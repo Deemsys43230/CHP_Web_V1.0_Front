@@ -1,4 +1,4 @@
-var commonApp= angular.module('commonApp', ['ngRoute','oc.lazyLoad']);
+var commonApp= angular.module('commonApp', ['ngRoute','oc.lazyLoad','requestModule','flash']);
 
 commonApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
 
@@ -49,7 +49,7 @@ commonApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
 
         $routeProvider.
             when('/index', {
-                templateUrl: 'views/common/index.html'
+                templateUrl: 'views/common/index.html',
             }).
             when('/howItWork', {
                 templateUrl: 'views/common/how-it-work.html'
@@ -73,3 +73,47 @@ commonApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 redirectTo: '/index'
             });
     }]);
+
+
+//Internal Login Details
+commonApp.controller('LoginController',function($scope,requestHandler,Flash){
+
+    $scope.doLogin=function(){
+        console.log("Logging in...");
+        requestHandler.loginRequest($scope.username,$scope.password).then(function(response){
+            console.log(response.data.Response_status);
+            if(response.data.Response_status===0){
+                errorMessage(Flash,"Incorrect Username/Password");
+            }
+            else{
+                successMessage(Flash,"Login Successful!");
+            }
+        });
+
+    };
+
+    $scope.register=function(){
+        alert("register Control");
+    };
+
+
+
+});
+
+//To Display success message
+//For User Messages
+function successMessage(Flash,message){
+    Flash.create('success', message, 'alert');
+    $("html, body").animate({
+        scrollTop: 0
+    }, 600);
+    return false;
+}
+
+function errorMessage(Flash,message){
+    Flash.create('danger', message, 'custom-class');
+    $("html, body").animate({
+        scrollTop: 0
+    }, 600);
+    return false;
+}

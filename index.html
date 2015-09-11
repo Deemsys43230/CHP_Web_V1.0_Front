@@ -125,7 +125,7 @@
 </header>
 
 <!-- login or register popup-->
-<div id="modal" class="popupContainer" style="display:none;">
+<div id="modal" class="popupContainer" style="display:none;" ng-controller="LoginController">
     <header class="popupHeader">
         <span class="header_title">Login</span>
         <span class="modal_close pull-right"><i class="fa fa-times"></i></span>
@@ -134,6 +134,7 @@
     <section class="popupBody">
         <!-- Social Login -->
         <div class="user_login">
+
             <div class="">
                 <a href="#" class="social_box fb">
                     <span class="icon"><i class="fa fa-facebook"></i></span>
@@ -144,21 +145,25 @@
             <div class="centeredText">
                 <span>Or</span>
             </div>
-
-            <form>
+            <div flash-message="5000" ></div>
+            <form name="loginForm" novalidate>
                 <p>Email</p>
-                <input type="text" />
-
+                <input type="email" name="username" ng-model="username" required email/>
+                <span ng-show="loginForm.username.$dirty&&loginForm.username.$invalid">
+                <span class="error-message" ng-show="loginForm.username.$error.required"><span>Required.</span></span>
+                <span class="error-message" ng-show="loginForm.username.$error.email"><span>Enter&nbsp;valid&nbsp;Email&nbsp;ID.</span></span>
+                </span>
                 <p>Password</p>
-                <input type="password" />
-            </form>
-
-            <a href="#" id="forgot_password" class="forgot_password text-center">Forgot password?</a>
-
+                <input type="password" name="password" required ng-model="password"/>
+                <span ng-show="loginForm.password.$dirty&&loginForm.password.$invalid">
+                <span class="error-message" ng-show="loginForm.password.$error.required"><span>Required.</span></span>
+                </span>
+             <a href="#" id="forgot_password" class="forgot_password text-center">Forgot password?</a>
             <div class="action_btns">
-                <div class="one_half"><a href="views/superadmin/" class="btn btn_red">Login</a></div>
-                <div class="one_half last"><a href="#" id="register_form" class="btn">Register</a></div>
+                <div class="one_half"><a class="btn btn_red" ng-class="{'button-disable':loginForm.$invalid}" ng-click="doLogin()">Login</a></div>
+                <div class="one_half last"><a id="register_form" class="btn">Register</a></div>
             </div>
+            </form>
         </div>
 
         <!-- Username & Password Login form -->
@@ -188,7 +193,7 @@
                 <span>Or</span>
             </div>
 
-            <form>
+            <form name="registerForm">
                 <p>Name</p>
                 <input type="text" />
 
@@ -329,6 +334,10 @@
 <script src="angular/angularjs-1.4.3.js"></script>
 <script src="angular/angular-route-1.4.2.js"></script>
 <script src="angular/ocLazyLoad.min.js"></script>
+<script src="angular/angular-flash.min.js"></script>
+
+
+<script src="app/requestHandler.js"></script>
 <script src="app/commonApp.js"></script>
 
 <script type="text/javascript" src="js/jquery.migrate.js"></script>
