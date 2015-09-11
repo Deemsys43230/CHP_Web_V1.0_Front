@@ -5,13 +5,13 @@ requestHandlerApp.factory("requestHandler",['$http',function($http,$location){
     var requestObj={};
 
     //*IMPORTANT*//
-    var hostedDomain="http://learnterest.com:8089/Learnterest/";
+    var hostedDomain="http://192.168.1.71:8081/api/v1/";
 
     requestObj.getRequest=function(requestURL,params){
         requestURL=hostedDomain+requestURL;
-         return $http.get(requestURL,params).then(function (results) {
-            console.log(results);
-            return results;   
+         return $http.get(requestURL,params).then(function (response) {
+            console.log(response);
+            return response;
          });
     };
 
@@ -19,8 +19,8 @@ requestHandlerApp.factory("requestHandler",['$http',function($http,$location){
          
          requestURL=hostedDomain+requestURL;
     
-         return $http.post(requestURL,params).then(function (results) {
-            return results;   
+         return $http.post(requestURL,params).then(function (response) {
+            return response;
          });
     };
 

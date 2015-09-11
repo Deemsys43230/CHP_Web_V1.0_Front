@@ -49,7 +49,7 @@ commonApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
 
         $routeProvider.
             when('/index', {
-                templateUrl: 'views/common/index.html',
+                templateUrl: 'views/common/index.html'
             }).
             when('/howItWork', {
                 templateUrl: 'views/common/how-it-work.html'
@@ -79,7 +79,6 @@ commonApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
 commonApp.controller('LoginController',function($scope,requestHandler,Flash){
 
     $scope.doLogin=function(){
-        console.log("Logging in...");
         requestHandler.loginRequest($scope.username,$scope.password).then(function(response){
             console.log(response.data.Response_status);
             if(response.data.Response_status===0){
@@ -92,12 +91,23 @@ commonApp.controller('LoginController',function($scope,requestHandler,Flash){
 
     };
 
+    //Register New User
     $scope.register=function(){
-        alert("register Control");
+        //Operation After clicked create account
+        $scope.userForm.role="3";
+        requestHandler.postRequest("registerUser/",$scope.userForm,0).then(function(response){
+
+            if(response.data.Response===0){
+
+            }
+            else{
+                successMessage(Flash,"Register Successful!");
+            }
+        });
+        $scope.userForm={};
+        $scope.confirmpassword="";
+        $scope.registerForm=false;
     };
-
-
-
 });
 
 //To Display success message
@@ -117,3 +127,64 @@ function errorMessage(Flash,message){
     }, 600);
     return false;
 }
+
+// Compare Confirm Password
+commonApp.directive('compareTo',function() {
+    return {
+        require: "ngModel",
+        scope: {
+            otherModelValue: "=compareTo"
+        },
+        link: function(scope, element, attributes, ngModel) {
+
+            ngModel.$validators.compareTo = function(modelValue) {
+                return modelValue == scope.otherModelValue;
+            };
+
+            scope.$watch("otherModelValue", function() {
+                ngModel.$validate();
+            });
+        }
+    };
+});
+
+//Check for Email Already Exists
+commonApp.directive("emailexists", function ($q, $timeout,requestHandler) {
+
+    var CheckEmailExists = function (isNew) {
+
+        if(isNew===1)
+            return true;
+        else
+            return false;
+    };
+
+    return {
+        restrict: "A",
+        require: "ngModel",
+        link: function (scope, element, attributes, ngModel) {
+            ngModel.$asyncValidators.emailexists = function (modelValue) {
+                var defer = $q.defer();
+                $timeout(function () {
+                    var isNew;
+                    var sendRequest=requestHandler.postRequest("checkEmailExist/",{"emailid":modelValue},0).then(function(response){
+                        isNew=response.data.Response_status;
+                    });
+
+                    sendRequest.then(function(){
+
+                        if (CheckEmailExists(isNew)){
+                            defer.resolve();
+                        }
+                        else{
+                            defer.reject();
+                        }
+                    });
+                    isNew = false;
+                }, 10);
+
+                return defer.promise;
+            }
+        }
+    };
+});
