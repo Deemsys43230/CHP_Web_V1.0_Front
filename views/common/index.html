@@ -36,9 +36,29 @@
 
         <!-- Username & Password Login form -->
         <div class="reset_password1">
-            <form>
+            <form name="forgotPasswordForm">
                 <p>Email</p>
-                <input type="text"/>
+                <input type="email" name="emailid" required email ng-model="emailid"/>
+                <span ng-show="forgotPasswordForm.emailid.$dirty&&forgotPasswordForm.emailid.$invalid">
+                <span class="error-message" ng-show="forgotPasswordForm.emailid.$error.required"><span>Required.</span></span>
+                <span class="error-message" ng-show="forgotPasswordForm.emailid.$error.email"><span>Enter&nbsp;valid&nbsp;Email&nbsp;ID.</span></span>
+                </span>
+                <div class="action_btns margin-top-20">
+                    <div class="one_half"><a href="#" class="btn back_btn"><i class="fa fa-angle-double-left"></i> Back</a></div>
+                    <div class="one_half last"><a id="check_secret" class="btn btn_red"  ng-class="{'button-disable':loginForm.$invalid}" ng-click="doLogin()">Submit</a></div>
+                </div>
+            </form>
+
+        </div>
+
+        <!-- Answer for Secret Question -->
+        <div class="secret_question">
+            <form name="js">
+                <p>Secret Question :</p>
+                <p class="text-bold">fsdf</p>
+
+                <p>Secret Answer</p>
+                <input type="password"/>
 
                 <div class="action_btns margin-top-20">
                     <div class="one_half"><a href="#" class="btn back_btn"><i class="fa fa-angle-double-left"></i> Back</a></div>

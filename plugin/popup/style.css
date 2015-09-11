@@ -144,3 +144,10 @@ form p{
 .width-100{
     width: 100% !important;
 }
+
+/* Check Secret Question Form */
+.secret_question {display: none;}
+.secret_question label {display: block; margin-bottom:5px;}
+.secret_question input[type="text"], .secret_question input[type="email"], .secret_question input[type="password"] {display: block; width:100%; padding: 10px; border:1px solid #DDD; color:#666;}
+.secret_question input[type="checkbox"] {float:left; margin-right:5px;}
+.secret_question input[type="checkbox"]+label {float:left;}

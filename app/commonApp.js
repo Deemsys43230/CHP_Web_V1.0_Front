@@ -108,6 +108,28 @@ commonApp.controller('LoginController',function($scope,requestHandler,Flash){
         $scope.confirmpassword="";
         $scope.registerForm=false;
     };
+
+    //Forgot Password
+    $scope.doForgotPassword=function(){
+
+        alert("hit");
+        requestHandler.postRequest("getSecretQuestion/",{"emailid":$scope.emailid}).then(function(response){
+            if(response.data.Response_status==0){
+                errorMessage(Flash,"Email ID doesn't Exist!");
+            }
+            else if(response.data.Response_status==1){
+                //Lets show the secret question
+                $(".user_login").hide();
+                $(".reset_password").hide();
+                $(".user_register").hide();
+                $(".secret_question").show();
+                $(".header_title").text('Register');
+                $scope.secretQuestion=response.data.secretquestion;
+            }
+        });
+
+
+    };
 });
 
 //To Display success message
