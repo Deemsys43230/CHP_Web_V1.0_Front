@@ -283,7 +283,7 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../js/bootstrap.min.js',
                                 '../../plugin/popup/style.css',
                                 '../../plugin/popup/jquery.leanModal.min.js',
-                                '../../css/image-upload.css',
+                                '../../css/profile-image-upload.css',
                                 '../../js/image-upload.js'
                             ]
                         })
@@ -343,7 +343,7 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../css/custom-inputs.css',
                                 '../../plugin/popup/style.css',
                                 '../../plugin/popup/jquery.leanModal.min.js',
-                                '../../css/image-upload.css',
+                                '../../css/food-image-upload.css',
                                 '../../js/image-upload.js'
                             ]
                         })
