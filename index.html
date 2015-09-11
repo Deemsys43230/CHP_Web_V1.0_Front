@@ -1,0 +1,429 @@
+<!doctype html>
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><html lang="en" class="no-js"> <![endif]-->
+<html lang="en">
+
+<head>
+
+    <!-- Basic -->
+    <title>Cyberhealth</title>
+    <!-- Favicons-->
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon"/>
+
+    <!-- Bootstrap CSS  -->
+    <!--<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">-->
+    <link rel="stylesheet" href="css/bootstrap.css">
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" type="text/css" media="screen">
+
+    <!-- Margo CSS Styles  -->
+    <link rel="stylesheet" type="text/css" href="css/style.css" media="screen">
+
+    <!-- Responsive CSS Styles  -->
+    <link rel="stylesheet" type="text/css" href="css/responsive.css" media="screen">
+
+    <!-- Css3 Transitions Styles  -->
+    <link rel="stylesheet" type="text/css" href="css/animate.css" media="screen">
+
+    <!-- Color CSS Styles  -->
+    <link rel="stylesheet" type="text/css" href="css/yellow.css" title="yellow" media="screen" />
+
+    <!-- Pop-up Styles  -->
+    <link type="text/css" rel="stylesheet" href="plugin/popup/style.css" />
+
+</head>
+
+<body ng-app="commonApp">
+
+<!-- Full Body Container -->
+<div id="container" class="boxed-page">
+<!-- Start Header Section -->
+<div class="hidden-header"></div>
+<header class="clearfix">
+
+    <!-- Start Top Bar -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-7">
+                    <!-- Start Contact Info -->
+                    <ul class="contact-details">
+                        <li><a href="#"><i class="fa fa-map-marker"></i> Gahanna, OHIO 43230, U.S.A.</a>
+                        </li>
+                        <li><a href="#"><i class="fa fa-envelope-o"></i> support@deemsysinc.com</a>
+                        </li>
+                        <li><a href="#"><i class="fa fa-phone"></i> 614-322-9928</a>
+                        </li>
+                    </ul>
+                    <!-- End Contact Info -->
+                </div><!-- .col-md-6 -->
+                <div class="col-md-5">
+                    <!-- Start Social Links -->
+                    <ul class="social-list">
+                        <li>
+                            <a class="login itl-tooltip" id="modal_trigger" data-placement="bottom" title="Login / Register" href="#modal">Login / Register</a>
+                        </li>
+                        <li>
+                            <a class="facebook itl-tooltip" data-placement="bottom" title="Facebook" target="_blank" href="#"><i class="fa fa-facebook"></i></a>
+                        </li>
+                        <li>
+                            <a class="twitter itl-tooltip" data-placement="bottom" title="Twitter"  target="_blank" href="#"><i class="fa fa-twitter"></i></a>
+                        </li>
+                        <li>
+                            <a class="google itl-tooltip" data-placement="bottom" title="Google Plus"  target="_blank" href="#"><i class="fa fa-google-plus"></i></a>
+                        </li>
+                        <li>
+                            <a class="linkdin itl-tooltip" data-placement="bottom" title="Linkedin"  target="_blank" href="#"><i class="fa fa-linkedin"></i></a>
+                        </li>
+                    </ul>
+                    <!-- End Social Links -->
+                </div><!-- .col-md-6 -->
+            </div><!-- .row -->
+        </div><!-- .container -->
+    </div><!-- .top-bar -->
+    <!-- End Top Bar -->
+
+    <!-- Start  Logo & Naviagtion  -->
+    <div class="navbar navbar-default navbar-top">
+        <div class="container">
+            <div class="navbar-header">
+                <!-- Stat Toggle Nav Link For Mobiles -->
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <i class="fa fa-bars"></i>
+                </button>
+                <!-- End Toggle Nav Link For Mobiles -->
+                <a class="navbar-brand" href="index.html">
+                    <img alt="" src="images/bephit.png">
+                </a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <!-- Stat Search -->
+                <div class="search-side">
+                    <a href="#" onclick="return false;" class="show-search"><i class="fa fa-search"></i></a>
+                    <div class="search-form">
+                        <form autocomplete="off" role="search" method="get" class="searchform" action="#">
+                            <input type="text" value="" name="s" id="s" placeholder="Search the site...">
+                        </form>
+                    </div>
+                </div>
+                <!-- End Search -->
+                <!-- Start Navigation List -->
+                <ul class="nav navbar-nav navbar-right active-class">
+                    <li><a class="active" href="#index">Home</a></li>
+                    <li><a href="#howItWork">How It Works</a></li>
+                    <li><a href="#aboutUs">About Us</a></li>
+                    <li><a href="#portfolio">Portfolio</a></li>
+                    <li><a href="#blog">Blog</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                <!-- End Navigation List -->
+            </div>
+        </div>
+    </div>
+    <!-- End Header Logo & Naviagtion -->
+</header>
+
+<!-- login or register popup-->
+<div id="modal" class="popupContainer" style="display:none;">
+    <header class="popupHeader">
+        <span class="header_title">Login</span>
+        <span class="modal_close pull-right"><i class="fa fa-times"></i></span>
+    </header>
+
+    <section class="popupBody">
+        <!-- Social Login -->
+        <div class="user_login">
+            <div class="">
+                <a href="#" class="social_box fb">
+                    <span class="icon"><i class="fa fa-facebook"></i></span>
+                    <span class="icon_title">Login with Facebook</span>
+                </a>
+            </div>
+
+            <div class="centeredText">
+                <span>Or</span>
+            </div>
+
+            <form>
+                <p>Email</p>
+                <input type="text" />
+
+                <p>Password</p>
+                <input type="password" />
+            </form>
+
+            <a href="#" id="forgot_password" class="forgot_password text-center">Forgot password?</a>
+
+            <div class="action_btns">
+                <div class="one_half"><a href="views/superadmin/" class="btn btn_red">Login</a></div>
+                <div class="one_half last"><a href="#" id="register_form" class="btn">Register</a></div>
+            </div>
+        </div>
+
+        <!-- Username & Password Login form -->
+        <div class="reset_password">
+            <form>
+                <p>Email</p>
+                <input type="text" />
+
+                <div class="action_btns margin-top-20">
+                    <div class="one_half"><a href="#" class="btn back_btn"><i class="fa fa-angle-double-left"></i> Back</a></div>
+                    <div class="one_half last"><a href="" class="btn btn_red">Submit</a></div>
+                </div>
+            </form>
+        </div>
+
+        <!-- Register Form -->
+        <div class="user_register">
+
+            <div class="">
+                <a href="#" class="social_box fb">
+                    <span class="icon"><i class="fa fa-facebook"></i></span>
+                    <span class="icon_title">Sign Up with Facebook</span>
+                </a>
+            </div>
+
+            <div class="centeredText">
+                <span>Or</span>
+            </div>
+
+            <form>
+                <p>Name</p>
+                <input type="text" />
+
+                <p>Email</p>
+                <input type="email" />
+
+                <p>Password</p>
+                <input type="password" />
+
+                <p>Confirm Password</p>
+                <input type="password" />
+
+                <div class="action_btns margin-top-20">
+                    <div class="one_half"><a href="#" class="btn back_btn"><i class="fa fa-angle-double-left"></i> Back</a></div>
+                    <div class="one_half last"><a href="views/user/#/register" class="btn btn_red">Register</a></div>
+                </div>
+            </form>
+        </div>
+    </section>
+</div>
+
+<div ng-view></div>
+
+<!-- Start Footer Section -->
+<footer>
+    <div class="container">
+        <div class="row footer-widgets">
+
+
+            <!-- Start Subscribe & Social Links Widget -->
+            <div class="col-md-3 col-xs-12">
+                <div class="footer-widget mail-subscribe-widget">
+                    <h4>Get in touch<span class="head-line"></span></h4>
+                    <p>Join our mailing list to stay up to date and get notices about our new releases!</p>
+                    <form class="subscribe">
+                        <input type="text" placeholder="mail@example.com">
+                        <input type="submit" class="btn-system" value="Send">
+                    </form>
+                </div>
+            </div><!-- .col-md-3 -->
+            <!-- End Subscribe & Social Links Widget -->
+
+
+            <!-- Start Twitter Widget -->
+            <div class="col-md-3 col-xs-12">
+                <div class="footer-widget social-widget">
+                    <h4>Follow Us<span class="head-line"></span></h4>
+                    <p>Join our mailing list to stay up to date and get notices about our new releases!</p>
+                    <ul class="social-icons margin-top-10">
+                        <li>
+                            <a class="facebook" href="#"><i class="fa fa-facebook"></i></a>
+                        </li>
+                        <li>
+                            <a class="twitter" href="#"><i class="fa fa-twitter"></i></a>
+                        </li>
+                        <li>
+                            <a class="google" href="#"><i class="fa fa-google-plus"></i></a>
+                        </li>
+                        <li>
+                            <a class="linkdin" href="#"><i class="fa fa-linkedin"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div><!-- .col-md-3 -->
+            <!-- End Twitter Widget -->
+
+
+            <!-- Start Flickr Widget -->
+            <div class="col-md-3 col-xs-12">
+                <div class="footer-widget social-widget">
+                    <h4>Mobile Apps<span class="head-line"></span></h4>
+                    <p>Get our mobile apps for handly use</p>
+                    <img class="margin-top-20" src="images/available.png">
+                </div>
+            </div><!-- .col-md-3 -->
+            <!-- End Flickr Widget -->
+
+
+            <!-- Start Contact Widget -->
+            <div class="col-md-3 col-xs-12">
+                <div class="footer-widget contact-widget">
+                    <h4><img src="images/footer-margo.png" class="img-responsive" alt="Footer Logo" /></h4>
+                    <ul>
+                        <li><span>Phone Number:</span> +01 234 567 890</li>
+                        <li><span>Email:</span> company@company.com</li>
+                        <li><span>Website:</span> www.yourdomain.com</li>
+                    </ul>
+                </div>
+            </div><!-- .col-md-3 -->
+            <!-- End Contact Widget -->
+
+
+        </div><!-- .row -->
+
+        <!-- Start Copyright -->
+        <div class="copyright-section">
+            <div class="row">
+                <div class="col-md-6">
+                    <p>&copy; 2015 Deemsys Inc -  All Rights Reserved</p>
+                </div><!-- .col-md-6 -->
+                <div class="col-md-6">
+                    <ul class="footer-nav">
+                        <li><a href="#">Sitemap</a>
+                        </li>
+                        <li><a href="#">Privacy Policy</a>
+                        </li>
+                        <li><a href="#">Contact</a>
+                        </li>
+                    </ul>
+                </div><!-- .col-md-6 -->
+            </div><!-- .row -->
+        </div>
+        <!-- End Copyright -->
+
+    </div>
+</footer>
+<!-- End Footer Section -->
+
+
+</div>
+<!-- End Full Body Container -->
+
+<!-- Go To Top Link -->
+<a href="#" class="back-to-top"><i class="fa fa-angle-up"></i></a>
+
+<div id="loader">
+    <div class="spinner">
+        <div class="dot1"></div>
+        <div class="dot2"></div>
+    </div>
+</div>
+
+<!-- Margo JS  -->
+<script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+
+<!-- ANGULAR JS -->
+<script src="angular/angularjs-1.4.3.js"></script>
+<script src="angular/angular-route-1.4.2.js"></script>
+<script src="angular/ocLazyLoad.min.js"></script>
+<script src="app/commonApp.js"></script>
+
+<script type="text/javascript" src="js/jquery.migrate.js"></script>
+<script type="text/javascript" src="js/modernizrr.js"></script>
+<script type="text/javascript" src="js/jquery.fitvids.js"></script>
+<script type="text/javascript" src="js/owl.carousel.min.js"></script>
+<script type="text/javascript" src="js/nivo-lightbox.min.js"></script>
+<script type="text/javascript" src="js/jquery.isotope.min.js"></script>
+<script type="text/javascript" src="js/jquery.appear.js"></script>
+<script type="text/javascript" src="js/count-to.js"></script>
+<script type="text/javascript" src="js/jquery.textillate.js"></script>
+<script type="text/javascript" src="js/jquery.lettering.js"></script>
+<script type="text/javascript" src="js/jquery.easypiechart.min.js"></script>
+<script type="text/javascript" src="js/jquery.nicescroll.min.js"></script>
+<script type="text/javascript" src="js/jquery.parallax.js"></script>
+<script type="text/javascript" src="js/mediaelement-and-player.js"></script>
+
+<!--[if IE 8]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+<!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+<!-- Pop-up Styles  -->
+<script type="text/javascript" src="plugin/popup/jquery.leanModal.min.js"></script>
+
+<script type="text/javascript">
+    $("#modal_trigger").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
+
+    $(function(){
+        // Calling Login Form
+        $("#forgot_password").click(function(){
+            $(".user_login").hide();
+            $(".reset_password").show();
+            $(".header_title").text('Reset Password');
+            return false;
+        });
+
+        // Calling Register Form
+        $("#register_form").click(function(){
+            $(".user_login").hide();
+            $(".user_register").show();
+            $(".header_title").text('Register');
+            return false;
+        });
+
+        // Going back to Social Forms
+        $(".back_btn").click(function(){
+            $(".reset_password").hide();
+            $(".user_register").hide();
+            $(".user_login").show();
+            $(".header_title").text('Login');
+            return false;
+        });
+    })
+</script>
+
+<script>
+    $('.active-class a').click(function() {
+        $('.active-class a').removeClass('active');
+        $(this).addClass('active');
+    });
+</script>
+
+<script>
+    "use strict";
+    // Page Loader
+    $(window).load(function () {
+        $('#loader').fadeOut();
+    });
+
+    /*hidden header*/
+    var headerEle = function () {
+        var $headerHeight = $('header').height();
+        $('.hidden-header').css({ 'height' : $headerHeight  + "px" });
+    };
+
+    $(window).load(function () {
+        headerEle();
+    });
+
+    $(window).resize(function () {
+        headerEle();
+    });
+
+    /*Nice-Scroll*/
+    $("html").niceScroll({
+        scrollspeed: 100,
+        mousescrollstep: 38,
+        cursorwidth: 5,
+        cursorborder: 0,
+        cursorcolor: '#333',
+        autohidemode: true,
+        zindex: 999999999,
+        horizrailenabled: false,
+        cursorborderradius: 0
+    });
+</script>
+
+</body>
+</html>
