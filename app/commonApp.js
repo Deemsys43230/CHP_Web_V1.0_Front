@@ -78,6 +78,7 @@ commonApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
 //Internal Login Details
 commonApp.controller('LoginController',function($scope,requestHandler,Flash){
 
+    //Login
     $scope.doLogin=function(){
         requestHandler.loginRequest($scope.username,$scope.password).then(function(response){
             console.log(response.data.Response_status);
@@ -95,7 +96,7 @@ commonApp.controller('LoginController',function($scope,requestHandler,Flash){
     $scope.register=function(){
         //Operation After clicked create account
         $scope.userForm.role="3";
-        requestHandler.postRequest("registerUser/",$scope.userForm,0).then(function(response){
+        requestHandler.postRequest("registerUser/",$scope.userForm).then(function(response){
 
             if(response.data.Response===0){
 
@@ -200,7 +201,7 @@ commonApp.directive("emailexists", function ($q, $timeout,requestHandler) {
                 var defer = $q.defer();
                 $timeout(function () {
                     var isNew;
-                    var sendRequest=requestHandler.postRequest("checkEmailExist/",{"emailid":modelValue},0).then(function(response){
+                    var sendRequest=requestHandler.postRequest("checkEmailExist/",{"emailid":modelValue}).then(function(response){
                         isNew=response.data.Response_status;
                     });
 
