@@ -186,29 +186,19 @@
 
         <!-- Answer for Secret Question -->
         <div class="secret_question">
-            <form name="js">
+            <div flash-message="5000" ></div>
+            <form name="secretAnswerForm">
                 <p>Secret Question :</p>
                 <p class="text-bold">{{secretQuestion}}</p>
 
                 <p>Secret Answer</p>
-                <input type="password"/>
-
+                <input type="password" name="secretAnswer" ng-model="secretAnswer" required/>
+                <span ng-show="forgotPasswordForm.secretAnswer.$dirty&&forgotPasswordForm.secretAnswer.$invalid">
+                    <span class="error-message" ng-show="forgotPasswordForm.secretAnswer.$error.required"><span>Required.</span></span>
+                </span>
                 <div class="action_btns margin-top-20">
                     <div class="one_half"><a href="#" class="btn back_btn"><i class="fa fa-angle-double-left"></i> Back</a></div>
-                    <div class="one_half last"><a href="" class="btn btn_red">Submit</a></div>
-                </div>
-            </form>
-        </div>
-
-        <!-- Answer for Secret Question -->
-        <div class="reset_password">
-            <form>
-                <p>Email</p>
-                <input type="text" />
-
-                <div class="action_btns margin-top-20">
-                    <div class="one_half"><a href="#" class="btn back_btn"><i class="fa fa-angle-double-left"></i> Back</a></div>
-                    <div class="one_half last"><a href="" class="btn btn_red">Submit</a></div>
+                    <div class="one_half last"><a ng-class="{'button-disable':forgotPasswordForm.$invalid}" ng-click="doSecretAnswerCheck()" class="btn btn_red">Submit</a></div>
                 </div>
             </form>
         </div>
@@ -380,7 +370,6 @@
 <script src="angular/ocLazyLoad.min.js"></script>
 <script src="angular/angular-flash.min.js"></script>
 
-
 <script src="app/requestHandler.js"></script>
 <script src="app/commonApp.js"></script>
 
@@ -412,6 +401,7 @@
         // Calling Login Form
         $("#forgot_password").click(function(){
             $(".user_login").hide();
+            $(".secret_question").hide();
             $(".reset_password").show();
             $(".header_title").text('Reset Password');
             return false;
@@ -420,6 +410,7 @@
         // Calling Register Form
         $("#register_form").click(function(){
             $(".user_login").hide();
+            $(".secret_question").hide();
             $(".user_register").show();
             $(".header_title").text('Register');
             return false;
@@ -429,6 +420,7 @@
         $(".back_btn").click(function(){
             $(".reset_password").hide();
             $(".user_register").hide();
+            $(".secret_question").hide();
             $(".user_login").show();
             $(".header_title").text('Login');
             return false;

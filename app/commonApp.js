@@ -111,8 +111,7 @@ commonApp.controller('LoginController',function($scope,requestHandler,Flash){
 
     //Forgot Password
     $scope.doForgotPassword=function(){
-
-        alert("hit");
+        //request for secret question
         requestHandler.postRequest("getSecretQuestion/",{"emailid":$scope.emailid}).then(function(response){
             if(response.data.Response_status==0){
                 errorMessage(Flash,"Email ID doesn't Exist!");
@@ -127,8 +126,20 @@ commonApp.controller('LoginController',function($scope,requestHandler,Flash){
                 $scope.secretQuestion=response.data.secretquestion;
             }
         });
+    };
 
-
+    //Check Secret Answer
+    $scope.doSecretAnswerCheck=function(){
+        //send secret answer
+        requestHandler.postRequest("forgotPassword/",{"emailid":$scope.emailid,"secretanswer":$scope.secretAnswer}).then(function(response){
+            if(response.data.Response_status==0){
+                errorMessage(Flash,"Incorrect Secret Answer!");
+            }
+            else if(response.data.Response_status==1){
+                //Lets show the secret question
+                successMessage(Flash,"Secret Answer Matched! Check your Mail for Password");
+            }
+        });
     };
 });
 
