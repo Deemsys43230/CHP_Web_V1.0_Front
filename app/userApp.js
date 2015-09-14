@@ -56,9 +56,17 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                             name:'userApp',
                             files:[
                                 '../../css/custom-inputs.css',
+                                '../../css/vertical_tab.css',
+                                '../../plugin/circle/circle.css',
+                                '../../plugin/circle/circle.js',
+                                '../../plugin/circle/jquery.circlechart.js',
                                 '../../plugin/datepicker/bootstrap-datepicker.js',
-                                '../../plugin/datepicker/datepicker.css'
-                            ]
+                                '../../plugin/datepicker/datepicker.css',
+                                '../../plugin/search/tipuedrop_content.js',
+                               '../../plugin/search/tipuedrop.css',
+                               '../../plugin/search/tipuedrop.js',
+
+                                ]
                         })
                     }
                 }

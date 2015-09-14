@@ -76,7 +76,7 @@ commonApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
 
 
 //Internal Login Details
-commonApp.controller('LoginController',function($scope,requestHandler,Flash){
+commonApp.controller('LoginController',function($scope,requestHandler,Flash,$window){
 
     //Login
     $scope.doLogin=function(){
@@ -87,6 +87,28 @@ commonApp.controller('LoginController',function($scope,requestHandler,Flash){
             }
             else{
                 successMessage(Flash,"Login Successful!");
+
+                //Get Logged In User
+                requestHandler.getRequest("getUserId/","").then(function(response){
+                    console.log("Role:"+response.data.Login.roleid);
+                   if(response.data.Login.roleid==3){
+                       console.log("Role:"+response.data.User_Profile.isProfileUpdated);
+                       if(response.data.User_Profile.isProfileUpdated==0){
+                          $window.location.href="views/user/#/register";
+                       }else{
+                           $window.location.href="views/user/#/dashboard";
+                       }
+                   }
+                    else if(response.data.Login.roleid==2){
+
+                   }
+                    else if(response.data.Login.roleid==1){
+
+                   }
+                });
+
+
+               // $window.location.href="views/user/#/register";
             }
         });
 
@@ -99,15 +121,17 @@ commonApp.controller('LoginController',function($scope,requestHandler,Flash){
         requestHandler.postRequest("registerUser/",$scope.userForm).then(function(response){
 
             if(response.data.Response===0){
-
+                errorMessage(Flash,"Something went wrong! Please Try again later!")
             }
             else{
+                $(".reset_password").hide();
+                $(".user_register").hide();
+                $(".secret_question").hide();
+                $(".user_login").show();
+                $(".header_title").text('Login');
                 successMessage(Flash,"Register Successful!");
             }
         });
-        $scope.userForm={};
-        $scope.confirmpassword="";
-        $scope.registerForm=false;
     };
 
     //Forgot Password
