@@ -6940,30 +6940,36 @@ ul.food li p.food_name{
 ul.sidebar-menu{
     margin-left: 15px !important;
     width: 90%;
-    direction: block;
-    list-style: none;
+    display: block;
  }
 
 ul.sidebar-menu li{
-    width: 100%;
+	list-style:none;
+}
+
+ul.sidebar-menu li a{
+	display: block;
+    width: 100% !important;
     border-bottom: 1px solid #ccc;
     padding:10px !important ;
     border: 1px solid #ccc;
     border-radius: 3px;
     margin-bottom: 5px;
+	collapse: #ddd;
 }
 
-ul.sidebar-menu li:hover{
+ul.sidebar-menu li:hover a{
     color: #fff !important;
     background-color: #f8ba01 !important;
     cursor: pointer !important;
     border-color: #f8ba01;
 }
+
 ul.sidebar-menu li:hover a{
     color: #fff !important;
 }
 
-ul.sidebar-menu li.active{
+ul.sidebar-menu li.active a{
     color: #f8ba01 !important;
     background-color: #f8ba01 !important;
     border-color: #f8ba01;
@@ -6975,7 +6981,6 @@ ul.sidebar-menu li.active a{
 
 ul.sidebar-menu li a{
     color: #666 !important;
-    margin: 20px 10px !important;
 }
 
 .action-col{
