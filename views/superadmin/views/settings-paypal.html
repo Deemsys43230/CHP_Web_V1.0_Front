@@ -1,0 +1,45 @@
+<!-- Start Page Banner -->
+<div class="page-banner">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-3">
+                <h4 class="classic-title"><span>Settings</span></h4>
+                <settingsmenu></settingsmenu>
+            </div>
+            <div class="col-md-9">
+                <a href="#dashboard" class="back-button pull-right margin-left-10"><i class="fa fa-arrow-circle-o-left"></i> Back to Dashboard</a>
+                <div flash-message="5000" class="col-md-4 pull-right"></div>
+                <h3 class="margin-bottom-10">Paypal</h3>
+                <hr/>
+                <form name="paypalSettingsForm">
+                    <div class="row form-set">
+                        <div class="col-md-3">
+                            <h4>Paypal Id :</h4>
+                        </div>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control margin-bottom-20" name="paypalid" ng-model="paypalSettings.paypalid" required>
+                         <span ng-show="paypalSettingsForm.paypalid.$dirty&&paypalSettingsForm.paypalid.$invalid">
+                                <span class="error-message" ng-show="paypalSettingsForm.paypalid.$error.required"><span>Required.</span></span>
+                         </span>
+                        </div>
+                        <div class="col-md-3">
+                            <h4>Paypal Name :</h4>
+                        </div>
+                        <div class="col-md-9">
+                            <input class="form-control margin-bottom-20" name="paypalname" ng-model="paypalSettings.paypalname" required>
+                         <span ng-show="paypalSettingsForm.paypalname.$dirty&&paypalSettingsForm.paypalname.$invalid">
+                                <span class="error-message" ng-show="paypalSettingsForm.paypalname.$error.required"><span>Required.</span></span>
+                         </span>
+                        </div>
+                    </div>
+                </form>
+                <div class="text-center">
+                    <a href="" class="btn btn-success" ng-click="doUpdatePaypalSettings()" ng-disabled="paypalSettingsForm.$invalid">Save Changes</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- End Page Banner -->

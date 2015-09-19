@@ -32,6 +32,9 @@
     <!-- Pop-up Styles  -->
     <link type="text/css" rel="stylesheet" href="plugin/popup/style.css" />
 
+    <!--Message flash-->
+    <link type="text/css" rel="stylesheet" href="css/angular-flash.css" />
+
 </head>
 
 <body ng-app="commonApp">
@@ -205,14 +208,12 @@
 
         <!-- Register Form -->
         <div class="user_register">
-
             <div class="">
                 <a href="#" class="social_box fb">
                     <span class="icon"><i class="fa fa-facebook"></i></span>
                     <span class="icon_title">Sign Up with Facebook</span>
                 </a>
             </div>
-
             <div class="centeredText">
                 <span>Or</span>
             </div>
@@ -242,10 +243,31 @@
                 </span>
                 <div class="action_btns margin-top-20">
                     <div class="one_half"><a href="#" class="btn back_btn"><i class="fa fa-angle-double-left"></i> Back</a></div>
-                    <div class="one_half last"><a ng-click="register(userForm)" ng-class="{'button-disable':registerForm.$invalid}" class="btn btn_red">Register</a></div>
+                    <div class="one_half last"><a id="register_form2" ng-disabled="registerForm.$invalid" class="btn btn_red">Proceed <i class="fa fa-angle-double-right"></i></a></div>
                 </div>
             </form>
         </div>
+
+        <div class="user_register1">
+            <form name="registerForm2">
+                    <p>Security Question (Optional)</p>
+                    <input type="text" name="secretquestion" ng-model="userForm.secretquestion" ng-required="userForm.secretanswer"/>
+                    <span ng-show="registerForm2.secretquestion.$invalid">
+                                <span class="error-message" ng-show="registerForm2.secretquestion.$error.required"><span>Required.</span></span>
+                    </span>
+                    <p>Answer</p>
+                    <input type="text" name="secretanswer" ng-model="userForm.secretanswer" ng-required="userForm.secretquestion"/>
+                            <span ng-show="registerForm2.secretanswer.$invalid">
+                                <span class="error-message" ng-show="registerForm2.secretanswer.$error.required"><span>Required.</span></span>
+                            </span>
+                    <div class="action_btns margin-top-20">
+                        <div class="one_half"><a href="#" class="btn back_btn_register"><i class="fa fa-angle-double-left"></i> Back</a></div>
+                        <div class="one_half last"><a ng-click="register(userForm)" ng-disabled="registerForm2.$invalid" class="btn btn_red">Register</a></div>
+                    </div>
+            </form>
+        </div>
+
+
     </section>
 </div>
 
@@ -366,8 +388,10 @@
 
 <!-- ANGULAR JS -->
 <script src="angular/angularjs-1.4.3.js"></script>
+<script src="angular/angular-cookies.js"></script>
 <script src="angular/angular-route-1.4.2.js"></script>
 <script src="angular/ocLazyLoad.min.js"></script>
+<script src="angular/angular-animate-1.4.3.js"></script>
 <script src="angular/angular-flash.min.js"></script>
 
 <script src="app/requestHandler.js"></script>
@@ -387,6 +411,7 @@
 <script type="text/javascript" src="js/jquery.nicescroll.min.js"></script>
 <script type="text/javascript" src="js/jquery.parallax.js"></script>
 <script type="text/javascript" src="js/mediaelement-and-player.js"></script>
+<script type="text/javascript" src="angular/angular-utils-pagination"></script>
 
 <!--[if IE 8]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 <!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
@@ -412,6 +437,18 @@
             $(".user_login").hide();
             $(".secret_question").hide();
             $(".user_register").show();
+            $(".user_register1").hide();
+            $(".header_title").text('Register');
+            return false;
+        });
+
+
+        // Calling Register Form
+        $("#register_form2").click(function(){
+            $(".user_login").hide();
+            $(".secret_question").hide();
+            $(".user_register").hide();
+            $(".user_register1").show();
             $(".header_title").text('Register');
             return false;
         });
@@ -422,6 +459,17 @@
             $(".user_register").hide();
             $(".secret_question").hide();
             $(".user_login").show();
+            $(".header_title").text('Login');
+            return false;
+        });
+
+        // Going back to Social Forms
+        $(".back_btn_register").click(function(){
+            $(".reset_password").hide();
+            $(".user_register").show();
+            $(".user_register1").hide();
+            $(".secret_question").hide();
+            $(".user_login").hide();
             $(".header_title").text('Login');
             return false;
         });

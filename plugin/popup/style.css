@@ -151,3 +151,10 @@ form p{
 .secret_question input[type="text"], .secret_question input[type="email"], .secret_question input[type="password"] {display: block; width:100%; padding: 10px; border:1px solid #DDD; color:#666;}
 .secret_question input[type="checkbox"] {float:left; margin-right:5px;}
 .secret_question input[type="checkbox"]+label {float:left;}
+
+
+.user_register1 {display: none;}
+.user_register1 label {display: block; margin-bottom:5px;}
+.user_register1 input[type="text"], .user_register1 input[type="email"], .user_register1 input[type="password"] {display: block; width:100%; padding: 10px; border:1px solid #DDD; color:#666;}
+.user_register1 input[type="checkbox"] {float:left; margin-right:5px;}
+.user_register1 input[type="checkbox"]+label {float:left;}

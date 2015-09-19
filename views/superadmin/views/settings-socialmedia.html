@@ -1,0 +1,63 @@
+<!-- Start Page Banner -->
+<div class="page-banner">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-3">
+                <h4 class="classic-title"><span>Settings</span></h4>
+                <settingsmenu></settingsmenu>
+            </div>
+            <div class="col-md-9">
+                <a href="#dashboard" class="back-button pull-right margin-left-10"><i class="fa fa-arrow-circle-o-left"></i> Back to Dashboard</a>
+                <div flash-message="5000" class="col-md-4 pull-right"></div>
+                <h3 class="margin-bottom-10">Contact Settings</h3>
+                <hr/>
+                <form name="socialMediaForm">
+                    <div class="row form-set">
+                        <div class="col-md-3">
+                            <h4>Facebook URL :</h4>
+                        </div>
+                        <div class="col-md-9">
+                            <input class="form-control margin-bottom-20" name="facebookurl" ng-model="socialMedia.facebookurl" required>
+                        <span ng-show="socialMediaForm.facebookurl.$dirty&&socialMediaForm.facebookurl.$invalid">
+                                <span class="error-message" ng-show="socialMediaForm.facebookurl.$error.required"><span>Required.</span></span>
+                         </span>
+                        </div>
+                        <div class="col-md-3">
+                            <h4>Twitter URL :</h4>
+                        </div>
+                        <div class="col-md-9">
+                            <input class="form-control margin-bottom-20" name="twitterurl" ng-model="socialMedia.twitterurl" required>
+                        <span ng-show="socialMediaForm.twitterurl.$dirty&&socialMediaForm.twitterurl.$invalid">
+                                <span class="error-message" ng-show="socialMediaForm.twitterurl.$error.required"><span>Required.</span></span>
+                         </span>
+                        </div>
+                        <div class="col-md-3">
+                            <h4>Linkedin URL :</h4>
+                        </div>
+                        <div class="col-md-9">
+                            <input class="form-control margin-bottom-20" name="linkedinurl" ng-model="socialMedia.linkedinurl" required>
+                        <span ng-show="socialMediaForm.linkedinurl.$dirty&&socialMediaForm.linkedinurl.$invalid">
+                                <span class="error-message" ng-show="socialMediaForm.linkedinurl.$error.required"><span>Required.</span></span>
+                         </span>
+                        </div>
+                        <div class="col-md-3">
+                            <h4>Google Plus URL :</h4>
+                        </div>
+                        <div class="col-md-9">
+                            <input class="form-control margin-bottom-20" name="googleurl" ng-model="socialMedia.googleurl" required>
+                         <span ng-show="socialMediaForm.googleurl.$dirty&&socialMediaForm.googleurl.$invalid">
+                                <span class="error-message" ng-show="socialMediaForm.googleurl.$error.required"><span>Required.</span></span>
+                         </span>
+                        </div>
+                    </div>
+                </form>
+                <div class="text-center">
+                    <a href="" class="btn btn-success" ng-click="doUpdateSocialMedia()" ng-disabled="socialMediaForm.$invalid">Save Changes</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- End Page Banner -->

@@ -1,4 +1,4 @@
-var adminApp= angular.module('adminApp', ['ngRoute','oc.lazyLoad']);
+var adminApp= angular.module('adminApp', ['ngRoute','oc.lazyLoad','ngCookies','ngAnimate','angularUtils.directives.dirPagination']);
 
 adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
 
@@ -11,11 +11,14 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
         //Do For Cross Orgin Management
         $httpProvider.defaults.withCredentials = true;
 
-        $httpProvider.interceptors.push(['$q','$location','$injector',function ($q, $location,$injector) {
+
+
+        $httpProvider.interceptors.push(['$q','$location','$injector','$cookies',function ($q, $location,$injector,$cookies) {
 
             return {
                 
                 'request': function(request) {
+                    request.headers['X-CSRFToken']=$cookies.get('X-CSRFToken');
                     return request;
                 },
                 'response': function (response) {
@@ -168,11 +171,14 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../js/bootstrap.min.js',
                                 '../../app/commonDirectives/sidebar/sitemenu.js',
                                 '../../plugin/popup/style.css',
-                                '../../plugin/popup/jquery.leanModal.min.js'
+                                '../../plugin/popup/jquery.leanModal.min.js',
+                                '../../js/jquery.simplyCountable.js',
+                                '../../app/faq/faqController.js'
                             ]
                         })
                     }
-                }
+                },
+                controller:'FAQController'
             }).
             when('/instruction', {
                 templateUrl: 'views/site-instruction.html',
@@ -298,26 +304,79 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                             name:'adminApp',
                             files:[
                                 '../../js/bootstrap.min.js',
-                                '../../app/commonDirectives/sidebar/settingsmenu.js'
+                                '../../app/commonDirectives/sidebar/settingsmenu.js',
+                                '../../app/settings/basicInfoController.js'
                             ]
                         })
                     }
-                }
+                },
+                controller:'ContactUsController'
             }).
             when('/mobileApp', {
                 templateUrl: 'views/settings-mobile-app.html',
                 resolve: {
                     loadMyFiles:function($ocLazyLoad) {
                         return $ocLazyLoad.load({
-                            name:'adminApp',
-                            files:[
+                            name: 'adminApp',
+                            files: [
                                 '../../js/bootstrap.min.js',
-                                '../../app/commonDirectives/sidebar/settingsmenu.js'
+                                '../../app/commonDirectives/sidebar/settingsmenu.js',
+                                '../../app/settings/mobileAppSettingsController.js'
                             ]
                         })
                     }
-                }
+                },
+                controller:'MobileAppSettingsController'
             }).
+            when('/paypalSettings', {
+                templateUrl: 'views/settings-paypal.html',
+                resolve: {
+                    loadMyFiles:function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name: 'adminApp',
+                            files: [
+                                '../../js/bootstrap.min.js',
+                                '../../app/commonDirectives/sidebar/settingsmenu.js',
+                                '../../app/settings/paypalController.js'
+                            ]
+                        })
+                    }
+                },
+                controller:'PaypalSettingsController'
+            }).
+            when('/socialMediaSettings', {
+                templateUrl: 'views/settings-socialmedia.html',
+                resolve: {
+                    loadMyFiles:function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name: 'adminApp',
+                            files: [
+                                '../../js/bootstrap.min.js',
+                                '../../app/commonDirectives/sidebar/settingsmenu.js',
+                                '../../app/settings/socialMediaController.js'
+                            ]
+                        })
+                    }
+                },
+                controller:'SocialMediaSettingsController'
+            }).
+            when('/serverSettings', {
+                templateUrl: 'views/settings-server.html',
+                resolve: {
+                    loadMyFiles:function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name: 'adminApp',
+                            files: [
+                                '../../js/bootstrap.min.js',
+                                '../../app/commonDirectives/sidebar/settingsmenu.js',
+                                '../../app/settings/serverController.js'
+                            ]
+                        })
+                    }
+                },
+                controller:'ServerSettingsController'
+            }).
+
             when('/food', {
                 templateUrl: 'views/food.html',
                 resolve: {
@@ -412,3 +471,22 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 redirectTo: '/dashboard'
             });
 }]);
+
+
+//To Display success message
+//For User Messages
+function successMessage(Flash,message){
+    Flash.create('success', message, 'alert');
+    $("html, body").animate({
+        scrollTop: 0
+    }, 600);
+    return false;
+}
+
+function errorMessage(Flash,message){
+    Flash.create('danger', message, 'custom-class');
+    $("html, body").animate({
+        scrollTop: 0
+    }, 600);
+    return false;
+}

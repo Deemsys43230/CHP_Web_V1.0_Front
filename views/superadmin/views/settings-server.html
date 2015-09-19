@@ -1,0 +1,74 @@
+<!-- Start Page Banner -->
+<div class="page-banner">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-3">
+                <h4 class="classic-title"><span>Settings</span></h4>
+                <settingsmenu></settingsmenu>
+            </div>
+            <div class="col-md-9">
+                <a href="#dashboard" class="back-button pull-right margin-left-10"><i class="fa fa-arrow-circle-o-left"></i> Back to Dashboard</a>
+                <div flash-message="5000" class="col-md-4 pull-right"></div>
+                <h3 class="margin-bottom-10">Contact Settings</h3>
+                <hr/>
+                <form name="serverSettingsForm">
+                    <div class="row form-set">
+
+                        <div class="col-md-3">
+                            <h4>App Email ID :</h4>
+                        </div>
+                        <div class="col-md-9">
+                            <input type="email" class="form-control margin-bottom-20" name="appemailid" ng-model="serverSettings.appemailid" required email>
+                         <span ng-show="serverSettingsForm.appemailid.$dirty&&serverSettingsForm.appemailid.$invalid">
+                                <span class="error-message" ng-show="serverSettingsForm.appemailid.$error.required"><span>Required.</span></span>
+                             <span class="error-message" ng-show="serverSettingsForm.appemailid.$error.email"><span>Enter&nbsp;valid&nbsp;Email&nbsp;ID.</span></span>
+                         </span>
+                        </div>
+                        <div class="col-md-3">
+                            <h4>App Password :</h4>
+                        </div>
+                        <div class="col-md-9">
+                            <input type="password" class="form-control margin-bottom-20" name="apppassword" ng-model="serverSettings.apppassword" required>
+                         <span ng-show="serverSettingsForm.apppassword.$dirty&&serverSettingsForm.apppassword.$invalid">
+                                <span class="error-message" ng-show="serverSettingsForm.apppassword.$error.required"><span>Required.</span></span>
+                         </span>
+                        </div>
+                        <div class="col-md-3">
+                            <h4>Outgoing Mail Server :</h4>
+                        </div>
+                        <div class="col-md-9">
+                            <input class="form-control margin-bottom-20" name="outgoingmailserver" ng-model="serverSettings.outgoingmailserver" required>
+                        <span ng-show="serverSettingsForm.outgoingmailserver.$dirty&&serverSettingsForm.outgoingmailserver.$invalid">
+                                <span class="error-message" ng-show="serverSettingsForm.outgoingmailserver.$error.required"><span>Required.</span></span>
+                         </span>
+                        </div>
+                        <div class="col-md-3">
+                            <h4>Port :</h4>
+                        </div>
+                        <div class="col-md-9">
+                            <input class="form-control margin-bottom-20" name="port" ng-model="serverSettings.port" required>
+                        <span ng-show="serverSettingsForm.port.$dirty&&serverSettingsForm.port.$invalid">
+                                <span class="error-message" ng-show="serverSettingsForm.port.$error.required"><span>Required.</span></span>
+                         </span>
+                        </div>
+                        <div class="col-md-3">
+                            <h4>SSL :</h4>
+                        </div>
+                        <div class="col-md-9">
+                            <input class="form-control margin-bottom-20" name="ssl" ng-model="serverSettings.ssl" required>
+                        <span ng-show="serverSettingsForm.ssl.$dirty&&serverSettingsForm.ssl.$invalid">
+                                <span class="error-message" ng-show="serverSettingsForm.ssl.$error.required"><span>Required.</span></span>
+                         </span>
+                        </div>
+                    </div>
+                </form>
+                <div class="text-center">
+                    <a href="" class="btn btn-success" ng-click="doUpdateServerSettings()" ng-disabled="serverSettingsForm.$invalid">Save Changes</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- End Page Banner -->

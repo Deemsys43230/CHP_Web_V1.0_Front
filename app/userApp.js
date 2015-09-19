@@ -1,4 +1,4 @@
-var userApp= angular.module('userApp', ['ngRoute','oc.lazyLoad']);
+var userApp= angular.module('userApp', ['ngRoute','oc.lazyLoad','ngCookies']);
 
 userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
 
@@ -11,11 +11,12 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
         //Do For Cross Orgin Management
         $httpProvider.defaults.withCredentials = true;
 
-        $httpProvider.interceptors.push(['$q','$location','$injector',function ($q, $location,$injector) {
+        $httpProvider.interceptors.push(['$q','$location','$injector','$cookies',function ($q, $location,$injector,$cookies) {
 
             return {
                 
                 'request': function(request) {
+                    request.headers['X-CSRFToken']=$cookies.get('X-CSRFToken');
                     return request;
                 },
                 'response': function (response) {
@@ -64,7 +65,6 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../plugin/search/tipuedrop_content.js',
                                '../../plugin/search/tipuedrop.css',
                                '../../plugin/search/tipuedrop.js'
-
                                 ]
                         })
                     }

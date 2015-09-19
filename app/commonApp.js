@@ -1,4 +1,4 @@
-var commonApp= angular.module('commonApp', ['ngRoute','oc.lazyLoad','requestModule','flash']);
+var commonApp= angular.module('commonApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','ngCookies']);
 
 commonApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
 
@@ -11,11 +11,12 @@ commonApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
         //Do For Cross Orgin Login Management
         $httpProvider.defaults.withCredentials = true;
 
-        $httpProvider.interceptors.push(['$q','$location','$injector',function ($q, $location,$injector) {
+        $httpProvider.interceptors.push(['$q','$location','$injector','$cookies',function ($q, $location,$injector,$cookies) {
 
             return {
 
                 'request': function(request) {
+                    request.headers['X-CSRFToken']=$cookies.get('X-CSRFToken');
                     return request;
                 },
                 'response': function (response) {
@@ -30,8 +31,6 @@ commonApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                             alert("restricted");
                         }
                         case 403: {
-                            alert("yes !");
-                            alert("Get out");
                             $location.path("/login");
                             break;
                         }
@@ -100,10 +99,10 @@ commonApp.controller('LoginController',function($scope,requestHandler,Flash,$win
                        }
                    }
                     else if(response.data.Login.roleid==2){
-
+                       $window.location.href="views/superadmin/#/dashboard";
                    }
                     else if(response.data.Login.roleid==1){
-
+                       $window.location.href="views/superadmin/#/dashboard";
                    }
                 });
 
@@ -120,6 +119,8 @@ commonApp.controller('LoginController',function($scope,requestHandler,Flash,$win
         $scope.userForm.role="3";
         requestHandler.postRequest("registerUser/",$scope.userForm).then(function(response){
 
+            console.log($scope.userForm);
+
             if(response.data.Response===0){
                 errorMessage(Flash,"Something went wrong! Please Try again later!")
             }
@@ -127,9 +128,14 @@ commonApp.controller('LoginController',function($scope,requestHandler,Flash,$win
                 $(".reset_password").hide();
                 $(".user_register").hide();
                 $(".secret_question").hide();
+                $(".user_register1").hide();
                 $(".user_login").show();
                 $(".header_title").text('Login');
                 successMessage(Flash,"Register Successful!");
+
+                $scope.userForm={};
+                $scope.registerForm=false;
+
             }
         });
     };
@@ -162,7 +168,7 @@ commonApp.controller('LoginController',function($scope,requestHandler,Flash,$win
             }
             else if(response.data.Response_status==1){
                 //Lets show the secret question
-                successMessage(Flash,"Secret Answer Matched! Check your Mail for Password");
+                successMessage(Flash,"Secret Answer Matched! Check your E-Mail");
             }
         });
     };
@@ -205,6 +211,35 @@ commonApp.directive('compareTo',function() {
         }
     };
 });
+
+// Compare Confirm Password
+commonApp.directive('secretAnswer',function() {
+    return {
+        require: "ngModel",
+        scope: {
+            otherModelValue: "=secretAnswer"
+        },
+        link: function (scope, element, attributes, ngModel) {
+
+            ngModel.$validators.secretAnswer = function (modelValue) {
+                alert("Sample"+scope.otherModelValue);
+                if(scope.otherModelValue!=""){
+                    alert("return true");
+                    return true;
+                }else{
+                    return false;
+                }
+
+
+            };
+
+            scope.$watch("otherModelValue", function () {
+                ngModel.$validate();
+            });
+        }
+    };
+});
+
 
 //Check for Email Already Exists
 commonApp.directive("emailexists", function ($q, $timeout,requestHandler) {
