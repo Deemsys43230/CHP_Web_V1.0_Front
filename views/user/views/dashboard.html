@@ -1,76 +1,3 @@
-<script>
-    if (top.location != location) {
-        top.location.href = document.location.href ;
-    }
-    $(function(){
-        window.prettyPrint && prettyPrint();
-        $('#dp1').datepicker({
-            format: 'mm-dd-yyyy'
-        });
-        var startDate = new Date(2012,1,20);
-        var endDate = new Date(2020,1,25);
-
-        var checkin = $('#dpd1').datepicker({
-            onRender: function(date) {
-                return date.valueOf() < now.valueOf() ? 'disabled' : '';
-            }
-        }).on('changeDate', function(ev) {
-            if (ev.date.valueOf() > checkout.date.valueOf()) {
-                var newDate = new Date(ev.date)
-                newDate.setDate(newDate.getDate() + 1);
-                checkout.setValue(newDate);
-            }
-            checkin.hide();
-            $('#dpd2')[0].focus();
-        }).data('datepicker');
-    });
-</script>
-
-<script type="text/javascript">
-    $(function(){
-        $('#sidemenu a').on('click', function(e){
-            e.preventDefault();
-
-            if($(this).hasClass('open')) {
-                // do nothing because the link is already open
-            } else {
-                var oldcontent = $('#sidemenu a.open').attr('href');
-                var newcontent = $(this).attr('href');
-
-                $(oldcontent).fadeOut('fast', function(){
-                    $(newcontent).fadeIn().removeClass('hidden');
-                    $(oldcontent).addClass('hidden');
-                });
-
-
-                $('#sidemenu a').removeClass('open');
-                $(this).addClass('open');
-            }
-        });
-    });
-</script>
-
-<!--new tab script-->
-
-<script type="text/javascript">
-
-    $(document).ready(function() {
-
-        $(".tab_content").hide();
-        $(".tab_content:first").show();
-
-        $("ul.tabs li").click(function() {
-            $("ul.tabs li").removeClass("active");
-            $(this).addClass("active");
-            $(".tab_content").hide();
-            var activeTab = $(this).attr("rel");
-            $("#"+activeTab).fadeIn();
-        });
-    });
-
-</script>
-
-
 <style>
     /*weight level*/
 
@@ -101,30 +28,6 @@
     }
 
 </style>
-
-<script>
-    function viewGraph1(){
-        $('.weight_level');
-        var ha = document.getElementById('weight_entry').innerText;
-        var hacolor = parseFloat(ha);
-        if (hacolor <= 45) {
-            $('#col').addClass('green');
-            $('#col').animate({height: ha}, 1200);
-        }
-        else if(hacolor >= 55) {
-            $('#col').addClass('red');
-            $('#col').animate({height: ha}, 1200);
-        }
-        else if (45> hacolor < 55) {
-            $('#col').addClass('yellow');
-            $('#col').animate({height: ha}, 1200);
-        }
-
-    }
-    $(document).ready(function(){
-        viewGraph1();
-    });
-</script>
 
 <div class="page-banner1">
 
@@ -767,19 +670,19 @@
                     <div class="left">
                         <div class="health">
                             <div class="col-md-3 no-padding text-center">
-                                <img src="../../images/i-protein.jpg" style="margin-right: 5px">
+                                <img src="../../images/i-protein.jpg" class="margin-left-5">
                                 <p>Protein<br/><strong>312</strong><br/>gms</p>
                             </div>
                             <div class="col-md-3 no-padding">
-                                <img src="../../images/i-fats.jpg" style="margin-left: 5px">
+                                <img src="../../images/i-fats.jpg" class="margin-left-5">
                                 <p>Fats<br/><strong>42</strong><br/>gms</p>
                             </div>
                             <div class="col-md-3 no-padding">
-                                <img src="../../images/i-carbs.jpg" style="margin-left: 5px">
+                                <img src="../../images/i-carbs.jpg" class="margin-left-5">
                                 <p>Carbs<br/><strong>08</strong><br/>gms</p>
                             </div>
                             <div class="col-md-3 no-padding">
-                                <img src="../../images/i-fibre.jpg" style="margin-left: 5px">
+                                <img src="../../images/i-fibre.jpg" class="margin-left-5">
                                 <p>Fibre<br/><strong>11</strong><br/>gms</p>
                             </div>
                         </div>
@@ -793,6 +696,88 @@
 </div>
 
 <script type="text/javascript" src="../../js/script.js"></script>
+
+<script>
+    function viewGraph1(){
+        $('.weight_level');
+        var ha = document.getElementById('weight_entry').innerText;
+        var hacolor = parseFloat(ha);
+        if (hacolor <= 45) {
+            $('#col').addClass('green');
+            $('#col').animate({height: ha}, 1200);
+        }
+        else if(hacolor >= 55) {
+            $('#col').addClass('red');
+            $('#col').animate({height: ha}, 1200);
+        }
+        else if (45> hacolor < 55) {
+            $('#col').addClass('yellow');
+            $('#col').animate({height: ha}, 1200);
+        }
+
+    }
+    $(document).ready(function(){
+        viewGraph1();
+    });
+</script>
+
+<script>
+    function viewGraph(){
+        $('.column').css('height','0');
+        $('table tr').each(function(index) {
+            var ha = $(this).children('td').eq(1).text();
+            $('#col'+index).animate({height: ha}, 1500).html("<div>"+ha+"</div>");
+        });
+    }
+    $(document).ready(function(){
+        viewGraph();
+    });
+
+</script>
+
+<script type="text/javascript">
+    $(function(){
+        $('#sidemenu a').on('click', function(e){
+            e.preventDefault();
+
+            if($(this).hasClass('open')) {
+                // do nothing because the link is already open
+            } else {
+                var oldcontent = $('#sidemenu a.open').attr('href');
+                var newcontent = $(this).attr('href');
+
+                $(oldcontent).fadeOut('fast', function(){
+                    $(newcontent).fadeIn().removeClass('hidden');
+                    $(oldcontent).addClass('hidden');
+                });
+
+
+                $('#sidemenu a').removeClass('open');
+                $(this).addClass('open');
+            }
+        });
+    });
+</script>
+
+<!--new tab script-->
+
+<script type="text/javascript">
+
+    $(document).ready(function() {
+
+        $(".tab_content").hide();
+        $(".tab_content:first").show();
+
+        $("ul.tabs li").click(function() {
+            $("ul.tabs li").removeClass("active");
+            $(this).addClass("active");
+            $(".tab_content").hide();
+            var activeTab = $(this).attr("rel");
+            $("#"+activeTab).fadeIn();
+        });
+    });
+
+</script>
 
 <script>
     $('.gain').percentcircle({
@@ -869,4 +854,32 @@
         $('.select_food ul').fadeOut();
     });
 
+</script>
+
+<script>
+    if (top.location != location) {
+        top.location.href = document.location.href ;
+    }
+    $(function(){
+        window.prettyPrint && prettyPrint();
+        $('#dp1').datepicker({
+            format: 'mm-dd-yyyy'
+        });
+        var startDate = new Date(2012,1,20);
+        var endDate = new Date(2020,1,25);
+
+        var checkin = $('#dpd1').datepicker({
+            onRender: function(date) {
+                return date.valueOf() < now.valueOf() ? 'disabled' : '';
+            }
+        }).on('changeDate', function(ev) {
+            if (ev.date.valueOf() > checkout.date.valueOf()) {
+                var newDate = new Date(ev.date)
+                newDate.setDate(newDate.getDate() + 1);
+                checkout.setValue(newDate);
+            }
+            checkin.hide();
+            $('#dpd2')[0].focus();
+        }).data('datepicker');
+    });
 </script>
