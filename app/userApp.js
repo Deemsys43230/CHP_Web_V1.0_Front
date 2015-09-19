@@ -104,6 +104,27 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
             when('/contact', {
                 templateUrl: '../common/contact.html'
             }).
+            when('/profile', {
+                templateUrl: 'views/profile.html',
+                resolve: {
+                    loadMyFiles:function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'userApp',
+                            files:[
+                                '../../plugin/datepicker/bootstrap-datepicker.js',
+                                '../../plugin/datepicker/datepicker.css',
+                                '../../plugin/popup/style.css',
+                                '../../plugin/popup/jquery.leanModal.min.js',
+                                '../../css/profile-image-upload.css',
+                                '../../js/image-upload.js'
+                            ]
+                        })
+                    }
+                }
+            }).
+            when('/demography', {
+                templateUrl: 'views/demography.html'
+            }).
             otherwise({
                 redirectTo: '/dashboard'
             });
