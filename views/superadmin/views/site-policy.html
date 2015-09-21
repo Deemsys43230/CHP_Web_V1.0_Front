@@ -10,27 +10,33 @@
                 <sitemenu></sitemenu>
             </div>
             <div class="col-md-9">
+                <div flash-message="5000" class="col-md-4 pull-right"></div>
                 <a href="#dashboard" class="back-button pull-right margin-left-10"><i class="fa fa-arrow-circle-o-left"></i> Back to Dashboard</a>
                 <h3 class="margin-bottom-10">Privacy Policy</h3>
                 <hr/>
                 <div class="row">
+                    <form name="privacyPolicyForm">
                     <div class="col-md-2">
                         <h4>Title :</h4>
                     </div>
                     <div class="col-md-10 margin-bottom-20">
-                        <input class="form-control">
+                        <span>{{privacypolicydetails.title}}</span>
                     </div>
                     <div class="col-md-2">
                         <h4>Content :</h4>
                     </div>
                     <div class="col-md-10">
+                        <span ng-show="privacyPolicyForm.content.$dirty&&privacyPolicyForm.content.$invalid">
+                              <span class="error-message textarea-errormessage40" ng-show="privacyPolicyForm.content.$error.required"><span>Required.</span></span>
+                         </span>
                         <div class="texteditor">
-                            <textarea name="summernote" id="summernote"></textarea>
+                            <summernote height= "300" name="content"  ng-model="privacypolicydetails.content" required></summernote>
                         </div>
                     </div>
+                        </form>
                 </div>
                 <div class="text-center margin-top-20">
-                    <a href="" class="btn btn-success">Save Changes</a>
+                    <a href="" class="btn btn-success" ng-disabled="privacyPolicyForm.$invalid" ng-click="doUpdatePrivacyPolicy()">Save Changes</a>
                 </div>
             </div>
         </div>

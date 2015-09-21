@@ -207,12 +207,34 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                             files:[
                                 '../../app/commonDirectives/sidebar/sitemenu.js',
                                 '../../plugin/text-editor/text-editor-bootstarp.js',
-                                'http://cdnjs.cloudflare.com/ajax/libs/summernote/0.5.0/summernote.css',
-                                '../../plugin/text-editor/summernote.js'
+                                '../../app/privacyPolicy/privacyPolicyController.js',
+                                '../../css/summernote.css',
+                                '../../js/summernote.js'
+
                             ]
                         })
                     }
-                }
+                },
+                controller:'PrivacyPolicyController'
+            }).
+            when('/termsOfUse', {
+                templateUrl: 'views/site-termsofuse.html',
+                resolve: {
+                    loadMyFiles:function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'adminApp',
+                            files:[
+                                '../../app/commonDirectives/sidebar/sitemenu.js',
+                                '../../plugin/text-editor/text-editor-bootstarp.js',
+                                '../../app/termsOfUse/termsOfUseController.js',
+                                '../../css/summernote.css',
+                                '../../js/summernote.js'
+
+                            ]
+                        })
+                    }
+                },
+                controller:'TermsOfUseController'
             }).
             when('/testimonials', {
                 templateUrl: 'views/site-testimonials.html',

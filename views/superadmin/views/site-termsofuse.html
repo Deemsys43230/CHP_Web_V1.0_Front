@@ -1,0 +1,55 @@
+
+<!-- Start Page Banner -->
+
+<div class="page-banner">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <h4 class="classic-title"><span>Site Management</span></h4>
+                <sitemenu></sitemenu>
+            </div>
+            <div class="col-md-9">
+                <div flash-message="5000" class="col-md-4 pull-right"></div>
+                <a href="#dashboard" class="back-button pull-right margin-left-10"><i class="fa fa-arrow-circle-o-left"></i> Back to Dashboard</a>
+                <h3 class="margin-bottom-10">Instruction</h3>
+                <hr/>
+                <div class="row">
+                    <form name="termsOfUseForm">
+                        <div class="col-md-2">
+                            <h4>Title :</h4>
+                        </div>
+                        <div class="col-md-10 margin-bottom-20">
+                            <span>{{terms.title}}</span>
+                        </div>
+                        <div class="col-md-2">
+                            <h4>Content :</h4>
+                        </div>
+
+                        <div class="col-md-10">
+                        <span ng-show="termsOfUseForm.content.$dirty&&termsOfUseForm.content.$invalid">
+                              <span class="error-message textarea-errormessage40" ng-show="termsOfUseForm.content.$error.required"><span>Required.</span></span>
+                         </span>
+                            <div class="texteditor">
+                                <summernote height= "300" name="content"  ng-model="terms.content" required></summernote>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="text-center margin-top-20">
+                    <a href="" class="btn btn-success" ng-disabled="termsOfUseForm.$invalid" ng-click="doUpdateTermsOfUse()">Save Changes</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- End Page Banner -->
+
+<!-- text editor -->
+<script type='text/javascript'>//<![CDATA[
+$(function(){
+    $('#summernote').summernote({height: 300});
+});//]]>
+</script>
+
+<script type="text/javascript" src="../../js/script.js"></script>
