@@ -189,12 +189,14 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                             files:[
                                 '../../app/commonDirectives/sidebar/sitemenu.js',
                                 '../../plugin/text-editor/text-editor-bootstarp.js',
-                                'http://cdnjs.cloudflare.com/ajax/libs/summernote/0.5.0/summernote.css',
-                                '../../plugin/text-editor/summernote.js'
+                                '../../css/summernote.css',
+                                '../../js/summernote.js',
+                                '../../app/instruction/instructionController.js'
                             ]
                         })
                     }
-                }
+                },
+                controller:'InstructionController'
             }).
             when('/privacyPolicy', {
                 templateUrl: 'views/site-policy.html',

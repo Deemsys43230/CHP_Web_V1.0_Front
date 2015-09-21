@@ -7242,6 +7242,9 @@ a:hover, a:visited, a:link, a:active
 	font-weight: bold;
 }
 
+.textarea-errormessage40{
+	top: 40px;
+}
 .textarea-errormessage-60{
 	top: -60px;
 }
@@ -7269,7 +7272,9 @@ a:hover, a:visited, a:link, a:active
 .textarea-errormessage-80{
 	top: -80px;
 }
-
+.textarea-errormessage-370{
+	top: -360px;
+}
 
 .error-message span{
 	display: inline-block !important;
