@@ -6171,8 +6171,6 @@ ul.footer-nav li a:hover {
     font-size: 14px;
 }
 
-@import url(http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
-
 .transition (@time: .5s, @range: all, @ease: ease-out) {
     -moz-transition: @range @time @ease;
     -webkit-transition: @range @time @ease;
