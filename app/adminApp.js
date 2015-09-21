@@ -236,6 +236,56 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'TermsOfUseController'
             }).
+            when('/latestNews', {
+                templateUrl: 'views/site-news.html',
+                resolve: {
+                    loadMyFiles:function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'adminApp',
+                            files:[
+                                '../../js/bootstrap.min.js',
+                                '../../app/commonDirectives/sidebar/sitemenu.js'
+                            ]
+                        })
+                    }
+                }
+            }).
+            when('/addLatestNews', {
+                templateUrl: 'views/site-add-news.html',
+                resolve: {
+                    loadMyFiles:function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'adminApp',
+                            files:[
+                                '../../app/commonDirectives/sidebar/sitemenu.js',
+                                '../../plugin/text-editor/text-editor-bootstarp.js',
+                                'http://cdnjs.cloudflare.com/ajax/libs/summernote/0.5.0/summernote.css',
+                                '../../plugin/text-editor/summernote.js',
+                                '../../plugin/date-time-picker/DateTimePicker.js',
+                                '../../plugin/date-time-picker/DateTimePicker.css'
+                            ]
+                        })
+                    }
+                }
+            }).
+            when('/editLatestNews', {
+                templateUrl: 'views/site-edit-news.html',
+                resolve: {
+                    loadMyFiles:function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'adminApp',
+                            files:[
+                                '../../app/commonDirectives/sidebar/sitemenu.js',
+                                '../../plugin/text-editor/text-editor-bootstarp.js',
+                                'http://cdnjs.cloudflare.com/ajax/libs/summernote/0.5.0/summernote.css',
+                                '../../plugin/text-editor/summernote.js',
+                                '../../plugin/date-time-picker/DateTimePicker.js',
+                                '../../plugin/date-time-picker/DateTimePicker.css'
+                            ]
+                        })
+                    }
+                }
+            }).
             when('/testimonials', {
                 templateUrl: 'views/site-testimonials.html',
                 resolve: {
