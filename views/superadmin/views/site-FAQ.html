@@ -7,23 +7,21 @@
 
     <section class="popupBody">
         <!-- common form -->
-        <div class="common_model">
+        <div class="user_register">
             <form name="faqForm">
-                <p>Question</p>
+                <p>Question ( <span class="text-bold text-red" id="question-counter"></span> Left )</p>
                 <textarea class="form-control height-100" name="question" ng-model="faq.question" required id="question" maxlength="300"></textarea>
-                <span class="input-icon text-count" id="counter"></span>
                 <span ng-show="faqForm.question.$dirty&&faqForm.question.$invalid">
                     <span class="error-message textarea-errormessage-60" ng-show="faqForm.question.$error.required"><span>Required.</span></span>
                 </span>
 
-                <p>Answer</p>
-                <textarea class="form-control height-150" name="answer" ng-model="faq.answer" required></textarea>
-
+                <p>Answer ( <span class="text-bold text-red" id="answer-counter"></span> Left )</p>
+                <textarea class="form-control height-150" name="answer" ng-model="faq.answer" required id="answer" maxlength="300"></textarea>
                 <span ng-show="faqForm.answer.$dirty&&faqForm.answer.$invalid">
                     <span class="error-message textarea-errormessage-110" ng-show="faqForm.answer.$error.required"><span>Required.</span></span>
                 </span>
                 <div class="action_btns margin-top-20">
-                    <div class="one_half"   ><a href="#" class="btn btn_blue" ng-disabled="faqForm.$invalid" ng-click="doAddFAQ()">Add FAQ</a></div>
+                    <div class="one_half"><a onclick="return false;" class="btn btn_blue" ng-disabled="faqForm.$invalid" ng-click="doAddFAQ()">Add FAQ</a></div>
                     <div class="one_half last modal_close"><a href="" class="btn btn_red">Cancel</a></div>
                 </div>
             </form>
@@ -32,29 +30,31 @@
 </div>
 
 <!-- Edit FAQ popup-->
-<div id="modal-edit" class="popupContainer width-40" style="display:none;">
-    <header class="popupHeader width-100">
-        <span class="header_title">edit faq</span>
-        <span class="modal_close"><i class="fa fa-times"></i></span>
-    </header>
+<div id="modal-edit" class="popupContainer-width" style="display:none;">
+    <div class="center-block">
+        <header class="popupHeader width-100">
+            <span class="header_title">edit faq</span>
+            <span class="modal_close"><i class="fa fa-times"></i></span>
+        </header>
 
-    <section class="popupBody">
-        <!-- common form -->
-        <div class="common_model">
-            <form>
-                <p>Question</p>
-                <textarea class="form-control height-100"></textarea>
+        <section class="popupBody">
+            <!-- common form -->
+            <div class="common_model">
+                <form>
+                    <p>Question</p>
+                    <textarea class="form-control height-100"></textarea>
 
-                <p>Answer</p>
-                <textarea class="form-control height-150"></textarea>
+                    <p>Answer</p>
+                    <textarea class="form-control height-150"></textarea>
 
-                <div class="action_btns margin-top-20">
-                    <div class="one_half"><a href="#" class="btn btn_blue">Update</a></div>
-                    <div class="one_half last"><a href="" class="btn btn_red">Cancel</a></div>
-                </div>
-            </form>
-        </div>
-    </section>
+                    <div class="action_btns margin-top-20">
+                        <div class="one_half"><a href="#" class="btn btn_blue">Update</a></div>
+                        <div class="one_half last modal_close"><a href="" class="btn btn_red">Cancel</a></div>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </div>
 </div>
 
 <!-- Start Page Banner -->
@@ -68,9 +68,9 @@
                 <sitemenu></sitemenu>
             </div>
             <div class="col-md-9">
-                <div flash-message="5000" class="col-md-4 pull-right"></div>
                 <a href="#dashboard" class="back-button pull-right margin-left-10"><i class="fa fa-arrow-circle-o-left"></i> Back to Dashboard</a>
                 <a  id="modal_trigger" href="#modal" class="back-button pull-right "><i class="fa fa-plus-circle"></i> Add FAQ</a>
+                <div flash-message="5000" class="col-md-4 pull-right"></div>
                 <h3 class="margin-bottom-10">FAQ List</h3>
 
                 <table class="table table-striped table-bordered">
@@ -78,8 +78,7 @@
                         <tr class="warning">
                             <th class="question-col">Question</th>
                             <th>Answer</th>
-                            <th class="action-col">Actions<a href="#modal-edit" class="btn-xs btn-primary modal_trigger1">Edit</a></th>
-
+                            <th class="action-col">Actions</th>
                         </tr>
                     </thead>
                     <tbody dir-paginate="faq in faqList | orderBy:sortKey:reverse|itemsPerPage:6 ">
@@ -87,7 +86,7 @@
                             <td>{{faq.question}}</td>
                             <td>{{faq.answer}}</td>
                             <td>
-                                <a id="modal_trigger{{faq.faqid}}" href="#modal" class="btn-xs btn-primary modal_trigger1">Edit</a>
+                                <a href="" onclick="return false;" class="btn-xs btn-primary" ng-click="doUpdateFAQ(faq.faqid)">Edit</a>
                                 <a href="" class="btn-xs btn-success" ng-click="doEnableDisable(faq.faqid)" ng-show="faq.status==0">Enable</a>
                                 <a href="" class="btn-xs btn-danger" ng-click="doEnableDisable(faq.faqid)" ng-hide="faq.status==0">Disable</a>
                             </td>
@@ -112,17 +111,14 @@
     $("#modal_trigger").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
 
     $(function(){
-        $(".common_model").show();
+        $(".user_register").show();
         $('#question').simplyCountable({
             maxCount: 300,
+            counter: '#question-counter'
         });
-    })
-</script>
-
-<script type="text/javascript">
-    $(".modal_trigger1").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
-
-    $(function(){
-        $(".common_model").show();
+        $('#answer').simplyCountable({
+            maxCount: 300,
+            counter: '#answer-counter'
+        });
     })
 </script>

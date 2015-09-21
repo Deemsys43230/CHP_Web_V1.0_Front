@@ -24,8 +24,30 @@ adminApp.controller('FAQController',function($scope,requestHandler,Flash){
         });
     };
 
-    $scope.doUpdateFAQ=function(){
+    $scope.doUpdateFAQ=function(id){
+        $(function(){
+            $("#lean_overlay").fadeTo(1000);
+            $("#modal-edit").fadeIn(600);
+            $(".common_model").show();
+        });
 
+        requestHandler.getRequest("admin/getFAQListById/"+id,"").then(function(response){
+            $scope.faq=response.data.Faq_Data;
+        },function(){
+            errorMessage(Flash,"Please try again later!")
+        });
+
+        $(".modal_close").click(function(){
+            $(".common_model").hide();
+            $("#modal-edit").hide();
+            $("#lean_overlay").hide();
+        });
+
+        $("#lean_overlay").click(function(){
+            $(".common_model").hide();
+            $("#modal-edit").hide();
+            $("#lean_overlay").hide();
+        });
     };
 
     $scope.doEnableDisable=function(id){
@@ -42,16 +64,12 @@ adminApp.controller('FAQController',function($scope,requestHandler,Flash){
     $scope.doGetFAQByID=function(id){
         requestHandler.getRequest("admin/getFAQListById/"+id,"").then(function(response){
             $scope.faq=response.data.Faq_Data;
-
-            $("#modal_trigger"+id).leanModal();
-        },function(){
+            },function(){
             errorMessage(Flash,"Please try again later!")
         });
     };
 
-
     //Initial Load
     $scope.doGetAllFAQ();
-
 
 });

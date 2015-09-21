@@ -7251,11 +7251,20 @@ a:hover, a:visited, a:link, a:active
 .textarea-errormessage-120{
 	top: -120px;
 }
+.textarea-errormessage-130{
+	top: -130px;
+}
+.textarea-errormessage-135{
+	top: -135px;
+}
 .textarea-errormessage-110{
 	top: -110px;
 }
 .textarea-errormessage-90{
 	top: -90px;
+}
+.textarea-errormessage-85{
+	top: -85px;
 }
 .textarea-errormessage-80{
 	top: -80px;
@@ -7298,17 +7307,18 @@ a:hover, a:visited, a:link, a:active
 }
 
 /* Letter Count - Text Area */
-.input-icon{position:absolute; right:8px; top:10px; width:32px; height:24px; background-color:transparent; text-align:right; border-left: 1px solid #ececec; color:#ccc; font-size:18px; line-height:24px; text-shadow:none;}
-
-.text-count{
-	background-color:#4DBF4D !important;
-	text-align:center !important;
-	border-left: 0px !important;
-	color:#fff !important;
-	font-weight: bold;
-	font-size:12px !important;
-	line-height: 20px !important;
-	height: 20px !important;
+.input-icon {
+	position: relative;
+	z-index: 1000;
+	margin-right: 10px;
+	background-color: #4DBF4D !important;
+	float: right !important;
+	width: 40px;
+	height: 20px;
+	line-height: 12px;
+	padding: 3px 7px;
+	text-align: center;
+	color: white;
 }
 
 /*main page*/
