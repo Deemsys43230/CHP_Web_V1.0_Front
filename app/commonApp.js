@@ -68,6 +68,21 @@ commonApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
             when('/contact', {
                 templateUrl: 'views/common/contact.html'
             }).
+            when('/privacypolicy', {
+                templateUrl: 'views/common/privacypolicy.html',
+                resolve: {
+                    loadMyFiles:function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'commonApp',
+                            files:[
+                                'app/privacyPolicy/privacyPolicyController.js',
+                                'app/requestHandler.js',
+                            ]
+                        })
+                    }
+                }
+
+            }).
             otherwise({
                 redirectTo: '/index'
             });
