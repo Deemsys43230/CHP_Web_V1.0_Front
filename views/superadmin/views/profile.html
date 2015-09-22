@@ -1,0 +1,251 @@
+
+<div class="page-banner1">
+    <div id="w" class="clearfix">
+        <div id="profile">
+            <div class="col-md-12 no-padding">
+                <div class="profile-image center-block"><img id="profile-image-change" src="../../images/member02.jpg"></div>
+                <div class="change-image"><a id="modal_trigger" href="#modal" class="btn btn-xs btn-warning">Change</a></div>
+                <h4 class="margin-top-20">Mugesh Kumar</h4>
+                <p>9042081474</p>
+                <p>mugeshmail@gmail.com</p>
+                <div class="margin-top-10">
+                    <div class="col-md-3 no-padding">
+                        <h6>Gender</h6>
+                        <h6>DOB</h6>
+                        <h6>Country</h6>
+                        <h6>State</h6>
+                        <h6>City</h6>
+                    </div>
+                    <div class="col-md-9">
+                        <h6>: Male</h6>
+                        <h6>: 01/11/1991</h6>
+                        <h6>: India</h6>
+                        <h6>: Tamil Nadu</h6>
+                        <h6>: Karaikal</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="profile-content">
+            <div class="col-md-12">
+                <div class="col-md-12">
+                    <h5 class="classic-title"><span><i class="fa fa-user"></i> &nbsp;PROFILE UPDATE</span></h5>
+                </div>
+                <div class="col-md-12">
+                    <div class="col-md-6 margin-top-10">
+                        <div class="col-md-4 padding-top-4">
+                            <h5>Name :</h5>
+                        </div>
+                        <div class="col-md-8">
+                            <input class="profile_input"/>
+                        </div>
+                    </div>
+                    <div class="col-md-6 margin-top-10">
+                        <div class="col-md-4 padding-top-4">
+                            <h5>Country :</h5>
+                        </div>
+                        <div class="col-md-8">
+                            <input class="profile_input"/>
+                        </div>
+                    </div>
+                    <div class="col-md-6 margin-top-10">
+                        <div class="col-md-4 padding-top-4">
+                            <h5>Email Id :</h5>
+                        </div>
+                        <div class="col-md-8">
+                            <input class="profile_input"/>
+                        </div>
+                    </div>
+                    <div class="col-md-6 margin-top-10">
+                        <div class="col-md-4 padding-top-4">
+                            <h5>State :</h5>
+                        </div>
+                        <div class="col-md-8">
+                            <input class="profile_input"/>
+                        </div>
+                    </div>
+                    <div class="col-md-6 margin-top-10">
+                        <div class="col-md-4 padding-top-4">
+                            <h5>DOB :</h5>
+                        </div>
+                        <div class="col-md-8">
+                            <input type="text" class="profile_input" value="02-16-2012" placeholder="Date Of Birth" id="dp1" >
+                        </div>
+                    </div>
+                    <div class="col-md-6 margin-top-10">
+                        <div class="col-md-4 padding-top-4">
+                            <h5>City :</h5>
+                        </div>
+                        <div class="col-md-8">
+                            <input class="profile_input"/>
+                        </div>
+                    </div>
+                    <div class="col-md-6 margin-top-10">
+                        <div class="col-md-4 padding-top-4">
+                            <h5>Mobile :</h5>
+                        </div>
+                        <div class="col-md-8">
+                            <input class="profile_input"/>
+                        </div>
+                    </div>
+                    <div class="col-md-6 margin-top-10">
+                        <div class="col-md-4 padding-top-4">
+                            <h5>Experience :</h5>
+                        </div>
+                        <div class="col-md-8">
+                            <input class="profile_input"/>
+                        </div>
+                    </div>
+                    <div class="col-md-6 margin-top-10">
+                        <div class="col-md-4 padding-top-4">
+                            <h5>Gender :</h5>
+                        </div>
+                        <div class="col-md-8">
+                            <input type="radio" checked id="1" class="height" name="sex" />
+                            <label for="1">Male</label>
+                            <input type="radio" id="2" class="height" name="sex" />
+                            <label for="2">Female</label>
+                        </div>
+                    </div>
+                    <div class="col-md-12"><hr/></div>
+                    <div class="col-md-7">
+                        <div class="col-md-4 padding-top-4">
+                            <h5>Password :</h5>
+                        </div>
+                        <div class="col-md-8">
+                            <input class="profile_input"/>
+                        </div>
+                    </div>
+                    <div class="col-md-5 margin-top-5 no-padding">
+                        <a id="modal_trigger1" href="#modal-changePassword" class="profile_button">Change Password</a><br/><br/>
+                    </div>
+                    <div class="col-md-12"><hr/></div>
+                    <div class="col-md-12 text-center margin-top-10">
+                        <a href="" class="main_button">Save Changes</a>
+                        <a href="#dashboard" class="main_button">Cancel</a>
+                    </div>
+                </div>
+            </div>
+        </div><!-- @end #content -->
+    </div><!-- @end #w -->
+</div>
+
+<!-- create coach popup-->
+<div id="modal" class="popupContainer" style="display:none;">
+    <header class="popupHeader">
+        <span class="header_title">Change Profile Image</span>
+        <span class="modal_close"><i class="fa fa-times"></i></span>
+    </header>
+
+    <section class="popupBody">
+        <!-- Register Form -->
+        <div class="common_model">
+            <div class="image-editor">
+                <div class="cropit-image-preview center-block"></div>
+                <div class="image-size-label">
+                    Resize image
+                </div>
+                <input type="range" class="cropit-image-zoom-input">
+
+                <div class="action_btns margin-top-20">
+                    <div class="one_half">
+                        <div class="fileUpload food-button">
+                            <span>Choose File</span>
+                            <input type="file" class="upload cropit-image-input" />
+                        </div>
+                    </div>
+                    <div class="one_half last"><a href="" onclick="return false;" class="food-button export modal_close">Upload Image</a></div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- create coach popup-->
+<div id="modal-changePassword" class="popupContainer" style="display:none;">
+    <header class="popupHeader">
+        <span class="header_title">Change Password</span>
+        <span class="modal_close"><i class="fa fa-times"></i></span>
+    </header>
+
+    <section class="popupBody">
+        <!-- Register Form -->
+        <div class="common_model">
+            <form>
+                <p>Current Password</p>
+                <input type="text"/>
+                <p>New Password</p>
+                <input type="text"/>
+                <p>Confirm New Password</p>
+                <input type="text"/>
+                <div class="action_btns margin-top-20">
+                    <div class="one_half"><a class="btn btn_red">Change Password</a></div>
+                    <div class="one_half last modal_close"><a onclick="return false;" class="btn back_btn">Cancel</a></div>
+                </div>
+            </form>
+        </div>
+    </section>
+</div>
+
+<script type="text/javascript" src="../../js/script.js"></script>
+
+<script type="text/javascript">
+    $("#modal_trigger").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
+
+    $(function(){
+        $(".common_model").show();
+    })
+</script>
+
+<script type="text/javascript">
+    $("#modal_trigger1").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
+
+    $(function(){
+        $(".common_model").show();
+    })
+</script>
+
+<script>
+    $(function() {
+        $('.image-editor').cropit({
+            imageState: {
+                src: ''
+            }
+        });
+
+        $('.export').click(function() {
+            var imageData = $('.image-editor').cropit('export');
+            document.getElementById("profile-image-change").src=imageData;
+        });
+    });
+</script>
+
+<script>
+    if (top.location != location) {
+        top.location.href = document.location.href ;
+    }
+    $(function(){
+        window.prettyPrint && prettyPrint();
+        $('#dp1').datepicker({
+            format: 'mm-dd-yyyy'
+        });
+        var startDate = new Date(2012,1,20);
+        var endDate = new Date(2020,1,25);
+
+        var checkin = $('#dpd1').datepicker({
+            onRender: function(date) {
+                return date.valueOf() < now.valueOf() ? 'disabled' : '';
+            }
+        }).on('changeDate', function(ev) {
+            if (ev.date.valueOf() > checkout.date.valueOf()) {
+                var newDate = new Date(ev.date)
+                newDate.setDate(newDate.getDate() + 1);
+                checkout.setValue(newDate);
+            }
+            checkin.hide();
+            $('#dpd2')[0].focus();
+        }).data('datepicker');
+    });
+</script>
+
