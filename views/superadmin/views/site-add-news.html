@@ -11,33 +11,42 @@
             </div>
             <div class="col-md-9">
                 <a href="#latestNews" class="back-button pull-right margin-left-10"><i class="fa fa-arrow-circle-o-left"></i> Back to News List</a>
-                <h3 class="margin-bottom-10"><i class="fa fa-pencil"></i> &nbsp;Add Latest News</h3>
+                <h3 class="margin-bottom-10"><i class="fa fa-pencil"></i> &nbsp;{{title}}</h3>
                 <hr/>
                 <div class="row">
+                    <form name="latestNewsForm">
                     <div class="col-md-2">
                         <h4>Title :</h4>
                     </div>
                     <div class="col-md-10 margin-bottom-20">
-                        <input class="form-control">
+                        <span ng-show="latestNewsForm.title.$dirty&&latestNewsForm.title.$invalid">
+                              <span class="error-message" ng-show="latestNewsForm.title.$error.required"><span>Required.</span></span>
+                         </span>
+                        <input class="form-control" required ng-model="latest.title">
                     </div>
-                    <div class="col-md-2">
+                    <!--<div class="col-md-2">
                         <h4>Date & Time :</h4>
                     </div>
                     <div class="col-md-10 margin-bottom-20">
                         <input class="form-control" type="text" data-field="datetime">
                         <div id="dtBox"></div>
-                    </div>
+                    </div>-->
                     <div class="col-md-2">
                         <h4>Content :</h4>
                     </div>
                     <div class="col-md-10">
+                         <span ng-show="latestNewsForm.description.$dirty&&latestNewsForm.description.$invalid">
+                              <span class="error-message textarea-errormessage40" ng-show="latestNewsForm.description.$error.required"><span>Required.</span></span>
+                         </span>
                         <div class="texteditor">
-                            <textarea name="summernote" id="summernote"></textarea>
+                            <summernote height= "300" name="description" ng-model="latest.description"  required></summernote>
                         </div>
                     </div>
+                        </form>
                 </div>
                 <div class="text-center margin-top-20">
-                    <a href="" class="btn btn-success">Save Changes</a>
+                    <a href="" class="btn btn-success" ng-disabled="latestNewsForm.$invalid" ng-click="doAddLatestNews()" ng-show="isNew">Save Changes</a>
+                    <a href="" class="btn btn-success" ng-disabled="isClean() || latestNewsForm.$invalid" ng-click="doUpdateLatestNews()" ng-hide="isNew">Save Changes</a>
                 </div>
             </div>
         </div>

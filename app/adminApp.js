@@ -244,11 +244,14 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                             name:'adminApp',
                             files:[
                                 '../../js/bootstrap.min.js',
-                                '../../app/commonDirectives/sidebar/sitemenu.js'
+                                '../../app/commonDirectives/sidebar/sitemenu.js',
+                                '../../angular/angular-utils-pagination/dirPagination.js',
+                                '../../app/latestNews/latestNewsController.js'
                             ]
                         })
                     }
-                }
+                },
+                controller:'LatestNewsController'
             }).
             when('/addLatestNews', {
                 templateUrl: 'views/site-add-news.html',
@@ -259,17 +262,19 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                             files:[
                                 '../../app/commonDirectives/sidebar/sitemenu.js',
                                 '../../plugin/text-editor/text-editor-bootstarp.js',
-                                'http://cdnjs.cloudflare.com/ajax/libs/summernote/0.5.0/summernote.css',
-                                '../../plugin/text-editor/summernote.js',
                                 '../../plugin/date-time-picker/DateTimePicker.js',
-                                '../../plugin/date-time-picker/DateTimePicker.css'
+                                '../../plugin/date-time-picker/DateTimePicker.css',
+                                '../../css/summernote.css',
+                                '../../js/summernote.js',
+                                '../../app/latestNews/latestNewsController.js'
                             ]
                         })
                     }
-                }
+                },
+                controller:'LatestNewsController'
             }).
-            when('/editLatestNews', {
-                templateUrl: 'views/site-edit-news.html',
+            when('/editLatestNews/:id', {
+                templateUrl: 'views/site-add-news.html',
                 resolve: {
                     loadMyFiles:function($ocLazyLoad) {
                         return $ocLazyLoad.load({
@@ -277,14 +282,16 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                             files:[
                                 '../../app/commonDirectives/sidebar/sitemenu.js',
                                 '../../plugin/text-editor/text-editor-bootstarp.js',
-                                'http://cdnjs.cloudflare.com/ajax/libs/summernote/0.5.0/summernote.css',
-                                '../../plugin/text-editor/summernote.js',
                                 '../../plugin/date-time-picker/DateTimePicker.js',
-                                '../../plugin/date-time-picker/DateTimePicker.css'
+                                '../../plugin/date-time-picker/DateTimePicker.css',
+                                '../../css/summernote.css',
+                                '../../js/summernote.js',
+                                '../../app/latestNews/latestNewsController.js'
                             ]
                         })
                     }
-                }
+                },
+                controller:'LatestNewsEditController'
             }).
             when('/testimonials', {
                 templateUrl: 'views/site-testimonials.html',
