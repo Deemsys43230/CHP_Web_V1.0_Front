@@ -217,6 +217,26 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'LatestNewsEditController'
             }).
+            when('/viewLatestNews/:id', {
+                templateUrl: 'views/site-view-news.html',
+                resolve: {
+                    loadMyFiles:function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'adminApp',
+                            files:[
+                                '../../app/commonDirectives/sidebar/sitemenu.js',
+                                '../../plugin/text-editor/text-editor-bootstarp.js',
+                                '../../plugin/date-time-picker/DateTimePicker.js',
+                                '../../plugin/date-time-picker/DateTimePicker.css',
+                                '../../css/summernote.css',
+                                '../../js/summernote.js',
+                                '../../app/latestNews/latestNewsController.js'
+                            ]
+                        })
+                    }
+                },
+                controller:'LatestNewsEditController'
+            }).
             when('/testimonials', {
                 templateUrl: 'views/site-testimonials.html',
                 resolve: {

@@ -20,7 +20,6 @@
                     <thead>
                     <tr class="warning">
                         <th class="question-col">Title</th>
-                        <th>Description</th>
                         <th class="option-col1">Date & time</th>
                         <th class="action-col">Options</th>
                     </tr>
@@ -28,14 +27,14 @@
                     <tbody>
                     <tr dir-paginate="latestnews in news | itemsPerPage: 10" ng-show="news.length!=0">
                         <td>{{latestnews.title}}</td>
-                        <td>{{latestnews.description}}</td>
                         <td>{{latestnews.datetime}}</td>
                         <td>
+                            <a href="#viewLatestNews/{{latestnews.newsid}}" class="btn-xs btn-primary">View</a>
                             <a href="#editLatestNews/{{latestnews.newsid}}" class="btn-xs btn-primary">Edit</a>
                             <a href="" class="btn-xs btn-success" ng-click="doEnableDisableLatestNews(latestnews.newsid)" ng-show="latestnews.status==0">Enable</a>
                             <a href="" class="btn-xs btn-danger" ng-click="doEnableDisableLatestNews(latestnews.newsid)" ng-hide="latestnews.status==0">Disable</a>
                         </td>
-                    <tr ng-show="news.length==0"><td colspan="4">No Record Found !!!</td></tr>
+                    <tr ng-show="news.length==0"><td colspan="4">No Records Found !!!</td></tr>
                     </tbody>
                 </table>
                 <!-- Start Pagination -->
