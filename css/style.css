@@ -7499,3 +7499,13 @@ a.profile_button:hover{
 	width: 4%;
 	vertical-align: top;
 }
+
+.line-clamp{
+	min-height: 40px;
+	max-height: 40px;
+	border: none !important;
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+}

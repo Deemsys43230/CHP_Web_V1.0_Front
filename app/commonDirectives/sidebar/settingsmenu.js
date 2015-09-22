@@ -1,6 +1,6 @@
 
 //load admin sidebar html file
-angular.module('adminApp').directive('settingsmenu',['$location',function() {
+angular.module('adminApp').directive('settingsmenu',function() {
   return {
     templateUrl:'../../app/commonDirectives/sidebar/settingsmenu.html',
     restrict: 'E',
@@ -12,5 +12,4 @@ angular.module('adminApp').directive('settingsmenu',['$location',function() {
     },
     replace: true
   }
-}]);
-
+});
