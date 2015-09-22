@@ -68,6 +68,9 @@ commonApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
             when('/contact', {
                 templateUrl: 'views/common/contact.html'
             }).
+            when('/FAQ', {
+                templateUrl: 'views/common/FAQ.html'
+            }).
             when('/privacypolicy', {
                 templateUrl: 'views/common/privacypolicy.html',
                 resolve: {
@@ -76,7 +79,7 @@ commonApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                             name:'commonApp',
                             files:[
                                 'app/privacyPolicy/privacyPolicyController.js',
-                                'app/requestHandler.js',
+                                'app/requestHandler.js'
                             ]
                         })
                     }

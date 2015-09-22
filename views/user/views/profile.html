@@ -70,7 +70,7 @@
                             <h5>DOB :</h5>
                         </div>
                         <div class="col-md-8">
-                            <input type="text" class="profile_input" value="02-16-2012" placeholder="Date Of Birth" id="dp1" >
+                            <input type="text" class="profile_input" value="02/16/2012" placeholder="Date Of Birth" id="dp1" >
                         </div>
                     </div>
                     <div class="col-md-6 margin-top-10">
@@ -231,7 +231,7 @@
     $(function(){
         window.prettyPrint && prettyPrint();
         $('#dp1').datepicker({
-            format: 'mm-dd-yyyy'
+            format: 'mm/dd/yyyy'
         });
         var startDate = new Date(2012,1,20);
         var endDate = new Date(2020,1,25);

@@ -1397,6 +1397,49 @@ input[type="submit"] {
     padding-top: 4px;
 }
 
+.padding-top-5{
+    padding-top: 5px !important;
+}
+
+.height-240{
+	height: 240px!important;
+}
+
+.weight-500{
+	width: 500px !important
+}
+
+.top-33{
+	top:33.3333%
+}
+
+.top-66{
+	top:66.6666%
+}
+
+.margin-right-2{
+	margin-right: 2px!important;
+}
+
+#col0{
+	background-color:limegreen;
+}
+
+#col1{
+	left:25%;
+	background-color:red;
+}
+
+#col2{
+	left:50%;
+	background-color:#ff6600;
+}
+
+#col3{
+	left:75%;
+	background-color:#ffcc00;
+}
+
 .hr1 {
 	height: 1px;
 }
@@ -6363,13 +6406,13 @@ a.main_button {
     margin-top: 10px !important;
     font-size: 14px;
     padding:8px 40px;
-    background-color:#ccc;
-    color: #666;
+    background-color:#57cb85;
+    color: #fff;
 }
 
 a.main_button:hover{
     color: #fff;
-    background-color:#f8ba01;
+    background-color:#46A26A;
     cursor: pointer;
 }
 
@@ -7436,13 +7479,13 @@ a:hover, a:visited, a:link, a:active
 a.profile_button {
 	font-size: 14px;
 	padding:8px 20px;
-	background-color:#ccc;
-	color: #666;
+	background-color:#57cb85;
+	color: #fff;
 }
 
 a.profile_button:hover{
 	color: #fff;
-	background-color:#f8ba01;
+	background-color:#46A26A;
 	cursor: pointer;
 }
 
@@ -7450,4 +7493,9 @@ a.profile_button:hover{
 	position: absolute;
 	top: 5px;
 	right: 20px;
+}
+
+.faq-slno{
+	width: 4%;
+	vertical-align: top;
 }

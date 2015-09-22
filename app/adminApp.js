@@ -67,95 +67,19 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                     }
                 }
             }).
-            when('/register', {
-                templateUrl: 'views/register.html',
+            when('/profile', {
+                templateUrl: 'views/profile.html',
                 resolve: {
                     loadMyFiles:function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
-                                '../../js/bootstrap.min.js',
-                                '../../css/custom-inputs.css',
                                 '../../plugin/datepicker/bootstrap-datepicker.js',
-                                '../../plugin/datepicker/datepicker.css'
-                            ]
-                        })
-                    }
-                }
-            }).
-            when('/history', {
-                templateUrl: 'views/history.html',
-                resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
-                        return $ocLazyLoad.load({
-                            name:'adminApp',
-                            files:[
-                                '../../js/bootstrap.min.js'
-                            ]
-                        })
-                    }
-                }
-            }).
-            when('/coach', {
-                templateUrl: 'views/coach.html',
-                resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
-                        return $ocLazyLoad.load({
-                            name:'adminApp',
-                            files:[
-                                '../../js/bootstrap.min.js'
-                            ]
-                        })
-                    }
-                }
-            }).
-            when('/portfolio', {
-                templateUrl: '../common/portfolio.html',
-                resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
-                        return $ocLazyLoad.load({
-                            name:'adminApp',
-                            files:[
-                                '../../js/bootstrap.min.js'
-                            ]
-                        })
-                    }
-                }
-            }).
-            when('/singleProject', {
-                templateUrl: '../common/single-project.html',
-                resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
-                        return $ocLazyLoad.load({
-                            name:'adminApp',
-                            files:[
-                                '../../js/bootstrap.min.js'
-                            ]
-                        })
-                    }
-                }
-            }).
-            when('/blog', {
-                templateUrl: '../common/blog.html',
-                resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
-                        return $ocLazyLoad.load({
-                            name:'adminApp',
-                            files:[
-                                '../../js/bootstrap.min.js'
-                            ]
-                        })
-                    }
-                }
-            }).
-            when('/contact', {
-                templateUrl: '../common/contact.html',
-                resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
-                        return $ocLazyLoad.load({
-                            name:'adminApp',
-                            files:[
-                                '../../js/bootstrap.min.js'
+                                '../../plugin/datepicker/datepicker.css',
+                                '../../plugin/popup/style.css',
+                                '../../plugin/popup/jquery.leanModal.min.js',
+                                '../../css/profile-image-upload.css',
+                                '../../js/image-upload.js'
                             ]
                         })
                     }

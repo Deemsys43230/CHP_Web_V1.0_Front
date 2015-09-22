@@ -387,7 +387,7 @@
                             </div> <!-- .tab_container -->
                         </div>
                         <!-- Tab Content 2 -->
-                        <div class="tab-pane" id="tab-2" style="padding-top: 5px!important;">
+                        <div class="tab-pane padding-top-5" id="tab-2">
                             <div class="content-3">
                                 <a href="" class="suggest_button">Suggest Exercise</a>
                                 <div class="spent_option">
@@ -415,7 +415,7 @@
                                 <input type="text" name="q" id="tipue_drop_input4" autocomplete="off" required placeholder="Enter the Exercise...">
                                 <div id="tipue_drop_content4"></div>
                             </div>
-                            <div class="food_scrollbar style" style="height: 240px!important;">
+                            <div class="food_scrollbar style height-240">
                                 <ul class="food">
                                     <li class="row">
                                         <div class="col-md-3 no-padding"><img src="../../images//excer-2.jpg"></div>
@@ -459,7 +459,7 @@
                     <!-- End Tab Panels -->
                 </div>
                 <div class="col-md-5 margin-top-10">
-                    <i class="fa fa-calendar-o"></i> Date : <input type="text" class="main" value="02-16-2012" id="dp1" >
+                    <i class="fa fa-calendar-o"></i> Date : <input type="text" class="main" value="02/16/2012" id="dp1" >
                 </div>
                 <div class="col-md-12 text-center margin-top-10">
                     <a href="" class="main_button">Done</a>
@@ -514,8 +514,8 @@
                             </div>
                         </div>
 
-                        <div class="content-weight" style="width: 500px !important">
-                            <div class="row" style="margin-right: 2px">
+                        <div class="content-weight weight-500">
+                            <div class="row margin-right-2">
                                 <div class="col-md-12 margin-bottom-10">
                                     <h5>Set the Goal</h5>
                                 </div>
@@ -571,7 +571,7 @@
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <p style="display: none;visibility: hidden;" id="weight_entry">50%</p>
+                        <p hidden id="weight_entry">50%</p>
                         <div id="weight_level">
                             <div id="col" class="weight_level"></div>
                         </div>
@@ -647,29 +647,29 @@
             <h6>Today's Update</h6>
             <div>
                 <div>
-                    <table style="display: none;visibility: hidden;">
+                    <table hidden>
                         <caption>Date table</caption>
                         <tbody>
-                        <tr><td>A</td><td>90%</td><td style="background-color:#336699">&nbsp;</td></tr>
-                        <tr><td>B</td><td>68%</td><td style="background-color:#003366">&nbsp;</td></tr>
-                        <tr><td>C</td><td>30%</td><td style="background-color:#ff6600">&nbsp;</td></tr>
-                        <tr><td>D</td><td>20%</td><td style="background-color:#ffcc00">&nbsp;</td></tr>
+                        <tr><td>A</td><td>90%</td></tr>
+                        <tr><td>B</td><td>68%</td></tr>
+                        <tr><td>C</td><td>30%</td></tr>
+                        <tr><td>D</td><td>20%</td></tr>
                         </tbody>
                     </table>
                     <div class="left">
                         <div id="grafico">
-                            <div class="riga" style="top:33.3333%"><div>MAINTAIN</div></div>
-                            <div class="riga" style="top:66.6666%"><div>LOW</div></div>
+                            <div class="riga top-33"><div>MAINTAIN</div></div>
+                            <div class="riga top-66"><div>LOW</div></div>
                             <div id="1" class="riga"><div>HIGH</div></div>
-                            <div id="col0" style="left:0; background-color:limegreen;" class="column"></div>
-                            <div id="col1" style="left:25%; background-color:red;" class="column"></div>
-                            <div id="col2" style="left:50%; background-color:#ff6600;" class="column"></div>
-                            <div id="col3" style="left:75%; background-color:#ffcc00;" class="column"></div>
+                            <div id="col0" class="column"></div>
+                            <div id="col1" class="column"></div>
+                            <div id="col2" class="column"></div>
+                            <div id="col3" class="column"></div>
                         </div>
                     </div>
                     <div class="left">
                         <div class="health">
-                            <div class="col-md-3 no-padding text-center">
+                            <div class="col-md-3 no-padding">
                                 <img src="../../images/i-protein.jpg" class="margin-left-5">
                                 <p>Protein<br/><strong>312</strong><br/>gms</p>
                             </div>
@@ -863,7 +863,7 @@
     $(function(){
         window.prettyPrint && prettyPrint();
         $('#dp1').datepicker({
-            format: 'mm-dd-yyyy'
+            format: 'mm/dd/yyyy'
         });
         var startDate = new Date(2012,1,20);
         var endDate = new Date(2020,1,25);
