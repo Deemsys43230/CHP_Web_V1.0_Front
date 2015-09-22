@@ -51,6 +51,17 @@ body {
     background-size: 100% 100%;
 }
 
+/*for FireFox*/
+input::-moz-focus-inner,a::-moz-focus-inner,
+{
+	border : 0px !important;
+	outline : none !important;
+}
+/*for IE8 */
+input:focus,a:focus
+{
+	outline : none !important;
+}
 
 strong, b {
 	font-weight: 600;
