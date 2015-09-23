@@ -4,11 +4,12 @@
 var adminApp = angular.module('adminApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate']);
 
 adminApp.controller('PaypalSettingsController',function($scope,requestHandler,Flash){
-
+    var original="";
     $scope.activeClass = {paypal:'active'};
 
     $scope.doGetPaypalSettings= function () {
         requestHandler.getRequest("admin/getappdetails","").then(function(response){
+            original=angular.copy(response.data.App_settings[0]);
              $scope.paypalSettings=response.data.App_settings[0];
         },function(response){
             errorMessage(Flash,"Please Try again later");
@@ -22,6 +23,10 @@ adminApp.controller('PaypalSettingsController',function($scope,requestHandler,Fl
         },function(){
             errorMessage(Flash,"Please try again later");
         });
+    };
+
+    $scope.doGetPaypalSettings_isClean=function(){
+        return angular.equals(original, $scope.paypalSettings);
     };
 
     $scope.doGetPaypalSettings();

@@ -4,11 +4,12 @@
 var adminApp = angular.module('adminApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate']);
 
 adminApp.controller('SocialMediaSettingsController',function($scope,requestHandler,Flash){
-
+    var origianal="";
     $scope.activeClass = {social:'active'};
 
     $scope.doGetSocialMedia= function () {
         requestHandler.getRequest("admin/getappdetails","").then(function(response){
+            original=angular.copy(response.data.App_settings[0]);
              $scope.socialMedia=response.data.App_settings[0];
         },function(response){
             errorMessage(Flash,"Please Try again later");
@@ -22,6 +23,11 @@ adminApp.controller('SocialMediaSettingsController',function($scope,requestHandl
         },function(){
             errorMessage(Flash,"Please try again later");
         });
+    };
+
+    $scope.doGetSocialMedia_isClean=function(){
+        console.log(angular.equals(original, $scope.socialMedia));
+        return angular.equals(original, $scope.socialMedia);
     };
 
     $scope.doGetSocialMedia();

@@ -53,7 +53,7 @@
                     </div>
                 </form>
                 <div class="text-center">
-                    <a href="" class="btn btn-success" ng-click="doUpdateSocialMedia()" ng-disabled="socialMediaForm.$invalid">Save Changes</a>
+                    <a href="" class="btn btn-success" ng-click="doUpdateSocialMedia()" ng-disabled="doGetSocialMedia_isClean() || socialMediaForm.$invalid">Save Changes</a>
                 </div>
             </div>
         </div>

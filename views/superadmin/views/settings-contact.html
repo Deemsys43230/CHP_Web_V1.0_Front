@@ -97,7 +97,7 @@
                          </span>
                     </div>
                     <div class="text-center">
-                        <a href="" class="btn btn-success" ng-click="doUpdateContactUs()" ng-disabled="contactUsForm.$invalid">Save Changes</a>
+                        <a href="" class="btn btn-success" ng-click="doUpdateContactUs()" ng-disabled="doGetContactUs_isClean() || contactUsForm.$invalid">Save Changes</a>
                     </div>
                 </div>
                 </form>

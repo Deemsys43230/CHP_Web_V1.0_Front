@@ -8,8 +8,10 @@ adminApp.controller('ContactUsController',function($scope,requestHandler,Flash){
     $scope.activeClass = {basic:'active'};
 
     //This
+    var original="";
     $scope.doGetContactUs= function () {
         requestHandler.getRequest("admin/getappdetails/","").then(function(response){
+            original=angular.copy(response.data.App_settings[0]);
              $scope.contactUs=response.data.App_settings[0];
         },function(response){
             errorMessage(Flash,"Please Try again later");
@@ -25,6 +27,9 @@ adminApp.controller('ContactUsController',function($scope,requestHandler,Flash){
         });
     };
 
+    $scope.doGetContactUs_isClean=function(){
+        return angular.equals(original, $scope.contactUs);
+    };
     $scope.doGetContactUs();
 
 });

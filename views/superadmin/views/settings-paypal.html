@@ -35,7 +35,7 @@
                     </div>
                 </form>
                 <div class="text-center">
-                    <a href="" class="btn btn-success" ng-click="doUpdatePaypalSettings()" ng-disabled="paypalSettingsForm.$invalid">Save Changes</a>
+                    <a href="" class="btn btn-success" ng-click="doUpdatePaypalSettings()" ng-disabled="doGetPaypalSettings_isClean() || paypalSettingsForm.$invalid">Save Changes</a>
                 </div>
             </div>
         </div>
