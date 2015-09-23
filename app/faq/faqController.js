@@ -5,12 +5,12 @@ var adminApp = angular.module('adminApp', ['ngRoute','oc.lazyLoad','requestModul
 
 adminApp.controller('FAQController',function($scope,requestHandler,Flash){
 
+    $scope.activeClass = {faq:'active'};
 
     $scope.doGetAllFAQ=function(){
         requestHandler.getRequest("admin/getFAQList","").then(function(response){
 
             $scope.faqList=response.data.Faq_Data;
-
         },function(){
             errorMessage(Flash,"Please try again later!")
         });

@@ -3,6 +3,8 @@ var adminApp = angular.module('adminApp', ['ngRoute','oc.lazyLoad','requestModul
 
 adminApp.controller('TermsOfUseController',function($scope,requestHandler,Flash) {
 
+    $scope.activeClass = {terms:'active'};
+
     $scope.doGetTermsOfUse=function(){
         requestHandler.getRequest("getLegalByAll/Termsofuse/", "").then(function(response){
 

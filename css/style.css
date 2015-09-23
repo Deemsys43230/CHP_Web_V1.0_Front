@@ -7287,6 +7287,10 @@ a:hover, a:visited, a:link, a:active
     font-weight: bold;
 }
 
+.text-italic{
+    font-style: italic;
+}
+
 /* Error Message */
 .error-message{
 	position: relative;
@@ -7508,4 +7512,12 @@ a.profile_button:hover{
 	-webkit-line-clamp: 2;
 	-webkit-box-orient: vertical;
 	overflow: hidden;
+}
+
+.news-block{
+	width: 100%;
+	height: auto;
+	border: 1px solid #ddd;
+	padding: 20px;
+	background: white;
 }

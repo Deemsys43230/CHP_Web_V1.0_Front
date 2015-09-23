@@ -4,57 +4,22 @@
 
             <div class="col-md-3">
                 <h4 class="classic-title"><span>Site Management</span></h4>
-                <sitemenu></sitemenu>
+                <div ng-include src="'views/site-menu.html'" onload="activeClass"></div>
             </div>
             <div class="col-md-9">
                 <a href="#latestNews" class="back-button pull-right margin-left-10"><i class="fa fa-arrow-circle-o-left"></i> Back to News List</a>
                 <h3 class="margin-bottom-10"><i class="fa fa-pencil"></i> &nbsp;View Latest News</h3>
                 <hr/>
-                <div class="row">
-                    <div class="col-md-2">
-                        <h4>Title :</h4>
-                    </div>
-                    <div class="col-md-10 margin-bottom-20">
-                      <span>{{latest.title}}</span>
-                    </div>
-                    <div class="col-md-2">
-                         <h4>Date & Time :</h4>
-                     </div>
-                     <div class="col-md-10 margin-bottom-20">
-                         <span>{{latest.datetime}}</span>
-                     </div>
-                    <div class="col-md-2">
-                        <h4>Content :</h4>
-                    </div>
-                    <div class="col-md-10">
-                       <div ng-bind-html="latest.description | html"></div>
-                    </div>
+                <div class="col-md-12 news-block">
+                    <h4>{{latest.title}}</h4>
+                    <p class="text-italic margin-top-5">Published on : {{latest.datetime}}</p>
+                    <div class="margin-top-20" ng-bind-html="latest.description | html"></div>
                 </div>
-                <!--<div class="text-center margin-top-20">
-                    <a href="" class="btn btn-success" ng-click="doUpdateLatestNews()">Save Changes</a>
-                    <a href="" class="btn btn-danger">Back </a>
-                </div>-->
             </div>
         </div>
     </div>
 </div>
 
 <!-- End Page Banner -->
-
-<!-- text editor -->
-<script type='text/javascript'>//<![CDATA[
-$(function(){
-    $('#summernote').summernote({height: 300});
-});//]]>
-</script>
-
-<script type="text/javascript">
-
-    $(document).ready(function()
-    {
-        $("#dtBox").DateTimePicker();
-    });
-
-</script>
 
 <script type="text/javascript" src="../../js/script.js"></script>

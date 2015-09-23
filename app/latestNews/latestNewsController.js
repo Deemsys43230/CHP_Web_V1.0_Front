@@ -3,6 +3,7 @@ adminApp.controller('LatestNewsController',function($scope,requestHandler,Flash,
 
     $scope.isNew = true;
     $scope.title = "Add Latest News";
+    $scope.activeClass = {news:'active'};
 
     // To display Latest news
     $scope.doGetLatestNews=function(){
@@ -47,6 +48,7 @@ adminApp.controller('LatestNewsController',function($scope,requestHandler,Flash,
 
 adminApp.controller('LatestNewsEditController',function($scope,requestHandler,Flash,$location,$routeParams) {
 
+    $scope.activeClass = {news:'active'};
 
     var originalnews ="";
     //To display Latest News based on newsid
@@ -83,10 +85,6 @@ adminApp.controller('LatestNewsEditController',function($scope,requestHandler,Fl
 
     //Display Edit Page with date On load
     $scope.doGetLatestNewsByID();
-
-
-
-
 
 });
 

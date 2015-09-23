@@ -5,6 +5,8 @@ var adminApp = angular.module('adminApp', ['ngRoute','oc.lazyLoad','requestModul
 
 adminApp.controller('PaypalSettingsController',function($scope,requestHandler,Flash){
 
+    $scope.activeClass = {paypal:'active'};
+
     $scope.doGetPaypalSettings= function () {
         requestHandler.getRequest("admin/getappdetails","").then(function(response){
              $scope.paypalSettings=response.data.App_settings[0];

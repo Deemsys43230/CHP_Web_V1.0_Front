@@ -5,7 +5,7 @@ var adminApp = angular.module('adminApp', ['ngRoute','oc.lazyLoad','requestModul
 
 adminApp.controller("MobileAppSettingsController",function($scope,requestHandler,Flash){
 
-
+    $scope.activeClass = {mobileApp:'active'};
 
     $scope.collectDetails= function () {
       requestHandler.getRequest("admin/getmobileinfo","").then(function(response){

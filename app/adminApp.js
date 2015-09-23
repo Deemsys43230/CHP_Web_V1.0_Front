@@ -93,7 +93,6 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                             name:'adminApp',
                             files:[
                                 '../../js/bootstrap.min.js',
-                                '../../app/commonDirectives/sidebar/sitemenu.js',
                                 '../../plugin/popup/style.css',
                                 '../../plugin/popup/jquery.leanModal.min.js',
                                 '../../js/jquery.simplyCountable.js',
@@ -111,7 +110,6 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
-                                '../../app/commonDirectives/sidebar/sitemenu.js',
                                 '../../plugin/text-editor/text-editor-bootstarp.js',
                                 '../../css/summernote.css',
                                 '../../js/summernote.js',
@@ -129,7 +127,6 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
-                                '../../app/commonDirectives/sidebar/sitemenu.js',
                                 '../../plugin/text-editor/text-editor-bootstarp.js',
                                 '../../app/privacyPolicy/privacyPolicyController.js',
                                 '../../css/summernote.css',
@@ -148,7 +145,6 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
-                                '../../app/commonDirectives/sidebar/sitemenu.js',
                                 '../../plugin/text-editor/text-editor-bootstarp.js',
                                 '../../app/termsOfUse/termsOfUseController.js',
                                 '../../css/summernote.css',
@@ -168,7 +164,6 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                             name:'adminApp',
                             files:[
                                 '../../js/bootstrap.min.js',
-                                '../../app/commonDirectives/sidebar/sitemenu.js',
                                 '../../angular/angular-utils-pagination/dirPagination.js',
                                 '../../app/latestNews/latestNewsController.js'
                             ]
@@ -184,7 +179,6 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
-                                '../../app/commonDirectives/sidebar/sitemenu.js',
                                 '../../plugin/text-editor/text-editor-bootstarp.js',
                                 '../../plugin/date-time-picker/DateTimePicker.js',
                                 '../../plugin/date-time-picker/DateTimePicker.css',
@@ -204,7 +198,6 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
-                                '../../app/commonDirectives/sidebar/sitemenu.js',
                                 '../../plugin/text-editor/text-editor-bootstarp.js',
                                 '../../plugin/date-time-picker/DateTimePicker.js',
                                 '../../plugin/date-time-picker/DateTimePicker.css',
@@ -224,12 +217,6 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
-                                '../../app/commonDirectives/sidebar/sitemenu.js',
-                                '../../plugin/text-editor/text-editor-bootstarp.js',
-                                '../../plugin/date-time-picker/DateTimePicker.js',
-                                '../../plugin/date-time-picker/DateTimePicker.css',
-                                '../../css/summernote.css',
-                                '../../js/summernote.js',
                                 '../../app/latestNews/latestNewsController.js'
                             ]
                         })
@@ -245,7 +232,6 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                             name:'adminApp',
                             files:[
                                 '../../js/bootstrap.min.js',
-                                '../../app/commonDirectives/sidebar/sitemenu.js',
                                 '../../plugin/popup/style.css',
                                 '../../plugin/popup/jquery.leanModal.min.js'
                             ]
@@ -345,7 +331,6 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                             name:'adminApp',
                             files:[
                                 '../../js/bootstrap.min.js',
-                                '../../app/commonDirectives/sidebar/settingsmenu.js',
                                 '../../app/settings/basicInfoController.js'
                             ]
                         })
@@ -361,7 +346,6 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                             name: 'adminApp',
                             files: [
                                 '../../js/bootstrap.min.js',
-                                '../../app/commonDirectives/sidebar/settingsmenu.js',
                                 '../../app/settings/mobileAppSettingsController.js'
                             ]
                         })
@@ -377,7 +361,6 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                             name: 'adminApp',
                             files: [
                                 '../../js/bootstrap.min.js',
-                                '../../app/commonDirectives/sidebar/settingsmenu.js',
                                 '../../app/settings/paypalController.js'
                             ]
                         })
@@ -393,7 +376,6 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                             name: 'adminApp',
                             files: [
                                 '../../js/bootstrap.min.js',
-                                '../../app/commonDirectives/sidebar/settingsmenu.js',
                                 '../../app/settings/socialMediaController.js'
                             ]
                         })
@@ -409,7 +391,6 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                             name: 'adminApp',
                             files: [
                                 '../../js/bootstrap.min.js',
-                                '../../app/commonDirectives/sidebar/settingsmenu.js',
                                 '../../app/settings/serverController.js'
                             ]
                         })

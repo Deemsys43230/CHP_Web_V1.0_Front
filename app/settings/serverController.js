@@ -5,6 +5,8 @@ var adminApp = angular.module('adminApp', ['ngRoute','oc.lazyLoad','requestModul
 
 adminApp.controller('ServerSettingsController',function($scope,requestHandler,Flash){
 
+    $scope.activeClass = {sever:'active'};
+
     $scope.doGetServerSettings= function () {
         requestHandler.getRequest("admin/getappdetails","").then(function(response){
              $scope.serverSettings=response.data.App_settings[0];

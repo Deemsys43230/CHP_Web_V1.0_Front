@@ -2,13 +2,15 @@
 var adminApp = angular.module('adminApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','summernote']);
 adminApp.controller('PrivacyPolicyController',function($scope,requestHandler,Flash) {
 
+    $scope.activeClass = {policy:'active'};
+
    // To display privacy policy details
     $scope.doGetPrivacyPolicy=function(){
 
         requestHandler.getRequest("getLegalByAll/Privacypolicy/", "").then(function(response){
 
             $scope.privacypolicydetails=response.data.Legal_Data;
-console.log($scope.privacypolicydetails);
+            console.log($scope.privacypolicydetails);
         },function(){
             errorMessage(Flash,"Please try again later!")
         });

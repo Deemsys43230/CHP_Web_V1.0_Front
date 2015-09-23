@@ -5,6 +5,8 @@ var adminApp = angular.module('adminApp', ['ngRoute','oc.lazyLoad','requestModul
 
 adminApp.controller('ContactUsController',function($scope,requestHandler,Flash){
 
+    $scope.activeClass = {basic:'active'};
+
     //This
     $scope.doGetContactUs= function () {
         requestHandler.getRequest("admin/getappdetails/","").then(function(response){
