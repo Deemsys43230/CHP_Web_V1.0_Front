@@ -73,3 +73,24 @@ adminApp.controller('FAQController',function($scope,requestHandler,Flash){
     $scope.doGetAllFAQ();
 
 });
+
+var commonApp = angular.module('commonApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate']);
+
+commonApp.controller('FAQUserController',function($scope,requestHandler,Flash){
+
+    // To display FAQ as user
+    $scope.doGetUserFAQ=function(){
+
+        requestHandler.getRequest("getFAQListByUser/", "").then(function(response){
+
+            $scope.userfaqlist=response.data.Faq_Data;
+            console.log($scope.userfaqlist);
+        },function(){
+            errorMessage(Flash,"Please try again later!")
+        });
+    };
+
+    // To display the user FAQ list on load
+    $scope.doGetUserFAQ();
+
+});

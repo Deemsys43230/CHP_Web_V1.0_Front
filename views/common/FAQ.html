@@ -6,59 +6,23 @@
         <div class="row">
             <h4 class="classic-title"><span>Frequently Asked Questions</span></h4>
             <div class="col-md-12">
+                <div class="col-md-5"></div>
+                <div class="col-md-6"><input class="form-control" ng-model="faqsearch" placeholder="Search"></div>
+                <div class="col-md-1"><i class="fa fa-search"></i></div>
+            </div>
+            <div class="col-md-12">
                 <table>
-                    <tr>
+                    <tr ng-repeat="userfaq in faqfilter = (userfaqlist | filter :{question : faqsearch})" ng-show="userfaq.length!=0">
                         <td class="faq-slno">
-                            <h3>1.</h3>
+                            <h3>{{$index+1}}.</h3>
                         </td>
                         <td>
-                            <h3>What are the advantages of purchasing a website template?</h3>
-                            <p>
-                                The major advantage is price: You get a high quality design for just $20-$70.
-                                You dont have to hire a web designer or web design studio. Second advantage is time frame:
-                                It usually takes 5-15 days for a good designer to produce a web page of such quality.
-                            </p><br/>
+                            <h3>{{userfaq.question}}</h3>
+                            <p>{{userfaq.answer}}</p><br/>
                         </td>
                     </tr>
-                    <tr>
-                        <td class="faq-slno">
-                            <h3>2.</h3>
-                        </td>
-                        <td>
-                            <h3>What are the advantages of purchasing a website template?</h3>
-                            <p>
-                                The major advantage is price: You get a high quality design for just $20-$70.
-                                You dont have to hire a web designer or web design studio. Second advantage is time frame:
-                                It usually takes 5-15 days for a good designer to produce a web page of such quality.
-                            </p><br/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="faq-slno">
-                            <h3>3.</h3>
-                        </td>
-                        <td>
-                            <h3>What are the advantages of purchasing a website template?</h3>
-                            <p>
-                                The major advantage is price: You get a high quality design for just $20-$70.
-                                You dont have to hire a web designer or web design studio. Second advantage is time frame:
-                                It usually takes 5-15 days for a good designer to produce a web page of such quality.
-                            </p><br/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="faq-slno">
-                            <h3>4.</h3>
-                        </td>
-                        <td>
-                            <h3>What are the advantages of purchasing a website template?</h3>
-                            <p>
-                                The major advantage is price: You get a high quality design for just $20-$70.
-                                You dont have to hire a web designer or web design studio. Second advantage is time frame:
-                                It usually takes 5-15 days for a good designer to produce a web page of such quality.
-                            </p><br/>
-                        </td>
-                    </tr>
+                    <tr ng-show="userfaq.length==0"><td colspan="2">No Records Found !!!</td></tr>
+                    <tr ng-show="!faqfilter.length"><td colspan="2">No Records Found !!!</td></tr>
                 </table>
             </div>
 
