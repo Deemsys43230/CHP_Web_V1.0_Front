@@ -83,20 +83,50 @@ commonApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'FAQUserController'
             }).
-            when('/privacypolicy', {
+            when('/instructions', {
+                templateUrl: 'views/common/instruction.html',
+                resolve: {
+                    loadMyFiles:function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'commonApp',
+                            files:[
+                                'js/bootstrap.min.js',
+                                'app/instruction/instructionController.js'
+                            ]
+                        })
+                    }
+                },
+                controller:'InstructionUserController'
+            }).
+            when('/termsofuse', {
+                templateUrl: 'views/common/termsofuse.html',
+                resolve: {
+                    loadMyFiles:function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'commonApp',
+                            files:[
+                                'js/bootstrap.min.js',
+                                'app/termsOfUse/termsOfUseController.js'
+                            ]
+                        })
+                    }
+                },
+                controller:'TermsOfUseUserController'
+            }).
+            when('/policy', {
                 templateUrl: 'views/common/privacypolicy.html',
                 resolve: {
                     loadMyFiles:function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'commonApp',
                             files:[
-                                'app/privacyPolicy/privacyPolicyController.js',
-                                'app/requestHandler.js'
+                                'js/bootstrap.min.js',
+                                'app/privacyPolicy/privacyPolicyController.js'
                             ]
                         })
                     }
-                }
-
+                },
+                controller:'PrivacyPolicyUserController'
             }).
             otherwise({
                 redirectTo: '/index'

@@ -6,7 +6,7 @@ adminApp.controller('TermsOfUseController',function($scope,requestHandler,Flash)
     $scope.activeClass = {terms:'active'};
 
     $scope.doGetTermsOfUse=function(){
-        requestHandler.getRequest("getLegalByAll/Termsofuse/", "").then(function(response){
+        requestHandler.getRequest("getLegalByName/Termsofuse/", "").then(function(response){
 
             $scope.terms=response.data.Legal_Data;
 
@@ -31,3 +31,28 @@ adminApp.controller('TermsOfUseController',function($scope,requestHandler,Flash)
     $scope.doGetTermsOfUse();
 
 });
+
+var commonApp = angular.module('commonApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate']);
+
+commonApp.controller('TermsOfUseUserController',function($scope,requestHandler,Flash) {
+
+    $scope.doGetUserTermsOfUse=function(){
+        requestHandler.getRequest("getLegalByAll/Termsofuse/", "").then(function(response){
+            $scope.userterms=response.data.Legal_Data;
+        },function(){
+            errorMessage(Flash,"Please try again later!")
+        });
+    };
+
+    // Display User Instruction details On Page Load
+    $scope.doGetUserTermsOfUse();
+
+});
+
+
+// html filter (render text as html)
+commonApp.filter('html', ['$sce', function ($sce) {
+    return function (text) {
+        return $sce.trustAsHtml(text);
+    };
+}]);
