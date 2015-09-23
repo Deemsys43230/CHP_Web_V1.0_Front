@@ -3,8 +3,11 @@ var adminApp = angular.module('adminApp', ['ngRoute','oc.lazyLoad','requestModul
 
 adminApp.controller('InstructionController',function($scope,requestHandler,Flash) {
     $scope.activeClass = {instruction:'active'};
+
+    var original="";
     $scope.doGetInstruction=function(){
         requestHandler.getRequest("getLegalByName/Instructions/", "").then(function(response){
+            original=angular.copy(response.data.Legal_Data);
             $scope.instructions=response.data.Legal_Data;
         },function(){
             errorMessage(Flash,"Please try again later!")
@@ -23,6 +26,10 @@ adminApp.controller('InstructionController',function($scope,requestHandler,Flash
         });
     };
 
+    $scope.isClean=function(){
+
+        return angular.equals(original, $scope.instructions);
+    };
     // Display Instruction details On Page Load
     $scope.doGetInstruction();
 

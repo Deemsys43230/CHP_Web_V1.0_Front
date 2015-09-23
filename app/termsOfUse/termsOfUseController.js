@@ -5,9 +5,12 @@ adminApp.controller('TermsOfUseController',function($scope,requestHandler,Flash)
 
     $scope.activeClass = {terms:'active'};
 
+    var original="";
     $scope.doGetTermsOfUse=function(){
         requestHandler.getRequest("getLegalByName/Termsofuse/", "").then(function(response){
 
+            original=angular.copy(response.data.Legal_Data);
+            console.log(response.data.Legal_Data);
             $scope.terms=response.data.Legal_Data;
 
         },function(){
@@ -25,6 +28,10 @@ adminApp.controller('TermsOfUseController',function($scope,requestHandler,Flash)
             errorMessage(Flash, "Please try again later!")
 
         });
+    };
+
+    $scope.isClean=function(){
+        return angular.equals(original, $scope.terms);
     };
 
     // Display Terms of Use details On Page Load

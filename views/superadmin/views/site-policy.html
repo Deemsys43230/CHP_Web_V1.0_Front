@@ -36,7 +36,7 @@
                         </form>
                 </div>
                 <div class="text-center margin-top-10">
-                    <a href="" class="btn btn-success" ng-disabled="privacyPolicyForm.$invalid" ng-click="doUpdatePrivacyPolicy()">Save Changes</a>
+                    <a href="" class="btn btn-success" ng-disabled="isClean() || privacyPolicyForm.$invalid" ng-click="doUpdatePrivacyPolicy()">Save Changes</a>
                 </div>
             </div>
         </div>

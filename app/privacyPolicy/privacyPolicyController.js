@@ -5,10 +5,11 @@ adminApp.controller('PrivacyPolicyController',function($scope,requestHandler,Fla
     $scope.activeClass = {policy:'active'};
 
    // To display privacy policy details
+    var original="";
     $scope.doGetPrivacyPolicy=function(){
-
         requestHandler.getRequest("getLegalByName/Privacypolicy/", "").then(function(response){
 
+            original=angular.copy(response.data.Legal_Data);
             $scope.privacypolicydetails=response.data.Legal_Data;
             console.log($scope.privacypolicydetails);
         },function(){
@@ -26,6 +27,10 @@ adminApp.controller('PrivacyPolicyController',function($scope,requestHandler,Fla
             errorMessage(Flash, "Please try again later!")
 
         });
+    };
+
+    $scope.isClean=function(){
+        return angular.equals(original, $scope.privacypolicydetails);
     };
 
     // Display Privacy policy details On Page Load
