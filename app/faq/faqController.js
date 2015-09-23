@@ -7,10 +7,13 @@ adminApp.controller('FAQController',function($scope,requestHandler,Flash){
 
     $scope.activeClass = {faq:'active'};
 
+
     $scope.doGetAllFAQ=function(){
+        $scope.loaded=true;
         requestHandler.getRequest("admin/getFAQList","").then(function(response){
 
             $scope.faqList=response.data.Faq_Data;
+            $scope.loaded=false;
         },function(){
             errorMessage(Flash,"Please try again later!")
         });

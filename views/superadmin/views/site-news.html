@@ -25,6 +25,9 @@
                     </tr>
                     </thead>
                     <tbody>
+                    <tr ng-if="loaded" style="border: none">
+                        <td colspan="3" class="text-center"><div class="loader">Loading...</div><br/></td>
+                    </tr>
                     <tr dir-paginate="latestnews in news | itemsPerPage: 7" ng-show="news.length!=0">
                         <td>{{latestnews.title}}</td>
                         <td>{{latestnews.datetime}}</td>

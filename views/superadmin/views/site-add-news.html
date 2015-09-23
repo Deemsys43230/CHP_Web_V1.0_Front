@@ -15,35 +15,26 @@
                 <hr/>
                 <div class="row">
                     <form name="latestNewsForm">
-                    <div class="col-md-2">
-                        <h4>Title :</h4>
-                    </div>
-                    <div class="col-md-10 margin-bottom-20">
-
-                        <input class="form-control" name="title" ng-model="latest.title" required>
-                        <span ng-show="latestNewsForm.title.$dirty&&latestNewsForm.title.$invalid">
-                              <span class="error-message" ng-show="latestNewsForm.title.$error.required"><span>Required.</span></span>
-                         </span>
-                    </div>
-                    <!--<div class="col-md-2">
-                        <h4>Date & Time :</h4>
-                    </div>
-                    <div class="col-md-10 margin-bottom-20">
-                        <input class="form-control" type="text" data-field="datetime">
-                        <div id="dtBox"></div>
-                    </div>-->
-                    <div class="col-md-2">
-                        <h4>Content :</h4>
-                    </div>
-                    <div class="col-md-10">
-                         <span ng-show="latestNewsForm.description.$dirty&&latestNewsForm.description.$invalid">
-                              <span class="error-message textarea-errormessage40" ng-show="latestNewsForm.description.$error.required"><span>Required.</span></span>
-                         </span>
-                        <div class="texteditor">
-                            <summernote height= "300" name="description" ng-model="latest.description"  required></summernote>
+                        <div class="col-md-2">
+                            <h4>Title :</h4>
                         </div>
-                    </div>
-                        </form>
+                        <div class="col-md-10 margin-bottom-20">
+
+                            <input class="form-control" name="title" ng-model="latest.title" required>
+                            <span ng-show="latestNewsForm.title.$dirty&&latestNewsForm.title.$invalid">
+                                  <span class="error-message" ng-show="latestNewsForm.title.$error.required"><span>Required.</span></span>
+                             </span>
+                        </div>
+                        <div class="col-md-2">
+                            <h4>Content :</h4>
+                        </div>
+                        <div class="col-md-10">
+                             <span ng-show="latestNewsForm.description.$dirty&&latestNewsForm.description.$invalid">
+                                  <span class="error-message textarea-errormessage40" ng-show="latestNewsForm.description.$error.required"><span>Required.</span></span>
+                             </span>
+                            <summernote id="summernote" name="description" ng-model="latest.description"></summernote>
+                        </div>
+                    </form>
                 </div>
                 <div class="text-center margin-top-20">
                     <a href="" class="btn btn-success" ng-disabled="latestNewsForm.$invalid" ng-click="doAddLatestNews()" ng-show="isNew">Add Latest News</a>
@@ -57,20 +48,8 @@
 
 <!-- End Page Banner -->
 
-<!-- text editor -->
-<script type='text/javascript'>//<![CDATA[
-$(function(){
-    $('#summernote').summernote({height: 300});
-});//]]>
-</script>
-
-<script type="text/javascript">
-
-    $(document).ready(function()
-    {
-        $("#dtBox").DateTimePicker();
-    });
-
+<script>
+    $('#summernote').summernote({height:250});
 </script>
 
 <script type="text/javascript" src="../../js/script.js"></script>

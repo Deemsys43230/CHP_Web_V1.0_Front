@@ -15,25 +15,22 @@
                 <hr/>
                 <div class="row">
                     <form name="instructionForm">
-                    <div class="col-md-2">
-                        <h4>Title :</h4>
-                    </div>
-                    <div class="col-md-10 margin-bottom-20">
-                        <span>{{instructions.title}}</span>
-                    </div>
-                    <div class="col-md-2">
-                        <h4>Content :</h4>
-                    </div>
-
-                    <div class="col-md-10">
-                        <span ng-show="instructionForm.content.$dirty&&instructionForm.content.$invalid">
-                              <span class="error-message textarea-errormessage40" ng-show="instructionForm.content.$error.required"><span>Required.</span></span>
-                         </span>
-                        <div class="texteditor">
-                            <summernote height= "200" name="content"  ng-model="instructions.content" required></summernote>
+                        <div class="col-md-2">
+                            <h4>Title :</h4>
                         </div>
-                    </div>
-                        </form>
+                        <div class="col-md-10 margin-bottom-20">
+                            <span>{{instructions.title}}</span><br/>
+                        </div>
+                        <div class="col-md-2">
+                            <h4>Content :</h4>
+                        </div>
+                        <div class="col-md-10">
+                            <span ng-show="instructionForm.content.$dirty&&instructionForm.content.$invalid">
+                                  <span class="error-message textarea-errormessage40" ng-show="instructionForm.content.$error.required"><span>Required.</span></span>
+                             </span>
+                            <summernote id="summernote" name="content"  ng-model="instructions.content" required></summernote>
+                        </div>
+                    </form>
                 </div>
                 <div class="text-center margin-top-10">
                     <a href="" class="btn btn-success" ng-disabled="isClean() || instructionForm.$invalid" ng-click="doUpdateInstructions()">Save Changes</a>
@@ -46,10 +43,8 @@
 <!-- End Page Banner -->
 
 <!-- text editor -->
-<script type='text/javascript'>//<![CDATA[
-$(function(){
-    $('#summernote').summernote({height: 200});
-});//]]>
+<script>
+    $('#summernote').summernote({height:250});
 </script>
 
 <script type="text/javascript" src="../../js/script.js"></script>

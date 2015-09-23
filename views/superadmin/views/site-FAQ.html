@@ -81,8 +81,11 @@
                             <th class="action-col">Actions</th>
                         </tr>
                     </thead>
-                    <tbody dir-paginate="faq in faqList | orderBy:sortKey:reverse|itemsPerPage:6 ">
-                        <tr>
+                    <tbody >
+                    <tr ng-if="loaded">
+                        <td colspan="3" class="text-center">Loading...</td>
+                    </tr>
+                        <tr dir-paginate="faq in faqList | orderBy:sortKey:reverse|itemsPerPage:6 ">
                             <td>{{faq.question}}</td>
                             <td>{{faq.answer}}</td>
                             <td>

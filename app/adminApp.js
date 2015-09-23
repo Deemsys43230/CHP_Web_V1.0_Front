@@ -110,9 +110,9 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
-                                '../../plugin/text-editor/text-editor-bootstarp.js',
-                                '../../css/summernote.css',
-                                '../../js/summernote.js',
+                                '../../js/bootstrap.min.js',
+                                '../../plugin/text-editor/summernote.js',
+                                '../../plugin/text-editor/summernote.css',
                                 '../../app/instruction/instructionController.js'
                             ]
                         })
@@ -127,11 +127,10 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
-                                '../../plugin/text-editor/text-editor-bootstarp.js',
-                                '../../app/privacyPolicy/privacyPolicyController.js',
-                                '../../css/summernote.css',
-                                '../../js/summernote.js'
-
+                                '../../js/bootstrap.min.js',
+                                '../../plugin/text-editor/summernote.js',
+                                '../../plugin/text-editor/summernote.css',
+                                '../../app/privacyPolicy/privacyPolicyController.js'
                             ]
                         })
                     }
@@ -145,11 +144,10 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
-                                '../../plugin/text-editor/text-editor-bootstarp.js',
-                                '../../app/termsOfUse/termsOfUseController.js',
-                                '../../css/summernote.css',
-                                '../../js/summernote.js'
-
+                                '../../js/bootstrap.min.js',
+                                '../../plugin/text-editor/summernote.js',
+                                '../../plugin/text-editor/summernote.css',
+                                '../../app/termsOfUse/termsOfUseController.js'
                             ]
                         })
                     }
@@ -179,11 +177,9 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
-                                '../../plugin/text-editor/text-editor-bootstarp.js',
-                                '../../plugin/date-time-picker/DateTimePicker.js',
-                                '../../plugin/date-time-picker/DateTimePicker.css',
-                                '../../css/summernote.css',
-                                '../../js/summernote.js',
+                                '../../js/bootstrap.min.js',
+                                '../../plugin/text-editor/summernote.js',
+                                '../../plugin/text-editor/summernote.css',
                                 '../../app/latestNews/latestNewsController.js'
                             ]
                         })
@@ -198,11 +194,9 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
-                                '../../plugin/text-editor/text-editor-bootstarp.js',
-                                '../../plugin/date-time-picker/DateTimePicker.js',
-                                '../../plugin/date-time-picker/DateTimePicker.css',
-                                '../../css/summernote.css',
-                                '../../js/summernote.js',
+                                '../../js/bootstrap.min.js',
+                                '../../plugin/text-editor/summernote.js',
+                                '../../plugin/text-editor/summernote.css',
                                 '../../app/latestNews/latestNewsController.js'
                             ]
                         })
