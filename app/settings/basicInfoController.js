@@ -39,7 +39,6 @@ commonApp.controller('ContactUsDetailsController',function($scope,requestHandler
 
     // To Get the Contact Us details
     $scope.doGetContactUsDetails= function () {
-        alert("hi");
         requestHandler.getRequest("contactus/","").then(function(response){
             $scope.contactUsDetails=response.data.Contactus[0];
             console.log($scope.contactUsDetails);
