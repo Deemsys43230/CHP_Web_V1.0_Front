@@ -33,3 +33,23 @@ adminApp.controller('ContactUsController',function($scope,requestHandler,Flash){
     $scope.doGetContactUs();
 
 });
+
+var commonApp = angular.module('commonApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate']);
+commonApp.controller('ContactUsDetailsController',function($scope,requestHandler,Flash) {
+
+    // To Get the Contact Us details
+    $scope.doGetContactUsDetails= function () {
+        alert("hi");
+        requestHandler.getRequest("contactus/","").then(function(response){
+            $scope.contactUsDetails=response.data.Contactus[0];
+            console.log($scope.contactUsDetails);
+        },function(response){
+            errorMessage(Flash,"Please Try again later");
+        });
+
+    };
+
+    //Display Contact Us details on load
+    $scope.doGetContactUsDetails();
+
+});

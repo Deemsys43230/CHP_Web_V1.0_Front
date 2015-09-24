@@ -66,7 +66,18 @@ commonApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 templateUrl: 'views/common/blog.html'
             }).
             when('/contact', {
-                templateUrl: 'views/common/contact.html'
+                templateUrl: 'views/common/contact.html',
+                resolve: {
+                    loadMyFiles:function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'commonApp',
+                            files:[
+                                'app/settings/basicInfoController.js'
+                            ]
+                        })
+                    }
+                },
+                controller:'ContactUsDetailsController'
             }).
             when('/FAQ', {
                 templateUrl: 'views/common/FAQ.html',

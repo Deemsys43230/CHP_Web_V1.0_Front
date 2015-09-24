@@ -1,6 +1,6 @@
 <script src="http://maps.googleapis.com/maps/api/js?sensor=false" type="text/javascript"></script>
 <!-- Start Map -->
-<div id="map" data-position-latitude="39.996526" data-position-longitude="-82.836383"></div>
+<!--<div id="map" data-position-latitude="39.996526" data-position-longitude="-82.836383"></div>
 <script>
     (function ( $ ) {
         $.fn.CustomMap = function( options ) {
@@ -68,7 +68,7 @@
     jQuery(document).ready(function() {
         jQuery('#map').CustomMap();
     });
-</script>
+</script>-->
 <!-- End Map -->
 
 <!-- Start Content -->
@@ -118,7 +118,7 @@
 				<h4 class="classic-title"><span>Information</span></h4>
 				
 				<!-- Some Info -->
-				<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum.</p>
+				<p>You can contact us from the below information !!!</p>
 				
 				<!-- Divider -->
 				<div class="hr1" style="margin-bottom:10px;"></div>
@@ -126,23 +126,25 @@
 				<!-- Info - Icons List -->
 				<ul class="icons-list">
 
-					<li><i class="fa fa-globe">  </i> <strong>Address:</strong> 800 Cross Pointe Road Suite A Gahanna, OH 43230</li>
-					<li><i class="fa fa-envelope-o"></i> <strong>Email:</strong> support@deemsysinc.com</li>
-					<li><i class="fa fa-mobile"></i> <strong>Phone:</strong> 614-322-9928</li>
+					<li><i class="fa fa-building">  </i> <strong>Address:</strong> {{contactUsDetails.streetaddress}},{{contactUsDetails.city}},{{contactUsDetails.state}},{{contactUsDetails.zipcode}}</li>
+					<li><i class="fa fa-envelope-o"></i> <strong>Email:</strong>{{contactUsDetails.supportemail}}</li>
+					<li><i class="fa fa-mobile"></i> <strong>Phone:</strong>{{contactUsDetails.mobile}}</li>
+                    <li><i class="fa fa-phone"></i> <strong>Landline:</strong>{{contactUsDetails.landline}}</li>
+                    <li><i class="fa fa-globe"></i> <strong>Company URL:</strong>{{contactUsDetails.companyurl}}</li>
 				</ul>
 				
 				<!-- Divider -->
 				<div class="hr1" style="margin-bottom:15px;"></div>
 				
-				<!-- Classic Heading -->
+				<!-- Classic Heading
 				<h4 class="classic-title"><span>Working Hours</span></h4>
 				
-				<!-- Info - List -->
+				&lt;!&ndash; Info - List &ndash;&gt;
 				<ul class="list-unstyled">
 					<li><strong>Monday - Friday</strong> - 9am to 5pm</li>
 					<li><strong>Saturday</strong> - 9am to 2pm</li>
 					<li><strong>Sunday</strong> - Closed</li>
-				</ul>
+				</ul>-->
 				
 			</div>
 			
