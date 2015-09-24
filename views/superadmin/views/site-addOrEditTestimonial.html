@@ -1,0 +1,94 @@
+
+<!-- Start Page Banner -->
+
+<div class="page-banner">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-3">
+                <h4 class="classic-title"><span>Site Management</span></h4>
+                <div ng-include src="'views/site-menu.html'" onload="activeClass"></div>
+            </div>
+            <div class="col-md-9">
+                <a href="#testimonials" class="back-button pull-right margin-left-10"><i class="fa fa-arrow-circle-o-left"></i> Back to Testimonial List</a>
+                <h3 class="margin-bottom-10"><i class="fa fa-pencil"></i> &nbsp;scope title</h3>
+                <hr/>
+                <div class="row">
+                    <form name="latestNewsForm">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <div class="col-md-12 image-editor">
+                                    <h4>User Image</h4>
+                                    <div class="cropit-image-preview"></div>
+                                    <p class="image-size-label">
+                                        Resize image
+                                    </p>
+                                    <div class="col-md-10 no-padding">
+                                        <input type="range" class="cropit-image-zoom-input">
+                                    </div>
+
+                                    <div class="margin-top-20 col-md-12 no-padding">
+                                        <div class="fileUpload btn btn-xs btn-primary">
+                                            <span>Choose File</span>
+                                            <input type="file" class="upload cropit-image-input" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-10">
+                                <div class="col-md-3">
+                                    <h4>User Name</h4>
+                                </div>
+                                <div class="col-md-9 margin-bottom-20">
+                                    <input class="form-control">
+                                </div>
+                                <div class="col-md-3">
+                                    <h4>Designation</h4>
+                                </div>
+                                <div class="col-md-9 margin-bottom-20">
+                                    <input class="form-control">
+                                </div>
+                                <div class="col-md-3">
+                                    <h4>Title</h4>
+                                </div>
+                                <div class="col-md-9 margin-bottom-20">
+                                    <input class="form-control">
+                                </div>
+                                <div class="col-md-3">
+                                    <h4>Description</h4>
+                                </div>
+                                <div class="col-md-9 margin-bottom-20">
+                                    <textarea class="form-control height-100"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="text-center margin-top-10">
+                    <a href="" class="btn btn-success">Add Latest News</a>
+                    <a href="" class="btn btn-success">Save Changes</a>
+                    <a href="#testimonials" class="btn btn-warning">Cancel</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- End Page Banner -->
+
+<script type="text/javascript" src="../../js/script.js"></script>
+
+
+<script>
+    $(function() {
+        $('.image-editor').cropit({
+            imageState: {
+                src: ''
+            }
+        });
+
+        $('.export').click(function() {
+            var imageData = $('.image-editor').cropit('export');
+        });
+    });
+</script>

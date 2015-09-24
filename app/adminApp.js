@@ -226,12 +226,29 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                             name:'adminApp',
                             files:[
                                 '../../js/bootstrap.min.js',
-                                '../../plugin/popup/style.css',
-                                '../../plugin/popup/jquery.leanModal.min.js'
+                                '../../app/testimonial/testimonialController.js'
                             ]
                         })
                     }
-                }
+                },
+                controller:'testimonialController'
+            }).
+            when('/addOrEditTestimonial', {
+                templateUrl: 'views/site-addOrEditTestimonial.html',
+                resolve: {
+                    loadMyFiles:function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'adminApp',
+                            files:[
+                                '../../js/bootstrap.min.js',
+                                '../../app/testimonial/testimonialController.js',
+                                '../../css/testimonial-image-upload.css',
+                                '../../js/image-upload.js'
+                            ]
+                        })
+                    }
+                },
+                controller:'testimonialController'
             }).
             when('/member', {
                 templateUrl: 'views/member.html',
