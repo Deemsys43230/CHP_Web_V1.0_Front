@@ -226,12 +226,15 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                             name:'adminApp',
                             files:[
                                 '../../js/bootstrap.min.js',
-                                '../../app/testimonial/testimonialController.js'
+                                '../../angular/angular-utils-pagination/dirPagination.js',
+                                '../../app/testimonial/testimonialController.js',
+                                '../../css/testimonial-image-upload.css',
+                                '../../js/image-upload.js'
                             ]
                         })
                     }
                 },
-                controller:'testimonialController'
+                controller:'TestimonialController'
             }).
             when('/addTestimonial', {
                 templateUrl: 'views/site-add-or-edit-testimonial.html',
@@ -248,9 +251,9 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         })
                     }
                 },
-                controller:'testimonialController'
+                controller:'TestimonialController'
             }).
-            when('/editTestimonial', {
+            when('/editTestimonial/:id', {
                 templateUrl: 'views/site-add-or-edit-testimonial.html',
                 resolve: {
                     loadMyFiles:function($ocLazyLoad) {
@@ -265,9 +268,9 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         })
                     }
                 },
-                controller:'testimonialController'
+                controller:'TestimonialEditController'
             }).
-            when('/viewTestimonial', {
+            when('/viewTestimonial/:id', {
                 templateUrl: 'views/site-view-testimonial.html',
                 resolve: {
                     loadMyFiles:function($ocLazyLoad) {
@@ -282,7 +285,7 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         })
                     }
                 },
-                controller:'testimonialController'
+                controller:'TestimonialEditController'
             }).
             when('/member', {
                 templateUrl: 'views/member.html',
