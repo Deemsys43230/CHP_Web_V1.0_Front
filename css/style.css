@@ -7547,9 +7547,15 @@ a.profile_button:hover{
 	-webkit-animation: load7 1.8s infinite ease-in-out;
 	animation: load7 1.8s infinite ease-in-out;
 }
+.loader-style{
+	position: absolute;
+	z-index: 20;
+	top:170px;
+	left: 45%;
+}
+
 .loader {
 	font-size: 6px;
-	margin: 10px auto;
 	position: relative;
 	text-indent: -9999em;
 	-webkit-transform: translateZ(0);
