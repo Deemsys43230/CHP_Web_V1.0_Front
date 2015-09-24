@@ -26,12 +26,10 @@
                         </div>
 
                         <div class="col-md-10">
-                        <span ng-show="termsOfUseForm.content.$dirty&&termsOfUseForm.content.$invalid">
-                              <span class="error-message textarea-errormessage40" ng-show="termsOfUseForm.content.$error.required"><span>Required.</span></span>
-                         </span>
-                            <div class="texteditor">
-                                <summernote height= "200" name="content"  ng-model="terms.content" required></summernote>
-                            </div>
+                            <span ng-show="termsOfUseForm.content.$dirty&&termsOfUseForm.content.$invalid">
+                                <span class="error-message textarea-errormessage40" ng-show="termsOfUseForm.content.$error.required"><span>Required.</span></span>
+                            </span>
+                            <summernote id="summernote" name="content"  ng-model="terms.content" required></summernote>
                         </div>
                     </form>
                 </div>
@@ -46,10 +44,8 @@
 <!-- End Page Banner -->
 
 <!-- text editor -->
-<script type='text/javascript'>//<![CDATA[
-$(function(){
+<script type='text/javascript'>
     $('#summernote').summernote({height: 200});
-});//]]>
 </script>
 
 <script type="text/javascript" src="../../js/script.js"></script>
