@@ -35,6 +35,28 @@ adminApp.controller('InstructionController',function($scope,requestHandler,Flash
 
 });
 
+/*adminApp.controller('InstructionAdminController',function($scope,requestHandler,Flash) {
+
+    $scope.doGetAdminInstruction=function(){
+        requestHandler.getRequest("getLegalByAll/Instructions/", "").then(function(response){
+            $scope.userinstructions=response.data.Legal_Data;
+        },function(){
+            errorMessage(Flash,"Please try again later!")
+        });
+    };
+
+    // Display User Instruction details On Page Load
+    $scope.doGetAdminInstruction();
+
+});
+
+// html filter (render text as html)
+adminApp.filter('html', ['$sce', function ($sce) {
+    return function (text) {
+        return $sce.trustAsHtml(text);
+    };
+}]);*/
+
 var commonApp = angular.module('commonApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate']);
 
 commonApp.controller('InstructionUserController',function($scope,requestHandler,Flash) {
@@ -51,6 +73,7 @@ commonApp.controller('InstructionUserController',function($scope,requestHandler,
     $scope.doGetUserInstruction();
 
 });
+
 
 
 // html filter (render text as html)

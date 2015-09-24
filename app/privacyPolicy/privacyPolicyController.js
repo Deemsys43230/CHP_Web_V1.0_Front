@@ -37,6 +37,31 @@ adminApp.controller('PrivacyPolicyController',function($scope,requestHandler,Fla
     $scope.doGetPrivacyPolicy();
 });
 
+/*adminApp.controller('PrivacyPolicyAdminController',function($scope,requestHandler,Flash) {
+
+    // To display privacy policy details as user
+    $scope.doGetAdminPrivacyPolicy=function(){
+
+        requestHandler.getRequest("getLegalByAll/Privacypolicy/", "").then(function(response){
+
+            $scope.userprivacypolicydetails=response.data.Legal_Data;
+            console.log($scope.userprivacypolicydetails);
+        },function(){
+            errorMessage(Flash,"Please try again later!")
+        });
+    };
+
+    // Display User Privacy policy details On Page Load
+    $scope.doGetAdminPrivacyPolicy();
+});
+
+// html filter (render text as html)
+adminApp.filter('html', ['$sce', function ($sce) {
+    return function (text) {
+        return $sce.trustAsHtml(text);
+    };
+}]);*/
+
 var commonApp = angular.module('commonApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate']);
 commonApp.controller('PrivacyPolicyUserController',function($scope,requestHandler,Flash) {
 
@@ -56,9 +81,12 @@ commonApp.controller('PrivacyPolicyUserController',function($scope,requestHandle
     $scope.doGetUserPrivacyPolicy();
 });
 
+
+
 // html filter (render text as html)
 commonApp.filter('html', ['$sce', function ($sce) {
     return function (text) {
         return $sce.trustAsHtml(text);
     };
 }]);
+

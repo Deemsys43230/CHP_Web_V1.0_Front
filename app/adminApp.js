@@ -483,6 +483,66 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                     }
                 }
             }).
+          /*  when('/FAQ', {
+                templateUrl: '../../views/common/FAQ.html',
+                resolve: {
+                    loadMyFiles:function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'adminApp',
+                            files:[
+                                '../../js/bootstrap.min.js',
+                                '../../app/faq/faqController.js'
+                            ]
+                        })
+                    }
+                },
+                controller:'FAQAdminController'
+            }).
+            when('/instructions', {
+                templateUrl: '../../views/common/instruction.html',
+                resolve: {
+                    loadMyFiles:function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'adminApp',
+                            files:[
+                                '../../js/bootstrap.min.js',
+                                '../../app/instruction/instructionController.js'
+                            ]
+                        })
+                    }
+                },
+                controller:'InstructionAdminController'
+            }).
+            when('/termsofuse', {
+                templateUrl: '../../views/common/termsofuse.html',
+                resolve: {
+                    loadMyFiles:function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'adminApp',
+                            files:[
+                                '../../js/bootstrap.min.js',
+                                '../../app/termsOfUse/termsOfUseController.js'
+                            ]
+                        })
+                    }
+                },
+                controller:'TermsOfUseAdminController'
+            }).
+            when('/policy', {
+                templateUrl: '../../views/common/privacypolicy.html',
+                resolve: {
+                    loadMyFiles:function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'adminApp',
+                            files:[
+                                '../../js/bootstrap.min.js',
+                                '../../app/privacyPolicy/privacyPolicyController.js'
+                            ]
+                        })
+                    }
+                },
+                controller:'PrivacyPolicyAdminController'
+            }).*/
             otherwise({
                 redirectTo: '/dashboard'
             });
