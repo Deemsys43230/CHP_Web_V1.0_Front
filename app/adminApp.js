@@ -233,8 +233,42 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'testimonialController'
             }).
-            when('/addOrEditTestimonial', {
-                templateUrl: 'views/site-addOrEditTestimonial.html',
+            when('/addTestimonial', {
+                templateUrl: 'views/site-add-or-edit-testimonial.html',
+                resolve: {
+                    loadMyFiles:function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'adminApp',
+                            files:[
+                                '../../js/bootstrap.min.js',
+                                '../../app/testimonial/testimonialController.js',
+                                '../../css/testimonial-image-upload.css',
+                                '../../js/image-upload.js'
+                            ]
+                        })
+                    }
+                },
+                controller:'testimonialController'
+            }).
+            when('/editTestimonial', {
+                templateUrl: 'views/site-add-or-edit-testimonial.html',
+                resolve: {
+                    loadMyFiles:function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'adminApp',
+                            files:[
+                                '../../js/bootstrap.min.js',
+                                '../../app/testimonial/testimonialController.js',
+                                '../../css/testimonial-image-upload.css',
+                                '../../js/image-upload.js'
+                            ]
+                        })
+                    }
+                },
+                controller:'testimonialController'
+            }).
+            when('/viewTestimonial', {
+                templateUrl: 'views/site-view-testimonial.html',
                 resolve: {
                     loadMyFiles:function($ocLazyLoad) {
                         return $ocLazyLoad.load({

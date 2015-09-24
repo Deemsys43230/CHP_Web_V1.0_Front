@@ -7686,3 +7686,7 @@ input[type=range]:focus::-ms-fill-lower {
 input[type=range]:focus::-ms-fill-upper {
 	background: #ccc;
 }
+
+.half-opacity{
+	opacity: 0.3 !important;
+}
