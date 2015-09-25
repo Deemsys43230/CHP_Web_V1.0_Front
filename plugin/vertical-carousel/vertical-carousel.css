@@ -1,0 +1,27 @@
+.vertical-carousel-control{
+    margin: 3px 0px;
+}
+
+.vertical-carousel-control:visited span, .vertical-carousel-control span{
+    color: #ccc;
+}
+
+.vertical-carousel-control:hover{
+    background: #f8ba01;
+}
+
+.vertical-carousel-control:hover span{
+    color: #fff !important;
+}
+
+.prev.vertical-carousel-control{
+    border: 1px solid #ccc;
+    padding: 0px 6px;
+    border-radius: 3px;
+}
+
+.next.vertical-carousel-control{
+    border: 1px solid #ccc;
+    padding: 0px 6px;
+    border-radius: 3px;
+}
