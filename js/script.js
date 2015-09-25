@@ -176,15 +176,13 @@ $(document).ready(function ($) {
       start();
     }
 	
-	
-	
 	////------- Projects Carousel
 	$(".projects-carousel").owlCarousel({
 		navigation : true,
 		pagination: false,
 		slideSpeed : 400,
 		stopOnHover: true,
-    	autoPlay: 3000,
+    	autoPlay: false,
     	items : 4,
     	itemsDesktopSmall : [900,3],
 		itemsTablet: [600,2],
@@ -204,10 +202,6 @@ $(document).ready(function ($) {
 		autoHeight : true,
 		transitionStyle : "fade"
 	});
-	
-	
-	
-	
 	
 	
 	////------- Custom Carousel
