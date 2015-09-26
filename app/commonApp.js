@@ -220,11 +220,12 @@ commonApp.controller('LoginController',function($scope,requestHandler,Flash,$win
 
                 //Get Logged In User
                 requestHandler.getRequest("getUserId/","").then(function(response){
+
                     console.log("Role:"+response.data.Login.roleid);
                    if(response.data.Login.roleid==3){
                        console.log("Role:"+response.data.User_Profile.isProfileUpdated);
                        if(response.data.User_Profile.isProfileUpdated==0){
-                          $window.location.href="views/user/#/register";
+                          $window.location.href="views/user/#/profile";
                        }else{
                            $window.location.href="views/user/#/dashboard";
                        }

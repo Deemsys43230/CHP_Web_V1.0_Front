@@ -8,21 +8,34 @@
     <section class="popupBody">
         <!-- Register Form -->
         <div class="user_register">
-            <form>
+            <form name="coachRegisterForm">
                 <p>Name</p>
-                <input type="text" />
+                <input type="text" ng-model="coach.name" name="coachName" required/>
+                <span ng-show="coachRegisterForm.coachName.$dirty&&coachRegisterForm.coachName.$invalid">
+                    <span class="error-message" ng-show="coachRegisterForm.coachName.$error.required"><span>Required.</span></span>
+                </span>
 
                 <p>Email</p>
-                <input type="email" />
-
+                <input type="email" name="emailid" ng-model="coach.emailid" required emailexists/>
+                <span ng-show="coachRegisterForm.emailid.$dirty&&coachRegisterForm.emailid.$invalid">
+                    <span class="error-message" ng-show="coachRegisterForm.emailid.$error.required"><span>Required.</span></span>
+                    <span class="error-message" ng-show="coachRegisterForm.emailid.$error.email"><span>Enter&nbsp;valid&nbsp;Email&nbsp;ID</span></span>
+                </span>
+                <span class="error-message" ng-show="coachRegisterForm.emailid.$error.emailexists"><span>Email&nbsp;ID&nbsp;Already&nbsp;Exist.</span></span>
                 <p>Password</p>
-                <input type="password" />
-
+                <input type="password" name="password" ng-model="coach.password" required/>
+                 <span ng-show="coachRegisterForm.password.$dirty&&coachRegisterForm.password.$invalid">
+                    <span class="error-message" ng-show="coachRegisterForm.password.$error.required"><span>Required.</span></span>
+                </span>
                 <p>Confirm Password</p>
-                <input type="password" />
+                <input type="password" name="confirm_password" required ng-model="confirm_password" compare-to="coach.password"/>
+                <span ng-show="coachRegisterForm.confirm_password.$dirty&&coachRegisterForm.confirm_password.$invalid">
+                    <span class="error-message" ng-show="coachRegisterForm.confirm_password.$error.required"><span>Required.</span></span>
+                    <span class="error-message" ng-show="coachRegisterForm.confirm_password.$error.compareTo"><span>Password&nbsp;don't&nbsp;match.</span></span>
+                </span>
 
                 <div class="action_btns margin-top-20">
-                    <div><a href="" class="btn btn_red">Create Coach</a></div>
+                    <div><a href="" class="btn btn_red" ng-click="doAddCoach();" ng-disabled="coachRegisterForm.$invalid">Create Coach</a></div>
                 </div>
             </form>
         </div>
@@ -47,93 +60,14 @@
                     <thead>
                     <tr class="warning">
                         <th>Name</th>
-                        <th>Specialist</th>
                         <th>Email</th>
                         <th class="option-col1">Options</th>
                     </tr>
                     </thead>
-                    <tbody>
+                    <tbody dir-paginate="coach in coachList | itemsPerPage: 7" ng-show="news.length!=0">
                     <tr>
-                        <td>Sachin</td>
-                        <td>Running Specialist</td>
-                        <td>sachine243@gmail.com</td>
-                        <td>
-                            <a href="#coach-view" class="btn-xs btn-primary">View</a>
-                            <a href="#coach-edit" class="btn-xs btn-danger">Edit</a>
-                            <a href="" class="btn-xs btn-success">Enable</a>
-                            <a href="" class="btn-xs btn-warning">Reset Password</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Sachin</td>
-                        <td>Running Specialist</td>
-                        <td>sachine243@gmail.com</td>
-                        <td>
-                            <a href="#coach-view" class="btn-xs btn-primary">View</a>
-                            <a href="#coach-edit" class="btn-xs btn-danger">Edit</a>
-                            <a href="" class="btn-xs btn-success">Enable</a>
-                            <a href="" class="btn-xs btn-warning">Reset Password</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Sachin</td>
-                        <td>Running Specialist</td>
-                        <td>sachine243@gmail.com</td>
-                        <td>
-                            <a href="#coach-view" class="btn-xs btn-primary">View</a>
-                            <a href="#coach-edit" class="btn-xs btn-danger">Edit</a>
-                            <a href="" class="btn-xs btn-success">Enable</a>
-                            <a href="" class="btn-xs btn-warning">Reset Password</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Sachin</td>
-                        <td>Running Specialist</td>
-                        <td>sachine243@gmail.com</td>
-                        <td>
-                            <a href="#coach-view" class="btn-xs btn-primary">View</a>
-                            <a href="#coach-edit" class="btn-xs btn-danger">Edit</a>
-                            <a href="" class="btn-xs btn-success">Enable</a>
-                            <a href="" class="btn-xs btn-warning">Reset Password</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Sachin</td>
-                        <td>Running Specialist</td>
-                        <td>sachine243@gmail.com</td>
-                        <td>
-                            <a href="#coach-view" class="btn-xs btn-primary">View</a>
-                            <a href="#coach-edit" class="btn-xs btn-danger">Edit</a>
-                            <a href="" class="btn-xs btn-success">Enable</a>
-                            <a href="" class="btn-xs btn-warning">Reset Password</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Sachin</td>
-                        <td>Running Specialist</td>
-                        <td>sachine243@gmail.com</td>
-                        <td>
-                            <a href="#coach-view" class="btn-xs btn-primary">View</a>
-                            <a href="#coach-edit" class="btn-xs btn-danger">Edit</a>
-                            <a href="" class="btn-xs btn-success">Enable</a>
-                            <a href="" class="btn-xs btn-warning">Reset Password</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Sachin</td>
-                        <td>Running Specialist</td>
-                        <td>sachine243@gmail.com</td>
-                        <td>
-                            <a href="#coach-view" class="btn-xs btn-primary">View</a>
-                            <a href="#coach-edit" class="btn-xs btn-danger">Edit</a>
-                            <a href="" class="btn-xs btn-success">Enable</a>
-                            <a href="" class="btn-xs btn-warning">Reset Password</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Sachin</td>
-                        <td>Running Specialist</td>
-                        <td>sachine243@gmail.com</td>
+                        <td>{{coach.name}}</td>
+                        <td>{{coach.emailid}}</td>
                         <td>
                             <a href="#coach-view" class="btn-xs btn-primary">View</a>
                             <a href="#coach-edit" class="btn-xs btn-danger">Edit</a>
@@ -144,13 +78,7 @@
                     </tbody>
                 </table>
                 <!-- Start Pagination -->
-                <div id="pagination">
-                    <span class="all-pages">Page 1 of 3</span>
-                    <span class="current page-num">1</span>
-                    <a class="page-num" href="#">2</a>
-                    <a class="page-num" href="#">3</a>
-                    <a class="next-page" href="#">Next</a>
-                </div>
+                <dir-pagination-controls boundary-links="true"> </dir-pagination-controls>
                 <!-- End Pagination -->
             </div>
         </div>

@@ -1,4 +1,4 @@
-var userApp= angular.module('userApp', ['ngRoute','oc.lazyLoad','ngCookies']);
+var userApp= angular.module('userApp', ['ngRoute','oc.lazyLoad','ngCookies','requestModule']);
 
 userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
 
@@ -115,11 +115,13 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../plugin/popup/style.css',
                                 '../../plugin/popup/jquery.leanModal.min.js',
                                 '../../css/profile-image-upload.css',
-                                '../../js/image-upload.js'
+                                '../../js/image-upload.js',
+                                '../../app/userProfile/userProfileController.js'
                             ]
                         })
                     }
-                }
+                },
+                controller:'UserProfileController'
             }).
             when('/demography', {
                 templateUrl: 'views/demography.html'
@@ -127,4 +129,22 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
             otherwise({
                 redirectTo: '/dashboard'
             });
+}]);
+
+//Initial Controller for Username
+userApp.controller("UserInitialController",function($scope,requestHandler){
+    requestHandler.getRequest("getUserId/","").then(function(response){
+        $scope.username=response.data.User_Profile.name;
+    });
+});
+
+//Controller For Logout
+userApp.controller("UserLogoutController",['$cookies','$scope','$window',function($cookies,$scope,$window){
+
+    $scope.doLogout=function(){
+        $cookies.remove("X-CSRFToken",{path: '/'});
+        $cookies.put('sessionid',undefined);
+        $window.location.href="../../#/index";
+    };
+
 }]);

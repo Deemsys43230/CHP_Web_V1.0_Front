@@ -7483,6 +7483,23 @@ a:hover, a:visited, a:link, a:active
 	margin: 0;
 }
 
+.profile_input_textarea
+{
+	font-size: 14px;
+	color: #333;
+	padding: 5px 8px;
+	width: 600px !important;
+	height:60px;
+	border:0px !important;
+	-moz-appearance: none;
+	-webkit-appearance: none;
+	-webkit-box-shadow: inset 0px 0px 3px rgba(0,0,0,0.3);
+	-moz-box-shadow: inset 0px 0px 3px rgba(0,0,0,0.3);
+	box-shadow: inset 0px 0px 3px rgba(0,0,0,0.3);
+	outline: 0;
+	margin: 0;
+}
+
 .demography_input
 {
 	font-size: 14px;

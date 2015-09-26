@@ -1,4 +1,4 @@
-var adminApp= angular.module('adminApp', ['ngRoute','oc.lazyLoad','ngCookies','ngAnimate','angularUtils.directives.dirPagination']);
+var adminApp= angular.module('adminApp', ['ngRoute','oc.lazyLoad','ngCookies','requestModule','ngAnimate','angularUtils.directives.dirPagination']);
 
 adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
 
@@ -10,8 +10,6 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
 
         //Do For Cross Orgin Management
         $httpProvider.defaults.withCredentials = true;
-
-
 
         $httpProvider.interceptors.push(['$q','$location','$injector','$cookies',function ($q, $location,$injector,$cookies) {
 
@@ -335,11 +333,13 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                             files:[
                                 '../../js/bootstrap.min.js',
                                 '../../plugin/popup/style.css',
-                                '../../plugin/popup/jquery.leanModal.min.js'
+                                '../../plugin/popup/jquery.leanModal.min.js',,
+                                '../../app/coach/coachController.js'
                             ]
                         })
                     }
-                }
+                },
+                controller:"CoachController"
             }).
             when('/coach-view', {
                 templateUrl: 'views/coach-view.html',
@@ -602,10 +602,93 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
             });
 }]);
 
+//Initial Controller for Username
+adminApp.controller("InitialController",function($scope,requestHandler){
+    requestHandler.getRequest("getUserId/","").then(function(response){
+        $scope.username=response.data.User_Profile.name;
+    });
+});
+
+//Controller For Logout
+adminApp.controller("LogoutController",['$cookies','$scope','$window',function($cookies,$scope,$window,requestHandler){
+
+    $scope.doLogout=function(){
+
+
+        $cookies.remove("X-CSRFToken",{path: '/'});
+        $cookies.put('sessionid',undefined);
+        $window.location.href="../../#/index";
+    };
+
+}]);
+
+//Email Already Exists
+adminApp.directive("emailexists", function ($q, $timeout,requestHandler) {
+
+    var CheckEmailExists = function (isNew) {
+
+        if(isNew===1)
+            return true;
+        else
+            return false;
+    };
+
+    return {
+        restrict: "A",
+        require: "ngModel",
+        link: function (scope, element, attributes, ngModel) {
+            ngModel.$asyncValidators.emailexists = function (modelValue) {
+                var defer = $q.defer();
+                $timeout(function () {
+                    var isNew;
+                    var sendRequest=requestHandler.postRequest("checkEmailExist/",{"emailid":modelValue}).then(function(response){
+                        isNew=response.data.Response_status;
+                    });
+
+                    sendRequest.then(function(){
+
+                        if (CheckEmailExists(isNew)){
+                            defer.resolve();
+                        }
+                        else{
+                            defer.reject();
+                        }
+                    });
+                    isNew = false;
+                }, 10);
+
+                return defer.promise;
+            }
+        }
+    };
+});
+
+// Compare Confirm Password
+adminApp.directive('compareTo',function() {
+    return {
+        require: "ngModel",
+        scope: {
+            otherModelValue: "=compareTo"
+        },
+        link: function(scope, element, attributes, ngModel) {
+
+            ngModel.$validators.compareTo = function(modelValue) {
+                return modelValue == scope.otherModelValue;
+            };
+
+            scope.$watch("otherModelValue", function() {
+                ngModel.$validate();
+            });
+        }
+    };
+});
+
+
 
 //To Display success message
 //For User Messages
 function successMessage(Flash,message){
+    Flash.dismiss();
     Flash.create('success', message, 'alert');
     $("html, body").animate({
         scrollTop: 0
@@ -614,6 +697,7 @@ function successMessage(Flash,message){
 }
 
 function errorMessage(Flash,message){
+    Flash.dismiss();
     Flash.create('danger', message, 'custom-class');
     $("html, body").animate({
         scrollTop: 0

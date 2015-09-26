@@ -32,7 +32,7 @@
                     <tr >
 
                     </tr>
-                    <tr dir-paginate="latestnews in news | itemsPerPage: 7" ng-show="news.length!=0">
+                    <tr ng-if="loaded" dir-paginate="latestnews in news | itemsPerPage: 7" ng-show="news.length!=0">
                         <td>{{latestnews.title}}</td>
                         <td>{{latestnews.datetime}}</td>
                         <td>

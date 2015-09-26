@@ -3,7 +3,8 @@
     <div id="w" class="clearfix">
         <div id="profile">
             <div class="col-md-12 no-padding">
-                <div class="profile-image center-block"><img id="profile-image-change" src="../../images/member02.jpg"></div>
+                <div class="profile-image center-block"><img id="profile-image-change" ng-src="{{imageUrl | trusted}}"></div>
+                <input type="hidden" ng-model="userProfile.imageurl" name="profileImage" id="profileImageId"/>
                 <div class="change-image"><a id="modal_trigger" href="#modal" class="btn btn-xs btn-warning">Change</a></div>
                 <h4 class="margin-top-20">Mugesh Kumar</h4>
                 <p>9042081474</p>
@@ -28,9 +29,14 @@
         </div>
 
         <div id="profile-content">
+            <form name="userProfileForm">
             <div class="col-md-12">
                 <div class="col-md-12">
+                    <div class="margin-top-5 no-padding pull-right">
+                        <a id="modal_trigger1" href="#modal-changePassword" class="profile_button"><i class="fa fa-lock"></i> Change Password</a><br/><br/>
+                    </div>
                     <h5 class="classic-title"><span><i class="fa fa-user"></i> &nbsp;PROFILE UPDATE</span></h5>
+
                 </div>
                 <div class="col-md-12">
                     <div class="col-md-6 margin-top-10">
@@ -38,7 +44,7 @@
                             <h5>Name :</h5>
                         </div>
                         <div class="col-md-8">
-                            <input class="profile_input"/>
+                            <input class="profile_input" ng-model="userProfile.name" ng-pattern="/^(\w+\s?)*\s*$/"/>
                         </div>
                     </div>
                     <div class="col-md-6 margin-top-10">
@@ -46,23 +52,7 @@
                             <h5>Country :</h5>
                         </div>
                         <div class="col-md-8">
-                            <input class="profile_input"/>
-                        </div>
-                    </div>
-                    <div class="col-md-6 margin-top-10">
-                        <div class="col-md-4 padding-top-4">
-                            <h5>Email Id :</h5>
-                        </div>
-                        <div class="col-md-8">
-                            <input class="profile_input"/>
-                        </div>
-                    </div>
-                    <div class="col-md-6 margin-top-10">
-                        <div class="col-md-4 padding-top-4">
-                            <h5>State :</h5>
-                        </div>
-                        <div class="col-md-8">
-                            <input class="profile_input"/>
+                            <input class="profile_input" ng-model="userProfile.country" maxlength="20"/>
                         </div>
                     </div>
                     <div class="col-md-6 margin-top-10">
@@ -70,15 +60,32 @@
                             <h5>DOB :</h5>
                         </div>
                         <div class="col-md-8">
-                            <input type="text" class="profile_input" value="02/16/2012" placeholder="Date Of Birth" id="dp1" >
+                            <input type="text" class="profile_input" ng-model="userProfile.dob" placeholder="Date Of Birth">
                         </div>
                     </div>
+                    <div class="col-md-6 margin-top-10">
+                        <div class="col-md-4 padding-top-4">
+                            <h5>State :</h5>
+                        </div>
+                        <div class="col-md-8">
+                            <input class="profile_input" ng-model="userProfile.state" maxlength="20"/>
+                        </div>
+                    </div>
+                    <div class="col-md-6 margin-top-10">
+                        <div class="col-md-4 padding-top-4">
+                            <h5>Email Id :</h5>
+                        </div>
+                        <div class="col-md-8">
+                            <input class="profile_input" ng-model="userProfile.emailid" ng-disabled="true"/>
+                        </div>
+                    </div>
+
                     <div class="col-md-6 margin-top-10">
                         <div class="col-md-4 padding-top-4">
                             <h5>City :</h5>
                         </div>
                         <div class="col-md-8">
-                            <input class="profile_input"/>
+                            <input class="profile_input" ng-model="userProfile.city" maxlength="20"/>
                         </div>
                     </div>
                     <div class="col-md-6 margin-top-10">
@@ -86,50 +93,64 @@
                             <h5>Mobile :</h5>
                         </div>
                         <div class="col-md-8">
-                            <input class="profile_input"/>
+                            <input class="profile_input" ng-model="userProfile.phone" maxlength="10"/>
                         </div>
                     </div>
+                    <div class="col-md-6 margin-top-10">
+                        <div class="col-md-4 padding-top-4">
+                            <h5>Zipcode :</h5>
+                        </div>
+                        <div class="col-md-8">
+                            <input class="profile_input" ng-model="userProfile.zipcode" maxlength="10"/>
+                        </div>
+                    </div>
+                    <div class="col-md-6 margin-top-10">
+                        <div class="col-md-4 padding-top-4">
+                            <h5>Secret&nbsp;Question:</h5>
+                        </div>
+                        <div class="col-md-8">
+                            <input class="profile_input" ng-model="userProfile.secretquestion" maxlength="10"/>
+                        </div>
+                    </div>
+
                     <div class="col-md-6 margin-top-10">
                         <div class="col-md-4 padding-top-4">
                             <h5>Gender :</h5>
                         </div>
                         <div class="col-md-8">
-                            <input type="radio" checked id="1" class="height" name="sex" />
+                            <input type="radio" id="1" class="height" name="sex" value="1" ng-model="userProfile.gender"/>
                             <label for="1">Male</label>
-                            <input type="radio" id="2" class="height" name="sex" />
+                            <input type="radio" id="2" class="height" name="sex" value="2" ng-model="userProfile.gender"/>
                             <label for="2">Female</label>
                         </div>
                     </div>
-                    <div class="col-md-12"><hr/></div>
-                    <div class="col-md-7">
+                    <div class="col-md-6 margin-top-10">
                         <div class="col-md-4 padding-top-4">
-                            <h5>Password :</h5>
+                            <h5>Secret&nbsp;Answer:</h5>
                         </div>
                         <div class="col-md-8">
-                            <input class="profile_input"/>
+                            <input class="profile_input" ng-model="userProfile.secretanswer" maxlength="10"/>
                         </div>
                     </div>
-                    <div class="col-md-5 margin-top-5 no-padding">
-                        <a id="modal_trigger1" href="#modal-changePassword" class="profile_button">Change Password</a><br/><br/>
+                    <div class="col-md-6 margin-top-10">
+                        <br/><br/>
                     </div>
-                    <div class="col-md-12 margin-top-10">
-                        <div class="col-md-5 padding-top-4">
-                            <h5>Do you want others to see your profile?</h5>
+                    <div class="col-md-6 margin-top-10">
+                        <div class="col-md-4 padding-top-4">
+                            <h5>About Me :</h5>
                         </div>
-                        <div class="col-md-7">
-                            <input type="radio" checked id="yes" class="height" name="allowProfileView" />
-                            <label for="yes">Yes</label>
-                            <input type="radio" id="no" class="height" name="allowProfileView" />
-                            <label for="no">No</label>
+                        <div class="col-md-8">
+                            <textarea class="profile_input_textarea" ng-model="userProfile.about" maxlength="300"></textarea>
+
                         </div>
                     </div>
-                    <div class="col-md-12"><hr/></div>
-                    <div class="col-md-12 text-center margin-top-10">
-                        <a href="" class="main_button">Save Changes</a>
+                    <div class="col-md-12 text-center margin-top-20">
+                        <a href="" class="main_button" ng-click="doUpdateProfile()">Save Changes</a>
                         <a href="#dashboard" class="main_button">Cancel</a>
                     </div>
                 </div>
             </div>
+                </form>
         </div><!-- @end #content -->
     </div><!-- @end #w -->
 </div>
@@ -158,7 +179,7 @@
                             <input type="file" class="upload cropit-image-input" />
                         </div>
                     </div>
-                    <div class="one_half last"><a href="" onclick="return false;" class="food-button export modal_close">Upload Image</a></div>
+                    <div class="one_half last"><a href="" onclick="return false;" class="food-button export modal_close" ng-click="doUpdateProfileImage()">Upload Image</a></div>
                 </div>
             </div>
         </div>
@@ -211,15 +232,8 @@
 
 <script>
     $(function() {
-        $('.image-editor').cropit({
-            imageState: {
-                src: ''
-            }
-        });
+         $('.export').click(function() {
 
-        $('.export').click(function() {
-            var imageData = $('.image-editor').cropit('export');
-            document.getElementById("profile-image-change").src=imageData;
         });
     });
 </script>
@@ -231,11 +245,8 @@
     $(function(){
         window.prettyPrint && prettyPrint();
         $('#dp1').datepicker({
-            format: 'mm/dd/yyyy'
+            format: 'dd/mm/yyyy'
         });
-        var startDate = new Date(2012,1,20);
-        var endDate = new Date(2020,1,25);
-
         var checkin = $('#dpd1').datepicker({
             onRender: function(date) {
                 return date.valueOf() < now.valueOf() ? 'disabled' : '';

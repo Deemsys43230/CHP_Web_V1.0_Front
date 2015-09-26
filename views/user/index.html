@@ -56,14 +56,14 @@
                         <li class="navbar-user">
                             <ul class="nav navbar-nav">
                                 <li>
-                                    <a href="#" onclick="return false;">User Name &nbsp;<span class="fa fa-caret-down"></span> </a>
+                                    <a href="#" onclick="return false;" ng-controller="UserInitialController">{{username}}&nbsp;<span class="fa fa-caret-down"></span> </a>
                                     <ul class="dropdown">
                                         <li><a href="#profile">My Profile</a></li>
                                         <li><a href="#demography">My Demography</a></li>
                                         <li><a href="">My History</a></li>
                                         <li><a href="">My Goals</a></li>
                                         <li><a href="">My Coach</a></li>
-                                        <li><a href="index.html">Log Out</a></li>
+                                        <li><a href="index.html" ng-controller="UserLogoutController" ng-click="doLogout()">Log Out</a></li>
                                     </ul>
                                 </li>
                             </ul>
@@ -266,6 +266,7 @@
 <script src="../../angular/angular-cookies.js"></script>
 <script src="../../angular/angular-route-1.4.2.js"></script>
 <script src="../../angular/ocLazyLoad.min.js"></script>
+<script src="../../app/requestHandler.js"></script>
 <script src="../../app/userApp.js"></script>
 
 <script type="text/javascript" src="../../js/jquery.migrate.js"></script>
