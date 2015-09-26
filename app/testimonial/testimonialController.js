@@ -73,7 +73,7 @@ adminApp.controller('TestimonialEditController',function($scope,requestHandler,F
             // View the image in image cropit preview in edit testimonials
             $('.image-editor').cropit({
                 imageState: {
-                    src: response.data.Testimonials.imageurl
+                    src: response.data.Testimonials.imageurl+"?decache="+Math.random()
                 }
             });
             original=angular.copy(response.data.Testimonials.imageurl);
@@ -161,5 +161,19 @@ commonApp.controller('TestimonialUserController',function($scope,requestHandler,
 commonApp.filter('trusted', ['$sce', function ($sce) {
     return function(url) {
         return $sce.trustAsResourceUrl(url);
+    };
+}]);
+
+// html filter (render text as html)
+adminApp.filter('html', ['$sce', function ($sce) {
+    return function (text) {
+        return $sce.trustAsHtml(text);
+    };
+}]);
+
+// html filter (render text as html)
+commonApp.filter('html', ['$sce', function ($sce) {
+    return function (text) {
+        return $sce.trustAsHtml(text);
     };
 }]);

@@ -243,6 +243,8 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                             files:[
                                 '../../js/bootstrap.min.js',
                                 '../../app/testimonial/testimonialController.js',
+                                '../../plugin/text-editor/summernote.js',
+                                '../../plugin/text-editor/summernote.css',
                                 '../../css/testimonial-image-upload.css',
                                 '../../js/image-upload.js'
                             ]
@@ -260,6 +262,8 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                             files:[
                                 '../../js/bootstrap.min.js',
                                 '../../app/testimonial/testimonialController.js',
+                                '../../plugin/text-editor/summernote.js',
+                                '../../plugin/text-editor/summernote.css',
                                 '../../css/testimonial-image-upload.css',
                                 '../../js/image-upload.js'
                             ]
