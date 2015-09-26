@@ -316,97 +316,29 @@
 
             </div>
 
-            <div class="col-md-4">
+            <div class="col-md-4" ng-controller="TestimonialUserController">
                 <div class="panel no-margin no-box-shadow">
                     <div class="panel-body">
                         <a onclick="return false;" href="#" class="prev vertical-carousel-control pull-right margin-left-5"><span class="fa fa-angle-down"></span></a>
                         <a onclick="return false;"  href="#" class="next vertical-carousel-control pull-right"><span class="fa fa-angle-up"></span></a>
                         <h4 class="classic-title"><span>Others Says</span></h4>
                         <ul class="vertical-items">
-                            <li class="news-item">
+                            <li class="news-item" ng-repeat="usertestimonial in usertestimoniallist">
                                 <div class="media testimonial-inner">
                                     <div class="pull-left">
-                                        <img class="img-responsive img-circle" src="images/pic-1.jpg">
+                                        <img class="img-responsive img-circle" ng-src="{{usertestimonial.imageurl | trusted}}">
+
                                     </div>
                                     <div class="testimonials-carousel-content">
-                                        <a href="">consectetur adipisicing to</a>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt.</p>
-                                        <div><strong>- Marie curie/</strong> Director of corlate.com</div>
+
+                                        <a href="#testimonials/{{usertestimonial.testimonialid}}" ng-click="">{{usertestimonial.title}}</a>
+                                        <p>{{usertestimonial.description}}</p>
+                                        <div><strong>{{usertestimonial.givenby}}</strong></div>
+
                                     </div>
                                 </div>
                             </li>
-                            <li class="news-item">
-                                <div class="media testimonial-inner">
-                                    <div class="pull-left">
-                                        <img class="img-responsive img-circle" src="images/pic-3.jpg">
-                                    </div>
-                                    <div class="testimonials-carousel-content">
-                                        <a href="">consectetur adipisicing adipisicing</a>
-                                        <p>Lorem ipsuisicing elit, sed do eiusmod tempor incididunt.</p>
-                                        <div><strong>- Marie curie/</strong> Director of corlate.com</div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="news-item">
-                                <div class="media testimonial-inner">
-                                    <div class="pull-left">
-                                        <img class="img-responsive img-circle" src="images/pic-1.jpg">
-                                    </div>
-                                    <div class="testimonials-carousel-content">
-                                        <a href="">consectetur adipisicing  adipisicing</a>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt.</p>
-                                        <div><strong>- Marie curie/</strong> Director of corlate.com</div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="news-item">
-                                <div class="media testimonial-inner">
-                                    <div class="pull-left">
-                                        <img class="img-responsive img-circle" src="images/pic-3.jpg">
-                                    </div>
-                                    <div class="testimonials-carousel-content">
-                                        <a href="">consectetur adipisicing  adipisicing</a>
-                                        <p>Lorem ipsuisicing elit, sed do eiusmod tempor incididunt.</p>
-                                        <div><strong>- Marie curie/</strong> Director of corlate.com</div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="news-item">
-                                <div class="media testimonial-inner">
-                                    <div class="pull-left">
-                                        <img class="img-responsive img-circle" src="images/pic-3.jpg">
-                                    </div>
-                                    <div class="testimonials-carousel-content">
-                                        <a href="">consectetur adipisicing  adipisicing</a>
-                                        <p>Lorem ipsuisicing elit, sed do eiusmod tempor incididunt.</p>
-                                        <div><strong>- Marie curie/</strong> Director of corlate.com</div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="news-item">
-                                <div class="media testimonial-inner">
-                                    <div class="pull-left">
-                                        <img class="img-responsive img-circle" src="images/pic-3.jpg">
-                                    </div>
-                                    <div class="testimonials-carousel-content">
-                                        <a href="">consectetur adipisicing  adipisicing</a>
-                                        <p>Lorem ipsuisicing elit, sed do eiusmod tempor incididunt.</p>
-                                        <div><strong>- Marie curie/</strong> Director of corlate.com</div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="news-item">
-                                <div class="media testimonial-inner">
-                                    <div class="pull-left">
-                                        <img class="img-responsive img-circle" src="images/pic-3.jpg">
-                                    </div>
-                                    <div class="testimonials-carousel-content">
-                                        <a href="">consectetur adipisicing  adipisicing</a>
-                                        <p>Lorem ipsuisicing elit, sed do eiusmod tempor incididunt.</p>
-                                        <div><strong>- Marie curie/</strong> Director of corlate.com</div>
-                                    </div>
-                                </div>
-                            </li>
+
                         </ul>
                     </div>
                 </div>

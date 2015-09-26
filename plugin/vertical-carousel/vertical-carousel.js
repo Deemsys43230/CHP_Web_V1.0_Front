@@ -26,7 +26,6 @@ if (typeof Object.create !== 'function') {
             var self = this;
             self.elem = elem;
             self.$elem = $( elem );
-            
             self.newsTagName = self.$elem.find(":first-child").prop('tagName');
             self.newsClassName = self.$elem.find(":first-child").attr('class');
 
@@ -91,20 +90,21 @@ if (typeof Object.create !== 'function') {
 
             //prevent user to select more news that it actualy have
 
-            if( self.$elem.find(self.newsTagName).length < self.options.newsPerPage ) {
+           /* if( self.$elem.find(self.newsTagName).length < self.options.newsPerPage ) {
                 self.options.newsPerPage = self.$elem.find(self.newsTagName).length;
-            }
+            }*/
             
             //get height of the very first self.options.newsPerPage news
             var height = 0;
 
             $.map(self.$elem.find(self.newsTagName), function( newsItem, index ) {
+
                 if ( index < self.options.newsPerPage ) {
                     height = parseInt(height) + parseInt($(newsItem).height()) + 10;
                 }
             });
 
-            $(self.elem).css({"overflow-y": "hidden", "height": height});
+            $(self.elem).css({"overflow-y": "hidden", "height": 320});
 
             //recalculate news box height for responsive interfaces
             $( w ).resize(function() {
@@ -258,7 +258,7 @@ if (typeof Object.create !== 'function') {
             var newsBox = Object.create( NewsBox );
 
             newsBox.init( options, this );
-            //console.log(newsBox);
+            console.log(newsBox);
 
         });
     };

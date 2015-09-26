@@ -55,7 +55,8 @@ commonApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                             name:'commonApp',
                             files:[
                                 'plugin/vertical-carousel/vertical-carousel.js',
-                                'plugin/vertical-carousel/vertical-carousel.css'
+                                'plugin/vertical-carousel/vertical-carousel.css',
+                                'app/testimonial/testimonialController.js'
                             ]
                         })
                     }
@@ -98,11 +99,31 @@ commonApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                             name:'commonApp',
                             files:[
                                 'plugin/vertical-carousel/vertical-carousel.js',
-                                'plugin/vertical-carousel/vertical-carousel.css'
+                                'plugin/vertical-carousel/vertical-carousel.css',
+                                'app/testimonial/testimonialController.js'
+
                             ]
                         })
                     }
-                }
+                },
+                controller:'TestimonialUserController'
+            }).
+            when('/testimonials/:id', {
+                templateUrl: 'views/common/testimonial.html',
+                resolve: {
+                    loadMyFiles:function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'commonApp',
+                            files:[
+                                'plugin/vertical-carousel/vertical-carousel.js',
+                                'plugin/vertical-carousel/vertical-carousel.css',
+                                'app/testimonial/testimonialController.js'
+
+                            ]
+                        })
+                    }
+                },
+                controller:'TestimonialUserController'
             }).
             when('/news', {
                 templateUrl: 'views/common/news.html',

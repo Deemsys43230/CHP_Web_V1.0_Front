@@ -18,10 +18,10 @@ adminApp.controller('TestimonialController',function($scope,requestHandler,Flash
 
     //To add Testimonials
     $scope.doAddTestimonials=function(){
-       // alert("hi");
 
+        //Convert the image to base 64
         $scope.testimonials.imageurl = $('.image-editor').cropit('export');
-       // alert($scope.testimonials.imageurl);
+
 
         requestHandler.postRequest("admin/insertorupdateTestimonial/",$scope.testimonials).then(function(response){
 
@@ -49,6 +49,7 @@ adminApp.controller('TestimonialController',function($scope,requestHandler,Flash
     // Display Testimonials For admin view On Page Load
     $scope.doGetTestimonialsByAdmin();
 
+    //For image upload
     $('.image-editor').cropit();
 
 });
@@ -66,16 +67,21 @@ adminApp.controller('TestimonialEditController',function($scope,requestHandler,F
         requestHandler.getRequest("admin/getTestimonialListById/"+$routeParams.id,"").then(function(response){
             delete response.data.Testimonials.datetime;
 
+            //View the image in ng-src for view testimonials
             $scope.myImgSrc = $sce.trustAsResourceUrl(response.data.Testimonials.imageurl);
-            //alert($scope.myImgSrc);
+
+            // View the image in image cropit preview in edit testimonials
             $('.image-editor').cropit({
                 imageState: {
                     src: response.data.Testimonials.imageurl
                 }
             });
-            //alert(response.data.Testimonials.imageurl);
-            original=angular.copy(response.data.Testimonials);
+            original=angular.copy(response.data.Testimonials.imageurl);
             $scope.testimonials=response.data.Testimonials;
+
+
+
+
         },function(){
             errorMessage(Flash,"Please try again later!")
         });
@@ -84,10 +90,12 @@ adminApp.controller('TestimonialEditController',function($scope,requestHandler,F
 
     //To update Latest News
     $scope.doUpdateTestimonials = function(){
-
        // alert("hi");
-        $scope.testimonials.imageurl = $('.image-editor').cropit('export');
-       // alert($scope.testimonials.imageurl );
+        // convert the image to base64 while editing the image
+       $scope.testimonials.imageurl = $('.image-editor').cropit('export');
+
+        //alert($scope.testimonials.imageurl);
+
         requestHandler.putRequest("admin/insertorupdateTestimonial/",$scope.testimonials).then(function(response){
             successMessage(Flash,"Successfully Updated");
             $location.path("testimonials");
@@ -104,4 +112,54 @@ adminApp.controller('TestimonialEditController',function($scope,requestHandler,F
 
 
 
+
 });
+
+
+var commonApp = angular.module('commonApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate']);
+
+commonApp.controller('TestimonialUserController',function($scope,requestHandler,Flash,$sce,$routeParams){
+
+    // To display Testimonials as user
+    $scope.doGetTestimonialsByUser=function(){
+
+        requestHandler.getRequest("getTestimonialListByUser/", "").then(function(response){
+
+            $scope.usertestimoniallist=response.data.Testimonials;
+
+            $scope.myImgSrc = $sce.trustAsResourceUrl(response.data.Testimonials[0].imageurl);
+            $scope.usertestimonialdetails = response.data.Testimonials[0];
+
+        },function(){
+            errorMessage(Flash,"Please try again later!")
+        });
+    };
+
+    $scope.doGetTestimonialDetailsByUser= function (id) {
+      //  alert("hi");
+        requestHandler.getRequest("getTestimonialDetail/"+id, "").then(function(response){
+
+            //View the image in ng-src for view testimonials
+            $scope.myImgSrc = $sce.trustAsResourceUrl(response.data.Testimonials.imageurl);
+
+            $scope.usertestimonialdetails=response.data.Testimonials
+
+        },function(){
+            errorMessage(Flash,"Please try again later!")
+        });
+
+    };
+
+    // To display the user Testimonial list on load
+    $scope.doGetTestimonialsByUser();
+    $scope.doGetTestimonialDetailsByUser($routeParams.id);
+
+
+});
+
+// render image to view in list
+commonApp.filter('trusted', ['$sce', function ($sce) {
+    return function(url) {
+        return $sce.trustAsResourceUrl(url);
+    };
+}]);
