@@ -133,11 +133,13 @@ commonApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                             name:'commonApp',
                             files:[
                                 'plugin/vertical-carousel/vertical-carousel.js',
-                                'plugin/vertical-carousel/vertical-carousel.css'
+                                'plugin/vertical-carousel/vertical-carousel.css',
+                                'app/latestNews/latestNewsController.js'
                             ]
                         })
                     }
-                }
+                },
+                controller:'NewsUserController'
             }).
             when('/FAQ', {
                 templateUrl: 'views/common/FAQ.html',

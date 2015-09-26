@@ -332,7 +332,7 @@
                                     <div class="testimonials-carousel-content">
 
                                         <a href="#testimonials/{{usertestimonial.testimonialid}}" ng-click="">{{usertestimonial.title}}</a>
-                                        <p>{{usertestimonial.description}}</p>
+                                        <p ng-bind-html="usertestimonial.description | html"></p>
                                         <div><strong>{{usertestimonial.givenby}}</strong></div>
 
                                     </div>

@@ -99,3 +99,70 @@ adminApp.filter('html', ['$sce', function ($sce) {
         return $sce.trustAsHtml(text);
     };
 }]);
+
+var commonApp = angular.module('commonApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate']);
+
+commonApp.controller('NewsUserController',function($scope,requestHandler,Flash,$sce,$routeParams){
+
+
+
+    // To display Testimonials as user
+    $scope.doGetNewsByUser=function(){
+
+        requestHandler.getRequest("getLatestNewsByUser/", "").then(function(response){
+
+            $scope.usernewslist=response.data.News;
+/*var date = new Date($scope.usernewslist.datetime);
+            $scope.dateformat = date.getDate();
+            alert($scope.dateformat);*/
+          //  $scope.usertestimonialdetails = response.data.Testimonials[0];
+
+        },function(){
+            errorMessage(Flash,"Please try again later!")
+        });
+    };
+
+   /* $scope.doGetNewsDetailsByUser= function (id) {
+        //  alert("hi");
+        requestHandler.getRequest("getTestimonialDetail/"+id, "").then(function(response){
+
+            //View the image in ng-src for view testimonials
+            $scope.myImgSrc = $sce.trustAsResourceUrl(response.data.Testimonials.imageurl+"?decache="+Math.random());
+
+            $scope.usertestimonialdetails=response.data.Testimonials
+
+        },function(){
+            errorMessage(Flash,"Please try again later!")
+        });
+
+    };*/
+
+    // To display the user Testimonial list on load
+    $scope.doGetNewsByUser();
+   // $scope.doGetTestimonialDetailsByUser($routeParams.id);
+
+
+});
+
+// html filter (render text as html)
+commonApp.filter('html', ['$sce', function ($sce) {
+    return function (text) {
+        return $sce.trustAsHtml(text);
+    };
+}]);
+
+
+
+commonApp.filter('toSec', function($filter) {
+
+    return function(input) {
+       // alert("i");
+       /* alert(new Date());
+        alert("input"+input);
+        var dateformat = $filter('date')(input, 'MM/dd/yyyy hh:mm:ss');*/
+       /* alert(dateformat);*/
+        var result = new Date(input).getTime();
+       // alert(result);
+        return result || '';
+    };
+});

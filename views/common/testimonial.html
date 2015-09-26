@@ -34,7 +34,7 @@
                                     <div class="testimonials-carousel-content">
 
                                         <a href="" ng-click="doGetTestimonialDetailsByUser(usertestimonial.testimonialid)">{{usertestimonial.title}}</a>
-                                        <p>{{usertestimonial.description}}</p>
+                                        <p ng-bind-html="usertestimonial.description | html"></p>
                                         <div><strong>{{usertestimonial.givenby}}</strong></div>
 
                                     </div>
@@ -52,6 +52,7 @@
 
 <script type="text/javascript">
     $(function () {
+        $("html,body").scrollTop(0);
         $(".vertical-items").bootstrapNews({
             newsPerPage: 3,
             autoplay: true,

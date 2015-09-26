@@ -68,7 +68,7 @@ adminApp.controller('TestimonialEditController',function($scope,requestHandler,F
             delete response.data.Testimonials.datetime;
 
             //View the image in ng-src for view testimonials
-            $scope.myImgSrc = $sce.trustAsResourceUrl(response.data.Testimonials.imageurl);
+            $scope.myImgSrc = $sce.trustAsResourceUrl(response.data.Testimonials.imageurl+"?decache="+Math.random());
 
             // View the image in image cropit preview in edit testimonials
             $('.image-editor').cropit({
@@ -128,7 +128,7 @@ commonApp.controller('TestimonialUserController',function($scope,requestHandler,
 
             $scope.usertestimoniallist=response.data.Testimonials;
 
-            $scope.myImgSrc = $sce.trustAsResourceUrl(response.data.Testimonials[0].imageurl);
+            $scope.myImgSrc = $sce.trustAsResourceUrl(response.data.Testimonials[0].imageurl+"?decache="+Math.random());
             $scope.usertestimonialdetails = response.data.Testimonials[0];
 
         },function(){
@@ -141,7 +141,7 @@ commonApp.controller('TestimonialUserController',function($scope,requestHandler,
         requestHandler.getRequest("getTestimonialDetail/"+id, "").then(function(response){
 
             //View the image in ng-src for view testimonials
-            $scope.myImgSrc = $sce.trustAsResourceUrl(response.data.Testimonials.imageurl);
+            $scope.myImgSrc = $sce.trustAsResourceUrl(response.data.Testimonials.imageurl+"?decache="+Math.random());
 
             $scope.usertestimonialdetails=response.data.Testimonials
 
