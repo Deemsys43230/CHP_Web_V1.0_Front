@@ -48,14 +48,7 @@ adminApp.controller('InstructionController',function($scope,requestHandler,Flash
     // Display User Instruction details On Page Load
     $scope.doGetAdminInstruction();
 
-});
-
-// html filter (render text as html)
-adminApp.filter('html', ['$sce', function ($sce) {
-    return function (text) {
-        return $sce.trustAsHtml(text);
-    };
-}]);*/
+});*/
 
 var commonApp = angular.module('commonApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate']);
 
@@ -73,8 +66,6 @@ commonApp.controller('InstructionUserController',function($scope,requestHandler,
     $scope.doGetUserInstruction();
 
 });
-
-
 
 // html filter (render text as html)
 commonApp.filter('html', ['$sce', function ($sce) {

@@ -56,7 +56,7 @@ adminApp.controller('TestimonialController',function($scope,requestHandler,Flash
 
 adminApp.controller('TestimonialEditController',function($scope,requestHandler,Flash,$location,$routeParams,$sce) {
 
-    $scope.activeClass = {news:'active'};
+    $scope.activeClass = {testimonial:'active'};
 
     var original ="";
     //To display Latest News based on newsid
@@ -104,16 +104,17 @@ adminApp.controller('TestimonialEditController',function($scope,requestHandler,F
             errorMessage(Flash, "Please try again later!")
         });
     };
-
-
-
     //Display Edit Page with date On load
     $scope.doGetTestimonialsAdminByID();
 
-
-
-
 });
+
+// html filter (render text as html)
+adminApp.filter('html', ['$sce', function ($sce) {
+    return function (text) {
+        return $sce.trustAsHtml(text);
+    };
+}]);
 
 
 var commonApp = angular.module('commonApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate']);
@@ -161,13 +162,6 @@ commonApp.controller('TestimonialUserController',function($scope,requestHandler,
 commonApp.filter('trusted', ['$sce', function ($sce) {
     return function(url) {
         return $sce.trustAsResourceUrl(url);
-    };
-}]);
-
-// html filter (render text as html)
-adminApp.filter('html', ['$sce', function ($sce) {
-    return function (text) {
-        return $sce.trustAsHtml(text);
     };
 }]);
 

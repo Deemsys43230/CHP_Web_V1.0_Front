@@ -246,6 +246,8 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../plugin/text-editor/summernote.js',
                                 '../../plugin/text-editor/summernote.css',
                                 '../../css/testimonial-image-upload.css',
+                                '../../plugin/text-editor/summernote.js',
+                                '../../plugin/text-editor/summernote.css',
                                 '../../js/image-upload.js'
                             ]
                         })
@@ -265,6 +267,8 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../plugin/text-editor/summernote.js',
                                 '../../plugin/text-editor/summernote.css',
                                 '../../css/testimonial-image-upload.css',
+                                '../../plugin/text-editor/summernote.js',
+                                '../../plugin/text-editor/summernote.css',
                                 '../../js/image-upload.js'
                             ]
                         })

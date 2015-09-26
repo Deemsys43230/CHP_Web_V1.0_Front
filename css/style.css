@@ -6890,6 +6890,23 @@ ul.food li p.food_name{
     margin: 0;
 }
 
+
+.measure_input
+{
+    font-size: 14px;
+    color: #333;
+    padding: 5px 8px;
+    width: 120px;
+    border:0px !important;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    -webkit-box-shadow: inset 0px 0px 3px rgba(0,0,0,0.3);
+    -moz-box-shadow: inset 0px 0px 3px rgba(0,0,0,0.3);
+    box-shadow: inset 0px 0px 3px rgba(0,0,0,0.3);
+    outline: 0;
+    margin: 0;
+}
+
 .set_goal{
     text-align: center;
     width: 100%;
@@ -7153,6 +7170,10 @@ ul.sidebar-menu li a{
 
 .option-col{
     width:18% !important;
+}
+
+.author-col{
+    width:30% !important;
 }
 
 .option-col1{
@@ -7841,4 +7862,8 @@ input[type=range]:focus::-ms-fill-upper {
 	background: -o-linear-gradient(to right, rgba(255, 255, 255, 0), white 45%, white);
 	background: -ms-linear-gradient(to right, rgba(255, 255, 255, 0), white 45%, white);
 	background: linear-gradient(to right, rgba(255, 255, 255, 0), white 45%, white);
+}
+
+.measure-input{
+	width: 30px !important;
 }

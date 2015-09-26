@@ -62,8 +62,7 @@
                                      <span ng-show="testimonialForm.description.$dirty&&testimonialForm.description.$invalid">
                                   <span class="error-message textarea-errormessage40" ng-show="testimonialForm.description.$error.required"><span>Required.</span></span>
                              </span>
-                                    <summernote id="summernote" name="description" ng-model="testimonials.description" required></summernote>
-
+                                    <summernote id="summernote" name="description"  ng-model="testimonials.description" required></summernote>
                                 </div>
                             </div>
                         </div>
@@ -82,9 +81,8 @@
 <!-- End Page Banner -->
 
 <script type="text/javascript" src="../../js/script.js"></script>
-<!--
+
+
 <script>
-$(function(){
-$('.image-editor').cropit();
-});
-</script>-->
+    $('#summernote').summernote({height:200});
+</script>
