@@ -126,6 +126,7 @@ commonApp.controller('TestimonialUserController',function($scope,requestHandler,
 
         requestHandler.getRequest("getTestimonialListByUser/", "").then(function(response){
 
+
             $scope.usertestimoniallist=response.data.Testimonials;
 
             $scope.myImgSrc = $sce.trustAsResourceUrl(response.data.Testimonials[0].imageurl+"?decache="+Math.random());
@@ -166,6 +167,7 @@ commonApp.filter('trusted', ['$sce', function ($sce) {
 }]);
 
 // html filter (render text as html)
+
 commonApp.filter('html', ['$sce', function ($sce) {
     return function (text) {
         return $sce.trustAsHtml(text);

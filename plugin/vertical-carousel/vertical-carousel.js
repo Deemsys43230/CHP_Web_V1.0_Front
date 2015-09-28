@@ -191,7 +191,7 @@ if (typeof Object.create !== 'function') {
         },
 
         onPrev: function() {
-            
+
             var self = this;
 
             if ( self.animationStarted ) {
@@ -221,6 +221,7 @@ if (typeof Object.create !== 'function') {
         },
 
         onNext: function() {
+
             var self = this;
 
             if ( self.animationStarted ) {
@@ -229,11 +230,11 @@ if (typeof Object.create !== 'function') {
 
             self.animationStarted = true;
 
-            var html = '<' + self.newsTagName + ' style="display:none;" class=' + self.newsClassName + '>' + $(self.$elem).find(self.newsTagName).first().html() + '</' + self.newsTagName + '>';
+            var html = '<' + self.newsTagName + ' style="display:none;" class="' + self.newsClassName + '">' + $(self.$elem).find(self.newsTagName).first().html() + '</' + self.newsTagName + '>';
             $(self.$elem).append(html);
 
             $(self.$elem).find(self.newsTagName).first().slideUp(self.options.animationSpeed, function(){
-                $(this).remove();
+               $(this).remove();
             });
 
             $(self.$elem).find(self.newsTagName +':nth-child(' + parseInt(self.options.newsPerPage + 1) + ')').slideDown(self.options.animationSpeed, function(){
