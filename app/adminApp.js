@@ -469,7 +469,7 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 }
             }).
             when('/food-edit', {
-                templateUrl: 'views/food-edit.html',
+                templateUrl: 'views/food-add-or-edit.html',
                 resolve: {
                     loadMyFiles:function($ocLazyLoad) {
                         return $ocLazyLoad.load({
@@ -501,21 +501,39 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 }
             }).
             when('/addFood', {
-                templateUrl: 'views/add-food.html',
+                templateUrl: 'views/food-add-or-edit.html',
                 resolve: {
                     loadMyFiles:function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
                                 '../../js/bootstrap.min.js',
-                                '../../css/input-tag.css',
-                                '../../css/custom-inputs.css',
                                 '../../plugin/popup/style.css',
-                                '../../plugin/popup/jquery.leanModal.min.js'
+                                '../../plugin/popup/jquery.leanModal.min.js',
+                                '../../css/food-image-upload.css',
+                                '../../js/image-upload.js',
+                                '../../css/input-tag.css',
+                                '../../css/custom-inputs.css'
                             ]
                         })
                     }
                 }
+            }).
+            when('/uploadFood', {
+                templateUrl: 'views/upload-food.html',
+                resolve: {
+                    loadMyFiles:function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'adminApp',
+                            files:[
+                                '../../js/bootstrap.min.js',
+                                '../../plugin/file-upload/angular-file-upload.min.js',
+                                '../../app/food/foodController.js'
+                            ]
+                        })
+                    }
+                },
+                controller:'FoodController'
             }).
             when('/course', {
                 templateUrl: 'views/course.html',

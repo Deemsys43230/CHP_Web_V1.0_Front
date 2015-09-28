@@ -6421,6 +6421,21 @@ a.register_button:hover{
     cursor: pointer;
 }
 
+a.cancel_button{
+    font-size: 15px;
+     padding:8px 50px;
+     font-weight: bold;
+     background-color:transparent;
+     border: 2px solid #ED6347;
+     color: #ED6347;
+ }
+
+a.cancel_button:hover{
+    color: #fff;
+    background-color:#ED6347;
+    cursor: pointer;
+}
+
 a.main_button {
     margin-top: 10px !important;
     font-size: 14px;
@@ -7866,4 +7881,43 @@ input[type=range]:focus::-ms-fill-upper {
 
 .measure-input{
 	width: 30px !important;
+}
+
+.wrap{
+	word-break: break-all!important;
+}
+
+.width-200{
+	width: 200px !important;
+}
+
+.file-upload-progress{
+	background: #ddd;
+	height: 10px;
+}
+
+.food-fileUpload {
+	position: relative;
+	overflow: hidden;
+}
+.food-fileUpload input.upload {
+	position: absolute;
+	top: 0;
+	right: 0;
+	margin: 0;
+	padding: 0;
+	height: 100px!important;
+	width: 100% !important;
+	font-size: 20px;
+	cursor: pointer;
+	opacity: 0;
+	filter: alpha(opacity=0);
+}
+
+.food-upload-button{
+	height: 100px !important;
+	text-align: center;
+	padding-top: 35px;
+	color: #bbb;
+	border: 3px dotted #bbb;
 }
