@@ -4,6 +4,11 @@ adminApp.controller('PrivacyPolicyController',function($scope,requestHandler,Fla
 
     $scope.activeClass = {policy:'active'};
 
+    //summer note
+    $scope.options = {
+        height: 250
+    };
+
    // To display privacy policy details
     var original="";
     $scope.doGetPrivacyPolicy=function(){

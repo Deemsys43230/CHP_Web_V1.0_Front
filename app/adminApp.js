@@ -56,10 +56,7 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
-                                '../../js/bootstrap.min.js',
-                                '../../css/custom-inputs.css',
-                                '../../plugin/datepicker/bootstrap-datepicker.js',
-                                '../../plugin/datepicker/datepicker.css'
+                                '../../js/bootstrap.min.js'
                             ]
                         })
                     }
@@ -169,7 +166,7 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 controller:'LatestNewsController'
             }).
             when('/addLatestNews', {
-                templateUrl: 'views/site-add-news.html',
+                templateUrl: 'views/site-add-or-edit-news.html',
                 resolve: {
                     loadMyFiles:function($ocLazyLoad) {
                         return $ocLazyLoad.load({
@@ -186,7 +183,7 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 controller:'LatestNewsController'
             }).
             when('/editLatestNews/:id', {
-                templateUrl: 'views/site-add-news.html',
+                templateUrl: 'views/site-add-or-edit-news.html',
                 resolve: {
                     loadMyFiles:function($ocLazyLoad) {
                         return $ocLazyLoad.load({
@@ -246,8 +243,6 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../plugin/text-editor/summernote.js',
                                 '../../plugin/text-editor/summernote.css',
                                 '../../css/testimonial-image-upload.css',
-                                '../../plugin/text-editor/summernote.js',
-                                '../../plugin/text-editor/summernote.css',
                                 '../../js/image-upload.js'
                             ]
                         })
@@ -267,8 +262,6 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../plugin/text-editor/summernote.js',
                                 '../../plugin/text-editor/summernote.css',
                                 '../../css/testimonial-image-upload.css',
-                                '../../plugin/text-editor/summernote.js',
-                                '../../plugin/text-editor/summernote.css',
                                 '../../js/image-upload.js'
                             ]
                         })
@@ -283,10 +276,7 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
-                                '../../js/bootstrap.min.js',
-                                '../../app/testimonial/testimonialController.js',
-                                '../../css/testimonial-image-upload.css',
-                                '../../js/image-upload.js'
+                                '../../js/bootstrap.min.js'
                             ]
                         })
                     }

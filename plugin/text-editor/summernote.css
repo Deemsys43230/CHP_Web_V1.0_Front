@@ -34,16 +34,16 @@
     width: 100%;
 }
 .note-editor.fullscreen .note-editable {
-    background-color: white
+    background-color: white;
 }
 .note-editor.fullscreen .note-resizebar {
-    display: none
+    display: none;
 }
 .note-editor.codeview .note-editable {
-    display: none
+    display: none;
 }
 .note-editor.codeview .note-codable {
-    display: block
+    display: block;
 }
 .note-editor .note-toolbar {
     padding-bottom: 5px;

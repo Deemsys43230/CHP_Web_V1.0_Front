@@ -32,13 +32,13 @@
                              <span ng-show="latestNewsForm.description.$dirty&&latestNewsForm.description.$invalid">
                                   <span class="error-message textarea-errormessage40" ng-show="latestNewsForm.description.$error.required"><span>Required.</span></span>
                              </span>
-                            <summernote id="summernote" name="description" ng-model="latest.description"></summernote>
+                            <div summernote config="options" name="content"  ng-model="latest.description" required></div>
                         </div>
                     </form>
                 </div>
                 <div class="text-center margin-top-20">
                     <a href="" class="btn btn-success" ng-disabled="latestNewsForm.$invalid" ng-click="doAddLatestNews()" ng-show="isNew">Add Latest News</a>
-                    <a href="" class="btn btn-success" ng-disabled="isClean() || latestNewsForm.$invalid" ng-click="doUpdateLatestNews()" ng-hide="isNew">Save Changes</a>
+                    <a href="" class="btn btn-success" ng-disabled="latestNewsForm.$invalid" ng-click="doUpdateLatestNews()" ng-hide="isNew">Save Changes</a>
                     <a href="#latestNews" class="btn btn-warning">Cancel</a>
                 </div>
             </div>
@@ -47,9 +47,4 @@
 </div>
 
 <!-- End Page Banner -->
-
-<script>
-    $('#summernote').summernote({height:250});
-</script>
-
 <script type="text/javascript" src="../../js/script.js"></script>

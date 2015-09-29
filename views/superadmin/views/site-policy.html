@@ -29,12 +29,12 @@
                             <span ng-show="privacyPolicyForm.content.$dirty&&privacyPolicyForm.content.$invalid">
                                   <span class="error-message textarea-errormessage40" ng-show="privacyPolicyForm.content.$error.required"><span>Required.</span></span>
                              </span>
-                            <summernote id="summernote" name="content"  ng-model="privacypolicydetails.content" required></summernote>
+                            <div summernote config="options" name="content"  ng-model="privacypolicydetails.content" required></div>
                         </div>
                     </form>
                 </div>
                 <div class="text-center margin-top-10">
-                    <a href="" class="btn btn-success" ng-disabled="isClean() || privacyPolicyForm.$invalid" ng-click="doUpdatePrivacyPolicy()">Save Changes</a>
+                    <a href="" class="btn btn-success" ng-disabled="privacyPolicyForm.$invalid" ng-click="doUpdatePrivacyPolicy()">Save Changes</a>
                 </div>
             </div>
         </div>
@@ -42,10 +42,5 @@
 </div>
 
 <!-- End Page Banner -->
-
-<!-- text editor -->
-<script type='text/javascript'>//<![CDATA[
-    $('#summernote').summernote({height: 200});
-</script>
 
 <script type="text/javascript" src="../../js/script.js"></script>

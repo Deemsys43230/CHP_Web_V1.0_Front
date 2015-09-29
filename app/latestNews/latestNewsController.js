@@ -5,6 +5,11 @@ adminApp.controller('LatestNewsController',function($scope,requestHandler,Flash,
     $scope.title = "Add Latest News";
     $scope.activeClass = {news:'active'};
 
+    //summer note
+    $scope.options = {
+        height: 250
+    };
+
     // To display Latest news
     $scope.doGetLatestNews=function(){
         $scope.loaded=true;

@@ -5,6 +5,11 @@ adminApp.controller('TermsOfUseController',function($scope,requestHandler,Flash)
 
     $scope.activeClass = {terms:'active'};
 
+    //summer note
+    $scope.options = {
+        height: 250
+    };
+
     var original="";
     $scope.doGetTermsOfUse=function(){
         requestHandler.getRequest("getLegalByName/Termsofuse/", "").then(function(response){

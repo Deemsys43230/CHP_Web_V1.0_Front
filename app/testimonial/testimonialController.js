@@ -5,6 +5,11 @@ adminApp.controller('TestimonialController',function($scope,requestHandler,Flash
     $scope.title = "Add Testimonial";
     $scope.activeClass = {testimonial:'active'};
 
+    //summer note
+    $scope.options = {
+        height: 250
+    };
+
     // To display Testimonials admin view
     $scope.doGetTestimonialsByAdmin=function(){
 
