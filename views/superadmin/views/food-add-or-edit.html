@@ -26,13 +26,9 @@
                                 <h4>Categories :</h4>
                             </div>
                             <div class="col-md-10">
-                                <select multiple data-role="tagsinput" class="form-control">
-                                    <option value="Amsterdam">Amsterdam</option>
-                                    <option value="Washington">Washington</option>
-                                    <option value="Sydney">Sydney</option>
-                                    <option value="Beijing">Beijing</option>
-                                    <option value="Cairo">Cairo</option>
-                                </select>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="categories" value="Biriyani,NonVegetarian,Chicken" placeholder="Type something and hit enter" />
+                                </div>
                                 <hr/>
                             </div>
                         </div>
@@ -60,13 +56,9 @@
                                 <h4>Tags :</h4>
                             </div>
                             <div class="col-md-10">
-                                <select multiple data-role="tagsinput" class="form-control">
-                                    <option value="Amsterdam">Amsterdam</option>
-                                    <option value="Washington">Washington</option>
-                                    <option value="Sydney">Sydney</option>
-                                    <option value="Beijing">Beijing</option>
-                                    <option value="Cairo">Cairo</option>
-                                </select>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="tags" value="Lunch,Heavy,Food" placeholder="Type something and hit enter" />
+                                </div>
                                 <hr/>
                             </div>
                         </div>
@@ -161,11 +153,11 @@
                 <div class="action_btns margin-top-20">
                     <div class="one_half">
                         <div class="fileUpload food-button">
-                            <span>Choose File</span>
+                            <span>Choose Image</span>
                             <input type="file" class="upload cropit-image-input" />
                         </div>
                     </div>
-                    <div class="one_half last"><a href="" onclick="return false;" class="food-button export modal_close">Upload Image</a></div>
+                    <div class="one_half last"><a href="" onclick="return false;" class="food-button export modal_close">Save Image</a></div>
                 </div>
             </div>
         </div>
@@ -227,6 +219,29 @@
     });
 </script>
 
-<script type="text/javascript" src="../../js/input-tag.js"></script>
+<script type="text/javascript">
+    jQuery(document).ready(function($) {
+
+        $('#categories').tokenfield({
+            autocomplete: {
+                source: ['Vegetarian','Meals','Sea Food','Chiense','Ice Creams'],
+                delay: 100
+            },
+            showAutocompleteOnFocus: true,
+            delimiter: [',',' ', '-', '_']
+        });
+
+        $('#tags').tokenfield({
+            autocomplete: {
+                source: ['Biriyani','Chicken','Lunch','black','white'],
+                delay: 100
+            },
+            showAutocompleteOnFocus: true,
+            delimiter: [',',' ', '-', '_']
+        });
+
+    });
+</script>
+
 
 
