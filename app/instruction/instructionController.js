@@ -5,7 +5,14 @@ adminApp.controller('InstructionController',function($scope,requestHandler,Flash
     $scope.activeClass = {instruction:'active'};
 
     var original="";
+
+    //summer note
+    $scope.options = {
+        height: 250
+    };
+
     $scope.doGetInstruction=function(){
+
         requestHandler.getRequest("getLegalByName/Instructions/", "").then(function(response){
             original=angular.copy(response.data.Legal_Data);
             $scope.instructions=response.data.Legal_Data;
@@ -33,6 +40,27 @@ adminApp.controller('InstructionController',function($scope,requestHandler,Flash
     // Display Instruction details On Page Load
     $scope.doGetInstruction();
 
+});
+
+adminApp.controller('CallbacksCtrl', function($scope) {
+    $scope.init = function() { console.log('Summernote is launched'); };
+    $scope.enter = function() { console.log('Enter/Return key pressed'); };
+    $scope.focus = function(e) { console.log('Editable area is focused'); };
+    $scope.blur = function(e) { console.log('Editable area loses focus'); };
+    $scope.paste = function(e) {
+        console.log('Called event paste: ' +  e.originalEvent.clipboardData.getData('text'));
+    };
+    $scope.change = function(contents) {
+        console.log('contents are changed:', contents, $scope.editable);
+    };
+    $scope.keyup = function(e) { console.log('Key is released:', e.keyCode); };
+    $scope.keydown = function(e) { console.log('Key is pressed:', e.keyCode); };
+    $scope.toolbarClick = function(e) { console.log('Toolbar is clicked:', e); };
+    $scope.imageUpload = function(files) {
+        console.log('image upload:', files);
+        console.log('image upload\'s editor:', $scope.editor);
+        console.log('image upload\'s editable:', $scope.editable);
+    };
 });
 
 /*adminApp.controller('InstructionAdminController',function($scope,requestHandler,Flash) {

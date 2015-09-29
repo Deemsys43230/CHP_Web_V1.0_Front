@@ -476,12 +476,15 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                             name:'adminApp',
                             files:[
                                 '../../js/bootstrap.min.js',
-                                '../../css/input-tag.css',
-                                '../../css/custom-inputs.css',
                                 '../../plugin/popup/style.css',
                                 '../../plugin/popup/jquery.leanModal.min.js',
                                 '../../css/food-image-upload.css',
-                                '../../js/image-upload.js'
+                                '../../js/image-upload.js',
+                                '../../css/custom-inputs.css',
+                                '../../plugin/input-tag/bootstrap-tokenfield.css',
+                                '../../plugin/input-tag/bootstrap-tokenfield.js',
+                                '../../plugin/input-tag/jquery-ui.css',
+                                '../../plugin/input-tag/jquery-ui.js'
                             ]
                         })
                     }
@@ -512,8 +515,11 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../plugin/popup/jquery.leanModal.min.js',
                                 '../../css/food-image-upload.css',
                                 '../../js/image-upload.js',
-                                '../../css/input-tag.css',
-                                '../../css/custom-inputs.css'
+                                '../../css/custom-inputs.css',
+                                '../../plugin/input-tag/bootstrap-tokenfield.css',
+                                '../../plugin/input-tag/bootstrap-tokenfield.js',
+                                '../../plugin/input-tag/jquery-ui.css',
+                                '../../plugin/input-tag/jquery-ui.js'
                             ]
                         })
                     }
