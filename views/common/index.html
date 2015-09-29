@@ -480,24 +480,22 @@
             <div class="col-md-12">
 
                 <!-- Start Recent Posts Carousel -->
-                <div class="latest-posts" >
+                <div class="latest-posts" ng-controller="NewsUserController" >
                     <h4 class="classic-title"><span>Latest News</span></h4>
-                    <div class="latest-posts-classic custom-carousel touch-carousel" data-appeared-items="3">
-
-                        <!-- Posts 1 -->
-                        <div class="post-row item">
+                    <div class="latest-posts-classic custom-carousel touch-carousel"  data-appeared-items="3" data-navigation="true" >
+                    <!-- Posts 1 -->
+                        <div class="post-row item" ng-repeat="usernews in usernewslist">
                             <div class="left-meta-post">
-                                <div class="post-date"><span class="day">28</span><span class="month">Dec</span></div>
+                                <div class="post-date"><span class="day">{{ usernews.datetime | toSec | date:'dd'}}</span><span class="month">{{ usernews.datetime | toSec | date:'MMM'}}</span></div>
                                 <div class="post-type"><i class="fa fa-picture-o"></i></div>
                             </div>
-                            <h3 class="post-title"><a href="#">sample</a></h3>
-                            <div class="post-content">
-                                <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit. <a class="read-more" href="#">Read More...</a></p>
-                            </div>
+                            <h3 class="post-title"><a href="#">{{usernews.title}}</a></h3>
+                             <div class="post-content">
+                            <p ng-bind-html="usernews.description | html"> <a class="read-more" href="#">Read More...</a></p>
+                             </div>
                         </div>
-
-                        <!--&lt;!&ndash; Posts 2 &ndash;&gt;
-                        <div class="post-row item">
+                        <!-- Posts 2 -->
+                        <!--<div class="post-row item">
                             <div class="left-meta-post">
                                 <div class="post-date"><span class="day">26</span><span class="month">Dec</span></div>
                                 <div class="post-type"><i class="fa fa-picture-o"></i></div>
@@ -508,7 +506,6 @@
                             </div>
                         </div>
 
-                        &lt;!&ndash; Posts 3 &ndash;&gt;
                         <div class="post-row item">
                             <div class="left-meta-post">
                                 <div class="post-date"><span class="day">26</span><span class="month">Dec</span></div>
@@ -520,7 +517,6 @@
                             </div>
                         </div>
 
-                        &lt;!&ndash; Posts 4 &ndash;&gt;
                         <div class="post-row item">
                             <div class="left-meta-post">
                                 <div class="post-date"><span class="day">26</span><span class="month">Dec</span></div>
@@ -532,7 +528,6 @@
                             </div>
                         </div>
 
-                        &lt;!&ndash; Posts 5 &ndash;&gt;
                         <div class="post-row item">
                             <div class="left-meta-post">
                                 <div class="post-date"><span class="day">26</span><span class="month">Dec</span></div>
@@ -544,7 +539,6 @@
                             </div>
                         </div>
 
-                        &lt;!&ndash; Posts 6 &ndash;&gt;
                         <div class="post-row item">
                             <div class="left-meta-post">
                                 <div class="post-date"><span class="day">26</span><span class="month">Dec</span></div>
@@ -556,12 +550,12 @@
                             </div>
                         </div>-->
 
-                    </div>
                 </div>
                 <!-- End Recent Posts Carousel -->
                 <hr>
             </div>
         </div>
+    </div>
     </div>
 </div>
 <!-- End Testimonials Section -->

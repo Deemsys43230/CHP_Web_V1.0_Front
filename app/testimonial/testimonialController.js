@@ -70,16 +70,20 @@ adminApp.controller('TestimonialEditController',function($scope,requestHandler,F
             //View the image in ng-src for view testimonials
             $scope.myImgSrc = $sce.trustAsResourceUrl(response.data.Testimonials.imageurl+"?decache="+Math.random());
 
+            //Set values to display data in edit testimonial
+            $scope.testimonials=response.data.Testimonials;
+
+            // Change the url hostname to localhost
+            $scope.testimonials.imageurl = $scope.testimonials.imageurl.substring($scope.testimonials.imageurl.indexOf("/") + 14, $scope.testimonials.imageurl.length);
+            $scope.testimonials.imageurl = "http://localhost"+$scope.testimonials.imageurl;
+
+
             // View the image in image cropit preview in edit testimonials
             $('.image-editor').cropit({
                 imageState: {
-                    src: response.data.Testimonials.imageurl+"?decache="+Math.random()
+                    src: $scope.testimonials.imageurl+"?decache="+Math.random()
                 }
             });
-            original=angular.copy(response.data.Testimonials.imageurl);
-            $scope.testimonials=response.data.Testimonials;
-
-
 
 
         },function(){
@@ -87,22 +91,43 @@ adminApp.controller('TestimonialEditController',function($scope,requestHandler,F
         });
     };
 
+// Function to convert image url to base64
+    $scope.convertImgToBase64=function(url, callback, outputFormat){
+        var img = new Image();
+        img.crossOrigin = 'Anonymous';
+        img.onload = function(){
+            var canvas = document.createElement('CANVAS');
+            var ctx = canvas.getContext('2d');
+            canvas.height = this.height;
+            canvas.width = this.width;
+            ctx.drawImage(this,0,0);
+            var dataURL = canvas.toDataURL(outputFormat || 'image/jpg');
+            callback(dataURL);
+            canvas = null;
+        };
+        img.src = url;
+    };
 
     //To update Latest News
     $scope.doUpdateTestimonials = function(){
-       // alert("hi");
-        // convert the image to base64 while editing the image
-       $scope.testimonials.imageurl = $('.image-editor').cropit('export');
 
-        //alert($scope.testimonials.imageurl);
+        $scope.convertImgToBase64($scope.testimonials.imageurl, function(base64Img){
 
-        requestHandler.putRequest("admin/insertorupdateTestimonial/",$scope.testimonials).then(function(response){
-            successMessage(Flash,"Successfully Updated");
-            $location.path("testimonials");
+            //Convert the image url to base64 when image is not edited
+            $scope.testimonials.imageurl=base64Img;
 
-        }, function () {
-            errorMessage(Flash, "Please try again later!")
+            //Convert the image url to base64 when image is edited
+            $scope.testimonials.imageurl = $('.image-editor').cropit('export');
+
+            requestHandler.putRequest("admin/insertorupdateTestimonial/",$scope.testimonials).then(function(response){
+                successMessage(Flash,"Successfully Updated");
+                $location.path("testimonials");
+
+            }, function () {
+                errorMessage(Flash, "Please try again later!")
+            });
         });
+
     };
     //Display Edit Page with date On load
     $scope.doGetTestimonialsAdminByID();

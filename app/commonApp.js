@@ -56,7 +56,7 @@ commonApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                             files:[
                                 'plugin/vertical-carousel/vertical-carousel.js',
                                 'plugin/vertical-carousel/vertical-carousel.css',
-                                'app/testimonial/testimonialController.js'
+                                'app/commonController.js'
                             ]
                         })
                     }

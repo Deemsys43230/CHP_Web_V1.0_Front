@@ -103,7 +103,7 @@ adminApp.filter('htmlnews', ['$sce', function ($sce) {
 var commonApp = angular.module('commonApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate']);
 
 commonApp.controller('NewsUserController',function($scope,requestHandler,Flash){
-
+alert("ok");
     // To display Testimonials as user
     $scope.doGetNewsByUser=function(){
 
@@ -125,7 +125,7 @@ commonApp.controller('NewsUserController',function($scope,requestHandler,Flash){
 });
 
 // html filter (render text as html)
-commonApp.filter('htmlnews', ['$sce', function ($sce) {
+commonApp.filter('html', ['$sce', function ($sce) {
     return function (text) {
         return $sce.trustAsHtml(text);
     };

@@ -205,10 +205,15 @@ $(document).ready(function ($) {
 	
 	
 	////------- Custom Carousel
+	setTimeout(function(){
 	$('.custom-carousel').each(function(){
+
 		var owl = jQuery(this),
+
 			itemsNum = $(this).attr('data-appeared-items'),
 			sliderNavigation = $(this).attr('data-navigation');
+
+
 			
 		if ( sliderNavigation == 'false' || sliderNavigation == '0' ) {
 			var returnSliderNavigation = false
@@ -216,11 +221,13 @@ $(document).ready(function ($) {
 			var returnSliderNavigation = true
 		}
 		if( itemsNum == 1) {
+
 			var deskitemsNum = 1;
 			var desksmallitemsNum = 1;
 			var tabletitemsNum = 1;
 		} 
 		else if (itemsNum >= 2 && itemsNum < 4) {
+
 			var deskitemsNum = itemsNum;
 			var desksmallitemsNum = itemsNum - 1;
 			var tabletitemsNum = itemsNum - 1;
@@ -251,12 +258,18 @@ $(document).ready(function ($) {
 		});
 	});
 
+		$('.touch-carousel').find('.owl-prev').html('<i class="fa fa-angle-left"></i>');
+		$('.touch-carousel').find('.owl-next').html('<i class="fa fa-angle-right"></i>');
+	},1000);
 
 	////------- Custom Carousel
 	$('.clients-carousel').each(function(){
+
 		var owl = jQuery(this),
+
 			itemsNum = $(this).attr('data-appeared-items'),
 			sliderNavigation = $(this).attr('data-navigation');
+
 
 		if ( sliderNavigation == 'false' || sliderNavigation == '0' ) {
 			var returnSliderNavigation = false
@@ -284,6 +297,7 @@ $(document).ready(function ($) {
 			var tabletitemsNum = itemsNum - 8;
 		}
 		owl.owlCarousel({
+
 			slideSpeed : 300,
 			stopOnHover: true,
 			autoPlay: false,
