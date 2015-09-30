@@ -11,7 +11,7 @@
                     <div class="media-body">
                         <h4>{{usertestimonialdetails.title}}</h4>
                         <p class="margin-top-10">{{usertestimonialdetails.description}}</p>
-                        <div class="margin-top-10"><strong>- {{usertestimonialdetails.givenby}},</strong></div>
+                        <div class="margin-top-10 pull-right"><strong>- {{usertestimonialdetails.givenby}},</strong></div>
                     </div>
                 </div>
             </div>
@@ -35,7 +35,7 @@
 
                                         <a href="" ng-click="doGetTestimonialDetailsByUser(usertestimonial.testimonialid)">{{usertestimonial.title}}</a>
                                         <p ng-bind-html="usertestimonial.description | html"></p>
-                                        <div><strong>{{usertestimonial.givenby}}</strong></div>
+                                        <div><strong>-{{usertestimonial.givenby}},</strong></div>
 
                                     </div>
                                 </div>

@@ -31,8 +31,10 @@
                                     <div class="margin-top-20 col-md-12 no-padding">
                                         <div class="fileUpload btn btn-xs btn-primary">
                                             <span>Choose File</span>
-                                            <input type="file" name="image" class="upload cropit-image-input"   />
-
+                                            <input type="file" name="image" class="upload cropit-image-input" valid-file required  ng-model="testimonials.imageurl"/>
+                                <span ng-show="testimonialForm.image.$dirty&&testimonialForm.image.$invalid">
+                                  <span class="error-message" ng-show="testimonialForm.image.$error.required"><span>Required.</span></span>
+                             </span>
                                         </div>
                                     </div>
                                 </div>
