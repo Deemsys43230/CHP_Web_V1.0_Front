@@ -12,11 +12,12 @@ adminApp.controller('PrivacyPolicyController',function($scope,requestHandler,Fla
    // To display privacy policy details
     var original="";
     $scope.doGetPrivacyPolicy=function(){
+        $scope.loaded=true;
         requestHandler.getRequest("getLegalByName/Privacypolicy/", "").then(function(response){
 
             original=angular.copy(response.data.Legal_Data);
             $scope.privacypolicydetails=response.data.Legal_Data;
-            console.log($scope.privacypolicydetails);
+            $scope.loaded=false;
         },function(){
             errorMessage(Flash,"Please try again later!")
         });

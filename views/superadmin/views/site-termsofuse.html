@@ -24,8 +24,12 @@
                         <div class="col-md-2">
                             <h4>Content :</h4>
                         </div>
-
                         <div class="col-md-10">
+                            <div ng-if="loaded">
+                                <div class="loader-style">
+                                    <div class="loader"></div>
+                                </div>
+                            </div>
                             <span ng-show="termsOfUseForm.content.$dirty&&termsOfUseForm.content.$invalid">
                                 <span class="error-message textarea-errormessage40" ng-show="termsOfUseForm.content.$error.required"><span>Required.</span></span>
                             </span>

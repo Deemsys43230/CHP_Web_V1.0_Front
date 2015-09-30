@@ -12,10 +12,10 @@ adminApp.controller('TestimonialController',function($scope,requestHandler,Flash
 
     // To display Testimonials admin view
     $scope.doGetTestimonialsByAdmin=function(){
-
+        $scope.loaded=true;
         requestHandler.getRequest("admin/getTestimonialList/", "").then(function(response){
             $scope.admintestimonials=response.data.Testimonials;
-
+            $scope.loaded=false;
         },function(){
             errorMessage(Flash,"Please try again later!")
         });

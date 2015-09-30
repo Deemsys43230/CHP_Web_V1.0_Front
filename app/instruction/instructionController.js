@@ -12,10 +12,11 @@ adminApp.controller('InstructionController',function($scope,requestHandler,Flash
     };
 
     $scope.doGetInstruction=function(){
-
+        $scope.loaded=true;
         requestHandler.getRequest("getLegalByName/Instructions/", "").then(function(response){
             original=angular.copy(response.data.Legal_Data);
             $scope.instructions=response.data.Legal_Data;
+            $scope.loaded=false;
         },function(){
             errorMessage(Flash,"Please try again later!")
         });

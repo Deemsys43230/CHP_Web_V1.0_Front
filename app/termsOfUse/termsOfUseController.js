@@ -12,11 +12,12 @@ adminApp.controller('TermsOfUseController',function($scope,requestHandler,Flash)
 
     var original="";
     $scope.doGetTermsOfUse=function(){
+        $scope.loaded=true;
         requestHandler.getRequest("getLegalByName/Termsofuse/", "").then(function(response){
 
             original=angular.copy(response.data.Legal_Data);
-            console.log(response.data.Legal_Data);
             $scope.terms=response.data.Legal_Data;
+            $scope.loaded=false;
 
         },function(){
             errorMessage(Flash,"Please try again later!")
