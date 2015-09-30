@@ -60,6 +60,11 @@ adminApp.controller('LatestNewsEditController',function($scope,requestHandler,Fl
 
     $scope.activeClass = {news:'active'};
 
+    //summer note
+    $scope.options = {
+        height: 250
+    };
+
     var originalnews ="";
     //To display Latest News based on newsid
     $scope.doGetLatestNewsByID=function(){
