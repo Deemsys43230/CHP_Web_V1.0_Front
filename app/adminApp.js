@@ -69,8 +69,10 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
-                                '../../plugin/datepicker/bootstrap-datepicker.js',
-                                '../../plugin/datepicker/datepicker.css',
+                                '../../js/bootstrap.min.js',
+                                '../../plugin/date-picker/moment.js',
+                                '../../plugin/date-picker/pikaday.css',
+                                '../../plugin/date-picker/pikaday.js',
                                 '../../plugin/popup/style.css',
                                 '../../plugin/popup/jquery.leanModal.min.js',
                                 '../../css/profile-image-upload.css',

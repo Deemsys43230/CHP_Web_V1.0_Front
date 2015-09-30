@@ -459,7 +459,7 @@
                     <!-- End Tab Panels -->
                 </div>
                 <div class="col-md-5 margin-top-10">
-                    <i class="fa fa-calendar-o"></i> Date : <input type="text" class="main" value="02/16/2012" id="dp1" >
+                    <i class="fa fa-calendar-o"></i> Date : <input type="text" class="main" id="datepicker"/>
                 </div>
                 <div class="col-md-12 text-center margin-top-10">
                     <a href="" class="main_button">Done</a>
@@ -857,29 +857,15 @@
 </script>
 
 <script>
-    if (top.location != location) {
-        top.location.href = document.location.href ;
-    }
-    $(function(){
-        window.prettyPrint && prettyPrint();
-        $('#dp1').datepicker({
-            format: 'mm/dd/yyyy'
-        });
-        var startDate = new Date(2012,1,20);
-        var endDate = new Date(2020,1,25);
+    var picker = new Pikaday(
+            {
+                format:'MM/DD/YYYY',
+                field: document.getElementById('datepicker'),
+                firstDay: 1,
+                minDate: new Date(1940, 0, 1),
+                maxDate: new Date(new Date().getFullYear()-7, 12, 31),
+                yearRange: [1940, new Date().getFullYear()-7],
+                defaultDate: new Date(new Date().getFullYear()-25,0,1)
+            });
 
-        var checkin = $('#dpd1').datepicker({
-            onRender: function(date) {
-                return date.valueOf() < now.valueOf() ? 'disabled' : '';
-            }
-        }).on('changeDate', function(ev) {
-            if (ev.date.valueOf() > checkout.date.valueOf()) {
-                var newDate = new Date(ev.date)
-                newDate.setDate(newDate.getDate() + 1);
-                checkout.setValue(newDate);
-            }
-            checkin.hide();
-            $('#dpd2')[0].focus();
-        }).data('datepicker');
-    });
 </script>

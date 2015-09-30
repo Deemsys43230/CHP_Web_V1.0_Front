@@ -60,12 +60,13 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../css/vertical_tab.css',
                                 '../../plugin/circle/circle.css',
                                 '../../plugin/circle/jquery.circlechart.js',
-                                '../../plugin/datepicker/bootstrap-datepicker.js',
-                                '../../plugin/datepicker/datepicker.css',
+                                '../../plugin/date-picker/moment.js',
+                                '../../plugin/date-picker/pikaday.css',
+                                '../../plugin/date-picker/pikaday.js',
                                 '../../plugin/search/tipuedrop_content.js',
-                               '../../plugin/search/tipuedrop.css',
-                               '../../plugin/search/tipuedrop.js'
-                                ]
+                                '../../plugin/search/tipuedrop.css',
+                                '../../plugin/search/tipuedrop.js'
+                            ]
                         })
                     }
                 }
