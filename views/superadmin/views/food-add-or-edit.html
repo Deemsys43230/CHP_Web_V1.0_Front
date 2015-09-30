@@ -105,6 +105,7 @@
                                         <th>Carbo (g)</th>
                                         <th>Fibre (g)</th>
                                         <th>Calorie Intake</th>
+                                        <th>Options</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -115,6 +116,7 @@
                                         <td><input class="form-control"></td>
                                         <td><input class="form-control"></td>
                                         <td><input class="form-control"></td>
+                                        <td><a href="#minerals" class="btn btn-primary minerals-modal">View more</a> </td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -186,6 +188,87 @@
     </section>
 </div>
 
+
+<!-- Tag popup-->
+<div id="minerals" class="popupContainer width-40" style="display:none;">
+    <header class="popupHeader width-100">
+        <span class="header_title">add more minerals</span>
+        <span class="modal_close"><i class="fa fa-times"></i></span>
+    </header>
+
+    <section class="popupBody">
+        <!-- Register Form -->
+        <div class="common_model">
+            <form>
+                <div class="col-md-4">
+                    <p>name</p>
+                    <input type="text" />
+                </div>
+                <div class="col-md-4">
+                    <p>name</p>
+                    <input type="text" />
+                </div>
+                <div class="col-md-4">
+                    <p>Name</p>
+                    <input type="text" />
+                </div>
+                <div class="col-md-4">
+                    <p>Name</p>
+                    <input type="text" />
+                </div>
+                <div class="col-md-4">
+                    <p>Name</p>
+                    <input type="text" />
+                </div>
+                <div class="col-md-4">
+                    <p>Unit Name</p>
+                    <input type="text" />
+                </div>
+                <div class="col-md-4">
+                    <p>Name</p>
+                    <input type="text" />
+                </div>
+                <div class="col-md-4">
+                    <p>Name</p>
+                    <input type="text" />
+                </div>
+                <div class="col-md-4">
+                    <p>Name</p>
+                    <input type="text" />
+                </div>
+                <div class="col-md-4">
+                    <p>Name</p>
+                    <input type="text" />
+                </div>
+                <div class="col-md-4">
+                    <p>Name</p>
+                    <input type="text" />
+                </div>
+                <div class="col-md-4">
+                    <p>Name</p>
+                    <input type="text" />
+                </div>
+                <div class="col-md-4">
+                    <p>Name</p>
+                    <input type="text" />
+                </div>
+                <div class="col-md-4">
+                    <p>Name</p>
+                    <input type="text" />
+                </div>
+                <div class="col-md-4">
+                    <p>Name</p>
+                    <input type="text" />
+                </div>
+                <div class="col-md-12 action_btns margin-top-20 margin-bottom-20">
+                    <div class="one_half"><a onclick="return false;" class="btn btn_blue">Save Values</a></div>
+                    <div class="one_half last modal_close"><a href="" class="btn btn_red">Cancel</a></div>
+                </div><br/><br/>
+            </form>
+        </div>
+    </section>
+</div>
+
 <!-- End Page Banner -->
 <script type="text/javascript" src="../../js/script.js"></script>
 
@@ -198,6 +281,14 @@
 
 <script type="text/javascript">
     $("#measure-modal").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
+
+    $(function(){
+        $(".common_model").show();
+    })
+</script>
+
+<script type="text/javascript">
+    $(".minerals-modal").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
 
     $(function(){
         $(".common_model").show();

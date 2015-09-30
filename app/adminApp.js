@@ -487,7 +487,9 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
-                                '../../js/bootstrap.min.js'
+                                '../../js/bootstrap.min.js',
+                                '../../plugin/popup/style.css',
+                                '../../plugin/popup/jquery.leanModal.min.js'
                             ]
                         })
                     }

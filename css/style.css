@@ -7921,3 +7921,8 @@ input[type=range]:focus::-ms-fill-upper {
 	color: #bbb;
 	border: 3px dotted #bbb;
 }
+
+.line p{
+	border-bottom: 1px solid #eee;
+	margin-bottom: 3px;
+}
