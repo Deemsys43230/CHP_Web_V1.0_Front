@@ -137,6 +137,18 @@ form p{
 .common_model input[type="checkbox"] {float:left; margin-right:5px;}
 .common_model input[type="checkbox"]+label {float:left;}
 
+.common_model.input_mineral input[type="text"], .common_model.input_mineral input[type="email"], .common_model.input_mineral input[type="password"] {
+    display: block;
+    width:100%;
+    margin-top: 10px;
+    padding: 0 5px!important;
+    border:1px solid #DDD !important;
+    color:#666;
+    font-size: 12px;
+}
+.common_model.input_mineral input[type="checkbox"] {float:left; margin-right:5px;}
+.common_model.input_mineral input[type="checkbox"]+label {float:left;}
+
 .width-40{
     width: 40% !important;
 }
