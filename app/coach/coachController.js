@@ -26,7 +26,7 @@ adminApp.controller('CoachController',function($scope,requestHandler,Flash) {
              $("#modal").hide();
              $("#lean_overlay").hide();
           /*End Close Modal*/
-
+          $scope.doGetCoachList();
           $scope.coach={};
           $scope.confirm_password="";
           $scope.coachRegisterForm=false;

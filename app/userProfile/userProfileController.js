@@ -6,20 +6,49 @@ var userApp= angular.module('userApp', ['ngRoute','oc.lazyLoad','ngCookies','req
 
 userApp.controller('UserProfileController',['$scope','requestHandler',function($scope,requestHandler) {
 
+
+    // Function to convert image url to base64
+    $scope.convertImgToBase64=function(url, callback, outputFormat){
+        var img = new Image();
+        img.crossOrigin = 'Anonymous';
+        img.onload = function(){
+            var canvas = document.createElement('CANVAS');
+            var ctx = canvas.getContext('2d');
+            canvas.height = this.height;
+            canvas.width = this.width;
+            ctx.drawImage(this,0,0);
+            var dataURL = canvas.toDataURL(outputFormat || 'image/jpg');
+            callback(dataURL);
+            canvas = null;
+        };
+        img.src = url;
+    };
+
+
     $scope.doGetProfile=function(){
         requestHandler.getRequest("getUserId/","").then(function(response){
 
+
             $scope.userProfile=response.data.User_Profile;
-            $scope.imageUrl=response.data.User_Profile.imageurl+"?decache="+Math.random();
+            $scope.userProfile.imageurl=$scope.userProfile.imageurl.substring($scope.userProfile.imageurl.indexOf("/") + 14, $scope.userProfile.imageurl.length)
+            $scope.userProfile.imageurl=$scope.userProfile.imageurl+"?decache="+Math.random();
+
+            //Convert Integer to String
+            if($scope.userProfile.gender)
+            $scope.userProfile.gender=$scope.userProfile.gender.toString();
+
             //Delete unwanted variables
             delete $scope.userProfile.createdon;
             delete $scope.userProfile.userid;
             delete $scope.userProfile.isProfileUpdated;
             delete $scope.userProfile.status;
 
+            //Copy Original
+            $scope.orginalUserProfile=angular.copy($scope.userProfile);
+
             $('.image-editor').cropit({
                 imageState: {
-                    src: $scope.imageUrl+"?decache="+Math.random()
+                    src: $scope.userProfile.imageurl+"?decache="+Math.random()
                 }
             });
         });
@@ -27,10 +56,13 @@ userApp.controller('UserProfileController',['$scope','requestHandler',function($
 
     $scope.refreshImage=function(){
         requestHandler.getRequest("getUserId/","").then(function(response){
-            $scope.imageUrl=response.data.User_Profile.imageurl+"?decache="+Math.random();
+            $scope.userProfile.imageurl=response.data.User_Profile.imageurl;
+            $scope.userProfile.imageurl=$scope.userProfile.imageurl.substring($scope.userProfile.imageurl.indexOf("/") + 14, $scope.userProfile.imageurl.length)
+            $scope.userProfile.imageurl=$scope.userProfile.imageurl+"?decache="+Math.random();
+
             $('.image-editor').cropit({
                 imageState: {
-                    src: $scope.imageUrl+"?decache="+Math.random()
+                    src: $scope.userProfile.imageurl+"?decache="+Math.random()
                 }
             });
         });
@@ -38,15 +70,27 @@ userApp.controller('UserProfileController',['$scope','requestHandler',function($
 
 
     $scope.doUpdateProfile= function () {
-        $scope.userProfile.imageurl=$scope.getBase64Image(document.getElementById("profile-image-change"));
-        $scope.userProfile.dob="31/05/2015";
-        requestHandler.putRequest("updateProfile/",$scope.userProfile).then(function(){
-            alert("success");
+
+        $scope.convertImgToBase64($scope.userProfile.imageurl, function(base64Img){
+
+            //Convert Image to base64
+            $scope.userProfile.imageurl=base64Img;
+
+            requestHandler.putRequest("updateProfile/",$scope.userProfile).then(function(){
+                //Copy Orginal
+                $scope.orginalUserProfile=angular.copy($scope.userProfile);
+                alert("success");
+            });
         });
+
+
     };
 
+
     $scope.doUpdateProfileImage=function(){
-        var image=$('.image-editor').cropit('export');
+        //Convert the image to base 64
+        var image = $('.image-editor').cropit('export');
+
         requestHandler.postRequest("uploadProfileImage/",{'imageurl':image}).then(function(response){
             $scope.refreshImage();
         },function(response){
@@ -55,6 +99,22 @@ userApp.controller('UserProfileController',['$scope','requestHandler',function($
     };
 
     $scope.doGetProfile();
+
+    //To Enable the update button if changes occur.
+    $scope.isClean = function() {
+        console.log($scope.orginalUserProfile);
+        console.log($scope.userProfile);
+        return angular.equals ($scope.orginalUserProfile, $scope.userProfile);
+    }
+
+    //Change Password
+    $scope.doChangePassword=function(){
+        requestHandler.postRequest("changePassword/",{'oldPassword':$scope.oldPassword,'newPassword':$scope.newPassword}).then(function(response){
+            $scope.refreshImage();
+        },function(response){
+            alert("Please Try again later!");
+        });
+    };
 
 }]);
 

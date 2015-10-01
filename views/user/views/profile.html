@@ -3,28 +3,12 @@
     <div id="w" class="clearfix">
         <div id="profile">
             <div class="col-md-12 no-padding">
-                <div class="profile-image center-block"><img id="profile-image-change" ng-src="{{imageUrl | trusted}}"></div>
+                <div class="profile-image center-block"><img id="profile-image-change" ng-src="{{userProfile.imageurl | trusted}}"></div>
                 <input type="hidden" ng-model="userProfile.imageurl" name="profileImage" id="profileImageId"/>
                 <div class="change-image"><a id="modal_trigger" href="#modal" class="btn btn-xs btn-warning">Change</a></div>
-                <h4 class="margin-top-20">Mugesh Kumar</h4>
-                <p>9042081474</p>
-                <p>mugeshmail@gmail.com</p>
-                <div class="margin-top-10">
-                    <div class="col-md-3 no-padding">
-                        <h6>Gender</h6>
-                        <h6>DOB</h6>
-                        <h6>Country</h6>
-                        <h6>State</h6>
-                        <h6>City</h6>
-                    </div>
-                    <div class="col-md-9">
-                        <h6>: Male</h6>
-                        <h6>: 01/11/1991</h6>
-                        <h6>: India</h6>
-                        <h6>: Tamil Nadu</h6>
-                        <h6>: Karaikal</h6>
-                    </div>
-                </div>
+                <h4 class="margin-top-20">{{orginalUserProfile.name}}</h4>
+                <p>{{orginalUserProfile.emailid}}</p>
+                <p>{{orginalUserProfile.phone}}</p>
             </div>
         </div>
 
@@ -144,8 +128,8 @@
                         </div>
                     </div>
                     <div class="col-md-12 text-center margin-top-20">
-                        <a href="" class="register_button" ng-click="doUpdateProfile()">Save Changes</a>
-                        <a href="#dashboard" class="cancel_button">Cancel</a>
+                        <a href="" class=" btn register_button" ng-click="doUpdateProfile()" ng-disabled="isClean()">Save Changes</a>
+                        <a href="#dashboard" class="btn cancel_button">Cancel</a>
                     </div>
                 </div>
             </div>
@@ -195,13 +179,13 @@
     <section class="popupBody">
         <!-- Register Form -->
         <div class="common_model">
-            <form>
+            <form name="changePasswordForm">
                 <p>Current Password</p>
-                <input type="text"/>
+                <input type="password" name="oldPassword" ng-model="changePassword.oldPassword" required/>
                 <p>New Password</p>
-                <input type="text"/>
+                <input type="password" name="newPassword" ng-model="changePassword.oldPassword" required/>
                 <p>Confirm New Password</p>
-                <input type="text"/>
+                <input type="password" name="confirmPassword"/>
                 <div class="action_btns margin-top-20">
                     <div class="one_half"><a class="btn btn_red">Change Password</a></div>
                     <div class="one_half last modal_close"><a onclick="return false;" class="btn back_btn">Cancel</a></div>

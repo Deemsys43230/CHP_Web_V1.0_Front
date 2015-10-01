@@ -28,9 +28,8 @@
                     <span class="error-message" ng-show="coachRegisterForm.password.$error.required"><span>Required.</span></span>
                 </span>
                 <p>Confirm Password</p>
-                <input type="password" name="confirm_password" required ng-model="confirm_password" compare-to="coach.password"/>
+                <input type="password" name="confirm_password" ng-model="confirm_password" compare-to="coach.password"/>
                 <span ng-show="coachRegisterForm.confirm_password.$dirty&&coachRegisterForm.confirm_password.$invalid">
-                    <span class="error-message" ng-show="coachRegisterForm.confirm_password.$error.required"><span>Required.</span></span>
                     <span class="error-message" ng-show="coachRegisterForm.confirm_password.$error.compareTo"><span>Password&nbsp;don't&nbsp;match.</span></span>
                 </span>
 
@@ -51,10 +50,12 @@
             <div class="col-md-12">
                 <a href="#dashboard" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back to Dashboard</a>
                 <a id="modal_trigger" href="#modal" class="back-button pull-right margin-left-5"><i class="fa fa-plus-circle"></i> Add Coach</a>
+
                 <form class="form-wrapper pull-right">
                     <input type="text" placeholder="Search here..." required>
                     <button type="submit"><i class="fa fa-search"></i></button>
                 </form>
+                <div flash-message="5000" class="col-md-4 pull-right"></div>
                 <h4 class="classic-title"><span>Coach Management</span></h4>
                 <table class="table table-striped table-bordered">
                     <thead>
