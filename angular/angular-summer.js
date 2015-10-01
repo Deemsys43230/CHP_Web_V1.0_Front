@@ -10,20 +10,42 @@ angular.module("summernote",[])
       if(angular.isDefined($attrs.height)&&(summernoteConfig.height=$attrs.height),
           angular.isDefined($attrs.focus)&&(summernoteConfig.focus=!0),
           angular.isDefined($attrs.airmode)&&(summernoteConfig.airMode=!0),
-              angular.isDefined($attrs.lang)){if(!angular.isDefined($.summernote.lang[$attrs.lang]))
-        throw new Error('"'+$attrs.lang+'" lang file must be exist.');summernoteConfig.lang=$attrs.lang}
-      summernoteConfig.oninit=$scope.init,summernoteConfig.onenter=function(evt){updateNgModel(),$scope.enter({evt:evt})}
-          ,summernoteConfig.onfocus=function(evt){$scope.focus({evt:evt})},summernoteConfig.onblur=function(evt)
-      {$scope.blur({evt:evt})},
+          angular.isDefined($attrs.lang)){
 
-          summernoteConfig.onpaste=function(evt) {
-              var bufferText = ((evt.originalEvent || evt).clipboardData || window.clipboardData).getData('Text');
-              evt.preventDefault();
-              document.execCommand('insertText', false, bufferText);
-              $scope.paste({evt:bufferText});
-          }
-          ,summernoteConfig.onkeyup=function(evt){$scope.keyup({evt:evt})},
-          summernoteConfig.onkeydown=function(evt){$scope.keydown({evt:evt})},
+            if(!angular.isDefined($.summernote.lang[$attrs.lang]))
+                throw new Error('"'+$attrs.lang+'" lang file must be exist.');
+          summernoteConfig.lang=$attrs.lang
+      }
+
+      summernoteConfig.oninit=$scope.init,
+      summernoteConfig.onenter=function(evt){
+          updateNgModel();
+          $scope.enter({evt:evt})
+      },
+
+      summernoteConfig.onfocus=function(evt){
+          $scope.focus({evt:evt})
+      },
+
+      summernoteConfig.onblur=function(evt){
+          $scope.blur({evt:evt})
+      },
+
+      summernoteConfig.onpaste=function(evt) {
+          var bufferText = ((evt.originalEvent || evt).clipboardData || window.clipboardData).getData('Text');
+          evt.preventDefault();
+          document.execCommand('insertText', false, bufferText);
+          $scope.paste({evt:bufferText});
+      },
+
+      summernoteConfig.onkeyup=function(evt){
+          $scope.keyup({evt:evt})
+      },
+
+      summernoteConfig.onkeydown=function(evt){
+          $scope.keydown({evt:evt})
+      },
+
       angular.isDefined($attrs.onImageUpload)&&(summernoteConfig.onImageUpload=function(files,editor)
       {$scope.imageUpload({files:files,editor:editor,editable:$scope.editable})})
           ,this.activate=function(scope,element,ngModel){var updateNgModel=function()
