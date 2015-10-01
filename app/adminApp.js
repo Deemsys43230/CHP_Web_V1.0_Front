@@ -92,7 +92,6 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../js/bootstrap.min.js',
                                 '../../plugin/popup/style.css',
                                 '../../plugin/popup/jquery.leanModal.min.js',
-                                '../../js/jquery.simplyCountable.js',
                                 '../../app/faq/faqController.js'
                             ]
                         })

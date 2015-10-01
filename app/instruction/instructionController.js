@@ -43,27 +43,6 @@ adminApp.controller('InstructionController',function($scope,requestHandler,Flash
 
 });
 
-adminApp.controller('CallbacksCtrl', function($scope) {
-    $scope.init = function() { console.log('Summernote is launched'); };
-    $scope.enter = function() { console.log('Enter/Return key pressed'); };
-    $scope.focus = function(e) { console.log('Editable area is focused'); };
-    $scope.blur = function(e) { console.log('Editable area loses focus'); };
-    $scope.paste = function(e) {
-        console.log('Called event paste: ' +  e.originalEvent.clipboardData.getData('text'));
-    };
-    $scope.change = function(contents) {
-        console.log('contents are changed:', contents, $scope.editable);
-    };
-    $scope.keyup = function(e) { console.log('Key is released:', e.keyCode); };
-    $scope.keydown = function(e) { console.log('Key is pressed:', e.keyCode); };
-    $scope.toolbarClick = function(e) { console.log('Toolbar is clicked:', e); };
-    $scope.imageUpload = function(files) {
-        console.log('image upload:', files);
-        console.log('image upload\'s editor:', $scope.editor);
-        console.log('image upload\'s editable:', $scope.editable);
-    };
-});
-
 /*adminApp.controller('InstructionAdminController',function($scope,requestHandler,Flash) {
 
     $scope.doGetAdminInstruction=function(){

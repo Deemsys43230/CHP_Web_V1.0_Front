@@ -8,20 +8,22 @@
     <section class="popupBody">
         <!-- common form -->
         <div class="user_register">
-            <form name="faqForm">
-                <p>Question ( <span class="text-bold text-red" id="question-counter"></span> Left )</p>
-                <textarea class="form-control height-100" name="question" ng-model="faq.question" required id="question" maxlength="300"></textarea>
-                <span ng-show="faqForm.question.$dirty&&faqForm.question.$invalid">
-                    <span class="error-message textarea-errormessage-60" ng-show="faqForm.question.$error.required"><span>Required.</span></span>
+            <form name="faqAddForm">
+                <p>Question ( <span class="text-bold text-red">{{ (300-faq.question.length) }}</span> Left )</p>
+                <span ng-show="faqAddForm.question.$dirty && faqAddForm.question.$invalid && !faqAddForm.question.$pristine">
+                    <span class="error-message textarea-errormessage40" ng-show="faqAddForm.question.$error.required"><span>Required.</span></span>
                 </span>
+                <textarea class="form-control height-100" name="question" ng-model="faq.question" id="add-question" required maxlength="300"></textarea>
 
-                <p>Answer ( <span class="text-bold text-red" id="answer-counter"></span> Left )</p>
-                <textarea class="form-control height-150" name="answer" ng-model="faq.answer" required id="answer" maxlength="300"></textarea>
-                <span ng-show="faqForm.answer.$dirty&&faqForm.answer.$invalid">
-                    <span class="error-message textarea-errormessage-110" ng-show="faqForm.answer.$error.required"><span>Required.</span></span>
+
+                <p>Answer ( <span class="text-bold text-red">{{ (300-faq.answer.length) }}</span> Left )</p>
+                <span ng-show="faqAddForm.answer.$dirty && faqAddForm.answer.$invalid && !faqAddForm.answer.$pristine">
+                    <span class="error-message textarea-errormessage40" ng-show="faqAddForm.answer.$error.required"><span>Required.</span></span>
                 </span>
+                <textarea class="form-control height-150" name="answer" ng-model="faq.answer" id="add-answer" required maxlength="300"></textarea>
+
                 <div class="action_btns margin-top-20">
-                    <div class="one_half"><a onclick="return false;" class="btn btn_blue" ng-disabled="faqForm.$invalid" ng-click="doAddFAQ()">Add FAQ</a></div>
+                    <div class="one_half modal_close"><a onclick="return false;" class="btn btn_blue" ng-disabled="faqAddForm.$invalid" ng-click="doAddFAQ()">Add FAQ</a></div>
                     <div class="one_half last modal_close"><a href="" class="btn btn_red">Cancel</a></div>
                 </div>
             </form>
@@ -39,16 +41,28 @@
 
         <section class="popupBody">
             <!-- common form -->
+            <div ng-if="modalloaded">
+                <div class="loader-style">
+                    <div class="loader"></div>
+                </div>
+            </div>
             <div class="common_model">
-                <form>
-                    <p>Question</p>
-                    <textarea class="form-control height-100"></textarea>
+                <form name="faqEditForm">
+                    <p>Question ( <span class="text-bold text-red">{{ (300-faq.question.length) }}</span> Left )</p>
+                    <span ng-show="faqEditForm.question.$dirty&&faqEditForm.question.$invalid">
+                        <span class="error-message textarea-errormessage40" ng-show="faqEditForm.question.$error.required"><span>Required.</span></span>
+                    </span>
+                    <textarea class="form-control height-100" name="question" ng-model="faq.question" required id="question" maxlength="300"></textarea>
 
-                    <p>Answer</p>
-                    <textarea class="form-control height-150"></textarea>
+
+                    <p>Answer ( <span class="text-bold text-red">{{(300-faq.answer.length) }}</span> Left )</p>
+                    <span ng-show="faqEditForm.answer.$dirty&&faqEditForm.answer.$invalid">
+                        <span class="error-message textarea-errormessage40" ng-show="faqEditForm.answer.$error.required"><span>Required.</span></span>
+                    </span>
+                    <textarea class="form-control height-150" name="answer" ng-model="faq.answer" required id="answer" maxlength="300"></textarea>
 
                     <div class="action_btns margin-top-20">
-                        <div class="one_half"><a href="#" class="btn btn_blue">Update</a></div>
+                        <div class="one_half modal_close"><a onclick="return false;" class="btn btn_blue" ng-disabled="isClean()|| faqEditForm.$invalid" ng-click="doUpdateFAQ(faq.faqid)">Edit FAQ</a></div>
                         <div class="one_half last modal_close"><a href="" class="btn btn_red">Cancel</a></div>
                     </div>
                 </form>
@@ -69,7 +83,7 @@
             </div>
             <div class="col-md-9">
                 <a href="#dashboard" class="back-button pull-right margin-left-10"><i class="fa fa-arrow-circle-o-left"></i> Back to Dashboard</a>
-                <a  id="modal_trigger" href="#modal" class="back-button pull-right "><i class="fa fa-plus-circle"></i> Add FAQ</a>
+                <a  id="modal_trigger" href="#modal" ng-click="reset()" class="back-button pull-right"><i class="fa fa-plus-circle"></i> Add FAQ</a>
                 <div flash-message="2000" class="col-md-4 pull-right"></div>
                 <h3 class="margin-bottom-10"><i class="fa fa-list-ul"></i> &nbsp;FAQ List</h3>
                 <div ng-if="loaded">
@@ -86,11 +100,11 @@
                         </tr>
                     </thead>
                     <tbody >
-                        <tr dir-paginate="faq in faqList | orderBy:sortKey:reverse|itemsPerPage:6 ">
-                            <td>{{faq.question}}</td>
-                            <td>{{faq.answer}}</td>
+                        <tr dir-paginate="faq in faqList | orderBy:sortKey:!reverse | itemsPerPage:6 ">
+                            <td><span class="line-clamp">{{faq.question}}</span></td>
+                            <td><span class="line-clamp">{{faq.answer}}</span></td>
                             <td>
-                                <a href="" onclick="return false;" class="btn-xs btn-primary" ng-click="doUpdateFAQ(faq.faqid)">Edit</a>
+                                <a href="" onclick="return false;" class="btn-xs btn-primary" ng-click="doGetFAQByID(faq.faqid)">Edit</a>
                                 <a href="" class="btn-xs btn-success" ng-click="doEnableDisable(faq.faqid)" ng-show="faq.status==0">Enable</a>
                                 <a href="" class="btn-xs btn-danger" ng-click="doEnableDisable(faq.faqid)" ng-hide="faq.status==0">Disable</a>
                             </td>
@@ -116,13 +130,5 @@
 
     $(function(){
         $(".user_register").show();
-        $('#question').simplyCountable({
-            maxCount: 300,
-            counter: '#question-counter'
-        });
-        $('#answer').simplyCountable({
-            maxCount: 300,
-            counter: '#answer-counter'
-        });
     })
 </script>
