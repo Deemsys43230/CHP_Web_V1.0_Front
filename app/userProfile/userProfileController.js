@@ -159,6 +159,7 @@ userApp.directive('compareTo',function() {
     };
 });
 
+/*
 userApp.directive('numbersOnly', function(){
     return {
         require: 'ngModel',
@@ -178,4 +179,4 @@ userApp.directive('numbersOnly', function(){
             });
         }
     };
-});
+});*/

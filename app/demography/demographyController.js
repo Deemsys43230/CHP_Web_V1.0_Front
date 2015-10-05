@@ -20,7 +20,11 @@ userApp.controller('DemographyController',['$scope','requestHandler','Flash',fun
     };
 
     $scope.doUpdateDemography= function () {
+            $scope.demography.height = parseFloat($scope.demography.height);
+            $scope.demography.weight = parseFloat($scope.demography.weight);
+            $scope.demography.hip = parseFloat($scope.demography.hip);
             requestHandler.putRequest("user/insertorupdateDemography/",$scope.demography).then(function(response){
+                $scope.doGetProfile();
                 successMessage(Flash,"Successfully Updated");
                 originalDemography=angular.copy($scope.demography);
             }, function () {
@@ -29,8 +33,6 @@ userApp.controller('DemographyController',['$scope','requestHandler','Flash',fun
     };
 
     $scope.isClean =function(){
-        console.log(originalDemography);
-        console.log($scope.demography);
             return angular.equals(originalDemography, $scope.demography);
     };
 
