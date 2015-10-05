@@ -3,12 +3,16 @@
     <div id="w" class="clearfix">
         <div id="profile">
             <div class="col-md-12 no-padding">
-                <div class="profile-image center-block"><img id="profile-image-change" src="../../images/member02.jpg"></div>
-                <h4 class="margin-top-20">Mugesh Kumar</h4>
-                <p class="text-green">Normal Health</p>
+                <div class="profile-image center-block"><img ng-src="{{userProfile.imageurl | trusted}}"></div>
+                <h4 class="margin-top-20">{{userProfile.name}}</h4>
+                <p>{{userProfile.emailid}}</p>
+                <p>{{userProfile.dob}}</p>
+                <p>{{userProfile.phone}}</p>
+
+               <!--<p class="text-green">Normal Health</p>
                 <div class="margin-top-10">
                     <div class="col-md-5 no-padding">
-                        <h6>Height<span class="pull-right">:</span></h6>
+                        <h6>Email<span class="pull-right">:</span></h6>
                         <h6>Weight<span class="pull-right">:</span></h6>
                         <h6>Hip<span class="pull-right">:</span></h6>
                         <h6>Waist<span class="pull-right">:</span></h6>
@@ -23,13 +27,15 @@
                         <h6 class="text-green">Normal</h6>
                         <h6 class="text-green">Normal</h6>
                     </div>
-                </div>
+                </div>-->
             </div>
         </div>
 
         <div id="profile-content">
+            <form name="demographyForm">
             <div class="col-md-12">
                 <div class="col-md-12">
+                    <div flash-message="2000" class="col-md-4 pull-right"></div>
                     <h5 class="classic-title"><span><i class="fa fa-male"></i> &nbsp;DEMOGRAPHY</span></h5>
                 </div>
                 <div class="col-md-12">
@@ -38,12 +44,12 @@
                             <h5>Height :</h5>
                         </div>
                         <div class="col-md-7 no-padding">
-                            <input class="weight_input"/>  .
-                            <input class="weight_input"/>&nbsp;
-                            <input type="radio" id="cm" name="height" />
+                            <input class="weight_input" name="height" ng-model="demography.height" required/>
+                            <input type="radio" checked id="cm" />
                             <label for="cm">cm</label>
-                            <input type="radio" id="ft" name="height" />
-                            <label for="ft">ft</label>
+                             <span ng-show="demographyForm.height.$dirty&&demographyForm.height.$invalid">
+                    <span class="error-message textarea-errormessage40-left" ng-show="demographyForm.height.$error.required"><span>Required.</span></span>
+                             </span>
                         </div>
                     </div>
                     <div class="col-md-6 margin-top-10">
@@ -51,12 +57,12 @@
                             <h5>Weight :</h5>
                         </div>
                         <div class="col-md-7 no-padding">
-                            <input class="weight_input"/>  .
-                            <input class="weight_input"/>&nbsp;
-                            <input type="radio" id="Kg" name="weight" />
+                            <input class="weight_input"  name="weight" ng-model="demography.weight" required/>
+                           <input type="radio" checked id="Kg" />
                             <label for="Kg">Kg</label>
-                            <input type="radio" id="Lb" name="weight" />
-                            <label for="Lb">Lb</label>
+                             <span ng-show="demographyForm.weight.$dirty&&demographyForm.weight.$invalid">
+                    <span class="error-message textarea-errormessage40-left" ng-show="demographyForm.weight.$error.required"><span>Required.</span></span>
+                             </span>
                         </div>
                     </div>
                     <div class="col-md-6 margin-top-10">
@@ -64,10 +70,12 @@
                             <h5>Hip :</h5>
                         </div>
                         <div class="col-md-7 no-padding">
-                            <input class="weight_input"/>  .
-                            <input class="weight_input"/>&nbsp;
-                            <input type="radio" checked id="hip" name="hip" />
+                            <input class="weight_input" name="hip" ng-model="demography.hip" required/>
+                            <input type="radio" checked id="hip" />
                             <label for="hip">Inch</label>
+                            <span ng-show="demographyForm.hip.$dirty&&demographyForm.hip.$invalid">
+                    <span class="error-message textarea-errormessage40-left" ng-show="demographyForm.hip.$error.required"><span>Required.</span></span>
+                             </span>
                         </div>
                     </div>
                     <div class="col-md-6 margin-top-10">
@@ -75,10 +83,12 @@
                             <h5>Waist :</h5>
                         </div>
                         <div class="col-md-7 no-padding">
-                            <input class="weight_input"/>  .
-                            <input class="weight_input"/>&nbsp;
-                            <input type="radio" checked id="waist" name="waist" />
+                            <input class="weight_input" name="waist" ng-model="demography.waist" required/>
+                            <input type="radio" checked id="waist"  />
                             <label for="waist">Inch</label>
+                            <span ng-show="demographyForm.waist.$dirty&&demographyForm.waist.$invalid">
+                    <span class="error-message textarea-errormessage40-left" ng-show="demographyForm.waist.$error.required"><span>Required.</span></span>
+                             </span>
                         </div>
                     </div>
                     <div class="col-md-6 margin-top-10">
@@ -86,10 +96,12 @@
                             <h5>BMI :</h5>
                         </div>
                         <div class="col-md-7 no-padding">
-                            <input class="weight_input"/>  .
-                            <input class="weight_input"/>&nbsp;
-                            <input type="radio" checked id="bmi" name="bmi" />
+                            <input class="weight_input" name="bmi" ng-model="demography.bmi" required/>
+                            <input type="radio" checked id="bmi"  />
                             <label for="bmi">Kg/m<sup>2</sup></label>
+                             <span ng-show="demographyForm.bmi.$dirty&&demographyForm.bmi.$invalid">
+                    <span class="error-message textarea-errormessage40-left" ng-show="demographyForm.bmi.$error.required"><span>Required.</span></span>
+                             </span>
                         </div>
                     </div>
                     <div class="col-md-12"></div>
@@ -98,7 +110,10 @@
                             <h5>Blood Pressure :</h5>
                         </div>
                         <div class="col-md-7 no-padding">
-                            <input class="demography_input"/>
+                            <input class="demography_input" name="bloodpressure" ng-model="demography.bloodpressure" required/>
+                             <span ng-show="demographyForm.bloodpressure.$dirty&&demographyForm.bloodpressure.$invalid">
+                    <span class="error-message textarea-errormessage40" ng-show="demographyForm.bloodpressure.$error.required"><span>Required.</span></span>
+                             </span>
                         </div>
                     </div>
                     <div class="col-md-6 margin-top-10">
@@ -106,7 +121,17 @@
                             <h5>Blood Group :</h5>
                         </div>
                         <div class="col-md-7 no-padding">
-                            <input class="demography_input"/>
+                            <div class="dropdown">
+                                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                    Blood Group<span class="caret"></span></button>
+                                  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                      <li><a href="#">A +ve</a></li>
+                                      <li><a href="#">B +ve</a></li>
+                                      <li><a href="#">O +ve</a></li>
+                                      <li><a href="#">AB +ve</a></li>
+                                  </ul>
+                            </div>
+                           <!--<input class="demography_input" name="bloodgroup" ng-model="demography.bloodgroup" required/>-->
                         </div>
                     </div>
                     <div class="col-md-6 margin-top-10">
@@ -114,7 +139,10 @@
                             <h5>Protein :</h5>
                         </div>
                         <div class="col-md-7 no-padding">
-                            <input class="demography_input"/>
+                            <input class="demography_input" name="protein" ng-model="demography.protein" required/>
+                             <span ng-show="demographyForm.protein.$dirty&&demographyForm.protein.$invalid">
+                    <span class="error-message textarea-errormessage40" ng-show="demographyForm.protein.$error.required"><span>Required.</span></span>
+                             </span>
                         </div>
                     </div>
                     <div class="col-md-6 margin-top-10">
@@ -122,7 +150,10 @@
                             <h5>Fat :</h5>
                         </div>
                         <div class="col-md-7 no-padding">
-                            <input class="demography_input"/>
+                            <input class="demography_input" name="fat" ng-model="demography.fat" required/>
+                             <span ng-show="demographyForm.fat.$dirty&&demographyForm.fat.$invalid">
+                    <span class="error-message textarea-errormessage40" ng-show="demographyForm.fat.$error.required"><span>Required.</span></span>
+                             </span>
                         </div>
                     </div>
                     <div class="col-md-6 margin-top-10">
@@ -130,7 +161,10 @@
                             <h5>Carbo Hydrate :</h5>
                         </div>
                         <div class="col-md-7 no-padding">
-                            <input class="demography_input"/>
+                            <input class="demography_input" name="carbo" ng-model="demography.carbo" required/>
+                             <span ng-show="demographyForm.carbo.$dirty&&demographyForm.carbo.$invalid">
+                    <span class="error-message textarea-errormessage40" ng-show="demographyForm.carbo.$error.required"><span>Required.</span></span>
+                             </span>
                         </div>
                     </div>
                     <div class="col-md-6 margin-top-10">
@@ -138,7 +172,10 @@
                             <h5>Fiber :</h5>
                         </div>
                         <div class="col-md-7 no-padding">
-                            <input class="demography_input"/>
+                            <input class="demography_input" name="fibre" ng-model="demography.fibre" required/>
+                             <span ng-show="demographyForm.fibre.$dirty&&demographyForm.fibre.$invalid">
+                    <span class="error-message textarea-errormessage40" ng-show="demographyForm.fibre.$error.required"><span>Required.</span></span>
+                             </span>
                         </div>
                     </div>
                     <div class="col-md-6 margin-top-10">
@@ -146,143 +183,26 @@
                             <h5>Calories Intake :</h5>
                         </div>
                         <div class="col-md-7 no-padding">
-                            <input class="demography_input"/>
-                        </div>
-                    </div>
-                    <div class="col-md-6 margin-top-10">
-                        <div class="col-md-5 padding-top-4">
-                            <h5>Waist :</h5>
-                        </div>
-                        <div class="col-md-7 no-padding">
-                            <input class="demography_input"/>
+                            <input class="demography_input" name="calorieintake" ng-model="demography.calorieintake" required/>
+                             <span ng-show="demographyForm.calorieintake.$dirty&&demographyForm.calorieintake.$invalid">
+                    <span class="error-message textarea-errormessage40" ng-show="demographyForm.calorieintake.$error.required"><span>Required.</span></span>
+                             </span>
                         </div>
                     </div>
                     <div class="col-md-12"><hr/></div>
                     <div class="col-md-12 text-center margin-top-10">
-                        <a href="" class="register_button">Save Changes</a>
-                        <a href="#dashboard" class="cancel_button">Cancel</a>
+                        <a href="" class="btn register_button" ng-disabled="isClean() || demographyForm.$invalid" ng-click="doUpdateDemography()" >Save Changes</a>
+                        <a href="#dashboard" class="btn cancel_button">Cancel</a>
                     </div>
                 </div>
             </div>
+                </form>
         </div><!-- @end #content -->
     </div><!-- @end #w -->
 </div>
 
-<!-- create coach popup-->
-<div id="modal" class="popupContainer" style="display:none;">
-    <header class="popupHeader">
-        <span class="header_title">Change Profile Image</span>
-        <span class="modal_close"><i class="fa fa-times"></i></span>
-    </header>
 
-    <section class="popupBody">
-        <!-- Register Form -->
-        <div class="common_model">
-            <div class="image-editor">
-                <div class="cropit-image-preview center-block"></div>
-                <div class="image-size-label">
-                    Resize image
-                </div>
-                <input type="range" class="cropit-image-zoom-input">
 
-                <div class="action_btns margin-top-20">
-                    <div class="one_half">
-                        <div class="fileUpload food-button">
-                            <span>Choose File</span>
-                            <input type="file" class="upload cropit-image-input" />
-                        </div>
-                    </div>
-                    <div class="one_half last"><a href="" onclick="return false;" class="food-button export modal_close">Upload Image</a></div>
-                </div>
-            </div>
-        </div>
-    </section>
-</div>
 
-<!-- create coach popup-->
-<div id="modal-changePassword" class="popupContainer" style="display:none;">
-    <header class="popupHeader">
-        <span class="header_title">Change Password</span>
-        <span class="modal_close"><i class="fa fa-times"></i></span>
-    </header>
-
-    <section class="popupBody">
-        <!-- Register Form -->
-        <div class="common_model">
-            <form>
-                <p>Current Password</p>
-                <input type="text"/>
-                <p>New Password</p>
-                <input type="text"/>
-                <p>Confirm New Password</p>
-                <input type="text"/>
-                <div class="action_btns margin-top-20">
-                    <div class="one_half"><a class="btn btn_red">Change Password</a></div>
-                    <div class="one_half last modal_close"><a onclick="return false;" class="btn back_btn">Cancel</a></div>
-                </div>
-            </form>
-        </div>
-    </section>
-</div>
 
 <script type="text/javascript" src="../../js/script.js"></script>
-
-<script type="text/javascript">
-    $("#modal_trigger").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
-
-    $(function(){
-        $(".common_model").show();
-    })
-</script>
-
-<script type="text/javascript">
-    $("#modal_trigger1").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
-
-    $(function(){
-        $(".common_model").show();
-    })
-</script>
-
-<script>
-    $(function() {
-        $('.image-editor').cropit({
-            imageState: {
-                src: ''
-            }
-        });
-
-        $('.export').click(function() {
-            var imageData = $('.image-editor').cropit('export');
-            document.getElementById("profile-image-change").src=imageData;
-        });
-    });
-</script>
-
-<script>
-    if (top.location != location) {
-        top.location.href = document.location.href ;
-    }
-    $(function(){
-        window.prettyPrint && prettyPrint();
-        $('#dp1').datepicker({
-            format: 'mm-dd-yyyy'
-        });
-        var startDate = new Date(2012,1,20);
-        var endDate = new Date(2020,1,25);
-
-        var checkin = $('#dpd1').datepicker({
-            onRender: function(date) {
-                return date.valueOf() < now.valueOf() ? 'disabled' : '';
-            }
-        }).on('changeDate', function(ev) {
-            if (ev.date.valueOf() > checkout.date.valueOf()) {
-                var newDate = new Date(ev.date)
-                newDate.setDate(newDate.getDate() + 1);
-                checkout.setValue(newDate);
-            }
-            checkin.hide();
-            $('#dpd2')[0].focus();
-        }).data('datepicker');
-    });
-</script>
-

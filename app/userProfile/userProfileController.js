@@ -1,10 +1,10 @@
 /**
  * Created by Deemsys on 9/21/2015.
  */
-var userApp= angular.module('userApp', ['ngRoute','oc.lazyLoad','ngCookies','requestModule']);
+var userApp= angular.module('userApp', ['ngRoute','oc.lazyLoad','ngCookies','requestModule','flash','ngAnimate']);
 
 
-userApp.controller('UserProfileController',['$scope','requestHandler',function($scope,requestHandler) {
+userApp.controller('UserProfileController',['$scope','requestHandler','Flash',function($scope,requestHandler,Flash) {
 
 
     // Function to convert image url to base64
@@ -77,9 +77,10 @@ userApp.controller('UserProfileController',['$scope','requestHandler',function($
             $scope.userProfile.imageurl=base64Img;
 
             requestHandler.putRequest("updateProfile/",$scope.userProfile).then(function(){
+                successMessage(Flash,"Successfully Updated");
                 //Copy Orginal
                 $scope.orginalUserProfile=angular.copy($scope.userProfile);
-                alert("success");
+
             });
         });
 
@@ -94,7 +95,7 @@ userApp.controller('UserProfileController',['$scope','requestHandler',function($
         requestHandler.postRequest("uploadProfileImage/",{'imageurl':image}).then(function(response){
             $scope.refreshImage();
         },function(response){
-            alert("Please Try again later!");
+            errorMessage(Flash,"Please Try again later!");
         });
     };
 
@@ -102,21 +103,35 @@ userApp.controller('UserProfileController',['$scope','requestHandler',function($
 
     //To Enable the update button if changes occur.
     $scope.isClean = function() {
-        console.log($scope.orginalUserProfile);
-        console.log($scope.userProfile);
         return angular.equals ($scope.orginalUserProfile, $scope.userProfile);
     }
 
     //Change Password
     $scope.doChangePassword=function(){
-        requestHandler.postRequest("changePassword/",{'oldPassword':$scope.oldPassword,'newPassword':$scope.newPassword}).then(function(response){
-            $scope.refreshImage();
+        requestHandler.postRequest("changePassword/",$scope.changePassword).then(function(response){
+            if(response.data.Response_status==0){
+                $scope.doGetProfile();
+                errorMessage(Flash,"Incorrect&nbsp;current&nbsp;password");
+                $scope.changePasswordForm.$setPristine();
+            }
+            else if(response.data.Response_status==1) {
+                $scope.doGetProfile();
+                successMessage(Flash, "Password&nbsp;changed&nbsp;successfully");
+                $scope.changePasswordForm.$setPristine();
+            }
         },function(response){
-            alert("Please Try again later!");
+            errorMessage(Flash,"Please try again later!");
         });
     };
 
+    $scope.reset=function(){
+        $scope.changePassword={};
+        $scope.changePasswordForm.$setPristine();
+    };
+
+
 }]);
+
 
 // render image to view in list
 userApp.filter('trusted', ['$sce', function ($sce) {
@@ -124,3 +139,43 @@ userApp.filter('trusted', ['$sce', function ($sce) {
         return $sce.trustAsResourceUrl(url);
     };
 }]);
+
+userApp.directive('compareTo',function() {
+    return {
+        require: "ngModel",
+        scope: {
+            otherModelValue: "=compareTo"
+        },
+        link: function(scope, element, attributes, ngModel) {
+
+            ngModel.$validators.compareTo = function(modelValue) {
+                return modelValue == scope.otherModelValue;
+            };
+
+            scope.$watch("otherModelValue", function() {
+                ngModel.$validate();
+            });
+        }
+    };
+});
+
+userApp.directive('numbersOnly', function(){
+    return {
+        require: 'ngModel',
+        link: function(scope, element, attrs, modelCtrl) {
+            modelCtrl.$parsers.push(function (inputValue) {
+                // this next if is necessary for when using ng-required on your input.
+                // In such cases, when a letter is typed first, this parser will be called
+                // again, and the 2nd time, the value will be undefined
+                if (inputValue == undefined) return ''
+                var transformedInput = inputValue.replace(/[^0-9]/g, '');
+                if (transformedInput!=inputValue) {
+                    modelCtrl.$setViewValue(transformedInput);
+                    modelCtrl.$render();
+                }
+
+                return transformedInput;
+            });
+        }
+    };
+});

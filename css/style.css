@@ -7355,8 +7355,19 @@ a:hover, a:visited, a:link, a:active
 	font-weight: bold;
 }
 
-.textarea-errormessage40{
+
+.textarea-errormessage40-left{
 	top: 40px;
+	left: -100px;
+}
+.textarea-errormessage40{
+	 top: 40px;
+ }
+.textarea-errormessage20{
+	top: 20px;
+}
+.textarea-errormessage30{
+	top: 30px;
 }
 .textarea-errormessage-60{
 	top: -60px;

@@ -17,8 +17,9 @@
             <div class="col-md-12">
                 <div class="col-md-12">
                     <div class="margin-top-5 no-padding pull-right">
-                        <a id="modal_trigger1" href="#modal-changePassword" class="profile_button"><i class="fa fa-lock"></i> Change Password</a><br/><br/>
+                        <a id="modal_trigger1" href="#modal-changePassword" ng-click="reset()" class="profile_button"><i class="fa fa-lock"></i> Change Password</a><br/><br/>
                     </div>
+                    <div flash-message="2000" class="col-md-4 pull-right"></div>
                     <h5 class="classic-title"><span><i class="fa fa-user"></i> &nbsp;PROFILE UPDATE</span></h5>
 
                 </div>
@@ -28,7 +29,10 @@
                             <h5>Name :</h5>
                         </div>
                         <div class="col-md-8">
-                            <input class="profile_input" ng-model="userProfile.name" ng-pattern="/^(\w+\s?)*\s*$/"/>
+                            <input class="profile_input" name="name" ng-model="userProfile.name" ng-pattern="/^(\w+\s?)*\s*$/" required/>
+                            <span ng-show="userProfileForm.name.$dirty&&userProfileForm.name.$invalid">
+                    <span class="error-message" ng-show="userProfileForm.name.$error.required"><span>Required.</span></span>
+                             </span>
                         </div>
                     </div>
                     <div class="col-md-6 margin-top-10">
@@ -36,7 +40,10 @@
                             <h5>Country :</h5>
                         </div>
                         <div class="col-md-8">
-                            <input class="profile_input" ng-model="userProfile.country" maxlength="20"/>
+                            <input class="profile_input" name="country" ng-model="userProfile.country" maxlength="20" required/>
+                             <span ng-show="userProfileForm.country.$dirty&&userProfileForm.country.$invalid">
+                    <span class="error-message" ng-show="userProfileForm.country.$error.required"><span>Required.</span></span>
+                             </span>
                         </div>
                     </div>
                     <div class="col-md-6 margin-top-10">
@@ -44,7 +51,10 @@
                             <h5>DOB :</h5>
                         </div>
                         <div class="col-md-8">
-                            <input type="text"  id="datepicker" class="profile_input" ng-model="userProfile.dob" placeholder="Date Of Birth">
+                            <input type="text"  id="datepicker" name="dob" class="profile_input" ng-model="userProfile.dob" placeholder="Date Of Birth" required>
+                             <span ng-show="userProfileForm.dob.$dirty&&userProfileForm.dob.$invalid">
+                    <span class="error-message" ng-show="userProfileForm.dob.$error.required"><span>Required.</span></span>
+                             </span>
                         </div>
                     </div>
                     <div class="col-md-6 margin-top-10">
@@ -52,7 +62,10 @@
                             <h5>State :</h5>
                         </div>
                         <div class="col-md-8">
-                            <input class="profile_input" ng-model="userProfile.state" maxlength="20"/>
+                            <input class="profile_input" name="state" ng-model="userProfile.state" maxlength="20" required/>
+                            <span ng-show="userProfileForm.state.$dirty&&userProfileForm.state.$invalid">
+                    <span class="error-message" ng-show="userProfileForm.state.$error.required"><span>Required.</span></span>
+                             </span>
                         </div>
                     </div>
                     <div class="col-md-6 margin-top-10">
@@ -60,7 +73,7 @@
                             <h5>Email Id :</h5>
                         </div>
                         <div class="col-md-8">
-                            <input class="profile_input" ng-model="userProfile.emailid" ng-disabled="true"/>
+                            <input class="profile_input" ng-model="userProfile.emailid" ng-disabled="true" required/>
                         </div>
                     </div>
 
@@ -69,7 +82,10 @@
                             <h5>City :</h5>
                         </div>
                         <div class="col-md-8">
-                            <input class="profile_input" ng-model="userProfile.city" maxlength="20"/>
+                            <input class="profile_input" name="city" ng-model="userProfile.city" maxlength="20" required/>
+                             <span ng-show="userProfileForm.city.$dirty&&userProfileForm.city.$invalid">
+                    <span class="error-message" ng-show="userProfileForm.city.$error.required"><span>Required.</span></span>
+                             </span>
                         </div>
                     </div>
                     <div class="col-md-6 margin-top-10">
@@ -77,7 +93,10 @@
                             <h5>Mobile :</h5>
                         </div>
                         <div class="col-md-8">
-                            <input class="profile_input" ng-model="userProfile.phone" maxlength="10"/>
+                            <input class="profile_input" name="phone" ng-model="userProfile.phone" maxlength="10" required numbers-only/>
+                            <span ng-show="userProfileForm.phone.$dirty&&userProfileForm.phone.$invalid">
+                    <span class="error-message" ng-show="userProfileForm.phone.$error.required"><span>Required.</span></span>
+                             </span>
                         </div>
                     </div>
                     <div class="col-md-6 margin-top-10">
@@ -85,7 +104,10 @@
                             <h5>Zipcode :</h5>
                         </div>
                         <div class="col-md-8">
-                            <input class="profile_input" ng-model="userProfile.zipcode" maxlength="10"/>
+                            <input class="profile_input" name="zipcode" ng-model="userProfile.zipcode" maxlength="6" required numbers-only/>
+                            <span ng-show="userProfileForm.zipcode.$dirty&&userProfileForm.zipcode.$invalid">
+                    <span class="error-message" ng-show="userProfileForm.zipcode.$error.required"><span>Required.</span></span>
+                             </span>
                         </div>
                     </div>
                     <div class="col-md-6 margin-top-10">
@@ -93,7 +115,10 @@
                             <h5>Secret&nbsp;Question:</h5>
                         </div>
                         <div class="col-md-8">
-                            <input class="profile_input" ng-model="userProfile.secretquestion" maxlength="10"/>
+                            <input class="profile_input" name="secretquestion" ng-model="userProfile.secretquestion" maxlength="150" required/>
+                            <span ng-show="userProfileForm.secretquestion.$dirty&&userProfileForm.secretquestion.$invalid">
+                    <span class="error-message" ng-show="userProfileForm.secretquestion.$error.required"><span>Required.</span></span>
+                             </span>
                         </div>
                     </div>
 
@@ -102,9 +127,9 @@
                             <h5>Gender :</h5>
                         </div>
                         <div class="col-md-8">
-                            <input type="radio" id="1" class="height" name="sex" value="1" ng-model="userProfile.gender"/>
+                            <input type="radio" id="1" class="height" name="sex" value="1" ng-model="userProfile.gender" required/>
                             <label for="1">Male</label>
-                            <input type="radio" id="2" class="height" name="sex" value="2" ng-model="userProfile.gender"/>
+                            <input type="radio" id="2" class="height" name="sex" value="2" ng-model="userProfile.gender" required/>
                             <label for="2">Female</label>
                         </div>
                     </div>
@@ -113,7 +138,10 @@
                             <h5>Secret&nbsp;Answer:</h5>
                         </div>
                         <div class="col-md-8">
-                            <input class="profile_input" ng-model="userProfile.secretanswer" maxlength="10"/>
+                            <input class="profile_input" name="secretanswer" ng-model="userProfile.secretanswer" maxlength="150" required/>
+                            <span ng-show="userProfileForm.secretanswer.$dirty&&userProfileForm.secretanswer.$invalid">
+                    <span class="error-message" ng-show="userProfileForm.secretanswer.$error.required"><span>Required.</span></span>
+                             </span>
                         </div>
                     </div>
                     <div class="col-md-6 margin-top-10">
@@ -124,11 +152,14 @@
                             <h5>About Me :</h5>
                         </div>
                         <div class="col-md-8">
-                            <textarea class="profile_input_textarea" ng-model="userProfile.about" maxlength="300"></textarea>
+                            <textarea class="profile_input_textarea" name="about" ng-model="userProfile.about" maxlength="300" required></textarea>
+                             <span ng-show="userProfileForm.about.$dirty&&userProfileForm.about.$invalid">
+                    <span class="error-message" ng-show="userProfileForm.about.$error.required"><span>Required.</span></span>
+                             </span>
                         </div>
                     </div>
                     <div class="col-md-12 text-center margin-top-20">
-                        <a href="" class=" btn register_button" ng-click="doUpdateProfile()" ng-disabled="isClean()">Save Changes</a>
+                        <a href="" class=" btn register_button" ng-click="doUpdateProfile()" ng-disabled="isClean() || userProfileForm.$invalid">Save Changes</a>
                         <a href="#dashboard" class="btn cancel_button">Cancel</a>
                     </div>
                 </div>
@@ -181,13 +212,22 @@
         <div class="common_model">
             <form name="changePasswordForm">
                 <p>Current Password</p>
-                <input type="password" name="oldPassword" ng-model="changePassword.oldPassword" required/>
+                <input type="password" name="oldPassword" ng-model="changePassword.oldPassword" maxlength="20" required/>
+                <span ng-show="changePasswordForm.oldPassword.$dirty&&changePasswordForm.oldPassword.$invalid">
+                    <span class="error-message" ng-show="changePasswordForm.oldPassword.$error.required"><span>Required.</span></span>
+                </span>
                 <p>New Password</p>
-                <input type="password" name="newPassword" ng-model="changePassword.oldPassword" required/>
+                <input type="password" name="newPassword" ng-model="changePassword.newPassword" maxlength="20" required/>
+                 <span ng-show="changePasswordForm.newPassword.$dirty&&changePasswordForm.newPassword.$invalid">
+                    <span class="error-message" ng-show="changePasswordForm.newPassword.$error.required"><span>Required.</span></span>
+                </span>
                 <p>Confirm New Password</p>
-                <input type="password" name="confirmPassword"/>
+                <input type="password" name="confirmPassword" compare-to="changePassword.newPassword" ng-model="changePassword.confirmPassword"/>
+                <span ng-show="changePasswordForm.confirmPassword.$dirty&&changePasswordForm.confirmPassword.$invalid">
+                    <span class="error-message" ng-show="changePasswordForm.confirmPassword.$error.compareTo"><span>Password&nbsp;don't&nbsp;match.</span></span>
+                </span>
                 <div class="action_btns margin-top-20">
-                    <div class="one_half"><a class="btn btn_red">Change Password</a></div>
+                    <div class="one_half"><a class="btn btn_red modal_close" onclick="return false" ng-disabled="changePasswordForm.$invalid" ng-click="doChangePassword()">Change Password</a></div>
                     <div class="one_half last modal_close"><a onclick="return false;" class="btn back_btn">Cancel</a></div>
                 </div>
             </form>

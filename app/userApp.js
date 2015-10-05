@@ -1,4 +1,4 @@
-var userApp= angular.module('userApp', ['ngRoute','oc.lazyLoad','ngCookies','requestModule']);
+var userApp= angular.module('userApp', ['ngRoute','oc.lazyLoad','ngCookies','requestModule','ngAnimate','flash']);
 
 userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
 
@@ -126,7 +126,20 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 controller:'UserProfileController'
             }).
             when('/demography', {
-                templateUrl: 'views/demography.html'
+                templateUrl: 'views/demography.html',
+                resolve: {
+                    loadMyFiles:function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'userApp',
+                            files:[
+                                '../../css/profile-image-upload.css',
+                                '../../js/image-upload.js',
+                                '../../app/demography/demographyController.js'
+                            ]
+                        })
+                    }
+                },
+                controller:'DemographyController'
             }).
             otherwise({
                 redirectTo: '/dashboard'
@@ -150,3 +163,25 @@ userApp.controller("UserLogoutController",['$cookies','$scope','$window',functio
     };
 
 }]);
+
+
+//To Display success message
+//For User Messages
+function successMessage(Flash,message){
+
+    Flash.dismiss();
+    Flash.create('success', message, 'alert');
+    $("html, body").animate({
+        scrollTop: 0
+    }, 600);
+    return false;
+}
+
+function errorMessage(Flash,message){
+    Flash.dismiss();
+    Flash.create('danger', message, 'custom-class');
+    $("html, body").animate({
+        scrollTop: 0
+    }, 600);
+    return false;
+}

@@ -5,6 +5,25 @@ adminApp.controller('TestimonialController',function($scope,requestHandler,Flash
     $scope.title = "Add Testimonial";
     $scope.activeClass = {testimonial:'active'};
 
+    $scope.imageAdded=false;
+
+     $scope.fileNameChanged = function(element)
+    {
+        if(!$scope.imageAdded){
+            if(element.files.length > 0){
+                $scope.inputContainsFile = false;
+                $scope.imageAdded=true;
+            }
+            else{
+                $scope.inputContainsFile = true;
+                $scope.imageAdded=false;
+            }
+        }
+
+
+    }
+
+
     //summer note
     $scope.options = {
         height: 250
@@ -61,7 +80,25 @@ adminApp.controller('TestimonialController',function($scope,requestHandler,Flash
 
 adminApp.controller('TestimonialEditController',function($scope,requestHandler,Flash,$location,$routeParams,$sce) {
 
-    $scope.activeClass = {testimonial:'active'};
+    $scope.activeClass = {testimonial:'active'}
+
+    $scope.imageAdded=false;
+
+    $scope.fileNameChanged = function(element)
+    {
+        if(!$scope.imageAdded){
+            if(element.files.length > 0){
+                $scope.inputContainsFile = false;
+                $scope.imageAdded=true;
+            }
+            else{
+                $scope.inputContainsFile = true;
+                $scope.imageAdded=false;
+            }
+        }
+
+
+    }
 
     var original ="";
     //To display Latest News based on newsid
@@ -137,6 +174,8 @@ adminApp.controller('TestimonialEditController',function($scope,requestHandler,F
     //Display Edit Page with date On load
     $scope.doGetTestimonialsAdminByID();
 
+
+
 });
 
 // html filter (render text as html)
@@ -146,6 +185,7 @@ adminApp.filter('html', ['$sce', function ($sce) {
     };
 }]);
 
+// Validation for file upload
 adminApp.directive('validFile',function(){
     return {
         require:'ngModel',
@@ -183,7 +223,7 @@ commonApp.controller('TestimonialUserController',function($scope,requestHandler,
     };
 
     $scope.doGetTestimonialDetailsByUser= function (id) {
-      //  alert("hi");
+     // alert("hi");
         requestHandler.getRequest("getTestimonialDetail/"+id, "").then(function(response){
 
             //View the image in ng-src for view testimonials

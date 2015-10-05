@@ -191,7 +191,6 @@ if (typeof Object.create !== 'function') {
         },
 
         onPrev: function() {
-
             var self = this;
 
             if ( self.animationStarted ) {
@@ -221,7 +220,6 @@ if (typeof Object.create !== 'function') {
         },
 
         onNext: function() {
-
             var self = this;
 
             if ( self.animationStarted ) {
