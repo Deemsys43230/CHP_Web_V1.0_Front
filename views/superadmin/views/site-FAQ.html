@@ -23,7 +23,7 @@
                 <textarea class="form-control height-150" name="answer" ng-model="faq.answer" id="add-answer" required maxlength="300"></textarea>
 
                 <div class="action_btns margin-top-20">
-                    <div class="one_half modal_close"><a onclick="return false;" class="btn btn_blue" ng-disabled="faqAddForm.$invalid" ng-click="doAddFAQ()">Add FAQ</a></div>
+                    <div class="one_half"><a onclick="return false;" ng-class="{modal_close:faqAddForm.$invalid}" class="btn btn_blue" ng-disabled="faqAddForm.$invalid" ng-click="doAddFAQ()">Add FAQ</a></div>
                     <div class="one_half last modal_close"><a href="" class="btn btn_red">Cancel</a></div>
                 </div>
             </form>
@@ -49,20 +49,20 @@
             <div class="common_model">
                 <form name="faqEditForm">
                     <p>Question ( <span class="text-bold text-red">{{ (300-faq.question.length) }}</span> Left )</p>
-                    <span ng-show="faqEditForm.question.$dirty&&faqEditForm.question.$invalid">
+                    <span ng-show="faqEditForm.question.$dirty&&faqEditForm.question.$invalid && !faqEditForm.question.$pristine">
                         <span class="error-message textarea-errormessage40" ng-show="faqEditForm.question.$error.required"><span>Required.</span></span>
                     </span>
                     <textarea class="form-control height-100" name="question" ng-model="faq.question" required id="question" maxlength="300"></textarea>
 
 
                     <p>Answer ( <span class="text-bold text-red">{{(300-faq.answer.length) }}</span> Left )</p>
-                    <span ng-show="faqEditForm.answer.$dirty&&faqEditForm.answer.$invalid">
+                    <span ng-show="faqEditForm.answer.$dirty&&faqEditForm.answer.$invalid && !faqEditForm.question.$pristine">
                         <span class="error-message textarea-errormessage40" ng-show="faqEditForm.answer.$error.required"><span>Required.</span></span>
                     </span>
                     <textarea class="form-control height-150" name="answer" ng-model="faq.answer" required id="answer" maxlength="300"></textarea>
 
                     <div class="action_btns margin-top-20">
-                        <div class="one_half modal_close"><a onclick="return false;" class="btn btn_blue" ng-disabled="isClean()|| faqEditForm.$invalid" ng-click="doUpdateFAQ(faq.faqid)">Edit FAQ</a></div>
+                        <div class="one_half"><a onclick="return false;" ng-class="{modal_close:isClean()||faqEditForm.$invalid}" class="btn btn_blue" ng-disabled="isClean()|| faqEditForm.$invalid" ng-click="doUpdateFAQ(faq.faqid)">Edit FAQ</a></div>
                         <div class="one_half last modal_close"><a href="" class="btn btn_red">Cancel</a></div>
                     </div>
                 </form>

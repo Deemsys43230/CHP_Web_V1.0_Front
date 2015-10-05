@@ -20,6 +20,7 @@ adminApp.controller('FAQController',function($scope,requestHandler,Flash){
     $scope.reset=function(){
         $scope.faq={};
         $scope.faqAddForm.$setPristine();
+        $scope.faqEditForm.$setPristine();
     };
 
     var original="";
@@ -31,7 +32,6 @@ adminApp.controller('FAQController',function($scope,requestHandler,Flash){
             $scope.doGetAllFAQ();
             successMessage(Flash,"Successfully Added");
             $scope.loaded=false;
-            $scope.faqAddForm.$setPristine();
         }, function () {
             errorMessage(Flash, "Please try again later!")
         });
@@ -42,7 +42,7 @@ adminApp.controller('FAQController',function($scope,requestHandler,Flash){
         requestHandler.putRequest("admin/insertorupdateFAQList/",$scope.faq).then(function(response){
             $scope.doGetAllFAQ();
             successMessage(Flash,"Successfully Updated");
-            $scope.faq={};
+            $scope.reset();
         },function(){
             errorMessage(Flash,"Please try again later!")
         });
@@ -69,6 +69,7 @@ adminApp.controller('FAQController',function($scope,requestHandler,Flash){
         });
 
         $scope.modalloaded=true;
+        $scope.reset();
         requestHandler.getRequest("admin/getFAQListById/"+id,"").then(function(response){
             original=angular.copy(response.data.Faq_Data);
             $scope.faq=response.data.Faq_Data;
@@ -78,7 +79,6 @@ adminApp.controller('FAQController',function($scope,requestHandler,Flash){
         });
 
         $(".modal_close").click(function(){
-            $scope.faq={};
             $(".common_model").hide();
             $("#modal-edit").hide();
             $("#lean_overlay").hide();
@@ -99,26 +99,6 @@ adminApp.controller('FAQController',function($scope,requestHandler,Flash){
     $scope.doGetAllFAQ();
 
 });
-
-
-/*adminApp.controller('FAQAdminController',function($scope,requestHandler,Flash){
-
-    // To display FAQ as user
-    $scope.doGetAdminFAQ=function(){
-
-        requestHandler.getRequest("getFAQListByUser/", "").then(function(response){
-
-            $scope.userfaqlist=response.data.Faq_Data;
-            console.log($scope.userfaqlist);
-        },function(){
-            errorMessage(Flash,"Please try again later!")
-        });
-    };
-
-    // To display the user FAQ list on load
-    $scope.doGetAdminFAQ();
-
-});*/
 
 var commonApp = angular.module('commonApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate']);
 
