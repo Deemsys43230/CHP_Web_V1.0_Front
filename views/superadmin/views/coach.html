@@ -10,9 +10,10 @@
         <div class="user_register">
             <form name="coachRegisterForm">
                 <p>Name</p>
-                <input type="text" ng-model="coach.name" name="coachName" required/>
+                <input type="text" ng-pattern="/^ *([a-zA-Z]+ ?)+ *$/" ng-model="coach.name" name="coachName" required maxlength="45" />
                 <span ng-show="coachRegisterForm.coachName.$dirty&&coachRegisterForm.coachName.$invalid">
                     <span class="error-message" ng-show="coachRegisterForm.coachName.$error.required"><span>Required.</span></span>
+                    <span class="error-message" ng-show="coachRegisterForm.coachName.$error.pattern"><span>Enter&nbsp;valid&nbsp;Name.</span></span>
                 </span>
 
                 <p>Email</p>
@@ -23,12 +24,13 @@
                 </span>
                 <span class="error-message" ng-show="coachRegisterForm.emailid.$error.emailexists"><span>Email&nbsp;ID&nbsp;Already&nbsp;Exist.</span></span>
                 <p>Password</p>
-                <input type="password" name="password" ng-model="coach.password" required/>
+                <input type="password" name="password" ng-pattern="/^[^ ]+$/" ng-model="coach.password" required maxlength="20"/>
                  <span ng-show="coachRegisterForm.password.$dirty&&coachRegisterForm.password.$invalid">
                     <span class="error-message" ng-show="coachRegisterForm.password.$error.required"><span>Required.</span></span>
+                     <span class="error-message" ng-show="coachRegisterForm.password.$error.pattern"><span>Password&nbsp;doesn't&nbsp;allow&nbsp;space.</span></span>
                 </span>
                 <p>Confirm Password</p>
-                <input type="password" name="confirm_password" ng-model="confirm_password" compare-to="coach.password"/>
+                <input type="password" name="confirm_password" ng-model="confirm_password"  compare-to="coach.password" maxlength="20">
                 <span ng-show="coachRegisterForm.confirm_password.$dirty&&coachRegisterForm.confirm_password.$invalid">
                     <span class="error-message" ng-show="coachRegisterForm.confirm_password.$error.compareTo"><span>Password&nbsp;don't&nbsp;match.</span></span>
                 </span>
@@ -71,9 +73,7 @@
                         <td>{{coach.emailid}}</td>
                         <td>
                             <a href="#coach-view/{{coach.userid}}" class="btn-xs btn-primary">View</a>
-                            <a href="#coach-edit" class="btn-xs btn-danger">Edit</a>
                             <a href="" class="btn-xs btn-success">Enable</a>
-                            <a href="" class="btn-xs btn-warning">Reset Password</a>
                         </td>
                     </tr>
                     </tbody>
