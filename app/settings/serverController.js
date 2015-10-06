@@ -7,13 +7,18 @@ adminApp.controller('ServerSettingsController',function($scope,requestHandler,Fl
     var original="";
     $scope.activeClass = {sever:'active'};
 
+    $scope.copyOrginal_serverSettings=function(mobileInfoIos){
+        $scope.copyOrginal_serverSettings = serverSettings;
+        $scope.serverSettings.port = $scope.serverSettings.port.toString();
+        $scope.serverSettings.ssl = $scope.serverSettings.ssl.toString();
+        original=angular.copy( $scope.serverSettings);
+    }
+
                 /*VIEW ALL*/
     $scope.doGetServerSettings= function () {
         requestHandler.getRequest("admin/getappdetails","").then(function(response){
             $scope.serverSettings=response.data.App_settings[0];
-            $scope.serverSettings.port = $scope.serverSettings.port.toString();
-            $scope.serverSettings.ssl = $scope.serverSettings.ssl.toString();
-            original=angular.copy( $scope.serverSettings);
+            $scope.copyOrginal_serverSettings();
 
         },function(response){
             errorMessage(Flash,"Please Try again later");
@@ -24,7 +29,7 @@ adminApp.controller('ServerSettingsController',function($scope,requestHandler,Fl
                 /*UPDATE SERVER*/
     $scope.doUpdateServerSettings=function(){
         requestHandler.putRequest("admin/updateEmailDetails",$scope.serverSettings).then(function(response){
-            original=angular.copy( $scope.serverSettings);
+            $scope.copyOrginal_serverSettings
             successMessage(Flash,"Successfully Updated!");
         },function(){
             errorMessage(Flash,"Please try again later");

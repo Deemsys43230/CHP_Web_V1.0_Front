@@ -14,6 +14,7 @@ adminApp.controller('ContactUsController',function($scope,requestHandler,Flash){
         $scope.contactUs.zipcode = $scope.contactUs.zipcode.toString();
         original=angular.copy( $scope.contactUs);
     };
+
     $scope.doGetContactUs= function () {
         requestHandler.getRequest("admin/getappdetails/","").then(function(response){
             $scope.contactUs = response.data.App_settings[0];
