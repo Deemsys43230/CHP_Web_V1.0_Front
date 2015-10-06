@@ -332,7 +332,6 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                             files:[
                                 '../../js/bootstrap.min.js',
                                 '../../plugin/popup/style.css',
-                                '../../plugin/popup/jquery.leanModal.min.js',
                                 '../../app/coach/coachController.js'
                             ]
                         })
@@ -736,3 +735,43 @@ function errorMessage(Flash,message){
     }, 600);
     return false;
 }
+
+//Check For Email Validation
+adminApp.directive('validateEmail', function() {
+    var EMAIL_REGEXP = /^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,5})$/;
+
+    return {
+        require: 'ngModel',
+        restrict: '',
+        link: function(scope, elm, attrs, ctrl) {
+            // only apply the validator if ngModel is present and Angular has added the email validator
+            if (ctrl && ctrl.$validators.email) {
+
+                // this will overwrite the default Angular email validator
+                ctrl.$validators.email = function(modelValue) {
+                    return ctrl.$isEmpty(modelValue) || EMAIL_REGEXP.test(modelValue);
+                };
+            }
+        }
+    };
+});
+
+//Check For URL Validation
+adminApp.directive('validateUrl', function() {
+    var URL_REGEXP = /^((?:http|ftp)s?:\/\/)(?:(?:[A-Z0-9](?:[A-Z0-9-]{0,61}[A-Z0-9])?\.)+(?:[A-Z]{2,6}\.?|[A-Z0-9-]{2,}\.?)|localhost|\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})(?::\d+)?(?:\/?|[\/?]\S+)$/i
+
+    return {
+        require: 'ngModel',
+        restrict: '',
+        link: function(scope, elm, attrs, ctrl) {
+            // only apply the validator if ngModel is present and Angular has added the email validator
+            if (ctrl && ctrl.$validators.url) {
+
+                // this will overwrite the default Angular email validator
+                ctrl.$validators.url = function(modelValue) {
+                    return ctrl.$isEmpty(modelValue) || URL_REGEXP.test(modelValue);
+                };
+            }
+        }
+    };
+});

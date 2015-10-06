@@ -83,9 +83,10 @@
                             <h5>City :</h5>
                         </div>
                         <div class="col-md-8">
-                            <input class="profile_input" name="city" ng-model="userProfile.city" maxlength="20" required/>
+                            <input class="profile_input" name="city" ng-pattern="/^ *([a-zA-Z]+ ?)+ *$/" ng-model="userProfile.city" maxlength="20" required/>
                              <span ng-show="userProfileForm.city.$dirty&&userProfileForm.city.$invalid">
-                    <span class="error-message textarea-errormessage10" ng-show="userProfileForm.city.$error.required"><span>Required.</span></span>
+                                 <span class="error-message textarea-errormessage10" ng-show="userProfileForm.city.$error.required"><span>Required.</span></span>
+                                 <span class="error-message textarea-errormessage10" ng-show="userProfileForm.city.$error.pattern"><span>Invalid&nbsp;city.</span></span>
                              </span>
                         </div>
                     </div>
@@ -94,10 +95,11 @@
                             <h5>Mobile :</h5>
                         </div>
                         <div class="col-md-8">
-                            <input class="profile_input" name="phone" ng-pattern="/^\d+$/"  ng-model="userProfile.phone" maxlength="10" required />
+                            <input class="profile_input" name="phone" ng-pattern="/^\d+$/"  ng-model="userProfile.phone" ng-minlength="10" maxlength="10" required />
                             <span ng-show="userProfileForm.phone.$dirty&&userProfileForm.phone.$invalid">
                                  <span class="error-message textarea-errormessage10" ng-show="userProfileForm.phone.$error.required"><span>Required.</span></span>
                                   <span class="error-message textarea-errormessage10" ng-show="userProfileForm.phone.$error.pattern"><span>Invalid&nbsp;Format.</span></span>
+                                 <span class="error-message textarea-errormessage10" ng-show="!userProfileForm.phone.$error.pattern&&userProfileForm.phone.$error.minlength"><span>Should&nbsp;be&nbsp;of&nbsp;length&nbsp;10.</span></span>
                              </span>
                         </div>
                     </div>
@@ -106,10 +108,12 @@
                             <h5>Zipcode :</h5>
                         </div>
                         <div class="col-md-8">
-                            <input class="profile_input" name="zipcode" ng-pattern="/^\d+$/" ng-model="userProfile.zipcode" maxlength="6" required/>
+                            <input class="profile_input" name="zipcode" ng-pattern="/^\d+$/" ng-model="userProfile.zipcode" maxlength="6" ng-minlength="6" required/>
                             <span ng-show="userProfileForm.zipcode.$dirty&&userProfileForm.zipcode.$invalid">
                                 <span class="error-message textarea-errormessage10" ng-show="userProfileForm.zipcode.$error.required"><span>Required.</span></span>
                                 <span class="error-message textarea-errormessage10" ng-show="userProfileForm.zipcode.$error.pattern"><span>Invalid&nbsp;Format.</span></span>
+
+                                <span class="error-message textarea-errormessage10" ng-show="!userProfileForm.zipcode.$error.pattern&&userProfileForm.zipcode.$error.minlength"><span>Should&nbsp;be&nbsp;of&nbsp;length&nbsp;6.</span></span>
                              </span>
                         </div>
                     </div>

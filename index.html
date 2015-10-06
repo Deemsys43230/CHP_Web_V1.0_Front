@@ -150,7 +150,7 @@
             <div flash-message="5000" ></div>
             <form name="loginForm" novalidate>
                 <p>Email</p>
-                <input type="email" name="username" ng-model="username" required email/>
+                <input type="email" name="username" ng-model="username" required validate-email/>
                 <span ng-show="loginForm.username.$dirty&&loginForm.username.$invalid">
                 <span class="error-message" ng-show="loginForm.username.$error.required"><span>Required.</span></span>
                 <span class="error-message" ng-show="loginForm.username.$error.email"><span>Enter&nbsp;valid&nbsp;Email&nbsp;ID.</span></span>
@@ -219,26 +219,27 @@
             <div flash-message="5000" ></div>
             <form name="registerForm">
                 <p>Name</p>
-                <input type="text" name="name" ng-pattern="/^ *([a-zA-Z]+ ?)+ *$/"  ng-model="userForm.name" required/>
+                <input type="text" name="name" ng-pattern="/^ *([a-zA-Z]+ ?)+ *$/"  ng-model="userForm.name" maxlength="30" required/>
                 <span ng-show="registerForm.name.$dirty&&registerForm.name.$invalid">
                     <span class="error-message" ng-show="registerForm.name.$error.required"><span>Required.</span></span>
                      <span class="error-message" ng-show="registerForm.name.$error.pattern"><span>Enter&nbsp;valid&nbsp;Name.</span></span>
                 </span>
                 <p>Email</p>
-                <input type="email" name="emailid" ng-model="userForm.emailid" required email emailexists/>
+                <input type="email" name="emailid" ng-model="userForm.emailid"  required validate-email emailexists/>
                 <span ng-show="registerForm.emailid.$dirty&&registerForm.emailid.$invalid">
                     <span class="error-message" ng-show="registerForm.emailid.$error.required"><span>Required.</span></span>
-                    <span class="error-message" ng-show="registerForm.emailid.$error.email"><span>Enter&nbsp;valid&nbsp;Email&nbsp;ID.</span></span>
+                   <span class="error-message" ng-show="registerForm.emailid.$error.email"><span>Enter&nbsp;valid&nbsp;Email&nbsp;ID.</span></span>
+
                 </span>
                 <span class="error-message" ng-show="registerForm.emailid.$error.emailexists"><span>Email&nbsp;Address&nbsp;Already&nbsp;Exist.</span></span>
                 <p>Password</p>
-                <input type="password" name="password" ng-model="userForm.password" ng-pattern="/^[^ ]+$/" required/>
+                <input type="password" name="password" ng-model="userForm.password" ng-pattern="/^[^ ]+$/"  maxlength="20" required/>
                 <span ng-show="registerForm.password.$dirty&&registerForm.password.$invalid">
                     <span class="error-message" ng-show="registerForm.password.$error.required"><span>Required.</span></span>
                       <span class="error-message" ng-show="registerForm.password.$error.pattern"><span>Password&nbsp;doesn't&nbsp;allow&nbsp;space.</span></span>
                 </span>
                 <p>Confirm Password</p>
-                <input type="password" name="confirmPassword" compare-to="userForm.password" required ng-model="confirmpassword"/>
+                <input type="password" name="confirmPassword" compare-to="userForm.password" maxlength="20" required ng-model="confirmpassword"/>
                 <span ng-show="registerForm.confirmPassword.$dirty&&registerForm.confirmPassword.$invalid">
                     <span class="error-message" ng-show="registerForm.confirmPassword.$error.compareTo"><span>Password&nbsp;don't&nbsp;match.</span></span>
                 </span>
@@ -252,12 +253,12 @@
         <div class="user_register1">
             <form name="registerForm2">
                     <p>Security Question (Optional)</p>
-                    <input type="text" name="secretquestion" ng-model="userForm.secretquestion" ng-required="userForm.secretanswer"/>
+                    <input type="text" name="secretquestion" ng-model="userForm.secretquestion" maxlength="150" ng-required="userForm.secretanswer"/>
                     <span ng-show="registerForm2.secretquestion.$invalid">
                                 <span class="error-message" ng-show="registerForm2.secretquestion.$error.required"><span>Required.</span></span>
                     </span>
                     <p>Answer</p>
-                    <input type="text" name="secretanswer" ng-model="userForm.secretanswer" ng-required="userForm.secretquestion"/>
+                    <input type="text" name="secretanswer" ng-model="userForm.secretanswer" maxlength="150" ng-required="userForm.secretquestion"/>
                             <span ng-show="registerForm2.secretanswer.$invalid">
                                 <span class="error-message" ng-show="registerForm2.secretanswer.$error.required"><span>Required.</span></span>
                             </span>

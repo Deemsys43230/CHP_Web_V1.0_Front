@@ -253,6 +253,14 @@ commonApp.controller('LoginController',function($scope,requestHandler,Flash,$win
     $scope.register=function(){
         //Operation After clicked create account
         $scope.userForm.role="3";
+        if($scope.userForm.secretquestion==""){
+            delete $scope.userForm.secretquestion;
+            delete $scope.userForm.secretanswer;
+        }
+        if($scope.userForm.secretanswer==""){
+            delete $scope.userForm.secretquestion;
+            delete $scope.userForm.secretanswer;
+        }
         requestHandler.postRequest("registerUser/",$scope.userForm).then(function(response){
 
             console.log($scope.userForm);
@@ -271,6 +279,8 @@ commonApp.controller('LoginController',function($scope,requestHandler,Flash,$win
 
                 $scope.userForm={};
                 $scope.registerForm=false;
+                $scope.confirm_password=false;
+
 
             }
         });
@@ -434,6 +444,46 @@ commonApp.directive("emailexists", function ($q, $timeout,requestHandler) {
                 }, 10);
 
                 return defer.promise;
+            }
+        }
+    };
+});
+
+//Check For Email Validation
+commonApp.directive('validateEmail', function() {
+    var EMAIL_REGEXP = /^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,5})$/;
+
+    return {
+        require: 'ngModel',
+        restrict: '',
+        link: function(scope, elm, attrs, ctrl) {
+            // only apply the validator if ngModel is present and Angular has added the email validator
+            if (ctrl && ctrl.$validators.email) {
+
+                // this will overwrite the default Angular email validator
+                ctrl.$validators.email = function(modelValue) {
+                    return ctrl.$isEmpty(modelValue) || EMAIL_REGEXP.test(modelValue);
+                };
+            }
+        }
+    };
+});
+
+//Check For Url Validation
+commonApp.directive('validateUrl', function() {
+    var URL_REGEXP = /^((?:http|ftp)s?:\/\/)(?:(?:[A-Z0-9](?:[A-Z0-9-]{0,61}[A-Z0-9])?\.)+(?:[A-Z]{2,6}\.?|[A-Z0-9-]{2,}\.?)|localhost|\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})(?::\d+)?(?:\/?|[\/?]\S+)$/i
+
+    return {
+        require: 'ngModel',
+        restrict: '',
+        link: function(scope, elm, attrs, ctrl) {
+            // only apply the validator if ngModel is present and Angular has added the email validator
+            if (ctrl && ctrl.$validators.url) {
+
+                // this will overwrite the default Angular email validator
+                ctrl.$validators.url = function(modelValue) {
+                    return ctrl.$isEmpty(modelValue) || URL_REGEXP.test(modelValue);
+                };
             }
         }
     };
