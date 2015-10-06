@@ -7,20 +7,25 @@ adminApp.controller('ContactUsController',function($scope,requestHandler,Flash){
 
     $scope.activeClass = {basic:'active'};
 
-    //This
+                /*VIEW ALL*/
     var original="";
     $scope.doGetContactUs= function () {
         requestHandler.getRequest("admin/getappdetails/","").then(function(response){
-            original=angular.copy(response.data.App_settings[0]);
-             $scope.contactUs=response.data.App_settings[0];
+            $scope.contactUs = response.data.App_settings[0];
+            $scope.contactUs.zipcode = $scope.contactUs.zipcode.toString();
+            original=angular.copy( $scope.contactUs);
+
         },function(response){
             errorMessage(Flash,"Please Try again later");
         });
 
     };
-
+                /*UPDATE DETAILS*/
     $scope.doUpdateContactUs=function(){
         requestHandler.putRequest("admin/updateAddressDetails",$scope.contactUs).then(function(response){
+            $scope.contactUs.zipcode = parseFloat($scope.contactUs.zipcode);
+            original=angular.copy(response.data.App_settings[0]);
+
             successMessage(Flash,"Successfully Updated!");
         },function(){
             errorMessage(Flash,"Please try again later");
@@ -37,7 +42,7 @@ adminApp.controller('ContactUsController',function($scope,requestHandler,Flash){
 var commonApp = angular.module('commonApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate']);
 commonApp.controller('ContactUsDetailsController',function($scope,requestHandler,Flash) {
 
-    // To Get the Contact Us details
+    // To Get the Contact Us details for user
     $scope.doGetContactUsDetails= function () {
         requestHandler.getRequest("contactus/","").then(function(response){
             $scope.contactUsDetails=response.data.Contactus[0];

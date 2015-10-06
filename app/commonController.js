@@ -42,23 +42,23 @@ commonApp.controller('TestimonialUserController',function($scope,requestHandler,
     };
 
     $scope.doGetTestimonialDetailsByUser= function (id) {
-        //  alert("hi");
+         // alert("hi");
         requestHandler.getRequest("getTestimonialDetail/"+id, "").then(function(response){
 
             //View the image in ng-src for view testimonials
             $scope.myImgSrc = $sce.trustAsResourceUrl(response.data.Testimonials.imageurl+"?decache="+Math.random());
-
+            alert($scope.myImgSrc)
             $scope.usertestimonialdetails=response.data.Testimonials
-
+            alert(response.data.Testimonials)
         },function(){
-            errorMessage(Flash,"Please try again later!")
+            errorMessage(Flash,"Please dont try again later!")
         });
 
     };
 
     // To display the user Testimonial list on load
     $scope.doGetTestimonialsByUser();
-    $scope.doGetTestimonialDetailsByUser($routeParams.id);
+   // $scope.doGetTestimonialDetailsByUser($routeParams.id);
 
 
 });

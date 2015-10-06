@@ -26,6 +26,7 @@ adminApp.controller('PaypalSettingsController',function($scope,requestHandler,Fl
     };
 
     $scope.doGetPaypalSettings_isClean=function(){
+        console.log(angular.equals(original, $scope.paypalSettings));
         return angular.equals(original, $scope.paypalSettings);
     };
 
