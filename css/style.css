@@ -7944,3 +7944,11 @@ input[type=range]:focus::-ms-fill-upper {
 	border-bottom: 1px solid #eee;
 	margin-bottom: 3px;
 }
+
+.small-font{
+	font-size: 12px;
+}
+
+.avoid-clicks {
+	pointer-events: none;
+}

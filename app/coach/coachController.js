@@ -56,11 +56,7 @@ adminApp.controller('CoachViewController',function($scope,requestHandler,Flash,$
             $scope.averageRatings = response.data.Ratings_Reviews.averageRatings;
         });
     };
-
-    $scope.range = function(n) {
-        return new Array(n);
-    };
-
+    
     $scope.doGetCoachProfile();
 
 

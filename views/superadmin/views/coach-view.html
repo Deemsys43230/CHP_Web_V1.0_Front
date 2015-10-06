@@ -10,9 +10,9 @@
                 <div class="col-md-3 coach-details">
                     <img ng-src="{{coachProfile.imageurl | trusted}}"/>
                     <h3 class="margin-top-10">{{coachProfile.name}}</h3>
-                    <p class="margin-bottom-20">Running Specilist</p>
+                    <p>Running Specilist</p>
                     Ratings: {{averageRatings}}
-                    <div class="score" data-rating="{{averageRatings}}"></div>
+                    <div class="score margin-bottom-20 avoid-clicks" data-rating="{{averageRatings}}"></div>
                     <p><strong>Email-Id : </strong>{{coachProfile.emailid}}</p>
                     <p><strong>DOB : </strong>{{coachProfile.dob}}</p>
                     <p><strong>Phone : </strong>{{coachProfile.phone}}</p>
@@ -30,8 +30,8 @@
                     <div class="row" dir-paginate="reviews in coachReviews | itemsPerPage: 4" ng-show="coachReviews.length!=0">
                         <div class="col-md-2">
                             <img class="img-responsive img-circle" ng-src="{{reviews.review_imageurl | trusted}}">
-                           <strong>{{reviews.review_username}}</strong>
-                            <span>{{reviews.reviewddatetime}}</span>
+                          <p> <strong>{{reviews.review_username}}</strong></p>
+                            <span class="small-font">{{reviews.reviewddatetime}}</span>
                         </div>
                         <div class="col-md-7">
                             <strong>{{reviews.reviewtitle}}</strong>
@@ -41,7 +41,7 @@
 
                         <div class="col-md-3 review">
                             Ratings : {{reviews.ratinglevel}}<br/>
-                            <div class="score" data-rating="{{reviews.ratinglevel}}"></div>
+                            <div class="score avoid-clicks"  data-rating="{{reviews.ratinglevel}}"></div>
                             <!--<i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
