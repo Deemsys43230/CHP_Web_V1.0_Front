@@ -9,7 +9,7 @@ adminApp.controller('ContactUsController',function($scope,requestHandler,Flash){
 
                 /*VIEW ALL*/
     var original="";
-    $scope.copyOrginal_contactUs=function(mobileInfoIos){
+    $scope.copyOrginal_contactUs=function(contactUs){
         $scope.copyOrginal_contactUs=contactUs;
         $scope.contactUs.zipcode = $scope.contactUs.zipcode.toString();
         original=angular.copy( $scope.contactUs);
