@@ -332,7 +332,7 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                             files:[
                                 '../../js/bootstrap.min.js',
                                 '../../plugin/popup/style.css',
-                                '../../plugin/popup/jquery.leanModal.min.js',,
+                                '../../plugin/popup/jquery.leanModal.min.js',
                                 '../../app/coach/coachController.js'
                             ]
                         })
@@ -340,18 +340,22 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:"CoachController"
             }).
-            when('/coach-view', {
+            when('/coach-view/:id', {
                 templateUrl: 'views/coach-view.html',
                 resolve: {
                     loadMyFiles:function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
-                                '../../js/bootstrap.min.js'
+                                '../../js/bootstrap.min.js',
+                                '../../css/profile-image-upload.css',
+                                '../../js/image-upload.js',
+                                '../../app/coach/coachController.js'
                             ]
                         })
                     }
-                }
+                },
+                controller:"CoachViewController"
             }).
             when('/coach-edit', {
                 templateUrl: 'views/coach-edit.html',

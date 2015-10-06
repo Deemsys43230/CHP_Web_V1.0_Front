@@ -219,9 +219,10 @@
             <div flash-message="5000" ></div>
             <form name="registerForm">
                 <p>Name</p>
-                <input type="text" name="name" ng-model="userForm.name" required/>
+                <input type="text" name="name" ng-pattern="/^ *([a-zA-Z]+ ?)+ *$/"  ng-model="userForm.name" required/>
                 <span ng-show="registerForm.name.$dirty&&registerForm.name.$invalid">
                     <span class="error-message" ng-show="registerForm.name.$error.required"><span>Required.</span></span>
+                     <span class="error-message" ng-show="registerForm.name.$error.pattern"><span>Enter&nbsp;valid&nbsp;Name.</span></span>
                 </span>
                 <p>Email</p>
                 <input type="email" name="emailid" ng-model="userForm.emailid" required email emailexists/>
@@ -231,9 +232,10 @@
                 </span>
                 <span class="error-message" ng-show="registerForm.emailid.$error.emailexists"><span>Email&nbsp;Address&nbsp;Already&nbsp;Exist.</span></span>
                 <p>Password</p>
-                <input type="password" name="password" ng-model="userForm.password" required/>
+                <input type="password" name="password" ng-model="userForm.password" ng-pattern="/^[^ ]+$/" required/>
                 <span ng-show="registerForm.password.$dirty&&registerForm.password.$invalid">
                     <span class="error-message" ng-show="registerForm.password.$error.required"><span>Required.</span></span>
+                      <span class="error-message" ng-show="registerForm.password.$error.pattern"><span>Password&nbsp;doesn't&nbsp;allow&nbsp;space.</span></span>
                 </span>
                 <p>Confirm Password</p>
                 <input type="password" name="confirmPassword" compare-to="userForm.password" required ng-model="confirmpassword"/>

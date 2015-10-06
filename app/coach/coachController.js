@@ -38,3 +38,37 @@ adminApp.controller('CoachController',function($scope,requestHandler,Flash) {
     $scope.doGetCoachList();
 
 });
+
+
+adminApp.controller('CoachViewController',function($scope,requestHandler,Flash,$routeParams) {
+
+    $scope.doGetCoachProfile = function () {
+        requestHandler.getRequest("getCoachIndividualDetail/"+$routeParams.id, "").then(function (response) {
+            $scope.coachProfile = response.data.getCoachIndividualDetail;
+            $scope.coachProfile.imageurl = $scope.coachProfile.imageurl.substring($scope.coachProfile.imageurl.indexOf("/") + 14, $scope.coachProfile.imageurl.length)
+            $scope.coachProfile.imageurl = $scope.coachProfile.imageurl + "?decache=" + Math.random();
+        });
+
+
+        requestHandler.getRequest("getRatingsandReviews/"+$routeParams.id, "").then(function (response) {
+
+            $scope.coachReviews = response.data.Ratings_Reviews.Reviews;
+            $scope.ratings = $scope.coachReviews.ratinglevel;
+        });
+    };
+
+    $scope.range = function(n) {
+        return new Array(n);
+    };
+
+    $scope.doGetCoachProfile();
+
+
+});
+
+// render image to view in list
+adminApp.filter('trusted', ['$sce', function ($sce) {
+    return function(url) {
+        return $sce.trustAsResourceUrl(url);
+    };
+}]);

@@ -65,12 +65,12 @@
                         <th class="option-col1">Options</th>
                     </tr>
                     </thead>
-                    <tbody dir-paginate="coach in coachList | itemsPerPage: 7" ng-show="news.length!=0">
+                    <tbody dir-paginate="coach in coachList | itemsPerPage: 7" ng-show="coachList.length!=0">
                     <tr>
                         <td>{{coach.name}}</td>
                         <td>{{coach.emailid}}</td>
                         <td>
-                            <a href="#coach-view" class="btn-xs btn-primary">View</a>
+                            <a href="#coach-view/{{coach.userid}}" class="btn-xs btn-primary">View</a>
                             <a href="#coach-edit" class="btn-xs btn-danger">Edit</a>
                             <a href="" class="btn-xs btn-success">Enable</a>
                             <a href="" class="btn-xs btn-warning">Reset Password</a>

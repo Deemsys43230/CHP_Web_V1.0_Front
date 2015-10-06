@@ -8,108 +8,50 @@
                 <a href="#coach" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back to Coach List</a>
                 <h4 class="classic-title"><span>Coach Management</span></h4>
                 <div class="col-md-3 coach-details">
-                    <img src="../../images/pic-1.jpg"/>
-                    <h3 class="margin-top-10">MARY MICHELLE</h3>
+                    <img ng-src="{{coachProfile.imageurl | trusted}}"/>
+                    <h3 class="margin-top-10">{{coachProfile.name}}</h3>
                     <p class="margin-bottom-20">Running Specilist</p>
-                    <p><strong>Email-Id : </strong>anthony42@gmail.com</p>
-                    <p><strong>DOB : </strong>12/03/1890</p>
-                    <p><strong>Phone : </strong>6380329</p>
-                    <p><strong>Gender : </strong>Female</p>
-                    <p><strong>Country : </strong>USA</p>
-                    <p><strong>City : </strong>Newyork</p>
-                    <p><strong>Zipcode : </strong>829249</p>
-                    <p><strong>Qualification : </strong>829249</p>
+                    <p><strong>Email-Id : </strong>{{coachProfile.emailid}}</p>
+                    <p><strong>DOB : </strong>{{coachProfile.dob}}</p>
+                    <p><strong>Phone : </strong>{{coachProfile.phone}}</p>
+                    <p><strong>Gender : </strong><span ng-if="coachProfile.gender == 1">Male</span><span ng-if="coachProfile.gender == 2">Female</span></p>
+                    <p><strong>Country : </strong>{{coachProfile.country}}</p>
+                    <p><strong>City : </strong>{{coachProfile.city}}</p>
+                    <p><strong>Zipcode : </strong>{{coachProfile.zipcode}}</p>
+                    <p><strong>Qualification : </strong>{{coachProfile.qualification}}</p>
                 </div>
                 <div class="col-md-9">
-                    <h4 class="text-orange">Description :</h4>
-                    <p class="margin-top-5">
-                        How many girls / women are named . . . in the United States? The following tables include the 1000 most common female first names in the US population during the 1990 census.
-                        Read more at http://names.mongabay.com/female_names.htm#8K7JMAzmwbfR0DHs.99
-                    </p>
+                    <h4 class="text-orange">Description :</h4><!--<div id="score" data-rating="4"></div>-->
+                    <p class="margin-top-5">{{coachProfile.about}}</p>
                     <hr/>
                     <h4 class="margin-top-20 margin-bottom-10 text-orange">Reviews :</h4>
-                    <div class="row">
+                    <div class="row" dir-paginate="reviews in coachReviews | itemsPerPage: 4" ng-show="coachReviews.length!=0">
                         <div class="col-md-2">
-                            <h5>Anderson</h5>
+                            <img class="img-responsive img-circle" ng-src="{{reviews.review_imageurl | trusted}}">
+                           <strong>{{reviews.review_username}}</strong>
+                            <span>{{reviews.reviewddatetime}}</span>
                         </div>
                         <div class="col-md-7">
-                            <p>women are named . . . in the United States? The following tables include the 1000 most common female first names in the US population during the 1990 census.
-                            Read more at http://names.mongabay.com/femal</p>
-                            <hr/>
+                            <strong>{{reviews.reviewtitle}}</strong>
+                            <p>{{reviews.reviewdescription}}</p>
                         </div>
+
+
                         <div class="col-md-3 review">
-                            Ratings : 3.5/5<br/>
+                            Ratings : {{reviews.ratinglevel}}<br/>
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star-half-empty"></i>
                             <i class="fa fa-star-o"></i>
                         </div>
+                        <div class="col-md-12"><hr/></div>
+
                     </div>
-                    <div class="row">
-                        <div class="col-md-2">
-                            <h5>Anthony thomas</h5>
-                        </div>
-                        <div class="col-md-7">
-                            <p>women are named . . . in the United States? The following tables include the 1000 most common female first names in the US population during the 1990 census.
-                            Read more at http://names.mongabay.com/femal</p>
-                            <hr/>
-                        </div>
-                        <div class="col-md-3 review">
-                            Ratings : 3.5/5<br/>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star-half-empty"></i>
-                            <i class="fa fa-star-o"></i>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-2">
-                            <h5>Anderson</h5>
-                        </div>
-                        <div class="col-md-7">
-                            <p>women are named . . . in the United States? The following tables include the 1000 most common female first names in the US population during the 1990 census.
-                            Read more at http://names.mongabay.com/femal</p>
-                            <hr/>
-                        </div>
-                        <div class="col-md-3 review">
-                            Ratings : 3.5/5<br/>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star-half-empty"></i>
-                            <i class="fa fa-star-o"></i>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-2">
-                            <h5>Anderson</h5>
-                        </div>
-                        <div class="col-md-7">
-                            <p>women are named . . . in the United States? The following tables include the 1000 most common female first names in the US population during the 1990 census.
-                            Read more at http://names.mongabay.com/femal</p>
-                            <hr/>
-                        </div>
-                        <div class="col-md-3 review">
-                            Ratings : 3.5/5<br/>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star-half-empty"></i>
-                            <i class="fa fa-star-o"></i>
-                        </div>
-                    </div>
-                    <!-- Start Pagination -->
-                    <div id="pagination">
-                        <span class="all-pages">Page 1 of 3</span>
-                        <span class="current page-num">1</span>
-                        <a class="page-num" href="#">2</a>
-                        <a class="page-num" href="#">3</a>
-                        <a class="next-page" href="#">Next</a>
-                    </div>
-                    <!-- End Pagination -->
+
+                    
                 </div>
+                <dir-pagination-controls boundary-links="true"> </dir-pagination-controls>
             </div>
         </div>
     </div>
@@ -118,3 +60,14 @@
 <!-- End Page Banner -->
 
 <script type="text/javascript" src="../../js/script.js"></script>
+
+<script type="text/javascript">
+    $(function() {
+
+        $('#score').raty({
+            score: function() {
+                return $(this).attr('data-rating');
+            }
+        });
+    });
+</script>
