@@ -9,11 +9,15 @@ adminApp.controller('ContactUsController',function($scope,requestHandler,Flash){
 
                 /*VIEW ALL*/
     var original="";
+    $scope.copyOrginal_contactUs=function(mobileInfoIos){
+        $scope.copyOrginal_contactUs=contactUs;
+        $scope.contactUs.zipcode = $scope.contactUs.zipcode.toString();
+        original=angular.copy( $scope.contactUs);
+    };
     $scope.doGetContactUs= function () {
         requestHandler.getRequest("admin/getappdetails/","").then(function(response){
             $scope.contactUs = response.data.App_settings[0];
-            $scope.contactUs.zipcode = $scope.contactUs.zipcode.toString();
-            original=angular.copy( $scope.contactUs);
+            $scope.copyOrginal_contactUs($scope.contactUs);
 
         },function(response){
             errorMessage(Flash,"Please Try again later");
@@ -24,8 +28,7 @@ adminApp.controller('ContactUsController',function($scope,requestHandler,Flash){
     $scope.doUpdateContactUs=function(){
         requestHandler.putRequest("admin/updateAddressDetails",$scope.contactUs).then(function(response){
             $scope.contactUs.zipcode = parseFloat($scope.contactUs.zipcode);
-            original=angular.copy(response.data.App_settings[0]);
-
+            $scope.copyOrginal_contactUs($scope.contactUs);
             successMessage(Flash,"Successfully Updated!");
         },function(){
             errorMessage(Flash,"Please try again later");

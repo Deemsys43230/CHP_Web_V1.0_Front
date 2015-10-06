@@ -4,7 +4,7 @@
 var adminApp = angular.module('adminApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate']);
 
 adminApp.controller('SocialMediaSettingsController',function($scope,requestHandler,Flash){
-    var origianal="";
+    var original="";
     $scope.activeClass = {social:'active'};
 
     $scope.doGetSocialMedia= function () {

@@ -228,7 +228,7 @@ commonApp.controller('LoginController',function($scope,requestHandler,Flash,$win
                    if(response.data.Login.roleid==3){
                        console.log("Role:"+response.data.User_Profile.isProfileUpdated);
                        if(response.data.User_Profile.isProfileUpdated==0){
-                          $window.location.href="views/user/#/profile";
+                          $window.location.href="views/user/##/profile";
                        }else{
                            $window.location.href="views/user/#/dashboard";
                        }
@@ -244,6 +244,7 @@ commonApp.controller('LoginController',function($scope,requestHandler,Flash,$win
 
                // $window.location.href="views/user/#/register";
             }
+
         });
 
     };
@@ -255,7 +256,7 @@ commonApp.controller('LoginController',function($scope,requestHandler,Flash,$win
         requestHandler.postRequest("registerUser/",$scope.userForm).then(function(response){
 
             console.log($scope.userForm);
-
+            console.log(response.data.Response);
             if(response.data.Response===0){
                 errorMessage(Flash,"Something went wrong! Please Try again later!")
             }
@@ -326,7 +327,28 @@ function errorMessage(Flash,message){
     }, 600);
     return false;
 }
-
+// Name Field Validation
+commonApp.directive('replace', function() {
+    return {
+        require: 'ngModel',
+        scope: {
+            regex: '@replace',
+            with: '@with'
+        },
+        link: function(scope, element, attrs, model) {
+            model.$parsers.push(function(val) {
+                if (!val) { return; }
+                var regex = new RegExp(scope.regex);
+                var replaced = val.replace(regex, scope.with);
+                if (replaced !== val) {
+                    model.$setViewValue(replaced);
+                    model.$render();
+                }
+                return replaced;
+            });
+        }
+    };
+})
 // Compare Confirm Password
 commonApp.directive('compareTo',function() {
     return {
