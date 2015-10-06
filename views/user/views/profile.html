@@ -221,9 +221,10 @@
                     <span class="error-message" ng-show="changePasswordForm.oldPassword.$error.required"><span>Required.</span></span>
                 </span>
                 <p>New Password</p>
-                <input type="password" name="newPassword" ng-model="changePassword.newPassword" maxlength="20" required/>
+                <input type="password" name="newPassword" ng-model="changePassword.newPassword" ng-pattern="/^[^ ]+$/" maxlength="20" required/>
                  <span ng-show="changePasswordForm.newPassword.$dirty&&changePasswordForm.newPassword.$invalid">
                     <span class="error-message" ng-show="changePasswordForm.newPassword.$error.required"><span>Required.</span></span>
+                     <span class="error-message" ng-show="changePasswordForm.newPassword.$error.pattern"><span>Password&nbsp;doesn't&nbsp;allow&nbsp;space.</span></span>
                 </span>
                 <p>Confirm New Password</p>
                 <input type="password" name="confirmPassword" compare-to="changePassword.newPassword" ng-model="changePassword.confirmPassword"/>
