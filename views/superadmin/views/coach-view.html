@@ -11,6 +11,8 @@
                     <img ng-src="{{coachProfile.imageurl | trusted}}"/>
                     <h3 class="margin-top-10">{{coachProfile.name}}</h3>
                     <p class="margin-bottom-20">Running Specilist</p>
+                    Ratings: {{averageRatings}}
+                    <div class="score" data-rating="{{averageRatings}}"></div>
                     <p><strong>Email-Id : </strong>{{coachProfile.emailid}}</p>
                     <p><strong>DOB : </strong>{{coachProfile.dob}}</p>
                     <p><strong>Phone : </strong>{{coachProfile.phone}}</p>
@@ -21,7 +23,7 @@
                     <p><strong>Qualification : </strong>{{coachProfile.qualification}}</p>
                 </div>
                 <div class="col-md-9">
-                    <h4 class="text-orange">Description :</h4><!--<div id="score" data-rating="4"></div>-->
+                    <h4 class="text-orange">Description :</h4>
                     <p class="margin-top-5">{{coachProfile.about}}</p>
                     <hr/>
                     <h4 class="margin-top-20 margin-bottom-10 text-orange">Reviews :</h4>
@@ -39,17 +41,18 @@
 
                         <div class="col-md-3 review">
                             Ratings : {{reviews.ratinglevel}}<br/>
-                            <i class="fa fa-star"></i>
+                            <div class="score" data-rating="{{reviews.ratinglevel}}"></div>
+                            <!--<i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star-half-empty"></i>
-                            <i class="fa fa-star-o"></i>
+                            <i class="fa fa-star-o"></i>-->
                         </div>
                         <div class="col-md-12"><hr/></div>
 
                     </div>
 
-                    
+
                 </div>
                 <dir-pagination-controls boundary-links="true"> </dir-pagination-controls>
             </div>
@@ -61,13 +64,16 @@
 
 <script type="text/javascript" src="../../js/script.js"></script>
 
+<script src="../../plugin/jquery.raty-2.4.5/js/jquery.min.js"></script>
+<script src="../../plugin/jquery.raty-2.4.5/js/jquery.raty.min.js"></script>
 <script type="text/javascript">
-    $(function() {
+    setTimeout(function(){
 
-        $('#score').raty({
-            score: function() {
-                return $(this).attr('data-rating');
-            }
-        });
-    });
+            $('.score').raty({
+                score: function() {
+                    return $(this).attr('data-rating');
+                }
+            });
+
+    },500);
 </script>

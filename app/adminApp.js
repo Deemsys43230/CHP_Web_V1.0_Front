@@ -347,9 +347,12 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
+                                '../../plugin/jquery.raty-2.4.5/js/jquery.min.js',
+                                '../../plugin/jquery.raty-2.4.5/js/jquery.raty.min.js',
                                 '../../js/bootstrap.min.js',
                                 '../../css/profile-image-upload.css',
                                 '../../js/image-upload.js',
+
                                 '../../app/coach/coachController.js'
                             ]
                         })

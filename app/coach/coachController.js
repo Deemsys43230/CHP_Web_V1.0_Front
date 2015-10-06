@@ -53,7 +53,7 @@ adminApp.controller('CoachViewController',function($scope,requestHandler,Flash,$
         requestHandler.getRequest("getRatingsandReviews/"+$routeParams.id, "").then(function (response) {
 
             $scope.coachReviews = response.data.Ratings_Reviews.Reviews;
-            $scope.ratings = $scope.coachReviews.ratinglevel;
+            $scope.averageRatings = response.data.Ratings_Reviews.averageRatings;
         });
     };
 
