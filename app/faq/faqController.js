@@ -50,8 +50,10 @@ adminApp.controller('FAQController',function($scope,requestHandler,Flash){
     };
 
     $scope.doEnableDisable=function(id){
-        requestHandler.postRequest("admin/disableFAQList/",{'faqid':id}).then(function(response){
 
+        $scope.loaded=true;
+        requestHandler.postRequest("admin/disableFAQList/",{'faqid':id}).then(function(response){
+            $scope.loaded=false;
             $scope.doGetAllFAQ();
             successMessage(Flash,"Successfully Updated");
 
@@ -98,6 +100,24 @@ adminApp.controller('FAQController',function($scope,requestHandler,Flash){
     //Initial Load
     $scope.doGetAllFAQ();
 
+});
+
+adminApp.controller('FAQViewController',function($scope,requestHandler,Flash,$routeParams){
+
+    $scope.activeClass = {faq:'active'};
+
+    $scope.doGetFAQByID=function(){
+        $scope.modalloaded=true;
+        requestHandler.getRequest("admin/getFAQListById/"+$routeParams.id,"").then(function(response){
+            $scope.faq=response.data.Faq_Data;
+            $scope.modalloaded=false;
+        },function(){
+            errorMessage(Flash,"Please try again later!")
+        });
+    };
+
+    //Display FAQ On load
+    $scope.doGetFAQByID();
 });
 
 var commonApp = angular.module('commonApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate']);

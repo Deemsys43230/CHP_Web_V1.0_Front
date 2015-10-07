@@ -99,6 +99,21 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'FAQController'
             }).
+            when('/viewFAQ/:id', {
+                templateUrl: 'views/site-view-FAQ.html',
+                resolve: {
+                    loadMyFiles:function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'adminApp',
+                            files:[
+                                '../../js/bootstrap.min.js',
+                                '../../app/faq/faqController.js'
+                            ]
+                        })
+                    }
+                },
+                controller:'FAQViewController'
+            }).
             when('/instruction', {
                 templateUrl: 'views/site-instruction.html',
                 resolve: {

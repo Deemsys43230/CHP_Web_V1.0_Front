@@ -3981,6 +3981,7 @@ ul.post-meta li, ul.post-meta li a {
 }
 .pagination > li {
   display: inline;
+
 }
 .pagination > li > a,
 .pagination > li > span {
@@ -3991,7 +3992,7 @@ ul.post-meta li, ul.post-meta li a {
   line-height: 1.42857143;
   color: #666;
   text-decoration: none;
-  background-color: #fff;
+  background-color: #f9f9f9;
   border: 1px solid #ddd;
 }
 .pagination > li:first-child > a,
@@ -4033,7 +4034,7 @@ ul.post-meta li, ul.post-meta li a {
 .pagination > .disabled > a:focus {
   color: #777;
   cursor: not-allowed;
-  background-color: #fff;
+  background-color: #f9f9f9;
   border-color: #ddd;
 }
 .pagination-lg > li > a,
@@ -5867,14 +5868,6 @@ ul.footer-nav li a:hover {
   transition: all .5s ease-in-out;
 }
 
-
-
-
-
-
-
-
-
 /* Counter */
 
 .counter-item {
@@ -7595,13 +7588,24 @@ a.profile_button:hover{
 }
 
 .line-clamp{
-	min-height: 40px;
 	max-height: 40px;
 	border: none !important;
 	display: -webkit-box;
 	-webkit-line-clamp: 2;
 	-webkit-box-orient: vertical;
 	overflow: hidden;
+}
+
+.max-width-400{
+	max-width: 400px !important;
+}
+
+.max-width-200{
+	max-width: 200px !important;
+}
+
+.min-height-250{
+	min-height: 250px !important;
 }
 
 .news-block{

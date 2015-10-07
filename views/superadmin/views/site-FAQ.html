@@ -9,18 +9,18 @@
         <!-- common form -->
         <div class="user_register">
             <form name="faqAddForm">
-                <p>Question ( <span class="text-bold text-red">{{ (300-faq.question.length) }}</span> Left )</p>
+                <p>Question ( <span class="text-bold text-red">{{ (300-faq.question.length) }}</span> Characters Left )</p>
                 <span ng-show="faqAddForm.question.$dirty && faqAddForm.question.$invalid && !faqAddForm.question.$pristine">
                     <span class="error-message textarea-errormessage40" ng-show="faqAddForm.question.$error.required"><span>Required.</span></span>
                 </span>
                 <textarea class="form-control height-100" name="question" ng-model="faq.question" id="add-question" required maxlength="300"></textarea>
 
 
-                <p>Answer ( <span class="text-bold text-red">{{ (300-faq.answer.length) }}</span> Left )</p>
+                <p>Answer ( <span class="text-bold text-red">{{ (1000-faq.answer.length) }}</span> Characters Left )</p>
                 <span ng-show="faqAddForm.answer.$dirty && faqAddForm.answer.$invalid && !faqAddForm.answer.$pristine">
                     <span class="error-message textarea-errormessage40" ng-show="faqAddForm.answer.$error.required"><span>Required.</span></span>
                 </span>
-                <textarea class="form-control height-150" name="answer" ng-model="faq.answer" id="add-answer" required maxlength="300"></textarea>
+                <textarea class="form-control height-150" name="answer" ng-model="faq.answer" id="add-answer" required maxlength="1000"></textarea>
 
                 <div class="action_btns margin-top-20">
                     <div class="one_half"><a onclick="return false;" ng-class="{modal_close:faqAddForm.$invalid}" class="btn btn_blue" ng-disabled="faqAddForm.$invalid" ng-click="doAddFAQ()">Add FAQ</a></div>
@@ -48,21 +48,21 @@
             </div>
             <div class="common_model">
                 <form name="faqEditForm">
-                    <p>Question ( <span class="text-bold text-red">{{ (300-faq.question.length) }}</span> Left )</p>
+                    <p>Question ( <span class="text-bold text-red">{{ (300-faq.question.length) }}</span> Characters Left )</p>
                     <span ng-show="faqEditForm.question.$dirty&&faqEditForm.question.$invalid && !faqEditForm.question.$pristine">
                         <span class="error-message textarea-errormessage40" ng-show="faqEditForm.question.$error.required"><span>Required.</span></span>
                     </span>
                     <textarea class="form-control height-100" name="question" ng-model="faq.question" required id="question" maxlength="300"></textarea>
 
 
-                    <p>Answer ( <span class="text-bold text-red">{{(300-faq.answer.length) }}</span> Left )</p>
+                    <p>Answer ( <span class="text-bold text-red">{{(1000-faq.answer.length) }}</span> Characters Left )</p>
                     <span ng-show="faqEditForm.answer.$dirty&&faqEditForm.answer.$invalid && !faqEditForm.question.$pristine">
                         <span class="error-message textarea-errormessage40" ng-show="faqEditForm.answer.$error.required"><span>Required.</span></span>
                     </span>
-                    <textarea class="form-control height-150" name="answer" ng-model="faq.answer" required id="answer" maxlength="300"></textarea>
+                    <textarea class="form-control height-150" name="answer" ng-model="faq.answer" required id="answer" maxlength="1000"></textarea>
 
                     <div class="action_btns margin-top-20">
-                        <div class="one_half"><a onclick="return false;" ng-class="{modal_close:isClean()||faqEditForm.$invalid}" class="btn btn_blue" ng-disabled="isClean()|| faqEditForm.$invalid" ng-click="doUpdateFAQ(faq.faqid)">Edit FAQ</a></div>
+                        <div class="one_half"><a onclick="return false;" ng-class="{modal_close:isClean()||faqEditForm.$invalid}" class="btn btn_blue" ng-disabled="isClean()|| faqEditForm.$invalid" ng-click="doUpdateFAQ(faq.faqid)">Save Changes</a></div>
                         <div class="one_half last modal_close"><a href="" class="btn btn_red">Cancel</a></div>
                     </div>
                 </form>
@@ -94,17 +94,18 @@
                 <table class="table table-striped table-bordered">
                     <thead>
                         <tr class="warning">
-                            <th class="question-col">Question</th>
-                            <th>Answer</th>
-                            <th class="action-col">Actions</th>
+                            <th class="question-col">Questions</th>
+                            <th>Answers</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
-                    <tbody >
+                    <tbody>
                         <tr dir-paginate="faq in faqList | orderBy:sortKey:!reverse | itemsPerPage:6 ">
-                            <td><span class="line-clamp">{{faq.question}}</span></td>
-                            <td><span class="line-clamp">{{faq.answer}}</span></td>
+                            <td><span class="line-clamp max-width-200">{{faq.question}}</span></td>
+                            <td><span class="line-clamp max-width-400">{{faq.answer}}</span></td>
                             <td>
-                                <a href="" onclick="return false;" class="btn-xs btn-primary" ng-click="doGetFAQByID(faq.faqid)">Edit</a>
+                                <a href="#viewFAQ/{{faq.faqid}}" class="btn-xs btn-primary">View</a>
+                                <a href="" onclick="return false;" class="btn-xs btn-warning" ng-click="doGetFAQByID(faq.faqid)">Edit</a>
                                 <a href="" class="btn-xs btn-success" ng-click="doEnableDisable(faq.faqid)" ng-show="faq.status==0">Enable</a>
                                 <a href="" class="btn-xs btn-danger" ng-click="doEnableDisable(faq.faqid)" ng-hide="faq.status==0">Disable</a>
                             </td>
@@ -113,7 +114,7 @@
                 </table>
                 <!-- Start Pagination -->
                 <dir-pagination-controls max-size="5" direction-links="true"
-                                         boundary-links="true"> </dir-pagination-controls>
+                                         boundary-links="true" ng-if="!loaded"> </dir-pagination-controls>
 
                 <!-- End Pagination -->
             </div>
