@@ -152,13 +152,13 @@
             <form name="loginForm" novalidate>
                 <p>Email</p>
                 <input type="email" name="username" ng-model="username" ng-keypress="checkIfEnterKeyWasPressedForLogin($event)" required validate-email/>
-                <span ng-show="loginForm.username.$dirty&&loginForm.username.$invalid">
+                <span ng-show="loginForm.username.$dirty&&loginForm.username.$invalid && !loginForm.username.$pristine">
                 <span class="error-message" ng-show="loginForm.username.$error.required"><span>Required.</span></span>
                 <span class="error-message" ng-show="loginForm.username.$error.email"><span>Enter&nbsp;valid&nbsp;Email&nbsp;ID.</span></span>
                 </span>
                 <p>Password</p>
                 <input type="password" name="password" ng-keypress="checkIfEnterKeyWasPressedForLogin($event)" required ng-model="password"/>
-                <span ng-show="loginForm.password.$dirty&&loginForm.password.$invalid">
+                <span ng-show="loginForm.password.$dirty&&loginForm.password.$invalid && !loginForm.password.$pristine">
                 <span class="error-message" ng-show="loginForm.password.$error.required"><span>Required.</span></span>
                 </span>
              <a href="#" id="forgot_password" class="forgot_password text-center">Forgot password?</a>
@@ -174,7 +174,7 @@
             <div flash-message="2000" ></div>
             <form name="forgotPasswordForm">
                 <p>Email</p>
-                <input type="email" name="emailid" ng-keypress="checkIfEnterKeyWasPressedForResetPassword($event)" required email ng-model="emailid"/>
+                <input type="email" name="emailid" required email ng-model="emailid"/>
                 <span ng-show="forgotPasswordForm.emailid.$dirty&&forgotPasswordForm.emailid.$invalid">
                 <span class="error-message" ng-show="forgotPasswordForm.emailid.$error.required"><span>Required.</span></span>
                 <span class="error-message" ng-show="forgotPasswordForm.emailid.$error.email"><span>Enter&nbsp;valid&nbsp;Email&nbsp;ID.</span></span>

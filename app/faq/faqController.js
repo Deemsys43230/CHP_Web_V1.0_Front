@@ -33,6 +33,7 @@ adminApp.controller('FAQController',function($scope,requestHandler,Flash){
             $scope.doGetAllFAQ();
             successMessage(Flash,"Successfully Added");
             $scope.loaded=false;
+            $scope.paginationLoad=true;
         }, function () {
             errorMessage(Flash, "Please try again later!")
         });
@@ -99,7 +100,12 @@ adminApp.controller('FAQController',function($scope,requestHandler,Flash){
     };
 
     //Initial Load
-    $scope.doGetAllFAQ();
+    $scope.init = function(){
+        alert("yes");
+        $scope.paginationLoad=false;
+        $scope.doGetAllFAQ();
+    };
+
 
 });
 

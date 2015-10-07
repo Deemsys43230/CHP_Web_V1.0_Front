@@ -50,7 +50,7 @@
   }
   
   var clsMutationObserver = window.MutationObserver || window.WebKitMutationObserver || false;
-  
+
   var _globaloptions = {
       zindex:"auto",
       cursoropacitymin:0,
@@ -87,8 +87,7 @@
       smoothscroll:true,
       sensitiverail:true,
       enablemouselockapi:true,
-//      cursormaxheight:false,
-      cursorfixedheight:false,      
+      cursorfixedheight:false,
       directionlockdeadzone:6,
       hidecursordelay:400,
       nativeparentscrolling:true,
@@ -882,11 +881,12 @@
           if (self.railh) self.railh.css({opacity:self.opt.cursoropacitymax});
         }
         else if ((self.opt.autohidemode===true)||(self.opt.autohidemode==="leave")) {
-          self.autohidedom = $().add(self.rail);          
+          self.autohidedom = $().add(self.rail);
           if (cap.isie8) self.autohidedom=self.autohidedom.add(self.cursor);
           if (self.railh) self.autohidedom=self.autohidedom.add(self.railh);
           if (self.railh&&cap.isie8) self.autohidedom=self.autohidedom.add(self.cursorh);
         }
+
         else if (self.opt.autohidemode=="scroll") {
           self.autohidedom = $().add(self.rail);
           if (self.railh) self.autohidedom=self.autohidedom.add(self.railh);

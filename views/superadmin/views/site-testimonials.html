@@ -27,7 +27,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr dir-paginate="testimonial in admintestimonials | itemsPerPage: 8" ng-show="admintestimonials.length!=0">
+                    <tr dir-paginate="testimonial in admintestimonials | itemsPerPage: 8" pagination-id="testimonial">
                         <td>{{testimonial.title}}</td>
                         <td>{{testimonial.givenby}}</td>
                         <td>
@@ -41,7 +41,7 @@
                     </tbody>
                 </table>
                 <!-- Start Pagination -->
-                <dir-pagination-controls boundary-links="true" ng-if="!loaded"> </dir-pagination-controls>
+                <dir-pagination-controls boundary-links="true" pagination-id="testimonial"> </dir-pagination-controls>
                 <!-- End Pagination -->
             </div>
         </div>

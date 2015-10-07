@@ -466,7 +466,6 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'ServerSettingsController'
             }).
-
             when('/food', {
                 templateUrl: 'views/food.html',
                 resolve: {
@@ -474,11 +473,13 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
-                                '../../js/bootstrap.min.js'
+                                '../../js/bootstrap.min.js',
+                                '../../app/food/foodController.js'
                             ]
                         })
                     }
-                }
+                },
+                controller:'FoodController'
             }).
             when('/food-edit', {
                 templateUrl: 'views/food-add-or-edit.html',
@@ -554,6 +555,23 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                     }
                 },
                 controller:'FoodController'
+            }).
+            when('/foodCategory', {
+                templateUrl: 'views/food-category.html',
+                resolve: {
+                    loadMyFiles:function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'adminApp',
+                            files:[
+                                '../../js/bootstrap.min.js',
+                                '../../plugin/popup/style.css',
+                                '../../plugin/popup/jquery.leanModal.min.js',
+                                '../../app/food/foodController.js'
+                            ]
+                        })
+                    }
+                },
+                controller:'FoodCateogryController'
             }).
             when('/course', {
                 templateUrl: 'views/course.html',

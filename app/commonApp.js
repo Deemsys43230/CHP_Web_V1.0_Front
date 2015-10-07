@@ -211,6 +211,16 @@ commonApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
 //Internal Login Details
 commonApp.controller('LoginController',function($scope,requestHandler,Flash,$window){
 
+    /*$scope.reset=function(){
+        $scope.username="";
+        $scope.password="";
+        $scope.loginForm.$setPristine();
+    };
+
+    $("#modal_trigger").click(function(){
+        $scope.reset();
+    });
+*/
     //Login
     $scope.doLogin=function(){
         requestHandler.loginRequest($scope.username,$scope.password).then(function(response){
@@ -237,6 +247,7 @@ commonApp.controller('LoginController',function($scope,requestHandler,Flash,$win
                        $window.location.href="views/superadmin/#/dashboard";
                    }
                     else if(response.data.Login.roleid==1){
+                       $scope.reset();
                        $window.location.href="views/superadmin/#/dashboard";
                    }
                 });
@@ -309,15 +320,8 @@ commonApp.controller('LoginController',function($scope,requestHandler,Flash,$win
     $scope.checkIfEnterKeyWasPressedForLogin = function($event){
         var keyCode = $event.which || $event.keyCode;
         if (keyCode === 13) {
+            if($scope.username!=null && $scope.password!=null)
             $scope.doLogin();
-        }
-    };
-
-    //Enter Key Reset Password
-    $scope.checkIfEnterKeyWasPressedForResetPassword = function($event){
-        var keyCode = $event.which || $event.keyCode;
-        if (keyCode === 13) {
-            $scope.doForgotPassword();
         }
     };
 

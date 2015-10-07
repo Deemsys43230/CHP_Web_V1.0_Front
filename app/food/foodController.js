@@ -2,15 +2,19 @@
  * Created by user on 26-09-2015.
  */
 
-var adminApp = angular.module('adminApp', ['angularFileUpload']);
+var adminApp = angular.module('adminApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate'/*,'angularFileUpload'*/]);
 
-adminApp.controller('FoodController', ['$scope', 'FileUploader', function($scope, FileUploader) {
+adminApp.controller('FoodController', function($scope) {
+    $scope.activeClass = {foodlist:'active'};
+});
+
+adminApp.controller('FoodUploadController', ['$scope', 'FileUploader', function($scope, FileUploader) {
+
     var uploader = $scope.uploader = new FileUploader({
         url: 'upload.php'
     });
 
     // FILTERS
-
     uploader.filters.push({
         name: 'customFilter',
         fn: function(item /*{File|FileLikeObject}*/, options) {
@@ -19,7 +23,6 @@ adminApp.controller('FoodController', ['$scope', 'FileUploader', function($scope
     });
 
     // CALLBACKS
-
     uploader.onWhenAddingFileFailed = function(item /*{File|FileLikeObject}*/, filter, options) {
         console.info('onWhenAddingFileFailed', item, filter, options);
     };
@@ -56,3 +59,10 @@ adminApp.controller('FoodController', ['$scope', 'FileUploader', function($scope
 
     console.info('uploader', uploader);
 }]);
+
+
+adminApp.controller('FoodCateogryController', ['$scope', function($scope) {
+    $scope.activeClass = {category:'active'};
+}]);
+
+
