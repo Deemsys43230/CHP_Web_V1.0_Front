@@ -19,7 +19,7 @@
                             <h4>App Email ID :</h4>
                         </div>
                         <div class="col-md-9">
-                            <input type="email" class="form-control margin-bottom-20" name="appemailid" ng-model="serverSettings.appemailid" required email>
+                            <input type="email" class="form-control margin-bottom-20" name="appemailid" ng-model="serverSettings.appemailid" validate-email required >
                          <span ng-show="serverSettingsForm.appemailid.$dirty&&serverSettingsForm.appemailid.$invalid">
                                 <span class="error-message" ng-show="serverSettingsForm.appemailid.$error.required"><span>Required.</span></span>
                              <span class="error-message" ng-show="serverSettingsForm.appemailid.$error.email"><span>Enter&nbsp;valid&nbsp;Email&nbsp;ID.</span></span>

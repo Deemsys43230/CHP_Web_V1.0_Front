@@ -54,8 +54,7 @@
                 <a id="modal_trigger" href="#modal" class="back-button pull-right margin-left-5"><i class="fa fa-plus-circle"></i> Add Coach</a>
 
                 <form class="form-wrapper pull-right">
-                    <input type="text" placeholder="Search here..." required>
-                    <button type="submit"><i class="fa fa-search"></i></button>
+                    <input type="text" ng-model="coachsearch" placeholder="Search here...">
                 </form>
                 <div flash-message="5000" class="col-md-4 pull-right"></div>
                 <h4 class="classic-title"><span>Coach Management</span></h4>
@@ -67,8 +66,8 @@
                         <th class="option-col1">Options</th>
                     </tr>
                     </thead>
-                    <tbody dir-paginate="coach in coachList | itemsPerPage: 7" ng-show="coachList.length!=0">
-                    <tr>
+                    <tbody >
+                    <tr dir-paginate="coach in coachfilter = (coachList |filter: coachsearch | itemsPerPage: 7)" ng-show="coachList.length!=0">
                         <td>{{coach.name}}</td>
                         <td>{{coach.emailid}}</td>
                         <td>
@@ -76,6 +75,8 @@
                             <a href="" class="btn-xs btn-success">Enable</a>
                         </td>
                     </tr>
+                    <tr ng-show="coachList.length==0"><td colspan="3">No Records Found !!!</td></tr>
+                    <tr ng-show="!coachfilter.length"><td colspan="3">No Records Found !!!</td></tr>
                     </tbody>
                 </table>
                 <!-- Start Pagination -->

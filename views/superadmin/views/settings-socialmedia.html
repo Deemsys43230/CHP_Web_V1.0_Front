@@ -18,36 +18,41 @@
                             <h4>Facebook URL :</h4>
                         </div>
                         <div class="col-md-9">
-                            <input class="form-control margin-bottom-20" name="facebookurl" ng-model="socialMedia.facebookurl" required>
+                            <input class="form-control margin-bottom-20" name="facebookurl" ng-model="socialMedia.facebookurl" validate-url required>
                         <span ng-show="socialMediaForm.facebookurl.$dirty&&socialMediaForm.facebookurl.$invalid">
                                 <span class="error-message" ng-show="socialMediaForm.facebookurl.$error.required"><span>Required.</span></span>
+                                 <span class="error-message" ng-show="!socialMediaForm.facebookurl.$error.required&&socialMediaForm.facebookurl.$error.validateUrl"><span>Enter&nbsp;valid&nbsp;URL.</span></span>
                          </span>
                         </div>
                         <div class="col-md-3">
                             <h4>Twitter URL :</h4>
                         </div>
                         <div class="col-md-9">
-                            <input class="form-control margin-bottom-20" name="twitterurl" ng-model="socialMedia.twitterurl" required>
+                            <input class="form-control margin-bottom-20" name="twitterurl" ng-model="socialMedia.twitterurl" validate-url required>
                         <span ng-show="socialMediaForm.twitterurl.$dirty&&socialMediaForm.twitterurl.$invalid">
                                 <span class="error-message" ng-show="socialMediaForm.twitterurl.$error.required"><span>Required.</span></span>
+                            <span class="error-message" ng-show="!socialMediaForm.twitterurl.$error.required&&socialMediaForm.twitterurl.$error.validateUrl"><span>Enter&nbsp;valid&nbsp;URL.</span></span>
                          </span>
                         </div>
                         <div class="col-md-3">
                             <h4>Linkedin URL :</h4>
                         </div>
                         <div class="col-md-9">
-                            <input class="form-control margin-bottom-20" name="linkedinurl" ng-model="socialMedia.linkedinurl" required>
+                            <input class="form-control margin-bottom-20" name="linkedinurl" ng-model="socialMedia.linkedinurl" validate-url required>
                         <span ng-show="socialMediaForm.linkedinurl.$dirty&&socialMediaForm.linkedinurl.$invalid">
                                 <span class="error-message" ng-show="socialMediaForm.linkedinurl.$error.required"><span>Required.</span></span>
+                            <span class="error-message" ng-show="!socialMediaForm.linkedinurl.$error.required&&socialMediaForm.linkedinurl.$error.validateUrl"><span>Enter&nbsp;valid&nbsp;URL.</span></span>
+
                          </span>
                         </div>
                         <div class="col-md-3">
                             <h4>Google Plus URL :</h4>
                         </div>
                         <div class="col-md-9">
-                            <input class="form-control margin-bottom-20" name="googleurl" ng-model="socialMedia.googleurl" required>
+                            <input class="form-control margin-bottom-20" name="googleurl" ng-model="socialMedia.googleurl" validate-url required>
                          <span ng-show="socialMediaForm.googleurl.$dirty&&socialMediaForm.googleurl.$invalid">
                                 <span class="error-message" ng-show="socialMediaForm.googleurl.$error.required"><span>Required.</span></span>
+                             <span class="error-message" ng-show="!socialMediaForm.googleurl.$error.required&&socialMediaForm.googleurl.$error.validateUrl"><span>Enter&nbsp;valid&nbsp;URL.</span></span>
                          </span>
                         </div>
                     </div>

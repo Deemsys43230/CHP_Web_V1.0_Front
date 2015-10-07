@@ -476,15 +476,12 @@ commonApp.directive('validateUrl', function() {
     return {
         require: 'ngModel',
         restrict: '',
-        link: function(scope, elm, attrs, ctrl) {
+        link: function(scope, elm, attrs, ngModel) {
             // only apply the validator if ngModel is present and Angular has added the email validator
-            if (ctrl && ctrl.$validators.url) {
+            ngModel.$validators.validateUrl = function(modelValue) {
+                return URL_REGEXP.test(modelValue);
+            };
 
-                // this will overwrite the default Angular email validator
-                ctrl.$validators.url = function(modelValue) {
-                    return ctrl.$isEmpty(modelValue) || URL_REGEXP.test(modelValue);
-                };
-            }
         }
     };
 });
