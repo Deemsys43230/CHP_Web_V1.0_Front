@@ -430,6 +430,7 @@
     $("#modal_trigger").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
 
     $(function(){
+
         // Calling Login Form
         $("#forgot_password").click(function(){
             $(".user_login").hide();
@@ -480,7 +481,16 @@
             $(".header_title").text('Login');
             return false;
         });
-    })
+
+        $("#modal_trigger").click(function(){
+            $(".reset_password").hide();
+            $(".user_register").hide();
+            $(".secret_question").hide();
+            $(".user_login").show();
+            $(".header_title").text('Login');
+            return false;
+        });
+    });
 </script>
 
 <script>

@@ -1,25 +1,19 @@
 var commonApp = angular.module('commonApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate']);
 
-commonApp.controller('NewsUserController',function($scope,requestHandler,Flash){
+commonApp.controller('NewsUserController',function($scope,requestHandler,Flash) {
 
     // To display Testimonials as user
-    $scope.doGetNewsByUser=function(){
+    $scope.doGetNewsByUser = function () {
+        requestHandler.getRequest("getLatestNewsByUser/", "").then(function (response) {
+            $scope.usernewslist = response.data.News;
 
-
-        requestHandler.getRequest("getLatestNewsByUser/", "").then(function(response){
-
-            $scope.usernewslist=response.data.News;
-
-
-        },function(){
-            errorMessage(Flash,"Please try again later!")
+        }, function () {
+            errorMessage(Flash, "Please try again later!")
         });
     };
 
-
     // To display the user Testimonial list on load
     $scope.doGetNewsByUser();
-
 
 });
 
@@ -51,7 +45,7 @@ commonApp.controller('TestimonialUserController',function($scope,requestHandler,
             $scope.usertestimonialdetails=response.data.Testimonials
             alert(response.data.Testimonials)
         },function(){
-            errorMessage(Flash,"Please dont try again later!")
+            errorMessage(Flash,"Please try again later!")
         });
 
     };
@@ -59,7 +53,6 @@ commonApp.controller('TestimonialUserController',function($scope,requestHandler,
     // To display the user Testimonial list on load
     $scope.doGetTestimonialsByUser();
    // $scope.doGetTestimonialDetailsByUser($routeParams.id);
-
 
 });
 
