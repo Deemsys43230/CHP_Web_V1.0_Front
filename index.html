@@ -134,9 +134,9 @@
     </header>
 
     <section class="popupBody">
-        <!-- Social Login -->
-        <div class="user_login">
 
+        <div class="user_login">
+            <!-- Social Login -->
             <div class="">
                 <a href="#" class="social_box fb">
                     <span class="icon"><i class="fa fa-facebook"></i></span>
@@ -144,19 +144,20 @@
                 </a>
             </div>
 
+            <!-- Username & Password Login form -->
             <div class="centeredText">
                 <span>Or</span>
             </div>
-            <div flash-message="5000" ></div>
+            <div flash-message="2000" ></div>
             <form name="loginForm" novalidate>
                 <p>Email</p>
-                <input type="email" name="username" ng-model="username" required validate-email/>
+                <input type="email" name="username" ng-model="username" ng-keypress="checkIfEnterKeyWasPressedForLogin($event)" required validate-email/>
                 <span ng-show="loginForm.username.$dirty&&loginForm.username.$invalid">
                 <span class="error-message" ng-show="loginForm.username.$error.required"><span>Required.</span></span>
                 <span class="error-message" ng-show="loginForm.username.$error.email"><span>Enter&nbsp;valid&nbsp;Email&nbsp;ID.</span></span>
                 </span>
                 <p>Password</p>
-                <input type="password" name="password" required ng-model="password"/>
+                <input type="password" name="password" ng-keypress="checkIfEnterKeyWasPressedForLogin($event)" required ng-model="password"/>
                 <span ng-show="loginForm.password.$dirty&&loginForm.password.$invalid">
                 <span class="error-message" ng-show="loginForm.password.$error.required"><span>Required.</span></span>
                 </span>
@@ -168,12 +169,12 @@
             </form>
         </div>
 
-        <!-- Username & Password Login form -->
+        <!-- Reset Password -->
         <div class="reset_password">
-            <div flash-message="5000" ></div>
+            <div flash-message="2000" ></div>
             <form name="forgotPasswordForm">
                 <p>Email</p>
-                <input type="email" name="emailid" required email ng-model="emailid"/>
+                <input type="email" name="emailid" ng-keypress="checkIfEnterKeyWasPressedForResetPassword($event)" required email ng-model="emailid"/>
                 <span ng-show="forgotPasswordForm.emailid.$dirty&&forgotPasswordForm.emailid.$invalid">
                 <span class="error-message" ng-show="forgotPasswordForm.emailid.$error.required"><span>Required.</span></span>
                 <span class="error-message" ng-show="forgotPasswordForm.emailid.$error.email"><span>Enter&nbsp;valid&nbsp;Email&nbsp;ID.</span></span>
@@ -188,7 +189,7 @@
 
         <!-- Answer for Secret Question -->
         <div class="secret_question">
-            <div flash-message="5000" ></div>
+            <div flash-message="2000" ></div>
             <form name="secretAnswerForm">
                 <p>Secret Question :</p>
                 <p class="text-bold">{{secretQuestion}}</p>
@@ -216,7 +217,7 @@
             <div class="centeredText">
                 <span>Or</span>
             </div>
-            <div flash-message="5000" ></div>
+            <div flash-message="2000" ></div>
             <form name="registerForm">
                 <p>Name</p>
                 <input type="text" name="name" ng-pattern="/^ *([a-zA-Z]+ ?)+ *$/"  ng-model="userForm.name" maxlength="30" required/>
@@ -250,6 +251,7 @@
             </form>
         </div>
 
+        <!-- Register Form Continuation-->
         <div class="user_register1">
             <form name="registerForm2">
                     <p>Security Question (Optional)</p>
@@ -415,7 +417,7 @@
 <script type="text/javascript" src="js/jquery.textillate.js"></script>
 <script type="text/javascript" src="js/jquery.lettering.js"></script>
 <script type="text/javascript" src="js/jquery.easypiechart.min.js"></script>
-<script type="text/javascript" src="js/jquery.nicescroll.min.js"></script>
+<script type="text/javascript" src="js/jquery.nicescroll.js"></script>
 <script type="text/javascript" src="js/jquery.parallax.js"></script>
 <script type="text/javascript" src="js/mediaelement-and-player.js"></script>
 <script type="text/javascript" src="angular/angular-utils-pagination"></script>
@@ -526,9 +528,9 @@
         scrollspeed: 100,
         mousescrollstep: 38,
         cursorwidth: 5,
+        autohidemode:false,
         cursorborder: 0,
         cursorcolor: '#333',
-        autohidemode: true,
         zindex: 999999999,
         horizrailenabled: false,
         cursorborderradius: 0

@@ -305,6 +305,22 @@ commonApp.controller('LoginController',function($scope,requestHandler,Flash,$win
         });
     };
 
+    //Enter Key Login
+    $scope.checkIfEnterKeyWasPressedForLogin = function($event){
+        var keyCode = $event.which || $event.keyCode;
+        if (keyCode === 13) {
+            $scope.doLogin();
+        }
+    };
+
+    //Enter Key Reset Password
+    $scope.checkIfEnterKeyWasPressedForResetPassword = function($event){
+        var keyCode = $event.which || $event.keyCode;
+        if (keyCode === 13) {
+            $scope.doForgotPassword();
+        }
+    };
+
     //Check Secret Answer
     $scope.doSecretAnswerCheck=function(){
         //send secret answer
@@ -337,6 +353,7 @@ function errorMessage(Flash,message){
     }, 600);
     return false;
 }
+
 // Name Field Validation
 commonApp.directive('replace', function() {
     return {
@@ -396,8 +413,6 @@ commonApp.directive('secretAnswer',function() {
                 }else{
                     return false;
                 }
-
-
             };
 
             scope.$watch("otherModelValue", function () {
