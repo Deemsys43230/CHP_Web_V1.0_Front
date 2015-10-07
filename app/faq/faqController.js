@@ -9,6 +9,7 @@ adminApp.controller('FAQController',function($scope,requestHandler,Flash){
 
     $scope.doGetAllFAQ=function(){
         $scope.loaded=true;
+
         requestHandler.getRequest("admin/getFAQList","").then(function(response){
             $scope.faqList=response.data.Faq_Data;
             $scope.loaded=false;

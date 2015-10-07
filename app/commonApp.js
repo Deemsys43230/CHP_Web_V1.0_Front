@@ -329,8 +329,14 @@ commonApp.controller('LoginController',function($scope,requestHandler,Flash,$win
                 errorMessage(Flash,"Incorrect Secret Answer!");
             }
             else if(response.data.Response_status==1){
+                $(".reset_password").hide();
+                $(".user_register").hide();
+                $(".secret_question").hide();
+                $(".user_register1").hide();
+                $(".user_login").show();
+                $(".header_title").text('Login');
                 //Lets show the secret question
-                successMessage(Flash,"Secret Answer Matched! Check your E-Mail");
+                successMessage(Flash,"Secret Answer Matched! <br/>Check your E-Mail");
             }
         });
     };
@@ -395,33 +401,6 @@ commonApp.directive('compareTo',function() {
         }
     };
 });
-
-// Compare Confirm Password
-commonApp.directive('secretAnswer',function() {
-    return {
-        require: "ngModel",
-        scope: {
-            otherModelValue: "=secretAnswer"
-        },
-        link: function (scope, element, attributes, ngModel) {
-
-            ngModel.$validators.secretAnswer = function (modelValue) {
-                alert("Sample"+scope.otherModelValue);
-                if(scope.otherModelValue!=""){
-                    alert("return true");
-                    return true;
-                }else{
-                    return false;
-                }
-            };
-
-            scope.$watch("otherModelValue", function () {
-                ngModel.$validate();
-            });
-        }
-    };
-});
-
 
 //Check for Email Already Exists
 commonApp.directive("emailexists", function ($q, $timeout,requestHandler) {

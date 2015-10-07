@@ -200,7 +200,7 @@
                     <span class="error-message" ng-show="forgotPasswordForm.secretAnswer.$error.required"><span>Required.</span></span>
                 </span>
                 <div class="action_btns margin-top-20">
-                    <div class="one_half"><a href="#" class="btn back_btn"><i class="fa fa-angle-double-left"></i> Back</a></div>
+                    <div class="one_half"><a href="#" class="btn back_btn_forgotPassword"><i class="fa fa-angle-double-left"></i> Back</a></div>
                     <div class="one_half last"><a ng-class="{'button-disable':forgotPasswordForm.$invalid}" ng-click="doSecretAnswerCheck()" class="btn btn_red">Submit</a></div>
                 </div>
             </form>
@@ -470,6 +470,16 @@
             $(".secret_question").hide();
             $(".user_login").show();
             $(".header_title").text('Login');
+            return false;
+        });
+
+        // Going back to Forgot Password Forms
+        $(".back_btn_forgotPassword").click(function(){
+            $(".reset_password").show();
+            $(".user_register").hide();
+            $(".secret_question").hide();
+            $(".user_login").hide();
+            $(".header_title").text('Reset Password');
             return false;
         });
 
