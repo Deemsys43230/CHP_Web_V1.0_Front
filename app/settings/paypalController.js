@@ -19,6 +19,8 @@ adminApp.controller('PaypalSettingsController',function($scope,requestHandler,Fl
 
     $scope.doUpdatePaypalSettings=function(){
         requestHandler.putRequest("admin/updatePayPalDetails",$scope.paypalSettings).then(function(response){
+
+            original=angular.copy($scope.paypalSettings);
             successMessage(Flash,"Successfully Updated!");
         },function(){
             errorMessage(Flash,"Please try again later");

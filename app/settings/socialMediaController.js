@@ -19,6 +19,7 @@ adminApp.controller('SocialMediaSettingsController',function($scope,requestHandl
 
     $scope.doUpdateSocialMedia=function(){
         requestHandler.putRequest("admin/updateSocialURLDetails",$scope.socialMedia).then(function(response){
+            original=angular.copy($scope.socialMedia);
             successMessage(Flash,"Successfully Updated!");
         },function(){
             errorMessage(Flash,"Please try again later");

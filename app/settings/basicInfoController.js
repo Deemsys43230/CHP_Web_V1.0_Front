@@ -28,7 +28,7 @@ adminApp.controller('ContactUsController',function($scope,requestHandler,Flash){
                 /*UPDATE DETAILS*/
     $scope.doUpdateContactUs=function(){
         requestHandler.putRequest("admin/updateAddressDetails",$scope.contactUs).then(function(response){
-            $scope.contactUs.zipcode = parseFloat($scope.contactUs.zipcode);
+            original=angular.copy( $scope.contactUs);
             $scope.copyOrginal_contactUs($scope.contactUs);
             successMessage(Flash,"Successfully Updated!");
         },function(){
