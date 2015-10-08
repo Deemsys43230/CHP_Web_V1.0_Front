@@ -141,6 +141,22 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'DemographyController'
             }).
+            when('/nutrients', {
+                templateUrl: 'views/nutrients.html',
+                resolve: {
+                    loadMyFiles:function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'userApp',
+                            files:[
+                                '../../css/profile-image-upload.css',
+                                '../../js/image-upload.js',
+                                '../../app/demography/demographyController.js'
+                            ]
+                        })
+                    }
+                },
+                controller:'DemographyController'
+            }).
             otherwise({
                 redirectTo: '/dashboard'
             });
@@ -185,3 +201,20 @@ function errorMessage(Flash,message){
     }, 600);
     return false;
 }
+
+//Check For FLoat Validation
+userApp.directive('validateFloat', function() {
+    var FLOAT_REGEXP = /^\-?\d+((\.|\,)\d+)?$/;
+
+    return {
+        require: 'ngModel',
+        restrict: '',
+        link: function(scope, elm, attrs, ngModel) {
+            // only apply the validator if ngModel is present and Angular has added the email validator
+            ngModel.$validators.validateFloat = function(modelValue) {
+                return FLOAT_REGEXP.test(modelValue);
+            };
+
+        }
+    };
+});

@@ -1,17 +1,20 @@
 var userApp= angular.module('userApp', ['ngRoute','oc.lazyLoad','ngCookies','requestModule','flash']);
 userApp.controller('DemographyController',['$scope','requestHandler','Flash',function($scope,requestHandler,Flash) {
     var originalDemography="";
-    $scope.doGetProfile = function () {
-        requestHandler.getRequest("getUserId/", "").then(function (response) {
-            $scope.userProfile = response.data.User_Profile;
-            $scope.userProfile.imageurl = $scope.userProfile.imageurl.substring($scope.userProfile.imageurl.indexOf("/") + 14, $scope.userProfile.imageurl.length)
-            $scope.userProfile.imageurl = $scope.userProfile.imageurl + "?decache=" + Math.random();
-        });
+    var originalNutrition="";
+    $scope.doGetDemographyandNutrition = function () {
 
         requestHandler.getRequest("user/getDemography/","").then(function(response) {
             //Copy Original
             originalDemography=angular.copy(response.data.Demography_Data[0]);
             $scope.demography = response.data.Demography_Data[0];
+
+
+        });
+        requestHandler.getRequest("user/getNutrition/","").then(function(response) {
+            //Copy Original
+            originalNutrition=angular.copy(response.data.Nutrition);
+            $scope.nutrients = response.data.Nutrition;
 
 
         },function(){
@@ -24,7 +27,7 @@ userApp.controller('DemographyController',['$scope','requestHandler','Flash',fun
             $scope.demography.weight = parseFloat($scope.demography.weight);
             $scope.demography.hip = parseFloat($scope.demography.hip);
             requestHandler.putRequest("user/insertorupdateDemography/",$scope.demography).then(function(response){
-                $scope.doGetProfile();
+                $scope.doGetDemographyandNutrition();
                 successMessage(Flash,"Successfully Updated");
                 originalDemography=angular.copy($scope.demography);
             }, function () {
@@ -32,11 +35,25 @@ userApp.controller('DemographyController',['$scope','requestHandler','Flash',fun
             });
     };
 
-    $scope.isClean =function(){
+    $scope.doUpdateNutrition= function () {
+        requestHandler.putRequest("user/updateNutrition/",$scope.nutrients).then(function(response){
+            $scope.doGetDemographyandNutrition();
+            successMessage(Flash,"Successfully Updated");
+            originalNutrition=angular.copy($scope.nutrients);
+        }, function () {
+            errorMessage(Flash, "Please try again later!")
+        });
+    };
+
+    $scope.isCleanDemography =function(){
             return angular.equals(originalDemography, $scope.demography);
     };
 
-    $scope.doGetProfile();
+    $scope.isCleanNutrition =function(){
+        return angular.equals(originalNutrition, $scope.nutrients);
+    };
+
+    $scope.doGetDemographyandNutrition();
 }]);
 
 

@@ -1,42 +1,14 @@
 
 <div class="page-banner1">
     <div id="w" class="clearfix">
-        <div id="profile">
-            <div class="col-md-12 no-padding">
-                <div class="profile-image center-block"><img ng-src="{{userProfile.imageurl | trusted}}"></div>
-                <h4 class="margin-top-20">{{userProfile.name}}</h4>
-                <p>{{userProfile.emailid}}</p>
-                <p>{{userProfile.dob}}</p>
-                <p>{{userProfile.phone}}</p>
 
-               <!--<p class="text-green">Normal Health</p>
-                <div class="margin-top-10">
-                    <div class="col-md-5 no-padding">
-                        <h6>Email<span class="pull-right">:</span></h6>
-                        <h6>Weight<span class="pull-right">:</span></h6>
-                        <h6>Hip<span class="pull-right">:</span></h6>
-                        <h6>Waist<span class="pull-right">:</span></h6>
-                        <h6>BMI<span class="pull-right">:</span></h6>
-                        <h6>Blood Pressure<span class="pull-right">:</span></h6>
-                    </div>
-                    <div class="col-md-7">
-                        <h6 class="text-green">Idle Height</h6>
-                        <h6 class="text-red">Low Weight</h6>
-                        <h6 class="text-green">Normal</h6>
-                        <h6 class="text-green">Normal</h6>
-                        <h6 class="text-green">Normal</h6>
-                        <h6 class="text-green">Normal</h6>
-                    </div>
-                </div>-->
-            </div>
-        </div>
-
-        <div id="profile-content">
+        <div id="demography-content">
             <form name="demographyForm">
             <div class="col-md-12">
                 <div class="col-md-12">
                     <div flash-message="2000" class="col-md-4 pull-right"></div>
-                    <h5 class="classic-title"><span><i class="fa fa-male"></i> &nbsp;DEMOGRAPHY</span></h5>
+                    <h5 class="classic-title"><span><i class="fa fa-male"></i><a href="#demography">&nbsp;DEMOGRAPHY</a></span>&nbsp;|&nbsp;<span><i class="fa fa-life-saver"></i><a href="#nutrients"> &nbsp;NUTRIENTS</a></span></h5>
+
                 </div>
                 <div class="col-md-12">
                     <div class="col-md-6 margin-top-10">
@@ -181,7 +153,7 @@
                     </div>
                     <div class="col-md-12"><hr/></div>
                     <div class="col-md-12 text-center margin-top-10">
-                        <a href="" class="btn register_button" ng-disabled="isClean() || demographyForm.$invalid" ng-click="doUpdateDemography()" >Save Changes</a>
+                        <a href="" class="btn register_button" ng-disabled="isCleanDemography() || demographyForm.$invalid" ng-click="doUpdateDemography()" >Save Changes</a>
                         <a href="#dashboard" class="btn cancel_button">Cancel</a>
                     </div>
                 </div>

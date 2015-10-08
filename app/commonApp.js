@@ -229,7 +229,7 @@ commonApp.controller('LoginController',function($scope,requestHandler,Flash,$win
 
     //Login
     $scope.doLogin=function(){
-        requestHandler.loginRequest($scope.login.username,$scope.login.password).then(function(response){
+        requestHandler.loginRequest($scope.username,$scope.password).then(function(response){
             console.log(response.data.Response_status);
             if(response.data.Response_status===0){
                 errorMessage(Flash,"Incorrect Username/Password");

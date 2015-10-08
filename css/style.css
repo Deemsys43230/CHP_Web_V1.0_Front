@@ -7504,6 +7504,21 @@ a:hover, a:visited, a:link, a:active
 	padding-top: 20px;
 }
 
+#demography-content {
+	display: block;
+	margin: 0px;
+	border-top: 4px solid orange;
+	width: 1100px;
+	height: 480px;
+	float: left;
+	z-index: 1;
+	background-color: #fff;
+	-webkit-box-shadow: 1px 1px 5px rgba(0,0,0,0.3);
+	-moz-box-shadow: 1px 1px 5px rgba(0,0,0,0.3);
+	box-shadow: 1px 1px 5px rgba(0,0,0,0.3);
+	padding: 20px !important;
+}
+
 .profile-image{
 	width:200px;
 	height: 200px;
