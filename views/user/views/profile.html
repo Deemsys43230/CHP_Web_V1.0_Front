@@ -133,8 +133,8 @@
                         <div class="col-md-4 padding-top-4">
                             <h5>Gender :</h5>
                         </div>
-                        <div class="col-md-8">
-                            <input type="radio" id="1" class="height" name="sex" value="1" ng-model="userProfile.gender" checked required/>
+                        <div class="col-md-8" ng-init="userProfile.gender=1">
+                            <input type="radio" id="1" class="height" name="sex" value="1" ng-model="userProfile.gender" required/>
                             <label for="1">Male</label>
                             <input type="radio" id="2" class="height" name="sex" value="2" ng-model="userProfile.gender" required/>
                             <label for="2">Female</label>
