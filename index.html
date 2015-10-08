@@ -39,7 +39,7 @@
 <body ng-app="commonApp">
 
 <!-- Full Body Container -->
-<div id="container" class="boxed-page">
+<div id="container" class="boxed-page" ng-controller="LoginController">
 <!-- Start Header Section -->
 <div class="hidden-header"></div>
 <header class="clearfix">
@@ -64,7 +64,7 @@
                     <!-- Start Social Links -->
                     <ul class="social-list">
                         <li>
-                            <a class="login itl-tooltip" id="modal_trigger" data-placement="bottom" title="Login / Register" href="#modal">Login / Register</a>
+                            <a class="login itl-tooltip" id="modal_trigger" data-ng-click="reset()" data-placement="bottom" title="Login / Register" href="#modal">Login / Register</a>
                         </li>
                         <li>
                             <a class="facebook itl-tooltip" data-placement="bottom" title="Facebook" target="_blank" href="#"><i class="fa fa-facebook"></i></a>
@@ -127,7 +127,7 @@
 </header>
 
 <!-- login or register popup-->
-<div id="modal" class="popupContainer" style="display:none;" ng-controller="LoginController">
+<div id="modal" class="popupContainer" style="display:none;">
     <header class="popupHeader">
         <span class="header_title">Login</span>
         <span class="modal_close pull-right"><i class="fa fa-times"></i></span>
@@ -161,7 +161,7 @@
                 <span ng-show="loginForm.password.$dirty&&loginForm.password.$invalid && !loginForm.password.$pristine">
                 <span class="error-message" ng-show="loginForm.password.$error.required"><span>Required.</span></span>
                 </span>
-             <a href="#" id="forgot_password" class="forgot_password text-center">Forgot password?</a>
+             <a href="#" id="forgot_password" data-ng-click="reset()" class="forgot_password text-center">Forgot password?</a>
             <div class="action_btns">
                 <div class="one_half"><a class="btn btn_red" ng-class="{'button-disable':loginForm.$invalid}" ng-click="doLogin()">Login</a></div>
                 <div class="one_half last"><a id="register_form" class="btn">Register</a></div>
@@ -175,12 +175,12 @@
             <form name="forgotPasswordForm">
                 <p>Email</p>
                 <input type="email" name="emailid" required email ng-model="emailid"/>
-                <span ng-show="forgotPasswordForm.emailid.$dirty&&forgotPasswordForm.emailid.$invalid">
+                <span ng-show="forgotPasswordForm.emailid.$dirty&&forgotPasswordForm.emailid.$invalid && !forgotPasswordForm.emailid.$pristine">
                 <span class="error-message" ng-show="forgotPasswordForm.emailid.$error.required"><span>Required.</span></span>
                 <span class="error-message" ng-show="forgotPasswordForm.emailid.$error.email"><span>Enter&nbsp;valid&nbsp;Email&nbsp;ID.</span></span>
                 </span>
                 <div class="action_btns margin-top-20">
-                    <div class="one_half"><a href="#" class="btn back_btn"><i class="fa fa-angle-double-left"></i> Back</a></div>
+                    <div class="one_half"><a href="#" class="btn back_btn" data-ng-click="reset()"><i class="fa fa-angle-double-left"></i> Back</a></div>
                     <div class="one_half last"><a id="check_secret" class="btn btn_red"  ng-class="{'button-disable':forgotPasswordForm.$invalid}" ng-click="doForgotPassword()">Submit</a></div>
                 </div>
             </form>
@@ -196,11 +196,11 @@
 
                 <p>Secret Answer</p>
                 <input type="password" name="secretAnswer" ng-model="secretAnswer" required/>
-                <span ng-show="forgotPasswordForm.secretAnswer.$dirty&&forgotPasswordForm.secretAnswer.$invalid">
+                <span ng-show="forgotPasswordForm.secretAnswer.$dirty&&forgotPasswordForm.secretAnswer.$invalid && !forgotPasswordForm.secretAnswer.$pristine">
                     <span class="error-message" ng-show="forgotPasswordForm.secretAnswer.$error.required"><span>Required.</span></span>
                 </span>
                 <div class="action_btns margin-top-20">
-                    <div class="one_half"><a href="#" class="btn back_btn_forgotPassword"><i class="fa fa-angle-double-left"></i> Back</a></div>
+                    <div class="one_half"><a href="#"  data-ng-click="reset()" class="btn back_btn_forgotPassword"><i class="fa fa-angle-double-left"></i> Back</a></div>
                     <div class="one_half last"><a ng-class="{'button-disable':forgotPasswordForm.$invalid}" ng-click="doSecretAnswerCheck()" class="btn btn_red">Submit</a></div>
                 </div>
             </form>
@@ -221,13 +221,13 @@
             <form name="registerForm">
                 <p>Name</p>
                 <input type="text" name="name" ng-pattern="/^ *([a-zA-Z]+ ?)+ *$/"  ng-model="userForm.name" maxlength="30" required/>
-                <span ng-show="registerForm.name.$dirty&&registerForm.name.$invalid">
+                <span ng-show="registerForm.name.$dirty&&registerForm.name.$invalid && !registerForm.name.$pristine">
                     <span class="error-message" ng-show="registerForm.name.$error.required"><span>Required.</span></span>
                      <span class="error-message" ng-show="registerForm.name.$error.pattern"><span>Enter&nbsp;valid&nbsp;Name.</span></span>
                 </span>
                 <p>Email</p>
                 <input type="email" name="emailid" ng-model="userForm.emailid"  required validate-email emailexists/>
-                <span ng-show="registerForm.emailid.$dirty&&registerForm.emailid.$invalid">
+                <span ng-show="registerForm.emailid.$dirty&&registerForm.emailid.$invalid && !registerForm.emailid.$pristine">
                     <span class="error-message" ng-show="registerForm.emailid.$error.required"><span>Required.</span></span>
                    <span class="error-message" ng-show="registerForm.emailid.$error.email"><span>Enter&nbsp;valid&nbsp;Email&nbsp;ID.</span></span>
 
@@ -235,17 +235,17 @@
                 <span class="error-message" ng-show="registerForm.emailid.$error.emailexists"><span>Email&nbsp;Address&nbsp;Already&nbsp;Exist.</span></span>
                 <p>Password</p>
                 <input type="password" name="password" ng-model="userForm.password" ng-pattern="/^[^ ]+$/"  maxlength="20" required/>
-                <span ng-show="registerForm.password.$dirty&&registerForm.password.$invalid">
+                <span ng-show="registerForm.password.$dirty&&registerForm.password.$invalid && !registerForm.password.$pristine">
                     <span class="error-message" ng-show="registerForm.password.$error.required"><span>Required.</span></span>
                       <span class="error-message" ng-show="registerForm.password.$error.pattern"><span>Password&nbsp;doesn't&nbsp;allow&nbsp;space.</span></span>
                 </span>
                 <p>Confirm Password</p>
                 <input type="password" name="confirmPassword" compare-to="userForm.password" maxlength="20" required ng-model="confirmpassword"/>
-                <span ng-show="registerForm.confirmPassword.$dirty&&registerForm.confirmPassword.$invalid">
+                <span ng-show="registerForm.confirmPassword.$dirty&&registerForm.confirmPassword.$invalid && !registerForm.confirmPassword.$pristine">
                     <span class="error-message" ng-show="registerForm.confirmPassword.$error.compareTo"><span>Password&nbsp;don't&nbsp;match.</span></span>
                 </span>
                 <div class="action_btns margin-top-20">
-                    <div class="one_half"><a href="#" class="btn back_btn"><i class="fa fa-angle-double-left"></i> Back</a></div>
+                    <div class="one_half"><a href="#" data-ng-click="reset()" class="btn back_btn"><i class="fa fa-angle-double-left"></i> Back</a></div>
                     <div class="one_half last"><a id="register_form2" ng-disabled="registerForm.$invalid" class="btn btn_red">Proceed <i class="fa fa-angle-double-right"></i></a></div>
                 </div>
             </form>
@@ -256,12 +256,12 @@
             <form name="registerForm2">
                     <p>Security Question (Optional)</p>
                     <input type="text" name="secretquestion" ng-model="userForm.secretquestion" maxlength="150" ng-required="userForm.secretanswer"/>
-                    <span ng-show="registerForm2.secretquestion.$invalid">
+                    <span ng-show="registerForm2.secretquestion.$invalid && !registerForm2.secretquestion.$pristine">
                                 <span class="error-message" ng-show="registerForm2.secretquestion.$error.required"><span>Required.</span></span>
                     </span>
                     <p>Answer</p>
                     <input type="text" name="secretanswer" ng-model="userForm.secretanswer" maxlength="150" ng-required="userForm.secretquestion"/>
-                            <span ng-show="registerForm2.secretanswer.$invalid">
+                            <span ng-show="registerForm2.secretanswer.$invalid && !registerForm2.secretanswer.$pristine">
                                 <span class="error-message" ng-show="registerForm2.secretanswer.$error.required"><span>Required.</span></span>
                             </span>
                     <div class="action_btns margin-top-20">

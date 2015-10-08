@@ -211,19 +211,25 @@ commonApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
 //Internal Login Details
 commonApp.controller('LoginController',function($scope,requestHandler,Flash,$window){
 
-    /*$scope.reset=function(){
-        $scope.username="";
-        $scope.password="";
+    $scope.reset=function(){
         $scope.loginForm.$setPristine();
+        $scope.forgotPasswordForm.$setPristine();
+        $scope.registerForm.$setPristine();
+        $scope.registerForm2.$setPristine();
+        $scope.username='';
+        $scope.password='';
+        $scope.emailid='';
+        $scope.secretAnswer='';
+        $scope.confirmpassword='';
+        $scope.userForm={};
+        $scope.userForm={
+            'emailid':''
+        };
     };
 
-    $("#modal_trigger").click(function(){
-        $scope.reset();
-    });
-*/
     //Login
     $scope.doLogin=function(){
-        requestHandler.loginRequest($scope.username,$scope.password).then(function(response){
+        requestHandler.loginRequest($scope.login.username,$scope.login.password).then(function(response){
             console.log(response.data.Response_status);
             if(response.data.Response_status===0){
                 errorMessage(Flash,"Incorrect Username/Password");
@@ -287,12 +293,7 @@ commonApp.controller('LoginController',function($scope,requestHandler,Flash,$win
                 $(".user_login").show();
                 $(".header_title").text('Login');
                 successMessage(Flash,"Register Successful!");
-
-                $scope.userForm={};
-                $scope.registerForm=false;
-                $scope.confirm_password=false;
-
-
+                $scope.reset();
             }
         });
     };
