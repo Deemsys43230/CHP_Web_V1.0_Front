@@ -806,3 +806,26 @@ adminApp.directive('validateUrl', function() {
         }
     };
 });
+
+//Check For URL Validation
+adminApp.directive('validateNumber', function() {
+    var NUM_REGEXP = /^\d+$/;
+
+    return {
+        require: 'ngModel',
+        restrict: '',
+        link: function(scope, elm, attrs, ngModel) {
+            // only apply the validator if ngModel is present and Angular has added the email validator
+            ngModel.$validators.validateNumber = function(modelValue) {
+                return NUM_REGEXP.test(modelValue);
+            };
+
+            elm.bind('keypress', function(event) {
+                if(event.keyCode === 32) {
+                    event.preventDefault();
+                }
+            });
+
+        }
+    };
+});
