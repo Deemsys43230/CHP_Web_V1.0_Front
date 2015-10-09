@@ -7319,6 +7319,7 @@ a:hover, a:visited, a:link, a:active
 .form-wrapper button:focus{
     color: #fff;
     background: #f8ba01;
+	outline: none!important;
 }
 
 .form-wrapper button:before {
@@ -7329,19 +7330,23 @@ a:hover, a:visited, a:link, a:active
     border-color: transparent #e0e0e0 transparent;
     top: 8px;
     left: -6px;
+	outline: none !important;
 }
 
 .form-wrapper button:hover:before{
     border-right-color: #f8ba01;
+	outline: none!important;
 }
 
 .form-wrapper button:focus:before{
-    border-right-color: #c42f2f;
+    border-right-color: #f8ba01;
+	outline: none!important;
 }
 
 .form-wrapper button::-moz-focus-inner {
     border: 0;
     padding: 0;
+	outline: none !important;
 }
 
 /*end search*/
@@ -7652,6 +7657,10 @@ a.profile_button:hover{
 
 .min-height-250{
 	min-height: 250px !important;
+}
+
+.min-height-450{
+	min-height: 450px !important;
 }
 
 .news-block{

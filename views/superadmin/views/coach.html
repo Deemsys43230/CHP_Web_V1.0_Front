@@ -49,21 +49,27 @@
     <div class="container">
         <div class="row">
 
-            <div class="col-md-12">
+            <div class="col-md-12 min-height-450" ng-init="init()">
                 <a href="#dashboard" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back to Dashboard</a>
                 <a id="modal_trigger" href="#modal" class="back-button pull-right margin-left-5"><i class="fa fa-plus-circle"></i> Add Coach</a>
 
                 <form class="form-wrapper pull-right">
                     <input type="text" ng-model="coachsearch" placeholder="Search here...">
+                    <button><i class="fa fa-search"></i> </button>
                 </form>
                 <div flash-message="5000" class="col-md-4 pull-right"></div>
                 <h4 class="classic-title"><span>Coach Management</span></h4>
+                <div ng-if="loaded">
+                    <div class="loader-style">
+                        <div class="loader"></div>
+                    </div>
+                </div>
                 <table class="table table-striped table-bordered">
                     <thead>
                     <tr class="warning">
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th class="option-col1">Options</th>
+                        <th class="col-md-4">Name</th>
+                        <th class="col-md-6">Email</th>
+                        <th class="col-md-2">Options</th>
                     </tr>
                     </thead>
                     <tbody >
@@ -75,12 +81,10 @@
                             <a href="" class="btn-xs btn-success">Enable</a>
                         </td>
                     </tr>
-                    <tr ng-show="coachList.length==0"><td colspan="3">No Records Found !!!</td></tr>
-                    <tr ng-show="!coachfilter.length"><td colspan="3">No Records Found !!!</td></tr>
                     </tbody>
                 </table>
                 <!-- Start Pagination -->
-                <dir-pagination-controls boundary-links="true"> </dir-pagination-controls>
+                <dir-pagination-controls ng-show="paginationLoad" boundary-links="true"> </dir-pagination-controls>
                 <!-- End Pagination -->
             </div>
         </div>

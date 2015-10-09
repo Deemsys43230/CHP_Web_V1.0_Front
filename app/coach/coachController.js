@@ -7,9 +7,11 @@ adminApp.controller('CoachController',function($scope,requestHandler,Flash) {
 
     //Get Coach List
     $scope.doGetCoachList=function(){
-
+        $scope.loaded=true;
         requestHandler.getRequest("admin/getallCoachListbyAdmin/","").then(function(response){
             $scope.coachList=response.data.getallCoachListbyAdmin;
+            $scope.loaded=false;
+            $scope.paginationLoad=true;
         });
 
     };
@@ -35,7 +37,11 @@ adminApp.controller('CoachController',function($scope,requestHandler,Flash) {
       });
     };
 
-    $scope.doGetCoachList();
+    //Initial Load
+    $scope.init = function(){
+        $scope.paginationLoad=false;
+        $scope.doGetCoachList();
+    };
 
 });
 
