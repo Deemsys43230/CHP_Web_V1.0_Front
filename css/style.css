@@ -136,8 +136,9 @@ h4 {
 }
 
 h5 {
-    font-size: 13px;
+    font-size: 14px;
 	line-height: 20px;
+	margin-bottom: 5px;
 }
 
 h6 {
@@ -1386,8 +1387,16 @@ input[type="submit"] {
     margin-top: 20px;
 }
 
+.margin-top-3 {
+    margin-top: 3px;
+}
+
 .margin-tb-20 {
     margin: 20px 0 !important;
+}
+
+.margin-tb-10 {
+    margin: 10px 0 !important;
 }
 
 .margin-top-10 {
@@ -1450,6 +1459,10 @@ input[type="submit"] {
 #col3{
 	left:75%;
 	background-color:#ffcc00;
+}
+
+hr{
+	margin: 10px 0px !important;
 }
 
 .hr1 {
@@ -6899,6 +6912,24 @@ ul.food li p.food_name{
 }
 
 
+.mineral_input
+{
+	font-size: 14px;
+	color: #333;
+	padding: 5px 8px;
+	width: 60px;
+	border:0px !important;
+	-moz-appearance: none;
+	-webkit-appearance: none;
+	-webkit-box-shadow: inset 0px 0px 3px rgba(0,0,0,0.3);
+	-moz-box-shadow: inset 0px 0px 3px rgba(0,0,0,0.3);
+	box-shadow: inset 0px 0px 3px rgba(0,0,0,0.3);
+	outline: 0;
+	margin: 0;
+}
+
+
+
 .measure_input
 {
     font-size: 14px;
@@ -7960,8 +7991,14 @@ input[type=range]:focus::-ms-fill-upper {
 }
 
 .line p{
+	 margin-bottom: 3px;
+	background: #f3f3f3;
+ }
+
+.line p.text-bold{
 	border-bottom: 1px solid #eee;
 	margin-bottom: 3px;
+	background: transparent;
 }
 
 .small-font{

@@ -8,36 +8,17 @@
             <div class="col-md-12">
                 <a href="#food" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back to Food List</a>
                 <h4 class="classic-title"><span>{scope} Food</span></h4>
-                <div class="col-md-2 coach-details">
-                    <img id="food-image-change" src="../../images/food.jpg"/><br/><br/>
-                    <a id="modal_trigger" href="#modal" onclick="return false;" class="btn-sm btn-primary">Change Food Image</a>
-                </div>
                 <div class="col-md-10 no-padding">
-                    <div class="col-md-2 margin-top-5">
-                        <h4>Food Name :</h4>
+                    <h5>Food Name :</h5>
+                    <input class="form-control"/><br/>
+                    <h5>Categories :</h5>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="categories" value="Biriyani,NonVegetarian,Chicken" placeholder="Type something and hit enter" />
                     </div>
-                    <div class="col-md-10">
-                        <input class="form-control"/>
-                        <hr/>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="row">
-                            <div class="col-md-2">
-                                <h4>Categories :</h4>
-                            </div>
-                            <div class="col-md-10">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" id="categories" value="Biriyani,NonVegetarian,Chicken" placeholder="Type something and hit enter" />
-                                </div>
-                                <hr/>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-2 margin-top-5">
-                        <h4>Session :</h4>
-                    </div>
-                    <div class="col-md-10">
-                    <span class="fh-checkbox">
+                    <h5>Session :</h5>
+                    <div class="col-md-1"></div>
+                    <div class="col-md-11">
+                        <span class="fh-checkbox">
                         <input type="checkbox" id="session-1" name="session" checked>
                         <label for="session-1">Break Fast</label>
                         <input type="checkbox" id="session-2" name="session">
@@ -47,84 +28,390 @@
                         <input type="checkbox" id="session-4" name="session">
                         <label for="session-4">Dinner</label>
                     </span>
-                        <hr/>
+                    </div>
+                </div>
+                <div class="col-md-2 coach-details">
+                    <img id="food-image-change" src="../../images/food.jpg"/><br/><br/>
+                    <a id="modal_trigger" href="#modal" onclick="return false;" class="btn-sm btn-warning">Change Food Image</a>
+                </div>
+                <div class="col-md-12 no-padding">
+                    <hr>
+                    <h5>Tags :</h5>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="tags" value="Lunch,Heavy,Food" placeholder="Type something and hit enter" />
                     </div>
 
-                    <div class="col-md-12">
-                        <div class="row">
-                            <div class="col-md-2">
-                                <h4>Tags :</h4>
-                            </div>
-                            <div class="col-md-10">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" id="tags" value="Lunch,Heavy,Food" placeholder="Type something and hit enter" />
-                                </div>
-                                <hr/>
-                            </div>
+                    <h5>Measures :</h5>
+                    <div class="col-md-1"></div>
+                    <div class="fh-checkbox col-md-11">
+                        <input class="col-md-1" id="measure-1" type="checkbox" checked>
+                        <label class="col-md-2" for="measure-1">Grams</label>
+                        <input class="col-md-1" id="measure-2" type="checkbox">
+                        <label class="col-md-2" for="measure-2">Kgs</label>
+                        <input class="col-md-1" id="measure-3" type="checkbox">
+                        <label class="col-md-2" for="measure-3">litter</label>
+                        <input class="col-md-1" id="measure-4" type="checkbox">
+                        <label class="col-md-2" for="measure-4">ml</label>
+                        <input class="col-md-1" id="measure-5" type="checkbox">
+                        <label class="col-md-2" for="measure-5">cup</label>
+                        <input class="col-md-1" id="measure-6" type="checkbox">
+                        <label class="col-md-2" for="measure-6">bowl</label>
+                        <input class="col-md-1" id="measure-7" type="checkbox">
+                        <label class="col-md-2" for="measure-7">plate</label>
+                        <input class="col-md-1" id="measure-8" type="checkbox">
+                        <label class="col-md-2" for="measure-8">pieces</label>
+                        <input class="col-md-1" id="measure-9" type="checkbox">
+                        <label class="col-md-2" for="measure-9">glass</label>
+                        <div class="col-md-3 no-padding margin-top-5">
+                            <a id="measure-modal" href="#measure-modal-edit" onclick="return false;" class="main_button"><i class="fa fa-plus-circle"></i>&nbsp;Add New</a>
                         </div>
                     </div>
-
-                    <div class="col-md-12">
-                        <div class="row">
-                            <div class="col-md-2 margin-top-5">
-                                <h4>Measures :</h4>
-                            </div>
-                            <div class="col-md-10">
-                                <div class="row">
-                                    <div class="fh-checkbox col-md-12">
-                                        <input class="col-md-1" id="measure-1" type="checkbox" checked>
-                                        <label class="col-md-2" for="measure-1">Grams</label>
-                                        <input class="col-md-1" id="measure-2" type="checkbox">
-                                        <label class="col-md-2" for="measure-2">Kgs</label>
-                                        <input class="col-md-1" id="measure-3" type="checkbox">
-                                        <label class="col-md-2" for="measure-3">litter</label>
-                                        <input class="col-md-1" id="measure-4" type="checkbox">
-                                        <label class="col-md-2" for="measure-4">ml</label>
-                                        <input class="col-md-1" id="measure-5" type="checkbox">
-                                        <label class="col-md-2" for="measure-5">cup</label>
-                                        <input class="col-md-1" id="measure-6" type="checkbox">
-                                        <label class="col-md-2" for="measure-6">bowl</label>
-                                        <input class="col-md-1" id="measure-7" type="checkbox">
-                                        <label class="col-md-2" for="measure-7">plate</label>
-                                        <input class="col-md-1" id="measure-8" type="checkbox">
-                                        <label class="col-md-2" for="measure-8">pieces</label>
-                                        <input class="col-md-1" id="measure-9" type="checkbox">
-                                        <label class="col-md-2" for="measure-9">glass</label>
-                                        <div class="col-md-3 no-padding margin-top-5">
-                                            <a id="measure-modal" href="#measure-modal-edit" onclick="return false;" class="main_button"><i class="fa fa-plus-circle"></i>&nbsp;Add New</a>
+                    <div class="col-md-12 no-padding margin-top-10">
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr class="success">
+                                <th class="col-md-1 text-center">Measures</th>
+                                <th class="col-md-1 text-center">Value</th>
+                                <th class="col-md-10 text-center">Minerals</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>Grams</td>
+                                <td><input class="mineral_input"></td>
+                                <td class="line">
+                                    <div class="col-md-3">
+                                        <div class="col-md-7 no-padding">
+                                            <p>Calories</p>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <p class="text-bold">123</p>
+                                        </div>
+                                        <div class="col-md-7 no-padding">
+                                            <p>Fat</p>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <p class="text-bold">123</p>
+                                        </div>
+                                        <div class="col-md-7 no-padding">
+                                            <p>Protein</p>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <p class="text-bold">123</p>
+                                        </div>
+                                        <div class="col-md-7 no-padding">
+                                            <p>Carbo</p>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <p class="text-bold">123</p>
+                                        </div>
+                                        <div class="col-md-7 no-padding">
+                                            <p>Fibre</p>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <p class="text-bold">123</p>
+                                        </div>
+                                        <div class="col-md-7 no-padding">
+                                            <p>Calcium</p>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <p class="text-bold">123</p>
+                                        </div>
+                                        <div class="col-md-7 no-padding">
+                                            <p>Zinc</p>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <p class="text-bold">123</p>
                                         </div>
                                     </div>
-
-                                </div>
-                                <table class="table table-bordered margin-top-10">
-                                    <thead>
-                                    <tr class="success">
-                                        <th class="action-col">Measures</th>
-                                        <th>Fat (g)</th>
-                                        <th>Protein (g)</th>
-                                        <th>Carbo (g)</th>
-                                        <th>Fibre (g)</th>
-                                        <th>Calorie Intake</th>
-                                        <th>Options</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td>Grams</td>
-                                        <td><input class="form-control"></td>
-                                        <td><input class="form-control"></td>
-                                        <td><input class="form-control"></td>
-                                        <td><input class="form-control"></td>
-                                        <td><input class="form-control"></td>
-                                        <td><a href="#minerals" class="btn btn-primary minerals-modal">Add Minerals</a> </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
+                                    <div class="col-md-3 no-padding">
+                                        <div class="col-md-7 no-padding">
+                                            <p>Folic Acid</p>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <p class="text-bold">123</p>
+                                        </div>
+                                        <div class="col-md-7 no-padding">
+                                            <p>Iron</p>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <p class="text-bold">123</p>
+                                        </div>
+                                        <div class="col-md-7 no-padding">
+                                            <p>Niacin</p>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <p class="text-bold">123</p>
+                                        </div>
+                                        <div class="col-md-7 no-padding">
+                                            <p>Phosphorous</p>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <p class="text-bold">123</p>
+                                        </div>
+                                        <div class="col-md-7 no-padding">
+                                            <p>Potassium</p>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <p class="text-bold">123</p>
+                                        </div>
+                                        <div class="col-md-7 no-padding">
+                                            <p>Riboflavin</p>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <p class="text-bold">123</p>
+                                        </div>
+                                        <a href="#minerals" class="btn btn-xs btn-warning minerals-modal margin-top-3"><i class="fa fa-pencil"></i> Edit Values</a>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="col-md-7 no-padding">
+                                            <p>Saturated Fat</p>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <p class="text-bold">123</p>
+                                        </div>
+                                        <div class="col-md-7 no-padding">
+                                            <p>Sodium</p>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <p class="text-bold">123</p>
+                                        </div>
+                                        <div class="col-md-7 no-padding">
+                                            <p>Sugar</p>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <p class="text-bold">123</p>
+                                        </div>
+                                        <div class="col-md-7 no-padding">
+                                            <p>Thiamine</p>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <p class="text-bold">123</p>
+                                        </div>
+                                        <div class="col-md-7 no-padding">
+                                            <p>Vitamin A</p>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <p class="text-bold">123</p>
+                                        </div>
+                                        <div class="col-md-7 no-padding">
+                                            <p>Vitamin B12</p>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <p class="text-bold">123</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 no-padding">
+                                        <div class="col-md-7 no-padding">
+                                            <p>Vitamin B6</p>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <p class="text-bold">123</p>
+                                        </div>
+                                        <div class="col-md-7 no-padding">
+                                            <p>Vitamin C</p>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <p class="text-bold">123</p>
+                                        </div>
+                                        <div class="col-md-7 no-padding">
+                                            <p>Vitamin E</p>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <p class="text-bold">123</p>
+                                        </div>
+                                        <div class="col-md-7 no-padding">
+                                            <p>Vitamin K</p>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <p class="text-bold">123</p>
+                                        </div>
+                                        <div class="col-md-7 no-padding">
+                                            <p>Polyunsaturated Fat</p>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <p class="text-bold">123</p>
+                                        </div>
+                                        <div class="col-md-7 no-padding">
+                                            <p>Monounsaturated Fat</p>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <p class="text-bold">123</p>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Grams</td>
+                                <td><input class="mineral_input"></td>
+                                <td class="line">
+                                    <div class="col-md-3">
+                                        <div class="col-md-7 no-padding">
+                                            <p>Calories</p>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <p class="text-bold">123</p>
+                                        </div>
+                                        <div class="col-md-7 no-padding">
+                                            <p>Fat</p>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <p class="text-bold">123</p>
+                                        </div>
+                                        <div class="col-md-7 no-padding">
+                                            <p>Protein</p>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <p class="text-bold">123</p>
+                                        </div>
+                                        <div class="col-md-7 no-padding">
+                                            <p>Carbo</p>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <p class="text-bold">123</p>
+                                        </div>
+                                        <div class="col-md-7 no-padding">
+                                            <p>Fibre</p>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <p class="text-bold">123</p>
+                                        </div>
+                                        <div class="col-md-7 no-padding">
+                                            <p>Calcium</p>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <p class="text-bold">123</p>
+                                        </div>
+                                        <div class="col-md-7 no-padding">
+                                            <p>Zinc</p>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <p class="text-bold">123</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 no-padding">
+                                        <div class="col-md-7 no-padding">
+                                            <p>Folic Acid</p>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <p class="text-bold">123</p>
+                                        </div>
+                                        <div class="col-md-7 no-padding">
+                                            <p>Iron</p>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <p class="text-bold">123</p>
+                                        </div>
+                                        <div class="col-md-7 no-padding">
+                                            <p>Niacin</p>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <p class="text-bold">123</p>
+                                        </div>
+                                        <div class="col-md-7 no-padding">
+                                            <p>Phosphorous</p>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <p class="text-bold">123</p>
+                                        </div>
+                                        <div class="col-md-7 no-padding">
+                                            <p>Potassium</p>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <p class="text-bold">123</p>
+                                        </div>
+                                        <div class="col-md-7 no-padding">
+                                            <p>Riboflavin</p>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <p class="text-bold">123</p>
+                                        </div>
+                                        <a href="#minerals" class="btn btn-xs btn-warning minerals-modal margin-top-3"><i class="fa fa-pencil"></i> Edit Values</a>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="col-md-7 no-padding">
+                                            <p>Saturated Fat</p>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <p class="text-bold">123</p>
+                                        </div>
+                                        <div class="col-md-7 no-padding">
+                                            <p>Sodium</p>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <p class="text-bold">123</p>
+                                        </div>
+                                        <div class="col-md-7 no-padding">
+                                            <p>Sugar</p>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <p class="text-bold">123</p>
+                                        </div>
+                                        <div class="col-md-7 no-padding">
+                                            <p>Thiamine</p>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <p class="text-bold">123</p>
+                                        </div>
+                                        <div class="col-md-7 no-padding">
+                                            <p>Vitamin A</p>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <p class="text-bold">123</p>
+                                        </div>
+                                        <div class="col-md-7 no-padding">
+                                            <p>Vitamin B12</p>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <p class="text-bold">123</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 no-padding">
+                                        <div class="col-md-7 no-padding">
+                                            <p>Vitamin B6</p>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <p class="text-bold">123</p>
+                                        </div>
+                                        <div class="col-md-7 no-padding">
+                                            <p>Vitamin C</p>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <p class="text-bold">123</p>
+                                        </div>
+                                        <div class="col-md-7 no-padding">
+                                            <p>Vitamin E</p>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <p class="text-bold">123</p>
+                                        </div>
+                                        <div class="col-md-7 no-padding">
+                                            <p>Vitamin K</p>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <p class="text-bold">123</p>
+                                        </div>
+                                        <div class="col-md-7 no-padding">
+                                            <p>Polyunsaturated Fat</p>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <p class="text-bold">123</p>
+                                        </div>
+                                        <div class="col-md-7 no-padding">
+                                            <p>Monounsaturated Fat</p>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <p class="text-bold">123</p>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
                     </div>
+
                     <div class="col-md-12 margin-top-10 text-center">
-                        <a class="register_button" href="">Save Food</a>
+                        <a class="register_button" href="">Save Food Details</a>
                         <a class="cancel_button" href="#food">Cancel</a>
                     </div>
                 </div>
@@ -187,9 +474,9 @@
 </div>
 
 <!-- Minerals popup-->
-<div id="minerals" class="popupContainer width-40" style="display:none;">
+<div id="minerals" class="popupContainer width-60" style="display:none;">
     <header class="popupHeader width-100">
-        <span class="header_title">add minerals</span>
+        <span class="header_title">edit minerals values</span>
         <span class="modal_close"><i class="fa fa-times"></i></span>
     </header>
 
@@ -197,98 +484,167 @@
         <!-- Register Form -->
         <div class="common_model input_mineral">
             <form class="row">
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <div class="col-md-7 no-padding">
-                        <p>Calcium<span class="pull-right">:</span></p>
+                        <p>Calories</p>
                     </div>
                     <div class="col-md-5">
                         <input type="text" />
                     </div>
                     <div class="col-md-7 no-padding">
-                        <p>Chloride<span class="pull-right">:</span></p>
+                        <p>Fat</p>
                     </div>
                     <div class="col-md-5">
                         <input type="text" />
                     </div>
                     <div class="col-md-7 no-padding">
-                        <p>Magnesium<span class="pull-right">:</span></p>
+                        <p>Protein</p>
                     </div>
                     <div class="col-md-5">
                         <input type="text" />
                     </div>
                     <div class="col-md-7 no-padding">
-                        <p>Phosphorus<span class="pull-right">:</span></p>
+                        <p>Carbo</p>
                     </div>
                     <div class="col-md-5">
                         <input type="text" />
                     </div>
                     <div class="col-md-7 no-padding">
-                        <p>Sodium<span class="pull-right">:</span></p>
+                        <p>Fibre</p>
                     </div>
                     <div class="col-md-5">
                         <input type="text" />
                     </div>
                     <div class="col-md-7 no-padding">
-                        <p>Sulfur<span class="pull-right">:</span></p>
+                        <p>Calcium</p>
                     </div>
                     <div class="col-md-5">
                         <input type="text" />
                     </div>
                     <div class="col-md-7 no-padding">
-                        <p>Iron<span class="pull-right">:</span></p>
-                    </div>
-                    <div class="col-md-5">
-                        <input type="text" />
-                    </div>
-                </div>
-
-
-                <div class="col-md-6">
-                    <div class="col-md-7 no-padding">
-                        <p>Zinc<span class="pull-right">:</span></p>
+                        <p>Zinc</p>
                     </div>
                     <div class="col-md-5">
                         <input type="text" />
                     </div>
                     <div class="col-md-7 no-padding">
-                        <p>Manganese<span class="pull-right">:</span></p>
+                        <p>Folic Acid</p>
                     </div>
                     <div class="col-md-5">
                         <input type="text" />
                     </div>
                     <div class="col-md-7 no-padding">
-                        <p>Copper<span class="pull-right">:</span></p>
-                    </div>
-                    <div class="col-md-5">
-                        <input type="text" />
-                    </div>
-                    <div class="col-md-7 no-padding">
-                        <p>Molybdenum<span class="pull-right">:</span></p>
-                    </div>
-                    <div class="col-md-5">
-                        <input type="text" />
-                    </div>
-                    <div class="col-md-7 no-padding">
-                        <p>Iodine<span class="pull-right">:</span></p>
-                    </div>
-                    <div class="col-md-5">
-                        <input type="text" />
-                    </div>
-                    <div class="col-md-7 no-padding">
-                        <p>Chromium<span class="pull-right">:</span></p>
-                    </div>
-                    <div class="col-md-5">
-                        <input type="text" />
-                    </div>
-                    <div class="col-md-7 no-padding">
-                        <p>Selenium<span class="pull-right">:</span></p>
+                        <p>Iron</p>
                     </div>
                     <div class="col-md-5">
                         <input type="text" />
                     </div>
                 </div>
 
-                <div class="col-md-12 action_btns margin-top-20">
+
+                <div class="col-md-4">
+                    <div class="col-md-7 no-padding">
+                        <p>Niacin</p>
+                    </div>
+                    <div class="col-md-5">
+                        <input type="text" />
+                    </div>
+                    <div class="col-md-7 no-padding">
+                        <p>Phosphorous</p>
+                    </div>
+                    <div class="col-md-5">
+                        <input type="text" />
+                    </div>
+                    <div class="col-md-7 no-padding">
+                        <p>Potassium</p>
+                    </div>
+                    <div class="col-md-5">
+                        <input type="text" />
+                    </div>
+                    <div class="col-md-7 no-padding">
+                        <p>Riboflavin</p>
+                    </div>
+                    <div class="col-md-5">
+                        <input type="text" />
+                    </div>
+                    <div class="col-md-7 no-padding">
+                        <p>Saturated Fat</p>
+                    </div>
+                    <div class="col-md-5">
+                        <input type="text" />
+                    </div>
+                    <div class="col-md-7 no-padding">
+                        <p>Sodium</p>
+                    </div>
+                    <div class="col-md-5">
+                        <input type="text" />
+                    </div>
+                    <div class="col-md-7 no-padding">
+                        <p>Sugar</p>
+                    </div>
+                    <div class="col-md-5">
+                        <input type="text" />
+                    </div>
+                    <div class="col-md-7 no-padding">
+                        <p>Thiamine</p>
+                    </div>
+                    <div class="col-md-5">
+                        <input type="text" />
+                    </div>
+                    <div class="col-md-7 no-padding">
+                        <p>Vitamin A</p>
+                    </div>
+                    <div class="col-md-5">
+                        <input type="text" />
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="col-md-7 no-padding">
+                        <p>Vitamin B12</p>
+                    </div>
+                    <div class="col-md-5">
+                        <input type="text" />
+                    </div>
+                    <div class="col-md-7 no-padding">
+                        <p>Vitamin B6</p>
+                    </div>
+                    <div class="col-md-5">
+                        <input type="text" />
+                    </div>
+                    <div class="col-md-7 no-padding">
+                        <p>Vitamin C</p>
+                    </div>
+                    <div class="col-md-5">
+                        <input type="text" />
+                    </div>
+                    <div class="col-md-7 no-padding">
+                        <p>Vitamin E</p>
+                    </div>
+                    <div class="col-md-5">
+                        <input type="text" />
+                    </div>
+                    <div class="col-md-7 no-padding">
+                        <p>Vitamin K</p>
+                    </div>
+                    <div class="col-md-5">
+                        <input type="text" />
+                    </div>
+                    <div class="col-md-7 no-padding">
+                        <p>Polyunsaturated Fat</p>
+                    </div>
+                    <div class="col-md-5">
+                        <input type="text" />
+                    </div>
+                    <div class="col-md-7 no-padding">
+                        <p>Monounsaturated Fat</p>
+                    </div>
+                    <div class="col-md-5">
+                        <input type="text" />
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-md-offset-3 action_btns margin-top-20">
                     <div class="one_half"><a onclick="return false;" class="btn btn_blue">Save Values</a></div>
                     <div class="one_half last modal_close"><a href="" class="btn btn_red">Cancel</a></div>
                 </div><br/><br/>
