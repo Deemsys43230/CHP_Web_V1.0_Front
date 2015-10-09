@@ -16,6 +16,7 @@ adminApp.controller('LatestNewsController',function($scope,requestHandler,Flash,
         requestHandler.getRequest("admin/getLatestNews/", "").then(function(response){
             $scope.news=response.data.News;
             $scope.loaded=false;
+            $scope.paginationLoad=true;
         },function(){
             errorMessage(Flash,"Please try again later!")
         });
@@ -52,8 +53,10 @@ adminApp.controller('LatestNewsController',function($scope,requestHandler,Flash,
     };
 
     // Display Latest News On Page Load
-    $scope.doGetLatestNews();
-
+    $scope.init = function(){
+        $scope.paginationLoad=false;
+        $scope.doGetLatestNews();
+    };
 });
 
 adminApp.controller('LatestNewsEditController',function($scope,requestHandler,Flash,$location,$routeParams) {

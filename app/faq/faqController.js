@@ -13,6 +13,7 @@ adminApp.controller('FAQController',function($scope,requestHandler,Flash){
         requestHandler.getRequest("admin/getFAQList","").then(function(response){
             $scope.faqList=response.data.Faq_Data;
             $scope.loaded=false;
+            $scope.paginationLoad=true;
         },function(){
             errorMessage(Flash,"Please try again later!")
         });
@@ -58,7 +59,6 @@ adminApp.controller('FAQController',function($scope,requestHandler,Flash){
             $scope.loaded=false;
             $scope.doGetAllFAQ();
             successMessage(Flash,"Successfully Updated");
-
         },function(){
             errorMessage(Flash,"Please try again later!")
         });
@@ -101,11 +101,9 @@ adminApp.controller('FAQController',function($scope,requestHandler,Flash){
 
     //Initial Load
     $scope.init = function(){
-        alert("yes");
         $scope.paginationLoad=false;
         $scope.doGetAllFAQ();
     };
-
 
 });
 

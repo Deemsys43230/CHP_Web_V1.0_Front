@@ -19,9 +19,7 @@ adminApp.controller('TestimonialController',function($scope,requestHandler,Flash
                 $scope.imageAdded=false;
             }
         }
-
-
-    }
+    };
 
 
     //summer note
@@ -35,6 +33,7 @@ adminApp.controller('TestimonialController',function($scope,requestHandler,Flash
         requestHandler.getRequest("admin/getTestimonialList/", "").then(function(response){
             $scope.admintestimonials=response.data.Testimonials;
             $scope.loaded=false;
+            $scope.paginationLoad=true;
         },function(){
             errorMessage(Flash,"Please try again later!")
         });
@@ -71,7 +70,10 @@ adminApp.controller('TestimonialController',function($scope,requestHandler,Flash
     };
 
     // Display Testimonials For admin view On Page Load
-    $scope.doGetTestimonialsByAdmin();
+    $scope.init = function(){
+        $scope.paginationLoad=false;
+        $scope.doGetTestimonialsByAdmin();
+    };
 
     //For image upload
     $('.image-editor').cropit();
@@ -80,7 +82,7 @@ adminApp.controller('TestimonialController',function($scope,requestHandler,Flash
 
 adminApp.controller('TestimonialEditController',function($scope,requestHandler,Flash,$location,$routeParams,$sce) {
 
-    $scope.activeClass = {testimonial:'active'}
+    $scope.activeClass = {testimonial:'active'};
 
     $scope.imageAdded=false;
 
