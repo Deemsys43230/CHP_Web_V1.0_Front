@@ -61,8 +61,5 @@ adminApp.controller('FoodUploadController', ['$scope', 'FileUploader', function(
 }]);
 
 
-adminApp.controller('FoodCateogryController', ['$scope', function($scope) {
-    $scope.activeClass = {category:'active'};
-}]);
 
 

@@ -470,7 +470,7 @@ commonApp.directive('validateEmail', function() {
 
 //Check For Url Validation
 commonApp.directive('validateUrl', function() {
-    var URL_REGEXP = /^http:\/\/\w+(\.\w+)*(:[0-9]+)?\/?(\/[.\w]*)*$/;
+    var URL_REGEXP = /^http:\/\/\w.+(\.\w+)*(:[0-9]+)?\/?(\/[.\w]*)*$/;
 
     return {
         require: 'ngModel',

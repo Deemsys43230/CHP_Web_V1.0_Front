@@ -566,12 +566,13 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../js/bootstrap.min.js',
                                 '../../plugin/popup/style.css',
                                 '../../plugin/popup/jquery.leanModal.min.js',
-                                '../../app/food/foodController.js'
+                                '../../angular/angular-utils-pagination/dirPagination.js',
+                                '../../app/foodCategory/foodCategoryController.js'
                             ]
                         })
                     }
                 },
-                controller:'FoodCateogryController'
+                controller:'FoodCategoryController'
             }).
             when('/course', {
                 templateUrl: 'views/course.html',

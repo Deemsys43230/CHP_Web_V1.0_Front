@@ -32,6 +32,15 @@ requestHandlerApp.factory("requestHandler",['$http',function($http,$location){
          });
     };
 
+    requestObj.deleteRequest=function(requestURL,params){
+        requestURL=hostedDomain+requestURL;
+        return $http.delete(requestURL,{data:params}).then(function(response){
+            return response;
+         },function(response){
+            return response;
+        });
+    };
+
     requestObj.loginRequest=function(username,password){
          return $http.post('http://localhost/api/v1/login/',{"username":username,"password":password}).then(function(response){
             return response;

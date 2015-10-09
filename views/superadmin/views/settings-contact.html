@@ -59,7 +59,7 @@
                         <h4>Mobile :</h4>
                     </div>
                     <div class="col-md-9">
-                        <input class="form-control margin-bottom-20" name="mobile" ng-pattern="/^\d+$/" ng-minlength="10" maxlength="14" ng-model="contactUs.mobile" required>
+                        <input class="form-control margin-bottom-20" name="mobile" ng-pattern="/^\S\d+$/" ng-minlength="10" maxlength="14" ng-model="contactUs.mobile" required>
                           <span ng-show="contactUsForm.mobile.$dirty&&contactUsForm.mobile.$invalid">
                                 <span class="error-message" ng-show="contactUsForm.mobile.$error.required"><span>Required.</span></span>
                                 <span class="error-message" ng-show="contactUsForm.mobile.$error.pattern"><span>Invalid&nbsp;Format.</span></span>
@@ -92,7 +92,7 @@
                         <h4>Company URL :</h4>
                     </div>
                     <div class="col-md-9">
-                        <input type="text"  class="form-control margin-bottom-20" name="companyurl" ng-model="contactUs.companyurl" validate-url required >
+                        <input type="text"  class="form-control margin-bottom-20" name="companyurl" maxlength="100" ng-model="contactUs.companyurl" validate-url required >
                          <span ng-show="contactUsForm.companyurl.$dirty&&contactUsForm.companyurl.$invalid">
                                 <span class="error-message" ng-show="contactUsForm.companyurl.$error.required"><span>Required.</span></span>
                                 <span class="error-message" ng-show="!contactUsForm.companyurl.$error.required&&contactUsForm.companyurl.$error.validateUrl"><span>Enter&nbsp;valid&nbsp;URL.</span></span>
@@ -102,7 +102,7 @@
                         <h4>App URL :</h4>
                     </div>
                     <div class="col-md-9">
-                        <input class="form-control margin-bottom-20" name="appurl" ng-model="contactUs.appurl" validate-url required>
+                        <input class="form-control margin-bottom-20" name="appurl" ng-model="contactUs.appurl" maxlength="100" validate-url required>
                         <span ng-show="contactUsForm.appurl.$dirty&&contactUsForm.appurl.$invalid">
                                 <span class="error-message" ng-show="contactUsForm.appurl.$error.required"><span>Required.</span></span>
                             <span class="error-message" ng-show="!contactUsForm.appurl.$error.required&&contactUsForm.appurl.$error.validateUrl"><span>Enter&nbsp;valid&nbsp;URL.</span></span>
