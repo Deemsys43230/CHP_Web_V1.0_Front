@@ -26,10 +26,15 @@ userApp.controller('UserProfileController',['$scope','requestHandler','Flash',fu
 
 
     $scope.doGetProfile=function(){
+
         requestHandler.getRequest("getUserId/","").then(function(response){
 
 
             $scope.userProfile=response.data.User_Profile;
+            if($scope.userProfile.gender == null) {
+                $scope.userProfile.gender = "1";
+            }
+
             $scope.userProfile.imageurl=$scope.userProfile.imageurl.substring($scope.userProfile.imageurl.indexOf("/") + 14, $scope.userProfile.imageurl.length)
             $scope.userProfile.imageurl=$scope.userProfile.imageurl+"?decache="+Math.random();
 
