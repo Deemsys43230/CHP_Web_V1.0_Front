@@ -78,7 +78,7 @@
                         <td>{{coach.emailid}}</td>
                         <td>
                             <a href="#coach-view/{{coach.userid}}" class="btn-xs btn-primary">View</a>
-                            <a href="" class="btn-xs btn-success">Enable</a>
+                            <a href="" ng-click="doEnableDisableCoach(coach.userid)" class="btn-xs btn-success">Enable</a>
                         </td>
                     </tr>
                     </tbody>

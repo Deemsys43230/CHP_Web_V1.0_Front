@@ -16,6 +16,16 @@ adminApp.controller('CoachController',function($scope,requestHandler,Flash) {
 
     };
 
+    //Enable Disable coach
+    $scope.doEnableDisableCoach=function(coachId){
+        requestHandler.postRequest("admin/enableordisableUser/",{"userid":coachId}).then(function(response){
+           $scope.doGetCoachList();
+            successMessage(Flash,"Successful");
+        },function(){
+            errorMessage(Flash,"Please Try Again Later");
+        });
+    };
+
     //Add New Coach
     $scope.doAddCoach= function () {
         //Set Coach Role
