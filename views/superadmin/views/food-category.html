@@ -8,14 +8,13 @@
                 <h4 class="classic-title"><span>Food Management</span></h4>
                 <div ng-include src="'views/food-menu.html'" onload="activeClass"></div>
             </div>
-            <div class="col-md-9">
+            <div class="col-md-9 min-height-350" ng-init="init()">
                 <a href="#dashboard" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back to Dashboard</a>
-                <a id="modal_category" ng-click="reset()" href="#category" class="back-button pull-right"><i class="fa fa-plus-circle"></i> Add Category</a>
-                <form class="form-wrapper pull-right">
-                    <input type="text" ng-model="categorysearch" placeholder="Search here...">
-                </form>
+                <a id="modal_category" ng-click="reset()" href="#category" class="back-button pull-right margin-left-5"><i class="fa fa-plus-circle"></i> Add Category</a>
+
                 <div flash-message="2000" class="col-md-4 pull-right"></div>
                 <h3 class="margin-bottom-10"><i class="fa fa-list-ul"></i> &nbsp;Food Category</h3>
+
                 <div ng-if="loaded">
                     <div class="loader-style">
                         <div class="loader"></div>
@@ -24,13 +23,24 @@
                 <table class="table table-bordered table-hover">
                     <thead>
                     <tr class="warning">
-                        <th>S.No</th>
-                        <th>Category Name</th>
-                        <th class="option-col">Options</th>
+                        <th class="col-md-1">S.No</th>
+                        <th class="col-md-8">Category Name
+                            <!-- Stat Search -->
+                            <div class="pull-right">
+                                <a href="#" onclick="return false;" class="show-list-search"><i class="fa fa-search"></i></a>
+                                <div class="search-list-form">
+                                    <form autocomplete="off" class="searchform">
+                                        <input type="text" ng-model="categorysearch" placeholder="Search here...">
+                                    </form>
+                                </div>
+                            </div>
+                            <!-- End Search -->
+                        </th>
+                        <th class="col-md-3">Options</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr dir-paginate="category in categoryfilter = (foodCategoryList |filter: categorysearch | itemsPerPage: 10|orderBy:sortKey:!reverse)" ng-show="foodCategoryList.length!=0">
+                    <tr dir-paginate="category in categoryfilter = (foodCategoryList |filter: categorysearch | itemsPerPage: 8|orderBy:sortKey:!reverse)" ng-show="foodCategoryList.length!=0">
                         <td>{{$index+1}}</td>
                         <td>{{category.categoryname}}</td>
                         <td>
@@ -45,7 +55,7 @@
                     </tbody>
                 </table>
                 <!-- Start Pagination -->
-                <dir-pagination-controls max-size="5" direction-links="true"  boundary-links="true"> </dir-pagination-controls>
+                <dir-pagination-controls ng-show="paginationLoad" max-size="5" direction-links="true"  boundary-links="true"> </dir-pagination-controls>
                 <!-- End Pagination -->
             </div>
         </div>
@@ -86,4 +96,14 @@
     $(function(){
         $(".common_model").show();
     })
+</script>
+
+<script>
+    $('.show-list-search').click(function() {
+        $('.search-list-form').fadeIn(300);
+        $('.search-list-form input').focus();
+    });
+    $('.search-list-form input').blur(function() {
+        $('.search-list-form').fadeOut(300);
+    });
 </script>

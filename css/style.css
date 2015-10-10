@@ -880,6 +880,23 @@ ul.social-list li:last-child a i {
 	color: #666;
 }
 
+.show-list-search {
+	position: relative;
+	display: block;
+	float: right;
+	margin-right: 10px;
+}
+
+.show-list-search i {
+	font-size: 1.2em !important;
+	display: block;
+	color: #fff;
+	transition: all 0.2s ease-in-out;
+	-moz-transition: all 0.2s ease-in-out;
+	-webkit-transition: all 0.2s ease-in-out;
+	-o-transition: all 0.2s ease-in-out;
+}
+
 a.back-button{
     padding: 0px 10px;
     color: #666 !important;
@@ -983,7 +1000,57 @@ a.update-button:hover{
 	z-index: 20;
 }
 
+.search-list-form {
+	position: relative;
+	right: -25px;
+	z-index: 20;
+	float: right;
+	display: none;
+	top: 25px;
+}
 
+.search-list-form:before {
+	background-color: #ccc;
+	top: -2px;
+	content: '';
+	display: block;
+	height: 4px;
+	width: 4px;
+	z-index: 20;
+	right: 15px;
+	-webkit-transform: rotate(45deg);
+	-moz-transform: rotate(45deg);
+	-ms-transform: rotate(45deg);
+	-o-transform: rotate(45deg);
+	transform: rotate(45deg);
+	position: absolute;
+}
+
+.search-list-form form input {
+	width: 250px !important;
+	font-weight: normal !important;
+	border: 2px solid #ccc;
+	border-radius: 3px;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	-o-border-radius: 3px;
+	padding: 5px 14px;
+	z-index: 22;
+	color: #9d9d9d;
+	box-shadow: none;
+	-o-box-shadow: none;
+	-moz-box-shadow: none;
+	-webkit-box-shadow: none;
+	outline: none;
+	box-shadow: none;
+}
+
+.search-list-form form {
+	position: absolute;
+	right: 0;
+	top: 0;
+	z-index: 20;
+}
 
 
 
@@ -7662,6 +7729,12 @@ a.profile_button:hover{
 .min-height-450{
 	min-height: 450px !important;
 }
+
+
+.min-height-350{
+	min-height: 350px !important;
+}
+
 
 .news-block{
 	width: 100%;

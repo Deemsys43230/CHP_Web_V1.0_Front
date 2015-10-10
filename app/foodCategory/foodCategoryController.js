@@ -9,10 +9,22 @@ adminApp.controller('FoodCategoryController',function($scope,requestHandler,Flas
         requestHandler.getRequest("admin/getFoodCategory/","").then(function(response){
             $scope.foodCategoryList=response.data.Food_Category;
             $scope.loaded=false;
+            $scope.paginationLoad=true;
         },function(){
             errorMessage(Flash,"Please try again later!")
         });
     };
+
+    // Search food category
+    $('.show-list-search').click(function() {
+        $('.search-list-form').fadeIn(300);
+        $('.search-list-form input').focus();
+    });
+
+    $('.search-list-form input').focusout(function() {
+        $('.search-list-form').fadeOut(300);
+        $scope.categorysearch="";
+    });
 
     $scope.doAddFoodCategory=function(){
         $scope.loaded=true;
@@ -64,7 +76,11 @@ adminApp.controller('FoodCategoryController',function($scope,requestHandler,Flas
         $scope.foodCategoryAddForm.$setPristine();
         //$scope.foodCategoryEditForm.$setPristine();
     };
-    $scope.doGetAllFoodCategory();
 
+    //Initial Load
+    $scope.init = function(){
+        $scope.paginationLoad=false;
+        $scope.doGetAllFoodCategory();
+    };
 
 });
