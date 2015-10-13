@@ -1,0 +1,100 @@
+
+<!-- Start Page Banner -->
+<div class="page-banner">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-3">
+                <h4 class="classic-title"><span>Food Management</span></h4>
+                <div ng-include src="'views/food-menu.html'" onload="activeClass"></div>
+            </div>
+            <div class="col-md-9">
+                <a href="#dashboard" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back to Dashboard</a>
+                <a id="modal_measure" href="#measure" class="back-button pull-right "><i class="fa fa-plus-circle"></i> Add Measure</a>
+                <div flash-message="2000" class="col-md-4 pull-right"></div>
+                <h3 class="margin-bottom-10"><i class="fa fa-list-ul"></i> &nbsp;Food Measure</h3>
+                <div ng-if="loaded">
+                    <div class="loader-style">
+                        <div class="loader"></div>
+                    </div>
+                </div>
+                <table class="table table-bordered table-hover">
+                    <thead>
+                    <tr class="warning">
+                        <th>S.No</th>
+                        <th>Measure</th>
+                        <th class="option-col">Options</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr dir-paginate="list in measureList | itemsPerPage:6 ">
+                        <td>{{list.measureid}}</td>
+                        <td>{{list.measurename}}</td>
+                        <td>
+                            <a href="" onclick="return false;" class="btn-xs btn-warning" ng-click="">Edit</a>
+                            <a href="" class="btn-xs btn-success" ng-click="doEnableDisable(list.measureid)" ng-show="list.status==1">Enable</a>
+                            <a href="" class="btn-xs btn-danger" ng-click="doEnableDisable(list.measureid)" ng-hide="list.status==1">Disable</a>
+                            <a href="" class="btn-xs btn-danger" ng-click="doDeleteFoodMeasure()">Delete</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <!-- Start Pagination -->
+                <dir-pagination-controls max-size="5" direction-links="true"
+                                         boundary-links="true"> </dir-pagination-controls>
+                <!-- End Pagination -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- measure Popup-->
+<div id="measure" class="popupContainer" style="display:none;">
+    <header class="popupHeader">
+        <span class="header_title">Add Measure</span>
+        <span class="modal_close"><i class="fa fa-times"></i></span>
+    </header>
+
+    <section class="popupBody">
+        <!-- measure Form -->
+        <div class="common_model">
+            <form name="measureForm">
+                <p>Enter Measure</p>
+                <input type="text" onkeypress="return noenter(event)" name="measure"  ng-pattern="/^ *([a-zA-Z]+ ?)+ *$/" ng-model="list.measurename" required>
+                         <span ng-show="measureForm.measure.$dirty&&measureForm.measure.$invalid">
+                                <span class="error-message" ng-show="measureForm.measure.$error.required"><span>Required.</span></span>
+                             <span class="error-message" ng-show="measureForm.measure.$error.pattern"><span>Invalid&nbsp;Measure.</span></span>
+                         </span>
+
+                <div class="action_btns margin-top-20">
+                    <div><a ng-class="{modal_close:measureForm.$invalid}" class="btn btn_red" ng-disabled="measureForm.$invalid" ng-click="doAddMeasure()">Save Measure </a></div>
+                </div>
+            </form>
+        </div>
+    </section>
+</div>
+
+<!-- End Page Banner -->
+
+<script type="text/javascript" src="../../js/script.js"></script>
+
+<script type="text/javascript">
+    $("#modal_measure").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
+    $(function(){
+        $(".common_model").show();
+    })
+</script>
+<script>
+    function noenter(e) {
+        e = e || window.event;
+        var key = e.keyCode || e.charCode;
+        if(key == 13){
+            alert("Enter Key is Restricted");
+            return key !== 13;
+        }
+        else if(key == 32){
+            alert("SpaceBar is Restricted");
+            return key !== 32;
+        }
+    }
+</script>
