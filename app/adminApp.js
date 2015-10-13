@@ -792,7 +792,8 @@ adminApp.directive('validateEmail', function() {
 
 //Check For URL Validation
 adminApp.directive('validateUrl', function() {
-    var URL_REGEXP = /^http:\/\/\w+(\.\w+)*(:[0-9]+)?\/?(\/[.\w]*)*$/;
+   /* var URL_REGEXP = /^http:\/\/\w+(\.\w+)*(:[0-9]+)?\/?(\/[.\w]*)*$/;*/
+    var URL_REGEXP = /^http(s)?:\/\/(www\.)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/;
 
     return {
         require: 'ngModel',

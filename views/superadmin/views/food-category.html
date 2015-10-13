@@ -40,7 +40,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr dir-paginate="category in categoryfilter = (foodCategoryList |filter: categorysearch | itemsPerPage: 8|orderBy:sortKey:!reverse)" ng-show="foodCategoryList.length!=0">
+                    <tr dir-paginate="category in categoryfilter = (foodCategoryList |filter: categorysearch | itemsPerPage: 8)" ng-show="foodCategoryList.length!=0">
                         <td>{{$index+1}}</td>
                         <td>{{category.categoryname}}</td>
                         <td>
