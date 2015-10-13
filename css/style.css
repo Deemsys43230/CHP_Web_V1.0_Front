@@ -8090,4 +8090,9 @@ input[type=range]:focus::-ms-fill-upper {
 .avoid-clicks {
 	pointer-events: none;
 }
-
+.custom-text-green{
+	color:green;
+}
+.custom-text-red{
+	color: red;
+}
