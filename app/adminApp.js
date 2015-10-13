@@ -574,6 +574,23 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'FoodCategoryController'
             }).
+            when('/foodMeasure', {
+                templateUrl: 'views/food-Measure.html',
+                resolve: {
+                    loadMyFiles:function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'adminApp',
+                            files:[
+                                '../../js/bootstrap.min.js',
+                                '../../plugin/popup/style.css',
+                                '../../plugin/popup/jquery.leanModal.min.js',
+                                '../../app/food/foodMeasure.js'
+                            ]
+                        })
+                    }
+                },
+                controller:'FoodMeasureController'
+            }).
             when('/course', {
                 templateUrl: 'views/course.html',
                 resolve: {
