@@ -148,7 +148,7 @@ adminApp.controller("FoodDetailsEditController",function($scope,requestHandler,$
 
     //For Tag Input
     $scope.tagTransform = function (newTag) {
-        alert(newTag);
+
         var item = {
             "tagid": null,
             "tagname": newTag
@@ -449,13 +449,13 @@ adminApp.controller("FoodDetailsEditController",function($scope,requestHandler,$
 adminApp.controller('FoodDetailsAddController', function ($scope,requestHandler,$routeParams,Flash) {
 
     $scope.foodDetails={};
-    $scope.foodDetails.measureid=[];
+    $scope.foodDetails.measureid=[];//Need a check
 
     $scope.title="Add Food";
 
     //For Tag Input
     $scope.tagTransform = function (newTag) {
-        alert(newTag);
+
         var item = {
             "tagid": null,
             "tagname": newTag

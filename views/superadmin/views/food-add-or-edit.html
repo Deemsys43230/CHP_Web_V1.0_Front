@@ -20,6 +20,7 @@
                             {{category.categoryname}}
                         </ui-select-choices>
                     </ui-select>
+                    Selected: {{foodDetails.categoryid}}
                     <br/>
 
                     <h5>Session :</h5>
@@ -53,6 +54,7 @@
                               {{tag.tagname}}
                           </ui-select-choices>
                       </ui-select>
+                      Selected: {{foodDetails.tagid}}
                   </div>
 
 
@@ -250,7 +252,7 @@
                             </tbody>
                         </table>
                     </div>
-
+{{foodDetails.measureid}}
                     <div class="col-md-12 margin-top-10 text-center">
                         <a class="register_button" href="" ng-click="doUpdateFoodDetails()">Save Food Details</a>
                         <a class="register_button" href="" ng-click="doAddFoodDetails()">Save Food Details</a>

@@ -1,0 +1,337 @@
+
+<!doctype html>
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><html lang="en" class="no-js"> <![endif]-->
+<html lang="en">
+<head>
+
+    <!-- Basic -->
+    <title>Cyberhealth</title>
+    <!-- Favicons-->
+    <link rel="shortcut icon" href="../../images/favicon.ico" type="image/x-icon"/>
+
+    <!-- Bootstrap CSS  -->
+    <link rel="stylesheet" href="../../css/bootstrap.css" type="text/css" media="screen">
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="../../plugin/fonts/css/font-awesome.min.css">
+
+    <!-- Margo CSS Styles  -->
+    <link rel="stylesheet" type="text/css" href="../../css/style.css" media="screen">
+
+    <!-- Responsive CSS Styles  -->
+    <link rel="stylesheet" type="text/css" href="../../css/responsive.css" media="screen">
+
+    <!-- Color CSS Styles  -->
+    <link rel="stylesheet" type="text/css" href="../../css/yellow.css" title="yellow" media="screen" />
+
+    <!--Message flash-->
+    <link type="text/css" rel="stylesheet" href="../../css/angular-flash-small.css" />
+</head>
+<body ng-app="userApp">
+
+<!-- Container -->
+<div id="container" class="boxed-page">
+
+    <!-- Start Header -->
+    <div class="hidden-header"></div>
+    <header class="clearfix">
+
+        <!-- Start Top Bar -->
+        <div class="top-bar">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-7">
+                        <!-- Start Contact Info -->
+                        <ul class="contact-details">
+                            <li><a href="#"><i class="fa fa-map-marker"></i> Gahanna, OHIO 43230, U.S.A.</a>
+                            </li>
+                            <li><a href="#"><i class="fa fa-envelope-o"></i> support@deemsysinc.com</a>
+                            </li>
+                            <li><a href="#"><i class="fa fa-phone"></i> 614-322-9928</a>
+                            </li>
+                        </ul>
+                        <!-- End Contact Info -->
+                    </div><!-- .col-md-6 -->
+                    <div class="col-md-5">
+                        <!-- Start Social Links -->
+                        <ul class="social-list">
+                            <li class="navbar-user">
+                                <ul class="nav navbar-nav">
+                                    <li>
+                                        <a href="#" onclick="return false;" ng-controller="UserInitialController">{{username}}&nbsp;<span class="fa fa-caret-down"></span> </a>
+                                        <ul class="dropdown">
+                                            <li><a href="#profile">My Profile</a></li>
+                                            <li><a href="#demography">My Demography</a></li>
+                                            <li><a href="">My History</a></li>
+                                            <li><a href="">My Goals</a></li>
+                                            <li><a href="">My Coach</a></li>
+                                            <li><a href="index.html" ng-controller="UserLogoutController" ng-click="doLogout()">Log Out</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a class="facebook itl-tooltip" data-placement="bottom" title="Facebook" href="#"><i class="fa fa-facebook"></i></a>
+                            </li>
+                            <li>
+                                <a class="twitter itl-tooltip" data-placement="bottom" title="Twitter" href="#"><i class="fa fa-twitter"></i></a>
+                            </li>
+                            <li>
+                                <a class="google itl-tooltip" data-placement="bottom" title="Google Plus" href="#"><i class="fa fa-google-plus"></i></a>
+                            </li>
+                            <li>
+                                <a class="linkdin itl-tooltip" data-placement="bottom" title="Linkedin" href="#"><i class="fa fa-linkedin"></i></a>
+                            </li>
+                        </ul>
+                        <!-- End Social Links -->
+                    </div><!-- .col-md-6 -->
+                </div><!-- .row -->
+            </div><!-- .container -->
+        </div><!-- .top-bar -->
+        <!-- End Top Bar -->
+
+        <!-- Start  Logo & Naviagtion  -->
+        <div class="navbar navbar-default navbar-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <!-- Stat Toggle Nav Link For Mobiles -->
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <i class="fa fa-bars"></i>
+                    </button>
+                    <!-- End Toggle Nav Link For Mobiles -->
+                    <a class="navbar-brand" href="../../index.html">
+                        <img alt="" src="../../images/bephit.png">
+                    </a>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <!-- Stat Search -->
+                    <div class="search-side">
+                        <a href="#" class="show-search"><i class="fa fa-search"></i></a>
+                        <div class="search-form">
+                            <form autocomplete="off" role="search" method="get" class="searchform" action="#">
+                                <input type="text" value="" name="s" id="s" placeholder="Search the site...">
+                            </form>
+                        </div>
+                    </div>
+                    <!-- End Search -->
+                    <!-- Start Navigation List -->
+                    <ul class="nav navbar-nav navbar-right active-class">
+                        <li>
+                            <a class="active" href="../../index.html">Home</a>
+                        </li>
+                        <li>
+                            <a href="#">History</a>
+                        </li>
+                        <li>
+                            <a href="#">Coach</a>
+                        </li>
+                        <li>
+                            <a href="#">Portfolio</a>
+                        </li>
+                        <li>
+                            <a href="#">Blog</a>
+                        </li>
+                        <li><a href="#">Contact</a>
+                        </li>
+                    </ul>
+                    <!-- End Navigation List -->
+                </div>
+            </div>
+        </div>
+        <!-- End Header Logo & Naviagtion -->
+
+    </header>
+    <!-- End Header -->
+
+    <div ng-view></div>
+
+    <!-- Start Footer Section -->
+    <footer>
+        <div class="container">
+            <div class="row footer-widgets">
+
+
+                <!-- Start Subscribe & Social Links Widget -->
+                <div class="col-md-3 col-xs-12">
+                    <div class="footer-widget mail-subscribe-widget">
+                        <h4>Get in touch<span class="head-line"></span></h4>
+                        <p>Join our mailing list to stay up to date and get notices about our new releases!</p>
+                        <form class="subscribe">
+                            <input type="text" placeholder="mail@example.com">
+                            <input type="submit" class="btn-system" value="Send">
+                        </form>
+                    </div>
+                </div><!-- .col-md-3 -->
+                <!-- End Subscribe & Social Links Widget -->
+
+
+                <!-- Start Twitter Widget -->
+                <div class="col-md-3 col-xs-12">
+                    <div class="footer-widget social-widget">
+                        <h4>Follow Us<span class="head-line"></span></h4>
+                        <p>Join our mailing list to stay up to date and get notices about our new releases!</p>
+                        <ul class="social-icons margin-top-10">
+                            <li>
+                                <a class="facebook" href="#"><i class="fa fa-facebook"></i></a>
+                            </li>
+                            <li>
+                                <a class="twitter" href="#"><i class="fa fa-twitter"></i></a>
+                            </li>
+                            <li>
+                                <a class="google" href="#"><i class="fa fa-google-plus"></i></a>
+                            </li>
+                            <li>
+                                <a class="linkdin" href="#"><i class="fa fa-linkedin"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div><!-- .col-md-3 -->
+                <!-- End Twitter Widget -->
+
+
+                <!-- Start Flickr Widget -->
+                <div class="col-md-3 col-xs-12">
+                    <div class="footer-widget social-widget">
+                        <h4>Mobile Apps<span class="head-line"></span></h4>
+                        <p>Get our mobile apps for handly use</p>
+                        <img class="margin-top-20" src="../../images/available.png">
+                    </div>
+                </div><!-- .col-md-3 -->
+                <!-- End Flickr Widget -->
+
+
+                <!-- Start Contact Widget -->
+                <div class="col-md-3 col-xs-12">
+                    <div class="footer-widget contact-widget">
+                        <h4><img src="../../images/footer-margo.png" class="img-responsive" alt="Footer Logo" /></h4>
+                        <ul>
+                            <li><span>Phone Number:</span> +01 234 567 890</li>
+                            <li><span>Email:</span> company@company.com</li>
+                            <li><span>Website:</span> www.yourdomain.com</li>
+                        </ul>
+                    </div>
+                </div><!-- .col-md-3 -->
+                <!-- End Contact Widget -->
+
+
+            </div><!-- .row -->
+
+            <!-- Start Copyright -->
+            <div class="copyright-section">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p>&copy; 2015 Deemsys Inc -  All Rights Reserved</p>
+                    </div><!-- .col-md-6 -->
+                    <div class="col-md-6">
+                        <ul class="footer-nav">
+                            <li><a href="#">Sitemap</a>
+                            </li>
+                            <li><a href="#policy">Privacy Policy</a>
+                            </li>
+                            <li><a href="#instructions">Instructions</a>
+                            </li>
+                            <li><a href="#termsofuse">Terms Of Use</a>
+                            </li>
+                            <li><a href="#FAQ">FAQ</a>
+                            </li>
+                            <li><a href="#">Contact</a>
+                            </li>
+                        </ul>
+                    </div><!-- .col-md-6 -->
+                </div><!-- .row -->
+            </div>
+            <!-- End Copyright -->
+
+        </div>
+    </footer>
+    <!-- End Footer Section -->
+
+</div>
+<!-- End Container -->
+
+<!-- Go To Top Link -->
+<a href="#" class="back-to-top"><i class="fa fa-angle-up"></i></a>
+
+<div id="loader">
+    <div class="spinner">
+        <div class="dot1"></div>
+        <div class="dot2"></div>
+    </div>
+</div>
+
+<!-- Margo JS  -->
+<script type="text/javascript" src="../../js/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="../../js/bootstrap.min.js"></script>
+
+<!-- ANGULAR JS -->
+<script src="../../angular/angularjs-1.4.3.js"></script>
+<script src="../../angular/angular-cookies.js"></script>
+<script src="../../angular/angular-route-1.4.2.js"></script>
+<script src="../../angular/ocLazyLoad.min.js"></script>
+<script src="../../angular/angular-animate-1.4.3.js"></script>
+<script src="../../angular/angular-flash.min.js"></script>
+<script src="../../app/requestHandler.js"></script>
+<script src="../../app/userApp.js"></script>
+
+<script type="text/javascript" src="../../js/jquery.migrate.js"></script>
+<script type="text/javascript" src="../../js/modernizrr.js"></script>
+<script type="text/javascript" src="../../js/jquery.fitvids.js"></script>
+<script type="text/javascript" src="../../js/owl.carousel.min.js"></script>
+<script type="text/javascript" src="../../js/nivo-lightbox.min.js"></script>
+<script type="text/javascript" src="../../js/jquery.isotope.min.js"></script>
+<script type="text/javascript" src="../../js/jquery.appear.js"></script>
+<script type="text/javascript" src="../../js/count-to.js"></script>
+<script type="text/javascript" src="../../js/jquery.textillate.js"></script>
+<script type="text/javascript" src="../../js/jquery.lettering.js"></script>
+<script type="text/javascript" src="../../js/jquery.easypiechart.min.js"></script>
+<script type="text/javascript" src="../../js/jquery.nicescroll.min.js"></script>
+<script type="text/javascript" src="../../js/jquery.parallax.js"></script>
+
+<!--[if IE 8]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+<!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+<script>
+    $('.active-class a').click(function() {
+        $('.active-class a').removeClass('active');
+        $(this).addClass('active');
+    });
+</script>
+
+<script>
+    "use strict";
+    // Page Loader
+    $(window).load(function () {
+        $('#loader').fadeOut();
+    });
+
+    /*hidden header*/
+    var headerEle = function () {
+        var $headerHeight = $('header').height();
+        $('.hidden-header').css({ 'height' : 110  + "px" });
+    };
+
+    $(window).load(function () {
+        headerEle();
+    });
+
+    $(window).resize(function () {
+        headerEle();
+    });
+
+    /*Nice-Scroll*/
+    $("html").niceScroll({
+        scrollspeed: 100,
+        mousescrollstep: 38,
+        cursorwidth: 5,
+        cursorborder: 0,
+        cursorcolor: '#333',
+        autohidemode: true,
+        zindex: 999999999,
+        horizrailenabled: false,
+        cursorborderradius: 0
+    });
+</script>
+
+</body>
+</html>

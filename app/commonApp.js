@@ -244,13 +244,13 @@ commonApp.controller('LoginController',function($scope,requestHandler,Flash,$win
                    if(response.data.Login.roleid==3){
                        console.log("Role:"+response.data.User_Profile.isProfileUpdated);
                        if(response.data.User_Profile.isProfileUpdated==0){
-                          $window.location.href="views/user/##/profile";
+                          $window.location.href="views/user/#/profile";
                        }else{
                            $window.location.href="views/user/#/dashboard";
                        }
                    }
                     else if(response.data.Login.roleid==2){
-                       $window.location.href="views/superadmin/#/dashboard";
+                       $window.location.href="views/coach/#/dashboard";
                    }
                     else if(response.data.Login.roleid==1){
                        $scope.reset();
@@ -450,7 +450,7 @@ commonApp.directive("emailexists", function ($q, $timeout,requestHandler) {
 
 //Check For Email Validation
 commonApp.directive('validateEmail', function() {
-    var EMAIL_REGEXP = /^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,5})$/;
+    var EMAIL_REGEXP = /^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,5})$/;
 
     return {
         require: 'ngModel',
