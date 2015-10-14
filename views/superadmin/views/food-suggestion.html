@@ -34,7 +34,7 @@
                         <td>{{suggestion.foodname}}</td>
                         <td>{{suggestion.fooddescription}}</td>
                        <td>
-                            <a href="" class="btn-xs btn-success" ng-click="doApproveFoodSuggestion(suggestion.suggestionid)" ng-show="suggestion.foodstatus==0" data-hint="Approve"><i class="fa fa-check"/></a>&nbsp;&nbsp;<a href="" class="btn-xs btn-danger" ng-click="doRejectFoodSuggestion(suggestion.suggestionid)" ng-show="suggestion.foodstatus==0" data-hint="Reject"><i class="fa fa-close"/></a>
+                            <a href="" class="btn-xs btn-success hint--top" ng-click="doApproveFoodSuggestion(suggestion.suggestionid)" ng-show="suggestion.foodstatus==0" data-hint="Approve"><i class="fa fa-check"/></a>&nbsp;&nbsp;<a href="" class="btn-xs btn-danger hint--top" ng-click="doRejectFoodSuggestion(suggestion.suggestionid)" ng-show="suggestion.foodstatus==0" data-hint="Reject"><i class="fa fa-close"/></a>
                             <span  class="custom-text-green"  ng-show="suggestion.foodstatus==1" >Approved</span>
                             <span  class="custom-text-red"  ng-show="suggestion.foodstatus==2">Rejected</span>
                         </td>
