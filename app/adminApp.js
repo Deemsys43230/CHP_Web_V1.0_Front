@@ -474,6 +474,7 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                             name:'adminApp',
                             files:[
                                 '../../js/bootstrap.min.js',
+                                '../../js/category-select.js',
                                 '../../app/food/foodController.js'
                             ]
                         })
@@ -481,7 +482,7 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'FoodController'
             }).
-            when('/food-edit', {
+            when('/food-edit/:id', {
                 templateUrl: 'views/food-add-or-edit.html',
                 resolve: {
                     loadMyFiles:function($ocLazyLoad) {
@@ -494,16 +495,18 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../css/food-image-upload.css',
                                 '../../js/image-upload.js',
                                 '../../css/custom-inputs.css',
-                                '../../plugin/input-tag/bootstrap-tokenfield.css',
-                                '../../plugin/input-tag/bootstrap-tokenfield.js',
-                                '../../plugin/input-tag/jquery-ui.css',
-                                '../../plugin/input-tag/jquery-ui.js'
+                                '../../js/category-select.js',
+                                '../../css/multiSelect.css',
+                                '../../css/category-select.css',
+                                '../../css/category-select-bootstrap.css',
+                                '../../app/food/foodController.js'
                             ]
                         })
                     }
-                }
+                },
+                controller:'FoodDetailsEditController'
             }).
-            when('/food-view', {
+            when('/food-view/:id', {
                 templateUrl: 'views/food-view.html',
                 resolve: {
                     loadMyFiles:function($ocLazyLoad) {
@@ -512,11 +515,13 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                             files:[
                                 '../../js/bootstrap.min.js',
                                 '../../plugin/popup/style.css',
-                                '../../plugin/popup/jquery.leanModal.min.js'
+                                '../../plugin/popup/jquery.leanModal.min.js',
+                                '../../app/food/foodController.js'
                             ]
                         })
                     }
-                }
+                },
+                controller:'FoodDetailsViewController'
             }).
             when('/addFood', {
                 templateUrl: 'views/food-add-or-edit.html',
@@ -531,14 +536,16 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../css/food-image-upload.css',
                                 '../../js/image-upload.js',
                                 '../../css/custom-inputs.css',
-                                '../../plugin/input-tag/bootstrap-tokenfield.css',
-                                '../../plugin/input-tag/bootstrap-tokenfield.js',
-                                '../../plugin/input-tag/jquery-ui.css',
-                                '../../plugin/input-tag/jquery-ui.js'
+                                '../../js/category-select.js',
+                                '../../css/multiSelect.css',
+                                '../../css/category-select.css',
+                                '../../css/category-select-bootstrap.css',
+                                '../../app/food/foodController.js'
                             ]
                         })
                     }
-                }
+                },
+                controller:'FoodDetailsAddController'
             }).
             when('/uploadFood', {
                 templateUrl: 'views/upload-food.html',
@@ -826,7 +833,7 @@ adminApp.directive('validateEmail', function() {
 
 //Check For URL Validation
 adminApp.directive('validateUrl', function() {
-   /* var URL_REGEXP = /^http:\/\/\w+(\.\w+)*(:[0-9]+)?\/?(\/[.\w]*)*$/;*/
+   
     var URL_REGEXP = /^http(s)?:\/\/(www\.)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/;
 
     return {

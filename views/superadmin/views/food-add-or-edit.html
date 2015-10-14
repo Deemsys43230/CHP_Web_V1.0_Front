@@ -7,67 +7,72 @@
         <div class="row">
             <div class="col-md-12">
                 <a href="#food" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back to Food List</a>
-                <h4 class="classic-title"><span>{scope} Food</span></h4>
+                <div flash-message="2000" class="col-md-4 pull-right"></div>
+                <h4 class="classic-title"><span>{{title}}</span></h4>
+
                 <div class="col-md-10 no-padding">
                     <h5>Food Name :</h5>
-                    <input class="form-control"/><br/>
+                    <input class="form-control" ng-model="foodDetails.foodname"/><br/>
                     <h5>Categories :</h5>
-                    <div class="form-group">
-                        <input type="text" class="form-control" id="categories" value="Biriyani,NonVegetarian,Chicken" placeholder="Type something and hit enter" />
-                    </div>
+                    <ui-select multiple ng-model="foodDetails.categoryid" theme="select2" ng-disabled="disabled" class="form-control">
+                        <ui-select-match placeholder="Type and Select Categories">{{$item.categoryname}}</ui-select-match>
+                        <ui-select-choices repeat="category in foodCategoryListAll | filter:$select.search">
+                            {{category.categoryname}}
+                        </ui-select-choices>
+                    </ui-select>
+                    <br/>
+
                     <h5>Session :</h5>
                     <div class="col-md-1"></div>
                     <div class="col-md-11">
                         <span class="fh-checkbox">
-                        <input type="checkbox" id="session-1" name="session" checked>
+                        <input type="checkbox" id="session-1" name="session" ng-model="foodDetails.breakfast">
                         <label for="session-1">Break Fast</label>
-                        <input type="checkbox" id="session-2" name="session">
+                        <input type="checkbox" id="session-2" name="session" ng-model="foodDetails.brunch">
                         <label for="session-2">Brunch</label>
-                        <input type="checkbox" id="session-3" name="session">
+                        <input type="checkbox" id="session-3" name="session" ng-model="foodDetails.lunch">
                         <label for="session-3">Lunch</label>
-                        <input type="checkbox" id="session-4" name="session">
+                        <input type="checkbox" id="session-4" name="session" ng-model="foodDetails.eveningsnacks">
                         <label for="session-4">Evening Snacks</label>
-                        <input type="checkbox" id="session-5" name="session">
+                        <input type="checkbox" id="session-5" name="session" ng-model="foodDetails.dinner">
                         <label for="session-5">Dinner</label>
                     </span>
                     </div>
                 </div>
                 <div class="col-md-2 coach-details">
-                    <img id="food-image-change" src="../../images/food.jpg"/><br/><br/>
+                    <img id="food-image-change" ng-src="{{foodDetails.foodImagePath}}"/><br/><br/>
                     <a id="modal_trigger" href="#modal" onclick="return false;" class="btn-sm btn-warning">Change Food Image</a>
                 </div>
                 <div class="col-md-12 no-padding">
                     <hr>
                     <h5>Tags :</h5>
-                    <div class="form-group">
-                        <input type="text" class="form-control" id="tags" value="Lunch,Heavy,Food" placeholder="Type something and hit enter" />
-                    </div>
+                  <div class="form-group">
+                      <ui-select multiple tagging="tagTransform" tagging-label="(custom 'new' label)" ng-model="foodDetails.tagid" theme="select2" sortable="true" ng-disabled="disabled" class="form-control" title="Choose a color">
+                          <ui-select-match placeholder="Type/Select tags">{{$item.tagname}}</ui-select-match>
+                          <ui-select-choices repeat="tag in foodTagList | filter:$select.search">
+                              {{tag.tagname}}
+                          </ui-select-choices>
+                      </ui-select>
+                  </div>
 
-                    <h5>Measures :</h5>
-                    <div class="col-md-1"></div>
-                    <div class="fh-checkbox col-md-11">
-                        <input class="col-md-1" id="measure-1" type="checkbox" checked>
-                        <label class="col-md-2" for="measure-1">Grams</label>
-                        <input class="col-md-1" id="measure-2" type="checkbox">
-                        <label class="col-md-2" for="measure-2">Kgs</label>
-                        <input class="col-md-1" id="measure-3" type="checkbox">
-                        <label class="col-md-2" for="measure-3">litter</label>
-                        <input class="col-md-1" id="measure-4" type="checkbox">
-                        <label class="col-md-2" for="measure-4">ml</label>
-                        <input class="col-md-1" id="measure-5" type="checkbox">
-                        <label class="col-md-2" for="measure-5">cup</label>
-                        <input class="col-md-1" id="measure-6" type="checkbox">
-                        <label class="col-md-2" for="measure-6">bowl</label>
-                        <input class="col-md-1" id="measure-7" type="checkbox">
-                        <label class="col-md-2" for="measure-7">plate</label>
-                        <input class="col-md-1" id="measure-8" type="checkbox">
-                        <label class="col-md-2" for="measure-8">pieces</label>
-                        <input class="col-md-1" id="measure-9" type="checkbox">
-                        <label class="col-md-2" for="measure-9">glass</label>
-                        <div class="col-md-3 no-padding margin-top-5">
-                            <a id="measure-modal" href="#measure-modal-edit" onclick="return false;" class="main_button"><i class="fa fa-plus-circle"></i>&nbsp;Add New</a>
+
+                    <div ng-if="loaded">
+                        <div class="loader-style">
+                            <div class="loader"></div>
                         </div>
                     </div>
+                    <div class="no-padding margin-top-5 pull-right">
+                        <a id="measure-modal" href="#measure-modal-edit" onclick="return false;" class="main_button"><i class="fa fa-plus-circle"></i>&nbsp;Add New Measure</a>
+                    </div>
+                    <h5>Measures :</h5><br/>
+                    <div class="col-md-1"></div>
+                    <div class="col-md-11 min-height-100">
+                        <span  class="fh-checkbox" ng-repeat="foodMeasure in foodMeasureListAll">
+                        <input class="col-md-1" id="{{foodMeasure.measureid}}" type="checkbox" ng-model="foodMeasure.checked" ng-change="doAddMeasureMinerals(foodMeasure.measureid,foodMeasure.measurename)">
+                        <label class="col-md-2" for="{{foodMeasure.measureid}}">{{foodMeasure.measurename}}{{foodMeasure.measureid}}</label>
+                        </span>
+                    </div>
+
                     <div class="col-md-12 no-padding margin-top-10">
                         <table class="table table-bordered">
                             <thead>
@@ -77,53 +82,53 @@
                                 <th class="col-md-10 text-center">Minerals</th>
                             </tr>
                             </thead>
-                            <tbody>
+                            <tbody ng-repeat="measureDetail in foodDetails.measureid">
                             <tr>
-                                <td>Grams</td>
-                                <td><input class="mineral_input"></td>
-                                <td class="line">
-                                    <div class="col-md-3">
+                                <td>{{measureDetail.measurename}}</td>
+                                <td class="input_mineral"><input type="text" ng-model="measureDetail.value"/></td>
+                                <td class="line input_mineral">
+                                    <div class="col-md-3 no-padding">
                                         <div class="col-md-7 no-padding">
                                             <p>Calories</p>
                                         </div>
                                         <div class="col-md-5">
-                                            <p class="text-bold">123</p>
+                                            <input type="text" ng-model="measureDetail.calories"/>
                                         </div>
                                         <div class="col-md-7 no-padding">
                                             <p>Fat</p>
                                         </div>
                                         <div class="col-md-5">
-                                            <p class="text-bold">123</p>
+                                            <input type="text" ng-model="measureDetail.fat"/>
                                         </div>
                                         <div class="col-md-7 no-padding">
                                             <p>Protein</p>
                                         </div>
                                         <div class="col-md-5">
-                                            <p class="text-bold">123</p>
+                                            <input type="text" ng-model="measureDetail.protein"/>
                                         </div>
                                         <div class="col-md-7 no-padding">
                                             <p>Carbo</p>
                                         </div>
                                         <div class="col-md-5">
-                                            <p class="text-bold">123</p>
+                                            <input type="text" ng-model="measureDetail.carbo"/>
                                         </div>
                                         <div class="col-md-7 no-padding">
                                             <p>Fibre</p>
                                         </div>
                                         <div class="col-md-5">
-                                            <p class="text-bold">123</p>
+                                            <input type="text" ng-model="measureDetail.fiber"/>
                                         </div>
                                         <div class="col-md-7 no-padding">
                                             <p>Calcium</p>
                                         </div>
                                         <div class="col-md-5">
-                                            <p class="text-bold">123</p>
+                                            <input type="text" ng-model="measureDetail.calcium"/>
                                         </div>
                                         <div class="col-md-7 no-padding">
                                             <p>Zinc</p>
                                         </div>
                                         <div class="col-md-5">
-                                            <p class="text-bold">123</p>
+                                            <input type="text" ng-model="measureDetail.zinc"/>
                                         </div>
                                     </div>
                                     <div class="col-md-3 no-padding">
@@ -131,76 +136,75 @@
                                             <p>Folic Acid</p>
                                         </div>
                                         <div class="col-md-5">
-                                            <p class="text-bold">123</p>
+                                            <input type="text" ng-model="measureDetail.folicacid"/>
                                         </div>
                                         <div class="col-md-7 no-padding">
                                             <p>Iron</p>
                                         </div>
                                         <div class="col-md-5">
-                                            <p class="text-bold">123</p>
+                                            <input type="text" ng-model="measureDetail.iron"/>
                                         </div>
                                         <div class="col-md-7 no-padding">
                                             <p>Niacin</p>
                                         </div>
                                         <div class="col-md-5">
-                                            <p class="text-bold">123</p>
+                                            <input type="text" ng-model="measureDetail.niacin"/>
                                         </div>
                                         <div class="col-md-7 no-padding">
                                             <p>Phosphorous</p>
                                         </div>
                                         <div class="col-md-5">
-                                            <p class="text-bold">123</p>
+                                            <input type="text" ng-model="measureDetail.phosphorous"/>
                                         </div>
                                         <div class="col-md-7 no-padding">
                                             <p>Potassium</p>
                                         </div>
                                         <div class="col-md-5">
-                                            <p class="text-bold">123</p>
+                                            <input type="text" ng-model="measureDetail.potassium"/>
                                         </div>
                                         <div class="col-md-7 no-padding">
                                             <p>Riboflavin</p>
                                         </div>
                                         <div class="col-md-5">
-                                            <p class="text-bold">123</p>
+                                            <input type="text" ng-model="measureDetail.riboflavin"/>
                                         </div>
-                                        <a href="#minerals" class="btn btn-xs btn-warning minerals-modal margin-top-3"><i class="fa fa-pencil"></i> Edit Values</a>
                                     </div>
-                                    <div class="col-md-3">
+                                    <div class="col-md-3 no-padding">
                                         <div class="col-md-7 no-padding">
                                             <p>Saturated Fat</p>
                                         </div>
                                         <div class="col-md-5">
-                                            <p class="text-bold">123</p>
+                                            <input type="text" ng-model="measureDetail.saturatedfat"/>
                                         </div>
                                         <div class="col-md-7 no-padding">
                                             <p>Sodium</p>
                                         </div>
                                         <div class="col-md-5">
-                                            <p class="text-bold">123</p>
+                                            <input type="text" ng-model="measureDetail.sodium"/>
                                         </div>
                                         <div class="col-md-7 no-padding">
                                             <p>Sugar</p>
                                         </div>
                                         <div class="col-md-5">
-                                            <p class="text-bold">123</p>
+                                            <input type="text" ng-model="measureDetail.sugar"/>
                                         </div>
                                         <div class="col-md-7 no-padding">
                                             <p>Thiamine</p>
                                         </div>
                                         <div class="col-md-5">
-                                            <p class="text-bold">123</p>
+                                            <input type="text" ng-model="measureDetail.thiamine"/>
                                         </div>
                                         <div class="col-md-7 no-padding">
                                             <p>Vitamin A</p>
                                         </div>
                                         <div class="col-md-5">
-                                            <p class="text-bold">123</p>
+                                            <input type="text" ng-model="measureDetail.vitaminA"/>
                                         </div>
                                         <div class="col-md-7 no-padding">
                                             <p>Vitamin B12</p>
                                         </div>
                                         <div class="col-md-5">
-                                            <p class="text-bold">123</p>
+                                            <input type="text" ng-model="measureDetail.vitaminB12"/>
                                         </div>
                                     </div>
                                     <div class="col-md-3 no-padding">
@@ -208,202 +212,37 @@
                                             <p>Vitamin B6</p>
                                         </div>
                                         <div class="col-md-5">
-                                            <p class="text-bold">123</p>
+                                            <input type="text" ng-model="measureDetail.vitaminB6"/>
                                         </div>
                                         <div class="col-md-7 no-padding">
                                             <p>Vitamin C</p>
                                         </div>
                                         <div class="col-md-5">
-                                            <p class="text-bold">123</p>
+                                            <input type="text" ng-model="measureDetail.vitaminC"/>
                                         </div>
                                         <div class="col-md-7 no-padding">
                                             <p>Vitamin E</p>
                                         </div>
                                         <div class="col-md-5">
-                                            <p class="text-bold">123</p>
+                                            <input type="text" ng-model="measureDetail.vitaminE"/>
                                         </div>
                                         <div class="col-md-7 no-padding">
                                             <p>Vitamin K</p>
                                         </div>
                                         <div class="col-md-5">
-                                            <p class="text-bold">123</p>
+                                            <input type="text" ng-model="measureDetail.vitaminK"/>
                                         </div>
                                         <div class="col-md-7 no-padding">
                                             <p>Polyunsaturated Fat</p>
                                         </div>
                                         <div class="col-md-5">
-                                            <p class="text-bold">123</p>
+                                            <input type="text" ng-model="measureDetail.polyunsaturatedfat"/>
                                         </div>
                                         <div class="col-md-7 no-padding">
                                             <p>Monounsaturated Fat</p>
                                         </div>
                                         <div class="col-md-5">
-                                            <p class="text-bold">123</p>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Grams</td>
-                                <td><input class="mineral_input"></td>
-                                <td class="line">
-                                    <div class="col-md-3">
-                                        <div class="col-md-7 no-padding">
-                                            <p>Calories</p>
-                                        </div>
-                                        <div class="col-md-5">
-                                            <p class="text-bold">123</p>
-                                        </div>
-                                        <div class="col-md-7 no-padding">
-                                            <p>Fat</p>
-                                        </div>
-                                        <div class="col-md-5">
-                                            <p class="text-bold">123</p>
-                                        </div>
-                                        <div class="col-md-7 no-padding">
-                                            <p>Protein</p>
-                                        </div>
-                                        <div class="col-md-5">
-                                            <p class="text-bold">123</p>
-                                        </div>
-                                        <div class="col-md-7 no-padding">
-                                            <p>Carbo</p>
-                                        </div>
-                                        <div class="col-md-5">
-                                            <p class="text-bold">123</p>
-                                        </div>
-                                        <div class="col-md-7 no-padding">
-                                            <p>Fibre</p>
-                                        </div>
-                                        <div class="col-md-5">
-                                            <p class="text-bold">123</p>
-                                        </div>
-                                        <div class="col-md-7 no-padding">
-                                            <p>Calcium</p>
-                                        </div>
-                                        <div class="col-md-5">
-                                            <p class="text-bold">123</p>
-                                        </div>
-                                        <div class="col-md-7 no-padding">
-                                            <p>Zinc</p>
-                                        </div>
-                                        <div class="col-md-5">
-                                            <p class="text-bold">123</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3 no-padding">
-                                        <div class="col-md-7 no-padding">
-                                            <p>Folic Acid</p>
-                                        </div>
-                                        <div class="col-md-5">
-                                            <p class="text-bold">123</p>
-                                        </div>
-                                        <div class="col-md-7 no-padding">
-                                            <p>Iron</p>
-                                        </div>
-                                        <div class="col-md-5">
-                                            <p class="text-bold">123</p>
-                                        </div>
-                                        <div class="col-md-7 no-padding">
-                                            <p>Niacin</p>
-                                        </div>
-                                        <div class="col-md-5">
-                                            <p class="text-bold">123</p>
-                                        </div>
-                                        <div class="col-md-7 no-padding">
-                                            <p>Phosphorous</p>
-                                        </div>
-                                        <div class="col-md-5">
-                                            <p class="text-bold">123</p>
-                                        </div>
-                                        <div class="col-md-7 no-padding">
-                                            <p>Potassium</p>
-                                        </div>
-                                        <div class="col-md-5">
-                                            <p class="text-bold">123</p>
-                                        </div>
-                                        <div class="col-md-7 no-padding">
-                                            <p>Riboflavin</p>
-                                        </div>
-                                        <div class="col-md-5">
-                                            <p class="text-bold">123</p>
-                                        </div>
-                                        <a href="#minerals" class="btn btn-xs btn-warning minerals-modal margin-top-3"><i class="fa fa-pencil"></i> Edit Values</a>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div class="col-md-7 no-padding">
-                                            <p>Saturated Fat</p>
-                                        </div>
-                                        <div class="col-md-5">
-                                            <p class="text-bold">123</p>
-                                        </div>
-                                        <div class="col-md-7 no-padding">
-                                            <p>Sodium</p>
-                                        </div>
-                                        <div class="col-md-5">
-                                            <p class="text-bold">123</p>
-                                        </div>
-                                        <div class="col-md-7 no-padding">
-                                            <p>Sugar</p>
-                                        </div>
-                                        <div class="col-md-5">
-                                            <p class="text-bold">123</p>
-                                        </div>
-                                        <div class="col-md-7 no-padding">
-                                            <p>Thiamine</p>
-                                        </div>
-                                        <div class="col-md-5">
-                                            <p class="text-bold">123</p>
-                                        </div>
-                                        <div class="col-md-7 no-padding">
-                                            <p>Vitamin A</p>
-                                        </div>
-                                        <div class="col-md-5">
-                                            <p class="text-bold">123</p>
-                                        </div>
-                                        <div class="col-md-7 no-padding">
-                                            <p>Vitamin B12</p>
-                                        </div>
-                                        <div class="col-md-5">
-                                            <p class="text-bold">123</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3 no-padding">
-                                        <div class="col-md-7 no-padding">
-                                            <p>Vitamin B6</p>
-                                        </div>
-                                        <div class="col-md-5">
-                                            <p class="text-bold">123</p>
-                                        </div>
-                                        <div class="col-md-7 no-padding">
-                                            <p>Vitamin C</p>
-                                        </div>
-                                        <div class="col-md-5">
-                                            <p class="text-bold">123</p>
-                                        </div>
-                                        <div class="col-md-7 no-padding">
-                                            <p>Vitamin E</p>
-                                        </div>
-                                        <div class="col-md-5">
-                                            <p class="text-bold">123</p>
-                                        </div>
-                                        <div class="col-md-7 no-padding">
-                                            <p>Vitamin K</p>
-                                        </div>
-                                        <div class="col-md-5">
-                                            <p class="text-bold">123</p>
-                                        </div>
-                                        <div class="col-md-7 no-padding">
-                                            <p>Polyunsaturated Fat</p>
-                                        </div>
-                                        <div class="col-md-5">
-                                            <p class="text-bold">123</p>
-                                        </div>
-                                        <div class="col-md-7 no-padding">
-                                            <p>Monounsaturated Fat</p>
-                                        </div>
-                                        <div class="col-md-5">
-                                            <p class="text-bold">123</p>
+                                            <input type="text" ng-model="measureDetail.monounsaturatedfat"/>
                                         </div>
                                     </div>
                                 </td>
@@ -413,7 +252,8 @@
                     </div>
 
                     <div class="col-md-12 margin-top-10 text-center">
-                        <a class="register_button" href="">Save Food Details</a>
+                        <a class="register_button" href="" ng-click="doUpdateFoodDetails()">Save Food Details</a>
+                        <a class="register_button" href="" ng-click="doAddFoodDetails()">Save Food Details</a>
                         <a class="cancel_button" href="#food">Cancel</a>
                     </div>
                 </div>
@@ -475,186 +315,6 @@
     </section>
 </div>
 
-<!-- Minerals popup-->
-<div id="minerals" class="popupContainer width-60" style="display:none;">
-    <header class="popupHeader width-100">
-        <span class="header_title">edit minerals values</span>
-        <span class="modal_close"><i class="fa fa-times"></i></span>
-    </header>
-
-    <section class="popupBody">
-        <!-- Register Form -->
-        <div class="common_model input_mineral">
-            <form class="row">
-                <div class="col-md-4">
-                    <div class="col-md-7 no-padding">
-                        <p>Calories</p>
-                    </div>
-                    <div class="col-md-5">
-                        <input type="text" />
-                    </div>
-                    <div class="col-md-7 no-padding">
-                        <p>Fat</p>
-                    </div>
-                    <div class="col-md-5">
-                        <input type="text" />
-                    </div>
-                    <div class="col-md-7 no-padding">
-                        <p>Protein</p>
-                    </div>
-                    <div class="col-md-5">
-                        <input type="text" />
-                    </div>
-                    <div class="col-md-7 no-padding">
-                        <p>Carbo</p>
-                    </div>
-                    <div class="col-md-5">
-                        <input type="text" />
-                    </div>
-                    <div class="col-md-7 no-padding">
-                        <p>Fibre</p>
-                    </div>
-                    <div class="col-md-5">
-                        <input type="text" />
-                    </div>
-                    <div class="col-md-7 no-padding">
-                        <p>Calcium</p>
-                    </div>
-                    <div class="col-md-5">
-                        <input type="text" />
-                    </div>
-                    <div class="col-md-7 no-padding">
-                        <p>Zinc</p>
-                    </div>
-                    <div class="col-md-5">
-                        <input type="text" />
-                    </div>
-                    <div class="col-md-7 no-padding">
-                        <p>Folic Acid</p>
-                    </div>
-                    <div class="col-md-5">
-                        <input type="text" />
-                    </div>
-                    <div class="col-md-7 no-padding">
-                        <p>Iron</p>
-                    </div>
-                    <div class="col-md-5">
-                        <input type="text" />
-                    </div>
-                </div>
-
-
-                <div class="col-md-4">
-                    <div class="col-md-7 no-padding">
-                        <p>Niacin</p>
-                    </div>
-                    <div class="col-md-5">
-                        <input type="text" />
-                    </div>
-                    <div class="col-md-7 no-padding">
-                        <p>Phosphorous</p>
-                    </div>
-                    <div class="col-md-5">
-                        <input type="text" />
-                    </div>
-                    <div class="col-md-7 no-padding">
-                        <p>Potassium</p>
-                    </div>
-                    <div class="col-md-5">
-                        <input type="text" />
-                    </div>
-                    <div class="col-md-7 no-padding">
-                        <p>Riboflavin</p>
-                    </div>
-                    <div class="col-md-5">
-                        <input type="text" />
-                    </div>
-                    <div class="col-md-7 no-padding">
-                        <p>Saturated Fat</p>
-                    </div>
-                    <div class="col-md-5">
-                        <input type="text" />
-                    </div>
-                    <div class="col-md-7 no-padding">
-                        <p>Sodium</p>
-                    </div>
-                    <div class="col-md-5">
-                        <input type="text" />
-                    </div>
-                    <div class="col-md-7 no-padding">
-                        <p>Sugar</p>
-                    </div>
-                    <div class="col-md-5">
-                        <input type="text" />
-                    </div>
-                    <div class="col-md-7 no-padding">
-                        <p>Thiamine</p>
-                    </div>
-                    <div class="col-md-5">
-                        <input type="text" />
-                    </div>
-                    <div class="col-md-7 no-padding">
-                        <p>Vitamin A</p>
-                    </div>
-                    <div class="col-md-5">
-                        <input type="text" />
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="col-md-7 no-padding">
-                        <p>Vitamin B12</p>
-                    </div>
-                    <div class="col-md-5">
-                        <input type="text" />
-                    </div>
-                    <div class="col-md-7 no-padding">
-                        <p>Vitamin B6</p>
-                    </div>
-                    <div class="col-md-5">
-                        <input type="text" />
-                    </div>
-                    <div class="col-md-7 no-padding">
-                        <p>Vitamin C</p>
-                    </div>
-                    <div class="col-md-5">
-                        <input type="text" />
-                    </div>
-                    <div class="col-md-7 no-padding">
-                        <p>Vitamin E</p>
-                    </div>
-                    <div class="col-md-5">
-                        <input type="text" />
-                    </div>
-                    <div class="col-md-7 no-padding">
-                        <p>Vitamin K</p>
-                    </div>
-                    <div class="col-md-5">
-                        <input type="text" />
-                    </div>
-                    <div class="col-md-7 no-padding">
-                        <p>Polyunsaturated Fat</p>
-                    </div>
-                    <div class="col-md-5">
-                        <input type="text" />
-                    </div>
-                    <div class="col-md-7 no-padding">
-                        <p>Monounsaturated Fat</p>
-                    </div>
-                    <div class="col-md-5">
-                        <input type="text" />
-                    </div>
-                </div>
-
-                <div class="col-md-6 col-md-offset-3 action_btns margin-top-20">
-                    <div class="one_half"><a onclick="return false;" class="btn btn_blue">Save Values</a></div>
-                    <div class="one_half last modal_close"><a href="" class="btn btn_red">Cancel</a></div>
-                </div><br/><br/>
-            </form>
-        </div>
-    </section>
-</div>
-
 <!-- End Page Banner -->
 <script type="text/javascript" src="../../js/script.js"></script>
 
@@ -672,53 +332,5 @@
         $(".common_model").show();
     })
 </script>
-
-<script type="text/javascript">
-    $(".minerals-modal").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
-
-    $(function(){
-        $(".common_model").show();
-    })
-</script>
-
-<script>
-    $(function() {
-        $('.image-editor').cropit({
-            imageState: {
-                src: ''
-            }
-        });
-
-        $('.export').click(function() {
-            var imageData = $('.image-editor').cropit('export');
-            document.getElementById("food-image-change").src=imageData;
-        });
-    });
-</script>
-
-<script type="text/javascript">
-    jQuery(document).ready(function($) {
-
-        $('#categories').tokenfield({
-            autocomplete: {
-                source: ['Vegetarian','Meals','Sea Food','Chiense','Ice Creams'],
-                delay: 100
-            },
-            showAutocompleteOnFocus: true,
-            delimiter: [',',' ', '-', '_']
-        });
-
-        $('#tags').tokenfield({
-            autocomplete: {
-                source: ['Biriyani','Chicken','Lunch','black','white'],
-                delay: 100
-            },
-            showAutocompleteOnFocus: true,
-            delimiter: [',',' ', '-', '_']
-        });
-
-    });
-</script>
-
 
 

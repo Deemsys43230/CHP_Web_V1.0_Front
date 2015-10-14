@@ -7726,6 +7726,10 @@ a.profile_button:hover{
 	min-height: 250px !important;
 }
 
+.min-height-100{
+	min-height: 100px !important;
+}
+
 .min-height-450{
 	min-height: 450px !important;
 }
@@ -8090,6 +8094,16 @@ input[type=range]:focus::-ms-fill-upper {
 .avoid-clicks {
 	pointer-events: none;
 }
+
+.input_mineral input{
+	display: block;
+	width:100%;
+	padding: 0 3px!important;
+	border:1px solid #DDD !important;
+	color:#666;
+	font-size: 14px;
+}
+
 .custom-text-green{
 	color:green;
 }

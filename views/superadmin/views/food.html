@@ -8,11 +8,11 @@
                 <h4 class="classic-title"><span>Food Management</span></h4>
                 <div ng-include src="'views/food-menu.html'" onload="activeClass"></div>
             </div>
-            <div class="col-md-9">
+            <div class="col-md-9 min-height-450" ng-init="init()">
                 <a href="#dashboard" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back to Dashboard</a>
                 <a href="#uploadFood" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-down"></i> Import Food</a>
                 <a href="#addFood" class="back-button pull-right "><i class="fa fa-plus-circle"></i> Add Food</a>
-                <!--<div flash-message="2000" class="col-md-4 pull-right"></div>-->
+                <div flash-message="2000" class="col-md-4 pull-right"></div>
                 <h3 class="margin-bottom-10"><i class="fa fa-list-ul"></i> &nbsp;Food List</h3>
                 <div ng-if="loaded">
                     <div class="loader-style">
@@ -22,7 +22,7 @@
                 <table class="table table-bordered table-hover">
                     <thead>
                     <tr class="warning">
-                        <th>S.No</th>
+                        <th>Food Id</th>
                         <th>Food Name</th>
                         <th>Category</th>
                         <th>Session</th>
@@ -30,115 +30,33 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Dublin Bay prawn</td>
-                        <td>Biriyani,Vegetarian</td>
-                        <td>Lunch,Dinner</td>
+                    <tr dir-paginate="food in foodList | itemsPerPage: 5|orderBy:['foodid']">
+                        <td>{{food.foodid}}</td>
+                        <td>{{food.foodname}}</td>
                         <td>
-                            <a href="#food-view" class="btn-xs btn-primary">View</a>
-                            <a href="#food-edit" class="btn-xs btn-warning">Edit</a>
-                            <a href="" class="btn-xs btn-success">Enable</a>
+                            <span  ng-repeat="category in food.categoryid">
+                                {{category.categoryname}}{{$last ? '' : ','}}
+                            </span>
+                        </td>
+                        <td>
+                            <span  ng-repeat="session in food.sessionid">
+                                {{session.sessionname}}{{$last ? '' : ','}}
+                            </span></td>
+                        <td>
+                            <a href="#food-view/{{food.foodid}}" class="btn-xs btn-primary">View</a>
+                            <a href="#food-edit/{{food.foodid}}" class="btn-xs btn-warning">Edit</a>
+                            <a href="" class="btn-xs btn-success" ng-click="doEnableDisable(food.foodid)" ng-show="food.status==0">Enable</a>
+                            <a href="" class="btn-xs btn-danger" ng-click="doEnableDisable(food.foodid)" ng-hide="food.status==0">Disable</a>
                         </td>
                     </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Dublin Bay prawn</td>
-                        <td>Biriyani,Vegetarian</td>
-                        <td>Lunch,Dinner</td>
-                        <td>
-                            <a href="#food-view" class="btn-xs btn-primary">View</a>
-                            <a href="#food-edit" class="btn-xs btn-warning">Edit</a>
-                            <a href="" class="btn-xs btn-success">Enable</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Dublin Bay prawn</td>
-                        <td>Biriyani,Vegetarian</td>
-                        <td>Lunch,Dinner</td>
-                        <td>
-                            <a href="#food-view" class="btn-xs btn-primary">View</a>
-                            <a href="#food-edit" class="btn-xs btn-warning">Edit</a>
-                            <a href="" class="btn-xs btn-success">Enable</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>Dublin Bay prawn</td>
-                        <td>Biriyani,Vegetarian</td>
-                        <td>Lunch,Dinner</td>
-                        <td>
-                            <a href="#food-view" class="btn-xs btn-primary">View</a>
-                            <a href="#food-edit" class="btn-xs btn-warning">Edit</a>
-                            <a href="" class="btn-xs btn-success">Enable</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>5</td>
-                        <td>Dublin Bay prawn</td>
-                        <td>Biriyani,Vegetarian</td>
-                        <td>Lunch,Dinner</td>
-                        <td>
-                            <a href="#food-view" class="btn-xs btn-primary">View</a>
-                            <a href="#food-edit" class="btn-xs btn-warning">Edit</a>
-                            <a href="" class="btn-xs btn-success">Enable</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>6</td>
-                        <td>Dublin Bay prawn</td>
-                        <td>Biriyani,Vegetarian</td>
-                        <td>Lunch,Dinner</td>
-                        <td>
-                            <a href="#food-view" class="btn-xs btn-primary">View</a>
-                            <a href="#food-edit" class="btn-xs btn-warning">Edit</a>
-                            <a href="" class="btn-xs btn-success">Enable</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>7</td>
-                        <td>Dublin Bay prawn</td>
-                        <td>Biriyani,Vegetarian</td>
-                        <td>Lunch,Dinner</td>
-                        <td>
-                            <a href="#food-view" class="btn-xs btn-primary">View</a>
-                            <a href="#food-edit" class="btn-xs btn-warning">Edit</a>
-                            <a href="" class="btn-xs btn-success">Enable</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>8</td>
-                        <td>Dublin Bay prawn</td>
-                        <td>Biriyani,Vegetarian</td>
-                        <td>Lunch,Dinner</td>
-                        <td>
-                            <a href="#food-view" class="btn-xs btn-primary">View</a>
-                            <a href="#food-edit" class="btn-xs btn-warning">Edit</a>
-                            <a href="" class="btn-xs btn-danger">Disable</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>9</td>
-                        <td>Dublin Bay prawn</td>
-                        <td>Biriyani,Vegetarian</td>
-                        <td>Lunch,Dinner</td>
-                        <td>
-                            <a href="#food-view" class="btn-xs btn-primary">View</a>
-                            <a href="#food-edit" class="btn-xs btn-warning">Edit</a>
-                            <a href="" class="btn-xs btn-danger">Disable</a>
-                        </td>
-                    </tr>
+
                     </tbody>
                 </table>
+
                 <!-- Start Pagination -->
-                <div id="pagination">
-                    <span class="all-pages">Page 1 of 3</span>
-                    <span class="current page-num">1</span>
-                    <a class="page-num" href="#">2</a>
-                    <a class="page-num" href="#">3</a>
-                    <a class="next-page" href="#">Next</a>
-                </div>
+                <dir-pagination-controls ng-show="paginationLoad" max-size="5" direction-links="true"
+                                         boundary-links="true"> </dir-pagination-controls>
+
                 <!-- End Pagination -->
             </div>
         </div>
