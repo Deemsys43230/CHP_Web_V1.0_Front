@@ -19,18 +19,21 @@
                          </span>
                     <br/>
                     <h5>Categories :</h5>
-                    <ui-select multiple ng-model="foodDetails.categoryid" theme="select2" ng-disabled="disabled" class="form-control">
+                    <ui-select multiple name="categoryid" ng-model="foodDetails.categoryid" theme="select2" ng-disabled="disabled" class="form-control" ui-select-required>
                         <ui-select-match placeholder="Type and Select Categories">{{$item.categoryname}}</ui-select-match>
                         <ui-select-choices repeat="category in foodCategoryListAll | filter:$select.search">
                             {{category.categoryname}}
                         </ui-select-choices>
                     </ui-select>
+                    <span ng-show="foodForm.categoryid.$dirty&&foodForm.categoryid.$invalid">
+                        <span class="error-message" ng-show="foodForm.categoryid.$error.uiSelectRequired"><span>Required.</span></span>
+                    </span>
                     <br/>
 
                     <h5>Session :</h5>
                     <div class="col-md-1"></div>
                     <div class="col-md-11">
-                        <span class="fh-checkbox">
+                        <span class="fh-checkbox" required>
                         <input type="checkbox" id="session-1" name="session" ng-model="foodDetails.sessionSet.breakfast">
                         <label for="session-1">Break Fast</label>
                         <input type="checkbox" id="session-2" name="session" ng-model="foodDetails.sessionSet.brunch">
@@ -42,6 +45,9 @@
                         <input type="checkbox" id="session-5" name="session" ng-model="foodDetails.sessionSet.dinner">
                         <label for="session-5">Dinner</label>
                     </span>
+                <span ng-show="foodForm.$invalid">
+                                <span class="error-message" ng-show="foodForm.session.$error.required"><span>Required.</span></span>
+                         </span>
                     </div>
                 </div>
                 <div class="col-md-2 coach-details">
@@ -52,12 +58,15 @@
                     <hr>
                     <h5>Tags :</h5>
                   <div class="form-group">
-                      <ui-select multiple tagging="tagTransform" tagging-label="(custom 'new' label)" ng-model="foodDetails.tagid" theme="select2" sortable="true" ng-disabled="disabled" class="form-control" title="Choose a color">
+                      <ui-select multiple tagging="tagTransform" tagging-label="(custom 'new' label)"  ng-model="foodDetails.tagid" theme="select2" sortable="true" ng-disabled="disabled" class="form-control">
                           <ui-select-match placeholder="Type/Select tags">{{$item.tagname}}</ui-select-match>
                           <ui-select-choices repeat="tag in foodTagList | filter:$select.search">
                               {{tag.tagname}}
                           </ui-select-choices>
                       </ui-select>
+                     <!-- <span ng-show="foodForm.tagid.$dirty&&foodForm.tagid.$invalid">
+                        <span class="error-message" ng-show="foodForm.tagid.$error.uiSelectRequired"><span>Required.</span></span>
+                    </span>-->
                   </div>
 
 

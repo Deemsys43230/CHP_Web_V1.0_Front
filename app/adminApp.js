@@ -890,7 +890,17 @@ adminApp.directive('uiSelectRequired', function() {
         link: function(scope, elm, attrs, ngModel) {
             console.log(ngModel);
             ngModel.$validators.uiSelectRequired = function(modelValue, viewValue) {
-                return modelValue && modelValue.length;
+               /* return modelValue && modelValue.length;*/
+                var determineVal;
+                if (angular.isArray(modelValue)) {
+                    determineVal = modelValue;
+                } else if (angular.isArray(viewValue)) {
+                    determineVal = viewValue;
+                } else {
+                    return false;
+                }
+
+                return determineVal.length > 0;
             };
         }
     };
