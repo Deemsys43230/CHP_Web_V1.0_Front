@@ -19,20 +19,18 @@
                          </span>
                     <br/>
                     <h5>Categories :</h5>
-                    <ui-select multiple  name="category" ng-model="foodDetails.categoryid" theme="select2" ng-disabled="disabled"  class="form-control" ui-select-required>
+                    <ui-select multiple ng-model="foodDetails.categoryid" theme="select2" ng-disabled="disabled" class="form-control">
                         <ui-select-match placeholder="Type and Select Categories">{{$item.categoryname}}</ui-select-match>
                         <ui-select-choices repeat="category in foodCategoryListAll | filter:$select.search">
                             {{category.categoryname}}
                         </ui-select-choices>
                     </ui-select>
-                                <span class="error-message" ng-show="foodForm.category.$error.uiSelectRequired"><span>Required.</span></span>
-                    
                     <br/>
 
                     <h5>Session :</h5>
                     <div class="col-md-1"></div>
                     <div class="col-md-11">
-                        <span class="fh-checkbox" required>
+                        <span class="fh-checkbox">
                         <input type="checkbox" id="session-1" name="session" ng-model="foodDetails.sessionSet.breakfast">
                         <label for="session-1">Break Fast</label>
                         <input type="checkbox" id="session-2" name="session" ng-model="foodDetails.sessionSet.brunch">
@@ -43,9 +41,6 @@
                         <label for="session-4">Evening Snacks</label>
                         <input type="checkbox" id="session-5" name="session" ng-model="foodDetails.sessionSet.dinner">
                         <label for="session-5">Dinner</label>
-                    </span>
-                        <span ng-show="foodForm.$invalid">
-                                <span class="error-message" ng-show="foodForm.session.$error.required"><span>Required.</span></span>
                     </span>
                     </div>
                 </div>
@@ -79,7 +74,7 @@
                     <div class="col-md-11 min-height-100">
                         <span  class="fh-checkbox" ng-repeat="foodMeasure in foodMeasureListAll">
                         <input class="col-md-1" id="{{foodMeasure.measureid}}" type="checkbox" ng-model="foodMeasure.checked" ng-change="doAddNewMeasureMinerals(foodMeasure.measureid,foodMeasure.measurename)">
-                        <label class="col-md-2" for="{{foodMeasure.measureid}}">{{foodMeasure.measurename}}</label>
+                        <label class="col-md-2" for="{{foodMeasure.measureid}}">{{foodMeasure.measurename}}{{foodMeasure.measureid}}</label>
                         </span>
                     </div>
 
@@ -261,9 +256,9 @@
                         </table>
                     </div>
                     <div class="col-md-12 margin-top-10 text-center">
-                        <a class="btn register_button" href="" ng-click="doUpdateFoodDetails()" ng-hide="isNew">Save Food Details</a>
-                        <a class="btn register_button" href="" ng-click="doAddFoodDetails()" ng-show="isNew" ng-disabled="foodForm.$invalid">Save Food Details</a>
-                        <a class="btn cancel_button" href="#food">Cancel</a>
+                        <a class="register_button" href="" ng-click="doUpdateFoodDetails()" ng-hide="isNew">Save Food Details</a>
+                        <a class="register_button" href="" ng-click="doAddFoodDetails()" ng-show="isNew">Save Food Details</a>
+                        <a class="cancel_button" href="#food">Cancel</a>
                     </div>
                 </div>
                 </form>

@@ -885,13 +885,26 @@ adminApp.directive('validateNumber', function() {
 
 //ui-select required validation
 adminApp.directive('uiSelectRequired', function() {
-    alert("ui select")
     return {
         require: 'ngModel',
         link: function(scope, elm, attrs, ngModel) {
             console.log(ngModel);
             ngModel.$validators.uiSelectRequired = function(modelValue, viewValue) {
                 return modelValue && modelValue.length;
+            };
+        }
+    };
+});
+
+adminApp.directive('checkRequired', function(){
+    return {
+        require: 'ngModel',
+        restrict: 'A',
+        link: function (scope, element, attrs, ngModel) {
+            ngModel.$validators.checkRequired = function (modelValue, viewValue) {
+                var value = modelValue || viewValue;
+                var match = scope.$eval(attrs.ngTrueValue) || true;
+                return value && match === value;
             };
         }
     };
