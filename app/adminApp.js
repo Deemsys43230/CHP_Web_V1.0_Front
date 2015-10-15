@@ -475,6 +475,7 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                             files:[
                                 '../../js/bootstrap.min.js',
                                 '../../js/category-select.js',
+                                '../../app/food/foodService.js',
                                 '../../app/food/foodController.js'
                             ]
                         })
@@ -499,12 +500,17 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../css/multiSelect.css',
                                 '../../css/category-select.css',
                                 '../../css/category-select-bootstrap.css',
+                                '../../app/food/foodService.js',
                                 '../../app/food/foodController.js'
                             ]
                         })
                     }
                 },
-                controller:'FoodDetailsEditController'
+                controller:'FoodDetailsEditController',
+                title:'Edit Food',
+                type:2, //For Update type=1
+                isNew:false
+
             }).
             when('/food-view/:id', {
                 templateUrl: 'views/food-view.html',
@@ -516,6 +522,7 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../js/bootstrap.min.js',
                                 '../../plugin/popup/style.css',
                                 '../../plugin/popup/jquery.leanModal.min.js',
+                                '../../app/food/foodService.js',
                                 '../../app/food/foodController.js'
                             ]
                         })
@@ -540,12 +547,16 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../css/multiSelect.css',
                                 '../../css/category-select.css',
                                 '../../css/category-select-bootstrap.css',
+                                '../../app/food/foodService.js',
                                 '../../app/food/foodController.js'
                             ]
                         })
                     }
                 },
-                controller:'FoodDetailsAddController'
+                controller:'FoodDetailsEditController',
+                title:'Add Food',
+                type:1,//For Add type=1
+                isNew:true
             }).
             when('/uploadFood', {
                 templateUrl: 'views/upload-food.html',
@@ -868,6 +879,20 @@ adminApp.directive('validateNumber', function() {
                 }
             });
 
+        }
+    };
+});
+
+//ui-select required validation
+adminApp.directive('uiSelectRequired', function() {
+    alert("ui select")
+    return {
+        require: 'ngModel',
+        link: function(scope, elm, attrs, ngModel) {
+            console.log(ngModel);
+            ngModel.$validators.uiSelectRequired = function(modelValue, viewValue) {
+                return modelValue && modelValue.length;
+            };
         }
     };
 });
