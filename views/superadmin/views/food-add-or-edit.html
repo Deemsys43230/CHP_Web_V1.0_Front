@@ -51,7 +51,7 @@
                     </div>
                 </div>
                 <div class="col-md-2 coach-details">
-                    <img id="food-image-change" ng-src="{{foodDetails.foodImagePath}}"/><br/><br/>
+                    <img id="food-image-change" ng-src="{{foodDetails.foodImagePath|trusted}}"/><br/><br/>
                     <a id="modal_trigger" href="#modal" onclick="return false;" class="btn-sm btn-warning">Change Food Image</a>
                 </div>
                 <div class="col-md-12 no-padding">
@@ -286,22 +286,19 @@
     <section class="popupBody">
         <!-- Register Form -->
         <div class="common_model">
-            <div class="image-editor">
-                <div class="cropit-image-preview center-block"></div>
-                <div class="image-size-label">
-                    Resize image
-                </div>
-                <input type="range" class="cropit-image-zoom-input">
-
-                <div class="action_btns margin-top-20">
-                    <div class="one_half">
-                        <div class="fileUpload food-button">
-                            <span>Choose Image</span>
-                            <input type="file" class="upload cropit-image-input" />
-                        </div>
+            <p>Preview:</p>
+            <img class="food-preview center-block" ng-src="{{foodDetails.foodimage|trusted}}"/>
+            <h6 class="text-red text-center margin-tb-10">Note : Upload Image Size 1000x1000</h6>
+            <p>Progress:</p>
+            <progress class="food-progress" value="{{progress}}"></progress>
+            <div class="action_btns margin-top-10">
+                <div class="one_half">
+                    <div class="fileUpload food-button">
+                        <span>Choose Image</span>
+                        <input type="file"class="upload" ng-file-select="onFileSelect($files)" />
                     </div>
-                    <div class="one_half last"><a href="" onclick="return false;" class="food-button export modal_close">Save Image</a></div>
                 </div>
+                <div class="one_half last"><a href="" onclick="return false;" class="food-button export modal_close" ng-click="doUpdateFoodImage();">Save Image</a></div>
             </div>
         </div>
     </section>
