@@ -186,7 +186,6 @@ adminApp.controller("FoodDetailsEditController",function($scope,requestHandler,F
         $scope.progress = 0;
         fileReader.readAsDataUrl($scope.file, $scope)
             .then(function(result) {
-                alert(result);
                 $scope.foodDetails.foodimage = result;
 
             });
@@ -195,6 +194,10 @@ adminApp.controller("FoodDetailsEditController",function($scope,requestHandler,F
     $scope.$on("fileProgress", function(e, progress) {
         $scope.progress = progress.loaded / progress.total;
     });
+
+    $scope.doRefreshPreview=function(){
+        $scope.foodDetails.foodimage=$scope.foodDetails.foodImagePath;
+    }
 
     //Update Food Image
     $scope.doUpdateFoodImage=function(){

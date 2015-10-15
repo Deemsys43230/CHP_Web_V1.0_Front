@@ -22,26 +22,28 @@
                 <table class="table table-bordered table-hover">
                     <thead>
                     <tr class="warning">
-                        <th>Food Id</th>
-                        <th>Food Name</th>
-                        <th>Category</th>
-                        <th>Session</th>
-                        <th class="option-col">Options</th>
+                        <th class="col-md-1">Food Id</th>
+                        <th class="col-md-2">Food Name</th>
+                        <th class="col-md-3">Category</th>
+                        <th class="col-md-3">Session</th>
+                        <th class="col-md-3">Options</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr dir-paginate="food in foodList | itemsPerPage: 5|orderBy:['foodid']">
+                    <tr dir-paginate="food in foodList | itemsPerPage: 8|orderBy:['foodid']">
                         <td>{{food.foodid}}</td>
-                        <td>{{food.foodname}}</td>
-                        <td>
+                        <td title="{{food.foodname}}"><span class="one-line-clamp">{{food.foodname}}</span></td>
+                        <td><span class="one-line-clamp">
                             <span  ng-repeat="category in food.categoryid">
                                 {{category.categoryname}}{{$last ? '' : ','}}
-                            </span>
+                            </span></span>
                         </td>
-                        <td>
+                        <td><span class="one-line-clamp">
                             <span  ng-repeat="session in food.sessionid">
                                 {{session.sessionname}}{{$last ? '' : ','}}
-                            </span></td>
+                            </span>
+                        </span>
+                        </td>
                         <td>
                             <a href="#food-view/{{food.foodid}}" class="btn-xs btn-primary">View</a>
                             <a href="#food-edit/{{food.foodid}}" class="btn-xs btn-warning">Edit</a>

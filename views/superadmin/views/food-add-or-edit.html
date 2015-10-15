@@ -10,7 +10,7 @@
                 <div flash-message="2000" class="col-md-4 pull-right"></div>
                 <h4 class="classic-title"><span>{{title}}</span></h4>
                 <form name="foodForm">
-                <div class="col-md-10 no-padding">
+                <div class="col-md-9 no-padding">
                     <h5>Food Name :</h5>
                     <input class="form-control" name="foodname" maxlength="100" ng-pattern="/^ *([a-zA-Z]+ ?)+ *$/" ng-model="foodDetails.foodname" required/>
                     <span ng-show="foodForm.foodname.$dirty&&foodForm.foodname.$invalid">
@@ -34,40 +34,42 @@
                     <div class="col-md-1"></div>
                     <div class="col-md-11">
                         <span class="fh-checkbox" required>
-                        <input type="checkbox" id="session-1" name="session" ng-model="foodDetails.sessionSet.breakfast">
-                        <label for="session-1">Break Fast</label>
-                        <input type="checkbox" id="session-2" name="session" ng-model="foodDetails.sessionSet.brunch">
-                        <label for="session-2">Brunch</label>
-                        <input type="checkbox" id="session-3" name="session" ng-model="foodDetails.sessionSet.lunch">
-                        <label for="session-3">Lunch</label>
-                        <input type="checkbox" id="session-4" name="session" ng-model="foodDetails.sessionSet.eveningsnacks">
-                        <label for="session-4">Evening Snacks</label>
-                        <input type="checkbox" id="session-5" name="session" ng-model="foodDetails.sessionSet.dinner">
-                        <label for="session-5">Dinner</label>
-                    </span>
-                <span ng-show="foodForm.$invalid">
-                                <span class="error-message" ng-show="foodForm.session.$error.required"><span>Required.</span></span>
-                         </span>
+                            <input type="checkbox" id="session-1" name="session" ng-model="foodDetails.sessionSet.breakfast">
+                            <label for="session-1">Break Fast</label>
+                            <input type="checkbox" id="session-2" name="session" ng-model="foodDetails.sessionSet.brunch">
+                            <label for="session-2">Brunch</label>
+                            <input type="checkbox" id="session-3" name="session" ng-model="foodDetails.sessionSet.lunch">
+                            <label for="session-3">Lunch</label>
+                            <input type="checkbox" id="session-4" name="session" ng-model="foodDetails.sessionSet.eveningsnacks">
+                            <label for="session-4">Evening Snacks</label>
+                            <input type="checkbox" id="session-5" name="session" ng-model="foodDetails.sessionSet.dinner">
+                            <label for="session-5">Dinner</label>
+                        </span>
+                        <span ng-show="foodForm.$invalid">
+                            <span class="error-message" ng-show="foodForm.session.$error.required"><span>Required.</span></span>
+                        </span>
                     </div>
-                </div>
-                <div class="col-md-2 coach-details">
-                    <img id="food-image-change" ng-src="{{foodDetails.foodImagePath|trusted}}"/><br/><br/>
-                    <a id="modal_trigger" href="#modal" onclick="return false;" class="btn-sm btn-warning">Change Food Image</a>
-                </div>
-                <div class="col-md-12 no-padding">
-                    <hr>
                     <h5>Tags :</h5>
-                  <div class="form-group">
-                      <ui-select multiple tagging="tagTransform" tagging-label="(custom 'new' label)" name="tagid"  ng-model="foodDetails.tagid" theme="select2" sortable="true" ng-disabled="disabled" class="form-control" ui-select-required>
-                          <ui-select-match placeholder="Type/Select tags">{{$item.tagname}}</ui-select-match>
-                          <ui-select-choices repeat="tag in foodTagList | filter:$select.search">
-                              {{tag.tagname}}
-                          </ui-select-choices>
-                      </ui-select>
+                    <div class="form-group">
+                        <ui-select multiple tagging="tagTransform" tagging-label="(custom 'new' label)" name="tagid"  ng-model="foodDetails.tagid" theme="select2" sortable="true" ng-disabled="disabled" class="form-control" ui-select-required>
+                            <ui-select-match placeholder="Type/Select tags">{{$item.tagname}}</ui-select-match>
+                            <ui-select-choices repeat="tag in foodTagList | filter:$select.search">
+                                {{tag.tagname}}
+                            </ui-select-choices>
+                        </ui-select>
                       <span ng-show="foodForm.tagid.$dirty&&foodForm.tagid.$invalid">
                         <span class="error-message" ng-show="foodForm.tagid.$error.uiSelectRequired"><span>Required.</span></span>
                     </span>
-                  </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3 coach-details text-center">
+                    <img class="food-image-wrap" id="food-image-change" ng-src="{{foodDetails.foodImagePath|trusted}}"/><br/><br/>
+                    <a id="modal_trigger" href="#modal" onclick="return false;" ng-click="doRefreshPreview();" class="btn-sm btn-warning">Change Food Image</a>
+                </div>
+                <div class="col-md-12 no-padding">
+                    <hr>
+
 
 
                     <div ng-if="loaded">

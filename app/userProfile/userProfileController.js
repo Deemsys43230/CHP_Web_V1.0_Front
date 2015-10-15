@@ -109,7 +109,7 @@ userApp.controller('UserProfileController',['$scope','requestHandler','Flash',fu
     //To Enable the update button if changes occur.
     $scope.isClean = function() {
         return angular.equals ($scope.orginalUserProfile, $scope.userProfile);
-    }
+    };
 
     //Change Password
     $scope.doChangePassword=function(){
