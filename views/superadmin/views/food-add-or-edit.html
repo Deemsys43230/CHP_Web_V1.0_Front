@@ -58,15 +58,15 @@
                     <hr>
                     <h5>Tags :</h5>
                   <div class="form-group">
-                      <ui-select multiple tagging="tagTransform" tagging-label="(custom 'new' label)"  ng-model="foodDetails.tagid" theme="select2" sortable="true" ng-disabled="disabled" class="form-control">
+                      <ui-select multiple tagging="tagTransform" tagging-label="(custom 'new' label)" name="tagid"  ng-model="foodDetails.tagid" theme="select2" sortable="true" ng-disabled="disabled" class="form-control" ui-select-required>
                           <ui-select-match placeholder="Type/Select tags">{{$item.tagname}}</ui-select-match>
                           <ui-select-choices repeat="tag in foodTagList | filter:$select.search">
                               {{tag.tagname}}
                           </ui-select-choices>
                       </ui-select>
-                     <!-- <span ng-show="foodForm.tagid.$dirty&&foodForm.tagid.$invalid">
+                      <span ng-show="foodForm.tagid.$dirty&&foodForm.tagid.$invalid">
                         <span class="error-message" ng-show="foodForm.tagid.$error.uiSelectRequired"><span>Required.</span></span>
-                    </span>-->
+                    </span>
                   </div>
 
 
