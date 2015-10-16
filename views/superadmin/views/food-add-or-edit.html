@@ -7,7 +7,6 @@
         <div class="row">
             <div class="col-md-12">
                 <a href="#food" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back to Food List</a>
-                <div flash-message="2000" class="col-md-4 pull-right"></div>
                 <h4 class="classic-title"><span>{{title}}</span></h4>
                 <form name="foodForm" novalidate>
                 <div class="col-md-9 no-padding">
@@ -31,7 +30,9 @@
                     </span>
                     <br/>
 
-                    <h5>Session :</h5>
+                    <h5>Session : <span ng-show="foodForm.session.$invalid">
+                            <span class="text-red">Required.</span>
+                        </span></h5><br/>
                     <div class="col-md-1"></div>
                     <div class="col-md-11">
                         <checkbox-group min-required="1">
@@ -48,9 +49,7 @@
                             <label for="session-5">Dinner</label>
                         </span>
                         </checkbox-group>
-                        <span ng-show="foodForm.session.$invalid">
-                            Required.
-                        </span>
+
                     </div>
                     <h5>Tags :</h5>
                     <div class="form-group">
@@ -77,12 +76,10 @@
                             <div class="loader"></div>
                         </div>
                     </div>
-                    <h5 class="col-md-1 no-padding">Measures :</h5>
-                    <span class="col-md-2 no-padding">
-                        <a id="measure-modal" href="#measure-modal-edit" onclick="return false;">Add New Measure</a>
-                    </span>
-
-                    <br/><br/>
+                    <h5>Measures :<span ng-show="foodForm.foodMeasureName.$invalid">
+                            <span class="text-red">Required.</span>
+                        </span></h5>
+<br/>
                     <div class="col-md-1"></div>
                     <div class="col-md-11 min-height-100">{{measureRequired}}
                         <checkbox-group min-required="1">
@@ -91,9 +88,7 @@
                             <label class="col-md-2" for="{{foodMeasure.measureid}}">{{foodMeasure.measurename}}</label>
                         </span>
                         </checkbox-group>
-                        <span ng-show="foodForm.foodMeasureName.$invalid">
-                            Required.
-                        </span>
+
                     </div>
 
                     <div class="col-md-12 no-padding margin-top-10">
@@ -282,9 +277,9 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="col-md-12 margin-top-10 text-center">{{foodForm.$invalid}}
+                    <div class="col-md-12 margin-top-10 text-center">
                         <a class="btn register_button" href="" ng-click="doUpdateFoodDetails()" ng-disabled="foodForm.$invalid||isClean()" ng-hide="isNew">Update Food Details</a>
-                        <a class="btn register_button" href="" ng-click="doAddFoodDetails()" ng-disabled="foodForm.$invalid" ng-show="isNew">Save Food Details</a>
+                        <a class="btn register_button" href="" ng-click="doAddFoodDetails()" ng-disabled="foodForm.$invalid||imageAdded" ng-show="isNew">Save Food Details</a>
                         <a class="btn cancel_button" href="#food">Cancel</a>
                     </div>
                 </div>

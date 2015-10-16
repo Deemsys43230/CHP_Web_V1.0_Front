@@ -121,7 +121,7 @@ adminApp.controller("FoodDetailsViewController",function($scope,requestHandler,$
 
 });
 
-adminApp.controller("FoodDetailsEditController",function($scope,requestHandler,FoodService,$routeParams,Flash,$route,fileReader){
+adminApp.controller("FoodDetailsEditController",function($scope,requestHandler,FoodService,$routeParams,Flash,$route,fileReader,$location){
 
     var original="";
     $scope.title=$route.current.title;
@@ -192,6 +192,7 @@ adminApp.controller("FoodDetailsEditController",function($scope,requestHandler,F
 
     //Set Food Details Obj for add
     $scope.doSetFoodDetails=function(){
+        $scope.imageAdded=false;
         $scope.foodDetails={};
         $scope.foodDetails.measureid=[];
         $scope.foodDetails.sessionid=[];
@@ -239,6 +240,7 @@ adminApp.controller("FoodDetailsEditController",function($scope,requestHandler,F
                 if (response.data.Response_status == 1) {
                     successMessage(Flash,"Food Updated Successfully!");
                     $scope.doGetFoodDetails();
+                    $location.path("food");
                 }
             }, function (response) {
                 alert("Not able to pull Food Tag");
@@ -252,6 +254,7 @@ adminApp.controller("FoodDetailsEditController",function($scope,requestHandler,F
     $scope.doAddFoodDetails= function () {
 
         //Get Add Details
+        $scope.imageAdded=true;
         $scope.foodDetails.sessionid=FoodService.getSessionArray($scope.foodDetails.sessionSet);
         $scope.foodDetails.categoryid=FoodService.getCategoryArray($scope.foodDetails.categoryid);
         $scope.foodDetails.tagid=FoodService.getTagArray($scope.foodDetails.tagid);
@@ -262,6 +265,7 @@ adminApp.controller("FoodDetailsEditController",function($scope,requestHandler,F
             if (response.data.Response_status == 1) {
                 successMessage(Flash,"Food Added Successfully!");
                 //$scope.doGetFoodDetails();
+                $location.path("food");
             }
         }, function (response) {
             alert("Not able to pull Food Tag");
@@ -286,31 +290,10 @@ adminApp.controller("FoodDetailsEditController",function($scope,requestHandler,F
 
 
     //Set measure set
-    $scope.measureCount = 0;
-    $scope.doAddNewMeasureMinerals=function(id,name,foodMeasure){
+    $scope.doAddNewMeasureMinerals=function(id,name){
         $scope.foodDetails.measureid=FoodService.doAddMeasureMinerals(id,name,$scope.foodDetails.measureid);
-
-
-            if(foodMeasure.checked){
-                $scope.measureCount--;//opposite
-            }else{
-                $scope.measureCount++;
-            }
-
-
     }
-    $scope.sessionCount = 0;
-    $scope.doCheckSession=function(session){
-            alert("hi");
-        if(session.checked) {
-            alert("if");
-            $scope.sessionCount--;
-        }else{
-            alert("else")
-            $scope.sessionCount++;
-        }
 
-    }
     //Get Categories
     var foodCategoryPromise=FoodService.doGetCategories();
     foodCategoryPromise.then(function(result){
