@@ -484,7 +484,7 @@
                     <h4 class="classic-title"><span>Latest News</span></h4>
                     <div class="latest-posts-classic custom-carousel touch-carousel"  data-appeared-items="3" data-navigation="true" >
                     <!-- Posts 1 -->
-                        <div class="post-row item" ng-repeat="usernews in usernewslist">
+                        <div class="post-row item" ng-repeat="usernews in usernewslist" ng-show="usernewslist.length!=0">
                             <div class="left-meta-post">
                                 <div class="post-date"><span class="day">{{ usernews.datetime | toSec | date:'dd'}}</span><span class="month">{{ usernews.datetime | toSec | date:'MMM'}}</span></div>
                                 <div class="post-type"><i class="fa fa-picture-o"></i></div>
@@ -494,6 +494,7 @@
                             <p ng-bind-html="usernews.description | html"> <a class="read-more" href="#">Read More...</a></p>
                              </div>
                         </div>
+                        <div class="post-row item" ng-show="usernewslist.length==0">News is not published!!!</div>
 
                 </div>
                 <!-- End Recent Posts Carousel -->

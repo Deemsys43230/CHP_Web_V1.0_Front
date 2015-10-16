@@ -38,8 +38,8 @@
                         <td>
                             <a href="#viewLatestNews/{{latestnews.newsid}}" class="btn-xs btn-primary">View</a>
                             <a href="#editLatestNews/{{latestnews.newsid}}" class="btn-xs btn-warning">Edit</a>
-                            <a href="" class="btn-xs btn-success" ng-click="doEnableDisableLatestNews(latestnews.newsid)" ng-show="latestnews.status==0">Published</a>
-                            <a href="" class="btn-xs btn-danger" ng-click="doEnableDisableLatestNews(latestnews.newsid)" ng-hide="latestnews.status==0">Unpublished</a>
+                            <a href="" class="btn-xs btn-success" ng-click="doEnableDisableLatestNews(latestnews.newsid)" ng-show="latestnews.status==0">Publish</a>
+                            <a href="" class="btn-xs btn-danger" ng-click="doEnableDisableLatestNews(latestnews.newsid)" ng-hide="latestnews.status==0">Unpublish</a>
                         </td>
                     <tr ng-show="news.length==0"><td colspan="4">No Records Found !!!</td></tr>
                     </tbody>
