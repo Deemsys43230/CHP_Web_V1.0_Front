@@ -12,7 +12,7 @@
                 <form name="foodForm" novalidate>
                 <div class="col-md-9 no-padding">
                     <h5>Food Name :</h5>
-                    <input class="form-control" name="foodname" maxlength="100"  ng-pattern="/^ *([a-zA-Z]+ ?)+ *$/" ng-model="foodDetails.foodname" required food-name-exists/>
+                    <input class="form-control" name="foodname" maxlength="100"  ng-pattern="/^ *([a-zA-Z]+ ?)+ *$/" ng-model="foodDetails.foodname" required/>
                     <span ng-show="foodForm.foodname.$dirty&&foodForm.foodname.$invalid">
                                 <span class="error-message" ng-show="foodForm.foodname.$error.required"><span>Required.</span></span>
                              <span class="error-message" ng-show="foodForm.foodname.$error.pattern"><span>Enter&nbsp;Valid&nbsp;name.</span></span>
@@ -34,6 +34,7 @@
                     <h5>Session :</h5>
                     <div class="col-md-1"></div>
                     <div class="col-md-11">
+                        <checkbox-group min-required="1">
                         <span class="fh-checkbox" required>
                             <input type="checkbox" id="session-1" name="session" ng-model="foodDetails.sessionSet.breakfast">
                             <label for="session-1">Break Fast</label>
@@ -46,8 +47,9 @@
                             <input type="checkbox" id="session-5" name="session" ng-model="foodDetails.sessionSet.dinner">
                             <label for="session-5">Dinner</label>
                         </span>
-                        <span ng-show="foodForm.$invalid">
-                            <span class="error-message" ng-show="foodForm.session.$error.required"><span>Required.</span></span>
+                        </checkbox-group>
+                        <span ng-show="foodForm.session.$invalid">
+                            Required.
                         </span>
                     </div>
                     <h5>Tags :</h5>
@@ -79,14 +81,21 @@
                     <span class="col-md-2 no-padding">
                         <a id="measure-modal" href="#measure-modal-edit" onclick="return false;">Add New Measure</a>
                     </span>
+
                     <br/><br/>
                     <div class="col-md-1"></div>
-                    <div class="col-md-11 min-height-100">
+                    <div class="col-md-11 min-height-100">{{measureRequired}}
+                        <checkbox-group min-required="1">
                         <span  class="fh-checkbox" ng-repeat="foodMeasure in foodMeasureListAll">
-                            <input class="col-md-1" id="{{foodMeasure.measureid}}" type="checkbox" ng-model="foodMeasure.checked" ng-change="doAddNewMeasureMinerals(foodMeasure.measureid,foodMeasure.measurename)">
+                            <input class="col-md-1" name="foodMeasureName" ng-required="measureRequired" id="{{foodMeasure.measureid}}" type="checkbox" ng-model="foodMeasure.checked" ng-change="doAddNewMeasureMinerals(foodMeasure.measureid,foodMeasure.measurename)">
                             <label class="col-md-2" for="{{foodMeasure.measureid}}">{{foodMeasure.measurename}}</label>
                         </span>
+                        </checkbox-group>
+                        <span ng-show="foodForm.foodMeasureName.$invalid">
+                            Required.
+                        </span>
                     </div>
+
                     <div class="col-md-12 no-padding margin-top-10">
                         <table class="table table-bordered">
                             <thead>
@@ -274,7 +283,7 @@
                         </table>
                     </div>
                     <div class="col-md-12 margin-top-10 text-center">{{foodForm.$invalid}}
-                        <a class="btn register_button" href="" ng-click="doUpdateFoodDetails()" ng-disabled="foodForm.$invalid" ng-hide="isNew">Update Food Details</a>
+                        <a class="btn register_button" href="" ng-click="doUpdateFoodDetails()" ng-disabled="foodForm.$invalid||isClean()" ng-hide="isNew">Update Food Details</a>
                         <a class="btn register_button" href="" ng-click="doAddFoodDetails()" ng-disabled="foodForm.$invalid" ng-show="isNew">Save Food Details</a>
                         <a class="btn cancel_button" href="#food">Cancel</a>
                     </div>
