@@ -7705,14 +7705,58 @@ a.profile_button:hover{
 	vertical-align: top;
 }
 
-.line-clamp{
-	max-height: 40px;
-	border: none !important;
-	display: -webkit-box;
-	-webkit-line-clamp: 2;
-    -moz-line-clamp: 2;
-	-webkit-box-orient: vertical;
-	overflow: hidden;
+.line-clamp-xs{
+    position: absolute;
+    max-height: 20px;
+    width: 12%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow:hidden;
+}
+
+.line-clamp-sm{
+    position: absolute;
+    max-height: 20px;
+    width: 22%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow:hidden;
+}
+
+.line-clamp-md{
+    position: absolute;
+    max-height: 20px;
+    width: 35%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow:hidden;
+}
+
+.line-clamp-lg{
+    position: absolute;
+    max-height: 20px;
+    width: 45%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow:hidden;
+}
+
+.line-clamp-400{
+    position: absolute;
+    max-height: 20px;
+    width: 400px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow:hidden;
+}
+
+.line-clamp-200{
+    position: absolute;
+    max-height: 20px;
+    width: 200px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow:hidden;
 }
 
 .one-line-clamp{
@@ -7721,7 +7765,7 @@ a.profile_button:hover{
     display: -webkit-box;
     -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
-    overflow: hidden;
+    overflow-y: hidden;
 }
 
 .max-width-400{

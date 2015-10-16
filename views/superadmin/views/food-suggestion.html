@@ -8,7 +8,7 @@
                 <h4 class="classic-title"><span>Food Management</span></h4>
                 <div ng-include src="'views/food-menu.html'" onload="activeClass"></div>
             </div>
-            <div class="col-md-9 min-height-350" ng-init="init()">
+            <div class="col-md-9 min-height-450" ng-init="init()">
                 <a href="#dashboard" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back to Dashboard</a>
 
                 <div flash-message="2000" class="col-md-4 pull-right"></div>
@@ -31,8 +31,8 @@
                     <tbody>
                     <tr dir-paginate="suggestion in foodSuggestionList | itemsPerPage: 8" ng-show="foodSuggestionList.length!=0">
                         <td>{{$index+1}}</td>
-                        <td>{{suggestion.foodname}}</td>
-                        <td>{{suggestion.fooddescription}}</td>
+                        <td><span class="line-clamp-xs">{{suggestion.foodname}}</span></td>
+                        <td><span class="line-clamp-lg">{{suggestion.fooddescription}}</span></td>
                        <td>
                             <a href="" class="btn-xs btn-success hint--top" ng-click="doApproveFoodSuggestion(suggestion.suggestionid)" ng-show="suggestion.foodstatus==0" data-hint="Approve"><i class="fa fa-check"/></a>&nbsp;&nbsp;<a href="" class="btn-xs btn-danger hint--top" ng-click="doRejectFoodSuggestion(suggestion.suggestionid)" ng-show="suggestion.foodstatus==0" data-hint="Reject"><i class="fa fa-close"/></a>
                             <span  class="custom-text-green"  ng-show="suggestion.foodstatus==1" >Approved</span>

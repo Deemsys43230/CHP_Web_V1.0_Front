@@ -69,23 +69,21 @@
                 </div>
                 <div class="col-md-12 no-padding">
                     <hr>
-
-
-
                     <div ng-if="loaded">
                         <div class="loader-style">
                             <div class="loader"></div>
                         </div>
                     </div>
-                    <div class="no-padding margin-top-5 pull-right">
-                        <a id="measure-modal" href="#measure-modal-edit" onclick="return false;" class="main_button"><i class="fa fa-plus-circle"></i>&nbsp;Add New Measure</a>
-                    </div>
-                    <h5>Measures :</h5><br/>
+                    <h5 class="col-md-1 no-padding">Measures :</h5>
+                    <span class="col-md-2 no-padding">
+                        <a id="measure-modal" href="#measure-modal-edit" onclick="return false;">Add New Measure</a>
+                    </span>
+                    <br/><br/>
                     <div class="col-md-1"></div>
                     <div class="col-md-11 min-height-100">
                         <span  class="fh-checkbox" ng-repeat="foodMeasure in foodMeasureListAll">
-                        <input class="col-md-1" id="{{foodMeasure.measureid}}" type="checkbox" ng-model="foodMeasure.checked" ng-change="doAddNewMeasureMinerals(foodMeasure.measureid,foodMeasure.measurename)">
-                        <label class="col-md-2" for="{{foodMeasure.measureid}}">{{foodMeasure.measurename}}{{foodMeasure.measureid}}</label>
+                            <input class="col-md-1" id="{{foodMeasure.measureid}}" type="checkbox" ng-model="foodMeasure.checked" ng-change="doAddNewMeasureMinerals(foodMeasure.measureid,foodMeasure.measurename)">
+                            <label class="col-md-2" for="{{foodMeasure.measureid}}">{{foodMeasure.measurename}}</label>
                         </span>
                     </div>
 

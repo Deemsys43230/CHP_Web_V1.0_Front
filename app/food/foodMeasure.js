@@ -12,25 +12,16 @@ adminApp.controller('FoodMeasureController',function($scope,requestHandler,Flash
 
     //View All Measure
     $scope.doViewAllFoodMeasure=function(){
-            $scope.loaded=true;
-            $scope.reset();
-            requestHandler.getRequest("admin/viewAllfoodMeasure/", "").then(function(response){
+        $scope.loaded=true;
+        $scope.reset();
+        requestHandler.getRequest("admin/viewAllfoodMeasure/", "").then(function(response){
             $scope.measureList=response.data.viewAllfoodMeasure;
             $scope.loaded=false;
+            $scope.paginationLoad=true;
         },  function(){
             errorMessage(Flash,"Please try again later!")
         });
     };
-
-    //View Measure By ID
-    /*$scope.doViewFoodMeasure=function(id){
-            requestHandler.getRequest("admin/viewfoodMeasure/"+id,"").then(function(response) {
-            $scope.list = response.data.viewAllfoodMeasure;
-        },  function(){
-                errorMessage(Flash,"Please try again later!")
-        });
-    };*/
-
 
     //Add Measure
     $scope.doAddMeasure=function(){
@@ -63,7 +54,10 @@ adminApp.controller('FoodMeasureController',function($scope,requestHandler,Flash
         });
     };
 
-    //Initial Load
-    $scope.doViewAllFoodMeasure();
+    //Initial Load//Initial Load
+    $scope.init = function(){
+        $scope.paginationLoad=false;
+        $scope.doViewAllFoodMeasure();
+    };
 
 });

@@ -32,13 +32,13 @@
                     <tbody>
                     <tr dir-paginate="food in foodList | itemsPerPage: 8|orderBy:['foodid']">
                         <td>{{food.foodid}}</td>
-                        <td title="{{food.foodname}}"><span class="one-line-clamp">{{food.foodname}}</span></td>
-                        <td><span class="one-line-clamp">
+                        <td title="{{food.foodname}}"><span class="line-clamp-xs">{{food.foodname}}</span></td>
+                        <td><span class="line-clamp-sm">
                             <span  ng-repeat="category in food.categoryid">
                                 {{category.categoryname}}{{$last ? '' : ','}}
                             </span></span>
                         </td>
-                        <td><span class="one-line-clamp">
+                        <td><span class="line-clamp-em">
                             <span  ng-repeat="session in food.sessionid">
                                 {{session.sessionname}}{{$last ? '' : ','}}
                             </span>

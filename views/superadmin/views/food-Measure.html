@@ -8,7 +8,7 @@
                 <h4 class="classic-title"><span>Food Management</span></h4>
                 <div ng-include src="'views/food-menu.html'" onload="activeClass"></div>
             </div>
-            <div class="col-md-9">
+            <div class="col-md-9 min-height-450" ng-init="init()">
                 <a href="#dashboard" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back to Dashboard</a>
                 <a id="modal_measure" href="#measure" class="back-button pull-right "><i class="fa fa-plus-circle"></i> Add Measure</a>
                 <div flash-message="2000" class="col-md-4 pull-right"></div>
@@ -27,7 +27,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr dir-paginate="list in measureList | itemsPerPage:6 ">
+                    <tr dir-paginate="list in measureList | itemsPerPage:8 ">
                         <td>{{list.measureid}}</td>
                         <td>{{list.measurename}}</td>
                         <td>
@@ -40,7 +40,7 @@
                     </tbody>
                 </table>
                 <!-- Start Pagination -->
-                <dir-pagination-controls max-size="5" direction-links="true"
+                <dir-pagination-controls ng-show="paginationLoad" max-size="5" direction-links="true"
                                          boundary-links="true"> </dir-pagination-controls>
                 <!-- End Pagination -->
             </div>
