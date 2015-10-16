@@ -213,6 +213,9 @@ adminApp.controller("FoodDetailsEditController",function($scope,requestHandler,F
         $scope.foodDetails.measureid=[];
         $scope.foodDetails.sessionid=[];
 
+        $scope.foodDetails.foodImagePath='../../images/No_image_available.jpg';
+        $scope.foodDetails.foodimage='../../images/No_image_available.jpg';
+
         //Set session
         $scope.foodDetails.sessionSet=FoodService.setSessionValues($scope.foodDetails.sessionid);
 

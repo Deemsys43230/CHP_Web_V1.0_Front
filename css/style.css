@@ -7708,7 +7708,7 @@ a.profile_button:hover{
 .line-clamp-xs{
     position: absolute;
     max-height: 20px;
-    width: 12%;
+    width: 15%;
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow:hidden;
