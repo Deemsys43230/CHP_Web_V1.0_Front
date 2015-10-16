@@ -30,7 +30,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr dir-paginate="food in foodList | itemsPerPage: 8|orderBy:['foodid']">
+                    <tr dir-paginate="food in foodList | itemsPerPage: 10|orderBy:['foodid']">
                         <td>{{food.foodid}}</td>
                         <td title="{{food.foodname}}"><span class="line-clamp-xs">{{food.foodname}}</span></td>
                         <td><span class="line-clamp-sm">

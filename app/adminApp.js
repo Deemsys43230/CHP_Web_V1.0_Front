@@ -919,3 +919,34 @@ adminApp.directive('checkRequired', function(){
         }
     };
 });
+
+//Check for Email Already Exists
+adminApp.directive("foodNameExists", function ($q, $timeout,requestHandler) {
+
+    return {
+        restrict: "A",
+        require: "ngModel",
+        link: function (scope, element, attributes, ngModel) {
+            ngModel.$asyncValidators.foodNameExists = function (modelValue) {
+                var defer = $q.defer();
+                $timeout(function () {
+                    var sendRequest=requestHandler.postRequest("admin/searchFoodnamebyAdmin/",{"foodname":modelValue}).then(function(response){
+                        return response.data.Response_status;
+                    });
+
+                    sendRequest.then(function(result){
+                        if (result=="0"){
+                            defer.resolve();
+                        }
+                        else{
+                            defer.reject();
+                        }
+                    });
+                    isNewFood = false;
+                }, 10);
+
+                return defer.promise;
+            }
+        }
+    };
+});

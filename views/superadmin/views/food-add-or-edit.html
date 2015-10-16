@@ -9,14 +9,15 @@
                 <a href="#food" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back to Food List</a>
                 <div flash-message="2000" class="col-md-4 pull-right"></div>
                 <h4 class="classic-title"><span>{{title}}</span></h4>
-                <form name="foodForm">
+                <form name="foodForm" novalidate>
                 <div class="col-md-9 no-padding">
                     <h5>Food Name :</h5>
-                    <input class="form-control" name="foodname" maxlength="100" ng-pattern="/^ *([a-zA-Z]+ ?)+ *$/" ng-model="foodDetails.foodname" required/>
+                    <input class="form-control" name="foodname" maxlength="100"  ng-pattern="/^ *([a-zA-Z]+ ?)+ *$/" ng-model="foodDetails.foodname" required food-name-exists/>
                     <span ng-show="foodForm.foodname.$dirty&&foodForm.foodname.$invalid">
                                 <span class="error-message" ng-show="foodForm.foodname.$error.required"><span>Required.</span></span>
                              <span class="error-message" ng-show="foodForm.foodname.$error.pattern"><span>Enter&nbsp;Valid&nbsp;name.</span></span>
-                         </span>
+                              <span class="error-message" ng-show="foodForm.foodname.$error.foodNameExists"><span>Food&nbsp;Name&nbsp;Already&nbsp;Exist.</span></span>
+                    </span>
                     <br/>
                     <h5>Categories :</h5>
                     <ui-select multiple name="categoryid" ng-model="foodDetails.categoryid" theme="select2" ng-disabled="disabled" class="form-control" ui-select-required>
@@ -86,7 +87,6 @@
                             <label class="col-md-2" for="{{foodMeasure.measureid}}">{{foodMeasure.measurename}}</label>
                         </span>
                     </div>
-
                     <div class="col-md-12 no-padding margin-top-10">
                         <table class="table table-bordered">
                             <thead>
@@ -96,41 +96,49 @@
                                 <th class="col-md-10 text-center">Minerals</th>
                             </tr>
                             </thead>
-                            <tbody ng-repeat="measureDetail in foodDetails.measureid">
-                            <tr>
+                            <tbody>
+                            <tr  ng-class="animate-repeat" ng-repeat="measureDetail in foodDetails.measureid" ng-form="mineralForm">
                                 <td>{{measureDetail.measurename}}</td>
-                                <td class="input_mineral"><input type="text" ng-model="measureDetail.value"/></td>
+                                <td class="input_mineral">
+                                    <input type="text" name="measureValue" ng-model="measureDetail.value" required/>
+                                     <span ng-show="mineralForm.measureValue.$dirty&&mineralForm.measureValue.$invalid">
+                                         <span class="error-message" ng-show="mineralForm.measureValue.$error.required"><span>Required.</span></span>
+                                     </span>
+                                </td>
                                 <td class="line input_mineral">
                                     <div class="col-md-3 no-padding">
                                         <div class="col-md-7 no-padding">
-                                            <p>Calories</p>
+                                            <p>Calories<span class="text-red">*</span><span ng-show="mineralForm.calories.$dirty&&mineralForm.calories.$invalid"><span class="pull-right text-red">Required.</span></span></p>
                                         </div>
                                         <div class="col-md-5">
-                                            <input type="text" ng-model="measureDetail.calories"/>
+                                            <input type="text" name="calories" ng-model="measureDetail.calories" required/>
                                         </div>
                                         <div class="col-md-7 no-padding">
-                                            <p>Fat</p>
+                                            <p>Fat<span class="text-red">*</span><span ng-show="mineralForm.fat.$dirty&&mineralForm.fat.$invalid"><span class="pull-right text-red">Required.</span></span></p>
                                         </div>
                                         <div class="col-md-5">
-                                            <input type="text" ng-model="measureDetail.fat"/>
+                                            <input type="text" name="fat" ng-model="measureDetail.fat" required/>
                                         </div>
                                         <div class="col-md-7 no-padding">
-                                            <p>Protein</p>
+                                            <p>Protein<span class="text-red">*</span><span ng-show="mineralForm.protein.$dirty&&mineralForm.protein.$invalid"><span class="pull-right text-red">Required.</span></span></p>
                                         </div>
                                         <div class="col-md-5">
-                                            <input type="text" ng-model="measureDetail.protein"/>
+                                            <input type="text" name="protein" ng-model="measureDetail.protein" required/>
                                         </div>
                                         <div class="col-md-7 no-padding">
-                                            <p>Carbo</p>
+                                            <p>Carbo<span class="text-red">*</span><span ng-show="mineralForm.carbo.$dirty&&mineralForm.carbo.$invalid"><span class="pull-right text-red">Required.</span></span></p>
                                         </div>
                                         <div class="col-md-5">
-                                            <input type="text" ng-model="measureDetail.carbo"/>
+                                            <input type="text" name="carbo" ng-model="measureDetail.carbo" required/>
                                         </div>
                                         <div class="col-md-7 no-padding">
-                                            <p>Fiber</p>
+                                            <p>Fiber<span class="text-red">*</span><span ng-show="mineralForm.fiber.$dirty&&mineralForm.fiber.$invalid"><span class="pull-right text-red">Required.</span></span></p>
                                         </div>
                                         <div class="col-md-5">
-                                            <input type="text" ng-model="measureDetail.fibre"/>
+                                            <input type="text" name="fibre" ng-model="measureDetail.fibre" required/>
+                                             <span ng-show="mineralForm.fibre.$dirty&&mineralForm.fibre.$invalid">
+                                          <span class="error-message" ng-show="mineralForm.fibre.$error.required"><span>Required.</span></span>
+                                        </span>
                                         </div>
                                         <div class="col-md-7 no-padding">
                                             <p>Calcium</p>
@@ -261,13 +269,14 @@
                                     </div>
                                 </td>
                             </tr>
+                            <tr ng-show="foodDetails.measureid.length==0"><td colspan="3"><center>No Measure Selected !!!</center></td></tr>
                             </tbody>
                         </table>
                     </div>
-                    <div class="col-md-12 margin-top-10 text-center">
-                        <a class="register_button" href="" ng-click="doUpdateFoodDetails()" ng-hide="isNew">Save Food Details</a>
-                        <a class="register_button" href="" ng-click="doAddFoodDetails()" ng-show="isNew">Save Food Details</a>
-                        <a class="cancel_button" href="#food">Cancel</a>
+                    <div class="col-md-12 margin-top-10 text-center">{{foodForm.$invalid}}
+                        <a class="btn register_button" href="" ng-click="doUpdateFoodDetails()" ng-disabled="foodForm.$invalid" ng-hide="isNew">Update Food Details</a>
+                        <a class="btn register_button" href="" ng-click="doAddFoodDetails()" ng-disabled="foodForm.$invalid" ng-show="isNew">Save Food Details</a>
+                        <a class="btn cancel_button" href="#food">Cancel</a>
                     </div>
                 </div>
                 </form>
