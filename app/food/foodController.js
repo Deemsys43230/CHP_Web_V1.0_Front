@@ -286,10 +286,31 @@ adminApp.controller("FoodDetailsEditController",function($scope,requestHandler,F
 
 
     //Set measure set
-    $scope.doAddNewMeasureMinerals=function(id,name){
+    $scope.measureCount = 0;
+    $scope.doAddNewMeasureMinerals=function(id,name,foodMeasure){
         $scope.foodDetails.measureid=FoodService.doAddMeasureMinerals(id,name,$scope.foodDetails.measureid);
-    }
 
+
+            if(foodMeasure.checked){
+                $scope.measureCount--;//opposite
+            }else{
+                $scope.measureCount++;
+            }
+
+
+    }
+    $scope.sessionCount = 0;
+    $scope.doCheckSession=function(session){
+            alert("hi");
+        if(session.checked) {
+            alert("if");
+            $scope.sessionCount--;
+        }else{
+            alert("else")
+            $scope.sessionCount++;
+        }
+
+    }
     //Get Categories
     var foodCategoryPromise=FoodService.doGetCategories();
     foodCategoryPromise.then(function(result){
