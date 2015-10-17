@@ -66,12 +66,14 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../plugin/search/tipuedrop_content.js',
                                 '../../plugin/search/tipuedrop.css',
                                 '../../plugin/search/tipuedrop.js',
-                                '../../plugin/popup/style.css',
-                                '../../plugin/popup/jquery.leanModal.min.js'
-                            ]
-                        })
-                    }
-                }
+ 								'../../css/augucomplete.css',
+                                'http://ghiden.github.io/angucomplete-alt/js/libs/angucomplete-alt.js',
+                                '../../app/userDashboard/userDashboardController.js'
+                           
+
+]
+ },
+                controller:'UserDashboardController'
             }).
             when('/register', {
                 templateUrl: 'views/register.html',
