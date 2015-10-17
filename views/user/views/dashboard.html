@@ -96,11 +96,11 @@
                         <div class="tab-pane in active" id="tab-1">
 
                             <ul class="session">
-                                <li class="active">Break Fast</li>
-                                <li>Brunch</li>
-                                <li>Lunch</li>
-                                <li>Snacks</li>
-                                <li>Dinner</li>
+                                <li class="active" ng-click="getBreakfast()">Break Fast</li>
+                                <li ng-click="getBrunch()">Brunch</li>
+                                <li ng-click="getLunch()">Lunch</li>
+                                <li ng-click="getSnacks()">Snacks</li>
+                                <li ng-click="getDinner()">Dinner</li>
                             </ul>
 
                             <div class="tab_container">
@@ -127,14 +127,14 @@
                                         </div>
                                     </div>
                                     <div class="content-1">
-                                        <div angucomplete-alt id="ex10" placeholder="Search Food" pause="100" selected-object="foodSelected" local-data="foodSearchResult" search-fields="foodname" title-field="foodname" image-field="foodImagePath" minlength="1" input-class="form-control form-control-small" match-class="highlight" input-changed="inputChanged" clear-selected="true" >
+                                        <div angucomplete-alt id="ex10" placeholder="Search Food" pause="100" selected-object="foodSelected" local-data="foodSearchResult" search-fields="foodname" title-field="foodname" image-field="foodImagePath" minlength="1" input-class="weight_input full-width" match-class="highlight" input-changed="inputChanged" clear-selected="true" >
                                         </div>
 
                                     </div>
                                     <div class="food_scrollbar style">
                                         <ul class="food">
                                             <li class="row" ng-repeat="foodDiaryData in userFoodDiaryData">
-                                                <div class="col-md-2 no-padding"><img ng-src="{{foodDiaryData.foodImagePath}}"></div>
+                                                <div class="col-md-2 no-padding"><img ng-src="{{foodDiaryData.foodImagePath+'200x200.jpg'}}"></div>
                                                 <div class="col-md-10 no-padding">
                                                     <span class="pull-right food_close">x</span>
                                                     <p class="food_name">{{foodDiaryData.foodname}}</p>
