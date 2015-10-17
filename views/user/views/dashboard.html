@@ -127,79 +127,26 @@
                                         </div>
                                     </div>
                                     <div class="content-1">
-                                        <div angucomplete-alt id="ex10" placeholder="Search Food Name..." pause="100" selected-object="foodSelected" local-data="foodSearchResult" search-fields="foodname" title-field="foodname" image-field="foodImagePath" minlength="1" input-class="weight_input full-width" match-class="highlight" input-changed="inputChanged" clear-selected="true" >
+                                        <div angucomplete-alt id="ex10" placeholder="Search Food" pause="100" selected-object="foodSelected" local-data="foodSearchResult" search-fields="foodname" title-field="foodname" image-field="foodImagePath" minlength="1" input-class="form-control form-control-small" match-class="highlight" input-changed="inputChanged" clear-selected="true" >
                                         </div>
+
                                     </div>
                                     <div class="food_scrollbar style">
                                         <ul class="food">
-                                            <li class="row">
-                                                <div class="col-md-2 no-padding"><img src="../../images/food-1.jpg"></div>
+                                            <li class="row" ng-repeat="foodDiaryData in userFoodDiaryData">
+                                                <div class="col-md-2 no-padding"><img ng-src="{{foodDiaryData.foodImagePath}}"></div>
                                                 <div class="col-md-10 no-padding">
                                                     <span class="pull-right food_close">x</span>
-                                                    <p class="food_name">Plain Dosa</p>
+                                                    <p class="food_name">{{foodDiaryData.foodname}}</p>
                                                     <p>
-                                                        <span class="pull-right text-green"><i class="fa fa-angle-up"></i> 135 calories</span>
+                                                        <span class="pull-right text-green"><i class="fa fa-angle-up"></i>&nbsp;{{foodDiaryData.measureid.calories}}  calories</span>
                                                     <div class="select_food">
-                                                        <select>
-                                                            <option>1 piece</option>
-                                                            <option>2 pieces</option>
-                                                            <option>3 pieces</option>
-                                                        </select>
+                                                        {{foodDiaryData.measureid.servings}}&nbsp;{{foodDiaryData.measureid.measurename}}
                                                     </div>
                                                     </p>
                                                 </div>
                                             </li>
-                                            <li class="row">
-                                                <div class="col-md-2 no-padding"><img src="../../images/food-2.jpg"></div>
-                                                <div class="col-md-10 no-padding">
-                                                    <span class="pull-right food_close">x</span>
-                                                    <p class="food_name">Briyani</p>
-                                                    <p>
-                                                        <span class="pull-right text-green"><i class="fa fa-angle-up"></i> 135 calories</span>
-                                                    <div class="select_food">
-                                                        <select>
-                                                            <option>1 piece</option>
-                                                            <option>2 pieces</option>
-                                                            <option>3 pieces</option>
-                                                        </select>
-                                                    </div>
-                                                    </p>
-                                                </div>
-                                            </li>
-                                            <li class="row">
-                                                <div class="col-md-2 no-padding"><img src="../../images/food-1.jpg"></div>
-                                                <div class="col-md-10 no-padding">
-                                                    <span class="pull-right food_close">x</span>
-                                                    <p class="food_name">Plain Dosa</p>
-                                                    <p>
-                                                        <span class="pull-right text-green"><i class="fa fa-angle-up"></i> 135 calories</span>
-                                                    <div class="select_food">
-                                                        <select>
-                                                            <option>1 piece</option>
-                                                            <option>2 pieces</option>
-                                                            <option>3 pieces</option>
-                                                        </select>
-                                                    </div>
-                                                    </p>
-                                                </div>
-                                            </li>
-                                            <li class="row">
-                                                <div class="col-md-2 no-padding"><img src="../../images//food-1.jpg"></div>
-                                                <div class="col-md-10 no-padding">
-                                                    <span class="pull-right food_close">x</span>
-                                                    <p class="food_name">Plain Dosa</p>
-                                                    <p>
-                                                        <span class="pull-right text-green"><i class="fa fa-angle-up"></i> 135 calories</span>
-                                                    <div class="select_food">
-                                                        <select>
-                                                            <option>1 piece</option>
-                                                            <option>2 pieces</option>
-                                                            <option>3 pieces</option>
-                                                        </select>
-                                                    </div>
-                                                    </p>
-                                                </div>
-                                            </li>
+
                                         </ul>
                                     </div>
                                 </div><!-- #tab1 -->
@@ -555,18 +502,7 @@
 </div>
 
 <script type="text/javascript" src="../../js/script.js"></script>
-
-<script>
-    var picker = new Pikaday({
-        format:'MM/DD/YYYY',
-        field: document.getElementById('datepicker'),
-        firstDay: 1,
-        minDate: new Date(1940, 0, 1),
-        maxDate: new Date(new Date().getFullYear()-7, 12, 31),
-        yearRange: [1940, new Date().getFullYear()-7],
-        defaultDate: new Date(new Date().getFullYear()-25,0,1)
-    });
-</script>
+<script type="text/javascript" src="../../plugin/date-picker/moment.js"></script>
 
 <script type="text/javascript">
     $("#modal_trigger_food").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
@@ -688,6 +624,7 @@
     });
 </script>
 
+
 <script>
 
     // Code to convert select to UL
@@ -725,6 +662,19 @@
     // On click out hide the UL
     $(document).on('click',function(){
         $('.select_food ul').fadeOut();
+    });
+
+</script>
+
+<script>
+    var picker = new Pikaday({
+        format:'MM/DD/YYYY',
+        field: document.getElementById('datepicker'),
+        firstDay: 1,
+        minDate: new Date(1940, 0, 1),
+        maxDate: new Date(new Date().getFullYear()-7, 12, 31),
+        yearRange: [1940, new Date().getFullYear()-7],
+        defaultDate: new Date(new Date().getFullYear()-25,0,1)
     });
 
 </script>
