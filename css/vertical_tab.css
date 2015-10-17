@@ -190,9 +190,9 @@ html[xmlns] .clearfix { display: block; }
 
 .outerline{
     width: 540px;
-    height: 445px;
-    padding: 15px 0px;
-    margin: 0px 15px 15px 15px;
+    height: 450px;
+    padding: 10px 0px;
+    margin: 0px 10px 10px 15px;
     -webkit-box-shadow: inset 0px 0px 3px rgba(0,0,0,0.3);
     -moz-box-shadow: inset 0px 0px 3px rgba(0,0,0,0.3);
     box-shadow: inset 0px 0px 3px rgba(0,0,0,0.3);
