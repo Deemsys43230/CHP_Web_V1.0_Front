@@ -1,15 +1,4 @@
-.form-control {
-    outline: 0;
-    border-color: #ECECEC;
-    border-style: solid;
-    border-width: 1px;
-    width: 95%;
-    background-color: #ffffff;
-    padding: 6px;
-    border-radius: 2px;
-    margin-bottom: 5px;
-    font-size: 14px;
-}
+
 
 .angucomplete-holder {
     position: relative;
@@ -20,15 +9,11 @@
     border-width: 1px;
     border-style: solid;
     border-radius: 2px;
-    width: 400px;
+    width: 100%;
     padding: 6px;
     cursor: pointer;
     z-index: 9999;
     position: absolute;
-    /*top: 32px;
-    left: 0px;
-    */
-    margin-top: -6px;
     background-color: #ffffff;
 }
 
@@ -37,36 +22,32 @@
     font-size: 14px;
 }
 
-.angucomplete-description {
-    font-size: 14px;
-}
-
 .angucomplete-row {
-    padding: 5px;
-    color: #000000;
+    height: 45px;
+    padding: 10px 5px 5px 5px;
+    color: #666;
     margin-bottom: 4px;
-
+    font-size: 16px;
 }
 
 .angucomplete-selected-row, .angucomplete-row:hover {
-    background-color: green;
-    color: #ffffff;
+    background-color: #eee;
+    color: #333;
 }
 
 .angucomplete-image-holder {
-    padding-top: 2px;
     float: left;
-    height: 34px;
-    width: 34px;
+    height: 35px;
+    width: 35px;
+    margin-top: -5px;
     margin-right: 10px;
     margin-left: 5px;
 }
 
 .angucomplete-image {
-    height: 34px;
-    width: 34px;
+    height: 35px;
+    width: 35px;
     border-radius: 50%;
     border-color: #ececec;
     border-style: solid;
-    border-width: 1px;
 }
