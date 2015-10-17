@@ -63,6 +63,8 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../plugin/date-picker/moment.js',
                                 '../../plugin/date-picker/pikaday.css',
                                 '../../plugin/date-picker/pikaday.js',
+                                '../../plugin/popup/style.css',
+                                '../../plugin/popup/jquery.leanModal.min.js',
  								'../../css/augucomplete.css',
                                 'http://ghiden.github.io/angucomplete-alt/js/libs/angucomplete-alt.js',
                                 '../../app/userDashboard/userDashboardController.js'
