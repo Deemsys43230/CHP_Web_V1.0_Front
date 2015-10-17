@@ -2,7 +2,7 @@
 
 #content {
     display: block;
-    margin: 0px 0px 0px 240px;
+    margin: 0px 0px 0px 235px;
     position: absolute;
     width: 570px;
     height: 480px;
@@ -11,7 +11,7 @@
     -webkit-box-shadow: 1px 1px 5px rgba(0,0,0,0.3);
     -moz-box-shadow: 1px 1px 5px rgba(0,0,0,0.3);
     box-shadow: 1px 1px 5px rgba(0,0,0,0.3);
-    padding-top: 20px;
+    padding-top: 15px;
 }
 
 /* side navigation */

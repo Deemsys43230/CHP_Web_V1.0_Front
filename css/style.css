@@ -311,13 +311,123 @@ input[type="submit"] {
 	color: #c4c4c4;
 }
 
+.full-width{
+    width: 100% !important;
+}
+
 #container {
     background-color: transparent;
 }
 
+@media (min-width: 1200px & max-width: 1250px) {
+    .container {
+        width: 1100px !important;
+    }
+    #w{
+        width: 1080px !important;
+    }
+
+    #content{
+        width: 560px !important;
+    }
+
+    .tab-content{
+        width: 530px !important;
+    }
+
+    .content-1 {
+        width: 335px !important;
+    }
+
+    .food_scrollbar
+    {
+        width: 345px !important;
+    }
+}
+
+@media (min-width: 1250px) {
+    .container {
+        width: 1170px;
+    }
+    #w{
+        width: 1150px !important;
+    }
+
+    #content{
+        width: 630px !important;
+    }
+
+    .tab-content{
+        width: 600px !important;
+    }
+
+    .content-1 {
+        width: 405px !important;
+    }
+
+    .food_scrollbar
+    {
+        width: 415px !important;
+    }
+}
+
+@media (min-width: 1300px) {
+    .container {
+        width: 1220px;
+    }
+
+    #w{
+        width: 1190px !important;
+    }
+
+    #content{
+        width: 670px !important;
+    }
+
+    .tab-content{
+        width: 640px !important;
+    }
+
+    .content-1 {
+        width: 445px !important;
+    }
+
+    .food_scrollbar
+    {
+        width: 455px !important;
+    }
+}
+
+@media (min-width: 1350px) {
+    .container {
+        width: 1250px;
+    }
+
+    #w{
+        width: 1220px !important;
+    }
+
+    #content{
+        width: 700px !important;
+    }
+
+    .tab-content{
+        width: 670px !important;
+    }
+
+    .content-1 {
+        width: 475px !important;
+    }
+
+    .food_scrollbar
+    {
+        width: 485px !important;
+    }
+}
+
 .boxed-page {
   position: relative;
-  width: 1220px;
+  width: 1300px;
   margin: 0 auto;
   background-color: #fff;
   -webkit-box-shadow:0 0 10px rgba(0,0,0,0.3);
@@ -327,7 +437,7 @@ input[type="submit"] {
 }
 
 .boxed-page header {
-  width: 1220px;
+  width: 1300px;
 }
 
 #loader {
@@ -1489,6 +1599,10 @@ input[type="submit"] {
     padding-top: 5px !important;
 }
 
+.height-310{
+    height: 310px!important;
+}
+
 .height-240{
 	height: 240px!important;
 }
@@ -2365,7 +2479,7 @@ ul.icons-list li i {
 .tab-content {
 	margin: 10px 0px;
     width: 540px;
-    height: 350px;
+    height: 400px;
     -webkit-box-shadow: inset 0px 0px 3px rgba(0,0,0,0.3);
     -moz-box-shadow: inset 0px 0px 3px rgba(0,0,0,0.3);
     box-shadow: inset 0px 0px 3px rgba(0,0,0,0.3);
@@ -5814,6 +5928,14 @@ ul.footer-nav li a:hover {
 	color: #fff;
 }
 
+.switcher-box .open-switcher:focus{
+    background: url(../images/icons/switcher.png) #444 center no-repeat !important;
+    -webkit-box-shadow: 0 0 4px rgba(0,0,0,0.2);
+    -moz-box-shadow: 0 0 4px rgba(0,0,0,0.2);
+    box-shadow: 0 0 4px rgba(0,0,0,0.2);
+    color: #fff;
+}
+
 .switcher-box .open-switcher i {
 	text-align: center;
 	padding-top: 7px;
@@ -6655,8 +6777,8 @@ ul.tabs li.active{
 }
 
 .content-1 {
-    padding: 10px;
-    margin: 10px 15px 15px 15px;
+    padding: 7px;
+    margin: 10px 15px 10px 15px;
     width: 335px;
     background: #FFFFFF;
     -webkit-box-shadow: 0px 0px 3px rgba(0,0,0,0.3);
@@ -6677,9 +6799,10 @@ ul.tabs li.active{
 .content-2 {
     position: absolute;
     padding: 10px !important;
-    margin: 0px 0px 0px 365px;
+    top:60px;
+    right:-267px;
     width: 160px;
-    height: 275px;
+    height: 375px;
     background: #FFFFFF;
     -webkit-box-shadow: 0px 0px 3px rgba(0,0,0,0.3);
     -moz-box-shadow: 0px 0px 3px rgba(0,0,0,0.3);
@@ -6689,9 +6812,10 @@ ul.tabs li.active{
 .content-3 {
     position: absolute;
     padding: 10px !important;
-    margin: 10px 0px 0px 365px;
+    top:60px;
+    right:-267px;
     width: 160px;
-    height: 317px;
+    height: 375px;
     background: #FFFFFF;
     -webkit-box-shadow: 0px 0px 3px rgba(0,0,0,0.3);
     -moz-box-shadow: 0px 0px 3px rgba(0,0,0,0.3);
@@ -6704,7 +6828,7 @@ ul.tabs li.active{
 .food_scrollbar
 {
     float: left;
-    height: 200px;
+    height: 268px;
     width: 350px;
     background: none;
     overflow-y: scroll;
@@ -7555,9 +7679,10 @@ a:hover, a:visited, a:link, a:active
 
 /*main page*/
 
+
 #w {
 	display: block;
-	width: 1100px;
+	width: 1000px;
 	margin: 0 auto;
 	background: none;
 }
