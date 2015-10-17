@@ -30,34 +30,18 @@ userApp.controller('UserDashboardController',function($scope,requestHandler,Flas
 
     $scope.getBreakfast=function(){
         $scope.userFoodDiaryData=$scope.userFoodDiaryDataAll.BreakFast;
-        $.each($scope.userFoodDiaryData, function(index,value){
-            value.foodImagePath=value.foodImagePath.substring(value.foodImagePath.indexOf("/") + 14,value.foodImagePath.length);
-        });
     };
-
 
     $scope.getBrunch=function(){
         $scope.userFoodDiaryData=$scope.userFoodDiaryDataAll.Brunch;
-        $.each($scope.userFoodDiaryData, function(index,value){
-            value.foodImagePath=value.foodImagePath.substring(value.foodImagePath.indexOf("/") + 14,value.foodImagePath.length);
-        });
-
     };
 
     $scope.getLunch=function(){
         $scope.userFoodDiaryData=$scope.userFoodDiaryDataAll.Lunch;
-        $.each($scope.userFoodDiaryData, function(index,value){
-            value.foodImagePath=value.foodImagePath.substring(value.foodImagePath.indexOf("/") + 14,value.foodImagePath.length);
-        });
-
     };
 
     $scope.getSnacks=function(){
         $scope.userFoodDiaryData=$scope.userFoodDiaryDataAll.Evening;
-        $.each($scope.userFoodDiaryData, function(index,value){
-            value.foodImagePath=value.foodImagePath.substring(value.foodImagePath.indexOf("/") + 14,value.foodImagePath.length);
-        });
-
     };
 
     $scope.getDinner=function(){
