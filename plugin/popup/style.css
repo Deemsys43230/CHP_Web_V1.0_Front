@@ -136,6 +136,7 @@ form p{
 .common_model input[type="text"], .common_model input[type="email"], .common_model input[type="password"] {display: block; width:100%; padding: 10px; border:1px solid #DDD; color:#666;}
 .common_model input[type="checkbox"] {float:left; margin-right:5px;}
 .common_model input[type="checkbox"]+label {float:left;}
+.common_model textarea[type="text"] {display: block; width:100%; padding: 10px; border:1px solid #DDD; color:#666;outline: none;}
 
 .common_model.input_mineral input[type="text"], .common_model.input_mineral input[type="email"], .common_model.input_mineral input[type="password"] {
     display: block;

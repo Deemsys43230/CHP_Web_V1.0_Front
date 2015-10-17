@@ -65,7 +65,9 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../plugin/date-picker/pikaday.js',
                                 '../../plugin/search/tipuedrop_content.js',
                                 '../../plugin/search/tipuedrop.css',
-                                '../../plugin/search/tipuedrop.js'
+                                '../../plugin/search/tipuedrop.js',
+                                '../../plugin/popup/style.css',
+                                '../../plugin/popup/jquery.leanModal.min.js'
                             ]
                         })
                     }
