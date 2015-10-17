@@ -71,8 +71,8 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../app/userDashboard/userDashboardController.js'
                            
 
-]
- },
+                                ]
+                        })}},
                 controller:'UserDashboardController'
             }).
             when('/register', {
