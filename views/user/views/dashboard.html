@@ -96,23 +96,22 @@
                         <div class="tab-pane in active" id="tab-1">
 
                             <div class="session">
-                                <input type="radio" id="breakFast" name="sex" value="breakFast" checked/>
-                                <label for="breakFast"  ng-click="getBreakfast()">Break Fast</label>
-                                <input type="radio" id="brunch" name="sex" value="brunch"/>
-                                <label for="brunch" ng-click="getBrunch()">Brunch</label>
-                                <input type="radio" id="lunch" name="sex" value="lunch"/>
-                                <label for="lunch" ng-click="getLunch()">Lunch</label>
-                                <input type="radio" id="snacks" name="sex" value="snacks"/>
-                                <label for="snacks" ng-click="getSnacks()">Snacks</label>
-                                <input type="radio" id="dinner" name="sex" value="dinner"/>
-                                <label for="dinner" ng-click="getDinner()">Dinner</label>
+                                <input type="radio" id="breakFast" value="1"  ng-click="loadSessionDetails()" ng-model="userFood.sessionid"/>
+                                <label for="breakFast">Break Fast</label>
+                                <input type="radio" id="brunch" ng-click="loadSessionDetails()" value="2" ng-model="userFood.sessionid"/>
+                                <label for="brunch" >Brunch</label>
+                                <input type="radio"  ng-click="loadSessionDetails()" id="lunch" value="3" ng-model="userFood.sessionid"/>
+                                <label for="lunch">Lunch</label>
+                                <input type="radio"  ng-click="loadSessionDetails()" id="snacks" value="4" ng-model="userFood.sessionid"/>
+                                <label for="snacks">Snacks</label>
+                                <input type="radio" ng-click="loadSessionDetails()" id="dinner" value="5" ng-model="userFood.sessionid"/>
+                                <label for="dinner">Dinner</label>
                             </div>
 
                             <div class="tab_container">
 
                                 <div class="tab_content">
                                     <div class="content-2">
-                                        <a class="suggest_button" ng-click="foodSelected(13)">Food</a>
                                         <a id="modal_trigger_food" href="#modal-food" onclick="return false;" class="suggest_button">Suggest Food</a>
                                         <div class="food_option">
                                             <span>idle</span>
@@ -142,7 +141,7 @@
                                             <li class="row" ng-repeat="foodDiaryData in userFoodDiaryData">
                                                 <div class="col-md-2 no-padding"><img ng-src="{{foodDiaryData.foodImagePath+'200x200.jpg'}}"></div>
                                                 <div class="col-md-10 no-padding">
-                                                    <a href="" class="pull-right food_close" title="Delete Food" ng-click="deleteUserFood(foodDiaryData.userfoodid)">x</a>
+                                                    <a href="" class="pull-right food_close" title="Delete Food" ng-click="doDeleteUserFood(foodDiaryData.userfoodid)">x</a>
                                                     <p class="food_name">{{foodDiaryData.foodname}}</p>
                                                     <p>
                                                         <span class="pull-right text-green"><i class="fa fa-angle-up"></i>&nbsp;{{foodDiaryData.measureid.calories}}  calories</span>

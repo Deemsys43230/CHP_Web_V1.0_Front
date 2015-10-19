@@ -1,6 +1,6 @@
-var userApp= angular.module('userApp', ['ngRoute','oc.lazyLoad','ngCookies','requestModule','flash','ngAnimate','ngTouch', 'angucomplete-alt','ngPercentDisplay']);
+var userApp= angular.module('userApp', ['ngRoute','oc.lazyLoad','ngCookies','requestModule','flash','ngAnimate','ngTouch', 'angucomplete-alt','ngPercentDisplay','userDashboardServiceModule']);
 
-userApp.controller('UserDashboardController',function($scope,requestHandler,Flash) {
+userApp.controller('UserDashboardController',function($scope,requestHandler,Flash,UserDashboardService) {
     $scope.foodSearchResult = [];
     $scope.userFood={};
     $scope.userFood.sessionid=1;
@@ -26,25 +26,15 @@ userApp.controller('UserDashboardController',function($scope,requestHandler,Flas
         });
     };
 
-    $scope.doGetSelectedFoodDetails= function (foodid) {
-        requestHandler.postRequest("user/getFoodDetailByUser/",{"foodid":foodid}).then(function (response) {
-            $scope.userSelectedFoodDetails=response.data.Food_Data;
+    //
 
-            $.each($scope.userSelectedFoodDetails, function(index,value){
-                value.foodImagePath=value.foodImagePath+"200x200.jpg";
-            });
-
-            console.log($scope.userSelectedFoodDetails);
-
-        }, function () {
-            errorMessage(Flash, "Please try again later!")
-        });
-    };
-
-
+    //On Select search function
     $scope.foodSelected=function(selected){
-        $scope.doGetSelectedFoodDetails(selected.description.foodid);
-        $scope.doUserAddFood();
+        var getFoodDetailPromise=UserDashboardService.doGetSelectedFoodDetails(selected.description.foodid);
+        getFoodDetailPromise.then(function(result){
+            $scope.userSelectedFoodDetails=result;
+            $scope.doUserAddFood();
+        });
     };
 
 
@@ -57,96 +47,68 @@ userApp.controller('UserDashboardController',function($scope,requestHandler,Flas
 
     };
 
-
+    //Insert User Food
     $scope.doInsertUserFood=function(){
-
+        //Set values according to the api calls
         $scope.userFood.foodid=$scope.userSelectedFoodDetails.foodid;
         $scope.userFood.measureid=$scope.userFood.measure.measureid;
         $scope.userFood.addeddate="17/10/2015";
-
         $scope.userFood.servings=parseInt($scope.userFood.servings);
 
-        requestHandler.postRequest("user/usersaveFoodtoDiary/",$scope.userFood).then(function (response) {
-            $scope.getFoodDiary();
-        }, function () {
-            errorMessage(Flash, "Please try again later!");
+        var foodInsertPromise=UserDashboardService.doInsertUserFood($scope.userFood);
+        foodInsertPromise.then(function(){
+            $scope.loadFoodDiary();
+        });
+
+
+
+    };
+
+    //Delete User Food
+    $scope.doDeleteUserFood= function (userFoodId) {
+        var foodDeletePromise=UserDashboardService.doDeleteUserFood(userFoodId);
+        foodDeletePromise.then(function(){
+            $scope.loadFoodDiary();
         });
     };
 
-    $scope.deleteUserFood= function (userFoodId) {
-        alert(userFoodId);
-        requestHandler.postRequest("user/deleteUserFood/",{"userfoodid":userFoodId}).then(function (response) {
-            $scope.getFoodDiary();
-        }, function () {
-            errorMessage(Flash, "Please try again later!");
+    //On load Food Diary
+    $scope.loadFoodDiary=function(){
+        var userFoodDiaryDetailPromise=UserDashboardService.getFoodDiary("17/10/2015");
+        userFoodDiaryDetailPromise.then(function(result){
+            $scope.userFoodDiaryDataAll=result;
+            $scope.loadSessionDetails();
         });
     };
 
-    $scope.getFoodDiary=function(){
 
-        requestHandler.postRequest("user/getFoodbyDate/",{"addeddate":"17/10/2015"}).then(function (response) {
-            $scope.userFoodDiaryDataAll=response.data.MyFoodData;
-
-            switch($scope.userFood.sessionid){
-                case 1:$scope.getBreakfast();
-                    break;
-                case 2:$scope.getBrunch();
-                    break;
-                case 3:$scope.getLunch();
-                    break;
-                case 4:$scope.getSnacks();
-                    break;
-                case 5:$scope.getDinner();
-                    break;
-                default : break;
-
-            }
-
-
-        }, function () {
-            errorMessage(Flash, "Please try again later!")
-        });
+    //Load Details Based on session
+    $scope.loadSessionDetails=function(){
+        switch(parseInt($scope.userFood.sessionid)){
+            case 1:$scope.userFoodDiaryData=$scope.userFoodDiaryDataAll.BreakFast;
+                break;
+            case 2:$scope.userFoodDiaryData=$scope.userFoodDiaryDataAll.Brunch;
+                break;
+            case 3:$scope.userFoodDiaryData=$scope.userFoodDiaryDataAll.Lunch;
+                break;
+            case 4:$scope.userFoodDiaryData=$scope.userFoodDiaryDataAll.Evening;
+                break;
+            case 5: $scope.userFoodDiaryData=$scope.userFoodDiaryDataAll.Dinner;
+                break;
+            default :break;
+        }
     };
 
-    $scope.getBreakfast=function(){
-        $scope.userFood.sessionid=1;
-        $scope.userFoodDiaryData=$scope.userFoodDiaryDataAll.BreakFast;
+    //Search Function
+     $scope.inputChanged = function(searchStr) {
+         var userFoodDiaryDetailPromise=UserDashboardService.searchFood(searchStr);
+         userFoodDiaryDetailPromise.then(function(result){
+             $scope.foodSearchResult=result;
+         });
     };
 
-    $scope.getBrunch=function(){
-        $scope.userFood.sessionid=2;
-        $scope.userFoodDiaryData=$scope.userFoodDiaryDataAll.Brunch;
-    };
 
-    $scope.getLunch=function(){
-        $scope.userFood.sessionid=3;
-        $scope.userFoodDiaryData=$scope.userFoodDiaryDataAll.Lunch;
-    };
-
-    $scope.getSnacks=function(){
-        $scope.userFood.sessionid=4;
-        $scope.userFoodDiaryData=$scope.userFoodDiaryDataAll.Evening;
-    };
-
-    $scope.getDinner=function(){
-        $scope.userFood.sessionid=5;
-        $scope.userFoodDiaryData=$scope.userFoodDiaryDataAll.Dinner;
-    };
-
-     $scope.inputChanged = function(str) {
-        requestHandler.postRequest("searchFoodListByUser/",{"foodname":str}).then(function (response) {
-           $scope.searchResponse=response.data.Food_Data;
-
-            $.each($scope.searchResponse, function(index,value){
-                value.foodImagePath=value.foodImagePath+"150x150.jpg";
-            });
-
-            $scope.foodSearchResult=$scope.searchResponse;
-        }, function () {
-            errorMessage(Flash, "Please try again later!")
-        });
-    };
-
-    $scope.getFoodDiary();
+    //Initialize
+    $scope.loadFoodDiary();
 
 });
