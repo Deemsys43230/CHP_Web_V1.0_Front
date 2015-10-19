@@ -95,13 +95,18 @@
                         <!-- Tab Content 1 -->
                         <div class="tab-pane in active" id="tab-1">
 
-                            <ul class="session">
-                                <li class="active" ng-click="getBreakfast()">Break Fast</li>
-                                <li ng-click="getBrunch()">Brunch</li>
-                                <li ng-click="getLunch()">Lunch</li>
-                                <li ng-click="getSnacks()">Snacks</li>
-                                <li ng-click="getDinner()">Dinner</li>
-                            </ul>
+                            <div class="session">
+                                <input type="radio" id="breakFast" name="sex" value="breakFast" checked/>
+                                <label for="breakFast"  ng-click="getBreakfast()">Break Fast</label>
+                                <input type="radio" id="brunch" name="sex" value="brunch"/>
+                                <label for="brunch" ng-click="getBrunch()">Brunch</label>
+                                <input type="radio" id="lunch" name="sex" value="lunch"/>
+                                <label for="lunch" ng-click="getLunch()">Lunch</label>
+                                <input type="radio" id="snacks" name="sex" value="snacks"/>
+                                <label for="snacks" ng-click="getSnacks()">Snacks</label>
+                                <input type="radio" id="dinner" name="sex" value="dinner"/>
+                                <label for="dinner" ng-click="getDinner()">Dinner</label>
+                            </div>
 
                             <div class="tab_container">
 
