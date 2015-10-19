@@ -502,31 +502,53 @@
 </div>
 
 <!-- User Add Food-->
-<div id="modal-add-food" class="popupContainer" style="display:none;">
-    <header class="popupHeader">
-        <span class="header_title">Add Food</span>
-        <span class="modal_close"><i class="fa fa-times"></i></span>
-    </header>
+<div id="modal-add-food" class="popupContainer-width" style="display:none;">
+    <div class="center-block">
+        <header class="popupHeader width-100">
+            <span class="header_title">Add Food</span>
+            <span class="modal_close"><i class="fa fa-times"></i></span>
+        </header>
 
-    <section class="popupBody">
-        <!-- Register Form -->
-        <div class="user_register">
-            <p>Exercise Name:</p>
-            <input type="text"/>
-            <p>Exercise Description:</p>
-            <textarea type="text" class="height-150"/></textarea>
-            <div class="action_btns margin-top-20">
-                <div class="one_half"><a href="#" class="btn btn_blue">Send Request</a></div>
-                <div class="one_half last modal_close"><a class="btn btn_red">Cancel</a></div>
+        <section class="popupBody">
+            <!-- Register Form -->
+            <div class="user_register">
+                <div class="row">
+                    <div class="col-md-8">
+                        <h5>Food Name</h5>
+                        <p class="margin-bottom-10">Measure Unit</p>
+                        <span  class="fh-checkbox">
+                            <input class="col-md-1" name="foodMeasureName" ng-required="measureRequired" id="measure" type="checkbox">
+                            <label class="col-md-5" for="measure">Measure</label>
+                            <input class="col-md-1" name="foodMeasureName" ng-required="measureRequired" id="m" type="checkbox">
+                            <label class="col-md-5" for="m">Measure</label>
+                            <input class="col-md-1" name="foodMeasureName" ng-required="measureRequired" id="e" type="checkbox">
+                            <label class="col-md-5" for="e">Measure</label>
+                        </span>
+                        <p class="col-md-12 no-padding">Value</p>
+                        <input type="text">
+                    </div>
+
+                    <div class="col-md-4">
+                        <h5>Calories Intake</h5>
+                        <div class="center-block">
+                            <div class="food-gain margin-top-10" data-percent="170"></div>
+                            <p>170 Cals</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="action_btns margin-top-20">
+                    <div class="one_half"><a href="#" class="btn btn_blue">Add Food</a></div>
+                    <div class="one_half last modal_close"><a class="btn btn_red">Cancel</a></div>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </div>
 </div>
 
 
 
 <script type="text/javascript" src="../../js/script.js"></script>
-<script type="text/javascript" src="../../plugin/date-picker/moment.js"></script>
 
 <script type="text/javascript">
     $("#modal_trigger_food").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
@@ -632,6 +654,19 @@
         fillColor: '#CCCC00',
         percentSize: '18px',
         percentWeight: '20px'
+    });
+</script>
+
+<script>
+    $('.food-gain').percentcircle({
+        animate : true,
+        diameter : 150,
+        guage: 3,
+        coverBg: '#fff',
+        bgColor: '#efefef',
+        fillColor: '#CCCC00',
+        percentSize: '1px',
+        percentWeight: '1px'
     });
 </script>
 

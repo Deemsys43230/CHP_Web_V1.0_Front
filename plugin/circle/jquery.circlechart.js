@@ -60,7 +60,7 @@
 						perc = Math.round($this.data('percent')), //get the percentage from the element
 						deg = perc * 3.6,
 						stop = options.animate ? 0 : deg,
-						$chart = $(template.replace('{{percentage}}',perc+'%'));
+						$chart = $(template.replace('{{percentage}}',perc));
 						//set all of the css properties forthe chart
 						$chart.css(styles.cirContainer).find('.ab').css(styles.cir).find('.cir').css(styles.cirCover).find('.perc').css(styles.percent);
 					
