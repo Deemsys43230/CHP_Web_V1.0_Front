@@ -71,9 +71,7 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../app/userDashboard/ngPercentageCircle.js',
                                 'http://ghiden.github.io/angucomplete-alt/js/libs/angucomplete-alt.js',
                                 '../../app/userDashboard/userDashboardController.js'
-                           
-
-                                ]
+                            ]
                         })}},
                 controller:'UserDashboardController'
             }).

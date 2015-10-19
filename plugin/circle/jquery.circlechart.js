@@ -6,7 +6,7 @@
 			var defaults = {
 			        animate : true,
 					diameter : 75,
-					guage: 10,
+					guage: 5,
 					coverBg: '#fff',
 					bgColor: '#efefef',
 					fillColor: '#5c93c8',

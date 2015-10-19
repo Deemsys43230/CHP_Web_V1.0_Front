@@ -519,21 +519,21 @@
             <!-- Register Form -->
             <div class="user_register">
                 <div class="row">
-                    <div class="col-md-8">
+                    <div class="col-md-7">
                         <h5>Food Name:</h5>
                         <p>{{userSelectedFoodDetails.foodname}}</p>
                         <h5 class="margin-top-10">Select Measure:</h5>
-                            <select ng-model="userFood.measure" ng-options="measure.measurename for measure in userSelectedFoodDetails.measureid track by measure.measureid">
+                            <select class="form-control" ng-model="userFood.measure" ng-options="measure.measurename for measure in userSelectedFoodDetails.measureid track by measure.measureid">
                                 <option value="">-- Select Measure --</option>
                             </select>
                         <h5  class="margin-top-10">Value</h5>
-                        <input type="number" ng-model="userFood.servings" ng-change="doCalculateCalories()">
+                        <input class="form-control" type="number" ng-model="userFood.servings" ng-change="doCalculateCalories()">
                     </div>
 
-                    <div class="col-md-4">
+                    <div class="col-md-5">
                         <h5>Calories Intake</h5>
                         <percent-display percent="caloriesIntake" side="120" colors="#CCE0CC #006400"></percent-display>
-                        <p>cal</p>
+                        <p class="col-md-12">cal</p>
                     </div>
                 </div>
 
