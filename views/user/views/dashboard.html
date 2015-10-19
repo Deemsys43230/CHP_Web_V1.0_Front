@@ -112,6 +112,7 @@
 
                                 <div class="tab_content">
                                     <div class="content-2">
+                                        <a class="suggest_button" ng-click="foodSelected(13)">Food</a>
                                         <a id="modal_trigger_food" href="#modal-food" onclick="return false;" class="suggest_button">Suggest Food</a>
                                         <div class="food_option">
                                             <span>idle</span>
@@ -141,7 +142,7 @@
                                             <li class="row" ng-repeat="foodDiaryData in userFoodDiaryData">
                                                 <div class="col-md-2 no-padding"><img ng-src="{{foodDiaryData.foodImagePath+'200x200.jpg'}}"></div>
                                                 <div class="col-md-10 no-padding">
-                                                    <span class="pull-right food_close">x</span>
+                                                    <a href="" class="pull-right food_close" title="Delete Food" ng-click="deleteUserFood(foodDiaryData.userfoodid)">x</a>
                                                     <p class="food_name">{{foodDiaryData.foodname}}</p>
                                                     <p>
                                                         <span class="pull-right text-green"><i class="fa fa-angle-up"></i>&nbsp;{{foodDiaryData.measureid.calories}}  calories</span>
@@ -519,31 +520,25 @@
             <div class="user_register">
                 <div class="row">
                     <div class="col-md-8">
-                        <h5>Food Name</h5>
-                        <p class="margin-bottom-10">Measure Unit</p>
-                        <span  class="fh-checkbox">
-                            <input class="col-md-1" name="foodMeasureName" ng-required="measureRequired" id="measure" type="checkbox">
-                            <label class="col-md-5" for="measure">Measure</label>
-                            <input class="col-md-1" name="foodMeasureName" ng-required="measureRequired" id="m" type="checkbox">
-                            <label class="col-md-5" for="m">Measure</label>
-                            <input class="col-md-1" name="foodMeasureName" ng-required="measureRequired" id="e" type="checkbox">
-                            <label class="col-md-5" for="e">Measure</label>
-                        </span>
-                        <p class="col-md-12 no-padding">Value</p>
-                        <input type="text">
+                        <h5>Food Name:</h5>
+                        <p>{{userSelectedFoodDetails.foodname}}</p>
+                        <h5 class="margin-top-10">Select Measure:</h5>
+                            <select ng-model="userFood.measure" ng-options="measure.measurename for measure in userSelectedFoodDetails.measureid track by measure.measureid">
+                                <option value="">-- Select Measure --</option>
+                            </select>
+                        <h5  class="margin-top-10">Value</h5>
+                        <input type="number" ng-model="userFood.servings" ng-change="doCalculateCalories()">
                     </div>
 
                     <div class="col-md-4">
                         <h5>Calories Intake</h5>
-                        <div class="center-block">
-                            <div class="food-gain margin-top-10" data-percent="170"></div>
-                            <p>170 Cals</p>
-                        </div>
+                        <percent-display percent="caloriesIntake" side="120" colors="#CCE0CC #006400"></percent-display>
+                        <p>cal</p>
                     </div>
                 </div>
 
                 <div class="action_btns margin-top-20">
-                    <div class="one_half"><a href="#" class="btn btn_blue">Add Food</a></div>
+                    <div class="one_half"><a href="#" onclick="return false;" class="btn btn_blue modal_close" ng-click="doInsertUserFood()">Add Food</a></div>
                     <div class="one_half last modal_close"><a class="btn btn_red">Cancel</a></div>
                 </div>
             </div>
