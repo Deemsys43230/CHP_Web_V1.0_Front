@@ -3,7 +3,31 @@ var userApp= angular.module('userApp', ['ngRoute','oc.lazyLoad','ngCookies','req
 userApp.controller('UserDashboardController',function($scope,requestHandler,Flash) {
     $scope.foodSearchResult = [];
 
+    $scope.doUserAddFood=function(){
+        $(function(){
+            $("#lean_overlay").fadeTo(1000);
+            $("#modal-add-food").fadeIn(600);
+            $(".user_register").show();
+        });
+
+        $(".modal_close").click(function(){
+            $(".user_register").hide();
+            $("#modal-add-food").hide();
+            $("#lean_overlay").hide();
+        });
+
+        $("#lean_overlay").click(function(){
+            $(".user_register").hide();
+            $("#modal-add-food").hide();
+            $("#lean_overlay").hide();
+        });
+    };
+
+
     $scope.foodSelected=function(selected){
+
+        $scope.doUserAddFood();
+
         requestHandler.postRequest("user/getFoodDetailByUser/",{"foodid":selected.description.foodid}).then(function (response) {
             $scope.userSelectedFoodDetails=response.data.Food_Data;
 
@@ -17,6 +41,8 @@ userApp.controller('UserDashboardController',function($scope,requestHandler,Flas
             errorMessage(Flash, "Please try again later!")
         });
     };
+
+
 
     $scope.getFoodDiary=function(){
 
