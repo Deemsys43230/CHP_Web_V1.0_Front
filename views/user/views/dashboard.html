@@ -58,11 +58,10 @@
             <li class="calories">
                 <div class="text">
                     <h4>
-                        some text
+                       Today's Update
                     </h4>
-                    <p>sdscfasfa jhchzxc jbcuzx ck ighicx izug shcizx ch zhgizx</p>
                 </div>
-
+<br/>
                 <div class="col-md-6 text-center">
                     <h5>Gain</h5>
                     <div class="gain margin-top-10" data-percent="65"></div>
@@ -217,8 +216,8 @@
                     <!-- End Tab Panels -->
                 </div>
                 <div class="col-md-4 pull-right margin-top-10">
-                    <i class="fa fa-calendar-o"></i> Date : <input type="text" class="main" id="datepicker" ng-model="currdate" ng-change="getFoodDiary()"/>
-                    {{currdate}}
+                    <i class="fa fa-calendar-o"></i> Date : <input type="text" class="main" id="datepicker" ng-model="currdate"  ng-change=""/>
+{{currdate}}
                 </div>
             </div>
 
@@ -398,7 +397,7 @@
                 </div>
             </div>
             <hr/>
-            <h6>Today's Update</h6>
+            <h6>Today's Intake graph</h6>
             <div>
                 <div>
                     <table hidden>
@@ -730,7 +729,8 @@
         minDate: new Date(1940, 0, 1),
         maxDate: new Date(new Date().getFullYear()+15, 12, 31),
         yearRange: [1940, new Date().getFullYear()+15],
-        defaultDate: new Date(new Date().getFullYear()-25,0,1)
+        defaultDate: new Date(),
+        setDefaultDate:true
     });
 
 
