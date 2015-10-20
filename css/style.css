@@ -355,6 +355,15 @@ input[type="submit"] {
     .content-goal{
         width: 490px !important;
     }
+
+    #profile-content{
+        width:790px!important;
+    }
+
+    .profile_input_textarea
+    {
+        width:580px!important;
+    }
 }
 
 @media (min-width: 1250px) {
@@ -392,6 +401,15 @@ input[type="submit"] {
 
     .content-goal{
         width: 560px !important;
+    }
+
+    #profile-content{
+        width:860px!important;
+    }
+
+    .profile_input_textarea
+    {
+        width:650px!important;
     }
 }
 
@@ -432,6 +450,15 @@ input[type="submit"] {
     .content-goal{
         width: 600px !important;
     }
+
+    #profile-content{
+        width:900px!important;
+    }
+
+    .profile_input_textarea
+    {
+        width:690px!important;
+    }
 }
 
 @media (min-width: 1350px) {
@@ -470,6 +497,15 @@ input[type="submit"] {
 
     .outerline{
         width: 670px !important; ;
+    }
+
+    #profile-content{
+        width:930px!important;
+    }
+
+    .profile_input_textarea
+    {
+        width:720px!important;
     }
 }
 
@@ -1635,7 +1671,12 @@ input[type="submit"] {
 }
 
 .margin-bottom-10 {
-    margin-bottom: 10px;
+    margin-bottom: 10px !important;
+}
+
+
+.margin-bottom-5 {
+    margin-bottom: 5px !important;
 }
 
 
@@ -6655,7 +6696,8 @@ select.user{
 
 a.register_button {
     font-size: 15px;
-     padding:8px 50px;
+     padding:8px 50px !important;
+    border-radius: 0px !important;
      font-weight: bold;
      background-color:transparent;
      border: 2px solid #57cb85;
@@ -6670,7 +6712,8 @@ a.register_button:hover{
 
 a.cancel_button{
     font-size: 15px;
-     padding:8px 50px;
+     padding:8px 50px !important;
+    border-radius: 0px !important;
      font-weight: bold;
      background-color:transparent;
      border: 2px solid #ED6347;
@@ -7859,7 +7902,7 @@ a:hover, a:visited, a:link, a:active
 	font-size: 14px;
 	color: #333;
 	padding: 5px 8px;
-	width: 220px;
+	width: 100%;
 	border:0px !important;
 	-moz-appearance: none;
 	-webkit-appearance: none;
@@ -7874,9 +7917,9 @@ a:hover, a:visited, a:link, a:active
 {
 	font-size: 14px;
 	color: #333;
-	padding: 5px 8px;
-	width: 600px !important;
-	height:60px;
+	padding: 5px 50px 5px 8px;
+	width: 600px;
+	height:90px;
 	border:0px !important;
 	-moz-appearance: none;
 	-webkit-appearance: none;
@@ -7885,6 +7928,10 @@ a:hover, a:visited, a:link, a:active
 	box-shadow: inset 0px 0px 3px rgba(0,0,0,0.3);
 	outline: 0;
 	margin: 0;
+}
+
+.count-letters{
+    left: -40px;
 }
 
 .demography_input

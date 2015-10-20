@@ -113,7 +113,7 @@ userApp.controller('UserDashboardController',function($scope,requestHandler,Flas
 
 });
 
-userApp.directive('ngDatepicker', ['$document', function($scope,$document) {
+userApp.directive('ngDatepicker', ['$document', function($document) {
     'use strict';
 
     var setScopeValues = function (scope, attrs) {
