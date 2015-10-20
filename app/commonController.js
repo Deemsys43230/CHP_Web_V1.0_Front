@@ -41,9 +41,9 @@ commonApp.controller('TestimonialUserController',function($scope,requestHandler,
 
             //View the image in ng-src for view testimonials
             $scope.myImgSrc = $sce.trustAsResourceUrl(response.data.Testimonials.imageurl+"?decache="+Math.random());
-            alert($scope.myImgSrc)
+           // alert($scope.myImgSrc)
             $scope.usertestimonialdetails=response.data.Testimonials
-            alert(response.data.Testimonials)
+            //alert(response.data.Testimonials)
         },function(){
             errorMessage(Flash,"Please try again later!")
         });

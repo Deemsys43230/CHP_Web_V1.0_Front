@@ -58,7 +58,7 @@
             <li class="calories">
                 <div class="text">
                     <h4>
-                       Today's Update
+                        Today's Update
                     </h4>
                 </div>
 <br/>
@@ -216,8 +216,8 @@
                     <!-- End Tab Panels -->
                 </div>
                 <div class="col-md-4 pull-right margin-top-10">
-                    <i class="fa fa-calendar-o"></i> Date : <input type="text" class="main" id="datepicker" ng-model="currdate"  ng-change=""/>
-{{currdate}}
+                    <i class="fa fa-calendar-o"></i> Date :  <input class="main" pikaday="viewDate" format="DD/MM/YYYY">
+
                 </div>
             </div>
 
@@ -397,7 +397,7 @@
                 </div>
             </div>
             <hr/>
-            <h6>Today's Intake graph</h6>
+            <h6>Today's Intake Graph</h6>
             <div>
                 <div>
                     <table hidden>
@@ -718,21 +718,5 @@
     $(document).on('click',function(){
         $('.select_food ul').fadeOut();
     });
-
-</script>
-
-<script>
-    var picker = new Pikaday({
-        format:'DD/MM/YYYY',
-        field: document.getElementById('datepicker'),
-        firstDay: 1,
-        minDate: new Date(1940, 0, 1),
-        maxDate: new Date(new Date().getFullYear()+15, 12, 31),
-        yearRange: [1940, new Date().getFullYear()+15],
-        defaultDate: new Date(),
-        setDefaultDate:true
-    });
-
-
 
 </script>

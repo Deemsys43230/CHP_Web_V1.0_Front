@@ -69,6 +69,52 @@ adminApp.factory("UserDashboardService",function(requestHandler){
         });
     };
 
+    //Get User Details
+    userDashboardServiceObj.doGetUserDetails=function(){
+        return requestHandler.getRequest("getUserId/","").then(function(response){
+            userProfile=response.data.User_Profile;
+            userProfile.imageurl=userProfile.imageurl.substring(userProfile.imageurl.indexOf("/") + 14, userProfile.imageurl.length)
+            userProfile.imageurl=userProfile.imageurl+"?decache="+Math.random();
+
+            //For Age calculation
+            var today = new Date();
+            var birthDate = new Date(userProfile.dob);
+            var age = today.getFullYear() - birthDate.getFullYear();
+            var m = today.getMonth() - birthDate.getMonth();
+            if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+                age--;
+            }
+            userProfile.age = age;
+            return userProfile;
+        });
+    };
+
+    //Get User Demography Details
+    userDashboardServiceObj.doGetDemographyDetails=function(){
+        return requestHandler.getRequest("user/getDemography/","").then(function(response) {
+            return response.data.Demography_Data[0];
+        });
+    };
+
+    //Frequently Added Foods
+    userDashboardServiceObj.doGetFrequentlyAdded=function(){
+        return requestHandler.getRequest("user/userFrequentlyaskedFoods/","").then(function(response) {
+            return response.data.FoodDataList;
+        });
+    };
+
+    //Add Suggested Food
+    userDashboardServiceObj.doAddSuggestedFood=function(foodSuggest){
+        return requestHandler.postRequest("user/insertFoodSuggestion/",foodSuggest).then(function (response) {
+            return response;
+        });
+    }
+
+
+
+
+
+
     return userDashboardServiceObj;
 
 });

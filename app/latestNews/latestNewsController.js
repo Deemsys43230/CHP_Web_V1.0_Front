@@ -24,9 +24,6 @@ adminApp.controller('LatestNewsController',function($scope,requestHandler,Flash,
 
     //To add Latest News
     $scope.doAddLatestNews=function(){
-        alert($scope.latest.description);
-        alert($('#summernote-news').html());
-
         /*$('#summernote-news').code().find('*').css('font-family','inherit');
               alert($scope.latest.description);*/
         requestHandler.postRequest("admin/insertorupdateLatestNews/",$scope.latest).then(function(response){
