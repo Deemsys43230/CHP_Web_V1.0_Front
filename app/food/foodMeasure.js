@@ -100,15 +100,7 @@ var original ="";
         });
     };
 
-    //Delete Food Measure
-    $scope.doDeleteFoodMeasure=function(id){
-            requestHandler.deleteRequest("",{'measureid':id}).then(function(response){
-            $scope.doViewAllFoodMeasure();
-            successMessage(Flash,"Deleted Successfully");
-        },  function () {
-            errorMessage(Flash, "Please try again later!")
-        });
-    };
+   
 
     //Initial Load//Initial Load
     $scope.init = function(){
