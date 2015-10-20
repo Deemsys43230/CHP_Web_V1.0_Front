@@ -23,8 +23,8 @@
                 <table class="table table-bordered table-hover">
                     <thead>
                     <tr class="warning">
-                        <th class="col-md-1">S.No</th>
-                        <th class="col-md-7">Category Name
+                        <th class="col-md-2">Category Id</th>
+                        <th class="col-md-6">Category Name
                             <!-- Stat Search -->
                             <div class="pull-right">
                                 <a href="#" onclick="return false;" class="show-list-search"><i class="fa fa-search"></i></a>
@@ -41,12 +41,12 @@
                     </thead>
                     <tbody>
                     <tr dir-paginate="category in categoryfilter = (foodCategoryList |filter: categorysearch | itemsPerPage: 8)" ng-show="foodCategoryList.length!=0">
-                        <td>{{$index+1}}</td>
+                        <td>{{category.categoryid}}</td>
                         <td>{{category.categoryname}}</td>
                         <td>
-                            <a href="" class="btn-xs btn-warning">Edit</a>
-                            <a href="" class="btn-xs btn-success" ng-click="doEnableDisableFoodCategory(category.categoryid)" ng-show="category.status==0">Enable</a>
-                            <a href="" class="btn-xs btn-danger" ng-click="doEnableDisableFoodCategory(category.categoryid)" ng-hide="category.status==0">Disable</a>
+                            <a href="" class="btn-xs btn-warning" ng-click="doEditFoodCategory(category.categoryid)">Edit</a>
+                            <a href="" class="btn-xs btn-success" ng-click="doEnableDisableFoodCategory(category.categoryid)" ng-show="category.status==1">Enable</a>
+                            <a href="" class="btn-xs btn-danger" ng-click="doEnableDisableFoodCategory(category.categoryid)" ng-hide="category.status==1">Disable</a>
                             <a href="" class="btn-xs btn-danger" ng-click="doDeleteFoodCategory(category.categoryid)">Delete</a>
                         </td>
                     </tr>
@@ -65,7 +65,7 @@
 <!-- Category popup-->
 <div id="category" class="popupContainer" style="display:none;">
     <header class="popupHeader">
-        <span class="header_title">add New category</span>
+        <span class="header_title">{{title}}</span>
         <span class="modal_close"><i class="fa fa-times"></i></span>
     </header>
 
@@ -80,7 +80,8 @@
                              <span class="error-message" ng-show="foodCategoryAddForm.categoryname.$error.pattern"><span>Enter&nbsp;Valid&nbsp;name.</span></span>
                          </span>
                 <div class="action_btns margin-top-20">
-                    <div><a href="" class="btn btn_red" ng-class="{modal_close:foodCategoryAddForm.$invalid}" ng-disabled="foodCategoryAddForm.$invalid" ng-click="doAddFoodCategory()">Save Category </a></div>
+                    <div><a href="" class="btn btn_red" ng-class="{modal_close:foodCategoryAddForm.$invalid}" ng-disabled="foodCategoryAddForm.$invalid" ng-show="isNew" ng-click="doAddFoodCategory()">Save Category </a></div>
+                    <div><a href="" class="btn btn_red" ng-class="{modal_close:foodCategoryAddForm.$invalid}" ng-disabled="foodCategoryAddForm.$invalid || isClean()" ng-hide="isNew" ng-click="doUpdateFoodCategory()">Save Category </a></div>
                 </div>
             </form>
         </div>

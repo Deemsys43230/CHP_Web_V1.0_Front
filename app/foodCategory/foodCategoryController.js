@@ -2,6 +2,9 @@ var adminApp = angular.module('adminApp', ['ngRoute','oc.lazyLoad','requestModul
 
 adminApp.controller('FoodCategoryController',function($scope,requestHandler,Flash) {
     $scope.activeClass = {category:'active'};
+    $scope.isNew = true;
+    $scope.title = "Add Category";
+    var original ="";
 
     $scope.doGetAllFoodCategory=function(){
         $scope.loaded=true;
@@ -11,7 +14,7 @@ adminApp.controller('FoodCategoryController',function($scope,requestHandler,Flas
             $scope.loaded=false;
             $scope.paginationLoad=true;
         },function(){
-            errorMessage(Flash,"Please try again later!")
+            errorMessage(Flash,"Please try again later!");
         });
     };
 
@@ -39,13 +42,64 @@ adminApp.controller('FoodCategoryController',function($scope,requestHandler,Flas
         });
     };
 
+    $scope.doEditFoodCategory=function(id){
+        $scope.isNew = false;
+        $scope.title = "Edit Category";
+
+        $(function(){
+            $("#lean_overlay").fadeTo(1000);
+            $("#category").fadeIn(600);
+            $(".common_model").show();
+        });
+
+        $scope.loaded=true;
+        requestHandler.postRequest("admin/getfoodCategorybyId/",{'categoryid':id}).then(function(response){
+            original=angular.copy(response.data.Food_Category);
+            $scope.foodCategory=response.data.Food_Category;
+            $scope.loaded=false;
+            $scope.paginationLoad=true;
+        },function(){
+            errorMessage(Flash,"Please try again later!")
+        });
+
+        $(".modal_close").click(function(){
+            $(".common_model").hide();
+            $("#category").hide();
+            $("#lean_overlay").hide();
+        });
+
+        $("#lean_overlay").click(function(){
+            $(".common_model").hide();
+            $("#category").hide();
+            $("#lean_overlay").hide();
+        });
+  };
+
+    $scope.doUpdateFoodCategory=function(){
+        $scope.loaded=true;
+        requestHandler.putRequest("admin/editFoodCategory/",$scope.foodCategory).then(function (response) {
+             $scope.doGetAllFoodCategory();
+            successMessage(Flash,"Successfully Updated");
+            $scope.loaded=false;
+            $scope.paginationLoad=true;
+        }, function () {
+            errorMessage(Flash, "Please try again later!")
+        });
+
+    };
+
     $scope.doEnableDisableFoodCategory=function(id){
         $scope.loaded=true;
         requestHandler.putRequest("admin/enableOrDisableCategoryStatus/",{'categoryid':id}).then(function(response){
             $scope.loaded=false;
+            if(response.data.Response_status==0){
             $scope.doGetAllFoodCategory();
+            errorMessage(Flash,"Category&nbsp;Paired&nbsp;with&nbsp;other&nbsp;food")
+            }
+            if(response.data.Response_status==1){
+                $scope.doGetAllFoodCategory();
             successMessage(Flash,"Successfully Updated");
-
+            }
         },function(){
             errorMessage(Flash,"Please try again later!")
         });
@@ -82,5 +136,9 @@ adminApp.controller('FoodCategoryController',function($scope,requestHandler,Flas
         $scope.paginationLoad=false;
         $scope.doGetAllFoodCategory();
     };
+
+    $scope.isClean=function(){
+        return angular.equals(original, $scope.foodCategory);
+    }
 
 });

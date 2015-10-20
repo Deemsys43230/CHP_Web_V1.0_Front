@@ -31,10 +31,10 @@
                         <td>{{list.measureid}}</td>
                         <td>{{list.measurename}}</td>
                         <td>
-                            <a href="" onclick="return false;" class="btn-xs btn-warning" ng-click="">Edit</a>
+                            <a href="" class="btn-xs btn-warning" ng-click="doEditFoodMeasure(list.measureid)">Edit</a>
                             <a href="" class="btn-xs btn-success" ng-click="doEnableDisable(list.measureid)" ng-show="list.status==1">Enable</a>
                             <a href="" class="btn-xs btn-danger" ng-click="doEnableDisable(list.measureid)" ng-hide="list.status==1">Disable</a>
-                            <a href="" class="btn-xs btn-danger" ng-click="doDeleteFoodMeasure()">Delete</a>
+                            <a href="" class="btn-xs btn-danger" ng-click="">Delete</a>
                         </td>
                     </tr>
                     </tbody>
@@ -51,7 +51,7 @@
 <!-- measure Popup-->
 <div id="measure" class="popupContainer" style="display:none;">
     <header class="popupHeader">
-        <span class="header_title">Add Measure</span>
+        <span class="header_title">{{title}}</span>
         <span class="modal_close"><i class="fa fa-times"></i></span>
     </header>
 
@@ -60,14 +60,16 @@
         <div class="common_model">
             <form name="measureForm">
                 <p>Enter Measure</p>
-                <input type="text" onkeypress="return noenter(event)" name="measure"  ng-pattern="/^ *([a-zA-Z]+ ?)+ *$/" ng-model="list.measurename" required>
+                <input type="text" name="measure"  ng-pattern="/^ *([a-zA-Z]+ ?)+ *$/" ng-model="list.measurename" maxlength="45" required>
                          <span ng-show="measureForm.measure.$dirty&&measureForm.measure.$invalid">
                                 <span class="error-message" ng-show="measureForm.measure.$error.required"><span>Required.</span></span>
                              <span class="error-message" ng-show="measureForm.measure.$error.pattern"><span>Invalid&nbsp;Measure.</span></span>
                          </span>
 
                 <div class="action_btns margin-top-20">
-                    <div><a ng-class="{modal_close:measureForm.$invalid}" class="btn btn_red" ng-disabled="measureForm.$invalid" ng-click="doAddMeasure()">Save Measure </a></div>
+                    <div><a ng-class="{modal_close:measureForm.$invalid}" class="btn btn_red" ng-disabled="measureForm.$invalid" ng-show="isNew" ng-click="doAddMeasure()">Save Measure </a></div>
+                    <div><a ng-class="{modal_close:measureForm.$invalid}" class="btn btn_red" ng-disabled="measureForm.$invalid || isClean()" ng-hide="isNew" ng-click="doUpdateMeasure()">Save Measure </a></div>
+
                 </div>
             </form>
         </div>
@@ -84,6 +86,7 @@
         $(".common_model").show();
     })
 </script>
+<!--
 <script>
     function noenter(e) {
         e = e || window.event;
@@ -97,4 +100,4 @@
             return key !== 32;
         }
     }
-</script>
+</script>-->
