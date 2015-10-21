@@ -78,6 +78,10 @@ adminApp.factory("UserDashboardService",function(requestHandler){
 
             //For Age calculation
             var today = new Date();
+            if(userProfile.dob == null){
+                userProfile.age = "-";
+            }
+            if(userProfile.dob !=null){
             var birthDate = new Date(userProfile.dob);
             var age = today.getFullYear() - birthDate.getFullYear();
             var m = today.getMonth() - birthDate.getMonth();
@@ -85,6 +89,7 @@ adminApp.factory("UserDashboardService",function(requestHandler){
                 age--;
             }
             userProfile.age = age;
+            }
             return userProfile;
         });
     };
@@ -111,11 +116,7 @@ adminApp.factory("UserDashboardService",function(requestHandler){
     }
 
 
-
-
-
-
-    return userDashboardServiceObj;
+ return userDashboardServiceObj;
 
 });
 

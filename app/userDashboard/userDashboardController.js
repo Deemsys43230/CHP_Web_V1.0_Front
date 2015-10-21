@@ -52,12 +52,12 @@ userApp.controller('UserDashboardController',function($scope,requestHandler,Flas
         //Set values according to the api calls
         $scope.userFood.foodid=$scope.userSelectedFoodDetails.foodid;
         $scope.userFood.measureid=$scope.userFood.measure.measureid;
-        $scope.userFood.addeddate="17/10/2015";
+        $scope.userFood.addeddate=selectedDate;
         $scope.userFood.servings=parseInt($scope.userFood.servings);
 
         var foodInsertPromise=UserDashboardService.doInsertUserFood($scope.userFood);
         foodInsertPromise.then(function(){
-            $scope.loadFoodDiary();
+            $scope.loadFoodDiary(selectedDate);
         });
 
 
@@ -68,13 +68,14 @@ userApp.controller('UserDashboardController',function($scope,requestHandler,Flas
     $scope.doDeleteUserFood= function (userFoodId) {
         var foodDeletePromise=UserDashboardService.doDeleteUserFood(userFoodId);
         foodDeletePromise.then(function(){
-            $scope.loadFoodDiary();
+            $scope.loadFoodDiary(selectedDate);
         });
     };
 
     //On load Food Diary
-    $scope.loadFoodDiary=function(){
-        var userFoodDiaryDetailPromise=UserDashboardService.getFoodDiary("17/10/2015");
+    $scope.loadFoodDiary=function(selectedDate){
+       // alert(selectedDate);
+        var userFoodDiaryDetailPromise=UserDashboardService.getFoodDiary(selectedDate);
         userFoodDiaryDetailPromise.then(function(result){
             $scope.userFoodDiaryDataAll=result;
             $scope.loadSessionDetails();
@@ -107,9 +108,63 @@ userApp.controller('UserDashboardController',function($scope,requestHandler,Flas
          });
     };
 
+    // To get User Basic details
+    var userDetailPromise=UserDashboardService.doGetUserDetails();
+    userDetailPromise.then(function(result){
+        $scope.userProfile=result;
+    });
+
+
+    //TO get user demography details
+    var userDemographyPromise=UserDashboardService.doGetDemographyDetails();
+    userDemographyPromise.then(function(result){
+        $scope.demography = result;
+    });
+
+
+    //To get frequently asked foods
+    var frequentFoodPromise=UserDashboardService.doGetFrequentlyAdded();
+    frequentFoodPromise.then(function(result){
+        $scope.frequentFoodList =result;
+    });
+
+
+    // Insert suggest food
+    $scope.doAddSuggestFood=function(){
+
+        var insertSuggestedFoodPromise=UserDashboardService.doAddSuggestedFood($scope.foodSuggest);
+
+        insertSuggestedFoodPromise.then(function(result){
+            successMessage(Flash,"Thanks&nbsp;for&nbsp;the&nbspsuggestion!!");
+            $scope.resetSuggestFood();
+        },function(){
+            errorMessage(Flash, "Please try again later!");
+        })
+
+    };
+
+    //Clear suggest food model values
+    $scope.resetSuggestFood=function(){
+        $scope.foodSuggest={};
+        $scope.foodSuggestForm.$setPristine();
+    };
+
+//To Display current date
+    var selectedDate = new Date();
+    var dd = selectedDate.getDate();
+    var mm = selectedDate.getMonth()+1; //January is 0!
+
+    var yyyy = selectedDate.getFullYear();
+    if(dd<10){
+        dd='0'+dd
+    }
+    if(mm<10){
+        mm='0'+mm
+    }
+    var selectedDate = dd+'/'+mm+'/'+yyyy;
 
     //Initialize
-    $scope.loadFoodDiary();
+    $scope.loadFoodDiary(selectedDate);
 
 });
 
@@ -220,7 +275,7 @@ userApp.directive('ngDatepicker', ['$document', function($document) {
                 var selectedDate = moment(date.day + '/' + date.month + '/' + date.year, 'DD/mm/YYYY');
                 ngModel.$setViewValue(selectedDate.format(scope.format));
                 scope.viewValue = selectedDate.format(scope.viewFormat);
-                alert(scope.viewValue);
+               // alert(scope.viewValue);
                 scope.closeCalendar();
             };
 
