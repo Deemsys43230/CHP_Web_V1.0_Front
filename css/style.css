@@ -364,6 +364,10 @@ input[type="submit"] {
     {
         width:580px!important;
     }
+
+    #demography-content{
+        width:1080px!important;
+    }
 }
 
 @media (min-width: 1250px) {
@@ -410,6 +414,10 @@ input[type="submit"] {
     .profile_input_textarea
     {
         width:650px!important;
+    }
+
+    #demography-content{
+        width:1150px!important;
     }
 }
 
@@ -459,6 +467,10 @@ input[type="submit"] {
     {
         width:690px!important;
     }
+
+    #demography-content{
+        width:1190px!important;
+    }
 }
 
 @media (min-width: 1350px) {
@@ -506,6 +518,10 @@ input[type="submit"] {
     .profile_input_textarea
     {
         width:720px!important;
+    }
+
+    #demography-content{
+        width:1220px!important;
     }
 }
 
@@ -1658,6 +1674,10 @@ input[type="submit"] {
 
 .margin-tb-10 {
     margin: 10px 0 !important;
+}
+
+.margin-tb-5 {
+    margin: 5px 0 !important;
 }
 
 .margin-top-10 {
@@ -3420,13 +3440,25 @@ h5.classic-title {
     margin-bottom: 20px;
     padding-bottom: 10px;
     border-bottom: 3px solid #eee;
-    font-weight: bold;
+    font-weight: 600;
 }
 
 .classic-title span {
 	padding-bottom: 8px;
 	border-bottom: 3px solid;
-	font-weight: 400;
+	font-weight: 600;
+}
+
+h5.classic-title a{
+    color: #777;
+}
+
+h5.classic-title a:hover{
+    color: #f8ba01;
+}
+
+h5.classic-title span a{
+    color: #f8ba01;
 }
 
 .big-title {
@@ -6663,6 +6695,26 @@ input.userdob {
     padding: 0px 10px !important;
 }
 
+select.main {
+    height: 30px;
+    padding: 0px 5px !important;
+    width: 90%;
+    border: 0px !important;
+    outline: none !important;
+    color: #999;
+    border-radius: 0 !important;
+    background-color: transparent;
+    -webkit-box-shadow: inset 0px 0px 3px rgba(0,0,0,0.3);
+    -moz-box-shadow: inset 0px 0px 3px rgba(0,0,0,0.3);
+    box-shadow: inset 0px 0px 3px rgba(0,0,0,0.3);
+}
+
+select.main:focus {
+    -webkit-box-shadow: inset 0px 0px 3px rgba(0,0,0,0.3);
+    -moz-box-shadow: inset 0px 0px 3px rgba(0,0,0,0.3);
+    box-shadow: inset 0px 0px 3px rgba(0,0,0,0.3);
+}
+
 input.main {
     height:24px !important;
     width: 115px;
@@ -7931,6 +7983,8 @@ a:hover, a:visited, a:link, a:active
 }
 
 .count-letters{
+    position: absolute;
+    float: right;
     left: -40px;
 }
 
@@ -7939,7 +7993,7 @@ a:hover, a:visited, a:link, a:active
 	font-size: 14px;
 	color: #333;
 	padding: 5px 8px;
-	width: 180px;
+	width: 90%;
 	border:0px !important;
 	-moz-appearance: none;
 	-webkit-appearance: none;

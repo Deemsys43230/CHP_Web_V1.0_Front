@@ -150,11 +150,11 @@
                              </span>
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <br/><br/>
+                    <div class="col-md-6 margin-top-15">
+                        <p class="pull-right" ng-show="showCount && userProfile.about.length"><span class="text-bold text-red">{{ (300-userProfile.about.length) }}</span> Characters left&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+                        <p class="pull-right" ng-hide="showCount && userProfile.about.length">&nbsp;</p>
                     </div>
-                    <span class="text-bold text-red pull-right count-letters">{{ (300-userProfile.about.length) }}</span>
-                    <div class="col-md-6 margin-top-5">
+                    <div class="col-md-6">
                         <div class="col-md-4 padding-top-4">
                             <h5>About Me :</h5>
                         </div>
@@ -162,11 +162,12 @@
                             <span ng-show="userProfileForm.about.$dirty&&userProfileForm.about.$invalid">
                                  <span class="error-message textarea-errormessage40-right" ng-show="userProfileForm.about.$error.required"><span>Required.</span></span>
                              </span>
-                            <textarea class="profile_input_textarea" name="about" ng-model="userProfile.about" maxlength="300" required></textarea>
+                            <textarea class="profile_input_textarea" name="about" ng-model="userProfile.about" maxlength="300" ng-blur="showCount=0" ng-focus="showCount=1" required></textarea>
                         </div>
                     </div>
+
                     <div class="col-md-12 text-center margin-top-10">
-                        <a href="" class=" btn register_button" ng-click="doUpdateProfile()" ng-disabled="isClean() || userProfileForm.$invalid">Save Changes</a>
+                        <a href="" class="btn register_button" ng-click="doUpdateProfile()" ng-disabled="isClean() || userProfileForm.$invalid">Save Changes</a>
                         <a href="#dashboard" class="btn cancel_button">Cancel</a>
                     </div>
                 </div>

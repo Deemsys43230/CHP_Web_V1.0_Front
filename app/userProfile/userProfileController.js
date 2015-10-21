@@ -71,7 +71,7 @@ userApp.controller('UserProfileController',['$scope','requestHandler','Flash',fu
                 }
             });
         });
-    }
+    };
 
 
     $scope.doUpdateProfile= function () {
