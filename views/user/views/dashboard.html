@@ -58,11 +58,11 @@
             <li class="calories">
                 <div class="text">
                     <h4>
-                        some text
+                        Today's Update
                     </h4>
-                    <p>sdscfasfa jhchzxc jbcuzx ck ighicx izug shcizx ch zhgizx</p>
-                </div>
 
+                </div>
+<br/>
                 <div class="col-md-6 text-center">
                     <h5>Gain</h5>
                     <div class="gain margin-top-10" data-percent="65"></div>
@@ -112,7 +112,7 @@
 
                                 <div class="tab_content">
                                     <div class="content-2">
-                                        <a id="modal_trigger_food" href="#modal-food" onclick="return false;" class="suggest_button">Suggest Food</a>
+                                        <a id="modal_trigger_food" href="#modal-food"  onclick="return false;" class="suggest_button">Suggest Food</a>
                                         <div class="food_option">
                                             <span ng-repeat="frequentfood in frequentFoodList">{{frequentfood.foodname}}</span>
                                         </div>
@@ -400,7 +400,7 @@
                 </div>
             </div>
             <hr/>
-            <h6>Today's Update</h6>
+            <h6>Today's Intake Graph</h6>
             <div>
                 <div>
                     <table hidden>
@@ -530,7 +530,7 @@
                                      <span class="error-message" ng-show="FoodAddForm.measure.$error.required"><span>Required.</span></span>
                              </span>
                         <h5  class="margin-top-10">Value</h5>
-                        <input class="form-control" type="text" ng-pattern="/^\d+$/"  ng-disabled="!userFood.measure" name="servings" ng-model="userFood.servings" ng-change="doCalculateCalories()" required>
+                        <input class="form-control" type="text" ng-pattern="/^\d+$/"  ng-disabled="!userFood.measure" name="servings" ng-model="userFood.servings" ng-change="doCalculateCalories()" maxlength="3" required>
                         <span ng-show="FoodAddForm.servings.$dirty&&FoodAddForm.servings.$invalid">
                                  <span class="error-message textarea-errormessage10" ng-show="FoodAddForm.servings.$error.required"><span>Required.</span></span>
                                   <span class="error-message textarea-errormessage10" ng-show="FoodAddForm.servings.$error.pattern"><span>Invalid&nbsp;Format.</span></span>

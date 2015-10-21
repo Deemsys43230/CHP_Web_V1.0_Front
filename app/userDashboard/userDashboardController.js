@@ -12,6 +12,7 @@ userApp.controller('UserDashboardController',function($scope,requestHandler,Flas
             $("#lean_overlay").fadeTo(1000);
             $("#modal-add-food").fadeIn(600);
             $(".user_register").show();
+          //  $scope.resetdata();
         });
         $(".modal_close").click(function(){
             $(".user_register").hide();
@@ -136,7 +137,7 @@ userApp.controller('UserDashboardController',function($scope,requestHandler,Flas
 
         insertSuggestedFoodPromise.then(function(result){
             successMessage(Flash,"Thanks&nbsp;for&nbsp;the&nbspsuggestion!!");
-            $scope.resetSuggestFood();
+           //$scope.resetdata();
         },function(){
             errorMessage(Flash, "Please try again later!");
         })
@@ -144,9 +145,11 @@ userApp.controller('UserDashboardController',function($scope,requestHandler,Flas
     };
 
     //Clear suggest food model values
-    $scope.resetSuggestFood=function(){
+    $scope.resetdata=function(){
         $scope.foodSuggest={};
         $scope.foodSuggestForm.$setPristine();
+        $scope.userFood={};
+        $scope.FoodAddForm.$setPristine();
     };
 
 //To Display current date
@@ -164,6 +167,7 @@ userApp.controller('UserDashboardController',function($scope,requestHandler,Flas
     var selectedDate = dd+'/'+mm+'/'+yyyy;
 
     //Initialize
+
     $scope.loadFoodDiary(selectedDate);
 
 });
