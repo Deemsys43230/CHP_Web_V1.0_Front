@@ -1,0 +1,64 @@
+
+<!-- Start Page Banner -->
+<div class="page-banner">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-3">
+                <h4 class="classic-title"><span>Exercise Management</span></h4>
+                <div ng-include src="'views/exercise-menu.html'" onload="activeClass"></div>
+            </div>
+            <div class="col-md-9 min-height-450" ng-init="init()">
+                <a href="#dashboard" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back to Dashboard</a>
+                <a href="#uploadFood" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-down"></i> Import Exercise</a>
+                <a href="#add-exercise" class="back-button pull-right "><i class="fa fa-plus-circle"></i> Add Exercise</a>
+                <div flash-message="2000" class="col-md-4 pull-right"></div>
+                <h3 class="margin-bottom-10"><i class="fa fa-list-ul"></i> &nbsp;Exercise List</h3>
+                <div ng-if="loaded">
+                    <div class="loader-style">
+                        <div class="loader"></div>
+                    </div>
+                </div>
+                <table class="table table-bordered table-hover">
+                    <thead>
+                    <tr class="warning">
+                        <th class="col-md-2">Exercise Id</th>
+                        <th class="col-md-5">Exercise Name</th>
+                        <th class="col-md-3">Exercise Type</th>
+                        <th class="col-md-2">Options</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr dir-paginate="food in foodList | itemsPerPage: 10|orderBy:['foodid']">
+                        <td>{{food.foodid}}</td>
+                        <td title="{{food.foodname}}"><span class="line-clamp-xs">{{food.foodname}}</span></td>
+                        <td><span class="line-clamp-sm">
+                            <span  ng-repeat="category in food.categoryid">
+                                {{category.categoryname}}{{$last ? '' : ','}}
+                            </span></span>
+                        </td>
+                        </td>
+                        <td>
+                            <a href="#food-view/{{food.foodid}}" class="btn-xs btn-primary">View</a>
+                            <a href="#food-edit/{{food.foodid}}" class="btn-xs btn-warning">Edit</a>
+                            <a href="" class="btn-xs btn-success" ng-click="doEnableDisable(food.foodid)" ng-show="food.status==0">Enable</a>
+                            <a href="" class="btn-xs btn-danger" ng-click="doEnableDisable(food.foodid)" ng-hide="food.status==0">Disable</a>
+                        </td>
+                    </tr>
+
+                    </tbody>
+                </table>
+
+                <!-- Start Pagination -->
+                <dir-pagination-controls ng-show="paginationLoad" max-size="5" direction-links="true"
+                                         boundary-links="true"> </dir-pagination-controls>
+
+                <!-- End Pagination -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- End Page Banner -->
+
+<script type="text/javascript" src="../../js/script.js"></script>

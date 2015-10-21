@@ -366,7 +366,6 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../js/bootstrap.min.js',
                                 '../../css/profile-image-upload.css',
                                 '../../js/image-upload.js',
-
                                 '../../app/coach/coachController.js'
                             ]
                         })
@@ -390,6 +389,51 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         })
                     }
                 }
+            }).
+            when('/exercise', {
+                templateUrl: 'views/exercise.html',
+                resolve: {
+                    loadMyFiles:function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'adminApp',
+                            files:[
+                                '../../js/bootstrap.min.js',
+                                '../../js/category-select.js',
+                                '../../app/exercise/foodService.js',
+                                '../../app/exercise/foodController.js'
+                            ]
+                        })
+                    }
+                },
+                controller:'FoodController'
+            }).
+            when('/add-exercise', {
+                templateUrl: 'views/exercise-add-or-edit.html',
+                resolve: {
+                    loadMyFiles:function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'adminApp',
+                            files:[
+                                '../../js/bootstrap.min.js',
+                                '../../plugin/popup/style.css',
+                                '../../plugin/popup/jquery.leanModal.min.js',
+                                '../../css/food-image-upload.css',
+                                '../../js/image-upload.js',
+                                '../../css/custom-inputs.css',
+                                '../../js/category-select.js',
+                                '../../css/multiSelect.css',
+                                '../../css/category-select.css',
+                                '../../css/category-select-bootstrap.css',
+                                '../../app/exercise/foodService.js',
+                                '../../app/exercise/foodController.js'
+                            ]
+                        })
+                    }
+                },
+                controller:'FoodDetailsEditController',
+                title:'Add Exercise',
+                type:1,//For Add type=1
+                isNew:true
             }).
             when('/settings', {
                 templateUrl: 'views/settings-contact.html',

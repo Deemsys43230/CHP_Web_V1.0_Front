@@ -362,7 +362,7 @@ input[type="submit"] {
 
     .profile_input_textarea
     {
-        width:580px!important;
+        width:583px!important;
     }
 
     #demography-content{
@@ -413,7 +413,7 @@ input[type="submit"] {
 
     .profile_input_textarea
     {
-        width:650px!important;
+        width:653px!important;
     }
 
     #demography-content{
@@ -465,7 +465,7 @@ input[type="submit"] {
 
     .profile_input_textarea
     {
-        width:690px!important;
+        width:693px!important;
     }
 
     #demography-content{
@@ -517,7 +517,7 @@ input[type="submit"] {
 
     .profile_input_textarea
     {
-        width:720px!important;
+        width:723px!important;
     }
 
     #demography-content{
@@ -7969,7 +7969,7 @@ a:hover, a:visited, a:link, a:active
 {
 	font-size: 14px;
 	color: #333;
-	padding: 5px 50px 5px 8px;
+	padding: 5px 8px;
 	width: 600px;
 	height:90px;
 	border:0px !important;

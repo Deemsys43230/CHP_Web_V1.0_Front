@@ -1,0 +1,156 @@
+
+<!-- Start Page Banner -->
+<div class="page-banner">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <a href="#food" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back to Exercise List</a>
+                <h4 class="classic-title"><span>{{title}}</span></h4>
+                <form name="foodForm" novalidate>
+                <div class="col-md-9 no-padding">
+                    <h5>Exercise Name :</h5>
+                    <input class="form-control" name="foodname" maxlength="100"  ng-pattern="/^ *([a-zA-Z]+ ?)+ *$/" ng-model="foodDetails.foodname" required/>
+                    <span ng-show="foodForm.foodname.$dirty&&foodForm.foodname.$invalid">
+                        <span class="error-message" ng-show="foodForm.foodname.$error.required"><span>Required.</span></span>
+                        <span class="error-message" ng-show="foodForm.foodname.$error.pattern"><span>Enter&nbsp;Valid&nbsp;name.</span></span>
+                        <span class="error-message" ng-show="foodForm.foodname.$error.foodNameExists"><span>Food&nbsp;Name&nbsp;Already&nbsp;Exist.</span></span>
+                    </span>
+                    <br/>
+                    <h5>Tags :</h5>
+                    <div class="form-group">
+                        <ui-select multiple tagging="tagTransform" tagging-label="(custom 'new' label)" name="tagid"  ng-model="foodDetails.tagid" theme="select2" sortable="true" ng-disabled="disabled" class="form-control" ui-select-required>
+                            <ui-select-match placeholder="Type/Select tags">{{$item.tagname}}</ui-select-match>
+                            <ui-select-choices repeat="tag in foodTagList | filter:$select.search">
+                                {{tag.tagname}}
+                            </ui-select-choices>
+                        </ui-select>
+                      <span ng-show="foodForm.tagid.$dirty&&foodForm.tagid.$invalid">
+                        <span class="error-message" ng-show="foodForm.tagid.$error.uiSelectRequired"><span>Required.</span></span>
+                    </span>
+                    <br/>
+                        <div ng-if="loaded">
+                            <div class="loader-style">
+                                <div class="loader"></div>
+                            </div>
+                        </div>
+                    <h5>Exercise Type :</h5>
+                        <div ng-controller="DemoCtrl">
+                            <p>Selected: {{person.selected}}</p>
+                            <ui-select ng-model="person.selected" theme="select2" ng-disabled="disabled" class="form-control">
+                                <ui-select-match placeholder="Select or search a exercise name...">{{$select.selected.type}}</ui-select-match>
+                                <ui-select-choices repeat="person in people | propsFilter: {type: $select.search}">
+                                    <div class="typename" ng-bind-html="person.type | highlight: $select.search">{{person.type}}</div>
+                                    <small>
+                                        {{person.level}}
+                                    </small>
+                                </ui-select-choices>
+                            </ui-select>
+                        </div>
+                    <br/>
+                    <h5>Energy Spent By Exercise Type :</h5>
+                    </div>
+                </div>
+
+                <div class="col-md-3 coach-details text-center">
+                    <img class="food-image-wrap" id="food-image-change" ng-src="{{foodDetails.foodImagePath|trusted}}"/><br/><br/>
+                    <a id="modal_trigger" href="#modal" onclick="return false;" ng-click="doRefreshPreview();" class="btn-sm btn-warning">Change Exercise Image</a>
+                </div>
+                <div class="col-md-12 no-padding">
+                    <div class="col-md-12 no-padding">
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr class="success">
+                                <th class="col-md-4">Level Name</th>
+                                <th class="col-md-4">Timing (mints)</th>
+                                <th class="col-md-4">Calories Spent</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Level Name</td>
+                                    <td><input class="form-control"></td>
+                                    <td><input class="form-control"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-md-12 margin-top-10 text-center">
+                        <a class="btn register_button" href="" ng-click="doUpdateFoodDetails()" ng-disabled="foodForm.$invalid||isClean()" ng-hide="isNew">Update Exercise Details</a>
+                        <a class="btn register_button" href="" ng-click="doAddFoodDetails()" ng-disabled="foodForm.$invalid||imageAdded" ng-show="isNew">Save Exercise Details</a>
+                        <a class="btn cancel_button" href="#food">Cancel</a>
+                    </div>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Food Image popup-->
+<div id="modal" class="popupContainer" style="display:none;">
+    <header class="popupHeader">
+        <span class="header_title">Change Exercise Image</span>
+        <span class="modal_close"><i class="fa fa-times"></i></span>
+    </header>
+
+    <section class="popupBody">
+        <!-- Register Form -->
+        <div class="common_model">
+            <p>Preview:</p>
+            <img class="food-preview center-block" ng-src="{{foodDetails.foodimage|trusted}}"/>
+            <h6 class="text-red text-center margin-tb-10">Note : Upload Image Size 1000x1000</h6>
+            <p>Progress:</p>
+            <progress class="food-progress" value="{{progress}}"></progress>
+            <div class="action_btns margin-top-10">
+                <div class="one_half">
+                    <div class="fileUpload food-button">
+                        <span>Choose Image</span>
+                        <input type="file"class="upload" ng-file-select="onFileSelect($files)" />
+                    </div>
+                </div>
+                <div class="one_half last"><a href="" onclick="return false;" class="food-button export modal_close" ng-click="doUpdateFoodImage();">Save Image</a></div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- Help container -->
+<div class="switcher-box">
+    <a href="#" onclick="return false" class="open-switcher show-switcher"><i class="fa fa-question-circle fa-2x"></i></a>
+    <h4>Help</h4>
+    <span>12 Predefined Color Skins</span>
+    <ul>
+        <li>
+            tips 1
+        </li>
+        <li>
+            tips 2
+        </li>
+        <li>
+            tips 3
+        </li>
+        <li>
+            tips 4
+        </li>
+    </ul>
+</div>
+
+<!-- End Page Banner -->
+<script type="text/javascript" src="../../js/script.js"></script>
+
+<script type="text/javascript">
+    $("#modal_trigger").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
+    $(function(){
+        $(".common_model").show();
+    })
+</script>
+
+<script type="text/javascript">
+    $("#measure-modal").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
+
+    $(function(){
+        $(".common_model").show();
+    })
+</script>
+
+
