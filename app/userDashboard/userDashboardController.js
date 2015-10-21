@@ -27,7 +27,15 @@ userApp.controller('UserDashboardController',function($scope,requestHandler,Flas
         });
     };
 
-    //
+    //On Select frequent foods
+    $scope.frequentFood=function(foodid){
+       // alert(foodid);
+        var getFoodDetailPromise=UserDashboardService.doGetSelectedFoodDetails(foodid);
+        getFoodDetailPromise.then(function(result){
+            $scope.userSelectedFoodDetails=result;
+            $scope.doUserAddFood();
+        });
+    };
 
     //On Select search function
     $scope.foodSelected=function(selected){
@@ -61,9 +69,7 @@ userApp.controller('UserDashboardController',function($scope,requestHandler,Flas
             $scope.loadFoodDiary(selectedDate);
         });
 
-
-
-    };
+};
 
     //Delete User Food
     $scope.doDeleteUserFood= function (userFoodId) {
@@ -137,7 +143,7 @@ userApp.controller('UserDashboardController',function($scope,requestHandler,Flas
 
         insertSuggestedFoodPromise.then(function(result){
             successMessage(Flash,"Thanks&nbsp;for&nbsp;the&nbspsuggestion!!");
-           //$scope.resetdata();
+           $scope.resetdata();
         },function(){
             errorMessage(Flash, "Please try again later!");
         })
@@ -148,6 +154,7 @@ userApp.controller('UserDashboardController',function($scope,requestHandler,Flas
     $scope.resetdata=function(){
         $scope.foodSuggest={};
         $scope.foodSuggestForm.$setPristine();
+        $scope.foodSuggestForm.$setValidity();
         $scope.userFood={};
         $scope.FoodAddForm.$setPristine();
     };
