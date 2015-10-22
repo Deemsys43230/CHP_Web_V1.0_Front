@@ -214,9 +214,9 @@ userApp.directive('validateFloat', function() {
     return {
         require: 'ngModel',
         restrict: '',
-        link: function(scope, elm, attrs, ngModel) {
+        link: function(scope, elm, attrs, ctrl) {
             // only apply the validator if ngModel is present and Angular has added the email validator
-            ngModel.$validators.validateFloat = function(modelValue) {
+            ctrl.$validators.validateFloat = function(modelValue) {
                 return FLOAT_REGEXP.test(modelValue);
             };
 

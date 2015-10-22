@@ -16,7 +16,6 @@ userApp.controller('DemographyController',['$scope','requestHandler','Flash',fun
             originalNutrition=angular.copy(response.data.Nutrition);
             $scope.nutrients = response.data.Nutrition;
 
-
         },function(){
             errorMessage(Flash,"Please try again later!")
         });
@@ -37,10 +36,10 @@ userApp.controller('DemographyController',['$scope','requestHandler','Flash',fun
 
     $scope.doUpdateNutrition= function () {
         requestHandler.putRequest("user/updateNutrition/",$scope.nutrients).then(function(response){
-            $scope.doGetDemographyandNutrition();
-            successMessage(Flash,"Successfully Updated");
             originalNutrition=angular.copy($scope.nutrients);
-        }, function () {
+
+            successMessage(Flash,"Successfully Updated");
+        },  function () {
             errorMessage(Flash, "Please try again later!")
         });
     };
