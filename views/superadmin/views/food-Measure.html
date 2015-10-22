@@ -21,13 +21,13 @@
                 <table class="table table-bordered table-hover">
                     <thead>
                     <tr class="warning">
-                        <th>S.No</th>
+                        <th>Measure Id</th>
                         <th>Measure</th>
                         <th class="option-col">Options</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr dir-paginate="list in measureList | itemsPerPage:8 ">
+                    <tr dir-paginate="list in measureList | itemsPerPage:8">
                         <td>{{list.measureid}}</td>
                         <td>{{list.measurename}}</td>
                         <td>
@@ -69,7 +69,6 @@
                 <div class="action_btns margin-top-20">
                     <div><a ng-class="{modal_close:measureForm.$invalid}" class="btn btn_red" ng-disabled="measureForm.$invalid" ng-show="isNew" ng-click="doAddMeasure()">Save Measure </a></div>
                     <div><a ng-class="{modal_close:measureForm.$invalid}" class="btn btn_red" ng-disabled="measureForm.$invalid || isClean()" ng-hide="isNew" ng-click="doUpdateMeasure()">Save Measure </a></div>
-
                 </div>
             </form>
         </div>
@@ -86,18 +85,3 @@
         $(".common_model").show();
     })
 </script>
-<!--
-<script>
-    function noenter(e) {
-        e = e || window.event;
-        var key = e.keyCode || e.charCode;
-        if(key == 13){
-            alert("Enter Key is Restricted");
-            return key !== 13;
-        }
-        else if(key == 32){
-            alert("SpaceBar is Restricted");
-            return key !== 32;
-        }
-    }
-</script>-->

@@ -399,13 +399,31 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                             files:[
                                 '../../js/bootstrap.min.js',
                                 '../../js/category-select.js',
-                                '../../app/exercise/foodService.js',
-                                '../../app/exercise/foodController.js'
+                                '../../app/exercise/exerciseService.js',
+                                '../../app/exercise/exerciseController.js'
                             ]
                         })
                     }
                 },
-                controller:'FoodController'
+                controller:'ExerciseController'
+            }).
+            when('/exerciseType', {
+                templateUrl: 'views/exercise-type.html',
+                resolve: {
+                    loadMyFiles:function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'adminApp',
+                            files:[
+                                '../../js/bootstrap.min.js',
+                                '../../plugin/popup/style.css',
+                                '../../plugin/popup/jquery.leanModal.min.js',
+                                '../../angular/angular-utils-pagination/dirPagination.js',
+                                '../../app/exerciseType/exerciseTypeController.js'
+                            ]
+                        })
+                    }
+                },
+                controller:'ExerciseTypeController'
             }).
             when('/add-exercise', {
                 templateUrl: 'views/exercise-add-or-edit.html',
@@ -424,8 +442,8 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../css/multiSelect.css',
                                 '../../css/category-select.css',
                                 '../../css/category-select-bootstrap.css',
-                                '../../app/exercise/foodService.js',
-                                '../../app/exercise/foodController.js'
+                                '../../app/exercise/exerciseService.js',
+                                '../../app/exercise/exerciseController.js'
                             ]
                         })
                     }
@@ -629,7 +647,7 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../plugin/popup/style.css',
                                 '../../plugin/popup/jquery.leanModal.min.js',
                                 '../../angular/angular-utils-pagination/dirPagination.js',
-                                '../../app/foodCategory/foodCategoryController.js'
+                                '../../app/foodCategory/exerciseTypeController.js'
                             ]
                         })
                     }

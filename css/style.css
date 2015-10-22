@@ -7844,6 +7844,9 @@ a:hover, a:visited, a:link, a:active
 	border-left: 6px solid transparent;
 }
 
+
+
+
 /* Button Disability */
 .button-disable{
 	pointer-events: none;
@@ -8115,6 +8118,11 @@ a.profile_button:hover{
 .min-height-350{
 	min-height: 350px !important;
 }
+
+.min-height-380{
+    min-height: 380px !important;
+}
+
 
 
 .news-block{

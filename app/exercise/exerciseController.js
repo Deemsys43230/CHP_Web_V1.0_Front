@@ -120,9 +120,9 @@ adminApp.controller('FoodUploadController', ['$scope', 'FileUploader', function(
 }]);
 
 
-adminApp.controller('FoodController',function ($scope,requestHandler,Flash) {
+adminApp.controller('ExerciseController',function ($scope,requestHandler,Flash) {
     //sidebar menu active class
-    $scope.activeClass = {foodlist:'active'};
+    $scope.activeClass = {exerciseList:'active'};
 
     //Get Food List
     $scope.doGetAllFoodItems=function(){
@@ -368,6 +368,7 @@ adminApp.controller("FoodDetailsEditController",function($scope,requestHandler,F
     //End Initialize Page
 
 });
+
 
 adminApp.directive("ngFileSelect",function(){
 
