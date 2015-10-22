@@ -78,7 +78,8 @@
                         <td>{{coach.emailid}}</td>
                         <td>
                             <a href="#coach-view/{{coach.userid}}" class="btn-xs btn-primary">View</a>
-                            <a href="" ng-click="doEnableDisableCoach(coach.userid)" class="btn-xs btn-success">Enable</a>
+                            <a href="" class="btn-xs btn-success" ng-click="doEnableDisableCoach(coach.userid)" ng-show="coach.isenabled==0">Enable</a>
+                            <a href="" class="btn-xs btn-danger" ng-click="doEnableDisableCoach(coach.userid)" ng-hide="coach.isenabled==0">Disable</a>
                         </td>
                     </tr>
                     </tbody>

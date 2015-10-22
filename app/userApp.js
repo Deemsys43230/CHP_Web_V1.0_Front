@@ -68,7 +68,7 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
  								'../../css/augucomplete.css',
                                 '../../css/ngPercentageCircle.css',
                                 '../../app/userDashboard/ngPercentageCircle.js',
-                                'http://ghiden.github.io/angucomplete-alt/js/libs/angucomplete-alt.js',
+                                '../../js/augucomplete-alt.js',
                                 '../../app/userDashboard/userDashboardService.js',
                                 '../../app/userDashboard/userDashboardController.js',
                                 '../../app/userDashboard/datepickerDirective.js'

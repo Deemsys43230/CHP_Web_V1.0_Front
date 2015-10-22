@@ -20,7 +20,7 @@ adminApp.controller('CoachController',function($scope,requestHandler,Flash) {
     $scope.doEnableDisableCoach=function(coachId){
         requestHandler.postRequest("admin/enableordisableUser/",{"userid":coachId}).then(function(response){
            $scope.doGetCoachList();
-            successMessage(Flash,"Successful");
+            successMessage(Flash,"Successfully Updated");
         },function(){
             errorMessage(Flash,"Please Try Again Later");
         });

@@ -691,7 +691,7 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                             name:'adminApp',
                             files:[
                                 '../../plugin/text-editor/text-editor-bootstarp.js',
-                                'http://cdnjs.cloudflare.com/ajax/libs/summernote/0.5.0/summernote.css',
+                                '../../plugin/text-editor/summernote.css',
                                 '../../plugin/text-editor/summernote.js'
                             ]
                         })
