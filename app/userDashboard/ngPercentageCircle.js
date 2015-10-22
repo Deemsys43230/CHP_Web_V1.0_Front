@@ -50,7 +50,8 @@
                             // Adjust right
                             deg = 180 - (newvalue / 100 * 360)
                             rightSide.css({ "-webkit-transform": "rotateZ(-" + deg + "deg)" });
-                        } else {
+                        }
+                         else {
                             // Adjust left
                             leftSide.show();
                             deg = 180 - ((newvalue - 50) / 100 * 360)

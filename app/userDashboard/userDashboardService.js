@@ -60,10 +60,31 @@ adminApp.factory("UserDashboardService",function(requestHandler){
         });
     };
 
-    //Insert User Food to diary
+    //Update User Food to diary
+    userDashboardServiceObj.doUpdateUserFood=function(userFood){
+        return requestHandler.putRequest("user/editUserFood/",userFood).then(function (response) {
+            return response;
+        }, function () {
+            errorMessage(Flash, "Please try again later!");
+        });
+    };
+
+
+    //Delete User Food to diary
     userDashboardServiceObj.doDeleteUserFood=function(userFoodId){
         return requestHandler.postRequest("user/deleteUserFood/",{"userfoodid":userFoodId}).then(function (response) {
             return response;
+        }, function () {
+            errorMessage(Flash, "Please try again later!");
+        });
+    };
+
+    //Get User Food Details
+    userDashboardServiceObj.doGetUserFoodDetails=function(userFoodId){
+
+        console.log(userFoodId);
+        return requestHandler.postRequest("user/getFoodDetails/",{"userfoodid":userFoodId}).then(function (response) {
+            return response.data.FoodDetails;
         }, function () {
             errorMessage(Flash, "Please try again later!");
         });

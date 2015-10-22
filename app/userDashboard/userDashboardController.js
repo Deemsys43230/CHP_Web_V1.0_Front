@@ -7,28 +7,33 @@ userApp.controller('UserDashboardController',function($scope,requestHandler,Flas
     $scope.servings=0;
     $scope.caloriesIntake=0;
 
+
     $scope.doUserAddFood=function(){
         $(function(){
             $("#lean_overlay").fadeTo(1000);
             $("#modal-add-food").fadeIn(600);
             $(".user_register").show();
-          //  $scope.resetdata();
+
         });
         $(".modal_close").click(function(){
             $(".user_register").hide();
             $("#modal-add-food").hide();
             $("#lean_overlay").hide();
+           $scope.resetdata();
         });
 
         $("#lean_overlay").click(function(){
             $(".user_register").hide();
             $("#modal-add-food").hide();
             $("#lean_overlay").hide();
+           $scope.resetdata();
         });
     };
 
     //On Select frequent foods
     $scope.frequentFood=function(foodid){
+        $scope.isNew=true;
+        $scope.title= "Add Food";
        // alert(foodid);
         var getFoodDetailPromise=UserDashboardService.doGetSelectedFoodDetails(foodid);
         getFoodDetailPromise.then(function(result){
@@ -39,6 +44,8 @@ userApp.controller('UserDashboardController',function($scope,requestHandler,Flas
 
     //On Select search function
     $scope.foodSelected=function(selected){
+        $scope.isNew=true;
+        $scope.title= "Add Food";
         var getFoodDetailPromise=UserDashboardService.doGetSelectedFoodDetails(selected.description.foodid);
         getFoodDetailPromise.then(function(result){
             $scope.userSelectedFoodDetails=result;
@@ -46,11 +53,39 @@ userApp.controller('UserDashboardController',function($scope,requestHandler,Flas
         });
     };
 
+    //On Select edit foods
+    $scope.doEditUserFood=function(foodid,userfoodid){
+        $scope.isNew=false;
+        $scope.title= "Edit Food";
+        var getFoodDetailForEditPromise=UserDashboardService.doGetSelectedFoodDetails(foodid);
+        getFoodDetailForEditPromise.then(function(result){
+            $scope.userSelectedFoodDetails=result;
+            //console.log(result);
+            var getUserFoodDetailsPromise=UserDashboardService.doGetUserFoodDetails(userfoodid);
+            getUserFoodDetailsPromise.then(function(result){
+               // console.log(result);
+                $scope.userFood.userfoodid=result.userfoodid;
+                $scope.userFood.foodid=result.foodid;
+                $scope.userFood.measure=result.measureid;
+                $scope.userFood.servings=parseInt(result.measureid.servings);
+                $scope.caloriesIntake=result.measureid.calories;
+
+                $scope.doUserAddFood();
+           });
+
+        });
+    };
+
 
     $scope.doCalculateCalories=function(measureid){
+
         if($scope.userFood.servings==0){
             $scope.caloriesIntake=0;
-        }else{
+        }
+        if(!$scope.userFood.servings>0){
+            $scope.caloriesIntake=0;
+        }
+        else{
             $scope.caloriesIntake=$scope.userFood.measure.calories*$scope.userFood.servings;
         }
 
@@ -70,6 +105,21 @@ userApp.controller('UserDashboardController',function($scope,requestHandler,Flas
         });
 
 };
+
+    //Update User Food
+    $scope.doUpdateUserFood=function(){
+        //Set values according to the api calls
+        $scope.userFood.userfoodid= $scope.userFood.userfoodid;
+        $scope.userFood.foodid= $scope.userFood.foodid;
+        $scope.userFood.measureid=$scope.userFood.measure.measureid;
+        $scope.userFood.servings=parseInt($scope.userFood.servings);
+
+        var foodInsertPromise=UserDashboardService.doUpdateUserFood($scope.userFood);
+        foodInsertPromise.then(function(){
+            $scope.loadFoodDiary(selectedDate);
+        });
+
+    };
 
     //Delete User Food
     $scope.doDeleteUserFood= function (userFoodId) {
@@ -154,9 +204,10 @@ userApp.controller('UserDashboardController',function($scope,requestHandler,Flas
     $scope.resetdata=function(){
         $scope.foodSuggest={};
         $scope.foodSuggestForm.$setPristine();
-        $scope.foodSuggestForm.$setValidity();
-        $scope.userFood={};
+        $scope.userFood.measure="";
+        $scope.userFood.servings=[];
         $scope.FoodAddForm.$setPristine();
+        $scope.caloriesIntake=0;
     };
 
 //To Display current date
