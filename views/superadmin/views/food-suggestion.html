@@ -22,7 +22,7 @@
                 <table class="table table-bordered table-hover">
                     <thead>
                     <tr class="warning">
-                        <th class="col-md-1">S.No</th>
+                        <th class="col-md-1">Food Id</th>
                         <th class="col-md-2">Food Name</th>
                         <th class="col-md-6">Food Description</th>
                         <th class="col-md-3">Options</th>
@@ -30,7 +30,7 @@
                     </thead>
                     <tbody>
                     <tr dir-paginate="suggestion in foodSuggestionList | itemsPerPage: 8" ng-show="foodSuggestionList.length!=0">
-                        <td>{{$index+1}}</td>
+                        <td>{{suggestion.suggestionid}}</td>
                         <td><span class="line-clamp-xs">{{suggestion.foodname}}</span></td>
                         <td><span class="line-clamp-lg">{{suggestion.fooddescription}}</span></td>
                        <td>

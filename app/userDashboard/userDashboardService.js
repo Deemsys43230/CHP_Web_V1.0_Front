@@ -136,6 +136,13 @@ adminApp.factory("UserDashboardService",function(requestHandler){
         });
     }
 
+    //Add Suggested Exercise
+    userDashboardServiceObj.doAddSuggestedExercise=function(exerciseSuggest){
+        return requestHandler.postRequest("user/insertExerciseSuggestion/",exerciseSuggest).then(function (response) {
+            return response;
+        });
+    }
+
 
  return userDashboardServiceObj;
 

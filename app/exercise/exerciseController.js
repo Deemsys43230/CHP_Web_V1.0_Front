@@ -4,6 +4,7 @@
 
 var adminApp = angular.module('adminApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','ui.select','foodServiceModule']);
 
+/*
 adminApp.filter('propsFilter', function() {
     return function(items, props) {
         var out = [];
@@ -74,13 +75,17 @@ adminApp.controller('FoodUploadController', ['$scope', 'FileUploader', function(
     // FILTERS
     uploader.filters.push({
         name: 'customFilter',
-        fn: function(item /*{File|FileLikeObject}*/, options) {
+        fn: function(item */
+/*{File|FileLikeObject}*//*
+, options) {
             return this.queue.length < 10;
         }
     });
 
     // CALLBACKS
-    uploader.onWhenAddingFileFailed = function(item /*{File|FileLikeObject}*/, filter, options) {
+    uploader.onWhenAddingFileFailed = function(item */
+/*{File|FileLikeObject}*//*
+, filter, options) {
         console.info('onWhenAddingFileFailed', item, filter, options);
     };
     uploader.onAfterAddingFile = function(fileItem) {
@@ -395,5 +400,6 @@ adminApp.filter('trusted', ['$sce', function ($sce) {
 adminApp.controller('FoodCateogryController', ['$scope', function($scope) {
     $scope.activeClass = {category:'active'};
 }]);
+*/
 
 

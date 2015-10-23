@@ -200,6 +200,19 @@ userApp.controller('UserDashboardController',function($scope,requestHandler,Flas
 
     };
 
+    // Insert suggest exercise
+    $scope.doAddSuggestExercise=function(){
+        var insertSuggestedExercisePromise=UserDashboardService.doAddSuggestedExercise($scope.exerciseSuggest);
+
+        insertSuggestedExercisePromise.then(function(result){
+            successMessage(Flash,"Thanks&nbsp;for&nbsp;the&nbspsuggestion!!");
+           $scope.resetexercisedata();
+        },function(){
+            errorMessage(Flash, "Please try again later!");
+        })
+
+    };
+
     //Clear suggest food model values
     $scope.resetdata=function(){
         $scope.foodSuggest={};
@@ -208,6 +221,13 @@ userApp.controller('UserDashboardController',function($scope,requestHandler,Flas
         $scope.userFood.servings=[];
         $scope.FoodAddForm.$setPristine();
         $scope.caloriesIntake=0;
+    };
+
+    //Clear suggest exercise model values
+    $scope.resetexercisedata=function(){
+        $scope.exerciseSuggest={};
+        $scope.exerciseSuggestForm.$setPristine();
+
     };
 
 //To Display current date
@@ -227,6 +247,8 @@ userApp.controller('UserDashboardController',function($scope,requestHandler,Flas
     //Initialize
 
     $scope.loadFoodDiary(selectedDate);
+
+
 
 });
 
