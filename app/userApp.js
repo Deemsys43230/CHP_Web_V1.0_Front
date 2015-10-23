@@ -209,7 +209,7 @@ function errorMessage(Flash,message){
 
 //Check For FLoat Validation
 userApp.directive('validateFloat', function() {
-    var FLOAT_REGEXP = /^\-?\d+((\.|\,)\d+)?$/;
+    var FLOAT_REGEXP = /^[\-?\d+((\.|\,)\d+)? ]*$/;
 
     return {
         require: 'ngModel',
@@ -217,7 +217,7 @@ userApp.directive('validateFloat', function() {
         link: function(scope, elm, attrs, ctrl) {
             // only apply the validator if ngModel is present and Angular has added the email validator
             ctrl.$validators.validateFloat = function(modelValue) {
-                return FLOAT_REGEXP.test(modelValue);
+                return  ctrl.$isEmpty(modelValue) || FLOAT_REGEXP.test(modelValue);
             };
 
         }
