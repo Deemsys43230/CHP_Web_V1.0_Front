@@ -179,7 +179,7 @@ userApp.controller("UserLogoutController",['$cookies','$scope','$window',functio
 
     $scope.doLogout=function(){
         $cookies.remove("X-CSRFToken",{path: '/'});
-        $cookies.put('sessionid',undefined);
+        $cookies.remove("sessionid",{path: '/'});
         $window.location.href="../../#/index";
     };
 
