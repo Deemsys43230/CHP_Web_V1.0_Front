@@ -16,6 +16,17 @@ adminApp.controller('ExerciseTypeController',['$scope','requestHandler','Flash',
         });
     };
 
+    // Search Exercise Type
+    $('.show-list-search').click(function() {
+        $('.search-list-form').fadeIn(300);
+        $('.search-list-form input').focus();
+    });
+
+    $('.search-list-form input').focusout(function() {
+        $('.search-list-form').fadeOut(300);
+        $scope.categorysearch="";
+    });
+
     $scope.addInput = function(){
         $scope.inputs.push({field:''});
     };

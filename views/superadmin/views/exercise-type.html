@@ -11,9 +11,18 @@
             <div class="col-md-9">
                 <a href="#dashboard" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back to Dashboard</a>
                 <a id="modal_exerciseType" ng-click="reset()" href="#exerciseType" class="back-button pull-right margin-left-5"><i class="fa fa-plus-circle"></i> Add Exercise Type</a>
-
+                <!-- Stat Search -->
+                <div class="pull-right">
+                    <a href="#" onclick="return false;" class="show-list-search search_button"><i class="fa fa-search"></i></a>
+                    <div class="search-list-form">
+                        <form autocomplete="off" class="searchform">
+                            <input type="text" ng-model="typesearch" placeholder="Search here...">
+                        </form>
+                    </div>
+                </div>
+                <!-- End Search -->
                 <div flash-message="2000" class="col-md-5 pull-right"></div>
-                <h3 class="margin-bottom-10"><i class="fa fa-clone"></i> &nbsp;Exercise Type List</h3>
+                <h3 class="margin-bottom-10"><i class="fa fa-clone"></i> &nbsp;Exercise Types</h3>
 
                 <div ng-if="loaded">
                     <div class="loader-style">
@@ -25,13 +34,14 @@
                     <thead>
                     <tr class="warning">
                         <th class="col-md-1">Type Id</th>
-                        <th class="col-md-3">Type Name</th>
+                        <th class="col-md-3">Type Name
+                        </th>
                         <th class="col-md-5">Levels</th>
                         <th class="col-md-2">Options</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr dir-paginate="list in exerciseTypeList | itemsPerPage:9">
+                    <tr dir-paginate="list in exercisetypefilter = (exerciseTypeList |filter: typesearch | itemsPerPage: 9)" ng-show="exerciseTypeList.length!=0">
                         <td>{{list.typeid}}</td>
                         <td>
                             <span class="line-clamp-sm">
@@ -57,6 +67,8 @@
                             </div>
                         </td>
                     </tr>
+                    <tr ng-show="exerciseTypeList.length==0" class="text-center"><td colspan="4">No Records Found !!!</td></tr>
+                    <tr ng-show="!exercisetypefilter.length" class="text-center"><td colspan="4">No Records Found !!!</td></tr>
                     </tbody>
                 </table>
                 </div>
@@ -89,20 +101,23 @@
 
                 <button class="btn btn-xs btn-warning pull-right margin-top-5" ng-click="addInput()">Add New Level</button>
                 <p>List of level</p>
-                <div ng-repeat="input in inputs" class="margin-top-15">
-                    <input class="level_input" type="text" name="exerciseLevel" ng-model="input.levelname" ng-pattern="/^ *([a-zA-Z]+ ?)+ *$/" maxlength="45"/>
-                    <span class="level_close" ng-click="removeInput($index)"><span>Remove</span></span>
-                    <span ng-show="exerciseTypeAddForm.exerciseLevel.$dirty && exerciseTypeAddForm.exerciseLevel.$invalid">
-                        <span class="error-message" ng-show="exerciseTypeAddForm.exerciseLevel.$error.required"><span>Required.</span></span>
-                        <span class="error-message" ng-show="exerciseTypeAddForm.exerciseLevel.$error.pattern"><span>Enter&nbsp;Valid&nbsp;name.</span></span>
-                    </span>
-                </div>
 
+                <div ng-repeat="input in inputs" class="margin-top-15">
+                    <ng-form name="levelForm">
+                        <input class="level_input" type="text" name="exerciseLevel" ng-model="input.levelname" ng-pattern="/^ *([a-zA-Z]+ ?)+ *$/" maxlength="45" required/>
+                        <span class="level_close" ng-click="removeInput($index)"><span>Remove</span></span>
+                            <span ng-show="levelForm.exerciseLevel.$dirty && levelForm.exerciseLevel.$invalid">
+                                <span class="error-message override" ng-show="levelForm.exerciseLevel.$error.required"><span>Required.</span></span>
+                                <span class="error-message override" ng-show="levelForm.exerciseLevel.$error.pattern"><span>Enter&nbsp;Valid&nbsp;name.</span></span>
+                            </span>
+                    </ng-form>
+                </div>
                 <div class="action_btns margin-top-20">
                     <div class="one_half" ng-show="isNew"><a href="" class="btn btn_red" ng-class="{modal_close:exerciseTypeAddForm.$invalid}" ng-disabled="exerciseTypeAddForm.$invalid" ng-click="doAddExerciseType()">Save Exercise Type </a></div>
                     <div class="one_half" ng-hide="isNew"><a href="" class="btn btn_red" ng-class="{modal_close:exerciseTypeAddForm.$invalid}" ng-disabled="exerciseTypeAddForm.$invalid || isClean()" ng-click="doUpdateExerciseType()">Update Exercise Type </a></div>
                     <div class="one_half last modal_close"><a id="register_form" class="btn">Cancel</a></div>
                 </div>
+
             </form>
         </div>
     </section>

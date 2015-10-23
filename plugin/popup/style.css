@@ -140,11 +140,15 @@ form p{
 
 .common_model input[type="text"].level_input{
     padding: 7px 75px 7px 10px !important;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
 }
 
 .margin-top-9{
     margin-top: 9px;
+}
+
+.btn{
+    outline: none!important;
 }
 
 /* Level close */
@@ -166,7 +170,7 @@ form p{
     line-height: 29px;
     text-align: center;
     border-radius: 0px;
-    bottom: 14px;
+    bottom: 19px;
     right: 5px;
     cursor: pointer;
 }

@@ -1210,6 +1210,26 @@ a.update-button:hover{
 	z-index: 20;
 }
 
+.search_button{
+    margin-right: 0px;
+    padding: 6px 7px;
+    width:30px;
+    height: 30px;
+    background-color: #ddd;
+}
+
+.search_button i{
+    color: #666;
+}
+
+.search_button:hover{
+     background-color: #f8ba01;
+ }
+
+.search_button:hover i{
+     color: #fff;
+ }
+
 .search-list-form {
 	position: relative;
 	right: -25px;
@@ -7767,7 +7787,6 @@ a:hover, a:visited, a:link, a:active
 	font-weight: bold;
 }
 
-
 .textarea-errormessage40-left{
 	 top: 40px;
 	 left: -100px;
@@ -7817,6 +7836,18 @@ a:hover, a:visited, a:link, a:active
 }
 .textarea-errormessage-370{
 	top: -360px;
+}
+
+.error-message.override{
+    float: left;
+}
+
+.error-message.override span{
+    height: 15px;
+    line-height: 15px;
+    padding: 0 8px;
+    bottom: 53px;
+    right:auto;
 }
 
 .error-message span{

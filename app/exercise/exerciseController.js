@@ -122,7 +122,7 @@ adminApp.controller('FoodUploadController', ['$scope', 'FileUploader', function(
 
 adminApp.controller('ExerciseController',function ($scope,requestHandler,Flash) {
     //sidebar menu active class
-    $scope.activeClass = {exerciseList:'active'};
+    $scope.activeClass = {exerciselist:'active'};
 
     //Get Food List
     $scope.doGetAllFoodItems=function(){

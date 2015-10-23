@@ -647,7 +647,7 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../plugin/popup/style.css',
                                 '../../plugin/popup/jquery.leanModal.min.js',
                                 '../../angular/angular-utils-pagination/dirPagination.js',
-                                '../../app/foodCategory/exerciseTypeController.js'
+                                '../../app/foodCategory/foodCategoryController.js'
                             ]
                         })
                     }
