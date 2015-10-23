@@ -32,7 +32,18 @@ adminApp.controller('ExerciseTypeController',['$scope','requestHandler','Flash',
     };
 
     $scope.removeInput = function(index){
-        $scope.inputs.splice(index,1);
+
+        if($scope.inputs.length > 1){
+            $scope.inputs.splice(index,1);
+        }
+        else{
+            $scope.errorMessageForType=true;
+            window.setTimeout(function() {
+                $scope.$apply(function() {
+                    $scope.errorMessageForType=false;
+                });
+            }, 3000);
+        }
     };
 
     $scope.doAddExerciseType=function(){
@@ -52,11 +63,43 @@ adminApp.controller('ExerciseTypeController',['$scope','requestHandler','Flash',
 
         requestHandler.postRequest("admin/insertorupdateExerciseTypeAndLevel/",exerciseTypeObj).then(function (response) {
             $scope.doGetAllExerciseType();
-            successMessage(Flash,"Successfully Added");
+            successMessage(Flash,"Exercise Successfully Added");
             $scope.loaded=false;
             $scope.paginationLoad=true;
         }, function () {
             errorMessage(Flash, "Please try again later!")
+        });
+    };
+
+    $scope.doViewExerciseType=function(id){
+        $scope.title = "View Exercise Type";
+
+        $(function(){
+            $("#lean_overlay").fadeTo(1000);
+            $("#exerciseTypeView").fadeIn(600);
+            $(".common_model").show();
+        });
+
+        $scope.loaded=true;
+        requestHandler.postRequest("admin/gettypeIndividualDetail/",{'typeid':id}).then(function(response){
+            $scope.exerciseType=response.data.IndividualtypeData;
+            $scope.loaded=false;
+            $scope.paginationLoad=true;
+
+        },function(){
+            errorMessage(Flash,"Please try again later!")
+        });
+
+        $(".modal_close").click(function(){
+            $(".common_model").hide();
+            $("#exerciseTypeView").hide();
+            $("#lean_overlay").hide();
+        });
+
+        $("#lean_overlay").click(function(){
+            $(".common_model").hide();
+            $("#exerciseTypeView").hide();
+            $("#lean_overlay").hide();
         });
     };
 
@@ -111,10 +154,16 @@ adminApp.controller('ExerciseTypeController',['$scope','requestHandler','Flash',
         exerciseTypeObj.typeid=$scope.exerciseType.typeid;
 
         requestHandler.putRequest("admin/insertorupdateExerciseTypeAndLevel/",exerciseTypeObj).then(function (response) {
-            $scope.doGetAllExerciseType();
-            successMessage(Flash,"Successfully Updated");
             $scope.loaded=false;
             $scope.paginationLoad=true;
+            if(response.data.Response_status==0){
+                $scope.doGetAllExerciseType();
+                errorMessage(Flash,"Exercise already used, can't updated!")
+            }
+            if(response.data.Response_status==1){
+                $scope.doGetAllExerciseType();
+                successMessage(Flash,"Exercise Successfully Updated");
+            }
         }, function () {
             errorMessage(Flash, "Please try again later!")
         });
@@ -131,7 +180,7 @@ adminApp.controller('ExerciseTypeController',['$scope','requestHandler','Flash',
             }
             if(response.data.Response_status==1){
                 $scope.doGetAllExerciseType();
-                successMessage(Flash,"Successfully Updated");
+                successMessage(Flash,"Exercise Successfully Updated");
             }
         },function(){
             errorMessage(Flash,"Please try again later!")
@@ -145,11 +194,11 @@ adminApp.controller('ExerciseTypeController',['$scope','requestHandler','Flash',
 
             if(response.data.Response_status==0){
                 $scope.doGetAllExerciseType();
-                errorMessage(Flash,"Paired with other exercise, can't delete!");
+                errorMessage(Flash,"Exercise already used, can't delete!");
             }
             if(response.data.Response_status==1){
                 $scope.doGetAllExerciseType();
-                successMessage(Flash,"Successfully Updated");
+                successMessage(Flash,"Exercise Successfully Deleted");
             }
 
         },function(){

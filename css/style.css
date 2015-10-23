@@ -25,9 +25,9 @@
 /*   12 - Footer Styles 		   */
 /*   13 - Plugins Styles 	  	   */
 
-/*@import url(http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800);
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800);
 @import url(http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic);
-@import url(http://fonts.googleapis.com/css?family=Raleway:400,300,700);*/
+@import url(http://fonts.googleapis.com/css?family=Raleway:400,300,700);
 
 @font-face {
     font-family: audimat;
@@ -7646,6 +7646,10 @@ ul.sidebar-menu li a{
     margin-bottom: 20px !important;
 }
 
+.margin-bottom-40{
+    margin-bottom: 40px !important;
+}
+
 a:hover, a:visited, a:link, a:active
 {
     text-decoration: none;
@@ -7838,16 +7842,11 @@ a:hover, a:visited, a:link, a:active
 	top: -360px;
 }
 
-.error-message.override{
-    float: left;
-}
-
 .error-message.override span{
     height: 15px;
     line-height: 15px;
     padding: 0 8px;
     bottom: 53px;
-    right:auto;
 }
 
 .error-message span{
