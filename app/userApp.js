@@ -209,7 +209,7 @@ function errorMessage(Flash,message){
 
 //Check For FLoat Validation
 userApp.directive('validateFloat', function() {
-    var FLOAT_REGEXP = /^[\-?\d+((\.|\,)\d+)? ]*$/;
+    var FLOAT_REGEXP = /^[\-?\d+((\.|\,)\d+)? ]$/;
 
     return {
         require: 'ngModel',
