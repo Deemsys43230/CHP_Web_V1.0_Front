@@ -143,6 +143,60 @@ adminApp.factory("UserDashboardService",function(requestHandler){
         });
     }
 
+    userDashboardServiceObj.searchExercise=function(searchStr){
+        return requestHandler.postRequest("user/searchExercisebyUser/",{"exercisename":searchStr}).then(function (response) {
+            var exerciseSearchResponse=response.data.exercisesData;
+            $.each(exerciseSearchResponse, function(index,value){
+                value.imagepath=value.imagepath+"150x150.jpg";
+            });
+            return exerciseSearchResponse;
+        }, function () {
+            errorMessage(Flash, "Please try again later!")
+        });
+    }
+
+    //On Select Exercise From list
+    userDashboardServiceObj.doGetSelectedExerciseDetails= function (exerciseid) {
+        return requestHandler.postRequest("user/getExerciseDetailByuser/",{"exerciseid":exerciseid}).then(function (response) {
+            var userSelectedExerciseDetails=response.data.ExerciseDetail;
+/*
+            $.each(userSelectedExerciseDetails, function(index,value){
+               var index=value.imageurl.lastIndexOf('/');
+                value.imageurl=value.imageurl.substring(0,index);
+                value.imageurl=value.imageurl+"/200x200.jpg";
+            });*/
+            return userSelectedExerciseDetails;
+        }, function () {
+            errorMessage(Flash, "Please try again later!")
+        });
+    };
+
+    //Get Exercise by date
+    userDashboardServiceObj.getExerciseDiary=function(date){
+        return requestHandler.postRequest("user/getListOfExerciseByDate/",{"date":date}).then(function (response) {
+            return response.data.ExerciseData;
+        }, function () {
+            errorMessage(Flash, "Please try again later!")
+        });
+    };
+
+    //Insert User Exercise to diary
+    userDashboardServiceObj.doInsertUserExercise=function(userExercise){
+        return requestHandler.postRequest("user/insertUserExercise/",userExercise).then(function (response) {
+            return response;
+        }, function () {
+            errorMessage(Flash, "Please try again later!");
+        });
+    };
+
+    //Delete User Exercise to diary
+    userDashboardServiceObj.doDeleteUserExercise=function(userExerciseId){
+        return requestHandler.postRequest("user/deleteUserExercise/",{"userexercisemapid":userExerciseId}).then(function (response) {
+            return response;
+        }, function () {
+            errorMessage(Flash, "Please try again later!");
+        });
+    };
 
  return userDashboardServiceObj;
 

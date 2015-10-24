@@ -6,8 +6,12 @@ userApp.controller('UserDashboardController',function($scope,requestHandler,Flas
     $scope.userFood.sessionid=1;
     $scope.servings=0;
     $scope.caloriesIntake=0;
+    $scope.exerciseSearchResult = [];
+    $scope.userExercise={};
+    $scope.caloriesSpent=0;
+    $scope.workoutvalue=0;
 
-
+//Modal Popup to add user food
     $scope.doUserAddFood=function(){
         $(function(){
             $("#lean_overlay").fadeTo(1000);
@@ -27,6 +31,29 @@ userApp.controller('UserDashboardController',function($scope,requestHandler,Flas
             $("#modal-add-food").hide();
             $("#lean_overlay").hide();
            $scope.resetdata();
+        });
+    };
+
+    //Modal Popup to add user exercise
+    $scope.doUserAddExercise=function(){
+        $(function(){
+            $("#lean_overlay").fadeTo(1000);
+            $("#modal-add-exercise").fadeIn(600);
+            $(".user_register").show();
+
+        });
+        $(".modal_close").click(function(){
+            $(".user_register").hide();
+            $("#modal-add-exercise").hide();
+            $("#lean_overlay").hide();
+           $scope.resetexercisedata();
+        });
+
+        $("#lean_overlay").click(function(){
+            $(".user_register").hide();
+            $("#modal-add-exercise").hide();
+            $("#lean_overlay").hide();
+            $scope.resetexercisedata();
         });
     };
 
@@ -76,7 +103,7 @@ userApp.controller('UserDashboardController',function($scope,requestHandler,Flas
         });
     };
 
-
+//Calories caluclation for food
     $scope.doCalculateCalories=function(measureid){
 
         if($scope.userFood.servings==0){
@@ -157,7 +184,7 @@ userApp.controller('UserDashboardController',function($scope,requestHandler,Flas
         }
     };
 
-    //Search Function
+    //Search Function for food
      $scope.inputChanged = function(searchStr) {
          var userFoodDiaryDetailPromise=UserDashboardService.searchFood(searchStr);
          userFoodDiaryDetailPromise.then(function(result){
@@ -213,6 +240,73 @@ userApp.controller('UserDashboardController',function($scope,requestHandler,Flas
 
     };
 
+    //Search Function for exercise
+    $scope.inputChangedExercise = function(searchStr) {
+        var userExerciseDiaryDetailPromise=UserDashboardService.searchExercise(searchStr);
+        userExerciseDiaryDetailPromise.then(function(result){
+            $scope.exerciseSearchResult=result;
+        });
+    };
+
+    //On Select search exercise function
+    $scope.exerciseSelected=function(selected){
+        $scope.isNew=true;
+        $scope.title= "Add Exercise";
+        var getExerciseDetailPromise=UserDashboardService.doGetSelectedExerciseDetails(selected.description.exerciseid);
+        getExerciseDetailPromise.then(function(result){
+            $scope.userSelectedExerciseDetails=result;
+           //   console.log($scope.userSelectedExerciseDetails);
+            $scope.doUserAddExercise ();
+        });
+    };
+
+    //On load Exercise Diary
+    $scope.loadExerciseDiary=function(selectedDate){
+        // alert(selectedDate);
+        var userExerciseDiaryDetailPromise=UserDashboardService.getExerciseDiary(selectedDate);
+        userExerciseDiaryDetailPromise.then(function(result){
+            $scope.userExerciseDiaryDataAll=result;
+        });
+    };
+
+    //Insert User Exercise
+    $scope.doInsertUserExercise=function(){
+        //Set values according to the api calls
+        $scope.userExercise.exerciseid=$scope.userSelectedExerciseDetails.exerciseid;
+        $scope.userExercise.levelid=$scope.userExercise.levelid.levelid;
+        $scope.userExercise.date=selectedDate;
+        $scope.userExercise.workoutvalue=parseInt($scope.userExercise.workoutvalue);
+
+        var exerciseInsertPromise=UserDashboardService.doInsertUserExercise($scope.userExercise);
+        exerciseInsertPromise.then(function(){
+            $scope.loadExerciseDiary(selectedDate);
+        });
+
+    };
+
+    //Delete User Exercise
+    $scope.doDeleteUserExercise= function (userExerciseId) {
+        var exerciseDeletePromise=UserDashboardService.doDeleteUserExercise(userExerciseId);
+        exerciseDeletePromise.then(function(){
+            $scope.loadExerciseDiary(selectedDate);
+        });
+    };
+
+    //Calories caluclation for exercose
+    $scope.doCalculateCaloriesExercise=function(levelid){
+
+        if($scope.userExercise.workoutvalue==0){
+            $scope.caloriesSpent=0;
+        }
+        if(!$scope.userExercise.workoutvalue>0){
+            $scope.caloriesSpent=0;
+        }
+        else{
+            $scope.caloriesSpent=$scope.userExercise.levelid.calories*$scope.userExercise.workoutvalue;
+        }
+
+    };
+
     //Clear suggest food model values
     $scope.resetdata=function(){
         $scope.foodSuggest={};
@@ -227,6 +321,9 @@ userApp.controller('UserDashboardController',function($scope,requestHandler,Flas
     $scope.resetexercisedata=function(){
         $scope.exerciseSuggest={};
         $scope.exerciseSuggestForm.$setPristine();
+        $scope.userExercise.levelid="";
+        $scope.userExercise.workoutvalue="";
+        $scope.ExerciseAddForm.$setPristine();
 
     };
 
@@ -246,9 +343,12 @@ userApp.controller('UserDashboardController',function($scope,requestHandler,Flas
 
     //Initialize
 
+   $scope.loadFoodAndExercise=function(selectedDate){
     $scope.loadFoodDiary(selectedDate);
+    $scope.loadExerciseDiary(selectedDate);
+   }
 
-
+    $scope.loadFoodAndExercise(selectedDate);
 
 });
 
