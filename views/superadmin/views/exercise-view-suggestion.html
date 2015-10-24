@@ -1,0 +1,38 @@
+
+<!-- Start Page Banner -->
+
+<div class="page-banner">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-3">
+                <h4 class="classic-title"><span>Exercise Management</span></h4>
+                <div ng-include src="'views/exercise-menu.html'" onload="activeClass"></div>
+            </div>
+            <div class="col-md-9">
+                <a href="#exerciseSuggestion" class="back-button pull-right margin-left-10"><i class="fa fa-arrow-circle-o-left"></i> Back to Exercise Suggestion List</a>
+                <h3 class="margin-bottom-10"><i class="fa fa-eye"></i> &nbsp;View Exercise Suggestion</h3>
+                <hr/>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="testimonial">
+                            <div class="media testimonial-inner">
+                                <div class="pull-left">
+                                    <img class="img-responsive img-circle" ng-src="{{myImgSrc}}" >
+                                </div>
+                                <div class="media-body">
+                                    <div class="col-md-3" ><strong>Suggested User:</strong></div><div class="col-md-9"><span>{{viewExerciseSuggestionDetails.user_name}}</span></div>
+                                    <div class="col-md-3 margin-top-10"><strong>Suggested Date:</strong></div><div class="col-md-9 margin-top-10"><span>{{viewExerciseSuggestionDetails.suggesteddate}}</span></div>
+                                    <div class="col-md-3 margin-top-10"><strong>Suggested Exercise:</strong></div><div class="col-md-9 margin-top-10"><span>{{viewExerciseSuggestionDetails.exercisename}}</span></div>
+                                    <div class="col-md-3 margin-top-10"><strong>Description:</strong></div><div class="col-md-9 margin-top-10"><span>{{viewExerciseSuggestionDetails.description}}</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- End Page Banner -->

@@ -132,12 +132,24 @@ adminApp.controller("FoodDetailsEditController",function($scope,requestHandler,F
     //For Tag Input
     $scope.tagTransform = function (newTag) {
 
-        var item = {
-            "tagid": null,
-            "tagname": newTag
-        };
+        var isExist=false;
+        $.each($scope.foodTagList,function(index,value){
+            if(value.tagname==newTag){
+                isExist=true;
+            }
+        });
 
-        return item;
+        if(!isExist){
+            var item = {
+                "tagid": null,
+                "tagname": newTag
+            };
+
+            return item;
+        }else{
+            return false;
+        }
+
     };
 
     //Get Particular Food Details
@@ -155,6 +167,9 @@ adminApp.controller("FoodDetailsEditController",function($scope,requestHandler,F
             foodMeasurePromise.then(function(result){
                 $scope.foodMeasureListAll=result;
             });
+
+            //Set Region Values
+            $scope.foodDetails.regionid=$scope.foodDetails.regionid.regionid;
 
             original=angular.copy($scope.foodDetails);
 
@@ -196,6 +211,7 @@ adminApp.controller("FoodDetailsEditController",function($scope,requestHandler,F
         $scope.foodDetails={};
         $scope.foodDetails.measureid=[];
         $scope.foodDetails.sessionid=[];
+        $scope.foodDetails.regionid="1";
 
         $scope.foodDetails.foodImagePath='../../images/No_image_available.jpg';
         $scope.foodDetails.foodimage='../../images/No_image_available.jpg';
@@ -219,9 +235,12 @@ adminApp.controller("FoodDetailsEditController",function($scope,requestHandler,F
     $scope.foodDetails.sessionid=FoodService.getSessionArray($scope.foodDetails.sessionSet);
     $scope.foodDetails.categoryid=FoodService.getCategoryArray($scope.foodDetails.categoryid);
     $scope.foodDetails.tagid=FoodService.getTagArray($scope.foodDetails.tagid);
+        $scope.foodDetails.regionid=$scope.foodDetails.regionid;
 
     //To Change the name of the obj from measureid to measuredata
     $scope.foodDetails.measuredata=$scope.foodDetails.measureid;
+
+
 
 
     if($scope.imageUpload){//Check for Image Upload
@@ -260,7 +279,7 @@ adminApp.controller("FoodDetailsEditController",function($scope,requestHandler,F
         $scope.foodDetails.tagid=FoodService.getTagArray($scope.foodDetails.tagid);
 
         $scope.foodDetails.measuredata=$scope.foodDetails.measureid;
-
+$scope.foodDetails.regionid=$scope.foodDetails.regionid;
         requestHandler.postRequest("admin/insertFood/", $scope.foodDetails).then(function (response) {
             if (response.data.Response_status == 1) {
                 successMessage(Flash,"Food Added Successfully!");

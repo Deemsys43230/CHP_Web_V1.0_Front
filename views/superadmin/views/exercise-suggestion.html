@@ -32,8 +32,9 @@
                     <tr dir-paginate="exercisesuggestion in exerciseSuggestionList | itemsPerPage: 8" ng-show="exerciseSuggestionList.length!=0">
                         <td>{{exercisesuggestion.suggestionid}}</td>
                         <td><span class="line-clamp-xs">{{exercisesuggestion.exercisename}}</span></td>
-                        <td><span class="line-clamp-lg">{{exercisesuggestion.description}}</span></td>
+                        <td><span class="line-clamp-md">{{exercisesuggestion.description}}</span></td>
                         <td>
+                            <a href="#exerciseSuggestionDetail/{{exercisesuggestion.suggestionid}}" class="btn-xs btn-primary">View</a>
                             <a href="" class="btn-xs btn-success hint--top" ng-click="doApproveExerciseSuggestion(exercisesuggestion.suggestionid)" ng-show="exercisesuggestion.exercisestatus==0" data-hint="Approve"><i class="fa fa-check"/></a>&nbsp;&nbsp;<a href="" class="btn-xs btn-danger hint--top" ng-click="doRejectExerciseSuggestion(exercisesuggestion.suggestionid)" ng-show="exercisesuggestion.exercisestatus==0" data-hint="Reject"><i class="fa fa-close"/></a>
                             <span  class="custom-text-green"  ng-show="exercisesuggestion.exercisestatus==1" >Approved</span>
                             <span  class="custom-text-red"  ng-show="exercisesuggestion.exercisestatus==2">Rejected</span>

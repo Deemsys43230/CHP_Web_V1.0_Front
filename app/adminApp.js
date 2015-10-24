@@ -688,6 +688,23 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'FoodSuggestionController'
             }).
+            when('/foodSuggestionDetail/:id', {
+                templateUrl: 'views/food-view-suggestion.html',
+                resolve: {
+                    loadMyFiles:function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'adminApp',
+                            files:[
+                                '../../js/bootstrap.min.js',
+                                '../../plugin/popup/style.css',
+                                '../../angular/angular-utils-pagination/dirPagination.js',
+                                '../../app/foodSuggestion/foodSuggestionController.js'
+                            ]
+                        })
+                    }
+                },
+                controller:'FoodSuggestionViewController'
+            }).
             when('/exerciseSuggestion', {
                 templateUrl: 'views/exercise-Suggestion.html',
                 resolve: {
@@ -704,6 +721,23 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                     }
                 },
                 controller:'ExerciseSuggestionController'
+            }).
+            when('/exerciseSuggestionDetail/:id', {
+                templateUrl: 'views/exercise-view-suggestion.html',
+                resolve: {
+                    loadMyFiles:function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'adminApp',
+                            files:[
+                                '../../js/bootstrap.min.js',
+                                '../../plugin/popup/style.css',
+                                '../../angular/angular-utils-pagination/dirPagination.js',
+                                '../../app/exerciseSuggestion/exerciseSuggestionController.js'
+                            ]
+                        })
+                    }
+                },
+                controller:'ExerciseSuggestionDetailViewController'
             }).
             when('/course', {
                 templateUrl: 'views/course.html',

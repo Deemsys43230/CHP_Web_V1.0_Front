@@ -46,3 +46,26 @@ adminApp.controller('FoodSuggestionController',function($scope,requestHandler,Fl
     };
 
 });
+
+adminApp.controller('FoodSuggestionViewController',function($scope,requestHandler,Flash,$routeParams,$sce) {
+    $scope.activeClass = {suggestion: 'active'};
+
+    //Exercise Detail View Suggestion
+    $scope.doViewFoodSuggestion= function () {
+        $scope.loaded = true;
+        requestHandler.postRequest("admin/getFoodSuggestionDetail/",{'suggestionid':$routeParams.id}).then(function(response){
+            $scope.myImgSrc = $sce.trustAsResourceUrl(response.data.Food_Suggestion_Data.user_imageurl+"?decache="+Math.random());
+            $scope.viewFoodSuggestionDetails = response.data.Food_Suggestion_Data;
+            //View the image in ng-src for view testimonials
+
+            $scope.loaded = false;
+            $scope.paginationLoad = true;
+
+        },  function () {
+            errorMessage(Flash, "Please try again later!")
+        });
+    };
+
+    $scope.doViewFoodSuggestion();
+
+});
