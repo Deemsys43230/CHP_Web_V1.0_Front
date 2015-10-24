@@ -28,6 +28,7 @@
 .ui-select-choices-row{
     color:#444;
     padding: 3px;
+    margin-bottom: 3px;
 }
 
 .ui-select-choices-row div.typename{

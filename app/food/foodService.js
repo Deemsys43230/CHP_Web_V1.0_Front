@@ -163,7 +163,7 @@ adminApp.factory("FoodService",function(requestHandler){
             return response.data.Food_Tag_Data.tagid;
          }
          });
-    }
+    };
 
 
     //Get Tag array to update

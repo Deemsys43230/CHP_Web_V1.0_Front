@@ -6,26 +6,26 @@
             <div class="col-md-12">
                 <a href="#exercise" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back to Exercise List</a>
                 <h4 class="classic-title"><span>{{title}}</span></h4>
-                <form name="foodForm" novalidate>
+                <form name="exerciseForm" novalidate>
                 <div class="col-md-9 no-padding">
                     <h5>Exercise Name :</h5>
-                    <input class="form-control" name="foodname" maxlength="100"  ng-pattern="/^ *([a-zA-Z]+ ?)+ *$/" ng-model="foodDetails.foodname" required/>
-                    <span ng-show="foodForm.foodname.$dirty&&foodForm.foodname.$invalid">
-                        <span class="error-message" ng-show="foodForm.foodname.$error.required"><span>Required.</span></span>
-                        <span class="error-message" ng-show="foodForm.foodname.$error.pattern"><span>Enter&nbsp;Valid&nbsp;name.</span></span>
-                        <span class="error-message" ng-show="foodForm.foodname.$error.foodNameExists"><span>Food&nbsp;Name&nbsp;Already&nbsp;Exist.</span></span>
+                    <input class="form-control" name="exercisename" maxlength="100"  ng-pattern="/^ *([a-zA-Z]+ ?)+ *$/" ng-model="exerciseDetail.exercisename" required/>
+                    <span ng-show="exerciseForm.exercisename.$dirty&&exerciseForm.exercisename.$invalid">
+                        <span class="error-message" ng-show="exerciseForm.exercisename.$error.required"><span>Required.</span></span>
+                        <span class="error-message" ng-show="exerciseForm.exercisename.$error.pattern"><span>Enter&nbsp;Valid&nbsp;name.</span></span>
+                        <span class="error-message" ng-show="exerciseForm.exercisename.$error.exercisenameExists"><span>Food&nbsp;Name&nbsp;Already&nbsp;Exist.</span></span>
                     </span>
                     <br/>
                     <h5>Tags :</h5>
                     <div class="form-group">
-                        <ui-select multiple tagging="tagTransform" tagging-label="(custom 'new' label)" name="tagid"  ng-model="foodDetails.tagid" theme="select2" sortable="true" ng-disabled="disabled" class="form-control" ui-select-required>
+                        <ui-select multiple tagging="tagTransform" tagging-label="(custom 'new' label)" name="tags"  ng-model="exerciseDetail.tags" theme="select2" sortable="true" ng-disabled="disabled" class="form-control" ui-select-required>
                             <ui-select-match placeholder="Type/Select tags">{{$item.tagname}}</ui-select-match>
-                            <ui-select-choices repeat="tag in foodTagList | filter:$select.search">
+                            <ui-select-choices repeat="tag in exerciseTagList | filter:$select.search">
                                 {{tag.tagname}}
                             </ui-select-choices>
                         </ui-select>
-                      <span ng-show="foodForm.tagid.$dirty&&foodForm.tagid.$invalid">
-                        <span class="error-message" ng-show="foodForm.tagid.$error.uiSelectRequired"><span>Required.</span></span>
+                        <span ng-show="exerciseForm.tags.$dirty&&exerciseForm.tags.$invalid">
+                        <span class="error-message" ng-show="exerciseForm.tags.$error.uiSelectRequired"><span>Required.</span></span>
                     </span>
                     <br/>
                         <div ng-if="loaded">
@@ -34,25 +34,24 @@
                             </div>
                         </div>
                     <h5>Exercise Type :</h5>
-                        <div ng-controller="DemoCtrl">
-                            <p>Selected: {{person.selected}}</p>
-                            <ui-select ng-model="person.selected" theme="select2" ng-disabled="disabled" class="form-control">
-                                <ui-select-match placeholder="Select or search a exercise name...">{{$select.selected.type}}</ui-select-match>
-                                <ui-select-choices repeat="person in people | propsFilter: {type: $select.search}">
-                                    <div class="typename" ng-bind-html="person.type | highlight: $select.search">{{person.type}}</div>
+                        <ui-select ng-model="level.selected" theme="select2" ng-disabled="disabled" class="form-control">
+                            <ui-select-match placeholder="Select or search a exercise name...">{{$select.selected.type}}</ui-select-match>
+                            <ui-select-choices repeat="level in levelslist | propsFilter: {type: $select.search}">
+                                <div ng-click="dochangeExerciseType(level.typeid);">
+                                    <div class="typename" ng-bind-html="level.type | highlight: $select.search | html">{{level.type}}</div>
                                     <small>
-                                        {{person.level}}
+                                        {{level.levelnames}}
                                     </small>
-                                </ui-select-choices>
-                            </ui-select>
-                        </div>
+                                </div>
+                            </ui-select-choices>
+                        </ui-select>
                     <br/>
                     <h5>Energy Spent By Exercise Type :</h5>
                     </div>
                 </div>
 
                 <div class="col-md-3 coach-details text-center">
-                    <img class="food-image-wrap" id="food-image-change" ng-src="{{foodDetails.foodImagePath|trusted}}"/><br/><br/>
+                    <img class="food-image-wrap" id="food-image-change" ng-src="{{exerciseDetail.imageurl|trusted}}"/><br/><br/>
                     <a id="modal_trigger" href="#modal" onclick="return false;" ng-click="doRefreshPreview();" class="btn-sm btn-warning">Change Exercise Image</a>
                 </div>
                 <div class="col-md-12 no-padding">
@@ -66,18 +65,32 @@
                             </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>Level Name</td>
-                                    <td><input class="form-control"></td>
-                                    <td><input class="form-control"></td>
+                                <tr ng-repeat="levels in exerciseDetail.type.levels">
+                                    <td>{{levels.levelname}}</td>
+                                    <td>
+                                        <ng-form name="workoutValueForm">
+                                            <input class="form-control" name="workoutValue" ng-model="levels.workoutvalue" required/>
+                                            <span ng-show="workoutValueForm.workoutValue.$dirty && workoutValueForm.workoutValue.$invalid">
+                                                <span class="error-message" ng-show="workoutValueForm.workoutValue.$error.required"><span>Required</span></span>
+                                            </span>
+                                        </ng-form>
+                                    </td>
+                                    <td>
+                                        <ng-form name="caloriesForm">
+                                            <input class="form-control" name="calories" ng-model="levels.calories" required/>
+                                            <span ng-show="caloriesForm.calories.$dirty && caloriesForm.calories.$invalid">
+                                                <span class="error-message" ng-show="caloriesForm.calories.$error.required"><span>Required</span></span>
+                                            </span>
+                                        </ng-form>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                     <div class="col-md-12 margin-top-10 text-center">
-                        <a class="btn register_button" href="" ng-click="doUpdateFoodDetails()" ng-disabled="foodForm.$invalid||isClean()" ng-hide="isNew">Update Exercise Details</a>
-                        <a class="btn register_button" href="" ng-click="doAddFoodDetails()" ng-disabled="foodForm.$invalid||imageAdded" ng-show="isNew">Save Exercise Details</a>
-                        <a class="btn cancel_button" href="#food">Cancel</a>
+                        <a class="btn register_button" href="" ng-click="doUpdateExerciseDetail()" ng-disabled="exerciseForm.$invalid||isClean()" ng-hide="isNew">Update Exercise Details</a>
+                        <a class="btn register_button" href="" ng-click="doAddExerciseDetail()" ng-disabled="exerciseForm.$invalid||imageAdded" ng-show="isNew">Save Exercise Details</a>
+                        <a class="btn cancel_button" href="#exercise">Cancel</a>
                     </div>
                 </div>
                 </form>
@@ -97,7 +110,7 @@
         <!-- Register Form -->
         <div class="common_model">
             <p>Preview:</p>
-            <img class="food-preview center-block" ng-src="{{foodDetails.foodimage|trusted}}"/>
+            <img class="food-preview center-block" ng-src="{{exerciseDetail.exerciseimage|trusted}}"/>
             <h6 class="text-red text-center margin-tb-10">Note : Upload Image Size 1000x1000</h6>
             <p>Progress:</p>
             <progress class="food-progress" value="{{progress}}"></progress>
@@ -108,7 +121,7 @@
                         <input type="file"class="upload" ng-file-select="onFileSelect($files)" />
                     </div>
                 </div>
-                <div class="one_half last"><a href="" onclick="return false;" class="food-button export modal_close" ng-click="doUpdateFoodImage();">Save Image</a></div>
+                <div class="one_half last"><a href="" onclick="return false;" class="food-button export modal_close" ng-click="doUpdateExerciseImage();">Save Image</a></div>
             </div>
         </div>
     </section>

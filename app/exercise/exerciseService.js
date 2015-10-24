@@ -1,181 +1,84 @@
-var adminApp=angular.module('foodServiceModule',['requestModule']);
+var adminApp=angular.module('exerciseServiceModule',['requestModule']);
 
-adminApp.factory("FoodService",function(requestHandler){
+adminApp.factory("ExerciseService",function(requestHandler){
 
-    var foodServiceObj={};
-    
-    //Get Categories
-    foodServiceObj.doGetCategories= function () {
-       return requestHandler.getRequest("admin/getFoodCategoryByStatus","").then(function(response){
-          return response.data.Food_Category;
-        },function(response){
-            alert("Not able to pull Food Measure List");
-        })
-    };
-    //End Get Food Categories
+    var exerciseServiceObj={};
 
     //Get Tags
-    foodServiceObj.doGetTags= function () {
-         return requestHandler.getRequest("admin/getFoodTag","").then(function(response){
-            return response.data.Food_Tag_Data;
+    exerciseServiceObj.doGetTags= function () {
+         return requestHandler.getRequest("admin/listofExercisetags","").then(function(response){
+            return response.data.Exercise_Tag_Data;
         },function(response){
             alert("Not able to pull Food Tag");
         })
     };
     //End Get Food Tags
 
-    //Measure Object
-    foodServiceObj.getMeasureSet=function(){
-        //Create Measure set object
-        var measureSet={"polyunsaturatedfat": "",
-            "folicacid": "",
-            "vitaminE": "",
-            "vitaminC": "",
-            "zinc": "",
-            "vitaminA": "",
-            "protein": "",
-            "vitaminK": "",
-            "saturatedfat":"",
-            "niacin": "",
-            "fibre": "",
-            "measureid": "",
-            "sodium": "",
-            "thiamin": "",
-            "sugar": "",
-            "potassium": "",
-            "fat": "",
-            "vitaminB12": "",
-            "vitaminB6": "",
-            "calories": "",
-            "value": "",
-            "phosphorous": "",
-            "calcium": "",
-            "riboflavin": "",
-            "iron": "",
-            "monounsaturatedfat": "",
-            "measurename": "",
-            "carbo": ""
-        };
-        return measureSet;
-    };
-    //End Measure Object
+    //Exercise Type By id
+    exerciseServiceObj.getSelectedLevel = function(typeObj){
+        var levelnames = "";
 
-    //Add New Measure
-    foodServiceObj.doAddMeasureMinerals=function(id,name,measureid){
-        var addMeasureSet=foodServiceObj.getMeasureSet();
-        addMeasureSet.measureid=id;
-        addMeasureSet.measurename=name;
-        var isExist=false;
-        var removeIndex=0;
-        $.each(measureid, function(index,value){
-            if(value.measureid==id){
-                isExist=true;
-                removeIndex=index;
-            }
-        });
-        if(isExist){
-            measureid.splice(removeIndex,1);
-        }
-        else{
-            measureid.push(addMeasureSet);
-        }
-        return measureid;
-    };
-    //End Add Measure
-
-    //SetGet Session Values Basically SessionSet
-    foodServiceObj.setSessionValues=function(sessionid){
-
-        var sessionSet={
-            breakfast:false,
-            brunch:false,
-            lunch:false,
-            eveningsnacks:false,
-            dinner:false
-        };
-
-        $.each(sessionid, function(index,value) {
-            switch(value.sessionid) {
-                case 1:
-                    sessionSet.breakfast=true;
-                    break;
-                case 2:
-                    sessionSet.brunch=true;
-                    break;
-                case 3:
-                    sessionSet.lunch=true;
-                    break;
-                case 4:
-                    sessionSet.eveningsnacks=true;
-                    break;
-                case 5:
-                    sessionSet.dinner=true;
-                    break;
-                default:
-                    break;
-            }
+        $.each(typeObj.levels, function(index,value){
+            if(index<typeObj.levels.length-1)
+            levelnames = levelnames+value.levelname+', ';
+            levelnames = levelnames+value.levelname;
         });
 
-        return sessionSet;
+        var returnObj={};
+
+        returnObj.typeid=typeObj.typeid;
+        returnObj.type=typeObj.typename;
+        returnObj.levelnames=levelnames;
+
+        return returnObj;
     };
+    //End Exercise Type By id
 
-    //Get session array to update
-    foodServiceObj.getSessionArray=function(sessionSet){
+    //Exercise Type List
+    exerciseServiceObj.getTypeList = function(typeList){
+        var returnTypeListArray=new Array();
+        $.each(typeList, function(index,value){
+            var TypeListObj = {};
 
-        //Set Session Array
-        var sessionArray=new Array();
+            TypeListObj.typeid=value.typeid;
+            TypeListObj.type=value.typename;
+            var levelnames = "";
+            $.each(value.levels, function(index,levelValues){
+                if(index<value.levels.length-1)
+                levelnames = levelnames+levelValues.levelname+', ';
+                levelnames = levelnames+levelValues.levelname;
+            });
 
-        if(sessionSet.breakfast){
-            sessionArray.push(1);
-        }
-        if(sessionSet.brunch){
-            sessionArray.push(2);
-        }
-        if(sessionSet.lunch){
-            sessionArray.push(3);
-        }
-        if(sessionSet.eveningsnacks){
-            sessionArray.push(4);
-        }
-        if(sessionSet.dinner){
-            sessionArray.push(5);
-        }
-        return sessionArray;
-    };
+            TypeListObj.levelnames=levelnames;
 
-    //Get category array to update
-    foodServiceObj.getCategoryArray=function(categoryid){
+            returnTypeListArray.push(TypeListObj);
 
-        var categoryArray=new Array();
-
-        $.each(categoryid, function(index,value) {
-            categoryArray.push(parseInt(value.categoryid));
         });
 
-        return categoryArray;
-
+        return returnTypeListArray;
     };
+    //End Exercise Type List
 
     //Insert New Tags
-    foodServiceObj.insertTag=function(tagname){
-        return requestHandler.postRequest("admin/insertFoodTag/",{'tagname':tagname}).then(function(response){
+    exerciseServiceObj.insertTag=function(tagname){
+        return requestHandler.postRequest("admin/insertexerciseTag/",{'tagname':tagname}).then(function(response){
          if(response.data.Response_status==1){
-            return response.data.Food_Tag_Data.tagid;
+            return response.data.Exercise_Tag_Data.tagid;
          }
          });
-    }
-
+    };
 
     //Get Tag array to update
-    foodServiceObj.getTagArray=function(tagId){
+    exerciseServiceObj.getTagArray=function(tags){
+        console.log(tags);
 
         var tagArray=new Array();
         var tagPromise;
-        $.each(tagId, function(index,value) {
+        $.each(tags, function(index,value) {
             if(value.tagid!=null){
                 tagArray.push(parseInt(value.tagid));
             }else{
-               tagPromise=foodServiceObj.insertTag(value.tagname);
+               tagPromise=exerciseServiceObj.insertTag(value.tagname);
                tagPromise.then(function(result){
                    tagArray.push(result);
                });
@@ -187,7 +90,7 @@ adminApp.factory("FoodService",function(requestHandler){
     };
 
     // Function to convert image url to base64
-    foodServiceObj.convertImgToBase64=function(url, callback, outputFormat){
+    exerciseServiceObj.convertImgToBase64=function(url, callback, outputFormat){
         var img = new Image();
         img.crossOrigin = 'Anonymous';
         img.onload = function(){
@@ -203,31 +106,9 @@ adminApp.factory("FoodService",function(requestHandler){
         img.src = url;
     };
 
-    //Get Measures
-    foodServiceObj.doGetMeasures= function (measureid) {
-        return requestHandler.getRequest("admin/viewAllfoodMeasure","").then(function(response){
-            var foodMeasureListAll=response.data.viewAllfoodMeasure;
-            $.each(foodMeasureListAll, function(index,listValue) {
-                listValue.checked=false;
-                $.each(measureid, function(index,messureValue) {
-                    if(messureValue.measureid==listValue.measureid){
-                        listValue.checked=true;
-                    }
-                });
-            });
+    return exerciseServiceObj;
 
-            return foodMeasureListAll;
-
-        },function(response){
-            alert("Not able to pull Food Measure List");
-        })
-    };
-    //End Get Food Measures
-
-
-    return foodServiceObj;
-
-    });
+});
 
 
 

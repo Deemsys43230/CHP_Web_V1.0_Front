@@ -407,6 +407,48 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'ExerciseController'
             }).
+            when('/exercise-view/:id', {
+                templateUrl: 'views/exercise-view.html',
+                resolve: {
+                    loadMyFiles:function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'adminApp',
+                            files:[
+                                '../../js/bootstrap.min.js',
+                                '../../app/exercise/exerciseController.js'
+                            ]
+                        })
+                    }
+                },
+                controller:'ExerciseViewController'
+            }).
+            when('/exercise-edit/:id', {
+                templateUrl: 'views/exercise-add-or-edit.html',
+                resolve: {
+                    loadMyFiles:function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'adminApp',
+                            files:[
+                                '../../js/bootstrap.min.js',
+                                '../../plugin/popup/style.css',
+                                '../../plugin/popup/jquery.leanModal.min.js',
+                                '../../css/food-image-upload.css',
+                                '../../js/image-upload.js',
+                                '../../js/category-select.js',
+                                '../../css/multiSelect.css',
+                                '../../css/category-select.css',
+                                '../../css/category-select-bootstrap.css',
+                                '../../app/exercise/exerciseService.js',
+                                '../../app/exercise/exerciseController.js'
+                            ]
+                        })
+                    }
+                },
+                controller:'ExerciseEditController',
+                title:'Edit Exercise',
+                type:2, //For Update type=1
+                isNew:false
+            }).
             when('/exerciseType', {
                 templateUrl: 'views/exercise-type.html',
                 resolve: {

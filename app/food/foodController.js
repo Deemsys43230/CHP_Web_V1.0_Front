@@ -195,7 +195,7 @@ adminApp.controller("FoodDetailsEditController",function($scope,requestHandler,F
 
     $scope.doRefreshPreview=function(){
         $scope.foodDetails.foodimage=$scope.foodDetails.foodImagePath;
-    }
+    };
 
     //Update Food Image
     $scope.doUpdateFoodImage=function(){
@@ -306,12 +306,10 @@ $scope.foodDetails.regionid=$scope.foodDetails.regionid;
         $scope.doGetFoodDetails();
     }
 
-
-
     //Set measure set
     $scope.doAddNewMeasureMinerals=function(id,name){
         $scope.foodDetails.measureid=FoodService.doAddMeasureMinerals(id,name,$scope.foodDetails.measureid);
-    }
+    };
 
     //Get Categories
     var foodCategoryPromise=FoodService.doGetCategories();
