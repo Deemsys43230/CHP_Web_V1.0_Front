@@ -3,10 +3,29 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8">
-                <h3 class="classic-title"><span>Latest News</span></h3>
-                <h4>{{usernewsdetails.title}}</h4>
-                <p class="margin-top-10"  ng-bind-html="usernewsdetails.description | html"></p>
+<!--
 
+                <h3 class="classic-title"><span>Latest News</span></h3>
+
+                <h4>{{usernewsdetails.title}}</h4>
+                <p class="margin-top-10"  ng-bind-html="usernewsdetails.description | html"></p>-->
+
+                <div class="panel no-margin no-box-shadow">
+                    <div class="panel-body latest-posts-classic">
+                        <h3 class="classic-title"><span>Latest News</span></h3>
+                                <div class="post-row item">
+                                    <div class="left-meta-post">
+                                        <div class="post-date"><span class="day">{{ usernewsdetails.datetime | toSec | date:'dd'}}</span><span class="month">{{ usernewsdetails.datetime | toSec | date:'MMM'}}</span></div>
+                                        <div class="post-type"><i class="fa fa-picture-o"></i></div>
+                                    </div>
+                                    <h4>{{usernewsdetails.title}}</h4>
+                                    <div class="post-content">
+                                        <p class="margin-top-10"  ng-bind-html="usernewsdetails.description | html"></p>
+                                    </div>
+                                </div>
+
+                    </div>
+                </div>
             </div>
 
             <div class="col-md-4">
