@@ -70,8 +70,6 @@ adminApp.factory("ExerciseService",function(requestHandler){
 
     //Get Tag array to update
     exerciseServiceObj.getTagArray=function(tags){
-        console.log(tags);
-
         var tagArray=new Array();
         var tagPromise;
         $.each(tags, function(index,value) {

@@ -130,24 +130,26 @@
     <section class="popupBody">
         <!-- Register Form -->
         <div class="common_model">
-            <h5>
-            <div class="col-md-4">
-                Type Id <span class="pull-right">:</span>
-            </div>
-            <div class="col-md-8">{{exerciseType.typeid}}</div>
-            <div class="col-md-4 margin-top-10">
-                Type Name <span class="pull-right">:</span>
-            </div>
-            <div class="col-md-8 margin-top-10">{{exerciseType.typename}}</div>
-            <div class="col-md-4 margin-top-10">
-                Levels <span class="pull-right">:</span>
-            </div>
-            <div class="col-md-8 wrap margin-bottom-40 margin-top-10">
-                <span ng-repeat="level in exerciseType.levels">
-                    {{level.levelname}}{{$last ? '' : ','}}<br/>
-                </span>
-            </div>
-            </h5>
+            <table class="table table-bordered margin-top-10">
+                <tbody>
+                    <tr class="warning">
+                        <td class="col-md-4">Type Id</td>
+                        <td class="col-md-8">{{exerciseType.typeid}}</td>
+                    </tr>
+                    <tr>
+                        <td>Type Name</td>
+                        <td>{{exerciseType.typename}}</td>
+                    </tr>
+                    <tr class="warning">
+                        <td>Levels</td>
+                        <td>
+                            <span ng-repeat="level in exerciseType.levels">
+                                {{level.levelname}}{{$last ? '' : ','}}
+                            </span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </section>
 </div>
