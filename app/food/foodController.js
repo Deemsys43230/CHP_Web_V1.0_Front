@@ -147,7 +147,7 @@ adminApp.controller("FoodDetailsEditController",function($q,$scope,requestHandle
         requestHandler.postRequest("/getFoodDetailByadmin/",{"foodid":$routeParams.id}).then(function(response){
             $scope.foodDetails=response.data.Food_Data;
 
-            $scope.foodDetails.foodImagePath=$scope.foodDetails.foodImagePath.substring($scope.foodDetails.foodImagePath.indexOf("/") + 14,     $scope.foodDetails.foodImagePath.length)+"200x200.jpg";
+            $scope.foodDetails.foodImagePath=$scope.foodDetails.foodImagePath.substring($scope.foodDetails.foodImagePath.indexOf("/") + 14,$scope.foodDetails.foodImagePath.length)+"200x200.jpg";
             $scope.foodDetails.foodimage=$scope.foodDetails.foodimage.substring($scope.foodDetails.foodimage.indexOf("/") + 14,$scope.foodDetails.foodimage.length);
             //Set session
             $scope.foodDetails.sessionSet=FoodService.setSessionValues($scope.foodDetails.sessionid);

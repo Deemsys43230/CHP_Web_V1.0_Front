@@ -135,6 +135,9 @@ adminApp.controller('ExerciseEditController',function($scope,requestHandler,Flas
         requestHandler.postRequest("admin/getExerciseDetailByadmin/",{"exerciseid":$routeParams.id}).then(function(response){
 
             $scope.exerciseDetail=response.data.ExerciseDetail;
+
+            $scope.originalImage=$scope.exerciseDetail.imageurl.substring($scope.exerciseDetail.imageurl.indexOf("/") + 14, $scope.exerciseDetail.imageurl.length);
+
             $scope.exerciseDetail.imageurl=$scope.exerciseDetail.imageurl.substring($scope.exerciseDetail.imageurl.indexOf("/") + 14, $scope.exerciseDetail.imageurl.length-13)+"200x200.jpg";
             $scope.exerciseDetail.imageurl=$scope.exerciseDetail.imageurl+"?decache="+Math.random();
 
@@ -221,7 +224,10 @@ adminApp.controller('ExerciseEditController',function($scope,requestHandler,Flas
             updatedExerciseDetails.imageurl=$scope.exerciseDetail.imageurl;
         }
         else{
-            ExerciseService.convertImgToBase64(original.imageurl, function(base64Img) {//Convert Image to Base64
+
+            console.log($scope.originalImage);
+            ExerciseService.convertImgToBase64($scope.originalImage, function(base64Img) {//Convert Image to Base64
+                console.log(base64Img);
                 updatedExerciseDetails.imageurl=base64Img;
             });
         }

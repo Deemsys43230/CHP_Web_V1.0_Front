@@ -8,7 +8,7 @@
                 <h4 class="classic-title"><span>Exercise Management</span></h4>
                 <div ng-include src="'views/exercise-menu.html'" onload="activeClass"></div>
             </div>
-            <div class="col-md-9 min-height-450" ng-init="init()">
+            <div class="col-md-9" ng-init="init()">
                 <a href="#dashboard" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back to Dashboard</a>
 
                 <div flash-message="2000" class="col-md-4 pull-right"></div>
@@ -19,30 +19,34 @@
                         <div class="loader"></div>
                     </div>
                 </div>
-                <table class="table table-bordered table-hover">
-                    <thead>
-                    <tr class="warning">
-                        <th class="col-md-2">Exercise Id</th>
-                        <th class="col-md-2">Exercise Name</th>
-                        <th class="col-md-5">Exercise Description</th>
-                        <th class="col-md-3">Options</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr dir-paginate="exercisesuggestion in exerciseSuggestionList | itemsPerPage: 8" ng-show="exerciseSuggestionList.length!=0">
-                        <td>{{exercisesuggestion.suggestionid}}</td>
-                        <td><span class="line-clamp-xs">{{exercisesuggestion.exercisename}}</span></td>
-                        <td><span class="line-clamp-md">{{exercisesuggestion.description}}</span></td>
-                        <td>
-                            <a href="#exerciseSuggestionDetail/{{exercisesuggestion.suggestionid}}" class="btn-xs btn-primary">View</a>
-                            <a href="" class="btn-xs btn-success hint--top" ng-click="doApproveExerciseSuggestion(exercisesuggestion.suggestionid)" ng-show="exercisesuggestion.exercisestatus==0" data-hint="Approve"><i class="fa fa-check"/></a>&nbsp;&nbsp;<a href="" class="btn-xs btn-danger hint--top" ng-click="doRejectExerciseSuggestion(exercisesuggestion.suggestionid)" ng-show="exercisesuggestion.exercisestatus==0" data-hint="Reject"><i class="fa fa-close"/></a>
-                            <span  class="custom-text-green"  ng-show="exercisesuggestion.exercisestatus==1" >Approved</span>
-                            <span  class="custom-text-red"  ng-show="exercisesuggestion.exercisestatus==2">Rejected</span>
-                        </td>
-                    </tr>
-                    <tr ng-show="exerciseSuggestionList.length==0"><td colspan="3">No Records Found !!!</td></tr>
-                    </tbody>
-                </table>
+                <div class="min-height-380">
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                        <tr class="warning">
+                            <th class="col-md-2">Suggestion Id</th>
+                            <th class="col-md-3">Suggest Exercise Name</th>
+                            <th class="col-md-5">Suggest Exercise Description</th>
+                            <th class="col-md-2">Options</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr dir-paginate="exercisesuggestion in exerciseSuggestionList | itemsPerPage: 9" ng-show="exerciseSuggestionList.length!=0">
+                            <td>{{exercisesuggestion.suggestionid}}</td>
+                            <td><span class="line-clamp-sm">{{exercisesuggestion.exercisename}}</span></td>
+                            <td><span class="line-clamp-md">{{exercisesuggestion.description}}</span></td>
+                            <td>
+                                <a href="#exerciseSuggestionDetail/{{exercisesuggestion.suggestionid}}" class="btn-sm btn-primary">View</a>
+                                <a href="" class="btn-xs btn-success hint--top" ng-click="doApproveExerciseSuggestion(exercisesuggestion.suggestionid)" ng-show="exercisesuggestion.exercisestatus==0" data-hint="Approve"><span>&#10004;</span></a>
+                                <a href="" class="btn-xs btn-danger hint--top" ng-click="doRejectExerciseSuggestion(exercisesuggestion.suggestionid)" ng-show="exercisesuggestion.exercisestatus==0" data-hint="Reject"><span>&#x2716;</span></a>
+                                <span class="btn-sm btn-success" ng-disabled ng-show="exercisesuggestion.exercisestatus==1" >Approved</span>
+                                <span class="btn-sm btn-danger" ng-disabled ng-show="exercisesuggestion.exercisestatus==2">Rejected</span>
+                            </td>
+                        </tr>
+                        <tr ng-show="exerciseSuggestionList.length==0"><td colspan="3">No Records Found !!!</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
                 <!-- Start Pagination -->
                 <dir-pagination-controls ng-show="paginationLoad"  direction-links="true"  boundary-links="true"> </dir-pagination-controls>
                 <!-- End Pagination -->

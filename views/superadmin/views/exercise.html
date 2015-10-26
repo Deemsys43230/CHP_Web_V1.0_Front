@@ -24,15 +24,15 @@
                         <thead>
                         <tr class="warning">
                             <th class="col-md-2">Exercise Id</th>
-                            <th class="col-md-4">Exercise Name</th>
-                            <th class="col-md-4">Exercise Type</th>
+                            <th class="col-md-5">Exercise Name</th>
+                            <th class="col-md-3">Exercise Type</th>
                             <th class="col-md-2">Options</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr dir-paginate="exercise in exerciseList | itemsPerPage: 9|orderBy:['exerciseid']">
                             <td>{{exercise.exerciseid}}</td>
-                            <td title="{{exercise.exercisename}}"><span class="line-clamp-sm">{{exercise.exercisename}}</span></td>
+                            <td title="{{exercise.exercisename}}"><span class="line-clamp-md">{{exercise.exercisename}}</span></td>
                             <td>
                              <span class="line-clamp-sm">
                                 <span ng-repeat="type in exercise.types">
