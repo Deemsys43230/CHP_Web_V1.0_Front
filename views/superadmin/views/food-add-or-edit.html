@@ -54,10 +54,10 @@
                     <h5>Region :</h5>
                     <div class="col-md-1"></div>
                     <div class="col-md-11">
-                    <input type="radio" id="1" class="height" name="regionid" value="1" ng-model="foodDetails.regionid"/>
-                    <label for="1">India</label>
-                    <input type="radio" id="2" class="height" name="regionid" value="2" ng-model="foodDetails.regionid"/>
-                    <label for="2">United states</label>
+                    <input type="radio" id="india" class="height" name="regionid" value="1" ng-model="foodDetails.regionid"/>
+                    <label for="india">India</label>
+                    <input type="radio" id="us" class="height" name="regionid" value="2" ng-model="foodDetails.regionid"/>
+                    <label for="us">United states</label>
                     </div>
                     <h5>Tags :</h5>
                     <div class="form-group">
@@ -112,45 +112,72 @@
                             <tr  ng-class="animate-repeat" ng-repeat="measureDetail in foodDetails.measureid" ng-form="mineralForm">
                                 <td>{{measureDetail.measurename}}</td>
                                 <td class="input_mineral">
-                                    <input type="text" name="measureValue" ng-model="measureDetail.value" required/>
+                                    <input type="text" name="measureValue" ng-model="measureDetail.value" required validate-Float/>
                                      <span ng-show="mineralForm.measureValue.$dirty&&mineralForm.measureValue.$invalid">
-                                         <span class="error-message" ng-show="mineralForm.measureValue.$error.required"><span>Required.</span></span>
+                                         <span class="error-message textarea-errormessage20" ng-show="mineralForm.measureValue.$error.required"><span>Required.</span></span>
+                                        <span class="error-message textarea-errormessage20" ng-show="!mineralForm.measureValue.$error.required&&mineralForm.measureValue.$error.validateFloat"><span>Invalid&nbsp;data.</span></span>
                                      </span>
                                 </td>
                                 <td class="line input_mineral">
                                     <div class="col-md-3 no-padding">
                                         <div class="col-md-7 no-padding">
-                                            <p>Calories<span class="text-red">*</span><span ng-show="mineralForm.calories.$dirty&&mineralForm.calories.$invalid"><span class="pull-right text-red">Required.</span></span></p>
+                                            <p>Calories<span class="text-red">*</span>
+                                                <span ng-show="mineralForm.calories.$dirty&&mineralForm.calories.$invalid">
+                                                   <span ng-show="mineralForm.calories.$error.required"> <span class="pull-right text-red">Required.</span></span>
+                                                    <span ng-show="!mineralForm.calories.$error.required&&mineralForm.calories.$error.validateFloat"> <span class="pull-right text-red">Invalid&nbsp;data.</span></span>
+                                                </span>
+
+                                            </p>
                                         </div>
                                         <div class="col-md-5">
-                                            <input type="text" name="calories" ng-model="measureDetail.calories" required/>
+                                            <input type="text" name="calories" ng-model="measureDetail.calories" required validate-Float/>
                                         </div>
                                         <div class="col-md-7 no-padding">
-                                            <p>Fat<span class="text-red">*</span><span ng-show="mineralForm.fat.$dirty&&mineralForm.fat.$invalid"><span class="pull-right text-red">Required.</span></span></p>
+                                            <p>Fat<span class="text-red">*</span>
+                                             <span ng-show="mineralForm.fat.$dirty&&mineralForm.fat.$invalid">
+                                                   <span ng-show="mineralForm.fat.$error.required"> <span class="pull-right text-red">Required.</span></span>
+                                                    <span ng-show="!mineralForm.fat.$error.required&&mineralForm.fat.$error.validateFloat"> <span class="pull-right text-red">Invalid&nbsp;data.</span></span>
+                                                </span>
+                                            </p>
                                         </div>
                                         <div class="col-md-5">
-                                            <input type="text" name="fat" ng-model="measureDetail.fat" required/>
+                                            <input type="text" name="fat" ng-model="measureDetail.fat" required validate-Float/>
                                         </div>
                                         <div class="col-md-7 no-padding">
-                                            <p>Protein<span class="text-red">*</span><span ng-show="mineralForm.protein.$dirty&&mineralForm.protein.$invalid"><span class="pull-right text-red">Required.</span></span></p>
+                                            <p>Protein<span class="text-red">*</span>
+                                            <span ng-show="mineralForm.protein.$dirty&&mineralForm.protein.$invalid">
+                                                   <span ng-show="mineralForm.protein.$error.required"> <span class="pull-right text-red">Required.</span></span>
+                                                    <span ng-show="!mineralForm.protein.$error.required&&mineralForm.protein.$error.validateFloat"> <span class="pull-right text-red">Invalid&nbsp;data.</span></span>
+                                                </span>
+                                            </p>
                                         </div>
                                         <div class="col-md-5">
-                                            <input type="text" name="protein" ng-model="measureDetail.protein" required/>
+                                            <input type="text" name="protein" ng-model="measureDetail.protein" required validate-Float/>
                                         </div>
                                         <div class="col-md-7 no-padding">
-                                            <p>Carbo<span class="text-red">*</span><span ng-show="mineralForm.carbo.$dirty&&mineralForm.carbo.$invalid"><span class="pull-right text-red">Required.</span></span></p>
+                                            <p>Carbo<span class="text-red">*</span>
+                                            <span ng-show="mineralForm.carbo.$dirty&&mineralForm.carbo.$invalid">
+                                                   <span ng-show="mineralForm.carbo.$error.required"> <span class="pull-right text-red">Required.</span></span>
+                                                    <span ng-show="!mineralForm.carbo.$error.required&&mineralForm.carbo.$error.validateFloat"> <span class="pull-right text-red">Invalid&nbsp;data.</span></span>
+                                                </span>
+                                            </p>
                                         </div>
                                         <div class="col-md-5">
-                                            <input type="text" name="carbo" ng-model="measureDetail.carbo" required/>
+                                            <input type="text" name="carbo" ng-model="measureDetail.carbo" required validate-Float/>
                                         </div>
                                         <div class="col-md-7 no-padding">
-                                            <p>Fiber<span class="text-red">*</span><span ng-show="mineralForm.fiber.$dirty&&mineralForm.fiber.$invalid"><span class="pull-right text-red">Required.</span></span></p>
-                                        </div>
-                                        <div class="col-md-5">
-                                            <input type="text" name="fibre" ng-model="measureDetail.fibre" required/>
+                                            <p>Fiber<span class="text-red">*</span>
                                              <span ng-show="mineralForm.fibre.$dirty&&mineralForm.fibre.$invalid">
+                                                   <span ng-show="mineralForm.fibre.$error.required"> <span class="pull-right text-red">Required.</span></span>
+                                                    <span ng-show="!mineralForm.fibre.$error.required&&mineralForm.fibre.$error.validateFloat"> <span class="pull-right text-red">Invalid&nbsp;data.</span></span>
+                                                </span>
+                                            </p>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <input type="text" name="fibre" ng-model="measureDetail.fibre" required validate-Float/>
+                                            <!-- <span ng-show="mineralForm.fibre.$dirty&&mineralForm.fibre.$invalid">
                                           <span class="error-message" ng-show="mineralForm.fibre.$error.required"><span>Required.</span></span>
-                                        </span>
+                                        </span>-->
                                         </div>
                                         <div class="col-md-7 no-padding">
                                             <p>Calcium</p>
@@ -286,7 +313,7 @@
                         </table>
                     </div>
                     <div class="col-md-12 margin-top-10 text-center">
-                        <a class="btn register_button" href="" ng-click="doUpdateFoodDetails()" ng-disabled="foodForm.$invalid||isClean()" ng-hide="isNew">Update Food Details</a>
+                        <a class="btn register_button" href="" ng-click="doUpdateFoodDetails()" ng-disabled="foodForm.$invalid||isClean()||doingUpdate" ng-hide="isNew">Update Food Details</a>
                         <a class="btn register_button" href="" ng-click="doAddFoodDetails()" ng-disabled="foodForm.$invalid||imageAdded" ng-show="isNew">Save Food Details</a>
                         <a class="btn cancel_button" href="#food">Cancel</a>
                     </div>

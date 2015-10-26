@@ -272,6 +272,7 @@ userApp.controller('UserDashboardController',function($scope,requestHandler,Flas
     //Insert User Exercise
     $scope.doInsertUserExercise=function(){
         //Set values according to the api calls
+        //alert(selectedDate);
         $scope.userExercise.exerciseid=$scope.userSelectedExerciseDetails.exerciseid;
         $scope.userExercise.levelid=$scope.userExercise.levelid.levelid;
         $scope.userExercise.date=selectedDate;

@@ -599,7 +599,7 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../css/food-image-upload.css',
                                 '../../js/image-upload.js',
                                 '../../css/custom-inputs.css',
-                                '../../js/category-select.js',
+                                'https://cdn.rawgit.com/angular-ui/ui-select/master/dist/select.min.js',
                                 '../../css/multiSelect.css',
                                 '../../css/category-select.css',
                                 '../../css/category-select-bootstrap.css',
@@ -1160,6 +1160,25 @@ adminApp.directive('input', function() {
                 // In case we are adding and removing checkboxes dynamically we need to tidy up after outselves.
                 scope.$on('$destroy', function() { checkboxGroup.deregister(ngModel); });
             }
+        }
+    };
+});
+
+//Float Validation
+
+//Check For FLoat Validation
+adminApp.directive('validateFloat', function() {
+    var FLOAT_REGEXP = /^\-?\d+((\.)\d+)?$/;
+
+    return {
+        require: 'ngModel',
+        restrict: '',
+        link: function(scope, elm, attrs, ctrl) {
+            // only apply the validator if ngModel is present and Angular has added the email validator
+            ctrl.$validators.validateFloat = function(modelValue) {
+                return  ctrl.$isEmpty(modelValue) || FLOAT_REGEXP.test(modelValue);
+            };
+
         }
     };
 });

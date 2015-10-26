@@ -165,27 +165,6 @@ adminApp.factory("FoodService",function(requestHandler){
          });
     };
 
-
-    //Get Tag array to update
-    foodServiceObj.getTagArray=function(tagId){
-
-        var tagArray=new Array();
-        var tagPromise;
-        $.each(tagId, function(index,value) {
-            if(value.tagid!=null){
-                tagArray.push(parseInt(value.tagid));
-            }else{
-               tagPromise=foodServiceObj.insertTag(value.tagname);
-               tagPromise.then(function(result){
-                   tagArray.push(result);
-               });
-            }
-        });
-
-        return tagArray;
-
-    };
-
     // Function to convert image url to base64
     foodServiceObj.convertImgToBase64=function(url, callback, outputFormat){
         var img = new Image();

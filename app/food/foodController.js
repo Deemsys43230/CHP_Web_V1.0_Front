@@ -4,7 +4,7 @@
 
 var adminApp = angular.module('adminApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','ui.select','foodServiceModule']);
 
-adminApp.controller('FoodUploadController', ['$scope', 'FileUploader', function($scope, FileUploader) {
+adminApp.controller('FoodUploadController', ['$scope', 'FileUploader', function($q,$scope, FileUploader) {
     //Start code for uploader//
     var uploader = $scope.uploader = new FileUploader({
         url: 'upload.php'
@@ -121,7 +121,7 @@ adminApp.controller("FoodDetailsViewController",function($scope,requestHandler,$
 
 });
 
-adminApp.controller("FoodDetailsEditController",function($scope,requestHandler,FoodService,$routeParams,Flash,$route,fileReader,$location){
+adminApp.controller("FoodDetailsEditController",function($q,$scope,requestHandler,FoodService,$routeParams,Flash,$route,fileReader,$location){
 
     var original="";
     $scope.title=$route.current.title;
@@ -132,28 +132,18 @@ adminApp.controller("FoodDetailsEditController",function($scope,requestHandler,F
     //For Tag Input
     $scope.tagTransform = function (newTag) {
 
-        var isExist=false;
-        $.each($scope.foodTagList,function(index,value){
-            if(value.tagname==newTag){
-                isExist=true;
-            }
-        });
-
-        if(!isExist){
             var item = {
                 "tagid": null,
                 "tagname": newTag
             };
 
             return item;
-        }else{
-            return false;
-        }
 
     };
 
     //Get Particular Food Details
     $scope.doGetFoodDetails= function () {
+        $scope.doingUpdate = false;
         requestHandler.postRequest("/getFoodDetailByadmin/",{"foodid":$routeParams.id}).then(function(response){
             $scope.foodDetails=response.data.Food_Data;
 
@@ -201,13 +191,14 @@ adminApp.controller("FoodDetailsEditController",function($scope,requestHandler,F
     $scope.doUpdateFoodImage=function(){
         $scope.foodDetails.foodImagePath=$scope.foodDetails.foodimage;
         $scope.imageUpload=true;
+        $scope.imageAdded=false;
     };
    //End Food Image Upload Controller
 
 
     //Set Food Details Obj for add
     $scope.doSetFoodDetails=function(){
-        $scope.imageAdded=false;
+        $scope.imageAdded=true;
         $scope.foodDetails={};
         $scope.foodDetails.measureid=[];
         $scope.foodDetails.sessionid=[];
@@ -230,40 +221,63 @@ adminApp.controller("FoodDetailsEditController",function($scope,requestHandler,F
 
     //Do Update Food
     $scope.doUpdateFoodDetails= function () {
-
+//For disabling the update button after one click
+        $scope.doingUpdate = true;
     //Get Update Details
     $scope.foodDetails.sessionid=FoodService.getSessionArray($scope.foodDetails.sessionSet);
     $scope.foodDetails.categoryid=FoodService.getCategoryArray($scope.foodDetails.categoryid);
-    $scope.foodDetails.tagid=FoodService.getTagArray($scope.foodDetails.tagid);
-        $scope.foodDetails.regionid=$scope.foodDetails.regionid;
+
+    //Tag Array Operation
+    var tagArray=[];
+    var tagPromise;
+    $.each($scope.foodDetails.tagid, function(index,value) {
+        if(value.tagid!=null){
+            tagArray.push(parseInt(value.tagid));
+        }else{
+            tagPromise=FoodService.insertTag(value.tagname);
+            tagPromise.then(function(result){
+                tagArray.push(result);
+            });
+        }
+    });
+    //End Array Operation
+
+    $scope.foodDetails.tagid=tagArray;
+
+    //For Region
+    $scope.foodDetails.regionid=$scope.foodDetails.regionid;
 
     //To Change the name of the obj from measureid to measuredata
     $scope.foodDetails.measuredata=$scope.foodDetails.measureid;
 
 
-
-
     if($scope.imageUpload){//Check for Image Upload
-        requestHandler.putRequest("admin/updateFood/", $scope.foodDetails).then(function (response) {
-            if (response.data.Response_status == 1) {
-                successMessage(Flash,"Food Updated Successfully!");
-                $scope.doGetFoodDetails();
-            }
-        }, function (response) {
-            alert("Not able to pull Food Tag");
-        });
-    }else{
-        FoodService.convertImgToBase64($scope.foodDetails.foodImagePath, function(base64Img) {//Convert Image to Base64
-            $scope.foodDetails.foodimage=base64Img;
+        $q.all([tagPromise]).then(function(){
             requestHandler.putRequest("admin/updateFood/", $scope.foodDetails).then(function (response) {
                 if (response.data.Response_status == 1) {
                     successMessage(Flash,"Food Updated Successfully!");
                     $scope.doGetFoodDetails();
-                    $location.path("food");
                 }
             }, function (response) {
                 alert("Not able to pull Food Tag");
             });
+        });
+
+    }else{
+        FoodService.convertImgToBase64($scope.foodDetails.foodImagePath, function(base64Img) {//Convert Image to Base64
+            $scope.foodDetails.foodimage=base64Img;
+            $q.all([tagPromise]).then(function(){//Only after tagPromise
+                requestHandler.putRequest("admin/updateFood/", $scope.foodDetails).then(function (response) {
+                    if (response.data.Response_status == 1) {
+                        successMessage(Flash,"Food Updated Successfully!");
+                        $scope.doGetFoodDetails();
+                        $location.path("food");
+                    }
+                }, function (response) {
+                    alert("Not able to pull Food Tag");
+                });
+            });
+
         });
     }
     };
@@ -273,22 +287,39 @@ adminApp.controller("FoodDetailsEditController",function($scope,requestHandler,F
     $scope.doAddFoodDetails= function () {
 
         //Get Add Details
-        $scope.imageAdded=true;
         $scope.foodDetails.sessionid=FoodService.getSessionArray($scope.foodDetails.sessionSet);
         $scope.foodDetails.categoryid=FoodService.getCategoryArray($scope.foodDetails.categoryid);
-        $scope.foodDetails.tagid=FoodService.getTagArray($scope.foodDetails.tagid);
+
+        //Tag Array Operation
+        var tagArray=[];
+        var tagPromise;
+        $.each($scope.foodDetails.tagid, function(index,value) {
+            if(value.tagid!=null){
+                tagArray.push(parseInt(value.tagid));
+            }else{
+                tagPromise=FoodService.insertTag(value.tagname);
+                tagPromise.then(function(result){
+                    tagArray.push(result);
+                });
+            }
+        });
+        $scope.foodDetails.tagid=tagArray;
+        //End Tag Array Operation
 
         $scope.foodDetails.measuredata=$scope.foodDetails.measureid;
-$scope.foodDetails.regionid=$scope.foodDetails.regionid;
-        requestHandler.postRequest("admin/insertFood/", $scope.foodDetails).then(function (response) {
-            if (response.data.Response_status == 1) {
-                successMessage(Flash,"Food Added Successfully!");
-                //$scope.doGetFoodDetails();
-                $location.path("food");
-            }
-        }, function (response) {
-            alert("Not able to pull Food Tag");
+        $scope.foodDetails.regionid=$scope.foodDetails.regionid;
+        $q.all([tagPromise]).then(function(){//Only after tag array operation
+            requestHandler.postRequest("admin/insertFood/", $scope.foodDetails).then(function (response) {
+                if (response.data.Response_status == 1) {
+                    successMessage(Flash,"Food Added Successfully!");
+                    //$scope.doGetFoodDetails();
+                    $location.path("food");
+                }
+            }, function (response) {
+                alert("Not able to pull Food Tag");
+            });
         });
+
 
 
     };
@@ -354,3 +385,33 @@ adminApp.controller('FoodCateogryController', ['$scope', function($scope) {
 }]);
 
 
+adminApp.filter('propsFilter', function() {
+        return function(items, props) {
+            var out = [];
+
+            if (angular.isArray(items)) {
+                items.forEach(function(item) {
+                    var itemMatches = false;
+
+                    var keys = Object.keys(props);
+                    for (var i = 0; i < keys.length; i++) {
+                        var prop = keys[i];
+                        var text = props[prop].toLowerCase();
+                        if (item[prop].toString().toLowerCase().indexOf(text) !== -1) {
+                            itemMatches = true;
+                            break;
+                        }
+                    }
+
+                    if (itemMatches) {
+                        out.push(item);
+                    }
+                });
+            } else {
+                // Let the output be the input untouched
+                out = items;
+            }
+
+            return out;
+        };
+    });

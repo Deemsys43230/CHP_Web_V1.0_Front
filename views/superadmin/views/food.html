@@ -26,7 +26,8 @@
                         <th class="col-md-2">Food Name</th>
                         <th class="col-md-3">Category</th>
                         <th class="col-md-3">Session</th>
-                        <th class="col-md-3">Options</th>
+                        <th class="col-md-1">Region</th>
+                        <th class="col-md-2">Options</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -44,6 +45,7 @@
                             </span>
                         </span>
                         </td>
+                        <td>{{food.regionid.regionname}}</td>
                         <td>
                             <a href="#food-view/{{food.foodid}}" class="btn-xs btn-primary">View</a>
                             <a href="#food-edit/{{food.foodid}}" class="btn-xs btn-warning">Edit</a>
