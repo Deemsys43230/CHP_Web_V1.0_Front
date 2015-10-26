@@ -1230,6 +1230,21 @@ a.update-button:hover{
      color: #fff;
  }
 
+.search-list-form.override{
+    right: 10px !important;
+    top: 0 !important;
+}
+
+.search-list-form.override:before {
+    top: 13px !important;
+    right: -2px !important;
+}
+
+.search-list-form.override form input{
+    padding: 3px 10px !important;
+    width: 300px;
+}
+
 .search-list-form {
 	position: relative;
 	right: -25px;
