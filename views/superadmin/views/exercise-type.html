@@ -63,7 +63,6 @@
                             <a href="" class="btn-xs btn-danger" ng-show="list.canedit==1" ng-click="doDeleteExerciseType(list.typeid)">Delete</a>
                         </td>
                     </tr>
-                    <tr ng-show="exerciseTypeList.length==0" class="text-center"><td colspan="4">No Records Found !!!</td></tr>
                     <tr ng-show="!exercisetypefilter.length" class="text-center"><td colspan="4">No Records Found !!!</td></tr>
                     </tbody>
                 </table>
@@ -90,10 +89,11 @@
         <div class="common_model">
             <form name="exerciseTypeAddForm" novalidate>
                 <p>Exercise Type Name</p>
-                <input type="text" name="exerciseTypeName" ng-model="exerciseType.typename" maxlength="45" required/>
+                <input type="text" name="exerciseTypeName" ng-change="isNameAlreadyExist(exerciseType.typename)" ng-model="exerciseType.typename" maxlength="45" required/>
                 <span ng-show="exerciseTypeAddForm.exerciseTypeName.$dirty && exerciseTypeAddForm.exerciseTypeName.$invalid">
                     <span class="error-message" ng-show="exerciseTypeAddForm.exerciseTypeName.$error.required"><span>Required.</span></span>
                 </span>
+                <span class="error-message" ng-show="nameAlreadyExist"><span>Type&nbsp;Name&nbsp;Already&nbsp;Exist</span></span>
 
                 <p class="text-red pull-right" ng-show="errorMessageForType">Atleast one level is required</p>
                 <p class="margin-bottom-10">List of level (<a href="" class="text-bold" ng-click="addInput()"> <i class="fa fa-plus-circle"></i> Add New Level </a> )</p>
@@ -108,8 +108,8 @@
                     </ng-form>
                 </div>
                 <div class="action_btns margin-top-20">
-                    <div class="one_half" ng-show="isNew"><a href="" class="btn btn_red" ng-class="{modal_close:exerciseTypeAddForm.$invalid}" ng-disabled="exerciseTypeAddForm.$invalid" ng-click="doAddExerciseType()">Save Exercise Type </a></div>
-                    <div class="one_half" ng-hide="isNew"><a href="" class="btn btn_red" ng-class="{modal_close:exerciseTypeAddForm.$invalid}" ng-disabled="exerciseTypeAddForm.$invalid || isClean()" ng-click="doUpdateExerciseType()">Update Exercise Type </a></div>
+                    <div class="one_half" ng-show="isNew"><a href="" class="btn btn_red modal_close" ng-disabled="exerciseTypeAddForm.$invalid || nameAlreadyExist" ng-click="doAddExerciseType()">Save Exercise Type </a></div>
+                    <div class="one_half" ng-hide="isNew"><a href="" class="btn btn_red modal_close" ng-disabled="exerciseTypeAddForm.$invalid || isClean() || nameAlreadyExist" ng-click="doUpdateExerciseType()">Update Exercise Type </a></div>
                     <div class="one_half last modal_close"><a id="register_form" class="btn">Cancel</a></div>
                 </div>
 

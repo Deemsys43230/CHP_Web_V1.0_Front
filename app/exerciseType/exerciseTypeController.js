@@ -4,16 +4,42 @@ adminApp.controller('ExerciseTypeController',['$scope','requestHandler','Flash',
 
     $scope.activeClass = {exercisetype:'active'};
     var original ="";
+    var exerciseTypeArray=[];
 
     $scope.doGetAllExerciseType=function(){
         $scope.loaded=true;
         requestHandler.getRequest("admin/listofTypes/","").then(function(response){
             $scope.exerciseTypeList=response.data.Typelist;
+
+            $.each($scope.exerciseTypeList, function(index,typelist) {
+                exerciseTypeArray.push(typelist.typename);
+            });
+            $scope.exerciseTypeArrayValues=exerciseTypeArray;
+
             $scope.loaded=false;
             $scope.paginationLoad=true;
         },function(){
             errorMessage(Flash,"Please try again later!");
         });
+    };
+
+    $scope.isNameAlreadyExist=function(typename){
+        if($scope.isNew==true){
+            if($scope.exerciseTypeArrayValues.indexOf(typename)!=-1){
+                $scope.nameAlreadyExist=true;
+            }
+            else{
+                $scope.nameAlreadyExist=false;
+            }
+        }
+        else{
+            if($scope.exerciseTypeArrayValues.indexOf(typename)!=-1 && original.typename!=typename){
+                $scope.nameAlreadyExist=true;
+            }
+            else{
+                $scope.nameAlreadyExist=false;
+            }
+        }
     };
 
     // Search Exercise Type
@@ -24,7 +50,7 @@ adminApp.controller('ExerciseTypeController',['$scope','requestHandler','Flash',
 
     $('.search-list-form input').focusout(function() {
         $('.search-list-form').fadeOut(300);
-        $scope.categorysearch="";
+        $scope.typesearch="";
     });
 
     $scope.addInput = function(){
@@ -106,6 +132,7 @@ adminApp.controller('ExerciseTypeController',['$scope','requestHandler','Flash',
     $scope.doEditExerciseType=function(id){
         $scope.isNew = false;
         $scope.title = "Edit Exercise Type";
+        $scope.nameAlreadyExist=false;
 
         $(function(){
             $("#lean_overlay").fadeTo(1000);
@@ -219,7 +246,7 @@ adminApp.controller('ExerciseTypeController',['$scope','requestHandler','Flash',
         $(function(){
             $(".common_model").show();
         });
-
+        $scope.nameAlreadyExist=false;
     };
 
     //Initial Load
