@@ -63,7 +63,7 @@ adminApp.controller('ExerciseTypeController',['$scope','requestHandler','Flash',
 
         requestHandler.postRequest("admin/insertorupdateExerciseTypeAndLevel/",exerciseTypeObj).then(function (response) {
             $scope.doGetAllExerciseType();
-            successMessage(Flash,"Exercise Successfully Added");
+            successMessage(Flash,"Exercise Type Successfully Added");
             $scope.loaded=false;
             $scope.paginationLoad=true;
         }, function () {
@@ -162,7 +162,7 @@ adminApp.controller('ExerciseTypeController',['$scope','requestHandler','Flash',
             }
             if(response.data.Response_status==1){
                 $scope.doGetAllExerciseType();
-                successMessage(Flash,"Exercise Successfully Updated");
+                successMessage(Flash,"Exercise Type Successfully Updated");
             }
         }, function () {
             errorMessage(Flash, "Please try again later!")
@@ -180,7 +180,7 @@ adminApp.controller('ExerciseTypeController',['$scope','requestHandler','Flash',
             }
             if(response.data.Response_status==1){
                 $scope.doGetAllExerciseType();
-                successMessage(Flash,"Exercise Successfully Updated");
+                successMessage(Flash,"Exercise Type Successfully Updated");
             }
         },function(){
             errorMessage(Flash,"Please try again later!")
@@ -198,7 +198,7 @@ adminApp.controller('ExerciseTypeController',['$scope','requestHandler','Flash',
             }
             if(response.data.Response_status==1){
                 $scope.doGetAllExerciseType();
-                successMessage(Flash,"Exercise Successfully Deleted");
+                successMessage(Flash,"Exercise Type Successfully Deleted");
             }
 
         },function(){
