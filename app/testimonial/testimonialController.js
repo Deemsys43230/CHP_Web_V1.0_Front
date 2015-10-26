@@ -210,11 +210,8 @@ commonApp.controller('TestimonialUserController',function($scope,requestHandler,
 
     // To display Testimonials as user
     $scope.doGetTestimonialsByUser=function(){
-
         requestHandler.getRequest("getTestimonialListByUser/", "").then(function(response){
-
-
-            $scope.usertestimoniallist=response.data.Testimonials;
+      $scope.usertestimoniallist=response.data.Testimonials;
 
             $scope.myImgSrc = $sce.trustAsResourceUrl(response.data.Testimonials[0].imageurl+"?decache="+Math.random());
             $scope.usertestimonialdetails = response.data.Testimonials[0];
@@ -225,7 +222,7 @@ commonApp.controller('TestimonialUserController',function($scope,requestHandler,
     };
 
     $scope.doGetTestimonialDetailsByUser= function (id) {
-     // alert("hi");
+
         requestHandler.getRequest("getTestimonialDetail/"+id, "").then(function(response){
 
             //View the image in ng-src for view testimonials
@@ -241,7 +238,7 @@ commonApp.controller('TestimonialUserController',function($scope,requestHandler,
 
     // To display the user Testimonial list on load
     $scope.doGetTestimonialsByUser();
-    $scope.doGetTestimonialDetailsByUser($routeParams.id);
+   $scope.doGetTestimonialDetailsByUser($routeParams.id);
 
 
 });

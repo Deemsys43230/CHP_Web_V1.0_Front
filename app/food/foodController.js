@@ -65,6 +65,13 @@ adminApp.controller('FoodController',function ($scope,requestHandler,Flash) {
     //sidebar menu active class
     $scope.activeClass = {foodlist:'active'};
 
+    
+    //sorting
+    $scope.sort = function(keyname){
+        $scope.sortKey = keyname;   //set the sortKey to the param passed
+        $scope.reverse = !$scope.reverse; //if true make it false and vice versa
+    }
+
     //Get Food List
     $scope.doGetAllFoodItems=function(){
         $scope.loaded=true;
@@ -100,6 +107,16 @@ adminApp.controller('FoodController',function ($scope,requestHandler,Flash) {
     };
     //End Initial Load
 
+// Search Food Type
+    $('.show-list-search').click(function() {
+        $('.search-list-form').fadeIn(300);
+        $('.search-list-form input').focus();
+    });
+
+    $('.search-list-form input').focusout(function() {
+        $('.search-list-form').fadeOut(300);
+        $scope.categorysearch="";
+    });
 
 });
 

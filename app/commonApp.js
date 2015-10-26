@@ -61,7 +61,8 @@ commonApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                             ]
                         })
                     }
-                }
+                },
+                controller:'CommonController'
             }).
             when('/howItWork', {
                 templateUrl: 'views/common/how-it-work.html'
@@ -127,6 +128,22 @@ commonApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 controller:'TestimonialUserController'
             }).
             when('/news', {
+                templateUrl: 'views/common/news.html',
+                resolve: {
+                    loadMyFiles:function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'commonApp',
+                            files:[
+                                'plugin/vertical-carousel/vertical-carousel.js',
+                                'plugin/vertical-carousel/vertical-carousel.css',
+                                'app/latestNews/latestNewsController.js'
+                            ]
+                        })
+                    }
+                },
+                controller:'NewsUserController'
+            }).
+            when('/news/:id', {
                 templateUrl: 'views/common/news.html',
                 resolve: {
                     loadMyFiles:function($ocLazyLoad) {

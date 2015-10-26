@@ -320,7 +320,7 @@
 
             </div>
 
-            <div class="col-md-4" ng-controller="TestimonialUserController">
+            <div class="col-md-4">
                 <div class="panel no-margin no-box-shadow">
                     <div class="panel-body">
                         <a onclick="return false;" href="#" class="prev vertical-carousel-control pull-right margin-left-5"><span class="fa fa-angle-down"></span></a>
@@ -484,7 +484,7 @@
             <div class="col-md-12">
 
                 <!-- Start Recent Posts Carousel -->
-                <div class="latest-posts" ng-controller="NewsUserController" >
+                <div class="latest-posts" >
                     <h4 class="classic-title"><span>Latest News</span></h4>
                     <div class="latest-posts-classic custom-carousel touch-carousel"  data-appeared-items="3" data-navigation="true" >
                     <!-- Posts 1 -->
@@ -493,7 +493,7 @@
                                 <div class="post-date"><span class="day">{{ usernews.datetime | toSec | date:'dd'}}</span><span class="month">{{ usernews.datetime | toSec | date:'MMM'}}</span></div>
                                 <div class="post-type"><i class="fa fa-picture-o"></i></div>
                             </div>
-                            <h3 class="post-title"><a href="#">{{usernews.title}}</a></h3>
+                            <h3 class="post-title"><a href="#news/{{usernews.newsid}}">{{usernews.title}}</a></h3>
                              <div class="post-content">
                             <p ng-bind-html="usernews.description | html"> <a class="read-more" href="#">Read More...</a></p>
                              </div>

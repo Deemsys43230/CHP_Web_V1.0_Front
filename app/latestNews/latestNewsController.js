@@ -112,25 +112,34 @@ adminApp.filter('htmlnews', ['$sce', function ($sce) {
 
 var commonApp = angular.module('commonApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate']);
 
-commonApp.controller('NewsUserController',function($scope,requestHandler,Flash){
-alert("ok");
+commonApp.controller('NewsUserController',function($scope,requestHandler,Flash,$routeParams,$location){
+
     // To display Testimonials as user
     $scope.doGetNewsByUser=function(){
-
         requestHandler.getRequest("getLatestNewsByUser/", "").then(function(response){
 
             $scope.usernewslist=response.data.News;
 
+         },function(){
+            errorMessage(Flash,"Please try again later!")
+        });
+    };
 
+    $scope.doGetNewsDetailsByUser= function (id) {
+
+        requestHandler.getRequest("getLatestNewsDetail/"+id, "").then(function(response){
+
+            $scope.usernewsdetails=response.data.News;
         },function(){
             errorMessage(Flash,"Please try again later!")
         });
+
     };
 
 
     // To display the user Testimonial list on load
     $scope.doGetNewsByUser();
-
+    $scope.doGetNewsDetailsByUser($routeParams.id);
 
 });
 
