@@ -7625,6 +7625,14 @@ ul.sidebar-menu li a{
     width:15% !important;
 }
 
+.title-col{
+    width:10% !important;
+}
+
+.descripton-col{
+    width:20% !important;
+}
+
 .option-col{
     width:18% !important;
 }
@@ -8081,10 +8089,23 @@ a.profile_button:hover{
 	vertical-align: top;
 }
 
+tr.sort-icon th i{
+   cursor: pointer;
+}
+
 .line-clamp-xs{
     position: absolute;
     max-height: 20px;
-    width: 15%;
+    width: 13%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow:hidden;
+}
+
+.line-clamp-xxs{
+    position: absolute;
+    max-height: 20px;
+    width: 16%;
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow:hidden;
@@ -8173,7 +8194,9 @@ a.profile_button:hover{
     min-height: 380px !important;
 }
 
-
+.min-height-385{
+    min-height: 385px !important;
+}
 
 .news-block{
 	width: 100%;
@@ -8588,6 +8611,28 @@ input[type=range]:focus::-ms-fill-upper {
 	line-height: 12px;
 	white-space: nowrap; }
 
+.label-success {
+    padding: 3px 5px !important;
+    line-height: 1.2 !important;
+    border: 1px solid #4cae4c;
+    color: #4cae4c;
+    font-size: 12px;
+    background-color: transparent;
+    border-radius: 3px;
+    font-weight: bold;
+}
+
+
+.label-danger{
+    font-weight: bold;
+    padding: 3px 5px !important;
+    line-height: 1.2 !important;
+    border: 1px solid #d43f3a;
+    color: #d43f3a;
+    font-size: 12px;
+    background-color: transparent;
+    border-radius: 3px;
+}
 
 .btn-sm,
 .btn-group-sm > .btn {

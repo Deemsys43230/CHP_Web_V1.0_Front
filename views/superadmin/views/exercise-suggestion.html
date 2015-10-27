@@ -19,7 +19,7 @@
                         <div class="loader"></div>
                     </div>
                 </div>
-                <div class="min-height-380">
+                <div class="min-height-385">
                     <table class="table table-bordered table-hover">
                         <thead>
                         <tr class="warning">
@@ -38,8 +38,8 @@
                                 <a href="#exerciseSuggestionDetail/{{exercisesuggestion.suggestionid}}" class="btn-sm btn-primary">View</a>
                                 <a href="" class="btn-xs btn-success hint--top" ng-click="doApproveExerciseSuggestion(exercisesuggestion.suggestionid)" ng-show="exercisesuggestion.exercisestatus==0" data-hint="Approve"><span>&#10004;</span></a>
                                 <a href="" class="btn-xs btn-danger hint--top" ng-click="doRejectExerciseSuggestion(exercisesuggestion.suggestionid)" ng-show="exercisesuggestion.exercisestatus==0" data-hint="Reject"><span>&#x2716;</span></a>
-                                <span class="btn-sm btn-success" ng-disabled ng-show="exercisesuggestion.exercisestatus==1" >Approved</span>
-                                <span class="btn-sm btn-danger" ng-disabled ng-show="exercisesuggestion.exercisestatus==2">Rejected</span>
+                                <span class="label-success" ng-show="exercisesuggestion.exercisestatus==1" >Approved</span>
+                                <span class="label-danger" ng-show="exercisesuggestion.exercisestatus==2">Rejected</span>
                             </td>
                         </tr>
                         <tr ng-show="exerciseSuggestionList.length==0"><td colspan="3">No Records Found !!!</td></tr>

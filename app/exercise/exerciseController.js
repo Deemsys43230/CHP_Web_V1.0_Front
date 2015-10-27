@@ -141,13 +141,17 @@ adminApp.controller('ExerciseEditController',function($scope,requestHandler,Flas
             $scope.exerciseDetail.imageurl=$scope.exerciseDetail.imageurl.substring($scope.exerciseDetail.imageurl.indexOf("/") + 14, $scope.exerciseDetail.imageurl.length-13)+"200x200.jpg";
             $scope.exerciseDetail.imageurl=$scope.exerciseDetail.imageurl+"?decache="+Math.random();
 
+            $.each($scope.exerciseDetail.type.levels,function(index,levelvalue){
+                levelvalue.workoutvalue=levelvalue.workoutvalue.toString();
+            });
+
+            original=angular.copy($scope.exerciseDetail);
+
             //push corresponding level
             var selectedLevel = ExerciseService.getSelectedLevel($scope.exerciseDetail.type);
             $scope.level = {selected : selectedLevel};
 
             $scope.loaded=false;
-
-            original=angular.copy($scope.exerciseDetail);
 
         },function(){
             errorMessage(Flash,"Please try again later!")

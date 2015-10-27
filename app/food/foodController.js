@@ -65,12 +65,61 @@ adminApp.controller('FoodController',function ($scope,requestHandler,Flash) {
     //sidebar menu active class
     $scope.activeClass = {foodlist:'active'};
 
-    
+
     //sorting
-    $scope.sort = function(keyname){
+    /*$scope.sort = function(keyname){
         $scope.sortKey = keyname;   //set the sortKey to the param passed
         $scope.reverse = !$scope.reverse; //if true make it false and vice versa
-    }
+    };*/
+
+
+    $scope.sortfoodidicon="fa fa-caret-down";
+    $scope.sortfoodnameicon = "fa fa-caret-down";
+    $scope.sortcategoryicon = "fa fa-caret-down";
+    $scope.sortsessionicon = "fa fa-caret-down";
+    $scope.sortregionicon = "fa fa-caret-down";
+
+    //sorting by food Id
+    $scope.sortFoodId = function(){
+        $scope.sortKey='foodid';
+        $scope.reverse = !$scope.reverse;
+        if($scope.sortfoodidicon=="fa fa-caret-down")$scope.sortfoodidicon="fa fa-caret-up";
+        else $scope.sortfoodidicon="fa fa-caret-down";
+    };
+
+    //sorting by food name
+    $scope.sortFoodName = function(){
+        $scope.sortKey='foodname';
+        $scope.reverse = !$scope.reverse;
+        if($scope.sortfoodnameicon=="fa fa-caret-down") $scope.sortfoodnameicon="fa fa-caret-up";
+        else $scope.sortfoodnameicon="fa fa-caret-down";
+    };
+
+    //sorting by category
+    $scope.sortCategory = function(){
+        $scope.sortKey = 'category.categoryname';
+        $scope.reverse = !$scope.reverse;
+        if($scope.sortcategoryicon=="fa fa-caret-down")$scope.sortcategoryicon="fa fa-caret-up";
+        else $scope.sortcategoryicon="fa fa-caret-down";
+    };
+
+
+    //sorting by session
+    $scope.sortSession = function(){
+        $scope.sortKey = 'sessionname';
+        $scope.reverse = !$scope.reverse;
+        if($scope.sortsessionicon=="fa fa-caret-down")$scope.sortsessionicon="fa fa-caret-up";
+        else $scope.sortsessionicon="fa fa-caret-down";
+    };
+
+
+    //sorting by region
+    $scope.sortRegion = function(){
+        $scope.sortKey = 'regionname';
+        $scope.reverse = !$scope.reverse;
+        if($scope.sortregionicon=="fa fa-caret-down")$scope.sortregionicon="fa fa-caret-up";
+        else $scope.sortregionicon="fa fa-caret-down";
+    };
 
     //Get Food List
     $scope.doGetAllFoodItems=function(){
@@ -342,7 +391,6 @@ adminApp.controller("FoodDetailsEditController",function($q,$scope,requestHandle
     };
 
     $scope.isClean=function(){
-
         return angular.equals(original, $scope.foodDetails);
     };
 

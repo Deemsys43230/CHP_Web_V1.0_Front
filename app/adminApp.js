@@ -1174,11 +1174,27 @@ adminApp.directive('validateFloat', function() {
         require: 'ngModel',
         restrict: '',
         link: function(scope, elm, attrs, ctrl) {
-            // only apply the validator if ngModel is present and Angular has added the email validator
+            // only apply the validator if ngModel is present and Angular has added the Float Number validator
             ctrl.$validators.validateFloat = function(modelValue) {
                 return  ctrl.$isEmpty(modelValue) || FLOAT_REGEXP.test(modelValue);
             };
 
+        }
+    };
+});
+
+//Check For Integer Validation
+adminApp.directive('validateInteger', function() {
+    var INTEGER_REGEXP = /^\-?\d*$/;
+
+    return {
+        require: 'ngModel',
+        restrict: '',
+        link: function(scope, elm, attrs, ctrl) {
+            // only apply the validator if ngModel is present and Angular has added the Integer validator
+            ctrl.$validators.validateInteger = function(modelValue) {
+                return  ctrl.$isEmpty(modelValue) || INTEGER_REGEXP.test(modelValue);
+            };
         }
     };
 });

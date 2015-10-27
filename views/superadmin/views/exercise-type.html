@@ -63,7 +63,7 @@
                             <a href="" class="btn-xs btn-danger" ng-show="list.canedit==1" ng-click="doDeleteExerciseType(list.typeid)">Delete</a>
                         </td>
                     </tr>
-                    <tr ng-show="!exercisetypefilter.length" class="text-center"><td colspan="4">No Records Found !!!</td></tr>
+                    <tr ng-show="exercisetypefilter.length==0" class="text-center"><td colspan="4">No Records Found !!!</td></tr>
                     </tbody>
                 </table>
                 </div>
