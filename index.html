@@ -255,7 +255,16 @@
         <div class="user_register1">
             <form name="registerForm2">
                     <p>Security Question (Optional)</p>
-                    <input type="text" name="secretquestion" ng-model="userForm.secretquestion" maxlength="150" ng-required="userForm.secretanswer"/>
+                    <!--<input type="text" name="secretquestion" ng-model="userForm.secretquestion" maxlength="150" ng-required="userForm.secretanswer"/>-->
+                    <select class="form-control main"  ng-model="userForm.secretquestion" name="secretquestion"  ng-required="userForm.secretanswer">
+                    <option value="">--Select secret question--</option>
+                    <option value="1">What was the name of your first pet?</option>
+                    <option value="2">What is the name of your best friend?</option>
+                    <option value="3">What is your favourite dish?</option>
+                    <option value="4">What is the name of your favourite film star ?</option>
+                    <option value="5">What is the name of your favourite sport's team?</option>
+                    <option value="6">What is your Dream job?</option>
+                </select>
                     <span ng-show="registerForm2.secretquestion.$invalid && !registerForm2.secretquestion.$pristine">
                                 <span class="error-message" ng-show="registerForm2.secretquestion.$error.required"><span>Required.</span></span>
                     </span>
