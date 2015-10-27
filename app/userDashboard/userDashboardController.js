@@ -325,6 +325,7 @@ userApp.controller('UserDashboardController',function($scope,requestHandler,Flas
         $scope.userExercise.levelid="";
         $scope.userExercise.workoutvalue="";
         $scope.ExerciseAddForm.$setPristine();
+        $scope.caloriesSpent=0;
 
     };
 
