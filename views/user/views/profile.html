@@ -121,7 +121,16 @@
                             <h5>Secret&nbsp;Question:</h5>
                         </div>
                         <div class="col-md-8">
-                            <input class="profile_input" name="secretquestion" ng-model="userProfile.secretquestion" maxlength="150" required/>
+                           <!-- <input class="profile_input" name="secretquestion" ng-model="userProfile.secretquestion" maxlength="150" required/>-->
+                            <select class="form-control main"  ng-model="userProfile.secretquestion" name="secretquestion" required>
+                                <option value="">--Select secret question--</option>
+                                <option value="1">What was the name of your first pet?</option>
+                                <option value="2">What is the name of your best friend?</option>
+                                <option value="3">What is your favourite dish?</option>
+                                <option value="4">What is the name of your favourite film star ?</option>
+                                <option value="5">What is the name of your favourite sport's team?</option>
+                                <option value="6">What is your Dream job?</option>
+                            </select>
                             <span ng-show="userProfileForm.secretquestion.$dirty&&userProfileForm.secretquestion.$invalid">
                     <span class="error-message textarea-errormessage10" ng-show="userProfileForm.secretquestion.$error.required"><span>Required.</span></span>
                              </span>

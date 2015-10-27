@@ -500,7 +500,7 @@
                         <h5>Food Name:</h5>
                         <p>{{userSelectedFoodDetails.foodname}}</p>
                         <h5 class="margin-top-10">Select Measure:</h5>
-                            <select class="form-control" name="measure" ng-model="userFood.measure" ng-options="measure.measurename for measure in userSelectedFoodDetails.measureid track by measure.measureid" required>
+                            <select class="form-control" name="measure" ng-model="userFood.measure" ng-options="measure.measurename for measure in userSelectedFoodDetails.measureid track by measure.measureid" ng-change="doCalculateCalories()" required>
                                 <option value="">-- Select Measure --</option>
                             </select>
                              <span ng-show="FoodAddForm.measure.$dirty&&FoodAddForm.measure.$invalid">
@@ -550,7 +550,7 @@
                             <h5>Exercise Name:</h5>
                             <p>{{userSelectedExerciseDetails.exercisename}}</p>
                             <h5 class="margin-top-10">Select Level:</h5>
-                            <select class="form-control" name="levelid" ng-model="userExercise.levelid" ng-options="level.levelname for level in userSelectedExerciseDetails.type.levels track by level.levelid" required>
+                            <select class="form-control" name="levelid" ng-model="userExercise.levelid" ng-options="level.levelname for level in userSelectedExerciseDetails.type.levels track by level.levelid" ng-change="doCalculateCaloriesExercise()" required>
                                 <option value="">-- Select Level --</option>
                             </select>
                              <span ng-show="ExerciseAddForm.levelid.$dirty&&ExerciseAddForm.levelid.$invalid">
