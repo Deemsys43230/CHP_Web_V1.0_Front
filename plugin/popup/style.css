@@ -196,6 +196,10 @@ form p{
     width: 40% !important;
 }
 
+.width-28{
+    width: 28% !important;
+}
+
 .width-60{
     width: 60% !important;
 }
@@ -211,9 +215,9 @@ form p{
 .secret_question input[type="checkbox"] {float:left; margin-right:5px;}
 .secret_question input[type="checkbox"]+label {float:left;}
 
-
 .user_register1 {display: none;}
 .user_register1 label {display: block; margin-bottom:5px;}
 .user_register1 input[type="text"], .user_register1 input[type="email"], .user_register1 input[type="password"] {display: block; width:100%; padding: 10px; border:1px solid #DDD; color:#666;}
 .user_register1 input[type="checkbox"] {float:left; margin-right:5px;}
 .user_register1 input[type="checkbox"]+label {float:left;}
+.user_register1 select{display: block; width:100%; padding: 10px; border:1px solid #DDD; color:#666;outline: none}

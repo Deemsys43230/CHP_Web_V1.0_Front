@@ -127,8 +127,8 @@
 </header>
 
 <!-- login or register popup-->
-<div id="modal" class="popupContainer" style="display:none;">
-    <header class="popupHeader">
+<div id="modal" class="popupContainer width-28" style="display:none;">
+    <header class="popupHeader width-100">
         <span class="header_title">Login</span>
         <span class="modal_close pull-right"><i class="fa fa-times"></i></span>
     </header>
@@ -256,7 +256,7 @@
             <form name="registerForm2">
                     <p>Security Question (Optional)</p>
                     <!--<input type="text" name="secretquestion" ng-model="userForm.secretquestion" maxlength="150" ng-required="userForm.secretanswer"/>-->
-                    <select class="form-control main"  ng-model="userForm.secretquestion" name="secretquestion"  ng-required="userForm.secretanswer">
+                    <select  ng-model="userForm.secretquestion" name="secretquestion"  ng-required="userForm.secretanswer">
                     <option value="">--Select secret question--</option>
                     <option value="1">What was the name of your first pet?</option>
                     <option value="2">What is the name of your best friend?</option>
@@ -279,7 +279,6 @@
                     </div>
             </form>
         </div>
-
 
     </section>
 </div>
@@ -507,6 +506,7 @@
             $(".reset_password").hide();
             $(".user_register").hide();
             $(".secret_question").hide();
+            $(".user_register1").hide();
             $(".user_login").show();
             $(".header_title").text('Login');
             return false;
