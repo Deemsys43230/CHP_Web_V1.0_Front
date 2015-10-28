@@ -35,7 +35,9 @@ userApp.controller('UserProfileController',['$scope','requestHandler','Flash',fu
                 $scope.userProfile.gender = "1";
             }
 
-            $scope.userProfile.imageurl=$scope.userProfile.imageurl.substring($scope.userProfile.imageurl.indexOf("/") + 14, $scope.userProfile.imageurl.length);
+            //alert($scope.userProfile.imageurl);
+            $scope.userProfile.imageurl=requestHandler.convertUrl($scope.userProfile.imageurl);
+          //  $scope.userProfile.imageurl=$scope.userProfile.imageurl.substring($scope.userProfile.imageurl.indexOf("/") + 14, $scope.userProfile.imageurl.length);
 
             //Convert Integer to String
             if($scope.userProfile.gender)
@@ -61,7 +63,7 @@ userApp.controller('UserProfileController',['$scope','requestHandler','Flash',fu
     $scope.refreshImage=function(){
         requestHandler.getRequest("getUserId/","").then(function(response){
             $scope.userProfile.imageurl=response.data.User_Profile.imageurl;
-            $scope.userProfile.imageurl=$scope.userProfile.imageurl.substring($scope.userProfile.imageurl.indexOf("/") + 14, $scope.userProfile.imageurl.length)
+            $scope.userProfile.imageurl=requestHandler.convertUrl($scope.userProfile.imageurl);
             $scope.userProfile.imageurl=$scope.userProfile.imageurl+"?decache="+Math.random();
 
             $('.image-editor').cropit({

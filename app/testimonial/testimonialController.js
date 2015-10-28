@@ -118,7 +118,7 @@ adminApp.controller('TestimonialEditController',function($scope,requestHandler,F
             $scope.testimonials=response.data.Testimonials;
 
             // Change the url hostname to localhost
-            $scope.testimonials.imageurl = $scope.testimonials.imageurl.substring($scope.testimonials.imageurl.indexOf("/") + 14, $scope.testimonials.imageurl.length);
+            $scope.testimonials.imageurl = requestHandler.convertUrl( $scope.testimonials.imageurl);
             $scope.testimonials.imageurl = "http://localhost"+$scope.testimonials.imageurl;
 
 

@@ -6,6 +6,8 @@ requestHandlerApp.factory("requestHandler",['$http',function($http,$location){
 
     //*IMPORTANT*//
     var hostedDomain="http://localhost/api/v1/";
+    var urlLength = 14;
+    var exerciselength=13;
 
     requestObj.getRequest=function(requestURL,params){
         requestURL=hostedDomain+requestURL;
@@ -50,6 +52,25 @@ requestHandlerApp.factory("requestHandler",['$http',function($http,$location){
 
     };
 
+    requestObj.convertUrl=function(imageurl){
+   // alert(imageurl);
+        var url = imageurl.substring(imageurl.indexOf("/")+ urlLength, imageurl.length);
+        console.log(url);
+     //   alert(url);
+        return url;
+
+
+    };
+
+    requestObj.convertUrlExercise=function(imageurl){
+      //  alert(imageurl);
+        var exerciseurl = imageurl.substring(imageurl.indexOf("/")+ urlLength, imageurl.length-exerciselength);
+        console.log(exerciseurl);
+     //   alert(exerciseurl);
+        return exerciseurl;
+
+
+    };
     requestObj.alerting=function(){
       alert("ok deal");
     };

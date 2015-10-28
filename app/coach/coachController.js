@@ -61,7 +61,7 @@ adminApp.controller('CoachViewController',function($scope,requestHandler,Flash,$
     $scope.doGetCoachProfile = function () {
         requestHandler.getRequest("getCoachIndividualDetail/"+$routeParams.id, "").then(function (response) {
             $scope.coachProfile = response.data.getCoachIndividualDetail;
-            $scope.coachProfile.imageurl = $scope.coachProfile.imageurl.substring($scope.coachProfile.imageurl.indexOf("/") + 14, $scope.coachProfile.imageurl.length)
+            $scope.coachProfile.imageurl = requestHandler.convertUrl($scope.coachProfile.imageurl);
             $scope.coachProfile.imageurl = $scope.coachProfile.imageurl + "?decache=" + Math.random();
         });
 

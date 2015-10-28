@@ -89,7 +89,9 @@ adminApp.controller('ExerciseViewController',function($scope,requestHandler,Flas
         $scope.loaded=true;
         requestHandler.postRequest("admin/getExerciseDetailByadmin/",{"exerciseid":$routeParams.id}).then(function(response){
             $scope.exerciseDetail=response.data.ExerciseDetail;
-            $scope.exerciseDetail.imageurl=$scope.exerciseDetail.imageurl.substring($scope.exerciseDetail.imageurl.indexOf("/") + 14, $scope.exerciseDetail.imageurl.length-13)+"200x200.jpg";
+           // alert($scope.exerciseDetail.imageurl);
+          $scope.exerciseDetail.imageurl=requestHandler.convertUrlExercise($scope.exerciseDetail.imageurl)+"200x200.jpg";
+          //  $scope.exerciseDetail.imageurl=$scope.exerciseDetail.imageurl.substring($scope.exerciseDetail.imageurl.indexOf("/")+14,$scope.exerciseDetail.imageurl.length)+"200x200.jpg";
             $scope.exerciseDetail.imageurl=$scope.exerciseDetail.imageurl+"?decache="+Math.random();
             $scope.loaded=false;
         },function(){
@@ -136,9 +138,12 @@ adminApp.controller('ExerciseEditController',function($scope,requestHandler,Flas
 
             $scope.exerciseDetail=response.data.ExerciseDetail;
 
-            $scope.originalImage=$scope.exerciseDetail.imageurl.substring($scope.exerciseDetail.imageurl.indexOf("/") + 14, $scope.exerciseDetail.imageurl.length);
+           $scope.originalImage=requestHandler.convertUrl($scope.exerciseDetail.imageurl);
+            //$scope.originalImage=$scope.exerciseDetail.imageurl.substring($scope.exerciseDetail.imageurl.indexOf("/")+14,$scope.exerciseDetail.imageurl.length)
 
-            $scope.exerciseDetail.imageurl=$scope.exerciseDetail.imageurl.substring($scope.exerciseDetail.imageurl.indexOf("/") + 14, $scope.exerciseDetail.imageurl.length-13)+"200x200.jpg";
+           $scope.exerciseDetail.imageurl=requestHandler.convertUrlExercise($scope.exerciseDetail.imageurl)+"200x200.jpg";
+           // $scope.exerciseDetail.imageurl=$scope.exerciseDetail.imageurl.substring($scope.exerciseDetail.imageurl.indexOf("/")+14,$scope.exerciseDetail.imageurl.length)
+
             $scope.exerciseDetail.imageurl=$scope.exerciseDetail.imageurl+"?decache="+Math.random();
 
             $.each($scope.exerciseDetail.type.levels,function(index,levelvalue){
