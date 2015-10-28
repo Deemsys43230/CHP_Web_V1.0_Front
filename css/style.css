@@ -1725,10 +1725,13 @@ input[type="submit"] {
     margin-top: 15px;
 }
 
+.margin-bottom-13 {
+    margin-bottom: 13px;
+}
+
 .margin-bottom-10 {
     margin-bottom: 10px !important;
 }
-
 
 .margin-bottom-5 {
     margin-bottom: 5px !important;
@@ -1745,6 +1748,10 @@ input[type="submit"] {
 
 .height-310{
     height: 310px!important;
+}
+
+.height-320{
+    height: 321px!important;
 }
 
 .height-240{
@@ -6846,26 +6853,28 @@ a.weight_button:hover{
 }
 
 a.suggest_button {
+    margin-bottom:10px;
+    height: 45px;
+    font-weight: bold;
+    line-height: 40px;
     display: block;
     position: relative;
     font-size: 13px;
     width: 100%;
     padding: 3px ;
     text-align: center;
-    background-color:#57cb85;
-    color: #ffffff;
+    background-color:#efefef;
+    color: #666;
 }
 
 a.suggest_button:hover{
     color: #fff;
-    background-color:#4EB778;
+    background-color:#f8ba01;
     cursor: pointer;
 }
 
 .food_option{
-    display: block;
-    margin-top: 10px;
-    height: 210px;
+    height: 300px;
     overflow-y: hidden;
 }
 
@@ -6873,10 +6882,10 @@ a.suggest_button:hover{
     display: inline-block;
     font-size: 13px;
     padding: 2px 10px;
-    margin-left: 5px;
     margin-bottom: 5px !important;
     background-color: #eee;
     color: #666;
+    margin-right: 5px;
 }
 
 .food_option span:hover{
@@ -6884,11 +6893,8 @@ a.suggest_button:hover{
     cursor: pointer;
 }
 
-
 .spent_option{
-    display: block;
-    margin-top: 10px;
-    height: 240px;
+    height: 300px;
     overflow-y: hidden;
 }
 
@@ -6898,6 +6904,7 @@ a.suggest_button:hover{
     padding: 2px 10px;
     margin-bottom: 5px !important;
     background-color: #eee;
+    margin-right: 5px;
     color: #666;
 }
 
@@ -6917,7 +6924,7 @@ a.suggest_button:hover{
 /* user main page session selection */
 
 .session {
-    margin: 15px 0px 0px 15px;
+    margin: -5px 0 0 10px;
 }
 .session input[type=radio]{
     display:none;
@@ -6996,7 +7003,7 @@ ul.tabs li.active{
 
 .content-1 {
     padding: 7px;
-    margin: 10px 15px 10px 15px;
+    margin: 5px 10px 10px 10px;
     width: 335px;
     background: #FFFFFF;
     -webkit-box-shadow: 0px 0px 3px rgba(0,0,0,0.3);
@@ -7039,15 +7046,19 @@ ul.tabs li.active{
 
 .content-3 {
     position: absolute;
-    padding: 10px !important;
     top:60px;
     right:-267px;
     width: 160px;
     height: 375px;
+}
+
+.content-3 .suggest_content{
     background: #FFFFFF;
+    padding: 10px!important;
     -webkit-box-shadow: 0px 0px 3px rgba(0,0,0,0.3);
     -moz-box-shadow: 0px 0px 3px rgba(0,0,0,0.3);
     box-shadow: 0px 0px 3px rgba(0,0,0,0.3);
+    height: 320px;
 }
 
 
@@ -7056,7 +7067,7 @@ ul.tabs li.active{
 .food_scrollbar
 {
     float: left;
-    height: 268px;
+    height: 280px;
     width: 350px;
     background: none;
     overflow-y: scroll;
@@ -7307,6 +7318,12 @@ ul.food li p.food_name{
     color: red !important;
     font-weight:500;
 }
+
+.text-gray{
+    color: #aaa !important;
+    font-weight:500;
+}
+
 
 .text-green{
     color: limegreen !important;
@@ -8710,9 +8727,29 @@ input[type=range]:focus::-ms-fill-upper {
 }
 
 .line p{
-    margin: 0px 0px 5px 0px !important;
+    margin: 0 0 5px 0 !important;
 }
 
 a#measure-modal{
     text-decoration: underline;
+}
+
+/*circle progress*/
+.circle-wrapper{
+    position: relative;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.circle-progress{
+    position: absolute;
+    color: #bbb;
+    margin-top: -5px;
+    font-weight: 100;
+    font-size: 20px !important;
+    background-color: transparent;
+}
+
+.circle-progress small{
+    font-size: 12px !important;
 }

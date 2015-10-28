@@ -5,13 +5,14 @@ userApp.controller('UserDashboardController',function($scope,requestHandler,Flas
     $scope.userFood={};
     $scope.userFood.sessionid=1;
     $scope.servings=0;
-    $scope.caloriesIntake=0;
+    $scope.current=$scope.caloriesIntake=0;
+    $scope.max=100;
     $scope.exerciseSearchResult = [];
     $scope.userExercise={};
     $scope.caloriesSpent=0;
     $scope.workoutvalue=0;
 
-//Modal Popup to add user food
+    //Modal Popup to add user food
     $scope.doUserAddFood=function(){
         $(function(){
             $("#lean_overlay").fadeTo(1000);
@@ -95,7 +96,8 @@ userApp.controller('UserDashboardController',function($scope,requestHandler,Flas
                 $scope.userFood.foodid=result.foodid;
                 $scope.userFood.measure=result.measureid;
                 $scope.userFood.servings=parseInt(result.measureid.servings);
-                $scope.caloriesIntake=result.measureid.calories;
+                $scope.current=$scope.caloriesIntake=result.measureid.calories;
+
 
                 $scope.doUserAddFood();
            });
@@ -103,19 +105,23 @@ userApp.controller('UserDashboardController',function($scope,requestHandler,Flas
         });
     };
 
-//Calories caluclation for food
-    $scope.doCalculateCalories=function(measureid){
+    //Calories caluclation for food
+    $scope.doCalculateCalories=function(){
+
+        $scope.currentColor =   '#66E066';
 
         if($scope.userFood.servings==0){
-            $scope.caloriesIntake=0;
+            $scope.current=$scope.caloriesIntake=0;
         }
         if(!$scope.userFood.servings>0){
-            $scope.caloriesIntake=0;
+            $scope.current=$scope.caloriesIntake=0;
         }
         else{
-            $scope.caloriesIntake=$scope.userFood.measure.calories*$scope.userFood.servings;
+            $scope.current=$scope.caloriesIntake=$scope.userFood.measure.calories*$scope.userFood.servings;
+            $scope.current=$scope.current.toFixed(2);
+            if(($scope.current.length-3)>2) $scope.max=$scope.max+((String($scope.current|0).slice(0, -2))*100);
+            else $scope.max=100;
         }
-
     };
 
     //Insert User Food
@@ -294,16 +300,21 @@ userApp.controller('UserDashboardController',function($scope,requestHandler,Flas
     };
 
     //Calories caluclation for exercose
-    $scope.doCalculateCaloriesExercise=function(levelid){
+    $scope.doCalculateCaloriesExercise=function(){
+
+        $scope.currentColor =   '#FF5C33';
 
         if($scope.userExercise.workoutvalue==0){
-            $scope.caloriesSpent=0;
+            $scope.current=$scope.caloriesSpent=0;
         }
         if(!$scope.userExercise.workoutvalue>0){
-            $scope.caloriesSpent=0;
+            $scope.current=$scope.caloriesSpent=0;
         }
         else{
-            $scope.caloriesSpent=$scope.userExercise.levelid.calories*$scope.userExercise.workoutvalue;
+            $scope.current=$scope.caloriesSpent=$scope.userExercise.levelid.calories*$scope.userExercise.workoutvalue;
+            $scope.current=$scope.current.toFixed(2);
+            if(($scope.current.length-3)>2) $scope.max=$scope.max+((String($scope.current|0).slice(0, -2))*100);
+            else $scope.max=100;
         }
 
     };
@@ -315,7 +326,8 @@ userApp.controller('UserDashboardController',function($scope,requestHandler,Flas
         $scope.userFood.measure="";
         $scope.userFood.servings=[];
         $scope.FoodAddForm.$setPristine();
-        $scope.caloriesIntake=0;
+        $scope.current=$scope.caloriesIntake=0;
+        $scope.max = 100;
     };
 
     //Clear suggest exercise model values
@@ -325,11 +337,11 @@ userApp.controller('UserDashboardController',function($scope,requestHandler,Flas
         $scope.userExercise.levelid="";
         $scope.userExercise.workoutvalue="";
         $scope.ExerciseAddForm.$setPristine();
-        $scope.caloriesSpent=0;
-
+        $scope.current=$scope.caloriesSpent=0;
+        $scope.max = 100;
     };
 
-//To Display current date
+    //To Display current date
     var selectedDate = new Date();
     var dd = selectedDate.getDate();
     var mm = selectedDate.getMonth()+1; //January is 0!
@@ -345,38 +357,27 @@ userApp.controller('UserDashboardController',function($scope,requestHandler,Flas
 
     //Initialize
 
-   $scope.loadFoodAndExercise=function(selectedDate){
-    $scope.loadFoodDiary(selectedDate);
-    $scope.loadExerciseDiary(selectedDate);
-   }
+    $scope.loadFoodAndExercise=function(selectedDate){
+        $scope.loadFoodDiary(selectedDate);
+        $scope.loadExerciseDiary(selectedDate);
+    };
 
     $scope.loadFoodAndExercise(selectedDate);
 
 
     //circle round
-    $scope.current =        27;
-    $scope.max =            100;
     $scope.offset =         0;
     $scope.timerCurrent =   0;
     $scope.uploadCurrent =  0;
-    $scope.stroke =         15;
-    $scope.radius =         125;
+    $scope.stroke =         12;
+    $scope.radius =         70;
     $scope.isSemi =         false;
     $scope.rounded =        false;
     $scope.responsive =     false;
     $scope.clockwise =      true;
-    $scope.currentColor =   '#45ccce';
     $scope.bgColor =        '#eaeaea';
-    $scope.duration =       800;
+    $scope.duration =       1000;
     $scope.currentAnimation = 'easeOutCubic';
-
-    $scope.increment = function(amount){
-        $scope.current+=(amount || 1);
-    };
-
-    $scope.decrement = function(amount){
-        $scope.current-=(amount || 1);
-    };
 
     $scope.animations = [];
 
@@ -407,8 +408,6 @@ userApp.controller('UserDashboardController',function($scope,requestHandler,Flas
     };
 
 });
-
-
 
 // render image to view in list
 userApp.filter('trusted', ['$sce', function ($sce) {
