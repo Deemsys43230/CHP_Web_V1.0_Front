@@ -60,7 +60,7 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../css/vertical_tab.css',
                                 '../../plugin/circle/circle.css',
                                 '../../plugin/circle/jquery.circlechart.js',
-                                '../../plugin/date-picker/moment.js',
+                                '../../js/moment.js',
                                 '../../css/ngDatepicker.css',
                                 '../../css/custom-inputs.css',
                                 '../../plugin/popup/style.css',
@@ -95,7 +95,31 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 templateUrl: 'views/history.html'
             }).
             when('/coach', {
-                templateUrl: 'views/coach.html'
+                templateUrl: 'views/coach.html',
+                resolve: {
+                    loadMyFiles:function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'userApp',
+                            files:[
+                                '../../css/profile-image-upload.css'
+                            ]
+                        })
+                    }
+                }
+            }).
+            when('/coachSearch', {
+                templateUrl: 'views/coach-search.html',
+                resolve: {
+                    loadMyFiles:function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'userApp',
+                            files:[
+                                '../../css/profile-image-upload.css'
+                            ]
+                        })
+                    }
+                },
+                controller:'DemographyController'
             }).
             when('/portfolio', {
                 templateUrl: '../common/portfolio.html'
@@ -116,9 +140,6 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'userApp',
                             files:[
-                                '../../plugin/date-picker/moment.js',
-                                '../../plugin/date-picker/pikaday.css',
-                                '../../plugin/date-picker/pikaday.js',
                                 '../../plugin/popup/style.css',
                                 '../../plugin/popup/jquery.leanModal.min.js',
                                 '../../css/profile-image-upload.css',
@@ -137,8 +158,6 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'userApp',
                             files:[
-                                '../../css/profile-image-upload.css',
-                                '../../js/image-upload.js',
                                 '../../app/demography/demographyController.js'
                             ]
                         })
@@ -153,8 +172,6 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'userApp',
                             files:[
-                                '../../css/profile-image-upload.css',
-                                '../../js/image-upload.js',
                                 '../../app/demography/demographyController.js'
                             ]
                         })

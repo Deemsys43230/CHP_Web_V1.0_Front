@@ -25,14 +25,12 @@
 /*   12 - Footer Styles 		   */
 /*   13 - Plugins Styles 	  	   */
 
-/*@import url(http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800);
+/*
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800);
 @import url(http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic);
-@import url(http://fonts.googleapis.com/css?family=Raleway:400,300,700);*/
+@import url(http://fonts.googleapis.com/css?family=Raleway:400,300,700);
+*/
 
-@font-face {
-    font-family: audimat;
-    src: url(../fonts/audimat/AUdimat-Regular.otf);
-}
 
 /*------------------------------------------*/
 /*	     01 - General & Basic Styles
@@ -48,15 +46,23 @@ body {
 }
 
 /*for FireFox*/
-input::-moz-focus-inner,a::-moz-focus-inner,
+input::-moz-focus-inner,a::-moz-focus-inner
 {
-	border : 0px !important;
+	border : 0 !important;
 	outline : none !important;
 }
 /*for IE8 */
 input:focus,a:focus
 {
 	outline : none !important;
+}
+
+select:invalid {
+    box-shadow: none;
+}
+
+input:invalid {
+    box-shadow: none;
 }
 
 .modal {
@@ -319,7 +325,7 @@ input[type="submit"] {
     background-color: transparent;
 }
 
-@media (min-width: 1200px & max-width: 1250px) {
+@media (min-width: 1200px) and (max-width: 1250px){
     .container {
         width: 1100px !important;
     }
@@ -929,7 +935,7 @@ ul.social-list li:last-child a i {
 .navbar-default .navbar-nav > li > a {
     color: #999;
     display: block;
-    font-size: 14.4px;
+    font-size: 14px;
     font-weight: 300;
     padding: 28px 15px 28px 15px;
     overflow: hidden;
@@ -5043,7 +5049,6 @@ footer a:hover {
 .copyright-section {
     padding: 15px 0;
 	font-size: 11px;
-	letter-spacing: 0.5px;
     border-top: 1px solid rgba(255,255,255,.06);
 }
 
@@ -6743,7 +6748,7 @@ select.main {
     width: 90%;
     border: 0px !important;
     outline: none !important;
-    color: #999;
+    color: #333;
     border-radius: 0 !important;
     background-color: transparent;
     -webkit-box-shadow: inset 0px 0px 3px rgba(0,0,0,0.3);
@@ -6859,17 +6864,16 @@ a.suggest_button {
     line-height: 40px;
     display: block;
     position: relative;
-    font-size: 13px;
+    font-size: 14px;
     width: 100%;
     padding: 3px ;
     text-align: center;
-    background-color:#efefef;
-    color: #666;
+    background-color: #16cb7f;
+    color: #fff;
 }
 
 a.suggest_button:hover{
-    color: #fff;
-    background-color:#f8ba01;
+    background-color: #16b56f;
     cursor: pointer;
 }
 
@@ -7051,6 +7055,67 @@ ul.tabs li.active{
     height: 320px;
 }
 
+.content_scrollbar
+{
+    height: 310px;
+    width: 100%;
+    background: none;
+    overflow-y: scroll;
+    overflow-x:hidden;
+    word-wrap: break-word;
+}
+
+.content_scrollbar::-webkit-scrollbar-track
+{
+    -webkit-box-shadow: inset 0 0 3px rgba(0,0,0,0.3);
+    -moz-box-shadow: inset 0 0 3px rgba(0,0,0,0.3);
+    box-shadow: inset 0 0 3px rgba(0,0,0,0.3));
+    background-color: #F5F5F5;
+}
+
+.content_scrollbar::-webkit-scrollbar
+{
+    width: 6px;
+    background-color: #F5F5F5;
+}
+
+.content_scrollbar::-webkit-scrollbar-thumb
+{
+    background-color: #666;
+}
+
+.coach-list{
+    margin: 0 !important;
+    padding-top: 10px;
+}
+
+.search-content{
+    width: 100%;
+    height: auto;
+    -webkit-box-shadow: 0px 0px 3px rgba(0,0,0,0.3);
+    -moz-box-shadow: 0px 0px 3px rgba(0,0,0,0.3);
+    box-shadow: 0px 0px 3px rgba(0,0,0,0.3);
+    padding: 8px;
+}
+
+.coach-view{
+    margin: 3px 0 10px 3px;
+    width: 97%;
+    height: 95px;
+    padding: 10px;
+    -webkit-box-shadow: 0 0 3px rgba(0,0,0,0.3);
+    -moz-box-shadow: 0 0 3px rgba(0,0,0,0.3);
+    box-shadow: 0 0 3px rgba(0,0,0,0.3);
+}
+
+.coach-view:hover{
+    cursor: pointer;
+    color: #f8ba01;
+}
+
+.coach-view:hover h3{
+    color: #f8ba01;
+}
 
 /*food scroll bar*/
 
@@ -7065,7 +7130,7 @@ ul.tabs li.active{
     word-wrap: break-word;
 }
 
-.style::-webkit-scrollbar-track
+/*.style::-webkit-scrollbar-track
 {
     -webkit-box-shadow: inset 0 0 3px rgba(0,0,0,0.3);
     -moz-box-shadow: inset 0 0 3px rgba(0,0,0,0.3);
@@ -7082,7 +7147,7 @@ ul.tabs li.active{
 .style::-webkit-scrollbar-thumb
 {
     background-color: #666;
-}
+}*/
 
 ul.food{
     margin-left: 15px;
@@ -8031,6 +8096,22 @@ a:hover, a:visited, a:link, a:active
 	box-shadow: inset 0px 0px 3px rgba(0,0,0,0.3);
 	outline: 0;
 	margin: 0;
+}
+
+.coach_input
+{
+    font-size: 15px;
+    color: #333;
+    padding: 8px 10px;
+    width: 100%;
+    border:0px !important;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    -webkit-box-shadow: inset 0px 0px 3px rgba(0,0,0,0.3);
+    -moz-box-shadow: inset 0px 0px 3px rgba(0,0,0,0.3);
+    box-shadow: inset 0px 0px 3px rgba(0,0,0,0.3);
+    outline: 0;
+    margin: 0;
 }
 
 .profile_input_textarea

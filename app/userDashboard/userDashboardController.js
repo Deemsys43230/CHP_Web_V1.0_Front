@@ -97,8 +97,10 @@ userApp.controller('UserDashboardController',function($scope,requestHandler,Flas
                 $scope.userFood.measure=result.measureid;
                 $scope.userFood.servings=parseInt(result.measureid.servings);
                 $scope.current=$scope.caloriesIntake=result.measureid.calories;
-
-
+                $scope.currentColor =   '#66E066';
+                $scope.current=$scope.current.toFixed(2);
+                if(($scope.current.length-3)>2) $scope.max=100+((String($scope.current|0).slice(0, -2))*100);
+                else $scope.max=100;
                 $scope.doUserAddFood();
            });
 
@@ -119,7 +121,7 @@ userApp.controller('UserDashboardController',function($scope,requestHandler,Flas
         else{
             $scope.current=$scope.caloriesIntake=$scope.userFood.measure.calories*$scope.userFood.servings;
             $scope.current=$scope.current.toFixed(2);
-            if(($scope.current.length-3)>2) $scope.max=$scope.max+((String($scope.current|0).slice(0, -2))*100);
+            if(($scope.current.length-3)>2) $scope.max=100+((String($scope.current|0).slice(0, -2))*100);
             else $scope.max=100;
         }
     };
@@ -165,10 +167,12 @@ userApp.controller('UserDashboardController',function($scope,requestHandler,Flas
     //On load Food Diary
     $scope.loadFoodDiary=function(selectedDate){
        // alert(selectedDate);
+        $scope.loaded=true;
         var userFoodDiaryDetailPromise=UserDashboardService.getFoodDiary(selectedDate);
         userFoodDiaryDetailPromise.then(function(result){
             $scope.userFoodDiaryDataAll=result;
             $scope.loadSessionDetails();
+            $scope.loaded=false;
         });
     };
 

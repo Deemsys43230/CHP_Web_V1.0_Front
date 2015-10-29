@@ -221,3 +221,5 @@ form p{
 .user_register1 input[type="checkbox"] {float:left; margin-right:5px;}
 .user_register1 input[type="checkbox"]+label {float:left;}
 .user_register1 select{display: block; width:100%; padding: 10px; border:1px solid #DDD; color:#666;outline: none}
+
+.user_register select{display: block; width:100%; padding: 10px; border:1px solid #DDD; color:#666;outline: none}

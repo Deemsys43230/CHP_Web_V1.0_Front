@@ -33,7 +33,6 @@
 
     <div id="w" class="clearfix">
         <ul id="sidemenu">
-
             <li class="daily_update">
                 <a href="#daily_update" class="open"><i class="fa fa-child fa-4x"></i><span>Daily Updates</span>
                     <br/>
@@ -62,7 +61,7 @@
                     </h4>
 
                 </div>
-<br/>
+                <br/>
                 <div class="col-md-6 text-center">
                     <h5>Gain</h5>
                     <div class="gain margin-top-10" data-percent="65"></div>
@@ -75,10 +74,7 @@
                     <h4>547</h4>
                     <p>of 1700 Cals</p>
                 </div>
-
-
             </li>
-
         </ul>
 
         <div id="content">
@@ -133,14 +129,19 @@
                                                     <a href="" class="pull-right food_close" title="Delete Food" ng-click="doDeleteUserFood(foodDiaryData.userfoodid)">x</a>
                                                     <p class="food_name">{{foodDiaryData.foodname}}</p>
                                                     <p>
-                                                        <span class="pull-right text-green"><i class="fa fa-angle-up"></i>&nbsp;{{foodDiaryData.measureid.calories}}  calories</span>
+                                                        <span class="pull-right text-green text-bold"><i class="fa fa-angle-up"></i>&nbsp;{{foodDiaryData.measureid.calories}}  calories</span>
                                                     <div class="select_food">
-                                                        {{foodDiaryData.measureid.servings}}&nbsp;{{foodDiaryData.measureid.measurename}}&nbsp;<a href="" ng-click="doEditUserFood(foodDiaryData.foodid,foodDiaryData.userfoodid)"><i class="fa fa-pencil"></i></a>
+                                                        <span class="text-bold">Quantity : </span>{{foodDiaryData.measureid.servings}}&nbsp;{{foodDiaryData.measureid.measurename}}&nbsp;<a href="" ng-click="doEditUserFood(foodDiaryData.foodid,foodDiaryData.userfoodid)"><i class="fa fa-pencil"></i></a>
                                                     </div>
                                                     </p>
                                                 </div>
                                             </li>
                                         </ul>
+                                        <div class="text-center margin-top-40">
+                                            <div ng-show="loaded" class="throbber-loader margin-top-40">
+                                                Loading…
+                                            </div>
+                                        </div>
                                     </div>
                                 </div><!-- #tab1 -->
 
@@ -186,7 +187,7 @@
                                             <a href="" class="pull-right food_close" title="Delete Exercise" ng-click="doDeleteUserExercise(exerciseDiaryData.userfoodid)">x</a>
                                             <p class="food_name">{{exerciseDiaryData.Exercise.exercisename}}</p>
                                             <p>
-                                                <span class="pull-right text-green"><i class="fa fa-angle-up"></i>&nbsp;{{exerciseDiaryData.Level.calories}}  calories</span>
+                                                <span class="pull-right text-red text-bold"><i class="fa fa-angle-down"></i>&nbsp;{{exerciseDiaryData.Level.calories}}  calories</span>
                                             <div class="select_food">
                                                 <p>Level:{{exerciseDiaryData.Level.levelname}}</p>Workout:{{exerciseDiaryData.Level.workoutvalue}}&nbsp;<a href="" ng-click="doEditUserFood(foodDiaryData.foodid,foodDiaryData.userfoodid)"><i class="fa fa-pencil"></i></a>
                                             </div>
@@ -202,9 +203,6 @@
                 <div class="col-md-2 margin-top-15 text-right"><i class="fa fa-calendar"></i> Date</div>
                 <div class="col-md-3 pull-right margin-top-10">
                     <ng-datepicker ng-model="selectedDate" ng-change="loadFoodAndExercise(selectedDate)"></ng-datepicker>
-                    <!--<i class="fa fa-calendar-o"></i> Date : <input type="text" class="main" id="datepicker" ng-model="currdate" ng-change="getFoodDiary()"/>
-                   --!>
-
                 </div>
             </div>
 
@@ -517,17 +515,17 @@
                         <h5>Food Name:</h5>
                         <p>{{userSelectedFoodDetails.foodname}}</p>
                         <h5 class="margin-top-10">Select Measure:</h5>
-                            <select class="form-control" name="measure" ng-model="userFood.measure" ng-options="measure.measurename for measure in userSelectedFoodDetails.measureid track by measure.measureid" ng-change="doCalculateCalories()" required>
+                            <select name="measure" ng-model="userFood.measure" ng-options="measure.measurename for measure in userSelectedFoodDetails.measureid track by measure.measureid" ng-change="doCalculateCalories()" required>
                                 <option value="">-- Select Measure --</option>
                             </select>
                              <span ng-show="FoodAddForm.measure.$dirty&&FoodAddForm.measure.$invalid">
                                      <span class="error-message" ng-show="FoodAddForm.measure.$error.required"><span>Required.</span></span>
                              </span>
                         <h5  class="margin-top-10">Value</h5>
-                        <input class="form-control" type="text" ng-pattern="/^\d+$/"  ng-disabled="!userFood.measure" name="servings" ng-model="userFood.servings" ng-change="doCalculateCalories()" maxlength="3" required>
+                        <input type="text" ng-pattern="/^\d+$/"  ng-disabled="!userFood.measure" name="servings" ng-model="userFood.servings" ng-change="doCalculateCalories()" maxlength="3" required>
                         <span ng-show="FoodAddForm.servings.$dirty&&FoodAddForm.servings.$invalid">
-                                 <span class="error-message textarea-errormessage10" ng-show="FoodAddForm.servings.$error.required"><span>Required.</span></span>
-                                  <span class="error-message textarea-errormessage10" ng-show="FoodAddForm.servings.$error.pattern"><span>Invalid&nbsp;Format.</span></span>
+                                 <span class="error-message" ng-show="FoodAddForm.servings.$error.required"><span>Required.</span></span>
+                                  <span class="error-message" ng-show="FoodAddForm.servings.$error.pattern"><span>Invalid&nbsp;Format.</span></span>
                             </span>
                         </form>
                     </div>
@@ -584,17 +582,17 @@
                             <h5>Exercise Name:</h5>
                             <p>{{userSelectedExerciseDetails.exercisename}}</p>
                             <h5 class="margin-top-10">Select Level:</h5>
-                            <select class="form-control" name="levelid" ng-model="userExercise.levelid" ng-options="level.levelname for level in userSelectedExerciseDetails.type.levels track by level.levelid" ng-change="doCalculateCaloriesExercise()" required>
+                            <select name="levelid" ng-model="userExercise.levelid" ng-options="level.levelname for level in userSelectedExerciseDetails.type.levels track by level.levelid" ng-change="doCalculateCaloriesExercise()" required>
                                 <option value="">-- Select Level --</option>
                             </select>
                              <span ng-show="ExerciseAddForm.levelid.$dirty&&ExerciseAddForm.levelid.$invalid">
                                      <span class="error-message" ng-show="ExerciseAddForm.levelid.$error.required"><span>Required.</span></span>
                              </span>
                             <h5  class="margin-top-10">Timings(minutes)</h5>
-                            <input class="form-control" type="text" ng-pattern="/^\d+$/"  ng-disabled="!userExercise.levelid" name="workoutvalue" ng-model="userExercise.workoutvalue" ng-change="doCalculateCaloriesExercise()"  maxlength="3" required>
+                            <input type="text" ng-pattern="/^\d+$/"  ng-disabled="!userExercise.levelid" name="workoutvalue" ng-model="userExercise.workoutvalue" ng-change="doCalculateCaloriesExercise()"  maxlength="3" required>
                         <span ng-show="ExerciseAddForm.workoutvalue.$dirty&&ExerciseAddForm.workoutvalue.$invalid">
-                                 <span class="error-message textarea-errormessage10" ng-show="ExerciseAddForm.workoutvalue.$error.required"><span>Required.</span></span>
-                                  <span class="error-message textarea-errormessage10" ng-show="ExerciseAddForm.workoutvalue.$error.pattern"><span>Invalid&nbsp;Format.</span></span>
+                                 <span class="error-message" ng-show="ExerciseAddForm.workoutvalue.$error.required"><span>Required.</span></span>
+                                  <span class="error-message" ng-show="ExerciseAddForm.workoutvalue.$error.pattern"><span>Invalid&nbsp;Format.</span></span>
                             </span>
                         </form>
                     </div>
