@@ -200,10 +200,25 @@
                     </div>
                     <!-- End Tab Panels -->
                 </div>
-                <div class="col-md-2 margin-top-15 text-right"><i class="fa fa-calendar"></i> Date</div>
-                <div class="col-md-3 pull-right margin-top-10">
-                    <ng-datepicker ng-model="selectedDate" ng-change="loadFoodAndExercise(selectedDate)"></ng-datepicker>
+                <div class="col-md-2 pull-right margin-top-10 no-padding margin-right-20">
+                    <div class="input-group ui-datepicker">
+                        <input ng-click="open($event)" ng-change="loadFoodAndExercise()" type="text"
+                               ng-keypress="prevent()"
+                               class="profile_input override"
+                               id = "popup"
+                               datepicker-popup="{{format}}"
+                               ng-model="selectedDate"
+                               is-open="opened"
+                               min="minDate"
+                               max="maxDate"
+                               datepicker-options="dateOptions"
+                               date-disabled="disabled(date, mode)"
+                               ng-required="true"
+                               close-text="Close" required>
+                    </div>
                 </div>
+                <div class="col-md-2 pull-right margin-top-15 text-right"><i class="fa fa-calendar"></i> Date</div>
+
             </div>
 
             <div id="weight" class="contentblock hidden">

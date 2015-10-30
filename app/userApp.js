@@ -179,6 +179,20 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'DemographyController'
             }).
+            when('/test', {
+                templateUrl: 'views/test.html',
+                resolve: {
+                    loadMyFiles:function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'userApp',
+                            files:[
+                                '../../app/demography/test.js'
+                            ]
+                        })
+                    }
+                },
+                controller:'DatepickerDemoCtrl'
+            }).
             otherwise({
                 redirectTo: '/dashboard'
             });

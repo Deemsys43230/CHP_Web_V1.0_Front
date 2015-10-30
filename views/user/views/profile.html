@@ -51,10 +51,24 @@
                             <h5>DOB :</h5>
                         </div>
                         <div class="col-md-8">
-                            <input type="text"  id="datepicker" name="dob" class="profile_input" ng-model="userProfile.dob" placeholder="Date Of Birth" required>
-                             <span ng-show="userProfileForm.dob.$dirty&&userProfileForm.dob.$invalid">
-                    <span class="error-message textarea-errormessage10" ng-show="userProfileForm.dob.$error.required"><span>Required.</span></span>
-                             </span>
+                            <div class="input-group ui-datepicker full-width">
+                                <input placeholder="Date Of Birth" name="dob" ng-click="open($event)" ng-change="change()" type="text"
+                                       ng-keypress="prevent()"
+                                       class="profile_input"
+                                       id = "popup"
+                                       datepicker-popup="{{format}}"
+                                       ng-model="selectedDate"
+                                       is-open="opened"
+                                       min="minDate"
+                                       max="maxDate"
+                                       datepicker-options="dateOptions"
+                                       date-disabled="disabled(date, mode)"
+                                       ng-required="true"
+                                       close-text="Close" required>
+                            </div>
+                            <span ng-show="userProfileForm.dob.$dirty&&userProfileForm.dob.$invalid">
+                                <span class="error-message textarea-errormessage10" ng-show="userProfileForm.dob.$error.required"><span>Required.</span></span>
+                            </span>
                         </div>
                     </div>
                     <div class="col-md-6 margin-top-10">
@@ -122,7 +136,7 @@
                         </div>
                         <div class="col-md-8">
                            <!-- <input class="profile_input" name="secretquestion" ng-model="userProfile.secretquestion" maxlength="150" required/>-->
-                            <select class="form-control main"  ng-model="userProfile.secretquestion" name="secretquestion" required>
+                            <select class="full-width main"  ng-model="userProfile.secretquestion" name="secretquestion" required>
                                 <option value="">--Select secret question--</option>
                                 <option value="1">What was the name of your first pet?</option>
                                 <option value="2">What is the name of your best friend?</option>
@@ -269,20 +283,5 @@
     $(function(){
         $(".common_model").show();
     })
-</script>
-
-<script>
-
-    var picker = new Pikaday(
-            {
-                format:'DD/MM/YYYY',
-                field: document.getElementById('datepicker'),
-                firstDay: 1,
-                minDate: new Date(1940, 0, 1),
-                maxDate: new Date(new Date().getFullYear()-7, 12, 31),
-                yearRange: [1940, new Date().getFullYear()-7],
-                defaultDate: new Date(new Date().getFullYear()-25,0,1)
-            });
-
 </script>
 

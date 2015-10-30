@@ -13,8 +13,12 @@ angular.module('ngDatepicker', [] ).directive('ngDatepicker', ['$document', func
         restrict: 'EA',
         require: '?ngModel',
         scope: {},
-        link: function (scope, element, attrs, ngModel) {
+        link: function (scope, element,attrs, ngModel) {
             setScopeValues(scope, attrs);
+
+            element.on("keypress", function(e){
+                e.preventDefault();
+            });
 
             scope.calendarOpened = false;
             scope.days = [];
@@ -44,10 +48,8 @@ angular.module('ngDatepicker', [] ).directive('ngDatepicker', ['$document', func
                     year = date.year(),
                     n = 1;
 
-                var firstWeekDay = date.set('date', 1).day();
-                if (firstWeekDay !== 1) {
-                    n -= firstWeekDay;
-                }
+                var firstWeekDay = scope.firstWeekDaySunday === true ? date.set('date', 1).day() : date.set('date', 1).day();
+                n -= firstWeekDay;
 
                 scope.dateValue = date.format('MMMM YYYY');
                 scope.days = [];
@@ -173,4 +175,10 @@ angular.module('ngDatepicker', [] ).directive('ngDatepicker', ['$document', func
                 '</div>'
     };
 
+    $('.ng-datepicker-input').keypress(function(e) {
+        e.preventDefault();
+    });
+
 }]);
+
+
