@@ -8,66 +8,34 @@
                     <div flash-message="2000" class="col-md-3 no-padding pull-right"></div>
                     <h5 class="classic-title"><span><a href="#coach"><i class="fa fa-male"></i>&nbsp;&nbsp;MY COACH</a></span>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#coachSearch"><i class="fa fa-search"></i>&nbsp;&nbsp;COACH SEARCH</a></h5>
                 </div>
-                <div class="col-md-5">
-                    <div class="search-content">
-                        <input class="coach_input" placeholder="search coach here..">
-                    </div>
-                    <div class="coach-list">
-                        <div class="content_scrollbar">
-                            <div class="coach-view">
-                                <div class="col-md-3">
-                                    <img class="img-circle" src="../../images/pic-1.jpg">
-                                </div>
-                                <div class="col-md-9">
-                                    <h3>Lucas Martin</h3>
-                                    <i>Senior Coach</i><br/>
-                                    <i class="fa fa-star text-orange"></i><i class="fa fa-star text-orange"></i><i class="fa fa-star text-orange"></i><i class="fa fa-star text-orange"></i><i class="fa fa-star text-gray"></i>
-                                    <small>( 232 Reviews )</small>
-                                </div>
-                            </div>
-                            <div class="coach-view">
-                                <div class="col-md-3">
-                                    <img class="img-circle" src="../../images/pic-1.jpg">
-                                </div>
-                                <div class="col-md-9">
-                                    <h3>Lucas Martin</h3>
-                                    <i>Senior Coach</i><br/>
-                                    <i class="fa fa-star text-orange"></i><i class="fa fa-star text-orange"></i><i class="fa fa-star text-orange"></i><i class="fa fa-star text-orange"></i><i class="fa fa-star text-gray"></i>
-                                    <small>( 232 Reviews )</small>
-                                </div>
-                            </div>
-                            <div class="coach-view">
-                                <div class="col-md-3">
-                                    <img class="img-circle" src="../../images/pic-1.jpg">
-                                </div>
-                                <div class="col-md-9">
-                                    <h3>Lucas Martin</h3>
-                                    <i>Senior Coach</i><br/>
-                                    <i class="fa fa-star text-orange"></i><i class="fa fa-star text-orange"></i><i class="fa fa-star text-orange"></i><i class="fa fa-star text-orange"></i><i class="fa fa-star text-gray"></i>
-                                    <small>( 232 Reviews )</small>
-                                </div>
-                            </div>
-                        </div>
+
+                <div ng-if="loaded">
+                    <div class="loader-style">
+                        <div class="loader"></div>
                     </div>
                 </div>
-                <div class="col-md-7">
-                    <div class="row">
-                        <div class="col-md-8">
-                            <h3 class="text-orange">Lucas Martin</h3>
-                            <h5></h4><i>Senior Coach</i></h5><br/><br/>
-                            <strong>Students:</strong>3243 Students<br/>
-                            <strong>Email id:</strong>lucas@gmail.com<br/>
-                            <strong>Name:</strong>Lucas Martin<br/>
-                        </div>
-                        <div class="col-md-4">
-                            <img style="width: 150px; height: 150px" src="../../images/pic-3.jpg"/>
-                        </div>
-                        <div class="col-md-12"><br/>
-                            <strong>About Me:</strong>
-                            “People find me to be an upbeat, self-motivated team player with excellent communication skills. For the past several years I have worked in lead qualification, telemarketing, and customer service in the technology industry. My experience includes successfully calling people in director-level positions of technology departments and developing viable leads. I have a track record of maintaining a consistent call and activity volume and consistently achieving the top 10 percent in sales, and I can do the same thing for your company.”
-                        </div>
-                    </div>
-                </div>
+                <table class="table table-striped table-bordered">
+                    <thead>
+                    <tr class="warning">
+                        <th class="col-md-4">Name</th>
+                        <th class="col-md-6">Email</th>
+                        <th class="col-md-2">Options</th>
+                    </tr>
+                    </thead>
+                    <tbody >
+                    <tr dir-paginate="mycoach in mycoachfilter = (mycoachlist |filter: mycoachsearch | itemsPerPage: 7)" ng-show="mycoachlist.length!=0">
+                        <td>{{mycoach.name}}</td>
+                        <td>{{mycoach.emailid}}</td>
+                        <td>
+                            <a href="#coach-view/{{coach.userid}}" class="btn-xs btn-primary">View</a>
+                            <a href="" class="btn-xs btn-success" ng-click="" >Unsubscribe</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <!-- Start Pagination -->
+               <dir-pagination-controls ng-show="paginationLoad" boundary-links="true"> </dir-pagination-controls>
+                <!-- End Pagination -->
 
             </form>
         </div><!-- @end #content -->

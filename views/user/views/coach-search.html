@@ -2,7 +2,7 @@
 <div class="page-banner1">
     <div id="w" class="clearfix">
         <div id="demography-content">
-            <form name="demographyForm">
+            <form name="userCoachForm">
                 <div class="col-md-12">
                     <a href="#dashboard" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back to Dashboard</a>
                     <div flash-message="2000" class="col-md-3 no-padding pull-right"></div>
@@ -10,65 +10,67 @@
                 </div>
                 <div class="col-md-5">
                     <div class="search-content">
-                        <input class="coach_input" placeholder="search coach here..">
+                        <input class="coach_input" ng-model="coachsearch" placeholder="search coach here..">
                     </div>
                     <div class="coach-list">
                         <div class="content_scrollbar">
-                            <div class="coach-view">
+                            <div class="coach-view" ng-repeat="usercoach in usercoachlist | filter : coachsearch">
                                 <div class="col-md-3">
-                                    <img class="img-circle" src="../../images/pic-1.jpg">
+                                    <img class="img-circle"ng-src="{{usercoach.imageurl | trusted}}">
                                 </div>
                                 <div class="col-md-9">
-                                    <h3>Lucas Martin</h3>
-                                    <i>Senior Coach</i><br/>
-                                    <i class="fa fa-star text-orange"></i><i class="fa fa-star text-orange"></i><i class="fa fa-star text-orange"></i><i class="fa fa-star text-orange"></i><i class="fa fa-star text-gray"></i>
-                                    <small>( 232 Reviews )</small>
+                                    <a href="" ng-click="doGetCoachDetailsByUser(usercoach.userid)">{{usercoach.name}}</a>
+                                    <div class="avg" id="Rating_{{usercoach.userid}}"></div>
+                                    <!--<small>({{coachReviewslist.totalRatings}} Reviews)</small>-->
                                 </div>
                             </div>
-                            <div class="coach-view">
-                                <div class="col-md-3">
-                                    <img class="img-circle" src="../../images/pic-1.jpg">
-                                </div>
-                                <div class="col-md-9">
-                                    <h3>Lucas Martin</h3>
-                                    <i>Senior Coach</i><br/>
-                                    <i class="fa fa-star text-orange"></i><i class="fa fa-star text-orange"></i><i class="fa fa-star text-orange"></i><i class="fa fa-star text-orange"></i><i class="fa fa-star text-gray"></i>
-                                    <small>( 232 Reviews )</small>
-                                </div>
-                            </div>
-                            <div class="coach-view">
-                                <div class="col-md-3">
-                                    <img class="img-circle" src="../../images/pic-1.jpg">
-                                </div>
-                                <div class="col-md-9">
-                                    <h3>Lucas Martin</h3>
-                                    <i>Senior Coach</i><br/>
-                                    <i class="fa fa-star text-orange"></i><i class="fa fa-star text-orange"></i><i class="fa fa-star text-orange"></i><i class="fa fa-star text-orange"></i><i class="fa fa-star text-gray"></i>
-                                    <small>( 232 Reviews )</small>
-                                </div>
-                            </div>
+
                         </div>
                     </div>
                 </div>
                 <div class="col-md-7">
                     <div class="row">
                         <div class="col-md-8">
-                            <h3 class="text-orange">Lucas Martin</h3>
-                            <h5></h4><i>Senior Coach</i></h5><br/><br/>
-                            <strong>Students:</strong>3243 Students<br/>
-                            <strong>Email id:</strong>lucas@gmail.com<br/>
-                            <strong>Name:</strong>Lucas Martin<br/>
+                            <h3 class="text-orange">{{usercoachdetails.name}}</h3>
+                            <!--<h5></h4><i>Senior Coach</i></h5><br/><br/>
+                            <strong>Students:</strong>3243 Students<br/>-->
+                            <strong>Email id:</strong>{{usercoachdetails.emailid}}<br/>
+                            <strong>Name:</strong>{{usercoachdetails.name}}<br/>
                         </div>
                         <div class="col-md-4">
-                            <img style="width: 150px; height: 150px" src="../../images/pic-3.jpg"/>
+                            <img style="width: 150px; height: 150px" ng-src="{{usercoachdetails.imageurl | trusted}}"/>
                         </div>
                         <div class="col-md-12"><br/>
                             <strong>About Me:</strong>
-                            “People find me to be an upbeat, self-motivated team player with excellent communication skills. For the past several years I have worked in lead qualification, telemarketing, and customer service in the technology industry. My experience includes successfully calling people in director-level positions of technology departments and developing viable leads. I have a track record of maintaining a consistent call and activity volume and consistently achieving the top 10 percent in sales, and I can do the same thing for your company.”
+                           {{usercoachdetails.about}}
+                        </div><br/>
+
+                        <div  ng-repeat="reviews in coachReviews">
+                            <div class="col-md-2">
+                                <img class="img-circle" ng-src="{{reviews.review_imageurl | trusted}}">
+                                <p> <strong>{{reviews.review_username}}</strong></p>
+                                <span class="small-font">{{reviews.reviewddatetime}}</span>
+                            </div>
+                            <div class="col-md-7">
+                                <strong>{{reviews.reviewtitle}}</strong>
+                                <p>{{reviews.reviewdescription}}</p>
+                            </div>
+
+
+                            <div class="col-md-3 review">
+                                Ratings : {{reviews.ratinglevel}}<br/>
+                                <div class="rates" id="Rates_{{reviews.id}}"></div>
+                                <!--<i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star-half-empty"></i>
+                                <i class="fa fa-star-o"></i>-->
+                            </div>
+                            <div class="col-md-12"><hr/></div>
+
                         </div>
                         <div class="col-md-12 text-center margin-top-20">
-                            <a href="" class="btn register_button"> Hire Me </a>
-                        </div>
+                            <a href="" ng-click="doSubscribeCoach(usercoachdetails.userid)" class="btn register_button" ng-show="usercoachdetails.coachEnrollStatus==0"> Subscribe </a>                        </div>
                     </div>
                 </div>
             </form>
@@ -77,3 +79,5 @@
 </div>
 
 <script type="text/javascript" src="../../js/script.js"></script>
+<!--<script src="../../plugin/jquery.raty-2.4.5/js/jquery.min.js"></script>
+<script src="../../plugin/jquery.raty-2.4.5/js/jquery.raty.min.js"></script>-->
