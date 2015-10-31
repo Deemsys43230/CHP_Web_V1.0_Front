@@ -60,8 +60,6 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../css/vertical_tab.css',
                                 '../../plugin/circle/circle.css',
                                 '../../plugin/circle/jquery.circlechart.js',
-                                '../../js/moment.js',
-                                '../../css/ngDatepicker.css',
                                 '../../css/custom-inputs.css',
                                 '../../plugin/popup/style.css',
                                 '../../plugin/popup/jquery.leanModal.min.js',
@@ -70,8 +68,7 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../app/userDashboard/ngPercentageCircle.js',
                                 '../../js/augucomplete-alt.js',
                                 '../../app/userDashboard/userDashboardService.js',
-                                '../../app/userDashboard/userDashboardController.js',
-                                '../../app/userDashboard/datepickerDirective.js'
+                                '../../app/userDashboard/userDashboardController.js'
                             ]
                         })}},
                 controller:'UserDashboardController'

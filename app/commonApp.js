@@ -56,7 +56,6 @@ commonApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                             files:[
                                 'plugin/vertical-carousel/vertical-carousel.js',
                                 'plugin/vertical-carousel/vertical-carousel.css',
-                                'plugin/date-picker/moment.js',
                                 'app/commonController.js'
                             ]
                         })
