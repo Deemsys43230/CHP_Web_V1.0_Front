@@ -1,0 +1,58 @@
+
+
+<!-- Start Page Banner -->
+
+<div>
+    <h3 class="text-center margin-tb-10 text-green text-bold">Set Your Goal</h3>
+    <div class="col-md-12">
+        <p>
+            The value property sets or returns the value of the value attribute of a text field.
+            The value property contains the default value OR the value a user types in.
+        </p>
+    </div>
+    <div class="col-md-5 margin-top-15">Target Period<span class="pull-right">:</span></div>
+    <div class="col-md-7 margin-top-10">
+        <input type="text" id="set-date" class="profile_input">
+    </div>
+    <div class="col-md-5 margin-top-15">Target Weight<small>(Kgs)</small><span class="pull-right">:</span></div>
+    <div class="col-md-7 margin-top-10">
+        <input type="text"  class="profile_input">
+    </div>
+
+    <div class="col-md-12 margin-top-20 text-center">
+        <a class="weight_button" ng-click="changegoal()">Set Goal</a>
+    </div>
+
+    <input id="start" hidden ng-model="start-date"/>
+    <input id="end" hidden ng-model="end-date"/>
+</div>
+
+<!-- End Page Banner -->
+
+<script type="text/javascript">
+    $(document).ready(function() {
+
+        $('#startDate').daterangepicker({
+            singleDatePicker: true,
+            startDate: moment()
+        });
+
+        $('#endDate').daterangepicker({
+            singleDatePicker: true,
+            startDate: moment()
+        });
+
+        var options = {
+            minDate : new Date()
+        };
+
+
+        $('#set-date').daterangepicker(options, function(start, end, label) {
+            document.getElementById("start").value = start.format('DD/MM/YYYY');
+            document.getElementById("end").value = end.format('DD/MM/YYYY');
+            console.log('start date: ' + start.format('DD/MM/YYYY'));
+            console.log('end date: ' + end.format('DD/MM/YYYY'));
+        });
+
+    });
+</script>

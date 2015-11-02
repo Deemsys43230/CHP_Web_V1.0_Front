@@ -1,0 +1,94 @@
+
+<!-- Start Page Banner -->
+
+<div>
+    <h3 class="text-center margin-tb-10 text-green text-bold">Your Goal</h3>
+    <div class="margin-top-10">
+        <div class="col-md-7">Started Date<span class="pull-right">:</span></div>
+        <div class="col-md-5">01/10/2015</div>
+    </div>
+    <div class="margin-top-10">
+        <div class="col-md-7">Ends On<span class="pull-right">:</span></div>
+        <div class="col-md-5">25/11/2015</div>
+    </div>
+    <div class="margin-top-10">
+        <div class="col-md-7">Target Weight<small>(Kgs)</small><span class="pull-right">:</span></div>
+        <div class="col-md-5">50Kgs</div>
+    </div>
+
+    <div class="col-md-12 margin-top-10">
+        <p>Goal Progress</p>
+        <div class="margin-top-5" id="goal-progress" style="max-width: 100%; height: 60px;"></div>
+    </div>
+
+    <div class="col-md-12 text-center">
+        <a class="weight_button" ng-click="changegoal()">Track Goal</a>
+    </div>
+
+    <input id="start" hidden ng-model="start-date"/>
+    <input id="end" hidden ng-model="end-date"/>
+</div>
+
+<script>
+    $(function () {
+        $('#goal-progress').highcharts({
+            chart: {
+                type: 'bar'
+            },
+            title: {
+                text: ''
+            },
+            colors: [
+                '#f8ba01'
+            ],
+            subtitle: {
+                text: ''
+            },
+            xAxis: {
+                categories: ['Weight']
+            },
+            yAxis: {
+                min: 100,
+                max: 120,
+                title: {
+                    text: '',
+                    align: 'high'
+                },
+                labels: {
+                    overflow: 'justify'
+                }
+            },
+            tooltip: {
+                valueSuffix: ' Kgs'
+            },
+            plotOptions: {
+                bar: {
+                    dataLabels: {
+                        enabled: true
+                    }
+                }
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'top',
+                x: -40,
+                y: 80,
+                floating: true,
+                borderWidth: 1,
+                backgroundColor: ((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#ffffff'),
+                shadow: true
+            },
+            credits: {
+                enabled: false
+            },
+            series: [{
+                name: ' ',
+                data: [107]
+            }],
+            exporting: {
+                enabled: false
+            }
+        });
+    });
+</script>

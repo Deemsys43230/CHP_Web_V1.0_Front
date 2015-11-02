@@ -1,3 +1,5 @@
+<link data-require="animate.css@*" data-semver="3.2.0" rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.2.0/animate.min.css" />
+
 <style xmlns="http://www.w3.org/1999/html">
     /*weight level*/
 
@@ -6,7 +8,7 @@
         height:200px;
         width:90px;
         margin-top:20px;
-        margin-left:70px;
+        margin-left:88px;
         font-size: 13px;
         overflow:hidden;
         background-color: #eee;
@@ -27,6 +29,14 @@
         background-color: #ffcc00;
     }
 
+    div[ng-include].ng-enter {
+        -webkit-animation: fadeInRight 1s;
+        animation: fadeInRight 1s;
+    }
+    body{
+        overflow-x: hidden !important;
+    }
+
 </style>
 
 <div class="page-banner1">
@@ -41,7 +51,7 @@
             </li>
 
             <li class="weight">
-                <a href="#weight"><i class="fa fa-tachometer fa-4x"></i><span>Weight</span>
+                <a href="#weight"><i class="fa fa-tachometer fa-4x"></i><span>Weight & Goal</span>
                     <br/>
                     <p>Update Age & Set Goal</p>
                 </a>
@@ -224,106 +234,34 @@
             <div id="weight" class="contentblock hidden">
                 <div class="outerline">
                     <div class="col-md-8">
-                        <div class="content-weight">
-                            <div class="row margin-top-10">
-                                <div class="col-md-4 text-right padding-top-4">
-                                    <h5>Height :</h5>
-                                </div>
-                                <div class="col-md-8">
-                                    <input class="weight_input"/>
-                                    <input type="radio" id="3" class="height" name="height" />
-                                    <label for="3">cm</label>
-                                    <input type="radio" id="4" class="height" name="height" />
-                                    <label for="4">ft</label>
-                                </div>
-                            </div>
-                            <div class="row margin-top-10">
-                                <div class="col-md-4 text-right padding-top-4">
-                                    <h5>Weight :</h5>
-                                </div>
-                                <div class="col-md-8">
-                                    <input class="weight_input"/>
-                                    <input type="radio" id="5" class="height" name="weight" />
-                                    <label for="5">Kg</label>
-                                    <input type="radio" id="6" class="height" name="weight" />
-                                    <label for="6">Lb</label>
-                                </div>
-
-                                <div class="col-md-12 text-center margin-top-20 margin-bottom-10">
-                                    <a href="" class="weight_button">Update</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="content-weight">
-                            <div class="row">
-                                <div class="col-md-7 text-right">
-                                    <h5>Your Idle Weight :</h5>
-                                    <h5 class="margin-top-10">Your Original Weight :</h5>
-                                </div>
-                                <div class="col-md-5">
-                                    <h5><span class="yellow">&nbsp;&nbsp;</span> 65 Kgs</h5>
-                                    <h5 class="margin-top-10"><span class="green">&nbsp;&nbsp;</span> 58 Kgs</h5>
-                                </div>
-                            </div>
+                        <div class="content-weight height-265">
+                            <div ng-include src="'views/'+goal.status+'.html'"></div>
                         </div>
 
-                        <div class="content-goal">
+                        <div class="content-weight">
                             <div class="row margin-right-2">
                                 <div class="col-md-12 margin-bottom-10">
-                                    <h5>Set the Goal</h5>
+                                    <h5>Update Weight</h5>
                                 </div>
-                                <div class="col-md-3 no-padding">
-                                    <div class="set_goal">
-                                        <div class="set_goal_item low">
-                                            <p>Low</p>
-                                            <h6>
-                                                <span>1 Month<br/>
-                                                <i class="fa fa-angle-up"></i> 1 Kgs<br/></span>
-                                                <a href="">Set Goal</a>
-                                            </h6>
-                                        </div>
+                                <div class="col-md-12">
+                                    <div class="col-md-4 text-right padding-top-4">
+                                        <h5>Weight :</h5>
                                     </div>
-                                </div>
-                                <div class="col-md-3 no-padding">
-                                    <div class="set_goal">
-                                        <div class="set_goal_item medium">
-                                            <p>Medium</p>
-                                            <h6>
-                                                <span>1 Month<br/>
-                                                <i class="fa fa-angle-up"></i> 2 Kgs<br/></span>
-                                                <a href="">Set Goal</a>
-                                            </h6>
-                                        </div>
+                                    <div class="col-md-8">
+                                        <input class="weight_input"/>
+                                        <input type="radio" id="5" class="height" name="weight" />
+                                        <label for="5">Kg</label>
+                                        <input type="radio" id="6" class="height" name="weight" />
+                                        <label for="6">Lb</label>
                                     </div>
-                                </div>
-                                <div class="col-md-3 no-padding">
-                                    <div class="set_goal">
-                                        <div class="set_goal_item high">
-                                            <p>High</p>
-                                            <h6>
-                                                <span>1 Month<br/>
-                                                <i class="fa fa-angle-up"></i> 3 Kgs<br/></span>
-                                                <a href="">Set Goal</a>
-                                            </h6>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-3 no-padding">
-                                    <div class="set_goal">
-                                        <div class="set_goal_item custom">
-                                            <p>Set Yours</p>
-                                            <h6>
-                                                <span class="pull-left">Month<br/><input id="month" type="number" min="1" max="10" step="1" value ="1"/></span>
-                                                <span class="pull-right">Weight<br/><input id="weight_to" type="number" min="1" max="10" step="1" value ="1"/></span><br/><br/>
-                                                <a href="">Set Goal</a>
-                                            </h6>
-                                        </div>
+                                    <div class="col-md-12 text-center margin-top-20 margin-bottom-10">
+                                        <a href="" class="weight_button">Update</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-4 no-padding">
                         <p hidden id="weight_entry">50%</p>
                         <div id="weight_level">
                             <div id="col" class="weight_level"></div>
@@ -337,7 +275,17 @@
                             <div class="level_maintain"><div>MAINTAIN</div></div>
                             <div class="level_low"><div>LOW</div></div>
                         </div>
-                        <div class="pull-right margin-right-40 small margin-top-10">Weight Level</div>
+                        <div class="text-center small margin-top-10">Weight Level</div>
+                        <br/>
+                        <div class="col-md-7 no-padding">
+                            <h5>Idle Weight <span class="pull-right">: &nbsp;</span></h5>
+                            <h5 class="margin-top-10">Original Weight <span class="pull-right">: &nbsp;</span></h5>
+                        </div>
+                        <div class="col-md-5 no-padding">
+                            <h5><span class="yellow">&nbsp;&nbsp;</span> 65 Kgs</h5>
+                            <h5 class="margin-top-10"><span class="green">&nbsp;&nbsp;</span> 58 Kgs</h5>
+                        </div><br/><br/>
+                        <p>Your Are Adviced to increase your weight by 7 Kgs</p>
                     </div>
                 </div>
             </div><!-- @end #ideas-content -->
@@ -403,13 +351,13 @@
                     <table hidden>
                         <caption>Date table</caption>
                         <tbody>
-                        <tr><td>A</td><td>90%</td></tr>
+                        <tr><td>A</td><td>100%</td></tr>
                         <tr><td>B</td><td>68%</td></tr>
                         <tr><td>C</td><td>30%</td></tr>
                         <tr><td>D</td><td>20%</td></tr>
                         </tbody>
                     </table>
-                    <div class="left">
+                    <div class="left-range">
                         <div id="grafico">
                             <div class="riga top-33"><div>MAINTAIN</div></div>
                             <div class="riga top-66"><div>LOW</div></div>
@@ -420,7 +368,7 @@
                             <div id="col3" class="column"></div>
                         </div>
                     </div>
-                    <div class="left">
+                    <div class="left-range">
                         <div class="health">
                             <div class="col-md-3 no-padding">
                                 <img src="../../images/i-protein.jpg" class="margin-left-5">

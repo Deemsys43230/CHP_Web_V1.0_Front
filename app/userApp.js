@@ -68,7 +68,9 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../app/userDashboard/ngPercentageCircle.js',
                                 '../../js/augucomplete-alt.js',
                                 '../../app/userDashboard/userDashboardService.js',
-                                '../../app/userDashboard/userDashboardController.js'
+                                '../../app/userDashboard/userDashboardController.js',
+                                '../../plugin/dateRange/daterangepicker.css',
+                                '../../plugin/dateRange/daterangepicker.js'
                             ]
                         })}},
                 controller:'UserDashboardController'
@@ -190,7 +192,10 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'userApp',
                             files:[
-                                '../../app/demography/test.js'
+                                '../../app/demography/test.js',
+                                '../../plugin/dateRange/daterangepicker.css',
+                                '../../plugin/dateRange/moment.js',
+                                '../../plugin/dateRange/daterangepicker.js'
                             ]
                         })
                     }

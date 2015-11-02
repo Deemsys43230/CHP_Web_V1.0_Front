@@ -344,6 +344,23 @@ userApp.controller('UserDashboardController',function($scope,requestHandler,Flas
         $scope.max = 100;
     };
 
+    //Weight and Set Goal
+    $scope.goal = {
+        status: 'set-goal'
+    };
+
+    $scope.changegoal=function(){
+        $scope.goal = {
+            status: 'view-goal'
+        };
+    };
+
+    $scope.changegoal1=function(){
+        $scope.goal = {
+            status: 'set-goal'
+        };
+    };
+
     //To Display current date
     var selectedDate = new Date();
     var dd = selectedDate.getDate();

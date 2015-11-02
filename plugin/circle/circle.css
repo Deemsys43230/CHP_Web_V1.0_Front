@@ -1,16 +1,16 @@
 
-.left{
+.left-range{
     float:left;
     width:170px;
     margin-left:50px;
     margin-right: 20px;
 }
 
-.left .health{
+.left-range .health{
     margin-top: 7px;
 }
 
-.left .health p{
+.left-range .health p{
      font-size: 11px !important;
      text-align: center;
     margin-left: -5px;
