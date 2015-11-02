@@ -289,104 +289,129 @@ adminApp.controller("FoodDetailsEditController",function($q,$scope,requestHandle
 
     //Do Update Food
     $scope.doUpdateFoodDetails= function () {
-//For disabling the update button after one click
-        $scope.doingUpdate = true;
-    //Get Update Details
-    $scope.foodDetails.sessionid=FoodService.getSessionArray($scope.foodDetails.sessionSet);
-    $scope.foodDetails.categoryid=FoodService.getCategoryArray($scope.foodDetails.categoryid);
 
-    //Tag Array Operation
-    var tagArray=[];
-    var tagPromise;
-    $.each($scope.foodDetails.tagid, function(index,value) {
-        if(value.tagid!=null){
-            tagArray.push(parseInt(value.tagid));
-        }else{
-            tagPromise=FoodService.insertTag(value.tagname);
-            tagPromise.then(function(result){
-                tagArray.push(result);
-            });
-        }
-    });
-    //End Array Operation
+   requestHandler.postRequest("admin/checkFoodNameExists/",{"foodid":$scope.foodDetails.foodid,"foodname":$scope.foodDetails.foodname}).then(function(response){
+        if(response.data.Response_status==0){
 
-    $scope.foodDetails.tagid=tagArray;
+            //For disabling the update button after one click
+            $scope.doingUpdate = true;
+            //Get Update Details
+            $scope.foodDetails.sessionid=FoodService.getSessionArray($scope.foodDetails.sessionSet);
+            $scope.foodDetails.categoryid=FoodService.getCategoryArray($scope.foodDetails.categoryid);
 
-    //For Region
-    $scope.foodDetails.regionid=$scope.foodDetails.regionid;
-
-    //To Change the name of the obj from measureid to measuredata
-    $scope.foodDetails.measuredata=$scope.foodDetails.measureid;
-
-
-    if($scope.imageUpload){//Check for Image Upload
-        $q.all([tagPromise]).then(function(){
-            requestHandler.putRequest("admin/updateFood/", $scope.foodDetails).then(function (response) {
-                if (response.data.Response_status == 1) {
-                    successMessage(Flash,"Food Updated Successfully!");
-                    $scope.doGetFoodDetails();
+            //Tag Array Operation
+            var tagArray=[];
+            var tagPromise;
+            $.each($scope.foodDetails.tagid, function(index,value) {
+                if(value.tagid!=null){
+                    tagArray.push(parseInt(value.tagid));
+                }else{
+                    tagPromise=FoodService.insertTag(value.tagname);
+                    tagPromise.then(function(result){
+                        tagArray.push(result);
+                    });
                 }
-            }, function (response) {
-                alert("Not able to pull Food Tag");
             });
-        });
+            //End Array Operation
 
-    }else{
-        FoodService.convertImgToBase64($scope.foodDetails.foodImagePath, function(base64Img) {//Convert Image to Base64
-            $scope.foodDetails.foodimage=base64Img;
-            $q.all([tagPromise]).then(function(){//Only after tagPromise
-                requestHandler.putRequest("admin/updateFood/", $scope.foodDetails).then(function (response) {
-                    if (response.data.Response_status == 1) {
-                        successMessage(Flash,"Food Updated Successfully!");
-                        $scope.doGetFoodDetails();
-                        $location.path("food");
-                    }
-                }, function (response) {
-                    alert("Not able to pull Food Tag");
+            $scope.foodDetails.tagid=tagArray;
+
+            //For Region
+            $scope.foodDetails.regionid=$scope.foodDetails.regionid;
+
+            //To Change the name of the obj from measureid to measuredata
+            $scope.foodDetails.measuredata=$scope.foodDetails.measureid;
+
+
+            if($scope.imageUpload){//Check for Image Upload
+                $q.all([tagPromise]).then(function(){
+                    requestHandler.putRequest("admin/updateFood/", $scope.foodDetails).then(function (response) {
+                        if (response.data.Response_status == 1) {
+                            successMessage(Flash,"Food Updated Successfully!");
+                            $scope.doGetFoodDetails();
+                        }
+                    }, function (response) {
+                        alert("Not able to pull Food Tag");
+                    });
                 });
-            });
 
-        });
-    }
+            }else{
+                FoodService.convertImgToBase64($scope.foodDetails.foodImagePath, function(base64Img) {//Convert Image to Base64
+                    $scope.foodDetails.foodimage=base64Img;
+                    $q.all([tagPromise]).then(function(){//Only after tagPromise
+                        requestHandler.putRequest("admin/updateFood/", $scope.foodDetails).then(function (response) {
+                            if (response.data.Response_status == 1) {
+                                successMessage(Flash,"Food Updated Successfully!");
+                                $scope.doGetFoodDetails();
+                                $location.path("food");
+                            }
+                        }, function (response) {
+                            alert("Not able to pull Food Tag");
+                        });
+                    });
+
+                });
+            }
+
+        }
+       else if(response.data.Response_status==1){
+            errorMessage(Flash,"Food&nbsp;already&nbsp;exists");
+        }
+
+   });
+
+
     };
 
 
     //Do Add Food Details
     $scope.doAddFoodDetails= function () {
 
-        //Get Add Details
-        $scope.foodDetails.sessionid=FoodService.getSessionArray($scope.foodDetails.sessionSet);
-        $scope.foodDetails.categoryid=FoodService.getCategoryArray($scope.foodDetails.categoryid);
+        requestHandler.postRequest("admin/checkFoodNameExists/",{'foodname':$scope.foodDetails.foodname}).then(function(response){
+          if(response.data.Response_status == 0)  {
 
-        //Tag Array Operation
-        var tagArray=[];
-        var tagPromise;
-        $.each($scope.foodDetails.tagid, function(index,value) {
-            if(value.tagid!=null){
-                tagArray.push(parseInt(value.tagid));
-            }else{
-                tagPromise=FoodService.insertTag(value.tagname);
-                tagPromise.then(function(result){
-                    tagArray.push(result);
-                });
-            }
-        });
-        $scope.foodDetails.tagid=tagArray;
-        //End Tag Array Operation
+              //Get Add Details
+              $scope.foodDetails.sessionid=FoodService.getSessionArray($scope.foodDetails.sessionSet);
+              $scope.foodDetails.categoryid=FoodService.getCategoryArray($scope.foodDetails.categoryid);
 
-        $scope.foodDetails.measuredata=$scope.foodDetails.measureid;
-        $scope.foodDetails.regionid=$scope.foodDetails.regionid;
-        $q.all([tagPromise]).then(function(){//Only after tag array operation
-            requestHandler.postRequest("admin/insertFood/", $scope.foodDetails).then(function (response) {
-                if (response.data.Response_status == 1) {
-                    successMessage(Flash,"Food Added Successfully!");
-                    //$scope.doGetFoodDetails();
-                    $location.path("food");
-                }
-            }, function (response) {
-                alert("Not able to pull Food Tag");
-            });
+              //Tag Array Operation
+              var tagArray=[];
+              var tagPromise;
+              $.each($scope.foodDetails.tagid, function(index,value) {
+                  if(value.tagid!=null){
+                      tagArray.push(parseInt(value.tagid));
+                  }else{
+                      tagPromise=FoodService.insertTag(value.tagname);
+                      tagPromise.then(function(result){
+                          tagArray.push(result);
+                      });
+                  }
+              });
+              $scope.foodDetails.tagid=tagArray;
+              //End Tag Array Operation
+
+              $scope.foodDetails.measuredata=$scope.foodDetails.measureid;
+              $scope.foodDetails.regionid=$scope.foodDetails.regionid;
+              $q.all([tagPromise]).then(function(){//Only after tag array operation
+                  requestHandler.postRequest("admin/insertFood/", $scope.foodDetails).then(function (response) {
+                      if (response.data.Response_status == 1) {
+                          successMessage(Flash,"Food Added Successfully!");
+                          //$scope.doGetFoodDetails();
+                          $location.path("food");
+                      }
+                  }, function (response) {
+                      alert("Not able to pull Food Tag");
+                  });
+              });
+
+          }
+            else if(response.data.Response_status == 1){
+              errorMessage(Flash,"Food&nbsp;already&nbsp;exists");
+          }
+
         });
+
+
 
 
 

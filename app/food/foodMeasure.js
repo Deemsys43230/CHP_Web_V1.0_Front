@@ -28,10 +28,14 @@ var original ="";
     //Add Measure
     $scope.doAddMeasure=function(){
             requestHandler.postRequest("admin/insertfoodMeasure/",$scope.list).then(function(response){
-            $scope.doViewAllFoodMeasure();
-            successMessage(Flash,"Successfully Added");
-        },  function () {
-            errorMessage(Flash, "Please try again later!")
+                if(response.data.Response_status==0){
+                    errorMessage(Flash,"Measure&nbsp;already&nbsp;exists");
+                }
+                else if(response.data.Response_status==1){
+                    $scope.doViewAllFoodMeasure();
+                    successMessage(Flash,"Successfully Added");
+                }
+
         });
     };
 

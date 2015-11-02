@@ -225,14 +225,22 @@ userApp.controller('UserDashboardController',function($scope,requestHandler,Flas
     // Insert suggest food
     $scope.doAddSuggestFood=function(){
 
-        var insertSuggestedFoodPromise=UserDashboardService.doAddSuggestedFood($scope.foodSuggest);
+        requestHandler.postRequest("user/searchFoodnamebyUser/",{"foodname":$scope.foodSuggest.foodname}).then(function(response){
+           if(response.data.Response_status==0){
+               var insertSuggestedFoodPromise=UserDashboardService.doAddSuggestedFood($scope.foodSuggest);
 
-        insertSuggestedFoodPromise.then(function(result){
-            successMessage(Flash,"Thanks&nbsp;for&nbsp;the&nbspsuggestion!!");
-           $scope.resetdata();
-        },function(){
-            errorMessage(Flash, "Please try again later!");
-        })
+               insertSuggestedFoodPromise.then(function(result){
+                   successMessage(Flash,"Thanks&nbsp;for&nbsp;the&nbspsuggestion!!");
+                   $scope.resetdata();
+               },function(){
+                   errorMessage(Flash, "Please try again later!");
+               });
+           }
+            else if(response.data.Response_status==1){
+               errorMessage(Flash,"Food&nbsp;already&nbsp;exists");
+               $scope.resetdata();
+           }
+        });
 
     };
 

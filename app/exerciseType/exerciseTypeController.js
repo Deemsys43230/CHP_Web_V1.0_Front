@@ -88,10 +88,16 @@ adminApp.controller('ExerciseTypeController',['$scope','requestHandler','Flash',
         console.log(exerciseTypeObj);
 
         requestHandler.postRequest("admin/insertorupdateExerciseTypeAndLevel/",exerciseTypeObj).then(function (response) {
-            $scope.doGetAllExerciseType();
-            successMessage(Flash,"Exercise Type Successfully Added");
-            $scope.loaded=false;
-            $scope.paginationLoad=true;
+            if(response.data.Response_status==0){
+                errorMessage(Flash,"Exercise&nbsp;Type&nbsp;already&nbsp;exists");
+            }
+            else if(response.data.Response_status==1){
+                $scope.doGetAllExerciseType();
+                successMessage(Flash,"Exercise Type Successfully Added");
+                $scope.loaded=false;
+                $scope.paginationLoad=true;
+            }
+
         }, function () {
             errorMessage(Flash, "Please try again later!")
         });

@@ -246,17 +246,25 @@ adminApp.controller('ExerciseEditController',function($scope,requestHandler,Flas
         updatedExerciseDetails.levels = $scope.exerciseDetail.type.levels;
 
         console.log(updatedExerciseDetails);
-
-        requestHandler.putRequest("admin/updateExercise/",updatedExerciseDetails).then(function (response) {
-            if (response.data.Response_status == 1) {
-                successMessage(Flash,"Exercise Updated Successfully!");
-                $location.path("exercise");
+        requestHandler.postRequest("admin/checkExerciseNameExists/",{"exerciseid":$scope.exerciseDetail.exerciseid,"exercisename":$scope.exerciseDetail.exercisename}).then(function(response){
+            if(response.data.Response_status==0){
+                requestHandler.putRequest("admin/updateExercise/",updatedExerciseDetails).then(function (response) {
+                    if (response.data.Response_status == 1) {
+                        successMessage(Flash,"Exercise Updated Successfully!");
+                        $location.path("exercise");
+                        $scope.loaded=false;
+                    }
+                }, function () {
+                    errorMessage(Flash,"Please Try Again Later!");
+                    $scope.loaded=false;
+                });
+            }
+            else  if(response.data.Response_status==1){
+                errorMessage(Flash,"Exercise&nbsp;already&nbsp;exists");
                 $scope.loaded=false;
             }
-        }, function () {
-            errorMessage(Flash,"Please Try Again Later!");
-            $scope.loaded=false;
         });
+
     };
 
     $scope.doAddExerciseDetail=function(){
@@ -281,16 +289,25 @@ adminApp.controller('ExerciseEditController',function($scope,requestHandler,Flas
 
         if($scope.isNoImage==false){
             console.log(updatedExerciseDetails);
-            requestHandler.postRequest("admin/insertExercise/",updatedExerciseDetails).then(function (response) {
-                if (response.data.Response_status == 1) {
-                    successMessage(Flash,"Exercise Added Successfully!");
-                    $location.path("exercise");
+            requestHandler.postRequest("admin/checkExerciseNameExists/",{"exercisename":$scope.exerciseDetail.exercisename}).then(function(response){
+                if(response.data.Response_status==0){
+                    requestHandler.postRequest("admin/insertExercise/",updatedExerciseDetails).then(function (response) {
+                        if (response.data.Response_status == 1) {
+                            successMessage(Flash,"Exercise Added Successfully!");
+                            $location.path("exercise");
+                            $scope.loaded=false;
+                        }
+                    }, function () {
+                        errorMessage(Flash,"Please Try Again Later!");
+                        $scope.loaded=false;
+                    });
+                }
+                else if(response.data.Response_status==1){
+                    errorMessage(Flash,"Exercise&nbsp;already&nbsp;exists");
                     $scope.loaded=false;
                 }
-            }, function () {
-                errorMessage(Flash,"Please Try Again Later!");
-                $scope.loaded=false;
             });
+
         }
         else{
             $scope.loaded=false;

@@ -20,7 +20,7 @@
                                 </div>
                                 <div class="col-md-9">
                                     <a href="" ng-click="doGetCoachDetailsByUser(usercoach.userid)">{{usercoach.name}}</a>
-                                    <div class="avg" id="Rating_{{usercoach.userid}}"></div>
+                                    <div class="avoid-clicks" id="Rating_{{usercoach.userid}}"></div>
                                     <!--<small>({{coachReviewslist.totalRatings}} Reviews)</small>-->
                                 </div>
                             </div>
@@ -59,12 +59,8 @@
 
                             <div class="col-md-3 review">
                                 Ratings : {{reviews.ratinglevel}}<br/>
-                                <div class="rates" id="Rates_{{reviews.id}}"></div>
-                                <!--<i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star-half-empty"></i>
-                                <i class="fa fa-star-o"></i>-->
+                                <div class="avg" id="Review_{{reviews.id}}"></div>
+
                             </div>
                             <div class="col-md-12"><hr/></div>
 
@@ -79,5 +75,5 @@
 </div>
 
 <script type="text/javascript" src="../../js/script.js"></script>
-<!--<script src="../../plugin/jquery.raty-2.4.5/js/jquery.min.js"></script>
-<script src="../../plugin/jquery.raty-2.4.5/js/jquery.raty.min.js"></script>-->
+<script src="../../plugin/jquery.raty-2.4.5/js/jquery.min.js"></script>
+<script src="../../plugin/jquery.raty-2.4.5/js/jquery.raty.min.js"></script>

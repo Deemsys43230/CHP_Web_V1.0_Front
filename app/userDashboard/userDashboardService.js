@@ -99,17 +99,24 @@ adminApp.factory("UserDashboardService",function(requestHandler){
 
             //For Age calculation
             var today = new Date();
+            console.log(userProfile.dob);
             if(userProfile.dob == null){
                 userProfile.age = "-";
             }
             if(userProfile.dob !=null){
-            var birthDate = new Date(userProfile.dob);
-            var age = today.getFullYear() - birthDate.getFullYear();
-            var m = today.getMonth() - birthDate.getMonth();
-            if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-                age--;
-            }
+                //Age Calculation starts
+                var birthDate = userProfile.dob;
+                var birthdatearray = birthDate.split("/");
+                var newdate = birthdatearray[1] + '/' + birthdatearray[0] + '/' + birthdatearray[2];
+                birthDate = new Date(newdate);
+                 var age = today.getFullYear() - birthDate.getFullYear();
+                 var m = today.getMonth() - birthDate.getMonth();
+                 if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+                     age--;
+                  }
+                //Age caluclation ends
             userProfile.age = age;
+                console.log(userProfile.age);
             }
             return userProfile;
         });

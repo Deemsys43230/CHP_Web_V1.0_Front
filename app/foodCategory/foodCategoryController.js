@@ -31,15 +31,24 @@ adminApp.controller('FoodCategoryController',function($scope,requestHandler,Flas
 
     $scope.doAddFoodCategory=function(){
         $scope.loaded=true;
-        requestHandler.postRequest("admin/insertFoodCategory/",$scope.foodCategory).then(function (response) {
+        requestHandler.postRequest("admin/checkCategoryNameExists/",$scope.foodCategory).then(function(response){
+            if(response.data.Response_status == 1){
+                errorMessage(Flash,"Category&nbsp;already&nbsp;exists");
+                $scope.loaded=false;
+            }
+            else if(response.data.Response_status == 0){
+                requestHandler.postRequest("admin/insertFoodCategory/",$scope.foodCategory).then(function (response) {
 
-            $scope.doGetAllFoodCategory();
-            successMessage(Flash,"Successfully Added");
-            $scope.loaded=false;
-            $scope.paginationLoad=true;
-        }, function () {
-            errorMessage(Flash, "Please try again later!")
+                    $scope.doGetAllFoodCategory();
+                    successMessage(Flash,"Successfully Added");
+                    $scope.loaded=false;
+                    $scope.paginationLoad=true;
+                }, function () {
+                    errorMessage(Flash, "Please try again later!")
+                });
+            }
         });
+
     };
 
     $scope.doEditFoodCategory=function(id){
@@ -77,14 +86,24 @@ adminApp.controller('FoodCategoryController',function($scope,requestHandler,Flas
 
     $scope.doUpdateFoodCategory=function(){
         $scope.loaded=true;
-        requestHandler.putRequest("admin/editFoodCategory/",$scope.foodCategory).then(function (response) {
-             $scope.doGetAllFoodCategory();
-            successMessage(Flash,"Successfully Updated");
-            $scope.loaded=false;
-            $scope.paginationLoad=true;
-        }, function () {
-            errorMessage(Flash, "Please try again later!")
+        requestHandler.postRequest("admin/checkCategoryNameExists/",$scope.foodCategory).then(function(response){
+            if(response.data.Response_status==0){
+                requestHandler.putRequest("admin/editFoodCategory/",$scope.foodCategory).then(function (response) {
+                    $scope.doGetAllFoodCategory();
+                    successMessage(Flash,"Successfully Updated");
+                    $scope.loaded=false;
+                    $scope.paginationLoad=true;
+                }, function () {
+                    errorMessage(Flash, "Please try again later!");
+                });
+            }
+            else if(response.data.Response_status==1){
+                errorMessage(Flash, "Category&nbsp;already&nbsp;exists");
+                $scope.loaded=false;
+            }
+
         });
+
 
     };
 
