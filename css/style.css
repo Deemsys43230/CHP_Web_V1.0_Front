@@ -7008,6 +7008,16 @@ ul.tabs li.active{
     box-shadow: 0px 0px 3px rgba(0,0,0,0.3);
 }
 
+.graph-weight {
+    padding: 10px;
+    margin: 5px 5px 15px 5px;
+    width: 99%;
+    background: #FFFFFF;
+    -webkit-box-shadow: 0px 0px 3px rgba(0,0,0,0.3);
+    -moz-box-shadow: 0px 0px 3px rgba(0,0,0,0.3);
+    box-shadow: 0px 0px 3px rgba(0,0,0,0.3);
+}
+
 .content-goal {
     padding: 10px;
     margin: 5px 5px 15px 5px;
@@ -7562,6 +7572,10 @@ ul.food li p.food_name{
 
 .text-lightgray{
     color: #ccc !important;
+}
+
+.white-background{
+    background-color: #fff;
 }
 
 .left-border{
@@ -8272,9 +8286,12 @@ tr.sort-icon th i{
 }
 
 .min-height-450{
-	min-height: 450px !important;
+    min-height: 450px !important;
 }
 
+.height-320{
+    height: 320px !important;
+}
 
 .min-height-350{
 	min-height: 350px !important;

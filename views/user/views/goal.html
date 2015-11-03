@@ -1,0 +1,84 @@
+
+
+<!-- Start Page Banner -->
+
+    <div class="col-md-8">
+        <div class="content-weight height-265">
+            <div ng-include src="'views/'+goal.status+'.html'"></div>
+        </div>
+
+        <div class="content-weight">
+            <div class="row margin-right-2">
+                <div class="col-md-12 margin-bottom-10">
+                    <h5>Update Weight</h5>
+                </div>
+                <div class="col-md-12">
+                    <div class="col-md-4 text-right padding-top-4">
+                        <h5>Weight :</h5>
+                    </div>
+                    <div class="col-md-8">
+                        <input class="weight_input"/>
+                        <input type="radio" id="5" class="height" name="weight" />
+                        <label for="5">Kg</label>
+                        <input type="radio" id="6" class="height" name="weight" />
+                        <label for="6">Lb</label>
+                    </div>
+                    <div class="col-md-12 text-center margin-top-20 margin-bottom-10">
+                        <a href="" class="weight_button">Update</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 no-padding">
+        <p hidden id="weight_entry">50%</p>
+        <div id="weight_level">
+            <div id="col" class="weight_level"></div>
+        </div>
+        <div class="weight_mask">
+            <img src="../../images/weight.png">
+            <!--<img src="../../images/weight_female.png">-->
+        </div>
+        <div class="weight_measure">
+            <div class="level_high"><div>HIGH</div></div>
+            <div class="level_maintain"><div>MAINTAIN</div></div>
+            <div class="level_low"><div>LOW</div></div>
+        </div>
+        <div class="text-center small margin-top-10">Weight Level</div>
+        <br/>
+        <div class="col-md-7 no-padding">
+            <h5>Idle Weight <span class="pull-right">: &nbsp;</span></h5>
+            <h5 class="margin-top-10">Original Weight <span class="pull-right">: &nbsp;</span></h5>
+        </div>
+        <div class="col-md-5 no-padding">
+            <h5><span class="yellow">&nbsp;&nbsp;</span> 65 Kgs</h5>
+            <h5 class="margin-top-10"><span class="green">&nbsp;&nbsp;</span> 58 Kgs</h5>
+        </div><br/><br/>
+        <p>Your Are Adviced to increase your weight by 7 Kgs</p>
+    </div>
+
+<!-- End Page Banner -->
+
+<script>
+    function viewGraph1(){
+        $('.weight_level');
+        var ha = document.getElementById('weight_entry').innerText;
+        var hacolor = parseFloat(ha);
+        if (hacolor <= 45) {
+            $('#col').addClass('green');
+            $('#col').animate({height: ha}, 1200);
+        }
+        else if(hacolor >= 55) {
+            $('#col').addClass('red');
+            $('#col').animate({height: ha}, 1200);
+        }
+        else if (45> hacolor < 55) {
+            $('#col').addClass('yellow');
+            $('#col').animate({height: ha}, 1200);
+        }
+
+    }
+    $(document).ready(function(){
+        viewGraph1();
+    });
+</script>

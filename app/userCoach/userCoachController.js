@@ -1,4 +1,5 @@
 var userApp = angular.module('userApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','angularUtils.directives.dirPagination']);
+
 userApp.controller('UserCoachController',function($scope,requestHandler,Flash,$location) {
 
   // To display Coach list by user

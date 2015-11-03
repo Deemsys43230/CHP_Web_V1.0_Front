@@ -1,6 +1,6 @@
 var userApp= angular.module('userApp', ['ngRoute','oc.lazyLoad','ngCookies','requestModule','flash','ngAnimate','ngTouch', 'angucomplete-alt','ngPercentDisplay','userDashboardServiceModule','ui.bootstrap','angular-svg-round-progress']);
 
-userApp.controller('UserDashboardController',function($scope,requestHandler,Flash,UserDashboardService,$interval,roundProgressService) {
+userApp.controller('UserDashboardController',function($scope,requestHandler,Flash,UserDashboardService,$interval,roundProgressService,limitToFilter) {
     $scope.foodSearchResult = [];
     $scope.userFood={};
     $scope.userFood.sessionid=1;
@@ -357,7 +357,23 @@ userApp.controller('UserDashboardController',function($scope,requestHandler,Flas
         status: 'set-goal'
     };
 
-    $scope.changegoal=function(){
+    $scope.graph = {
+        status: 'goal'
+    };
+
+    $scope.viewGraph=function(){
+        $scope.graph = {
+            status: 'goal-graph'
+        };
+    };
+
+    $scope.viewGoal=function(){
+        $scope.graph = {
+            status: 'goal'
+        };
+    };
+
+    $scope.setGoal=function(){
         $scope.goal = {
             status: 'view-goal'
         };
@@ -368,6 +384,32 @@ userApp.controller('UserDashboardController',function($scope,requestHandler,Flas
             status: 'set-goal'
         };
     };
+
+    //bar chart values
+    $scope.weightValue = [
+        ['Current Weight', 59.5]
+    ];
+    $scope.weightTrack = limitToFilter($scope.weightValue, 2);
+    //end bar chart values
+
+    //weight Graph
+    $scope.weightGraphValue = [
+        ['nov-1', 58],
+        ['nov-2', 58],
+        ['nov-3', 58.2],
+        ['nov-4', 58],
+        ['nov-5', 58.5],
+        ['nov-6', 58.7],
+        ['nov-7', 59],
+        ['nov-8', 58.7],
+        ['nov-9', 59.2],
+        ['nov-10', 59.3],
+        ['nov-11', 59.5]
+    ];
+
+    $scope.weightGraph = limitToFilter($scope.weightGraphValue, 30);
+    //end weight Graph
+
 
     //To Display current date
     var selectedDate = new Date();
@@ -595,3 +637,146 @@ userApp.filter('trusted', ['$sce', function ($sce) {
         return $sce.trustAsResourceUrl(url);
     };
 }]);
+
+// bar chart
+userApp.directive('hcBar', function () {
+        return {
+            restrict: 'C',
+            replace: true,
+            scope: {
+                items: '='
+            },
+            controller: function ($scope, $element, $attrs) {
+            },
+            template: '<div id="chart-container" style="margin: 10px 0 0 0;height:60px">not working</div>',
+            link: function (scope, element, attrs) {
+                var chart = new Highcharts.Chart({
+                    chart: {
+                        renderTo: 'chart-container'
+                    },
+                    title: {
+                        text: ''
+                    },
+                    yAxis: {
+                        min: 58,
+                        max: 60,
+                        title: {
+                            text: '',
+                            align: 'high'
+                        },
+                        labels: {
+                            overflow: 'justify'
+                        }
+                    },
+                    tooltip: {
+                        valueSuffix: ' Kgs'
+                    },
+                    colors: [
+                        '#f8ba01'
+                    ],
+                    legend: {
+                        layout: 'vertical',
+                        align: 'right',
+                        verticalAlign: 'top',
+                        x: -50,
+                        y: 80,
+                        floating: true
+                    },
+                    plotOptions: {
+                        bar: {
+                            dataLabels: {
+                                enabled: true
+                            }
+                        }
+                    },
+                    series: [{
+                        type: 'bar',
+                        name: ' '
+                    }],
+                    exporting: {
+                        enabled: false
+                    },
+                    credits: {
+                        enabled: false
+                    }
+                });
+                scope.$watch("items", function (newValue) {
+                    chart.series[0].setData(newValue, true);
+                }, true);
+
+            }
+        }
+    });
+
+userApp.directive('hcGraph', function () {
+    return {
+        restrict: 'C',
+        replace: true,
+        scope: {
+            graph: '='
+        },
+        controller: function ($scope, $element, $attrs) {
+        },
+        template: '<div id="graph-container" style="margin: 0 auto;height: 300px">not working</div>',
+        link: function (scope, element, attrs) {
+            var chart = new Highcharts.Chart({
+                chart: {
+                    renderTo: 'graph-container',
+                    plotBackgroundColor: null,
+                    plotBorderWidth: null,
+                    plotShadow: false
+                },
+                title: {
+                    text: 'Goal Graph',
+                    x: -20 //center
+                },
+                subtitle: {
+                    text: '',
+                    x: -20
+                },
+                xAxis: {
+                    categories: []
+                },
+                yAxis: {
+                    title: {
+                        text: 'Weight (Kgs)'
+                    },
+                    plotLines: [{
+                        value: 0,
+                        width: 1,
+                        color: '#f8ba01'
+                    }]
+                },
+                tooltip: {
+                    valueSuffix: 'Kgs'
+                },
+
+                colors: [
+                    '#f8ba01'
+                ],
+                legend: {
+                    layout: 'vertical',
+                    align: 'right',
+                    verticalAlign: 'middle',
+                    borderWidth: 0,
+                    x: 80,
+                    y: 0
+                },
+                series: [ {
+                    name: 'Weight',
+                    data: []
+                }],
+                exporting: {
+                enabled: false
+                },
+                credits: {
+                    enabled: false
+                }
+            });
+            scope.$watch("graph", function (newValue) {
+                chart.series[0].setData(newValue, true);
+            }, true);
+
+        }
+    }
+});

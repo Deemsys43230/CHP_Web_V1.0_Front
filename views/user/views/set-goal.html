@@ -2,7 +2,7 @@
 
 <!-- Start Page Banner -->
 
-<div>
+<div class="white-background">
     <h3 class="text-center margin-tb-10 text-green text-bold">Set Your Goal</h3>
     <div class="col-md-12">
         <p>
@@ -20,11 +20,11 @@
     </div>
 
     <div class="col-md-12 margin-top-20 text-center">
-        <a class="weight_button" ng-click="changegoal()">Set Goal</a>
+        <a class="weight_button" ng-click="setGoal()">Set Goal</a>
     </div>
 
-    <input id="start" hidden ng-model="start-date"/>
-    <input id="end" hidden ng-model="end-date"/>
+    <!--<input id="start" hidden ng-model="start-date"/>
+    <input id="end" hidden ng-model="end-date"/>-->
 </div>
 
 <!-- End Page Banner -->
@@ -48,8 +48,8 @@
 
 
         $('#set-date').daterangepicker(options, function(start, end, label) {
-            document.getElementById("start").value = start.format('DD/MM/YYYY');
-            document.getElementById("end").value = end.format('DD/MM/YYYY');
+            /*document.getElementById("start").value = start.format('DD/MM/YYYY');
+            document.getElementById("end").value = end.format('DD/MM/YYYY');*/
             console.log('start date: ' + start.format('DD/MM/YYYY'));
             console.log('end date: ' + end.format('DD/MM/YYYY'));
         });
