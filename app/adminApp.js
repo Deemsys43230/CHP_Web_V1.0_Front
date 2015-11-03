@@ -934,6 +934,175 @@ adminApp.directive("emailexists", function ($q, $timeout,requestHandler) {
     };
 });
 
+/*//Category Already Exists
+adminApp.directive("categoryexists", function ($q, $timeout,requestHandler) {
+
+      return {
+        restrict: "A",
+        require: "ngModel",
+
+        link: function (scope, element, attributes, ngModel) {
+            ngModel.$asyncValidators.categoryexists = function (modelValue) {
+                var defer = $q.defer();
+                $timeout(function () {
+                    var sendRequest=requestHandler.postRequest("admin/checkCategoryNameExists/",{"categoryname":modelValue}).then(function(response){
+                        alert(response.data.Response_status);
+                        if (response.data.Response_status==0){
+                            defer.resolve();
+                        }
+                        else{
+                            defer.reject();
+                        }
+                    });
+
+                }, 10);
+
+                return defer.promise;
+            }
+        }
+    };
+});*/
+
+//Category Already Exists
+adminApp.directive("categoryexists", function ($q, $timeout,requestHandler) {
+
+    return {
+        restrict: "A",
+        require: "ngModel",
+        scope: {
+            "categoryid" : "="
+        },
+        link: function (scope, element, attributes, ngModel) {
+            ngModel.$asyncValidators.categoryexists = function (modelValue) {
+                var defer = $q.defer();
+                $timeout(function () {
+                    var categoryid = scope.categoryid;
+                    var sendRequest=requestHandler.postRequest("admin/checkCategoryNameExists/",{"categoryname":modelValue,"categoryid":categoryid}).then(function(response){
+                        if (response.data.Response_status==0){
+                            defer.resolve();
+                        }
+                        else{
+                            defer.reject();
+                        }
+                    });
+
+                }, 10);
+
+                return defer.promise;
+            }
+        }
+    };
+});
+
+//Food Already Exists
+adminApp.directive("foodexists", function ($q, $timeout,requestHandler) {
+
+    return {
+        restrict: "A",
+        require: "ngModel",
+        scope: {
+            "foodid" : "="
+        },
+        link: function (scope, element, attributes, ngModel) {
+
+            ngModel.$asyncValidators.foodexists = function (modelValue) {
+                var defer = $q.defer();
+                $timeout(function () {
+                    var foodid = scope.foodid;
+                    var sendRequest=requestHandler.postRequest("admin/checkFoodNameExists/",{"foodname":modelValue,"foodid":foodid}).then(function(response){
+
+                        if (response.data.Response_status==0){
+                            defer.resolve();
+                        }
+                        else{
+                            defer.reject();
+                        }
+                    });
+
+                }, 10);
+
+                return defer.promise;
+            }
+        }
+    };
+});
+
+//Exercise Already Exists
+adminApp.directive("exerciseexists", function ($q, $timeout,requestHandler) {
+
+    return {
+        restrict: "A",
+        require: "ngModel",
+        scope: {
+            "exerciseid" : "="
+        },
+        link: function (scope, element, attributes, ngModel) {
+
+            ngModel.$asyncValidators.exerciseexists = function (modelValue) {
+                var defer = $q.defer();
+                $timeout(function () {
+                    var exerciseid = scope.exerciseid;
+                    var sendRequest=requestHandler.postRequest("admin/checkExerciseNameExists/",{"exercisename":modelValue,"exerciseid":exerciseid}).then(function(response){
+
+                        if (response.data.Response_status==0){
+                            defer.resolve();
+                        }
+                        else{
+                            defer.reject();
+                        }
+                    });
+
+                }, 10);
+
+                return defer.promise;
+            }
+        }
+    };
+});
+
+//Exercise type name Already Exists
+adminApp.directive("typenameexists", function ($q, $timeout,requestHandler) {
+
+    return {
+        restrict: "A",
+        require: "ngModel",
+        scope: {
+            "values" : "="
+
+        },
+        link: function (scope, element, attributes, ngModel) {
+            ngModel.$asyncValidators.typenameexists = function (modelValue) {
+
+                var defer = $q.defer();
+                $timeout(function () {
+                    var exists=false;
+                    var i=0;
+
+                    $.each(scope.values,function(index,value){
+                        alert(index);
+                        if(value.levelname===modelValue){
+                            if(i==index){
+                                exists=true;
+                            }
+
+                        }
+                        i+1;
+                   });
+                    if(exists){
+                        defer.reject();
+                    }else{
+                        defer.resolve();
+                    }
+
+                }, 10);
+
+                return defer.promise;
+            }
+        }
+    };
+});
+
+
 // Compare Confirm Password
 adminApp.directive('compareTo',function() {
     return {
@@ -1042,7 +1211,7 @@ adminApp.directive('uiSelectRequired', function() {
     return {
         require: 'ngModel',
         link: function(scope, elm, attrs, ngModel) {
-            console.log(ngModel);
+           // console.log(ngModel);
             ngModel.$validators.uiSelectRequired = function(modelValue, viewValue) {
                /* return modelValue && modelValue.length;*/
                 var determineVal;
@@ -1120,8 +1289,8 @@ adminApp.directive('checkboxGroup', function() {
                         checkedCount++;
                     }
                 });
-                console.log('minRequired', minRequired);
-                console.log('checkedCount', checkedCount);
+              //  console.log('minRequired', minRequired);
+              //  console.log('checkedCount', checkedCount);
                 var minRequiredValidity = checkedCount >= minRequired;
                 angular.forEach(ngModels, function(ngModel) {
                     ngModel.$setValidity('checkboxGroup-minRequired', minRequiredValidity, self);

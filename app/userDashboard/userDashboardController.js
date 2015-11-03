@@ -91,7 +91,7 @@ userApp.controller('UserDashboardController',function($scope,requestHandler,Flas
             //console.log(result);
             var getUserFoodDetailsPromise=UserDashboardService.doGetUserFoodDetails(userfoodid);
             getUserFoodDetailsPromise.then(function(result){
-               // console.log(result);
+                console.log(result);
                 $scope.userFood.userfoodid=result.userfoodid;
                 $scope.userFood.foodid=result.foodid;
                 $scope.userFood.measure=result.measureid;
@@ -109,7 +109,6 @@ userApp.controller('UserDashboardController',function($scope,requestHandler,Flas
 
     //Calories caluclation for food
     $scope.doCalculateCalories=function(){
-
         $scope.currentColor =   '#66E066';
 
         if($scope.userFood.servings==0){
@@ -265,6 +264,18 @@ userApp.controller('UserDashboardController',function($scope,requestHandler,Flas
         });
     };
 
+    //On Select frequent exercise
+    $scope.frequentExercise=function(exerciseid){
+        $scope.isNew=true;
+        $scope.title= "Add Exercise";
+        // alert(foodid);
+        var getExerciseDetailPromise=UserDashboardService.doGetSelectedExerciseDetails(exerciseid);
+        getExerciseDetailPromise.then(function(result){
+            $scope.userSelectedExerciseDetails=result;
+            $scope.doUserAddExercise();
+        });
+    };
+
     //On Select search exercise function
     $scope.exerciseSelected=function(selected){
         $scope.isNew=true;
@@ -310,9 +321,58 @@ userApp.controller('UserDashboardController',function($scope,requestHandler,Flas
         });
     };
 
+    //On Select edit exercise
+    $scope.doEditUserExercise=function(exerciseid,userexercisemapid){
+
+        $scope.isNew=false;
+        $scope.title= "Edit Exercise";
+        var getExerciseDetailForEditPromise=UserDashboardService.doGetSelectedExerciseDetails(exerciseid);
+        getExerciseDetailForEditPromise.then(function(result){
+            $scope.userSelectedExerciseDetails=result;
+           // console.log(result);
+            var getUserExerciseDetailsPromise=UserDashboardService.doGetUserExerciseDetails(userexercisemapid);
+            getUserExerciseDetailsPromise.then(function(result){
+                console.log(result);
+                $scope.userExercise.userexercisemapid=userexercisemapid;
+                $scope.userExercise.exerciseid=exerciseid;
+                $scope.userExercise.levelid=result.User_exercise_data.Level;
+                $scope.userExercise.workoutvalue=parseInt(result.User_exercise_data.Level.workoutvalue);
+
+                $scope.current=$scope.caloriesSpent=result.User_exercise_data.Level.calories;
+                 $scope.currentColor =   '#66E066';
+                 $scope.current=$scope.current.toFixed(2);
+                 if(($scope.current.length-3)>2) $scope.max=100+((String($scope.current|0).slice(0, -2))*100);
+                 else $scope.max=100;
+                 $scope.doUserAddExercise();
+            });
+
+        });
+    };
+
+    //Update User Exercise
+    $scope.doUpdateUserExercise=function(){
+        //Set values according to the api calls
+        $scope.userExercise.userexercisemapid= $scope.userExercise.userexercisemapid;
+        $scope.userExercise.exerciseid= $scope.userExercise.exerciseid;
+        $scope.userExercise.levelid=$scope.userExercise.levelid.levelid;
+        $scope.userExercise.workoutvalue=parseInt($scope.userExercise.workoutvalue);
+
+        var exerciseInsertPromise=UserDashboardService.doUpdateUserExercise($scope.userExercise);
+        exerciseInsertPromise.then(function(){
+            $scope.loadExerciseDiary(selectedDate);
+        });
+
+    };
+
+
+    //To get frequently asked exercise
+    var frequentExercisePromise=UserDashboardService.doGetFrequentlyUsedExercise();
+    frequentExercisePromise.then(function(result){
+        $scope.frequentExerciseList =result;
+    });
+
     //Calories caluclation for exercose
     $scope.doCalculateCaloriesExercise=function(){
-
         $scope.currentColor =   '#FF5C33';
 
         if($scope.userExercise.workoutvalue==0){
@@ -323,6 +383,7 @@ userApp.controller('UserDashboardController',function($scope,requestHandler,Flas
         }
         else{
             $scope.current=$scope.caloriesSpent=$scope.userExercise.levelid.calories*$scope.userExercise.workoutvalue;
+
             $scope.current=$scope.current.toFixed(2);
             if(($scope.current.length-3)>2) $scope.max=$scope.max+((String($scope.current|0).slice(0, -2))*100);
             else $scope.max=100;

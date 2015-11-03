@@ -75,10 +75,11 @@
             <form name="foodCategoryAddForm">
                 <p>Category Name</p>
                <!-- <input type="hidden" name="categoryid" ng-model="foodCategory.categoryid"/>-->
-                <input type="text" name="categoryname" ng-model="foodCategory.categoryname" ng-pattern="/^ *([a-zA-Z]+ ?)+ *$/" maxlength="45" required/>
+                <input type="text" name="categoryname" data-categoryid="foodCategory.categoryid" ng-model="foodCategory.categoryname" ng-pattern="/^ *([a-zA-Z]+ ?)+ *$/" maxlength="45" categoryexists required/>
                 <span ng-show="foodCategoryAddForm.categoryname.$dirty&&foodCategoryAddForm.categoryname.$invalid">
                                 <span class="error-message" ng-show="foodCategoryAddForm.categoryname.$error.required"><span>Required.</span></span>
                              <span class="error-message" ng-show="foodCategoryAddForm.categoryname.$error.pattern"><span>Enter&nbsp;Valid&nbsp;name.</span></span>
+ <span class="error-message" ng-show="foodCategoryAddForm.categoryname.$error.categoryexists"><span>Category&nbsp;Already&nbsp;Exists</span></span>
                          </span>
                 <div class="action_btns margin-top-20">
                     <div><a href="" class="btn btn_red" ng-class="{modal_close:foodCategoryAddForm.$invalid}" ng-disabled="foodCategoryAddForm.$invalid" ng-show="isNew" ng-click="doAddFoodCategory()">Save Category </a></div>

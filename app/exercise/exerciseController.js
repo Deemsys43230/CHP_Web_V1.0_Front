@@ -104,7 +104,7 @@ adminApp.controller('ExerciseViewController',function($scope,requestHandler,Flas
 });
 
 
-adminApp.controller('ExerciseEditController',function($scope,requestHandler,Flash,$routeParams,$route,ExerciseService,fileReader,$location){
+adminApp.controller('ExerciseEditController',function($q,$scope,requestHandler,Flash,$routeParams,$route,ExerciseService,fileReader,$location){
 
     var original="";
     $scope.title=$route.current.title;
@@ -242,12 +242,27 @@ adminApp.controller('ExerciseEditController',function($scope,requestHandler,Flas
         }
 
         updatedExerciseDetails.difficultytype=$scope.exerciseDetail.type.typeid;
-        updatedExerciseDetails.tagid = ExerciseService.getTagArray($scope.exerciseDetail.tags);
+
+        var tagArray=[];
+        var tagPromise;
+        $.each($scope.exerciseDetail.tags, function(index,value) {
+            if(value.tagid!=null){
+                tagArray.push(parseInt(value.tagid));
+            }else{
+                tagPromise=ExerciseService.insertTag(value.tagname);
+                tagPromise.then(function(result){
+                    tagArray.push(result);
+                });
+            }
+        });
+        updatedExerciseDetails.tagid = tagArray;
+      // updatedExerciseDetails.tagid = ExerciseService.getTagArray($scope.exerciseDetail.tags);
         updatedExerciseDetails.levels = $scope.exerciseDetail.type.levels;
 
         console.log(updatedExerciseDetails);
         requestHandler.postRequest("admin/checkExerciseNameExists/",{"exerciseid":$scope.exerciseDetail.exerciseid,"exercisename":$scope.exerciseDetail.exercisename}).then(function(response){
             if(response.data.Response_status==0){
+                $q.all([tagPromise]).then(function(){
                 requestHandler.putRequest("admin/updateExercise/",updatedExerciseDetails).then(function (response) {
                     if (response.data.Response_status == 1) {
                         successMessage(Flash,"Exercise Updated Successfully!");
@@ -258,6 +273,8 @@ adminApp.controller('ExerciseEditController',function($scope,requestHandler,Flas
                     errorMessage(Flash,"Please Try Again Later!");
                     $scope.loaded=false;
                 });
+                });
+
             }
             else  if(response.data.Response_status==1){
                 errorMessage(Flash,"Exercise&nbsp;already&nbsp;exists");
@@ -284,13 +301,29 @@ adminApp.controller('ExerciseEditController',function($scope,requestHandler,Flas
         }
 
         updatedExerciseDetails.difficultytype=$scope.exerciseDetail.type.typeid;
-        updatedExerciseDetails.tagid = ExerciseService.getTagArray($scope.exerciseDetail.tags);
+        //Tag Array Operation starts
+        var tagArray=[];
+        var tagPromise;
+        $.each($scope.exerciseDetail.tags, function(index,value) {
+            if(value.tagid!=null){
+                tagArray.push(parseInt(value.tagid));
+            }else{
+                tagPromise=ExerciseService.insertTag(value.tagname);
+                tagPromise.then(function(result){
+                    tagArray.push(result);
+                });
+            }
+        });
+        updatedExerciseDetails.tagid = tagArray;
+        //Tag Array Ends
+
         updatedExerciseDetails.levels = $scope.exerciseDetail.type.levels;
 
         if($scope.isNoImage==false){
             console.log(updatedExerciseDetails);
             requestHandler.postRequest("admin/checkExerciseNameExists/",{"exercisename":$scope.exerciseDetail.exercisename}).then(function(response){
                 if(response.data.Response_status==0){
+                    $q.all([tagPromise]).then(function(){
                     requestHandler.postRequest("admin/insertExercise/",updatedExerciseDetails).then(function (response) {
                         if (response.data.Response_status == 1) {
                             successMessage(Flash,"Exercise Added Successfully!");
@@ -300,6 +333,7 @@ adminApp.controller('ExerciseEditController',function($scope,requestHandler,Flas
                     }, function () {
                         errorMessage(Flash,"Please Try Again Later!");
                         $scope.loaded=false;
+                    });
                     });
                 }
                 else if(response.data.Response_status==1){

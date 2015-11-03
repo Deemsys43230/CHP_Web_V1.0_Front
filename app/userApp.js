@@ -263,3 +263,70 @@ userApp.directive('validateFloat', function() {
         }
     };
 });
+
+//Food Already Exists
+userApp.directive("foodexists", function ($q, $timeout,requestHandler) {
+
+    return {
+        restrict: "A",
+        require: "ngModel",
+        scope: {
+            "foodid" : "="
+        },
+        link: function (scope, element, attributes, ngModel) {
+
+            ngModel.$asyncValidators.foodexists = function (modelValue) {
+                var defer = $q.defer();
+                $timeout(function () {
+                    var foodid = scope.foodid;
+                    var sendRequest=requestHandler.postRequest("user/searchFoodnamebyUser/",{"foodname":modelValue,"foodid":foodid}).then(function(response){
+
+                        if (response.data.Response_status==0){
+                            defer.resolve();
+                        }
+                        else{
+                            defer.reject();
+                        }
+                    });
+
+                }, 10);
+
+                return defer.promise;
+            }
+        }
+    };
+});
+
+
+//Food Already Exists
+userApp.directive("exerciseexists", function ($q, $timeout,requestHandler) {
+
+    return {
+        restrict: "A",
+        require: "ngModel",
+        scope: {
+            "exerciseid" : "="
+        },
+        link: function (scope, element, attributes, ngModel) {
+
+            ngModel.$asyncValidators.exerciseexists = function (modelValue) {
+                var defer = $q.defer();
+                $timeout(function () {
+                    var exerciseid = scope.exerciseid;
+                    var sendRequest=requestHandler.postRequest("user/searchExercisebnamebyUser/",{"exercisename":modelValue,"exerciseid":exerciseid}).then(function(response){
+
+                        if (response.data.Response_status==0){
+                            defer.resolve();
+                        }
+                        else{
+                            defer.reject();
+                        }
+                    });
+
+                }, 10);
+
+                return defer.promise;
+            }
+        }
+    };
+});

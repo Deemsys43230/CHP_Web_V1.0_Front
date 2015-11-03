@@ -89,22 +89,28 @@
         <div class="common_model">
             <form name="exerciseTypeAddForm" novalidate>
                 <p>Exercise Type Name</p>
-                <input type="text" name="exerciseTypeName" ng-change="isNameAlreadyExist(exerciseType.typename)" ng-model="exerciseType.typename" maxlength="45" required/>
+                <input type="text" name="exerciseTypeName"  ng-change="isNameAlreadyExist(exerciseType.typename)" ng-model="exerciseType.typename" maxlength="45" required/>
                 <span ng-show="exerciseTypeAddForm.exerciseTypeName.$dirty && exerciseTypeAddForm.exerciseTypeName.$invalid">
                     <span class="error-message" ng-show="exerciseTypeAddForm.exerciseTypeName.$error.required"><span>Required.</span></span>
                 </span>
-                <span class="error-message" ng-show="nameAlreadyExist"><span>Type&nbsp;Name&nbsp;Already&nbsp;Exist</span></span>
+                <span class="error-message"  ng-show="nameAlreadyExist"><span>Type&nbsp;Name&nbsp;Already&nbsp;Exist</span></span>
 
                 <p class="text-red pull-right" ng-show="errorMessageForType">Atleast one level is required</p>
                 <p class="margin-bottom-10">List of level (<a href="" class="text-bold" ng-click="addInput()"> <i class="fa fa-plus-circle"></i> Add New Level </a> )</p>
-
                 <div ng-repeat="input in inputs" class="margin-bottom-20">
                     <ng-form name="levelForm">
-                        <input class="level_input" type="text" name="exerciseLevel" ng-model="input.levelname" maxlength="45" required/>
+                        <input class="level_input" data-values="inputs" data-typeid="exerciseType.typeid" type="text" name="exerciseLevel" ng-model="input.levelname" maxlength="45" ng-change="verifyDuplicate()" required/>
                         <span class="level_close" ng-click="removeInput($index)"><span>Remove</span></span>
                             <span ng-show="levelForm.exerciseLevel.$dirty && levelForm.exerciseLevel.$invalid && !errorMessageForType">
                                 <span class="error-message override" ng-show="levelForm.exerciseLevel.$error.required"><span>Empty&nbsp;field&nbsp;not&nbsp;accepted.</span></span>
+
                             </span>
+                        <!--<div class="error-message override"
+                             ng-if="input.isDuplicate">
+                            Duplicate.
+                        </div>-->
+                        <span class="error-message override" ng-show="input.isDuplicate"><span>Duplicate.</span></span>
+                        <span class="error-message override" ng-show="levelForm.exerciseLevel.$error.typenameexists"><span>Level&nbsp;Name&nbsp;should&nbsp;not&nbsp;same.</span></span>
                     </ng-form>
                 </div>
                 <div class="action_btns margin-top-20">

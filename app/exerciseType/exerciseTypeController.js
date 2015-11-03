@@ -267,4 +267,20 @@ adminApp.controller('ExerciseTypeController',['$scope','requestHandler','Flash',
         return angular.equals(original, $scope.exerciseType);
     };
 
+
+    $scope.verifyDuplicate = function() {
+       // alert("hi");
+        var sorted, i ;
+        //console.log("normal",$scope.inputs);
+        sorted = $scope.inputs.concat().sort(function (a, b) {
+            if (a.levelname > b.levelname) return 1;
+            if (a.levelname < b.levelname) return -1;
+            return 0;
+        });
+       //console.log("sorted",sorted);
+        for(i = 0; i < $scope.inputs.length; i++) {
+            sorted[i].isDuplicate = ((sorted[i-1] && sorted[i-1].levelname == sorted[i].levelname) || (sorted[i+1] && sorted[i+1].levelname == sorted[i].levelname));
+        }
+  };
+
 }]);

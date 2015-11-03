@@ -205,7 +205,34 @@ adminApp.factory("UserDashboardService",function(requestHandler){
         });
     };
 
- return userDashboardServiceObj;
+    //Get User exercise Details
+    userDashboardServiceObj.doGetUserExerciseDetails=function(userExerciseId){
+
+        return requestHandler.postRequest("user/getSavedExerciseDetailByUUID/",{"userexercisemapid":userExerciseId}).then(function (response) {
+            return response.data.ExerciseData;
+        }, function () {
+            errorMessage(Flash, "Please try again later!");
+        });
+    };
+
+    //Update User Exercise to diary
+    userDashboardServiceObj.doUpdateUserExercise=function(userExercise){
+        return requestHandler.postRequest("user/updateUserExerciseByUUID/",userExercise).then(function (response) {
+            return response;
+        }, function () {
+            errorMessage(Flash, "Please try again later!");
+        });
+    };
+
+    //Frequently Added Exercise
+    userDashboardServiceObj.doGetFrequentlyUsedExercise=function(){
+        return requestHandler.getRequest("user/userFrequentlyaskedExercise/","").then(function(response) {
+            return response.data.ExerciseDataList;
+        });
+    };
+
+
+    return userDashboardServiceObj;
 
 });
 

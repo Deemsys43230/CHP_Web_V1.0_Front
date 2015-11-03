@@ -164,24 +164,7 @@
                                 <div class="suggest_content">
                                     <div class="suggest_option">
                                         <h6>Frequently Used</h6>
-                                        <span>Running</span>
-                                        <span>Walking</span>
-                                        <span>Swimming</span>
-                                        <span>Pull Up</span>
-                                        <span>Push Up</span>
-                                        <span>Cycling</span>
-                                        <span>Running</span>
-                                        <span>Walking</span>
-                                        <span>Swimming</span>
-                                        <span>Pull Up</span>
-                                        <span>Push Up</span>
-                                        <span>Cycling</span>
-                                        <span>Running</span>
-                                        <span>Walking</span>
-                                        <span>Swimming</span>
-                                        <span>Pull Up</span>
-                                        <span>Push Up</span>
-                                        <span>Cycling</span>
+                                        <span ng-repeat="frequentexercise in frequentExerciseList" ng-click="frequentExercise(frequentexercise.exerciseid)">{{frequentexercise.exercisename}}</span>
                                     </div>
                                 </div>
                             </div>
@@ -194,12 +177,12 @@
                                     <li class="row" ng-repeat="exerciseDiaryData in userExerciseDiaryDataAll">
                                         <div class="col-md-2 no-padding"><img ng-src="{{exerciseDiaryData.exerciseImagePath+'200x200.jpg'}}"></div>
                                         <div class="col-md-10 no-padding">
-                                            <a href="" class="pull-right food_close" title="Delete Exercise" ng-click="doDeleteUserExercise(exerciseDiaryData.userfoodid)">x</a>
+                                            <a href="" class="pull-right food_close" title="Delete Exercise" ng-click="doDeleteUserExercise(exerciseDiaryData.userexercisemapid)">x</a>
                                             <p class="food_name">{{exerciseDiaryData.Exercise.exercisename}}</p>
                                             <p>
                                                 <span class="pull-right text-red text-bold"><i class="fa fa-angle-down"></i>&nbsp;{{exerciseDiaryData.Level.calories}}  calories</span>
                                             <div class="select_food">
-                                                <p>Level:{{exerciseDiaryData.Level.levelname}}</p>Workout:{{exerciseDiaryData.Level.workoutvalue}}&nbsp;<a href="" ng-click="doEditUserFood(foodDiaryData.foodid,foodDiaryData.userfoodid)"><i class="fa fa-pencil"></i></a>
+                                                <p>Level:{{exerciseDiaryData.Level.levelname}}</p>Workout:{{exerciseDiaryData.Level.workoutvalue}}&nbsp;<a href="" ng-click="doEditUserExercise(exerciseDiaryData.Exercise.exerciseid,exerciseDiaryData.userexercisemapid)"><i class="fa fa-pencil"></i></a>
                                             </div>
                                             </p>
                                         </div>
@@ -357,10 +340,11 @@
 
             <form name="foodSuggestForm" id="suggestform">
             <p>Food Name:</p>
-            <input type="text" name="foodname" ng-model="foodSuggest.foodname" ng-pattern="/^ *([a-zA-Z]+ ?)+ *$/" maxlength="100" required />
+            <input type="text" name="foodname" data-foodid="foodSuggest.foodid" ng-model="foodSuggest.foodname" ng-pattern="/^ *([a-zA-Z]+ ?)+ *$/" maxlength="100" foodexists required />
              <span ng-show="foodSuggestForm.foodname.$dirty&&foodSuggestForm.foodname.$invalid">
                                 <span class="error-message" ng-show="foodSuggestForm.foodname.$error.required"><span>Required.</span></span>
                              <span class="error-message" ng-show="foodSuggestForm.foodname.$error.pattern"><span>Enter&nbsp;Valid&nbsp;name.</span></span>
+                 <span class="error-message" ng-show="foodSuggestForm.foodname.$error.foodexists"><span>Food&nbsp;Already&nbsp;Exists</span></span>
                          </span>
             <p>Food Description:</p>
             <textarea type="text" class="height-150" name="fooddescription" ng-model="foodSuggest.fooddescription" maxlength="300" required/></textarea>
@@ -389,11 +373,12 @@
         <div class="common_model">
             <form name="exerciseSuggestForm">
             <p>Exercise Name:</p>
-            <input type="text" name="exercisename" ng-model="exerciseSuggest.exercisename" ng-pattern="/^ *([a-zA-Z0-9]+ ?)+ *$/" maxlength="100" required />
+            <input type="text" name="exercisename" data-exerciseid="exerciseSuggest.exerciseid" ng-model="exerciseSuggest.exercisename" ng-pattern="/^ *([a-zA-Z0-9]+ ?)+ *$/" maxlength="100" exerciseexists required />
             <span ng-show="exerciseSuggestForm.exercisename.$dirty&&exerciseSuggestForm.exercisename.$invalid">
                                 <span class="error-message" ng-show="exerciseSuggestForm.exercisename.$error.required"><span>Required.</span></span>
                              <span class="error-message" ng-show="exerciseSuggestForm.exercisename.$error.pattern"><span>Enter&nbsp;Valid&nbsp;name.</span></span>
-                         </span>
+             <span class="error-message" ng-show="exerciseSuggestForm.exercisename.$error.exerciseexists"><span>Exercise&nbsp;already&nbsp;exists.</span></span>
+            </span>
             <p>Exercise Description:</p>
             <textarea type="text" class="height-150" name="description" ng-model="exerciseSuggest.description"maxlength="300"  required/></textarea>
              <span ng-show="exerciseSuggestForm.description.$dirty&&exerciseSuggestForm.description.$invalid">
@@ -533,7 +518,7 @@
 
                 <div class="action_btns margin-top-20">
                     <div class="one_half" ng-show="isNew"><a href="#" onclick="return false;" ng-disabled="ExerciseAddForm.$invalid" class="btn btn_blue modal_close" ng-click="doInsertUserExercise()">Add Exercise</a></div>
-                    <div class="one_half" ng-hide="isNew"><a href="#" onclick="return false;" ng-disabled="ExerciseAddForm.$invalid" class="btn btn_blue modal_close" ng-click="doUpdateUserFood()">Update Exercise</a></div>
+                    <div class="one_half" ng-hide="isNew"><a href="#" onclick="return false;" ng-disabled="ExerciseAddForm.$invalid" class="btn btn_blue modal_close" ng-click="doUpdateUserExercise()">Update Exercise</a></div>
                     <div class="one_half last modal_close"><a class="btn btn_red">Cancel</a></div>
                 </div>
             </div>

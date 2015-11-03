@@ -10,11 +10,11 @@
                 <form name="exerciseForm" novalidate>
                 <div class="col-md-9 no-padding">
                     <h5>Exercise Name :</h5>
-                    <input class="form-control" name="exercisename" maxlength="100"  ng-pattern="/^ *([a-zA-Z]+ ?)+ *$/" ng-model="exerciseDetail.exercisename" required/>
+                    <input class="form-control" data-exerciseid="exerciseDetail.exerciseid" name="exercisename" maxlength="100"  ng-pattern="/^ *([a-zA-Z]+ ?)+ *$/" ng-model="exerciseDetail.exercisename" exerciseexists required/>
                     <span ng-show="exerciseForm.exercisename.$dirty&&exerciseForm.exercisename.$invalid">
                         <span class="error-message" ng-show="exerciseForm.exercisename.$error.required"><span>Required.</span></span>
                         <span class="error-message" ng-show="exerciseForm.exercisename.$error.pattern"><span>Enter&nbsp;Valid&nbsp;Name.</span></span>
-                        <span class="error-message" ng-show="exerciseForm.exercisename.$error.exercisenameExists"><span>Exercise&nbsp;Name&nbsp;Already&nbsp;Exist.</span></span>
+                         <span class="error-message" ng-show="exerciseForm.exercisename.$error.exerciseexists"><span>Exercise&nbsp;Already&nbsp;Exists</span></span>
                     </span>
                     <br/>
                     <h5>Tags :</h5>
