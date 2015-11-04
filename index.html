@@ -234,10 +234,10 @@
                 </span>
                 <span class="error-message" ng-show="registerForm.emailid.$error.emailexists"><span>Email&nbsp;Address&nbsp;Already&nbsp;Exist.</span></span>
                 <p>Password</p>
-                <input type="password" name="password" ng-model="userForm.password" ng-pattern="/^[^ ]+$/"  maxlength="20" required/>
+                <input type="password" name="password" ng-model="userForm.password" ng-pattern="/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-])(?!.*\s).{6,}$/"  maxlength="20" required/>
                 <span ng-show="registerForm.password.$dirty&&registerForm.password.$invalid && !registerForm.password.$pristine">
                     <span class="error-message" ng-show="registerForm.password.$error.required"><span>Required.</span></span>
-                      <span class="error-message" ng-show="registerForm.password.$error.pattern"><span>Password&nbsp;doesn't&nbsp;allow&nbsp;space.</span></span>
+                      <span class="error-message" ng-show="registerForm.password.$error.pattern"><span>Password&nbsp;doesn't&nbsp;not&nbsp;match.</span></span>
                 </span>
                 <p>Confirm Password</p>
                 <input type="password" name="confirmPassword" compare-to="userForm.password" maxlength="20" required ng-model="confirmpassword"/>

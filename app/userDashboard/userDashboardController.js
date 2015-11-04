@@ -352,6 +352,10 @@ userApp.controller('UserDashboardController',function($scope,requestHandler,Flas
     //Update User Exercise
     $scope.doUpdateUserExercise=function(){
         //Set values according to the api calls
+        if($scope.userExercise.date!=null){
+            delete $scope.userExercise.date;
+        }
+
         $scope.userExercise.userexercisemapid= $scope.userExercise.userexercisemapid;
         $scope.userExercise.exerciseid= $scope.userExercise.exerciseid;
         $scope.userExercise.levelid=$scope.userExercise.levelid.levelid;

@@ -1072,29 +1072,7 @@ adminApp.directive("typenameexists", function ($q, $timeout,requestHandler) {
         },
         link: function (scope, element, attributes, ngModel) {
             ngModel.$asyncValidators.typenameexists = function (modelValue) {
-
                 var defer = $q.defer();
-                $timeout(function () {
-                    var exists=false;
-                    var i=0;
-
-                    $.each(scope.values,function(index,value){
-                        alert(index);
-                        if(value.levelname===modelValue){
-                            if(i==index){
-                                exists=true;
-                            }
-
-                        }
-                        i+1;
-                   });
-                    if(exists){
-                        defer.reject();
-                    }else{
-                        defer.resolve();
-                    }
-
-                }, 10);
 
                 return defer.promise;
             }
