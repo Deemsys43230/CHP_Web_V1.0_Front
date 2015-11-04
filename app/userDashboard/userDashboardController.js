@@ -386,6 +386,8 @@ userApp.controller('UserDashboardController',function($scope,requestHandler,Flas
             $scope.current=$scope.caloriesSpent=0;
         }
         else{
+            console.log("calories",$scope.userExercise.levelid.calories);
+            console.log("workout",$scope.userExercise.workoutvalue);
             $scope.current=$scope.caloriesSpent=$scope.userExercise.levelid.calories*$scope.userExercise.workoutvalue;
 
             $scope.current=$scope.current.toFixed(2);
