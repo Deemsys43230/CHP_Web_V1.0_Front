@@ -228,7 +228,7 @@ adminApp.controller('ExerciseEditController',function($q,$scope,requestHandler,F
         updatedExerciseDetails.exerciseid=$scope.exerciseDetail.exerciseid;
 
         updatedExerciseDetails.exercisename=$scope.exerciseDetail.exercisename;
-
+/*
         if($scope.imageUpload){
             updatedExerciseDetails.imageurl=$scope.exerciseDetail.imageurl;
         }
@@ -239,7 +239,7 @@ adminApp.controller('ExerciseEditController',function($q,$scope,requestHandler,F
                 console.log(base64Img);
                 updatedExerciseDetails.imageurl=base64Img;
             });
-        }
+        }*/
 
         updatedExerciseDetails.difficultytype=$scope.exerciseDetail.type.typeid;
 
@@ -260,6 +260,7 @@ adminApp.controller('ExerciseEditController',function($q,$scope,requestHandler,F
         updatedExerciseDetails.levels = $scope.exerciseDetail.type.levels;
 
         console.log(updatedExerciseDetails);
+        if($scope.imageUpload){
         requestHandler.postRequest("admin/checkExerciseNameExists/",{"exerciseid":$scope.exerciseDetail.exerciseid,"exercisename":$scope.exerciseDetail.exercisename}).then(function(response){
             if(response.data.Response_status==0){
                 $q.all([tagPromise]).then(function(){
@@ -281,6 +282,35 @@ adminApp.controller('ExerciseEditController',function($q,$scope,requestHandler,F
                 $scope.loaded=false;
             }
         });
+        }else{
+            ExerciseService.convertImgToBase64($scope.originalImage, function(base64Img) {//Convert Image to Base64
+                console.log(base64Img);
+
+                updatedExerciseDetails.imageurl=base64Img;
+                requestHandler.postRequest("admin/checkExerciseNameExists/",{"exerciseid":$scope.exerciseDetail.exerciseid,"exercisename":$scope.exerciseDetail.exercisename}).then(function(response){
+                    if(response.data.Response_status==0){
+                        $q.all([tagPromise]).then(function(){
+                            requestHandler.putRequest("admin/updateExercise/",updatedExerciseDetails).then(function (response) {
+                                if (response.data.Response_status == 1) {
+                                    successMessage(Flash,"Exercise Updated Successfully!");
+                                    $location.path("exercise");
+                                    $scope.loaded=false;
+                                }
+                            }, function () {
+                                errorMessage(Flash,"Please Try Again Later!");
+                                $scope.loaded=false;
+                            });
+                        });
+
+                    }
+                    else  if(response.data.Response_status==1){
+                        errorMessage(Flash,"Exercise&nbsp;already&nbsp;exists");
+                        $scope.loaded=false;
+                    }
+                });
+
+            });
+        }
 
     };
 
@@ -356,6 +386,7 @@ adminApp.controller('ExerciseEditController',function($q,$scope,requestHandler,F
     $scope.doSetExcerciseDetails=function(){
         $scope.exerciseDetail={};
         $scope.loaded=true;
+        $scope.isNoImage=true
 
         $scope.exerciseDetail.imageurl='../../images/No_image_available.jpg';
 

@@ -89,7 +89,7 @@
                     </div>
                     <div class="col-md-12 margin-top-10 text-center">
                         <a class="btn register_button" href="" ng-click="doUpdateExerciseDetail()" ng-disabled="exerciseForm.$invalid||isClean()" ng-hide="isNew">Update Exercise Details</a>
-                        <a class="btn register_button" href="" ng-click="doAddExerciseDetail()" ng-disabled="exerciseForm.$invalid || !imageUpload" ng-show="isNew">Save Exercise Details</a>
+                        <a class="btn register_button" href="" ng-click="doAddExerciseDetail()" ng-disabled="exerciseForm.$invalid || isNoImage" ng-show="isNew">Save Exercise Details</a>
                         <a class="btn cancel_button" href="#exercise">Cancel</a>
                     </div>
                 </div>
