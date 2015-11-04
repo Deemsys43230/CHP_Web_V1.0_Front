@@ -1,0 +1,58 @@
+<style>
+    body{
+        overflow-x: hidden !important;
+    }
+</style>
+
+<div class="row">
+    <div class="panel no-margin no-box-shadow">
+        <div class="panel-body">
+            <a onclick="return false;" href="#" class="prev vertical-carousel-control pull-right margin-left-5"><span class="fa fa-angle-down"></span></a>
+            <a onclick="return false;"  href="#" class="next vertical-carousel-control pull-right"><span class="fa fa-angle-up"></span></a>
+            <h4 class="classic-title"><span>Reviews</span></h4>
+            <div class="row">
+                <ul class="vertical-items">
+                    <li class="news-item" ng-repeat="reviews in coachReviews">
+                        <div class="col-md-2">
+                            <img class="img-circle" ng-src="{{reviews.review_imageurl | trusted}}">
+                        </div>
+                        <div class="col-md-2">
+                            <p> <strong>{{reviews.review_username}}</strong></p>
+                            <span class="small-font">{{reviews.reviewddatetime}}</span>
+                        </div>
+                        <div class="col-md-5">
+                            <strong>{{reviews.reviewtitle}}</strong>
+                            <p>{{reviews.reviewdescription}}</p>
+                        </div>
+
+                        <div class="col-md-3">
+                            Ratings : {{reviews.ratinglevel}}<br/>
+                            <average-star-rating ng-model="(reviews.ratinglevel)-1" max="5"></average-star-rating>
+                        </div>
+                        <div class="col-md-12 margin-tb-5"><hr/></div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-12 text-center margin-top-20">
+        <a href="" ng-click="doSubscribeCoach(usercoachdetails.userid)" class="btn register_button" ng-show="usercoachdetails.coachEnrollStatus==0"> Subscribe </a>                        </div>
+</div>
+
+<script type="text/javascript" src="../../js/script.js"></script>
+
+<script type="text/javascript">
+    $(function () {
+        $(".vertical-items").bootstrapNews({
+            newsPerPage: 3,
+            autoplay: false,
+            pauseOnHover:true,
+            direction: 'up',
+            newsTickerInterval: 4000,
+            onToDo: function () {
+                //console.log(this);
+            }
+        });
+    });
+</script>

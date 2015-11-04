@@ -100,7 +100,6 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'userApp',
                             files:[
-                                '../../css/profile-image-upload.css',
                                 '../../angular/angular-utils-pagination/dirPagination.js',
                                 '../../app/userCoach/userCoachController.js'
                             ]
@@ -116,10 +115,9 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'userApp',
                             files:[
-                                '../../css/profile-image-upload.css',
+                                '../../plugin/vertical-carousel/vertical-carousel.js',
+                                '../../plugin/vertical-carousel/vertical-carousel.css',
                                 '../../angular/angular-utils-pagination/dirPagination.js',
-                                '../../plugin/jquery.raty-2.4.5/js/jquery.min.js',
-                                '../../plugin/jquery.raty-2.4.5/js/jquery.raty.min.js',
                                 '../../app/userCoach/userCoachController.js'
                             ]
                         })

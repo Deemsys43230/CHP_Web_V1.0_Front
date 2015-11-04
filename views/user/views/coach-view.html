@@ -1,0 +1,26 @@
+
+
+<div class="row">
+    <div class="col-md-8">
+        <h3 class="text-orange margin-bottom-10">{{usercoachdetails.name}}</h3>
+        <!--<h5></h4><i>Senior Coach</i></h5><br/><br/>
+        <strong>Students:</strong>3243 Students<br/>-->
+        {{usercoachdetails.emailid}}<br/><br/>
+        <strong>About Me:</strong><br/>
+        {{usercoachdetails.about}}
+    </div>
+    <div class="col-md-4">
+        <img style="width: 150px; height: 150px" ng-src="{{usercoachdetails.imageurl | trusted}}"/>
+        <h4>Total Ratings : 4.4</h4>
+        <a href="" class="btn btn-xs btn-primary" ng-click="coachReview(usercoachdetails.userid)">View Ratings</a>
+    </div>
+    <div class="col-md-12">
+        User 1 rating <star-rating ng-model="user1" ></star-rating><br/>
+        User 2 rating <star-rating ng-model="user2" ></star-rating><br/>
+        User 3 rating <star-rating ng-model="user3" ></star-rating><br/>
+    </div>
+    <div class="col-md-12 bottom text-center">
+        <a href="" ng-click="doSubscribeCoach(usercoachdetails.userid)" class="btn register_button"> Subscribe </a>
+    </div>
+</div>
+

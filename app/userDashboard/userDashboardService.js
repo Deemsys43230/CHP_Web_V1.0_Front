@@ -82,7 +82,6 @@ adminApp.factory("UserDashboardService",function(requestHandler){
     //Get User Food Details
     userDashboardServiceObj.doGetUserFoodDetails=function(userFoodId){
 
-        console.log(userFoodId);
         return requestHandler.postRequest("user/getFoodDetails/",{"userfoodid":userFoodId}).then(function (response) {
             return response.data.FoodDetails;
         }, function () {
@@ -99,7 +98,6 @@ adminApp.factory("UserDashboardService",function(requestHandler){
 
             //For Age calculation
             var today = new Date();
-            console.log(userProfile.dob);
             if(userProfile.dob == null){
                 userProfile.age = "-";
             }
@@ -116,7 +114,6 @@ adminApp.factory("UserDashboardService",function(requestHandler){
                   }
                 //Age caluclation ends
             userProfile.age = age;
-                console.log(userProfile.age);
             }
             return userProfile;
         });

@@ -1,7 +1,12 @@
+<style>
+    body{
+        overflow-x: hidden !important;
+    }
+</style>
 
 <div class="page-banner1">
     <div id="w" class="clearfix">
-        <div id="demography-content">
+        <div id="demography-content" ng-init="userCoachInit()">
             <form name="userCoachForm">
                 <div class="col-md-12">
                     <a href="#dashboard" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back to Dashboard</a>
@@ -14,14 +19,19 @@
                     </div>
                     <div class="coach-list">
                         <div class="content_scrollbar">
-                            <div class="coach-view" ng-repeat="usercoach in usercoachlist | filter : coachsearch">
+                            <div class="coach-view" ng-repeat="usercoach in usercoachlist | filter : coachsearch" ng-click="doGetCoachDetailsByUser(usercoach.userid)">
                                 <div class="col-md-3">
                                     <img class="img-circle"ng-src="{{usercoach.imageurl | trusted}}">
                                 </div>
-                                <div class="col-md-9">
-                                    <a href="" ng-click="doGetCoachDetailsByUser(usercoach.userid)">{{usercoach.name}}</a>
-                                    <div class="avoid-clicks" id="Rating_{{usercoach.userid}}"></div>
-                                    <!--<small>({{coachReviewslist.totalRatings}} Reviews)</small>-->
+                                <div class="col-md-9 no-padding">
+                                    <h4 class="col-md-12">{{usercoach.name}}</h4>
+                                    <p class="col-md-12">{{usercoach.emailid}}</p>
+                                    <div class="average col-md-3">
+                                        <average-star-rating ng-model="usercoach.averageRating" max="5"></average-star-rating>
+                                    </div>
+                                    <div class="col-md-9">
+                                        &nbsp;&nbsp;&nbsp;<small>( {{usercoach.totalReviews}} Reviews )</small>
+                                    </div>
                                 </div>
                             </div>
 
@@ -29,45 +39,7 @@
                     </div>
                 </div>
                 <div class="col-md-7">
-                    <div class="row">
-                        <div class="col-md-8">
-                            <h3 class="text-orange">{{usercoachdetails.name}}</h3>
-                            <!--<h5></h4><i>Senior Coach</i></h5><br/><br/>
-                            <strong>Students:</strong>3243 Students<br/>-->
-                            <strong>Email id:</strong>{{usercoachdetails.emailid}}<br/>
-                            <strong>Name:</strong>{{usercoachdetails.name}}<br/>
-                        </div>
-                        <div class="col-md-4">
-                            <img style="width: 150px; height: 150px" ng-src="{{usercoachdetails.imageurl | trusted}}"/>
-                        </div>
-                        <div class="col-md-12"><br/>
-                            <strong>About Me:</strong>
-                           {{usercoachdetails.about}}
-                        </div><br/>
-
-                        <div  ng-repeat="reviews in coachReviews">
-                            <div class="col-md-2">
-                                <img class="img-circle" ng-src="{{reviews.review_imageurl | trusted}}">
-                                <p> <strong>{{reviews.review_username}}</strong></p>
-                                <span class="small-font">{{reviews.reviewddatetime}}</span>
-                            </div>
-                            <div class="col-md-7">
-                                <strong>{{reviews.reviewtitle}}</strong>
-                                <p>{{reviews.reviewdescription}}</p>
-                            </div>
-
-
-                            <div class="col-md-3 review">
-                                Ratings : {{reviews.ratinglevel}}<br/>
-                                <div class="avg" id="Review_{{reviews.id}}"></div>
-
-                            </div>
-                            <div class="col-md-12"><hr/></div>
-
-                        </div>
-                        <div class="col-md-12 text-center margin-top-20">
-                            <a href="" ng-click="doSubscribeCoach(usercoachdetails.userid)" class="btn register_button" ng-show="usercoachdetails.coachEnrollStatus==0"> Subscribe </a>                        </div>
-                    </div>
+                    <div ng-include src="'views/'+coach.status+'.html'"></div>
                 </div>
             </form>
         </div><!-- @end #content -->
@@ -75,5 +47,3 @@
 </div>
 
 <script type="text/javascript" src="../../js/script.js"></script>
-<script src="../../plugin/jquery.raty-2.4.5/js/jquery.min.js"></script>
-<script src="../../plugin/jquery.raty-2.4.5/js/jquery.raty.min.js"></script>

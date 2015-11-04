@@ -67,6 +67,47 @@ input:focus,a:focus
 	margin: 17px 20px 0 0 !important;
 }
 
+div[ng-include].ng-enter {
+    -webkit-animation: fadeInRight 1s;
+    animation: fadeInRight 1s;
+}
+
+/*ratings*/
+.rating {
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+}
+.rating li {
+    padding: 1px;
+    color: #ddd;
+    font-size: 15px;
+    list-style-type: none;
+    display: inline-block;
+    cursor: pointer;
+}
+.rating li.filled {
+    color: #f8ba01;
+}
+.rating.readonly li.filled {
+    color: #666;
+}
+
+.average-rating-container {
+    position: relative;
+    height: 31px;
+    width: 103px;
+    overflow: hidden;
+}
+.average-rating-container .background,
+.average-rating-container .foreground {
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
 strong, b {
 	font-weight: 600;
 }
@@ -7111,13 +7152,13 @@ ul.tabs li.active{
     box-shadow: 0 0 3px rgba(0,0,0,0.3);
 }
 
-.coach-view:hover{
+.coach-view:hover,.coach-view:hover h4,.coach-view:hover p{
     cursor: pointer;
     color: #f8ba01;
 }
 
-.coach-view:hover h3{
-    color: #f8ba01;
+.coach-view .img-circle{
+    border:2px solid #efefef !important;
 }
 
 /*food scroll bar*/
@@ -7249,13 +7290,6 @@ ul.food li p.food_name{
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
     border-radius: 4px;
-}
-
-.rating {
-    float: left;
-    width: 45%;
-    margin-right: 5%;
-    text-align: center;
 }
 
 .rating-num {

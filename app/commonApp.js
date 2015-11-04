@@ -402,7 +402,8 @@ commonApp.directive('replace', function() {
             });
         }
     };
-})
+});
+
 // Compare Confirm Password
 commonApp.directive('compareTo',function() {
     return {
