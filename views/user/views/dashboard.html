@@ -133,7 +133,7 @@
                                     </div>
                                     <div class="food_scrollbar style">
                                         <ul class="food">
-                                            <li class="row" ng-repeat="foodDiaryData in userFoodDiaryData">
+                                            <li class="row" ng-repeat="foodDiaryData in userFoodDiaryData | orderBy:'$index':true">
                                                 <div class="col-md-2 no-padding"><img ng-src="{{foodDiaryData.foodImagePath+'200x200.jpg'}}"></div>
                                                 <div class="col-md-10 no-padding">
                                                     <a href="" class="pull-right food_close" title="Delete Food" ng-click="doDeleteUserFood(foodDiaryData.userfoodid)">x</a>
@@ -174,7 +174,7 @@
                             </div>
                             <div class="food_scrollbar style height-320">
                                 <ul class="food">
-                                    <li class="row" ng-repeat="exerciseDiaryData in userExerciseDiaryDataAll">
+                                    <li class="row" ng-repeat="exerciseDiaryData in userExerciseDiaryDataAll | orderBy:'$index':true">
                                         <div class="col-md-2 no-padding"><img ng-src="{{exerciseDiaryData.exerciseImagePath+'200x200.jpg'}}"></div>
                                         <div class="col-md-10 no-padding">
                                             <a href="" class="pull-right food_close" title="Delete Exercise" ng-click="doDeleteUserExercise(exerciseDiaryData.userexercisemapid)">x</a>

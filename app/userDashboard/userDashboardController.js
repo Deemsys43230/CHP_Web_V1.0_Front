@@ -705,6 +705,12 @@ userApp.filter('trusted', ['$sce', function ($sce) {
     };
 }]);
 
+/*userApp.filter('reverse', function() {
+    return function(items) {
+        return items.slice().reverse();
+    };
+});*/
+
 // bar chart
 userApp.directive('hcBar', function () {
         return {

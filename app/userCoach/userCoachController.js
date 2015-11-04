@@ -45,8 +45,8 @@ userApp.controller('UserCoachController',function($scope,requestHandler,Flash,$l
              $scope.coachReviews = response.data.Ratings_Reviews.Reviews;
 
             $.each($scope.coachReviews, function(index,value){
-              // alert(value.id);
-               // alert(value.ratinglevel)
+               alert(value.id);
+               alert(value.ratinglevel);
                 $('#Review_'+value.id).raty({score: value.ratinglevel});
             });
 
