@@ -280,6 +280,7 @@ adminApp.controller('ExerciseTypeController',['$scope','requestHandler','Flash',
        //console.log("sorted",sorted);
         for(i = 0; i < $scope.inputs.length; i++) {
             sorted[i].isDuplicate = ((sorted[i-1] && sorted[i-1].levelname == sorted[i].levelname) || (sorted[i+1] && sorted[i+1].levelname == sorted[i].levelname));
+            $scope.error=sorted[i].isDuplicate;
         }
   };
 
