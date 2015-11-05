@@ -11,13 +11,9 @@
     </div>
     <div class="col-md-4">
         <img style="width: 150px; height: 150px" ng-src="{{usercoachdetails.imageurl | trusted}}"/>
-        <h4>Total Ratings : 4.4</h4>
+        <h4>Total Ratings : {{coachReviews.averageRatings}}</h4>
+        <average-star-rating ng-model="avg" max="5"></average-star-rating>
         <a href="" class="btn btn-xs btn-primary" ng-click="coachReview(usercoachdetails.userid)">View Ratings</a>
-    </div>
-    <div class="col-md-12">
-        User 1 rating <star-rating ng-model="user1" ></star-rating><br/>
-        User 2 rating <star-rating ng-model="user2" ></star-rating><br/>
-        User 3 rating <star-rating ng-model="user3" ></star-rating><br/>
     </div>
     <div class="col-md-12 bottom text-center">
         <a href="" ng-click="doSubscribeCoach(usercoachdetails.userid)" class="btn register_button"> Subscribe </a>

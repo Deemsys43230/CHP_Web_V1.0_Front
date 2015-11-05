@@ -7161,6 +7161,19 @@ ul.tabs li.active{
     border:2px solid #efefef !important;
 }
 
+a.title_button{
+    border: 1px solid #888;
+    padding: 2px 8px;
+    border-radius: 3px;
+    color: #888 !important;
+}
+
+a.title_button:hover{
+    border-color: #f8ba01;
+    background: #f8ba01;
+    color: #fff !important;
+}
+
 /*food scroll bar*/
 
 .food_scrollbar

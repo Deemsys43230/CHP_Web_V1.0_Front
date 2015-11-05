@@ -21,7 +21,7 @@
                         <div class="content_scrollbar">
                             <div class="coach-view" ng-repeat="usercoach in usercoachlist | filter : coachsearch" ng-click="doGetCoachDetailsByUser(usercoach.userid)">
                                 <div class="col-md-3">
-                                    <img class="img-circle"ng-src="{{usercoach.imageurl | trusted}}">
+                                    <img class="img-circle" ng-src="{{usercoach.imageurl | trusted}}">
                                 </div>
                                 <div class="col-md-9 no-padding">
                                     <h4 class="col-md-12">{{usercoach.name}}</h4>
