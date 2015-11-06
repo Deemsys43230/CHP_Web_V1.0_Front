@@ -82,6 +82,7 @@ coachApp.controller('CoachProfileController',['$scope','requestHandler','Flash',
 
                 //Convert Image to base64
                 $scope.userProfile.imageurl=base64Img;
+                $scope.userProfile.experience=parseInt($scope.userProfile.experience);
 
                 requestHandler.putRequest("updateProfile/",$scope.userProfile).then(function(){
                     successMessage(Flash,"Successfully Updated");
