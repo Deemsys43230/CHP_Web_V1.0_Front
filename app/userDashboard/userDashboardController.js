@@ -88,13 +88,20 @@ userApp.controller('UserDashboardController',function($scope,requestHandler,Flas
         var getFoodDetailForEditPromise=UserDashboardService.doGetSelectedFoodDetails(foodid);
         getFoodDetailForEditPromise.then(function(result){
             $scope.userSelectedFoodDetails=result;
+            console.log("dropdow",result);
             //console.log(result);
             var getUserFoodDetailsPromise=UserDashboardService.doGetUserFoodDetails(userfoodid);
             getUserFoodDetailsPromise.then(function(result){
+                console.log(result.measureid);
                 console.log(result);
                 $scope.userFood.userfoodid=result.userfoodid;
                 $scope.userFood.foodid=result.foodid;
-                $scope.userFood.measure=result.measureid;
+              //  $scope.userFood.measure=result.measureid;
+               $.each($scope.userSelectedFoodDetails.measureid, function(index,value) {
+                    if(value.measureid == result.measureid.measureid){
+                        $scope.userFood.measure = value;
+                    }
+                });
                 $scope.userFood.servings=parseInt(result.measureid.servings);
                 $scope.current=$scope.caloriesIntake=result.measureid.calories;
                 $scope.currentColor =   '#66E066';
@@ -335,7 +342,12 @@ userApp.controller('UserDashboardController',function($scope,requestHandler,Flas
                 console.log(result);
                 $scope.userExercise.userexercisemapid=userexercisemapid;
                 $scope.userExercise.exerciseid=exerciseid;
-                $scope.userExercise.levelid=result.User_exercise_data.Level;
+                //$scope.userExercise.levelid=result.User_exercise_data.Level;
+                $.each($scope.userSelectedExerciseDetails.type.levels, function(index,value) {
+                    if(value.levelid == result.User_exercise_data.Level.levelid){
+                        $scope.userExercise.levelid = value;
+                    }
+                });
                 $scope.userExercise.workoutvalue=parseInt(result.User_exercise_data.Level.workoutvalue);
 
                 $scope.current=$scope.caloriesSpent=result.User_exercise_data.Level.calories;

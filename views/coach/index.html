@@ -28,7 +28,7 @@
     <!--Message flash-->
     <link type="text/css" rel="stylesheet" href="../../css/angular-flash-small.css" />
 </head>
-<body ng-app="userApp">
+<body ng-app="coachApp">
 
 <!-- Container -->
 <div id="container" class="boxed-page">
@@ -59,14 +59,14 @@
                             <li class="navbar-user">
                                 <ul class="nav navbar-nav">
                                     <li>
-                                        <a href="#" onclick="return false;" ng-controller="UserInitialController">{{username}}&nbsp;<span class="fa fa-caret-down"></span> </a>
+                                        <a href="#" onclick="return false;" ng-controller="CoachInitialController">{{username}}&nbsp;<span class="fa fa-caret-down"></span> </a>
                                         <ul class="dropdown">
                                             <li><a href="#profile">My Profile</a></li>
                                             <li><a href="#demography">My Demography</a></li>
                                             <li><a href="">My History</a></li>
                                             <li><a href="">My Goals</a></li>
                                             <li><a href="">My Coach</a></li>
-                                            <li><a href="index.html" ng-controller="UserLogoutController" ng-click="doLogout()">Log Out</a></li>
+                                            <li><a href="index.html">Log Out</a></li>
                                         </ul>
                                     </li>
                                 </ul>
@@ -272,7 +272,8 @@
 <script src="../../angular/angular-animate-1.4.3.js"></script>
 <script src="../../angular/angular-flash.min.js"></script>
 <script src="../../app/requestHandler.js"></script>
-<script src="../../app/userApp.js"></script>
+<script src="../../app/coachApp.js"></script>
+<script src="../../angular/angular-datepicker.js"></script>
 
 <script type="text/javascript" src="../../js/jquery.migrate.js"></script>
 <script type="text/javascript" src="../../js/modernizrr.js"></script>

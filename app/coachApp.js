@@ -1,4 +1,4 @@
-var coachApp= angular.module('coachApp', ['ngRoute','oc.lazyLoad','ngCookies','requestModule','ngAnimate','angularUtils.directives.dirPagination']);
+var coachApp= angular.module('coachApp', ['ngRoute','oc.lazyLoad','ngCookies','requestModule','ngAnimate']);
 
 coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
 
@@ -61,7 +61,53 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                     }
                 }
             }).
+            when('/profile', {
+                templateUrl: 'views/profile.html',
+                resolve: {
+                    loadMyFiles:function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'coachApp',
+                            files:[
+                                '../../plugin/popup/style.css',
+                                '../../plugin/popup/jquery.leanModal.min.js',
+                                '../../css/profile-image-upload.css',
+                                '../../js/image-upload.js',
+                                '../../app/coachProfile/coachProfileController.js'
+                            ]
+                        })
+                    }
+                },
+                controller:'CoachProfileController'
+            }).
             otherwise({
                 redirectTo: '/dashboard'
             });
     }]);
+
+//Initial Controller for Username
+coachApp.controller("CoachInitialController",function($scope,requestHandler){
+    requestHandler.getRequest("getUserId/","").then(function(response){
+        $scope.username=response.data.User_Profile.name;
+    });
+});
+
+//To Display success message
+//For User Messages
+function successMessage(Flash,message){
+
+    Flash.dismiss();
+    Flash.create('success', message, 'alert');
+    $("html, body").animate({
+        scrollTop: 0
+    }, 600);
+    return false;
+}
+
+function errorMessage(Flash,message){
+    Flash.dismiss();
+    Flash.create('danger', message, 'custom-class');
+    $("html, body").animate({
+        scrollTop: 0
+    }, 600);
+    return false;
+}

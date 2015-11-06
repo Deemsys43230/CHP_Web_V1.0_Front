@@ -266,7 +266,12 @@ commonApp.controller('LoginController',function($scope,requestHandler,Flash,$win
                        }
                    }
                     else if(response.data.Login.roleid==2){
-                       $window.location.href="views/coach/#/dashboard";
+                       console.log("Role:"+response.data.User_Profile.isProfileUpdated);
+                       if(response.data.User_Profile.isProfileUpdated==0){
+                           $window.location.href="views/coach/#/profile";
+                       }else{
+                           $window.location.href="views/coach/#/dashboard";
+                       }
                    }
                     else if(response.data.Login.roleid==1){
                        $scope.reset();
