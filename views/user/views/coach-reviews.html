@@ -7,7 +7,12 @@
 <div class="row">
     <div class="panel no-margin no-box-shadow">
         <div class="panel-body">
-            <a href="" ng-click="coachView()" class="title_button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back to Coach Details</a>
+            <div ng-if="reviewload">
+                <div class="loader-style">
+                    <div class="loader"></div>
+                </div>
+            </div>
+            <a href="" ng-click="coachView(coachViewId)" class="btn-sm btn-warning pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back to Coach Details</a>
             <h4 class="classic-title"><span>Reviews</span></h4>
             <div class="content_scrollbar">
                 <ul>

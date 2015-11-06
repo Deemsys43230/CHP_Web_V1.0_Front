@@ -1,18 +1,17 @@
 var userApp = angular.module('userApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','angularUtils.directives.dirPagination']);
 
-userApp.controller('UserCoachController',function($scope,requestHandler,Flash,$location,$q) {
+userApp.controller('UserCoachController',function($scope,requestHandler,Flash,$location,$q,$routeParams) {
+
+    $scope.averageRate=0.1;
+    var myCoachIdListArray = [];
 
   // To display Coach list by user
     $scope.doGetCoachListByUser=function(){
         requestHandler.getRequest("user/getallCoachListbyUser/", "").then(function(response){
+
             $scope.usercoachlist=response.data.getallCoachListbyUser;
 
-            $scope.usercoachdetails=response.data.getallCoachListbyUser[2];
-
-            requestHandler.getRequest("getRatingsandReviews/"+$scope.usercoachdetails.userid, "").then(function (response) {
-                $scope.coachReviews = response.data.Ratings_Reviews;
-                $scope.avg=$scope.coachReviews.averageRatings;
-            });
+            $scope.doGetCoachDetailsByUser(response.data.getallCoachListbyUser[0].userid);
 
             /*var ratingPromise;
             $.each($scope.usercoachlist, function(index,value){
@@ -41,26 +40,60 @@ userApp.controller('UserCoachController',function($scope,requestHandler,Flash,$l
         });
     };
 
-
     $scope.doGetCoachRatings= function (id) {
+        $scope.reviewload=true;
         requestHandler.getRequest("getRatingsandReviews/"+id, "").then(function(response){
             $scope.coachReviews=response.data.Ratings_Reviews.Reviews;
+            $scope.reviewload=false;
         });
     };
 
-    $scope.doGetCoachDetailsByUser= function (id) {
+    $scope.doGetCoachDetailsByUser= function (id){
 
-        requestHandler.getRequest("getCoachIndividualDetail/"+id, "").then(function(response){
+        $scope.coach = {
+            status: 'coach-view'
+        };
+
+        $scope.doGetMyCoachListByUser();
+
+        if(myCoachIdListArray.indexOf(id)!=-1)
+            $scope.checkSubscribed=0;
+        else
+            $scope.checkSubscribed=1;
+
+        $scope.viewload=true;
+
+        requestHandler.getRequest("getCoachIndividualDetailbyUser/"+id, "").then(function(response){
 
             $scope.usercoachdetails=response.data.getCoachIndividualDetail;
 
             if($scope.usercoachdetails.about==null){
                 $scope.usercoachdetails.about = "-";
             }
+
+            if($scope.usercoachdetails.specialist==null){
+                $scope.usercoachdetails.specialist = "-";
+            }
+
+            if($scope.usercoachdetails.qualification==null){
+                $scope.usercoachdetails.qualification = "-";
+            }
+
+            if($scope.usercoachdetails.experience==null){
+                $scope.usercoachdetails.experience = "0";
+            }
+
         });
 
         requestHandler.getRequest("getRatingsandReviews/"+id, "").then(function (response) {
-            $scope.coachReviews = response.data.Ratings_Reviews.Reviews;
+            $scope.coachReviews = response.data.Ratings_Reviews;
+            $scope.viewload=false;
+
+            if($scope.coachReviews.averageRatings==0)
+                $scope.averageRate=0.1;
+            else
+                $scope.averageRate=$scope.coachReviews.averageRatings;
+        },function(){
         },function(){
             errorMessage(Flash,"Please try again later!")
         });
@@ -68,23 +101,29 @@ userApp.controller('UserCoachController',function($scope,requestHandler,Flash,$l
     };
 
     $scope.doGetMyCoachListByUser=function(){
+        $scope.loaded=true;
         requestHandler.getRequest("user/getmyCoachList/", "").then(function(response){
             $scope.mycoachlist=response.data.getmyCoachList;
-
-
+            $scope.loaded=false;
+            $.each($scope.mycoachlist, function(index,coachlist){
+                myCoachIdListArray.push(coachlist.userid);
+            });
         },function(){
             errorMessage(Flash,"Please try again later!")
         });
+
     };
 
     $scope.doSubscribeCoach = function(coach){
-
        requestHandler.postRequest("user/subscribeCoach/",{"coach":coach}).then(function(response){
-            successMessage(Flash,"Successfully subscribed");
-           $location.path("coach");
-
+           successMessage(Flash,"Successfully subscribed");
+       },function(){
+           errorMessage(Flash,"Please try again later!")
        });
+    };
 
+    $scope.doUnsubscribeCoach = function(coach){
+       alert('Are you surely want to Unsubcribe the Coach '+coach);
     };
 
     $scope.coachListInit=function(){
@@ -98,18 +137,23 @@ userApp.controller('UserCoachController',function($scope,requestHandler,Flash,$l
         };
     };
 
+    $scope.userCoachViewInit=function(){
+        $scope.doGetCoachDetailsByUser($routeParams.id);
+        $scope.coachView = {
+            status: 'coach-reviews'
+        };
+    };
+
     $scope.coachReview=function(id){
         $scope.doGetCoachRatings(id);
+        $scope.coachViewId=id;
         $scope.coach = {
             status: 'coach-reviews'
         };
     };
 
-    $scope.coachView=function(){
-        $scope.doGetCoachListByUser();
-        $scope.coach = {
-            status: 'coach-view'
-        };
+    $scope.coachView=function(id){
+        $scope.doGetCoachDetailsByUser(id);
     };
 });
 

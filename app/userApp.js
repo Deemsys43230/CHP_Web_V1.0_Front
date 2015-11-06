@@ -125,6 +125,23 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller: 'UserCoachController'
             }).
+            when('/coachView/:id', {
+                templateUrl: 'views/coach-user-view.html',
+                resolve: {
+                    loadMyFiles:function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'userApp',
+                            files:[
+                                '../../plugin/vertical-carousel/vertical-carousel.js',
+                                '../../plugin/vertical-carousel/vertical-carousel.css',
+                                '../../angular/angular-utils-pagination/dirPagination.js',
+                                '../../app/userCoach/userCoachController.js'
+                            ]
+                        })
+                    }
+                },
+                controller: 'UserCoachController'
+            }).
             when('/portfolio', {
                 templateUrl: '../common/portfolio.html'
             }).

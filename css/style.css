@@ -6838,9 +6838,13 @@ a.register_button {
  }
 
 a.register_button:hover{
-    color: #fff;
+    color: #fff !important;
     background-color:#57cb85;
     cursor: pointer;
+}
+
+a.register_button:visited{
+    color: #57cb85;
 }
 
 a.cancel_button{
@@ -6854,9 +6858,13 @@ a.cancel_button{
  }
 
 a.cancel_button:hover{
-    color: #fff;
+    color: #fff !important;
     background-color:#ED6347;
     cursor: pointer;
+}
+
+a.cancel_button:visited{
+    color: #ED6347;
 }
 
 a.main_button {
@@ -7152,13 +7160,34 @@ ul.tabs li.active{
     box-shadow: 0 0 3px rgba(0,0,0,0.3);
 }
 
+.coach-image{
+    width: 180px;
+    height: 180px;
+    border-radius: 3px;
+    border: 1px solid #ddd;
+    margin-bottom: 15px;
+}
+
+.coach-view-image{
+    width: 150px;
+    height: 150px;
+    border-radius: 3px;
+    border: 1px solid #ddd;
+    margin-bottom: 15px;
+}
+
 .coach-view:hover,.coach-view:hover h4,.coach-view:hover p{
     cursor: pointer;
     color: #f8ba01;
 }
 
+.coach-view.active,.coach-view.active h4,.coach-view.active p{
+     cursor: pointer;
+     color: #f8ba01;
+}
+
 .coach-view .img-circle{
-    border:2px solid #efefef !important;
+    border:2px solid #efefef;
 }
 
 a.title_button{
