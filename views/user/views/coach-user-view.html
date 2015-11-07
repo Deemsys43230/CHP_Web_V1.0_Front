@@ -16,10 +16,14 @@
                 <div class="col-md-5">
                     <div class="col-md-4 no-padding">
                         <img class="coach-view-image" ng-src="{{usercoachdetails.imageurl | trusted}}"/>
+                        <h5 class="margin-bottom-10">Average Ratings : {{avgRatings}}</h5>
+                        <div><average-star-rating ng-model="averageRate" max="5"></average-star-rating></div>
+                        <div>( {{totalRatings}} Reviews )</div>
+                        <a href="" ng-click="doUnsubscribeCoach(usercoachdetails.userid)" class="btn btn-sm btn-danger margin-top-10">Unsubscribe</a>
                     </div>
                     <div class="col-md-8">
-                        <h3 class="text-orange">{{usercoachdetails.name}}</h3>
-                        <div class="margin-bottom-10">{{usercoachdetails.emailid}}</div>
+                        <h3 class="text-orange">{{usercoachdetails.name}}&nbsp;</h3>
+                        <div class="margin-bottom-10">{{usercoachdetails.emailid}}&nbsp;</div>
                         <div class="col-md-4 no-padding"><strong>Specialist</strong></div>
                         <div class="col-md-8">: {{usercoachdetails.specialist}}</div>
                         <div class="col-md-4 no-padding"><strong>Qualification</strong></div>
@@ -30,12 +34,10 @@
                         <div class="col-md-8">: {{usercoachdetails.phone}}</div>
                         <div class="col-md-4 no-padding"><strong>DOB</strong></div>
                         <div class="col-md-8">: {{usercoachdetails.dob}}</div>
-                    </div>
-                    <div class="col-md-12 no-padding">
                         <div class="col-md-4 no-padding"><strong>Country</strong></div>
                         <div class="col-md-8">: {{usercoachdetails.country}}</div>
-                        <div class="col-md-4 no-padding"><strong>Status</strong></div>
-                        <div class="col-md-8">: {{usercoachdetails.status}}</div>
+                        <div class="col-md-4 no-padding"><strong>State</strong></div>
+                        <div class="col-md-8">: {{usercoachdetails.state}}</div>
                         <div class="col-md-4 no-padding"><strong>City</strong></div>
                         <div class="col-md-8">: {{usercoachdetails.city}}</div>
                         <div class="col-md-4 no-padding"><strong>Zipcode</strong></div>
@@ -43,10 +45,23 @@
                         <div class="col-md-12 no-padding margin-top-10"><strong>About Me :</strong></div>
                         <div class="col-md-12 no-padding">{{usercoachdetails.about}}</div>
                     </div>
-
                 </div>
                 <div class="col-md-7">
-                    <div ng-include src="'views/'+coach.status+'.html'"></div>
+                    <span ng-show="totalRatings!=0"><div ng-include src="'views/'+coachView.status+'.html'"></div></span>
+                    <span ng-show="totalRatings==0">
+                        <div class="row">
+                            <div class="panel no-margin no-box-shadow">
+                                <div class="panel-body">
+                                    <a href="#coach" class="btn-sm btn-warning pull-right"><i class="fa fa-arrow-circle-o-left"></i> Back</a>
+                                    <h4 class="classic-title"><span>Reviews</span></h4>
+                                    <div class="text-center margin-top-40">
+                                        <img src="../../images/no-reviews.png"/>
+                                        <h1 class="text-gray">NO REVIEWS</h1>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </span>
                 </div>
             </form>
         </div><!-- @end #content -->

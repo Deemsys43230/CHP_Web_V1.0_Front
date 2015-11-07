@@ -2710,6 +2710,10 @@ ul.icons-list li i {
     margin-top: 40px !important;
 }
 
+.pagination {
+    margin: 0 !important;
+}
+
 .icon-small {
 	font-size: 2em;
 	color: #444;
@@ -8149,7 +8153,7 @@ a:hover, a:visited, a:link, a:active
 	margin: 0px;
 	border-top: 4px solid orange;
 	width: 1100px;
-	height: 480px;
+	height: 490px;
 	float: left;
 	z-index: 1;
 	background-color: #fff;

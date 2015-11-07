@@ -12,7 +12,8 @@
                     <div class="loader"></div>
                 </div>
             </div>
-            <a href="" ng-click="coachView(coachViewId)" class="btn-sm btn-warning pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back to Coach Details</a>
+            <span ng-if="subscribed==0"><a href="" ng-click="coachView(coachViewId)" class="btn-sm btn-warning pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back</a></span>
+            <span ng-if="subscribed==1"><a href="#coach" class="btn-sm btn-warning pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back</a></span>
             <h4 class="classic-title"><span>Reviews</span></h4>
             <div class="content_scrollbar">
                 <ul>

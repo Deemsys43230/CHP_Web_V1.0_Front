@@ -6,7 +6,7 @@
             <div class="loader"></div>
         </div>
     </div>
-    <div class="col-md-8">
+    <div class="col-md-8 height-320 margin-bottom-10">
         <h3 class="text-orange margin-bottom-10">{{usercoachdetails.name}}</h3>
         <div class="col-md-5 no-padding"><strong>Specialist</strong></div>
         <div class="col-md-7">: {{usercoachdetails.specialist}}</div>
@@ -24,7 +24,7 @@
         <span class="col-md-7">( {{coachReviews.totalRatings}} Reviews )</span>
         <span class="col-md-12 margin-top-10 no-padding" ng-if="coachReviews.averageRatings!=0"><a href="" class="btn-sm btn-warning" ng-click="coachReview(usercoachdetails.userid)">View Reviews</a></span>
     </div>
-    <div class="col-md-12 bottom text-center margin-top-15">
+    <div class="col-md-12 text-center">
         <span ng-if="checkSubscribed=0"><a href="" ng-click="doSubscribeCoach(usercoachdetails.userid)" class="btn register_button"> Subscribe </a></span>
         <span ng-if="checkSubscribed=1"><a href="" ng-click="doUnsubscribeCoach(usercoachdetails.userid)" class="btn cancel_button"> Unsubscribe </a></span>
     </div>
