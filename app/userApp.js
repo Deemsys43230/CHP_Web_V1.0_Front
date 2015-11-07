@@ -233,8 +233,9 @@ userApp.controller("UserInitialController",function($scope,requestHandler){
 userApp.controller("UserLogoutController",['$cookies','$scope','$window',function($cookies,$scope,$window){
 
     $scope.doLogout=function(){
+
         $cookies.remove("X-CSRFToken",{path: '/'});
-        $cookies.remove("sessionid",{path: '/'});
+        $cookies.put('sessionid',undefined);
         $window.location.href="../../#/index";
     };
 

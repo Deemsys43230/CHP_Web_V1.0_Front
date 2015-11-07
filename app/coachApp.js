@@ -79,6 +79,39 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'CoachProfileController'
             }).
+            when('/mymembers', {
+                templateUrl: 'views/member.html',
+                resolve: {
+                    loadMyFiles:function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'coachApp',
+                            files:[
+                                '../../js/bootstrap.min.js',
+                                '../../plugin/popup/style.css',
+                                '../../angular/angular-utils-pagination/dirPagination.js',
+                                '../../app/coachMembers/coachMembersController.js'
+                            ]
+                        })
+                    }
+                },
+                controller:'CoachMembersController'
+            }).
+            when('/memberView/:id', {
+                templateUrl: 'views/member-view.html',
+                resolve: {
+                    loadMyFiles:function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'coachApp',
+                            files:[
+                                '../../js/bootstrap.min.js',
+                                '../../plugin/popup/style.css',
+                                '../../app/coachMembers/coachMembersController.js'
+                            ]
+                        })
+                    }
+                },
+                controller:'MembersViewController'
+            }).
             otherwise({
                 redirectTo: '/dashboard'
             });
@@ -90,6 +123,19 @@ coachApp.controller("CoachInitialController",function($scope,requestHandler){
         $scope.username=response.data.User_Profile.name;
     });
 });
+
+//Controller For Logout
+coachApp.controller("LogoutController",['$cookies','$scope','$window',function($cookies,$scope,$window,requestHandler){
+
+    $scope.doLogout=function(){
+
+
+        $cookies.remove("X-CSRFToken",{path: '/'});
+        $cookies.put('sessionid',undefined);
+        $window.location.href="../../#/index";
+    };
+
+}]);
 
 //To Display success message
 //For User Messages
