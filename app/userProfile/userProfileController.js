@@ -59,7 +59,20 @@ userApp.controller('UserProfileController',['$scope','requestHandler','Flash',fu
                 }
             });
         });
-    };
+
+        requestHandler.getRequest("getUserSettings/","").then(function(response){
+            $.each(response.data.User_Settings,function(index,value){
+                $scope.privacydetail = value.isprivacy;
+                if($scope.privacydetail == 1){
+                    document.privacyForm.elements['cmn-toggle-7'].checked = true;
+                }
+                else if($scope.privacydetail == 0){
+                    document.privacyForm.elements['cmn-toggle-7'].checked = false;
+                }
+            });
+
+        });
+        };
 
     $scope.refreshImage=function(){
         requestHandler.getRequest("getUserId/","").then(function(response){
@@ -136,6 +149,15 @@ userApp.controller('UserProfileController',['$scope','requestHandler','Flash',fu
         $scope.changePasswordForm.$setPristine();
     };
 
+        //Enable or Disable Privacy details
+    $scope.privacydetails = function(){
+        requestHandler.putRequest("updateUserSettingsIsPrivacy/","").then(function(response){
+        //$scope.doGetProfile();
+        },function(response){
+            errorMessage(Flash,"Please Try Again Later");
+        });
+
+    };
     //Date Picker
     $scope.prevent=function(){
         event.preventDefault();
