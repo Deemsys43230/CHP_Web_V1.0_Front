@@ -31,6 +31,15 @@ userApp.factory("FriendsService",function(requestHandler){
         })
     };
 
+    //Search friends
+    userFriendsServiceObj.doInviteFriends= function (id) {
+        return requestHandler.postRequest("user/sendFriendRequest/",{"friends_friendid":id}).then(function(response){
+            return response;
+        },function(response){
+            alert("Please try again later");
+        })
+    };
+
     return userFriendsServiceObj;
 
 });

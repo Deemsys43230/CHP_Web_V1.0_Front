@@ -3,6 +3,7 @@ var userApp = angular.module('userApp', ['ngRoute','oc.lazyLoad','requestModule'
 
 userApp.controller('FriendsController',function($scope,requestHandler,Flash,FriendsService){
 
+    //My Friends Pagination starts
     $scope.currentPage = 0;
     $scope.pageSize = 8;
     $scope.numberOfPages=function(){
@@ -11,10 +12,20 @@ userApp.controller('FriendsController',function($scope,requestHandler,Flash,Frie
     $scope.numberOfData=function(){
         return $scope.myFriendsList.length;
     };
+    //My Friends Pagination ends
+
+    //Requested Friends Pagination starts
+    $scope.currentPage1 = 0;
+    $scope.pageSize1 = 8;
+    $scope.numberOfPages1=function(){
+        return Math.ceil($scope.requestedFriendsList.length/$scope.pageSize1);
+    };
+    $scope.numberOfData1=function(){
+        return $scope.requestedFriendsList.length;
+    };
+    //Requested Friends Pagination ends
 
 
-
-    //On Select frequent foods
     $scope.myFriends=function(){
 
         var getMyFriendsPromise=FriendsService.doGetMyFriends();
@@ -39,11 +50,24 @@ userApp.controller('FriendsController',function($scope,requestHandler,Flash,Frie
         });
     };
 
+    $scope.inviteFriends=function(id){
+        var inviteFriendsPromise = FriendsService.doInviteFriends(id);
+        inviteFriendsPromise.then(function(result){
+            if(result.data.Response_status ==1){
+                successMessage(Flash,"Friend&nbsp;Request&nbsp;Sent");
+                $scope.searchFriends(name);
+            }
+           else if(result.data.Response_status = 0){
+                errorMessage(Flash,"Already Request Sent");
+            }
+        })
+    }
+
     //Onload
     $scope.initialLoad=function(){
         $scope.myFriends();
         $scope.requestedFriends();
-        $scope.searchFriends('A');
+        $scope.searchFriends('');
     };
 
     $scope.initialLoad();

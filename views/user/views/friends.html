@@ -3,7 +3,7 @@
     <div id="w" class="clearfix">
         <div id="demography-content" class="height-520">
             <div class="col-md-8">
-                <div flash-message="2000" class="col-md-3 no-padding pull-right"></div>
+                <div flash-message="2000" class="col-md-3 pull-right"></div>
                 <div class="my-friends">
 
                     <h5 class="classic-title"><span><a href=""><i class="fa fa-users my-friends-list"></i>&nbsp;&nbsp;My Friends</a></span>
@@ -26,10 +26,10 @@
                                 <i class="fa fa-angle-left"></i>
                             </button>
                             <span class="friends-list-no">&nbsp;&nbsp;{{currentPage*pageSize+1}}&nbsp;-&nbsp;<span ng-show="(currentPage+1)*pageSize<=numberOfData()">{{(currentPage+1)*pageSize}}</span><span ng-show="(currentPage+1)*8>numberOfData()">{{numberOfData()}}</span>&nbsp;of&nbsp;{{numberOfData()}}&nbsp;Friends&nbsp;&nbsp;</span>
-                            <button class="friends-button" ng-disabled="currentPage >= data.length/pageSize - 1" ng-click="currentPage=currentPage+1">
+                            <button class="friends-button" ng-disabled="currentPage >= myFriendsList.length/pageSize - 1" ng-click="currentPage=currentPage+1">
                                 <i class="fa fa-angle-right"></i>
                             </button>
-                            <button class="friends-button" ng-disabled="currentPage >= data.length/pageSize - 1" ng-click="currentPage=numberOfPages()-1">
+                            <button class="friends-button" ng-disabled="currentPage >= myFriendsList.length/pageSize - 1" ng-click="currentPage=numberOfPages()-1">
                                 <i class="fa fa-angle-double-right"></i>
                             </button>
                         </div>
@@ -54,6 +54,7 @@
                         &nbsp;&nbsp;|&nbsp;&nbsp;<span><a href=""><i class="fa fa-info-circle"></i>&nbsp;&nbsp;Friends Request</a></span>
                     </h5>
 
+
                     <div class="col-md-12 no-padding">
                         <h5 class="pull-left">Your friends request</h5>
                         <!-- <ul>
@@ -62,46 +63,34 @@
                              </li>
                          </ul>-->
                         <div class="pull-right">
-                            <button class="friends-button" ng-disabled="currentPage == 0" ng-click="currentPage=0">
+                            <button class="friends-button" ng-disabled="currentPage1 == 0" ng-click="currentPage1=0">
                                 <i class="fa fa-angle-double-left"></i>
                             </button>
-                            <button class="friends-button" ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1">
+                            <button class="friends-button" ng-disabled="currentPage1 == 0" ng-click="currentPage1=currentPage1-1">
                                 <i class="fa fa-angle-left"></i>
                             </button>
-                            <span class="friends-list-no">&nbsp;&nbsp;{{currentPage*pageSize+1}}&nbsp;-&nbsp;<span ng-show="(currentPage+1)*pageSize<=numberOfData()">{{(currentPage+1)*pageSize}}</span><span ng-show="(currentPage+1)*8>numberOfData()">{{numberOfData()}}</span>&nbsp;of&nbsp;{{numberOfData()}}&nbsp;Friends&nbsp;&nbsp;</span>
-                            <button class="friends-button" ng-disabled="currentPage >= data.length/pageSize - 1" ng-click="currentPage=currentPage+1">
+                            <span class="friends-list-no">&nbsp;&nbsp;{{currentPage1*pageSize1+1}}&nbsp;-&nbsp;<span ng-show="(currentPage1+1)*pageSize1<=numberOfData1()">{{(currentPage1+1)*pageSize1}}</span><span ng-show="(currentPage1+1)*8>numberOfData1()">{{numberOfData1()}}</span>&nbsp;of&nbsp;{{numberOfData1()}}&nbsp;Friends&nbsp;&nbsp;</span>
+                            <button class="friends-button" ng-disabled="currentPage1 >= requestedFriendsList.length/pageSize1 - 1" ng-click="currentPage1=currentPage1+1">
                                 <i class="fa fa-angle-right"></i>
                             </button>
-                            <button class="friends-button" ng-disabled="currentPage >= data.length/pageSize - 1" ng-click="currentPage=numberOfPages()-1">
+                            <button class="friends-button" ng-disabled="currentPage1 >= requestedFriendsList.length/pageSize1 - 1" ng-click="currentPage1=numberOfPages1()-1">
                                 <i class="fa fa-angle-double-right"></i>
                             </button>
                         </div>
                     </div>
                     <div class="row friends-list">
                         <div id="effect-5" class="effects clearfix">
-                            <div class="col-md-3">
-                                <a href="" class="img-shadow"><img src="../../images/pic-1.jpg"/></a>
-                                <h5 class="wrap">user name<br/>
+                            <div class="col-md-3" ng-repeat="friendsrequest in requestedFriendsList | startFrom:currentPage1*pageSize1 | limitTo:pageSize1">
+                                <a href="" class="img-shadow"><img ng-src="{{friendsrequest.imageurl | trusted}}"/></a>
+                                <h5 class="wrap">{{friendsrequest.name}}<br/>
                                 <a href="" class="btn btn-xs btn-success margin-top-5">Accept</a>
                                 <a href="" class="btn btn-xs btn-danger margin-top-5">Deny</a>
                                 </h5>
                             </div>
-                            <div class="col-md-3">
-                                <a href="" class="img-shadow"><img src="../../images/pic-1.jpg"/></a>
-                                <h5 class="wrap">user name<br/>
-                                <a href="" class="btn btn-xs btn-success margin-top-5">Accept</a>
-                                <a href="" class="btn btn-xs btn-danger margin-top-5">Deny</a>
-                                </h5>
-                            </div>
-                            <div class="col-md-3">
-                                <a href="" class="img-shadow"><img src="../../images/pic-1.jpg"/></a>
-                                <h5 class="wrap">user name<br/>
-                                <a href="" class="btn btn-xs btn-success margin-top-5">Accept</a>
-                                <a href="" class="btn btn-xs btn-danger margin-top-5">Deny</a>
-                                </h5>
-                            </div>
+
                         </div>
                     </div>
+
                 </div>
             </div>
             <div class="col-md-4">
@@ -125,56 +114,15 @@
                     <div class="col-md-9">
                         <h5>{{searchfriends.name}}</h5>
                         <p class="margin-bottom-5" ng-if="searchfriends.isPrivacy == 1">{{searchfriends.emailid}}</p>
-                        <a href="" class="invite_button">Invite</a>
+                        <a href="" class="invite_button" ng-if="searchfriends.friendStatus == 0" ng-click="inviteFriends(searchfriends.userid)">Invite</a>
+                        <a href="" class="invite_button disabled" ng-if="searchfriends.friendStatus == 1">Request Sent</a>
+                        <a href="" class="invite_button disabled" ng-if="searchfriends.friendStatus == 2">Request Received</a>
+                        <a href="" class="invite_button disabled" ng-if="searchfriends.friendStatus == 3">Friends</a>
                     </div>
                     <div class="col-md-12">
                         <hr/>
                     </div>
                     </div>
-                    <!--<div class="col-md-3">
-                        <img class="img-circle" src="../../images/pic-1.jpg"/>
-                    </div>
-                    <div class="col-md-9">
-                        <h5>User name</h5>
-                        <p class="margin-bottom-5">Secondary detail</p>
-                        <a href="" class="invite_button">Invite</a>
-                    </div>
-                    <div class="col-md-12">
-                        <hr/>
-                    </div>
-                    <div class="col-md-3">
-                        <img class="img-circle" src="../../images/pic-1.jpg"/>
-                    </div>
-                    <div class="col-md-9">
-                        <h5>User nameUser nameUser name</h5>
-                        <p class="margin-bottom-5">Secondary detail</p>
-                        <a href="" class="invite_button">Invite</a>
-                    </div>
-                    <div class="col-md-12">
-                        <hr/>
-                    </div>
-                    <div class="col-md-3">
-                        <img class="img-circle" src="../../images/pic-1.jpg"/>
-                    </div>
-                    <div class="col-md-9">
-                        <h5>User name</h5>
-                        <p class="margin-bottom-5">Secondary detail</p>
-                        <a href="#" class="invite_button disabled">Request Sent</a>
-                    </div>
-                    <div class="col-md-12">
-                        <hr/>
-                    </div>
-                    <div class="col-md-3">
-                        <img class="img-circle" src="../../images/pic-1.jpg"/>
-                    </div>
-                    <div class="col-md-9">
-                        <h5>User name</h5>
-                        <p class="margin-bottom-5">Secondary detail</p>
-                        <a href="#" class="invite_button disabled">Request Sent</a>
-                    </div>
-                    <div class="col-md-12">
-                        <hr/>
-                    </div>-->
                 </div>
             </div>
         </div><!-- @end #content -->
