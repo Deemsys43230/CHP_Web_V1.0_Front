@@ -53,44 +53,55 @@
                     <h5 class="classic-title"><a href="" class="my-friends-list"><i class="fa fa-users"></i>&nbsp;&nbsp;My Friends</a>
                         &nbsp;&nbsp;|&nbsp;&nbsp;<span><a href=""><i class="fa fa-info-circle"></i>&nbsp;&nbsp;Friends Request</a></span>
                     </h5>
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr class="warning">
-                                <th>Name</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>user name</td>
-                                <td>
-                                    <a href="" class="btn btn-xs btn-success">Accept</a>
-                                    <a href="" class="btn btn-xs btn-danger">Deny</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>user name</td>
-                                <td>
-                                    <a href="" class="btn btn-xs btn-success">Accept</a>
-                                    <a href="" class="btn btn-xs btn-danger">Deny</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>user name</td>
-                                <td>
-                                    <a href="" class="btn btn-xs btn-success">Accept</a>
-                                    <a href="" class="btn btn-xs btn-danger">Deny</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>user name</td>
-                                <td>
-                                    <a href="" class="btn btn-xs btn-success">Accept</a>
-                                    <a href="" class="btn btn-xs btn-danger">Deny</a>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+
+                    <div class="col-md-12 no-padding">
+                        <h5 class="pull-left">Your friends request</h5>
+                        <!-- <ul>
+                             <li ng-repeat="item in data | startFrom:currentPage*pageSize | limitTo:pageSize">
+                                 {{item}}
+                             </li>
+                         </ul>-->
+                        <div class="pull-right">
+                            <button class="friends-button" ng-disabled="currentPage == 0" ng-click="currentPage=0">
+                                <i class="fa fa-angle-double-left"></i>
+                            </button>
+                            <button class="friends-button" ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1">
+                                <i class="fa fa-angle-left"></i>
+                            </button>
+                            <span class="friends-list-no">&nbsp;&nbsp;{{currentPage*pageSize+1}}&nbsp;-&nbsp;<span ng-show="(currentPage+1)*pageSize<=numberOfData()">{{(currentPage+1)*pageSize}}</span><span ng-show="(currentPage+1)*8>numberOfData()">{{numberOfData()}}</span>&nbsp;of&nbsp;{{numberOfData()}}&nbsp;Friends&nbsp;&nbsp;</span>
+                            <button class="friends-button" ng-disabled="currentPage >= data.length/pageSize - 1" ng-click="currentPage=currentPage+1">
+                                <i class="fa fa-angle-right"></i>
+                            </button>
+                            <button class="friends-button" ng-disabled="currentPage >= data.length/pageSize - 1" ng-click="currentPage=numberOfPages()-1">
+                                <i class="fa fa-angle-double-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="row friends-list">
+                        <div id="effect-5" class="effects clearfix">
+                            <div class="col-md-3">
+                                <a href="" class="img-shadow"><img src="../../images/pic-1.jpg"/></a>
+                                <h5 class="wrap">user name<br/>
+                                <a href="" class="btn btn-xs btn-success margin-top-5">Accept</a>
+                                <a href="" class="btn btn-xs btn-danger margin-top-5">Deny</a>
+                                </h5>
+                            </div>
+                            <div class="col-md-3">
+                                <a href="" class="img-shadow"><img src="../../images/pic-1.jpg"/></a>
+                                <h5 class="wrap">user name<br/>
+                                <a href="" class="btn btn-xs btn-success margin-top-5">Accept</a>
+                                <a href="" class="btn btn-xs btn-danger margin-top-5">Deny</a>
+                                </h5>
+                            </div>
+                            <div class="col-md-3">
+                                <a href="" class="img-shadow"><img src="../../images/pic-1.jpg"/></a>
+                                <h5 class="wrap">user name<br/>
+                                <a href="" class="btn btn-xs btn-success margin-top-5">Accept</a>
+                                <a href="" class="btn btn-xs btn-danger margin-top-5">Deny</a>
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="col-md-4">
