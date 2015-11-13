@@ -1,0 +1,56 @@
+
+
+<!-- Start Page Banner -->
+
+<div class="page-banner1">
+
+    <div id="w" class="clearfix">
+        <div class="col-md-4">
+            <h5>Set Goal</h5>
+            <input type="text" id="config-demo" class="profile_input">
+            <button ng-click="changegoal()">change URL</button>
+        </div>
+    </div>
+</div>
+
+<!-- End Page Banner -->
+
+<script type="text/javascript">
+    $(document).ready(function() {
+
+        $('#startDate').daterangepicker({
+            singleDatePicker: true,
+            startDate: moment().subtract(6, 'days')
+        });
+
+        $('#endDate').daterangepicker({
+            singleDatePicker: true,
+            startDate: moment()
+        });
+
+        var options = {
+            minDate : new Date(),
+            linkedCalendars : true,
+            autoUpdateInput : true,
+            locale : {
+                format: 'DD/MM/YYYY',
+                separator: ' - ',
+                applyLabel: 'Apply',
+                cancelLabel: 'x',
+                fromLabel: 'From',
+                toLabel: 'To',
+                customRangeLabel: 'Custom',
+                daysOfWeek: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr','Sa'],
+                monthNames: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+                firstDay: 1
+            }
+        };
+
+
+        $('#config-demo').daterangepicker(options, function(start, end, label) {
+            console.log('start date: ' + start.format('DD/MM/YYYY'));
+            console.log('end date: ' + end.format('DD/MM/YYYY'));
+        });
+
+    });
+</script>

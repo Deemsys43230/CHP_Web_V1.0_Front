@@ -1,0 +1,187 @@
+
+<div class="page-banner1">
+    <div id="w" class="clearfix">
+        <div id="demography-content" class="height-520">
+            <div class="col-md-8">
+                <div flash-message="2000" class="col-md-3 no-padding pull-right"></div>
+                <h5 class="classic-title"><span><a href="#friends"><i class="fa fa-users"></i>&nbsp;&nbsp;My Friends</a></span></h5>
+                <div class="row">
+                    <div class="col-md-7">
+                        <input type="text" class="friend-input" placeholder="Search my friend here..."/>
+                    </div>
+                    <div class="col-md-5 text-center margin-top-10">
+                        <!--<ul>
+                            <li ng-repeat="item in data | startFrom:currentPage*pageSize | limitTo:pageSize">
+                                {{item}}
+                            </li>
+                        </ul>-->
+                        <button class="friends-button" ng-disabled="currentPage == 0" ng-click="currentPage=0">
+                            <i class="fa fa-angle-double-left"></i>
+                        </button>
+                        <button class="friends-button" ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1">
+                            <i class="fa fa-angle-left"></i>
+                        </button>
+                        <span class="friends-list-no">&nbsp;&nbsp;{{currentPage*pageSize+1}}&nbsp;-&nbsp;<span ng-show="(currentPage+1)*pageSize<=numberOfData()">{{(currentPage+1)*pageSize}}</span><span ng-show="(currentPage+1)*8>numberOfData()">{{numberOfData()}}</span>&nbsp;of&nbsp;{{numberOfData()}}&nbsp;Friends&nbsp;&nbsp;</span>
+                        <button class="friends-button" ng-disabled="currentPage >= data.length/pageSize - 1" ng-click="currentPage=currentPage+1">
+                            <i class="fa fa-angle-right"></i>
+                        </button>
+                        <button class="friends-button" ng-disabled="currentPage >= data.length/pageSize - 1" ng-click="currentPage=numberOfPages()-1">
+                            <i class="fa fa-angle-double-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="row friends-list">
+                    <div id="effect-6" class="effects clearfix">
+                        <div class="col-md-3">
+                            <div class="img">
+                                <a href="" class="img-shadow"><img src="../../images/pic-1.jpg"/></a>
+                                <div class="overlay">
+                                    <a href="#" class="expand"><i class="fa fa-times-circle"></i>&nbsp;Unfriend</a>
+                                </div>
+                            </div>
+                            <h5 class="wrap"><a href="">user name</a></h5>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="img">
+                                <a href="" class="img-shadow"><img src="../../images/pic-2.jpg"/></a>
+                                <div class="overlay">
+                                    <a href="#" class="expand"><i class="fa fa-times-circle"></i>&nbsp;Unfriend</a>
+                                </div>
+                            </div>
+                            <h5 class="wrap"><a href="">user name</a></h5>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="img">
+                                <a href="" class="img-shadow"><img src="../../images/pic-3.jpg"/></a>
+                                <div class="overlay">
+                                    <a href="#" class="expand"><i class="fa fa-times-circle"></i>&nbsp;Unfriend</a>
+                                </div>
+                            </div>
+                            <h5 class="wrap"><a href="">usernameusernameusernameusernameusername</a></h5>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="img">
+                                <a href="" class="img-shadow"><img src="../../images/pic-1.jpg"/></a>
+                                <div class="overlay">
+                                    <a href="#" class="expand"><i class="fa fa-times-circle"></i>&nbsp;Unfriend</a>
+                                </div>
+                            </div>
+                            <h5 class="wrap"><a href="">user name</a></h5>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="img">
+                                <a href="" class="img-shadow"><img src="../../images/pic-2.jpg"/></a>
+                                <div class="overlay">
+                                    <a href="#" class="expand"><i class="fa fa-times-circle"></i>&nbsp;Unfriend</a>
+                                </div>
+                            </div>
+                            <h5 class="wrap"><a href="">user name</a></h5>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="img">
+                                <a href="" class="img-shadow"><img src="../../images/pic-3.jpg"/></a>
+                                <div class="overlay">
+                                    <a href="#" class="expand"><i class="fa fa-times-circle"></i>&nbsp;Unfriend</a>
+                                </div>
+                            </div>
+                            <h5 class="wrap"><a href="">user name</a></h5>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="img">
+                                <a href="" class="img-shadow"><img src="../../images/pic-1.jpg"/></a>
+                                <div class="overlay">
+                                    <a href="#" class="expand"><i class="fa fa-times-circle"></i>&nbsp;Unfriend</a>
+                                </div>
+                            </div>
+                            <h5 class="wrap"><a href="">user name</a></h5>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="img">
+                                <a href="" class="img-shadow"><img src="../../images/pic-1.jpg"/></a>
+                                <div class="overlay">
+                                    <a href="#" class="expand"><i class="fa fa-times-circle"></i>&nbsp;Unfriend</a>
+                                </div>
+                            </div>
+                            <h5 class="wrap"><a href="">user name</a></h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <h5 class="classic-title"><span><a href="#friends"><i class="fa fa-search"></i>&nbsp;&nbsp;Search Friends</a></span></h5>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="input-group">
+                            <input type="text" class="friend-input" placeholder="Search new friend name...">
+                        <span class="input-group-btn">
+                            <a class="search-btn" type="button">Search</a>
+                        </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row margin-top-20">
+                    <div class="col-md-3">
+                        <img class="img-circle" src="../../images/pic-1.jpg"/>
+                    </div>
+                    <div class="col-md-9">
+                        <h5>User nameUserUser nameUserUser</h5>
+                        <p class="margin-bottom-5">Secondary detail</p>
+                        <a href="" class="invite_button">Invite</a>
+                    </div>
+                    <div class="col-md-12">
+                        <hr/>
+                    </div>
+                    <div class="col-md-3">
+                        <img class="img-circle" src="../../images/pic-1.jpg"/>
+                    </div>
+                    <div class="col-md-9">
+                        <h5>User name</h5>
+                        <p class="margin-bottom-5">Secondary detail</p>
+                        <a href="" class="invite_button">Invite</a>
+                    </div>
+                    <div class="col-md-12">
+                        <hr/>
+                    </div>
+                    <div class="col-md-3">
+                        <img class="img-circle" src="../../images/pic-1.jpg"/>
+                    </div>
+                    <div class="col-md-9">
+                        <h5>User nameUser nameUser name</h5>
+                        <p class="margin-bottom-5">Secondary detail</p>
+                        <a href="" class="invite_button">Invite</a>
+                    </div>
+                    <div class="col-md-12">
+                        <hr/>
+                    </div>
+                    <div class="col-md-3">
+                        <img class="img-circle" src="../../images/pic-1.jpg"/>
+                    </div>
+                    <div class="col-md-9">
+                        <h5>User name</h5>
+                        <p class="margin-bottom-5">Secondary detail</p>
+                        <a href="#" class="invite_button disabled">Request Sent</a>
+                    </div>
+                    <div class="col-md-12">
+                        <hr/>
+                    </div>
+                </div>
+            </div>
+        </div><!-- @end #content -->
+    </div><!-- @end #w -->
+</div>
+
+<script type="text/javascript" src="../../js/script.js"></script>
+<script>
+    $(document).ready(function(){
+        // handle the mouseenter functionality
+        $(".img").mouseenter(function(){
+            $(this).addClass("hover");
+        })
+            // handle the mouseleave functionality
+                .mouseleave(function(){
+                    $(this).removeClass("hover");
+                });
+    });
+</script>
