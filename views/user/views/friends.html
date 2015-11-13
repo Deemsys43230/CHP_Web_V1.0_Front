@@ -11,10 +11,10 @@
                     </h5>
                     <div class="row">
                         <div class="col-md-7">
-                            <input type="text" class="friend-input" placeholder="Search my friend here..."/>
+                            <input type="text" class="friend-input" placeholder="Search my friend here..." ng-model="myfriendssearch"/>
                         </div>
                         <div class="col-md-5 text-center margin-top-10">
-                            <!--<ul>
+                           <!-- <ul>
                                 <li ng-repeat="item in data | startFrom:currentPage*pageSize | limitTo:pageSize">
                                     {{item}}
                                 </li>
@@ -34,81 +34,18 @@
                             </button>
                         </div>
                     </div>
-
                     <div class="row friends-list">
                         <div id="effect-6" class="effects clearfix">
-                            <div class="col-md-3">
+                            <div class="col-md-3" ng-repeat="myfriends in friendsfilter=( myFriendsList | filter:myfriendssearch | startFrom:currentPage*pageSize | limitTo:pageSize)">
                                 <div class="img">
-                                    <a href="" class="img-shadow"><img src="../../images/pic-1.jpg"/></a>
+                                    <a href="" class="img-shadow"><img ng-src="{{myfriends.imageurl | trusted}}"/></a>
                                     <div class="overlay">
                                         <a href="#" class="expand"><i class="fa fa-times-circle"></i>&nbsp;Unfriend</a>
                                     </div>
                                 </div>
-                                <h5 class="wrap"><a href="">user name</a></h5>
+                                <h5 class="wrap"><a href="">{{myfriends.name}}</a></h5>
                             </div>
-                            <div class="col-md-3">
-                                <div class="img">
-                                    <a href="" class="img-shadow"><img src="../../images/pic-2.jpg"/></a>
-                                    <div class="overlay">
-                                        <a href="#" class="expand"><i class="fa fa-times-circle"></i>&nbsp;Unfriend</a>
-                                    </div>
-                                </div>
-                                <h5 class="wrap"><a href="">user name</a></h5>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="img">
-                                    <a href="" class="img-shadow"><img src="../../images/pic-3.jpg"/></a>
-                                    <div class="overlay">
-                                        <a href="#" class="expand"><i class="fa fa-times-circle"></i>&nbsp;Unfriend</a>
-                                    </div>
-                                </div>
-                                <h5 class="wrap"><a href="">usernameusernameusernameusernameusername</a></h5>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="img">
-                                    <a href="" class="img-shadow"><img src="../../images/pic-1.jpg"/></a>
-                                    <div class="overlay">
-                                        <a href="#" class="expand"><i class="fa fa-times-circle"></i>&nbsp;Unfriend</a>
-                                    </div>
-                                </div>
-                                <h5 class="wrap"><a href="">user name</a></h5>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="img">
-                                    <a href="" class="img-shadow"><img src="../../images/pic-2.jpg"/></a>
-                                    <div class="overlay">
-                                        <a href="#" class="expand"><i class="fa fa-times-circle"></i>&nbsp;Unfriend</a>
-                                    </div>
-                                </div>
-                                <h5 class="wrap"><a href="">user name</a></h5>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="img">
-                                    <a href="" class="img-shadow"><img src="../../images/pic-3.jpg"/></a>
-                                    <div class="overlay">
-                                        <a href="#" class="expand"><i class="fa fa-times-circle"></i>&nbsp;Unfriend</a>
-                                    </div>
-                                </div>
-                                <h5 class="wrap"><a href="">user name</a></h5>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="img">
-                                    <a href="" class="img-shadow"><img src="../../images/pic-1.jpg"/></a>
-                                    <div class="overlay">
-                                        <a href="#" class="expand"><i class="fa fa-times-circle"></i>&nbsp;Unfriend</a>
-                                    </div>
-                                </div>
-                                <h5 class="wrap"><a href="">user name</a></h5>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="img">
-                                    <a href="" class="img-shadow"><img src="../../images/pic-1.jpg"/></a>
-                                    <div class="overlay">
-                                        <a href="#" class="expand"><i class="fa fa-times-circle"></i>&nbsp;Unfriend</a>
-                                    </div>
-                                </div>
-                                <h5 class="wrap"><a href="">user name</a></h5>
-                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -161,27 +98,29 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="input-group">
-                            <input type="text" class="friend-input" placeholder="Search new friend name...">
+                            <input type="text" class="friend-input" placeholder="Search new friend name..." ng-model="friendsearch">
                         <span class="input-group-btn">
-                            <a class="search-btn" type="button">Search</a>
+                            <a class="search-btn" type="button" ng-click="searchFriends(friendsearch)">Search</a>
                         </span>
                         </div>
                     </div>
                 </div>
 
                 <div class="row margin-top-20 content_scrollbar height-350">
+                    <div ng-repeat="searchfriends in searchFriendsList">
                     <div class="col-md-3">
-                        <img class="img-circle" src="../../images/pic-1.jpg"/>
+                        <img class="img-circle" ng-src="{{searchfriends.imageurl | trusted}}"/>
                     </div>
                     <div class="col-md-9">
-                        <h5>User nameUserUser nameUserUser</h5>
-                        <p class="margin-bottom-5">Secondary detail</p>
+                        <h5>{{searchfriends.name}}</h5>
+                        <p class="margin-bottom-5" ng-if="searchfriends.isPrivacy == 1">{{searchfriends.emailid}}</p>
                         <a href="" class="invite_button">Invite</a>
                     </div>
                     <div class="col-md-12">
                         <hr/>
                     </div>
-                    <div class="col-md-3">
+                    </div>
+                    <!--<div class="col-md-3">
                         <img class="img-circle" src="../../images/pic-1.jpg"/>
                     </div>
                     <div class="col-md-9">
@@ -224,7 +163,7 @@
                     </div>
                     <div class="col-md-12">
                         <hr/>
-                    </div>
+                    </div>-->
                 </div>
             </div>
         </div><!-- @end #content -->

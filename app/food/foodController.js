@@ -198,14 +198,14 @@ adminApp.controller("FoodDetailsEditController",function($q,$scope,requestHandle
 
     //For Tag Input
     $scope.tagTransform = function (newTag) {
-
+        if($scope.tagListArray.indexOf(newTag)==-1){
             var item = {
                 "tagid": null,
                 "tagname": newTag
             };
 
             return item;
-
+        }
     };
 
     //Get Particular Food Details
@@ -418,9 +418,13 @@ adminApp.controller("FoodDetailsEditController",function($q,$scope,requestHandle
     });
 
     //Get Tags
+    $scope.tagListArray=[];
     var foodTagPromise=FoodService.doGetTags();
     foodTagPromise.then(function(result){
         $scope.foodTagList=result;
+        $.each($scope.foodTagList, function(index,value){
+            $scope.tagListArray.push(value.tagname);
+        });
     });
 
     //End Initialize Page

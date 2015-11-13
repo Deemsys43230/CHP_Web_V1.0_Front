@@ -149,7 +149,8 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'userApp',
                             files:[
-                                '../../app/friends/friendsController.js'
+                                '../../app/friends/friendsController.js',
+                                '../../app/friends/friendsService.js'
                             ]
                         })
                     }
