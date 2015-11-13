@@ -8372,6 +8372,10 @@ tr.sort-icon th i{
     height: 320px !important;
 }
 
+.height-350{
+    height: 350px !important;
+}
+
 .min-height-350{
 	min-height: 350px !important;
 }
