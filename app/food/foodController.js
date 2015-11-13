@@ -290,9 +290,6 @@ adminApp.controller("FoodDetailsEditController",function($q,$scope,requestHandle
     //Do Update Food
     $scope.doUpdateFoodDetails= function () {
 
-   requestHandler.postRequest("admin/checkFoodNameExists/",{"foodid":$scope.foodDetails.foodid,"foodname":$scope.foodDetails.foodname}).then(function(response){
-        if(response.data.Response_status==0){
-
             //For disabling the update button after one click
             $scope.doingUpdate = true;
             //Get Update Details
@@ -353,13 +350,6 @@ adminApp.controller("FoodDetailsEditController",function($q,$scope,requestHandle
                 });
             }
 
-        }
-       else if(response.data.Response_status==1){
-            errorMessage(Flash,"Food&nbsp;already&nbsp;exists");
-        }
-
-   });
-
 
     };
 
@@ -367,8 +357,6 @@ adminApp.controller("FoodDetailsEditController",function($q,$scope,requestHandle
     //Do Add Food Details
     $scope.doAddFoodDetails= function () {
 
-        requestHandler.postRequest("admin/checkFoodNameExists/",{'foodname':$scope.foodDetails.foodname}).then(function(response){
-          if(response.data.Response_status == 0)  {
 
               //Get Add Details
               $scope.foodDetails.sessionid=FoodService.getSessionArray($scope.foodDetails.sessionSet);
@@ -404,18 +392,7 @@ adminApp.controller("FoodDetailsEditController",function($q,$scope,requestHandle
                   });
               });
 
-          }
-            else if(response.data.Response_status == 1){
-              errorMessage(Flash,"Food&nbsp;already&nbsp;exists");
-          }
-
-        });
-
-
-
-
-
-    };
+   };
 
     $scope.isClean=function(){
         return angular.equals(original, $scope.foodDetails);

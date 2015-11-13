@@ -45,8 +45,8 @@
                         <td>{{category.categoryname}}</td>
                         <td>
                             <a href="" class="btn-xs btn-warning" ng-click="doEditFoodCategory(category.categoryid)">Edit</a>
-                            <a href="" class="btn-xs btn-success" ng-click="doEnableDisableFoodCategory(category.categoryid)" ng-show="category.status==1">Enable</a>
-                            <a href="" class="btn-xs btn-danger" ng-click="doEnableDisableFoodCategory(category.categoryid)" ng-hide="category.status==1">Disable</a>
+                            <a href="" class="btn-xs btn-success" ng-click="doEnableDisableFoodCategory(category.categoryid)" ng-show="category.status==0">Enable</a>
+                            <a href="" class="btn-xs btn-danger" ng-click="doEnableDisableFoodCategory(category.categoryid)" ng-hide="category.status==0">Disable</a>
                             <a href="" class="btn-xs btn-danger" ng-click="doDeleteFoodCategory(category.categoryid)">Delete</a>
                         </td>
                     </tr>
