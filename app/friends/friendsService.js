@@ -9,7 +9,7 @@ userApp.factory("FriendsService",function(requestHandler){
         return requestHandler.getRequest("user/getMyFriendsList/","").then(function(response){
             return response.data.Friends_List;
         },function(response){
-            alert("Please try again later");
+            errorMessage(Flash,"Please try again later");
         })
     };
 
@@ -18,7 +18,7 @@ userApp.factory("FriendsService",function(requestHandler){
         return requestHandler.getRequest("user/getFriendsRequestList/","").then(function(response){
             return response.data.Friends_List;
         },function(response){
-            alert("Please try again later");
+            errorMessage(Flash,"Please try again later");
         })
     };
 
@@ -27,16 +27,34 @@ userApp.factory("FriendsService",function(requestHandler){
         return requestHandler.postRequest("user/searchFriends/",{"name":name}).then(function(response){
             return response.data.Friends_List;
         },function(response){
-            alert("Please try again later");
+            errorMessage(Flash,"Please try again later");
         })
     };
 
-    //Search friends
+    //Invite friends
     userFriendsServiceObj.doInviteFriends= function (id) {
         return requestHandler.postRequest("user/sendFriendRequest/",{"friends_friendid":id}).then(function(response){
             return response;
         },function(response){
-            alert("Please try again later");
+            errorMessage(Flash,"Please try again later");
+        })
+    };
+
+    //Accept friends
+    userFriendsServiceObj.doAcceptFriends= function (id) {
+        return requestHandler.postRequest("user/acceptFriendRequest/",{"friends_friendid":id}).then(function(response){
+            return response;
+        },function(response){
+            errorMessage(Flash,"Please try again later");
+        })
+    };
+
+    //Deny friends
+    userFriendsServiceObj.doDenyFriends= function (id) {
+        return requestHandler.postRequest("user/denyFriendRequest/",{"friends_friendid":id}).then(function(response){
+            return response;
+        },function(response){
+            errorMessage(Flash,"Please try again later");
         })
     };
 

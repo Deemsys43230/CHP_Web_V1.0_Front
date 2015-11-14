@@ -3,7 +3,7 @@
     <div id="w" class="clearfix">
         <div id="demography-content" class="height-520">
             <div class="col-md-8">
-                <div flash-message="2000" class="col-md-3 pull-right"></div>
+                <div flash-message="2000" class="col-md-4 pull-right"></div>
                 <div class="my-friends">
 
                     <h5 class="classic-title"><span><a href=""><i class="fa fa-users my-friends-list"></i>&nbsp;&nbsp;My Friends</a></span>
@@ -36,7 +36,7 @@
                     </div>
                     <div class="row friends-list">
                         <div id="effect-6" class="effects clearfix">
-                            <div class="col-md-3" ng-repeat="myfriends in friendsfilter=( myFriendsList | filter:myfriendssearch | startFrom:currentPage*pageSize | limitTo:pageSize)">
+                            <div class="col-md-3" ng-repeat="myfriends in friendsfilter=( myFriendsList | filter:myfriendssearch | startFrom:currentPage*pageSize | limitTo:pageSize)" ng-show="myFriendsList.length!=0">
                                 <div class="img">
                                     <a href="" class="img-shadow"><img ng-src="{{myfriends.imageurl | trusted}}"/></a>
                                     <div class="overlay">
@@ -45,7 +45,8 @@
                                 </div>
                                 <h5 class="wrap"><a href="">{{myfriends.name}}</a></h5>
                             </div>
-
+                            <div class="col-md-3" ng-show="myFriendsList.length==0"><p class="text-center">No Friends Found!!!</p></div>
+                            <div class="col-md-3" ng-show="!friendsfilter.length"><p class="text-center">No Friends Found!!!</p></div>
                         </div>
                     </div>
                 </div>
@@ -83,8 +84,8 @@
                             <div class="col-md-3" ng-repeat="friendsrequest in requestedFriendsList | startFrom:currentPage1*pageSize1 | limitTo:pageSize1">
                                 <a href="" class="img-shadow"><img ng-src="{{friendsrequest.imageurl | trusted}}"/></a>
                                 <h5 class="wrap">{{friendsrequest.name}}<br/>
-                                <a href="" class="btn btn-xs btn-success margin-top-5">Accept</a>
-                                <a href="" class="btn btn-xs btn-danger margin-top-5">Deny</a>
+                                <a href="" class="btn btn-xs btn-success margin-top-5" ng-click="acceptFriends(friendsrequest.userid)">Accept</a>
+                                <a href="" class="btn btn-xs btn-danger margin-top-5" ng-click="denyFriends(friendsrequest.userid)">Deny</a>
                                 </h5>
                             </div>
 
@@ -98,16 +99,16 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="input-group">
-                            <input type="text" class="friend-input" placeholder="Search new friend name..." ng-model="friendsearch">
-                        <span class="input-group-btn">
-                            <a class="search-btn" type="button" ng-click="searchFriends(friendsearch)">Search</a>
-                        </span>
+                            <input type="text" class="friend-input" placeholder="Search new friend name..." ng-model="friendsearch" ng-keypress="searchFriends(friendsearch)">
+                        <!--<span class="input-group-btn">
+                            <a href="" class="search-btn" type="button">Search</a>
+                        </span>-->
                         </div>
                     </div>
                 </div>
 
                 <div class="row margin-top-20 content_scrollbar height-350">
-                    <div ng-repeat="searchfriends in searchFriendsList">
+                    <div ng-repeat="searchfriends in searchFriendsList" ng-show="searchFriendsList.length!=0">
                     <div class="col-md-3">
                         <img class="img-circle" ng-src="{{searchfriends.imageurl | trusted}}"/>
                     </div>
@@ -123,6 +124,7 @@
                         <hr/>
                     </div>
                     </div>
+                    <div ng-show="searchFriendsList.length == 0"><p class="text-center">No Users Found!!!</p></div>
                 </div>
             </div>
         </div><!-- @end #content -->

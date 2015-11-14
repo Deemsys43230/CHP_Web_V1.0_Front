@@ -75,9 +75,9 @@ adminApp.controller('FoodController',function ($scope,requestHandler,Flash) {
 
     $scope.sortfoodidicon="fa fa-caret-down";
     $scope.sortfoodnameicon = "fa fa-caret-down";
-    $scope.sortcategoryicon = "fa fa-caret-down";
+   /* $scope.sortcategoryicon = "fa fa-caret-down";
     $scope.sortsessionicon = "fa fa-caret-down";
-    $scope.sortregionicon = "fa fa-caret-down";
+    $scope.sortregionicon = "fa fa-caret-down";*/
 
     //sorting by food Id
     $scope.sortFoodId = function(){
@@ -95,7 +95,7 @@ adminApp.controller('FoodController',function ($scope,requestHandler,Flash) {
         else $scope.sortfoodnameicon="fa fa-caret-down";
     };
 
-    //sorting by category
+   /* //sorting by category
     $scope.sortCategory = function(){
         $scope.sortKey = 'category.categoryname';
         $scope.reverse = !$scope.reverse;
@@ -119,7 +119,7 @@ adminApp.controller('FoodController',function ($scope,requestHandler,Flash) {
         $scope.reverse = !$scope.reverse;
         if($scope.sortregionicon=="fa fa-caret-down")$scope.sortregionicon="fa fa-caret-up";
         else $scope.sortregionicon="fa fa-caret-down";
-    };
+    };*/
 
     //Get Food List
     $scope.doGetAllFoodItems=function(){

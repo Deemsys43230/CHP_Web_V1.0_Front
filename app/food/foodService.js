@@ -184,8 +184,8 @@ adminApp.factory("FoodService",function(requestHandler){
 
     //Get Measures
     foodServiceObj.doGetMeasures= function (measureid) {
-        return requestHandler.getRequest("admin/viewAllfoodMeasure","").then(function(response){
-            var foodMeasureListAll=response.data.viewAllfoodMeasure;
+        return requestHandler.getRequest("admin/viewfoodMeasure","").then(function(response){
+            var foodMeasureListAll=response.data.viewfoodMeasure;
             $.each(foodMeasureListAll, function(index,listValue) {
                 listValue.checked=false;
                 $.each(measureid, function(index,messureValue) {

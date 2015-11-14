@@ -147,6 +147,7 @@ adminApp.controller('FoodCategoryController',function($scope,requestHandler,Flas
     $scope.reset=function(){
         $scope.foodCategory={};
         $scope.foodCategoryAddForm.$setPristine();
+        $scope.foodCategory.categoryname="";
         //$scope.foodCategoryEditForm.$setPristine();
     };
 

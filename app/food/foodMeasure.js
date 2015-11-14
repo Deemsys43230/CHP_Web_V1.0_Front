@@ -10,12 +10,14 @@ var original ="";
     //Reset Scope
     $scope.reset=function(){
         $scope.list={};
+        $scope.measureForm.$setPristine();
+        $scope.list.measurename="";
+
     };
 
     //View All Measure
     $scope.doViewAllFoodMeasure=function(){
         $scope.loaded=true;
-        $scope.reset();
         requestHandler.getRequest("admin/viewAllfoodMeasure/", "").then(function(response){
             $scope.measureList=response.data.viewAllfoodMeasure;
             $scope.loaded=false;

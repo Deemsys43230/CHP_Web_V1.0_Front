@@ -3,6 +3,9 @@ var userApp = angular.module('userApp', ['ngRoute','oc.lazyLoad','requestModule'
 
 userApp.controller('FriendsController',function($scope,requestHandler,Flash,FriendsService){
 
+    //Initialize search
+    $scope.friendsearch="";
+
     //My Friends Pagination starts
     $scope.currentPage = 0;
     $scope.pageSize = 8;
@@ -42,9 +45,8 @@ userApp.controller('FriendsController',function($scope,requestHandler,Flash,Frie
         });
     };
 
-    $scope.searchFriends=function(name){
-
-        var getSearchFriendsPromise=FriendsService.doSearchFriends(name);
+    $scope.searchFriends=function(){
+        var getSearchFriendsPromise=FriendsService.doSearchFriends($scope.friendsearch);
         getSearchFriendsPromise.then(function(result){
             $scope.searchFriendsList=result;
         });
@@ -55,19 +57,46 @@ userApp.controller('FriendsController',function($scope,requestHandler,Flash,Frie
         inviteFriendsPromise.then(function(result){
             if(result.data.Response_status ==1){
                 successMessage(Flash,"Friend&nbsp;Request&nbsp;Sent");
-                $scope.searchFriends(name);
+                $scope.searchFriends('');
             }
-           else if(result.data.Response_status = 0){
+           else if(result.data.Response_status == 0){
                 errorMessage(Flash,"Already Request Sent");
             }
         })
     }
 
+    $scope.acceptFriends=function(id){
+        var acceptFriendsPromise = FriendsService.doAcceptFriends(id);
+        acceptFriendsPromise.then(function(result){
+            if(result.data.Response_status ==1){
+                successMessage(Flash,"Friend&nbsp;Request&nbsp;Accepted");
+                $scope.myFriends();
+            }
+            else if(result.data.Response_status == 0){
+                errorMessage(Flash,"No Friends pair found");
+            }
+        })
+    }
+
+    $scope.denyFriends=function(id){
+        var denyFriendsPromise = FriendsService.doDenyFriends(id);
+        denyFriendsPromise.then(function(result){
+            if(result.data.Response_status ==1){
+                successMessage(Flash,"Friend&nbsp;Request&nbsp;Rejected");
+            }
+            else if(result.data.Response_status == 0){
+                errorMessage(Flash,"No friends pair found");
+            }
+        })
+    }
+
+
+
     //Onload
     $scope.initialLoad=function(){
         $scope.myFriends();
         $scope.requestedFriends();
-        $scope.searchFriends('');
+        $scope.searchFriends();
     };
 
     $scope.initialLoad();
