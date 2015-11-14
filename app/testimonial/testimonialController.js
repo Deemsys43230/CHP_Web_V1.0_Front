@@ -201,7 +201,7 @@ adminApp.directive('validFile',function(){
             })
         }
     }
-})
+});
 
 
 var commonApp = angular.module('commonApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate']);

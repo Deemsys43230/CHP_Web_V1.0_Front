@@ -151,6 +151,7 @@ userApp.controller('UserCoachController',function($scope,requestHandler,Flash,$l
     $scope.doSubscribeCoach = function(coach){
        requestHandler.postRequest("user/subscribeCoach/",{"coach":coach}).then(function(response){
            successMessage(Flash,"Successfully subscribed");
+           $scope.doGetCoachDetailsByUser(coach);
        },function(){
            errorMessage(Flash,"Please try again later!")
        });

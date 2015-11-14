@@ -113,6 +113,22 @@ adminApp.controller('ExerciseEditController',function($q,$scope,requestHandler,F
     $scope.imageUpload=false;
     $scope.tagListArray=[];
 
+    $scope.imageSet=false;
+
+    $scope.fileNameChanged = function(element)
+    {
+        if(!$scope.imageSet){
+            if(element.files.length > 0){
+                $scope.inputContainsFile = false;
+                $scope.imageSet=true;
+            }
+            else{
+                $scope.inputContainsFile = true;
+                $scope.imageSet=false;
+            }
+        }
+    };
+
     //Get Tags
     var excerciseTagPromise=ExerciseService.doGetTags();
     excerciseTagPromise.then(function(result){
@@ -441,5 +457,19 @@ adminApp.filter('html', ['$sce', function ($sce) {
     };
 }]);
 
-
+// Validation for file upload
+adminApp.directive('validFile',function(){
+    return {
+        require:'ngModel',
+        link:function(scope,el,attrs,ngModel){
+            //change event is fired when file is selected
+            el.bind('change',function(){
+                scope.$apply(function(){
+                    ngModel.$setViewValue(el.val());
+                    ngModel.$render();
+                })
+            })
+        }
+    }
+});
 

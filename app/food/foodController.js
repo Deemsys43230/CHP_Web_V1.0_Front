@@ -196,6 +196,22 @@ adminApp.controller("FoodDetailsEditController",function($q,$scope,requestHandle
     $scope.isNew=$route.current.isNew;
     $scope.imageUpload=false;
 
+    $scope.imageSet=false;
+
+    $scope.fileNameChanged = function(element)
+    {
+        if(!$scope.imageSet){
+            if(element.files.length > 0){
+                $scope.inputContainsFile = false;
+                $scope.imageSet=true;
+            }
+            else{
+                $scope.inputContainsFile = true;
+                $scope.imageSet=false;
+            }
+        }
+    };
+
     //For Tag Input
     $scope.tagTransform = function (newTag) {
         if($scope.tagListArray.indexOf(newTag)==-1){
@@ -488,3 +504,20 @@ adminApp.filter('propsFilter', function() {
             return out;
         };
     });
+
+
+// Validation for file upload
+adminApp.directive('validFile',function(){
+    return {
+        require:'ngModel',
+        link:function(scope,el,attrs,ngModel){
+            //change event is fired when file is selected
+            el.bind('change',function(){
+                scope.$apply(function(){
+                    ngModel.$setViewValue(el.val());
+                    ngModel.$render();
+                })
+            })
+        }
+    }
+});

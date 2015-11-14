@@ -25,8 +25,8 @@
         <span class="col-md-12 margin-top-10 no-padding" ng-if="coachReviews.averageRatings!=0"><a href="" class="btn-sm btn-warning" ng-click="coachReview(usercoachdetails.userid)">View Reviews</a></span>
     </div>
     <div class="col-md-12 text-center">
-        <span ng-if="checkSubscribed=0"><a href="" ng-click="doSubscribeCoach(usercoachdetails.userid)" class="btn register_button"> Subscribe </a></span>
-        <span ng-if="checkSubscribed=1"><a href="" ng-click="doUnsubscribeCoach(usercoachdetails.userid)" class="btn cancel_button"> Unsubscribe </a></span>
+        <span ng-show="usercoachdetails.coachEnrollStatus==0"><a href="" ng-click="doSubscribeCoach(usercoachdetails.userid)" class="btn register_button"> Subscribe </a></span>
+        <span ng-hide="usercoachdetails.coachEnrollStatus==0"><a href="" ng-click="doUnsubscribeCoach(usercoachdetails.userid)" class="btn cancel_button"> Unsubscribe </a></span>
     </div>
 </div>
 

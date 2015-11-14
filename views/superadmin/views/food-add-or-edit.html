@@ -75,7 +75,9 @@
                     </span>
                     </div>
                 </div>
-
+                <span ng-show="inputContainsFile">
+                    <span class="error-message textarea-errormessage20-left"><span>Required.</span></span>
+                </span>
                 <div class="col-md-3 coach-details text-center">
                     <img class="food-image-wrap" id="food-image-change" ng-src="{{foodDetails.foodImagePath|trusted}}"/><br/><br/>
                     <a id="modal_trigger" href="#modal" onclick="return false;" ng-click="doRefreshPreview();" class="btn-sm btn-warning">Change Food Image</a>
@@ -337,6 +339,9 @@
     <section class="popupBody">
         <!-- Register Form -->
         <div class="common_model">
+            <span ng-show="inputContainsFile">
+                    <span class="error-message textarea-errormessage20-left"><span>Required.</span></span>
+                </span>
             <p>Preview:</p>
             <img class="food-preview center-block" ng-src="{{foodDetails.foodimage|trusted}}"/>
             <h6 class="text-red text-center margin-tb-10">Note : Upload Image Size 1000x1000</h6>
@@ -346,7 +351,7 @@
                 <div class="one_half">
                     <div class="fileUpload food-button">
                         <span>Choose Image</span>
-                        <input type="file"class="upload" ng-file-select="onFileSelect($files)" />
+                        <input type="file" name="image" valid-file  ng-model="foodDetails.foodimage" class="upload" ng-file-select="onFileSelect($files)"  onblur="angular.element(this).scope().fileNameChanged(this)" required/>
                     </div>
                 </div>
                 <div class="one_half last"><a href="" onclick="return false;" class="food-button export modal_close" ng-click="doUpdateFoodImage();">Save Image</a></div>

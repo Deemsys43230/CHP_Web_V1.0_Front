@@ -50,7 +50,9 @@
                     <h5>Energy Spent By Exercise Type :</h5>
                     </div>
                 </div>
-
+                <span ng-show="inputContainsFile">
+                    <span class="error-message textarea-errormessage20-left"><span>Required.</span></span>
+                </span>
                 <div class="col-md-3 coach-details text-center margin-top-10">
                     <!--<span class="error-message textarea-errormessage20-left" ng-show="isNoImage"><span>Required</span></span>-->
                     <img class="food-image-wrap" id="food-image-change" ng-src="{{exerciseDetail.imageurl|trusted}}"/><br/><br/>
@@ -109,6 +111,9 @@
     <section class="popupBody">
         <!-- Register Form -->
         <div class="common_model">
+            <span ng-show="inputContainsFile">
+                    <span class="error-message textarea-errormessage20-left"><span>Required.</span></span>
+                </span>
             <p>Preview:</p>
             <img class="food-preview center-block" ng-src="{{exerciseDetail.exerciseimage|trusted}}"/>
             <h6 class="text-red text-center margin-tb-10">Note : Upload Image Size 1000x1000</h6>
@@ -118,7 +123,7 @@
                 <div class="one_half">
                     <div class="fileUpload food-button">
                         <span>Choose Image</span>
-                        <input type="file"class="upload" ng-file-select="onFileSelect($files)" />
+                        <input type="file" name="image" valid-file  ng-model="exerciseDetail.exerciseimage" class="upload" ng-file-select="onFileSelect($files)"  onblur="angular.element(this).scope().fileNameChanged(this)" required/>
                     </div>
                 </div>
                 <div class="one_half last"><a href="" onclick="return false;" class="food-button export modal_close" ng-click="doUpdateExerciseImage();">Save Image</a></div>
