@@ -229,6 +229,70 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'LatestNewsEditController'
             }).
+            when('/forums', {
+                templateUrl: 'views/site-forums.html',
+                resolve: {
+                    loadMyFiles:function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'adminApp',
+                            files:[
+                                '../../js/bootstrap.min.js',
+                                '../../angular/angular-utils-pagination/dirPagination.js',
+                                '../../app/forums/forumsController.js'
+                            ]
+                        })
+                    }
+                },
+                controller:'ForumsController'
+            }).
+            when('/viewForum/:id', {
+                templateUrl: 'views/site-view-forum.html',
+                resolve: {
+                    loadMyFiles:function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'adminApp',
+                            files:[
+                                '../../app/forums/forumsController.js'
+                            ]
+                        })
+                    }
+                },
+                controller:'ForumsEditController'
+            }).
+            when('/editForum/:id', {
+                templateUrl: 'views/site-add-or-edit-forum.html',
+                resolve: {
+                    loadMyFiles:function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'adminApp',
+                            files:[
+                                '../../js/bootstrap.min.js',
+                                '../../plugin/text-editor/summernote.js',
+                                '../../plugin/text-editor/summernote.css',
+                                '../../app/forums/forumsController.js'
+                            ]
+                        })
+                    }
+                },
+                controller:'ForumsEditController'
+            }).
+            when('/addForum', {
+                templateUrl: 'views/site-add-or-edit-forum.html',
+                resolve: {
+                    loadMyFiles:function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'adminApp',
+                            files:[
+                                '../../js/bootstrap.min.js',
+                                '../../plugin/text-editor/summernote.js',
+                                '../../plugin/text-editor/summernote.css',
+                                '../../app/forums/forumsController.js'
+                            ]
+                        })
+                    }
+                },
+                controller:'ForumsController'
+            }).
             when('/testimonials', {
                 templateUrl: 'views/site-testimonials.html',
                 resolve: {

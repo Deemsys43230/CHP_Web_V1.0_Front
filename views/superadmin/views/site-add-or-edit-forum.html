@@ -1,0 +1,50 @@
+
+<!-- Start Page Banner -->
+
+<div class="page-banner">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-3">
+                <h4 class="classic-title"><span>Site Management</span></h4>
+                <div ng-include src="'views/site-menu.html'" onload="activeClass"></div>
+            </div>
+            <div class="col-md-9" ng-init="editForumInit()">
+                <a href="#forums" class="back-button pull-right margin-left-10"><i class="fa fa-arrow-circle-o-left"></i> Back to Forum List</a>
+                <h3 class="margin-bottom-10"><i class="fa fa-pencil"></i> &nbsp;{{title}}</h3>
+                <hr/>
+                <div class="row">
+                    <form name="ForumForm">
+                        <div class="col-md-2">
+                            <h4>Title :</h4>
+                        </div>
+                        <div class="col-md-10 margin-bottom-20">
+
+                            <input class="form-control" name="title" ng-model="forumDetails.posttitle" required>
+                            <span ng-show="ForumForm.title.$dirty&&ForumForm.title.$invalid">
+                                  <span class="error-message" ng-show="ForumForm.title.$error.required"><span>Required.</span></span>
+                             </span>
+                        </div>
+                        <div class="col-md-2">
+                            <h4>Content :</h4>
+                        </div>
+                        <div class="col-md-10">
+                             <span ng-show="ForumForm.description.$dirty&&ForumForm.description.$invalid">
+                                  <span class="error-message textarea-errormessage40" ng-show="ForumForm.description.$error.required"><span>Required.</span></span>
+                             </span>
+                            <div summernote config="options" name="description"  ng-model="forumDetails.postdescription" required></div>
+                        </div>
+                    </form>
+                </div>
+                <div class="text-center margin-top-20">
+                    <a href="" class="btn btn-success" ng-disabled="ForumForm.$invalid" ng-click="doAddForum()" ng-show="isNew">Add Latest News</a>
+                    <a href="" class="btn btn-success" ng-disabled="ForumForm.$invalid" ng-click="doUpdateForum()" ng-hide="isNew">Save Changes</a>
+                    <a href="#forums" class="btn btn-warning">Cancel</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- End Page Banner -->
+<script type="text/javascript" src="../../js/script.js"></script>

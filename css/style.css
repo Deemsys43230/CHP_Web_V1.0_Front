@@ -8317,6 +8317,15 @@ tr.sort-icon th i{
     overflow:hidden;
 }
 
+.line-clamp-md-low{
+    position: absolute;
+    max-height: 20px;
+    width: 30%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow:hidden;
+}
+
 .line-clamp-lg{
     position: absolute;
     max-height: 20px;
