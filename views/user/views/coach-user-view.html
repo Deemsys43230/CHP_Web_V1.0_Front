@@ -116,10 +116,9 @@
                 <p>Rate the coach</p>
                 <div><star-rating ng-model="coachreview" ></star-rating></div>
                 <p>Review Summary</p>
-                <input type="text" name="reviewtitle" ng-model="coachreview.reviewtitle" ng-pattern="/^ *([a-zA-Z]+ ?)+ *$/" maxlength="45"  required/>
+                <input type="text" name="reviewtitle" ng-model="coachreview.reviewtitle"  maxlength="100"  required/>
                 <span ng-show="reviewForm.reviewtitle.$dirty&&reviewForm.reviewtitle.$invalid">
                                 <span class="error-message" ng-show="reviewForm.reviewtitle.$error.required"><span>Required.</span></span>
-                             <span class="error-message" ng-show="reviewForm.reviewtitle.$error.pattern"><span>Enter&nbsp;Valid&nbsp;name.</span></span>
                          </span>
                 <p>Review:</p>
                 <textarea type="text" class="height-150" name="reviewdescription" ng-model="coachreview.reviewdescription"maxlength="300"  required/></textarea>
