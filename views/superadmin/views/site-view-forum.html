@@ -15,7 +15,11 @@
                     <p class="text-italic margin-top-5">Published on : {{forumDetails.postedon}}</p>
                     <div id="forumDescription"><div class="margin-top-20" ng-bind-html="forumDetails.postdescription | html"></div></div><br/>
                     <h4>Comments</h4>
-                    <div ng-repeat="forumAnswerList in forumAnswers">
+                    <div class="text-center margin-tb-20" ng-show="forumAnswers.length==0">
+                        <img src="../../images/no-reviews.png"/>
+                        <h1 class="text-gray">NO COMMENTS</h1>
+                    </div>
+                    <div ng-repeat="forumAnswerList in forumAnswers" ng-hide="forumAnswers.length==0">
                         <div class="row">
                             <div class="col-md-12">
                                 <hr/>
