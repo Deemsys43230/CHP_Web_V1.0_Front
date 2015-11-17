@@ -1,10 +1,12 @@
 var userApp = angular.module('userApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','angularUtils.directives.dirPagination']);
 
-userApp.controller('UserCoachController',function($scope,requestHandler,Flash,$location,$q,$routeParams) {
+userApp.controller('UserCoachController',function($scope,requestHandler,Flash,$location,$q,$routeParams,$window) {
 
+    $scope.coachreview = {ratinglevel:1};
     $scope.averageRate=0.1;
     $scope.paginationLoad=false;
     var myCoachIdListArray = [];
+    $scope.disablereview=false;
 
   // To display Coach list by user
     $scope.doGetCoachListByUser=function(){
@@ -179,6 +181,8 @@ userApp.controller('UserCoachController',function($scope,requestHandler,Flash,$l
         };
         $scope.doGetCoachRatings($routeParams.id);
         $scope.subscribed=1;
+
+        $scope.checkReview();
     };
 
     $scope.coachReview=function(id){
@@ -193,6 +197,46 @@ userApp.controller('UserCoachController',function($scope,requestHandler,Flash,$l
     $scope.coachView=function(id){
         $scope.doGetCoachDetailsByUser(id);
     };
+
+    $scope.doAddReview=function(){
+        $scope.coachreview.review_coach=$routeParams.id;
+        requestHandler.postRequest("user/insertRatingsandReviews/",$scope.coachreview).then(function(response){
+
+          successMessage(Flash,"Successfully Added");
+         $scope.userCoachViewInit();
+        }, function () {
+            errorMessage(Flash, "Please try again later!")
+        });
+    };
+
+
+    $scope.reset=function(){
+        $scope.coachreview.reviewtitle="";
+        $scope.coachreview.reviewdescription="";
+        $scope.reviewForm.$setPristine();
+    };
+
+
+    $scope.checkReview=function(){
+        $scope.coachReviews="";
+
+        requestHandler.getRequest("getUserId/","").then(function(response){
+            $scope.userProfile=response.data.User_Profile;
+           $scope.loginuserid = $scope.userProfile.userid;
+           requestHandler.getRequest("getRatingsandReviews/"+$routeParams.id, "").then(function (response) {
+               $scope.coachReviews = response.data.Ratings_Reviews.Reviews;
+               $.each($scope.coachReviews,function(index,value){
+                   if(value.review_user == $scope.loginuserid){
+                       $scope.disablereview = true;
+                   }
+
+               });
+
+            });
+
+        });
+    }
+
 });
 
 
@@ -202,6 +246,46 @@ userApp.filter('trusted', ['$sce', function ($sce) {
         return $sce.trustAsResourceUrl(url);
     };
 }]);
+
+userApp.directive("starRating", function() {
+    return {
+        restrict : "EA",
+        template : "<ul class='rating' ng-class='{readonly: readonly}'>" +
+            "  <li ng-repeat='star in stars' ng-class='star' ng-click='toggle($index)'>" +
+            "    <i class='fa fa-star'></i>" + //&#9733
+            "  </li>" +
+            "</ul>",
+        scope : {
+            ratingValue : "=ngModel",
+            max : "=?", //optional: default is 5
+            readonly: "=?"
+        },
+        link : function(scope, elem, attrs) {
+            if (scope.max == undefined) { scope.max = 5; }
+            function updateStars() {
+                scope.stars = [];
+                for (var i = 0; i < scope.max; i++) {
+                    scope.stars.push({
+                        filled : (i < scope.ratingValue.ratinglevel)
+                    });
+                }
+            };
+            scope.toggle = function(index) {
+                if (scope.readonly == undefined || scope.readonly == false){
+                    scope.ratingValue.ratinglevel = index + 1;
+                    scope.onRatingSelected({
+                        ratinglevel: index + 1
+                    });
+                }
+            };
+            scope.$watch("ratingValue.ratinglevel", function(oldVal, newVal) {
+                if (newVal) { updateStars(); }
+            });
+        }
+    };
+});
+
+
 
 userApp.directive("averageStarRating", function() {
         return {

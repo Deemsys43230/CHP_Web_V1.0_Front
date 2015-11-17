@@ -135,7 +135,9 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../plugin/vertical-carousel/vertical-carousel.js',
                                 '../../plugin/vertical-carousel/vertical-carousel.css',
                                 '../../angular/angular-utils-pagination/dirPagination.js',
-                                '../../app/userCoach/userCoachController.js'
+                                '../../app/userCoach/userCoachController.js',
+                                '../../plugin/popup/style.css',
+                                '../../plugin/popup/jquery.leanModal.min.js'
                             ]
                         })
                     }
