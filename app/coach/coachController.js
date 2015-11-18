@@ -58,24 +58,115 @@ adminApp.controller('CoachController',function($scope,requestHandler,Flash) {
 
 adminApp.controller('CoachViewController',function($scope,requestHandler,Flash,$routeParams) {
 
-    $scope.doGetCoachProfile = function () {
-        requestHandler.getRequest("getCoachIndividualDetail/"+$routeParams.id, "").then(function (response) {
-            $scope.coachProfile = response.data.getCoachIndividualDetail;
-            $scope.coachProfile.imageurl = requestHandler.convertUrl($scope.coachProfile.imageurl);
-            $scope.coachProfile.imageurl = $scope.coachProfile.imageurl + "?decache=" + Math.random();
+    $scope.averageRate=0.1;
+    $scope.paginationLoad=false;
+
+    $scope.doGetCoachDetailsByUser= function (id){
+
+        $scope.coach = {
+            status: 'coach-view'
+        };
+
+
+
+
+        $scope.viewload=true;
+
+        requestHandler.getRequest("getCoachIndividualDetailbyAdmin/"+id, "").then(function(response){
+
+            $scope.usercoachdetails=response.data.getCoachIndividualDetail;
+
+            if($scope.usercoachdetails.about==null){
+                $scope.usercoachdetails.about = "NA";
+            }
+
+            if($scope.usercoachdetails.specialist==null){
+                $scope.usercoachdetails.specialist = "NA";
+            }
+
+            if($scope.usercoachdetails.qualification==null){
+                $scope.usercoachdetails.qualification = "NA";
+            }
+
+            if($scope.usercoachdetails.experience==null){
+                $scope.usercoachdetails.experience = "0";
+            }
+
+            if($scope.usercoachdetails.specialist==null){
+                $scope.usercoachdetails.specialist = "NA";
+            }
+
+            if($scope.usercoachdetails.phone==null){
+                $scope.usercoachdetails.phone = "NA";
+            }
+
+            if($scope.usercoachdetails.dob==null){
+                $scope.usercoachdetails.dob = "NA";
+            }
+
+            if($scope.usercoachdetails.country==null){
+                $scope.usercoachdetails.country = "NA";
+            }
+
+            if($scope.usercoachdetails.state==null){
+                $scope.usercoachdetails.state = "NA";
+            }
+
+            if($scope.usercoachdetails.city==null){
+                $scope.usercoachdetails.city = "NA";
+            }
+
+            if($scope.usercoachdetails.zipcode==null){
+                $scope.usercoachdetails.zipcode = "NA";
+            }
+
         });
 
 
-        requestHandler.getRequest("getRatingsandReviews/"+$routeParams.id, "").then(function (response) {
 
-            $scope.coachReviews = response.data.Ratings_Reviews.Reviews;
-            $scope.averageRatings = response.data.Ratings_Reviews.averageRatings;
+        requestHandler.getRequest("getRatingsandReviews/"+id, "").then(function (response) {
+            $scope.coachReviews = response.data.Ratings_Reviews;
+            $scope.viewload=false;
+            $scope.totalRatings = $scope.coachReviews.totalRatings;
+            $scope.avgRatings = $scope.coachReviews.averageRatings;
+
+            if($scope.coachReviews.averageRatings==0)
+                $scope.averageRate=0.1;
+            else
+                $scope.averageRate=$scope.coachReviews.averageRatings;
+        },function(){
+        },function(){
+            errorMessage(Flash,"Please try again later!")
+        });
+
+    };
+
+
+
+    $scope.doGetCoachRatings= function (id) {
+        $scope.reviewload=true;
+        requestHandler.getRequest("getRatingsandReviews/"+id, "").then(function(response){
+            $scope.coachReviews=response.data.Ratings_Reviews.Reviews;
+            $scope.reviewload=false;
         });
     };
-    
-    $scope.doGetCoachProfile();
 
+    $scope.coachReview=function(id){
+        $scope.doGetCoachRatings(id);
+        $scope.coachViewId=id;
+        $scope.coach = {
+            status: 'coach-reviews'
+        };
+    };
 
+    $scope.userCoachViewInit=function(){
+        $scope.doGetCoachDetailsByUser($routeParams.id);
+        $scope.coachView = {
+            status: 'coach-reviews'
+        };
+        $scope.doGetCoachRatings($routeParams.id);
+
+    };
 });
 
 // render image to view in list
@@ -84,3 +175,40 @@ adminApp.filter('trusted', ['$sce', function ($sce) {
         return $sce.trustAsResourceUrl(url);
     };
 }]);
+
+
+adminApp.directive("averageStarRating", function() {
+    return {
+        restrict : "EA",
+        template : "<div class='average-rating-container'>" +
+            "  <ul class='rating background' class='readonly'>" +
+            "    <li ng-repeat='star in stars' class='star'>" +
+            "      <i class='fa fa-star'></i>" + //&#9733
+            "    </li>" +
+            "  </ul>" +
+            "  <ul class='rating foreground' class='readonly' style='width:{{filledInStarsContainerWidth}}%'>" +
+            "    <li ng-repeat='star in stars' class='star filled'>" +
+            "      <i class='fa fa-star'></i>" + //&#9733
+            "    </li>" +
+            "  </ul>" +
+            "</div>",
+        scope : {
+            averageRatingValue : "=ngModel",
+            max : "=?" //optional: default is 5
+        },
+        link : function(scope, elem, attrs) {
+            if (scope.max == undefined) { scope.max = 5; }
+            function updateStars() {
+                scope.stars = [];
+                for (var i = 0; i < scope.max; i++) {
+                    scope.stars.push({});
+                }
+                var starContainerMaxWidth = 76; //%
+                scope.filledInStarsContainerWidth = scope.averageRatingValue / scope.max * starContainerMaxWidth;
+            }
+            scope.$watch("averageRatingValue", function(oldVal, newVal) {
+                if (newVal) { updateStars(); }
+            });
+        }
+    };
+});

@@ -218,14 +218,14 @@ userApp.controller('UserCoachController',function($scope,requestHandler,Flash,$l
 
 
     $scope.checkReview=function(){
-        $scope.coachReviews="";
+        $scope.checkReviews="";
 
         requestHandler.getRequest("getUserId/","").then(function(response){
             $scope.userProfile=response.data.User_Profile;
            $scope.loginuserid = $scope.userProfile.userid;
            requestHandler.getRequest("getRatingsandReviews/"+$routeParams.id, "").then(function (response) {
-               $scope.coachReviews = response.data.Ratings_Reviews.Reviews;
-               $.each($scope.coachReviews,function(index,value){
+               $scope.checkReviews = response.data.Ratings_Reviews.Reviews;
+               $.each($scope.checkReviews,function(index,value){
                    if(value.review_user == $scope.loginuserid){
                        $scope.disablereview = true;
                    }
