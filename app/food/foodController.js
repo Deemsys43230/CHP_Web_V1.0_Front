@@ -135,17 +135,24 @@ adminApp.controller('FoodController',function ($scope,requestHandler,Flash) {
 
     //Enable Disable Food Items
     $scope.doEnableDisable=function(foodId){
-            requestHandler.postRequest("admin/enableordisableFood/",{"foodid":foodId}).then(function(response){
-                if(response.data.Response_status==1){
-                    successMessage(Flash,"Successfully Updated");
-                }
-                else if(response.data.Response_status==0){
-                    errorMessage(Flash,"Food used by users");
-                }
-                $scope.doGetAllFoodItems();
-            },function(response){
-                errorMessage(Flash,"Please Try Again Later");
-            });
+
+        if($('.search-list-form').css('display') != 'none'){
+            $(".search-list-form").hide();
+            $(".search-list-form").show(2400);
+        }
+
+        requestHandler.postRequest("admin/enableordisableFood/",{"foodid":foodId}).then(function(response){
+            if(response.data.Response_status==1){
+                successMessage(Flash,"Successfully Updated");
+            }
+            else if(response.data.Response_status==0){
+                errorMessage(Flash,"Food used by users");
+            }
+            $scope.doGetAllFoodItems();
+        },function(response){
+            errorMessage(Flash,"Please Try Again Later");
+        });
+
     };
     //End Enable Disable
 
@@ -156,15 +163,9 @@ adminApp.controller('FoodController',function ($scope,requestHandler,Flash) {
     };
     //End Initial Load
 
-// Search Food Type
+    // Search Food Type
     $('.show-list-search').click(function() {
-        $('.search-list-form').fadeIn(300);
-        $('.search-list-form input').focus();
-    });
-
-    $('.search-list-form input').focusout(function() {
-        $('.search-list-form').fadeOut(300);
-        $scope.categorysearch="";
+        $('.search-list-form').toggle(300);
     });
 
 });

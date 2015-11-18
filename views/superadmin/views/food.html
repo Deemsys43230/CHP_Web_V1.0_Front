@@ -13,7 +13,7 @@
                 <a href="#uploadFood" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-down"></i> Import Food</a>
                 <a href="#addFood" class="back-button pull-right margin-left-5"><i class="fa fa-plus-circle"></i> Add Food</a>
                 <!-- Stat Search -->
-                <div class="pull-right">
+                <div class="pull-right" id="hidden-search">
                     <a href="#" onclick="return false;" class="show-list-search search_button"><i class="fa fa-search"></i></a>
                     <div class="search-list-form override">
                         <form autocomplete="off" class="searchform">
@@ -61,7 +61,7 @@
                         <td>
                             <a href="#food-view/{{food.foodid}}" class="btn-xs btn-primary">View</a>
                             <a href="#food-edit/{{food.foodid}}" class="btn-xs btn-warning">Edit</a>
-                            <a href="" class="btn-xs btn-success" ng-click="doEnableDisable(food.foodid)" ng-show="food.status==0">Enable</a>
+                            <a href=""  class="btn-xs btn-success" ng-click="doEnableDisable(food.foodid)" ng-show="food.status==0">Enable</a>
                             <a href="" class="btn-xs btn-danger" ng-click="doEnableDisable(food.foodid)" ng-hide="food.status==0">Disable</a>
                         </td>
                     </tr>
@@ -83,3 +83,11 @@
 <!-- End Page Banner -->
 
 <script type="text/javascript" src="../../js/script.js"></script>
+
+<script>
+        $(".hideSearch").click(function(){
+            alert("okay");
+            $("#hidden-search").hide();
+            $("#hidden-search").fadeIn(2000);
+        });
+</script>
