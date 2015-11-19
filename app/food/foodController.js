@@ -121,13 +121,54 @@ adminApp.controller('FoodController',function ($scope,requestHandler,Flash) {
         else $scope.sortregionicon="fa fa-caret-down";
     };*/
 
+
     //Get Food List
     $scope.doGetAllFoodItems=function(){
+        var sessionvalue="";
+        var sessionname="";
+        var categoryvalue="";
+        var categoryname="";
         $scope.loaded=true;
         requestHandler.getRequest("admin/getFoodList/","").then(function(response){
             $scope.foodList=response.data.Food_Data;
             $scope.paginationLoad=true;
             $scope.loaded=false;
+            // Tool tip for session in food list
+           $.each($scope.foodList,function(index,value){
+               value.session="";
+                $.each(value.sessionid,function(index,value1){
+                    sessionvalue=value1.sessionname + ",";
+                    sessionname = sessionname + sessionvalue;
+
+                });
+               //Remmoving comma from last character
+               var lastChar = sessionname.slice(-1);
+               if (lastChar == ',') {
+                   sessionname = sessionname.slice(0, -1);
+               }
+                value.session = sessionname;
+               sessionname="";
+
+            });
+
+
+            // Tool tip for category in food list
+            $.each($scope.foodList,function(index,value){
+                value.category="";
+                $.each(value.categoryid,function(index,value1){
+                    categoryvalue=value1.categoryname + ",";
+                    categoryname = categoryname + categoryvalue;
+
+                });
+                //Remmoving comma from last character
+                var lastChar = categoryname.slice(-1);
+                if (lastChar == ',') {
+                    categoryname = categoryname.slice(0, -1);
+                }
+                value.category = categoryname;
+                categoryname="";
+
+            });
         },function(response){
         });
     };
@@ -166,6 +207,7 @@ adminApp.controller('FoodController',function ($scope,requestHandler,Flash) {
     // Search Food Type
     $('.show-list-search').click(function() {
         $('.search-list-form').toggle(300);
+        $('.search-list-form input').focus();
     });
 
 });

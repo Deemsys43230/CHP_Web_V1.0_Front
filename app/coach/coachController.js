@@ -18,6 +18,11 @@ adminApp.controller('CoachController',function($scope,requestHandler,Flash) {
 
     //Enable Disable coach
     $scope.doEnableDisableCoach=function(coachId){
+        if($('.search-list-form').css('display') != 'none'){
+            $(".search-list-form").hide();
+            $(".search-list-form").show(2400);
+        }
+
         requestHandler.postRequest("admin/enableordisableUser/",{"userid":coachId}).then(function(response){
            $scope.doGetCoachList();
             successMessage(Flash,"Successfully Updated");
@@ -55,14 +60,11 @@ adminApp.controller('CoachController',function($scope,requestHandler,Flash) {
 
     // Search Food Type
     $('.show-list-search').click(function() {
-        $('.search-list-form').fadeIn(300);
+        $('.search-list-form').toggle(300);
         $('.search-list-form input').focus();
     });
 
-    $('.search-list-form input').focusout(function() {
-        $('.search-list-form').fadeOut(300);
-        $scope.coachsearch="";
-    });
+
 
 });
 

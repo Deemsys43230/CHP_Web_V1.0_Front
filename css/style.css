@@ -9228,6 +9228,12 @@ a.invite_button.disabled {
     -moz-transition: all 0.2s ease-in-out;
     -webkit-transition: all 0.2s ease-in-out;
     -o-transition: all 0.2s ease-in-out;
+
+}
+
+.break-text{
+    word-wrap: break-word;
+
 }
 
 .search-btn:hover{
@@ -9284,4 +9290,5 @@ a.abuse{
     -webkit-box-shadow: none;
     box-shadow: none;
     opacity: .65;
+
 }

@@ -20,14 +20,11 @@ adminApp.controller('FoodCategoryController',function($scope,requestHandler,Flas
 
     // Search food category
     $('.show-list-search').click(function() {
-        $('.search-list-form').fadeIn(300);
+        $('.search-list-form').toggle(300);
         $('.search-list-form input').focus();
     });
 
-    $('.search-list-form input').focusout(function() {
-        $('.search-list-form').fadeOut(300);
-        $scope.categorysearch="";
-    });
+
 
     $scope.doAddFoodCategory=function(){
         $scope.loaded=true;
@@ -108,6 +105,10 @@ adminApp.controller('FoodCategoryController',function($scope,requestHandler,Flas
     };
 
     $scope.doEnableDisableFoodCategory=function(id){
+        if($('.search-list-form').css('display') != 'none'){
+            $(".search-list-form").hide();
+            $(".search-list-form").show(2400);
+        }
         $scope.loaded=true;
         requestHandler.putRequest("admin/enableOrDisableCategoryStatus/",{'categoryid':id}).then(function(response){
             $scope.loaded=false;
@@ -125,6 +126,10 @@ adminApp.controller('FoodCategoryController',function($scope,requestHandler,Flas
     };
 
     $scope.doDeleteFoodCategory = function(id){
+        if($('.search-list-form').css('display') != 'none'){
+            $(".search-list-form").hide();
+            $(".search-list-form").show(2400);
+        }
         $scope.loaded=true;
         requestHandler.deleteRequest("admin/deleteFoodCategory/",{'categoryid':id}).then(function(response){
             $scope.loaded=false;

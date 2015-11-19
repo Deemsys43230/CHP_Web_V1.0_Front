@@ -43,14 +43,10 @@ adminApp.controller('ExerciseTypeController',['$scope','requestHandler','Flash',
     };
 
     // Search Exercise Type
+    // Search Food Type
     $('.show-list-search').click(function() {
-        $('.search-list-form').fadeIn(300);
+        $('.search-list-form').toggle(300);
         $('.search-list-form input').focus();
-    });
-
-    $('.search-list-form input').focusout(function() {
-        $('.search-list-form').fadeOut(300);
-        $scope.typesearch="";
     });
 
     $scope.addInput = function(){
@@ -204,6 +200,12 @@ adminApp.controller('ExerciseTypeController',['$scope','requestHandler','Flash',
     };
 
     $scope.doEnableDisableExerciseType=function(id){
+
+        if($('.search-list-form').css('display') != 'none'){
+            $(".search-list-form").hide();
+            $(".search-list-form").show(2400);
+        }
+
         $scope.loaded=true;
         requestHandler.postRequest("admin/enableordisableExerciseType/",{'typeid':id}).then(function(response){
             $scope.loaded=false;
@@ -221,6 +223,12 @@ adminApp.controller('ExerciseTypeController',['$scope','requestHandler','Flash',
     };
 
     $scope.doDeleteExerciseType = function(id){
+
+        if($('.search-list-form').css('display') != 'none'){
+            $(".search-list-form").hide();
+            $(".search-list-form").show(2400);
+        }
+
         $scope.loaded=true;
         requestHandler.postRequest("admin/deleteExerciseTypeAndLevel/",{'typeid':id}).then(function(response){
             $scope.loaded=false;

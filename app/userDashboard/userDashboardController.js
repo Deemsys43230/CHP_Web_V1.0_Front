@@ -137,12 +137,12 @@ userApp.controller('UserDashboardController',function($scope,requestHandler,Flas
         //Set values according to the api calls
         $scope.userFood.foodid=$scope.userSelectedFoodDetails.foodid;
         $scope.userFood.measureid=$scope.userFood.measure.measureid;
-        $scope.userFood.addeddate=selectedDate;
+        $scope.userFood.addeddate=$scope.selectedDate.format("dd/mm/yyyy");
         $scope.userFood.servings=parseInt($scope.userFood.servings);
 
         var foodInsertPromise=UserDashboardService.doInsertUserFood($scope.userFood);
         foodInsertPromise.then(function(){
-            $scope.loadFoodDiary(selectedDate);
+            $scope.loadFoodDiary( $scope.userFood.addeddate);
         });
 
 };
@@ -157,7 +157,7 @@ userApp.controller('UserDashboardController',function($scope,requestHandler,Flas
 
         var foodInsertPromise=UserDashboardService.doUpdateUserFood($scope.userFood);
         foodInsertPromise.then(function(){
-            $scope.loadFoodDiary(selectedDate);
+            $scope.loadFoodDiary($scope.selectedDate.format("dd/mm/yyyy"));
         });
 
     };
@@ -166,7 +166,7 @@ userApp.controller('UserDashboardController',function($scope,requestHandler,Flas
     $scope.doDeleteUserFood= function (userFoodId) {
         var foodDeletePromise=UserDashboardService.doDeleteUserFood(userFoodId);
         foodDeletePromise.then(function(){
-            $scope.loadFoodDiary(selectedDate);
+            $scope.loadFoodDiary($scope.selectedDate.format("dd/mm/yyyy"));
         });
     };
 
@@ -297,25 +297,25 @@ userApp.controller('UserDashboardController',function($scope,requestHandler,Flas
 
     //On load Exercise Diary
     $scope.loadExerciseDiary=function(selectedDate){
-        // alert(selectedDate);
+     // alert(selectedDate);
+
         var userExerciseDiaryDetailPromise=UserDashboardService.getExerciseDiary(selectedDate);
         userExerciseDiaryDetailPromise.then(function(result){
             $scope.userExerciseDiaryDataAll=result;
         });
     };
-
     //Insert User Exercise
     $scope.doInsertUserExercise=function(){
         //Set values according to the api calls
         //alert(selectedDate);
         $scope.userExercise.exerciseid=$scope.userSelectedExerciseDetails.exerciseid;
         $scope.userExercise.levelid=$scope.userExercise.levelid.levelid;
-        $scope.userExercise.date=selectedDate;
+        $scope.userExercise.date=$scope.selectedDate.format("dd/mm/yyyy");
         $scope.userExercise.workoutvalue=parseInt($scope.userExercise.workoutvalue);
 
         var exerciseInsertPromise=UserDashboardService.doInsertUserExercise($scope.userExercise);
         exerciseInsertPromise.then(function(){
-            $scope.loadExerciseDiary(selectedDate);
+            $scope.loadExerciseDiary($scope.userExercise.date);
         });
 
     };
@@ -324,7 +324,7 @@ userApp.controller('UserDashboardController',function($scope,requestHandler,Flas
     $scope.doDeleteUserExercise= function (userExerciseId) {
         var exerciseDeletePromise=UserDashboardService.doDeleteUserExercise(userExerciseId);
         exerciseDeletePromise.then(function(){
-            $scope.loadExerciseDiary(selectedDate);
+            $scope.loadExerciseDiary($scope.selectedDate.format("dd/mm/yyyy"));
         });
     };
 
@@ -375,7 +375,7 @@ userApp.controller('UserDashboardController',function($scope,requestHandler,Flas
 
         var exerciseInsertPromise=UserDashboardService.doUpdateUserExercise($scope.userExercise);
         exerciseInsertPromise.then(function(){
-            $scope.loadExerciseDiary(selectedDate);
+            $scope.loadExerciseDiary($scope.selectedDate.format("dd/mm/yyyy"));
         });
 
     };
@@ -503,6 +503,7 @@ userApp.controller('UserDashboardController',function($scope,requestHandler,Flas
         mm='0'+mm
     }
     var selectedDate = dd+'/'+mm+'/'+yyyy;
+
     $scope.selectedDate = selectedDate;
 
     //Initialize

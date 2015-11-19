@@ -12,7 +12,7 @@
                 <a href="#dashboard" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back to Dashboard</a>
                 <a id="modal_exerciseType" ng-click="reset()" href="#exerciseType" class="back-button pull-right margin-left-5"><i class="fa fa-plus-circle"></i> Add Exercise Type</a>
                 <!-- Stat Search -->
-                <div class="pull-right">
+                <div class="pull-right" id="hidden-search">
                     <a href="#" onclick="return false;" class="show-list-search search_button"><i class="fa fa-search"></i></a>
                     <div class="search-list-form override">
                         <form autocomplete="off" class="searchform">
@@ -57,10 +57,10 @@
                         </td>
                         <td>
                             <a href="" class="btn-xs btn-primary" ng-click="doViewExerciseType(list.typeid)">View</a>
-                            <a href="" class="btn-xs btn-warning" ng-show="list.canedit==1" ng-click="doEditExerciseType(list.typeid)">Edit</a>
+                            <a href="" class="btn-dis btn-xs btn-warning" ng-disabled="list.canedit==0" ng-click="doEditExerciseType(list.typeid)">Edit</a>
                             <a href="" class="btn-xs btn-success" ng-click="doEnableDisableExerciseType(list.typeid)" ng-hide="list.status==1">Enable</a>
                             <a href="" class="btn-xs btn-danger" ng-click="doEnableDisableExerciseType(list.typeid)" ng-show="list.status==1">Disable</a>
-                            <a href="" class="btn-xs btn-danger" ng-show="list.canedit==1" ng-click="doDeleteExerciseType(list.typeid)">Delete</a>
+                            <a href="" class="btn-dis btn-xs btn-danger" ng-disabled="list.canedit==0" ng-click="doDeleteExerciseType(list.typeid)">Delete</a>
                         </td>
                     </tr>
                     <tr ng-show="exercisetypefilter.length==0" class="text-center"><td colspan="4">No Records Found !!!</td></tr>
