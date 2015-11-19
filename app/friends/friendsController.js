@@ -12,9 +12,6 @@ userApp.controller('FriendsController',function($scope,requestHandler,Flash,Frie
     $scope.numberOfPages=function(){
         return Math.ceil($scope.myFriendsList.length/$scope.pageSize);
     };
-    $scope.numberOfData=function(){
-        return $scope.myFriendsList.length;
-    };
     //My Friends Pagination ends
 
     //Requested Friends Pagination starts
@@ -22,9 +19,6 @@ userApp.controller('FriendsController',function($scope,requestHandler,Flash,Frie
     $scope.pageSize1 = 8;
     $scope.numberOfPages1=function(){
         return Math.ceil($scope.requestedFriendsList.length/$scope.pageSize1);
-    };
-    $scope.numberOfData1=function(){
-        return $scope.requestedFriendsList.length;
     };
     //Requested Friends Pagination ends
 
@@ -63,7 +57,7 @@ userApp.controller('FriendsController',function($scope,requestHandler,Flash,Frie
                 errorMessage(Flash,"Already Request Sent");
             }
         })
-    }
+    };
 
     $scope.acceptFriends=function(id){
         var acceptFriendsPromise = FriendsService.doAcceptFriends(id);
@@ -76,7 +70,7 @@ userApp.controller('FriendsController',function($scope,requestHandler,Flash,Frie
                 errorMessage(Flash,"No Friends pair found");
             }
         })
-    }
+    };
 
     $scope.denyFriends=function(id){
         var denyFriendsPromise = FriendsService.doDenyFriends(id);
@@ -88,7 +82,7 @@ userApp.controller('FriendsController',function($scope,requestHandler,Flash,Frie
                 errorMessage(Flash,"No friends pair found");
             }
         })
-    }
+    };
 
 
 

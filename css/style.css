@@ -9094,7 +9094,7 @@ input.cmn-toggle-yes-no:checked + label:after {
     text-decoration: underline;
 }
 
-.friends-list h5.wrap a:hover{
+.friends-list h5 a.margin-top-5:hover{
     text-decoration: none;
 }
 

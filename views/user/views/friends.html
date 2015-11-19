@@ -20,7 +20,7 @@
                             <button class="friends-button" ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1">
                                 <i class="fa fa-angle-left"></i>
                             </button>
-                            <span class="friends-list-no">&nbsp;&nbsp;{{currentPage*pageSize+1}}&nbsp;-&nbsp;<span ng-show="(currentPage+1)*pageSize<=numberOfData()">{{(currentPage+1)*pageSize}}</span><span ng-show="(currentPage+1)*8>numberOfData()">{{numberOfData()}}</span>&nbsp;of&nbsp;{{numberOfData()}}&nbsp;Friends&nbsp;&nbsp;</span>
+                            <span class="friends-list-no">&nbsp;&nbsp;{{currentPage*pageSize+1}}&nbsp;-&nbsp;<span ng-show="(currentPage+1)*pageSize<=myFriendsList.length">{{(currentPage+1)*pageSize}}</span><span ng-show="(currentPage+1)*8>myFriendsList.length">{{myFriendsList.length}}</span>&nbsp;of&nbsp;{{myFriendsList.length}}&nbsp;Friends&nbsp;&nbsp;</span>
                             <button class="friends-button" ng-disabled="currentPage >= myFriendsList.length/pageSize - 1" ng-click="currentPage=currentPage+1">
                                 <i class="fa fa-angle-right"></i>
                             </button>
@@ -30,19 +30,12 @@
                         </div>
                     </div>
                     <div class="row friends-list">
-                        <div id="effect-6" class="effects clearfix">
-                            <div class="col-md-3" ng-repeat="myfriends in friendsfilter=( myFriendsList | filter:myfriendssearch | startFrom:currentPage*pageSize | limitTo:pageSize)" ng-show="myFriendsList.length!=0">
-                                <div class="img">
-                                    <a href="" class="img-shadow"><img ng-src="{{myfriends.imageurl | trusted}}"/></a>
-                                    <div class="overlay">
-                                        <a href="#" class="expand"><i class="fa fa-times-circle"></i>&nbsp;Unfriend</a>
-                                    </div>
-                                </div>
-                                <h5 class="wrap"><a href="">{{myfriends.name}}</a></h5>
-                            </div>
-                            <h1 class="col-md-12 margin-top-50 text-gray text-center" ng-show="myFriendsList.length==0">NO FRIENDS FOUND!!!</h1>
-                            <h1 class="col-md-12 margin-top-50 text-gray text-center" ng-show="!friendsfilter.length">NO FRIENDS FOUND!!!</h1>
+                        <div class="col-md-3" ng-repeat="myfriends in friendsfilter=( myFriendsList | filter:myfriendssearch | startFrom:currentPage*pageSize | limitTo:pageSize)" ng-show="myFriendsList.length!=0">
+                            <a href="" class="img-shadow"><img ng-src="{{myfriends.imageurl | trusted}}"/></a>
+                            <h5 class="wrap"><a href="">{{myfriends.name}}</a></h5>
                         </div>
+                        <h1 class="col-md-12 margin-top-50 text-gray text-center" ng-show="myFriendsList.length==0">NO FRIENDS FOUND!!!</h1>
+                        <h1 class="col-md-12 margin-top-50 text-gray text-center" ng-show="!friendsfilter.length">NO FRIENDS FOUND!!!</h1>
                     </div>
                 </div>
                 <div class="friend-request">
@@ -58,7 +51,7 @@
                             <button class="friends-button" ng-disabled="currentPage1 == 0" ng-click="currentPage1=currentPage1-1">
                                 <i class="fa fa-angle-left"></i>
                             </button>
-                            <span class="friends-list-no">&nbsp;&nbsp;{{currentPage1*pageSize1+1}}&nbsp;-&nbsp;<span ng-show="(currentPage1+1)*pageSize1<=numberOfData1()">{{(currentPage1+1)*pageSize1}}</span><span ng-show="(currentPage1+1)*8>numberOfData1()">{{numberOfData1()}}</span>&nbsp;of&nbsp;{{numberOfData1()}}&nbsp;Friends&nbsp;&nbsp;</span>
+                            <span class="friends-list-no">&nbsp;&nbsp;{{currentPage1*pageSize1+1}}&nbsp;-&nbsp;<span ng-show="(currentPage1+1)*pageSize1<=requestedFriendsList.length">{{(currentPage1+1)*pageSize1}}</span><span ng-show="(currentPage1+1)*8>requestedFriendsList.length">{{requestedFriendsList.length}}</span>&nbsp;of&nbsp;{{requestedFriendsList.length}}&nbsp;Friends&nbsp;&nbsp;</span>
                             <button class="friends-button" ng-disabled="currentPage1 >= requestedFriendsList.length/pageSize1 - 1" ng-click="currentPage1=currentPage1+1">
                                 <i class="fa fa-angle-right"></i>
                             </button>
@@ -113,18 +106,6 @@
 </div>
 
 <script type="text/javascript" src="../../js/script.js"></script>
-<script>
-    $(document).ready(function(){
-        // handle the mouseenter functionality
-        $(".img").mouseenter(function(){
-            $(this).addClass("hover");
-        })
-            // handle the mouseleave functionality
-                .mouseleave(function(){
-                    $(this).removeClass("hover");
-                });
-    });
-</script>
 
 <script>
     $(document).ready(function(){
