@@ -14,11 +14,6 @@
                             <input type="text" class="friend-input" placeholder="Search my friend here..." ng-model="myfriendssearch"/>
                         </div>
                         <div class="col-md-5 text-center margin-top-10">
-                           <!-- <ul>
-                                <li ng-repeat="item in data | startFrom:currentPage*pageSize | limitTo:pageSize">
-                                    {{item}}
-                                </li>
-                            </ul>-->
                             <button class="friends-button" ng-disabled="currentPage == 0" ng-click="currentPage=0">
                                 <i class="fa fa-angle-double-left"></i>
                             </button>
@@ -45,8 +40,8 @@
                                 </div>
                                 <h5 class="wrap"><a href="">{{myfriends.name}}</a></h5>
                             </div>
-                            <div class="col-md-3" ng-show="myFriendsList.length==0"><p class="text-center">No Friends Found!!!</p></div>
-                            <div class="col-md-3" ng-show="!friendsfilter.length"><p class="text-center">No Friends Found!!!</p></div>
+                            <h1 class="col-md-12 margin-top-50 text-gray text-center" ng-show="myFriendsList.length==0">NO FRIENDS FOUND!!!</h1>
+                            <h1 class="col-md-12 margin-top-50 text-gray text-center" ng-show="!friendsfilter.length">NO FRIENDS FOUND!!!</h1>
                         </div>
                     </div>
                 </div>
@@ -54,15 +49,8 @@
                     <h5 class="classic-title"><a href="" class="my-friends-list"><i class="fa fa-users"></i>&nbsp;&nbsp;My Friends</a>
                         &nbsp;&nbsp;|&nbsp;&nbsp;<span><a href=""><i class="fa fa-info-circle"></i>&nbsp;&nbsp;Friends Request</a></span>
                     </h5>
-
-
                     <div class="col-md-12 no-padding">
-                        <h5 class="pull-left">Your friends request</h5>
-                        <!-- <ul>
-                             <li ng-repeat="item in data | startFrom:currentPage*pageSize | limitTo:pageSize">
-                                 {{item}}
-                             </li>
-                         </ul>-->
+                        <h2 class="pull-left text-gray">YOUR FRIENDS REQUEST</h2>
                         <div class="pull-right">
                             <button class="friends-button" ng-disabled="currentPage1 == 0" ng-click="currentPage1=0">
                                 <i class="fa fa-angle-double-left"></i>
@@ -80,15 +68,12 @@
                         </div>
                     </div>
                     <div class="row friends-list">
-                        <div id="effect-5" class="effects clearfix">
-                            <div class="col-md-3" ng-repeat="friendsrequest in requestedFriendsList | startFrom:currentPage1*pageSize1 | limitTo:pageSize1">
-                                <a href="" class="img-shadow"><img ng-src="{{friendsrequest.imageurl | trusted}}"/></a>
-                                <h5 class="wrap">{{friendsrequest.name}}<br/>
-                                <a href="" class="btn btn-xs btn-success margin-top-5" ng-click="acceptFriends(friendsrequest.userid)">Accept</a>
-                                <a href="" class="btn btn-xs btn-danger margin-top-5" ng-click="denyFriends(friendsrequest.userid)">Deny</a>
-                                </h5>
-                            </div>
-
+                        <div class="col-md-3" ng-repeat="friendsrequest in requestedFriendsList | startFrom:currentPage1*pageSize1 | limitTo:pageSize1">
+                            <a href="" class="img-shadow"><img ng-src="{{friendsrequest.imageurl | trusted}}"/></a>
+                            <h5 class="wrap">{{friendsrequest.name}}<br/>
+                                <a href="" class="btn-xs btn-success margin-top-5" ng-click="acceptFriends(friendsrequest.userid)">Accept</a>
+                                <a href="" class="btn-xs btn-danger margin-top-5" ng-click="denyFriends(friendsrequest.userid)">Deny</a>
+                            </h5>
                         </div>
                     </div>
 
@@ -98,33 +83,29 @@
                 <h5 class="classic-title"><span><a href="#friends"><i class="fa fa-search"></i>&nbsp;&nbsp;Search Friends</a></span></h5>
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="input-group">
-                            <input type="text" class="friend-input" placeholder="Search new friend name..." ng-model="friendsearch" ng-keydown="searchFriends(friendsearch)">
-                        <!--<span class="input-group-btn">
-                            <a href="" class="search-btn" type="button">Search</a>
-                        </span>-->
-                        </div>
+                        <input type="text" class="friend-input" placeholder="Search new friend name..." ng-model="friendsearch" ng-change="searchFriends(friendsearch)">
                     </div>
                 </div>
 
                 <div class="row margin-top-20 content_scrollbar height-350">
                     <div ng-repeat="searchfriends in searchFriendsList" ng-show="searchFriendsList.length!=0">
-                    <div class="col-md-3">
-                        <img class="img-circle" ng-src="{{searchfriends.imageurl | trusted}}"/>
+                        <div ng-hide="searchfriends.friendStatus == 3">
+                            <div class="col-md-3">
+                                <img class="img-circle" ng-src="{{searchfriends.imageurl | trusted}}"/>
+                            </div>
+                            <div class="col-md-9">
+                                <h5>{{searchfriends.name}}</h5>
+                                <p class="margin-bottom-5" ng-if="searchfriends.isPrivacy == 1">{{searchfriends.emailid}}</p>
+                                <a href="" class="invite_button" ng-if="searchfriends.friendStatus == 0" ng-click="inviteFriends(searchfriends.userid)">Invite</a>
+                                <a href="" class="invite_button request_sent disabled" ng-if="searchfriends.friendStatus == 1">Request Sent</a>
+                                <a href="" class="invite_button disabled" ng-if="searchfriends.friendStatus == 2">Request Received</a>
+                            </div>
+                            <div class="col-md-12">
+                                <hr/>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-md-9">
-                        <h5>{{searchfriends.name}}</h5>
-                        <p class="margin-bottom-5" ng-if="searchfriends.isPrivacy == 1">{{searchfriends.emailid}}</p>
-                        <a href="" class="invite_button" ng-if="searchfriends.friendStatus == 0" ng-click="inviteFriends(searchfriends.userid)">Invite</a>
-                        <a href="" class="invite_button disabled" ng-if="searchfriends.friendStatus == 1">Request Sent</a>
-                        <a href="" class="invite_button disabled" ng-if="searchfriends.friendStatus == 2">Request Received</a>
-                        <a href="" class="invite_button disabled" ng-if="searchfriends.friendStatus == 3">Friends</a>
-                    </div>
-                    <div class="col-md-12">
-                        <hr/>
-                    </div>
-                    </div>
-                    <div ng-show="searchFriendsList.length == 0"><p class="text-center">No Users Found!!!</p></div>
+                    <h3 class="text-center text-gray margin-top-50" ng-show="searchFriendsList.length == 0">NO USERS FOUND!!!</h3>
                 </div>
             </div>
         </div><!-- @end #content -->

@@ -9063,6 +9063,7 @@ input.cmn-toggle-yes-no:checked + label:after {
     bottom: 0;
     left: 0;
     right: 0;
+    opacity: 0.8;
     box-shadow: inset 0 0 100px #000;
     -moz-box-shadow: inset 0 0 100px #000;
     -webkit-box-shadow: inset 0 0 100px #000;
@@ -9091,6 +9092,10 @@ input.cmn-toggle-yes-no:checked + label:after {
 
 .friends-list h5 a:hover{
     text-decoration: underline;
+}
+
+.friends-list h5.wrap a:hover{
+    text-decoration: none;
 }
 
 input[type="text"].friend-input{
@@ -9193,6 +9198,11 @@ a.expand {
     opacity: 1;
 }
 
+a.invite_button.request_sent{
+    color: #FF4F4F !important;
+    border-color: #FF4F4F !important;
+}
+
 a.invite_button{
     color: #57cb85;
     font-size: 12px;
@@ -9228,12 +9238,6 @@ a.invite_button.disabled {
     -moz-transition: all 0.2s ease-in-out;
     -webkit-transition: all 0.2s ease-in-out;
     -o-transition: all 0.2s ease-in-out;
-
-}
-
-.break-text{
-    word-wrap: break-word;
-
 }
 
 .search-btn:hover{
@@ -9290,5 +9294,8 @@ a.abuse{
     -webkit-box-shadow: none;
     box-shadow: none;
     opacity: .65;
+}
 
+.height-550{
+    height: 550px !important;
 }
