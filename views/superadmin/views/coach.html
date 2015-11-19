@@ -52,11 +52,16 @@
             <div class="col-md-12 min-height-450" ng-init="init()">
                 <a href="#dashboard" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back to Dashboard</a>
                 <a id="modal_trigger" href="#modal" class="back-button pull-right margin-left-5"><i class="fa fa-plus-circle"></i> Add Coach</a>
-
-                <form class="form-wrapper pull-right">
-                    <input type="text" ng-model="coachsearch" placeholder="Search here...">
-                    <button><i class="fa fa-search"></i> </button>
-                </form>
+                <!-- Stat Search -->
+                <div class="pull-right">
+                    <a href="#" onclick="return false;" class="show-list-search search_button"><i class="fa fa-search"></i></a>
+                    <div class="search-list-form override">
+                        <form autocomplete="off" class="searchform">
+                            <input type="text" ng-model="coachsearch" placeholder="Search here...">
+                        </form>
+                    </div>
+                </div>
+                <!-- End Search -->
                 <div flash-message="5000" class="col-md-4 pull-right"></div>
                 <h4 class="classic-title"><span>Coach Management</span></h4>
                 <div ng-if="loaded">
@@ -82,7 +87,9 @@
                             <a href="" class="btn-xs btn-danger" ng-click="doEnableDisableCoach(coach.userid)" ng-hide="coach.isenabled==0">Disable</a>
                         </td>
                     </tr>
-                    </tbody>
+                    <tr ng-show="coachList.length==0"><td colspan="3" class="text-center">No Records Found !!!</td></tr>
+                    <tr ng-show="!coachfilter.length"><td colspan="3" class="text-center">No Records Found !!!</td></tr>
+ </tbody>
                 </table>
                 <!-- Start Pagination -->
                 <dir-pagination-controls ng-show="paginationLoad" boundary-links="true"> </dir-pagination-controls>

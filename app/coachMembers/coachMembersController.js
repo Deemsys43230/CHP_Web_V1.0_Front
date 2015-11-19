@@ -30,7 +30,7 @@ coachApp.controller('CoachMembersController',function($scope,requestHandler) {
 
     $('.search-list-form input').focusout(function() {
         $('.search-list-form').fadeOut(300);
-        $scope.categorysearch="";
+        $scope.membersearch="";
     });
 
 

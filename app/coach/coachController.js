@@ -53,6 +53,17 @@ adminApp.controller('CoachController',function($scope,requestHandler,Flash) {
         $scope.doGetCoachList();
     };
 
+    // Search Food Type
+    $('.show-list-search').click(function() {
+        $('.search-list-form').fadeIn(300);
+        $('.search-list-form input').focus();
+    });
+
+    $('.search-list-form input').focusout(function() {
+        $('.search-list-form').fadeOut(300);
+        $scope.coachsearch="";
+    });
+
 });
 
 

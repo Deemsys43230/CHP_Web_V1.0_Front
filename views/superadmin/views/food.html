@@ -47,17 +47,17 @@
                         <td>{{food.foodid}}</td>
                         <td title="{{food.foodname}}"><span class="line-clamp-xxs">{{food.foodname}}</span></td>
                         <td><span class="line-clamp-xxs">
-                            <span  ng-repeat="category in food.categoryid">
+                            <span  ng-repeat="category in food.categoryid" title="{{category.categoryname}}">
                                 {{category.categoryname}}{{$last ? '' : ','}}
                             </span></span>
                         </td>
-                        <td><span class="line-clamp-xxs">
-                            <span  ng-repeat="session in food.sessionid">
+                        <td ><span class="line-clamp-xxs">
+                            <span  ng-repeat="session in food.sessionid" title="{{session.sessionname}}">
                                 {{session.sessionname}}{{$last ? '' : ','}}
                             </span>
                         </span>
                         </td>
-                        <td>{{food.regionid.regionname}}</td>
+                        <td title="{{food.regionid.regionname}}">{{food.regionid.regionname}}</td>
                         <td>
                             <a href="#food-view/{{food.foodid}}" class="btn-xs btn-primary">View</a>
                             <a href="#food-edit/{{food.foodid}}" class="btn-xs btn-warning">Edit</a>
