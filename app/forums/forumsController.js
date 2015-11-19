@@ -158,7 +158,7 @@ userApp.controller('ForumsUserController',function($scope,requestHandler,Flash,$
             });
             $scope.loaded=false;
             $('#showMostViewed').hide();
-            $('#showMostViewed').show(200);
+            $('#showMostViewed').show(300);
 
          },function(){
             errorMessage(Flash,"Please try again later!")

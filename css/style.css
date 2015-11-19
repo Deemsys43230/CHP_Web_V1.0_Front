@@ -9270,3 +9270,18 @@ a.abuse{
     margin: 0 !important;
     font-size: 11px !important;
 }
+
+.forum-list-content{
+    max-height:42px;
+    overflow-y: hidden;
+}
+
+.btn-dis.disabled,
+.btn-dis[disabled]{
+    pointer-events: none;
+    cursor: not-allowed;
+    filter: alpha(opacity=65);
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    opacity: .65;
+}
