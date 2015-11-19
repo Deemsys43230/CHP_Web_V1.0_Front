@@ -174,7 +174,7 @@ h4 {
 
 h5 {
     font-size: 14px;
-	line-height: 18px;
+	line-height: 22px;
 }
 
 h6 {
@@ -250,8 +250,21 @@ a.main-button:hover, input[type="submit"]:hover {
 	color: #fff;
 }
 
+a.main-button:disabled, input[type="submit"]:disabled {
+    opacity: 0.5;
+}
+
 a.main-button i {
 	font-size: 1.2em;
+}
+
+a.h6{
+    color: #f8ba01;
+    font-size: 11px;
+}
+
+a.h6:hover{
+    color: #666;
 }
 
 input[type="submit"] {
@@ -9207,7 +9220,7 @@ a.invite_button.disabled {
     padding: 0px 20px;
     border: none;
     color: #fff;
-    background-color:#57cb85 ;
+    background-color:#57cb85;
     font-size: 15px;
     line-height: 36px;
     text-align: center;
@@ -9215,4 +9228,45 @@ a.invite_button.disabled {
     -moz-transition: all 0.2s ease-in-out;
     -webkit-transition: all 0.2s ease-in-out;
     -o-transition: all 0.2s ease-in-out;
+}
+
+.search-btn:hover{
+    background-color: #4EB677;
+    color: #fff;
+    cursor: pointer;
+}
+
+input.search-input{
+     display: block;
+     width:100%;
+     padding: 8px 20px;
+     border:1px solid #DDD;
+     color:#666;
+ }
+
+textarea.forum-textarea{
+    display: block;
+    width:100%;
+    outline: none;
+    margin: 10px 0;
+    height: 100px;
+    padding:8px 15px;
+    border:1px solid #DDD;
+    color:#666;
+    margin: 15px 0;
+}
+
+a.forum-topic{
+    color:#666;
+}
+
+a.forum-topic:hover{
+    cursor: pointer;
+    color:#57cb85;
+}
+
+a.abuse{
+    padding: 0 !important;
+    margin: 0 !important;
+    font-size: 11px !important;
 }

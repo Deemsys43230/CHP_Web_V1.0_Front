@@ -25,6 +25,11 @@
                                   <span class="error-message" ng-show="ForumForm.title.$error.required"><span>Required.</span></span>
                              </span>
                         </div>
+                        <div ng-if="loaded">
+                            <div class="loader-style">
+                                <div class="loader"></div>
+                            </div>
+                        </div>
                         <div class="col-md-2">
                             <h4>Content :</h4>
                         </div>

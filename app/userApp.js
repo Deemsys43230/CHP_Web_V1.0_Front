@@ -234,6 +234,34 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'DatepickerDemoCtrl'
             }).
+            when('/forums', {
+                templateUrl: 'views/forums.html',
+                resolve: {
+                    loadMyFiles:function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'userApp',
+                            files:[
+                                '../../app/forums/forumsController.js'
+                            ]
+                        })
+                    }
+                },
+                controller:'ForumsUserController'
+            }).
+            when('/forumDetails/:id', {
+                templateUrl: 'views/forum-details.html',
+                resolve: {
+                    loadMyFiles:function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'userApp',
+                            files:[
+                                '../../app/forums/forumsController.js'
+                            ]
+                        })
+                    }
+                },
+                controller:'ForumsUserController'
+            }).
             otherwise({
                 redirectTo: '/dashboard'
             });

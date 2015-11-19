@@ -68,9 +68,11 @@ adminApp.controller('ForumsEditController',function($scope,requestHandler,Flash,
     $scope.doGetForumsByID=function(){
         $scope.isNew = false;
         $scope.title = "Edit Forum";
+        $scope.loaded=true;
 
         requestHandler.postRequest("getForumDetailByAdmin/",{"postid":$routeParams.id}).then(function(response){
             $scope.forumDetails=response.data['Forum details'];
+            $scope.loaded=false;
         },function(){
             errorMessage(Flash,"Please try again later!")
         });
@@ -136,26 +138,80 @@ adminApp.filter('trusted', ['$sce', function ($sce) {
     };
 }]);
 
-var commonApp = angular.module('commonApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate']);
+var userApp = angular.module('userApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate']);
 
-commonApp.controller('NewsUserController',function($scope,requestHandler,Flash,$routeParams,$location){
+userApp.controller('ForumsUserController',function($scope,requestHandler,Flash,$routeParams){
 
-    // To display Testimonials as user
-    $scope.doGetNewsByUser=function(){
-        requestHandler.getRequest("getLatestNewsByUser/", "").then(function(response){
+    $scope.abuseDisable=false;
 
-            $scope.usernewslist=response.data.News;
+    // To display Forum as user
+    $scope.doGetForumsByUser=function(){
+        $scope.loaded=true;
+        requestHandler.getRequest("getListOfForumsByUserAndCoach/", "").then(function(response){
+
+            $scope.userforumlist=response.data['Forum details'];
+
+            $.each($scope.userforumlist, function(index,value) {
+                requestHandler.postRequest("listofAnswers/", {"postid":value.postid}).then(function(response){
+                    value.totalcomment=response.data.ForumDiscussionData.length;
+                });
+            });
+            $scope.loaded=false;
+            $('#showMostViewed').hide();
+            $('#showMostViewed').show(200);
 
          },function(){
             errorMessage(Flash,"Please try again later!")
         });
     };
 
-    $scope.doGetNewsDetailsByUser= function (id) {
+    $scope.doGetForumDetailsByUser= function () {
 
-        requestHandler.getRequest("getLatestNewsDetail/"+id, "").then(function(response){
+        requestHandler.postRequest("getForumDetailByUserAndCoach/",{"postid":$routeParams.id}).then(function(response){
+            $scope.userforumdetails=response.data['Forum details'];
+        },function(){
+            errorMessage(Flash,"Please try again later!")
+        });
 
-            $scope.usernewsdetails=response.data.News;
+    };
+
+    $scope.doGetForumAnswers=function(){
+
+        requestHandler.postRequest("listofAnswers/",{"postid":$routeParams.id}).then(function(response){
+            $scope.forumAnswers=response.data.ForumDiscussionData;
+        },function(){
+            errorMessage(Flash,"Please try again later!")
+        });
+
+    };
+
+    $scope.doPostForumAnswers=function(){
+
+        requestHandler.postRequest("postAnswer/",{"comments":$scope.comments,"postid":$routeParams.id}).then(function(response){
+            successMessage(Flash,"Your Comment Successfully Posted!");
+            $scope.doGetForumAnswers();
+            $scope.comments='';
+            $scope.userCommentForm.$setPristine();
+        },function(){
+            errorMessage(Flash,"Please try again later!")
+        });
+
+    };
+
+    $scope.doMarkPostAsAbuse=function(){
+
+        requestHandler.postRequest("abuseCount/",{"postid":$routeParams.id}).then(function(response){
+            successMessage(Flash,"Thanks for your evaluation!");
+            $scope.abuseDisable=true;
+        },function(){
+            errorMessage(Flash,"Please try again later!")
+        });
+
+    };
+
+    $scope.doMarkCommentAsAbuse=function(ansid){
+        requestHandler.postRequest("MarkasAbuse/",{"ansid":ansid}).then(function(response){
+            successMessage(Flash,"Thanks for your evaluation!");
         },function(){
             errorMessage(Flash,"Please try again later!")
         });
@@ -163,34 +219,26 @@ commonApp.controller('NewsUserController',function($scope,requestHandler,Flash,$
     };
 
 
-    // To display the user Testimonial list on load
-    $scope.doGetNewsByUser();
-    $scope.doGetNewsDetailsByUser($routeParams.id);
+    // To display the user Forum list on load
+    $scope.doGetForumsByUser();
+
+    $scope.init=function(){
+        $scope.doGetForumDetailsByUser();
+        $scope.doGetForumAnswers();
+    };
 
 });
 
 // html filter (render text as html)
-commonApp.filter('html', ['$sce', function ($sce) {
+userApp.filter('html', ['$sce', function ($sce) {
     return function (text) {
         return $sce.trustAsHtml(text);
     };
 }]);
 
-
-
-commonApp.filter('toSec', function() {
-
-    return function(input) {
-
-            dateArgs = input.match(/\d{2,4}/g),
-            year = dateArgs[2],
-            month = parseInt(dateArgs[1]) - 1,
-            day = dateArgs[0],
-            hour = dateArgs[3],
-            minutes = dateArgs[4];
-
-        var result = new Date(year, month, day, hour, minutes).getTime();
-
-        return result || '';
+// render image to view in list
+userApp.filter('trusted', ['$sce', function ($sce) {
+    return function(url) {
+        return $sce.trustAsResourceUrl(url);
     };
-});
+}]);
