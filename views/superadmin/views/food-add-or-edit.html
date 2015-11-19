@@ -185,36 +185,57 @@
                                         </span>-->
                                         </div>
                                         <div class="col-md-7 no-padding">
-                                            <p>Calcium</p>
+                                            <p>Calcium
+                                               <span ng-show="mineralForm.calcium.$dirty&&mineralForm.calcium.$invalid">
+                                                    <span ng-show="mineralForm.calcium.$error.validateFloat"> <span class="pull-right text-red">Invalid&nbsp;data.</span></span>
+                                                </span></p>
                                         </div>
                                         <div class="col-md-5">
-                                            <input type="text" ng-model="measureDetail.calcium"/>
+                                            <input type="text" name="calcium" ng-model="measureDetail.calcium" validate-Float/>
                                         </div>
                                         <div class="col-md-7 no-padding">
-                                            <p>Zinc</p>
+                                            <p>Zinc
+                                            <span ng-show="mineralForm.zinc.$dirty&&mineralForm.zinc.$invalid">
+                                                    <span ng-show="mineralForm.zinc.$error.validateFloat"> <span class="pull-right text-red">Invalid&nbsp;data.</span></span>
+                                                </span>
+                                            </p>
                                         </div>
                                         <div class="col-md-5">
-                                            <input type="text" ng-model="measureDetail.zinc"/>
+                                            <input type="text" name="zinc" ng-model="measureDetail.zinc" validate-Float/>
                                         </div>
                                     </div>
                                     <div class="col-md-3 no-padding">
                                         <div class="col-md-7 no-padding">
-                                            <p>Folic Acid</p>
+                                            <p>Folic Acid
+                                            <span ng-show="mineralForm.folicacid.$dirty&&mineralForm.folicacid.$invalid">
+                                                    <span ng-show="mineralForm.folicacid.$error.validateFloat"> <span class="pull-right text-red">Invalid&nbsp;data.</span></span>
+                                                </span>
+                                            </p>
                                         </div>
                                         <div class="col-md-5">
-                                            <input type="text" ng-model="measureDetail.folicacid"/>
+                                            <input type="text" name="folicacid" ng-model="measureDetail.folicacid" validate-Float/>
                                         </div>
                                         <div class="col-md-7 no-padding">
-                                            <p>Iron</p>
+                                            <p>Iron
+                                            <span ng-show="mineralForm.iron.$dirty&&mineralForm.iron.$invalid">
+                                                    <span ng-show="mineralForm.iron.$error.validateFloat"> <span class="pull-right text-red">Invalid&nbsp;data.</span></span>
+                                                </span>
+                                            </p>
+                                            </p>
                                         </div>
                                         <div class="col-md-5">
-                                            <input type="text" ng-model="measureDetail.iron"/>
+                                            <input type="text" name="iron" ng-model="measureDetail.iron" validate-Float/>
                                         </div>
                                         <div class="col-md-7 no-padding">
-                                            <p>Niacin</p>
+                                            <p>Niacin
+                                            <span ng-show="mineralForm.niacin.$dirty&&mineralForm.niacin.$invalid">
+                                                    <span ng-show="mineralForm.niacin.$error.validateFloat"> <span class="pull-right text-red">Invalid&nbsp;data.</span></span>
+                                                </span>
+                                            </p>
+                                            </p>
                                         </div>
                                         <div class="col-md-5">
-                                            <input type="text" ng-model="measureDetail.niacin"/>
+                                            <input type="text" name="niacin" ng-model="measureDetail.niacin" validate-Float/>
                                         </div>
                                         <div class="col-md-7 no-padding">
                                             <p>Phosphorous</p>
@@ -258,7 +279,7 @@
                                             <p>Thiamine</p>
                                         </div>
                                         <div class="col-md-5">
-                                            <input type="text" ng-model="measureDetail.thiamine"/>
+                                            <input type="text" ng-model="measureDetail.thiamin"/>
                                         </div>
                                         <div class="col-md-7 no-padding">
                                             <p>Vitamin A</p>

@@ -137,17 +137,13 @@ adminApp.controller('FoodController',function ($scope,requestHandler,Flash) {
            $.each($scope.foodList,function(index,value){
                value.session="";
                 $.each(value.sessionid,function(index,value1){
-                    sessionvalue=value1.sessionname + ",";
+                    sessionvalue=value1.sessionname;
                     sessionname = sessionname + sessionvalue;
-
+                    if(index!=value.sessionid.length-1)
+                        sessionname=sessionname+',';
                 });
-               //Remmoving comma from last character
-               var lastChar = sessionname.slice(-1);
-               if (lastChar == ',') {
-                   sessionname = sessionname.slice(0, -1);
-               }
                 value.session = sessionname;
-               sessionname="";
+                sessionname="";
 
             });
 
@@ -156,15 +152,11 @@ adminApp.controller('FoodController',function ($scope,requestHandler,Flash) {
             $.each($scope.foodList,function(index,value){
                 value.category="";
                 $.each(value.categoryid,function(index,value1){
-                    categoryvalue=value1.categoryname + ",";
+                    categoryvalue=value1.categoryname;
                     categoryname = categoryname + categoryvalue;
-
+                    if(index!=value.categoryid.length-1)
+                        categoryname=categoryname+',';
                 });
-                //Remmoving comma from last character
-                var lastChar = categoryname.slice(-1);
-                if (lastChar == ',') {
-                    categoryname = categoryname.slice(0, -1);
-                }
                 value.category = categoryname;
                 categoryname="";
 
