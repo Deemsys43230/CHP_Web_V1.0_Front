@@ -3,13 +3,18 @@
     <div id="w" class="clearfix">
         <div id="demography-content" class="height-520">
             <div class="col-md-8">
-                <div flash-message="2000" class="col-md-4 pull-right"></div>
+                <div flash-message="2000" class="col-md-5 pull-right"></div>
                 <div class="my-friends">
 
                     <h5 class="classic-title"><span><a href=""><i class="fa fa-users my-friends-list"></i>&nbsp;&nbsp;My Friends</a></span>
                         &nbsp;&nbsp;|&nbsp;&nbsp;<a href="" class="friends-request"><i class="fa fa-info-circle"></i>&nbsp;&nbsp;Friends Request</a>
                     </h5>
-                    <div class="row">
+                    <div ng-if="loaded">
+                        <div class="loader-style">
+                            <div class="loader"></div>
+                        </div>
+                    </div>
+                    <div class="row" ng-hide="myFriendsList.length==0">
                         <div class="col-md-7">
                             <input type="text" class="friend-input" placeholder="Search my friend here..." ng-model="myfriendssearch"/>
                         </div>
@@ -34,30 +39,37 @@
                             <a href="" class="img-shadow"><img ng-src="{{myfriends.imageurl | trusted}}"/></a>
                             <h5 class="wrap"><a href="">{{myfriends.name}}</a></h5>
                         </div>
-                        <h1 class="col-md-12 margin-top-50 text-gray text-center" ng-show="myFriendsList.length==0">NO FRIENDS FOUND!!!</h1>
-                        <h1 class="col-md-12 margin-top-50 text-gray text-center" ng-show="!friendsfilter.length">NO FRIENDS FOUND!!!</h1>
+                        <h1 class="col-md-12 margin-top-50 text-gray text-center" ng-show="!friendsfilter.length" ng-if="!loaded">
+                            <img src="../../images/no-friend.png"/><br/>
+                            NO FRIENDS FOUND!!!
+                        </h1>
                     </div>
                 </div>
                 <div class="friend-request">
                     <h5 class="classic-title"><a href="" class="my-friends-list"><i class="fa fa-users"></i>&nbsp;&nbsp;My Friends</a>
                         &nbsp;&nbsp;|&nbsp;&nbsp;<span><a href=""><i class="fa fa-info-circle"></i>&nbsp;&nbsp;Friends Request</a></span>
                     </h5>
-                    <div class="col-md-12 no-padding">
-                        <h2 class="pull-left text-gray">YOUR FRIENDS REQUEST</h2>
-                        <div class="pull-right">
-                            <button class="friends-button" ng-disabled="currentPage1 == 0" ng-click="currentPage1=0">
-                                <i class="fa fa-angle-double-left"></i>
-                            </button>
-                            <button class="friends-button" ng-disabled="currentPage1 == 0" ng-click="currentPage1=currentPage1-1">
-                                <i class="fa fa-angle-left"></i>
-                            </button>
-                            <span class="friends-list-no">&nbsp;&nbsp;{{currentPage1*pageSize1+1}}&nbsp;-&nbsp;<span ng-show="(currentPage1+1)*pageSize1<=requestedFriendsList.length">{{(currentPage1+1)*pageSize1}}</span><span ng-show="(currentPage1+1)*8>requestedFriendsList.length">{{requestedFriendsList.length}}</span>&nbsp;of&nbsp;{{requestedFriendsList.length}}&nbsp;Friends&nbsp;&nbsp;</span>
-                            <button class="friends-button" ng-disabled="currentPage1 >= requestedFriendsList.length/pageSize1 - 1" ng-click="currentPage1=currentPage1+1">
-                                <i class="fa fa-angle-right"></i>
-                            </button>
-                            <button class="friends-button" ng-disabled="currentPage1 >= requestedFriendsList.length/pageSize1 - 1" ng-click="currentPage1=numberOfPages1()-1">
-                                <i class="fa fa-angle-double-right"></i>
-                            </button>
+                    <div ng-hide="requestedFriendsList.length==0">
+                        <div class="col-md-12 no-padding">
+                            <h2 class="pull-left text-gray">YOUR FRIENDS REQUEST</h2>
+                            <div class="pull-right">
+                                <button class="friends-button" ng-disabled="currentPage1 == 0" ng-click="currentPage1=0">
+                                    <i class="fa fa-angle-double-left"></i>
+                                </button>
+                                <button class="friends-button" ng-disabled="currentPage1 == 0" ng-click="currentPage1=currentPage1-1">
+                                    <i class="fa fa-angle-left"></i>
+                                </button>
+                                <span class="friends-list-no">&nbsp;&nbsp;{{currentPage1*pageSize1+1}}&nbsp;-&nbsp;<span ng-show="(currentPage1+1)*pageSize1<=requestedFriendsList.length">{{(currentPage1+1)*pageSize1}}</span><span ng-show="(currentPage1+1)*8>requestedFriendsList.length">{{requestedFriendsList.length}}</span>&nbsp;of&nbsp;{{requestedFriendsList.length}}&nbsp;Friends&nbsp;&nbsp;</span>
+                                <button class="friends-button" ng-disabled="currentPage1 >= requestedFriendsList.length/pageSize1 - 1" ng-click="currentPage1=currentPage1+1">
+                                    <i class="fa fa-angle-right"></i>
+                                </button>
+                                <button class="friends-button" ng-disabled="currentPage1 >= requestedFriendsList.length/pageSize1 - 1" ng-click="currentPage1=numberOfPages1()-1">
+                                    <i class="fa fa-angle-double-right"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-md-12 no-padding">
+                            <hr/>
                         </div>
                     </div>
                     <div class="row friends-list">
@@ -68,8 +80,11 @@
                                 <a href="" class="btn-xs btn-danger margin-top-5" ng-click="denyFriends(friendsrequest.userid)">Deny</a>
                             </h5>
                         </div>
+                        <h1 class="col-md-12 margin-top-50 text-gray text-center" ng-show="requestedFriendsList.length==0">
+                            <img src="../../images/no-request.png"/><br/>
+                            NO REQUEST FOUND!!!
+                        </h1>
                     </div>
-
                 </div>
             </div>
             <div class="col-md-4">
@@ -79,10 +94,14 @@
                         <input type="text" class="friend-input" placeholder="Search new friend name..." ng-model="friendsearch" ng-change="searchFriends(friendsearch)">
                     </div>
                 </div>
-
+                <div ng-if="loaded">
+                    <div class="loader-style">
+                        <div class="loader"></div>
+                    </div>
+                </div>
                 <div class="row margin-top-20 content_scrollbar height-350">
                     <div ng-repeat="searchfriends in searchFriendsList" ng-show="searchFriendsList.length!=0">
-                        <div ng-hide="searchfriends.friendStatus == 3">
+                        <div>
                             <div class="col-md-3">
                                 <img class="img-circle" ng-src="{{searchfriends.imageurl | trusted}}"/>
                             </div>
@@ -92,6 +111,7 @@
                                 <a href="" class="invite_button" ng-if="searchfriends.friendStatus == 0" ng-click="inviteFriends(searchfriends.userid)">Invite</a>
                                 <a href="" class="invite_button request_sent disabled" ng-if="searchfriends.friendStatus == 1">Request Sent</a>
                                 <a href="" class="invite_button disabled" ng-if="searchfriends.friendStatus == 2">Request Received</a>
+                                <a href="" class="invite_button disabled" ng-if="searchfriends.friendStatus == 3">Friend</a>
                             </div>
                             <div class="col-md-12">
                                 <hr/>

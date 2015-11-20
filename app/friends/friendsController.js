@@ -24,10 +24,11 @@ userApp.controller('FriendsController',function($scope,requestHandler,Flash,Frie
 
 
     $scope.myFriends=function(){
-
+        $scope.loaded=true;
         var getMyFriendsPromise=FriendsService.doGetMyFriends();
         getMyFriendsPromise.then(function(result){
             $scope.myFriendsList=result;
+            $scope.loaded=false;
         });
     };
 
@@ -65,6 +66,8 @@ userApp.controller('FriendsController',function($scope,requestHandler,Flash,Frie
             if(result.data.Response_status ==1){
                 successMessage(Flash,"Friend&nbsp;Request&nbsp;Accepted");
                 $scope.myFriends();
+                $scope.requestedFriends();
+                $scope.searchFriends();
             }
             else if(result.data.Response_status == 0){
                 errorMessage(Flash,"No Friends pair found");

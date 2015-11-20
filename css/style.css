@@ -72,6 +72,10 @@ div[ng-include].ng-enter {
     animation: fadeInRight 1s;
 }
 
+.outerline{
+    overflow: hidden !important;
+}
+
 /*ratings*/
 .rating {
     margin: 0;
@@ -9226,6 +9230,8 @@ a.invite_button.disabled {
 .search-btn {
     display: inline-block;
     width: 100%;
+    pointer-events: none;
+    cursor: not-allowed;
     height: 39px;
     padding: 0px 20px;
     border: none;
@@ -9238,12 +9244,6 @@ a.invite_button.disabled {
     -moz-transition: all 0.2s ease-in-out;
     -webkit-transition: all 0.2s ease-in-out;
     -o-transition: all 0.2s ease-in-out;
-}
-
-.search-btn:hover{
-    background-color: #4EB677;
-    color: #fff;
-    cursor: pointer;
 }
 
 input.search-input{
