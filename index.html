@@ -218,7 +218,7 @@
                 <span>Or</span>
             </div>
             <div flash-message="2000" ></div>
-            <form name="registerForm">
+            <form name="registerForm" novalidate="novalidate">
                 <p>Name</p>
                 <input type="text" name="name" ng-pattern="/^ *([a-zA-Z]+ ?)+ *$/"  ng-model="userForm.name" maxlength="30" required/>
                 <span ng-show="registerForm.name.$dirty&&registerForm.name.$invalid && !registerForm.name.$pristine">
@@ -234,10 +234,10 @@
                 </span>
                 <span class="error-message" ng-show="registerForm.emailid.$error.emailexists"><span>Email&nbsp;Address&nbsp;Already&nbsp;Exist.</span></span>
                 <p>Password</p>
-                <input type="password" name="password" ng-model="userForm.password" ng-pattern="/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-])(?!.*\s).{6,}$/"  maxlength="20" required/>
+                <input type="password"  name="password" id="pswd" ng-model="userForm.password" ng-pattern="/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-])(?!.*\s).{6,}$/"  maxlength="20"required/>
                 <span ng-show="registerForm.password.$dirty&&registerForm.password.$invalid && !registerForm.password.$pristine">
                     <span class="error-message" ng-show="registerForm.password.$error.required"><span>Required.</span></span>
-                      <span class="error-message" ng-show="registerForm.password.$error.pattern"><span>Password&nbsp;doesn't&nbsp;not&nbsp;match.</span></span>
+                      <span class="error-message" ng-show="registerForm.password.$error.pattern"></span>
                 </span>
                 <p>Confirm Password</p>
                 <input type="password" name="confirmPassword" compare-to="userForm.password" maxlength="20" required ng-model="confirmpassword"/>
@@ -249,6 +249,31 @@
                     <div class="one_half last"><a id="register_form2" ng-disabled="registerForm.$invalid" class="btn btn_red">Proceed <i class="fa fa-angle-double-right"></i></a></div>
                 </div>
             </form>
+            <div id="pswd_info">
+                <h4>Password must meet the following requirements:</h4>
+
+                <ul>
+                    <li id="letter" class="invalid">At least <strong>one small letter</strong>
+
+                    </li>
+                    <li id="capital" class="invalid">At least <strong>one capital letter</strong>
+
+                    </li>
+                    <li id="number" class="invalid">At least <strong>one number</strong>
+
+                    </li>
+                    <li id="special" class="invalid">At least <strong>one special charcter</strong>
+
+                    </li>
+                    <li id="length" class="invalid">Be at least <strong>6 characters</strong>
+
+                    </li>
+                    <li id="space" class="valid">Space is not accepted
+
+                    </li>
+                </ul>
+            </div>
+        </div>
         </div>
 
         <!-- Register Form Continuation-->
@@ -553,7 +578,121 @@
         horizrailenabled: false,
         cursorborderradius: 0
     });
+
+
+    $(document).ready(function () {
+        $('#pswd').keyup(function () {
+            // set password variable
+            var pswd = $('#pswd').val();
+            if (pswd.length < 6) {
+                $('#length').removeClass('valid').addClass('invalid');
+            } else {
+                $('#length').removeClass('invalid').addClass('valid');
+            }
+            //validate letter
+            if (pswd.match(/[a-z]/)) {
+                $('#letter').removeClass('invalid').addClass('valid');
+            } else {
+                $('#letter').removeClass('valid').addClass('invalid');
+            }
+            //validate capital letter
+            if (pswd.match(/[A-Z]/)) {
+                $('#capital').removeClass('invalid').addClass('valid');
+            } else {
+                $('#capital').removeClass('valid').addClass('invalid');
+            }
+
+            //validate number
+            if (pswd.match(/\d/)) {
+                $('#number').removeClass('invalid').addClass('valid');
+            } else {
+                $('#number').removeClass('valid').addClass('invalid');
+            }
+
+            if (pswd.match(/\s/)) {
+                $('#space').removeClass('valid').addClass('invalid');
+            } else {
+                $('#space').removeClass('invalid').addClass('valid');
+            }
+
+            if (pswd.match(/[#?!@$%^&*-]/)) {
+                $('#special').removeClass('invalid').addClass('valid');
+            } else {
+                $('#special').removeClass('valid').addClass('invalid');
+            }
+
+            if ($('#pswd_info li.invalid').length == 0) {
+                $('#pswd_info').fadeOut();
+            } else {
+                $('#pswd_info').fadeIn();
+            }
+        });
+        $('#pswd').focus(function () {
+            // focus code here
+        });
+        $('#pswd').blur(function () {
+            // blur code here
+        });
+
+        $('#pswd]').keyup(function () {
+
+            // keyup code here
+        }).focus(function () {
+            $('#pswd_info').show();
+        }).blur(function () {
+            $('#pswd_info').hide();
+        });
+
+
+    });
 </script>
+<style>
+
+    #pswd_info {
+        position:absolute;
+        bottom:80px;
+        /* IE Specific */
+        right:-240px;
+        width:250px;
+        padding:15px;
+        background:#fefefe;
+        font-size:.875em;
+        border-radius:5px;
+        box-shadow:0 1px 3px #ccc;
+        border:1px solid #ddd;
+    }
+    #pswd_info h4 {
+        margin:0 0 10px 0;
+        padding:0;
+        font-weight:normal;
+    }
+    #pswd_info::before {
+        content:"\25C0";
+        position:absolute;
+        left:-12px;
+        top:45%;
+        font-size:14px;
+        line-height:14px;
+        color:#ddd;
+        text-shadow:none;
+        display:block;
+    }
+    .invalid {
+        background:url(../../images/invalid.png) no-repeat 0 50%;
+        padding-left:22px;
+        line-height:24px;
+        color:#ec3f41;
+    }
+    .valid {
+        background:url(../../images/valid.png) no-repeat 0 50%;
+        padding-left:22px;
+        line-height:24px;
+        color:#3a7d34;
+    }
+    #pswd_info {
+        display:none;
+    }
+</style>
 
 </body>
 </html>

@@ -209,7 +209,7 @@ adminApp.controller("FoodDetailsViewController",function($scope,requestHandler,$
 
     //Get Particular Food Details
     $scope.doGetFoodDetails= function () {
-        requestHandler.postRequest("/getFoodDetailByadmin/",{"foodid":$routeParams.id}).then(function(response){
+        requestHandler.postRequest("getFoodDetailByadmin/",{"foodid":$routeParams.id}).then(function(response){
             $scope.foodDetails=response.data.Food_Data;
            $scope.foodDetails.foodImagePath=requestHandler.convertUrl($scope.foodDetails.foodImagePath)+"200x200.jpg";
           //  $scope.foodDetails.foodImagePath=$scope.foodDetails.foodImagePath.substring($scope.foodDetails.foodImagePath.indexOf("/")+14,$scope.foodDetails.foodImagePath.length)
@@ -262,7 +262,8 @@ adminApp.controller("FoodDetailsEditController",function($q,$scope,requestHandle
     //Get Particular Food Details
     $scope.doGetFoodDetails= function () {
         $scope.doingUpdate = false;
-        requestHandler.postRequest("/getFoodDetailByadmin/",{"foodid":$routeParams.id}).then(function(response){
+        requestHandler.postRequest("getFoodDetailByadmin/",{"foodid":$routeParams.id}).then(function(response){
+
             $scope.foodDetails=response.data.Food_Data;
            $scope.foodDetails.foodImagePath=requestHandler.convertUrl($scope.foodDetails.foodImagePath)+"200x200.jpg";
            // $scope.foodDetails.foodImagePath=$scope.foodDetails.foodImagePath.substring($scope.foodDetails.foodImagePath.indexOf("/")+14,$scope.foodDetails.foodImagePath.length)
@@ -284,7 +285,7 @@ adminApp.controller("FoodDetailsEditController",function($q,$scope,requestHandle
 
         },function(response){
             alert("Not able to pull Food Measure List");
-        })
+        });
     };
     //End Get
 
