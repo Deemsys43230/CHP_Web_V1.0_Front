@@ -237,7 +237,7 @@
                 <input type="password"  name="password" id="pswd" ng-model="userForm.password" ng-pattern="/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-])(?!.*\s).{6,}$/"  maxlength="20"required/>
                 <span ng-show="registerForm.password.$dirty&&registerForm.password.$invalid && !registerForm.password.$pristine">
                     <span class="error-message" ng-show="registerForm.password.$error.required"><span>Required.</span></span>
-                      <span class="error-message" ng-show="registerForm.password.$error.pattern"></span>
+                      <span class="error-message" ng-show="registerForm.password.$error.pattern"><span>Condition&nbsp;not&nbsp;satisfied</span></span>
                 </span>
                 <p>Confirm Password</p>
                 <input type="password" name="confirmPassword" compare-to="userForm.password" maxlength="20" required ng-model="confirmpassword"/>
@@ -481,7 +481,6 @@
             $(".user_register1").hide();
             $(".header_title").text('Register');
             $("#pswd_info").hide();
-            $("#pswd").val="";
             return false;
         });
 
@@ -643,14 +642,12 @@
         }).focus(function () {
             $('#pswd_info').show();
         }).blur(function () {
-            var pass = $('#pswd').val();
+           /* var pass = $('#pswd').val();
            // alert(pass);
             if(pass == ""){
             $('#pswd_info').hide();
-            }
-            else{
-            $('#pswd_info').show();
-            }
+            }*/
+            $('#pswd_info').hide();
         });
 
         /*$('#pswd').bind("cut copy paste",function(e) {
