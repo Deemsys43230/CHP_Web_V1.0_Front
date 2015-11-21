@@ -274,7 +274,6 @@
                 </ul>
             </div>
         </div>
-        </div>
 
         <!-- Register Form Continuation-->
         <div class="user_register1">
@@ -481,6 +480,7 @@
             $(".user_register").show();
             $(".user_register1").hide();
             $(".header_title").text('Register');
+            $("#pswd_info").hide();
             return false;
         });
 
@@ -622,9 +622,9 @@
             }
 
             if ($('#pswd_info li.invalid').length == 0) {
-                $('#pswd_info').fadeOut();
+               $('#pswd_info').fadeOut();
             } else {
-                $('#pswd_info').fadeIn();
+               $('#pswd_info').fadeIn();
             }
         });
         $('#pswd').focus(function () {
@@ -634,13 +634,22 @@
             // blur code here
         });
 
+
+
         $('#pswd').keyup(function () {
 
             // keyup code here
         }).focus(function () {
             $('#pswd_info').show();
         }).blur(function () {
+            var pass = $('#pswd').val();
+            alert(pass);
+            if(pass == ""){
             $('#pswd_info').hide();
+            }
+            else{
+            $('#pswd_info').show();
+            }
         });
 
         /*$('#pswd').bind("cut copy paste",function(e) {
