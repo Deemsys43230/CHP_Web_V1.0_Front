@@ -481,6 +481,7 @@
             $(".user_register1").hide();
             $(".header_title").text('Register');
             $("#pswd_info").hide();
+            $("#pswd").val="";
             return false;
         });
 
@@ -643,7 +644,7 @@
             $('#pswd_info').show();
         }).blur(function () {
             var pass = $('#pswd').val();
-            alert(pass);
+           // alert(pass);
             if(pass == ""){
             $('#pswd_info').hide();
             }
