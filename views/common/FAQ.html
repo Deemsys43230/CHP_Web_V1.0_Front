@@ -13,12 +13,12 @@
             <div class="col-md-12">
                 <table>
                     <tr ng-repeat="userfaq in faqfilter = (userfaqlist | filter :{question : faqsearch})" ng-show="userfaq.length!=0">
-                        <td class="faq-slno">
+                       <!--<td class="faq-slno">
                             <h3>{{$index+1}}.</h3>
-                        </td>
+                        </td>-->
                         <td>
                             <h3>{{userfaq.question}}</h3>
-                            <p>{{userfaq.answer}}</p><br/>
+                            <p class="wrap">{{userfaq.answer}}</p><hr/><br/>
                         </td>
                     </tr>
                     <tr ng-show="userfaq.length==0"><td colspan="2">No Records Found !!!</td></tr>

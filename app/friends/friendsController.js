@@ -51,7 +51,7 @@ userApp.controller('FriendsController',function($scope,requestHandler,Flash,Frie
         var inviteFriendsPromise = FriendsService.doInviteFriends(id);
         inviteFriendsPromise.then(function(result){
             if(result.data.Response_status ==1){
-                successMessage(Flash,"Friend&nbsp;Request&nbsp;Sent");
+                successMessage(Flash,"Request&nbsp;Sent");
                 $scope.searchFriends('');
             }
            else if(result.data.Response_status == 0){
@@ -64,13 +64,11 @@ userApp.controller('FriendsController',function($scope,requestHandler,Flash,Frie
         var acceptFriendsPromise = FriendsService.doAcceptFriends(id);
         acceptFriendsPromise.then(function(result){
             if(result.data.Response_status ==1){
-                successMessage(Flash,"Friend&nbsp;Request&nbsp;Accepted");
-                $scope.myFriends();
-                $scope.requestedFriends();
-                $scope.searchFriends();
+                successMessage(Flash,"Request&nbsp;Accepted");
+                $scope.initialLoad();
             }
             else if(result.data.Response_status == 0){
-                errorMessage(Flash,"No Friends pair found");
+                errorMessage(Flash,"No Friends found");
             }
         })
     };
@@ -79,10 +77,10 @@ userApp.controller('FriendsController',function($scope,requestHandler,Flash,Frie
         var denyFriendsPromise = FriendsService.doDenyFriends(id);
         denyFriendsPromise.then(function(result){
             if(result.data.Response_status ==1){
-                successMessage(Flash,"Friend&nbsp;Request&nbsp;Rejected");
+                successMessage(Flash,"Request&nbsp;Rejected");
             }
             else if(result.data.Response_status == 0){
-                errorMessage(Flash,"No friends pair found");
+                errorMessage(Flash,"No friends found");
             }
         })
     };

@@ -240,7 +240,7 @@
                       <span class="error-message" ng-show="registerForm.password.$error.pattern"><span>Condition&nbsp;not&nbsp;satisfied</span></span>
                 </span>
                 <p>Confirm Password</p>
-                <input type="password" name="confirmPassword" compare-to="userForm.password" maxlength="20" required ng-model="confirmpassword"/>
+                <input type="password" name="confirmPassword"  maxlength="20" required ng-model="confirmpassword" compare-to="userForm.password"/>
                 <span ng-show="registerForm.confirmPassword.$dirty&&registerForm.confirmPassword.$invalid && !registerForm.confirmPassword.$pristine">
                     <span class="error-message" ng-show="registerForm.confirmPassword.$error.compareTo"><span>Password&nbsp;don't&nbsp;match.</span></span>
                 </span>

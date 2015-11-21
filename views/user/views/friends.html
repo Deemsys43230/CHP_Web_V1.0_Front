@@ -3,11 +3,12 @@
     <div id="w" class="clearfix">
         <div id="demography-content" class="height-520">
             <div class="col-md-8">
-                <div flash-message="2000" class="col-md-5 pull-right"></div>
+                <div flash-message="2000" class="col-md-4 pull-right"></div>
                 <div class="my-friends">
 
-                    <h5 class="classic-title"><span><a href=""><i class="fa fa-users my-friends-list"></i>&nbsp;&nbsp;My Friends</a></span>
-                        &nbsp;&nbsp;|&nbsp;&nbsp;<a href="" class="friends-request"><i class="fa fa-info-circle"></i>&nbsp;&nbsp;Friends Request</a>
+                    <h5 class="classic-title"><span><a href="" ng-click="initialLoad()"><i class="fa fa-users my-friends-list"></i>&nbsp;&nbsp;My Friends</a></span>
+                        &nbsp;&nbsp;|&nbsp;&nbsp;<a href="" class="friends-request" ng-click="initialLoad()"><i class="fa fa-info-circle"></i>&nbsp;&nbsp;Request Received</a>
+                        &nbsp;&nbsp;|&nbsp;&nbsp;<a href="" class="friends-request-sent" ng-click="initialLoad()"><i class="fa fa-info-circle"></i>&nbsp;&nbsp;Request Sent </a>
                     </h5>
                     <div ng-if="loaded">
                         <div class="loader-style">
@@ -46,8 +47,9 @@
                     </div>
                 </div>
                 <div class="friend-request">
-                    <h5 class="classic-title"><a href="" class="my-friends-list"><i class="fa fa-users"></i>&nbsp;&nbsp;My Friends</a>
-                        &nbsp;&nbsp;|&nbsp;&nbsp;<span><a href=""><i class="fa fa-info-circle"></i>&nbsp;&nbsp;Friends Request</a></span>
+                    <h5 class="classic-title"><a href="" class="my-friends-list" ng-click="initialLoad()"><i class="fa fa-users"></i>&nbsp;&nbsp;My Friends</a>
+                        &nbsp;&nbsp;|&nbsp;&nbsp;<span><a href="" ng-click="initialLoad()"><i class="fa fa-info-circle"></i>&nbsp;&nbsp;Request Received</a></span>
+                        &nbsp;&nbsp;|&nbsp;&nbsp;<a href="" class="friends-request-sent" ng-click="initialLoad()"><i class="fa fa-info-circle"></i>&nbsp;&nbsp;Request Sent</a>
                     </h5>
                     <div ng-hide="requestedFriendsList.length==0">
                         <div class="col-md-12 no-padding">
@@ -73,12 +75,59 @@
                         </div>
                     </div>
                     <div class="row friends-list">
-                        <div class="col-md-3" ng-repeat="friendsrequest in requestedFriendsList | startFrom:currentPage1*pageSize1 | limitTo:pageSize1">
+                        <div class="col-md-3" ng-repeat="friendsrequest in requestedFriendsList | startFrom:currentPage1*pageSize1 | limitTo:pageSize1" ng-show="friendsrequest.friendStatus == 2">
+                            <div>
                             <a href="" class="img-shadow"><img ng-src="{{friendsrequest.imageurl | trusted}}"/></a>
                             <h5 class="wrap">{{friendsrequest.name}}<br/>
                                 <a href="" class="btn-xs btn-success margin-top-5" ng-click="acceptFriends(friendsrequest.userid)">Accept</a>
                                 <a href="" class="btn-xs btn-danger margin-top-5" ng-click="denyFriends(friendsrequest.userid)">Deny</a>
                             </h5>
+                            </div>
+                        </div>
+                        <h1 class="col-md-12 margin-top-50 text-gray text-center" ng-show="requestedFriendsList.length==0">
+                            <img src="../../images/no-request.png"/><br/>
+                            NO REQUEST FOUND!!!
+                        </h1>
+                    </div>
+                </div>
+                <div class="friend-request-sent">
+                    <h5 class="classic-title"><a href="" class="my-friends-list" ng-click="initialLoad()"><i class="fa fa-users"></i>&nbsp;&nbsp;My Friends</a>
+                        &nbsp;&nbsp;|&nbsp;&nbsp;<a href="" class="friends-request" ng-click="initialLoad()"><i class="fa fa-info-circle"></i>&nbsp;&nbsp;Request Received</a>
+                        &nbsp;&nbsp;|&nbsp;&nbsp;<span><a href="" ng-click="initialLoad()"><i class="fa fa-info-circle"></i>&nbsp;&nbsp;Request Sent</a></span>
+                    </h5>
+
+                    <div ng-hide="requestedFriendsList.length==0">
+                        <div class="col-md-12 no-padding">
+                            <h3 class="pull-left text-gray">Request Received</h3>
+                            <div class="pull-right">
+                                <button class="friends-button" ng-disabled="currentPage1 == 0" ng-click="currentPage1=0">
+                                    <i class="fa fa-angle-double-left"></i>
+                                </button>
+                                <button class="friends-button" ng-disabled="currentPage1 == 0" ng-click="currentPage1=currentPage1-1">
+                                    <i class="fa fa-angle-left"></i>
+                                </button>
+                                <span class="friends-list-no">&nbsp;&nbsp;{{currentPage1*pageSize1+1}}&nbsp;-&nbsp;<span ng-show="(currentPage1+1)*pageSize1<=requestedFriendsList.length">{{(currentPage1+1)*pageSize1}}</span><span ng-show="(currentPage1+1)*8>requestedFriendsList.length">{{requestedFriendsList.length}}</span>&nbsp;of&nbsp;{{requestedFriendsList.length}}&nbsp;Friends&nbsp;&nbsp;</span>
+                                <button class="friends-button" ng-disabled="currentPage1 >= requestedFriendsList.length/pageSize1 - 1" ng-click="currentPage1=currentPage1+1">
+                                    <i class="fa fa-angle-right"></i>
+                                </button>
+                                <button class="friends-button" ng-disabled="currentPage1 >= requestedFriendsList.length/pageSize1 - 1" ng-click="currentPage1=numberOfPages1()-1">
+                                    <i class="fa fa-angle-double-right"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-md-12 no-padding">
+                            <hr/>
+                        </div>
+                    </div>
+                    <div class="row friends-list">
+                        <div class="col-md-3" ng-repeat="friendsrequest in requestedFriendsList | startFrom:currentPage1*pageSize1 | limitTo:pageSize1" ng-show="friendsrequest.friendStatus == 1">
+                            <div>
+                                <a href="" class="img-shadow"><img ng-src="{{friendsrequest.imageurl | trusted}}"/></a>
+                                <h5 class="wrap">{{friendsrequest.name}}<br/>
+                                    <!--<a href="" class="btn-xs btn-success margin-top-5" ng-click="acceptFriends(friendsrequest.userid)">Accept</a>
+                                    <a href="" class="btn-xs btn-danger margin-top-5" ng-click="denyFriends(friendsrequest.userid)">Deny</a>-->
+                                </h5>
+                            </div>
                         </div>
                         <h1 class="col-md-12 margin-top-50 text-gray text-center" ng-show="requestedFriendsList.length==0">
                             <img src="../../images/no-request.png"/><br/>
@@ -130,13 +179,21 @@
 <script>
     $(document).ready(function(){
         $(".friend-request").hide();
+        $(".friend-request-sent").hide();
         $(".my-friends-list").click(function(){
             $(".friend-request").hide();
+            $(".friend-request-sent").hide();
             $(".my-friends").show();
         });
         $(".friends-request").click(function(){
             $(".friend-request").show();
             $(".my-friends").hide();
+            $(".friend-request-sent").hide();
+        });
+        $(".friends-request-sent").click(function(){
+            $(".friend-request").hide();
+            $(".my-friends").hide();
+            $(".friend-request-sent").show();
         });
     });
 </script>
