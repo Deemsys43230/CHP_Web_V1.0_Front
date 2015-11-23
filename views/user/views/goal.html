@@ -9,24 +9,30 @@
 
         <div class="content-weight">
             <div class="row margin-right-2">
-                <div class="col-md-12 margin-bottom-10">
-                    <h5>Update Weight</h5>
-                </div>
                 <div class="col-md-12">
-                    <div class="col-md-4 text-right padding-top-4">
-                        <h5>Weight :</h5>
-                    </div>
-                    <div class="col-md-8">
-                        <input class="weight_input"/>
-                        <input type="radio" id="5" class="height" name="weight" />
-                        <label for="5">Kg</label>
-                        <input type="radio" id="6" class="height" name="weight" />
-                        <label for="6">Lb</label>
-                    </div>
-                    <div class="col-md-12 text-center margin-top-20 margin-bottom-10">
-                        <a href="" class="weight_button">Update</a>
-                    </div>
+                    <h5>&nbsp;&nbsp;Update Weight <span class="pull-right">Today's Date : <span class="text-red text-bold">{{todayDate}}</span></span> </h5>
                 </div>
+                <form name="demographyForm">
+                    <div class="col-md-12 margin-top-15">
+                        <div class="col-md-4 text-right padding-top-4">
+                            <h5>Weight :</h5>
+                        </div>
+                        <div class="col-md-8">
+                            <input class="weight_input" name="weight" ng-pattern="/^\-?\d+((\.|\,)\d+)?$/" ng-model="demography.weight" required/>
+                            <input type="radio" id="5" class="height" name="weight" />
+                            <label for="5">Kg</label>
+                            <input type="radio" id="6" class="height" name="weight" />
+                            <label for="6">Lb</label>
+                            <span ng-show="demographyForm.weight.$dirty&&demographyForm.weight.$invalid">
+                                <span class="error-message textarea-errormessage40-left" ng-show="demographyForm.weight.$error.required"><span>Required.</span></span>
+                                <span class="error-message textarea-errormessage40-left" ng-show="demographyForm.weight.$error.pattern"><span>Invalid&nbsp;Format.</span></span>
+                            </span>
+                        </div>
+                        <div class="col-md-12 text-center margin-top-15 margin-bottom-10">
+                            <a href="" class="weight_button" ng-disabled="demographyForm.$invalid" ng-click="doInsertWeightLog()">Update</a>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

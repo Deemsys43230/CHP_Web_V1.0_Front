@@ -49,7 +49,7 @@ userApp.controller('DemographyController',['$scope','requestHandler','Flash',fun
         $scope.nutrients.vitaminB6=$scope.nutrients.vitaminB6.toString();
 
          originalNutrition=angular.copy($scope.nutrients);
-    }
+    };
 
     $scope.doUpdateDemography= function () {
             $scope.demography.height = parseFloat($scope.demography.height);

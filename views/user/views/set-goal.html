@@ -17,14 +17,20 @@
         <input type="text" id="set-date" class="profile_input">
     </div>
     <div class="col-md-5 margin-top-15">Target Weight<small>(Kgs)</small><span class="pull-right">:</span></div>
-    <div class="col-md-7 margin-top-10">
-        <input type="text" class="profile_input">
-    </div>
+    <form name="setGoalForm">
+        <div class="col-md-7 margin-top-10">
+            <input id="target" type="text" ng-pattern="/^\d+$/" name="targetweight" ng-model="weight" class="profile_input" required maxlength="2">
+            <span ng-show="setGoalForm.targetweight.$dirty&&setGoalForm.targetweight.$invalid">
+                <span class="error-message" ng-show="setGoalForm.targetweight.$error.required"><span>Required.</span></span>
+                <span class="error-message" ng-show="setGoalForm.targetweight.$error.pattern"><span>Invalid&nbsp;Format.</span></span>
+            </span>
+        </div>
 
-    <div class="col-md-12 margin-top-20 text-center">
-        <span ng-show="updateGoal==0"><a class="btn-dis weight_button" ng-click="setGoal()">Set Goal</a></span>
-        <span ng-show="updateGoal==1"><a class="btn-dis weight_button" ng-click="setGoal()">Update Goal</a></span>
-    </div>
+        <div class="col-md-12 margin-top-20 text-center">
+            <span ng-show="updateGoal==0"><a class="btn-dis weight_button" ng-disabled="setGoalForm.$invalid" ng-click="setGoal()">Set Goal</a></span>
+            <span ng-show="updateGoal==1"><a class="btn-dis weight_button" ng-click="setGoal()">Update Goal</a></span>
+        </div>
+    </form>
 
     <input id="start" hidden/>
     <input id="end" hidden/>

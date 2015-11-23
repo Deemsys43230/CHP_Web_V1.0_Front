@@ -224,15 +224,12 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'userApp',
                             files:[
-                                '../../app/demography/test.js',
-                                '../../plugin/dateRange/daterangepicker.css',
-                                '../../plugin/dateRange/moment.js',
-                                '../../plugin/dateRange/daterangepicker.js'
+                                '../../app/test.js'
                             ]
                         })
                     }
                 },
-                controller:'DatepickerDemoCtrl'
+                controller:'testController'
             }).
             when('/forums', {
                 templateUrl: 'views/forums.html',
