@@ -452,21 +452,47 @@ userApp.controller('UserDashboardController',function($scope,requestHandler,Flas
         };
     };
 
-    $scope.setGoal=function(){
-        $scope.goal = {
-            status: 'view-goal'
-        };
-    };
-
     $scope.changegoal1=function(){
         $scope.goal = {
             status: 'set-goal'
         };
     };
 
+    $scope.doGetWeightGoal=function(){
+        requestHandler.getRequest("user/getWeightGoal/","").then(function(response){
+            if(response.data.Response_status==0){
+                $scope.updateGoal=0;
+            }
+            else{
+                $scope.goalDetails=response.data.Weight_Goal;
+                $scope.updateGoal=1;
+                /*$scope.minWeight=$scope.goalDetails.initialweight;
+                $scope.maxWeight=$scope.goalDetails.targetweight;*/
+                $scope.minWeight=40;
+                $scope.maxWeight=60;
+                console.log($scope.minWeight);
+                $scope.goal = {
+                    status: 'view-goal'
+                };
+            }
+        });
+    };
+
+    $scope.doGetWeightGoal();
+
+    $scope.setGoal=function(){
+        $scope.goal = {
+            status: 'view-goal'
+        };
+        var goalStartDate=document.getElementById("start").value;
+        var goalEndDate=document.getElementById("end").value;
+        console.log(goalStartDate);
+        console.log(goalEndDate);
+    };
+
     //bar chart values
     $scope.weightValue = [
-        ['Current Weight', 59.5]
+        ['Current Weight', -11]
     ];
     $scope.weightTrack = limitToFilter($scope.weightValue, 2);
     //end bar chart values
@@ -488,7 +514,6 @@ userApp.controller('UserDashboardController',function($scope,requestHandler,Flas
 
     $scope.weightGraph = limitToFilter($scope.weightGraphValue, 30);
     //end weight Graph
-
 
     //To Display current date
     var selectedDate = new Date();
@@ -730,9 +755,9 @@ userApp.directive('hcBar', function () {
             restrict: 'C',
             replace: true,
             scope: {
-                items: '='
-            },
-            controller: function ($scope, $element, $attrs) {
+                items: '=',
+                "minWeight":'=',
+                "maxWeight":'='
             },
             template: '<div id="chart-container" style="margin: 10px 0 0 0;height:60px">not working</div>',
             link: function (scope, element, attrs) {
@@ -744,8 +769,8 @@ userApp.directive('hcBar', function () {
                         text: ''
                     },
                     yAxis: {
-                        min: 58,
-                        max: 60,
+                        min: 10,
+                        max: 20,
                         title: {
                             text: '',
                             align: 'high'
@@ -788,6 +813,7 @@ userApp.directive('hcBar', function () {
                 });
                 scope.$watch("items", function (newValue) {
                     chart.series[0].setData(newValue, true);
+                    alert("newValue");
                 }, true);
 
             }

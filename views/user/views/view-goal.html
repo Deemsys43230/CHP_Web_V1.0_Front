@@ -3,21 +3,21 @@
 
 <div class="white-background">
     <h3 class="text-center margin-tb-10 text-green text-bold">Your Goal</h3>
-    <div class="margin-top-10">
-        <div class="col-md-7">Started Date<span class="pull-right">:</span></div>
-        <div class="col-md-5">01/10/2015</div>
+    <div class="col-md-12 no-padding">
+        <div class="col-md-6">Duration<span class="pull-right">:</span></div>
+        <div class="col-md-6 no-padding">{{goalDetails.startdate}} - {{goalDetails.enddate}}</div>
     </div>
-    <div class="margin-top-10">
-        <div class="col-md-7">Ends On<span class="pull-right">:</span></div>
-        <div class="col-md-5">25/11/2015</div>
+    <div class="col-md-12 no-padding">
+        <div class="col-md-6">Initial Weight <small>(Kgs)</small><span class="pull-right">:</span></div>
+        <div class="col-md-6 no-padding" data-minWeight="minWeight">{{goalDetails.initialweight}} Kgs</div>
     </div>
-    <div class="margin-top-10">
-        <div class="col-md-7">Target Weight<small>(Kgs)</small><span class="pull-right">:</span></div>
-        <div class="col-md-5">50Kgs</div>
+    <div class="col-md-12 no-padding">
+        <div class="col-md-6">Target Weight <small>(Kgs)</small><span class="pull-right">:</span></div>
+        <div class="col-md-6 no-padding" data-maxWeight="maxWeight">{{goalDetails.targetweight}} Kgs</div>
     </div>
 
     <div class="col-md-12 margin-top-10">
-        <p>Goal Progress</p>
+        <p>Target Date</p>
         <div class="hc-bar" items="weightTrack"></div>
     </div>
 

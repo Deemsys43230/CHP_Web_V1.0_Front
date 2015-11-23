@@ -4185,7 +4185,9 @@ and (min-width : 551px){
     width: 70px !important;
 }
 
-
+.hc-bar{
+    width: 350px !important;
+}
 
 
 /*------------------------------------------*/
@@ -6917,6 +6919,12 @@ a.weight_button {
 }
 
 a.weight_button:hover{
+     color: #fff;
+     background-color:#0db600;
+     cursor: pointer;
+ }
+
+a.weight_button[disabled]{
     color: #fff;
     background-color:#0db600;
     cursor: pointer;
