@@ -259,8 +259,8 @@
                         </div>
                         <div class="col-md-8">
                             <h6>{{userProfile.age}}</h6>
-                            <h6>{{demography.weight}}<small>kgs</small></h6>
-                            <h6>{{demography.height}}<small>ft</small></h6>
+                            <h6>{{demography.weight}}<small> kgs</small></h6>
+                            <h6>{{demography.height}}<small> ft</small></h6>
                         </div>
                     </div>
                 </div>
@@ -560,6 +560,26 @@
                     <div class="one_half last modal_close"><a class="btn btn_red">Cancel</a></div>
                 </div>
             </form>
+        </div>
+    </section>
+</div>
+
+
+<!-- Weight Goal Confirmation-->
+<div id="goal-delete-confirmation" class="popupContainer" style="display:none;left:37%!important;">
+    <header class="popupHeader">
+        <span class="header_title">Confirmation</span>
+        <span class="modal_close"><i class="fa fa-times"></i></span>
+    </header>
+
+    <section class="popupBody">
+        <!-- Register Form -->
+        <div class="common_model">
+            Are you sure want to delete this goal?
+            <div class="action_btns margin-top-20">
+                <div class="one_half modal_close"><a href="" class="btn btn_blue" ng-click="doDeleteGoal()">Yes</a></div>
+                <div class="one_half last modal_close"><a class="btn btn_red">No</a></div>
+            </div>
         </div>
     </section>
 </div>

@@ -28,7 +28,7 @@
 
         <div class="col-md-12 margin-top-20 text-center">
             <span ng-show="updateGoal==0"><a class="btn-dis weight_button" ng-disabled="setGoalForm.$invalid" ng-click="setGoal()">Set Goal</a></span>
-            <span ng-show="updateGoal==1"><a class="btn-dis weight_button" ng-click="setGoal()">Update Goal</a></span>
+            <span ng-show="updateGoal==1"><a class="btn-dis weight_button" ng-click="doUpdateGoal()">Update Goal</a></span>
         </div>
     </form>
 
@@ -41,18 +41,10 @@
 <script type="text/javascript">
     $(document).ready(function() {
 
-        $('#startDate').daterangepicker({
-            singleDatePicker: true,
-            startDate: moment()
-        });
-
-        $('#endDate').daterangepicker({
-            singleDatePicker: true,
-            startDate: moment()
-        });
-
         var options = {
-            minDate : new Date()
+            minDate : new Date(),
+            startDate : goalStartDate,
+            endDate : goalEndDate
         };
 
         $('#set-date').daterangepicker(options, function(start, end, label) {

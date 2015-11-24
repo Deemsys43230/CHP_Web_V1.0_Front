@@ -9,21 +9,26 @@
     </div>
     <div class="col-md-12 no-padding">
         <div class="col-md-6">Initial Weight <small>(Kgs)</small><span class="pull-right">:</span></div>
-        <div class="col-md-6 no-padding" data-minWeight="minWeight">{{goalDetails.initialweight}} Kgs</div>
+        <div class="col-md-6 no-padding">{{goalDetails.initialweight}} Kgs</div>
     </div>
     <div class="col-md-12 no-padding">
         <div class="col-md-6">Target Weight <small>(Kgs)</small><span class="pull-right">:</span></div>
-        <div class="col-md-6 no-padding" data-maxWeight="maxWeight">{{goalDetails.targetweight}} Kgs</div>
+        <div class="col-md-6 no-padding">{{goalDetails.targetweight}} Kgs</div>
+    </div>
+    <div class="col-md-12 no-padding">
+        <div class="col-md-6">Current Weight <small>(Kgs)</small><span class="pull-right">:</span></div>
+        <div class="col-md-6 no-padding">{{demography.weight}} Kgs</div>
     </div>
 
-    <div class="col-md-12 margin-top-10">
+    <div class="col-md-12 margin-top-5">
         <p>Target Progress</p>
-        <!--<div class="hc-bar" items="weightTrack"></div>-->
         <div id="targetGraph" style="height:47px;width:350px;"></div>
     </div>
 
-    <div class="col-md-12 text-center">
-        <a class="weight_button" ng-click="viewGraph()">View Graph</a>
+    <div class="col-md-12 margin-top-10 text-center">
+        <a class="target_button green_button" ng-click="updateGoalDetails()">Update Goal</a>
+        <a class="target_button orange_button" ng-click="doGetWeightLogGraph()">View Graph</a>
+        <a class="target_button red_button" ng-click="deteteGoal()">Delete Goal</a>
     </div>
 </div>
 
@@ -101,6 +106,6 @@
             plotBands:[{color: 'rgba(103,103,103,.35)'}]
         },
         series:[{name:'Current Weight',type: 'bar',pointWidth:10,data:[currentweight]},
-            {name:'Target',type: 'scatter',data:[targetweight]}]
+            {name:'Target Weight',type: 'scatter',data:[targetweight]}]
     });
 </script>

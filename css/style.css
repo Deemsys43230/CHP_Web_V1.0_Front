@@ -6930,6 +6930,47 @@ a.weight_button[disabled]{
     cursor: pointer;
 }
 
+
+a.target_button{
+    font-size: 14px;
+    padding:5px 15px;
+    color: white;
+    font-weight: bold;
+    -webkit-box-shadow: 0px 0px 1px rgba(0,0,0,0.2);
+    -moz-box-shadow: 0px 0px 1px rgba(0,0,0,0.2);
+    box-shadow: 0px 0px 1px rgba(0,0,0,0.2);
+}
+
+.green_button{
+    background-color:limegreen;
+}
+
+.green_button:hover{
+    color: #fff;
+    background-color:#0db600;
+    cursor: pointer;
+}
+
+.red_button{
+    background-color:#ff4c4c;
+}
+
+.red_button:hover{
+    color: #fff;
+    background-color:#ff1919;
+    cursor: pointer;
+}
+
+.orange_button{
+    background-color:#ffb732;
+}
+
+.orange_button:hover{
+    color: #fff;
+    background-color:#ffa500;
+    cursor: pointer;
+}
+
 a.suggest_button {
     margin-bottom:10px;
     height: 45px;
