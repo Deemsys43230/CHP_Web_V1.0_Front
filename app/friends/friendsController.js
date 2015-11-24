@@ -53,6 +53,7 @@ userApp.controller('FriendsController',function($scope,requestHandler,Flash,Frie
             if(result.data.Response_status ==1){
                 successMessage(Flash,"Request&nbsp;Sent");
                 $scope.searchFriends('');
+                $scope.initialLoad();
             }
            else if(result.data.Response_status == 0){
                 errorMessage(Flash,"Already Request Sent");
@@ -78,14 +79,13 @@ userApp.controller('FriendsController',function($scope,requestHandler,Flash,Frie
         denyFriendsPromise.then(function(result){
             if(result.data.Response_status ==1){
                 successMessage(Flash,"Request&nbsp;Rejected");
+                $scope.initialLoad();
             }
             else if(result.data.Response_status == 0){
                 errorMessage(Flash,"No friends found");
             }
         })
     };
-
-
 
     //Onload
     $scope.initialLoad=function(){

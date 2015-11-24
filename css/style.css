@@ -9218,6 +9218,11 @@ a.invite_button.request_sent{
     border-color: #FF4F4F !important;
 }
 
+a.invite_button.request_sent:hover{
+    color: #FFF !important;
+    background-color: #FF4F4F !important;
+}
+
 a.invite_button{
     color: #57cb85;
     font-size: 12px;

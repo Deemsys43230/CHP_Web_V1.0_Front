@@ -1,6 +1,6 @@
 var userApp=angular.module('friendsServiceModule',['requestModule']);
 
-userApp.factory("FriendsService",function(requestHandler){
+userApp.factory("FriendsService",function(requestHandler,Flash){
 
     var userFriendsServiceObj={};
 
@@ -51,7 +51,7 @@ userApp.factory("FriendsService",function(requestHandler){
 
     //Deny friends
     userFriendsServiceObj.doDenyFriends= function (id) {
-        return requestHandler.postRequest("user/denyFriendRequest/",{"friends_friendid":id}).then(function(response){
+        return requestHandler.postRequest("user/denyorCancelFriendRequest/",{"friends_friendid":id}).then(function(response){
             return response;
         },function(response){
             errorMessage(Flash,"Please try again later");
