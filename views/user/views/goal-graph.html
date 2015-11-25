@@ -9,19 +9,14 @@
 
         <div class="graph-weight">
             <div class="row">
-                <div class="col-md-8">
-                    <div class="col-md-7">Started Date<span class="pull-right">:</span></div>
-                    <div class="col-md-5">01/10/2015</div>
-                    <div class="margin-top-10">
-                        <div class="col-md-7">Ends On<span class="pull-right">:</span></div>
-                        <div class="col-md-5">25/11/2015</div>
-                    </div>
-                    <div class="margin-top-10">
-                        <div class="col-md-7">Target Weight<small>(Kgs)</small><span class="pull-right">:</span></div>
-                        <div class="col-md-5">50Kgs</div>
-                    </div>
+                <div class="col-md-8 text-center margin-top-15 margin-bottom-20">
+                    <span ng-show="weightUpdated">
+                       <h1 class="text-green" ng-hide="weightIncrease">{{weightDiff}} <small class="text-green">Kgs</small> Gained</h1>
+                       <h1 class="text-red" ng-show="weightIncrease">{{weightDiff}} <small class="text-red">Kgs</small> Reduced</h1>
+                    </span>
+                    <h1 class="text-gray" ng-hide="weightUpdated">No Changes in Weight</h1>
                 </div>
-                <div class="col-md-4 text-center">
+                <div class="col-md-4 text-center margin-top-20">
                     <a class="weight_button" ng-click="viewGoal()">Back</a>
                 </div>
             </div>

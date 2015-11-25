@@ -6925,11 +6925,10 @@ a.weight_button:hover{
  }
 
 a.weight_button[disabled]{
-    color: #fff;
-    background-color:#0db600;
-    cursor: pointer;
+    pointer-events: none;
+    opacity: 0.7;
+    cursor: not-allowed;
 }
-
 
 a.target_button{
     font-size: 14px;

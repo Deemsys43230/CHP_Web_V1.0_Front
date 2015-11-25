@@ -229,7 +229,6 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         $scope.frequentFoodList =result;
     });
 
-
     // Insert suggest food
     $scope.doAddSuggestFood=function(){
 
@@ -443,6 +442,8 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
     };
 
     $scope.viewGoal=function(){
+        $scope.weightUpdated=0;
+        $scope.doGetWeightGoal();
         $scope.graph = {
             status: 'goal'
         };
@@ -452,7 +453,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         $scope.goal = {
             status: 'view-goal'
         };
-    }
+    };
 
     $scope.doGetWeightGoal=function(){
         requestHandler.getRequest("user/getWeightGoal/","").then(function(response){
@@ -462,6 +463,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
             else{
                 $scope.goalDetails=response.data.Weight_Goal;
                 $scope.updateGoal=1;
+                $scope.originalWeight=$scope.demography.weight;
 
                 var dateCompare = $scope.goalDetails.startdate.slice(6,10)+','+$scope.goalDetails.startdate.slice(3,5)+','+$scope.goalDetails.startdate.slice(0,2);
                 var date1 = selectedDate.slice(6,10)+','+selectedDate.slice(3,5)+','+selectedDate.slice(0,2);
@@ -506,7 +508,6 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
             $scope.setGoalDetails.startdate = $scope.setGoalDetails.enddate = selectedDate;
         }
         if($scope.demography.weight!=""){
-            $scope.originalWeight=$scope.demography.weight;
             $(function(){
                 $("#lean_overlay").fadeTo(1000);
                 $("#goal-confirmation").fadeIn(600);
@@ -525,6 +526,10 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
                 $("#lean_overlay").hide();
             });
         }
+    };
+
+    $scope.isWeightUpdated=function(){
+        return angular.equals ($scope.originalWeight,parseInt($scope.demography.weight));
     };
 
     $scope.setGoalConfirmation=function(){
@@ -555,6 +560,15 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
 
     //TO Insert weight Goal Log
     $scope.doInsertWeightLog=function(){
+        $scope.weightUpdated=1;
+        $scope.weightDiff = ($scope.originalWeight - $scope.demography.weight).toFixed(2);
+        if($scope.weightDiff>0){
+            $scope.weightIncrease=1;
+        }
+        else{
+            $scope.weightDiff = $scope.weightDiff*(-1);
+            $scope.weightIncrease=0;
+        }
         requestHandler.postRequest("user/getWeightLogByDate/",{"date":selectedDate}).then(function(response){
             if(response.data.Response_status==0){
                 requestHandler.postRequest("user/insertWeightLog/",{"date":selectedDate,"weight":$scope.demography.weight}).then(function(response){
