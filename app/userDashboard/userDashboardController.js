@@ -448,6 +448,12 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         };
     };
 
+    $scope.cancelUpdate=function(){
+        $scope.goal = {
+            status: 'view-goal'
+        };
+    }
+
     $scope.doGetWeightGoal=function(){
         requestHandler.getRequest("user/getWeightGoal/","").then(function(response){
             if(response.data.Response_status==0){
@@ -456,6 +462,31 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
             else{
                 $scope.goalDetails=response.data.Weight_Goal;
                 $scope.updateGoal=1;
+
+                var dateCompare = $scope.goalDetails.startdate.slice(6,10)+','+$scope.goalDetails.startdate.slice(3,5)+','+$scope.goalDetails.startdate.slice(0,2);
+                var date1 = selectedDate.slice(6,10)+','+selectedDate.slice(3,5)+','+selectedDate.slice(0,2);
+                var date2 = $scope.goalDetails.enddate.slice(6,10)+','+$scope.goalDetails.enddate.slice(3,5)+','+$scope.goalDetails.enddate.slice(0,2);
+
+                var date1_ms;
+                if (new Date(dateCompare).getTime() >= new Date(date1).getTime()) {
+                    date1_ms = new Date(dateCompare).getTime();
+                }
+                else{
+                    date1_ms = new Date(date1).getTime();
+                }
+
+                // The number of milliseconds in one day
+                var ONE_DAY = 1000 * 60 * 60 * 24;
+
+                // Convert both dates to milliseconds
+                var date2_ms = new Date(date2).getTime();
+
+                // Calculate the difference in milliseconds
+                var difference_ms = Math.abs(date1_ms - date2_ms);
+
+                // Convert back to days
+                $scope.remainingDates = Math.round(difference_ms/ONE_DAY);
+
                 $window.currentweight = $scope.demography.weight;
                 $window.targetweight = $scope.goalDetails.targetweight;
                 $scope.goal = {
@@ -608,6 +639,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
     $scope.updateGoalDetails=function(){
         $window.goalStartDate = $scope.goalDetails.startdate;
         $window.goalEndDate = $scope.goalDetails.enddate;
+        $window.goalEndDate = $scope.goalDetails.enddate;
         $scope.weight = $scope.goalDetails.targetweight;
         $scope.goal = {
             status: 'set-goal'
@@ -617,14 +649,18 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
     //To Do Update Goal
     $scope.doUpdateGoal=function(){
         $scope.setGoalDetails={};
-        $scope.setGoalDetails.startdate=document.getElementById("start").value;
-        $scope.setGoalDetails.enddate=document.getElementById("end").value;
-        $scope.setGoalDetails.targetweight=parseInt(document.getElementById("target").value);
-        $scope.demography.weight = parseFloat($scope.demography.weight);
-        if($scope.originalWeight!=$scope.demography.weight){
-            $scope.doUpdateWeight();
+        if(document.getElementById("start").value==''){
+            $scope.setGoalDetails.startdate=$scope.goalDetails.startdate;
+            $scope.setGoalDetails.enddate=$scope.goalDetails.enddate;
         }
-        $scope.setGoalDetails.initialweight=parseInt($scope.demography.weight);
+        else{
+            $scope.setGoalDetails.startdate=document.getElementById("start").value;
+            $scope.setGoalDetails.enddate=document.getElementById("end").value;
+        }
+        $scope.setGoalDetails.targetweight=parseInt(document.getElementById("target").value);
+        $scope.setGoalDetails.initialweight=$scope.goalDetails.initialweight;
+
+        console.log($scope.setGoalDetails);
 
         requestHandler.putRequest("user/updateWeightGoal/",$scope.setGoalDetails).then(function(response){
             $scope.doGetWeightGoal();

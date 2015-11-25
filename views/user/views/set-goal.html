@@ -28,7 +28,8 @@
 
         <div class="col-md-12 margin-top-20 text-center">
             <span ng-show="updateGoal==0"><a class="btn-dis weight_button" ng-disabled="setGoalForm.$invalid" ng-click="setGoal()">Set Goal</a></span>
-            <span ng-show="updateGoal==1"><a class="btn-dis weight_button" ng-click="doUpdateGoal()">Update Goal</a></span>
+            <span ng-show="updateGoal==1"><a class="btn-dis target_button green_button" ng-click="doUpdateGoal()">Update Goal</a></span>
+            <span ng-show="updateGoal==1"><a class="btn-dis target_button red_button" ng-click="cancelUpdate()">Cancel</a></span>
         </div>
     </form>
 
@@ -42,7 +43,7 @@
     $(document).ready(function() {
 
         var options = {
-            minDate : new Date(),
+            minDate : new Date,
             startDate : goalStartDate,
             endDate : goalEndDate
         };
