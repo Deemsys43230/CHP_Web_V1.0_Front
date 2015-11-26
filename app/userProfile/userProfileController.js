@@ -149,6 +149,7 @@ userApp.controller('UserProfileController',['$scope','requestHandler','Flash',fu
         $scope.changePasswordForm.$setPristine();
     };
 
+
         //Enable or Disable Privacy details
     $scope.privacydetails = function(){
         requestHandler.putRequest("updateUserSettingsIsPrivacy/","").then(function(response){
