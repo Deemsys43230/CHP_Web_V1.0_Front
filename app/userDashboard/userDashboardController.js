@@ -18,7 +18,6 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
             $("#lean_overlay").fadeTo(1000);
             $("#modal-add-food").fadeIn(600);
             $(".user_register").show();
-
         });
         $(".modal_close").click(function(){
             $(".user_register").hide();
@@ -125,6 +124,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
             $scope.current=$scope.caloriesIntake=0;
         }
         else{
+            console.log($scope.userFood.measure.calories);
             $scope.current=$scope.caloriesIntake=$scope.userFood.measure.calories*$scope.userFood.servings;
             $scope.current=$scope.current.toFixed(2);
             if(($scope.current.length-3)>2) $scope.max=100+((String($scope.current|0).slice(0, -2))*100);
@@ -448,9 +448,10 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         $scope.foodSuggestForm.$setPristine();
         $scope.userFood.measure="";
         $scope.userFood.servings="";
-        $scope.FoodAddForm.$setPristine();
+         $scope.FoodAddForm.$setPristine();
         $scope.current=$scope.caloriesIntake=0;
         $scope.max = 100;
+        $scope.userSelectedFoodDetails={};
     };
 
     //Clear suggest exercise model values
@@ -462,6 +463,8 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         $scope.ExerciseAddForm.$setPristine();
         $scope.current=$scope.caloriesSpent=0;
         $scope.max = 100;
+        $scope.userSelectedExerciseDetails={};
+
     };
 
     //Weight and Set Goal

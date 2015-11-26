@@ -24,7 +24,7 @@
                     </div>
                     <div class="coach-list">
                         <div class="content_scrollbar">
-                            <div class="coach-view" ng-class="{'active': usercoach.userid == usercoachdetails.userid }" ng-repeat="usercoach in usercoachfilter = (usercoachlist | filter : coachsearch)" ng-click="doGetCoachDetailsByUser(usercoach.userid)" ng-show="usercoachlist.length!=0">
+                            <div class="coach-view" ng-class="{'active': usercoach.userid == usercoachdetails.userid }" ng-repeat="usercoach in usercoachfilter = (usercoachlist | filter : { name : coachsearch} )" ng-click="doGetCoachDetailsByUser(usercoach.userid)" ng-show="usercoachlist.length!=0">
                                 <div class="col-md-3">
                                     <img class="img-circle" ng-src="{{usercoach.imageurl | trusted}}">
                                 </div>
