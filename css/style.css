@@ -7332,16 +7332,11 @@ ul.food li .food_close{
     color: #ccc;
 }
 
-ul.food li p{
-    line-height: 8px;
+ul.food li span.pull-right{
+    font-size:13px !important;
 }
 
-ul.food li p span.pull-right{
-    margin-top:5px !important;
-}
-
-ul.food li p.food_name{
-    padding-top:10px;
+ul.food li .food_name{
     font-size: 15px;
     font-weight:bold !important;
     text-decoration:underline;
@@ -8997,7 +8992,7 @@ a#measure-modal{
 .circle-wrapper{
     position: relative;
     text-align: center;
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 .circle-progress{
@@ -9013,7 +9008,9 @@ a#measure-modal{
     font-size: 12px !important;
 }
 
-
+.font-14{
+    font-size: 15px !important;
+}
 
 /* ============================================================
   COMMON
@@ -9354,5 +9351,14 @@ a.abuse{
 
 .height-550{
     height: 550px !important;
+}
+
+.input-form-control-override{
+    border-radius: 0px !important;
+    box-shadow: none !important;
+}
+
+.input-form-control-override:focus{
+    box-shadow: none !important;
 }
 

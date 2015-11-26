@@ -4,28 +4,31 @@
 <div class="page-banner">
     <div class="container">
         <div class="row">
-            <h4 class="classic-title"><span>Frequently Asked Questions</span></h4>
             <div class="col-md-12">
-                <div class="col-md-5"></div>
-                <div class="col-md-6"><input class="form-control" ng-model="faqsearch" placeholder="Search"></div>
-                <div class="col-md-1"><i class="fa fa-search"></i></div>
+                <div class="col-md-4 no-padding pull-right">
+                    <input class="form-control input-form-control-override" ng-model="faqsearch" placeholder="Search terms here...">
+                </div>
+                <h4 class="classic-title margin-top-5"><span>Frequently Asked Questions</span></h4>
             </div>
-            <div class="col-md-12">
-                <table>
-                    <tr ng-repeat="userfaq in faqfilter = (userfaqlist | filter :{question : faqsearch})" ng-show="userfaq.length!=0">
-                       <!--<td class="faq-slno">
-                            <h3>{{$index+1}}.</h3>
-                        </td>-->
-                        <td>
-                            <h3>{{userfaq.question}}</h3>
-                            <p class="wrap">{{userfaq.answer}}</p><hr/><br/>
-                        </td>
-                    </tr>
-                    <tr ng-show="userfaq.length==0"><td colspan="2">No Records Found !!!</td></tr>
-                    <tr ng-show="!faqfilter.length"><td colspan="2">No Records Found !!!</td></tr>
-                </table>
+            <div class="col-md-12 min-height-385">
+                <div ng-if="loaded">
+                    <div class="loader-style">
+                        <div class="loader"></div>
+                    </div>
+                </div>
+                <div ng-repeat="userfaq in faqfilter = (userfaqlist | filter :{question : faqsearch})" ng-show="userfaq.length!=0">
+                    <div class="news-block margin-top-7">
+                        <h3 class="text-muted">{{userfaq.question}}</h3>
+                        <h5 class="text-justify margin-top-7 text-gray">{{userfaq.answer}}</h5>
+                    </div>
+                </div>
+                <div ng-show="userfaq.length==0 || !faqfilter.length">
+                    <div class="margin-top-50 text-center">
+                        <img class="margin-top-20" src="images/no-faq.png"/>
+                        <h1 class="text-gray">NO FAQ FOUND !!!</h1>
+                    </div>
+                </div>
             </div>
-
         </div>
     </div>
 </div>

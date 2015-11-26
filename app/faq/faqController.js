@@ -131,11 +131,10 @@ commonApp.controller('FAQUserController',function($scope,requestHandler,Flash){
 
     // To display FAQ as user
     $scope.doGetUserFAQ=function(){
-
+        $scope.loaded=true;
         requestHandler.getRequest("getFAQListByUser/", "").then(function(response){
-
             $scope.userfaqlist=response.data.Faq_Data;
-            console.log($scope.userfaqlist);
+            $scope.loaded=false;
         },function(){
             errorMessage(Flash,"Please try again later!")
         });

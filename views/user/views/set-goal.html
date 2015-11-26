@@ -12,7 +12,7 @@
             The value property contains the default value OR the value a user types in.
         </p>
     </div>
-    <div class="col-md-5 margin-top-15">Target Period<span class="pull-right">:</span></div>
+    <div class="col-md-5 margin-top-15">Target {{targetText}}<span class="pull-right">:</span></div>
     <div class="col-md-7 margin-top-10">
         <input type="text" id="set-date" class="profile_input">
     </div>
@@ -44,8 +44,9 @@
 
         var options = {
             minDate : new Date,
-            startDate : goalStartDate,
-            endDate : goalEndDate
+            startDate : goalEndDate,
+            endDate : goalEndDate,
+            singleDatePicker: singlePicker
         };
 
         $('#set-date').daterangepicker(options, function(start, end, label) {

@@ -36,7 +36,7 @@ adminApp.factory("UserDashboardService",function(requestHandler){
         }, function () {
             errorMessage(Flash, "Please try again later!")
         });
-    }
+    };
 
     //On Select Food From list
     userDashboardServiceObj.doGetSelectedFoodDetails= function (foodid) {

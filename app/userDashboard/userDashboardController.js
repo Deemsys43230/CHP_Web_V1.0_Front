@@ -6,7 +6,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
     $scope.userFood.sessionid=1;
     $scope.servings=0;
     $scope.current=$scope.caloriesIntake=0;
-    $scope.max=100;
+    $scope.max=$scope.gainGraphMax=100;
     $scope.exerciseSearchResult = [];
     $scope.userExercise={};
     $scope.caloriesSpent=0;
@@ -100,7 +100,6 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
                 });
                 $scope.userFood.servings=parseInt(result.measureid.servings);
                 $scope.current=$scope.caloriesIntake=result.measureid.calories;
-                $scope.currentColor =   '#66E066';
                 $scope.current=$scope.current.toFixed(2);
                 if(($scope.current.length-3)>2) $scope.max=100+((String($scope.current|0).slice(0, -2))*100);
                 else $scope.max=100;
@@ -112,8 +111,6 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
 
     //Calories caluclation for food
     $scope.doCalculateCalories=function(){
-        $scope.currentColor =   '#66E066';
-
         if($scope.userFood.servings==0){
             $scope.current=$scope.caloriesIntake=0;
         }
@@ -146,6 +143,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         var foodInsertPromise=UserDashboardService.doInsertUserFood($scope.userFood);
         foodInsertPromise.then(function(){
             $scope.loadFoodDiary( $scope.userFood.addeddate);
+            $scope.doGetIntakeBruntByDate( $scope.userFood.addeddate);
         });
 
     };
@@ -162,10 +160,12 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         foodInsertPromise.then(function(){
         if($scope.selectedDate==selectedDate){
             $scope.loadFoodDiary($scope.selectedDate);
+            $scope.doGetIntakeBruntByDate($scope.selectedDate);
         }
         else
         {
             $scope.loadFoodDiary($scope.selectedDate.format("dd/mm/yyyy"));
+            $scope.doGetIntakeBruntByDate($scope.selectedDate.format("dd/mm/yyyy"));
         }
         });
 
@@ -177,11 +177,12 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         foodDeletePromise.then(function(){
             if($scope.selectedDate==selectedDate){
                 $scope.loadFoodDiary($scope.selectedDate);
+                $scope.doGetIntakeBruntByDate($scope.selectedDate);
             }
             else{
                 $scope.loadFoodDiary($scope.selectedDate.format("dd/mm/yyyy"));
+                $scope.doGetIntakeBruntByDate($scope.selectedDate.format("dd/mm/yyyy"));
             }
-
         });
     };
 
@@ -334,6 +335,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         var exerciseInsertPromise=UserDashboardService.doInsertUserExercise($scope.userExercise);
         exerciseInsertPromise.then(function(){
             $scope.loadExerciseDiary($scope.userExercise.date);
+            $scope.doGetIntakeBruntByDate($scope.userExercise.date);
         });
 
     };
@@ -344,9 +346,11 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         exerciseDeletePromise.then(function(){
             if($scope.selectedDate==selectedDate){
                 $scope.loadExerciseDiary($scope.selectedDate);
+                $scope.doGetIntakeBruntByDate($scope.selectedDate);
             }
             else{
                 $scope.loadExerciseDiary($scope.selectedDate.format("dd/mm/yyyy"));
+                $scope.doGetIntakeBruntByDate($scope.selectedDate.format("dd/mm/yyyy"));
             }
 
         });
@@ -373,7 +377,6 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
                 $scope.userExercise.workoutvalue=parseInt(result.User_exercise_data.Level.workoutvalue);
 
                 $scope.current=$scope.caloriesSpent=result.User_exercise_data.Level.calories;
-                 $scope.currentColor =   '#66E066';
                  $scope.current=$scope.current.toFixed(2);
                  if(($scope.current.length-3)>2) $scope.max=100+((String($scope.current|0).slice(0, -2))*100);
                  else $scope.max=100;
@@ -399,10 +402,12 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         exerciseInsertPromise.then(function(){
             if($scope.selectedDate==selectedDate){
                 $scope.loadExerciseDiary($scope.selectedDate);
+                $scope.doGetIntakeBruntByDate($scope.selectedDate);
             }
             else
             {
                 $scope.loadExerciseDiary($scope.selectedDate.format("dd/mm/yyyy"));
+                $scope.doGetIntakeBruntByDate($scope.selectedDate.format("dd/mm/yyyy"));
             }
         });
 
@@ -417,8 +422,6 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
 
     //Calories caluclation for exercose
     $scope.doCalculateCaloriesExercise=function(){
-        $scope.currentColor =   '#FF5C33';
-
         if($scope.userExercise.workoutvalue==0){
             $scope.current=$scope.caloriesSpent=0;
         }
@@ -715,6 +718,26 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         });
     };
 
+    // Get Calories Brunt And Intake deatils by date
+    $scope.doGetIntakeBruntByDate = function(date){
+        requestHandler.postRequest("user/getTotalCalorieDetailForDate/",{"date":date}).then(function(response){
+            $scope.calorieGraph=response.data.Calorie_Graph;
+            if($scope.calorieGraph.intakecalorie=="") $scope.calorieGraph.intakecalorie=0;
+            if($scope.calorieGraph.burntcalorie=="") $scope.calorieGraph.burntcalorie=0;
+            $scope.currentGain=$scope.calorieGraph.intakecalorie;
+            $scope.currentGain=$scope.currentGain.toFixed(2);
+            if(($scope.currentGain.length-3)>2) $scope.gainGraphMax=100+((String($scope.currentGain|0).slice(0, -2))*100);
+            else $scope.gainGraphMax=100;
+            $scope.currentSpent=$scope.calorieGraph.burntcalorie;
+            $scope.currentSpent=$scope.currentSpent.toFixed(2);
+            if(($scope.currentSpent.length-3)>2) $scope.spentGraphMax=100+((String($scope.currentSpent|0).slice(0, -2))*100);
+            else $scope.spentGraphMax=100;
+
+        },function(){
+            errorMessage(Flash, "Please try again later!");
+        });
+    };
+
     //To Display current date
     var selectedDate = new Date();
     var dd = selectedDate.getDate();
@@ -738,15 +761,17 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         if($scope.selectedDate==selectedDate){
             $scope.loadFoodDiary($scope.selectedDate);
             $scope.loadExerciseDiary($scope.selectedDate);
+            $scope.doGetIntakeBruntByDate($scope.selectedDate);
         }
         else{
             $scope.loadFoodDiary($scope.selectedDate.format("dd/mm/yyyy"));
             $scope.loadExerciseDiary($scope.selectedDate.format("dd/mm/yyyy"));
+            $scope.doGetIntakeBruntByDate($scope.selectedDate.format("dd/mm/yyyy"));
         }
         $scope.doGetWeightGoal();
     };
 
-    $scope.initialLoadFoodAndExercise(selectedDate);
+    $scope.initialLoadFoodAndExercise();
 
     //circle round
     $scope.offset =         0;
@@ -777,13 +802,8 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
             'left': '50%',
             'transform': transform,
             '-moz-transform': transform,
-            '-webkit-transform': transform,
-            'font-size': $scope.radius/3.5 + 'px'
+            '-webkit-transform': transform
         };
-    };
-
-    $scope.getColor = function(){
-        return $scope.gradient ? 'url(#gradient)' : $scope.currentColor;
     };
 
     var getPadded = function(val){

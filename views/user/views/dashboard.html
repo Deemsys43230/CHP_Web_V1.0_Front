@@ -65,15 +65,47 @@
                 <br/>
                 <div class="col-md-6 text-center">
                     <h5>Gain</h5>
-                    <div class="gain margin-top-10" data-percent="65"></div>
-                    <h4>547</h4>
-                    <p>of 1700 Cals</p>
+                    <div class="circle-wrapper">
+                        <div class="circle-progress ng-cloak font-14" ng-style="getStyle()">{{currentGain}}</div>
+                        <div round-progress
+                             max="gainGraphMax"
+                             current="currentGain"
+                             color="#66E066"
+                             bgcolor="{{ bgColor }}"
+                             radius="40"
+                             semi="isSemi"
+                             rounded="rounded"
+                             stroke="6"
+                             clockwise="clockwise"
+                             responsive="responsive"
+                             duration="{{ duration }}"
+                             animation="{{ currentAnimation }}"
+                             offset="{{ offset }}">
+                        </div>
+                    </div>
+                    <p class="text-gray">out of {{gainGraphMax}} calories</p>
                 </div>
                 <div class="col-md-6 text-center">
                     <h5>Spent</h5>
-                    <div class="spent margin-top-10" data-percent="55"></div>
-                    <h4>547</h4>
-                    <p>of 1700 Cals</p>
+                    <div class="circle-wrapper">
+                        <div class="circle-progress ng-cloak font-14" ng-style="getStyle()">{{currentSpent}}</div>
+                        <div round-progress
+                             max="spentGraphMax"
+                             current="currentSpent"
+                             color="#FF5C33"
+                             bgcolor="{{ bgColor }}"
+                             radius="40"
+                             semi="isSemi"
+                             rounded="rounded"
+                             stroke="6"
+                             clockwise="clockwise"
+                             responsive="responsive"
+                             duration="{{ duration }}"
+                             animation="{{ currentAnimation }}"
+                             offset="{{ offset }}">
+                        </div>
+                    </div>
+                    <p class="text-gray">out of {{spentGraphMax}} calories</p>
                 </div>
             </li>
         </ul>
@@ -128,13 +160,13 @@
                                                 <div class="col-md-2 no-padding"><img ng-src="{{foodDiaryData.foodImagePath+'200x200.jpg'}}"></div>
                                                 <div class="col-md-10 no-padding">
                                                     <a href="" class="pull-right food_close" title="Delete Food" ng-click="doDeleteUserFood(foodDiaryData.userfoodid)">x</a>
-                                                    <p class="food_name">{{foodDiaryData.foodname}}</p>
-                                                    <p>
-                                                        <span class="pull-right text-green text-bold"><i class="fa fa-angle-up"></i>&nbsp;{{foodDiaryData.measureid.calories}}  calories</span>
-                                                    <div class="select_food">
-                                                        <span class="text-bold">Quantity : </span>{{foodDiaryData.measureid.servings}}&nbsp;{{foodDiaryData.measureid.measurename}}&nbsp;<a href="" ng-click="doEditUserFood(foodDiaryData.foodid,foodDiaryData.userfoodid)"><i class="fa fa-pencil"></i></a>
+                                                    <div class="food_name">{{foodDiaryData.foodname}}</div>
+                                                    <div class="margin-top-10">
+                                                        <span class="pull-right text-green text-bold"><strong><i class="fa fa-angle-up"></i>&nbsp;{{foodDiaryData.measureid.calories}}  calories</strong></span>
+                                                        <div class="select_food">
+                                                            <span class="text-bold">Quantity : </span>{{foodDiaryData.measureid.servings}}&nbsp;{{foodDiaryData.measureid.measurename}}&nbsp;&nbsp;<a href="" ng-click="doEditUserFood(foodDiaryData.foodid,foodDiaryData.userfoodid)" title="Edit Quantity"><i class="fa fa-pencil"></i></a>
+                                                        </div>
                                                     </div>
-                                                    </p>
                                                 </div>
                                             </li>
                                         </ul>
@@ -169,13 +201,13 @@
                                         <div class="col-md-2 no-padding"><img ng-src="{{exerciseDiaryData.exerciseImagePath+'200x200.jpg'}}"></div>
                                         <div class="col-md-10 no-padding">
                                             <a href="" class="pull-right food_close" title="Delete Exercise" ng-click="doDeleteUserExercise(exerciseDiaryData.userexercisemapid)">x</a>
-                                            <p class="food_name">{{exerciseDiaryData.Exercise.exercisename}}</p>
-                                            <p>
-                                                <span class="pull-right text-red text-bold"><i class="fa fa-angle-down"></i>&nbsp;{{exerciseDiaryData.Level.calories}}  calories</span>
-                                            <div class="select_food">
-                                                <p>Level:{{exerciseDiaryData.Level.levelname}}</p>Workout:{{exerciseDiaryData.Level.workoutvalue}}&nbsp;<a href="" ng-click="doEditUserExercise(exerciseDiaryData.Exercise.exerciseid,exerciseDiaryData.userexercisemapid)"><i class="fa fa-pencil"></i></a>
+                                            <div class="food_name">{{exerciseDiaryData.Exercise.exercisename}}&nbsp;({{exerciseDiaryData.Level.levelname}})</div>
+                                            <div class="margin-top-10">
+                                                <span class="pull-right text-red text-bold"><strong><i class="fa fa-angle-down"></i>&nbsp;{{exerciseDiaryData.Level.calories}}  calories</strong></span>
+                                                <div class="select_food">
+                                                    <span class="text-bold">Workout :</span> {{exerciseDiaryData.Level.workoutvalue}}&nbsp;minutes&nbsp;&nbsp;<a href="" ng-click="doEditUserExercise(exerciseDiaryData.Exercise.exerciseid,exerciseDiaryData.userexercisemapid)" title="Edit Minutes"><i class="fa fa-pencil"></i></a>
+                                                </div>
                                             </div>
-                                            </p>
                                         </div>
                                     </li>
                                 </ul>
@@ -407,7 +439,7 @@
                              <span ng-show="FoodAddForm.measure.$dirty&&FoodAddForm.measure.$invalid">
                                      <span class="error-message" ng-show="FoodAddForm.measure.$error.required"><span>Required.</span></span>
                              </span>
-                        <h5  class="margin-top-10">Value</h5>{{userFood.measure.calories}}
+                        <h5  class="margin-top-10">Value</h5>
                         <input type="text" ng-pattern="/^\d+$/"  ng-disabled="!userFood.measure" name="servings" ng-model="userFood.servings" ng-change="doCalculateCalories()" maxlength="4" required>
                         <span ng-show="FoodAddForm.servings.$dirty&&FoodAddForm.servings.$invalid">
                                  <span class="error-message" ng-show="FoodAddForm.servings.$error.required"><span>Required.</span></span>
@@ -423,7 +455,7 @@
                             <div round-progress
                                  max="max"
                                  current="current"
-                                 color="{{ getColor() }}"
+                                 color="#66E066"
                                  bgcolor="{{ bgColor }}"
                                  radius="{{ radius }}"
                                  semi="isSemi"
@@ -490,7 +522,7 @@
                             <div round-progress
                                  max="max"
                                  current="current"
-                                 color="{{ getColor() }}"
+                                 color="#FF5C33"
                                  bgcolor="{{ bgColor }}"
                                  radius="{{ radius }}"
                                  semi="isSemi"
@@ -665,19 +697,6 @@
         fillColor: '#CCCC00',
         percentSize: '18px',
         percentWeight: '20px'
-    });
-</script>
-
-<script>
-    $('.food-gain').percentcircle({
-        animate : true,
-        diameter : 150,
-        guage: 3,
-        coverBg: '#fff',
-        bgColor: '#efefef',
-        fillColor: '#CCCC00',
-        percentSize: '1px',
-        percentWeight: '1px'
     });
 </script>
 
