@@ -133,10 +133,14 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         //Set values according to the api calls
         $scope.userFood.foodid=$scope.userSelectedFoodDetails.foodid;
         $scope.userFood.measureid=$scope.userFood.measure.measureid;
-        if($scope.selectedDate==selectedDate)
-        $scope.userFood.addeddate=$scope.selectedDate;
+        if($scope.selectedDate==selectedDate){
+            $scope.userFood.addeddate=$scope.selectedDate;
+        }
         else
-        $scope.userFood.addeddate=$scope.selectedDate.format("dd/mm/yyyy");
+        {
+            $scope.userFood.addeddate=$scope.selectedDate.format("dd/mm/yyyy");
+        }
+
         $scope.userFood.servings=parseInt($scope.userFood.servings);
 
         var foodInsertPromise=UserDashboardService.doInsertUserFood($scope.userFood);
@@ -156,7 +160,13 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
 
         var foodInsertPromise=UserDashboardService.doUpdateUserFood($scope.userFood);
         foodInsertPromise.then(function(){
+        if($scope.selectedDate==selectedDate){
             $scope.loadFoodDiary($scope.selectedDate);
+        }
+        else
+        {
+            $scope.loadFoodDiary($scope.selectedDate.format("dd/mm/yyyy"));
+        }
         });
 
     };
@@ -165,7 +175,13 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
     $scope.doDeleteUserFood= function (userFoodId) {
         var foodDeletePromise=UserDashboardService.doDeleteUserFood(userFoodId);
         foodDeletePromise.then(function(){
-            $scope.loadFoodDiary($scope.selectedDate.format("dd/mm/yyyy"));
+            if($scope.selectedDate==selectedDate){
+                $scope.loadFoodDiary($scope.selectedDate);
+            }
+            else{
+                $scope.loadFoodDiary($scope.selectedDate.format("dd/mm/yyyy"));
+            }
+
         });
     };
 
@@ -306,13 +322,14 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         //alert(selectedDate);
         $scope.userExercise.exerciseid=$scope.userSelectedExerciseDetails.exerciseid;
         $scope.userExercise.levelid=$scope.userExercise.levelid.levelid;
-        if($scope.selectedDate=selectedDate){
+        if($scope.selectedDate==selectedDate){
             $scope.userExercise.date=$scope.selectedDate;
         }
-        else{
+        else
+        {
             $scope.userExercise.date=$scope.selectedDate.format("dd/mm/yyyy");
         }
-        $scope.userExercise.workoutvalue=parseInt($scope.userExercise.workoutvalue);
+         $scope.userExercise.workoutvalue=parseInt($scope.userExercise.workoutvalue);
 
         var exerciseInsertPromise=UserDashboardService.doInsertUserExercise($scope.userExercise);
         exerciseInsertPromise.then(function(){
@@ -325,7 +342,13 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
     $scope.doDeleteUserExercise= function (userExerciseId) {
         var exerciseDeletePromise=UserDashboardService.doDeleteUserExercise(userExerciseId);
         exerciseDeletePromise.then(function(){
-            $scope.loadExerciseDiary($scope.selectedDate.format("dd/mm/yyyy"));
+            if($scope.selectedDate==selectedDate){
+                $scope.loadExerciseDiary($scope.selectedDate);
+            }
+            else{
+                $scope.loadExerciseDiary($scope.selectedDate.format("dd/mm/yyyy"));
+            }
+
         });
     };
 
@@ -374,7 +397,13 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
 
         var exerciseInsertPromise=UserDashboardService.doUpdateUserExercise($scope.userExercise);
         exerciseInsertPromise.then(function(){
-            $scope.loadExerciseDiary($scope.selectedDate.format("dd/mm/yyyy"));
+            if($scope.selectedDate==selectedDate){
+                $scope.loadExerciseDiary($scope.selectedDate);
+            }
+            else
+            {
+                $scope.loadExerciseDiary($scope.selectedDate.format("dd/mm/yyyy"));
+            }
         });
 
     };
@@ -415,6 +444,8 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         $scope.FoodAddForm.$setPristine();
         $scope.current=$scope.caloriesIntake=0;
         $scope.max = 100;
+        $scope.userSelectedFoodDetails={};
+
     };
 
     //Clear suggest exercise model values
@@ -426,6 +457,8 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         $scope.ExerciseAddForm.$setPristine();
         $scope.current=$scope.caloriesSpent=0;
         $scope.max = 100;
+        $scope.userSelectedExerciseDetails={};
+
     };
 
     //Weight and Set Goal
@@ -701,9 +734,15 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
     $window.goalStartDate = $window.goalEndDate = selectedDate;
 
     //Initialize
-    $scope.initialLoadFoodAndExercise=function(selectedDate){
-        $scope.loadFoodDiary(selectedDate);
-        $scope.loadExerciseDiary(selectedDate);
+    $scope.initialLoadFoodAndExercise=function(){
+        if($scope.selectedDate==selectedDate){
+            $scope.loadFoodDiary($scope.selectedDate);
+            $scope.loadExerciseDiary($scope.selectedDate);
+        }
+        else{
+            $scope.loadFoodDiary($scope.selectedDate.format("dd/mm/yyyy"));
+            $scope.loadExerciseDiary($scope.selectedDate.format("dd/mm/yyyy"));
+        }
         $scope.doGetWeightGoal();
     };
 

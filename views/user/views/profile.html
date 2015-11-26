@@ -233,12 +233,12 @@
                 <h6 class="text-red text-center margin-tb-10">Note : Upload Image Size 200x200</h6>
                 <div class="action_btns margin-top-20">
                     <div class="one_half">
-                        <div class="fileUpload food-button">
+                        <div class="fileUpload food-button" >
                             <span>Choose File</span>
-                            <input type="file" class="upload cropit-image-input"/>
+                            <input type="file" class="upload cropit-image-input" valid-file required  ng-model="testimonials.imageurl" onblur="angular.element(this).scope().fileNameChanged(this)"/>
                         </div>
                     </div>
-                    <div class="one_half last"><a href="" onclick="return false;" class="food-button export modal_close" ng-click="doUpdateProfileImage()">Upload Image</a></div>
+                    <div class="one_half last"><a href="" onclick="return false;" class="btn food-button export modal_close" ng-disabled="imageUploaded" ng-click="doUpdateProfileImage()">Upload Image</a></div>
                 </div>
             </div>
         </div>

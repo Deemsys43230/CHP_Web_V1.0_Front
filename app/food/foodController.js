@@ -128,6 +128,7 @@ adminApp.controller('FoodController',function ($scope,requestHandler,Flash) {
         var sessionname="";
         var categoryvalue="";
         var categoryname="";
+        var regionname="";
         $scope.loaded=true;
         requestHandler.getRequest("admin/getFoodList/","").then(function(response){
             $scope.foodList=response.data.Food_Data;
@@ -159,6 +160,14 @@ adminApp.controller('FoodController',function ($scope,requestHandler,Flash) {
                 });
                 value.category = categoryname;
                 categoryname="";
+
+            });
+
+            //For search
+            $.each($scope.foodList,function(index,value){
+                value.region="";
+               regionname= value.regionid.regionname;
+                value.region = regionname;
 
             });
         },function(response){

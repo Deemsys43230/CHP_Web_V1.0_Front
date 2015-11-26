@@ -107,6 +107,24 @@ userApp.controller('UserProfileController',['$scope','requestHandler','Flash',fu
 
     };
 
+        $scope.imageAdded=false;
+        $scope.imageUploaded=true;
+
+        $scope.fileNameChanged = function(element)
+        {
+            if(!$scope.imageAdded){
+                if(element.files.length > 0){
+                    $scope.inputContainsFile = false;
+                    $scope.imageAdded=true;
+                    $scope.imageUploaded=false;
+                }
+                else{
+                    $scope.inputContainsFile = true;
+                    $scope.imageAdded=false;
+                    $scope.imageUploaded=true;
+                }
+            }
+        };
 
     $scope.doUpdateProfileImage=function(){
         //Convert the image to base 64
@@ -334,6 +352,22 @@ userApp.directive('compareTo',function() {
             });
         }
     };
+});
+
+// Validation for file upload
+userApp.directive('validFile',function(){
+    return {
+        require:'ngModel',
+        link:function(scope,el,attrs,ngModel){
+            //change event is fired when file is selected
+            el.bind('change',function(){
+                scope.$apply(function(){
+                    ngModel.$setViewValue(el.val());
+                    ngModel.$render();
+                })
+            })
+        }
+    }
 });
 
 /*
