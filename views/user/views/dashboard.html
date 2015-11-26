@@ -186,7 +186,7 @@
                 </div>
                 <div class="col-md-2 pull-right margin-top-10 no-padding margin-right-20">
                     <div class="input-group ui-datepicker">
-                        <input ng-click="open($event)" ng-change="loadFoodAndExercise()" type="text"
+                        <input ng-click="open($event)" ng-change="initialLoadFoodAndExercise()" type="text"
                                ng-keypress="prevent()"
                                class="profile_input override"
                                id = "popup"
@@ -408,7 +408,7 @@
                                      <span class="error-message" ng-show="FoodAddForm.measure.$error.required"><span>Required.</span></span>
                              </span>
                         <h5  class="margin-top-10">Value</h5>
-                        <input type="text" ng-pattern="/^\d+$/"  ng-disabled="!userFood.measure" name="servings" ng-model="userFood.servings" ng-change="doCalculateCalories()" maxlength="3" required>
+                        <input type="text" ng-pattern="/^\d+$/"  ng-disabled="!userFood.measure" name="servings" ng-model="userFood.servings" ng-change="doCalculateCalories()" maxlength="4" required>
                         <span ng-show="FoodAddForm.servings.$dirty&&FoodAddForm.servings.$invalid">
                                  <span class="error-message" ng-show="FoodAddForm.servings.$error.required"><span>Required.</span></span>
                                   <span class="error-message" ng-show="FoodAddForm.servings.$error.pattern"><span>Invalid&nbsp;Format.</span></span>

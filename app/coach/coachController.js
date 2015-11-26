@@ -189,6 +189,14 @@ adminApp.filter('trusted', ['$sce', function ($sce) {
     };
 }]);
 
+/*adminApp.filter('myfilter', function(){
+    return function(input, text){
+        return input.filter(function(coach){
+            return coach.startsWith(text);
+        });
+    };
+});*/
+
 
 adminApp.directive("averageStarRating", function() {
     return {
@@ -225,3 +233,4 @@ adminApp.directive("averageStarRating", function() {
         }
     };
 });
+

@@ -43,7 +43,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr dir-paginate="food in foodfilter=(foodList | filter:foodsearch  |orderBy:sortKey:reverse | itemsPerPage: 10)" ng-show="foodList.length!=0">
+                    <tr dir-paginate="food in foodfilter=(foodList | filter: {foodname: foodsearch } |orderBy:sortKey:reverse | itemsPerPage: 10)" ng-show="foodList.length!=0">
                         <td>{{food.foodid}}</td>
                         <td title="{{food.foodname}}"><span class="line-clamp-xxs">{{food.foodname}}</span></td>
                         <td><span class="line-clamp-xxs">

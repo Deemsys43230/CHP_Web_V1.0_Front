@@ -78,7 +78,7 @@
                     </tr>
                     </thead>
                     <tbody >
-                    <tr dir-paginate="coach in coachfilter = (coachList |filter: coachsearch | itemsPerPage: 7)" ng-show="coachList.length!=0">
+                    <tr dir-paginate="coach in coachfilter = (coachList |filter: {name : coachsearch , emailid : coachsearch} | itemsPerPage: 7)" ng-show="coachList.length!=0">
                         <td>{{coach.name}}</td>
                         <td>{{coach.emailid}}</td>
                         <td>
