@@ -34,7 +34,7 @@
                         </tr>
                         </thead>
                         <tbody >
-                        <tr dir-paginate="mycoach in mycoachfilter = (mycoachlist |filter: {name : mycoachsearch , emailid : mycoachsearch}  | itemsPerPage: 8)" ng-show="mycoachlist.length!=0">
+                        <tr dir-paginate="mycoach in mycoachfilter = (mycoachlist |startsWithLetter : mycoachsearch  | itemsPerPage: 8)" ng-show="mycoachlist.length!=0">
                             <td>{{mycoach.name}}</td>
                             <td>{{mycoach.emailid}}</td>
                             <td>

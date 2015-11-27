@@ -189,13 +189,20 @@ adminApp.filter('trusted', ['$sce', function ($sce) {
     };
 }]);
 
-/*adminApp.filter('myfilter', function(){
-    return function(input, text){
-        return input.filter(function(coach){
-            return coach.startsWith(text);
-        });
+adminApp.filter('startsWithLetter', function () {
+
+    return function (items, coachsearch) {
+        var filtered = [];
+        var letterMatch = new RegExp(coachsearch, 'i');
+        for (var i = 0; i < items.length; i++) {
+            var item = items[i];
+            if (letterMatch.test(item.emailid) || letterMatch.test(item.name) ) {
+                filtered.push(item);
+            }
+        }
+        return filtered;
     };
-});*/
+});
 
 
 adminApp.directive("averageStarRating", function() {
