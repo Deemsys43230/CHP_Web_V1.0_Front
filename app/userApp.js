@@ -59,7 +59,6 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../css/custom-inputs.css',
                                 '../../css/vertical_tab.css',
                                 '../../plugin/circle/circle.css',
-                                '../../plugin/circle/jquery.circlechart.js',
                                 '../../css/custom-inputs.css',
                                 '../../plugin/popup/style.css',
                                 '../../plugin/popup/jquery.leanModal.min.js',
@@ -216,20 +215,6 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                     }
                 },
                 controller:'DemographyController'
-            }).
-            when('/test', {
-                templateUrl: 'views/test.html',
-                resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
-                        return $ocLazyLoad.load({
-                            name:'userApp',
-                            files:[
-                                '../../app/test.js'
-                            ]
-                        })
-                    }
-                },
-                controller:'testController'
             }).
             when('/forums', {
                 templateUrl: 'views/forums.html',

@@ -201,7 +201,7 @@
                                         <div class="col-md-2 no-padding"><img ng-src="{{exerciseDiaryData.exerciseImagePath+'200x200.jpg'}}"></div>
                                         <div class="col-md-10 no-padding">
                                             <a href="" class="pull-right food_close" title="Delete Exercise" ng-click="doDeleteUserExercise(exerciseDiaryData.userexercisemapid)">x</a>
-                                            <div class="food_name">{{exerciseDiaryData.Exercise.exercisename}}&nbsp;({{exerciseDiaryData.Level.levelname}})</div>
+                                            <div class="food_name">{{exerciseDiaryData.Exercise.exercisename}}&nbsp;<small>({{exerciseDiaryData.Level.levelname}})</small></div>
                                             <div class="margin-top-10">
                                                 <span class="pull-right text-red text-bold"><strong><i class="fa fa-angle-down"></i>&nbsp;{{exerciseDiaryData.Level.calories}}  calories</strong></span>
                                                 <div class="select_food">
@@ -685,31 +685,5 @@
         });
     });
 
-</script>
-
-<script>
-    $('.gain').percentcircle({
-        animate : true,
-        diameter : 100,
-        guage: 3,
-        coverBg: '#fff',
-        bgColor: '#efefef',
-        fillColor: '#CCCC00',
-        percentSize: '18px',
-        percentWeight: '20px'
-    });
-</script>
-
-<script>
-    $('.spent').percentcircle({
-        animate : true,
-        diameter : 100,
-        guage: 3,
-        coverBg: '#fff',
-        bgColor: '#efefef',
-        fillColor: '#57cb85',
-        percentSize: '18px',
-        percentWeight: '20px'
-    });
 </script>
 
