@@ -318,7 +318,9 @@ adminApp.controller("FoodDetailsEditController",function($q,$scope,requestHandle
 
     //Update Food Image
     $scope.doUpdateFoodImage=function(){
+        console.log($scope.foodDetails.foodimage);
         $scope.foodDetails.foodImagePath=$scope.foodDetails.foodimage;
+        console.log($scope.foodDetails.foodImagePath);
         $scope.imageUpload=true;
         $scope.imageAdded=false;
     };
@@ -327,11 +329,28 @@ adminApp.controller("FoodDetailsEditController",function($q,$scope,requestHandle
 
     //Set Food Details Obj for add
     $scope.doSetFoodDetails=function(){
+
         $scope.imageAdded=true;
         $scope.foodDetails={};
         $scope.foodDetails.measureid=[];
         $scope.foodDetails.sessionid=[];
         $scope.foodDetails.regionid="1";
+
+        if($routeParams.id != null){
+            $scope.suggestionname = function(){
+                requestHandler.postRequest("admin/getFoodSuggestionDetail/",{'suggestionid':$routeParams.id}).then(function(response){
+                   $scope.foodDetails.foodname = response.data.Food_Suggestion_Data.foodname;
+                },  function () {
+                    errorMessage(Flash, "Please try again later!")
+                });
+            };
+
+            $scope.suggestionname();
+
+        }
+        else{
+           $scope.foodDetails.foodname = null;
+        }
 
         $scope.foodDetails.foodImagePath='../../images/No_image_available.jpg';
         $scope.foodDetails.foodimage='../../images/No_image_available.jpg';
@@ -384,9 +403,11 @@ adminApp.controller("FoodDetailsEditController",function($q,$scope,requestHandle
             if($scope.imageUpload){//Check for Image Upload
                 $q.all([tagPromise]).then(function(){
                     requestHandler.putRequest("admin/updateFood/", $scope.foodDetails).then(function (response) {
+                        console.log($scope.foodDetails);
                         if (response.data.Response_status == 1) {
                             successMessage(Flash,"Food Updated Successfully!");
                             $scope.doGetFoodDetails();
+                            $location.path("food");
                         }
                     }, function (response) {
                         alert("Not able to pull Food Tag");
@@ -451,9 +472,25 @@ adminApp.controller("FoodDetailsEditController",function($q,$scope,requestHandle
                   }, function (response) {
                       alert("Not able to pull Food Tag");
                   });
+
+                  if($routeParams.id != null){
+                      $scope.doApproveFoodSuggestion();
+                  }
               });
 
    };
+
+    $scope.doApproveFoodSuggestion=function(){
+        $scope.loaded=true;
+        requestHandler.postRequest("admin/approveFoodSuggestion/",{'suggestionid':$routeParams.id}).then(function(response){
+            $scope.loaded=false;
+            $scope.doGetAllFoodSuggestion();
+            successMessage(Flash,"Successfully Updated");
+
+        },function(){
+            errorMessage(Flash,"Please try again later!")
+        });
+    };
 
     $scope.isClean=function(){
         return angular.equals(original, $scope.foodDetails);

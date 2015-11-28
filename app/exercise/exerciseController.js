@@ -380,6 +380,10 @@ adminApp.controller('ExerciseEditController',function($q,$scope,requestHandler,F
                         errorMessage(Flash,"Please Try Again Later!");
                         $scope.loaded=false;
                     });
+
+                        if($routeParams.id != null){
+                            $scope.doApproveExerciseSuggestion();
+                        }
                     });
                 }
                 else if(response.data.Response_status==1){
@@ -392,6 +396,17 @@ adminApp.controller('ExerciseEditController',function($q,$scope,requestHandler,F
         else{
             $scope.loaded=false;
         }
+    };
+
+    $scope.doApproveExerciseSuggestion=function(){
+        $scope.loaded=true;
+        requestHandler.postRequest("admin/approveExerciseSuggestion/",{'suggestionid':$routeParams.id}).then(function(response){
+            $scope.doGetAllExerciseSuggestion();
+            successMessage(Flash,"Successfully Updated");
+
+        },function(){
+            errorMessage(Flash,"Please try again later!")
+        });
     };
 
     $scope.isClean=function(){
@@ -413,6 +428,22 @@ adminApp.controller('ExerciseEditController',function($q,$scope,requestHandler,F
             $scope.level = {selected : selectedLevel};
             $scope.loaded=false;
         });
+
+        if($routeParams.id != null){
+            $scope.suggestionname = function(){
+                requestHandler.postRequest("admin/getExerciseSuggestionDetail/",{'suggestionid':$routeParams.id}).then(function(response){
+                    $scope.exerciseDetail.exercisename = response.data.Exercise_Suggestion_Data.exercisename;
+               },  function () {
+                    errorMessage(Flash, "Please try again later!")
+                });
+            };
+
+            $scope.suggestionname();
+
+        }
+        else{
+            $scope.exerciseDetail.exercisename = null;
+        }
 
     };
 
