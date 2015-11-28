@@ -11,6 +11,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
     $scope.userExercise={};
     $scope.caloriesSpent=0;
     $scope.workoutvalue=0;
+    $window.singlePicker = false;
 
     //Modal Popup to add user food
     $scope.doUserAddFood=function(){
@@ -144,6 +145,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         foodInsertPromise.then(function(){
             $scope.loadFoodDiary( $scope.userFood.addeddate);
             $scope.doGetIntakeBruntByDate( $scope.userFood.addeddate);
+            $scope.goGetDailyIntakeGraph($scope.userFood.addeddate);
         });
 
     };
@@ -161,11 +163,13 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         if($scope.selectedDate==selectedDate){
             $scope.loadFoodDiary($scope.selectedDate);
             $scope.doGetIntakeBruntByDate($scope.selectedDate);
+            $scope.goGetDailyIntakeGraph($scope.selectedDate);
         }
         else
         {
             $scope.loadFoodDiary($scope.selectedDate.format("dd/mm/yyyy"));
             $scope.doGetIntakeBruntByDate($scope.selectedDate.format("dd/mm/yyyy"));
+            $scope.goGetDailyIntakeGraph($scope.selectedDate.format("dd/mm/yyyy"));
         }
         });
 
@@ -178,10 +182,12 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
             if($scope.selectedDate==selectedDate){
                 $scope.loadFoodDiary($scope.selectedDate);
                 $scope.doGetIntakeBruntByDate($scope.selectedDate);
+                $scope.goGetDailyIntakeGraph($scope.selectedDate);
             }
             else{
                 $scope.loadFoodDiary($scope.selectedDate.format("dd/mm/yyyy"));
                 $scope.doGetIntakeBruntByDate($scope.selectedDate.format("dd/mm/yyyy"));
+                $scope.goGetDailyIntakeGraph($scope.selectedDate.format("dd/mm/yyyy"));
             }
         });
     };
@@ -738,6 +744,112 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         });
     };
 
+    $scope.goGetDailyIntakeGraph = function(date){
+        requestHandler.postRequest("user/dailyCalorieGraph/",{"date":date}).then(function(response){
+            $scope.calorieIntakeGraph=response.data.dailyCalorieGraph;
+            if($scope.calorieIntakeGraph.averagefat=="") $scope.calorieIntakeGraph.averagefat=0;
+            if($scope.calorieIntakeGraph.fat=="") $scope.calorieIntakeGraph.fat=0;
+            if($scope.calorieIntakeGraph.averageprotein=="") $scope.calorieIntakeGraph.averageprotein=0;
+            if($scope.calorieIntakeGraph.protein=="") $scope.calorieIntakeGraph.protein=0;
+            if($scope.calorieIntakeGraph.averagefibre=="") $scope.calorieIntakeGraph.averagefibre=0;
+            if($scope.calorieIntakeGraph.fibre=="") $scope.calorieIntakeGraph.fibre=0;
+            if($scope.calorieIntakeGraph.averagecarbo=="") $scope.calorieIntakeGraph.averagecarbo=0;
+            if($scope.calorieIntakeGraph.carbo=="") $scope.calorieIntakeGraph.carbo=0;
+
+            $('#dailyIntake').highcharts({
+                title: {
+                    text: ''
+                },
+                xAxis: {
+                    categories: ['Protein', 'Fat', 'Carbo', 'Fibre'],
+                    labels: {
+                        style: {
+                            fontSize:'9px',
+                            fontWeight:'normal'
+                        }
+                        /*useHTML: true,
+                        formatter: function() {
+                            if(this.value == "Protein")
+                                return this.value+'<br/><img src="../../images/test.jpg"/>';
+                            else if(this.value == "Fat")
+                                return this.value+'<br/><img src="../../images/test.jpg"/>';
+                            else if(this.value == "Carbo")
+                                return this.value+'<br/><img src="../../images/test.jpg"/>';
+                            else if(this.value == "Fibre")
+                                return this.value+'<br/><img src="http://highcharts.com/demo/gfx/sun.png"/>';
+                            else
+                                return this.value;
+                        }*/
+                    }
+                },
+                tooltip:{
+                    enabled:true,
+                    backgroundColor:'rgba(255, 255, 255, 1)',
+                    borderWidth:1,
+                    shadow:true,
+                    style:{fontSize:'10px',padding:5,zIndex:10000},
+                    formatter:false
+                },
+                yAxis:{
+                    title: {
+                        text: null
+                    },
+                    labels:{
+                        style:{
+                            fontSize:'10px'
+                        }
+                    }
+                },
+                exporting: {
+                    enabled: false
+                },
+                credits: {
+                    enabled: false
+                },
+                legend:{enabled:false},
+                series: [{
+                    type: 'column',
+                    showInLegend:false,
+                    data: [
+                        {
+                            name: 'Protein',
+                            color: 'limegreen',
+                            y: parseFloat($scope.calorieIntakeGraph.protein)
+                        }, {
+                            name: 'Fat',
+                            color: 'red',
+                            y: parseFloat($scope.calorieIntakeGraph.fat)
+                        }, {
+                            name: 'Carbo',
+                            color: 'orange',
+                            y: parseFloat($scope.calorieIntakeGraph.carbo)
+                        }, {
+                            name: 'Fibre',
+                            color: '#ffcc00',
+                            y: parseFloat($scope.calorieIntakeGraph.fibre)
+                        }]
+                },  {
+                    type: 'spline',
+                    name: 'Average',
+                    showInLegend:true,
+                    data: [
+                        parseFloat($scope.calorieIntakeGraph.averageprotein),
+                        parseFloat($scope.calorieIntakeGraph.averagefat),
+                        parseFloat($scope.calorieIntakeGraph.averagecarbo),
+                        parseFloat($scope.calorieIntakeGraph.averagefibre)],
+                    marker: {
+                        lineWidth: 1,
+                        lineColor: Highcharts.getOptions().colors[1],
+                        fillColor: 'white'
+                    }
+                }]
+            });
+
+        },function(){
+            errorMessage(Flash, "Please try again later!");
+        });
+    };
+
     //To Display current date
     var selectedDate = new Date();
     var dd = selectedDate.getDate();
@@ -762,11 +874,13 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
             $scope.loadFoodDiary($scope.selectedDate);
             $scope.loadExerciseDiary($scope.selectedDate);
             $scope.doGetIntakeBruntByDate($scope.selectedDate);
+            $scope.goGetDailyIntakeGraph($scope.selectedDate);
         }
         else{
             $scope.loadFoodDiary($scope.selectedDate.format("dd/mm/yyyy"));
             $scope.loadExerciseDiary($scope.selectedDate.format("dd/mm/yyyy"));
             $scope.doGetIntakeBruntByDate($scope.selectedDate.format("dd/mm/yyyy"));
+            $scope.goGetDailyIntakeGraph($scope.selectedDate.format("dd/mm/yyyy"));
         }
         $scope.doGetWeightGoal();
     };

@@ -9362,3 +9362,12 @@ a.abuse{
     box-shadow: none !important;
 }
 
+.daily-intake img{
+    margin: 0 16px 0 0;
+}
+
+#dailyIntake{
+    min-width: 210px;
+    height: 190px !important;
+}
+

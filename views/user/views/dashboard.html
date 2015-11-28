@@ -280,9 +280,9 @@
                     <img ng-src="{{userProfile.imageurl | trusted}}">
                 </div>
                 <div class="col-md-8 no-padding">
-                    <h4>{{userProfile.name}}</h4>
-                    <p>{{userProfile.phone}}</p>
-                    <p>{{userProfile.emailid}}</p>
+                    <h4>{{userProfile.name}}&nbsp;</h4>
+                    <p>{{userProfile.phone}}&nbsp;</p>
+                    <p>{{userProfile.emailid}}&nbsp;</p>
                     <div class="margin-top-10">
                         <div class="col-md-4 no-padding">
                             <h6>Age</h6>
@@ -290,58 +290,24 @@
                             <h6>Height</h6>
                         </div>
                         <div class="col-md-8">
-                            <h6>{{userProfile.age}}</h6>
-                            <h6>{{demography.weight}}<small> kgs</small></h6>
-                            <h6>{{demography.height}}<small> ft</small></h6>
+                            <h6>{{userProfile.age}}&nbsp;</h6>
+                            <h6>{{demography.weight}}<small>&nbsp;kgs</small></h6>
+                            <h6>{{demography.height}}<small>&nbsp;ft</small></h6>
                         </div>
                     </div>
                 </div>
             </div>
             <hr/>
             <h6>Today's Intake Graph</h6>
-            <div>
-                <div>
-                    <table hidden>
-                        <caption>Date table</caption>
-                        <tbody>
-                        <tr><td>A</td><td>100%</td></tr>
-                        <tr><td>B</td><td>68%</td></tr>
-                        <tr><td>C</td><td>30%</td></tr>
-                        <tr><td>D</td><td>20%</td></tr>
-                        </tbody>
-                    </table>
-                    <div class="left-range">
-                        <div id="grafico">
-                            <div class="riga top-33"><div>MAINTAIN</div></div>
-                            <div class="riga top-66"><div>LOW</div></div>
-                            <div id="1" class="riga"><div>HIGH</div></div>
-                            <div id="col0" class="column"></div>
-                            <div id="col1" class="column"></div>
-                            <div id="col2" class="column"></div>
-                            <div id="col3" class="column"></div>
-                        </div>
-                    </div>
-                    <div class="left-range">
-                        <div class="health">
-                            <div class="col-md-3 no-padding">
-                                <img src="../../images/i-protein.jpg" class="margin-left-5">
-                                <p>Protein<br/><strong>312</strong><br/>gms</p>
-                            </div>
-                            <div class="col-md-3 no-padding">
-                                <img src="../../images/i-fats.jpg" class="margin-left-5">
-                                <p>Fats<br/><strong>42</strong><br/>gms</p>
-                            </div>
-                            <div class="col-md-3 no-padding">
-                                <img src="../../images/i-carbs.jpg" class="margin-left-5">
-                                <p>Carbs<br/><strong>08</strong><br/>gms</p>
-                            </div>
-                            <div class="col-md-3 no-padding">
-                                <img src="../../images/i-fibre.jpg" class="margin-left-5">
-                                <p>Fibre<br/><strong>11</strong><br/>gms</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div id="dailyIntake" class="margin-top-15"></div>
+            <div class="text-right daily-intake">
+                <img src="../../images/i-protein.jpg">
+                <img src="../../images/i-fats.jpg">
+                <img src="../../images/i-carbs.jpg">
+                <img src="../../images/i-fibre.jpg">
+            </div>
+            <div class="text-center row margin-top-5">
+                <img src="../../images/avg.png">
             </div>
         </div>
     </div><!-- @end #w -->
@@ -633,20 +599,6 @@
     })
 </script>
 
-<script>
-    function viewGraph(){
-        $('.column').css('height','0');
-        $('table tr').each(function(index) {
-            var ha = $(this).children('td').eq(1).text();
-            $('#col'+index).animate({height: ha}, 1500).html("<div>"+ha+"</div>");
-        });
-    }
-    $(document).ready(function(){
-        viewGraph();
-    });
-
-</script>
-
 <script type="text/javascript">
     $(function(){
         $('#sidemenu a').on('click', function(e){
@@ -686,4 +638,3 @@
     });
 
 </script>
-

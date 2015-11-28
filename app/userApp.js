@@ -58,7 +58,6 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                             files:[
                                 '../../css/custom-inputs.css',
                                 '../../css/vertical_tab.css',
-                                '../../plugin/circle/circle.css',
                                 '../../css/custom-inputs.css',
                                 '../../plugin/popup/style.css',
                                 '../../plugin/popup/jquery.leanModal.min.js',
