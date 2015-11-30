@@ -8505,6 +8505,13 @@ tr.sort-icon th i{
 	left: 45%;
 }
 
+.loader-style-dashboard{
+    position: absolute;
+    z-index: 20;
+    top:100px;
+    left: 50%;
+}
+
 .loader {
 	font-size: 6px;
 	position: relative;
@@ -9369,5 +9376,11 @@ a.abuse{
 #dailyIntake{
     min-width: 210px;
     height: 190px !important;
+}
+
+.gain-list p{
+    margin:0 0 10px 0;
+    font-size:13px;
+    line-height: 17px;
 }
 

@@ -63,10 +63,11 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
     $scope.frequentFood=function(foodid){
         $scope.isNew=true;
         $scope.title= "Add Food";
-       // alert(foodid);
+        $scope.loaded=true;
         var getFoodDetailPromise=UserDashboardService.doGetSelectedFoodDetails(foodid);
         getFoodDetailPromise.then(function(result){
             $scope.userSelectedFoodDetails=result;
+            $scope.loaded=false;
             $scope.doUserAddFood();
         });
     };
@@ -86,6 +87,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
     $scope.doEditUserFood=function(foodid,userfoodid){
         $scope.isNew=false;
         $scope.title= "Edit Food";
+        $scope.loaded=true;
         var getFoodDetailForEditPromise=UserDashboardService.doGetSelectedFoodDetails(foodid);
         getFoodDetailForEditPromise.then(function(result){
             $scope.userSelectedFoodDetails=result;
@@ -93,8 +95,8 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
             getUserFoodDetailsPromise.then(function(result){
                 $scope.userFood.userfoodid=result.userfoodid;
                 $scope.userFood.foodid=result.foodid;
-              //  $scope.userFood.measure=result.measureid;
-               $.each($scope.userSelectedFoodDetails.measureid, function(index,value) {
+                //  $scope.userFood.measure=result.measureid;
+                $.each($scope.userSelectedFoodDetails.measureid, function(index,value) {
                     if(value.measureid == result.measureid.measureid){
                         $scope.userFood.measure = value;
                     }
@@ -104,9 +106,9 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
                 $scope.current=$scope.current.toFixed(2);
                 if(($scope.current.length-3)>2) $scope.max=100+((String($scope.current|0).slice(0, -2))*100);
                 else $scope.max=100;
+                $scope.loaded=false;
                 $scope.doUserAddFood();
-           });
-
+            });
         });
     };
 
@@ -177,6 +179,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
 
     //Delete User Food
     $scope.doDeleteUserFood= function (userFoodId) {
+        $scope.loaded=true;
         var foodDeletePromise=UserDashboardService.doDeleteUserFood(userFoodId);
         foodDeletePromise.then(function(){
             if($scope.selectedDate==selectedDate){
@@ -295,10 +298,11 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
     $scope.frequentExercise=function(exerciseid){
         $scope.isNew=true;
         $scope.title= "Add Exercise";
-        // alert(foodid);
+        $scope.loaded=true;
         var getExerciseDetailPromise=UserDashboardService.doGetSelectedExerciseDetails(exerciseid);
         getExerciseDetailPromise.then(function(result){
             $scope.userSelectedExerciseDetails=result;
+            $scope.loaded=false;
             $scope.doUserAddExercise();
         });
     };
@@ -316,11 +320,11 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
 
     //On load Exercise Diary
     $scope.loadExerciseDiary=function(selectedDate){
-     // alert(selectedDate);
-
+        $scope.loaded=true;
         var userExerciseDiaryDetailPromise=UserDashboardService.getExerciseDiary(selectedDate);
         userExerciseDiaryDetailPromise.then(function(result){
             $scope.userExerciseDiaryDataAll=result;
+            $scope.loaded=false;
         });
     };
     //Insert User Exercise
@@ -348,6 +352,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
 
     //Delete User Exercise
     $scope.doDeleteUserExercise= function (userExerciseId) {
+        $scope.loaded=true;
         var exerciseDeletePromise=UserDashboardService.doDeleteUserExercise(userExerciseId);
         exerciseDeletePromise.then(function(){
             if($scope.selectedDate==selectedDate){
@@ -367,6 +372,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
 
         $scope.isNew=false;
         $scope.title= "Edit Exercise";
+        $scope.loaded=true;
         var getExerciseDetailForEditPromise=UserDashboardService.doGetSelectedExerciseDetails(exerciseid);
         getExerciseDetailForEditPromise.then(function(result){
             $scope.userSelectedExerciseDetails=result;
@@ -383,10 +389,11 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
                 $scope.userExercise.workoutvalue=parseInt(result.User_exercise_data.Level.workoutvalue);
 
                 $scope.current=$scope.caloriesSpent=result.User_exercise_data.Level.calories;
-                 $scope.current=$scope.current.toFixed(2);
-                 if(($scope.current.length-3)>2) $scope.max=100+((String($scope.current|0).slice(0, -2))*100);
-                 else $scope.max=100;
-                 $scope.doUserAddExercise();
+                $scope.current=$scope.current.toFixed(2);
+                if(($scope.current.length-3)>2) $scope.max=100+((String($scope.current|0).slice(0, -2))*100);
+                else $scope.max=100;
+                $scope.loaded=false;
+                $scope.doUserAddExercise();
             });
 
         });
@@ -569,7 +576,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
     };
 
     $scope.isWeightUpdated=function(){
-        return angular.equals ($scope.originalWeight,parseInt($scope.demography.weight));
+        return angular.equals (parseFloat($scope.originalWeight),parseFloat($scope.demography.weight));
     };
 
     $scope.setGoalConfirmation=function(){
@@ -728,8 +735,10 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
     $scope.doGetIntakeBruntByDate = function(date){
         requestHandler.postRequest("user/getTotalCalorieDetailForDate/",{"date":date}).then(function(response){
             $scope.calorieGraph=response.data.Calorie_Graph;
+
             if($scope.calorieGraph.intakecalorie=="") $scope.calorieGraph.intakecalorie=0;
             if($scope.calorieGraph.burntcalorie=="") $scope.calorieGraph.burntcalorie=0;
+
             $scope.currentGain=$scope.calorieGraph.intakecalorie;
             $scope.currentGain=$scope.currentGain.toFixed(2);
             if(($scope.currentGain.length-3)>2) $scope.gainGraphMax=100+((String($scope.currentGain|0).slice(0, -2))*100);
@@ -738,6 +747,83 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
             $scope.currentSpent=$scope.currentSpent.toFixed(2);
             if(($scope.currentSpent.length-3)>2) $scope.spentGraphMax=100+((String($scope.currentSpent|0).slice(0, -2))*100);
             else $scope.spentGraphMax=100;
+
+            var gainedCalories;
+            var spentCalories;
+            if($scope.calorieGraph.intakecalorie>$scope.calorieGraph.burntcalorie)
+                spentCalories = parseFloat(($scope.calorieGraph.intakecalorie - $scope.calorieGraph.burntcalorie).toFixed(2));
+            else spentCalories =0;
+            if($scope.calorieGraph.intakecalorie<$scope.calorieGraph.burntcalorie)
+                gainedCalories = parseFloat(($scope.calorieGraph.burntcalorie - $scope.calorieGraph.intakecalorie).toFixed(2));
+            else gainedCalories =0;
+            if($scope.calorieGraph.intakecalorie==$scope.calorieGraph.burntcalorie){
+                gainedCalories =0;
+                spentCalories =0;
+            }
+
+            $('#gainVsSpent').highcharts({
+
+                chart: {
+                    type: 'column'
+                },
+
+                xAxis: {
+                    categories: ['Compare <br/> <small>(calories)</small>']
+                },
+
+                yAxis: {
+                    allowDecimals: false,
+                    min: 0,
+                    title: {
+                        text: ''
+                    }
+                },
+
+                credits:{enabled:false},
+                exporting:{enabled:false},
+                legend:{enabled:false},
+                title:{text:''},
+
+                tooltip: {
+                    enabled:true,
+                    backgroundColor:'rgba(255, 255, 255, 1)',
+                    borderWidth:1,
+                    shadow:true,
+                    style:{fontSize:'10px',padding:5,zIndex:10000},
+                    formatter: function () {
+                        return '<b>' + this.x + '</b><br/>' +
+                            this.series.name + ': ' + this.y + '<br/>'
+                    }
+                },
+
+                plotOptions: {
+                    column: {
+                        stacking: 'normal'
+                    }
+                },
+
+                series: [{
+                    name: 'Spent',
+                    data: [gainedCalories],
+                    color: '#eee',
+                    stack: 'male'
+                },{
+                    name: 'Intake',
+                    data: [$scope.calorieGraph.intakecalorie],
+                    color: 'limegreen',
+                    stack: 'male'
+                }, {
+                    name: 'Gained',
+                    color: '#eee',
+                    data: [spentCalories],
+                    stack: 'female'
+                },{
+                    name: 'Brunt',
+                    data: [$scope.calorieGraph.burntcalorie],
+                    color: 'red',
+                    stack: 'female'
+                }]
+            });
 
         },function(){
             errorMessage(Flash, "Please try again later!");
@@ -887,6 +973,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
 
     $scope.initialLoadFoodAndExercise();
 
+
     //circle round
     $scope.offset =         0;
     $scope.timerCurrent =   0;
@@ -897,7 +984,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
     $scope.rounded =        false;
     $scope.responsive =     false;
     $scope.clockwise =      true;
-    $scope.bgColor =        '#eaeaea';
+    $scope.bgColor =        '#ddd';
     $scope.duration =       1000;
     $scope.currentAnimation = 'easeOutCubic';
 

@@ -197,3 +197,120 @@ html[xmlns] .clearfix { display: block; }
     -moz-box-shadow: inset 0px 0px 3px rgba(0,0,0,0.3);
     box-shadow: inset 0px 0px 3px rgba(0,0,0,0.3);
 }
+
+
+/* main page */
+
+#graphcontent {
+    display: block;
+    margin: 5px 0 0 200px;
+    position: absolute;
+    width: 460px;
+    height: 380px;
+    z-index: 1;
+    background-color: #fff;
+    -webkit-box-shadow: 0px 1px 4px rgba(0,0,0,0.3);
+    -moz-box-shadow: 0px 1px 4px rgba(0,0,0,0.3);
+    box-shadow: 0px 1px 4px rgba(0,0,0,0.3);
+    padding-top: 15px;
+}
+
+/* side navigation */
+#graphmenu {
+    margin: 5px 0 0 10px;
+    padding: 0;
+    float: left;
+    background: transparent;
+    height: 380px;
+}
+
+#graphmenu li {
+    display: block;
+    text-align: left;
+    font-size: 1.1em;
+    width: 180px;
+    background-color: #eee;
+    margin-bottom: 7px;
+}
+
+#graphmenu li a {
+    display: block;
+    padding: 8px 15px;
+    overflow-y: hidden;
+    color: #555;
+    height: 40px;
+    text-decoration: none;
+}
+
+#graphmenu li p{
+    margin-top: 5px;
+    font-size: 12px;
+}
+
+#graphmenu li.calories {
+    display: block;
+    padding: 10px 0;
+    height: 255px;
+    background-color: #fff;
+    -webkit-box-shadow: 1px 1px 5px rgba(0,0,0,0.3);
+    -moz-box-shadow: 1px 1px 5px rgba(0,0,0,0.3);
+    box-shadow: 1px 1px 5px rgba(0,0,0,0.3);
+    color: #555;
+    text-decoration: none;
+    width: 224px;
+    margin-left: -4px;
+    border-left: 4px solid dodgerblue ;
+}
+
+#graphmenu li.calories .text{
+    margin: 0 10px !important;
+}
+
+#graphmenu li.calories .text p{
+    margin-bottom: 10px;
+}
+
+#graphmenu li a:hover {
+    background: #f2f2f2;
+}
+
+#graphmenu li a strong {
+    display: block;
+    margin-top: 5px;
+}
+
+#graphmenu li a.open {
+    width: 180px;
+    height: 98px;
+    background: #fff;
+    position: relative;
+    z-index: 10;
+    -webkit-box-shadow: 1px 1px 5px rgba(0,0,0,0.3);
+    -moz-box-shadow: 1px 1px 5px rgba(0,0,0,0.3);
+    box-shadow: 1px 1px 5px rgba(0,0,0,0.3);
+}
+
+#graphmenu li.daily_update a.open {
+    color: #f8ba01;
+    border-left: 4px solid #f8ba01;
+}
+
+#graphmenu li.advice a.open {
+    color: red;
+    border-left: 4px solid red;
+}
+
+#graphmenu li.weight a.open {
+    color: limegreen;
+    border-left: 4px solid limegreen;
+}
+
+#graphmenu span.horizontal a.open {
+    color: blue;
+    border-top: 4px solid blue;
+}
+
+#graphmenu li a span{
+    font-size: 14px;
+    font-weight: bold;
+}

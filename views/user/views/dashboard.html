@@ -117,6 +117,7 @@
                     <ul class="nav nav-tabs">
                         <li class="active"><a href="#tab-1" data-toggle="tab" onclick="return false;">Food Gain</a></li>
                         <li><a href="#tab-2" data-toggle="tab" onclick="return false;">Energy Spent</a></li>
+                        <li><a href="#tab-3" data-toggle="tab" onclick="return false;">Graphs</a></li>
                     </ul>
 
                     <!-- Tab panels -->
@@ -155,6 +156,11 @@
                                         </div>
                                     </div>
                                     <div class="food_scrollbar style">
+                                        <div ng-if="loaded" class="col-md-12">
+                                            <div class="loader-style-dashboard">
+                                                <div class="loader"></div>
+                                            </div>
+                                        </div>
                                         <ul class="food">
                                             <li class="row" ng-repeat="foodDiaryData in userFoodDiaryData | orderBy:'$index':true">
                                                 <div class="col-md-2 no-padding"><img ng-src="{{foodDiaryData.foodImagePath+'200x200.jpg'}}"></div>
@@ -170,10 +176,9 @@
                                                 </div>
                                             </li>
                                         </ul>
-                                        <div class="text-center margin-top-40">
-                                            <div ng-show="loaded" class="throbber-loader margin-top-40">
-                                                Loading…
-                                            </div>
+                                        <div ng-show="userFoodDiaryData.length==0 || userFoodDiaryDataAll.length==0" class="text-center"><br/>
+                                            <img src="../../images/no-food.png">
+                                            <h1 class="text-gray margin-top-15">  NO FOOD ADDED!!!</h1>
                                         </div>
                                     </div>
                                 </div><!-- #tab1 -->
@@ -196,6 +201,11 @@
                                 </div>
                             </div>
                             <div class="food_scrollbar style height-320">
+                                <div ng-if="loaded" class="col-md-12">
+                                    <div class="loader-style-dashboard">
+                                        <div class="loader"></div>
+                                    </div>
+                                </div>
                                 <ul class="food">
                                     <li class="row" ng-repeat="exerciseDiaryData in userExerciseDiaryDataAll | orderBy:'$index':true">
                                         <div class="col-md-2 no-padding"><img ng-src="{{exerciseDiaryData.exerciseImagePath+'200x200.jpg'}}"></div>
@@ -211,7 +221,109 @@
                                         </div>
                                     </li>
                                 </ul>
+                                <div ng-show="userExerciseDiaryDataAll.length==0" class="text-center"><br/><br/>
+                                    <img src="../../images/no-exercise.png">
+                                    <h1 class="text-gray margin-top-15">  NO EXERCISE ADDED!!!</h1>
+                                </div>
                             </div>
+                        </div>
+                        <!-- Tab Content 3 -->
+                        <div class="tab-pane padding-top-5" id="tab-3">
+                            <ul id="graphmenu">
+                                <li class="daily_update">
+                                    <a href="#graph1" class="open"><span>Gain vs Spent</span>
+                                        <br/>
+                                        <p>Enter your Daily Updates</p>
+                                    </a>
+                                </li>
+
+                                <li class="weight">
+                                    <a href="#2"><span>Weight & Goal</span>
+                                        <br/>
+                                        <p>Update Weight & Set Goal</p>
+                                    </a>
+                                </li>
+
+                                <li class="advice">
+                                    <a href="#3"><span>Advices</span>
+                                        <br/>
+                                        <p>Get daily tips for you</p>
+                                    </a>
+                                </li>
+
+                                <li class="advice">
+                                    <a href="#4"><span>Advices</span>
+                                        <br/>
+                                        <p>Get daily tips for you</p>
+                                    </a>
+                                </li>
+
+                                <li class="advice">
+                                    <a href="#5"><span>Advices</span>
+                                        <br/>
+                                        <p>Get daily tips for you</p>
+                                    </a>
+                                </li>
+
+                                <li class="advice">
+                                    <a href="#6"><span>Advices</span>
+                                        <br/>
+                                        <p>Get daily tips for you</p>
+                                    </a>
+                                </li>
+
+                                <li class="advice">
+                                    <a href="#7"><span>Advices</span>
+                                        <br/>
+                                        <p>Get daily tips for you</p>
+                                    </a>
+                                </li>
+
+                            </ul>
+
+                            <div id="graphcontent">
+                                <div id="graph1">
+                                    <div ng-hide="userFoodDiaryDataAll.length==0&&userExerciseDiaryDataAll==0">
+                                        <div class="col-md-4 text-right gain-list">
+                                            <div class="text-green text-bold">Gain</div>
+                                            <hr/>
+                                            <p ng-repeat="food in userFoodDiaryDataAll.BreakFast" class="wrap">
+                                                {{food.foodname}}</p>
+                                            <p ng-repeat="food in userFoodDiaryDataAll.Brunch" class="wrap">
+                                                {{food.foodname}}</p>
+                                            <p ng-repeat="food in userFoodDiaryDataAll.Lunch" class="wrap">
+                                                {{food.foodname}}</p>
+                                            <p ng-repeat="food in userFoodDiaryDataAll.Evening" class="wrap">
+                                                {{food.foodname}}</p>
+                                            <p ng-repeat="food in userFoodDiaryDataAll.Dinner" class="wrap">
+                                                {{food.foodname}}</p>
+                                        </div>
+                                        <div class="col-md-4 no-padding">
+                                            <div id="gainVsSpent" style="width:130px;height: 350px; margin: auto;padding: 15px 5px 5px 5px; box-shadow:inset 0 0 3px #ccc"></div>
+                                        </div>
+                                        <div class="col-md-4 gain-list">
+                                            <div class="text-red text-bold">Spent</div>
+                                            <hr/>
+                                            <p ng-repeat="exerciseDiaryData in userExerciseDiaryDataAll" class="wrap text-left">
+                                                {{exerciseDiaryData.Exercise.exercisename}}</p>
+                                        </div>
+                                    </div>
+                                    <div ng-show="userFoodDiaryDataAll.length==0&&userExerciseDiaryDataAll==0" class="text-center">
+                                        <br/><br/><br/>
+                                        <img src="../../images/no-update.png">
+                                        <h1 class="text-gray">NO UPDATE TODAY!!!</h1>
+                                    </div>
+                                </div>
+
+                                <div id="2" class="contentblock hidden">
+                                    graph 2
+                                </div><!-- @end #ideas-content -->
+
+                                <div id="3" class="contentblock hidden">
+                                    graph 3
+                                </div><!-- @end #ideas-content -->
+                            </div><!-- @end #content -->
+
                         </div>
                     </div>
                     <!-- End Tab Panels -->
@@ -617,6 +729,30 @@
 
 
                 $('#sidemenu a').removeClass('open');
+                $(this).addClass('open');
+            }
+        });
+    });
+</script>
+
+<script type="text/javascript">
+    $(function(){
+        $('#graphmenu a').on('click', function(e){
+            e.preventDefault();
+
+            if($(this).hasClass('open')) {
+                // do nothing because the link is already open
+            } else {
+                var oldcontent = $('#graphmenu a.open').attr('href');
+                var newcontent = $(this).attr('href');
+
+                $(oldcontent).fadeOut('fast', function(){
+                    $(newcontent).fadeIn().removeClass('hidden');
+                    $(oldcontent).addClass('hidden');
+                });
+
+
+                $('#graphmenu a').removeClass('open');
                 $(this).addClass('open');
             }
         });
