@@ -113,7 +113,7 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 controller:'MembersViewController'
             }).
             when('/forums', {
-                templateUrl: 'views/forums.html',
+                templateUrl: '../user/views/forums.html',
                 resolve: {
                     loadMyFiles:function($ocLazyLoad) {
                         return $ocLazyLoad.load({
@@ -128,7 +128,7 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 controller:'ForumsCoachController'
             }).
             when('/addforum', {
-                templateUrl: 'views/forum-add.html',
+                templateUrl: '../user/views/forum-add.html',
                 resolve: {
                     loadMyFiles:function($ocLazyLoad) {
                         return $ocLazyLoad.load({
@@ -145,7 +145,7 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 controller:'ForumsCoachController'
             }).
             when('/editForum/:id', {
-                templateUrl: 'views/forum-add.html',
+                templateUrl: '../user/views/forum-add.html',
                 resolve: {
                     loadMyFiles:function($ocLazyLoad) {
                         return $ocLazyLoad.load({
@@ -162,7 +162,7 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 controller:'ForumsCoachEditController'
             }).
             when('/forumDetails/:id', {
-                templateUrl: 'views/forum-details.html',
+                templateUrl: '../user/views/forum-details.html',
                 resolve: {
                     loadMyFiles:function($ocLazyLoad) {
                         return $ocLazyLoad.load({
@@ -176,18 +176,18 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 controller:'ForumsCoachController'
             }).
             when('/advices', {
-                templateUrl: 'views/advices.html'
-                /*resolve: {
+                templateUrl: 'views/advices.html',
+                resolve: {
                     loadMyFiles:function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'coachApp',
                             files:[
-                                '../../app/forums/forumsController.js'
+                                '../../app/coachAdvice/coachAdviceController.js'
                             ]
                         })
                     }
                 },
-                controller:'ForumsCoachController'*/
+                controller:'CoachAdviceController'
             }).
             otherwise({
                 redirectTo: '/dashboard'

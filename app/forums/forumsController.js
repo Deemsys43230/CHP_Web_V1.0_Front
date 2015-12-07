@@ -269,12 +269,14 @@ userApp.controller('ForumsUserController',function($scope,requestHandler,Flash,$
 });
 
 userApp.controller('ForumsUserEditController',function($scope,requestHandler,Flash,$routeParams,$location){
+    var original="";
     $scope.doGetForumDetailsByUserEdit= function () {
 
         $scope.isNew = false;
         $scope.title = "Edit Forum";
 
         requestHandler.postRequest("getForumDetailByUserAndCoach/",{"postid":$routeParams.id}).then(function(response){
+            original=angular.copy(response.data['Forum details']);
             $scope.forumDetails=response.data['Forum details'];
 
         },function(){
@@ -303,6 +305,39 @@ userApp.controller('ForumsUserEditController',function($scope,requestHandler,Fla
             errorMessage(Flash, "Please try again later!")
         });
     };
+
+    // To display Forum as user
+    $scope.doGetForumsByUser=function(){
+        $scope.loaded=true;
+
+        $scope.forum = {
+            status: 'forum-view'
+        };
+
+        requestHandler.getRequest("getListOfForumsByUserAndCoach/", "").then(function(response){
+
+            $scope.userforumlist=response.data['Forum details'];
+
+            $.each($scope.userforumlist, function(index,value) {
+                requestHandler.postRequest("listofAnswers/", {"postid":value.postid}).then(function(response){
+                    value.totalcomment=response.data.ForumDiscussionData.length;
+                });
+            });
+            $scope.loaded=false;
+            $('#showMostViewed').hide();
+            $('#showMostViewed').show(300);
+
+        },function(){
+            errorMessage(Flash,"Please try again later!")
+        });
+    };
+
+    $scope.isClean=function(){
+
+        return angular.equals(original,  $scope.forumDetails);
+    };
+
+    $scope.doGetForumsByUser();
 
     $scope.Editinit=function(){
         $scope.doGetForumDetailsByUserEdit();
@@ -463,12 +498,15 @@ coachApp.controller('ForumsCoachController',function($scope,requestHandler,Flash
 });
 
 coachApp.controller('ForumsCoachEditController',function($scope,requestHandler,Flash,$routeParams,$location){
+
+    var original="";
     $scope.doGetForumDetailsByUserEdit= function () {
 
         $scope.isNew = false;
         $scope.title = "Edit Forum";
 
         requestHandler.postRequest("getForumDetailByUserAndCoach/",{"postid":$routeParams.id}).then(function(response){
+            original=angular.copy(response.data['Forum details']);
             $scope.forumDetails=response.data['Forum details'];
 
         },function(){
@@ -497,6 +535,39 @@ coachApp.controller('ForumsCoachEditController',function($scope,requestHandler,F
             errorMessage(Flash, "Please try again later!")
         });
     };
+
+    // To display Forum as user
+    $scope.doGetForumsByUser=function(){
+        $scope.loaded=true;
+
+        $scope.forum = {
+            status: 'forum-view'
+        };
+
+        requestHandler.getRequest("getListOfForumsByUserAndCoach/", "").then(function(response){
+
+            $scope.userforumlist=response.data['Forum details'];
+
+            $.each($scope.userforumlist, function(index,value) {
+                requestHandler.postRequest("listofAnswers/", {"postid":value.postid}).then(function(response){
+                    value.totalcomment=response.data.ForumDiscussionData.length;
+                });
+            });
+            $scope.loaded=false;
+            $('#showMostViewed').hide();
+            $('#showMostViewed').show(300);
+
+        },function(){
+            errorMessage(Flash,"Please try again later!")
+        });
+    };
+
+    $scope.isClean=function(){
+
+        return angular.equals(original,  $scope.forumDetails);
+    };
+
+    $scope.doGetForumsByUser();
 
     $scope.Editinit=function(){
         $scope.doGetForumDetailsByUserEdit();
