@@ -156,8 +156,10 @@ userApp.controller('ForumsUserController',function($scope,requestHandler,Flash,$
     $scope.doAddForum=function(){
 
         requestHandler.postRequest("insertForum/",$scope.forumDetails).then(function(response){
+
+            $scope.postid = response.data['Forum details'].postid;
             successMessage(Flash,"Successfully Added");
-            $location.path("forums");
+            $location.path("forumDetails/"+$scope.postid);
         }, function () {
             errorMessage(Flash, "Please try again later!")
         });
@@ -299,8 +301,9 @@ userApp.controller('ForumsUserEditController',function($scope,requestHandler,Fla
     //To update Latest News
     $scope.doUpdateForum = function(){
         requestHandler.putRequest("updateForum/",$scope.forumDetails).then(function(response){
+            $scope.postid = response.data['Forum details'].postid;
             successMessage(Flash,"Successfully Updated");
-            $location.path("forums");
+            $location.path("forumDetails/"+$scope.postid);
         }, function () {
             errorMessage(Flash, "Please try again later!")
         });
@@ -380,8 +383,9 @@ coachApp.controller('ForumsCoachController',function($scope,requestHandler,Flash
     $scope.doAddForum=function(){
 
         requestHandler.postRequest("insertForum/",$scope.forumDetails).then(function(response){
+            $scope.postid = response.data['Forum details'].postid;
             successMessage(Flash,"Successfully Added");
-            $location.path("forums");
+            $location.path("forumDetails/"+$scope.postid);
         }, function () {
             errorMessage(Flash, "Please try again later!")
         });
@@ -529,8 +533,9 @@ coachApp.controller('ForumsCoachEditController',function($scope,requestHandler,F
     //To update Latest News
     $scope.doUpdateForum = function(){
         requestHandler.putRequest("updateForum/",$scope.forumDetails).then(function(response){
+            $scope.postid = response.data['Forum details'].postid;
             successMessage(Flash,"Successfully Updated");
-            $location.path("forums");
+            $location.path("forumDetails/"+$scope.postid);
         }, function () {
             errorMessage(Flash, "Please try again later!")
         });
