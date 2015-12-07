@@ -175,6 +175,20 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'ForumsCoachController'
             }).
+            when('/advices', {
+                templateUrl: 'views/advices.html'
+                /*resolve: {
+                    loadMyFiles:function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'coachApp',
+                            files:[
+                                '../../app/forums/forumsController.js'
+                            ]
+                        })
+                    }
+                },
+                controller:'ForumsCoachController'*/
+            }).
             otherwise({
                 redirectTo: '/dashboard'
             });
