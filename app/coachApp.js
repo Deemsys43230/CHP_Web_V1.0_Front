@@ -112,6 +112,69 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'MembersViewController'
             }).
+            when('/forums', {
+                templateUrl: 'views/forums.html',
+                resolve: {
+                    loadMyFiles:function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'coachApp',
+                            files:[
+
+                                '../../app/forums/forumsController.js'
+                            ]
+                        })
+                    }
+                },
+                controller:'ForumsCoachController'
+            }).
+            when('/addforum', {
+                templateUrl: 'views/forum-add.html',
+                resolve: {
+                    loadMyFiles:function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'coachApp',
+                            files:[
+                                '../../js/bootstrap.min.js',
+                                '../../plugin/text-editor/summernote.js',
+                                '../../plugin/text-editor/summernote.css',
+                                '../../app/forums/forumsController.js'
+                            ]
+                        })
+                    }
+                },
+                controller:'ForumsCoachController'
+            }).
+            when('/editForum/:id', {
+                templateUrl: 'views/forum-add.html',
+                resolve: {
+                    loadMyFiles:function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'coachApp',
+                            files:[
+                                '../../js/bootstrap.min.js',
+                                '../../plugin/text-editor/summernote.js',
+                                '../../plugin/text-editor/summernote.css',
+                                '../../app/forums/forumsController.js'
+                            ]
+                        })
+                    }
+                },
+                controller:'ForumsCoachEditController'
+            }).
+            when('/forumDetails/:id', {
+                templateUrl: 'views/forum-details.html',
+                resolve: {
+                    loadMyFiles:function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'coachApp',
+                            files:[
+                                '../../app/forums/forumsController.js'
+                            ]
+                        })
+                    }
+                },
+                controller:'ForumsCoachController'
+            }).
             otherwise({
                 redirectTo: '/dashboard'
             });

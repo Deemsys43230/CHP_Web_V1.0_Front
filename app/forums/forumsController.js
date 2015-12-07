@@ -140,16 +140,40 @@ adminApp.filter('trusted', ['$sce', function ($sce) {
 
 var userApp = angular.module('userApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate']);
 
-userApp.controller('ForumsUserController',function($scope,requestHandler,Flash,$routeParams){
+userApp.controller('ForumsUserController',function($scope,requestHandler,Flash,$routeParams,$location){
+
+  $scope.isNew = true;
+    $scope.title = "Add Forum";
+
+    //summer note
+    $scope.options = {
+        height: 250
+    };
 
     $scope.abuseDisable=false;
+
+    //To add Forum
+    $scope.doAddForum=function(){
+
+        requestHandler.postRequest("insertForum/",$scope.forumDetails).then(function(response){
+            successMessage(Flash,"Successfully Added");
+            $location.path("forums");
+        }, function () {
+            errorMessage(Flash, "Please try again later!")
+        });
+    };
 
     // To display Forum as user
     $scope.doGetForumsByUser=function(){
         $scope.loaded=true;
+
+        $scope.forum = {
+            status: 'forum-view'
+        };
+
         requestHandler.getRequest("getListOfForumsByUserAndCoach/", "").then(function(response){
 
-            $scope.userforumlist=response.data['Forum details'];
+           $scope.userforumlist=response.data['Forum details'];
 
             $.each($scope.userforumlist, function(index,value) {
                 requestHandler.postRequest("listofAnswers/", {"postid":value.postid}).then(function(response){
@@ -167,13 +191,216 @@ userApp.controller('ForumsUserController',function($scope,requestHandler,Flash,$
 
     $scope.doGetForumDetailsByUser= function () {
 
+        requestHandler.getRequest("getUserId/","").then(function(response){
+
+            $scope.loginuserid=response.data.User_Profile.userid;
+        });
+
         requestHandler.postRequest("getForumDetailByUserAndCoach/",{"postid":$routeParams.id}).then(function(response){
             $scope.userforumdetails=response.data['Forum details'];
+
+            if($scope.loginuserid === $scope.userforumdetails.userid){
+                $scope.userCheck = true;
+            }
+            else{
+                $scope.userCheck=false;
+            }
+        },function(){
+            errorMessage(Flash,"Please try again later!")
+        });
+
+
+    };
+
+
+    $scope.doGetForumAnswers=function(){
+
+        requestHandler.postRequest("listofAnswers/",{"postid":$routeParams.id}).then(function(response){
+            $scope.forumAnswers=response.data.ForumDiscussionData;
         },function(){
             errorMessage(Flash,"Please try again later!")
         });
 
     };
+
+    $scope.doPostForumAnswers=function(){
+
+        requestHandler.postRequest("postAnswer/",{"comments":$scope.comments,"postid":$routeParams.id}).then(function(response){
+            successMessage(Flash,"Your Comment Successfully Posted!");
+            $scope.doGetForumAnswers();
+            $scope.comments='';
+            $scope.userCommentForm.$setPristine();
+        },function(){
+            errorMessage(Flash,"Please try again later!")
+        });
+
+    };
+
+    $scope.doMarkPostAsAbuse=function(){
+
+        requestHandler.postRequest("abuseCount/",{"postid":$routeParams.id}).then(function(response){
+            successMessage(Flash,"Thanks for your evaluation!");
+            $scope.abuseDisable=true;
+        },function(){
+            errorMessage(Flash,"Please try again later!")
+        });
+
+    };
+
+    $scope.doMarkCommentAsAbuse=function(ansid){
+        requestHandler.postRequest("MarkasAbuse/",{"ansid":ansid}).then(function(response){
+            successMessage(Flash,"Thanks for your evaluation!");
+        },function(){
+            errorMessage(Flash,"Please try again later!")
+        });
+
+    };
+
+ // To display the user Forum list on load
+    $scope.doGetForumsByUser();
+
+    $scope.init=function(){
+        $scope.doGetForumDetailsByUser();
+        $scope.doGetForumAnswers();
+    };
+
+
+
+});
+
+userApp.controller('ForumsUserEditController',function($scope,requestHandler,Flash,$routeParams,$location){
+    $scope.doGetForumDetailsByUserEdit= function () {
+
+        $scope.isNew = false;
+        $scope.title = "Edit Forum";
+
+        requestHandler.postRequest("getForumDetailByUserAndCoach/",{"postid":$routeParams.id}).then(function(response){
+            $scope.forumDetails=response.data['Forum details'];
+
+        },function(){
+            errorMessage(Flash,"Please try again later!")
+        });
+
+
+    };
+
+    $scope.doGetForumAnswers=function(){
+
+        requestHandler.postRequest("listofAnswers/",{"postid":$routeParams.id}).then(function(response){
+            $scope.forumAnswers=response.data.ForumDiscussionData;
+        },function(){
+            errorMessage(Flash,"Please try again later!")
+        });
+
+    };
+
+    //To update Latest News
+    $scope.doUpdateForum = function(){
+        requestHandler.putRequest("updateForum/",$scope.forumDetails).then(function(response){
+            successMessage(Flash,"Successfully Updated");
+            $location.path("forums");
+        }, function () {
+            errorMessage(Flash, "Please try again later!")
+        });
+    };
+
+    $scope.Editinit=function(){
+        $scope.doGetForumDetailsByUserEdit();
+        $scope.doGetForumAnswers();
+    };
+
+    $scope.Editinit();
+});
+
+// html filter (render text as html)
+userApp.filter('html', ['$sce', function ($sce) {
+    return function (text) {
+        return $sce.trustAsHtml(text);
+    };
+}]);
+
+// render image to view in list
+userApp.filter('trusted', ['$sce', function ($sce) {
+    return function(url) {
+        return $sce.trustAsResourceUrl(url);
+    };
+}]);
+
+
+var coachApp = angular.module('coachApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate']);
+
+coachApp.controller('ForumsCoachController',function($scope,requestHandler,Flash,$routeParams,$location){
+
+    $scope.isNew = true;
+    $scope.title = "Add Forum";
+
+    //summer note
+    $scope.options = {
+        height: 250
+    };
+
+    $scope.abuseDisable=false;
+
+    //To add Forum
+    $scope.doAddForum=function(){
+
+        requestHandler.postRequest("insertForum/",$scope.forumDetails).then(function(response){
+            successMessage(Flash,"Successfully Added");
+            $location.path("forums");
+        }, function () {
+            errorMessage(Flash, "Please try again later!")
+        });
+    };
+
+    // To display Forum as user
+    $scope.doGetForumsByUser=function(){
+        $scope.loaded=true;
+
+        $scope.forum = {
+            status: 'forum-view'
+        };
+
+        requestHandler.getRequest("getListOfForumsByUserAndCoach/", "").then(function(response){
+
+            $scope.userforumlist=response.data['Forum details'];
+
+            $.each($scope.userforumlist, function(index,value) {
+                requestHandler.postRequest("listofAnswers/", {"postid":value.postid}).then(function(response){
+                    value.totalcomment=response.data.ForumDiscussionData.length;
+                });
+            });
+            $scope.loaded=false;
+            $('#showMostViewed').hide();
+            $('#showMostViewed').show(300);
+
+        },function(){
+            errorMessage(Flash,"Please try again later!")
+        });
+    };
+
+    $scope.doGetForumDetailsByUser= function () {
+
+        requestHandler.getRequest("getUserId/","").then(function(response){
+
+            $scope.loginuserid=response.data.User_Profile.userid;
+        });
+
+        requestHandler.postRequest("getForumDetailByUserAndCoach/",{"postid":$routeParams.id}).then(function(response){
+            $scope.userforumdetails=response.data['Forum details'];
+
+            if($scope.loginuserid === $scope.userforumdetails.userid){
+                $scope.userCheck = true;
+            }
+            else{
+                $scope.userCheck=false;
+            }
+        },function(){
+            errorMessage(Flash,"Please try again later!")
+        });
+
+
+    };
+
 
     $scope.doGetForumAnswers=function(){
 
@@ -219,6 +446,10 @@ userApp.controller('ForumsUserController',function($scope,requestHandler,Flash,$
     };
 
 
+
+
+
+
     // To display the user Forum list on load
     $scope.doGetForumsByUser();
 
@@ -227,18 +458,65 @@ userApp.controller('ForumsUserController',function($scope,requestHandler,Flash,$
         $scope.doGetForumAnswers();
     };
 
+
+
+});
+
+coachApp.controller('ForumsCoachEditController',function($scope,requestHandler,Flash,$routeParams,$location){
+    $scope.doGetForumDetailsByUserEdit= function () {
+
+        $scope.isNew = false;
+        $scope.title = "Edit Forum";
+
+        requestHandler.postRequest("getForumDetailByUserAndCoach/",{"postid":$routeParams.id}).then(function(response){
+            $scope.forumDetails=response.data['Forum details'];
+
+        },function(){
+            errorMessage(Flash,"Please try again later!")
+        });
+
+
+    };
+
+    $scope.doGetForumAnswers=function(){
+
+        requestHandler.postRequest("listofAnswers/",{"postid":$routeParams.id}).then(function(response){
+            $scope.forumAnswers=response.data.ForumDiscussionData;
+        },function(){
+            errorMessage(Flash,"Please try again later!")
+        });
+
+    };
+
+    //To update Latest News
+    $scope.doUpdateForum = function(){
+        requestHandler.putRequest("updateForum/",$scope.forumDetails).then(function(response){
+            successMessage(Flash,"Successfully Updated");
+            $location.path("forums");
+        }, function () {
+            errorMessage(Flash, "Please try again later!")
+        });
+    };
+
+    $scope.Editinit=function(){
+        $scope.doGetForumDetailsByUserEdit();
+        $scope.doGetForumAnswers();
+    };
+
+    $scope.Editinit();
 });
 
 // html filter (render text as html)
-userApp.filter('html', ['$sce', function ($sce) {
+coachApp.filter('html', ['$sce', function ($sce) {
     return function (text) {
         return $sce.trustAsHtml(text);
     };
 }]);
 
 // render image to view in list
-userApp.filter('trusted', ['$sce', function ($sce) {
+coachApp.filter('trusted', ['$sce', function ($sce) {
     return function(url) {
         return $sce.trustAsResourceUrl(url);
     };
 }]);
+

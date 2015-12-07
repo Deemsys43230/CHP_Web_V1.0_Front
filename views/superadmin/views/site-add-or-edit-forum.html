@@ -34,15 +34,16 @@
                             <h4>Content :</h4>
                         </div>
                         <div class="col-md-10">
+                            <textarea type="text" class="height-150 forum-textarea" name="description" ng-model="forumDetails.postdescription" maxlength="300"  required/></textarea>
                              <span ng-show="ForumForm.description.$dirty&&ForumForm.description.$invalid">
                                   <span class="error-message textarea-errormessage40" ng-show="ForumForm.description.$error.required"><span>Required.</span></span>
                              </span>
-                            <div summernote config="options" name="description"  ng-model="forumDetails.postdescription" required></div>
+                           <!-- <div summernote config="options" name="description"  ng-model="forumDetails.postdescription" required></div>-->
                         </div>
                     </form>
                 </div>
                 <div class="text-center margin-top-20">
-                    <a href="" class="btn btn-success" ng-disabled="ForumForm.$invalid" ng-click="doAddForum()" ng-show="isNew">Add Latest News</a>
+                    <a href="" class="btn btn-success" ng-disabled="ForumForm.$invalid" ng-click="doAddForum()" ng-show="isNew">Add Forum</a>
                     <a href="" class="btn btn-success" ng-disabled="ForumForm.$invalid" ng-click="doUpdateForum()" ng-hide="isNew">Save Changes</a>
                     <a href="#forums" class="btn btn-warning">Cancel</a>
                 </div>

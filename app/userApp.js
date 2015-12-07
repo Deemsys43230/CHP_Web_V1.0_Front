@@ -222,12 +222,47 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'userApp',
                             files:[
+
                                 '../../app/forums/forumsController.js'
                             ]
                         })
                     }
                 },
                 controller:'ForumsUserController'
+            }).
+            when('/addforum', {
+                templateUrl: 'views/forum-add.html',
+                resolve: {
+                    loadMyFiles:function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'userApp',
+                            files:[
+                                '../../js/bootstrap.min.js',
+                                '../../plugin/text-editor/summernote.js',
+                                '../../plugin/text-editor/summernote.css',
+                                '../../app/forums/forumsController.js'
+                            ]
+                        })
+                    }
+                },
+                controller:'ForumsUserController'
+            }).
+            when('/editForum/:id', {
+                templateUrl: 'views/forum-add.html',
+                resolve: {
+                    loadMyFiles:function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'userApp',
+                            files:[
+                                '../../js/bootstrap.min.js',
+                                '../../plugin/text-editor/summernote.js',
+                                '../../plugin/text-editor/summernote.css',
+                                '../../app/forums/forumsController.js'
+                            ]
+                        })
+                    }
+                },
+                controller:'ForumsUserEditController'
             }).
             when('/forumDetails/:id', {
                 templateUrl: 'views/forum-details.html',
