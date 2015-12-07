@@ -39,13 +39,18 @@
                 </div>
                 <div class="col-md-12">
                     <h5>
-                        <div class="col-md-8 no-padding">
-                            Forum
+                        <div class="col-md-9">
+                            <div class="col-md-2 no-padding">
+                                Posted By
+                            </div>
+                            <div class="col-md-10 no-padding">
+                                Forum
+                            </div>
                         </div>
-                        <div class="col-md-2 text-center">
+                        <div class="col-md-1 text-center no-padding">
                             Comments
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-2 text-center">
                             Date and Time
                         </div>
                     </h5>
@@ -61,14 +66,20 @@
                     </span>
                     <div ng-switch-default>
                         <div class="col-md-12" ng-repeat="userforum in userforumlist | filter:forumsearch">
-                            <div class="col-md-8 no-padding">
-                                <h5><a href="#forumDetails/{{userforum.postid}}">{{userforum.posttitle}}</a></h5>
-                                <p class="forum-list-content">{{userforum.postdescription}}</p>
+                            <div class="col-md-9">
+                                <div class="col-md-2 no-padding">
+                                    <img class="img-circle forum-list-img" src="{{userforum.userimage | trusted}}">
+                                    <p class="wrap">{{userforum.username}}</p>
+                                </div>
+                                <div class="col-md-10 no-padding">
+                                    <h5><a href="#forumDetails/{{userforum.postid}}">{{userforum.posttitle}}</a></h5>
+                                    <p class="forum-list-content">{{userforum.postdescription}}</p>
+                                </div>
                             </div>
-                            <div class="col-md-2 text-center">
+                            <div class="col-md-1 text-center">
                                 <i class="fa fa-comments"></i>  &nbsp;{{userforum.totalcomment}}
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-2 text-center">
                                 <p>{{userforum.postedon}}</p>
                             </div>
                             <div class="col-md-12 no-padding">
