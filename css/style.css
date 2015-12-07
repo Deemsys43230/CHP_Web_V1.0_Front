@@ -7870,6 +7870,10 @@ ul.sidebar-menu li a{
     width:30% !important;
 }
 
+.height-60{
+    height: 60px !important;
+}
+
 .height-100{
     height: 100px !important;
 }
@@ -8220,7 +8224,7 @@ a:hover, a:visited, a:link, a:active
 	margin: 0px;
 	border-top: 4px solid orange;
 	width: 1100px;
-	height: 490px;
+	height: 500px;
 	float: left;
 	z-index: 1;
 	background-color: #fff;
@@ -8374,7 +8378,7 @@ tr.sort-icon th i{
 .line-clamp-md{
     position: absolute;
     max-height: 20px;
-    width: 35%;
+    width: 34%;
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow:hidden;
@@ -8451,6 +8455,10 @@ tr.sort-icon th i{
 
 .height-350{
     height: 350px !important;
+}
+
+.height-335{
+    height: 335px !important;
 }
 
 .min-height-350{
@@ -9267,6 +9275,16 @@ a.invite_button.request_sent:hover{
     background-color: #FF4F4F !important;
 }
 
+a.invite_button.add-member{
+    color: orange !important;
+    border-color: orange !important;
+}
+
+a.invite_button.add-member:hover{
+    color: #FFF !important;
+    background-color: orange !important;
+}
+
 a.invite_button{
     color: #57cb85;
     font-size: 12px;
@@ -9342,8 +9360,13 @@ a.abuse{
 }
 
 .forum-list-content{
-    max-height:42px;
+    max-height:63px;
     overflow-y: hidden;
+}
+
+.forum-list-img{
+    width:70px!important;
+    height:70px!important;
 }
 
 .btn-dis.disabled,
@@ -9382,5 +9405,11 @@ a.abuse{
     margin:0 0 10px 0;
     font-size:13px;
     line-height: 17px;
+}
+
+.disabled-class{
+    opacity: 0.5;
+    pointer-events: none;
+    cursor: default;
 }
 
