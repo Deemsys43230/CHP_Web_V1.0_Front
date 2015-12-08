@@ -9371,6 +9371,20 @@ input.friend-search{
     border: 1px solid #ccc;
 }
 
+.rank_circle{
+    top:30px;
+    right:30px;
+    position: absolute;
+    width:20px;
+    height:20px;
+    font-size: 10px;
+    border-radius:10px;
+    color:#fff;
+    line-height:20px;
+    text-align:center;
+    background:#f8ba01
+}
+
 .forum-list-img{
     width:70px!important;
     height:70px!important;

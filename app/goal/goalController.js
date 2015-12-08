@@ -7,6 +7,7 @@ userApp.controller('GoalController',function($scope,$window,requestHandler,Flash
 
     $scope.doGetMyGoalList=function(){
         $scope.paginationLoad=false;
+        $scope.loaded=true;
         requestHandler.getRequest("user/getMyGoallist","").then(function(response){
             $scope.myGoalList = [];
             $scope.myRequestGoalList = [];
@@ -17,6 +18,7 @@ userApp.controller('GoalController',function($scope,$window,requestHandler,Flash
                     else $scope.myRequestGoalList.push(value);
                 })
             });
+            $scope.loaded=false;
             $scope.paginationLoad=true;
         })
     };
@@ -25,10 +27,14 @@ userApp.controller('GoalController',function($scope,$window,requestHandler,Flash
         $scope.isRequest=$route.current.request;
         requestHandler.postRequest("user/getIndividualGoalDetail/",{"goalid" :$routeParams.id}).then(function(response){
             $scope.goalDetail=response.data.Goal_Data;
+            if($scope.goalDetail.status==2){
+                $scope.viewRank();
+            }
         });
     };
 
     $scope.doGetViewGoalMember=function(){
+        $scope.loaded=true;
         requestHandler.postRequest("user/getGoalMemberList/",{"goalid" : $routeParams.id}).then(function(response){
             $scope.goalMembers=response.data.Goal_Data;
             $scope.memberUserIdList=[];
@@ -42,6 +48,7 @@ userApp.controller('GoalController',function($scope,$window,requestHandler,Flash
                 if($scope.memberUserIdList.indexOf(uservalue.userid)=='-1')
                 $scope.myRemainderFriendsList.push(uservalue);
             });
+            $scope.loaded=false;
         });
     };
 
@@ -92,10 +99,9 @@ userApp.controller('GoalController',function($scope,$window,requestHandler,Flash
     };
 
     $scope.doQuitGroup=function(){
-        requestHandler.deleteRequest("user/deleteGoal/",{"goalid" : $routeParams.id}).then(function(response){
-            $location.path('/groupGoal');
-            successMessage(Flash,"Successfully Updated!");
-            $scope.doGetMyGoalList();
+        requestHandler.postRequest("user/completeGoal/",{"goalid" : $routeParams.id}).then(function(response){
+            $location.path('/groupGoalView/'+$routeParams.id);
+            successMessage(Flash,"Goal Successfully Completed!");
         },function(){
             errorMessage(Flash,"Please try again later!");
         });
@@ -126,6 +132,16 @@ userApp.controller('GoalController',function($scope,$window,requestHandler,Flash
             if($scope.isRequest)$location.path('/groupGoalRequest');
             else $location.path('/groupGoal');
             successMessage(Flash,"Successfully Exit!");
+            $scope.doGetMyGoalList();
+        },function(){
+            errorMessage(Flash,"Please try again later!");
+        });
+    };
+
+    $scope.doAcceptGroup=function(){
+        requestHandler.putRequest("user/acceptGoal/",{"goalid" : $routeParams.id}).then(function(response){
+            $location.path('/groupGoalView/'+$routeParams.id);
+            successMessage(Flash,"Successfully Accepted!");
             $scope.doGetMyGoalList();
         },function(){
             errorMessage(Flash,"Please try again later!");
@@ -230,5 +246,33 @@ userApp.filter('trusted', ['$sce', function ($sce) {
         return $sce.trustAsResourceUrl(url);
     };
 }]);
+
+userApp.filter('startsWithLetter', function () {
+    return function (items, searchfriend) {
+        var filtered = [];
+        var letterMatch = new RegExp(searchfriend, 'i');
+        for (var i = 0; i < items.length; i++) {
+            var item = items[i];
+            if (letterMatch.test(item.user_name)) {
+                filtered.push(item);
+            }
+        }
+        return filtered;
+    };
+});
+
+userApp.filter('startsWithLetterRemain', function () {
+    return function (items, friendsearch) {
+        var filtered = [];
+        var letterMatch = new RegExp(friendsearch, 'i');
+        for (var i = 0; i < items.length; i++) {
+            var item = items[i];
+            if (letterMatch.test(item.name)) {
+                filtered.push(item);
+            }
+        }
+        return filtered;
+    };
+});
 
 
