@@ -9364,6 +9364,13 @@ a.abuse{
     overflow-y: hidden;
 }
 
+input.friend-search{
+    padding:3px 10px 4px 10px;
+    font-size:13px;
+    width:250px;
+    border: 1px solid #ccc;
+}
+
 .forum-list-img{
     width:70px!important;
     height:70px!important;

@@ -278,6 +278,74 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'ForumsUserController'
             }).
+            when('/groupGoal', {
+                templateUrl: 'views/group-goal.html',
+                resolve: {
+                    loadMyFiles:function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'userApp',
+                            files:[
+                                '../../plugin/popup/style.css',
+                                '../../plugin/popup/jquery.leanModal.min.js',
+                                '../../app/goal/goalController.js',
+                                '../../angular/angular-utils-pagination/dirPagination.js',
+                                '../../plugin/dateRange/daterangepicker.css',
+                                '../../plugin/dateRange/daterangepicker.js'
+                            ]
+                        })
+                    }
+                },
+                controller:'GoalController'
+            }).
+            when('/groupGoalRequest', {
+                templateUrl: 'views/group-goal-request.html',
+                resolve: {
+                    loadMyFiles:function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'userApp',
+                            files:[
+                                '../../app/goal/goalController.js',
+                                '../../angular/angular-utils-pagination/dirPagination.js'
+                            ]
+                        })
+                    }
+                },
+                controller:'GoalController'
+            }).
+            when('/groupGoalView/:id', {
+                templateUrl: 'views/group-goal-view.html',
+                resolve: {
+                    loadMyFiles:function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'userApp',
+                            files:[
+                                '../../plugin/popup/style.css',
+                                '../../plugin/popup/jquery.leanModal.min.js',
+                                '../../app/goal/goalController.js'
+                            ]
+                        })
+                    }
+                },
+                controller:'GoalController',
+                request:0
+            }).
+            when('/groupGoalRequest/:id', {
+                templateUrl: 'views/group-goal-view.html',
+                resolve: {
+                    loadMyFiles:function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'userApp',
+                            files:[
+                                '../../plugin/popup/style.css',
+                                '../../plugin/popup/jquery.leanModal.min.js',
+                                '../../app/goal/goalController.js'
+                            ]
+                        })
+                    }
+                },
+                controller:'GoalController',
+                request:1
+            }).
             otherwise({
                 redirectTo: '/dashboard'
             });

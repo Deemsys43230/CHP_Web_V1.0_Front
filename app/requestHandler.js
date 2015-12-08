@@ -55,11 +55,7 @@ requestHandlerApp.factory("requestHandler",['$http',function($http,$location){
     requestObj.convertUrl=function(imageurl){
    // alert(imageurl);
         var url = imageurl.substring(imageurl.indexOf("/")+ urlLength, imageurl.length);
-        console.log(url);
-     //   alert(url);
         return url;
-
-
     };
 
     requestObj.convertUrlExercise=function(imageurl){

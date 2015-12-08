@@ -1,0 +1,234 @@
+/**
+ * Created by Deemsys on 9/21/2015.
+ */
+var userApp= angular.module('userApp', ['ngRoute','oc.lazyLoad','ngCookies','requestModule','flash','ngAnimate','angularUtils.directives.dirPagination']);
+
+userApp.controller('GoalController',function($scope,$window,requestHandler,Flash,$routeParams,$location,$route) {
+
+    $scope.doGetMyGoalList=function(){
+        $scope.paginationLoad=false;
+        requestHandler.getRequest("user/getMyGoallist","").then(function(response){
+            $scope.myGoalList = [];
+            $scope.myRequestGoalList = [];
+            $.each(response.data.MyGoallist,function(index,value){
+                requestHandler.postRequest("user/getGoalMemberList/",{"goalid" : value.goalid}).then(function(response){
+                    value.members=response.data.Goal_Data.length;
+                    if(value.activestatus==1)$scope.myGoalList.push(value);
+                    else $scope.myRequestGoalList.push(value);
+                })
+            });
+            $scope.paginationLoad=true;
+        })
+    };
+
+    $scope.doGetViewGoal=function(){
+        $scope.isRequest=$route.current.request;
+        requestHandler.postRequest("user/getIndividualGoalDetail/",{"goalid" :$routeParams.id}).then(function(response){
+            $scope.goalDetail=response.data.Goal_Data;
+        });
+    };
+
+    $scope.doGetViewGoalMember=function(){
+        requestHandler.postRequest("user/getGoalMemberList/",{"goalid" : $routeParams.id}).then(function(response){
+            $scope.goalMembers=response.data.Goal_Data;
+            $scope.memberUserIdList=[];
+            $.each($scope.goalMembers,function(index,value){
+                $scope.memberUserIdList.push(value.userid);
+            });
+        });
+        requestHandler.getRequest("user/getMyFriendsList/","").then(function(response){
+            $scope.myRemainderFriendsList=[];
+            $.each(response.data.Friends_List,function(index,uservalue){
+                if($scope.memberUserIdList.indexOf(uservalue.userid)=='-1')
+                $scope.myRemainderFriendsList.push(uservalue);
+            });
+        });
+    };
+
+    $scope.doAddMember=function(id){
+        requestHandler.postRequest("user/insertGoalMembers/",{"goalid" : $routeParams.id,"memberlist" : [id]}).then(function(){
+            $scope.doGetViewGoalMember();
+        });
+    };
+
+    $scope.doRemoveMember=function(id){
+        requestHandler.deleteRequest("user/deleteGoalMember/",{"goalid" : $routeParams.id,"memberid" : id}).then(function(){
+            successMessage(Flash,"Successfully Removed!");
+            $scope.doGetViewGoalMember();
+        },function(){
+            errorMessage(Flash,"Please try again later!");
+        });
+    };
+
+    $scope.doConfirmation=function(id){
+        $(function(){
+            $("#lean_overlay").fadeTo(1000);
+            $("#confirmation").fadeIn(600);
+            $(".common_model").show();
+        });
+
+        $scope.deleteId=id;
+
+        $(".modal_close").click(function(){
+            $(".common_model").hide();
+            $("#confirmation").hide();
+            $("#lean_overlay").hide();
+        });
+
+        $("#lean_overlay").click(function(){
+            $(".common_model").hide();
+            $("#confirmation").hide();
+            $("#lean_overlay").hide();
+        });
+    };
+
+    $scope.doDeleteGroup=function(id){
+         requestHandler.deleteRequest("user/deleteGoal/",{"goalid" : id}).then(function(response){
+             successMessage(Flash,"Successfully Updated!");
+             $scope.doGetMyGoalList();
+         },function(){
+             errorMessage(Flash,"Please try again later!");
+         });
+    };
+
+    $scope.doQuitGroup=function(){
+        requestHandler.deleteRequest("user/deleteGoal/",{"goalid" : $routeParams.id}).then(function(response){
+            $location.path('/groupGoal');
+            successMessage(Flash,"Successfully Updated!");
+            $scope.doGetMyGoalList();
+        },function(){
+            errorMessage(Flash,"Please try again later!");
+        });
+    };
+
+    $scope.doExitConfirmation=function(){
+        $(function(){
+            $("#lean_overlay").fadeTo(1000);
+            $("#confirmation-remove").fadeIn(600);
+            $(".common_model").show();
+        });
+
+        $(".modal_close").click(function(){
+            $(".common_model").hide();
+            $("#confirmation-remove").hide();
+            $("#lean_overlay").hide();
+        });
+
+        $("#lean_overlay").click(function(){
+            $(".common_model").hide();
+            $("#confirmation-remove").hide();
+            $("#lean_overlay").hide();
+        });
+    };
+
+    $scope.doExitGroup=function(){
+        requestHandler.deleteRequest("user/rejectOrExistGoalMember/",{"goalid" : $routeParams.id}).then(function(response){
+            if($scope.isRequest)$location.path('/groupGoalRequest');
+            else $location.path('/groupGoal');
+            successMessage(Flash,"Successfully Exit!");
+            $scope.doGetMyGoalList();
+        },function(){
+            errorMessage(Flash,"Please try again later!");
+        });
+    };
+
+    $scope.doAddGoalPopup=function(){
+        $scope.createGoal={};
+        $scope.createGoalForm.$setPristine();
+        $scope.createGoal.goaltype=1;
+        $(function(){
+            $("#lean_overlay").fadeTo(1000);
+            $("#createGoal").fadeIn(600);
+            $(".common_model").show();
+        });
+
+        $(".modal_close").click(function(){
+            $(".common_model").hide();
+            $("#createGoal").hide();
+            $("#lean_overlay").hide();
+        });
+
+        $("#lean_overlay").click(function(){
+            $(".common_model").hide();
+            $("#createGoal").hide();
+            $("#lean_overlay").hide();
+        });
+    };
+
+    $scope.viewRank=function(){
+        requestHandler.postRequest("user/rankGoalList/",{"goalid" : $routeParams.id}).then(function(response){
+            $scope.rankList=response.data.Goal_Data;
+        },function(){
+            errorMessage(Flash,"Please try again later!");
+        });
+    };
+
+    //To Display current date
+    var selectedDate = new Date();
+    var dd = selectedDate.getDate();
+    var mm = selectedDate.getMonth()+1; //January is 0!
+
+    var yyyy = selectedDate.getFullYear();
+    if(dd<10){
+        dd='0'+dd
+    }
+    if(mm<10){
+        mm='0'+mm
+    }
+    selectedDate = dd+'/'+mm+'/'+yyyy;
+
+    $scope.doCreateGoal=function(){
+        if(document.getElementById("start").value==""){
+            console.log(selectedDate);
+            $scope.createGoal.startdate=$scope.createGoal.enddate=selectedDate;
+        }
+        else{
+            $scope.createGoal.startdate=document.getElementById("start").value;
+            $scope.createGoal.enddate=document.getElementById("end").value;
+        }
+        $scope.createGoal.goaltype=parseInt($scope.createGoal.goaltype);
+
+        requestHandler.postRequest("user/insertUserGoal/",$scope.createGoal).then(function(response){
+            successMessage(Flash,"Goal Successfully Created!");
+            $scope.doGetMyGoalList();
+        },function(){
+            errorMessage(Flash,"Please try again later!");
+        });
+    };
+
+    $scope.doAcceptGoalRequest=function(id){
+        requestHandler.putRequest("user/acceptGoal/",{"goalid":id}).then(function(){
+            successMessage(Flash,"Successfully Joined!");
+            $scope.doGetMyGoalList();
+        },function(){
+            errorMessage(Flash,"Please try again later!");
+        });
+    };
+
+    $scope.doDeleteGoalRequest=function(id){
+        requestHandler.deleteRequest("user/rejectOrExistGoalMember/",{"goalid":id}).then(function(){
+            successMessage(Flash,"Successfully Exited!");
+            $scope.doGetMyGoalList();
+        },function(){
+            errorMessage(Flash,"Please try again later!");
+        });
+    };
+
+    if(!$routeParams.id){
+        $scope.doGetMyGoalList();
+    }
+    else{
+        $scope.doGetViewGoal();
+        $scope.doGetViewGoalMember();
+    }
+
+});
+
+// render image to view in list
+userApp.filter('trusted', ['$sce', function ($sce) {
+    return function(url) {
+        return $sce.trustAsResourceUrl(url);
+    };
+}]);
+
+
