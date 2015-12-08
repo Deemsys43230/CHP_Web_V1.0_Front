@@ -357,30 +357,24 @@
 
             <div id="advice" class="contentblock hidden">
                 <div class="outerline">
-                    <div class="col-md-5 margin-top-5">
-                        <h4>For a High Protein Meal</h4>
-                        consider having soybean, milk.<br><br>
-                        <h5>What Can I Eat:</h5>
-                        Snacks OR Skimmed milk<br><br>
-
-                        <h4>For a High Fibre Meal</h4>
-                        consider having roti, nuts or pulses.<br><br>
-                        <h5>What Can I Eat:</h5>
-                        Jowar ki roti OR Green gram<br>
-                        Channa Sundal
-                    </div>
-                    <div class="col-md-7 margin-top-5">
-                        <img src="../../images/soyabean-milk-1.jpg"/><br/><br/>
-                        <p>
-                            Soy milk, also referred to as soymilk or soya milk, is a
-                            plant milk produced by soaking dried soybeans and
-                            grinding them in water.
-                            <br/><br/>
-                            A traditional staple of East Asian cuisine,
-                            soy milk is a stable emulsion of oil,
-                            water and protein. Soy milk can be
-                            produced at home using a soy milk machine.
-                        </p>
+                    <div class="col-md-12 margin-top-5" >
+                        <h4>Coach Advices</h4><br/>
+                        <div class="marquee">
+                        <div ng-repeat="mycoachadvice in coachadvice">
+                            <div class="col-md-1 no-padding">
+                                <img class="img-circle" src="{{mycoachadvice.coachimage | trusted}}">
+                            </div>
+                            <div class="col-md-2">
+                                <p class="wrap">{{mycoachadvice.coachname}}</p>
+                            </div>
+                            <div class="col-md-9">
+                                <span>{{mycoachadvice.description}}</span>
+                            </div>
+                            <div class="col-md-12 no-padding">
+                                <hr/>
+                            </div>
+                        </div>
+                        </div>
                     </div>
                 </div>
             </div><!-- @end #ideas-content -->
@@ -774,3 +768,22 @@
     });
 
 </script>
+<style>
+    .marquee {
+        top: 6em;
+        position: relative;
+        box-sizing: border-box;
+        animation: marquee 15s linear infinite;
+    }
+
+    .marquee:hover {
+        animation-play-state: paused;
+    }
+
+    /* Make it move! */
+    @keyframes marquee {
+        0%   { top:   8em }
+        100% { top:   1em }
+    }
+</style>
+

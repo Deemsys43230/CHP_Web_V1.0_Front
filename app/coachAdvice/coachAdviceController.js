@@ -47,3 +47,4 @@ coachApp.controller('CoachAdviceController',function($scope,requestHandler,Flash
     $scope.doGetCoachMyAdvice();
 
 });
+

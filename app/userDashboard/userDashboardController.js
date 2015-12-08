@@ -936,6 +936,28 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         });
     };
 
+    $scope.doGetCoachAdvices = function(){
+        requestHandler.getRequest("user/getCoachAdvicesByUser/", "").then(function(response){
+            $scope.coachadvice=response.data.Coach_Advice;
+
+            $.each($scope.coachadvice,function(index,value){
+            requestHandler.getRequest("getCoachIndividualDetailbyUser/"+value.coachid, "").then(function(response){
+
+                $scope.usercoachdetails=response.data.getCoachIndividualDetail;
+                value.coachname = $scope.usercoachdetails.name;
+                value.coachimage = $scope.usercoachdetails.imageurl;
+            });
+
+            });
+
+
+        },function(){
+            errorMessage(Flash,"Please try again later!")
+        });
+    };
+
+
+
     //To Display current date
     var selectedDate = new Date();
     var dd = selectedDate.getDate();
@@ -969,6 +991,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
             $scope.goGetDailyIntakeGraph($scope.selectedDate.format("dd/mm/yyyy"));
         }
         $scope.doGetWeightGoal();
+        $scope.doGetCoachAdvices();
     };
 
     $scope.initialLoadFoodAndExercise();
