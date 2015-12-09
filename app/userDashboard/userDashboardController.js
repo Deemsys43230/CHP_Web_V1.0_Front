@@ -599,7 +599,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         $scope.demography.weight = parseFloat($scope.demography.weight);
         $scope.demography.hip = parseFloat($scope.demography.hip);
         requestHandler.putRequest("user/insertorupdateDemography/",$scope.demography).then(function(response){
-            successMessage(Flash, "Successfully Updated!")
+            successMessage(Flash, "Successfully Updated!");
         }, function () {
             errorMessage(Flash, "Please try again later!")
         });

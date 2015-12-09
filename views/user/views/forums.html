@@ -10,7 +10,7 @@
                 </div>
                 <h4 class="classic-title"><span>Most Viewed</span></h4>
                 <div id="showMostViewed">
-                    <div ng-repeat="userforum in userforumlist | limitTo:10 | orderBy:'-totalcomment'">
+                    <div ng-repeat="userforum in userforumlist | limitTo:20 | orderBy:'-totalcomment'">
                         <h5><a class="forum-topic" href="#forumDetails/{{userforum.postid}}">{{userforum.posttitle}}</a></h5>
                         <hr/>
                     </div>

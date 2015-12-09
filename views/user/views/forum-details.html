@@ -8,9 +8,9 @@
                         <div class="loader"></div>
                     </div>
                 </div>
-                <h4 class="classic-title"><span>Related Post</span></h4>
+                <h4 class="classic-title"><span>Most Viewed</span></h4>
                 <div id="showMostViewed">
-                    <div ng-repeat="userforum in userforumlist | limitTo:10 | orderBy:'-totalcomment'">
+                    <div ng-repeat="userforum in userforumlist | limitTo:20 | orderBy:'-totalcomment'">
                         <h5 class="forum-topic" ng-click="doGetNewsDetailsByUser(userforum.postid)">{{userforum.posttitle}}</h5>
                         <hr/>
                     </div>
@@ -41,11 +41,13 @@
                         <p>Posted by : <strong>{{userforumdetails.username}}</strong></p>
                         <p>Posted on : {{userforumdetails.postedon}}</p>
                     </div>
-                    <div class="col-md-12 no-padding margin-tb-20">
+                    <div class="col-md-12 no-padding margin-tb-10">
                         {{userforumdetails.postdescription}}<br/>
-                        <a href="" ng-click="doMarkPostAsAbuse()" class="btn abuse" ng-disabled="abuseDisable" class="h6">Report Abuse</a><span ng-if="userCheck"> | <a href="#editForum/{{userforumdetails.postid}}"  class="btn abuse"  class="h6" >Edit</a></span>
+                        <div class="margin-top-10">
+                            <a href="" ng-click="doMarkPostAsAbuse()" class="btn abuse" ng-disabled="abuseDisable" class="h6">Report Abuse</a>
+                            <span ng-if="userCheck"> | <a href="#editForum/{{userforumdetails.postid}}"  class="btn abuse"  class="h6" >Edit</a></span>
+                        </div>
                     </div>
-                    <hr/>
                     <h4>Comments</h4>
                     <div class="text-center margin-tb-20" ng-show="forumAnswers.length==0">
                         <img src="../../images/no-reviews.png"/>

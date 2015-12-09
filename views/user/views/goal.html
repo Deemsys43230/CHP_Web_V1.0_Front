@@ -29,7 +29,8 @@
                             </span>
                         </div>
                         <div class="col-md-12 text-center margin-top-15 margin-bottom-10">
-                            <a href="" class="weight_button" ng-disabled="isWeightUpdated() || demographyForm.$invalid" ng-click="doInsertWeightLog()">Update Weight</a>
+                            <span  ng-show="updateGoal==1"><a href="" class="weight_button" ng-disabled="isWeightUpdated() || demographyForm.$invalid" ng-click="doInsertWeightLog()">Update Weight</a></span>
+                            <span  ng-show="updateGoal==0"><a href="" class="weight_button" ng-disabled="isWeightUpdated() || demographyForm.$invalid" ng-click="doUpdateWeight()">Update Weight</a></span>
                         </div>
                     </div>
                 </form>
@@ -37,7 +38,7 @@
         </div>
     </div>
     <div class="col-md-4 no-padding">
-        <p hidden id="weight_entry">50%</p>
+        <p hidden id="weight_entry">40%</p>
         <div id="weight_level">
             <div id="col" class="weight_level"></div>
         </div>
