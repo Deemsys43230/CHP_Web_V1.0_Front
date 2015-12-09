@@ -3,7 +3,7 @@
  */
 var userApp= angular.module('userApp', ['ngRoute','oc.lazyLoad','ngCookies','requestModule','flash','ngAnimate','angularUtils.directives.dirPagination']);
 
-userApp.controller('GoalController',function($scope,$window,requestHandler,Flash,$routeParams,$location,$route) {
+userApp.controller('GoalController',function($scope,requestHandler,Flash,$route,$routeParams,$location) {
 
     $scope.doGetMyGoalList=function(){
         $scope.paginationLoad=false;
@@ -41,6 +41,7 @@ userApp.controller('GoalController',function($scope,$window,requestHandler,Flash
             $.each($scope.goalMembers,function(index,value){
                 $scope.memberUserIdList.push(value.userid);
             });
+            $scope.loaded=false;
         });
         requestHandler.getRequest("user/getMyFriendsList/","").then(function(response){
             $scope.myRemainderFriendsList=[];
@@ -48,7 +49,6 @@ userApp.controller('GoalController',function($scope,$window,requestHandler,Flash
                 if($scope.memberUserIdList.indexOf(uservalue.userid)=='-1')
                 $scope.myRemainderFriendsList.push(uservalue);
             });
-            $scope.loaded=false;
         });
     };
 
@@ -179,6 +179,14 @@ userApp.controller('GoalController',function($scope,$window,requestHandler,Flash
         });
     };
 
+    if(!$routeParams.id){
+        $scope.doGetMyGoalList();
+    }
+    else{
+        $scope.doGetViewGoal();
+        $scope.doGetViewGoalMember();
+    }
+
     //To Display current date
     var selectedDate = new Date();
     var dd = selectedDate.getDate();
@@ -194,6 +202,7 @@ userApp.controller('GoalController',function($scope,$window,requestHandler,Flash
     selectedDate = dd+'/'+mm+'/'+yyyy;
 
     $scope.doCreateGoal=function(){
+        $scope.loaded=true;
         if(document.getElementById("start").value==""){
             console.log(selectedDate);
             $scope.createGoal.startdate=$scope.createGoal.enddate=selectedDate;
@@ -207,6 +216,7 @@ userApp.controller('GoalController',function($scope,$window,requestHandler,Flash
         requestHandler.postRequest("user/insertUserGoal/",$scope.createGoal).then(function(response){
             successMessage(Flash,"Goal Successfully Created!");
             $scope.doGetMyGoalList();
+            $scope.loaded=false;
         },function(){
             errorMessage(Flash,"Please try again later!");
         });
@@ -230,14 +240,10 @@ userApp.controller('GoalController',function($scope,$window,requestHandler,Flash
         });
     };
 
-    if(!$routeParams.id){
-        $scope.doGetMyGoalList();
-    }
-    else{
-        $scope.doGetViewGoal();
-        $scope.doGetViewGoalMember();
-    }
+});
 
+userApp.controller('GoalViewController',function() {
+    alert("okay");
 });
 
 // render image to view in list
@@ -251,10 +257,13 @@ userApp.filter('startsWithLetter', function () {
     return function (items, searchfriend) {
         var filtered = [];
         var letterMatch = new RegExp(searchfriend, 'i');
-        for (var i = 0; i < items.length; i++) {
-            var item = items[i];
-            if (letterMatch.test(item.user_name)) {
-                filtered.push(item);
+        if(!items){}
+        else{
+            for (var i = 0; i < items.length; i++) {
+                var item = items[i];
+                if (letterMatch.test(item.user_name)) {
+                    filtered.push(item);
+                }
             }
         }
         return filtered;
@@ -265,10 +274,13 @@ userApp.filter('startsWithLetterRemain', function () {
     return function (items, friendsearch) {
         var filtered = [];
         var letterMatch = new RegExp(friendsearch, 'i');
-        for (var i = 0; i < items.length; i++) {
-            var item = items[i];
-            if (letterMatch.test(item.name)) {
-                filtered.push(item);
+        if(!items){}
+        else{
+            for (var i = 0; i < items.length; i++) {
+                var item = items[i];
+                if (letterMatch.test(item.name)) {
+                    filtered.push(item);
+                }
             }
         }
         return filtered;

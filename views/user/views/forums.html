@@ -22,35 +22,26 @@
                         <div class="loader"></div>
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-5">
                     <h1>FORUMS</h1>
                 </div>
-                <div class="col-md-8">
-                    <div class="input-group">
-                        <input type="text" class="search-input" ng-model="forumsearch" placeholder="Search forum topics here...">
-                    <span class="input-group-btn">
-                        <a href="#addforum" class="btn btn-primary" >Add Post</a>
-                    </span>
-                    </div>
-                </div>
-                <div class="col-md-12 margin-top-10">
-                    <hr/>
+                <div class="col-md-7">
+                    <span class="col-md-8"><input type="text" class="search-input" ng-model="forumsearch" placeholder="Search forum topics here..."></span>
+                    <span class="col-md-4 no-padding"><a href="#addforum" class="forum_button col-md-12" >Add New Post</a></span>
                 </div>
                 <div class="col-md-12">
+                    <hr/>
                     <h5>
-                        <div class="col-md-9">
-                            <div class="col-md-2 no-padding">
-                                Posted By
-                            </div>
-                            <div class="col-md-10 no-padding">
-                                Forum
-                            </div>
+                        <div class="col-md-1 no-padding">
+                            Posted By
+                        </div>
+                        <div class="col-md-3">
+                        </div>
+                        <div class="col-md-7 no-padding">
+                            Forum
                         </div>
                         <div class="col-md-1 text-center no-padding">
                             Comments
-                        </div>
-                        <div class="col-md-2 text-center">
-                            Date and Time
                         </div>
                     </h5>
                 </div>
@@ -65,21 +56,19 @@
                     </span>
                     <div ng-switch-default>
                         <div class="col-md-12" ng-repeat="userforum in userforumlist | filter:forumsearch">
-                            <div class="col-md-9">
-                                <div class="col-md-2 no-padding">
-                                    <img class="img-circle forum-list-img" src="{{userforum.userimage | trusted}}">
-                                    <p class="wrap">{{userforum.username}}</p>
-                                </div>
-                                <div class="col-md-10 no-padding">
-                                    <h5><a href="#forumDetails/{{userforum.postid}}">{{userforum.posttitle}}</a></h5>
-                                    <p class="forum-list-content">{{userforum.postdescription}}</p>
-                                </div>
+                            <div class="col-md-1 no-padding">
+                                <img class="img-circle forum-list-img" src="{{userforum.userimage | trusted}}">
+                            </div>
+                            <div class="col-md-3">
+                                <p class="wrap text-bold">{{userforum.username}}</p>
+                                <p>{{userforum.postedon}}</p>
+                            </div>
+                            <div class="col-md-7 no-padding">
+                                <h5><a href="#forumDetails/{{userforum.postid}}">{{userforum.posttitle}}</a></h5>
+                                <p class="forum-list-content">{{userforum.postdescription}}</p>
                             </div>
                             <div class="col-md-1 text-center">
                                 <i class="fa fa-comments"></i>  &nbsp;{{userforum.totalcomment}}
-                            </div>
-                            <div class="col-md-2 text-center">
-                                <p>{{userforum.postedon}}</p>
                             </div>
                             <div class="col-md-12 no-padding">
                                 <hr/>

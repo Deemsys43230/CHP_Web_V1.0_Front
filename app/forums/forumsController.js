@@ -182,10 +182,9 @@ userApp.controller('ForumsUserController',function($scope,requestHandler,Flash,$
                     value.totalcomment=response.data.ForumDiscussionData.length;
                 });
             });
-            $scope.loaded=false;
             $('#showMostViewed').hide();
-            $('#showMostViewed').show(300);
-
+            $('#showMostViewed').show(700);
+            $scope.loaded=false;
          },function(){
             errorMessage(Flash,"Please try again later!")
         });
