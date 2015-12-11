@@ -190,7 +190,7 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 controller:'CoachAdviceController'
             }).
             when('/course', {
-                templateUrl: 'views/courses.html',
+                templateUrl: 'views/course.html',
                 resolve: {
                     loadMyFiles:function($ocLazyLoad) {
                         return $ocLazyLoad.load({
@@ -204,7 +204,7 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 controller:'CoachAdviceController'
             }).
             when('/courseView', {
-                templateUrl: 'views/course-details.html',
+                templateUrl: 'views/course-view.html',
                 resolve: {
                     loadMyFiles:function($ocLazyLoad) {
                         return $ocLazyLoad.load({

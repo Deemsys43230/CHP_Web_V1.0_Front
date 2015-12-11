@@ -1768,6 +1768,10 @@ input[type="submit"] {
     margin: 10px 0 !important;
 }
 
+.margin-rl {
+    margin: 0 10px!important;
+}
+
 .margin-tb-5 {
     margin: 5px 0 !important;
 }
