@@ -1790,6 +1790,10 @@ input[type="submit"] {
     margin-bottom: 10px !important;
 }
 
+.margin-bottom-15 {
+    margin-bottom: 15px !important;
+}
+
 .margin-bottom-5 {
     margin-bottom: 5px !important;
 }
@@ -5793,11 +5797,16 @@ ul.footer-nav li a:hover {
 	color: #fff;
 }
 
-
 .touch-carousel .owl-controls .owl-buttons {
 	position: absolute;
 	top: -50px;
 	right: 2px;
+}
+
+.touch-carousel.course-control .owl-controls .owl-buttons {
+    position: absolute;
+    top: -29px;
+    right: 10px;
 }
 
 .touch-carousel.projects-carousel .owl-controls .owl-buttons {
@@ -6821,6 +6830,17 @@ select.main:focus {
     box-shadow: inset 0px 0px 3px rgba(0,0,0,0.3);
 }
 
+select.course-select {
+    height: 40px;
+    padding: 5px 15px !important;
+    width: 90%;
+    border: 1px solid #ccc!important;
+    outline: none !important;
+    color: #777;
+    border-radius: 0 !important;
+    background-color: #fff;
+}
+
 input.main {
     height:24px !important;
     width: 115px;
@@ -7727,7 +7747,7 @@ ul.food li .food_name{
 
 .dashboard{
     box-shadow: 0px 0px 2px #999;
-    margin-bottom: 40px;
+    margin-bottom: 30px;
 }
 
 .dashboard .head{
@@ -7763,6 +7783,33 @@ ul.food li .food_name{
 
 .dashcontent h3,.dashcontent p {
     color: #fff;
+}
+
+.course-status{
+    position: absolute;
+    right: 12px;
+    top:-4px;
+    z-index: 20;
+}
+
+.course-grid{
+    background-color: #fff;
+    padding: 5px;
+    height: 170px;
+}
+.course-grid-user{
+    background-color: #fff;
+    padding: 5px;
+    height: 180px;
+}
+
+.arrange{
+    margin:10px !important;
+}
+
+.course-author-img{
+    width: 40px !important;
+    height: 40px !important;
 }
 
 .backgreen{
@@ -8234,6 +8281,11 @@ a:hover, a:visited, a:link, a:active
 	padding: 20px !important;
 }
 
+.height-auto{
+    height: auto !important;
+    min-height: 500px !important;
+}
+
 .profile-image{
 	width:200px;
 	height: 200px;
@@ -8352,6 +8404,12 @@ a.forum_button:hover{
 	position: absolute;
 	top: 5px;
 	right: 20px;
+}
+
+.change-course-image{
+    position: absolute;
+    top: 5px;
+    right: 40px;
 }
 
 .faq-slno{
@@ -9449,3 +9507,39 @@ input.friend-search{
     cursor: default;
 }
 
+.course-price{
+    position: absolute;
+    color: #ffffff;
+    padding: 2px 25px;
+    right: -6px;
+    bottom:5px;
+    box-shadow: -1px -3px 2px rgba(0,0,0,0.3);
+}
+
+.course-price.cost{
+    background-color: red;
+}
+
+.course-price.free{
+    background-color: limegreen;
+}
+
+.course-controller span{
+    color: #bbb;
+}
+
+.course-controller:hover{
+    background: #f8ba01;
+}
+
+.course-controller:hover span{
+    color: #fff !important;
+}
+
+.course-controller{
+    margin-right:62px;
+    border: 1px solid #ccc;
+    padding: 0px 10px;
+    font-size:13px;
+    border-radius: 2px;
+}

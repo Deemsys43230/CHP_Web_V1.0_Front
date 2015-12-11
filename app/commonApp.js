@@ -50,16 +50,16 @@ commonApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
             when('/index', {
                 templateUrl: 'views/common/index.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
-                        return $ocLazyLoad.load({
-                            name:'commonApp',
-                            files:[
-                                'plugin/vertical-carousel/vertical-carousel.js',
-                                'plugin/vertical-carousel/vertical-carousel.css',
-                                'app/commonController.js'
-                            ]
-                        })
-                    }
+                        loadMyFiles:function($ocLazyLoad) {
+                            return $ocLazyLoad.load({
+                                name:'commonApp',
+                                files:[
+                                    'plugin/vertical-carousel/vertical-carousel.js',
+                                    'plugin/vertical-carousel/vertical-carousel.css',
+                                    'app/commonController.js'
+                                ]
+                            })
+                        }
                 },
                 controller:'CommonController'
             }).

@@ -899,7 +899,7 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 controller:'ExerciseSuggestionDetailViewController'
             }).
             when('/course', {
-                templateUrl: 'views/course.html',
+                templateUrl: 'views/courses.html',
                 resolve: {
                     loadMyFiles:function($ocLazyLoad) {
                         return $ocLazyLoad.load({
@@ -912,7 +912,7 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 }
             }).
             when('/createCourse', {
-                templateUrl: 'views/create-course.html',
+                templateUrl: 'views/create-courses.html',
                 resolve: {
                     loadMyFiles:function($ocLazyLoad) {
                         return $ocLazyLoad.load({

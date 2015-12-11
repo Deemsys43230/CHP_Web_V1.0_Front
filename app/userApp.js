@@ -88,8 +88,20 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                     }
                 }
             }).
-            when('/history', {
-                templateUrl: 'views/history.html'
+            when('/myCourses', {
+                templateUrl: 'views/courses-my.html'
+            }).
+            when('/courses', {
+                templateUrl: 'views/courses.html'
+            }).
+            when('/courseDetails', {
+                templateUrl: 'views/course-details.html'
+            }).
+            when('/courseView', {
+                templateUrl: 'views/course-view.html'
+            }).
+            when('/courseCategory', {
+                templateUrl: 'views/course-category.html'
             }).
             when('/coach', {
                 templateUrl: 'views/coach.html',

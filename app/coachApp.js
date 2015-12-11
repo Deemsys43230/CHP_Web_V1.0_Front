@@ -189,6 +189,112 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'CoachAdviceController'
             }).
+            when('/course', {
+                templateUrl: 'views/courses.html',
+                resolve: {
+                    loadMyFiles:function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'coachApp',
+                            files:[
+                                '../../app/coachAdvice/coachAdviceController.js'
+                            ]
+                        })
+                    }
+                },
+                controller:'CoachAdviceController'
+            }).
+            when('/courseView', {
+                templateUrl: 'views/course-details.html',
+                resolve: {
+                    loadMyFiles:function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'coachApp',
+                            files:[
+                                '../../app/coachAdvice/coachAdviceController.js'
+                            ]
+                        })
+                    }
+                },
+                controller:'CoachAdviceController'
+            }).
+            when('/courseSection', {
+                templateUrl: 'views/course-section.html',
+                resolve: {
+                    loadMyFiles:function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'coachApp',
+                            files:[
+                                '../../app/coachAdvice/coachAdviceController.js'
+                            ]
+                        })
+                    }
+                },
+                controller:'CoachAdviceController'
+            }).
+            when('/courseSectionEdit', {
+                templateUrl: 'views/course-section-add-edit.html',
+                resolve: {
+                    loadMyFiles:function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'coachApp',
+                            files:[
+                                '../../app/coachAdvice/coachAdviceController.js'
+                            ]
+                        })
+                    }
+                },
+                controller:'CoachAdviceController'
+            }).
+            when('/courseSectionAdd', {
+                templateUrl: 'views/course-section-add-edit.html',
+                resolve: {
+                    loadMyFiles:function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'coachApp',
+                            files:[
+                                '../../app/coachAdvice/coachAdviceController.js'
+                            ]
+                        })
+                    }
+                },
+                controller:'CoachAdviceController'
+            }).
+            when('/courseEdit', {
+                templateUrl: 'views/course-add-edit.html',
+                resolve: {
+                    loadMyFiles:function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'coachApp',
+                            files:[
+                                '../../plugin/popup/style.css',
+                                '../../plugin/popup/jquery.leanModal.min.js',
+                                '../../css/course-image-upload.css',
+                                '../../js/image-upload.js',
+                                '../../app/coachProfile/coachProfileController.js'
+                            ]
+                        })
+                    }
+                },
+                controller:'CoachProfileController'
+            }).
+            when('/courseAdd', {
+                templateUrl: 'views/course-add-edit.html',
+                resolve: {
+                    loadMyFiles:function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'coachApp',
+                            files:[
+                                '../../plugin/popup/style.css',
+                                '../../plugin/popup/jquery.leanModal.min.js',
+                                '../../css/course-image-upload.css',
+                                '../../js/image-upload.js',
+                                '../../app/coachProfile/coachProfileController.js'
+                            ]
+                        })
+                    }
+                },
+                controller:'CoachProfileController'
+            }).
             otherwise({
                 redirectTo: '/dashboard'
             });
