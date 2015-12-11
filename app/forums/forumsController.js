@@ -1,14 +1,16 @@
 var adminApp = angular.module('adminApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','summernote','angularUtils.directives.dirPagination']);
-adminApp.controller('ForumsController',function($scope,requestHandler,Flash,$location) {
+adminApp.controller('ForumsController',function($scope,requestHandler,Flash,$location,siteMenuService) {
 
     $scope.isNew = true;
     $scope.title = "Add Forum";
-    $scope.activeClass = {forum:'active'};
 
-    //summer note
-    $scope.options = {
-        height: 250
-    };
+    $scope.siteMenuList = siteMenuService;
+    $.each($scope.siteMenuList,function(index,value){
+        if(value.id==1){
+            value.active = "active";
+        }
+        else value.active = ""
+    });
 
     // To display Forums List
     $scope.doGetForums=function(){
@@ -53,14 +55,15 @@ adminApp.controller('ForumsController',function($scope,requestHandler,Flash,$loc
     };
 });
 
-adminApp.controller('ForumsEditController',function($scope,requestHandler,Flash,$location,$routeParams) {
+adminApp.controller('ForumsEditController',function($scope,requestHandler,Flash,$routeParams,siteMenuService,$location) {
 
-    $scope.activeClass = {forum:'active'};
-
-    //summer note
-    $scope.options = {
-        height: 250
-    };
+    $scope.siteMenuList = siteMenuService;
+    $.each($scope.siteMenuList,function(index,value){
+        if(value.id==1){
+            value.active = "active";
+        }
+        else value.active = ""
+    });
 
     var originalforum ="";
 

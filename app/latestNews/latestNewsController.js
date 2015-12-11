@@ -1,13 +1,20 @@
 var adminApp = angular.module('adminApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','summernote','angularUtils.directives.dirPagination']);
-adminApp.controller('LatestNewsController',function($scope,requestHandler,Flash,$location) {
+adminApp.controller('LatestNewsController',function($scope,requestHandler,Flash,$location,siteMenuService) {
 
     $scope.isNew = true;
     $scope.title = "Add Latest News";
-    $scope.activeClass = {news:'active'};
+
+    $scope.siteMenuList = siteMenuService;
+    $.each($scope.siteMenuList,function(index,value){
+        if(value.id==2){
+            value.active = "active";
+        }
+        else value.active = ""
+    });
 
     //summer note
     $scope.options = {
-        height: 250
+        height: 350
     };
 
     // To display Latest news
@@ -56,13 +63,19 @@ adminApp.controller('LatestNewsController',function($scope,requestHandler,Flash,
     };
 });
 
-adminApp.controller('LatestNewsEditController',function($scope,requestHandler,Flash,$location,$routeParams) {
+adminApp.controller('LatestNewsEditController',function($scope,requestHandler,Flash,$location,$routeParams,siteMenuService) {
 
-    $scope.activeClass = {news:'active'};
+    $scope.siteMenuList = siteMenuService;
+    $.each($scope.siteMenuList,function(index,value){
+        if(value.id==2){
+            value.active = "active";
+        }
+        else value.active = ""
+    });
 
     //summer note
     $scope.options = {
-        height: 250
+        height: 350
     };
 
     var originalnews ="";
@@ -96,7 +109,7 @@ adminApp.controller('LatestNewsEditController',function($scope,requestHandler,Fl
         console.log(originalnews);
         console.log($scope.latest);
         return angular.equals (originalnews, $scope.latest);
-    }
+    };
 
     //Display Edit Page with date On load
     $scope.doGetLatestNewsByID();

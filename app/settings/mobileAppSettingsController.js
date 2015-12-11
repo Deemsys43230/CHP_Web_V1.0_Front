@@ -3,9 +3,15 @@
  */
 var adminApp = angular.module('adminApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate']);
 
-adminApp.controller("MobileAppSettingsController",function($scope,requestHandler,Flash){
+adminApp.controller("MobileAppSettingsController",function($scope,requestHandler,Flash,siteMenuService,$location){
 
-    $scope.activeClass = {mobileApp:'active'};
+    $scope.siteMenuList = siteMenuService;
+    $.each($scope.siteMenuList,function(index,value){
+        if(value.href==$location.path().substr(1)){
+            value.active = "active";
+        }
+        else value.active = ""
+    });
 
     var mobileInfoWindows_original="";
     var mobileInfoAndroid_original="";
@@ -16,20 +22,21 @@ adminApp.controller("MobileAppSettingsController",function($scope,requestHandler
         $scope.mobileInfoIos.buildnumber = $scope.mobileInfoIos.buildnumber.toString();
         $scope.mobileInfoIos.version = $scope.mobileInfoIos.version.toString();
         mobileInfoIos_original=angular.copy($scope.mobileInfoIos);
-    }
+    };
+
     $scope.copyOrginal_Android=function(mobileInfoAndroid){
         $scope.mobileInfoAndroid=mobileInfoAndroid;
         $scope.mobileInfoAndroid.buildnumber = $scope.mobileInfoAndroid.buildnumber.toString();
         $scope.mobileInfoAndroid.version = $scope.mobileInfoAndroid.version.toString();
         mobileInfoAndroid_original=angular.copy($scope.mobileInfoAndroid);
-    }
+    };
+
     $scope.copyOrginal_Windows=function(mobileInfoWindows){
         $scope.mobileInfoWindows=mobileInfoWindows;
         $scope.mobileInfoWindows.buildnumber = $scope.mobileInfoWindows.buildnumber.toString();
         $scope.mobileInfoWindows.version = $scope.mobileInfoWindows.version.toString();
         mobileInfoWindows_original=angular.copy($scope.mobileInfoWindows);
-    }
-
+    };
 
     $scope.collectDetails= function () {
         requestHandler.getRequest("admin/getmobileinfo","").then(function(response){
@@ -89,7 +96,7 @@ adminApp.controller("MobileAppSettingsController",function($scope,requestHandler
 
     $scope.mobileInfoAndroid_isClean=function(){
         return angular.equals(mobileInfoAndroid_original, $scope.mobileInfoAndroid);
-    }
+    };
 
     $scope.mobileInfoIos_isClean=function(){
         return angular.equals(mobileInfoIos_original, $scope.mobileInfoIos);

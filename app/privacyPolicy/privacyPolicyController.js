@@ -1,12 +1,18 @@
 
 var adminApp = angular.module('adminApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','summernote']);
-adminApp.controller('PrivacyPolicyController',function($scope,requestHandler,Flash) {
+adminApp.controller('PrivacyPolicyController',function($scope,requestHandler,Flash,$location,siteMenuService) {
 
-    $scope.activeClass = {policy:'active'};
+    $scope.siteMenuList = siteMenuService;
+    $.each($scope.siteMenuList,function(index,value){
+        if(value.href==$location.path().substr(1)){
+            value.active = "active";
+        }
+        else value.active = ""
+    });
 
     //summer note
     $scope.options = {
-        height: 250
+        height: 350
     };
 
    // To display privacy policy details
@@ -42,31 +48,6 @@ adminApp.controller('PrivacyPolicyController',function($scope,requestHandler,Fla
     // Display Privacy policy details On Page Load
     $scope.doGetPrivacyPolicy();
 });
-
-/*adminApp.controller('PrivacyPolicyAdminController',function($scope,requestHandler,Flash) {
-
-    // To display privacy policy details as user
-    $scope.doGetAdminPrivacyPolicy=function(){
-
-        requestHandler.getRequest("getLegalByAll/Privacypolicy/", "").then(function(response){
-
-            $scope.userprivacypolicydetails=response.data.Legal_Data;
-            console.log($scope.userprivacypolicydetails);
-        },function(){
-            errorMessage(Flash,"Please try again later!")
-        });
-    };
-
-    // Display User Privacy policy details On Page Load
-    $scope.doGetAdminPrivacyPolicy();
-});
-
-// html filter (render text as html)
-adminApp.filter('html', ['$sce', function ($sce) {
-    return function (text) {
-        return $sce.trustAsHtml(text);
-    };
-}]);*/
 
 var commonApp = angular.module('commonApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate']);
 commonApp.controller('PrivacyPolicyUserController',function($scope,requestHandler,Flash) {

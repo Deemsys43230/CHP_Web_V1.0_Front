@@ -3,9 +3,15 @@
  */
 var adminApp = angular.module('adminApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate']);
 
-adminApp.controller('FAQController',function($scope,requestHandler,Flash){
+adminApp.controller('FAQController',function($scope,requestHandler,Flash,siteMenuService){
 
-    $scope.activeClass = {faq:'active'};
+    $scope.siteMenuList = siteMenuService;
+    $.each($scope.siteMenuList,function(index,value){
+        if(value.id==4){
+            value.active = "active";
+        }
+        else value.active = ""
+    });
 
     $scope.doGetAllFAQ=function(){
         $scope.loaded=true;
@@ -107,9 +113,15 @@ adminApp.controller('FAQController',function($scope,requestHandler,Flash){
 
 });
 
-adminApp.controller('FAQViewController',function($scope,requestHandler,Flash,$routeParams){
+adminApp.controller('FAQViewController',function($scope,requestHandler,Flash,$routeParams,siteMenuService){
 
-    $scope.activeClass = {faq:'active'};
+    $scope.siteMenuList = siteMenuService;
+    $.each($scope.siteMenuList,function(index,value){
+        if(value.id==4){
+            value.active = "active";
+        }
+        else value.active = ""
+    });
 
     $scope.doGetFAQByID=function(){
         $scope.modalloaded=true;

@@ -1,14 +1,21 @@
 
 var adminApp = angular.module('adminApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','summernote']);
 
-adminApp.controller('InstructionController',function($scope,requestHandler,Flash) {
-    $scope.activeClass = {instruction:'active'};
+adminApp.controller('InstructionController',function($scope,requestHandler,Flash,$location,siteMenuService) {
+
+    $scope.siteMenuList = siteMenuService;
+    $.each($scope.siteMenuList,function(index,value){
+        if(value.href==$location.path().substr(1)){
+            value.active = "active";
+        }
+        else value.active = ""
+    });
 
     var original="";
 
     //summer note
     $scope.options = {
-        height: 250
+        height: 350
     };
 
     $scope.doGetInstruction=function(){
@@ -42,21 +49,6 @@ adminApp.controller('InstructionController',function($scope,requestHandler,Flash
     $scope.doGetInstruction();
 
 });
-
-/*adminApp.controller('InstructionAdminController',function($scope,requestHandler,Flash) {
-
-    $scope.doGetAdminInstruction=function(){
-        requestHandler.getRequest("getLegalByAll/Instructions/", "").then(function(response){
-            $scope.userinstructions=response.data.Legal_Data;
-        },function(){
-            errorMessage(Flash,"Please try again later!")
-        });
-    };
-
-    // Display User Instruction details On Page Load
-    $scope.doGetAdminInstruction();
-
-});*/
 
 var commonApp = angular.module('commonApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate']);
 

@@ -3,9 +3,16 @@
  */
 var adminApp = angular.module('adminApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate']);
 
-adminApp.controller('SocialMediaSettingsController',function($scope,requestHandler,Flash){
+adminApp.controller('SocialMediaSettingsController',function($scope,requestHandler,Flash,siteMenuService,$location){
     var original="";
-    $scope.activeClass = {social:'active'};
+
+    $scope.siteMenuList = siteMenuService;
+    $.each($scope.siteMenuList,function(index,value){
+        if(value.href==$location.path().substr(1)){
+            value.active = "active";
+        }
+        else value.active = ""
+    });
 
     $scope.doGetSocialMedia= function () {
         requestHandler.getRequest("admin/getappdetails","").then(function(response){
@@ -27,7 +34,6 @@ adminApp.controller('SocialMediaSettingsController',function($scope,requestHandl
     };
 
     $scope.doGetSocialMedia_isClean=function(){
-        console.log(angular.equals(original, $scope.socialMedia));
         return angular.equals(original, $scope.socialMedia);
     };
 

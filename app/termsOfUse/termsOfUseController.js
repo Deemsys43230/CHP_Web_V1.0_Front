@@ -1,13 +1,19 @@
 
 var adminApp = angular.module('adminApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','summernote']);
 
-adminApp.controller('TermsOfUseController',function($scope,requestHandler,Flash) {
+adminApp.controller('TermsOfUseController',function($scope,requestHandler,Flash,$location,siteMenuService) {
 
-    $scope.activeClass = {terms:'active'};
+    $scope.siteMenuList = siteMenuService;
+    $.each($scope.siteMenuList,function(index,value){
+        if(value.href==$location.path().substr(1)){
+            value.active = "active";
+        }
+        else value.active = ""
+    });
 
     //summer note
     $scope.options = {
-        height: 250
+        height: 350
     };
 
     var original="";
@@ -45,28 +51,6 @@ adminApp.controller('TermsOfUseController',function($scope,requestHandler,Flash)
 
 });
 
-/*adminApp.controller('TermsOfUseAdminController',function($scope,requestHandler,Flash) {
-
-    $scope.doGetAdminTermsOfUse=function(){
-        requestHandler.getRequest("getLegalByAll/Termsofuse/", "").then(function(response){
-            $scope.userterms=response.data.Legal_Data;
-        },function(){
-            errorMessage(Flash,"Please try again later!")
-        });
-    };
-
-    // Display User Instruction details On Page Load
-    $scope.doGetAdminTermsOfUse();
-
-});
-
-// html filter (render text as html)
-adminApp.filter('html', ['$sce', function ($sce) {
-    return function (text) {
-        return $sce.trustAsHtml(text);
-    };
-}]);*/
-
 var commonApp = angular.module('commonApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate']);
 
 commonApp.controller('TermsOfUseUserController',function($scope,requestHandler,Flash) {
@@ -83,9 +67,6 @@ commonApp.controller('TermsOfUseUserController',function($scope,requestHandler,F
     $scope.doGetUserTermsOfUse();
 
 });
-
-
-
 
 // html filter (render text as html)
 commonApp.filter('html', ['$sce', function ($sce) {

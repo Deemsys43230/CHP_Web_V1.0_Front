@@ -3,16 +3,24 @@
  */
 var adminApp = angular.module('adminApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate']);
 
-adminApp.controller('ServerSettingsController',function($scope,requestHandler,Flash){
+adminApp.controller('ServerSettingsController',function($scope,requestHandler,Flash,siteMenuService,$location){
     var original="";
-    $scope.activeClass = {sever:'active'};
+
+    $scope.siteMenuList = siteMenuService;
+
+    $.each($scope.siteMenuList,function(index,value){
+        if(value.href==$location.path().substr(1)){
+            value.active = "active";
+        }
+        else value.active = ""
+    });
 
     $scope.copyOrginal_serverSettings=function(serverSettings){
         $scope.serverSettings = serverSettings;
         $scope.serverSettings.port = $scope.serverSettings.port.toString();
         $scope.serverSettings.ssl = $scope.serverSettings.ssl.toString();
         original=angular.copy( $scope.serverSettings);
-    }
+    };
 
                 /*VIEW ALL*/
     $scope.doGetServerSettings= function () {

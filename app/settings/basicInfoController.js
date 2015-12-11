@@ -3,11 +3,17 @@
  */
 var adminApp = angular.module('adminApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate']);
 
-adminApp.controller('ContactUsController',function($scope,requestHandler,Flash){
+adminApp.controller('ContactUsController',function($scope,requestHandler,Flash,siteMenuService,$location){
 
-    $scope.activeClass = {basic:'active'};
+    $scope.siteMenuList = siteMenuService;
+    $.each($scope.siteMenuList,function(index,value){
+        if(value.href==$location.path().substr(1)){
+            value.active = "active";
+        }
+        else value.active = ""
+    });
 
-                /*VIEW ALL*/
+    /*VIEW ALL*/
     var original="";
     $scope.copyOrginal_contactUs=function(contactUs){
         $scope.contactUs=contactUs;

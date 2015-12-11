@@ -1,9 +1,16 @@
 var adminApp = angular.module('adminApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','summernote','angularUtils.directives.dirPagination']);
-adminApp.controller('TestimonialController',function($scope,requestHandler,Flash,$location) {
+adminApp.controller('TestimonialController',function($scope,requestHandler,Flash,$location,siteMenuService) {
 
     $scope.isNew = true;
     $scope.title = "Add Testimonial";
-    $scope.activeClass = {testimonial:'active'};
+
+    $scope.siteMenuList = siteMenuService;
+    $.each($scope.siteMenuList,function(index,value){
+        if(value.id==3){
+            value.active = "active";
+        }
+        else value.active = ""
+    });
 
     $scope.imageAdded=false;
 
@@ -20,7 +27,6 @@ adminApp.controller('TestimonialController',function($scope,requestHandler,Flash
             }
         }
     };
-
 
     //summer note
     $scope.options = {
@@ -80,9 +86,20 @@ adminApp.controller('TestimonialController',function($scope,requestHandler,Flash
 
 });
 
-adminApp.controller('TestimonialEditController',function($scope,requestHandler,Flash,$location,$routeParams,$sce) {
+adminApp.controller('TestimonialEditController',function($scope,requestHandler,Flash,$location,$routeParams,$sce,siteMenuService) {
 
-    $scope.activeClass = {testimonial:'active'};
+    $scope.siteMenuList = siteMenuService;
+    $.each($scope.siteMenuList,function(index,value){
+        if(value.id==3){
+            value.active = "active";
+        }
+        else value.active = ""
+    });
+
+    //summer note
+    $scope.options = {
+        height: 250
+    };
 
     $scope.imageAdded=false;
 
@@ -202,7 +219,6 @@ adminApp.directive('validFile',function(){
         }
     }
 });
-
 
 var commonApp = angular.module('commonApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate']);
 

@@ -14,7 +14,7 @@
                 <h3 class="margin-bottom-10"><i class="fa fa-pencil"></i> &nbsp;{{title}}</h3>
                 <hr/>
                 <div class="row">
-                    <form name="ForumForm">
+                    <form name="ForumForm" class="margin-top-10">
                         <div class="col-md-2">
                             <h4>Title :</h4>
                         </div>
@@ -34,7 +34,7 @@
                             <h4>Content :</h4>
                         </div>
                         <div class="col-md-10">
-                            <textarea type="text" class="height-150 forum-textarea" name="description" ng-model="forumDetails.postdescription" maxlength="300"  required/></textarea>
+                            <textarea type="text" class="height-150 form-control" name="description" ng-model="forumDetails.postdescription" maxlength="300"  required/></textarea>
                              <span ng-show="ForumForm.description.$dirty&&ForumForm.description.$invalid">
                                   <span class="error-message textarea-errormessage40" ng-show="ForumForm.description.$error.required"><span>Required.</span></span>
                              </span>

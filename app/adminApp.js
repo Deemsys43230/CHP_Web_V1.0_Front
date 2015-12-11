@@ -1463,3 +1463,104 @@ adminApp.directive('validateInteger', function() {
         }
     };
 });
+
+adminApp.filter('startsWithLetter', function () {
+    return function (items, searchMenu) {
+        var filtered = [];
+        var letterMatch = new RegExp(searchMenu, 'i');
+        if(!items){}
+        else{
+            for (var i = 0; i < items.length; i++) {
+                var item = items[i];
+                if (letterMatch.test(item.name)) {
+                    filtered.push(item);
+                }
+            }
+        }
+        return filtered;
+    };
+});
+
+adminApp.factory("siteMenuService", function () {
+
+    var site =[
+        {
+            "id":4,
+            "name": "FAQ List",
+            "icon": "list-ul",
+            "href": "site",
+            "active": ""
+        },
+        {
+            "name": "Instruction",
+            "icon": "exclamation-circle",
+            "href": "instruction",
+            "active": ""
+        },
+        {
+            "name": "Privacy Policy",
+            "icon": "pencil",
+            "href": "privacyPolicy",
+            "active": ""
+        },
+        {
+            "name": "Terms Of Use",
+            "icon": "file-text",
+            "href": "termsOfUse",
+            "active": ""
+        },
+        {
+            "id":3,
+            "name": "Testimonials",
+            "icon": "comment",
+            "href": "testimonials",
+            "active": ""
+        },
+        {
+            "id":2,
+            "name": "Latest News",
+            "icon": "newspaper-o",
+            "href": "latestNews",
+            "active": ""
+        },
+        {
+            "id":1,
+            "name": "Forums",
+            "icon": "comment-o",
+            "href": "forums",
+            "active": ""
+        },
+        {
+            "name": "Basic Info",
+            "icon": "list-ul",
+            "href": "settings",
+            "active": ""
+        },
+        {
+            "name": "Mobile App",
+            "icon": "tablet",
+            "href": "mobileApp",
+            "active": ""
+        },
+        {
+            "name": "Paypal",
+            "icon": "paypal",
+            "href": "paypalSettings",
+            "active": ""
+        },
+        {
+            "name": "Server",
+            "icon": "server",
+            "href": "serverSettings",
+            "active": ""
+        },
+        {
+            "name": "Social Media",
+            "icon": "connectdevelop",
+            "href": "socialMediaSettings",
+            "active": ""
+        }
+    ];
+
+    return site;
+});

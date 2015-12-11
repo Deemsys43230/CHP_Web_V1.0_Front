@@ -3539,7 +3539,7 @@ ul.icons-list li i {
 
 .classic-title {
     font-size: 20px;
-	margin-bottom: 20px;
+	margin-bottom: 15px;
 	padding-bottom: 10px;
 	border-bottom: 3px solid #eee;
     font-weight: 600;
@@ -7849,7 +7849,7 @@ ul.food li .food_name{
 
 ul.sidebar-menu{
     margin-left: 15px !important;
-    width: 90%;
+    width: 91%;
     display: block;
  }
 
@@ -7861,7 +7861,7 @@ ul.sidebar-menu li a{
 	display: block;
     width: 100% !important;
     border-bottom: 1px solid #ccc;
-    padding:10px !important ;
+    padding:8px 12px !important ;
     border: 1px solid #ccc;
     border-radius: 3px;
     margin-bottom: 5px;
