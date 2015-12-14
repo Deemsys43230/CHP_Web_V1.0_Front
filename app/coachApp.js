@@ -196,40 +196,40 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'coachApp',
                             files:[
-                                '../../app/coachAdvice/coachAdviceController.js'
+                                '../../app/course/courseController.js'
                             ]
                         })
                     }
                 },
-                controller:'CoachAdviceController'
+                controller:'CourseController'
             }).
-            when('/courseView', {
+            when('/courseView/:id', {
                 templateUrl: 'views/course-view.html',
                 resolve: {
                     loadMyFiles:function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'coachApp',
                             files:[
-                                '../../app/coachAdvice/coachAdviceController.js'
+                                '../../app/course/courseController.js'
                             ]
                         })
                     }
                 },
-                controller:'CoachAdviceController'
+                controller:'CourseController'
             }).
-            when('/courseSection', {
+            when('/courseSection/:sectionId', {
                 templateUrl: 'views/course-section.html',
                 resolve: {
                     loadMyFiles:function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'coachApp',
                             files:[
-                                '../../app/coachAdvice/coachAdviceController.js'
+                                '../../app/course/courseController.js'
                             ]
                         })
                     }
                 },
-                controller:'CoachAdviceController'
+                controller:'CourseController'
             }).
             when('/courseSectionEdit', {
                 templateUrl: 'views/course-section-add-edit.html',
@@ -259,7 +259,7 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'CoachAdviceController'
             }).
-            when('/courseEdit', {
+            when('/courseEdit/:id', {
                 templateUrl: 'views/course-add-edit.html',
                 resolve: {
                     loadMyFiles:function($ocLazyLoad) {
@@ -270,12 +270,14 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../plugin/popup/jquery.leanModal.min.js',
                                 '../../css/course-image-upload.css',
                                 '../../js/image-upload.js',
-                                '../../app/coachProfile/coachProfileController.js'
+                                '../../plugin/text-editor/summernote.js',
+                                '../../plugin/text-editor/summernote.css',
+                                '../../app/course/courseController.js'
                             ]
                         })
                     }
                 },
-                controller:'CoachProfileController'
+                controller:'CourseEditController'
             }).
             when('/courseAdd', {
                 templateUrl: 'views/course-add-edit.html',

@@ -6,63 +6,50 @@
         <div class="row">
             <div class="col-md-12 min-height-450">
                 <a href="#course" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back</a>
-                <a href="#courseSectionAdd" class="back-button pull-right margin-left-5"><i class="fa fa-plus-circle"></i> Add Section</a>
-                <a href="" class="back-button pull-right margin-left-5"><i class="fa fa-paper-plane"></i> Send to Review</a>
+                <a ng-show="courseDetails.canedit==1" href="#courseSectionAdd" class="back-button pull-right margin-left-5"><i class="fa fa-plus-circle"></i> Add Section</a>
+                <a ng-show="courseDetails.canedit==1" href="" class="back-button pull-right margin-left-5"><i class="fa fa-paper-plane"></i> Send to Review</a>
                 <div flash-message="2000" class="col-md-4 pull-right"></div>
-                <h4 class="classic-title"><span>Natural Health Tips for Skin</span></h4>
+                <h4 class="classic-title">
+                    <span ng-show="courseDetails.canedit==0">Course View</span>
+                    <span ng-show="courseDetails.canedit==1">Course Edit</span>&nbsp;
+                </h4>
                 <div class="row margin-top-10 margin-bottom-10">
                     <div class="col-md-3">
-                        <img src="../../images/course-1.jpg">
-                        <p class="margin-top-10">
-                            Combination skin is usually dry or normal in some areas but oily in the T-zone – a fancy name for the forehead, nose, and chin area of your face. If this is your skin type, you might be struggling with enlarged pores, blackheads, and some grease and shine along your T-zone.
-                        </p>
-                        <a href="#courseEdit" class="main-button margin-top-10">Edit Basic Info</a>
+                        <img class="height-100" ng-src="{{courseDetails.promoimage | trusted}}">
+                        <h5 class="row margin-top-15 text-muted">
+                            <span class="col-md-5">Category</span>
+                            <span class="col-md-7">: {{courseDetails.categoryname}}</span>
+                            <span class="col-md-5">Price</span>
+                            <span class="col-md-7">
+                                : <span ng-show="courseDetails.price==0" class="text-green text-bold">Free</span>
+                                <span ng-hide="courseDetails.price==0" class="text-red text-bold">{{courseDetails.price}} $</span>
+                            </span>
+                            <span class="col-md-5">Created On</span>
+                            <span class="col-md-7">: {{courseDetails.createdon}}</span>
+                            <span class="col-md-5">Students</span>
+                            <span class="col-md-7">
+                                : <span ng-show="courseDetails.enrollcount==0">----</span>
+                                <span ng-hide="courseDetails.enrollcount==0">{{courseDetails.enrollcount}}</span>
+                            </span>
+                            <span class="col-md-5">Reviewed On</span>
+                            <span class="col-md-7">
+                                : <span ng-show="!courseDetails.reviewdate">----</span>
+                                <span ng-hide="!courseDetails.reviewdate">{{courseDetails.reviewdate}}</span>
+                            </span>
+                            <span class="col-md-5">Published On</span>
+                            <span class="col-md-7">
+                                : <span ng-show="!courseDetails.publishedon">----</span>
+                                <span ng-hide="!courseDetails.publishedon">{{courseDetails.publishedon}}</span>
+                            </span>
+                        </h5>
+                        <span ng-show="courseDetails.canedit==1"><a href="#courseEdit/{{courseDetails.courseid}}" class="main-button margin-top-10">Edit Basic Info</a></span>
                     </div>
                     <div class="col-md-9 no-padding">
-                        <div class="col-md-1 col-sm-2 no-padding">
-                            <h4>Section 1:</h4>
-                        </div>
-                        <div class="col-md-11 col-sm-10">
-                            <h4><a href="#courseSection">Combination skin is usually dry or normal in some areas</a>&nbsp;&nbsp;&nbsp;<a href="#courseSectionEdit" class="fa fa-pencil"></a></h4>
-                            <p class="margin-top-7 margin-bottom-20">
-                                Combination skin is usually dry or normal in some areas but oily in the T-zone – a fancy name for the forehead, nose, and chin area of your face. If this is your skin type, you might be struggling with enlarged pores, blackheads, and some grease and shine along your T-zone.
-                            </p>
-                        </div>
-                        <div class="col-md-1 col-sm-2 no-padding">
-                            <h4>Section 2:</h4>
-                        </div>
-                        <div class="col-md-11 col-sm-10">
-                            <h4><a href="#courseSection">Combination skin is usually dry or normal in some areas</a>&nbsp;&nbsp;&nbsp;<a href="#courseSectionEdit" class="fa fa-pencil"></a></h4>
-                            <p class="margin-top-7 margin-bottom-20">
-                                Combination skin is usually dry or normal in some areas but oily in the T-zone – a fancy name for the forehead, nose, and chin area of your face. If this is your skin type, you might be struggling with enlarged pores, blackheads, and some grease and shine along your T-zone.
-                            </p>
-                        </div>
-                        <div class="col-md-1 col-sm-2 no-padding">
-                            <h4>Section 3:</h4>
-                        </div>
-                        <div class="col-md-11 col-sm-10">
-                            <h4><a href="#courseSection">Combination skin is usually dry or normal in some areas</a>&nbsp;&nbsp;&nbsp;<a href="#courseSectionEdit" class="fa fa-pencil"></a></h4>
-                            <p class="margin-top-7 margin-bottom-20">
-                                Combination skin is usually dry or normal in some areas but oily in the T-zone – a fancy name for the forehead, nose, and chin area of your face. If this is your skin type, you might be struggling with enlarged pores, blackheads, and some grease and shine along your T-zone.
-                            </p>
-                        </div>
-                        <div class="col-md-1 col-sm-2 no-padding">
-                            <h4>Section 4:</h4>
-                        </div>
-                        <div class="col-md-11 col-sm-10">
-                            <h4><a href="#courseSection">Combination skin is usually dry or normal in some areas</a>&nbsp;&nbsp;&nbsp;<a href="#courseSectionEdit" class="fa fa-pencil"></a></h4>
-                            <p class="margin-top-7 margin-bottom-20">
-                                Combination skin is usually dry or normal in some areas but oily in the T-zone – a fancy name for the forehead, nose, and chin area of your face. If this is your skin type, you might be struggling with enlarged pores, blackheads, and some grease and shine along your T-zone.
-                            </p>
-                        </div>
-                        <div class="col-md-1 col-sm-2 no-padding">
-                            <h4>Section 5:</h4>
-                        </div>
-                        <div class="col-md-11 col-sm-10">
-                            <h4><a href="#courseSection">Combination skin is usually dry or normal in some areas</a>&nbsp;&nbsp;&nbsp;<a href="#courseSectionEdit" class="fa fa-pencil"></a></h4>
-                            <p class="margin-top-7 margin-bottom-20">
-                                Combination skin is usually dry or normal in some areas but oily in the T-zone – a fancy name for the forehead, nose, and chin area of your face. If this is your skin type, you might be struggling with enlarged pores, blackheads, and some grease and shine along your T-zone.
-                            </p>
+                        <h2>{{courseDetails.coursename}}</h2>
+                        <h5 class="margin-top-5 text-muted">{{courseDetails.coursesubtitle}}</h5>
+                        <p class="margin-top-10 margin-right-20">{{courseDetails.coursedescription}}</p>
+                        <div class="margin-top-15">
+                            <h5 ng-repeat="section in courseSections" class="margin-bottom-5">Section {{section.sequenceno}} : <a href="#courseSection/{{section.sectionid}}">{{section.sectiontitle}}</a>&nbsp;&nbsp;&nbsp;<span ng-show="courseDetails.canedit==1"><a href="#courseSectionEdit" class="fa fa-pencil"></a></span></h5>
                         </div>
                     </div>
                 </div>

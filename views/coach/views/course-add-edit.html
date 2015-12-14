@@ -10,15 +10,15 @@
                 <h4 class="classic-title"><span>Course Edit</span></h4>
                 <div class="row margin-top-10 margin-bottom-10">
                     <div class="col-md-2 margin-top-7">
-                        <h4>Course Title <span class="pull-right">:</span></h4><br/>
+                        <h4>Course Name <span class="pull-right">:</span></h4><br/>
                         <h4 class="margin-top-10">Course Subtitle <span class="pull-right">:</span></h4><br/>
                         <h4 class="margin-top-10">Course Category <span class="pull-right">:</span></h4><br/>
                         <h4 class="margin-top-10">Course Price <span class="pull-right">:</span></h4>
                     </div>
                     <div class="col-md-7">
-                        <input class="search-input" placeholder="Enter course title">
-                        <input class="search-input margin-top-15" placeholder="Enter course sub-title">
-                        <select class="full-width course-select margin-top-15" name="secretquestion" required>
+                        <input class="search-input" placeholder="Enter course title" ng-model="courseDetails.coursename">
+                        <input class="search-input margin-top-15" placeholder="Enter course sub-title" ng-model="courseDetails.coursesubtitle">
+                        <select class="full-width course-select margin-top-15"  ng-model="courseDetails.categoryname" name="secretquestion" required>
                             <option value="">Select the category</option>
                             <option value="1">Aging</option>
                             <option value="2">Beauty & Fashion</option>
@@ -27,7 +27,7 @@
                             <option value="5">Health Tips</option>
                             <option value="6">Healthy Foods</option>
                         </select>
-                        <input class="search-input margin-top-15" placeholder="Enter course price">
+                        <input class="search-input margin-top-15" placeholder="Enter course price" ng-model="courseDetails.price">
                         <p class="text-red margin-top-5"><b>Note : Price "zero" will be consider as free course.</b></p>
                     </div>
                     <div class="col-md-3">
@@ -39,8 +39,8 @@
                         <div class="col-md-2 margin-top-15">
                             <h4>Course Description <span class="pull-right">:</span></h4>
                         </div>
-                        <div class="col-md-10">
-                            <textarea class="forum-textarea height-100"></textarea>
+                        <div class="col-md-10 margin-top-10">
+                            <div summernote config="options" name="content"  ng-model="courseDetails.coursedescription" required></div>
                         </div>
                     </div>
                     <div class="col-md-12 text-center">
