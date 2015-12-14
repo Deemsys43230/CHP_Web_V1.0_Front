@@ -6900,6 +6900,11 @@ a.register_button:visited{
     color: #57cb85;
 }
 
+.course-image{
+    height: 125px;
+    width: 100%;
+}
+
 a.course_button {
     font-size: 14px;
     padding:5px 25px !important;
