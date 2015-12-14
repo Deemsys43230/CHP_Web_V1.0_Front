@@ -4193,6 +4193,10 @@ and (min-width : 551px){
     width: 70px !important;
 }
 
+.width-110{
+    width: 110px !important;
+}
+
 .hc-bar{
     width: 350px !important;
 }
@@ -6896,6 +6900,26 @@ a.register_button:visited{
     color: #57cb85;
 }
 
+a.course_button {
+    font-size: 14px;
+    padding:5px 25px !important;
+    border-radius: 0px !important;
+    font-weight: bold;
+    background-color:transparent;
+    border: 2px solid #57cb85;
+    color: #57cb85;
+}
+
+a.course_button:hover{
+    color: #fff !important;
+    background-color:#57cb85;
+    cursor: pointer;
+}
+
+a.course_button:visited{
+    color: #57cb85;
+}
+
 a.cancel_button{
     font-size: 15px;
      padding:8px 50px !important;
@@ -6975,12 +6999,12 @@ a.target_button{
 }
 
 .red_button{
-    background-color:#ff4c4c;
+    background-color:#ff4c4c !important;
 }
 
 .red_button:hover{
-    color: #fff;
-    background-color:#ff1919;
+    color: #fff !important;
+    background-color:#ff1919 !important;
     cursor: pointer;
 }
 

@@ -899,7 +899,7 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 controller:'ExerciseSuggestionDetailViewController'
             }).
             when('/course', {
-                templateUrl: 'views/courses.html',
+                templateUrl: 'views/course.html',
                 resolve: {
                     loadMyFiles:function($ocLazyLoad) {
                         return $ocLazyLoad.load({
@@ -911,16 +911,40 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                     }
                 }
             }).
-            when('/createCourse', {
-                templateUrl: 'views/create-courses.html',
+            when('/coursePending', {
+                templateUrl: 'views/course-pending.html',
                 resolve: {
                     loadMyFiles:function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
-                                '../../plugin/text-editor/text-editor-bootstarp.js',
-                                '../../plugin/text-editor/summernote.css',
-                                '../../plugin/text-editor/summernote.js'
+                                '../../js/bootstrap.min.js'
+                            ]
+                        })
+                    }
+                }
+            }).
+            when('/courseDetails', {
+                templateUrl: 'views/course-details.html',
+                resolve: {
+                    loadMyFiles:function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'adminApp',
+                            files:[
+                                '../../js/bootstrap.min.js'
+                            ]
+                        })
+                    }
+                }
+            }).
+            when('/courseView', {
+                templateUrl: 'views/course-view.html',
+                resolve: {
+                    loadMyFiles:function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'adminApp',
+                            files:[
+                                '../../js/bootstrap.min.js'
                             ]
                         })
                     }

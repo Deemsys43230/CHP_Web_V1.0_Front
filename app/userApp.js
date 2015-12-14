@@ -89,7 +89,18 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 }
             }).
             when('/myCourses', {
-                templateUrl: 'views/courses-my.html'
+                templateUrl: 'views/courses-my.html',
+                resolve: {
+                    loadMyFiles:function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'userApp',
+                            files:[
+                                '../../app/course/courseController.js'
+                            ]
+                        })
+                    }
+                },
+                controller:'CourseController'
             }).
             when('/courses', {
                 templateUrl: 'views/courses.html'
