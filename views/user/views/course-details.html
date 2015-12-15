@@ -3,44 +3,34 @@
 <!-- Start Page Banner -->
 <div class="page-banner1">
     <div id="w" class="clearfix">
-        <div id="demography-content" class="height-auto">
+        <div id="demography-content" class="height-auto" ng-init="viewinit()">
             <div class="col-md-12">
                 <div class="margin-rl">
-                    <a href="#courses" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back</a>
+                   <span ng-hide="courseDetails.enrollmentStatus==0"> <a href="#myCourses" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back</a></span>
+                   <span ng-show="courseDetails.enrollmentStatus==0"><a href="#courses" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back</a></span>
                     <div flash-message="2000" class="col-md-4 pull-right"></div>
                     <h4 class="classic-title"><span>Course Details</span></h4>
                     <div class="row margin-top-10 margin-bottom-10">
                         <div class="col-md-3">
-                            <img class="margin-bottom-15" src="../../images/course-test.jpg">
-                            <div class="col-md-2 no-padding margin-top-5"><img class="course-author-img" src="../../images/pic-1.jpg"></div>
+                            <img class="margin-bottom-15 course-image" src="{{courseDetails.promoimage | trusted}}">
+                            <div class="col-md-2 no-padding margin-top-5"><img class="course-author-img" src="{{courseDetails.imageurl | trusted}}"></div>
                             <div class="col-md-10">
-                                <h5>course author name</h5>
-                                <p>course author specialist</p>
-                                <h5 class="margin-top-10"><i class="fa fa-users text-gray"></i> - 12123 Students</h5>
-                                <h5 class="margin-top-10"><i class="fa fa-book text-gray"></i> - 23 Sections</h5>
+                                <h5>{{courseDetails.ownername}}</h5>
+                                <p>{{courseDetails.specialistin}}</p>
+                                <h5 class="margin-top-10" ng-show="courseDetails.enrollmentStatus==0"><i class="fa fa-users text-gray"></i> - {{courseDetails.enrollcount}} Students</h5>
+                               <!-- <h5 class="margin-top-10"><i class="fa fa-book text-gray"></i> - 23 Sections</h5>-->
                             </div>
-                            <a href="" class="col-md-12 suggest_button margin-top-10">Enroll to this course</a>
+                            <span ng-show="courseDetails.enrollmentStatus==0"><a href="" class="col-md-12 suggest_button margin-top-10" ng-click="doEnrollCourse(courseDetails.courseid)">Enroll to this course</a></span>
                         </div>
                         <div class="col-md-9">
-                            <h2>Course Name</h2>
-                            <h4 class="text-muted margin-tb-10">Course Subtitle</h4>
+                            <h2>{{courseDetails.coursename}}</h2>
+                            <h4 class="text-muted margin-tb-10">{{courseDetails.coursesubtitle}}</h4>
                             <p class="margin-tb-10">
-                                Combination skin is usually dry or normal in some areas but oily in the T-zone – a fancy name for the forehead, nose, and chin area of your face. If this is your skin type, you might be struggling with enlarged pores, blackheads, and some grease and shine along your T-zone.
+                                {{courseDetails.coursedescription}}
                             </p>
-                            <h5 class="margin-bottom-10">Section 1 : Combination skin is usually dry or normal in s</h5>
-                            <h5 class="margin-bottom-10">Section 2 : Combination skin is usually dry or normal in </h5>
-                            <h5 class="margin-bottom-10">Section 3 : Combination skin is usually dry or normal in</h5>
-                            <h5 class="margin-bottom-10">Section 4 : Combination skin is usually dry or normal in</h5>
-                            <h5 class="margin-bottom-10">Section 5 : Combination skin is usually dry or normal in</h5>
-                            <h5 class="margin-bottom-10">Section 6 : Combination skin is usually dry or normal in</h5>
-                            <h5 class="margin-bottom-10">Section 7 : Combination skin is usually dry or normal in</h5>
-                            <h5 class="margin-bottom-10">Section 8 : Combination skin is usually dry or normal in</h5>
-                            <h5 class="margin-bottom-10">Section 9 : Combination skin is usually dry or normal in</h5>
-                            <h5 class="margin-bottom-10">Section 10 : Combination skin is usually dry or normal in</h5>
-                            <h5 class="margin-bottom-10">Section 11 : Combination skin is usually dry or normal in</h5>
-                            <h5 class="margin-bottom-10">Section 12 : Combination skin is usually dry or normal in</h5>
-                            <h5 class="margin-bottom-10">Section 13 : Combination skin is usually dry or normal in</h5>
-                            <h5 class="margin-bottom-10">Section 14 : Combination skin is usually dry or normal in</h5>
+
+                            <h5 class="margin-bottom-10" ng-repeat="sections in sectionList" ng-hide="courseDetails.enrollmentStatus==0">Section {{$index+1}} : <a href="#courseView/{{sections.sectionid}}" >{{sections.sectiontitle}}</a></h5>
+                            <h5 class="margin-bottom-10" ng-repeat="sections in sectionList" ng-show="courseDetails.enrollmentStatus==0">Section {{$index+1}} : <a href="" ng-click="checkenroll()">{{sections.sectiontitle}}</a></h5>
                         </div>
                     </div>
                 </div>

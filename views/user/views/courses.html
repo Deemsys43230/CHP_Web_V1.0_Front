@@ -21,7 +21,7 @@
                     <div class="latest-posts-classic custom-carousel touch-carousel course-control margin-top-5" data-appeared-items="3" data-navigation="true">
                         <!-- Posts 1-->
                         <div class="item" ng-repeat="courses in courseList">
-                            <a href="#courseDetails">
+                            <a href="#courseDetail/{{courses.courseid}}">
                                 <div class="dashboard arrange">
                                     <div class="course-grid-user">
                                         <div class="col-md-6 margin-top-5">
@@ -39,6 +39,7 @@
                                             <div class="col-md-10 no-padding">
                                                 <h5>{{courses.ownername}}</h5>
                                                 <p>{{courses.specialistin}}</p>
+                                                <span ng-hide="courses.enrollmentstatus==0"> <p class="text-green" >Enrolled</p></span>
                                             </div>
                                         </div>
                                     </div>

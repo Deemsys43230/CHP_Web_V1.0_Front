@@ -116,8 +116,8 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'CourseController'
             }).
-            when('/courseDetails', {
-                templateUrl: 'views/course-details.html',
+            when('/courseView/:id', {
+                templateUrl: 'views/course-view.html',
                 resolve: {
             loadMyFiles:function($ocLazyLoad) {
                 return $ocLazyLoad.load({
@@ -130,8 +130,8 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
         },
         controller:'CourseController'
             }).
-            when('/courseView/:id', {
-                templateUrl: 'views/course-view.html',
+            when('/courseDetail/:id', {
+                templateUrl: 'views/course-details.html',
                 resolve: {
                     loadMyFiles:function($ocLazyLoad) {
                         return $ocLazyLoad.load({
