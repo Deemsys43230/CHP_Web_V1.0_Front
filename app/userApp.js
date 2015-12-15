@@ -95,7 +95,7 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'userApp',
                             files:[
-                                '../../app/course/courseController.js'
+                                '../../app/test/testController.js'
                             ]
                         })
                     }
@@ -103,13 +103,46 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 controller:'CourseController'
             }).
             when('/courses', {
-                templateUrl: 'views/courses.html'
+                templateUrl: 'views/courses.html',
+                resolve: {
+                    loadMyFiles:function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'userApp',
+                            files:[
+                                '../../app/test/testController.js'
+                            ]
+                        })
+                    }
+                },
+                controller:'CourseController'
             }).
             when('/courseDetails', {
-                templateUrl: 'views/course-details.html'
+                templateUrl: 'views/course-details.html',
+                resolve: {
+            loadMyFiles:function($ocLazyLoad) {
+                return $ocLazyLoad.load({
+                    name:'userApp',
+                    files:[
+                        '../../app/test/testController.js'
+                    ]
+                })
+            }
+        },
+        controller:'CourseController'
             }).
-            when('/courseView', {
-                templateUrl: 'views/course-view.html'
+            when('/courseView/:id', {
+                templateUrl: 'views/course-view.html',
+                resolve: {
+                    loadMyFiles:function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'userApp',
+                            files:[
+                                '../../app/test/testController.js'
+                            ]
+                        })
+                    }
+                },
+                controller:'CourseController'
             }).
             when('/courseCategory', {
                 templateUrl: 'views/course-category.html'
