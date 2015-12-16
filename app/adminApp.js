@@ -139,7 +139,7 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                             name:'adminApp',
                             files:[
                                 '../../js/bootstrap.min.js',
-                                '../../plugin/text-editor/summernote.js',
+                                '../../js/summernote.js',
                                 '../../plugin/text-editor/summernote.css',
                                 '../../app/privacyPolicy/privacyPolicyController.js'
                             ]

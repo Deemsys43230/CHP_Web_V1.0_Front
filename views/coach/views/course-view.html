@@ -6,17 +6,17 @@
         <div class="row">
             <div class="col-md-12 min-height-450">
                 <a href="#course" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back</a>
-                <a ng-show="courseDetails.canedit==1" href="#courseSectionAdd" class="back-button pull-right margin-left-5"><i class="fa fa-plus-circle"></i> Add Section</a>
-                <a ng-show="courseDetails.canedit==1" href="" class="back-button pull-right margin-left-5"><i class="fa fa-paper-plane"></i> Send to Review</a>
-                <div flash-message="2000" class="col-md-4 pull-right"></div>
+                <a ng-show="courseDetails.canedit==1 && courseSections.length!=0"  href="#courseSectionAdd/{{courseDetails.courseid}}" class="back-button pull-right margin-left-5"><i class="fa fa-plus-circle"></i> Add Section</a>
+                <a ng-show="courseDetails.canedit==1 && courseSections.length!=0" href="" class="back-button pull-right margin-left-5"><i class="fa fa-paper-plane"></i> Send to Review</a>
+                <div flash-message="2000" class="col-md-3 pull-right no-padding"></div>
                 <h4 class="classic-title">
                     <span ng-show="courseDetails.canedit==0">Course View</span>
-                    <span ng-show="courseDetails.canedit==1">Course Edit</span>&nbsp;
+                    <span ng-show="courseDetails.canedit==1">Edit Course</span>&nbsp;
                 </h4>
                 <div class="row margin-top-10 margin-bottom-10">
                     <div class="col-md-3">
-                        <img class="height-100" ng-src="{{courseDetails.promoimage | trusted}}">
-                        <h5 class="row margin-top-15 text-muted">
+                        <div class="height-190"><img class="max-height-180" ng-src="{{courseDetails.promoimage | trusted}}"></div>
+                        <h5 class="row text-muted">
                             <span class="col-md-5">Category</span>
                             <span class="col-md-7">: {{courseDetails.categoryname}}</span>
                             <span class="col-md-5">Price</span>
@@ -42,14 +42,29 @@
                                 <span ng-hide="!courseDetails.publishedon">{{courseDetails.publishedon}}</span>
                             </span>
                         </h5>
-                        <span ng-show="courseDetails.canedit==1"><a href="#courseEdit/{{courseDetails.courseid}}" class="main-button margin-top-10">Edit Basic Info</a></span>
+                        <span ng-show="courseDetails.canedit==1"><a href="#courseEdit/{{courseDetails.courseid}}" class="main-button green_back margin-top-10">Edit Basic Info</a></span>
+                        <span ng-show="courseDetails.canedit==1"><a id="modal_trigger" href="#modal" class="main-button red_back margin-top-10">Delete course</a></span>
                     </div>
                     <div class="col-md-9 no-padding">
                         <h2>{{courseDetails.coursename}}</h2>
+                        <div ng-if="loaded">
+                            <div class="loader-style">
+                                <div class="loader"></div>
+                            </div>
+                        </div>
                         <h5 class="margin-top-5 text-muted">{{courseDetails.coursesubtitle}}</h5>
-                        <p class="margin-top-10 margin-right-20">{{courseDetails.coursedescription}}</p>
+                        <p class="margin-top-10 margin-right-20" ng-bind-html="courseDetails.coursedescription | html"></p>
                         <div class="margin-top-15">
-                            <h5 ng-repeat="section in courseSections" class="margin-bottom-5">Section {{section.sequenceno}} : <a href="#courseSection/{{section.sectionid}}">{{section.sectiontitle}}</a>&nbsp;&nbsp;&nbsp;<span ng-show="courseDetails.canedit==1"><a href="#courseSectionEdit" class="fa fa-pencil"></a></span></h5>
+                            <div ng-show="courseSections.length==0" class="margin-top-20">
+                                <div class="col-md-5">
+                                    <img class="pull-right" src="../../images/no-section.png"/>
+                                </div>
+                                <div class="col-md-7 margin-top-10">
+                                    <h2 class="text-gray">no section added</h2>
+                                    <a href="#courseSectionAdd/{{courseDetails.courseid}}" class="main-button margin-top-10">Add Section</a>
+                                </div>
+                            </div>
+                            <h5 ng-repeat="section in courseSections" class="margin-bottom-5">Section {{section.sequenceno}} : <a href="#courseSection/{{section.sectionid}}">{{section.sectiontitle}}</a>&nbsp;&nbsp;&nbsp;<span ng-show="courseDetails.canedit==1"><a href="#courseSectionEdit/{{section.sectionid}}" class="fa fa-pencil"></a></span></h5>
                         </div>
                     </div>
                 </div>
@@ -58,7 +73,37 @@
     </div>
 </div>
 
+
+<!-- create coach popup-->
+<div id="modal" class="popupContainer" style="display:none;">
+    <header class="popupHeader">
+        <span class="header_title">Confirmation</span>
+        <span class="modal_close"><i class="fa fa-times"></i></span>
+    </header>
+
+    <section class="popupBody">
+        <!-- Register Form -->
+        <div class="common_model">
+            <div class="text-center"><img src="../../images/alert-ring.png"/></div><br/>
+            <div>It will delete entire data of this course<br/>Are you sure want to delete this course?</div>
+            <div class="action_btns margin-top-20">
+                <div class="one_half"><a href="" class="btn btn_red modal_close" ng-click="doDeleteCourse()">Yes</a></div>
+                <div class="one_half last modal_close"><a onclick="return false;" class="btn back_btn">No</a></div>
+            </div>
+        </div>
+    </section>
+</div>
+
+
 <!-- End Page Banner -->
 
 <script type="text/javascript" src="../../js/script.js"></script>
+
+<script type="text/javascript">
+    $("#modal_trigger").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
+
+    $(function(){
+        $(".common_model").show();
+    })
+</script>
 

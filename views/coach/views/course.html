@@ -10,6 +10,11 @@
                 <div flash-message="2000" class="col-md-4 pull-right"></div>
                 <h4 class="classic-title"><span>My Courses</span></h4>
                 <div class="row margin-top-10 margin-bottom-10">
+                    <div ng-if="loaded">
+                        <div class="loader-style">
+                            <div class="loader"></div>
+                        </div>
+                    </div>
                     <div class="col-md-4" ng-repeat="courseList in myCourseList">
                         <a href="#courseView/{{courseList.courseid}}">
                             <div class="dashboard">

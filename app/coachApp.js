@@ -210,7 +210,9 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'coachApp',
                             files:[
-                                '../../app/course/courseController.js'
+                                '../../app/course/courseController.js',
+                                '../../plugin/popup/style.css',
+                                '../../plugin/popup/jquery.leanModal.min.js'
                             ]
                         })
                     }
@@ -231,33 +233,37 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'CourseController'
             }).
-            when('/courseSectionEdit', {
+            when('/courseSectionEdit/:sectionId', {
                 templateUrl: 'views/course-section-add-edit.html',
                 resolve: {
                     loadMyFiles:function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'coachApp',
                             files:[
-                                '../../app/coachAdvice/coachAdviceController.js'
+                                '../../app/course/courseController.js',
+                                '../../plugin/text-editor/summernote.js',
+                                '../../plugin/text-editor/summernote.css'
                             ]
                         })
                     }
                 },
-                controller:'CoachAdviceController'
+                controller:'CourseEditController'
             }).
-            when('/courseSectionAdd', {
+            when('/courseSectionAdd/:courseId', {
                 templateUrl: 'views/course-section-add-edit.html',
                 resolve: {
                     loadMyFiles:function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'coachApp',
                             files:[
-                                '../../app/coachAdvice/coachAdviceController.js'
+                                '../../app/course/courseController.js',
+                                '../../plugin/text-editor/summernote.js',
+                                '../../plugin/text-editor/summernote.css'
                             ]
                         })
                     }
                 },
-                controller:'CoachAdviceController'
+                controller:'CourseEditController'
             }).
             when('/courseEdit/:id', {
                 templateUrl: 'views/course-add-edit.html',
@@ -290,12 +296,14 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../plugin/popup/jquery.leanModal.min.js',
                                 '../../css/course-image-upload.css',
                                 '../../js/image-upload.js',
-                                '../../app/coachProfile/coachProfileController.js'
+                                '../../plugin/text-editor/summernote.js',
+                                '../../plugin/text-editor/summernote.css',
+                                '../../app/course/courseController.js'
                             ]
                         })
                     }
                 },
-                controller:'CoachProfileController'
+                controller:'CourseEditController'
             }).
             otherwise({
                 redirectTo: '/dashboard'

@@ -5,48 +5,64 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12 min-height-450">
-                <a href="#courseView" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back</a>
+                <span ng-show="isAdd==0"><a href="#courseView/{{courseDetails.courseid}}" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back</a></span>
+                <span ng-show="isAdd==1"><a href="#course" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back</a></span>
                 <div flash-message="2000" class="col-md-4 pull-right"></div>
-                <h4 class="classic-title"><span>Course Edit</span></h4>
+                <h4 class="classic-title"><span>{{CourseTitle}}</span></h4>
                 <div class="row margin-top-10 margin-bottom-10">
-                    <div class="col-md-2 margin-top-7">
-                        <h4>Course Name <span class="pull-right">:</span></h4><br/>
-                        <h4 class="margin-top-10">Course Subtitle <span class="pull-right">:</span></h4><br/>
-                        <h4 class="margin-top-10">Course Category <span class="pull-right">:</span></h4><br/>
-                        <h4 class="margin-top-10">Course Price <span class="pull-right">:</span></h4>
-                    </div>
-                    <div class="col-md-7">
-                        <input class="search-input" placeholder="Enter course title" ng-model="courseDetails.coursename">
-                        <input class="search-input margin-top-15" placeholder="Enter course sub-title" ng-model="courseDetails.coursesubtitle">
-                        <select class="full-width course-select margin-top-15"  ng-model="courseDetails.categoryname" name="secretquestion" required>
-                            <option value="">Select the category</option>
-                            <option value="1">Aging</option>
-                            <option value="2">Beauty & Fashion</option>
-                            <option value="3">Diets & Weight Loss</option>
-                            <option value="4">Health & Fitness</option>
-                            <option value="5">Health Tips</option>
-                            <option value="6">Healthy Foods</option>
-                        </select>
-                        <input class="search-input margin-top-15" placeholder="Enter course price" ng-model="courseDetails.price">
-                        <p class="text-red margin-top-5"><b>Note : Price "zero" will be consider as free course.</b></p>
-                    </div>
-                    <div class="col-md-3">
-                        <img id="profile-image-change" ng-src="{{userProfile.imageurl | trusted}}">
-                        <input type="hidden" ng-model="userProfile.imageurl" name="profileImage" id="profileImageId"/>
-                        <a id="modal_trigger" href="#modal" class="btn btn-sm btn-warning margin-top-10">Change Course Image</a>
-                    </div>
-                    <div class="col-md-12 no-padding">
-                        <div class="col-md-2 margin-top-15">
-                            <h4>Course Description <span class="pull-right">:</span></h4>
+                    <form name="courseForm">
+                        <div class="col-md-2 margin-top-7">
+                            <h4>Course Name <span class="pull-right">:</span></h4><br/>
+                            <h4 class="margin-top-10">Course Subtitle <span class="pull-right">:</span></h4><br/>
+                            <h4 class="margin-top-10">Course Category <span class="pull-right">:</span></h4><br/>
+                            <h4 class="margin-top-10">Course Price <span class="pull-right">:</span></h4>
                         </div>
-                        <div class="col-md-10 margin-top-10">
-                            <div summernote config="options" name="content"  ng-model="courseDetails.coursedescription" required></div>
+                        <div class="col-md-7">
+                            <span ng-show="courseForm.title.$dirty&&courseForm.title.$invalid">
+                                <span class="error-message textarea-errormessage40" ng-show="courseForm.title.$error.required"><span>Required.</span></span>
+                            </span>
+                            <input class="section-input" maxlength="150" name="title" placeholder="Enter course title" ng-model="courseDetails.coursename" required>
+                            <div class="text-count-position"><span class="text-count">{{(150 - courseDetails.coursename.length)}}</span></div>
+
+                            <span ng-show="courseForm.subtitle.$dirty&&courseForm.subtitle.$invalid">
+                                <span class="error-message textarea-errormessage55" ng-show="courseForm.subtitle.$error.required"><span>Required.</span></span>
+                            </span>
+                            <input class="section-input margin-top-15" maxlength="200" name="subtitle" placeholder="Enter course sub-title" ng-model="courseDetails.coursesubtitle" required>
+                            <div class="text-count-position"><span class="text-count">{{(200 - courseDetails.coursesubtitle.length)}}</span></div>
+
+                            <select class="full-width course-select margin-top-15" ng-model="courseDetails.categoryid" ng-options="option.categoryid as option.categoryname for option in options">
+                                <option value="" selected hidden />
+                            </select>
+
+                            <span ng-show="courseForm.price.$dirty&&courseForm.price.$invalid">
+                                <span class="error-message textarea-errormessage55" ng-show="courseForm.price.$error.required"><span>Required.</span></span>
+                            </span>
+                            <input class="search-input margin-top-15" name="price" placeholder="Enter course price" ng-model="courseDetails.price" required>
+                            <p class="text-red margin-top-5"><b>Note : Price "zero" will be consider as free course.</b></p>
                         </div>
-                    </div>
-                    <div class="col-md-12 text-center">
-                        <a href="" class="btn btn-success">Save Changes</a>
-                        <a href="#courseView" class="btn btn-danger">Cancel</a>
-                    </div>
+                        <div class="col-md-3">
+                            <span ng-show="isAdd==1"><img src="{{courseDetails.promoimage | trusted}}"></span>
+                            <span ng-show="isAdd==0"><img ng-src="{{courseDetails.promoimage | trusted}}"></span>
+                            <a onclick="return false;" id="modal_trigger" href="#modal" class="btn btn-sm btn-warning margin-top-10">Change Course Image</a>
+                        </div>
+                        <div class="col-md-12 no-padding">
+                            <div class="col-md-2 margin-top-15">
+                                <h4>Course Description <span class="pull-right">:</span></h4>
+                            </div>
+                            <div class="col-md-10 margin-top-10">
+                                <span ng-show="courseForm.content.$dirty&&courseForm.content.$invalid">
+                                <span class="error-message textarea-errormessage40" ng-show="courseForm.content.$error.required"><span>Required.</span></span>
+                            </span>
+                                <div summernote config="options" name="content"  ng-model="courseDetails.coursedescription" required></div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 text-center margin-top-15">
+                            <span ng-show="isAdd==1"><a href="" ng-disabled="courseForm.$invalid" class="btn btn-success" ng-click="doAddCourse()">Save Course</a></span>
+                            <span ng-show="isAdd==0"><a href="" class="btn btn-success" ng-click="doUpdateCourse()">Save Changes</a></span>
+                            <span ng-show="isAdd==0"><a href="#courseView/{{courseDetails.courseid}}" class="btn btn-danger">Cancel</a></span>
+                            <span ng-show="isAdd==1"><a href="#course" class="btn btn-danger">Cancel</a></span>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -65,6 +81,7 @@
         <div class="common_model">
             <div class="image-editor">
                 <div class="cropit-image-preview center-block"></div>
+                <p class="text-red text-bold">Note : Minimum size : 270x180 pixels</p>
                 <div class="image-size-label">
                     Resize image
                 </div>
@@ -73,11 +90,11 @@
                 <div class="action_btns margin-top-20">
                     <div class="one_half">
                         <div class="fileUpload food-button">
-                            <span>Choose File</span>
+                            <span>Choose Image</span>
                             <input type="file" class="upload cropit-image-input" />
                         </div>
                     </div>
-                    <div class="one_half last"><a href="" onclick="return false;" class="food-button export modal_close" ng-click="doUpdateProfileImage()">Upload Image</a></div>
+                    <div class="one_half last"><a href="" onclick="return false;" class="food-button export modal_close" ng-click="doUpdateImage()">Upload Image</a></div>
                 </div>
             </div>
         </div>

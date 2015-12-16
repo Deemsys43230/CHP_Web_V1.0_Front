@@ -233,6 +233,14 @@ p strong {
 	margin-right: 10px;
 }
 
+a.main-button.red_back{
+    background-color: #ff704d;
+}
+
+a.main-button.green_back{
+    background-color: #5cd65c;
+}
+
 a.main-button, input[type="submit"] {
     display: inline-block;
     text-decoration: none;
@@ -1754,6 +1762,10 @@ input[type="submit"] {
 
 .margin-top-20 {
     margin-top: 20px;
+}
+
+.margin-top-30 {
+    margin-top: 30px;
 }
 
 .margin-top-3 {
@@ -6844,9 +6856,13 @@ select.course-select {
     width: 90%;
     border: 1px solid #ccc!important;
     outline: none !important;
-    color: #777;
+    color: #666;
     border-radius: 0 !important;
     background-color: #fff;
+}
+
+#select-item:first-child {
+    display: none;
 }
 
 input.main {
@@ -7966,6 +7982,10 @@ ul.sidebar-menu li a{
     height: 150px !important;
 }
 
+.height-190{
+    height: 190px !important;
+}
+
 .margin-left-10{
     margin-left: 10px !important;
 }
@@ -8143,6 +8163,9 @@ a:hover, a:visited, a:link, a:active
 }
 .textarea-errormessage40{
 	 top: 40px;
+ }
+.textarea-errormessage55{
+	 top: 55px;
  }
 .textarea-errormessage20{
 	top: 20px;
@@ -8541,6 +8564,10 @@ tr.sort-icon th i{
 
 .max-width-200{
 	max-width: 200px !important;
+}
+
+.max-height-180{
+	max-height: 180px !important;
 }
 
 .min-height-250{
@@ -9438,6 +9465,14 @@ input.search-input{
      color:#666;
  }
 
+input.section-input{
+    display: block;
+    width:100%;
+    padding: 8px 80px 8px 20px;
+    border:1px solid #DDD;
+    color:#666;
+}
+
 textarea.forum-textarea{
     display: block;
     width:100%;
@@ -9575,4 +9610,20 @@ input.friend-search{
     padding: 0px 10px;
     font-size:13px;
     border-radius: 2px;
+}
+
+.text-count-position{
+    position: relative;
+}
+
+.text-count{
+    position: absolute;
+    width:60px;
+    text-align: center;
+    right:4px;
+    top:-35px;
+    background-color: #ddd;
+    font-size: 15px;
+    padding: 5px 0;
+    font-weight: bold
 }

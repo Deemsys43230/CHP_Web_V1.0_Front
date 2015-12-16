@@ -43,7 +43,7 @@ angular.module("summernote",[])
       },
 
       summernoteConfig.onkeydown=function(evt){
-          $scope.keydown({evt:evt})
+          $scope.keydown({evt:evt});
       },
 
       angular.isDefined($attrs.onImageUpload)&&(summernoteConfig.onImageUpload=function(files,editor)
@@ -52,10 +52,9 @@ angular.module("summernote",[])
       {var newValue=element.code();ngModel&&ngModel.$viewValue!==newValue&&$timeout
       (function(){ngModel.$setViewValue(newValue)},0)};
 
-        summernoteConfig.onChange=
-          function(contents){updateNgModel(),
-              $scope.change({contents:contents,editable:$scope.editable})},
-            element.summernote(summernoteConfig);
+        summernoteConfig.onkeyup=function(contents){
+            updateNgModel(),$scope.change({contents:contents,editable:$scope.editable})
+        },element.summernote(summernoteConfig);
 
           var unwatchNgModel,
               editor$=element.next(".note-editor");
