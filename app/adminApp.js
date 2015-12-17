@@ -905,11 +905,14 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
-                                '../../js/bootstrap.min.js'
+                                '../../js/bootstrap.min.js',
+                                '../../app/test/testController.js',
+                                '../../angular/angular-utils-pagination/dirPagination.js'
                             ]
                         })
                     }
-                }
+                },
+                controller:'CourseAdminController'
             }).
             when('/coursePending', {
                 templateUrl: 'views/course-pending.html',
@@ -918,37 +921,47 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
-                                '../../js/bootstrap.min.js'
+                                '../../js/bootstrap.min.js',
+                                '../../app/test/testController.js',
+                                '../../plugin/popup/style.css',
+                                '../../plugin/popup/jquery.leanModal.min.js',
+                                '../../angular/angular-utils-pagination/dirPagination.js'
                             ]
                         })
                     }
-                }
+                },
+                controller:'CourseAdminController'
             }).
-            when('/courseDetails', {
-                templateUrl: 'views/course-details.html',
+
+            when('/courseDetail/:id', {
+                templateUrl: '../user/views/course-details.html',
                 resolve: {
                     loadMyFiles:function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
-                                '../../js/bootstrap.min.js'
+                                '../../js/bootstrap.min.js',
+                                '../../app/test/testController.js'
                             ]
                         })
                     }
-                }
+                },
+                controller:'CourseAdminController'
             }).
-            when('/courseView', {
-                templateUrl: 'views/course-view.html',
+            when('/courseView/:id', {
+                templateUrl: '../user/views/course-view.html',
                 resolve: {
                     loadMyFiles:function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
-                                '../../js/bootstrap.min.js'
+                                '../../js/bootstrap.min.js',
+                                '../../app/test/testController.js'
                             ]
                         })
                     }
-                }
+                },
+                controller:'CourseAdminController'
             }).
           /*  when('/FAQ', {
                 templateUrl: '../../views/common/FAQ.html',

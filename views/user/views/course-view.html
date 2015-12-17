@@ -6,18 +6,19 @@
         <div id="demography-content" class="height-auto">
             <div class="col-md-12" ng-init="courseSectionDetails()">
                 <div class="margin-rl">
-                    <a href="#myCourses" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back</a>
+                    <a href="#courseDetail/{{sectionDetail.courseid}}" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back</a>
                     <div flash-message="2000" class="col-md-4 pull-right"></div>
                     <h4 class="classic-title"><span>Course View</span></h4>
                     <div class="row margin-top-10 margin-bottom-10">
                         <div class="col-md-8">
-                            <h2 class="margin-bottom-10">Section 1 : {{sectionDetail.sectiontitle}}</h2>
+                            <h2 class="margin-bottom-10">Section {{sectionno}} : {{sectionDetail.sectiontitle}}</h2>
                             <p class="margin-tb-10">
                                 {{sectionDetail.sectioncontent}}
                             </p>
+                            <input type="hidden" name="indexvalue" ng-model="currentIndex"/>
                             <div class="text-center margin-top-20">
-                                <a href="" class="course_button"><i class="fa fa-backward"></i>&nbsp;&nbsp; Previous Section</a>
-                                <a href="" class="course_button margin-left-20" ng-click="">Next Section  &nbsp;&nbsp;<i class="fa fa-forward"></i></a>
+                                <a href="" class="btn course_button" ng-disabled="prevdisable" ng-click="getPreviousIndex()"><i class="fa fa-backward"></i>&nbsp;&nbsp; Previous Section</a>
+                                <a href="" class="btn course_button margin-left-20" ng-disabled="nextdisable" ng-click="getNextIndex()">Next Section  &nbsp;&nbsp;<i class="fa fa-forward"></i></a>
                             </div>
                         </div>
                         <div class="col-md-4">

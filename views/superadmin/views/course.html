@@ -11,8 +11,8 @@
                     <tr class="warning">
                         <th class="col-md-2">Course Name</th>
                         <th class="col-md-2">Course Subtitle</th>
-                        <th class="col-md-1">Category</th>
-                        <th class="col-md-2">Author Name</th>
+                        <th class="col-md-2">Category</th>
+                        <th class="col-md-1">Author Name</th>
                         <th class="col-md-1">Price</th>
                         <th class="col-md-1">Enroll</th>
                         <th class="col-md-1">Created On</th>
@@ -21,81 +21,27 @@
                     </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Course Name</td>
-                            <td>Course subtitle</td>
-                            <td>Category</td>
-                            <td>john kennedy</td>
-                            <td>Free</td>
-                            <td>1233</td>
-                            <td>12/09/2015</td>
-                            <td>12/09/2015</td>
+                        <tr dir-paginate="course in coursefilter = (courseList |startsWithLetter: coachsearch| itemsPerPage:5)" ng-show="courseList.length!=0">
+                            <td>{{course.coursename}}</td>
+                            <td>{{course.coursesubtitle}}</td>
+                            <td>{{course.categoryname}}</td>
+                            <td>{{course.ownername}}</td>
+                            <td ng-if="course.price==0">Free</td>
+                            <td ng-if="course.price!=0">{{course.price}}$</td>
+                            <td>{{course.enrollcount}}</td>
+                            <td>{{course.createdon}}</td>
+                            <td>{{course.publishedon}}</td>
                             <td>
-                                <a href="#courseView" class="btn-xs btn-primary">View course</a>
+                                <a href="#courseDetail/{{course.courseid}}" class="btn-xs btn-primary">View course</a>
                             </td>
                         </tr>
-                        <tr>
-                            <td>Course Name</td>
-                            <td>Course subtitle</td>
-                            <td>Category</td>
-                            <td>john kennedy</td>
-                            <td>12 $</td>
-                            <td>1233</td>
-                            <td>12/09/2015</td>
-                            <td>12/09/2015</td>
-                            <td>
-                                <a href="#courseView" class="btn-xs btn-primary">View course</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Course Name</td>
-                            <td>Course subtitle</td>
-                            <td>Category</td>
-                            <td>john kennedy</td>
-                            <td>Free</td>
-                            <td>1233</td>
-                            <td>12/09/2015</td>
-                            <td>12/09/2015</td>
-                            <td>
-                                <a href="#courseView" class="btn-xs btn-primary">View course</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Course Name</td>
-                            <td>Course subtitle</td>
-                            <td>Category</td>
-                            <td>john kennedy</td>
-                            <td>12 $</td>
-                            <td>1233</td>
-                            <td>12/09/2015</td>
-                            <td>12/09/2015</td>
-                            <td>
-                                <a href="#courseView" class="btn-xs btn-primary">View course</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Course Name</td>
-                            <td>Course subtitle</td>
-                            <td>Category</td>
-                            <td>john kennedy</td>
-                            <td>12 $</td>
-                            <td>1233</td>
-                            <td>12/09/2015</td>
-                            <td>12/09/2015</td>
-                            <td>
-                                <a href="#courseView" class="btn-xs btn-primary">View course</a>
-                            </td>
-                        </tr>
+                        <tr ng-show="courseList.length==0"><td colspan="3" class="text-center">No Records Found !!! </td></tr>
+                        <tr ng-show="!coursefilter.length"><td colspan="3" class="text-center">No Records Found !!!</td></tr>
+
                     </tbody>
                 </table>
                 <!-- Start Pagination -->
-                <div id="pagination">
-                    <span class="all-pages">Page 1 of 3</span>
-                    <span class="current page-num">1</span>
-                    <a class="page-num" href="#">2</a>
-                    <a class="page-num" href="#">3</a>
-                    <a class="next-page" href="#">Next</a>
-                </div>
+                <dir-pagination-controls ng-show="paginationLoad" boundary-links="true"> </dir-pagination-controls>
                 <!-- End Pagination -->
             </div>
         </div>
