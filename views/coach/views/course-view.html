@@ -1,3 +1,9 @@
+<style>
+    table.sorting-table {cursor: move;}
+    table tr.sorting-row td {background-color: #fff; box-shadow: 0 0 2px #ccc;padding: 3px 5px 0 5px;}
+    table tr.sorting-row td.sorter {background-color: transparent !important;box-shadow:none!important;}
+    table td.sorter {color: #f80; width: 25px; cursor: move;}
+</style>
 
 <!-- Start Page Banner -->
 
@@ -6,8 +12,10 @@
         <div class="row">
             <div class="col-md-12 min-height-450">
                 <a href="#course" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back</a>
-                <a ng-show="courseDetails.canedit==1 && courseSections.length!=0"  href="#courseSectionAdd/{{courseDetails.courseid}}" class="back-button pull-right margin-left-5"><i class="fa fa-plus-circle"></i> Add Section</a>
-                <a ng-show="courseDetails.canedit==1 && courseSections.length!=0" href="" class="back-button pull-right margin-left-5"><i class="fa fa-paper-plane"></i> Send to Review</a>
+                <span ng-show="courseDetails.canedit==1 && courseSections.length!=0">
+                    <a href="#courseSectionAdd/{{courseDetails.courseid}}" class="back-button pull-right margin-left-5"><i class="fa fa-plus-circle"></i> Add Section</a>
+                    <a ng-click="reviewModel()" id="modal_trigger1" href="" class="back-button pull-right margin-left-5"><i class="fa fa-paper-plane"></i> Send to Review</a>
+                </span>
                 <div flash-message="2000" class="col-md-3 pull-right no-padding"></div>
                 <h4 class="classic-title">
                     <span ng-show="courseDetails.canedit==0">Course View</span>
@@ -43,7 +51,7 @@
                             </span>
                         </h5>
                         <span ng-show="courseDetails.canedit==1"><a href="#courseEdit/{{courseDetails.courseid}}" class="main-button green_back margin-top-10">Edit Basic Info</a></span>
-                        <span ng-show="courseDetails.canedit==1"><a id="modal_trigger" href="#modal" class="main-button red_back margin-top-10">Delete course</a></span>
+                        <span ng-show="courseDetails.canedit==1"><a ng-click="deleteModel()" id="modal_trigger" href="" class="main-button red_back margin-top-10">Delete course</a></span>
                     </div>
                     <div class="col-md-9 no-padding">
                         <h2>{{courseDetails.coursename}}</h2>
@@ -55,7 +63,7 @@
                         <h5 class="margin-top-5 text-muted">{{courseDetails.coursesubtitle}}</h5>
                         <p class="margin-top-10 margin-right-20" ng-bind-html="courseDetails.coursedescription | html"></p>
                         <div class="margin-top-15">
-                            <div ng-show="courseSections.length==0" class="margin-top-20">
+                            <div ng-show="courseSections.length==0 && courseDetails.canedit==1" class="margin-top-20">
                                 <div class="col-md-5">
                                     <img class="pull-right" src="../../images/no-section.png"/>
                                 </div>
@@ -64,8 +72,25 @@
                                     <a href="#courseSectionAdd/{{courseDetails.courseid}}" class="main-button margin-top-10">Add Section</a>
                                 </div>
                             </div>
-                            <h5 ng-repeat="section in courseSections" class="margin-bottom-5">Section {{section.sequenceno}} : <a href="#courseSection/{{section.sectionid}}">{{section.sectiontitle}}</a>&nbsp;&nbsp;&nbsp;<span ng-show="courseDetails.canedit==1"><a href="#courseSectionEdit/{{section.sectionid}}" class="fa fa-pencil"></a></span></h5>
+                            <div ng-show="courseDetails.canedit==0">
+                                <h5 ng-repeat="section in courseSections" class="margin-bottom-5">Section {{section.sequenceno}} : <a href="#courseSection/{{section.sectionid}}">{{section.sectiontitle}}</a>&nbsp;&nbsp;&nbsp;<span ng-show="courseDetails.canedit==1"><a href="#courseSectionEdit/{{section.sectionid}}" class="fa fa-pencil"></a></span></h5>
+                            </div>
                         </div>
+
+                        <table attr-sample="thetable" ng-show="courseDetails.canedit==1">
+                            <tbody>
+                            <tr ng-repeat="section in courseSections">
+                                <td class="sorter fa fa-arrows"></td>
+                                <td><h5 class="margin-bottom-5">&nbsp;&nbsp;Section {{section.sequenceno}} : <a href="#courseSection/{{section.sectionid}}">{{section.sectiontitle}}</a>&nbsp;&nbsp;&nbsp;<span ng-show="courseDetails.canedit==1"><a href="#courseSectionEdit/{{section.sectionid}}" class="fa fa-pencil"></a></span></h5></td>
+                            </tr>
+                            </tbody>
+                            <tfoot hidden>
+                            <tr>
+                                <td colspan="4" id="logarea">&nbsp;</td>
+                            </tr>
+                            </tfoot>
+                        </table>
+
                     </div>
                 </div>
             </div>
@@ -75,7 +100,7 @@
 
 
 <!-- create coach popup-->
-<div id="modal" class="popupContainer" style="display:none;">
+<div id="modal" class="popupContainer" style="display:none;left: 37%!important;">
     <header class="popupHeader">
         <span class="header_title">Confirmation</span>
         <span class="modal_close"><i class="fa fa-times"></i></span>
@@ -85,9 +110,29 @@
         <!-- Register Form -->
         <div class="common_model">
             <div class="text-center"><img src="../../images/alert-ring.png"/></div><br/>
-            <div>It will delete entire data of this course<br/>Are you sure want to delete this course?</div>
+            <h5 class="text-center">It will delete entire data of this course<br/>Are you sure want to delete this course?</h5>
             <div class="action_btns margin-top-20">
                 <div class="one_half"><a href="" class="btn btn_red modal_close" ng-click="doDeleteCourse()">Yes</a></div>
+                <div class="one_half last modal_close"><a onclick="return false;" class="btn back_btn">No</a></div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- create coach popup-->
+<div id="review-modal" class="popupContainer" style="display:none;left: 37%!important;">
+    <header class="popupHeader">
+        <span class="header_title">Send Confirmation</span>
+        <span class="modal_close"><i class="fa fa-times"></i></span>
+    </header>
+
+    <section class="popupBody">
+        <!-- Register Form -->
+        <div class="common_model">
+            <div class="text-center"><img src="../../images/alert-ring.png"/></div><br/>
+            <h5 class="text-center">You can't edit this course after<br/> sent to the review<br/><br/>Are you sure want to sent this<br/> course for review?</h5>
+            <div class="action_btns margin-top-20">
+                <div class="one_half"><a href="" class="btn btn_red modal_close" ng-click="sendCourseToReview()">Yes</a></div>
                 <div class="one_half last modal_close"><a onclick="return false;" class="btn back_btn">No</a></div>
             </div>
         </div>
@@ -98,12 +143,18 @@
 <!-- End Page Banner -->
 
 <script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src="../../js/RowSorter.js"></script>
 
 <script type="text/javascript">
     $("#modal_trigger").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
+    $("#modal_trigger1").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
+</script>
 
-    $(function(){
-        $(".common_model").show();
-    })
+<script type="text/javascript">
+    var logarea = document.getElementById("logarea");
+    function log(text)
+    {
+        logarea.innerHTML = text;
+    }
 </script>
 

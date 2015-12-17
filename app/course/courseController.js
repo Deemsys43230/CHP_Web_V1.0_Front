@@ -34,19 +34,79 @@ coachApp.controller('CourseController',function($scope,requestHandler,Flash,$rou
     }
     else{
         $scope.loaded=true;
-        requestHandler.postRequest("coach/getCourseDetail/",{"courseid":$routeParams.id}).then(function(response) {
-            $scope.courseDetails = response.data['Course details'];
-            $scope.courseDetails.promoimage = $scope.courseDetails.promoimage+"?decache="+Math.random();
-        },function(){
-            errorMessage(Flash,"Please try again later!")
-        });
 
-        requestHandler.postRequest("coach/getCourseSections/",{"courseid":$routeParams.id}).then(function(response) {
-            $scope.courseSections = response.data.CourseSections.sections;
-            $scope.loaded=false;
-        },function(){
-            errorMessage(Flash,"Please try again later!")
-        });
+        $scope.getCourseDetails=function(){
+            requestHandler.postRequest("coach/getCourseDetail/",{"courseid":$routeParams.id}).then(function(response) {
+                $scope.courseDetails = response.data['Course details'];
+                $scope.courseDetails.promoimage = $scope.courseDetails.promoimage+"?decache="+Math.random();
+                $scope.getAllSections();
+            },function(){
+                errorMessage(Flash,"Please try again later!")
+            });
+        };
+
+        $scope.getAllSections=function(){
+            requestHandler.postRequest("coach/getCourseSections/",{"courseid":$routeParams.id}).then(function(response) {
+                $scope.courseSections = response.data.CourseSections.sections;
+                $scope.loaded=false;
+            },function(){
+                errorMessage(Flash,"Please try again later!")
+            });
+        };
+
+        $scope.getCourseDetails();
+
+        if($scope.courseSections!=0){
+            var table = document.getElementById("table1");
+            RowSorter('table[attr-sample=thetable]', {
+                handler: 'td.sorter',
+                stickFirstRow : true,
+                stickLastRow  : false,
+                onDragStart: function(tbody, row, index)
+                {
+                    log('start index is ' + index);
+                },
+                onDrop: function(tbody, row, new_index, old_index)
+                {
+                    $scope.loaded=true;
+                    $scope.sortSectionIdlist = [];
+                    $scope.sortSectionIdUnlist = [];
+                    var pickIndex = old_index+1;
+                    var dropIndex = new_index+1;
+                    if(pickIndex<dropIndex){
+                        $.each($scope.courseSections,function(index,value){
+                            if(value.sequenceno<pickIndex)
+                            $scope.sortSectionIdlist.push(value.sectionid);
+                            else if(pickIndex<=value.sequenceno && value.sequenceno<dropIndex)
+                            $scope.sortSectionIdlist.push($scope.courseSections[index+1].sectionid);
+                            else if(value.sequenceno==dropIndex)
+                            $scope.sortSectionIdlist.push($scope.courseSections[pickIndex-1].sectionid);
+                            else
+                            $scope.sortSectionIdlist.push(value.sectionid);
+                        });
+                    }
+                    else{
+                        $.each($scope.courseSections,function(index,value){
+                            $scope.sortSectionIdUnlist.push(value.sectionid);
+                            if(value.sequenceno<dropIndex)
+                                $scope.sortSectionIdlist.push(value.sectionid);
+                            else if(dropIndex<value.sequenceno && value.sequenceno<=pickIndex)
+                                $scope.sortSectionIdlist.push($scope.courseSections[index-1].sectionid);
+                            else if(value.sequenceno==dropIndex)
+                             $scope.sortSectionIdlist.push($scope.courseSections[pickIndex-1].sectionid);
+                             else
+                             $scope.sortSectionIdlist.push(value.sectionid);
+                        });
+                    }
+                    requestHandler.postRequest("coach/swapCourseSection/",{"sectionidList":$scope.sortSectionIdlist,"courseid":$routeParams.id}).then(function(response) {
+                        successMessage(Flash,"Sections Sorted Successfully!");
+                        $scope.getAllSections();
+                    },function(){
+                        errorMessage(Flash,"Please try again later!")
+                    });
+                }
+            });
+        }
     }
 
     if(!$routeParams.sectionId){
@@ -92,6 +152,55 @@ coachApp.controller('CourseController',function($scope,requestHandler,Flash,$rou
             $location.path("course");
         },function(){
             errorMessage(Flash,"Please try again later!")
+        });
+    };
+
+    $scope.sendCourseToReview=function(){
+        requestHandler.postRequest("coach/sendCourseForReview/",{"courseid":$routeParams.id}).then(function(response) {
+            successMessage(Flash,"Course Sent for Review!");
+            $scope.getCourseDetails();
+        },function(){
+            errorMessage(Flash,"Please try again later!")
+        });
+    };
+
+    $scope.reviewModel=function(){
+        $(function(){
+            $("#lean_overlay").fadeTo(1000);
+            $("#review-modal").fadeIn(600);
+            $(".common_model").show();
+        });
+
+        $(".modal_close").click(function(){
+            $(".common_model").hide();
+            $("#review-modal").hide();
+            $("#lean_overlay").hide();
+        });
+
+        $("#lean_overlay").click(function(){
+            $(".common_model").hide();
+            $("#review-modal").hide();
+            $("#lean_overlay").hide();
+        });
+    };
+
+    $scope.deleteModel=function(){
+        $(function(){
+            $("#lean_overlay").fadeTo(1000);
+            $("#modal").fadeIn(600);
+            $(".common_model").show();
+        });
+
+        $(".modal_close").click(function(){
+            $(".common_model").hide();
+            $("#modal").hide();
+            $("#lean_overlay").hide();
+        });
+
+        $("#lean_overlay").click(function(){
+            $(".common_model").hide();
+            $("#modal").hide();
+            $("#lean_overlay").hide();
         });
     };
 
@@ -309,6 +418,26 @@ coachApp.controller('CourseEditController',function($scope,requestHandler,Flash,
             errorMessage(Flash,"Please try again later!")
         });
 
+    };
+
+    $scope.openCourseImageModel=function(){
+        $(function(){
+            $("#lean_overlay").fadeTo(1000);
+            $("#modal").fadeIn(600);
+            $(".common_model").show();
+        });
+
+        $(".modal_close").click(function(){
+            $(".common_model").hide();
+            $("#modal").hide();
+            $("#lean_overlay").hide();
+        });
+
+        $("#lean_overlay").click(function(){
+            $(".common_model").hide();
+            $("#modal").hide();
+            $("#lean_overlay").hide();
+        });
     };
 
 });

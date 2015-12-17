@@ -36,14 +36,15 @@
 
                             <span ng-show="courseForm.price.$dirty&&courseForm.price.$invalid">
                                 <span class="error-message textarea-errormessage55" ng-show="courseForm.price.$error.required"><span>Required.</span></span>
+                                <span class="error-message textarea-errormessage55" ng-show="courseForm.price.$error.pattern"><span>Invalid&nbsp;Format.</span></span>
                             </span>
-                            <input class="search-input margin-top-15" name="price" placeholder="Enter course price" ng-model="courseDetails.price" required>
+                            <input class="search-input margin-top-15" name="price" ng-pattern="/^\-?\d+((\.|\,)\d+)?$/" placeholder="Enter course price" ng-model="courseDetails.price" required>
                             <p class="text-red margin-top-5"><b>Note : Price "zero" will be consider as free course.</b></p>
                         </div>
                         <div class="col-md-3">
                             <span ng-show="isAdd==1"><img src="{{courseDetails.promoimage | trusted}}"></span>
                             <span ng-show="isAdd==0"><img ng-src="{{courseDetails.promoimage | trusted}}"></span>
-                            <a onclick="return false;" id="modal_trigger" href="#modal" class="btn btn-sm btn-warning margin-top-10">Change Course Image</a>
+                            <a ng-click="openCourseImageModel()" id="modal_trigger" href="" class="btn btn-sm btn-warning margin-top-10">Change Course Image</a>
                         </div>
                         <div class="col-md-12 no-padding">
                             <div class="col-md-2 margin-top-15">
@@ -51,8 +52,8 @@
                             </div>
                             <div class="col-md-10 margin-top-10">
                                 <span ng-show="courseForm.content.$dirty&&courseForm.content.$invalid">
-                                <span class="error-message textarea-errormessage40" ng-show="courseForm.content.$error.required"><span>Required.</span></span>
-                            </span>
+                                    <span class="error-message textarea-errormessage40" ng-show="courseForm.content.$error.required"><span>Required.</span></span>
+                                </span>
                                 <div summernote config="options" name="content"  ng-model="courseDetails.coursedescription" required></div>
                             </div>
                         </div>
@@ -70,7 +71,7 @@
 </div>
 
 <!-- create coach popup-->
-<div id="modal" class="popupContainer" style="display:none;">
+<div id="modal" class="popupContainer" style="display:none;left:37%!important;">
     <header class="popupHeader">
         <span class="header_title">Change Profile Image</span>
         <span class="modal_close"><i class="fa fa-times"></i></span>
@@ -107,9 +108,5 @@
 
 <script type="text/javascript">
     $("#modal_trigger").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
-
-    $(function(){
-        $(".common_model").show();
-    })
 </script>
 
