@@ -348,24 +348,20 @@ adminApp.controller('CourseAdminController',['$scope','requestHandler','Flash','
     };
 
     $scope.doAcceptCourse = function(course){
-        if($scope.page == 'pending'){
+
             requestHandler.postRequest("admin/publishCourse/",{"courseid":course}).then(function(response){
 
-                $scope.pendingcourselist();
-                successMessage(Flash,"Successfully Published");
+                if($scope.page == 'pending'){
+                    $scope.pendingcourselist();
+                    successMessage(Flash,"Successfully Published");
+                }
+                else{
+                    $location.path("courseDetail/"+course);
+                    successMessage(Flash,"Successfully Published");
+                }
             },function(){
                 errorMessage(Flash,"Please try again later!")
             });
-        }
-        else{
-            requestHandler.postRequest("admin/publishCourse/",{"courseid":$routeParams.id}).then(function(response){
-                 $location.path("courseDetail/"+course);
-                successMessage(Flash,"Successfully Published");
-
-        },function(){
-            errorMessage(Flash,"Please try again later!")
-        });
-        }
     };
 
 
@@ -402,7 +398,10 @@ adminApp.controller('CourseAdminController',['$scope','requestHandler','Flash','
         $scope.coursesearch="";
     });
 
-    $scope.modal =function(){
+    $scope.modal =function(courseid){
+
+        $scope.courseid = courseid;
+
         $(function(){
             $("#lean_overlay").fadeTo(1000);
             $(".modalRejectCourse").fadeIn(600);
@@ -424,7 +423,9 @@ adminApp.controller('CourseAdminController',['$scope','requestHandler','Flash','
 
     };
 
-    $scope.acceptModal=function(){
+    $scope.acceptModal=function(courseid){
+
+        $scope.courseid = courseid;
         $(function(){
             $("#lean_overlay").fadeTo(1000);
             $("#modal").fadeIn(600);

@@ -23,8 +23,8 @@
                                <!-- <h5 class="margin-top-10"><i class="fa fa-book text-gray"></i> - 23 Sections</h5>-->
                             </div>
                             <span ng-show="courseDetails.enrollmentStatus==0" ng-if="courseDetails.role=='user'"><a href="" class="col-md-12 suggest_button margin-top-10" ng-click="doEnrollCourse(courseDetails.courseid)">Enroll to this course</a></span>
-                            <span ng-show="courseDetails.publishedon==null"><a href="" id="modal_trigger1" class="col-md-12 suggest_button margin-top-10" ng-click="acceptModal()">Accept this course</a></span>
-                            <span ng-show="courseDetails.publishedon==null"><a href="" class="col-md-12 suggest_button red_button modal_trigger" ng-click="modal()">Reject this course</a></span>
+                            <span ng-show="courseDetails.publishedon==null"><a href="" id="modal_trigger1" class="col-md-12 suggest_button margin-top-10" ng-click="acceptModal(courseDetails.courseid)">Accept this course</a></span>
+                            <span ng-show="courseDetails.publishedon==null"><a href="" class="col-md-12 suggest_button red_button modal_trigger" ng-click="modal(courseDetails.courseid)">Reject this course</a></span>
                         </div>
                         <div class="col-md-9">
                             <h2>{{courseDetails.coursename}}</h2>
@@ -62,7 +62,7 @@
                        <span class="error-message textarea-errormessage-110" ng-show="courseRejectForm.description.$error.required"><span>Required.</span></span>
                     </span>-->
                 <div class="action_btns margin-top-20">
-                    <div class="one_half"><a class="btn btn_red modal_close" onclick="return false" ng-disabled="courseRejectForm.$invalid" ng-click="doRejectCourse(pendingcourse.courseid)">Reject</a></div>
+                    <div class="one_half"><a class="btn btn_red modal_close" onclick="return false" ng-disabled="courseRejectForm.$invalid" ng-click="doRejectCourse(courseid)">Reject</a></div>
                     <div class="one_half last modal_close"><a onclick="return false;" class="btn back_btn">Cancel</a></div>
                 </div>
             </form>
@@ -77,14 +77,13 @@
         <span class="header_title">Confirmation</span>
         <span class="modal_close"><i class="fa fa-times"></i></span>
     </header>
-
     <section class="popupBody">
         <!-- Register Form -->
         <div class="common_model">
             <div class="text-center"><img src="../../images/alert-ring.png"/></div><br/>
             <h5 class="text-center">Are you sure want to publish this course?</h5>
             <div class="action_btns margin-top-20">
-                <div class="one_half"><a href="" class="btn btn_red modal_close" ng-click="doAcceptCourse(course)">Yes</a></div>
+                <div class="one_half"><a href="" class="btn btn_red modal_close" ng-click="doAcceptCourse(courseid)">Yes</a></div>
                 <div class="one_half last modal_close"><a onclick="return false;" class="btn back_btn">No</a></div>
             </div>
         </div>
