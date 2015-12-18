@@ -906,7 +906,7 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                             name:'adminApp',
                             files:[
                                 '../../js/bootstrap.min.js',
-                                '../../app/test/testController.js',
+                                '../../app/course/courseController.js',
                                 '../../angular/angular-utils-pagination/dirPagination.js'
                             ]
                         })
@@ -922,10 +922,10 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                             name:'adminApp',
                             files:[
                                 '../../js/bootstrap.min.js',
-                                '../../app/test/testController.js',
                                 '../../plugin/popup/style.css',
                                 '../../plugin/popup/jquery.leanModal.min.js',
-                                '../../angular/angular-utils-pagination/dirPagination.js'
+                                '../../angular/angular-utils-pagination/dirPagination.js',
+                                '../../app/course/courseController.js'
                             ]
                         })
                     }
@@ -941,7 +941,9 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                             name:'adminApp',
                             files:[
                                 '../../js/bootstrap.min.js',
-                                '../../app/test/testController.js'
+                                '../../plugin/popup/style.css',
+                                '../../plugin/popup/jquery.leanModal.min.js',
+                                '../../app/course/courseController.js'
                             ]
                         })
                     }
@@ -956,7 +958,7 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                             name:'adminApp',
                             files:[
                                 '../../js/bootstrap.min.js',
-                                '../../app/test/testController.js'
+                                '../../app/course/courseController.js'
                             ]
                         })
                     }

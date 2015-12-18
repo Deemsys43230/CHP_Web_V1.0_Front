@@ -47,6 +47,10 @@ userApp.controller('CourseController',['$scope','requestHandler','Flash','$route
                     $scope.currentIndex = index;
                     $scope.sectionno = index + 1;
                 }
+                if($scope.sectionList.length === 1){
+                         $scope.nextdisable = true;
+                     }
+
             });
 
             });
@@ -231,6 +235,10 @@ adminApp.controller('CourseAdminController',['$scope','requestHandler','Flash','
                         $scope.currentIndex = index;
                         $scope.sectionno = index + 1;
                     }
+                    if($scope.sectionList.length === 1){
+                        $scope.nextdisable = true;
+                    }
+
                 });
             });
         },function(){
@@ -268,7 +276,7 @@ adminApp.controller('CourseAdminController',['$scope','requestHandler','Flash','
             var nextIndex = currentIndex+1;
             console.log("Index value",nextIndex);
             $scope.sectionno = nextIndex +1;
-            if( nextIndex === $scope.sectionList.length -1){
+            if( nextIndex === $scope.sectionList.length -1) {
 
                 //move to start if at list end
                 console.log("Entered If");
@@ -373,6 +381,18 @@ adminApp.controller('CourseAdminController',['$scope','requestHandler','Flash','
     };
 
     $scope.courselist();
+
+    // Search Food Type
+    $('.show-list-search').click(function() {
+        $('.search-list-form').fadeIn(300);
+        $('.search-list-form input').focus();
+    });
+
+    $('.search-list-form input').focusout(function() {
+        $('.search-list-form').fadeOut(300);
+        $scope.coursesearch="";
+    });
+
 }]);
 
 // render image to view in list
@@ -381,3 +401,18 @@ adminApp.filter('trusted', ['$sce', function ($sce) {
         return $sce.trustAsResourceUrl(url);
     };
 }]);
+adminApp.filter('startsWithLetter', function () {
+alert("hi");
+    return function (items, coursesearch) {
+        var filtered = [];
+        var letterMatch = new RegExp(coursesearch, 'i');
+        for (var i = 0; i < items.length; i++) {
+            var item = items[i];
+            if (letterMatch.test(item.coursename) ) {
+                filtered.push(item);
+            }
+        }
+        return filtered;
+    };
+});
+

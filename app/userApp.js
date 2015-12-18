@@ -95,7 +95,7 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'userApp',
                             files:[
-                                '../../app/test/testController.js'
+                                '../../app/course/courseController.js'
                             ]
                         })
                     }
@@ -109,7 +109,7 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'userApp',
                             files:[
-                                '../../app/test/testController.js'
+                                '../../app/course/courseController.js'
                             ]
                         })
                     }
@@ -123,7 +123,7 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 return $ocLazyLoad.load({
                     name:'userApp',
                     files:[
-                        '../../app/test/testController.js'
+                        '../../app/course/courseController.js'
                     ]
                 })
             }
@@ -137,7 +137,7 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'userApp',
                             files:[
-                                '../../app/test/testController.js'
+                                '../../app/course/courseController.js'
                             ]
                         })
                     }
