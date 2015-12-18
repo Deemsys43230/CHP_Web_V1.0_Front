@@ -12,8 +12,8 @@
                     <div class="row margin-top-10 margin-bottom-10">
                         <div class="col-md-8">
                             <h2 class="margin-bottom-10">Section {{sectionno}} : {{sectionDetail.sectiontitle}}</h2>
-                            <p class="margin-tb-10">
-                                {{sectionDetail.sectioncontent}}
+                            <p class="margin-tb-10"ng-bind-html="sectionDetail.sectioncontent | html" >
+                               <!-- {{sectionDetail.sectioncontent}}-->
                             </p>
                             <input type="hidden" name="indexvalue" ng-model="currentIndex"/>
                             <div class="text-center margin-top-20">

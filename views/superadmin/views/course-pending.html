@@ -11,7 +11,7 @@
                     <a href="#" onclick="return false;" class="show-list-search search_button"><i class="fa fa-search"></i></a>
                     <div class="search-list-form override">
                         <form autocomplete="off" class="searchform">
-                            <input type="text"  placeholder="Search here...">
+                            <input type="text" ng-model="coursesearch"  placeholder="Search here...">
                         </form>
                     </div>
                 </div>
@@ -32,7 +32,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr dir-paginate="pendingcourse in pendingcoursefilter = (pendingCourseList | itemsPerPage:5)" ng-show="pendingCourseList.length!=0">
+                    <tr dir-paginate="pendingcourse in pendingcoursefilter = (pendingCourseList | startsWithLetter : coursesearch | itemsPerPage:5)" ng-show="pendingCourseList.length!=0">
                             <td>{{pendingcourse.coursename}}</td>
                             <td>{{pendingcourse.coursesubtitle}}</td>
                             <td>{{pendingcourse.categoryname}}</td>
@@ -45,7 +45,7 @@
                             <td>
                                 <a href="#courseDetail/{{pendingcourse.courseid}}" class="btn-xs btn-primary">View</a>
                                 <a href="" class="btn-xs btn-success" id="modal_trigger1" ng-click="acceptModal(pendingcourse.courseid)">Accept</a>
-                                <a href="" class="btn-xs btn-danger modal_trigger"  ng-click="modal(pendingcourse.courseid)">Reject</a>
+                                <a href="" class="btn-xs btn-danger modal_trigger" ng-click="modal(pendingcourse.courseid)">Reject</a>
                             </td>
                         </tr>
                     <tr ng-show="pendingCourseList.length==0"><td colspan="8" class="text-center">No Records Found !!! </td></tr>

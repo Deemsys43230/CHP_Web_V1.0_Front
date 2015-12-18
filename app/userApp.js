@@ -123,6 +123,9 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 return $ocLazyLoad.load({
                     name:'userApp',
                     files:[
+
+                        '../../plugin/popup/style.css',
+                        '../../plugin/popup/jquery.leanModal.min.js',
                         '../../app/course/courseController.js'
                     ]
                 })
@@ -137,6 +140,9 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'userApp',
                             files:[
+
+                                '../../plugin/popup/style.css',
+                                '../../plugin/popup/jquery.leanModal.min.js',
                                 '../../app/course/courseController.js'
                             ]
                         })
