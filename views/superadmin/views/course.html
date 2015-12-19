@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12 min-height-450">
-                <a href="#dashboard" class="back-button pull-right margin-left-10"><i class="fa fa-arrow-circle-o-left"></i> Back to Dashboard</a>
+                <a href="#dashboard" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back to Dashboard</a>
                 <!-- Stat Search -->
                 <div class="pull-right" id="hidden-search">
                     <a href="#" onclick="return false;" class="show-list-search search_button"><i class="fa fa-search"></i></a>
@@ -23,7 +23,7 @@
                         <th class="col-md-2">Course Name</th>
                         <th class="col-md-2">Course Subtitle</th>
                         <th class="col-md-2">Category</th>
-                        <th class="col-md-1">Author Name</th>
+                        <th class="col-md-1">Author</th>
                         <th class="col-md-1">Price</th>
                         <th class="col-md-1">Enroll</th>
                         <th class="col-md-1">Created On</th>
@@ -32,11 +32,11 @@
                     </tr>
                     </thead>
                     <tbody>
-                        <tr dir-paginate="course in coursefilter = (courseList | startsWithLetter : coursesearch | itemsPerPage:5)" ng-show="courseList.length!=0">
-                            <td>{{course.coursename}}</td>
-                            <td>{{course.coursesubtitle}}</td>
-                            <td>{{course.categoryname}}</td>
-                            <td>{{course.ownername}}</td>
+                        <tr dir-paginate="course in coursefilter = ( courseList | filter : coursesearch | itemsPerPage:9)" ng-show="courseList.length!=0">
+                            <td title="{{course.coursename}}"><span class="line-clamp-xs">{{course.coursename}}</span></td>
+                            <td title="{{course.coursesubtitle}}"><span class="line-clamp-xs">{{course.coursesubtitle}}</span></td>
+                            <td title="{{course.categoryname}}"><span class="line-clamp-xs">{{course.categoryname}}</span></td>
+                            <td title="{{course.ownername}}"><span class="line-clamp-lxs">{{course.ownername}}</span></td>
                             <td ng-if="course.price==0">Free</td>
                             <td ng-if="course.price!=0">{{course.price}}$</td>
                             <td>{{course.enrollcount}}</td>
@@ -48,7 +48,6 @@
                         </tr>
                         <tr ng-show="courseList.length==0"><td colspan="9" class="text-center">No Records Found !!! </td></tr>
                         <tr ng-show="!coursefilter.length"><td colspan="9" class="text-center">No Records Found !!!</td></tr>
-
                     </tbody>
                 </table>
                 <!-- Start Pagination -->

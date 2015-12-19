@@ -6916,8 +6916,19 @@ a.register_button:visited{
     color: #57cb85;
 }
 
-.course-image{
+.course-image-1{
     height: 125px;
+    width: auto;
+}
+
+.course-name{
+    max-height:65px;
+    overflow-y: hidden;
+}
+
+.course-image{
+    height: auto;
+    max-height: 115px;
     width: 100%;
 }
 
@@ -8481,6 +8492,15 @@ tr.sort-icon th i{
     position: absolute;
     max-height: 20px;
     width: 13%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow:hidden;
+}
+
+.line-clamp-lxs{
+    position: absolute;
+    max-height: 20px;
+    width: 7%;
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow:hidden;

@@ -5,7 +5,7 @@
         <div class="row">
 
             <div class="col-md-12 min-height-450" ng-init="pendingcourselist()">
-                <a href="#dashboard" class="back-button pull-right margin-left-10"><i class="fa fa-arrow-circle-o-left"></i> Back to Dashboard</a>
+                <a href="#dashboard" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back to Dashboard</a>
                 <!-- Stat Search -->
                 <div class="pull-right" id="hidden-search">
                     <a href="#" onclick="return false;" class="show-list-search search_button"><i class="fa fa-search"></i></a>
@@ -24,7 +24,7 @@
                         <th class="col-md-2">Course Name</th>
                         <th class="col-md-2">Course Subtitle</th>
                         <th class="col-md-2">Category</th>
-                        <th class="col-md-1">Author Name</th>
+                        <th class="col-md-1">Author</th>
                         <th class="col-md-1">Price</th>
                         <th class="col-md-1">Created On</th>
                         <th class="col-md-1">Received On</th>
@@ -32,11 +32,11 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr dir-paginate="pendingcourse in pendingcoursefilter = (pendingCourseList | startsWithLetter : coursesearch | itemsPerPage:5)" ng-show="pendingCourseList.length!=0">
-                            <td>{{pendingcourse.coursename}}</td>
-                            <td>{{pendingcourse.coursesubtitle}}</td>
-                            <td>{{pendingcourse.categoryname}}</td>
-                            <td>{{pendingcourse.ownername}}</td>
+                    <tr dir-paginate="pendingcourse in pendingcoursefilter = (pendingCourseList | filter : coursesearch | itemsPerPage:9)" ng-show="pendingCourseList.length!=0">
+                            <td title="{{pendingcourse.coursename}}"><span class="line-clamp-xs">{{pendingcourse.coursename}}</span></td>
+                            <td title="{{pendingcourse.coursesubtitle}}"><span class="line-clamp-xs">{{pendingcourse.coursesubtitle}}</span></td>
+                            <td title="{{pendingcourse.categoryname}}"><span class="line-clamp-xs">{{pendingcourse.categoryname}}</span></td>
+                            <td title="{{pendingcourse.ownername}}"><span class="line-clamp-lxs">{{pendingcourse.ownername}}</span></td>
                             <td ng-if="pendingcourse.price==0">Free</td>
                             <td ng-if="pendingcourse.price!=0">{{pendingcourse.price}}$</td>
                             <td>{{pendingcourse.createdon}}</td>

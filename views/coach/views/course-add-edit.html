@@ -10,6 +10,11 @@
                 <div flash-message="2000" class="col-md-4 pull-right"></div>
                 <h4 class="classic-title"><span>{{CourseTitle}}</span></h4>
                 <div class="row margin-top-10 margin-bottom-10">
+                    <div ng-if="loaded">
+                        <div class="loader-style">
+                            <div class="loader"></div>
+                        </div>
+                    </div>
                     <form name="courseForm">
                         <div class="col-md-2 margin-top-7">
                             <h4>Course Name <span class="pull-right">:</span></h4><br/>
@@ -59,7 +64,7 @@
                         </div>
                         <div class="col-md-12 text-center margin-top-15">
                             <span ng-show="isAdd==1"><a href="" ng-disabled="courseForm.$invalid" class="btn btn-success" ng-click="doAddCourse()">Save Course</a></span>
-                            <span ng-show="isAdd==0"><a href="" class="btn btn-success" ng-click="doUpdateCourse()">Save Changes</a></span>
+                            <span ng-show="isAdd==0"><a href="" ng-disabled="isCleanCourse() || courseForm.$invalid" class="btn btn-success" ng-click="doUpdateCourse()">Save Changes</a></span>
                             <span ng-show="isAdd==0"><a href="#courseView/{{courseDetails.courseid}}" class="btn btn-danger">Cancel</a></span>
                             <span ng-show="isAdd==1"><a href="#course" class="btn btn-danger">Cancel</a></span>
                         </div>

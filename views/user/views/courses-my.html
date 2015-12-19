@@ -12,12 +12,17 @@
             </div>
 
             <div class="col-md-12 margin-bottom-10">
+                <div ng-if="loaded">
+                    <div class="loader-style">
+                        <div class="loader"></div>
+                    </div>
+                </div>
                 <div class="col-md-4 no-padding" ng-repeat="mycourses in myCourseList">
                     <a href="#courseDetail/{{mycourses.courseid}}">
                         <div class="dashboard arrange">
                             <div class="course-grid-user">
                                 <div class="col-md-6 margin-top-5">
-                                    <h4>{{mycourses.coursename}}</h4>
+                                    <h4 class="course-name" title="{{courseList.coursename}}">{{mycourses.coursename}}</h4>
 
                                     <p class="margin-top-10">{{mycourses.categoryname}}</p>
                                 </div>

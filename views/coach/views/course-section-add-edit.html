@@ -36,7 +36,7 @@
                         </div>
                         <div class="col-md-12 text-center margin-top-15">
                             <span ng-show="isAdd==1"><a href="" class="btn btn-success" ng-disabled="sectionForm.$invalid" ng-click="addSection()">Add Section</a></span>
-                            <span ng-show="isAdd==0"><a href="" class="btn btn-success" ng-click="doUpdateSection()">Save Changes</a></span>
+                            <span ng-show="isAdd==0"><a href="" ng-disabled="isClean() || sectionForm.$invalid" class="btn btn-success" ng-click="doUpdateSection()">Save Changes</a></span>
                             <a href="#courseView/{{sectionDetails.courseid}}" class="btn btn-danger">Cancel</a>
                         </div>
                     </form>
@@ -49,8 +49,4 @@
 <!-- End Page Banner -->
 
 <script type="text/javascript" src="../../js/script.js"></script>
-
-<script type="text/javascript">
-    $("#modal_trigger1").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
-</script>
 

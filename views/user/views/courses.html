@@ -8,53 +8,57 @@
                 <div class="margin-rl">
                     <div flash-message="2000" class="col-md-3 no-padding pull-right"></div>
                     <h5 class="classic-title"><a href="#myCourses"><i class="fa fa-male"></i>&nbsp;&nbsp;MY COURSES</a>&nbsp;&nbsp;|&nbsp;&nbsp;<span><a href="#courses"><i class="fa fa-search"></i>&nbsp;&nbsp;COURSE SEARCH</a></span></h5>
-
                 </div>
             </div>
 
-            <div class="col-md-12 margin-bottom-15"  >
-
+            <div class="col-md-12 margin-bottom-15">
+                <div ng-if="loaded">
+                    <div class="loader-style">
+                        <div class="loader"></div>
+                    </div>
+                </div>
                  <!--Start Recent Posts Carousel -->
                 <div class="latest-posts" >
                     <a href="#courseCategory" class="course-controller pull-right"><span><i class="fa fa-eye"></i> View all courses</span></a>
-                    <!--<h3 class="text-gray">&nbsp;&nbsp;Aging</h3>-->
-                    <div class="latest-posts-classic custom-carousel touch-carousel course-control margin-top-5" data-appeared-items="3" data-navigation="true">
-                        <!-- Posts 1-->
-                        <div class="item" ng-repeat="courses in courseList">
-                            <a href="#courseDetail/{{courses.courseid}}">
-                                <div class="dashboard arrange">
-                                    <div class="course-grid-user">
-                                        <div class="col-md-6 margin-top-5">
-                                            <h4>{{courses.coursename}}</h4>
-                                            
-                                            <p class="margin-top-10">{{courses.enrollcount}} users</p>
-                                        </div>
-                                        <div class="col-md-6 no-padding">
-                                            <img class="course-image" src="{{courses.promoimage | trusted}}">
-                                            <div class="text-bold" ng-if="courses.price==0"><span class="course-price free">Free</span></div>
-                                            <div class="text-bold" ng-if="courses.price!=0"><span class="course-price cost">{{courses.price}}$</span></div>
-                                        </div>
-                                        <div class="col-md-12 margin-top-5">
-                                            <div class="col-md-2 no-padding margin-top-5"><img class="course-author-img" src="{{courses.imageurl | trusted}}"></div>
-                                            <div class="col-md-10 no-padding">
-                                                <h5>{{courses.ownername}}</h5>
-                                                <p>{{courses.specialistin}}</p>
-                                                <span ng-hide="courses.enrollmentstatus==0"> <p class="text-green" >Enrolled</p></span>
+                    <h3 class="text-gray">&nbsp;&nbsp;Category Name</h3>
+                    <div id="callCarousel">
+                        <div class="latest-posts-classic cust-carousel touch-carousel course-control margin-top-5">
+                            <!-- Posts 1-->
+                            <div class="item" ng-repeat="courses in courseList">
+                                <a href="#courseDetail/{{courses.courseid}}">
+                                    <div class="dashboard arrange">
+                                        <div class="course-grid-user">
+                                            <div class="col-md-6 margin-top-5">
+                                                <h4 class="course-name" title="{{courseList.coursename}}">{{courses.coursename}}</h4>
+
+                                                <p class="margin-top-10">{{courses.enrollcount}} users</p>
+                                            </div>
+                                            <div class="col-md-6 no-padding">
+                                                <img class="course-image" src="{{courses.promoimage | trusted}}">
+                                                <div class="text-bold" ng-if="courses.price==0"><span class="course-price free">Free</span></div>
+                                                <div class="text-bold" ng-if="courses.price!=0"><span class="course-price cost">{{courses.price}}$</span></div>
+                                            </div>
+                                            <div class="col-md-12 margin-top-5">
+                                                <div class="col-md-2 no-padding margin-top-5"><img class="course-author-img" src="{{courses.imageurl | trusted}}"></div>
+                                                <div class="col-md-10 no-padding">
+                                                    <h5>{{courses.ownername}}</h5>
+                                                    <p>{{courses.specialistin}}</p>
+                                                    <span ng-hide="courses.enrollmentstatus==0"> <p class="text-green" >Enrolled</p></span>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </a>
+                                </a>
+                            </div>
                         </div>
                     </div>
                     <!-- End Recent Posts Carousel -->
                </div>
-
             </div>
 
-            <!--
 
-                       <div class="col-md-12 margin-bottom-15">
+
+                      <!-- <div class="col-md-12 margin-bottom-15">
             &lt;!&ndash;Start Recent Posts Carousel&ndash;&gt;
                 <div class="latest-posts" >
                     <a href="#courseCategory" class="course-controller pull-right margin-left-5"><span><i class="fa fa-eye"></i> View all courses</span></a>
@@ -161,8 +165,8 @@
                     &lt;!&ndash; End Recent Posts Carousel &ndash;&gt;
                 </div>
 
-            </div>
--->
+            </div>-->
+
 
         </div>
     </div>
@@ -172,21 +176,27 @@
 <script type="text/javascript" src="../../js/script.js"></script>
 
 <script>
-    $('.cust-carousel').owlCarousel({
-        slideSpeed : 300,
-        stopOnHover: true,
-        autoPlay: false,
-        navigation : true,
-        pagination: false,
-        lazyLoad : true,
-        items : 3,
-        itemsDesktop : [1000,3],
-        itemsDesktopSmall : [900,2],
-        itemsTablet: [600,2],
-        itemsMobile : false,
-        transitionStyle : "goDown"
-    });
 
-    $('.touch-carousel').find('.owl-prev').html('<i class="fa fa-angle-left"></i>');
-    $('.touch-carousel').find('.owl-next').html('<i class="fa fa-angle-right"></i>');
+    function callCarousel(){
+        $('#callCarousel').fadeIn(1000);
+        setTimeout(function(){
+            $('.cust-carousel').owlCarousel({
+                slideSpeed : 300,
+                stopOnHover: true,
+                autoPlay: false,
+                navigation : true,
+                pagination: false,
+                lazyLoad : true,
+                items : 3,
+                itemsDesktop : [1000,3],
+                itemsDesktopSmall : [900,2],
+                itemsTablet: [600,2],
+                itemsMobile : false,
+                transitionStyle : "goDown"
+            });
+
+            $('.touch-carousel').find('.owl-prev').html('<i class="fa fa-angle-left"></i>');
+            $('.touch-carousel').find('.owl-next').html('<i class="fa fa-angle-right"></i>');
+        },0.0001);
+    }
 </script>

@@ -5,21 +5,22 @@
 var userApp= angular.module('userApp', ['ngRoute','oc.lazyLoad','ngCookies','requestModule','flash']);
 userApp.controller('CourseController',['$scope','requestHandler','Flash','$routeParams','$location',function($scope,requestHandler,Flash,$routeParams,$location) {
 
-
-
     $scope.mycourselist = function(){
+        $scope.loaded=true;
         requestHandler.getRequest("user/getMyCourseList/","").then(function(response) {
             $scope.myCourseList = response.data.published_Course;
-            console.log($scope.myCourseList);
+            $scope.loaded=false;
         },function(){
             errorMessage(Flash,"Please try again later!")
         });
     };
 
     $scope.courseDetails =function(){
+        $scope.loaded=true;
         requestHandler.postRequest("courseDetail/",{"courseid":$routeParams.id}).then(function(response) {
             $scope.courseDetails = response.data.coursedetail;
             $scope.courseDetails.role= "user";
+            $scope.loaded=false;
         },function(){
             errorMessage(Flash,"Please try again later!")
         });
@@ -75,13 +76,13 @@ userApp.controller('CourseController',['$scope','requestHandler','Flash','$route
         },function(){
             errorMessage(Flash,"Please try again later!")
         });
-
     };
 
     $scope.courselist = function(){
         requestHandler.postRequest("getPublishedCourse/",{"offset":0}).then(function(response) {
             $scope.courseList = response.data.published_Course;
-
+            $('#callCarousel').hide();
+            callCarousel();
         },function(){
             errorMessage(Flash,"Please try again later!")
         });
@@ -256,9 +257,6 @@ adminApp.controller('CourseAdminController',['$scope','requestHandler','Flash','
         },function(){
             errorMessage(Flash,"Please try again later!")
         });
-
-
-
     };
 
     $scope.courseSectionDetailsbyId =function(id){
@@ -311,7 +309,7 @@ adminApp.controller('CourseAdminController',['$scope','requestHandler','Flash','
 
         });
 
-    }
+    };
 
     $scope.getPreviousIndex = function() {
 
@@ -338,11 +336,10 @@ adminApp.controller('CourseAdminController',['$scope','requestHandler','Flash','
                 });
             });
             currentIndex= prevIndex;
-            console.log("Newcurr",currentIndex);
             $scope.nextdisable=false;
 
         });
-    }
+    };
 
     $scope.pendingcourselist = function(){
         requestHandler.getRequest("admin/listOfPendingCourses/","").then(function(response) {
@@ -461,6 +458,7 @@ adminApp.filter('trusted', ['$sce', function ($sce) {
         return $sce.trustAsResourceUrl(url);
     };
 }]);
+
 adminApp.filter('startsWithLetter', function () {
     alert("hi");
     return function (items, coursesearch) {
@@ -509,14 +507,14 @@ coachApp.controller('CourseController',function($scope,requestHandler,Flash,$rou
             requestHandler.postRequest("coach/getCourseDetail/",{"courseid":$routeParams.id}).then(function(response) {
                 $scope.courseDetails = response.data['Course details'];
                 $scope.courseDetails.promoimage = $scope.courseDetails.promoimage+"?decache="+Math.random();
-                $scope.getAllSections();
+                $scope.getAllSections($scope.courseDetails.courseid);
             },function(){
                 errorMessage(Flash,"Please try again later!")
             });
         };
 
-        $scope.getAllSections=function(){
-            requestHandler.postRequest("coach/getCourseSections/",{"courseid":$routeParams.id}).then(function(response) {
+        $scope.getAllSections=function(id){
+            requestHandler.postRequest("coach/getCourseSections/",{"courseid":id}).then(function(response) {
                 $scope.courseSections = response.data.CourseSections.sections;
                 $scope.loaded=false;
             },function(){
@@ -570,7 +568,7 @@ coachApp.controller('CourseController',function($scope,requestHandler,Flash,$rou
                     }
                     requestHandler.postRequest("coach/swapCourseSection/",{"sectionidList":$scope.sortSectionIdlist,"courseid":$routeParams.id}).then(function(response) {
                         successMessage(Flash,"Sections Sorted Successfully!");
-                        $scope.getAllSections();
+                        $scope.getAllSections($routeParams.id);
                     },function(){
                         errorMessage(Flash,"Please try again later!")
                     });
@@ -625,9 +623,21 @@ coachApp.controller('CourseController',function($scope,requestHandler,Flash,$rou
         });
     };
 
-    $scope.sendCourseToReview=function(){
-        requestHandler.postRequest("coach/sendCourseForReview/",{"courseid":$routeParams.id}).then(function(response) {
+    $scope.sendCourseToReview=function(id){
+        requestHandler.postRequest("coach/sendCourseForReview/",{"courseid":id}).then(function(response) {
             successMessage(Flash,"Course Sent for Review!");
+            if(!$routeParams.id){
+                $location.path("courseView/"+id);
+            }
+            else $scope.getCourseDetails();
+        },function(){
+            errorMessage(Flash,"Please try again later!")
+        });
+    };
+
+    $scope.deleteSection=function(){
+        requestHandler.deleteRequest("coach/deleteCourseSection/",{"sectionid":$scope.deleteSectionId}).then(function(response) {
+            successMessage(Flash,"Section Deleted Successfully!");
             $scope.getCourseDetails();
         },function(){
             errorMessage(Flash,"Please try again later!")
@@ -650,6 +660,29 @@ coachApp.controller('CourseController',function($scope,requestHandler,Flash,$rou
         $("#lean_overlay").click(function(){
             $(".common_model").hide();
             $("#review-modal").hide();
+            $("#lean_overlay").hide();
+        });
+    };
+
+    $scope.sectionDeleteModel=function(id){
+
+        $scope.deleteSectionId=id;
+
+        $(function(){
+            $("#lean_overlay").fadeTo(1000);
+            $("#section-modal").fadeIn(600);
+            $(".common_model").show();
+        });
+
+        $(".modal_close").click(function(){
+            $(".common_model").hide();
+            $("#section-modal").hide();
+            $("#lean_overlay").hide();
+        });
+
+        $("#lean_overlay").click(function(){
+            $(".common_model").hide();
+            $("#section-modal").hide();
             $("#lean_overlay").hide();
         });
     };
@@ -679,6 +712,7 @@ coachApp.controller('CourseController',function($scope,requestHandler,Flash,$rou
 coachApp.controller('CourseEditController',function($scope,requestHandler,Flash,$routeParams,$location) {
 
     $scope.courseDetails = {};
+    var originalSectionDetails={};
 
     if(!$routeParams.courseId){
     }
@@ -694,9 +728,11 @@ coachApp.controller('CourseEditController',function($scope,requestHandler,Flash,
         };
 
         $scope.addSection=function(){
+            $scope.loaded=true;
             requestHandler.postRequest("coach/insertCourseSection/",$scope.sectionDetails).then(function(response) {
                 $location.path("courseSection/"+response.data.CourseSection.sectionid);
-                successMessage(Flash,"Section Successfully Added!")
+                $scope.loaded=false;
+                successMessage(Flash,"Section Successfully Added!");
             },function(){
                 errorMessage(Flash,"Please try again later!")
             });
@@ -747,7 +783,7 @@ coachApp.controller('CourseEditController',function($scope,requestHandler,Flash,
 
         requestHandler.postRequest("coach/getCourseDetail/",{"courseid":$routeParams.id}).then(function(response) {
             $scope.courseDetails = response.data['Course details'];
-            $scope.originalCourseDetails = $scope.courseDetails;
+            $scope.originalCourseDetails = angular.copy($scope.courseDetails);
             $scope.courseDetails.promoimage = $scope.courseDetails.promoimage+"?decache="+Math.random();
             $('.image-editor').cropit({
                 imageState: {
@@ -764,6 +800,13 @@ coachApp.controller('CourseEditController',function($scope,requestHandler,Flash,
             errorMessage(Flash,"Please try again later!")
         });
     }
+
+    //To Enable the update button if changes occur.
+    $scope.isCleanCourse = function() {
+        console.log($scope.courseDetails);
+        console.log($scope.originalCourseDetails);
+        return angular.equals ($scope.originalCourseDetails, $scope.courseDetails);
+    };
 
     $scope.doUpdateImage = function(){
         if($scope.isAdd==0){
@@ -868,13 +911,21 @@ coachApp.controller('CourseEditController',function($scope,requestHandler,Flash,
 
         requestHandler.postRequest("coach/detailCourseSection/",{"sectionid":$routeParams.sectionId}).then(function(response) {
             $scope.sectionDetails = response.data.CourseSectionDetail;
+            $scope.originalSectionDetails = angular.copy($scope.sectionDetails);
             $scope.loaded=false;
         },function(){
             errorMessage(Flash,"Please try again later!")
         });
     }
 
+    //To Enable the update button if changes occur.
+    $scope.isClean = function() {
+        return angular.equals ($scope.originalSectionDetails, $scope.sectionDetails);
+    };
+
     $scope.doUpdateSection = function(){
+
+        $scope.loaded=true;
 
         var sectionUpdate={};
         sectionUpdate.sectionid = $scope.sectionDetails.sectionid;
@@ -883,6 +934,7 @@ coachApp.controller('CourseEditController',function($scope,requestHandler,Flash,
 
         requestHandler.putRequest("coach/updateCourseSection/",sectionUpdate).then(function(response) {
             $location.path("courseSection/"+response.data.CourseSection.sectionid);
+            $scope.loaded=false;
             successMessage(Flash,"Section Updated Successfully!");
         },function(){
             errorMessage(Flash,"Please try again later!")

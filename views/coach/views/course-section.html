@@ -14,7 +14,12 @@
                 <h4 class="classic-title"><span>Course View</span></h4>
                 <div class="row margin-top-10 margin-bottom-10">
                     <div class="col-md-8">
-                        <h2>Section {{sectionDetails.sequenceno}}&nbsp;&nbsp;: {{sectionDetails.sectiontitle}} &nbsp;&nbsp;<span ng-show="sectionDetails.canedit==1"><a href="#courseSectionEdit/{{sectionDetails.sectionid}}" title="Section Edit"><i class="fa fa-pencil"></i></a></span></h2>
+                        <h2>Section {{sectionDetails.sequenceno}}&nbsp;&nbsp;: {{sectionDetails.sectiontitle}} &nbsp;&nbsp;
+                            <span ng-show="sectionDetails.canedit==1">
+                                <a href="#courseSectionEdit/{{sectionDetails.sectionid}}" title="Edit Section"><i class="fa fa-pencil"></i></a>&nbsp;&nbsp;
+                                <a href="" ng-click="sectionDeleteModel(sectionDetails.sectionid)" title="Delete Section" class="fa fa-trash"></a>
+                            </span>
+                        </h2>
                         <p class="margin-top-15 margin-bottom-20" ng-bind-html="sectionDetails.sectioncontent|html"></p>
                         <div class="text-center margin-top-20">
                             <a href="" class="btn course_button" ng-disabled="sectionDetails.sequenceno==1" ng-click="prevSection(sectionDetails.sequenceno)"><i class="fa fa-backward"></i>&nbsp;&nbsp; Previous Section</a>
@@ -33,7 +38,7 @@
 </div>
 
 
-<!-- create coach popup-->
+<!-- send for review course popup-->
 <div id="review-modal" class="popupContainer" style="display:none;left: 37%!important;">
     <header class="popupHeader">
         <span class="header_title">Send Confirmation</span>
@@ -46,7 +51,28 @@
             <div class="text-center"><img src="../../images/alert-ring.png"/></div><br/>
             <h5 class="text-center">You can't edit this course after<br/> sent to the review<br/><br/>Are you sure want to sent this<br/> course for review?</h5>
             <div class="action_btns margin-top-20">
-                <div class="one_half"><a href="" class="btn btn_red modal_close" ng-click="sendCourseToReview()">Yes</a></div>
+                <div class="one_half"><a href="" class="btn btn_red modal_close" ng-click="sendCourseToReview(sectionDetails.courseid)">Yes</a></div>
+                <div class="one_half last modal_close"><a onclick="return false;" class="btn back_btn">No</a></div>
+            </div>
+        </div>
+    </section>
+</div>
+
+
+<!-- delete section popup-->
+<div id="section-modal" class="popupContainer" style="display:none;left: 37%!important;">
+    <header class="popupHeader">
+        <span class="header_title">Confirmation</span>
+        <span class="modal_close"><i class="fa fa-times"></i></span>
+    </header>
+
+    <section class="popupBody">
+        <!-- Register Form -->
+        <div class="common_model">
+            <div class="text-center"><img src="../../images/alert-ring.png"/></div><br/>
+            <h5 class="text-center">It will delete entire data of this section<br/>Are you sure want to delete this section?</h5>
+            <div class="action_btns margin-top-20">
+                <div class="one_half"><a href="" class="btn btn_red modal_close" ng-click="deleteSection()">Yes</a></div>
                 <div class="one_half last modal_close"><a onclick="return false;" class="btn back_btn">No</a></div>
             </div>
         </div>
