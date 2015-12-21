@@ -21,15 +21,48 @@
                         <div class="col-md-3">
                             <img class="margin-bottom-15" src="{{courseDetails.promoimage | trusted}}">
                             <div class="col-md-2 no-padding margin-top-5"><img class="course-author-img" src="{{courseDetails.imageurl | trusted}}"></div>
-                            <div class="col-md-10">
-                                <h5>{{courseDetails.ownername}}</h5>
-                                <p>{{courseDetails.specialistin}}</p>
-                                <h5 class="margin-top-10" ng-show="courseDetails.enrollmentStatus==0"><i class="fa fa-users text-gray"></i> - {{courseDetails.enrollcount}} Students</h5>
-                                <h5 class="margin-top-10"><i class="fa fa-book text-gray"></i> - {{sectionList.length}} Sections</h5>
+                            <div class="col-md-12">
+
+                                <h5 class="row text-muted">
+                                    <span class="col-md-6">Created By</span>
+                                    <span class="col-md-6">: {{courseDetails.ownername}}</span>
+                                    <span class="col-md-6">Speacialist</span>
+                                    <span class="col-md-6">: {{courseDetails.specialistin}}</span>
+                                    <span class="col-md-6">Category</span>
+                                    <span class="col-md-6">: {{courseDetails.categoryname}}</span>
+                                    <span class="col-md-6">Price</span>
+                            <span class="col-md-6">
+                                : <span ng-show="courseDetails.price==0" class="text-green text-bold">Free</span>
+                                <span ng-hide="courseDetails.price==0" class="text-red text-bold">{{courseDetails.price}} $</span>
+                            </span>
+                                    <span class="col-md-6" ng-if="courseDetails.role=='admin'">Created On</span>
+                                    <span class="col-md-6" ng-if="courseDetails.role=='admin'">: {{courseDetails.createdon}}</span>
+                                    <span class="col-md-6">Students</span>
+                            <span class="col-md-6">
+                                : <span ng-show="courseDetails.enrollcount==0">----</span>
+                                <span ng-hide="courseDetails.enrollcount==0">{{courseDetails.enrollcount}}</span>
+                            </span>
+                                    <span class="col-md-6">Reviewed On</span>
+                            <span class="col-md-6">
+                                : <span ng-show="!courseDetails.reviewdate">----</span>
+                                <span ng-hide="!courseDetails.reviewdate">{{courseDetails.reviewdate}}</span>
+                            </span>
+                                    <span class="col-md-6" ng-if="courseDetails.role=='admin'">Published On</span>
+                            <span class="col-md-6" ng-if="courseDetails.role=='admin'">
+                                : <span ng-show="!courseDetails.publishedon" ng-if="courseDetails.role=='admin'">----</span>
+                                <span ng-hide="!courseDetails.publishedon" ng-if="courseDetails.role=='admin'">{{courseDetails.publishedon}}</span>
+                            </span>
+                                    <span class="col-md-6">Sections</span>
+                            <span class="col-md-6">
+                                :  <span >{{sectionList.length}} </span>
+                            </span>
+                                </h5>
+                                <!--<h5 class="margin-top-10" ng-show="courseDetails.enrollmentStatus==0"><i class="fa fa-users text-gray"></i> - {{courseDetails.enrollcount}} Students</h5>
+                                <h5 class="margin-top-10"><i class="fa fa-book text-gray"></i> - {{sectionList.length}} Sections</h5>-->
                             </div>
                             <span ng-show="courseDetails.enrollmentStatus==0" ng-if="courseDetails.role=='user'"><a href="" class="col-md-12 suggest_button margin-top-10" ng-click="doEnrollCourse(courseDetails.courseid)">Enroll to this course</a></span>
-                            <span ng-show="courseDetails.publishedon==null"><a href="" id="modal_trigger1" class="col-md-12 suggest_button margin-top-10" ng-click="acceptModal(courseDetails.courseid)">Accept this course</a></span>
-                            <span ng-show="courseDetails.publishedon==null"><a href="" class="col-md-12 suggest_button red_button modal_trigger" ng-click="modal(courseDetails.courseid)">Reject this course</a></span>
+                            <span ng-show="courseDetails.publishedon==null" ng-if="courseDetails.role=='admin'" ><a href="" id="modal_trigger1" class="col-md-12 suggest_button margin-top-10" ng-click="acceptModal(courseDetails.courseid)">Accept this course</a></span>
+                            <span ng-show="courseDetails.publishedon==null" ng-if="courseDetails.role=='admin'"><a href="" class="col-md-12 suggest_button red_button modal_trigger" ng-click="modal(courseDetails.courseid)">Reject this course</a></span>
                         </div>
                         <div class="col-md-9">
                             <h2>{{courseDetails.coursename}}</h2>
@@ -74,7 +107,7 @@
 </div>
 
 
-<!-- create coach popup-->
+<!-- create accept popup-->
 <div id="modal" class="popupContainer" style="display:none;left: 37%!important;">
     <header class="popupHeader">
         <span class="header_title">Confirmation</span>
@@ -93,6 +126,25 @@
     </section>
 </div>
 
+
+<!-- create enroll popup-->
+<div id="enrollmodal" class="popupContainer" style="display:none;left: 37%!important;">
+    <header class="popupHeader">
+        <span class="header_title">Confirmation</span>
+        <span class="modal_close"><i class="fa fa-times"></i></span>
+    </header>
+    <section class="popupBody">
+        <!-- Register Form -->
+        <div class="common_model">
+            <div class="text-center"><img src="../../images/alert-ring.png"/></div><br/>
+            <h5 class="text-center">Please enroll the course to view details!!!</h5>
+            <div class="action_btns margin-top-20">
+                <div class="one_half last modal_close"><a onclick="return false;" class="btn back_btn">OK</a></div>
+            </div>
+        </div>
+    </section>
+</div>
+
 <!-- End Page Banner -->
 
 <script type="text/javascript" src="../../js/script.js"></script>
@@ -102,3 +154,9 @@
     $(".modal_trigger").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
 
 </script>
+<style>
+
+    [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+        display: none !important;
+    }
+</style>

@@ -401,6 +401,7 @@ adminApp.controller("FoodDetailsEditController",function($q,$scope,requestHandle
 
 
             if($scope.imageUpload){//Check for Image Upload
+                //alert("1");
                 $q.all([tagPromise]).then(function(){
                     requestHandler.putRequest("admin/updateFood/", $scope.foodDetails).then(function (response) {
                         console.log($scope.foodDetails);
@@ -415,6 +416,7 @@ adminApp.controller("FoodDetailsEditController",function($q,$scope,requestHandle
                 });
 
             }else{
+               // alert("2");
                 FoodService.convertImgToBase64($scope.foodDetails.foodImagePath, function(base64Img) {//Convert Image to Base64
                     $scope.foodDetails.foodimage=base64Img;
                     $q.all([tagPromise]).then(function(){//Only after tagPromise

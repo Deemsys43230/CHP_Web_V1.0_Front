@@ -98,7 +98,25 @@ userApp.controller('CourseController',['$scope','requestHandler','Flash','$route
     };
 
     $scope.checkenroll = function(){
-        alert("Please enroll the course to view details!!!");
+       // alert("Please enroll the course to view details!!!");
+
+        $(function(){
+            $("#lean_overlay").fadeTo(1000);
+            $("#enrollmodal").fadeIn(600);
+            $(".common_model").show();
+        });
+
+        $(".modal_close").click(function(){
+            $(".common_model").hide();
+            $("#enrollmodal").hide();
+            $("#lean_overlay").hide();
+        });
+
+        $("#lean_overlay").click(function(){
+            $(".common_model").hide();
+            $("#enrollmodal").hide();
+            $("#lean_overlay").hide();
+        });
     };
 
 
@@ -353,15 +371,14 @@ adminApp.controller('CourseAdminController',['$scope','requestHandler','Flash','
     };
 
     $scope.doAcceptCourse = function(course){
-
-            requestHandler.postRequest("admin/publishCourse/",{"courseid":course}).then(function(response){
+         requestHandler.postRequest("admin/publishCourse/",{"courseid":course}).then(function(response){
 
                 if($scope.page == 'pending'){
                     $scope.pendingcourselist();
                     successMessage(Flash,"Successfully Published");
                 }
                 else{
-                    $location.path("courseDetail/"+course);
+                    $location.path('coursePending');
                     successMessage(Flash,"Successfully Published");
                 }
             },function(){
@@ -377,7 +394,7 @@ adminApp.controller('CourseAdminController',['$scope','requestHandler','Flash','
                 successMessage(Flash,"Successfully Rejected");
             }
             else{
-                $location.path("courseDetail/"+course);
+               $location.path('coursePending');
                 successMessage(Flash,"Successfully Rejected");
             }
         },function(){
@@ -488,7 +505,7 @@ coachApp.controller('CourseController',function($scope,requestHandler,Flash,$rou
 
     if(!$routeParams.id){
         if(!$routeParams.sectionId){
-            $scope.loaded=true;
+           // $scope.loaded=true;
             requestHandler.getRequest("coach/getCourseList/","").then(function(response) {
                 $scope.myCourseList = response.data.course.course_list;
                 $.each($scope.myCourseList,function(index,value){

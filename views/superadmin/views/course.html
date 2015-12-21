@@ -46,8 +46,8 @@
                                 <a href="#courseDetail/{{course.courseid}}" class="btn-xs btn-primary">View course</a>
                             </td>
                         </tr>
-                        <tr ng-show="courseList.length==0"><td colspan="9" class="text-center">No Records Found !!! </td></tr>
-                        <tr ng-show="!coursefilter.length"><td colspan="9" class="text-center">No Records Found !!!</td></tr>
+                        <tr ng-show="courseList.length==0 || !coursefilter.length"><td colspan="9" class="text-center">No Records Found !!! </td></tr>
+                      <!--  <tr ng-show="!coursefilter.length"><td colspan="9" class="text-center">No Records Found !!!</td></tr>-->
                     </tbody>
                 </table>
                 <!-- Start Pagination -->

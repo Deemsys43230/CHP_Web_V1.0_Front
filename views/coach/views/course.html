@@ -15,7 +15,7 @@
                             <div class="loader"></div>
                         </div>
                     </div>
-                    <div class="col-md-4" ng-repeat="courseList in myCourseList">
+                    <span ng-show="myCourseList.length!=0"><div class="col-md-4" ng-repeat="courseList in myCourseList">
                         <a href="#courseView/{{courseList.courseid}}">
                             <div class="dashboard">
                                 <span ng-show="courseList.coursestatus==1"><img class="course-status" src="../../images/draft.png"></span>
@@ -44,6 +44,13 @@
                             </div>
                         </a>
                     </div>
+                        </span>
+                    <span  ng-show="myCourseList.length!=0">
+                    <div class="col-md-12">
+                       <p class="text-center">No courses available <a href="#courseAdd" class="back-button margin-left-5"><i class="fa fa-plus-circle"></i> Create New Course</a></p>
+
+                    </div>
+                        </span>
                 </div>
             </div>
         </div>
