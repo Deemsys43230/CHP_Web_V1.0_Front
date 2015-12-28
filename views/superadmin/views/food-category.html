@@ -51,7 +51,7 @@
                     <tbody>
                     <tr dir-paginate="category in categoryfilter = (foodCategoryList |filter: categorysearch | itemsPerPage: 8)" ng-show="foodCategoryList.length!=0">
                         <td>{{category.categoryid}}</td>
-                        <td>{{category.categoryname}}</td>
+                        <td title="{{category.categoryname}}">{{category.categoryname}}</td>
                         <td>
                             <a href="" class="btn-xs btn-warning" ng-click="doEditFoodCategory(category.categoryid)">Edit</a>
                             <a href="" class="btn-xs btn-success" ng-click="doEnableDisableFoodCategory(category.categoryid)" ng-show="category.status==0">Enable</a>
@@ -59,8 +59,8 @@
                             <a href="" class="btn-xs btn-danger" ng-click="doDeleteFoodCategory(category.categoryid)">Delete</a>
                         </td>
                     </tr>
-                    <tr ng-show="foodCategoryList.length==0"><td colspan="3" class="text-center">No Records Found !!!</td></tr>
-                    <tr ng-show="!categoryfilter.length"><td colspan="3" class="text-center">No Records Found !!!</td></tr>
+                    <tr ng-show="foodCategoryList.length==0 || !categoryfilter.length"><td colspan="3" class="text-center">No Records Found !!!</td></tr><!--
+                    <tr ng-show="!categoryfilter.length"><td colspan="3" class="text-center">No Records Found !!!</td></tr>-->
                     </tbody>
                 </table>
                 <!-- Start Pagination -->

@@ -1472,7 +1472,8 @@ adminApp.directive('input', function() {
 
 //Check For FLoat Validation
 adminApp.directive('validateFloat', function() {
-    var FLOAT_REGEXP = /^\-?\d+((\.)\d+)?$/;
+   var FLOAT_REGEXP = /^\-?\d+((\.)\d+)?$/;
+    //var FLOAT_REGEXP = /^[1-9]+((\.)\d+)?$/;
 
     return {
         require: 'ngModel',
@@ -1480,6 +1481,24 @@ adminApp.directive('validateFloat', function() {
         link: function(scope, elm, attrs, ctrl) {
             // only apply the validator if ngModel is present and Angular has added the Float Number validator
             ctrl.$validators.validateFloat = function(modelValue) {
+                return  ctrl.$isEmpty(modelValue) || FLOAT_REGEXP.test(modelValue);
+            };
+
+        }
+    };
+});
+
+//Check For FLoat Validation
+adminApp.directive('validateFloat1', function() {
+    // var FLOAT_REGEXP = /^\-?\d+((\.)\d+)?$/;
+    var FLOAT_REGEXP = /^[1-9]+((\.)\d+)?$/;
+
+    return {
+        require: 'ngModel',
+        restrict: '',
+        link: function(scope, elm, attrs, ctrl) {
+            // only apply the validator if ngModel is present and Angular has added the Float Number validator
+            ctrl.$validators.validateFloat1 = function(modelValue) {
                 return  ctrl.$isEmpty(modelValue) || FLOAT_REGEXP.test(modelValue);
             };
 

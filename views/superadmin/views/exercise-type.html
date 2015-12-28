@@ -43,14 +43,14 @@
                     <tbody>
                     <tr dir-paginate="list in exercisetypefilter = (exerciseTypeList |filter: typesearch | itemsPerPage: 9)" ng-show="exerciseTypeList.length!=0">
                         <td>{{list.typeid}}</td>
-                        <td>
+                        <td title="{{list.typename}}">
                             <span class="line-clamp-sm">
                                 {{list.typename}}
                             </span>
                         </td>
                         <td>
                             <span class="line-clamp-md">
-                                <span  ng-repeat="level in list.levels">
+                                <span  ng-repeat="level in list.levels" title="{{list.level}}">
                                     {{level.levelname}}{{$last ? '' : ','}}
                                 </span>
                             </span>

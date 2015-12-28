@@ -1,18 +1,35 @@
 var adminApp = angular.module('adminApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','angularUtils.directives.dirPagination']);
 
-adminApp.controller('ExerciseTypeController',['$scope','requestHandler','Flash',function($scope,requestHandler,Flash) {
+adminApp.controller('ExerciseTypeController',['$scope','requestHandler','Flash',function($scope,requestHandler,Flash,$location) {
 
     $scope.activeClass = {exercisetype:'active'};
     var original ="";
     var exerciseTypeArray=[];
 
     $scope.doGetAllExerciseType=function(){
+      //  alert("hi");
+        var levelvalue="";
+        var levelname="";
         $scope.loaded=true;
         requestHandler.getRequest("admin/listofTypes/","").then(function(response){
             $scope.exerciseTypeList=response.data.Typelist;
 
             $.each($scope.exerciseTypeList, function(index,typelist) {
                 exerciseTypeArray.push(typelist.typename);
+            });
+
+            // Tool tip for session in food list
+            $.each($scope.exerciseTypeList,function(index,value){
+                value.level="";
+                $.each(value.levels,function(index,value1){
+                    levelvalue=value1.levelname;
+                    levelname = levelname + levelvalue;
+                    if(index!=value.levels.length-1)
+                        levelname=levelname+',';
+                });
+                value.level = levelname;
+                levelname="";
+
             });
             $scope.exerciseTypeArrayValues=exerciseTypeArray;
 
@@ -25,10 +42,12 @@ adminApp.controller('ExerciseTypeController',['$scope','requestHandler','Flash',
 
     $scope.isNameAlreadyExist=function(typename){
         if($scope.isNew==true){
-            if($scope.exerciseTypeArrayValues.indexOf(typename)!=-1){
+             if($scope.exerciseTypeArrayValues.indexOf(typename)!=-1){
+                alert("1");
                 $scope.nameAlreadyExist=true;
             }
             else{
+                alert("2");
                 $scope.nameAlreadyExist=false;
             }
         }
@@ -238,8 +257,9 @@ adminApp.controller('ExerciseTypeController',['$scope','requestHandler','Flash',
                 errorMessage(Flash,"Exercise already used, can't delete!");
             }
             if(response.data.Response_status==1){
+                 successMessage(Flash,"Exercise Type Successfully Deleted");
                 $scope.doGetAllExerciseType();
-                successMessage(Flash,"Exercise Type Successfully Deleted");
+               // $location.path("exerciseType");
             }
 
         },function(){

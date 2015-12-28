@@ -5,6 +5,11 @@ requestHandlerApp.factory("requestHandler",['$http',function($http,$location){
     var requestObj={};
 
     //*IMPORTANT*//
+    /*For deployment*/
+  /*  var hostedDomain="http://www.deemsysinc.net/api/v1/";
+    var urlLength = 15;
+    var exerciselength=13;*/
+
     var hostedDomain="http://localhost/api/v1/";
     var urlLength = 14;
     var exerciselength=13;

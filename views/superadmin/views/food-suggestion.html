@@ -32,8 +32,8 @@
                         <tbody>
                         <tr dir-paginate="suggestion in foodSuggestionList | itemsPerPage: 9" ng-show="foodSuggestionList.length!=0">
                             <td>{{suggestion.suggestionid}}</td>
-                            <td><span class="line-clamp-sm">{{suggestion.foodname}}</span></td>
-                            <td><span class="line-clamp-md">{{suggestion.fooddescription}}</span></td>
+                            <td title="{{suggestion.foodname}}"><span class="line-clamp-sm">{{suggestion.foodname}}</span></td>
+                            <td title="{{suggestion.fooddescription}}"><span class="line-clamp-md">{{suggestion.fooddescription}}</span></td>
                            <td>
                                 <a href="#foodSuggestionDetail/{{suggestion.suggestionid}}" class="btn-sm btn-primary">View</a>
                                 <a href="" class="btn-xs btn-success hint--top" ng-click="doApproveFoodSuggestion(suggestion.suggestionid)" ng-show="suggestion.foodstatus==0" data-hint="Approve"><span>&#10004;</span></a>

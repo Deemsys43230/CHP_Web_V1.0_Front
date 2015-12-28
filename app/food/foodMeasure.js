@@ -118,4 +118,11 @@ var original ="";
     {
         return angular.equals(original, $scope.list);
     };
+
+    // Search food category
+    $('.show-list-search').click(function() {
+        $('.search-list-form').toggle(300);
+        $('.search-list-form input').focus();
+    });
+
 });

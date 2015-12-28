@@ -61,6 +61,8 @@
                     <label for="india">India</label>
                     <input type="radio" id="us" class="height" name="regionid" value="2" ng-model="foodDetails.regionid"/>
                     <label for="us">United states</label>
+                    <input type="radio" id="general" class="height" name="regionid" value="3" ng-model="foodDetails.regionid"/>
+                    <label for="us">General</label>
                     </div>
                     <h5>Tags :</h5>
                     <div class="form-group">
@@ -117,10 +119,10 @@
                             <tr  ng-class="animate-repeat" ng-repeat="measureDetail in foodDetails.measureid" ng-form="mineralForm">
                                 <td>{{measureDetail.measurename}}</td>
                                 <td class="input_mineral">
-                                    <input type="text" name="measureValue" ng-model="measureDetail.value" required validate-Float/>
+                                    <input type="text" name="measureValue" ng-model="measureDetail.value" required validate-Float1/>
                                      <span ng-show="mineralForm.measureValue.$dirty&&mineralForm.measureValue.$invalid">
                                          <span class="error-message textarea-errormessage20" ng-show="mineralForm.measureValue.$error.required"><span>Required.</span></span>
-                                        <span class="error-message textarea-errormessage20" ng-show="!mineralForm.measureValue.$error.required&&mineralForm.measureValue.$error.validateFloat"><span>Invalid&nbsp;data.</span></span>
+                                        <span class="error-message textarea-errormessage20" ng-show="!mineralForm.measureValue.$error.required&&mineralForm.measureValue.$error.validateFloat1"><span>Invalid&nbsp;data.</span></span>
                                      </span>
                                 </td>
                                 <td class="line input_mineral">
