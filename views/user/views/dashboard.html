@@ -83,7 +83,7 @@
                              offset="{{ offset }}">
                         </div>
                     </div>
-                    <p class="text-gray">out of {{gainGraphMax}} calories</p>
+                    <p class="text-gray">out of {{calorieGraph.averagecalorieintake}} calories</p>
                 </div>
                 <div class="col-md-6 text-center">
                     <h5>Spent</h5>
@@ -504,7 +504,7 @@
                         <form name="FoodAddForm">
                         <h5>Food Name:</h5>
                         <p>{{userSelectedFoodDetails.foodname}}</p>
-                        <h5 class="margin-top-10">Select Measure:</h5>
+                        <h5 class="margin-top-10">Select Measure:</h5>{{userFood.measure}}
                             <select name="measure" ng-model="userFood.measure" ng-options="measure.measurename for measure in userSelectedFoodDetails.measureid track by measure.measureid" ng-change="doCalculateCalories()" required>
                                 <option value="">-- Select Measure --</option>
                             </select>
