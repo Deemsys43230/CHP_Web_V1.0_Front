@@ -606,7 +606,7 @@ adminApp.directive('validFile',function(){
     }
 });
 
-adminApp.filter('startsWithLetter', function () {
+adminApp.filter('startsWithLetterFood', function () {
 
     return function (items, foodsearch) {
         var filtered = [];

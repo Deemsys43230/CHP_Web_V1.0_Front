@@ -87,8 +87,8 @@
                             <a href="" class="btn-xs btn-danger" ng-click="doEnableDisableCoach(coach.userid)" ng-hide="coach.isenabled==0">Disable</a>
                         </td>
                     </tr>
-                    <tr ng-show="coachList.length==0"><td colspan="3" class="text-center">No Records Found !!!</td></tr>
-                    <tr ng-show="!coachfilter.length"><td colspan="3" class="text-center">No Records Found !!!</td></tr>
+                    <tr ng-show="coachList.length==0 || !coachfilter.length "><td colspan="3" class="text-center">No Records Found !!!</td></tr>
+                    <!--<tr ng-show="!coachfilter.length"><td colspan="3" class="text-center">No Records Found !!!</td></tr>-->
  </tbody>
                 </table>
                 <!-- Start Pagination -->

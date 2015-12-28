@@ -42,11 +42,22 @@ adminApp.controller('ExerciseController',function ($scope,requestHandler,Flash) 
 
     //Get Exercise List
     $scope.doGetAllExercise=function(){
+
+        var typevalue="";
         $scope.loaded=true;
         requestHandler.getRequest("admin/listofExercise/","").then(function(response){
             $scope.exerciseList=response.data.listexercises;
             $scope.paginationLoad=true;
             $scope.loaded=false;
+
+            $.each($scope.exerciseList,function(index,value){
+                value.type="";
+                $.each(value.types,function(index,value1){
+                typevalue= value1.typename;
+                });
+                value.type = typevalue;
+
+            });
         },function(response){
         });
     };
@@ -54,6 +65,7 @@ adminApp.controller('ExerciseController',function ($scope,requestHandler,Flash) 
 
     //Enable Disable Exercise
     $scope.doEnableDisable=function(exerciseId){
+
         $scope.loaded=true;
         requestHandler.postRequest("admin/enableordisableExercise/",{"exerciseid":exerciseId}).then(function(response){
             if(response.data.Response_status==1){
@@ -399,6 +411,7 @@ adminApp.controller('ExerciseEditController',function($q,$scope,requestHandler,F
     };
 
     $scope.doApproveExerciseSuggestion=function(){
+
         $scope.loaded=true;
         requestHandler.postRequest("admin/approveExerciseSuggestion/",{'suggestionid':$routeParams.id}).then(function(response){
             $scope.doGetAllExerciseSuggestion();
@@ -457,6 +470,8 @@ adminApp.controller('ExerciseEditController',function($q,$scope,requestHandler,F
         $scope.doGetExcerciseTypeList();
     }
 
+
+
 });
 
 
@@ -504,3 +519,17 @@ adminApp.directive('validFile',function(){
     }
 });
 
+adminApp.filter('startsWithLetterExercise', function () {
+
+    return function (items, exercisesearch) {
+        var filtered = [];
+        var letterMatch = new RegExp(exercisesearch, 'i');
+        for (var i = 0; i < items.length; i++) {
+            var item = items[i];
+            if (letterMatch.test(item.exercisename) || letterMatch.test(item.type) ) {
+                filtered.push(item);
+            }
+        }
+        return filtered;
+    };
+});

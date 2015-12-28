@@ -192,11 +192,13 @@ adminApp.filter('trusted', ['$sce', function ($sce) {
 adminApp.filter('startsWithLetter', function () {
 
     return function (items, coachsearch) {
+
         var filtered = [];
         var letterMatch = new RegExp(coachsearch, 'i');
         for (var i = 0; i < items.length; i++) {
             var item = items[i];
             if (letterMatch.test(item.emailid) || letterMatch.test(item.name) ) {
+
                 filtered.push(item);
             }
         }

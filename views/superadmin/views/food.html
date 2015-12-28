@@ -43,7 +43,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr dir-paginate="food in foodfilter=(foodList | startsWithLetter: foodsearch |orderBy:sortKey:reverse | itemsPerPage: 10)" ng-show="foodList.length!=0">
+                    <tr dir-paginate="food in foodfilter=(foodList | startsWithLetterFood: foodsearch |orderBy:sortKey:reverse | itemsPerPage: 10)" ng-show="foodList.length!=0">
                         <td>{{food.foodid}}</td>
                         <td title="{{food.foodname}}"><span class="line-clamp-xxs">{{food.foodname}}</span></td>
                         <td><span class="line-clamp-xxs">
@@ -65,8 +65,8 @@
                             <a href="" class="btn-xs btn-danger" ng-click="doEnableDisable(food.foodid)" ng-hide="food.status==0">Disable</a>
                         </td>
                     </tr>
-                    <tr ng-show="foodList.length==0"><td colspan="6" class="text-center">No Records Found !!!</td></tr>
-                    <tr ng-show="!foodfilter.length"><td colspan="6" class="text-center">No Records Found !!!</td></tr>
+                    <tr ng-show="foodList.length==0 || !foodfilter.length "><td colspan="6" class="text-center">No Records Found !!!</td></tr>
+                   <!-- <tr ng-show="!foodfilter.length"><td colspan="6" class="text-center">No Records Found !!!</td></tr>-->
                     </tbody>
                 </table>
 
@@ -84,10 +84,10 @@
 
 <script type="text/javascript" src="../../js/script.js"></script>
 
-<script>
+<!--<script>
         $(".hideSearch").click(function(){
             alert("okay");
             $("#hidden-search").hide();
             $("#hidden-search").fadeIn(2000);
         });
-</script>
+</script>-->
