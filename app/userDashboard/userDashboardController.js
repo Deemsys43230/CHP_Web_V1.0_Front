@@ -83,9 +83,10 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
             $scope.doUserAddFood();
         });
     };
-
+    var originalfood="";
     //On Select edit foods
     $scope.doEditUserFood=function(foodid,userfoodid){
+
         $scope.isNew=false;
         $scope.title= "Edit Food";
         $scope.loaded=true;
@@ -94,6 +95,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
             $scope.userSelectedFoodDetails=result;
             var getUserFoodDetailsPromise=UserDashboardService.doGetUserFoodDetails(userfoodid);
             getUserFoodDetailsPromise.then(function(result){
+                originalfood = angular.copy(result);
                 $scope.userFood.userfoodid=result.userfoodid;
                 $scope.userFood.foodid=result.foodid;
                 //  $scope.userFood.measure=result.measureid;
@@ -113,6 +115,9 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         });
     };
 
+    $scope.isClean=function(){
+        return angular.equals(originalfood, $scope.userFood);
+    };
     //Calories caluclation for food
     $scope.doCalculateCalories=function(){
         if($scope.userFood.servings==0){
@@ -366,7 +371,6 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
 
         });
     };
-
     //On Select edit exercise
     $scope.doEditUserExercise=function(exerciseid,userexercisemapid){
 
@@ -375,6 +379,8 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         $scope.loaded=true;
         var getExerciseDetailForEditPromise=UserDashboardService.doGetSelectedExerciseDetails(exerciseid);
         getExerciseDetailForEditPromise.then(function(result){
+
+
             $scope.userSelectedExerciseDetails=result;
             var getUserExerciseDetailsPromise=UserDashboardService.doGetUserExerciseDetails(userexercisemapid);
             getUserExerciseDetailsPromise.then(function(result){
@@ -398,6 +404,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
 
         });
     };
+
 
     //Update User Exercise
     $scope.doUpdateUserExercise=function(){

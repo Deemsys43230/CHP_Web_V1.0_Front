@@ -10,10 +10,12 @@ adminApp.controller('ExerciseTypeController',['$scope','requestHandler','Flash',
       //  alert("hi");
         var levelvalue="";
         var levelname="";
+        $scope.exerciseTypeArrayValues=[];
+
         $scope.loaded=true;
         requestHandler.getRequest("admin/listofTypes/","").then(function(response){
             $scope.exerciseTypeList=response.data.Typelist;
-
+            exerciseTypeArray=[];
             $.each($scope.exerciseTypeList, function(index,typelist) {
                 exerciseTypeArray.push(typelist.typename);
             });
@@ -43,11 +45,11 @@ adminApp.controller('ExerciseTypeController',['$scope','requestHandler','Flash',
     $scope.isNameAlreadyExist=function(typename){
         if($scope.isNew==true){
              if($scope.exerciseTypeArrayValues.indexOf(typename)!=-1){
-                alert("1");
+                //alert("1");
                 $scope.nameAlreadyExist=true;
             }
             else{
-                alert("2");
+                //alert("2");
                 $scope.nameAlreadyExist=false;
             }
         }
