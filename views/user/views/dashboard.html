@@ -68,9 +68,9 @@
                     <div class="circle-wrapper">
                         <div class="circle-progress ng-cloak font-14" ng-style="getStyle()">{{currentGain}}</div>
                         <div round-progress
-                             max="gainGraphMax"
+                             max="calorieGraph.averagecalorieintake"
                              current="currentGain"
-                             color="#66E066"
+                             color="{{currentGainColour}}"
                              bgcolor="{{ bgColor }}"
                              radius="40"
                              semi="isSemi"
@@ -92,7 +92,7 @@
                         <div round-progress
                              max="spentGraphMax"
                              current="currentSpent"
-                             color="#FF5C33"
+                             color="{{currentSpentColour}}"
                              bgcolor="{{ bgColor }}"
                              radius="40"
                              semi="isSemi"
@@ -287,6 +287,7 @@
                                         <div class="col-md-4 text-right gain-list">
                                             <div class="text-green text-bold">Gain</div>
                                             <hr/>
+                                            <div id="demo">
                                             <p ng-repeat="food in userFoodDiaryDataAll.BreakFast" class="wrap">
                                                 {{food.foodname}}</p>
                                             <p ng-repeat="food in userFoodDiaryDataAll.Brunch" class="wrap">
@@ -297,6 +298,8 @@
                                                 {{food.foodname}}</p>
                                             <p ng-repeat="food in userFoodDiaryDataAll.Dinner" class="wrap">
                                                 {{food.foodname}}</p>
+                                            </div>
+                                            <a href="" onclick="buttonHeight()">check</a>
                                         </div>
                                         <div class="col-md-4 no-padding">
                                             <div id="gainVsSpent" style="width:130px;height: 350px; margin: auto;padding: 15px 5px 5px 5px; box-shadow:inset 0 0 3px #ccc"></div>
@@ -504,7 +507,7 @@
                         <form name="FoodAddForm">
                         <h5>Food Name:</h5>
                         <p>{{userSelectedFoodDetails.foodname}}</p>
-                        <h5 class="margin-top-10">Select Measure:</h5>{{userFood.measure}}
+                        <h5 class="margin-top-10">Select Measure:</h5>
                             <select name="measure" ng-model="userFood.measure" ng-options="measure.measurename for measure in userSelectedFoodDetails.measureid track by measure.measureid" ng-change="doCalculateCalories()" required>
                                 <option value="">-- Select Measure --</option>
                             </select>
@@ -702,7 +705,10 @@
 
     $(function(){
         $(".common_model").show();
-    })
+    });
+    function buttonHeight(){
+        alert(document.getElementById('demo').clientHeight);
+    };
 </script>
 
 <script type="text/javascript">

@@ -12,25 +12,25 @@
                 <div class="col-md-12">
                     <h5>&nbsp;&nbsp;Update Weight <span class="pull-right">Today's Date : <span class="text-red text-bold">{{todayDate}}</span></span> </h5>
                 </div>
-                <form name="demographyForm">
+                <form name="weightLogForm" novalidate>
                     <div class="col-md-12 margin-top-15">
                         <div class="col-md-4 text-right padding-top-4">
                             <h5>Weight :</h5>
                         </div>
                         <div class="col-md-8">
-                            <input class="weight_input" name="weight" ng-pattern="/^\-?\d+((\.|\,)\d+)?$/" ng-model="demography.weight" required/>
+                            <input class="weight_input" id="weightLog" name="weight" ng-model="weightlog" ng-pattern="/^\-?\d+((\.|\,)\d+)?$/" required/>
                             <input type="radio" id="5" class="height" name="weight" />
                             <label for="5">Kg</label>
                             <input type="radio" id="6" class="height" name="weight" />
                             <label for="6">Lb</label>
-                            <span ng-show="demographyForm.weight.$dirty&&demographyForm.weight.$invalid">
-                                <span class="error-message textarea-errormessage40-left" ng-show="demographyForm.weight.$error.required"><span>Required.</span></span>
-                                <span class="error-message textarea-errormessage40-left" ng-show="demographyForm.weight.$error.pattern"><span>Invalid&nbsp;Format.</span></span>
+                            <span ng-show="weightLogForm.weight.$dirty&&weightLogForm.weight.$invalid">
+                                <span class="error-message textarea-errormessage40-left" ng-show="weightLogForm.weight.$error.required"><span>Required.</span></span>
+                                <span class="error-message textarea-errormessage40-left" ng-show="weightLogForm.weight.$error.pattern"><span>Invalid&nbsp;Format.</span></span>
                             </span>
                         </div>
                         <div class="col-md-12 text-center margin-top-15 margin-bottom-10">
-                            <span  ng-show="updateGoal==1"><a href="" class="weight_button" ng-disabled="isWeightUpdated() || demographyForm.$invalid" ng-click="doInsertWeightLog()">Update Weight</a></span>
-                            <span  ng-show="updateGoal==0"><a href="" class="weight_button" ng-disabled="isWeightUpdated() || demographyForm.$invalid" ng-click="doUpdateWeight()">Update Weight</a></span>
+                            <a href="" class="weight_button" ng-disabled="weightLogForm.$invalid" ng-click="doInsertOrUpdateWeightLog()">
+                                <span ng-if="spinner"><span class="three-quarters-loader">Loading…</span></span>{{weightUpdateText}}</a>
                         </div>
                     </div>
                 </form>
@@ -88,4 +88,5 @@
     $(document).ready(function(){
         viewGraph1();
     });
+
 </script>

@@ -12,6 +12,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
     $scope.caloriesSpent=0;
     $scope.workoutvalue=0;
     $window.singlePicker = false;
+    $scope.weightUpdateText="Update Weight";
 
     //Modal Popup to add user food
     $scope.doUserAddFood=function(){
@@ -205,7 +206,6 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
             $scope.loaded=false;
         });
     };
-
 
     //Load Details Based on session
     $scope.loadSessionDetails=function(){
@@ -487,7 +487,6 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
     };
 
     $scope.viewGoal=function(){
-        $scope.weightUpdated=0;
         $scope.doGetWeightGoal();
         $scope.graph = {
             status: 'goal'
@@ -502,6 +501,8 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
 
     $scope.doGetWeightGoal=function(){
         requestHandler.getRequest("user/getWeightGoal/","").then(function(response){
+            $scope.weightlog=$scope.demography.weight;
+            $scope.originalWeight=$scope.demography.weight;
             if(response.data.Response_status==0){
                 $scope.updateGoal=0;
                 $scope.targetText='Period';
@@ -510,7 +511,6 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
             else{
                 $scope.goalDetails=response.data.Weight_Goal;
                 $scope.updateGoal=1;
-                $scope.originalWeight=$scope.demography.weight;
 
                 var dateCompare = $scope.goalDetails.startdate.slice(6,10)+','+$scope.goalDetails.startdate.slice(3,5)+','+$scope.goalDetails.startdate.slice(0,2);
                 var date1 = selectedDate.slice(6,10)+','+selectedDate.slice(3,5)+','+selectedDate.slice(0,2);
@@ -575,15 +575,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         }
     };
 
-    $scope.isWeightUpdated=function(){
-        return angular.equals (parseFloat($scope.originalWeight),parseFloat($scope.demography.weight));
-    };
-
     $scope.setGoalConfirmation=function(){
-        $scope.demography.weight = parseFloat($scope.demography.weight);
-        if($scope.originalWeight!=$scope.demography.weight){
-            $scope.doUpdateWeight();
-        }
         $scope.setGoalDetails.initialweight=parseInt($scope.demography.weight);
 
         requestHandler.postRequest("user/insertWeightGoal/",$scope.setGoalDetails).then(function(response){
@@ -593,45 +585,42 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         });
     };
 
-    //TO Update Weight
-    $scope.doUpdateWeight=function(){
-        $scope.demography.height = parseFloat($scope.demography.height);
-        $scope.demography.weight = parseFloat($scope.demography.weight);
-        $scope.demography.hip = parseFloat($scope.demography.hip);
-        requestHandler.putRequest("user/insertorupdateDemography/",$scope.demography).then(function(response){
-            successMessage(Flash, "Successfully Updated!");
-        }, function () {
-            errorMessage(Flash, "Please try again later!")
-        });
-    };
-
     //TO Insert weight Goal Log
-    $scope.doInsertWeightLog=function(){
-        $scope.weightUpdated=1;
-        $scope.weightDiff = ($scope.originalWeight - $scope.demography.weight).toFixed(2);
-        if($scope.weightDiff>0){
-            $scope.weightIncrease=1;
-        }
-        else{
-            $scope.weightDiff = $scope.weightDiff*(-1);
-            $scope.weightIncrease=0;
-        }
-        requestHandler.postRequest("user/getWeightLogByDate/",{"date":selectedDate}).then(function(response){
+    $scope.doInsertOrUpdateWeightLog=function(){
+
+        $scope.weightUpdateText="Updating...";
+        $scope.spinner=true;
+
+        requestHandler.getRequest("user/getWeightGoal/","").then(function(response){
             if(response.data.Response_status==0){
-                requestHandler.postRequest("user/insertWeightLog/",{"date":selectedDate,"weight":$scope.demography.weight}).then(function(response){
-                    successMessage(Flash, "Successfully Updated!");
-                    $window.currentweight=response.data.Weight_logs.weight;
-                    $scope.doUpdateWeight();
-                    $scope.doGetWeightLogGraph();
+                requestHandler.postRequest("user/weightlogInsertorUpdate/",{"date":selectedDate,"weight":$scope.weightlog}).then(function(response){
+                    $scope.spinner=false;
+                    $scope.weightUpdateText="Update Weight";
                 }, function () {
                     errorMessage(Flash, "Please try again later!")
                 });
             }
             else{
-                requestHandler.putRequest("user/updateWeightLog/",{"logid":response.data.Weight_logs.logid,"weight":$scope.demography.weight}).then(function(response){
+                var currentWeight=document.getElementById('weightLog').value;
+                $scope.weightDiff = (currentWeight - $scope.originalWeight).toFixed(2);
+                if($scope.weightDiff==0.00){
+                    $scope.weightUpdated=0;
+                }
+                else if($scope.weightDiff>0){
+                    $scope.weightIncrease=0;
+                    $scope.weightUpdated=1;
+                }
+                else{
+                    $scope.weightDiff = $scope.weightDiff*(-1);
+                    $scope.weightIncrease=1;
+                    $scope.weightUpdated=1;
+                }
+                requestHandler.postRequest("user/weightlogInsertorUpdate/",{"date":selectedDate,"weight":currentWeight}).then(function(response){
                     successMessage(Flash, "Successfully Updated!");
-                    $window.currentweight=response.data.Weight_logs.weight;
-                    $scope.doUpdateWeight();
+                    $scope.weightlog=response.data.Weight_Goal.weight;
+                    $scope.spinner=false;
+                    $scope.weightUpdateText="Update Weight";
+                    $window.currentweight=response.data.Weight_Goal.weight;
                     $scope.doGetWeightLogGraph();
                 }, function () {
                     errorMessage(Flash, "Please try again later!")
@@ -646,9 +635,9 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         };
         var monthNames= ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
         requestHandler.postRequest("user/getWeightLogGraph/",{"startdate":$scope.goalDetails.startdate.toString(),"enddate":$scope.goalDetails.enddate.toString()}).then(function(response){
-            $scope.weightLogGraph=response.data.Weight_logs;
+            $scope.weightlogGraph=response.data.Weight_logs;
             var weightLogs = [];
-            $.each($scope.weightLogGraph, function(index,value) {
+            $.each($scope.weightlogGraph, function(index,value) {
                 var weightLog = [];
                 var date = value.date.split("/");
                 weightLog.push(monthNames[(date[1]-1)]+' '+date[0]);
@@ -741,12 +730,18 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
 
             $scope.currentGain=$scope.calorieGraph.intakecalorie;
             $scope.currentGain=$scope.currentGain.toFixed(2);
-            if(($scope.currentGain.length-3)>2) $scope.gainGraphMax=100+((String($scope.currentGain|0).slice(0, -2))*100);
-            else $scope.gainGraphMax=100;
+            /*if(($scope.currentGain.length-3)>2) $scope.gainGraphMax=100+((String($scope.currentGain|0).slice(0, -2))*100);
+            else $scope.gainGraphMax=100;*/
+
+            if($scope.calorieGraph.averagecalorieintake<$scope.calorieGraph.intakecalorie){
+                $scope.currentGainColour="red";
+            }else $scope.currentGainColour="limegreen";
+
             $scope.currentSpent=$scope.calorieGraph.burntcalorie;
             $scope.currentSpent=$scope.currentSpent.toFixed(2);
-            if(($scope.currentSpent.length-3)>2) $scope.spentGraphMax=100+((String($scope.currentSpent|0).slice(0, -2))*100);
-            else $scope.spentGraphMax=100;
+            /*if(($scope.currentSpent.length-3)>2) $scope.spentGraphMax=100+((String($scope.currentSpent|0).slice(0, -2))*100);
+            else $scope.spentGraphMax=100;*/
+            $scope.currentSpentColour="orange";
 
             var gainedCalories;
             var spentCalories;
