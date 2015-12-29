@@ -1814,6 +1814,9 @@ input[type="submit"] {
     margin-bottom: 5px !important;
 }
 
+.margin-bottom-1 {
+    margin-bottom: 1px !important;
+}
 
 .padding-top-4{
     padding-top: 4px;
