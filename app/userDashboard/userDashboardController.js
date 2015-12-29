@@ -83,7 +83,8 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
             $scope.doUserAddFood();
         });
     };
-    var originalfood="";
+    var originalmeasure="";
+    var originalservings="";
     //On Select edit foods
     $scope.doEditUserFood=function(foodid,userfoodid){
 
@@ -95,18 +96,18 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
             $scope.userSelectedFoodDetails=result;
             var getUserFoodDetailsPromise=UserDashboardService.doGetUserFoodDetails(userfoodid);
             getUserFoodDetailsPromise.then(function(result){
-                originalfood = angular.copy(result);
-                console.log(result);
-                console.log(originalfood)
+
                 $scope.userFood.userfoodid=result.userfoodid;
                 $scope.userFood.foodid=result.foodid;
                 //  $scope.userFood.measure=result.measureid;
                 $.each($scope.userSelectedFoodDetails.measureid, function(index,value) {
                     if(value.measureid == result.measureid.measureid){
                         $scope.userFood.measure = value;
+                        originalmeasure = angular.copy(value);
                     }
                 });
                 $scope.userFood.servings=parseInt(result.measureid.servings);
+                originalservings = angular.copy(result.measureid.servings);
                 $scope.current=$scope.caloriesIntake=result.measureid.calories;
                 $scope.current=$scope.current.toFixed(2);
                 if(($scope.current.length-3)>2) $scope.max=100+((String($scope.current|0).slice(0, -2))*100);
@@ -117,9 +118,8 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         });
     };
 
-    $scope.isClean=function(){
-        console.log(angular.equals(originalfood, $scope.userFood));
-        return angular.equals(originalfood, $scope.userFood);
+    $scope.isCleanFood=function(){
+        return angular.equals(originalmeasure, $scope.userFood.measure)&& angular.equals(originalservings, $scope.userFood.servings);
     };
     //Calories caluclation for food
     $scope.doCalculateCalories=function(){
@@ -374,6 +374,8 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
 
         });
     };
+    var originallevel="";
+    var originaltiming="";
     //On Select edit exercise
     $scope.doEditUserExercise=function(exerciseid,userexercisemapid){
 
@@ -393,10 +395,11 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
                 $.each($scope.userSelectedExerciseDetails.type.levels, function(index,value) {
                     if(value.levelid == result.User_exercise_data.Level.levelid){
                         $scope.userExercise.levelid = value;
+                        originallevel=angular.copy(value);
                     }
                 });
                 $scope.userExercise.workoutvalue=parseInt(result.User_exercise_data.Level.workoutvalue);
-
+                originaltiming = parseInt(result.User_exercise_data.Level.workoutvalue);
                 $scope.current=$scope.caloriesSpent=result.User_exercise_data.Level.calories;
                 $scope.current=$scope.current.toFixed(2);
                 if(($scope.current.length-3)>2) $scope.max=100+((String($scope.current|0).slice(0, -2))*100);
@@ -408,6 +411,9 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         });
     };
 
+    $scope.isCleanExercise=function(){
+        return angular.equals(originallevel, $scope.userExercise.levelid)&& angular.equals(originaltiming, $scope.userExercise.workoutvalue);
+    };
 
     //Update User Exercise
     $scope.doUpdateUserExercise=function(){
