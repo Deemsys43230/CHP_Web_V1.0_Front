@@ -18,14 +18,14 @@
                             <h5>Weight :</h5>
                         </div>
                         <div class="col-md-8">
-                            <input class="weight_input" id="weightLog" name="weight" ng-model="weightlog" ng-pattern="/^\-?\d+((\.|\,)\d+)?$/" required/>
+                            <input class="weight_input" id="weightLog" name="weight" ng-model="weightlog" maxlength="5"  required validate-Float1/>
                             <input type="radio" id="5" class="height" name="weight" />
                             <label for="5">Kg</label>
                             <input type="radio" id="6" class="height" name="weight" />
                             <label for="6">Lb</label>
                             <span ng-show="weightLogForm.weight.$dirty&&weightLogForm.weight.$invalid">
                                 <span class="error-message textarea-errormessage40-left" ng-show="weightLogForm.weight.$error.required"><span>Required.</span></span>
-                                <span class="error-message textarea-errormessage40-left" ng-show="weightLogForm.weight.$error.pattern"><span>Invalid&nbsp;Format.</span></span>
+                                <span class="error-message textarea-errormessage40-left" ng-show="!weightLogForm.weight.$error.required&&weightLogForm.weight.$error.validateFloat1"><span>Invalid&nbsp;Data.</span></span>
                             </span>
                         </div>
                         <div class="col-md-12 text-center margin-top-15 margin-bottom-10">

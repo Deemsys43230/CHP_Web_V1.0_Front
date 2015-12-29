@@ -160,6 +160,7 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'userApp',
                             files:[
+                                '../../js/bootstrap.min.js',
                                 '../../angular/angular-utils-pagination/dirPagination.js',
                                 '../../app/userCoach/userCoachController.js'
                             ]
@@ -534,6 +535,25 @@ userApp.directive("exerciseexists", function ($q, $timeout,requestHandler) {
 
                 return defer.promise;
             }
+        }
+    };
+});
+
+
+//Check For FLoat Validation greater than 0
+userApp.directive('validateFloat1', function() {
+    // var FLOAT_REGEXP = /^\-?\d+((\.)\d+)?$/;
+    var FLOAT_REGEXP = /^\s*(?=.*[1-9])\d*(?:\.\d{0,8})?\s*$/;
+
+    return {
+        require: 'ngModel',
+        restrict: '',
+        link: function(scope, elm, attrs, ctrl) {
+            // only apply the validator if ngModel is present and Angular has added the Float Number validator
+            ctrl.$validators.validateFloat1 = function(modelValue) {
+                return  ctrl.$isEmpty(modelValue) || FLOAT_REGEXP.test(modelValue);
+            };
+
         }
     };
 });

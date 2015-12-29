@@ -1488,10 +1488,10 @@ adminApp.directive('validateFloat', function() {
     };
 });
 
-//Check For FLoat Validation
+//Check For FLoat Validation greater than 0
 adminApp.directive('validateFloat1', function() {
     // var FLOAT_REGEXP = /^\-?\d+((\.)\d+)?$/;
-    var FLOAT_REGEXP = /^[1-9]\d+((\.)\d+)?$/;
+    var FLOAT_REGEXP = /^\s*(?=.*[1-9])\d*(?:\.\d{0,8})?\s*$/;
 
     return {
         require: 'ngModel',

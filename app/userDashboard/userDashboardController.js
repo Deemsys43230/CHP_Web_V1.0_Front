@@ -96,6 +96,8 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
             var getUserFoodDetailsPromise=UserDashboardService.doGetUserFoodDetails(userfoodid);
             getUserFoodDetailsPromise.then(function(result){
                 originalfood = angular.copy(result);
+                console.log(result);
+                console.log(originalfood)
                 $scope.userFood.userfoodid=result.userfoodid;
                 $scope.userFood.foodid=result.foodid;
                 //  $scope.userFood.measure=result.measureid;
@@ -116,6 +118,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
     };
 
     $scope.isClean=function(){
+        console.log(angular.equals(originalfood, $scope.userFood));
         return angular.equals(originalfood, $scope.userFood);
     };
     //Calories caluclation for food

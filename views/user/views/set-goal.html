@@ -19,10 +19,10 @@
     <div class="col-md-5 margin-top-15">Target Weight<small>(Kgs)</small><span class="pull-right">:</span></div>
     <form name="setGoalForm">
         <div class="col-md-7 margin-top-10">
-            <input id="target" type="text" ng-pattern="/^\d+$/" name="targetweight" ng-model="weight" class="profile_input" required maxlength="2">
+            <input id="target" type="text"  name="targetweight" ng-model="weight" class="profile_input" required maxlength="5" validate-Float1>
             <span ng-show="setGoalForm.targetweight.$dirty&&setGoalForm.targetweight.$invalid">
                 <span class="error-message" ng-show="setGoalForm.targetweight.$error.required"><span>Required.</span></span>
-                <span class="error-message" ng-show="setGoalForm.targetweight.$error.pattern"><span>Invalid&nbsp;Format.</span></span>
+                <span class="error-message" ng-show="!setGoalForm.targetweight.$error.required&&setGoalForm.targetweight.$error.validateFloat1"><span>Invalid&nbsp;Data.</span></span>
             </span>
         </div>
 

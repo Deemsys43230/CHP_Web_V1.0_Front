@@ -239,13 +239,8 @@ userApp.controller('UserCoachController',function($scope,requestHandler,Flash,$l
 
     // Search Food Type
     $('.show-list-search').click(function() {
-        $('.search-list-form').fadeIn(300);
+        $('.search-list-form').toggle(300);
         $('.search-list-form input').focus();
-    });
-
-    $('.search-list-form input').focusout(function() {
-        $('.search-list-form').fadeOut(300);
-        $scope.mycoachsearch="";
     });
 
 });
