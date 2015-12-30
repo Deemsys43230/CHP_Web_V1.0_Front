@@ -6,6 +6,17 @@
                 <div class="col-md-12">
                     <!--<a href="#dashboard" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back to Dashboard</a>-->
                     <!-- Stat Search -->
+                    <div hidden class="pull-right" id="hidden-search1">
+                        <a href="#" onclick="return false;" class="show-list-search search_button"><i class="fa fa-search"></i></a>
+                        <div class="search-list-form override">
+                            <form autocomplete="off" class="searchform">
+                                <input type="text" ng-model="mycoachsearch" placeholder="Search here...">
+                            </form>
+                        </div>
+                    </div>
+                    <!-- End Search -->
+
+                    <!-- Stat Search -->
                     <div class="pull-right" id="hidden-search">
                         <a href="#" onclick="return false;" class="show-list-search search_button"><i class="fa fa-search"></i></a>
                         <div class="search-list-form override">
