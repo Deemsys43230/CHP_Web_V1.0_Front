@@ -119,19 +119,19 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
             when('/courseView/:id', {
                 templateUrl: 'views/course-view.html',
                 resolve: {
-            loadMyFiles:function($ocLazyLoad) {
-                return $ocLazyLoad.load({
-                    name:'userApp',
-                    files:[
+                loadMyFiles:function($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name:'userApp',
+                        files:[
 
-                        '../../plugin/popup/style.css',
-                        '../../plugin/popup/jquery.leanModal.min.js',
-                        '../../app/course/courseController.js'
-                    ]
-                })
-            }
-        },
-        controller:'CourseController'
+                            '../../plugin/popup/style.css',
+                            '../../plugin/popup/jquery.leanModal.min.js',
+                            '../../app/course/courseController.js'
+                        ]
+                    })
+                }
+            },
+            controller:'CourseController'
             }).
             when('/courseDetail/:id', {
                 templateUrl: 'views/course-details.html',
@@ -152,6 +152,64 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
             }).
             when('/courseCategory', {
                 templateUrl: 'views/course-category.html'
+            }).
+            when('/payments', {
+                templateUrl: 'views/payments.html',
+                resolve: {
+                    loadMyFiles:function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'userApp',
+                            files:[
+                                '../../angular/angular-utils-pagination/dirPagination.js',
+                                '../../app/payments/userPaymentController.js'
+                            ]
+                        })
+                    }
+                },
+                controller: 'UserPaymentController'
+            }).
+            when('/coachPayments', {
+                templateUrl: 'views/payments-coach.html',
+                resolve: {
+                    loadMyFiles:function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'userApp',
+                            files:[
+                                '../../angular/angular-utils-pagination/dirPagination.js',
+                                '../../app/payments/userPaymentController.js'
+                            ]
+                        })
+                    }
+                },
+                controller: 'UserPaymentController'
+            }).
+            when('/paymentDetails/:id', {
+                templateUrl: 'views/payment-details.html',
+                resolve: {
+                    loadMyFiles:function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'userApp',
+                            files:[
+                                '../../app/payments/userPaymentController.js'
+                            ]
+                        })
+                    }
+                },
+                controller: 'UserPaymentController'
+            }).
+            when('/paymentCoachDetails/:id', {
+                templateUrl: 'views/payment-coach-details.html',
+                resolve: {
+                    loadMyFiles:function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'userApp',
+                            files:[
+                                '../../app/payments/userPaymentController.js'
+                            ]
+                        })
+                    }
+                },
+                controller: 'UserPaymentController'
             }).
             when('/coach', {
                 templateUrl: 'views/coach.html',

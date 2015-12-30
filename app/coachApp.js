@@ -307,6 +307,35 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'CourseEditController'
             }).
+            when('/payments', {
+                templateUrl: 'views/payments.html',
+                resolve: {
+                    loadMyFiles:function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'coachApp',
+                            files:[
+                                '../../angular/angular-utils-pagination/dirPagination.js',
+                                '../../app/payments/coachPaymentController.js'
+                            ]
+                        })
+                    }
+                },
+                controller: 'CoachPaymentController'
+            }).
+            when('/studentsList/:id', {
+                templateUrl: 'views/payment-student-list.html',
+                resolve: {
+                    loadMyFiles:function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'coachApp',
+                            files:[
+                                '../../app/payments/coachPaymentController.js'
+                            ]
+                        })
+                    }
+                },
+                controller: 'CoachPaymentController'
+            }).
             otherwise({
                 redirectTo: '/dashboard'
             });

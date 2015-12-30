@@ -227,106 +227,91 @@
                                 </div>
                             </div>
                         </div>
+
                         <!-- Tab Content 3 -->
                         <div class="tab-pane padding-top-5" id="tab-3">
-                            <ul id="graphmenu">
-                                <li class="daily_update">
-                                    <a href="#graph1" class="open"><span>Gain vs Spent</span>
-                                        <br/>
-                                        <p>Enter your Daily Updates</p>
-                                    </a>
-                                </li>
-
-                              <!--  <li class="weight">
-                                    <a href="#2"><span>Weight & Goal</span>
-                                        <br/>
-                                        <p>Update Weight & Set Goal</p>
-                                    </a>
-                                </li>
-
-                                <li class="advice">
-                                    <a href="#3"><span>Advices</span>
-                                        <br/>
-                                        <p>Get daily tips for you</p>
-                                    </a>
-                                </li>
-
-                                <li class="advice">
-                                    <a href="#4"><span>Advices</span>
-                                        <br/>
-                                        <p>Get daily tips for you</p>
-                                    </a>
-                                </li>
-
-                                <li class="advice">
-                                    <a href="#5"><span>Advices</span>
-                                        <br/>
-                                        <p>Get daily tips for you</p>
-                                    </a>
-                                </li>
-
-                                <li class="advice">
-                                    <a href="#6"><span>Advices</span>
-                                        <br/>
-                                        <p>Get daily tips for you</p>
-                                    </a>
-                                </li>
-
-                                <li class="advice">
-                                    <a href="#7"><span>Advices</span>
-                                        <br/>
-                                        <p>Get daily tips for you</p>
-                                    </a>
-                                </li>-->
-
-                            </ul>
-
-                            <div id="graphcontent">
-                                <div id="graph1">
-                                    <div ng-hide="userFoodDiaryDataAll.length==0&&userExerciseDiaryDataAll==0">
+                            <div class="row">
+                                <div class="col-md-12 graphs">
+                                    <input type="radio" id="gainSpent" value="1"  ng-click="graphOne()" ng-model="graphs"/>
+                                    <label for="gainSpent">Gain vs Spent</label>
+                                    <input type="radio" id="nutrients" ng-click="graphTwo()" value="2" ng-model="graphs"/>
+                                    <label for="nutrients" >Nutrients Graph by Session</label>
+                                </div>
+                            </div>
+                            <div class="graph-content" >
+                                <div ng-if="loaded" class="col-md-12">
+                                    <div class="loader-style-dashboard"><br/><br/>
+                                        <div class="loader"></div>
+                                    </div>
+                                </div>
+                                <div ng-show="graphs==1" class="margin-top-5">
+                                    <div ng-hide="userFoodDiaryDataAll.length==0&&userExerciseDiaryDataAll==0" class="margin-top-10">
                                         <div class="col-md-4 text-right gain-list">
                                             <div class="text-green text-bold">Gain</div>
                                             <hr/>
-                                            <div id="demo">
-                                            <p ng-repeat="food in userFoodDiaryDataAll.BreakFast" class="wrap">
-                                                {{food.foodname}}</p>
-                                            <p ng-repeat="food in userFoodDiaryDataAll.Brunch" class="wrap">
-                                                {{food.foodname}}</p>
-                                            <p ng-repeat="food in userFoodDiaryDataAll.Lunch" class="wrap">
-                                                {{food.foodname}}</p>
-                                            <p ng-repeat="food in userFoodDiaryDataAll.Evening" class="wrap">
-                                                {{food.foodname}}</p>
-                                            <p ng-repeat="food in userFoodDiaryDataAll.Dinner" class="wrap">
-                                                {{food.foodname}}</p>
+                                            <div class="suggest_option">
+                                                <p ng-repeat="food in userFoodDiaryDataAll.BreakFast" class="wrap">
+                                                    {{food.foodname}}</p>
+                                                <p ng-repeat="food in userFoodDiaryDataAll.Brunch" class="wrap">
+                                                    {{food.foodname}}</p>
+                                                <p ng-repeat="food in userFoodDiaryDataAll.Lunch" class="wrap">
+                                                    {{food.foodname}}</p>
+                                                <p ng-repeat="food in userFoodDiaryDataAll.Evening" class="wrap">
+                                                    {{food.foodname}}</p>
+                                                <p ng-repeat="food in userFoodDiaryDataAll.Dinner" class="wrap">
+                                                    {{food.foodname}}</p>
                                             </div>
-                                            <a href="" onclick="buttonHeight()">check</a>
                                         </div>
                                         <div class="col-md-4 no-padding">
-                                            <div id="gainVsSpent" style="width:130px;height: 350px; margin: auto;padding: 15px 5px 5px 5px; box-shadow:inset 0 0 3px #ccc"></div>
+                                            <div id="gainVsSpent" style="width:150px;height: 300px; margin: auto;padding: 15px 5px 5px 5px; box-shadow:inset 0 0 3px #ccc"></div>
                                         </div>
                                         <div class="col-md-4 gain-list">
                                             <div class="text-red text-bold">Spent</div>
                                             <hr/>
-                                            <p ng-repeat="exerciseDiaryData in userExerciseDiaryDataAll" class="wrap text-left">
-                                                {{exerciseDiaryData.Exercise.exercisename}}</p>
+                                            <div class="suggest_option">
+                                                <p ng-repeat="exerciseDiaryData in userExerciseDiaryDataAll" class="wrap text-left">
+                                                    {{exerciseDiaryData.Exercise.exercisename}}</p>
+                                            </div>
                                         </div>
+
                                     </div>
                                     <div ng-show="userFoodDiaryDataAll.length==0&&userExerciseDiaryDataAll==0" class="text-center">
                                         <br/><br/><br/>
                                         <img src="../../images/no-update.png">
-                                        <h1 class="text-gray">NO UPDATE TODAY!!!</h1>
+                                        <h1 class="text-gray">NO UPDATE!!!</h1>
                                     </div>
                                 </div>
-
-                                <div id="2" class="contentblock hidden">
-                                    graph 2
-                                </div><!-- @end #ideas-content -->
-
-                                <div id="3" class="contentblock hidden">
-                                    graph 3
-                                </div><!-- @end #ideas-content -->
-                            </div><!-- @end #content -->
-
+                                <div ng-show="graphs==2" class="margin-top-5">
+                                    <div class="col-md-6">
+                                        <h5 class="margin-bottom-5">Choose session</h5>
+                                        <select class="full-width main"  ng-model="graphSessionId" ng-change="loadSessionFood(graphSessionId)" name="graph" required>
+                                            <option value="1">Break Fast</option>
+                                            <option value="2">Brunch</option>
+                                            <option value="3">Lunch</option>
+                                            <option value="4">Snacks</option>
+                                            <option value="5">Dinner</option>
+                                        </select>
+                                        <div ng-show="graphResponse==1">
+                                            <h5 class="margin-top-10 margin-bottom-5">Foods Intaken</h5>
+                                            <div class="foodlistGraph gain-list">
+                                                <p ng-repeat="food in userSessionFoods" class="wrap">{{food.foodname}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div ng-show="graphResponse==1">
+                                            <h5>Nutrients Graph</h5>
+                                            <div id="sessionGraph" class="sessionGraph margin-top-15"></div>
+                                        </div>
+                                        <div ng-show="graphResponse==0" class="text-center">
+                                            <br/><br/>
+                                            <img src="../../images/no-update.png">
+                                            <h1 class="text-gray">NO UPDATE!!!</h1>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- @end #content -->
                         </div>
                     </div>
                     <!-- End Tab Panels -->
@@ -707,9 +692,7 @@
     $(function(){
         $(".common_model").show();
     });
-    function buttonHeight(){
-        alert(document.getElementById('demo').clientHeight);
-    };
+
 </script>
 
 <script type="text/javascript">
@@ -775,9 +758,19 @@
 
     });
 
+    $(document).ready(function() {
 
+        $(".tab_content").show();
+
+        $("ul.graphs li").click(function() {
+            $("ul.graphs li").removeClass("active");
+            $(this).addClass("active");
+        });
+
+    });
 
 </script>
+
 <style>
     .marquee {
         top: 6em;

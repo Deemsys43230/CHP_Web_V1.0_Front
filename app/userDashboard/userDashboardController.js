@@ -4,6 +4,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
     $scope.foodSearchResult = [];
     $scope.userFood={};
     $scope.userFood.sessionid=1;
+    $scope.graphSessionId='1';
     $scope.servings=0;
     $scope.current=$scope.caloriesIntake=0;
     $scope.max=$scope.gainGraphMax=100;
@@ -13,6 +14,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
     $scope.workoutvalue=0;
     $window.singlePicker = false;
     $scope.weightUpdateText="Update Weight";
+    $scope.graphs=1;
 
     //Modal Popup to add user food
     $scope.doUserAddFood=function(){
@@ -157,6 +159,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
             $scope.loadFoodDiary( $scope.userFood.addeddate);
             $scope.doGetIntakeBruntByDate( $scope.userFood.addeddate);
             $scope.goGetDailyIntakeGraph($scope.userFood.addeddate);
+            $scope.goGetSessionGraph($scope.storedSessionId);
         });
 
     };
@@ -175,12 +178,14 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
             $scope.loadFoodDiary($scope.selectedDate);
             $scope.doGetIntakeBruntByDate($scope.selectedDate);
             $scope.goGetDailyIntakeGraph($scope.selectedDate);
+            $scope.goGetSessionGraph($scope.storedSessionId);
         }
         else
         {
             $scope.loadFoodDiary($scope.selectedDate.format("dd/mm/yyyy"));
             $scope.doGetIntakeBruntByDate($scope.selectedDate.format("dd/mm/yyyy"));
             $scope.goGetDailyIntakeGraph($scope.selectedDate.format("dd/mm/yyyy"));
+            $scope.goGetSessionGraph($scope.storedSessionId);
         }
         });
 
@@ -195,11 +200,13 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
                 $scope.loadFoodDiary($scope.selectedDate);
                 $scope.doGetIntakeBruntByDate($scope.selectedDate);
                 $scope.goGetDailyIntakeGraph($scope.selectedDate);
+                $scope.goGetSessionGraph($scope.storedSessionId);
             }
             else{
                 $scope.loadFoodDiary($scope.selectedDate.format("dd/mm/yyyy"));
                 $scope.doGetIntakeBruntByDate($scope.selectedDate.format("dd/mm/yyyy"));
                 $scope.goGetDailyIntakeGraph($scope.selectedDate.format("dd/mm/yyyy"));
+                $scope.goGetSessionGraph($scope.storedSessionId);
             }
         });
     };
@@ -211,6 +218,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         userFoodDiaryDetailPromise.then(function(result){
             $scope.userFoodDiaryDataAll=result;
             $scope.loadSessionDetails();
+            $scope.loadSessionFood();
             $scope.loaded=false;
         });
     };
@@ -907,6 +915,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
                 series: [{
                     type: 'column',
                     showInLegend:false,
+                    name:'Unit',
                     data: [
                         {
                             name: 'Protein',
@@ -945,6 +954,134 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         },function(){
             errorMessage(Flash, "Please try again later!");
         });
+    };
+
+    $scope.graphOne=function(){
+        $scope.graphs=1;
+    };
+
+    $scope.graphTwo=function(){
+        $scope.graphs=2;
+    };
+
+    $scope.loadSessionFood=function(){
+        switch(parseInt($scope.graphSessionId)){
+            case 1:$scope.userSessionFoods=$scope.userFoodDiaryDataAll.BreakFast;
+                break;
+            case 2:$scope.userSessionFoods=$scope.userFoodDiaryDataAll.Brunch;
+                break;
+            case 3:$scope.userSessionFoods=$scope.userFoodDiaryDataAll.Lunch;
+                break;
+            case 4:$scope.userSessionFoods=$scope.userFoodDiaryDataAll.Evening;
+                break;
+            case 5: $scope.userSessionFoods=$scope.userFoodDiaryDataAll.Dinner;
+                break;
+            default :break;
+        }
+        $scope.goGetSessionGraph($scope.graphSessionId);
+    };
+
+    $scope.goGetSessionGraph = function(id){
+        $scope.loaded=true;
+        var date;
+        if($scope.selectedDate==selectedDate){
+            date = $scope.selectedDate;
+        }
+        else{
+            date = $scope.selectedDate.format("dd/mm/yyyy");
+        }
+        $scope.storedSessionId = id;
+
+        if(!$scope.storedSessionId){}
+        else{
+            requestHandler.postRequest("user/getDailyCalorieGraphWithSession/",{"date":date,"sessionid":id}).then(function(response){
+                $scope.calorieIntakeGraph=response.data.Calorie_Graph;
+                $scope.graphResponse=response.data.Response_status;
+                if($scope.calorieIntakeGraph.fat=="") $scope.calorieIntakeGraph.fat=0;
+                if($scope.calorieIntakeGraph.protein=="") $scope.calorieIntakeGraph.protein=0;
+                if($scope.calorieIntakeGraph.fibre=="") $scope.calorieIntakeGraph.fibre=0;
+                if($scope.calorieIntakeGraph.carbo=="") $scope.calorieIntakeGraph.carbo=0;
+
+                $scope.totalUnits = $scope.calorieIntakeGraph.fat+$scope.calorieIntakeGraph.protein+$scope.calorieIntakeGraph.fibre+$scope.calorieIntakeGraph.carbo;
+
+                $('#sessionGraph').highcharts({
+                    title: {
+                        text: ''
+                    },
+                    xAxis: {
+                        categories: ['Protein', 'Fat', 'Carbo', 'Fibre'],
+                        labels: {
+                            useHTML: true,
+                             formatter: function() {
+                             if(this.value == "Protein")
+                             return this.value+'<br/><img src="../../images/i-protein.jpg"/>';
+                             else if(this.value == "Fat")
+                             return '&nbsp;&nbsp;'+this.value+'&nbsp;&nbsp;'+'<br/><img src="../../images/i-fats.jpg"/>';
+                             else if(this.value == "Carbo")
+                             return this.value+'<br/><img src="../../images/i-carbs.jpg"/>';
+                             else if(this.value == "Fibre")
+                             return this.value+'<br/><img src="../../images/i-fibre.jpg"/>';
+                             else
+                             return this.value;
+                             }
+                        }
+                    },
+                    tooltip:{
+                        enabled:true,
+                        backgroundColor:'rgba(255, 255, 255, 1)',
+                        borderWidth:1,
+                        shadow:true,
+                        style:{fontSize:'10px',padding:5,zIndex:500},
+                        formatter:false
+                    },
+                    yAxis:{
+                        title: {
+                            text: null
+                        },
+                        min: 0, max: $scope.totalUnits,
+                        labels:{
+                            style:{
+                                fontSize:'10px'
+                            }
+                        }
+                    },
+                    exporting: {
+                        enabled: false
+                    },
+                    credits: {
+                        enabled: false
+                    },
+                    legend:{enabled:false},
+                    series: [{
+                        type: 'column',
+                        showInLegend:false,
+                        name:'Unit',
+                        data: [
+                            {
+                                name: 'Protein',
+                                color: 'limegreen',
+                                y: parseFloat($scope.calorieIntakeGraph.protein)
+                            }, {
+                                name: 'Fat',
+                                color: 'red',
+                                y: parseFloat($scope.calorieIntakeGraph.fat)
+                            }, {
+                                name: 'Carbo',
+                                color: 'orange',
+                                y: parseFloat($scope.calorieIntakeGraph.carbo)
+                            }, {
+                                name: 'Fibre',
+                                color: '#ffcc00',
+                                y: parseFloat($scope.calorieIntakeGraph.fibre)
+                            }]
+                    }]
+                });
+                $scope.loaded=false;
+
+            },function(){
+                errorMessage(Flash, "Please try again later!");
+            });
+        }
     };
 
     $scope.doGetCoachAdvices = function(){
@@ -1003,6 +1140,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         }
         $scope.doGetWeightGoal();
         $scope.doGetCoachAdvices();
+        $scope.goGetSessionGraph($scope.storedSessionId);
     };
 
     $scope.initialLoadFoodAndExercise();
