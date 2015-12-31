@@ -79,7 +79,7 @@
                                         </span>
                                     </td>
                                     <td>
-                                        <input type="text" class="form-control" name="calories" ng-model="levels.calories" required validate-Float/>
+                                        <input type="text" class="form-control" name="calories" ng-model="levels.calories" maxlength="7" required validate-Float/>
                                         <span ng-show="levelForm.calories.$dirty && levelForm.calories.$invalid">
                                             <span class="error-message" ng-show="levelForm.calories.$error.required"><span>Required</span></span>
                                             <span class="error-message" ng-show="!levelForm.calories.$error.required && levelForm.calories.$error.validateFloat"><span>Enter&nbsp;Valid&nbsp;Number</span></span>

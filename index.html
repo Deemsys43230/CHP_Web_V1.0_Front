@@ -192,7 +192,13 @@
             <div flash-message="2000" ></div>
             <form name="secretAnswerForm">
                 <p>Secret Question :</p>
-                <p class="text-bold">{{secretQuestion}}</p>
+                <p class="text-bold" ng-if="secretQuestion==1">What was the name of your first pet?</p>
+                <p class="text-bold" ng-if="secretQuestion==2">What is the name of your best friend?</p>
+                <p class="text-bold" ng-if="secretQuestion==3">What is your favourite dish?</p>
+                <p class="text-bold" ng-if="secretQuestion==4">What is the name of your favourite film star ?</p>
+                <p class="text-bold" ng-if="secretQuestion==5">What is the name of your favourite sport's team?</p>
+                <p class="text-bold" ng-if="secretQuestion==6">What is your Dream job?</p>
+
 
                 <p>Secret Answer</p>
                 <input type="password" name="secretAnswer" ng-model="secretAnswer" required/>

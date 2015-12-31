@@ -64,7 +64,13 @@ adminApp.controller('CoachController',function($scope,requestHandler,Flash) {
         $('.search-list-form input').focus();
     });
 
-
+    $scope.reset=function(){
+        $scope.coach={};
+        $scope.coach.emailid="";
+        $scope.coach.password="";
+        $scope.coach.confirm_password="";
+        $scope.coachRegisterForm.$setPristine();
+    };
 
 });
 

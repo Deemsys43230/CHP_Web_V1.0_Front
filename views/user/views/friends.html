@@ -36,7 +36,7 @@
                         </div>
                     </div>
                     <div class="row friends-list">
-                        <div class="col-md-3" ng-repeat="myfriends in friendsfilter=( myFriendsList | filter:myfriendssearch | startFrom:currentPage*pageSize | limitTo:pageSize)" ng-show="myFriendsList.length!=0">
+                        <div class="col-md-3" ng-repeat="myfriends in friendsfilter=( myFriendsList | filter: {name : myfriendssearch} | startFrom:currentPage*pageSize | limitTo:pageSize)" ng-show="myFriendsList.length!=0">
                             <a href="" class="img-shadow"><img ng-src="{{myfriends.imageurl | trusted}}"/></a>
                             <h5 class="wrap"><a href="">{{myfriends.name}}</a></h5>
                         </div>
@@ -77,7 +77,7 @@
                         </div>
                     </div>
                     <div class="row friends-list">
-                        <div class="col-md-3" ng-repeat="friendsrequest in receivedfilter=( requestedFriendsList | filter:requestreceivedsearch | startFrom:currentPage1*pageSize1 | limitTo:pageSize1)" ng-show="friendsrequest.friendStatus == 2">
+                        <div class="col-md-3" ng-repeat="friendsrequest in receivedfilter=( requestedFriendsList | filter:{name : requestreceivedsearch} | startFrom:currentPage1*pageSize1 | limitTo:pageSize1)" ng-show="friendsrequest.friendStatus == 2">
                             <div>
                             <a href="" class="img-shadow"><img ng-src="{{friendsrequest.imageurl | trusted}}"/></a>
                             <h5 class="wrap">{{friendsrequest.name}}<br/>
@@ -124,7 +124,7 @@
                         </div>
                     </div>
                     <div class="row friends-list">
-                        <div class="col-md-3" ng-repeat="friendsrequest in sentfilter =( requestedFriendsList | filter:requestsentsearch | startFrom:currentPage1*pageSize1 | limitTo:pageSize1)" ng-show="friendsrequest.friendStatus == 1">
+                        <div class="col-md-3" ng-repeat="friendsrequest in sentfilter =( requestedFriendsList | filter:{name : requestsentsearch} | startFrom:currentPage1*pageSize1 | limitTo:pageSize1)" ng-show="friendsrequest.friendStatus == 1">
                             <div>
                                 <a href="" class="img-shadow"><img ng-src="{{friendsrequest.imageurl | trusted}}"/></a>
                                 <h5 class="wrap">{{friendsrequest.name}}<br/>

@@ -62,7 +62,7 @@
                     <input type="radio" id="us" class="height" name="regionid" value="2" ng-model="foodDetails.regionid"/>
                     <label for="us">United states</label>
                     <input type="radio" id="general" class="height" name="regionid" value="3" ng-model="foodDetails.regionid"/>
-                    <label for="us">General</label>
+                    <label for="general">General</label>
                     </div>
                     <h5>Tags :</h5>
                     <div class="form-group">
@@ -119,7 +119,7 @@
                             <tr  ng-class="animate-repeat" ng-repeat="measureDetail in foodDetails.measureid" ng-form="mineralForm">
                                 <td>{{measureDetail.measurename}}</td>
                                 <td class="input_mineral">
-                                    <input type="text" name="measureValue" ng-model="measureDetail.value" required validate-Float1/>
+                                    <input type="text" name="measureValue" ng-model="measureDetail.value" maxlength="3" required validate-Float1/>
                                      <span ng-show="mineralForm.measureValue.$dirty&&mineralForm.measureValue.$invalid">
                                          <span class="error-message textarea-errormessage20" ng-show="mineralForm.measureValue.$error.required"><span>Required.</span></span>
                                         <span class="error-message textarea-errormessage20" ng-show="!mineralForm.measureValue.$error.required&&mineralForm.measureValue.$error.validateFloat1"><span>Invalid&nbsp;data.</span></span>
@@ -137,7 +137,7 @@
                                             </p>
                                         </div>
                                         <div class="col-md-5">
-                                            <input type="text" name="calories" ng-model="measureDetail.calories" required validate-Float/>
+                                            <input type="text" name="calories" ng-model="measureDetail.calories" maxlength="7" required validate-Float/>
                                         </div>
                                         <div class="col-md-7 no-padding">
                                             <p>Fat<span class="text-red">*</span>
@@ -148,7 +148,7 @@
                                             </p>
                                         </div>
                                         <div class="col-md-5">
-                                            <input type="text" name="fat" ng-model="measureDetail.fat" required validate-Float/>
+                                            <input type="text" name="fat" ng-model="measureDetail.fat" maxlength="7" required validate-Float/>
                                         </div>
                                         <div class="col-md-7 no-padding">
                                             <p>Protein<span class="text-red">*</span>
@@ -159,7 +159,7 @@
                                             </p>
                                         </div>
                                         <div class="col-md-5">
-                                            <input type="text" name="protein" ng-model="measureDetail.protein" required validate-Float/>
+                                            <input type="text" name="protein" ng-model="measureDetail.protein" maxlength="7" required validate-Float/>
                                         </div>
                                         <div class="col-md-7 no-padding">
                                             <p>Carbo<span class="text-red">*</span>
@@ -170,7 +170,7 @@
                                             </p>
                                         </div>
                                         <div class="col-md-5">
-                                            <input type="text" name="carbo" ng-model="measureDetail.carbo" required validate-Float/>
+                                            <input type="text" name="carbo" ng-model="measureDetail.carbo" maxlength="7" required validate-Float/>
                                         </div>
                                         <div class="col-md-7 no-padding">
                                             <p>Fiber<span class="text-red">*</span>
@@ -181,7 +181,7 @@
                                             </p>
                                         </div>
                                         <div class="col-md-5">
-                                            <input type="text" name="fibre" ng-model="measureDetail.fibre" required validate-Float/>
+                                            <input type="text" name="fibre" ng-model="measureDetail.fibre" maxlength="7" required validate-Float/>
                                             <!-- <span ng-show="mineralForm.fibre.$dirty&&mineralForm.fibre.$invalid">
                                           <span class="error-message" ng-show="mineralForm.fibre.$error.required"><span>Required.</span></span>
                                         </span>-->
@@ -193,7 +193,7 @@
                                                 </span></p>
                                         </div>
                                         <div class="col-md-5">
-                                            <input type="text" name="calcium" ng-model="measureDetail.calcium" validate-Float/>
+                                            <input type="text" name="calcium" ng-model="measureDetail.calcium" maxlength="7" validate-Float/>
                                         </div>
                                         <div class="col-md-7 no-padding">
                                             <p>Zinc
@@ -203,7 +203,7 @@
                                             </p>
                                         </div>
                                         <div class="col-md-5">
-                                            <input type="text" name="zinc" ng-model="measureDetail.zinc" validate-Float/>
+                                            <input type="text" name="zinc" ng-model="measureDetail.zinc" maxlength="7" validate-Float/>
                                         </div>
                                     </div>
                                     <div class="col-md-3 no-padding">
@@ -215,7 +215,7 @@
                                             </p>
                                         </div>
                                         <div class="col-md-5">
-                                            <input type="text" name="folicacid" ng-model="measureDetail.folicacid" validate-Float/>
+                                            <input type="text" name="folicacid" ng-model="measureDetail.folicacid" maxlength="7" validate-Float/>
                                         </div>
                                         <div class="col-md-7 no-padding">
                                             <p>Iron
@@ -226,7 +226,7 @@
                                             </p>
                                         </div>
                                         <div class="col-md-5">
-                                            <input type="text" name="iron" ng-model="measureDetail.iron" validate-Float/>
+                                            <input type="text" name="iron" ng-model="measureDetail.iron" maxlength="7" validate-Float/>
                                         </div>
                                         <div class="col-md-7 no-padding">
                                             <p>Niacin
@@ -237,7 +237,7 @@
                                             </p>
                                         </div>
                                         <div class="col-md-5">
-                                            <input type="text" name="niacin" ng-model="measureDetail.niacin" validate-Float/>
+                                            <input type="text" name="niacin" ng-model="measureDetail.niacin" maxlength="7" validate-Float/>
                                         </div>
                                         <div class="col-md-7 no-padding">
                                             <p>Phosphorous
@@ -247,7 +247,7 @@
                                             </p>
                                         </div>
                                         <div class="col-md-5">
-                                            <input type="text" name="phosphorous" ng-model="measureDetail.phosphorous" validate-Float/>
+                                            <input type="text" name="phosphorous" ng-model="measureDetail.phosphorous" maxlength="7" validate-Float/>
                                         </div>
                                         <div class="col-md-7 no-padding">
                                             <p>Potassium
@@ -257,7 +257,7 @@
                                             </p>
                                         </div>
                                         <div class="col-md-5">
-                                            <input type="text" name="potassium" ng-model="measureDetail.potassium" validate-Float/>
+                                            <input type="text" name="potassium" ng-model="measureDetail.potassium" maxlength="7" validate-Float/>
                                         </div>
                                         <div class="col-md-7 no-padding">
                                             <p>Riboflavin
@@ -267,7 +267,7 @@
                                             </p>
                                         </div>
                                         <div class="col-md-5">
-                                            <input type="text" name="riboflavin" ng-model="measureDetail.riboflavin" validate-Float/>
+                                            <input type="text" name="riboflavin" ng-model="measureDetail.riboflavin" maxlength="7" validate-Float/>
                                         </div>
                                     </div>
                                     <div class="col-md-3 no-padding">
@@ -279,7 +279,7 @@
                                             </p>
                                         </div>
                                         <div class="col-md-5">
-                                            <input type="text" name="saturatedfat" ng-model="measureDetail.saturatedfat" validate-Float/>
+                                            <input type="text" name="saturatedfat" ng-model="measureDetail.saturatedfat" maxlength="7" validate-Float/>
                                         </div>
                                         <div class="col-md-7 no-padding">
                                             <p>Sodium
@@ -289,7 +289,7 @@
                                             </p>
                                         </div>
                                         <div class="col-md-5">
-                                            <input type="text" name="sodium" ng-model="measureDetail.sodium" validate-Float/>
+                                            <input type="text" name="sodium" ng-model="measureDetail.sodium" maxlength="7" validate-Float/>
                                         </div>
                                         <div class="col-md-7 no-padding">
                                             <p>Sugar
@@ -299,7 +299,7 @@
                                             </p>
                                         </div>
                                         <div class="col-md-5">
-                                            <input type="text" name="sugar" ng-model="measureDetail.sugar" validate-Float/>
+                                            <input type="text" name="sugar" ng-model="measureDetail.sugar" maxlength="7" validate-Float/>
                                         </div>
                                         <div class="col-md-7 no-padding">
                                             <p>Thiamine
@@ -309,7 +309,7 @@
                                             </p>
                                         </div>
                                         <div class="col-md-5">
-                                            <input type="text" name="thiamin" ng-model="measureDetail.thiamin" validate-Float/>
+                                            <input type="text" name="thiamin" ng-model="measureDetail.thiamin" maxlength="7" validate-Float/>
                                         </div>
                                         <div class="col-md-7 no-padding">
                                             <p>Vitamin A
@@ -319,7 +319,7 @@
                                             </p>
                                         </div>
                                         <div class="col-md-5">
-                                            <input type="text" name="vitaminA" ng-model="measureDetail.vitaminA" validate-Float/>
+                                            <input type="text" name="vitaminA" ng-model="measureDetail.vitaminA" maxlength="7" validate-Float/>
                                         </div>
                                         <div class="col-md-7 no-padding">
                                             <p>Vitamin B12
@@ -329,7 +329,7 @@
                                             </p>
                                         </div>
                                         <div class="col-md-5">
-                                            <input type="text" name="vitaminB12" ng-model="measureDetail.vitaminB12" validate-Float/>
+                                            <input type="text" name="vitaminB12" ng-model="measureDetail.vitaminB12" maxlength="7" validate-Float/>
                                         </div>
                                     </div>
                                     <div class="col-md-3 no-padding">
@@ -341,7 +341,7 @@
                                             </p>
                                         </div>
                                         <div class="col-md-5">
-                                            <input type="text" name="vitaminB6" ng-model="measureDetail.vitaminB6" validate-Float/>
+                                            <input type="text" name="vitaminB6" ng-model="measureDetail.vitaminB6" maxlength="7" validate-Float/>
                                         </div>
                                         <div class="col-md-7 no-padding">
                                             <p>Vitamin C
@@ -351,7 +351,7 @@
                                             </p>
                                         </div>
                                         <div class="col-md-5">
-                                            <input type="text" name="vitaminC" ng-model="measureDetail.vitaminC" validate-Float/>
+                                            <input type="text" name="vitaminC" ng-model="measureDetail.vitaminC" maxlength="7" validate-Float/>
                                         </div>
                                         <div class="col-md-7 no-padding">
                                             <p>Vitamin E
@@ -361,7 +361,7 @@
                                             </p>
                                         </div>
                                         <div class="col-md-5">
-                                            <input type="text" name="vitaminE" ng-model="measureDetail.vitaminE" validate-Float/>
+                                            <input type="text" name="vitaminE" ng-model="measureDetail.vitaminE" maxlength="7" validate-Float/>
                                         </div>
                                         <div class="col-md-7 no-padding">
                                             <p>Vitamin K
@@ -371,7 +371,7 @@
                                             </p>
                                         </div>
                                         <div class="col-md-5">
-                                            <input type="text" name="vitaminK" ng-model="measureDetail.vitaminK" validate-Float/>
+                                            <input type="text" name="vitaminK" ng-model="measureDetail.vitaminK" maxlength="7" validate-Float/>
                                         </div>
                                         <div class="col-md-7 no-padding">
                                             <p>Polyunsaturated Fat
@@ -381,7 +381,7 @@
                                             </p>
                                         </div>
                                         <div class="col-md-5">
-                                            <input type="text" name="polyunsaturatedfat" ng-model="measureDetail.polyunsaturatedfat" validate-Float/>
+                                            <input type="text" name="polyunsaturatedfat" ng-model="measureDetail.polyunsaturatedfat" maxlength="7" validate-Float/>
                                         </div>
                                         <div class="col-md-7 no-padding">
                                             <p>Monounsaturated Fat
@@ -391,7 +391,7 @@
                                             </p>
                                         </div>
                                         <div class="col-md-5">
-                                            <input type="text" name="monounsaturatedfat" ng-model="measureDetail.monounsaturatedfat" validate-Float/>
+                                            <input type="text" name="monounsaturatedfat" ng-model="measureDetail.monounsaturatedfat" maxlength="7" validate-Float/>
                                         </div>
                                     </div>
                                 </td>
