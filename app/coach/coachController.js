@@ -66,6 +66,7 @@ adminApp.controller('CoachController',function($scope,requestHandler,Flash) {
 
     $scope.reset=function(){
         $scope.coach={};
+        $scope.coach.name="";
         $scope.coach.emailid="";
         $scope.coach.password="";
         $scope.coach.confirm_password="";
