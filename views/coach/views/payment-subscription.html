@@ -1,12 +1,11 @@
 
 <div class="page-banner1">
     <div id="w" class="clearfix">
-        <div id="demography-content" ng-init="studentListInit()">
+        <div id="demography-content" ng-init="studentSubscriptionList()">
             <form name="demographyForm">
                 <div class="col-md-12">
-                    <a href="#payments" class="btn-sm btn-warning pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i>&nbsp;Back</a>
                     <h3 class="pull-right text-orange">TOTAL EARN : 245 $&nbsp;&nbsp;&nbsp;</h3>
-                    <h5 class="classic-title"><a href=""><i class="fa fa-money"></i>&nbsp;&nbsp;COURSE PAYMENT LIST</a></h5>
+                    <h5 class="classic-title"><a href="#payments"><i class="fa fa-money"></i>&nbsp;&nbsp;COURSE PAYMENTS</a>&nbsp;&nbsp;|&nbsp;&nbsp;<span><a href="#studentPayments"><i class="fa fa-dollar"></i>&nbsp;&nbsp;STUDENT SUBSCRIPTION PAYMENTS</a></span></h5>
                 </div>
 
                 <div class="col-md-12">
@@ -26,14 +25,14 @@
                         </tr>
                         </thead>
                         <tbody >
-                        <tr dir-paginate="student in studentList  | itemsPerPage: 8" ng-show="studentList.length!=0">
+                        <tr dir-paginate="student in subscribedList  | itemsPerPage: 8" ng-show="subscribedList.length!=0">
                             <td>{{student.coursename}}</td>
                             <td>{{student.categoryname}}</td>
                             <td>{{student.createdon}}</td>
                             <td>{{student.publishedon}}</td>
                             <td>{{student.enrollcount}} $</td>
                         </tr>
-                        <tr ng-show="studentList.length==0"><td colspan="6" class="text-center">No Records Found !!!</td></tr>
+                        <tr ng-show="subscribedList.length==0"><td colspan="6" class="text-center">No Records Found !!!</td></tr>
                         </tbody>
                     </table>
                     <!-- Start Pagination -->

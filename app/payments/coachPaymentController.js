@@ -19,25 +19,12 @@ coachApp.controller('CoachPaymentController',function($scope,requestHandler,Flas
         });
     };
 
-    $scope.getPaymentDetails=function(){
-        requestHandler.getRequest("getCoachIndividualDetailbyUser/"+$routeParams.id, "").then(function(response){
-            $scope.paymentDetails=response.data.getCoachIndividualDetail;
-        });
-    };
-
     // To display Coach list by user
-    $scope.doGetMyCoachListByUser=function(){
-        requestHandler.getRequest("user/getallCoachListbyUser/", "").then(function(response){
-            $scope.usercourselist=response.data.getallCoachListbyUser;
+    $scope.doGetMyStudentListByCoach=function(){
+        requestHandler.getRequest("coach/getCourseList/","").then(function(response) {
+            $scope.subscribedList = response.data.course.course_list;
         },function(){
             errorMessage(Flash,"Please try again later!")
-        });
-    };
-
-    $scope.getCoachPaymentDetails=function(){
-        requestHandler.getRequest("getCoachIndividualDetailbyUser/"+$routeParams.id, "").then(function(response){
-            $scope.paymentDetails=response.data.getCoachIndividualDetail;
-            console.log($scope.paymentDetails);
         });
     };
 
@@ -49,16 +36,8 @@ coachApp.controller('CoachPaymentController',function($scope,requestHandler,Flas
         $scope.doGetMyStudentListByCourse();
     };
 
-    $scope.paymentDetails=function(){
-        $scope.getPaymentDetails();
-    };
-
-    $scope.coachListInit=function(){
-        $scope.doGetMyCoachListByUser();
-    };
-
-    $scope.coachPaymentDetails=function(){
-        $scope.getCoachPaymentDetails();
+    $scope.studentSubscriptionList=function(){
+        $scope.doGetMyStudentListByCoach();
     };
 
 });

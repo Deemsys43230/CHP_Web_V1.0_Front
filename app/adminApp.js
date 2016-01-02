@@ -965,6 +965,81 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'CourseAdminController'
             }).
+            when('/payments', {
+                templateUrl: 'views/payments.html',
+                resolve: {
+                    loadMyFiles:function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'adminApp',
+                            files:[
+                                '../../js/bootstrap.min.js',
+                                '../../app/payments/adminPaymentController.js'
+                            ]
+                        })
+                    }
+                },
+                controller:'AdminPaymentController'
+            }).
+            when('/courseStudentList/:id', {
+                templateUrl: 'views/payments-course-student.html',
+                resolve: {
+                    loadMyFiles:function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'adminApp',
+                            files:[
+                                '../../js/bootstrap.min.js',
+                                '../../app/payments/adminPaymentController.js'
+                            ]
+                        })
+                    }
+                },
+                controller:'AdminPaymentController'
+            }).
+            when('/courseStudentDetails/:id', {
+                templateUrl: 'views/payments-course-student-details.html',
+                resolve: {
+                    loadMyFiles:function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'adminApp',
+                            files:[
+                                '../../js/bootstrap.min.js',
+                                '../../app/payments/adminPaymentController.js'
+                            ]
+                        })
+                    }
+                },
+                controller:'AdminPaymentController'
+            }).
+            when('/coachPayment', {
+                templateUrl: 'views/payments-coach.html',
+                resolve: {
+                    loadMyFiles:function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'adminApp',
+                            files:[
+                                '../../js/bootstrap.min.js',
+                                '../../app/payments/adminPaymentController.js'
+                            ]
+                        })
+                    }
+                },
+                controller:'AdminPaymentController'
+            }).
+            when('/coachStudentList/:id', {
+                templateUrl: 'views/payments-coach-student.html',
+                resolve: {
+                    loadMyFiles:function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'adminApp',
+                            files:[
+                                '../../js/bootstrap.min.js',
+                                '../../app/payments/adminPaymentController.js'
+                            ]
+                        })
+                    }
+                },
+                controller:'AdminPaymentController'
+            }).
           /*  when('/FAQ', {
                 templateUrl: '../../views/common/FAQ.html',
                 resolve: {

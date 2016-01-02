@@ -336,6 +336,21 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller: 'CoachPaymentController'
             }).
+            when('/studentPayments', {
+                templateUrl: 'views/payment-subscription.html',
+                resolve: {
+                    loadMyFiles:function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'coachApp',
+                            files:[
+                                '../../angular/angular-utils-pagination/dirPagination.js',
+                                '../../app/payments/coachPaymentController.js'
+                            ]
+                        })
+                    }
+                },
+                controller: 'CoachPaymentController'
+            }).
             otherwise({
                 redirectTo: '/dashboard'
             });

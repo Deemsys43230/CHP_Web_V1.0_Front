@@ -7906,7 +7906,7 @@ ul.food li .food_name{
 .dashcontent{
     color: #fff;
     padding: 20px;
-    min-height: 130px;
+    height: 110px;
 }
 
 .dashcontent h3,.dashcontent p {
@@ -7962,7 +7962,7 @@ ul.food li .food_name{
 
 .backgreeness{
     opacity: 0.9;
-    background-color: #00CC66;
+    background-color: #00cc7a;
 }
 
 .backyellow{
@@ -7970,6 +7970,20 @@ ul.food li .food_name{
     background-color: #FF9900;
 }
 
+.greenyellow{
+    opacity: 0.9;
+    background-color: #ff661a;
+}
+
+.pinky{
+    opacity: 0.9;
+    background-color: #ff007e;
+}
+
+.violety{
+    opacity: 0.9;
+    background-color: #00a3cc;
+}
 
 ul.sidebar-menu{
     margin-left: 15px !important;
@@ -8125,14 +8139,10 @@ a:hover, a:visited, a:link, a:active
     padding: 10px;
     float: left;
     border: 0;
-    background: #e0e0e0;
+    background: #eee;
     color: #555;
 }
 
-.form-wrapper input:focus {
-    outline: 0;
-    background: #eee;
-}
 
 .form-wrapper button {
     overflow: visible;
