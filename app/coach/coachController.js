@@ -202,12 +202,16 @@ adminApp.filter('startsWithLetter', function () {
 
         var filtered = [];
         var letterMatch = new RegExp(coachsearch, 'i');
-        for (var i = 0; i < items.length; i++) {
-            var item = items[i];
-            if (letterMatch.test(item.emailid) || letterMatch.test(item.name) ) {
+        if(!items){}
+        else{
+            for (var i = 0; i < items.length; i++) {
+                var item = items[i];
+                if (letterMatch.test(item.emailid) || letterMatch.test(item.name) ) {
 
-                filtered.push(item);
+                    filtered.push(item);
+                }
             }
+
         }
         return filtered;
     };

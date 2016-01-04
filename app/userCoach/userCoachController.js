@@ -335,10 +335,13 @@ userApp.filter('startsWithLetter', function () {
     return function (items, mycoachsearch) {
         var filtered = [];
         var letterMatch = new RegExp(mycoachsearch, 'i');
-        for (var i = 0; i < items.length; i++) {
-            var item = items[i];
-            if (letterMatch.test(item.emailid) || letterMatch.test(item.name) ) {
-                filtered.push(item);
+        if(!items){}
+        else{
+            for (var i = 0; i < items.length; i++) {
+                var item = items[i];
+                if (letterMatch.test(item.emailid) || letterMatch.test(item.name) ) {
+                    filtered.push(item);
+                }
             }
         }
         return filtered;
