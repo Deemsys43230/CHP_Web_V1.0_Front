@@ -531,6 +531,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
                 $scope.updateGoal=0;
                 $scope.targetText='Period';
                 $window.singlePicker = false;
+                $window.minimumDate = new Date();
             }
             else{
                 $scope.goalDetails=response.data.Weight_Goal;
@@ -645,7 +646,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
                     $scope.spinner=false;
                     $scope.weightUpdateText="Update Weight";
                     $window.currentweight=response.data.Weight_Goal.weight;
-                    $scope.doGetWeightLogGraph();
+                   // $scope.doGetWeightLogGraph();
                 }, function () {
                     errorMessage(Flash, "Please try again later!")
                 });
@@ -701,11 +702,13 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
             $scope.weight='';
             $scope.updateGoal=0;
             $window.goalStartDate = $window.goalEndDate = selectedDate;
+            $window.minimumDate = new Date();
             $scope.targetText='Period';
             $window.singlePicker = false;
             $scope.goal = {
                 status: 'set-goal'
             };
+
         },function () {
             errorMessage(Flash, "Please try again later!")
         });
@@ -715,6 +718,15 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
     $scope.updateGoalDetails=function(){
         $scope.targetText = 'End Date';
         $window.singlePicker = true;
+        var startformat = $scope.goalDetails.startdate.slice(6,10)+','+$scope.goalDetails.startdate.slice(3,5)+','+$scope.goalDetails.startdate.slice(0,2);
+        var currentformat = selectedDate.slice(6,10)+','+selectedDate.slice(3,5)+','+selectedDate.slice(0,2);
+        if (new Date(startformat).getTime() >= new Date(currentformat).getTime()) {
+            $window.minimumDate = $scope.goalDetails.startdate;
+
+        }
+       else{
+            $window.minimumDate = new Date();
+        }
         $window.goalStartDate = $scope.goalDetails.startdate;
         $window.goalEndDate = $scope.goalDetails.enddate;
         $window.goalEndDate = $scope.goalDetails.enddate;

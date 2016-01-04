@@ -77,7 +77,7 @@
     <section class="popupBody">
         <!-- Register Form -->
         <div class="common_model">
-            <form name="createGoalForm">
+            <form name="createGoalForm" novalidate>
                 <p>Goal Title</p>
                 <input type="text" name="title" ng-model="createGoal.title" maxlength="50" required/>
                 <span ng-show="createGoalForm.title.$dirty&&createGoalForm.title.$invalid && !createGoalForm.title.$pristine">

@@ -5,6 +5,8 @@ var userApp= angular.module('userApp', ['ngRoute','oc.lazyLoad','ngCookies','req
 
 userApp.controller('GoalController',function($scope,requestHandler,Flash,$route,$routeParams,$location) {
 
+    $scope.activeClass = {mygoal:'active'};
+
     $scope.doGetMyGoalList=function(){
         $scope.paginationLoad=false;
         $scope.loaded=true;
@@ -24,6 +26,8 @@ userApp.controller('GoalController',function($scope,requestHandler,Flash,$route,
     };
 
     $scope.doGetViewGoal=function(){
+
+
 
         $scope.isRequest=$route.current.request;
         requestHandler.postRequest("user/getIndividualGoalDetail/",{"goalid" :$routeParams.id}).then(function(response){
@@ -101,8 +105,9 @@ userApp.controller('GoalController',function($scope,requestHandler,Flash,$route,
 
     $scope.doQuitGroup=function(){
         requestHandler.postRequest("user/completeGoal/",{"goalid" : $routeParams.id}).then(function(response){
-            $location.path('/groupGoalView/'+$routeParams.id);
+            //$location.path('/groupGoalView/'+$routeParams.id);
             successMessage(Flash,"Goal Successfully Completed!");
+            $scope.doGetViewGoal();
         },function(){
             errorMessage(Flash,"Please try again later!");
         });

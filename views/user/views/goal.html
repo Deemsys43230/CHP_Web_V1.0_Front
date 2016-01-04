@@ -10,7 +10,21 @@
         <div class="content-weight">
             <div class="row margin-right-2">
                 <div class="col-md-12">
-                    <h5>&nbsp;&nbsp;Update Weight <span class="pull-right">Today's Date : <span class="text-red text-bold">{{todayDate}}</span></span> </h5>
+                    <h5>&nbsp;&nbsp;Update Weight <span class="pull-right">Date :</span>  <div class="input-group ui-datepicker ">
+                        <input ng-click="open($event)"  type="text"
+                               ng-keypress="prevent()"
+                               class="profile_input override "
+                               id = "popup"
+                               datepicker-popup="{{format}}"
+                               ng-model="selectedDate"
+                               is-open="opened"
+                               min="minDate"
+                               max="maxDate"
+                               datepicker-options="dateOptions"
+                               date-disabled="disabled(date, mode)"
+                               ng-required="true"
+                               close-text="Close" required block>
+                    </div> </h5>
                 </div>
                 <form name="weightLogForm" novalidate>
                     <div class="col-md-12 margin-top-15">

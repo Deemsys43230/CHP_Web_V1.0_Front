@@ -274,7 +274,7 @@
     <section class="popupBody">
         <!-- Register Form -->
         <div class="common_model">
-            <form name="changePasswordForm">
+            <form name="changePasswordForm" novalidate>
                 <p>Current Password</p>
                 <input type="password" name="oldPassword" ng-model="changePassword.oldPassword" maxlength="20" required/>
                 <span ng-show="changePasswordForm.oldPassword.$dirty&&changePasswordForm.oldPassword.$invalid">

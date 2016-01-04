@@ -136,7 +136,7 @@
                             <h5>Blood Group :</h5>
                         </div>
                         <div class="col-md-7 no-padding">
-                            <select class="form-control main"  ng-model="demography.bloodgroup" name="bloodgroup"  required>
+                            <select class="form-control main"  ng-model="demography.bloodgroup" name="bloodgroup" >
                                 <option value="">--Select blood group--</option>
                                 <option value="1">A +ve</option>
                                 <option value="2">B +ve</option>
@@ -147,9 +147,9 @@
                                 <option value="7">O -ve</option>
                                 <option value="8">AB -ve</option>
                             </select>
-                             <span ng-show="demographyForm.bloodgroup.$dirty&&demographyForm.bloodgroup.$invalid">
+                             <!--<span ng-show="demographyForm.bloodgroup.$dirty&&demographyForm.bloodgroup.$invalid">
                                      <span class="error-message" ng-show="demographyForm.bloodgroup.$error.required"><span>Required.</span></span>
-                             </span>
+                             </span>-->
                             <span class="error" ng-show="myForm.service_id.$dirty && myForm.service_id.$invalid">Select service</span>
                         </div>
                     </div>
@@ -159,10 +159,10 @@
                             <h5>Blood Pressure :</h5>
                         </div>
                         <div class="col-md-7 no-padding">
-                            <input class="demography_input" name="bloodpressure" ng-model="demography.bloodpressure" required/>
-                        <span ng-show="demographyForm.bloodpressure.$dirty&&demographyForm.bloodpressure.$invalid">
+                            <input class="demography_input" name="bloodpressure" ng-model="demography.bloodpressure" />
+                       <!-- <span ng-show="demographyForm.bloodpressure.$dirty&&demographyForm.bloodpressure.$invalid">
                         <span class="error-message textarea-errormessage40" ng-show="demographyForm.bloodpressure.$error.required"><span>Required.</span></span>
-                        </span>
+                        </span>-->
                         </div>
                     </div>
                 </div>
