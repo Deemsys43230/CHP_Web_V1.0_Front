@@ -8587,7 +8587,7 @@ tr.sort-icon th i{
 .line-clamp-xxs{
     position: absolute;
     max-height: 20px;
-    width: 16%;
+    width: 15%;
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow:hidden;

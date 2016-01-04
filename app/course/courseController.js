@@ -90,7 +90,7 @@ userApp.controller('CourseController',['$scope','requestHandler','Flash','$route
 
     $scope.doEnrollCourse = function(course){
         requestHandler.postRequest("user/enrollCourse/",{"courseid":course}).then(function(response){
-            $location.path("courseDetail/"+course);
+            $location.path("myCourses");
             successMessage(Flash,"Successfully Enrolled");
         },function(){
             errorMessage(Flash,"Please try again later!")
@@ -424,6 +424,10 @@ adminApp.controller('CourseAdminController',['$scope','requestHandler','Flash','
 
         $scope.courseid = courseid;
 
+        $("html, body").animate({
+            scrollTop: 0
+        }, 600);
+
         $(function(){
             $("#lean_overlay").fadeTo(1000);
             $(".modalRejectCourse").fadeIn(600);
@@ -448,6 +452,9 @@ adminApp.controller('CourseAdminController',['$scope','requestHandler','Flash','
     $scope.acceptModal=function(courseid){
 
         $scope.courseid = courseid;
+        $("html, body").animate({
+            scrollTop: 0
+        }, 600);
         $(function(){
             $("#lean_overlay").fadeTo(1000);
             $("#modal").fadeIn(600);

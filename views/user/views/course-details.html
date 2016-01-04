@@ -21,41 +21,38 @@
                         <div class="col-md-3">
                             <img class="margin-bottom-15" src="{{courseDetails.promoimage | trusted}}">
                             <div class="col-md-2 no-padding margin-top-5"><img class="course-author-img" src="{{courseDetails.imageurl | trusted}}"></div>
-                            <div class="col-md-12">
+                            <div class="col-md-10"><h5>{{courseDetails.ownername}}<br><small>{{courseDetails.specialistin}}</small></h5></div>
+                            <div class="col-md-12 margin-top-10 no-padding">
 
                                 <h5 class="row text-muted">
-                                    <span class="col-md-6">Created By</span>
-                                    <span class="col-md-6">: {{courseDetails.ownername}}</span>
-                                    <span class="col-md-6">Speacialist</span>
-                                    <span class="col-md-6">: {{courseDetails.specialistin}}</span>
-                                    <span class="col-md-6">Category</span>
-                                    <span class="col-md-6">: {{courseDetails.categoryname}}</span>
-                                    <span class="col-md-6">Price</span>
-                            <span class="col-md-6">
-                                : <span ng-show="courseDetails.price==0" class="text-green text-bold">Free</span>
-                                <span ng-hide="courseDetails.price==0" class="text-red text-bold">{{courseDetails.price}} $</span>
-                            </span>
-                                    <span class="col-md-6" ng-if="courseDetails.role=='admin'">Created On</span>
-                                    <span class="col-md-6" ng-if="courseDetails.role=='admin'">: {{courseDetails.createdon}}</span>
-                                    <span class="col-md-6">Students</span>
-                            <span class="col-md-6">
-                                : <span ng-show="courseDetails.enrollcount==0">----</span>
-                                <span ng-hide="courseDetails.enrollcount==0">{{courseDetails.enrollcount}}</span>
-                            </span>
-                                    <span class="col-md-6">Reviewed On</span>
-                            <span class="col-md-6">
-                                : <span ng-show="!courseDetails.reviewdate">----</span>
-                                <span ng-hide="!courseDetails.reviewdate">{{courseDetails.reviewdate}}</span>
-                            </span>
-                                    <span class="col-md-6" ng-if="courseDetails.role=='admin'">Published On</span>
-                            <span class="col-md-6" ng-if="courseDetails.role=='admin'">
-                                : <span ng-show="!courseDetails.publishedon" ng-if="courseDetails.role=='admin'">----</span>
-                                <span ng-hide="!courseDetails.publishedon" ng-if="courseDetails.role=='admin'">{{courseDetails.publishedon}}</span>
-                            </span>
-                                    <span class="col-md-6">Sections</span>
-                            <span class="col-md-6">
-                                :  <span >{{sectionList.length}} </span>
-                            </span>
+                                    <span class="col-md-5">Category</span>
+                                    <span class="col-md-7">: {{courseDetails.categoryname}}</span>
+                                    <span class="col-md-5">Price</span>
+                                    <span class="col-md-7">
+                                        : <span ng-show="courseDetails.price==0" class="text-green text-bold">Free</span>
+                                        <span ng-hide="courseDetails.price==0" class="text-red text-bold">{{courseDetails.price}} $</span>
+                                    </span>
+                                    <span class="col-md-5" ng-if="courseDetails.role=='admin'">Created On</span>
+                                    <span class="col-md-7" ng-if="courseDetails.role=='admin'">: {{courseDetails.createdon}}</span>
+                                    <span class="col-md-5">Students</span>
+                                    <span class="col-md-7">
+                                        : <span ng-show="courseDetails.enrollcount==0">----</span>
+                                        <span ng-hide="courseDetails.enrollcount==0">{{courseDetails.enrollcount}}</span>
+                                    </span>
+                                    <span class="col-md-5">Reviewed On</span>
+                                    <span class="col-md-7">
+                                        : <span ng-show="!courseDetails.reviewdate">----</span>
+                                        <span ng-hide="!courseDetails.reviewdate">{{courseDetails.reviewdate}}</span>
+                                    </span>
+                                    <span class="col-md-5" ng-if="courseDetails.role=='admin'">Published On</span>
+                                    <span class="col-md-7" ng-if="courseDetails.role=='admin'">
+                                        : <span ng-show="!courseDetails.publishedon" ng-if="courseDetails.role=='admin'">----</span>
+                                        <span ng-hide="!courseDetails.publishedon" ng-if="courseDetails.role=='admin'">{{courseDetails.publishedon}}</span>
+                                    </span>
+                                    <span class="col-md-5">Sections</span>
+                                    <span class="col-md-7">
+                                        :  <span >{{sectionList.length}} </span>
+                                    </span>
                                 </h5>
                                 <!--<h5 class="margin-top-10" ng-show="courseDetails.enrollmentStatus==0"><i class="fa fa-users text-gray"></i> - {{courseDetails.enrollcount}} Students</h5>
                                 <h5 class="margin-top-10"><i class="fa fa-book text-gray"></i> - {{sectionList.length}} Sections</h5>-->

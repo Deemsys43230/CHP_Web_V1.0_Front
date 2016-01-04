@@ -33,9 +33,9 @@
                     </thead>
                     <tbody>
                         <tr dir-paginate="course in coursefilter = ( courseList | filter : coursesearch | itemsPerPage:9)" ng-show="courseList.length!=0">
-                            <td title="{{course.coursename}}"><span class="line-clamp-xs">{{course.coursename}}</span></td>
-                            <td title="{{course.coursesubtitle}}"><span class="line-clamp-xs">{{course.coursesubtitle}}</span></td>
-                            <td title="{{course.categoryname}}"><span class="line-clamp-xs">{{course.categoryname}}</span></td>
+                            <td title="{{course.coursename}}"><span class="line-clamp-xxs">{{course.coursename}}</span></td>
+                            <td title="{{course.coursesubtitle}}"><span class="line-clamp-xxs">{{course.coursesubtitle}}</span></td>
+                            <td title="{{course.categoryname}}"><span class="line-clamp-xxs">{{course.categoryname}}</span></td>
                             <td title="{{course.ownername}}"><span class="line-clamp-lxs">{{course.ownername}}</span></td>
                             <td ng-if="course.price==0">Free</td>
                             <td ng-if="course.price!=0">{{course.price}}$</td>

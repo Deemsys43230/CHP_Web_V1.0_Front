@@ -23,19 +23,27 @@
                 <table class="table table-striped table-bordered">
                     <thead>
                     <tr class="warning sort-icon">
-                        <th class="col-md-3">Coach Name</th>
-                        <th class="col-md-2">Student Name<i ng-click="sortList('publishedon')" class="{{sortIcon.publishedon}} pull-right"></i></th>
-                        <th class="col-md-1">Subscribed on<i ng-click="sortList('enrollcount')" class="{{sortIcon.enrollcount}} pull-right"></i></th>
-                        <th class="col-md-1">Earn</th>
-                        <th class="col-md-2">Transcation Id</th>
+                        <th class="col-md-2">Subscribed By</th>
+                        <th class="col-md-1">Date<i ng-click="sortList('publishedon')" class="{{sortIcon.publishedon}} pull-right"></i></th>
+                        <th class="col-md-1">From Date<i ng-click="sortList('enrollcount')" class="{{sortIcon.enrollcount}} pull-right"></i></th>
+                        <th class="col-md-1">To Date</th>
+                        <th class="col-md-1">Share $</th>
+                        <th class="col-md-1">Earn  $</th>
+                        <th class="col-md-2">Inward ID</th>
+                        <th class="col-md-2">Outward ID</th>
+                        <th class="col-md-1">Status</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr ng-show="students.length <= 0"><td colspan="5" style="text-align:center;">Loading new data!!</td></tr>
                     <tr dir-paginate="student in students|itemsPerPage:itemsPerPage" total-items="total_count">
-                        <td>{{student.coursename}}</td>
-                        <td>{{student.coursename}}</td>
+                        <td><span class="line-clamp-xs">{{student.coursename}}</span></td>
+                        <td>{{student.publishedon}}</td>
                         <td>{{student.enrollcount}}</td>
+                        <td>{{student.ownerid}}</td>
+                        <td>{{student.ownerid}}</td>
+                        <td>{{student.ownerid}}</td>
+                        <td>{{student.ownerid}}</td>
                         <td>{{student.ownerid}}</td>
                         <td>{{student.ownerid}}</td>
                     </tr>

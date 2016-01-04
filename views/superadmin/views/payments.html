@@ -26,16 +26,16 @@
                         <th class="col-md-3">Course Name<i ng-click="sortList('coursename')" class="{{sortIcon.coursename}} pull-right"></i></th>
                         <th class="col-md-3">Coach Name<i ng-click="sortList('coachname')" class="{{sortIcon.coachname}} pull-right"></i></th>
                         <th class="col-md-2">Published On<i ng-click="sortList('publishedon')" class="{{sortIcon.publishedon}} pull-right"></i></th>
-                        <th class="col-md-1">Enroll<i ng-click="sortList('enrollcount')" class="{{sortIcon.enrollcount}} pull-right"></i></th>
+                        <th class="col-md-2">No. of Enrollments<i ng-click="sortList('enrollcount')" class="{{sortIcon.enrollcount}} pull-right"></i></th>
                         <th class="col-md-1">Total Earn<i ng-click="sortList('ownerid')" class="{{sortIcon.ownerid}} pull-right"></i></th>
-                        <th class="col-md-2">Options</th>
+                        <th class="col-md-1">Options</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr ng-show="courses.length <= 0"><td colspan="5" style="text-align:center;">Loading new data!!</td></tr>
                     <tr dir-paginate="course in courses|itemsPerPage:itemsPerPage" total-items="total_count">
-                        <td>{{course.coursename}}</td>
-                        <td>{{course.coursename}}</td>
+                        <td><span class="line-clamp-sm">{{course.coursename}}</span></td>
+                        <td><span class="line-clamp-sm">{{course.coursename}}</span></td>
                         <td>{{course.publishedon}}</td>
                         <td>{{course.enrollcount}}</td>
                         <td>{{course.ownerid}}</td>

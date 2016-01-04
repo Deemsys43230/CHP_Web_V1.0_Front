@@ -89,6 +89,7 @@ adminApp.controller('AdminPaymentController',function($scope,requestHandler,Flas
     $scope.doGetCourseSearch=function(){
         $scope.sortIcon=iconList;
         $scope.currentOrderId='';
+        $scope.doGetCourseList(1);
         var searchObject={};
         if(!$scope.courseSearch){
             searchObject.keyid="";

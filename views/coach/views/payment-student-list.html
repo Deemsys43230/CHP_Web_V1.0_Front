@@ -18,18 +18,20 @@
                     <table class="table table-striped table-bordered">
                         <thead>
                         <tr class="warning">
-                            <th class="col-md-4">Student Name</th>
-                            <th class="col-md-2">Email id</th>
+                            <th class="col-md-3">Enrolled By</th>
                             <th class="col-md-2">Purchased On</th>
-                            <th class="col-md-2">Payment Id</th>
                             <th class="col-md-2">Purchased Amount</th>
+                            <th class="col-md-1">Share $</th>
+                            <th class="col-md-2">Payment ID</th>
+                            <th class="col-md-2">Receipt ID</th>
                         </tr>
                         </thead>
                         <tbody >
                         <tr dir-paginate="student in studentList  | itemsPerPage: 8" ng-show="studentList.length!=0">
-                            <td>{{student.coursename}}</td>
-                            <td>{{student.categoryname}}</td>
+                            <td><span class="line-clamp-sm">{{student.coursename}}</span></td>
+                            <td>{{student.publishedon}}</td>
                             <td>{{student.createdon}}</td>
+                            <td>{{student.publishedon}}</td>
                             <td>{{student.publishedon}}</td>
                             <td>{{student.enrollcount}} $</td>
                         </tr>

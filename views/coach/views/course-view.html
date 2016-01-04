@@ -78,26 +78,26 @@
                         </div>
 
                         <table attr-sample="thetable" ng-show="courseDetails.canedit==1">
-                            <tbody>
-                            <tr ng-repeat="section in courseSections">
-                                <td class="sorter fa fa-arrows"></td>
-                                <td>
-                                    <h5 class="margin-bottom-5">&nbsp;&nbsp;Section {{section.sequenceno}} :
-                                        <a href="#courseSection/{{section.sectionid}}">{{section.sectiontitle}}</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <tbody>
+                        <tr ng-repeat="section in courseSections">
+                            <td class="sorter fa fa-arrows"></td>
+                            <td>
+                                <h5 class="margin-bottom-5">&nbsp;&nbsp;Section {{section.sequenceno}} :
+                                    <a href="#courseSection/{{section.sectionid}}">{{section.sectiontitle}}</a>&nbsp;&nbsp;&nbsp;&nbsp;
                                         <span ng-show="courseDetails.canedit==1">
                                             <a href="#courseSectionEdit/{{section.sectionid}}" title="Edit Section" class="fa fa-pencil"></a>&nbsp;&nbsp;
                                             <a href="" ng-click="sectionDeleteModel(section.sectionid)" title="Delete Section" class="fa fa-trash"></a>
                                         </span>
-                                    </h5>
-                                </td>
-                            </tr>
-                            </tbody>
-                            <tfoot hidden>
-                            <tr>
-                                <td colspan="4" id="logarea">&nbsp;</td>
-                            </tr>
-                            </tfoot>
-                        </table>
+                                </h5>
+                            </td>
+                        </tr>
+                        </tbody>
+                        <tfoot hidden>
+                        <tr>
+                            <td colspan="4" id="logarea">&nbsp;</td>
+                        </tr>
+                        </tfoot>
+                    </table>
 
                     </div>
                 </div>

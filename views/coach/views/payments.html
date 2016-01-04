@@ -19,10 +19,11 @@
                         <tr class="warning">
                             <th class="col-md-3">Course Name</th>
                             <th class="col-md-2">Category</th>
-                            <th class="col-md-2">Created On</th>
-                            <th class="col-md-2">Published On</th>
-                            <th class="col-md-1">Enroll</th>
+                            <th class="col-md-1">Created On</th>
+                            <th class="col-md-1">Published On</th>
                             <th class="col-md-1">Price</th>
+                            <th class="col-md-1">Enroll Count</th>
+                            <th class="col-md-1">Total Earn</th>
                             <th class="col-md-1">Option</th>
                         </tr>
                         </thead>
@@ -33,6 +34,7 @@
                             <td>{{mycourse.createdon}}</td>
                             <td>{{mycourse.publishedon}}</td>
                             <td>{{mycourse.enrollcount}}</td>
+                            <td>{{mycourse.price}}</td>
                             <td>{{mycourse.price}}</td>
                             <td><a class="btn-xs btn-primary" href="#studentsList/{{mycourse.courseid}}">View Details</a></td>
                         </tr>
