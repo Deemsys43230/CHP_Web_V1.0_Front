@@ -2,9 +2,23 @@
 
 #content {
     display: block;
-    margin: 0px 0px 0px 235px;
+    margin: 0 0 0 235px;
     position: absolute;
     width: 570px;
+    height: 480px;
+    z-index: 1;
+    background-color: #fff;
+    -webkit-box-shadow: 1px 1px 5px rgba(0,0,0,0.3);
+    -moz-box-shadow: 1px 1px 5px rgba(0,0,0,0.3);
+    box-shadow: 1px 1px 5px rgba(0,0,0,0.3);
+    padding-top: 15px;
+}
+
+#contentHistory{
+    display: block;
+    margin: 0 0 0 235px!important;
+    position: absolute;
+    width: 985px !important;
     height: 480px;
     z-index: 1;
     background-color: #fff;
@@ -70,8 +84,8 @@
 
 #sidemenu li a {
   display: block;
-  padding: 12px 20px;
-  height: 65px;
+  padding: 10px 20px;
+  height: 60px;
   overflow-y: hidden;
   color: #555;
   text-decoration: none;
@@ -83,22 +97,22 @@
 }
 
 #sidemenu li.calories {
-     display: block;
-     padding: 10px 0px;
-     height: 255px;
-     background-color: #fff;
-     -webkit-box-shadow: 1px 1px 5px rgba(0,0,0,0.3);
-     -moz-box-shadow: 1px 1px 5px rgba(0,0,0,0.3);
-     box-shadow: 1px 1px 5px rgba(0,0,0,0.3);
-     color: #555;
-     text-decoration: none;
-     width: 224px;
-     margin-left: -4px;
-     border-left: 4px solid dodgerblue ;
+    display: block;
+    padding: 10px 0;
+    height: 200px;
+    background-color: #fff;
+    -webkit-box-shadow: 1px 1px 5px rgba(0,0,0,0.3);
+    -moz-box-shadow: 1px 1px 5px rgba(0,0,0,0.3);
+    box-shadow: 1px 1px 5px rgba(0,0,0,0.3);
+    color: #555;
+    text-decoration: none;
+    width: 224px;
+    margin-left: -4px;
+    border-left: 4px solid dodgerblue ;
  }
 
 #sidemenu li.calories .text{
-    margin: 0px 10px !important;
+    margin: 0 10px 10px 10px !important;
 }
 
 #sidemenu li.calories .text p{
@@ -137,6 +151,15 @@
 
 #advice h4 {
     color: red;
+}
+
+#sidemenu li.history a.open {
+    color: #ff0066;
+    border-left: 4px solid #ff0066;
+}
+
+#history h4 {
+    color: #ff0066;
 }
 
 #sidemenu li.weight a.open {

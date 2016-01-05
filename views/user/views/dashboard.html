@@ -34,22 +34,29 @@
 
     <div id="w" class="clearfix">
         <ul id="sidemenu">
-            <li class="daily_update">
+            <li class="daily_update" ng-click="otherThanHistory()">
                 <a href="#daily_update" class="open"><i class="fa fa-child fa-4x"></i><span>Daily Updates</span>
                     <br/>
                     <p>Enter your Daily Updates</p>
                 </a>
             </li>
 
-            <li class="weight">
+            <li class="weight" ng-click="otherThanHistory()">
                 <a href="#weight"><i class="fa fa-tachometer fa-4x"></i><span>Weight & Goal</span>
                     <br/>
                     <p>Update Weight & Set Goal</p>
                 </a>
             </li>
 
-            <li class="advice">
+            <li class="advice" ng-click="otherThanHistory()">
                 <a href="#advice"><i class="fa fa-exclamation-triangle fa-4x"></i><span>Advices</span>
+                    <br/>
+                    <p>Get daily tips for you</p>
+                </a>
+            </li>
+
+            <li class="history" ng-click="getHistory()">
+                <a href="#history"><i class="fa fa-history fa-4x"></i><span>History</span>
                     <br/>
                     <p>Get daily tips for you</p>
                 </a>
@@ -57,12 +64,10 @@
 
             <li class="calories">
                 <div class="text">
-                    <h4>
+                    <h5>
                         Today's Update
-                    </h4>
-
+                    </h5>
                 </div>
-                <br/>
                 <div class="col-md-6 text-center">
                     <h5>Gain</h5>
                     <div class="circle-wrapper">
@@ -83,7 +88,7 @@
                              offset="{{ offset }}">
                         </div>
                     </div>
-                    <p class="text-gray">out of {{calorieGraph.averagecalorieintake}} calories</p>
+                    <p class="text-gray">of {{calorieGraph.averagecalorieintake}} cals.</p>
                 </div>
                 <div class="col-md-6 text-center">
                     <h5>Spent</h5>
@@ -105,12 +110,12 @@
                              offset="{{ offset }}">
                         </div>
                     </div>
-                    <p class="text-gray">out of {{spentGraphMax}} calories</p>
+                    <p class="text-gray">of {{spentGraphMax}} cals.</p>
                 </div>
             </li>
         </ul>
 
-        <div id="content">
+        <div id="content" ng-show="historyReport==0">
             <div id="daily_update">
                 <div class="col-md-7">
                     <!-- Nav Tabs -->
@@ -368,7 +373,63 @@
             </div><!-- @end #ideas-content -->
         </div><!-- @end #content -->
 
-        <div id="update">
+        <div id="contentHistory" ng-show="historyReport==1">
+            <div id="history"  class="contentblock hidden">
+
+                <div class="col-md-6">
+                    <!-- Nav Tabs -->
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a class="historyOverride" href="#tab-4" data-toggle="tab" onclick="return false;">Calories Intaken</a></li>
+                        <li><a href="#tab-5" class="historyOverride" data-toggle="tab" onclick="return false;">Calories Burnt</a></li>
+                        <li><a href="#tab-6" class="historyOverride" data-toggle="tab" onclick="return false;">Exercise Minutes</a></li>
+                    </ul>
+
+                    <!-- Tab panels -->
+                    <div class="tab-content contentHistoryOverride">
+                        <!-- Tab Content 1 -->
+                        <div class="tab-pane in active padding-top-5" id="tab-4">
+                            tab-1
+                        </div>
+                        <!-- Tab Content 2 -->
+                        <div class="tab-pane padding-top-5" id="tab-5">
+                            tab-2
+                        </div>
+
+                        <!-- Tab Content 3 -->
+                        <div class="tab-pane padding-top-5" id="tab-6">
+                            tab-3
+                        </div>
+                    </div>
+                    <!-- End Tab Panels -->
+                </div>
+
+                <div class="col-md-1 pull-right">
+                    <a href="" class="btn btn-sm btn-primary">Go</a>
+                </div>
+
+                <div class="col-md-2 pull-right no-padding margin-right-20">
+                    <div class="ui-datepicker">
+                        <input ng-click="open($event)" ng-change="initialLoadFoodAndExercise()" type="text"
+                               ng-keypress="prevent()"
+                               class="profile_input"
+                               id = "popup"
+                               datepicker-popup="{{format}}"
+                               ng-model="selectedDate"
+                               is-open="opened"
+                               min="minDate"
+                               max="maxDate"
+                               datepicker-options="dateOptions"
+                               date-disabled="disabled(date, mode)"
+                               ng-required="true"
+                               close-text="Close" required block>
+                    </div>
+                </div>
+
+                <div class="col-md-2 pull-right margin-top-5 text-right"><i class="fa fa-calendar"></i> Date Range</div>
+            </div><!-- @end #ideas-content -->
+        </div>
+
+        <div id="update" ng-show="historyReport==0">
             <div class="row">
                 <div class="col-md-4">
                     <img ng-src="{{userProfile.imageurl | trusted}}">

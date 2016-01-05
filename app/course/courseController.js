@@ -827,8 +827,6 @@ coachApp.controller('CourseEditController',function($scope,requestHandler,Flash,
 
     //To Enable the update button if changes occur.
     $scope.isCleanCourse = function() {
-        console.log($scope.courseDetails);
-        console.log($scope.originalCourseDetails);
         return angular.equals ($scope.originalCourseDetails, $scope.courseDetails);
     };
 

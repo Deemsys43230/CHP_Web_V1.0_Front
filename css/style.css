@@ -298,6 +298,11 @@ input[type="submit"] {
     background-color: #fff;
 }
 
+#contentHistory{
+    padding: 50px 0;
+    background-color: #fff;
+}
+
 #content.full-sections {
 	padding: 0;
 }
@@ -2683,6 +2688,16 @@ ul.icons-list li i {
     margin-right: 7px !important;
 }
 
+.nav-tabs > li > a.historyOverride{
+    font-weight: 600;
+    color: #666;
+    padding: 6px 15px;
+    background-color: #f9f9f9;
+    border-radius: 0px !important;
+    border: 0px !important;
+    margin-right: 7px !important;
+}
+
 .nav-tabs > li > a i {
     padding-right: 6px;
 }
@@ -2703,9 +2718,17 @@ ul.icons-list li i {
     box-shadow: 0px 0px 3px rgba(0,0,0,0.3);
 }
 
-.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover {
+.nav-tabs > li > a.historyOverride:hover, .nav-tabs > li > a.historyOverride:focus {
+    color: #ff0066 !important;
+    background-color: #fff !important;
+    -webkit-box-shadow: 0px 0px 3px rgba(0,0,0,0.3);
+    -moz-box-shadow:  0px 0px 3px rgba(0,0,0,0.3);
+    box-shadow:  0px 0px 3px rgba(0,0,0,0.3);
+}
+
+.nav-tabs > li.active > a.historyOverride, .nav-tabs > li.active > a.historyOverride:hover, .nav-tabs > li.active > a.historyOverride:focus {
     background-color: #fff;
-    color: #f8ba01 !important;
+    color: #ff0066 !important;
     -webkit-box-shadow:  0px 0px 3px rgba(0,0,0,0.3);
     -moz-box-shadow:  0px 0px 3px rgba(0,0,0,0.3);
     box-shadow: 0px 0px 3px rgba(0,0,0,0.3);
@@ -2718,6 +2741,11 @@ ul.icons-list li i {
     -webkit-box-shadow: inset 0px 0px 3px rgba(0,0,0,0.3);
     -moz-box-shadow: inset 0px 0px 3px rgba(0,0,0,0.3);
     box-shadow: inset 0px 0px 3px rgba(0,0,0,0.3);
+}
+
+.tab-content.contentHistoryOverride{
+    width: 950px !important;
+    height: 410px !important;
 }
 
 .tab-content p {
@@ -9238,7 +9266,7 @@ a#measure-modal{
 .circle-wrapper{
     position: relative;
     text-align: center;
-    margin-top: 10px;
+    margin-top: 5px;
 }
 
 .circle-progress{

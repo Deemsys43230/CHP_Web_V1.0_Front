@@ -15,6 +15,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
     $window.singlePicker = false;
     $scope.weightUpdateText="Update Weight";
     $scope.graphs=1;
+    $scope.historyReport=0;
 
     //Modal Popup to add user food
     $scope.doUserAddFood=function(){
@@ -1131,7 +1132,13 @@ alert($scope.selectedDate1);
         });
     };
 
+    $scope.getHistory=function(){
+        $scope.historyReport=1;
+    };
 
+    $scope.otherThanHistory=function(){
+        $scope.historyReport=0;
+    };
 
     //To Display current date
     var selectedDate = new Date();
@@ -1145,7 +1152,7 @@ alert($scope.selectedDate1);
     if(mm<10){
         mm='0'+mm
     }
-    var selectedDate = dd+'/'+mm+'/'+yyyy;
+    selectedDate = dd+'/'+mm+'/'+yyyy;
     $scope.selectedDate1 = selectedDate;
     $scope.selectedDate = selectedDate;
     $scope.todayDate = selectedDate;
@@ -1154,14 +1161,14 @@ alert($scope.selectedDate1);
     //Initialize
     $scope.initialLoadFoodAndExercise=function(){
         if($scope.selectedDate==selectedDate){
-            alert("1");
+            /*alert("1");*/
             $scope.loadFoodDiary($scope.selectedDate);
             $scope.loadExerciseDiary($scope.selectedDate);
             $scope.doGetIntakeBruntByDate($scope.selectedDate);
             $scope.goGetDailyIntakeGraph($scope.selectedDate);
         }
         else{
-            alert("2");
+            /*alert("2");*/
             $scope.loadFoodDiary($scope.selectedDate.format("dd/mm/yyyy"));
             $scope.loadExerciseDiary($scope.selectedDate.format("dd/mm/yyyy"));
             $scope.doGetIntakeBruntByDate($scope.selectedDate.format("dd/mm/yyyy"));
@@ -1173,7 +1180,6 @@ alert($scope.selectedDate1);
     };
 
     $scope.initialLoadFoodAndExercise();
-
 
     //circle round
     $scope.offset =         0;
