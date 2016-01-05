@@ -47,6 +47,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
             $(".user_register").show();
 
         });
+
         $(".modal_close").click(function(){
             $(".user_register").hide();
             $("#modal-add-exercise").hide();
@@ -612,13 +613,22 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
 
     //TO Insert weight Goal Log
     $scope.doInsertOrUpdateWeightLog=function(){
-
+alert($scope.selectedDate1);
+        alert(selectedDate);
         $scope.weightUpdateText="Updating...";
         $scope.spinner=true;
-
+        var updateDate;
+        if($scope.selectedDate1 == selectedDate){
+            alert("1");
+            updateDate = $scope.selectedDate1;
+        }
+        else{
+            alert("2");
+            updateDate = $scope.selectedDate1.format("dd/mm/yyyy");
+        }
         requestHandler.getRequest("user/getWeightGoal/","").then(function(response){
             if(response.data.Response_status==0){
-                requestHandler.postRequest("user/weightlogInsertorUpdate/",{"date":selectedDate,"weight":$scope.weightlog}).then(function(response){
+                requestHandler.postRequest("user/weightlogInsertorUpdate/",{"date":updateDate,"weight":$scope.weightlog}).then(function(response){
                     $scope.spinner=false;
                     $scope.weightUpdateText="Update Weight";
                 }, function () {
@@ -640,7 +650,8 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
                     $scope.weightIncrease=1;
                     $scope.weightUpdated=1;
                 }
-                requestHandler.postRequest("user/weightlogInsertorUpdate/",{"date":selectedDate,"weight":currentWeight}).then(function(response){
+
+                requestHandler.postRequest("user/weightlogInsertorUpdate/",{"date":updateDate,"weight":currentWeight}).then(function(response){
                     successMessage(Flash, "Successfully Updated!");
                     $scope.weightlog=response.data.Weight_Goal.weight;
                     $scope.spinner=false;
@@ -650,9 +661,13 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
                 }, function () {
                     errorMessage(Flash, "Please try again later!")
                 });
+
+
             }
         });
     };
+
+
 
     $scope.doGetWeightLogGraph=function(){
         $scope.graph = {
@@ -1131,7 +1146,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         mm='0'+mm
     }
     var selectedDate = dd+'/'+mm+'/'+yyyy;
-
+    $scope.selectedDate1 = selectedDate;
     $scope.selectedDate = selectedDate;
     $scope.todayDate = selectedDate;
     $window.goalStartDate = $window.goalEndDate = selectedDate;
@@ -1139,12 +1154,14 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
     //Initialize
     $scope.initialLoadFoodAndExercise=function(){
         if($scope.selectedDate==selectedDate){
+            alert("1");
             $scope.loadFoodDiary($scope.selectedDate);
             $scope.loadExerciseDiary($scope.selectedDate);
             $scope.doGetIntakeBruntByDate($scope.selectedDate);
             $scope.goGetDailyIntakeGraph($scope.selectedDate);
         }
         else{
+            alert("2");
             $scope.loadFoodDiary($scope.selectedDate.format("dd/mm/yyyy"));
             $scope.loadExerciseDiary($scope.selectedDate.format("dd/mm/yyyy"));
             $scope.doGetIntakeBruntByDate($scope.selectedDate.format("dd/mm/yyyy"));
@@ -1205,6 +1222,12 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
     };
 
     $scope.open = function ($event) {
+        $event.preventDefault();
+        $event.stopPropagation();
+        $scope.opened = true;
+    };
+
+    $scope.open1 = function ($event) {
         $event.preventDefault();
         $event.stopPropagation();
         $scope.opened = true;
