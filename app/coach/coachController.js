@@ -13,7 +13,6 @@ adminApp.controller('CoachController',function($scope,requestHandler,Flash) {
             $scope.loaded=false;
             $scope.paginationLoad=true;
         });
-
     };
 
     //Enable Disable coach
@@ -86,9 +85,6 @@ adminApp.controller('CoachViewController',function($scope,requestHandler,Flash,$
         $scope.coach = {
             status: 'coach-view'
         };
-
-
-
 
         $scope.viewload=true;
 

@@ -217,7 +217,6 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'userApp',
                             files:[
-                                '../../js/bootstrap.min.js',
                                 '../../angular/angular-utils-pagination/dirPagination.js',
                                 '../../app/userCoach/userCoachController.js'
                             ]

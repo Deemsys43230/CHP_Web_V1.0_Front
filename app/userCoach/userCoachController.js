@@ -1,12 +1,18 @@
 var userApp = angular.module('userApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','angularUtils.directives.dirPagination']);
 
-userApp.controller('UserCoachController',function($scope,requestHandler,Flash,$location,$q,$routeParams,$window) {
+userApp.controller('UserCoachController',function($scope,requestHandler,Flash,$location,$q,$routeParams) {
 
     $scope.coachreview = {ratinglevel:1};
     $scope.averageRate=0.1;
     $scope.paginationLoad=false;
     var myCoachIdListArray = [];
     $scope.disablereview=false;
+
+    // Search Food Type
+    $('.show-list-search').click(function() {
+        $('.search-list-form').toggle(300);
+        $('.search-list-form input').focus();
+    });
 
   // To display Coach list by user
     $scope.doGetCoachListByUser=function(){
@@ -236,13 +242,6 @@ userApp.controller('UserCoachController',function($scope,requestHandler,Flash,$l
 
         });
     };
-
-    // Search Food Type
-    $('.show-list-search').click(function() {
-        $('.search-list-form').toggle(300);
-        $('.search-list-form input').focus();
-    });
-
 });
 
 
