@@ -261,6 +261,20 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller: 'UserCoachController'
             }).
+            when('/thanksPage', {
+                templateUrl: 'views/thanks-page.html',
+                resolve: {
+                    loadMyFiles:function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'userApp',
+                            files:[
+                                '../../app/thanksPage/thanksPageController.js'
+                            ]
+                        })
+                    }
+                },
+                controller: 'ThanksPageController'
+            }).
             when('/friends', {
                 templateUrl: 'views/friends.html',
                 resolve: {

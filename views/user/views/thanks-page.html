@@ -1,0 +1,35 @@
+
+
+<div class="page-banner1" ng-init="InitializeTimer(5)">
+    <div id="w" class="clearfix">
+        <div id="demography-content">
+            <div class="col-md-12 text-center" style="background-image: url(../../images/subscripe.png);background-repeat: no-repeat;height: 500px">
+                <div class="col-md-2"></div>
+                <div class="col-md-10">
+                    <h1 class="text-bold text-orange thanks-h1">THANKS FOR YOUR <br/>SUBSCRIPTION</h1>
+                    <h1 class="text-gray margin-top-20">YOUR SUBSCRIPTION IS SUCCESSFULLY COMPLETED</h1>
+                    <h2 class="text-gray" id="countmesg"></h2>
+                </div>
+            </div>
+        </div><!-- @end #content -->
+    </div><!-- @end #w -->
+</div>
+
+<script type="text/javascript" src="../../js/script.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        var delay = 10 ;
+        var url = "http://google.com";
+        function countdown() {
+            setTimeout(countdown, 1000) ;
+            $('#countmesg').html("Redirecting in "  + delay  + " seconds.");
+            delay --;
+        if (delay < 0 ) {
+            window.location = url ;
+            delay = 0 ;
+            }
+        }
+        countdown() ;
+    });
+</script>
