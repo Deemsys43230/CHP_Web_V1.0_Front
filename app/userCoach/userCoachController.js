@@ -200,6 +200,13 @@ userApp.controller('UserCoachController',function($scope,requestHandler,Flash,$l
         };
     };
 
+    $scope.priceTable=function(id){
+        $scope.coachViewId=id;
+        $scope.coach = {
+            status: 'coach-price'
+        };
+    };
+
     $scope.coachView=function(id){
         $scope.doGetCoachDetailsByUser(id);
     };

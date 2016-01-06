@@ -157,8 +157,6 @@ adminApp.controller('CoachViewController',function($scope,requestHandler,Flash,$
 
     };
 
-
-
     $scope.doGetCoachRatings= function (id) {
         $scope.reviewload=true;
         requestHandler.getRequest("getRatingsandReviews/"+id, "").then(function(response){
