@@ -11,13 +11,13 @@
             <div class="row margin-right-2">
                 <div class="col-md-12">
                     <h5>&nbsp;&nbsp;Update Weight <span class="pull-right">Date :</span>  <div class="input-group ui-datepicker ">
-                        <input ng-click="open1($event)"  type="text"
+                        <input style="z-index:1000"
+                                ng-model="weightLogDate" ng-click="open($event,'opened1')" ng-change="setWeightLogDate()"  type="text"
                                ng-keypress="prevent()"
                                class="profile_input override "
-                               id = "popup"
-                               datepicker-popup="{{format}}"
-                               ng-model="selectedDate1"
-                               is-open="opened"
+                               id = "popup1"
+                               datepicker-popu p="{{format}}"
+                               is-open="dpOpened.opened1"
                                min="minDate"
                                max="maxDate"
                                datepicker-options="dateOptions"

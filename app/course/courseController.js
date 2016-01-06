@@ -827,7 +827,9 @@ coachApp.controller('CourseEditController',function($scope,requestHandler,Flash,
 
     //To Enable the update button if changes occur.
     $scope.isCleanCourse = function() {
+        console.log(angular.equals ($scope.originalCourseDetails, $scope.courseDetails));
         return angular.equals ($scope.originalCourseDetails, $scope.courseDetails);
+
     };
 
     $scope.doUpdateImage = function(){

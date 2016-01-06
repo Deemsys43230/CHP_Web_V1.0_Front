@@ -323,13 +323,13 @@
                 </div>
                 <div class="col-md-2 pull-right margin-top-3 no-padding margin-right-20">
                     <div class="input-group ui-datepicker ">
-                        <input ng-click="open($event)" ng-change="initialLoadFoodAndExercise()" type="text"
+                        <input ng-click="open($event,'opened')" ng-change="initialLoadFoodAndExercise()" type="text"
                                ng-keypress="prevent()"
-                               class="profile_input override "
+                               class="profile_input override"
                                id = "popup"
                                datepicker-popup="{{format}}"
                                ng-model="selectedDate"
-                               is-open="opened"
+                               is-open="dpOpened.opened"
                                min="minDate"
                                max="maxDate"
                                datepicker-options="dateOptions"
