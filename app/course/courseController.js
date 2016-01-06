@@ -739,7 +739,6 @@ coachApp.controller('CourseEditController',function($scope,requestHandler,Flash,
     var originalSectionDetails={};
 
     $scope.isCancel = $routeParams.cancelvalue;
-    console.log("iscancel",$scope.isCancel);
 
     if(!$routeParams.courseId){
     }
