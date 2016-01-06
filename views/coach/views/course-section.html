@@ -16,11 +16,11 @@
                     <div class="col-md-8">
                         <h2>Section {{sectionDetails.sequenceno}}&nbsp;&nbsp;: {{sectionDetails.sectiontitle}} &nbsp;&nbsp;
                             <span ng-show="sectionDetails.canedit==1">
-                                <a href="#courseSectionEdit/{{sectionDetails.sectionid}}" title="Edit Section"><i class="fa fa-pencil"></i></a>&nbsp;&nbsp;
+                                <a href="#courseSectionEdit/{{sectionDetails.sectionid}}?cancelvalue=2" title="Edit Section"><i class="fa fa-pencil"></i></a>&nbsp;&nbsp;
                                 <a href="" ng-click="sectionDeleteModel(sectionDetails.sectionid)" title="Delete Section" class="fa fa-trash"></a>
                             </span>
                         </h2>
-                        <p class="margin-top-15 margin-bottom-20" ng-bind-html="sectionDetails.sectioncontent|html"></p>
+                        <p class="margin-top-15 margin-bottom-20 wrap" ng-bind-html="sectionDetails.sectioncontent|html"></p>
                         <hr/>
                         <div class="text-center margin-top-20">
                             <a href="" class="btn course_button" ng-disabled="sectionDetails.sequenceno==1" ng-click="prevSection(sectionDetails.sequenceno)"><i class="fa fa-backward"></i>&nbsp;&nbsp; Previous Section</a>

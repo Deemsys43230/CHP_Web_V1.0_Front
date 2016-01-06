@@ -1223,9 +1223,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         event.preventDefault();
     };
 
-    $scope.change=function(){
-        $scope.userProfile.dob=$scope.selectedDate.format("dd/mm/yyyy");
-    };
+
 
     $scope.dpOpened = {
         opened: false,

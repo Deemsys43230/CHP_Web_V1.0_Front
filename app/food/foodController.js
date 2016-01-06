@@ -611,11 +611,14 @@ adminApp.filter('startsWithLetterFood', function () {
     return function (items, foodsearch) {
         var filtered = [];
         var letterMatch = new RegExp(foodsearch, 'i');
+        if(!items){}
+        else{
         for (var i = 0; i < items.length; i++) {
             var item = items[i];
             if (letterMatch.test(item.foodname) || letterMatch.test(item.category) || letterMatch.test(item.session) || letterMatch.test(item.region)) {
                 filtered.push(item);
             }
+        }
         }
         return filtered;
     };

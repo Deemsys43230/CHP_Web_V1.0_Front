@@ -738,6 +738,9 @@ coachApp.controller('CourseEditController',function($scope,requestHandler,Flash,
     $scope.courseDetails = {};
     var originalSectionDetails={};
 
+    $scope.isCancel = $routeParams.cancelvalue;
+    console.log("iscancel",$scope.isCancel);
+
     if(!$routeParams.courseId){
     }
     else{
@@ -807,8 +810,9 @@ coachApp.controller('CourseEditController',function($scope,requestHandler,Flash,
 
         requestHandler.postRequest("coach/getCourseDetail/",{"courseid":$routeParams.id}).then(function(response) {
             $scope.courseDetails = response.data['Course details'];
-            $scope.originalCourseDetails = angular.copy($scope.courseDetails);
+
             $scope.courseDetails.promoimage = $scope.courseDetails.promoimage+"?decache="+Math.random();
+            $scope.originalCourseDetails = angular.copy($scope.courseDetails);
             $('.image-editor').cropit({
                 imageState: {
                     src: $scope.courseDetails.promoimage+"?decache="+Math.random()
@@ -827,7 +831,6 @@ coachApp.controller('CourseEditController',function($scope,requestHandler,Flash,
 
     //To Enable the update button if changes occur.
     $scope.isCleanCourse = function() {
-        console.log(angular.equals ($scope.originalCourseDetails, $scope.courseDetails));
         return angular.equals ($scope.originalCourseDetails, $scope.courseDetails);
 
     };

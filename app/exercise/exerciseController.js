@@ -524,11 +524,14 @@ adminApp.filter('startsWithLetterExercise', function () {
     return function (items, exercisesearch) {
         var filtered = [];
         var letterMatch = new RegExp(exercisesearch, 'i');
+        if(!items){}
+        else{
         for (var i = 0; i < items.length; i++) {
             var item = items[i];
             if (letterMatch.test(item.exercisename) || letterMatch.test(item.type) ) {
                 filtered.push(item);
             }
+        }
         }
         return filtered;
     };

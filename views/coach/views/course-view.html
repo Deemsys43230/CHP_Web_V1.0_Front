@@ -54,14 +54,14 @@
                         <span ng-show="courseDetails.canedit==1"><a ng-click="deleteModel()" id="modal_trigger" href="" class="main-button red_back margin-top-10">Delete course</a></span>
                     </div>
                     <div class="col-md-9 no-padding">
-                        <h2>{{courseDetails.coursename}}</h2>
+                        <h2 class="wrap">{{courseDetails.coursename}}</h2>
                         <div ng-if="loaded">
                             <div class="loader-style">
                                 <div class="loader"></div>
                             </div>
                         </div>
-                        <h5 class="margin-top-5 text-muted">{{courseDetails.coursesubtitle}}</h5>
-                        <p class="margin-top-10 margin-right-20" ng-bind-html="courseDetails.coursedescription | html"></p>
+                        <h5 class="margin-top-5 text-muted wrap">{{courseDetails.coursesubtitle}}</h5>
+                        <p class="margin-top-10 margin-right-20 wrap" ng-bind-html="courseDetails.coursedescription | html"></p>
                         <div class="margin-top-15">
                             <div ng-show="courseSections.length==0 && courseDetails.canedit==1" class="margin-top-20">
                                 <div class="col-md-5">
@@ -85,7 +85,7 @@
                                 <h5 class="margin-bottom-5">&nbsp;&nbsp;Section {{section.sequenceno}} :
                                     <a href="#courseSection/{{section.sectionid}}">{{section.sectiontitle}}</a>&nbsp;&nbsp;&nbsp;&nbsp;
                                         <span ng-show="courseDetails.canedit==1">
-                                            <a href="#courseSectionEdit/{{section.sectionid}}" title="Edit Section" class="fa fa-pencil"></a>&nbsp;&nbsp;
+                                            <a href="#courseSectionEdit/{{section.sectionid}}?cancelvalue=1" title="Edit Section" class="fa fa-pencil"></a>&nbsp;&nbsp;
                                             <a href="" ng-click="sectionDeleteModel(section.sectionid)" title="Delete Section" class="fa fa-trash"></a>
                                         </span>
                                 </h5>

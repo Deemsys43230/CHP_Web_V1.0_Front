@@ -8087,6 +8087,10 @@ ul.sidebar-menu li a{
     width:30% !important;
 }
 
+.height-20{
+    height: 20px !important;
+}
+
 .height-60{
     height: 60px !important;
 }
@@ -9753,6 +9757,13 @@ input.friend-search{
     padding: 5px 0;
     font-weight: bold
 }
+
+
+.course-title{
+    height : 70px;
+    overflow-y: hidden;
+}
+
 
 #pricing-table {
     margin:10px 0 0 10px;

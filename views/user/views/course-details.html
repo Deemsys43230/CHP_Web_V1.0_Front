@@ -62,9 +62,9 @@
                             <span ng-show="courseDetails.publishedon==null" ng-if="courseDetails.role=='admin'"><a href="" class="col-md-12 suggest_button red_button modal_trigger" ng-click="modal(courseDetails.courseid)">Reject this course</a></span>
                         </div>
                         <div class="col-md-9">
-                            <h2>{{courseDetails.coursename}}</h2>
-                            <h4 class="text-muted margin-tb-10">{{courseDetails.coursesubtitle}}</h4>
-                            <p class="margin-tb-10"  ng-bind-html="courseDetails.coursedescription | html"></p>
+                            <h2 class="wrap">{{courseDetails.coursename}}</h2>
+                            <h4 class="text-muted margin-tb-10 wrap">{{courseDetails.coursesubtitle}}</h4>
+                            <p class="margin-tb-10 wrap"  ng-bind-html="courseDetails.coursedescription | html"></p>
 
                             <h5 class="margin-bottom-10" ng-repeat="sections in sectionList" ng-hide="courseDetails.enrollmentStatus==0" ng-if="courseDetails.role=='user'">Section {{$index+1}} : <a href="#courseView/{{sections.sectionid}}" >{{sections.sectiontitle}}</a></h5>
                             <h5 class="margin-bottom-10" ng-repeat="sections in sectionList" ng-show="courseDetails.enrollmentStatus==0" ng-if="courseDetails.role=='user'">Section {{$index+1}} : <a href="" ng-click="checkenroll()">{{sections.sectiontitle}}</a></h5>
