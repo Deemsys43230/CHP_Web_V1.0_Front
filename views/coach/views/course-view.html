@@ -83,7 +83,7 @@
                             <td class="sorter fa fa-arrows"></td>
                             <td>
                                 <h5 class="margin-bottom-5">&nbsp;&nbsp;Section {{section.sequenceno}} :
-                                    <a href="#courseSection/{{section.sectionid}}">{{section.sectiontitle}}</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <a href="#courseSection/{{section.sectionid}}" class="wrap">{{section.sectiontitle}}</a>&nbsp;&nbsp;&nbsp;&nbsp;
                                         <span ng-show="courseDetails.canedit==1">
                                             <a href="#courseSectionEdit/{{section.sectionid}}?cancelvalue=1" title="Edit Section" class="fa fa-pencil"></a>&nbsp;&nbsp;
                                             <a href="" ng-click="sectionDeleteModel(section.sectionid)" title="Delete Section" class="fa fa-trash"></a>

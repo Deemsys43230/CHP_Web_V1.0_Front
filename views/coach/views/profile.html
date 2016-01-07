@@ -64,7 +64,7 @@
                                        datepicker-options="dateOptions"
                                        date-disabled="disabled(date, mode)"
                                        ng-required="true"
-                                       close-text="Close" required>
+                                       close-text="Close" required block>
                             </div>
                             <span ng-show="userProfileForm.dob.$dirty&&userProfileForm.dob.$invalid">
                                 <span class="error-message textarea-errormessage10" ng-show="userProfileForm.dob.$error.required"><span>Required.</span></span>
@@ -281,14 +281,14 @@
                     <span class="error-message" ng-show="changePasswordForm.oldPassword.$error.required"><span>Required.</span></span>
                 </span>
                 <p>New Password</p>
-                <input type="password" name="newPassword" ng-model="changePassword.newPassword" ng-pattern="/^[^ ]+$/" maxlength="20" required/>
+                <input type="password" name="newPassword" id="pswd" ng-model="changePassword.newPassword" ng-pattern="/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-])(?!.*\s).{6,}$/" maxlength="20" required/>
                  <span ng-show="changePasswordForm.newPassword.$dirty&&changePasswordForm.newPassword.$invalid">
                     <span class="error-message" ng-show="changePasswordForm.newPassword.$error.required"><span>Required.</span></span>
-                     <span class="error-message" ng-show="changePasswordForm.newPassword.$error.pattern"><span>Password&nbsp;doesn't&nbsp;allow&nbsp;space.</span></span>
+                     <span class="error-message" ng-show="changePasswordForm.newPassword.$error.pattern"><span>Condition&nbsp;not&nbsp;satisfied</span></span>
                 </span>
                 <p>Confirm New Password</p>
-                <input type="password" name="confirmPassword" compare-to="changePassword.newPassword" ng-model="changePassword.confirmPassword"/>
-                <span ng-show="changePasswordForm.confirmPassword.$dirty&&changePasswordForm.confirmPassword.$invalid">
+                <input type="password" name="confirmPassword" ng-disabled="changePasswordForm.newPassword.$invalid" compare-to="changePassword.newPassword" ng-model="changePassword.confirmPassword"/>
+                <span ng-show="changePasswordForm.confirmPassword.$dirty&&changePasswordForm.confirmPassword.$invalid&&!changePasswordForm.confirmPassword.$pristine">
                     <span class="error-message" ng-show="changePasswordForm.confirmPassword.$error.compareTo"><span>Password&nbsp;don't&nbsp;match.</span></span>
                 </span>
                 <div class="action_btns margin-top-20">
@@ -296,6 +296,30 @@
                     <div class="one_half last modal_close"><a onclick="return false;" class="btn back_btn">Cancel</a></div>
                 </div>
             </form>
+            <div id="pswd_info">
+                <h4>Password must meet the following requirements:</h4>
+
+                <ul>
+                    <li id="letter" class="invalid">At least <strong>one small letter</strong>
+
+                    </li>
+                    <li id="capital" class="invalid">At least <strong>one capital letter</strong>
+
+                    </li>
+                    <li id="number" class="invalid">At least <strong>one number</strong>
+
+                    </li>
+                    <li id="special" class="invalid">At least <strong>one special charcter</strong>
+
+                    </li>
+                    <li id="length" class="invalid">Be at least <strong>6 characters</strong>
+
+                    </li>
+                    <li id="space" class="valid">Should not allow space
+
+                    </li>
+                </ul>
+            </div>
         </div>
     </section>
 </div>
@@ -317,4 +341,128 @@
         $(".common_model").show();
     })
 </script>
+<script>
+    $(document).ready(function () {
+        $('#pswd').keyup(function () {
+            // set password variable
+            var pswd = $('#pswd').val();
+            if (pswd.length < 6) {
+                $('#length').removeClass('valid').addClass('invalid');
+            } else {
+                $('#length').removeClass('invalid').addClass('valid');
+            }
+            //validate letter
+            if (pswd.match(/[a-z]/)) {
+                $('#letter').removeClass('invalid').addClass('valid');
+            } else {
+                $('#letter').removeClass('valid').addClass('invalid');
+            }
+            //validate capital letter
+            if (pswd.match(/[A-Z]/)) {
+                $('#capital').removeClass('invalid').addClass('valid');
+            } else {
+                $('#capital').removeClass('valid').addClass('invalid');
+            }
+
+            //validate number
+            if (pswd.match(/\d/)) {
+                $('#number').removeClass('invalid').addClass('valid');
+            } else {
+                $('#number').removeClass('valid').addClass('invalid');
+            }
+
+            if (pswd.match(/\s/)) {
+                $('#space').removeClass('valid').addClass('invalid');
+            } else {
+                $('#space').removeClass('invalid').addClass('valid');
+            }
+
+            if (pswd.match(/[#?!@$%^&*-]/)) {
+                $('#special').removeClass('invalid').addClass('valid');
+            } else {
+                $('#special').removeClass('valid').addClass('invalid');
+            }
+
+            if ($('#pswd_info li.invalid').length == 0) {
+                $('#pswd_info').fadeOut();
+            } else {
+                $('#pswd_info').fadeIn();
+            }
+        });
+        $('#pswd').focus(function () {
+            // focus code here
+        });
+        $('#pswd').blur(function () {
+            // blur code here
+        });
+
+
+
+        $('#pswd').keyup(function () {
+
+            // keyup code here
+        }).focus(function () {
+            $('#pswd_info').show();
+        }).blur(function () {
+            /* var pass = $('#pswd').val();
+             // alert(pass);
+             if(pass == ""){
+             $('#pswd_info').hide();
+             }*/
+            $('#pswd_info').hide();
+        });
+
+        /*$('#pswd').bind("cut copy paste",function(e) {
+         e.preventDefault();
+         });*/
+
+    });
+</script>
+<style>
+
+    #pswd_info {
+        position:absolute;
+        bottom:80px;
+        /* IE Specific */
+        right:-240px;
+        width:250px;
+        padding:15px;
+        background:#fefefe;
+        font-size:.875em;
+        border-radius:5px;
+        box-shadow:0 1px 3px #ccc;
+        border:1px solid #ddd;
+    }
+    #pswd_info h4 {
+        margin:0 0 10px 0;
+        padding:0;
+        font-weight:normal;
+    }
+    #pswd_info::before {
+        content:"\25C0";
+        position:absolute;
+        left:-8px;
+        top:54%;
+        font-size:14px;
+        line-height:14px;
+        color:#ddd;
+        text-shadow:none;
+        display:block;
+    }
+    .invalid {
+        background:url(../../images/invalid.png) no-repeat 0 50%;
+        padding-left:22px;
+        line-height:24px;
+        color:#ec3f41;
+    }
+    .valid {
+        background:url(../../images/valid.png) no-repeat 0 50%;
+        padding-left:22px;
+        line-height:24px;
+        color:#3a7d34;
+    }
+    #pswd_info {
+        display:none;
+    }
+</style>
 

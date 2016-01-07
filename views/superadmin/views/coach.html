@@ -8,7 +8,7 @@
     <section class="popupBody">
         <!-- Register Form -->
         <div class="user_register">
-            <form name="coachRegisterForm">
+            <form name="coachRegisterForm" novalidate>
                 <p>Name</p>
                 <input type="text" ng-pattern="/^ *([a-zA-Z]+ ?)+ *$/" ng-model="coach.name" name="coachName" required maxlength="45" />
                 <span ng-show="coachRegisterForm.coachName.$dirty&&coachRegisterForm.coachName.$invalid">
