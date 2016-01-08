@@ -1664,7 +1664,7 @@ adminApp.factory("siteMenuService", function () {
             "active": ""
         },
         {
-            "name": "Basic Info",
+            "name": "Address Info",
             "icon": "list-ul",
             "href": "settings",
             "active": ""

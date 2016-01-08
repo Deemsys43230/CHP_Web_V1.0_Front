@@ -622,7 +622,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
 
     //TO Insert weight Goal Log
     $scope.doInsertOrUpdateWeightLog=function(){
-        $scope.weightLogDate=$("#weightLogDate").val();
+        $scope.weightLogDate=$("#weight-log-date").val();
         $scope.weightUpdateText="Updating...";
         $scope.spinner=true;
 
