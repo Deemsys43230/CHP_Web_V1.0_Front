@@ -16,20 +16,3 @@
 </div>
 
 <script type="text/javascript" src="../../js/script.js"></script>
-
-<script type="text/javascript">
-    $(document).ready(function() {
-        var delay = 10 ;
-        var url = "http://google.com";
-        function countdown() {
-            setTimeout(countdown, 1000) ;
-            $('#countmesg').html("Redirecting in "  + delay  + " seconds.");
-            delay --;
-        if (delay < 0 ) {
-            window.location = url ;
-            delay = 0 ;
-            }
-        }
-        countdown() ;
-    });
-</script>

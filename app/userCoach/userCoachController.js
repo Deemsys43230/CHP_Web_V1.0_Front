@@ -157,16 +157,14 @@ userApp.controller('UserCoachController',function($scope,requestHandler,Flash,$l
     };
 
     $scope.doSubscribeCoach = function(coach){
-       requestHandler.postRequest("user/subscribeCoach/",{"coach":coach}).then(function(response){
+        $location.path("thanksPage");
+       /*requestHandler.postRequest("user/subscribeCoach/",{"coach":coach}).then(function(response){
            successMessage(Flash,"Successfully subscribed");
+           $location.path("thanksPage");
            $scope.doGetCoachDetailsByUser(coach);
        },function(){
            errorMessage(Flash,"Please try again later!")
-       });
-    };
-
-    $scope.doUnsubscribeCoach = function(coach){
-       alert('Are you surely want to Unsubcribe the Coach '+coach);
+       });*/
     };
 
     $scope.coachListInit=function(){
