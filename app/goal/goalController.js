@@ -143,9 +143,9 @@ userApp.controller('GoalController',function($scope,requestHandler,Flash,$route,
 
     $scope.doAcceptGroup=function(){
         requestHandler.putRequest("user/acceptGoal/",{"goalid" : $routeParams.id}).then(function(response){
+             successMessage(Flash,"Successfully Accepted!");
             $location.path('/groupGoalView/'+$routeParams.id);
-            successMessage(Flash,"Successfully Accepted!");
-            $scope.doGetMyGoalList();
+           // $scope.doGetMyGoalList();
         },function(){
             errorMessage(Flash,"Please try again later!");
         });
@@ -228,7 +228,8 @@ userApp.controller('GoalController',function($scope,requestHandler,Flash,$route,
     $scope.doAcceptGoalRequest=function(id){
         requestHandler.putRequest("user/acceptGoal/",{"goalid":id}).then(function(){
             successMessage(Flash,"Successfully Joined!");
-            $scope.doGetMyGoalList();
+            $location.path('/groupGoalView/'+id);
+           // $scope.doGetMyGoalList();
         },function(){
             errorMessage(Flash,"Please try again later!");
         });

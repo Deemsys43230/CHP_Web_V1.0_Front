@@ -10,7 +10,7 @@
                     <a href="#groupGoal" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back</a>
                 </span>
                 <div flash-message="2000" class="col-md-4 pull-right no-padding"></div>
-                <h5 class="classic-title active"><a class="active"><i class="fa fa-bullseye"></i>&nbsp;&nbsp;GOAL DETAILS</a></h5>
+                <h5 class="classic-title"><a href="" class="active"><i class="fa fa-bullseye"></i>&nbsp;&nbsp;GOAL DETAILS</a></h5>
             </div>
             <div class="col-md-6">
                 <div ng-if="loaded">
@@ -149,7 +149,7 @@
             <input type="text" placeholder="Search friends here.." ng-model="friendsearch">
             <hr/>
             <div class="margin-top-10 content_scrollbar height-350">
-                <div ng-repeat="myFriends in myRemainderFriendsList  | startsWithLetterRemain:friendsearch">
+                <div ng-repeat="myFriends in myRemainderFriendsList  | startsWithLetterRemain:friendsearch" ng-show="!myRemainderFriendsList==0">
                     <div class="col-md-1 no-padding">
                         <img src="{{myFriends.imageurl|trusted}}">
                     </div>
@@ -163,7 +163,13 @@
                         <hr/>
                     </div>
                 </div>
+                <div ng-show="myRemainderFriendsList==0">
+                    <h1 class="col-md-12 margin-top-50 text-gray text-center">
+                        NO FRIENDS FOUND!!!<br/><a class="btn btn-warning btn-sm modal_close" href="#friends"><i class="fa fa-users"></i>&nbsp;&nbsp;Find Friends Here</a>
+                    </h1>
+                </div>
             </div>
+
         </div>
     </section>
 </div>

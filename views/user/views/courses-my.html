@@ -17,12 +17,12 @@
                         <div class="loader"></div>
                     </div>
                 </div>
-                <div class="col-md-4 no-padding" ng-repeat="mycourses in myCourseList">
+                <div class="col-md-4 no-padding" ng-repeat="mycourses in myCourseList" ng-show="!myCourseList.length==0">
                     <a href="#courseDetail/{{mycourses.courseid}}">
                         <div class="dashboard arrange">
                             <div class="course-grid-user">
                                 <div class="col-md-6 margin-top-5">
-                                    <h4 class="course-name wrap" title="{{courseList.coursename}}">{{mycourses.coursename}}</h4>
+                                    <h4 class="course-name wrap" title="{{mycourses.coursename}}">{{mycourses.coursename}}</h4>
 
                                     <p class="margin-top-10">{{mycourses.categoryname}}</p>
                                 </div>
@@ -39,6 +39,11 @@
                             </div>
                         </div>
                     </a>
+                </div>
+                <div ng-show="myCourseList.length==0">
+                    <h1 class="col-md-12 margin-top-50 text-gray text-center">
+                        NO COURSES FOUND!!!<br/><a class="btn btn-warning btn-sm" href="#courses"><i class="fa fa-book"></i>&nbsp;&nbsp;Enroll Courses Here</a>
+                    </h1>
                 </div>
             </div>
 
