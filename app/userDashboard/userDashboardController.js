@@ -13,9 +13,11 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
     $scope.caloriesSpent=0;
     $scope.workoutvalue=0;
     $window.singlePicker = false;
+    $window.minimumDate = new Date();
     $scope.weightUpdateText="Update Weight";
     $scope.graphs=1;
     $scope.historyReport=0;
+    $scope.historyType=1;
 
     //Modal Popup to add user food
     $scope.doUserAddFood=function(){
@@ -162,6 +164,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
             $scope.doGetIntakeBruntByDate( $scope.userFood.addeddate);
             $scope.goGetDailyIntakeGraph($scope.userFood.addeddate);
             $scope.goGetSessionGraph($scope.storedSessionId);
+            $scope.doGetHistoryReport();
         });
 
     };
@@ -173,22 +176,22 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         $scope.userFood.foodid= $scope.userFood.foodid;
         $scope.userFood.measureid=$scope.userFood.measure.measureid;
         $scope.userFood.servings=parseInt($scope.userFood.servings);
-
         var foodInsertPromise=UserDashboardService.doUpdateUserFood($scope.userFood);
         foodInsertPromise.then(function(){
-        if($scope.selectedDate==selectedDate){
-            $scope.loadFoodDiary($scope.selectedDate);
-            $scope.doGetIntakeBruntByDate($scope.selectedDate);
-            $scope.goGetDailyIntakeGraph($scope.selectedDate);
-            $scope.goGetSessionGraph($scope.storedSessionId);
-        }
-        else
-        {
-            $scope.loadFoodDiary($scope.selectedDate.format("dd/mm/yyyy"));
-            $scope.doGetIntakeBruntByDate($scope.selectedDate.format("dd/mm/yyyy"));
-            $scope.goGetDailyIntakeGraph($scope.selectedDate.format("dd/mm/yyyy"));
-            $scope.goGetSessionGraph($scope.storedSessionId);
-        }
+            if($scope.selectedDate==selectedDate){
+                $scope.loadFoodDiary($scope.selectedDate);
+                $scope.doGetIntakeBruntByDate($scope.selectedDate);
+                $scope.goGetDailyIntakeGraph($scope.selectedDate);
+                $scope.goGetSessionGraph($scope.storedSessionId);
+            }
+            else
+            {
+                $scope.loadFoodDiary($scope.selectedDate.format("dd/mm/yyyy"));
+                $scope.doGetIntakeBruntByDate($scope.selectedDate.format("dd/mm/yyyy"));
+                $scope.goGetDailyIntakeGraph($scope.selectedDate.format("dd/mm/yyyy"));
+                $scope.goGetSessionGraph($scope.storedSessionId);
+            }
+            $scope.doGetHistoryReport();
         });
 
     };
@@ -210,6 +213,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
                 $scope.goGetDailyIntakeGraph($scope.selectedDate.format("dd/mm/yyyy"));
                 $scope.goGetSessionGraph($scope.storedSessionId);
             }
+            $scope.doGetHistoryReport();
         });
     };
 
@@ -351,6 +355,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         //alert(selectedDate);
         $scope.userExercise.exerciseid=$scope.userSelectedExerciseDetails.exerciseid;
         $scope.userExercise.levelid=$scope.userExercise.levelid.levelid;
+
         if($scope.selectedDate==selectedDate){
             $scope.userExercise.date=$scope.selectedDate;
         }
@@ -364,6 +369,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         exerciseInsertPromise.then(function(){
             $scope.loadExerciseDiary($scope.userExercise.date);
             $scope.doGetIntakeBruntByDate($scope.userExercise.date);
+            $scope.doGetHistoryReport();
         });
 
     };
@@ -381,7 +387,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
                 $scope.loadExerciseDiary($scope.selectedDate.format("dd/mm/yyyy"));
                 $scope.doGetIntakeBruntByDate($scope.selectedDate.format("dd/mm/yyyy"));
             }
-
+            $scope.doGetHistoryReport();
         });
     };
     var originallevel="";
@@ -448,6 +454,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
                 $scope.loadExerciseDiary($scope.selectedDate.format("dd/mm/yyyy"));
                 $scope.doGetIntakeBruntByDate($scope.selectedDate.format("dd/mm/yyyy"));
             }
+            $scope.doGetHistoryReport();
         });
 
     };
@@ -615,11 +622,9 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
 
     //TO Insert weight Goal Log
     $scope.doInsertOrUpdateWeightLog=function(){
-        $scope.weightLogDate=$("#popup1").val();
+        $scope.weightLogDate=$("#weightLogDate").val();
         $scope.weightUpdateText="Updating...";
         $scope.spinner=true;
-        var updateDate;
-        //alert("www:"+$scope.weightLogDate);
 
         requestHandler.getRequest("user/getWeightGoal/","").then(function(response){
 
@@ -658,8 +663,6 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
                 }, function () {
                     errorMessage(Flash, "Please try again later!")
                 });
-
-
             /*}*/
         });
     };
@@ -732,17 +735,16 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         $window.singlePicker = true;
         var startformat = $scope.goalDetails.startdate.slice(6,10)+','+$scope.goalDetails.startdate.slice(3,5)+','+$scope.goalDetails.startdate.slice(0,2);
         var currentformat = selectedDate.slice(6,10)+','+selectedDate.slice(3,5)+','+selectedDate.slice(0,2);
-        if (new Date(startformat).getTime() >= new Date(currentformat).getTime()) {
-            $window.minimumDate = $scope.goalDetails.startdate;
-
-        }
-       else{
-            $window.minimumDate = new Date();
-        }
         $window.goalStartDate = $scope.goalDetails.startdate;
         $window.goalEndDate = $scope.goalDetails.enddate;
         $window.goalEndDate = $scope.goalDetails.enddate;
         $scope.weight = $scope.goalDetails.targetweight;
+        if (new Date(startformat).getTime() >= new Date(currentformat).getTime()) {
+            $window.minimumDate = $scope.goalDetails.startdate;
+        }
+        else{
+            $window.minimumDate = new Date();
+        }
         $scope.goal = {
             status: 'set-goal'
         };
@@ -1130,10 +1132,124 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
 
     $scope.getHistory=function(){
         $scope.historyReport=1;
+        if($('#history-start').val()=='') $scope.isHistoryEmpty=1;
+        else $scope.isHistoryEmpty=0;
     };
 
     $scope.otherThanHistory=function(){
         $scope.historyReport=0;
+    };
+
+    $scope.setHistoryType=function(id){
+        $scope.historyType=id;
+        if($('#history-start').val()==''){}
+        else $scope.doGetHistoryReport();
+    };
+
+    $scope.doGetHistoryReport=function(){
+        $scope.isHistoryEmpty=0;
+        $scope.loaded=true;
+        var startDate = $('#history-start').val();
+        var endDate = $('#history-end').val();
+        var monthNames= ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+        var historyReport = [];
+        var titles={};
+        if($scope.historyType==1){
+            requestHandler.postRequest("user/calorieGraphbyDates/", {"fromdate":startDate,"todate":endDate}).then(function(response){
+                $scope.historyRecord=response.data.calorieGraphbyDates;
+                $.each($scope.historyRecord, function(index,value) {
+                    var history = [];
+                    var date = value.date.split("/");
+                    history.push(monthNames[(date[1]-1)]+' '+date[0]);
+                    history.push(parseFloat(value.calorie));
+                    historyReport.push(history);
+                });
+                titles.title="Calories Intaken Graph ( "+startDate+" - "+endDate+" )";
+                titles.name="Calories Gained";
+                titles.suffix=" cals";
+                titles.yaxis="Calories (cals)";
+                $scope.drawHistoryGraph(historyReport,titles);
+            });
+        }
+        else if($scope.historyType==2){
+            requestHandler.postRequest("user/getCalorieBurntGraphByDates/", {"fromdate":startDate,"todate":endDate}).then(function(response){
+                $scope.historyRecord=response.data.CalorieBurntGraphbyDates;
+                $.each($scope.historyRecord, function(index,value) {
+                    var history = [];
+                    var date = value.date.split("/");
+                    history.push(monthNames[(date[1]-1)]+' '+date[0]);
+                    history.push(parseFloat(value.calorie));
+                    historyReport.push(history);
+                });
+                titles.title="Calories Brunt Graph ( "+startDate+" - "+endDate+" )";
+                titles.name="Calories Burned";
+                titles.suffix=" cals";
+                titles.yaxis="Calories (cals)";
+                $scope.drawHistoryGraph(historyReport,titles);
+            });
+        }
+        else{
+            requestHandler.postRequest("user/getExerciseMinutesUsingDates/", {"fromdate":startDate,"todate":endDate}).then(function(response){
+                $scope.historyRecord=response.data.ExerciseMinutesUsingDates;
+                $.each($scope.historyRecord, function(index,value) {
+                    var history = [];
+                    var date = value.date.split("/");
+                    history.push(monthNames[(date[1]-1)]+' '+date[0]);
+                    history.push(parseFloat(value.workoutvalue));
+                    historyReport.push(history);
+                });
+                titles.title="Exercise Minutes Graph ( "+startDate+" - "+endDate+" )";
+                titles.name="Exercise Minutes";
+                titles.suffix=" mints";
+                titles.yaxis="Minutes (mints)";
+                $scope.drawHistoryGraph(historyReport,titles);
+            });
+        }
+    };
+
+    $scope.drawHistoryGraph=function(data,titles){
+        $scope.loaded=false;
+        $('#historyGraph').highcharts({
+            title: {
+                text: titles.title
+            },
+            xAxis: {
+                categories: []
+            },
+            tooltip:{
+                enabled:true,
+                backgroundColor:'rgba(255, 255, 255, 1)',
+                borderWidth:1,
+                shadow:true,
+                style:{fontSize:'10px',padding:5,zIndex:500},
+                formatter:false,
+                valueSuffix: titles.suffix
+            },
+            yAxis: {
+                title: {
+                    text: titles.yaxis
+                },
+                plotLines: [{
+                    value: 0,
+                    width: 1,
+                    color: '#ff0066'
+                }]
+            },
+            colors: [
+                '#ff0066'
+            ],
+            exporting: {
+                enabled: false
+            },
+            credits: {
+                enabled: false
+            },
+            legend:{enabled:false},
+            series: [ {
+                name: titles.name,
+                data: data
+            }]
+        });
     };
 
     //To Display current date
@@ -1223,9 +1339,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         event.preventDefault();
     };
 
-
-
-    $scope.dpOpened = {
+    /*$scope.dpOpened = {
         opened: false,
         opened1: false
     };
@@ -1234,6 +1348,12 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         $event.preventDefault();
         $event.stopPropagation();
         $scope.dpOpened[opened] = true;
+    };*/
+
+    $scope.open = function ($event) {
+        $event.preventDefault();
+        $event.stopPropagation();
+        $scope.opened = true;
     };
 
     $scope.format = "dd/MM/yyyy";
@@ -1458,3 +1578,83 @@ userApp.directive('hcGraph', function () {
         }
     }
 });
+
+// Graph chart
+userApp.directive('historyGraph', function () {
+    return {
+        restrict: 'C',
+        replace: true,
+        scope: {
+            historygraph: '=',
+            test:'='
+        },
+        controller: function ($scope, $element, $attrs) {
+        },
+        template: '<div id="graph-container" style="height: 400px;width: 67%">not working</div>',
+        link: function (scope, element, attrs) {
+            var chart = new Highcharts.Chart({
+                chart: {
+                    renderTo: 'graph-container',
+                    plotBackgroundColor: null,
+                    plotBorderWidth: null,
+                    plotShadow: false
+                },
+                title: {
+                    text: scope.test,
+                    x: -20 //center
+                },
+                subtitle: {
+                    text: '',
+                    x: -20
+                },
+                xAxis: {
+                    categories: []
+                },
+                yAxis: {
+                    title: {
+                        text: 'Weight (Kgs)'
+                    },
+                    plotLines: [{
+                        value: 0,
+                        width: 1,
+                        color: '#ff0066'
+                    }]
+                },
+                tooltip: {
+                    valueSuffix: 'Kgs'
+                },
+
+                colors: [
+                    '#ff0066'
+                ],
+                legend: {
+                    layout: 'vertical',
+                    align: 'right',
+                    verticalAlign: 'middle',
+                    borderWidth: 0,
+                    x: 80,
+                    y: 0
+                },
+                series: [ {
+                    name: 'Weight',
+                    data: []
+                }],
+                exporting: {
+                    enabled: false
+                },
+                credits: {
+                    enabled: false
+                }
+            });
+            scope.$watch("historygraph", function (newValue) {
+                chart.series[0].setData(newValue, true);
+            }, true);
+            scope.$watch("test", function (newValue) {
+                chart.title.setData(newValue, true);
+            }, true);
+
+        }
+    }
+});
+
+

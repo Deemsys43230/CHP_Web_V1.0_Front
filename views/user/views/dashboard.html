@@ -268,7 +268,7 @@
                                             </div>
                                         </div>
                                         <div class="col-md-4 no-padding">
-                                            <div id="gainVsSpent" style="width:150px;height: 300px; margin: auto;padding: 15px 5px 5px 5px; box-shadow:inset 0 0 3px #ccc"></div>
+                                            <div id="gainVsSpent"></div>
                                         </div>
                                         <div class="col-md-4 gain-list">
                                             <div class="text-red text-bold">Spent</div>
@@ -323,13 +323,13 @@
                 </div>
                 <div class="col-md-2 pull-right margin-top-3 no-padding margin-right-20">
                     <div class="input-group ui-datepicker ">
-                        <input ng-click="open($event,'opened')" ng-change="initialLoadFoodAndExercise()" type="text"
+                        <input ng-click="open($event)" ng-change="initialLoadFoodAndExercise()" type="text"
                                ng-keypress="prevent()"
                                class="profile_input override"
                                id = "popup"
                                datepicker-popup="{{format}}"
                                ng-model="selectedDate"
-                               is-open="dpOpened.opened"
+                               is-open="opened"
                                min="minDate"
                                max="maxDate"
                                datepicker-options="dateOptions"
@@ -379,51 +379,46 @@
                 <div class="col-md-6">
                     <!-- Nav Tabs -->
                     <ul class="nav nav-tabs">
-                        <li class="active"><a class="historyOverride" href="#tab-4" data-toggle="tab" onclick="return false;">Calories Intaken</a></li>
-                        <li><a href="#tab-5" class="historyOverride" data-toggle="tab" onclick="return false;">Calories Burnt</a></li>
-                        <li><a href="#tab-6" class="historyOverride" data-toggle="tab" onclick="return false;">Exercise Minutes</a></li>
+                        <li class="active"><a class="historyOverride" href="#tab-4" data-toggle="tab" onclick="return false;" ng-click="setHistoryType(1)">Calories Intaken</a></li>
+                        <li><a href="#tab-4" class="historyOverride" data-toggle="tab" onclick="return false;" ng-click="setHistoryType(2)">Calories Burnt</a></li>
+                        <li><a href="#tab-4" class="historyOverride" data-toggle="tab" onclick="return false;" ng-click="setHistoryType(3)">Exercise Minutes</a></li>
                     </ul>
 
                     <!-- Tab panels -->
                     <div class="tab-content contentHistoryOverride">
                         <!-- Tab Content 1 -->
                         <div class="tab-pane in active padding-top-5" id="tab-4">
-                            tab-1
-                        </div>
-                        <!-- Tab Content 2 -->
-                        <div class="tab-pane padding-top-5" id="tab-5">
-                            tab-2
-                        </div>
-
-                        <!-- Tab Content 3 -->
-                        <div class="tab-pane padding-top-5" id="tab-6">
-                            tab-3
+                            <div ng-if="loaded" class="col-md-12">
+                                <div class="loader-style-dashboard"><br/><br/>
+                                    <div class="loader"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div ng-show="isHistoryEmpty==0">
+                                    <div id="historyGraph" class="margin-top-5"></div>
+                                </div>
+                                <div ng-show="isHistoryEmpty==1" class="text-center">
+                                    <br/><br/><br/>
+                                    <img src="../../images/no-dates.png">
+                                    <h1 class="text-gray">NO DATES SELECTED</h1>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <!-- End Tab Panels -->
                 </div>
 
-                <div class="col-md-1 pull-right">
-                    <a href="" class="btn btn-sm btn-primary">Go</a>
-                </div>
+                <div class="col-md-3 pull-right no-padding margin-right-20">
+                    <div class = "input-group">
+                        <input type="text" id="history-graph-date" class="history_input" block>
+                        <span class="input-group-btn">
+                            <button class="btn history" ng-click="doGetHistoryReport()" type="button">Go!</button>
+                        </span>
+                    </div><!-- /input-group -->
 
-                <!--<div class="col-md-2 pull-right no-padding margin-right-20">
-                    <div class="ui-datepicker">
-                        <input ng-click="open($event)" ng-change="initialLoadFoodAndExercise()" type="text"
-                               ng-keypress="prevent()"
-                               class="profile_input"
-                               id = "popup"
-                               datepicker-popup="{{format}}"
-                               ng-model="selectedDate"
-                               is-open="opened"
-                               min="minDate"
-                               max="maxDate"
-                               datepicker-options="dateOptions"
-                               date-disabled="disabled(date, mode)"
-                               ng-required="true"
-                               close-text="Close" required block>
-                    </div>
-                </div>-->
+                    <input id="history-start" hidden />
+                    <input id="history-end" hidden/>
+                </div>
 
                 <div class="col-md-2 pull-right margin-top-5 text-right"><i class="fa fa-calendar"></i> Date Range</div>
             </div><!-- @end #ideas-content -->
@@ -850,4 +845,34 @@
         100% { top:   0em }
     }
 </style>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+
+        var options = {
+            maxDate : new Date(),
+            startDate : new Date(),
+            endDate : new Date(),
+            singleDatePicker: false,
+            opens:'left',
+            showDropdowns: true,
+            dateLimit: {
+                days: 31
+            },
+            ranges:{
+                'Last Week': [moment().subtract('days', 6), moment()],
+                'Last 2 Weeks': [moment().subtract('days', 13), moment()],
+                'Last 3 Weeks': [moment().subtract('days', 20), moment()],
+                'This Month': [moment().subtract('month', 0).startOf('month'), moment()],
+                'Last Month': [moment().subtract('month', 1).startOf('month'), moment().subtract('month', 1).endOf('month')]
+            }
+        };
+
+        $('#history-graph-date').daterangepicker(options, function(start, end, label) {
+            document.getElementById("history-start").value = start.format('DD/MM/YYYY');
+            document.getElementById("history-end").value = end.format('DD/MM/YYYY');
+        });
+
+    });
+</script>
 

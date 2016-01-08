@@ -9,7 +9,37 @@
 
         <div class="content-weight">
             <div class="row margin-right-2">
-                <div class="col-md-12">
+                <form name="weightLogForm" novalidate>
+                    <div class="col-md-6 text-center">
+                        <h1 class="fa-5x fa fa-tachometer text-green"></h1>
+                        <h4 class="margin-top-10">UPDATE WEIGHT</h4>
+                    </div>
+                    <div class="col-md-6 no-padding">
+                        <div class="col-md-4 no-padding margin-top-5">
+                            <span>Date <span class="pull-right">:</span></span>
+                        </div>
+                        <div class="col-md-8 pull-right">
+                            <input type="text" id="weight-log-date" class="profile_input weightoverride" block>
+                            <input id="weightLogDate" hidden>
+                        </div>
+                        <div class="col-md-4 no-padding margin-top-20">
+                            <span>Weight<span class="pull-right">:</span></span>
+                        </div>
+                        <div class="col-md-8 pull-right margin-top-10">
+                            <input class="profile_input weightoverride" id="weightLog" name="weight" ng-model="weightlog" maxlength="5"  required validate-Float1/>
+                            <span ng-show="weightLogForm.weight.$dirty&&weightLogForm.weight.$invalid">
+                                <span class="error-message textarea-errormessage10" ng-show="weightLogForm.weight.$error.required"><span>Required.</span></span>
+                                <span class="error-message textarea-errormessage10" ng-show="!weightLogForm.weight.$error.required&&weightLogForm.weight.$error.validateFloat1"><span>Invalid&nbsp;Data.</span></span>
+                            </span>
+                        </div>
+                        <div class="col-md-11 no-padding text-center margin-top-20 margin-bottom-10">
+                            <a href="" class="weight_button" ng-disabled="weightLogForm.$invalid" ng-click="doInsertOrUpdateWeightLog()">
+                                <span ng-if="spinner"><span class="three-quarters-loader">Loading…</span></span>{{weightUpdateText}}</a>
+                        </div>
+                    </div>
+
+
+                <!--<div class="col-md-12">
                     <h5>&nbsp;&nbsp;Update Weight <span class="pull-right">Date :</span>  <div class="input-group ui-datepicker ">
                         <input style="z-index:1000"
                                 ng-model="weightLogDate" ng-click="open($event,'opened1')" ng-change="setWeightLogDate()"  type="text"
@@ -25,28 +55,9 @@
                                ng-required="true"
                                close-text="Close" required block>
                     </div> </h5>
-                </div>
-                <form name="weightLogForm" novalidate>
-                    <div class="col-md-12 margin-top-15">
-                        <div class="col-md-4 text-right padding-top-4">
-                            <h5>Weight :</h5>
-                        </div>
-                        <div class="col-md-8">
-                            <input class="weight_input" id="weightLog" name="weight" ng-model="weightlog" maxlength="5"  required validate-Float1/>
-                            <input type="radio" id="5" class="height" name="weight" />
-                            <label for="5">Kg</label>
-                            <input type="radio" id="6" class="height" name="weight" />
-                            <label for="6">Lb</label>
-                            <span ng-show="weightLogForm.weight.$dirty&&weightLogForm.weight.$invalid">
-                                <span class="error-message textarea-errormessage40-left" ng-show="weightLogForm.weight.$error.required"><span>Required.</span></span>
-                                <span class="error-message textarea-errormessage40-left" ng-show="!weightLogForm.weight.$error.required&&weightLogForm.weight.$error.validateFloat1"><span>Invalid&nbsp;Data.</span></span>
-                            </span>
-                        </div>
-                        <div class="col-md-12 text-center margin-top-15 margin-bottom-10">
-                            <a href="" class="weight_button" ng-disabled="weightLogForm.$invalid" ng-click="doInsertOrUpdateWeightLog()">
-                                <span ng-if="spinner"><span class="three-quarters-loader">Loading…</span></span>{{weightUpdateText}}</a>
-                        </div>
-                    </div>
+                </div>-->
+
+
                 </form>
             </div>
         </div>
@@ -103,4 +114,20 @@
         viewGraph1();
     });
 
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+
+        var options = {
+            drops:"up",
+            maxDate : new Date(),
+            singleDatePicker: true
+        };
+
+        $('#weight-log-date').daterangepicker(options, function(start, end, label) {
+            document.getElementById("weightLogDate").value = start.format('DD/MM/YYYY');
+        });
+
+    });
 </script>

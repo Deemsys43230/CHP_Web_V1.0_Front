@@ -26,9 +26,6 @@ userApp.controller('GoalController',function($scope,requestHandler,Flash,$route,
     };
 
     $scope.doGetViewGoal=function(){
-
-
-
         $scope.isRequest=$route.current.request;
         requestHandler.postRequest("user/getIndividualGoalDetail/",{"goalid" :$routeParams.id}).then(function(response){
             $scope.goalDetail=response.data.Goal_Data;
