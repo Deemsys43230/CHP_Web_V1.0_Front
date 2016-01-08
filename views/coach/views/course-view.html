@@ -50,7 +50,7 @@
                                 <span ng-hide="!courseDetails.publishedon">{{courseDetails.publishedon}}</span>
                             </span>
                         </h5>
-                        <span ng-show="courseDetails.canedit==1"><a href="#courseEdit/{{courseDetails.courseid}}" class="main-button green_back margin-top-10">Edit Basic Info</a></span>
+                        <span ng-show="courseDetails.canedit==1"><a href="#courseEdit/{{courseDetails.courseid}}" class="main-button blue_back margin-top-10">Edit Basic Info</a></span>
                         <span ng-show="courseDetails.canedit==1"><a ng-click="deleteModel()" id="modal_trigger" href="" class="main-button red_back margin-top-10">Delete course</a></span>
                     </div>
                     <div class="col-md-9 no-padding">
@@ -85,8 +85,8 @@
                                 <h5 class="margin-bottom-5">&nbsp;&nbsp;Section {{section.sequenceno}} :
                                     <a href="#courseSection/{{section.sectionid}}" class="wrap">{{section.sectiontitle}}</a>&nbsp;&nbsp;&nbsp;&nbsp;
                                         <span ng-show="courseDetails.canedit==1">
-                                            <a href="#courseSectionEdit/{{section.sectionid}}?cancelvalue=1" title="Edit Section" class="fa fa-pencil"></a>&nbsp;&nbsp;
-                                            <a href="" ng-click="sectionDeleteModel(section.sectionid)" title="Delete Section" class="fa fa-trash"></a>
+                                            <a href="#courseSectionEdit/{{section.sectionid}}?cancelvalue=1" title="Edit Section" class="text-primary fa fa-pencil"></a>&nbsp;&nbsp;
+                                            <a href="" ng-click="sectionDeleteModel(section.sectionid)" title="Delete Section" class="text-red fa fa-trash"></a>
                                         </span>
                                 </h5>
                             </td>

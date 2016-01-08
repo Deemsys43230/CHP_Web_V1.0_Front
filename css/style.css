@@ -241,6 +241,11 @@ a.main-button.green_back{
     background-color: #5cd65c;
 }
 
+a.main-button.blue_back{
+    background-color: #428bca;
+}
+
+
 a.main-button, input[type="submit"] {
     display: inline-block;
     text-decoration: none;

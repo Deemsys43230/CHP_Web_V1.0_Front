@@ -16,8 +16,8 @@
                     <div class="col-md-8">
                         <h2 class="wrap">Section {{sectionDetails.sequenceno}}&nbsp;&nbsp;: {{sectionDetails.sectiontitle}} &nbsp;&nbsp;
                             <span ng-show="sectionDetails.canedit==1">
-                                <a href="#courseSectionEdit/{{sectionDetails.sectionid}}?cancelvalue=2" title="Edit Section"><i class="fa fa-pencil"></i></a>&nbsp;&nbsp;
-                                <a href="" ng-click="sectionDeleteModel(sectionDetails.sectionid)" title="Delete Section" class="fa fa-trash"></a>
+                                <a href="#courseSectionEdit/{{sectionDetails.sectionid}}?cancelvalue=2" title="Edit Section"><i class="text-primary fa fa-pencil"></i></a>&nbsp;&nbsp;
+                                <a href="" ng-click="sectionDeleteModel(sectionDetails.sectionid)" title="Delete Section" class="text-red fa fa-trash"></a>
                             </span>
                         </h2>
                         <p class="margin-top-15 margin-bottom-20 wrap" ng-bind-html="sectionDetails.sectioncontent|html"></p>

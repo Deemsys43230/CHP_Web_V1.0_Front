@@ -90,7 +90,7 @@ userApp.controller('CourseController',['$scope','requestHandler','Flash','$route
 
     $scope.doEnrollCourse = function(course){
         requestHandler.postRequest("user/enrollCourse/",{"courseid":course}).then(function(response){
-            $location.path("myCourses");
+            $location.path("thanksEnrollPage/"+course);
             successMessage(Flash,"Successfully Enrolled");
         },function(){
             errorMessage(Flash,"Please try again later!")

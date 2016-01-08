@@ -261,7 +261,7 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller: 'UserCoachController'
             }).
-            when('/thanksPage', {
+            when('/thanksSubscribePage/:id', {
                 templateUrl: 'views/thanks-page.html',
                 resolve: {
                     loadMyFiles:function($ocLazyLoad) {
@@ -273,7 +273,21 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         })
                     }
                 },
-                controller: 'ThanksPageController'
+                controller: 'ThanksSubscribePageController'
+            }).
+            when('/thanksEnrollPage/:id', {
+                templateUrl: 'views/thanks-page.html',
+                resolve: {
+                    loadMyFiles:function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'userApp',
+                            files:[
+                                '../../app/thanksPage/thanksPageController.js'
+                            ]
+                        })
+                    }
+                },
+                controller: 'ThanksEnrollPageController'
             }).
             when('/friends', {
                 templateUrl: 'views/friends.html',

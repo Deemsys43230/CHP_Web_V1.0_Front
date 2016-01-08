@@ -1149,8 +1149,15 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
     $scope.doGetHistoryReport=function(){
         $scope.isHistoryEmpty=0;
         $scope.loaded=true;
-        var startDate = $('#history-start').val();
-        var endDate = $('#history-end').val();
+        var startDate;
+        var endDate;
+        if($('#history-start').val()==''){
+            startDate = endDate = selectedDate;
+        }
+        else{
+            startDate = $('#history-start').val();
+            endDate = $('#history-end').val();
+        }
         var monthNames= ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
         var historyReport = [];
         var titles={};
@@ -1168,6 +1175,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
                 titles.name="Calories Gained";
                 titles.suffix=" cals";
                 titles.yaxis="Calories (cals)";
+                titles.color='limegreen';
                 $scope.drawHistoryGraph(historyReport,titles);
             });
         }
@@ -1185,6 +1193,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
                 titles.name="Calories Burned";
                 titles.suffix=" cals";
                 titles.yaxis="Calories (cals)";
+                titles.color='red';
                 $scope.drawHistoryGraph(historyReport,titles);
             });
         }
@@ -1202,6 +1211,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
                 titles.name="Exercise Minutes";
                 titles.suffix=" mints";
                 titles.yaxis="Minutes (mints)";
+                titles.color='blue';
                 $scope.drawHistoryGraph(historyReport,titles);
             });
         }
@@ -1232,11 +1242,11 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
                 plotLines: [{
                     value: 0,
                     width: 1,
-                    color: '#ff0066'
+                    color:titles.color
                 }]
             },
             colors: [
-                '#ff0066'
+                titles.color
             ],
             exporting: {
                 enabled: false
