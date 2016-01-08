@@ -5,7 +5,7 @@
             <form name="demographyForm">
                 <div class="col-md-12">
                     <h3 class="pull-right text-orange">TOTAL EARN : 245 $&nbsp;&nbsp;&nbsp;</h3>
-                    <h5 class="classic-title"><a href="#payments"><i class="fa fa-money"></i>&nbsp;&nbsp;COURSE PAYMENTS</a>&nbsp;&nbsp;|&nbsp;&nbsp;<span><a href="#studentPayments"><i class="fa fa-dollar"></i>&nbsp;&nbsp;STUDENT SUBSCRIPTION PAYMENTS</a></span></h5>
+                    <h5 class="classic-title"><a href="#payments"><i class="fa fa-money"></i>&nbsp;&nbsp;COURSE PAYMENTS</a>&nbsp;&nbsp;|&nbsp;&nbsp;<span><a href="#subscribersPayments"><i class="fa fa-dollar"></i>&nbsp;&nbsp;SUBSCRIPTION PAYMENTS</a></span></h5>
                 </div>
 
                 <div class="col-md-12">
@@ -30,15 +30,15 @@
                         </thead>
                         <tbody >
                         <tr dir-paginate="student in subscribedList  | itemsPerPage: 8" ng-show="subscribedList.length!=0">
-                            <td><span class="line-clamp-xs">{{student.coursename}}</span></td>
+                            <td><span class="line-clamp-xs"><!--{{student.coursename}}-->User Name {{$index}}</span></td>
                             <td>{{student.createdon}}</td>
                             <td>{{student.enrollcount}} $</td>
                             <td>{{student.enrollcount}} $</td>
                             <td>{{student.publishedon}}</td>
                             <td>{{student.publishedon}}</td>
-                            <td>{{student.publishedon}}</td>
-                            <td>{{student.publishedon}}</td>
-                            <td>{{student.enrollcount}}</td>
+                            <td class="text-green">Active</td>
+                            <td>{{student.enrollcount}}43DDJE83JS2</td>
+                            <td>{{student.enrollcount}}HHS8Y394KYN</td>
                         </tr>
                         <tr ng-show="subscribedList.length==0"><td colspan="6" class="text-center">No Records Found !!!</td></tr>
                         </tbody>

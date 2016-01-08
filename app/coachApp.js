@@ -322,8 +322,8 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller: 'CoachPaymentController'
             }).
-            when('/studentsList/:id', {
-                templateUrl: 'views/payment-student-list.html',
+            when('/subscribersList/:id', {
+                templateUrl: 'views/payment-subscribers-list.html',
                 resolve: {
                     loadMyFiles:function($ocLazyLoad) {
                         return $ocLazyLoad.load({
@@ -336,7 +336,7 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller: 'CoachPaymentController'
             }).
-            when('/studentPayments', {
+            when('/subscribersPayments', {
                 templateUrl: 'views/payment-subscription.html',
                 resolve: {
                     loadMyFiles:function($ocLazyLoad) {

@@ -35,10 +35,10 @@
                     <tr ng-show="courses.length <= 0"><td colspan="5" style="text-align:center;">Loading new data!!</td></tr>
                     <tr dir-paginate="course in courses|itemsPerPage:itemsPerPage" total-items="total_count">
                         <td><span class="line-clamp-sm">{{course.coursename}}</span></td>
-                        <td><span class="line-clamp-sm">{{course.coursename}}</span></td>
+                        <td><span class="line-clamp-sm">{{course.ownername}}</span></td>
                         <td>{{course.publishedon}}</td>
                         <td>{{course.enrollcount}}</td>
-                        <td>{{course.ownerid}}</td>
+                        <td>{{course.ownerid}} $</td>
                         <td><a href="#courseStudentList/{{course.courseid}}" class="btn-xs btn-primary">View Details</a></td>
                     </tr>
                     </tbody>

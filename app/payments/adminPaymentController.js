@@ -15,7 +15,6 @@ adminApp.controller('AdminPaymentController',function($scope,requestHandler,Flas
     };
 
     $scope.doGetStudentList = function(pageno){
-        alert($routeParams.id);
         //In practice this should be in a factory.
         requestHandler.postRequest("getPublishedCourse/",{'offset':pageno}).then(function(response){
             $scope.students = [];
@@ -24,7 +23,6 @@ adminApp.controller('AdminPaymentController',function($scope,requestHandler,Flas
     };
 
     $scope.doGetCoursePuchaseDetails = function(){
-        alert($routeParams.id);
         //In practice this should be in a factory.
         requestHandler.postRequest("courseDetail/",{'courseid':$routeParams.id}).then(function(response){
             $scope.coursePurchsedDeatils = response.data.coursedetail;
