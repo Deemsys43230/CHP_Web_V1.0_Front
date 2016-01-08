@@ -1,0 +1,63 @@
+
+<!-- Start Page Banner -->
+<div class="page-banner">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-3">
+                <h4 class="classic-title"><span>Payment Settings</span></h4>
+                <div ng-include src="'views/payment-settings-menu.html'" onload="activeClass"></div>
+            </div>
+            <div class="col-md-9 min-height-450">
+                <a href="#dashboard" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back to Dashboard</a>
+                <div flash-message="2000" class="col-md-4 pull-right"></div>
+                <h3 class="margin-bottom-10"><i class="fa fa-dollar"></i> &nbsp;Subscription Panel</h3>
+                <div ng-if="loaded">
+                    <div class="loader-style">
+                        <div class="loader"></div>
+                    </div>
+                </div>
+                <div class="col-md-12 no-padding">
+                    <hr/>
+                    <form name="paypalSettingsForm">
+                        <div class="row form-set">
+                            <div class="col-md-3 margin-top-10">
+                                <h4>Basic Pay (1 month) :</h4>
+                            </div>
+                            <div class="col-md-9 margin-top-10">
+                                <input class="section-input" placeholder="Enter Basic Pay" name="paypalid" ng-model="paypalSettings.paypalid" required>
+                                 <span ng-show="paypalSettingsForm.paypalid.$dirty&&paypalSettingsForm.paypalid.$invalid">
+                                        <span class="error-message" ng-show="paypalSettingsForm.paypalid.$error.required"><span>Required.</span></span>
+                                 </span>
+                            </div>
+                            <div class="col-md-3 margin-top-10">
+                                <h4>Subscription (3 months) :</h4>
+                            </div>
+                            <div class="col-md-9 margin-top-10">
+                                <input class="section-input" placeholder="Enter Pay for 3 months" name="paypalname" ng-model="paypalSettings.paypalname" required>
+                                 <span ng-show="paypalSettingsForm.paypalname.$dirty&&paypalSettingsForm.paypalname.$invalid">
+                                        <span class="error-message" ng-show="paypalSettingsForm.paypalname.$error.required"><span>Required.</span></span>
+                                 </span>
+                            </div>
+                            <div class="col-md-3 margin-top-10">
+                                <h4>Subscription (6 months) :</h4>
+                            </div>
+                            <div class="col-md-9 margin-top-10">
+                                <input class="section-input" placeholder="Enter Pay for 6 months" name="paypalname" ng-model="paypalSettings.paypalname" required>
+                                 <span ng-show="paypalSettingsForm.paypalname.$dirty&&paypalSettingsForm.paypalname.$invalid">
+                                        <span class="error-message" ng-show="paypalSettingsForm.paypalname.$error.required"><span>Required.</span></span>
+                                 </span>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="text-center margin-top-20">
+                        <a href="" class="btn btn-success">Save Changes</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- End Page Banner -->
+<script type="text/javascript" src="../../js/script.js"></script>
