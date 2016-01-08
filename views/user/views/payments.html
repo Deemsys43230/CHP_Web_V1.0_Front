@@ -24,10 +24,10 @@
                         </thead>
                         <tbody >
                         <tr dir-paginate="mycourse in usercourselist  | itemsPerPage: 8" ng-show="usercourselist.length!=0">
-                            <td><a href="#paymentDetails/{{mycourse.userid}}">{{mycourse.emailid}}</a></td>
-                            <td>{{mycourse.emailid}}</td>
-                            <td>{{mycourse.emailid}}</td>
-                            <td>{{mycourse.emailid}}</td>
+                            <td><a href="#paymentDetails/{{mycourse.userid}}">Course Name {{$index}}</a></td>
+                            <td><!--{{mycourse.emailid}}--> Category {{$index}}</td>
+                            <td><!--{{mycourse.emailid}}--> 23/01/2015</td>
+                            <td><!--{{mycourse.emailid}}--> 43 $</td>
                         </tr>
                         <tr ng-show="usercourselist.length==0"><td colspan="4" class="text-center">No Records Found !!!</td></tr>
                         </tbody>

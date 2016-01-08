@@ -33,11 +33,11 @@
                     <tbody>
                     <tr ng-show="courses.length <= 0"><td colspan="5" style="text-align:center;">Loading new data!!</td></tr>
                     <tr dir-paginate="course in courses|itemsPerPage:itemsPerPage" total-items="total_count">
-                        <td>{{course.coursename}}</td>
-                        <td>{{course.coursename}}</td>
+                        <td>{{course.ownername}}</td>
                         <td>{{course.enrollcount}}</td>
-                        <td>{{course.enrollcount}}</td>
-                        <td><a href="#coachStudentList/{{course.courseid}}" class="btn-xs btn-primary">View Details</a></td>
+                        <td>{{course.enrollcount}}34 $</td>
+                        <td>62{{course.enrollcount}} $</td>
+                        <td><a href="#coachSubscribersList/{{course.courseid}}" class="btn-xs btn-primary">View Details</a></td>
                     </tr>
                     </tbody>
                 </table>

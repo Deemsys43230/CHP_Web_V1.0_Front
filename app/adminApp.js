@@ -980,8 +980,8 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'AdminPaymentController'
             }).
-            when('/courseStudentList/:id', {
-                templateUrl: 'views/payments-course-student.html',
+            when('/courseSubscribersList/:id', {
+                templateUrl: 'views/payments-course-subscribers.html',
                 resolve: {
                     loadMyFiles:function($ocLazyLoad) {
                         return $ocLazyLoad.load({
@@ -995,8 +995,8 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'AdminPaymentController'
             }).
-            when('/courseStudentDetails/:id', {
-                templateUrl: 'views/payments-course-student-details.html',
+            when('/courseSubscriberDetails/:id', {
+                templateUrl: 'views/payments-course-subscriber-details.html',
                 resolve: {
                     loadMyFiles:function($ocLazyLoad) {
                         return $ocLazyLoad.load({
@@ -1025,8 +1025,8 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'AdminPaymentController'
             }).
-            when('/coachStudentList/:id', {
-                templateUrl: 'views/payments-coach-student.html',
+            when('/coachSubscribersList/:id', {
+                templateUrl: 'views/payments-coach-subscribers.html',
                 resolve: {
                     loadMyFiles:function($ocLazyLoad) {
                         return $ocLazyLoad.load({
