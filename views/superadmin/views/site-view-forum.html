@@ -16,9 +16,9 @@
                     </div>
                 </div>
                 <div class="col-md-12 news-block">
-                    <h4>{{forumDetails.posttitle}}</h4>
+                    <h4 class="wrap">{{forumDetails.posttitle}}</h4>
                     <p class="text-italic margin-top-5">Published on : {{forumDetails.postedon}}</p>
-                    <div id="forumDescription"><div class="margin-top-20" ng-bind-html="forumDetails.postdescription | html"></div></div><br/>
+                    <div id="forumDescription"><div class="margin-top-20 wrap" ng-bind-html="forumDetails.postdescription | html"></div></div><br/>
                     <h4>Comments</h4>
                     <div class="text-center margin-tb-20" ng-show="forumAnswers.length==0">
                         <img src="../../images/no-reviews.png"/>

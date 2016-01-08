@@ -11,7 +11,7 @@
                 <h4 class="classic-title"><span>Most Viewed</span></h4>
                 <div id="showMostViewed">
                     <div ng-repeat="userforum in userforumlist | limitTo:20 | orderBy:'-totalcomment'">
-                        <h5 class="forum-topic" ng-click="doGetNewsDetailsByUser(userforum.postid)">{{userforum.posttitle}}</h5>
+                        <h5 class="forum-topic wrap" ng-click="doGetNewsDetailsByUser(userforum.postid)">{{userforum.posttitle}}</h5>
                         <hr/>
                     </div>
                 </div>
@@ -33,7 +33,7 @@
                     <hr/>
                 </div>
                 <div class="col-md-12">
-                    <h3 class="margin-bottom-20">{{userforumdetails.posttitle}}</h3>
+                    <h3 class="margin-bottom-20 wrap">{{userforumdetails.posttitle}}</h3>
                     <div class="col-md-1">
                         <img class="img-circle" ng-src="{{userforumdetails.userimage | trusted}}"/>
                     </div>
@@ -41,7 +41,7 @@
                         <p>Posted by : <strong>{{userforumdetails.username}}</strong></p>
                         <p>Posted on : {{userforumdetails.postedon}}</p>
                     </div>
-                    <div class="col-md-12 no-padding margin-tb-10">
+                    <div class="col-md-12 no-padding margin-tb-10 wrap">
                         {{userforumdetails.postdescription}}<br/>
                         <div class="margin-top-10">
                             <a href="" ng-click="doMarkPostAsAbuse()" class="btn abuse" ng-disabled="abuseDisable" class="h6">Report Abuse</a>
@@ -77,7 +77,7 @@
                     </div>
                     <hr/>
                     <h4 class="margin-top-20">Post Comment</h4>
-                    <form name="userCommentForm">
+                    <form name="userCommentForm" novalidate>
                         <span ng-show="userCommentForm.comments.$dirty&&userCommentForm.comments.$invalid&& !userCommentForm.comments.$pristine">
                             <span class="error-message textarea-errormessage40" ng-show="userCommentForm.comments.$error.required"><span>Required.</span></span>
                         </span>
