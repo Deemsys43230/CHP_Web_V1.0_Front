@@ -18,6 +18,16 @@ adminApp.controller('PaypalSettingsController',function($scope,requestHandler,Fl
         requestHandler.getRequest("admin/getappdetails","").then(function(response){
             original=angular.copy(response.data.App_settings[0]);
              $scope.paypalSettings=response.data.App_settings[0];
+
+             $scope.paypalSettings.clientId="AUccSASDAdsade#SADASDA";
+             $scope.paypalSettings.clientSecret="AUccSASDAdsade##ASDASDSA";
+             $scope.paypalSettings.appUserId="AUccSASDAdsade#$%###@@#2";
+             $scope.paypalSettings.appPassword="Sample";
+             $scope.paypalSettings.appSignature="AUccSASDAdsade@#SADadasdASD##$@#ssaddsada1234567";
+             $scope.paypalSettings.courseSharePercentage="20";
+             $scope.paypalSettings.coachSharePercentage="20";
+             $scope.paypalSettings.appId="AUccSASDAdsadeSDasda###";
+
         },function(response){
             errorMessage(Flash,"Please Try again later");
         });

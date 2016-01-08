@@ -10,12 +10,57 @@
             <div class="col-md-9">
                 <a href="#dashboard" class="back-button pull-right margin-left-10"><i class="fa fa-arrow-circle-o-left"></i> Back to Dashboard</a>
                 <div flash-message="2000" class="col-md-4 pull-right"></div>
-                <h3 class="margin-bottom-10">Paypal Settings</h3>
+                <h3 class="margin-bottom-10"><i class="fa fa-dollar"></i> Payment Settings</h3>
                 <hr/>
                 <form name="paypalSettingsForm">
                     <div class="row form-set">
                         <div class="col-md-3 margin-top-10">
-                            <h4>Paypal Id :</h4>
+                            <h4>Client ID :</h4>
+                        </div>
+                        <div class="col-md-9 margin-top-10">
+                            <input type="text" class="form-control margin-bottom-20" name="clientId" ng-model="paypalSettings.clientId" required>
+                         <span ng-show="paypalSettingsForm.clientId.$dirty&&paypalSettingsForm.clientId.$invalid">
+                                <span class="error-message" ng-show="paypalSettingsForm.clientId.$error.required"><span>Required.</span></span>
+                         </span>
+                        </div>
+                        <div class="col-md-3 margin-top-10">
+                            <h4>Client Secret:</h4>
+                        </div>
+                        <div class="col-md-9 margin-top-10">
+                            <input type="text" class="form-control margin-bottom-20" name="clientSecret" ng-model="paypalSettings.clientSecret" required>
+                         <span ng-show="paypalSettingsForm.clientSecret.$dirty&&paypalSettingsForm.clientSecret.$invalid">
+                                <span class="error-message" ng-show="paypalSettingsForm.clientSecret.$error.required"><span>Required.</span></span>
+                         </span>
+                        </div>
+                        <div class="col-md-3 margin-top-10">
+                            <h4>App User ID :</h4>
+                        </div>
+                        <div class="col-md-9 margin-top-10">
+                            <input type="text" class="form-control margin-bottom-20" name="appUserId" ng-model="paypalSettings.appUserId" required>
+                         <span ng-show="paypalSettingsForm.appUserId.$dirty&&paypalSettingsForm.appUserId.$invalid">
+                                <span class="error-message" ng-show="paypalSettingsForm.appUserId.$error.required"><span>Required.</span></span>
+                         </span>
+                        </div>
+                        <div class="col-md-3 margin-top-10">
+                            <h4>App Password :</h4>
+                        </div>
+                        <div class="col-md-9 margin-top-10">
+                            <input type="password" class="form-control margin-bottom-20" name="appPassword" ng-model="paypalSettings.appPassword" required>
+                         <span ng-show="paypalSettingsForm.appPassword.$dirty&&paypalSettingsForm.appPassword.$invalid">
+                                <span class="error-message" ng-show="paypalSettingsForm.appPassword.$error.required"><span>Required.</span></span>
+                         </span>
+                        </div>
+                        <div class="col-md-3 margin-top-10">
+                            <h4>App Signature :</h4>
+                        </div>
+                        <div class="col-md-9 margin-top-10">
+                            <input type="text" class="form-control margin-bottom-20" name="appSignature" ng-model="paypalSettings.appSignature" required>
+                         <span ng-show="paypalSettingsForm.appSignature.$dirty&&paypalSettingsForm.appSignature.$invalid">
+                                <span class="error-message" ng-show="paypalSettingsForm.appSignature.$error.required"><span>Required.</span></span>
+                         </span>
+                        </div>
+                        <div class="col-md-3 margin-top-10">
+                            <h4>Paypal Email ID :</h4>
                         </div>
                         <div class="col-md-9 margin-top-10">
                             <input type="text" class="form-control margin-bottom-20" name="paypalid" ng-model="paypalSettings.paypalid" required>
@@ -32,6 +77,34 @@
                                 <span class="error-message" ng-show="paypalSettingsForm.paypalname.$error.required"><span>Required.</span></span>
                          </span>
                         </div>
+                        <div class="col-md-3 margin-top-10">
+                            <h4>Course Share %:</h4>
+                        </div>
+                        <div class="col-md-9 margin-top-10">
+                            <input type="text" class="form-control margin-bottom-20" name="courseSharePercentage" ng-model="paypalSettings.courseSharePercentage" required>
+                         <span ng-show="paypalSettingsForm.coachSharePercentage.$dirty&&paypalSettingsForm.courseSharePercentage.$invalid">
+                                <span class="error-message" ng-show="paypalSettingsForm.courseSharePercentage.$error.required"><span>Required.</span></span>
+                         </span>
+                        </div>
+                        <div class="col-md-3 margin-top-10">
+                            <h4>Coach Share %:</h4>
+                        </div>
+                        <div class="col-md-9 margin-top-10">
+                            <input type="text" class="form-control margin-bottom-20" name="coachSharePercentage" ng-model="paypalSettings.coachSharePercentage" required>
+                         <span ng-show="paypalSettingsForm.coachSharePercentage.$dirty&&paypalSettingsForm.coachSharePercentage.$invalid">
+                                <span class="error-message" ng-show="paypalSettingsForm.coachSharePercentage.$error.required"><span>Required.</span></span>
+                         </span>
+                        </div>
+                        <div class="col-md-3 margin-top-10">
+                            <h4>App ID :</h4>
+                        </div>
+                        <div class="col-md-9 margin-top-10">
+                            <input type="text" class="form-control margin-bottom-20" name="appId" ng-model="paypalSettings.appId" required>
+                         <span ng-show="paypalSettingsForm.appId.$dirty&&paypalSettingsForm.appId.$invalid">
+                                <span class="error-message" ng-show="paypalSettingsForm.appId.$error.required"><span>Required.</span></span>
+                         </span>
+                        </div>
+                        
                     </div>
                 </form>
                 <div class="text-center">

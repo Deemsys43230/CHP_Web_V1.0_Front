@@ -115,6 +115,76 @@ adminApp.controller('AdminPaymentController',function($scope,requestHandler,Flas
         $scope.doGetCoursePuchaseDetails();
     };
 
+    $scope.doViewInwardDetails=function(id){
+        $scope.title = "Payment Inward Details";
+
+        $(function(){
+            $("#lean_overlay").fadeTo(1000);
+            $("#inwardDetailView").fadeIn(600);
+            $(".common_model").show();
+        });
+
+        //$scope.loaded=true;
+
+        /*****************Get Inward Details****************/
+
+       /* requestHandler.postRequest("admin/gettypeIndividualDetail/",{'typeid':id}).then(function(response){
+            $scope.exerciseType=response.data.IndividualtypeData;
+            $scope.loaded=false;
+            $scope.paginationLoad=true;
+
+        },function(){
+            errorMessage(Flash,"Please try again later!")
+        });
+        */
+        $(".modal_close").click(function(){
+            $(".common_model").hide();
+            $("#inwardDetailView").hide();
+            $("#lean_overlay").hide();
+        });
+
+        $("#lean_overlay").click(function(){
+            $(".common_model").hide();
+            $("#inwardDetailView").hide();
+            $("#lean_overlay").hide();
+        });
+    };
+
+    $scope.doViewOutwardDetails=function(id){
+        $scope.title = "Payment Outward Details";
+
+        $(function(){
+            $("#lean_overlay").fadeTo(1000);
+            $("#outwardDetailView").fadeIn(600);
+            $(".common_model").show();
+        });
+
+        //$scope.loaded=true;
+
+        /*****************Get Inward Details****************/
+
+       /* requestHandler.postRequest("admin/gettypeIndividualDetail/",{'typeid':id}).then(function(response){
+            $scope.exerciseType=response.data.IndividualtypeData;
+            $scope.loaded=false;
+            $scope.paginationLoad=true;
+
+        },function(){
+            errorMessage(Flash,"Please try again later!")
+        });
+        */
+        $(".modal_close").click(function(){
+            $(".common_model").hide();
+            $("#outwardDetailView").hide();
+            $("#lean_overlay").hide();
+        });
+
+        $("#lean_overlay").click(function(){
+            $(".common_model").hide();
+            $("#outwardDetailView").hide();
+            $("#lean_overlay").hide();
+        });
+    };
+
 });
 
 

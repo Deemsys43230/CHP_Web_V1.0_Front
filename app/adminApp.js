@@ -1033,7 +1033,9 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                             name:'adminApp',
                             files:[
                                 '../../js/bootstrap.min.js',
-                                '../../app/payments/adminPaymentController.js'
+                                '../../app/payments/adminPaymentController.js',                                
+                                '../../plugin/popup/style.css',
+                                '../../plugin/popup/jquery.leanModal.min.js'
                             ]
                         })
                     }
@@ -1676,8 +1678,8 @@ adminApp.factory("siteMenuService", function () {
             "active": ""
         },
         {
-            "name": "Paypal",
-            "icon": "paypal",
+            "name": "Payment Settings",
+            "icon": "dollar",
             "href": "paypalSettings",
             "active": ""
         },

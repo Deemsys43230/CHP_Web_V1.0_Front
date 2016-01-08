@@ -43,8 +43,8 @@
                         <td>{{student.publishedon}}</td>
                         <td>3{{student.ownerid}} $</td>
                         <td>{{student.ownerid}} $</td>
-                        <td>{{student.ownerid}}HWYN9459USB</td>
-                        <td>{{student.ownerid}}MS863HND82G</td>
+                        <td><a href="" ng-click="doViewInwardDetails(student.ownerid)">{{student.ownerid}}HWYN9459USB</a></td>
+                        <td><a href="" ng-click="doViewOutwardDetails(student.ownerid)">{{student.ownerid}}HWYN9332GRF</a></td>
                         <td class="text-green">Active</td>
                     </tr>
                     </tbody>
@@ -61,6 +61,123 @@
     </div>
 </div>
 
+<!--Inward Pop Up-->
+<div id="inwardDetailView" class="popupContainer-width" style="display:none;">
+
+    <header class="popupHeader width-100">
+        <span class="header_title">{{title}}</span>
+        <span class="modal_close"><i class="fa fa-times"></i></span>
+    </header>
+
+    <section class="popupBody">
+        <!-- Register Form -->
+        <div class="common_model">
+            <table class="table table-bordered margin-top-10">
+                <tbody>
+                    <tr class="warning">
+                        <td class="col-md-4">Payer Email</td>
+                        <td class="col-md-8">kishore@gmail.com</td>
+                    </tr>
+                    <tr>
+                        <td>Paypal Firstname</td>
+                        <td>Michel</td>
+                    </tr>
+                   <tr class="warning">
+                        <td class="col-md-4">Payer Lastname</td>
+                        <td class="col-md-8">kishore</td>
+                    </tr>
+                    <tr>
+                        <td>Payer ID</td>
+                        <td>HFASDA#32323</td>
+                    </tr>
+                    <tr class="warning">
+                        <td class="col-md-4">Transaction Date</td>
+                        <td class="col-md-8">09/01/2016</td>
+                    </tr>
+                    <tr>
+                        <td>Transaction Fee</td>
+                        <td>0.034 $</td>
+                    </tr>
+                    <tr class="warning">
+                        <td class="col-md-4">Transaction Amount</td>
+                        <td class="col-md-8">212.00 $</td>
+                    </tr>
+                    <tr>
+                        <td>Transaction Status</td>
+                        <td>Completed</td>
+                    </tr>
+                    <tr class="warning">
+                        <td class="col-md-4">Currency Code</td>
+                        <td class="col-md-8">USD</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</div>
+<!--End Inward-->
+
+
+<!--Outward Pop Up-->
+<div id="outwardDetailView" class="popupContainer-width" style="display:none;">
+
+    <header class="popupHeader width-100">
+        <span class="header_title">{{title}}</span>
+        <span class="modal_close"><i class="fa fa-times"></i></span>
+    </header>
+
+    <section class="popupBody">
+        <!-- Register Form -->
+        <div class="common_model">
+            <table class="table table-bordered margin-top-10">
+                <tbody>
+                    <tr class="warning">
+                        <td class="col-md-4">Amount</td>
+                        <td class="col-md-8">10</td>
+                    </tr>
+                    <tr>
+                    <td>Receiver Email ID</td>
+                        <td>Michel@gmail.com</td>
+                    </tr>
+                   <tr class="warning">
+                        <td class="col-md-4">Receiver Account ID</td>
+                        <td class="col-md-8">SDA23423SADSAD</td>
+                    </tr>
+                    <tr>
+                        <td>Sender Email ID</td>
+                        <td>kishore@gmail.com</td>
+                    </tr>
+                    <tr class="warning">
+                        <td class="col-md-4">Sender Account</td>
+                        <td class="col-md-8">ASDASD222342342</td>
+                    </tr>
+                    <tr>
+                        <td>Transaction ID</td>
+                        <td>757DFSDFDFDSFSDFERWWERWFDSWE32432423</td>
+                    </tr>
+                    <tr class="warning">
+                        <td class="col-md-4">Transaction Date</td>
+                        <td class="col-md-8">05-Jan-2016</td>
+                    </tr>
+                    <tr>
+                        <td>Transaction Status</td>
+                        <td>Completed</td>
+                    </tr>
+                    <tr class="warning">
+                        <td class="col-md-4">Currency Code</td>
+                        <td class="col-md-8">USD</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</div>
+<!--End Outward-->
+
+
 <!-- End Page Banner -->
 
 <script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript">
+    $("#modal_exerciseType").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
+</script>
