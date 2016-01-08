@@ -178,6 +178,7 @@ userApp.controller('UserCoachController',function($scope,requestHandler,Flash,$l
     };
 
     $scope.userCoachViewInit=function(){
+        $scope.checkReview();
         $scope.doGetCoachDetailsByUser($routeParams.id);
         $scope.coachView = {
             status: 'coach-reviews'
@@ -185,7 +186,7 @@ userApp.controller('UserCoachController',function($scope,requestHandler,Flash,$l
         $scope.doGetCoachRatings($routeParams.id);
         $scope.subscribed=1;
 
-        $scope.checkReview();
+
     };
 
     $scope.coachReview=function(id){

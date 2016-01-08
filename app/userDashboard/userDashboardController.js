@@ -569,7 +569,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
 
                 // Convert back to days
                 $scope.remainingDates = Math.round(difference_ms/ONE_DAY);
-
+               $scope.curweight= $scope.demography.weight;
                 $window.currentweight = $scope.demography.weight;
                 $window.targetweight = $scope.goalDetails.targetweight;
                 $scope.goal = {
