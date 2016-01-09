@@ -11,7 +11,7 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
         //Do For Cross Orgin Management
         $httpProvider.defaults.withCredentials = true;
 
-        $httpProvider.interceptors.push(['$q','$location','$injector','$cookies',function ($q, $location,$injector,$cookies) {
+        $httpProvider.interceptors.push(['$q','$location','$injector','$cookies','$window',function ($q, $location,$injector,$cookies,$window) {
 
             return {
                 
@@ -33,7 +33,8 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         case 403: {
                             alert("yes !");
                             alert("Get out");
-                            $location.path("/login");
+                            $window.location.href="../../#/index";
+                            //$location.path("/login");
                             break;
                         }
                         case 500: {

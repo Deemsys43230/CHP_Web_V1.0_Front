@@ -141,7 +141,7 @@ adminApp.filter('trusted', ['$sce', function ($sce) {
     };
 }]);
 
-var userApp = angular.module('userApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate']);
+var userApp = angular.module('userApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','angularUtils.directives.dirPagination']);
 
 userApp.controller('ForumsUserController',function($scope,requestHandler,Flash,$routeParams,$location){
 
@@ -385,7 +385,7 @@ userApp.filter('startsWithLetterForum', function () {
 });
 
 
-var coachApp = angular.module('coachApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate']);
+var coachApp = angular.module('coachApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','angularUtils.directives.dirPagination']);
 
 coachApp.controller('ForumsCoachController',function($scope,requestHandler,Flash,$routeParams,$location){
 
@@ -428,14 +428,17 @@ coachApp.controller('ForumsCoachController',function($scope,requestHandler,Flash
                     value.totalcomment=response.data.ForumDiscussionData.length;
                 });
             });
+            $scope.userforumlist.sort(function(a,b){
+                return a.totalcomment > b.totalcomment;
+            });
             $scope.loaded=false;
-            $('#showMostViewed').hide();
-            $('#showMostViewed').show(300);
 
         },function(){
             errorMessage(Flash,"Please try again later!")
         });
     };
+
+
 
     $scope.doGetForumDetailsByUser= function () {
 
@@ -617,3 +620,20 @@ coachApp.filter('trusted', ['$sce', function ($sce) {
 }]);
 
 
+coachApp.filter('startsWithLetterForum', function () {
+
+    return function (items, forumsearch) {
+        var filtered = [];
+        var letterMatch = new RegExp(forumsearch, 'i');
+        if(!items){}
+        else{
+            for (var i = 0; i < items.length; i++) {
+                var item = items[i];
+                if (letterMatch.test(item.username) || letterMatch.test(item.posttitle) || letterMatch.test(item.postdescription)) {
+                    filtered.push(item);
+                }
+            }
+        }
+        return filtered;
+    };
+});

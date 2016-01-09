@@ -10,7 +10,7 @@
                 </div>
                 <h4 class="classic-title"><span>Most Viewed</span></h4>
                 <div id="showMostViewed">
-                    <div ng-repeat="userforum in userforumlist | limitTo:20 | orderBy:'-totalcomment'">
+                    <div ng-repeat="userforum in userforumlist | limitTo:20">
                         <h5><a class="forum-topic wrap" href="#forumDetails/{{userforum.postid}}">{{userforum.posttitle}}</a></h5>
                         <hr/>
                     </div>
@@ -55,7 +55,7 @@
                         </div>
                     </span>
                     <div ng-switch-default>
-                        <div class="col-md-12" ng-repeat="userforum in userforumlist | startsWithLetterForum :forumsearch" ng-show="userforumlist !=0">
+                        <div class="col-md-12" dir-paginate="userforum in userforumlist | startsWithLetterForum :forumsearch | itemsPerPage: 8" ng-show="userforumlist !=0">
                             <div class="col-md-1 no-padding">
                                 <img class="img-circle forum-list-img" src="{{userforum.userimage | trusted}}">
                             </div>
@@ -81,7 +81,7 @@
                         </div>
 
                     </div>
-                    <!--<dir-pagination-controls  boundary-links="true"> </dir-pagination-controls>-->
+                    <dir-pagination-controls  boundary-links="true"> </dir-pagination-controls>
                 </div>
             </div>
 
