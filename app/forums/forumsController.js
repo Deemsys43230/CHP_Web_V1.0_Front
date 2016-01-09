@@ -426,7 +426,6 @@ coachApp.controller('ForumsCoachController',function($scope,requestHandler,Flash
             $.each($scope.userforumlist, function(index,value) {
                 requestHandler.postRequest("listofAnswers/", {"postid":value.postid}).then(function(response){
                     value.totalcomment=response.data.ForumDiscussionData.length;
-                });
             });
             $scope.userforumlist.sort(function(a,b){
                 return a.totalcomment > b.totalcomment;
