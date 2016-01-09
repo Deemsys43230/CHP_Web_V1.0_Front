@@ -6,7 +6,7 @@ userApp.controller('UserCoachController',function($scope,requestHandler,Flash,$l
     $scope.averageRate=0.1;
     $scope.paginationLoad=false;
     var myCoachIdListArray = [];
-    $scope.disablereview=false;
+   // $scope.disablereview=false;
 
     // Search Food Type
     $('.show-list-search').click(function() {
@@ -57,6 +57,7 @@ userApp.controller('UserCoachController',function($scope,requestHandler,Flash,$l
             $scope.coachReviews=response.data.Ratings_Reviews.Reviews;
             $scope.reviewload=false;
         });
+
     };
 
     $scope.doGetCoachDetailsByUser= function (id){
@@ -139,6 +140,7 @@ userApp.controller('UserCoachController',function($scope,requestHandler,Flash,$l
             errorMessage(Flash,"Please try again later!")
         });
 
+
     };
 
     $scope.doGetMyCoachListByUser=function(){
@@ -177,7 +179,9 @@ userApp.controller('UserCoachController',function($scope,requestHandler,Flash,$l
         };
     };
 
+
     $scope.userCoachViewInit=function(){
+        $scope.disablereview=true;
         $scope.checkReview();
         $scope.doGetCoachDetailsByUser($routeParams.id);
         $scope.coachView = {
@@ -228,7 +232,9 @@ userApp.controller('UserCoachController',function($scope,requestHandler,Flash,$l
     };
 
 
+
     $scope.checkReview=function(){
+
         $scope.checkReviews="";
 
         requestHandler.getRequest("getUserId/","").then(function(response){
@@ -236,12 +242,31 @@ userApp.controller('UserCoachController',function($scope,requestHandler,Flash,$l
            $scope.loginuserid = $scope.userProfile.userid;
            requestHandler.getRequest("getRatingsandReviews/"+$routeParams.id, "").then(function (response) {
                $scope.checkReviews = response.data.Ratings_Reviews.Reviews;
+
+               userTypeArray=[];
+               $.each($scope.checkReviews, function(index,userid) {
+                   userTypeArray.push(userid.review_user);
+               });
+
+               $scope.check=userTypeArray;
+
+               if($scope.check.indexOf($scope.loginuserid) !=-1){
+                   $scope.disablereview = true;
+               }
+               else{
+                   $scope.disablereview = false;
+               }
+/*
                $.each($scope.checkReviews,function(index,value){
-                   if(value.review_user == $scope.loginuserid){
+
+                       if(value.review_user == $scope.loginuserid){
                        $scope.disablereview = true;
                    }
+                   else{
+                       $scope.disablereview = false;
+                   }
 
-               });
+               });*/
 
             });
 
@@ -306,7 +331,7 @@ userApp.directive("averageStarRating", function() {
                 "      <i class='fa fa-star'></i>" + //&#9733
                 "    </li>" +
                 "  </ul>" +
-                "  <ul class='rating foreground' class='readonly' style='width:{{filledInStarsContainerWidth}}%'>" +
+                "  <ul class='rating foreground' class='readonly' ng-attr-style='width:{{filledInStarsContainerWidth}}%'>" +
                 "    <li ng-repeat='star in stars' class='star filled'>" +
                 "      <i class='fa fa-star'></i>" + //&#9733
                 "    </li>" +

@@ -366,6 +366,24 @@ userApp.filter('trusted', ['$sce', function ($sce) {
     };
 }]);
 
+userApp.filter('startsWithLetterForum', function () {
+
+    return function (items, forumsearch) {
+        var filtered = [];
+        var letterMatch = new RegExp(forumsearch, 'i');
+        if(!items){}
+        else{
+            for (var i = 0; i < items.length; i++) {
+                var item = items[i];
+                if (letterMatch.test(item.username) || letterMatch.test(item.posttitle) || letterMatch.test(item.postdescription)) {
+                    filtered.push(item);
+                }
+            }
+        }
+        return filtered;
+    };
+});
+
 
 var coachApp = angular.module('coachApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate']);
 
@@ -597,4 +615,5 @@ coachApp.filter('trusted', ['$sce', function ($sce) {
         return $sce.trustAsResourceUrl(url);
     };
 }]);
+
 

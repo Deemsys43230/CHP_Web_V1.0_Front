@@ -37,9 +37,9 @@ userApp.controller('GoalController',function($scope,requestHandler,Flash,$route,
 
     $scope.doGetViewGoalMember=function(){
         $scope.loaded=true;
+        $scope.memberUserIdList=[];
         requestHandler.postRequest("user/getGoalMemberList/",{"goalid" : $routeParams.id}).then(function(response){
             $scope.goalMembers=response.data.Goal_Data;
-            $scope.memberUserIdList=[];
             $.each($scope.goalMembers,function(index,value){
                 $scope.memberUserIdList.push(value.userid);
             });
@@ -49,7 +49,7 @@ userApp.controller('GoalController',function($scope,requestHandler,Flash,$route,
             $scope.myRemainderFriendsList=[];
             $.each(response.data.Friends_List,function(index,uservalue){
                 if($scope.memberUserIdList.indexOf(uservalue.userid)=='-1')
-                $scope.myRemainderFriendsList.push(uservalue);
+                    $scope.myRemainderFriendsList.push(uservalue);
             });
         });
     };

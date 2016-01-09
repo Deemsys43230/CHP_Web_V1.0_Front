@@ -33,6 +33,7 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         case 403: {
                             alert("yes !");
                             alert("Get out");
+
                             $location.path("/login");
                             break;
                         }

@@ -55,7 +55,7 @@
                         </div>
                     </span>
                     <div ng-switch-default>
-                        <div class="col-md-12" ng-repeat="userforum in userforumlist | filter:forumsearch">
+                        <div class="col-md-12" ng-repeat="userforum in userforumlist | startsWithLetterForum :forumsearch" ng-show="userforumlist !=0">
                             <div class="col-md-1 no-padding">
                                 <img class="img-circle forum-list-img" src="{{userforum.userimage | trusted}}">
                             </div>
@@ -74,7 +74,14 @@
                                 <hr/>
                             </div>
                         </div>
+                        <div ng-show="userforumlist==0">
+                            <h1 class="col-md-12 margin-top-50 text-gray text-center">
+                                NO RECORDS FOUND!!!
+                            </h1>
+                        </div>
+
                     </div>
+                    <!--<dir-pagination-controls  boundary-links="true"> </dir-pagination-controls>-->
                 </div>
             </div>
 

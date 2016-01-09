@@ -11,7 +11,7 @@
                     <h4 class="classic-title"><span>Course View</span></h4>
                     <div class="row margin-top-10 margin-bottom-10">
                         <div class="col-md-8">
-                            <h2 class="margin-bottom-10">Section {{sectionno}} : {{sectionDetail.sectiontitle}}</h2>
+                            <h2 class="margin-bottom-10 wrap">Section {{sectionno}} : {{sectionDetail.sectiontitle}}</h2>
                             <p class="margin-tb-10 wrap" ng-bind-html="sectionDetail.sectioncontent | html" >
                                <!-- {{sectionDetail.sectioncontent}}-->
                             </p>
@@ -23,9 +23,9 @@
                             </div>
                         </div>
                         <div class="col-md-4">
-                            <h2>{{sectionDetail.coursename}}</h2>
-                            <h4 class="text-gray margin-tb-10">{{sectionDetail.coursesubtitle}}</h4>
-                            <h5 class="margin-tb-10" ng-repeat="sections in sectionList">Section{{$index+1}}: <a href="" ng-click="courseSectionDetailsbyId(sections.sectionid)">{{sections.sectiontitle}}</a></h5>
+                            <h2 class="wrap">{{sectionDetail.coursename}}</h2>
+                            <h4 class="text-gray margin-tb-10 wrap">{{sectionDetail.coursesubtitle}}</h4>
+                            <h5 class="margin-tb-10" ng-repeat="sections in sectionList">Section{{$index+1}}: <a href="" ng-click="courseSectionDetailsbyId(sections.sectionid)" class="wrap">{{sections.sectiontitle}}</a></h5>
                             </div>
                     </div>
                 </div>
