@@ -48,15 +48,15 @@ commonApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
 
         $routeProvider.
             when('/index', {
-                templateUrl: 'views/common/index.html',
+                templateUrl: '../common/index.html',
                 resolve: {
                         loadMyFiles:function($ocLazyLoad) {
                             return $ocLazyLoad.load({
                                 name:'commonApp',
                                 files:[
-                                    'plugin/vertical-carousel/vertical-carousel.js',
-                                    'plugin/vertical-carousel/vertical-carousel.css',
-                                    'app/commonController.js'
+                                    '../../plugin/vertical-carousel/vertical-carousel.js',
+                                    '../../plugin/vertical-carousel/vertical-carousel.css',
+                                    '../../app/commonController.js'
                                 ]
                             })
                         }
@@ -64,28 +64,28 @@ commonApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 controller:'CommonController'
             }).
             when('/howItWork', {
-                templateUrl: 'views/common/how-it-work.html'
+                templateUrl: '../common/how-it-work.html'
             }).
             when('/aboutUs', {
-                templateUrl: 'views/common/about.html'
+                templateUrl: '../common/about.html'
             }).
             when('/portfolio', {
-                templateUrl: 'views/common/portfolio.html'
+                templateUrl: '../common/portfolio.html'
             }).
             when('/singleProject', {
-                templateUrl: 'views/common/single-project.html'
+                templateUrl: '../common/single-project.html'
             }).
             when('/blog', {
-                templateUrl: 'views/common/blog.html'
+                templateUrl: '../common/blog.html'
             }).
             when('/contact', {
-                templateUrl: 'views/common/contact.html',
+                templateUrl: '../common/contact.html',
                 resolve: {
                     loadMyFiles:function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'commonApp',
                             files:[
-                                'app/settings/basicInfoController.js'
+                                '../../app/settings/basicInfoController.js'
                             ]
                         })
                     }
@@ -93,7 +93,7 @@ commonApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 controller:'ContactUsDetailsController'
             }).
             when('/testimonial', {
-                templateUrl: 'views/common/testimonial.html',
+                templateUrl: '../common/testimonial.html',
                 resolve: {
                     loadMyFiles:function($ocLazyLoad) {
                         return $ocLazyLoad.load({
@@ -110,7 +110,7 @@ commonApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 controller:'TestimonialUserController'
             }).
             when('/testimonials/:id', {
-                templateUrl: 'views/common/testimonial.html',
+                templateUrl: '../common/testimonial.html',
                 resolve: {
                     loadMyFiles:function($ocLazyLoad) {
                         return $ocLazyLoad.load({
@@ -127,7 +127,7 @@ commonApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 controller:'TestimonialUserController'
             }).
             when('/news', {
-                templateUrl: 'views/common/news.html',
+                templateUrl: '../common/news.html',
                 resolve: {
                     loadMyFiles:function($ocLazyLoad) {
                         return $ocLazyLoad.load({
@@ -143,7 +143,7 @@ commonApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 controller:'NewsUserController'
             }).
             when('/news/:id', {
-                templateUrl: 'views/common/news.html',
+                templateUrl: '../common/news.html',
                 resolve: {
                     loadMyFiles:function($ocLazyLoad) {
                         return $ocLazyLoad.load({
@@ -159,7 +159,7 @@ commonApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 controller:'NewsUserController'
             }).
             when('/FAQ', {
-                templateUrl: 'views/common/FAQ.html',
+                templateUrl: '../common/FAQ.html',
                 resolve: {
                     loadMyFiles:function($ocLazyLoad) {
                         return $ocLazyLoad.load({
@@ -174,7 +174,7 @@ commonApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 controller:'FAQUserController'
             }).
             when('/instructions', {
-                templateUrl: 'views/common/instruction.html',
+                templateUrl: '../common/instruction.html',
                 resolve: {
                     loadMyFiles:function($ocLazyLoad) {
                         return $ocLazyLoad.load({
@@ -189,7 +189,7 @@ commonApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 controller:'InstructionUserController'
             }).
             when('/termsofuse', {
-                templateUrl: 'views/common/termsofuse.html',
+                templateUrl: '../common/termsofuse.html',
                 resolve: {
                     loadMyFiles:function($ocLazyLoad) {
                         return $ocLazyLoad.load({
@@ -204,7 +204,7 @@ commonApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 controller:'TermsOfUseUserController'
             }).
             when('/policy', {
-                templateUrl: 'views/common/privacypolicy.html',
+                templateUrl: '../common/privacypolicy.html',
                 resolve: {
                     loadMyFiles:function($ocLazyLoad) {
                         return $ocLazyLoad.load({
@@ -243,6 +243,14 @@ commonApp.controller('LoginController',function($scope,requestHandler,Flash,$win
         };
     };
 
+    $scope.getSocialMediaDetails=function(){
+        requestHandler.getRequest("contactus/","").then(function(response){
+            $scope.commonDetails = response.data.Contactus[0];
+        });
+    };
+
+    $scope.getSocialMediaDetails();
+
     //Login
     $scope.doLogin=function(){
         requestHandler.loginRequest($scope.username,$scope.password).then(function(response){
@@ -260,22 +268,22 @@ commonApp.controller('LoginController',function($scope,requestHandler,Flash,$win
                    if(response.data.Login.roleid==3){
                        console.log("Role:"+response.data.User_Profile.isProfileUpdated);
                        if(response.data.User_Profile.isProfileUpdated==0){
-                          $window.location.href="views/user/#/profile";
+                          $window.location.href="../user/#/profile";
                        }else{
-                           $window.location.href="views/user/#/dashboard";
+                           $window.location.href="../user/#/dashboard";
                        }
                    }
                     else if(response.data.Login.roleid==2){
                        console.log("Role:"+response.data.User_Profile.isProfileUpdated);
                        if(response.data.User_Profile.isProfileUpdated==0){
-                           $window.location.href="views/coach/#/profile";
+                           $window.location.href="../coach/#/profile";
                        }else{
-                           $window.location.href="views/coach/#/dashboard";
+                           $window.location.href="../coach/#/dashboard";
                        }
                    }
                     else if(response.data.Login.roleid==1){
                        $scope.reset();
-                       $window.location.href="views/superadmin/#/dashboard";
+                       $window.location.href="../superadmin/#/dashboard";
                    }
                 });
 

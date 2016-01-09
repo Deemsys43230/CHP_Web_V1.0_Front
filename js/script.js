@@ -6,14 +6,13 @@ $(document).ready(function ($) {
 	"use strict";
 
 
-////	Hidder Header
+//Hidder Header
 
     
     /*---------------------------------------------------*/
     /* Progress Bar
     /*---------------------------------------------------*/
-    
-    
+
     $('.skill-shortcode').appear(function() {
   		$('.progress').each(function(){ 
     		$('.progress-bar').css('width',  function(){ return ($(this).attr('data-percentage')+'%')});
@@ -25,9 +24,7 @@ $(document).ready(function ($) {
     /*--------------------------------------------------*/
     /* Counter
     /*--------------------------------------------------*/
-    
-    
-    
+
     $('.timer').countTo();
 
     $('.counter-item').appear(function() {
@@ -69,10 +66,8 @@ $(document).ready(function ($) {
         event.preventDefault();
         $('html, body').animate({scrollTop: 0}, 600);
         return false;
-    })
-	
-	
-	
+    });
+
 	
 	/*----------------------------------------------------*/
 	/*	Sliders & Carousel
@@ -87,29 +82,33 @@ $(document).ready(function ($) {
 		tick,
 		percentTime;
 	$('.touch-slider').each(function(){
+        var returnSliderNav;
+        var returnSliderPag;
+        var returnSliderProgressBar;
+        var returnAutoPlay;
 		var owl = jQuery(this),
 			sliderNav = $(this).attr('data-slider-navigation'),
 			sliderPag = $(this).attr('data-slider-pagination'),
 			sliderProgressBar = $(this).attr('data-slider-progress-bar');
 			
 		if ( sliderNav == 'false' || sliderNav == '0' ) {
-			var returnSliderNav = false
+			returnSliderNav = false
 		}else {
-			var returnSliderNav = true
+			returnSliderNav = true
 		}
 		
 		if ( sliderPag == 'true' || sliderPag == '1' ) {
-			var returnSliderPag = true
+			returnSliderPag = true
 		}else {
-			var returnSliderPag = false
+			returnSliderPag = false
 		}
 		
 		if ( sliderProgressBar == 'true' || sliderProgressBar == '1' ) {
-			var returnSliderProgressBar = progressBar
-			var returnAutoPlay = false
+			returnSliderProgressBar = progressBar
+			returnAutoPlay = false
 		}else {
-			var returnSliderProgressBar = false
-			var returnAutoPlay = true
+			returnSliderProgressBar = false
+			returnAutoPlay = true
 		}
 		
 		owl.owlCarousel({
@@ -153,7 +152,7 @@ $(document).ready(function ($) {
     };
  
     function interval() {
-		if(isPause === false){
+		/*if(isPause === false){
 			percentTime += 1 / time;
 			$bar.css({
 				width: percentTime+"%"
@@ -161,7 +160,7 @@ $(document).ready(function ($) {
 			if(percentTime >= 100){
 				$elem.trigger('owl.next')
 			}
-		}
+		}*/
     }
 	
     function pauseOnDragging(){
@@ -396,15 +395,15 @@ $(document).ready(function ($) {
 	/*----------------------------------------------------*/
 	
 	$("[data-progress-animation]").each(function() {
-		
+
 		var $this = $(this);
-		
+
 		$this.appear(function() {
-			
+
 			var delay = ($this.attr("data-appear-animation-delay") ? $this.attr("data-appear-animation-delay") : 1);
-			
+
 			if(delay > 1) $this.css("animation-delay", delay + "ms");
-			
+
 			setTimeout(function() { $this.animate({width: $this.attr("data-progress-animation")}, 800);}, delay);
 
 		}, {accX: 0, accY: -50});
@@ -524,27 +523,27 @@ $(document).ready(function ($) {
 				$('.top-bar').slideUp(300);
 				$("header").addClass("fixed-header");
 				$('.navbar-brand').css({ 'padding-top' : 19 + "px", 'padding-bottom' : 19 + "px" });
-				
+
 				if (/iPhone|iPod|BlackBerry/i.test(navigator.userAgent) || $(window).width() < 479 ){
 					$('.navbar-default .navbar-nav > li > a').css({ 'padding-top' : 0 + "px", 'padding-bottom' : 0 + "px" })
 				}else{
 					$('.navbar-default .navbar-nav > li > a').css({ 'padding-top' : 20 + "px", 'padding-bottom' : 20 + "px" })
 					$('.search-side').css({ 'margin-top' : -7 + "px" });
 				};
-				
+
 			}
 			else {
 				$('.top-bar').slideDown(300);
 				$("header").removeClass("fixed-header");
 				$('.navbar-brand').css({ 'padding-top' : 27 + "px", 'padding-bottom' : 27 + "px" });
-				
+
 				if (/iPhone|iPod|BlackBerry/i.test(navigator.userAgent) || $(window).width() < 479 ){
 					$('.navbar-default .navbar-nav > li > a').css({ 'padding-top' : 0 + "px", 'padding-bottom' : 0 + "px" })
 				}else{
 					$('.navbar-default .navbar-nav > li > a').css({ 'padding-top' : 28 + "px", 'padding-bottom' : 28 + "px" })
 					$('.search-side').css({ 'margin-top' : 0  + "px" });
 				};
-				
+
 			}
 			didScroll = false;
 		}

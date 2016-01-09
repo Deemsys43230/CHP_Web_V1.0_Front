@@ -1595,8 +1595,7 @@ userApp.directive('historyGraph', function () {
         restrict: 'C',
         replace: true,
         scope: {
-            historygraph: '=',
-            test:'='
+            historygraph: '='
         },
         controller: function ($scope, $element, $attrs) {
         },
@@ -1659,10 +1658,6 @@ userApp.directive('historyGraph', function () {
             scope.$watch("historygraph", function (newValue) {
                 chart.series[0].setData(newValue, true);
             }, true);
-            scope.$watch("test", function (newValue) {
-                chart.title.setData(newValue, true);
-            }, true);
-
         }
     }
 });
