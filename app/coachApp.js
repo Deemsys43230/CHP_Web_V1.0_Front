@@ -31,8 +31,7 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                             alert("restricted");
                         }
                         case 403: {
-                            alert("yes !");
-                            alert("Get out");
+                            alert("Your session has been expired.Please login again!!!");
                             $window.location.href="../../#/index";
                            //$location.path("/login");
                             break;
