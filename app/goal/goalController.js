@@ -40,6 +40,7 @@ userApp.controller('GoalController',function($scope,requestHandler,Flash,$route,
         $scope.memberUserIdList=[];
         requestHandler.postRequest("user/getGoalMemberList/",{"goalid" : $routeParams.id}).then(function(response){
             $scope.goalMembers=response.data.Goal_Data;
+
             $.each($scope.goalMembers,function(index,value){
                 $scope.memberUserIdList.push(value.userid);
             });

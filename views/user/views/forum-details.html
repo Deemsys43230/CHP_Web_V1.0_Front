@@ -9,7 +9,7 @@
                     </div>
                 </div>
                 <h4 class="classic-title"><span>Most Viewed</span></h4>
-                <div id="showMostViewed">
+                <div id="showMostViewed" class="wrap">
                     <div ng-repeat="userforum in userforumlist | limitTo:20">
                         <h5><a class="forum-topic wrap" href="#forumDetails/{{userforum.postid}}">{{userforum.posttitle}}</a></h5>
                         <hr/>
