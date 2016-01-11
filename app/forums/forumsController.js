@@ -427,14 +427,18 @@ coachApp.controller('ForumsCoachController',function($scope,requestHandler,Flash
                 requestHandler.postRequest("listofAnswers/", {"postid":value.postid}).then(function(response){
                     value.totalcomment=response.data.ForumDiscussionData.length;
             });
-            $scope.userforumlist.sort(function(a,b){
-                return a.totalcomment > b.totalcomment;
             });
-            $scope.loaded=false;
+           /* $scope.userforumlist.sort(function(a,b){
+                return a.totalcomment > b.totalcomment;
+            });*/
+            $('#showMostViewed').hide();
+            $('#showMostViewed').show(300);
+                 $scope.loaded=false;
 
         },function(){
             errorMessage(Flash,"Please try again later!")
         });
+
     };
 
 
