@@ -623,12 +623,13 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
     //TO Insert weight Goal Log
     $scope.doInsertOrUpdateWeightLog=function(){
         $scope.weightLogDate=$("#weight-log-date").val();
+        $scope.weightlog=$("#weightLog").val();
         $scope.weightUpdateText="Updating...";
         $scope.spinner=true;
 
         requestHandler.getRequest("user/getWeightGoal/","").then(function(response){
 
-            /*if(response.data.Response_status==0){
+            if(response.data.Response_status==0){
                 requestHandler.postRequest("user/weightlogInsertorUpdate/",{"date":$scope.weightLogDate,"weight":$scope.weightlog}).then(function(response){
                     $scope.spinner=false;
                     $scope.weightUpdateText="Update Weight";
@@ -651,7 +652,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
                     $scope.weightIncrease=1;
                     $scope.weightUpdated=1;
                 }
-*/
+
                 requestHandler.postRequest("user/weightlogInsertorUpdate/",{"date":$scope.weightLogDate,"weight":$scope.weightlog}).then(function(response){
 
                     successMessage(Flash, "Successfully Updated!");
@@ -663,7 +664,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
                 }, function () {
                     errorMessage(Flash, "Please try again later!")
                 });
-            /*}*/
+            }
         });
     };
 
