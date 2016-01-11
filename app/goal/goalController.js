@@ -45,14 +45,17 @@ userApp.controller('GoalController',function($scope,requestHandler,Flash,$route,
                 $scope.memberUserIdList.push(value.userid);
             });
             $scope.loaded=false;
-        });
-        requestHandler.getRequest("user/getMyFriendsList/","").then(function(response){
-            $scope.myRemainderFriendsList=[];
-            $.each(response.data.Friends_List,function(index,uservalue){
-                if($scope.memberUserIdList.indexOf(uservalue.userid)=='-1')
-                    $scope.myRemainderFriendsList.push(uservalue);
+
+            requestHandler.getRequest("user/getMyFriendsList/","").then(function(response){
+                $scope.myRemainderFriendsList=[];
+                $.each(response.data.Friends_List,function(index,uservalue){
+
+                    if($scope.memberUserIdList.indexOf(uservalue.userid)=='-1')
+                        $scope.myRemainderFriendsList.push(uservalue);
+                });
             });
         });
+
     };
 
     $scope.doAddMember=function(id){
