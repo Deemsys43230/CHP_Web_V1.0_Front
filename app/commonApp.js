@@ -99,9 +99,9 @@ commonApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'commonApp',
                             files:[
-                                'plugin/vertical-carousel/vertical-carousel.js',
-                                'plugin/vertical-carousel/vertical-carousel.css',
-                                'app/testimonial/testimonialController.js'
+                                '../../plugin/vertical-carousel/vertical-carousel.js',
+                                '../../plugin/vertical-carousel/vertical-carousel.css',
+                                '../../app/testimonial/testimonialController.js'
 
                             ]
                         })
@@ -116,9 +116,9 @@ commonApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'commonApp',
                             files:[
-                                'plugin/vertical-carousel/vertical-carousel.js',
-                                'plugin/vertical-carousel/vertical-carousel.css',
-                                'app/testimonial/testimonialController.js'
+                                '../../plugin/vertical-carousel/vertical-carousel.js',
+                                '../../plugin/vertical-carousel/vertical-carousel.css',
+                                '../../app/testimonial/testimonialController.js'
 
                             ]
                         })
@@ -133,9 +133,9 @@ commonApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'commonApp',
                             files:[
-                                'plugin/vertical-carousel/vertical-carousel.js',
-                                'plugin/vertical-carousel/vertical-carousel.css',
-                                'app/latestNews/latestNewsController.js'
+                                '../../plugin/vertical-carousel/vertical-carousel.js',
+                                '../../plugin/vertical-carousel/vertical-carousel.css',
+                                '../../app/latestNews/latestNewsController.js'
                             ]
                         })
                     }
@@ -149,9 +149,9 @@ commonApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'commonApp',
                             files:[
-                                'plugin/vertical-carousel/vertical-carousel.js',
-                                'plugin/vertical-carousel/vertical-carousel.css',
-                                'app/latestNews/latestNewsController.js'
+                                '../../plugin/vertical-carousel/vertical-carousel.js',
+                                '../../plugin/vertical-carousel/vertical-carousel.css',
+                                '../../app/latestNews/latestNewsController.js'
                             ]
                         })
                     }
@@ -165,8 +165,7 @@ commonApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'commonApp',
                             files:[
-                                'js/bootstrap.min.js',
-                                'app/faq/faqController.js'
+                                '../../app/faq/faqController.js'
                             ]
                         })
                     }
@@ -180,8 +179,7 @@ commonApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'commonApp',
                             files:[
-                                'js/bootstrap.min.js',
-                                'app/instruction/instructionController.js'
+                                '../../app/instruction/instructionController.js'
                             ]
                         })
                     }
@@ -195,8 +193,7 @@ commonApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'commonApp',
                             files:[
-                                'js/bootstrap.min.js',
-                                'app/termsOfUse/termsOfUseController.js'
+                                '../../app/termsOfUse/termsOfUseController.js'
                             ]
                         })
                     }
@@ -210,8 +207,7 @@ commonApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'commonApp',
                             files:[
-                                'js/bootstrap.min.js',
-                                'app/privacyPolicy/privacyPolicyController.js'
+                                '../../app/privacyPolicy/privacyPolicyController.js'
                             ]
                         })
                     }
@@ -223,9 +219,14 @@ commonApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
             });
     }]);
 
-
 //Internal Login Details
-commonApp.controller('LoginController',function($scope,requestHandler,Flash,$window){
+commonApp.controller('LoginController',function($scope,requestHandler,Flash,$window,$location){
+
+    $scope.$on('$routeChangeStart', function(next, current) {
+        $scope.activeClass={};
+        var currentPage = $location.url().substr(1);
+        $scope.activeClass[currentPage]='active';
+    });
 
     $scope.reset=function(){
         $scope.loginForm.$setPristine();

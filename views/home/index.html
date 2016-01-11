@@ -159,12 +159,12 @@
                 <!-- End Search -->
                 <!-- Start Navigation List -->
                 <ul class="nav navbar-nav navbar-right active-class">
-                    <li><a class="active" href="#index">Home</a></li>
-                    <li><a href="#howItWork">How It Works</a></li>
-                    <li><a href="#aboutUs">About Us</a></li>
-                    <li><a href="#portfolio">Portfolio</a></li>
-                    <li><a href="#blog">Blog</a></li>
-                    <li><a href="#contact">Contact</a></li>
+                    <li><a class="{{activeClass.index}}" href="#index">Home</a></li>
+                    <li><a class="{{activeClass.howItWork}}" href="#howItWork">How It Works</a></li>
+                    <li><a class="{{activeClass.aboutUs}}" href="#aboutUs">About Us</a></li>
+                    <li><a class="{{activeClass.portfolio}}" href="#portfolio">Portfolio</a></li>
+                    <li><a class="{{activeClass.blog}}" href="#blog">Blog</a></li>
+                    <li><a class="{{activeClass.contact}}" href="#contact">Contact</a></li>
                 </ul>
                 <!-- End Navigation List -->
             </div>
@@ -440,8 +440,8 @@
                 </div><!-- .col-md-6 -->
                 <div class="col-md-6">
                     <ul class="footer-nav">
-                        <li><a href="#">Sitemap</a>
-                        </li>
+                        <!--<li><a href="#">Sitemap</a>
+                        </li>-->
                         <li><a href="#policy">Privacy Policy</a>
                         </li>
                         <li><a href="#instructions">Instructions</a>
@@ -593,13 +593,6 @@
             $(".header_title").text('Login');
             return false;
         });
-    });
-</script>
-
-<script>
-    $('.active-class a').click(function() {
-        $('.active-class a').removeClass('active');
-        $(this).addClass('active');
     });
 </script>
 

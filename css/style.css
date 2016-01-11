@@ -7718,6 +7718,10 @@ ul.food li .food_name{
     font-weight:500;
 }
 
+.text-darkgray{
+    color: #959595 !important;
+    font-weight:500;
+}
 
 .text-green{
     color: limegreen !important;
