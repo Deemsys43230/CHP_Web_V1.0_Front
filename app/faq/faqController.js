@@ -137,9 +137,68 @@ adminApp.controller('FAQViewController',function($scope,requestHandler,Flash,$ro
     $scope.doGetFAQByID();
 });
 
+adminApp.controller('FAQCommonController',function($scope,requestHandler,Flash){
+
+    // To display FAQ as user
+    $scope.doGetUserFAQ=function(){
+        $scope.loaded=true;
+        requestHandler.getRequest("getFAQListByUser/", "").then(function(response){
+            $scope.userfaqlist=response.data.Faq_Data;
+            $scope.loaded=false;
+        },function(){
+            errorMessage(Flash,"Please try again later!")
+        });
+    };
+
+    // To display the user FAQ list on load
+    $scope.doGetUserFAQ();
+
+});
+
 var commonApp = angular.module('commonApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate']);
 
-commonApp.controller('FAQUserController',function($scope,requestHandler,Flash){
+commonApp.controller('FAQCommonController',function($scope,requestHandler,Flash){
+
+    // To display FAQ as user
+    $scope.doGetUserFAQ=function(){
+        $scope.loaded=true;
+        requestHandler.getRequest("getFAQListByUser/", "").then(function(response){
+            $scope.userfaqlist=response.data.Faq_Data;
+            $scope.loaded=false;
+        },function(){
+            errorMessage(Flash,"Please try again later!")
+        });
+    };
+
+    // To display the user FAQ list on load
+    $scope.doGetUserFAQ();
+
+});
+
+var userApp = angular.module('userApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate']);
+
+userApp.controller('FAQCommonController',function($scope,requestHandler,Flash){
+
+    // To display FAQ as user
+    $scope.doGetUserFAQ=function(){
+        $scope.loaded=true;
+        requestHandler.getRequest("getFAQListByUser/", "").then(function(response){
+            $scope.userfaqlist=response.data.Faq_Data;
+            $scope.loaded=false;
+        },function(){
+            errorMessage(Flash,"Please try again later!")
+        });
+    };
+
+    // To display the user FAQ list on load
+    $scope.doGetUserFAQ();
+
+});
+
+
+var coachApp = angular.module('coachApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate']);
+
+coachApp.controller('FAQCommonController',function($scope,requestHandler,Flash){
 
     // To display FAQ as user
     $scope.doGetUserFAQ=function(){

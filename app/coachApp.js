@@ -382,16 +382,99 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller: 'CoachSubscriptionController'
             }).
+            when('/contact', {
+                templateUrl: '../common/contact.html',
+                resolve: {
+                    loadMyFiles:function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'coachApp',
+                            files:[
+                                '../../app/settings/basicInfoController.js'
+                            ]
+                        })
+                    }
+                },
+                controller:'ContactUsDetailsController'
+            }).
+            when('/FAQ', {
+                templateUrl: '../common/FAQ.html',
+                resolve: {
+                    loadMyFiles:function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'coachApp',
+                            files:[
+                                '../../app/faq/faqController.js'
+                            ]
+                        })
+                    }
+                },
+                controller:'FAQCommonController'
+            }).
+            when('/instructions', {
+                templateUrl: '../common/instruction.html',
+                resolve: {
+                    loadMyFiles:function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'coachApp',
+                            files:[
+                                '../../app/instruction/instructionController.js'
+                            ]
+                        })
+                    }
+                },
+                controller:'InstructionCommonController'
+            }).
+            when('/termsofuse', {
+                templateUrl: '../common/termsofuse.html',
+                resolve: {
+                    loadMyFiles:function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'coachApp',
+                            files:[
+                                '../../app/termsOfUse/termsOfUseController.js'
+                            ]
+                        })
+                    }
+                },
+                controller:'TermsOfUseCommonController'
+            }).
+            when('/policy', {
+                templateUrl: '../common/privacypolicy.html',
+                resolve: {
+                    loadMyFiles:function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'coachApp',
+                            files:[
+                                '../../app/privacyPolicy/privacyPolicyController.js'
+                            ]
+                        })
+                    }
+                },
+                controller:'PrivacyPolicyCommonController'
+            }).
             otherwise({
                 redirectTo: '/dashboard'
             });
     }]);
 
 //Initial Controller for Username
-coachApp.controller("CoachInitialController",function($scope,requestHandler){
+coachApp.controller("CoachInitialController",function($scope,requestHandler,$location){
     requestHandler.getRequest("getUserId/","").then(function(response){
         $scope.username=response.data.User_Profile.name;
     });
+    $scope.$on('$routeChangeStart', function(next, current) {
+        $scope.activeClass={};
+        var currentPage = $location.url().substr(1);
+        $scope.activeClass[currentPage]='active';
+    });
+
+    $scope.getSocialMediaDetails=function(){
+        requestHandler.getRequest("contactus/","").then(function(response){
+            $scope.commonDetails = response.data.Contactus[0];
+        });
+    };
+
+    $scope.getSocialMediaDetails();
 });
 
 //Controller For Logout

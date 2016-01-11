@@ -170,7 +170,7 @@ commonApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         })
                     }
                 },
-                controller:'FAQUserController'
+                controller:'FAQCommonController'
             }).
             when('/instructions', {
                 templateUrl: '../common/instruction.html',
@@ -184,7 +184,7 @@ commonApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         })
                     }
                 },
-                controller:'InstructionUserController'
+                controller:'InstructionCommonController'
             }).
             when('/termsofuse', {
                 templateUrl: '../common/termsofuse.html',
@@ -198,7 +198,7 @@ commonApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         })
                     }
                 },
-                controller:'TermsOfUseUserController'
+                controller:'TermsOfUseCommonController'
             }).
             when('/policy', {
                 templateUrl: '../common/privacypolicy.html',
@@ -212,7 +212,7 @@ commonApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         })
                     }
                 },
-                controller:'PrivacyPolicyUserController'
+                controller:'PrivacyPolicyCommonController'
             }).
             otherwise({
                 redirectTo: '/index'

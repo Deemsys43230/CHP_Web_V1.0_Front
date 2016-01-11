@@ -39,7 +39,7 @@
 <body ng-app="userApp">
 
 <!-- Container -->
-<div id="container" class="boxed-page">
+<div id="container" class="boxed-page" ng-controller="UserInitialController">
 
 <!-- Start Header -->
 <div class="hidden-header"></div>
@@ -52,11 +52,11 @@
                 <div class="col-md-7">
                     <!-- Start Contact Info -->
                     <ul class="contact-details">
-                        <li><a href="#"><i class="fa fa-map-marker"></i> Gahanna, OHIO 43230, U.S.A.</a>
+                        <li><a href="#"><i class="fa fa-map-marker"></i> {{commonDetails.streetaddress}}, {{commonDetails.state}}, {{commonDetails.city}} {{commonDetails.zipcode}}</a>
                         </li>
-                        <li><a href="#"><i class="fa fa-envelope-o"></i> support@deemsysinc.com</a>
+                        <li><a href="#"><i class="fa fa-envelope-o"></i> {{commonDetails.supportemail}}</a>
                         </li>
-                        <li><a href="#"><i class="fa fa-phone"></i> 614-322-9928</a>
+                        <li><a href="#"><i class="fa fa-phone"></i> {{commonDetails.mobile}}</a>
                         </li>
                     </ul>
                     <!-- End Contact Info -->
@@ -67,7 +67,7 @@
                         <li class="navbar-user">
                             <ul class="nav navbar-nav">
                                 <li>
-                                    <a href="#" onclick="return false;" ng-controller="UserInitialController">{{username}}&nbsp;<span class="fa fa-caret-down"></span> </a>
+                                    <a href="#" onclick="return false;">{{username}}&nbsp;<span class="fa fa-caret-down"></span> </a>
                                     <ul class="dropdown">
                                         <li><a href="#profile">My Profile</a></li>
                                         <li><a href="#demography">My Demography</a></li>
@@ -82,16 +82,16 @@
                             </ul>
                         </li>
                         <li>
-                            <a class="facebook itl-tooltip" data-placement="bottom" title="Facebook" href="#"><i class="fa fa-facebook"></i></a>
+                            <a class="facebook itl-tooltip" data-placement="bottom" title="Facebook" target="_blank" href="{{commonDetails.facebookurl}}"><i class="fa fa-facebook"></i></a>
                         </li>
                         <li>
-                            <a class="twitter itl-tooltip" data-placement="bottom" title="Twitter" href="#"><i class="fa fa-twitter"></i></a>
+                            <a class="twitter itl-tooltip" data-placement="bottom" title="Twitter"  target="_blank" href="{{commonDetails.twitterurl}}"><i class="fa fa-twitter"></i></a>
                         </li>
                         <li>
-                            <a class="google itl-tooltip" data-placement="bottom" title="Google Plus" href="#"><i class="fa fa-google-plus"></i></a>
+                            <a class="google itl-tooltip" data-placement="bottom" title="Google Plus" target="_blank" href="{{commonDetails.googleurl}}"><i class="fa fa-google-plus"></i></a>
                         </li>
                         <li>
-                            <a class="linkdin itl-tooltip" data-placement="bottom" title="Linkedin" href="#"><i class="fa fa-linkedin"></i></a>
+                            <a class="linkdin itl-tooltip" data-placement="bottom" title="Linkedin" target="_blank" href="{{commonDetails.linkedinurl}}"><i class="fa fa-linkedin"></i></a>
                         </li>
                     </ul>
                     <!-- End Social Links -->
@@ -128,25 +128,28 @@
                 <!-- Start Navigation List -->
                 <ul class="nav navbar-nav navbar-right active-class">
                     <li>
-                        <a class="active" href="#dashboard">Home</a>
+                        <a class="{{activeClass.dashboard}}" href="#dashboard">Home</a>
                     </li>
                     <li>
-                        <a href="#myCourses">Courses</a>
+                        <a class="{{activeClass.myCourses}}" href="#myCourses">Courses</a>
                     </li>
                     <li>
-                        <a href="#groupGoal">Goal</a>
+                        <a class="{{activeClass.groupGoal}}" href="#groupGoal">Goal</a>
                     </li>
                     <li>
-                        <a href="#coach">Coach</a>
+                        <a class="{{activeClass.coach}}" href="#coach">Coach</a>
+                    </li>
+                    <!--<li>
+                        <a class="{{activeClass.portfolio}}" href="#portfolio">Portfolio</a>
                     </li>
                     <li>
-                        <a href="#portfolio">Portfolio</a>
+                        <a class="{{activeClass.blog}}" href="#blog">Blog</a>
+                    </li>-->
+                    <li>
+                        <a class="{{activeClass.forums}}" href="#forums">Forums</a>
                     </li>
                     <li>
-                        <a href="#blog">Blog</a>
-                    </li>
-                    <li>
-                        <a href="#contact">Contact</a>
+                        <a class="{{activeClass.contact}}" href="#contact">Contact</a>
                     </li>
                 </ul>
                 <!-- End Navigation List -->
@@ -227,8 +230,6 @@
                 </div>
             </div><!-- .col-md-3 -->
             <!-- End Contact Widget -->
-
-
         </div><!-- .row -->
 
         <!-- Start Copyright -->
@@ -239,8 +240,8 @@
                 </div><!-- .col-md-6 -->
                 <div class="col-md-6">
                     <ul class="footer-nav">
-                        <li><a href="#">Sitemap</a>
-                        </li>
+                        <!--<li><a href="#">Sitemap</a>
+                        </li>-->
                         <li><a href="#policy">Privacy Policy</a>
                         </li>
                         <li><a href="#instructions">Instructions</a>
@@ -249,9 +250,9 @@
                         </li>
                         <li><a href="#FAQ">FAQ</a>
                         </li>
-                        <li><a href="#forums">Forums</a>
-                        </li>
-                        <li><a href="#">Contact</a>
+                        <!--<li><a href="#forums">Forums</a>
+                        </li>-->
+                        <li><a href="#contact">Contact</a>
                         </li>
                     </ul>
                 </div><!-- .col-md-6 -->
@@ -312,13 +313,7 @@
 <!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 <script src="../../plugin/highchart/highchart.js"></script>
 <script src="../../plugin/highchart/highchart-more.js"></script>
-
-<script>
-    $('.active-class a').click(function() {
-        $('.active-class a').removeClass('active');
-        $(this).addClass('active');
-    });
-</script>
+<script src="https://maps.googleapis.com/maps/api/js?sensor=false" type="text/javascript"></script>
 
 <script>
     "use strict";

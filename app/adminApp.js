@@ -1042,8 +1042,8 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'AdminPaymentController'
             }).
-          /*  when('/FAQ', {
-                templateUrl: '../../views/common/FAQ.html',
+            when('/FAQ', {
+                templateUrl: '../common/FAQ.html',
                 resolve: {
                     loadMyFiles:function($ocLazyLoad) {
                         return $ocLazyLoad.load({
@@ -1055,7 +1055,7 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         })
                     }
                 },
-                controller:'FAQAdminController'
+                controller:'FAQCommonController'
             }).
             when('/instructions', {
                 templateUrl: '../../views/common/instruction.html',
@@ -1070,7 +1070,7 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         })
                     }
                 },
-                controller:'InstructionAdminController'
+                controller:'InstructionCommonController'
             }).
             when('/termsofuse', {
                 templateUrl: '../../views/common/termsofuse.html',
@@ -1085,10 +1085,10 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         })
                     }
                 },
-                controller:'TermsOfUseAdminController'
+                controller:'TermsOfUseCommonController'
             }).
             when('/policy', {
-                templateUrl: '../../views/common/privacypolicy.html',
+                templateUrl: '../common/privacypolicy.html',
                 resolve: {
                     loadMyFiles:function($ocLazyLoad) {
                         return $ocLazyLoad.load({
@@ -1100,18 +1100,56 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         })
                     }
                 },
-                controller:'PrivacyPolicyAdminController'
-            }).*/
+                controller:'PrivacyPolicyCommonController'
+            }).
+            when('/contact', {
+                templateUrl: '../common/contact.html',
+                resolve: {
+                    loadMyFiles:function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'adminApp',
+                            files:[
+                                '../../js/bootstrap.min.js',
+                                '../../app/settings/basicInfoController.js'
+                            ]
+                        })
+                    }
+                },
+                controller:'ContactUsController'
+            }).
+            when('/portfolio', {
+                templateUrl: '../common/portfolio.html'
+            }).
+            when('/singleProject', {
+                templateUrl: '../common/single-project.html'
+            }).
+            when('/blog', {
+                templateUrl: '../common/blog.html'
+            }).
             otherwise({
                 redirectTo: '/dashboard'
             });
 }]);
 
 //Initial Controller for Username
-adminApp.controller("InitialController",function($scope,requestHandler){
+adminApp.controller("InitialController",function($scope,requestHandler,$location){
     requestHandler.getRequest("getUserId/","").then(function(response){
         $scope.username=response.data.User_Profile.name;
     });
+
+    $scope.$on('$routeChangeStart', function(next, current) {
+        $scope.activeClass={};
+        var currentPage = $location.url().substr(1);
+        $scope.activeClass[currentPage]='active';
+    });
+
+    $scope.getSocialMediaDetails=function(){
+        requestHandler.getRequest("contactus/","").then(function(response){
+            $scope.commonDetails = response.data.Contactus[0];
+        });
+    };
+
+    $scope.getSocialMediaDetails();
 });
 
 //Controller For Logout

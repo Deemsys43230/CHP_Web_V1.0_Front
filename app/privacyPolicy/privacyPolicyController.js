@@ -49,8 +49,35 @@ adminApp.controller('PrivacyPolicyController',function($scope,requestHandler,Fla
     $scope.doGetPrivacyPolicy();
 });
 
+adminApp.controller('PrivacyPolicyCommonController',function($scope,requestHandler,Flash) {
+
+    // To display privacy policy details as user
+    $scope.doGetUserPrivacyPolicy=function(){
+
+        requestHandler.getRequest("getLegalByAll/Privacypolicy/", "").then(function(response){
+
+            $scope.userprivacypolicydetails=response.data.Legal_Data;
+            console.log($scope.userprivacypolicydetails);
+        },function(){
+            errorMessage(Flash,"Please try again later!")
+        });
+    };
+
+    // Display User Privacy policy details On Page Load
+    $scope.doGetUserPrivacyPolicy();
+});
+
+
+
+// html filter (render text as html)
+adminApp.filter('html', ['$sce', function ($sce) {
+    return function (text) {
+        return $sce.trustAsHtml(text);
+    };
+}]);
+
 var commonApp = angular.module('commonApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate']);
-commonApp.controller('PrivacyPolicyUserController',function($scope,requestHandler,Flash) {
+commonApp.controller('PrivacyPolicyCommonController',function($scope,requestHandler,Flash) {
 
     // To display privacy policy details as user
     $scope.doGetUserPrivacyPolicy=function(){
@@ -72,6 +99,60 @@ commonApp.controller('PrivacyPolicyUserController',function($scope,requestHandle
 
 // html filter (render text as html)
 commonApp.filter('html', ['$sce', function ($sce) {
+    return function (text) {
+        return $sce.trustAsHtml(text);
+    };
+}]);
+
+
+var coachApp = angular.module('coachApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate']);
+coachApp.controller('PrivacyPolicyCommonController',function($scope,requestHandler,Flash) {
+
+    // To display privacy policy details as user
+    $scope.doGetUserPrivacyPolicy=function(){
+
+        requestHandler.getRequest("getLegalByAll/Privacypolicy/", "").then(function(response){
+
+            $scope.userprivacypolicydetails=response.data.Legal_Data;
+            console.log($scope.userprivacypolicydetails);
+        },function(){
+            errorMessage(Flash,"Please try again later!")
+        });
+    };
+
+    // Display User Privacy policy details On Page Load
+    $scope.doGetUserPrivacyPolicy();
+});
+
+// html filter (render text as html)
+coachApp.filter('html', ['$sce', function ($sce) {
+    return function (text) {
+        return $sce.trustAsHtml(text);
+    };
+}]);
+
+
+var userApp = angular.module('userApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate']);
+userApp.controller('PrivacyPolicyCommonController',function($scope,requestHandler,Flash) {
+
+    // To display privacy policy details as user
+    $scope.doGetUserPrivacyPolicy=function(){
+
+        requestHandler.getRequest("getLegalByAll/Privacypolicy/", "").then(function(response){
+
+            $scope.userprivacypolicydetails=response.data.Legal_Data;
+            console.log($scope.userprivacypolicydetails);
+        },function(){
+            errorMessage(Flash,"Please try again later!")
+        });
+    };
+
+    // Display User Privacy policy details On Page Load
+    $scope.doGetUserPrivacyPolicy();
+});
+
+// html filter (render text as html)
+userApp.filter('html', ['$sce', function ($sce) {
     return function (text) {
         return $sce.trustAsHtml(text);
     };

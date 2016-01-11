@@ -51,9 +51,32 @@ adminApp.controller('TermsOfUseController',function($scope,requestHandler,Flash,
 
 });
 
+
+adminApp.controller('TermsOfUseCommonController',function($scope,requestHandler,Flash) {
+
+    $scope.doGetUserTermsOfUse=function(){
+        requestHandler.getRequest("getLegalByAll/Termsofuse/", "").then(function(response){
+            $scope.userterms=response.data.Legal_Data;
+        },function(){
+            errorMessage(Flash,"Please try again later!")
+        });
+    };
+
+    // Display User Instruction details On Page Load
+    $scope.doGetUserTermsOfUse();
+
+});
+
+// html filter (render text as html)
+adminApp.filter('html', ['$sce', function ($sce) {
+    return function (text) {
+        return $sce.trustAsHtml(text);
+    };
+}]);
+
 var commonApp = angular.module('commonApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate']);
 
-commonApp.controller('TermsOfUseUserController',function($scope,requestHandler,Flash) {
+commonApp.controller('TermsOfUseCommonController',function($scope,requestHandler,Flash) {
 
     $scope.doGetUserTermsOfUse=function(){
         requestHandler.getRequest("getLegalByAll/Termsofuse/", "").then(function(response){
@@ -74,5 +97,55 @@ commonApp.filter('html', ['$sce', function ($sce) {
         return $sce.trustAsHtml(text);
     };
 }]);
+
+var userApp = angular.module('userApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate']);
+
+userApp.controller('TermsOfUseCommonController',function($scope,requestHandler,Flash) {
+
+    $scope.doGetUserTermsOfUse=function(){
+        requestHandler.getRequest("getLegalByAll/Termsofuse/", "").then(function(response){
+            $scope.userterms=response.data.Legal_Data;
+        },function(){
+            errorMessage(Flash,"Please try again later!")
+        });
+    };
+
+    // Display User Instruction details On Page Load
+    $scope.doGetUserTermsOfUse();
+
+});
+
+// html filter (render text as html)
+userApp.filter('html', ['$sce', function ($sce) {
+    return function (text) {
+        return $sce.trustAsHtml(text);
+    };
+}]);
+
+
+var coachApp = angular.module('coachApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate']);
+
+coachApp.controller('TermsOfUseCommonController',function($scope,requestHandler,Flash) {
+
+    $scope.doGetUserTermsOfUse=function(){
+        requestHandler.getRequest("getLegalByAll/Termsofuse/", "").then(function(response){
+            $scope.userterms=response.data.Legal_Data;
+        },function(){
+            errorMessage(Flash,"Please try again later!")
+        });
+    };
+
+    // Display User Instruction details On Page Load
+    $scope.doGetUserTermsOfUse();
+
+});
+
+// html filter (render text as html)
+coachApp.filter('html', ['$sce', function ($sce) {
+    return function (text) {
+        return $sce.trustAsHtml(text);
+    };
+}]);
+
 
 

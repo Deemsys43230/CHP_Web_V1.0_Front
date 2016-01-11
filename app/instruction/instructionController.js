@@ -50,9 +50,31 @@ adminApp.controller('InstructionController',function($scope,requestHandler,Flash
 
 });
 
+adminApp.controller('InstructionCommonController',function($scope,requestHandler,Flash) {
+
+    $scope.doGetUserInstruction=function(){
+        requestHandler.getRequest("getLegalByAll/Instructions/", "").then(function(response){
+            $scope.userinstructions=response.data.Legal_Data;
+        },function(){
+            errorMessage(Flash,"Please try again later!")
+        });
+    };
+
+    // Display User Instruction details On Page Load
+    $scope.doGetUserInstruction();
+
+});
+
+// html filter (render text as html)
+adminApp.filter('html', ['$sce', function ($sce) {
+    return function (text) {
+        return $sce.trustAsHtml(text);
+    };
+}]);
+
 var commonApp = angular.module('commonApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate']);
 
-commonApp.controller('InstructionUserController',function($scope,requestHandler,Flash) {
+commonApp.controller('InstructionCommonController',function($scope,requestHandler,Flash) {
 
     $scope.doGetUserInstruction=function(){
         requestHandler.getRequest("getLegalByAll/Instructions/", "").then(function(response){
@@ -69,6 +91,55 @@ commonApp.controller('InstructionUserController',function($scope,requestHandler,
 
 // html filter (render text as html)
 commonApp.filter('html', ['$sce', function ($sce) {
+    return function (text) {
+        return $sce.trustAsHtml(text);
+    };
+}]);
+
+var userApp = angular.module('userApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate']);
+
+userApp.controller('InstructionCommonController',function($scope,requestHandler,Flash) {
+
+    $scope.doGetUserInstruction=function(){
+        requestHandler.getRequest("getLegalByAll/Instructions/", "").then(function(response){
+            $scope.userinstructions=response.data.Legal_Data;
+        },function(){
+            errorMessage(Flash,"Please try again later!")
+        });
+    };
+
+    // Display User Instruction details On Page Load
+    $scope.doGetUserInstruction();
+
+});
+
+// html filter (render text as html)
+userApp.filter('html', ['$sce', function ($sce) {
+    return function (text) {
+        return $sce.trustAsHtml(text);
+    };
+}]);
+
+
+var coachApp = angular.module('coachApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate']);
+
+coachApp.controller('InstructionCommonController',function($scope,requestHandler,Flash) {
+
+    $scope.doGetUserInstruction=function(){
+        requestHandler.getRequest("getLegalByAll/Instructions/", "").then(function(response){
+            $scope.userinstructions=response.data.Legal_Data;
+        },function(){
+            errorMessage(Flash,"Please try again later!")
+        });
+    };
+
+    // Display User Instruction details On Page Load
+    $scope.doGetUserInstruction();
+
+});
+
+// html filter (render text as html)
+coachApp.filter('html', ['$sce', function ($sce) {
     return function (text) {
         return $sce.trustAsHtml(text);
     };

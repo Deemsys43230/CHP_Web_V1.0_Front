@@ -304,7 +304,7 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller: 'FriendsController'
             }).
-            when('/portfolio', {
+            /*when('/portfolio', {
                 templateUrl: '../common/portfolio.html'
             }).
             when('/singleProject', {
@@ -312,9 +312,20 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
             }).
             when('/blog', {
                 templateUrl: '../common/blog.html'
-            }).
+            }).*/
             when('/contact', {
-                templateUrl: '../common/contact.html'
+                templateUrl: '../common/contact.html',
+                resolve: {
+                    loadMyFiles:function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'userApp',
+                            files:[
+                                '../../app/settings/basicInfoController.js'
+                            ]
+                        })
+                    }
+                },
+                controller:'ContactUsDetailsController'
             }).
             when('/profile', {
                 templateUrl: 'views/profile.html',
@@ -494,16 +505,87 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 controller:'GoalController',
                 request:1
             }).
+            when('/FAQ', {
+                templateUrl: '../common/FAQ.html',
+                resolve: {
+                    loadMyFiles:function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'userApp',
+                            files:[
+                                '../../app/faq/faqController.js'
+                            ]
+                        })
+                    }
+                },
+                controller:'FAQCommonController'
+            }).
+            when('/instructions', {
+                templateUrl: '../common/instruction.html',
+                resolve: {
+                    loadMyFiles:function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'userApp',
+                            files:[
+                                '../../app/instruction/instructionController.js'
+                            ]
+                        })
+                    }
+                },
+                controller:'InstructionCommonController'
+            }).
+            when('/termsofuse', {
+                templateUrl: '../common/termsofuse.html',
+                resolve: {
+                    loadMyFiles:function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'userApp',
+                            files:[
+                                '../../app/termsOfUse/termsOfUseController.js'
+                            ]
+                        })
+                    }
+                },
+                controller:'TermsOfUseCommonController'
+            }).
+            when('/policy', {
+                templateUrl: '../common/privacypolicy.html',
+                resolve: {
+                    loadMyFiles:function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'userApp',
+                            files:[
+                                '../../app/privacyPolicy/privacyPolicyController.js'
+                            ]
+                        })
+                    }
+                },
+                controller:'PrivacyPolicyCommonController'
+            }).
             otherwise({
                 redirectTo: '/dashboard'
             });
 }]);
 
 //Initial Controller for Username
-userApp.controller("UserInitialController",function($scope,requestHandler){
+userApp.controller("UserInitialController",function($scope,requestHandler,$location){
     requestHandler.getRequest("getUserId/","").then(function(response){
         $scope.username=response.data.User_Profile.name;
     });
+
+    $scope.$on('$routeChangeStart', function(next, current) {
+        $scope.activeClass={};
+        var currentPage = $location.url().substr(1);
+        $scope.activeClass[currentPage]='active';
+    });
+
+    $scope.getSocialMediaDetails=function(){
+        requestHandler.getRequest("contactus/","").then(function(response){
+            $scope.commonDetails = response.data.Contactus[0];
+        });
+    };
+
+    $scope.getSocialMediaDetails();
+
 });
 
 //Controller For Logout
