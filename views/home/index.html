@@ -501,7 +501,8 @@
 <script type="text/javascript" src="../../js/jquery.textillate.js"></script>
 <script type="text/javascript" src="../../js/jquery.lettering.js"></script>
 <script type="text/javascript" src="../../js/jquery.easypiechart.min.js"></script>
-<script type="text/javascript" src="../../js/jquery.nicescroll.js"></script>
+<script type="text/javascript" src="../../plugin/scroll/jquery.nicescroll.min.js"></script>
+
 <script type="text/javascript" src="../../js/jquery.parallax.js"></script>
 <script type="text/javascript" src="../../js/mediaelement-and-player.js"></script>
 
@@ -516,6 +517,7 @@
 
 <!-- Pop-up Styles  -->
 <script type="text/javascript" src="../../plugin/popup/jquery.leanModal.min.js"></script>
+
 
 <script type="text/javascript">
     $("#modal_trigger").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
@@ -617,19 +619,10 @@
         headerEle();
     });
 
-    /*Nice-Scroll*/
-    $("html").niceScroll({
-        scrollspeed: 100,
-        mousescrollstep: 38,
-        cursorwidth: 5,
-        autohidemode:false,
-        cursorborder: 0,
-        cursorcolor: '#333',
-        zindex: 999999999,
-        horizrailenabled: false,
-        cursorborderradius: 0
+    /*Scroll*/
+    $(document).ready(function() {
+        $('body').niceScroll();  // The document page (body)
     });
-
 
     $(document).ready(function () {
         $('#pswd').keyup(function () {

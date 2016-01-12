@@ -279,7 +279,7 @@
 <script type="text/javascript" src="../../js/jquery.textillate.js"></script>
 <script type="text/javascript" src="../../js/jquery.lettering.js"></script>
 <script type="text/javascript" src="../../js/jquery.easypiechart.min.js"></script>
-<script type="text/javascript" src="../../js/jquery.nicescroll.min.js"></script>
+<script type="text/javascript" src="../../plugin/scroll/jquery.nicescroll.min.js"></script>
 <script type="text/javascript" src="../../js/jquery.parallax.js"></script>
 <script type="text/javascript" src="../../angular/angular-utils-pagination/dirPagination.js"></script>
 <script type="text/javascript" src="../../angular/angular-image-upload.js"></script>
@@ -309,17 +309,9 @@
         headerEle();
     });
 
-    /*Nice-Scroll*/
-    $("html").niceScroll({
-        scrollspeed: 100,
-        mousescrollstep: 38,
-        cursorwidth: 5,
-        cursorborder: 0,
-        cursorcolor: '#333',
-        autohidemode: true,
-        zindex: 999999999,
-        horizrailenabled: false,
-        cursorborderradius: 0
+    /*Scroll*/
+    $(document).ready(function() {
+        $('body').niceScroll();  // The document page (body)
     });
 </script>
 </body>
