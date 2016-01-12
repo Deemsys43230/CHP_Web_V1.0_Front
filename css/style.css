@@ -732,6 +732,11 @@ header {
 	border-left: 1px solid rgba(255,255,255,.1);
 }
 
+.top-bar.color-bar .contact-details li a{
+    cursor: default !important;
+    pointer-events:none !important;
+}
+
 .top-bar.color-bar ul.social-list li:last-child a i {
 	border-right: 1px solid rgba(255,255,255,.1);
 }

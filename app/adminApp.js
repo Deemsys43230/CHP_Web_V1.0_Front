@@ -1146,6 +1146,7 @@ adminApp.controller("InitialController",function($scope,requestHandler,$location
     $scope.getSocialMediaDetails=function(){
         requestHandler.getRequest("contactus/","").then(function(response){
             $scope.commonDetails = response.data.Contactus[0];
+            $scope.contactUsDetails=$scope.commonDetails;
         });
     };
 
