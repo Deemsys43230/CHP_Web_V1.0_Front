@@ -1,5 +1,5 @@
 var userApp= angular.module('userApp', ['ngRoute','oc.lazyLoad','ngCookies','requestModule','flash']);
-userApp.controller('DemographyController',['$scope','requestHandler','Flash',function($scope,requestHandler,Flash) {
+userApp.controller('DemographyController',['$scope','requestHandler','Flash','$location',function($scope,requestHandler,Flash,$location) {
     var originalDemography="";
     var originalNutrition="";
     $scope.doGetDemographyandNutrition = function () {
@@ -55,9 +55,20 @@ userApp.controller('DemographyController',['$scope','requestHandler','Flash',fun
             $scope.demography.height = parseFloat($scope.demography.height);
             $scope.demography.weight = parseFloat($scope.demography.weight);
             $scope.demography.hip = parseFloat($scope.demography.hip);
+            $scope.demography.obesity=parseFloat($scope.demography.obesity);
+            $scope.demography.diabetes=parseFloat($scope.demography.diabetes);
+
+       if( $scope.demography.obesity == '0'){
+           $scope.demography.obesity="";
+       }
+        if($scope.demography.diabetes == '0'){
+            $scope.demography.diabetes="";
+        }
             requestHandler.putRequest("user/insertorupdateDemography/",$scope.demography).then(function(response){
                 $scope.doGetDemographyandNutrition();
+                //$location.path("/demography");
                 successMessage(Flash,"Successfully Updated");
+
             }, function () {
                 errorMessage(Flash, "Please try again later!")
             });
@@ -78,6 +89,15 @@ userApp.controller('DemographyController',['$scope','requestHandler','Flash',fun
 
     $scope.isCleanNutrition =function(){
         return angular.equals(originalNutrition, $scope.nutrients);
+    };
+
+    $scope.valcheck=function(){
+        if($scope.demography.obesity == "true"){
+            $scope.demography.obesity ="1";
+        }
+        else{
+            $scope.demography.obesity="";
+        }
     };
 
     $scope.doGetDemographyandNutrition();
