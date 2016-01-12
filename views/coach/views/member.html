@@ -34,7 +34,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr  dir-paginate="mymembers in memberfilter=(myMembersList | filter:membersearch | itemsPerPage: 10 )" ng-show="myMembersList.length!=0">
+                        <tr  dir-paginate="mymembers in memberfilter=(myMembersList | startsWithLetterMember : membersearch | itemsPerPage: 10 )" ng-show="myMembersList.length!=0">
                             <td>{{mymembers.userid}}</td>
                             <td>{{mymembers.name}}</td>
                             <td>{{mymembers.emailid}}</td>

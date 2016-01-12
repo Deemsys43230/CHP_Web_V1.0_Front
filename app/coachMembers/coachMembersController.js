@@ -57,3 +57,21 @@ coachApp.controller('MembersViewController',function($scope,requestHandler,Flash
     $scope.doViewMembers();
 
 });
+
+coachApp.filter('startsWithLetterMember', function () {
+
+    return function (items, membersearch) {
+        var filtered = [];
+        var letterMatch = new RegExp(membersearch, 'i');
+        if(!items){}
+        else{
+            for (var i = 0; i < items.length; i++) {
+                var item = items[i];
+                if (letterMatch.test(item.name) || letterMatch.test(item.emailid)) {
+                    filtered.push(item);
+                }
+            }
+        }
+        return filtered;
+    };
+});
