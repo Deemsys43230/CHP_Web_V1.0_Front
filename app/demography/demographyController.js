@@ -5,14 +5,14 @@ userApp.controller('DemographyController',['$scope','requestHandler','Flash',fun
     $scope.doGetDemographyandNutrition = function () {
 
         requestHandler.getRequest("user/getDemography/","").then(function(response) {
-            $scope.demography = response.data.Demography_Data[0];
+            $scope.demography = response.data.Demography_Data;
             //Copy Original
             $scope.demography.height=$scope.demography.height.toString();
             $scope.demography.weight=$scope.demography.weight.toString();
             $scope.demography.hip=$scope.demography.hip.toString();
             $scope.demography.waist=$scope.demography.waist.toString();
 
-            originalDemography=angular.copy(response.data.Demography_Data[0]);
+            originalDemography=angular.copy(response.data.Demography_Data);
 
         });
         requestHandler.getRequest("user/getNutrition/","").then(function(response) {

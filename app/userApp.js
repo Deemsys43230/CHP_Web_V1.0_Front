@@ -352,6 +352,7 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'userApp',
                             files:[
+                                '../../css/custom-inputs.css',
                                 '../../app/demography/demographyController.js'
                             ]
                         })

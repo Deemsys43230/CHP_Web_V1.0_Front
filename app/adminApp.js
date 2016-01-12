@@ -1267,6 +1267,38 @@ adminApp.directive("categoryexists", function ($q, $timeout,requestHandler) {
     };
 });
 
+
+//Category Already Exists
+adminApp.directive("measureexists", function ($q, $timeout,requestHandler) {
+
+    return {
+        restrict: "A",
+        require: "ngModel",
+        scope: {
+            "measureid" : "="
+        },
+        link: function (scope, element, attributes, ngModel) {
+            ngModel.$asyncValidators.measureexists = function (modelValue) {
+                var defer = $q.defer();
+                $timeout(function () {
+                    var measureid = scope.measureid;
+                    var sendRequest=requestHandler.postRequest("admin/checkMeasureNameExists/",{"measurename":modelValue,"measureid":measureid}).then(function(response){
+                        if (response.data.Response_status==0){
+                            defer.resolve();
+                        }
+                        else{
+                            defer.reject();
+                        }
+                    });
+
+                }, 10);
+
+                return defer.promise;
+            }
+        }
+    };
+});
+
 //Food Already Exists
 adminApp.directive("foodexists", function ($q, $timeout,requestHandler) {
 

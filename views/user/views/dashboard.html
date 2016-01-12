@@ -477,7 +477,7 @@
         <div flash-message="2000"></div>
         <div class="common_model">
 
-            <form name="foodSuggestForm" id="suggestform">
+            <form name="foodSuggestForm" id="suggestform" novalidate>
             <p>Food Name:</p>
             <input type="text" name="foodname" data-foodid="foodSuggest.foodid" ng-model="foodSuggest.foodname" ng-pattern="/^ *([a-zA-Z]+ ?)+ *$/" maxlength="100" foodexists required />
              <span ng-show="foodSuggestForm.foodname.$dirty&&foodSuggestForm.foodname.$invalid">
@@ -510,7 +510,7 @@
         <!-- Register Form -->
         <div flash-message="2000"></div>
         <div class="common_model">
-            <form name="exerciseSuggestForm">
+            <form name="exerciseSuggestForm" novalidate>
             <p>Exercise Name:</p>
             <input type="text" name="exercisename" data-exerciseid="exerciseSuggest.exerciseid" ng-model="exerciseSuggest.exercisename" ng-pattern="/^ *([a-zA-Z0-9]+ ?)+ *$/" maxlength="100" exerciseexists required />
             <span ng-show="exerciseSuggestForm.exercisename.$dirty&&exerciseSuggestForm.exercisename.$invalid">
@@ -545,7 +545,7 @@
             <div class="user_register">
                 <div class="row">
                     <div class="col-md-6">
-                        <form name="FoodAddForm">
+                        <form name="FoodAddForm" novalidate>
                         <h5>Food Name:</h5>
                         <p>{{userSelectedFoodDetails.foodname}}</p>
                         <h5 class="margin-top-10">Select Measure:</h5>
@@ -613,7 +613,7 @@
             <div class="user_register">
                 <div class="row">
                     <div class="col-md-6">
-                        <form name="ExerciseAddForm">
+                        <form name="ExerciseAddForm" novalidate>
                             <h5>Exercise Name:</h5>
                             <p>{{userSelectedExerciseDetails.exercisename}}</p>
                             <h5 class="margin-top-10">Select Level:</h5>
@@ -697,7 +697,7 @@
                     {{setGoalDetails.targetweight}} Kgs
                 </div>
             </div>
-            <form name="demographyForm">
+            <form name="demographyForm" novalidate>
                 <p>Update your current weight:</p>
                 <input class="profile_input"  name="weight" ng-pattern="/^\-?\d+((\.|\,)\d+)?$/" ng-model="demography.weight" maxlength="5" required validate-Float1/>
                 <span ng-show="demographyForm.weight.$dirty&&demographyForm.weight.$invalid">
