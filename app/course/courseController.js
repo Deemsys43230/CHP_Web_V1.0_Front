@@ -413,6 +413,12 @@ adminApp.controller('CourseAdminController',['$scope','requestHandler','Flash','
     $scope.pendingcourselist();
     };
 
+    $scope.resetrejectdata= function(){
+        $scope.comments={};
+        $scope.comments="";
+        $scope.courseRejectForm.$setPristine();
+    };
+
     $scope.publishedCourses();
 
     // Search Food Type
@@ -427,6 +433,7 @@ adminApp.controller('CourseAdminController',['$scope','requestHandler','Flash','
     });
 
     $scope.modal =function(courseid){
+
 
         $scope.courseid = courseid;
 
@@ -444,13 +451,15 @@ adminApp.controller('CourseAdminController',['$scope','requestHandler','Flash','
         $(".modal_close").click(function(){
             $(".common_model").hide();
             $(".modalRejectCourse").hide();
-            $("#lean_overlay").hide();
+            $("#lean_overlay").hide()
+            $scope.resetrejectdata();
         });
 
         $("#lean_overlay").click(function(){
             $(".common_model").hide();
             $(".modalRejectCourse").hide();
             $("#lean_overlay").hide();
+            $scope.resetrejectdata();
         });
 
     };

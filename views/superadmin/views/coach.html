@@ -17,8 +17,8 @@
                 </span>
 
                 <p>Email</p>
-                <input type="email" name="emailid" ng-model="coach.emailid" required emailexists/>
-                <span ng-show="coachRegisterForm.emailid.$dirty&&coachRegisterForm.emailid.$invalid">
+                <input type="email" name="emailid" ng-model="coach.emailid" required validate-email emailexists/>
+                <span ng-show="coachRegisterForm.emailid.$dirty&&coachRegisterForm.emailid.$invalid && !coachRegisterForm.emailid.$pristine">
                     <span class="error-message" ng-show="coachRegisterForm.emailid.$error.required"><span>Required.</span></span>
                     <span class="error-message" ng-show="coachRegisterForm.emailid.$error.email"><span>Enter&nbsp;valid&nbsp;Email&nbsp;ID</span></span>
                 </span>

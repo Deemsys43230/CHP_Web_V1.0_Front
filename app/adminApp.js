@@ -1448,6 +1448,8 @@ adminApp.directive('validateEmail', function() {
     };
 });
 
+
+
 //Check For URL Validation
 adminApp.directive('validateUrl', function() {
    
