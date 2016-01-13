@@ -6508,7 +6508,9 @@ ul.footer-nav li a:hover {
   text-align:right; 
 }
 
-
+.nav.navbar-nav.navbar-right{
+    right:-25px !important;
+}
 
 .purchase {
     background: rgba(0,0,0,0.3);

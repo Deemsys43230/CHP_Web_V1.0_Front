@@ -1285,18 +1285,12 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
     //Initialize
     $scope.initialLoadFoodAndExercise=function(){
         if($scope.selectedDate==selectedDate){
-
-            /*alert("1");*/
-
             $scope.loadFoodDiary($scope.selectedDate);
             $scope.loadExerciseDiary($scope.selectedDate);
             $scope.doGetIntakeBruntByDate($scope.selectedDate);
             $scope.goGetDailyIntakeGraph($scope.selectedDate);
         }
         else{
-
-            /*alert("2");*/
-
             $scope.loadFoodDiary($scope.selectedDate.format("dd/mm/yyyy"));
             $scope.loadExerciseDiary($scope.selectedDate.format("dd/mm/yyyy"));
             $scope.doGetIntakeBruntByDate($scope.selectedDate.format("dd/mm/yyyy"));

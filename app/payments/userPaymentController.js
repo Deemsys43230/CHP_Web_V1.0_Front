@@ -4,8 +4,8 @@ userApp.controller('UserPaymentController',function($scope,requestHandler,Flash,
 
     // To display Course list by user
     $scope.doGetMyCourseListByUser=function(){
-        requestHandler.getRequest("user/getallCoachListbyUser/", "").then(function(response){
-            $scope.usercourselist=response.data.getallCoachListbyUser;
+        requestHandler.getRequest("user/getMyCoursePurchaseList/", "").then(function(response){
+            $scope.usercourselist=response.data.courselist;
         },function(){
             errorMessage(Flash,"Please try again later!")
         });
