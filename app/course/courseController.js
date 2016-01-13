@@ -79,7 +79,7 @@ userApp.controller('CourseController',['$scope','requestHandler','Flash','$route
     };
 
     $scope.courselist = function(){
-        requestHandler.postRequest("getPublishedCourse/",{"offset":0}).then(function(response) {
+        requestHandler.postRequest("getPublishedCourse/",{"offset":0,"limit":10}).then(function(response) {
             $scope.courseList = response.data.published_Course;
             $('#callCarousel').hide();
             callCarousel();
@@ -89,9 +89,9 @@ userApp.controller('CourseController',['$scope','requestHandler','Flash','$route
     };
 
     $scope.doEnrollCourse = function(course){
-        requestHandler.postRequest("user/enrollCourse/",{"courseid":course}).then(function(response){
-            $location.path("thanksEnrollPage/"+course);
-            successMessage(Flash,"Successfully Enrolled");
+        requestHandler.postRequest("user/enrollCourse/",{"courseid":course,"returnUrl":"http://localhost/cyber/views/user/#/thanksEnrollPage/"+course,"cancelUrl":"http://www.example.com/"}).then(function(response){
+            window.location=response.data.approveURL.href;
+           // successMessage(Flash,"Successfully Enrolled");
         },function(){
             errorMessage(Flash,"Please try again later!")
         });
@@ -222,7 +222,7 @@ var adminApp= angular.module('adminApp', ['ngRoute','oc.lazyLoad','ngCookies','r
 adminApp.controller('CourseAdminController',['$scope','requestHandler','Flash','$routeParams','$location',function($scope,requestHandler,Flash,$routeParams,$location) {
 
     $scope.courselist = function(){
-        requestHandler.postRequest("getPublishedCourse/",{"offset":0}).then(function(response) {
+        requestHandler.postRequest("getPublishedCourse/",{"offset":0,"limit":10}).then(function(response) {
             $scope.courseList = response.data.published_Course;
             $scope.paginationLoad=true;
 

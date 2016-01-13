@@ -57,7 +57,7 @@
                                 <!--<h5 class="margin-top-10" ng-show="courseDetails.enrollmentStatus==0"><i class="fa fa-users text-gray"></i> - {{courseDetails.enrollcount}} Students</h5>
                                 <h5 class="margin-top-10"><i class="fa fa-book text-gray"></i> - {{sectionList.length}} Sections</h5>-->
                             </div>
-                            <span ng-show="courseDetails.enrollmentStatus==0" ng-if="courseDetails.role=='user'"><a href="https://www.paypal.com/signin/" target="_blank" class="col-md-12 suggest_button margin-top-10" ng-click="doEnrollCourse(courseDetails.courseid)">Enroll to this course</a></span>
+                            <span ng-show="courseDetails.enrollmentStatus==0" ng-if="courseDetails.role=='user'"><a href=""class="col-md-12 suggest_button margin-top-10" ng-click="doEnrollCourse(courseDetails.courseid)">Enroll to this course</a></span>
                             <span ng-show="courseDetails.publishedon==null" ng-if="courseDetails.role=='admin'" ><a href="" id="modal_trigger1" class="col-md-12 suggest_button margin-top-10" ng-click="acceptModal(courseDetails.courseid)">Accept this course</a></span>
                             <span ng-show="courseDetails.publishedon==null" ng-if="courseDetails.role=='admin'"><a href="" class="col-md-12 suggest_button red_button modal_trigger" ng-click="modal(courseDetails.courseid)">Reject this course</a></span>
                         </div>
