@@ -89,17 +89,21 @@ userApp.controller('CourseController',['$scope','requestHandler','Flash','$route
     };
 
     $scope.doEnrollCourse = function(course){
-        requestHandler.postRequest("user/enrollCourse/",{"courseid":course,"returnUrl":"http://localhost/cyber/views/user/#/thanksEnrollPage/"+course,"cancelUrl":"http://www.example.com/"}).then(function(response){
-            window.location=response.data.approveURL.href;
-           // successMessage(Flash,"Successfully Enrolled");
+        requestHandler.postRequest("user/enrollCourse/",{"courseid":course,"returnUrl":"http://localhost/cyber/views/user/#/thanksEnrollPage/"+course,"cancelUrl":"http://localhost/cyber/views/user/#/courses"}).then(function(response){
+            if(response.data.transactionStatus==1){
+                window.location=response.data.approveURL.href;
+            }
+            else if(response.data.transactionStatus==2){
+                window.location="http://localhost/cyber/views/user/#/thanksEnrollPage/"+course;
+            }
+            //successMessage(Flash,"Successfully Enrolled");
         },function(){
             errorMessage(Flash,"Please try again later!")
         });
     };
 
     $scope.checkenroll = function(){
-       // alert("Please enroll the course to view details!!!");
-
+        // alert("Please enroll the course to view details!!!");
         $(function(){
             $("#lean_overlay").fadeTo(1000);
             $("#enrollmodal").fadeIn(600);
@@ -156,7 +160,7 @@ userApp.controller('CourseController',['$scope','requestHandler','Flash','$route
 
         });
 
-    }
+    };
 
     $scope.getPreviousIndex = function() {
 
@@ -187,11 +191,11 @@ userApp.controller('CourseController',['$scope','requestHandler','Flash','$route
             $scope.nextdisable=false;
 
         });
-    }
+    };
 
     $scope.courseinit=function(){
         $scope.courselist();
-    }
+    };
 
     $scope.mycourselist();
 

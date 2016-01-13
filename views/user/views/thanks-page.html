@@ -11,9 +11,15 @@
                     <h2 class="text-gray">Processing....</h2>
                 </div>
                 <div class="col-md-10" ng-show="completed">
-                    <h1 class="text-bold text-orange thanks-h1">THANKS FOR YOUR <br/>SUBSCRIPTION</h1>
-                    <h1 class="text-gray margin-top-20">YOUR SUBSCRIPTION IS SUCCESSFULLY COMPLETED</h1>
-                    <h2 class="text-gray" id="countmesg"></h2>
+                    <div ng-show="!transactionSucceed"><br/></br></br>
+                        <img class="text-center" src="../../images/alert.png">
+                        <h1 class="text-orange margin-top-20 sorry-h1">SORRY, YOU CAN'T ENROLL AT THIS TIME</h1>
+                    </div>
+                    <div ng-show="transactionSucceed">
+                        <h1 class="text-bold text-orange thanks-h1">THANKS FOR YOUR <br/>SUBSCRIPTION</h1>
+                        <h1 class="text-gray margin-top-20">YOUR SUBSCRIPTION IS SUCCESSFULLY COMPLETED</h1>
+                    </div>
+                    <h4 class="text-gray" id="countmesg"></h4>
                 </div>
             </div>
         </div><!-- @end #content -->
