@@ -389,7 +389,7 @@ adminApp.controller('CourseAdminController',['$scope','requestHandler','Flash','
 
 
     $scope.doRejectCourse = function(course){
-        requestHandler.postRequest("admin/rejectCourse/",{"courseid":course}).then(function(response){
+        requestHandler.postRequest("admin/rejectCourse/",{"courseid":course,"comments":$scope.comments}).then(function(response){
             if($scope.page == 'pending'){
                 $scope.pendingcourselist();
                 successMessage(Flash,"Successfully Rejected");
@@ -674,24 +674,29 @@ coachApp.controller('CourseController',function($scope,requestHandler,Flash,$rou
         });
     };
 
-    $scope.reviewModel=function(){
-        $(function(){
-            $("#lean_overlay").fadeTo(1000);
-            $("#review-modal").fadeIn(600);
-            $(".common_model").show();
+    $scope.reviewModel=function(id){
+        requestHandler.postRequest("coach/sendCourseForReview/",{"courseid":id}).then(function(response) {
+            $scope.response=response.data.Response_status;
+            $(function(){
+                $("#lean_overlay").fadeTo(1000);
+                $("#review-modal").fadeIn(600);
+                $(".common_model").show();
+            });
+
+            $(".modal_close").click(function(){
+                $(".common_model").hide();
+                $("#review-modal").hide();
+                $("#lean_overlay").hide();
+            });
+
+            $("#lean_overlay").click(function(){
+                $(".common_model").hide();
+                $("#review-modal").hide();
+                $("#lean_overlay").hide();
+            });
+
         });
 
-        $(".modal_close").click(function(){
-            $(".common_model").hide();
-            $("#review-modal").hide();
-            $("#lean_overlay").hide();
-        });
-
-        $("#lean_overlay").click(function(){
-            $(".common_model").hide();
-            $("#review-modal").hide();
-            $("#lean_overlay").hide();
-        });
     };
 
     $scope.sectionDeleteModel=function(id){
