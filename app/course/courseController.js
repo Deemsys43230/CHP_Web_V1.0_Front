@@ -655,6 +655,7 @@ coachApp.controller('CourseController',function($scope,requestHandler,Flash,$rou
 
     $scope.sendCourseToReview=function(id){
         requestHandler.postRequest("coach/sendCourseForReview/",{"courseid":id}).then(function(response) {
+
             successMessage(Flash,"Course Sent for Review!");
             if(!$routeParams.id){
                 $location.path("courseView/"+id);
@@ -677,6 +678,7 @@ coachApp.controller('CourseController',function($scope,requestHandler,Flash,$rou
     $scope.reviewModel=function(id){
         requestHandler.postRequest("coach/sendCourseForReview/",{"courseid":id}).then(function(response) {
             $scope.response=response.data.Response_status;
+            alert($scope.response);
             $(function(){
                 $("#lean_overlay").fadeTo(1000);
                 $("#review-modal").fadeIn(600);

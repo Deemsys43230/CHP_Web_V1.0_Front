@@ -25,7 +25,7 @@
                                 <h4>Paypal Email :</h4>
                             </div>
                             <div class="col-md-9 margin-top-10">
-                                <input type="text" class="search-input" placeholder="Enter Paypal Email ID" name="paypalid" ng-model="paypalSettings.paypalid" required>
+                                <input type="text" class="search-input" placeholder="Enter Paypal Email ID" name="paypalid" ng-model="paypalDetails.paypalid" required>
                                  <span ng-show="paypalSettingsForm.paypalid.$dirty&&paypalSettingsForm.paypalid.$invalid">
                                         <span class="error-message" ng-show="paypalSettingsForm.paypalid.$error.required"><span>Required.</span></span>
                                  </span>
@@ -34,7 +34,7 @@
                                 <h4>Paypal Name :</h4>
                             </div>
                             <div class="col-md-9 margin-top-10">
-                                <input class="search-input" name="paypalname" placeholder="Enter Paypal User Name" ng-model="paypalSettings.paypalname" required>
+                                <input class="search-input" name="paypalname" placeholder="Enter Paypal User Name" ng-model="paypalDetails.paypalname" required>
                                  <span ng-show="paypalSettingsForm.paypalname.$dirty&&paypalSettingsForm.paypalname.$invalid">
                                         <span class="error-message" ng-show="paypalSettingsForm.paypalname.$error.required"><span>Required.</span></span>
                                  </span>
@@ -43,25 +43,20 @@
                                 <h4>Currency :</h4>
                             </div>
                             <div class="col-md-9 margin-top-10">
-                                <select class="full-width course-select" placeholder="Select Currency" name="" required>
-                                    <option selected>Dollar</option>
-                                    <option>Rupees</option>
+                                <select class="full-width course-select" placeholder="Select Currency" name="currencycode" ng-model="paypalDetails.currencycode" ng-options="currencycode.currencycode as currencycode.currencycode for currencycode in currencycodeData" required>
+                                        <option value="">-- Select a Currency Code --</option>
                                 </select>
+                                <span ng-show="paypalSettingsForm.currencycode.$dirty&&paypalSettingsForm.currencycode.$invalid">
+                    <span class="error-message textarea-errormessage10" ng-show="paypalSettingsForm.currencycode.$error.required"><span>Required.</span></span>
+                             </span>
                             </div>
-                            <div class="col-md-3 margin-top-15">
-                                <h4>Privacy :</h4>
-                            </div>
-                            <div class="col-md-9 margin-top-15 margin-bottom-20">
-                                <input type="radio" id="1" class="height" name="sex" value="1" ng-model="userProfile.gender"   required/>
-                                <label for="1">Yes</label>
-                                <input type="radio" id="2" class="height" name="sex" value="2" ng-model="userProfile.gender"   required/>
-                                <label for="2">No</label>
-                            </div>
+
                         </div>
-                    </form>
-                    <div class="text-center">
-                        <a href="" class="btn btn-success">Save Changes</a>
+
+                    <div class="text-center margin-top-10">
+                        <a href=""  class="btn btn-success" ng-disabled="paypalSettingsForm.$invalid || isCleanPaypalSettings()" ng-click="doUpdatePaypalDetails()">Save Changes</a>
                     </div>
+                    </form>
                 </div>
             </div>
         </div>

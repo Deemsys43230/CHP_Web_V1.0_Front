@@ -210,6 +210,21 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller: 'UserPaymentController'
             }).
+            when('/paymentSettings', {
+                templateUrl: 'views/payment-settings.html',
+                resolve: {
+                    loadMyFiles:function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'userApp',
+                            files:[
+                                '../../angular/angular-utils-pagination/dirPagination.js',
+                                '../../app/payments/userPaymentController.js'
+                            ]
+                        })
+                    }
+                },
+                controller: 'UserPaymentController'
+            }).
             when('/coach', {
                 templateUrl: 'views/coach.html',
                 resolve: {
