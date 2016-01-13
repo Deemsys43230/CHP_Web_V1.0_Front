@@ -676,8 +676,10 @@ coachApp.controller('CourseController',function($scope,requestHandler,Flash,$rou
     };
 
     $scope.reviewModel=function(id){
-        requestHandler.postRequest("coach/sendCourseForReview/",{"courseid":id}).then(function(response) {
-            $scope.response=response.data.Response_status;
+        requestHandler.getRequest("getUserId/","").then(function(response){
+
+
+            $scope.response=response.data.User_Profile.status;
             alert($scope.response);
             $(function(){
                 $("#lean_overlay").fadeTo(1000);
