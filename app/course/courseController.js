@@ -103,7 +103,7 @@ userApp.controller('CourseController',['$scope','requestHandler','Flash','$route
     };
 
     $scope.checkenroll = function(){
-        // alert("Please enroll the course to view details!!!");
+
         $(function(){
             $("#lean_overlay").fadeTo(1000);
             $("#enrollmodal").fadeIn(600);
@@ -503,7 +503,6 @@ adminApp.filter('trusted', ['$sce', function ($sce) {
 }]);
 
 adminApp.filter('startsWithLetter', function () {
-    alert("hi");
     return function (items, coursesearch) {
         var filtered = [];
         var letterMatch = new RegExp(coursesearch, 'i');
@@ -668,7 +667,6 @@ coachApp.controller('CourseController',function($scope,requestHandler,Flash,$rou
 
     $scope.sendCourseToReview=function(id){
         requestHandler.postRequest("coach/sendCourseForReview/",{"courseid":id}).then(function(response) {
-
             successMessage(Flash,"Course Sent for Review!");
             if(!$routeParams.id){
                 $location.path("courseView/"+id);
@@ -688,12 +686,10 @@ coachApp.controller('CourseController',function($scope,requestHandler,Flash,$rou
         });
     };
 
-    $scope.reviewModel=function(id){
+    $scope.reviewModel=function(){
         requestHandler.getRequest("getUserId/","").then(function(response){
+            $scope.response=response.data.Login.status;
 
-
-            $scope.response=response.data.User_Profile.status;
-            alert($scope.response);
             $(function(){
                 $("#lean_overlay").fadeTo(1000);
                 $("#review-modal").fadeIn(600);
@@ -711,9 +707,7 @@ coachApp.controller('CourseController',function($scope,requestHandler,Flash,$rou
                 $("#review-modal").hide();
                 $("#lean_overlay").hide();
             });
-
         });
-
     };
 
     $scope.sectionDeleteModel=function(id){

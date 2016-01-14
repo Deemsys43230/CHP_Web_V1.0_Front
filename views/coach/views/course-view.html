@@ -14,7 +14,7 @@
                 <a href="#course" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back</a>
                 <span ng-show="courseDetails.canedit==1 && courseSections.length!=0">
                     <a href="#courseSectionAdd/{{courseDetails.courseid}}" class="back-button pull-right margin-left-5"><i class="fa fa-plus-circle"></i> Add Section</a>
-                    <a ng-click="reviewModel(courseDetails.courseid)" id="modal_trigger1" href="" class="back-button pull-right margin-left-5"><i class="fa fa-paper-plane"></i> Send to Review</a>
+                    <a ng-click="reviewModel()" id="modal_trigger1" href="" class="back-button pull-right margin-left-5"><i class="fa fa-paper-plane"></i> Send to Review</a>
                 </span>
                 <div flash-message="2000" class="col-md-3 pull-right no-padding"></div>
                 <h4 class="classic-title">
@@ -159,19 +159,22 @@
         <!-- Register Form -->
         <div class="common_model">
             <div class="text-center"><img src="../../images/alert-ring.png"/></div><br/>
-            <span ng-if="response==1">
-            <h5 class="text-center">You can't edit this course after<br/> sent to the review<br/><br/>Are you sure want to send this<br/> course for review?</h5>
-            <div class="action_btns margin-top-20">
-                <div class="one_half"><a href="" class="btn btn_red modal_close" ng-click="sendCourseToReview(courseDetails.courseid)">Yes</a></div>
-                <div class="one_half last modal_close"><a onclick="return false;" class="btn back_btn">No</a></div>
+            <div ng-show="response==1">
+                <h5 class="text-center">You can't edit this course after<br/> sent to the review<br/><br/>Are you sure want to send this<br/> course for review?</h5>
             </div>
-            </span>
-            <span ng-if="response==0">
-            <h5  class="text-center">Please Update your paypal details<br/> and send your course for review!!!</h5>
-            <div class="action_btns margin-top-20">
-                <div class="one_half last modal_close"><a onclick="return false;" class="btn back_btn">OK</a></div>
+            <div ng-show="response==0">
+                <h5  class="text-center">Please Update your paypal details<br/> and send your course for review!<br/><br/>Do you want to update now!</h5>
             </div>
-            </span>
+            <div class="action_btns margin-top-20">
+                <div ng-show="response==1">
+                    <div class="one_half"><a href="" class="btn btn_red modal_close" ng-click="sendCourseToReview(courseDetails.courseid)">Yes</a></div>
+                    <div class="one_half last modal_close"><a onclick="return false;" class="btn back_btn">No</a></div>
+                </div>
+                <div ng-show="response==0">
+                    <div class="one_half"><a href="#paymentSettings" class="btn btn_red modal_close">Yes</a></div>
+                    <div class="one_half last modal_close"><a onclick="return false;" class="btn back_btn">No</a></div>
+                </div>
+            </div>
         </div>
     </section>
 </div>
