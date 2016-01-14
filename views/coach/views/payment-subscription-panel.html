@@ -45,7 +45,7 @@
                                  </span>
                                 </div>
                                 <div class="col-md-6">
-                                    <h4>% of {{subscriptionDetail.onemonth_amount * 3}} = {{(subscriptionDetail.onemonth_amount - subscriptionDetail.threemonth_percentage) *3}}</h4>
+                                    <h4>% of {{subscriptionDetail.onemonth_amount * 3}} = {{(subscriptionDetail.onemonth_amount*3)-(subscriptionDetail.onemonth_amount * subscriptionDetail.threemonth_percentage) /100}}</h4>
                                 </div>
                             </div>
 
@@ -61,7 +61,7 @@
                                  </span>
                                     </div>
                                 <div class="col-md-6">
-                                    <h4>% of {{subscriptionDetail.onemonth_amount * 6}} = {{(subscriptionDetail.onemonth_amount - subscriptionDetail.sixmonth_percentage) *6}}</h4>
+                                    <h4>% of {{subscriptionDetail.onemonth_amount * 6}} = {{(subscriptionDetail.onemonth_amount*6)-(subscriptionDetail.onemonth_amount * subscriptionDetail.sixmonth_percentage) /100}}</h4>
                                 </div>
                             </div>
 
