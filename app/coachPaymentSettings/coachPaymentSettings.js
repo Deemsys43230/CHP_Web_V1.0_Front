@@ -45,9 +45,6 @@ coachApp.controller('CoachPaymentSettingsController',function($scope,requestHand
     };
 
     $scope.isCleanPaypalSettings=function(){
-        console.log("ori",original);
-        console.log("val",$scope.paypalDetails);
-        console.log(angular.equals(original, $scope.paypalDetails));
         return angular.equals(original, $scope.paypalDetails);
     };
 

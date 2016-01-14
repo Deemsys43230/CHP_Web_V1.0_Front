@@ -19,40 +19,59 @@
                 </div>
                 <div class="col-md-12 no-padding">
                     <hr/>
-                    <form name="paypalSettingsForm">
+                    <form name="subscriptionForm">
                         <div class="row form-set">
                             <div class="col-md-3 margin-top-10">
                                 <h4>Basic Pay (1 month) :</h4>
                             </div>
                             <div class="col-md-9 margin-top-10">
-                                <input class="section-input" placeholder="Enter Basic Pay" name="paypalid" ng-model="paypalSettings.paypalid" required>
-                                 <span ng-show="paypalSettingsForm.paypalid.$dirty&&paypalSettingsForm.paypalid.$invalid">
-                                        <span class="error-message" ng-show="paypalSettingsForm.paypalid.$error.required"><span>Required.</span></span>
+                                <div class="col-md-12">
+                                <input class="section-input" placeholder="Enter Basic Pay" name="basicpay" ng-model="subscriptionDetail.onemonth_amount" required validate-Float>
+                                 <span ng-show="subscriptionForm.basicpay.$dirty&&subscriptionForm.basicpay.$invalid">
+                                        <span class="error-message" ng-show="subscriptionForm.basicpay.$error.required"><span>Required.</span></span>
+                                      <span class="error-message" ng-show="!subscriptionForm.basicpay.$error.required&&subscriptionForm.basicpay.$error.validateFloat"><span>Invalid&nbsp;Format.</span></span>
                                  </span>
+                                    </div>
                             </div>
                             <div class="col-md-3 margin-top-10">
                                 <h4>Subscription (3 months) :</h4>
                             </div>
                             <div class="col-md-9 margin-top-10">
-                                <input class="section-input" placeholder="Enter Discount % for 3 months" name="paypalname" ng-model="paypalSettings.paypalname" required>
-                                 <span ng-show="paypalSettingsForm.paypalname.$dirty&&paypalSettingsForm.paypalname.$invalid">
-                                        <span class="error-message" ng-show="paypalSettingsForm.paypalname.$error.required"><span>Required.</span></span>
+                                <div class="col-md-3">
+                                <input class="section-input" placeholder="Enter Discount % for 3 months" name="threemonthpercentage" ng-model="subscriptionDetail.threemonth_percentage" required validate-Float>
+                                 <span ng-show="subscriptionForm.threemonthpercentage.$dirty&&subscriptionForm.threemonthpercentage.$invalid">
+                                        <span class="error-message" ng-show="subscriptionForm.threemonthpercentage.$error.required"><span>Required.</span></span>
+                                     <span class="error-message" ng-show="!subscriptionForm.threemonthpercentage.$error.required&&subscriptionForm.threemonthpercentage.$error.validateFloat"><span>Invalid&nbsp;Format.</span></span>
                                  </span>
+                                </div>
+                                <div class="col-md-6">
+                                    <h4>% of {{subscriptionDetail.onemonth_amount * 3}} = {{(subscriptionDetail.onemonth_amount - subscriptionDetail.threemonth_percentage) *3}}</h4>
+                                </div>
                             </div>
+
                             <div class="col-md-3 margin-top-10">
                                 <h4>Subscription (6 months) :</h4>
                             </div>
                             <div class="col-md-9 margin-top-10">
-                                <input class="section-input" placeholder="Enter  Discount % 6 months" name="" ng-model="dd" required>
-                                 <span ng-show="paypalSettingsForm.paypalname.$dirty&&paypalSettingsForm.paypalname.$invalid">
-                                        <span class="error-message" ng-show="paypalSettingsForm.paypalname.$error.required"><span>Required.</span></span>
+                                <div class="col-md-3">
+                                <input class="section-input" placeholder="Enter  Discount % 6 months" name="sixmonthpercentage" ng-model="subscriptionDetail.sixmonth_percentage" required validate-Float>
+                                 <span ng-show="subscriptionForm.sixmonthpercentage.$dirty&&subscriptionForm.sixmonthpercentage.$invalid">
+                                        <span class="error-message" ng-show="subscriptionForm.sixmonthpercentage.$error.required"><span>Required.</span></span>
+                                      <span class="error-message" ng-show="!subscriptionForm.sixmonthpercentage.$error.required&&subscriptionForm.sixmonthpercentage.$error.validateFloat"><span>Invalid&nbsp;Format.</span></span>
                                  </span>
+                                    </div>
+                                <div class="col-md-6">
+                                    <h4>% of {{subscriptionDetail.onemonth_amount * 6}} = {{(subscriptionDetail.onemonth_amount - subscriptionDetail.sixmonth_percentage) *6}}</h4>
+                                </div>
                             </div>
+
+
                         </div>
-                    </form>
+
                     <div class="text-center margin-top-20">
-                        <a href="" class="btn btn-success">Save Changes</a>
+                        <a href="" class="btn btn-success" ng-disabled="subscriptionForm.$invalid || isCleanSubscriptionDetails()" ng-click="doUpdateSubscriptionDetails()">Save Changes</a>
                     </div>
+                    </form>
                 </div>
             </div>
         </div>

@@ -537,3 +537,21 @@ coachApp.directive('block', function () {
         }
     }
 });
+
+//Check For FLoat Validation
+coachApp.directive('validateFloat', function() {
+    var FLOAT_REGEXP = /^\-?\d+((\.)\d+)?$/;
+    //var FLOAT_REGEXP = /^[1-9]+((\.)\d+)?$/;
+
+    return {
+        require: 'ngModel',
+        restrict: '',
+        link: function(scope, elm, attrs, ctrl) {
+            // only apply the validator if ngModel is present and Angular has added the Float Number validator
+            ctrl.$validators.validateFloat = function(modelValue) {
+                return  ctrl.$isEmpty(modelValue) || FLOAT_REGEXP.test(modelValue);
+            };
+
+        }
+    };
+});

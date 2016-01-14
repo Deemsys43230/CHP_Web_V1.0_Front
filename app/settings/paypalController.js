@@ -16,8 +16,12 @@ adminApp.controller('PaypalSettingsController',function($scope,requestHandler,Fl
 
     $scope.doGetPaypalSettings= function () {
         requestHandler.getRequest("admin/getappdetails/","").then(function(response){
-            original=angular.copy(response.data.App_settings[0]);
+
              $scope.paypalSettings=response.data.App_settings[0];
+
+            $scope.paypalSettings.coursepurchaseshare = $scope.paypalSettings.coursepurchaseshare.toString();
+            $scope.paypalSettings.coachsubscribeshare = $scope.paypalSettings.coachsubscribeshare.toString();
+            original=angular.copy($scope.paypalSettings);
         },function(response){
             errorMessage(Flash,"Please Try again later");
         });
@@ -27,7 +31,7 @@ adminApp.controller('PaypalSettingsController',function($scope,requestHandler,Fl
     $scope.doUpdatePaypalSettings=function(){
         requestHandler.putRequest("admin/updatePayPalDetails",$scope.paypalSettings).then(function(response){
 
-            original=angular.copy($scope.paypalSettings);
+
             successMessage(Flash,"Successfully Updated!");
         },function(){
             errorMessage(Flash,"Please try again later");
