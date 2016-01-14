@@ -158,10 +158,17 @@ userApp.controller('UserCoachController',function($scope,requestHandler,Flash,$l
 
     };
 
-    $scope.doSubscribeCoach = function(coach){
-       requestHandler.postRequest("user/subscribeCoach/",{"coach":coach}).then(function(response){
-           successMessage(Flash,"Successfully subscribed");
-           $location.path("thanksSubscribePage/"+coach);
+    $scope.doSubscribeCoach = function(coach,month){
+
+       requestHandler.postRequest("user/subscribeCoach/",{"coachid":coach,"month":month,"returnUrl":"http://localhost/cyber/views/user/#/thanksSubscribePage/"+coach+"/"+month,"cancelUrl":"http://localhost/cyber/views/user/#/coachSearch"}).then(function(response){
+           if(response.data.transactionStatus==1){
+               window.location=response.data.approveURL.href;
+           }
+           else if(response.data.transactionStatus==2){
+               window.location="http://localhost/cyber/views/user/#/thanksEnrollPage/"+course;
+           }
+           /*successMessage(Flash,"Successfully subscribed");*/
+           /*$location.path("thanksSubscribePage/"+coach);*/
            /*$scope.doGetCoachDetailsByUser(coach);*/
        },function(){
            errorMessage(Flash,"Please try again later!")
@@ -203,10 +210,28 @@ userApp.controller('UserCoachController',function($scope,requestHandler,Flash,$l
     };
 
     $scope.priceTable=function(id){
+        //$scope.viewload=true;
         $scope.coachViewId=id;
         $scope.coach = {
             status: 'coach-price'
         };
+        /*requestHandler.getRequest("coachSubscriptionDetail/","").then(function(response){
+            $scope.priceValue=response.data["Coach Subscription Detail"];
+            $scope.viewload=false;
+        }, function () {
+            errorMessage(Flash, "Please try again later!")
+        });*/
+
+        //hard code
+        $scope.priceValue={
+            "coachid": 8,
+            "onemonth_amount": 20,
+            "threemonth_percentage": 1,
+            "threemonth_amount": 19.8,
+            "sixmonth_percentage": 3,
+            "sixmonth_amount": 19.4,
+            "status": 1
+        }
     };
 
     $scope.coachView=function(id){

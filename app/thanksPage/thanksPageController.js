@@ -1,12 +1,16 @@
 var userApp = angular.module('userApp', ['ngRoute','oc.lazyLoad','requestModule']);
 userApp.controller('ThanksSubscribePageController',function($scope,requestHandler,$location,$routeParams) {
-    $scope.urlPage="http://localhost/cyber/views/user/#/coachView/"+$routeParams.id;
+    var paymentResponse=$location.search();
+    $scope.completed=false;
+    $scope.transactionSucceed=true;
+    $scope.enroll="SUBSCRIPTION";
+    $scope.thanksEnroll="YOUR SUBSCRIPTION WAS SUCCESSFULLY COMPLETED";
 
-        var delay = 10 ;
-        var url = $scope.urlPage;
+    $scope.countDownTimer = function(url,redirectPageName){
+        var delay = 5 ;
         var timer=setInterval(function(){countdown()}, 1000) ;
         function countdown() {
-            $('#countmesg').html("Redirecting in "  + delay  + " seconds.");
+            $('#countmesg').html("You will be redirecting to the "+redirectPageName+" page in "  + delay  + " seconds.");
             delay --;
             if (delay < 0 ) {
                 clearInterval(timer);
@@ -14,7 +18,41 @@ userApp.controller('ThanksSubscribePageController',function($scope,requestHandle
                 delay = 0 ;
             }
         }
+    };
 
+    if($.isEmptyObject(paymentResponse)){
+        $scope.completed=true;
+        $scope.transactionSucceed=true;
+        $scope.urlPage="http://localhost/cyber/views/user/#/coachView/"+$routeParams.id;
+        $scope.countDownTimer($scope.urlPage,"course");
+    }
+    else{
+        var paymentConfirmDetails={};
+        paymentConfirmDetails.payId=paymentResponse.paymentId;
+        paymentConfirmDetails.payerId=paymentResponse.PayerID;
+        paymentConfirmDetails.coachid=parseInt($routeParams.id);
+        paymentConfirmDetails.month=parseInt($routeParams.month);
+
+        $scope.doExcecutePayment = function(paymentConfirmDetails){
+            requestHandler.postRequest("user/subscribeCoachExecute/",paymentConfirmDetails).then(function(response){
+                if(response.data.Response_status==0){
+                    $scope.transactionSucceed=false;
+                    $scope.urlPage="http://localhost/cyber/views/user/#/coachSearch";
+                    $scope.countDownTimer($scope.urlPage,"coach search");
+                }
+                else{
+                    $scope.transactionSucceed=true;
+                    $scope.completed=true;
+                    $scope.urlPage="http://localhost/cyber/views/user/#/coachView/"+$routeParams.id;
+                    $scope.countDownTimer($scope.urlPage,"coach view");
+                }
+            },function(){
+                errorMessage(Flash,"Please try again later!")
+            });
+        };
+        console.log(paymentConfirmDetails);
+        $scope.doExcecutePayment(paymentConfirmDetails);
+    }
 });
 
 userApp.controller('ThanksEnrollPageController',function($scope,requestHandler,$location,$window,$routeParams) {
@@ -22,6 +60,8 @@ userApp.controller('ThanksEnrollPageController',function($scope,requestHandler,$
     var paymentResponse=$location.search();
     $scope.completed=false;
     $scope.transactionSucceed=true;
+    $scope.enroll="ENROLLMENT";
+    $scope.thanksEnroll="YOUR HAVE SUCCESSFULLY ENROLLED THIS COURSE";
 
     $scope.countDownTimer = function(url,redirectPageName){
         var delay = 5 ;

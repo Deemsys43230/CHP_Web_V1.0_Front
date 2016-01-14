@@ -30,8 +30,6 @@ userApp.controller('CourseController',['$scope','requestHandler','Flash','$route
     $scope.courseSectionList =function(){
         requestHandler.postRequest("getSectionList/",{"courseid":$routeParams.id}).then(function(response) {
             $scope.sectionList = response.data.course;
-            console.log($scope.sectionList);
-
         },function(){
             errorMessage(Flash,"Please try again later!")
         });
@@ -42,9 +40,6 @@ userApp.controller('CourseController',['$scope','requestHandler','Flash','$route
 
         requestHandler.postRequest("user/sectionDetail/",{"sectionid":$routeParams.id}).then(function(response) {
             $scope.sectionDetail = response.data.sectiondetail;
-            console.log($scope.sectionDetail);
-
-
             requestHandler.postRequest("getSectionList/",{"courseid":$scope.sectionDetail.courseid}).then(function(response) {
                 $scope.sectionList = response.data.course;
                 $.each($scope.sectionList,function(index,value){
@@ -86,6 +81,34 @@ userApp.controller('CourseController',['$scope','requestHandler','Flash','$route
         },function(){
             errorMessage(Flash,"Please try again later!")
         });
+
+       /* requestHandler.getRequest("user/getMyCourseList/","").then(function(response) {
+            $scope.myCourseList = response.data.published_Course;
+            var mycourseid = [];
+            $.each($scope.myCourseList,function(index,value){
+                mycourseid.push(val)
+                if(value.sectionid == id){
+                    $scope.currentIndex = index;
+                    $scope.sectionno = index + 1;
+                }
+            });
+        },function(){
+            errorMessage(Flash,"Please try again later!")
+        });*/
+
+            /*requestHandler.getRequest("getCoursecategory/","").then(function(response) {
+                $scope.courseCatgory = response.data.coursecategory;
+                $.each($scope.courseCatgory,function(index,value){
+                    if(value.sectionid == id){
+                        $scope.currentIndex = index;
+                        $scope.sectionno = index + 1;
+                    }
+                });
+            },function(){
+                errorMessage(Flash,"Please try again later!")
+            });*/
+
+
     };
 
     $scope.doEnrollCourse = function(course){
@@ -130,32 +153,23 @@ userApp.controller('CourseController',['$scope','requestHandler','Flash','$route
     $scope.getNextIndex = function() {
         requestHandler.postRequest("getSectionList/",{"courseid":$scope.sectionDetail.courseid}).then(function(response) {
             $scope.sectionList = response.data.course;
-            console.log("length",$scope.sectionList.length);
-
-
-            console.log("curr",$scope.currentIndex);
             var nextIndex = $scope.currentIndex+1;
-            console.log("Index value",nextIndex);
             $scope.sectionno = nextIndex + 1;
             if( nextIndex === $scope.sectionList.length -1){
 
                 //move to start if at list end
-                console.log("Entered If");
                 $scope.nextdisable = true;
-                console.log($scope.nextdisable);
             }
 
             $scope.sectionList=response.data.course[nextIndex];
             requestHandler.postRequest("user/sectionDetail/",{"sectionid":$scope.sectionList.sectionid}).then(function(response) {
                 $scope.sectionDetail = response.data.sectiondetail;
-                console.log($scope.sectionDetail);
 
                 requestHandler.postRequest("getSectionList/",{"courseid":$scope.sectionDetail.courseid}).then(function(response) {
                     $scope.sectionList = response.data.course;
                 });
             });
             $scope.currentIndex= nextIndex;
-            console.log("Newcurr",$scope.currentIndex);
             $scope.prevdisable=false;
 
         });
@@ -166,28 +180,21 @@ userApp.controller('CourseController',['$scope','requestHandler','Flash','$route
 
         requestHandler.postRequest("getSectionList/",{"courseid":$scope.sectionDetail.courseid}).then(function(response) {
             $scope.sectionList = response.data.course;
-            console.log("length",$scope.sectionList.length);
-
-            console.log("curr",$scope.currentIndex);
             var prevIndex = $scope.currentIndex-1;
             $scope.sectionno = prevIndex +1;
-            console.log("Index value",prevIndex);
             if( prevIndex === 0 ){
                 //move to start if at list end
-                console.log("Entered If");
                 $scope.prevdisable = true;
             }
             $scope.sectionList=response.data.course[prevIndex];
             requestHandler.postRequest("user/sectionDetail/",{"sectionid":$scope.sectionList.sectionid}).then(function(response) {
                 $scope.sectionDetail = response.data.sectiondetail;
-                console.log($scope.sectionDetail);
 
                 requestHandler.postRequest("getSectionList/",{"courseid":$scope.sectionDetail.courseid}).then(function(response) {
                     $scope.sectionList = response.data.course;
                 });
             });
             $scope.currentIndex= prevIndex;
-            console.log("Newcurr",$scope.currentIndex);
             $scope.nextdisable=false;
 
         });
@@ -197,7 +204,9 @@ userApp.controller('CourseController',['$scope','requestHandler','Flash','$route
         $scope.courselist();
     };
 
-    $scope.mycourselist();
+    $scope.mycourseinit=function(){
+        $scope.mycourselist();
+    };
 
     $scope.viewinit=function(){
         $scope.courseDetails();
@@ -248,8 +257,6 @@ adminApp.controller('CourseAdminController',['$scope','requestHandler','Flash','
     $scope.courseSectionList =function(){
         requestHandler.postRequest("getSectionList/",{"courseid":$routeParams.id}).then(function(response) {
             $scope.sectionList = response.data.course;
-            console.log($scope.sectionList);
-
         },function(){
             errorMessage(Flash,"Please try again later!")
         });
@@ -260,7 +267,6 @@ adminApp.controller('CourseAdminController',['$scope','requestHandler','Flash','
 
         requestHandler.postRequest("admin/getSectionDetail/",{"sectionid":$routeParams.id}).then(function(response) {
             $scope.sectionDetail = response.data['Section Detail'];
-            console.log($scope.sectionDetail);
             $scope.sectionno=1;
 
             requestHandler.postRequest("getSectionList/",{"courseid":$scope.sectionDetail.courseid}).then(function(response) {
@@ -303,30 +309,23 @@ adminApp.controller('CourseAdminController',['$scope','requestHandler','Flash','
     $scope.getNextIndex = function() {
         requestHandler.postRequest("getSectionList/",{"courseid":$scope.sectionDetail.courseid}).then(function(response) {
             $scope.sectionList = response.data.course;
-            console.log("length",$scope.sectionList.length);
-            console.log("curr",currentIndex);
             var nextIndex = currentIndex+1;
-            console.log("Index value",nextIndex);
             $scope.sectionno = nextIndex +1;
             if( nextIndex === $scope.sectionList.length -1) {
 
                 //move to start if at list end
-                console.log("Entered If");
                 $scope.nextdisable = true;
-                console.log($scope.nextdisable);
             }
 
             $scope.sectionList=response.data.course[nextIndex];
             requestHandler.postRequest("admin/getSectionDetail/",{"sectionid":$scope.sectionList.sectionid}).then(function(response) {
                 $scope.sectionDetail = response.data['Section Detail'];
-                console.log($scope.sectionDetail);
 
                 requestHandler.postRequest("getSectionList/",{"courseid":$scope.sectionDetail.courseid}).then(function(response) {
                     $scope.sectionList = response.data.course;
                 });
             });
             currentIndex= nextIndex;
-            console.log("Newcurr",currentIndex);
             $scope.prevdisable=false;
 
         });
@@ -337,22 +336,15 @@ adminApp.controller('CourseAdminController',['$scope','requestHandler','Flash','
 
         requestHandler.postRequest("getSectionList/",{"courseid":$scope.sectionDetail.courseid}).then(function(response) {
             $scope.sectionList = response.data.course;
-            console.log("length",$scope.sectionList.length);
-
-            console.log("curr",currentIndex);
             var prevIndex = currentIndex-1;
-            console.log("Index value",prevIndex);
             $scope.sectionno = prevIndex +1;
             if( prevIndex === 0 ){
                 //move to start if at list end
-                console.log("Entered If");
                 $scope.prevdisable = true;
             }
             $scope.sectionList=response.data.course[prevIndex];
             requestHandler.postRequest("admin/getSectionDetail/",{"sectionid":$scope.sectionList.sectionid}).then(function(response) {
                 $scope.sectionDetail = response.data['Section Detail'];
-                console.log($scope.sectionDetail);
-
                 requestHandler.postRequest("getSectionList/",{"courseid":$scope.sectionDetail.courseid}).then(function(response) {
                     $scope.sectionList = response.data.course;
                 });

@@ -14,44 +14,53 @@
 
     <div id="pricing-table">
         <div class="promos">
-            <div class="promo">
+            <div class="promo" ng-class="{'disabled': priceValue.onemonth_amount == null}">
                 <div class="deal">
                     <span>BASIC</span>
                     <span>Basic deal!</span>
                 </div>
-                <span class="price">$79&nbsp;<small>/ month</small></span>
+                <span class="price">
+                    <span ng-if="priceValue.onemonth_amount!=null">${{priceValue.onemonth_amount}}&nbsp;<small>/ month</small></span>
+                    <span ng-if="priceValue.onemonth_amount==null"><small>Not Available</small></span>
+                </span>
                 <ul class="features">
                     <li>1 month Subscription</li>
                     <li>Expert chat</li>
                     <li>And more...</li>
                 </ul>
-                <a href="https://www.paypal.com/signin/" target="_blank" ng-click="doSubscribeCoach(coachViewId)" class="price-button">Subscribe</a><br/>
+                <a href="" ng-click="doSubscribeCoach(coachViewId,1)" class="price-button">Subscribe</a><br/>
             </div>
-            <div class="promo scale">
+            <div class="promo scale" ng-class="{'disabled': priceValue.threemonth_amount == null}">
                 <div class="deal">
                     <span>PREMIUM</span>
                     <span>This is really a good deal!</span>
                 </div>
-                <span class="price backred">$65&nbsp;<small>/ month</small></span>
+                <span class="price backred">
+                    <span ng-if="priceValue.threemonth_amount!=null">${{priceValue.threemonth_amount}}&nbsp;<small>/ month</small></span>
+                    <span ng-if="priceValue.threemonth_amount==null"><small>Not Available</small></span>
+                </span>
                 <ul class="features">
                     <li>3 months Subscription</li>
                     <li>Expert chat</li>
                     <li>And more...</li>
                 </ul>
-                <a href="https://www.paypal.com/signin/" target="_blank" ng-click="doSubscribeCoach(coachViewId)" class="price-button">Subscribe</a><br/>
+                <a href="" ng-click="doSubscribeCoach(coachViewId,3)" class="price-button">Subscribe</a><br/>
             </div>
-            <div class="promo disabled">
+            <div class="promo" ng-class="{'disabled': priceValue.sixmonth_amount == null}">
                 <div class="deal">
                     <span>PLUS</span>
                     <span>Most valuable deal!</span>
                 </div>
-                <span class="price"><small>Not Available</small></span>
+                <span class="price">
+                    <span ng-if="priceValue.sixmonth_amount!=null">${{priceValue.sixmonth_amount}}&nbsp;<small>/ month</small></span>
+                    <span ng-if="priceValue.sixmonth_amount==null"><small>Not Available</small></span>
+                </span>
                 <ul class="features">
                     <li>6 months Subscription</li>
                     <li>Expert chat</li>
                     <li>And more...</li>
                 </ul>
-                <a href="https://www.paypal.com/signin/" target="_blank" ng-click="doSubscribeCoach(coachViewId)" class="price-button">Subscribe</a><br/>
+                <a href="" ng-click="doSubscribeCoach(coachViewId,6)" class="price-button">Subscribe</a><br/>
             </div>
         </div>
     </div>

@@ -276,7 +276,7 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller: 'UserCoachController'
             }).
-            when('/thanksSubscribePage/:id', {
+            when('/thanksSubscribePage/:id/:month', {
                 templateUrl: 'views/thanks-page.html',
                 resolve: {
                     loadMyFiles:function($ocLazyLoad) {
