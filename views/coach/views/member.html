@@ -43,8 +43,8 @@
 
                             </td>
                         </tr>
-                        <tr ng-show="myMembersList.length==0"><td colspan="4" class="text-center">No Records Found !!!</td></tr>
-                        <tr ng-show="!memberfilter.length"><td colspan="4" class="text-center">No Records Found !!!</td></tr>
+                        <tr ng-show="myMembersList.length==0 || !memberfilter.length"><td colspan="4" class="text-center">No Records Found !!!</td></tr>
+                       <!-- <tr ng-show="!memberfilter.length"><td colspan="4" class="text-center">No Records Found !!!</td></tr>-->
                     </tbody>
                 </table>
             <!-- Start Pagination -->
