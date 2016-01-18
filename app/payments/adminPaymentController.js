@@ -2,17 +2,74 @@ var adminApp = angular.module('adminApp', ['ngRoute','oc.lazyLoad','requestModul
 
 adminApp.controller('AdminPaymentController',function($scope,requestHandler,Flash,$routeParams) {
 
-    $scope.pageno = 1;
-    $scope.total_count = 60;
-    $scope.itemsPerPage = 10;
 
-    $scope.doGetCourseList = function(pageno){
+    //Main Function returns the list
+    $scope.doGetCoursePaymentDetails = function(pageno){
+       $scope.pagination.current=pageno;
+       $scope.offset=(pageno-1)*$scope.itemsPerPage;
+       $scope.limit=pageno*$scope.itemsPerPage;
+
+       if($scope.courseSearch==undefined){
+           $scope.courseSearch="";
+       }
+
+        $scope.params={
+            "limit":$scope.limit,
+            "offset":$scope.offset,
+            "searchname":$scope.courseSearch,
+            "sortid":$scope.sortId,
+            "sorttype":$scope.sorttype
+        };
+
         //In practice this should be in a factory.
-        requestHandler.postRequest("getPublishedCourse/",{'offset':pageno}).then(function(response){
+        requestHandler.postRequest("admin/publishedCoursePaymentlist/",$scope.params).then(function(response){
             $scope.courses = [];
-            $scope.courses = response.data.published_Course;
+            $scope.courses = response.data.courselist;
+            $scope.total_count=response.data.totalrecordcount;
         });
     };
+    //End Function returns the list
+
+    //Detail of subscribers
+    $scope.doGetCourseSubsciberList = function(pageno){
+        $scope.pagination.current=pageno;
+        $scope.offset=(pageno-1)*$scope.itemsPerPage;
+        $scope.limit=pageno*$scope.itemsPerPage;
+
+        if($scope.courseSearch==undefined){
+            $scope.courseSearch="";
+        }
+
+        $scope.params={
+            "courseid":$routeParams.id,
+            "limit":$scope.limit,
+            "offset":$scope.offset,
+            "searchname":$scope.courseSearch,
+            "sortid":$scope.sortId,
+            "sorttype":$scope.sorttype
+        };
+
+        //In practice this should be in a factory.
+        requestHandler.postRequest("admin/paymentHistoryforCourse/",$scope.params).then(function(response){
+            $scope.coursesPaymentHistory = [];
+            $scope.coursesPaymentHistory = response.data.coursePaylist.paymentHistory;
+            $scope.total_count=response.data.totalrecordcount;
+        });
+    };
+    //End Subscriber returns the list
+
+
+    //Subscription Details - Course
+    $scope.doGetSubscriberDetailView = function(){
+
+        //In practice this should be in a factory.
+        requestHandler.postRequest("admin/detailViewofCourseTransactionbyAdmin/",{
+            "paymentid":$routeParams.id
+        }).then(function(response){
+            $scope.coursePurchaseDetailView=response.data;
+        });
+    };
+    //End Subscriber returns the list
 
     $scope.doGetStudentList = function(pageno){
         //In practice this should be in a factory.
@@ -30,89 +87,72 @@ adminApp.controller('AdminPaymentController',function($scope,requestHandler,Flas
     };
 
 
-    var iconList={};
-    iconList.coursename="fa fa-caret-down";
-    iconList.coachname="fa fa-caret-down";
-    iconList.publishedon="fa fa-caret-down";
-    iconList.enrollcount="fa fa-caret-down";
-    iconList.ownerid="fa fa-caret-down";
+    $scope.sortingCourse = function(id){
+        $scope.sortId=id;
+        var currentOrder=$scope.sortIcon[id];
+        //Object + 1 icons needed NOTE
+        $scope.sortIcon=['fa fa-caret-down','fa fa-caret-down','fa fa-caret-down','fa fa-caret-down','fa fa-caret-down','fa fa-caret-down','fa fa-caret-down','fa fa-caret-down'];
 
-    $scope.sortIcon=iconList;
-    $scope.orderBy=0;
-    $scope.currentOrderId='';
-
-    //sorting by food Id
-    $scope.sortList = function(id){
-        var iconList={};
-        iconList.coursename="fa fa-caret-down";
-        iconList.coachname="fa fa-caret-down";
-        iconList.publishedon="fa fa-caret-down";
-        iconList.enrollcount="fa fa-caret-down";
-        iconList.ownerid="fa fa-caret-down";
-
-        if($scope.currentOrderId==''||$scope.currentOrderId!=id){
-            $scope.currentOrderId=id;
-            iconList[id]="fa fa-caret-up";
-            $scope.orderBy=1;
-            $scope.sortIcon=iconList;
+        if(currentOrder=='fa fa-caret-down'){
+            $scope.sortIcon[id]='fa fa-caret-up';
+            $scope.sorttype=2;
+        }else{
+            $scope.sortIcon[id]='fa fa-caret-down';
+            $scope.sorttype=1;
         }
-        else{
-            if($scope.orderBy==0){
-                iconList[id]="fa fa-caret-up";
-                $scope.orderBy=1;
-                $scope.sortIcon=iconList;
-            }
-            else{
-                iconList[id]="fa fa-caret-down";
-                $scope.orderBy=0;
-                $scope.sortIcon=iconList;
-            }
-        }
-
-        var searchObject={};
-        if(!$scope.courseSearch){
-            searchObject.keyid=id;
-            searchObject.orderby=$scope.orderBy;
-            searchObject.searchtext="";
-            console.log(searchObject);
-        }
-        else{
-            searchObject.keyid=id;
-            searchObject.orderby=$scope.orderBy;
-            searchObject.searchtext=$scope.courseSearch;
-            console.log(searchObject);
-        }
+        $scope.doGetCoursePaymentDetails(1);
     };
+    $scope.sortingCourseSubscriber = function(id){
+        $scope.sortId=id;
+        var currentOrder=$scope.sortIcon[id];
+        //Object + 1 icons needed NOTE
+        $scope.sortIcon=['fa fa-caret-down','fa fa-caret-down','fa fa-caret-down','fa fa-caret-down','fa fa-caret-down','fa fa-caret-down','fa fa-caret-down','fa fa-caret-down'];
 
-    $scope.doGetCourseSearch=function(){
-        $scope.sortIcon=iconList;
-        $scope.currentOrderId='';
-        $scope.doGetCourseList(1);
-        var searchObject={};
-        if(!$scope.courseSearch){
-            searchObject.keyid="";
-            searchObject.orderby="";
-            searchObject.searchtext="";
-            console.log(searchObject);
+        if(currentOrder=='fa fa-caret-down'){
+            $scope.sortIcon[id]='fa fa-caret-up';
+            $scope.sorttype=2;
+        }else{
+            $scope.sortIcon[id]='fa fa-caret-down';
+            $scope.sorttype=1;
         }
-        else{
-            searchObject.keyid="";
-            searchObject.orderby="";
-            searchObject.searchtext=$scope.courseSearch;
-            console.log(searchObject);
-        }
+        $scope.doGetCourseSubsciberList(1);
     };
 
     $scope.init=function(){
-        $scope.doGetCourseList($scope.pageno);
+        $scope.itemsPerPage = 10;
+        $scope.courseSearch="";
+        $scope.sortId="";
+        $scope.sorttype="";
+
+        //Initialize Pagination
+        $scope.pagination = {
+            current: 1
+        };
+
+        //Object + 1 icons needed NOTE //Initialize Icon
+        $scope.sortIcon=['fa fa-caret-down','fa fa-caret-down','fa fa-caret-down','fa fa-caret-down','fa fa-caret-down','fa fa-caret-down','fa fa-caret-down','fa fa-caret-down'];
+        $scope.doGetCoursePaymentDetails(1);
     };
 
-    $scope.studentlistinit=function(){
-        $scope.doGetStudentList($scope.pageno);
+    $scope.subscribersListInit=function(){
+        $scope.itemsPerPage = 10;
+        $scope.courseSearch="";
+        $scope.sortId="";
+        $scope.sorttype="";
+
+        //Initialize Pagination
+        $scope.pagination = {
+            current: 1
+        };
+
+        //Object + 1 icons needed NOTE //Initialize Icon
+        $scope.sortIcon=['fa fa-caret-down','fa fa-caret-down','fa fa-caret-down','fa fa-caret-down','fa fa-caret-down','fa fa-caret-down','fa fa-caret-down','fa fa-caret-down'];
+        $scope.doGetCourseSubsciberList(1);
     };
 
-    $scope.studentlistdetailinit=function(){
-        $scope.doGetCoursePuchaseDetails();
+
+    $scope.subscribersDetailInit=function(){
+         $scope.doGetSubscriberDetailView();
     };
 
     $scope.doViewInwardDetails=function(id){
