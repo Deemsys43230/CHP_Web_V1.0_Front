@@ -13,10 +13,11 @@
                     <button type="submit" ><i class="fa fa-search"></i></button>
                 </form>
                 <!-- End Search -->
-                <h2 class="pull-right text-orange"><b>TOTAL EARN : <span class="text-red"><b>1232 $</b></span></b>&nbsp;&nbsp;&nbsp;</h2>
+                <h2 class="pull-right text-orange"><b>TOTAL EARN : <small class="text-bold">Admin :</small>&nbsp;<span class="text-red"><b>{{totalEarningsByAdmin}} $</b></span>&nbsp;&nbsp;<small class="text-bold">Coach :</small>&nbsp;<span class="text-red"><b>{{totalEarningsByCoach}} $</b></span></b>&nbsp;&nbsp;</h2>
                 <h5 class="classic-title"><span><a href="#payments"><i class="fa fa-money"></i>&nbsp;&nbsp;COURSE PAYMENT</a></span>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#coachPayment"><i class="fa fa-dollar"></i>&nbsp;&nbsp;COACH PAYMENT</a></h5>
                 <div ng-if="loaded">
                     <div class="loader-style">
+                        <br/><br/><br/>
                         <div class="loader"></div>
                     </div>
                 </div>
@@ -26,20 +27,20 @@
                         <th class="col-md-2">Course Name<i ng-click="sortingCourse('1')" class="{{sortIcon[1]}} pull-right"></i></th>
                         <th class="col-md-2">Category Name<i ng-click="sortingCourse('2')" class="{{sortIcon[2]}} pull-right"></i></th>
                         <th class="col-md-2">Author Name<i ng-click="sortingCourse('3')" class="{{sortIcon[3]}} pull-right"></i></th>
-                        <th class="col-md-2">Published On<i ng-click="sortingCourse('4')" class="{{sortIcon[4]}} pull-right"></i></th>
-                        <th class="col-md-2">Enroll Count<i ng-click="sortingCourse('6')" class="{{sortIcon[6]}} pull-right"></i></th>
-                        <th class="col-md-2">Course Amount<i ng-click="sortingCourse('5')" class="{{sortIcon[5]}} pull-right"></i></th>
+                        <th class="col-md-1">Pbl. Date<i ng-click="sortingCourse('4')" class="{{sortIcon[4]}} pull-right"></i></th>
+                        <th class="col-md-1">Enrolls<i ng-click="sortingCourse('6')" class="{{sortIcon[6]}} pull-right"></i></th>
+                        <th class="col-md-1">Course $<i ng-click="sortingCourse('5')" class="{{sortIcon[5]}} pull-right"></i></th>
                         <th class="col-md-1">Earnings $<i ng-click="sortingCourse('7')" class="{{sortIcon[7]}} pull-right"></i></th>
-                        <th class="col-md-2">Share Amount $<i ng-click="sortingCourse('8')" class="{{sortIcon[8]}} pull-right"></i></th>
+                        <th class="col-md-1">Share $<i ng-click="sortingCourse('8')" class="{{sortIcon[8]}} pull-right"></i></th>
                         <th class="col-md-1">Options</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr ng-show="courses.length <= 0"><td colspan="5" style="text-align:center;">Loading new data!!</td></tr>
                     <tr dir-paginate="course in courses|itemsPerPage:itemsPerPage" total-items="total_count" current-page="pagination.current">
-                        <td><span class="line-clamp-sm">{{course.coursename}}</span></td>
-                        <td><span class="line-clamp-sm">{{course.categoryname}}</span></td>
-                        <td><span class="line-clamp-sm">{{course.authorname}}</span></td>
+                        <td><span class="line-clamp-xxs">{{course.coursename}}</span></td>
+                        <td><span class="line-clamp-xxs">{{course.categoryname}}</span></td>
+                        <td><span class="line-clamp-xxs">{{course.authorname}}</span></td>
                         <td>{{course.publishedon}}</td>
                         <td>{{course.enrollcount}}</td>
                         <td>{{course.courseamount}}</td>

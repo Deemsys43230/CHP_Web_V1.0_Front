@@ -89,6 +89,8 @@ userApp.controller('ThanksEnrollPageController',function($scope,requestHandler,$
         paymentConfirmDetails.payerId=paymentResponse.PayerID;
         paymentConfirmDetails.courseid=parseInt($routeParams.id);
 
+        console.log(paymentConfirmDetails);
+
         $scope.doExcecutePayment = function(paymentConfirmDetails){
             requestHandler.postRequest("user/enrollCourseExecute/",paymentConfirmDetails).then(function(response){
                 if(response.data.Response_status==0){
@@ -106,7 +108,6 @@ userApp.controller('ThanksEnrollPageController',function($scope,requestHandler,$
                 errorMessage(Flash,"Please try again later!")
             });
         };
-        console.log(paymentConfirmDetails);
         $scope.doExcecutePayment(paymentConfirmDetails);
     }
 });

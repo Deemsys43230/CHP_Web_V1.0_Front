@@ -5,6 +5,9 @@
 var userApp= angular.module('userApp', ['ngRoute','oc.lazyLoad','ngCookies','requestModule','flash']);
 userApp.controller('CourseController',['$scope','requestHandler','Flash','$routeParams','$location',function($scope,requestHandler,Flash,$routeParams,$location) {
 
+    $scope.entrolling="Enroll to this course";
+    $scope.enrollButtonStatus=false;
+
     $scope.mycourselist = function(){
         $scope.loaded=true;
         requestHandler.getRequest("user/getMyCourseList/","").then(function(response) {
@@ -112,6 +115,8 @@ userApp.controller('CourseController',['$scope','requestHandler','Flash','$route
     };
 
     $scope.doEnrollCourse = function(course){
+        $scope.entrolling="Enrolling Please Wait";
+        $scope.enrollButtonStatus=true;
         requestHandler.postRequest("user/enrollCourse/",{"courseid":course,"returnUrl":"http://localhost/cyber/views/user/#/thanksEnrollPage/"+course,"cancelUrl":"http://localhost/cyber/views/user/#/courses"}).then(function(response){
             if(response.data.transactionStatus==1){
                 window.location=response.data.approveURL.href;

@@ -7123,6 +7123,12 @@ a.suggest_button {
 
 a.suggest_button:hover{
     background-color: #16b56f;
+    color: #fff;
+    cursor: pointer;
+}
+
+a.suggest_button:focus{
+    color: #fff;
     cursor: pointer;
 }
 
@@ -8209,14 +8215,14 @@ a:hover, a:visited, a:link, a:active
 
 /*search*/
 .form-wrapper {
-    width: 300px;
+    width: 250px;
     background: #444;
 }
 
 .form-wrapper input {
-    width: 270px;
+    width: 220px;
     height: 30px;
-    padding: 10px;
+    padding: 3px 10px;
     float: left;
     border: 0;
     background: #eee;
@@ -10024,4 +10030,40 @@ a.cancel:hover{
     -moz-box-shadow: 0 0 5px rgba(0,0,0,0.5);
     -o-box-shadow: 0 0 5px rgba(0,0,0,0.5);
     box-shadow: 0 0 5px rgba(0,0,0,0.5);
+}
+
+.one {
+    opacity: 0;
+    -webkit-animation: dot 1.3s infinite;
+    -webkit-animation-delay: 0.0s;
+    animation: dot 1.3s infinite;
+    animation-delay: 0.0s;
+}
+
+.two {
+    opacity: 0;
+    -webkit-animation: dot 1.3s infinite;
+    -webkit-animation-delay: 0.2s;
+    animation: dot 1.3s infinite;
+    animation-delay: 0.2s;
+}
+
+.three {
+    opacity: 0;
+    -webkit-animation: dot 1.3s infinite;
+    -webkit-animation-delay: 0.3s;
+    animation: dot 1.3s infinite;
+    animation-delay: 0.3s;
+}
+
+@-webkit-keyframes dot {
+    0% { opacity: 0; }
+    50% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+@keyframes dot {
+    0% { opacity: 0; }
+    50% { opacity: 0; }
+    100% { opacity: 1; }
 }
