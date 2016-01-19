@@ -370,38 +370,30 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
-                                '../../js/bootstrap.min.js'
+                                '../../js/bootstrap.min.js',
+                                '../../app/member/memberController.js'
                             ]
                         })
                     }
-                }
+                },
+                controller:'MemberController'
             }).
-            when('/member-view', {
+            when('/member-view/:id', {
                 templateUrl: 'views/member-view.html',
                 resolve: {
                     loadMyFiles:function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
-                                '../../js/bootstrap.min.js'
+                                '../../js/bootstrap.min.js',
+                                '../../app/member/memberController.js'
                             ]
                         })
                     }
-                }
+                },
+                controller:'MemberController'
             }).
-            when('/member-edit', {
-                templateUrl: 'views/member-edit.html',
-                resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
-                        return $ocLazyLoad.load({
-                            name:'adminApp',
-                            files:[
-                                '../../js/bootstrap.min.js'
-                            ]
-                        })
-                    }
-                }
-            }).
+
             when('/coach', {
                 templateUrl: 'views/coach.html',
                 resolve: {

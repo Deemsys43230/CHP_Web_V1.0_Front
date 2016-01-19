@@ -78,8 +78,8 @@
                     </tr>
                     </thead>
                     <tbody >
-                    <tr dir-paginate="coach in coachfilter = (coachList |startsWithLetter: coachsearch| itemsPerPage: 7)" ng-show="coachList.length!=0">
-                        <td>{{coach.name}}</td>
+                    <tr dir-paginate="coach in coachfilter = (coachList |startsWithLettercoach: coachsearch| itemsPerPage: 7)" ng-show="coachList.length!=0">
+                        <td><a href="#coach-view/{{coach.userid}}">{{coach.name}}</a></td>
                         <td>{{coach.emailid}}</td>
                         <td>
                             <a href="#coach-view/{{coach.userid}}" class="btn-xs btn-primary">View</a>

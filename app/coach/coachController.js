@@ -190,7 +190,7 @@ adminApp.filter('trusted', ['$sce', function ($sce) {
     };
 }]);
 
-adminApp.filter('startsWithLetter', function () {
+adminApp.filter('startsWithLettercoach', function () {
 
     return function (items, coachsearch) {
 
