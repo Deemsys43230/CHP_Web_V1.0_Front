@@ -1,0 +1,62 @@
+
+<!-- Start Page Banner -->
+<div class="page-banner1">
+    <div id="w" class="clearfix">
+        <div id="demography-content" ng-init="getSettingDetails()">
+            <div class="col-md-12">
+                <h5 class="classic-title"><a href="#payments"><i class="fa fa-money"></i>&nbsp;&nbsp;COURSE PAYMENTS</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#coachPayments"><i class="fa fa-dollar"></i>&nbsp;&nbsp;COACH PAYMENTS</a>&nbsp;&nbsp;|&nbsp;&nbsp;<span><a href="#paymentSettings"><i class="fa fa-dollar"></i>&nbsp;&nbsp;PAYMENT SETTINGS</a></span></h5>
+            </div>
+            <div class="col-md-9 min-height-450">
+
+                <div flash-message="2000" class="col-md-4 pull-right"></div>
+                <h3 class="margin-bottom-10"><i class="fa fa-paypal"></i> &nbsp;Paypal Settings</h3>
+                <div ng-if="loaded">
+                    <div class="loader-style">
+                        <div class="loader"></div>
+                    </div>
+                </div>
+                <div class="col-md-12 no-padding">
+                    <hr/>
+                    <form name="paypalSettingsForm">
+                        <div class="row form-set">
+                            <div class="col-md-3 margin-top-10">
+                                <h4>Paypal Email :</h4>
+                            </div>
+                            <div class="col-md-9 margin-top-10">
+                                <input type="text" class="search-input" placeholder="Enter Paypal Email ID" name="paypalid" ng-model="paypalDetails.paypalid" required>
+                                 <span ng-show="paypalSettingsForm.paypalid.$dirty&&paypalSettingsForm.paypalid.$invalid">
+                                        <span class="error-message" ng-show="paypalSettingsForm.paypalid.$error.required"><span>Required.</span></span>
+                                 </span>
+                            </div>
+                            <div class="col-md-3 margin-top-10">
+                                <h4>Paypal Name :</h4>
+                            </div>
+                            <div class="col-md-9 margin-top-10">
+                                <input class="search-input" name="paypalname" placeholder="Enter Paypal User Name" ng-model="paypalDetails.paypalname" required>
+                                 <span ng-show="paypalSettingsForm.paypalname.$dirty&&paypalSettingsForm.paypalname.$invalid">
+                                        <span class="error-message" ng-show="paypalSettingsForm.paypalname.$error.required"><span>Required.</span></span>
+                                 </span>
+                            </div>
+                            <div class="col-md-3 margin-top-10">
+                                <h4>Currency :</h4>
+                            </div>
+                            <div class="col-md-9 margin-top-10">
+                                <select class="full-width course-select" placeholder="Select Currency" name="currencycode" ng-model="paypalDetails.currencycode" ng-options="currencycode.currencycode as currencycode.currencycode for currencycode in currencycodeData" required>
+                                    <option value="">-- Select a Currency Code --</option>
+                                </select>
+                                <span ng-show="paypalSettingsForm.currencycode.$dirty&&paypalSettingsForm.currencycode.$invalid">
+                    <span class="error-message textarea-errormessage10" ng-show="paypalSettingsForm.currencycode.$error.required"><span>Required.</span></span>
+                             </span>
+                            </div>
+
+                        </div>
+
+                        <div class="text-center margin-top-10">
+                            <a href=""  class="btn btn-success" ng-disabled="paypalSettingsForm.$invalid || isCleanPaypalSettings()" ng-click="doUpdatePaypalDetails()">Save Changes</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

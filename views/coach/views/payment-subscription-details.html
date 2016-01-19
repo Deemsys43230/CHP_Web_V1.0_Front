@@ -1,0 +1,61 @@
+
+
+<!-- Start Page Banner -->
+<div class="page-banner1">
+    <div id="w" class="clearfix">
+        <div id="demography-content" ng-init="studentSubscriptionDetailsInit()">
+
+            <div class="col-md-12 min-height-450">
+                <a href="#subscribersPayments" class="btn-sm btn-warning pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i>&nbsp;Back</a>
+                <h5 class="classic-title"><i class="fa fa-newspaper-o"></i>&nbsp;&nbsp;COURSE PURCHASED DETAILS</h5>
+                <div ng-if="loaded">
+                    <div class="loader-style">
+                        <div class="loader"></div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <h4>COACH DETAILS</h4><br/>
+                    <img class="margin-bottom-10" ng-src="{{coachDetails.coachimage|trusted}}">
+                    <h4>{{coachDetails.coachname}}</h4>
+                    <h4>{{coachDetails.coachemailid}}</h4>
+                </div>
+                <div class="col-md-6 no-padding">
+                    <h4 class="col-md-12">OUTWARD DETAILS<br/><br/></h4>
+                    <h4>
+                        <div class="col-md-4">Outward Id</div>
+                        <div class="col-md-8 no-padding">:&nbsp;&nbsp;{{outwardDetails.outwardid}}</div>
+                        <div class="col-md-4">Amount</div>
+                        <div class="col-md-8 no-padding">:&nbsp;&nbsp;{{outwardDetails.amount}}</div>
+                        <div class="col-md-4">Receiver Email id</div>
+                        <div class="col-md-8 no-padding">:&nbsp;&nbsp;{{outwardDetails.receiveremailid}}</div>
+                        <div class="col-md-4">Receiver Account id</div>
+                        <div class="col-md-8 no-padding">:&nbsp;&nbsp;{{outwardDetails.receiveraccountid}}</div>
+                        <div class="col-md-4">Sender Email Id</div>
+                        <div class="col-md-8 no-padding">:&nbsp;&nbsp;{{outwardDetails.senderemailid}}</div>
+                        <div class="col-md-4">Sender Account Id</div>
+                        <div class="col-md-8 no-padding">:&nbsp;&nbsp;{{outwardDetails.senderaccountid}}</div>
+                        <div class="col-md-4">Transaction Id</div>
+                        <div class="col-md-8 no-padding">:&nbsp;&nbsp;{{outwardDetails.transactionid}}</div>
+                        <div class="col-md-4">Transcation Date</div>
+                        <div class="col-md-8 no-padding">:&nbsp;&nbsp;{{outwardDetails.transactiondate}}</div>
+                        <div class="col-md-4">Transaction Status</div>
+                        <div class="col-md-8 no-padding">:&nbsp;&nbsp;{{outwardDetails.transactionstatus}}</div>
+                        <div class="col-md-4">Currency code</div>
+                        <div class="col-md-8 no-padding">:&nbsp;&nbsp;{{outwardDetails.currencycode}}</div>
+                    </h4>
+                </div>
+                <div class="col-md-3">
+                    <h4>SUBSCRIBER DETAILS</h4><br/>
+                    <img class="margin-bottom-10" ng-src="{{userdetail.userimage|trusted}}">
+                    <h4>{{userdetail.username}}</h4>
+                    <h4>{{userdetail.useremailid}}</h4>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- End Page Banner -->
+
+<script type="text/javascript" src="../../js/script.js"></script>

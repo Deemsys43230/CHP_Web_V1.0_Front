@@ -1,8 +1,9 @@
 
 var userApp = angular.module('userApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','friendsServiceModule']);
 
-userApp.controller('FriendsController',function($scope,requestHandler,Flash,FriendsService){
+userApp.controller('FriendsController',function($scope,requestHandler,Flash,FriendsService,$sce){
 
+    $scope.viewDetails=0;
     //Initialize search
     $scope.friendsearch="";
 
@@ -87,11 +88,29 @@ userApp.controller('FriendsController',function($scope,requestHandler,Flash,Frie
         })
     };
 
+    //user view details
+    $scope.doViewMembers= function (id) {
+        $scope.viewDetails=1;
+        $scope.loaded = true;
+        requestHandler.getRequest("getUserIndividualDetail/"+id,"").then(function(response){
+            $scope.myImgSrc = $sce.trustAsResourceUrl(response.data.getUserIndividualDetail.imageurl+"?decache="+Math.random());
+            $scope.viewMemberDetails = response.data.getUserIndividualDetail;
+            //View the image in ng-src for view testimonials
+            $scope.loaded = false;
+            $scope.paginationLoad = true;
+
+        },  function () {
+            errorMessage(Flash, "Please try again later!")
+        });
+    };
+
     //Onload
     $scope.initialLoad=function(){
         $scope.myFriends();
         $scope.requestedFriends();
         $scope.searchFriends();
+        $scope.viewDetails=0;
+
     };
 
     $scope.initialLoad();

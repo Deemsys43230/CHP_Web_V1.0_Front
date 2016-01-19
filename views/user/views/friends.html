@@ -36,14 +36,119 @@
                         </div>
                     </div>
                     <div class="row friends-list">
+                        <div ng-hide="viewDetails==1">
                         <div class="col-md-3" ng-repeat="myfriends in friendsfilter=( myFriendsList | filter: {name : myfriendssearch} | startFrom:currentPage*pageSize | limitTo:pageSize)" ng-show="myFriendsList.length!=0">
                             <a href="" class="img-shadow"><img ng-src="{{myfriends.imageurl | trusted}}"/></a>
-                            <h5 class="wrap"><a href="">{{myfriends.name}}</a></h5>
+                            <h5 class="wrap"><a href="" ng-click="doViewMembers(myfriends.userid)">{{myfriends.name}}</a></h5>
                         </div>
                         <h1 class="col-md-12 margin-top-50 text-gray text-center" ng-show="!friendsfilter.length" ng-if="!loaded">
                             <img src="../../images/no-friend.png"/><br/>
                             NO FRIENDS FOUND!!!
                         </h1>
+                        </div>
+                        <div ng-show="viewDetails==1">
+                            <a href="" class="back-button pull-right margin-right-40 margin-top-20" ng-click="initialLoad()"><i class="fa fa-arrow-circle-o-left"></i> Back to Myfriends</a>
+                        <div class="col-md-3 coach-details">
+                            <img ng-src="{{myImgSrc}}"/>
+                            <h3 class="margin-top-10 text-center">{{viewMemberDetails.name}}</h3>
+                        </div>
+                        <div class="col-md-9 margin-top-20">
+                            <div class="row">
+                                <div class="col-md-6">
+
+                                    <div class="row margin-bottom-10">
+                                        <div class="col-md-4">
+                                            Name :
+                                        </div>
+                                        <div class="col-md-8">
+                                            {{viewMemberDetails.name}}
+                                        </div>
+                                    </div>
+                                    <div class="row margin-bottom-10">
+                                        <div class="col-md-4">
+                                            Email ID :
+                                        </div>
+                                        <div class="col-md-8">
+                                            {{viewMemberDetails.emailid}}
+                                        </div>
+                                    </div>
+
+                                    <div class="row margin-bottom-10">
+                                        <div class="col-md-4">
+                                            Gender :
+                                        </div>
+
+                                        <div class="col-md-8" ng-if="viewMemberDetails.gender == 1">
+                                            Male
+                                        </div>
+
+                                        <div class="col-md-8" ng-if="viewMemberDetails.gender == 2">
+                                            Female
+                                        </div>
+                                    </div>
+
+                                    <div class="row margin-bottom-10">
+                                        <div class="col-md-4">
+                                            About :
+                                        </div>
+                                        <div class="col-md-8">
+                                            {{viewMemberDetails.about}}
+                                        </div>
+                                    </div>
+                                    <div ng-if="viewMemberDetails.isprivacy==0">
+                                        <div class="row margin-bottom-10">
+                                            <div class="col-md-4">
+                                                DOB :
+                                            </div>
+                                            <div class="col-md-8">
+                                                {{viewMemberDetails.dob}}
+                                            </div>
+                                        </div>
+                                        <div class="row margin-bottom-10">
+                                            <div class="col-md-4">
+                                                Phone :
+                                            </div>
+                                            <div class="col-md-8">
+                                                {{viewMemberDetails.phone}}
+                                            </div>
+                                        </div>
+                                        <div class="row margin-bottom-10">
+                                            <div class="col-md-4">
+                                                Country :
+                                            </div>
+                                            <div class="col-md-8">
+                                                {{viewMemberDetails.country}}
+                                            </div>
+                                        </div>
+                                        <div class="row margin-bottom-10">
+                                            <div class="col-md-4">
+                                                State :
+                                            </div>
+                                            <div class="col-md-8">
+                                                {{viewMemberDetails.state}}
+                                            </div>
+                                        </div>
+                                        <div class="row margin-bottom-10">
+                                            <div class="col-md-4">
+                                                City :
+                                            </div>
+                                            <div class="col-md-8">
+                                                {{viewMemberDetails.city}}
+                                            </div>
+                                        </div>
+                                        <div class="row margin-bottom-10">
+                                            <div class="col-md-4">
+                                                Zipcode :
+                                            </div>
+                                            <div class="col-md-8">
+                                                {{viewMemberDetails.zipcode}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>
+                        </div>
+                            </div>
                     </div>
                 </div>
                 <div class="friend-request">
