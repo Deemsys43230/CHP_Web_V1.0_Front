@@ -7,8 +7,8 @@
                 <div class="my-friends">
 
                     <h5 class="classic-title"><span><a href="" ng-click="initialLoad()"><i class="fa fa-users my-friends-list"></i>&nbsp;&nbsp;My Friends</a></span>
-                        &nbsp;&nbsp;|&nbsp;&nbsp;<a href="" class="friends-request" ng-click="initialLoad()"><i class="fa fa-envelope"></i>&nbsp;&nbsp;Request Received</a>
-                        &nbsp;&nbsp;|&nbsp;&nbsp;<a href="" class="friends-request-sent" ng-click="initialLoad()"><i class="fa fa-paper-plane"></i>&nbsp;&nbsp;Request Sent </a>
+                        &nbsp;&nbsp;|&nbsp;&nbsp;<a href="" class="friends-request" ng-click="initialLoad()"><i class="fa fa-envelope"></i>&nbsp;&nbsp;Request Received</a>&nbsp;<a class="text-red text-bold" ng-show="(requestedFriendsList | filter: {friendStatus: 2}).length!=0">[{{(requestedFriendsList | filter: {friendStatus: 2}).length}}]</a>
+                        &nbsp;&nbsp;|&nbsp;&nbsp;<a href="" class="friends-request-sent" ng-click="initialLoad()"><i class="fa fa-paper-plane"></i>&nbsp;&nbsp;Request Sent </a><a class="text-red text-bold" ng-show="(requestedFriendsList | filter: {friendStatus: 1}).length!=0">[{{(requestedFriendsList | filter: {friendStatus: 1}).length}}]</a>
                     </h5>
                     <div ng-if="loaded">
                         <div class="loader-style">
@@ -157,8 +157,8 @@
                 </div>
                 <div class="friend-request">
                     <h5 class="classic-title"><a href="" class="my-friends-list" ng-click="initialLoad()"><i class="fa fa-users"></i>&nbsp;&nbsp;My Friends</a>
-                        &nbsp;&nbsp;|&nbsp;&nbsp;<span><a href="" ng-click="initialLoad()"><i class="fa fa-envelope"></i>&nbsp;&nbsp;Request Received</a></span>
-                        &nbsp;&nbsp;|&nbsp;&nbsp;<a href="" class="friends-request-sent" ng-click="initialLoad()"><i class="fa fa-paper-plane"></i>&nbsp;&nbsp;Request Sent</a>
+                        &nbsp;&nbsp;|&nbsp;&nbsp;<span><a href="" ng-click="initialLoad()"><i class="fa fa-envelope"></i>&nbsp;&nbsp;Request Received</a></span>&nbsp;<a class="text-red text-bold" ng-show="(requestedFriendsList | filter: {friendStatus: 2}).length!=0">[{{(requestedFriendsList | filter: {friendStatus: 2}).length}}]</a>
+                        &nbsp;&nbsp;|&nbsp;&nbsp;<a href="" class="friends-request-sent" ng-click="initialLoad()"><i class="fa fa-paper-plane"></i>&nbsp;&nbsp;Request Sent</a>&nbsp;<a class="text-red text-bold" ng-show="(requestedFriendsList | filter: {friendStatus: 1}).length!=0">[{{(requestedFriendsList | filter: {friendStatus: 1}).length}}]</a>
                     </h5>
                     <div ng-if="loaded">
                         <div class="loader-style">
@@ -204,8 +204,8 @@
                 </div>
                 <div class="friend-request-sent">
                     <h5 class="classic-title"><a href="" class="my-friends-list" ng-click="initialLoad()"><i class="fa fa-users"></i>&nbsp;&nbsp;My Friends</a>
-                        &nbsp;&nbsp;|&nbsp;&nbsp;<a href="" class="friends-request" ng-click="initialLoad()"><i class="fa fa-envelope"></i>&nbsp;&nbsp;Request Received</a>
-                        &nbsp;&nbsp;|&nbsp;&nbsp;<span><a href="" ng-click="initialLoad()"><i class="fa fa-paper-plane"></i>&nbsp;&nbsp;Request Sent</a></span>
+                        &nbsp;&nbsp;|&nbsp;&nbsp;<a href="" class="friends-request" ng-click="initialLoad()"><i class="fa fa-envelope"></i>&nbsp;&nbsp;Request Received</a>&nbsp;<a class="text-red text-bold" ng-show="(requestedFriendsList | filter: {friendStatus: 2}).length!=0">[{{(requestedFriendsList | filter: {friendStatus: 2}).length}}]</a>
+                        &nbsp;&nbsp;|&nbsp;&nbsp;<span><a href="" ng-click="initialLoad()"><i class="fa fa-paper-plane"></i>&nbsp;&nbsp;Request Sent</a></span>&nbsp;<a class="text-red text-bold" ng-show="(requestedFriendsList | filter: {friendStatus: 1}).length!=0">[{{(requestedFriendsList | filter: {friendStatus: 1}).length}}]</a>
                     </h5>
                     <div ng-if="loaded">
                         <div class="loader-style">
