@@ -1002,6 +1002,21 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'AdminPaymentController'
             }).
+            when('/coachSubscriberDetails/:id', {
+                templateUrl: 'views/payments-coach-subscriber-details.html',
+                resolve: {
+                    loadMyFiles:function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'adminApp',
+                            files:[
+                                '../../js/bootstrap.min.js',
+                                '../../app/payments/adminPaymentController.js'
+                            ]
+                        })
+                    }
+                },
+                controller:'AdminPaymentController'
+            }).
             when('/coachPayment', {
                 templateUrl: 'views/payments-coach.html',
                 resolve: {
@@ -1025,9 +1040,7 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                             name:'adminApp',
                             files:[
                                 '../../js/bootstrap.min.js',
-                                '../../app/payments/adminPaymentController.js',                                
-                                '../../plugin/popup/style.css',
-                                '../../plugin/popup/jquery.leanModal.min.js'
+                                '../../app/payments/adminPaymentController.js'
                             ]
                         })
                     }

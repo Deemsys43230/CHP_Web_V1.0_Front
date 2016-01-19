@@ -1,0 +1,84 @@
+
+
+<!-- Start Page Banner -->
+<div class="page-banner">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 min-height-450 margin-bottom-20" ng-init="coachSubscribersDetailInit()">
+                <a href="#coachSubscribersList/{{coachSubscriptionDetailView.coachdetail.coachid}}" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back to subscribers list</a>
+                <h5 class="classic-title"><i class="fa fa-newspaper-o"></i>&nbsp;&nbsp;COURSE PURCHASED DETAILS</h5>
+                <div ng-if="loaded">
+                    <div class="loader-style">
+                        <br/><br/><br/>
+                        <div class="loader"></div>
+                    </div>
+                </div>
+                <div class="col-md-2 no-padding">
+                    <h4>SUBSCRIBER DETAILS</h4><br/>
+                    <img class="margin-bottom-10" ng-src="{{coachSubscriptionDetailView.userdetail.userimage|trusted}}">
+                    <h5 class="wrap">{{coachSubscriptionDetailView.userdetail.username}}</h5>
+                    <h6 class="wrap">{{coachSubscriptionDetailView.userdetail.useremailid}}</h6>
+                </div>
+                <div class="col-md-8">
+                    <h4 class="col-md-12 text-center">SUBSCRIPTION DETAILS<br/></h4>
+                    <h4 class="col-md-12 text-gray margin-bottom-15 margin-top-10">Inward Details</h4>
+                    <h5>
+                        <div class="col-md-4">Inward Id</div>
+                        <div class="col-md-8 no-padding">:&nbsp;&nbsp;{{coachSubscriptionDetailView.inwarddetail.inwardid}}</div>
+                        <div class="col-md-4">Payer Email</div>
+                        <div class="col-md-8 no-padding">:&nbsp;&nbsp;{{coachSubscriptionDetailView.inwarddetail.payeremail}}</div>
+                        <div class="col-md-4">Paypal Firstname</div>
+                        <div class="col-md-8 no-padding">:&nbsp;&nbsp;{{coachSubscriptionDetailView.inwarddetail.paypalfirstname}}</div>
+                        <div class="col-md-4">Paypal Lastname</div>
+                        <div class="col-md-8 no-padding">:&nbsp;&nbsp;{{coachSubscriptionDetailView.inwarddetail.paypallastname}}</div>
+                        <div class="col-md-4">Payer ID</div>
+                        <div class="col-md-8 no-padding">:&nbsp;&nbsp;{{coachSubscriptionDetailView.inwarddetail.payerID}}</div>
+                        <div class="col-md-4">Transaction Date</div>
+                        <div class="col-md-8 no-padding">:&nbsp;&nbsp;{{coachSubscriptionDetailView.inwarddetail.transactiondate}}</div>
+                        <div class="col-md-4">Transaction Fee</div>
+                        <div class="col-md-8 no-padding">:&nbsp;&nbsp;{{coachSubscriptionDetailView.inwarddetail.transactionfee}}&nbsp;$</div>
+                        <div class="col-md-4">Transaction Amount</div>
+                        <div class="col-md-8 no-padding">:&nbsp;&nbsp;{{coachSubscriptionDetailView.inwarddetail.transactionamount}}&nbsp;$</div>
+                        <div class="col-md-4">Transaction Status</div>
+                        <div class="col-md-8 no-padding">:&nbsp;&nbsp;{{coachSubscriptionDetailView.inwarddetail.transactionstatus}}</div>
+                        <div class="col-md-4">Currency Code</div>
+                        <div class="col-md-8 no-padding">:&nbsp;&nbsp;{{coachSubscriptionDetailView.inwarddetail.currencycode}}</div>
+                    </h5>
+                    <h4 class="col-md-12 text-gray margin-tb-20">Outward Details</h4>
+                    <h5>
+                        <div class="col-md-4">Outward Id</div>
+                        <div class="col-md-8 no-padding">:&nbsp;&nbsp;{{coachSubscriptionDetailView.outwarddetail.outwardid}}</div>
+                        <div class="col-md-4">Amount</div>
+                        <div class="col-md-8 no-padding">:&nbsp;&nbsp;{{coachSubscriptionDetailView.outwarddetail.amount}}&nbsp;$</div>
+                        <div class="col-md-4">Receiver Email Id</div>
+                        <div class="col-md-8 no-padding">:&nbsp;&nbsp;{{coachSubscriptionDetailView.outwarddetail.receiveremailid}}</div>
+                        <div class="col-md-4">Receiver Account Id</div>
+                        <div class="col-md-8 no-padding">:&nbsp;&nbsp;{{coachSubscriptionDetailView.outwarddetail.receiveraccountid}}</div>
+                        <div class="col-md-4">Sender Email Id</div>
+                        <div class="col-md-8 no-padding">:&nbsp;&nbsp;{{coachSubscriptionDetailView.outwarddetail.senderemailid}}</div>
+                        <div class="col-md-4">Sender Account Id</div>
+                        <div class="col-md-8 no-padding">:&nbsp;&nbsp;{{coachSubscriptionDetailView.outwarddetail.senderaccountid}}</div>
+                        <div class="col-md-4">transaction Id</div>
+                        <div class="col-md-8 no-padding">:&nbsp;&nbsp;{{coachSubscriptionDetailView.outwarddetail.transactionid}}</div>
+                        <div class="col-md-4">Transaction Date</div>
+                        <div class="col-md-8 no-padding">:&nbsp;&nbsp;{{coachSubscriptionDetailView.outwarddetail.transactiondate}}</div>
+                        <div class="col-md-4">Transaction Status</div>
+                        <div class="col-md-8 no-padding">:&nbsp;&nbsp;{{coachSubscriptionDetailView.outwarddetail.transactionstatus}}</div>
+                        <div class="col-md-4">Currency Code</div>
+                        <div class="col-md-8 no-padding">:&nbsp;&nbsp;{{coachSubscriptionDetailView.outwarddetail.currencycode}}</div>
+                    </h5>
+                </div>
+                <div class="col-md-2 no-padding">
+                    <h4>COACH DETAILS</h4><br/>
+                    <img class="margin-bottom-10" ng-src="{{coachSubscriptionDetailView.coachdetail.coachimage|trusted}}">
+                    <h5 class="wrap">{{coachSubscriptionDetailView.coachdetail.coachname}}</h5>
+                    <h6 class="wrap">{{coachSubscriptionDetailView.coachdetail.coachemailid}}</h6>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- End Page Banner -->
+
+<script type="text/javascript" src="../../js/script.js"></script>
