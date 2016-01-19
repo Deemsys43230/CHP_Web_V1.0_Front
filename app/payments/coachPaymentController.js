@@ -19,12 +19,94 @@ coachApp.controller('CoachPaymentController',function($scope,requestHandler,Flas
         });
     };
 
-    $scope.doGetMyStudentListByCourse=function(){
-        requestHandler.postRequest("coach/courseTransactionHistory/",{"courseid":$routeParams.id,"offset":0,"limit":10,"searchname":"","sortid":"","sorttype":""}).then(function(response) {
-            $scope.studentList = response.data.purchasehistory.purchasedList;
-            console.log("asda",$scope.studentList);
+    $scope.doGetMySubscribersListByCourse=function(pageno){
+
+        $scope.pagination.current=pageno;
+        $scope.offset=(pageno-1)*$scope.itemsPerPage;
+        $scope.limit=pageno*$scope.itemsPerPage;
+        $scope.loaded=true;
+
+        if($scope.subscriberSearch==undefined){
+            $scope.subscriberSearch="";
+        }
+
+        $scope.params={
+            "courseid":$routeParams.id,
+            "limit":$scope.limit,
+            "offset":$scope.offset,
+            "searchname":$scope.subscriberSearch,
+            "sortid":$scope.sortId,
+            "sorttype":$scope.sorttype
+        };
+
+        requestHandler.postRequest("coach/courseTransactionHistory/",$scope.params).then(function(response) {
+            $scope.subscribersList = response.data.purchasehistory;
+            $scope.total_count=response.data.totalrecordcount;
+            $scope.loaded=false;
         },function(){
             errorMessage(Flash,"Please try again later!")
+        });
+    };
+
+    $scope.sortingCourseSubscriber = function(id){
+        $scope.sortId=id;
+        var currentOrder=$scope.sortIcon[id];
+        //Object + 1 icons needed NOTE
+        $scope.sortIcon=['fa fa-caret-up','fa fa-caret-up','fa fa-caret-up','fa fa-caret-up','fa fa-caret-up'];
+
+        if(currentOrder=='fa fa-caret-up'){
+            $scope.sortIcon[id]='fa fa-caret-down';
+            $scope.sorttype=1;
+        }else{
+            $scope.sortIcon[id]='fa fa-caret-up';
+            $scope.sorttype=2;
+        }
+        $scope.doGetMySubscribersListByCourse(1);
+    };
+
+    $scope.sortingCoachSubscriber = function(id){
+        $scope.sortId=id;
+        var currentOrder=$scope.sortIcon[id];
+        //Object + 1 icons needed NOTE
+        $scope.sortIcon=['fa fa-caret-down','fa fa-caret-down','fa fa-caret-down','fa fa-caret-down','fa fa-caret-down'];
+
+        if(currentOrder=='fa fa-caret-down'){
+            $scope.sortIcon[id]='fa fa-caret-up';
+            $scope.sorttype=2;
+        }else{
+            $scope.sortIcon[id]='fa fa-caret-down';
+            $scope.sorttype=1;
+        }
+        $scope.doGetMySubscribersListByCoach(1);
+    };
+
+    $scope.doViewPaymentDetails=function(outwardid){
+
+        $(function(){
+            $("#lean_overlay").fadeTo(1000);
+            $("#paymentView").fadeIn(600);
+            $(".common_model").show();
+        });
+
+        $scope.loaded=true;
+
+        requestHandler.postRequest("outwardPaymentDetail/",{'outwardid':outwardid}).then(function(response){
+            $scope.paymentDetails=response.data.outwardDetails;
+            $scope.loaded=false;
+        },function(){
+            errorMessage(Flash,"Please try again later!")
+        });
+
+        $(".modal_close").click(function(){
+            $(".common_model").hide();
+            $("#paymentView").hide();
+            $("#lean_overlay").hide();
+        });
+
+        $("#lean_overlay").click(function(){
+            $(".common_model").hide();
+            $("#paymentView").hide();
+            $("#lean_overlay").hide();
         });
     };
 
@@ -37,9 +119,29 @@ coachApp.controller('CoachPaymentController',function($scope,requestHandler,Flas
     };
 
     // To display Coach list by user
-    $scope.doGetMyStudentListByCoach=function(){
-        requestHandler.postRequest("coach/coachSubscribedTransactionHistory/",{"offset":0,"limit":10,"searchname":"","sortid":"","sorttype":""}).then(function(response) {
+    $scope.doGetMySubscribersListByCoach=function(pageno){
+
+        $scope.pagination.current=pageno;
+        $scope.offset=(pageno-1)*$scope.itemsPerPage;
+        $scope.limit=pageno*$scope.itemsPerPage;
+        $scope.loaded=true;
+
+        if($scope.subscriberSearch==undefined){
+            $scope.subscriberSearch="";
+        }
+
+        $scope.params={
+            "limit":$scope.limit,
+            "offset":$scope.offset,
+            "searchname":$scope.subscriberSearch,
+            "sortid":$scope.sortId,
+            "sorttype":$scope.sorttype
+        };
+
+        requestHandler.postRequest("coach/coachSubscribedTransactionHistory/",$scope.params).then(function(response) {
             $scope.subscribedList = response.data.purchasehistory.purchasedList;
+            $scope.total_count=response.data.totalrecordcount;
+            $scope.loaded=false;
         },function(){
             errorMessage(Flash,"Please try again later!")
         });
@@ -56,7 +158,6 @@ coachApp.controller('CoachPaymentController',function($scope,requestHandler,Flas
     $scope.doGetSubscriptionDetails =function(){
             requestHandler.postRequest("coach/detailViewofsubscriptionTransaction/",{"paymentid":$routeParams.id}).then(function(response) {
             $scope.outwardDetails = response.data.subscription_transaction_detail.outwarddetail;
-                console.log("jgfghf",$scope.outwardDetails);
             $scope.coachDetails = response.data.subscription_transaction_detail.coachdetail;
             $scope.userdetail =  response.data.subscription_transaction_detail.userdetail;
         },function(){
@@ -69,13 +170,39 @@ coachApp.controller('CoachPaymentController',function($scope,requestHandler,Flas
         $scope.doGetCourseTotalEarnings();
     };
 
-    $scope.studentListInit=function(){
-        $scope.doGetMyStudentListByCourse();
+    $scope.subscribersListInit=function(){
+        $scope.itemsPerPage = 10;
+        $scope.subscriberSearch="";
+        $scope.sortId="";
+        $scope.sorttype="";
+
+        //Initialize Pagination
+        $scope.pagination = {
+            current: 1
+        };
+
+        //Object + 1 icons needed NOTE //Initialize Icon
+        $scope.sortIcon=['fa fa-caret-up','fa fa-caret-up','fa fa-caret-up','fa fa-caret-up','fa fa-caret-up'];
+
+        $scope.doGetMySubscribersListByCourse(1);
         $scope.doGetPerCourseTotalEarnings();
     };
 
-    $scope.studentSubscriptionList=function(){
-        $scope.doGetMyStudentListByCoach();
+    $scope.SubscriptionList=function(){
+        $scope.itemsPerPage = 10;
+        $scope.subscriberSearch="";
+        $scope.sortId="";
+        $scope.sorttype="";
+
+        //Initialize Pagination
+        $scope.pagination = {
+            current: 1
+        };
+
+        //Object + 1 icons needed NOTE //Initialize Icon
+        $scope.sortIcon=['fa fa-caret-down','fa fa-caret-down','fa fa-caret-down','fa fa-caret-down','fa fa-caret-down','fa fa-caret-down'];
+
+        $scope.doGetMySubscribersListByCoach(1);
         $scope.doGetTotalSubscriptionEarnings();
     };
 

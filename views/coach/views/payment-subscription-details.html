@@ -6,23 +6,23 @@
         <div id="demography-content" ng-init="studentSubscriptionDetailsInit()">
 
             <div class="col-md-12 min-height-450">
-                <a href="#subscribersPayments" class="btn-sm btn-warning pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i>&nbsp;Back</a>
+                <a href="#subscribersPayments" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back to subscribers list</a>
                 <h5 class="classic-title"><i class="fa fa-newspaper-o"></i>&nbsp;&nbsp;COURSE PURCHASED DETAILS</h5>
                 <div ng-if="loaded">
                     <div class="loader-style">
                         <div class="loader"></div>
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-2 no-padding">
                     <h4>COACH DETAILS</h4><br/>
                     <img class="margin-bottom-10" ng-src="{{coachDetails.coachimage|trusted}}">
-                    <h4>{{coachDetails.coachname}}</h4>
-                    <h4>{{coachDetails.coachemailid}}</h4>
+                    <h5 class="wrap">{{coachDetails.coachname}}</h5>
+                    <h6 class="wrap">{{coachDetails.coachemailid}}</h6>
                 </div>
-                <div class="col-md-6 no-padding">
-                    <h4 class="col-md-12">OUTWARD DETAILS<br/><br/></h4>
-                    <h4>
-                        <div class="col-md-4">Outward Id</div>
+                <div class="col-md-8">
+                    <h4 class="col-md-12 text-center">PAYMENT DETAILS<br/><br/></h4>
+                    <h5>
+                        <div class="col-md-4">Receipt Id</div>
                         <div class="col-md-8 no-padding">:&nbsp;&nbsp;{{outwardDetails.outwardid}}</div>
                         <div class="col-md-4">Amount</div>
                         <div class="col-md-8 no-padding">:&nbsp;&nbsp;{{outwardDetails.amount}}</div>
@@ -42,13 +42,13 @@
                         <div class="col-md-8 no-padding">:&nbsp;&nbsp;{{outwardDetails.transactionstatus}}</div>
                         <div class="col-md-4">Currency code</div>
                         <div class="col-md-8 no-padding">:&nbsp;&nbsp;{{outwardDetails.currencycode}}</div>
-                    </h4>
+                    </h5>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-2 no-padding">
                     <h4>SUBSCRIBER DETAILS</h4><br/>
                     <img class="margin-bottom-10" ng-src="{{userdetail.userimage|trusted}}">
-                    <h4>{{userdetail.username}}</h4>
-                    <h4>{{userdetail.useremailid}}</h4>
+                    <h5 class="wrap">{{userdetail.username}}</h5>
+                    <h6 class="wrap">{{userdetail.useremailid}}</h6>
                 </div>
 
             </div>

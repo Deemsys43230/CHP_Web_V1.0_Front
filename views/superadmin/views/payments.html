@@ -9,7 +9,7 @@
                 <a href="#dashboard" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back to Dashboard</a>
                 <!-- Stat Search -->
                 <form class="form-wrapper pull-right" novalidate>
-                    <input type="text" placeholder="Search here..." value="" ng-change="doGetCoursePaymentDetails(1);" ng-model="courseSearch" required>
+                    <input type="text" placeholder="Search here..." value="" ng-change="doGetMyCourseListByUser(1);" ng-model="courseSearch" required>
                     <button type="submit" ><i class="fa fa-search"></i></button>
                 </form>
                 <!-- End Search -->
@@ -36,7 +36,8 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr ng-show="courses.length <= 0"><td colspan="5" style="text-align:center;">Loading new data!!</td></tr>
+                    <tr ng-show="courses.length < 0"><td colspan="9" class="text-center">Loading new data!!</td></tr>
+                    <tr ng-show="courses.length == 0"><td colspan="9" class="text-center">No Results!!!</td></tr>
                     <tr dir-paginate="course in courses|itemsPerPage:itemsPerPage" total-items="total_count" current-page="pagination.current">
                         <td><span class="line-clamp-xxs">{{course.coursename}}</span></td>
                         <td><span class="line-clamp-xxs">{{course.categoryname}}</span></td>
@@ -54,7 +55,7 @@
                         max-size="8"
                         direction-links="true"
                         boundary-links="true"
-                        on-page-change="doGetCoursePaymentDetails(newPageNumber)">
+                        on-page-change="doGetMySubscribersListByCourse(newPageNumber)">
                 </dir-pagination-controls>
 
             </div>
