@@ -96,6 +96,29 @@ userApp.controller('FriendsController',function($scope,requestHandler,Flash,Frie
             $scope.myImgSrc = $sce.trustAsResourceUrl(response.data.getUserIndividualDetail.imageurl+"?decache="+Math.random());
             $scope.viewMemberDetails = response.data.getUserIndividualDetail;
             //View the image in ng-src for view testimonials
+
+            if($scope.viewMemberDetails.about==null){
+                $scope.viewMemberDetails.about="N/A";
+            }
+            if($scope.viewMemberDetails.dob==null){
+                $scope.viewMemberDetails.dob="N/A";
+            }
+            if($scope.viewMemberDetails.phone==null){
+                $scope.viewMemberDetails.phone="N/A";
+            }
+            if($scope.viewMemberDetails.country==null){
+                $scope.viewMemberDetails.country="N/A";
+            }
+            if($scope.viewMemberDetails.state==null){
+                $scope.viewMemberDetails.state="N/A";
+            }
+            if($scope.viewMemberDetails.city==null){
+                $scope.viewMemberDetails.city="N/A";
+            }
+            if($scope.viewMemberDetails.zipcode==null){
+                $scope.viewMemberDetails.zipcode="N/A";
+            }
+
             $scope.loaded = false;
             $scope.paginationLoad = true;
 

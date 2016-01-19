@@ -15,7 +15,7 @@
                             <div class="loader"></div>
                         </div>
                     </div>
-                    <div class="row" ng-hide="myFriendsList.length==0">
+                    <div class="row" ng-hide="myFriendsList.length==0 || viewDetails==1" >
                         <div class="col-md-7">
                             <input type="text" class="friend-input" placeholder="Search my friend here..." ng-model="myfriendssearch"/>
                         </div>
@@ -52,9 +52,9 @@
                             <img ng-src="{{myImgSrc}}"/>
                             <h3 class="margin-top-10 text-center">{{viewMemberDetails.name}}</h3>
                         </div>
-                        <div class="col-md-9 margin-top-20">
+                        <div class="col-md-9">
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-9">
 
                                     <div class="row margin-bottom-10">
                                         <div class="col-md-4">
@@ -84,6 +84,10 @@
 
                                         <div class="col-md-8" ng-if="viewMemberDetails.gender == 2">
                                             Female
+                                        </div>
+
+                                        <div class="col-md-8" ng-if="viewMemberDetails.gender == null">
+                                            N/A
                                         </div>
                                     </div>
 
