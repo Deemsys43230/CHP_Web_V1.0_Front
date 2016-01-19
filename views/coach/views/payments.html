@@ -4,7 +4,8 @@
         <div id="demography-content" ng-init="courseListInit()">
             <form name="demographyForm">
                 <div class="col-md-12">
-                    <h3 class="pull-right text-orange">TOTAL EARN : 245 $&nbsp;&nbsp;&nbsp;</h3>
+                    <a href="#dashboard" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back to Dashboard</a>
+                    <h3 class="pull-right text-orange">TOTAL EARN : {{totalearnings}} $&nbsp;&nbsp;&nbsp;</h3>
                     <h5 class="classic-title"><span><a href="#payments"><i class="fa fa-money"></i>&nbsp;&nbsp;COURSE PAYMENTS</a></span>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#subscribersPayments"><i class="fa fa-dollar"></i>&nbsp;&nbsp;SUBSCRIPTION PAYMENTS</a></h5>
                 </div>
 
@@ -19,11 +20,10 @@
                         <tr class="warning">
                             <th class="col-md-3">Course Name</th>
                             <th class="col-md-2">Category</th>
-                            <th class="col-md-1">Created On</th>
                             <th class="col-md-1">Published On</th>
-                            <th class="col-md-1">Price</th>
+                            <th class="col-md-1">Price $</th>
                             <th class="col-md-1">Enroll Count</th>
-                            <th class="col-md-1">Total Earn</th>
+                            <th class="col-md-1">Total Earn $</th>
                             <th class="col-md-1">Option</th>
                         </tr>
                         </thead>
@@ -31,11 +31,10 @@
                         <tr dir-paginate="mycourse in myCourseList  | itemsPerPage: 8" ng-show="myCourseList.length!=0">
                             <td><span class="line-clamp-sm">{{mycourse.coursename}}</span></td>
                             <td>{{mycourse.categoryname}}</td>
-                            <td>{{mycourse.createdon}}</td>
                             <td>{{mycourse.publishedon}}</td>
-                            <td>{{mycourse.enrollcount}} $</td>
-                            <td>12{{mycourse.enrollcount}}</td>
-                            <td>432{{mycourse.enrollcount}} $</td>
+                            <td>{{mycourse.courseamount}} </td>
+                            <td>{{mycourse.enrollcount}}</td>
+                            <td>{{mycourse.toatlearnings}} </td>
                             <td><a class="btn-xs btn-primary" href="#subscribersList/{{mycourse.courseid}}">View Details</a></td>
                         </tr>
                         <tr ng-show="myCourseList.length==0"><td colspan="6" class="text-center">No Records Found !!!</td></tr>

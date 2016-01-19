@@ -352,6 +352,20 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller: 'CoachPaymentController'
             }).
+            when('/subscriptionDetails/:id', {
+                templateUrl: 'views/payment-subscription-details.html',
+                resolve: {
+                    loadMyFiles:function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'coachApp',
+                            files:[
+                                '../../app/payments/coachPaymentController.js'
+                            ]
+                        })
+                    }
+                },
+                controller: 'CoachPaymentController'
+            }).
             when('/paymentSettings', {
                 templateUrl: 'views/payment-settings.html',
                 resolve: {
@@ -552,6 +566,74 @@ coachApp.directive('validateFloat', function() {
                 return  ctrl.$isEmpty(modelValue) || FLOAT_REGEXP.test(modelValue);
             };
 
+        }
+    };
+});
+
+coachApp.directive('isNumber', function () {
+    return {
+        require: 'ngModel',
+        link: function (scope) {
+            scope.$watch('subscriptionDetail.onemonth_amount', function(newValue,oldValue) {
+               var arr = String(newValue).split("");
+                if (arr.length === 0) return;
+                //if (arr.length === 1 && (arr[0] == '-' || arr[0] === '.' )) return;
+                if (arr.length === 2 && newValue === '-.') return;
+                alert(newValue);
+                if(newValue!== undefined){
+                 if (isNaN(newValue)) {
+                    scope.subscriptionDetail.onemonth_amount = oldValue;
+                }
+                }
+            });
+
+        }
+    }
+});
+
+coachApp.directive('validNumber', function() {
+    return {
+        require: '?ngModel',
+        link: function(scope, element, attrs, ngModelCtrl) {
+            if(!ngModelCtrl) {
+                return;
+            }
+
+            ngModelCtrl.$parsers.push(function(val) {
+                if (angular.isUndefined(val)) {
+                    var val ='';
+
+                }
+
+                var clean = val.replace(/[^-0-9\.]/g, '');
+                var negativeCheck = clean.split('-');
+                var decimalCheck = clean.split('.');
+                if(!angular.isUndefined(negativeCheck[1])) {
+                    negativeCheck[1] = negativeCheck[1].slice(0, negativeCheck[1].length);
+                    clean =negativeCheck[0] + '-' + negativeCheck[1];
+                    if(negativeCheck[0].length > 0) {
+                        clean =negativeCheck[0];
+                    }
+
+                }
+
+                if(!angular.isUndefined(decimalCheck[1])) {
+                    decimalCheck[1] = decimalCheck[1].slice(0,2);
+                    clean =decimalCheck[0] + '.' + decimalCheck[1];
+                }
+
+                if (val !== clean) {
+                    ngModelCtrl.$setViewValue(clean);
+                    ngModelCtrl.$render();
+                }
+                return clean;
+            });
+
+            element.bind('keypress', function(event) {
+                if(event.keyCode === 32) {
+                    event.preventDefault();
+                }
+            });
         }
     };
 });
