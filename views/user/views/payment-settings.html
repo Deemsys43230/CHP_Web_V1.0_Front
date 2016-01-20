@@ -23,16 +23,17 @@
                                 <h4>Paypal Email :</h4>
                             </div>
                             <div class="col-md-9 margin-top-10">
-                                <input type="text" class="search-input" placeholder="Enter Paypal Email ID" name="paypalid" ng-model="paypalDetails.paypalid" required>
+                                <input type="email" class="search-input" placeholder="Enter Paypal Email ID" name="paypalid" ng-model="paypalDetails.paypalid" required validate-email>
                                  <span ng-show="paypalSettingsForm.paypalid.$dirty&&paypalSettingsForm.paypalid.$invalid">
                                         <span class="error-message" ng-show="paypalSettingsForm.paypalid.$error.required"><span>Required.</span></span>
+                                     <span class="error-message" ng-show="paypalSettingsForm.paypalid.$error.email"><span>Enter&nbsp;valid&nbsp;Email&nbsp;ID</span></span>
                                  </span>
                             </div>
                             <div class="col-md-3 margin-top-10">
                                 <h4>Paypal Name :</h4>
                             </div>
                             <div class="col-md-9 margin-top-10">
-                                <input class="search-input" name="paypalname" placeholder="Enter Paypal User Name" ng-model="paypalDetails.paypalname" required>
+                                <input class="search-input" name="paypalname" placeholder="Enter Paypal User Name" maxlength="100" ng-model="paypalDetails.paypalname" required>
                                  <span ng-show="paypalSettingsForm.paypalname.$dirty&&paypalSettingsForm.paypalname.$invalid">
                                         <span class="error-message" ng-show="paypalSettingsForm.paypalname.$error.required"><span>Required.</span></span>
                                  </span>

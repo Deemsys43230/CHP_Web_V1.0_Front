@@ -9,13 +9,13 @@
                 <a href="#courseAdd" class="back-button pull-right margin-left-5"><i class="fa fa-plus-circle"></i> Create New Course</a>
                 <div flash-message="2000" class="col-md-4 pull-right"></div>
                 <h4 class="classic-title"><span>My Courses</span></h4>
-                <div class="row margin-top-10 margin-bottom-10">
+                <div class="row margin-top-10 margin-bottom-10"   ng-show="myCourseList.length!=0">
                     <div ng-if="loaded">
                         <div class="loader-style">
                             <div class="loader"></div>
                         </div>
                     </div>
-                    <span ng-if="myCourseList.length!=0"><div class="col-md-4" ng-repeat="courseList in myCourseList">
+                    <div class="col-md-4" ng-repeat="courseList in myCourseList">
                         <a href="#courseView/{{courseList.courseid}}">
                             <div class="dashboard">
                                 <span ng-show="courseList.coursestatus==1"><img class="course-status" src="../../images/draft.png"></span>
@@ -44,13 +44,11 @@
                             </div>
                         </a>
                     </div>
-                        </span>
-                    <span  ng-if="myCourseList.length==0">
-                    <div class="col-md-12">
-                       <p class="text-center">No courses available <a href="#courseAdd" class="back-button margin-left-5"><i class="fa fa-plus-circle"></i> Create New Course</a></p>
 
-                    </div>
-                        </span>
+                </div>
+                <div class="col-md-12" ng-show="myCourseList.length==0">
+                    <p class="text-center">No courses available <a href="#courseAdd" class="back-button margin-left-5"><i class="fa fa-plus-circle"></i> Create New Course</a></p>
+
                 </div>
             </div>
         </div>

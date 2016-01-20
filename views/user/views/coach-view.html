@@ -26,6 +26,8 @@
     </div>
     <div class="col-md-12 text-center">
         <span ng-show="usercoachdetails.coachEnrollStatus==0"><a href="" class="btn register_button" ng-click="priceTable(usercoachdetails.userid)"> Subscribe </a></span>
+        <span ng-show="usercoachdetails.coachEnrollStatus==2"><a href="" class="btn register_button" ng-click="priceTable(usercoachdetails.userid)"> Renew Subscription </a></span>
+        <span ng-show="usercoachdetails.coachEnrollStatus==1"><a href="" class="btn register_button" disabled> Subscribed </a></span>
        <!-- <span ng-hide="usercoachdetails.coachEnrollStatus==0"><a href="" ng-click="doUnsubscribeCoach(usercoachdetails.userid)" class="btn cancel_button"> Unsubscribe </a></span>-->
     </div>
 </div>

@@ -257,6 +257,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
     // To get User Basic details
     var userDetailPromise=UserDashboardService.doGetUserDetails();
     userDetailPromise.then(function(result){
+        console.log("pro",result);
         $scope.userProfile=result;
     });
 
@@ -264,7 +265,9 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
     //TO get user demography details
     var userDemographyPromise=UserDashboardService.doGetDemographyDetails();
     userDemographyPromise.then(function(result){
+        console.log("demo",result);
         $scope.demography = result;
+
     });
 
     //To get frequently asked foods
@@ -534,6 +537,8 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
 
     $scope.doGetWeightGoal=function(){
         requestHandler.getRequest("user/getWeightGoal/","").then(function(response){
+            //alert("hi");
+            //console.log("SDA",$scope.demography);
             $scope.weightlog=$scope.demography.weight;
             $scope.originalWeight=$scope.demography.weight;
             if(response.data.Response_status==0){

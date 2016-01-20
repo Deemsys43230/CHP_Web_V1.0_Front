@@ -260,7 +260,7 @@ commonApp.controller('LoginController',function($scope,requestHandler,Flash,$win
                 errorMessage(Flash,"Incorrect Username/Password");
             }
             if(response.data.Response_status==="User not allowed"){
-                errorMessage(Flash,"User disabled Please Contact Administrator");
+                errorMessage(Flash,"Your Account has been disabled!<br/>Please Contact Administrator.");
             }
             else{
                 successMessage(Flash,"Login Successful!");

@@ -160,6 +160,8 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                             name:'userApp',
                             files:[
                                 '../../angular/angular-utils-pagination/dirPagination.js',
+                                '../../plugin/popup/style.css',
+                                '../../plugin/popup/jquery.leanModal.min.js',
                                 '../../app/payments/userPaymentController.js'
                             ]
                         })
@@ -175,6 +177,8 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                             name:'userApp',
                             files:[
                                 '../../angular/angular-utils-pagination/dirPagination.js',
+                                '../../plugin/popup/style.css',
+                                '../../plugin/popup/jquery.leanModal.min.js',
                                 '../../app/payments/userPaymentController.js'
                             ]
                         })
