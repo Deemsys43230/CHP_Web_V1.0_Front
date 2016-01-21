@@ -3,135 +3,58 @@
 <!-- Start Page Banner -->
 <div class="page-banner1">
     <div id="w" class="clearfix">
-        <div id="demography-content" class="height-auto">
+        <div id="demography-content" class="height-auto" ng-init="categorycourseinit()">
             <div class="col-md-12">
                 <div class="margin-rl">
                     <a href="#courses" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back</a>
-                    <h5 class="classic-title"><span><i class="fa fa-book"></i>&nbsp;&nbsp;COURSES - COURSE CATEGORY</span></h5>
+                    <!-- Stat Search -->
+                    <div class="pull-right" id="hidden-search">
+                        <a href="#" onclick="return false;" class="show-list-search search_button"><i class="fa fa-search"></i></a>
+                        <div class="search-list-form override">
+                            <form autocomplete="off" class="searchform" novalidate>
+                                <input type="text" ng-model="courseSearch" placeholder="Search here...">
+                            </form>
+                        </div>
+                    </div>
+                    <!-- End Search -->
+                    <h5 class="classic-title"><span><i class="fa fa-book"></i>&nbsp;&nbsp;&nbsp;{{categoryCourses[0].categoryname}}&nbsp;&nbsp;<span class="text-red">({{categoryCourses.length}})</span></span></h5>
                 </div>
             </div>
 
             <div class="col-md-12 margin-bottom-10">
-                <div class="col-md-4 no-padding">
-                    <a href="#courseView">
-                        <div class="dashboard arrange">
-                            <div class="course-grid-user">
-                                <div class="col-md-6 margin-top-5">
-                                    <h4>Natural Health Tips for Skin</h4>
+                <div dir-paginate="courses in courseList = ( categoryCourses |startsWithLetterCourse : courseSearch | itemsPerPage: 9)"  ng-show="categoryCourses.length!=0">
+                    <div class="col-md-4 no-padding">
+                        <a href="#courseDetail/{{courses.courseid}}">
+                            <div class="dashboard arrange">
+                                <span ng-hide="courses.enrollmentStatus==0"><img class="user-course-status" src="../../images/enrolled.png"></span>
+                                <div class="course-grid-user">
+                                    <div class="col-md-6 margin-top-5">
+                                        <h4 class="course-name wrap" title="{{courses.coursename}}">{{courses.coursename}}</h4>
 
-                                    <p class="margin-top-10">25 Students</p>
-                                </div>
-                                <div class="col-md-6 no-padding">
-                                    <img src="../../images/course-1.jpg">
-                                    <div class="text-bold"><span class="course-price free">Free</span></div>
-                                </div>
-                                <div class="col-md-12 margin-top-5">
-                                    <div class="col-md-2 no-padding margin-top-5"><img class="course-author-img" src="../../images/pic-1.jpg"></div>
-                                    <div class="col-md-10 no-padding">
-                                        <h5>course author name</h5>
-                                        <p>course author specialist</p>
+                                        <p class="margin-top-10">{{courses.enrollcount}} users</p>
+                                    </div>
+                                    <div class="col-md-6 no-padding">
+                                        <img class="course-image" src="{{courses.promoimage | trusted}}">
+                                        <div class="text-bold" ng-if="courses.price==0"><span class="course-price free">Free</span></div>
+                                        <div class="text-bold" ng-if="courses.price!=0"><span class="course-price cost">{{courses.price}}$</span></div>
+                                    </div>
+                                    <div class="col-md-12 margin-top-5">
+                                        <div class="col-md-2 no-padding margin-top-5"><img class="course-author-img" src="{{courses.imageurl | trusted}}"></div>
+                                        <div class="col-md-10 no-padding">
+                                            <h5 class="line-clamp-xlg">{{courses.ownername}}</h5><br/>
+                                            <p class="line-clamp-xlg">{{courses.specialistin}}</p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </a>
+                        </a>
+                    </div>
                 </div>
-                <div class="col-md-4 no-padding">
-                    <a href="#courseView">
-                        <div class="dashboard arrange">
-                            <div class="course-grid-user">
-                                <div class="col-md-6 margin-top-5">
-                                    <h4>Natural Health Tips for Skin</h4>
-
-                                    <p class="margin-top-10">25 Students</p>
-                                </div>
-                                <div class="col-md-6 no-padding">
-                                    <img src="../../images/course-1.jpg">
-                                    <div class="text-bold"><span class="course-price free">Free</span></div>
-                                </div>
-                                <div class="col-md-12 margin-top-5">
-                                    <div class="col-md-2 no-padding margin-top-5"><img class="course-author-img" src="../../images/pic-1.jpg"></div>
-                                    <div class="col-md-10 no-padding">
-                                        <h5>course author name</h5>
-                                        <p>course author specialist</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
+                <!-- Start Pagination -->
+                <div class="text-center margin-top-20 col-md-12 to-top">
+                    <dir-pagination-controls ng-show="paginationLoad" boundary-links="true"> </dir-pagination-controls>
                 </div>
-                <div class="col-md-4 no-padding">
-                    <a href="#courseView">
-                        <div class="dashboard arrange">
-                            <div class="course-grid-user">
-                                <div class="col-md-6 margin-top-5">
-                                    <h4>Natural Health Tips for Skin</h4>
-
-                                    <p class="margin-top-10">25 Students</p>
-                                </div>
-                                <div class="col-md-6 no-padding">
-                                    <img src="../../images/course-1.jpg">
-                                    <div class="text-bold"><span class="course-price free">Free</span></div>
-                                </div>
-                                <div class="col-md-12 margin-top-5">
-                                    <div class="col-md-2 no-padding margin-top-5"><img class="course-author-img" src="../../images/pic-1.jpg"></div>
-                                    <div class="col-md-10 no-padding">
-                                        <h5>course author name</h5>
-                                        <p>course author specialist</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-md-4 no-padding">
-                    <a href="#courseView">
-                        <div class="dashboard arrange">
-                            <div class="course-grid-user">
-                                <div class="col-md-6 margin-top-5">
-                                    <h4>Natural Health Tips for Skin</h4>
-
-                                    <p class="margin-top-10">25 Students</p>
-                                </div>
-                                <div class="col-md-6 no-padding">
-                                    <img src="../../images/course-1.jpg">
-                                    <div class="text-bold"><span class="course-price free">Free</span></div>
-                                </div>
-                                <div class="col-md-12 margin-top-5">
-                                    <div class="col-md-2 no-padding margin-top-5"><img class="course-author-img" src="../../images/pic-1.jpg"></div>
-                                    <div class="col-md-10 no-padding">
-                                        <h5>course author name</h5>
-                                        <p>course author specialist</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-md-4 no-padding">
-                    <a href="#courseView">
-                        <div class="dashboard arrange">
-                            <div class="course-grid-user">
-                                <div class="col-md-6 margin-top-5">
-                                    <h4>Natural Health Tips for Skin</h4>
-
-                                    <p class="margin-top-10">25 Students</p>
-                                </div>
-                                <div class="col-md-6 no-padding">
-                                    <img src="../../images/course-1.jpg">
-                                    <div class="text-bold"><span class="course-price free">Free</span></div>
-                                </div>
-                                <div class="col-md-12 margin-top-5">
-                                    <div class="col-md-2 no-padding margin-top-5"><img class="course-author-img" src="../../images/pic-1.jpg"></div>
-                                    <div class="col-md-10 no-padding">
-                                        <h5>course author name</h5>
-                                        <p>course author specialist</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
+                <!-- End Pagination -->
             </div>
 
         </div>

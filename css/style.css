@@ -8002,6 +8002,13 @@ button.history:focus{
     z-index: 20;
 }
 
+.user-course-status{
+    position: absolute;
+    right: 5px;
+    top:6px;
+    z-index: 20;
+}
+
 .course-grid{
     background-color: #fff;
     padding: 5px;
@@ -8728,6 +8735,15 @@ tr.sort-icon th i{
     position: absolute;
     max-height: 20px;
     width: 45%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow:hidden;
+}
+
+.line-clamp-xlg{
+    position: absolute;
+    max-height: 20px;
+    width: 65%;
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow:hidden;
@@ -9782,7 +9798,7 @@ input.friend-search{
     color: #ffffff;
     padding: 2px 25px;
     right: -6px;
-    bottom:5px;
+    bottom:-40px;
     box-shadow: -1px -3px 2px rgba(0,0,0,0.3);
 }
 

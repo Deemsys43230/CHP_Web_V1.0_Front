@@ -68,6 +68,12 @@ $(document).ready(function ($) {
         return false;
     });
 
+    $('.to-top').click(function(event) {
+        event.preventDefault();
+        $('html, body').animate({scrollTop: 0}, 600);
+        return false;
+    });
+
 	
 	/*----------------------------------------------------*/
 	/*	Sliders & Carousel

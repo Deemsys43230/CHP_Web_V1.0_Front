@@ -2,7 +2,7 @@
  * Created by user on 14/12/15.
  */
 
-var userApp= angular.module('userApp', ['ngRoute','oc.lazyLoad','ngCookies','requestModule','flash']);
+var userApp= angular.module('userApp', ['ngRoute','oc.lazyLoad','ngCookies','requestModule','flash','angularUtils.directives.dirPagination']);
 userApp.controller('CourseController',['$scope','requestHandler','Flash','$routeParams','$location',function($scope,requestHandler,Flash,$routeParams,$location) {
 
     $scope.entrolling="Enroll to this course";
@@ -77,41 +77,40 @@ userApp.controller('CourseController',['$scope','requestHandler','Flash','$route
     };
 
     $scope.courselist = function(){
-        requestHandler.postRequest("getPublishedCourse/",{"offset":0,"limit":10}).then(function(response) {
-            $scope.courseList = response.data.published_Course;
-            $('#callCarousel').hide();
-            callCarousel();
-        },function(){
-            errorMessage(Flash,"Please try again later!")
-        });
+        /*requestHandler.postRequest("getPublishedCourse/",{"offset":0,"limit":10}).then(function(response) {
+         $scope.courseList = response.data.published_Course;
+         $('#callCarousel').hide();
+         callCarousel();
+         },function(){
+         errorMessage(Flash,"Please try again later!")
+         });*/
 
-       /* requestHandler.getRequest("user/getMyCourseList/","").then(function(response) {
-            $scope.myCourseList = response.data.published_Course;
-            var mycourseid = [];
-            $.each($scope.myCourseList,function(index,value){
-                mycourseid.push(val)
-                if(value.sectionid == id){
-                    $scope.currentIndex = index;
-                    $scope.sectionno = index + 1;
-                }
-            });
-        },function(){
-            errorMessage(Flash,"Please try again later!")
-        });*/
+        $('#callCarousel').hide();
+        $scope.loaded=true;
 
-            /*requestHandler.getRequest("getCoursecategory/","").then(function(response) {
-                $scope.courseCatgory = response.data.coursecategory;
-                $.each($scope.courseCatgory,function(index,value){
-                    if(value.sectionid == id){
-                        $scope.currentIndex = index;
-                        $scope.sectionno = index + 1;
+        requestHandler.getRequest("getCoursecategory/","").then(function(response){
+            $scope.allCategory=$scope.allCategoryCourses=response.data.coursecategory;
+            $.each($scope.allCategory,function(index,courses){
+                requestHandler.postRequest("searchPublishedCourse/",{"categoryid":courses.categoryid,"coursename":"","ownername":""}).then(function(response){
+                    $scope.allCategoryCourses[index].categoryCourses=response.data.published_Course;
+                    if(index==($scope.allCategory.length)-1){
+                        callCarousel();
+                        window.setTimeout(function() {
+                            $scope.$apply(function() {
+                                $scope.loaded=false;
+                            });
+                        }, 900);
                     }
                 });
-            },function(){
-                errorMessage(Flash,"Please try again later!")
-            });*/
+            });
+        });
+    };
 
-
+    $scope.categoryCourseList=function(){
+        requestHandler.postRequest("searchPublishedCourse/",{"categoryid":$routeParams.id,"coursename":$scope.courseSearch,"ownername":$scope.authorSearch}).then(function(response){
+            $scope.categoryCourses=response.data.published_Course;
+            $scope.paginationLoad=true;
+        });
     };
 
     $scope.doEnrollCourse = function(course){
@@ -213,10 +212,23 @@ userApp.controller('CourseController',['$scope','requestHandler','Flash','$route
         $scope.mycourselist();
     };
 
+    $scope.categorycourseinit=function(){
+        $scope.paginationLoad=false;
+        $scope.courseSearch="";
+        $scope.authorSearch="";
+        $scope.categoryCourseList();
+    };
+
     $scope.viewinit=function(){
         $scope.courseDetails();
         $scope.courseSectionList();
     };
+
+    // Search Food Type
+    $('.show-list-search').click(function() {
+        $('.search-list-form').toggle(300);
+        $('.search-list-form input').focus();
+    });
 
 
 }]);
@@ -234,6 +246,24 @@ userApp.filter('html', ['$sce', function ($sce) {
         return $sce.trustAsHtml(text);
     };
 }]);
+
+userApp.filter('startsWithLetterCourse', function () {
+
+    return function (items, courseSearch) {
+        var filtered = [];
+        var letterMatch = new RegExp(courseSearch, 'i');
+        if(!items){}
+        else{
+            for (var i = 0; i < items.length; i++) {
+                var item = items[i];
+                if (letterMatch.test(item.ownername) || letterMatch.test(item.coursename) ) {
+                    filtered.push(item);
+                }
+            }
+        }
+        return filtered;
+    };
+});
 
 
 var adminApp= angular.module('adminApp', ['ngRoute','oc.lazyLoad','ngCookies','requestModule','flash','angularUtils.directives.dirPagination']);

@@ -108,6 +108,7 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'userApp',
                             files:[
+                                '../../angular/angular-utils-pagination/dirPagination.js',
                                 '../../app/course/courseController.js'
                             ]
                         })
@@ -122,7 +123,7 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                     return $ocLazyLoad.load({
                         name:'userApp',
                         files:[
-
+                            '../../angular/angular-utils-pagination/dirPagination.js',
                             '../../plugin/popup/style.css',
                             '../../plugin/popup/jquery.leanModal.min.js',
                             '../../app/course/courseController.js'
@@ -139,7 +140,7 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'userApp',
                             files:[
-
+                                '../../angular/angular-utils-pagination/dirPagination.js',
                                 '../../plugin/popup/style.css',
                                 '../../plugin/popup/jquery.leanModal.min.js',
                                 '../../app/course/courseController.js'
@@ -149,8 +150,20 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'CourseController'
             }).
-            when('/courseCategory', {
-                templateUrl: 'views/course-category.html'
+            when('/courseCategory/:id', {
+                templateUrl: 'views/course-category.html',
+                resolve: {
+                    loadMyFiles:function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'userApp',
+                            files:[
+                                '../../angular/angular-utils-pagination/dirPagination.js',
+                                '../../app/course/courseController.js'
+                            ]
+                        })
+                    }
+                },
+                controller:'CourseController'
             }).
             when('/payments', {
                 templateUrl: 'views/payments.html',
