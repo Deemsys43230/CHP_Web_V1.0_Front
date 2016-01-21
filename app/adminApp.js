@@ -1627,6 +1627,7 @@ adminApp.directive('input', function() {
 
 //Check For FLoat Validation
 adminApp.directive('validateFloat', function() {
+    //alert("hi");
    var FLOAT_REGEXP = /^\-?\d+((\.)\d+)?$/;
     //var FLOAT_REGEXP = /^[1-9]+((\.)\d+)?$/;
 
@@ -1636,6 +1637,7 @@ adminApp.directive('validateFloat', function() {
         link: function(scope, elm, attrs, ctrl) {
             // only apply the validator if ngModel is present and Angular has added the Float Number validator
             ctrl.$validators.validateFloat = function(modelValue) {
+               // alert(modelValue);
                 return  ctrl.$isEmpty(modelValue) || FLOAT_REGEXP.test(modelValue);
             };
 
