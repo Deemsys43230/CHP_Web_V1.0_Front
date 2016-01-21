@@ -57,6 +57,11 @@ requestHandlerApp.factory("requestHandler",['$http',function($http,$location){
 
     };
 
+    requestObj.paymentURL=function(){
+        var returnurl="http://localhost/cyber/views/user";
+        return returnurl;
+    };
+
     requestObj.convertUrl=function(imageurl){
    // alert(imageurl);
         var url = imageurl.substring(imageurl.indexOf("/")+ urlLength, imageurl.length);

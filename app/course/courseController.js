@@ -117,12 +117,12 @@ userApp.controller('CourseController',['$scope','requestHandler','Flash','$route
     $scope.doEnrollCourse = function(course){
         $scope.entrolling="Enrolling Please Wait";
         $scope.enrollButtonStatus=true;
-        requestHandler.postRequest("user/enrollCourse/",{"courseid":course,"returnUrl":"http://localhost/cyber/views/user/#/thanksEnrollPage/"+course,"cancelUrl":"http://localhost/cyber/views/user/#/courses"}).then(function(response){
+        requestHandler.postRequest("user/enrollCourse/",{"courseid":course,"returnUrl":requestHandler.paymentURL()+"/#/thanksEnrollPage/"+course,"cancelUrl":requestHandler.paymentURL()+"/#/courses"}).then(function(response){
             if(response.data.transactionStatus==1){
                 window.location=response.data.approveURL.href;
             }
             else if(response.data.transactionStatus==2){
-                window.location="http://localhost/cyber/views/user/#/thanksEnrollPage/"+course;
+                window.location=requestHandler.paymentURL()+"/#/thanksEnrollPage/"+course;
             }
             //successMessage(Flash,"Successfully Enrolled");
         },function(){

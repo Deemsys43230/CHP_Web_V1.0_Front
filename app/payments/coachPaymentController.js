@@ -2,10 +2,13 @@ var coachApp = angular.module('coachApp', ['ngRoute','oc.lazyLoad','requestModul
 
 coachApp.controller('CoachPaymentController',function($scope,requestHandler,Flash,$routeParams) {
 
+    $scope.paginationLoad=false;
+
     // To display Course list by user
     $scope.doGetMyCourseListByUser=function(){
         requestHandler.getRequest("coach/listofPublishedCoursePayment/","").then(function(response) {
             $scope.myCourseList = response.data.courselist;
+            $scope.paginationLoad=true;
         },function(){
             errorMessage(Flash,"Please try again later!")
         });
@@ -206,6 +209,31 @@ coachApp.controller('CoachPaymentController',function($scope,requestHandler,Flas
         $scope.doGetTotalSubscriptionEarnings();
     };
 
+    $scope.courseSortIcons={
+        coursename:"fa fa-caret-down",
+        categoryname:"fa fa-caret-down",
+        publishedon:"fa fa-caret-down",
+        courseamount:"fa fa-caret-down",
+        enrollcount:"fa fa-caret-down",
+        toatlearnings:"fa fa-caret-down"
+    };
+
+    $scope.sortBy=function(sortKey){
+        $scope.sortKey=sortKey;
+        $scope.reverse = !$scope.reverse;
+        var sortKeyStore=$scope.courseSortIcons[sortKey];
+        $scope.courseSortIcons={
+            coursename:"fa fa-caret-down",
+            categoryname:"fa fa-caret-down",
+            publishedon:"fa fa-caret-down",
+            courseamount:"fa fa-caret-down",
+            enrollcount:"fa fa-caret-down",
+            toatlearnings:"fa fa-caret-down"
+        };
+        if(sortKeyStore=="fa fa-caret-down")$scope.courseSortIcons[sortKey]="fa fa-caret-up";
+        else $scope.courseSortIcons[sortKey]="fa fa-caret-down";
+    };
+
     $scope.studentSubscriptionDetailsInit=function(){
         $scope.doGetSubscriptionDetails();
     };
@@ -219,3 +247,21 @@ coachApp.filter('trusted', ['$sce', function ($sce) {
         return $sce.trustAsResourceUrl(url);
     };
 }]);
+
+coachApp.filter('startsWithLetterCourse', function () {
+
+    return function (items, usersearch) {
+        var filtered = [];
+        var letterMatch = new RegExp(usersearch, 'i');
+        if(!items){}
+        else{
+            for (var i = 0; i < items.length; i++) {
+                var item = items[i];
+                if (letterMatch.test(item.coursename) || letterMatch.test(item.categoryname) ) {
+                    filtered.push(item);
+                }
+            }
+        }
+        return filtered;
+    };
+});
