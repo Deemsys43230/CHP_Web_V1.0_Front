@@ -249,6 +249,39 @@ adminApp.controller('AdminPaymentController',function($scope,requestHandler,Flas
         else $scope.coachSortIcons[sortKey]="fa fa-caret-down";
     };
 
+    $scope.doManualPay=function(paymentid){
+        alert(paymentid);
+        requestHandler.postRequest("admin/payManualImplicit/",{"coachid":$routeParams.id,"paymentid":paymentid}).then(function(response){
+              if(response.data.Response_status==1){
+                  subscribersListInit();
+                  successMessage(Flash,"Paymenyt successfull");
+              }
+            else if(response.data.Response_status==0){
+                  $(function(){
+                      $("#lean_overlay").fadeTo(1000);
+                      $("#errormodal").fadeIn(600);
+                      $(".common_model").show();
+                  });
+                  $scope.errormsg= response.data.Error;
+
+                  $(".modal_close").click(function(){
+                      $(".common_model").hide();
+                      $("#errormodal").hide();
+                      $("#lean_overlay").hide();
+                  });
+
+                  $("#lean_overlay").click(function(){
+                      $(".common_model").hide();
+                      $("#errormodal").hide();
+                      $("#lean_overlay").hide();
+                  });
+
+              }
+            });
+
+
+    }
+
     $scope.init=function(){
         $scope.itemsPerPage = 10;
         $scope.courseSearch="";

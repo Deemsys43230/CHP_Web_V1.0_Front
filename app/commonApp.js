@@ -255,14 +255,16 @@ commonApp.controller('LoginController',function($scope,requestHandler,Flash,$win
     //Login
     $scope.doLogin=function(){
         requestHandler.loginRequest($scope.username,$scope.password).then(function(response){
-            console.log(response.data.Response_status);
+
             if(response.data.Response_status===0){
+
                 errorMessage(Flash,"Incorrect Username/Password");
             }
             if(response.data.Response_status==="User not allowed"){
                 errorMessage(Flash,"Your Account has been disabled!<br/>Please Contact Administrator.");
             }
-            else{
+            if(response.data.Response_status===""){
+
                 successMessage(Flash,"Login Successful!");
 
                 //Get Logged In User
@@ -335,6 +337,7 @@ commonApp.controller('LoginController',function($scope,requestHandler,Flash,$win
     $scope.doForgotPassword=function(){
         //request for secret question
         requestHandler.postRequest("getSecretQuestion/",{"emailid":$scope.emailid}).then(function(response){
+
             if(response.data.Response_status==0){
                 errorMessage(Flash,"Email ID doesn't Exist!");
             }
@@ -346,6 +349,19 @@ commonApp.controller('LoginController',function($scope,requestHandler,Flash,$win
                 $(".secret_question").show();
                 $(".header_title").text('Register');
                 $scope.secretQuestion=response.data.secretquestion;
+            }
+            else if(response.data.Response_status==2){
+                successMessage(Flash,"Please check your email!!");
+             //   $scope.emailid={};
+             /*   $(".user_login").hide();
+                $(".reset_password").hide();
+                $(".user_register").hide();
+                $(".secret_question").hide();*/
+               // $(".header_title").text('Register');
+
+            }
+            else if(response.data.Response_status=="User not allowed"){
+                errorMessage(Flash,"Your Account has been disabled!<br/>Please Contact Administrator.");
             }
         });
     };

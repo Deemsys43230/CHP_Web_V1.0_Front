@@ -883,7 +883,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
     };
 
     $scope.goGetDailyIntakeGraph = function(date){
-        alert(date);
+       // alert(date);
         requestHandler.postRequest("user/dailyCalorieGraph/",{"date":date}).then(function(response){
             alert(response);
             $scope.calorieIntakeGraph=response.data.dailyCalorieGraph;

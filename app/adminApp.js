@@ -980,6 +980,8 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                             name:'adminApp',
                             files:[
                                 '../../js/bootstrap.min.js',
+                                 '../../plugin/popup/style.css',
+                                '../../plugin/popup/jquery.leanModal.min.js',
                                 '../../app/payments/adminPaymentController.js'
                             ]
                         })

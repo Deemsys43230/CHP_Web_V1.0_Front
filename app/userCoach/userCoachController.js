@@ -36,6 +36,13 @@ userApp.controller('UserCoachController',function($scope,requestHandler,Flash,$l
 
             $q.all([ratingPromise]).then(function(){
                 $scope.usercoachlist=$scope.usercoachlist1;
+                if($scope.usercoachlist==0){
+
+                }else{
+                    $scope.coach = {
+                        status: 'coach-view'
+                    };
+                }
             });
 
 
@@ -184,9 +191,10 @@ userApp.controller('UserCoachController',function($scope,requestHandler,Flash,$l
 
     $scope.userCoachInit=function(){
         $scope.doGetCoachListByUser();
-        $scope.coach = {
+
+       /* $scope.coach = {
             status: 'coach-view'
-        };
+        };*/
     };
 
 
