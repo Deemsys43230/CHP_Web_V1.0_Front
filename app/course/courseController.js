@@ -529,7 +529,14 @@ coachApp.controller('CourseController',function($scope,requestHandler,Flash,$rou
         if(!$routeParams.sectionId){
            // $scope.loaded=true;
             requestHandler.getRequest("coach/getCourseList/","").then(function(response) {
-                $scope.myCourseList = response.data.course.course_list;
+                $scope.courselength = response.data.course;
+                if( $scope.courselength.length===0){
+                    $scope.myCourseList= "";
+                }
+                else{
+                    $scope.myCourseList=response.data.course.course_list;
+                }
+
                 $.each($scope.myCourseList,function(index,value){
                     value.promoimage = value.promoimage+"?decache="+Math.random();
                 });

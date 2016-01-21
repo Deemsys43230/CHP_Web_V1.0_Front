@@ -84,7 +84,7 @@
                         </div>
                         <div class="col-md-9 margin-top-10">
                             <input type="text" class="form-control margin-bottom-20" name="courseSharePercentage" ng-model="paypalSettings.coursepurchaseshare" required validate-Float>
-                         <span ng-show="paypalSettingsForm.coachSharePercentage.$dirty&&paypalSettingsForm.courseSharePercentage.$invalid">
+                         <span ng-show="paypalSettingsForm.courseSharePercentage.$dirty&&paypalSettingsForm.courseSharePercentage.$invalid">
                                 <span class="error-message" ng-show="paypalSettingsForm.courseSharePercentage.$error.required"><span>Required.</span></span>
                               <span class="error-message" ng-show="!paypalSettingsForm.courseSharePercentage.$error.required&&paypalSettingsForm.courseSharePercentage.$error.validateFloat"><span>Invalid&nbsp;Format.</span></span>
                          </span>

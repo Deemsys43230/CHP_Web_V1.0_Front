@@ -122,8 +122,8 @@ adminApp.factory("UserDashboardService",function(requestHandler){
     //Get User Demography Details
     userDashboardServiceObj.doGetDemographyDetails=function(){
         return requestHandler.getRequest("user/getDemography/","").then(function(response) {
-            console.log("full",response.data.Demography_Data[0]);
-            return response.data.Demography_Data[0];
+            console.log("full",response.data.Demography_Data);
+            return response.data.Demography_Data;
         });
     };
 
