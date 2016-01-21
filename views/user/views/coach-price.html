@@ -28,7 +28,11 @@
                     <li>Expert chat</li>
                     <li>And more...</li>
                 </ul>
-                <a href="" ng-click="doSubscribeCoach(coachViewId,1)" class="price-button">Subscribe</a><br/>
+                <a href="" class="price-button btn" ng-disabled="subscribeButtonStatus" ng-click="doSubscribeCoach(coachViewId,1)">
+                    <span ng-show="subscribing[1]==true">
+                        <span class="three-quarters-loader">Loading…</span>
+                    </span>&nbsp;Subscribe
+                </a><br/>
             </div>
             <div class="promo scale" ng-class="{'disabled': priceValue.threemonth_amount == null}">
                 <div class="deal">
@@ -44,7 +48,11 @@
                     <li>Expert chat</li>
                     <li>And more...</li>
                 </ul>
-                <a href="" ng-click="doSubscribeCoach(coachViewId,3)" class="price-button">Subscribe</a><br/>
+                <a href="" class="price-button btn" ng-disabled="subscribeButtonStatus" ng-click="doSubscribeCoach(coachViewId,3)">
+                    <span ng-show="subscribing[3]==true">
+                        <span class="three-quarters-loader">Loading…</span>
+                    </span>&nbsp;Subscribe
+                </a><br/>
             </div>
             <div class="promo" ng-class="{'disabled': priceValue.sixmonth_amount == null}">
                 <div class="deal">
@@ -60,7 +68,11 @@
                     <li>Expert chat</li>
                     <li>And more...</li>
                 </ul>
-                <a href="" ng-click="doSubscribeCoach(coachViewId,6)" class="price-button">Subscribe</a><br/>
+                <a href="" class="price-button btn" ng-disabled="subscribeButtonStatus" ng-click="doSubscribeCoach(coachViewId,6)">
+                    <span ng-show="subscribing[6]==true">
+                        <span class="three-quarters-loader">Loading…</span>
+                    </span>&nbsp;Subscribe
+                </a><br/>
             </div>
         </div>
     </div>

@@ -9915,15 +9915,13 @@ input.friend-search{
 .promo .price {
     display: block;
     width: 100%;
-    background-color: #FFB266;
+    background-color: #ff9933;
     margin: 15px 0 10px 0;
     text-align: center;
     font-size: 23px;
     padding: 17px 0 17px 0;
 }
-.promo .price.backred{
-    background-color: #ff8000 !important;
-}
+
 .promo .price small{
     font-size:14px !important;
 }
@@ -9944,14 +9942,14 @@ a.price-button{
     position: relative !important;
     border: none;
     border-radius: 40px;
-    background: #FFB266;
-    color: #fff;
+    background: #ff9933;
+    color: #fff !important;
     outline: none;
     padding: 10px 37px;
 }
 
 a.price-button:hover{
-    background: #ffa64c;
+    background: #ff8c1a;
 }
 
 .scale {
@@ -9961,6 +9959,10 @@ a.price-button:hover{
 }
 .scale a.price-button{
     background: #ff8000;
+}
+
+.scale .price.backred{
+    background-color: #ff8000;
 }
 
 .scale a.price-button:hover{

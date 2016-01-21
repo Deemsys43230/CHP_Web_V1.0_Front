@@ -158,18 +158,24 @@ userApp.controller('UserCoachController',function($scope,requestHandler,Flash,$l
 
     };
 
+    $scope.subscribeButtonStatus=false;
+    $scope.subscribing=[];
+
     $scope.doSubscribeCoach = function(coach,month){
 
-       requestHandler.postRequest("user/subscribeCoach/",{"coachid":coach,"month":month,"returnUrl":requestHandler.paymentURL()+"/#/thanksSubscribePage/"+coach+"/"+month,"cancelUrl":requestHandler.paymentURL()+"/#/coachSearch"}).then(function(response){
-           if(response.data.transactionStatus==1){
-               window.location=response.data.approveURL.href;
-           }
-           else if(response.data.transactionStatus==2){
-               window.location=requestHandler.paymentURL()+"/#/thanksSubscribePage/"+coach+"/"+month;
-           }
-       },function(){
-           errorMessage(Flash,"Please try again later!")
-       });
+        $scope.subscribeButtonStatus=true;
+        $scope.subscribing[month]=true;
+
+        requestHandler.postRequest("user/subscribeCoach/",{"coachid":coach,"month":month,"returnUrl":requestHandler.paymentURL()+"/#/thanksSubscribePage/"+coach+"/"+month,"cancelUrl":requestHandler.paymentURL()+"/#/coachSearch"}).then(function(response){
+            if(response.data.transactionStatus==1){
+                window.location=response.data.approveURL.href;
+            }
+            else if(response.data.transactionStatus==2){
+                window.location=requestHandler.paymentURL()+"/#/thanksSubscribePage/"+coach+"/"+month;
+            }
+        },function(){
+            errorMessage(Flash,"Please try again later!")
+        });
     };
 
     $scope.coachListInit=function(){

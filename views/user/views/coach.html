@@ -31,7 +31,7 @@
                         <th class="col-md-2">Options</th>
                     </tr>
                     </thead>
-                    <tbody >
+                    <tbody>
                     <tr dir-paginate="mycoach in mycoachfilter = (mycoachlist |startsWithLetter : mycoachsearch  | itemsPerPage: 8)" ng-show="mycoachlist.length!=0">
                         <td>{{mycoach.name}}</td>
                         <td>{{mycoach.emailid}}</td>
