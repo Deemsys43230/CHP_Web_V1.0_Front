@@ -337,7 +337,7 @@ commonApp.controller('LoginController',function($scope,requestHandler,Flash,$win
     $scope.doForgotPassword=function(){
         //request for secret question
         requestHandler.postRequest("getSecretQuestion/",{"emailid":$scope.emailid}).then(function(response){
-
+alert(response.data.Response_status);
             if(response.data.Response_status==0){
                 errorMessage(Flash,"Email ID doesn't Exist!");
             }
@@ -352,16 +352,14 @@ commonApp.controller('LoginController',function($scope,requestHandler,Flash,$win
             }
             else if(response.data.Response_status==2){
                 successMessage(Flash,"Please check your email!!");
-             //   $scope.emailid={};
+                $scope.emailid="";
+                $scope.forgotPasswordForm.$setPristine();
              /*   $(".user_login").hide();
                 $(".reset_password").hide();
                 $(".user_register").hide();
                 $(".secret_question").hide();*/
                // $(".header_title").text('Register');
 
-            }
-            else if(response.data.Response_status=="User not allowed"){
-                errorMessage(Flash,"Your Account has been disabled!<br/>Please Contact Administrator.");
             }
         });
     };

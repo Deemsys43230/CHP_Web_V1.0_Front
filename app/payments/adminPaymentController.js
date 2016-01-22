@@ -250,8 +250,12 @@ adminApp.controller('AdminPaymentController',function($scope,requestHandler,Flas
     };
 
     $scope.doManualPay=function(paymentid){
+alert("hi");
         alert(paymentid);
+        alert($routeParams.id);
         requestHandler.postRequest("admin/payManualImplicit/",{"coachid":$routeParams.id,"paymentid":paymentid}).then(function(response){
+            alert("pay",paymentid);
+            alert("coach",$routeParams.id);
               if(response.data.Response_status==1){
                   subscribersListInit();
                   successMessage(Flash,"Paymenyt successfull");
@@ -280,7 +284,7 @@ adminApp.controller('AdminPaymentController',function($scope,requestHandler,Flas
             });
 
 
-    }
+    };
 
     $scope.init=function(){
         $scope.itemsPerPage = 10;

@@ -44,7 +44,7 @@
                         <td>{{subscriber.coachamount}}</td>
                         <td>{{subscriber.adminamount}}</td>
                         <td>{{subscriber.inwardid}}</td>
-                        <td>{{subscriber.outwardid}}</td>
+                        <td><span ng-show="subscriber.outwardid!=undefined">{{subscriber.outwardid}}</span><span ng-show="subscriber.outwardid==undefined"><a href="" ng-click="doManualPay(subscriber.paymentid)" class="btn-xs btn-success">Manual Pay</a></span></td>
                         <td>
                             <span ng-show="subscriber.enrollmentstatus==1" class="text-green">Active</span>
                             <span ng-show="subscriber.enrollmentstatus==0" class="text-red">In active</span>
@@ -65,5 +65,27 @@
     </div>
 </div>
 
+<!-- create enroll popup-->
+<div id="errormodal" class="popupContainer" style="display:none;left: 37%!important;">
+    <header class="popupHeader">
+        <span class="header_title">Alert</span>
+        <span class="modal_close"><i class="fa fa-times"></i></span>
+    </header>
+    <section class="popupBody">
+        <!-- Register Form -->
+        <div class="common_model">
+            <div class="text-center"><img src="../../images/alert-ring.png"/></div><br/>
+            <h5 class="text-center">{{errormsg}}!!!</h5>
+            <div class="action_btns margin-top-20">
+                <div class="one_half last modal_close"><a onclick="return false;" class="btn back_btn">OK</a></div>
+            </div>
+        </div>
+    </section>
+</div>
+
 <!-- End Page Banner -->
 <script type="text/javascript" src="../../js/script.js"></script>
+
+<script type="text/javascript">
+    $("#modal").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
+</script>
