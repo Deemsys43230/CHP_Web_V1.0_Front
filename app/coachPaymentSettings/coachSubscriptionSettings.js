@@ -42,7 +42,7 @@ coachApp.controller('CoachSubscriptionController',function($scope,requestHandler
             $scope.percentagethreemonthamount = 0;
         } else {
             $scope.totalthreemonthamount = $scope.subscriptionDetail.onemonth_amount * 3;
-            $scope.percentagethreemonthamount = ($scope.subscriptionDetail.onemonth_amount * 3) - ($scope.subscriptionDetail.onemonth_amount * $scope.subscriptionDetail.threemonth_percentage) / 100;
+            $scope.percentagethreemonthamount = ($scope.subscriptionDetail.onemonth_amount * 3) - ($scope.subscriptionDetail.onemonth_amount * 3 * $scope.subscriptionDetail.threemonth_percentage) / 100;
         }
 
         if ($scope.subscriptionDetail.onemonth_amount === undefined || $scope.subscriptionDetail.sixmonth_percentage === undefined) {
@@ -50,7 +50,7 @@ coachApp.controller('CoachSubscriptionController',function($scope,requestHandler
             $scope.percentagesixmonthamount = 0;
         } else {
             $scope.totalsixmonthamount = $scope.subscriptionDetail.onemonth_amount * 6;
-            $scope.percentagesixmonthamount = ($scope.subscriptionDetail.onemonth_amount * 6) - ($scope.subscriptionDetail.onemonth_amount * $scope.subscriptionDetail.sixmonth_percentage) / 100;
+            $scope.percentagesixmonthamount = ($scope.subscriptionDetail.onemonth_amount * 6) - ($scope.subscriptionDetail.onemonth_amount * 6 * $scope.subscriptionDetail.sixmonth_percentage) / 100;
         }
 
 

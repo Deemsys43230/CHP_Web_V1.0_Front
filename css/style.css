@@ -10085,3 +10085,7 @@ a.cancel:hover{
     50% { opacity: 0; }
     100% { opacity: 1; }
 }
+
+/*-- Remove Clear from IE Text box */
+
+input::-ms-clear { display: none; }
