@@ -16,27 +16,34 @@ adminApp.controller('ExerciseTypeController',['$scope','requestHandler','Flash',
         requestHandler.getRequest("admin/listofTypes/","").then(function(response){
             $scope.exerciseTypeList=response.data.Typelist;
             exerciseTypeArray=[];
-            $.each($scope.exerciseTypeList, function(index,typelist) {
-                exerciseTypeArray.push(typelist.typename);
-            });
 
-            // Tool tip for session in food list
-            $.each($scope.exerciseTypeList,function(index,value){
-                value.level="";
-                $.each(value.levels,function(index,value1){
-                    levelvalue=value1.levelname;
-                    levelname = levelname + levelvalue;
-                    if(index!=value.levels.length-1)
-                        levelname=levelname+',';
+            if(!$scope.exerciseTypeList){
+                $scope.exerciseTypeList=[];
+            }
+            else{
+                $.each($scope.exerciseTypeList, function(index,typelist) {
+                    exerciseTypeArray.push(typelist.typename);
                 });
-                value.level = levelname;
-                levelname="";
 
-            });
+                // Tool tip for session in food list
+                $.each($scope.exerciseTypeList,function(index,value){
+                    value.level="";
+                    $.each(value.levels,function(index,value1){
+                        levelvalue=value1.levelname;
+                        levelname = levelname + levelvalue;
+                        if(index!=value.levels.length-1)
+                            levelname=levelname+',';
+                    });
+                    value.level = levelname;
+                    levelname="";
+
+                });
+            }
+
             $scope.exerciseTypeArrayValues=exerciseTypeArray;
-
             $scope.loaded=false;
             $scope.paginationLoad=true;
+
         },function(){
             errorMessage(Flash,"Please try again later!");
         });

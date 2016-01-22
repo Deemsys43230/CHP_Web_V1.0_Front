@@ -220,19 +220,3 @@
         });
     });
 </script>
-
-
-<script>
-    var picker = new Pikaday(
-            {
-                format:'MM/DD/YYYY',
-                field: document.getElementById('datepicker'),
-                firstDay: 1,
-                minDate: new Date(1940, 0, 1),
-                maxDate: new Date(new Date().getFullYear()-7, 12, 31),
-                yearRange: [1940, new Date().getFullYear()-7],
-                defaultDate: new Date(new Date().getFullYear()-25,0,1)
-            });
-
-</script>
-

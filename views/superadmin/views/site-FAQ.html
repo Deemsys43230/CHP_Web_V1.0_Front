@@ -100,7 +100,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr dir-paginate="faq in faqList | orderBy:sortKey:!reverse | itemsPerPage:13">
+                        <tr dir-paginate="faq in faqList | orderBy:sortKey:!reverse | itemsPerPage:13" ng-show="faqList.length!=0">
                             <td><span class="line-clamp-sm">{{faq.question}}</span></td>
                             <td><span class="line-clamp-lg">{{faq.answer}}</span></td>
                             <td>
@@ -110,6 +110,7 @@
                                 <a href="" class="btn-xs btn-danger" ng-click="doEnableDisable(faq.faqid)" ng-hide="faq.status==0">Disable</a>
                             </td>
                         </tr>
+                        <tr ng-show="faqList.length==0"><td colspan="3" class="text-center">No Records Found!!!</td></tr>
                     </tbody>
                 </table>
                 <!-- Start Pagination -->

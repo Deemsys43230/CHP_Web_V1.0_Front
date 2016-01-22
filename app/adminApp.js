@@ -70,9 +70,6 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                             name:'adminApp',
                             files:[
                                 '../../js/bootstrap.min.js',
-                                '../../plugin/date-picker/moment.js',
-                                '../../plugin/date-picker/pikaday.css',
-                                '../../plugin/date-picker/pikaday.js',
                                 '../../plugin/popup/style.css',
                                 '../../plugin/popup/jquery.leanModal.min.js',
                                 '../../css/profile-image-upload.css',
@@ -857,7 +854,7 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 controller:'FoodSuggestionViewController'
             }).
             when('/exerciseSuggestion', {
-                templateUrl: 'views/exercise-Suggestion.html',
+                templateUrl: 'views/exercise-suggestion.html',
                 resolve: {
                     loadMyFiles:function($ocLazyLoad) {
                         return $ocLazyLoad.load({

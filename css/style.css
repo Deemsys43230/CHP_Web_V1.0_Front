@@ -3484,7 +3484,7 @@ ul.icons-list li i {
 }
 
 .team-member .member-socail {
-	//text-align: center;
+	text-align: center;
 }
 
 .team-member .member-socail a i {
@@ -6359,7 +6359,7 @@ ul.footer-nav li a:hover {
   position:relative;
 }
 
- .progress-bar-span { 
+.progress-bar-span {
  opacity:1;
  position:absolute;
  top:-5px;
@@ -6786,7 +6786,7 @@ ul.footer-nav li a:hover {
     box-shadow: @dims @color; // Opera, FFX4
     -moz-box-shadow:@dims @color; // FFX3.5
     -webkit-box-shadow:@dims @color; // Safari/Chrome/WebKit
-                                                      .ie7 { filter: e(%("progid:DXImageTransform.Microsoft.Shadow(color='%d', Direction=135, Strength=3)", @color)); }
+    .ie7 { filter: e(%("progid:DXImageTransform.Microsoft.Shadow(color='%d', Direction=135, Strength=3)", @color)); }
 }
 
 .inset(@dims:1px 1px 1px, @color:#fff) {
@@ -8457,6 +8457,7 @@ a:hover, a:visited, a:link, a:active
 	width: 1000px;
 	margin: 0 auto;
 	background: none;
+    min-height:490px;
 }
 
 #update{
@@ -8538,6 +8539,7 @@ a:hover, a:visited, a:link, a:active
 {
 	font-size: 14px;
 	color: #333;
+    line-height: 20px;
 	padding: 5px 8px;
 	width: 100%;
 	border:0px !important;

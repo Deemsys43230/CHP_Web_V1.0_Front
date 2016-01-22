@@ -785,20 +785,22 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
             if($scope.calorieGraph.intakecalorie=="") $scope.calorieGraph.intakecalorie=0;
             if($scope.calorieGraph.burntcalorie=="") $scope.calorieGraph.burntcalorie=0;
 
+            $scope.averageIntake=Math.round($scope.calorieGraph.averagecalorieintake);
+            $scope.averageSpent=Math.round($scope.calorieGraph.averagecalorieburnt);
+
             $scope.currentGain=$scope.calorieGraph.intakecalorie;
             $scope.currentGain=$scope.currentGain.toFixed(2);
-            /*if(($scope.currentGain.length-3)>2) $scope.gainGraphMax=100+((String($scope.currentGain|0).slice(0, -2))*100);
-            else $scope.gainGraphMax=100;*/
 
-            if($scope.calorieGraph.averagecalorieintake<$scope.calorieGraph.intakecalorie){
+            if($scope.averageIntake<$scope.calorieGraph.intakecalorie){
                 $scope.currentGainColour="red";
             }else $scope.currentGainColour="limegreen";
 
             $scope.currentSpent=$scope.calorieGraph.burntcalorie;
             $scope.currentSpent=$scope.currentSpent.toFixed(2);
-            /*if(($scope.currentSpent.length-3)>2) $scope.spentGraphMax=100+((String($scope.currentSpent|0).slice(0, -2))*100);
-            else $scope.spentGraphMax=100;*/
-            $scope.currentSpentColour="orange";
+
+            if($scope.averageSpent<$scope.calorieGraph.burntcalorie){
+                $scope.currentSpentColour="red";
+            }else $scope.currentSpentColour="orange";
 
             var gainedCalories;
             var spentCalories;

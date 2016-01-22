@@ -107,7 +107,7 @@ userApp.controller('CourseController',['$scope','requestHandler','Flash','$route
     };
 
     $scope.categoryCourseList=function(){
-        requestHandler.postRequest("searchPublishedCourse/",{"categoryid":$routeParams.id,"coursename":$scope.courseSearch,"ownername":$scope.authorSearch}).then(function(response){
+        requestHandler.postRequest("searchPublishedCourse/",{"categoryid":$routeParams.id,"coursename":"","ownername":""}).then(function(response){
             $scope.categoryCourses=response.data.published_Course;
             $scope.paginationLoad=true;
         });
@@ -214,8 +214,6 @@ userApp.controller('CourseController',['$scope','requestHandler','Flash','$route
 
     $scope.categorycourseinit=function(){
         $scope.paginationLoad=false;
-        $scope.courseSearch="";
-        $scope.authorSearch="";
         $scope.categoryCourseList();
     };
 

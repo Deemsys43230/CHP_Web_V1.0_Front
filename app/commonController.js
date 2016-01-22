@@ -14,15 +14,8 @@ commonApp.controller('CommonController',function($scope,requestHandler,Flash,$ro
 
     // To display Testimonials as user
     $scope.doGetTestimonialsByUser=function(){
-
         requestHandler.getRequest("getTestimonialListByUser/", "").then(function(response){
-
-
             $scope.usertestimoniallist=response.data.Testimonials;
-
-            $scope.myImgSrc = $sce.trustAsResourceUrl(response.data.Testimonials[0].imageurl+"?decache="+Math.random());
-            $scope.usertestimonialdetails = response.data.Testimonials[0];
-
         },function(){
             errorMessage(Flash,"Please try again later!")
         });

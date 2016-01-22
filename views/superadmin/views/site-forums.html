@@ -33,7 +33,7 @@
                     <tr >
 
                     </tr>
-                    <tr dir-paginate="forumsList in forums | itemsPerPage: 13" ng-show="forumsList.length!=0">
+                    <tr dir-paginate="forumsList in forums | itemsPerPage: 13" ng-show="forums.length!=0">
                         <td><span class="line-clamp-sm">{{forumsList.posttitle}}</span></td>
                         <td><span class="line-clamp-lg">{{forumsList.postdescription}}</span></td>
                         <td class="text-center">{{forumsList.abusecount}}</td>
@@ -43,7 +43,7 @@
                             <span ng-hide="forumsList.isblocked==0"><a href="" class="btn-xs btn-success" ng-click="doBlockUnblockForum(forumsList.postid)">Unblock</a></span>
                             <span ng-show="forumsList.isblocked==0"><a href="" class="btn-xs btn-danger" ng-click="doBlockUnblockForum(forumsList.postid)">Block</a></span>
                         </td>
-                    <tr ng-show="forumsList.length==0"><td colspan="4" class="text-center">No Records Found !!!</td></tr>
+                    <tr ng-show="forums.length==0"><td colspan="4" class="text-center">No Records Found !!!</td></tr>
                     </tbody>
                 </table>
                 <!-- Start Pagination -->

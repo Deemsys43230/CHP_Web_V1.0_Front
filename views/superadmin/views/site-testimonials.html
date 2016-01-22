@@ -27,7 +27,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr dir-paginate="testimonial in admintestimonials | itemsPerPage: 13" pagination-id="testimonial">
+                    <tr dir-paginate="testimonial in admintestimonials | itemsPerPage: 13" pagination-id="testimonial" ng-show="admintestimonials.length != 0">
                         <td><span class="line-clamp-lg">{{testimonial.title}}</span></td>
                         <td><span class="line-clamp-sm">{{testimonial.givenby}}</span></td>
                         <td>
@@ -37,7 +37,7 @@
                             <a href="" class="btn-xs btn-danger" ng-click="doEnableDisableTestimonials(testimonial.testimonialid)" ng-hide="testimonial.status==0">Disable</a>
                         </td>
                     </tr>
-                    <tr ng-show="admintestimonials.length == 0"><td colspan="4" class="text-center"></td> </tr>
+                    <tr ng-show="admintestimonials.length == 0"><td colspan="4" class="text-center">No Records Found!!!</td></tr>
                     </tbody>
                 </table>
                 <!-- Start Pagination -->
