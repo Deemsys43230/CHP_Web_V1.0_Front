@@ -3,9 +3,7 @@
  */
 var userApp= angular.module('userApp', ['ngRoute','oc.lazyLoad','ngCookies','requestModule','flash','ngAnimate','ui.bootstrap']);
 
-
 userApp.controller('UserProfileController',['$scope','requestHandler','Flash',function($scope,requestHandler,Flash) {
-
 
     // Function to convert image url to base64
     $scope.convertImgToBase64=function(url, callback, outputFormat){
@@ -28,38 +26,39 @@ userApp.controller('UserProfileController',['$scope','requestHandler','Flash',fu
 
         requestHandler.getRequest("getUserId/","").then(function(response){
 
-
             $scope.userProfile=response.data.User_Profile;
-            if($scope.userProfile.gender == null) {
+
+            console.log($scope.userProfile);
+
+            if($scope.userProfile.gender == null){
                 $scope.userProfile.gender = "1";
             }
-         if($scope.userProfile.isProfileUpdated == 1){
-             $.each($scope.countries, function(index,value) {
-             if(value.code == $scope.userProfile.country){
-             $scope.userProfile.country = value;
-             }
-             $.each($scope.states, function(index1,value1){
-                     if(value1.countryid == $scope.userProfile.country.id){
-                         $scope.availableStates.push(value1);
-                         if(value1.code == $scope.userProfile.state){
-                         $scope.userProfile.state = value1;
-                         }
-                     }
-                 });
-                 });
-             }
-             else{
-             $scope.userProfile.country=$scope.countries[''];
-             }
 
+            if($scope.userProfile.isProfileUpdated == 1){
 
+                $.each($scope.countries, function(index,value) {
+                    if(value.code == $scope.userProfile.country){
+                        $scope.userProfile.country = value;
+                    }
 
+                    $.each($scope.states, function(index1,value1){
+                        if(value1.countryid == $scope.userProfile.country.id){
+                            $scope.availableStates.push(value1);
+                            if(value1.code == $scope.userProfile.state){
+                                $scope.userProfile.state = value1;
+                            }
+                        }
+                    });
+                });
+            }
 
-
+            else{
+                $scope.userProfile.country=$scope.countries[''];
+            }
 
             //alert($scope.userProfile.imageurl);
             $scope.userProfile.imageurl=requestHandler.convertUrl($scope.userProfile.imageurl);
-          //  $scope.userProfile.imageurl=$scope.userProfile.imageurl.substring($scope.userProfile.imageurl.indexOf("/") + 14, $scope.userProfile.imageurl.length);
+            //$scope.userProfile.imageurl=$scope.userProfile.imageurl.substring($scope.userProfile.imageurl.indexOf("/") + 14, $scope.userProfile.imageurl.length);
 
             //Convert Integer to String
             if($scope.userProfile.gender)
