@@ -17,7 +17,6 @@ userApp.controller('UserCoachController',function($scope,requestHandler,Flash,$l
   // To display Coach list by user
     $scope.doGetCoachListByUser=function(){
         requestHandler.getRequest("user/getallCoachListbyUser/", "").then(function(response){
-
             $scope.usercoachlist1=response.data.getallCoachListbyUser;
 
             $scope.doGetCoachDetailsByUser(response.data.getallCoachListbyUser[0].userid);
@@ -36,6 +35,7 @@ userApp.controller('UserCoachController',function($scope,requestHandler,Flash,$l
 
             $q.all([ratingPromise]).then(function(){
                 $scope.usercoachlist=$scope.usercoachlist1;
+                alert($scope.usercoachlist);
                 if($scope.usercoachlist==0){
 
                 }else{
@@ -192,9 +192,9 @@ userApp.controller('UserCoachController',function($scope,requestHandler,Flash,$l
     $scope.userCoachInit=function(){
         $scope.doGetCoachListByUser();
 
-       /* $scope.coach = {
+        $scope.coach = {
             status: 'coach-view'
-        };*/
+        };
     };
 
 
