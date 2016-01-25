@@ -11,6 +11,7 @@ requestHandlerApp.factory("requestHandler",['$http',function($http,$location){
     var exerciselength=13;*/
 
     var hostedDomain="http://192.168.1.236/api/v1/";
+    var paymentURL="http://192.168.1.236/Cyberhealth/views/user";
     var urlLength = 14;
     var exerciselength=13;
 
@@ -49,7 +50,8 @@ requestHandlerApp.factory("requestHandler",['$http',function($http,$location){
     };
 
     requestObj.loginRequest=function(username,password){
-         return $http.post('http://192.168.1.236/api/v1/login/',{"username":username,"password":password}).then(function(response){
+         requestURL=hostedDomain+'/login/';
+         return $http.post(requestURL,{"username":username,"password":password}).then(function(response){
             return response;
         },function(response){
              return response;
@@ -58,12 +60,10 @@ requestHandlerApp.factory("requestHandler",['$http',function($http,$location){
     };
 
     requestObj.paymentURL=function(){
-        var returnurl="http://192.168.1.236/cyber/views/user";
-        return returnurl;
+        return paymentURL;
     };
 
     requestObj.convertUrl=function(imageurl){
-   // alert(imageurl);
         var url = imageurl.substring(imageurl.indexOf("/")+ urlLength, imageurl.length);
         return url;
     };
