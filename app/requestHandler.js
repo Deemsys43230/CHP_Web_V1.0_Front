@@ -10,7 +10,7 @@ requestHandlerApp.factory("requestHandler",['$http',function($http,$location){
     var urlLength = 15;
     var exerciselength=13;*/
 
-    var hostedDomain="http://localhost/api/v1/";
+    var hostedDomain="http://192.168.1.236/api/v1/";
     var urlLength = 14;
     var exerciselength=13;
 
@@ -49,7 +49,7 @@ requestHandlerApp.factory("requestHandler",['$http',function($http,$location){
     };
 
     requestObj.loginRequest=function(username,password){
-         return $http.post('http://localhost/api/v1/login/',{"username":username,"password":password}).then(function(response){
+         return $http.post('http://192.168.1.236/api/v1/login/',{"username":username,"password":password}).then(function(response){
             return response;
         },function(response){
              return response;
@@ -58,7 +58,7 @@ requestHandlerApp.factory("requestHandler",['$http',function($http,$location){
     };
 
     requestObj.paymentURL=function(){
-        var returnurl="http://localhost/cyber/views/user";
+        var returnurl="http://192.168.1.236/cyber/views/user";
         return returnurl;
     };
 
