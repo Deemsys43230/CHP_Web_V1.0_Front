@@ -28,8 +28,6 @@ userApp.controller('UserProfileController',['$scope','requestHandler','Flash',fu
 
             $scope.userProfile=response.data.User_Profile;
 
-            console.log($scope.userProfile);
-
             if($scope.userProfile.gender == null){
                 $scope.userProfile.gender = "1";
             }
@@ -57,7 +55,7 @@ userApp.controller('UserProfileController',['$scope','requestHandler','Flash',fu
             }
 
             //alert($scope.userProfile.imageurl);
-            $scope.userProfile.imageurl=requestHandler.convertUrl($scope.userProfile.imageurl);
+            $scope.userProfile.imageurl=$scope.userProfile.imageurl;
             //$scope.userProfile.imageurl=$scope.userProfile.imageurl.substring($scope.userProfile.imageurl.indexOf("/") + 14, $scope.userProfile.imageurl.length);
 
             //Convert Integer to String
@@ -101,17 +99,15 @@ userApp.controller('UserProfileController',['$scope','requestHandler','Flash',fu
     $scope.refreshImage=function(){
         requestHandler.getRequest("getUserId/","").then(function(response){
             $scope.userProfile.imageurl=response.data.User_Profile.imageurl;
-            $scope.userProfile.imageurl=requestHandler.convertUrl($scope.userProfile.imageurl);
             $scope.userProfile.imageurl=$scope.userProfile.imageurl+"?decache="+Math.random();
-
             $('.image-editor').cropit({
                 imageState: {
-                    src: $scope.userProfile.imageurl+"?decache="+Math.random()
+                    src: $scope.userProfile.imageurl
                 }
             });
+            $scope.spinner=false;
         });
     };
-
 
     $scope.doUpdateProfile= function () {
 
@@ -127,34 +123,32 @@ userApp.controller('UserProfileController',['$scope','requestHandler','Flash',fu
                 successMessage(Flash,"Successfully Updated");
                 //Copy Orginal
                 $scope.orginalUserProfile=angular.copy($scope.userProfile);
-
             });
         });
-
-
     };
 
-        $scope.imageAdded=false;
-        $scope.imageUploaded=true;
+    $scope.imageAdded=false;
+    $scope.imageUploaded=true;
+    $scope.spinner=false;
 
-        $scope.fileNameChanged = function(element)
-        {
-            if(!$scope.imageAdded){
-                if(element.files.length > 0){
-                    $scope.inputContainsFile = false;
-                    $scope.imageAdded=true;
-                    $scope.imageUploaded=false;
-                }
-                else{
-                    $scope.inputContainsFile = true;
-                    $scope.imageAdded=false;
-                    $scope.imageUploaded=true;
-                }
+    $scope.fileNameChanged = function(element){
+        if(!$scope.imageAdded){
+            if(element.files.length > 0){
+                $scope.inputContainsFile = false;
+                $scope.imageAdded=true;
+                $scope.imageUploaded=false;
             }
-        };
+            else{
+                $scope.inputContainsFile = true;
+                $scope.imageAdded=false;
+                $scope.imageUploaded=true;
+            }
+        }
+    };
 
     $scope.doUpdateProfileImage=function(){
         //Convert the image to base 64
+        $scope.spinner=true;
         var image = $('.image-editor').cropit('export');
 
         requestHandler.postRequest("uploadProfileImage/",{'imageurl':image}).then(function(response){
@@ -195,31 +189,26 @@ userApp.controller('UserProfileController',['$scope','requestHandler','Flash',fu
         $scope.changePassword.oldPassword="";
         $scope.changePassword.newPassword="";
         $scope.changePassword.confirmPassword="";
-
     };
 
-
-        //Enable or Disable Privacy details
+    //Enable or Disable Privacy details
     $scope.privacydetails = function(){
         requestHandler.putRequest("updateUserSettingsIsPrivacy/","").then(function(response){
         //$scope.doGetProfile();
         },function(response){
             errorMessage(Flash,"Please Try Again Later");
         });
-
     };
 
-        $scope.addCountry = function(){
-            $scope.availableStates = [];
-            $.each($scope.states, function(index,value){
-                if(value.countryid == $scope.userProfile.country.id){
-                    $scope.availableStates.push(value);
-                    $scope.userProfile.state = $scope.availableStates[''];
-                }
-            });
-
-
-        }
+    $scope.addCountry = function(){
+        $scope.availableStates = [];
+        $.each($scope.states, function(index,value){
+            if(value.countryid == $scope.countries.id){
+                $scope.availableStates.push(value);
+                $scope.userProfile.state = $scope.availableStates[''];
+            }
+        });
+    };
 
         $scope.countries = [
             {name:'Afghanistan', code:'AF', "id":1001},
@@ -712,7 +701,6 @@ userApp.controller('UserProfileController',['$scope','requestHandler','Flash',fu
 
             {name:'Isle of Man', code:'IM', "id":1246}
         ];
-
 
         $scope.states = [
             {name:'Alabama', code:'AL', "countryid":1228},

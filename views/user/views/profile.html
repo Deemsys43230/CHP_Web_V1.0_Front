@@ -3,7 +3,13 @@
     <div id="w" class="clearfix">
         <div id="profile">
             <div class="col-md-12 no-padding">
-                <div class="profile-image center-block"><img id="profile-image-change" ng-src="{{userProfile.imageurl | trusted}}"></div>
+                <div class="profile-image center-block">
+                    <span ng-if="spinner">
+                        <span class="spinner-profile">
+                            <span class="three-quarters-loader">Loading…</span></span>
+                        </span>
+                    <img ng-src="{{userProfile.imageurl | trusted}}">
+                </div>
                 <input type="hidden" ng-model="userProfile.imageurl" name="profileImage" id="profileImageId"/>
                 <div class="change-image"><a id="modal_trigger" href="#modal" class="btn btn-xs btn-warning">Change</a></div>
                 <h4 class="margin-top-20">{{orginalUserProfile.name}}</h4>
@@ -31,7 +37,6 @@
             <div class="col-md-12">
                 <div class="col-md-12">
                     <div class="margin-top-5 no-padding pull-right">
-
                         <a id="modal_trigger1" href="#modal-changePassword" ng-click="reset()" class="profile_button"><i class="fa fa-lock"></i> Change Password</a>
                         <a href="#dashboard" class="back-button pull-right margin-left-5 margin-top5"><i class="fa fa-arrow-circle-o-left"></i>&nbsp;Go To Dashboard</a>
                     </div>
@@ -67,7 +72,7 @@
                     </div>
                     <div class="col-md-6 margin-top-10">
                         <div class="col-md-4 padding-top-4">
-                            <h5>DOB :</h5>
+                            <h5>DOB <small>(DD/MM/YYYY)</small> :</h5>
                         </div>
                         <div class="col-md-8">
                             <div class="input-group ui-datepicker full-width">
@@ -143,11 +148,10 @@
                             <h5>Zipcode :</h5>
                         </div>
                         <div class="col-md-8">
-                            <input class="profile_input" name="zipcode" ng-pattern="/^\d{5,6}+$/" ng-model="userProfile.zipcode" maxlength="6" ng-minlength="5" required/>
+                            <input class="profile_input" name="zipcode" ng-pattern="/^\d{5,6}$/" ng-model="userProfile.zipcode" maxlength="6" minlength="5" required/>
                             <span ng-show="userProfileForm.zipcode.$dirty&&userProfileForm.zipcode.$invalid">
                                 <span class="error-message textarea-errormessage10" ng-show="userProfileForm.zipcode.$error.required"><span>Required.</span></span>
                                 <span class="error-message textarea-errormessage10" ng-show="userProfileForm.zipcode.$error.pattern"><span>Invalid&nbsp;Format.</span></span>
-
                                 <span class="error-message textarea-errormessage10" ng-show="!userProfileForm.zipcode.$error.pattern&&userProfileForm.zipcode.$error.minlength"><span>Should&nbsp;be&nbsp;of&nbsp;length&nbsp;5.</span></span>
                              </span>
                         </div>
@@ -243,7 +247,7 @@
                     <div class="one_half">
                         <div class="fileUpload food-button" >
                             <span>Choose File</span>
-                            <input type="file" class="upload cropit-image-input" valid-file required  ng-model="testimonials.imageurl" onblur="angular.element(this).scope().fileNameChanged(this)"/>
+                            <input type="file" class="upload cropit-image-input" valid-file required  ng-model="testimonials.imageurl" onchange="angular.element(this).scope().fileNameChanged(this)"/>
                         </div>
                     </div>
                     <div class="one_half last"><a href="" onclick="return false;" class="btn food-button export modal_close" ng-disabled="imageUploaded" ng-click="doUpdateProfileImage()">Upload Image</a></div>
@@ -385,8 +389,6 @@
             // blur code here
         });
 
-
-
         $('#pswd').keyup(function () {
 
             // keyup code here
@@ -401,56 +403,5 @@
             $('#pswd_info').hide();
         });
 
-        /*$('#pswd').bind("cut copy paste",function(e) {
-         e.preventDefault();
-         });*/
-
     });
 </script>
-<style>
-
-    #pswd_info {
-        position:absolute;
-        bottom:80px;
-        /* IE Specific */
-        right:-240px;
-        width:250px;
-        padding:15px;
-        background:#fefefe;
-        font-size:.875em;
-        border-radius:5px;
-        box-shadow:0 1px 3px #ccc;
-        border:1px solid #ddd;
-    }
-    #pswd_info h4 {
-        margin:0 0 10px 0;
-        padding:0;
-        font-weight:normal;
-    }
-    #pswd_info::before {
-        content:"\25C0";
-        position:absolute;
-        left:-8px;
-        top:54%;
-        font-size:14px;
-        line-height:14px;
-        color:#ddd;
-        text-shadow:none;
-        display:block;
-    }
-    .invalid {
-        background:url(../../../images/invalid.png) no-repeat 0 50%;
-        padding-left:22px;
-        line-height:24px;
-        color:#ec3f41;
-    }
-    .valid {
-        background:url(../../../images/valid.png) no-repeat 0 50%;
-        padding-left:22px;
-        line-height:24px;
-        color:#3a7d34;
-    }
-    #pswd_info {
-        display:none;
-    }
-</style>

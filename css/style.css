@@ -8343,6 +8343,7 @@ a:hover, a:visited, a:link, a:active
 	top: 40px;
 	left: 400px;
 }
+
 .textarea-errormessage40{
 	 top: 40px;
  }
@@ -8523,6 +8524,15 @@ a:hover, a:visited, a:link, a:active
 .height-auto{
     height: auto !important;
     min-height: 500px !important;
+}
+
+.spinner-profile{
+    position: absolute;
+    text-align:center;
+    background-color: rgba(0,0,0,0.4);
+    width: 200px:
+    height:200px!important;
+    padding:89px 92px;
 }
 
 .profile-image{
