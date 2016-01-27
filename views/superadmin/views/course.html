@@ -24,7 +24,7 @@
                         <th class="col-md-2">Course Subtitle</th>
                         <th class="col-md-2">Category</th>
                         <th class="col-md-1">Author</th>
-                        <th class="col-md-1">Price</th>
+                        <th class="col-md-1">Price $</th>
                         <th class="col-md-1">Enroll</th>
                         <th class="col-md-1">Created On</th>
                         <th class="col-md-1">Published On</th>
@@ -38,7 +38,7 @@
                             <td title="{{course.categoryname}}"><span class="line-clamp-xxs">{{course.categoryname}}</span></td>
                             <td title="{{course.ownername}}"><span class="line-clamp-lxs">{{course.ownername}}</span></td>
                             <td ng-if="course.price==0">Free</td>
-                            <td ng-if="course.price!=0">{{course.price}}$</td>
+                            <td ng-if="course.price!=0">{{course.price}}</td>
                             <td>{{course.enrollcount}}</td>
                             <td>{{course.createdon}}</td>
                             <td>{{course.publishedon}}</td>

@@ -23,10 +23,9 @@
                     <tr class="warning">
                         <th class="col-md-2">Course Name</th>
                         <th class="col-md-2">Course Subtitle</th>
-                        <th class="col-md-2">Course Subtitle</th>
                         <th class="col-md-2">Category</th>
                         <th class="col-md-1">Author</th>
-                        <th class="col-md-1">Price</th>
+                        <th class="col-md-1">Price $</th>
                         <th class="col-md-1">Created On</th>
                         <th class="col-md-1">Received On</th>
                         <th class="col-md-2">Options</th>
@@ -39,7 +38,7 @@
                             <td title="{{pendingcourse.categoryname}}"><span class="line-clamp-xs">{{pendingcourse.categoryname}}</span></td>
                             <td title="{{pendingcourse.ownername}}"><span class="line-clamp-lxs">{{pendingcourse.ownername}}</span></td>
                             <td ng-if="pendingcourse.price==0">Free</td>
-                            <td ng-if="pendingcourse.price!=0">{{pendingcourse.price}}$</td>
+                            <td ng-if="pendingcourse.price!=0">{{pendingcourse.price}}</td>
                             <td>{{pendingcourse.createdon}}</td>
                             <td>{{pendingcourse.reviewdate}}</td>
                         <input type="hidden" ng-model="pendingcourse.page"/>

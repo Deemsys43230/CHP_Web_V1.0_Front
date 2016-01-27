@@ -210,7 +210,7 @@
         <!-- Reset Password -->
         <div class="reset_password">
             <div flash-message="2000" ></div>
-            <form name="forgotPasswordForm">
+            <form name="forgotPasswordForm" novalidate>
                 <p>Email</p>
                 <input type="email" name="emailid" required validate-email ng-model="emailid"/>
                     <span ng-show="forgotPasswordForm.emailid.$dirty&&forgotPasswordForm.emailid.$invalid && !forgotPasswordForm.emailid.$pristine">
