@@ -22,9 +22,9 @@
                     </span>
                     <br/>
                     <h5>Categories :</h5>
-                    <ui-select multiple name="categoryid" ng-model="foodDetails.categoryid" theme="select2" ng-disabled="disabled" class="form-control" ui-select-required>
+                    <ui-select multiple ng-model="foodDetails.categoryid" theme="select2" ng-disabled="disabled" class="form-control" ui-select-required>
                         <ui-select-match placeholder="Type and Select Categories">{{$item.categoryname}}</ui-select-match>
-                        <ui-select-choices repeat="category in foodCategoryListAll | filter:$select.search">
+                        <ui-select-choices repeat="category in foodCategoryListAll | propsFilter: {categoryid: $select.search, categoryname: $select.search}">
                             {{category.categoryname}}
                         </ui-select-choices>
                     </ui-select>

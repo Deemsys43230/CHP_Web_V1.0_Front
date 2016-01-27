@@ -337,7 +337,7 @@ commonApp.controller('LoginController',function($scope,requestHandler,Flash,$win
     $scope.doForgotPassword=function(){
         //request for secret question
         requestHandler.postRequest("getSecretQuestion/",{"emailid":$scope.emailid}).then(function(response){
-alert(response.data.Response_status);
+
             if(response.data.Response_status==0){
                 errorMessage(Flash,"Email ID doesn't Exist!");
             }
@@ -351,7 +351,7 @@ alert(response.data.Response_status);
                 $scope.secretQuestion=response.data.secretquestion;
             }
             else if(response.data.Response_status==2){
-                successMessage(Flash,"Please check your email!!");
+                successMessage(Flash,"Please check your Email ID <br/>to reset the password!");
                 $scope.emailid="";
                 $scope.forgotPasswordForm.$setPristine();
              /*   $(".user_login").hide();

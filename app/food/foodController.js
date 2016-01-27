@@ -498,13 +498,7 @@ adminApp.controller("FoodDetailsEditController",function($q,$scope,requestHandle
         return angular.equals(original, $scope.foodDetails);
     };
 
-    //Initialize Page
-    //Get Food Details
-    if($scope.type==1){
-        $scope.doSetFoodDetails();
-    }else if($scope.type==2){
-        $scope.doGetFoodDetails();
-    }
+    
 
     //Set measure set
     $scope.doAddNewMeasureMinerals=function(id,name){
@@ -527,6 +521,14 @@ adminApp.controller("FoodDetailsEditController",function($q,$scope,requestHandle
         });
     });
 
+    $q.all([foodCategoryPromise,foodTagPromise]).then(function(){
+         if($scope.type==1){
+        $scope.doSetFoodDetails();
+        }else if($scope.type==2){
+          $scope.doGetFoodDetails();
+         }
+    });
+    
     //End Initialize Page
 
 });
@@ -559,6 +561,7 @@ adminApp.controller('FoodCateogryController', ['$scope', function($scope) {
 
 
 adminApp.filter('propsFilter', function() {
+
         return function(items, props) {
             var out = [];
 
