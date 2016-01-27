@@ -592,7 +592,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         $scope.setGoalDetails={};
         $scope.setGoalDetails.startdate=document.getElementById("start").value;
         $scope.setGoalDetails.enddate=document.getElementById("end").value;
-        $scope.setGoalDetails.targetweight=parseInt(document.getElementById("target").value);
+        $scope.setGoalDetails.targetweight=parseFloat(document.getElementById("target").value);
         $scope.setGoalDetails.initialweight=$scope.demography.weight;
 
         if($scope.setGoalDetails.startdate==''){
@@ -650,7 +650,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
     $scope.weightLogEntry=function(){
         $scope.weightUpdateText="Updating...";
         $scope.spinner=true;
-        $scope.doInsertOrUpdateWeightLog($("#weight-log-date").val(),parseInt($("#weightLog").val()));
+        $scope.doInsertOrUpdateWeightLog($("#weight-log-date").val(),parseFloat($("#weightLog").val()));
     };
 
     //TO Insert weight Goal Log
@@ -672,7 +672,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
     };
 
     $scope.isCleanWeight=function(){
-        return angular.equals(parseInt($("#weightLog").val()), parseInt($scope.originalWeight));
+        return angular.equals(parseFloat($("#weightLog").val()), parseFloat($scope.originalWeight));
     };
 
 
@@ -767,7 +767,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         else{
             $scope.setGoalDetails.enddate=document.getElementById("start").value;
         }
-        $scope.setGoalDetails.targetweight=parseInt(document.getElementById("target").value);
+        $scope.setGoalDetails.targetweight=parseFloat(document.getElementById("target").value);
         $scope.setGoalDetails.initialweight=$scope.goalDetails.initialweight;
 
         requestHandler.putRequest("user/updateWeightGoal/",$scope.setGoalDetails).then(function(response){
