@@ -181,6 +181,24 @@ userApp.controller('GoalController',function($scope,requestHandler,Flash,$route,
     $scope.viewRank=function(){
         requestHandler.postRequest("user/rankGoalList/",{"goalid" : $routeParams.id}).then(function(response){
             $scope.rankList=response.data.Goal_Data;
+        $(function(){
+            $("#lean_overlay").fadeTo(1000);
+            $("#modal1").fadeIn(600);
+            $(".common_model").show();
+        });
+
+        $(".modal_close").click(function(){
+            $(".common_model").hide();
+            $("#modal1").hide();
+            $("#lean_overlay").hide();
+        });
+
+        $("#lean_overlay").click(function(){
+            $(".common_model").hide();
+            $("#modal1").hide();
+            $("#lean_overlay").hide();
+        });
+
         },function(){
             errorMessage(Flash,"Please try again later!");
         });
@@ -232,6 +250,7 @@ userApp.controller('GoalController',function($scope,requestHandler,Flash,$route,
     $scope.doAcceptGoalRequest=function(id){
         requestHandler.putRequest("user/acceptGoal/",{"goalid":id}).then(function(){
             successMessage(Flash,"Successfully Joined!");
+            $("#modal_trigger1").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
             $location.path('/groupGoalView/'+id);
            // $scope.doGetMyGoalList();
         },function(){

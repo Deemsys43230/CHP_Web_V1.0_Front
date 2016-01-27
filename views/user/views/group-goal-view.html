@@ -60,7 +60,7 @@
                             <span><a class="target_button red_button" ng-click="doExitConfirmation()">Exit from Goal</a></span>
                         </div>
                         <div ng-hide="isRequest">
-                            <span><a href="#modal1" id="modal_trigger1" class="target_button green_button" ng-click="viewRank()">View Rank</a></span>
+                            <span><a href="" id="modal_trigger1" class="target_button green_button" ng-click="viewRank()">View Rank</a></span>
                             <span ng-show="goalDetail.candelete==1"><a href="#modal" ng-click="resetdata()" id="modal_trigger" class="target_button orange_button" >Add Members</a></span>
                             <span ng-show="goalDetail.candelete==1"><a class="target_button red_button" ng-click="doConfirmation(goalList.goalid)">Finish Goal</a></span>
                             <span ng-show="goalDetail.candelete==0"><a class="target_button red_button" ng-click="doExitConfirmation()">Exit from Goal</a></span>
@@ -257,9 +257,5 @@
 
 <script type="text/javascript">
     $("#modal_trigger1").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
-
-    $(function(){
-        $(".common_model").show();
-    })
 </script>
 

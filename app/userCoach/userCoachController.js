@@ -35,7 +35,6 @@ userApp.controller('UserCoachController',function($scope,requestHandler,Flash,$l
 
             $q.all([ratingPromise]).then(function(){
                 $scope.usercoachlist=$scope.usercoachlist1;
-                alert($scope.usercoachlist);
                 if($scope.usercoachlist==0){
 
                 }else{
