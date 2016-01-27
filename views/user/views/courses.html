@@ -17,83 +17,45 @@
                         <div class="loader"></div>
                     </div>
                 </div>
-                 <!--Start Recent Posts Carousel -->
-               <!-- <div class="latest-posts" >
-                    <a href="#courseCategory" class="course-controller pull-right"><span><i class="fa fa-eye"></i> View all courses</span></a>
-                    <h3 class="text-gray">&nbsp;&nbsp;Category Name</h3>
-                    <div id="callCarousel">
-                        <div class="latest-posts-classic cust-carousel touch-carousel course-control margin-top-5">
-                            &lt;!&ndash; Posts 1&ndash;&gt;
-                            <div class="item" ng-repeat="courses in courseList">
-                                <a href="#courseDetail/{{courses.courseid}}">
-                                    <div class="dashboard arrange">
-                                        <div class="course-grid-user">
-                                            <div class="col-md-6 margin-top-5">
-                                                <h4 class="course-name wrap" title="{{courses.coursename}}">{{courses.coursename}}</h4>
-
-                                                <p class="margin-top-10">{{courses.enrollcount}} users</p>
-                                            </div>
-                                            <div class="col-md-6 no-padding">
-                                                <img class="course-image" src="{{courses.promoimage | trusted}}">
-                                                <div class="text-bold" ng-if="courses.price==0"><span class="course-price free">Free</span></div>
-                                                <div class="text-bold" ng-if="courses.price!=0"><span class="course-price cost">{{courses.price}}$</span></div>
-                                            </div>
-                                            <div class="col-md-12 margin-top-5">
-                                                <div class="col-md-2 no-padding margin-top-5"><img class="course-author-img" src="{{courses.imageurl | trusted}}"></div>
-                                                <div class="col-md-10 no-padding">
-                                                    <h5>{{courses.ownername}}</h5>
-                                                    <p>{{courses.specialistin}}</p>
-                                                    <span ng-hide="courses.enrollmentstatus==0"> <p class="text-green" >Enrolled</p></span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    &lt;!&ndash; End Recent Posts Carousel &ndash;&gt;
-               </div>-->
 
                 <div id="callCarousel">
 
+                    <div ng-repeat="coursesByCategory in allCategoryCourses">
+                        <div class="latest-posts margin-bottom-10"  ng-if="coursesByCategory.categoryCourses.length>0">
+                            <span ng-if="coursesByCategory.categoryCourses.length>3"><a href="#courseCategory/{{coursesByCategory.categoryid}}" class="course-controller pull-right"><span><i class="fa fa-eye"></i> View all courses</span></a></span>
+                            <h3 class="text-gray">&nbsp;&nbsp;{{coursesByCategory.categoryname}}&nbsp;<span class="text-red">({{coursesByCategory.categoryCourses.length}})</span></h3>
+                            <div class="latest-posts-classic cust-carousel touch-carousel course-control margin-top-5">
+                                <!-- Posts 1-->
+                                <div class="item" ng-repeat="courses in coursesByCategory.categoryCourses">
+                                    <a href="#courseDetail/{{courses.courseid}}">
+                                        <div class="dashboard arrange">
+                                            <span ng-hide="courses.enrollmentStatus==0"><img class="user-course-status" src="../../images/enrolled.png"></span>
+                                            <div class="course-grid-user">
+                                                <div class="col-md-6 margin-top-5">
+                                                    <h4 class="course-name wrap" title="{{courses.coursename}}">{{courses.coursename}}</h4>
 
-                <div ng-repeat="coursesByCategory in allCategoryCourses">
-                    <div class="latest-posts margin-bottom-10"  ng-if="coursesByCategory.categoryCourses.length>0">
-                        <span ng-if="coursesByCategory.categoryCourses.length>3"><a href="#courseCategory/{{coursesByCategory.categoryid}}" class="course-controller pull-right"><span><i class="fa fa-eye"></i> View all courses</span></a></span>
-                        <h3 class="text-gray">&nbsp;&nbsp;{{coursesByCategory.categoryname}}&nbsp;<span class="text-red">({{coursesByCategory.categoryCourses.length}})</span></h3>
-                        <div class="latest-posts-classic cust-carousel touch-carousel course-control margin-top-5">
-                            <!-- Posts 1-->
-                            <div class="item" ng-repeat="courses in coursesByCategory.categoryCourses">
-                                <a href="#courseDetail/{{courses.courseid}}">
-                                    <div class="dashboard arrange">
-                                        <span ng-hide="courses.enrollmentStatus==0"><img class="user-course-status" src="../../images/enrolled.png"></span>
-                                        <div class="course-grid-user">
-                                            <div class="col-md-6 margin-top-5">
-                                                <h4 class="course-name wrap" title="{{courses.coursename}}">{{courses.coursename}}</h4>
-
-                                                <p class="margin-top-10">{{courses.enrollcount}} users</p>
-                                            </div>
-                                            <div class="col-md-6 no-padding">
-                                                <img class="course-image" src="{{courses.promoimage | trusted}}">
-                                                <div class="text-bold" ng-if="courses.price==0"><span class="course-price free">Free</span></div>
-                                                <div class="text-bold" ng-if="courses.price!=0"><span class="course-price cost">{{courses.price}}$</span></div>
-                                            </div>
-                                            <div class="col-md-12 margin-top-5">
-                                                <div class="col-md-2 no-padding margin-top-5"><img class="course-author-img" src="{{courses.imageurl | trusted}}"></div>
-                                                <div class="col-md-10 no-padding">
-                                                    <h5 class="line-clamp-xlg">{{courses.ownername}}</h5><br/>
-                                                    <p class="line-clamp-xlg">{{courses.specialistin}}</p>
+                                                    <p class="margin-top-10">{{courses.enrollcount}} users</p>
+                                                </div>
+                                                <div class="col-md-6 no-padding">
+                                                    <img class="course-image" ng-src="{{courses.promoimage | trusted}}">
+                                                    <div class="text-bold" ng-if="courses.price==0"><span class="course-price free">Free</span></div>
+                                                    <div class="text-bold" ng-if="courses.price!=0"><span class="course-price cost">{{courses.price}}$</span></div>
+                                                </div>
+                                                <div class="col-md-12 margin-top-5">
+                                                    <div class="col-md-2 no-padding margin-top-5"><img class="course-author-img" ng-src="{{courses.imageurl | trusted}}"></div>
+                                                    <div class="col-md-10 no-padding">
+                                                        <h5 class="line-clamp-xlg">{{courses.ownername}}</h5><br/>
+                                                        <p class="line-clamp-xlg">{{courses.specialistin}}</p>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </a>
+                                    </a>
+                                </div>
                             </div>
+                            <!-- End Recent Posts Carousel -->
                         </div>
-                        <!-- End Recent Posts Carousel -->
                     </div>
-                </div>
 
                 </div>
             </div>

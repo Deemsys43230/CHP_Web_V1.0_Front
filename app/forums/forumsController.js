@@ -3,6 +3,7 @@ adminApp.controller('ForumsController',function($scope,requestHandler,Flash,$loc
 
     $scope.isNew = true;
     $scope.title = "Add Forum";
+    $scope.activeClass.forums='active';
 
     $scope.siteMenuList = siteMenuService;
     $.each($scope.siteMenuList,function(index,value){
@@ -145,8 +146,9 @@ var userApp = angular.module('userApp', ['ngRoute','oc.lazyLoad','requestModule'
 
 userApp.controller('ForumsUserController',function($scope,requestHandler,Flash,$routeParams,$location){
 
-  $scope.isNew = true;
+    $scope.isNew = true;
     $scope.title = "Add Forum";
+    $scope.activeClass.forums='active';
 
     //summer note
     $scope.options = {

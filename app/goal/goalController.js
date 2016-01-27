@@ -5,7 +5,7 @@ var userApp= angular.module('userApp', ['ngRoute','oc.lazyLoad','ngCookies','req
 
 userApp.controller('GoalController',function($scope,requestHandler,Flash,$route,$routeParams,$location) {
 
-    $scope.activeClass = {mygoal:'active'};
+    $scope.activeClass.groupGoal='active';
 
     $scope.doGetMyGoalList=function(){
         $scope.paginationLoad=false;

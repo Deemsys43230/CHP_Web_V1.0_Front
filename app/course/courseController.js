@@ -7,8 +7,7 @@ userApp.controller('CourseController',['$scope','requestHandler','Flash','$route
 
     $scope.entrolling="Enroll to this course";
     $scope.enrollButtonStatus=false;
-
-    alert("yes");
+    $scope.activeClass.myCourses='active';
 
     $scope.mycourselist = function(){
         $scope.loaded=true;

@@ -34,12 +34,12 @@
                                         <p class="margin-top-10">{{courses.enrollcount}} users</p>
                                     </div>
                                     <div class="col-md-6 no-padding">
-                                        <img class="course-image" src="{{courses.promoimage | trusted}}">
+                                        <img class="course-image" ng-src="{{courses.promoimage | trusted}}">
                                         <div class="text-bold" ng-if="courses.price==0"><span class="course-price free">Free</span></div>
                                         <div class="text-bold" ng-if="courses.price!=0"><span class="course-price cost">{{courses.price}}$</span></div>
                                     </div>
                                     <div class="col-md-12 margin-top-5">
-                                        <div class="col-md-2 no-padding margin-top-5"><img class="course-author-img" src="{{courses.imageurl | trusted}}"></div>
+                                        <div class="col-md-2 no-padding margin-top-5"><img class="course-author-img" ng-src="{{courses.imageurl | trusted}}"></div>
                                         <div class="col-md-10 no-padding">
                                             <h5 class="line-clamp-xlg">{{courses.ownername}}</h5><br/>
                                             <p class="line-clamp-xlg">{{courses.specialistin}}</p>

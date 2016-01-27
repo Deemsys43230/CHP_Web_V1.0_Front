@@ -57,7 +57,7 @@
                     <div ng-switch-default>
                         <div class="col-md-12" dir-paginate="userforum in userforumlist | startsWithLetterForum :forumsearch | itemsPerPage: 8" ng-show="userforumlist !=0">
                             <div class="col-md-1 no-padding">
-                                <img class="img-circle forum-list-img" src="{{userforum.userimage | trusted}}">
+                                <img class="img-circle forum-list-img" ng-src="{{userforum.userimage|trusted}}">
                             </div>
                             <div class="col-md-3">
                                 <p class="wrap text-bold">{{userforum.username}}</p>

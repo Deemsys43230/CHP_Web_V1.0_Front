@@ -94,6 +94,7 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'userApp',
                             files:[
+                                '../../angular/angular-utils-pagination/dirPagination.js',
                                 '../../app/course/courseController.js'
                             ]
                         })

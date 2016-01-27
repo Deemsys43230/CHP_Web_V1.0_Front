@@ -5,15 +5,13 @@ userApp.controller('UserPaymentController',function($scope,requestHandler,Flash,
 
     $scope.sortcoursenameicon="fa fa-caret-down";
     $scope.sortcategoryicon = "fa fa-caret-down";
-     $scope.sortauthoricon = "fa fa-caret-down";
-     $scope.sortpruchasedonicon = "fa fa-caret-down";
-     $scope.sortamounticon = "fa fa-caret-down";
+    $scope.sortauthoricon = "fa fa-caret-down";
+    $scope.sortpruchasedonicon = "fa fa-caret-down";
+    $scope.sortamounticon = "fa fa-caret-down";
     $scope.sortcoachnameicon="fa fa-caret-down";
     $scope.sortcoachemailicon="fa fa-caret-down";
     $scope.sortenrollicon="fa fa-caret-down";
     $scope.sortpayicon="fa fa-caret-down";
-
-
 
     //sorting by food Id
     $scope.sortCourseName = function(){
@@ -126,13 +124,6 @@ userApp.controller('UserPaymentController',function($scope,requestHandler,Flash,
         });
     };
 
-   /* $scope.getPaymentDetails=function(){
-        requestHandler.getRequest("getCoachIndividualDetailbyUser/"+$routeParams.id, "").then(function(response){
-            $scope.paymentDetails=response.data.getCoachIndividualDetail;
-            console.log($scope.paymentDetails);
-        });
-    };*/
-
     // To display Coach list by user
     $scope.doGetMyCoachListByUser=function(){
         requestHandler.getRequest("user/getmySubscribedCoachList/", "").then(function(response){
@@ -141,13 +132,6 @@ userApp.controller('UserPaymentController',function($scope,requestHandler,Flash,
             errorMessage(Flash,"Please try again later!")
         });
     };
-
-    /*$scope.getCoachPaymentDetails=function(){
-        requestHandler.getRequest("getCoachIndividualDetailbyUser/"+$routeParams.id, "").then(function(response){
-            $scope.paymentDetails=response.data.getCoachIndividualDetail;
-            console.log($scope.paymentDetails);
-        });
-    };*/
 
     var original="";
     $scope.doGetPaypalDetails = function(){
@@ -163,7 +147,6 @@ userApp.controller('UserPaymentController',function($scope,requestHandler,Flash,
 
     $scope.doUpdatePaypalDetails=function(){
         requestHandler.putRequest("updateUserSettings/",$scope.paypalDetails).then(function(response){
-
             successMessage(Flash,"Successfully Updated!");
         },function(){
             errorMessage(Flash,"Please try again later");

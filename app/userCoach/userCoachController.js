@@ -2,6 +2,7 @@ var userApp = angular.module('userApp', ['ngRoute','oc.lazyLoad','requestModule'
 
 userApp.controller('UserCoachController',function($scope,requestHandler,Flash,$location,$q,$routeParams) {
 
+    $scope.activeClass.coach='active';
     $scope.coachreview = {ratinglevel:1};
     $scope.averageRate=0.1;
     $scope.paginationLoad=false;

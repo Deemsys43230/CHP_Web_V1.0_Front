@@ -27,10 +27,10 @@
                                     <p class="margin-top-10">{{mycourses.categoryname}}</p>
                                 </div>
                                 <div class="col-md-6 no-padding">
-                                    <img class="course-image" src="{{mycourses.promoimage | trusted}}">
+                                    <img class="course-image" ng-src="{{mycourses.promoimage | trusted}}">
                                  </div>
                                 <div class="col-md-12 margin-top-5">
-                                    <div class="col-md-2 no-padding margin-top-5"><img class="course-author-img" src="{{mycourses.imageurl | trusted}}"></div>
+                                    <div class="col-md-2 no-padding margin-top-5"><img class="course-author-img" ng-src="{{mycourses.imageurl | trusted}}"></div>
                                     <div class="col-md-10 no-padding">
                                         <h5>{{mycourses.ownername}}</h5>
                                         <p>{{mycourses.specialistin}}</p>
@@ -40,10 +40,13 @@
                         </div>
                     </a>
                 </div>
-                <div ng-show="myCourseList.length==0">
-                    <h1 class="col-md-12 margin-top-50 text-gray text-center">
-                        NO COURSES FOUND!!!<br/><br/><a class="btn btn-warning btn-sm" href="#courses"><i class="fa fa-book"></i>&nbsp;&nbsp;Enroll Courses Here</a>
-                    </h1>
+                <div class="margin-top-50" ng-show="myCourseList.length==0">
+                    <div class="col-md-6">
+                        <img class="margin-top-20 pull-right" src="../../images/no-courses.png"></div>
+                    <div class="col-md-6">
+                        <h1 class="text-gray margin-top-50">NO COURSES FOUND!!!</h1><br/>
+                        <a class="main-button" href="#courses"><i class="fa fa-book"></i>&nbsp;&nbsp;Enroll Courses Here</a>
+                    </div>
                 </div>
             </div>
 
