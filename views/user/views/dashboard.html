@@ -353,20 +353,22 @@
                     <div class="col-md-12 margin-top-5" >
                         <h4>Coach Advices</h4><br/>
                         <div class="marquee">
-                        <div ng-repeat="mycoachadvice in coachadvice">
-                            <div class="col-md-1 no-padding">
-                                <img class="img-circle" src="{{mycoachadvice.coachimage | trusted}}">
+                            <div ng-show="coachadvice.length>0">
+                                <div ng-repeat="mycoachadvice in coachadvice">
+                                    <div class="col-md-1 no-padding">
+                                        <img class="img-circle" ng-src="{{mycoachadvice.coachimage | trusted}}">
+                                    </div>
+                                    <div class="col-md-2">
+                                        <p class="wrap">{{mycoachadvice.coachname}}</p>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <span>{{mycoachadvice.description}}</span>
+                                    </div>
+                                    <div class="col-md-12 no-padding">
+                                        <hr/>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col-md-2">
-                                <p class="wrap">{{mycoachadvice.coachname}}</p>
-                            </div>
-                            <div class="col-md-9">
-                                <span>{{mycoachadvice.description}}</span>
-                            </div>
-                            <div class="col-md-12 no-padding">
-                                <hr/>
-                            </div>
-                        </div>
                         </div>
                     </div>
                 </div>
@@ -427,7 +429,7 @@
         <div id="update" ng-show="historyReport==0">
             <div class="row">
                 <div class="col-md-4">
-                    <img ng-src="{{userProfile.imageurl | trusted}}">
+                    <img ng-src="{{userProfileImage | trusted}}">
                 </div>
                 <div class="col-md-8 no-padding">
                     <h4>{{userProfile.name}}&nbsp;</h4>
@@ -699,7 +701,7 @@
             </div>
             <form name="demographyForm" novalidate>
                 <p>Update your current weight:</p>
-                <input class="profile_input"  name="weight" ng-pattern="/^\-?\d+((\.|\,)\d+)?$/" ng-model="demography.weight" maxlength="5" required validate-Float1/>
+                <input class="profile_input"  name="weight" ng-pattern="/^\-?\d+((\.|\,)\d+)?$/" ng-model="setGoalDetails.initialweight" maxlength="5" required validate-Float1/>
                 <span ng-show="demographyForm.weight.$dirty&&demographyForm.weight.$invalid">
                     <span class="error-message textarea-errormessage40-left" ng-show="demographyForm.weight.$error.required"><span>Required.</span></span>
                     <span class="error-message textarea-errormessage40-left" ng-show="!demographyForm.weight.$error.required && demographyForm.weight.$error.validateFloat1"><span>Invalid&nbsp;Data.</span></span>

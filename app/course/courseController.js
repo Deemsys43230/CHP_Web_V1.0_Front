@@ -3,10 +3,12 @@
  */
 
 var userApp= angular.module('userApp', ['ngRoute','oc.lazyLoad','ngCookies','requestModule','flash','angularUtils.directives.dirPagination']);
-userApp.controller('CourseController',['$scope','requestHandler','Flash','$routeParams','$location',function($scope,requestHandler,Flash,$routeParams,$location) {
+userApp.controller('CourseController',['$scope','requestHandler','Flash','$routeParams','$location',function($scope,requestHandler,Flash,$routeParams) {
 
     $scope.entrolling="Enroll to this course";
     $scope.enrollButtonStatus=false;
+
+    alert("yes");
 
     $scope.mycourselist = function(){
         $scope.loaded=true;

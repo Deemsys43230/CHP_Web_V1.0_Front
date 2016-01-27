@@ -17,17 +17,17 @@
     </div>
     <div class="col-md-12 no-padding">
         <div class="col-md-6">Current Weight <small>(Kgs)</small><span class="pull-right">:</span></div>
-        <div class="col-md-6 no-padding">{{curweight}} Kgs</div>
+        <div class="col-md-6 no-padding">{{demography.weight}} Kgs</div>
     </div>
 
     <div class="col-md-12 margin-top-5">
         <p>Target Progress</p>
-        <div id="targetGraph" style="height:47px;width:350px;"></div>
+        <div id="targetGraph"></div>
     </div>
 
     <div class="col-md-12 margin-top-10 text-center">
         <a class="target_button green_button" ng-click="updateGoalDetails()">Update Goal</a>
-        <a class="target_button orange_button" ng-click="doGetWeightLogGraph()">View Graph</a>
+        <span ng-show="viewGraphButton"><a class="target_button orange_button" ng-click="doGetWeightLogGraph()">View Graph</a></span>
         <a class="target_button red_button" ng-click="deteteGoal()">Reset Goal</a>
     </div>
 </div>
@@ -88,6 +88,21 @@
     });
 
     //-------------------------------------------------------
+    function refreshGraph() {
+        var targetchart = new Highcharts.Chart({
+            chart:{renderTo:'targetGraph',
+                margin:[5,30,20,70]
+            },
+            xAxis:{categories:['Weight']},
+            yAxis:{
+                labels:{y:10,style:{fontSize:'8px'}},
+                plotBands:[{color: 'rgba(103,103,103,.35)'}]
+            },
+            series:[{name:'Current Weight',type: 'bar',pointWidth:10,data:[currentweight]},
+                {name:'Target Weight',type: 'scatter',data:[targetweight]}]
+        });
+    }
+
     var targetchart = new Highcharts.Chart({
         chart:{renderTo:'targetGraph',
             margin:[5,30,20,70]

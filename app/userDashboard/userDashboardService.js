@@ -93,8 +93,6 @@ adminApp.factory("UserDashboardService",function(requestHandler){
     userDashboardServiceObj.doGetUserDetails=function(){
         return requestHandler.getRequest("getUserId/","").then(function(response){
             userProfile=response.data.User_Profile;
-            userProfile.imageurl=userProfile.imageurl.substring(userProfile.imageurl.indexOf("/") + 14, userProfile.imageurl.length)
-            userProfile.imageurl=userProfile.imageurl+"?decache="+Math.random();
 
             //For Age calculation
             var today = new Date();

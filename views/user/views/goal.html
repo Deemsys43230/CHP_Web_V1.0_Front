@@ -19,45 +19,24 @@
                             <span>Date <span class="pull-right">:</span></span>
                         </div>
                         <div class="col-md-8 pull-right">
-                            <input type="text" id="weight-log-date"  class="profile_input weightoverride" block>
+                            <input type="text" id="weight-log-date" class="profile_input weightoverride" block>
                             <input id="weightLogDate" hidden>
                         </div>
                         <div class="col-md-4 no-padding margin-top-20">
                             <span>Weight<span class="pull-right">:</span></span>
                         </div>
                         <div class="col-md-8 pull-right margin-top-10">
-                            <input class="profile_input weightoverride" id="weightLog" name="weight" ng-model="weightlog" maxlength="5"  required validate-Float1/>
+                            <input class="profile_input weightoverride" id="weightLog" name="weight" ng-model="weightlog" maxlength="5" required validate-Float1/>
                             <span ng-show="weightLogForm.weight.$dirty&&weightLogForm.weight.$invalid">
                                 <span class="error-message textarea-errormessage10" ng-show="weightLogForm.weight.$error.required"><span>Required.</span></span>
                                 <span class="error-message textarea-errormessage10" ng-show="!weightLogForm.weight.$error.required&&weightLogForm.weight.$error.validateFloat1"><span>Invalid&nbsp;Data.</span></span>
                             </span>
                         </div>
                         <div class="col-md-11 no-padding text-center margin-top-20 margin-bottom-10">
-                            <a href="" class="weight_button" ng-disabled="weightLogForm.$invalid" ng-click="doInsertOrUpdateWeightLog()">
+                            <a href="" class="btn-dis weight_button" ng-disabled="isCleanWeight() || weightLogForm.$invalid" ng-click="weightLogEntry()">
                                 <span ng-if="spinner"><span class="three-quarters-loader">Loading…</span></span>{{weightUpdateText}}</a>
                         </div>
                     </div>
-
-
-                <!--<div class="col-md-12">
-                    <h5>&nbsp;&nbsp;Update Weight <span class="pull-right">Date :</span>  <div class="input-group ui-datepicker ">
-                        <input style="z-index:1000"
-                                ng-model="weightLogDate" ng-click="open($event,'opened1')" ng-change="setWeightLogDate()"  type="text"
-                               ng-keypress="prevent()"
-                               class="profile_input override "
-                               id = "popup1"
-                               datepicker-popup="{{format}}"
-                               is-open="dpOpened.opened1"
-                               min="minDate"
-                               max="maxDate"
-                               datepicker-options="dateOptions"
-                               date-disabled="disabled(date, mode)"
-                               ng-required="true"
-                               close-text="Close" required block>
-                    </div> </h5>
-                </div>-->
-
-
                 </form>
             </div>
         </div>
@@ -127,6 +106,8 @@
 
         $('#weight-log-date').daterangepicker(options, function(start, end, label) {
             document.getElementById("weightLogDate").value = start.format('DD/MM/YYYY');
+            var scope = angular.element($("#weight-log-date")).scope();
+            scope.doGetWeightLog(start.format('DD/MM/YYYY'));
         });
 
     });

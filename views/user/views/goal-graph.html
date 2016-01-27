@@ -3,23 +3,9 @@
 <!-- Start Page Banner -->
 
     <div class="col-md-12">
-        <div class="graph-weight height-320">
-            <div class="hc-graph" graph="weightGraph"></div>
-        </div>
-
+        <span class="weight-graph-back-button"><a class="target_button green_button" ng-click="viewGoal()">Back</a></span>
         <div class="graph-weight">
-            <div class="row">
-                <div class="col-md-8 text-center margin-top-15 margin-bottom-20">
-                    <span ng-show="weightUpdated">
-                       <h1 class="text-green" ng-hide="weightIncrease">{{weightDiff}} <small class="text-green">Kgs</small> Gained</h1>
-                       <h1 class="text-red" ng-show="weightIncrease">{{weightDiff}} <small class="text-red">Kgs</small> Reduced</h1>
-                    </span>
-                    <h1 class="text-gray" ng-hide="weightUpdated">No Changes in Weight</h1>
-                </div>
-                <div class="col-md-4 text-center margin-top-20">
-                    <a class="weight_button" ng-click="viewGoal()">Back</a>
-                </div>
-            </div>
+            <div class="hc-graph height-400" graph="weightGraph"></div>
         </div>
     </div>
 

@@ -127,6 +127,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
     $scope.isCleanFood=function(){
         return angular.equals(originalmeasure, $scope.userFood.measure)&& angular.equals(originalservings, $scope.userFood.servings);
     };
+
     //Calories caluclation for food
     $scope.doCalculateCalories=function(){
         if($scope.userFood.servings==0){
@@ -257,18 +258,19 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
     // To get User Basic details
     var userDetailPromise=UserDashboardService.doGetUserDetails();
     userDetailPromise.then(function(result){
-        console.log("pro",result);
         $scope.userProfile=result;
+        $scope.userProfileImage=$scope.userProfile.imageurl+"?decache="+Math.random();
     });
 
 
     //TO get user demography details
-    var userDemographyPromise=UserDashboardService.doGetDemographyDetails();
-    userDemographyPromise.then(function(result){
-        console.log("demo",result);
-        $scope.demography = result;
-
-    });
+    $scope.doGetDemograph=function(){
+        var userDemographyPromise=UserDashboardService.doGetDemographyDetails();
+        userDemographyPromise.then(function(result){
+            $scope.demography = result;
+        });
+    };
+    $scope.doGetDemograph();
 
     //To get frequently asked foods
     var frequentFoodPromise=UserDashboardService.doGetFrequentlyAdded();
@@ -537,10 +539,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
 
     $scope.doGetWeightGoal=function(){
         requestHandler.getRequest("user/getWeightGoal/","").then(function(response){
-            //alert("hi");
-            //console.log("SDA",$scope.demography);
-            $scope.weightlog=$scope.demography.weight;
-            $scope.originalWeight=$scope.demography.weight;
+
             if(response.data.Response_status==0){
                 $scope.updateGoal=0;
                 $scope.targetText='Period';
@@ -556,11 +555,14 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
                 var date2 = $scope.goalDetails.enddate.slice(6,10)+','+$scope.goalDetails.enddate.slice(3,5)+','+$scope.goalDetails.enddate.slice(0,2);
 
                 var date1_ms;
-                if (new Date(dateCompare).getTime() >= new Date(date1).getTime()) {
+
+                if (new Date(dateCompare).getTime() > new Date(date1).getTime()) {
                     date1_ms = new Date(dateCompare).getTime();
+                    $scope.viewGraphButton=false;
                 }
                 else{
                     date1_ms = new Date(date1).getTime();
+                    $scope.viewGraphButton=true;
                 }
 
                 // The number of milliseconds in one day
@@ -574,7 +576,8 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
 
                 // Convert back to days
                 $scope.remainingDates = Math.round(difference_ms/ONE_DAY);
-               $scope.curweight= $scope.demography.weight;
+                if($scope.remainingDates<0) $scope.remainingDates=0;
+
                 $window.currentweight = $scope.demography.weight;
                 $window.targetweight = $scope.goalDetails.targetweight;
                 $scope.goal = {
@@ -590,9 +593,12 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         $scope.setGoalDetails.startdate=document.getElementById("start").value;
         $scope.setGoalDetails.enddate=document.getElementById("end").value;
         $scope.setGoalDetails.targetweight=parseInt(document.getElementById("target").value);
+        $scope.setGoalDetails.initialweight=$scope.demography.weight;
+
         if($scope.setGoalDetails.startdate==''){
             $scope.setGoalDetails.startdate = $scope.setGoalDetails.enddate = selectedDate;
         }
+
         if($scope.demography.weight!=""){
             $(function(){
                 $("#lean_overlay").fadeTo(1000);
@@ -615,65 +621,59 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
     };
 
     $scope.setGoalConfirmation=function(){
-        $scope.setGoalDetails.initialweight=parseInt($scope.demography.weight);
-
         requestHandler.postRequest("user/insertWeightGoal/",$scope.setGoalDetails).then(function(response){
             $scope.doGetWeightGoal();
+            $scope.doInsertOrUpdateWeightLog(selectedDate,$scope.setGoalDetails.initialweight);
         },function(){
             errorMessage(Flash, "Please try again later!");
         });
     };
 
 
-
-    //TO Insert weight Goal Log
-    $scope.doInsertOrUpdateWeightLog=function(){
-        $scope.weightLogDate=$("#weight-log-date").val();
-        $scope.weightlog=$("#weightLog").val();
-        $scope.weightUpdateText="Updating...";
-        $scope.spinner=true;
-
-        requestHandler.getRequest("user/getWeightGoal/","").then(function(response){
-
-            if(response.data.Response_status==0){
-                requestHandler.postRequest("user/weightlogInsertorUpdate/",{"date":$scope.weightLogDate,"weight":$scope.weightlog}).then(function(response){
-                    $scope.spinner=false;
-                    $scope.weightUpdateText="Update Weight";
-                }, function () {
-                    errorMessage(Flash, "Please try again later!")
-                });
+    $scope.doGetWeightLog=function(date){
+        requestHandler.postRequest("user/getWeightLogByDate/",{"date":date}).then(function(response){
+            var weightlogdetails=response.data.Weight_logs;
+            if(!weightlogdetails.weight){
+                $scope.originalWeight="";
+                $("#weightLog").val('');
             }
             else{
-                var currentWeight=document.getElementById('weightLog').value;
-                $scope.weightDiff = (currentWeight - $scope.originalWeight).toFixed(2);
-                if($scope.weightDiff==0.00){
-                    $scope.weightUpdated=0;
-                }
-                else if($scope.weightDiff>0){
-                    $scope.weightIncrease=0;
-                    $scope.weightUpdated=1;
-                }
-                else{
-                    $scope.weightDiff = $scope.weightDiff*(-1);
-                    $scope.weightIncrease=1;
-                    $scope.weightUpdated=1;
-                }
-
-                requestHandler.postRequest("user/weightlogInsertorUpdate/",{"date":$scope.weightLogDate,"weight":$scope.weightlog}).then(function(response){
-
-                    successMessage(Flash, "Successfully Updated!");
-                    $scope.weightlog=response.data.Weight_Goal.weight;
-                    $scope.spinner=false;
-                    $scope.weightUpdateText="Update Weight";
-                    $window.currentweight=response.data.Weight_Goal.weight;
-                   // $scope.doGetWeightLogGraph();
-                }, function () {
-                    errorMessage(Flash, "Please try again later!")
-                });
+                $scope.weightlog=$scope.originalWeight=weightlogdetails.weight;
+                $("#weightLog").val(weightlogdetails.weight);
             }
+
+        }, function () {
+            errorMessage(Flash, "Please try again later!")
         });
     };
 
+    $scope.weightLogEntry=function(){
+        $scope.weightUpdateText="Updating...";
+        $scope.spinner=true;
+        $scope.doInsertOrUpdateWeightLog($("#weight-log-date").val(),parseInt($("#weightLog").val()));
+    };
+
+    //TO Insert weight Goal Log
+    $scope.doInsertOrUpdateWeightLog=function(date,weight){
+
+        if(date==selectedDate){
+            $window.currentweight = weight;
+            refreshGraph();
+        }
+
+        requestHandler.postRequest("user/weightlogInsertorUpdate/",{"date":date,"weight":weight}).then(function(response){
+            $scope.spinner=false;
+            $scope.weightUpdateText="Update Weight";
+            $scope.doGetWeightLog(date);
+            $scope.doGetDemograph();
+        }, function () {
+            errorMessage(Flash, "Please try again later!")
+        });
+    };
+
+    $scope.isCleanWeight=function(){
+        return angular.equals(parseInt($("#weightLog").val()), parseInt($scope.originalWeight));
+    };
 
 
     $scope.doGetWeightLogGraph=function(){
@@ -1126,17 +1126,17 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         requestHandler.getRequest("user/getCoachAdvicesByUser/", "").then(function(response){
             $scope.coachadvice=response.data.Coach_Advice;
 
-            $.each($scope.coachadvice,function(index,value){
-            requestHandler.getRequest("getCoachIndividualDetailbyUser/"+value.coachid, "").then(function(response){
-
-                $scope.usercoachdetails=response.data.getCoachIndividualDetail;
-                value.coachname = $scope.usercoachdetails.name;
-                value.coachimage = $scope.usercoachdetails.imageurl;
-            });
-
-            });
-
-
+            if($scope.coachadvice==''){
+            }
+            else{
+                $.each($scope.coachadvice,function(index,value){
+                    requestHandler.getRequest("getCoachIndividualDetailbyUser/"+value.coachid, "").then(function(response){
+                        $scope.usercoachdetails=response.data.getCoachIndividualDetail;
+                        value.coachname = $scope.usercoachdetails.name;
+                        value.coachimage = $scope.usercoachdetails.imageurl;
+                    });
+                });
+            }
         },function(){
             errorMessage(Flash,"Please try again later!")
         });
@@ -1308,6 +1308,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         }
         $scope.doGetWeightGoal();
         $scope.doGetCoachAdvices();
+        $scope.doGetWeightLog(selectedDate);
         $scope.goGetSessionGraph($scope.storedSessionId);
     };
 

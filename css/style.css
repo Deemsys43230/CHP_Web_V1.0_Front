@@ -7047,6 +7047,7 @@ a.weight_button {
     font-size: 15px;
     padding:8px 40px;
     font-weight: bold;
+    white-space: nowrap;
     background-color:limegreen;
     color: white;
     -webkit-box-shadow: 0px 0px 1px rgba(0,0,0,0.2);
@@ -8820,6 +8821,10 @@ tr.sort-icon th i{
     height: 350px !important;
 }
 
+.height-400{
+    height: 400px !important;
+}
+
 .height-335{
     height: 335px !important;
 }
@@ -10101,3 +10106,15 @@ a.cancel:hover{
 /*-- Remove Clear from IE Text box */
 
 input::-ms-clear { display: none; }
+
+#targetGraph{
+    height:47px;
+    width:350px;
+}
+
+.weight-graph-back-button{
+    position: absolute;
+    right: 25px;
+    top:20px;
+    z-index: 20000;
+}
