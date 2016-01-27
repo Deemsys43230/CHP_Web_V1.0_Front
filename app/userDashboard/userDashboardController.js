@@ -248,7 +248,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
 
     //Search Function for food
      $scope.inputChanged = function(searchStr) {
-         var userFoodDiaryDetailPromise=UserDashboardService.searchFood(searchStr);
+         var userFoodDiaryDetailPromise=UserDashboardService.searchFood(searchStr,$scope.userFood.sessionid);
          userFoodDiaryDetailPromise.then(function(result){
              $scope.foodSearchResult=result;
          });

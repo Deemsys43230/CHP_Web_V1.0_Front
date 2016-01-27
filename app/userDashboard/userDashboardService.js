@@ -26,11 +26,11 @@ adminApp.factory("UserDashboardService",function(requestHandler){
         });
     };
 
-    userDashboardServiceObj.searchFood=function(searchStr){
-        return requestHandler.postRequest("searchFoodListByUser/",{"foodname":searchStr}).then(function (response) {
+    userDashboardServiceObj.searchFood=function(searchStr,session){
+        return requestHandler.postRequest("searchFoodListByUser/",{"foodname":searchStr,"foodsession":session}).then(function (response) {
             var searchResponse=response.data.Food_Data;
             $.each(searchResponse, function(index,value){
-                value.foodImagePath=value.foodImagePath+"150x150.jpg";
+                value.foodImagePath=value.foodImagePath+"50x50.jpg";
             });
             return searchResponse;
         }, function () {
@@ -43,7 +43,7 @@ adminApp.factory("UserDashboardService",function(requestHandler){
         return requestHandler.postRequest("user/getFoodDetailByUser/",{"foodid":foodid}).then(function (response) {
             var userSelectedFoodDetails=response.data.Food_Data;
             $.each(userSelectedFoodDetails, function(index,value){
-                value.foodImagePath=value.foodImagePath+"200x200.jpg";
+                value.foodImagePath=value.foodImagePath+"50x50.jpg";
             });
             return userSelectedFoodDetails;
         }, function () {
