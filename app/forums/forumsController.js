@@ -194,13 +194,9 @@ userApp.controller('ForumsUserController',function($scope,requestHandler,Flash,$
     };
 
     $scope.doGetForumDetailsByUser= function () {
-
-        requestHandler.getRequest("getUserId/","").then(function(response){
-
+            requestHandler.getRequest("getUserId/","").then(function(response){                
             $scope.loginuserid=response.data.User_Profile.userid;
-        });
-
-        requestHandler.postRequest("getForumDetailByUserAndCoach/",{"postid":$routeParams.id}).then(function(response){
+             requestHandler.postRequest("getForumDetailByUserAndCoach/",{"postid":$routeParams.id}).then(function(response){
             $scope.userforumdetails=response.data['Forum details'];
 
             if($scope.loginuserid === $scope.userforumdetails.userid){
@@ -212,8 +208,7 @@ userApp.controller('ForumsUserController',function($scope,requestHandler,Flash,$
         },function(){
             errorMessage(Flash,"Please try again later!")
         });
-
-
+        });
     };
 
 
@@ -444,13 +439,10 @@ coachApp.controller('ForumsCoachController',function($scope,requestHandler,Flash
 
 
     $scope.doGetForumDetailsByUser= function () {
-
+        
         requestHandler.getRequest("getUserId/","").then(function(response){
-
             $scope.loginuserid=response.data.User_Profile.userid;
-        });
-
-        requestHandler.postRequest("getForumDetailByUserAndCoach/",{"postid":$routeParams.id}).then(function(response){
+            requestHandler.postRequest("getForumDetailByUserAndCoach/",{"postid":$routeParams.id}).then(function(response){
             $scope.userforumdetails=response.data['Forum details'];
 
             if($scope.loginuserid === $scope.userforumdetails.userid){
@@ -462,8 +454,7 @@ coachApp.controller('ForumsCoachController',function($scope,requestHandler,Flash
         },function(){
             errorMessage(Flash,"Please try again later!")
         });
-
-
+        });
     };
 
 
