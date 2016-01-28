@@ -155,20 +155,19 @@
     <div class="container">
         <div class="row footer-widgets">
 
-
             <!-- Start Subscribe & Social Links Widget -->
             <div class="col-md-3 col-xs-12">
                 <div class="footer-widget mail-subscribe-widget">
                     <h4>Get in touch<span class="head-line"></span></h4>
-                    <p>Join our mailing list to stay up to date and get notices about our new releases!</p>
-                    <form class="subscribe">
+                    <p class="margin-bottom-10">For more information or clarifications please contact us through the mail</p>
+                    <a href="" class="text-orange">{{commonDetails.supportemail}}</a>
+                    <!--<form class="subscribe">
                         <input type="text" placeholder="mail@example.com">
                         <input type="submit" class="btn-system" value="Send">
-                    </form>
+                    </form>-->
                 </div>
             </div><!-- .col-md-3 -->
             <!-- End Subscribe & Social Links Widget -->
-
 
             <!-- Start Twitter Widget -->
             <div class="col-md-3 col-xs-12">
@@ -177,22 +176,21 @@
                     <p>Join our social network to stay up to date and get notices about our new releases!</p>
                     <ul class="social-icons margin-top-10">
                         <li>
-                            <a class="facebook" href="#"><i class="fa fa-facebook"></i></a>
+                            <a class="facebook" target="_blank" href="{{commonDetails.facebookurl}}"><i class="fa fa-facebook"></i></a>
                         </li>
                         <li>
-                            <a class="twitter" href="#"><i class="fa fa-twitter"></i></a>
+                            <a class="twitter" target="_blank" href="{{commonDetails.twitterurl}}"><i class="fa fa-twitter"></i></a>
                         </li>
                         <li>
-                            <a class="google" href="#"><i class="fa fa-google-plus"></i></a>
+                            <a class="google" target="_blank" href="{{commonDetails.googleurl}}"><i class="fa fa-google-plus"></i></a>
                         </li>
                         <li>
-                            <a class="linkdin" href="#"><i class="fa fa-linkedin"></i></a>
+                            <a class="linkdin" target="_blank" href="{{commonDetails.linkedinurl}}"><i class="fa fa-linkedin"></i></a>
                         </li>
                     </ul>
                 </div>
             </div><!-- .col-md-3 -->
             <!-- End Twitter Widget -->
-
 
             <!-- Start Flickr Widget -->
             <div class="col-md-3 col-xs-12">
@@ -204,19 +202,19 @@
             </div><!-- .col-md-3 -->
             <!-- End Flickr Widget -->
 
-
             <!-- Start Contact Widget -->
             <div class="col-md-3 col-xs-12">
                 <div class="footer-widget contact-widget">
                     <h4><img src="../../images/footer-margo.png" class="img-responsive" alt="Footer Logo" /></h4>
                     <ul>
-                        <li><span>Phone Number:</span> +01 234 567 890</li>
-                        <li><span>Email:</span> company@company.com</li>
-                        <li><span>Website:</span> www.yourdomain.com</li>
+                        <li><span>Phone Number:</span> {{commonDetails.mobile}}</li>
+                        <li><span>Email:</span> {{commonDetails.supportemail}}</li>
+                        <li><span>Website:</span> www.cyberhealth.com</li>
                     </ul>
                 </div>
             </div><!-- .col-md-3 -->
             <!-- End Contact Widget -->
+
         </div><!-- .row -->
 
         <!-- Start Copyright -->

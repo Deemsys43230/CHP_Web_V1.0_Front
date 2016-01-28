@@ -258,7 +258,7 @@ alert("hi");
             alert("coach",$routeParams.id);
               if(response.data.Response_status==1){
                   subscribersListInit();
-                  successMessage(Flash,"Paymenyt successfull");
+                  successMessage(Flash,"Payment successfull");
               }
             else if(response.data.Response_status==0){
                   $(function(){

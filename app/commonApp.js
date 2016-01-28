@@ -56,6 +56,7 @@ commonApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 files:[
                                     '../../plugin/vertical-carousel/vertical-carousel.js',
                                     '../../plugin/vertical-carousel/vertical-carousel.css',
+                                    '../../css/password.css',
                                     '../../app/commonController.js'
                                 ]
                             })

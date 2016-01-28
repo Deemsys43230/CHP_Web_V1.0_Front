@@ -650,16 +650,15 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
     $scope.weightLogEntry=function(){
         $scope.weightUpdateText="Updating...";
         $scope.spinner=true;
+        if($("#weight-log-date").val()==selectedDate){
+            $window.currentweight = parseFloat($("#weightLog").val());
+            refreshGraph();
+        }
         $scope.doInsertOrUpdateWeightLog($("#weight-log-date").val(),parseFloat($("#weightLog").val()));
     };
 
     //TO Insert weight Goal Log
     $scope.doInsertOrUpdateWeightLog=function(date,weight){
-
-        if(date==selectedDate){
-            $window.currentweight = weight;
-            refreshGraph();
-        }
 
         requestHandler.postRequest("user/weightlogInsertorUpdate/",{"date":date,"weight":weight}).then(function(response){
             $scope.spinner=false;

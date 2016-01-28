@@ -35,54 +35,6 @@
     <!--Message flash-->
     <link type="text/css" rel="stylesheet" href="../../css/angular-flash.css"/>
 
-    <style>
-
-        #pswd_info {
-            position:absolute;
-            bottom:80px;
-            /* IE Specific */
-            right:-240px;
-            width:250px;
-            padding:15px;
-            background:#fefefe;
-            font-size:.875em;
-            border-radius:5px;
-            box-shadow:0 1px 3px #ccc;
-            border:1px solid #ddd;
-        }
-        #pswd_info h4 {
-            margin:0 0 10px 0;
-            padding:0;
-            font-weight:normal;
-        }
-        #pswd_info::before {
-            content:"\25C0";
-            position:absolute;
-            left:-12px;
-            top:45%;
-            font-size:14px;
-            line-height:14px;
-            color:#ddd;
-            text-shadow:none;
-            display:block;
-        }
-        .invalid {
-            background:url(../../images/invalid.png) no-repeat 0 50%;
-            padding-left:22px;
-            line-height:24px;
-            color:#ec3f41;
-        }
-        .valid {
-            background:url(../../images/valid.png) no-repeat 0 50%;
-            padding-left:22px;
-            line-height:24px;
-            color:#3a7d34;
-        }
-        #pswd_info {
-            display:none;
-        }
-    </style>
-
 </head>
 
 <body ng-app="commonApp">
@@ -186,7 +138,7 @@
             <div class="centeredText">
                 <span>Or</span>
             </div>
-            <div flash-message="2000" ></div>
+            <div flash-message="3000" ></div>
             <form name="loginForm" novalidate>
                 <p>Email</p>
                 <input type="email" name="username" ng-model="username" ng-keypress="checkIfEnterKeyWasPressedForLogin($event)" required validate-email/>
@@ -209,7 +161,7 @@
 
         <!-- Reset Password -->
         <div class="reset_password">
-            <div flash-message="2000" ></div>
+            <div flash-message="3000" ></div>
             <form name="forgotPasswordForm" novalidate>
                 <p>Email</p>
                 <input type="email" name="emailid" required validate-email ng-model="emailid"/>
@@ -227,7 +179,7 @@
 
         <!-- Answer for Secret Question -->
         <div class="secret_question">
-            <div flash-message="2000" ></div>
+            <div flash-message="3000" ></div>
             <form name="secretAnswerForm">
                 <p>Secret Question :</p>
                 <p class="text-bold" ng-if="secretQuestion==1">What was the name of your first pet?</p>
@@ -261,7 +213,7 @@
             <div class="centeredText">
                 <span>Or</span>
             </div>
-            <div flash-message="2000" ></div>
+            <div flash-message="3000" ></div>
             <form name="registerForm" novalidate="novalidate">
                 <p>Name</p>
                 <input type="text" name="name" ng-pattern="/^ *([a-zA-Z]+ ?)+ *$/"  ng-model="userForm.name" maxlength="30" required/>
@@ -332,14 +284,14 @@
                     <option value="5">What is the name of your favourite sport's team?</option>
                     <option value="6">What is your Dream job?</option>
                 </select>
-                        <span ng-show="registerForm2.secretquestion.$invalid && !registerForm2.secretquestion.$pristine">
-                                    <span class="error-message" ng-show="registerForm2.secretquestion.$error.required"><span>Required.</span></span>
-                        </span>
+                <span ng-show="registerForm2.secretquestion.$invalid && !registerForm2.secretquestion.$pristine">
+                    <span class="error-message" ng-show="registerForm2.secretquestion.$error.required"><span>Required.</span></span>
+                </span>
                 <p>Answer</p>
                 <input type="text" name="secretanswer" ng-model="userForm.secretanswer" maxlength="150" ng-required="userForm.secretquestion"/>
-                                <span ng-show="registerForm2.secretanswer.$invalid && !registerForm2.secretanswer.$pristine">
-                                    <span class="error-message" ng-show="registerForm2.secretanswer.$error.required"><span>Required.</span></span>
-                                </span>
+                <span ng-show="registerForm2.secretanswer.$invalid && !registerForm2.secretanswer.$pristine">
+                    <span class="error-message" ng-show="registerForm2.secretanswer.$error.required"><span>Required.</span></span>
+                </span>
                 <div class="action_btns margin-top-20">
                     <div class="one_half"><a href="#" class="btn back_btn_register"><i class="fa fa-angle-double-left"></i> Back</a></div>
                     <div class="one_half last"><a ng-click="register(userForm)" ng-disabled="registerForm2.$invalid" class="btn btn_red">Register</a></div>
@@ -357,20 +309,19 @@
     <div class="container">
         <div class="row footer-widgets">
 
-
             <!-- Start Subscribe & Social Links Widget -->
             <div class="col-md-3 col-xs-12">
                 <div class="footer-widget mail-subscribe-widget">
                     <h4>Get in touch<span class="head-line"></span></h4>
-                    <p>Join our mailing list to stay up to date and get notices about our new releases!</p>
-                    <form class="subscribe">
+                    <p class="margin-bottom-10">For more information or clarifications please contact us through the mail</p>
+                    <a href="" class="text-orange">{{commonDetails.supportemail}}</a>
+                    <!--<form class="subscribe">
                         <input type="text" placeholder="mail@example.com">
                         <input type="submit" class="btn-system" value="Send">
-                    </form>
+                    </form>-->
                 </div>
             </div><!-- .col-md-3 -->
             <!-- End Subscribe & Social Links Widget -->
-
 
             <!-- Start Twitter Widget -->
             <div class="col-md-3 col-xs-12">
@@ -379,22 +330,21 @@
                     <p>Join our social network to stay up to date and get notices about our new releases!</p>
                     <ul class="social-icons margin-top-10">
                         <li>
-                            <a class="facebook" href="#"><i class="fa fa-facebook"></i></a>
+                            <a class="facebook" target="_blank" href="{{commonDetails.facebookurl}}"><i class="fa fa-facebook"></i></a>
                         </li>
                         <li>
-                            <a class="twitter" href="#"><i class="fa fa-twitter"></i></a>
+                            <a class="twitter" target="_blank" href="{{commonDetails.twitterurl}}"><i class="fa fa-twitter"></i></a>
                         </li>
                         <li>
-                            <a class="google" href="#"><i class="fa fa-google-plus"></i></a>
+                            <a class="google" target="_blank" href="{{commonDetails.googleurl}}"><i class="fa fa-google-plus"></i></a>
                         </li>
                         <li>
-                            <a class="linkdin" href="#"><i class="fa fa-linkedin"></i></a>
+                            <a class="linkdin" target="_blank" href="{{commonDetails.linkedinurl}}"><i class="fa fa-linkedin"></i></a>
                         </li>
                     </ul>
                 </div>
             </div><!-- .col-md-3 -->
             <!-- End Twitter Widget -->
-
 
             <!-- Start Flickr Widget -->
             <div class="col-md-3 col-xs-12">
@@ -406,20 +356,18 @@
             </div><!-- .col-md-3 -->
             <!-- End Flickr Widget -->
 
-
             <!-- Start Contact Widget -->
             <div class="col-md-3 col-xs-12">
                 <div class="footer-widget contact-widget">
                     <h4><img src="../../images/footer-margo.png" class="img-responsive" alt="Footer Logo" /></h4>
                     <ul>
-                        <li><span>Phone Number:</span> +01 234 567 890</li>
-                        <li><span>Email:</span> company@company.com</li>
-                        <li><span>Website:</span> www.yourdomain.com</li>
+                        <li><span>Phone Number:</span> {{commonDetails.mobile}}</li>
+                        <li><span>Email:</span> {{commonDetails.supportemail}}</li>
+                        <li><span>Website:</span> www.cyberhealth.com</li>
                     </ul>
                 </div>
             </div><!-- .col-md-3 -->
             <!-- End Contact Widget -->
-
 
         </div><!-- .row -->
 
