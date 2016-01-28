@@ -24,10 +24,11 @@
                 </span>
                 <span class="error-message" ng-show="coachRegisterForm.emailid.$error.emailexists"><span>Email&nbsp;ID&nbsp;Already&nbsp;Exist.</span></span>
                 <p>Password</p>
-                <input type="password" name="password" ng-pattern="/^[^ ]+$/" ng-model="coach.password" required maxlength="20"/>
+                <input type="password" name="password" ng-pattern="/^[^ ]+$/" ng-model="coach.password" required minlength="6" maxlength="20"/>
                  <span ng-show="coachRegisterForm.password.$dirty&&coachRegisterForm.password.$invalid">
                     <span class="error-message" ng-show="coachRegisterForm.password.$error.required"><span>Required.</span></span>
                      <span class="error-message" ng-show="coachRegisterForm.password.$error.pattern"><span>Password&nbsp;doesn't&nbsp;allow&nbsp;space.</span></span>
+                      <span class="error-message" ng-show="!coachRegisterForm.password.$error.pattern&&coachRegisterForm.password.$error.minlength"><span>Should&nbsp;be&nbsp;of&nbsp;length&nbsp;6.</span></span>
                 </span>
                 <p>Confirm Password</p>
                 <input type="password" name="confirm_password" ng-model="confirm_password"  compare-to="coach.password" maxlength="20">

@@ -56,11 +56,13 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
-                                '../../js/bootstrap.min.js'
+                                '../../js/bootstrap.min.js',
+                                '../../app/dashboard/adminDashboardController.js'
                             ]
                         })
                     }
-                }
+                },
+                controller:'AdminDashboardController'
             }).
             when('/profile', {
                 templateUrl: 'views/profile.html',

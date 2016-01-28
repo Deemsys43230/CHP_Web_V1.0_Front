@@ -12,6 +12,7 @@ requestHandlerApp.factory("requestHandler",['$http',function($http,$location){
 
     var hostedDomain="http://192.168.1.236/api/v1/";
     var paymentURL="http://192.168.1.236/CyberHealth/views/user";
+
     var urlLength = 14;
     var exerciselength=13;
 

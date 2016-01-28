@@ -606,6 +606,10 @@ coachApp.directive('validNumber', function() {
                     var val ='';
 
                 }
+            ngModelCtrl.$validators.max = function(val) {
+                    return val <= 100;
+                };
+
 
                 var clean = val.replace(/[^-0-9\.]/g, '');
                 var negativeCheck = clean.split('-');
@@ -639,3 +643,5 @@ coachApp.directive('validNumber', function() {
         }
     };
 });
+
+

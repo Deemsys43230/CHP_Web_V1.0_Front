@@ -220,7 +220,9 @@ adminApp.controller("FoodDetailsViewController",function($scope,requestHandler,$
     $scope.doGetFoodDetails= function () {
         requestHandler.postRequest("getFoodDetailByadmin/",{"foodid":$routeParams.id}).then(function(response){
             $scope.foodDetails=response.data.Food_Data;
-           $scope.foodDetails.foodImagePath=$scope.foodDetails.foodImagePath+"1000x1000.jpg";
+            console.log("view", $scope.foodDetails);
+           $scope.foodDetails.foodImagePath=$scope.foodDetails.foodImagePath+"1000x1000.jpg"+"?decache="+Math.random();
+
           //  $scope.foodDetails.foodImagePath=$scope.foodDetails.foodImagePath.substring($scope.foodDetails.foodImagePath.indexOf("/")+14,$scope.foodDetails.foodImagePath.length)
             console.log("ImagePath:"+$scope.foodDetails.foodImagePath);
         },function(response){
@@ -274,9 +276,9 @@ adminApp.controller("FoodDetailsEditController",function($q,$scope,requestHandle
         requestHandler.postRequest("getFoodDetailByadmin/",{"foodid":$routeParams.id}).then(function(response){
 
             $scope.foodDetails=response.data.Food_Data;
-           $scope.foodDetails.foodImagePath=$scope.foodDetails.foodImagePath+"1000x1000.jpg";
+           $scope.foodDetails.foodImagePath=$scope.foodDetails.foodImagePath+"1000x1000.jpg"+"?decache="+Math.random();
            // $scope.foodDetails.foodImagePath=$scope.foodDetails.foodImagePath.substring($scope.foodDetails.foodImagePath.indexOf("/")+14,$scope.foodDetails.foodImagePath.length)
-           $scope.foodDetails.foodimage=$scope.foodDetails.foodimage;
+           $scope.foodDetails.foodimage=$scope.foodDetails.foodimage+"?decache="+Math.random();
           //  $scope.foodDetails.foodimage=$scope.foodDetails.foodimage.substring($scope.foodDetails.foodimage.indexOf("/")+14,$scope.foodDetails.foodimage.length);
             //Set session
             $scope.foodDetails.sessionSet=FoodService.setSessionValues($scope.foodDetails.sessionid);

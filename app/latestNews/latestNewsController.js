@@ -117,7 +117,7 @@ adminApp.controller('LatestNewsEditController',function($scope,requestHandler,Fl
 });
 
 // html filter (render text as html)
-adminApp.filter('htmlnews', ['$sce', function ($sce) {
+adminApp.filter('html', ['$sce', function ($sce) {
     return function (text) {
         return $sce.trustAsHtml(text);
     };

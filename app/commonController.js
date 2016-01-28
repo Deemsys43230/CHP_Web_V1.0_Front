@@ -1,7 +1,9 @@
-var commonApp = angular.module('commonApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate']);
+var commonApp = angular.module('commonApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','countTo']);
 
 commonApp.controller('CommonController',function($scope,requestHandler,Flash,$routeParams,$sce) {
 
+    $scope.countTo = 10000;
+    $scope.countFrom=5;
     // To display Testimonials as user
     $scope.doGetNewsByUser = function () {
         requestHandler.getRequest("getLatestNewsByUser/", "").then(function (response) {

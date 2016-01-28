@@ -42,10 +42,10 @@
                             </div>
                             <div class="col-md-9 margin-top-10">
                                 <div class="col-md-3">
-                                <input class="section-input" placeholder="Enter Discount % for 3 months" ng-change="doCalculatesubscription()" name="threemonthpercentage" max="100" ng-model="subscriptionDetail.threemonth_percentage" required valid-number>
+                                <input class="section-input" placeholder="Enter Discount % for 3 months" ng-change="doCalculatesubscription()" name="threemonthpercentage"  ng-model="subscriptionDetail.threemonth_percentage" required valid-number>
                                  <span ng-show="subscriptionForm.threemonthpercentage.$dirty&&subscriptionForm.threemonthpercentage.$invalid">
                                         <span class="error-message" ng-show="subscriptionForm.threemonthpercentage.$error.required"><span>Required.</span></span>
-                                      <span class="error-message" ng-show="!subscriptionForm.threemonthpercentage.$error.required&&subscriptionForm.threemonthpercentage.$error.max"><span>Maximum value should be 100.</span></span>
+                                      <span class="error-message" ng-show="!subscriptionForm.threemonthpercentage.$error.required&&subscriptionForm.threemonthpercentage.$error.max"><span>Maximum&nbsp;value&nbsp;should&nbsp;be&nbsp;100.</span></span>
                                      <!--<span class="error-message" ng-show="!subscriptionForm.threemonthpercentage.$error.required&&subscriptionForm.threemonthpercentage.$error.validateFloat"><span>Invalid&nbsp;Format.</span></span>-->
                                  </span>
                                 </div>
@@ -60,10 +60,10 @@
                             </div>
                             <div class="col-md-9 margin-top-10">
                                 <div class="col-md-3">
-                                <input class="section-input" placeholder="Enter  Discount % 6 months" name="sixmonthpercentage" ng-change="doCalculatesubscription()" max="100" ng-model="subscriptionDetail.sixmonth_percentage" required valid-number>
+                                <input class="section-input" placeholder="Enter  Discount % 6 months" name="sixmonthpercentage" ng-change="doCalculatesubscription()"  ng-model="subscriptionDetail.sixmonth_percentage" required valid-number>
                                  <span ng-show="subscriptionForm.sixmonthpercentage.$dirty&&subscriptionForm.sixmonthpercentage.$invalid">
                                         <span class="error-message" ng-show="subscriptionForm.sixmonthpercentage.$error.required"><span>Required.</span></span>
-                                     <span class="error-message" ng-show="!subscriptionForm.sixmonthpercentage.$error.required&&subscriptionForm.sixmonthpercentage.$error.max"><span>Maximum value should be 100.</span></span>
+                                     <span class="error-message" ng-show="!subscriptionForm.sixmonthpercentage.$error.required&&subscriptionForm.sixmonthpercentage.$error.max"><span>Maximum&nbsp;value&nbsp;should&nbsp;be&nbsp;100.</span></span>
                                     <!--  <span class="error-message" ng-show="!subscriptionForm.sixmonthpercentage.$error.required&&subscriptionForm.sixmonthpercentage.$error.validateFloat"><span>Invalid&nbsp;Format.</span></span>-->
                                  </span>
                                     </div>

@@ -437,7 +437,7 @@
                         <input type="file" name="image" valid-file  ng-model="foodDetails.foodimage" class="upload" ng-file-select="onFileSelect($files)"  onblur="angular.element(this).scope().fileNameChanged(this)" required/>
                     </div>
                 </div>
-                <div class="one_half last"><a href="" onclick="return false;" class="food-button export modal_close" ng-disabled="inputContainsFile" ng-click="doUpdateFoodImage();">Save Image</a></div>
+                <div class="one_half last"><a href="" onclick="return false;" class="btn food-button export modal_close" id="submit_button" ng-click="doUpdateFoodImage();" disabled>Save Image</a></div>
             </div>
         </div>
     </section>
@@ -481,5 +481,16 @@
         $(".common_model").show();
     })
 </script>
-
+<script>
+    $(document).ready(
+             function(){
+                $('input:file').change(
+                        function(){
+                            if ($(this).val()) {
+                                $('#submit_button').attr('disabled',false);
+                            }
+                        }
+                );
+            });
+</script>
 
