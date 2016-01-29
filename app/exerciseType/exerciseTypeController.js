@@ -4,43 +4,12 @@ adminApp.controller('ExerciseTypeController',['$scope','requestHandler','Flash',
 
     $scope.activeClass = {exercisetype:'active'};
     var original ="";
-    var exerciseTypeArray=[];
 
     $scope.doGetAllExerciseType=function(){
-      //  alert("hi");
-        var levelvalue="";
-        var levelname="";
-        $scope.exerciseTypeArrayValues=[];
 
         $scope.loaded=true;
         requestHandler.getRequest("admin/listofTypes/","").then(function(response){
-            $scope.exerciseTypeList=response.data.Typelist;
-            exerciseTypeArray=[];
-
-            if(!$scope.exerciseTypeList){
-                $scope.exerciseTypeList=[];
-            }
-            else{
-                $.each($scope.exerciseTypeList, function(index,typelist) {
-                    exerciseTypeArray.push(typelist.typename);
-                });
-
-                // Tool tip for session in food list
-                $.each($scope.exerciseTypeList,function(index,value){
-                    value.level="";
-                    $.each(value.levels,function(index,value1){
-                        levelvalue=value1.levelname;
-                        levelname = levelname + levelvalue;
-                        if(index!=value.levels.length-1)
-                            levelname=levelname+',';
-                    });
-                    value.level = levelname;
-                    levelname="";
-
-                });
-            }
-
-            $scope.exerciseTypeArrayValues=exerciseTypeArray;
+            $scope.exerciseTypeList=response.data.ExerciseType_Data;
             $scope.loaded=false;
             $scope.paginationLoad=true;
 
@@ -49,26 +18,7 @@ adminApp.controller('ExerciseTypeController',['$scope','requestHandler','Flash',
         });
     };
 
-    $scope.isNameAlreadyExist=function(typename){
-        if($scope.isNew==true){
-             if($scope.exerciseTypeArrayValues.indexOf(typename)!=-1){
-                //alert("1");
-                $scope.nameAlreadyExist=true;
-            }
-            else{
-                //alert("2");
-                $scope.nameAlreadyExist=false;
-            }
-        }
-        else{
-            if($scope.exerciseTypeArrayValues.indexOf(typename)!=-1 && original.typename!=typename){
-                $scope.nameAlreadyExist=true;
-            }
-            else{
-                $scope.nameAlreadyExist=false;
-            }
-        }
-    };
+
 
     // Search Exercise Type
     // Search Food Type
@@ -77,41 +27,12 @@ adminApp.controller('ExerciseTypeController',['$scope','requestHandler','Flash',
         $('.search-list-form input').focus();
     });
 
-    $scope.addInput = function(){
-        $scope.inputs.push({field:''});
-    };
-
-    $scope.removeInput = function(index){
-
-        if($scope.inputs.length > 1){
-            $scope.inputs.splice(index,1);
-        }
-        else{
-            $scope.errorMessageForType=true;
-            window.setTimeout(function() {
-                $scope.$apply(function() {
-                    $scope.errorMessageForType=false;
-                });
-            }, 3000);
-        }
-    };
 
     $scope.doAddExerciseType=function(){
         $scope.loaded=true;
 
-        var exerciseTypeObj={};
-        var levelArray=new Array();
 
-        $.each($scope.inputs, function(index,value) {
-            levelArray.push(value.levelname);
-        });
-
-        exerciseTypeObj.typename=$scope.exerciseType.typename;
-        exerciseTypeObj.levelname=levelArray;
-
-        console.log(exerciseTypeObj);
-
-        requestHandler.postRequest("admin/insertorupdateExerciseTypeAndLevel/",exerciseTypeObj).then(function (response) {
+        requestHandler.postRequest("admin/insertorupdateExerciseType/",$scope.exerciseType).then(function (response) {
             if(response.data.Response_status==0){
                 errorMessage(Flash,"Exercise&nbsp;Type&nbsp;already&nbsp;exists");
             }
@@ -171,11 +92,10 @@ adminApp.controller('ExerciseTypeController',['$scope','requestHandler','Flash',
         });
 
         $scope.loaded=true;
-        requestHandler.postRequest("admin/gettypeIndividualDetail/",{'typeid':id}).then(function(response){
-            original=angular.copy(response.data.IndividualtypeData);
-            $scope.exerciseType=response.data.IndividualtypeData;
+        requestHandler.postRequest("admin/getTypeDetail/",{'typeid':id}).then(function(response){
+            original=angular.copy(response.data.ExerciseType_Data);
+            $scope.exerciseType=response.data.ExerciseType_Data;
 
-            $scope.inputs = $scope.exerciseType.levels;
             $scope.loaded=false;
             $scope.paginationLoad=true;
 
@@ -199,18 +119,8 @@ adminApp.controller('ExerciseTypeController',['$scope','requestHandler','Flash',
     $scope.doUpdateExerciseType=function(){
         $scope.loaded=true;
 
-        var exerciseTypeObj={};
-        var levelArray=new Array();
-
-        $.each($scope.inputs, function(index,value) {
-            levelArray.push(value.levelname);
-        });
-
-        exerciseTypeObj.typename=$scope.exerciseType.typename;
-        exerciseTypeObj.levelname=levelArray;
-        exerciseTypeObj.typeid=$scope.exerciseType.typeid;
-
-        requestHandler.putRequest("admin/insertorupdateExerciseTypeAndLevel/",exerciseTypeObj).then(function (response) {
+delete $scope.exerciseType.status;
+        requestHandler.postRequest("admin/insertorupdateExerciseType/",$scope.exerciseType).then(function (response) {
             $scope.loaded=false;
             $scope.paginationLoad=true;
             if(response.data.Response_status==0){

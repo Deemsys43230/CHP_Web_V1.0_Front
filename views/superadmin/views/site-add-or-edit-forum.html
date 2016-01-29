@@ -44,7 +44,7 @@
                 </div>
                 <div class="text-center margin-top-20">
                     <a href="" class="btn btn-success" ng-disabled="ForumForm.$invalid" ng-click="doAddForum()" ng-show="isNew">Add Forum</a>
-                    <a href="" class="btn btn-success" ng-disabled="ForumForm.$invalid" ng-click="doUpdateForum()" ng-hide="isNew">Save Changes</a>
+                    <a href="" class="btn btn-success" ng-disabled="ForumForm.$invalid || isClean()" ng-click="doUpdateForum()" ng-hide="isNew">Save Changes</a>
                     <a href="#forums" class="btn btn-warning">Cancel</a>
                 </div>
             </div>

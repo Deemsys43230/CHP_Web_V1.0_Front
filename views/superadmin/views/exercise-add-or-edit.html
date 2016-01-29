@@ -47,7 +47,7 @@
                             </ui-select-choices>
                         </ui-select>
                     <br/>
-                    <h5>Energy Spent By Exercise Type :</h5>
+                    <h5>MET :</h5>
                     </div>
                 </div>
                 <span ng-show="inputContainsFile">
@@ -58,37 +58,16 @@
                     <img class="food-image-wrap" id="food-image-change" ng-src="{{exerciseDetail.imageurl|trusted}}"/><br/><br/>
                     <a id="modal_trigger" href="#modal" onclick="return false;" ng-click="doRefreshPreview();" class="btn-sm btn-warning">Change Exercise Image</a>
                 </div>
-                <div class="col-md-12 no-padding">
+                <div class="col-md-9 no-padding">
                     <div class="col-md-12 no-padding">
-                        <table class="table table-bordered">
-                            <thead>
-                            <tr class="success">
-                                <th class="col-md-4">Level Name</th>
-                                <th class="col-md-4">Timing (minutes)</th>
-                                <th class="col-md-4">Calories Spent</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                                <tr ng-repeat="levels in exerciseDetail.type.levels" ng-form="levelForm">
-                                    <td>{{levels.levelname}}</td>
-                                    <td>
-                                        <input type="text" class="form-control" name="workoutValue" maxlength="3" ng-model="levels.workoutvalue" validate-Integer required/>
-                                        <span ng-show="levelForm.workoutValue.$dirty && levelForm.workoutValue.$invalid">
-                                            <span class="error-message" ng-show="levelForm.workoutValue.$error.required"><span>Required</span></span>
-                                            <span class="error-message" ng-show="!levelForm.workoutValue.$error.required && levelForm.workoutValue.$error.validateInteger"><span>Enter&nbsp;Valid&nbsp;Number</span></span>
-                                        </span>
-                                    </td>
-                                    <td>
-                                        <input type="text" class="form-control" name="calories" ng-model="levels.calories" maxlength="7" required validate-Float/>
-                                        <span ng-show="levelForm.calories.$dirty && levelForm.calories.$invalid">
-                                            <span class="error-message" ng-show="levelForm.calories.$error.required"><span>Required</span></span>
-                                            <span class="error-message" ng-show="!levelForm.calories.$error.required && levelForm.calories.$error.validateFloat"><span>Enter&nbsp;Valid&nbsp;Number</span></span>
-                                        </span>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <input class="form-control"  name="met" ng-model="exerciseDetail.met" required validate-Float/>
+                        <span ng-show="exerciseForm.me.$dirtty&&exerciseForm.met.$invalid">
+                        <span class="error-message" ng-show="exerciseForm.met.$error.required"><span>Required.</span></span>
+                             <span ng-show="!exerciseForm.met.$error.required&&exerciseForm.met.$error.validateFloat"> <span>Invalid&nbsp;data.</span></span>
+
+                    </span>
                     </div>
+                    <br/>
                     <div class="col-md-12 margin-top-10 text-center">
                         <a class="btn register_button" href="" ng-click="doUpdateExerciseDetail()" ng-disabled="exerciseForm.$invalid||isClean()" ng-hide="isNew">Update Exercise Details</a>
                         <a class="btn register_button" href="" ng-click="doAddExerciseDetail()" ng-disabled="exerciseForm.$invalid || isNoImage" ng-show="isNew">Save Exercise Details</a>

@@ -174,15 +174,15 @@ adminApp.controller('ExerciseEditController',function($q,$scope,requestHandler,F
 
             $scope.exerciseDetail.imageurl=$scope.exerciseDetail.imageurl+"?decache="+Math.random();
 
-            $.each($scope.exerciseDetail.type.levels,function(index,levelvalue){
+           /* $.each($scope.exerciseDetail.type.levels,function(index,levelvalue){
                 levelvalue.workoutvalue=levelvalue.workoutvalue.toString();
-            });
+            });*/
 
             original=angular.copy($scope.exerciseDetail);
 
-            //push corresponding level
+           /* //push corresponding level
             var selectedLevel = ExerciseService.getSelectedLevel($scope.exerciseDetail.type);
-            $scope.level = {selected : selectedLevel};
+            $scope.level = {selected : selectedLevel};*/
 
             $scope.loaded=false;
 
@@ -194,15 +194,14 @@ adminApp.controller('ExerciseEditController',function($q,$scope,requestHandler,F
     //get type list for drop down
     $scope.doGetExcerciseTypeList=function(){
         requestHandler.getRequest("admin/listofTypes/","").then(function(response){
-            $scope.typeListForDropDown = response.data.Typelist;
-            $scope.levelslist=ExerciseService.getTypeList($scope.typeListForDropDown);
+            $scope.typeListForDropDown = response.data.ExerciseType_Data;
 
         },function(){
             errorMessage(Flash,"Please try again later!")
         });
     };
 
-    //Change Exercise Type
+    /*//Change Exercise Type
     $scope.doChangeExerciseType=function(id){
         if($scope.type==2){
             if(id==original.type.typeid){
@@ -224,7 +223,7 @@ adminApp.controller('ExerciseEditController',function($q,$scope,requestHandler,F
             });
         }
 
-    };
+    };*/
 
     //Exercise Image Upload Controller
     $scope.getFile = function () {
@@ -375,7 +374,7 @@ adminApp.controller('ExerciseEditController',function($q,$scope,requestHandler,F
         updatedExerciseDetails.tagid = tagArray;
         //Tag Array Ends
 
-        updatedExerciseDetails.levels = $scope.exerciseDetail.type.levels;
+       // updatedExerciseDetails.levels = $scope.exerciseDetail.type.levels;
 
         if($scope.isNoImage==false){
             console.log(updatedExerciseDetails);

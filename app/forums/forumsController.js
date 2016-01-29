@@ -39,6 +39,11 @@ adminApp.controller('ForumsController',function($scope,requestHandler,Flash,$loc
 
     //To Enable or Disable Forums
     $scope.doBlockUnblockForum=function(id){
+
+        if($('.search-list-form').css('display') != 'none'){
+            $(".search-list-form").hide();
+            $(".search-list-form").show(2400);
+        }
         requestHandler.putRequest("admin/blockorUnblockForum/",{'postid':id}).then(function(response){
 
             $scope.doGetForums();
@@ -54,6 +59,12 @@ adminApp.controller('ForumsController',function($scope,requestHandler,Flash,$loc
         $scope.paginationLoad=false;
         $scope.doGetForums();
     };
+
+    // Search Food Type
+    $('.show-list-search').click(function() {
+        $('.search-list-form').toggle(300);
+        $('.search-list-form input').focus();
+    });
 });
 
 adminApp.controller('ForumsEditController',function($scope,requestHandler,Flash,$routeParams,siteMenuService,$location) {
@@ -75,7 +86,10 @@ adminApp.controller('ForumsEditController',function($scope,requestHandler,Flash,
         $scope.loaded=true;
 
         requestHandler.postRequest("getForumDetailByAdmin/",{"postid":$routeParams.id}).then(function(response){
+            originalforum=angular.copy(response.data['Forum details']);
+            console.log("ori",originalforum);
             $scope.forumDetails=response.data['Forum details'];
+            console.log("adsd",$scope.forumDetails);
             $scope.loaded=false;
         },function(){
             errorMessage(Flash,"Please try again later!")
@@ -107,12 +121,22 @@ adminApp.controller('ForumsEditController',function($scope,requestHandler,Flash,
 
     //To update Latest News
     $scope.doUpdateForum = function(){
+        if($('.search-list-form').css('display') != 'none'){
+            $(".search-list-form").hide();
+            $(".search-list-form").show(2400);
+        }
+
         requestHandler.putRequest("updateForum/",$scope.forumDetails).then(function(response){
             successMessage(Flash,"Successfully Updated");
             $location.path("forums");
         }, function () {
             errorMessage(Flash, "Please try again later!")
         });
+    };
+
+    $scope.isClean=function(){
+        console.log(angular.equals(originalforum, $scope.forumDetails));
+        return angular.equals(originalforum, $scope.forumDetails);
     };
 
     //Display view forums
@@ -126,6 +150,24 @@ adminApp.controller('ForumsEditController',function($scope,requestHandler,Flash,
         $scope.doGetForumsByID();
     };
 
+});
+
+adminApp.filter('startsWithLetterForum', function () {
+
+    return function (items, forumsearch) {
+        var filtered = [];
+        var letterMatch = new RegExp(forumsearch, 'i');
+        if(!items){}
+        else{
+            for (var i = 0; i < items.length; i++) {
+                var item = items[i];
+                if (letterMatch.test(item.posttitle) || letterMatch.test(item.postdescription)) {
+                    filtered.push(item);
+                }
+            }
+        }
+        return filtered;
+    };
 });
 
 // html filter (render text as html)

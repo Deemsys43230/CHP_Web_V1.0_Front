@@ -1387,6 +1387,20 @@ adminApp.directive("typenameexists", function ($q, $timeout,requestHandler) {
             ngModel.$asyncValidators.typenameexists = function (modelValue) {
                 var defer = $q.defer();
 
+                $timeout(function () {
+                    var typeid = scope.typeid;
+                    var sendRequest=requestHandler.postRequest("admin/checkTypeName/",{"typename":modelValue,"typeid":typeid}).then(function(response){
+
+                        if (response.data.Response_status==0){
+                            defer.resolve();
+                        }
+                        else{
+                            defer.reject();
+                        }
+                    });
+
+                }, 10);
+
                 return defer.promise;
             }
         }

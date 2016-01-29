@@ -36,7 +36,6 @@
                     <tr class="warning">
                         <th class="col-md-1">Type Id</th>
                         <th class="col-md-3">Type Name</th>
-                        <th class="col-md-4">Levels</th>
                         <th class="col-md-3">Options</th>
                     </tr>
                     </thead>
@@ -49,21 +48,14 @@
                             </span>
                         </td>
                         <td>
-                            <span class="line-clamp-md">
-                                <span  ng-repeat="level in list.levels" title="{{list.level}}">
-                                    {{level.levelname}}{{$last ? '' : ','}}
-                                </span>
-                            </span>
-                        </td>
-                        <td>
-                            <a href="" class="btn-xs btn-primary" ng-click="doViewExerciseType(list.typeid)">View</a>
+
                             <a href="" class="btn-dis btn-xs btn-warning" ng-disabled="list.canedit==0" ng-click="doEditExerciseType(list.typeid)">Edit</a>
-                            <a href="" class="btn-xs btn-success" ng-click="doEnableDisableExerciseType(list.typeid)" ng-hide="list.status==1">Enable</a>
+                            <!--<a href="" class="btn-xs btn-success" ng-click="doEnableDisableExerciseType(list.typeid)" ng-hide="list.status==1">Enable</a>
                             <a href="" class="btn-xs btn-danger" ng-click="doEnableDisableExerciseType(list.typeid)" ng-show="list.status==1">Disable</a>
-                            <a href="" class="btn-dis btn-xs btn-danger" ng-disabled="list.canedit==0" ng-click="doDeleteExerciseType(list.typeid)">Delete</a>
+                            <a href="" class="btn-dis btn-xs btn-danger" ng-disabled="list.canedit==0" ng-click="doDeleteExerciseType(list.typeid)">Delete</a>-->
                         </td>
                     </tr>
-                    <tr ng-show="exercisetypefilter.length==0" class="text-center"><td colspan="4">No Records Found !!!</td></tr>
+                    <tr ng-show="exercisetypefilter.length==0" class="text-center"><td colspan="3">No Records Found !!!</td></tr>
                     </tbody>
                 </table>
                 </div>
@@ -89,34 +81,17 @@
         <div class="common_model">
             <form name="exerciseTypeAddForm" novalidate>
                 <p>Exercise Type Name</p>
-                <input type="text" name="exerciseTypeName"  ng-change="isNameAlreadyExist(exerciseType.typename)" ng-pattern="/^ *([a-zA-Z]+ ?)+ *$/" ng-model="exerciseType.typename" maxlength="45" required/>
+                <input type="text" name="exerciseTypeName"  data-typeid="exerciseType.typeid" ng-pattern="/^ *([a-zA-Z]+ ?)+ *$/" ng-model="exerciseType.typename" maxlength="45" typenameexists required/>
                 <span ng-show="exerciseTypeAddForm.exerciseTypeName.$dirty && exerciseTypeAddForm.exerciseTypeName.$invalid">
                     <span class="error-message" ng-show="exerciseTypeAddForm.exerciseTypeName.$error.required"><span>Required.</span></span>
                     <span class="error-message" ng-show="exerciseTypeAddForm.exerciseTypeName.$error.pattern"><span>Enter&nbsp;Valid&nbsp;name.</span></span>
+                    <span class="error-message" ng-show="exerciseTypeAddForm.exerciseTypeName.$error.typenameexists"><span>Type&nbsp;Already&nbsp;Exists</span></span>
                 </span>
-                <span class="error-message" ng-show="nameAlreadyExist"><span>Type&nbsp;Name&nbsp;Already&nbsp;Exist</span></span>
 
-                <p class="text-red pull-right" ng-show="errorMessageForType">Atleast one level is required</p>
-                <p class="margin-bottom-10">List of level (<a href="" class="text-bold" ng-click="addInput()"> <i class="fa fa-plus-circle"></i> Add New Level </a> )</p>
-                <div ng-repeat="input in inputs" class="margin-bottom-20">
-                    <ng-form name="levelForm">
-                        <input class="level_input" data-values="inputs" data-typeid="exerciseType.typeid" type="text" name="exerciseLevel" ng-model="input.levelname" maxlength="45" ng-change="verifyDuplicate()" required/>
-                        <span class="level_close" ng-click="removeInput($index)"><span>Remove</span></span>
-                            <span ng-show="levelForm.exerciseLevel.$dirty && levelForm.exerciseLevel.$invalid && !errorMessageForType">
-                                <span class="error-message override" ng-show="levelForm.exerciseLevel.$error.required"><span>Empty&nbsp;field&nbsp;not&nbsp;accepted.</span></span>
 
-                            </span>
-                        <!--<div class="error-message override"
-                             ng-if="input.isDuplicate">
-                            Duplicate.
-                        </div>-->
-                        <span class="error-message override" ng-show="input.isDuplicate"><span>Duplicate.</span></span>
-                        <span class="error-message override" ng-show="levelForm.exerciseLevel.$error.typenameexists"><span>Level&nbsp;Name&nbsp;should&nbsp;not&nbsp;same.</span></span>
-                    </ng-form>
-                </div>
                 <div class="action_btns margin-top-20">
-                    <div class="one_half" ng-show="isNew"><a href="" class="btn btn_red modal_close" ng-disabled="exerciseTypeAddForm.$invalid || nameAlreadyExist || error" ng-click="doAddExerciseType()">Save Exercise Type </a></div>
-                    <div class="one_half" ng-hide="isNew"><a href="" class="btn btn_red modal_close" ng-disabled="exerciseTypeAddForm.$invalid || isClean() || nameAlreadyExist || error " ng-click="doUpdateExerciseType()">Update Exercise Type </a></div>
+                    <div class="one_half" ng-show="isNew"><a href="" class="btn btn_red modal_close" ng-disabled="exerciseTypeAddForm.$invalid" ng-click="doAddExerciseType()">Save Exercise Type </a></div>
+                    <div class="one_half" ng-hide="isNew"><a href="" class="btn btn_red modal_close" ng-disabled="exerciseTypeAddForm.$invalid || isClean()" ng-click="doUpdateExerciseType()">Update Exercise Type </a></div>
                     <div class="one_half last modal_close"><a id="register_form" class="btn">Cancel</a></div>
                 </div>
             </form>
@@ -124,42 +99,7 @@
     </section>
 </div>
 
-<!-- Category popup-->
-<div id="exerciseTypeView" class="popupContainer-width" style="display:none;">
 
-    <header class="popupHeader width-100">
-        <span class="header_title">{{title}}</span>
-        <span class="modal_close"><i class="fa fa-times"></i></span>
-    </header>
-
-    <section class="popupBody">
-        <!-- Register Form -->
-        <div class="common_model">
-            <table class="table table-bordered margin-top-10">
-                <tbody>
-                    <tr class="warning">
-                        <td class="col-md-4">Type Id</td>
-                        <td class="col-md-8">{{exerciseType.typeid}}</td>
-                    </tr>
-                    <tr>
-                        <td>Type Name</td>
-                        <td>{{exerciseType.typename}}</td>
-                    </tr>
-                    <tr class="warning">
-                        <td>Levels</td>
-                        <td>
-                            <span ng-repeat="level in exerciseType.levels">
-                                {{level.levelname}}{{$last ? '' : ','}}
-                            </span>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </section>
-</div>
-
-<!-- End Page Banner -->
 
 <script type="text/javascript" src="../../js/script.js"></script>
 

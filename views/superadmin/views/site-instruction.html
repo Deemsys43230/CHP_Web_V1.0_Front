@@ -31,7 +31,7 @@
                     </form>
                 </div>
                 <div class="text-center margin-top-15">
-                    <a href="" class="btn btn-success" ng-disabled="instructionForm.$invalid" ng-click="doUpdateInstructions()">Save Changes</a>
+                    <a href="" class="btn btn-success" ng-disabled="instructionForm.$invalid || isClean()" ng-click="doUpdateInstructions()">Save Changes</a>
                 </div>
             </div>
         </div>

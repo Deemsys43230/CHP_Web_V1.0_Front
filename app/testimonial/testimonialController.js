@@ -134,9 +134,9 @@ adminApp.controller('TestimonialEditController',function($scope,requestHandler,F
             //Set values to display data in edit testimonial
             $scope.testimonials=response.data.Testimonials;
 
-            // Change the url hostname to localhost
+           /* // Change the url hostname to localhost
             $scope.testimonials.imageurl = requestHandler.convertUrl( $scope.testimonials.imageurl);
-            $scope.testimonials.imageurl = "http://localhost"+$scope.testimonials.imageurl;
+            $scope.testimonials.imageurl = "http://localhost"+$scope.testimonials.imageurl;*/
 
 
             // View the image in image cropit preview in edit testimonials

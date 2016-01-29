@@ -38,7 +38,7 @@
                 </div>
                 <div class="text-center margin-top-20">
                     <a href="" class="btn btn-success" ng-disabled="latestNewsForm.$invalid" ng-click="doAddLatestNews()" ng-show="isNew">Add Latest News</a>
-                    <a href="" class="btn btn-success" ng-disabled="latestNewsForm.$invalid" ng-click="doUpdateLatestNews()" ng-hide="isNew">Save Changes</a>
+                    <a href="" class="btn btn-success" ng-disabled="latestNewsForm.$invalid || isClean()" ng-click="doUpdateLatestNews()" ng-hide="isNew">Save Changes</a>
                     <a href="#latestNews" class="btn btn-warning">Cancel</a>
                 </div>
             </div>

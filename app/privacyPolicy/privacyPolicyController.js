@@ -41,9 +41,9 @@ adminApp.controller('PrivacyPolicyController',function($scope,requestHandler,Fla
         });
     };
 
-  /*  $scope.isClean=function(){
+   $scope.isClean=function(){
      return angular.equals(original, $scope.privacypolicydetails);
-     };*/
+     };
 
     // Display Privacy policy details On Page Load
     $scope.doGetPrivacyPolicy();

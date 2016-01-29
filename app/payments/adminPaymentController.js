@@ -58,11 +58,17 @@ adminApp.controller('AdminPaymentController',function($scope,requestHandler,Flas
         //In practice this should be in a factory.
         requestHandler.postRequest("admin/paymentHistoryforCourse/",$scope.params).then(function(response){
             $scope.coursesPaymentHistory = [];
-            $scope.coursesPaymentHistory = response.data.coursePaylist.paymentHistory;
+            $scope.coachid = response.data.coursePaylist.coachid;
+            alert($scope.coachid);
+             $scope.coursesPaymentHistory = response.data.coursePaylist.paymentHistory;
+            alert($scope.coursesPaymentHistory.paymentid);
+            console.log("asdas",$scope.coursesPaymentHistory);
             $scope.total_count=response.data.totalrecordcount;
             $scope.loaded=false;
         });
     };
+
+
     //End Subscriber returns the list
 
 
@@ -102,6 +108,7 @@ adminApp.controller('AdminPaymentController',function($scope,requestHandler,Flas
         requestHandler.postRequest("admin/paymentHistoryforCoach/",$scope.params).then(function(response){
             $scope.coachPaymentHistory = [];
             $scope.coachPaymentHistory = response.data.coachPaylist;
+            $scope.coachid= response.data.coachPaylist.coachid;
             $scope.total_count=response.data.totalrecordcount;
             $scope.loaded=false;
         });
@@ -249,13 +256,11 @@ adminApp.controller('AdminPaymentController',function($scope,requestHandler,Flas
         else $scope.coachSortIcons[sortKey]="fa fa-caret-down";
     };
 
-    $scope.doManualPay=function(paymentid){
-alert("hi");
+    $scope.doManualPay=function(paymentid,coachid){
         alert(paymentid);
-        alert($routeParams.id);
-        requestHandler.postRequest("admin/payManualImplicit/",{"coachid":$routeParams.id,"paymentid":paymentid}).then(function(response){
-            alert("pay",paymentid);
-            alert("coach",$routeParams.id);
+        alert(coachid);
+        requestHandler.postRequest("admin/payManualImplicit/",{"coachid":coachid,"paymentid":paymentid}).then(function(response){
+
               if(response.data.Response_status==1){
                   subscribersListInit();
                   successMessage(Flash,"Payment successfull");

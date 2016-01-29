@@ -12,7 +12,17 @@
             </div>
             <div class="col-md-9 min-height-450" ng-init="init()">
                 <a href="#dashboard" class="back-button pull-right margin-left-10"><i class="fa fa-arrow-circle-o-left"></i> Back to Dashboard</a>
-                <a href="#addForum" class="back-button pull-right"><i class="fa fa-plus-circle"></i> Add New Forum</a>
+                <a href="#addForum" class="back-button pull-right margin-left-10"><i class="fa fa-plus-circle"></i> Add New Forum</a>
+                <!-- Stat Search -->
+                <div class="pull-right" id="hidden-search">
+                    <a href="#" onclick="return false;" class="show-list-search search_button"><i class="fa fa-search"></i></a>
+                    <div class="search-list-form override">
+                        <form autocomplete="off" class="searchform">
+                            <input type="text" ng-model="forumsearch" placeholder="Search here...">
+                        </form>
+                    </div>
+                </div>
+                <!-- End Search -->
                 <div flash-message="2000" class="col-md-4 pull-right"></div>
                 <h3 class="margin-bottom-10"><i class="fa fa-comment-o"></i> &nbsp;Forums</h3>
                 <div ng-if="loaded">
@@ -33,7 +43,7 @@
                     <tr >
 
                     </tr>
-                    <tr dir-paginate="forumsList in forums | itemsPerPage: 13" ng-show="forums.length!=0">
+                    <tr dir-paginate="forumsList in forumfilter=(forums | startsWithLetterForum: forumsearch | itemsPerPage: 13)" ng-show="forums.length!=0">
                         <td><span class="line-clamp-sm">{{forumsList.posttitle}}</span></td>
                         <td><span class="line-clamp-lg">{{forumsList.postdescription}}</span></td>
                         <td class="text-center">{{forumsList.abusecount}}</td>
@@ -43,7 +53,7 @@
                             <span ng-hide="forumsList.isblocked==0"><a href="" class="btn-xs btn-success" ng-click="doBlockUnblockForum(forumsList.postid)">Unblock</a></span>
                             <span ng-show="forumsList.isblocked==0"><a href="" class="btn-xs btn-danger" ng-click="doBlockUnblockForum(forumsList.postid)">Block</a></span>
                         </td>
-                    <tr ng-show="forums.length==0"><td colspan="4" class="text-center">No Records Found !!!</td></tr>
+                    <tr ng-show="forums.length==0 || !forumfilter.length"><td colspan="4" class="text-center">No Records Found !!!</td></tr>
                     </tbody>
                 </table>
                 <!-- Start Pagination -->
