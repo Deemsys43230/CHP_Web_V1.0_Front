@@ -434,12 +434,12 @@ adminApp.controller('ExerciseEditController',function($q,$scope,requestHandler,F
         $scope.exerciseDetail.imageurl='../../images/No_image_available.jpg';
 
         //push corresponding level
-        requestHandler.postRequest("admin/gettypeIndividualDetail/",{"typeid":1}).then(function(response){
+       /* requestHandler.postRequest("admin/gettypeIndividualDetail/",{"typeid":1}).then(function(response){
             $scope.exerciseDetail.type = response.data.IndividualtypeData;
             var selectedLevel = ExerciseService.getSelectedLevel($scope.exerciseDetail.type);
             $scope.level = {selected : selectedLevel};
             $scope.loaded=false;
-        });
+        });*/
 
         if($routeParams.id != null){
             $scope.suggestionname = function(){

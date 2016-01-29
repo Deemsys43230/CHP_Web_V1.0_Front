@@ -15,7 +15,7 @@
                                   <span class="error-message textarea-errormessage40" ng-show="adviceForm.description.$error.required"><span>Required.</span></span>
                              </span>
                 <div class="text-center">
-                    <a href="" class="btn btn-success" ng-disabled="adviceForm.$invalid || isClean()" ng-click="doUpdateMyAdvice()">Save Advice</a>
+                    <a href="" class="btn btn-success" ng-disabled="adviceForm.$invalid || isClean()" ng-click="doInsertOrUpdateMyAdvice()">Save Advice</a>
                     <a href="#dashboard" class="btn btn-danger">Cancel</a>
                     <a href=""  class="btn btn-success" ng-click="doEnableDisableMyAdvice()" ng-show="myadvice.status==0">Enable</a>
                     <a href="" class="btn btn-danger" ng-click="doEnableDisableMyAdvice()" ng-hide="myadvice.status==0">Disable</a>

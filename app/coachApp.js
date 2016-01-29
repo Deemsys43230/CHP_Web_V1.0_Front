@@ -55,11 +55,13 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'coachApp',
                             files:[
-                                '../../js/bootstrap.min.js'
+                                '../../js/bootstrap.min.js',
+                                '../../app/dashboard/coachDashboardController.js'
                             ]
                         })
                     }
-                }
+                },
+                controller:'CoachDashboardController'
             }).
             when('/profile', {
                 templateUrl: 'views/profile.html',
@@ -593,6 +595,24 @@ coachApp.directive('isNumber', function () {
     }
 });
 
+//Check For FLoat Validation greater than 0
+coachApp.directive('validateFloat1', function() {
+    // var FLOAT_REGEXP = /^\-?\d+((\.)\d+)?$/;
+    var FLOAT_REGEXP = /^\s*(?=.*[1-9])\d*(?:\.\d{0,8})?\s*$/;
+
+    return {
+        require: 'ngModel',
+        restrict: '',
+        link: function(scope, elm, attrs, ctrl) {
+            // only apply the validator if ngModel is present and Angular has added the Float Number validator
+            ctrl.$validators.validateFloat1 = function(modelValue) {
+                return  ctrl.$isEmpty(modelValue) || FLOAT_REGEXP.test(modelValue);
+            };
+
+        }
+    };
+});
+
 coachApp.directive('validNumber', function() {
     return {
         require: '?ngModel',
@@ -607,7 +627,7 @@ coachApp.directive('validNumber', function() {
 
                 }
             ngModelCtrl.$validators.max = function(val) {
-                    return val <= 100;
+                    return val <= 90;
                 };
 
 
@@ -644,4 +664,59 @@ coachApp.directive('validNumber', function() {
     };
 });
 
+coachApp.directive('validFloatnumber', function() {
 
+    var FLOAT_REGEXP = /^\s*(?=.*[1-9])\d*(?:\.\d{0,8})?\s*$/;
+
+    return {
+        require: '?ngModel',
+        link: function(scope, element, attrs, ngModelCtrl) {
+            if(!ngModelCtrl) {
+                return;
+            }
+
+            ngModelCtrl.$parsers.push(function(val) {
+                if (angular.isUndefined(val)) {
+                    var val ='';
+
+                }
+                ngModelCtrl.$validators.max = function(val) {
+                    return val <= 90;
+                };
+
+                ngModelCtrl.$validators.validateFloat1 = function(val) {
+                    return  ngModelCtrl.$isEmpty(val) || FLOAT_REGEXP.test(val);
+                };
+
+                var clean = val.replace(/[^-0-9\.]/g, '');
+                var negativeCheck = clean.split('-');
+                var decimalCheck = clean.split('.');
+                if(!angular.isUndefined(negativeCheck[1])) {
+                    negativeCheck[1] = negativeCheck[1].slice(0, negativeCheck[1].length);
+                    clean =negativeCheck[0] + '-' + negativeCheck[1];
+                    if(negativeCheck[0].length > 0) {
+                        clean =negativeCheck[0];
+                    }
+
+                }
+
+                if(!angular.isUndefined(decimalCheck[1])) {
+                    decimalCheck[1] = decimalCheck[1].slice(0,2);
+                    clean =decimalCheck[0] + '.' + decimalCheck[1];
+                }
+
+                if (val !== clean) {
+                    ngModelCtrl.$setViewValue(clean);
+                    ngModelCtrl.$render();
+                }
+                return clean;
+            });
+
+            element.bind('keypress', function(event) {
+                if(event.keyCode === 32) {
+                    event.preventDefault();
+                }
+            });
+        }
+    };
+});

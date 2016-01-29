@@ -32,6 +32,7 @@ coachApp.controller('CoachPaymentSettingsController',function($scope,requestHand
         requestHandler.putRequest("updateUserSettings/",$scope.paypalDetails).then(function(response){
 
             successMessage(Flash,"Successfully Updated!");
+            $scope.getSettingDetails();
         },function(){
             errorMessage(Flash,"Please try again later");
         });
