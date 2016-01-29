@@ -120,7 +120,6 @@ adminApp.factory("UserDashboardService",function(requestHandler){
     //Get User Demography Details
     userDashboardServiceObj.doGetDemographyDetails=function(){
         return requestHandler.getRequest("user/getDemography/","").then(function(response) {
-            console.log("full",response.data.Demography_Data);
             return response.data.Demography_Data;
         });
     };
@@ -137,14 +136,14 @@ adminApp.factory("UserDashboardService",function(requestHandler){
         return requestHandler.postRequest("user/insertFoodSuggestion/",foodSuggest).then(function (response) {
             return response;
         });
-    }
+    };
 
     //Add Suggested Exercise
     userDashboardServiceObj.doAddSuggestedExercise=function(exerciseSuggest){
         return requestHandler.postRequest("user/insertExerciseSuggestion/",exerciseSuggest).then(function (response) {
             return response;
         });
-    }
+    };
 
     userDashboardServiceObj.searchExercise=function(searchStr){
         return requestHandler.postRequest("user/searchExercisebyUser/",{"exercisename":searchStr}).then(function (response) {
@@ -156,7 +155,7 @@ adminApp.factory("UserDashboardService",function(requestHandler){
         }, function () {
             errorMessage(Flash, "Please try again later!")
         });
-    }
+    };
 
     //On Select Exercise From list
     userDashboardServiceObj.doGetSelectedExerciseDetails= function (exerciseid) {

@@ -357,7 +357,6 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
     //Insert User Exercise
     $scope.doInsertUserExercise=function(){
         //Set values according to the api calls
-        //alert(selectedDate);
         $scope.userExercise.exerciseid=$scope.userSelectedExerciseDetails.exerciseid;
         $scope.userExercise.levelid=$scope.userExercise.levelid.levelid;
 
@@ -884,11 +883,11 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
     };
 
     $scope.goGetDailyIntakeGraph = function(date){
-       // alert(date);
+
         requestHandler.postRequest("user/dailyCalorieGraph/",{"date":date}).then(function(response){
-            alert(response);
+
             $scope.calorieIntakeGraph=response.data.dailyCalorieGraph;
-            console.log("daily",$scope.calorieIntakeGraph);
+
             if($scope.calorieIntakeGraph.averagefat=="") $scope.calorieIntakeGraph.averagefat=0;
             if($scope.calorieIntakeGraph.fat=="") $scope.calorieIntakeGraph.fat=0;
             if($scope.calorieIntakeGraph.averageprotein=="") $scope.calorieIntakeGraph.averageprotein=0;

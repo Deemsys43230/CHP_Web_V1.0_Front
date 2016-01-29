@@ -26,7 +26,7 @@
                     <h4>{{goalDetail.title}}&nbsp;</h4>
                     <p class="margin-top-5">{{goalDetail.description}}&nbsp;</p><br/>
                     <div class="col-md-2 no-padding height-60">
-                        <img class="img-circle" src="{{goalDetail.user_imageurl|trusted}}">
+                        <img class="img-circle" ng-src="{{goalDetail.user_imageurl|trusted}}">
                     </div>
                     <div class="col-md-10">
                         <h6>Created By</h6>
@@ -81,7 +81,7 @@
                     <div class="content_scrollbar height-335">
                         <div ng-repeat="member in goalMembers | startsWithLetter:searchfriend | orderBy:'-isownerstatus'">
                             <div class="col-md-1 no-padding">
-                                <img class="img-circle" src="{{member.user_imageurl|trusted}}">
+                                <img class="img-circle" ng-src="{{member.user_imageurl|trusted}}">
                             </div>
                             <div class="col-md-6">
                                 <h4>{{member.user_name}}</h4>
@@ -112,12 +112,12 @@
                     <div class="content_scrollbar height-335">
                         <div ng-repeat="ranking in rankList | orderBy:'rank'">
                             <div class="col-md-2">
-                                <span ng-if="ranking.rank<4"><img src="../../images/rank-{{ranking.rank}}.jpg"></span>
+                                <span ng-if="ranking.rank<4"><img ng-src="../../images/rank-{{ranking.rank}}.jpg"></span>
                                 <span ng-if="ranking.rank>=4"><img src="../../images/rank-high.png"></span>
                                 <div class="rank_circle">{{ranking.rank}}</div>
                             </div>
                             <div class="col-md-1 no-padding">
-                                <img class="img-circle" src="{{ranking.user_imageurl|trusted}}">
+                                <img class="img-circle" ng-src="{{ranking.user_imageurl|trusted}}">
                             </div>
                             <div class="col-md-5">
                                 <h4>{{ranking.user_name}}</h4>
@@ -151,7 +151,7 @@
             <div class="margin-top-10 content_scrollbar height-350">
                 <div ng-repeat="myFriends in myRemainderFriendsList  | startsWithLetterRemain:friendsearch" ng-show="!myRemainderFriendsList==0">
                     <div class="col-md-1 no-padding">
-                        <img src="{{myFriends.imageurl|trusted}}">
+                        <img ng-src="{{myFriends.imageurl|trusted}}">
                     </div>
                     <div class="col-md-7">
                         <h4>{{myFriends.name}}</h4>
@@ -164,8 +164,10 @@
                     </div>
                 </div>
                 <div ng-show="myRemainderFriendsList==0">
-                    <h1 class="col-md-12 margin-top-50 text-gray text-center">
-                        NO FRIENDS FOUND!!!<br/><a class="btn btn-warning btn-sm modal_close" href="#friends"><i class="fa fa-users"></i>&nbsp;&nbsp;Find Friends Here</a>
+                    <h1 class="col-md-12 margin-top-30 text-gray text-center">
+                        <img src="../../images/no-friend.png"><br/>
+                        NO FRIENDS FOUND!!!<br/>
+                        <a class="main-button modal_close margin-top-20" href="#friends">&nbsp;&nbsp;<i class="fa fa-users"></i>&nbsp;&nbsp;Find Friends Here&nbsp;&nbsp;</a>
                     </h1>
                 </div>
             </div>
@@ -186,10 +188,10 @@
         <div class="common_model">
             <div class="margin-top-10" ng-repeat="rank in rankList | limitTo:3">
                 <div class="col-md-2 no-padding text-center">
-                    <img src="../../images/rank-{{rank.rank}}.jpg">
+                    <img ng-src="../../images/rank-{{rank.rank}}.jpg">
                 </div>
                 <div class="col-md-2">
-                    <img src="{{rank.user_imageurl | trusted}}">
+                    <img ng-src="{{rank.user_imageurl | trusted}}">
                 </div>
                 <div class="col-md-8">
                     <h4>{{rank.user_name}}</h4>
@@ -216,10 +218,13 @@
     <section class="popupBody">
         <!-- Register Form -->
         <div class="common_model">
-            <div>Are you sure want to complete this Goal?</div>
+            <div class="margin-top-20 text-center">
+                <img src="../../images/alert-ring.png"><br><br>
+                <h5 class="text-muted">Are you sure want to complete this Goal?</h5>
+            </div>
             <div class="action_btns margin-top-20">
                 <div class="one_half"><a href="" class="btn btn_red modal_close" ng-click="doQuitGroup(deleteId)">Yes</a></div>
-                <div class="one_half last modal_close"><a onclick="return false;" class="btn back_btn">No</a></div>
+                <div class="one_half last modal_close"><a onclick="return false;" class="btn btn_blue">No</a></div>
             </div>
         </div>
     </section>
@@ -249,13 +254,5 @@
 
 <script type="text/javascript">
     $("#modal_trigger").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
-
-    $(function(){
-        $(".common_model").show();
-    })
-</script>
-
-<script type="text/javascript">
-    $("#modal_trigger1").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
 </script>
 

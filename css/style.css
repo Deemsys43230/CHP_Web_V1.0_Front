@@ -10118,3 +10118,9 @@ input::-ms-clear { display: none; }
     top:20px;
     z-index: 20000;
 }
+
+.thanks-page-back{
+    background-image: url(../images/subscripe.png);
+    background-repeat: no-repeat;
+    height: 500px;
+}

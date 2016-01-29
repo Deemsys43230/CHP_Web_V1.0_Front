@@ -22,33 +22,40 @@
             </div>
 
             <div class="col-md-12 margin-bottom-10">
-                <div dir-paginate="courses in courseList = ( categoryCourses |startsWithLetterCourse : courseSearch | itemsPerPage: 9)"  ng-show="categoryCourses.length!=0">
-                    <div class="col-md-4 no-padding">
-                        <a href="#courseDetail/{{courses.courseid}}">
-                            <div class="dashboard arrange">
-                                <span ng-hide="courses.enrollmentStatus==0"><img class="user-course-status" src="../../images/enrolled.png"></span>
-                                <div class="course-grid-user">
-                                    <div class="col-md-6 margin-top-5">
-                                        <h4 class="course-name wrap" title="{{courses.coursename}}">{{courses.coursename}}</h4>
+                <div ng-show="courseList.length>0">
+                    <div dir-paginate="courses in courseList = ( categoryCourses |startsWithLetterCourse : courseSearch | itemsPerPage: 9)"  ng-show="categoryCourses.length!=0">
+                        <div class="col-md-4 no-padding">
+                            <a href="#courseDetail/{{courses.courseid}}">
+                                <div class="dashboard arrange">
+                                    <span ng-hide="courses.enrollmentStatus==0"><img class="user-course-status" src="../../images/enrolled.png"></span>
+                                    <div class="course-grid-user">
+                                        <div class="col-md-6 margin-top-5">
+                                            <h4 class="course-name wrap" title="{{courses.coursename}}">{{courses.coursename}}</h4>
 
-                                        <p class="margin-top-10">{{courses.enrollcount}} users</p>
-                                    </div>
-                                    <div class="col-md-6 no-padding">
-                                        <img class="course-image" ng-src="{{courses.promoimage | trusted}}">
-                                        <div class="text-bold" ng-if="courses.price==0"><span class="course-price free">Free</span></div>
-                                        <div class="text-bold" ng-if="courses.price!=0"><span class="course-price cost">{{courses.price}}$</span></div>
-                                    </div>
-                                    <div class="col-md-12 margin-top-5">
-                                        <div class="col-md-2 no-padding margin-top-5"><img class="course-author-img" ng-src="{{courses.imageurl | trusted}}"></div>
-                                        <div class="col-md-10 no-padding">
-                                            <h5 class="line-clamp-xlg">{{courses.ownername}}</h5><br/>
-                                            <p class="line-clamp-xlg">{{courses.specialistin}}</p>
+                                            <p class="margin-top-10">{{courses.enrollcount}} users</p>
+                                        </div>
+                                        <div class="col-md-6 no-padding">
+                                            <img class="course-image" ng-src="{{courses.promoimage | trusted}}">
+                                            <div class="text-bold" ng-if="courses.price==0"><span class="course-price free">Free</span></div>
+                                            <div class="text-bold" ng-if="courses.price!=0"><span class="course-price cost">{{courses.price}}$</span></div>
+                                        </div>
+                                        <div class="col-md-12 margin-top-5">
+                                            <div class="col-md-2 no-padding margin-top-5"><img class="course-author-img" ng-src="{{courses.imageurl | trusted}}"></div>
+                                            <div class="col-md-10 no-padding">
+                                                <h5 class="line-clamp-xlg">{{courses.ownername}}</h5><br/>
+                                                <p class="line-clamp-xlg">{{courses.specialistin}}</p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </a>
+                            </a>
+                        </div>
                     </div>
+                </div>
+
+                <div ng-show="courseList.length==0" class="text-center margin-top-50">
+                    <img src="../../images/no-courses.png"/>
+                    <h1 class="text-gray margin-top-10">NO COURSES FOUND!!!</h1>
                 </div>
                 <!-- Start Pagination -->
                 <div class="text-center margin-top-20 col-md-12 to-top">
