@@ -10,8 +10,8 @@ requestHandlerApp.factory("requestHandler",['$http',function($http,$location){
     var urlLength = 15;
     var exerciselength=13;*/
 
-    var hostedDomain="http://localhost/api/v1/";
-    var paymentURL="http://localhost/CyberHealth/views/user";
+    var hostedDomain="http://192.168.1.236/api/v1/";
+    var paymentURL="http://192.168.1.236/CyberHealth/views/user";
 
     var urlLength = 14;
     var exerciselength=13;
