@@ -4,6 +4,7 @@ adminApp.controller('AdminPaymentController',function($scope,requestHandler,Flas
 
     $scope.totalEarningsByAdmin=0.00;
     $scope.totalEarningsByCoach=0.00;
+    $scope.loaddisable=false;
 
     //Main Function returns the list
     $scope.doGetCoursePaymentDetails = function(pageno){
@@ -59,9 +60,9 @@ adminApp.controller('AdminPaymentController',function($scope,requestHandler,Flas
         requestHandler.postRequest("admin/paymentHistoryforCourse/",$scope.params).then(function(response){
             $scope.coursesPaymentHistory = [];
             $scope.coachid = response.data.coursePaylist.coachid;
-            alert($scope.coachid);
+
              $scope.coursesPaymentHistory = response.data.coursePaylist.paymentHistory;
-            alert($scope.coursesPaymentHistory.paymentid);
+
             console.log("asdas",$scope.coursesPaymentHistory);
             $scope.total_count=response.data.totalrecordcount;
             $scope.loaded=false;
@@ -257,13 +258,16 @@ adminApp.controller('AdminPaymentController',function($scope,requestHandler,Flas
     };
 
     $scope.doManualPay=function(paymentid,coachid){
-        alert(paymentid);
-        alert(coachid);
+
+        $scope.loaddisable=true;
+        $scope.loaded=true;
         requestHandler.postRequest("admin/payManualImplicit/",{"coachid":coachid,"paymentid":paymentid}).then(function(response){
 
               if(response.data.Response_status==1){
                   subscribersListInit();
                   successMessage(Flash,"Payment successfull");
+                  $scope.loaded=false;
+                  $scope.loaddisable=false;
               }
             else if(response.data.Response_status==0){
                   $(function(){
@@ -284,6 +288,8 @@ adminApp.controller('AdminPaymentController',function($scope,requestHandler,Flas
                       $("#errormodal").hide();
                       $("#lean_overlay").hide();
                   });
+                  $scope.loaded=false;
+                  $scope.loaddisable=false;
 
               }
             });

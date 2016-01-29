@@ -44,7 +44,7 @@
                         <td>{{subscriber.coachamount}}</td>
                         <td>{{subscriber.adminamount}}</td>
                         <td>{{subscriber.inwardid}}</td>
-                        <td><span ng-show="subscriber.outwardid!=undefined">{{subscriber.outwardid}}</span><span ng-show="subscriber.outwardid==undefined"><a href="" ng-click="doManualPay(subscriber.paymentid,coachid)" class="btn-xs btn-success">Manual Pay</a></span></td>
+                        <td><span ng-show="subscriber.outwardid!=undefined">{{subscriber.outwardid}}</span><span ng-show="subscriber.outwardid==undefined"><a href="" ng-click="doManualPay(subscriber.paymentid,coachid)" class="btn-xs btn-success" ng-disabled="loaddisable">Manual Pay</a></span></td>
                         <td>
                             <span ng-show="subscriber.enrollmentstatus==1" class="text-green">Active</span>
                             <span ng-show="subscriber.enrollmentstatus==0" class="text-red">In active</span>
