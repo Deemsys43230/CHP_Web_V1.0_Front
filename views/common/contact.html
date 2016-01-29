@@ -4,9 +4,10 @@
 	<div class="container">
 		<div class="row">
 			
-			<div class="col-md-7">
+			<div class="col-md-8">
 				<!-- Classic Heading -->
 				<h4 class="classic-title"><span>Contact Us</span></h4>
+                <div my-map=""></div>
 				<!-- Start Contact Form -->
                 <!--<form role="form" class="contact-form" id="contact-form" method="post">
                     <div class="form-group">
@@ -36,7 +37,7 @@
 				<!-- End Contact Form -->
 			</div>
 			
-			<div class="col-md-5">
+			<div class="col-md-4">
 				<!-- Classic Heading -->
 				<h4 class="classic-title"><span>Information</span></h4>
 				<!-- Some Info -->
@@ -46,12 +47,51 @@
 				
 				<!-- Info - Icons List -->
 				<ul class="icons-list">
-
-					<li><i class="fa fa-building">  </i> <strong>Address:</strong> {{contactUsDetails.streetaddress}},{{contactUsDetails.city}},{{contactUsDetails.state}},{{contactUsDetails.zipcode}}</li>
-					<li><i class="fa fa-envelope-o"></i> <strong>Email:</strong>{{contactUsDetails.supportemail}}</li>
-					<li><i class="fa fa-mobile"></i> <strong>Phone:</strong>{{contactUsDetails.mobile}}</li>
-                    <li><i class="fa fa-phone"></i> <strong>Landline:</strong>{{contactUsDetails.landline}}</li>
-                    <li><i class="fa fa-globe"></i> <strong>Company URL:</strong>{{contactUsDetails.companyurl}}</li>
+					<li>
+                        <span class="col-md-4 no-padding">
+                            <i class="fa fa-building">  </i>
+                            <strong>Address<span class="pull-right">:</span></strong>
+                        </span>
+                        <span class="col-md-8 margin-bottom-10">
+                            {{contactUsDetails.streetaddress}},<br/>{{contactUsDetails.city}},<br/>{{contactUsDetails.state}},{{contactUsDetails.zipcode}}
+                        </span>
+                    </li>
+					<li>
+                        <span class="col-md-4 no-padding">
+                            <i class="fa fa-envelope-o"></i>
+                            <strong>Email ID<span class="pull-right">:</span></strong>
+                        </span>
+                        <span class="col-md-8 margin-bottom-10">
+                            {{contactUsDetails.supportemail}}
+                        </span>
+                    </li>
+					<li>
+                        <span class="col-md-4 no-padding">
+                            <i class="fa fa-tablet"></i>
+                            <strong>Phone<span class="pull-right">:</span></strong>
+                        </span>
+                        <span class="col-md-8 margin-bottom-10">
+                            {{contactUsDetails.mobile}}
+                        </span>
+                    </li>
+                    <li>
+                        <span class="col-md-4 no-padding">
+                            <i class="fa fa-phone"></i>
+                            <strong>Landline<span class="pull-right">:</span></strong>
+                        </span>
+                        <span class="col-md-8 margin-bottom-10">
+                            {{contactUsDetails.landline}}
+                        </span>
+                    </li>
+                    <li>
+                        <span class="col-md-4 no-padding">
+                            <i class="fa fa-globe"></i>
+                            <strong>Company URL<span class="pull-right">:</span></strong>
+                        </span>
+                        <span class="col-md-8 margin-bottom-10">
+                            {{contactUsDetails.companyurl}}
+                        </span>
+                    </li>
 				</ul>
 				
 				<!-- Divider -->

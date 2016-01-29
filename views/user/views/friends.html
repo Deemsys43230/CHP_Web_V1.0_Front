@@ -3,11 +3,11 @@
     <div id="w" class="clearfix">
         <div id="demography-content" class="height-520">
             <div class="col-md-8">
-                <div flash-message="2000" class="col-md-4 pull-right"></div>
+                <div flash-message="2000" class="col-md-4 pull-right no-padding"></div>
                 <div class="my-friends">
 
                     <h5 class="classic-title"><span><a href="" ng-click="initialLoad()"><i class="fa fa-users my-friends-list"></i>&nbsp;&nbsp;My Friends</a></span>
-                        &nbsp;&nbsp;|&nbsp;&nbsp;<a href="" class="friends-request" ng-click="initialLoad()"><i class="fa fa-envelope"></i>&nbsp;&nbsp;Request Received</a>&nbsp;<a class="text-red text-bold" ng-show="(requestedFriendsList | filter: {friendStatus: 2}).length!=0">[{{(requestedFriendsList | filter: {friendStatus: 2}).length}}]</a>
+                        &nbsp;&nbsp;|&nbsp;&nbsp;<a href="" class="friends-request" ng-click="initialLoad()"><i class="fa fa-envelope"></i>&nbsp;&nbsp;Request Received&nbsp;<b class="text-red text-bold" ng-show="(requestedFriendsList | filter: {friendStatus: 2}).length!=0">[{{(requestedFriendsList | filter: {friendStatus: 2}).length}}]</b></a>
                         &nbsp;&nbsp;|&nbsp;&nbsp;<a href="" class="friends-request-sent" ng-click="initialLoad()"><i class="fa fa-paper-plane"></i>&nbsp;&nbsp;Request Sent </a><a class="text-red text-bold" ng-show="(requestedFriendsList | filter: {friendStatus: 1}).length!=0">[{{(requestedFriendsList | filter: {friendStatus: 1}).length}}]</a>
                     </h5>
                     <div ng-if="loaded">
@@ -38,7 +38,7 @@
                     <div class="row friends-list">
                         <div ng-hide="viewDetails==1">
                         <div class="col-md-3" ng-repeat="myfriends in friendsfilter=( myFriendsList | filter: {name : myfriendssearch} | startFrom:currentPage*pageSize | limitTo:pageSize)" ng-show="myFriendsList.length!=0">
-                            <a href="" class="img-shadow"><img ng-src="{{myfriends.imageurl | trusted}}"/></a>
+                            <a href="" ng-click="doViewMembers(myfriends.userid)" class="img-shadow"><img ng-src="{{myfriends.imageurl | trusted}}"/></a>
                             <h5 class="wrap"><a href="" ng-click="doViewMembers(myfriends.userid)">{{myfriends.name}}</a></h5>
                         </div>
                         <h1 class="col-md-12 margin-top-50 text-gray text-center" ng-show="!friendsfilter.length" ng-if="!loaded">
@@ -47,112 +47,71 @@
                         </h1>
                         </div>
                         <div ng-show="viewDetails==1">
-                            <a href="" class="back-button pull-right margin-right-40 margin-top-20" ng-click="initialLoad()"><i class="fa fa-arrow-circle-o-left"></i> Back to Myfriends</a>
-                        <div class="col-md-3 coach-details">
-                            <img ng-src="{{myImgSrc}}"/>
-                            <h3 class="margin-top-10 text-center">{{viewMemberDetails.name}}</h3>
-                        </div>
-                        <div class="col-md-9 margin-top40">
-                            <div class="row">
-                                <div class="col-md-9">
-
-                                    <div class="row margin-bottom-10">
-                                        <div class="col-md-4">
-                                            Name :
-                                        </div>
-                                        <div class="col-md-8">
-                                            {{viewMemberDetails.name}}
-                                        </div>
-                                    </div>
-                                    <div class="row margin-bottom-10">
-                                        <div class="col-md-4">
-                                            Email ID :
-                                        </div>
-                                        <div class="col-md-8">
-                                            {{viewMemberDetails.emailid}}
-                                        </div>
-                                    </div>
-
-                                    <div class="row margin-bottom-10">
-                                        <div class="col-md-4">
-                                            Gender :
-                                        </div>
-
-                                        <div class="col-md-8" ng-if="viewMemberDetails.gender == 1">
-                                            Male
-                                        </div>
-
-                                        <div class="col-md-8" ng-if="viewMemberDetails.gender == 2">
-                                            Female
-                                        </div>
-
-                                        <div class="col-md-8" ng-if="viewMemberDetails.gender == null">
-                                            N/A
-                                        </div>
-                                    </div>
-
-                                    <div class="row margin-bottom-10">
-                                        <div class="col-md-4">
-                                            About :
-                                        </div>
-                                        <div class="col-md-8">
-                                            {{viewMemberDetails.about}}
-                                        </div>
-                                    </div>
-                                    <div ng-if="viewMemberDetails.isprivacy==0">
-                                        <div class="row margin-bottom-10">
-                                            <div class="col-md-4">
-                                                DOB :
-                                            </div>
-                                            <div class="col-md-8">
-                                                {{viewMemberDetails.dob}}
-                                            </div>
-                                        </div>
-                                        <div class="row margin-bottom-10">
-                                            <div class="col-md-4">
-                                                Phone :
-                                            </div>
-                                            <div class="col-md-8">
-                                                {{viewMemberDetails.phone}}
-                                            </div>
-                                        </div>
-                                        <div class="row margin-bottom-10">
-                                            <div class="col-md-4">
-                                                Country :
-                                            </div>
-                                            <div class="col-md-8">
-                                                {{viewMemberDetails.country}}
-                                            </div>
-                                        </div>
-                                        <div class="row margin-bottom-10">
-                                            <div class="col-md-4">
-                                                State :
-                                            </div>
-                                            <div class="col-md-8">
-                                                {{viewMemberDetails.state}}
-                                            </div>
-                                        </div>
-                                        <div class="row margin-bottom-10">
-                                            <div class="col-md-4">
-                                                City :
-                                            </div>
-                                            <div class="col-md-8">
-                                                {{viewMemberDetails.city}}
-                                            </div>
-                                        </div>
-                                        <div class="row margin-bottom-10">
-                                            <div class="col-md-4">
-                                                Zipcode :
-                                            </div>
-                                            <div class="col-md-8">
-                                                {{viewMemberDetails.zipcode}}
-                                            </div>
-                                        </div>
-                                    </div>
+                            <div class="col-md-12">
+                                <div class="col-md-3 no-padding">
+                                    <div class="margin-right-20"><img class="border-image" ng-src="{{myImgSrc}}"/></div>
                                 </div>
+                                <div class="col-md-9 no-padding">
+                                    <table class="table table-bordered table-striped">
+                                        <tr>
+                                            <td class="col-md-4">Name</td>
+                                            <td class="col-md-8">{{viewMemberDetails.name}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Email ID</td>
+                                            <td>{{viewMemberDetails.emailid}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Gender</td>
+                                            <td>
+                                                <div ng-if="viewMemberDetails.gender == 1">
+                                                    Male
+                                                </div>
+
+                                                <div ng-if="viewMemberDetails.gender == 2">
+                                                    Female
+                                                </div>
+
+                                                <div ng-if="viewMemberDetails.gender == null">
+                                                    N/A
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr ng-if="viewMemberDetails.isprivacy==0">
+                                            <td>DOB</td>
+                                            <td>{{viewMemberDetails.dob}}</td>
+                                        </tr>
+                                        <tr ng-if="viewMemberDetails.isprivacy==0">
+                                            <td>Phone</td>
+                                            <td>{{viewMemberDetails.phone}}</td>
+                                        </tr>
+                                        <tr ng-if="viewMemberDetails.isprivacy==0">
+                                            <td>Country</td>
+                                            <td>{{viewMemberDetails.country}}</td>
+                                        </tr>
+                                        <tr ng-if="viewMemberDetails.isprivacy==0">
+                                            <td>State</td>
+                                            <td>{{viewMemberDetails.state}}</td>
+                                        </tr>
+                                        <tr ng-if="viewMemberDetails.isprivacy==0">
+                                            <td>City</td>
+                                            <td>{{viewMemberDetails.city}}</td>
+                                        </tr>
+                                        <tr ng-if="viewMemberDetails.isprivacy==0">
+                                            <td>Zipcode</td>
+                                            <td>{{viewMemberDetails.zipcode}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>About</td>
+                                            <td>{{viewMemberDetails.about}}</td>
+                                        </tr>
+                                    </table>
                                 </div>
-                        </div>
+                                <div class="col-md-12 text-center">
+                                     <a href="" class="main_button" ng-click="initialLoad()"><i class="fa fa-arrow-circle-o-left"></i> Back to Myfriends</a>
+                                </div>
                             </div>
+                        </div>
                     </div>
                 </div>
                 <div class="friend-request">
@@ -260,13 +219,13 @@
                         <div class="loader"></div>
                     </div>
                 </div>
-                <div class="row margin-top-20 content_scrollbar height-350">
-                    <div ng-repeat="searchfriends in searchFriendsList" ng-show="searchFriendsList.length!=0">
-                        <div>
-                            <div class="col-md-3">
+                <div class="margin-top-20 content_scrollbar height-350">
+                    <div ng-show="searchFriendsList.length>0">
+                        <div ng-repeat="searchfriends in searchFriendsList">
+                            <div class="col-md-2 no-padding">
                                 <img class="img-circle" ng-src="{{searchfriends.imageurl | trusted}}"/>
                             </div>
-                            <div class="col-md-9">
+                            <div class="col-md-10">
                                 <h5>{{searchfriends.name}}</h5>
                                 <!--<p class="margin-bottom-5" ng-if="searchfriends.isPrivacy == 1">{{searchfriends.emailid}}</p>-->
                                 <div class="margin-top-5">
@@ -281,7 +240,10 @@
                             </div>
                         </div>
                     </div>
-                    <h3 class="text-center text-gray margin-top-50" ng-show="searchFriendsList.length == 0">NO USERS FOUND!!!</h3>
+                    <div ng-show="searchFriendsList.length==0" class="margin-top-50 text-center">
+                        <img src="../../images/no-friend.png">
+                        <h3 class="text-gray" ng-show="searchFriendsList.length == 0">NO USERS FOUND!!!</h3>
+                    </div>
                 </div>
             </div>
         </div><!-- @end #content -->

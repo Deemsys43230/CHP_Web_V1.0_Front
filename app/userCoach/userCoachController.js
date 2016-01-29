@@ -20,6 +20,7 @@ userApp.controller('UserCoachController',function($scope,requestHandler,Flash,$l
         requestHandler.getRequest("user/getallCoachListbyUser/", "").then(function(response){
             $scope.usercoachlist1=response.data.getallCoachListbyUser;
 
+            if($scope.usercoachlist1.length>0)
             $scope.doGetCoachDetailsByUser(response.data.getallCoachListbyUser[0].userid);
 
             var ratingPromise;

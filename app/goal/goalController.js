@@ -181,23 +181,25 @@ userApp.controller('GoalController',function($scope,requestHandler,Flash,$route,
     $scope.viewRank=function(){
         requestHandler.postRequest("user/rankGoalList/",{"goalid" : $routeParams.id}).then(function(response){
             $scope.rankList=response.data.Goal_Data;
-        $(function(){
-            $("#lean_overlay").fadeTo(1000);
-            $("#modal1").fadeIn(600);
-            $(".common_model").show();
-        });
+            if($scope.goalDetail.status==1){
+                $(function(){
+                    $("#lean_overlay").fadeTo(1000);
+                    $("#modal1").fadeIn(600);
+                    $(".common_model").show();
+                });
 
-        $(".modal_close").click(function(){
-            $(".common_model").hide();
-            $("#modal1").hide();
-            $("#lean_overlay").hide();
-        });
+                $(".modal_close").click(function(){
+                    $(".common_model").hide();
+                    $("#modal1").hide();
+                    $("#lean_overlay").hide();
+                });
 
-        $("#lean_overlay").click(function(){
-            $(".common_model").hide();
-            $("#modal1").hide();
-            $("#lean_overlay").hide();
-        });
+                $("#lean_overlay").click(function(){
+                    $(".common_model").hide();
+                    $("#modal1").hide();
+                    $("#lean_overlay").hide();
+                });
+            }
 
         },function(){
             errorMessage(Flash,"Please try again later!");
@@ -269,6 +271,24 @@ userApp.controller('GoalController',function($scope,requestHandler,Flash,$route,
 
     $scope.resetdata = function(){
         $scope.friendsearch = "";
+        $(function(){
+            $("#lean_overlay").fadeTo(1000);
+            $("#modal").fadeIn(600);
+            $(".common_model").show();
+        });
+
+        $(".modal_close").click(function(){
+            $(".common_model").hide();
+            $("#modal").hide();
+            $("#lean_overlay").hide();
+        });
+
+        $("#lean_overlay").click(function(){
+            $(".common_model").hide();
+            $("#modal").hide();
+            $("#lean_overlay").hide();
+        });
+
     };
 
 });

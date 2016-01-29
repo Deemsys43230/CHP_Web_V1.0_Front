@@ -1,73 +1,3 @@
-<!-- login or register popup-->
-<div id="modal1" class="popupContainer" style="display:none;">
-    <header class="popupHeader">
-        <span class="header_title">Login</span>
-        <span class="modal_close"><i class="fa fa-times"></i></span>
-    </header>
-
-    <section class="popupBody">
-        <!-- Social Login -->
-        <div class="user_login1">
-            <div class="">
-                <a href="#" class="social_box fb">
-                    <span class="icon"><i class="fa fa-facebook"></i></span>
-                    <span class="icon_title">Login with Facebook</span>
-                </a>
-            </div>
-
-            <div class="centeredText">
-                <span>Or</span>
-            </div>
-
-            <form>
-                <p>Email</p>
-                <input type="text" />
-
-                <p>Password</p>
-                <input type="password" />
-            </form>
-
-            <a href="#" id="forgot_password1" class="forgot_password text-center">Forgot password?</a>
-
-            <div class="action_btns">
-                <div><a href="register_details.html" class="btn btn_red">Login</a></div>
-            </div>
-        </div>
-
-        <!-- Username & Password Login form -->
-        <div class="reset_password1">
-            <form name="forgotPasswordForm">
-                <p>Email</p>
-                <input type="email" name="emailid" required email ng-model="emailid"/>
-                <span ng-show="forgotPasswordForm.emailid.$dirty&&forgotPasswordForm.emailid.$invalid">
-                <span class="error-message" ng-show="forgotPasswordForm.emailid.$error.required"><span>Required.</span></span>
-                <span class="error-message" ng-show="forgotPasswordForm.emailid.$error.email"><span>Enter&nbsp;valid&nbsp;Email&nbsp;ID.</span></span>
-                </span>
-                <div class="action_btns margin-top-20">
-                    <div class="one_half"><a href="#" class="btn back_btn"><i class="fa fa-angle-double-left"></i> Back</a></div>
-                    <div class="one_half last"><a id="check_secret" class="btn btn_red"  ng-class="{'button-disable':loginForm.$invalid}" ng-click="doLogin()">Submit</a></div>
-                </div>
-            </form>
-
-        </div>
-
-        <!-- Answer for Secret Question -->
-        <div class="secret_question">
-            <form name="js">
-                <p>Secret Question :</p>
-                <p class="text-bold">fsdf</p>
-
-                <p>Secret Answer</p>
-                <input type="password"/>
-
-                <div class="action_btns margin-top-20">
-                    <div class="one_half"><a href="#" class="btn back_btn"><i class="fa fa-angle-double-left"></i> Back</a></div>
-                    <div class="one_half last"><a href="" class="btn btn_red">Submit</a></div>
-                </div>
-            </form>
-        </div>
-    </section>
-</div>
 
 <!-- Start Purchase Section -->
 <div class="section purchase">
@@ -568,7 +498,6 @@
 <script type="text/javascript" src="../../js/script.js"></script>
 
 <script type="text/javascript">
-    $("#modal_trigger1").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
 
     $(function(){
         // Calling Login Form

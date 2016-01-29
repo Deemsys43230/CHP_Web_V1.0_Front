@@ -2692,6 +2692,7 @@ ul.icons-list li, ul.list-unstyled li {
 ul.icons-list li i {
 	font-size: 14px;
 	margin-right: 4px;
+    width: 15px;
 }
 
 
@@ -8481,7 +8482,7 @@ a:hover, a:visited, a:link, a:active
 #profile{
 	display: block;
 	margin: 0px;
-	border-top: 4px solid orange;
+	border-top: 4px solid #f8ba01;
 	width: 270px;
 	height: 480px;
 	float: left;
@@ -8510,7 +8511,7 @@ a:hover, a:visited, a:link, a:active
 #demography-content {
 	display: block;
 	margin: 0px;
-	border-top: 4px solid orange;
+	border-top: 4px solid #f8ba01;
 	width: 1100px;
 	height: 500px;
 	float: left;
@@ -8538,7 +8539,15 @@ a:hover, a:visited, a:link, a:active
 
 .profile-image{
 	width:200px;
-	height: 200px;
+	height:200px;
+}
+
+.profile-image-style{
+    min-height: 200px;
+}
+
+.border-image{
+    border: 1px solid #ccc;
 }
 
 .profile-image-preview{

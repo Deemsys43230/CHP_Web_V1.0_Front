@@ -105,7 +105,7 @@
                     <li><a class="{{activeClass.index}}" href="#index">Home</a></li>
                     <li><a class="{{activeClass.howItWork}}" href="#howItWork">How It Works</a></li>
                     <li><a class="{{activeClass.aboutUs}}" href="#aboutUs">About Us</a></li>
-                    <li><a class="{{activeClass.portfolio}}" href="#portfolio">Portfolio</a></li>
+                    <!--<li><a class="{{activeClass.portfolio}}" href="#portfolio">Portfolio</a></li>-->
                     <li><a class="{{activeClass.blog}}" href="#blog">Blog</a></li>
                     <li><a class="{{activeClass.contact}}" href="#contact">Contact</a></li>
                 </ul>
@@ -127,20 +127,20 @@
 
         <div class="user_login">
             <!-- Social Login -->
-            <div class="">
+            <!--<div class="">
                 <a href="#" class="social_box fb">
                     <span class="icon"><i class="fa fa-facebook"></i></span>
                     <span class="icon_title">Login with Facebook</span>
                 </a>
-            </div>
+            </div>-->
 
             <!-- Username & Password Login form -->
-            <div class="centeredText">
+            <!--<div class="centeredText">
                 <span>Or</span>
-            </div>
+            </div>-->
             <div flash-message="3000" ></div>
             <form name="loginForm" novalidate>
-                <p>Email</p>
+                <p>Email ID</p>
                 <input type="email" name="username" ng-model="username" ng-keypress="checkIfEnterKeyWasPressedForLogin($event)" required validate-email/>
                     <span ng-show="loginForm.username.$dirty&&loginForm.username.$invalid && !loginForm.username.$pristine">
                     <span class="error-message" ng-show="loginForm.username.$error.required"><span>Required.</span></span>
@@ -163,7 +163,7 @@
         <div class="reset_password">
             <div flash-message="3000" ></div>
             <form name="forgotPasswordForm" novalidate>
-                <p>Email</p>
+                <p>Email ID</p>
                 <input type="email" name="emailid" required validate-email ng-model="emailid"/>
                     <span ng-show="forgotPasswordForm.emailid.$dirty&&forgotPasswordForm.emailid.$invalid && !forgotPasswordForm.emailid.$pristine">
                     <span class="error-message" ng-show="forgotPasswordForm.emailid.$error.required"><span>Required.</span></span>
@@ -180,7 +180,7 @@
         <!-- Answer for Secret Question -->
         <div class="secret_question">
             <div flash-message="3000" ></div>
-            <form name="secretAnswerForm">
+            <form name="secretAnswerForm" novalidate>
                 <p>Secret Question :</p>
                 <p class="text-bold" ng-if="secretQuestion==1">What was the name of your first pet?</p>
                 <p class="text-bold" ng-if="secretQuestion==2">What is the name of your best friend?</p>
@@ -204,7 +204,7 @@
 
         <!-- Register Form -->
         <div class="user_register">
-            <div class="">
+            <!--<div class="">
                 <a href="#" class="social_box fb">
                     <span class="icon"><i class="fa fa-facebook"></i></span>
                     <span class="icon_title">Sign Up with Facebook</span>
@@ -212,23 +212,23 @@
             </div>
             <div class="centeredText">
                 <span>Or</span>
-            </div>
+            </div>-->
             <div flash-message="3000" ></div>
-            <form name="registerForm" novalidate="novalidate">
+            <form name="registerForm" novalidate>
                 <p>Name</p>
                 <input type="text" name="name" ng-pattern="/^ *([a-zA-Z]+ ?)+ *$/"  ng-model="userForm.name" maxlength="30" required/>
                     <span ng-show="registerForm.name.$dirty&&registerForm.name.$invalid && !registerForm.name.$pristine">
                         <span class="error-message" ng-show="registerForm.name.$error.required"><span>Required.</span></span>
                          <span class="error-message" ng-show="registerForm.name.$error.pattern"><span>Enter&nbsp;valid&nbsp;Name.</span></span>
                     </span>
-                <p>Email</p>
+                <p>Email ID</p>
                 <input type="email" name="emailid" ng-model="userForm.emailid"  required validate-email emailexists/>
                     <span ng-show="registerForm.emailid.$dirty&&registerForm.emailid.$invalid && !registerForm.emailid.$pristine">
                         <span class="error-message" ng-show="registerForm.emailid.$error.required"><span>Required.</span></span>
                        <span class="error-message" ng-show="registerForm.emailid.$error.email"><span>Enter&nbsp;valid&nbsp;Email&nbsp;ID.</span></span>
 
                     </span>
-                <span class="error-message" ng-show="registerForm.emailid.$error.emailexists"><span>Email&nbsp;Address&nbsp;Already&nbsp;Exist.</span></span>
+                <span class="error-message" ng-show="registerForm.emailid.$error.emailexists"><span>Email&nbsp;ID&nbsp;Already&nbsp;Exist.</span></span>
                 <p>Password</p>
                 <input type="password"  name="password" id="pswd" ng-model="userForm.password" ng-pattern="/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-])(?!.*\s).{6,}$/"  maxlength="20"required/>
                     <span ng-show="registerForm.password.$dirty&&registerForm.password.$invalid && !registerForm.password.$pristine">
@@ -273,10 +273,10 @@
 
         <!-- Register Form Continuation-->
         <div class="user_register1">
-            <form name="registerForm2" novalidate="novalidate">
+            <form name="registerForm2" novalidate>
                 <p>Security Question</p>
                 <select  ng-model="userForm.secretquestion" name="secretquestion"  ng-required="userForm.secretanswer">
-                    <option value="">--Select secret question--</option>
+                    <option value="">--Select Security Question--</option>
                     <option value="1">What was the name of your first pet?</option>
                     <option value="2">What is the name of your best friend?</option>
                     <option value="3">What is your favourite dish?</option>
@@ -362,7 +362,7 @@
                     <h4><img src="../../images/footer-margo.png" class="img-responsive" alt="Footer Logo" /></h4>
                     <ul>
                         <li><span>Phone Number:</span> {{commonDetails.mobile}}</li>
-                        <li><span>Email:</span> {{commonDetails.supportemail}}</li>
+                        <li><span>Email ID:</span> {{commonDetails.supportemail}}</li>
                         <li><span>Website:</span> www.cyberhealth.com</li>
                     </ul>
                 </div>
