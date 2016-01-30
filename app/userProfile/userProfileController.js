@@ -61,6 +61,7 @@ userApp.controller('UserProfileController',['$scope','requestHandler','Flash',fu
             //Convert Integer to String
             if($scope.userProfile.gender)
             $scope.userProfile.gender=$scope.userProfile.gender.toString();
+            $scope.userProfile.zipcode=$scope.userProfile.zipcode.toString();
 
             $scope.selectedDate = $scope.userProfile.dob;
 
@@ -122,7 +123,7 @@ userApp.controller('UserProfileController',['$scope','requestHandler','Flash',fu
                 $scope.doGetProfile();
                 successMessage(Flash,"Successfully Updated");
                 //Copy Orginal
-                $scope.orginalUserProfile=angular.copy($scope.userProfile);
+               // $scope.orginalUserProfile=angular.copy($scope.userProfile);
             });
         });
     };
@@ -153,6 +154,7 @@ userApp.controller('UserProfileController',['$scope','requestHandler','Flash',fu
 
         requestHandler.postRequest("uploadProfileImage/",{'imageurl':image}).then(function(response){
             $scope.refreshImage();
+            $scope.doGetProfile();
         },function(response){
             errorMessage(Flash,"Please Try again later!");
         });
@@ -162,6 +164,8 @@ userApp.controller('UserProfileController',['$scope','requestHandler','Flash',fu
 
     //To Enable the update button if changes occur.
     $scope.isClean = function() {
+        console.log("ori",$scope.orginalUserProfile);
+        console.log("dad",$scope.userProfile);
         return angular.equals ($scope.orginalUserProfile, $scope.userProfile);
     };
 

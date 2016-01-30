@@ -268,6 +268,36 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         var userDemographyPromise=UserDashboardService.doGetDemographyDetails();
         userDemographyPromise.then(function(result){
             $scope.demography = result;
+            if($scope.userProfile.gender==1){
+                $scope.maleIdealWeight = ($scope.demography.height - 100 -(($scope.demography.height -150)/4));
+
+                if($scope.demography.weight < $scope.maleIdealWeight){
+                    $scope.upweight =1;
+                    $scope.balanceweight = $scope.maleIdealWeight - $scope.demography.weight;
+                   // alert($scope.balanceweight);
+                }
+                else if($scope.demography.weight > $scope.maleIdealWeight){
+                    $scope.upweight =0;
+                    $scope.balanceweight =  $scope.demography.weight - $scope.maleIdealWeight ;
+                   // alert($scope.balanceweight);
+                }
+            }
+            else if($scope.userProfile.gender ==2){
+                $scope.femaleIdealWeight = ($scope.demography.height - 100 -(($scope.demography.height -150)/2));
+
+
+            if($scope.demography.weight < $scope.femaleIdealWeight){
+                $scope.upweight =1;
+                $scope.balanceweight = $scope.femaleIdealWeight - $scope.demography.weight;
+              //  alert($scope.balanceweight);
+            }
+
+           else if($scope.demography.weight > $scope.femaleIdealWeight){
+                $scope.upweight =0;
+                $scope.balanceweight =  $scope.demography.weight -  $scope.femaleIdealWeight;
+                //alert($scope.balanceweight);
+            }
+            }
         });
     };
     $scope.doGetDemograph();
@@ -668,6 +698,8 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
             errorMessage(Flash, "Please try again later!")
         });
     };
+
+
 
     $scope.isCleanWeight=function(){
         return angular.equals(parseFloat($("#weightLog").val()), parseFloat($scope.originalWeight));

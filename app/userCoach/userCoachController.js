@@ -227,14 +227,14 @@ userApp.controller('UserCoachController',function($scope,requestHandler,Flash,$l
         $scope.coach = {
             status: 'coach-price'
         };
-        /*requestHandler.getRequest("coachSubscriptionDetail/","").then(function(response){
-            $scope.priceValue=response.data["Coach Subscription Detail"];
-            $scope.viewload=false;
+        requestHandler.getRequest("getCoachIndividualDetailbyUser/"+id,"").then(function(response){
+            $scope.priceValue=response.data.getCoachIndividualDetail.subscriptionDetail;
+            //$scope.viewload=false;
         }, function () {
             errorMessage(Flash, "Please try again later!")
-        });*/
+        });
 
-        //hard code
+       /* //hard code
         $scope.priceValue={
             "coachid": 8,
             "onemonth_amount": 20,
@@ -243,7 +243,7 @@ userApp.controller('UserCoachController',function($scope,requestHandler,Flash,$l
             "sixmonth_percentage": 3,
             "sixmonth_amount": 19.4,
             "status": 1
-        }
+        }*/
     };
 
     $scope.coachView=function(id){

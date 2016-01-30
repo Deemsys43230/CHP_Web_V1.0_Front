@@ -42,7 +42,7 @@
         </div>
     </div>
     <div class="col-md-4 no-padding">
-        <p hidden id="weight_entry">40%</p>
+        <p hidden id="weight_entry">48%</p>
         <div id="weight_level">
             <div id="col" class="weight_level"></div>
         </div>
@@ -58,14 +58,22 @@
         <div class="text-center small margin-top-10">Weight Level</div>
         <br/>
         <div class="col-md-7 no-padding">
+
             <h5>Idle Weight <span class="pull-right">: &nbsp;</span></h5>
-            <h5 class="margin-top-10">Original Weight <span class="pull-right">: &nbsp;</span></h5>
+            <h5 class="margin-top-10">Current Weight <span class="pull-right">: &nbsp;</span></h5>
         </div>
         <div class="col-md-5 no-padding">
-            <h5><span class="yellow">&nbsp;&nbsp;</span> 65 Kgs</h5>
-            <h5 class="margin-top-10"><span class="green">&nbsp;&nbsp;</span> 58 Kgs</h5>
+            <div ng-if="userProfile.gender==1">
+                <h5><span class="yellow">&nbsp;&nbsp;</span> {{maleIdealWeight}} Kgs</h5>
+            </div>
+            <div ng-if="userProfile.gender==2">
+                <h5><span class="yellow">&nbsp;&nbsp;</span> {{femaleIdealWeight}}Kgs</h5>
+            </div>
+
+            <h5 class="margin-top-10"><span class="green">&nbsp;&nbsp;</span> {{demography.weight}} Kgs</h5>
         </div><br/><br/>
-        <p>Your Are Adviced to increase your weight by 7 Kgs</p>
+        <div ng-show="upweight == 1"><p>Your Are Adviced to increase your weight by {{balanceweight}} Kgs</p></div>
+        <div ng-hide="upweight == 1"><p>Your Are Adviced to decrease your weight by {{balanceweight}} Kgs</p></div>
     </div>
 
 <!-- End Page Banner -->

@@ -49,7 +49,7 @@
                             </thead>
                             <tbody >
                             <tr dir-paginate="mycourse in coursefilter=(usercourselist  | startsWithLetterCourse: coursepay | orderBy:sortKey:reverse | itemsPerPage: 8)" ng-show="usercourselist.length!=0">
-                                <td><a href="#paymentDetails/{{mycourse.userid}}">{{mycourse.coursename}}</a></td>
+                                <td>{{mycourse.coursename}}</td>
                                 <td>{{mycourse.categoryname}}</td>
                                 <td>{{mycourse.ownername}}</td>
                                 <td>{{mycourse.purchasedon}}</td>
