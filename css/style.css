@@ -9873,7 +9873,7 @@ input.friend-search{
 }
 
 .course-title{
-    height : 70px;
+    max-height : 70px;
     overflow-y: hidden;
 }
 

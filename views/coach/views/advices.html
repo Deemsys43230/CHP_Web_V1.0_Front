@@ -6,19 +6,19 @@
         <div class="row">
             <div class="col-md-12">
                 <a href="#dashboard" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back to Dashboard</a>
-                <div flash-message="2000" class="col-md-4 pull-right"></div>
+                <div flash-message="2000" class="col-md-3 pull-right no-padding"></div>
                 <h4 class="classic-title"><span>My Advice</span></h4>
                 <form name="adviceForm">
-                <div>Description :</div>
+                <h5 class="text-muted">Description :</h5>
                 <textarea class="height-150 forum-textarea" name="description" ng-model="myadvice.description" maxlength="600" required></textarea>
                  <span ng-show="adviceForm.description.$dirty&&adviceForm.description.$invalid">
                                   <span class="error-message textarea-errormessage40" ng-show="adviceForm.description.$error.required"><span>Required.</span></span>
                              </span>
                 <div class="text-center">
                     <a href="" class="btn btn-success" ng-disabled="adviceForm.$invalid || isClean()" ng-click="doInsertOrUpdateMyAdvice()">Save Advice</a>
-                    <a href="#dashboard" class="btn btn-danger">Cancel</a>
-                    <a href=""  class="btn btn-success" ng-click="doEnableDisableMyAdvice()" ng-show="myadvice.status==0">Enable</a>
-                    <a href="" class="btn btn-danger" ng-click="doEnableDisableMyAdvice()" ng-hide="myadvice.status==0">Disable</a>
+                    <a href="#dashboard" class="btn btn-warning">Cancel</a>
+                    <span ng-show="myadvice.status==0"><a href=""  class="btn btn-success" ng-click="doEnableDisableMyAdvice()">Enable&nbsp;</a></span>
+                    <span ng-hide="myadvice.status==0"><a href="" class="btn btn-danger" ng-click="doEnableDisableMyAdvice()">Disable</a></span>
                 </div>
                 </form>
             </div>
