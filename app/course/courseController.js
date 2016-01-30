@@ -599,7 +599,6 @@ coachApp.controller('CourseController',function($scope,requestHandler,Flash,$rou
         $scope.getCourseDetails();
 
         if($scope.courseSections!=0){
-            var table = document.getElementById("table1");
             RowSorter('table[attr-sample=thetable]', {
                 handler: 'td.sorter',
                 stickFirstRow : true,

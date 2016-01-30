@@ -1,7 +1,8 @@
 <style>
-    table.sorting-table {cursor: move;}
-    table tr.sorting-row td {background-color: #fff; box-shadow: 0 0 2px #ccc;padding: 3px 5px 0 5px;}
-    table tr.sorting-row td.sorter {background-color: transparent !important;box-shadow:none!important;}
+    table.sorting-table {cursor: move; display:inline-block; width:100%;}
+    table.sorting-table tbody{display:inline-block; width:100%;}
+    table tr.sorting-row td {background-color: transparent; /*box-shadow: 0 0 2px #ccc;*/padding: 3px 5px 0 5px;}
+    table tr.sorting-row td.sorter {background-color: transparent !important;/*box-shadow:none!important;*/}
     table td.sorter {color: #f80; width: 25px; cursor: move;}
 </style>
 
@@ -32,13 +33,13 @@
                                 : <span ng-show="courseDetails.price==0" class="text-green text-bold">Free</span>
                                 <span ng-hide="courseDetails.price==0" class="text-red text-bold">{{courseDetails.price}} $</span>
                             </span>
-                            <span class="col-md-5">Created On</span>
-                            <span class="col-md-7">: {{courseDetails.createdon}}</span>
-                            <span class="col-md-5">Students</span>
+                            <span class="col-md-5">No. of Enrolls</span>
                             <span class="col-md-7">
                                 : <span ng-show="courseDetails.enrollcount==0">----</span>
                                 <span ng-hide="courseDetails.enrollcount==0">{{courseDetails.enrollcount}}</span>
                             </span>
+                            <span class="col-md-5">Created On</span>
+                            <span class="col-md-7">: {{courseDetails.createdon}}</span>
                             <span class="col-md-5">Reviewed On</span>
                             <span class="col-md-7">
                                 : <span ng-show="!courseDetails.reviewdate">----</span>
@@ -54,15 +55,15 @@
                         <span ng-show="courseDetails.canedit==1"><a ng-click="deleteModel()" id="modal_trigger" href="" class="main-button red_back margin-top-10">Delete course</a></span>
                     </div>
                     <div class="col-md-9 no-padding">
-                        <h2 class="wrap">{{courseDetails.coursename}}</h2>
+                        <h2 class="wrap margin-right-20">{{courseDetails.coursename}}</h2>
                         <div ng-if="loaded">
                             <div class="loader-style">
                                 <div class="loader"></div>
                             </div>
                         </div>
-                        <h5 class="margin-top-5 text-muted wrap">{{courseDetails.coursesubtitle}}</h5>
+                        <h5 class="margin-top-5 margin-right-20 text-muted wrap">{{courseDetails.coursesubtitle}}</h5>
                         <p class="margin-top-10 margin-right-20 wrap" ng-bind-html="courseDetails.coursedescription | html"></p>
-                        <div class="margin-top-15 ">
+                        <div class="margin-top-15">
                             <div ng-show="courseSections.length==0 && courseDetails.canedit==1" class="margin-top-20">
                                 <div class="col-md-5">
                                     <img class="pull-right" src="../../images/no-section.png"/>
@@ -72,33 +73,33 @@
                                     <a href="#courseSectionAdd/{{courseDetails.courseid}}" class="main-button margin-top-10">Add Section</a>
                                 </div>
                             </div>
-                            <div ng-show="courseDetails.canedit==0" class="col-md-4">
-                                <h5 ng-repeat="section in courseSections" class="margin-bottom-5 wrap">Section {{section.sequenceno}} : <a href="#courseSection/{{section.sectionid}}" >{{section.sectiontitle}}</a>&nbsp;&nbsp;&nbsp;<span ng-show="courseDetails.canedit==1"><a href="#courseSectionEdit/{{section.sectionid}}" class="fa fa-pencil"></a></span></h5>
+                            <div ng-show="courseDetails.canedit==0" class="col-md-12 no-padding">
+                                <h5 ng-repeat="section in courseSections" class="margin-bottom-5 margin-right-20 wrap">Section {{section.sequenceno}} : <a href="#courseSection/{{section.sectionid}}" >{{section.sectiontitle}}</a>&nbsp;&nbsp;&nbsp;<span ng-show="courseDetails.canedit==1"><a href="#courseSectionEdit/{{section.sectionid}}" class="fa fa-pencil"></a></span></h5>
                             </div>
                         </div>
-
-                        <table attr-sample="thetable" ng-show="courseDetails.canedit==1">
-                        <tbody>
-                        <tr ng-repeat="section in courseSections" >
-                            <td class="sorter fa fa-arrows"></td>
-                            <td>
-                                <h5 class="col-md-9 margin-bottom-5 wrap">&nbsp;&nbsp;Section {{section.sequenceno}} :
-                                    <a href="#courseSection/{{section.sectionid}}" class="wrap">{{section.sectiontitle}}</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <div class="col-md-12 no-padding" ng-show="courseDetails.canedit==1">
+                            <table class="sorting-table" attr-sample="thetable">
+                                <tbody>
+                                <tr ng-repeat="section in courseSections">
+                                    <td class="sorter fa fa-arrows"></td>
+                                    <td>
+                                        <h5 class="col-md-9 margin-bottom-5 wrap">Section {{section.sequenceno}} :
+                                            <a href="#courseSection/{{section.sectionid}}" class="wrap">{{section.sectiontitle}}</a>&nbsp;&nbsp;&nbsp;&nbsp;
                                         <span ng-show="courseDetails.canedit==1">
                                             <a href="#courseSectionEdit/{{section.sectionid}}?cancelvalue=1" title="Edit Section" class="text-primary fa fa-pencil"></a>&nbsp;&nbsp;
                                             <a href="" ng-click="sectionDeleteModel(section.sectionid)" title="Delete Section" class="text-red fa fa-trash"></a>
                                         </span>
-                                </h5>
-                            </td>
-                        </tr>
-                        </tbody>
-                        <tfoot hidden>
-                        <tr>
-                            <td colspan="4" id="logarea">&nbsp;</td>
-                        </tr>
-                        </tfoot>
-                    </table>
-
+                                        </h5>
+                                    </td>
+                                </tr>
+                                </tbody>
+                                <tfoot hidden>
+                                <tr>
+                                    <td colspan="4" id="logarea">&nbsp;</td>
+                                </tr>
+                                </tfoot>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>

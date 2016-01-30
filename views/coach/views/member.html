@@ -36,11 +36,10 @@
                     <tbody>
                         <tr  dir-paginate="mymembers in memberfilter=(myMembersList | startsWithLetterMember : membersearch | itemsPerPage: 10 )" ng-show="myMembersList.length!=0">
                             <td>{{mymembers.userid}}</td>
-                            <td>{{mymembers.name}}</td>
-                            <td>{{mymembers.emailid}}</td>
+                            <td><span class="line-clamp-md-low">{{mymembers.name}}</span></td>
+                            <td><span class="line-clamp-md-low">{{mymembers.emailid}}</span></td>
                             <td>
                                 <a href="#memberView/{{mymembers.userid}}" class="btn-xs btn-primary">View Details</a>
-
                             </td>
                         </tr>
                         <tr ng-show="myMembersList.length==0 || !memberfilter.length"><td colspan="4" class="text-center">No Records Found !!!</td></tr>

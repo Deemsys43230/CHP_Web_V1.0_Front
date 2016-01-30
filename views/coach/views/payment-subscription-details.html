@@ -1,13 +1,14 @@
 
 
 <!-- Start Page Banner -->
-<div class="page-banner1">
-    <div id="w" class="clearfix">
-        <div id="demography-content" ng-init="studentSubscriptionDetailsInit()">
 
-            <div class="col-md-12 min-height-450">
+<div class="page-banner">
+    <div class="container">
+        <div class="row min-height-450"  ng-init="studentSubscriptionDetailsInit()">
+
+            <div class="col-md-12">
                 <a href="#subscribersPayments" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back to subscribers list</a>
-                <h5 class="classic-title"><i class="fa fa-newspaper-o"></i>&nbsp;&nbsp;COURSE PURCHASED DETAILS</h5>
+                <h5 class="classic-title"><span><i class="fa fa-newspaper-o"></i>&nbsp;&nbsp;COURSE PURCHASED DETAILS</span></h5>
                 <div ng-if="loaded">
                     <div class="loader-style">
                         <div class="loader"></div>
@@ -19,30 +20,52 @@
                     <h5 class="wrap">{{coachDetails.coachname}}</h5>
                     <h6 class="wrap">{{coachDetails.coachemailid}}</h6>
                 </div>
-                <div class="col-md-8">
+                <div class="col-md-8 margin-bottom-20">
                     <h4 class="col-md-12 text-center">PAYMENT DETAILS<br/><br/></h4>
-                    <h5>
-                        <div class="col-md-4">Receipt Id</div>
-                        <div class="col-md-8 no-padding">:&nbsp;&nbsp;{{outwardDetails.outwardid}}</div>
-                        <div class="col-md-4">Amount</div>
-                        <div class="col-md-8 no-padding">:&nbsp;&nbsp;{{outwardDetails.amount}}</div>
-                        <div class="col-md-4">Receiver Email id</div>
-                        <div class="col-md-8 no-padding">:&nbsp;&nbsp;{{outwardDetails.receiveremailid}}</div>
-                        <div class="col-md-4">Receiver Account id</div>
-                        <div class="col-md-8 no-padding">:&nbsp;&nbsp;{{outwardDetails.receiveraccountid}}</div>
-                        <div class="col-md-4">Sender Email Id</div>
-                        <div class="col-md-8 no-padding">:&nbsp;&nbsp;{{outwardDetails.senderemailid}}</div>
-                        <div class="col-md-4">Sender Account Id</div>
-                        <div class="col-md-8 no-padding">:&nbsp;&nbsp;{{outwardDetails.senderaccountid}}</div>
-                        <div class="col-md-4">Transaction Id</div>
-                        <div class="col-md-8 no-padding">:&nbsp;&nbsp;{{outwardDetails.transactionid}}</div>
-                        <div class="col-md-4">Transcation Date</div>
-                        <div class="col-md-8 no-padding">:&nbsp;&nbsp;{{outwardDetails.transactiondate}}</div>
-                        <div class="col-md-4">Transaction Status</div>
-                        <div class="col-md-8 no-padding">:&nbsp;&nbsp;{{outwardDetails.transactionstatus}}</div>
-                        <div class="col-md-4">Currency code</div>
-                        <div class="col-md-8 no-padding">:&nbsp;&nbsp;{{outwardDetails.currencycode}}</div>
-                    </h5>
+                    <div class="col-md-12">
+                        <table class="table table-bordered table-striped">
+                            <tr>
+                                <td class="col-md-4">Receipt ID</td>
+                                <td class="col-md-8">{{outwardDetails.outwardid}}</td>
+                            </tr>
+                            <tr>
+                                <td>Purchased Amount</td>
+                                <td>{{outwardDetails.amount}}</td>
+                            </tr>
+                            <tr>
+                                <td>Receiver Email ID</td>
+                                <td>{{outwardDetails.receiveremailid}}</td>
+                            </tr>
+                            <tr>
+                                <td>Receiver Account ID</td>
+                                <td>{{outwardDetails.receiveraccountid}}</td>
+                            </tr>
+                            <tr>
+                                <td>Sender Email ID</td>
+                                <td>{{outwardDetails.senderemailid}}</td>
+                            </tr>
+                            <tr>
+                                <td>Sender Account ID</td>
+                                <td>{{outwardDetails.senderaccountid}}</td>
+                            </tr>
+                            <tr>
+                                <td>Transaction ID</td>
+                                <td>{{outwardDetails.transactionid}}</td>
+                            </tr>
+                            <tr>
+                                <td>Transaction Date</td>
+                                <td>{{outwardDetails.transactiondate}}</td>
+                            </tr>
+                            <tr>
+                                <td>Transaction Status</td>
+                                <td>{{outwardDetails.transactionstatus}}</td>
+                            </tr>
+                            <tr>
+                                <td>Currency Code</td>
+                                <td>{{outwardDetails.currencycode}}</td>
+                            </tr>
+                        </table>
+                    </div>
                 </div>
                 <div class="col-md-2 no-padding">
                     <h4>SUBSCRIBER DETAILS</h4><br/>
