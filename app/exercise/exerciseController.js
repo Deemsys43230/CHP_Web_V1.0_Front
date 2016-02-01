@@ -169,7 +169,7 @@ adminApp.controller('ExerciseEditController',function($q,$scope,requestHandler,F
            $scope.originalImage=$scope.exerciseDetail.imageurl+"?decache="+Math.random();
            // $scope.originalImage=$scope.exerciseDetail.imageurl.substring($scope.exerciseDetail.imageurl.indexOf("/")+14,$scope.exerciseDetail.imageurl.length)
 
-         
+
             $scope.exerciseDetail.imageurl=$scope.exerciseDetail.imageurl+"?decache="+Math.random();
 
            $scope.exerciseDetail.tags =response.data.ExerciseDetail.tags;

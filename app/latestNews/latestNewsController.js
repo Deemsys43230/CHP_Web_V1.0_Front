@@ -46,6 +46,10 @@ adminApp.controller('LatestNewsController',function($scope,requestHandler,Flash,
     //To Enable or Disable Latest News
 
     $scope.doEnableDisableLatestNews=function(id){
+        if($('.search-list-form').css('display') != 'none'){
+            $(".search-list-form").hide();
+            $(".search-list-form").show(2400);
+        }
         requestHandler.postRequest("admin/disableLatestNews/",{'newsid':id}).then(function(response){
 
             $scope.doGetLatestNews();
@@ -61,6 +65,12 @@ adminApp.controller('LatestNewsController',function($scope,requestHandler,Flash,
         $scope.paginationLoad=false;
         $scope.doGetLatestNews();
     };
+
+    // Search Food Type
+    $('.show-list-search').click(function() {
+        $('.search-list-form').toggle(300);
+        $('.search-list-form input').focus();
+    });
 });
 
 adminApp.controller('LatestNewsEditController',function($scope,requestHandler,Flash,$location,$routeParams,siteMenuService) {
@@ -122,6 +132,24 @@ adminApp.filter('html', ['$sce', function ($sce) {
         return $sce.trustAsHtml(text);
     };
 }]);
+
+adminApp.filter('startsWithLetterNews', function () {
+
+    return function (items, newssearch) {
+        var filtered = [];
+        var letterMatch = new RegExp(newssearch, 'i');
+        if(!items){}
+        else{
+            for (var i = 0; i < items.length; i++) {
+                var item = items[i];
+                if (letterMatch.test(item.title) || letterMatch.test(item.datetime)) {
+                    filtered.push(item);
+                }
+            }
+        }
+        return filtered;
+    };
+});
 
 var commonApp = angular.module('commonApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate']);
 

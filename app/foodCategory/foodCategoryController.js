@@ -49,6 +49,7 @@ adminApp.controller('FoodCategoryController',function($scope,requestHandler,Flas
     $scope.doEditFoodCategory=function(id){
         $scope.isNew = false;
         $scope.title = "Edit Category";
+        $scope.foodCategoryAddForm.$setPristine();
 
         $(function(){
             $("#lean_overlay").fadeTo(1000);
