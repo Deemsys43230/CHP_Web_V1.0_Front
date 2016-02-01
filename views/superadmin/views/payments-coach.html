@@ -4,7 +4,6 @@
 <div class="page-banner">
     <div class="container">
         <div class="row">
-
             <div class="col-md-12 min-height-450" ng-init="coachListInit()">
                 <a href="#dashboard" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back to Dashboard</a>
                 <!-- Stat Search -->
@@ -24,10 +23,10 @@
                     <thead>
                     <tr class="warning sort-icon">
                         <th class="col-md-3">Coach Name<i ng-click="sortBy('coachname')" class="{{coachSortIcons.coachname}} pull-right"></i></th>
-                        <th class="col-md-2">Subscription Count<i ng-click="sortBy('coachsubscriptioncount')" class="{{coachSortIcons.coachsubscriptioncount}} pull-right"></i></th>
-                        <th class="col-md-2">Basic Pay/month $<i ng-click="sortBy('coachonemonthpay')" class="{{coachSortIcons.coachonemonthpay}} pull-right"></i></th>
-                        <th class="col-md-2">Total Earn $<i ng-click="sortBy('toatlearningsCoach')" class="{{coachSortIcons.toatlearningsCoach}} pull-right"></i></th>
-                        <th class="col-md-2">Share Amount $<i ng-click="sortBy('totalearningsAdmin')" class="{{coachSortIcons.totalearningsAdmin}} pull-right"></i></th>
+                        <th class="col-md-2">No.of Subscription<i ng-click="sortBy('coachsubscriptioncount')" class="{{coachSortIcons.coachsubscriptioncount}} pull-right"></i></th>
+                        <th class="col-md-2">Basic Pay/month ($)<i ng-click="sortBy('coachonemonthpay')" class="{{coachSortIcons.coachonemonthpay}} pull-right"></i></th>
+                        <th class="col-md-2">Earn ($)<i ng-click="sortBy('toatlearningsCoach')" class="{{coachSortIcons.toatlearningsCoach}} pull-right"></i></th>
+                        <th class="col-md-2">Share ($)<i ng-click="sortBy('totalearningsAdmin')" class="{{coachSortIcons.totalearningsAdmin}} pull-right"></i></th>
                         <th class="col-md-1">Options</th>
                     </tr>
                     </thead>

@@ -24,8 +24,6 @@ adminApp.controller('FoodCategoryController',function($scope,requestHandler,Flas
         $('.search-list-form input').focus();
     });
 
-
-
     $scope.doAddFoodCategory=function(){
         $scope.loaded=true;
         requestHandler.postRequest("admin/checkCategoryNameExists/",$scope.foodCategory).then(function(response){
@@ -154,6 +152,30 @@ adminApp.controller('FoodCategoryController',function($scope,requestHandler,Flas
         $scope.foodCategoryAddForm.$setPristine();
         $scope.foodCategory.categoryname="";
         //$scope.foodCategoryEditForm.$setPristine();
+        $scope.title = "Add Category";
+        $scope.isNew = true;
+
+        if($('.search-list-form').css('display') != 'none'){
+            $(".search-list-form").hide();
+        }
+
+        $(function(){
+            $("#lean_overlay").fadeTo(1000);
+            $("#category").fadeIn(600);
+            $(".common_model").show();
+        });
+
+        $(".modal_close").click(function(){
+            $(".common_model").hide();
+            $("#category").hide();
+            $("#lean_overlay").hide();
+        });
+
+        $("#lean_overlay").click(function(){
+            $(".common_model").hide();
+            $("#category").hide();
+            $("#lean_overlay").hide();
+        });
     };
 
     //Initial Load

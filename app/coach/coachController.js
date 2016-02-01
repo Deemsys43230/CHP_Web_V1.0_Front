@@ -36,7 +36,7 @@ adminApp.controller('CoachController',function($scope,requestHandler,Flash) {
         $scope.coach.role=2;
 
       requestHandler.postRequest("admin/registerCoach/",$scope.coach).then(function(){
-            successMessage(Flash,"Registration Successful");
+            successMessage(Flash,"Successfully Registered");
             /*To Close Modal*/
              $(".common_model").hide();
              $("#modal").hide();
@@ -70,6 +70,10 @@ adminApp.controller('CoachController',function($scope,requestHandler,Flash) {
         $scope.coach.password="";
         $scope.coach.confirm_password="";
         $scope.coachRegisterForm.$setPristine();
+
+        if($('.search-list-form').css('display') != 'none'){
+            $(".search-list-form").hide();
+        }
     };
 
 });

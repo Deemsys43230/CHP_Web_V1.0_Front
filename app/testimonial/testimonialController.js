@@ -30,7 +30,7 @@ adminApp.controller('TestimonialController',function($scope,requestHandler,Flash
 
     //summer note
     $scope.options = {
-        height: 250
+        height: 200
     };
 
     // To display Testimonials admin view
@@ -98,7 +98,7 @@ adminApp.controller('TestimonialEditController',function($scope,requestHandler,F
 
     //summer note
     $scope.options = {
-        height: 250
+        height: 200
     };
 
     $scope.imageAdded=false;

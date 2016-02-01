@@ -11,8 +11,7 @@
             </div>
             <div class="col-md-9" ng-init="editForumInit()">
                 <a href="#forums" class="back-button pull-right margin-left-10"><i class="fa fa-arrow-circle-o-left"></i> Back to Forum List</a>
-                <h3 class="margin-bottom-10"><i class="fa fa-pencil"></i> &nbsp;{{title}}</h3>
-                <hr/>
+                <h4 class="classic-title"><span><i class="fa fa-pencil"></i> &nbsp;{{title}}</span></h4>
                 <div class="row">
                     <form name="ForumForm" class="margin-top-10" novalidate>
                         <div class="col-md-2">
@@ -34,10 +33,10 @@
                             <h4>Content :</h4>
                         </div>
                         <div class="col-md-10">
-                            <textarea type="text" class="height-150 form-control" name="description" ng-model="forumDetails.postdescription" maxlength="300"  required/></textarea>
-                             <span ng-show="ForumForm.description.$dirty&&ForumForm.description.$invalid">
+                            <span ng-show="ForumForm.description.$dirty&&ForumForm.description.$invalid">
                                   <span class="error-message textarea-errormessage40" ng-show="ForumForm.description.$error.required"><span>Required.</span></span>
                              </span>
+                            <textarea type="text" class="height-150 form-control" name="description" ng-model="forumDetails.postdescription" maxlength="300"  required/></textarea>
                            <!-- <div summernote config="options" name="description"  ng-model="forumDetails.postdescription" required></div>-->
                         </div>
                     </form>

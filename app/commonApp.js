@@ -328,7 +328,7 @@ commonApp.controller('LoginController',function($scope,requestHandler,Flash,$win
                 $(".user_register1").hide();
                 $(".user_login").show();
                 $(".header_title").text('Login');
-                successMessage(Flash,"Register Successful!");
+                successMessage(Flash,"Registration Successful!");
                 $scope.reset();
             }
         });
@@ -352,7 +352,7 @@ commonApp.controller('LoginController',function($scope,requestHandler,Flash,$win
                 $scope.secretQuestion=response.data.secretquestion;
             }
             else if(response.data.Response_status==2){
-                successMessage(Flash,"Please check your Email ID <br/>to reset the password!");
+                successMessage(Flash,"Please check your Email<br/>to reset the password!");
                 $scope.emailid="";
                 $scope.forgotPasswordForm.$setPristine();
              /*   $(".user_login").hide();

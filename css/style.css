@@ -1315,7 +1315,7 @@ a.update-button:hover{
  }
 
 .search-list-form.override{
-    right: 10px !important;
+    right: 3px !important;
     top: 0 !important;
 }
 
@@ -3607,7 +3607,7 @@ ul.icons-list li i {
 
 .classic-title {
     font-size: 20px;
-	margin-bottom: 15px;
+	margin-bottom: 10px;
 	padding-bottom: 10px;
 	border-bottom: 3px solid #eee;
     font-weight: 600;

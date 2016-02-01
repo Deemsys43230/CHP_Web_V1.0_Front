@@ -1719,7 +1719,7 @@ adminApp.factory("siteMenuService", function () {
         {
             "id":4,
             "name": "FAQ List",
-            "icon": "list-ul",
+            "icon": "question-circle",
             "href": "site",
             "active": ""
         },
@@ -1758,13 +1758,13 @@ adminApp.factory("siteMenuService", function () {
         {
             "id":1,
             "name": "Forums",
-            "icon": "comment-o",
+            "icon": "comments",
             "href": "forums",
             "active": ""
         },
         {
             "name": "Address Info",
-            "icon": "list-ul",
+            "icon": "map-marker",
             "href": "settings",
             "active": ""
         },
@@ -1775,7 +1775,7 @@ adminApp.factory("siteMenuService", function () {
             "active": ""
         },
         {
-            "name": "Payment Settings",
+            "name": "Payment Info",
             "icon": "dollar",
             "href": "paypalSettings",
             "active": ""

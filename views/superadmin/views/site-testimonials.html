@@ -9,10 +9,10 @@
                 <div ng-include src="'views/site-menu.html'" onload="activeClass"></div>
             </div>
             <div class="col-md-9 min-height-450" ng-init="init()">
-                <a href="#dashboard" class="back-button pull-right margin-left-10"><i class="fa fa-arrow-circle-o-left"></i> Back to Dashboard</a>
-                <a href="#addTestimonial" class="back-button pull-right"><i class="fa fa-plus-circle"></i> Add Testimonial</a>
-                <div flash-message="2000" class="col-md-4 pull-right"></div>
-                <h3 class="margin-bottom-10"><i class="fa fa-comment"></i> &nbsp;Testimonial List</h3>
+                <a href="#dashboard" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back to Dashboard</a>
+                <a href="#addTestimonial" class="back-button pull-right margin-left-5"><i class="fa fa-plus-circle"></i> Add Testimonial</a>
+                <div flash-message="2000" class="col-md-4 pull-right no-padding"></div>
+                <h4 class="classic-title"><span><i class="fa fa-comment"></i> &nbsp;Testimonial List</span></h4>
                 <div ng-if="loaded">
                     <div class="loader-style">
                         <div class="loader"></div>
@@ -31,7 +31,7 @@
                         <td><span class="line-clamp-lg">{{testimonial.title}}</span></td>
                         <td><span class="line-clamp-sm">{{testimonial.givenby}}</span></td>
                         <td>
-                            <a href="#viewTestimonial/{{testimonial.testimonialid}}" class="btn-xs btn-primary">View</a>
+                            <a href="#viewTestimonial/{{testimonial.testimonialid}}" class="btn-xs btn-primary">View Details</a>
                             <a href="#editTestimonial/{{testimonial.testimonialid}}" class="btn-xs btn-warning">Edit</a>
                             <a href="" class="btn-xs btn-success" ng-click="doEnableDisableTestimonials(testimonial.testimonialid)" ng-show="testimonial.status==0">Enable</a>
                             <a href="" class="btn-xs btn-danger" ng-click="doEnableDisableTestimonials(testimonial.testimonialid)" ng-hide="testimonial.status==0">Disable</a>

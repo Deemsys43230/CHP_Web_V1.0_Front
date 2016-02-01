@@ -14,7 +14,7 @@ adminApp.controller('LatestNewsController',function($scope,requestHandler,Flash,
 
     //summer note
     $scope.options = {
-        height: 350
+        height: 250
     };
 
     // To display Latest news
@@ -75,7 +75,7 @@ adminApp.controller('LatestNewsEditController',function($scope,requestHandler,Fl
 
     //summer note
     $scope.options = {
-        height: 350
+        height: 250
     };
 
     var originalnews ="";

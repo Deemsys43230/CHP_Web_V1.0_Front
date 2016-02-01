@@ -57,7 +57,6 @@ adminApp.controller('MemberController',function($scope,requestHandler,Flash,$rou
             $(".search-list-form").hide();
             $(".search-list-form").show(2400);
         }
-
         requestHandler.postRequest("admin/enableordisableUser/",{"userid":userId}).then(function(response){
             $scope.doGetMemberList();
             successMessage(Flash,"Successfully Updated");

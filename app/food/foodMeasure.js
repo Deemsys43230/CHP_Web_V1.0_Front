@@ -6,12 +6,37 @@ adminApp.controller('FoodMeasureController',function($scope,requestHandler,Flash
     $scope.activeClass = {measure:'active'};
     $scope.isNew = true;
     $scope.title = "Add Measure";
-var original ="";
+    var original ="";
+
     //Reset Scope
     $scope.reset=function(){
         $scope.list={};
         $scope.measureForm.$setPristine();
         $scope.list.measurename="";
+        $scope.isNew = true;
+        $scope.title = "Add Measure";
+
+        if($('.search-list-form').css('display') != 'none'){
+            $(".search-list-form").hide();
+        }
+
+        $(function(){
+            $("#lean_overlay").fadeTo(1000);
+            $("#measure").fadeIn(600);
+            $(".common_model").show();
+        });
+
+        $(".modal_close").click(function(){
+            $(".common_model").hide();
+            $("#measure").hide();
+            $("#lean_overlay").hide();
+        });
+
+        $("#lean_overlay").click(function(){
+            $(".common_model").hide();
+            $("#measure").hide();
+            $("#lean_overlay").hide();
+        });
 
     };
 

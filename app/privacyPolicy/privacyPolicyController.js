@@ -12,7 +12,7 @@ adminApp.controller('PrivacyPolicyController',function($scope,requestHandler,Fla
 
     //summer note
     $scope.options = {
-        height: 350
+        height: 250
     };
 
    // To display privacy policy details

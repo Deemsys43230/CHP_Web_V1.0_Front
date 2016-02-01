@@ -14,7 +14,7 @@
                 </form>
                 <!-- End Search -->
                 <h2 class="pull-right text-orange"><b>TOTAL EARN : <small class="text-bold">Admin :</small>&nbsp;<span class="text-red"><b>{{totalEarningsByAdmin}} $</b></span>&nbsp;&nbsp;<small class="text-bold">Coach :</small>&nbsp;<span class="text-red"><b>{{totalEarningsByCoach}} $</b></span></b>&nbsp;&nbsp;</h2>
-                <h5 class="classic-title"><i class="fa fa-male"></i>&nbsp;&nbsp;COACH SUBSCRIPTION LIST</h5>
+                <h5 class="classic-title"><span><i class="fa fa-male"></i>&nbsp;&nbsp;COACH SUBSCRIPTION LIST</span></h5>
                 <div ng-if="loaded">
                     <div class="loader-style">
                         <div class="loader"></div>
@@ -26,12 +26,12 @@
                         <th class="col-md-1">Subs. By<i ng-click="sortingCoachSubscriber('1')" class="{{sortIcon[1]}} pull-right"></i></th>
                         <th class="col-md-1">Subs. On<i ng-click="sortingCoachSubscriber('2')" class="{{sortIcon[2]}} pull-right"></i></th>
                         <th class="col-md-1">Expires On<i ng-click="sortingCoachSubscriber('3')" class="{{sortIcon[3]}} pull-right"></i></th>
-                        <th class="col-md-1">Earn $<i ng-click="sortingCoachSubscriber('4')" class="{{sortIcon[4]}} pull-right"></i></th>
-                        <th class="col-md-1">Share $<i ng-click="sortingCoachSubscriber('5')" class="{{sortIcon[5]}} pull-right"></i></th>
+                        <th class="col-md-1">Earn ($)<i ng-click="sortingCoachSubscriber('4')" class="{{sortIcon[4]}} pull-right"></i></th>
+                        <th class="col-md-1">Share ($)<i ng-click="sortingCoachSubscriber('5')" class="{{sortIcon[5]}} pull-right"></i></th>
                         <th class="col-md-3">Inward ID</th>
                         <th class="col-md-2">Outward ID</th>
                         <th class="col-md-1">Status</th>
-                        <th class="col-md-1">Option</th>
+                        <th class="col-md-1">Options</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -44,12 +44,12 @@
                         <td>{{subscriber.coachamount}}</td>
                         <td>{{subscriber.adminamount}}</td>
                         <td>{{subscriber.inwardid}}</td>
-                        <td><span ng-show="subscriber.outwardid!=undefined">{{subscriber.outwardid}}</span><span ng-show="subscriber.outwardid==undefined"><a href="" ng-click="doManualPay(subscriber.paymentid,coachid)" class="btn-xs btn-success" ng-disabled="loaddisable">Manual Pay</a></span></td>
+                        <td><span ng-show="subscriber.outwardid!=undefined">{{subscriber.outwardid}}</span><span ng-show="subscriber.outwardid==undefined"><a href="" ng-click="doManualPay(subscriber.paymentid,coachid)" class="btn-dis btn-xs btn-success" ng-disabled="loaddisable">Manual Pay</a></span></td>
                         <td>
                             <span ng-show="subscriber.enrollmentstatus==1" class="text-green">Active</span>
                             <span ng-show="subscriber.enrollmentstatus==0" class="text-red">In active</span>
                         </td>
-                        <td><a href="#coachSubscriberDetails/{{subscriber.paymentid}}" class="btn-xs btn-primary">View details</a></td>
+                        <td><a href="#coachSubscriberDetails/{{subscriber.paymentid}}" class="btn-xs btn-primary">View Details</a></td>
                     </tr>
                     </tbody>
                 </table>

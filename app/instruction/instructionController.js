@@ -15,7 +15,7 @@ adminApp.controller('InstructionController',function($scope,requestHandler,Flash
 
     //summer note
     $scope.options = {
-        height: 350
+        height: 250
     };
 
     $scope.doGetInstruction=function(){

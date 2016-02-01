@@ -60,10 +60,10 @@ adminApp.controller('AdminPaymentController',function($scope,requestHandler,Flas
         requestHandler.postRequest("admin/paymentHistoryforCourse/",$scope.params).then(function(response){
             $scope.coursesPaymentHistory = [];
             $scope.coachid = response.data.coursePaylist.coachid;
+            $scope.coursesPaymentHistory = response.data.coursePaylist.paymentHistory;
+            $scope.courseDetails = response.data.coursePaylist;
 
-             $scope.coursesPaymentHistory = response.data.coursePaylist.paymentHistory;
-
-            console.log("asdas",$scope.coursesPaymentHistory);
+            console.log(response.data);
             $scope.total_count=response.data.totalrecordcount;
             $scope.loaded=false;
         });

@@ -22,51 +22,95 @@
                 <div class="col-md-8">
                     <h4 class="col-md-12 text-center">SUBSCRIPTION DETAILS<br/></h4>
                     <h4 class="col-md-12 text-gray margin-bottom-15 margin-top-10">Inward Details</h4>
-                    <h5>
-                        <div class="col-md-4">Inward Id</div>
-                        <div class="col-md-8 no-padding">:&nbsp;&nbsp;{{coachSubscriptionDetailView.inwarddetail.inwardid}}</div>
-                        <div class="col-md-4">Payer Email</div>
-                        <div class="col-md-8 no-padding">:&nbsp;&nbsp;{{coachSubscriptionDetailView.inwarddetail.payeremail}}</div>
-                        <div class="col-md-4">Paypal Firstname</div>
-                        <div class="col-md-8 no-padding">:&nbsp;&nbsp;{{coachSubscriptionDetailView.inwarddetail.paypalfirstname}}</div>
-                        <div class="col-md-4">Paypal Lastname</div>
-                        <div class="col-md-8 no-padding">:&nbsp;&nbsp;{{coachSubscriptionDetailView.inwarddetail.paypallastname}}</div>
-                        <div class="col-md-4">Payer ID</div>
-                        <div class="col-md-8 no-padding">:&nbsp;&nbsp;{{coachSubscriptionDetailView.inwarddetail.payerID}}</div>
-                        <div class="col-md-4">Transaction Date</div>
-                        <div class="col-md-8 no-padding">:&nbsp;&nbsp;{{coachSubscriptionDetailView.inwarddetail.transactiondate}}</div>
-                        <div class="col-md-4">Transaction Fee</div>
-                        <div class="col-md-8 no-padding">:&nbsp;&nbsp;{{coachSubscriptionDetailView.inwarddetail.transactionfee}}&nbsp;$</div>
-                        <div class="col-md-4">Transaction Amount</div>
-                        <div class="col-md-8 no-padding">:&nbsp;&nbsp;{{coachSubscriptionDetailView.inwarddetail.transactionamount}}&nbsp;$</div>
-                        <div class="col-md-4">Transaction Status</div>
-                        <div class="col-md-8 no-padding">:&nbsp;&nbsp;{{coachSubscriptionDetailView.inwarddetail.transactionstatus}}</div>
-                        <div class="col-md-4">Currency Code</div>
-                        <div class="col-md-8 no-padding">:&nbsp;&nbsp;{{coachSubscriptionDetailView.inwarddetail.currencycode}}</div>
-                    </h5>
-                    <h4 class="col-md-12 text-gray margin-tb-20">Outward Details</h4>
-                    <h5>
-                        <div class="col-md-4">Outward Id</div>
-                        <div class="col-md-8 no-padding">:&nbsp;&nbsp;{{coachSubscriptionDetailView.outwarddetail.outwardid}}</div>
-                        <div class="col-md-4">Amount</div>
-                        <div class="col-md-8 no-padding">:&nbsp;&nbsp;{{coachSubscriptionDetailView.outwarddetail.amount}}&nbsp;$</div>
-                        <div class="col-md-4">Receiver Email Id</div>
-                        <div class="col-md-8 no-padding">:&nbsp;&nbsp;{{coachSubscriptionDetailView.outwarddetail.receiveremailid}}</div>
-                        <div class="col-md-4">Receiver Account Id</div>
-                        <div class="col-md-8 no-padding">:&nbsp;&nbsp;{{coachSubscriptionDetailView.outwarddetail.receiveraccountid}}</div>
-                        <div class="col-md-4">Sender Email Id</div>
-                        <div class="col-md-8 no-padding">:&nbsp;&nbsp;{{coachSubscriptionDetailView.outwarddetail.senderemailid}}</div>
-                        <div class="col-md-4">Sender Account Id</div>
-                        <div class="col-md-8 no-padding">:&nbsp;&nbsp;{{coachSubscriptionDetailView.outwarddetail.senderaccountid}}</div>
-                        <div class="col-md-4">transaction Id</div>
-                        <div class="col-md-8 no-padding">:&nbsp;&nbsp;{{coachSubscriptionDetailView.outwarddetail.transactionid}}</div>
-                        <div class="col-md-4">Transaction Date</div>
-                        <div class="col-md-8 no-padding">:&nbsp;&nbsp;{{coachSubscriptionDetailView.outwarddetail.transactiondate}}</div>
-                        <div class="col-md-4">Transaction Status</div>
-                        <div class="col-md-8 no-padding">:&nbsp;&nbsp;{{coachSubscriptionDetailView.outwarddetail.transactionstatus}}</div>
-                        <div class="col-md-4">Currency Code</div>
-                        <div class="col-md-8 no-padding">:&nbsp;&nbsp;{{coachSubscriptionDetailView.outwarddetail.currencycode}}</div>
-                    </h5>
+                    <div class="col-md-12">
+                        <table class="table table-bordered table-striped">
+                            <tr>
+                                <td class="col-md-4">Inward ID</td>
+                                <td class="col-md-8">{{coachSubscriptionDetailView.inwarddetail.inwardid}}</td>
+                            </tr>
+                            <tr>
+                                <td>Payer Email ID</td>
+                                <td>{{coachSubscriptionDetailView.inwarddetail.payeremail}}</td>
+                            </tr>
+                            <tr>
+                                <td>Paypal Firstname</td>
+                                <td>{{coachSubscriptionDetailView.inwarddetail.paypalfirstname}}</td>
+                            </tr>
+                            <tr>
+                                <td>Paypal Lastname</td>
+                                <td>{{coachSubscriptionDetailView.inwarddetail.paypallastname}}</td>
+                            </tr>
+                            <tr>
+                                <td>Payer ID</td>
+                                <td>{{coachSubscriptionDetailView.inwarddetail.payerID}}</td>
+                            </tr>
+                            <tr>
+                                <td>Transaction Date</td>
+                                <td>{{coachSubscriptionDetailView.inwarddetail.transactiondate}}</td>
+                            </tr>
+                            <tr>
+                                <td>Transaction Fee</td>
+                                <td>{{coachSubscriptionDetailView.inwarddetail.transactionfee}}</td>
+                            </tr>
+                            <tr>
+                                <td>Transaction Amount</td>
+                                <td>{{coachSubscriptionDetailView.inwarddetail.transactionamount}}</td>
+                            </tr>
+                            <tr>
+                                <td>Transaction Status</td>
+                                <td>{{coachSubscriptionDetailView.inwarddetail.transactionstatus}}</td>
+                            </tr>
+                            <tr>
+                                <td>Currency Code</td>
+                                <td>{{coachSubscriptionDetailView.inwarddetail.currencycode}}</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <h4 class="col-md-12 text-gray margin-bottom-10">Outward Details</h4>
+                    <div class="col-md-12">
+                        <table class="table table-bordered table-striped">
+                            <tr>
+                                <td class="col-md-4">Outward ID</td>
+                                <td class="col-md-8">{{coachSubscriptionDetailView.outwarddetail.outwardid}}</td>
+                            </tr>
+                            <tr>
+                                <td>Amount</td>
+                                <td>{{coachSubscriptionDetailView.outwarddetail.amount}}</td>
+                            </tr>
+                            <tr>
+                                <td>Receiver Email ID</td>
+                                <td>{{coachSubscriptionDetailView.outwarddetail.receiveremailid}}</td>
+                            </tr>
+                            <tr>
+                                <td>Receiver Account ID</td>
+                                <td>{{coachSubscriptionDetailView.outwarddetail.receiveraccountid}}</td>
+                            </tr>
+                            <tr>
+                                <td>Sender Email ID</td>
+                                <td>{{coachSubscriptionDetailView.outwarddetail.senderemailid}}</td>
+                            </tr>
+                            <tr>
+                                <td>Sender Account ID</td>
+                                <td>{{coachSubscriptionDetailView.outwarddetail.senderaccountid}}</td>
+                            </tr>
+                            <tr>
+                                <td>Transaction ID</td>
+                                <td>{{coachSubscriptionDetailView.outwarddetail.transactionid}}</td>
+                            </tr>
+                            <tr>
+                                <td>Transaction Date</td>
+                                <td>{{coachSubscriptionDetailView.outwarddetail.transactiondate}}</td>
+                            </tr>
+                            <tr>
+                                <td>Transaction Status</td>
+                                <td>{{coachSubscriptionDetailView.outwarddetail.transactionstatus}}</td>
+                            </tr>
+                            <tr>
+                                <td>Currency Code</td>
+                                <td>{{coachSubscriptionDetailView.outwarddetail.currencycode}}</td>
+                            </tr>
+                        </table>
+                    </div>
                 </div>
                 <div class="col-md-2 no-padding">
                     <h4>COACH DETAILS</h4><br/>

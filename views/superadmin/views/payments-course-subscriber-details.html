@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-md-12 min-height-450 margin-bottom-20" ng-init="subscribersDetailInit()">
                 <a href="#courseSubscribersList/{{coursePurchaseDetailView.coursedetail.courseid}}" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back to subscribers list</a>
-                <h5 class="classic-title"><i class="fa fa-newspaper-o"></i>&nbsp;&nbsp;COURSE PURCHASED DETAILS</h5>
+                <h5 class="classic-title"><span><i class="fa fa-newspaper-o"></i>&nbsp;&nbsp;COURSE PURCHASED DETAILS</span></h5>
                 <div ng-if="loaded">
                     <div class="loader-style">
                         <br/><br/><br/>
@@ -15,58 +15,103 @@
                 </div>
                 <div class="col-md-2 no-padding">
                     <h4>SUBSCRIBER DETAILS</h4><br/>
-                    <img class="margin-bottom-10" ng-src="{{coursePurchaseDetailView.userdetail.userimage|trusted}}">
+                    <img class="margin-bottom-10 border-image" ng-src="{{coursePurchaseDetailView.userdetail.userimage|trusted}}">
                     <h5 class="wrap">{{coursePurchaseDetailView.userdetail.username}}</h5>
                     <h6 class="wrap">{{coursePurchaseDetailView.userdetail.useremailid}}</h6>
                 </div>
                 <div class="col-md-6">
                     <h4 class="col-md-12">PURCHASED DETAILS<br/></h4>
                     <h4 class="col-md-12 text-center text-gray margin-bottom-15 margin-top-10">Inward Details</h4>
-                    <h5>
-                        <div class="col-md-4">Inward Id</div>
-                        <div class="col-md-8 no-padding">:&nbsp;&nbsp;{{coursePurchaseDetailView.inwarddetail.inwardid}}</div>
-                        <div class="col-md-4">Payer Email</div>
-                        <div class="col-md-8 no-padding">:&nbsp;&nbsp;{{coursePurchaseDetailView.inwarddetail.payeremail}}</div>
-                        <div class="col-md-4">Paypal Firstname</div>
-                        <div class="col-md-8 no-padding">:&nbsp;&nbsp;{{coursePurchaseDetailView.inwarddetail.paypalfirstname}}</div>
-                        <div class="col-md-4">Paypal Lastname</div>
-                        <div class="col-md-8 no-padding">:&nbsp;&nbsp;{{coursePurchaseDetailView.inwarddetail.paypallastname}}</div>
-                        <div class="col-md-4">Payer ID</div>
-                        <div class="col-md-8 no-padding">:&nbsp;&nbsp;{{coursePurchaseDetailView.inwarddetail.payerID}}</div>
-                        <div class="col-md-4">Transaction Date</div>
-                        <div class="col-md-8 no-padding">:&nbsp;&nbsp;{{coursePurchaseDetailView.inwarddetail.transactiondate}}</div>
-                        <div class="col-md-4">Transaction Fee</div>
-                        <div class="col-md-8 no-padding">:&nbsp;&nbsp;{{coursePurchaseDetailView.inwarddetail.transactionfee}}&nbsp;$</div>
-                        <div class="col-md-4">Transaction Amount</div>
-                        <div class="col-md-8 no-padding">:&nbsp;&nbsp;{{coursePurchaseDetailView.inwarddetail.transactionamount}}&nbsp;$</div>
-                        <div class="col-md-4">Transaction Status</div>
-                        <div class="col-md-8 no-padding">:&nbsp;&nbsp;{{coursePurchaseDetailView.inwarddetail.transactionstatus}}</div>
-                        <div class="col-md-4">Currency Code</div>
-                        <div class="col-md-8 no-padding">:&nbsp;&nbsp;{{coursePurchaseDetailView.inwarddetail.currencycode}}</div>
-                    </h5>
-                    <h4 class="col-md-12 text-center text-gray margin-tb-20">Outward Details</h4>
-                    <h5>
-                        <div class="col-md-4">Outward Id</div>
-                        <div class="col-md-8 no-padding">:&nbsp;&nbsp;{{coursePurchaseDetailView.outwarddetail.outwardid}}</div>
-                        <div class="col-md-4">Amount</div>
-                        <div class="col-md-8 no-padding">:&nbsp;&nbsp;{{coursePurchaseDetailView.outwarddetail.amount}}&nbsp;$</div>
-                        <div class="col-md-4">Receiver Email Id</div>
-                        <div class="col-md-8 no-padding">:&nbsp;&nbsp;{{coursePurchaseDetailView.outwarddetail.receiveremailid}}</div>
-                        <div class="col-md-4">Receiver Account Id</div>
-                        <div class="col-md-8 no-padding">:&nbsp;&nbsp;{{coursePurchaseDetailView.outwarddetail.receiveraccountid}}</div>
-                        <div class="col-md-4">Sender Email Id</div>
-                        <div class="col-md-8 no-padding">:&nbsp;&nbsp;{{coursePurchaseDetailView.outwarddetail.senderemailid}}</div>
-                        <div class="col-md-4">Sender Account Id</div>
-                        <div class="col-md-8 no-padding">:&nbsp;&nbsp;{{coursePurchaseDetailView.outwarddetail.senderaccountid}}</div>
-                        <div class="col-md-4">transaction Id</div>
-                        <div class="col-md-8 no-padding">:&nbsp;&nbsp;{{coursePurchaseDetailView.outwarddetail.transactionid}}</div>
-                        <div class="col-md-4">Transaction Date</div>
-                        <div class="col-md-8 no-padding">:&nbsp;&nbsp;{{coursePurchaseDetailView.outwarddetail.transactiondate}}</div>
-                        <div class="col-md-4">Transaction Status</div>
-                        <div class="col-md-8 no-padding">:&nbsp;&nbsp;{{coursePurchaseDetailView.outwarddetail.transactionstatus}}</div>
-                        <div class="col-md-4">Currency Code</div>
-                        <div class="col-md-8 no-padding">:&nbsp;&nbsp;{{coursePurchaseDetailView.outwarddetail.currencycode}}</div>
-                    </h5>
+                    <div class="col-md-12">
+                        <table class="table table-bordered table-striped">
+                            <tr>
+                                <td class="col-md-4">Inward ID</td>
+                                <td class="col-md-8">{{coursePurchaseDetailView.inwarddetail.inwardid}}</td>
+                            </tr>
+                            <tr>
+                                <td class="col-md-4">Payer Email ID</td>
+                                <td class="col-md-8">{{coursePurchaseDetailView.inwarddetail.payeremail}}</td>
+                            </tr>
+                            <tr>
+                                <td class="col-md-4">Paypal Firstname</td>
+                                <td class="col-md-8">{{coursePurchaseDetailView.inwarddetail.paypalfirstname}}</td>
+                            </tr>
+                            <tr>
+                                <td class="col-md-4">Paypal Lastname</td>
+                                <td class="col-md-8">{{coursePurchaseDetailView.inwarddetail.paypallastname}}</td>
+                            </tr>
+                            <tr>
+                                <td class="col-md-4">Payer ID</td>
+                                <td class="col-md-8">{{coursePurchaseDetailView.inwarddetail.payerID}}</td>
+                            </tr>
+                            <tr>
+                                <td class="col-md-4">Transaction Date</td>
+                                <td class="col-md-8">{{coursePurchaseDetailView.inwarddetail.transactiondate}}</td>
+                            </tr>
+                            <tr>
+                                <td class="col-md-4">Transaction Fee</td>
+                                <td class="col-md-8">{{coursePurchaseDetailView.inwarddetail.transactionfee}}</td>
+                            </tr>
+                            <tr>
+                                <td class="col-md-4">Transaction Amount</td>
+                                <td class="col-md-8">{{coursePurchaseDetailView.inwarddetail.transactionamount}}</td>
+                            </tr>
+                            <tr>
+                                <td class="col-md-4">Transaction Status</td>
+                                <td class="col-md-8">{{coursePurchaseDetailView.inwarddetail.transactionstatus}}</td>
+                            </tr>
+                            <tr>
+                                <td class="col-md-3">Currency Code</td>
+                                <td class="col-md-9">{{coursePurchaseDetailView.inwarddetail.currencycode}}</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <h4 class="col-md-12 text-center text-gray margin-bottom-10">Outward Details</h4>
+                    <div class="col-md-12">
+                        <table class="table table-bordered table-striped">
+                            <tr>
+                                <td class="col-md-4">Outward ID</td>
+                                <td class="col-md-8">{{coursePurchaseDetailView.outwarddetail.outwardid}}</td>
+                            </tr>
+                            <tr>
+                                <td class="col-md-4">Amount</td>
+                                <td class="col-md-8">{{coursePurchaseDetailView.outwarddetail.amount}}</td>
+                            </tr>
+                            <tr>
+                                <td class="col-md-4">Receiver Email ID</td>
+                                <td class="col-md-8">{{coursePurchaseDetailView.outwarddetail.receiveremailid}}</td>
+                            </tr>
+                            <tr>
+                                <td class="col-md-4">Receiver Account ID</td>
+                                <td class="col-md-8">{{coursePurchaseDetailView.outwarddetail.receiveraccountid}}</td>
+                            </tr>
+                            <tr>
+                                <td class="col-md-4">Sender Email ID</td>
+                                <td class="col-md-8">{{coursePurchaseDetailView.outwarddetail.senderemailid}}</td>
+                            </tr>
+                            <tr>
+                                <td class="col-md-4">Sender Account ID</td>
+                                <td class="col-md-8">{{coursePurchaseDetailView.outwarddetail.senderaccountid}}</td>
+                            </tr>
+                            <tr>
+                                <td class="col-md-4">Transaction ID</td>
+                                <td class="col-md-8">{{coursePurchaseDetailView.outwarddetail.transactionid}}</td>
+                            </tr>
+                            <tr>
+                                <td class="col-md-4">Transaction Date</td>
+                                <td class="col-md-8">{{coursePurchaseDetailView.outwarddetail.transactiondate}}</td>
+                            </tr>
+                            <tr>
+                                <td class="col-md-4">Transaction Status</td>
+                                <td class="col-md-8">{{coursePurchaseDetailView.outwarddetail.transactionstatus}}</td>
+                            </tr>
+                            <tr>
+                                <td class="col-md-3">Currency Code</td>
+                                <td class="col-md-9">{{coursePurchaseDetailView.outwarddetail.currencycode}}</td>
+                            </tr>
+                        </table>
+                    </div>
                 </div>
                 <div class="col-md-4 no-padding">
                     <h4>COACH DETAILS</h4><br/>
@@ -92,8 +137,9 @@
                             <span class="col-md-9">:&nbsp;&nbsp;{{coursePurchaseDetailView.coursedetail.publishedon}}</span>
                             <span class="col-md-3 no-padding">Total Enrolls</span>
                             <span class="col-md-9">:&nbsp;&nbsp;{{coursePurchaseDetailView.coursedetail.enrollcount}}</span>
+                            <span class="col-md-3 no-padding margin-top-10 text-bold">Description :</span>
+                            <span class="col-md-12 wrap margin-top-5" ng-bind-html="coursePurchaseDetailView.coursedetail.coursedescription | html">:</span>
                         </h6>
-                        <p class="wrap margin-top-10" ng-bind-html="coursePurchaseDetailView.coursedetail.coursedescription | html"></p>
                     </div>
                 </div>
             </div>

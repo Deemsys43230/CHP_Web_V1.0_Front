@@ -6,211 +6,66 @@
 
             <div class="col-md-12" ng-init="doViewMembers()">
                 <a href="#member" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back to Members List</a>
-                <h4 class="classic-title"><span>Member Management</span></h4>
-                <div class="col-md-3 coach-details">
-                    <img ng-src="{{myImgSrc}}"/>
-                    <h3 class="margin-top-10">{{viewMemberDetails.name}}</h3>
+                <h4 class="classic-title"><span>Member Details</span></h4>
+                <div class="col-md-2 no-padding">
+                    <div class="margin-right-20">
+                        <img class="border-image" ng-src="{{myImgSrc}}"/>
+                    </div>
                 </div>
-                <div class="col-md-9">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <h4 class="text-orange">Basic Profile :</h4>
-                            <hr/>
-                            <div class="row margin-bottom-10">
-                                <div class="col-md-4">
-                                    Name :
-                                </div>
-                                <div class="col-md-8">
-                                    {{viewMemberDetails.name}}
-                                </div>
-                            </div>
-                            <div class="row margin-bottom-10">
-                                <div class="col-md-4">
-                                    Email ID :
-                                </div>
-                                <div class="col-md-8">
-                                    {{viewMemberDetails.emailid}}
-                                </div>
-                            </div>
-
-                            <div class="row margin-bottom-10">
-                                <div class="col-md-4">
-                                    Gender :
-                                </div>
-
-                                <div class="col-md-8" ng-if="viewMemberDetails.gender == 1">
+                <div class="col-md-10">
+                    <table class="table table-bordered table-striped">
+                        <tr>
+                            <td class="col-md-3">Name</td>
+                            <td class="col-md-9">{{viewMemberDetails.name}}</td>
+                        </tr>
+                        <tr>
+                            <td>Email ID</td>
+                            <td>{{viewMemberDetails.emailid}}</td>
+                        </tr>
+                        <tr>
+                            <td>Gender</td>
+                            <td>
+                                <div ng-if="viewMemberDetails.gender == 1">
                                     Male
                                 </div>
 
-                                <div class="col-md-8" ng-if="viewMemberDetails.gender == 2">
+                                <div ng-if="viewMemberDetails.gender == 2">
                                     Female
                                 </div>
-                                <div class="col-md-8" ng-if="viewMemberDetails.gender == null">
+                                <div ng-if="viewMemberDetails.gender == null">
                                     N/A
                                 </div>
-                            </div>
-
-                            <div class="row margin-bottom-10">
-                                <div class="col-md-4">
-                                    About :
-                                </div>
-                                <div class="col-md-8">
-                                    {{viewMemberDetails.about}}
-                                </div>
-                            </div>
-                            <div ng-if="viewMemberDetails.isprivacy==0">
-                                <div class="row margin-bottom-10">
-                                    <div class="col-md-4">
-                                        DOB :
-                                    </div>
-                                    <div class="col-md-8">
-                                        {{viewMemberDetails.dob}}
-                                    </div>
-                                </div>
-                                <div class="row margin-bottom-10">
-                                    <div class="col-md-4">
-                                        Phone :
-                                    </div>
-                                    <div class="col-md-8">
-                                        {{viewMemberDetails.phone}}
-                                    </div>
-                                </div>
-                                <div class="row margin-bottom-10">
-                                    <div class="col-md-4">
-                                        Country :
-                                    </div>
-                                    <div class="col-md-8">
-                                        {{viewMemberDetails.country}}
-                                    </div>
-                                </div>
-                                <div class="row margin-bottom-10">
-                                    <div class="col-md-4">
-                                        State :
-                                    </div>
-                                    <div class="col-md-8">
-                                        {{viewMemberDetails.state}}
-                                    </div>
-                                </div>
-                                <div class="row margin-bottom-10">
-                                    <div class="col-md-4">
-                                        City :
-                                    </div>
-                                    <div class="col-md-8">
-                                        {{viewMemberDetails.city}}
-                                    </div>
-                                </div>
-                                <div class="row margin-bottom-10">
-                                    <div class="col-md-4">
-                                        Zipcode :
-                                    </div>
-                                    <div class="col-md-8">
-                                        {{viewMemberDetails.zipcode}}
-                                    </div>
-                                </div>
-                                </div>
-                        </div>
-                        <!--<div class="col-md-6">
-                            <h4 class="text-orange">Demographic Profile :</h4>
-                            <hr/>
-                            <div class="row margin-bottom-10">
-                                <div class="col-md-4">
-                                    Height :
-                                </div>
-                                <div class="col-md-8">
-                                    6.7 inch
-                                </div>
-                            </div>
-                            <div class="row margin-bottom-10">
-                                <div class="col-md-4">
-                                    Weight :
-                                </div>
-                                <div class="col-md-8">
-                                    76
-                                </div>
-                            </div>
-                            <div class="row margin-bottom-10">
-                                <div class="col-md-4">
-                                    Hip :
-                                </div>
-                                <div class="col-md-8">
-                                    74
-                                </div>
-                            </div>
-                            <div class="row margin-bottom-10">
-                                <div class="col-md-4">
-                                    Waist :
-                                </div>
-                                <div class="col-md-8">
-                                    34
-                                </div>
-                            </div>
-                            <div class="row margin-bottom-10">
-                                <div class="col-md-4">
-                                    Blood Group :
-                                </div>
-                                <div class="col-md-8">
-                                    O positive
-                                </div>
-                            </div>
-                            <div class="row margin-bottom-10">
-                                <div class="col-md-4">
-                                    BMI :
-                                </div>
-                                <div class="col-md-8">
-                                    543
-                                </div>
-                            </div>
-                            <div class="row margin-bottom-10">
-                                <div class="col-md-4">
-                                    Blood Pressure :
-                                </div>
-                                <div class="col-md-8">
-                                    65
-                                </div>
-                            </div>
-                            <div class="row margin-bottom-10">
-                                <div class="col-md-4">
-                                    Protein :
-                                </div>
-                                <div class="col-md-8">
-                                    543
-                                </div>
-                            </div>
-                            <div class="row margin-bottom-10">
-                                <div class="col-md-4">
-                                    Fat :
-                                </div>
-                                <div class="col-md-8">
-                                    48
-                                </div>
-                            </div>
-                            <div class="row margin-bottom-10">
-                                <div class="col-md-4">
-                                    Carbo :
-                                </div>
-                                <div class="col-md-8">
-                                    48
-                                </div>
-                            </div>
-                            <div class="row margin-bottom-10">
-                                <div class="col-md-4">
-                                    Fibre :
-                                </div>
-                                <div class="col-md-8">
-                                    48
-                                </div>
-                            </div>
-                            <div class="row margin-bottom-10">
-                                <div class="col-md-4">
-                                    Calories :
-                                </div>
-                                <div class="col-md-8">
-                                    48
-                                </div>
-                            </div>
-                        </div>-->
-                    </div>
-
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>About</td>
+                            <td>{{viewMemberDetails.about}}</td>
+                        </tr>
+                        <tr ng-if="viewMemberDetails.isprivacy==0">
+                            <td>DOB</td>
+                            <td>{{viewMemberDetails.dob}}</td>
+                        </tr>
+                        <tr ng-if="viewMemberDetails.isprivacy==0">
+                            <td>Phone</td>
+                            <td>{{viewMemberDetails.phone}}</td>
+                        </tr>
+                        <tr ng-if="viewMemberDetails.isprivacy==0">
+                            <td>Country</td>
+                            <td>{{viewMemberDetails.country}}</td>
+                        </tr>
+                        <tr ng-if="viewMemberDetails.isprivacy==0">
+                            <td>State</td>
+                            <td>{{viewMemberDetails.state}}</td>
+                        </tr>
+                        <tr ng-if="viewMemberDetails.isprivacy==0">
+                            <td>City</td>
+                            <td>{{viewMemberDetails.city}}</td>
+                        </tr>
+                        <tr ng-if="viewMemberDetails.isprivacy==0">
+                            <td>Zipcode</td>
+                            <td>{{viewMemberDetails.zipcode}}</td>
+                        </tr>
+                    </table>
                 </div>
             </div>
         </div>
