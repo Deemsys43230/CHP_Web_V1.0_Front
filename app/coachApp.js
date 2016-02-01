@@ -73,6 +73,7 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../plugin/popup/style.css',
                                 '../../plugin/popup/jquery.leanModal.min.js',
                                 '../../css/profile-image-upload.css',
+                                '../../css/password.css',
                                 '../../js/image-upload.js',
                                 '../../app/coachProfile/coachProfileController.js'
                             ]

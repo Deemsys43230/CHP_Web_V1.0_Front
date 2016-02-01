@@ -3,9 +3,7 @@
  */
 var coachApp= angular.module('coachApp', ['ngRoute','oc.lazyLoad','ngCookies','requestModule','flash','ngAnimate','ui.bootstrap']);
 
-
 coachApp.controller('CoachProfileController',['$scope','requestHandler','Flash',function($scope,requestHandler,Flash) {
-
 
         // Function to convert image url to base64
         $scope.convertImgToBase64=function(url, callback, outputFormat){
@@ -28,17 +26,19 @@ coachApp.controller('CoachProfileController',['$scope','requestHandler','Flash',
 
             requestHandler.getRequest("getUserId/","").then(function(response){
 
-
                 $scope.userProfile=response.data.User_Profile;
-                if($scope.userProfile.gender == null) {
+
+                if($scope.userProfile.gender == null){
                     $scope.userProfile.gender = "1";
                 }
 
                 if($scope.userProfile.isProfileUpdated == 1){
+
                     $.each($scope.countries, function(index,value) {
                         if(value.code == $scope.userProfile.country){
                             $scope.userProfile.country = value;
                         }
+
                         $.each($scope.states, function(index1,value1){
                             if(value1.countryid == $scope.userProfile.country.id){
                                 $scope.availableStates.push(value1);
@@ -49,17 +49,19 @@ coachApp.controller('CoachProfileController',['$scope','requestHandler','Flash',
                         });
                     });
                 }
+
                 else{
                     $scope.userProfile.country=$scope.countries[''];
                 }
 
                 //alert($scope.userProfile.imageurl);
-                $scope.userProfile.imageurl=requestHandler.convertUrl($scope.userProfile.imageurl);
-                //  $scope.userProfile.imageurl=$scope.userProfile.imageurl.substring($scope.userProfile.imageurl.indexOf("/") + 14, $scope.userProfile.imageurl.length);
+                $scope.userProfile.imageurl=$scope.userProfile.imageurl+"?decache="+Math.random();
+                //$scope.userProfile.imageurl=$scope.userProfile.imageurl.substring($scope.userProfile.imageurl.indexOf("/") + 14, $scope.userProfile.imageurl.length);
 
                 //Convert Integer to String
                 if($scope.userProfile.gender)
                     $scope.userProfile.gender=$scope.userProfile.gender.toString();
+                    $scope.userProfile.zipcode=$scope.userProfile.zipcode.toString();
 
                 $scope.selectedDate = $scope.userProfile.dob;
 
@@ -78,22 +80,24 @@ coachApp.controller('CoachProfileController',['$scope','requestHandler','Flash',
                     }
                 });
             });
+
+
+
+
         };
 
         $scope.refreshImage=function(){
             requestHandler.getRequest("getUserId/","").then(function(response){
                 $scope.userProfile.imageurl=response.data.User_Profile.imageurl;
-                $scope.userProfile.imageurl=requestHandler.convertUrl($scope.userProfile.imageurl);
                 $scope.userProfile.imageurl=$scope.userProfile.imageurl+"?decache="+Math.random();
-
                 $('.image-editor').cropit({
                     imageState: {
-                        src: $scope.userProfile.imageurl+"?decache="+Math.random()
+                        src: $scope.userProfile.imageurl
                     }
                 });
+                $scope.spinner=false;
             });
         };
-
 
         $scope.doUpdateProfile= function () {
 
@@ -101,28 +105,45 @@ coachApp.controller('CoachProfileController',['$scope','requestHandler','Flash',
 
                 //Convert Image to base64
                 $scope.userProfile.imageurl=base64Img;
-                $scope.userProfile.experience=parseInt($scope.userProfile.experience);
                 $scope.userProfile.country = $scope.userProfile.country.code;
                 $scope.userProfile.state = $scope.userProfile.state.code;
 
                 requestHandler.putRequest("updateProfile/",$scope.userProfile).then(function(){
+                    $scope.doGetProfile();
                     successMessage(Flash,"Successfully Updated");
                     //Copy Orginal
-                    $scope.orginalUserProfile=angular.copy($scope.userProfile);
-
+                    // $scope.orginalUserProfile=angular.copy($scope.userProfile);
                 });
             });
-
-
         };
 
+        $scope.imageAdded=false;
+        $scope.imageUploaded=true;
+        $scope.spinner=false;
+
+        $scope.fileNameChanged = function(element){
+            if(!$scope.imageAdded){
+                if(element.files.length > 0){
+                    $scope.inputContainsFile = false;
+                    $scope.imageAdded=true;
+                    $scope.imageUploaded=false;
+                }
+                else{
+                    $scope.inputContainsFile = true;
+                    $scope.imageAdded=false;
+                    $scope.imageUploaded=true;
+                }
+            }
+        };
 
         $scope.doUpdateProfileImage=function(){
             //Convert the image to base 64
+            $scope.spinner=true;
             var image = $('.image-editor').cropit('export');
 
             requestHandler.postRequest("uploadProfileImage/",{'imageurl':image}).then(function(response){
                 $scope.refreshImage();
+                $scope.doGetProfile();
             },function(response){
                 errorMessage(Flash,"Please Try again later!");
             });
@@ -132,6 +153,8 @@ coachApp.controller('CoachProfileController',['$scope','requestHandler','Flash',
 
         //To Enable the update button if changes occur.
         $scope.isClean = function() {
+            console.log("ori",$scope.orginalUserProfile);
+            console.log("dad",$scope.userProfile);
             return angular.equals ($scope.orginalUserProfile, $scope.userProfile);
         };
 
@@ -141,12 +164,12 @@ coachApp.controller('CoachProfileController',['$scope','requestHandler','Flash',
                 if(response.data.Response_status==0){
                     $scope.doGetProfile();
                     errorMessage(Flash,"Incorrect&nbsp;current&nbsp;password");
-                    $scope.changePasswordForm.$setPristine();
+                    $scope.reset();
                 }
                 else if(response.data.Response_status==1) {
                     $scope.doGetProfile();
                     successMessage(Flash, "Password&nbsp;changed&nbsp;successfully");
-                    $scope.changePasswordForm.$setPristine();
+                    $scope.reset();
                 }
             },function(response){
                 errorMessage(Flash,"Please try again later!");
@@ -156,19 +179,21 @@ coachApp.controller('CoachProfileController',['$scope','requestHandler','Flash',
         $scope.reset=function(){
             $scope.changePassword={};
             $scope.changePasswordForm.$setPristine();
+            $scope.changePassword.oldPassword="";
+            $scope.changePassword.newPassword="";
+            $scope.changePassword.confirmPassword="";
         };
+
 
         $scope.addCountry = function(){
             $scope.availableStates = [];
             $.each($scope.states, function(index,value){
-                if(value.countryid == $scope.userProfile.country.id){
+                if(value.countryid == $scope.countries.id){
                     $scope.availableStates.push(value);
                     $scope.userProfile.state = $scope.availableStates[''];
                 }
             });
-
-
-        }
+        };
 
         $scope.countries = [
             {name:'Afghanistan', code:'AF', "id":1001},
@@ -661,7 +686,6 @@ coachApp.controller('CoachProfileController',['$scope','requestHandler','Flash',
 
             {name:'Isle of Man', code:'IM', "id":1246}
         ];
-
 
         $scope.states = [
             {name:'Alabama', code:'AL', "countryid":1228},
@@ -4389,7 +4413,6 @@ coachApp.controller('CoachProfileController',['$scope','requestHandler','Flash',
                 }
             });
         }
-
         //Date Picker
         $scope.prevent=function(){
             event.preventDefault();
@@ -4567,4 +4590,40 @@ coachApp.directive('compareTo',function() {
     };
 });
 
+// Validation for file upload
+coachApp.directive('validFile',function(){
+    return {
+        require:'ngModel',
+        link:function(scope,el,attrs,ngModel){
+            //change event is fired when file is selected
+            el.bind('change',function(){
+                scope.$apply(function(){
+                    ngModel.$setViewValue(el.val());
+                    ngModel.$render();
+                })
+            })
+        }
+    }
+});
 
+/*
+ userApp.directive('numbersOnly', function(){
+ return {
+ require: 'ngModel',
+ link: function(scope, element, attrs, modelCtrl) {
+ modelCtrl.$parsers.push(function (inputValue) {
+ // this next if is necessary for when using ng-required on your input.
+ // In such cases, when a letter is typed first, this parser will be called
+ // again, and the 2nd time, the value will be undefined
+ if (inputValue == undefined) return ''
+ var transformedInput = inputValue.replace(/[^0-9]/g, '');
+ if (transformedInput!=inputValue) {
+ modelCtrl.$setViewValue(transformedInput);
+ modelCtrl.$render();
+ }
+
+ return transformedInput;
+ });
+ }
+ };
+ });*/
