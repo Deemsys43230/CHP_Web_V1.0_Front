@@ -32,6 +32,11 @@ userApp.controller('UserProfileController',['$scope','requestHandler','Flash',fu
                 $scope.userProfile.gender = "1";
             }
 
+
+            if($scope.userProfile.preferfood == null){
+                $scope.userProfile.preferfood = "1";
+            }
+
             if($scope.userProfile.isProfileUpdated == 1){
 
                 $.each($scope.countries, function(index,value) {

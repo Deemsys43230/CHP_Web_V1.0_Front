@@ -50,14 +50,7 @@ adminApp.controller('ExerciseController',function ($scope,requestHandler,Flash) 
             $scope.paginationLoad=true;
             $scope.loaded=false;
 
-            $.each($scope.exerciseList,function(index,value){
-                value.type="";
-                $.each(value.types,function(index,value1){
-                typevalue= value1.typename;
-                });
-                value.type = typevalue;
 
-            });
         },function(response){
         });
     };
@@ -98,13 +91,19 @@ adminApp.controller('ExerciseViewController',function($scope,requestHandler,Flas
     $scope.activeClass = {exerciselist:'active'};
 
     $scope.doGetExerciseByID=function(){
+        //alert("hi");
         $scope.loaded=true;
         requestHandler.postRequest("admin/getExerciseDetailByadmin/",{"exerciseid":$routeParams.id}).then(function(response){
-            $scope.exerciseDetail=response.data.ExerciseDetail;
-           // alert($scope.exerciseDetail.imageurl);
-          $scope.exerciseDetail.imageurl=requestHandler.convertUrlExercise($scope.exerciseDetail.imageurl)+"200x200.jpg";
-          //  $scope.exerciseDetail.imageurl=$scope.exerciseDetail.imageurl.substring($scope.exerciseDetail.imageurl.indexOf("/")+14,$scope.exerciseDetail.imageurl.length)+"200x200.jpg";
-            $scope.exerciseDetail.imageurl=$scope.exerciseDetail.imageurl+"?decache="+Math.random();
+            $scope.exerciseDetail=response.data.ExerciseDetail.exercise;
+          // alert(JSON.stringify($scope.exerciseDetail));
+           $scope.exerciseDetail.imagepath=$scope.exerciseDetail.imagepath+"1000x1000.jpg"+"?decache="+Math.random();
+          $scope.exerciseDetail.imageurl=$scope.exerciseDetail.imageurl+"?decache="+Math.random();
+            requestHandler.postRequest("admin/getTypeDetail/",{"typeid":$scope.exerciseDetail.exercisetypeid}).then(function(response){
+            $scope.typename = response.data.ExerciseType_Data;
+                $scope.exerciseDetail.exercisetypename=$scope.typename.typename;
+
+            });
+
             $scope.loaded=false;
         },function(){
             errorMessage(Flash,"Please try again later!")
@@ -164,19 +163,17 @@ adminApp.controller('ExerciseEditController',function($q,$scope,requestHandler,F
         $scope.loaded=true;
         requestHandler.postRequest("admin/getExerciseDetailByadmin/",{"exerciseid":$routeParams.id}).then(function(response){
 
-            $scope.exerciseDetail=response.data.ExerciseDetail;
+            $scope.exerciseDetail=response.data.ExerciseDetail.exercise;
+            $scope.exerciseDetail.typeid = $scope.exerciseDetail.exercisetypeid;
 
-           $scope.originalImage=requestHandler.convertUrl($scope.exerciseDetail.imageurl);
-            //$scope.originalImage=$scope.exerciseDetail.imageurl.substring($scope.exerciseDetail.imageurl.indexOf("/")+14,$scope.exerciseDetail.imageurl.length)
+           $scope.originalImage=$scope.exerciseDetail.imageurl+"?decache="+Math.random();
+           // $scope.originalImage=$scope.exerciseDetail.imageurl.substring($scope.exerciseDetail.imageurl.indexOf("/")+14,$scope.exerciseDetail.imageurl.length)
 
-           $scope.exerciseDetail.imageurl=requestHandler.convertUrlExercise($scope.exerciseDetail.imageurl)+"200x200.jpg";
-           // $scope.exerciseDetail.imageurl=$scope.exerciseDetail.imageurl.substring($scope.exerciseDetail.imageurl.indexOf("/")+14,$scope.exerciseDetail.imageurl.length)
-
+         
             $scope.exerciseDetail.imageurl=$scope.exerciseDetail.imageurl+"?decache="+Math.random();
 
-           /* $.each($scope.exerciseDetail.type.levels,function(index,levelvalue){
-                levelvalue.workoutvalue=levelvalue.workoutvalue.toString();
-            });*/
+           $scope.exerciseDetail.tags =response.data.ExerciseDetail.tags;
+            $scope.exerciseDetail.met=$scope.exerciseDetail.MET;
 
             original=angular.copy($scope.exerciseDetail);
 
@@ -255,8 +252,8 @@ adminApp.controller('ExerciseEditController',function($q,$scope,requestHandler,F
         updatedExerciseDetails.exerciseid=$scope.exerciseDetail.exerciseid;
 
         updatedExerciseDetails.exercisename=$scope.exerciseDetail.exercisename;
-/*
-        if($scope.imageUpload){
+
+       /* if($scope.imageUpload){
             updatedExerciseDetails.imageurl=$scope.exerciseDetail.imageurl;
         }
         else{
@@ -268,7 +265,8 @@ adminApp.controller('ExerciseEditController',function($q,$scope,requestHandler,F
             });
         }*/
 
-        updatedExerciseDetails.difficultytype=$scope.exerciseDetail.type.typeid;
+        updatedExerciseDetails.typeid=$scope.exerciseDetail.typeid;
+        updatedExerciseDetails.MET = $scope.exerciseDetail.met;
 
         var tagArray=[];
         var tagPromise;
@@ -283,15 +281,13 @@ adminApp.controller('ExerciseEditController',function($q,$scope,requestHandler,F
             }
         });
         updatedExerciseDetails.tagid = tagArray;
-      // updatedExerciseDetails.tagid = ExerciseService.getTagArray($scope.exerciseDetail.tags);
-        updatedExerciseDetails.levels = $scope.exerciseDetail.type.levels;
 
-        console.log(updatedExerciseDetails);
+        console.log("qadasa",updatedExerciseDetails);
         if($scope.imageUpload){
-        requestHandler.postRequest("admin/checkExerciseNameExists/",{"exerciseid":$scope.exerciseDetail.exerciseid,"exercisename":$scope.exerciseDetail.exercisename}).then(function(response){
-            if(response.data.Response_status==0){
                 $q.all([tagPromise]).then(function(){
+                    updatedExerciseDetails.imageurl=$scope.exerciseDetail.imageurl;
                 requestHandler.putRequest("admin/updateExercise/",updatedExerciseDetails).then(function (response) {
+
                     if (response.data.Response_status == 1) {
                         successMessage(Flash,"Exercise Updated Successfully!");
                         $location.path("exercise");
@@ -303,19 +299,12 @@ adminApp.controller('ExerciseEditController',function($q,$scope,requestHandler,F
                 });
                 });
 
-            }
-            else  if(response.data.Response_status==1){
-                errorMessage(Flash,"Exercise&nbsp;already&nbsp;exists");
-                $scope.loaded=false;
-            }
-        });
+
         }else{
             ExerciseService.convertImgToBase64($scope.originalImage, function(base64Img) {//Convert Image to Base64
                 console.log(base64Img);
 
                 updatedExerciseDetails.imageurl=base64Img;
-                requestHandler.postRequest("admin/checkExerciseNameExists/",{"exerciseid":$scope.exerciseDetail.exerciseid,"exercisename":$scope.exerciseDetail.exercisename}).then(function(response){
-                    if(response.data.Response_status==0){
                         $q.all([tagPromise]).then(function(){
                             requestHandler.putRequest("admin/updateExercise/",updatedExerciseDetails).then(function (response) {
                                 if (response.data.Response_status == 1) {
@@ -329,12 +318,7 @@ adminApp.controller('ExerciseEditController',function($q,$scope,requestHandler,F
                             });
                         });
 
-                    }
-                    else  if(response.data.Response_status==1){
-                        errorMessage(Flash,"Exercise&nbsp;already&nbsp;exists");
-                        $scope.loaded=false;
-                    }
-                });
+
 
             });
         }
@@ -357,7 +341,14 @@ adminApp.controller('ExerciseEditController',function($q,$scope,requestHandler,F
             updatedExerciseDetails.imageurl=$scope.exerciseDetail.imageurl;
         }
 
-        updatedExerciseDetails.difficultytype=$scope.exerciseDetail.type.typeid;
+
+
+
+
+
+        updatedExerciseDetails.typeid=$scope.exerciseDetail.typeid;
+        updatedExerciseDetails.MET = $scope.exerciseDetail.met;
+
         //Tag Array Operation starts
         var tagArray=[];
         var tagPromise;
@@ -456,6 +447,7 @@ adminApp.controller('ExerciseEditController',function($q,$scope,requestHandler,F
         else{
             $scope.exerciseDetail.exercisename = null;
         }
+        $scope.loaded=false;
 
     };
 

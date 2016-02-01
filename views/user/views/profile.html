@@ -199,7 +199,22 @@
                              </span>
                         </div>
                     </div>
-                    <div class="col-md-6 margin-top-15">
+                    <div class="col-md-6 margin-top-10">
+                        <div class="col-md-4 padding-top-4">
+                            <h5>Prefer Food :</h5>
+                        </div>
+                        <div class="col-md-8" >
+                            <input type="radio" id="india" class="height" name="preferfood" value="1" ng-model="userProfile.preferfood"/>
+                            <label for="india">India</label>
+                            <input type="radio" id="us" class="height" name="preferfood" value="2" ng-model="userProfile.preferfood"/>
+                            <label for="us">United states</label>
+                            <input type="radio" id="general" class="height" name="preferfood" value="3" ng-model="userProfile.preferfood"/>
+                            <label for="general">General</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                   </div>
+                    <div class="col-md-6">
                         <p class="pull-right" ng-show="showCount && userProfile.about.length"><span class="text-bold text-red">{{ (300-userProfile.about.length) }}</span> Characters left&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
                         <p class="pull-right" ng-hide="showCount && userProfile.about.length">&nbsp;</p>
                     </div>

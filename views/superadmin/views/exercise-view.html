@@ -31,28 +31,13 @@
                         </div>
                         <div class="row margin-top-10">
                             <div class="col-md-4">Exercise Type<span class="pull-right">:</span></div>
-                            <div class="col-md-8">{{exerciseDetail.type.typename}}
+                            <div class="col-md-8">{{exerciseDetail.exercisetypename}}
                             </div>
                         </div>
                         <div class="row margin-top-10">
-                            <div class="col-md-4">Exercise Levels<span class="pull-right">:</span></div>
-                            <div class="col-md-8">
-                                <table class="table table-bordered">
-                                    <thead>
-                                    <tr class="success">
-                                        <th class="col-md-4">Level Name</th>
-                                        <th class="col-md-4">Timing (minutes)</th>
-                                        <th class="col-md-4">Calories Spent</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr ng-repeat="level in exerciseDetail.type.levels">
-                                        <td>{{level.levelname}}</td>
-                                        <td>{{level.workoutvalue}}</td>
-                                        <td>{{level.calories}}</td>
-                                    </tr>
-                                    </tbody>
-                                </table>
+                            <div class="col-md-4">MET<span class="pull-right">:</span></div>
+                            <div class="col-md-8">{{exerciseDetail.MET}}
+
                             </div>
                         </div>
                     </div>

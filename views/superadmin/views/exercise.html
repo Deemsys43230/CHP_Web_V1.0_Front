@@ -43,15 +43,8 @@
                         <tr dir-paginate="exercise in exercisefilter = (exerciseList |startsWithLetterExercise: exercisesearch| itemsPerPage: 9)" ng-show="exerciseList.length!=0">
                             <td>{{exercise.exerciseid}}</td>
                             <td title="{{exercise.exercisename}}"><span class="line-clamp-md">{{exercise.exercisename}}</span></td>
-                            <td>
-                             <span class="line-clamp-sm">
-                                <span ng-repeat="type in exercise.types" title="{{type.typename}}">
-                                    {{type.typename}}
-                                </span>
-                            </span>
-                            </td>
-                            </td>
-                            <td>
+                            <td title="{{exercise.exercisetypename}}"><span class="line-clamp-sm">{{exercise.exercisetypename}}</span></td>
+                           <td>
                                 <a href="#exercise-view/{{exercise.exerciseid}}" class="btn-xs btn-primary">View</a>
                                 <a href="#exercise-edit/{{exercise.exerciseid}}" class="btn-xs btn-warning">Edit</a>
                                 <a href="" class="btn-xs btn-success" ng-click="doEnableDisable(exercise.exerciseid)" ng-show="exercise.status==0">Enable</a>

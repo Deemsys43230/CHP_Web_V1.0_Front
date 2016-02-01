@@ -35,7 +35,16 @@
                             </div>
                         </div>
                     <h5>Exercise Type :</h5>
-                        <ui-select ng-model="level.selected" theme="select2" ng-disabled="disabled" class="form-control">
+                        <!--<ui-select multiple ng-model="exerciseDetail.typeid" theme="select2" ng-disabled="disabled" class="form-control" ui-select-required>
+                            <ui-select-match placeholder="Type and Select Exercise types">{{$item.typename}}</ui-select-match>
+                            <ui-select-choices repeat="type in typeListForDropDown | propsFilter: {typeid: $select.search, typename: $select.search}">
+                                {{type.typename}}
+                            </ui-select-choices>
+                        </ui-select>-->
+                        <select class="full-width course-select" name="typeid" ng-model="exerciseDetail.typeid" ng-options="typeid.typeid as typeid.typename for typeid in typeListForDropDown"  required>
+                            <option value="">-- Select Exercise Type --</option>
+                        </select>
+                        <!--<ui-select ng-model="level.selected" theme="select2" ng-disabled="disabled" class="form-control">
                             <ui-select-match placeholder="Select or search a exercise name...">{{$select.selected.type}}</ui-select-match>
                             <ui-select-choices repeat="level in levelslist | propsFilter: {type: $select.search}">
                                 <div ng-click="doChangeExerciseType(level.typeid);">
@@ -45,7 +54,7 @@
                                     </small>
                                 </div>
                             </ui-select-choices>
-                        </ui-select>
+                        </ui-select>-->
                     <br/>
                     <h5>MET :</h5>
                     </div>

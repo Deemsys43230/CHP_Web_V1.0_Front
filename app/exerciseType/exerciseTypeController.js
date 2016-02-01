@@ -83,7 +83,7 @@ adminApp.controller('ExerciseTypeController',['$scope','requestHandler','Flash',
     $scope.doEditExerciseType=function(id){
         $scope.isNew = false;
         $scope.title = "Edit Exercise Type";
-        $scope.nameAlreadyExist=false;
+        $scope.exerciseTypeAddForm.$setPristine();
 
         $(function(){
             $("#lean_overlay").fadeTo(1000);
@@ -189,17 +189,13 @@ delete $scope.exerciseType.status;
 
     $scope.reset=function(){
         $scope.exerciseType={};
-        $scope.inputs = [{
-            "levelname": ""
-            }
-        ];
+        $scope.exerciseType.typename="";
         $scope.title = "Add Exercise Type";
         $scope.isNew = true;
         $scope.exerciseTypeAddForm.$setPristine();
         $(function(){
             $(".common_model").show();
         });
-        $scope.nameAlreadyExist=false;
     };
 
     //Initial Load
