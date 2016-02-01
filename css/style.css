@@ -9279,11 +9279,10 @@ input[type=range]:focus::-ms-fill-upper {
 	white-space: nowrap; }
 
 .label-success {
-    padding: 3px 5px !important;
-    line-height: 1.2 !important;
+    padding: 3px!important;
     border: 1px solid #4cae4c;
     color: #4cae4c;
-    font-size: 12px;
+    font-size: 11px;
     background-color: transparent;
     border-radius: 3px;
     font-weight: bold;
@@ -9292,11 +9291,10 @@ input[type=range]:focus::-ms-fill-upper {
 
 .label-danger{
     font-weight: bold;
-    padding: 3px 5px !important;
-    line-height: 1.2 !important;
+    padding: 3px!important;
     border: 1px solid #d43f3a;
     color: #d43f3a;
-    font-size: 12px;
+    font-size: 11px;
     background-color: transparent;
     border-radius: 3px;
 }

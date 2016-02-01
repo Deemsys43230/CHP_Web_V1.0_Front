@@ -96,7 +96,7 @@
                         </span></h5>
 <br/>
                     <div class="col-md-1"></div>
-                    <div class="col-md-11 min-height-100">{{measureRequired}}
+                    <div class="col-md-11">{{measureRequired}}
                         <checkbox-group min-required="1">
                         <span  class="fh-checkbox" ng-repeat="foodMeasure in foodMeasureListAll">
                             <input class="col-md-1" name="foodMeasureName" ng-required="measureRequired" id="{{foodMeasure.measureid}}" type="checkbox" ng-model="foodMeasure.checked" ng-change="doAddNewMeasureMinerals(foodMeasure.measureid,foodMeasure.measurename)">
@@ -106,7 +106,7 @@
 
                     </div>
 
-                    <div class="col-md-12 no-padding margin-top-10">
+                    <div class="col-md-12 no-padding margin-top-15">
                         <table class="table table-bordered">
                             <thead>
                             <tr class="success">
@@ -401,8 +401,8 @@
                         </table>
                     </div>
                     <div class="col-md-12 margin-top-10 text-center">
-                        <a class="btn register_button" href="" ng-click="doUpdateFoodDetails()" ng-disabled="foodForm.$invalid||isClean()||doingUpdate" ng-hide="isNew">Update Food Details</a>
-                        <a class="btn register_button" href="" ng-click="doAddFoodDetails()" ng-disabled="foodForm.$invalid||imageAdded" ng-show="isNew">Save Food Details</a>
+                        <span ng-hide="isNew"><a class="btn register_button" href="" ng-click="doUpdateFoodDetails()" ng-disabled="foodForm.$invalid||isClean()||doingUpdate"><span ng-if="spinner"><span class="one-quarters-loader">Loading…</span></span>Update Food Details</a></span>
+                        <span ng-show="isNew"><a class="btn register_button" href="" ng-click="doAddFoodDetails()" ng-disabled="foodForm.$invalid||imageAdded"><span ng-if="spinner"><span class="one-quarters-loader">Loading…</span></span>Save Food Details</a></span>
                         <a class="btn cancel_button" href="#food">Cancel</a>
                     </div>
                 </div>
