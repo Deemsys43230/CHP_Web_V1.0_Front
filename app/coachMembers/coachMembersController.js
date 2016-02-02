@@ -15,7 +15,6 @@ coachApp.controller('CoachMembersController',function($scope,requestHandler) {
         });
 
     };
-
     //Initial Load
     $scope.init = function(){
         $scope.paginationLoad=false;
@@ -37,6 +36,8 @@ coachApp.controller('CoachMembersController',function($scope,requestHandler) {
 });
 
 coachApp.controller('MembersViewController',function($scope,requestHandler,Flash,$routeParams,$sce) {
+
+    $scope.activeClass.mymembers='active';
 
     //Exercise Detail View Suggestion
     $scope.doViewMembers= function () {

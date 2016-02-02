@@ -2,8 +2,8 @@
 #lean_overlay {
     position: fixed;
     z-index:99998;
-    top: 0px;
-    left: 0px;
+    top: 0;
+    left: 0;
     height:100%;
     width:100%;
     background: #000;
@@ -64,7 +64,7 @@ a.btn_blue {color: #FFF !important;}
 .user_login .social_box:hover {background: #E4E4E2;}
 
 .user_login label {display: block; margin-bottom:5px;}
-.user_login input[type="text"], .user_login input[type="email"], .user_login input[type="password"] {display: block; width:100%; padding: 10px; border:1px solid #DDD; color:#666;}
+.user_login input[type="text"], .user_login input[type="email"], .user_login input[type="password"] {display: block; line-height:14px;width:100%; padding: 13px; border:1px solid #DDD; color:#666;}
 .user_login input[type="checkbox"] {float:left; margin-right:5px;}
 .user_login input[type="checkbox"]+label {float:left;}
 .user_login .checkbox {margin-bottom: 10px; clear: both; overflow: hidden;}
@@ -77,7 +77,7 @@ a.btn_blue {color: #FFF !important;}
 /* User Login Form */
 .reset_password {display: none;}
 .reset_password label {display: block; margin-bottom:5px;}
-.reset_password input[type="text"], .reset_password input[type="email"], .reset_password input[type="password"] {display: block; width:100%; padding: 10px; border:1px solid #DDD; color:#666;}
+.reset_password input[type="text"], .reset_password input[type="email"], .reset_password input[type="password"] {display: block; line-height:14px;width:100%; padding: 13px; border:1px solid #DDD; color:#666;}
 .reset_password input[type="checkbox"] {float:left; margin-right:5px;}
 .reset_password input[type="checkbox"]+label {float:left;}
 
@@ -87,7 +87,7 @@ a.btn_blue {color: #FFF !important;}
 /* User Register Form */
 .user_register {display: none;}
 .user_register label {display: block; margin-bottom:5px;}
-.user_register input[type="text"], .user_register input[type="email"], .user_register input[type="password"] {display: block; width:100%; padding: 10px; border:1px solid #DDD; color:#666;}
+.user_register input[type="text"], .user_register input[type="email"], .user_register input[type="password"] {display: block; line-height:14px;width:100%; padding: 13px; border:1px solid #DDD; color:#666;}
 .user_register input[type="checkbox"] {float:left; margin-right:5px;}
 .user_register input[type="checkbox"]+label {float:left;}
 
@@ -114,7 +114,7 @@ form p{
 .user_login1 .social_box:hover {background: #E4E4E2;}
 
 .user_login1 label {display: block; margin-bottom:5px;}
-.user_login1 input[type="text"], .user_login1 input[type="email"], .user_login1 input[type="password"] {display: block; width:100%; padding: 10px; border:1px solid #DDD; color:#666;}
+.user_login1 input[type="text"], .user_login1 input[type="email"], .user_login1 input[type="password"] {display: block; width:100%; padding: 13px; border:1px solid #DDD; color:#666;}
 .user_login1 input[type="checkbox"] {float:left; margin-right:5px;}
 .user_login1 input[type="checkbox"]+label {float:left;}
 .user_login1 .checkbox {margin-bottom: 10px; clear: both; overflow: hidden;}
@@ -122,7 +122,7 @@ form p{
 /* User Login Form */
 .reset_password1 {display: none;}
 .reset_password1 label {display: block; margin-bottom:5px;}
-.reset_password1 input[type="text"], .reset_password1 input[type="email"], .reset_password1 input[type="password"] {display: block; width:100%; padding: 10px; border:1px solid #DDD; color:#666;}
+.reset_password1 input[type="text"], .reset_password1 input[type="email"], .reset_password1 input[type="password"] {display: block; width:100%;line-height:14px; padding: 13px; border:1px solid #DDD; color:#666;}
 .reset_password1 input[type="checkbox"] {float:left; margin-right:5px;}
 .reset_password1 input[type="checkbox"]+label {float:left;}
 
@@ -133,14 +133,15 @@ form p{
 /* User Register Form */
 .common_model {display: none;}
 .common_model label {display: block; margin-bottom:5px;}
-.common_model input[type="text"], .common_model input[type="email"], .common_model input[type="password"] {display: block; width:100%; padding: 10px; border:1px solid #DDD; color:#666;}
+.common_model input[type="text"], .common_model input[type="email"], .common_model input[type="password"] {display: block;line-height:14px; width:100%; padding: 13px; border:1px solid #DDD; color:#666;}
 .common_model input[type="checkbox"] {float:left; margin-right:5px;}
 .common_model input[type="checkbox"]+label {float:left;}
-.common_model textarea[type="text"] {display: block; width:100%; padding: 10px; border:1px solid #DDD; color:#666;outline: none;}
+.common_model textarea[type="text"] {display: block; width:100%; padding: 13px; border:1px solid #DDD; color:#666;outline: none;}
 
 .common_model input[type="text"].level_input{
     padding: 7px 75px 7px 10px !important;
     margin-bottom: 15px;
+    line-height:14px;
 }
 
 .margin-top-9{
@@ -183,6 +184,7 @@ form p{
 .common_model.input_mineral input[type="text"], .common_model.input_mineral input[type="email"], .common_model.input_mineral input[type="password"] {
     display: block;
     width:100%;
+    line-height:14px;
     margin-top: 10px;
     padding: 0 5px!important;
     border:1px solid #DDD !important;
@@ -211,15 +213,15 @@ form p{
 /* Check Secret Question Form */
 .secret_question {display: none;}
 .secret_question label {display: block; margin-bottom:5px;}
-.secret_question input[type="text"], .secret_question input[type="email"], .secret_question input[type="password"] {display: block; width:100%; padding: 10px; border:1px solid #DDD; color:#666;}
+.secret_question input[type="text"], .secret_question input[type="email"], .secret_question input[type="password"] {display: block;line-height:14px; width:100%; padding: 13px; border:1px solid #DDD; color:#666;}
 .secret_question input[type="checkbox"] {float:left; margin-right:5px;}
 .secret_question input[type="checkbox"]+label {float:left;}
 
 .user_register1 {display: none;}
 .user_register1 label {display: block; margin-bottom:5px;}
-.user_register1 input[type="text"], .user_register1 input[type="email"], .user_register1 input[type="password"] {display: block; width:100%; padding: 10px; border:1px solid #DDD; color:#666;}
+.user_register1 input[type="text"], .user_register1 input[type="email"], .user_register1 input[type="password"] {display: block; line-height:14px;width:100%; padding: 13px; border:1px solid #DDD; color:#666;}
 .user_register1 input[type="checkbox"] {float:left; margin-right:5px;}
 .user_register1 input[type="checkbox"]+label {float:left;}
-.user_register1 select{display: block; width:100%; padding: 10px; border:1px solid #DDD; color:#666;outline: none}
+.user_register1 select{display: block; width:100%; padding: 13px; border:1px solid #DDD; color:#666;outline: none}
 
-.user_register select{display: block; width:100%; padding: 10px; border:1px solid #DDD; color:#666;outline: none}
+.user_register select{display: block; width:100%; padding: 13px; border:1px solid #DDD; color:#666;outline: none}

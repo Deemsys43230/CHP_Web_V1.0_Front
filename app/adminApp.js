@@ -75,11 +75,14 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../plugin/popup/style.css',
                                 '../../plugin/popup/jquery.leanModal.min.js',
                                 '../../css/profile-image-upload.css',
-                                '../../js/image-upload.js'
+                                '../../css/password.css',
+                                '../../js/image-upload.js',
+                                '../../app/adminProfile/adminProfileController.js'
                             ]
                         })
                     }
-                }
+                },
+                controller:'AdminProfileController'
             }).
             when('/site', {
                 templateUrl: 'views/site-FAQ.html',

@@ -1,10 +1,15 @@
 <style>
+    .hidden-x{
+        overflow-x: hidden
+    }
     table.sorting-table {cursor: move; display:inline-block; width:100%;}
-    table.sorting-table tbody{display:inline-block; width:100%;}
-    table tr.sorting-row td {background-color: transparent; /*box-shadow: 0 0 2px #ccc;*/padding: 3px 5px 0 5px;}
-    table tr.sorting-row td.sorter {background-color: transparent !important;/*box-shadow:none!important;*/}
+    table.sorting-table tbody{display:inline-block; width:100%}
+    table tr.sorting-row td {background-color: transparent; box-shadow: -2px 0 0 #f80; padding: 3px 5px 0 5px;}
+    table tr.sorting-row td.sorter {background-color: transparent !important;box-shadow:none!important;}
     table td.sorter {color: #f80; width: 25px; cursor: move;}
 </style>
+
+
 
 <!-- Start Page Banner -->
 
@@ -77,7 +82,7 @@
                                 <h5 ng-repeat="section in courseSections" class="margin-bottom-5 margin-right-20 wrap">Section {{section.sequenceno}} : <a href="#courseSection/{{section.sectionid}}" >{{section.sectiontitle}}</a>&nbsp;&nbsp;&nbsp;<span ng-show="courseDetails.canedit==1"><a href="#courseSectionEdit/{{section.sectionid}}" class="fa fa-pencil"></a></span></h5>
                             </div>
                         </div>
-                        <div class="col-md-12 no-padding" ng-show="courseDetails.canedit==1">
+                        <div class="col-md-12 no-padding hidden-x" ng-show="courseDetails.canedit==1">
                             <table class="sorting-table" attr-sample="thetable">
                                 <tbody>
                                 <tr ng-repeat="section in courseSections">

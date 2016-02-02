@@ -69,6 +69,8 @@ adminApp.controller('ForumsController',function($scope,requestHandler,Flash,$loc
 
 adminApp.controller('ForumsEditController',function($scope,requestHandler,Flash,$routeParams,siteMenuService,$location) {
 
+    $scope.activeClass.forums='active';
+
     $scope.siteMenuList = siteMenuService;
     $.each($scope.siteMenuList,function(index,value){
         if(value.id==1){
@@ -430,6 +432,7 @@ coachApp.controller('ForumsCoachController',function($scope,requestHandler,Flash
 
     $scope.isNew = true;
     $scope.title = "Add Forum";
+    $scope.activeClass.forums='active';
 
     //summer note
     $scope.options = {
@@ -564,6 +567,7 @@ coachApp.controller('ForumsCoachController',function($scope,requestHandler,Flash
 
 coachApp.controller('ForumsCoachEditController',function($scope,requestHandler,Flash,$routeParams,$location){
 
+    $scope.activeClass.forums='active';
     var original="";
     $scope.doGetForumDetailsByUserEdit= function () {
 

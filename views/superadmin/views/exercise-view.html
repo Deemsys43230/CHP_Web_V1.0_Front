@@ -12,15 +12,17 @@
                 <a href="#exercise" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back to Exercise List</a>
                 <a href="#exercise-edit/{{exerciseDetail.exerciseid}}" class="back-button pull-right margin-left-5"><i class="fa fa-pencil"></i> Edit Exercise</a>
                 <div flash-message="2000" class="col-md-4 pull-right"></div>
-                <h3 class="margin-bottom-10"><i class="fa fa-list-ul"></i> &nbsp;Exercise View</h3>
+                <h4 class="classic-title"><span><i class="fa fa-list-ul"></i> &nbsp;Exercise View</span></h4>
                 <div ng-if="loaded">
                     <div class="loader-style">
                         <div class="loader"></div>
                     </div>
                 </div>
-                <div class="row margin-top-10">
-                    <div class="col-md-12"><hr/></div>
-                    <div class="col-md-9">
+                <div class="row">
+                    <div class="col-md-3 margin-top-10">
+                        <img ng-src="{{exerciseDetail.imageurl}}"/><br/><br/>
+                    </div>
+                    <div class="col-md-9 h5 text-bold">
                         <div class="row margin-top-10">
                             <div class="col-md-4">Exercise Id<span class="pull-right">:</span></div>
                             <div class="col-md-8">{{exerciseDetail.exerciseid}}</div>
@@ -36,13 +38,8 @@
                         </div>
                         <div class="row margin-top-10">
                             <div class="col-md-4">MET<span class="pull-right">:</span></div>
-                            <div class="col-md-8">{{exerciseDetail.MET}}
-
-                            </div>
+                            <div class="col-md-8">{{exerciseDetail.MET}}</div>
                         </div>
-                    </div>
-                    <div class="col-md-3 pull-right">
-                        <img ng-src="{{exerciseDetail.imageurl}}"/><br/><br/>
                     </div>
                 </div>
 

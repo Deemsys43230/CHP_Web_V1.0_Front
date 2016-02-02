@@ -3,6 +3,7 @@ var coachApp = angular.module('coachApp', ['ngRoute','oc.lazyLoad','requestModul
 coachApp.controller('CoachPaymentController',function($scope,requestHandler,Flash,$routeParams) {
 
     $scope.paginationLoad=false;
+    $scope.activeClass.payments='active';
 
     // To display Course list by user
     $scope.doGetMyCourseListByUser=function(){

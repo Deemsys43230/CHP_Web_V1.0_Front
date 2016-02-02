@@ -55,6 +55,10 @@ input:focus,a:focus
 	outline : none !important;
 }
 
+select::-ms-expand {
+    display: none;
+}
+
 .modal {
 	z-index: 10001 !important;
 }
@@ -1022,10 +1026,11 @@ ul.social-list li:last-child a i {
     -webkit-transition: all 0.3s ease-in-out;
     -o-transition: all 0.3s ease-in-out;
     font-weight: 400;
+    border-bottom: 3px solid #fff;
 }
 
 .navbar-default .navbar-nav > li > a.active, .navbar-default .navbar-nav > li:hover > a {
-    border-bottom: 3px solid;
+    border-color: #f8ba01;
 }
 
 .navbar-default .navbar-nav > li > a i {
@@ -1685,7 +1690,8 @@ input[type="submit"] {
 #respond input[type="text"],
 #respond textarea, .email {
     color: #666fb5;
-    font-size: 13px;
+    font-size: 13px!important;
+    line-height: 13px!important;
     font-family: 'Open Sans', sans-serif;
     border: 1px solid #eee;
     border-radius: 2px;
@@ -1694,7 +1700,7 @@ input[type="submit"] {
     -o-border-radius: 2px;
     outline: none;
     width: 100%;
-    padding: 7px 14px;
+    padding: 7px 14px!important;
     display: block;
     margin-bottom: 10px;
 	transition: all 0.4s ease-in-out;
@@ -3606,27 +3612,35 @@ ul.icons-list li i {
 /*************** Heading Titles ***************/
 
 .classic-title {
-    font-size: 20px;
+    font-size: 18px;
 	margin-bottom: 10px;
 	padding-bottom: 10px;
 	border-bottom: 3px solid #eee;
     font-weight: 600;
 }
 
+.classic-title span {
+    padding-bottom: 9px;
+    border-bottom: 3px solid;
+    font-weight: 600;
+}
+
 
 h5.classic-title {
     font-size: 16px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     padding-bottom: 10px;
     border-bottom: 3px solid #eee;
     font-weight: 600;
 }
 
-.classic-title span {
-	padding-bottom: 8px;
-	border-bottom: 3px solid;
+h5.classic-title span {
+	padding-bottom: 10px;
+	border-bottom: 3px solid #f8ba01;
 	font-weight: 600;
 }
+
+
 
 h5.classic-title a{
     color: #777;
@@ -6420,6 +6434,14 @@ ul.footer-nav li a:hover {
     font-weight: normal !important;
 }
 
+.payment-font{
+    color: #fff !important;
+    text-align: left;
+    font-size: 30px !important;
+    line-height: 50px !important;
+    font-weight: normal !important;
+}
+
 
 .parallax{
   width:100%;
@@ -8166,6 +8188,10 @@ ul.sidebar-menu li a{
     height: 265px !important;
 }
 
+.height-350{
+    height: 350px !important;
+}
+
 .height-150{
     height: 150px !important;
 }
@@ -8558,9 +8584,9 @@ a:hover, a:visited, a:link, a:active
 .profile_input
 {
 	font-size: 14px;
+    line-height: 14px!important;
 	color: #333;
-    line-height: 20px;
-	padding: 5px 8px;
+	padding: 7px 10px;
 	width: 100%;
 	border:0px !important;
 	-moz-appearance: none;
@@ -8798,6 +8824,16 @@ tr.sort-icon th i{
     overflow-y: hidden;
 }
 
+.name-line-clamp{
+    max-height: 24px;
+    width: 100%;
+    border: none !important;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow-y: hidden;
+}
+
 .max-width-400{
 	max-width: 400px !important;
 }
@@ -8862,7 +8898,7 @@ tr.sort-icon th i{
 	width: 100%;
 	height: auto;
 	border: 1px solid #ddd;
-	padding: 20px;
+	padding: 10px 15px;
 	background: white;
 }
 
@@ -9108,6 +9144,30 @@ input[type=range]:focus::-ms-fill-upper {
 	background: -o-linear-gradient(to right, rgba(255, 255, 255, 0), white 45%, white);
 	background: -ms-linear-gradient(to right, rgba(255, 255, 255, 0), white 45%, white);
 	background: linear-gradient(to right, rgba(255, 255, 255, 0), white 45%, white);
+}
+
+.one-line-shade{
+    overflow:hidden;
+    text-overflow:ellipsis;
+    -ms-text-overflow:ellipsis;
+    display:block;
+    display: -webkit-box;
+    position:relative;
+    height:26px;
+    margin-right:10px;
+}
+
+.one-line-shade::after{
+    content:'\00a0';
+    position:absolute;
+    bottom:0;
+    right:0;
+    padding:0 10px 5px 30px;
+    background: -webkit-gradient(linear, left top, right top, from(rgba(255, 255, 255, 0)), to(white), color-stop(45%, white));
+    background: -moz-linear-gradient(to right, rgba(255, 255, 255, 0), white 45%, white);
+    background: -o-linear-gradient(to right, rgba(255, 255, 255, 0), white 45%, white);
+    background: -ms-linear-gradient(to right, rgba(255, 255, 255, 0), white 45%, white);
+    background: linear-gradient(to right, rgba(255, 255, 255, 0), white 45%, white);
 }
 
 .post-row a{

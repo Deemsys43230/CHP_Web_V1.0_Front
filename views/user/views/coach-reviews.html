@@ -19,16 +19,16 @@
             <div class="content_scrollbar">
                 <ul>
                     <li ng-repeat="reviews in coachReviews">
-                        <div class="col-md-2">
+                        <div class="col-md-1 no-padding">
                             <img class="img-circle" ng-src="{{reviews.review_imageurl | trusted}}">
                         </div>
-                        <div class="col-md-3 no-padding">
-                            <p> <strong>{{reviews.review_username}}</strong></p>
-                            <span class="small-font">{{reviews.reviewddatetime}}</span>
+                        <div class="col-md-4">
+                            <strong>{{reviews.review_username}}</strong><br/>
+                            <span class="small-font text-gray">{{reviews.reviewddatetime}}</span>
                         </div>
                         <div class="col-md-5">
-                            <strong>{{reviews.reviewtitle}}</strong>
-                            <p>{{reviews.reviewdescription}}</p>
+                            <strong>{{reviews.reviewtitle}}</strong><br/>
+                            <span class="small-font text-gray">{{reviews.reviewdescription}}</span>
                         </div>
 
                         <div class="col-md-2">
