@@ -18,10 +18,17 @@ coachApp.controller('CoachSubscriptionController',function($scope,requestHandler
         requestHandler.getRequest("coachSubscriptionDetail/","").then(function(response){
 
             $scope.subscriptionDetail=response.data['Coach Subscription Detail'][0];
+            if($scope.subscriptionDetail.onemonth_amount==0){
+                $scope.subscriptionDetail.onemonth_amount="";
+            }
             $scope.subscriptionDetail.onemonth_amount=$scope.subscriptionDetail.onemonth_amount.toString();
+            if($scope.subscriptionDetail.threemonth_percentage!=null){
             $scope.subscriptionDetail.threemonth_percentage=$scope.subscriptionDetail.threemonth_percentage.toString();
-            $scope.subscriptionDetail.sixmonth_percentage=$scope.subscriptionDetail.sixmonth_percentage.toString();
-           original=angular.copy($scope.subscriptionDetail);
+            }
+            if($scope.subscriptionDetail.sixmonth_percentage!=null){
+                $scope.subscriptionDetail.sixmonth_percentage=$scope.subscriptionDetail.sixmonth_percentage.toString();
+            }
+                original=angular.copy($scope.subscriptionDetail);
             $scope.doCalculatesubscription();
 
         },function(response){
@@ -66,7 +73,7 @@ coachApp.controller('CoachSubscriptionController',function($scope,requestHandler
         return angular.equals(original, $scope.subscriptionDetail);
     };
 
- 
+
 
     $scope.doGetCoachSubscriptionDetails();
 
