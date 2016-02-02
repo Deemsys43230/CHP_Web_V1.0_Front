@@ -67,8 +67,7 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../app/userDashboard/userDashboardService.js',
                                 '../../app/userDashboard/userDashboardController.js',
                                 '../../plugin/dateRange/daterangepicker.css',
-                                '../../plugin/dateRange/daterangepicker.js',
-                                '../../angular/angular-search-dropdown.js'
+                                '../../plugin/dateRange/daterangepicker.js'
                             ]
                         })}},
                 controller:'UserDashboardController'
