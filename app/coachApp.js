@@ -393,6 +393,7 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'coachApp',
                             files:[
+                                '../../css/custom-inputs.css',
                                 '../../angular/angular-utils-pagination/dirPagination.js',
                                 '../../app/coachPaymentSettings/coachSubscriptionSettings.js'
                             ]

@@ -21,59 +21,81 @@
                     <hr/>
                     <form name="subscriptionForm" novalidate>
                         <div class="row form-set">
-                            <div class="col-md-3 margin-top-10">
-                                <h4>Basic Pay (1 month) :</h4>
-                            </div>
-                            <div class="col-md-9 margin-top-10">
-                                <div class="col-md-4">
-                                <input class="section-input" placeholder="Enter Basic Pay" name="basicpay"  ng-model="subscriptionDetail.onemonth_amount" ng-change="doCalculatesubscription()" required valid-floatnumber>
+                            <div class="col-md-12 no-padding">
+                                <div class="col-md-1">&nbsp;</div>
+                                <div class="col-md-3">
+                                    <h4>Basic Pay (1 month) :</h4>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="col-md-4">
+                                        <input class="section-input" placeholder="Enter Basic Pay" name="basicpay"  ng-model="subscriptionDetail.onemonth_amount" ng-change="doCalculatesubscription()" required valid-floatnumber>
                                  <span ng-show="subscriptionForm.basicpay.$dirty&&subscriptionForm.basicpay.$invalid">
                                         <span class="error-message" ng-show="subscriptionForm.basicpay.$error.required"><span>Required.</span></span>
                                       <span class="error-message" ng-show="!subscriptionForm.basicpay.$error.required&&subscriptionForm.basicpay.$error.validateFloat1"><span>Invalid&nbsp;Data.</span></span>
                                  </span>
                                     </div>
-                                <div class="col-md-8">
-                                    <!-- <h4>% of {{subscriptionDetail.onemonth_amount * 3}} = {{(subscriptionDetail.onemonth_amount*3)-(subscriptionDetail.onemonth_amount * subscriptionDetail.threemonth_percentage) /100}}</h4>-->
-                                    <h4>$</h4>
+                                    <div class="col-md-8">
+                                        <!-- <h4>% of {{subscriptionDetail.onemonth_amount * 3}} = {{(subscriptionDetail.onemonth_amount*3)-(subscriptionDetail.onemonth_amount * subscriptionDetail.threemonth_percentage) /100}}</h4>-->
+                                        <h4>$</h4>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-md-3 margin-top-10">
-                                <h4>Subscription (3 months) :</h4>
-                            </div>
-                            <div class="col-md-9 margin-top-10">
-                                <div class="col-md-4">
-                                <input class="section-input" placeholder="Enter Discount % for 3 months" ng-change="doCalculatesubscription()" name="threemonthpercentage"  ng-model="subscriptionDetail.threemonth_percentage" required valid-number>
+
+                            <div class="col-md-12 no-padding">
+                                <div class="col-md-1 margin-top-30">
+                                    <checkbox-group>
+                                        <span class="fh-checkbox">
+                                            <input type="checkbox" id="type1" ng-model="disablethreemonth" >
+                                            <label for="type1"></label>
+                                        </span>
+                                    </checkbox-group>
+                                </div>
+                                <div class="col-md-3 margin-top-10">
+                                    <h4>Subscription (3 months) :</h4>
+                                </div>
+                                <div class="col-md-8 margin-top-10">
+                                    <div class="col-md-4">
+                                        <input class="section-input" placeholder="Enter Discount % for 3 months" ng-change="doCalculatesubscription()" name="threemonthpercentage" ng-disabled="!disablethreemonth" id="threemonth"  ng-model="subscriptionDetail.threemonth_percentage" ng-required="disablethreemonth" valid-number="disablethreemonth" >
                                  <span ng-show="subscriptionForm.threemonthpercentage.$dirty&&subscriptionForm.threemonthpercentage.$invalid">
                                         <span class="error-message" ng-show="subscriptionForm.threemonthpercentage.$error.required"><span>Required.</span></span>
                                       <span class="error-message" ng-show="!subscriptionForm.threemonthpercentage.$error.required&&subscriptionForm.threemonthpercentage.$error.max"><span>Should&nbsp;not&nbsp;be&nbsp;greater&nbsp;than&nbsp;90.</span></span>
                                      <!--<span class="error-message" ng-show="!subscriptionForm.threemonthpercentage.$error.required&&subscriptionForm.threemonthpercentage.$error.validateFloat"><span>Invalid&nbsp;Format.</span></span>-->
                                  </span>
-                                </div>
-                                <div class="col-md-8">
-                                 <!-- <h4>% of {{subscriptionDetail.onemonth_amount * 3}} = {{(subscriptionDetail.onemonth_amount*3)-(subscriptionDetail.onemonth_amount * subscriptionDetail.threemonth_percentage) /100}}</h4>-->
-                                    <h4> % discount of {{totalthreemonthamount}} $ = {{percentagethreemonthamount}} $</h4>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <!-- <h4>% of {{subscriptionDetail.onemonth_amount * 3}} = {{(subscriptionDetail.onemonth_amount*3)-(subscriptionDetail.onemonth_amount * subscriptionDetail.threemonth_percentage) /100}}</h4>-->
+                                        <h4> % discount of {{totalthreemonthamount}} $ = {{percentagethreemonthamount}} $</h4>
+                                    </div>
                                 </div>
                             </div>
 
-                            <div class="col-md-3 margin-top-10">
-                                <h4>Subscription (6 months) :</h4>
-                            </div>
-                            <div class="col-md-9 margin-top-10">
-                                <div class="col-md-4">
-                                <input class="section-input" placeholder="Enter Discount % 6 months" name="sixmonthpercentage" ng-change="doCalculatesubscription()"  ng-model="subscriptionDetail.sixmonth_percentage" required valid-number>
+                            <div class="col-md-12 no-padding">
+                                <div class="col-md-1 margin-top-30">
+                                    <checkbox-group>
+                                <span class="fh-checkbox">
+                                    <input type="checkbox" id="type2" ng-model="disablesixmonth" >
+                                    <label for="type2"></label>
+                                </span>
+                                    </checkbox-group>
+                                </div>
+                                <div class="col-md-3 margin-top-10">
+                                    <h4>Subscription (6 months) :</h4>
+                                </div>
+                                <div class="col-md-8 margin-top-10">
+                                    <div class="col-md-4">
+                                        <input class="section-input" placeholder="Enter Discount % 6 months" name="sixmonthpercentage" ng-change="doCalculatesubscription()" ng-disabled="!disablesixmonth" id="sixmonth"  ng-model="subscriptionDetail.sixmonth_percentage" ng-required="disablesixmonth"  valid-number="disablesixmonth">
                                  <span ng-show="subscriptionForm.sixmonthpercentage.$dirty&&subscriptionForm.sixmonthpercentage.$invalid">
                                         <span class="error-message" ng-show="subscriptionForm.sixmonthpercentage.$error.required"><span>Required.</span></span>
                                      <span class="error-message" ng-show="!subscriptionForm.sixmonthpercentage.$error.required&&subscriptionForm.sixmonthpercentage.$error.max"><span>Should&nbsp;not&nbsp;be&nbsp;greater&nbsp;than&nbsp;90.</span></span>
                                     <!--  <span class="error-message" ng-show="!subscriptionForm.sixmonthpercentage.$error.required&&subscriptionForm.sixmonthpercentage.$error.validateFloat"><span>Invalid&nbsp;Format.</span></span>-->
                                  </span>
                                     </div>
-                                <div class="col-md-8">
-                                   <!-- <h4>% of {{subscriptionDetail.onemonth_amount * 6}} = {{(subscriptionDetail.onemonth_amount*6)-(subscriptionDetail.onemonth_amount * subscriptionDetail.sixmonth_percentage) /100}}</h4>-->
-                                    <h4> % discount of {{totalsixmonthamount}} $ = {{percentagesixmonthamount}} $</h4>
+                                    <div class="col-md-8">
+                                        <!-- <h4>% of {{subscriptionDetail.onemonth_amount * 6}} = {{(subscriptionDetail.onemonth_amount*6)-(subscriptionDetail.onemonth_amount * subscriptionDetail.sixmonth_percentage) /100}}</h4>-->
+                                        <h4> % discount of {{totalsixmonthamount}} $ = {{percentagesixmonthamount}} $</h4>
+                                    </div>
                                 </div>
                             </div>
-
-
                         </div>
 
                     <div class="text-center margin-top-20">

@@ -7,6 +7,10 @@ var coachApp = angular.module('coachApp', ['ngRoute','oc.lazyLoad','requestModul
 coachApp.controller('CoachSubscriptionController',function($scope,requestHandler,Flash,$location) {
 //sidebar menu active class
     $scope.activeClass = {subscriptionPanel:'active'};
+    $scope.disablethreemonth=false;
+    $scope.disablesixmonth=false;
+    /*$("#threemonth").prop('required',false);
+    $("#sixmonth").prop('required',false);*/
 
     var original="";
     $scope.doGetCoachSubscriptionDetails = function(){
@@ -19,6 +23,7 @@ coachApp.controller('CoachSubscriptionController',function($scope,requestHandler
             $scope.subscriptionDetail.sixmonth_percentage=$scope.subscriptionDetail.sixmonth_percentage.toString();
            original=angular.copy($scope.subscriptionDetail);
             $scope.doCalculatesubscription();
+
         },function(response){
             errorMessage(Flash,"Please Try again later");
         });
@@ -60,6 +65,8 @@ coachApp.controller('CoachSubscriptionController',function($scope,requestHandler
     $scope.isCleanSubscriptionDetails=function(){
         return angular.equals(original, $scope.subscriptionDetail);
     };
+
+ 
 
     $scope.doGetCoachSubscriptionDetails();
 
