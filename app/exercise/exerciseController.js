@@ -141,14 +141,7 @@ adminApp.controller('ExerciseEditController',function($q,$scope,requestHandler,F
         }
     };
 
-    //Get Tags
-    var excerciseTagPromise=ExerciseService.doGetTags();
-    excerciseTagPromise.then(function(result){
-        $scope.exerciseTagList=result;
-        $.each($scope.exerciseTagList, function(index,value){
-            $scope.tagListArray.push(value.tagname);
-        });
-    });
+
 
     $scope.tagTransform = function (newTag) {
         if($scope.tagListArray.indexOf(newTag)==-1){
@@ -452,8 +445,18 @@ adminApp.controller('ExerciseEditController',function($q,$scope,requestHandler,F
 
     };
 
+    //Get Tags
+    $scope.tagListArray=[];
+    var excerciseTagPromise=ExerciseService.doGetTags();
+    excerciseTagPromise.then(function(result){
+        $scope.exerciseTagList=result;
+        $.each($scope.exerciseTagList, function(index,value){
+            $scope.tagListArray.push(value.tagname);
+        });
+    });
     //Initialize Page
     //Get Exercise Details
+    $q.all([excerciseTagPromise]).then(function(){
     if($scope.type==1){
         $scope.doSetExcerciseDetails();
         $scope.doGetExcerciseTypeList();
@@ -461,6 +464,7 @@ adminApp.controller('ExerciseEditController',function($q,$scope,requestHandler,F
         $scope.doGetExcerciseDetails();
         $scope.doGetExcerciseTypeList();
     }
+    });
 
 
 

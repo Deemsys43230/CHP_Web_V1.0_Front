@@ -392,7 +392,6 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
     $scope.doInsertUserExercise=function(){
         //Set values according to the api calls
         $scope.userExercise.exerciseid=$scope.userSelectedExerciseDetails.exerciseid;
-        $scope.userExercise.levelid=$scope.userExercise.levelid.levelid;
 
         if($scope.selectedDate==selectedDate){
             $scope.userExercise.date=$scope.selectedDate;
@@ -446,15 +445,15 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
                 $scope.userExercise.userexercisemapid=userexercisemapid;
                 $scope.userExercise.exerciseid=exerciseid;
                 //$scope.userExercise.levelid=result.User_exercise_data.Level;
-                $.each($scope.userSelectedExerciseDetails.type.levels, function(index,value) {
+               /* $.each($scope.userSelectedExerciseDetails.type.levels, function(index,value) {
                     if(value.levelid == result.User_exercise_data.Level.levelid){
                         $scope.userExercise.levelid = value;
                         originallevel=angular.copy(value);
                     }
-                });
-                $scope.userExercise.workoutvalue=parseInt(result.User_exercise_data.Level.workoutvalue);
-                originaltiming = parseInt(result.User_exercise_data.Level.workoutvalue);
-                $scope.current=$scope.caloriesSpent=result.User_exercise_data.Level.calories;
+                });*/
+                $scope.userExercise.workoutvalue=parseInt(result.workoutvalue);
+                originaltiming = parseInt(result.workoutvalue);
+                $scope.current=$scope.caloriesSpent=result.calories;
                 $scope.current=$scope.current.toFixed(2);
                 if(($scope.current.length-3)>2) $scope.max=100+((String($scope.current|0).slice(0, -2))*100);
                 else $scope.max=100;

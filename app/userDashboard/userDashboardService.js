@@ -149,7 +149,7 @@ adminApp.factory("UserDashboardService",function(requestHandler){
         return requestHandler.postRequest("user/searchExercisebyUser/",{"exercisename":searchStr}).then(function (response) {
             var exerciseSearchResponse=response.data.exercisesData;
             $.each(exerciseSearchResponse, function(index,value){
-                value.imagepath=value.imagepath+"150x150.jpg";
+                value.imagepath=value.imagepath+"50x50.jpg";
             });
             return exerciseSearchResponse;
         }, function () {
@@ -161,12 +161,11 @@ adminApp.factory("UserDashboardService",function(requestHandler){
     userDashboardServiceObj.doGetSelectedExerciseDetails= function (exerciseid) {
         return requestHandler.postRequest("user/getExerciseDetailByuser/",{"exerciseid":exerciseid}).then(function (response) {
             var userSelectedExerciseDetails=response.data.ExerciseDetail;
-/*
+
             $.each(userSelectedExerciseDetails, function(index,value){
-               var index=value.imageurl.lastIndexOf('/');
-                value.imageurl=value.imageurl.substring(0,index);
-                value.imageurl=value.imageurl+"/200x200.jpg";
-            });*/
+                value.imageurl=value.imageurl+"/50x50.jpg";
+            });
+
             return userSelectedExerciseDetails;
         }, function () {
             errorMessage(Flash, "Please try again later!")
