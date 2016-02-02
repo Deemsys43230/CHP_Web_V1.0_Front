@@ -679,7 +679,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
     $scope.weightLogEntry=function(){
         $scope.weightUpdateText="Updating...";
         $scope.spinner=true;
-        if($("#weight-log-date").val()==selectedDate){
+        if($("#weight-log-date").val()==selectedDate && $scope.updateGoal==1){
             $window.currentweight = parseFloat($("#weightLog").val());
             refreshGraph();
         }
