@@ -76,6 +76,17 @@
                         <span class="error-message" ng-show="foodForm.tagid.$error.uiSelectRequired"><span>Required.</span></span>
                     </span>
                     </div>
+                    <h5>Not Suitable For :</h5><br/>
+                    <div class="col-md-1"></div>
+                    <div class="col-md-11">
+                        <span class="fh-checkbox" required>
+                            <input type="checkbox" id="notobesity" name="notobesity" ng-true-value="'1'" ng-false-value="'0'"  ng-checked="foodDetails.notobesity=='1'" ng-model="foodDetails.notobesity">
+                            <label for="notobesity">Obesity</label>
+                            <input type="checkbox" id="notdiabetes" name="notdiabetes" ng-true-value="'1'" ng-false-value="'0'"  ng-checked="foodDetails.notdiabetes=='1'" ng-model="foodDetails.notdiabetes">
+                            <label for="notdiabetes">Diabetes</label>
+                        </span>
+                    </div>
+
                 </div>
                 <span ng-show="inputContainsFile">
                     <span class="error-message textarea-errormessage20-left"><span>Required.</span></span>

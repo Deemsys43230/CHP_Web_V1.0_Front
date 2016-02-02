@@ -148,9 +148,6 @@ adminApp.factory("UserDashboardService",function(requestHandler){
     userDashboardServiceObj.searchExercise=function(searchStr){
         return requestHandler.postRequest("user/searchExercisebyUser/",{"exercisename":searchStr}).then(function (response) {
             var exerciseSearchResponse=response.data.exercisesData;
-            $.each(exerciseSearchResponse, function(index,value){
-                value.imagepath=value.imagepath+"50x50.jpg";
-            });
             return exerciseSearchResponse;
         }, function () {
             errorMessage(Flash, "Please try again later!")

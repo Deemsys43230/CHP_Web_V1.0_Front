@@ -223,6 +223,18 @@ adminApp.controller("FoodDetailsViewController",function($scope,requestHandler,$
             console.log("view", $scope.foodDetails);
            $scope.foodDetails.foodImagePath=$scope.foodDetails.foodImagePath+"1000x1000.jpg"+"?decache="+Math.random();
 
+            //Set Suitable For
+            if($scope.foodDetails.notobesity==1){
+                $scope.foodDetails.notSuitableFor="Obesity";
+                if($scope.foodDetails.notdiabetes==1){
+                     $scope.foodDetails.notSuitableFor+=", Diabetes";
+                }
+            }else if($scope.foodDetails.notdiabetes==1){
+                $scope.foodDetails.notSuitableFor="Diabetes";
+            }else{
+                $scope.foodDetails.notSuitableFor="-"
+            }
+
           //  $scope.foodDetails.foodImagePath=$scope.foodDetails.foodImagePath.substring($scope.foodDetails.foodImagePath.indexOf("/")+14,$scope.foodDetails.foodImagePath.length)
             console.log("ImagePath:"+$scope.foodDetails.foodImagePath);
         },function(response){
@@ -293,6 +305,9 @@ $scope.imageload=true;
 
             //Set Region Values
             $scope.foodDetails.regionid=$scope.foodDetails.regionid.regionid;
+
+
+            
 
             original=angular.copy($scope.foodDetails);
 

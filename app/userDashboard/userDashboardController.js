@@ -1,4 +1,4 @@
-var userApp= angular.module('userApp', ['ngRoute','oc.lazyLoad','ngCookies','requestModule','flash','ngAnimate','ngTouch', 'angucomplete-alt','ngPercentDisplay','userDashboardServiceModule','ui.bootstrap','angular-svg-round-progress']);
+var userApp= angular.module('userApp', ['ngRoute','oc.lazyLoad','ngCookies','requestModule','flash','ngAnimate','ngTouch', 'angucomplete-alt','ngPercentDisplay','userDashboardServiceModule','angular-svg-round-progress','mm.foundation']);
 
 userApp.controller('UserDashboardController',function($scope,$window,requestHandler,Flash,UserDashboardService,$interval,roundProgressService,limitToFilter) {
     $scope.foodSearchResult = [];
@@ -40,6 +40,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
             $("#lean_overlay").hide();
            $scope.resetdata();
         });
+        $scope.selectedFood="";
     };
 
     //Modal Popup to add user exercise
@@ -64,6 +65,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
             $("#lean_overlay").hide();
             $scope.resetexercisedata();
         });
+        $scope.selectedExercise="";
     };
 
     //On Select frequent foods
@@ -80,10 +82,10 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
     };
 
     //On Select search function
-    $scope.foodSelected=function(selected){
+    $scope.foodSelected=function(){
         $scope.isNew=true;
         $scope.title= "Add Food";
-        var getFoodDetailPromise=UserDashboardService.doGetSelectedFoodDetails(selected.description.foodid);
+        var getFoodDetailPromise=UserDashboardService.doGetSelectedFoodDetails($scope.selectedFood.foodid);
         getFoodDetailPromise.then(function(result){
             $scope.userSelectedFoodDetails=result;
             $scope.doUserAddFood();
@@ -247,12 +249,16 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         }
     };
 
-    //Search Function for food
+   //Search Function for food
      $scope.inputChanged = function(searchStr) {
+        
          var userFoodDiaryDetailPromise=UserDashboardService.searchFood(searchStr,$scope.userFood.sessionid);
-         userFoodDiaryDetailPromise.then(function(result){
-             $scope.foodSearchResult=result;
+         return userFoodDiaryDetailPromise.then(function(result){
+            var foods = [];
+            $scope.foodSearchResult=result; 
+            return $scope.foodSearchResult;
          });
+
     };
 
     // To get User Basic details
@@ -350,8 +356,9 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
     //Search Function for exercise
     $scope.inputChangedExercise = function(searchStr) {
         var userExerciseDiaryDetailPromise=UserDashboardService.searchExercise(searchStr);
-        userExerciseDiaryDetailPromise.then(function(result){
+        return userExerciseDiaryDetailPromise.then(function(result){
             $scope.exerciseSearchResult=result;
+            return $scope.exerciseSearchResult;
         });
     };
 
@@ -369,10 +376,10 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
     };
 
     //On Select search exercise function
-    $scope.exerciseSelected=function(selected){
+    $scope.exerciseSelected=function(){
         $scope.isNew=true;
         $scope.title= "Add Exercise";
-        var getExerciseDetailPromise=UserDashboardService.doGetSelectedExerciseDetails(selected.description.exerciseid);
+        var getExerciseDetailPromise=UserDashboardService.doGetSelectedExerciseDetails($scope.selectedExercise.exerciseid);
         getExerciseDetailPromise.then(function(result){
             $scope.userSelectedExerciseDetails=result;
             $scope.doUserAddExercise ();
@@ -505,6 +512,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
 
     //Calories caluclation for exercose
     $scope.doCalculateCaloriesExercise=function(){
+        console.log($scope.userExercise);
         if($scope.userExercise.workoutvalue==0){
             $scope.current=$scope.caloriesSpent=0;
         }
@@ -512,7 +520,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
             $scope.current=$scope.caloriesSpent=0;
         }
         else{
-            $scope.current=$scope.caloriesSpent=$scope.userExercise.levelid.calories*$scope.userExercise.workoutvalue;
+            $scope.current=$scope.caloriesSpent=$scope.userSelectedExerciseDetails.MET*$scope.demography.weight*($scope.userExercise.workoutvalue/60);
 
             $scope.current=$scope.current.toFixed(2);
             if(($scope.current.length-3)>2) $scope.max=$scope.max+((String($scope.current|0).slice(0, -2))*100);

@@ -1,4 +1,3 @@
-
 <style xmlns="http://www.w3.org/1999/html">
     /*weight level*/
 
@@ -29,6 +28,24 @@
     }
 
 </style>
+
+<!--Food Template-->
+<script type="text/ng-template" id="foodTemplate.html">
+  <a>       
+      <img class="img-circle" ng-src="{{match.model.foodImagePath}}" width="35">&nbsp;
+      <span bind-html-unsafe="match.label"></span>&nbsp;
+      <span ng-show="match.model.issuitable==1" class="green">&nbsp;</span> 
+      <span ng-show="match.model.issuitable==0" class="red">&nbsp;</span> 
+  </a>
+</script>
+
+<!--Exercise Template-->
+<script type="text/ng-template" id="exerciseTemplate.html">
+  <a>       
+      <img class="img-circle" ng-src="{{match.model.imagepath}}50x50.jpg" width="35">&nbsp;
+      <span bind-html-unsafe="match.label"></span>
+  </a>
+</script>
 
 <div class="page-banner1">
 
@@ -157,8 +174,8 @@
                                     </div>
 
                                     <div class="content-1">
-                                        <div angucomplete-alt id="ex10" placeholder="Search Food" pause="100" selected-object="foodSelected" local-data="foodSearchResult" search-fields="foodname" title-field="foodname" image-field="foodImagePath" minlength="1" input-class="weight_input full-width" match-class="highlight" input-changed="inputChanged" clear-selected="true" >
-                                        </div>
+                                        <input class="profile_input" type="text" ng-model="selectedFood" placeholder="Search Food" typeahead="food as food.foodname for food in inputChanged($viewValue)" typeahead-template-url="foodTemplate.html" typeahead-on-select="foodSelected()" typeahead-class="form-control">
+                                        <span ng-show="loadingLocations">Searching Foods..</span>
                                     </div>
                                     <div class="food_scrollbar style">
                                         <div ng-if="loaded" class="col-md-12">
@@ -168,10 +185,13 @@
                                         </div>
                                         <ul class="food">
                                             <li class="row" ng-repeat="foodDiaryData in userFoodDiaryData | orderBy:'$index':true">
-                                                <div class="col-md-2 no-padding"><img ng-src="{{foodDiaryData.foodImagePath+'200x200.jpg'}}"></div>
+                                                <div class="col-md-2 no-padding"><img ng-src="{{foodDiaryData.foodImagePath+'50x50.jpg'}}"></div>
                                                 <div class="col-md-10 no-padding">
                                                     <a href="" class="pull-right food_close" title="Delete Food" ng-click="doDeleteUserFood(foodDiaryData.userfoodid)">x</a>
-                                                    <div class="food_name">{{foodDiaryData.foodname}}</div>
+                                                    <div class="food_name">{{foodDiaryData.foodname}}&nbsp;
+                                                    <span ng-show="foodDiaryData.issuitable==1" class="green">&nbsp;</span> 
+                                                    <span ng-show="foodDiaryData.issuitable==0" class="red">&nbsp;</span> 
+                                                    </div>
                                                     <div class="margin-top-10">
                                                         <span class="pull-right text-green text-bold"><strong><i class="fa fa-angle-up"></i>&nbsp;{{foodDiaryData.measureid.calories}}  calories</strong></span>
                                                         <div class="select_food">
@@ -202,8 +222,8 @@
                                 </div>
                             </div>
                             <div class="content-1">
-                                <div angucomplete-alt id="ex11" placeholder="Search Exercise" pause="100" selected-object="exerciseSelected" local-data="exerciseSearchResult" search-fields="exercisename" title-field="exercisename" image-field="imagepath" minlength="1" input-class="weight_input full-width" match-class="highlight" input-changed="inputChangedExercise" clear-selected="true" >
-                                </div>
+                                 <input class="profile_input" type="text" ng-model="selectedExercise" placeholder="Search Exercise" typeahead="exercise as exercise.exercisename for exercise in inputChangedExercise($viewValue)" typeahead-template-url="exerciseTemplate.html" typeahead-on-select="exerciseSelected()" typeahead-class="form-control">
+                                <span ng-show="loadingLocations">Searching Exercises..</span>
                             </div>
                             <div class="food_scrollbar style height-320">
                                 <div ng-if="loaded" class="col-md-12">
@@ -213,10 +233,10 @@
                                 </div>
                                 <ul class="food">
                                     <li class="row" ng-repeat="exerciseDiaryData in userExerciseDiaryDataAll | orderBy:'$index':true">
-                                        <div class="col-md-2 no-padding"><img ng-src="{{exerciseDiaryData.exerciseImagePath+'200x200.jpg'}}"></div>
+                                        <div class="col-md-2 no-padding"><img ng-src="{{exerciseDiaryData.exerciseImagePath+'50x50.jpg'}}"></div>
                                         <div class="col-md-10 no-padding">
                                             <a href="" class="pull-right food_close" title="Delete Exercise" ng-click="doDeleteUserExercise(exerciseDiaryData.userexercisemapid)">x</a>
-                                            <div class="food_name">{{exerciseDiaryData.Exercise.exercisename}}&nbsp;<small>({{exerciseDiaryData.Level.levelname}})</small></div>
+                                            <div class="food_name">{{exerciseDiaryData.Exercise.exercisename}}</div>
                                             <div class="margin-top-10">
                                                 <span class="pull-right text-red text-bold"><strong><i class="fa fa-angle-down"></i>&nbsp;{{exerciseDiaryData.calories}}  calories</strong></span>
                                                 <div class="select_food">
@@ -548,8 +568,17 @@
                 <div class="row">
                     <div class="col-md-6">
                         <form name="FoodAddForm" novalidate>
+                        <div class="col-md-3 no-padding">
+                            <img class="img-circle" ng-src="{{userSelectedFoodDetails.foodImagePath+'50x50.jpg'}}">
+                        </div>
+                        <div class="col-md-9">
                         <h5>Food Name:</h5>
-                        <p>{{userSelectedFoodDetails.foodname}}</p>
+                        <p>{{userSelectedFoodDetails.foodname}}&nbsp;
+                        <span ng-show="userSelectedFoodDetails.issuitable==1" class="green">&nbsp;</span> 
+                        <span ng-show="userSelectedFoodDetails.issuitable==0" class="red">&nbsp;</span> 
+                        </p>
+                        </div>
+                        <div class="col-md-12 no-padding">
                         <h5 class="margin-top-10">Select Measure:</h5>
                             <select name="measure" ng-model="userFood.measure" ng-options="measure.measurename for measure in userSelectedFoodDetails.measureid track by measure.measureid" ng-change="doCalculateCalories()" required>
                                 <option value="">-- Select Measure --</option>
@@ -557,13 +586,13 @@
                              <span ng-show="FoodAddForm.measure.$dirty&&FoodAddForm.measure.$invalid">
                                      <span class="error-message" ng-show="FoodAddForm.measure.$error.required"><span>Required.</span></span>
                              </span>
-                        <h5  class="margin-top-10">Value</h5>
+                        <h5 class="margin-top-10">Value</h5>
                         <input type="text"   ng-disabled="!userFood.measure" name="servings" ng-model="userFood.servings" ng-change="doCalculateCalories()" maxlength="4" required validate-Float1>
                         <span ng-show="FoodAddForm.servings.$dirty&&FoodAddForm.servings.$invalid">
                                  <span class="error-message" ng-show="FoodAddForm.servings.$error.required"><span>Required.</span></span>
-                                 <!-- <span class="error-message" ng-show="FoodAddForm.servings.$error.pattern"><span>Invalid&nbsp;Format.</span></span>-->
                              <span class="error-message" ng-show="!FoodAddForm.servings.$error.required&&FoodAddForm.servings.$error.validateFloat1"><span>Invalid&nbsp;data.</span></span>
-                            </span>
+                            </span>                           
+                         </div>                             
                         </form>
                     </div>
 
@@ -592,6 +621,7 @@
                 </div>
 
                 <div class="action_btns margin-top-20">
+                    <p ng-show="userSelectedFoodDetails.issuitable==0"><span class="text-red fa fa-exclamation-triangle"></span>&nbsp;<i>We advice you to reduce intaking this food item.</i></p><br/>
                     <div class="one_half" ng-show="isNew"><a href="#" onclick="return false;" ng-disabled="FoodAddForm.$invalid" class="btn btn_blue modal_close" ng-click="doInsertUserFood()">Add Food</a></div>
                     <div class="one_half" ng-hide="isNew"><a href="#" onclick="return false;" ng-disabled="FoodAddForm.$invalid || isCleanFood()" class="btn btn_blue modal_close"  ng-click="doUpdateUserFood()">Update Food</a></div>
                     <div class="one_half last modal_close"><a class="btn btn_red">Cancel</a></div>

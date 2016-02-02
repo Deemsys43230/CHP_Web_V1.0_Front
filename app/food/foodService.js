@@ -167,6 +167,7 @@ adminApp.factory("FoodService",function(requestHandler){
 
     // Function to convert image url to base64
     foodServiceObj.convertImgToBase64=function(url, callback, outputFormat){
+        var convertUrl=requestHandler.convertUrl(url);
         var img = new Image();
         img.crossOrigin = 'Anonymous';
         img.onload = function(){
@@ -179,7 +180,7 @@ adminApp.factory("FoodService",function(requestHandler){
             callback(dataURL);
             canvas = null;
         };
-        img.src = url;
+        img.src = convertUrl;
     };
 
     //Get Measures
