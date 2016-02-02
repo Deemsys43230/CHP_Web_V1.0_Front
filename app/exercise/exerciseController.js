@@ -123,19 +123,20 @@ adminApp.controller('ExerciseEditController',function($q,$scope,requestHandler,F
     $scope.isNew=$route.current.isNew;
     $scope.imageUpload=false;
     $scope.tagListArray=[];
-
+    $scope.imageload=true;
     $scope.imageSet=false;
-
     $scope.fileNameChanged = function(element)
     {
         if(!$scope.imageSet){
             if(element.files.length > 0){
                 $scope.inputContainsFile = false;
                 $scope.imageSet=true;
+                $scope.imageload=false;
             }
             else{
                 $scope.inputContainsFile = true;
                 $scope.imageSet=false;
+                $scope.imageload=true;
             }
         }
     };

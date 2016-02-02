@@ -44,6 +44,9 @@
                         <select class="full-width course-select" name="typeid" ng-model="exerciseDetail.typeid" ng-options="typeid.typeid as typeid.typename for typeid in typeListForDropDown"  required>
                             <option value="">-- Select Exercise Type --</option>
                         </select>
+                         <span ng-show="exerciseForm.typeid.$dirty&&exerciseForm.typeid.$invalid">
+                    <span class="error-message textarea-errormessage10" ng-show="exerciseForm.typeid.$error.required"><span>Required.</span></span>
+                             </span>
                         <!--<ui-select ng-model="level.selected" theme="select2" ng-disabled="disabled" class="form-control">
                             <ui-select-match placeholder="Select or search a exercise name...">{{$select.selected.type}}</ui-select-match>
                             <ui-select-choices repeat="level in levelslist | propsFilter: {type: $select.search}">
@@ -70,9 +73,9 @@
                 <div class="col-md-9 no-padding">
                     <div class="col-md-12 no-padding">
                         <input class="form-control"  name="met" ng-model="exerciseDetail.met" required validate-Float/>
-                        <span ng-show="exerciseForm.me.$dirtty&&exerciseForm.met.$invalid">
+                        <span ng-show="exerciseForm.met.$dirty&&exerciseForm.met.$invalid">
                         <span class="error-message" ng-show="exerciseForm.met.$error.required"><span>Required.</span></span>
-                             <span ng-show="!exerciseForm.met.$error.required&&exerciseForm.met.$error.validateFloat"> <span>Invalid&nbsp;data.</span></span>
+                        <span class="error-message" ng-show="!exerciseForm.met.$error.required&&exerciseForm.met.$error.validateFloat"> <span>Invalid&nbsp;data.</span></span>
 
                     </span>
                     </div>
@@ -114,7 +117,7 @@
                         <input type="file" name="image" valid-file  ng-model="exerciseDetail.exerciseimage" class="upload" ng-file-select="onFileSelect($files)"  onblur="angular.element(this).scope().fileNameChanged(this)" required/>
                     </div>
                 </div>
-                <div class="one_half last"><a href="" onclick="return false;" class="food-button export modal_close" ng-click="doUpdateExerciseImage();">Save Image</a></div>
+                <div class="one_half last"><a href="" onclick="return false;" class="btn food-button export modal_close" ng-click="doUpdateExerciseImage();" >Save Image</a></div>
             </div>
         </div>
     </section>

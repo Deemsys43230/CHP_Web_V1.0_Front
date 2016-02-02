@@ -274,11 +274,13 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
                 if($scope.demography.weight < $scope.maleIdealWeight){
                     $scope.upweight =1;
                     $scope.balanceweight = $scope.maleIdealWeight - $scope.demography.weight;
+                    $scope.balanceweight = $scope.balanceweight.toFixed(2);
                    // alert($scope.balanceweight);
                 }
                 else if($scope.demography.weight > $scope.maleIdealWeight){
                     $scope.upweight =0;
                     $scope.balanceweight =  $scope.demography.weight - $scope.maleIdealWeight ;
+                    $scope.balanceweight = $scope.balanceweight.toFixed(2);
                    // alert($scope.balanceweight);
                 }
             }
@@ -289,12 +291,14 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
             if($scope.demography.weight < $scope.femaleIdealWeight){
                 $scope.upweight =1;
                 $scope.balanceweight = $scope.femaleIdealWeight - $scope.demography.weight;
+                $scope.balanceweight = $scope.balanceweight.toFixed(2);
               //  alert($scope.balanceweight);
             }
 
            else if($scope.demography.weight > $scope.femaleIdealWeight){
                 $scope.upweight =0;
                 $scope.balanceweight =  $scope.demography.weight -  $scope.femaleIdealWeight;
+                $scope.balanceweight = $scope.balanceweight.toFixed(2);
                 //alert($scope.balanceweight);
             }
             }

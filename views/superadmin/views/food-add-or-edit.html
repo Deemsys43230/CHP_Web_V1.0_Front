@@ -437,7 +437,7 @@
                         <input type="file" name="image" valid-file  ng-model="foodDetails.foodimage" class="upload" ng-file-select="onFileSelect($files)"  onblur="angular.element(this).scope().fileNameChanged(this)" required/>
                     </div>
                 </div>
-                <div class="one_half last"><a href="" onclick="return false;" class="btn food-button export modal_close" id="submit_button" ng-click="doUpdateFoodImage();" disabled>Save Image</a></div>
+                <div class="one_half last"><a href="" onclick="return false;" class="btn food-button export modal_close" id="submit_button" ng-click="doUpdateFoodImage();" ng-disabled="imageload">Save Image</a></div>
             </div>
         </div>
     </section>

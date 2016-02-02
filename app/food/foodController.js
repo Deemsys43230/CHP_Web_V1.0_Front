@@ -241,7 +241,7 @@ adminApp.controller("FoodDetailsEditController",function($q,$scope,requestHandle
     $scope.type=$route.current.type;
     $scope.isNew=$route.current.isNew;
     $scope.imageUpload=false;
-
+$scope.imageload=true;
     $scope.imageSet=false;
 
     $scope.fileNameChanged = function(element)
@@ -250,10 +250,12 @@ adminApp.controller("FoodDetailsEditController",function($q,$scope,requestHandle
             if(element.files.length > 0){
                 $scope.inputContainsFile = false;
                 $scope.imageSet=true;
+                $scope.imageload=false;
             }
             else{
                 $scope.inputContainsFile = true;
                 $scope.imageSet=false;
+                $scope.imageload=true;
             }
         }
     };
