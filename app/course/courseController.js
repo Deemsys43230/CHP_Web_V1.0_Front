@@ -392,6 +392,8 @@ adminApp.controller('CourseAdminController',['$scope','requestHandler','Flash','
     $scope.pendingcourselist = function(){
         requestHandler.getRequest("admin/listOfPendingCourses/","").then(function(response) {
             $scope.pendingCourseList = response.data.pendingcourses;
+            $scope.pendingCount = [$scope.pendingCourseList.length];
+            console.log($scope.pendingCount);
             $scope.page = "pending";
             $scope.paginationLoad=true;
 
