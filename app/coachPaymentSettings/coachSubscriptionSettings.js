@@ -38,7 +38,8 @@ coachApp.controller('CoachSubscriptionController',function($scope,requestHandler
     };
 
     $scope.doUpdateSubscriptionDetails=function(){
-        requestHandler.putRequest("updateSubscriptionDetailByCoach/",$scope.subscriptionDetail).then(function(response){
+
+       requestHandler.putRequest("updateSubscriptionDetailByCoach/",$scope.subscriptionDetail).then(function(response){
 
             successMessage(Flash,"Successfully Updated!");
             $scope.doGetCoachSubscriptionDetails();
