@@ -7,8 +7,7 @@ var coachApp = angular.module('coachApp', ['ngRoute','oc.lazyLoad','requestModul
 coachApp.controller('CoachSubscriptionController',function($scope,requestHandler,Flash,$location) {
 //sidebar menu active class
     $scope.activeClass = {subscriptionPanel:'active'};
-    $scope.disablethreemonth=false;
-    $scope.disablesixmonth=false;
+
     /*$("#threemonth").prop('required',false);
     $("#sixmonth").prop('required',false);*/
 
@@ -22,12 +21,15 @@ coachApp.controller('CoachSubscriptionController',function($scope,requestHandler
                 $scope.subscriptionDetail.onemonth_amount="";
             }
             $scope.subscriptionDetail.onemonth_amount=$scope.subscriptionDetail.onemonth_amount.toString();
-            if($scope.subscriptionDetail.threemonth_percentage!=null){
+            if($scope.subscriptionDetail.threemonth_percentage!=null || $scope.subscriptionDetail.threemonth_percentage!=0){
             $scope.subscriptionDetail.threemonth_percentage=$scope.subscriptionDetail.threemonth_percentage.toString();
+                $scope.disablethreemonth=true;
             }
-            if($scope.subscriptionDetail.sixmonth_percentage!=null){
+            if($scope.subscriptionDetail.sixmonth_percentage!=null || $scope.subscriptionDetail.sixmonth_percentage!=0){
                 $scope.subscriptionDetail.sixmonth_percentage=$scope.subscriptionDetail.sixmonth_percentage.toString();
+                 $scope.disablesixmonth=true;
             }
+           
                 original=angular.copy($scope.subscriptionDetail);
             $scope.doCalculatesubscription();
 
@@ -38,6 +40,13 @@ coachApp.controller('CoachSubscriptionController',function($scope,requestHandler
     };
 
     $scope.doUpdateSubscriptionDetails=function(){
+
+        if($scope.disablethreemonth==false){
+            $scope.subscriptionDetail.threemonth_percentage="";
+        }
+        if($scope.disablesixmonth==false){
+            $scope.subscriptionDetail.sixmonth_percentage="";
+        }
 
        requestHandler.putRequest("updateSubscriptionDetailByCoach/",$scope.subscriptionDetail).then(function(response){
 
@@ -71,6 +80,7 @@ coachApp.controller('CoachSubscriptionController',function($scope,requestHandler
     };
 
     $scope.isCleanSubscriptionDetails=function(){
+        console.log(original)
         return angular.equals(original, $scope.subscriptionDetail);
     };
 
