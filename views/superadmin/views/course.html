@@ -32,7 +32,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                        <tr dir-paginate="course in coursefilter = ( courseList | filter : coursesearch | itemsPerPage:9)" ng-show="courseList.length!=0">
+                        <tr dir-paginate="course in coursefilter = ( courseList | startsWithLetterCourse : coursesearch | itemsPerPage:9)" ng-show="courseList.length!=0">
                             <td title="{{course.coursename}}"><span class="line-clamp-xxs">{{course.coursename}}</span></td>
                             <td title="{{course.coursesubtitle}}"><span class="line-clamp-xxs">{{course.coursesubtitle}}</span></td>
                             <td title="{{course.categoryname}}"><span class="line-clamp-xxs">{{course.categoryname}}</span></td>

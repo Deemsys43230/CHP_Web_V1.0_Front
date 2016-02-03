@@ -454,13 +454,8 @@ adminApp.controller('CourseAdminController',['$scope','requestHandler','Flash','
 
     // Search Food Type
     $('.show-list-search').click(function() {
-        $('.search-list-form').fadeIn(300);
+        $('.search-list-form').toggle(300);
         $('.search-list-form input').focus();
-    });
-
-    $('.search-list-form input').focusout(function() {
-        $('.search-list-form').fadeOut(300);
-        $scope.coursesearch="";
     });
 
     $scope.modal =function(courseid){
@@ -549,6 +544,25 @@ adminApp.filter('html', ['$sce', function ($sce) {
         return $sce.trustAsHtml(text);
     };
 }]);
+
+adminApp.filter('startsWithLetterCourse', function () {
+
+    return function (items, coursesearch) {
+        var filtered = [];
+        var letterMatch = new RegExp(coursesearch, 'i');
+        if(!items){}
+        else{
+            for (var i = 0; i < items.length; i++) {
+                var item = items[i];
+                if (letterMatch.test(item.coursename) || letterMatch.test(item.coursesubtitle) || letterMatch.test(item.categoryname) || letterMatch.test(item.ownername) || letterMatch.test(item.price) || letterMatch.test(item.enrollcount) || letterMatch.test(item.createdon) || letterMatch.test(item.publishedon) || letterMatch.test(item.reviewdate)) {
+                    filtered.push(item);
+                }
+            }
+        }
+        return filtered;
+    };
+});
+
 
 
 var coachApp= angular.module('coachApp', ['ngRoute','oc.lazyLoad','ngCookies','requestModule','flash','summernote']);

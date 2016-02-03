@@ -32,7 +32,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr dir-paginate="pendingcourse in pendingcoursefilter = (pendingCourseList | filter : coursesearch | itemsPerPage:9)" ng-show="pendingCourseList.length!=0">
+                    <tr dir-paginate="pendingcourse in pendingcoursefilter = (pendingCourseList | startsWithLetterCourse : coursesearch | itemsPerPage:9)" ng-show="pendingCourseList.length!=0">
                             <td title="{{pendingcourse.coursename}}"><span class="line-clamp-xs">{{pendingcourse.coursename}}</span></td>
                             <td title="{{pendingcourse.coursesubtitle}}"><span class="line-clamp-xs">{{pendingcourse.coursesubtitle}}</span></td>
                             <td title="{{pendingcourse.categoryname}}"><span class="line-clamp-xs">{{pendingcourse.categoryname}}</span></td>
@@ -48,7 +48,7 @@
                                 <a href="" class="btn-xs btn-danger modal_trigger" ng-click="modal(pendingcourse.courseid)">Reject</a>
                             </td>
                         </tr>
-                    <tr ng-show="pendingCourseList.length==0"><td colspan="9" class="text-center">No Records Found !!! </td></tr>
+                    <tr ng-show="pendingCourseList.length==0 || !pendingcoursefilter.length"><td colspan="9" class="text-center">No Records Found !!! </td></tr>
                     </tbody>
                 </table>
                 <!-- Start Pagination -->
