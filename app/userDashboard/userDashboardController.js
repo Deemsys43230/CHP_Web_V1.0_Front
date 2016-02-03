@@ -612,11 +612,59 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
                 var date2_ms = new Date(date2).getTime();
 
                 // Calculate the difference in milliseconds
-                var difference_ms = Math.abs(date1_ms - date2_ms);
+                var difference_ms = date2_ms - date1_ms;
 
                 // Convert back to days
                 $scope.remainingDates = Math.round(difference_ms/ONE_DAY);
-                if($scope.remainingDates<0) $scope.remainingDates=0;
+                if($scope.remainingDates<0){
+                    $scope.remainingDates=0;
+                    $scope.goalExpired=1;
+                    var dateinitial = new Date(dateCompare).getTime();
+                    var diff_ms = date2_ms - dateinitial;
+                    $scope.targetDays = Math.round(diff_ms/ONE_DAY);
+
+                    var weightLogPromise=UserDashboardService.doGetAchievedWeight($scope.goalDetails.enddate);
+                    weightLogPromise.then(function(result){
+                        $scope.achievedWeight = result;
+                        var targetWeightLossOrGain=0;
+                        var achievedWeightLossOrGain=0;
+                        var compare=0;
+                        if($scope.goalDetails.targetweight>$scope.goalDetails.initialweight){
+                            targetWeightLossOrGain = $scope.goalDetails.targetweight-$scope.goalDetails.initialweight;
+                            achievedWeightLossOrGain = $scope.achievedWeight-$scope.goalDetails.initialweight;
+                            if(achievedWeightLossOrGain<=0){
+                                $scope.achieveStatus=0;
+                            }
+                            else{
+                                compare = achievedWeightLossOrGain/targetWeightLossOrGain;
+                                if(compare==1){
+                                    $scope.achieveStatus=2;
+                                }else if(0.6>=compare<1&&compare<1.4){
+                                    $scope.achieveStatus=1;
+                                }else $scope.achieveStatus=0;
+                            }
+                        }
+                        else{
+                            targetWeightLossOrGain = $scope.goalDetails.initialweight - $scope.goalDetails.targetweight;
+                            achievedWeightLossOrGain = $scope.goalDetails.initialweight - $scope.achievedWeight;
+                            if(achievedWeightLossOrGain<=0){
+                                $scope.achieveStatus=0;
+                            }
+                            else{
+                                compare = achievedWeightLossOrGain/targetWeightLossOrGain;
+                                if(compare==1){
+                                    $scope.achieveStatus=2;
+                                }else if(0.6>=compare<1&&compare<1.4){
+                                    $scope.achieveStatus=1;
+                                }else $scope.achieveStatus=0;
+                            }
+                        }
+
+                    });
+                }
+                else{
+                    $scope.goalExpired=0;
+                }
 
                 $window.currentweight = $scope.demography.weight;
                 $window.targetweight = $scope.goalDetails.targetweight;
@@ -669,10 +717,11 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         });
     };
 
-
     $scope.doGetWeightLog=function(date){
-        requestHandler.postRequest("user/getWeightLogByDate/",{"date":date}).then(function(response){
-            var weightlogdetails=response.data.Weight_logs;
+
+        var weightLogPromise=UserDashboardService.doGetWeightLogDetails(date);
+        weightLogPromise.then(function(result){
+            var weightlogdetails=result.Weight_logs;
             if(!weightlogdetails.weight){
                 $scope.originalWeight="";
                 $("#weightLog").val('');
@@ -681,9 +730,6 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
                 $scope.weightlog=$scope.originalWeight=weightlogdetails.weight;
                 $("#weightLog").val(weightlogdetails.weight);
             }
-
-        }, function () {
-            errorMessage(Flash, "Please try again later!")
         });
     };
 

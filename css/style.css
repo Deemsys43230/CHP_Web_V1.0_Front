@@ -197,7 +197,7 @@ p {
     color: #666;
     font-size: 13px;
     font-family: 'Open Sans', sans-serif;
-    line-height: 22px;
+    line-height: 18px;
     margin: 0;
 }
 
@@ -1834,6 +1834,10 @@ input[type="submit"] {
 
 .margin-bottom-10 {
     margin-bottom: 10px !important;
+}
+
+.margin-bottom-7 {
+    margin-bottom: 7px;
 }
 
 .margin-bottom-15 {

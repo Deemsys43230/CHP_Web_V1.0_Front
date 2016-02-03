@@ -222,6 +222,49 @@ adminApp.factory("UserDashboardService",function(requestHandler){
         });
     };
 
+    //Frequently Added Exercise
+    userDashboardServiceObj.doGetWeightLogDetails=function(date){
+        return requestHandler.postRequest("user/getWeightLogByDate/",{"date":date}).then(function(response) {
+            return response.data;
+        });
+    };
+
+    userDashboardServiceObj.doGetAchievedWeight=function(date){
+        var achievedWeightPromise = userDashboardServiceObj.doGetWeightLogDetails(date);
+        return achievedWeightPromise.then(function(result){
+            if(result.Response_status==0){
+                var loopDate="";
+                var dateValue = date.slice(0,2);
+                if(dateValue=='01'){
+                    dateValue='31';
+                    var monthValue = date.slice(3,5);
+                    if(monthValue=='01'){
+                        monthValue='12';
+                        var yearValue=date.slice(6,10);
+                        yearValue = yearValue-1;
+                        loopDate=dateValue+"/"+monthValue+"/"+yearValue;
+                    }
+                    else{
+                        monthValue = monthValue-1;
+                        loopDate=dateValue+"/"+monthValue+"/"+date.slice(6,10);
+                    }
+                }
+                else{
+                    dateValue =dateValue-1;
+                    loopDate=dateValue+"/"+date.slice(3,5)+"/"+date.slice(6,10);
+                }
+                return userDashboardServiceObj.doGetAchievedWeight(loopDate);
+            }
+            else{
+                return result.Weight_logs.weight;
+            }
+        });
+
+        /*var temp = $filter('date')(new Date("10/02/2015"), "dd/mm/yyyy");
+        temp.setDate(temp.getDate()-1);
+        alert(temp);*/
+    };
+
 
     return userDashboardServiceObj;
 

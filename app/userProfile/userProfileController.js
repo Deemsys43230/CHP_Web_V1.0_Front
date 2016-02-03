@@ -5,23 +5,6 @@ var userApp= angular.module('userApp', ['ngRoute','oc.lazyLoad','ngCookies','req
 
 userApp.controller('UserProfileController',['$scope','requestHandler','Flash',function($scope,requestHandler,Flash) {
 
-    // Function to convert image url to base64
-    $scope.convertImgToBase64=function(url, callback, outputFormat){
-        var img = new Image();
-        img.crossOrigin = 'Anonymous';
-        img.onload = function(){
-            var canvas = document.createElement('CANVAS');
-            var ctx = canvas.getContext('2d');
-            canvas.height = this.height;
-            canvas.width = this.width;
-            ctx.drawImage(this,0,0);
-            var dataURL = canvas.toDataURL(outputFormat || 'image/jpg');
-            callback(dataURL);
-            canvas = null;
-        };
-        img.src = url;
-    };
-
     $scope.doGetProfile=function(){
 
         requestHandler.getRequest("getUserId/","").then(function(response){
@@ -70,6 +53,12 @@ userApp.controller('UserProfileController',['$scope','requestHandler','Flash',fu
 
             $scope.selectedDate = $scope.userProfile.dob;
 
+            $('.image-editor').cropit({
+                imageState: {
+                    src: $scope.userProfile.imageurl+"?decache="+Math.random()
+                }
+            });
+
             //Delete unwanted variables
             delete $scope.userProfile.createdon;
             delete $scope.userProfile.userid;
@@ -79,11 +68,6 @@ userApp.controller('UserProfileController',['$scope','requestHandler','Flash',fu
             //Copy Original
             $scope.orginalUserProfile=angular.copy($scope.userProfile);
 
-            $('.image-editor').cropit({
-                imageState: {
-                    src: $scope.userProfile.imageurl+"?decache="+Math.random()
-                }
-            });
         });
 
         requestHandler.getRequest("getUserSettings/","").then(function(response){
@@ -116,20 +100,13 @@ userApp.controller('UserProfileController',['$scope','requestHandler','Flash',fu
     };
 
     $scope.doUpdateProfile= function () {
+        delete $scope.userProfile.imageurl;
+        $scope.userProfile.country = $scope.userProfile.country.code;
+        $scope.userProfile.state = $scope.userProfile.state.code;
 
-        $scope.convertImgToBase64($scope.userProfile.imageurl, function(base64Img){
-
-            //Convert Image to base64
-            $scope.userProfile.imageurl=base64Img;
-            $scope.userProfile.country = $scope.userProfile.country.code;
-            $scope.userProfile.state = $scope.userProfile.state.code;
-
-            requestHandler.putRequest("updateProfile/",$scope.userProfile).then(function(){
-                $scope.doGetProfile();
-                successMessage(Flash,"Successfully Updated");
-                //Copy Orginal
-               // $scope.orginalUserProfile=angular.copy($scope.userProfile);
-            });
+        requestHandler.putRequest("updateProfile/",$scope.userProfile).then(function(){
+            $scope.doGetProfile();
+            successMessage(Flash,"Successfully Updated");
         });
     };
 
@@ -169,8 +146,6 @@ userApp.controller('UserProfileController',['$scope','requestHandler','Flash',fu
 
     //To Enable the update button if changes occur.
     $scope.isClean = function() {
-        console.log("ori",$scope.orginalUserProfile);
-        console.log("dad",$scope.userProfile);
         return angular.equals ($scope.orginalUserProfile, $scope.userProfile);
     };
 
@@ -179,12 +154,12 @@ userApp.controller('UserProfileController',['$scope','requestHandler','Flash',fu
         requestHandler.postRequest("changePassword/",$scope.changePassword).then(function(response){
             if(response.data.Response_status==0){
                 $scope.doGetProfile();
-                errorMessage(Flash,"Incorrect&nbsp;current&nbsp;password");
+                errorMessage(Flash,"Incorrect current password");
                 $scope.reset();
             }
             else if(response.data.Response_status==1) {
                 $scope.doGetProfile();
-                successMessage(Flash, "Password&nbsp;changed&nbsp;successfully");
+                successMessage(Flash, "Password changed successfully");
                 $scope.reset();
             }
         },function(response){
