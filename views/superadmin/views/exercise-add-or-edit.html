@@ -34,30 +34,13 @@
                                 <div class="loader"></div>
                             </div>
                         </div>
-                    <h5>Exercise Type :</h5>
-                        <!--<ui-select multiple ng-model="exerciseDetail.typeid" theme="select2" ng-disabled="disabled" class="form-control" ui-select-required>
-                            <ui-select-match placeholder="Type and Select Exercise types">{{$item.typename}}</ui-select-match>
-                            <ui-select-choices repeat="type in typeListForDropDown | propsFilter: {typeid: $select.search, typename: $select.search}">
+                    <h5>Exercise Type : <span class="text-red">Required</span></h5>
+                        <ui-select ng-model="exerciseDetail.type" theme="select2" ng-disabled="disabled" class="form-control">
+                            <ui-select-match placeholder="Type and Select Exercise types">{{$select.selected.typename}}</ui-select-match>
+                            <ui-select-choices repeat="type in typeListForDropDown | propsFilter: {typename: $select.search}">
                                 {{type.typename}}
                             </ui-select-choices>
-                        </ui-select>-->
-                        <select class="full-width course-select" name="typeid" ng-model="exerciseDetail.typeid" ng-options="typeid.typeid as typeid.typename for typeid in typeListForDropDown"  required>
-                            <option value="">-- Select Exercise Type --</option>
-                        </select>
-                         <span ng-show="exerciseForm.typeid.$dirty&&exerciseForm.typeid.$invalid">
-                    <span class="error-message textarea-errormessage10" ng-show="exerciseForm.typeid.$error.required"><span>Required.</span></span>
-                             </span>
-                        <!--<ui-select ng-model="level.selected" theme="select2" ng-disabled="disabled" class="form-control">
-                            <ui-select-match placeholder="Select or search a exercise name...">{{$select.selected.type}}</ui-select-match>
-                            <ui-select-choices repeat="level in levelslist | propsFilter: {type: $select.search}">
-                                <div ng-click="doChangeExerciseType(level.typeid);">
-                                    <div class="typename" ng-bind-html="level.type | highlight: $select.search | html">{{level.type}}</div>
-                                    <small>
-                                        {{level.levelnames}}
-                                    </small>
-                                </div>
-                            </ui-select-choices>
-                        </ui-select>-->
+                        </ui-select>
                     <br/>
                     <h5>MET :</h5>
                     </div>
@@ -72,7 +55,7 @@
                 </div>
                 <div class="col-md-9 no-padding">
                     <div class="col-md-12 no-padding">
-                        <input class="form-control"  name="met" ng-model="exerciseDetail.met" required validate-Float/>
+                        <input type="text" class="form-control"  name="met" ng-model="exerciseDetail.met" required validate-Float/>
                         <span ng-show="exerciseForm.met.$dirty&&exerciseForm.met.$invalid">
                         <span class="error-message" ng-show="exerciseForm.met.$error.required"><span>Required.</span></span>
                         <span class="error-message" ng-show="!exerciseForm.met.$error.required&&exerciseForm.met.$error.validateFloat"> <span>Invalid&nbsp;data.</span></span>

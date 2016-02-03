@@ -340,7 +340,7 @@ adminApp.controller('ExerciseEditController',function($q,$scope,requestHandler,F
 
 
 
-        updatedExerciseDetails.typeid=$scope.exerciseDetail.typeid;
+        updatedExerciseDetails.typeid=$scope.exerciseDetail.type.typeid;
         updatedExerciseDetails.MET = $scope.exerciseDetail.met;
 
         //Tag Array Operation starts
