@@ -6,7 +6,10 @@ adminApp.factory("ExerciseService",function(requestHandler){
 
     //Get Tags
     exerciseServiceObj.doGetTags= function () {
-         return requestHandler.getRequest("admin/listofExercisetags","").then(function(response){
+         return requestHandler.getRequest("admin/listofExercisetags/","").then(function(response){
+            $.each(response.data.Exercise_Tag_Data, function(index,tag){
+               delete tag.status;
+            });  
             return response.data.Exercise_Tag_Data;
         },function(response){
             alert("Not able to pull Food Tag");

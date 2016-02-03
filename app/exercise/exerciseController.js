@@ -459,12 +459,11 @@ adminApp.controller('ExerciseEditController',function($q,$scope,requestHandler,F
     $q.all([excerciseTagPromise]).then(function(){
 
     if($scope.type==1){
+        $scope.doGetExcerciseTypeList();
         $scope.doSetExcerciseDetails();
-        $scope.doGetExcerciseTypeList();
     }else if($scope.type==2){
-        $scope.doGetExcerciseDetails();
-        $scope.doGetExcerciseTypeList();
-    }
+        $scope.doGetExcerciseTypeList();        
+        $scope.doGetExcerciseDetails();    }
     });
 
 
