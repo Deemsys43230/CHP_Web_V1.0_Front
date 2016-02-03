@@ -31,8 +31,9 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                             alert("restricted");
                         }
                         case 403: {
-                            alert("Your session has been expired.Please login again!!!");
+                           alert("Your session has been expired.Please login again!!!");
                             $window.location.href="../../#/index";
+                            $(".user_login").show();
                           // $location.path("/login");
                             break;
                         }

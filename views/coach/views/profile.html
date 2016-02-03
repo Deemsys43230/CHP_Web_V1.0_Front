@@ -186,11 +186,57 @@
                              </span>
                     </div>
                 </div>
-                <div class="col-md-6 margin-top-15">
+               <!-- <div class="col-md-6 margin-top-5">
+                    <div class="col-md-4 padding-top-4">
+                        <h5>Secret&nbsp;Answer:</h5>
+                    </div>
+                    <div class="col-md-8">
+                        <input class="profile_input" name="secretanswer" ng-model="userProfile.secretanswer" maxlength="150" required/>
+                            <span ng-show="userProfileForm.secretanswer.$dirty&&userProfileForm.secretanswer.$invalid">
+                    <span class="error-message textarea-errormessage10" ng-show="userProfileForm.secretanswer.$error.required"><span>Required.</span></span>
+                             </span>
+                    </div>
+                </div>-->
+                <div class="col-md-6 margin-top-10">
+                    <div class="col-md-4 padding-top-4">
+                        <h5>Qualification :</h5>
+                    </div>
+                    <div class="col-md-8">
+                        <input class="profile_input" name="qualification" ng-model="userProfile.qualification" maxlength="30" required/>
+                             <span ng-show="userProfileForm.qualification.$dirty&&userProfileForm.qualification.$invalid">
+                                 <span class="error-message textarea-errormessage10" ng-show="userProfileForm.qualification.$error.required"><span>Required.</span></span>
+                             </span>
+                    </div>
+                </div>
+                <div class="col-md-6 margin-top-10">
+                    <div class="col-md-4 padding-top-4">
+                        <h5>Experience :</h5>
+                    </div>
+                    <div class="col-md-8">
+                        <input class="profile_input" name="experience" ng-model="userProfile.experience" maxlength="30" required/>
+                             <span ng-show="userProfileForm.experience.$dirty&&userProfileForm.experience.$invalid">
+                                 <span class="error-message textarea-errormessage10" ng-show="userProfileForm.experience.$error.required"><span>Required.</span></span>
+                             </span>
+                    </div>
+                </div>
+                <div class="col-md-6 margin-top-10">
+                    <div class="col-md-4 padding-top-4">
+                        <h5>Specialist :</h5>
+                    </div>
+                    <div class="col-md-8">
+                        <input class="profile_input" name="specialist" ng-model="userProfile.specialist" maxlength="30" required/>
+                             <span ng-show="userProfileForm.specialist.$dirty&&userProfileForm.specialist.$invalid">
+                                 <span class="error-message textarea-errormessage10" ng-show="userProfileForm.specialist.$error.required"><span>Required.</span></span>
+                             </span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                </div>
+                <div class="col-md-6">
                     <p class="pull-right" ng-show="showCount && userProfile.about.length"><span class="text-bold text-red">{{ (300-userProfile.about.length) }}</span> Characters left&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
                     <p class="pull-right" ng-hide="showCount && userProfile.about.length">&nbsp;</p>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6" >
                     <div class="col-md-4 padding-top-4">
                         <h5>About Me :</h5>
                     </div>

@@ -48,15 +48,15 @@
                 <div class="col-md-12">
                     <hr/>
                 </div>
-                <div ng-switch="(userforumlist | filter:forumsearch).length">
-                    <span class="ng-empty" ng-switch-when="0">
+                <div ng-switch="(userforumlist | startsWithLetterForum:forumsearch).length">
+                    <!--<span class="ng-empty" ng-switch-when="0">
                         <div class="col-md-12 text-center margin-top-50">
                             <img src="../../images/no-faq.png"/>
                             <h1 class="text-gray">NO RESULTS FOUND!!!</h1>
                         </div>
-                    </span>
+                    </span>-->
                     <div ng-switch-default>
-                        <div class="col-md-12" dir-paginate="userforum in userforumlist | startsWithLetterForum :forumsearch | itemsPerPage: 8" ng-show="userforumlist !=0">
+                        <div class="col-md-12" dir-paginate="userforum in forumfilter=(userforumlist | startsWithLetterForum :forumsearch | itemsPerPage: 8)" ng-show="userforumlist !=0">
                             <div class="col-md-1 no-padding">
                                 <img class="img-circle forum-list-img" ng-src="{{userforum.userimage|trusted}}">
                             </div>
@@ -75,8 +75,9 @@
                                 <hr/>
                             </div>
                         </div>
-                        <div ng-show="userforumlist==0">
+                        <div ng-show="userforumlist==0 || !forumfilter.length">
                             <h1 class="col-md-12 margin-top-50 text-gray text-center">
+                                <img src="../../images/no-faq.png"/>
                                 NO RECORDS FOUND!!!
                             </h1>
                         </div>

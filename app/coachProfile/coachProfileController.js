@@ -61,7 +61,7 @@ coachApp.controller('CoachProfileController',['$scope','requestHandler','Flash',
                 //Convert Integer to String
                 if($scope.userProfile.gender)
                     $scope.userProfile.gender=$scope.userProfile.gender.toString();
-                    $scope.userProfile.zipcode=$scope.userProfile.zipcode.toString();
+                   // $scope.userProfile.zipcode=$scope.userProfile.zipcode.toString();
 
                 $scope.selectedDate = $scope.userProfile.dob;
 

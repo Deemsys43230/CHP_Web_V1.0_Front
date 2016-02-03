@@ -122,7 +122,7 @@ adminApp.controller('ExerciseEditController',function($q,$scope,requestHandler,F
     $scope.type=$route.current.type;
     $scope.isNew=$route.current.isNew;
     $scope.imageUpload=false;
-    $scope.tagListArray=[];
+    //$scope.tagListArray=[];
     $scope.imageload=true;
     $scope.imageSet=false;
     $scope.fileNameChanged = function(element)
@@ -457,6 +457,7 @@ adminApp.controller('ExerciseEditController',function($q,$scope,requestHandler,F
     //Initialize Page
     //Get Exercise Details
     $q.all([excerciseTagPromise]).then(function(){
+
     if($scope.type==1){
         $scope.doSetExcerciseDetails();
         $scope.doGetExcerciseTypeList();

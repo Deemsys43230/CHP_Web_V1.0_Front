@@ -21,7 +21,8 @@
 
             <div class="col-md-9  min-height-450" >
                 <div class="col-md-12">
-                    <a href="#forums" class="back-button pull-right margin-left-10"><i class="fa fa-arrow-circle-o-left"></i> Back to Forum List</a>
+                    <a href="#forumDetails/{{forumDetails.postid}}" class="back-button pull-right margin-left-10" ng-hide="isNew"><i class="fa fa-arrow-circle-o-left"></i> Back to Forum</a>
+                    <a href="#forums" class="back-button pull-right margin-left-10" ng-show="isNew"><i class="fa fa-arrow-circle-o-left"></i> Back to Forums List</a>
                     <h3 class="margin-bottom-10"><i class="fa fa-pencil"></i> &nbsp;{{title}}</h3>
                     <div class="col-md-12 no-padding">
                         <hr/>

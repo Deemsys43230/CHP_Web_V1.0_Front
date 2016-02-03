@@ -413,3 +413,22 @@ userApp.filter('startsWithLetter', function () {
         return filtered;
     };
 });
+
+
+userApp.filter('startsWithLetterSearch', function () {
+
+    return function (items, coachsearch) {
+        var filtered = [];
+        var letterMatch = new RegExp(coachsearch, 'i');
+        if(!items){}
+        else{
+            for (var i = 0; i < items.length; i++) {
+                var item = items[i];
+                if (letterMatch.test(item.emailid) || letterMatch.test(item.name) ) {
+                    filtered.push(item);
+                }
+            }
+        }
+        return filtered;
+    };
+});
