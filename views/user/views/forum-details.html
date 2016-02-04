@@ -48,42 +48,44 @@
                             <span ng-if="userCheck"> | <a href="#editForum/{{userforumdetails.postid}}"  class="btn abuse"  class="h6" >Edit</a></span>
                         </div>
                     </div>
-                    <h4>Comments</h4>
-                    <div class="text-center margin-tb-20" ng-show="forumAnswers.length==0">
-                        <img src="../../images/no-reviews.png"/>
-                        <h1 class="text-gray">NO COMMENTS</h1>
-                    </div>
-                    <div ng-repeat="forumAnswerList in forumAnswers" ng-hide="forumAnswers.length==0">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <hr/>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="col-md-4 no-padding">
-                                    <div class="col-md-2 no-padding">
-                                        <img class="img-circle" ng-src="{{forumAnswerList.userimage | trusted}}"/>
-                                    </div>
-                                    <div class="col-md-10">
-                                        <h5>{{forumAnswerList.username}}</h5>
-                                        <p>{{forumAnswerList.postedon}}</p>
-                                    </div>
+                    <div class="col-md-12 no-padding">
+                        <h4>Comments</h4>
+                        <div class="text-center margin-tb-20" ng-show="forumAnswers.length==0">
+                            <img src="../../images/no-reviews.png"/>
+                            <h1 class="text-gray">NO COMMENTS</h1>
+                        </div>
+                        <div ng-repeat="forumAnswerList in forumAnswers" ng-hide="forumAnswers.length==0">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <hr/>
                                 </div>
-                                <div class="col-md-8">
-                                    <p class="wrap"><strong>{{forumAnswerList.comments}}</strong></p>
-                                    <a href="" ng-click="doMarkCommentAsAbuse(forumAnswerList.ansid)" class="h6">Report Abuse</a>
+                                <div class="col-md-12">
+                                    <div class="col-md-4 no-padding">
+                                        <div class="col-md-2 no-padding">
+                                            <img class="img-circle" ng-src="{{forumAnswerList.userimage | trusted}}"/>
+                                        </div>
+                                        <div class="col-md-10">
+                                            <h5>{{forumAnswerList.username}}</h5>
+                                            <p>{{forumAnswerList.postedon}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <p class="wrap"><strong>{{forumAnswerList.comments}}</strong></p>
+                                        <a href="" ng-click="doMarkCommentAsAbuse(forumAnswerList.ansid)" class="h6">Report Abuse</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <hr/>
-                    <h4 class="margin-top-20">Post Comment</h4>
-                    <form name="userCommentForm" novalidate>
+                        <hr/>
+                        <h4 class="margin-top-20">Post Comment</h4>
+                        <form name="userCommentForm" novalidate>
                         <span ng-show="userCommentForm.comments.$dirty&&userCommentForm.comments.$invalid&& !userCommentForm.comments.$pristine">
                             <span class="error-message textarea-errormessage40" ng-show="userCommentForm.comments.$error.required"><span>Required.</span></span>
                         </span>
-                        <textarea class="forum-textarea" name="comments" ng-model="comments" placeholder="Enter the comments" required/></textarea>
-                        <a href="" ng-click="doPostForumAnswers()" class="btn main-button" ng-disabled="userCommentForm.$invalid">POST COMMENT</a>
-                    </form>
+                            <textarea class="forum-textarea" name="comments" ng-model="comments" placeholder="Enter the comments" required/></textarea>
+                            <a href="" ng-click="doPostForumAnswers()" class="btn main-button" ng-disabled="userCommentForm.$invalid">POST COMMENT</a>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>

@@ -22,24 +22,29 @@
                     <div class="col-md-3 margin-top-10">
                         <img ng-src="{{exerciseDetail.imageurl}}"/><br/><br/>
                     </div>
-                    <div class="col-md-9 h5 text-bold">
+                    <div class="col-md-9 h5">
                         <div class="row margin-top-10">
-                            <div class="col-md-4">Exercise Id<span class="pull-right">:</span></div>
+                            <div class="col-md-4  text-bold">Exercise Id<span class="pull-right">:</span></div>
                             <div class="col-md-8">{{exerciseDetail.exerciseid}}</div>
                         </div>
                         <div class="row margin-top-10">
-                            <div class="col-md-4">Exercise Name<span class="pull-right">:</span></div>
+                            <div class="col-md-4  text-bold">Exercise Name<span class="pull-right">:</span></div>
                             <div class="col-md-8">{{exerciseDetail.exercisename}}</div>
                         </div>
                         <div class="row margin-top-10">
-                            <div class="col-md-4">Exercise Type<span class="pull-right">:</span></div>
+                            <div class="col-md-4  text-bold">Exercise Type<span class="pull-right">:</span></div>
                             <div class="col-md-8">{{exerciseDetail.exercisetypename}}
                             </div>
                         </div>
                         <div class="row margin-top-10">
-                            <div class="col-md-4">MET<span class="pull-right">:</span></div>
+                            <div class="col-md-4  text-bold">Exercise Tags<span class="pull-right">:</span></div>
+                            <div class="col-md-8" ng-repeat="tags in exerciseDetail.tags">{{tags.tagname}}{{$last ? '' : ','}}</div>
+                        </div>
+                        <div class="row margin-top-10">
+                            <div class="col-md-4  text-bold">MET<span class="pull-right">:</span></div>
                             <div class="col-md-8">{{exerciseDetail.MET}}</div>
                         </div>
+
                     </div>
                 </div>
 

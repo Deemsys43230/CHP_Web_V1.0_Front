@@ -98,6 +98,7 @@ adminApp.controller('ExerciseViewController',function($scope,requestHandler,Flas
           // alert(JSON.stringify($scope.exerciseDetail));
            $scope.exerciseDetail.imagepath=$scope.exerciseDetail.imagepath+"1000x1000.jpg"+"?decache="+Math.random();
           $scope.exerciseDetail.imageurl=$scope.exerciseDetail.imageurl+"?decache="+Math.random();
+            $scope.exerciseDetail.tags =response.data.ExerciseDetail.tags;
             requestHandler.postRequest("admin/getTypeDetail/",{"typeid":$scope.exerciseDetail.exercisetypeid}).then(function(response){
             $scope.typename = response.data.ExerciseType_Data;
                 $scope.exerciseDetail.exercisetypename=$scope.typename.typename;

@@ -120,6 +120,19 @@ adminApp.controller('ForumsEditController',function($scope,requestHandler,Flash,
 
     };
 
+    $scope.doPostForumAnswers=function(){
+
+        requestHandler.postRequest("postAnswer/",{"comments":$scope.comments,"postid":$routeParams.id}).then(function(response){
+            successMessage(Flash,"Your Comment Successfully Posted!");
+            $scope.doGetForumAnswers();
+            $scope.comments='';
+            $scope.userCommentForm.$setPristine();
+        },function(){
+            errorMessage(Flash,"Please try again later!")
+        });
+
+    };
+
 
     //To update Latest News
     $scope.doUpdateForum = function(){
