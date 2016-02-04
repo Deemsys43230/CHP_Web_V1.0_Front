@@ -123,7 +123,7 @@ adminApp.controller('ForumsEditController',function($scope,requestHandler,Flash,
     $scope.doPostForumAnswers=function(){
 
         requestHandler.postRequest("postAnswer/",{"comments":$scope.comments,"postid":$routeParams.id}).then(function(response){
-            successMessage(Flash,"Your Comment Successfully Posted!");
+            successMessage(Flash,"Comment Posted Successfully!");
             $scope.doGetForumAnswers();
             $scope.comments='';
             $scope.userCommentForm.$setPristine();
