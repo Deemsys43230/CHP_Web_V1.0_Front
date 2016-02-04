@@ -11,7 +11,7 @@
                     <a href="#" onclick="return false;" class="show-list-search search_button margin-left-5"><i class="fa fa-search"></i></a>
                     <div class="search-list-form override">
                         <form autocomplete="off" class="searchform">
-                            <input type="text" ng-model="coursesearch"  placeholder="Search here...">
+                            <input type="text" ng-model="pendingcoursesearch"  placeholder="Search here...">
                         </form>
                     </div>
                 </div>
@@ -32,7 +32,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr dir-paginate="pendingcourse in pendingcoursefilter = (pendingCourseList | startsWithLetterCourse : coursesearch | itemsPerPage:9)" ng-show="pendingCourseList.length!=0">
+                    <tr dir-paginate="pendingcourse in pendingcoursefilter = (pendingCourseList | startsWithLetterPending : pendingcoursesearch | itemsPerPage:9)" ng-show="pendingCourseList.length!=0">
                             <td title="{{pendingcourse.coursename}}"><span class="line-clamp-xs">{{pendingcourse.coursename}}</span></td>
                             <td title="{{pendingcourse.coursesubtitle}}"><span class="line-clamp-xs">{{pendingcourse.coursesubtitle}}</span></td>
                             <td title="{{pendingcourse.categoryname}}"><span class="line-clamp-xs">{{pendingcourse.categoryname}}</span></td>

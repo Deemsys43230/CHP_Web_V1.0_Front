@@ -524,19 +524,7 @@ adminApp.filter('trusted', ['$sce', function ($sce) {
     };
 }]);
 
-adminApp.filter('startsWithLetter', function () {
-    return function (items, coursesearch) {
-        var filtered = [];
-        var letterMatch = new RegExp(coursesearch, 'i');
-        for (var i = 0; i < items.length; i++) {
-            var item = items[i];
-            if (letterMatch.test(item.coursename) ) {
-                filtered.push(item);
-            }
-        }
-        return filtered;
-    };
-});
+
 
 // html filter (render text as html)
 adminApp.filter('html', ['$sce', function ($sce) {
@@ -554,7 +542,25 @@ adminApp.filter('startsWithLetterCourse', function () {
         else{
             for (var i = 0; i < items.length; i++) {
                 var item = items[i];
-                if (letterMatch.test(item.coursename) || letterMatch.test(item.coursesubtitle) || letterMatch.test(item.categoryname) || letterMatch.test(item.ownername) || letterMatch.test(item.price) || letterMatch.test(item.enrollcount) || letterMatch.test(item.createdon) || letterMatch.test(item.publishedon) || letterMatch.test(item.reviewdate)) {
+                if (letterMatch.test(item.coursename) || letterMatch.test(item.coursesubtitle) || letterMatch.test(item.categoryname) || letterMatch.test(item.ownername) || letterMatch.test(item.price) || letterMatch.test(item.enrollcount) || letterMatch.test(item.createdon) || letterMatch.test(item.publishedon)) {
+                    filtered.push(item);
+                }
+            }
+        }
+        return filtered;
+    };
+});
+
+adminApp.filter('startsWithLetterPending', function () {
+
+    return function (items, pendingcoursesearch) {
+        var filtered = [];
+        var letterMatch = new RegExp(pendingcoursesearch, 'i');
+        if(!items){}
+        else{
+            for (var i = 0; i < items.length; i++) {
+                var item = items[i];
+                if (letterMatch.test(item.coursename) || letterMatch.test(item.coursesubtitle) || letterMatch.test(item.categoryname) || letterMatch.test(item.ownername) || letterMatch.test(item.price) || letterMatch.test(item.createdon) || letterMatch.test(item.reviewdate)) {
                     filtered.push(item);
                 }
             }
