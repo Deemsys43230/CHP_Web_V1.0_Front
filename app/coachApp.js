@@ -632,8 +632,13 @@ coachApp.directive('validNumber', function() {
                     return val <= 90;
                 };
 
+                ngModelCtrl.$validators.zero = function(val) {
+                    return val != 0;
+                };
 
-                var clean = val.replace(/[^-0-9\.]/g, '');
+
+
+               var clean = val.replace(/[^-0-9\.]/g, '');
                 var negativeCheck = clean.split('-');
                 var decimalCheck = clean.split('.');
                 if(!angular.isUndefined(negativeCheck[1])) {

@@ -101,19 +101,14 @@ coachApp.controller('CoachProfileController',['$scope','requestHandler','Flash',
 
         $scope.doUpdateProfile= function () {
 
-            $scope.convertImgToBase64($scope.userProfile.imageurl, function(base64Img){
-
-                //Convert Image to base64
-                $scope.userProfile.imageurl=base64Img;
+                delete $scope.userProfile.imageurl;
                 $scope.userProfile.country = $scope.userProfile.country.code;
                 $scope.userProfile.state = $scope.userProfile.state.code;
 
                 requestHandler.putRequest("updateProfile/",$scope.userProfile).then(function(){
                     $scope.doGetProfile();
                     successMessage(Flash,"Successfully Updated");
-                    //Copy Orginal
-                    // $scope.orginalUserProfile=angular.copy($scope.userProfile);
-                });
+
             });
         };
 

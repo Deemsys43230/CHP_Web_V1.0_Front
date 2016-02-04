@@ -11,6 +11,7 @@ coachApp.controller('CoachSubscriptionController',function($scope,requestHandler
     /*$("#threemonth").prop('required',false);
     $("#sixmonth").prop('required',false);*/
 
+
     var original="";
     $scope.doGetCoachSubscriptionDetails = function(){
 
@@ -20,18 +21,24 @@ coachApp.controller('CoachSubscriptionController',function($scope,requestHandler
             if($scope.subscriptionDetail.onemonth_amount==0){
                 $scope.subscriptionDetail.onemonth_amount="";
             }
+
             $scope.subscriptionDetail.onemonth_amount=$scope.subscriptionDetail.onemonth_amount.toString();
-            if($scope.subscriptionDetail.threemonth_percentage!=null || $scope.subscriptionDetail.threemonth_percentage!=0){
-            $scope.subscriptionDetail.threemonth_percentage=$scope.subscriptionDetail.threemonth_percentage.toString();
-                $scope.disablethreemonth=true;
+
+            if($scope.subscriptionDetail.threemonth_percentage!=null){
+
+               $scope.subscriptionDetail.threemonth_percentage=$scope.subscriptionDetail.threemonth_percentage.toString();
+               $scope.disablethreemonth=true;
             }
-            if($scope.subscriptionDetail.sixmonth_percentage!=null || $scope.subscriptionDetail.sixmonth_percentage!=0){
-                $scope.subscriptionDetail.sixmonth_percentage=$scope.subscriptionDetail.sixmonth_percentage.toString();
+
+            if($scope.subscriptionDetail.sixmonth_percentage!= null){
+
+               $scope.subscriptionDetail.sixmonth_percentage=$scope.subscriptionDetail.sixmonth_percentage.toString();
                  $scope.disablesixmonth=true;
             }
-           
-                original=angular.copy($scope.subscriptionDetail);
+
+
             $scope.doCalculatesubscription();
+            original=angular.copy($scope.subscriptionDetail);
 
         },function(response){
             errorMessage(Flash,"Please Try again later");
@@ -40,13 +47,6 @@ coachApp.controller('CoachSubscriptionController',function($scope,requestHandler
     };
 
     $scope.doUpdateSubscriptionDetails=function(){
-
-        if($scope.disablethreemonth==false){
-            $scope.subscriptionDetail.threemonth_percentage="";
-        }
-        if($scope.disablesixmonth==false){
-            $scope.subscriptionDetail.sixmonth_percentage="";
-        }
 
        requestHandler.putRequest("updateSubscriptionDetailByCoach/",$scope.subscriptionDetail).then(function(response){
 
@@ -79,8 +79,20 @@ coachApp.controller('CoachSubscriptionController',function($scope,requestHandler
 
     };
 
+    $scope.doClearValue = function(){
+        if($scope.disablethreemonth==false){
+            $scope.subscriptionDetail.threemonth_percentage=null;
+            $scope.percentagethreemonthamount=$scope.totalthreemonthamount;
+
+        }
+        if($scope.disablesixmonth==false){
+            $scope.subscriptionDetail.sixmonth_percentage=null;
+            $scope.percentagesixmonthamount=$scope.totalsixmonthamount;
+        }
+
+    }
+
     $scope.isCleanSubscriptionDetails=function(){
-        console.log(original)
         return angular.equals(original, $scope.subscriptionDetail);
     };
 

@@ -45,7 +45,7 @@
                                 <div class="col-md-1 margin-top-30">
                                     <checkbox-group title="Enable/Disable 3 month Subscription">
                                         <span class="fh-checkbox">
-                                            <input type="checkbox" id="type1" ng-model="disablethreemonth" >
+                                            <input type="checkbox" id="type1" ng-model="disablethreemonth" ng-click="doClearValue()">
                                             <label for="type1"></label>
                                         </span>
                                     </checkbox-group>
@@ -59,7 +59,7 @@
                                  <span ng-show="subscriptionForm.threemonthpercentage.$dirty&&subscriptionForm.threemonthpercentage.$invalid">
                                         <span class="error-message" ng-show="subscriptionForm.threemonthpercentage.$error.required"><span>Required.</span></span>
                                       <span class="error-message" ng-show="!subscriptionForm.threemonthpercentage.$error.required&&subscriptionForm.threemonthpercentage.$error.max"><span>Should&nbsp;not&nbsp;be&nbsp;greater&nbsp;than&nbsp;90.</span></span>
-                                     <!--<span class="error-message" ng-show="!subscriptionForm.threemonthpercentage.$error.required&&subscriptionForm.threemonthpercentage.$error.validateFloat"><span>Invalid&nbsp;Format.</span></span>-->
+                                     <span class="error-message" ng-show="!subscriptionForm.threemonthpercentage.$error.required&&subscriptionForm.threemonthpercentage.$error.zero"><span>Should&nbsp;not&nbsp;be&nbsp;0</span></span>
                                  </span>
                                     </div>
                                     <div class="col-md-8">
@@ -73,7 +73,7 @@
                                 <div class="col-md-1 margin-top-30">
                                     <checkbox-group title="Enable/Disable 6 month Subscription">
                                 <span class="fh-checkbox">
-                                    <input type="checkbox"  id="type2" ng-model="disablesixmonth" >
+                                    <input type="checkbox"  id="type2" ng-model="disablesixmonth" ng-click="doClearValue()">
                                     <label for="type2"></label>
                                 </span>
                                     </checkbox-group>
@@ -87,7 +87,7 @@
                                  <span ng-show="subscriptionForm.sixmonthpercentage.$dirty&&subscriptionForm.sixmonthpercentage.$invalid">
                                         <span class="error-message" ng-show="subscriptionForm.sixmonthpercentage.$error.required"><span>Required.</span></span>
                                      <span class="error-message" ng-show="!subscriptionForm.sixmonthpercentage.$error.required&&subscriptionForm.sixmonthpercentage.$error.max"><span>Should&nbsp;not&nbsp;be&nbsp;greater&nbsp;than&nbsp;90.</span></span>
-                                    <!--  <span class="error-message" ng-show="!subscriptionForm.sixmonthpercentage.$error.required&&subscriptionForm.sixmonthpercentage.$error.validateFloat"><span>Invalid&nbsp;Format.</span></span>-->
+                                     <span class="error-message" ng-show="!subscriptionForm.sixmonthpercentage.$error.required&&subscriptionForm.sixmonthpercentage.$error.zero"><span>Should&nbsp;not&nbsp;be&nbsp;0.</span></span>
                                  </span>
                                     </div>
                                     <div class="col-md-8">
