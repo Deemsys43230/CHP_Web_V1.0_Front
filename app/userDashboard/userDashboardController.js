@@ -1296,7 +1296,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
                 $scope.drawHistoryGraph(historyReport,titles);
             });
         }
-        else{
+        else if($scope.historyType==3){
             requestHandler.postRequest("user/getExerciseMinutesUsingDates/", {"fromdate":startDate,"todate":endDate}).then(function(response){
                 $scope.historyRecord=response.data.ExerciseMinutesUsingDates;
                 $.each($scope.historyRecord, function(index,value) {
@@ -1313,7 +1313,25 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
                 titles.color='blue';
                 $scope.drawHistoryGraph(historyReport,titles);
             });
+        }else{
+            requestHandler.postRequest("/user/getWeightLogGraph/", {"startdate":startDate,"enddate":endDate}).then(function(response){
+                $scope.historyRecord=response.data.Weight_logs;
+                $.each($scope.historyRecord, function(index,value) {
+                    var history = [];
+                    var date = value.date.split("/");
+                    history.push(monthNames[(date[1]-1)]+' '+date[0]);
+                    history.push(parseFloat(value.weight));
+                    historyReport.push(history);
+                });
+                titles.title="Weight Log Graph ( "+startDate+" - "+endDate+" )";
+                titles.name="Weight Log";
+                titles.suffix=" Kgs";
+                titles.yaxis="Weight (Kgs)";
+                titles.color='#f8ba01';
+                $scope.drawHistoryGraph(historyReport,titles);
+            });
         }
+
     };
 
     $scope.drawHistoryGraph=function(data,titles){

@@ -398,12 +398,13 @@
         <div id="contentHistory" ng-show="historyReport==1">
             <div id="history"  class="contentblock hidden">
 
-                <div class="col-md-6">
+                <div class="col-md-7">
                     <!-- Nav Tabs -->
                     <ul class="nav nav-tabs">
                         <li class="active"><a class="historyOverride" href="#tab-4" data-toggle="tab" onclick="return false;" ng-click="setHistoryType(1)">Calories Intaken</a></li>
                         <li><a href="#tab-4" class="historyOverride" data-toggle="tab" onclick="return false;" ng-click="setHistoryType(2)">Calories Burnt</a></li>
                         <li><a href="#tab-4" class="historyOverride" data-toggle="tab" onclick="return false;" ng-click="setHistoryType(3)">Exercise Minutes</a></li>
+                        <li><a href="#tab-4" class="historyOverride" data-toggle="tab" onclick="return false;" ng-click="setHistoryType(4)">Weight Log</a></li>
                     </ul>
 
                     <!-- Tab panels -->
@@ -442,8 +443,9 @@
                     <input id="history-end" hidden/>
                 </div>
 
-                <div class="col-md-2 pull-right margin-top-5 text-right"><i class="fa fa-calendar"></i> Date Range</div>
-            </div><!-- @end #ideas-content -->
+                <div class="pull-right margin-top-5 text-right"><i class="fa fa-calendar"></i>&nbsp;Date Range:&nbsp;
+                    </div>
+                </div><!-- @end #ideas-content -->
         </div>
 
         <div id="update" ng-show="historyReport==0">
