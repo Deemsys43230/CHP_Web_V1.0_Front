@@ -159,7 +159,7 @@ adminApp.controller('ExerciseEditController',function($q,$scope,requestHandler,F
         requestHandler.postRequest("admin/getExerciseDetailByadmin/",{"exerciseid":$routeParams.id}).then(function(response){
 
             $scope.exerciseDetail=response.data.ExerciseDetail.exercise;
-            $scope.exerciseDetail.typeid = $scope.exerciseDetail.exercisetypeid;
+            $scope.exerciseDetail.type = $scope.exerciseDetail.exercisetypeid;
 
            $scope.originalImage=$scope.exerciseDetail.imageurl+"?decache="+Math.random();
            // $scope.originalImage=$scope.exerciseDetail.imageurl.substring($scope.exerciseDetail.imageurl.indexOf("/")+14,$scope.exerciseDetail.imageurl.length)
@@ -260,7 +260,7 @@ adminApp.controller('ExerciseEditController',function($q,$scope,requestHandler,F
             });
         }*/
 
-        updatedExerciseDetails.typeid=$scope.exerciseDetail.typeid;
+        updatedExerciseDetails.typeid=$scope.exerciseDetail.type.typeid;
         updatedExerciseDetails.MET = $scope.exerciseDetail.met;
 
         var tagArray=[];
