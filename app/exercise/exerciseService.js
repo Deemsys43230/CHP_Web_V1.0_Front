@@ -90,23 +90,6 @@ adminApp.factory("ExerciseService",function(requestHandler){
 
     };
 
-    // Function to convert image url to base64
-    exerciseServiceObj.convertImgToBase64=function(url, callback, outputFormat){
-        var img = new Image();
-        img.crossOrigin = 'Anonymous';
-        img.onload = function(){
-            var canvas = document.createElement('CANVAS');
-            var ctx = canvas.getContext('2d');
-            canvas.height = this.height;
-            canvas.width = this.width;
-            ctx.drawImage(this,0,0);
-            var dataURL = canvas.toDataURL(outputFormat || 'image/jpg');
-            callback(dataURL);
-            canvas = null;
-        };
-        img.src = url;
-    };
-
     return exerciseServiceObj;
 
 });

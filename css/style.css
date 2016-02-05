@@ -197,7 +197,7 @@ p {
     color: #666;
     font-size: 13px;
     font-family: 'Open Sans', sans-serif;
-    line-height: 18px;
+    line-height: 22px;
     margin: 0;
 }
 
@@ -8381,6 +8381,10 @@ a:hover, a:visited, a:link, a:active
 .textarea-errormessage55{
 	 top: 55px;
  }
+
+.textarea-errormessage60{
+    top: 60px;
+}
 .textarea-errormessage20{
 	top: 20px;
 }

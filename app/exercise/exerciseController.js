@@ -95,9 +95,7 @@ adminApp.controller('ExerciseViewController',function($scope,requestHandler,Flas
 		$scope.loaded=true;
 		requestHandler.postRequest("admin/getExerciseDetailByadmin/",{"exerciseid":$routeParams.id}).then(function(response){
 			$scope.exerciseDetail=response.data.ExerciseDetail.exercise;
-		  // alert(JSON.stringify($scope.exerciseDetail));
-		   $scope.exerciseDetail.imagepath=$scope.exerciseDetail.imagepath+"1000x1000.jpg"+"?decache="+Math.random();
-		  $scope.exerciseDetail.imageurl=$scope.exerciseDetail.imageurl+"?decache="+Math.random();
+		    $scope.exerciseDetail.imagepath=$scope.exerciseDetail.imagepath+"200x200.jpg"+"?decache="+Math.random();
 			$scope.exerciseDetail.tags =response.data.ExerciseDetail.tags;
 			requestHandler.postRequest("admin/getTypeDetail/",{"typeid":$scope.exerciseDetail.exercisetypeid}).then(function(response){
 			$scope.typename = response.data.ExerciseType_Data;
@@ -123,26 +121,8 @@ adminApp.controller('ExerciseEditController',function($q,$scope,requestHandler,F
 	$scope.type=$route.current.type;
 	$scope.isNew=$route.current.isNew;
 	$scope.imageUpload=false;
-	//$scope.tagListArray=[];
-	$scope.imageload=true;
-	$scope.imageSet=false;
-	$scope.fileNameChanged = function(element)
-	{
-		if(!$scope.imageSet){
-			if(element.files.length > 0){
-				$scope.inputContainsFile = false;
-				$scope.imageSet=true;
-				$scope.imageload=false;
-			}
-			else{
-				$scope.inputContainsFile = true;
-				$scope.imageSet=false;
-				$scope.imageload=true;
-			}
-		}
-	};
-
-
+    $scope.inputContainsFile = true;
+    $scope.doingUpdate=false;
 
 	$scope.tagTransform = function (newTag) {
 		if($scope.tagListArray.indexOf(newTag)==-1){
@@ -162,13 +142,13 @@ adminApp.controller('ExerciseEditController',function($q,$scope,requestHandler,F
 
 			$scope.exerciseDetail.type = {"typeid":$scope.exerciseDetail.exercisetypeid,"typename":$scope.exerciseDetail.exercisetypename,"status":1};
 
-		   $scope.originalImage=$scope.exerciseDetail.imageurl+"?decache="+Math.random();
-		   // $scope.originalImage=$scope.exerciseDetail.imageurl.substring($scope.exerciseDetail.imageurl.indexOf("/")+14,$scope.exerciseDetail.imageurl.length)
+		    $scope.originalImage=$scope.exerciseDetail.imageurl+"?decache="+Math.random();
+		    // $scope.originalImage=$scope.exerciseDetail.imageurl.substring($scope.exerciseDetail.imageurl.indexOf("/")+14,$scope.exerciseDetail.imageurl.length)
 
 
 			$scope.exerciseDetail.imageurl=$scope.exerciseDetail.imageurl+"?decache="+Math.random();
-
-		   $scope.exerciseDetail.tags =response.data.ExerciseDetail.tags;
+            $scope.exerciseDetail.imagepath=$scope.exerciseDetail.imagepath+"200x200.jpg"+"?decache="+Math.random();
+		    $scope.exerciseDetail.tags =response.data.ExerciseDetail.tags;
 			$scope.exerciseDetail.met=$scope.exerciseDetail.MET;
 
 			original=angular.copy($scope.exerciseDetail);
@@ -223,6 +203,7 @@ adminApp.controller('ExerciseEditController',function($q,$scope,requestHandler,F
 		$scope.progress = 0;
 		fileReader.readAsDataUrl($scope.file, $scope).then(function(result) {
 			$scope.exerciseDetail.exerciseimage = result;
+            $scope.inputContainsFile = false;
 		});
 	};
 
@@ -231,35 +212,27 @@ adminApp.controller('ExerciseEditController',function($q,$scope,requestHandler,F
 	});
 
 	$scope.doRefreshPreview=function(){
-		$scope.exerciseDetail.exerciseimage=$scope.exerciseDetail.imageurl;
+		$scope.exerciseDetail.exerciseimage=$scope.exerciseDetail.imagepath;
+        $scope.inputContainsFile = true;
 	};
 
 	//Update Exercise Image
 	$scope.doUpdateExerciseImage=function(){
-		$scope.exerciseDetail.imageurl=$scope.exerciseDetail.exerciseimage;
 		$scope.imageUpload=true;
-		$scope.isNoImage=false;
+        $scope.exerciseDetail.imagepath=$scope.exerciseDetail.exerciseimage;
 	};
 	//End Exercise Image Upload Controller
 
 	$scope.doUpdateExerciseDetail=function(){
-		$scope.loaded=true;
+		$scope.doingUpdate=true;
+        $scope.spinner=true;
 		var updatedExerciseDetails={};
 		updatedExerciseDetails.exerciseid=$scope.exerciseDetail.exerciseid;
-
 		updatedExerciseDetails.exercisename=$scope.exerciseDetail.exercisename;
 
-	   /* if($scope.imageUpload){
-			updatedExerciseDetails.imageurl=$scope.exerciseDetail.imageurl;
+	    if($scope.imageUpload){
+			updatedExerciseDetails.imageurl=$scope.exerciseDetail.exerciseimage;
 		}
-		else{
-
-			console.log($scope.originalImage);
-			ExerciseService.convertImgToBase64($scope.originalImage, function(base64Img) {//Convert Image to Base64
-				console.log(base64Img);
-				updatedExerciseDetails.imageurl=base64Img;
-			});
-		}*/
 
 		updatedExerciseDetails.typeid=$scope.exerciseDetail.type.typeid;
 		updatedExerciseDetails.MET = $scope.exerciseDetail.met;
@@ -278,72 +251,36 @@ adminApp.controller('ExerciseEditController',function($q,$scope,requestHandler,F
 		});
 		updatedExerciseDetails.tagid = tagArray;
 
-		console.log("qadasa",updatedExerciseDetails);
-		if($scope.imageUpload){
-				$q.all([tagPromise]).then(function(){
-					updatedExerciseDetails.imageurl=$scope.exerciseDetail.imageurl;
-				requestHandler.putRequest("admin/updateExercise/",updatedExerciseDetails).then(function (response) {
-
-					if (response.data.Response_status == 1) {
-						successMessage(Flash,"Exercise Updated Successfully!");
-						$location.path("exercise");
-						$scope.loaded=false;
-					}
-				}, function () {
-					errorMessage(Flash,"Please Try Again Later!");
-					$scope.loaded=false;
-				});
-				});
-
-
-		}else{
-			ExerciseService.convertImgToBase64($scope.originalImage, function(base64Img) {//Convert Image to Base64
-				console.log(base64Img);
-
-				updatedExerciseDetails.imageurl=base64Img;
-						$q.all([tagPromise]).then(function(){
-							requestHandler.putRequest("admin/updateExercise/",updatedExerciseDetails).then(function (response) {
-								if (response.data.Response_status == 1) {
-									successMessage(Flash,"Exercise Updated Successfully!");
-									$location.path("exercise");
-									$scope.loaded=false;
-								}
-							}, function () {
-								errorMessage(Flash,"Please Try Again Later!");
-								$scope.loaded=false;
-							});
-						});
-
-
-
-			});
-		}
+        $q.all([tagPromise]).then(function(){
+            requestHandler.putRequest("admin/updateExercise/",updatedExerciseDetails).then(function (response) {
+                if (response.data.Response_status == 1) {
+                    successMessage(Flash,"Exercise Updated Successfully!");
+                    $location.path("exercise");
+                    $scope.doingUpdate=false;
+                    $scope.spinner=false;
+                }
+            }, function () {
+                errorMessage(Flash,"Please Try Again Later!");
+                $scope.doingUpdate=false;
+                $scope.spinner=false;
+            });
+        });
 
 	};
 
 	$scope.doAddExerciseDetail=function(){
-		$scope.loaded=true;
-		var updatedExerciseDetails={};
 
-		updatedExerciseDetails.exercisename=$scope.exerciseDetail.exercisename;
+        $scope.doingUpdate=true;
+        $scope.spinner=true;
+        var updatedExerciseDetails={};
+        updatedExerciseDetails.exercisename=$scope.exerciseDetail.exercisename;
 
-		if($scope.exerciseDetail.imageurl=="../../images/No_image_available.jpg"){
-			$scope.isNoImage=true;
-			$("html, body").animate({
-				scrollTop: 0
-			}, 600);
-		}
-		else{
-			updatedExerciseDetails.imageurl=$scope.exerciseDetail.imageurl;
-		}
-
-
-
-
-
+        if($scope.imageUpload){
+            updatedExerciseDetails.imageurl=$scope.exerciseDetail.exerciseimage;
+        }
 
 		updatedExerciseDetails.typeid=$scope.exerciseDetail.type.typeid;
-		updatedExerciseDetails.MET = $scope.exerciseDetail.met;
+		updatedExerciseDetails.MET = parseInt($scope.exerciseDetail.met);
 
 		//Tag Array Operation starts
 		var tagArray=[];
@@ -361,39 +298,28 @@ adminApp.controller('ExerciseEditController',function($q,$scope,requestHandler,F
 		updatedExerciseDetails.tagid = tagArray;
 		//Tag Array Ends
 
-	   // updatedExerciseDetails.levels = $scope.exerciseDetail.type.levels;
+	    //updatedExerciseDetails.levels = $scope.exerciseDetail.type.levels;
+        $q.all([tagPromise]).then(function(){
 
-		if($scope.isNoImage==false){
-			console.log(updatedExerciseDetails);
-			requestHandler.postRequest("admin/checkExerciseNameExists/",{"exercisename":$scope.exerciseDetail.exercisename}).then(function(response){
-				if(response.data.Response_status==0){
-					$q.all([tagPromise]).then(function(){
-					requestHandler.postRequest("admin/insertExercise/",updatedExerciseDetails).then(function (response) {
-						if (response.data.Response_status == 1) {
-							successMessage(Flash,"Exercise Added Successfully!");
-							$location.path("exercise");
-							$scope.loaded=false;
-						}
-					}, function () {
-						errorMessage(Flash,"Please Try Again Later!");
-						$scope.loaded=false;
-					});
+            console.log(updatedExerciseDetails);
+            requestHandler.postRequest("admin/insertExercise/",updatedExerciseDetails).then(function (response) {
+                if (response.data.Response_status == 1) {
+                    successMessage(Flash,"Exercise Added Successfully!");
+                    $location.path("exercise");
+                    $scope.doingUpdate=false;
+                    $scope.spinner=false;
+                }
+            }, function () {
+                errorMessage(Flash,"Please Try Again Later!");
+                $scope.doingUpdate=false;
+                $scope.spinner=false;
+            });
 
-						if($routeParams.id != null){
-							$scope.doApproveExerciseSuggestion();
-						}
-					});
-				}
-				else if(response.data.Response_status==1){
-					errorMessage(Flash,"Exercise&nbsp;already&nbsp;exists");
-					$scope.loaded=false;
-				}
-			});
+            if($routeParams.id != null){
+                $scope.doApproveExerciseSuggestion();
+            }
+        });
 
-		}
-		else{
-			$scope.loaded=false;
-		}
 	};
 
 	$scope.doApproveExerciseSuggestion=function(){
@@ -416,9 +342,7 @@ adminApp.controller('ExerciseEditController',function($q,$scope,requestHandler,F
 	$scope.doSetExcerciseDetails=function(){
 		$scope.exerciseDetail={};
 		$scope.loaded=true;
-		$scope.isNoImage=true
-
-		$scope.exerciseDetail.imageurl='../../images/No_image_available.jpg';
+		$scope.exerciseDetail.imagepath='../../images/No_image_available.jpg';
 
 		//push corresponding level
 	   /* requestHandler.postRequest("admin/gettypeIndividualDetail/",{"typeid":1}).then(function(response){
@@ -456,16 +380,17 @@ adminApp.controller('ExerciseEditController',function($q,$scope,requestHandler,F
 			$scope.tagListArray.push(value.tagname);
 		});
 	});
+
 	//Initialize Page
 	//Get Exercise Details
 	$q.all([excerciseTagPromise]).then(function(){
-
-	if($scope.type==1){
-		$scope.doGetExcerciseTypeList();
-		$scope.doSetExcerciseDetails();
-	}else if($scope.type==2){
-		$scope.doGetExcerciseTypeList();        
-		$scope.doGetExcerciseDetails();    }
+        if($scope.type==1){
+            $scope.doGetExcerciseTypeList();
+            $scope.doSetExcerciseDetails();
+        }else if($scope.type==2){
+            $scope.doGetExcerciseTypeList();
+            $scope.doGetExcerciseDetails();
+        }
 	});
 
 

@@ -3,7 +3,6 @@
 <div class="page-banner">
     <div class="container">
         <div class="row">
-
             <div class="col-md-3">
                 <h4 class="classic-title"><span>Exercise Management</span></h4>
                 <div ng-include src="'views/exercise-menu.html'" onload="activeClass"></div>
@@ -20,7 +19,7 @@
                 </div>
                 <div class="row">
                     <div class="col-md-3 margin-top-10">
-                        <img ng-src="{{exerciseDetail.imageurl}}"/><br/><br/>
+                        <img ng-src="{{exerciseDetail.imagepath}}"/><br/><br/>
                     </div>
                     <div class="col-md-9 h5">
                         <div class="row margin-top-10">
@@ -38,7 +37,7 @@
                         </div>
                         <div class="row margin-top-10">
                             <div class="col-md-4  text-bold">Exercise Tags<span class="pull-right">:</span></div>
-                            <div class="col-md-8" ng-repeat="tags in exerciseDetail.tags">{{tags.tagname}}{{$last ? '' : ','}}</div>
+                            <div class="col-md-8"><span ng-repeat="tags in exerciseDetail.tags">{{tags.tagname}}{{$last ? '' : ','}}</span></div>
                         </div>
                         <div class="row margin-top-10">
                             <div class="col-md-4  text-bold">MET<span class="pull-right">:</span></div>

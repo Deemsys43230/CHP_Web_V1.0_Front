@@ -220,8 +220,7 @@ adminApp.controller("FoodDetailsViewController",function($scope,requestHandler,$
     $scope.doGetFoodDetails= function () {
         requestHandler.postRequest("getFoodDetailByadmin/",{"foodid":$routeParams.id}).then(function(response){
             $scope.foodDetails=response.data.Food_Data;
-            console.log("view", $scope.foodDetails);
-           $scope.foodDetails.foodImagePath=$scope.foodDetails.foodImagePath+"1000x1000.jpg"+"?decache="+Math.random();
+            $scope.foodDetails.foodImagePath=$scope.foodDetails.foodImagePath+"200x200.jpg"+"?decache="+Math.random();
 
             //Set Suitable For
             if($scope.foodDetails.notobesity==1){
@@ -234,9 +233,6 @@ adminApp.controller("FoodDetailsViewController",function($scope,requestHandler,$
             }else{
                 $scope.foodDetails.notSuitableFor="-"
             }
-
-          //  $scope.foodDetails.foodImagePath=$scope.foodDetails.foodImagePath.substring($scope.foodDetails.foodImagePath.indexOf("/")+14,$scope.foodDetails.foodImagePath.length)
-            console.log("ImagePath:"+$scope.foodDetails.foodImagePath);
         },function(response){
             alert("Not able to pull Food Measure List");
         })
@@ -253,24 +249,8 @@ adminApp.controller("FoodDetailsEditController",function($q,$scope,requestHandle
     $scope.type=$route.current.type;
     $scope.isNew=$route.current.isNew;
     $scope.imageUpload=false;
-$scope.imageload=true;
-    $scope.imageSet=false;
-
-    $scope.fileNameChanged = function(element)
-    {
-        if(!$scope.imageSet){
-            if(element.files.length > 0){
-                $scope.inputContainsFile = false;
-                $scope.imageSet=true;
-                $scope.imageload=false;
-            }
-            else{
-                $scope.inputContainsFile = true;
-                $scope.imageSet=false;
-                $scope.imageload=true;
-            }
-        }
-    };
+    $scope.inputContainsFile = true;
+    $scope.doingUpdate=false;
 
     //For Tag Input
     $scope.tagTransform = function (newTag) {
@@ -286,15 +266,10 @@ $scope.imageload=true;
 
     //Get Particular Food Details
     $scope.doGetFoodDetails= function () {
-        $scope.doingUpdate = false;
         requestHandler.postRequest("getFoodDetailByadmin/",{"foodid":$routeParams.id}).then(function(response){
 
             $scope.foodDetails=response.data.Food_Data;
-           $scope.foodDetails.foodImagePath=$scope.foodDetails.foodImagePath+"1000x1000.jpg"+"?decache="+Math.random();
-           // $scope.foodDetails.foodImagePath=$scope.foodDetails.foodImagePath.substring($scope.foodDetails.foodImagePath.indexOf("/")+14,$scope.foodDetails.foodImagePath.length)
-           $scope.foodDetails.foodimage=$scope.foodDetails.foodimage+"?decache="+Math.random();
-          //  $scope.foodDetails.foodimage=$scope.foodDetails.foodimage.substring($scope.foodDetails.foodimage.indexOf("/")+14,$scope.foodDetails.foodimage.length);
-            //Set session
+            $scope.foodDetails.foodImagePath=$scope.foodDetails.foodImagePath+"200x200.jpg"+"?decache="+Math.random();
             $scope.foodDetails.sessionSet=FoodService.setSessionValues($scope.foodDetails.sessionid);
 
             //Set Measure Values
@@ -306,10 +281,9 @@ $scope.imageload=true;
             //Set Region Values
             $scope.foodDetails.regionid=$scope.foodDetails.regionid.regionid;
 
-
-            
-
             original=angular.copy($scope.foodDetails);
+
+            console.log($scope.foodDetails);
 
         },function(response){
             alert("Not able to pull Food Measure List");
@@ -320,11 +294,10 @@ $scope.imageload=true;
     //Food Image Upload Controller
     $scope.getFile = function () {
         $scope.progress = 0;
-        fileReader.readAsDataUrl($scope.file, $scope)
-            .then(function(result) {
-                $scope.foodDetails.foodimage = result;
-
-            });
+        fileReader.readAsDataUrl($scope.file, $scope).then(function(result) {
+            $scope.foodDetails.foodimage = result;
+            $scope.inputContainsFile = false;
+        });
     };
 
     $scope.$on("fileProgress", function(e, progress) {
@@ -333,18 +306,72 @@ $scope.imageload=true;
 
     $scope.doRefreshPreview=function(){
         $scope.foodDetails.foodimage=$scope.foodDetails.foodImagePath;
+        $scope.inputContainsFile = true;
     };
 
     //Update Food Image
     $scope.doUpdateFoodImage=function(){
-        console.log($scope.foodDetails.foodimage);
-        $scope.foodDetails.foodImagePath=$scope.foodDetails.foodimage;
-        console.log($scope.foodDetails.foodImagePath);
         $scope.imageUpload=true;
-        $scope.imageAdded=false;
+        $scope.foodDetails.foodImagePath=$scope.foodDetails.foodimage;
     };
    //End Food Image Upload Controller
 
+    //Do Update Food
+    $scope.doUpdateFoodDetails= function () {
+        //For disabling the update button after one click
+        $scope.doingUpdate=true;
+        $scope.spinner=true;
+        //Get Update Details
+        $scope.foodDetails.sessionid=FoodService.getSessionArray($scope.foodDetails.sessionSet);
+        $scope.foodDetails.categoryid=FoodService.getCategoryArray($scope.foodDetails.categoryid);
+
+        if(!$scope.imageUpload){
+            delete $scope.foodDetails.foodimage;
+        }
+        delete $scope.foodDetails.foodImagePath;
+
+        //Tag Array Operation
+        var tagArray=[];
+        var tagPromise;
+        $.each($scope.foodDetails.tagid, function(index,value) {
+            if(value.tagid!=null){
+                tagArray.push(parseInt(value.tagid));
+            }else{
+                tagPromise=FoodService.insertTag(value.tagname);
+                tagPromise.then(function(result){
+                    tagArray.push(result);
+                });
+            }
+        });
+        //End Array Operation
+
+        $scope.foodDetails.tagid=tagArray;
+
+        //For Region
+        $scope.foodDetails.regionid=$scope.foodDetails.regionid;
+
+        //To Change the name of the obj from measureid to measuredata
+        $scope.foodDetails.measuredata=$scope.foodDetails.measureid;
+
+        $q.all([tagPromise]).then(function(){
+            requestHandler.putRequest("admin/updateFood/", $scope.foodDetails).then(function (response) {
+                console.log($scope.foodDetails);
+                if (response.data.Response_status == 1) {
+                    successMessage(Flash,"Food Updated Successfully!");
+                    $scope.doGetFoodDetails();
+                    $location.path("food");
+                    $scope.spinner=false;
+                    $scope.doingUpdate=false;
+                }
+            }, function (response) {
+                alert("Not able to pull Food Tag");
+                $scope.spinner=false;
+                $scope.doingUpdate=false;
+            });
+        });
+
+
+    };
 
     //Set Food Details Obj for add
     $scope.doSetFoodDetails=function(){
@@ -372,7 +399,6 @@ $scope.imageload=true;
         }
 
         $scope.foodDetails.foodImagePath='../../images/No_image_available.jpg';
-        $scope.foodDetails.foodimage='../../images/No_image_available.jpg';
 
         //Set session
         $scope.foodDetails.sessionSet=FoodService.setSessionValues($scope.foodDetails.sessionid);
@@ -382,92 +408,21 @@ $scope.imageload=true;
         foodMeasurePromise.then(function(result){
             $scope.foodMeasureListAll=result;
         });
-
     };
     //End Set
-
-    //Do Update Food
-    $scope.doUpdateFoodDetails= function () {
-
-            //For disabling the update button after one click
-            $scope.doingUpdate = true;
-            $scope.spinner=true;
-            //Get Update Details
-            $scope.foodDetails.sessionid=FoodService.getSessionArray($scope.foodDetails.sessionSet);
-            $scope.foodDetails.categoryid=FoodService.getCategoryArray($scope.foodDetails.categoryid);
-
-            //Tag Array Operation
-            var tagArray=[];
-            var tagPromise;
-            $.each($scope.foodDetails.tagid, function(index,value) {
-                if(value.tagid!=null){
-                    tagArray.push(parseInt(value.tagid));
-                }else{
-                    tagPromise=FoodService.insertTag(value.tagname);
-                    tagPromise.then(function(result){
-                        tagArray.push(result);
-                    });
-                }
-            });
-            //End Array Operation
-
-            $scope.foodDetails.tagid=tagArray;
-
-            //For Region
-            $scope.foodDetails.regionid=$scope.foodDetails.regionid;
-
-            //To Change the name of the obj from measureid to measuredata
-            $scope.foodDetails.measuredata=$scope.foodDetails.measureid;
-
-
-            if($scope.imageUpload){//Check for Image Upload
-                //alert("1");
-                $q.all([tagPromise]).then(function(){
-                    requestHandler.putRequest("admin/updateFood/", $scope.foodDetails).then(function (response) {
-                        console.log($scope.foodDetails);
-                        if (response.data.Response_status == 1) {
-                            successMessage(Flash,"Food Updated Successfully!");
-                            $scope.doGetFoodDetails();
-                            $location.path("food");
-                            $scope.spinner=false;
-                        }
-                    }, function (response) {
-                        alert("Not able to pull Food Tag");
-                        $scope.spinner=false;
-                    });
-                });
-
-            }else{
-               // alert("2");
-                FoodService.convertImgToBase64($scope.foodDetails.foodImagePath, function(base64Img) {//Convert Image to Base64
-                    $scope.foodDetails.foodimage=base64Img;
-                    $q.all([tagPromise]).then(function(){//Only after tagPromise
-                        requestHandler.putRequest("admin/updateFood/", $scope.foodDetails).then(function (response) {
-                            if (response.data.Response_status == 1) {
-                                successMessage(Flash,"Food Updated Successfully!");
-                                $scope.doGetFoodDetails();
-                                $location.path("food");
-                            }
-                        }, function (response) {
-                            alert("Not able to pull Food Tag");
-                        });
-                    });
-
-                });
-            }
-
-
-    };
-
 
     //Do Add Food Details
     $scope.doAddFoodDetails= function () {
 
+        $scope.doingUpdate=true;
         $scope.spinner=true;
-        $scope.imageAdded=true;
         //Get Add Details
         $scope.foodDetails.sessionid=FoodService.getSessionArray($scope.foodDetails.sessionSet);
         $scope.foodDetails.categoryid=FoodService.getCategoryArray($scope.foodDetails.categoryid);
+
+        if(!$scope.imageUpload){
+            delete $scope.foodDetails.foodimage;
+        }
 
         //Tag Array Operation
         var tagArray=[];
@@ -491,15 +446,14 @@ $scope.imageload=true;
             requestHandler.postRequest("admin/insertFood/", $scope.foodDetails).then(function (response) {
                 if (response.data.Response_status == 1) {
                     successMessage(Flash,"Food Added Successfully!");
+                    $scope.doingUpdate=false;
                     $scope.spinner=false;
-                    $scope.imageAdded=false;
-                    //$scope.doGetFoodDetails();
                     $location.path("food");
                 }
             }, function (response) {
+                $scope.doingUpdate=false;
                 $scope.spinner=false;
-                $scope.imageAdded=false;
-                alert("Not able to pull Food Tag");
+                errorMessage(Flash,"Try Again Later!");
             });
 
             if($routeParams.id != null){
@@ -521,10 +475,9 @@ $scope.imageload=true;
     };
 
     $scope.isClean=function(){
+        console.log(angular.equals(original, $scope.foodDetails));
         return angular.equals(original, $scope.foodDetails);
     };
-
-    
 
     //Set measure set
     $scope.doAddNewMeasureMinerals=function(id,name){
@@ -563,9 +516,7 @@ adminApp.directive("ngFileSelect",function(){
 
     return {
         link: function($scope,el){
-
             el.bind("change", function(e){
-
                 $scope.file = (e.srcElement || e.target).files[0];
                 $scope.getFile();
             })

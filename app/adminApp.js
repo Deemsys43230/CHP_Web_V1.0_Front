@@ -1612,9 +1612,12 @@ adminApp.directive('checkboxGroup', function() {
             };
 
             self.deregister = function(ngModel) {
-                var index = this.ngModels.indexOf(ngModel);
-                if ( index != -1 ) {
-                    this.ngModels.splice(index, 1);
+                if(!this.ngModels){}
+                else{
+                    var index = this.ngModels.indexOf(ngModel);
+                    if ( index != -1 ) {
+                        this.ngModels.splice(index, 1);
+                    }
                 }
             };
 
