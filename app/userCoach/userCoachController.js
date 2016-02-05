@@ -20,8 +20,13 @@ userApp.controller('UserCoachController',function($scope,requestHandler,Flash,$l
         requestHandler.getRequest("user/getallCoachListbyUser/", "").then(function(response){
             $scope.usercoachlist1=response.data.getallCoachListbyUser;
 
+            if($routeParams.renew){
+                $scope.doGetCoachDetailsByUser($routeParams.renew);
+            }
+            else{
             if($scope.usercoachlist1.length>0)
             $scope.doGetCoachDetailsByUser(response.data.getallCoachListbyUser[0].userid);
+            }
 
             var ratingPromise;
             $.each($scope.usercoachlist1, function(index,value){
@@ -34,6 +39,8 @@ userApp.controller('UserCoachController',function($scope,requestHandler,Flash,$l
                     value.totalReviews=result.totalRatings;
                 });
             });
+
+
 
             $q.all([ratingPromise]).then(function(){
                 $scope.usercoachlist=$scope.usercoachlist1;

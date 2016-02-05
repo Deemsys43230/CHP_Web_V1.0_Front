@@ -131,6 +131,23 @@ adminApp.controller('FoodMeasureController',function($scope,requestHandler,Flash
         });
     };
 
+    //Enable or Disable Measure
+    $scope.doDelete= function (id) {
+        requestHandler.postRequest("admin/deletefoodMeasure/",{'measureid':id}).then(function(response){
+            if(response.data.Response_status==0){
+                $scope.doViewAllFoodMeasure();
+                errorMessage(Flash,"Measure&nbsp;used&nbsp;by&nbsp;food");
+            }
+            if(response.data.Response_status==1){
+                $scope.doViewAllFoodMeasure();
+                successMessage(Flash,"Successfully Done");
+            }
+        },  function () {
+            errorMessage(Flash, "Please try again later!")
+        });
+    };
+
+
 
 
     //Initial Load//Initial Load
