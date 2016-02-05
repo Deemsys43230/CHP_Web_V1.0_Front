@@ -60,6 +60,7 @@ commonApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 ]
                             })
                         }
+
                 },
                 controller:'CommonController'
             }).

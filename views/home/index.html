@@ -141,8 +141,11 @@
             <!--<div class="centeredText">
                 <span>Or</span>
             </div>-->
+
             <div flash-message="3000" ></div>
+            <div ng-show="sessionValue==1"><span class="text-red">Your session has been expired.<br/>Please login again!!!</span></div>
             <form name="loginForm" novalidate>
+
                 <p>Email ID</p>
                 <input type="email" name="username" ng-model="username" ng-keypress="checkIfEnterKeyWasPressedForLogin($event)" required validate-email/>
                     <span ng-show="loginForm.username.$dirty&&loginForm.username.$invalid && !loginForm.username.$pristine">
