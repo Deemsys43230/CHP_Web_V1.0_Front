@@ -687,9 +687,7 @@ coachApp.directive('validFloatnumber', function() {
                     var val ='';
 
                 }
-                ngModelCtrl.$validators.max = function(val) {
-                    return val <= 90;
-                };
+
 
                 ngModelCtrl.$validators.validateFloat1 = function(val) {
                     return  ngModelCtrl.$isEmpty(val) || FLOAT_REGEXP.test(val);
