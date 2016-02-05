@@ -67,7 +67,7 @@
                     <!-- Start Social Links-->
                     <ul class="social-list">
                         <li>
-                            <a class="login itl-tooltip" id="modal_trigger" data-ng-click="reset()" data-placement="bottom" title="Login / Register" href="#modal">Login / Register</a>
+                            <a class="login itl-tooltip modal_trigger"  data-ng-click="reset()" data-placement="bottom" title="Login / Register" href="#modal">Login / Register</a>
                         </li>
                         <li>
                             <a class="facebook itl-tooltip" data-placement="bottom" title="Facebook" target="_blank" href="{{commonDetails.facebookurl}}"><i class="fa fa-facebook"></i></a>
@@ -143,7 +143,7 @@
             </div>-->
 
             <div flash-message="3000" ></div>
-            <div ng-show="sessionValue==1"><span class="text-red">Your session has been expired.<br/>Please login again!!!</span></div>
+           <!-- <div ng-show="sessionValue==1"><span class="text-red">Your session has been expired.<br/>Please login again!!!</span></div>-->
             <form name="loginForm" novalidate>
 
                 <p>Email ID</p>
@@ -304,7 +304,26 @@
                 </div>
             </form>
         </div>
+    </section>
+</div>
 
+<!-- delete section popup-->
+<div id="section-modal" class="popupContainer width-28" style="display:none;left: 36%!important;top:60px!important;">
+    <header class="popupHeader width-100">
+        <span class="header_title">Alert</span>
+        <span class="modal_close"><i class="fa fa-times"></i></span>
+    </header>
+
+    <section class="popupBody">
+        <!-- Register Form -->
+        <div class="common_model">
+            <div class="text-center"><img src="../../images/alert-ring.png"/></div><br/>
+            <h5 class="text-center">Your session has been expired<br/>Please login again!!!</h5>
+            <div class="action_btns margin-top-20 margin-bottom-10">
+                <div class="one_half"><a href="#modal"  data-ng-click="reset()" class="btn btn_red modal_trigger relogin">OK</a></div>
+                <div class="one_half last"><a onclick="return false;" class="btn back_btn modal_close">Cancel</a></div>
+            </div>
+        </div>
     </section>
 </div>
 
@@ -459,7 +478,7 @@
 
 
 <script type="text/javascript">
-    $("#modal_trigger").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
+    $(".modal_trigger").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
 
     $(function(){
 
@@ -525,7 +544,7 @@
             return false;
         });
 
-        $("#modal_trigger").click(function(){
+        $(".modal_trigger").click(function(){
             $(".reset_password").hide();
             $(".user_register").hide();
             $(".secret_question").hide();

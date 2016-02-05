@@ -6,23 +6,28 @@ commonApp.controller('CommonController',function($scope,requestHandler,Flash,$ro
     $scope.countFrom=5;
 
     if($routeParams.session== "logout"){
-        $rootScope.sessionValue = 1;
+       /* $rootScope.sessionValue = 1;*/
+
 
         $(function(){
             $("#lean_overlay").fadeTo(1000);
-            $("#modal").fadeIn(600);
-            $(".user_login").show();
+            $("#section-modal").fadeIn(600);
+            $(".common_model").show();
         });
 
         $(".modal_close").click(function(){
-            $(".user_login").hide();
-            $("#modal").hide();
+            $(".common_model").hide();
+            $("#section-modal").hide();
             $("#lean_overlay").hide();
         });
 
+        $(".relogin").click(function(){
+            $("#section-modal").hide();
+        });
+
         $("#lean_overlay").click(function(){
-            $(".user_login").hide();
-            $("#modal").hide();
+            $(".common_model").hide();
+            $("#section-modal").hide();
             $("#lean_overlay").hide();
         });
     }

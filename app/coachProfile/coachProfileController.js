@@ -148,8 +148,6 @@ coachApp.controller('CoachProfileController',['$scope','requestHandler','Flash',
 
         //To Enable the update button if changes occur.
         $scope.isClean = function() {
-            console.log("ori",$scope.orginalUserProfile);
-            console.log("dad",$scope.userProfile);
             return angular.equals ($scope.orginalUserProfile, $scope.userProfile);
         };
 
