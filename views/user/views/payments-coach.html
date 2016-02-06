@@ -49,7 +49,10 @@
                             <tr dir-paginate="mycoach in coachfilter = (usercoachlist | startsWithLetterCoach: coachpay | orderBy:sortKey:reverse | itemsPerPage: 8)" ng-show="usercoachlist.length!=0">
                                 <td>{{mycoach.coachname}}</a></td>
                                 <td>{{mycoach.coachemailid}}</td>
-                                <td>{{mycoach.coachEnrollStatus}}</td>
+                                <td>
+                                    <span ng-show="mycoach.coachEnrollStatus==1" class="text-green">Active</span>
+                                    <span ng-show="mycoach.coachEnrollStatus==2" class="text-red">Expired</span>
+                                </td>
                                 <td>{{mycoach.purchaseamount}}</td>
                                 <td><a href="" ng-click="doViewPaymentDetails(mycoach.inwardid)">{{mycoach.inwardid}}</a></td>
                             </tr>

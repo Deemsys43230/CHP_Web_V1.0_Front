@@ -6,7 +6,7 @@ coachApp.controller('CoachDashboardController',function($scope,requestHandler,Fl
     $scope.doGetCoachDashboardCount=function(){
         requestHandler.getRequest("getStatistics/","").then(function(response){
             $scope.coachCountList=response.data.Stats;
-            $scope.myMemberCount = $scope.coachCountList.membercount;
+            $scope.myMemberCount = $scope.coachCountList.subscriptioncount;
             $scope.myCourseCount = $scope.coachCountList.publishedcourses;
             $scope.myPayCount = $scope.coachCountList.totalincome
 

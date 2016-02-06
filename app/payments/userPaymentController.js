@@ -148,6 +148,7 @@ userApp.controller('UserPaymentController',function($scope,requestHandler,Flash,
     $scope.doUpdatePaypalDetails=function(){
         requestHandler.putRequest("updateUserSettings/",$scope.paypalDetails).then(function(response){
             successMessage(Flash,"Successfully Updated!");
+            $scope.getSettingDetails();
         },function(){
             errorMessage(Flash,"Please try again later");
         });

@@ -5,7 +5,7 @@
 var userApp= angular.module('userApp', ['ngRoute','oc.lazyLoad','ngCookies','requestModule','flash','angularUtils.directives.dirPagination']);
 userApp.controller('CourseController',['$scope','requestHandler','Flash','$routeParams','$location',function($scope,requestHandler,Flash,$routeParams) {
 
-    $scope.entrolling="Enroll to this course";
+    $scope.entrolling="Enroll course";
     $scope.enrollButtonStatus=false;
     $scope.activeClass.myCourses='active';
 
@@ -426,8 +426,9 @@ adminApp.controller('CourseAdminController',['$scope','requestHandler','Flash','
                 successMessage(Flash,"Successfully Rejected");
             }
             else{
+
+               successMessage(Flash,"Successfully Rejected");
                $location.path('coursePending');
-                successMessage(Flash,"Successfully Rejected");
             }
         },function(){
             errorMessage(Flash,"Please try again later!")

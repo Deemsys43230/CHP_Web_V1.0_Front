@@ -41,8 +41,8 @@
                         <td><span class="line-clamp-lxs" title="{{subscriber.subscribedby}}">{{subscriber.subscribedby}}</span></td>
                         <td>{{subscriber.subscribedon}}</td>
                         <td>{{subscriber.todate}}</td>
-                        <td>{{subscriber.coachamount}}</td>
                         <td>{{subscriber.adminamount}}</td>
+                        <td>{{subscriber.coachamount}}</td>
                         <td>{{subscriber.inwardid}}</td>
                         <td><span ng-show="subscriber.outwardid!=undefined">{{subscriber.outwardid}}</span><span ng-show="subscriber.outwardid==undefined"><a href="" ng-click="doManualPay(subscriber.paymentid,coachid)" class="btn-dis btn-xs btn-success" ng-disabled="loaddisable">Manual Pay</a></span></td>
                         <td>
