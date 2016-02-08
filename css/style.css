@@ -8533,6 +8533,10 @@ a:hover, a:visited, a:link, a:active
 	padding: 20px !important;
 }
 
+.height-520{
+    height:520px!important;
+}
+
 
 #profile{
 	display: block;
