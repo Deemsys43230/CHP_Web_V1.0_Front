@@ -405,14 +405,10 @@ adminApp.controller('CourseAdminController',['$scope','requestHandler','Flash','
     $scope.doAcceptCourse = function(course){
          requestHandler.postRequest("admin/publishCourse/",{"courseid":course}).then(function(response){
 
-                if($scope.page == 'pending'){
-                    $scope.pendingcourselist();
-                    successMessage(Flash,"Successfully Published");
-                }
-                else{
-                    $location.path('coursePending');
-                    successMessage(Flash,"Successfully Published");
-                }
+                $scope.pendingcourselist();
+                $location.path('coursePending');
+                successMessage(Flash,"Successfully Published");
+
             },function(){
                 errorMessage(Flash,"Please try again later!")
             });
@@ -421,15 +417,9 @@ adminApp.controller('CourseAdminController',['$scope','requestHandler','Flash','
 
     $scope.doRejectCourse = function(course){
         requestHandler.postRequest("admin/rejectCourse/",{"courseid":course,"comments":$scope.comments}).then(function(response){
-            if($scope.page == 'pending'){
                 $scope.pendingcourselist();
+                $location.path('coursePending');
                 successMessage(Flash,"Successfully Rejected");
-            }
-            else{
-
-               successMessage(Flash,"Successfully Rejected");
-               $location.path('coursePending');
-            }
         },function(){
             errorMessage(Flash,"Please try again later!")
         });
