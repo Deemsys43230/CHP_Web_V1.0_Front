@@ -19,7 +19,7 @@
                         </div>
                         <div class="col-md-10 margin-bottom-20">
 
-                            <input class="form-control" name="title" ng-model="latest.title" required>
+                            <input class="form-control" name="title" ng-model="latest.title" max-length="200" required>
                             <span ng-show="latestNewsForm.title.$dirty&&latestNewsForm.title.$invalid">
                                   <span class="error-message" ng-show="latestNewsForm.title.$error.required"><span>Required.</span></span>
                              </span>
