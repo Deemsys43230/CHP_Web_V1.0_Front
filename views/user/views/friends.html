@@ -54,8 +54,8 @@
                                 <div class="col-md-9 no-padding">
                                     <table class="table table-bordered table-striped">
                                         <tr>
-                                            <td class="col-md-4">Name</td>
-                                            <td class="col-md-8">{{viewMemberDetails.name}}</td>
+                                            <td class="col-md-3">Name</td>
+                                            <td class="col-md-9">{{viewMemberDetails.name}}</td>
                                         </tr>
                                         <tr>
                                             <td>Email ID</td>
@@ -86,16 +86,8 @@
                                             <td>{{viewMemberDetails.phone}}</td>
                                         </tr>
                                         <tr ng-if="viewMemberDetails.isprivacy==0">
-                                            <td>Country</td>
-                                            <td>{{viewMemberDetails.country}}</td>
-                                        </tr>
-                                        <tr ng-if="viewMemberDetails.isprivacy==0">
-                                            <td>State</td>
-                                            <td>{{viewMemberDetails.state}}</td>
-                                        </tr>
-                                        <tr ng-if="viewMemberDetails.isprivacy==0">
-                                            <td>City</td>
-                                            <td>{{viewMemberDetails.city}}</td>
+                                            <td>Address</td>
+                                            <td><span  class="line-clamp-xlg">{{viewMemberDetails.city}},{{viewMemberDetails.state}},{{viewMemberDetails.country}}</span></td>
                                         </tr>
                                         <tr ng-if="viewMemberDetails.isprivacy==0">
                                             <td>Zipcode</td>

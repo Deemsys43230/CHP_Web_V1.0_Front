@@ -9,17 +9,19 @@
                 <div flash-message="2000" class="col-md-3 pull-right no-padding"></div>
                 <h4 class="classic-title"><span>My Advice</span></h4>
                 <form name="adviceForm" novalidate>
-                <h5 class="text-muted">Description :</h5>
-                <textarea class="height-150 forum-textarea" name="description" ng-model="myadvice.description" maxlength="600" required></textarea>
-                 <span ng-show="adviceForm.description.$dirty&&adviceForm.description.$invalid">
-                                  <span class="error-message textarea-errormessage40" ng-show="adviceForm.description.$error.required"><span>Required.</span></span>
-                             </span>
-                <div class="text-center">
-                    <a href="" class="btn btn-success" ng-disabled="adviceForm.$invalid || isClean()" ng-click="doInsertOrUpdateMyAdvice()">Save Advice</a>
-                    <a href="#dashboard" class="btn btn-warning">Cancel</a>
-                    <span ng-show="myadvice.status==0"><a href=""  class="btn btn-success" ng-click="doEnableDisableMyAdvice()">Enable&nbsp;</a></span>
-                    <span ng-hide="myadvice.status==0"><a href="" class="btn btn-danger" ng-click="doEnableDisableMyAdvice()">Disable</a></span>
-                </div>
+                    <p class="pull-right" ng-show="showCount && myadvice.description.length"><span class="text-bold text-red">{{ (450-myadvice.description.length) }}</span> Characters left&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+                    <p class="pull-right" ng-hide="showCount && myadvice.description.length">&nbsp;</p>
+                    <h5 class="text-muted">Description :</h5>
+                    <textarea class="height-150 forum-textarea" name="description" ng-model="myadvice.description" maxlength="450" ng-blur="showCount=0" ng-focus="showCount=1" required></textarea>
+                     <span ng-show="adviceForm.description.$dirty&&adviceForm.description.$invalid">
+                                      <span class="error-message textarea-errormessage40" ng-show="adviceForm.description.$error.required"><span>Required.</span></span>
+                                 </span>
+                    <div class="text-center">
+                        <a href="" class="btn btn-success" ng-disabled="adviceForm.$invalid || isClean()" ng-click="doInsertOrUpdateMyAdvice()">Save Advice</a>
+                        <a href="#dashboard" class="btn btn-warning">Cancel</a>
+                        <span ng-show="myadvice.status==0"><a href=""  class="btn btn-success" ng-click="doEnableDisableMyAdvice()">Enable&nbsp;</a></span>
+                        <span ng-hide="myadvice.status==0"><a href="" class="btn btn-danger" ng-click="doEnableDisableMyAdvice()">Disable</a></span>
+                    </div>
                 </form>
             </div>
         </div>

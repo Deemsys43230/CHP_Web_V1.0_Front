@@ -229,6 +229,18 @@ adminApp.factory("UserDashboardService",function(requestHandler){
         });
     };
 
+    //Get Coach Details
+    userDashboardServiceObj.getCoachIndividualDetail=function(coachadvice){
+        var coachadvicedetails = coachadvice;
+        $.each(coachadvicedetails,function(index,value){
+            requestHandler.getRequest("getCoachIndividualDetailbyUser/"+value.coachid, "").then(function(response){
+                value.coachname = response.data.getCoachIndividualDetail.name;
+                value.coachimage = response.data.getCoachIndividualDetail.imageurl;
+            });
+        });
+        return coachadvicedetails;
+    };
+
     userDashboardServiceObj.doGetAchievedWeight=function(date){
         var achievedWeightPromise = userDashboardServiceObj.doGetWeightLogDetails(date);
         return achievedWeightPromise.then(function(result){

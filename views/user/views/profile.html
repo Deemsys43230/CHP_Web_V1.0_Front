@@ -212,15 +212,11 @@
                             <label for="general">General</label>
                         </div>
                     </div>
-                    <div class="col-md-6">
-                   </div>
-                    <div class="col-md-6">
-                        <p class="pull-right" ng-show="showCount && userProfile.about.length"><span class="text-bold text-red">{{ (300-userProfile.about.length) }}</span> Characters left&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
-                        <p class="pull-right" ng-hide="showCount && userProfile.about.length">&nbsp;</p>
-                    </div>
-                    <div class="col-md-6">
+                    <div class="col-md-6 margin-top-5">
                         <div class="col-md-4 padding-top-4">
                             <h5>About Me :</h5>
+                            <p ng-show="showCount && userProfile.about.length"><span class="text-bold text-red" style="font-size: 18px">{{ (300-userProfile.about.length) }}</span> Characters Remaining&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+                            <p ng-hide="showCount && userProfile.about.length">&nbsp;</p>
                         </div>
                         <div class="col-md-8">
                             <span ng-show="userProfileForm.about.$dirty&&userProfileForm.about.$invalid">

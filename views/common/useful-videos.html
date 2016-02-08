@@ -1,0 +1,49 @@
+
+
+<!-- Start Content -->
+<div id="content-page">
+    <div class="container">
+        <div class="row blog-page">
+            <!-- Start Blog Posts -->
+            <div class="col-md-8 blog-box">
+                <h4 class="classic-title"><span>Useful Videos</span></h4>
+                <h4 class="margin-bottom-20 margin-top-10">{{videoLink.title}}</h4>
+                <div my-youtube code="code" autoplay="autoplay"></div>
+                <div ng-hide="videoLink.description==''">
+                    <h4 class="margin-top-20 margin-bottom-10">Description</h4>
+                    <div class="text-justify text-muted" ng-bind-html="videoLink.description | html"></div>
+                </div>
+            </div>
+            <!-- End Blog Posts -->
+
+
+            <!--Sidebar-->
+            <div class="col-md-4 sidebar right-sidebar">
+                <h4 class="classic-title"><span>Other Videos</span></h4>
+
+                <!-- Popular Posts widget -->
+                <div class="widget widget-popular-posts">
+                    <ul>
+                        <li ng-repeat="video in videoList">
+                            <div class="widget-thumb">
+                                <a href="" ng-click="doGetVideo($index,1)"><img class="override" src="{{video.image|trustUrl}}" alt="" /></a>
+                            </div>
+                            <div class="widget-content">
+                                <h5><a href="" class="text-bold" ng-click="doGetVideo($index,1)">{{video.title}}</a></h5>
+                                <span class="line-clamp-lg" ng-bind-html="video.description | html"></span>
+                            </div>
+                            <div class="clearfix"></div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            </div>
+            <!--End sidebar-->
+
+
+        </div>
+    </div>
+</div>
+<!-- End Content -->
+
+<script type="text/javascript" src="../../js/script.js"></script>

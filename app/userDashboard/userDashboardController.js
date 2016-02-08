@@ -1211,22 +1211,31 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
 
     $scope.doGetCoachAdvices = function(){
         requestHandler.getRequest("user/getCoachAdvicesByUser/", "").then(function(response){
-            $scope.coachadvice=response.data.Coach_Advice;
 
-            if($scope.coachadvice==''){
+            //To get frequently asked exercise
+            var advicePromise=UserDashboardService.getCoachIndividualDetail(response.data.Coach_Advice);
+
+            var emptyCoach=[{coachid: "n1",coachname: ""},{coachid: "n2",coachname: ""},{coachid: "n3",coachname: ""},{coachid: "n4",coachname: ""}];
+
+            if(advicePromise.length<3){
+                for(i=advicePromise.length;i<3;i++){
+                    advicePromise.push(emptyCoach[i]);
+                }
             }
             else{
-                $.each($scope.coachadvice,function(index,value){
-                    requestHandler.getRequest("getCoachIndividualDetailbyUser/"+value.coachid, "").then(function(response){
-                        $scope.usercoachdetails=response.data.getCoachIndividualDetail;
-                        value.coachname = $scope.usercoachdetails.name;
-                        value.coachimage = $scope.usercoachdetails.imageurl;
-                    });
-                });
+                advicePromise.push(emptyCoach[0]);
             }
+
+            $scope.coachadvice =advicePromise;
+            $scope.usercoachadvicedetails=$scope.coachadvice[0];
+
         },function(){
-            errorMessage(Flash,"Please try again later!")
+            console.log("Please try again later!");
         });
+    };
+
+    $scope.setCoachDeatails=function(mycoachadvice){
+        $scope.usercoachadvicedetails=mycoachadvice;
     };
 
     $scope.getHistory=function(){

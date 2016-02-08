@@ -215,6 +215,20 @@ commonApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'PrivacyPolicyCommonController'
             }).
+            when('/usefulVideos', {
+                templateUrl: '../common/useful-videos.html',
+                resolve: {
+                    loadMyFiles:function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'commonApp',
+                            files:[
+                                '../../app/usefulVideos/usefulVideosController.js'
+                            ]
+                        })
+                    }
+                },
+                controller:'UsefulVideosController'
+            }).
             otherwise({
                 redirectTo: '/index'
             });
