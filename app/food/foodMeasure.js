@@ -124,7 +124,7 @@ adminApp.controller('FoodMeasureController',function($scope,requestHandler,Flash
            }
            if(response.data.Response_status==1){
             $scope.doViewAllFoodMeasure();
-            successMessage(Flash,"Successfully Done");
+            successMessage(Flash,"Successfully Updated");
            }
         },  function () {
             errorMessage(Flash, "Please try again later!")
@@ -140,7 +140,7 @@ adminApp.controller('FoodMeasureController',function($scope,requestHandler,Flash
             }
             if(response.data.Response_status==1){
                 $scope.doViewAllFoodMeasure();
-                successMessage(Flash,"Successfully Done");
+                successMessage(Flash,"Successfully Deleted");
             }
         },  function () {
             errorMessage(Flash, "Please try again later!")
