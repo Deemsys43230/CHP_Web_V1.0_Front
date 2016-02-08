@@ -98,10 +98,8 @@ adminApp.controller('AdminProfileController',['$scope','requestHandler','Flash',
 
         $scope.doUpdateProfile= function () {
 
-            $scope.convertImgToBase64($scope.userProfile.imageurl, function(base64Img){
 
-                //Convert Image to base64
-                $scope.userProfile.imageurl=base64Img;
+                delete $scope.userProfile.imageurl;
                 $scope.userProfile.country = $scope.userProfile.country.code;
                 $scope.userProfile.state = $scope.userProfile.state.code;
 
@@ -110,7 +108,7 @@ adminApp.controller('AdminProfileController',['$scope','requestHandler','Flash',
                     successMessage(Flash,"Successfully Updated");
                     //Copy Orginal
                     // $scope.orginalUserProfile=angular.copy($scope.userProfile);
-                });
+
             });
         };
 
@@ -215,6 +213,7 @@ adminApp.controller('AdminProfileController',['$scope','requestHandler','Flash',
 
             {name:'Aruba', code:'AW', "id":1012},
 
+            {name:'Australia', code:'AU', "id":1013},
             {name:'Australia', code:'AU', "id":1013},
 
             {name:'Austria', code:'AT', "id":1014},

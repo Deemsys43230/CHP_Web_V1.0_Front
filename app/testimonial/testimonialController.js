@@ -51,9 +51,9 @@ adminApp.controller('TestimonialController',function($scope,requestHandler,Flash
         //Convert the image to base 64
         $scope.testimonials.imageurl = $('.image-editor').cropit('export');
 
-alert(JSON.stringify($scope.testimonials));
+
         requestHandler.postRequest("admin/insertorupdateTestimonial/",$scope.testimonials).then(function(response){
-alert($scope.testimonials);
+
             successMessage(Flash,"Successfully Added");
             $location.path("testimonials");
         }, function () {
