@@ -72,9 +72,9 @@
             <form name="courseRejectForm" ng-init="pendingcourselist()">
 
                 <p>Reason for course rejection:</p>
-                <textarea type="text" class="height-150"  maxlength="300"  required/></textarea>
-                <span ng-show="courseRejectForm.description.$dirty&&courseRejectForm.description.$invalid">
-                    <span class="error-message textarea-errormessage-110" ng-show="courseRejectForm.description.$error.required"><span>Required.</span></span>
+                <textarea type="text" class="height-150" name="comments"  maxlength="300"  ng-model="comments"  required/></textarea>
+                <span ng-show="courseRejectForm.comments.$dirty&&courseRejectForm.comments.$invalid">
+                    <span class="error-message textarea-errormessage-110" ng-show="courseRejectForm.comments.$error.required"><span>Required.</span></span>
                  </span>
                 <div class="action_btns margin-top-20">
                     <div class="one_half"><a class="btn btn_red modal_close" onclick="return false" ng-disabled="courseRejectForm.$invalid" ng-click="doRejectCourse(courseid)">Reject</a></div>
