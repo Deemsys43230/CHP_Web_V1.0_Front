@@ -1,32 +1,23 @@
 /* ----------------- Start JS Document ----------------- */
 
-
-
 $(document).ready(function ($) {
 	"use strict";
 
-
-//Hidder Header
-
-    
     /*---------------------------------------------------*/
     /* Progress Bar
     /*---------------------------------------------------*/
-
     $('.skill-shortcode').appear(function() {
   		$('.progress').each(function(){ 
     		$('.progress-bar').css('width',  function(){ return ($(this).attr('data-percentage')+'%')});
   		});
 	},{accY: -100});
-	
-	
+
 	
     /*--------------------------------------------------*/
     /* Counter
     /*--------------------------------------------------*/
 
     $('.timer').countTo();
-
     $('.counter-item').appear(function() {
         $('.timer').countTo();
     },{accY: -100});
@@ -54,7 +45,6 @@ $(document).ready(function ($) {
 	/*----------------------------------------------------*/
 	
     var offset = 200;
-    var duration = 500;
     $(window).scroll(function() {
         if ($(this).scrollTop() > offset) {
             $('.back-to-top').fadeIn(400);
@@ -80,14 +70,15 @@ $(document).ready(function ($) {
 	/*----------------------------------------------------*/
 	
 	////------- Touch Slider
-	var time = 4.4,
-		$progressBar,
+	var $progressBar,
 		$bar,
 		$elem,
 		isPause,
 		tick,
 		percentTime;
-	$('.touch-slider').each(function(){
+
+    var touchslider=$('.touch-slider');
+    touchslider.each(function(){
         var returnSliderNav;
         var returnSliderPag;
         var returnSliderProgressBar;
@@ -98,23 +89,23 @@ $(document).ready(function ($) {
 			sliderProgressBar = $(this).attr('data-slider-progress-bar');
 			
 		if ( sliderNav == 'false' || sliderNav == '0' ) {
-			returnSliderNav = false
+			returnSliderNav = false;
 		}else {
-			returnSliderNav = true
+			returnSliderNav = true;
 		}
 		
 		if ( sliderPag == 'true' || sliderPag == '1' ) {
-			returnSliderPag = true
+			returnSliderPag = true;
 		}else {
-			returnSliderPag = false
+			returnSliderPag = false;
 		}
 		
 		if ( sliderProgressBar == 'true' || sliderProgressBar == '1' ) {
-			returnSliderProgressBar = progressBar
-			returnAutoPlay = false
+			returnSliderProgressBar = progressBar;
+			returnAutoPlay = false;
 		}else {
-			returnSliderProgressBar = false
-			returnAutoPlay = true
+			returnSliderProgressBar = false;
+			returnAutoPlay = true;
 		}
 		
 		owl.owlCarousel({
@@ -208,60 +199,59 @@ $(document).ready(function ($) {
 	
 	////------- Custom Carousel
 	setTimeout(function(){
-	$('.custom-carousel').each(function(){
+        $('.custom-carousel').each(function(){
 
-		var owl = jQuery(this),
+            var owl = jQuery(this),
+            itemsNum = $(this).attr('data-appeared-items'),
+            sliderNavigation = $(this).attr('data-navigation');
+            var returnSliderNavigation;
+            var deskitemsNum;
+            var desksmallitemsNum;
+            var tabletitemsNum;
 
-			itemsNum = $(this).attr('data-appeared-items'),
-			sliderNavigation = $(this).attr('data-navigation');
-
-
-			
-		if ( sliderNavigation == 'false' || sliderNavigation == '0' ) {
-			var returnSliderNavigation = false
-		}else {
-			var returnSliderNavigation = true
-		}
-		if( itemsNum == 1) {
-
-			var deskitemsNum = 1;
-			var desksmallitemsNum = 1;
-			var tabletitemsNum = 1;
-		} 
-		else if (itemsNum >= 2 && itemsNum < 4) {
-
-			var deskitemsNum = itemsNum;
-			var desksmallitemsNum = itemsNum - 1;
-			var tabletitemsNum = itemsNum - 1;
-		} 
-		else if (itemsNum >= 4 && itemsNum < 8) {
-			var deskitemsNum = itemsNum -1;
-			var desksmallitemsNum = itemsNum - 2;
-			var tabletitemsNum = itemsNum - 3;
-		} 
-		else {
-			var deskitemsNum = itemsNum -3;
-			var desksmallitemsNum = itemsNum - 6;
-			var tabletitemsNum = itemsNum - 8;
-		}
-		owl.owlCarousel({
-			slideSpeed : 300,
-			stopOnHover: true,
-			autoPlay: true,
-			navigation : returnSliderNavigation,
-			pagination: false,
-			lazyLoad : true,
-			items : itemsNum,
-			itemsDesktop : [1000,deskitemsNum],
-			itemsDesktopSmall : [900,desksmallitemsNum],
-			itemsTablet: [600,tabletitemsNum],
-			itemsMobile : false,
-			transitionStyle : "goDown"
-		});
-	});
-
-		$('.touch-carousel').find('.owl-prev').html('<i class="fa fa-angle-left"></i>');
-		$('.touch-carousel').find('.owl-next').html('<i class="fa fa-angle-right"></i>');
+            if( sliderNavigation == 'false' || sliderNavigation == '0' ) {
+                returnSliderNavigation = false
+            }else{
+                returnSliderNavigation = true
+            }
+            if( itemsNum == 1) {
+                deskitemsNum = 1;
+                desksmallitemsNum = 1;
+                tabletitemsNum = 1;
+            }
+            else if (itemsNum >= 2 && itemsNum < 4) {
+                deskitemsNum = itemsNum;
+                desksmallitemsNum = itemsNum - 1;
+                tabletitemsNum = itemsNum - 1;
+            }
+            else if (itemsNum >= 4 && itemsNum < 8) {
+                deskitemsNum = itemsNum -1;
+                desksmallitemsNum = itemsNum - 2;
+                tabletitemsNum = itemsNum - 3;
+            }
+            else {
+                deskitemsNum = itemsNum -3;
+                desksmallitemsNum = itemsNum - 6;
+                tabletitemsNum = itemsNum - 8;
+            }
+            owl.owlCarousel({
+                slideSpeed : 300,
+                stopOnHover: true,
+                autoPlay: true,
+                navigation : returnSliderNavigation,
+                pagination: false,
+                lazyLoad : true,
+                items : itemsNum,
+                itemsDesktop : [1000,deskitemsNum],
+                itemsDesktopSmall : [900,desksmallitemsNum],
+                itemsTablet: [600,tabletitemsNum],
+                itemsMobile : false,
+                transitionStyle : "goDown"
+            });
+        });
+        var carousel=$('.touch-carousel');
+        carousel.find('.owl-prev').html('<i class="fa fa-angle-left"></i>');
+        carousel.find('.owl-next').html('<i class="fa fa-angle-right"></i>');
 	},1000);
 
 
@@ -270,38 +260,38 @@ $(document).ready(function ($) {
         $('.advice-carousel').each(function(){
 
             var owl = jQuery(this),
-
                 itemsNum = $(this).attr('data-appeared-items'),
-                sliderNavigation = $(this).attr('data-navigation');
-
-
+                sliderNavigation = $(this).attr('data-navigation'),
+                returnSliderNavigation,
+                deskitemsNum,
+                desksmallitemsNum,
+                tabletitemsNum;
 
             if ( sliderNavigation == 'false' || sliderNavigation == '0' ) {
-                var returnSliderNavigation = false
+                returnSliderNavigation = false;
             }else {
-                var returnSliderNavigation = true
+                returnSliderNavigation = true;
             }
             if( itemsNum == 1) {
-
-                var deskitemsNum = 1;
-                var desksmallitemsNum = 1;
-                var tabletitemsNum = 1;
+                deskitemsNum = 1;
+                desksmallitemsNum = 1;
+                tabletitemsNum = 1;
             }
             else if (itemsNum >= 2 && itemsNum < 4) {
 
-                var deskitemsNum = itemsNum;
-                var desksmallitemsNum = itemsNum - 1;
-                var tabletitemsNum = itemsNum - 1;
+                deskitemsNum = itemsNum;
+                desksmallitemsNum = itemsNum - 1;
+                tabletitemsNum = itemsNum - 1;
             }
             else if (itemsNum >= 4 && itemsNum < 8) {
-                var deskitemsNum = itemsNum -1;
-                var desksmallitemsNum = itemsNum - 2;
-                var tabletitemsNum = itemsNum - 3;
+                deskitemsNum = itemsNum -1;
+                desksmallitemsNum = itemsNum - 2;
+                tabletitemsNum = itemsNum - 3;
             }
             else {
-                var deskitemsNum = itemsNum -3;
-                var desksmallitemsNum = itemsNum - 6;
-                var tabletitemsNum = itemsNum - 8;
+                deskitemsNum = itemsNum -3;
+                desksmallitemsNum = itemsNum - 6;
+                tabletitemsNum = itemsNum - 8;
             }
             owl.owlCarousel({
                 slideSpeed : 300,
@@ -319,8 +309,10 @@ $(document).ready(function ($) {
             });
         });
 
-        $('.advice-carousel-style').find('.owl-prev').html('<i class="fa fa-angle-left"></i>');
-        $('.advice-carousel-style').find('.owl-next').html('<i class="fa fa-angle-right"></i>');
+        var controlls=$('.advice-carousel-style');
+
+        controlls.find('.owl-prev').html('<i class="fa fa-angle-left"></i>');
+        controlls.find('.owl-next').html('<i class="fa fa-angle-right"></i>');
     },1000);
 
 	////------- Custom Carousel
@@ -329,33 +321,37 @@ $(document).ready(function ($) {
 		var owl = jQuery(this),
 
 			itemsNum = $(this).attr('data-appeared-items'),
-			sliderNavigation = $(this).attr('data-navigation');
+			sliderNavigation = $(this).attr('data-navigation'),
+            returnSliderNavigation,
+            deskitemsNum,
+            desksmallitemsNum,
+            tabletitemsNum;
 
 
 		if ( sliderNavigation == 'false' || sliderNavigation == '0' ) {
-			var returnSliderNavigation = false
+			returnSliderNavigation = false
 		}else {
-			var returnSliderNavigation = true
+			returnSliderNavigation = true
 		}
 		if( itemsNum == 1) {
-			var deskitemsNum = 1;
-			var desksmallitemsNum = 1;
-			var tabletitemsNum = 1;
+			deskitemsNum = 1;
+			desksmallitemsNum = 1;
+			tabletitemsNum = 1;
 		}
 		else if (itemsNum >= 2 && itemsNum < 4) {
-			var deskitemsNum = itemsNum;
-			var desksmallitemsNum = itemsNum - 1;
-			var tabletitemsNum = itemsNum - 1;
+			deskitemsNum = itemsNum;
+			desksmallitemsNum = itemsNum - 1;
+			tabletitemsNum = itemsNum - 1;
 		}
 		else if (itemsNum >= 4 && itemsNum < 8) {
-			var deskitemsNum = itemsNum -1;
-			var desksmallitemsNum = itemsNum - 2;
-			var tabletitemsNum = itemsNum - 3;
+			deskitemsNum = itemsNum -1;
+			desksmallitemsNum = itemsNum - 2;
+			tabletitemsNum = itemsNum - 3;
 		}
 		else {
-			var deskitemsNum = itemsNum -3;
-			var desksmallitemsNum = itemsNum - 6;
-			var tabletitemsNum = itemsNum - 8;
+			deskitemsNum = itemsNum -3;
+			desksmallitemsNum = itemsNum - 6;
+			tabletitemsNum = itemsNum - 8;
 		}
 		owl.owlCarousel({
 
@@ -397,12 +393,10 @@ $(document).ready(function ($) {
 	/*----------------------------------------------------*/
 	
 	$('#myTab a').click(function (e) {
-		e.preventDefault()
-		$(this).tab('show')
-	})
-	
-	
-	
+		e.preventDefault();
+		$(this).tab('show');
+	});
+
 	
 	/*----------------------------------------------------*/
 	/*	Css3 Transition
@@ -435,7 +429,7 @@ $(document).ready(function ($) {
 			$(this).appear(function() {
 				var $this = $(this),
 					chartBarColor = ($this.data('bar-color')) ? $this.data('bar-color') : "#F54F36",
-					chartBarWidth = ($this.data('bar-width')) ? ($this.data('bar-width')) : 150
+					chartBarWidth = ($this.data('bar-width')) ? ($this.data('bar-width')) : 150;
 				if( !$this.hasClass(pieChartLoadedClass) ) {
 					$this.easyPieChart({
 						animate: 2000,
@@ -516,11 +510,14 @@ $(document).ready(function ($) {
 	/*----------------------------------------------------*/
 	/*	Change Slider Nav Icons
 	/*----------------------------------------------------*/
-	
-	$('.touch-slider').find('.owl-prev').html('<i class="fa fa-angle-left"></i>');
-	$('.touch-slider').find('.owl-next').html('<i class="fa fa-angle-right"></i>');
-	$('.touch-carousel, .testimonials-carousel').find('.owl-prev').html('<i class="fa fa-angle-left"></i>');
-	$('.touch-carousel, .testimonials-carousel').find('.owl-next').html('<i class="fa fa-angle-right"></i>');
+
+    touchslider.find('.owl-prev').html('<i class="fa fa-angle-left"></i>');
+    touchslider.find('.owl-next').html('<i class="fa fa-angle-right"></i>');
+
+    var carouselcontroll = $('.touch-carousel, .testimonials-carousel');
+
+    carouselcontroll.find('.owl-prev').html('<i class="fa fa-angle-left"></i>');
+    carouselcontroll.find('.owl-next').html('<i class="fa fa-angle-right"></i>');
 	$('.read-more').append('<i class="fa fa-angle-right"></i>');
 	
 	
@@ -587,27 +584,27 @@ $(document).ready(function ($) {
 			if ( sy >= changeHeaderOn ) {
 				$('.top-bar').slideUp(300);
 				$("header").addClass("fixed-header");
-				$('.navbar-brand').css({ 'padding-top' : 19 + "px", 'padding-bottom' : 19 + "px" });
+				$('.navbar-brand').css({ 'padding-top' : 10 + "px", 'padding-bottom' : 10 + "px",'transform':"scale("+0.8+")",'transform-origin':0+" "+0 });
 
 				if (/iPhone|iPod|BlackBerry/i.test(navigator.userAgent) || $(window).width() < 479 ){
 					$('.navbar-default .navbar-nav > li > a').css({ 'padding-top' : 0 + "px", 'padding-bottom' : 0 + "px" })
 				}else{
-					$('.navbar-default .navbar-nav > li > a').css({ 'padding-top' : 20 + "px", 'padding-bottom' : 20 + "px" })
+					$('.navbar-default .navbar-nav > li > a').css({ 'padding-top' : 20 + "px", 'padding-bottom' : 20 + "px" });
 					$('.search-side').css({ 'margin-top' : -7 + "px" });
-				};
+				}
 
 			}
 			else {
 				$('.top-bar').slideDown(300);
 				$("header").removeClass("fixed-header");
-				$('.navbar-brand').css({ 'padding-top' : 27 + "px", 'padding-bottom' : 27 + "px" });
+				$('.navbar-brand').css({ 'padding-top' : 9 + "px", 'padding-bottom' : 9 + "px",'transform':"scale("+1+")",'transform-origin':0+" "+0 });
 
 				if (/iPhone|iPod|BlackBerry/i.test(navigator.userAgent) || $(window).width() < 479 ){
-					$('.navbar-default .navbar-nav > li > a').css({ 'padding-top' : 0 + "px", 'padding-bottom' : 0 + "px" })
+					$('.navbar-default .navbar-nav > li > a').css({ 'padding-top' : 0 + "px", 'padding-bottom' : 0 + "px" });
 				}else{
-					$('.navbar-default .navbar-nav > li > a').css({ 'padding-top' : 28 + "px", 'padding-bottom' : 28 + "px" })
+					$('.navbar-default .navbar-nav > li > a').css({ 'padding-top' : 28 + "px", 'padding-bottom' : 28 + "px" });
 					$('.search-side').css({ 'margin-top' : 0  + "px" });
-				};
+				}
 
 			}
 			didScroll = false;
@@ -664,17 +661,12 @@ jQuery(window).load(function(){
 		if ( $this.hasClass('selected') ) { return false; }
 		var $optionSet = $this.parents('.portfolio-filter ul');
 		$optionSet.find('.selected').removeClass('selected');
-		$this.addClass('selected'); 
+		$this.addClass('selected');
+        return "";
 	});
 	
 });
 /* ----------------- End JS Document ----------------- */
-
-
-
-
-
-
 
 
 // Styles Switcher JS
@@ -734,12 +726,12 @@ window.onload = function(e) {
   var cookie = readCookie("style");
   var title = cookie ? cookie : getPreferredStyleSheet();
   setActiveStyleSheet(title);
-}
+};
 
 window.onunload = function(e) {
   var title = getActiveStyleSheet();
   createCookie("style", title, 365);
-}
+};
 
 var cookie = readCookie("style");
 var title = cookie ? cookie : getPreferredStyleSheet();
@@ -752,31 +744,33 @@ $(document).ready(function(){
 	// Styles Switcher
 	$(document).ready(function(){
 		$('.open-switcher').click(function(){
+            var openswitcher = $('.open-switcher');
 			if($(this).hasClass('show-switcher')) {
 				$('.switcher-box').css({'left': 0});
-				$('.open-switcher').removeClass('show-switcher');
-				$('.open-switcher').addClass('hide-switcher');
+                openswitcher.removeClass('show-switcher');
+                openswitcher.addClass('hide-switcher');
 			}else if(jQuery(this).hasClass('hide-switcher')) {
 				$('.switcher-box').css({'left': '-212px'});
-				$('.open-switcher').removeClass('hide-switcher');
-				$('.open-switcher').addClass('show-switcher');
+                openswitcher.removeClass('hide-switcher');
+                openswitcher.addClass('show-switcher');
 			}
 		});
 	});
 	
 	//Top Bar Switcher
 	$(".topbar-style").change(function(){
+        var topbar=$(".top-bar");
 		if( $(this).val() == 1){
-			$(".top-bar").removeClass("dark-bar"),
-			$(".top-bar").removeClass("color-bar"),
+            topbar.removeClass("dark-bar");
+            topbar.removeClass("color-bar");
 			$(window).resize();
 		} else if( $(this).val() == 2){
-			$(".top-bar").removeClass("color-bar"),
-			$(".top-bar").addClass("dark-bar"),
+            topbar.removeClass("color-bar");
+            topbar.addClass("dark-bar");
 			$(window).resize();
 		} else if( $(this).val() == 3){
-			$(".top-bar").removeClass("dark-bar"),
-			$(".top-bar").addClass("color-bar"),
+            topbar.removeClass("dark-bar");
+            topbar.addClass("color-bar");
 			$(window).resize();
 		}
 	});
@@ -784,10 +778,10 @@ $(document).ready(function(){
 	//Layout Switcher
 	$(".layout-style").change(function(){
 		if( $(this).val() == 1){
-			$("#container").removeClass("boxed-page"),
+			$("#container").removeClass("boxed-page");
 			$(window).resize();
 		} else{
-			$("#container").addClass("boxed-page"),
+			$("#container").addClass("boxed-page");
 			$(window).resize();
 		}
 	});

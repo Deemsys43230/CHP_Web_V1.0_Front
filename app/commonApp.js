@@ -29,6 +29,7 @@ commonApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         }
                         case 401:{
                             alert("restricted");
+                            break;
                         }
                         case 403: {
                             $location.path("/login");
@@ -485,10 +486,13 @@ commonApp.directive("emailexists", function ($q, $timeout,requestHandler) {
 
     var CheckEmailExists = function (isNew) {
 
+        var returnvalue;
         if(isNew===1)
-            return true;
+            returnvalue=true;
         else
-            return false;
+        returnvalue=false;
+
+        return returnvalue;
     };
 
     return {

@@ -167,7 +167,7 @@ commonApp.controller('NewsUserController',function($scope,requestHandler,Flash,$
     };
 
     $scope.doGetNewsDetailsByUser= function (id) {
-
+        $('html, body').animate({scrollTop: 0}, 600);
         requestHandler.getRequest("getLatestNewsDetail/"+id, "").then(function(response){
 
             $scope.usernewsdetails=response.data.News;

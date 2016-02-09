@@ -1,5 +1,5 @@
 .vertical-carousel-control{
-    margin: 3px 0px;
+    margin: 3px 0;
 }
 
 .vertical-carousel-control:visited span, .vertical-carousel-control span{
@@ -16,12 +16,12 @@
 
 .prev.vertical-carousel-control{
     border: 1px solid #ccc;
-    padding: 0px 6px;
+    padding: 0 6px;
     border-radius: 3px;
 }
 
 .next.vertical-carousel-control{
     border: 1px solid #ccc;
-    padding: 0px 6px;
+    padding: 0 6px;
     border-radius: 3px;
 }

@@ -104,7 +104,7 @@ if (typeof Object.create !== 'function') {
                 }
             });
 
-            $(self.elem).css({"overflow-y": "hidden", "height": 320});
+            $(self.elem).css({"overflow-y": "hidden", "height": self.options.heightOnPage});
 
             //recalculate news box height for responsive interfaces
             $( w ).resize(function() {
@@ -269,6 +269,7 @@ if (typeof Object.create !== 'function') {
         direction:'up',
         animationSpeed: 'normal',
         newsTickerInterval: 4000, //4 secs
+        heightOnPage:400,
         pauseOnHover: true,
         onStop: null,
         onPause: null,
