@@ -356,6 +356,9 @@ commonApp.controller('LoginController',function($scope,requestHandler,Flash,$win
             if(response.data.Response_status==0){
                 errorMessage(Flash,"Email ID doesn't Exist!");
             }
+            if(response.data.Response_status=="User not allowed"){
+                errorMessage(Flash,"Your Account has been disabled!<br/>Please Contact Administrator.");
+            }
             else if(response.data.Response_status==1){
                 //Lets show the secret question
                 $(".user_login").hide();
@@ -366,6 +369,12 @@ commonApp.controller('LoginController',function($scope,requestHandler,Flash,$win
                 $scope.secretQuestion=response.data.secretquestion;
             }
             else if(response.data.Response_status==2){
+                $(".reset_password").hide();
+                $(".user_register").hide();
+                $(".secret_question").hide();
+                $(".user_register1").hide();
+                $(".user_login").show();
+                $(".header_title").text('Login');
                 successMessage(Flash,"Please check your Email<br/>to reset the password!");
                 $scope.emailid="";
                 $scope.forgotPasswordForm.$setPristine();

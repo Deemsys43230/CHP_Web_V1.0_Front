@@ -298,7 +298,7 @@ userApp.controller('ForumsUserController',function($scope,requestHandler,Flash,$
 
         requestHandler.postRequest("abuseCount/",{"postid":$routeParams.id}).then(function(response){
             successMessage(Flash,"Thanks for your evaluation!");
-            $scope.abuseDisable=true;
+           // $scope.abuseDisable=true;
         },function(){
             errorMessage(Flash,"Please try again later!")
         });

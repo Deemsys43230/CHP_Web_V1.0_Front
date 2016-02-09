@@ -1282,7 +1282,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
                 titles.title="Calories Intaken Graph ( "+startDate+" - "+endDate+" )";
                 titles.name="Calories Gained";
                 titles.suffix=" cals";
-                titles.yaxis="Calories (cals)";
+                titles.yaxis="Calories (cal)";
                 titles.color='limegreen';
                 $scope.drawHistoryGraph(historyReport,titles);
             });
@@ -1300,7 +1300,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
                 titles.title="Calories Brunt Graph ( "+startDate+" - "+endDate+" )";
                 titles.name="Calories Burned";
                 titles.suffix=" cals";
-                titles.yaxis="Calories (cals)";
+                titles.yaxis="Calories (cal)";
                 titles.color='red';
                 $scope.drawHistoryGraph(historyReport,titles);
             });
@@ -1318,7 +1318,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
                 titles.title="Exercise Minutes Graph ( "+startDate+" - "+endDate+" )";
                 titles.name="Exercise Minutes";
                 titles.suffix=" mints";
-                titles.yaxis="Minutes (mints)";
+                titles.yaxis="Minutes";
                 titles.color='blue';
                 $scope.drawHistoryGraph(historyReport,titles);
             });
