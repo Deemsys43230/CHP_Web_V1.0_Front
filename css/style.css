@@ -10529,3 +10529,17 @@ background-color: red;
 .advice-hover{
     cursor: pointer;
 }
+
+.search-loading{
+    font-size:14px;
+    margin-top:-15px;
+    margin-left:15px;
+    width:45%;
+    border:1px solid #bbb;
+    border-radius:3px;
+    z-index:100;
+    background:#fff;
+    padding:10px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    position:absolute;
+}

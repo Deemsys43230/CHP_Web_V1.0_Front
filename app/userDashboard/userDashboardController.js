@@ -251,13 +251,19 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
 
    //Search Function for food
      $scope.inputChanged = function(searchStr) {
-        
-         var userFoodDiaryDetailPromise=UserDashboardService.searchFood(searchStr,$scope.userFood.sessionid);
-         return userFoodDiaryDetailPromise.then(function(result){
-            var foods = [];
-            $scope.foodSearchResult=result; 
-            return $scope.foodSearchResult;
-         });
+
+        if(searchStr.length>=3){
+            if($scope.foodSearchResult.length==0){
+                $scope.loadingFoods=true;
+            }
+            var userFoodDiaryDetailPromise=UserDashboardService.searchFood(searchStr,$scope.userFood.sessionid);
+            return userFoodDiaryDetailPromise.then(function(result){
+                var foods = [];
+                $scope.foodSearchResult=result;
+                $scope.loadingFoods=false;
+                return $scope.foodSearchResult;
+            });
+        }
 
     };
 
@@ -355,11 +361,17 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
 
     //Search Function for exercise
     $scope.inputChangedExercise = function(searchStr) {
-        var userExerciseDiaryDetailPromise=UserDashboardService.searchExercise(searchStr);
-        return userExerciseDiaryDetailPromise.then(function(result){
-            $scope.exerciseSearchResult=result;
-            return $scope.exerciseSearchResult;
-        });
+        if(searchStr.length>=3){
+            if($scope.exerciseSearchResult.length==0){
+                $scope.loadingExercise=true;
+            }
+            var userExerciseDiaryDetailPromise=UserDashboardService.searchExercise(searchStr);
+            return userExerciseDiaryDetailPromise.then(function(result){
+                $scope.exerciseSearchResult=result;
+                $scope.loadingExercise=false;
+                return $scope.exerciseSearchResult;
+            });
+        }
     };
 
     //On Select frequent exercise

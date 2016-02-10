@@ -175,8 +175,8 @@
 
                                     <div class="content-1">
                                         <input class="profile_input" type="text" ng-model="selectedFood" placeholder="Search Food" typeahead="food as food.foodname for food in inputChanged($viewValue)" typeahead-template-url="foodTemplate.html" typeahead-on-select="foodSelected()" typeahead-class="form-control">
-                                        <span ng-show="loadingLocations">Searching Foods..</span>
                                     </div>
+                                    <div class="search-loading" ng-show="loadingFoods"><i class="fa fa-spinner fa-pulse"></i>&nbsp;&nbsp;Searching Foods...</div>
                                     <div class="food_scrollbar style">
                                         <div ng-if="loaded" class="col-md-12">
                                             <div class="loader-style-dashboard">
@@ -223,8 +223,8 @@
                             </div>
                             <div class="content-1">
                                  <input class="profile_input" type="text" ng-model="selectedExercise" placeholder="Search Exercise" typeahead="exercise as exercise.exercisename for exercise in inputChangedExercise($viewValue)" typeahead-template-url="exerciseTemplate.html" typeahead-on-select="exerciseSelected()" typeahead-class="form-control">
-                                <span ng-show="loadingLocations">Searching Exercises..</span>
                             </div>
+                            <div class="search-loading" ng-show="loadingExercise"><i class="fa fa-spinner fa-pulse"></i>&nbsp;&nbsp;Searching Exercise...</div>
                             <div class="food_scrollbar style height-320">
                                 <div ng-if="loaded" class="col-md-12">
                                     <div class="loader-style-dashboard">
