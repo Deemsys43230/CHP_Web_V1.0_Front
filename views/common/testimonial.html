@@ -20,8 +20,8 @@
                 <div class="panel no-margin no-box-shadow">
                     <div class="panel-body">
                         <div ng-show="usertestimoniallist.length>3">
-                            <a onclick="return false;" href=""  class="prev vertical-carousel-control pull-right margin-left-5"><span class="fa fa-angle-down"></span></a>
-                            <a onclick="return false;" href="" class="next vertical-carousel-control pull-right"><span class="fa fa-angle-up"></span></a>
+                            <a href="" class="prev vertical-carousel-control pull-right margin-left-5"><span class="fa fa-angle-down"></span></a>
+                            <a href="" class="next vertical-carousel-control pull-right"><span class="fa fa-angle-up"></span></a>
                         </div>
                         <h4 class="classic-title"><span>Others Says</span></h4>
 
@@ -32,7 +32,7 @@
                                         <img class="img-responsive img-circle" ng-src="{{usertestimonial.imageurl | trusted}}">
                                     </div>
                                     <div class="testimonials-carousel-content">
-                                        <a href="" ng-click="doGetTestimonialDetailsByUser(usertestimonial.testimonialid)">{{usertestimonial.title}}</a>
+                                        <a href="#" onclick="return false;" ng-click="doGetTestimonialDetailsByUser(usertestimonial.testimonialid)">{{usertestimonial.title}}</a>
                                         <p ng-bind-html="usertestimonial.description | html"></p>
                                         <div><strong>-&nbsp;{{usertestimonial.givenby}}</strong></div>
                                     </div>
@@ -51,7 +51,6 @@
 
 <script type="text/javascript">
     $(function () {
-        $("html,body").scrollTop(0);
         $(".vertical-items").bootstrapNews({
             newsPerPage: 3,
             autoplay: false,

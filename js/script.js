@@ -572,6 +572,9 @@ $(document).ready(function ($) {
 			
 		function init() {
 			window.addEventListener( 'scroll', function() {
+                $(function () {
+                    $('input,textarea').blur();
+                });
 				if( !didScroll ) {
 					didScroll = true;
 					setTimeout( scrollPage, 250 );
@@ -615,8 +618,8 @@ $(document).ready(function ($) {
 		}
 		
 		init();
-		
-		
+
+
 		
 	})();
 });

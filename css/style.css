@@ -8653,7 +8653,8 @@ a:hover, a:visited, a:link, a:active
 }
 
 .profile_input.override{
-    padding: 5px 20px !important;
+    padding: 7px 20px !important;
+    line-height: 16px !important;
 }
 
 .history_input
@@ -9207,6 +9208,31 @@ input[type=range]:focus::-ms-fill-upper {
 	background: -o-linear-gradient(to right, rgba(255, 255, 255, 0), white 60%, white);
 	background: -ms-linear-gradient(to right, rgba(255, 255, 255, 0), white 60%, white);
 	background: linear-gradient(to right, rgba(255, 255, 255, 0), white 60%, white);
+}
+
+.news-item .testimonials-carousel-content h4{
+    overflow:hidden;
+    text-overflow:ellipsis;
+    -ms-text-overflow:ellipsis;
+    display:block;
+    display: -webkit-box;
+    position:relative;
+    height:26px;
+    line-height: 22px;
+    font-size: 17px !important;
+}
+
+.news-item .testimonials-carousel-content h4::after{
+    content:"\00a0";
+    position:absolute;
+    bottom:0;
+    right:0;
+    padding:0 10px 5px 30px;
+    background: -webkit-gradient(linear, left top, right top, from(rgba(255, 255, 255, 0)), to(white), color-stop(60%, white));
+    background: -moz-linear-gradient(to right, rgba(255, 255, 255, 0), white 60%, white);
+    background: -o-linear-gradient(to right, rgba(255, 255, 255, 0), white 60%, white);
+    background: -ms-linear-gradient(to right, rgba(255, 255, 255, 0), white 60%, white);
+    background: linear-gradient(to right, rgba(255, 255, 255, 0), white 60%, white);
 }
 
 .one-line-shade{

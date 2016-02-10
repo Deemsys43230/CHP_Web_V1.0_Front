@@ -12,8 +12,6 @@ coachApp.controller('CoachDashboardController',function($scope,requestHandler,Fl
 
         });
     };
-
-
     $scope.doGetCoachDashboardCount();
 
 });

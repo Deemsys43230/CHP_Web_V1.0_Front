@@ -94,23 +94,6 @@ commonApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'ContactUsDetailsController'
             }).
-            when('/testimonial', {
-                templateUrl: '../common/testimonial.html',
-                resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
-                        return $ocLazyLoad.load({
-                            name:'commonApp',
-                            files:[
-                                '../../plugin/vertical-carousel/vertical-carousel.js',
-                                '../../plugin/vertical-carousel/vertical-carousel.css',
-                                '../../app/testimonial/testimonialController.js'
-
-                            ]
-                        })
-                    }
-                },
-                controller:'TestimonialUserController'
-            }).
             when('/testimonials/:id', {
                 templateUrl: '../common/testimonial.html',
                 resolve: {
@@ -121,7 +104,6 @@ commonApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../plugin/vertical-carousel/vertical-carousel.js',
                                 '../../plugin/vertical-carousel/vertical-carousel.css',
                                 '../../app/testimonial/testimonialController.js'
-
                             ]
                         })
                     }

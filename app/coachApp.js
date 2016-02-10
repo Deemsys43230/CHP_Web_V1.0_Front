@@ -55,7 +55,6 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'coachApp',
                             files:[
-                                '../../js/bootstrap.min.js',
                                 '../../app/dashboard/coachDashboardController.js'
                             ]
                         })
