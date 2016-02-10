@@ -6630,6 +6630,10 @@ ul.footer-nav li a:hover {
      margin-top:50px !important;
  }
 
+.wrap-all{
+    word-break: break-all;
+}
+
 .counter-item i{
     font-size: 48px;
     height: 100px;
