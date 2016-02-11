@@ -36,7 +36,7 @@
                         <h5>Name :</h5>
                     </div>
                     <div class="col-md-8">
-                        <input class="profile_input" name="name" ng-model="userProfile.name" ng-pattern="/^ *([a-zA-Z]+ ?)+ *$/" required/>
+                        <input class="profile_input" name="name" ng-model="userProfile.name" ng-pattern="/^ *([a-zA-Z]+ ?)+ *$/" maxlength="25" required/>
                             <span ng-show="userProfileForm.name.$dirty&&userProfileForm.name.$invalid">
                                   <span class="error-message textarea-errormessage10" ng-show="userProfileForm.name.$error.required"><span>Required.</span></span>
                                  <span class="error-message textarea-errormessage10" ng-show="userProfileForm.name.$error.pattern"><span>Enter&nbsp;valid&nbsp;Name.</span></span>

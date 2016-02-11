@@ -45,7 +45,7 @@
                                     <h4>Given By</h4>
                                 </div>
                                 <div class="col-md-9 margin-bottom-20">
-                                    <input class="form-control" name="givenby" ng-model="testimonials.givenby" required>
+                                    <input class="form-control" name="givenby" ng-model="testimonials.givenby" maxlength="45" required>
                                     <span ng-show="testimonialForm.givenby.$dirty&&testimonialForm.givenby.$invalid">
                                   <span class="error-message" ng-show="testimonialForm.givenby.$error.required"><span>Required.</span></span>
                              </span>
