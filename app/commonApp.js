@@ -395,7 +395,7 @@ commonApp.controller('LoginController',function($scope,requestHandler,Flash,$win
                 $(".user_login").show();
                 $(".header_title").text('Login');
                 //Lets show the secret question
-                successMessage(Flash,"Secret Answer Matched! <br/>Check your E-Mail");
+                successMessage(Flash,"Please check your registered email!!");
             }
         });
     };

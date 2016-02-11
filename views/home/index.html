@@ -237,7 +237,7 @@
 
                     </span>
                 <span class="error-message" ng-show="registerForm.emailid.$error.emailexists"><span>Email&nbsp;ID&nbsp;Already&nbsp;Exist.</span></span>
-                <p>Password</p>
+                <p>Password</p>{{userForm.password}}
                 <input type="password"  name="password" id="pswd" ng-model="userForm.password" ng-pattern="/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-])(?!.*\s).{6,}$/"  maxlength="20"required/>
                     <span ng-show="registerForm.password.$dirty&&registerForm.password.$invalid && !registerForm.password.$pristine">
                         <span class="error-message" ng-show="registerForm.password.$error.required"><span>Required.</span></span>
@@ -266,7 +266,7 @@
                     <li id="number" class="invalid">At least <strong>one number</strong>
 
                     </li>
-                    <li id="special" class="invalid">At least <strong>one special charcter</strong>
+                    <li id="special" class="invalid">At least <strong>one special character</strong>
 
                     </li>
                     <li id="length" class="invalid">Be at least <strong>6 characters</strong>
@@ -586,6 +586,52 @@
 
     $(document).ready(function () {
         $('#pswd').keyup(function () {
+            // set password variable
+            var pswd = $('#pswd').val();
+            if (pswd.length < 6) {
+                $('#length').removeClass('valid').addClass('invalid');
+            } else {
+                $('#length').removeClass('invalid').addClass('valid');
+            }
+            //validate letter
+            if (pswd.match(/[a-z]/)) {
+                $('#letter').removeClass('invalid').addClass('valid');
+            } else {
+                $('#letter').removeClass('valid').addClass('invalid');
+            }
+            //validate capital letter
+            if (pswd.match(/[A-Z]/)) {
+                $('#capital').removeClass('invalid').addClass('valid');
+            } else {
+                $('#capital').removeClass('valid').addClass('invalid');
+            }
+
+            //validate number
+            if (pswd.match(/\d/)) {
+                $('#number').removeClass('invalid').addClass('valid');
+            } else {
+                $('#number').removeClass('valid').addClass('invalid');
+            }
+
+            if (pswd.match(/\s/)) {
+                $('#space').removeClass('valid').addClass('invalid');
+            } else {
+                $('#space').removeClass('invalid').addClass('valid');
+            }
+
+            if (pswd.match(/[#?!@$%^&*-]/)) {
+                $('#special').removeClass('invalid').addClass('valid');
+            } else {
+                $('#special').removeClass('valid').addClass('invalid');
+            }
+
+            if ($('#pswd_info li.invalid').length == 0) {
+                $('#pswd_info').fadeOut();
+            } else {
+                $('#pswd_info').fadeIn();
+            }
+        });
+        $('#pswd').focus(function () {
             // set password variable
             var pswd = $('#pswd').val();
             if (pswd.length < 6) {
