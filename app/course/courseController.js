@@ -86,6 +86,12 @@ userApp.controller('CourseController',['$scope','requestHandler','Flash','$route
          errorMessage(Flash,"Please try again later!")
          });*/
 
+        requestHandler.postRequest("getPublishedCourse/",{"offset":0,"limit":1}).then(function(response) {
+            $scope.showCourseSearch=response.data.published_Course.length;
+        },function(){
+            errorMessage(Flash,"Please try again later!");
+        });
+
         $('#callCarousel').hide();
         $scope.loaded=true;
 

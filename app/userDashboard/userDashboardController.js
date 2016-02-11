@@ -267,53 +267,55 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
 
     };
 
-    // To get User Basic details
-    var userDetailPromise=UserDashboardService.doGetUserDetails();
-    userDetailPromise.then(function(result){
-        $scope.userProfile=result;
-        $scope.userProfileImage=$scope.userProfile.imageurl+"?decache="+Math.random();
-    });
-
-
     //TO get user demography details
     $scope.doGetDemograph=function(){
         var userDemographyPromise=UserDashboardService.doGetDemographyDetails();
         userDemographyPromise.then(function(result){
             $scope.demography = result;
-            if($scope.userProfile.gender==1){
-                $scope.maleIdealWeight = ($scope.demography.height - 100 -(($scope.demography.height -150)/4));
 
-                if($scope.demography.weight < $scope.maleIdealWeight){
+            if(!$scope.userProfile){
+                var userDetailPromise=UserDashboardService.doGetUserDetails();
+                userDetailPromise.then(function(result){
+                    $scope.userProfile=result;
+                    $scope.userProfileImage=$scope.userProfile.imageurl+"?decache="+Math.random();
+                    var dividevalue=2;
+                    if($scope.userProfile.gender==1){
+                        dividevalue=4;
+                    }
+                    $scope.idealWeight = ($scope.demography.height - 100 -(($scope.demography.height -150)/dividevalue));
+
+                    if($scope.demography.weight < $scope.idealWeight){
+                        $scope.upweight =1;
+                        $scope.balanceweight = $scope.idealWeight - $scope.demography.weight;
+                        $scope.balanceweight = $scope.balanceweight.toFixed(2);
+                    }
+                    else if($scope.demography.weight > $scope.idealWeight){
+                        $scope.upweight =0;
+                        $scope.balanceweight =  $scope.demography.weight - $scope.idealWeight ;
+                        $scope.balanceweight = $scope.balanceweight.toFixed(2);
+                    }
+
+                });
+            }
+            else{
+                var dividevalue=2;
+                if($scope.userProfile.gender==1){
+                    dividevalue=4;
+                }
+                $scope.idealWeight = ($scope.demography.height - 100 -(($scope.demography.height -150)/dividevalue));
+
+                if($scope.demography.weight < $scope.idealWeight){
                     $scope.upweight =1;
-                    $scope.balanceweight = $scope.maleIdealWeight - $scope.demography.weight;
+                    $scope.balanceweight = $scope.idealWeight - $scope.demography.weight;
                     $scope.balanceweight = $scope.balanceweight.toFixed(2);
-                   // alert($scope.balanceweight);
                 }
-                else if($scope.demography.weight > $scope.maleIdealWeight){
+                else if($scope.demography.weight > $scope.idealWeight){
                     $scope.upweight =0;
-                    $scope.balanceweight =  $scope.demography.weight - $scope.maleIdealWeight ;
+                    $scope.balanceweight =  $scope.demography.weight - $scope.idealWeight ;
                     $scope.balanceweight = $scope.balanceweight.toFixed(2);
-                   // alert($scope.balanceweight);
                 }
             }
-            else if($scope.userProfile.gender ==2){
-                $scope.femaleIdealWeight = ($scope.demography.height - 100 -(($scope.demography.height -150)/2));
 
-
-            if($scope.demography.weight < $scope.femaleIdealWeight){
-                $scope.upweight =1;
-                $scope.balanceweight = $scope.femaleIdealWeight - $scope.demography.weight;
-                $scope.balanceweight = $scope.balanceweight.toFixed(2);
-              //  alert($scope.balanceweight);
-            }
-
-           else if($scope.demography.weight > $scope.femaleIdealWeight){
-                $scope.upweight =0;
-                $scope.balanceweight =  $scope.demography.weight -  $scope.femaleIdealWeight;
-                $scope.balanceweight = $scope.balanceweight.toFixed(2);
-                //alert($scope.balanceweight);
-            }
-            }
         });
     };
     $scope.doGetDemograph();

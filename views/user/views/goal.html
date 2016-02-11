@@ -42,7 +42,7 @@
         </div>
     </div>
     <div class="col-md-4 no-padding">
-        <p hidden id="weight_entry">48%</p>
+        <p hidden id="weight_entry">55.1%</p>
         <div id="weight_level">
             <div id="col" class="weight_level"></div>
         </div>
@@ -63,13 +63,7 @@
             <h5 class="margin-top-10">Current Weight <span class="pull-right">: &nbsp;</span></h5>
         </div>
         <div class="col-md-5 no-padding">
-            <div ng-if="userProfile.gender==1">
-                <h5><span class="yellow">&nbsp;&nbsp;</span> {{maleIdealWeight}} Kgs</h5>
-            </div>
-            <div ng-if="userProfile.gender==2">
-                <h5><span class="yellow">&nbsp;&nbsp;</span> {{femaleIdealWeight}}Kgs</h5>
-            </div>
-
+            <h5><span class="yellow">&nbsp;&nbsp;</span> {{idealWeight}}Kgs</h5>
             <h5 class="margin-top-10"><span class="green">&nbsp;&nbsp;</span> {{demography.weight}} Kgs</h5>
         </div><br/><br/>
         <div ng-show="upweight == 1"><p>Your Are Adviced to increase your weight by {{balanceweight}} Kgs</p></div>
@@ -81,7 +75,7 @@
 <script>
     function viewGraph1(){
         $('.weight_level');
-        var ha = document.getElementById('weight_entry').innerText;
+        var ha = document.getElementById('weight_entry').innerHTML;
         var hacolor = parseFloat(ha);
         if (hacolor <= 45) {
             $('#col').addClass('green');
