@@ -18,24 +18,24 @@
         background-color: #003366;
     }
     .red{
-        background-color: red;
+        background-color: #ff4c4c;
     }
     .green{
         background-color: limegreen;
     }
     .yellow{
-        background-color: #ffcc00;
+        background-color: #f8ba01;
     }
 
 </style>
 
 <!--Food Template-->
 <script type="text/ng-template" id="foodTemplate.html">
-  <a>       
+  <a>
       <img class="img-circle" ng-src="{{match.model.foodImagePath}}" width="35">&nbsp;
       <span bind-html-unsafe="match.label"></span>&nbsp;
-      <span ng-show="match.model.issuitable==1" class="green">&nbsp;</span> 
-      <span ng-show="match.model.issuitable==0" class="red">&nbsp;</span> 
+      <span ng-show="match.model.issuitable==1" class="green">&nbsp;</span>
+      <span ng-show="match.model.issuitable==0" class="red">&nbsp;</span>
   </a>
 </script>
 
@@ -137,8 +137,8 @@
                 <div class="col-md-7">
                     <!-- Nav Tabs -->
                     <ul class="nav nav-tabs">
-                        <li class="active"><a href="#tab-1" data-toggle="tab" onclick="return false;">Food Gain</a></li>
-                        <li><a href="#tab-2" data-toggle="tab" onclick="return false;">Energy Spent</a></li>
+                        <li class="active" ng-click="showExercise=0"><a href="#tab-1" data-toggle="tab" onclick="return false;">Food Gain</a></li>
+                        <li ng-click="showExercise=1"><a href="#tab-2" data-toggle="tab" onclick="return false;">Energy Spent</a></li>
                         <li><a href="#tab-3" data-toggle="tab" onclick="return false;">Graphs</a></li>
                     </ul>
 
@@ -177,30 +177,34 @@
                                         <input class="profile_input" type="text" ng-model="selectedFood" placeholder="Search Food" typeahead="food as food.foodname for food in inputChanged($viewValue)" typeahead-template-url="foodTemplate.html" typeahead-on-select="foodSelected()" typeahead-class="form-control">
                                     </div>
                                     <div class="search-loading" ng-show="loadingFoods"><i class="fa fa-spinner fa-pulse"></i>&nbsp;&nbsp;Searching Foods...</div>
-                                    <div class="food_scrollbar style">
-                                        <div ng-if="loaded" class="col-md-12">
+                                    <div class="food_scrollbar" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#eee'}" >
+                                        <div ng-if="loaded">
                                             <div class="loader-style-dashboard">
+                                                <br/><br/><br/><br/><br/><br/>
                                                 <div class="loader"></div>
                                             </div>
                                         </div>
-                                        <ul class="food">
-                                            <li class="row" ng-repeat="foodDiaryData in userFoodDiaryData | orderBy:'$index':true">
-                                                <div class="col-md-2 no-padding"><img ng-src="{{foodDiaryData.foodImagePath+'50x50.jpg'}}"></div>
-                                                <div class="col-md-10 no-padding">
-                                                    <a href="" class="pull-right food_close" title="Delete Food" ng-click="doDeleteUserFood(foodDiaryData.userfoodid)">x</a>
-                                                    <div class="food_name">{{foodDiaryData.foodname}}&nbsp;
-                                                    <span ng-show="foodDiaryData.issuitable==1" class="green">&nbsp;</span> 
-                                                    <span ng-show="foodDiaryData.issuitable==0" class="red">&nbsp;</span> 
-                                                    </div>
-                                                    <div class="margin-top-10">
-                                                        <span class="pull-right text-green text-bold"><strong><i class="fa fa-angle-up"></i>&nbsp;{{foodDiaryData.measureid.calories}}  calories</strong></span>
-                                                        <div class="select_food">
-                                                            <span class="text-bold">Quantity : </span>{{foodDiaryData.measureid.servings}}&nbsp;{{foodDiaryData.measureid.measurename}}&nbsp;&nbsp;<a href="" ng-click="doEditUserFood(foodDiaryData.foodid,foodDiaryData.userfoodid)" title="Edit Food"><i class="fa fa-pencil"></i></a>
+                                        <div id="scrollheightfood" ng-if="showExercise==0" height-food-bind>
+                                            <ul class="food">
+                                                <li class="col-md-12" ng-repeat="foodDiaryData in userFoodDiaryData | orderBy:'$index':true">
+                                                    <div class="col-md-2 no-padding"><img ng-src="{{foodDiaryData.foodImagePath+'50x50.jpg'}}"></div>
+                                                    <div class="col-md-10 no-padding">
+                                                        <a href="" class="pull-right food_close" title="Delete Food" ng-click="doDeleteUserFood(foodDiaryData.userfoodid)">x</a>
+                                                        <div class="food_name">{{foodDiaryData.foodname}}&nbsp;
+                                                            <span ng-show="foodDiaryData.issuitable==1" class="green">&nbsp;</span>
+                                                            <span ng-show="foodDiaryData.issuitable==0" class="red">&nbsp;</span>
+                                                        </div>
+                                                        <div class="margin-top-10">
+                                                            <span class="pull-right text-green text-bold"><strong><i class="fa fa-angle-up"></i>&nbsp;{{foodDiaryData.measureid.calories}}  calories</strong></span>
+                                                            <div class="select_food">
+                                                                <span class="text-bold">Quantity : </span>{{foodDiaryData.measureid.servings}}&nbsp;{{foodDiaryData.measureid.measurename}}&nbsp;&nbsp;<a href="" ng-click="doEditUserFood(foodDiaryData.foodid,foodDiaryData.userfoodid)" title="Edit Food"><i class="fa fa-pencil"></i></a>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            </li>
-                                        </ul>
+                                                </li>
+                                            </ul>
+                                        </div>
+
                                         <div ng-show="userFoodDiaryData.length==0 || userFoodDiaryDataAll.length==0" class="text-center"><br/>
                                             <img src="../../images/no-food.png">
                                             <h1 class="text-gray margin-top-15">  NO FOOD ADDED!!!</h1>
@@ -225,27 +229,32 @@
                                  <input class="profile_input" type="text" ng-model="selectedExercise" placeholder="Search Exercise" typeahead="exercise as exercise.exercisename for exercise in inputChangedExercise($viewValue)" typeahead-template-url="exerciseTemplate.html" typeahead-on-select="exerciseSelected()" typeahead-class="form-control">
                             </div>
                             <div class="search-loading" ng-show="loadingExercise"><i class="fa fa-spinner fa-pulse"></i>&nbsp;&nbsp;Searching Exercise...</div>
-                            <div class="food_scrollbar style height-320">
-                                <div ng-if="loaded" class="col-md-12">
+                            <div class="food_scrollbar exercise-height" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#eee'}" >
+                                <div ng-if="loaded">
                                     <div class="loader-style-dashboard">
+                                        <br/><br/><br/><br/><br/><br/>
                                         <div class="loader"></div>
                                     </div>
                                 </div>
-                                <ul class="food">
-                                    <li class="row" ng-repeat="exerciseDiaryData in userExerciseDiaryDataAll | orderBy:'$index':true">
-                                        <div class="col-md-2 no-padding"><img ng-src="{{exerciseDiaryData.exerciseImagePath+'50x50.jpg'}}"></div>
-                                        <div class="col-md-10 no-padding">
-                                            <a href="" class="pull-right food_close" title="Delete Exercise" ng-click="doDeleteUserExercise(exerciseDiaryData.userexercisemapid)">x</a>
-                                            <div class="food_name">{{exerciseDiaryData.Exercise.exercisename}}</div>
-                                            <div class="margin-top-10">
-                                                <span class="pull-right text-red text-bold"><strong><i class="fa fa-angle-down"></i>&nbsp;{{exerciseDiaryData.calories}}  calories</strong></span>
-                                                <div class="select_food">
-                                                    <span class="text-bold">Workout :</span> {{exerciseDiaryData.workoutvalue}}&nbsp;minutes&nbsp;&nbsp;<a href="" ng-click="doEditUserExercise(exerciseDiaryData.Exercise.exerciseid,exerciseDiaryData.userexercisemapid)" title="Edit Exercise"><i class="fa fa-pencil"></i></a>
+                                {{test}}
+                                <div id="scrollheightexercise" ng-if="showExercise==1" height-exercise-bind>
+                                    <ul class="exercise">
+                                        <li class="col-md-12" ng-repeat="exerciseDiaryData in userExerciseDiaryDataAll | orderBy:'$index':true">
+                                            <div class="col-md-2 no-padding"><img ng-src="{{exerciseDiaryData.exerciseImagePath+'50x50.jpg'}}"></div>
+                                            <div class="col-md-10 no-padding">
+                                                <a href="" class="pull-right exercise_close" title="Delete Exercise" ng-click="doDeleteUserExercise(exerciseDiaryData.userexercisemapid)">x</a>
+                                                <div class="exercise_name">{{exerciseDiaryData.Exercise.exercisename}}</div>
+                                                <div class="margin-top-10">
+                                                    <span class="pull-right text-red text-bold"><strong><i class="fa fa-angle-down"></i>&nbsp;{{exerciseDiaryData.calories}}  calories</strong></span>
+                                                    <div class="select_food">
+                                                        <span class="text-bold">Workout :</span> {{exerciseDiaryData.workoutvalue}}&nbsp;minutes&nbsp;&nbsp;<a href="" ng-click="doEditUserExercise(exerciseDiaryData.Exercise.exerciseid,exerciseDiaryData.userexercisemapid)" title="Edit Exercise"><i class="fa fa-pencil"></i></a>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </li>
-                                </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+
                                 <div ng-show="userExerciseDiaryDataAll.length==0" class="text-center"><br/><br/>
                                     <img src="../../images/no-exercise.png">
                                     <h1 class="text-gray margin-top-15">  NO EXERCISE ADDED!!!</h1>
@@ -496,7 +505,7 @@
                     <h4 class="one-line-shade" title="{{userProfile.name}}">{{userProfile.name}}&nbsp;</h4>
                     <p>{{userProfile.phone}}&nbsp;</p>
                     <p class="one-line-shade" title="{{userProfile.emailid}}">{{userProfile.emailid}}&nbsp;</p>
-                    <div class="margin-top-10">
+                    <div class="margin-top-7">
                         <div class="col-md-4 no-padding">
                             <h6>Age</h6>
                             <h6>Weight</h6>
@@ -513,7 +522,7 @@
             <hr/>
             <h6>Today's Intake Graph</h6>
             <div id="dailyIntake" class="margin-top-15"></div>
-            <div class="text-right daily-intake">
+            <!--<div class="text-right daily-intake">
                 <img src="../../images/i-protein.jpg">
                 <img src="../../images/i-fats.jpg">
                 <img src="../../images/i-carbs.jpg">
@@ -521,7 +530,7 @@
             </div>
             <div class="text-center row margin-top-5">
                 <img src="../../images/avg.png">
-            </div>
+            </div>-->
         </div>
     </div><!-- @end #w -->
 

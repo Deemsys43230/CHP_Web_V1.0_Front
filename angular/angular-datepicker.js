@@ -382,8 +382,8 @@ angular.module("ui.bootstrap",["ui.bootstrap.tpls","ui.bootstrap.transition","ui
     angular.module("template/typeahead/typeahead-match.html",[]).run(["$templateCache",function(a){
         a.put("template/typeahead/typeahead-match.html",'<a tabindex="-1" bind-html-unsafe="match.label | typeaheadHighlight:query"></a>')
 }]),angular.module("template/typeahead/typeahead-popup.html",[]).run(["$templateCache",function(a){
-    a.put("template/typeahead/typeahead-popup.html",'<ul class="dropdown-menu" ng-show="isOpen()" ng-style="{top:' +
-        ' position.top+\'px\', left: position.left+\'px\'}" style="display: block;" role="listbox" aria-hidden="{{!isOpen()}}">\n  ' +
+    a.put("template/typeahead/typeahead-popup.html",'<ul class="dropdown-menu" ng-nicescroll role="listbox" aria-hidden="{{!isOpen()}}" ng-show="isOpen()" ng-style="{top:' +
+        ' position.top+\'px\', left: position.left+\'px\'}" style="display: block;width:100%;height:300px;overflow-y:scroll;">\n  ' +
         '  <li ng-repeat="match in matches track by $index" ng-class="{active: isActive($index) }" ng-mouseenter="selectActive($index)"' +
         ' ng-click="selectMatch($index)" role="option" id="{{match.id}}">\n  <div typeahead-match index="$index" match="match" ' +
         'query="query" template-url="templateUrl"></div>\n    </li>\n</ul>\n')}]);

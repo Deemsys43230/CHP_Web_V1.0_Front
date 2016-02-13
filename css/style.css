@@ -7562,6 +7562,10 @@ a.title_button:hover{
     word-wrap: break-word;
 }
 
+.exercise-height{
+    height: 320px !important;
+}
+
 .style::-webkit-scrollbar-track
 {
     -webkit-box-shadow: inset 0 0 3px rgba(0,0,0,0.3);
@@ -7581,10 +7585,24 @@ a.title_button:hover{
     background-color: #666;
 }
 
+#scrollheightfood:after{
+    content: "";
+    display: table;
+    clear: both;
+}
+
+#scrollheightexercise:after{
+    content: "";
+    display: table;
+    clear: both;
+}
 
 
+/*food*/
 ul.food{
-    margin-left: 15px;
+    margin-left: 10px;
+    padding-right: 3px;
+    transition: padding-right 0.5s ease;
 }
 
 ul.food img{
@@ -7614,6 +7632,45 @@ ul.food li span.pull-right{
 }
 
 ul.food li .food_name{
+    font-size: 15px;
+    font-weight:bold !important;
+}
+
+
+/*exercise*/
+ul.exercise{
+    margin-left: 10px;
+    padding-right: 3px;
+    transition: padding-right 0.5s ease;
+}
+
+ul.exercise img{
+    width: 60px;
+    height: 60px;
+    border-radius: 30px;
+    border: 3px solid #ddd;
+}
+
+ul.exercise li{
+    margin: 3px 10px 10px 0px;
+    padding: 10px;
+    -webkit-box-shadow: 0 0 3px rgba(0,0,0,0.3);
+    -moz-box-shadow: 0 0 3px rgba(0,0,0,0.3);
+    box-shadow: 0 0 3px rgba(0,0,0,0.3);
+}
+
+ul.exercise li .exercise_close{
+    margin-top: -5px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #ccc;
+}
+
+ul.exercise li span.pull-right{
+    font-size:13px !important;
+}
+
+ul.exercise li .exercise_name{
     font-size: 15px;
     font-weight:bold !important;
 }
@@ -7768,7 +7825,7 @@ ul.food li .food_name{
 }
 
 .weight_measure .level_high{
-    line-height: 90px;
+    line-height: 93px;
     vertical-align: middle;
     border-bottom: 1px solid #ddd;
     border-top: 1px solid #ddd;
@@ -7777,14 +7834,15 @@ ul.food li .food_name{
 }
 
 .weight_measure .level_maintain{
-     line-height: 18px;
+     line-height: 12px;
+    font-size:10px!important;
      vertical-align: middle;
      border-bottom: 1px solid #ddd;
-    color: #ffcc00;
+     color: #ffcc00;
  }
 
 .weight_measure .level_low{
-    line-height: 88px;
+    line-height: 93px;
     vertical-align: middle;
     border-bottom: 1px solid #ddd;
     color: limegreen;
@@ -8672,7 +8730,7 @@ a:hover, a:visited, a:link, a:active
 
 .profile_input.weightoverride
 {
-    padding: 5px 15px;
+    padding: 5px 10px;
 }
 
 .coach_input
@@ -9960,7 +10018,7 @@ input.friend-search{
 
 #dailyIntake{
     min-width: 210px;
-    height: 190px !important;
+    height: 260px !important;
 }
 
 .gain-list p{
@@ -10564,12 +10622,16 @@ background-color: red;
     font-size:14px;
     margin-top:-15px;
     margin-left:15px;
-    width:45%;
-    border:1px solid #bbb;
+    width:100%;
     border-radius:3px;
     z-index:100;
     background:#fff;
     padding:10px;
-    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, .15);
+    border-radius: 4px;
+    -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
     position:absolute;
 }

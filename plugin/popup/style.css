@@ -222,6 +222,38 @@ form p{
 .user_register1 input[type="text"], .user_register1 input[type="email"], .user_register1 input[type="password"] {display: block; line-height:16px;width:100%; padding: 12px 13px; border:1px solid #DDD; color:#666;}
 .user_register1 input[type="checkbox"] {float:left; margin-right:5px;}
 .user_register1 input[type="checkbox"]+label {float:left;}
-.user_register1 select{display: block; width:100%; padding: 12px 13px; border:1px solid #DDD; color:#666;outline: none}
+.user_register1 select{
+    display: block;
+    width:100%;
+    padding: 9px 13px;
+    border:1px solid #DDD;
+    color:#666;
+    outline: none;
+    line-height: 18px!important;
+    border-radius: 0 !important;
+    background-color: #fff;
+    background-image: url('../../images/down-arrow.png');
+    background-repeat: no-repeat;
+    background-position: right center;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
 
-.user_register select{display: block; width:100%; padding: 12px 13px; border:1px solid #DDD; color:#666;outline: none}
+.user_register select{
+    display: block;
+    width:100%;
+    padding: 9px 13px;
+    border:1px solid #DDD;
+    color:#666;
+    outline: none;
+    line-height: 18px!important;
+    border-radius: 0 !important;
+    background-color: #fff;
+    background-image: url('../../images/down-arrow.png');
+    background-repeat: no-repeat;
+    background-position: right center;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}

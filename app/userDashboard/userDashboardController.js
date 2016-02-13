@@ -1,6 +1,6 @@
-var userApp= angular.module('userApp', ['ngRoute','oc.lazyLoad','ngCookies','requestModule','flash','ngAnimate','ngTouch', 'angucomplete-alt','ngPercentDisplay','userDashboardServiceModule','angular-svg-round-progress','ui.bootstrap']);
+var userApp= angular.module('userApp', ['ngRoute','oc.lazyLoad','ngCookies','requestModule','flash','ngAnimate','ngTouch','ngPercentDisplay','userDashboardServiceModule','angular-svg-round-progress','ui.bootstrap','angular-nicescroll']);
 
-userApp.controller('UserDashboardController',function($scope,$window,requestHandler,Flash,UserDashboardService,$interval,roundProgressService,limitToFilter) {
+userApp.controller('UserDashboardController',function($scope,$window,requestHandler,Flash,UserDashboardService,$interval,roundProgressService,limitToFilter,$timeout) {
     $scope.foodSearchResult = [];
     $scope.userFood={};
     $scope.userFood.sessionid=1;
@@ -18,6 +18,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
     $scope.graphs=1;
     $scope.historyReport=0;
     $scope.historyType=1;
+    $scope.showExercise=0;
 
     //Modal Popup to add user food
     $scope.doUserAddFood=function(){
@@ -264,6 +265,9 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
                 return $scope.foodSearchResult;
             });
         }
+         else{
+            return {};
+        }
 
     };
 
@@ -286,14 +290,25 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
 
                     if($scope.demography.weight < $scope.idealWeight){
                         $scope.upweight =1;
+                        $scope.idealWeightlevel = $scope.demography.weight/$scope.idealWeight;
+                        $scope.idealWeightlevel = ($scope.idealWeightlevel*100)/2;
                         $scope.balanceweight = $scope.idealWeight - $scope.demography.weight;
                         $scope.balanceweight = $scope.balanceweight.toFixed(2);
                     }
                     else if($scope.demography.weight > $scope.idealWeight){
                         $scope.upweight =0;
+                        $scope.idealWeightlevel = $scope.idealWeight/$scope.demography.weight;
+                        $scope.idealWeightlevel = 100-($scope.idealWeightlevel*100)/2;
                         $scope.balanceweight =  $scope.demography.weight - $scope.idealWeight ;
                         $scope.balanceweight = $scope.balanceweight.toFixed(2);
+                    }else{
+                        $scope.upweight =2;
+                        $scope.idealWeightlevel = 1;
+                        $scope.idealWeightlevel = ($scope.idealWeightlevel*100)/2;
                     }
+
+                    $window.idealWeightlevel = $scope.idealWeightlevel.toFixed(2);
+                    viewWeightGraph();
 
                 });
             }
@@ -306,14 +321,25 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
 
                 if($scope.demography.weight < $scope.idealWeight){
                     $scope.upweight =1;
+                    $scope.idealWeightlevel = $scope.demography.weight/$scope.idealWeight;
+                    $scope.idealWeightlevel = ($scope.idealWeightlevel*100)/2;
                     $scope.balanceweight = $scope.idealWeight - $scope.demography.weight;
                     $scope.balanceweight = $scope.balanceweight.toFixed(2);
                 }
                 else if($scope.demography.weight > $scope.idealWeight){
                     $scope.upweight =0;
+                    $scope.idealWeightlevel = $scope.idealWeight/$scope.demography.weight;
+                    $scope.idealWeightlevel = 100-($scope.idealWeightlevel*100)/2;
                     $scope.balanceweight =  $scope.demography.weight - $scope.idealWeight ;
                     $scope.balanceweight = $scope.balanceweight.toFixed(2);
+                }else{
+                    $scope.upweight =2;
+                    $scope.idealWeightlevel = 1;
+                    $scope.idealWeightlevel = ($scope.idealWeightlevel*100)/2;
                 }
+
+                $window.idealWeightlevel = $scope.idealWeightlevel.toFixed(2);
+                viewWeightGraph();
             }
 
         });
@@ -604,9 +630,10 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
                 $scope.goalDetails=response.data.Weight_Goal;
                 $scope.updateGoal=1;
 
-                var dateCompare = $scope.goalDetails.startdate.slice(6,10)+','+$scope.goalDetails.startdate.slice(3,5)+','+$scope.goalDetails.startdate.slice(0,2);
-                var date1 = selectedDate.slice(6,10)+','+selectedDate.slice(3,5)+','+selectedDate.slice(0,2);
-                var date2 = $scope.goalDetails.enddate.slice(6,10)+','+$scope.goalDetails.enddate.slice(3,5)+','+$scope.goalDetails.enddate.slice(0,2);
+                var dateCompare = $scope.goalDetails.startdate.slice(6,10)+'-'+$scope.goalDetails.startdate.slice(3,5)+'-'+$scope.goalDetails.startdate.slice(0,2);
+                var date1 = selectedDate.slice(6,10)+'-'+selectedDate.slice(3,5)+'-'+selectedDate.slice(0,2);
+                var date2 = $scope.goalDetails.enddate.slice(6,10)+'-'+$scope.goalDetails.enddate.slice(3,5)+'-'+$scope.goalDetails.enddate.slice(0,2);
+
 
                 var date1_ms;
 
@@ -1010,20 +1037,20 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
                         style: {
                             fontSize:'9px',
                             fontWeight:'normal'
-                        }
-                        /*useHTML: true,
+                        },
+                        useHTML: true,
                         formatter: function() {
                             if(this.value == "Protein")
-                                return this.value+'<br/><img src="../../images/test.jpg"/>';
+                                return this.value+'<br/><img src="../../images/i-protein.jpg"/>';
                             else if(this.value == "Fat")
-                                return this.value+'<br/><img src="../../images/test.jpg"/>';
+                                return '&nbsp;&nbsp;'+this.value+'&nbsp;&nbsp;'+'<br/><img src="../../images/i-fats.jpg"/>';
                             else if(this.value == "Carbo")
-                                return this.value+'<br/><img src="../../images/test.jpg"/>';
+                                return this.value+'<br/><img src="../../images/i-carbs.jpg"/>';
                             else if(this.value == "Fibre")
-                                return this.value+'<br/><img src="http://highcharts.com/demo/gfx/sun.png"/>';
+                                return '&nbsp;'+this.value+'&nbsp;'+'<br/><img src="../../images/i-fibre.jpg"/>';
                             else
                                 return this.value;
-                        }*/
+                        }
                     }
                 },
                 tooltip:{
@@ -1050,11 +1077,10 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
                 credits: {
                     enabled: false
                 },
-                legend:{enabled:false},
+                legend:{enabled:true},
                 series: [{
                     type: 'column',
-                    showInLegend:false,
-                    name:'Unit',
+                    name:'Units',
                     data: [
                         {
                             name: 'Protein',
@@ -1076,7 +1102,6 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
                 },  {
                     type: 'spline',
                     name: 'Average',
-                    showInLegend:true,
                     data: [
                         parseFloat($scope.calorieIntakeGraph.averageprotein),
                         parseFloat($scope.calorieIntakeGraph.averagefat),
@@ -1793,6 +1818,42 @@ userApp.directive('historyGraph', function () {
             scope.$watch("historygraph", function (newValue) {
                 chart.series[0].setData(newValue, true);
             }, true);
+        }
+    }
+});
+
+userApp.directive('heightFoodBind', function() {
+    return {
+        link: function($scope, $element) {
+            $scope.$watch(function() {
+                setTimeout(function(){
+                    var selectclass = $('.food');
+                    if ($element.height()>parseInt($('.food_scrollbar').css('height'))) {
+                        selectclass.css({"paddingRight":"15px"});
+                    } else {
+                        selectclass.css({"paddingRight":"3px"});
+                    }
+                }, 0);
+            });
+        }
+    }
+});
+
+userApp.directive('heightExerciseBind', function() {
+    return {
+        link: function($scope, $element) {
+            $scope.$watch(function() {
+                setTimeout(function(){
+                    var selectclass = $('.exercise');
+                    console.log('exercise '+parseInt($('.exercise-height').css('height')));
+                    if ($element.height()>parseInt($('.exercise-height').css('height'))) {
+                        console.log("yes");
+                        selectclass.css({"paddingRight":"15px"});
+                    } else {
+                        selectclass.css({"paddingRight":"3px"});
+                    }
+                }, 0);
+            });
         }
     }
 });
