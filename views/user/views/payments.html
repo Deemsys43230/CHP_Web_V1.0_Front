@@ -49,11 +49,11 @@
                             </thead>
                             <tbody >
                             <tr dir-paginate="mycourse in coursefilter=(usercourselist  | startsWithLetterCourse: coursepay | orderBy:sortKey:reverse | itemsPerPage: 8)" ng-show="usercourselist.length!=0">
-                                <td>{{mycourse.coursename}}</td>
-                                <td>{{mycourse.categoryname}}</td>
-                                <td>{{mycourse.ownername}}</td>
-                                <td>{{mycourse.purchasedon}}</td>
-                                <td>{{mycourse.purchaseamount}}</td>
+                                <td><span class="line-clamp-xs">{{mycourse.coursename}}</span></td>
+                                <td><span class="line-clamp-xs">{{mycourse.categoryname}}</span></td>
+                                <td><span class="line-clamp-lxs">{{mycourse.ownername}}</span></td>
+                                <td><span class="line-clamp-xs">{{mycourse.purchasedon}}</span></td>
+                                <td><span class="line-clamp-xs">{{mycourse.purchaseamount}}</span></td>
                                 <td><a href="" ng-click="doViewPaymentDetails(mycourse.inwardid)">{{mycourse.inwardid}}</a></td>
                             </tr>
                             <tr ng-show="!coursefilter.length"><td colspan="6" class="text-center">No Records Found !!!</td></tr>

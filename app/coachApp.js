@@ -672,7 +672,7 @@ coachApp.directive('validNumber', function() {
 
 coachApp.directive('validFloatnumber', function() {
 
-    var FLOAT_REGEXP = /^\s*(?=.*[1-9])\d*(?:\.\d{0,8})?\s*$/;
+    var FLOAT_REGEXP = /^\s*(?=.*[0-9])\d*(?:\.\d{0,8})?\s*$/;
 
     return {
         require: '?ngModel',
