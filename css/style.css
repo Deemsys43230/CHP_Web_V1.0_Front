@@ -41,6 +41,7 @@ body {
 	color: #666;
 	background: url(../images/gym.jpg) fixed no-repeat;
     background-size: 100% 100%;
+    overflow-y: hidden;
 }
 
 /*for FireFox*/
@@ -984,9 +985,17 @@ ul.social-list li:last-child a i {
 .navbar-user .navbar-nav > li.drop:hover .dropdown {
     visibility: visible;
 	opacity: 1;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.4);
+    -o-box-shadow: 0 0 4px rgba(0, 0, 0, 0.4);
+    -moz-box-shadow: 0 0 4px rgba(0, 0, 0, 0.4);
+    -webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.4);
 }
 
-.navbar-user .navbar-nav .dropdown li {
+.navbar-user .navbar-nav .dropdown li{
+    width: 100%;
+}
+
+.navbar-user .navbar-nav .dropdown li a {
     width: 100%;
 }
 
@@ -5666,7 +5675,7 @@ ul.footer-nav li a:hover {
 	-o-transition: height 500ms ease-in-out;
 	transition: height 500ms ease-in-out;
 }
-	
+
 .owl-carousel .owl-item{
 	float: left;
 }
@@ -8967,12 +8976,21 @@ tr.sort-icon th i{
 	min-height: 100px !important;
 }
 
+.min-height-70{
+    min-height: 70px !important;
+}
+
+
 .min-height-180{
     min-height: 180px !important;
 }
 
 .min-height-450{
     min-height: 450px !important;
+}
+
+.min-height-550{
+    min-height: 550px !important;
 }
 
 .min-height-200{

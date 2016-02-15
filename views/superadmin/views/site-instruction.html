@@ -1,37 +1,35 @@
 
 <!-- Start Page Banner -->
 
-<div class="page-banner">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-3">
-                <h4 class="classic-title"><span>Site Management</span></h4>
-                <div ng-include src="'views/site-menu.html'" onload="activeClass"></div>
-            </div>
-            <div class="col-md-9">
-                <a href="#dashboard" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back to Dashboard</a>
-                <div flash-message="2000" class="col-md-4 pull-right no-padding"></div>
-                <h4 class="classic-title"><span><i class="fa fa-exclamation-circle"></i> &nbsp;Instruction</span></h4>
-                <div class="row">
-                    <form name="instructionForm">
-                        <div class="col-md-12">
-                            <h4 class="margin-bottom-10">Title :  {{instructions.title}}</h4>
-                            <h4 class="margin-bottom-10">Content :</h4>
-                            <div ng-if="loaded">
-                                <div class="loader-style">
-                                    <div class="loader"></div>
-                                </div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <h4 class="classic-title"><span>Site Management</span></h4>
+            <div ng-include src="'views/site-menu.html'" onload="activeClass"></div>
+        </div>
+        <div class="col-md-9">
+            <a href="#dashboard" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back to Dashboard</a>
+            <div flash-message="2000" class="col-md-4 pull-right no-padding"></div>
+            <h4 class="classic-title"><span><i class="fa fa-exclamation-circle"></i> &nbsp;Instruction</span></h4>
+            <div class="row">
+                <form name="instructionForm">
+                    <div class="col-md-12">
+                        <h4 class="margin-bottom-10">Title :  {{instructions.title}}</h4>
+                        <h4 class="margin-bottom-10">Content :</h4>
+                        <div ng-if="loaded">
+                            <div class="loader-style">
+                                <div class="loader"></div>
                             </div>
+                        </div>
                             <span ng-show="instructionForm.content.$dirty&&instructionForm.content.$invalid">
                                   <span class="error-message textarea-errormessage40" ng-show="instructionForm.content.$error.required"><span>Required.</span></span>
                              </span>
-                            <div summernote config="options" name="content"  ng-model="instructions.content" required></div>
-                        </div>
-                    </form>
-                </div>
-                <div class="text-center margin-top-15">
-                    <a href="" class="btn btn-success" ng-disabled="instructionForm.$invalid || isClean()" ng-click="doUpdateInstructions()">Save Changes</a>
-                </div>
+                        <div summernote config="options" name="content"  ng-model="instructions.content" required></div>
+                    </div>
+                </form>
+            </div>
+            <div class="text-center margin-top-15">
+                <a href="" class="btn btn-success" ng-disabled="instructionForm.$invalid || isClean()" ng-click="doUpdateInstructions()">Save Changes</a>
             </div>
         </div>
     </div>

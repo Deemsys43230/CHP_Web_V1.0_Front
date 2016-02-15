@@ -405,6 +405,7 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                             files:[
                                 '../../js/bootstrap.min.js',
                                 '../../plugin/popup/style.css',
+                                '../../plugin/popup/jquery.leanModal.min.js',
                                 '../../app/coach/coachController.js'
                             ]
                         })
@@ -967,6 +968,7 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                             name:'adminApp',
                             files:[
                                 '../../js/bootstrap.min.js',
+                                '../../angular/angular-ui-bootstarp.js',
                                 '../../app/payments/adminPaymentController.js'
                             ]
                         })
@@ -982,7 +984,9 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                             name:'adminApp',
                             files:[
                                 '../../js/bootstrap.min.js',
-                                 '../../plugin/popup/style.css',
+                                '../../plugin/popup/style.css',
+                                '../../angular/angular-ui-bootstarp.js',
+                                '../../angular/angular-utils-pagination/dirPagination.js',
                                 '../../plugin/popup/jquery.leanModal.min.js',
                                 '../../app/payments/adminPaymentController.js'
                             ]
@@ -999,6 +1003,7 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                             name:'adminApp',
                             files:[
                                 '../../js/bootstrap.min.js',
+                                '../../angular/angular-ui-bootstarp.js',
                                 '../../app/payments/adminPaymentController.js'
                             ]
                         })
@@ -1014,6 +1019,7 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                             name:'adminApp',
                             files:[
                                 '../../js/bootstrap.min.js',
+                                '../../angular/angular-ui-bootstarp.js',
                                 '../../app/payments/adminPaymentController.js'
                             ]
                         })
@@ -1029,6 +1035,8 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                             name:'adminApp',
                             files:[
                                 '../../js/bootstrap.min.js',
+                                '../../angular/angular-ui-bootstarp.js',
+                                '../../angular/angular-utils-pagination/dirPagination.js',
                                 '../../app/payments/adminPaymentController.js'
                             ]
                         })
@@ -1045,6 +1053,7 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                             files:[
                                 '../../js/bootstrap.min.js',
                                  '../../plugin/popup/style.css',
+                                '../../angular/angular-ui-bootstarp.js',
                                 '../../plugin/popup/jquery.leanModal.min.js',
                                 '../../app/payments/adminPaymentController.js'
                             ]

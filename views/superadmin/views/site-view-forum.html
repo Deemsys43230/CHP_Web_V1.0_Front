@@ -1,34 +1,33 @@
-<div class="page-banner">
-    <div class="container">
-        <div class="row">
+<div class="container">
+    <div class="row">
 
-            <div class="col-md-3">
-                <h4 class="classic-title"><span>Site Management</span></h4>
-                <div ng-include src="'views/site-menu.html'" onload="activeClass"></div>
-            </div>
-            <div class="col-md-9" ng-init="viewInit()">
-                <a href="#forums" class="back-button pull-right"><i class="fa fa-arrow-circle-o-left"></i> Back to Forums List</a>
-                <div flash-message="2000" class="col-md-4 pull-right"></div>
-                <h4 class="classic-title"><span><i class="fa fa-eye"></i> &nbsp;View Forum</span></h4>
+        <div class="col-md-3">
+            <h4 class="classic-title"><span>Site Management</span></h4>
+            <div ng-include src="'views/site-menu.html'" onload="activeClass"></div>
+        </div>
+        <div class="col-md-9" ng-init="viewInit()">
+            <a href="#forums" class="back-button pull-right"><i class="fa fa-arrow-circle-o-left"></i> Back to Forums List</a>
+            <div flash-message="2000" class="col-md-4 pull-right"></div>
+            <h4 class="classic-title"><span><i class="fa fa-eye"></i> &nbsp;View Forum</span></h4>
 
-                <div ng-if="loaded">
-                    <div class="loader-style">
-                        <div class="loader"></div>
-                    </div>
+            <div ng-if="loaded">
+                <div class="loader-style">
+                    <div class="loader"></div>
                 </div>
-                <div class="col-md-12 news-block">
-                    <h4 class="wrap">{{forumDetails.posttitle}}</h4>
-                    <div class="col-md-1 margin-top-10">
-                        <img class="img-circle" ng-src="{{forumDetails.userimage | trusted}}"/>
-                    </div>
-                    <div class="col-md-11">
+            </div>
+            <div class="col-md-12 news-block">
+                <h4 class="wrap">{{forumDetails.posttitle}}</h4>
+                <div class="col-md-1 margin-top-10">
+                    <img class="img-circle" ng-src="{{forumDetails.userimage | trusted}}"/>
+                </div>
+                <div class="col-md-11">
                     <p class="text-italic margin-top-5">Posted by : {{forumDetails.username}}</p>
                     <p class="text-italic margin-top-5">Posted on : {{forumDetails.postedon}}</p>
-                    </div>
-                    <div class="col-md-12 no-padding margin-tb-10 wrap">
+                </div>
+                <div class="col-md-12 no-padding margin-tb-10 wrap">
                     <div id="forumDescription"><div class="margin-top-20 wrap" ng-bind-html="forumDetails.postdescription | html"></div></div><br/>
-                   </div>
-                    <div class="col-md-12 no-padding">
+                </div>
+                <div class="col-md-12 no-padding">
                     <h4>Comments</h4>
                     <div class="text-center margin-tb-20" ng-show="forumAnswers.length==0">
                         <img src="../../images/no-reviews.png"/>
@@ -70,9 +69,8 @@
                         <textarea class="forum-textarea" name="comments" ng-model="comments" placeholder="Enter the comments" maxlength="400" required/></textarea>
                         <a href="" ng-click="doPostForumAnswers()" class="btn main-button" ng-disabled="userCommentForm.$invalid">POST COMMENT</a>
                     </form>
-                        </div>
-                    <br/>
                 </div>
+                <br/>
             </div>
         </div>
     </div>

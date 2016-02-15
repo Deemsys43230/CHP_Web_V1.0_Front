@@ -1,20 +1,20 @@
-var adminApp = angular.module('adminApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','angularUtils.directives.dirPagination']);
+var adminApp = angular.module('adminApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','angularUtils.directives.dirPagination','ui.bootstrap']);
 
 adminApp.controller('AdminPaymentController',function($scope,requestHandler,Flash,$routeParams) {
 
     $scope.totalEarningsByAdmin=0.00;
     $scope.totalEarningsByCoach=0.00;
     $scope.loaddisable=false;
+    $scope.currentPage=1;
 
     //Main Function returns the list
-    $scope.doGetCoursePaymentDetails = function(pageno){
+    $scope.doGetCoursePaymentDetails = function(){
 
         $scope.loaded=true;
-        $scope.pagination.current=pageno;
-        $scope.offset=(pageno-1)*$scope.itemsPerPage;
-        $scope.limit=pageno*$scope.itemsPerPage;
+        $scope.offset=($scope.currentPage-1)*$scope.itemsPerPage;
+        $scope.limit=$scope.currentPage*$scope.itemsPerPage;
 
-        if($scope.courseSearch==undefined){
+        if(!$scope.courseSearch){
             $scope.courseSearch="";
         }
 
@@ -37,10 +37,10 @@ adminApp.controller('AdminPaymentController',function($scope,requestHandler,Flas
     //End Function returns the list
 
     //Detail of subscribers
-    $scope.doGetCourseSubsciberList = function(pageno){
-        $scope.pagination.current=pageno;
-        $scope.offset=(pageno-1)*$scope.itemsPerPage;
-        $scope.limit=pageno*$scope.itemsPerPage;
+    $scope.doGetCourseSubsciberList = function(){
+
+        $scope.offset=($scope.currentPage-1)*$scope.itemsPerPage;
+        $scope.limit=$scope.currentPage*$scope.itemsPerPage;
         $scope.loaded=true;
 
         if($scope.courseSearch==undefined){
@@ -62,8 +62,6 @@ adminApp.controller('AdminPaymentController',function($scope,requestHandler,Flas
             $scope.coachid = response.data.coursePaylist.coachid;
             $scope.coursesPaymentHistory = response.data.coursePaylist.paymentHistory;
             $scope.courseDetails = response.data.coursePaylist;
-
-            console.log(response.data);
             $scope.total_count=response.data.totalrecordcount;
             $scope.loaded=false;
         });
@@ -86,10 +84,10 @@ adminApp.controller('AdminPaymentController',function($scope,requestHandler,Flas
     //End coach list
 
     //Detail of subscribers
-    $scope.doGetCoachSubscribersList = function(pageno){
-        $scope.pagination.current=pageno;
-        $scope.offset=(pageno-1)*$scope.itemsPerPage;
-        $scope.limit=pageno*$scope.itemsPerPage;
+    $scope.doGetCoachSubscribersList = function(){
+
+        $scope.offset=($scope.currentPage-1)*$scope.itemsPerPage;
+        $scope.limit=$scope.currentPage*$scope.itemsPerPage;
         $scope.loaded=true;
 
         if($scope.subscriberSearch==undefined){
@@ -140,14 +138,6 @@ adminApp.controller('AdminPaymentController',function($scope,requestHandler,Flas
     };
     //End Subscriber returns the list
 
-    $scope.doGetStudentList = function(pageno){
-        //In practice this should be in a factory.
-        requestHandler.postRequest("getPublishedCourse/",{'offset':pageno}).then(function(response){
-            $scope.students = [];
-            $scope.students = response.data.published_Course;
-        });
-    };
-
     $scope.doGetCoursePuchaseDetails = function(){
         //In practice this should be in a factory.
         requestHandler.postRequest("courseDetail/",{'courseid':$routeParams.id}).then(function(response){
@@ -158,6 +148,7 @@ adminApp.controller('AdminPaymentController',function($scope,requestHandler,Flas
 
     $scope.sortingCourse = function(id){
         $scope.sortId=id;
+        $scope.currentPage = 1;
         var currentOrder=$scope.sortIcon[id];
         //Object + 1 icons needed NOTE
         $scope.sortIcon=['fa fa-caret-down','fa fa-caret-down','fa fa-caret-down','fa fa-caret-down','fa fa-caret-down','fa fa-caret-down','fa fa-caret-down','fa fa-caret-down','fa fa-caret-down'];
@@ -169,11 +160,12 @@ adminApp.controller('AdminPaymentController',function($scope,requestHandler,Flas
             $scope.sortIcon[id]='fa fa-caret-down';
             $scope.sorttype=1;
         }
-        $scope.doGetCoursePaymentDetails(1);
+        $scope.doGetCoursePaymentDetails();
     };
 
     $scope.sortingCourseSubscriber = function(id){
         $scope.sortId=id;
+        $scope.currentPage=1;
         var currentOrder=$scope.sortIcon[id];
         //Object + 1 icons needed NOTE
         $scope.sortIcon=['fa fa-caret-down','fa fa-caret-down','fa fa-caret-down','fa fa-caret-down','fa fa-caret-down','fa fa-caret-down','fa fa-caret-down','fa fa-caret-down'];
@@ -185,13 +177,14 @@ adminApp.controller('AdminPaymentController',function($scope,requestHandler,Flas
             $scope.sortIcon[id]='fa fa-caret-down';
             $scope.sorttype=1;
         }
-        $scope.doGetCourseSubsciberList(1);
+        $scope.doGetCourseSubsciberList();
     };
 
 
 
     $scope.sortingCoachSubscriber = function(id){
         $scope.sortId=id;
+        $scope.currentPage=1;
         var currentOrder=$scope.sortIcon[id];
         //Object + 1 icons needed NOTE
         $scope.sortIcon=['fa fa-caret-down','fa fa-caret-down','fa fa-caret-down','fa fa-caret-down','fa fa-caret-down','fa fa-caret-down','fa fa-caret-down','fa fa-caret-down'];
@@ -203,7 +196,7 @@ adminApp.controller('AdminPaymentController',function($scope,requestHandler,Flas
             $scope.sortIcon[id]='fa fa-caret-down';
             $scope.sorttype=1;
         }
-        $scope.doGetCoachSubscribersList(1);
+        $scope.doGetCoachSubscribersList();
     };
 
     $scope.totalEarnbycourse=function(){
@@ -302,32 +295,20 @@ adminApp.controller('AdminPaymentController',function($scope,requestHandler,Flas
         $scope.courseSearch="";
         $scope.sortId="";
         $scope.sorttype="";
-
-        //Initialize Pagination
-        $scope.pagination = {
-            current: 1
-        };
-
         //Object + 1 icons needed NOTE //Initialize Icon
         $scope.sortIcon=['fa fa-caret-down','fa fa-caret-down','fa fa-caret-down','fa fa-caret-down','fa fa-caret-down','fa fa-caret-down','fa fa-caret-down','fa fa-caret-down','fa fa-caret-down'];
-        $scope.doGetCoursePaymentDetails(1);
+        $scope.doGetCoursePaymentDetails();
         $scope.totalEarnbycourse();
     };
 
     $scope.subscribersListInit=function(){
-        $scope.itemsPerPage = 10;
+        $scope.itemsPerPage = 6;
         $scope.courseSearch="";
         $scope.sortId="";
         $scope.sorttype="";
-
-        //Initialize Pagination
-        $scope.pagination = {
-            current: 1
-        };
-
         //Object + 1 icons needed NOTE //Initialize Icon
         $scope.sortIcon=['fa fa-caret-down','fa fa-caret-down','fa fa-caret-down','fa fa-caret-down','fa fa-caret-down','fa fa-caret-down','fa fa-caret-down','fa fa-caret-down'];
-        $scope.doGetCourseSubsciberList(1);
+        $scope.doGetCourseSubsciberList();
         $scope.totalEarnByCourseId();
     };
 
@@ -338,20 +319,14 @@ adminApp.controller('AdminPaymentController',function($scope,requestHandler,Flas
     };
 
     $scope.coachSubscribersListInit=function(){
-        $scope.itemsPerPage = 10;
+        $scope.itemsPerPage = 1;
         $scope.subscriberSearch="";
         $scope.sortId="";
         $scope.sorttype="";
-
-        //Initialize Pagination
-        $scope.pagination = {
-            current: 1
-        };
-
         //Object + 1 icons needed NOTE //Initialize Icon
         $scope.sortIcon=['fa fa-caret-down','fa fa-caret-down','fa fa-caret-down','fa fa-caret-down','fa fa-caret-down','fa fa-caret-down'];
 
-        $scope.doGetCoachSubscribersList(1);
+        $scope.doGetCoachSubscribersList();
         $scope.totalEarnByCoachId();
     };
 
