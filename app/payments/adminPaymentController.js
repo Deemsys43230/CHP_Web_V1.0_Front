@@ -250,45 +250,6 @@ adminApp.controller('AdminPaymentController',function($scope,requestHandler,Flas
         else $scope.coachSortIcons[sortKey]="fa fa-caret-down";
     };
 
-    $scope.doManualPay=function(paymentid,coachid){
-
-        $scope.loaddisable=true;
-        $scope.loaded=true;
-        requestHandler.postRequest("admin/payManualImplicit/",{"coachid":coachid,"paymentid":paymentid}).then(function(response){
-
-              if(response.data.Response_status==1){
-                  subscribersListInit();
-                  successMessage(Flash,"Payment successfull");
-                  $scope.loaded=false;
-                  $scope.loaddisable=false;
-              }
-            else if(response.data.Response_status==0){
-                  $(function(){
-                      $("#lean_overlay").fadeTo(1000);
-                      $("#errormodal").fadeIn(600);
-                      $(".common_model").show();
-                  });
-                  $scope.errormsg= response.data.Error;
-
-                  $(".modal_close").click(function(){
-                      $(".common_model").hide();
-                      $("#errormodal").hide();
-                      $("#lean_overlay").hide();
-                  });
-
-                  $("#lean_overlay").click(function(){
-                      $(".common_model").hide();
-                      $("#errormodal").hide();
-                      $("#lean_overlay").hide();
-                  });
-                  $scope.loaded=false;
-                  $scope.loaddisable=false;
-
-              }
-            });
-
-
-    };
 
     $scope.init=function(){
         $scope.itemsPerPage = 10;
@@ -336,6 +297,47 @@ adminApp.controller('AdminPaymentController',function($scope,requestHandler,Flas
 
     $scope.coachSubscribersDetailInit=function(){
          $scope.doGetCoachSubscriberDetailView();
+    };
+
+
+    $scope.doManualPay=function(paymentid,coachid){
+
+        $scope.loaddisable=true;
+        $scope.loaded=true;
+        requestHandler.postRequest("admin/payManualImplicit/",{"coachid":coachid,"paymentid":paymentid}).then(function(response){
+
+            if(response.data.Response_status==1){
+                $scope.subscribersListInit();
+                successMessage(Flash,"Payment successfull");
+                $scope.loaded=false;
+                $scope.loaddisable=false;
+            }
+            else if(response.data.Response_status==0){
+                $(function(){
+                    $("#lean_overlay").fadeTo(1000);
+                    $("#errormodal").fadeIn(600);
+                    $(".common_model").show();
+                });
+                $scope.errormsg= response.data.Error;
+
+                $(".modal_close").click(function(){
+                    $(".common_model").hide();
+                    $("#errormodal").hide();
+                    $("#lean_overlay").hide();
+                });
+
+                $("#lean_overlay").click(function(){
+                    $(".common_model").hide();
+                    $("#errormodal").hide();
+                    $("#lean_overlay").hide();
+                });
+                $scope.loaded=false;
+                $scope.loaddisable=false;
+
+            }
+        });
+
+
     };
 
 });
