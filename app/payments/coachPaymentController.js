@@ -1,9 +1,10 @@
-var coachApp = angular.module('coachApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','angularUtils.directives.dirPagination']);
+var coachApp = angular.module('coachApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','angularUtils.directives.dirPagination','ui.bootstrap']);
 
 coachApp.controller('CoachPaymentController',function($scope,requestHandler,Flash,$routeParams) {
 
     $scope.paginationLoad=false;
     $scope.activeClass.payments='active';
+    $scope.currentPage=1;
 
     // To display Course list by user
     $scope.doGetMyCourseListByUser=function(){
@@ -23,11 +24,10 @@ coachApp.controller('CoachPaymentController',function($scope,requestHandler,Flas
         });
     };
 
-    $scope.doGetMySubscribersListByCourse=function(pageno){
+    $scope.doGetMySubscribersListByCourse=function(){
 
-        $scope.pagination.current=pageno;
-        $scope.offset=(pageno-1)*$scope.itemsPerPage;
-        $scope.limit=pageno*$scope.itemsPerPage;
+        $scope.offset=($scope.currentPage-1)*$scope.itemsPerPage;
+        $scope.limit=$scope.currentPage*$scope.itemsPerPage;
         $scope.loaded=true;
 
         if($scope.subscriberSearch==undefined){
@@ -54,6 +54,7 @@ coachApp.controller('CoachPaymentController',function($scope,requestHandler,Flas
 
     $scope.sortingCourseSubscriber = function(id){
         $scope.sortId=id;
+        $scope.currentPage=1;
         var currentOrder=$scope.sortIcon[id];
         //Object + 1 icons needed NOTE
         $scope.sortIcon=['fa fa-caret-up','fa fa-caret-up','fa fa-caret-up','fa fa-caret-up','fa fa-caret-up'];
@@ -65,11 +66,12 @@ coachApp.controller('CoachPaymentController',function($scope,requestHandler,Flas
             $scope.sortIcon[id]='fa fa-caret-up';
             $scope.sorttype=2;
         }
-        $scope.doGetMySubscribersListByCourse(1);
+        $scope.doGetMySubscribersListByCourse();
     };
 
     $scope.sortingCoachSubscriber = function(id){
         $scope.sortId=id;
+        $scope.currentPage=1;
         var currentOrder=$scope.sortIcon[id];
         //Object + 1 icons needed NOTE
         $scope.sortIcon=['fa fa-caret-down','fa fa-caret-down','fa fa-caret-down','fa fa-caret-down','fa fa-caret-down'];
@@ -81,7 +83,7 @@ coachApp.controller('CoachPaymentController',function($scope,requestHandler,Flas
             $scope.sortIcon[id]='fa fa-caret-down';
             $scope.sorttype=1;
         }
-        $scope.doGetMySubscribersListByCoach(1);
+        $scope.doGetMySubscribersListByCoach();
     };
 
     $scope.doViewPaymentDetails=function(outwardid){
@@ -123,11 +125,10 @@ coachApp.controller('CoachPaymentController',function($scope,requestHandler,Flas
     };
 
     // To display Coach list by user
-    $scope.doGetMySubscribersListByCoach=function(pageno){
+    $scope.doGetMySubscribersListByCoach=function(){
 
-        $scope.pagination.current=pageno;
-        $scope.offset=(pageno-1)*$scope.itemsPerPage;
-        $scope.limit=pageno*$scope.itemsPerPage;
+        $scope.offset=($scope.currentPage-1)*$scope.itemsPerPage;
+        $scope.limit=$scope.currentPage*$scope.itemsPerPage;
         $scope.loaded=true;
 
         if($scope.subscriberSearch==undefined){
@@ -175,38 +176,28 @@ coachApp.controller('CoachPaymentController',function($scope,requestHandler,Flas
     };
 
     $scope.subscribersListInit=function(){
-        $scope.itemsPerPage = 10;
+        $scope.itemsPerPage = 9;
         $scope.subscriberSearch="";
         $scope.sortId="";
         $scope.sorttype="";
-
-        //Initialize Pagination
-        $scope.pagination = {
-            current: 1
-        };
 
         //Object + 1 icons needed NOTE //Initialize Icon
         $scope.sortIcon=['fa fa-caret-up','fa fa-caret-up','fa fa-caret-up','fa fa-caret-up','fa fa-caret-up'];
 
-        $scope.doGetMySubscribersListByCourse(1);
+        $scope.doGetMySubscribersListByCourse();
         $scope.doGetPerCourseTotalEarnings();
     };
 
     $scope.SubscriptionList=function(){
-        $scope.itemsPerPage = 10;
+        $scope.itemsPerPage = 9;
         $scope.subscriberSearch="";
         $scope.sortId="";
         $scope.sorttype="";
 
-        //Initialize Pagination
-        $scope.pagination = {
-            current: 1
-        };
-
         //Object + 1 icons needed NOTE //Initialize Icon
         $scope.sortIcon=['fa fa-caret-down','fa fa-caret-down','fa fa-caret-down','fa fa-caret-down','fa fa-caret-down','fa fa-caret-down'];
 
-        $scope.doGetMySubscribersListByCoach(1);
+        $scope.doGetMySubscribersListByCoach();
         $scope.doGetTotalSubscriptionEarnings();
     };
 

@@ -197,15 +197,22 @@ commonApp.filter('toSec', function() {
 
     return function(input) {
 
+        if(!input){
+            return '';
+        }
+        else{
             dateArgs = input.match(/\d{2,4}/g),
-            year = dateArgs[2],
-            month = parseInt(dateArgs[1]) - 1,
-            day = dateArgs[0],
-            hour = dateArgs[3],
-            minutes = dateArgs[4];
+                year = dateArgs[2],
+                month = parseInt(dateArgs[1]) - 1,
+                day = dateArgs[0],
+                hour = dateArgs[3],
+                minutes = dateArgs[4];
 
-        var result = new Date(year, month, day, hour, minutes).getTime();
+            var result = new Date(year, month, day, hour, minutes).getTime();
 
-        return result || '';
+            return result || '';
+        }
+
+
     };
 });

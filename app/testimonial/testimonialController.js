@@ -249,6 +249,8 @@ commonApp.controller('TestimonialUserController',function($scope,requestHandler,
             errorMessage(Flash,"Please try again later!")
         });
 
+        return false;
+
     };
 
     // To display the user Testimonial list on load

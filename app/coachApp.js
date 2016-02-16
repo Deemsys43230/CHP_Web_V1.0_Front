@@ -333,6 +333,7 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                             name:'coachApp',
                             files:[
                                 '../../app/payments/coachPaymentController.js',
+                                '../../angular/angular-ui-bootstarp.js',
                                 '../../plugin/popup/style.css',
                                 '../../plugin/popup/jquery.leanModal.min.js'
                             ]
@@ -349,6 +350,7 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                             name:'coachApp',
                             files:[
                                 '../../angular/angular-utils-pagination/dirPagination.js',
+                                '../../angular/angular-ui-bootstarp.js',
                                 '../../app/payments/coachPaymentController.js'
                             ]
                         })

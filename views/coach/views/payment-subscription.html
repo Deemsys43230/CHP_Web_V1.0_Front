@@ -6,7 +6,7 @@
                 <a href="#dashboard" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back to Dashboard</a>
                 <!-- Stat Search -->
                 <form class="form-wrapper pull-right" novalidate>
-                    <input type="text" placeholder="Search here..." value="" ng-change="doGetMySubscribersListByCoach(1);" ng-model="subscriberSearch" required>
+                    <input type="text" placeholder="Search here..." value="" ng-change="doGetMySubscribersListByCoach();" ng-model="subscriberSearch" required>
                     <button type="submit" ><i class="fa fa-search"></i></button>
                 </form>
                 <!-- End Search -->
@@ -35,7 +35,7 @@
                     <tbody >
                     <tr ng-show="subscribedList.length < 0"><td colspan="9" class="text-center">Loading new data!!</td></tr>
                     <tr ng-show="subscribedList.length == 0"><td colspan="9" class="text-center">No Results!!!</td></tr>
-                    <tr dir-paginate="subscriber in subscribedList|itemsPerPage:itemsPerPage" total-items="total_count" current-page="pagination.current">
+                    <tr ng-repeat="subscriber in subscribedList">
                         <td><span class="line-clamp-xs">{{subscriber.subscribedby}}</span></td>
                         <td>{{subscriber.subscribedon}}</td>
                         <td>{{subscriber.purchasedamount}} </td>
@@ -47,12 +47,16 @@
                     </tbody>
                 </table>
                 <!-- Start Pagination -->
-                <dir-pagination-controls
+                <pagination
+                        ng-show="total_count>itemsPerPage"
                         max-size="8"
                         direction-links="true"
                         boundary-links="true"
-                        on-page-change="doGetMySubscribersListByCoach(newPageNumber)">
-                </dir-pagination-controls>
+                        ng-model="currentPage"
+                        total-items="total_count"
+                        items-per-page="itemsPerPage"
+                        ng-change="doGetMySubscribersListByCoach()">
+                </pagination>
                 <!-- End Pagination -->
             </div>
         </div><!-- @end #content -->

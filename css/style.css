@@ -922,6 +922,11 @@ ul.social-list li:last-child a i {
     -o-transition: all 0.3s ease-in-out;
 }
 
+.dropdown-menu table{
+    margin: 3px 7px!important;
+    outline: 0 !important;
+}
+
 
 /*Nav bar for User*/
 
@@ -6443,6 +6448,10 @@ ul.footer-nav li a:hover {
 
 /* Counter */
 
+.pricing .counter-item h5 {
+    font-size:30px;
+}
+
 .counter-item {
   position:relative;
   text-align:center;
@@ -6453,6 +6462,14 @@ ul.footer-nav li a:hover {
   margin-bottom: 0px;
   color: #fff;
   text-transform: uppercase;
+}
+
+.pricing .counter-item h6 {
+    text-align: center;
+    margin-top: 20px;
+    color: #fff;
+    font-size:14px;
+    font-style:italic;
 }
 
 .counter-item i {
@@ -6809,7 +6826,7 @@ ul.footer-nav li a:hover {
 
 .pricing-section{
     /*background-color: rgba(0,0,0,0.7);*/
-    background: url("../images/fit-9.jpg");
+    background: url("../images/fit-11.jpg");
     background-attachment: fixed;
     background-repeat: no-repeat;
 }
@@ -10634,6 +10651,12 @@ background-color: red;
 
 .advice-hover{
     cursor: pointer;
+}
+
+/* placeholder only style */
+input:-ms-input-placeholder{
+    font-style:italic !important;
+    color: #ccc !important;
 }
 
 .search-loading{

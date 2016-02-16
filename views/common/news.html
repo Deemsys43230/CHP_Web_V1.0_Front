@@ -2,7 +2,7 @@
 <div class="page-banner">
     <div class="container">
         <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-8" id="NewsView">
                 <h3 class="classic-title"><span>Latest News</span></h3>
 
                 <div class="latest-posts-classic">
@@ -37,7 +37,7 @@
                                         <div class="post-type"><i class="fa fa-picture-o"></i></div>
                                     </div>
                                     <div class="testimonials-carousel-content">
-                                        <a href="" ng-click="doGetNewsDetailsByUser(usernews.newsid)">{{usernews.title}}</a>
+                                        <a href="" onclick="doGetNewsDetails($(this).attr('data-value'));return false;" data-value="{{usernews.newsid}}">{{usernews.title}}</a>
                                         <p class="changeHeight" ng-bind-html="usernews.description | html"></p>
                                     </div>
                                 </div>
@@ -67,4 +67,9 @@
             }
         });
     });
+
+    doGetNewsDetails=function(id){
+        angular.element(document.getElementById('NewsView')).scope().doGetNewsDetailsByUser(id);
+    }
+
 </script>

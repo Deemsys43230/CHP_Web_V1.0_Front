@@ -41,7 +41,7 @@
                         <tbody >
                         <tr ng-show="subscribersList.purchasedList.length < 0"><td colspan="9" class="text-center">Loading new data!!</td></tr>
                         <tr ng-show="subscribersList.purchasedList.length == 0"><td colspan="9" class="text-center">No Results!!!</td></tr>
-                        <tr dir-paginate="subscriber in subscribersList.purchasedList|itemsPerPage:itemsPerPage" total-items="total_count" current-page="pagination.current">
+                        <tr ng-repeat="subscriber in subscribersList.purchasedList">
                             <td><span class="line-clamp-sm">{{subscriber.enrolledby}}</span></td>
                             <td>{{subscriber.purchasedon}}</td>
                             <td>{{subscriber.purchasedamount}}</td>
@@ -51,12 +51,16 @@
                         </tbody>
                     </table>
                     <!-- Start Pagination -->
-                    <dir-pagination-controls
+                    <pagination
+                            ng-show="total_count>itemsPerPage"
                             max-size="8"
                             direction-links="true"
                             boundary-links="true"
-                            on-page-change="doGetMySubscribersListByCourse(newPageNumber)">
-                    </dir-pagination-controls>
+                            ng-model="currentPage"
+                            total-items="total_count"
+                            items-per-page="itemsPerPage"
+                            ng-change="doGetMySubscribersListByCourse()">
+                    </pagination>
                     <!-- End Pagination -->
                 </div>
             </div>

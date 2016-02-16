@@ -51,6 +51,7 @@
                 </tbody>
             </table>
             <pagination
+                    ng-show="total_count>itemsPerPage"
                     max-size="8"
                     items-per-page="itemsPerPage"
                     total-items="total_count"
