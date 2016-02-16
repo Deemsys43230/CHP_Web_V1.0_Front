@@ -727,10 +727,22 @@ coachApp.controller('CourseController',function($scope,requestHandler,Flash,$rou
         });
     };
 
-    $scope.deleteSection=function(){
+    $scope.deleteSection=function(id){
+
         requestHandler.deleteRequest("coach/deleteCourseSection/",{"sectionid":$scope.deleteSectionId}).then(function(response) {
+
+            if($routeParams.sectionId == $scope.deleteSectionId){
+
+                $location.path("courseView/"+id);
+            }
+            else if($routeParams.sectionId != $scope.deleteSectionId){
+
+                $scope.getCourseDetails();
+            }
+
             successMessage(Flash,"Section Deleted Successfully!");
-            $scope.getCourseDetails();
+
+
         },function(){
             errorMessage(Flash,"Please try again later!")
         });
@@ -761,6 +773,10 @@ coachApp.controller('CourseController',function($scope,requestHandler,Flash,$rou
     };
 
     $scope.sectionDeleteModel=function(id){
+
+        $("html, body").animate({
+            scrollTop: 0
+        }, 600);
 
         $scope.deleteSectionId=id;
 
@@ -881,9 +897,9 @@ coachApp.controller('CourseEditController',function($scope,requestHandler,Flash,
 
         requestHandler.postRequest("coach/getCourseDetail/",{"courseid":$routeParams.id}).then(function(response) {
             $scope.courseDetails = response.data['Course details'];
-
             $scope.courseDetails.promoimage = $scope.courseDetails.promoimage+"?decache="+Math.random();
             $scope.originalCourseDetails = angular.copy($scope.courseDetails);
+            console.log(angular.equals ($scope.originalCourseDetails, $scope.courseDetails));
             $('.image-editor').cropit({
                 imageState: {
                     src: $scope.courseDetails.promoimage+"?decache="+Math.random()
@@ -902,6 +918,9 @@ coachApp.controller('CourseEditController',function($scope,requestHandler,Flash,
 
     //To Enable the update button if changes occur.
     $scope.isCleanCourse = function() {
+        console.log("ori",$scope.originalCourseDetails);
+        console.log("adssd",$scope.courseDetails);
+        console.log(angular.equals ($scope.originalCourseDetails, $scope.courseDetails));
         return angular.equals ($scope.originalCourseDetails, $scope.courseDetails);
 
     };
@@ -972,8 +991,10 @@ coachApp.controller('CourseEditController',function($scope,requestHandler,Flash,
     };
 
     $scope.doUpdateCourse = function(){
+console.log("b4convert",$scope.courseDetails.promoimage);
 
-        $scope.courseDetails.promoimage=requestHandler.convertUrl($scope.courseDetails.promoimage);
+       /* $scope.courseDetails.promoimage=requestHandler.convertUrl($scope.courseDetails.promoimage);*/
+        console.log("afterconvert",$scope.courseDetails.promoimage);
         $scope.convertImgToBase64($scope.courseDetails.promoimage, function(base64Img){
             //Convert Image to base64
             var courseUpdate={};
