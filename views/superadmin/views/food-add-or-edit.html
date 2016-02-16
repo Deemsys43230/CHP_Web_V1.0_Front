@@ -12,10 +12,9 @@
                 <div class="col-md-9 no-padding">
                     <input type="hidden" name="foodid" ng-model="foodDetails.foodid"/>
                     <h5>Food Name :</h5>
-                    <input class="form-control" data-foodid="foodDetails.foodid" name="foodname" maxlength="100"  ng-pattern="/^ *([a-zA-Z]+ ?)+ *$/" ng-model="foodDetails.foodname" foodexists required/>
+                    <input class="form-control" data-foodid="foodDetails.foodid" name="foodname" maxlength="100"  ng-model="foodDetails.foodname" foodexists required/>
                     <span ng-show="foodForm.foodname.$dirty&&foodForm.foodname.$invalid">
                         <span class="error-message" ng-show="foodForm.foodname.$error.required"><span>Required.</span></span>
-                        <span class="error-message" ng-show="foodForm.foodname.$error.pattern"><span>Enter&nbsp;Valid&nbsp;name.</span></span>
                         <span class="error-message" ng-show="foodForm.foodname.$error.foodexists"><span>Food&nbsp;Already&nbsp;Exists</span></span>
                     </span>
                     <br/>
