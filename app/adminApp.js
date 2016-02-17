@@ -1392,7 +1392,7 @@ adminApp.directive("typenameexists", function ($q, $timeout,requestHandler) {
         restrict: "A",
         require: "ngModel",
         scope: {
-            "values" : "="
+            "typeid" : "="
 
         },
         link: function (scope, element, attributes, ngModel) {
