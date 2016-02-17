@@ -26,43 +26,43 @@
                         <table class="table table-bordered table-striped">
                             <tr>
                                 <td class="col-md-4">Receipt ID</td>
-                                <td class="col-md-8">{{outwardDetails.outwardid}}</td>
+                                <td class="col-md-8">{{outwardDetails.outwardid!=undefined ? outwardDetails.outwardid : "-"}}</td>
                             </tr>
                             <tr>
                                 <td>Purchased Amount</td>
-                                <td>{{outwardDetails.amount}}</td>
+                                <td>{{outwardDetails.amount!=undefined ? outwardDetails.amount : "-"}}</td>
                             </tr>
                             <tr>
                                 <td>Receiver Email ID</td>
-                                <td>{{outwardDetails.receiveremailid}}</td>
+                                <td>{{outwardDetails.receiveremailid!=undefined ? outwardDetails.receiveremailid : "-"}}</td>
                             </tr>
                             <tr>
                                 <td>Receiver Account ID</td>
-                                <td>{{outwardDetails.receiveraccountid}}</td>
+                                <td>{{outwardDetails.receiveraccountid!=undefined ? outwardDetails.receiveraccountid : "-"}}</td>
                             </tr>
                             <tr>
                                 <td>Sender Email ID</td>
-                                <td>{{outwardDetails.senderemailid}}</td>
+                                <td>{{outwardDetails.senderemailid!=undefined ? outwardDetails.senderemailid : "-"}}</td>
                             </tr>
                             <tr>
                                 <td>Sender Account ID</td>
-                                <td>{{outwardDetails.senderaccountid}}</td>
+                                <td>{{outwardDetails.senderaccountid!=undefined ? outwardDetails.senderaccountid : "-"}}</td>
                             </tr>
                             <tr>
                                 <td>Transaction ID</td>
-                                <td>{{outwardDetails.transactionid}}</td>
+                                <td>{{outwardDetails.transactionid!=undefined ? outwardDetails.transactionid : "-"}}</td>
                             </tr>
                             <tr>
                                 <td>Transaction Date</td>
-                                <td>{{outwardDetails.transactiondate}}</td>
+                                <td>{{outwardDetails.transactiondate!=undefined ? outwardDetails.transactiondate : "-"}}</td>
                             </tr>
                             <tr>
                                 <td>Transaction Status</td>
-                                <td>{{outwardDetails.transactionstatus}}</td>
+                                <td>{{outwardDetails.transactionstatus!=undefined ? outwardDetails.transactionstatus : "-"}}</td>
                             </tr>
                             <tr>
                                 <td>Currency Code</td>
-                                <td>{{outwardDetails.currencycode}}</td>
+                                <td>{{outwardDetails.currencycode!=undefined ? outwardDetails.currencycode : "-"}}</td>
                             </tr>
                         </table>
                     </div>

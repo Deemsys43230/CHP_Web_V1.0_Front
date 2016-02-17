@@ -46,7 +46,8 @@
                             <td>{{subscriber.purchasedon}}</td>
                             <td>{{subscriber.purchasedamount}}</td>
                             <td>{{subscriber.payamount}}</td>
-                            <td><a href="" ng-click="doViewPaymentDetails(subscriber.outwardid)">{{subscriber.outwardid}}</a></td>
+                            <!--<td><a href="" ng-click="doViewPaymentDetails(subscriber.outwardid)">{{subscriber.outwardid}}</a></td>-->
+                            <td><span ng-show="subscriber.outwardid!=undefined"><a href="" ng-click="doViewPaymentDetails(subscriber.outwardid)">{{subscriber.outwardid}}</a></span><span ng-show="subscriber.outwardid==undefined" class="text-red">Please Contact Admin for Transaction Details</span></td>
                         </tr>
                         </tbody>
                     </table>
