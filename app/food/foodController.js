@@ -124,18 +124,18 @@ adminApp.controller('FoodController',function ($scope,requestHandler,Flash) {
 
     //Get Food List
     $scope.doGetAllFoodItems=function(){
-        var sessionvalue="";
+       /* var sessionvalue="";
         var sessionname="";
         var categoryvalue="";
         var categoryname="";
-        var regionname="";
+        var regionname="";*/
         $scope.loaded=true;
-        requestHandler.getRequest("admin/getFoodList/","").then(function(response){
+        return requestHandler.getRequest("admin/getFoodList/","").then(function(response){
             $scope.foodList=response.data.Food_Data;
             $scope.paginationLoad=true;
             $scope.loaded=false;
             // Tool tip for session in food list
-           $.each($scope.foodList,function(index,value){
+          /* $.each($scope.foodList,function(index,value){
                value.session="";
                 $.each(value.sessionid,function(index,value1){
                     sessionvalue=value1.sessionname;
@@ -146,11 +146,11 @@ adminApp.controller('FoodController',function ($scope,requestHandler,Flash) {
                 value.session = sessionname;
                 sessionname="";
 
-            });
+            });*/
 
 
             // Tool tip for category in food list
-            $.each($scope.foodList,function(index,value){
+            /*$.each($scope.foodList,function(index,value){
                 value.category="";
                 $.each(value.categoryid,function(index,value1){
                     categoryvalue=value1.categoryname;
@@ -162,14 +162,14 @@ adminApp.controller('FoodController',function ($scope,requestHandler,Flash) {
                 categoryname="";
 
             });
-
+*/
             //For search
-            $.each($scope.foodList,function(index,value){
+            /*$.each($scope.foodList,function(index,value){
                 value.region="";
                regionname= value.regionid.regionname;
                 value.region = regionname;
 
-            });
+            });*/
         },function(response){
         });
     };
@@ -186,12 +186,17 @@ adminApp.controller('FoodController',function ($scope,requestHandler,Flash) {
         requestHandler.postRequest("admin/enableordisableFood/",{"foodid":foodId}).then(function(response){
 
             if(response.data.Response_status==1){
-                $scope.doGetAllFoodItems();
-                successMessage(Flash,"Successfully Updated");
+                var foodListPromise=$scope.doGetAllFoodItems();
+                foodListPromise.then(function(){
+                    successMessage(Flash,"Successfully Updated");
+                });
+
             }
             else if(response.data.Response_status==0){
-                $scope.doGetAllFoodItems();
+                var foodListPromise=$scope.doGetAllFoodItems();
+                foodListPromise.then(function(){
                 errorMessage(Flash,"Food used by users");
+                });
             }
 
         },function(response){

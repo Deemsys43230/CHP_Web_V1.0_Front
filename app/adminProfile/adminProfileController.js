@@ -37,7 +37,7 @@ adminApp.controller('AdminProfileController',['$scope','requestHandler','Flash',
                     $.each($scope.countries, function(index,value) {
                         if(value.code == $scope.userProfile.country){
                             $scope.userProfile.countrySelect = value;
-
+                            $scope.availableStates=[];
                             $.each($scope.states, function(index1,value1){
                                 if(value1.countryid == $scope.userProfile.countrySelect.id){
                                     $scope.availableStates.push(value1);
@@ -46,6 +46,10 @@ adminApp.controller('AdminProfileController',['$scope','requestHandler','Flash',
                                     }
                                 }
                             });
+                            if($scope.availableStates.length==0){
+                                $scope.availableStates.push({name:$scope.userProfile.countrySelect.name, code:$scope.userProfile.countrySelect.code, "countryid":$scope.userProfile.countrySelect.id});
+                                $scope.userProfile.stateSelect = {name:$scope.userProfile.countrySelect.name, code:$scope.userProfile.countrySelect.code, "countryid":$scope.userProfile.countrySelect.id};
+                            }
                         }
 
 
@@ -4408,6 +4412,9 @@ adminApp.controller('AdminProfileController',['$scope','requestHandler','Flash',
                     $scope.userProfile.stateSelect = $scope.availableStates[''];
                 }
             });
+            if($scope.availableStates.length==0){
+                $scope.availableStates.push({name:$scope.userProfile.countrySelect.name, code:$scope.userProfile.countrySelect.code, "countryid":$scope.userProfile.countrySelect.id});
+            }
         }
         //Date Picker
         $scope.prevent=function(){

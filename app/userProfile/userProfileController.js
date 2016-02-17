@@ -27,7 +27,7 @@ userApp.controller('UserProfileController',['$scope','requestHandler','Flash',fu
                 $.each($scope.countries, function(index,value) {
                     if(value.code == $scope.userProfile.country){
                         $scope.userProfile.countrySelect = value;
-
+                        $scope.availableStates=[];
                         $.each($scope.states, function(index1,value1){
                             if(value1.countryid == $scope.userProfile.countrySelect.id){
                                 $scope.availableStates.push(value1);
@@ -36,6 +36,10 @@ userApp.controller('UserProfileController',['$scope','requestHandler','Flash',fu
                                 }
                             }
                         });
+                        if($scope.availableStates.length==0){
+                            $scope.availableStates.push({name:$scope.userProfile.countrySelect.name, code:$scope.userProfile.countrySelect.code, "countryid":$scope.userProfile.countrySelect.id});
+                            $scope.userProfile.stateSelect = {name:$scope.userProfile.countrySelect.name, code:$scope.userProfile.countrySelect.code, "countryid":$scope.userProfile.countrySelect.id};
+                        }
                     }
 
 
@@ -109,7 +113,7 @@ userApp.controller('UserProfileController',['$scope','requestHandler','Flash',fu
         $scope.userProfile.state = $scope.userProfile.stateSelect.code;
 
         requestHandler.putRequest("updateProfile/",$scope.userProfile).then(function(){
-            alert("opko");
+
             $scope.doGetProfile();
             successMessage(Flash,"Successfully Updated");
         });
@@ -4416,6 +4420,9 @@ userApp.controller('UserProfileController',['$scope','requestHandler','Flash',fu
                     $scope.userProfile.stateSelect = $scope.availableStates[''];
                 }
             });
+            if($scope.availableStates.length==0){
+                $scope.availableStates.push({name:$scope.userProfile.countrySelect.name, code:$scope.userProfile.countrySelect.code, "countryid":$scope.userProfile.countrySelect.id});
+            }
         }        
     //Date Picker
     $scope.prevent=function(){
