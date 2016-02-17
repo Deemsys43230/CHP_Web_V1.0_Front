@@ -4557,12 +4557,12 @@ userApp.controller('UserProfileController',['$scope','requestHandler','Flash',fu
     };
 
 
-}]).constant('datepickerPopupConfig', {
+}]).constant('uibdatepickerPopupConfig', {
     datepickerPopup: "dd/MM/yyyy",
     closeOnDateSelection: true,
-    appendToBody: false,
+    appendToBody: true,
     showButtonBar: false
-}).constant('datepickerConfig', {
+}).constant('uibDatepickerConfig', {
     formatDay: 'dd',
     formatMonth: 'MMMM',
     formatYear: 'yyyy',

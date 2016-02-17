@@ -97,7 +97,7 @@ userApp.controller('GoalController',function($scope,requestHandler,Flash,$route,
 
     $scope.doDeleteGroup=function(id){
          requestHandler.deleteRequest("user/deleteGoal/",{"goalid" : id}).then(function(response){
-             successMessage(Flash,"Successfully Updated!");
+             successMessage(Flash,"Goal Successfully Deleted!");
              $scope.doGetMyGoalList();
          },function(){
              errorMessage(Flash,"Please try again later!");

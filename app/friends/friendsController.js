@@ -79,7 +79,7 @@ userApp.controller('FriendsController',function($scope,requestHandler,Flash,Frie
         var denyFriendsPromise = FriendsService.doDenyFriends(id);
         denyFriendsPromise.then(function(result){
             if(result.data.Response_status ==1){
-                successMessage(Flash,"Request&nbsp;Rejected");
+                successMessage(Flash,"Request&nbsp;Cancelled");
                 $scope.initialLoad();
             }
             else if(result.data.Response_status == 0){
