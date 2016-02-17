@@ -57,7 +57,10 @@ userApp.controller('UserProfileController',['$scope','requestHandler','Flash',fu
             //Convert Integer to String
             if($scope.userProfile.gender)
             $scope.userProfile.gender=$scope.userProfile.gender.toString();
-            $scope.userProfile.zipcode=$scope.userProfile.zipcode.toString();
+            if($scope.userProfile.zipcode!=null){
+                $scope.userProfile.zipcode=$scope.userProfile.zipcode.toString();
+            }
+
 
             $scope.selectedDate = $scope.userProfile.dob;
 
