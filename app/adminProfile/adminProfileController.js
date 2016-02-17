@@ -103,18 +103,14 @@ adminApp.controller('AdminProfileController',['$scope','requestHandler','Flash',
         };
 
         $scope.doUpdateProfile= function () {
-
-
-                delete $scope.userProfile.imageurl;
+                 delete $scope.userProfile.imageurl;
+                delete $scope.userProfile.createdon;
                 $scope.userProfile.country = $scope.userProfile.countrySelect.code;
                 $scope.userProfile.state = $scope.userProfile.stateSelect.code;
 
                 requestHandler.putRequest("updateProfile/",$scope.userProfile).then(function(){
                     $scope.doGetProfile();
                     successMessage(Flash,"Successfully Updated");
-                    //Copy Orginal
-                    // $scope.orginalUserProfile=angular.copy($scope.userProfile);
-
             });
         };
 

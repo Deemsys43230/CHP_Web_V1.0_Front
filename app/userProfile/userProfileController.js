@@ -109,6 +109,7 @@ userApp.controller('UserProfileController',['$scope','requestHandler','Flash',fu
 
     $scope.doUpdateProfile= function () {
         delete $scope.userProfile.imageurl;
+        delete $scope.userProfile.createdon;
         $scope.userProfile.country = $scope.userProfile.countrySelect.code;
         $scope.userProfile.state = $scope.userProfile.stateSelect.code;
 
