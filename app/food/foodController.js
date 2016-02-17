@@ -184,13 +184,16 @@ adminApp.controller('FoodController',function ($scope,requestHandler,Flash) {
         }
 
         requestHandler.postRequest("admin/enableordisableFood/",{"foodid":foodId}).then(function(response){
+            $scope.doGetAllFoodItems();
             if(response.data.Response_status==1){
+
                 successMessage(Flash,"Successfully Updated");
             }
             else if(response.data.Response_status==0){
+
                 errorMessage(Flash,"Food used by users");
             }
-            $scope.doGetAllFoodItems();
+
         },function(response){
             errorMessage(Flash,"Please Try Again Later");
         });

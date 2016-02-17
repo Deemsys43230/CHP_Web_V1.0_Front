@@ -32,13 +32,15 @@
                             <span class="error-message" ng-show="exerciseForm.tags.$error.uiSelectRequired"><span>Required.</span></span>
                         </span>
                         <br/>
-                        <h5>Exercise Type : <b class="text-red small-font">(Required)</b></h5>
-                        <ui-select ng-model="exerciseDetail.type" theme="select2" ng-disabled="disabled" class="form-control">
+                        <h5>Exercise Type : <span ng-show="exerciseForm.type.$invalid"> <b class="text-red small-font">(Required)</b> </span></h5>
+                        <ui-select ng-model="exerciseDetail.type" theme="select2" ng-disabled="disabled" name="type" class="form-control" required>
                             <ui-select-match placeholder="Type and Select Exercise types">{{$select.selected.typename}}</ui-select-match>
                             <ui-select-choices repeat="type in typeListForDropDown | propsFilter: {typename: $select.search}">
                                 {{type.typename}}
                             </ui-select-choices>
                         </ui-select>
+
+
                         <br/>
                         <h5>MET :</h5>
                         <input type="text" class="form-control"  name="met" ng-model="exerciseDetail.met" maxlength="7" required validate-Float/>
