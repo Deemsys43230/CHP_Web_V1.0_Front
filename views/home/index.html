@@ -283,7 +283,7 @@
         <div class="user_register1">
             <form name="registerForm2" novalidate>
                 <p>Security Question</p>
-                <select  ng-model="userForm.secretquestion" name="secretquestion"  ng-required="userForm.secretanswer">
+                <select  ng-model="userForm.secretquestion" name="secretquestion"  required>
                     <option value="">--Select Security Question--</option>
                     <option value="1">What was the name of your first pet?</option>
                     <option value="2">What is the name of your best friend?</option>
@@ -296,7 +296,7 @@
                     <span class="error-message" ng-show="registerForm2.secretquestion.$error.required"><span>Required.</span></span>
                 </span>
                 <p>Answer</p>
-                <input type="text" name="secretanswer" ng-model="userForm.secretanswer" maxlength="150" ng-required="userForm.secretquestion"/>
+                <input type="text" name="secretanswer" ng-model="userForm.secretanswer" maxlength="150" required/>
                 <span ng-show="registerForm2.secretanswer.$invalid && !registerForm2.secretanswer.$pristine">
                     <span class="error-message" ng-show="registerForm2.secretanswer.$error.required"><span>Required.</span></span>
                 </span>

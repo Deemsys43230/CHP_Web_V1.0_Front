@@ -20,21 +20,25 @@ userApp.controller('UserProfileController',['$scope','requestHandler','Flash',fu
                 $scope.userProfile.preferfood = "1";
             }
 
+
             if($scope.userProfile.isProfileUpdated == 1){
+
 
                 $.each($scope.countries, function(index,value) {
                     if(value.code == $scope.userProfile.country){
-                        $scope.userProfile.country = value;
+                        $scope.userProfile.countrySelect = value;
+
+                        $.each($scope.states, function(index1,value1){
+                            if(value1.countryid == $scope.userProfile.countrySelect.id){
+                                $scope.availableStates.push(value1);
+                                if(value1.code == $scope.userProfile.state){
+                                    $scope.userProfile.stateSelect = value1;
+                                }
+                            }
+                        });
                     }
 
-                    $.each($scope.states, function(index1,value1){
-                        if(value1.countryid == $scope.userProfile.country.id){
-                            $scope.availableStates.push(value1);
-                            if(value1.code == $scope.userProfile.state){
-                                $scope.userProfile.state = value1;
-                            }
-                        }
-                    });
+
                 });
             }
 
@@ -101,10 +105,11 @@ userApp.controller('UserProfileController',['$scope','requestHandler','Flash',fu
 
     $scope.doUpdateProfile= function () {
         delete $scope.userProfile.imageurl;
-        $scope.userProfile.country = $scope.userProfile.country.code;
-        $scope.userProfile.state = $scope.userProfile.state.code;
+        $scope.userProfile.country = $scope.userProfile.countrySelect.code;
+        $scope.userProfile.state = $scope.userProfile.stateSelect.code;
 
         requestHandler.putRequest("updateProfile/",$scope.userProfile).then(function(){
+            alert("opko");
             $scope.doGetProfile();
             successMessage(Flash,"Successfully Updated");
         });
@@ -4406,9 +4411,9 @@ userApp.controller('UserProfileController',['$scope','requestHandler','Flash',fu
             //alert("hi");
             $scope.availableStates = [];
             $.each($scope.states, function(index,value){
-                if(value.countryid == $scope.userProfile.country.id){
+                if(value.countryid == $scope.userProfile.countrySelect.id){
                     $scope.availableStates.push(value);
-                    $scope.userProfile.state = $scope.availableStates[''];
+                    $scope.userProfile.stateSelect = $scope.availableStates[''];
                 }
             });
         }        

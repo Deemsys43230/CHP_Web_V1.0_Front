@@ -48,7 +48,7 @@
                         <h5>Country :</h5>
                     </div>
                     <div class="col-md-8"><!--{{userProfile.country}}-->
-                        <select class="full-width main margin-bottom-1" name="country"  ng-model="userProfile.country" ng-options="country.name for country in countries track by country.code" ng-init="addCountry()" ng-change="updateCountry()" required>
+                        <select class="full-width main margin-bottom-1" name="country"  ng-model="userProfile.countrySelect" ng-options="country.name for country in countries track by country.code" ng-init="addCountry()" ng-change="updateCountry()" required>
                             <option value="">-- Select a Country --</option>
                         </select>
                         <!--<input class="profile_input" name="country" ng-model="userProfile.country" maxlength="20" required/>-->
@@ -87,7 +87,7 @@
                         <h5>State :</h5>
                     </div>
                     <div class="col-md-8"><!--{{userProfile.state}}-->
-                        <select class="full-width main margin-bottom-1" name="state" ng-model="userProfile.state" ng-options="state.name for state in availableStates track by state.code" required>
+                        <select class="full-width main margin-bottom-1" name="state" ng-model="userProfile.stateSelect" ng-options="state.name for state in availableStates track by state.code" required>
                             <option value="">-- Select a State --</option>
                         </select>
                         <!--<input class="profile_input" name="state" ng-model="userProfile.state" maxlength="20" required/>-->

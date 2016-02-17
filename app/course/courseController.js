@@ -991,12 +991,7 @@ coachApp.controller('CourseEditController',function($scope,requestHandler,Flash,
     };
 
     $scope.doUpdateCourse = function(){
-console.log("b4convert",$scope.courseDetails.promoimage);
 
-       /* $scope.courseDetails.promoimage=requestHandler.convertUrl($scope.courseDetails.promoimage);*/
-        console.log("afterconvert",$scope.courseDetails.promoimage);
-        $scope.convertImgToBase64($scope.courseDetails.promoimage, function(base64Img){
-            //Convert Image to base64
             var courseUpdate={};
             courseUpdate.coursename = $scope.courseDetails.coursename;
             courseUpdate.coursesubtitle = $scope.courseDetails.coursesubtitle;
@@ -1004,7 +999,7 @@ console.log("b4convert",$scope.courseDetails.promoimage);
             courseUpdate.price = $scope.courseDetails.price;
             courseUpdate.categoryid = $scope.courseDetails.categoryid;
             courseUpdate.courseid = $scope.courseDetails.courseid;
-            courseUpdate.promoimage = base64Img;
+           // courseUpdate.promoimage = base64Img;
 
             requestHandler.putRequest("coach/updateCourse/",courseUpdate).then(function(response) {
                 $location.path("courseView/"+response.data.Course.courseid);
@@ -1012,7 +1007,7 @@ console.log("b4convert",$scope.courseDetails.promoimage);
             },function(){
                 errorMessage(Flash,"Please try again later!")
             });
-        });
+
 
     };
 
