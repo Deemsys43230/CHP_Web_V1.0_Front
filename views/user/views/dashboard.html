@@ -27,23 +27,100 @@
         background-color: #f8ba01;
     }
 
+    .custom-popup-wrapper {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        z-index: 1000;
+        display: none;
+        background-color: #fff;
+        padding:5px;
+        border: 1px solid #ccc;
+        border: 1px solid rgba(0, 0, 0, .15);
+        border-radius: 4px;
+        -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
+    }
+
+    .custom-popup-wrapper > .dropdown-menu {
+        position: static;
+        float: none;
+        width: 100%;
+        padding:0;
+        display: block;
+        min-width: 160px;
+        max-height: 300px;
+        overflow-y: scroll;
+        background-color: transparent;
+        border: none;
+        border-radius: 0;
+        box-shadow: none;
+    }
+
+    .custom-popup-wrapper > .dropdown-menu >li{
+        padding-right: 0;
+    }
+
+    .custom-popup-wrapper > .dropdown-menu >li>a{
+        border-bottom: 1px solid #f5f5f5;
+        width: 100%;
+        padding:7px 10px;
+        font-size: 15px;
+    }
+
+    .custom-popup-wrapper > .dropdown-menu >li>a span.wrap{
+        display: inline-block;
+        width: 85%;
+        margin-top:0;
+        white-space: pre-wrap !important;
+    }
+
+    .custom-popup-wrapper > .dropdown-menu >li>a>img{
+        display: inline-block;
+        vertical-align: top;
+        border: 2px solid #c0c0c0;
+    }
+
+    .custom-popup-wrapper > .dropdown-menu >li>a>span{
+        display: inline-block;
+        vertical-align: top;
+        margin-top:2px;
+    }
+
+
 </style>
 
 <!--Food Template-->
 <script type="text/ng-template" id="foodTemplate.html">
   <a>
       <img class="img-circle" ng-src="{{match.model.foodImagePath}}" width="35">&nbsp;
-      <span bind-html-unsafe="match.label"></span>&nbsp;
       <span ng-show="match.model.issuitable==1" class="green">&nbsp;</span>
       <span ng-show="match.model.issuitable==0" class="red">&nbsp;</span>
+      <span class="wrap" ng-bind-html="match.label | uibTypeaheadHighlight:query"></span>&nbsp;
   </a>
+</script>
+
+<script type="text/ng-template" id="customPopupTemplate.html">
+    <div class="custom-popup-wrapper"
+         ng-style="{top: position().top+'px', left: position().left+'px'}"
+         style="display: block;"
+         ng-show="isOpen() && !moveInProgress"
+         aria-hidden="{{!isOpen()}}">
+        <ul class="dropdown-menu" role="listbox" drop-down-height ng-nicescroll nice-option="{cursorcolor: '#777',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#f1f1f1'}">
+            <li ng-repeat="match in matches track by $index" ng-class="{active: isActive($index) }"
+                ng-mouseenter="selectActive($index)" should-focus="isActive($index)" ng-click="selectMatch($index)" role="option" id="{{::match.id}}">
+                <div uib-typeahead-match index="$index" match="match" query="query" template-url="templateUrl"></div>
+            </li>
+        </ul>
+    </div>
 </script>
 
 <!--Exercise Template-->
 <script type="text/ng-template" id="exerciseTemplate.html">
   <a>       
       <img class="img-circle" ng-src="{{match.model.imagepath}}50x50.jpg" width="35">&nbsp;
-      <span bind-html-unsafe="match.label"></span>
+      <span ng-bind-html="match.label | uibTypeaheadHighlight:query"></span>
   </a>
 </script>
 
@@ -51,6 +128,7 @@
 
     <div id="w" class="clearfix">
         <ul id="sidemenu">
+
             <li class="daily_update" ng-click="otherThanHistory()">
                 <a href="#daily_update" class="open"><i class="fa fa-child fa-4x"></i><span>Daily Updates</span>
                     <br/>
@@ -168,18 +246,18 @@
                                         <div class="suggest_content">
                                             <div class="suggest_option">
                                                 <h6 class="margin-bottom-13">Frequently Used</h6>
-                                                <span ng-repeat="frequentfood in frequentFoodList" ng-click="frequentFood(frequentfood.foodid)" class="wrap">{{frequentfood.foodname}}</span>
+                                                <span ng-repeat="frequentfood in frequentFoodList" ng-click="frequentFood(frequentfood.foodid)" class="wrap-all">{{frequentfood.foodname}}</span>
                                             </div>
                                         </div>
                                     </div>
 
                                     <div class="content-1">
-                                        <input class="profile_input" type="text" ng-model="selectedFood" placeholder="Search Food" typeahead="food as food.foodname for food in inputChanged($viewValue)" typeahead-template-url="foodTemplate.html" typeahead-on-select="foodSelected()" typeahead-class="form-control">
+                                        <input class="profile_input" type="text" ng-model="selectedFood" placeholder="Search Food" uib-typeahead="food as food.foodname for food in inputChanged($viewValue)" typeahead-popup-template-url="customPopupTemplate.html" typeahead-template-url="foodTemplate.html" typeahead-on-select="foodSelected()" typeahead-class="form-control">
                                     </div>
                                     <div class="search-loading" ng-show="loadingFoods"><i class="fa fa-spinner fa-pulse"></i>&nbsp;&nbsp;Searching Foods...</div>
                                     <div class="food_scrollbar" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#eee'}" >
                                         <div ng-if="loaded">
-                                            <div class="loader-style-dashboard">
+                                            <div class="loader-style-dashboard override">
                                                 <br/><br/><br/><br/><br/><br/>
                                                 <div class="loader"></div>
                                             </div>
@@ -190,9 +268,9 @@
                                                     <div class="col-md-2 no-padding"><img ng-src="{{foodDiaryData.foodImagePath+'50x50.jpg'}}"></div>
                                                     <div class="col-md-10 no-padding">
                                                         <a href="" class="pull-right food_close" title="Delete Food" ng-click="doDeleteUserFood(foodDiaryData.userfoodid)">x</a>
-                                                        <div class="food_name">{{foodDiaryData.foodname}}&nbsp;
+                                                        <div class="food_name">
                                                             <span ng-show="foodDiaryData.issuitable==1" class="green">&nbsp;</span>
-                                                            <span ng-show="foodDiaryData.issuitable==0" class="red">&nbsp;</span>
+                                                            <span ng-show="foodDiaryData.issuitable==0" class="red">&nbsp;</span>&nbsp;{{foodDiaryData.foodname}}
                                                         </div>
                                                         <div class="margin-top-10">
                                                             <span class="pull-right text-green text-bold"><strong><i class="fa fa-angle-up"></i>&nbsp;{{foodDiaryData.measureid.calories}}  calories</strong></span>
@@ -226,17 +304,16 @@
                                 </div>
                             </div>
                             <div class="content-1">
-                                 <input class="profile_input" type="text" ng-model="selectedExercise" placeholder="Search Exercise" typeahead="exercise as exercise.exercisename for exercise in inputChangedExercise($viewValue)" typeahead-template-url="exerciseTemplate.html" typeahead-on-select="exerciseSelected()" typeahead-class="form-control">
+                                 <input class="profile_input" type="text" ng-model="selectedExercise" placeholder="Search Exercise" uib-typeahead="exercise as exercise.exercisename for exercise in inputChangedExercise($viewValue)" typeahead-popup-template-url="customPopupTemplate.html" typeahead-template-url="exerciseTemplate.html" typeahead-on-select="exerciseSelected()" typeahead-class="form-control">
                             </div>
                             <div class="search-loading" ng-show="loadingExercise"><i class="fa fa-spinner fa-pulse"></i>&nbsp;&nbsp;Searching Exercise...</div>
                             <div class="food_scrollbar exercise-height" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#eee'}" >
                                 <div ng-if="loaded">
-                                    <div class="loader-style-dashboard">
+                                    <div class="loader-style-dashboard override">
                                         <br/><br/><br/><br/><br/><br/>
                                         <div class="loader"></div>
                                     </div>
                                 </div>
-                                {{test}}
                                 <div id="scrollheightexercise" ng-if="showExercise==1" height-exercise-bind>
                                     <ul class="exercise">
                                         <li class="col-md-12" ng-repeat="exerciseDiaryData in userExerciseDiaryDataAll | orderBy:'$index':true">
@@ -350,17 +427,19 @@
                     </div>
                     <!-- End Tab Panels -->
                 </div>
-                <div class="col-md-2 pull-right margin-top-3 no-padding margin-right-20">
-                    <div class="input-group ui-datepicker ">
+                <div id="ui-datepicker" class="col-md-2 pull-right margin-top-3 no-padding margin-right-20">
+                    <div class="input-group ui-datepicker">
                         <input ng-click="open($event)" ng-change="initialLoadFoodAndExercise()" type="text"
                                ng-keypress="prevent()"
                                class="profile_input override"
                                id = "popup"
-                               datepicker-popup="{{format}}"
+                               uib-datepicker-popup="{{format}}"
                                ng-model="selectedDate"
                                is-open="opened"
                                min="minDate"
                                max="maxDate"
+                               data-show-weeks="false"
+                               show-button-bar="false"
                                datepicker-options="dateOptions"
                                date-disabled="disabled(date, mode)"
                                ng-required="true"
@@ -616,18 +695,23 @@
             <!-- Register Form -->
             <div class="user_register">
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-12">
+                        <div class="col-md-1 no-padding">
+                            <img class="img-circle border-image" ng-src="{{userSelectedFoodDetails.foodImagePath+'50x50.jpg'}}">
+                        </div>
+                        <div class="col-md-11">
+                            <div class="text-italic">Food Name:</div>
+                            <h5 class="wrap">
+                                <span><span ng-show="userSelectedFoodDetails.issuitable==1" class="green">&nbsp;</span>
+                                <span ng-show="userSelectedFoodDetails.issuitable==0" class="red">&nbsp;</span>&nbsp;{{userSelectedFoodDetails.foodname}}</span>
+                            </h5>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <hr/>
+                    </div>
+                    <div class="col-md-7">
                         <form name="FoodAddForm" novalidate>
-                        <div class="col-md-3 no-padding">
-                            <img class="img-circle" ng-src="{{userSelectedFoodDetails.foodImagePath+'50x50.jpg'}}">
-                        </div>
-                        <div class="col-md-9">
-                        <h5>Food Name:</h5>
-                        <span>{{userSelectedFoodDetails.foodname}}&nbsp;
-                        <span ng-show="userSelectedFoodDetails.issuitable==1" class="green">&nbsp;</span> 
-                        <span ng-show="userSelectedFoodDetails.issuitable==0" class="red">&nbsp;</span> 
-                        </span>
-                        </div>
                         <div class="col-md-12 no-padding">
                         <h5 class="margin-top-10">Select Measure:</h5>
                             <select name="measure" ng-model="userFood.measure" ng-options="measure.measurename for measure in userSelectedFoodDetails.measureid track by measure.measureid" ng-change="doCalculateCalories()" required>
@@ -646,7 +730,7 @@
                         </form>
                     </div>
 
-                    <div class="col-md-6 text-center">
+                    <div class="col-md-5 text-center">
                         <h5>Calories Intake</h5>
                         <div class="circle-wrapper">
                             <div class="circle-progress ng-cloak" ng-style="getStyle()">{{current}}<br/><small>Calories</small></div>
@@ -932,11 +1016,11 @@
                 days: 31
             },
             ranges:{
-                'Last Week': [moment().subtract('days', 6), moment()],
-                'Last 2 Weeks': [moment().subtract('days', 13), moment()],
-                'Last 3 Weeks': [moment().subtract('days', 20), moment()],
-                'This Month': [moment().subtract('month', 0).startOf('month'), moment()],
-                'Last Month': [moment().subtract('month', 1).startOf('month'), moment().subtract('month', 1).endOf('month')]
+                'Last Week': [moment().subtract(6,'days'), moment()],
+                'Last 2 Weeks': [moment().subtract(13,'days'), moment()],
+                'Last 3 Weeks': [moment().subtract(20,'days'), moment()],
+                'This Month': [moment().subtract(0,'month').startOf('month'), moment()],
+                'Last Month': [moment().subtract(1,'month').startOf('month'), moment().subtract(1,'month').endOf('month')]
             }
         };
 

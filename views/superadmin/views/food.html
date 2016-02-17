@@ -33,18 +33,18 @@
                 <tr class="warning sort-icon">
                     <!--<th class="col-md-1" ng-click="sort('foodid')">FoodId&nbsp;<span ng-class="{'fa fa-sort-asc':reverse,'fa fa-sort-desc':!reverse}"></span></th>
                     <th class="col-md-2" ng-click="sort('foodname')">Food &nbsp;&nbsp; <span  ng-class="{'fa fa-sort-asc':reverse,'fa fa-sort-desc':!reverse}"></span> </th>-->
-                    <th class="title-col">Food ID&nbsp;<i ng-click="sortFoodId()" class="{{sortfoodidicon}}"></i></th>
-                    <th class="descripton-col">Food Name&nbsp;&nbsp;<i ng-click="sortFoodName()" class="{{sortfoodnameicon}}"></i></th>
+                    <th class="col-md-2">Food ID&nbsp;<i ng-click="sortFoodId()" class="{{sortfoodidicon}}"></i></th>
+                    <th class="col-md-7">Food Name&nbsp;&nbsp;<i ng-click="sortFoodName()" class="{{sortfoodnameicon}}"></i></th>
                     <!--<th class="descripton-col">Categories&nbsp;&nbsp;</th>
                     <th class="descripton-col">Sessions&nbsp;&nbsp;</th>
                     <th class="title-col">Region&nbsp;&nbsp;</th>-->
-                    <th class="descripton-col">Options</th>
+                    <th class="col-md-3">Options</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr dir-paginate="food in foodfilter=(foodList | startsWithLetterFood: foodsearch |orderBy:sortKey:reverse | itemsPerPage: 10)" ng-show="foodList.length!=0">
                     <td>{{food.foodid}}</td>
-                    <td title="{{food.foodname}}"><span class="line-clamp-xxs">{{food.foodname}}</span></td>
+                    <td title="{{food.foodname}}"><span class="line-clamp-lg">{{food.foodname}}</span></td>
                     <!--<td><span class="line-clamp-xxs">
                             <span  ng-repeat="category in food.categoryid" title="{{food.category}}">
                                 <span>{{category.categoryname}}{{$last ? '' : ','}}</span>

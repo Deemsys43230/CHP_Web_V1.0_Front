@@ -609,6 +609,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         $scope.graph = {
             status: 'goal'
         };
+        setTimeout("viewWeightGraph();", 10);
     };
 
     $scope.cancelUpdate=function(){
@@ -1460,12 +1461,12 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
             $scope.goGetDailyIntakeGraph($scope.selectedDate.format("dd/mm/yyyy"));
         }
         $scope.doGetWeightGoal();
-        $scope.doGetCoachAdvices();
         $scope.doGetWeightLog(selectedDate);
         $scope.goGetSessionGraph($scope.storedSessionId);
     };
 
     $scope.initialLoadFoodAndExercise();
+    $scope.doGetCoachAdvices();
 
     //circle round
     $scope.offset =         0;
@@ -1640,12 +1641,12 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         return dateFormat(this, mask, utc);
     };
 
-}).constant('datepickerPopupConfig', {
+}).constant('uibdatepickerPopupConfig', {
     datepickerPopup: "dd/MM/yyyy",
     closeOnDateSelection: true,
-    appendToBody: false,
+    appendToBody: true,
     showButtonBar: false
-}).constant('datepickerConfig', {
+}).constant('uibDatepickerConfig', {
     formatDay: 'dd',
     formatMonth: 'MMMM',
     formatYear: 'yyyy',
@@ -1845,9 +1846,7 @@ userApp.directive('heightExerciseBind', function() {
             $scope.$watch(function() {
                 setTimeout(function(){
                     var selectclass = $('.exercise');
-                    console.log('exercise '+parseInt($('.exercise-height').css('height')));
                     if ($element.height()>parseInt($('.exercise-height').css('height'))) {
-                        console.log("yes");
                         selectclass.css({"paddingRight":"15px"});
                     } else {
                         selectclass.css({"paddingRight":"3px"});
@@ -1858,4 +1857,33 @@ userApp.directive('heightExerciseBind', function() {
     }
 });
 
+userApp.directive('shouldFocus', function(){
+    return {
+        restrict: 'A',
+        link: function(scope,element,attrs){
+            scope.$watch(attrs.shouldFocus,function(newVal,oldVal){
+                if (newVal) {
+                    element[0].scrollIntoView(false);
+                }
+            });
+        }
+    };
+});
+
+userApp.directive('dropDownHeight', function(){
+    return {
+        link: function($scope, $element) {
+            $scope.$watch(function() {
+                setTimeout(function(){
+                    var selectclass = $('.custom-popup-wrapper .dropdown-menu li');
+                    if ($element.height()==parseInt($('.custom-popup-wrapper .dropdown-menu').css('max-height'))) {
+                        selectclass.css({"paddingRight":"10px"});
+                    } else {
+                        selectclass.css({"paddingRight":"0"});
+                    }
+                }, 0);
+            });
+        }
+    }
+});
 

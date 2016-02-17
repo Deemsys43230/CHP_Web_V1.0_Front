@@ -17,7 +17,7 @@
         <input type="text" id="set-date" class="profile_input" block>
     </div>
     <div class="col-md-5 margin-top-15">Target Weight<small>(Kgs)</small><span class="pull-right">:</span></div>
-    <form name="setGoalForm">
+    <form name="setGoalForm" novalidate>
         <div class="col-md-7 margin-top-10">
             <input id="target" type="text"  name="targetweight" ng-model="weight" class="profile_input" required maxlength="5" validate-Float1>
             <span ng-show="setGoalForm.targetweight.$dirty&&setGoalForm.targetweight.$invalid">
@@ -28,7 +28,7 @@
 
         <div class="col-md-12 margin-top-20 text-center">
             <span ng-show="updateGoal==0"><a class="btn-dis weight_button" ng-disabled="setGoalForm.$invalid" ng-click="setGoal()">Set Goal</a></span>
-            <span ng-show="updateGoal==1"><a class="btn-dis target_button green_button" ng-click="doUpdateGoal()">Update Goal</a></span>
+            <span ng-show="updateGoal==1"><a class="btn-dis target_button green_button" ng-disabled="setGoalForm.$invalid" ng-click="doUpdateGoal()">Update Goal</a></span>
             <span ng-show="updateGoal==1"><a class="btn-dis target_button red_button" ng-click="cancelUpdate()">Cancel</a></span>
         </div>
     </form>

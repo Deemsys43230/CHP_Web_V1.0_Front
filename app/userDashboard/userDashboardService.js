@@ -12,7 +12,7 @@ adminApp.factory("UserDashboardService",function(requestHandler){
         return requestHandler.getRequest("admin/getFoodCategoryByStatus","").then(function(response){
             return response.data.Food_Category;
         },function(response){
-            alert("Not able to pull Food Measure List");
+            console.log("Not able to pull Food Measure List");
         })
     };
     //End Get Food Categories
@@ -22,7 +22,7 @@ adminApp.factory("UserDashboardService",function(requestHandler){
         return requestHandler.postRequest("user/getFoodbyDate/",{"addeddate":date}).then(function (response) {
             return response.data.MyFoodData;
         }, function () {
-            errorMessage(Flash, "Please try again later!")
+            console.log("Please try again later!")
         });
     };
 
@@ -34,7 +34,7 @@ adminApp.factory("UserDashboardService",function(requestHandler){
             });
             return searchResponse;
         }, function () {
-            errorMessage(Flash, "Please try again later!")
+            console.log("Please try again later!")
         });
     };
 
@@ -47,7 +47,7 @@ adminApp.factory("UserDashboardService",function(requestHandler){
             });
             return userSelectedFoodDetails;
         }, function () {
-            errorMessage(Flash, "Please try again later!")
+            console.log("Please try again later!")
         });
     };
 
@@ -56,7 +56,7 @@ adminApp.factory("UserDashboardService",function(requestHandler){
         return requestHandler.postRequest("user/usersaveFoodtoDiary/",userFood).then(function (response) {
             return response;
         }, function () {
-            errorMessage(Flash, "Please try again later!");
+            console.log("Please try again later!");
         });
     };
 
@@ -65,7 +65,7 @@ adminApp.factory("UserDashboardService",function(requestHandler){
         return requestHandler.putRequest("user/editUserFood/",userFood).then(function (response) {
             return response;
         }, function () {
-            errorMessage(Flash, "Please try again later!");
+            console.log("Please try again later!");
         });
     };
 
@@ -75,7 +75,7 @@ adminApp.factory("UserDashboardService",function(requestHandler){
         return requestHandler.postRequest("user/deleteUserFood/",{"userfoodid":userFoodId}).then(function (response) {
             return response;
         }, function () {
-            errorMessage(Flash, "Please try again later!");
+            console.log("Please try again later!");
         });
     };
 
@@ -85,7 +85,7 @@ adminApp.factory("UserDashboardService",function(requestHandler){
         return requestHandler.postRequest("user/getFoodDetails/",{"userfoodid":userFoodId}).then(function (response) {
             return response.data.FoodDetails;
         }, function () {
-            errorMessage(Flash, "Please try again later!");
+            console.log("Please try again later!");
         });
     };
 
@@ -150,7 +150,7 @@ adminApp.factory("UserDashboardService",function(requestHandler){
             var exerciseSearchResponse=response.data.exercisesData;
             return exerciseSearchResponse;
         }, function () {
-            errorMessage(Flash, "Please try again later!")
+            console.log("Please try again later!")
         });
     };
 
@@ -165,7 +165,7 @@ adminApp.factory("UserDashboardService",function(requestHandler){
 
             return userSelectedExerciseDetails;
         }, function () {
-            errorMessage(Flash, "Please try again later!")
+            console.log("Please try again later!")
         });
     };
 
@@ -174,7 +174,7 @@ adminApp.factory("UserDashboardService",function(requestHandler){
         return requestHandler.postRequest("user/getListOfExerciseByDate/",{"date":date}).then(function (response) {
             return response.data.ExerciseData;
         }, function () {
-            errorMessage(Flash, "Please try again later!")
+            console.log("Please try again later!")
         });
     };
 
@@ -183,7 +183,7 @@ adminApp.factory("UserDashboardService",function(requestHandler){
         return requestHandler.postRequest("user/insertUserExercise/",userExercise).then(function (response) {
             return response;
         }, function () {
-            errorMessage(Flash, "Please try again later!");
+            console.log("Please try again later!");
         });
     };
 
@@ -192,7 +192,7 @@ adminApp.factory("UserDashboardService",function(requestHandler){
         return requestHandler.postRequest("user/deleteUserExercise/",{"userexercisemapid":userExerciseId}).then(function (response) {
             return response;
         }, function () {
-            errorMessage(Flash, "Please try again later!");
+            console.log("Please try again later!");
         });
     };
 
@@ -202,7 +202,7 @@ adminApp.factory("UserDashboardService",function(requestHandler){
         return requestHandler.postRequest("user/getSavedExerciseDetailByUUID/",{"userexercisemapid":userExerciseId}).then(function (response) {
             return response.data.ExerciseData;
         }, function () {
-            errorMessage(Flash, "Please try again later!");
+            console.log("Please try again later!");
         });
     };
 
@@ -211,7 +211,7 @@ adminApp.factory("UserDashboardService",function(requestHandler){
         return requestHandler.postRequest("user/updateUserExerciseByUUID/",userExercise).then(function (response) {
             return response;
         }, function () {
-            errorMessage(Flash, "Please try again later!");
+            console.log("Please try again later!");
         });
     };
 
