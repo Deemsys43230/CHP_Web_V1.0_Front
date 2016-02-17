@@ -149,7 +149,6 @@ userApp.controller('UserProfileController',['$scope','requestHandler','Flash',fu
 
         requestHandler.postRequest("uploadProfileImage/",{'imageurl':image}).then(function(response){
             $scope.refreshImage();
-            $scope.doGetProfile();
         },function(response){
             errorMessage(Flash,"Please Try again later!");
         });
