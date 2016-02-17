@@ -67,7 +67,9 @@ adminApp.controller('AdminProfileController',['$scope','requestHandler','Flash',
                 //Convert Integer to String
                 if($scope.userProfile.gender)
                     $scope.userProfile.gender=$scope.userProfile.gender.toString();
+                if($scope.userProfile.zipcode!=null){
                     $scope.userProfile.zipcode=$scope.userProfile.zipcode.toString();
+                }
 
                 $scope.selectedDate = $scope.userProfile.dob;
 
