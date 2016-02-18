@@ -5,6 +5,7 @@ adminApp.controller('ExerciseTypeController',['$scope','requestHandler','Flash',
     $scope.activeClass = {exercisetype:'active'};
     var original ="";
 
+
     $scope.doGetAllExerciseType=function(){
 
         $scope.loaded=true;
@@ -89,6 +90,7 @@ adminApp.controller('ExerciseTypeController',['$scope','requestHandler','Flash',
             $("#lean_overlay").fadeTo(1000);
             $("#exerciseType").fadeIn(600);
             $(".common_model").show();
+            $scope.shouldBeOpen = true;
         });
 
         $scope.loaded=true;
@@ -107,12 +109,14 @@ adminApp.controller('ExerciseTypeController',['$scope','requestHandler','Flash',
             $(".common_model").hide();
             $("#exerciseType").hide();
             $("#lean_overlay").hide();
+            $scope.shouldBeOpen = false;
         });
 
         $("#lean_overlay").click(function(){
             $(".common_model").hide();
             $("#exerciseType").hide();
             $("#lean_overlay").hide();
+            $scope.shouldBeOpen = false;
         });
     };
 
@@ -195,6 +199,7 @@ delete $scope.exerciseType.status;
         $scope.exerciseTypeAddForm.$setPristine();
         $(function(){
             $(".common_model").show();
+            $scope.shouldBeOpen = true;
         });
     };
 

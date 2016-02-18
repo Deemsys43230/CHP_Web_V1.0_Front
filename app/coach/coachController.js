@@ -70,6 +70,7 @@ adminApp.controller('CoachController',function($scope,requestHandler,Flash) {
         $scope.coach.password="";
         $scope.coach.confirm_password="";
         $scope.coachRegisterForm.$setPristine();
+        $scope.shouldBeOpen = true;
 
         if($('.search-list-form').css('display') != 'none'){
             $(".search-list-form").hide();

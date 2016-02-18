@@ -24,18 +24,21 @@ adminApp.controller('FoodMeasureController',function($scope,requestHandler,Flash
             $("#lean_overlay").fadeTo(1000);
             $("#measure").fadeIn(600);
             $(".common_model").show();
+            $scope.shouldBeOpen = true;
         });
 
         $(".modal_close").click(function(){
             $(".common_model").hide();
             $("#measure").hide();
             $("#lean_overlay").hide();
+            $scope.shouldBeOpen = false;
         });
 
         $("#lean_overlay").click(function(){
             $(".common_model").hide();
             $("#measure").hide();
             $("#lean_overlay").hide();
+            $scope.shouldBeOpen = false;
         });
 
     };
@@ -74,6 +77,7 @@ adminApp.controller('FoodMeasureController',function($scope,requestHandler,Flash
             $("#lean_overlay").fadeTo(1000);
             $("#measure").fadeIn(600);
             $(".common_model").show();
+            $scope.shouldBeOpen = true;
         });
 
         $scope.loaded=true;
@@ -90,12 +94,14 @@ adminApp.controller('FoodMeasureController',function($scope,requestHandler,Flash
             $(".common_model").hide();
             $("#measure").hide();
             $("#lean_overlay").hide();
+            $scope.shouldBeOpen = false;
         });
 
         $("#lean_overlay").click(function(){
             $(".common_model").hide();
             $("#measure").hide();
             $("#lean_overlay").hide();
+            $scope.shouldBeOpen = false;
         });
     };
 

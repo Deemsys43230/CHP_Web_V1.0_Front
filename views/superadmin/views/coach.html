@@ -63,7 +63,7 @@
         <div class="user_register">
             <form name="coachRegisterForm" novalidate>
                 <p>Name</p>
-                <input type="text" ng-pattern="/^ *([a-zA-Z]+ ?)+ *$/" ng-model="coach.name" name="coachName" required maxlength="45" />
+                <input type="text" ng-pattern="/^ *([a-zA-Z]+ ?)+ *$/" ng-model="coach.name" name="coachName" required maxlength="45" focus-me="shouldBeOpen"/>
                 <span ng-show="coachRegisterForm.coachName.$dirty&&coachRegisterForm.coachName.$invalid">
                     <span class="error-message" ng-show="coachRegisterForm.coachName.$error.required"><span>Required.</span></span>
                     <span class="error-message" ng-show="coachRegisterForm.coachName.$error.pattern"><span>Enter&nbsp;valid&nbsp;Name.</span></span>
