@@ -848,6 +848,8 @@ ul.social-list li a.login {
     width: 130px;
     height: 33px;
     line-height: 33px;
+    background-color: #fec51b;
+    color: #fff!important;
     text-align: center;
     border-left: 1px solid #f2f2f2;
 }

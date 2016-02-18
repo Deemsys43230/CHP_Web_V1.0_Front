@@ -6,6 +6,7 @@ userApp.controller('FriendsController',function($scope,requestHandler,Flash,Frie
     $scope.viewDetails=0;
     //Initialize search
     $scope.friendsearch="";
+    $scope.activeClass.friends='active';
 
     //My Friends Pagination starts
     $scope.currentPage = 0;
