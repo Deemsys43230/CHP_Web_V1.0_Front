@@ -163,18 +163,21 @@ userApp.controller('GoalController',function($scope,requestHandler,Flash,$route,
             $("#lean_overlay").fadeTo(1000);
             $("#createGoal").fadeIn(600);
             $(".common_model").show();
+            $scope.shouldBeOpen = true;
         });
 
         $(".modal_close").click(function(){
             $(".common_model").hide();
             $("#createGoal").hide();
             $("#lean_overlay").hide();
+            $scope.shouldBeOpen = false;
         });
 
         $("#lean_overlay").click(function(){
             $(".common_model").hide();
             $("#createGoal").hide();
             $("#lean_overlay").hide();
+            $scope.shouldBeOpen = false;
         });
     };
 

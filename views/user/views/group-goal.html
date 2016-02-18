@@ -79,7 +79,7 @@
         <div class="common_model">
             <form name="createGoalForm" novalidate>
                 <p>Goal Title</p>
-                <input type="text" name="title" ng-model="createGoal.title" maxlength="50" required/>
+                <input type="text" name="title" ng-model="createGoal.title" maxlength="50" required focus-me="shouldBeOpen"/>
                 <span ng-show="createGoalForm.title.$dirty&&createGoalForm.title.$invalid && !createGoalForm.title.$pristine">
                     <span class="error-message" ng-show="createGoalForm.title.$error.required"><span>Required.</span></span>
                 </span>
