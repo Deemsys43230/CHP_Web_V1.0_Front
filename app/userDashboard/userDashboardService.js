@@ -29,10 +29,7 @@ adminApp.factory("UserDashboardService",function(requestHandler){
     userDashboardServiceObj.searchFood=function(searchStr,session){
         return requestHandler.postRequest("searchFoodListByUser/",{"foodname":searchStr,"foodsession":session}).then(function (response) {
             var searchResponse=response.data.Food_Data;
-            $.each(searchResponse, function(index,value){
-                value.foodImagePath=value.foodImagePath+"50x50.jpg";
-            });
-            return searchResponse;
+            return searchResponse.slice(0,50);
         }, function () {
             console.log("Please try again later!")
         });
@@ -148,7 +145,7 @@ adminApp.factory("UserDashboardService",function(requestHandler){
     userDashboardServiceObj.searchExercise=function(searchStr){
         return requestHandler.postRequest("user/searchExercisebyUser/",{"exercisename":searchStr}).then(function (response) {
             var exerciseSearchResponse=response.data.exercisesData;
-            return exerciseSearchResponse;
+            return exerciseSearchResponse.slice(0,50);
         }, function () {
             console.log("Please try again later!")
         });

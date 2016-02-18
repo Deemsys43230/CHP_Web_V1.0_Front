@@ -94,7 +94,7 @@
 <!--Food Template-->
 <script type="text/ng-template" id="foodTemplate.html">
   <a>
-      <img class="img-circle" ng-src="{{match.model.foodImagePath}}" width="35">&nbsp;
+      <img class="img-circle" ng-src="{{match.model.foodImagePath}}50x50.jpg" width="35">&nbsp;
       <span ng-show="match.model.issuitable==1" class="green">&nbsp;</span>
       <span ng-show="match.model.issuitable==0" class="red">&nbsp;</span>
       <span class="wrap" ng-bind-html="match.label | uibTypeaheadHighlight:query"></span>&nbsp;
