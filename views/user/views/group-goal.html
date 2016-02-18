@@ -5,7 +5,7 @@
             <div class="col-md-12">
                 <a href="" class="back-button pull-right margin-left-5 modal-createGoal" ng-click="doAddGoalPopup()"><i class="fa fa-plus-circle"></i> Create Goal</a>
                 <div flash-message="2000" class="col-md-4 pull-right no-padding"></div>
-                <h5 class="classic-title"><span><a href="#groupGoal"><i class="fa fa-bullseye"></i>&nbsp;&nbsp;MY GOALS</a></span>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#groupGoalRequest"><i class="fa fa-paper-plane"></i>&nbsp;&nbsp;GOAL REQUEST</a></h5>
+                <h5 class="classic-title"><span><a href="#groupGoal"><i class="fa fa-bullseye"></i>&nbsp;&nbsp;MY GOALS</a></span>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#groupGoalRequest"><i class="fa fa-paper-plane"></i>&nbsp;&nbsp;GOAL REQUEST<b ng-hide="!myRequestGoalList.length" class="text-red text-bold">({{myRequestGoalList.length}})</b></a></h5>
             </div>
             <div ng-if="loaded">
                 <div class="loader-style">

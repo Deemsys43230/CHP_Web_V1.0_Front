@@ -2,8 +2,8 @@ var commonApp = angular.module('commonApp', ['ngRoute','oc.lazyLoad','requestMod
 
 commonApp.controller('CommonController',function($scope,requestHandler,Flash,$routeParams,$sce,$rootScope) {
 
-    $scope.countTo = 10000;
-    $scope.countFrom=5;
+
+    $scope.countFrom = 0;
 
     if($routeParams.session== "logout"){
        /* $rootScope.sessionValue = 1;*/
@@ -50,11 +50,25 @@ commonApp.controller('CommonController',function($scope,requestHandler,Flash,$ro
         });
     };
 
+    $scope.doGetDashboardCount=function(){
+        requestHandler.getRequest("getStatistics/","").then(function(response){
+            $scope.adminCountList=response.data.Stats;
+            $scope.memberCount = $scope.adminCountList.membercount;
+            $scope.exerciseCount = $scope.adminCountList.exercisecount;
+            $scope.foodCount = $scope.adminCountList.foodcount;
+            $scope.courseCount = $scope.adminCountList.publishedcourses;
+
+        });
+    };
+
+
+
 
 
     // To display the user Testimonial list on load
     $scope.doGetNewsByUser();
     $scope.doGetTestimonialsByUser();
+   // $scope.doGetDashboardCount();
 });
 
 

@@ -4,7 +4,7 @@
         <div id="demography-content">
             <div class="col-md-12">
                 <div flash-message="2000" class="col-md-4 pull-right no-padding"></div>
-                <h5 class="classic-title"><a href="#groupGoal"><i class="fa fa-bullseye"></i>&nbsp;&nbsp;MY GOALS</a>&nbsp;&nbsp;|&nbsp;&nbsp;<span><a href="#groupGoalRequest"><i class="fa fa-paper-plane"></i>&nbsp;&nbsp;GOAL REQUEST</a></span></h5>
+                <h5 class="classic-title"><a href="#groupGoal"><i class="fa fa-bullseye"></i>&nbsp;&nbsp;MY GOALS</a>&nbsp;&nbsp;|&nbsp;&nbsp;<span><a href="#groupGoalRequest"><i class="fa fa-paper-plane"></i>&nbsp;&nbsp;GOAL REQUEST<b ng-hide="!myRequestGoalList.length" class="text-red text-bold">({{myRequestGoalList.length}})</b></a></span></h5>
             </div>
             <div ng-if="loaded">
                 <div class="loader-style">
