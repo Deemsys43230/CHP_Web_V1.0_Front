@@ -8,16 +8,17 @@
             <a href="#payments" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back to course list</a>
             <!-- Stat Search -->
             <form class="form-wrapper pull-right" novalidate>
-                <input type="text" placeholder="Search here..." ng-model="courseSearch" ng-change="doGetCourseSubsciberList(1)" required>
+                <input type="text" placeholder="Search here..." ng-model="courseSearch" ng-change="doGetCourseSubsciberList()" required>
                 <button type="submit" ><i class="fa fa-search"></i></button>
             </form>
             <!-- End Search -->
             <h2 class="pull-right text-orange"><b>TOTAL EARN : <small class="text-bold">Admin :</small>&nbsp;<span class="text-red"><b>{{totalEarningsByAdmin}} $</b></span>&nbsp;&nbsp;<small class="text-bold">Coach :</small>&nbsp;<span class="text-red"><b>{{totalEarningsByCoach}} $</b></span></b>&nbsp;&nbsp;</h2>
             <h5 class="classic-title"><span><i class="fa fa-male"></i>&nbsp;&nbsp;COURSE ENROLLMENT - PAYMENTS LIST</span></h5>
-            <div ng-if="loaded">
-                <div class="loader-style">
-                    <br/><br/><br/>
-                    <div class="loader"></div>
+                <div ng-if="loaded">
+                    <div class="loader-style">
+                        <br/><br/><br/>
+                        <div class="loader"></div>
+                    </div>
                 </div>
 
                 <div class="col-md-1 no-padding margin-bottom-10 min-height-70">
@@ -68,11 +69,7 @@
                         ng-model="currentPage"
                         ng-change="doGetCourseSubsciberList()">
                 </pagination>
-
             </div>
-
-
-
         </div>
     </div>
 </div>

@@ -986,7 +986,6 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../js/bootstrap.min.js',
                                 '../../plugin/popup/style.css',
                                 '../../angular/angular-ui-bootstarp.js',
-                                '../../angular/angular-utils-pagination/dirPagination.js',
                                 '../../plugin/popup/jquery.leanModal.min.js',
                                 '../../app/payments/adminPaymentController.js'
                             ]
