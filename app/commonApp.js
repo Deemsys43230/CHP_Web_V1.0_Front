@@ -80,6 +80,12 @@ commonApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
             when('/blog', {
                 templateUrl: '../common/blog.html'
             }).
+            when('/singleBlog1', {
+                templateUrl: '../common/single-blog1.html'
+            }).
+            when('/singleBlog2', {
+                templateUrl: '../common/single-blog2.html'
+            }).
             when('/contact', {
                 templateUrl: '../common/contact.html',
                 resolve: {

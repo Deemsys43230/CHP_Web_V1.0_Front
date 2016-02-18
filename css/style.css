@@ -138,6 +138,18 @@ ul {
     margin: 0;
 }
 
+ul.blog{
+    list-style: default!important;
+    list-style-type: circle;
+    padding: 0 10px 0 30px!important;
+}
+
+ul.inside-blog{
+    list-style: default!important;
+    list-style-type: square;
+    padding: 0 10px 0 30px!important;
+}
+
 a {
     transition: color 0.2s ease-in-out;
     -moz-transition: color 0.2s ease-in-out;

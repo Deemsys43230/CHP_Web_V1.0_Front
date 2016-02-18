@@ -869,10 +869,13 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
     $scope.updateGoalDetails=function(){
         $scope.targetText = 'End Date';
         $window.singlePicker = true;
+        $scope.originalUpdateGoal={
+            endDate:$scope.goalDetails.enddate,
+            weight:$scope.goalDetails.targetweight
+        };
         var startformat = $scope.goalDetails.startdate.slice(6,10)+','+$scope.goalDetails.startdate.slice(3,5)+','+$scope.goalDetails.startdate.slice(0,2);
         var currentformat = selectedDate.slice(6,10)+','+selectedDate.slice(3,5)+','+selectedDate.slice(0,2);
         $window.goalStartDate = $scope.goalDetails.startdate;
-        $window.goalEndDate = $scope.goalDetails.enddate;
         $window.goalEndDate = $scope.goalDetails.enddate;
         $scope.weight = $scope.goalDetails.targetweight;
         if (new Date(startformat).getTime() >= new Date(currentformat).getTime()) {
@@ -884,6 +887,22 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         $scope.goal = {
             status: 'set-goal'
         };
+    };
+
+    $scope.isCleanUpdateGoal=function(){
+        var endDate = document.getElementById("end").value;
+        if(endDate==""){
+            endDate = $scope.goalDetails.enddate;
+        }
+        var newUpdateGoal={
+            endDate:endDate,
+            weight:parseFloat(document.getElementById("target").value)
+        };
+        console.log($scope.originalUpdateGoal);
+        console.log(newUpdateGoal);
+        console.log(angular.equals($scope.originalUpdateGoal,newUpdateGoal));
+        $scope.test=angular.equals($scope.originalUpdateGoal,newUpdateGoal);
+        return angular.equals($scope.originalUpdateGoal,newUpdateGoal);
     };
 
     //To Do Update Goal
@@ -1834,7 +1853,7 @@ userApp.directive('heightFoodBind', function() {
                     } else {
                         selectclass.css({"paddingRight":"3px"});
                     }
-                }, 0);
+                }, 500);
             });
         }
     }
@@ -1851,7 +1870,7 @@ userApp.directive('heightExerciseBind', function() {
                     } else {
                         selectclass.css({"paddingRight":"3px"});
                     }
-                }, 0);
+                }, 500);
             });
         }
     }
