@@ -16,7 +16,7 @@
 	width:330px !important;
 	height: auto;
 	left:45%;
-	top: 10% !important;
+    top:100px!important;
 	background: #FFF;
     z-index:99999 !important;
 }
@@ -26,7 +26,7 @@
     width:500px !important;
     height: auto;
     left:30%;
-    top: 8% !important;
+    top:50px!important;
     background: #FFF;
     z-index:99999 !important;
 }

@@ -3352,7 +3352,8 @@ ul.icons-list li i {
 }
 
 .service-icon-left-more .service-content {
-	padding-left: 60px;
+	padding-left: 80px;
+    margin-left: 20px!important;
 }
 
 .service-center .service-icon {
