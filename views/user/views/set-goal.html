@@ -7,9 +7,9 @@
         <span ng-show="updateGoal==0">Set</span><span ng-show="updateGoal==1">Update</span> Your Goal
     </h3>
     <div class="col-md-12">
-        <p>
-            The value property sets or returns the value of the value attribute of a text field.
-            The value property contains the default value OR the value a user types in.
+        <h5 class="text-italic text-center">"A goal properly set is halfway reached."</h5>
+        <p class="margin-tb-5 text-center">
+            Set your individual goal right away!
         </p>
     </div>
     <div class="col-md-5 margin-top-15">Target {{targetText}}<span class="pull-right">:</span></div>
@@ -52,6 +52,11 @@
         $('#set-date').daterangepicker(options, function(start, end, label) {
             document.getElementById("start").value = start.format('DD/MM/YYYY');
             document.getElementById("end").value = end.format('DD/MM/YYYY');
+            /*if(end.format('DD/MM/YYYY')==start.format('DD/MM/YYYY')){
+                console.log(angular.element(document.getElementById('end')).scope().isCleanUpdateGoal());
+                var sle = document.getElementById("disable-button");
+                sle.setAttribute("ng-disabled",false);
+            }*/
         });
 
     });

@@ -44,6 +44,19 @@ body {
     overflow-y: hidden;
 }
 
+/*@media (max-width: 1400px) and (min-height: 900px){
+    body{
+        background: url(../images/gym-height-1024.jpg) fixed no-repeat;
+        background-size: auto 100%;
+    }
+}
+
+@media (min-width: 1500px) and (max-height: 900px){
+    body{
+        background: url(../images/gym-width-1500.jpg) fixed no-repeat;
+    }
+}*/
+
 /*for FireFox*/
 input::-moz-focus-inner,a::-moz-focus-inner
 {
@@ -704,7 +717,9 @@ input[type="submit"] {
 }
 
 
-
+a:focus{
+    color: #fff;
+}
 
 
 
@@ -3534,7 +3549,7 @@ ul.icons-list li i {
 }
 
 .team-member .member-info {
-	padding: 15px 6px 12px 6px;
+	padding: 10px 0;
 }
 
 .team-member .member-socail {
@@ -6476,6 +6491,11 @@ ul.footer-nav li a:hover {
   text-align:center;
 }
 
+h4.count-text{
+    margin: 20px 0;
+    font-size:40px;
+}
+
 .counter-item h5 {
   text-align: center;
   margin-bottom: 0px;
@@ -7174,6 +7194,12 @@ a.weight_button:hover{
  }
 
 a.weight_button[disabled]{
+    pointer-events: none;
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+a.target_button.disabled{
     pointer-events: none;
     opacity: 0.7;
     cursor: not-allowed;

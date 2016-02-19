@@ -234,7 +234,6 @@ userApp.controller('GoalController',function($scope,requestHandler,Flash,$route,
     $scope.doCreateGoal=function(){
         $scope.loaded=true;
         if(document.getElementById("start").value==""){
-            console.log(selectedDate);
             $scope.createGoal.startdate=$scope.createGoal.enddate=selectedDate;
         }
         else{

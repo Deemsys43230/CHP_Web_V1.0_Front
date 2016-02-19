@@ -1,4 +1,4 @@
-var commonApp = angular.module('commonApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','countTo']);
+var commonApp = angular.module('commonApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate']);
 
 commonApp.controller('CommonController',function($scope,requestHandler,Flash,$routeParams,$sce,$rootScope) {
 

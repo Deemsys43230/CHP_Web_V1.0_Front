@@ -84,7 +84,7 @@
                     <span class="error-message" ng-show="createGoalForm.title.$error.required"><span>Required.</span></span>
                 </span>
                 <p>Goal Duration</p>
-                <input type="text" id="set-date" required/>
+                <input type="text" id="set-goal-date" required/>
                 <p>Goal Type</p>
                 <div class="row margin-bottom-5 margin-top-3">
                     <div class="col-md-6">
@@ -140,16 +140,17 @@
 <script type="text/javascript">
     $(".modal-createGoal").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
 
-    $(function(){
+    setTimeout(function(){
         var options = {
             minDate : new Date,
             startDate : new Date,
-            endDate : new Date
+            endDate : new Date,
+            singleDatePicker:false
         };
 
-        $('#set-date').daterangepicker(options, function(start, end, label) {
+        $('#set-goal-date').daterangepicker(options, function(start, end, label) {
             document.getElementById("start").value = start.format('DD/MM/YYYY');
             document.getElementById("end").value = end.format('DD/MM/YYYY');
         });
-    })
+    },1000);
 </script>

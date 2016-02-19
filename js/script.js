@@ -254,67 +254,6 @@ $(document).ready(function ($) {
         carousel.find('.owl-next').html('<i class="fa fa-angle-right"></i>');
 	},1000);
 
-
-    ////------- Custom Carousel
-    setTimeout(function(){
-        $('.advice-carousel').each(function(){
-
-            var owl = jQuery(this),
-                itemsNum = $(this).attr('data-appeared-items'),
-                sliderNavigation = $(this).attr('data-navigation'),
-                returnSliderNavigation,
-                deskitemsNum,
-                desksmallitemsNum,
-                tabletitemsNum;
-
-            if ( sliderNavigation == 'false' || sliderNavigation == '0' ) {
-                returnSliderNavigation = false;
-            }else {
-                returnSliderNavigation = true;
-            }
-            if( itemsNum == 1) {
-                deskitemsNum = 1;
-                desksmallitemsNum = 1;
-                tabletitemsNum = 1;
-            }
-            else if (itemsNum >= 2 && itemsNum < 4) {
-
-                deskitemsNum = itemsNum;
-                desksmallitemsNum = itemsNum - 1;
-                tabletitemsNum = itemsNum - 1;
-            }
-            else if (itemsNum >= 4 && itemsNum < 8) {
-                deskitemsNum = itemsNum -1;
-                desksmallitemsNum = itemsNum - 2;
-                tabletitemsNum = itemsNum - 3;
-            }
-            else {
-                deskitemsNum = itemsNum -3;
-                desksmallitemsNum = itemsNum - 6;
-                tabletitemsNum = itemsNum - 8;
-            }
-            owl.owlCarousel({
-                slideSpeed : 300,
-                stopOnHover: true,
-                autoPlay: false,
-                navigation : returnSliderNavigation,
-                pagination: false,
-                lazyLoad : true,
-                items : itemsNum,
-                itemsDesktop : [1000,deskitemsNum],
-                itemsDesktopSmall : [900,desksmallitemsNum],
-                itemsTablet: [600,tabletitemsNum],
-                itemsMobile : false,
-                transitionStyle : "goDown"
-            });
-        });
-
-        var controlls=$('.advice-carousel-style');
-
-        controlls.find('.owl-prev').html('<i class="fa fa-angle-left"></i>');
-        controlls.find('.owl-next').html('<i class="fa fa-angle-right"></i>');
-    },1000);
-
 	////------- Custom Carousel
 	$('.clients-carousel').each(function(){
 
