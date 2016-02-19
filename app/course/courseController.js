@@ -46,6 +46,7 @@ userApp.controller('CourseController',['$scope','requestHandler','Flash','$route
             $scope.sectionDetail = response.data.sectiondetail;
             requestHandler.postRequest("getSectionList/",{"courseid":$scope.sectionDetail.courseid}).then(function(response) {
                 $scope.sectionList = response.data.course;
+                $scope.sectionLength=$scope.sectionList.length;
                 $.each($scope.sectionList,function(index,value){
                     if(value.sectionid == $routeParams.id){
                         $scope.currentIndex = index;
@@ -311,6 +312,7 @@ adminApp.controller('CourseAdminController',['$scope','requestHandler','Flash','
 
             requestHandler.postRequest("getSectionList/",{"courseid":$scope.sectionDetail.courseid}).then(function(response) {
                 $scope.sectionList = response.data.course;
+                $scope.sectionLength=$scope.sectionList.length;
                 $.each($scope.sectionList,function(index,value){
                     if(value.sectionid == $routeParams.id){
                         $scope.currentIndex = index;
