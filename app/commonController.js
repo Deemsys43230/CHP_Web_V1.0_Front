@@ -52,12 +52,12 @@ commonApp.controller('CommonController',function($scope,requestHandler,Flash,$ro
 
     $scope.doGetDashboardCount=function(){
         requestHandler.getRequest("getStatistics/","").then(function(response){
-            console.log(response.data);
             $scope.adminCountList=response.data.Stats;
             $scope.memberCount = $scope.adminCountList.membercount;
             $scope.exerciseCount = $scope.adminCountList.exercisecount;
             $scope.foodCount = $scope.adminCountList.foodcount;
             $scope.courseCount = $scope.adminCountList.publishedcourses;
+
         });
     };
 
