@@ -44,15 +44,15 @@
                                     <span class="col-md-6" ng-if="courseDetails.role=='admin'">Created On</span>
                                     <span class="col-md-6 no-padding" ng-if="courseDetails.role=='admin'">: {{courseDetails.createdon}}</span>
 
-                                    <span class="col-md-6">Reviewed On</span>
-                                    <span class="col-md-6 no-padding">
-                                        : <span ng-show="!courseDetails.reviewdate">----</span>
-                                        <span ng-hide="!courseDetails.reviewdate">{{courseDetails.reviewdate}}</span>
-                                    </span>
-                                    <span class="col-md-6" ng-if="courseDetails.role=='admin'">Published On</span>
+                                    <span class="col-md-6" ng-if="courseDetails.role=='admin'">Reviewed On</span>
                                     <span class="col-md-6 no-padding" ng-if="courseDetails.role=='admin'">
-                                        : <span ng-show="!courseDetails.publishedon" ng-if="courseDetails.role=='admin'">----</span>
-                                        <span ng-hide="!courseDetails.publishedon" ng-if="courseDetails.role=='admin'">{{courseDetails.publishedon}}</span>
+                                        : <span ng-show="!courseDetails.reviewdate" ng-if="courseDetails.role=='admin'">----</span>
+                                        <span ng-hide="!courseDetails.reviewdate"  ng-if="courseDetails.role=='admin'">{{courseDetails.reviewdate}}</span>
+                                    </span>
+                                    <span class="col-md-6" >Published On</span>
+                                    <span class="col-md-6 no-padding" >
+                                        : <span ng-show="!courseDetails.publishedon" >----</span>
+                                        <span ng-hide="!courseDetails.publishedon">{{courseDetails.publishedon}}</span>
                                     </span>
 
                                 </h5>
