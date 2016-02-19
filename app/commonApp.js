@@ -367,12 +367,8 @@ commonApp.controller('LoginController',function($scope,requestHandler,Flash,$win
                 successMessage(Flash,"Please check your Email<br/>to reset the password!");
                 $scope.emailid="";
                 $scope.forgotPasswordForm.$setPristine();
-             /*   $(".user_login").hide();
-                $(".reset_password").hide();
-                $(".user_register").hide();
-                $(".secret_question").hide();*/
-               // $(".header_title").text('Register');
-
+            }else if(response.data.Response_status=="User not allowed"){
+                errorMessage(Flash,"Email ID not allowed!");
             }
         });
     };
