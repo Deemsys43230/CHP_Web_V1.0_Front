@@ -1899,7 +1899,7 @@ userApp.directive('shouldFocus', function(){
     };
 });
 
-userApp.directive('dropDownHeight', function(){
+/*userApp.directive('dropDownHeight', function(){
     return {
         link: function($scope, $element) {
             $scope.$watch(function() {
@@ -1914,5 +1914,5 @@ userApp.directive('dropDownHeight', function(){
             });
         }
     }
-});
+});*/
 
