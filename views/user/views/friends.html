@@ -175,7 +175,10 @@
                     <div class="row friends-list">
                         <div class="col-md-3" ng-repeat="received in receivedfilter=( requestreceived | filter: {name : requestreceivedsearch} | startFrom:currentPage2*pageSize2 | limitTo:pageSize2)" ng-show="requestreceived.length!=0">
                             <a href="" class="img-shadow"><img ng-src="{{received.imageurl | trusted}}"/></a>
-                            <h5 class="wrap"><a href="">{{received.name}}</a></h5>
+                            <h5 class="wrap">{{received.name}}<br/>
+                                <a href="" class="btn-xs btn-success margin-top-5" ng-click="acceptFriends(received.userid)">Accept</a>
+                                <a href="" class="btn-xs btn-danger margin-top-5" ng-click="denyFriends(received.userid)">Cancel</a>
+                            </h5>
                         </div>
                         <h1 class="col-md-12 margin-top-50 text-gray text-center" ng-show="!receivedfilter.length" ng-if="!loaded">
                             <img src="../../images/no-friend.png"/><br/>
