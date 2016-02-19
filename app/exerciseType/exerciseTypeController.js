@@ -153,7 +153,7 @@ delete $scope.exerciseType.status;
             $scope.loaded=false;
             if(response.data.Response_status==0){
                 $scope.doGetAllExerciseType();
-                errorMessage(Flash,"Exercise Type Mapped with other exercise!")
+                errorMessage(Flash,"Exercise type mapped, can't disable!")
             }
             if(response.data.Response_status==1){
                 $scope.doGetAllExerciseType();
