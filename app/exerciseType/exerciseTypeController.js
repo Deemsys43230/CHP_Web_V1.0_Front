@@ -149,11 +149,11 @@ delete $scope.exerciseType.status;
         }
 
         $scope.loaded=true;
-        requestHandler.postRequest("admin/enableordisableExerciseType/",{'typeid':id}).then(function(response){
+        requestHandler.postRequest("enableordisableType/",{'typeid':id}).then(function(response){
             $scope.loaded=false;
             if(response.data.Response_status==0){
                 $scope.doGetAllExerciseType();
-                errorMessage(Flash,"Exercise Type Paired with other exercise!")
+                errorMessage(Flash,"Exercise Type Mapped with other exercise!")
             }
             if(response.data.Response_status==1){
                 $scope.doGetAllExerciseType();
@@ -172,12 +172,12 @@ delete $scope.exerciseType.status;
         }
 
         $scope.loaded=true;
-        requestHandler.postRequest("admin/deleteExerciseTypeAndLevel/",{'typeid':id}).then(function(response){
+        requestHandler.postRequest("deleteType/",{'typeid':id}).then(function(response){
             $scope.loaded=false;
 
             if(response.data.Response_status==0){
                 $scope.doGetAllExerciseType();
-                errorMessage(Flash,"Exercise already used, can't delete!");
+                errorMessage(Flash,"Exercise type mapped, can't delete!");
             }
             if(response.data.Response_status==1){
                  successMessage(Flash,"Exercise Type Successfully Deleted");
