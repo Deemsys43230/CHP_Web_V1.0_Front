@@ -3681,6 +3681,11 @@ h5.classic-title {
     font-weight: 600;
 }
 
+h5.classic-title.friend{
+    font-size: 14px!important;
+    line-height: 18px!important;
+}
+
 h5.classic-title span {
 	padding-bottom: 10px;
 	border-bottom: 3px solid #f8ba01;

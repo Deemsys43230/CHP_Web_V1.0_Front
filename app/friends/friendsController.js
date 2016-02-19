@@ -20,10 +20,15 @@ userApp.controller('FriendsController',function($scope,requestHandler,Flash,Frie
     $scope.currentPage1 = 0;
     $scope.pageSize1 = 8;
     $scope.numberOfPages1=function(){
-        return Math.ceil($scope.requestedFriendsList.length/$scope.pageSize1);
+        return Math.ceil($scope.requestsent.length/$scope.pageSize1);
     };
     //Requested Friends Pagination ends
 
+    $scope.currentPage2 = 0;
+    $scope.pageSize2 = 8;
+    $scope.numberOfPages2=function(){
+        return Math.ceil($scope.requestreceived.length/$scope.pageSize2);
+    };
 
     $scope.myFriends=function(){
         $scope.loaded=true;
@@ -39,6 +44,16 @@ userApp.controller('FriendsController',function($scope,requestHandler,Flash,Frie
         var getRequestedFriendsPromise=FriendsService.doGetFriendRequest();
         getRequestedFriendsPromise.then(function(result){
             $scope.requestedFriendsList=result;
+            $scope.requestreceived = [];
+            $scope.requestsent = [];
+            $.each($scope.requestedFriendsList,function(index,value){
+                if(value.friendStatus == 2){
+                     $scope.requestreceived.push(value);
+                }
+               else if(value.friendStatus == 1){
+                    $scope.requestsent.push(value);
+                }
+            })
         });
     };
 
