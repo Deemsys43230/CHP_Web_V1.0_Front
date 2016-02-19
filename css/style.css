@@ -7264,14 +7264,29 @@ a.suggest_button:focus{
     cursor: pointer;
 }
 
+.suggest_list_style{
+    border-bottom: 1px dotted #ededed;
+    padding-bottom:7px;
+    margin-top: 0
+}
+
 .suggest_option{
     height: 300px;
+    overflow-y: hidden;
+}
+
+.suggest_option_graph{
+    margin-right: -15px;
+    padding-right: 15px;
+    height: 250px!important;
     overflow-y: hidden;
 }
 
 .foodlistGraph{
     height: 210px;
     overflow-y: hidden;
+    padding-right: 15px;
+    margin-right: -15px;
 }
 
 .sessionGraph{

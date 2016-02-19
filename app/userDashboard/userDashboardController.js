@@ -789,6 +789,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
             if(date==selectedDate && $scope.updateGoal==1){
                 $window.currentweight = weight;
                 refreshGraph();
+                $scope.updateAverageGainSpent(date);
             }
             $scope.spinner=false;
             $scope.weightUpdateText="Update Weight";
@@ -1032,6 +1033,13 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         });
     };
 
+    $scope.updateAverageGainSpent = function(date){
+        requestHandler.postRequest("user/getTotalCalorieDetailForDate/",{"date":date}).then(function(response){
+            $scope.averageIntake=Math.round(response.data.Calorie_Graph.averagecalorieintake);
+            $scope.averageSpent=Math.round(response.data.Calorie_Graph.averagecalorieburnt);
+        });
+    };
+
     $scope.goGetDailyIntakeGraph = function(date){
 
         requestHandler.postRequest("user/dailyCalorieGraph/",{"date":date}).then(function(response){
@@ -1052,7 +1060,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
                     text: ''
                 },
                 xAxis: {
-                    categories: ['Protein', 'Fat', 'Carbo', 'Fibre'],
+                    categories: ['Protein', 'Fat', 'Carbs', 'Fibre'],
                     labels: {
                         style: {
                             fontSize:'9px',
@@ -1064,7 +1072,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
                                 return this.value+'<br/><img src="../../images/i-protein.jpg"/>';
                             else if(this.value == "Fat")
                                 return '&nbsp;&nbsp;'+this.value+'&nbsp;&nbsp;'+'<br/><img src="../../images/i-fats.jpg"/>';
-                            else if(this.value == "Carbo")
+                            else if(this.value == "Carbs")
                                 return this.value+'<br/><img src="../../images/i-carbs.jpg"/>';
                             else if(this.value == "Fibre")
                                 return '&nbsp;'+this.value+'&nbsp;'+'<br/><img src="../../images/i-fibre.jpg"/>';
@@ -1111,7 +1119,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
                             color: 'red',
                             y: parseFloat($scope.calorieIntakeGraph.fat)
                         }, {
-                            name: 'Carbo',
+                            name: 'Carbs',
                             color: 'orange',
                             y: parseFloat($scope.calorieIntakeGraph.carbo)
                         }, {
@@ -1193,7 +1201,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
                         text: ''
                     },
                     xAxis: {
-                        categories: ['Protein', 'Fat', 'Carbo', 'Fibre'],
+                        categories: ['Protein', 'Fat', 'Carbs', 'Fibre'],
                         labels: {
                             useHTML: true,
                              formatter: function() {
@@ -1201,7 +1209,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
                              return this.value+'<br/><img src="../../images/i-protein.jpg"/>';
                              else if(this.value == "Fat")
                              return '&nbsp;&nbsp;'+this.value+'&nbsp;&nbsp;'+'<br/><img src="../../images/i-fats.jpg"/>';
-                             else if(this.value == "Carbo")
+                             else if(this.value == "Carbs")
                              return this.value+'<br/><img src="../../images/i-carbs.jpg"/>';
                              else if(this.value == "Fibre")
                              return this.value+'<br/><img src="../../images/i-fibre.jpg"/>';
@@ -1250,7 +1258,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
                                 color: 'red',
                                 y: parseFloat($scope.calorieIntakeGraph.fat)
                             }, {
-                                name: 'Carbo',
+                                name: 'Carbs',
                                 color: 'orange',
                                 y: parseFloat($scope.calorieIntakeGraph.carbo)
                             }, {

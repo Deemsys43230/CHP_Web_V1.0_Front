@@ -227,7 +227,7 @@
 
                             <div class="session">
                                 <input type="radio" id="breakFast" value="1"  ng-click="loadSessionDetails()" ng-model="userFood.sessionid"/>
-                                <label for="breakFast">Break Fast</label>
+                                <label for="breakFast">Breakfast</label>
                                 <input type="radio" id="brunch" ng-click="loadSessionDetails()" value="2" ng-model="userFood.sessionid"/>
                                 <label for="brunch" >Brunch</label>
                                 <input type="radio"  ng-click="loadSessionDetails()" id="lunch" value="3" ng-model="userFood.sessionid"/>
@@ -360,16 +360,16 @@
                                         <div class="col-md-4 text-right gain-list">
                                             <div class="text-green text-bold">Gain</div>
                                             <hr/>
-                                            <div class="suggest_option">
-                                                <p ng-repeat="food in userFoodDiaryDataAll.BreakFast" class="wrap">
+                                            <div class="suggest_option_graph" ng-nicescroll nice-option="{cursorcolor: '#777',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#f1f1f1'}">
+                                                <p ng-repeat="food in userFoodDiaryDataAll.BreakFast" class="wrap suggest_list_style">
                                                     {{food.foodname}}</p>
-                                                <p ng-repeat="food in userFoodDiaryDataAll.Brunch" class="wrap">
+                                                <p ng-repeat="food in userFoodDiaryDataAll.Brunch" class="wrap suggest_list_style">
                                                     {{food.foodname}}</p>
-                                                <p ng-repeat="food in userFoodDiaryDataAll.Lunch" class="wrap">
+                                                <p ng-repeat="food in userFoodDiaryDataAll.Lunch" class="wrap suggest_list_style">
                                                     {{food.foodname}}</p>
-                                                <p ng-repeat="food in userFoodDiaryDataAll.Evening" class="wrap">
+                                                <p ng-repeat="food in userFoodDiaryDataAll.Evening" class="wrap suggest_list_style">
                                                     {{food.foodname}}</p>
-                                                <p ng-repeat="food in userFoodDiaryDataAll.Dinner" class="wrap">
+                                                <p ng-repeat="food in userFoodDiaryDataAll.Dinner" class="wrap suggest_list_style">
                                                     {{food.foodname}}</p>
                                             </div>
                                         </div>
@@ -379,8 +379,8 @@
                                         <div class="col-md-4 gain-list">
                                             <div class="text-red text-bold">Spent</div>
                                             <hr/>
-                                            <div class="suggest_option">
-                                                <p ng-repeat="exerciseDiaryData in userExerciseDiaryDataAll" class="wrap text-left">
+                                            <div class="suggest_option_graph" ng-nicescroll nice-option="{cursorcolor: '#777',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#f1f1f1'}">
+                                                <p ng-repeat="exerciseDiaryData in userExerciseDiaryDataAll" class="wrap text-left suggest_list_style">
                                                     {{exerciseDiaryData.Exercise.exercisename}}</p>
                                             </div>
                                         </div>
@@ -396,16 +396,16 @@
                                     <div class="col-md-6">
                                         <h5 class="margin-bottom-5">Choose session</h5>
                                         <select class="full-width main"  ng-model="graphSessionId" ng-change="loadSessionFood(graphSessionId)" name="graph" required>
-                                            <option value="1">Break Fast</option>
+                                            <option value="1">Breakfast</option>
                                             <option value="2">Brunch</option>
                                             <option value="3">Lunch</option>
                                             <option value="4">Snacks</option>
                                             <option value="5">Dinner</option>
                                         </select>
                                         <div ng-show="graphResponse==1">
-                                            <h5 class="margin-top-10 margin-bottom-5">Foods Intaken</h5>
-                                            <div class="foodlistGraph gain-list">
-                                                <p ng-repeat="food in userSessionFoods" class="wrap">{{food.foodname}}</p>
+                                            <h6 class="margin-tb-10">Foods Intaken</h6>
+                                            <div class="foodlistGraph gain-list" ng-nicescroll nice-option="{cursorcolor: '#777',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#f1f1f1'}">
+                                                <p ng-repeat="food in userSessionFoods" class="wrap suggest_list_style">{{food.foodname}}</p>
                                             </div>
                                         </div>
                                     </div>
