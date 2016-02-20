@@ -1,17 +1,1 @@
-var coachApp = angular.module('coachApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','countTo']);
-
-coachApp.controller('CoachDashboardController',function($scope,requestHandler,Flash) {
-    $scope.countFrom = 0;
-    //Get Coach List
-    $scope.doGetCoachDashboardCount=function(){
-        requestHandler.getRequest("getStatistics/","").then(function(response){
-            $scope.coachCountList=response.data.Stats;
-            $scope.myMemberCount = $scope.coachCountList.subscriptioncount;
-            $scope.myCourseCount = $scope.coachCountList.publishedcourses;
-            $scope.myPayCount = $scope.coachCountList.totalincome
-
-        });
-    };
-    $scope.doGetCoachDashboardCount();
-
-});
+var coachApp=angular.module("coachApp",["ngRoute","oc.lazyLoad","requestModule","flash","ngAnimate","countTo"]);coachApp.controller("CoachDashboardController",function(o,t){o.countFrom=0,o.doGetCoachDashboardCount=function(){t.getRequest("getStatistics/","").then(function(t){o.coachCountList=t.data.Stats,o.myMemberCount=o.coachCountList.subscriptioncount,o.myCourseCount=o.coachCountList.publishedcourses,o.myPayCount=o.coachCountList.totalincome})},o.doGetCoachDashboardCount()});
