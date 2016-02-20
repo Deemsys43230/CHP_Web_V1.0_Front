@@ -1,0 +1,136 @@
+
+<div class="page-banner" ng-cloak class="ng-cloak">
+    <div class="container">
+        <div class="row min-height-450"  ng-init="subscribersListInit()">
+            <div class="col-md-12">
+                <a href="#payments" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back to course list</a>
+                <!-- Stat Search -->
+                <form class="form-wrapper pull-right" novalidate>
+                    <input type="text" placeholder="Search here..." value="" ng-change="doGetMySubscribersListByCourse(1);" ng-model="subscriberSearch" required>
+                    <button type="submit" ><i class="fa fa-search"></i></button>
+                </form>
+                <!-- End Search -->
+                <h3 class="pull-right text-orange">TOTAL EARN : <span class="text-bold text-red">{{coursetotalearnings}} $</span>&nbsp;&nbsp;&nbsp;</h3>
+                <h5 class="classic-title"><span><i class="fa fa-money"></i>&nbsp;&nbsp;COURSE ENROLLMENT - PAYMENTS LIST</span></h5>
+            </div>
+
+            <div class="col-md-12 no-padding">
+                <div ng-if="loaded">
+                    <div class="loader-style">
+                        <div class="loader"></div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="min-height-180">
+                        <img ng-src="{{subscribersList.courseimage|trusted}}">
+                    </div>
+                    <h5 class="wrap margin-tb-10">{{subscribersList.coursename}}</h5>
+                    <h6 class="wrap text-gray">{{subscribersList.coursesubtitle}}</h6>
+                </div>
+                <div class="col-md-9">
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                        <tr class="warning sort-icon">
+                            <th class="col-md-3">Enrolled By<i ng-click="sortingCourseSubscriber('1')" class="{{sortIcon[1]}} pull-right"></i></th>
+                            <th class="col-md-2">Purchased On<i ng-click="sortingCourseSubscriber('2')" class="{{sortIcon[2]}} pull-right"></i></th>
+                            <th class="col-md-2">Paid Amount ($)<i ng-click="sortingCourseSubscriber('3')" class="{{sortIcon[3]}} pull-right"></i></th>
+                            <th class="col-md-2">Share ($)<i ng-click="sortingCourseSubscriber('4')" class="{{sortIcon[4]}} pull-right"></i></th>
+                            <th class="col-md-3">Receipt ID</th>
+                        </tr>
+                        </thead>
+                        <tbody >
+                        <tr ng-show="subscribersList.purchasedList.length < 0"><td colspan="9" class="text-center">Loading new data!!</td></tr>
+                        <tr ng-show="subscribersList.purchasedList.length == 0"><td colspan="9" class="text-center">No Results!!!</td></tr>
+                        <tr ng-repeat="subscriber in subscribersList.purchasedList">
+                            <td><span class="line-clamp-sm">{{subscriber.enrolledby}}</span></td>
+                            <td>{{subscriber.purchasedon}}</td>
+                            <td>{{subscriber.purchasedamount}}</td>
+                            <td>{{subscriber.payamount}}</td>
+                            <!--<td><a href="" ng-click="doViewPaymentDetails(subscriber.outwardid)">{{subscriber.outwardid}}</a></td>-->
+                            <td><span ng-show="subscriber.outwardid!=undefined"><a href="" ng-click="doViewPaymentDetails(subscriber.outwardid)">{{subscriber.outwardid}}</a></span><span ng-show="subscriber.outwardid==undefined" class="text-red">Please Contact Admin for Transaction Details</span></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <!-- Start Pagination -->
+                    <pagination
+                            ng-show="total_count>itemsPerPage"
+                            max-size="8"
+                            direction-links="true"
+                            boundary-links="true"
+                            ng-model="currentPage"
+                            total-items="total_count"
+                            items-per-page="itemsPerPage"
+                            ng-change="doGetMySubscribersListByCourse()">
+                    </pagination>
+                    <!-- End Pagination -->
+                </div>
+            </div>
+        </div><!-- @end #content -->
+    </div><!-- @end #w -->
+</div>
+
+<!-- Category popup-->
+<div id="paymentView" class="popupContainer-width" style="display:none;">
+
+    <header class="popupHeader width-100">
+        <span class="header_title">Payment details</span>
+        <span class="modal_close"><i class="fa fa-times"></i></span>
+    </header>
+
+    <section class="popupBody">
+        <!-- Register Form -->
+        <div class="common_model">
+            <table class="table table-bordered margin-top-10">
+                <tbody>
+                <tr class="warning">
+                    <td class="col-md-4">Receipt ID</td>
+                    <td class="col-md-8">{{paymentDetails.outwardid}}</td>
+                </tr>
+                <tr>
+                    <td>Amount</td>
+                    <td>{{paymentDetails.amount}}</td>
+                </tr>
+                <tr class="warning">
+                    <td>Receiver Email Id</td>
+                    <td>{{paymentDetails.receiveremailid}}</td>
+                </tr>
+                <tr>
+                    <td>Receiver Account Id</td>
+                    <td>{{paymentDetails.receiveraccountid}}</td>
+                </tr>
+                <tr class="warning">
+                    <td>Sender Email Id</td>
+                    <td>{{paymentDetails.senderemailid}}</td>
+                </tr>
+                <tr>
+                    <td>Sender Account Id</td>
+                    <td>{{paymentDetails.senderaccountid}}</td>
+                </tr>
+                <tr class="warning">
+                    <td>Transaction Id</td>
+                    <td>{{paymentDetails.transactionid}}</td>
+                </tr>
+                <tr>
+                    <td>Transaction Date</td>
+                    <td>{{paymentDetails.transactiondate}}</td>
+                </tr>
+                <tr class="warning">
+                    <td>Transaction Status</td>
+                    <td>{{paymentDetails.transactionstatus}}</td>
+                </tr>
+                <tr>
+                    <td>Currency Code</td>
+                    <td>{{paymentDetails.currencycode}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</div>
+
+
+<script type="text/javascript" src="../../js/script.js"></script>
+
+<script type="text/javascript">
+    $("#modal").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
+</script>

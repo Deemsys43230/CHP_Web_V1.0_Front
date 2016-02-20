@@ -1,0 +1,161 @@
+
+
+<!-- Start Page Banner -->
+<div class="page-banner1" ng-cloak class="ng-cloak">
+    <div id="w" class="clearfix">
+        <div id="demography-content" class="height-auto" ng-init="viewinit()">
+            <div class="col-md-12">
+                <div class="margin-rl">
+                   <span ng-hide="courseDetails.enrollmentStatus==0" ng-if="courseDetails.role=='user'"> <a href="#myCourses" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back</a></span>
+                   <span ng-show="courseDetails.enrollmentStatus==0" ng-if="courseDetails.role=='user'"><a href="#courses" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back</a></span>
+                    <span ng-hide="courseDetails.publishedon==null" ng-if="courseDetails.role=='admin'"><a href="#course" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back</a></span>
+                    <span ng-show="courseDetails.publishedon==null" ng-if="courseDetails.role=='admin'"><a href="#coursePending" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back</a></span>
+                    <div flash-message="2000" class="col-md-4 pull-right"></div>
+                    <h4 class="classic-title"><span>Course Details</span></h4>
+                    <div ng-if="loaded">
+                        <div class="loader-style">
+                            <div class="loader"></div>
+                        </div>
+                    </div>
+                    <div class="row margin-top-10 margin-bottom-10">
+                        <div class="col-md-3">
+                            <img class="margin-bottom-15" src="{{courseDetails.promoimage | trusted}}">
+                            <div class="col-md-2 no-padding margin-top-5"><img class="course-author-img" src="{{courseDetails.imageurl | trusted}}"></div>
+                            <div class="col-md-10"><h5>{{courseDetails.ownername}}<br><small>{{courseDetails.specialistin}}</small></h5></div>
+                            <div class="col-md-12 margin-top-10 no-padding">
+
+                                <h5 class="row text-muted">
+                                    <span class="col-md-6">Category</span>
+                                    <span class="col-md-6 no-padding">: {{courseDetails.categoryname}}</span>
+                                    <span class="col-md-6">Price</span>
+                                    <span class="col-md-6 no-padding">
+                                        : <span ng-show="courseDetails.price==0" class="text-green text-bold">Free</span>
+                                        <span ng-hide="courseDetails.price==0" class="text-red text-bold">{{courseDetails.price}} $</span>
+                                    </span>
+                                    <span class="col-md-6">No.of Sections</span>
+                                    <span class="col-md-6 no-padding">
+                                        :  {{sectionList.length}}
+                                    </span>
+                                    <span class="col-md-6">No.of Enrolls</span>
+                                    <span class="col-md-6 no-padding">
+                                        : <span ng-show="courseDetails.enrollcount==0">----</span>
+                                        <span ng-hide="courseDetails.enrollcount==0">{{courseDetails.enrollcount}}</span>
+                                    </span>
+                                    <span class="col-md-6" ng-if="courseDetails.role=='admin'">Created On</span>
+                                    <span class="col-md-6 no-padding" ng-if="courseDetails.role=='admin'">: {{courseDetails.createdon}}</span>
+
+                                    <span class="col-md-6" ng-if="courseDetails.role=='admin'">Reviewed On</span>
+                                    <span class="col-md-6 no-padding" ng-if="courseDetails.role=='admin'">
+                                        : <span ng-show="!courseDetails.reviewdate" ng-if="courseDetails.role=='admin'">----</span>
+                                        <span ng-hide="!courseDetails.reviewdate"  ng-if="courseDetails.role=='admin'">{{courseDetails.reviewdate}}</span>
+                                    </span>
+                                    <span class="col-md-6" >Published On</span>
+                                    <span class="col-md-6 no-padding" >
+                                        : <span ng-show="!courseDetails.publishedon" >----</span>
+                                        <span ng-hide="!courseDetails.publishedon">{{courseDetails.publishedon}}</span>
+                                    </span>
+
+                                </h5>
+                                <!--<h5 class="margin-top-10" ng-show="courseDetails.enrollmentStatus==0"><i class="fa fa-users text-gray"></i> - {{courseDetails.enrollcount}} Students</h5>
+                                <h5 class="margin-top-10"><i class="fa fa-book text-gray"></i> - {{sectionList.length}} Sections</h5>-->
+                            </div>
+                            <span ng-show="courseDetails.enrollmentStatus==0" ng-if="courseDetails.role=='user'"><a href=""class="col-md-12 suggest_button margin-top-10 btn" ng-disabled="enrollButtonStatus" ng-click="doEnrollCourse(courseDetails.courseid)"><span ng-show="enrollButtonStatus==true"><span class="three-quarters-loader">Loading…</span></span>&nbsp;{{entrolling}}</a></span>
+                            <span ng-show="courseDetails.publishedon==null" ng-if="courseDetails.role=='admin'" ><a href="" id="modal_trigger1" class="col-md-12 suggest_button margin-top-10 btn" ng-click="acceptModal(courseDetails.courseid)">Accept this course</a></span>
+                            <span ng-show="courseDetails.publishedon==null" ng-if="courseDetails.role=='admin'"><a href="" class="col-md-12 suggest_button red_button modal_trigger btn" ng-click="modal(courseDetails.courseid)">Reject this course</a></span>
+                        </div>
+                        <div class="col-md-9">
+                            <h2 class="wrap">{{courseDetails.coursename}}</h2>
+                            <h4 class="text-muted margin-tb-10 wrap">{{courseDetails.coursesubtitle}}</h4>
+                            <p class="margin-tb-10 wrap"  ng-bind-html="courseDetails.coursedescription | html"></p>
+
+                            <h5 class="margin-bottom-10 wrap" ng-repeat="sections in sectionList" ng-hide="courseDetails.enrollmentStatus==0" ng-if="courseDetails.role=='user'">Section {{$index+1}} : <a href="#courseView/{{sections.sectionid}}" class="wrap">{{sections.sectiontitle}}</a></h5>
+                            <h5 class="margin-bottom-10 wrap" ng-repeat="sections in sectionList" ng-show="courseDetails.enrollmentStatus==0" ng-if="courseDetails.role=='user'">Section {{$index+1}} : <a href="" ng-click="checkenroll()" class="wrap">{{sections.sectiontitle}}</a></h5>
+                            <h5 class="margin-bottom-10 wrap" ng-repeat="sections in sectionList" ng-hide="courseDetails.publishedon==null" ng-if="courseDetails.role=='admin'">Section {{$index+1}} : <a href="#courseView/{{sections.sectionid}}" class="wrap">{{sections.sectiontitle}}</a></h5>
+                            <h5 class="margin-bottom-10 wrap" ng-repeat="sections in sectionList" ng-show="courseDetails.publishedon==null" ng-if="courseDetails.role=='admin'">Section {{$index+1}} : <a href="#courseView/{{sections.sectionid}}" class="wrap">{{sections.sectiontitle}}</a></h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- create reject reason popup-->
+<div class="popupContainer modalRejectCourse" style="display:none;left:39% !important;">
+    <header class="popupHeader">
+        <span class="header_title">Reject Course</span>
+        <span class="modal_close"><i class="fa fa-times"></i></span>
+    </header>
+
+    <section class="popupBody">
+        <!-- Register Form -->
+        <div class="common_model">
+            <form name="courseRejectForm" novalidate>
+                <p>Reason for course rejection:</p>
+                <textarea type="text" class="height-150" name="comments"  maxlength="300" ng-model="comments" required/></textarea>
+                <span ng-show="courseRejectForm.comments.$dirty&&courseRejectForm.comments.$invalid">
+                       <span class="error-message textarea-errormessage-110" ng-show="courseRejectForm.comments.$error.required"><span>Required.</span></span>
+                    </span>
+                <div class="action_btns margin-top-20">
+                    <div class="one_half"><a class="btn btn_red modal_close" onclick="return false" ng-disabled="courseRejectForm.$invalid" ng-click="doRejectCourse(courseid)">Reject</a></div>
+                    <div class="one_half last modal_close"><a onclick="return false;" class="btn back_btn">Cancel</a></div>
+                </div>
+            </form>
+        </div>
+    </section>
+</div>
+
+
+<!-- create accept popup-->
+<div id="modal" class="popupContainer" style="display:none;left: 37%!important;">
+    <header class="popupHeader">
+        <span class="header_title">Confirmation</span>
+        <span class="modal_close"><i class="fa fa-times"></i></span>
+    </header>
+    <section class="popupBody">
+        <!-- Register Form -->
+        <div class="common_model">
+            <div class="text-center"><img src="../../images/alert-ring.png"/></div><br/>
+            <h5 class="text-center">Are you sure want to publish this course?</h5>
+            <div class="action_btns margin-top-20">
+                <div class="one_half"><a href="" class="btn btn_red modal_close" ng-click="doAcceptCourse(courseid)">Yes</a></div>
+                <div class="one_half last modal_close"><a onclick="return false;" class="btn back_btn">No</a></div>
+            </div>
+        </div>
+    </section>
+</div>
+
+
+<!-- create enroll popup-->
+<div id="enrollmodal" class="popupContainer" style="display:none;left: 37%!important;">
+    <header class="popupHeader">
+        <span class="header_title">Confirmation</span>
+        <span class="modal_close"><i class="fa fa-times"></i></span>
+    </header>
+    <section class="popupBody">
+        <!-- Register Form -->
+        <div class="common_model">
+            <div class="text-center"><img src="../../images/alert-ring.png"/></div><br/>
+            <h5 class="text-center">Please enroll the course to view details!!!</h5>
+            <div class="action_btns margin-top-20">
+                <div class="one_half last modal_close"><a onclick="return false;" class="btn back_btn">OK</a></div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- End Page Banner -->
+
+<script type="text/javascript" src="../../js/script.js"></script>
+
+<script type="text/javascript">
+    $("#modal_trigger1").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
+    $(".modal_trigger").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
+
+</script>
+<style>
+
+    [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+        display: none !important;
+    }
+</style>

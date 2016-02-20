@@ -1,0 +1,51 @@
+
+<!-- Start Page Banner -->
+<div class="container" ng-cloak class="ng-cloak">
+    <div class="row">
+
+        <div class="col-md-3">
+            <h4 class="classic-title"><span>Site Management</span></h4>
+            <div ng-include src="'views/site-menu.html'" onload="activeClass"></div>
+        </div>
+        <div class="col-md-9 min-height-450" ng-init="init()">
+            <a href="#dashboard" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back to Dashboard</a>
+            <a href="#addTestimonial" class="back-button pull-right margin-left-5"><i class="fa fa-plus-circle"></i> Add Testimonial</a>
+            <div flash-message="2000" class="col-md-4 pull-right no-padding"></div>
+            <h4 class="classic-title"><span><i class="fa fa-comment"></i> &nbsp;Testimonial List</span></h4>
+            <div ng-if="loaded">
+                <div class="loader-style">
+                    <div class="loader"></div>
+                </div>
+            </div>
+            <table class="table table-striped table-bordered">
+                <thead>
+                <tr class="warning">
+                    <th class="col-md-6">Title</th>
+                    <th class="col-md-3">Given By</th>
+                    <th class="col-md-3">Options</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr dir-paginate="testimonial in admintestimonials | itemsPerPage: 13" pagination-id="testimonial" ng-show="admintestimonials.length != 0">
+                    <td><span class="line-clamp-lg">{{testimonial.title}}</span></td>
+                    <td><span class="line-clamp-sm">{{testimonial.givenby}}</span></td>
+                    <td>
+                        <a href="#viewTestimonial/{{testimonial.testimonialid}}" class="btn-xs btn-primary">View Details</a>
+                        <a href="#editTestimonial/{{testimonial.testimonialid}}" class="btn-xs btn-warning">Edit</a>
+                        <a href="" class="btn-xs btn-success" ng-click="doEnableDisableTestimonials(testimonial.testimonialid)" ng-show="testimonial.status==0">Enable</a>
+                        <a href="" class="btn-xs btn-danger" ng-click="doEnableDisableTestimonials(testimonial.testimonialid)" ng-hide="testimonial.status==0">Disable</a>
+                    </td>
+                </tr>
+                <tr ng-show="admintestimonials.length == 0"><td colspan="4" class="text-center">No Records Found!!!</td></tr>
+                </tbody>
+            </table>
+            <!-- Start Pagination -->
+            <dir-pagination-controls ng-show="paginationLoad" boundary-links="true" pagination-id="testimonial"> </dir-pagination-controls>
+            <!-- End Pagination -->
+        </div>
+    </div>
+</div>
+
+<!-- End Page Banner -->
+
+<script type="text/javascript" src="../../js/script.js"></script>

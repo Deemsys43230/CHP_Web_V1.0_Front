@@ -1,0 +1,253 @@
+
+/*
+Tipue drop 5.0.1
+Copyright (c) 2015 Tipue
+Tipue drop is released under the MIT License
+http://www.tipue.com/drop
+*/
+
+
+#tipue_drop_input
+{
+    font-size: 14px;
+	color: #333;
+	padding: 8px 10px;
+	width: 315px;
+	border:0px !important;
+	-moz-appearance: none;
+	-webkit-appearance: none;
+    -webkit-box-shadow: inset 0px 0px 3px rgba(0,0,0,0.3);
+    -moz-box-shadow: inset 0px 0px 3px rgba(0,0,0,0.3);
+    box-shadow: inset 0px 0px 3px rgba(0,0,0,0.3);
+	outline: 0;
+	margin: 0;
+}
+
+#tipue_drop_content
+{
+    display: none;
+    position: absolute;
+	margin: 8px 8px 0 0;
+	line-height: 0;
+	z-index: 1000;
+}
+
+#tipue_drop_wrapper
+{
+    display: table;
+    margin: 6px;
+}
+#tipue_drop_wrapper a
+{
+    text-decoration: none;
+}
+
+/*second*/
+#tipue_drop_input1
+{
+    font-size: 14px;
+    color: #333;
+    padding: 8px 10px;
+    width: 315px;
+    border:0px !important;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    -webkit-box-shadow: inset 0px 0px 3px rgba(0,0,0,0.3);
+    -moz-box-shadow: inset 0px 0px 3px rgba(0,0,0,0.3);
+    box-shadow: inset 0px 0px 3px rgba(0,0,0,0.3);
+    outline: 0;
+    margin: 0;
+}
+
+#tipue_drop_content1
+{
+    display: none;
+    position: absolute;
+    margin: 8px 8px 0 0;
+    line-height: 0;
+    z-index: 1000;
+}
+
+#tipue_drop_wrapper1
+{
+    display: table;
+    margin: 6px;
+}
+#tipue_drop_wrapper1 a
+{
+    text-decoration: none;
+}
+
+/*Third*/
+#tipue_drop_input2
+{
+    font-size: 14px;
+    color: #333;
+    padding: 8px 10px;
+    width: 315px;
+    border:0px !important;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    -webkit-box-shadow: inset 0px 0px 3px rgba(0,0,0,0.3);
+    -moz-box-shadow: inset 0px 0px 3px rgba(0,0,0,0.3);
+    box-shadow: inset 0px 0px 3px rgba(0,0,0,0.3);
+    outline: 0;
+    margin: 0;
+}
+
+#tipue_drop_content2
+{
+    display: none;
+    position: absolute;
+    margin: 8px 8px 0 0;
+    line-height: 0;
+    z-index: 1000;
+}
+
+#tipue_drop_wrapper2
+{
+    display: table;
+    margin: 6px;
+}
+#tipue_drop_wrapper2 a
+{
+    text-decoration: none;
+}
+
+/*fourth*/
+#tipue_drop_input3
+{
+    font-size: 14px;
+    color: #333;
+    padding: 8px 10px;
+    width: 315px;
+    border:0px !important;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    -webkit-box-shadow: inset 0px 0px 3px rgba(0,0,0,0.3);
+    -moz-box-shadow: inset 0px 0px 3px rgba(0,0,0,0.3);
+    box-shadow: inset 0px 0px 3px rgba(0,0,0,0.3);
+    outline: 0;
+    margin: 0;
+}
+
+#tipue_drop_content3
+{
+    display: none;
+    position: absolute;
+    margin: 8px 8px 0 0;
+    line-height: 0;
+    z-index: 1000;
+}
+
+#tipue_drop_wrapper3
+{
+    display: table;
+    margin: 6px;
+}
+#tipue_drop_wrapper3 a
+{
+    text-decoration: none;
+}
+
+
+/*fifth*/
+#tipue_drop_input4
+{
+    font-size: 14px;
+    color: #333;
+    padding: 8px 10px;
+    width: 315px;
+    border:0px !important;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    -webkit-box-shadow: inset 0px 0px 3px rgba(0,0,0,0.3);
+    -moz-box-shadow: inset 0px 0px 3px rgba(0,0,0,0.3);
+    box-shadow: inset 0px 0px 3px rgba(0,0,0,0.3);
+    outline: 0;
+    margin: 0;
+}
+
+#tipue_drop_content4
+{
+    display: none;
+    position: absolute;
+    margin: 8px 8px 0 0;
+    line-height: 0;
+    z-index: 1000;
+}
+
+#tipue_drop_wrapper4
+{
+    display: table;
+    margin: 6px;
+}
+#tipue_drop_wrapper4 a
+{
+    text-decoration: none;
+}
+
+.tipue_drop_box 
+{
+    position: relative;
+	background: #fff;
+	border: 1px solid #dcdcdc;
+    -webkit-box-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+    -moz-box-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+    box-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+}
+.tipue_drop_box:after, .tipue_drop_box:before
+{
+	position: absolute;
+	pointer-events: none;
+	border: solid transparent;
+	bottom: 100%;
+	content: "";
+	height: 0;
+	width: 0;
+}
+.tipue_drop_box:after
+{
+	border-bottom-color: #fff;
+	border-width: 8px;
+	left: 42px;
+	margin-left: -8px;
+}
+.tipue_drop_box:before 
+{
+	border-bottom-color: #dcdcdc;
+	border-width: 9px;
+	left: 42px;
+	margin-left: -9px;
+}
+
+.tipue_drop_item
+{
+     display: table-row;
+     background-color: #fff;
+}
+.tipue_drop_item:hover
+{
+     background-color: #f7f7f7;
+}
+.tipue_drop_left
+{
+     display: table-cell;
+     padding: 7px;
+}
+.tipue_drop_image
+{
+     width: 26px;
+     height: 26px;
+     border-radius: 13px;
+     border: 2px solid #ddd;
+}
+.tipue_drop_right
+{
+     display: table-cell;
+     vertical-align: middle;
+     font: 300 14px/1.6 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	color: #333;     
+     width: 170px;
+     padding: 0 7px;
+}

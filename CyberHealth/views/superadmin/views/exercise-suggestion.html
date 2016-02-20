@@ -1,0 +1,63 @@
+
+<!-- Start Page Banner -->
+<div class="container" ng-cloak class="ng-cloak">
+    <div class="row">
+
+        <div class="col-md-3">
+            <h4 class="classic-title"><span>Exercise Management</span></h4>
+            <div ng-include src="'views/exercise-menu.html'" onload="activeClass"></div>
+        </div>
+        <div class="col-md-9" ng-init="init()">
+            <a href="#dashboard" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back to Dashboard</a>
+
+            <div flash-message="2000" class="col-md-4 pull-right no-padding"></div>
+            <h4 class="classic-title"><span><i class="fa fa-edit"></i> &nbsp;Exercise Suggestion</span></h4>
+
+            <div ng-if="loaded">
+                <div class="loader-style">
+                    <div class="loader"></div>
+                </div>
+            </div>
+            <div class="min-height-385">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                    <tr class="warning">
+                        <th class="col-md-2">Suggest ID</th>
+                        <th class="col-md-3">Suggested Exercise Name</th>
+                        <th class="col-md-5">Description</th>
+                        <th class="col-md-2">Options</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr dir-paginate="exercisesuggestion in exerciseSuggestionList | itemsPerPage: 9" ng-show="exerciseSuggestionList.length!=0">
+                        <td>{{exercisesuggestion.suggestionid}}</td>
+                        <td title="{{exercisesuggestion.exercisename}}"><span class="line-clamp-sm">{{exercisesuggestion.exercisename}}</span></td>
+                        <td title="{{exercisesuggestion.description}}"><span class="line-clamp-md">{{exercisesuggestion.description}}</span></td>
+                        <td>
+                            <a href="#exerciseSuggestionDetail/{{exercisesuggestion.suggestionid}}" class="btn-sm btn-primary btn-sm-override">View</a>
+                            <a href="" class="btn-xs btn-success hint--top" ng-click="doApproveExerciseSuggestion(exercisesuggestion.suggestionid)" ng-show="exercisesuggestion.exercisestatus==0" data-hint="Approve"><span>&#10004;</span></a>
+                            <a href="" class="btn-xs btn-danger hint--top" ng-click="doRejectExerciseSuggestion(exercisesuggestion.suggestionid)" ng-show="exercisesuggestion.exercisestatus==0" data-hint="Reject"><span>&#x2716;</span></a>
+                            <a href="#exercise-add/{{exercisesuggestion.suggestionid}}" class="btn-sm btn-success" ng-show="exercisesuggestion.exercisestatus==1" >Add Exercise</a>
+                            <span class="label-danger" ng-show="exercisesuggestion.exercisestatus==2">Rejected</span>
+                            <span class="label-success" ng-show="exercisesuggestion.exercisestatus==3">Approved</span>
+                        </td>
+                    </tr>
+                    <tr ng-show="exerciseSuggestionList.length==0">
+                        <td colspan="4" class="text-center">No Records Found !!!</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Start Pagination -->
+            <dir-pagination-controls ng-show="paginationLoad"  direction-links="true"  boundary-links="true"> </dir-pagination-controls>
+            <!-- End Pagination -->
+        </div>
+    </div>
+</div>
+
+
+
+<script type="text/javascript" src="../../js/script.js"></script>
+
+

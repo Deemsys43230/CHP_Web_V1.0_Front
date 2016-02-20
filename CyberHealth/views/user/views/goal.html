@@ -1,0 +1,131 @@
+
+
+<!-- Start Page Banner -->
+
+    <div class="col-md-8" ng-cloak class="ng-cloak">
+        <div class="content-weight height-265">
+            <div ng-include src="'views/'+goal.status+'.html'"></div>
+        </div>
+
+        <div class="content-weight">
+            <div class="row margin-right-2">
+                <form name="weightLogForm" novalidate>
+                    <div class="col-md-6 text-center">
+                        <h1 class="fa-5x fa fa-tachometer text-green"></h1>
+                        <h4 class="margin-top-10">UPDATE WEIGHT</h4>
+                    </div>
+                    <div class="col-md-6 no-padding">
+                        <div class="col-md-4 no-padding margin-top-3">
+                            <span>Date <span class="pull-right">:</span></span>
+                        </div>
+                        <div class="col-md-8 pull-right">
+                            <input type="text" id="weight-log-date" class="profile_input weightoverride" block>
+                            <input id="weightLogDate" hidden>
+                        </div>
+                        <div class="col-md-4 no-padding margin-top-15">
+                            <span>Weight<span class="pull-right">:</span></span>
+                        </div>
+                        <div class="col-md-8 pull-right margin-top-10">
+                            <input class="profile_input weightoverride" id="weightLog" name="weight" ng-model="weightlog" maxlength="5" required validate-Float1/>
+                            <span ng-show="weightLogForm.weight.$dirty&&weightLogForm.weight.$invalid">
+                                <span class="error-message textarea-errormessage10" ng-show="weightLogForm.weight.$error.required"><span>Required.</span></span>
+                                <span class="error-message textarea-errormessage10" ng-show="!weightLogForm.weight.$error.required&&weightLogForm.weight.$error.validateFloat1"><span>Invalid&nbsp;Data.</span></span>
+                            </span>
+                        </div>
+                        <div class="col-md-11 no-padding text-center margin-top-20 margin-bottom-10">
+                            <a href="" class="btn-dis weight_button" ng-disabled="isCleanWeight() || weightLogForm.$invalid||spinner" ng-click="weightLogEntry()">
+                                <span ng-if="spinner"><span class="three-quarters-loader">Loading…</span></span>{{weightUpdateText}}</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 no-padding">
+        <div id="weight_level">
+            <div id="col" class="weight_level"></div>
+        </div>
+        <div class="weight_mask">
+            <span ng-show="userProfile.gender==1"><img src="../../images/weight.png"></span>
+            <span ng-show="userProfile.gender==2"><img src="../../images/weight_female.png"></span>
+        </div>
+        <div class="weight_measure">
+            <div class="level_high"><div>HIGH</div></div>
+            <div class="level_maintain"><div>MAINTAIN</div></div>
+            <div class="level_low"><div>LOW</div></div>
+        </div>
+        <div class="text-center small margin-top-10">Weight Level</div>
+        <br/>
+        <div class="col-md-7 no-padding">
+
+            <h5>Idle Weight <span class="pull-right">: &nbsp;</span></h5>
+            <h5 class="margin-top-10">Current Weight <span class="pull-right">: &nbsp;</span></h5>
+        </div>
+        <div class="col-md-5 no-padding">
+            <h5><span class="yellow">&nbsp;&nbsp;</span> {{idealWeight}} Kgs</h5>
+            <h5 class="margin-top-10"><span class="green">&nbsp;&nbsp;</span> {{demography.weight}} Kgs</h5>
+        </div>
+        <div class="col-md-12 no-padding margin-top-10 text-italic">
+            <div class="margin-right-20">
+                <div ng-show="upweight == 1"><p>Your Are Adviced to increase the weight by {{balanceweight}} Kgs to reach your <strong>IDEAL WEIGHT</strong></p></div>
+                <div ng-show="upweight == 0"><p>Your Are Adviced to decrease the weight by {{balanceweight}} Kgs to reach your <strong>IDEAL WEIGHT</strong></p></div>
+                <div ng-show="upweight == 2"><p>Your Are in <strong>IDEAL WEIGHT</strong></p></div>
+            </div>
+        </div>
+    </div>
+
+<!-- End Page Banner -->
+
+<script>
+    function viewWeightGraph(){
+        var ha = idealWeightlevel+"%";
+        var hacolor = parseFloat(ha);
+        var selectoritem = $('#col');
+        if (idealWeightlevel <= 47) {
+            selectoritem.animate({height: ha}, 1200);
+            if(selectoritem.hasClass('yellow')){
+                selectoritem.removeClass('yellow');
+            }else if(selectoritem.hasClass('red')){
+                selectoritem.removeClass('red');
+            }
+            selectoritem.addClass('green');
+        }
+        else if(idealWeightlevel >= 53) {
+            selectoritem.animate({height: ha}, 1200);
+            if(selectoritem.hasClass('yellow')){
+                selectoritem.removeClass('yellow');
+            }else if(selectoritem.hasClass('green')){
+                selectoritem.removeClass('green');
+            }
+            selectoritem.addClass('red');
+        }
+        else if (47> idealWeightlevel < 53) {
+            selectoritem.animate({height: ha}, 1200);
+            if(selectoritem.hasClass('red')){
+                selectoritem.removeClass('red');
+            }else if(selectoritem.hasClass('green')){
+                selectoritem.removeClass('green');
+            }
+            selectoritem.addClass('yellow');
+        }
+    }
+
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+
+        var options = {
+            drops:"up",
+            maxDate : new Date(),
+            singleDatePicker: true
+        };
+
+        $('#weight-log-date').daterangepicker(options, function(start, end, label) {
+            document.getElementById("weightLogDate").value = start.format('DD/MM/YYYY');
+            var scope = angular.element($("#weight-log-date")).scope();
+            scope.doGetWeightLog(start.format('DD/MM/YYYY'));
+        });
+
+    });
+</script>

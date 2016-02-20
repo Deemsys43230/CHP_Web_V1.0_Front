@@ -1,0 +1,93 @@
+
+
+<!-- Start Page Banner -->
+<div class="container" ng-cloak class="ng-cloak">
+    <div class="row">
+
+        <div class="col-md-12 min-height-450" ng-init="coachSubscribersListInit()">
+            <a href="#coachPayment" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back to coach list</a>
+            <!-- Stat Search -->
+            <form class="form-wrapper pull-right" novalidate>
+                <input type="text" placeholder="Search here..." ng-model="subscriberSearch" ng-change="doGetCoachSubscribersList()" required>
+                <button type="submit" ><i class="fa fa-search"></i></button>
+            </form>
+            <!-- End Search -->
+            <h2 class="pull-right text-orange"><b>TOTAL EARN : <small class="text-bold">Admin :</small>&nbsp;<span class="text-red"><b>{{totalEarningsByAdmin}} $</b></span>&nbsp;&nbsp;<small class="text-bold">Coach :</small>&nbsp;<span class="text-red"><b>{{totalEarningsByCoach}} $</b></span></b>&nbsp;&nbsp;</h2>
+            <h5 class="classic-title"><span><i class="fa fa-male"></i>&nbsp;&nbsp;COACH SUBSCRIPTION - PAYMENT LIST</span></h5>
+            <div ng-if="loaded">
+                <div class="loader-style">
+                    <div class="loader"></div>
+                </div>
+            </div>
+            <table class="table table-striped table-bordered">
+                <thead>
+                <tr class="warning sort-icon">
+                    <th class="col-md-1">Subs. By<i ng-click="sortingCoachSubscriber('1')" class="{{sortIcon[1]}} pull-right"></i></th>
+                    <th class="col-md-1">Subs. On<i ng-click="sortingCoachSubscriber('2')" class="{{sortIcon[2]}} pull-right"></i></th>
+                    <th class="col-md-1">Expires On<i ng-click="sortingCoachSubscriber('3')" class="{{sortIcon[3]}} pull-right"></i></th>
+                    <th class="col-md-1">Earn ($)<i ng-click="sortingCoachSubscriber('4')" class="{{sortIcon[4]}} pull-right"></i></th>
+                    <th class="col-md-1">Share ($)<i ng-click="sortingCoachSubscriber('5')" class="{{sortIcon[5]}} pull-right"></i></th>
+                    <th class="col-md-3">Inward ID</th>
+                    <th class="col-md-2">Outward ID</th>
+                    <th class="col-md-1">Status</th>
+                    <th class="col-md-1">Options</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-show="coachPaymentHistory.paymentHistory.length == 0"><td colspan="9" class="text-center">No Subscribers!!!</td></tr>
+                <tr ng-show="coachPaymentHistory.paymentHistory.length < 0"><td colspan="9" class="text-center">Loading new data!!</td></tr>
+                <tr ng-repeat="subscriber in coachPaymentHistory.paymentHistory" >
+                    <td><span class="line-clamp-lxs" title="{{subscriber.subscribedby}}">{{subscriber.subscribedby}}</span></td>
+                    <td>{{subscriber.subscribedon}}</td>
+                    <td>{{subscriber.todate}}</td>
+                    <td>{{subscriber.adminamount}}</td>
+                    <td>{{subscriber.coachamount}}</td>
+                    <td>{{subscriber.inwardid}}</td>
+                    <td><span ng-show="subscriber.outwardid!=undefined">{{subscriber.outwardid}}</span><span ng-show="subscriber.outwardid==undefined"><a href="" ng-click="doManualPay(subscriber.paymentid,coachid)" class="btn-dis btn-xs btn-success" ng-disabled="loaddisable">Manual Pay</a></span></td>
+                    <td>
+                        <span ng-show="subscriber.enrollmentstatus==1" class="text-green">Active</span>
+                        <span ng-show="subscriber.enrollmentstatus==0" class="text-red">In active</span>
+                    </td>
+                    <td><a href="#coachSubscriberDetails/{{subscriber.paymentid}}" class="btn-xs btn-primary">View Details</a></td>
+                </tr>
+                </tbody>
+            </table>
+            <pagination
+                    ng-show="total_count>itemsPerPage"
+                    max-size="8"
+                    direction-links="true"
+                    boundary-links="true"
+                    total-items="total_count"
+                    items-per-page="itemsPerPage"
+                    ng-model="currentPage"
+                    ng-change="doGetCoachSubscribersList()" >
+            </pagination>
+
+        </div>
+    </div>
+</div>
+
+<!-- create enroll popup-->
+<div id="errormodal" class="popupContainer" style="display:none;left: 37%!important;">
+    <header class="popupHeader">
+        <span class="header_title">Alert</span>
+        <span class="modal_close"><i class="fa fa-times"></i></span>
+    </header>
+    <section class="popupBody">
+        <!-- Register Form -->
+        <div class="common_model">
+            <div class="text-center"><img src="../../images/alert-ring.png"/></div><br/>
+            <h5 class="text-center wrap">{{errormsg}}!!!</h5>
+            <div class="action_btns margin-top-20">
+                <div class="one_half last modal_close"><a onclick="return false;" class="btn back_btn">OK</a></div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- End Page Banner -->
+<script type="text/javascript" src="../../js/script.js"></script>
+
+<script type="text/javascript">
+    $("#modal").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
+</script>

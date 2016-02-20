@@ -1,0 +1,51 @@
+
+<div class="page-banner1" ng-cloak class="ng-cloak">
+    <div id="w" class="clearfix">
+        <div id="demography-content" ng-init="paymentDetails()">
+            <form name="demographyForm">
+                <div class="col-md-12">
+                    <a href="#payments" class="btn-sm btn-warning pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i>&nbsp;Back</a>
+                    <h5 class="classic-title"><span><i class="fa fa-money"></i>&nbsp;&nbsp;COURSE PAYMENT DETAILS</span></h5>
+                </div>
+
+                <div class="row">
+                    <div ng-if="loaded">
+                        <div class="loader-style">
+                            <div class="loader"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="col-md-12 margin-bottom-15">
+                            <!--<img ng-src="{{paymentDetails.imageurl | trusted}}">-->
+                            <img style="width: 100%" src="../../images/course-5.jpg">
+                        </div>
+                        <div class="col-md-3">
+                            <img ng-src="{{paymentDetails.imageurl | trusted}}">
+                        </div>
+                        <div class="col-md-9 no-padding">
+                            <h5>
+                            {{paymentDetails.name}}<br/>
+                            {{paymentDetails.emailid}}
+                            </h5>
+                        </div>
+                    </div>
+                    <div class="col-md-8 no-padding">
+                        <h4>
+                            <div class="col-md-4">Course Name</div>
+                            <div class="col-md-8">:&nbsp;&nbsp;&nbsp;{{paymentDetails.name}}</div>
+                            <div class="col-md-4 margin-top-10">Purchased Amount</div>
+                            <div class="col-md-8 margin-top-10">:&nbsp;&nbsp;&nbsp;<!--{{paymentDetails.name}}-->32 $</div>
+                            <div class="col-md-4 margin-top-10">Purchased Date</div>
+                            <div class="col-md-8 margin-top-10">:&nbsp;&nbsp;&nbsp;<!--{{paymentDetails.name}}-->23/01/2015</div>
+                            <div class="col-md-4 margin-top-10">Payment Id</div>
+                            <div class="col-md-8 margin-top-10">:&nbsp;&nbsp;&nbsp;<!--{{paymentDetails.name}}-->HGSJ829HP3A</div>
+                        </h4>
+                    </div>
+                </div>
+            </form>
+        </div><!-- @end #content -->
+    </div><!-- @end #w -->
+</div>
+
+
+<script type="text/javascript" src="../../js/script.js"></script>

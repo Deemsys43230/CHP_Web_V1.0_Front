@@ -1,0 +1,436 @@
+
+<div class="page-banner1" ng-cloak class="ng-cloak">
+    <div id="w" class="clearfix">
+        <div id="profile">
+            <div class="col-md-12 no-padding">
+                <div class="profile-image center-block">
+                    <span ng-if="spinner">
+                        <span class="spinner-profile">
+                            <span class="three-quarters-loader">Loading…</span></span>
+                        </span>
+
+                    <img ng-src="{{userProfile.imageurl | trusted}}">
+                </div>
+                <input type="hidden" ng-model="userProfile.imageurl" name="profileImage" id="profileImageId"/>
+                <div class="change-image"><a id="modal_trigger" href="#modal" class="btn btn-xs btn-warning">Change</a></div>
+                <h4 class="margin-top-20">{{orginalUserProfile.name}}</h4>
+                <p>{{orginalUserProfile.emailid}}</p>
+                <p>{{orginalUserProfile.phone}}</p>
+                <br/>
+                <div class="row">
+                    <div class="col-md-8">
+                        <p>Do you want to share your profile details?</p>
+                    </div>
+                    <div class="btn-group btn-toggle">
+                        <button class="btn btn-sm btn-default">YES</button>
+                        <button class="btn btn-sm btn-warning active">NO</button>
+                    </div>
+                    <form name="privacyForm">
+                    <div class="col-md-4 no-padding">
+                        <div class="switch">
+                            <input id="cmn-toggle-7" class="cmn-toggle cmn-toggle-yes-no"  ng-click="privacydetails()" type="checkbox">
+                            <label for="cmn-toggle-7" data-on="Yes" data-off="No"></label>
+                        </div>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div id="profile-content">
+            <form name="userProfileForm">
+            <div class="col-md-12">
+                <div class="col-md-12">
+                    <div class="margin-top-5 no-padding pull-right">
+                        <a id="modal_trigger1" href="#modal-changePassword" ng-click="reset()" class="profile_button margin-left-5 margin-top5"><i class="fa fa-lock"></i> Change Password</a>
+                        <a href="#dashboard" class="back-button pull-right margin-left-5 margin-top5"><i class="fa fa-arrow-circle-o-left"></i>&nbsp;Go To Dashboard</a>
+                    </div>
+                    <div flash-message="2000" class="col-md-4 pull-right no-padding"></div>
+                    <h5 class="classic-title margin-bottom-10"><span><i class="fa fa-user"></i> &nbsp;PROFILE UPDATE</span></h5>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="col-md-4 padding-top-4">
+                            <h5>Name :</h5>
+                        </div>
+                        <div class="col-md-8">
+                            <input class="profile_input" name="name" ng-model="userProfile.name" ng-pattern="/^ *([a-zA-Z]+ ?)+ *$/" maxlength="25" required/>
+                            <span ng-show="userProfileForm.name.$dirty&&userProfileForm.name.$invalid">
+                                  <span class="error-message textarea-errormessage10" ng-show="userProfileForm.name.$error.required"><span>Required.</span></span>
+                                 <span class="error-message textarea-errormessage10" ng-show="userProfileForm.name.$error.pattern"><span>Enter&nbsp;valid&nbsp;Name.</span></span>
+                             </span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="col-md-4 padding-top-4">
+                            <h5>Country :</h5>
+                        </div>
+                        <div class="col-md-8"><!--{{userProfile.country}}-->
+                            <select class="full-width main margin-bottom-1" name="country"  ng-model="userProfile.countrySelect" ng-options="country.name for country in countries track by country.code" ng-init="addCountry()" ng-change="updateCountry()" required>
+                                <option value="">-- Select a Country --</option>
+                            </select>
+                           <!--<input class="profile_input" name="country" ng-model="userProfile.country" maxlength="20" required/>-->
+                             <span ng-show="userProfileForm.country.$dirty&&userProfileForm.country.$invalid">
+                    <span class="error-message textarea-errormessage10" ng-show="userProfileForm.country.$error.required"><span>Required.</span></span>
+                             </span>
+                        </div>
+                    </div>
+                    <div class="col-md-6 margin-top-10">
+                        <div class="col-md-4 padding-top-4">
+                            <h5>DOB <small>(DD/MM/YYYY)</small> :</h5>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="input-group ui-datepicker full-width">
+                                <input placeholder="Date Of Birth" name="dob" ng-click="open($event)" ng-change="change()" type="text"
+                                       ng-keypress="prevent()"
+                                       class="profile_input"
+                                       id = "popup"
+                                       uib-datepicker-popup="{{format}}"
+                                       ng-model="selectedDate"
+                                       is-open="opened"
+                                       min="minDate"
+                                       max="maxDate"
+                                       data-show-weeks="false"
+                                       show-button-bar="false"
+                                       datepicker-options="dateOptions"
+                                       date-disabled="disabled(date, mode)"
+                                       ng-required="true"
+                                       close-text="Close" required block>
+                            </div>
+                            <span ng-show="userProfileForm.dob.$dirty&&userProfileForm.dob.$invalid">
+                                <span class="error-message textarea-errormessage10" ng-show="userProfileForm.dob.$error.required"><span>Required.</span></span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-6 margin-top-10">
+                        <div class="col-md-4 padding-top-4">
+                            <h5>State :</h5>
+                        </div>
+                        <div class="col-md-8"><!--{{userProfile.state}}-->
+                            <select class="full-width main margin-bottom-1" name="state" ng-model="userProfile.stateSelect" ng-options="state.name for state in availableStates track by state.code" required>
+                                <option value="">-- Select a State --</option>
+                            </select>
+                            <!--<input class="profile_input" name="state" ng-model="userProfile.state" maxlength="20" required/>-->
+                            <span ng-show="userProfileForm.state.$dirty&&userProfileForm.state.$invalid">
+                    <span class="error-message textarea-errormessage10" ng-show="userProfileForm.state.$error.required"><span>Required.</span></span>
+                             </span>
+                        </div>
+                    </div>
+                    <div class="col-md-6 margin-top-10">
+                        <div class="col-md-4 padding-top-4">
+                            <h5>Email ID :</h5>
+                        </div>
+                        <div class="col-md-8">
+                            <input class="profile_input" ng-model="userProfile.emailid" ng-disabled="true" required/>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 margin-top-10">
+                        <div class="col-md-4 padding-top-4">
+                            <h5>City :</h5>
+                        </div>
+                        <div class="col-md-8">
+                            <input class="profile_input" name="city" ng-pattern="/^ *([a-zA-Z]+ ?)+ *$/" ng-model="userProfile.city" maxlength="20" required/>
+                             <span ng-show="userProfileForm.city.$dirty&&userProfileForm.city.$invalid">
+                                 <span class="error-message textarea-errormessage10" ng-show="userProfileForm.city.$error.required"><span>Required.</span></span>
+                                 <span class="error-message textarea-errormessage10" ng-show="userProfileForm.city.$error.pattern"><span>Invalid&nbsp;city.</span></span>
+                             </span>
+                        </div>
+                    </div>
+                    <div class="col-md-6 margin-top-10">
+                        <div class="col-md-4 padding-top-4">
+                            <h5>Mobile :</h5>
+                        </div>
+                        <div class="col-md-8">
+                            <input class="profile_input" name="phone" ng-pattern="/^\d+$/"  ng-model="userProfile.phone" ng-minlength="10" maxlength="10" required />
+                            <span ng-show="userProfileForm.phone.$dirty&&userProfileForm.phone.$invalid">
+                                 <span class="error-message textarea-errormessage10" ng-show="userProfileForm.phone.$error.required"><span>Required.</span></span>
+                                  <span class="error-message textarea-errormessage10" ng-show="userProfileForm.phone.$error.pattern"><span>Invalid&nbsp;Format.</span></span>
+                                 <span class="error-message textarea-errormessage10" ng-show="!userProfileForm.phone.$error.pattern&&userProfileForm.phone.$error.minlength"><span>Should&nbsp;be&nbsp;of&nbsp;length&nbsp;10.</span></span>
+                             </span>
+                        </div>
+                    </div>
+                    <div class="col-md-6 margin-top-10">
+                        <div class="col-md-4 padding-top-4">
+                            <h5>Zipcode :</h5>
+                        </div>
+                        <div class="col-md-8">
+                            <input class="profile_input" name="zipcode" ng-pattern="/^\d{5,6}$/" ng-model="userProfile.zipcode" maxlength="6" minlength="5" required/>
+                            <span ng-show="userProfileForm.zipcode.$dirty&&userProfileForm.zipcode.$invalid">
+                                <span class="error-message textarea-errormessage10" ng-show="userProfileForm.zipcode.$error.required"><span>Required.</span></span>
+                                <span class="error-message textarea-errormessage10" ng-show="userProfileForm.zipcode.$error.pattern"><span>Invalid&nbsp;Format.</span></span>
+                                <span class="error-message textarea-errormessage10" ng-show="!userProfileForm.zipcode.$error.pattern&&userProfileForm.zipcode.$error.minlength"><span>Should&nbsp;be&nbsp;of&nbsp;length&nbsp;5.</span></span>
+                             </span>
+                        </div>
+                    </div>
+                    <div class="col-md-6 margin-top-10">
+                        <div class="col-md-4 padding-top-4">
+                            <h5>Secret&nbsp;Question:</h5>
+                        </div>
+                        <div class="col-md-8">
+                           <!-- <input class="profile_input" name="secretquestion" ng-model="userProfile.secretquestion" maxlength="150" required/>-->
+                            <select class="full-width main"  ng-model="userProfile.secretquestion" name="secretquestion" required>
+                                <option value="">--Select secret question--</option>
+                                <option value="1">What was the name of your first pet?</option>
+                                <option value="2">What is the name of your best friend?</option>
+                                <option value="3">What is your favourite dish?</option>
+                                <option value="4">What is the name of your favourite film star ?</option>
+                                <option value="5">What is the name of your favourite sport's team?</option>
+                                <option value="6">What is your Dream job?</option>
+                            </select>
+                            <span ng-show="userProfileForm.secretquestion.$dirty&&userProfileForm.secretquestion.$invalid">
+                    <span class="error-message textarea-errormessage10" ng-show="userProfileForm.secretquestion.$error.required"><span>Required.</span></span>
+                             </span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 margin-top-10">
+                        <div class="col-md-4 padding-top-4">
+                            <h5>Gender :</h5>
+                        </div>
+                        <div class="col-md-8" >
+                            <input type="radio" id="1" class="height" name="sex" value="1" ng-model="userProfile.gender"   required/>
+                            <label for="1">Male</label>
+                            <input type="radio" id="2" class="height" name="sex" value="2" ng-model="userProfile.gender"   required/>
+                            <label for="2">Female</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6 margin-top-5">
+                        <div class="col-md-4 padding-top-4">
+                            <h5>Secret&nbsp;Answer:</h5>
+                        </div>
+                        <div class="col-md-8">
+                            <input class="profile_input" name="secretanswer" ng-model="userProfile.secretanswer" maxlength="150" required/>
+                            <span ng-show="userProfileForm.secretanswer.$dirty&&userProfileForm.secretanswer.$invalid">
+                    <span class="error-message textarea-errormessage10" ng-show="userProfileForm.secretanswer.$error.required"><span>Required.</span></span>
+                             </span>
+                        </div>
+                    </div>
+                    <div class="col-md-6 margin-top-5">
+                        <div class="col-md-4 padding-top-4">
+                            <h5>Prefer Food :</h5>
+                        </div>
+                        <div class="col-md-8" >
+                            <input type="radio" id="india" class="height" name="preferfood" value="1" ng-model="userProfile.preferfood"/>
+                            <label for="india">Indian</label>
+                            <input type="radio" id="us" class="height" name="preferfood" value="2" ng-model="userProfile.preferfood"/>
+                            <label for="us">United states</label>
+                            <input type="radio" id="general" class="height" name="preferfood" value="3" ng-model="userProfile.preferfood"/>
+                            <label for="general">General</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6 margin-top-5">
+                        <div class="col-md-4 padding-top-4">
+                            <h5>About Me :</h5>
+                            <p ng-show="showCount && userProfile.about.length"><span class="text-bold text-red" style="font-size: 18px">{{ (300-userProfile.about.length) }}</span> Characters Remaining&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+                            <p ng-hide="showCount && userProfile.about.length">&nbsp;</p>
+                        </div>
+                        <div class="col-md-8">
+                            <span ng-show="userProfileForm.about.$dirty&&userProfileForm.about.$invalid">
+                                 <span class="error-message textarea-errormessage40-right" ng-show="userProfileForm.about.$error.required"><span>Required.</span></span>
+                             </span>
+                            <textarea class="profile_input_textarea" name="about" ng-model="userProfile.about" maxlength="300" ng-blur="showCount=0" ng-focus="showCount=1" required></textarea>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 text-center margin-top-10">
+                        <a href="" class="btn register_button" ng-click="doUpdateProfile()" ng-disabled="isClean() || userProfileForm.$invalid">Save Changes</a>
+                        <a href="#dashboard" class="btn cancel_button">Cancel</a>
+                    </div>
+                </div>
+            </div>
+                </form>
+        </div><!-- @end #content -->
+    </div><!-- @end #w -->
+</div>
+
+<!-- create coach popup-->
+<div id="modal" class="popupContainer" style="display:none;">
+    <header class="popupHeader">
+        <span class="header_title">Change Profile Image</span>
+        <span class="modal_close"><i class="fa fa-times"></i></span>
+    </header>
+
+    <section class="popupBody">
+        <!-- Register Form -->
+        <div class="common_model">
+            <div class="image-editor">
+                <div class="cropit-image-preview center-block"></div>
+                <div class="image-size-label">
+                    Resize image
+                </div>
+                <input type="range" class="cropit-image-zoom-input">
+                <h6 class="text-red text-center margin-tb-10">Note : Upload Image Size Minimum of 200x200</h6>
+                <div class="action_btns margin-top-20">
+                    <div class="one_half">
+                        <div class="fileUpload food-button" >
+                            <span>Choose File</span>
+                            <input type="file" class="upload cropit-image-input" valid-file required  ng-model="testimonials.imageurl" onchange="angular.element(this).scope().fileNameChanged(this)"/>
+                        </div>
+                    </div>
+                    <div class="one_half last"><a href="" onclick="return false;" class="btn food-button export modal_close" ng-disabled="imageUploaded" ng-click="doUpdateProfileImage()">Upload Image</a></div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- create coach popup-->
+<div id="modal-changePassword" class="popupContainer" style="display:none;">
+    <header class="popupHeader">
+        <span class="header_title">Change Password</span>
+        <span class="modal_close"><i class="fa fa-times"></i></span>
+    </header>
+
+    <section class="popupBody">
+        <!-- Register Form -->
+        <div class="common_model">
+            <form name="changePasswordForm" novalidate>
+                <p>Current Password</p>
+                <input type="password" name="oldPassword" ng-model="changePassword.oldPassword" maxlength="20" required/>
+                <span ng-show="changePasswordForm.oldPassword.$dirty&&changePasswordForm.oldPassword.$invalid">
+                    <span class="error-message" ng-show="changePasswordForm.oldPassword.$error.required"><span>Required.</span></span>
+                </span>
+                <p>New Password</p>
+                <input type="password" name="newPassword" id="pswd" ng-model="changePassword.newPassword" ng-pattern="/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-])(?!.*\s).{6,}$/" maxlength="20" required/>
+                 <span ng-show="changePasswordForm.newPassword.$dirty&&changePasswordForm.newPassword.$invalid">
+                    <span class="error-message" ng-show="changePasswordForm.newPassword.$error.required"><span>Required.</span></span>
+                     <span class="error-message" ng-show="changePasswordForm.newPassword.$error.pattern"><span>Condition&nbsp;not&nbsp;satisfied</span></span>
+                </span>
+                <p>Confirm New Password</p>
+                <input type="password" name="confirmPassword" ng-disabled="changePasswordForm.newPassword.$invalid" compare-to="changePassword.newPassword" ng-model="changePassword.confirmPassword"/>
+                <span ng-show="changePasswordForm.confirmPassword.$dirty&&changePasswordForm.confirmPassword.$invalid && !changePasswordForm.confirmPassword.$pristine">
+                    <span class="error-message" ng-show="changePasswordForm.confirmPassword.$error.compareTo"><span>Password&nbsp;don't&nbsp;match.</span></span>
+                </span>
+                <div class="action_btns margin-top-20">
+                    <div class="one_half"><a class="btn btn_red modal_close" onclick="return false" ng-disabled="changePasswordForm.$invalid" ng-click="doChangePassword()">Change Password</a></div>
+                    <div class="one_half last modal_close"><a onclick="return false;" class="btn back_btn">Cancel</a></div>
+                </div>
+            </form>
+            <div id="pswd_info">
+                <h4>Password must meet the following requirements:</h4>
+
+                <ul>
+                    <li id="letter" class="invalid">At least <strong>one small letter</strong>
+
+                    </li>
+                    <li id="capital" class="invalid">At least <strong>one capital letter</strong>
+
+                    </li>
+                    <li id="number" class="invalid">At least <strong>one number</strong>
+
+                    </li>
+                    <li id="special" class="invalid">At least <strong>one special charcter</strong>
+
+                    </li>
+                    <li id="length" class="invalid">Be at least <strong>6 characters</strong>
+
+                    </li>
+                    <li id="space" class="valid">Should not allow space
+
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+</div>
+
+<script type="text/javascript" src="../../js/script.js"></script>
+
+<script type="text/javascript">
+    $("#modal_trigger").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
+
+    $(function(){
+        $(".common_model").show();
+    })
+</script>
+
+<script type="text/javascript">
+    $("#modal_trigger1").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
+
+    $(function(){
+        $(".common_model").show();
+    })
+</script>
+
+<script>
+    $('.btn-toggle').click(function() {
+        $(this).find('.btn').toggleClass('active');
+        if ($(this).find('.btn-warning').size()>0) {
+            $(this).find('.btn').toggleClass('btn-warning');
+        }
+        $(this).find('.btn').toggleClass('btn-default');
+    });
+</script>
+
+<script>
+    $(document).ready(function () {
+        $('#pswd').keyup(function () {
+            // set password variable
+            var pswd = $('#pswd').val();
+            if (pswd.length < 6) {
+                $('#length').removeClass('valid').addClass('invalid');
+            } else {
+                $('#length').removeClass('invalid').addClass('valid');
+            }
+            //validate letter
+            if (pswd.match(/[a-z]/)) {
+                $('#letter').removeClass('invalid').addClass('valid');
+            } else {
+                $('#letter').removeClass('valid').addClass('invalid');
+            }
+            //validate capital letter
+            if (pswd.match(/[A-Z]/)) {
+                $('#capital').removeClass('invalid').addClass('valid');
+            } else {
+                $('#capital').removeClass('valid').addClass('invalid');
+            }
+
+            //validate number
+            if (pswd.match(/\d/)) {
+                $('#number').removeClass('invalid').addClass('valid');
+            } else {
+                $('#number').removeClass('valid').addClass('invalid');
+            }
+
+            if (pswd.match(/\s/)) {
+                $('#space').removeClass('valid').addClass('invalid');
+            } else {
+                $('#space').removeClass('invalid').addClass('valid');
+            }
+
+            if (pswd.match(/[#?!@$%^&*-]/)) {
+                $('#special').removeClass('invalid').addClass('valid');
+            } else {
+                $('#special').removeClass('valid').addClass('invalid');
+            }
+
+            if ($('#pswd_info li.invalid').length == 0) {
+                $('#pswd_info').fadeOut();
+            } else {
+                $('#pswd_info').fadeIn();
+            }
+        });
+        $('#pswd').focus(function () {
+            // focus code here
+        });
+        $('#pswd').blur(function () {
+            // blur code here
+        });
+
+        $('#pswd').keyup(function () {
+
+            // keyup code here
+        }).focus(function () {
+            $('#pswd_info').show();
+        }).blur(function () {
+            /* var pass = $('#pswd').val();
+             // alert(pass);
+             if(pass == ""){
+             $('#pswd_info').hide();
+             }*/
+            $('#pswd_info').hide();
+        });
+
+    });
+</script>

@@ -1,0 +1,96 @@
+<!-- Start Testimonials Section -->
+<div class="section service" ng-init="init()" xmlns="http://www.w3.org/1999/html" ng-cloak class="ng-cloak">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 min-height-450">
+                <div ng-if="loaded">
+                    <div class="loader-style">
+                        <div class="loader"></div>
+                    </div>
+                </div>
+                <h4 class="classic-title"><span>Most Viewed</span></h4>
+                <div id="showMostViewed" class="wrap">
+                    <div ng-repeat="userforum in userforumlist | limitTo:20">
+                        <h5><a class="forum-topic wrap" href="#forumDetails/{{userforum.postid}}">{{userforum.posttitle}}</a></h5>
+                        <hr/>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-9 min-height-450">
+                <div ng-if="loaded">
+                    <div class="loader-style">
+                        <div class="loader"></div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <h1>SINGLE FORUM</h1>
+                </div>
+                <div class="col-md-8">
+                    <a href="#forums" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i>&nbsp;Back to Forums List</a>
+                    <div flash-message="2000" class="col-md-7 no-padding pull-right"></div>
+                </div>
+                <div class="col-md-12">
+                    <hr/>
+                </div>
+                <div class="col-md-12">
+                    <h3 class="margin-bottom-20 wrap">{{userforumdetails.posttitle}}</h3>
+                    <div class="col-md-1">
+                        <img class="img-circle" ng-src="{{userforumdetails.userimage | trusted}}"/>
+                    </div>
+                    <div class="col-md-11">
+                        <p>Posted by : <strong>{{userforumdetails.username}}</strong></p>
+                        <p>Posted on : {{userforumdetails.postedon}}</p>
+                    </div>
+                    <div class="col-md-12 no-padding margin-tb-10 wrap">
+                        {{userforumdetails.postdescription}}<br/>
+                        <div class="margin-top-10">
+                            <a href="" ng-click="doMarkPostAsAbuse()" class="h6">Report Abuse</a>
+                            <span ng-if="userCheck"> | <a href="#editForum/{{userforumdetails.postid}}"  class="btn abuse"  class="h6" >Edit</a></span>
+                        </div>
+                    </div>
+                    <div class="col-md-12 no-padding">
+                        <h4>Comments</h4>
+                        <div class="text-center margin-tb-20" ng-show="forumAnswers.length==0">
+                            <img src="../../images/no-reviews.png"/>
+                            <h1 class="text-gray">NO COMMENTS</h1>
+                        </div>
+                        <div ng-repeat="forumAnswerList in forumAnswers" ng-hide="forumAnswers.length==0">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <hr/>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="col-md-4 no-padding">
+                                        <div class="col-md-2 no-padding">
+                                            <img class="img-circle" ng-src="{{forumAnswerList.userimage | trusted}}"/>
+                                        </div>
+                                        <div class="col-md-10">
+                                            <h5>{{forumAnswerList.username}}</h5>
+                                            <p>{{forumAnswerList.postedon}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <p class="wrap"><strong>{{forumAnswerList.comments}}</strong></p>
+                                        <a href="" ng-click="doMarkCommentAsAbuse(forumAnswerList.ansid)" class="h6">Report Abuse</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr/>
+                        <h4 class="margin-top-20">Post Comment</h4>
+                        <form name="userCommentForm" novalidate>
+                        <span ng-show="userCommentForm.comments.$dirty&&userCommentForm.comments.$invalid&& !userCommentForm.comments.$pristine">
+                            <span class="error-message textarea-errormessage40" ng-show="userCommentForm.comments.$error.required"><span>Required.</span></span>
+                        </span>
+                            <textarea class="forum-textarea" name="comments" ng-model="comments" placeholder="Enter the comments" maxlength="400" required/></textarea>
+                            <a href="" ng-click="doPostForumAnswers()" class="btn main-button" ng-disabled="userCommentForm.$invalid">POST COMMENT</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Testimonials Section -->
+
+<script type="text/javascript" src="../../js/script.js"></script>
