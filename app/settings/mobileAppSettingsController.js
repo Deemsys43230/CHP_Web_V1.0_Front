@@ -1,1 +1,106 @@
-var adminApp=angular.module("adminApp",["ngRoute","oc.lazyLoad","requestModule","flash","ngAnimate"]);adminApp.controller("MobileAppSettingsController",function(o,n,i,e,l){o.siteMenuList=e,$.each(o.siteMenuList,function(o,n){n.href==l.path().substr(1)?n.active="active":n.active=""});var s="",t="",a="";o.copyOrginal_Ios=function(n){o.mobileInfoIos=n,o.mobileInfoIos.buildnumber=o.mobileInfoIos.buildnumber.toString(),o.mobileInfoIos.version=o.mobileInfoIos.version.toString(),a=angular.copy(o.mobileInfoIos)},o.copyOrginal_Android=function(n){o.mobileInfoAndroid=n,o.mobileInfoAndroid.buildnumber=o.mobileInfoAndroid.buildnumber.toString(),o.mobileInfoAndroid.version=o.mobileInfoAndroid.version.toString(),t=angular.copy(o.mobileInfoAndroid)},o.copyOrginal_Windows=function(n){o.mobileInfoWindows=n,o.mobileInfoWindows.buildnumber=o.mobileInfoWindows.buildnumber.toString(),o.mobileInfoWindows.version=o.mobileInfoWindows.version.toString(),s=angular.copy(o.mobileInfoWindows)},o.collectDetails=function(){n.getRequest("admin/getmobileinfo","").then(function(n){o.mobileInfoWindows=n.data.Mobile_Info[2],o.mobileInfoAndroid=n.data.Mobile_Info[0],o.mobileInfoIos=n.data.Mobile_Info[1],o.copyOrginal_Ios(o.mobileInfoIos),o.copyOrginal_Android(o.mobileInfoAndroid),o.copyOrginal_Windows(o.mobileInfoWindows)},function(){errorMessage(i,"Please try again after some time!")})},o.doUpdateIos=function(){n.putRequest("admin/updatemobileinfo",o.mobileInfoIos).then(function(n){o.mobileInfoIos=n.data.Mobile_Info,o.copyOrginal_Ios(o.mobileInfoIos),successMessage(i,"Successfully updated!")},function(){errorMessage(i,"Please try again after some time!")})},o.doUpdateAndroid=function(){n.putRequest("admin/updatemobileinfo",o.mobileInfoAndroid).then(function(n){o.mobileInfoAndroid=n.data.Mobile_Info,o.copyOrginal_Android(o.mobileInfoAndroid),successMessage(i,"Successfully updated!")},function(){errorMessage(i,"Please try again after some time!")})},o.doUpdateWindows=function(){n.putRequest("admin/updatemobileinfo",o.mobileInfoWindows).then(function(n){o.mobileInfoWindows=n.data.Mobile_Info,o.copyOrginal_Windows(o.mobileInfoWindows),successMessage(i,"Successfully updated!")},function(){errorMessage(i,"Please try again after some time!")})},o.mobileInfoWindows_isClean=function(){return angular.equals(s,o.mobileInfoWindows)},o.mobileInfoAndroid_isClean=function(){return angular.equals(t,o.mobileInfoAndroid)},o.mobileInfoIos_isClean=function(){return angular.equals(a,o.mobileInfoIos)},o.collectDetails()});
+/**
+ * Created by Deemsys on 9/18/2015.
+ */
+var adminApp = angular.module('adminApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate']);
+
+adminApp.controller("MobileAppSettingsController",function($scope,requestHandler,Flash,siteMenuService,$location){
+
+    $scope.siteMenuList = siteMenuService;
+    $.each($scope.siteMenuList,function(index,value){
+        if(value.href==$location.path().substr(1)){
+            value.active = "active";
+        }
+        else value.active = ""
+    });
+
+    var mobileInfoWindows_original="";
+    var mobileInfoAndroid_original="";
+    var mobileInfoIos_original="";
+
+    $scope.copyOrginal_Ios=function(mobileInfoIos){
+        $scope.mobileInfoIos=mobileInfoIos;
+        $scope.mobileInfoIos.buildnumber = $scope.mobileInfoIos.buildnumber.toString();
+        $scope.mobileInfoIos.version = $scope.mobileInfoIos.version.toString();
+        mobileInfoIos_original=angular.copy($scope.mobileInfoIos);
+    };
+
+    $scope.copyOrginal_Android=function(mobileInfoAndroid){
+        $scope.mobileInfoAndroid=mobileInfoAndroid;
+        $scope.mobileInfoAndroid.buildnumber = $scope.mobileInfoAndroid.buildnumber.toString();
+        $scope.mobileInfoAndroid.version = $scope.mobileInfoAndroid.version.toString();
+        mobileInfoAndroid_original=angular.copy($scope.mobileInfoAndroid);
+    };
+
+    $scope.copyOrginal_Windows=function(mobileInfoWindows){
+        $scope.mobileInfoWindows=mobileInfoWindows;
+        $scope.mobileInfoWindows.buildnumber = $scope.mobileInfoWindows.buildnumber.toString();
+        $scope.mobileInfoWindows.version = $scope.mobileInfoWindows.version.toString();
+        mobileInfoWindows_original=angular.copy($scope.mobileInfoWindows);
+    };
+
+    $scope.collectDetails= function () {
+        requestHandler.getRequest("admin/getmobileinfo","").then(function(response){
+
+            $scope.mobileInfoWindows=response.data.Mobile_Info[2];
+            $scope.mobileInfoAndroid=response.data.Mobile_Info[0];
+            $scope.mobileInfoIos=response.data.Mobile_Info[1];
+
+            $scope.copyOrginal_Ios($scope.mobileInfoIos);
+            $scope.copyOrginal_Android($scope.mobileInfoAndroid);
+            $scope.copyOrginal_Windows($scope.mobileInfoWindows);
+
+
+
+
+        },function(response){
+            errorMessage(Flash,"Please try again after some time!")
+        });
+
+    };
+
+    $scope.doUpdateIos=function(){
+        requestHandler.putRequest("admin/updatemobileinfo",$scope.mobileInfoIos).then(function(response){
+            $scope.mobileInfoIos=response.data.Mobile_Info;
+            $scope.copyOrginal_Ios($scope.mobileInfoIos);
+            successMessage(Flash,"Successfully updated!");
+        },function(response){
+            errorMessage(Flash,"Please try again after some time!")
+        });
+    };
+
+    $scope.doUpdateAndroid=function(){
+        requestHandler.putRequest("admin/updatemobileinfo",$scope.mobileInfoAndroid).then(function(response){
+            $scope.mobileInfoAndroid=response.data.Mobile_Info;
+            $scope.copyOrginal_Android($scope.mobileInfoAndroid);
+            successMessage(Flash,"Successfully updated!");
+        },function(response){
+            errorMessage(Flash,"Please try again after some time!")
+        });
+    };
+
+
+    $scope.doUpdateWindows= function () {
+        requestHandler.putRequest("admin/updatemobileinfo",$scope.mobileInfoWindows).then(function(response){
+            $scope.mobileInfoWindows=response.data.Mobile_Info;
+            $scope.copyOrginal_Windows($scope.mobileInfoWindows);
+            successMessage(Flash,"Successfully updated!");
+        },function(response){
+            errorMessage(Flash,"Please try again after some time!")
+        });
+
+    };
+
+    $scope.mobileInfoWindows_isClean=function(){
+        return angular.equals(mobileInfoWindows_original, $scope.mobileInfoWindows);
+    };
+
+    $scope.mobileInfoAndroid_isClean=function(){
+        return angular.equals(mobileInfoAndroid_original, $scope.mobileInfoAndroid);
+    };
+
+    $scope.mobileInfoIos_isClean=function(){
+        return angular.equals(mobileInfoIos_original, $scope.mobileInfoIos);
+    };
+
+    $scope.collectDetails();
+});

@@ -1,1 +1,103 @@
-var adminApp=angular.module("exerciseServiceModule",["requestModule"]);adminApp.factory("ExerciseService",function(e){var t={};return t.doGetTags=function(){return e.getRequest("admin/listofExercisetags/","").then(function(e){return $.each(e.data.Exercise_Tag_Data,function(e,t){delete t.status}),e.data.Exercise_Tag_Data},function(){alert("Not able to pull Food Tag")})},t.getSelectedLevel=function(e){var t="";$.each(e.levels,function(a,n){a<e.levels.length-1&&(t=t+n.levelname+", "),t+=n.levelname});var a={};return a.typeid=e.typeid,a.type=e.typename,a.levelnames=t,a},t.getTypeList=function(e){var t=new Array;return $.each(e,function(e,a){var n={};n.typeid=a.typeid,n.type=a.typename;var r="";$.each(a.levels,function(e,t){e<a.levels.length-1&&(r=r+t.levelname+", "),r+=t.levelname}),n.levelnames=r,t.push(n)}),t},t.insertTag=function(t){return e.postRequest("admin/insertexerciseTag/",{tagname:t}).then(function(e){return 1==e.data.Response_status?e.data.Exercise_Tag_Data.tagid:void 0})},t.getTagArray=function(e){var a,n=new Array;return $.each(e,function(e,r){null!=r.tagid?n.push(parseInt(r.tagid)):(a=t.insertTag(r.tagname),a.then(function(e){n.push(e)}))}),n},t});
+var adminApp=angular.module('exerciseServiceModule',['requestModule']);
+
+adminApp.factory("ExerciseService",function(requestHandler){
+
+    var exerciseServiceObj={};
+
+    //Get Tags
+    exerciseServiceObj.doGetTags= function () {
+         return requestHandler.getRequest("admin/listofExercisetags/","").then(function(response){
+            $.each(response.data.Exercise_Tag_Data, function(index,tag){
+               delete tag.status;
+            });  
+            return response.data.Exercise_Tag_Data;
+        },function(response){
+            alert("Not able to pull Food Tag");
+        })
+    };
+    //End Get Food Tags
+
+    //Exercise Type By id
+    exerciseServiceObj.getSelectedLevel = function(typeObj){
+        var levelnames = "";
+
+        $.each(typeObj.levels, function(index,value){
+            if(index<typeObj.levels.length-1)
+            levelnames = levelnames+value.levelname+', ';
+            levelnames = levelnames+value.levelname;
+        });
+
+        var returnObj={};
+
+        returnObj.typeid=typeObj.typeid;
+        returnObj.type=typeObj.typename;
+        returnObj.levelnames=levelnames;
+
+        return returnObj;
+    };
+    //End Exercise Type By id
+
+    //Exercise Type List
+    exerciseServiceObj.getTypeList = function(typeList){
+        var returnTypeListArray=new Array();
+        $.each(typeList, function(index,value){
+            var TypeListObj = {};
+
+            TypeListObj.typeid=value.typeid;
+            TypeListObj.type=value.typename;
+            var levelnames = "";
+            $.each(value.levels, function(index,levelValues){
+                if(index<value.levels.length-1)
+                levelnames = levelnames+levelValues.levelname+', ';
+                levelnames = levelnames+levelValues.levelname;
+            });
+
+            TypeListObj.levelnames=levelnames;
+
+            returnTypeListArray.push(TypeListObj);
+
+        });
+
+        return returnTypeListArray;
+    };
+    //End Exercise Type List
+
+    //Insert New Tags
+    exerciseServiceObj.insertTag=function(tagname){
+        return requestHandler.postRequest("admin/insertexerciseTag/",{'tagname':tagname}).then(function(response){
+         if(response.data.Response_status==1){
+            return response.data.Exercise_Tag_Data.tagid;
+         }
+         });
+    };
+
+    //Get Tag array to update
+    exerciseServiceObj.getTagArray=function(tags){
+        var tagArray=new Array();
+        var tagPromise;
+        $.each(tags, function(index,value) {
+            if(value.tagid!=null){
+                tagArray.push(parseInt(value.tagid));
+            }else{
+               tagPromise=exerciseServiceObj.insertTag(value.tagname);
+               tagPromise.then(function(result){
+                   tagArray.push(result);
+               });
+            }
+        });
+
+        return tagArray;
+
+    };
+
+    return exerciseServiceObj;
+
+});
+
+
+
+
+
+
+
+
