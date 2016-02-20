@@ -81,12 +81,31 @@ userApp.controller('UserProfileController',['$scope','requestHandler','Flash',fu
         requestHandler.getRequest("getUserSettings/","").then(function(response){
             $.each(response.data.User_Settings,function(index,value){
                 $scope.privacydetail = value.isprivacy;
-                alert($scope.privacydetail);
                 if($scope.privacydetail == 1){
-                    document.privacyForm.elements['cmn-toggle-7'].checked = true;
+                    var selectorcheck = $('#profile-show-no');
+                    if(selectorcheck.hasClass('btn-default')){
+                        selectorcheck.removeClass('btn-default');
+                        selectorcheck.addClass('btn-warning active');
+                    }
+                    var selectorcheck1 = $('#profile-show-yes');
+                    if(selectorcheck1.hasClass('btn-warning active')){
+                        selectorcheck1.removeClass('btn-warning active');
+                        selectorcheck.addClass('btn-default');
+                    }
+                    //document.privacyForm.elements['cmn-toggle-7'].checked = true;
                 }
                 else if($scope.privacydetail == 0){
-                    document.privacyForm.elements['cmn-toggle-7'].checked = false;
+                    var selector = $('#profile-show-yes');
+                    if(selector.hasClass('btn-default')){
+                        selector.removeClass('btn-default');
+                        selector.addClass('btn-warning active');
+                    }
+                    var selector1 = $('#profile-show-no');
+                    if(selector1.hasClass('btn-warning active')){
+                        selector1.removeClass('btn-warning active');
+                        selector1.addClass('btn-default');
+                    }
+                    //document.privacyForm.elements['cmn-toggle-7'].checked = false;
                 }
             });
 

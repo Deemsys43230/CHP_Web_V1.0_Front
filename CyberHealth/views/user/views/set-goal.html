@@ -52,11 +52,6 @@
         $('#set-date').daterangepicker(options, function(start, end, label) {
             document.getElementById("start").value = start.format('DD/MM/YYYY');
             document.getElementById("end").value = end.format('DD/MM/YYYY');
-            /*if(end.format('DD/MM/YYYY')==start.format('DD/MM/YYYY')){
-                console.log(angular.element(document.getElementById('end')).scope().isCleanUpdateGoal());
-                var sle = document.getElementById("disable-button");
-                sle.setAttribute("ng-disabled",false);
-            }*/
         });
 
     });

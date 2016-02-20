@@ -707,14 +707,11 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
                     $scope.goalExpired=0;
                 }
 
-                setTimeout(function(){
-                    $window.currentweight = $scope.demography.weight;
-                    $window.targetweight = $scope.goalDetails.targetweight;
-                    $scope.goal = {
-                        status: 'view-goal'
-                    };
-                },1000);
-
+                $window.currentweight = $scope.demography.weight;
+                $window.targetweight = $scope.goalDetails.targetweight;
+                $scope.goal = {
+                    status: 'view-goal'
+                };
             }
         });
 
@@ -755,7 +752,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
     $scope.setGoalConfirmation=function(){
         requestHandler.postRequest("user/insertWeightGoal/",$scope.setGoalDetails).then(function(response){
             $scope.doGetWeightGoal();
-            $scope.doInsertOrUpdateWeightLog(selectedDate,$scope.setGoalDetails.initialweight);
+            $scope.doInsertOrUpdateWeightLog(selectedDate,parseFloat($scope.setGoalDetails.initialweight));
         },function(){
             errorMessage(Flash, "Please try again later!");
         });
