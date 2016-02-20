@@ -1,1 +1,175 @@
-var userApp=angular.module("userApp",["ngRoute","oc.lazyLoad","requestModule","flash","ngAnimate","friendsServiceModule"]);userApp.controller("FriendsController",function(e,t,s,n,i){e.viewDetails=0,e.friendsearch="",e.activeClass.friends="active",e.currentPage=0,e.pageSize=8,e.numberOfPages=function(){return Math.ceil(e.myFriendsList.length/e.pageSize)},e.currentPage1=0,e.pageSize1=8,e.numberOfPages1=function(){return Math.ceil(e.requestsent.length/e.pageSize1)},e.currentPage2=0,e.pageSize2=8,e.numberOfPages2=function(){return Math.ceil(e.requestreceived.length/e.pageSize2)},e.myFriends=function(){e.loaded=!0;var t=n.doGetMyFriends();t.then(function(t){e.myFriendsList=t,e.loaded=!1})},e.requestedFriends=function(){var t=n.doGetFriendRequest();t.then(function(t){e.requestedFriendsList=t,e.requestreceived=[],e.requestsent=[],$.each(e.requestedFriendsList,function(t,s){2==s.friendStatus?e.requestreceived.push(s):1==s.friendStatus&&e.requestsent.push(s)})})},e.searchFriends=function(){var t=n.doSearchFriends(e.friendsearch);t.then(function(t){e.searchFriendsList=t})},e.inviteFriends=function(t){var i=n.doInviteFriends(t);i.then(function(t){1==t.data.Response_status?(successMessage(s,"Request&nbsp;Sent"),e.searchFriends(""),e.initialLoad()):0==t.data.Response_status&&errorMessage(s,"Already Request Sent")})},e.acceptFriends=function(t){var i=n.doAcceptFriends(t);i.then(function(t){1==t.data.Response_status?(successMessage(s,"Request&nbsp;Accepted"),e.initialLoad()):0==t.data.Response_status&&errorMessage(s,"No Friends found")})},e.denyFriends=function(t){var i=n.doDenyFriends(t);i.then(function(t){1==t.data.Response_status?(successMessage(s,"Request&nbsp;Cancelled"),e.initialLoad()):0==t.data.Response_status&&errorMessage(s,"No friends found")})},e.doViewMembers=function(n){e.viewDetails=1,e.loaded=!0,t.getRequest("getUserIndividualDetail/"+n,"").then(function(t){e.myImgSrc=i.trustAsResourceUrl(t.data.getUserIndividualDetail.imageurl+"?decache="+Math.random()),e.viewMemberDetails=t.data.getUserIndividualDetail,null==e.viewMemberDetails.about&&(e.viewMemberDetails.about="N/A"),null==e.viewMemberDetails.dob&&(e.viewMemberDetails.dob="N/A"),null==e.viewMemberDetails.phone&&(e.viewMemberDetails.phone="N/A"),null==e.viewMemberDetails.country&&(e.viewMemberDetails.country="N/A"),null==e.viewMemberDetails.state&&(e.viewMemberDetails.state="N/A"),null==e.viewMemberDetails.city&&(e.viewMemberDetails.city="N/A"),null==e.viewMemberDetails.zipcode&&(e.viewMemberDetails.zipcode="N/A"),e.loaded=!1,e.paginationLoad=!0},function(){errorMessage(s,"Please try again later!")})},e.initialLoad=function(){e.myFriends(),e.requestedFriends(),e.searchFriends(),e.viewDetails=0},e.initialLoad()}),userApp.filter("startFrom",function(){return function(e,t){return t=+t,e?e.slice(t):void 0}}),userApp.filter("trusted",["$sce",function(e){return function(t){return e.trustAsResourceUrl(t)}}]);
+
+var userApp = angular.module('userApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','friendsServiceModule']);
+
+userApp.controller('FriendsController',function($scope,requestHandler,Flash,FriendsService,$sce){
+
+    $scope.viewDetails=0;
+    //Initialize search
+    $scope.friendsearch="";
+    $scope.activeClass.friends='active';
+
+    //My Friends Pagination starts
+    $scope.currentPage = 0;
+    $scope.pageSize = 8;
+    $scope.numberOfPages=function(){
+        return Math.ceil($scope.myFriendsList.length/$scope.pageSize);
+    };
+    //My Friends Pagination ends
+
+    //Requested Friends Pagination starts
+    $scope.currentPage1 = 0;
+    $scope.pageSize1 = 8;
+    $scope.numberOfPages1=function(){
+        return Math.ceil($scope.requestsent.length/$scope.pageSize1);
+    };
+    //Requested Friends Pagination ends
+
+    $scope.currentPage2 = 0;
+    $scope.pageSize2 = 8;
+    $scope.numberOfPages2=function(){
+        return Math.ceil($scope.requestreceived.length/$scope.pageSize2);
+    };
+
+    $scope.myFriends=function(){
+        $scope.loaded=true;
+        var getMyFriendsPromise=FriendsService.doGetMyFriends();
+        getMyFriendsPromise.then(function(result){
+            $scope.myFriendsList=result;
+            $scope.loaded=false;
+        });
+    };
+
+    $scope.requestedFriends=function(){
+
+        var getRequestedFriendsPromise=FriendsService.doGetFriendRequest();
+        getRequestedFriendsPromise.then(function(result){
+            $scope.requestedFriendsList=result;
+            $scope.requestreceived = [];
+            $scope.requestsent = [];
+            $.each($scope.requestedFriendsList,function(index,value){
+                if(value.friendStatus == 2){
+                     $scope.requestreceived.push(value);
+                }
+               else if(value.friendStatus == 1){
+                    $scope.requestsent.push(value);
+                }
+            })
+        });
+    };
+
+    $scope.searchFriends=function(){
+        var getSearchFriendsPromise=FriendsService.doSearchFriends($scope.friendsearch);
+        getSearchFriendsPromise.then(function(result){
+            $scope.searchFriendsList=result;
+        });
+    };
+
+    $scope.inviteFriends=function(id){
+        var inviteFriendsPromise = FriendsService.doInviteFriends(id);
+        inviteFriendsPromise.then(function(result){
+            if(result.data.Response_status ==1){
+                successMessage(Flash,"Request&nbsp;Sent");
+                $scope.searchFriends('');
+                $scope.initialLoad();
+            }
+           else if(result.data.Response_status == 0){
+                errorMessage(Flash,"Already Request Sent");
+            }
+        })
+    };
+
+    $scope.acceptFriends=function(id){
+        var acceptFriendsPromise = FriendsService.doAcceptFriends(id);
+        acceptFriendsPromise.then(function(result){
+            if(result.data.Response_status ==1){
+                successMessage(Flash,"Request&nbsp;Accepted");
+                $scope.initialLoad();
+            }
+            else if(result.data.Response_status == 0){
+                errorMessage(Flash,"No Friends found");
+            }
+        })
+    };
+
+    $scope.denyFriends=function(id){
+        var denyFriendsPromise = FriendsService.doDenyFriends(id);
+        denyFriendsPromise.then(function(result){
+            if(result.data.Response_status ==1){
+                successMessage(Flash,"Request&nbsp;Cancelled");
+                $scope.initialLoad();
+            }
+            else if(result.data.Response_status == 0){
+                errorMessage(Flash,"No friends found");
+            }
+        })
+    };
+
+    //user view details
+    $scope.doViewMembers= function (id) {
+        $scope.viewDetails=1;
+        $scope.loaded = true;
+        requestHandler.getRequest("getUserIndividualDetail/"+id,"").then(function(response){
+            $scope.myImgSrc = $sce.trustAsResourceUrl(response.data.getUserIndividualDetail.imageurl+"?decache="+Math.random());
+            $scope.viewMemberDetails = response.data.getUserIndividualDetail;
+            //View the image in ng-src for view testimonials
+
+            if($scope.viewMemberDetails.about==null){
+                $scope.viewMemberDetails.about="N/A";
+            }
+            if($scope.viewMemberDetails.dob==null){
+                $scope.viewMemberDetails.dob="N/A";
+            }
+            if($scope.viewMemberDetails.phone==null){
+                $scope.viewMemberDetails.phone="N/A";
+            }
+            if($scope.viewMemberDetails.country==null){
+                $scope.viewMemberDetails.country="N/A";
+            }
+            if($scope.viewMemberDetails.state==null){
+                $scope.viewMemberDetails.state="N/A";
+            }
+            if($scope.viewMemberDetails.city==null){
+                $scope.viewMemberDetails.city="N/A";
+            }
+            if($scope.viewMemberDetails.zipcode==null){
+                $scope.viewMemberDetails.zipcode="N/A";
+            }
+
+            $scope.loaded = false;
+            $scope.paginationLoad = true;
+
+        },  function () {
+            errorMessage(Flash, "Please try again later!")
+        });
+    };
+
+    //Onload
+    $scope.initialLoad=function(){
+        $scope.myFriends();
+        $scope.requestedFriends();
+        $scope.searchFriends();
+        $scope.viewDetails=0;
+
+    };
+
+    $scope.initialLoad();
+
+});
+
+userApp.filter('startFrom', function() {
+    return function(input, start) {
+        start = +start; //parse to int
+        if(!input){}
+        else return input.slice(start);
+    }
+});
+
+// render image to view in list
+userApp.filter('trusted', ['$sce', function ($sce) {
+    return function(url) {
+        return $sce.trustAsResourceUrl(url);
+    };
+}]);
+
+
+

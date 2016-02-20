@@ -1,1 +1,100 @@
-var coachApp=angular.module("coachApp",["ngRoute","oc.lazyLoad","requestModule","flash","ngAnimate","angularUtils.directives.dirPagination"]);coachApp.controller("CoachMembersController",function(e,t){e.doGetMyMembers=function(){e.loaded=!0,t.getRequest("coach/getSubscribedusers/","").then(function(t){e.myMembersList=t.data.getSubscribedusers,e.loaded=!1,e.paginationLoad=!0})},e.init=function(){e.paginationLoad=!1,e.doGetMyMembers()},$(".show-list-search").click(function(){$(".search-list-form").fadeIn(300),$(".search-list-form input").focus()}),$(".search-list-form input").focusout(function(){$(".search-list-form").fadeOut(300),e.membersearch=""})}),coachApp.controller("MembersViewController",function(e,t,i,a,r){e.activeClass.mymembers="active",e.doViewMembers=function(){e.loaded=!0,t.getRequest("getUserIndividualDetail/"+a.id,"").then(function(t){e.myImgSrc=r.trustAsResourceUrl(t.data.getUserIndividualDetail.imageurl+"?decache="+Math.random()),e.viewMemberDetails=t.data.getUserIndividualDetail,null==e.viewMemberDetails.about&&(e.viewMemberDetails.about="N/A"),null==e.viewMemberDetails.dob&&(e.viewMemberDetails.dob="N/A"),null==e.viewMemberDetails.phone&&(e.viewMemberDetails.phone="N/A"),null==e.viewMemberDetails.country&&(e.viewMemberDetails.country="N/A"),null==e.viewMemberDetails.state&&(e.viewMemberDetails.state="N/A"),null==e.viewMemberDetails.city&&(e.viewMemberDetails.city="N/A"),null==e.viewMemberDetails.zipcode&&(e.viewMemberDetails.zipcode="N/A"),e.loaded=!1,e.paginationLoad=!0},function(){errorMessage(i,"Please try again later!")})},e.doViewMembers()}),coachApp.filter("startsWithLetterMember",function(){return function(e,t){var i=[],a=new RegExp(t,"i");if(e)for(var r=0;r<e.length;r++){var l=e[r];(a.test(l.name)||a.test(l.emailid))&&i.push(l)}else;return i}});
+/**
+ * Created by Deemsys on 9/21/2015.
+ */
+var coachApp = angular.module('coachApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','angularUtils.directives.dirPagination']);
+
+coachApp.controller('CoachMembersController',function($scope,requestHandler) {
+
+    //Get Coach List
+    $scope.doGetMyMembers=function(){
+        $scope.loaded=true;
+        requestHandler.getRequest("coach/getSubscribedusers/","").then(function(response){
+            $scope.myMembersList=response.data.getSubscribedusers;
+            $scope.loaded=false;
+            $scope.paginationLoad=true;
+        });
+
+    };
+    //Initial Load
+    $scope.init = function(){
+        $scope.paginationLoad=false;
+        $scope.doGetMyMembers();
+    };
+
+    // Search Food Type
+    $('.show-list-search').click(function() {
+        $('.search-list-form').fadeIn(300);
+        $('.search-list-form input').focus();
+    });
+
+    $('.search-list-form input').focusout(function() {
+        $('.search-list-form').fadeOut(300);
+        $scope.membersearch="";
+    });
+
+
+});
+
+coachApp.controller('MembersViewController',function($scope,requestHandler,Flash,$routeParams,$sce) {
+
+    $scope.activeClass.mymembers='active';
+
+    //Exercise Detail View Suggestion
+    $scope.doViewMembers= function () {
+        $scope.loaded = true;
+        requestHandler.getRequest("getUserIndividualDetail/"+$routeParams.id,"").then(function(response){
+            $scope.myImgSrc = $sce.trustAsResourceUrl(response.data.getUserIndividualDetail.imageurl+"?decache="+Math.random());
+            $scope.viewMemberDetails = response.data.getUserIndividualDetail;
+            //View the image in ng-src for view testimonials
+
+            if($scope.viewMemberDetails.about==null){
+                $scope.viewMemberDetails.about="N/A";
+            }
+            if($scope.viewMemberDetails.dob==null){
+                $scope.viewMemberDetails.dob="N/A";
+            }
+            if($scope.viewMemberDetails.phone==null){
+                $scope.viewMemberDetails.phone="N/A";
+            }
+            if($scope.viewMemberDetails.country==null){
+                $scope.viewMemberDetails.country="N/A";
+            }
+            if($scope.viewMemberDetails.state==null){
+                $scope.viewMemberDetails.state="N/A";
+            }
+            if($scope.viewMemberDetails.city==null){
+                $scope.viewMemberDetails.city="N/A";
+            }
+            if($scope.viewMemberDetails.zipcode==null){
+                $scope.viewMemberDetails.zipcode="N/A";
+            }
+
+            $scope.loaded = false;
+            $scope.paginationLoad = true;
+
+        },  function () {
+            errorMessage(Flash, "Please try again later!")
+        });
+    };
+
+    $scope.doViewMembers();
+
+});
+
+coachApp.filter('startsWithLetterMember', function () {
+
+    return function (items, membersearch) {
+        var filtered = [];
+        var letterMatch = new RegExp(membersearch, 'i');
+        if(!items){}
+        else{
+            for (var i = 0; i < items.length; i++) {
+                var item = items[i];
+                if (letterMatch.test(item.name) || letterMatch.test(item.emailid)) {
+                    filtered.push(item);
+                }
+            }
+        }
+        return filtered;
+    };
+});

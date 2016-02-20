@@ -1,1 +1,276 @@
-var adminApp=angular.module("adminApp",["ngRoute","oc.lazyLoad","requestModule","flash","ngAnimate","summernote","angularUtils.directives.dirPagination"]);adminApp.controller("TestimonialController",function(e,t,i,n,a){e.isNew=!0,e.title="Add Testimonial",e.siteMenuList=a,$.each(e.siteMenuList,function(e,t){3==t.id?t.active="active":t.active=""}),e.imageAdded=!1,e.fileNameChanged=function(t){e.imageAdded||(t.files.length>0?(e.inputContainsFile=!1,e.imageAdded=!0):(e.inputContainsFile=!0,e.imageAdded=!1))},e.options={height:200},e.doGetTestimonialsByAdmin=function(){e.loaded=!0,t.getRequest("admin/getTestimonialList/","").then(function(t){e.admintestimonials=t.data.Testimonials,e.loaded=!1,e.paginationLoad=!0},function(){errorMessage(i,"Please try again later!")})},e.doAddTestimonials=function(){e.testimonials.imageurl=$(".image-editor").cropit("export"),t.postRequest("admin/insertorupdateTestimonial/",e.testimonials).then(function(){successMessage(i,"Successfully Added"),n.path("testimonials")},function(){errorMessage(i,"Please try again later!")})},e.doEnableDisableTestimonials=function(n){t.postRequest("admin/enableordisableTestimonial/",{testimonialid:n}).then(function(){e.doGetTestimonialsByAdmin(),successMessage(i,"Successfully Updated")},function(){errorMessage(i,"Please try again later!")})},e.init=function(){e.paginationLoad=!1,e.doGetTestimonialsByAdmin()},$(".image-editor").cropit()}),adminApp.controller("TestimonialEditController",function(e,t,i,n,a,s,o){e.siteMenuList=o,$.each(e.siteMenuList,function(e,t){3==t.id?t.active="active":t.active=""}),e.options={height:200},e.imageAdded=!1,e.fileNameChanged=function(t){e.imageAdded||(t.files.length>0?(e.inputContainsFile=!1,e.imageAdded=!0):(e.inputContainsFile=!0,e.imageAdded=!1))};e.doGetTestimonialsAdminByID=function(){e.isNew=!1,e.title="Edit Testimonial",t.getRequest("admin/getTestimonialListById/"+a.id,"").then(function(t){delete t.data.Testimonials.datetime,e.myImgSrc=s.trustAsResourceUrl(t.data.Testimonials.imageurl+"?decache="+Math.random()),e.testimonials=t.data.Testimonials,$(".image-editor").cropit({imageState:{src:e.testimonials.imageurl+"?decache="+Math.random()}})},function(){errorMessage(i,"Please try again later!")})},e.convertImgToBase64=function(e,t,i){var n=new Image;n.crossOrigin="Anonymous",n.onload=function(){var e=document.createElement("CANVAS"),n=e.getContext("2d");e.height=this.height,e.width=this.width,n.drawImage(this,0,0);var a=e.toDataURL(i||"image/jpg");t(a),e=null},n.src=e},e.doUpdateTestimonials=function(){e.convertImgToBase64(e.testimonials.imageurl,function(a){e.testimonials.imageurl=a,e.testimonials.imageurl=$(".image-editor").cropit("export"),t.putRequest("admin/insertorupdateTestimonial/",e.testimonials).then(function(){successMessage(i,"Successfully Updated"),n.path("testimonials")},function(){errorMessage(i,"Please try again later!")})})},e.doGetTestimonialsAdminByID()}),adminApp.filter("html",["$sce",function(e){return function(t){return e.trustAsHtml(t)}}]),adminApp.directive("validFile",function(){return{require:"ngModel",link:function(e,t,i,n){t.bind("change",function(){e.$apply(function(){n.$setViewValue(t.val()),n.$render()})})}}});var commonApp=angular.module("commonApp",["ngRoute","oc.lazyLoad","requestModule","flash","ngAnimate"]);commonApp.controller("TestimonialUserController",function(e,t,i,n,a){e.doGetTestimonialsByUser=function(){t.getRequest("getTestimonialListByUser/","").then(function(t){e.usertestimoniallist=t.data.Testimonials,e.myImgSrc=n.trustAsResourceUrl(t.data.Testimonials[0].imageurl+"?decache="+Math.random()),e.usertestimonialdetails=t.data.Testimonials[0]},function(){errorMessage(i,"Please try again later!")})},e.doGetTestimonialDetailsByUser=function(a){return t.getRequest("getTestimonialDetail/"+a,"").then(function(t){e.myImgSrc=n.trustAsResourceUrl(t.data.Testimonials.imageurl+"?decache="+Math.random()),e.usertestimonialdetails=t.data.Testimonials},function(){errorMessage(i,"Please try again later!")}),!1},e.doGetTestimonialsByUser(),e.doGetTestimonialDetailsByUser(a.id)}),commonApp.filter("trusted",["$sce",function(e){return function(t){return e.trustAsResourceUrl(t)}}]),commonApp.filter("html",["$sce",function(e){return function(t){return e.trustAsHtml(t)}}]);
+var adminApp = angular.module('adminApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','summernote','angularUtils.directives.dirPagination']);
+adminApp.controller('TestimonialController',function($scope,requestHandler,Flash,$location,siteMenuService) {
+
+    $scope.isNew = true;
+    $scope.title = "Add Testimonial";
+
+    $scope.siteMenuList = siteMenuService;
+    $.each($scope.siteMenuList,function(index,value){
+        if(value.id==3){
+            value.active = "active";
+        }
+        else value.active = ""
+    });
+
+    $scope.imageAdded=false;
+
+     $scope.fileNameChanged = function(element)
+    {
+        if(!$scope.imageAdded){
+            if(element.files.length > 0){
+                $scope.inputContainsFile = false;
+                $scope.imageAdded=true;
+            }
+            else{
+                $scope.inputContainsFile = true;
+                $scope.imageAdded=false;
+            }
+        }
+    };
+
+    //summer note
+    $scope.options = {
+        height: 200
+    };
+
+    // To display Testimonials admin view
+    $scope.doGetTestimonialsByAdmin=function(){
+        $scope.loaded=true;
+        requestHandler.getRequest("admin/getTestimonialList/", "").then(function(response){
+            $scope.admintestimonials=response.data.Testimonials;
+            $scope.loaded=false;
+            $scope.paginationLoad=true;
+        },function(){
+            errorMessage(Flash,"Please try again later!")
+        });
+    };
+
+    //To add Testimonials
+    $scope.doAddTestimonials=function(){
+
+        //Convert the image to base 64
+        $scope.testimonials.imageurl = $('.image-editor').cropit('export');
+
+
+        requestHandler.postRequest("admin/insertorupdateTestimonial/",$scope.testimonials).then(function(response){
+
+            successMessage(Flash,"Successfully Added");
+            $location.path("testimonials");
+        }, function () {
+            errorMessage(Flash, "Please try again later!")
+        });
+    };
+
+
+    //To Enable or Disable Testimonials
+
+    $scope.doEnableDisableTestimonials=function(id){
+        requestHandler.postRequest("admin/enableordisableTestimonial/",{'testimonialid':id}).then(function(response){
+
+            $scope.doGetTestimonialsByAdmin();
+            successMessage(Flash,"Successfully Updated");
+
+        },function(){
+            errorMessage(Flash,"Please try again later!")
+        });
+    };
+
+    // Display Testimonials For admin view On Page Load
+    $scope.init = function(){
+        $scope.paginationLoad=false;
+        $scope.doGetTestimonialsByAdmin();
+    };
+
+    //For image upload
+    $('.image-editor').cropit();
+
+});
+
+adminApp.controller('TestimonialEditController',function($scope,requestHandler,Flash,$location,$routeParams,$sce,siteMenuService) {
+
+    $scope.siteMenuList = siteMenuService;
+    $.each($scope.siteMenuList,function(index,value){
+        if(value.id==3){
+            value.active = "active";
+        }
+        else value.active = ""
+    });
+
+    //summer note
+    $scope.options = {
+        height: 200
+    };
+
+    $scope.imageAdded=false;
+
+    $scope.fileNameChanged = function(element)
+    {
+        if(!$scope.imageAdded){
+            if(element.files.length > 0){
+                $scope.inputContainsFile = false;
+                $scope.imageAdded=true;
+            }
+            else{
+                $scope.inputContainsFile = true;
+                $scope.imageAdded=false;
+            }
+        }
+
+
+    }
+
+    var original ="";
+    //To display Latest News based on newsid
+    $scope.doGetTestimonialsAdminByID=function(){
+        $scope.isNew = false;
+        $scope.title = "Edit Testimonial";
+
+        requestHandler.getRequest("admin/getTestimonialListById/"+$routeParams.id,"").then(function(response){
+            delete response.data.Testimonials.datetime;
+
+            //View the image in ng-src for view testimonials
+            $scope.myImgSrc = $sce.trustAsResourceUrl(response.data.Testimonials.imageurl+"?decache="+Math.random());
+
+            //Set values to display data in edit testimonial
+            $scope.testimonials=response.data.Testimonials;
+
+           /* // Change the url hostname to localhost
+            $scope.testimonials.imageurl = requestHandler.convertUrl( $scope.testimonials.imageurl);
+            $scope.testimonials.imageurl = "http://localhost"+$scope.testimonials.imageurl;*/
+
+
+            // View the image in image cropit preview in edit testimonials
+            $('.image-editor').cropit({
+                imageState: {
+                    src: $scope.testimonials.imageurl+"?decache="+Math.random()
+                }
+            });
+
+
+        },function(){
+            errorMessage(Flash,"Please try again later!")
+        });
+    };
+
+// Function to convert image url to base64
+    $scope.convertImgToBase64=function(url, callback, outputFormat){
+        var img = new Image();
+        img.crossOrigin = 'Anonymous';
+        img.onload = function(){
+            var canvas = document.createElement('CANVAS');
+            var ctx = canvas.getContext('2d');
+            canvas.height = this.height;
+            canvas.width = this.width;
+            ctx.drawImage(this,0,0);
+            var dataURL = canvas.toDataURL(outputFormat || 'image/jpg');
+            callback(dataURL);
+            canvas = null;
+        };
+        img.src = url;
+    };
+
+    //To update Latest News
+    $scope.doUpdateTestimonials = function(){
+
+        $scope.convertImgToBase64($scope.testimonials.imageurl, function(base64Img){
+
+            //Convert the image url to base64 when image is not edited
+            $scope.testimonials.imageurl=base64Img;
+
+            //Convert the image url to base64 when image is edited
+            $scope.testimonials.imageurl = $('.image-editor').cropit('export');
+
+            requestHandler.putRequest("admin/insertorupdateTestimonial/",$scope.testimonials).then(function(response){
+                successMessage(Flash,"Successfully Updated");
+                $location.path("testimonials");
+
+            }, function () {
+                errorMessage(Flash, "Please try again later!")
+            });
+        });
+
+    };
+    //Display Edit Page with date On load
+    $scope.doGetTestimonialsAdminByID();
+
+
+
+});
+
+// html filter (render text as html)
+adminApp.filter('html', ['$sce', function ($sce) {
+    return function (text) {
+        return $sce.trustAsHtml(text);
+    };
+}]);
+
+// Validation for file upload
+adminApp.directive('validFile',function(){
+    return {
+        require:'ngModel',
+        link:function(scope,el,attrs,ngModel){
+            //change event is fired when file is selected
+            el.bind('change',function(){
+                scope.$apply(function(){
+                    ngModel.$setViewValue(el.val());
+                    ngModel.$render();
+                })
+            })
+        }
+    }
+});
+
+var commonApp = angular.module('commonApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate']);
+
+commonApp.controller('TestimonialUserController',function($scope,requestHandler,Flash,$sce,$routeParams){
+
+    // To display Testimonials as user
+    $scope.doGetTestimonialsByUser=function(){
+        requestHandler.getRequest("getTestimonialListByUser/", "").then(function(response){
+      $scope.usertestimoniallist=response.data.Testimonials;
+
+            $scope.myImgSrc = $sce.trustAsResourceUrl(response.data.Testimonials[0].imageurl+"?decache="+Math.random());
+            $scope.usertestimonialdetails = response.data.Testimonials[0];
+
+        },function(){
+            errorMessage(Flash,"Please try again later!")
+        });
+    };
+
+    $scope.doGetTestimonialDetailsByUser= function (id) {
+        requestHandler.getRequest("getTestimonialDetail/"+id, "").then(function(response){
+
+            //View the image in ng-src for view testimonials
+            $scope.myImgSrc = $sce.trustAsResourceUrl(response.data.Testimonials.imageurl+"?decache="+Math.random());
+
+            $scope.usertestimonialdetails=response.data.Testimonials
+
+        },function(){
+            errorMessage(Flash,"Please try again later!")
+        });
+
+        return false;
+
+    };
+
+    // To display the user Testimonial list on load
+    $scope.doGetTestimonialsByUser();
+    $scope.doGetTestimonialDetailsByUser($routeParams.id);
+
+
+});
+
+// render image to view in list
+commonApp.filter('trusted', ['$sce', function ($sce) {
+    return function(url) {
+        return $sce.trustAsResourceUrl(url);
+    };
+}]);
+
+// html filter (render text as html)
+
+commonApp.filter('html', ['$sce', function ($sce) {
+    return function (text) {
+        return $sce.trustAsHtml(text);
+    };
+}]);

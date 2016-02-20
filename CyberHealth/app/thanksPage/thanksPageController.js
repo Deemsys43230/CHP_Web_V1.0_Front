@@ -1,1 +1,123 @@
-var userApp=angular.module("userApp",["ngRoute","oc.lazyLoad","requestModule"]);userApp.controller("ThanksSubscribePageController",function(e,n,c,o){var t=c.search();if(e.completed=!1,e.transactionSucceed=!0,e.enroll="SUBSCRIPTION",e.thanksEnroll="WE HAVE PROCESSING WITH YOUR PAYMENTS",e.countDownTimer=function(e,n){function c(){$("#countmesg").html("You will be redirecting to the "+n+" page in "+o+" seconds."),o--,0>o&&(clearInterval(t),window.location=e,o=0)}var o=5,t=setInterval(function(){c()},1e3)},$.isEmptyObject(t))e.completed=!0,e.transactionSucceed=!0,e.urlPage=n.paymentURL()+"/#/coachView/"+o.id,e.countDownTimer(e.urlPage,"course");else{var a={};a.payId=t.paymentId,a.payerId=t.PayerID,a.coachid=parseInt(o.id),a.month=parseInt(o.month),e.doExcecutePayment=function(c){n.postRequest("user/subscribeCoachExecute/",c).then(function(c){0==c.data.Response_status?(e.completed=!0,e.transactionSucceed=!1,e.urlPage=n.paymentURL()+"/#/coachSearch",e.countDownTimer(e.urlPage,"coach search")):(e.thanksEnroll="YOUR SUBSCRIPTION WAS SUCCESSFULLY COMPLETED",e.transactionSucceed=!0,e.completed=!0,e.urlPage=n.paymentURL()+"/#/coachView/"+o.id,e.countDownTimer(e.urlPage,"coach view"))},function(){e.completed=!0,e.transactionSucceed=!1,e.urlPage=n.paymentURL()+"/#/coachSearch",e.countDownTimer(e.urlPage,"coach search")})},console.log(a),e.doExcecutePayment(a)}}),userApp.controller("ThanksEnrollPageController",function(e,n,c,o,t){var a=c.search();if(e.completed=!1,e.transactionSucceed=!0,e.enroll="ENROLLMENT",e.thanksEnroll="WE HAVE PROCESSING WITH YOUR PAYMENTS",e.countDownTimer=function(e,n){function c(){$("#countmesg").html("You will be redirecting to the "+n+" page in "+o+" seconds."),o--,0>o&&(clearInterval(t),window.location=e,o=0)}var o=5,t=setInterval(function(){c()},1e3)},$.isEmptyObject(a))e.completed=!0,e.transactionSucceed=!0,e.urlPage=n.paymentURL()+"/#/courseDetail/"+t.id,e.countDownTimer(e.urlPage,"course");else{var r={};r.payId=a.paymentId,r.payerId=a.PayerID,r.courseid=parseInt(t.id),console.log(r),e.doExcecutePayment=function(c){n.postRequest("user/enrollCourseExecute/",c).then(function(c){0==c.data.Response_status?(e.completed=!0,e.transactionSucceed=!1,e.urlPage=n.paymentURL()+"/#/courses",e.countDownTimer(e.urlPage,"course search")):(e.thanksEnroll="YOUR HAVE SUCCESSFULLY ENROLLED THIS COURSE",e.transactionSucceed=!0,e.completed=!0,e.urlPage=n.paymentURL()+"/#/courseDetail/"+t.id,e.countDownTimer(e.urlPage,"course"))},function(){e.completed=!0,e.transactionSucceed=!1,e.urlPage=n.paymentURL()+"/#/courses",e.countDownTimer(e.urlPage,"course search")})},e.doExcecutePayment(r)}});
+var userApp = angular.module('userApp', ['ngRoute','oc.lazyLoad','requestModule']);
+userApp.controller('ThanksSubscribePageController',function($scope,requestHandler,$location,$routeParams) {
+    var paymentResponse=$location.search();
+    $scope.completed=false;
+    $scope.transactionSucceed=true;
+    $scope.enroll="SUBSCRIPTION";
+    $scope.thanksEnroll="WE HAVE PROCESSING WITH YOUR PAYMENTS";
+
+    $scope.countDownTimer = function(url,redirectPageName){
+        var delay = 5 ;
+        var timer=setInterval(function(){countdown()}, 1000) ;
+        function countdown() {
+            $('#countmesg').html("You will be redirecting to the "+redirectPageName+" page in "  + delay  + " seconds.");
+            delay --;
+            if (delay < 0 ) {
+                clearInterval(timer);
+                window.location = url ;
+                delay = 0 ;
+            }
+        }
+    };
+
+    if($.isEmptyObject(paymentResponse)){
+        $scope.completed=true;
+        $scope.transactionSucceed=true;
+        $scope.urlPage=requestHandler.paymentURL()+"/#/coachView/"+$routeParams.id;
+        $scope.countDownTimer($scope.urlPage,"course");
+    }
+    else{
+        var paymentConfirmDetails={};
+        paymentConfirmDetails.payId=paymentResponse.paymentId;
+        paymentConfirmDetails.payerId=paymentResponse.PayerID;
+        paymentConfirmDetails.coachid=parseInt($routeParams.id);
+        paymentConfirmDetails.month=parseInt($routeParams.month);
+
+        $scope.doExcecutePayment = function(paymentConfirmDetails){
+            requestHandler.postRequest("user/subscribeCoachExecute/",paymentConfirmDetails).then(function(response){
+                if(response.data.Response_status==0){
+                    $scope.completed=true;
+                    $scope.transactionSucceed=false;
+                    $scope.urlPage=requestHandler.paymentURL()+"/#/coachSearch";
+                    $scope.countDownTimer($scope.urlPage,"coach search");
+                }
+                else{
+                    $scope.thanksEnroll="YOUR SUBSCRIPTION WAS SUCCESSFULLY COMPLETED";
+                    $scope.transactionSucceed=true;
+                    $scope.completed=true;
+                    $scope.urlPage=requestHandler.paymentURL()+"/#/coachView/"+$routeParams.id;
+                    $scope.countDownTimer($scope.urlPage,"coach view");
+                }
+            },function(){
+                $scope.completed=true;
+                $scope.transactionSucceed=false;
+                $scope.urlPage=requestHandler.paymentURL()+"/#/coachSearch";
+                $scope.countDownTimer($scope.urlPage,"coach search");
+            });
+        };
+        console.log(paymentConfirmDetails);
+        $scope.doExcecutePayment(paymentConfirmDetails);
+    }
+});
+
+userApp.controller('ThanksEnrollPageController',function($scope,requestHandler,$location,$window,$routeParams) {
+
+    var paymentResponse=$location.search();
+    $scope.completed=false;
+    $scope.transactionSucceed=true;
+    $scope.enroll="ENROLLMENT";
+    $scope.thanksEnroll="WE HAVE PROCESSING WITH YOUR PAYMENTS";
+
+    $scope.countDownTimer = function(url,redirectPageName){
+        var delay = 5 ;
+        var timer=setInterval(function(){countdown()}, 1000) ;
+        function countdown() {
+            $('#countmesg').html("You will be redirecting to the "+redirectPageName+" page in "  + delay  + " seconds.");
+            delay --;
+            if (delay < 0 ) {
+                clearInterval(timer);
+                window.location = url ;
+                delay = 0 ;
+            }
+        }
+    };
+
+    if($.isEmptyObject(paymentResponse)){
+        $scope.completed=true;
+        $scope.transactionSucceed=true;
+        $scope.urlPage=requestHandler.paymentURL()+"/#/courseDetail/"+$routeParams.id;
+        $scope.countDownTimer($scope.urlPage,"course");
+    }
+    else{
+        var paymentConfirmDetails={};
+        paymentConfirmDetails.payId=paymentResponse.paymentId;
+        paymentConfirmDetails.payerId=paymentResponse.PayerID;
+        paymentConfirmDetails.courseid=parseInt($routeParams.id);
+
+        console.log(paymentConfirmDetails);
+
+        $scope.doExcecutePayment = function(paymentConfirmDetails){
+            requestHandler.postRequest("user/enrollCourseExecute/",paymentConfirmDetails).then(function(response){
+                if(response.data.Response_status==0){
+                    $scope.completed=true;
+                    $scope.transactionSucceed=false;
+                    $scope.urlPage=requestHandler.paymentURL()+"/#/courses";
+                    $scope.countDownTimer($scope.urlPage,"course search");
+                }
+                else{
+                    $scope.thanksEnroll="YOUR HAVE SUCCESSFULLY ENROLLED THIS COURSE";
+                    $scope.transactionSucceed=true;
+                    $scope.completed=true;
+                    $scope.urlPage=requestHandler.paymentURL()+"/#/courseDetail/"+$routeParams.id;
+                    $scope.countDownTimer($scope.urlPage,"course");
+                }
+            },function(){
+                $scope.completed=true;
+                $scope.transactionSucceed=false;
+                $scope.urlPage=requestHandler.paymentURL()+"/#/courses";
+                $scope.countDownTimer($scope.urlPage,"course search");
+            });
+        };
+        $scope.doExcecutePayment(paymentConfirmDetails);
+    }
+});
