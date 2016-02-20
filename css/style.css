@@ -8795,11 +8795,14 @@ a:hover, a:visited, a:link, a:active
     line-height: 16px !important;
 }
 
+_:-ms-lang(x), .history_input { padding: 6px 12px 7px 12px!important; }
+
 .history_input
 {
     font-size: 14px;
     color: #333;
-    padding: 4px 20px;
+    line-height: 17px;
+    padding: 6px 12px;
     width: 100%;
     border: 1px solid #ddd !important;
     -moz-appearance: none;

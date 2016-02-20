@@ -21,6 +21,10 @@
                     <div class="col-md-8">
                         <p>Do you want to share your profile details?</p>
                     </div>
+                    <div class="btn-group btn-toggle">
+                        <button class="btn btn-sm btn-default">YES</button>
+                        <button class="btn btn-sm btn-warning active">NO</button>
+                    </div>
                     <form name="privacyForm">
                     <div class="col-md-4 no-padding">
                         <div class="switch">
@@ -348,6 +352,17 @@
         $(".common_model").show();
     })
 </script>
+
+<script>
+    $('.btn-toggle').click(function() {
+        $(this).find('.btn').toggleClass('active');
+        if ($(this).find('.btn-warning').size()>0) {
+            $(this).find('.btn').toggleClass('btn-warning');
+        }
+        $(this).find('.btn').toggleClass('btn-default');
+    });
+</script>
+
 <script>
     $(document).ready(function () {
         $('#pswd').keyup(function () {

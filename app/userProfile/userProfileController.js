@@ -20,7 +20,6 @@ userApp.controller('UserProfileController',['$scope','requestHandler','Flash',fu
                 $scope.userProfile.preferfood = "1";
             }
 
-
             if($scope.userProfile.isProfileUpdated == 1){
 
 
@@ -41,8 +40,6 @@ userApp.controller('UserProfileController',['$scope','requestHandler','Flash',fu
                             $scope.userProfile.stateSelect = {name:$scope.userProfile.countrySelect.name, code:$scope.userProfile.countrySelect.code, "countryid":$scope.userProfile.countrySelect.id};
                         }
                     }
-
-
                 });
             }
 
@@ -84,6 +81,7 @@ userApp.controller('UserProfileController',['$scope','requestHandler','Flash',fu
         requestHandler.getRequest("getUserSettings/","").then(function(response){
             $.each(response.data.User_Settings,function(index,value){
                 $scope.privacydetail = value.isprivacy;
+                alert($scope.privacydetail);
                 if($scope.privacydetail == 1){
                     document.privacyForm.elements['cmn-toggle-7'].checked = true;
                 }
@@ -4426,7 +4424,7 @@ userApp.controller('UserProfileController',['$scope','requestHandler','Flash',fu
             if($scope.availableStates.length==0){
                 $scope.availableStates.push({name:$scope.userProfile.countrySelect.name, code:$scope.userProfile.countrySelect.code, "countryid":$scope.userProfile.countrySelect.id});
             }
-        }        
+        };
     //Date Picker
     $scope.prevent=function(){
         event.preventDefault();
