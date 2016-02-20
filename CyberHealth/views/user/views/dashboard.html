@@ -111,7 +111,7 @@
          style="display: block;"
          ng-show="isOpen() && !moveInProgress"
          aria-hidden="{{!isOpen()}}">
-        <ul class="dropdown-menu" role="listbox">
+        <ul class="dropdown-menu remove-style" role="listbox">
             <li ng-repeat="match in matches track by $index" ng-class="{active: isActive($index) }"
                 should-focus="isActive($index)" ng-click="selectMatch($index)" role="option" id="{{::match.id}}">
                 <div uib-typeahead-match index="$index" match="match" query="query" template-url="templateUrl"></div>
@@ -267,7 +267,7 @@
                                             </div>
                                         </div>
                                         <div id="scrollheightfood" ng-if="showExercise==0" height-food-bind>
-                                            <ul class="food">
+                                            <ul class="food remove-style">
                                                 <li class="col-md-12" ng-repeat="foodDiaryData in userFoodDiaryData | orderBy:'$index':true">
                                                     <div class="col-md-2 no-padding"><img ng-src="{{foodDiaryData.foodImagePath+'50x50.jpg'}}"></div>
                                                     <div class="col-md-10 no-padding">
@@ -319,7 +319,7 @@
                                     </div>
                                 </div>
                                 <div id="scrollheightexercise" ng-if="showExercise==1" height-exercise-bind>
-                                    <ul class="exercise">
+                                    <ul class="exercise remove-style">
                                         <li class="col-md-12" ng-repeat="exerciseDiaryData in userExerciseDiaryDataAll | orderBy:'$index':true">
                                             <div class="col-md-2 no-padding"><img ng-src="{{exerciseDiaryData.exerciseImagePath+'50x50.jpg'}}"></div>
                                             <div class="col-md-10 no-padding">
