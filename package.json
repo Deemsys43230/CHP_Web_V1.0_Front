@@ -1,0 +1,18 @@
+{
+  "name": "cyberhealths",
+  "version": "0.0.1",
+  "description": "Health care project",
+  "main": "index.html",
+  "scripts": {
+    "test": "no testing"
+  },
+  "keywords": [
+    "cyberhealths"
+  ],
+  "author": "Deemsys",
+  "license": "ISC",
+  "devDependencies": {
+    "grunt-cli": "^0.1.13",
+    "grunt-contrib-uglify": "^0.11.1"
+  }
+}

@@ -1,1 +1,1 @@
-var commonApp = angular.module('commonApp', ['ngRoute','oc.lazyLoad']);
+var commonApp=angular.module("commonApp",["ngRoute","oc.lazyLoad"]);
