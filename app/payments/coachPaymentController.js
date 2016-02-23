@@ -1,6 +1,6 @@
 var coachApp = angular.module('coachApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','angularUtils.directives.dirPagination','ui.bootstrap']);
 
-coachApp.controller('CoachPaymentController',function($scope,requestHandler,Flash,$routeParams) {
+coachApp.controller('CoachPaymentController',['$scope','requestHandler','Flash','$routeParams',function($scope,requestHandler,Flash,$routeParams) {
 
     $scope.paginationLoad=false;
     $scope.activeClass.payments='active';
@@ -230,7 +230,7 @@ coachApp.controller('CoachPaymentController',function($scope,requestHandler,Flas
         $scope.doGetSubscriptionDetails();
     };
 
-});
+}]);
 
 
 // render image to view in list

@@ -3,7 +3,7 @@
  */
 var adminApp = angular.module('adminApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate']);
 
-adminApp.controller('FAQController',function($scope,requestHandler,Flash,siteMenuService){
+adminApp.controller('FAQController',['$scope','requestHandler','Flash','siteMenuService',function($scope,requestHandler,Flash,siteMenuService){
 
     $scope.siteMenuList = siteMenuService;
     $.each($scope.siteMenuList,function(index,value){
@@ -111,9 +111,9 @@ adminApp.controller('FAQController',function($scope,requestHandler,Flash,siteMen
         $scope.doGetAllFAQ();
     };
 
-});
+}]);
 
-adminApp.controller('FAQViewController',function($scope,requestHandler,Flash,$routeParams,siteMenuService){
+adminApp.controller('FAQViewController',['$scope','requestHandler','Flash','$routeParams','siteMenuService',function($scope,requestHandler,Flash,$routeParams,siteMenuService){
 
     $scope.siteMenuList = siteMenuService;
     $.each($scope.siteMenuList,function(index,value){
@@ -135,9 +135,9 @@ adminApp.controller('FAQViewController',function($scope,requestHandler,Flash,$ro
 
     //Display FAQ On load
     $scope.doGetFAQByID();
-});
+}]);
 
-adminApp.controller('FAQCommonController',function($scope,requestHandler,Flash){
+adminApp.controller('FAQCommonController',['$scope','requestHandler','Flash',function($scope,requestHandler,Flash){
 
     // To display FAQ as user
     $scope.doGetUserFAQ=function(){
@@ -153,11 +153,11 @@ adminApp.controller('FAQCommonController',function($scope,requestHandler,Flash){
     // To display the user FAQ list on load
     $scope.doGetUserFAQ();
 
-});
+}]);
 
 var commonApp = angular.module('commonApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate']);
 
-commonApp.controller('FAQCommonController',function($scope,requestHandler,Flash){
+commonApp.controller('FAQCommonController',['$scope','requestHandler','Flash',function($scope,requestHandler,Flash){
 
     // To display FAQ as user
     $scope.doGetUserFAQ=function(){
@@ -173,11 +173,11 @@ commonApp.controller('FAQCommonController',function($scope,requestHandler,Flash)
     // To display the user FAQ list on load
     $scope.doGetUserFAQ();
 
-});
+}]);
 
 var userApp = angular.module('userApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate']);
 
-userApp.controller('FAQCommonController',function($scope,requestHandler,Flash){
+userApp.controller('FAQCommonController',['$scope','requestHandler','Flash',function($scope,requestHandler,Flash){
 
     // To display FAQ as user
     $scope.doGetUserFAQ=function(){
@@ -193,12 +193,12 @@ userApp.controller('FAQCommonController',function($scope,requestHandler,Flash){
     // To display the user FAQ list on load
     $scope.doGetUserFAQ();
 
-});
+}]);
 
 
 var coachApp = angular.module('coachApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate']);
 
-coachApp.controller('FAQCommonController',function($scope,requestHandler,Flash){
+coachApp.controller('FAQCommonController',['$scope','requestHandler','Flash',function($scope,requestHandler,Flash){
 
     // To display FAQ as user
     $scope.doGetUserFAQ=function(){
@@ -214,7 +214,7 @@ coachApp.controller('FAQCommonController',function($scope,requestHandler,Flash){
     // To display the user FAQ list on load
     $scope.doGetUserFAQ();
 
-});
+}]);
 
 
 

@@ -1,6 +1,6 @@
 var userApp= angular.module('userApp', ['ngRoute','oc.lazyLoad','ngCookies','requestModule','flash','ngAnimate','ngTouch','ngPercentDisplay','userDashboardServiceModule','angular-svg-round-progress','ui.bootstrap','angular-nicescroll']);
 
-userApp.controller('UserDashboardController',function($scope,$window,requestHandler,Flash,UserDashboardService,$interval,roundProgressService,limitToFilter,$timeout) {
+userApp.controller('UserDashboardController',['$scope','$window','requestHandler','Flash','UserDashboardService','$interval','roundProgressService','limitToFilter','$timeout',function($scope,$window,requestHandler,Flash,UserDashboardService,$interval,roundProgressService,limitToFilter,$timeout) {
     $scope.foodSearchResult = [];
     $scope.userFood={};
     $scope.userFood.sessionid=1;
@@ -32,14 +32,14 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
             $(".user_register").hide();
             $("#modal-add-food").hide();
             $("#lean_overlay").hide();
-           $scope.resetdata();
+            $scope.resetdata();
         });
 
         $("#lean_overlay").click(function(){
             $(".user_register").hide();
             $("#modal-add-food").hide();
             $("#lean_overlay").hide();
-           $scope.resetdata();
+            $scope.resetdata();
         });
         $scope.selectedFood="";
     };
@@ -57,7 +57,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
             $(".user_register").hide();
             $("#modal-add-exercise").hide();
             $("#lean_overlay").hide();
-           $scope.resetexercisedata();
+            $scope.resetexercisedata();
         });
 
         $("#lean_overlay").click(function(){
@@ -250,8 +250,8 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         }
     };
 
-   //Search Function for food
-     $scope.inputChanged = function(searchStr) {
+    //Search Function for food
+    $scope.inputChanged = function(searchStr) {
 
         if(searchStr.length>=3){
             if($scope.foodSearchResult.length==0){
@@ -265,7 +265,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
                 return $scope.foodSearchResult;
             });
         }
-         else{
+        else{
             return {};
         }
 
@@ -355,20 +355,20 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
     $scope.doAddSuggestFood=function(){
 
         requestHandler.postRequest("user/searchFoodnamebyUser/",{"foodname":$scope.foodSuggest.foodname}).then(function(response){
-           if(response.data.Response_status==0){
-               var insertSuggestedFoodPromise=UserDashboardService.doAddSuggestedFood($scope.foodSuggest);
+            if(response.data.Response_status==0){
+                var insertSuggestedFoodPromise=UserDashboardService.doAddSuggestedFood($scope.foodSuggest);
 
-               insertSuggestedFoodPromise.then(function(result){
-                   successMessage(Flash,"Thanks&nbsp;for&nbsp;the&nbspsuggestion!!");
-                   $scope.resetdata();
-               },function(){
-                   errorMessage(Flash, "Please try again later!");
-               });
-           }
+                insertSuggestedFoodPromise.then(function(result){
+                    successMessage(Flash,"Thanks&nbsp;for&nbsp;the&nbspsuggestion!!");
+                    $scope.resetdata();
+                },function(){
+                    errorMessage(Flash, "Please try again later!");
+                });
+            }
             else if(response.data.Response_status==1){
-               errorMessage(Flash,"Food&nbsp;already&nbsp;exists");
-               $scope.resetdata();
-           }
+                errorMessage(Flash,"Food&nbsp;already&nbsp;exists");
+                $scope.resetdata();
+            }
         });
 
     };
@@ -379,7 +379,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
 
         insertSuggestedExercisePromise.then(function(result){
             successMessage(Flash,"Thanks&nbsp;for&nbsp;the&nbspsuggestion!!");
-           $scope.resetexercisedata();
+            $scope.resetexercisedata();
         },function(){
             errorMessage(Flash, "Please try again later!");
         })
@@ -446,7 +446,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         {
             $scope.userExercise.date=$scope.selectedDate.format("dd/mm/yyyy");
         }
-         $scope.userExercise.workoutvalue=parseInt($scope.userExercise.workoutvalue);
+        $scope.userExercise.workoutvalue=parseInt($scope.userExercise.workoutvalue);
 
         var exerciseInsertPromise=UserDashboardService.doInsertUserExercise($scope.userExercise);
         exerciseInsertPromise.then(function(){
@@ -491,12 +491,12 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
                 $scope.userExercise.userexercisemapid=userexercisemapid;
                 $scope.userExercise.exerciseid=exerciseid;
                 //$scope.userExercise.levelid=result.User_exercise_data.Level;
-               /* $.each($scope.userSelectedExerciseDetails.type.levels, function(index,value) {
-                    if(value.levelid == result.User_exercise_data.Level.levelid){
-                        $scope.userExercise.levelid = value;
-                        originallevel=angular.copy(value);
-                    }
-                });*/
+                /* $.each($scope.userSelectedExerciseDetails.type.levels, function(index,value) {
+                 if(value.levelid == result.User_exercise_data.Level.levelid){
+                 $scope.userExercise.levelid = value;
+                 originallevel=angular.copy(value);
+                 }
+                 });*/
                 $scope.userExercise.workoutvalue=parseInt(result.workoutvalue);
                 originaltiming = parseInt(result.workoutvalue);
                 $scope.current=$scope.caloriesSpent=result.calories;
@@ -1201,18 +1201,18 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
                         categories: ['Protein', 'Fat', 'Carbs', 'Fibre'],
                         labels: {
                             useHTML: true,
-                             formatter: function() {
-                             if(this.value == "Protein")
-                             return this.value+'<br/><img src="../../images/i-protein.jpg"/>';
-                             else if(this.value == "Fat")
-                             return '&nbsp;&nbsp;'+this.value+'&nbsp;&nbsp;'+'<br/><img src="../../images/i-fats.jpg"/>';
-                             else if(this.value == "Carbs")
-                             return this.value+'<br/><img src="../../images/i-carbs.jpg"/>';
-                             else if(this.value == "Fibre")
-                             return this.value+'<br/><img src="../../images/i-fibre.jpg"/>';
-                             else
-                             return this.value;
-                             }
+                            formatter: function() {
+                                if(this.value == "Protein")
+                                    return this.value+'<br/><img src="../../images/i-protein.jpg"/>';
+                                else if(this.value == "Fat")
+                                    return '&nbsp;&nbsp;'+this.value+'&nbsp;&nbsp;'+'<br/><img src="../../images/i-fats.jpg"/>';
+                                else if(this.value == "Carbs")
+                                    return this.value+'<br/><img src="../../images/i-carbs.jpg"/>';
+                                else if(this.value == "Fibre")
+                                    return this.value+'<br/><img src="../../images/i-fibre.jpg"/>';
+                                else
+                                    return this.value;
+                            }
                         }
                     },
                     tooltip:{
@@ -1537,15 +1537,15 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
     };
 
     /*$scope.dpOpened = {
-        opened: false,
-        opened1: false
-    };
+     opened: false,
+     opened1: false
+     };
 
-    $scope.open = function ($event,opened) {
-        $event.preventDefault();
-        $event.stopPropagation();
-        $scope.dpOpened[opened] = true;
-    };*/
+     $scope.open = function ($event,opened) {
+     $event.preventDefault();
+     $event.stopPropagation();
+     $scope.dpOpened[opened] = true;
+     };*/
 
     $scope.open = function ($event) {
         $event.preventDefault();
@@ -1667,7 +1667,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         return dateFormat(this, mask, utc);
     };
 
-}).constant('uibdatepickerPopupConfig', {
+}]).constant('uibdatepickerPopupConfig', {
     datepickerPopup: "dd/MM/yyyy",
     closeOnDateSelection: true,
     appendToBody: true,
@@ -1697,10 +1697,10 @@ userApp.filter('trusted', ['$sce', function ($sce) {
 }]);
 
 /*userApp.filter('reverse', function() {
-    return function(items) {
-        return items.slice().reverse();
-    };
-});*/
+ return function(items) {
+ return items.slice().reverse();
+ };
+ });*/
 
 // Graph chart
 userApp.directive('hcGraph', function () {
@@ -1762,7 +1762,7 @@ userApp.directive('hcGraph', function () {
                     data: []
                 }],
                 exporting: {
-                enabled: false
+                    enabled: false
                 },
                 credits: {
                     enabled: false
@@ -1897,19 +1897,19 @@ userApp.directive('shouldFocus', function(){
 });
 
 /*userApp.directive('dropDownHeight', function(){
-    return {
-        link: function($scope, $element) {
-            $scope.$watch(function() {
-                setTimeout(function(){
-                    var selectclass = $('.custom-popup-wrapper .dropdown-menu li');
-                    if ($element.height()==parseInt($('.custom-popup-wrapper .dropdown-menu').css('max-height'))) {
-                        selectclass.css({"paddingRight":"10px"});
-                    } else {
-                        selectclass.css({"paddingRight":"0"});
-                    }
-                }, 0);
-            });
-        }
-    }
-});*/
+ return {
+ link: function($scope, $element) {
+ $scope.$watch(function() {
+ setTimeout(function(){
+ var selectclass = $('.custom-popup-wrapper .dropdown-menu li');
+ if ($element.height()==parseInt($('.custom-popup-wrapper .dropdown-menu').css('max-height'))) {
+ selectclass.css({"paddingRight":"10px"});
+ } else {
+ selectclass.css({"paddingRight":"0"});
+ }
+ }, 0);
+ });
+ }
+ }
+ });*/
 

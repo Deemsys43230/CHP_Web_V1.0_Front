@@ -1,6 +1,6 @@
 var adminApp = angular.module('adminApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','angularUtils.directives.dirPagination']);
 
-adminApp.controller('FoodSuggestionController',function($scope,requestHandler,Flash) {
+adminApp.controller('FoodSuggestionController',['$scope','requestHandler','Flash',function($scope,requestHandler,Flash) {
     $scope.activeClass = {suggestion: 'active'};
 
     $scope.doGetAllFoodSuggestion = function () {
@@ -45,9 +45,9 @@ adminApp.controller('FoodSuggestionController',function($scope,requestHandler,Fl
         $scope.doGetAllFoodSuggestion();
     };
 
-});
+}]);
 
-adminApp.controller('FoodSuggestionViewController',function($scope,requestHandler,Flash,$routeParams,$sce) {
+adminApp.controller('FoodSuggestionViewController',['$scope','requestHandler','Flash','$routeParams','$sce',function($scope,requestHandler,Flash,$routeParams,$sce) {
     $scope.activeClass = {suggestion: 'active'};
 
     //Exercise Detail View Suggestion
@@ -68,4 +68,4 @@ adminApp.controller('FoodSuggestionViewController',function($scope,requestHandle
 
     $scope.doViewFoodSuggestion();
 
-});
+}]);

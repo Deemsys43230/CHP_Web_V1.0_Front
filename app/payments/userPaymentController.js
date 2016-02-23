@@ -1,6 +1,6 @@
 var userApp = angular.module('userApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','angularUtils.directives.dirPagination']);
 
-userApp.controller('UserPaymentController',function($scope,requestHandler,Flash,$routeParams) {
+userApp.controller('UserPaymentController',['$scope','requestHandler','Flash','$routeParams',function($scope,requestHandler,Flash,$routeParams) {
 
 
     $scope.sortcoursenameicon="fa fa-caret-down";
@@ -194,7 +194,7 @@ userApp.controller('UserPaymentController',function($scope,requestHandler,Flash,
     });
 
 
-});
+}]);
 
 
 // render image to view in list

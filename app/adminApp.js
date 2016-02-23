@@ -1,3 +1,5 @@
+
+
 var adminApp= angular.module('adminApp', ['ngRoute','oc.lazyLoad','ngCookies','requestModule','ngAnimate','angularUtils.directives.dirPagination']);
 
 adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
@@ -11,10 +13,10 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
         //Do For Cross Orgin Management
         $httpProvider.defaults.withCredentials = true;
 
-        $httpProvider.interceptors.push(['$q','$location','$injector','$cookies','$window',function ($q, $location,$injector,$cookies,$window) {
+        $httpProvider.interceptors.push(['$q','$location','$cookies','$window',function ($q, $location,$cookies,$window) {
 
             return {
-                
+
                 'request': function(request) {
                     request.headers['X-CSRFToken']=$cookies.get('X-CSRFToken');
                     return request;
@@ -31,7 +33,7 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                             alert("restricted");
                         }
                         case 403: {
-                           // alert("Your session has been expired.Please login again!!!");
+                            // alert("Your session has been expired.Please login again!!!");
                             $window.location.href="../../views/home/#/index?session=logout";
                             //$location.path("/login");
                             break;
@@ -47,12 +49,13 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 }
             };
         }]);
+        $routeProvider.$inject = ['$ocLazyLoad'];
 
         $routeProvider.
             when('/dashboard', {
                 templateUrl: 'views/dashboard.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
@@ -60,14 +63,14 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../app/dashboard/adminDashboardController.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller:'AdminDashboardController'
             }).
             when('/profile', {
                 templateUrl: 'views/profile.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
@@ -80,14 +83,14 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../app/adminProfile/adminProfileController.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller:'AdminProfileController'
             }).
             when('/site', {
                 templateUrl: 'views/site-FAQ.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
@@ -97,14 +100,14 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../app/faq/faqController.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller:'FAQController'
             }).
             when('/viewFAQ/:id', {
                 templateUrl: 'views/site-view-FAQ.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
@@ -112,14 +115,14 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../app/faq/faqController.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller:'FAQViewController'
             }).
             when('/instruction', {
                 templateUrl: 'views/site-instruction.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
@@ -129,14 +132,14 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../app/instruction/instructionController.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller:'InstructionController'
             }).
             when('/privacyPolicy', {
                 templateUrl: 'views/site-policy.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
@@ -146,14 +149,14 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../app/privacyPolicy/privacyPolicyController.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller:'PrivacyPolicyController'
             }).
             when('/termsOfUse', {
                 templateUrl: 'views/site-termsofuse.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
@@ -163,14 +166,14 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../app/termsOfUse/termsOfUseController.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller:'TermsOfUseController'
             }).
             when('/latestNews', {
                 templateUrl: 'views/site-news.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
@@ -179,14 +182,14 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../app/latestNews/latestNewsController.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller:'LatestNewsController'
             }).
             when('/addLatestNews', {
                 templateUrl: 'views/site-add-or-edit-news.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
@@ -196,14 +199,14 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../app/latestNews/latestNewsController.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller:'LatestNewsController'
             }).
             when('/editLatestNews/:id', {
                 templateUrl: 'views/site-add-or-edit-news.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
@@ -213,28 +216,28 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../app/latestNews/latestNewsController.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller:'LatestNewsEditController'
             }).
             when('/viewLatestNews/:id', {
                 templateUrl: 'views/site-view-news.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
                                 '../../app/latestNews/latestNewsController.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller:'LatestNewsEditController'
             }).
             when('/forums', {
                 templateUrl: 'views/site-forums.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
@@ -243,28 +246,28 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../app/forums/forumsController.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller:'ForumsController'
             }).
             when('/viewForum/:id', {
                 templateUrl: 'views/site-view-forum.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
                                 '../../app/forums/forumsController.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller:'ForumsEditController'
             }).
             when('/editForum/:id', {
                 templateUrl: 'views/site-add-or-edit-forum.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
@@ -274,14 +277,14 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../app/forums/forumsController.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller:'ForumsEditController'
             }).
             when('/addForum', {
                 templateUrl: 'views/site-add-or-edit-forum.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
@@ -291,14 +294,14 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../app/forums/forumsController.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller:'ForumsController'
             }).
             when('/testimonials', {
                 templateUrl: 'views/site-testimonials.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
@@ -309,14 +312,14 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../js/image-upload.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller:'TestimonialController'
             }).
             when('/addTestimonial', {
                 templateUrl: 'views/site-add-or-edit-testimonial.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
@@ -328,14 +331,14 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../js/image-upload.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller:'TestimonialController'
             }).
             when('/editTestimonial/:id', {
                 templateUrl: 'views/site-add-or-edit-testimonial.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
@@ -347,28 +350,28 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../js/image-upload.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller:'TestimonialEditController'
             }).
             when('/viewTestimonial/:id', {
                 templateUrl: 'views/site-view-testimonial.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
                                 '../../js/bootstrap.min.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller:'TestimonialEditController'
             }).
             when('/member', {
                 templateUrl: 'views/member.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
@@ -376,14 +379,14 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../app/member/memberController.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller:'MemberController'
             }).
             when('/member-view/:id', {
                 templateUrl: 'views/member-view.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
@@ -391,7 +394,7 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../app/member/memberController.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller:'MemberController'
             }).
@@ -399,7 +402,7 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
             when('/coach', {
                 templateUrl: 'views/coach.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
@@ -409,14 +412,14 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../app/coach/coachController.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller:"CoachController"
             }).
             when('/coach-view/:id', {
                 templateUrl: 'views/coach-view.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
@@ -426,14 +429,14 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../app/coach/coachController.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller:"CoachViewController"
             }).
             when('/coach-edit', {
                 templateUrl: 'views/coach-edit.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
@@ -444,14 +447,14 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../js/image-upload.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller:'CoachViewController'
             }).
             when('/exercise', {
                 templateUrl: 'views/exercise.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
@@ -461,14 +464,14 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../app/exercise/exerciseController.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller:'ExerciseController'
             }).
             when('/exercise-view/:id', {
                 templateUrl: 'views/exercise-view.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
@@ -476,14 +479,14 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../app/exercise/exerciseController.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller:'ExerciseViewController'
             }).
             when('/exercise-edit/:id', {
                 templateUrl: 'views/exercise-add-or-edit.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
@@ -500,7 +503,7 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../app/exercise/exerciseController.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller:'ExerciseEditController',
                 title:'Edit Exercise',
@@ -510,7 +513,7 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
             when('/exercise-add', {
                 templateUrl: 'views/exercise-add-or-edit.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
@@ -527,7 +530,7 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../app/exercise/exerciseController.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller:'ExerciseEditController',
                 title:'Add Exercise',
@@ -537,7 +540,7 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
             when('/exercise-add/:id', {
                 templateUrl: 'views/exercise-add-or-edit.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
@@ -554,7 +557,7 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../app/exercise/exerciseController.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller:'ExerciseEditController',
                 title:'Add Exercise',
@@ -564,7 +567,7 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
             when('/exerciseType', {
                 templateUrl: 'views/exercise-type.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
@@ -575,14 +578,14 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../app/exerciseType/exerciseTypeController.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller:'ExerciseTypeController'
             }).
             when('/settings', {
                 templateUrl: 'views/settings-contact.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
@@ -590,14 +593,14 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../app/settings/basicInfoController.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller:'ContactUsController'
             }).
             when('/mobileApp', {
                 templateUrl: 'views/settings-mobile-app.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name: 'adminApp',
                             files: [
@@ -605,14 +608,14 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../app/settings/mobileAppSettingsController.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller:'MobileAppSettingsController'
             }).
             when('/paypalSettings', {
                 templateUrl: 'views/settings-paypal.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name: 'adminApp',
                             files: [
@@ -620,14 +623,14 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../app/settings/paypalController.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller:'PaypalSettingsController'
             }).
             when('/socialMediaSettings', {
                 templateUrl: 'views/settings-socialmedia.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name: 'adminApp',
                             files: [
@@ -635,14 +638,14 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../app/settings/socialMediaController.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller:'SocialMediaSettingsController'
             }).
             when('/serverSettings', {
                 templateUrl: 'views/settings-server.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name: 'adminApp',
                             files: [
@@ -650,14 +653,14 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../app/settings/serverController.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller:'ServerSettingsController'
             }).
             when('/food', {
                 templateUrl: 'views/food.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
@@ -667,14 +670,14 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../app/food/foodController.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller:'FoodController'
             }).
             when('/food-edit/:id', {
                 templateUrl: 'views/food-add-or-edit.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
@@ -692,7 +695,7 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../app/food/foodController.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller:'FoodDetailsEditController',
                 title:'Edit Food',
@@ -703,7 +706,7 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
             when('/food-view/:id', {
                 templateUrl: 'views/food-view.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
@@ -714,14 +717,14 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../app/food/foodController.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller:'FoodDetailsViewController'
             }).
             when('/addFood', {
                 templateUrl: 'views/food-add-or-edit.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
@@ -739,7 +742,7 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../app/food/foodController.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller:'FoodDetailsEditController',
                 title:'Add Food',
@@ -749,7 +752,7 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
             when('/addFood/:id', {
                 templateUrl: 'views/food-add-or-edit.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
@@ -767,7 +770,7 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../app/food/foodController.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller:'FoodDetailsEditController',
                 title:'Add Food',
@@ -777,7 +780,7 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
             when('/uploadFood', {
                 templateUrl: 'views/upload-food.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
@@ -786,14 +789,14 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../app/food/foodController.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller:'FoodController'
             }).
             when('/foodCategory', {
                 templateUrl: 'views/food-category.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
@@ -804,14 +807,14 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../app/foodCategory/foodCategoryController.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller:'FoodCategoryController'
             }).
             when('/foodMeasure', {
                 templateUrl: 'views/food-Measure.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
@@ -821,14 +824,14 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../app/food/foodMeasure.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller:'FoodMeasureController'
             }).
             when('/foodSuggestion', {
                 templateUrl: 'views/food-Suggestion.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
@@ -838,14 +841,14 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../app/foodSuggestion/foodSuggestionController.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller:'FoodSuggestionController'
             }).
             when('/foodSuggestionDetail/:id', {
                 templateUrl: 'views/food-view-suggestion.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
@@ -855,14 +858,14 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../app/foodSuggestion/foodSuggestionController.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller:'FoodSuggestionViewController'
             }).
             when('/exerciseSuggestion', {
                 templateUrl: 'views/exercise-suggestion.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
@@ -872,14 +875,14 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../app/exerciseSuggestion/exerciseSuggestionController.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller:'ExerciseSuggestionController'
             }).
             when('/exerciseSuggestionDetail/:id', {
                 templateUrl: 'views/exercise-view-suggestion.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
@@ -889,14 +892,14 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../app/exerciseSuggestion/exerciseSuggestionController.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller:'ExerciseSuggestionDetailViewController'
             }).
             when('/course', {
                 templateUrl: 'views/course.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
@@ -905,14 +908,14 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../angular/angular-utils-pagination/dirPagination.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller:'CourseAdminController'
             }).
             when('/coursePending', {
                 templateUrl: 'views/course-pending.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
@@ -923,7 +926,7 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../app/course/courseController.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller:'CourseAdminController'
             }).
@@ -931,7 +934,7 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
             when('/courseDetail/:id', {
                 templateUrl: '../user/views/course-details.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
@@ -941,14 +944,14 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../app/course/courseController.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller:'CourseAdminController'
             }).
             when('/courseView/:id', {
                 templateUrl: '../user/views/course-view.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
@@ -956,14 +959,14 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../app/course/courseController.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller:'CourseAdminController'
             }).
             when('/payments', {
                 templateUrl: 'views/payments.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
@@ -972,14 +975,14 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../app/payments/adminPaymentController.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller:'AdminPaymentController'
             }).
             when('/courseSubscribersList/:id', {
                 templateUrl: 'views/payments-course-subscribers.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
@@ -990,14 +993,14 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../app/payments/adminPaymentController.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller:'AdminPaymentController'
             }).
             when('/courseSubscriberDetails/:id', {
                 templateUrl: 'views/payments-course-subscriber-details.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
@@ -1006,14 +1009,14 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../app/payments/adminPaymentController.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller:'AdminPaymentController'
             }).
             when('/coachSubscriberDetails/:id', {
                 templateUrl: 'views/payments-coach-subscriber-details.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
@@ -1022,14 +1025,14 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../app/payments/adminPaymentController.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller:'AdminPaymentController'
             }).
             when('/coachPayment', {
                 templateUrl: 'views/payments-coach.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
@@ -1039,32 +1042,32 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../app/payments/adminPaymentController.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller:'AdminPaymentController'
             }).
             when('/coachSubscribersList/:id', {
                 templateUrl: 'views/payments-coach-subscribers.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
                                 '../../js/bootstrap.min.js',
-                                 '../../plugin/popup/style.css',
+                                '../../plugin/popup/style.css',
                                 '../../angular/angular-ui-bootstarp.js',
                                 '../../plugin/popup/jquery.leanModal.min.js',
                                 '../../app/payments/adminPaymentController.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller:'AdminPaymentController'
             }).
             when('/FAQ', {
                 templateUrl: '../common/FAQ.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
@@ -1072,14 +1075,14 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../app/faq/faqController.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller:'FAQCommonController'
             }).
             when('/instructions', {
                 templateUrl: '../../views/common/instruction.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
@@ -1087,14 +1090,14 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../app/instruction/instructionController.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller:'InstructionCommonController'
             }).
             when('/termsofuse', {
                 templateUrl: '../../views/common/termsofuse.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
@@ -1102,14 +1105,14 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../app/termsOfUse/termsOfUseController.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller:'TermsOfUseCommonController'
             }).
             when('/policy', {
                 templateUrl: '../common/privacypolicy.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
@@ -1117,14 +1120,14 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../app/privacyPolicy/privacyPolicyController.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller:'PrivacyPolicyCommonController'
             }).
             when('/contact', {
                 templateUrl: '../common/contact.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
@@ -1132,7 +1135,7 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../app/settings/basicInfoController.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller:'ContactUsController'
             }).
@@ -1148,10 +1151,9 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
             otherwise({
                 redirectTo: '/dashboard'
             });
-}]);
-
+    }]);
 //Initial Controller for Username
-adminApp.controller("InitialController",function($scope,requestHandler,$location){
+adminApp.controller("InitialController",['$scope','requestHandler','$location',function($scope,requestHandler,$location){
     requestHandler.getRequest("getUserId/","").then(function(response){
         $scope.username=response.data.User_Profile.name;
     });
@@ -1170,10 +1172,10 @@ adminApp.controller("InitialController",function($scope,requestHandler,$location
     };
 
     $scope.getSocialMediaDetails();
-});
+}]);
 
 //Controller For Logout
-adminApp.controller("LogoutController",['$cookies','$scope','$window',function($cookies,$scope,$window,requestHandler){
+adminApp.controller("LogoutController",['$cookies','$scope','$window','requestHandler',function($cookies,$scope,$window,requestHandler){
 
     $scope.doLogout=function(){
 
@@ -1186,7 +1188,7 @@ adminApp.controller("LogoutController",['$cookies','$scope','$window',function($
 }]);
 
 //Email Already Exists
-adminApp.directive("emailexists", function ($q, $timeout,requestHandler) {
+adminApp.directive("emailexists",['$q','$timeout','requestHandler', function ($q, $timeout,requestHandler) {
 
     var CheckEmailExists = function (isNew) {
 
@@ -1224,7 +1226,7 @@ adminApp.directive("emailexists", function ($q, $timeout,requestHandler) {
             }
         }
     };
-});
+}]);
 
 /*//Category Already Exists
 adminApp.directive("categoryexists", function ($q, $timeout,requestHandler) {
@@ -1256,7 +1258,7 @@ adminApp.directive("categoryexists", function ($q, $timeout,requestHandler) {
 });*/
 
 //Category Already Exists
-adminApp.directive("categoryexists", function ($q, $timeout,requestHandler) {
+adminApp.directive("categoryexists",['$q','$timeout','requestHandler', function ($q, $timeout,requestHandler) {
 
     return {
         restrict: "A",
@@ -1284,11 +1286,11 @@ adminApp.directive("categoryexists", function ($q, $timeout,requestHandler) {
             }
         }
     };
-});
+}]);
 
 
 //Category Already Exists
-adminApp.directive("measureexists", function ($q, $timeout,requestHandler) {
+adminApp.directive("measureexists", ['$q','$timeout','requestHandler', function ($q, $timeout,requestHandler) {
 
     return {
         restrict: "A",
@@ -1316,10 +1318,10 @@ adminApp.directive("measureexists", function ($q, $timeout,requestHandler) {
             }
         }
     };
-});
+}]);
 
 //Food Already Exists
-adminApp.directive("foodexists", function ($q, $timeout,requestHandler) {
+adminApp.directive("foodexists",['$q','$timeout','requestHandler', function ($q, $timeout,requestHandler) {
 
     return {
         restrict: "A",
@@ -1349,10 +1351,10 @@ adminApp.directive("foodexists", function ($q, $timeout,requestHandler) {
             }
         }
     };
-});
+}]);
 
 //Exercise Already Exists
-adminApp.directive("exerciseexists", function ($q, $timeout,requestHandler) {
+adminApp.directive("exerciseexists",['$q','$timeout','requestHandler', function ($q, $timeout,requestHandler) {
 
     return {
         restrict: "A",
@@ -1382,10 +1384,10 @@ adminApp.directive("exerciseexists", function ($q, $timeout,requestHandler) {
             }
         }
     };
-});
+}]);
 
 //Exercise type name Already Exists
-adminApp.directive("typenameexists", function ($q, $timeout,requestHandler) {
+adminApp.directive("typenameexists",['$q','$timeout','requestHandler', function ($q, $timeout,requestHandler) {
 
     return {
         restrict: "A",
@@ -1416,7 +1418,7 @@ adminApp.directive("typenameexists", function ($q, $timeout,requestHandler) {
             }
         }
     };
-});
+}]);
 
 
 // Compare Confirm Password
@@ -1562,7 +1564,7 @@ adminApp.directive('checkRequired', function(){
 });
 
 //Check for Email Already Exists
-adminApp.directive("foodNameExists", function ($q, $timeout,requestHandler) {
+adminApp.directive("foodNameExists",['$q','$timeout','requestHandler', function ($q, $timeout,requestHandler) {
 
     return {
         restrict: "A",
@@ -1590,7 +1592,7 @@ adminApp.directive("foodNameExists", function ($q, $timeout,requestHandler) {
             }
         }
     };
-});
+}]);
 
 
 adminApp.directive('checkboxGroup', function() {
@@ -1811,7 +1813,7 @@ adminApp.factory("siteMenuService", function () {
     return site;
 });
 
-adminApp.directive('focusMe', function($timeout, $parse) {
+adminApp.directive('focusMe',['$timeout','$parse', function($timeout, $parse) {
     return {
         //scope: true,   // optionally create a child scope
         link: function(scope, element, attrs) {
@@ -1832,4 +1834,4 @@ adminApp.directive('focusMe', function($timeout, $parse) {
             });
         }
     };
-});
+}]);

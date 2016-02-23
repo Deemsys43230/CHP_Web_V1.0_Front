@@ -2,7 +2,7 @@
  * Created by Deemsys on 09-Oct-15.
  */
 var adminApp = angular.module('adminApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate'/*,'angularFileUpload'*/]);
-adminApp.controller('FoodMeasureController',function($scope,requestHandler,Flash) {
+adminApp.controller('FoodMeasureController',['$scope','requestHandler','Flash',function($scope,requestHandler,Flash) {
     $scope.activeClass = {measure:'active'};
     $scope.isNew = true;
     $scope.title = "Add Measure";
@@ -173,4 +173,4 @@ adminApp.controller('FoodMeasureController',function($scope,requestHandler,Flash
         $('.search-list-form input').focus();
     });
 
-});
+}]);

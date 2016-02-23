@@ -1,6 +1,6 @@
 var adminApp=angular.module('foodServiceModule',['requestModule']);
 
-adminApp.factory("FoodService",function(requestHandler){
+adminApp.factory("FoodService",['requestHandler',function(requestHandler){
 
     var foodServiceObj={};
     
@@ -207,7 +207,7 @@ adminApp.factory("FoodService",function(requestHandler){
 
     return foodServiceObj;
 
-    });
+    }]);
 
 
 

@@ -1,6 +1,6 @@
 var userApp=angular.module('friendsServiceModule',['requestModule']);
 
-userApp.factory("FriendsService",function(requestHandler,Flash){
+userApp.factory("FriendsService",['requestHandler','Flash',function(requestHandler,Flash){
 
     var userFriendsServiceObj={};
 
@@ -60,4 +60,4 @@ userApp.factory("FriendsService",function(requestHandler,Flash){
 
     return userFriendsServiceObj;
 
-});
+}]);

@@ -3,7 +3,7 @@
  */
 var adminApp = angular.module('adminApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate']);
 
-adminApp.controller('SocialMediaSettingsController',function($scope,requestHandler,Flash,siteMenuService,$location){
+adminApp.controller('SocialMediaSettingsController',['$scope','requestHandler','Flash','siteMenuService','$location',function($scope,requestHandler,Flash,siteMenuService,$location){
     var original="";
 
     $scope.siteMenuList = siteMenuService;
@@ -39,4 +39,4 @@ adminApp.controller('SocialMediaSettingsController',function($scope,requestHandl
 
     $scope.doGetSocialMedia();
 
-});
+}]);

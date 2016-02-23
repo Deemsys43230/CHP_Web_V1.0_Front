@@ -1,7 +1,7 @@
 
 var userApp = angular.module('userApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','friendsServiceModule']);
 
-userApp.controller('FriendsController',function($scope,requestHandler,Flash,FriendsService,$sce){
+userApp.controller('FriendsController',['$scope','requestHandler','Flash','FriendsService','$sce',function($scope,requestHandler,Flash,FriendsService,$sce){
 
     $scope.viewDetails=0;
     //Initialize search
@@ -154,7 +154,7 @@ userApp.controller('FriendsController',function($scope,requestHandler,Flash,Frie
 
     $scope.initialLoad();
 
-});
+}]);
 
 userApp.filter('startFrom', function() {
     return function(input, start) {

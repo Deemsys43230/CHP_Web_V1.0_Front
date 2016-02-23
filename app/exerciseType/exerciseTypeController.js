@@ -1,6 +1,6 @@
 var adminApp = angular.module('adminApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','angularUtils.directives.dirPagination']);
 
-adminApp.controller('ExerciseTypeController',['$scope','requestHandler','Flash',function($scope,requestHandler,Flash,$location) {
+adminApp.controller('ExerciseTypeController',['$scope','requestHandler','Flash','$location',function($scope,requestHandler,Flash,$location) {
 
     $scope.activeClass = {exercisetype:'active'};
     var original ="";

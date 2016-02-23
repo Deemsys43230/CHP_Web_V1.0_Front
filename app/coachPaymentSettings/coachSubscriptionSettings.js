@@ -4,7 +4,7 @@
 
 var coachApp = angular.module('coachApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate']);
 
-coachApp.controller('CoachSubscriptionController',function($scope,requestHandler,Flash,$location) {
+coachApp.controller('CoachSubscriptionController',['$scope','requestHandler','Flash','$location',function($scope,requestHandler,Flash,$location) {
 //sidebar menu active class
     $scope.activeClass = {subscriptionPanel:'active'};
 
@@ -105,5 +105,5 @@ coachApp.controller('CoachSubscriptionController',function($scope,requestHandler
     $scope.doGetCoachSubscriptionDetails();
 
 
-});
+}]);
 

@@ -1,6 +1,6 @@
 var adminApp = angular.module('adminApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','angularUtils.directives.dirPagination']);
 
-adminApp.controller('FoodCategoryController',function($scope,requestHandler,Flash) {
+adminApp.controller('FoodCategoryController',['$scope','requestHandler','Flash',function($scope,requestHandler,Flash) {
     $scope.activeClass = {category:'active'};
     $scope.isNew = true;
     $scope.title = "Add Category";
@@ -195,4 +195,4 @@ adminApp.controller('FoodCategoryController',function($scope,requestHandler,Flas
         return angular.equals(original, $scope.foodCategory);
     }
 
-});
+}]);

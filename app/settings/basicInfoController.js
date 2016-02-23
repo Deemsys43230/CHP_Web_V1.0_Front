@@ -3,7 +3,7 @@
  */
 var adminApp = angular.module('adminApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate']);
 
-adminApp.controller('ContactUsController',function($scope,requestHandler,Flash,siteMenuService,$location){
+adminApp.controller('ContactUsController',['$scope','requestHandler','Flash','siteMenuService','$location',function($scope,requestHandler,Flash,siteMenuService,$location){
 
     $scope.siteMenuList = siteMenuService;
     $.each($scope.siteMenuList,function(index,value){
@@ -46,7 +46,7 @@ adminApp.controller('ContactUsController',function($scope,requestHandler,Flash,s
     };
     $scope.doGetContactUs();
 
-});
+}]);
 
 adminApp.directive('myMap', function() {
     // directive link function
@@ -130,7 +130,7 @@ adminApp.directive('myMap', function() {
 });
 
 var commonApp = angular.module('commonApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate']);
-commonApp.controller('ContactUsDetailsController',function($scope,requestHandler,Flash) {
+commonApp.controller('ContactUsDetailsController',['$scope','requestHandler','Flash',,function($scope,requestHandler,Flash) {
 
     // To Get the Contact Us details for user
     $scope.doGetContactUsDetails= function () {
@@ -146,7 +146,7 @@ commonApp.controller('ContactUsDetailsController',function($scope,requestHandler
     //Display Contact Us details on load
     $scope.doGetContactUsDetails();
 
-});
+}]);
 
 commonApp.directive('myMap', function() {
     // directive link function
@@ -231,7 +231,7 @@ commonApp.directive('myMap', function() {
 
 
 var userApp = angular.module('userApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate']);
-userApp.controller('ContactUsDetailsController',function($scope,requestHandler,Flash) {
+userApp.controller('ContactUsDetailsController',['$scope','requestHandler','Flash',function($scope,requestHandler,Flash) {
 
     // To Get the Contact Us details for user
     $scope.doGetContactUsDetails= function () {
@@ -247,7 +247,7 @@ userApp.controller('ContactUsDetailsController',function($scope,requestHandler,F
     //Display Contact Us details on load
     $scope.doGetContactUsDetails();
 
-});
+}]);
 
 userApp.directive('myMap', function() {
     // directive link function
@@ -333,7 +333,7 @@ userApp.directive('myMap', function() {
 
 
 var coachApp = angular.module('coachApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate']);
-coachApp.controller('ContactUsDetailsController',function($scope,requestHandler,Flash) {
+coachApp.controller('ContactUsDetailsController',['$scope','requestHandler','Flash',function($scope,requestHandler,Flash) {
 
     // To Get the Contact Us details for user
     $scope.doGetContactUsDetails= function () {
@@ -349,7 +349,7 @@ coachApp.controller('ContactUsDetailsController',function($scope,requestHandler,
     //Display Contact Us details on load
     $scope.doGetContactUsDetails();
 
-});
+}]);
 
 coachApp.directive('myMap', function() {
     // directive link function

@@ -1,5 +1,5 @@
 var adminApp = angular.module('adminApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','summernote','angularUtils.directives.dirPagination']);
-adminApp.controller('LatestNewsController',function($scope,requestHandler,Flash,$location,siteMenuService) {
+adminApp.controller('LatestNewsController',['$scope','requestHandler','Flash','$location','siteMenuService',function($scope,requestHandler,Flash,$location,siteMenuService) {
 
     $scope.isNew = true;
     $scope.title = "Add Latest News";
@@ -71,9 +71,9 @@ adminApp.controller('LatestNewsController',function($scope,requestHandler,Flash,
         $('.search-list-form').toggle(300);
         $('.search-list-form input').focus();
     });
-});
+}]);
 
-adminApp.controller('LatestNewsEditController',function($scope,requestHandler,Flash,$location,$routeParams,siteMenuService) {
+adminApp.controller('LatestNewsEditController',['$scope','requestHandler','Flash','$location','$routeParams','siteMenuService',function($scope,requestHandler,Flash,$location,$routeParams,siteMenuService) {
 
     $scope.siteMenuList = siteMenuService;
     $.each($scope.siteMenuList,function(index,value){
@@ -124,7 +124,7 @@ adminApp.controller('LatestNewsEditController',function($scope,requestHandler,Fl
     //Display Edit Page with date On load
     $scope.doGetLatestNewsByID();
 
-});
+}]);
 
 // html filter (render text as html)
 adminApp.filter('html', ['$sce', function ($sce) {
@@ -153,7 +153,7 @@ adminApp.filter('startsWithLetterNews', function () {
 
 var commonApp = angular.module('commonApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate']);
 
-commonApp.controller('NewsUserController',function($scope,requestHandler,Flash,$routeParams,$location){
+commonApp.controller('NewsUserController',['$scope','requestHandler','Flash','$routeParams','$location',function($scope,requestHandler,Flash,$routeParams,$location){
 
     // To display Testimonials as user
     $scope.doGetNewsByUser=function(){
@@ -182,7 +182,7 @@ commonApp.controller('NewsUserController',function($scope,requestHandler,Flash,$
     $scope.doGetNewsByUser();
     $scope.doGetNewsDetailsByUser($routeParams.id);
 
-});
+}]);
 
 // html filter (render text as html)
 commonApp.filter('html', ['$sce', function ($sce) {

@@ -1,5 +1,5 @@
 var adminApp = angular.module('adminApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','summernote','angularUtils.directives.dirPagination']);
-adminApp.controller('ForumsController',function($scope,requestHandler,Flash,$location,siteMenuService) {
+adminApp.controller('ForumsController',['$scope','requestHandler','Flash','$location','siteMenuservice',function($scope,requestHandler,Flash,$location,siteMenuService) {
 
     $scope.isNew = true;
     $scope.title = "Add Forum";
@@ -65,9 +65,9 @@ adminApp.controller('ForumsController',function($scope,requestHandler,Flash,$loc
         $('.search-list-form').toggle(300);
         $('.search-list-form input').focus();
     });
-});
+}]);
 
-adminApp.controller('ForumsEditController',function($scope,requestHandler,Flash,$routeParams,siteMenuService,$location) {
+adminApp.controller('ForumsEditController',['$scope','requestHandler','Flash','$routeParams','siteMenuService','$location',function($scope,requestHandler,Flash,$routeParams,siteMenuService,$location) {
 
     $scope.activeClass.forums='active';
 
@@ -165,7 +165,7 @@ adminApp.controller('ForumsEditController',function($scope,requestHandler,Flash,
         $scope.doGetForumsByID();
     };
 
-});
+}]);
 
 adminApp.filter('startsWithLetterForum', function () {
 
@@ -201,7 +201,7 @@ adminApp.filter('trusted', ['$sce', function ($sce) {
 
 var userApp = angular.module('userApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','angularUtils.directives.dirPagination']);
 
-userApp.controller('ForumsUserController',function($scope,requestHandler,Flash,$routeParams,$location){
+userApp.controller('ForumsUserController',['$scope','requestHandler','Flash','$routeParams','$location',function($scope,requestHandler,Flash,$routeParams,$location){
 
     $scope.isNew = true;
     $scope.title = "Add Forum";
@@ -324,9 +324,9 @@ userApp.controller('ForumsUserController',function($scope,requestHandler,Flash,$
 
 
 
-});
+}]);
 
-userApp.controller('ForumsUserEditController',function($scope,requestHandler,Flash,$routeParams,$location){
+userApp.controller('ForumsUserEditController',['$scope','requestHandler','Flash','$routeParams','$location',function($scope,requestHandler,Flash,$routeParams,$location){
     var original="";
     $scope.doGetForumDetailsByUserEdit= function () {
 
@@ -404,7 +404,7 @@ userApp.controller('ForumsUserEditController',function($scope,requestHandler,Fla
     };
 
     $scope.Editinit();
-});
+}]);
 
 // html filter (render text as html)
 userApp.filter('html', ['$sce', function ($sce) {
@@ -441,7 +441,7 @@ userApp.filter('startsWithLetterForum', function () {
 
 var coachApp = angular.module('coachApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','angularUtils.directives.dirPagination']);
 
-coachApp.controller('ForumsCoachController',function($scope,requestHandler,Flash,$routeParams,$location){
+coachApp.controller('ForumsCoachController',['$scope','requestHandler','Flash','$routeParams','$location',function($scope,requestHandler,Flash,$routeParams,$location){
 
     $scope.isNew = true;
     $scope.title = "Add Forum";
@@ -576,9 +576,9 @@ coachApp.controller('ForumsCoachController',function($scope,requestHandler,Flash
 
 
 
-});
+}]);
 
-coachApp.controller('ForumsCoachEditController',function($scope,requestHandler,Flash,$routeParams,$location){
+coachApp.controller('ForumsCoachEditController',['$scope','requestHandler','Flash','$routeParams','$location',function($scope,requestHandler,Flash,$routeParams,$location){
 
     $scope.activeClass.forums='active';
     var original="";
@@ -658,7 +658,7 @@ coachApp.controller('ForumsCoachEditController',function($scope,requestHandler,F
     };
 
     $scope.Editinit();
-});
+}]);
 
 // html filter (render text as html)
 coachApp.filter('html', ['$sce', function ($sce) {

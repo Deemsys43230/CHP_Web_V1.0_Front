@@ -3,7 +3,7 @@
  */
 
 var userApp= angular.module('userApp', ['ngRoute','oc.lazyLoad','ngCookies','requestModule','flash','angularUtils.directives.dirPagination']);
-userApp.controller('CourseController',['$scope','requestHandler','Flash','$routeParams','$location',function($scope,requestHandler,Flash,$routeParams) {
+userApp.controller('CourseController',['$scope','requestHandler','Flash','$routeParams','$location',function($scope,requestHandler,Flash,$routeParams,$location) {
 
     $scope.entrolling="Enroll course";
     $scope.enrollButtonStatus=false;
@@ -572,7 +572,7 @@ adminApp.filter('startsWithLetterPending', function () {
 
 var coachApp= angular.module('coachApp', ['ngRoute','oc.lazyLoad','ngCookies','requestModule','flash','summernote']);
 
-coachApp.controller('CourseController',function($scope,requestHandler,Flash,$routeParams,$location) {
+coachApp.controller('CourseController',['$scope','requestHandler','Flash','$routeParams','$location',function($scope,requestHandler,Flash,$routeParams,$location) {
 
     if(!$routeParams.id){
         if(!$routeParams.sectionId){
@@ -821,9 +821,9 @@ coachApp.controller('CourseController',function($scope,requestHandler,Flash,$rou
         });
     };
 
-});
+}]);
 
-coachApp.controller('CourseEditController',function($scope,requestHandler,Flash,$routeParams,$location) {
+coachApp.controller('CourseEditController',['$scope','requestHandler','Flash','$routeParams','$location',function($scope,requestHandler,Flash,$routeParams,$location) {
 
     $scope.courseDetails = {};
     var originalSectionDetails={};
@@ -959,7 +959,9 @@ coachApp.controller('CourseEditController',function($scope,requestHandler,Flash,
         if($scope.courseDetails.promoimage==='../../images/no-course.jpg'){
             $scope.convertImgToBase64($scope.courseDetails.promoimage, function(base64Img){
                 $scope.courseDetails.promoimage=base64Img;
+                $scope.loaded=true;
                 requestHandler.postRequest("coach/insertCourse/",$scope.courseDetails).then(function(response) {
+                    $scope.loaded=false;
                     $location.path("courseView/"+response.data.Course.courseid);
                 },function(){
                     errorMessage(Flash,"Please try again later!")
@@ -967,7 +969,9 @@ coachApp.controller('CourseEditController',function($scope,requestHandler,Flash,
             });
         }
         else{
+            $scope.loaded=true;
             requestHandler.postRequest("coach/insertCourse/",$scope.courseDetails).then(function(response) {
+                $scope.loaded=false;
                 $location.path("courseView/"+response.data.Course.courseid);
             },function(){
                 errorMessage(Flash,"Please try again later!")
@@ -1078,7 +1082,7 @@ coachApp.controller('CourseEditController',function($scope,requestHandler,Flash,
         });
     };
 
-});
+}]);
 
 // render image to view in list
 coachApp.filter('trusted', ['$sce', function ($sce) {

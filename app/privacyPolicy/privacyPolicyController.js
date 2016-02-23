@@ -1,6 +1,6 @@
 
 var adminApp = angular.module('adminApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','summernote']);
-adminApp.controller('PrivacyPolicyController',function($scope,requestHandler,Flash,$location,siteMenuService) {
+adminApp.controller('PrivacyPolicyController',['$scope','requestHandler','Flash','$location','siteMenuService',function($scope,requestHandler,Flash,$location,siteMenuService) {
 
     $scope.siteMenuList = siteMenuService;
     $.each($scope.siteMenuList,function(index,value){
@@ -47,9 +47,9 @@ adminApp.controller('PrivacyPolicyController',function($scope,requestHandler,Fla
 
     // Display Privacy policy details On Page Load
     $scope.doGetPrivacyPolicy();
-});
+}]);
 
-adminApp.controller('PrivacyPolicyCommonController',function($scope,requestHandler,Flash) {
+adminApp.controller('PrivacyPolicyCommonController',['$scope','requestHandler','Flash',function($scope,requestHandler,Flash) {
 
     // To display privacy policy details as user
     $scope.doGetUserPrivacyPolicy=function(){
@@ -65,7 +65,7 @@ adminApp.controller('PrivacyPolicyCommonController',function($scope,requestHandl
 
     // Display User Privacy policy details On Page Load
     $scope.doGetUserPrivacyPolicy();
-});
+}]);
 
 
 
@@ -77,7 +77,7 @@ adminApp.filter('html', ['$sce', function ($sce) {
 }]);
 
 var commonApp = angular.module('commonApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate']);
-commonApp.controller('PrivacyPolicyCommonController',function($scope,requestHandler,Flash) {
+commonApp.controller('PrivacyPolicyCommonController',['$scope','requestHandler','Flash',function($scope,requestHandler,Flash) {
 
     // To display privacy policy details as user
     $scope.doGetUserPrivacyPolicy=function(){
@@ -93,7 +93,7 @@ commonApp.controller('PrivacyPolicyCommonController',function($scope,requestHand
 
     // Display User Privacy policy details On Page Load
     $scope.doGetUserPrivacyPolicy();
-});
+}]);
 
 
 
@@ -106,7 +106,7 @@ commonApp.filter('html', ['$sce', function ($sce) {
 
 
 var coachApp = angular.module('coachApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate']);
-coachApp.controller('PrivacyPolicyCommonController',function($scope,requestHandler,Flash) {
+coachApp.controller('PrivacyPolicyCommonController',['$scope','requestHandler','Flash',function($scope,requestHandler,Flash) {
 
     // To display privacy policy details as user
     $scope.doGetUserPrivacyPolicy=function(){
@@ -122,7 +122,7 @@ coachApp.controller('PrivacyPolicyCommonController',function($scope,requestHandl
 
     // Display User Privacy policy details On Page Load
     $scope.doGetUserPrivacyPolicy();
-});
+}]);
 
 // html filter (render text as html)
 coachApp.filter('html', ['$sce', function ($sce) {
@@ -133,7 +133,7 @@ coachApp.filter('html', ['$sce', function ($sce) {
 
 
 var userApp = angular.module('userApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate']);
-userApp.controller('PrivacyPolicyCommonController',function($scope,requestHandler,Flash) {
+userApp.controller('PrivacyPolicyCommonController',['$scope','requestHandler','Flash',function($scope,requestHandler,Flash) {
 
     // To display privacy policy details as user
     $scope.doGetUserPrivacyPolicy=function(){
@@ -149,7 +149,7 @@ userApp.controller('PrivacyPolicyCommonController',function($scope,requestHandle
 
     // Display User Privacy policy details On Page Load
     $scope.doGetUserPrivacyPolicy();
-});
+}]);
 
 // html filter (render text as html)
 userApp.filter('html', ['$sce', function ($sce) {

@@ -51,21 +51,21 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
             when('/dashboard', {
                 templateUrl: 'views/dashboard.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'coachApp',
                             files:[
                                 '../../app/dashboard/coachDashboardController.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller:'CoachDashboardController'
             }).
             when('/profile', {
                 templateUrl: 'views/profile.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'coachApp',
                             files:[
@@ -77,14 +77,14 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../app/coachProfile/coachProfileController.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller:'CoachProfileController'
             }).
             when('/mymembers', {
                 templateUrl: 'views/member.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'coachApp',
                             files:[
@@ -94,14 +94,14 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../app/coachMembers/coachMembersController.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller:'CoachMembersController'
             }).
             when('/memberView/:id', {
                 templateUrl: 'views/member-view.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'coachApp',
                             files:[
@@ -110,14 +110,14 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../app/coachMembers/coachMembersController.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller:'MembersViewController'
             }).
             when('/forums', {
                 templateUrl: '../user/views/forums.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'coachApp',
                             files:[
@@ -126,14 +126,14 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../angular/angular-utils-pagination/dirPagination.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller:'ForumsCoachController'
             }).
             when('/addforum', {
                 templateUrl: '../user/views/forum-add.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'coachApp',
                             files:[
@@ -143,14 +143,14 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../app/forums/forumsController.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller:'ForumsCoachController'
             }).
             when('/editForum/:id', {
                 templateUrl: '../user/views/forum-add.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'coachApp',
                             files:[
@@ -160,56 +160,56 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../app/forums/forumsController.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller:'ForumsCoachEditController'
             }).
             when('/forumDetails/:id', {
                 templateUrl: '../user/views/forum-details.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'coachApp',
                             files:[
                                 '../../app/forums/forumsController.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller:'ForumsCoachController'
             }).
             when('/advices', {
                 templateUrl: 'views/advices.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'coachApp',
                             files:[
                                 '../../app/coachAdvice/coachAdviceController.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller:'CoachAdviceController'
             }).
             when('/course', {
                 templateUrl: 'views/course.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'coachApp',
                             files:[
                                 '../../app/course/courseController.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller:'CourseController'
             }).
             when('/courseView/:id', {
                 templateUrl: 'views/course-view.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'coachApp',
                             files:[
@@ -218,14 +218,14 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../plugin/popup/jquery.leanModal.min.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller:'CourseController'
             }).
             when('/courseSection/:sectionId', {
                 templateUrl: 'views/course-section.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'coachApp',
                             files:[
@@ -234,14 +234,14 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../plugin/popup/jquery.leanModal.min.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller:'CourseController'
             }).
             when('/courseSectionEdit/:sectionId', {
                 templateUrl: 'views/course-section-add-edit.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'coachApp',
                             files:[
@@ -250,14 +250,14 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../plugin/text-editor/summernote.css'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller:'CourseEditController'
             }).
             when('/courseSectionAdd/:courseId', {
                 templateUrl: 'views/course-section-add-edit.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'coachApp',
                             files:[
@@ -266,14 +266,14 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../plugin/text-editor/summernote.css'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller:'CourseEditController'
             }).
             when('/courseEdit/:id', {
                 templateUrl: 'views/course-add-edit.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'coachApp',
                             files:[
@@ -286,14 +286,14 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../app/course/courseController.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller:'CourseEditController'
             }).
             when('/courseAdd', {
                 templateUrl: 'views/course-add-edit.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'coachApp',
                             files:[
@@ -306,14 +306,14 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../app/course/courseController.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller:'CourseEditController'
             }).
             when('/payments', {
                 templateUrl: 'views/payments.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'coachApp',
                             files:[
@@ -321,14 +321,14 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../app/payments/coachPaymentController.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller: 'CoachPaymentController'
             }).
             when('/subscribersList/:id', {
                 templateUrl: 'views/payment-subscribers-list.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'coachApp',
                             files:[
@@ -338,14 +338,14 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../plugin/popup/jquery.leanModal.min.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller: 'CoachPaymentController'
             }).
             when('/subscribersPayments', {
                 templateUrl: 'views/payment-subscription.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'coachApp',
                             files:[
@@ -354,28 +354,28 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../app/payments/coachPaymentController.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller: 'CoachPaymentController'
             }).
             when('/subscriptionDetails/:id', {
                 templateUrl: 'views/payment-subscription-details.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'coachApp',
                             files:[
                                 '../../app/payments/coachPaymentController.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller: 'CoachPaymentController'
             }).
             when('/paymentSettings', {
                 templateUrl: 'views/payment-settings.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'coachApp',
                             files:[
@@ -383,14 +383,14 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../app/coachPaymentSettings/coachPaymentSettings.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller: 'CoachPaymentSettingsController'
             }).
             when('/subscriptionPanel', {
                 templateUrl: 'views/payment-subscription-panel.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'coachApp',
                             files:[
@@ -399,77 +399,77 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../app/coachPaymentSettings/coachSubscriptionSettings.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller: 'CoachSubscriptionController'
             }).
             when('/contact', {
                 templateUrl: '../common/contact.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'coachApp',
                             files:[
                                 '../../app/settings/basicInfoController.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller:'ContactUsDetailsController'
             }).
             when('/FAQ', {
                 templateUrl: '../common/FAQ.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'coachApp',
                             files:[
                                 '../../app/faq/faqController.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller:'FAQCommonController'
             }).
             when('/instructions', {
                 templateUrl: '../common/instruction.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'coachApp',
                             files:[
                                 '../../app/instruction/instructionController.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller:'InstructionCommonController'
             }).
             when('/termsofuse', {
                 templateUrl: '../common/termsofuse.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'coachApp',
                             files:[
                                 '../../app/termsOfUse/termsOfUseController.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller:'TermsOfUseCommonController'
             }).
             when('/policy', {
                 templateUrl: '../common/privacypolicy.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'coachApp',
                             files:[
                                 '../../app/privacyPolicy/privacyPolicyController.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller:'PrivacyPolicyCommonController'
             }).
@@ -479,7 +479,7 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
     }]);
 
 //Initial Controller for Username
-coachApp.controller("CoachInitialController",function($scope,requestHandler,$location){
+coachApp.controller("CoachInitialController",['$scope','requestHandler','$location',function($scope,requestHandler,$location){
     requestHandler.getRequest("getUserId/","").then(function(response){
         $scope.username=response.data.User_Profile.name;
     });
@@ -496,10 +496,10 @@ coachApp.controller("CoachInitialController",function($scope,requestHandler,$loc
     };
 
     $scope.getSocialMediaDetails();
-});
+}]);
 
 //Controller For Logout
-coachApp.controller("LogoutController",['$cookies','$scope','$window',function($cookies,$scope,$window,requestHandler){
+coachApp.controller("LogoutController",['$cookies','$scope','$window','requestHandler',function($cookies,$scope,$window,requestHandler){
 
     $scope.doLogout=function(){
 

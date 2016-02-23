@@ -1,6 +1,6 @@
 var commonApp = angular.module('commonApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate']);
 
-commonApp.controller('CommonController',function($scope,requestHandler,Flash,$routeParams,$sce,$rootScope) {
+commonApp.controller('CommonController',['$scope','requestHandler','Flash','$routeParams','$sce','$rootScope',function($scope,requestHandler,Flash,$routeParams,$sce,$rootScope) {
 
 
     $scope.countFrom = 0;
@@ -69,7 +69,7 @@ commonApp.controller('CommonController',function($scope,requestHandler,Flash,$ro
     $scope.doGetNewsByUser();
     $scope.doGetTestimonialsByUser();
     $scope.doGetDashboardCount();
-});
+}]);
 
 
 

@@ -1,7 +1,7 @@
 
 var adminApp = angular.module('adminApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','summernote']);
 
-adminApp.controller('TermsOfUseController',function($scope,requestHandler,Flash,$location,siteMenuService) {
+adminApp.controller('TermsOfUseController',['$scope','requestHandler','Flash','$location','siteMenuService',function($scope,requestHandler,Flash,$location,siteMenuService) {
 
     $scope.siteMenuList = siteMenuService;
     $.each($scope.siteMenuList,function(index,value){
@@ -49,10 +49,10 @@ adminApp.controller('TermsOfUseController',function($scope,requestHandler,Flash,
     // Display Terms of Use details On Page Load
     $scope.doGetTermsOfUse();
 
-});
+}]);
 
 
-adminApp.controller('TermsOfUseCommonController',function($scope,requestHandler,Flash) {
+adminApp.controller('TermsOfUseCommonController',['$scope','requestHandler','Flash',function($scope,requestHandler,Flash) {
 
     $scope.doGetUserTermsOfUse=function(){
         requestHandler.getRequest("getLegalByAll/Termsofuse/", "").then(function(response){
@@ -65,7 +65,7 @@ adminApp.controller('TermsOfUseCommonController',function($scope,requestHandler,
     // Display User Instruction details On Page Load
     $scope.doGetUserTermsOfUse();
 
-});
+}]);
 
 // html filter (render text as html)
 adminApp.filter('html', ['$sce', function ($sce) {
@@ -76,7 +76,7 @@ adminApp.filter('html', ['$sce', function ($sce) {
 
 var commonApp = angular.module('commonApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate']);
 
-commonApp.controller('TermsOfUseCommonController',function($scope,requestHandler,Flash) {
+commonApp.controller('TermsOfUseCommonController',['$scope','requestHandler','Flash',function($scope,requestHandler,Flash) {
 
     $scope.doGetUserTermsOfUse=function(){
         requestHandler.getRequest("getLegalByAll/Termsofuse/", "").then(function(response){
@@ -89,7 +89,7 @@ commonApp.controller('TermsOfUseCommonController',function($scope,requestHandler
     // Display User Instruction details On Page Load
     $scope.doGetUserTermsOfUse();
 
-});
+}]);
 
 // html filter (render text as html)
 commonApp.filter('html', ['$sce', function ($sce) {
@@ -100,7 +100,7 @@ commonApp.filter('html', ['$sce', function ($sce) {
 
 var userApp = angular.module('userApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate']);
 
-userApp.controller('TermsOfUseCommonController',function($scope,requestHandler,Flash) {
+userApp.controller('TermsOfUseCommonController',['$scope','requestHandler','Flash',function($scope,requestHandler,Flash) {
 
     $scope.doGetUserTermsOfUse=function(){
         requestHandler.getRequest("getLegalByAll/Termsofuse/", "").then(function(response){
@@ -113,7 +113,7 @@ userApp.controller('TermsOfUseCommonController',function($scope,requestHandler,F
     // Display User Instruction details On Page Load
     $scope.doGetUserTermsOfUse();
 
-});
+}]);
 
 // html filter (render text as html)
 userApp.filter('html', ['$sce', function ($sce) {
@@ -125,7 +125,7 @@ userApp.filter('html', ['$sce', function ($sce) {
 
 var coachApp = angular.module('coachApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate']);
 
-coachApp.controller('TermsOfUseCommonController',function($scope,requestHandler,Flash) {
+coachApp.controller('TermsOfUseCommonController',['$scope','requestHandler','Flash',function($scope,requestHandler,Flash) {
 
     $scope.doGetUserTermsOfUse=function(){
         requestHandler.getRequest("getLegalByAll/Termsofuse/", "").then(function(response){
@@ -138,7 +138,7 @@ coachApp.controller('TermsOfUseCommonController',function($scope,requestHandler,
     // Display User Instruction details On Page Load
     $scope.doGetUserTermsOfUse();
 
-});
+}]);
 
 // html filter (render text as html)
 coachApp.filter('html', ['$sce', function ($sce) {

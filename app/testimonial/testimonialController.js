@@ -1,5 +1,5 @@
 var adminApp = angular.module('adminApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','summernote','angularUtils.directives.dirPagination']);
-adminApp.controller('TestimonialController',function($scope,requestHandler,Flash,$location,siteMenuService) {
+adminApp.controller('TestimonialController',['$scope','requestHandler','Flash','$location','siteMenuService',function($scope,requestHandler,Flash,$location,siteMenuService) {
 
     $scope.isNew = true;
     $scope.title = "Add Testimonial";
@@ -84,9 +84,9 @@ adminApp.controller('TestimonialController',function($scope,requestHandler,Flash
     //For image upload
     $('.image-editor').cropit();
 
-});
+}]);
 
-adminApp.controller('TestimonialEditController',function($scope,requestHandler,Flash,$location,$routeParams,$sce,siteMenuService) {
+adminApp.controller('TestimonialEditController',['$scope','requestHandler','Flash','$location','$routeParams','$sce','siteMenuService',function($scope,requestHandler,Flash,$location,$routeParams,$sce,siteMenuService) {
 
     $scope.siteMenuList = siteMenuService;
     $.each($scope.siteMenuList,function(index,value){
@@ -195,7 +195,7 @@ adminApp.controller('TestimonialEditController',function($scope,requestHandler,F
 
 
 
-});
+}]);
 
 // html filter (render text as html)
 adminApp.filter('html', ['$sce', function ($sce) {
@@ -222,7 +222,7 @@ adminApp.directive('validFile',function(){
 
 var commonApp = angular.module('commonApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate']);
 
-commonApp.controller('TestimonialUserController',function($scope,requestHandler,Flash,$sce,$routeParams){
+commonApp.controller('TestimonialUserController',['$scope','requestHandler','Flash','$sce','$routeParams',function($scope,requestHandler,Flash,$sce,$routeParams){
 
     // To display Testimonials as user
     $scope.doGetTestimonialsByUser=function(){
@@ -258,7 +258,7 @@ commonApp.controller('TestimonialUserController',function($scope,requestHandler,
     $scope.doGetTestimonialDetailsByUser($routeParams.id);
 
 
-});
+}]);
 
 // render image to view in list
 commonApp.filter('trusted', ['$sce', function ($sce) {

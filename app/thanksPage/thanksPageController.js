@@ -1,5 +1,5 @@
 var userApp = angular.module('userApp', ['ngRoute','oc.lazyLoad','requestModule']);
-userApp.controller('ThanksSubscribePageController',function($scope,requestHandler,$location,$routeParams) {
+userApp.controller('ThanksSubscribePageController',['$scope','requestHandler','$location','$routeParams',function($scope,requestHandler,$location,$routeParams) {
     var paymentResponse=$location.search();
     $scope.completed=false;
     $scope.transactionSucceed=true;
@@ -58,9 +58,9 @@ userApp.controller('ThanksSubscribePageController',function($scope,requestHandle
         console.log(paymentConfirmDetails);
         $scope.doExcecutePayment(paymentConfirmDetails);
     }
-});
+}]);
 
-userApp.controller('ThanksEnrollPageController',function($scope,requestHandler,$location,$window,$routeParams) {
+userApp.controller('ThanksEnrollPageController',['$scope','requestHandler','$location','$window','$routeParams',function($scope,requestHandler,$location,$window,$routeParams) {
 
     var paymentResponse=$location.search();
     $scope.completed=false;
@@ -120,4 +120,4 @@ userApp.controller('ThanksEnrollPageController',function($scope,requestHandler,$
         };
         $scope.doExcecutePayment(paymentConfirmDetails);
     }
-});
+}]);

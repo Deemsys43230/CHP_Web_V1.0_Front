@@ -1,6 +1,6 @@
 var adminApp=angular.module('exerciseServiceModule',['requestModule']);
 
-adminApp.factory("ExerciseService",function(requestHandler){
+adminApp.factory("ExerciseService",['requestHandler',function(requestHandler){
 
     var exerciseServiceObj={};
 
@@ -92,7 +92,7 @@ adminApp.factory("ExerciseService",function(requestHandler){
 
     return exerciseServiceObj;
 
-});
+}]);
 
 
 

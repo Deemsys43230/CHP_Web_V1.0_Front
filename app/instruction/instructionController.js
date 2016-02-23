@@ -1,7 +1,7 @@
 
 var adminApp = angular.module('adminApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','summernote']);
 
-adminApp.controller('InstructionController',function($scope,requestHandler,Flash,$location,siteMenuService) {
+adminApp.controller('InstructionController',['$scope','requestHandler','Flash','$location','siteMenuService',function($scope,requestHandler,Flash,$location,siteMenuService) {
 
     $scope.siteMenuList = siteMenuService;
     $.each($scope.siteMenuList,function(index,value){
@@ -48,9 +48,9 @@ adminApp.controller('InstructionController',function($scope,requestHandler,Flash
     // Display Instruction details On Page Load
     $scope.doGetInstruction();
 
-});
+}]);
 
-adminApp.controller('InstructionCommonController',function($scope,requestHandler,Flash) {
+adminApp.controller('InstructionCommonController',['$scope','requestHandler','Flash',function($scope,requestHandler,Flash) {
 
     $scope.doGetUserInstruction=function(){
         requestHandler.getRequest("getLegalByAll/Instructions/", "").then(function(response){
@@ -63,7 +63,7 @@ adminApp.controller('InstructionCommonController',function($scope,requestHandler
     // Display User Instruction details On Page Load
     $scope.doGetUserInstruction();
 
-});
+}]);
 
 // html filter (render text as html)
 adminApp.filter('html', ['$sce', function ($sce) {
@@ -74,7 +74,7 @@ adminApp.filter('html', ['$sce', function ($sce) {
 
 var commonApp = angular.module('commonApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate']);
 
-commonApp.controller('InstructionCommonController',function($scope,requestHandler,Flash) {
+commonApp.controller('InstructionCommonController',['$scope','requestHandler','Flash',function($scope,requestHandler,Flash) {
 
     $scope.doGetUserInstruction=function(){
         requestHandler.getRequest("getLegalByAll/Instructions/", "").then(function(response){
@@ -87,7 +87,7 @@ commonApp.controller('InstructionCommonController',function($scope,requestHandle
     // Display User Instruction details On Page Load
     $scope.doGetUserInstruction();
 
-});
+}]);
 
 // html filter (render text as html)
 commonApp.filter('html', ['$sce', function ($sce) {
@@ -98,7 +98,7 @@ commonApp.filter('html', ['$sce', function ($sce) {
 
 var userApp = angular.module('userApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate']);
 
-userApp.controller('InstructionCommonController',function($scope,requestHandler,Flash) {
+userApp.controller('InstructionCommonController',['$scope','requestHandler','Flash',function($scope,requestHandler,Flash) {
 
     $scope.doGetUserInstruction=function(){
         requestHandler.getRequest("getLegalByAll/Instructions/", "").then(function(response){
@@ -111,7 +111,7 @@ userApp.controller('InstructionCommonController',function($scope,requestHandler,
     // Display User Instruction details On Page Load
     $scope.doGetUserInstruction();
 
-});
+}]);
 
 // html filter (render text as html)
 userApp.filter('html', ['$sce', function ($sce) {
@@ -123,7 +123,7 @@ userApp.filter('html', ['$sce', function ($sce) {
 
 var coachApp = angular.module('coachApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate']);
 
-coachApp.controller('InstructionCommonController',function($scope,requestHandler,Flash) {
+coachApp.controller('InstructionCommonController',['$scope','requestHandler','Flash',function($scope,requestHandler,Flash) {
 
     $scope.doGetUserInstruction=function(){
         requestHandler.getRequest("getLegalByAll/Instructions/", "").then(function(response){
@@ -136,7 +136,7 @@ coachApp.controller('InstructionCommonController',function($scope,requestHandler
     // Display User Instruction details On Page Load
     $scope.doGetUserInstruction();
 
-});
+}]);
 
 // html filter (render text as html)
 coachApp.filter('html', ['$sce', function ($sce) {

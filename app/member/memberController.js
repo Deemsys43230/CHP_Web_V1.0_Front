@@ -1,6 +1,6 @@
 var adminApp = angular.module('adminApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','angularUtils.directives.dirPagination']);
 
-adminApp.controller('MemberController',function($scope,requestHandler,Flash,$routeParams,$sce) {
+adminApp.controller('MemberController',['$scope','requestHandler','Flash','$routeParams','$sce',function($scope,requestHandler,Flash,$routeParams,$sce) {
 
 
     //Get Coach List
@@ -76,7 +76,7 @@ adminApp.controller('MemberController',function($scope,requestHandler,Flash,$rou
         $scope.doGetMemberList();
     };
 
-});
+}]);
 
 adminApp.filter('startsWithLetteruser', function () {
 

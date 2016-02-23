@@ -53,7 +53,7 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
             when('/dashboard', {
                 templateUrl: 'views/dashboard.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'userApp',
                             files:[
@@ -68,13 +68,13 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../plugin/dateRange/daterangepicker.css',
                                 '../../plugin/dateRange/daterangepicker.js'
                             ]
-                        })}},
+                        })}]},
                 controller:'UserDashboardController'
             }).
             when('/register', {
                 templateUrl: 'views/register.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'userApp',
                             files:[
@@ -83,13 +83,13 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../plugin/datepicker/datepicker.css'
                             ]
                         })
-                    }
+                    }]
                 }
             }).
             when('/myCourses', {
                 templateUrl: 'views/courses-my.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'userApp',
                             files:[
@@ -97,14 +97,14 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../app/course/courseController.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller:'CourseController'
             }).
             when('/courses', {
                 templateUrl: 'views/courses.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'userApp',
                             files:[
@@ -112,14 +112,14 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../app/course/courseController.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller:'CourseController'
             }).
             when('/courseView/:id', {
                 templateUrl: 'views/course-view.html',
                 resolve: {
-                loadMyFiles:function($ocLazyLoad) {
+                loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                     return $ocLazyLoad.load({
                         name:'userApp',
                         files:[
@@ -129,14 +129,14 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                             '../../app/course/courseController.js'
                         ]
                     })
-                }
+                }]
             },
             controller:'CourseController'
             }).
             when('/courseDetail/:id', {
                 templateUrl: 'views/course-details.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'userApp',
                             files:[
@@ -146,14 +146,14 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../app/course/courseController.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller:'CourseController'
             }).
             when('/courseCategory/:id', {
                 templateUrl: 'views/course-category.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'userApp',
                             files:[
@@ -161,14 +161,14 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../app/course/courseController.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller:'CourseController'
             }).
             when('/payments', {
                 templateUrl: 'views/payments.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'userApp',
                             files:[
@@ -178,14 +178,14 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../app/payments/userPaymentController.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller: 'UserPaymentController'
             }).
             when('/coachPayments', {
                 templateUrl: 'views/payments-coach.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'userApp',
                             files:[
@@ -195,42 +195,42 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../app/payments/userPaymentController.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller: 'UserPaymentController'
             }).
             when('/paymentDetails/:id', {
                 templateUrl: 'views/payment-details.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'userApp',
                             files:[
                                 '../../app/payments/userPaymentController.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller: 'UserPaymentController'
             }).
             when('/paymentCoachDetails/:id', {
                 templateUrl: 'views/payment-coach-details.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'userApp',
                             files:[
                                 '../../app/payments/userPaymentController.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller: 'UserPaymentController'
             }).
             when('/paymentSettings', {
                 templateUrl: 'views/payment-settings.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'userApp',
                             files:[
@@ -238,14 +238,14 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../app/payments/userPaymentController.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller: 'UserPaymentController'
             }).
             when('/coach', {
                 templateUrl: 'views/coach.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'userApp',
                             files:[
@@ -253,14 +253,14 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../app/userCoach/userCoachController.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller: 'UserCoachController'
             }).
             when('/coachSearch', {
                 templateUrl: 'views/coach-search.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'userApp',
                             files:[
@@ -270,14 +270,14 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../app/userCoach/userCoachController.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller: 'UserCoachController'
             }).
             when('/coachView/:id', {
                 templateUrl: 'views/coach-user-view.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'userApp',
                             files:[
@@ -289,42 +289,42 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../plugin/popup/jquery.leanModal.min.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller: 'UserCoachController'
             }).
             when('/thanksSubscribePage/:id/:month', {
                 templateUrl: 'views/thanks-page.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'userApp',
                             files:[
                                 '../../app/thanksPage/thanksPageController.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller: 'ThanksSubscribePageController'
             }).
             when('/thanksEnrollPage/:id', {
                 templateUrl: 'views/thanks-page.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'userApp',
                             files:[
                                 '../../app/thanksPage/thanksPageController.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller: 'ThanksEnrollPageController'
             }).
             when('/friends', {
                 templateUrl: 'views/friends.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'userApp',
                             files:[
@@ -332,7 +332,7 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../app/friends/friendsService.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller: 'FriendsController'
             }).
@@ -348,21 +348,21 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
             when('/contact', {
                 templateUrl: '../common/contact.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'userApp',
                             files:[
                                 '../../app/settings/basicInfoController.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller:'ContactUsDetailsController'
             }).
             when('/profile', {
                 templateUrl: 'views/profile.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'userApp',
                             files:[
@@ -374,14 +374,14 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../app/userProfile/userProfileController.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller:'UserProfileController'
             }).
             when('/demography', {
                 templateUrl: 'views/demography.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'userApp',
                             files:[
@@ -389,28 +389,28 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../app/demography/demographyController.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller:'DemographyController'
             }).
             when('/nutrients', {
                 templateUrl: 'views/nutrients.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'userApp',
                             files:[
                                 '../../app/demography/demographyController.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller:'DemographyController'
             }).
             when('/forums', {
                 templateUrl: 'views/forums.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'userApp',
                             files:[
@@ -419,14 +419,14 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../angular/angular-utils-pagination/dirPagination.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller:'ForumsUserController'
             }).
             when('/addforum', {
                 templateUrl: 'views/forum-add.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'userApp',
                             files:[
@@ -436,14 +436,14 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../app/forums/forumsController.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller:'ForumsUserController'
             }).
             when('/editForum/:id', {
                 templateUrl: 'views/forum-add.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'userApp',
                             files:[
@@ -453,28 +453,28 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../app/forums/forumsController.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller:'ForumsUserEditController'
             }).
             when('/forumDetails/:id', {
                 templateUrl: 'views/forum-details.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'userApp',
                             files:[
                                 '../../app/forums/forumsController.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller:'ForumsUserController'
             }).
             when('/groupGoal', {
                 templateUrl: 'views/group-goal.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'userApp',
                             files:[
@@ -486,14 +486,14 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../plugin/dateRange/daterangepicker.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller:'GoalController'
             }).
             when('/groupGoalRequest', {
                 templateUrl: 'views/group-goal-request.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'userApp',
                             files:[
@@ -501,14 +501,14 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../angular/angular-utils-pagination/dirPagination.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller:'GoalController'
             }).
             when('/groupGoalView/:id', {
                 templateUrl: 'views/group-goal-view.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'userApp',
                             files:[
@@ -517,7 +517,7 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../app/goal/goalController.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller:'GoalController',
                 request:0
@@ -525,7 +525,7 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
             when('/groupGoalRequest/:id', {
                 templateUrl: 'views/group-goal-view.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'userApp',
                             files:[
@@ -534,7 +534,7 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../app/goal/goalController.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller:'GoalController',
                 request:1
@@ -542,56 +542,56 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
             when('/FAQ', {
                 templateUrl: '../common/FAQ.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'userApp',
                             files:[
                                 '../../app/faq/faqController.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller:'FAQCommonController'
             }).
             when('/instructions', {
                 templateUrl: '../common/instruction.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'userApp',
                             files:[
                                 '../../app/instruction/instructionController.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller:'InstructionCommonController'
             }).
             when('/termsofuse', {
                 templateUrl: '../common/termsofuse.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'userApp',
                             files:[
                                 '../../app/termsOfUse/termsOfUseController.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller:'TermsOfUseCommonController'
             }).
             when('/policy', {
                 templateUrl: '../common/privacypolicy.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'userApp',
                             files:[
                                 '../../app/privacyPolicy/privacyPolicyController.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller:'PrivacyPolicyCommonController'
             }).
@@ -601,7 +601,7 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
 }]);
 
 //Initial Controller for Username
-userApp.controller("UserInitialController",function($scope,requestHandler,$location){
+userApp.controller("UserInitialController",['$scope','requestHandler','$location',function($scope,requestHandler,$location){
     requestHandler.getRequest("getUserId/","").then(function(response){
         $scope.username=response.data.User_Profile.name;
     });
@@ -620,7 +620,7 @@ userApp.controller("UserInitialController",function($scope,requestHandler,$locat
 
     $scope.getSocialMediaDetails();
 
-});
+}]);
 
 //Controller For Logout
 userApp.controller("UserLogoutController",['$cookies','$scope','$window',function($cookies,$scope,$window){
@@ -674,7 +674,7 @@ userApp.directive('validateFloat', function() {
 });
 
 //Food Already Exists
-userApp.directive("foodexists", function ($q, $timeout,requestHandler) {
+userApp.directive("foodexists",['$q','$timeout','requestHandler', function ($q, $timeout,requestHandler) {
 
     return {
         restrict: "A",
@@ -704,11 +704,11 @@ userApp.directive("foodexists", function ($q, $timeout,requestHandler) {
             }
         }
     };
-});
+}]);
 
 
 //Food Already Exists
-userApp.directive("exerciseexists", function ($q, $timeout,requestHandler) {
+userApp.directive("exerciseexists",['$q','$timeout','requestHandler', function ($q, $timeout,requestHandler) {
 
     return {
         restrict: "A",
@@ -738,7 +738,7 @@ userApp.directive("exerciseexists", function ($q, $timeout,requestHandler) {
             }
         }
     };
-});
+}]);
 
 
 //Check For FLoat Validation greater than 0
@@ -806,7 +806,7 @@ userApp.directive('validateEmail', function() {
     };
 });
 
-userApp.directive('focusMe', function($timeout, $parse) {
+userApp.directive('focusMe',['$timeout','$parse', function($timeout, $parse) {
     return {
         //scope: true,   // optionally create a child scope
         link: function(scope, element, attrs) {
@@ -825,4 +825,4 @@ userApp.directive('focusMe', function($timeout, $parse) {
             });
         }
     };
-});
+}]);

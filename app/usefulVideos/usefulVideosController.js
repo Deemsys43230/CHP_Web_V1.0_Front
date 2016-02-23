@@ -1,6 +1,6 @@
 var commonApp = angular.module('commonApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate']);
 
-commonApp.controller('UsefulVideosController',function($scope,requestHandler,Flash) {
+commonApp.controller('UsefulVideosController',['$scope','requestHandler','Flash',function($scope,requestHandler,Flash) {
 
     $scope.doGetVideo=function(id,autoplay){
         $scope.videoLink = $scope.videoList[id];
@@ -81,7 +81,7 @@ commonApp.controller('UsefulVideosController',function($scope,requestHandler,Fla
     // Display User Instruction details On Page Load
     $scope.doGetVideo(0,0);
 
-});
+}]);
 
 // html filter (render text as html)
 commonApp.filter('html', ['$sce', function ($sce) {
@@ -91,13 +91,13 @@ commonApp.filter('html', ['$sce', function ($sce) {
 }]);
 
 // url filter
-commonApp.filter('trustUrl', function ($sce) {
+commonApp.filter('trustUrl',['$sce', function ($sce) {
     return function(url) {
         return $sce.trustAsResourceUrl(url);
     };
-});
+}]);
 
-commonApp.directive('myYoutube', function($sce) {
+commonApp.directive('myYoutube',['$sce', function($sce) {
     return {
         restrict: 'EA',
         scope: { code:'=',
@@ -113,4 +113,4 @@ commonApp.directive('myYoutube', function($sce) {
             });
         }
     };
-});
+}]);

@@ -3,7 +3,7 @@
  */
 var adminApp = angular.module('adminApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate']);
 
-adminApp.controller('PaypalSettingsController',function($scope,requestHandler,Flash,siteMenuService,$location){
+adminApp.controller('PaypalSettingsController',['$scope','requestHandler','Flash','siteMenuService','$location',function($scope,requestHandler,Flash,siteMenuService,$location){
     var original="";
 
     $scope.siteMenuList = siteMenuService;
@@ -44,4 +44,4 @@ adminApp.controller('PaypalSettingsController',function($scope,requestHandler,Fl
 
     $scope.doGetPaypalSettings();
 
-});
+}]);

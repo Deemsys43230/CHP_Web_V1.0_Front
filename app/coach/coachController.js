@@ -3,7 +3,7 @@
  */
 var adminApp = angular.module('adminApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','angularUtils.directives.dirPagination']);
 
-adminApp.controller('CoachController',function($scope,requestHandler,Flash) {
+adminApp.controller('CoachController',['$scope','requestHandler','Flash',function($scope,requestHandler,Flash) {
 
     //Get Coach List
     $scope.doGetCoachList=function(){
@@ -77,10 +77,10 @@ adminApp.controller('CoachController',function($scope,requestHandler,Flash) {
         }
     };
 
-});
+}]);
 
 
-adminApp.controller('CoachViewController',function($scope,requestHandler,Flash,$routeParams) {
+adminApp.controller('CoachViewController',['$scope','requestHandler','Flash','$routeParams',function($scope,requestHandler,Flash,$routeParams) {
 
     $scope.averageRate=0.1;
     $scope.paginationLoad=false;
@@ -186,7 +186,7 @@ adminApp.controller('CoachViewController',function($scope,requestHandler,Flash,$
         $scope.doGetCoachRatings($routeParams.id);
 
     };
-});
+}]);
 
 // render image to view in list
 adminApp.filter('trusted', ['$sce', function ($sce) {

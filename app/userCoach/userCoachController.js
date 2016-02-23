@@ -1,13 +1,13 @@
 var userApp = angular.module('userApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','angularUtils.directives.dirPagination']);
 
-userApp.controller('UserCoachController',function($scope,requestHandler,Flash,$location,$q,$routeParams) {
+userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$location','$q','$routeParams',function($scope,requestHandler,Flash,$location,$q,$routeParams) {
 
     $scope.activeClass.coach='active';
     $scope.coachreview = {ratinglevel:1};
     $scope.averageRate=0.1;
     $scope.paginationLoad=false;
     var myCoachIdListArray = [];
-   // $scope.disablereview=false;
+    // $scope.disablereview=false;
 
     // Search Food Type
     $('.show-list-search').click(function() {
@@ -15,7 +15,7 @@ userApp.controller('UserCoachController',function($scope,requestHandler,Flash,$l
         $('.search-list-form input').focus();
     });
 
-  // To display Coach list by user
+    // To display Coach list by user
     $scope.doGetCoachListByUser=function(){
         requestHandler.getRequest("user/getallCoachListbyUser/", "").then(function(response){
             $scope.usercoachlist1=response.data.getallCoachListbyUser;
@@ -24,8 +24,8 @@ userApp.controller('UserCoachController',function($scope,requestHandler,Flash,$l
                 $scope.doGetCoachDetailsByUser($routeParams.renew);
             }
             else{
-            if($scope.usercoachlist1.length>0)
-            $scope.doGetCoachDetailsByUser(response.data.getallCoachListbyUser[0].userid);
+                if($scope.usercoachlist1.length>0)
+                    $scope.doGetCoachDetailsByUser(response.data.getallCoachListbyUser[0].userid);
             }
 
             var ratingPromise;
@@ -241,16 +241,16 @@ userApp.controller('UserCoachController',function($scope,requestHandler,Flash,$l
             errorMessage(Flash, "Please try again later!")
         });
 
-       /* //hard code
-        $scope.priceValue={
-            "coachid": 8,
-            "onemonth_amount": 20,
-            "threemonth_percentage": 1,
-            "threemonth_amount": 19.8,
-            "sixmonth_percentage": 3,
-            "sixmonth_amount": 19.4,
-            "status": 1
-        }*/
+        /* //hard code
+         $scope.priceValue={
+         "coachid": 8,
+         "onemonth_amount": 20,
+         "threemonth_percentage": 1,
+         "threemonth_amount": 19.8,
+         "sixmonth_percentage": 3,
+         "sixmonth_amount": 19.4,
+         "status": 1
+         }*/
     };
 
     $scope.coachView=function(id){
@@ -261,8 +261,8 @@ userApp.controller('UserCoachController',function($scope,requestHandler,Flash,$l
         $scope.coachreview.review_coach=$routeParams.id;
         requestHandler.postRequest("user/insertRatingsandReviews/",$scope.coachreview).then(function(response){
 
-          successMessage(Flash,"Successfully Added");
-         $scope.userCoachViewInit();
+            successMessage(Flash,"Successfully Added");
+            $scope.userCoachViewInit();
         }, function () {
             errorMessage(Flash, "Please try again later!")
         });
@@ -283,40 +283,40 @@ userApp.controller('UserCoachController',function($scope,requestHandler,Flash,$l
 
         requestHandler.getRequest("getUserId/","").then(function(response){
             $scope.userProfile=response.data.User_Profile;
-           $scope.loginuserid = $scope.userProfile.userid;
-           requestHandler.getRequest("getRatingsandReviews/"+$routeParams.id, "").then(function (response) {
-               $scope.checkReviews = response.data.Ratings_Reviews.Reviews;
+            $scope.loginuserid = $scope.userProfile.userid;
+            requestHandler.getRequest("getRatingsandReviews/"+$routeParams.id, "").then(function (response) {
+                $scope.checkReviews = response.data.Ratings_Reviews.Reviews;
 
-               userTypeArray=[];
-               $.each($scope.checkReviews, function(index,userid) {
-                   userTypeArray.push(userid.review_user);
-               });
+                userTypeArray=[];
+                $.each($scope.checkReviews, function(index,userid) {
+                    userTypeArray.push(userid.review_user);
+                });
 
-               $scope.check=userTypeArray;
+                $scope.check=userTypeArray;
 
-               if($scope.check.indexOf($scope.loginuserid) !=-1){
-                   $scope.disablereview = true;
-               }
-               else{
-                   $scope.disablereview = false;
-               }
-/*
-               $.each($scope.checkReviews,function(index,value){
+                if($scope.check.indexOf($scope.loginuserid) !=-1){
+                    $scope.disablereview = true;
+                }
+                else{
+                    $scope.disablereview = false;
+                }
+                /*
+                 $.each($scope.checkReviews,function(index,value){
 
-                       if(value.review_user == $scope.loginuserid){
-                       $scope.disablereview = true;
-                   }
-                   else{
-                       $scope.disablereview = false;
-                   }
+                 if(value.review_user == $scope.loginuserid){
+                 $scope.disablereview = true;
+                 }
+                 else{
+                 $scope.disablereview = false;
+                 }
 
-               });*/
+                 });*/
 
             });
 
         });
     };
-});
+}]);
 
 
 // render image to view in list
@@ -367,40 +367,40 @@ userApp.directive("starRating", function() {
 
 
 userApp.directive("averageStarRating", function() {
-        return {
-            restrict : "EA",
-            template : "<div class='average-rating-container'>" +
-                "  <ul class='rating background' class='readonly'>" +
-                "    <li ng-repeat='star in stars' class='star'>" +
-                "      <i class='fa fa-star'></i>" + //&#9733
-                "    </li>" +
-                "  </ul>" +
-                "  <ul class='rating foreground' class='readonly' ng-attr-style='width:{{filledInStarsContainerWidth}}%'>" +
-                "    <li ng-repeat='star in stars' class='star filled'>" +
-                "      <i class='fa fa-star'></i>" + //&#9733
-                "    </li>" +
-                "  </ul>" +
-                "</div>",
-            scope : {
-                averageRatingValue : "=ngModel",
-                max : "=?" //optional: default is 5
-            },
-            link : function(scope, elem, attrs) {
-                if (scope.max == undefined) { scope.max = 5; }
-                function updateStars() {
-                    scope.stars = [];
-                    for (var i = 0; i < scope.max; i++) {
-                        scope.stars.push({});
-                    }
-                    var starContainerMaxWidth = 76; //%
-                    scope.filledInStarsContainerWidth = scope.averageRatingValue / scope.max * starContainerMaxWidth;
+    return {
+        restrict : "EA",
+        template : "<div class='average-rating-container'>" +
+            "  <ul class='rating background' class='readonly'>" +
+            "    <li ng-repeat='star in stars' class='star'>" +
+            "      <i class='fa fa-star'></i>" + //&#9733
+            "    </li>" +
+            "  </ul>" +
+            "  <ul class='rating foreground' class='readonly' ng-attr-style='width:{{filledInStarsContainerWidth}}%'>" +
+            "    <li ng-repeat='star in stars' class='star filled'>" +
+            "      <i class='fa fa-star'></i>" + //&#9733
+            "    </li>" +
+            "  </ul>" +
+            "</div>",
+        scope : {
+            averageRatingValue : "=ngModel",
+            max : "=?" //optional: default is 5
+        },
+        link : function(scope, elem, attrs) {
+            if (scope.max == undefined) { scope.max = 5; }
+            function updateStars() {
+                scope.stars = [];
+                for (var i = 0; i < scope.max; i++) {
+                    scope.stars.push({});
                 }
-                scope.$watch("averageRatingValue", function(oldVal, newVal) {
-                    if (newVal) { updateStars(); }
-                });
+                var starContainerMaxWidth = 76; //%
+                scope.filledInStarsContainerWidth = scope.averageRatingValue / scope.max * starContainerMaxWidth;
             }
-        };
-    });
+            scope.$watch("averageRatingValue", function(oldVal, newVal) {
+                if (newVal) { updateStars(); }
+            });
+        }
+    };
+});
 
 
 userApp.filter('startsWithLetter', function () {

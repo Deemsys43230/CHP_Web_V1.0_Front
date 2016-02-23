@@ -35,7 +35,7 @@ adminApp.filter('propsFilter', function() {
 	}
 });
 
-adminApp.controller('ExerciseController',function ($scope,requestHandler,Flash) {
+adminApp.controller('ExerciseController',['$scope','requestHandler','Flash',function ($scope,requestHandler,Flash) {
 	//sidebar menu active class
 	$scope.activeClass = {exerciselist:'active'};
 
@@ -84,9 +84,9 @@ adminApp.controller('ExerciseController',function ($scope,requestHandler,Flash) 
 
 	$scope.init();
 
-});
+}]);
 
-adminApp.controller('ExerciseViewController',function($scope,requestHandler,Flash,$routeParams){
+adminApp.controller('ExerciseViewController',['$scope','requestHandler','Flash','$routeParams',function($scope,requestHandler,Flash,$routeParams){
 
 	$scope.activeClass = {exerciselist:'active'};
 
@@ -111,10 +111,10 @@ adminApp.controller('ExerciseViewController',function($scope,requestHandler,Flas
 
 	//Display FAQ On load
 	$scope.doGetExerciseByID();
-});
+}]);
 
 
-adminApp.controller('ExerciseEditController',function($q,$scope,requestHandler,Flash,$routeParams,$route,ExerciseService,fileReader,$location){
+adminApp.controller('ExerciseEditController',['$q','$scope','requestHandler','Flash','$routeParams','$route','ExerciseService','fileReader','$location',function($q,$scope,requestHandler,Flash,$routeParams,$route,ExerciseService,fileReader,$location){
 
 	var original="";
 	$scope.title=$route.current.title;
@@ -395,7 +395,7 @@ adminApp.controller('ExerciseEditController',function($q,$scope,requestHandler,F
 
 
 
-});
+}]);
 
 
 //Image Upload

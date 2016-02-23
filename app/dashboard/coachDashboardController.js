@@ -1,6 +1,6 @@
 var coachApp = angular.module('coachApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','countTo']);
 
-coachApp.controller('CoachDashboardController',function($scope,requestHandler,Flash) {
+coachApp.controller('CoachDashboardController',['$scope','requestHandler','Flash',function($scope,requestHandler,Flash) {
     $scope.countFrom = 0;
     //Get Coach List
     $scope.doGetCoachDashboardCount=function(){
@@ -14,4 +14,4 @@ coachApp.controller('CoachDashboardController',function($scope,requestHandler,Fl
     };
     $scope.doGetCoachDashboardCount();
 
-});
+}]);

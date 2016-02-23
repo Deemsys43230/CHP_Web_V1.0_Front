@@ -3,7 +3,7 @@
  */
 var adminApp=angular.module('userDashboardServiceModule',['requestModule']);
 
-adminApp.factory("UserDashboardService",function(requestHandler){
+adminApp.factory("UserDashboardService",['requestHandler',function(requestHandler){
 
     var userDashboardServiceObj={};
 
@@ -277,7 +277,7 @@ adminApp.factory("UserDashboardService",function(requestHandler){
 
     return userDashboardServiceObj;
 
-});
+}]);
 
 
 

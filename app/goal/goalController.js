@@ -3,7 +3,7 @@
  */
 var userApp= angular.module('userApp', ['ngRoute','oc.lazyLoad','ngCookies','requestModule','flash','ngAnimate','angularUtils.directives.dirPagination']);
 
-userApp.controller('GoalController',function($scope,requestHandler,Flash,$route,$routeParams,$location) {
+userApp.controller('GoalController',['$scope','requestHandler','Flash','$route','$routeParams','$location',function($scope,requestHandler,Flash,$route,$routeParams,$location) {
 
     $scope.activeClass.groupGoal='active';
 
@@ -293,10 +293,10 @@ userApp.controller('GoalController',function($scope,requestHandler,Flash,$route,
 
     };
 
-});
+}]);
 
 userApp.controller('GoalViewController',function() {
-    alert("okay");
+   // alert("okay");
 });
 
 // render image to view in list

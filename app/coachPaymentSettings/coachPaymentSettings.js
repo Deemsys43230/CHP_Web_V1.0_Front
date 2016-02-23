@@ -4,7 +4,7 @@
 
 var coachApp = angular.module('coachApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate']);
 
-coachApp.controller('CoachPaymentSettingsController',function($scope,requestHandler,Flash,$location) {
+coachApp.controller('CoachPaymentSettingsController',['$scope','requestHandler','Flash','$location',function($scope,requestHandler,Flash,$location) {
 //sidebar menu active class
     $scope.activeClass = {paymentSettings:'active'};
     var original="";
@@ -50,4 +50,4 @@ coachApp.controller('CoachPaymentSettingsController',function($scope,requestHand
     };
 
     $scope.getSettingDetails();
-});
+}]);

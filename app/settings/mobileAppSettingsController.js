@@ -3,7 +3,7 @@
  */
 var adminApp = angular.module('adminApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate']);
 
-adminApp.controller("MobileAppSettingsController",function($scope,requestHandler,Flash,siteMenuService,$location){
+adminApp.controller("MobileAppSettingsController",['$scope','requestHandler','Flash','siteMenuService','$location',function($scope,requestHandler,Flash,siteMenuService,$location){
 
     $scope.siteMenuList = siteMenuService;
     $.each($scope.siteMenuList,function(index,value){
@@ -103,4 +103,4 @@ adminApp.controller("MobileAppSettingsController",function($scope,requestHandler
     };
 
     $scope.collectDetails();
-});
+}]);

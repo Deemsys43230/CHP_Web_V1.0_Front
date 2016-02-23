@@ -1,6 +1,6 @@
 var adminApp = angular.module('adminApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','angularUtils.directives.dirPagination','ui.bootstrap']);
 
-adminApp.controller('AdminPaymentController',function($scope,requestHandler,Flash,$routeParams) {
+adminApp.controller('AdminPaymentController',['$scope','requestHandler','Flash','$routeParams',function($scope,requestHandler,Flash,$routeParams) {
 
     $scope.totalEarningsByAdmin=0.00;
     $scope.totalEarningsByCoach=0.00;
@@ -340,7 +340,7 @@ adminApp.controller('AdminPaymentController',function($scope,requestHandler,Flas
 
     };
 
-});
+}]);
 
 
 // render image to view in list

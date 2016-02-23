@@ -4,7 +4,7 @@
 
 var adminApp = angular.module('adminApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','ui.select','foodServiceModule']);
 
-adminApp.controller('FoodUploadController', ['$scope', 'FileUploader', function($q,$scope, FileUploader) {
+adminApp.controller('FoodUploadController', ['$q','$scope', 'FileUploader', function($q,$scope, FileUploader) {
     //Start code for uploader//
     var uploader = $scope.uploader = new FileUploader({
         url: 'upload.php'
@@ -59,7 +59,7 @@ adminApp.controller('FoodUploadController', ['$scope', 'FileUploader', function(
 }]);
 
 
-adminApp.controller('FoodController',function ($scope,requestHandler,Flash) {
+adminApp.controller('FoodController',['$scope','requestHandler','Flash',function ($scope,requestHandler,Flash) {
 
 
     //sidebar menu active class
@@ -219,10 +219,10 @@ adminApp.controller('FoodController',function ($scope,requestHandler,Flash) {
         $('.search-list-form input').focus();
     });
 
-});
+}]);
 
 
-adminApp.controller("FoodDetailsViewController",function($scope,requestHandler,$routeParams){
+adminApp.controller("FoodDetailsViewController",['$scope','requestHandler','$routeParams',function($scope,requestHandler,$routeParams){
 
     //Get Particular Food Details
     $scope.doGetFoodDetails= function () {
@@ -248,9 +248,9 @@ adminApp.controller("FoodDetailsViewController",function($scope,requestHandler,$
     //End Get Particular Food Details
     $scope.doGetFoodDetails();
 
-});
+}]);
 
-adminApp.controller("FoodDetailsEditController",function($q,$scope,requestHandler,FoodService,$routeParams,Flash,$route,fileReader,$location){
+adminApp.controller("FoodDetailsEditController",['$q','$scope','requestHandler','FoodService','$routeParams','Flash','$route','fileReader','$location',function($q,$scope,requestHandler,FoodService,$routeParams,Flash,$route,fileReader,$location){
 
     var original="";
     $scope.title=$route.current.title;
@@ -518,7 +518,7 @@ adminApp.controller("FoodDetailsEditController",function($q,$scope,requestHandle
     
     //End Initialize Page
 
-});
+}]);
 
 adminApp.directive("ngFileSelect",function(){
 

@@ -3,7 +3,7 @@
  */
 var coachApp = angular.module('coachApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','angularUtils.directives.dirPagination']);
 
-coachApp.controller('CoachMembersController',function($scope,requestHandler) {
+coachApp.controller('CoachMembersController',['$scope','requestHandler',function($scope,requestHandler) {
 
     //Get Coach List
     $scope.doGetMyMembers=function(){
@@ -33,9 +33,9 @@ coachApp.controller('CoachMembersController',function($scope,requestHandler) {
     });
 
 
-});
+}]);
 
-coachApp.controller('MembersViewController',function($scope,requestHandler,Flash,$routeParams,$sce) {
+coachApp.controller('MembersViewController',['$scope','requestHandler','Flash','$routeParams','$sce',function($scope,requestHandler,Flash,$routeParams,$sce) {
 
     $scope.activeClass.mymembers='active';
 
@@ -79,7 +79,7 @@ coachApp.controller('MembersViewController',function($scope,requestHandler,Flash
 
     $scope.doViewMembers();
 
-});
+}]);
 
 coachApp.filter('startsWithLetterMember', function () {
 

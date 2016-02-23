@@ -51,7 +51,7 @@ commonApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
             when('/index', {
                 templateUrl: '../common/index.html',
                 resolve: {
-                        loadMyFiles:function($ocLazyLoad) {
+                        loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                             return $ocLazyLoad.load({
                                 name:'commonApp',
                                 files:[
@@ -60,7 +60,7 @@ commonApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                     '../../app/commonController.js'
                                 ]
                             })
-                        }
+                        }]
 
                 },
                 controller:'CommonController'
@@ -89,21 +89,21 @@ commonApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
             when('/contact', {
                 templateUrl: '../common/contact.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'commonApp',
                             files:[
                                 '../../app/settings/basicInfoController.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller:'ContactUsDetailsController'
             }).
             when('/testimonials/:id', {
                 templateUrl: '../common/testimonial.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'commonApp',
                             files:[
@@ -112,14 +112,14 @@ commonApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../app/testimonial/testimonialController.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller:'TestimonialUserController'
             }).
             when('/news', {
                 templateUrl: '../common/news.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'commonApp',
                             files:[
@@ -128,14 +128,14 @@ commonApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../app/latestNews/latestNewsController.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller:'NewsUserController'
             }).
             when('/news/:id', {
                 templateUrl: '../common/news.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'commonApp',
                             files:[
@@ -144,77 +144,77 @@ commonApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../app/latestNews/latestNewsController.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller:'NewsUserController'
             }).
             when('/FAQ', {
                 templateUrl: '../common/FAQ.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'commonApp',
                             files:[
                                 '../../app/faq/faqController.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller:'FAQCommonController'
             }).
             when('/instructions', {
                 templateUrl: '../common/instruction.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'commonApp',
                             files:[
                                 '../../app/instruction/instructionController.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller:'InstructionCommonController'
             }).
             when('/termsofuse', {
                 templateUrl: '../common/termsofuse.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'commonApp',
                             files:[
                                 '../../app/termsOfUse/termsOfUseController.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller:'TermsOfUseCommonController'
             }).
             when('/policy', {
                 templateUrl: '../common/privacypolicy.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'commonApp',
                             files:[
                                 '../../app/privacyPolicy/privacyPolicyController.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller:'PrivacyPolicyCommonController'
             }).
             when('/usefulVideos', {
                 templateUrl: '../common/useful-videos.html',
                 resolve: {
-                    loadMyFiles:function($ocLazyLoad) {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'commonApp',
                             files:[
                                 '../../app/usefulVideos/usefulVideosController.js'
                             ]
                         })
-                    }
+                    }]
                 },
                 controller:'UsefulVideosController'
             }).
@@ -224,7 +224,7 @@ commonApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
     }]);
 
 //Internal Login Details
-commonApp.controller('LoginController',function($scope,requestHandler,Flash,$window,$location){
+commonApp.controller('LoginController',['$scope','requestHandler','Flash','$window','$location',function($scope,requestHandler,Flash,$window,$location){
 
     $scope.$on('$routeChangeStart', function(next, current) {
         $scope.activeClass={};
@@ -401,7 +401,7 @@ commonApp.controller('LoginController',function($scope,requestHandler,Flash,$win
             }
         });
     };
-});
+}]);
 
 //To Display success message
 //For User Messages
@@ -466,7 +466,7 @@ commonApp.directive('compareTo',function() {
 });
 
 //Check for Email Already Exists
-commonApp.directive("emailexists", function ($q, $timeout,requestHandler) {
+commonApp.directive("emailexists",['$q', '$timeout','requestHandler', function ($q, $timeout,requestHandler) {
 
     var CheckEmailExists = function (isNew) {
 
@@ -507,7 +507,7 @@ commonApp.directive("emailexists", function ($q, $timeout,requestHandler) {
             }
         }
     };
-});
+}]);
 
 //Check For Email Validation
 commonApp.directive('validateEmail', function() {

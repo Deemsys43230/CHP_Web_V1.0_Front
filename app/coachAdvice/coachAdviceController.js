@@ -1,6 +1,6 @@
 var coachApp = angular.module('coachApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate']);
 
-coachApp.controller('CoachAdviceController',function($scope,requestHandler,Flash) {
+coachApp.controller('CoachAdviceController',['$scope','requestHandler','Flash',function($scope,requestHandler,Flash) {
 
 
     var original="";
@@ -46,5 +46,5 @@ coachApp.controller('CoachAdviceController',function($scope,requestHandler,Flash
     // Display Terms of Use details On Page Load
     $scope.doGetCoachMyAdvice();
 
-});
+}]);
 

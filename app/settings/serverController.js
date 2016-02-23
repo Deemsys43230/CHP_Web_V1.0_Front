@@ -3,7 +3,7 @@
  */
 var adminApp = angular.module('adminApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate']);
 
-adminApp.controller('ServerSettingsController',function($scope,requestHandler,Flash,siteMenuService,$location){
+adminApp.controller('ServerSettingsController',['$scope','requestHandler','Flash','siteMenuService','$location',function($scope,requestHandler,Flash,siteMenuService,$location){
     var original="";
 
     $scope.siteMenuList = siteMenuService;
@@ -50,4 +50,4 @@ adminApp.controller('ServerSettingsController',function($scope,requestHandler,Fl
 
     $scope.doGetServerSettings();
 
-});
+}]);
