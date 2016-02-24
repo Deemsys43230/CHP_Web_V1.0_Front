@@ -130,7 +130,7 @@ adminApp.directive('myMap', function() {
 });
 
 var commonApp = angular.module('commonApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate']);
-commonApp.controller('ContactUsDetailsController',['$scope','requestHandler','Flash',,function($scope,requestHandler,Flash) {
+commonApp.controller('ContactUsDetailsController',['$scope','requestHandler','Flash',function($scope,requestHandler,Flash) {
 
     // To Get the Contact Us details for user
     $scope.doGetContactUsDetails= function () {
