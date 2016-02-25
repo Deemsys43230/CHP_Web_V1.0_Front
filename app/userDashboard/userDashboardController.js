@@ -1,6 +1,6 @@
 var userApp= angular.module('userApp', ['ngRoute','oc.lazyLoad','ngCookies','requestModule','flash','ngAnimate','ngTouch','ngPercentDisplay','userDashboardServiceModule','angular-svg-round-progress','ui.bootstrap','angular-nicescroll']);
 
-userApp.controller('UserDashboardController',['$scope','$window','requestHandler','Flash','UserDashboardService','$interval','roundProgressService','limitToFilter','$timeout',function($scope,$window,requestHandler,Flash,UserDashboardService,$interval,roundProgressService,limitToFilter,$timeout) {
+userApp.controller('UserDashboardController',function($scope,$window,requestHandler,Flash,UserDashboardService,$interval,roundProgressService,limitToFilter,$timeout) {
     $scope.foodSearchResult = [];
     $scope.userFood={};
     $scope.userFood.sessionid=1;
@@ -1293,7 +1293,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
             $scope.coachadvice =advicePromise;
             $scope.usercoachadvicedetails=$scope.coachadvice[0];
 
-            coachAdviceCarousel();
+            $scope.coachAdviceCarousel();
 
         },function(){
             console.log("Please try again later!");
@@ -1667,7 +1667,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
         return dateFormat(this, mask, utc);
     };
 
-}]).constant('uibdatepickerPopupConfig', {
+}).constant('uibdatepickerPopupConfig', {
     datepickerPopup: "dd/MM/yyyy",
     closeOnDateSelection: true,
     appendToBody: true,

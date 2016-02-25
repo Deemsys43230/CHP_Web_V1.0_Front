@@ -1,2 +1,1915 @@
-var userApp=angular.module("userApp",["ngRoute","oc.lazyLoad","ngCookies","requestModule","flash","ngAnimate","ngTouch","ngPercentDisplay","userDashboardServiceModule","angular-svg-round-progress","ui.bootstrap","angular-nicescroll"]);userApp.controller("UserDashboardController",["$scope","$window","requestHandler","Flash","UserDashboardService","$interval","roundProgressService","limitToFilter","$timeout",function(a,b,c,d,e,f,g,h,j){a.foodSearchResult=[],a.userFood={},a.userFood.sessionid=1,a.graphSessionId="1",a.servings=0,a.current=a.caloriesIntake=0,a.max=a.gainGraphMax=100,a.exerciseSearchResult=[],a.userExercise={},a.caloriesSpent=0,a.workoutvalue=0,b.singlePicker=!1,b.minimumDate=new Date,a.weightUpdateText="Update Weight",a.graphs=1,a.historyReport=0,a.historyType=1,a.showExercise=0,a.doUserAddFood=function(){$(function(){$("#lean_overlay").fadeTo(1e3),$("#modal-add-food").fadeIn(600),$(".user_register").show()}),$(".modal_close").click(function(){$(".user_register").hide(),$("#modal-add-food").hide(),$("#lean_overlay").hide(),a.resetdata()}),$("#lean_overlay").click(function(){$(".user_register").hide(),$("#modal-add-food").hide(),$("#lean_overlay").hide(),a.resetdata()}),a.selectedFood=""},a.doUserAddExercise=function(){$(function(){$("#lean_overlay").fadeTo(1e3),$("#modal-add-exercise").fadeIn(600),$(".user_register").show()}),$(".modal_close").click(function(){$(".user_register").hide(),$("#modal-add-exercise").hide(),$("#lean_overlay").hide(),a.resetexercisedata()}),$("#lean_overlay").click(function(){$(".user_register").hide(),$("#modal-add-exercise").hide(),$("#lean_overlay").hide(),a.resetexercisedata()}),a.selectedExercise=""},a.frequentFood=function(b){a.isNew=!0,a.title="Add Food",a.loaded=!0;var c=e.doGetSelectedFoodDetails(b);c.then(function(b){a.userSelectedFoodDetails=b,a.loaded=!1,a.doUserAddFood()})},a.foodSelected=function(){a.isNew=!0,a.title="Add Food";var b=e.doGetSelectedFoodDetails(a.selectedFood.foodid);b.then(function(b){a.userSelectedFoodDetails=b,a.doUserAddFood()})};var k="",l="";a.doEditUserFood=function(b,c){a.isNew=!1,a.title="Edit Food",a.loaded=!0;var d=e.doGetSelectedFoodDetails(b);d.then(function(b){a.userSelectedFoodDetails=b;var d=e.doGetUserFoodDetails(c);d.then(function(b){a.userFood.userfoodid=b.userfoodid,a.userFood.foodid=b.foodid,$.each(a.userSelectedFoodDetails.measureid,function(c,d){d.measureid==b.measureid.measureid&&(a.userFood.measure=d,k=angular.copy(d))}),a.userFood.servings=parseInt(b.measureid.servings),l=angular.copy(b.measureid.servings),a.current=a.caloriesIntake=b.measureid.calories,a.current=a.current.toFixed(2),a.current.length-3>2?a.max=100+100*String(0|a.current).slice(0,-2):a.max=100,a.loaded=!1,a.doUserAddFood()})})},a.isCleanFood=function(){return angular.equals(k,a.userFood.measure)&&angular.equals(l,a.userFood.servings)},a.doCalculateCalories=function(){0==a.userFood.servings&&(a.current=a.caloriesIntake=0),!a.userFood.servings>0?a.current=a.caloriesIntake=0:(a.current=a.caloriesIntake=a.userFood.measure.calories*a.userFood.servings,a.current=a.current.toFixed(2),a.current.length-3>2?a.max=100+100*String(0|a.current).slice(0,-2):a.max=100)},a.doInsertUserFood=function(){a.userFood.foodid=a.userSelectedFoodDetails.foodid,a.userFood.measureid=a.userFood.measure.measureid,a.selectedDate==q?a.userFood.addeddate=a.selectedDate:a.userFood.addeddate=a.selectedDate.format("dd/mm/yyyy"),a.userFood.servings=parseInt(a.userFood.servings);var b=e.doInsertUserFood(a.userFood);b.then(function(){a.loadFoodDiary(a.userFood.addeddate),a.doGetIntakeBruntByDate(a.userFood.addeddate),a.goGetDailyIntakeGraph(a.userFood.addeddate),a.goGetSessionGraph(a.storedSessionId),a.doGetHistoryReport()})},a.doUpdateUserFood=function(){a.userFood.userfoodid=a.userFood.userfoodid,a.userFood.foodid=a.userFood.foodid,a.userFood.measureid=a.userFood.measure.measureid,a.userFood.servings=parseInt(a.userFood.servings);var b=e.doUpdateUserFood(a.userFood);b.then(function(){a.selectedDate==q?(a.loadFoodDiary(a.selectedDate),a.doGetIntakeBruntByDate(a.selectedDate),a.goGetDailyIntakeGraph(a.selectedDate),a.goGetSessionGraph(a.storedSessionId)):(a.loadFoodDiary(a.selectedDate.format("dd/mm/yyyy")),a.doGetIntakeBruntByDate(a.selectedDate.format("dd/mm/yyyy")),a.goGetDailyIntakeGraph(a.selectedDate.format("dd/mm/yyyy")),a.goGetSessionGraph(a.storedSessionId)),a.doGetHistoryReport()})},a.doDeleteUserFood=function(b){a.loaded=!0;var c=e.doDeleteUserFood(b);c.then(function(){a.selectedDate==q?(a.loadFoodDiary(a.selectedDate),a.doGetIntakeBruntByDate(a.selectedDate),a.goGetDailyIntakeGraph(a.selectedDate),a.goGetSessionGraph(a.storedSessionId)):(a.loadFoodDiary(a.selectedDate.format("dd/mm/yyyy")),a.doGetIntakeBruntByDate(a.selectedDate.format("dd/mm/yyyy")),a.goGetDailyIntakeGraph(a.selectedDate.format("dd/mm/yyyy")),a.goGetSessionGraph(a.storedSessionId)),a.doGetHistoryReport()})},a.loadFoodDiary=function(b){a.loaded=!0;var c=e.getFoodDiary(b);c.then(function(b){a.userFoodDiaryDataAll=b,a.loadSessionDetails(),a.loadSessionFood(),a.loaded=!1})},a.loadSessionDetails=function(){switch(parseInt(a.userFood.sessionid)){case 1:a.userFoodDiaryData=a.userFoodDiaryDataAll.BreakFast;break;case 2:a.userFoodDiaryData=a.userFoodDiaryDataAll.Brunch;break;case 3:a.userFoodDiaryData=a.userFoodDiaryDataAll.Lunch;break;case 4:a.userFoodDiaryData=a.userFoodDiaryDataAll.Evening;break;case 5:a.userFoodDiaryData=a.userFoodDiaryDataAll.Dinner}},a.inputChanged=function(b){if(b.length>=3){0==a.foodSearchResult.length&&(a.loadingFoods=!0);var c=e.searchFood(b,a.userFood.sessionid);return c.then(function(b){return a.foodSearchResult=b,a.loadingFoods=!1,a.foodSearchResult})}return{}},a.doGetDemograph=function(){var c=e.doGetDemographyDetails();c.then(function(c){if(a.demography=c,a.userProfile){var d=2;1==a.userProfile.gender&&(d=4),a.idealWeight=a.demography.height-100-(a.demography.height-150)/d,a.demography.weight<a.idealWeight?(a.upweight=1,a.idealWeightlevel=a.demography.weight/a.idealWeight,a.idealWeightlevel=100*a.idealWeightlevel/2,a.balanceweight=a.idealWeight-a.demography.weight,a.balanceweight=a.balanceweight.toFixed(2)):a.demography.weight>a.idealWeight?(a.upweight=0,a.idealWeightlevel=a.idealWeight/a.demography.weight,a.idealWeightlevel=100-100*a.idealWeightlevel/2,a.balanceweight=a.demography.weight-a.idealWeight,a.balanceweight=a.balanceweight.toFixed(2)):(a.upweight=2,a.idealWeightlevel=1,a.idealWeightlevel=100*a.idealWeightlevel/2),b.idealWeightlevel=a.idealWeightlevel.toFixed(2),viewWeightGraph()}else{var f=e.doGetUserDetails();f.then(function(c){a.userProfile=c,a.userProfileImage=a.userProfile.imageurl+"?decache="+Math.random();var d=2;1==a.userProfile.gender&&(d=4),a.idealWeight=a.demography.height-100-(a.demography.height-150)/d,a.demography.weight<a.idealWeight?(a.upweight=1,a.idealWeightlevel=a.demography.weight/a.idealWeight,a.idealWeightlevel=100*a.idealWeightlevel/2,a.balanceweight=a.idealWeight-a.demography.weight,a.balanceweight=a.balanceweight.toFixed(2)):a.demography.weight>a.idealWeight?(a.upweight=0,a.idealWeightlevel=a.idealWeight/a.demography.weight,a.idealWeightlevel=100-100*a.idealWeightlevel/2,a.balanceweight=a.demography.weight-a.idealWeight,a.balanceweight=a.balanceweight.toFixed(2)):(a.upweight=2,a.idealWeightlevel=1,a.idealWeightlevel=100*a.idealWeightlevel/2),b.idealWeightlevel=a.idealWeightlevel.toFixed(2),setTimeout(viewWeightGraph(),1e3)})}})},a.doGetDemograph();var m=e.doGetFrequentlyAdded();m.then(function(b){a.frequentFoodList=b}),a.doAddSuggestFood=function(){c.postRequest("user/searchFoodnamebyUser/",{foodname:a.foodSuggest.foodname}).then(function(b){if(0==b.data.Response_status){var c=e.doAddSuggestedFood(a.foodSuggest);c.then(function(b){successMessage(d,"Thanks&nbsp;for&nbsp;the&nbspsuggestion!!"),a.resetdata()},function(){errorMessage(d,"Please try again later!")})}else 1==b.data.Response_status&&(errorMessage(d,"Food&nbsp;already&nbsp;exists"),a.resetdata())})},a.doAddSuggestExercise=function(){var b=e.doAddSuggestedExercise(a.exerciseSuggest);b.then(function(b){successMessage(d,"Thanks&nbsp;for&nbsp;the&nbspsuggestion!!"),a.resetexercisedata()},function(){errorMessage(d,"Please try again later!")})},a.inputChangedExercise=function(b){if(b.length>=3){0==a.exerciseSearchResult.length&&(a.loadingExercise=!0);var c=e.searchExercise(b);return c.then(function(b){return a.exerciseSearchResult=b,a.loadingExercise=!1,a.exerciseSearchResult})}},a.frequentExercise=function(b){a.isNew=!0,a.title="Add Exercise",a.loaded=!0;var c=e.doGetSelectedExerciseDetails(b);c.then(function(b){a.userSelectedExerciseDetails=b,a.loaded=!1,a.doUserAddExercise()})},a.exerciseSelected=function(){a.isNew=!0,a.title="Add Exercise";var b=e.doGetSelectedExerciseDetails(a.selectedExercise.exerciseid);b.then(function(b){a.userSelectedExerciseDetails=b,a.doUserAddExercise()})},a.loadExerciseDiary=function(b){a.loaded=!0;var c=e.getExerciseDiary(b);c.then(function(b){a.userExerciseDiaryDataAll=b,a.loaded=!1})},a.doInsertUserExercise=function(){a.userExercise.exerciseid=a.userSelectedExerciseDetails.exerciseid,a.selectedDate==q?a.userExercise.date=a.selectedDate:a.userExercise.date=a.selectedDate.format("dd/mm/yyyy"),a.userExercise.workoutvalue=parseInt(a.userExercise.workoutvalue);var b=e.doInsertUserExercise(a.userExercise);b.then(function(){a.loadExerciseDiary(a.userExercise.date),a.doGetIntakeBruntByDate(a.userExercise.date),a.doGetHistoryReport()})},a.doDeleteUserExercise=function(b){a.loaded=!0;var c=e.doDeleteUserExercise(b);c.then(function(){a.selectedDate==q?(a.loadExerciseDiary(a.selectedDate),a.doGetIntakeBruntByDate(a.selectedDate)):(a.loadExerciseDiary(a.selectedDate.format("dd/mm/yyyy")),a.doGetIntakeBruntByDate(a.selectedDate.format("dd/mm/yyyy"))),a.doGetHistoryReport()})};var n="",o="";a.doEditUserExercise=function(b,c){a.isNew=!1,a.title="Edit Exercise",a.loaded=!0;var d=e.doGetSelectedExerciseDetails(b);d.then(function(d){a.userSelectedExerciseDetails=d;var f=e.doGetUserExerciseDetails(c);f.then(function(d){a.userExercise.userexercisemapid=c,a.userExercise.exerciseid=b,a.userExercise.workoutvalue=parseInt(d.workoutvalue),o=parseInt(d.workoutvalue),a.current=a.caloriesSpent=d.calories,a.current=a.current.toFixed(2),a.current.length-3>2?a.max=100+100*String(0|a.current).slice(0,-2):a.max=100,a.loaded=!1,a.doUserAddExercise()})})},a.isCleanExercise=function(){return angular.equals(n,a.userExercise.levelid)&&angular.equals(o,a.userExercise.workoutvalue)},a.doUpdateUserExercise=function(){null!=a.userExercise.date&&delete a.userExercise.date,a.userExercise.userexercisemapid=a.userExercise.userexercisemapid,a.userExercise.exerciseid=a.userExercise.exerciseid,a.userExercise.levelid=a.userExercise.levelid.levelid,a.userExercise.workoutvalue=parseInt(a.userExercise.workoutvalue);var b=e.doUpdateUserExercise(a.userExercise);b.then(function(){a.selectedDate==q?(a.loadExerciseDiary(a.selectedDate),a.doGetIntakeBruntByDate(a.selectedDate)):(a.loadExerciseDiary(a.selectedDate.format("dd/mm/yyyy")),a.doGetIntakeBruntByDate(a.selectedDate.format("dd/mm/yyyy"))),a.doGetHistoryReport()})};var p=e.doGetFrequentlyUsedExercise();p.then(function(b){a.frequentExerciseList=b}),a.doCalculateCaloriesExercise=function(){console.log(a.userExercise),0==a.userExercise.workoutvalue&&(a.current=a.caloriesSpent=0),!a.userExercise.workoutvalue>0?a.current=a.caloriesSpent=0:(a.current=a.caloriesSpent=a.userSelectedExerciseDetails.MET*a.demography.weight*(a.userExercise.workoutvalue/60),a.current=a.current.toFixed(2),a.current.length-3>2?a.max=a.max+100*String(0|a.current).slice(0,-2):a.max=100)},a.resetdata=function(){a.foodSuggest={},a.foodSuggestForm.$setPristine(),a.userFood.measure="",a.userFood.servings=[],a.FoodAddForm.$setPristine(),a.current=a.caloriesIntake=0,a.max=100,a.userSelectedFoodDetails={}},a.resetexercisedata=function(){a.exerciseSuggest={},a.exerciseSuggestForm.$setPristine(),a.userExercise.levelid="",a.userExercise.workoutvalue="",a.ExerciseAddForm.$setPristine(),a.current=a.caloriesSpent=0,a.max=100,a.userSelectedExerciseDetails={}},a.goal={status:"set-goal"},a.graph={status:"goal"},a.viewGoal=function(){a.doGetWeightGoal(),a.graph={status:"goal"},setTimeout("viewWeightGraph();",10)},a.cancelUpdate=function(){a.goal={status:"view-goal"}},a.doGetWeightGoal=function(){c.getRequest("user/getWeightGoal/","").then(function(c){if(0==c.data.Response_status)a.updateGoal=0,a.targetText="Period",b.singlePicker=!1,b.minimumDate=new Date;else{a.goalDetails=c.data.Weight_Goal,a.updateGoal=1;var d,f=a.goalDetails.startdate.slice(6,10)+"-"+a.goalDetails.startdate.slice(3,5)+"-"+a.goalDetails.startdate.slice(0,2),g=q.slice(6,10)+"-"+q.slice(3,5)+"-"+q.slice(0,2),h=a.goalDetails.enddate.slice(6,10)+"-"+a.goalDetails.enddate.slice(3,5)+"-"+a.goalDetails.enddate.slice(0,2);new Date(f).getTime()>new Date(g).getTime()?(d=new Date(f).getTime(),a.viewGraphButton=!1):(d=new Date(g).getTime(),a.viewGraphButton=!0);var i=864e5,j=new Date(h).getTime(),k=j-d;if(a.remainingDates=Math.round(k/i),a.remainingDates<0){a.remainingDates=0,a.goalExpired=1;var l=new Date(f).getTime(),m=j-l;a.targetDays=Math.round(m/i);var n=e.doGetAchievedWeight(a.goalDetails.enddate);n.then(function(b){a.achievedWeight=b;var c=0,d=0,e=0;a.goalDetails.targetweight>a.goalDetails.initialweight?(c=a.goalDetails.targetweight-a.goalDetails.initialweight,d=a.achievedWeight-a.goalDetails.initialweight,0>=d?a.achieveStatus=0:(e=d/c,1==e?a.achieveStatus=2:1>(.6>=e)&&1.4>e?a.achieveStatus=1:a.achieveStatus=0)):(c=a.goalDetails.initialweight-a.goalDetails.targetweight,d=a.goalDetails.initialweight-a.achievedWeight,0>=d?a.achieveStatus=0:(e=d/c,1==e?a.achieveStatus=2:1>(.6>=e)&&1.4>e?a.achieveStatus=1:a.achieveStatus=0))})}else a.goalExpired=0;b.currentweight=a.demography.weight,b.targetweight=a.goalDetails.targetweight,a.goal={status:"view-goal"}}})},a.setGoal=function(){a.setGoalDetails={},a.setGoalDetails.startdate=document.getElementById("start").value,a.setGoalDetails.enddate=document.getElementById("end").value,a.setGoalDetails.targetweight=parseFloat(document.getElementById("target").value),a.setGoalDetails.initialweight=a.demography.weight,""==a.setGoalDetails.startdate&&(a.setGoalDetails.startdate=a.setGoalDetails.enddate=q),""!=a.demography.weight&&($(function(){$("#lean_overlay").fadeTo(1e3),$("#goal-confirmation").fadeIn(600),$(".common_model").show()}),$(".modal_close").click(function(){$(".common_model").hide(),$("#goal-confirmation").hide(),$("#lean_overlay").hide()}),$("#lean_overlay").click(function(){$(".common_model").hide(),$("#goal-confirmation").hide(),$("#lean_overlay").hide()}))},a.setGoalConfirmation=function(){c.postRequest("user/insertWeightGoal/",a.setGoalDetails).then(function(b){a.doGetWeightGoal(),a.doInsertOrUpdateWeightLog(q,parseFloat(a.setGoalDetails.initialweight))},function(){errorMessage(d,"Please try again later!")})},a.doGetWeightLog=function(b){var c=e.doGetWeightLogDetails(b);c.then(function(b){var c=b.Weight_logs;c.weight?(a.weightlog=a.originalWeight=c.weight,$("#weightLog").val(c.weight)):(a.originalWeight="",$("#weightLog").val(""))})},a.weightLogEntry=function(){a.weightUpdateText="Updating...",a.spinner=!0,a.doInsertOrUpdateWeightLog($("#weight-log-date").val(),parseFloat($("#weightLog").val()))},a.doInsertOrUpdateWeightLog=function(e,f){c.postRequest("user/weightlogInsertorUpdate/",{date:e,weight:f}).then(function(c){e==q&&1==a.updateGoal&&(b.currentweight=f,refreshGraph(),a.updateAverageGainSpent(e)),a.spinner=!1,a.weightUpdateText="Update Weight",a.doGetWeightLog(e),a.doGetDemograph()},function(){errorMessage(d,"Please try again later!")})},a.isCleanWeight=function(){return angular.equals(parseFloat($("#weightLog").val()),parseFloat(a.originalWeight))},a.doGetWeightLogGraph=function(){a.graph={status:"goal-graph"};var b=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];c.postRequest("user/getWeightLogGraph/",{startdate:a.goalDetails.startdate.toString(),enddate:a.goalDetails.enddate.toString()}).then(function(c){a.weightlogGraph=c.data.Weight_logs;var d=[];$.each(a.weightlogGraph,function(a,c){var e=[],f=c.date.split("/");e.push(b[f[1]-1]+" "+f[0]),e.push(c.weight),d.push(e)}),a.weightGraphValue=d,a.weightGraph=h(a.weightGraphValue,30)},function(){errorMessage(d,"Please try again later!")})},a.deteteGoal=function(){$(function(){$("#lean_overlay").fadeTo(1e3),$("#goal-delete-confirmation").fadeIn(600),$(".common_model").show()}),$(".modal_close").click(function(){$(".common_model").hide(),$("#goal-delete-confirmation").hide(),$("#lean_overlay").hide()}),$("#lean_overlay").click(function(){$(".common_model").hide(),$("#goal-delete-confirmation").hide(),$("#lean_overlay").hide()})},a.doDeleteGoal=function(){c.deleteRequest("user/deleteWeightGoal/","").then(function(c){a.weight="",a.updateGoal=0,b.goalStartDate=b.goalEndDate=q,b.minimumDate=new Date,a.targetText="Period",b.singlePicker=!1,a.goal={status:"set-goal"}},function(){errorMessage(d,"Please try again later!")})},a.updateGoalDetails=function(){a.targetText="End Date",b.singlePicker=!0,a.originalUpdateGoalWeight={endDate:a.goalDetails.enddate,weight:a.goalDetails.targetweight};var c=a.goalDetails.startdate.slice(6,10)+","+a.goalDetails.startdate.slice(3,5)+","+a.goalDetails.startdate.slice(0,2),d=q.slice(6,10)+","+q.slice(3,5)+","+q.slice(0,2);b.goalStartDate=a.goalDetails.startdate,b.goalEndDate=a.goalDetails.enddate,a.weight=a.goalDetails.targetweight,new Date(c).getTime()>=new Date(d).getTime()?b.minimumDate=a.goalDetails.startdate:b.minimumDate=new Date,a.goal={status:"set-goal"}},a.isCleanUpdateGoal=function(){var b=document.getElementById("end").value;""==b&&(b=a.goalDetails.enddate);var c={endDate:b,weight:parseFloat(document.getElementById("target").value)};return angular.equals(a.originalUpdateGoalWeight,c)},a.doUpdateGoal=function(){a.setGoalDetails={},a.setGoalDetails.startdate=a.goalDetails.startdate,""==document.getElementById("start").value?a.setGoalDetails.enddate=a.goalDetails.enddate:a.setGoalDetails.enddate=document.getElementById("start").value,a.setGoalDetails.targetweight=parseFloat(document.getElementById("target").value),a.setGoalDetails.initialweight=a.goalDetails.initialweight,c.putRequest("user/updateWeightGoal/",a.setGoalDetails).then(function(b){a.doGetWeightGoal()},function(){errorMessage(d,"Please try again later!")})},a.doGetIntakeBruntByDate=function(b){c.postRequest("user/getTotalCalorieDetailForDate/",{date:b}).then(function(b){a.calorieGraph=b.data.Calorie_Graph,""==a.calorieGraph.intakecalorie&&(a.calorieGraph.intakecalorie=0),""==a.calorieGraph.burntcalorie&&(a.calorieGraph.burntcalorie=0),a.averageIntake=Math.round(a.calorieGraph.averagecalorieintake),a.averageSpent=Math.round(a.calorieGraph.averagecalorieburnt),a.currentGain=a.calorieGraph.intakecalorie,a.currentGain=a.currentGain.toFixed(2),a.averageIntake<a.calorieGraph.intakecalorie?a.currentGainColour="red":a.currentGainColour="limegreen",a.currentSpent=a.calorieGraph.burntcalorie,a.currentSpent=a.currentSpent.toFixed(2),a.averageSpent<a.calorieGraph.burntcalorie?a.currentSpentColour="red":a.currentSpentColour="orange";var c,d;d=a.calorieGraph.intakecalorie>a.calorieGraph.burntcalorie?parseFloat((a.calorieGraph.intakecalorie-a.calorieGraph.burntcalorie).toFixed(2)):0,c=a.calorieGraph.intakecalorie<a.calorieGraph.burntcalorie?parseFloat((a.calorieGraph.burntcalorie-a.calorieGraph.intakecalorie).toFixed(2)):0,a.calorieGraph.intakecalorie==a.calorieGraph.burntcalorie&&(c=0,d=0),$("#gainVsSpent").highcharts({chart:{type:"column"},xAxis:{categories:["Compare <br/> <small>(calories)</small>"]},yAxis:{allowDecimals:!1,min:0,title:{text:""}},credits:{enabled:!1},exporting:{enabled:!1},legend:{enabled:!1},title:{text:""},tooltip:{enabled:!0,backgroundColor:"rgba(255, 255, 255, 1)",borderWidth:1,shadow:!0,style:{fontSize:"10px",padding:5,zIndex:1e4},formatter:function(){return"<b>"+this.x+"</b><br/>"+this.series.name+": "+this.y+"<br/>"}},plotOptions:{column:{stacking:"normal"}},series:[{name:"Spent",data:[c],color:"#eee",stack:"male"},{name:"Intake",data:[a.calorieGraph.intakecalorie],color:"limegreen",stack:"male"},{name:"Gained",color:"#eee",data:[d],stack:"female"},{name:"Brunt",data:[a.calorieGraph.burntcalorie],color:"red",stack:"female"}]})},function(){errorMessage(d,"Please try again later!")})},a.updateAverageGainSpent=function(b){c.postRequest("user/getTotalCalorieDetailForDate/",{date:b}).then(function(b){a.averageIntake=Math.round(b.data.Calorie_Graph.averagecalorieintake),a.averageSpent=Math.round(b.data.Calorie_Graph.averagecalorieburnt)})},a.goGetDailyIntakeGraph=function(b){c.postRequest("user/dailyCalorieGraph/",{date:b}).then(function(b){a.calorieIntakeGraph=b.data.dailyCalorieGraph,""==a.calorieIntakeGraph.averagefat&&(a.calorieIntakeGraph.averagefat=0),""==a.calorieIntakeGraph.fat&&(a.calorieIntakeGraph.fat=0),""==a.calorieIntakeGraph.averageprotein&&(a.calorieIntakeGraph.averageprotein=0),""==a.calorieIntakeGraph.protein&&(a.calorieIntakeGraph.protein=0),""==a.calorieIntakeGraph.averagefibre&&(a.calorieIntakeGraph.averagefibre=0),""==a.calorieIntakeGraph.fibre&&(a.calorieIntakeGraph.fibre=0),""==a.calorieIntakeGraph.averagecarbo&&(a.calorieIntakeGraph.averagecarbo=0),""==a.calorieIntakeGraph.carbo&&(a.calorieIntakeGraph.carbo=0),$("#dailyIntake").highcharts({title:{text:""},xAxis:{categories:["Protein","Fat","Carbs","Fibre"],labels:{style:{fontSize:"9px",fontWeight:"normal"},useHTML:!0,formatter:function(){return"Protein"==this.value?this.value+'<br/><img src="../../images/i-protein.jpg"/>':"Fat"==this.value?"&nbsp;&nbsp;"+this.value+'&nbsp;&nbsp;<br/><img src="../../images/i-fats.jpg"/>':"Carbs"==this.value?this.value+'<br/><img src="../../images/i-carbs.jpg"/>':"Fibre"==this.value?"&nbsp;"+this.value+'&nbsp;<br/><img src="../../images/i-fibre.jpg"/>':this.value}}},tooltip:{enabled:!0,backgroundColor:"rgba(255, 255, 255, 1)",borderWidth:1,shadow:!0,style:{fontSize:"10px",padding:5,zIndex:1e4},formatter:!1},yAxis:{title:{text:null},labels:{style:{fontSize:"10px"}}},exporting:{enabled:!1},credits:{enabled:!1},legend:{enabled:!0},series:[{type:"column",name:"Units",data:[{name:"Protein",color:"limegreen",y:parseFloat(a.calorieIntakeGraph.protein)},{name:"Fat",color:"red",y:parseFloat(a.calorieIntakeGraph.fat)},{name:"Carbs",color:"orange",y:parseFloat(a.calorieIntakeGraph.carbo)},{name:"Fibre",color:"#ffcc00",y:parseFloat(a.calorieIntakeGraph.fibre)}]},{type:"spline",name:"Average",data:[parseFloat(a.calorieIntakeGraph.averageprotein),parseFloat(a.calorieIntakeGraph.averagefat),parseFloat(a.calorieIntakeGraph.averagecarbo),parseFloat(a.calorieIntakeGraph.averagefibre)],marker:{lineWidth:1,lineColor:Highcharts.getOptions().colors[1],fillColor:"white"}}]})},function(){errorMessage(d,"Please try again later!")})},a.graphOne=function(){a.graphs=1},a.graphTwo=function(){a.graphs=2},a.loadSessionFood=function(){switch(parseInt(a.graphSessionId)){case 1:a.userSessionFoods=a.userFoodDiaryDataAll.BreakFast;break;case 2:a.userSessionFoods=a.userFoodDiaryDataAll.Brunch;break;case 3:a.userSessionFoods=a.userFoodDiaryDataAll.Lunch;break;case 4:a.userSessionFoods=a.userFoodDiaryDataAll.Evening;break;case 5:a.userSessionFoods=a.userFoodDiaryDataAll.Dinner}a.goGetSessionGraph(a.graphSessionId)},a.goGetSessionGraph=function(b){a.loaded=!0;var e;e=a.selectedDate==q?a.selectedDate:a.selectedDate.format("dd/mm/yyyy"),a.storedSessionId=b,a.storedSessionId&&c.postRequest("user/getDailyCalorieGraphWithSession/",{date:e,sessionid:b}).then(function(b){a.calorieIntakeGraph=b.data.Calorie_Graph,a.graphResponse=b.data.Response_status,""==a.calorieIntakeGraph.fat&&(a.calorieIntakeGraph.fat=0),""==a.calorieIntakeGraph.protein&&(a.calorieIntakeGraph.protein=0),""==a.calorieIntakeGraph.fibre&&(a.calorieIntakeGraph.fibre=0),""==a.calorieIntakeGraph.carbo&&(a.calorieIntakeGraph.carbo=0),a.totalUnits=a.calorieIntakeGraph.fat+a.calorieIntakeGraph.protein+a.calorieIntakeGraph.fibre+a.calorieIntakeGraph.carbo,$("#sessionGraph").highcharts({title:{text:""},xAxis:{categories:["Protein","Fat","Carbs","Fibre"],labels:{useHTML:!0,formatter:function(){return"Protein"==this.value?this.value+'<br/><img src="../../images/i-protein.jpg"/>':"Fat"==this.value?"&nbsp;&nbsp;"+this.value+'&nbsp;&nbsp;<br/><img src="../../images/i-fats.jpg"/>':"Carbs"==this.value?this.value+'<br/><img src="../../images/i-carbs.jpg"/>':"Fibre"==this.value?this.value+'<br/><img src="../../images/i-fibre.jpg"/>':this.value}}},tooltip:{enabled:!0,backgroundColor:"rgba(255, 255, 255, 1)",borderWidth:1,shadow:!0,style:{fontSize:"10px",padding:5,zIndex:500},formatter:!1},yAxis:{title:{text:null},min:0,max:a.totalUnits,labels:{style:{fontSize:"10px"}}},exporting:{enabled:!1},credits:{enabled:!1},legend:{enabled:!1},series:[{type:"column",showInLegend:!1,name:"Unit",data:[{name:"Protein",color:"limegreen",y:parseFloat(a.calorieIntakeGraph.protein)},{name:"Fat",color:"red",y:parseFloat(a.calorieIntakeGraph.fat)},{name:"Carbs",color:"orange",y:parseFloat(a.calorieIntakeGraph.carbo)},{name:"Fibre",color:"#ffcc00",y:parseFloat(a.calorieIntakeGraph.fibre)}]}]}),a.loaded=!1},function(){errorMessage(d,"Please try again later!")})},a.doGetCoachAdvices=function(){c.getRequest("user/getCoachAdvicesByUser/","").then(function(b){var c=e.getCoachIndividualDetail(b.data.Coach_Advice),d=[{coachid:"n1",coachname:""},{coachid:"n2",coachname:""},{coachid:"n3",coachname:""},{coachid:"n4",coachname:""}];if(c.length<3)for(i=c.length;i<3;i++)c.push(d[i]);else c.push(d[0]);a.coachadvice=c,a.usercoachadvicedetails=a.coachadvice[0],coachAdviceCarousel()},function(){console.log("Please try again later!")})},a.setCoachDeatails=function(b){a.usercoachadvicedetails=b},a.getHistory=function(){a.historyReport=1,""==$("#history-start").val()?a.isHistoryEmpty=1:a.isHistoryEmpty=0},a.otherThanHistory=function(){a.historyReport=0},a.setHistoryType=function(b){a.historyType=b,""==$("#history-start").val()||a.doGetHistoryReport()},a.doGetHistoryReport=function(){a.isHistoryEmpty=0,a.loaded=!0;var b,d;""==$("#history-start").val()?b=d=q:(b=$("#history-start").val(),d=$("#history-end").val());var e=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],f=[],g={};1==a.historyType?c.postRequest("user/calorieGraphbyDates/",{fromdate:b,todate:d}).then(function(c){a.historyRecord=c.data.calorieGraphbyDates,$.each(a.historyRecord,function(a,b){var c=[],d=b.date.split("/");c.push(e[d[1]-1]+" "+d[0]),c.push(parseFloat(b.calorie)),f.push(c)}),g.title="Calories Intaken Graph ( "+b+" - "+d+" )",g.name="Calories Gained",g.suffix=" cals",g.yaxis="Calories (cal)",g.color="limegreen",a.drawHistoryGraph(f,g)}):2==a.historyType?c.postRequest("user/getCalorieBurntGraphByDates/",{fromdate:b,todate:d}).then(function(c){a.historyRecord=c.data.CalorieBurntGraphbyDates,$.each(a.historyRecord,function(a,b){var c=[],d=b.date.split("/");c.push(e[d[1]-1]+" "+d[0]),c.push(parseFloat(b.calorie)),f.push(c)}),g.title="Calories Brunt Graph ( "+b+" - "+d+" )",g.name="Calories Burned",g.suffix=" cals",g.yaxis="Calories (cal)",g.color="red",a.drawHistoryGraph(f,g)}):3==a.historyType?c.postRequest("user/getExerciseMinutesUsingDates/",{fromdate:b,todate:d}).then(function(c){a.historyRecord=c.data.ExerciseMinutesUsingDates,$.each(a.historyRecord,function(a,b){var c=[],d=b.date.split("/");c.push(e[d[1]-1]+" "+d[0]),c.push(parseFloat(b.workoutvalue)),f.push(c)}),g.title="Exercise Minutes Graph ( "+b+" - "+d+" )",g.name="Exercise Minutes",g.suffix=" mints",g.yaxis="Minutes",g.color="blue",a.drawHistoryGraph(f,g)}):c.postRequest("/user/getWeightLogGraph/",{startdate:b,enddate:d}).then(function(c){a.historyRecord=c.data.Weight_logs,$.each(a.historyRecord,function(a,b){var c=[],d=b.date.split("/");c.push(e[d[1]-1]+" "+d[0]),c.push(parseFloat(b.weight)),f.push(c)}),g.title="Weight Log Graph ( "+b+" - "+d+" )",g.name="Weight Log",g.suffix=" Kgs",g.yaxis="Weight (Kgs)",g.color="#f8ba01",a.drawHistoryGraph(f,g)})},a.drawHistoryGraph=function(b,c){a.loaded=!1,$("#historyGraph").highcharts({title:{text:c.title},xAxis:{categories:[]},tooltip:{enabled:!0,backgroundColor:"rgba(255, 255, 255, 1)",borderWidth:1,shadow:!0,style:{fontSize:"10px",padding:5,zIndex:500},formatter:!1,valueSuffix:c.suffix},yAxis:{title:{text:c.yaxis},plotLines:[{value:0,width:1,color:c.color}]},colors:[c.color],exporting:{enabled:!1},credits:{enabled:!1},legend:{enabled:!1},series:[{name:c.name,data:b}]})};var q=new Date,r=q.getDate(),s=q.getMonth()+1,t=q.getFullYear();10>r&&(r="0"+r),10>s&&(s="0"+s),q=r+"/"+s+"/"+t,a.weightLogDate=q,a.selectedDate=q,a.todayDate=q,b.goalStartDate=b.goalEndDate=q,a.initialLoadFoodAndExercise=function(){a.selectedDate==q?(a.loadFoodDiary(a.selectedDate),a.loadExerciseDiary(a.selectedDate),a.doGetIntakeBruntByDate(a.selectedDate),a.goGetDailyIntakeGraph(a.selectedDate)):(a.loadFoodDiary(a.selectedDate.format("dd/mm/yyyy")),a.loadExerciseDiary(a.selectedDate.format("dd/mm/yyyy")),a.doGetIntakeBruntByDate(a.selectedDate.format("dd/mm/yyyy")),a.goGetDailyIntakeGraph(a.selectedDate.format("dd/mm/yyyy"))),a.doGetWeightGoal(),a.doGetWeightLog(q),a.goGetSessionGraph(a.storedSessionId)},a.initialLoadFoodAndExercise(),a.doGetCoachAdvices(),a.offset=0,a.timerCurrent=0,a.uploadCurrent=0,a.stroke=12,a.radius=70,a.isSemi=!1,a.rounded=!1,a.responsive=!1,a.clockwise=!0,a.bgColor="#ddd",a.duration=1e3,a.currentAnimation="easeOutCubic",a.animations=[],angular.forEach(g.animations,function(b,c){a.animations.push(c)}),a.getStyle=function(){var b=(a.isSemi?"":"translateY(-50%) ")+"translateX(-50%)";return{top:a.isSemi?"auto":"50%",bottom:a.isSemi?"5%":"auto",left:"50%",transform:b,"-moz-transform":b,"-webkit-transform":b}};a.prevent=function(){event.preventDefault()},a.open=function(b){b.preventDefault(),b.stopPropagation(),a.opened=!0},a.format="dd/MM/yyyy";var u=function(){var a=/d{1,4}|m{1,4}|yy(?:yy)?|([HhMsTt])\1?|[LloSZ]|"[^"]*"|'[^']*'/g,b=/\b(?:[PMCEA][SDP]T|(?:Pacific|Mountain|Central|Eastern|Atlantic) (?:Standard|Daylight|Prevailing) Time|(?:GMT|UTC)(?:[-+]\d{4})?)\b/g,c=/[^-+\dA-Z]/g,d=function(a,b){for(a=String(a),b=b||2;a.length<b;)a="0"+a;return a};return function(e,f,g){var h=u;if(1!=arguments.length||"[object String]"!=Object.prototype.toString.call(e)||/\d/.test(e)||(f=e,e=void 0),e=e?new Date(e):new Date,isNaN(e))throw SyntaxError("invalid date");f=String(h.masks[f]||f||h.masks["default"]),"UTC:"==f.slice(0,4)&&(f=f.slice(4),g=!0);var i=g?"getUTC":"get",j=e[i+"Date"](),k=e[i+"Day"](),l=e[i+"Month"](),m=e[i+"FullYear"](),n=e[i+"Hours"](),o=e[i+"Minutes"](),p=e[i+"Seconds"](),q=e[i+"Milliseconds"](),r=g?0:e.getTimezoneOffset(),s={d:j,dd:d(j),ddd:h.i18n.dayNames[k],dddd:h.i18n.dayNames[k+7],m:l+1,mm:d(l+1),mmm:h.i18n.monthNames[l],mmmm:h.i18n.monthNames[l+12],yy:String(m).slice(2),yyyy:m,h:n%12||12,hh:d(n%12||12),H:n,HH:d(n),M:o,MM:d(o),s:p,ss:d(p),l:d(q,3),L:d(q>99?Math.round(q/10):q),t:12>n?"a":"p",tt:12>n?"am":"pm",T:12>n?"A":"P",TT:12>n?"AM":"PM",Z:g?"UTC":(String(e).match(b)||[""]).pop().replace(c,""),o:(r>0?"-":"+")+d(100*Math.floor(Math.abs(r)/60)+Math.abs(r)%60,4),S:["th","st","nd","rd"][j%10>3?0:(j%100-j%10!=10)*j%10]};return f.replace(a,function(a){return a in s?s[a]:a.slice(1,a.length-1)})}}();u.masks={"default":"ddd mmm dd yyyy HH:MM:ss",shortDate:"m/d/yy",mediumDate:"mmm d, yyyy",longDate:"mmmm d, yyyy",fullDate:"dddd, mmmm d, yyyy",shortTime:"h:MM TT",mediumTime:"h:MM:ss TT",longTime:"h:MM:ss TT Z",isoDate:"yyyy-mm-dd",isoTime:"HH:MM:ss",isoDateTime:"yyyy-mm-dd'T'HH:MM:ss",isoUtcDateTime:"UTC:yyyy-mm-dd'T'HH:MM:ss'Z'"},u.i18n={dayNames:["Sun","Mon","Tue","Wed","Thu","Fri","Sat","Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],monthNames:["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec","January","February","March","April","May","June","July","August","September","October","November","December"]},Date.prototype.format=function(a,b){return u(this,a,b)}}]).constant("uibdatepickerPopupConfig",{
-datepickerPopup:"dd/MM/yyyy",closeOnDateSelection:!0,appendToBody:!0,showButtonBar:!1}).constant("uibDatepickerConfig",{formatDay:"dd",formatMonth:"MMMM",formatYear:"yyyy",formatDayHeader:"EEE",formatDayTitle:"MMMM yyyy",formatMonthTitle:"yyyy",datepickerMode:"day",minMode:"day",maxMode:"year",showWeeks:!1,startingDay:0,yearRange:20,minDate:null,maxDate:new Date}),userApp.filter("trusted",["$sce",function(a){return function(b){return a.trustAsResourceUrl(b)}}]),userApp.directive("hcGraph",function(){return{restrict:"C",replace:!0,scope:{graph:"="},controller:function(a,b,c){},template:'<div id="graph-container" style="margin: 0 auto;height: 300px">not working</div>',link:function(a,b,c){var d=new Highcharts.Chart({chart:{renderTo:"graph-container",plotBackgroundColor:null,plotBorderWidth:null,plotShadow:!1},title:{text:"Goal Graph",x:-20},subtitle:{text:"",x:-20},xAxis:{categories:[]},yAxis:{title:{text:"Weight (Kgs)"},plotLines:[{value:0,width:1,color:"#f8ba01"}]},tooltip:{valueSuffix:"Kgs"},colors:["#f8ba01"],legend:{layout:"vertical",align:"right",verticalAlign:"middle",borderWidth:0,x:80,y:0},series:[{name:"Weight",data:[]}],exporting:{enabled:!1},credits:{enabled:!1}});a.$watch("graph",function(a){d.series[0].setData(a,!0)},!0)}}}),userApp.directive("historyGraph",function(){return{restrict:"C",replace:!0,scope:{historygraph:"="},controller:function(a,b,c){},template:'<div id="graph-container" style="height: 400px;width: 67%">not working</div>',link:function(a,b,c){var d=new Highcharts.Chart({chart:{renderTo:"graph-container",plotBackgroundColor:null,plotBorderWidth:null,plotShadow:!1},title:{text:a.test,x:-20},subtitle:{text:"",x:-20},xAxis:{categories:[]},yAxis:{title:{text:"Weight (Kgs)"},plotLines:[{value:0,width:1,color:"#ff0066"}]},tooltip:{valueSuffix:"Kgs"},colors:["#ff0066"],legend:{layout:"vertical",align:"right",verticalAlign:"middle",borderWidth:0,x:80,y:0},series:[{name:"Weight",data:[]}],exporting:{enabled:!1},credits:{enabled:!1}});a.$watch("historygraph",function(a){d.series[0].setData(a,!0)},!0)}}}),userApp.directive("heightFoodBind",function(){return{link:function(a,b){a.$watch(function(){setTimeout(function(){var a=$(".food");b.height()>parseInt($(".food_scrollbar").css("height"))?a.css({paddingRight:"15px"}):a.css({paddingRight:"3px"})},500)})}}}),userApp.directive("heightExerciseBind",function(){return{link:function(a,b){a.$watch(function(){setTimeout(function(){var a=$(".exercise");b.height()>parseInt($(".exercise-height").css("height"))?a.css({paddingRight:"15px"}):a.css({paddingRight:"3px"})},500)})}}}),userApp.directive("shouldFocus",function(){return{restrict:"A",link:function(a,b,c){a.$watch(c.shouldFocus,function(a,c){a&&b[0].scrollIntoView(!1)})}}});
+var userApp= angular.module('userApp', ['ngRoute','oc.lazyLoad','ngCookies','requestModule','flash','ngAnimate','ngTouch','ngPercentDisplay','userDashboardServiceModule','angular-svg-round-progress','ui.bootstrap','angular-nicescroll']);
+
+userApp.controller('UserDashboardController',function($scope,$window,requestHandler,Flash,UserDashboardService,$interval,roundProgressService,limitToFilter,$timeout) {
+    $scope.foodSearchResult = [];
+    $scope.userFood={};
+    $scope.userFood.sessionid=1;
+    $scope.graphSessionId='1';
+    $scope.servings=0;
+    $scope.current=$scope.caloriesIntake=0;
+    $scope.max=$scope.gainGraphMax=100;
+    $scope.exerciseSearchResult = [];
+    $scope.userExercise={};
+    $scope.caloriesSpent=0;
+    $scope.workoutvalue=0;
+    $window.singlePicker = false;
+    $window.minimumDate = new Date();
+    $scope.weightUpdateText="Update Weight";
+    $scope.graphs=1;
+    $scope.historyReport=0;
+    $scope.historyType=1;
+    $scope.showExercise=0;
+
+    //Modal Popup to add user food
+    $scope.doUserAddFood=function(){
+        $(function(){
+            $("#lean_overlay").fadeTo(1000);
+            $("#modal-add-food").fadeIn(600);
+            $(".user_register").show();
+
+        });
+        $(".modal_close").click(function(){
+            $(".user_register").hide();
+            $("#modal-add-food").hide();
+            $("#lean_overlay").hide();
+            $scope.resetdata();
+        });
+
+        $("#lean_overlay").click(function(){
+            $(".user_register").hide();
+            $("#modal-add-food").hide();
+            $("#lean_overlay").hide();
+            $scope.resetdata();
+        });
+        $scope.selectedFood="";
+    };
+
+    //Modal Popup to add user exercise
+    $scope.doUserAddExercise=function(){
+        $(function(){
+            $("#lean_overlay").fadeTo(1000);
+            $("#modal-add-exercise").fadeIn(600);
+            $(".user_register").show();
+
+        });
+
+        $(".modal_close").click(function(){
+            $(".user_register").hide();
+            $("#modal-add-exercise").hide();
+            $("#lean_overlay").hide();
+            $scope.resetexercisedata();
+        });
+
+        $("#lean_overlay").click(function(){
+            $(".user_register").hide();
+            $("#modal-add-exercise").hide();
+            $("#lean_overlay").hide();
+            $scope.resetexercisedata();
+        });
+        $scope.selectedExercise="";
+    };
+
+    //On Select frequent foods
+    $scope.frequentFood=function(foodid){
+        $scope.isNew=true;
+        $scope.title= "Add Food";
+        $scope.loaded=true;
+        var getFoodDetailPromise=UserDashboardService.doGetSelectedFoodDetails(foodid);
+        getFoodDetailPromise.then(function(result){
+            $scope.userSelectedFoodDetails=result;
+            $scope.loaded=false;
+            $scope.doUserAddFood();
+        });
+    };
+
+    //On Select search function
+    $scope.foodSelected=function(){
+        $scope.isNew=true;
+        $scope.title= "Add Food";
+        var getFoodDetailPromise=UserDashboardService.doGetSelectedFoodDetails($scope.selectedFood.foodid);
+        getFoodDetailPromise.then(function(result){
+            $scope.userSelectedFoodDetails=result;
+            $scope.doUserAddFood();
+        });
+    };
+    var originalmeasure="";
+    var originalservings="";
+    //On Select edit foods
+    $scope.doEditUserFood=function(foodid,userfoodid){
+
+        $scope.isNew=false;
+        $scope.title= "Edit Food";
+        $scope.loaded=true;
+        var getFoodDetailForEditPromise=UserDashboardService.doGetSelectedFoodDetails(foodid);
+        getFoodDetailForEditPromise.then(function(result){
+            $scope.userSelectedFoodDetails=result;
+            var getUserFoodDetailsPromise=UserDashboardService.doGetUserFoodDetails(userfoodid);
+            getUserFoodDetailsPromise.then(function(result){
+
+                $scope.userFood.userfoodid=result.userfoodid;
+                $scope.userFood.foodid=result.foodid;
+                //  $scope.userFood.measure=result.measureid;
+                $.each($scope.userSelectedFoodDetails.measureid, function(index,value) {
+                    if(value.measureid == result.measureid.measureid){
+                        $scope.userFood.measure = value;
+                        originalmeasure = angular.copy(value);
+                    }
+                });
+                $scope.userFood.servings=parseInt(result.measureid.servings);
+                originalservings = angular.copy(result.measureid.servings);
+                $scope.current=$scope.caloriesIntake=result.measureid.calories;
+                $scope.current=$scope.current.toFixed(2);
+                if(($scope.current.length-3)>2) $scope.max=100+((String($scope.current|0).slice(0, -2))*100);
+                else $scope.max=100;
+                $scope.loaded=false;
+                $scope.doUserAddFood();
+            });
+        });
+    };
+
+    $scope.isCleanFood=function(){
+        return angular.equals(originalmeasure, $scope.userFood.measure)&& angular.equals(originalservings, $scope.userFood.servings);
+    };
+
+    //Calories caluclation for food
+    $scope.doCalculateCalories=function(){
+        if($scope.userFood.servings==0){
+            $scope.current=$scope.caloriesIntake=0;
+        }
+        if(!$scope.userFood.servings>0){
+            $scope.current=$scope.caloriesIntake=0;
+        }
+        else{
+            $scope.current=$scope.caloriesIntake=$scope.userFood.measure.calories*$scope.userFood.servings;
+            $scope.current=$scope.current.toFixed(2);
+            if(($scope.current.length-3)>2) $scope.max=100+((String($scope.current|0).slice(0, -2))*100);
+            else $scope.max=100;
+        }
+    };
+
+    //Insert User Food
+    $scope.doInsertUserFood=function(){
+        //Set values according to the api calls
+        $scope.userFood.foodid=$scope.userSelectedFoodDetails.foodid;
+        $scope.userFood.measureid=$scope.userFood.measure.measureid;
+        if($scope.selectedDate==selectedDate){
+            $scope.userFood.addeddate=$scope.selectedDate;
+        }
+        else
+        {
+            $scope.userFood.addeddate=$scope.selectedDate.format("dd/mm/yyyy");
+        }
+
+        $scope.userFood.servings=parseInt($scope.userFood.servings);
+
+        var foodInsertPromise=UserDashboardService.doInsertUserFood($scope.userFood);
+        foodInsertPromise.then(function(){
+            $scope.loadFoodDiary( $scope.userFood.addeddate);
+            $scope.doGetIntakeBruntByDate( $scope.userFood.addeddate);
+            $scope.goGetDailyIntakeGraph($scope.userFood.addeddate);
+            $scope.goGetSessionGraph($scope.storedSessionId);
+            $scope.doGetHistoryReport();
+        });
+
+    };
+
+    //Update User Food
+    $scope.doUpdateUserFood=function(){
+        //Set values according to the api calls
+        $scope.userFood.userfoodid= $scope.userFood.userfoodid;
+        $scope.userFood.foodid= $scope.userFood.foodid;
+        $scope.userFood.measureid=$scope.userFood.measure.measureid;
+        $scope.userFood.servings=parseInt($scope.userFood.servings);
+        var foodInsertPromise=UserDashboardService.doUpdateUserFood($scope.userFood);
+        foodInsertPromise.then(function(){
+            if($scope.selectedDate==selectedDate){
+                $scope.loadFoodDiary($scope.selectedDate);
+                $scope.doGetIntakeBruntByDate($scope.selectedDate);
+                $scope.goGetDailyIntakeGraph($scope.selectedDate);
+                $scope.goGetSessionGraph($scope.storedSessionId);
+            }
+            else
+            {
+                $scope.loadFoodDiary($scope.selectedDate.format("dd/mm/yyyy"));
+                $scope.doGetIntakeBruntByDate($scope.selectedDate.format("dd/mm/yyyy"));
+                $scope.goGetDailyIntakeGraph($scope.selectedDate.format("dd/mm/yyyy"));
+                $scope.goGetSessionGraph($scope.storedSessionId);
+            }
+            $scope.doGetHistoryReport();
+        });
+
+    };
+
+    //Delete User Food
+    $scope.doDeleteUserFood= function (userFoodId) {
+        $scope.loaded=true;
+        var foodDeletePromise=UserDashboardService.doDeleteUserFood(userFoodId);
+        foodDeletePromise.then(function(){
+            if($scope.selectedDate==selectedDate){
+                $scope.loadFoodDiary($scope.selectedDate);
+                $scope.doGetIntakeBruntByDate($scope.selectedDate);
+                $scope.goGetDailyIntakeGraph($scope.selectedDate);
+                $scope.goGetSessionGraph($scope.storedSessionId);
+            }
+            else{
+                $scope.loadFoodDiary($scope.selectedDate.format("dd/mm/yyyy"));
+                $scope.doGetIntakeBruntByDate($scope.selectedDate.format("dd/mm/yyyy"));
+                $scope.goGetDailyIntakeGraph($scope.selectedDate.format("dd/mm/yyyy"));
+                $scope.goGetSessionGraph($scope.storedSessionId);
+            }
+            $scope.doGetHistoryReport();
+        });
+    };
+
+    //On load Food Diary
+    $scope.loadFoodDiary=function(selectedDate){
+        $scope.loaded=true;
+        var userFoodDiaryDetailPromise=UserDashboardService.getFoodDiary(selectedDate);
+        userFoodDiaryDetailPromise.then(function(result){
+            $scope.userFoodDiaryDataAll=result;
+            $scope.loadSessionDetails();
+            $scope.loadSessionFood();
+            $scope.loaded=false;
+        });
+    };
+
+    //Load Details Based on session
+    $scope.loadSessionDetails=function(){
+        switch(parseInt($scope.userFood.sessionid)){
+            case 1:$scope.userFoodDiaryData=$scope.userFoodDiaryDataAll.BreakFast;
+                break;
+            case 2:$scope.userFoodDiaryData=$scope.userFoodDiaryDataAll.Brunch;
+                break;
+            case 3:$scope.userFoodDiaryData=$scope.userFoodDiaryDataAll.Lunch;
+                break;
+            case 4:$scope.userFoodDiaryData=$scope.userFoodDiaryDataAll.Evening;
+                break;
+            case 5: $scope.userFoodDiaryData=$scope.userFoodDiaryDataAll.Dinner;
+                break;
+            default :break;
+        }
+    };
+
+    //Search Function for food
+    $scope.inputChanged = function(searchStr) {
+
+        if(searchStr.length>=3){
+            if($scope.foodSearchResult.length==0){
+                $scope.loadingFoods=true;
+            }
+            var userFoodDiaryDetailPromise=UserDashboardService.searchFood(searchStr,$scope.userFood.sessionid);
+            return userFoodDiaryDetailPromise.then(function(result){
+                var foods = [];
+                $scope.foodSearchResult=result;
+                $scope.loadingFoods=false;
+                return $scope.foodSearchResult;
+            });
+        }
+        else{
+            return {};
+        }
+
+    };
+
+    //TO get user demography details
+    $scope.doGetDemograph=function(){
+        var userDemographyPromise=UserDashboardService.doGetDemographyDetails();
+        userDemographyPromise.then(function(result){
+            $scope.demography = result;
+
+            if(!$scope.userProfile){
+                var userDetailPromise=UserDashboardService.doGetUserDetails();
+                userDetailPromise.then(function(result){
+                    $scope.userProfile=result;
+                    $scope.userProfileImage=$scope.userProfile.imageurl+"?decache="+Math.random();
+                    var dividevalue=2;
+                    if($scope.userProfile.gender==1){
+                        dividevalue=4;
+                    }
+                    $scope.idealWeight = ($scope.demography.height - 100 -(($scope.demography.height -150)/dividevalue));
+
+                    if($scope.demography.weight < $scope.idealWeight){
+                        $scope.upweight =1;
+                        $scope.idealWeightlevel = $scope.demography.weight/$scope.idealWeight;
+                        $scope.idealWeightlevel = ($scope.idealWeightlevel*100)/2;
+                        $scope.balanceweight = $scope.idealWeight - $scope.demography.weight;
+                        $scope.balanceweight = $scope.balanceweight.toFixed(2);
+                    }
+                    else if($scope.demography.weight > $scope.idealWeight){
+                        $scope.upweight =0;
+                        $scope.idealWeightlevel = $scope.idealWeight/$scope.demography.weight;
+                        $scope.idealWeightlevel = 100-($scope.idealWeightlevel*100)/2;
+                        $scope.balanceweight =  $scope.demography.weight - $scope.idealWeight ;
+                        $scope.balanceweight = $scope.balanceweight.toFixed(2);
+                    }else{
+                        $scope.upweight =2;
+                        $scope.idealWeightlevel = 1;
+                        $scope.idealWeightlevel = ($scope.idealWeightlevel*100)/2;
+                    }
+
+                    $window.idealWeightlevel = $scope.idealWeightlevel.toFixed(2);
+                    setTimeout(viewWeightGraph(),1000);
+                });
+            }
+            else{
+                var dividevalue=2;
+                if($scope.userProfile.gender==1){
+                    dividevalue=4;
+                }
+                $scope.idealWeight = ($scope.demography.height - 100 -(($scope.demography.height -150)/dividevalue));
+
+                if($scope.demography.weight < $scope.idealWeight){
+                    $scope.upweight =1;
+                    $scope.idealWeightlevel = $scope.demography.weight/$scope.idealWeight;
+                    $scope.idealWeightlevel = ($scope.idealWeightlevel*100)/2;
+                    $scope.balanceweight = $scope.idealWeight - $scope.demography.weight;
+                    $scope.balanceweight = $scope.balanceweight.toFixed(2);
+                }
+                else if($scope.demography.weight > $scope.idealWeight){
+                    $scope.upweight =0;
+                    $scope.idealWeightlevel = $scope.idealWeight/$scope.demography.weight;
+                    $scope.idealWeightlevel = 100-($scope.idealWeightlevel*100)/2;
+                    $scope.balanceweight =  $scope.demography.weight - $scope.idealWeight ;
+                    $scope.balanceweight = $scope.balanceweight.toFixed(2);
+                }else{
+                    $scope.upweight =2;
+                    $scope.idealWeightlevel = 1;
+                    $scope.idealWeightlevel = ($scope.idealWeightlevel*100)/2;
+                }
+
+                $window.idealWeightlevel = $scope.idealWeightlevel.toFixed(2);
+                viewWeightGraph();
+            }
+
+        });
+    };
+    $scope.doGetDemograph();
+
+    //To get frequently asked foods
+    var frequentFoodPromise=UserDashboardService.doGetFrequentlyAdded();
+    frequentFoodPromise.then(function(result){
+        $scope.frequentFoodList =result;
+    });
+
+    // Insert suggest food
+    $scope.doAddSuggestFood=function(){
+
+        requestHandler.postRequest("user/searchFoodnamebyUser/",{"foodname":$scope.foodSuggest.foodname}).then(function(response){
+            if(response.data.Response_status==0){
+                var insertSuggestedFoodPromise=UserDashboardService.doAddSuggestedFood($scope.foodSuggest);
+
+                insertSuggestedFoodPromise.then(function(result){
+                    successMessage(Flash,"Thanks&nbsp;for&nbsp;the&nbspsuggestion!!");
+                    $scope.resetdata();
+                },function(){
+                    errorMessage(Flash, "Please try again later!");
+                });
+            }
+            else if(response.data.Response_status==1){
+                errorMessage(Flash,"Food&nbsp;already&nbsp;exists");
+                $scope.resetdata();
+            }
+        });
+
+    };
+
+    // Insert suggest exercise
+    $scope.doAddSuggestExercise=function(){
+        var insertSuggestedExercisePromise=UserDashboardService.doAddSuggestedExercise($scope.exerciseSuggest);
+
+        insertSuggestedExercisePromise.then(function(result){
+            successMessage(Flash,"Thanks&nbsp;for&nbsp;the&nbspsuggestion!!");
+            $scope.resetexercisedata();
+        },function(){
+            errorMessage(Flash, "Please try again later!");
+        })
+
+    };
+
+    //Search Function for exercise
+    $scope.inputChangedExercise = function(searchStr) {
+        if(searchStr.length>=3){
+            if($scope.exerciseSearchResult.length==0){
+                $scope.loadingExercise=true;
+            }
+            var userExerciseDiaryDetailPromise=UserDashboardService.searchExercise(searchStr);
+            return userExerciseDiaryDetailPromise.then(function(result){
+                $scope.exerciseSearchResult=result;
+                $scope.loadingExercise=false;
+                return $scope.exerciseSearchResult;
+            });
+        }
+    };
+
+    //On Select frequent exercise
+    $scope.frequentExercise=function(exerciseid){
+        $scope.isNew=true;
+        $scope.title= "Add Exercise";
+        $scope.loaded=true;
+        var getExerciseDetailPromise=UserDashboardService.doGetSelectedExerciseDetails(exerciseid);
+        getExerciseDetailPromise.then(function(result){
+            $scope.userSelectedExerciseDetails=result;
+            $scope.loaded=false;
+            $scope.doUserAddExercise();
+        });
+    };
+
+    //On Select search exercise function
+    $scope.exerciseSelected=function(){
+        $scope.isNew=true;
+        $scope.title= "Add Exercise";
+        var getExerciseDetailPromise=UserDashboardService.doGetSelectedExerciseDetails($scope.selectedExercise.exerciseid);
+        getExerciseDetailPromise.then(function(result){
+            $scope.userSelectedExerciseDetails=result;
+            $scope.doUserAddExercise ();
+        });
+    };
+
+    //On load Exercise Diary
+    $scope.loadExerciseDiary=function(selectedDate){
+        $scope.loaded=true;
+        var userExerciseDiaryDetailPromise=UserDashboardService.getExerciseDiary(selectedDate);
+        userExerciseDiaryDetailPromise.then(function(result){
+            $scope.userExerciseDiaryDataAll=result;
+            $scope.loaded=false;
+        });
+    };
+    //Insert User Exercise
+    $scope.doInsertUserExercise=function(){
+        //Set values according to the api calls
+        $scope.userExercise.exerciseid=$scope.userSelectedExerciseDetails.exerciseid;
+
+        if($scope.selectedDate==selectedDate){
+            $scope.userExercise.date=$scope.selectedDate;
+        }
+        else
+        {
+            $scope.userExercise.date=$scope.selectedDate.format("dd/mm/yyyy");
+        }
+        $scope.userExercise.workoutvalue=parseInt($scope.userExercise.workoutvalue);
+
+        var exerciseInsertPromise=UserDashboardService.doInsertUserExercise($scope.userExercise);
+        exerciseInsertPromise.then(function(){
+            $scope.loadExerciseDiary($scope.userExercise.date);
+            $scope.doGetIntakeBruntByDate($scope.userExercise.date);
+            $scope.doGetHistoryReport();
+        });
+
+    };
+
+    //Delete User Exercise
+    $scope.doDeleteUserExercise= function (userExerciseId) {
+        $scope.loaded=true;
+        var exerciseDeletePromise=UserDashboardService.doDeleteUserExercise(userExerciseId);
+        exerciseDeletePromise.then(function(){
+            if($scope.selectedDate==selectedDate){
+                $scope.loadExerciseDiary($scope.selectedDate);
+                $scope.doGetIntakeBruntByDate($scope.selectedDate);
+            }
+            else{
+                $scope.loadExerciseDiary($scope.selectedDate.format("dd/mm/yyyy"));
+                $scope.doGetIntakeBruntByDate($scope.selectedDate.format("dd/mm/yyyy"));
+            }
+            $scope.doGetHistoryReport();
+        });
+    };
+    var originallevel="";
+    var originaltiming="";
+    //On Select edit exercise
+    $scope.doEditUserExercise=function(exerciseid,userexercisemapid){
+
+        $scope.isNew=false;
+        $scope.title= "Edit Exercise";
+        $scope.loaded=true;
+        var getExerciseDetailForEditPromise=UserDashboardService.doGetSelectedExerciseDetails(exerciseid);
+        getExerciseDetailForEditPromise.then(function(result){
+
+
+            $scope.userSelectedExerciseDetails=result;
+            var getUserExerciseDetailsPromise=UserDashboardService.doGetUserExerciseDetails(userexercisemapid);
+            getUserExerciseDetailsPromise.then(function(result){
+                $scope.userExercise.userexercisemapid=userexercisemapid;
+                $scope.userExercise.exerciseid=exerciseid;
+                //$scope.userExercise.levelid=result.User_exercise_data.Level;
+                /* $.each($scope.userSelectedExerciseDetails.type.levels, function(index,value) {
+                 if(value.levelid == result.User_exercise_data.Level.levelid){
+                 $scope.userExercise.levelid = value;
+                 originallevel=angular.copy(value);
+                 }
+                 });*/
+                $scope.userExercise.workoutvalue=parseInt(result.workoutvalue);
+                originaltiming = parseInt(result.workoutvalue);
+                $scope.current=$scope.caloriesSpent=result.calories;
+                $scope.current=$scope.current.toFixed(2);
+                if(($scope.current.length-3)>2) $scope.max=100+((String($scope.current|0).slice(0, -2))*100);
+                else $scope.max=100;
+                $scope.loaded=false;
+                $scope.doUserAddExercise();
+            });
+
+        });
+    };
+
+    $scope.isCleanExercise=function(){
+        return angular.equals(originallevel, $scope.userExercise.levelid)&& angular.equals(originaltiming, $scope.userExercise.workoutvalue);
+    };
+
+    //Update User Exercise
+    $scope.doUpdateUserExercise=function(){
+        //Set values according to the api calls
+        if($scope.userExercise.date!=null){
+            delete $scope.userExercise.date;
+        }
+
+        $scope.userExercise.userexercisemapid= $scope.userExercise.userexercisemapid;
+        $scope.userExercise.exerciseid= $scope.userExercise.exerciseid;
+        $scope.userExercise.levelid=$scope.userExercise.levelid.levelid;
+        $scope.userExercise.workoutvalue=parseInt($scope.userExercise.workoutvalue);
+
+        var exerciseInsertPromise=UserDashboardService.doUpdateUserExercise($scope.userExercise);
+        exerciseInsertPromise.then(function(){
+            if($scope.selectedDate==selectedDate){
+                $scope.loadExerciseDiary($scope.selectedDate);
+                $scope.doGetIntakeBruntByDate($scope.selectedDate);
+            }
+            else
+            {
+                $scope.loadExerciseDiary($scope.selectedDate.format("dd/mm/yyyy"));
+                $scope.doGetIntakeBruntByDate($scope.selectedDate.format("dd/mm/yyyy"));
+            }
+            $scope.doGetHistoryReport();
+        });
+
+    };
+
+
+    //To get frequently asked exercise
+    var frequentExercisePromise=UserDashboardService.doGetFrequentlyUsedExercise();
+    frequentExercisePromise.then(function(result){
+        $scope.frequentExerciseList =result;
+    });
+
+    //Calories caluclation for exercose
+    $scope.doCalculateCaloriesExercise=function(){
+        console.log($scope.userExercise);
+        if($scope.userExercise.workoutvalue==0){
+            $scope.current=$scope.caloriesSpent=0;
+        }
+        if(!$scope.userExercise.workoutvalue>0){
+            $scope.current=$scope.caloriesSpent=0;
+        }
+        else{
+            $scope.current=$scope.caloriesSpent=$scope.userSelectedExerciseDetails.MET*$scope.demography.weight*($scope.userExercise.workoutvalue/60);
+
+            $scope.current=$scope.current.toFixed(2);
+            if(($scope.current.length-3)>2) $scope.max=$scope.max+((String($scope.current|0).slice(0, -2))*100);
+            else $scope.max=100;
+        }
+
+    };
+
+    //Clear suggest food model values
+    $scope.resetdata=function(){
+        $scope.foodSuggest={};
+        $scope.foodSuggestForm.$setPristine();
+        $scope.userFood.measure="";
+        $scope.userFood.servings=[];
+        $scope.FoodAddForm.$setPristine();
+        $scope.current=$scope.caloriesIntake=0;
+        $scope.max = 100;
+        $scope.userSelectedFoodDetails={};
+
+    };
+
+    //Clear suggest exercise model values
+    $scope.resetexercisedata=function(){
+        $scope.exerciseSuggest={};
+        $scope.exerciseSuggestForm.$setPristine();
+        $scope.userExercise.levelid="";
+        $scope.userExercise.workoutvalue="";
+        $scope.ExerciseAddForm.$setPristine();
+        $scope.current=$scope.caloriesSpent=0;
+        $scope.max = 100;
+        $scope.userSelectedExerciseDetails={};
+
+    };
+
+    //Weight and Set Goal
+    $scope.goal = {
+        status: 'set-goal'
+    };
+
+    $scope.graph = {
+        status: 'goal'
+    };
+
+    $scope.viewGoal=function(){
+        $scope.doGetWeightGoal();
+        $scope.graph = {
+            status: 'goal'
+        };
+        setTimeout("viewWeightGraph();", 10);
+    };
+
+    $scope.cancelUpdate=function(){
+        $scope.goal = {
+            status: 'view-goal'
+        };
+    };
+
+    $scope.doGetWeightGoal=function(){
+        requestHandler.getRequest("user/getWeightGoal/","").then(function(response){
+
+            if(response.data.Response_status==0){
+                $scope.updateGoal=0;
+                $scope.targetText='Period';
+                $window.singlePicker = false;
+                $window.minimumDate = new Date();
+            }
+            else{
+                $scope.goalDetails=response.data.Weight_Goal;
+                $scope.updateGoal=1;
+
+                var dateCompare = $scope.goalDetails.startdate.slice(6,10)+'-'+$scope.goalDetails.startdate.slice(3,5)+'-'+$scope.goalDetails.startdate.slice(0,2);
+                var date1 = selectedDate.slice(6,10)+'-'+selectedDate.slice(3,5)+'-'+selectedDate.slice(0,2);
+                var date2 = $scope.goalDetails.enddate.slice(6,10)+'-'+$scope.goalDetails.enddate.slice(3,5)+'-'+$scope.goalDetails.enddate.slice(0,2);
+
+
+                var date1_ms;
+
+                if (new Date(dateCompare).getTime() > new Date(date1).getTime()) {
+                    date1_ms = new Date(dateCompare).getTime();
+                    $scope.viewGraphButton=false;
+                }
+                else{
+                    date1_ms = new Date(date1).getTime();
+                    $scope.viewGraphButton=true;
+                }
+
+                // The number of milliseconds in one day
+                var ONE_DAY = 1000 * 60 * 60 * 24;
+
+                // Convert both dates to milliseconds
+                var date2_ms = new Date(date2).getTime();
+
+                // Calculate the difference in milliseconds
+                var difference_ms = date2_ms - date1_ms;
+
+                // Convert back to days
+                $scope.remainingDates = Math.round(difference_ms/ONE_DAY);
+                if($scope.remainingDates<0){
+                    $scope.remainingDates=0;
+                    $scope.goalExpired=1;
+                    var dateinitial = new Date(dateCompare).getTime();
+                    var diff_ms = date2_ms - dateinitial;
+                    $scope.targetDays = Math.round(diff_ms/ONE_DAY);
+
+                    var weightLogPromise=UserDashboardService.doGetAchievedWeight($scope.goalDetails.enddate);
+                    weightLogPromise.then(function(result){
+                        $scope.achievedWeight = result;
+                        var targetWeightLossOrGain=0;
+                        var achievedWeightLossOrGain=0;
+                        var compare=0;
+                        if($scope.goalDetails.targetweight>$scope.goalDetails.initialweight){
+                            targetWeightLossOrGain = $scope.goalDetails.targetweight-$scope.goalDetails.initialweight;
+                            achievedWeightLossOrGain = $scope.achievedWeight-$scope.goalDetails.initialweight;
+                            if(achievedWeightLossOrGain<=0){
+                                $scope.achieveStatus=0;
+                            }
+                            else{
+                                compare = achievedWeightLossOrGain/targetWeightLossOrGain;
+                                if(compare==1){
+                                    $scope.achieveStatus=2;
+                                }else if(0.6>=compare<1&&compare<1.4){
+                                    $scope.achieveStatus=1;
+                                }else $scope.achieveStatus=0;
+                            }
+                        }
+                        else{
+                            targetWeightLossOrGain = $scope.goalDetails.initialweight - $scope.goalDetails.targetweight;
+                            achievedWeightLossOrGain = $scope.goalDetails.initialweight - $scope.achievedWeight;
+                            if(achievedWeightLossOrGain<=0){
+                                $scope.achieveStatus=0;
+                            }
+                            else{
+                                compare = achievedWeightLossOrGain/targetWeightLossOrGain;
+                                if(compare==1){
+                                    $scope.achieveStatus=2;
+                                }else if(0.6>=compare<1&&compare<1.4){
+                                    $scope.achieveStatus=1;
+                                }else $scope.achieveStatus=0;
+                            }
+                        }
+
+                    });
+                }
+                else{
+                    $scope.goalExpired=0;
+                }
+
+                $window.currentweight = $scope.demography.weight;
+                $window.targetweight = $scope.goalDetails.targetweight;
+                $scope.goal = {
+                    status: 'view-goal'
+                };
+            }
+        });
+
+    };
+
+    $scope.setGoal=function(){
+        $scope.setGoalDetails={};
+        $scope.setGoalDetails.startdate=document.getElementById("start").value;
+        $scope.setGoalDetails.enddate=document.getElementById("end").value;
+        $scope.setGoalDetails.targetweight=parseFloat(document.getElementById("target").value);
+        $scope.setGoalDetails.initialweight=$scope.demography.weight;
+
+        if($scope.setGoalDetails.startdate==''){
+            $scope.setGoalDetails.startdate = $scope.setGoalDetails.enddate = selectedDate;
+        }
+
+        if($scope.demography.weight!=""){
+            $(function(){
+                $("#lean_overlay").fadeTo(1000);
+                $("#goal-confirmation").fadeIn(600);
+                $(".common_model").show();
+
+            });
+            $(".modal_close").click(function(){
+                $(".common_model").hide();
+                $("#goal-confirmation").hide();
+                $("#lean_overlay").hide();
+            });
+
+            $("#lean_overlay").click(function(){
+                $(".common_model").hide();
+                $("#goal-confirmation").hide();
+                $("#lean_overlay").hide();
+            });
+        }
+    };
+
+    $scope.setGoalConfirmation=function(){
+        requestHandler.postRequest("user/insertWeightGoal/",$scope.setGoalDetails).then(function(response){
+            $scope.doGetWeightGoal();
+            $scope.doInsertOrUpdateWeightLog(selectedDate,parseFloat($scope.setGoalDetails.initialweight));
+        },function(){
+            errorMessage(Flash, "Please try again later!");
+        });
+    };
+
+    $scope.doGetWeightLog=function(date){
+
+        var weightLogPromise=UserDashboardService.doGetWeightLogDetails(date);
+        weightLogPromise.then(function(result){
+            var weightlogdetails=result.Weight_logs;
+            if(!weightlogdetails.weight){
+                $scope.originalWeight="";
+                $("#weightLog").val('');
+            }
+            else{
+                $scope.weightlog=$scope.originalWeight=weightlogdetails.weight;
+                $("#weightLog").val(weightlogdetails.weight);
+            }
+        });
+    };
+
+    $scope.weightLogEntry=function(){
+        $scope.weightUpdateText="Updating...";
+        $scope.spinner=true;
+        $scope.doInsertOrUpdateWeightLog($("#weight-log-date").val(),parseFloat($("#weightLog").val()));
+    };
+
+    //TO Insert weight Goal Log
+    $scope.doInsertOrUpdateWeightLog=function(date,weight){
+        requestHandler.postRequest("user/weightlogInsertorUpdate/",{"date":date,"weight":weight}).then(function(response){
+            if(date==selectedDate && $scope.updateGoal==1){
+                $window.currentweight = weight;
+                refreshGraph();
+                $scope.updateAverageGainSpent(date);
+            }
+            $scope.spinner=false;
+            $scope.weightUpdateText="Update Weight";
+            $scope.doGetWeightLog(date);
+            $scope.doGetDemograph();
+        }, function () {
+            errorMessage(Flash, "Please try again later!")
+        });
+    };
+
+
+
+    $scope.isCleanWeight=function(){
+        return angular.equals(parseFloat($("#weightLog").val()), parseFloat($scope.originalWeight));
+    };
+
+
+    $scope.doGetWeightLogGraph=function(){
+        $scope.graph = {
+            status: 'goal-graph'
+        };
+        var monthNames= ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+        requestHandler.postRequest("user/getWeightLogGraph/",{"startdate":$scope.goalDetails.startdate.toString(),"enddate":$scope.goalDetails.enddate.toString()}).then(function(response){
+            $scope.weightlogGraph=response.data.Weight_logs;
+            var weightLogs = [];
+            $.each($scope.weightlogGraph, function(index,value) {
+                var weightLog = [];
+                var date = value.date.split("/");
+                weightLog.push(monthNames[(date[1]-1)]+' '+date[0]);
+                weightLog.push(value.weight);
+                weightLogs.push(weightLog);
+            });
+            $scope.weightGraphValue = weightLogs;
+            $scope.weightGraph = limitToFilter($scope.weightGraphValue, 30);
+        }, function () {
+            errorMessage(Flash, "Please try again later!")
+        });
+    };
+
+    $scope.deteteGoal=function(){
+        $(function(){
+            $("#lean_overlay").fadeTo(1000);
+            $("#goal-delete-confirmation").fadeIn(600);
+            $(".common_model").show();
+
+        });
+        $(".modal_close").click(function(){
+            $(".common_model").hide();
+            $("#goal-delete-confirmation").hide();
+            $("#lean_overlay").hide();
+        });
+
+        $("#lean_overlay").click(function(){
+            $(".common_model").hide();
+            $("#goal-delete-confirmation").hide();
+            $("#lean_overlay").hide();
+        });
+    };
+
+    //To Delete Goal
+    $scope.doDeleteGoal=function(){
+        requestHandler.deleteRequest("user/deleteWeightGoal/","").then(function(response){
+            $scope.weight='';
+            $scope.updateGoal=0;
+            $window.goalStartDate = $window.goalEndDate = selectedDate;
+            $window.minimumDate = new Date();
+            $scope.targetText='Period';
+            $window.singlePicker = false;
+            $scope.goal = {
+                status: 'set-goal'
+            };
+
+        },function () {
+            errorMessage(Flash, "Please try again later!")
+        });
+    };
+
+    //To Update Goal Details
+    $scope.updateGoalDetails=function(){
+        $scope.targetText = 'End Date';
+        $window.singlePicker = true;
+        $scope.originalUpdateGoalWeight={
+            endDate:$scope.goalDetails.enddate,
+            weight:$scope.goalDetails.targetweight
+        };
+        var startformat = $scope.goalDetails.startdate.slice(6,10)+','+$scope.goalDetails.startdate.slice(3,5)+','+$scope.goalDetails.startdate.slice(0,2);
+        var currentformat = selectedDate.slice(6,10)+','+selectedDate.slice(3,5)+','+selectedDate.slice(0,2);
+        $window.goalStartDate = $scope.goalDetails.startdate;
+        $window.goalEndDate = $scope.goalDetails.enddate;
+        $scope.weight = $scope.goalDetails.targetweight;
+        if (new Date(startformat).getTime() >= new Date(currentformat).getTime()) {
+            $window.minimumDate = $scope.goalDetails.startdate;
+        }
+        else{
+            $window.minimumDate = new Date();
+        }
+        $scope.goal = {
+            status: 'set-goal'
+        };
+    };
+
+    $scope.isCleanUpdateGoal=function(){
+        var endDate = document.getElementById("end").value;
+        if(endDate==""){
+            endDate = $scope.goalDetails.enddate;
+        }
+        var newUpdateGoal={
+            endDate:endDate,
+            weight:parseFloat(document.getElementById("target").value)
+        };
+        //console.log($scope.originalUpdateGoalWeight);
+        //console.log(newUpdateGoal);
+        //console.log(angular.equals($scope.originalUpdateGoalWeight,newUpdateGoal));
+        return angular.equals($scope.originalUpdateGoalWeight,newUpdateGoal);
+    };
+
+    //To Do Update Goal
+    $scope.doUpdateGoal=function(){
+        $scope.setGoalDetails={};
+        $scope.setGoalDetails.startdate=$scope.goalDetails.startdate;
+        if(document.getElementById("start").value==''){
+            $scope.setGoalDetails.enddate=$scope.goalDetails.enddate;
+        }
+        else{
+            $scope.setGoalDetails.enddate=document.getElementById("start").value;
+        }
+        $scope.setGoalDetails.targetweight=parseFloat(document.getElementById("target").value);
+        $scope.setGoalDetails.initialweight=$scope.goalDetails.initialweight;
+
+        requestHandler.putRequest("user/updateWeightGoal/",$scope.setGoalDetails).then(function(response){
+            $scope.doGetWeightGoal();
+        },function(){
+            errorMessage(Flash, "Please try again later!");
+        });
+    };
+
+    // Get Calories Brunt And Intake deatils by date
+    $scope.doGetIntakeBruntByDate = function(date){
+        requestHandler.postRequest("user/getTotalCalorieDetailForDate/",{"date":date}).then(function(response){
+            $scope.calorieGraph=response.data.Calorie_Graph;
+
+            if($scope.calorieGraph.intakecalorie=="") $scope.calorieGraph.intakecalorie=0;
+            if($scope.calorieGraph.burntcalorie=="") $scope.calorieGraph.burntcalorie=0;
+
+            $scope.averageIntake=Math.round($scope.calorieGraph.averagecalorieintake);
+            $scope.averageSpent=Math.round($scope.calorieGraph.averagecalorieburnt);
+
+            $scope.currentGain=$scope.calorieGraph.intakecalorie;
+            $scope.currentGain=$scope.currentGain.toFixed(2);
+
+            if($scope.averageIntake<$scope.calorieGraph.intakecalorie){
+                $scope.currentGainColour="red";
+            }else $scope.currentGainColour="limegreen";
+
+            $scope.currentSpent=$scope.calorieGraph.burntcalorie;
+            $scope.currentSpent=$scope.currentSpent.toFixed(2);
+
+            if($scope.averageSpent<$scope.calorieGraph.burntcalorie){
+                $scope.currentSpentColour="red";
+            }else $scope.currentSpentColour="orange";
+
+            var gainedCalories;
+            var spentCalories;
+            if($scope.calorieGraph.intakecalorie>$scope.calorieGraph.burntcalorie)
+                spentCalories = parseFloat(($scope.calorieGraph.intakecalorie - $scope.calorieGraph.burntcalorie).toFixed(2));
+            else spentCalories =0;
+            if($scope.calorieGraph.intakecalorie<$scope.calorieGraph.burntcalorie)
+                gainedCalories = parseFloat(($scope.calorieGraph.burntcalorie - $scope.calorieGraph.intakecalorie).toFixed(2));
+            else gainedCalories =0;
+            if($scope.calorieGraph.intakecalorie==$scope.calorieGraph.burntcalorie){
+                gainedCalories =0;
+                spentCalories =0;
+            }
+
+            $('#gainVsSpent').highcharts({
+
+                chart: {
+                    type: 'column'
+                },
+
+                xAxis: {
+                    categories: ['Compare <br/> <small>(calories)</small>']
+                },
+
+                yAxis: {
+                    allowDecimals: false,
+                    min: 0,
+                    title: {
+                        text: ''
+                    }
+                },
+
+                credits:{enabled:false},
+                exporting:{enabled:false},
+                legend:{enabled:false},
+                title:{text:''},
+
+                tooltip: {
+                    enabled:true,
+                    backgroundColor:'rgba(255, 255, 255, 1)',
+                    borderWidth:1,
+                    shadow:true,
+                    style:{fontSize:'10px',padding:5,zIndex:10000},
+                    formatter: function () {
+                        return '<b>' + this.x + '</b><br/>' +
+                            this.series.name + ': ' + this.y + '<br/>'
+                    }
+                },
+
+                plotOptions: {
+                    column: {
+                        stacking: 'normal'
+                    }
+                },
+
+                series: [{
+                    name: 'Spent',
+                    data: [gainedCalories],
+                    color: '#eee',
+                    stack: 'male'
+                },{
+                    name: 'Intake',
+                    data: [$scope.calorieGraph.intakecalorie],
+                    color: 'limegreen',
+                    stack: 'male'
+                }, {
+                    name: 'Gained',
+                    color: '#eee',
+                    data: [spentCalories],
+                    stack: 'female'
+                },{
+                    name: 'Brunt',
+                    data: [$scope.calorieGraph.burntcalorie],
+                    color: 'red',
+                    stack: 'female'
+                }]
+            });
+
+        },function(){
+            errorMessage(Flash, "Please try again later!");
+        });
+    };
+
+    $scope.updateAverageGainSpent = function(date){
+        requestHandler.postRequest("user/getTotalCalorieDetailForDate/",{"date":date}).then(function(response){
+            $scope.averageIntake=Math.round(response.data.Calorie_Graph.averagecalorieintake);
+            $scope.averageSpent=Math.round(response.data.Calorie_Graph.averagecalorieburnt);
+        });
+    };
+
+    $scope.goGetDailyIntakeGraph = function(date){
+
+        requestHandler.postRequest("user/dailyCalorieGraph/",{"date":date}).then(function(response){
+
+            $scope.calorieIntakeGraph=response.data.dailyCalorieGraph;
+
+            if($scope.calorieIntakeGraph.averagefat=="") $scope.calorieIntakeGraph.averagefat=0;
+            if($scope.calorieIntakeGraph.fat=="") $scope.calorieIntakeGraph.fat=0;
+            if($scope.calorieIntakeGraph.averageprotein=="") $scope.calorieIntakeGraph.averageprotein=0;
+            if($scope.calorieIntakeGraph.protein=="") $scope.calorieIntakeGraph.protein=0;
+            if($scope.calorieIntakeGraph.averagefibre=="") $scope.calorieIntakeGraph.averagefibre=0;
+            if($scope.calorieIntakeGraph.fibre=="") $scope.calorieIntakeGraph.fibre=0;
+            if($scope.calorieIntakeGraph.averagecarbo=="") $scope.calorieIntakeGraph.averagecarbo=0;
+            if($scope.calorieIntakeGraph.carbo=="") $scope.calorieIntakeGraph.carbo=0;
+
+            $('#dailyIntake').highcharts({
+                title: {
+                    text: ''
+                },
+                xAxis: {
+                    categories: ['Protein', 'Fat', 'Carbs', 'Fibre'],
+                    labels: {
+                        style: {
+                            fontSize:'9px',
+                            fontWeight:'normal'
+                        },
+                        useHTML: true,
+                        formatter: function() {
+                            if(this.value == "Protein")
+                                return this.value+'<br/><img src="../../images/i-protein.jpg"/>';
+                            else if(this.value == "Fat")
+                                return '&nbsp;&nbsp;'+this.value+'&nbsp;&nbsp;'+'<br/><img src="../../images/i-fats.jpg"/>';
+                            else if(this.value == "Carbs")
+                                return this.value+'<br/><img src="../../images/i-carbs.jpg"/>';
+                            else if(this.value == "Fibre")
+                                return '&nbsp;'+this.value+'&nbsp;'+'<br/><img src="../../images/i-fibre.jpg"/>';
+                            else
+                                return this.value;
+                        }
+                    }
+                },
+                tooltip:{
+                    enabled:true,
+                    backgroundColor:'rgba(255, 255, 255, 1)',
+                    borderWidth:1,
+                    shadow:true,
+                    style:{fontSize:'10px',padding:5,zIndex:10000},
+                    formatter:false
+                },
+                yAxis:{
+                    title: {
+                        text: null
+                    },
+                    labels:{
+                        style:{
+                            fontSize:'10px'
+                        }
+                    }
+                },
+                exporting: {
+                    enabled: false
+                },
+                credits: {
+                    enabled: false
+                },
+                legend:{enabled:true},
+                series: [{
+                    type: 'column',
+                    name:'Units',
+                    data: [
+                        {
+                            name: 'Protein',
+                            color: 'limegreen',
+                            y: parseFloat($scope.calorieIntakeGraph.protein)
+                        }, {
+                            name: 'Fat',
+                            color: 'red',
+                            y: parseFloat($scope.calorieIntakeGraph.fat)
+                        }, {
+                            name: 'Carbs',
+                            color: 'orange',
+                            y: parseFloat($scope.calorieIntakeGraph.carbo)
+                        }, {
+                            name: 'Fibre',
+                            color: '#ffcc00',
+                            y: parseFloat($scope.calorieIntakeGraph.fibre)
+                        }]
+                },  {
+                    type: 'spline',
+                    name: 'Average',
+                    data: [
+                        parseFloat($scope.calorieIntakeGraph.averageprotein),
+                        parseFloat($scope.calorieIntakeGraph.averagefat),
+                        parseFloat($scope.calorieIntakeGraph.averagecarbo),
+                        parseFloat($scope.calorieIntakeGraph.averagefibre)],
+                    marker: {
+                        lineWidth: 1,
+                        lineColor: Highcharts.getOptions().colors[1],
+                        fillColor: 'white'
+                    }
+                }]
+            });
+
+        },function(){
+            errorMessage(Flash, "Please try again later!");
+        });
+    };
+
+    $scope.graphOne=function(){
+        $scope.graphs=1;
+    };
+
+    $scope.graphTwo=function(){
+        $scope.graphs=2;
+    };
+
+    $scope.loadSessionFood=function(){
+        switch(parseInt($scope.graphSessionId)){
+            case 1:$scope.userSessionFoods=$scope.userFoodDiaryDataAll.BreakFast;
+                break;
+            case 2:$scope.userSessionFoods=$scope.userFoodDiaryDataAll.Brunch;
+                break;
+            case 3:$scope.userSessionFoods=$scope.userFoodDiaryDataAll.Lunch;
+                break;
+            case 4:$scope.userSessionFoods=$scope.userFoodDiaryDataAll.Evening;
+                break;
+            case 5: $scope.userSessionFoods=$scope.userFoodDiaryDataAll.Dinner;
+                break;
+            default :break;
+        }
+        $scope.goGetSessionGraph($scope.graphSessionId);
+    };
+
+    $scope.goGetSessionGraph = function(id){
+        $scope.loaded=true;
+        var date;
+        if($scope.selectedDate==selectedDate){
+            date = $scope.selectedDate;
+        }
+        else{
+            date = $scope.selectedDate.format("dd/mm/yyyy");
+        }
+        $scope.storedSessionId = id;
+
+        if(!$scope.storedSessionId){}
+        else{
+            requestHandler.postRequest("user/getDailyCalorieGraphWithSession/",{"date":date,"sessionid":id}).then(function(response){
+                $scope.calorieIntakeGraph=response.data.Calorie_Graph;
+                $scope.graphResponse=response.data.Response_status;
+                if($scope.calorieIntakeGraph.fat=="") $scope.calorieIntakeGraph.fat=0;
+                if($scope.calorieIntakeGraph.protein=="") $scope.calorieIntakeGraph.protein=0;
+                if($scope.calorieIntakeGraph.fibre=="") $scope.calorieIntakeGraph.fibre=0;
+                if($scope.calorieIntakeGraph.carbo=="") $scope.calorieIntakeGraph.carbo=0;
+
+                $scope.totalUnits = $scope.calorieIntakeGraph.fat+$scope.calorieIntakeGraph.protein+$scope.calorieIntakeGraph.fibre+$scope.calorieIntakeGraph.carbo;
+
+                $('#sessionGraph').highcharts({
+                    title: {
+                        text: ''
+                    },
+                    xAxis: {
+                        categories: ['Protein', 'Fat', 'Carbs', 'Fibre'],
+                        labels: {
+                            useHTML: true,
+                            formatter: function() {
+                                if(this.value == "Protein")
+                                    return this.value+'<br/><img src="../../images/i-protein.jpg"/>';
+                                else if(this.value == "Fat")
+                                    return '&nbsp;&nbsp;'+this.value+'&nbsp;&nbsp;'+'<br/><img src="../../images/i-fats.jpg"/>';
+                                else if(this.value == "Carbs")
+                                    return this.value+'<br/><img src="../../images/i-carbs.jpg"/>';
+                                else if(this.value == "Fibre")
+                                    return this.value+'<br/><img src="../../images/i-fibre.jpg"/>';
+                                else
+                                    return this.value;
+                            }
+                        }
+                    },
+                    tooltip:{
+                        enabled:true,
+                        backgroundColor:'rgba(255, 255, 255, 1)',
+                        borderWidth:1,
+                        shadow:true,
+                        style:{fontSize:'10px',padding:5,zIndex:500},
+                        formatter:false
+                    },
+                    yAxis:{
+                        title: {
+                            text: null
+                        },
+                        min: 0, max: $scope.totalUnits,
+                        labels:{
+                            style:{
+                                fontSize:'10px'
+                            }
+                        }
+                    },
+                    exporting: {
+                        enabled: false
+                    },
+                    credits: {
+                        enabled: false
+                    },
+                    legend:{enabled:false},
+                    series: [{
+                        type: 'column',
+                        showInLegend:false,
+                        name:'Unit',
+                        data: [
+                            {
+                                name: 'Protein',
+                                color: 'limegreen',
+                                y: parseFloat($scope.calorieIntakeGraph.protein)
+                            }, {
+                                name: 'Fat',
+                                color: 'red',
+                                y: parseFloat($scope.calorieIntakeGraph.fat)
+                            }, {
+                                name: 'Carbs',
+                                color: 'orange',
+                                y: parseFloat($scope.calorieIntakeGraph.carbo)
+                            }, {
+                                name: 'Fibre',
+                                color: '#ffcc00',
+                                y: parseFloat($scope.calorieIntakeGraph.fibre)
+                            }]
+                    }]
+                });
+                $scope.loaded=false;
+
+            },function(){
+                errorMessage(Flash, "Please try again later!");
+            });
+        }
+    };
+
+    $scope.doGetCoachAdvices = function(){
+        requestHandler.getRequest("user/getCoachAdvicesByUser/", "").then(function(response){
+
+            //To get frequently asked exercise
+            var advicePromise=UserDashboardService.getCoachIndividualDetail(response.data.Coach_Advice);
+
+            var emptyCoach=[{coachid: "n1",coachname: ""},{coachid: "n2",coachname: ""},{coachid: "n3",coachname: ""},{coachid: "n4",coachname: ""}];
+
+            if(advicePromise.length<3){
+                for(i=advicePromise.length;i<3;i++){
+                    advicePromise.push(emptyCoach[i]);
+                }
+            }
+            else{
+                advicePromise.push(emptyCoach[0]);
+            }
+
+            $scope.coachadvice =advicePromise;
+            $scope.usercoachadvicedetails=$scope.coachadvice[0];
+
+            $scope.coachAdviceCarousel();
+
+        },function(){
+            console.log("Please try again later!");
+        });
+    };
+
+    $scope.setCoachDeatails=function(mycoachadvice){
+        $scope.usercoachadvicedetails=mycoachadvice;
+    };
+
+    $scope.getHistory=function(){
+        $scope.historyReport=1;
+        if($('#history-start').val()=='') $scope.isHistoryEmpty=1;
+        else $scope.isHistoryEmpty=0;
+    };
+
+    $scope.otherThanHistory=function(){
+        $scope.historyReport=0;
+    };
+
+    $scope.setHistoryType=function(id){
+        $scope.historyType=id;
+        if($('#history-start').val()==''){}
+        else $scope.doGetHistoryReport();
+    };
+
+    $scope.doGetHistoryReport=function(){
+        $scope.isHistoryEmpty=0;
+        $scope.loaded=true;
+        var startDate;
+        var endDate;
+        if($('#history-start').val()==''){
+            startDate = endDate = selectedDate;
+        }
+        else{
+            startDate = $('#history-start').val();
+            endDate = $('#history-end').val();
+        }
+        var monthNames= ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+        var historyReport = [];
+        var titles={};
+        if($scope.historyType==1){
+            requestHandler.postRequest("user/calorieGraphbyDates/", {"fromdate":startDate,"todate":endDate}).then(function(response){
+                $scope.historyRecord=response.data.calorieGraphbyDates;
+                $.each($scope.historyRecord, function(index,value) {
+                    var history = [];
+                    var date = value.date.split("/");
+                    history.push(monthNames[(date[1]-1)]+' '+date[0]);
+                    history.push(parseFloat(value.calorie));
+                    historyReport.push(history);
+                });
+                titles.title="Calories Intaken Graph ( "+startDate+" - "+endDate+" )";
+                titles.name="Calories Gained";
+                titles.suffix=" cals";
+                titles.yaxis="Calories (cal)";
+                titles.color='limegreen';
+                $scope.drawHistoryGraph(historyReport,titles);
+            });
+        }
+        else if($scope.historyType==2){
+            requestHandler.postRequest("user/getCalorieBurntGraphByDates/", {"fromdate":startDate,"todate":endDate}).then(function(response){
+                $scope.historyRecord=response.data.CalorieBurntGraphbyDates;
+                $.each($scope.historyRecord, function(index,value) {
+                    var history = [];
+                    var date = value.date.split("/");
+                    history.push(monthNames[(date[1]-1)]+' '+date[0]);
+                    history.push(parseFloat(value.calorie));
+                    historyReport.push(history);
+                });
+                titles.title="Calories Brunt Graph ( "+startDate+" - "+endDate+" )";
+                titles.name="Calories Burned";
+                titles.suffix=" cals";
+                titles.yaxis="Calories (cal)";
+                titles.color='red';
+                $scope.drawHistoryGraph(historyReport,titles);
+            });
+        }
+        else if($scope.historyType==3){
+            requestHandler.postRequest("user/getExerciseMinutesUsingDates/", {"fromdate":startDate,"todate":endDate}).then(function(response){
+                $scope.historyRecord=response.data.ExerciseMinutesUsingDates;
+                $.each($scope.historyRecord, function(index,value) {
+                    var history = [];
+                    var date = value.date.split("/");
+                    history.push(monthNames[(date[1]-1)]+' '+date[0]);
+                    history.push(parseFloat(value.workoutvalue));
+                    historyReport.push(history);
+                });
+                titles.title="Exercise Minutes Graph ( "+startDate+" - "+endDate+" )";
+                titles.name="Exercise Minutes";
+                titles.suffix=" mints";
+                titles.yaxis="Minutes";
+                titles.color='blue';
+                $scope.drawHistoryGraph(historyReport,titles);
+            });
+        }else{
+            requestHandler.postRequest("/user/getWeightLogGraph/", {"startdate":startDate,"enddate":endDate}).then(function(response){
+                $scope.historyRecord=response.data.Weight_logs;
+                $.each($scope.historyRecord, function(index,value) {
+                    var history = [];
+                    var date = value.date.split("/");
+                    history.push(monthNames[(date[1]-1)]+' '+date[0]);
+                    history.push(parseFloat(value.weight));
+                    historyReport.push(history);
+                });
+                titles.title="Weight Log Graph ( "+startDate+" - "+endDate+" )";
+                titles.name="Weight Log";
+                titles.suffix=" Kgs";
+                titles.yaxis="Weight (Kgs)";
+                titles.color='#f8ba01';
+                $scope.drawHistoryGraph(historyReport,titles);
+            });
+        }
+
+    };
+
+    $scope.drawHistoryGraph=function(data,titles){
+        $scope.loaded=false;
+        $('#historyGraph').highcharts({
+            title: {
+                text: titles.title
+            },
+            xAxis: {
+                categories: []
+            },
+            tooltip:{
+                enabled:true,
+                backgroundColor:'rgba(255, 255, 255, 1)',
+                borderWidth:1,
+                shadow:true,
+                style:{fontSize:'10px',padding:5,zIndex:500},
+                formatter:false,
+                valueSuffix: titles.suffix
+            },
+            yAxis: {
+                title: {
+                    text: titles.yaxis
+                },
+                plotLines: [{
+                    value: 0,
+                    width: 1,
+                    color:titles.color
+                }]
+            },
+            colors: [
+                titles.color
+            ],
+            exporting: {
+                enabled: false
+            },
+            credits: {
+                enabled: false
+            },
+            legend:{enabled:false},
+            series: [ {
+                name: titles.name,
+                data: data
+            }]
+        });
+    };
+
+    //To Display current date
+    var selectedDate = new Date();
+    var dd = selectedDate.getDate();
+    var mm = selectedDate.getMonth()+1; //January is 0!
+
+    var yyyy = selectedDate.getFullYear();
+    if(dd<10){
+        dd='0'+dd
+    }
+    if(mm<10){
+        mm='0'+mm
+    }
+    selectedDate = dd+'/'+mm+'/'+yyyy;
+    $scope.weightLogDate = selectedDate;
+    $scope.selectedDate = selectedDate;
+    $scope.todayDate = selectedDate;
+    $window.goalStartDate = $window.goalEndDate = selectedDate;
+
+    //Initialize
+    $scope.initialLoadFoodAndExercise=function(){
+        if($scope.selectedDate==selectedDate){
+            $scope.loadFoodDiary($scope.selectedDate);
+            $scope.loadExerciseDiary($scope.selectedDate);
+            $scope.doGetIntakeBruntByDate($scope.selectedDate);
+            $scope.goGetDailyIntakeGraph($scope.selectedDate);
+        }
+        else{
+            $scope.loadFoodDiary($scope.selectedDate.format("dd/mm/yyyy"));
+            $scope.loadExerciseDiary($scope.selectedDate.format("dd/mm/yyyy"));
+            $scope.doGetIntakeBruntByDate($scope.selectedDate.format("dd/mm/yyyy"));
+            $scope.goGetDailyIntakeGraph($scope.selectedDate.format("dd/mm/yyyy"));
+        }
+        $scope.doGetWeightGoal();
+        $scope.doGetWeightLog(selectedDate);
+        $scope.goGetSessionGraph($scope.storedSessionId);
+    };
+
+    $scope.initialLoadFoodAndExercise();
+    $scope.doGetCoachAdvices();
+
+    //circle round
+    $scope.offset =         0;
+    $scope.timerCurrent =   0;
+    $scope.uploadCurrent =  0;
+    $scope.stroke =         12;
+    $scope.radius =         70;
+    $scope.isSemi =         false;
+    $scope.rounded =        false;
+    $scope.responsive =     false;
+    $scope.clockwise =      true;
+    $scope.bgColor =        '#ddd';
+    $scope.duration =       1000;
+    $scope.currentAnimation = 'easeOutCubic';
+
+    $scope.animations = [];
+
+    angular.forEach(roundProgressService.animations, function(value, key){
+        $scope.animations.push(key);
+    });
+
+    $scope.getStyle = function(){
+        var transform = ($scope.isSemi ? '' : 'translateY(-50%) ') + 'translateX(-50%)';
+
+        return {
+            'top': $scope.isSemi ? 'auto' : '50%',
+            'bottom': $scope.isSemi ? '5%' : 'auto',
+            'left': '50%',
+            'transform': transform,
+            '-moz-transform': transform,
+            '-webkit-transform': transform
+        };
+    };
+
+    var getPadded = function(val){
+        return val < 10 ? ('0' + val) : val;
+    };
+
+    //Date Picker
+    $scope.prevent=function(){
+        event.preventDefault();
+    };
+
+    /*$scope.dpOpened = {
+     opened: false,
+     opened1: false
+     };
+
+     $scope.open = function ($event,opened) {
+     $event.preventDefault();
+     $event.stopPropagation();
+     $scope.dpOpened[opened] = true;
+     };*/
+
+    $scope.open = function ($event) {
+        $event.preventDefault();
+        $event.stopPropagation();
+        $scope.opened = true;
+    };
+
+    $scope.format = "dd/MM/yyyy";
+
+    var dateFormat = function () {
+        var    token = /d{1,4}|m{1,4}|yy(?:yy)?|([HhMsTt])\1?|[LloSZ]|"[^"]*"|'[^']*'/g,
+            timezone = /\b(?:[PMCEA][SDP]T|(?:Pacific|Mountain|Central|Eastern|Atlantic) (?:Standard|Daylight|Prevailing) Time|(?:GMT|UTC)(?:[-+]\d{4})?)\b/g,
+            timezoneClip = /[^-+\dA-Z]/g,
+            pad = function (val, len) {
+                val = String(val);
+                len = len || 2;
+                while (val.length < len) val = "0" + val;
+                return val;
+            };
+
+        // Regexes and supporting functions are cached through closure
+        return function (date, mask, utc) {
+            var dF = dateFormat;
+
+            // You can't provide utc if you skip other args (use the "UTC:" mask prefix)
+            if (arguments.length == 1 && Object.prototype.toString.call(date) == "[object String]" && !/\d/.test(date)) {
+                mask = date;
+                date = undefined;
+            }
+
+            // Passing date through Date applies Date.parse, if necessary
+            date = date ? new Date(date) : new Date;
+            if (isNaN(date)) throw SyntaxError("invalid date");
+
+            mask = String(dF.masks[mask] || mask || dF.masks["default"]);
+
+            // Allow setting the utc argument via the mask
+            if (mask.slice(0, 4) == "UTC:") {
+                mask = mask.slice(4);
+                utc = true;
+            }
+
+            var    _ = utc ? "getUTC" : "get",
+                d = date[_ + "Date"](),
+                D = date[_ + "Day"](),
+                m = date[_ + "Month"](),
+                y = date[_ + "FullYear"](),
+                H = date[_ + "Hours"](),
+                M = date[_ + "Minutes"](),
+                s = date[_ + "Seconds"](),
+                L = date[_ + "Milliseconds"](),
+                o = utc ? 0 : date.getTimezoneOffset(),
+                flags = {
+                    d:    d,
+                    dd:   pad(d),
+                    ddd:  dF.i18n.dayNames[D],
+                    dddd: dF.i18n.dayNames[D + 7],
+                    m:    m + 1,
+                    mm:   pad(m + 1),
+                    mmm:  dF.i18n.monthNames[m],
+                    mmmm: dF.i18n.monthNames[m + 12],
+                    yy:   String(y).slice(2),
+                    yyyy: y,
+                    h:    H % 12 || 12,
+                    hh:   pad(H % 12 || 12),
+                    H:    H,
+                    HH:   pad(H),
+                    M:    M,
+                    MM:   pad(M),
+                    s:    s,
+                    ss:   pad(s),
+                    l:    pad(L, 3),
+                    L:    pad(L > 99 ? Math.round(L / 10) : L),
+                    t:    H < 12 ? "a"  : "p",
+                    tt:   H < 12 ? "am" : "pm",
+                    T:    H < 12 ? "A"  : "P",
+                    TT:   H < 12 ? "AM" : "PM",
+                    Z:    utc ? "UTC" : (String(date).match(timezone) || [""]).pop().replace(timezoneClip, ""),
+                    o:    (o > 0 ? "-" : "+") + pad(Math.floor(Math.abs(o) / 60) * 100 + Math.abs(o) % 60, 4),
+                    S:    ["th", "st", "nd", "rd"][d % 10 > 3 ? 0 : (d % 100 - d % 10 != 10) * d % 10]
+                };
+
+            return mask.replace(token, function ($0) {
+                return $0 in flags ? flags[$0] : $0.slice(1, $0.length - 1);
+            });
+        };
+    }();
+
+    // Some common format strings
+    dateFormat.masks = {
+        "default":      "ddd mmm dd yyyy HH:MM:ss",
+        shortDate:      "m/d/yy",
+        mediumDate:     "mmm d, yyyy",
+        longDate:       "mmmm d, yyyy",
+        fullDate:       "dddd, mmmm d, yyyy",
+        shortTime:      "h:MM TT",
+        mediumTime:     "h:MM:ss TT",
+        longTime:       "h:MM:ss TT Z",
+        isoDate:        "yyyy-mm-dd",
+        isoTime:        "HH:MM:ss",
+        isoDateTime:    "yyyy-mm-dd'T'HH:MM:ss",
+        isoUtcDateTime: "UTC:yyyy-mm-dd'T'HH:MM:ss'Z'"
+    };
+
+    // Internationalization strings
+    dateFormat.i18n = {
+        dayNames: [
+            "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat",
+            "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"
+        ],
+        monthNames: [
+            "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec",
+            "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"
+        ]
+    };
+
+    // For convenience...
+    Date.prototype.format = function (mask, utc) {
+        return dateFormat(this, mask, utc);
+    };
+
+}).constant('uibdatepickerPopupConfig', {
+    datepickerPopup: "dd/MM/yyyy",
+    closeOnDateSelection: true,
+    appendToBody: true,
+    showButtonBar: false
+}).constant('uibDatepickerConfig', {
+    formatDay: 'dd',
+    formatMonth: 'MMMM',
+    formatYear: 'yyyy',
+    formatDayHeader: 'EEE',
+    formatDayTitle: 'MMMM yyyy',
+    formatMonthTitle: 'yyyy',
+    datepickerMode: 'day',
+    minMode: 'day',
+    maxMode: 'year',
+    showWeeks: false,
+    startingDay: 0,
+    yearRange: 20,
+    minDate: null,// mm/dd/yyyy
+    maxDate: new Date()// mm/dd/yyyy
+});
+
+// render image to view in list
+userApp.filter('trusted', ['$sce', function ($sce) {
+    return function(url) {
+        return $sce.trustAsResourceUrl(url);
+    };
+}]);
+
+/*userApp.filter('reverse', function() {
+ return function(items) {
+ return items.slice().reverse();
+ };
+ });*/
+
+// Graph chart
+userApp.directive('hcGraph', function () {
+    return {
+        restrict: 'C',
+        replace: true,
+        scope: {
+            graph: '='
+        },
+        controller: function ($scope, $element, $attrs) {
+        },
+        template: '<div id="graph-container" style="margin: 0 auto;height: 300px">not working</div>',
+        link: function (scope, element, attrs) {
+            var chart = new Highcharts.Chart({
+                chart: {
+                    renderTo: 'graph-container',
+                    plotBackgroundColor: null,
+                    plotBorderWidth: null,
+                    plotShadow: false
+                },
+                title: {
+                    text: 'Goal Graph',
+                    x: -20 //center
+                },
+                subtitle: {
+                    text: '',
+                    x: -20
+                },
+                xAxis: {
+                    categories: []
+                },
+                yAxis: {
+                    title: {
+                        text: 'Weight (Kgs)'
+                    },
+                    plotLines: [{
+                        value: 0,
+                        width: 1,
+                        color: '#f8ba01'
+                    }]
+                },
+                tooltip: {
+                    valueSuffix: 'Kgs'
+                },
+
+                colors: [
+                    '#f8ba01'
+                ],
+                legend: {
+                    layout: 'vertical',
+                    align: 'right',
+                    verticalAlign: 'middle',
+                    borderWidth: 0,
+                    x: 80,
+                    y: 0
+                },
+                series: [ {
+                    name: 'Weight',
+                    data: []
+                }],
+                exporting: {
+                    enabled: false
+                },
+                credits: {
+                    enabled: false
+                }
+            });
+            scope.$watch("graph", function (newValue) {
+                chart.series[0].setData(newValue, true);
+            }, true);
+
+        }
+    }
+});
+
+// Graph chart
+userApp.directive('historyGraph', function () {
+    return {
+        restrict: 'C',
+        replace: true,
+        scope: {
+            historygraph: '='
+        },
+        controller: function ($scope, $element, $attrs) {
+        },
+        template: '<div id="graph-container" style="height: 400px;width: 67%">not working</div>',
+        link: function (scope, element, attrs) {
+            var chart = new Highcharts.Chart({
+                chart: {
+                    renderTo: 'graph-container',
+                    plotBackgroundColor: null,
+                    plotBorderWidth: null,
+                    plotShadow: false
+                },
+                title: {
+                    text: scope.test,
+                    x: -20 //center
+                },
+                subtitle: {
+                    text: '',
+                    x: -20
+                },
+                xAxis: {
+                    categories: []
+                },
+                yAxis: {
+                    title: {
+                        text: 'Weight (Kgs)'
+                    },
+                    plotLines: [{
+                        value: 0,
+                        width: 1,
+                        color: '#ff0066'
+                    }]
+                },
+                tooltip: {
+                    valueSuffix: 'Kgs'
+                },
+
+                colors: [
+                    '#ff0066'
+                ],
+                legend: {
+                    layout: 'vertical',
+                    align: 'right',
+                    verticalAlign: 'middle',
+                    borderWidth: 0,
+                    x: 80,
+                    y: 0
+                },
+                series: [ {
+                    name: 'Weight',
+                    data: []
+                }],
+                exporting: {
+                    enabled: false
+                },
+                credits: {
+                    enabled: false
+                }
+            });
+            scope.$watch("historygraph", function (newValue) {
+                chart.series[0].setData(newValue, true);
+            }, true);
+        }
+    }
+});
+
+userApp.directive('heightFoodBind', function() {
+    return {
+        link: function($scope, $element) {
+            $scope.$watch(function() {
+                setTimeout(function(){
+                    var selectclass = $('.food');
+                    if ($element.height()>parseInt($('.food_scrollbar').css('height'))) {
+                        selectclass.css({"paddingRight":"15px"});
+                    } else {
+                        selectclass.css({"paddingRight":"3px"});
+                    }
+                }, 500);
+            });
+        }
+    }
+});
+
+userApp.directive('heightExerciseBind', function() {
+    return {
+        link: function($scope, $element) {
+            $scope.$watch(function() {
+                setTimeout(function(){
+                    var selectclass = $('.exercise');
+                    if ($element.height()>parseInt($('.exercise-height').css('height'))) {
+                        selectclass.css({"paddingRight":"15px"});
+                    } else {
+                        selectclass.css({"paddingRight":"3px"});
+                    }
+                }, 500);
+            });
+        }
+    }
+});
+
+userApp.directive('shouldFocus', function(){
+    return {
+        restrict: 'A',
+        link: function(scope,element,attrs){
+            scope.$watch(attrs.shouldFocus,function(newVal,oldVal){
+                if (newVal) {
+                    element[0].scrollIntoView(false);
+                }
+            });
+        }
+    };
+});
+
+/*userApp.directive('dropDownHeight', function(){
+ return {
+ link: function($scope, $element) {
+ $scope.$watch(function() {
+ setTimeout(function(){
+ var selectclass = $('.custom-popup-wrapper .dropdown-menu li');
+ if ($element.height()==parseInt($('.custom-popup-wrapper .dropdown-menu').css('max-height'))) {
+ selectclass.css({"paddingRight":"10px"});
+ } else {
+ selectclass.css({"paddingRight":"0"});
+ }
+ }, 0);
+ });
+ }
+ }
+ });*/
+

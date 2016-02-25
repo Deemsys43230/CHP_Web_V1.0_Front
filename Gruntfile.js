@@ -12,7 +12,7 @@ module.exports=function(grunt){
                 files: [
                     {
                         expand: true,
-                        src: ['app/*.js','app/**/*.js'],
+                        src: ['app/*.js','app/**/*.js','!app/userDashboard/userDashboardController.js'],
                         dest: 'CyberHealth/',
                         ext: '.js'
                     }
