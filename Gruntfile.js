@@ -51,13 +51,25 @@ module.exports=function(grunt){
 
                }]
            }
+       },
+       cssmin: {
+           target: {
+               files: [{
+                   expand: true,
+                   src: ['css/site-font.css'],
+                   dest: 'Cyberhealth/',
+                   ext: '.css'
+               }]
+           }
        }
+
    });
 	grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-imagemin');
     grunt.loadNpmTasks('grunt-contrib-htmlmin');
+    grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-newer');
     grunt.registerTask('default', ['newer:uglify', 'watch']);
 };
