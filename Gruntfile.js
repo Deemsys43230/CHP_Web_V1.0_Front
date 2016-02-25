@@ -56,7 +56,7 @@ module.exports=function(grunt){
            target: {
                files: [{
                    expand: true,
-                   src: ['css/site-font.css'],
+                   src: ['css/*.css','!css/style.css'],
                    dest: 'Cyberhealth/',
                    ext: '.css'
                }]
