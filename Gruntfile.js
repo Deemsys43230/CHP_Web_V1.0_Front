@@ -37,12 +37,27 @@ module.exports=function(grunt){
                    dest: 'CyberHealth/'                  // Destination path prefix
                }]
            }
-   }
+   },
+       htmlmin: {                                     // Task
+           dist: {                                      // Target
+               options: {                                 // Target options
+                   removeComments: true,
+                   collapseWhitespace: true
+               },
+               files: [{
+                   expand:true,
+                   src: ['views/**/*.html'],   // Actual patterns to match
+                   dest: 'CyberHealth/'
+
+               }]
+           }
+       }
    });
 	grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-imagemin');
+    grunt.loadNpmTasks('grunt-contrib-htmlmin');
     grunt.loadNpmTasks('grunt-newer');
     grunt.registerTask('default', ['newer:uglify', 'watch']);
 };

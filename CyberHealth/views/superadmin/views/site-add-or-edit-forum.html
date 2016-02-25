@@ -1,42 +1,5 @@
-
-<!-- Start Page Banner -->
-
-<div class="container" ng-cloak class="ng-cloak">
-    <div class="row">
-
-        <div class="col-md-3">
-            <h4 class="classic-title"><span>Site Management</span></h4>
-            <div ng-include src="'views/site-menu.html'" onload="activeClass"></div>
-        </div>
-        <div class="col-md-9" ng-init="editForumInit()">
-            <a href="#forums" class="back-button pull-right margin-left-10"><i class="fa fa-arrow-circle-o-left"></i> Back to Forum List</a>
-            <h4 class="classic-title"><span><i class="fa fa-pencil"></i> &nbsp;{{title}}</span></h4>
-            <div class="row">
-                <form name="ForumForm" class="margin-top-10" novalidate>
-                    <div class="col-md-2">
-                        <h4>Title :</h4>
-                    </div>
-                    <div class="col-md-10 margin-bottom-20">
-
-                        <input class="form-control" name="title" ng-model="forumDetails.posttitle" maxlength="200" required>
-                            <span ng-show="ForumForm.title.$dirty&&ForumForm.title.$invalid">
-                                  <span class="error-message" ng-show="ForumForm.title.$error.required"><span>Required.</span></span>
-                             </span>
-                    </div>
-                    <div ng-if="loaded">
-                        <div class="loader-style">
-                            <div class="loader"></div>
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <h4>Content :</h4>
-                    </div>
-                    <div class="col-md-10">
-                            <span ng-show="ForumForm.description.$dirty&&ForumForm.description.$invalid">
-                                  <span class="error-message textarea-errormessage40" ng-show="ForumForm.description.$error.required"><span>Required.</span></span>
-                             </span>
-                        <textarea type="text" class="height-150 form-control" name="description" ng-model="forumDetails.postdescription" maxlength="300"  required/></textarea>
-                        <!-- <div summernote config="options" name="description"  ng-model="forumDetails.postdescription" required></div>-->
+<div class="container" ng-cloak class="ng-cloak"><div class="row"><div class="col-md-3"><h4 class="classic-title"><span>Site Management</span></h4><div ng-include src="'views/site-menu.html'" onload="activeClass"></div></div><div class="col-md-9" ng-init="editForumInit()"><a href="#forums" class="back-button pull-right margin-left-10"><i class="fa fa-arrow-circle-o-left"></i> Back to Forum List</a><h4 class="classic-title"><span><i class="fa fa-pencil"></i> &nbsp;{{title}}</span></h4><div class="row"><form name="ForumForm" class="margin-top-10" novalidate><div class="col-md-2"><h4>Title :</h4></div><div class="col-md-10 margin-bottom-20"><input class="form-control" name="title" ng-model="forumDetails.posttitle" maxlength="200" required> <span ng-show="ForumForm.title.$dirty&&ForumForm.title.$invalid"><span class="error-message" ng-show="ForumForm.title.$error.required"><span>Required.</span></span></span></div><div ng-if="loaded"><div class="loader-style"><div class="loader"></div></div></div><div class="col-md-2"><h4>Content :</h4></div><div class="col-md-10"><span ng-show="ForumForm.description.$dirty&&ForumForm.description.$invalid"><span class="error-message textarea-errormessage40" ng-show="ForumForm.description.$error.required"><span>Required.</span></span></span><textarea type="text" class="height-150 form-control" name="description" ng-model="forumDetails.postdescription" maxlength="300" required>
+                        
                     </div>
                 </form>
             </div>
@@ -49,5 +12,5 @@
     </div>
 </div>
 
-<!-- End Page Banner -->
+
 <script type="text/javascript" src="../../js/script.js"></script>

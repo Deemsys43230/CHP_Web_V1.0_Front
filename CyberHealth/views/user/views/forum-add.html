@@ -1,59 +1,8 @@
-
-<!-- Start Page Banner -->
-
-<div class="section service" ng-cloak class="ng-cloak">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-3 min-height-450">
-                <div ng-if="loaded">
-                    <div class="loader-style">
-                        <div class="loader"></div>
-                    </div>
-                </div>
-                <h4 class="classic-title"><span>Most Viewed</span></h4>
-                <div id="showMostViewed">
-                    <div ng-repeat="userforum in userforumlist | limitTo:20 | orderBy:'-totalcomment'">
-                        <h5 class="forum-topic wrap" ng-click="doGetNewsDetailsByUser(userforum.postid)">{{userforum.posttitle}}</h5>
-                        <hr/>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-9  min-height-450" >
-                <div class="col-md-12">
-                    <a href="#forumDetails/{{forumDetails.postid}}" class="back-button pull-right margin-left-10" ng-hide="isNew"><i class="fa fa-arrow-circle-o-left"></i> Back to Forum</a>
-                    <a href="#forums" class="back-button pull-right margin-left-10" ng-show="isNew"><i class="fa fa-arrow-circle-o-left"></i> Back to Forums List</a>
-                    <h3 class="margin-bottom-10"><i class="fa fa-pencil"></i> &nbsp;{{title}}</h3>
-                    <div class="col-md-12 no-padding">
-                        <hr/>
-                    </div>
-                </div>
-
-                <div class="col-md-12 no-padding margin-top-10">
-                    <form name="ForumForm" novalidate>
-                        <div class="col-md-2 margin-top-7">
-                            <h4>Title :</h4>
-                        </div>
-                        <div class="col-md-10 margin-bottom-10">
-                            <input class="search-input" name="title" ng-model="forumDetails.posttitle" maxlength="200" required>
-                            <span ng-show="ForumForm.title.$dirty&&ForumForm.title.$invalid">
-                                  <span class="error-message" ng-show="ForumForm.title.$error.required"><span>Required.</span></span>
-                             </span>
-                        </div>
-                        <div ng-if="loaded">
-                            <div class="loader-style">
-                                <div class="loader"></div>
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <h4 class="margin-top-20">Content :</h4>
-                        </div>
-                        <div class="col-md-10">
-                            <textarea type="text" class="height-150 forum-textarea" name="description" ng-model="forumDetails.postdescription" maxlength="300"  required/></textarea>
+<div class="section service" ng-cloak class="ng-cloak"><div class="container"><div class="row"><div class="col-md-3 min-height-450"><div ng-if="loaded"><div class="loader-style"><div class="loader"></div></div></div><h4 class="classic-title"><span>Most Viewed</span></h4><div id="showMostViewed"><div ng-repeat="userforum in userforumlist | limitTo:20 | orderBy:'-totalcomment'"><h5 class="forum-topic wrap" ng-click="doGetNewsDetailsByUser(userforum.postid)">{{userforum.posttitle}}</h5><hr></div></div></div><div class="col-md-9 min-height-450"><div class="col-md-12"><a href="#forumDetails/{{forumDetails.postid}}" class="back-button pull-right margin-left-10" ng-hide="isNew"><i class="fa fa-arrow-circle-o-left"></i> Back to Forum</a> <a href="#forums" class="back-button pull-right margin-left-10" ng-show="isNew"><i class="fa fa-arrow-circle-o-left"></i> Back to Forums List</a><h3 class="margin-bottom-10"><i class="fa fa-pencil"></i> &nbsp;{{title}}</h3><div class="col-md-12 no-padding"><hr></div></div><div class="col-md-12 no-padding margin-top-10"><form name="ForumForm" novalidate><div class="col-md-2 margin-top-7"><h4>Title :</h4></div><div class="col-md-10 margin-bottom-10"><input class="search-input" name="title" ng-model="forumDetails.posttitle" maxlength="200" required> <span ng-show="ForumForm.title.$dirty&&ForumForm.title.$invalid"><span class="error-message" ng-show="ForumForm.title.$error.required"><span>Required.</span></span></span></div><div ng-if="loaded"><div class="loader-style"><div class="loader"></div></div></div><div class="col-md-2"><h4 class="margin-top-20">Content :</h4></div><div class="col-md-10"><textarea type="text" class="height-150 forum-textarea" name="description" ng-model="forumDetails.postdescription" maxlength="300" required>
                              <span ng-show="ForumForm.description.$dirty&&ForumForm.description.$invalid">
                                   <span class="error-message textarea-errormessage40" ng-show="ForumForm.description.$error.required"><span>Required.</span></span>
                              </span>
-                            <!--<div summernote config="options" name="description"  ng-model="forumDetails.postdescription" required></div>-->
+                            
                         </div>
                     </form>
                 </div>
@@ -68,5 +17,5 @@
     </div>
 </div>
 
-<!-- End Page Banner -->
+
 <script type="text/javascript" src="../../js/script.js"></script>
