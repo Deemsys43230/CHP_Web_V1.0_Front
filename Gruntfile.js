@@ -3,8 +3,8 @@ module.exports=function(grunt){
         watch: {
         	options: { nospawn: true },
             scripts: {
-                files: ['app/*.js','app/**/*.js'],
-                tasks: ['newer:uglify']
+                files: ['app/*.js','app/**/*.js','css/*.css','!css/style.css','images/*.{png,jpg,gif}','images/**/*.{png,jpg,gif}','views/**/*.html','!views/user/views/dashboard.html'],
+                tasks: ['newer:uglify','newer:cssmin','newer:imagemin','newer:htmlmin']
             }
         },
         uglify  : {
@@ -46,7 +46,7 @@ module.exports=function(grunt){
                },
                files: [{
                    expand:true,
-                   src: ['views/**/*.html'],   // Actual patterns to match
+                   src: ['views/**/*.html','!views/user/views/dashboard.html'],   // Actual patterns to match
                    dest: 'CyberHealth/'
 
                }]
@@ -64,7 +64,7 @@ module.exports=function(grunt){
        }
 
    });
-	grunt.loadNpmTasks('grunt-contrib-watch');
+	  grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-imagemin');
