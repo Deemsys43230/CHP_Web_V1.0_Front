@@ -12,7 +12,7 @@ module.exports=function(grunt){
                 files: [
                     {
                         expand: true,
-                        src: ['angular/output.js'],
+                        src: ['app/*.js','app/**/*.js','angular/output.js','!app/userDashboard/userDashboardController.js'],
                         dest: 'CyberHealth/'
                     }
                 ]
@@ -55,7 +55,7 @@ module.exports=function(grunt){
            target: {
                files: [{
                    expand: true,
-                   src: ['css/*.css','!css/style.css'],
+                   src: ['css/*.css','plugin/**/*.css','!css/style.css'],
                    dest: 'Cyberhealth/',
                    ext: '.css'
                }]
