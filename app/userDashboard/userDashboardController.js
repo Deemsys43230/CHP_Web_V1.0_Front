@@ -1293,7 +1293,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
             $scope.coachadvice =advicePromise;
             $scope.usercoachadvicedetails=$scope.coachadvice[0];
 
-            $scope.coachAdviceCarousel();
+           coachAdviceCarousel();
 
         },function(){
             console.log("Please try again later!");
