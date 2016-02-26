@@ -121,7 +121,6 @@ adminApp.controller('ForumsEditController',['$scope','requestHandler','Flash','$
     };
 
     $scope.doPostForumAnswers=function(){
-
         requestHandler.postRequest("postAnswer/",{"comments":$scope.comments,"postid":$routeParams.id}).then(function(response){
             successMessage(Flash,"Comment Posted Successfully!");
             $scope.doGetForumAnswers();
@@ -282,9 +281,7 @@ userApp.controller('ForumsUserController',['$scope','requestHandler','Flash','$r
     };
 
     $scope.doPostForumAnswers=function(){
-
         requestHandler.postRequest("postAnswer/",{"comments":$scope.comments,"postid":$routeParams.id}).then(function(response){
-            successMessage(Flash,"Your Comment Successfully Posted!");
             $scope.doGetForumAnswers();
             $scope.comments='';
             $scope.userCommentForm.$setPristine();

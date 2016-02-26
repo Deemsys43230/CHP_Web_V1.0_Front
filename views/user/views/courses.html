@@ -4,14 +4,14 @@
 <div class="page-banner1" ng-cloak class="ng-cloak">
     <div id="w" class="clearfix">
         <div id="demography-content" class="height-auto"  ng-init="courseinit()">
-            <div class="col-md-12">
+            <div class="col-lg-12 col-md-12 col-sm-12">
                 <div class="margin-rl">
-                    <div flash-message="2000" class="col-md-3 no-padding pull-right"></div>
+                    <div flash-message="2000" class="col-lg-3 col-md-3 col-sm-3 no-padding pull-right"></div>
                     <h5 class="classic-title"><a href="#myCourses"><i class="fa fa-male"></i>&nbsp;&nbsp;MY COURSES</a>&nbsp;&nbsp;|&nbsp;&nbsp;<span><a href="#courses"><i class="fa fa-search"></i>&nbsp;&nbsp;COURSE SEARCH</a></span></h5>
                 </div>
             </div>
 
-            <div class="col-md-12 margin-bottom-15">
+            <div class="col-lg-12 col-md-12 col-sm-12 margin-bottom-15">
                 <div ng-if="loaded">
                     <div class="loader-style">
                         <div class="loader"></div>
@@ -19,7 +19,6 @@
                 </div>
 
                 <div id="callCarousel">
-
                     <div ng-repeat="coursesByCategory in allCategoryCourses">
                         <div class="latest-posts margin-bottom-10"  ng-if="coursesByCategory.categoryCourses.length>0">
                             <span ng-if="coursesByCategory.categoryCourses.length>3"><a href="#courseCategory/{{coursesByCategory.categoryid}}" class="course-controller pull-right"><span><i class="fa fa-eye"></i> View all courses</span></a></span>
@@ -31,18 +30,18 @@
                                         <div class="dashboard arrange">
                                             <span ng-hide="courses.enrollmentStatus==0"><img class="user-course-status" src="../../images/enrolled.png"></span>
                                             <div class="course-grid-user">
-                                                <div class="col-md-6 margin-top-5">
+                                                <div class="col-lg-6 col-md-6 col-sm-6 margin-top-5 course-info-grid-user">
                                                     <h4 class="course-name wrap" title="{{courses.coursename}}">{{courses.coursename}}</h4>
                                                     <p class="margin-top-10">{{courses.enrollcount}} users</p>
                                                 </div>
-                                                <div class="col-md-6 no-padding">
+                                                <div class="col-lg-6 col-md-6 col-sm-6 no-padding">
                                                     <img class="course-image" ng-src="{{courses.promoimage | trusted}}">
                                                     <div class="text-bold" ng-if="courses.price==0"><span class="course-price free">Free</span></div>
                                                     <div class="text-bold" ng-if="courses.price!=0"><span class="course-price cost">{{courses.price}}$</span></div>
                                                 </div>
-                                                <div class="col-md-12 margin-top-5">
-                                                    <div class="col-md-2 no-padding margin-top-5"><img class="course-author-img" ng-src="{{courses.imageurl | trusted}}"></div>
-                                                    <div class="col-md-10 no-padding">
+                                                <div class="col-lg-12 col-md-12 col-sm-12 margin-top-5">
+                                                    <div class="col-lg-2 col-md-3 col-sm-3 no-padding margin-top-5"><img class="course-author-img" ng-src="{{courses.imageurl | trusted}}"></div>
+                                                    <div class="col-lg-10 col-md-9 col-sm-9 no-padding">
                                                         <h5 class="line-clamp-xlg">{{courses.ownername}}</h5><br/>
                                                         <p class="line-clamp-xlg">{{courses.specialistin}}</p>
                                                     </div>
@@ -57,9 +56,9 @@
                     </div>
 
                     <div ng-hide="showCourseSearch" class="margin-top-50">
-                        <div class="col-md-5">
+                        <div class="col-lg-5 col-md-5 col-sm-5">
                             <img class="margin-top-20 pull-right" src="../../images/no-courses.png"></div>
-                        <div class="col-md-7">
+                        <div class="col-lg-7 col-md-7 col-sm-7">
                             <h1 class="text-gray margin-top-50">NO COURSE PUBLISHED!!!</h1><br/>
                             <h4 class="text-italic text-gray">No course found</h4>
                         </div>
@@ -88,8 +87,8 @@
                 lazyLoad : true,
                 items : 3,
                 itemsDesktop : [1000,3],
-                itemsDesktopSmall : [900,2],
-                itemsTablet: [600,2],
+                itemsDesktopSmall : [900,3],
+                itemsTablet: [600,3],
                 itemsMobile : false,
                 transitionStyle : "goDown"
             });

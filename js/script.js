@@ -26,11 +26,33 @@ $(document).ready(function ($) {
 	/*----------------------------------------------------*/
 	/*	Nav Menu & Search
 	/*----------------------------------------------------*/
-	
-	$(".nav > li:has(ul)").addClass("drop");
-	$(".nav > li.drop > ul").addClass("dropdown");
-	$(".nav > li.drop > ul.dropdown ul").addClass("sup-dropdown");
-	
+
+	//$(".nav > li:has(ul)").addClass("drop");
+
+    var dropdownselector = $(".nav.dropdownmenu > li");
+
+    dropdownselector.removeClass("drop");
+
+    dropdownselector.click(function(){
+        dropdownselector.addClass("drop");
+    });
+
+    $(".nav.dropdownmenu > li.drop").click(function(){
+        this.removeClass("drop");
+    });
+
+    $(document).mouseup(function (e)
+    {
+        var container = $(".nav.dropdownmenu > li.drop");
+
+        if (!container.is(e.target) // if the target of the click isn't the container...
+            && container.has(e.target).length === 0) // ... nor a descendant of the container
+        {
+            container.removeClass("drop");
+        }
+    });
+
+
 	$('.show-search').click(function() {
 		$('.search-form').fadeIn(300);
 		$('.search-form input').focus();

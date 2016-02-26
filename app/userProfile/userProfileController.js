@@ -4637,6 +4637,31 @@ userApp.directive('validFile',function(){
     }
 });
 
+
+userApp.directive('widthAboutMe', function() {
+    return {
+        link: function($scope, $element) {
+            $scope.$watch(function() {
+                setTimeout(function(){
+                    var windowheight=$("html").width();
+                    if(windowheight<1200&&windowheight>992){
+                        windowheight = Math.round((49*windowheight)/100);
+                        $('.profile_input_textarea').css({"width":windowheight+"px"});
+                    }else if(windowheight>1200){
+                        windowheight = Math.round((52.5*windowheight)/100);
+                        $('.profile_input_textarea').css({"width":windowheight+"px"});
+                    }
+                    else if(windowheight<=992&&windowheight>=479){
+                        windowheight = Math.round((37*windowheight)/100);
+                        $('.profile_input_textarea').css({"width":windowheight+"px"});
+                    }
+
+                }, 0);
+            });
+        }
+    }
+});
+
 /*
 userApp.directive('numbersOnly', function(){
     return {

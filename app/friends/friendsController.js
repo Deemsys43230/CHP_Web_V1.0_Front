@@ -1,5 +1,5 @@
 
-var userApp = angular.module('userApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','friendsServiceModule']);
+var userApp = angular.module('userApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','friendsServiceModule','angular-nicescroll']);
 
 userApp.controller('FriendsController',['$scope','requestHandler','Flash','FriendsService','$sce',function($scope,requestHandler,Flash,FriendsService,$sce){
 

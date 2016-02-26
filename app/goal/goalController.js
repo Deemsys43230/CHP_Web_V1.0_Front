@@ -1,7 +1,7 @@
 /**
  * Created by Deemsys on 9/21/2015.
  */
-var userApp= angular.module('userApp', ['ngRoute','oc.lazyLoad','ngCookies','requestModule','flash','ngAnimate','angularUtils.directives.dirPagination']);
+var userApp= angular.module('userApp', ['ngRoute','oc.lazyLoad','ngCookies','requestModule','flash','ngAnimate','angularUtils.directives.dirPagination','angular-nicescroll']);
 
 userApp.controller('GoalController',['$scope','requestHandler','Flash','$route','$routeParams','$location',function($scope,requestHandler,Flash,$route,$routeParams,$location) {
 

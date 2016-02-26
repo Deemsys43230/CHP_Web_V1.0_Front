@@ -16,28 +16,26 @@
             <span ng-if="subscribed==1"><a href="#coach" class="btn-sm btn-warning pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i>&nbsp;Back</a></span>
             <span ng-if="subscribed==1"><a id="modal_review" ng-click="reset()" href="#review" class="btn-sm btn-success pull-right margin-left-5"><i class="fa fa-plus-circle"></i> Add Reviews</a></span>
             <h4 class="classic-title"><span>Reviews</span></h4>
-            <div class="content_scrollbar">
-                <ul class="remove-style">
-                    <li ng-repeat="reviews in coachReviews">
-                        <div class="col-md-1 no-padding">
-                            <img class="img-circle" ng-src="{{reviews.review_imageurl | trusted}}">
-                        </div>
-                        <div class="col-md-4">
-                            <strong>{{reviews.review_username}}</strong><br/>
-                            <span class="small-font text-gray">{{reviews.reviewddatetime}}</span>
-                        </div>
-                        <div class="col-md-5">
-                            <strong>{{reviews.reviewtitle}}</strong><br/>
-                            <span class="small-font text-gray">{{reviews.reviewdescription}}</span>
-                        </div>
+            <div class="content_scrollbar" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#eee'}">
+                <div ng-repeat="reviews in coachReviews" class="margin-right-10">
+                    <div class="col-lg-1 col-md-1 col-sm-1 no-padding">
+                        <img class="img-circle" ng-src="{{reviews.review_imageurl | trusted}}">
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4">
+                        <strong class="wrap">{{reviews.review_username}}</strong><br/>
+                        <span class="small-font text-gray">{{reviews.reviewddatetime}}</span>
+                    </div>
+                    <div class="col-lg-5 col-md-4 col-sm-4">
+                        <strong>{{reviews.reviewtitle}}</strong><br/>
+                        <span class="small-font text-gray wrap">{{reviews.reviewdescription}}</span>
+                    </div>
 
-                        <div class="col-md-2">
-                            Ratings : {{reviews.ratinglevel}}<br/>
-                            <average-star-rating ng-model="reviews.ratinglevel"  max="5"></average-star-rating>
-                        </div>
-                        <div class="col-md-12 margin-tb-5"><hr/></div>
-                    </li>
-                </ul>
+                    <div class="col-lg-2 col-md-3 col-sm-3 no-padding">
+                        Ratings : {{reviews.ratinglevel}}<br/>
+                        <average-star-rating ng-model="reviews.ratinglevel" max="5"></average-star-rating>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 no-padding margin-tb-5"><hr/></div>
+                </div>
             </div>
         </div>
     </div>

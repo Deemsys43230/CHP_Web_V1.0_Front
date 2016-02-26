@@ -4,7 +4,7 @@
 <div class="page-banner1" ng-cloak class="ng-cloak">
     <div id="w" class="clearfix">
         <div id="demography-content" class="height-auto" ng-init="viewinit()">
-            <div class="col-md-12">
+            <div class="col-lg-12 col-md-12 col-sm-12">
                 <div class="margin-rl">
                    <span ng-hide="courseDetails.enrollmentStatus==0" ng-if="courseDetails.role=='user'"> <a href="#myCourses" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back</a></span>
                    <span ng-show="courseDetails.enrollmentStatus==0" ng-if="courseDetails.role=='user'"><a href="#courses" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back</a></span>
@@ -18,52 +18,48 @@
                         </div>
                     </div>
                     <div class="row margin-top-10 margin-bottom-10">
-                        <div class="col-md-3">
+                        <div class="col-lg-3 col-md-4 col-sm-4">
                             <img class="margin-bottom-15" src="{{courseDetails.promoimage | trusted}}">
-                            <div class="col-md-2 no-padding margin-top-5"><img class="course-author-img" src="{{courseDetails.imageurl | trusted}}"></div>
-                            <div class="col-md-10"><h5>{{courseDetails.ownername}}<br><small>{{courseDetails.specialistin}}</small></h5></div>
-                            <div class="col-md-12 margin-top-10 no-padding">
+                            <div class="col-lg-2 col-md-2 col-sm-2 no-padding margin-top-5"><img class="course-author-img" src="{{courseDetails.imageurl | trusted}}"></div>
+                            <div class="col-lg-10 col-md-10 col-sm-10"><h5>{{courseDetails.ownername}}<br><small>{{courseDetails.specialistin}}</small></h5></div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 margin-top-10 no-padding">
 
-                                <h5 class="row text-muted">
-                                    <span class="col-md-6">Category</span>
-                                    <span class="col-md-6 no-padding">: {{courseDetails.categoryname}}</span>
-                                    <span class="col-md-6">Price</span>
-                                    <span class="col-md-6 no-padding">
-                                        : <span ng-show="courseDetails.price==0" class="text-green text-bold">Free</span>
+                                <h5 class="row text-muted font-resize">
+                                    <span class="col-lg-6 col-md-6 col-sm-6">Category<span class="pull-right">:</span></span>
+                                    <span class="col-lg-6 col-md-6 col-sm-6 no-padding">{{courseDetails.categoryname}}</span>
+                                    <span class="col-lg-6 col-md-6 col-sm-6">Price<span class="pull-right">:</span></span>
+                                    <span class="col-lg-6 col-md-6 col-sm-6 no-padding">
+                                        <span ng-show="courseDetails.price==0" class="text-green text-bold">Free</span>
                                         <span ng-hide="courseDetails.price==0" class="text-red text-bold">{{courseDetails.price}} $</span>
                                     </span>
-                                    <span class="col-md-6">No.of Sections</span>
-                                    <span class="col-md-6 no-padding">
-                                        :  {{sectionList.length}}
-                                    </span>
-                                    <span class="col-md-6">No.of Enrolls</span>
-                                    <span class="col-md-6 no-padding">
-                                        : <span ng-show="courseDetails.enrollcount==0">----</span>
+                                    <span class="col-lg-6 col-md-6 col-sm-6">No.of Sections<span class="pull-right">:</span></span>
+                                    <span class="col-lg-6 col-md-6 col-sm-6 no-padding">{{sectionList.length}}</span>
+                                    <span class="col-lg-6 col-md-6 col-sm-6">No.of Enrolls<span class="pull-right">:</span></span>
+                                    <span class="col-lg-6 col-md-6 col-sm-6 no-padding">
+                                        <span ng-show="courseDetails.enrollcount==0">----</span>
                                         <span ng-hide="courseDetails.enrollcount==0">{{courseDetails.enrollcount}}</span>
                                     </span>
-                                    <span class="col-md-6" ng-if="courseDetails.role=='admin'">Created On</span>
-                                    <span class="col-md-6 no-padding" ng-if="courseDetails.role=='admin'">: {{courseDetails.createdon}}</span>
-
-                                    <span class="col-md-6" ng-if="courseDetails.role=='admin'">Reviewed On</span>
-                                    <span class="col-md-6 no-padding" ng-if="courseDetails.role=='admin'">
-                                        : <span ng-show="!courseDetails.reviewdate" ng-if="courseDetails.role=='admin'">----</span>
+                                    <span class="col-lg-6 col-md-6 col-sm-6" ng-if="courseDetails.role=='admin'">Created On<span class="pull-right">:</span></span>
+                                    <span class="col-lg-6 col-md-6 col-sm-6 no-padding" ng-if="courseDetails.role=='admin'">{{courseDetails.createdon}}</span>
+                                    <span class="col-lg-6 col-md-6 col-sm-6" ng-if="courseDetails.role=='admin'">Reviewed On<span class="pull-right">:</span></span>
+                                    <span class="col-lg-6 col-md-6 col-sm-6 no-padding" ng-if="courseDetails.role=='admin'">
+                                        <span ng-show="!courseDetails.reviewdate" ng-if="courseDetails.role=='admin'">----</span>
                                         <span ng-hide="!courseDetails.reviewdate"  ng-if="courseDetails.role=='admin'">{{courseDetails.reviewdate}}</span>
                                     </span>
-                                    <span class="col-md-6" >Published On</span>
-                                    <span class="col-md-6 no-padding" >
-                                        : <span ng-show="!courseDetails.publishedon" >----</span>
+                                    <span class="col-lg-6 col-md-6 col-sm-6" >Published On<span class="pull-right">:</span></span>
+                                    <span class="col-lg-6 col-md-6 col-sm-6 no-padding" >
+                                        <span ng-show="!courseDetails.publishedon" >----</span>
                                         <span ng-hide="!courseDetails.publishedon">{{courseDetails.publishedon}}</span>
                                     </span>
-
                                 </h5>
                                 <!--<h5 class="margin-top-10" ng-show="courseDetails.enrollmentStatus==0"><i class="fa fa-users text-gray"></i> - {{courseDetails.enrollcount}} Students</h5>
                                 <h5 class="margin-top-10"><i class="fa fa-book text-gray"></i> - {{sectionList.length}} Sections</h5>-->
                             </div>
-                            <span ng-show="courseDetails.enrollmentStatus==0" ng-if="courseDetails.role=='user'"><a href=""class="col-md-12 suggest_button margin-top-10 btn" ng-disabled="enrollButtonStatus" ng-click="doEnrollCourse(courseDetails.courseid)"><span ng-show="enrollButtonStatus==true"><span class="three-quarters-loader">Loading…</span></span>&nbsp;{{entrolling}}</a></span>
-                            <span ng-show="courseDetails.publishedon==null" ng-if="courseDetails.role=='admin'" ><a href="" id="modal_trigger1" class="col-md-12 suggest_button margin-top-10 btn" ng-click="acceptModal(courseDetails.courseid)">Accept this course</a></span>
-                            <span ng-show="courseDetails.publishedon==null" ng-if="courseDetails.role=='admin'"><a href="" class="col-md-12 suggest_button red_button modal_trigger btn" ng-click="modal(courseDetails.courseid)">Reject this course</a></span>
+                            <span ng-show="courseDetails.enrollmentStatus==0" ng-if="courseDetails.role=='user'"><a href=""class="col-lg-12 col-md-12 col-sm-12 suggest_button margin-top-10 btn" ng-disabled="enrollButtonStatus" ng-click="doEnrollCourse(courseDetails.courseid)"><span ng-show="enrollButtonStatus==true"><span class="three-quarters-loader">Loading…</span></span>&nbsp;{{entrolling}}</a></span>
+                            <span ng-show="courseDetails.publishedon==null" ng-if="courseDetails.role=='admin'" ><a href="" id="modal_trigger1" class="col-lg-12 col-md-12 col-sm-12 suggest_button margin-top-10 btn" ng-click="acceptModal(courseDetails.courseid)">Accept this course</a></span>
+                            <span ng-show="courseDetails.publishedon==null" ng-if="courseDetails.role=='admin'"><a href="" class="col-lg-12 col-md-12 col-sm-12 suggest_button red_button modal_trigger btn" ng-click="modal(courseDetails.courseid)">Reject this course</a></span>
                         </div>
-                        <div class="col-md-9">
+                        <div class="col-lg-9 col-md-8 col-sm-8">
                             <h2 class="wrap">{{courseDetails.coursename}}</h2>
                             <h4 class="text-muted margin-tb-10 wrap">{{courseDetails.coursesubtitle}}</h4>
                             <p class="margin-tb-10 wrap"  ng-bind-html="courseDetails.coursedescription | html"></p>
@@ -151,10 +147,9 @@
 <script type="text/javascript">
     $("#modal_trigger1").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
     $(".modal_trigger").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
-
 </script>
-<style>
 
+<style>
     [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
         display: none !important;
     }

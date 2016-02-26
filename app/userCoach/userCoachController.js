@@ -1,4 +1,4 @@
-var userApp = angular.module('userApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','angularUtils.directives.dirPagination']);
+var userApp = angular.module('userApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','angularUtils.directives.dirPagination','angular-nicescroll']);
 
 userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$location','$q','$routeParams',function($scope,requestHandler,Flash,$location,$q,$routeParams) {
 

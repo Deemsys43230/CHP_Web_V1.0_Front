@@ -35,7 +35,7 @@
 }
 
 @media (max-width: 991px) {
-	
+
 	.boxed-page, .boxed-page header {
 		width: 100%;
 	}
@@ -49,27 +49,9 @@
 		padding: 4px 8px;
 	}
 	
-	.contact-details {
-		display: none!important;
-	}
-	
-	.navbar-brand {
-		padding: 25px 15px;
-	}
-	
 	.navbar-default .navbar-nav {
 		margin: 0 !important;
 		top: 0;
-	}
-
-	ul.social-list {
-		float: none !important;
-		text-align: center;
-	}
-
-	ul.social-list li {
-		float: none !important;
-		display: inline-block;
 	}
 
 	.quote-buttons {
@@ -104,7 +86,7 @@
 	ul.breadcrumbs li {
 		float: none;
 		display: inline-block;
-		float: left\0/;
+		float: left;
 	}
 	
 	.portfolio-4 .portfolio-item {
@@ -190,6 +172,14 @@
 		float: none;
 		width: 100%;
 	}
+
+    .popupContainer{
+        width:600px !important;
+    }
+
+    .popupHeader {
+        width:600px !important;
+    }
 
 	.history-content {
 		float: none;
@@ -375,7 +365,13 @@
 
 
 @media (min-width : 768px) and (max-width: 991px) {
-    
+
+    body {
+        background: url(../images/gym-1.jpg) fixed no-repeat;
+        background-size: 100% auto;
+        -webkit-background-size: 100% auto;
+    }
+
     #main-slide .slider-content h2{
 		font-size: 52px;
 	}
@@ -422,4 +418,269 @@
 		display: none;
 	}
     
+}
+
+@media (min-width: 768px){
+
+    .search-list-form.override form input{
+        width: 250px !important;
+    }
+
+    a.price-button{
+        padding: 5px 24px;
+    }
+
+    ul.features{
+        font-size: 11px;
+    }
+
+    .friends-scroll-responsive{
+        height: 400px!important;
+    }
+
+    h5.classic-title.friend{
+        font-size: 16px!important;
+        line-height: 14px!important;
+    }
+
+    #profile{
+        height: 730px;
+    }
+
+    #profile-content{
+        height: 730px;
+    }
+
+    .service-box-image-responsive{
+        margin-top: 90px;
+    }
+
+    .service-center .service-content h4 {
+        font-size: 14px;
+    }
+
+    .service-icon i{
+        font-size: 25px;
+        height: 70px;
+        width: 70px;
+        border-radius: 100%;
+        line-height: 65px;
+        box-shadow: inset 0 0 0 3px #f2f2f2;
+        -webkit-box-shadow: inset 0 0 0 3px #f2f2f2;
+    }
+
+    .service-icon i:hover {
+        box-shadow: inset 0 0 0 3px #f8ba01;
+        -webkit-box-shadow: inset 0 0 0 3px #f8ba01;
+    }
+
+    .service-content-right{
+        text-align: right;
+        margin-top: 0;
+    }
+
+    .service-content-left{
+        text-align: left;
+        margin-top: 0;
+    }
+
+    input[type=radio]+ label
+    {
+        padding:5px 15px
+    }
+
+    .container{
+        width: 95% !important;
+    }
+
+}
+
+@media (min-width: 992px){
+
+    .search-list-form.override form input{
+        width: 240px !important;
+    }
+
+    ul.features{
+        font-size: 12px;
+    }
+
+    a.price-button{
+        padding: 6px 27px;
+    }
+
+    .friends-scroll-responsive{
+        height: 330px!important;
+    }
+
+    h5.classic-title.friend{
+        font-size: 12px!important;
+        line-height: 16px!important;
+    }
+
+    #profile{
+        height: 490px;
+    }
+
+    #profile-content{
+        height: 490px;
+    }
+
+    input[type=radio]+ label
+    {
+        padding:5px 10px
+    }
+
+    .service-box-image-responsive{
+        margin-top: 25px;
+    }
+
+    .profile-image{
+        width:180px;
+        height:180px;
+    }
+
+    .spinner-profile{
+        width:180px:
+        height:180px;
+        padding:78px 81px;
+    }
+
+    .service-center .service-content h4 {
+        font-size: 15px;
+    }
+
+    .service-icon i{
+        font-size: 35px;
+        height: 90px;
+        width: 90px;
+        border-radius: 100%;
+        line-height: 85px;
+        box-shadow: inset 0 0 0 4px #f2f2f2;
+        -webkit-box-shadow: inset 0 0 0 4px #f2f2f2;
+    }
+
+    .service-icon i:hover {
+        box-shadow: inset 0 0 0 4px #f8ba01;
+        -webkit-box-shadow: inset 0 0 0 4px #f8ba01;
+    }
+
+    .service-content-right{
+        text-align: right;
+        margin-top: 5px;
+    }
+
+    .service-content-left{
+        text-align: left;
+        margin-top: 5px;
+    }
+
+    .contact-widget ul li {
+        font-size: 12px;
+        margin-bottom: 7px;
+    }
+}
+
+@media (min-width: 1100px) and (max-width: 1250px){
+    h5.classic-title.friend{
+        font-size: 13px!important;
+        line-height: 17px!important;
+    }
+}
+
+@media (min-width: 1250px){
+    h5.classic-title.friend{
+        font-size: 14px!important;
+        line-height: 18px!important;
+    }
+
+    a.price-button{
+        padding: 10px 37px;
+    }
+}
+
+
+@media (min-width: 1200px){
+
+    .search-list-form.override form input{
+        padding: 3px 10px !important;
+        width: 300px;
+    }
+
+    ul.features{
+        font-size: 14px;
+    }
+
+    a.price-button{
+        padding: 7px 30px;
+    }
+
+    .friends-scroll-responsive{
+        height: 380px!important;
+    }
+
+    #profile{
+        height: 490px;
+    }
+
+    #profile-content{
+        height: 490px;
+    }
+
+    input[type=radio]+ label
+    {
+        padding:5px 15px
+    }
+
+    .service-box-image-responsive{
+        margin-top: 10px;
+    }
+
+    .profile-image{
+        width:200px;
+        height:200px;
+    }
+
+
+    .spinner-profile{
+        width: 200px:
+        height:200px!important;
+        padding:89px 92px;
+    }
+
+    .service-icon i{
+        font-size: 48px;
+        height: 110px;
+        width: 110px;
+        border-radius: 100%;
+        line-height: 105px;
+        box-shadow: inset 0 0 0 5px #f2f2f2;
+        -webkit-box-shadow: inset 0 0 0 5px #f2f2f2;
+    }
+
+    .service-icon i:hover {
+        box-shadow: inset 0 0 0 5px #f8ba01;
+        -webkit-box-shadow: inset 0 0 0 5px #f8ba01;
+    }
+
+    .service-content-right{
+        text-align: right;
+        margin-top: 20px;
+    }
+
+    .service-content-left{
+        text-align: left;
+        margin-top: 20px;
+    }
+
+    .contact-widget ul li {
+        font-size: 14px;
+        margin-bottom: 10px;
+    }
+}
+
+@media (min-width: 992px) and (max-width: 1200px){
+    .container{
+        width: 95%;
+    }
 }

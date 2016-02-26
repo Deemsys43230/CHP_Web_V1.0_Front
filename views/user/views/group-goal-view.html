@@ -2,45 +2,45 @@
 <div class="page-banner1" ng-cloak class="ng-cloak">
     <div id="w" class="clearfix">
         <div id="demography-content">
-            <div class="col-md-12">
+            <div class="col-lg-12 col-md-12 col-sm-12">
                 <span ng-show="isRequest">
                     <a href="#groupGoalRequest" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back</a>
                 </span>
                 <span ng-hide="isRequest">
                     <a href="#groupGoal" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back</a>
                 </span>
-                <div flash-message="2000" class="col-md-4 pull-right no-padding"></div>
+                <div flash-message="2000" class="col-lg-4 col-md-4 col-sm-4 pull-right no-padding"></div>
                 <h5 class="classic-title"><span><a href=""><i class="fa fa-bullseye"></i>&nbsp;&nbsp;GOAL DETAILS</a></span></h5>
             </div>
-            <div class="col-md-6">
+            <div class="col-lg-6 col-md-6 col-sm-6">
                 <div ng-if="loaded">
                     <div class="loader-style">
                         <div class="loader"></div>
                     </div>
                 </div>
-                <div class="col-md-4 no-padding">
+                <div class="col-lg-4 col-md-4 col-sm-4 no-padding">
                     <span ng-show="goalDetail.goaltype==1"><br/><img src="../../images/weight-loss.png"></span>
                     <span ng-show="goalDetail.goaltype==2"><img src="../../images/weight-gain.png"></span>
                 </div>
-                <div class="col-md-8">
+                <div class="col-lg-8 col-md-8 col-sm-8">
                     <h4>{{goalDetail.title}}&nbsp;</h4>
                     <p class="margin-top-5">{{goalDetail.description}}&nbsp;</p><br/>
-                    <div class="col-md-2 no-padding height-60">
+                    <div class="col-lg-2 col-md-2 col-sm-2 no-padding height-60">
                         <img class="img-circle" ng-src="{{goalDetail.user_imageurl|trusted}}">
                     </div>
-                    <div class="col-md-10">
+                    <div class="col-lg-10 col-md-10 col-sm-10">
                         <h6>Created By</h6>
                         <p>{{goalDetail.user_name}}&nbsp;</p>
                     </div>
-                    <div class="col-md-12 no-padding margin-top-10">
-                        <div class="col-md-3 no-padding">
+                    <div class="col-lg-12 col-md-12 col-sm-12 no-padding margin-top-10">
+                        <div class="col-lg-4 col-md-5 col-sm-6 no-padding">
                             <div class="text-bold">Start Date <span class="pull-right">:</span></div>
                             <div class="text-bold">End Date <span class="pull-right">:</span></div>
                             <div class="text-bold">Goal Type <span class="pull-right">:</span></div>
                             <div class="text-bold">Goal Status <span class="pull-right">:</span></div>
                             <div class="text-bold">Participants <span class="pull-right">:</span></div>
                         </div>
-                        <div class="col-md-8">
+                        <div class="col-lg-8 col-md-7 col-sm-6">
                             <div>{{goalDetail.startdate}}</div>
                             <div>{{goalDetail.enddate}}</div>
                             <div>
@@ -54,7 +54,7 @@
                             <div>{{goalMembers.length}}</div>
                         </div>
                     </div>
-                    <div class="col-md-12 no-padding margin-top-20" ng-hide="goalDetail.status==2">
+                    <div class="col-lg-12 col-md-12 col-sm-12 no-padding margin-top-10" ng-hide="goalDetail.status==2">
                         <div ng-show="isRequest">
                             <span><a href="" class="target_button green_button" ng-click="doAcceptGroup()">Join Group</a></span>
                             <span><a class="target_button red_button" ng-click="doExitConfirmation()">Exit from Goal</a></span>
@@ -68,31 +68,34 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-lg-6 col-md-6 col-sm-6">
                 <div ng-if="loaded">
                     <div class="loader-style">
                         <div class="loader"></div>
                     </div>
                 </div>
                 <div ng-hide="goalDetail.status==2">
-                    <input class="pull-right friend-search" placeholder="Search member here..." ng-model="searchfriend"/>
-                    <h4 class="margin-top-5">Members List</h4>
-                    <hr/>
-                    <div class="content_scrollbar height-335">
-
+                    <div>
+                        <input class="pull-right friend-search" placeholder="Search member here..." ng-model="searchfriend"/>
+                        <h4>Members List</h4>
+                    </div>
+                    <div class="margin-top-15">
+                        <hr/>
+                    </div>
+                    <div class="height-335" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#eee'}">
                         <div ng-show="(goalMembers | startsWithLetter:searchfriend).length>0">
                             <div ng-repeat="member in goalMembers | startsWithLetter:searchfriend | orderBy:'-isownerstatus'">
-                                <div class="col-md-1 no-padding">
+                                <div class="col-lg-1 col-md-1 col-sm-1 no-padding">
                                     <img class="img-circle" ng-src="{{member.user_imageurl|trusted}}">
                                 </div>
-                                <div class="col-md-6">
-                                    <h4>{{member.user_name}}</h4>
+                                <div class="col-lg-6 col-md-5 col-sm-5">
+                                    <h4 class="wrap">{{member.user_name}}</h4>
                                 </div>
-                                <div class="col-md-2">
+                                <div class="col-lg-2 col-md-3 col-sm-3">
                                     <span ng-show="member.status==1"><strong class="text-green text-bold">Joined</strong></span>
                                     <span ng-show="member.status==0"><strong class="text-orange">Pending</strong></span>
                                 </div>
-                                <div class="col-md-3 margin-top-3">
+                                <div class="col-lg-3 col-md-3 col-sm-3 margin-top-3">
                                     <div ng-show="goalDetail.candelete==0">
                                         <span ng-show="member.isownerstatus==1"><a href="" class="invite_button disabled">Admin</a></span>
                                         <span ng-show="member.isownerstatus==0"><a href="" class="invite_button request_sent disabled">Member</a></span>
@@ -102,8 +105,10 @@
                                         <span ng-show="member.isownerstatus==0"><a href="" class="invite_button request_sent" ng-click="doRemoveMember(member.userid)">Remove</a></span>
                                     </div>
                                 </div>
-                                <div class="col-md-12 no-padding">
-                                    <hr/>
+                                <div class="col-lg-12 col-md-12 col-sm-12 no-padding">
+                                    <div class="margin-right-10">
+                                        <hr/>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -116,24 +121,26 @@
                 <div ng-show="goalDetail.status==2">
                     <h4 class="margin-top-5">Rank List</h4>
                     <hr/>
-                    <div class="content_scrollbar height-335">
+                    <div class="height-335" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#eee'}">
                         <div ng-repeat="ranking in rankList | orderBy:'rank'">
-                            <div class="col-md-2">
+                            <div class="col-lg-2 col-md-2 col-sm-2">
                                 <span ng-if="ranking.rank<4"><img ng-src="../../images/rank-{{ranking.rank}}.jpg"></span>
                                 <span ng-if="ranking.rank>=4"><img src="../../images/rank-high.png"></span>
                                 <div class="rank_circle">{{ranking.rank}}</div>
                             </div>
-                            <div class="col-md-1 no-padding">
+                            <div class="col-lg-1 col-md-1 col-sm-1 no-padding">
                                 <img class="img-circle" ng-src="{{ranking.user_imageurl|trusted}}">
                             </div>
-                            <div class="col-md-5">
-                                <h4>{{ranking.user_name}}</h4>
+                            <div class="col-lg-5 col-md-4 col-sm-4">
+                                <h4 class="wrap">{{ranking.user_name}}</h4>
                             </div>
-                            <div class="col-md-4 margin-top-3">
+                            <div class="col-lg-4 col-md-5 col-sm-5 margin-top-3">
                                 <strong class="text-green text-bold">Weight : {{ranking.weight}} Kgs</strong>
                             </div>
-                            <div class="col-md-12 no-padding">
-                                <hr/>
+                            <div class="col-lg-12 col-md-12 col-sm-12 no-padding">
+                                <div class="margin-right-10">
+                                    <hr/>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -155,23 +162,25 @@
         <div class="common_model">
             <input type="text" placeholder="Search friends here.." ng-model="friendsearch">
             <hr/>
-            <div class="margin-top-10 content_scrollbar height-350">
+            <div class="margin-top-10 height-350" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#eee'}">
                 <div ng-repeat="myFriends in myRemainderFriendsList  | startsWithLetterRemain:friendsearch" ng-show="!myRemainderFriendsList==0">
-                    <div class="col-md-1 no-padding">
-                        <img ng-src="{{myFriends.imageurl|trusted}}">
+                    <div class="col-lg-1 col-md-1 col-sm-1 no-padding">
+                        <img class="img-circle" ng-src="{{myFriends.imageurl|trusted}}">
                     </div>
-                    <div class="col-md-7">
-                        <h4>{{myFriends.name}}</h4>
+                    <div class="col-lg-7 col-md-7 col-sm-7">
+                        <h4 class="wrap">{{myFriends.name}}</h4>
                     </div>
-                    <div class="col-md-4 margin-top-10">
+                    <div class="col-lg-4 col-md-4 col-sm-4 margin-top-10">
                         <a href="" class="invite_button" ng-click="doAddMember(myFriends.userid)">Send Request</a>
                     </div>
-                    <div class="col-md-12 no-padding">
-                        <hr/>
+                    <div class="col-lg-12 col-md-12 col-sm-12 no-padding">
+                        <div class="margin-right-10">
+                            <hr/>
+                        </div>
                     </div>
                 </div>
                 <div ng-show="myRemainderFriendsList==0">
-                    <h1 class="col-md-12 margin-top-30 text-gray text-center">
+                    <h1 class="col-lg-12 col-md-12 col-sm-12 margin-top-30 text-gray text-center">
                         <img src="../../images/no-friend.png"><br/>
                         NO FRIENDS FOUND!!!<br/>
                         <a class="main-button modal_close margin-top-20" href="#friends">&nbsp;&nbsp;<i class="fa fa-users"></i>&nbsp;&nbsp;Find Friends Here&nbsp;&nbsp;</a>
@@ -194,21 +203,21 @@
         <!-- Register Form -->
         <div class="common_model">
             <div class="margin-top-10" ng-repeat="rank in rankList | limitTo:3">
-                <div class="col-md-2 no-padding text-center">
-                    <img ng-src="../../images/rank-{{rank.rank}}.jpg">
+                <div class="col-lg-2 col-md-2 col-sm-2 no-padding text-center">
+                    <img class="img-circle" ng-src="../../images/rank-{{rank.rank}}.jpg">
                 </div>
-                <div class="col-md-2">
-                    <img ng-src="{{rank.user_imageurl | trusted}}">
+                <div class="col-lg-2 col-md-2 col-sm-2">
+                    <img class="img-circle" ng-src="{{rank.user_imageurl | trusted}}">
                 </div>
-                <div class="col-md-8">
-                    <h4>{{rank.user_name}}</h4>
+                <div class="col-lg-8 col-md-8 col-sm-8">
+                    <h4 class="wrap">{{rank.user_name}}</h4>
                     <p>Weight : {{rank.weight}} kgs</p>
                 </div>
-                <div class="col-md-12 no-padding">
+                <div class="col-lg-12 col-md-12 col-sm-12 no-padding">
                     <hr/>
                 </div>
             </div>
-            <div class="col-md-12">
+            <div class="col-lg-12 col-md-12 col-sm-12">
                 <br/>
             </div>
         </div>
@@ -247,7 +256,10 @@
     <section class="popupBody">
         <!-- Register Form -->
         <div class="common_model">
-            <div>Are you sure want to leave from this Group?</div>
+            <div class="margin-top-20 text-center">
+                <img src="../../images/alert-ring.png"><br><br>
+                <h5 class="text-muted">Are you sure want to leave from this Group?</h5>
+            </div>
             <div class="action_btns margin-top-20">
                 <div class="one_half"><a href="" class="btn btn_red modal_close" ng-click="doExitGroup()">Yes</a></div>
                 <div class="one_half last modal_close"><a onclick="return false;" class="btn back_btn">No</a></div>
@@ -262,4 +274,3 @@
 <script type="text/javascript">
     $("#modal_trigger").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
 </script>
-
