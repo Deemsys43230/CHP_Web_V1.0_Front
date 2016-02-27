@@ -52,7 +52,7 @@ input:focus,a:focus
 	outline : none !important;
 }
 
-select::-ms-expand{
+select::-ms-expand {
     display: none;
 }
 
@@ -251,7 +251,7 @@ a.main-button.blue_back{
 }
 
 
-a.main-button, input{
+a.main-button, input[type="submit"] {
     display: inline-block;
     text-decoration: none;
     color: #fff;
@@ -270,12 +270,12 @@ a.main-button, input{
     -o-transition: all 0.2s ease-in-out;
 }
 
-a.main-button:hover, input:hover {
+a.main-button:hover, input[type="submit"]:hover {
 	background: #444;
 	color: #fff;
 }
 
-a.main-button:disabled, input:disabled {
+a.main-button:disabled, input[type="submit"]:disabled {
     opacity: 0.5;
 }
 
@@ -5792,15 +5792,15 @@ ul.footer-nav li a:hover {
 }
 
 .services-2 {
-    position:relative;
-    text-align:center;
-    margin:0px 0px 30px 0px;
+  position:relative;
+  text-align:center;
+  margin:0px 0px 30px 0px;
 }
 
 .services-2-icon {
-    display: inline-block;
-    width:100%;
-    display: table;
+  display: inline-block;
+  width:100%;
+  display: table;
 }
 
 .services-2-icon i {
@@ -5816,44 +5816,46 @@ ul.footer-nav li a:hover {
     text-align: center;
     font-size: 26px;
     background:#E93735;
-    color:#fff;
+  color:#fff;
     -webkit-transition: all .5s ease-in-out;
-    -moz-transition: all .5s ease-in-out;
-    -ms-transition: all .5s ease-in-out;
-    -o-transition: all .5s ease-in-out;
-    transition: all .5s ease-in-out;
+       -moz-transition: all .5s ease-in-out;
+        -ms-transition: all .5s ease-in-out;
+         -o-transition: all .5s ease-in-out;
+            transition: all .5s ease-in-out;
 }
 
+
+
 .services-2:hover .services-2-icon i {
-    display: block;
-    -webkit-transform: rotate(360deg);
-    -moz-transform: rotate(360deg);
-    -o-transform: rotate(360deg);
-    -ms-transform: rotate(360deg);
+  display: block;
+  -webkit-transform: rotate(360deg);
+  -moz-transform: rotate(360deg);
+  -o-transform: rotate(360deg);
+  -ms-transform: rotate(360deg);
 }
 
 .services-2-text {
-    margin-left:75px;
-    overflow:hidden;
+  margin-left:75px;
+  overflow:hidden;
 }
 
 .services-2-icon h4 {
-    font-family: 'Open Sans', sans-serif;
-    color: #404449;
-    font-size: 16px;
-    font-weight: 400;
-    margin: 15px 0 0 0;
-    text-align:left;
-    display: table-cell;
-    padding: 0;
-    vertical-align: middle;
-    width:100%;
+  font-family: 'Open Sans', sans-serif;
+  color: #404449;
+  font-size: 16px;
+  font-weight: 400;
+  margin: 15px 0px 0px 0px;
+  text-align:left;
+  display: table-cell;
+  padding: 0px;
+  vertical-align: middle;
+  width:100%;
 }
 
 .services-2 p {
-    color: #ACB2B8;
-    margin: 0;
-    text-align:left;
+  color: #ACB2B8;
+  margin: 0px 0px 0px 0px;
+  text-align:left;
 }
 
 
@@ -5895,8 +5897,8 @@ ul.footer-nav li a:hover {
  background:#ACB2B8;
  padding:3px 10px;
  color:#FFF;
- border-radius: 0;
- right:0;
+ border-radius: 0px;
+ right:0px;
     -webkit-transition: all .5s ease-in-out;
   -moz-transition: all .5s ease-in-out;
   -o-transition: all .5s ease-in-out;
@@ -6331,6 +6333,7 @@ label
 {
     background-color:#ccc;
     padding: 5px 12px;
+    mqargin-right:5px;
 }
 
 input[type=radio]
@@ -6341,10 +6344,6 @@ input[type=radio]:checked + label
 {
     background-color:#57cb85;
     color: #fff;
-}
-
-input[type=radio] + label{
-    margin-right: 3px;
 }
 
 input.user {
@@ -6892,7 +6891,10 @@ ul.tabs li.active{
 .content_scrollbar
 {
     height: 350px;
+    width: 100%;
+    background: none;
     overflow-y: scroll;
+    overflow-x:hidden;
     word-wrap: break-word;
 }
 
@@ -6904,9 +6906,9 @@ ul.tabs li.active{
 .search-content{
     width: 100%;
     height: auto;
-    -webkit-box-shadow: 0 0 3px rgba(0,0,0,0.3);
-    -moz-box-shadow: 0 0 3px rgba(0,0,0,0.3);
-    box-shadow: 0 0 3px rgba(0,0,0,0.3);
+    -webkit-box-shadow: 0px 0px 3px rgba(0,0,0,0.3);
+    -moz-box-shadow: 0px 0px 3px rgba(0,0,0,0.3);
+    box-shadow: 0px 0px 3px rgba(0,0,0,0.3);
     padding: 8px;
 }
 
@@ -6914,9 +6916,9 @@ ul.tabs li.active{
     margin: 5px 0 0 10px;
     width: 97%;
     height: 340px;
-    -webkit-box-shadow: 0 0 3px rgba(0,0,0,0.3);
-    -moz-box-shadow: 0 0 3px rgba(0,0,0,0.3);
-    box-shadow: 0 0 3px rgba(0,0,0,0.3);
+    -webkit-box-shadow: 0px 0px 3px rgba(0,0,0,0.3);
+    -moz-box-shadow: 0px 0px 3px rgba(0,0,0,0.3);
+    box-shadow: 0px 0px 3px rgba(0,0,0,0.3);
     padding: 10px;
 }
 
@@ -7029,6 +7031,7 @@ ul.food li .food_name{
     font-weight:bold !important;
 }
 
+
 /*exercise*/
 ul.exercise{
     margin-left: 10px;
@@ -7104,6 +7107,7 @@ ul.exercise li .exercise_name{
     background:#eee;
     cursor:pointer;
 }
+
 
 /*Rating*/
 .container1{
@@ -8113,12 +8117,13 @@ a:hover, a:visited, a:link, a:active
     line-height: 16px !important;
 }
 
+
 .history_input
 {
     font-size: 14px;
     color: #333;
     line-height: 17px;
-    padding: 6px 12px 7px 12px;
+    padding: 6px 12px;
     width: 100%;
     border: 1px solid #ddd !important;
     -moz-appearance: none;
@@ -10089,6 +10094,7 @@ input:-ms-input-placeholder{
     -webkit-background-clip: padding-box;
     background-clip: padding-box;
     border: 1px solid rgba(0, 0, 0, .15);
+    border-radius: 4px;
     -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
     box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
     position:absolute;
@@ -10098,8 +10104,11 @@ input:-ms-input-placeholder{
     display: none !important;
 }
 
+.check{
+    border: 1px solid red;
+}
+
 .image_responsive{
     width:100%;
     height:auto;
 }
-
