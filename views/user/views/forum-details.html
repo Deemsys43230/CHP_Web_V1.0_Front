@@ -79,9 +79,9 @@
                         <hr/>
                         <h4 class="margin-top-20">Post Comment</h4>
                         <form name="userCommentForm" novalidate>
-                        <span ng-show="userCommentForm.comments.$dirty&&userCommentForm.comments.$invalid&& !userCommentForm.comments.$pristine">
-                            <span class="error-message textarea-errormessage40" ng-show="userCommentForm.comments.$error.required"><span>Required.</span></span>
-                        </span>
+                            <span ng-show="userCommentForm.comments.$dirty&&userCommentForm.comments.$invalid&& !userCommentForm.comments.$pristine">
+                                <span class="error-message textarea-errormessage40" ng-show="userCommentForm.comments.$error.required"><span>Required.</span></span>
+                            </span>
                             <textarea class="forum-textarea" name="comments" ng-model="comments" placeholder="Enter the comments" maxlength="400" required/></textarea>
                             <a href="" ng-click="doPostForumAnswers()" class="btn main-button" ng-disabled="userCommentForm.$invalid">POST COMMENT</a>
                         </form>

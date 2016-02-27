@@ -3,7 +3,7 @@ module.exports=function(grunt){
         watch: {
         	options: { nospawn: true },
             scripts: {
-                files: ['app/*.js','app/**/*.js','angular/output.js','!app/userDashboard/userDashboardController.js','css/*.css','!css/style.css','images/*.{png,jpg,gif}','images/**/*.{png,jpg,gif}','views/**/*.html','!views/user/views/dashboard.html'],
+                files: ['app/*.js','app/**/*.js','js/*.js','angular/output.js','!app/userDashboard/userDashboardController.js','css/*.css','!css/style.css','views/**/*.html','plugin/**/*.css','images/*.{png,jpg,gif}','images/**/*.{png,jpg,gif}','views/**/*.html','!views/user/views/dashboard.html'],
                 tasks: ['newer:uglify','newer:cssmin','newer:imagemin','newer:htmlmin']
             }
         },
@@ -12,7 +12,7 @@ module.exports=function(grunt){
                 files: [
                     {
                         expand: true,
-                        src: ['app/*.js','app/**/*.js','angular/output.js','!app/userDashboard/userDashboardController.js'],
+                        src: ['app/*.js','app/**/*.js','js/*.js','angular/output.js','!app/userDashboard/userDashboardController.js'],
                         dest: 'CyberHealth/'
                     }
                 ]
