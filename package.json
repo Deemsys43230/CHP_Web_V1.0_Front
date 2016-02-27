@@ -13,6 +13,7 @@
   "license": "ISC",
   "devDependencies": {
     "grunt-cli": "^0.1.13",
+    "grunt-concat-css": "^0.3.1",
     "grunt-contrib-concat": "^1.0.0",
     "grunt-contrib-cssmin": "^0.14.0",
     "grunt-contrib-htmlmin": "^0.6.0",
