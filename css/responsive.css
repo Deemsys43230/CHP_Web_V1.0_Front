@@ -75,10 +75,6 @@
 		margin-left: 15px;
 	}
 
-	.page-banner {
-		text-align: center;
-	}
-
 	ul.breadcrumbs {
 		float: none;
 	}
@@ -143,16 +139,6 @@
 	
 	.easyPieChart {
 		margin: 0 40px 20px 0;
-	}
-	
-	.right-sidebar {
-		margin-top: 60px;
-		padding-top: 60px;
-		border-top: 1px solid #eee;
-	}
-	
-	.sidebar .widget {
-		margin-bottom: 35px;
 	}
 	
 }
@@ -367,7 +353,27 @@
 @media (min-width : 768px) and (max-width: 991px) {
 
     .parallax{
-        background-position: 50% 30%;
+        width:100%;
+        padding: 0;
+        margin: 0;
+        background: url(../images/food-2.jpg) no-repeat;
+        background-size: cover;
+
+        @media (max-width: @iphone-screen) {
+            background-attachment: scroll;
+        }
+    }
+
+    .pricing-section{
+        width:100%;
+        padding: 0;
+        margin: 0;
+        background: url(../images/fit-12.jpg) no-repeat;
+        background-size: cover;
+
+        @media (max-width: @iphone-screen) {
+        background-attachment: scroll;
+        }
     }
 
     .pricing-section{

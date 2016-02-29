@@ -2,18 +2,18 @@
 <div class="page-banner" ng-cloak class="ng-cloak">
     <div class="container">
         <div class="row">
-            <div class="col-md-8" id="NewsView">
+            <div class="col-lg-8 col-md-7 col-sm-7" id="NewsView">
                 <h3 class="classic-title"><span>Latest News</span></h3>
 
                 <div class="latest-posts-classic">
                     <div class="post-row item">
-                        <div class="col-md-1 no-padding">
+                        <div class="col-lg-1 col-md-2 col-sm-2 no-padding">
                             <div class="left-meta-post">
                                 <div class="post-date"><span class="day">{{ usernewsdetails.datetime | toSec | date:'dd'}}</span><span class="month">{{ usernewsdetails.datetime | toSec | date:'MMM'}}</span></div>
                                 <div class="post-type"><i class="fa fa-picture-o"></i></div>
                             </div>
                         </div>
-                        <div class="col-md-11 no-padding">
+                        <div class="col-lg-11 col-md-10 col-sm-10 no-padding">
                             <h4 class="wrap">{{usernewsdetails.title}}</h4>
                             <p class="margin-top-10 wrap"  ng-bind-html="usernewsdetails.description | html"></p>
                         </div>
@@ -21,7 +21,7 @@
                 </div>
             </div>
 
-            <div class="col-md-4 no-padding">
+            <div class="col-lg-4 col-md-5 col-sm-5 no-padding">
                 <div class="panel no-margin no-box-shadow">
                     <div class="panel-body latest-posts-classic">
                         <div ng-show="usernewslist.length>5">

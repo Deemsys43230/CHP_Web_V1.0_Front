@@ -35,9 +35,12 @@ body {
     line-height: 21px;
 	font-weight: 300;
 	color: #666;
-	background: url(../images/gym.jpg) fixed no-repeat;
-    background-size: 100% 100%;
     overflow-y: hidden;
+    background: url(../images/gym.jpg) no-repeat fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 
 /*for FireFox*/
@@ -404,9 +407,9 @@ input[type="submit"] {
 }
 
 @media (min-width: 1200px) and (max-width: 1250px){
-    .container {
+    /*.container {
         width: 1100px !important;
-    }
+    }*/
     /*#w{
         width: 1080px !important;
     }*/
@@ -455,9 +458,9 @@ input[type="submit"] {
 }
 
 @media (min-width: 1250px) {
-    .container {
+    /*.container {
         width: 1170px;
-    }
+    }*/
     /*#w{
         width: 1150px !important;
     }*/
@@ -506,9 +509,9 @@ input[type="submit"] {
 }
 
 @media (min-width: 1300px) {
-    .container {
+    /*.container {
         width: 1220px;
-    }
+    }*/
 
     /*#w{
         width: 1190px !important;
@@ -558,9 +561,9 @@ input[type="submit"] {
 }
 
 @media (min-width: 1350px) {
-    .container {
+    /*.container {
         width: 1250px;
-    }
+    }*/
 
     /*#w{
         width: 1220px !important;
@@ -1610,7 +1613,7 @@ a.update-button:hover{
 
 .page-banner {
     padding:30px 0;
-    background: center #fff;
+    background: #fff;
 	border-bottom: 1px solid #eee;
 }
 
@@ -2824,8 +2827,7 @@ ul.icons-list li i {
 
 .service {
     background-color: rgba(255,255,255,1);
-    padding-top: 30px !important;
-    padding-bottom: 60px;
+    padding: 30px 0 !important;
 }
 
 .service1 {
@@ -5980,23 +5982,23 @@ h4.count-text{
     width:100%;
     padding: 0;
     margin: 0;
-    /*background-position: 50% 30%;*/
-    background: url(../images/gym-2.jpg) fixed no-repeat;
-    background-size: 100% auto;
-    background-color: transparent;
+    background: url(../images/food-1.jpg) fixed no-repeat;
+    background-size: cover;
+
+    @media (max-width: @iphone-screen) {
+    background-attachment: scroll;
+    }
 }
 
-.parallax-text-container-1 .parallax-text-item {
-  padding:120px 0px;
-  text-align:center;
+.parallax-text-container{
+    padding:120px 0;
+    text-align:center;
 }
-
 
 .parallax-mobile {
-	background-position: 50% 0px !important; 
+	background-position: 50% 0 !important;
 	background-attachment: scroll !important;
 }
-
 
 .services-3 {
   position:relative;
@@ -6305,13 +6307,15 @@ h4.count-text{
 }
 
 .pricing-section{
-    /*background-color: rgba(0,0,0,0.7);*/
     width:100%;
     padding: 0;
     margin: 0;
-    /*background-position: 50% 30%;*/
     background: url(../images/fit-11.jpg) fixed no-repeat;
-    background-size: 100% auto;
+    background-size: cover;
+
+    @media (max-width: @iphone-screen) {
+    background-attachment: scroll;
+    }
 }
 
 .pricing-section h1{
