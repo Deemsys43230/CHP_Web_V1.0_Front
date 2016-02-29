@@ -3,7 +3,7 @@ module.exports=function(grunt){
         watch: {
         	options: { nospawn: true },
             scripts: {
-                files: ['app/*.js','app/**/*.js','js/*.js','angular/output.js','!app/userDashboard/userDashboardController.js','css/*.css','views/**/*.html','plugin/**/*.css','images/*.{png,jpg,gif}','images/**/*.{png,jpg,gif}','views/**/*.html','!views/user/views/dashboard.html'],
+                files: ['app/*.js','app/**/*.js','js/*.js','angular/output.js','angular/output1.js','!app/userDashboard/userDashboardController.js','css/*.css','views/**/*.html','plugin/**/*.css','images/*.{png,jpg,gif}','images/**/*.{png,jpg,gif}','views/**/*.html','!views/user/views/dashboard.html'],
                 tasks: ['newer:uglify','newer:cssmin','newer:imagemin','newer:htmlmin']
             }
         },
@@ -11,6 +11,7 @@ module.exports=function(grunt){
             build: {
                 files: [
                     {
+                        mangle: false,
                         expand: true,
                         src: ['app/*.js','app/**/*.js','js/*.js','angular/output.js','!app/userDashboard/userDashboardController.js'],
                         dest: 'CyberHealth/'
@@ -23,8 +24,9 @@ module.exports=function(grunt){
                separator: ';'
            },
            dist: {
-              src: ['angular/angular-cookies.js', 'angular/ocLazyLoad.min.js', 'angular/angular-animate-1.4.3.js','angular/angular-flash.min.js','js/jquery.migrate.js','js/jquery.fitvids.js','js/nivo-lightbox.min.js','js/owl.carousel.min.js','js/jquery.isotope.min.js','js/jquery.appear.js','js/count-to.js','js/jquery.textillate.js','js/jquery.lettering.js','js/jquery.easypiechart.min.js','plugin/scroll/jquery.nicescroll.min.js','js/jquery.parallax.js','js/mediaelement-and-player.js','angular/angular-touch.js','plugin/dateRange/moment.js','angular/roundProgress.js','angular/ui-bootstrap-tpls-0.14.0.js','js/prefixfree.min.js','plugin/highchart/highchart.js','plugin/highchart/highchart-more.js','angular/angular-count-to.min.js','angular/angular-nicescroll.js'],
-              dest: 'CyberHealth/angular/output.js'
+              /*src: ['angular/angular-cookies.js', 'angular/ocLazyLoad.min.js', 'angular/angular-animate-1.4.3.js','angular/angular-flash.min.js','js/jquery.migrate.js','js/jquery.fitvids.js','js/nivo-lightbox.min.js','js/owl.carousel.min.js','js/jquery.isotope.min.js','js/jquery.appear.js','js/count-to.js','js/jquery.textillate.js','js/jquery.lettering.js','js/jquery.easypiechart.min.js','plugin/scroll/jquery.nicescroll.min.js','js/jquery.parallax.js','js/mediaelement-and-player.js','angular/angular-touch.js','plugin/dateRange/moment.js','angular/roundProgress.js','angular/ui-bootstrap-tpls-0.14.0.js','js/prefixfree.min.js','plugin/highchart/highchart.js','plugin/highchart/highchart-more.js','angular/angular-count-to.min.js','angular/angular-nicescroll.js'],*/
+               src: ['js/modernizrr.js','js/bootstrap.min.js','plugin/popup/jquery.leanModal.min.js'],
+              dest: 'angular/output1.js'
            }
        },
        imagemin: {                         // Task
