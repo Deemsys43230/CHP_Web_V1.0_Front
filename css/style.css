@@ -5977,15 +5977,13 @@ h4.count-text{
 
 
 .parallax{
-  width:100%;
-  padding: 0;
-  margin: 0;
-  /*background-position: 50% 30%;*/
-  background: url("../images/gym-2.jpg");
-  background-attachment: fixed;
-  background-repeat: no-repeat;
-
-  /*background: rgba(0,0,0,0.5);*/
+    width:100%;
+    padding: 0;
+    margin: 0;
+    /*background-position: 50% 30%;*/
+    background: url(../images/gym-2.jpg) fixed no-repeat;
+    background-size: 100% auto;
+    background-color: transparent;
 }
 
 .parallax-text-container-1 .parallax-text-item {
@@ -6302,15 +6300,18 @@ h4.count-text{
 }
 
 .testimonial-inner .pull-left .img-circle{
-    width: 70px;
-    height: 70px;
+    width: 60px;
+    height: 60px;
 }
 
 .pricing-section{
     /*background-color: rgba(0,0,0,0.7);*/
-    background: url("../images/fit-11.jpg");
-    background-attachment: fixed;
-    background-repeat: no-repeat;
+    width:100%;
+    padding: 0;
+    margin: 0;
+    /*background-position: 50% 30%;*/
+    background: url(../images/fit-11.jpg) fixed no-repeat;
+    background-size: 100% auto;
 }
 
 .pricing-section h1{
@@ -6333,7 +6334,7 @@ label
 {
     background-color:#ccc;
     padding: 5px 12px;
-    mqargin-right:5px;
+    mqargin-right:5px!important;
 }
 
 input[type=radio]
@@ -8658,7 +8659,7 @@ input[type=range]:focus::-ms-fill-upper {
 	display: -webkit-box;
 	position:relative;
 	height:25px;
-	margin-left:97px;
+	margin-left:80px;
 }
 
 .news-item .testimonials-carousel-content div::after{
@@ -10111,4 +10112,30 @@ input:-ms-input-placeholder{
 .image_responsive{
     width:100%;
     height:auto;
+}
+
+/*vetical carousel control*/
+
+.vertical-carousel-control:visited span, .vertical-carousel-control span{
+    color: #ccc;
+}
+
+.vertical-carousel-control:hover{
+    background: #f8ba01;
+}
+
+.vertical-carousel-control:hover span{
+    color: #fff !important;
+}
+
+.prev.vertical-carousel-control{
+    border: 1px solid #ccc;
+    padding: 0 6px;
+    border-radius: 3px;
+}
+
+.next.vertical-carousel-control{
+    border: 1px solid #ccc;
+    padding: 0 6px;
+    border-radius: 3px;
 }

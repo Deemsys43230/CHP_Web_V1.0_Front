@@ -430,9 +430,6 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'userApp',
                             files:[
-                                '../../js/bootstrap.min.js',
-                                '../../plugin/text-editor/summernote.js',
-                                '../../plugin/text-editor/summernote.css',
                                 '../../app/forums/forumsController.js'
                             ]
                         })
@@ -447,9 +444,6 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'userApp',
                             files:[
-                                '../../js/bootstrap.min.js',
-                                '../../plugin/text-editor/summernote.js',
-                                '../../plugin/text-editor/summernote.css',
                                 '../../app/forums/forumsController.js'
                             ]
                         })

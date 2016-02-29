@@ -49,7 +49,7 @@
                             <h4 class="margin-top-20">Content :</h4>
                         </div>
                         <div class="col-lg-10 col-md-10 col-sm-10">
-                            <textarea type="text" class="height-150 forum-textarea" name="description" ng-model="forumDetails.postdescription" maxlength="300"  required/></textarea>
+                            <textarea type="text" class="height-150 forum-textarea" name="description" ng-model="forumDetails.postdescription" maxlength="300"  required></textarea>
                              <span ng-show="ForumForm.description.$dirty&&ForumForm.description.$invalid">
                                   <span class="error-message textarea-errormessage40" ng-show="ForumForm.description.$error.required"><span>Required.</span></span>
                              </span>
@@ -67,6 +67,4 @@
         </div>
     </div>
 </div>
-
-<!-- End Page Banner -->
 <script type="text/javascript" src="../../js/script.js"></script>

@@ -366,6 +366,14 @@
 
 @media (min-width : 768px) and (max-width: 991px) {
 
+    .parallax{
+        background-position: 50% 30%;
+    }
+
+    .pricing-section{
+        background-color: #f8ba01;
+    }
+
     body {
         background: url(../images/gym-1.jpg) fixed no-repeat;
         background-size: 100% auto;

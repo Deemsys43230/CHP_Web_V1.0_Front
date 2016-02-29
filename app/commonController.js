@@ -35,7 +35,7 @@ commonApp.controller('CommonController',['$scope','requestHandler','Flash','$rou
     $scope.doGetNewsByUser = function () {
         requestHandler.getRequest("getLatestNewsByUser/", "").then(function (response) {
             $scope.usernewslist = response.data.News;
-
+            newscarousel();
         }, function () {
             errorMessage(Flash, "Please try again later!")
         });

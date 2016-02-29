@@ -199,8 +199,8 @@ $(document).ready(function ($) {
 		stopOnHover: true,
     	autoPlay: false,
     	items : 4,
-    	itemsDesktopSmall : [900,3],
-		itemsTablet: [600,2],
+    	itemsDesktopSmall : [992,3],
+		itemsTablet: [768,2],
 		itemsMobile : [479, 1]
 	});
 	
