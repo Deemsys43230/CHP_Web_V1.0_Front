@@ -56,7 +56,6 @@ commonApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 name:'commonApp',
                                 files:[
                                     'http://d1707mp3jqgbeq.cloudfront.net/plugin/vertical-carousel/vertical-carousel.js',
-                                    'http://d1707mp3jqgbeq.cloudfront.net/plugin/vertical-carousel/vertical-carousel.css',
                                     '../../app/commonController.js'
                                 ]
                             })
@@ -93,7 +92,8 @@ commonApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'commonApp',
                             files:[
-                                '../../app/settings/basicInfoController.js'
+                                '../../app/settings/basicInfoController.js',
+                                'https://maps.googleapis.com/maps/api/js'
                             ]
                         })
                     }]
@@ -108,7 +108,6 @@ commonApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                             name:'commonApp',
                             files:[
                                 '../../plugin/vertical-carousel/vertical-carousel.js',
-                                '../../plugin/vertical-carousel/vertical-carousel.css',
                                 '../../app/testimonial/testimonialController.js'
                             ]
                         })
@@ -124,7 +123,6 @@ commonApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                             name:'commonApp',
                             files:[
                                 '../../plugin/vertical-carousel/vertical-carousel.js',
-                                '../../plugin/vertical-carousel/vertical-carousel.css',
                                 '../../app/latestNews/latestNewsController.js'
                             ]
                         })
@@ -140,7 +138,6 @@ commonApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                             name:'commonApp',
                             files:[
                                 '../../plugin/vertical-carousel/vertical-carousel.js',
-                                '../../plugin/vertical-carousel/vertical-carousel.css',
                                 '../../app/latestNews/latestNewsController.js'
                             ]
                         })

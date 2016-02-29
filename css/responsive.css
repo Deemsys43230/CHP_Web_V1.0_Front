@@ -358,10 +358,6 @@
         margin: 0;
         background: url(../images/food-2.jpg) no-repeat;
         background-size: cover;
-
-        @media (max-width: @iphone-screen) {
-            background-attachment: scroll;
-        }
     }
 
     .pricing-section{
@@ -370,14 +366,6 @@
         margin: 0;
         background: url(../images/fit-12.jpg) no-repeat;
         background-size: cover;
-
-        @media (max-width: @iphone-screen) {
-        background-attachment: scroll;
-        }
-    }
-
-    .pricing-section{
-        background-color: #f8ba01;
     }
 
     body {
