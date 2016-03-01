@@ -1,6 +1,6 @@
 
 
-var adminApp= angular.module('adminApp', ['ngRoute','oc.lazyLoad','ngCookies','requestModule','ngAnimate','angularUtils.directives.dirPagination']);
+var adminApp= angular.module('adminApp', ['ngRoute','oc.lazyLoad','ngCookies','requestModule','ngAnimate']);
 
 adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
 
@@ -59,7 +59,6 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
-                                '../../js/bootstrap.min.js',
                                 '../../app/dashboard/adminDashboardController.js'
                             ]
                         })
@@ -74,9 +73,7 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
-                                '../../js/bootstrap.min.js',
                                 '../../plugin/popup/style.css',
-                                '../../plugin/popup/jquery.leanModal.min.js',
                                 '../../css/profile-image-upload.css',
                                 '../../css/password.css',
                                 '../../js/image-upload.js',
@@ -94,9 +91,8 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
-                                '../../js/bootstrap.min.js',
                                 '../../plugin/popup/style.css',
-                                '../../plugin/popup/jquery.leanModal.min.js',
+                                '../../angular/angular-utils-pagination/dirPagination.js',
                                 '../../app/faq/faqController.js'
                             ]
                         })
@@ -111,7 +107,6 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
-                                '../../js/bootstrap.min.js',
                                 '../../app/faq/faqController.js'
                             ]
                         })
@@ -126,7 +121,6 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
-                                '../../js/bootstrap.min.js',
                                 '../../plugin/text-editor/summernote.js',
                                 '../../plugin/text-editor/summernote.css',
                                 '../../app/instruction/instructionController.js'
@@ -143,8 +137,7 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
-                                '../../js/bootstrap.min.js',
-                                '../../js/summernote.js',
+                                '../../plugin/text-editor/summernote.js',
                                 '../../plugin/text-editor/summernote.css',
                                 '../../app/privacyPolicy/privacyPolicyController.js'
                             ]
@@ -160,7 +153,6 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
-                                '../../js/bootstrap.min.js',
                                 '../../plugin/text-editor/summernote.js',
                                 '../../plugin/text-editor/summernote.css',
                                 '../../app/termsOfUse/termsOfUseController.js'
@@ -177,7 +169,6 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
-                                '../../js/bootstrap.min.js',
                                 '../../angular/angular-utils-pagination/dirPagination.js',
                                 '../../app/latestNews/latestNewsController.js'
                             ]
@@ -193,7 +184,6 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
-                                '../../js/bootstrap.min.js',
                                 '../../plugin/text-editor/summernote.js',
                                 '../../plugin/text-editor/summernote.css',
                                 '../../app/latestNews/latestNewsController.js'
@@ -210,7 +200,6 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
-                                '../../js/bootstrap.min.js',
                                 '../../plugin/text-editor/summernote.js',
                                 '../../plugin/text-editor/summernote.css',
                                 '../../app/latestNews/latestNewsController.js'
@@ -241,7 +230,6 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
-                                '../../js/bootstrap.min.js',
                                 '../../angular/angular-utils-pagination/dirPagination.js',
                                 '../../app/forums/forumsController.js'
                             ]
@@ -257,6 +245,7 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
+                                '../../angular/angular-utils-pagination/dirPagination.js',
                                 '../../app/forums/forumsController.js'
                             ]
                         })
@@ -271,9 +260,6 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
-                                '../../js/bootstrap.min.js',
-                                '../../plugin/text-editor/summernote.js',
-                                '../../plugin/text-editor/summernote.css',
                                 '../../app/forums/forumsController.js'
                             ]
                         })
@@ -288,9 +274,6 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
-                                '../../js/bootstrap.min.js',
-                                '../../plugin/text-editor/summernote.js',
-                                '../../plugin/text-editor/summernote.css',
                                 '../../app/forums/forumsController.js'
                             ]
                         })
@@ -305,7 +288,6 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
-                                '../../js/bootstrap.min.js',
                                 '../../angular/angular-utils-pagination/dirPagination.js',
                                 '../../app/testimonial/testimonialController.js',
                                 '../../css/testimonial-image-upload.css',
@@ -323,7 +305,6 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
-                                '../../js/bootstrap.min.js',
                                 '../../app/testimonial/testimonialController.js',
                                 '../../plugin/text-editor/summernote.js',
                                 '../../plugin/text-editor/summernote.css',
@@ -342,7 +323,6 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
-                                '../../js/bootstrap.min.js',
                                 '../../app/testimonial/testimonialController.js',
                                 '../../plugin/text-editor/summernote.js',
                                 '../../plugin/text-editor/summernote.css',
@@ -356,16 +336,6 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
             }).
             when('/viewTestimonial/:id', {
                 templateUrl: 'views/site-view-testimonial.html',
-                resolve: {
-                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
-                        return $ocLazyLoad.load({
-                            name:'adminApp',
-                            files:[
-                                '../../js/bootstrap.min.js'
-                            ]
-                        })
-                    }]
-                },
                 controller:'TestimonialEditController'
             }).
             when('/member', {
@@ -375,7 +345,7 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
-                                '../../js/bootstrap.min.js',
+                                '../../angular/angular-utils-pagination/dirPagination.js',
                                 '../../app/member/memberController.js'
                             ]
                         })
@@ -390,7 +360,6 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
-                                '../../js/bootstrap.min.js',
                                 '../../app/member/memberController.js'
                             ]
                         })
@@ -406,9 +375,8 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
-                                '../../js/bootstrap.min.js',
                                 '../../plugin/popup/style.css',
-                                '../../plugin/popup/jquery.leanModal.min.js',
+                                '../../angular/angular-utils-pagination/dirPagination.js',
                                 '../../app/coach/coachController.js'
                             ]
                         })
@@ -423,7 +391,6 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
-                                '../../js/bootstrap.min.js',
                                 '../../css/profile-image-upload.css',
                                 '../../js/image-upload.js',
                                 '../../app/coach/coachController.js'
@@ -440,9 +407,7 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
-                                '../../js/bootstrap.min.js',
                                 '../../plugin/popup/style.css',
-                                '../../plugin/popup/jquery.leanModal.min.js',
                                 '../../css/profile-image-upload.css',
                                 '../../js/image-upload.js'
                             ]
@@ -458,8 +423,8 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
-                                '../../js/bootstrap.min.js',
                                 '../../js/category-select.js',
+                                '../../angular/angular-utils-pagination/dirPagination.js',
                                 '../../app/exercise/exerciseService.js',
                                 '../../app/exercise/exerciseController.js'
                             ]
@@ -475,7 +440,6 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
-                                '../../js/bootstrap.min.js',
                                 '../../app/exercise/exerciseController.js'
                             ]
                         })
@@ -490,9 +454,7 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
-                                '../../js/bootstrap.min.js',
                                 '../../plugin/popup/style.css',
-                                '../../plugin/popup/jquery.leanModal.min.js',
                                 '../../css/food-image-upload.css',
                                 '../../js/image-upload.js',
                                 '../../js/category-select.js',
@@ -517,11 +479,8 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
-                                '../../js/bootstrap.min.js',
                                 '../../plugin/popup/style.css',
-                                '../../plugin/popup/jquery.leanModal.min.js',
                                 '../../css/food-image-upload.css',
-                                '../../js/image-upload.js',
                                 '../../js/category-select.js',
                                 '../../css/multiSelect.css',
                                 '../../css/category-select.css',
@@ -544,9 +503,7 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
-                                '../../js/bootstrap.min.js',
                                 '../../plugin/popup/style.css',
-                                '../../plugin/popup/jquery.leanModal.min.js',
                                 '../../css/food-image-upload.css',
                                 '../../js/image-upload.js',
                                 '../../js/category-select.js',
@@ -571,9 +528,7 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
-                                '../../js/bootstrap.min.js',
                                 '../../plugin/popup/style.css',
-                                '../../plugin/popup/jquery.leanModal.min.js',
                                 '../../angular/angular-utils-pagination/dirPagination.js',
                                 '../../app/exerciseType/exerciseTypeController.js'
                             ]
@@ -589,7 +544,6 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
-                                '../../js/bootstrap.min.js',
                                 '../../app/settings/basicInfoController.js'
                             ]
                         })
@@ -604,7 +558,6 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name: 'adminApp',
                             files: [
-                                '../../js/bootstrap.min.js',
                                 '../../app/settings/mobileAppSettingsController.js'
                             ]
                         })
@@ -619,7 +572,6 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name: 'adminApp',
                             files: [
-                                '../../js/bootstrap.min.js',
                                 '../../app/settings/paypalController.js'
                             ]
                         })
@@ -634,7 +586,6 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name: 'adminApp',
                             files: [
-                                '../../js/bootstrap.min.js',
                                 '../../app/settings/socialMediaController.js'
                             ]
                         })
@@ -649,7 +600,6 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name: 'adminApp',
                             files: [
-                                '../../js/bootstrap.min.js',
                                 '../../app/settings/serverController.js'
                             ]
                         })
@@ -664,8 +614,8 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
-                                '../../js/bootstrap.min.js',
                                 '../../js/category-select.js',
+                                '../../angular/angular-utils-pagination/dirPagination.js',
                                 '../../app/food/foodService.js',
                                 '../../app/food/foodController.js'
                             ]
@@ -681,9 +631,7 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
-                                '../../js/bootstrap.min.js',
                                 '../../plugin/popup/style.css',
-                                '../../plugin/popup/jquery.leanModal.min.js',
                                 '../../css/food-image-upload.css',
                                 '../../js/image-upload.js',
                                 '../../css/custom-inputs.css',
@@ -710,9 +658,7 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
-                                '../../js/bootstrap.min.js',
                                 '../../plugin/popup/style.css',
-                                '../../plugin/popup/jquery.leanModal.min.js',
                                 '../../app/food/foodService.js',
                                 '../../app/food/foodController.js'
                             ]
@@ -728,11 +674,8 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
-                                '../../js/bootstrap.min.js',
                                 '../../plugin/popup/style.css',
-                                '../../plugin/popup/jquery.leanModal.min.js',
                                 '../../css/food-image-upload.css',
-                                '../../js/image-upload.js',
                                 '../../css/custom-inputs.css',
                                 '../../js/category-select.js',
                                 '../../css/multiSelect.css',
@@ -756,9 +699,7 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
-                                '../../js/bootstrap.min.js',
                                 '../../plugin/popup/style.css',
-                                '../../plugin/popup/jquery.leanModal.min.js',
                                 '../../css/food-image-upload.css',
                                 '../../js/image-upload.js',
                                 '../../css/custom-inputs.css',
@@ -784,7 +725,6 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
-                                '../../js/bootstrap.min.js',
                                 '../../plugin/file-upload/angular-file-upload.min.js',
                                 '../../app/food/foodController.js'
                             ]
@@ -800,9 +740,7 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
-                                '../../js/bootstrap.min.js',
                                 '../../plugin/popup/style.css',
-                                '../../plugin/popup/jquery.leanModal.min.js',
                                 '../../angular/angular-utils-pagination/dirPagination.js',
                                 '../../app/foodCategory/foodCategoryController.js'
                             ]
@@ -818,9 +756,8 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
-                                '../../js/bootstrap.min.js',
                                 '../../plugin/popup/style.css',
-                                '../../plugin/popup/jquery.leanModal.min.js',
+                                '../../angular/angular-utils-pagination/dirPagination.js',
                                 '../../app/food/foodMeasure.js'
                             ]
                         })
@@ -835,7 +772,6 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
-                                '../../js/bootstrap.min.js',
                                 '../../plugin/popup/style.css',
                                 '../../angular/angular-utils-pagination/dirPagination.js',
                                 '../../app/foodSuggestion/foodSuggestionController.js'
@@ -852,7 +788,6 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
-                                '../../js/bootstrap.min.js',
                                 '../../plugin/popup/style.css',
                                 '../../angular/angular-utils-pagination/dirPagination.js',
                                 '../../app/foodSuggestion/foodSuggestionController.js'
@@ -869,7 +804,6 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
-                                '../../js/bootstrap.min.js',
                                 '../../plugin/popup/style.css',
                                 '../../angular/angular-utils-pagination/dirPagination.js',
                                 '../../app/exerciseSuggestion/exerciseSuggestionController.js'
@@ -886,7 +820,6 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
-                                '../../js/bootstrap.min.js',
                                 '../../plugin/popup/style.css',
                                 '../../angular/angular-utils-pagination/dirPagination.js',
                                 '../../app/exerciseSuggestion/exerciseSuggestionController.js'
@@ -903,7 +836,6 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
-                                '../../js/bootstrap.min.js',
                                 '../../app/course/courseController.js',
                                 '../../angular/angular-utils-pagination/dirPagination.js'
                             ]
@@ -919,9 +851,7 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
-                                '../../js/bootstrap.min.js',
                                 '../../plugin/popup/style.css',
-                                '../../plugin/popup/jquery.leanModal.min.js',
                                 '../../angular/angular-utils-pagination/dirPagination.js',
                                 '../../app/course/courseController.js'
                             ]
@@ -938,9 +868,7 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
-                                '../../js/bootstrap.min.js',
                                 '../../plugin/popup/style.css',
-                                '../../plugin/popup/jquery.leanModal.min.js',
                                 '../../app/course/courseController.js'
                             ]
                         })
@@ -955,7 +883,6 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
-                                '../../js/bootstrap.min.js',
                                 '../../app/course/courseController.js'
                             ]
                         })
@@ -970,8 +897,8 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
-                                '../../js/bootstrap.min.js',
                                 '../../angular/angular-ui-bootstarp.js',
+                                '../../angular/angular-utils-pagination/dirPagination.js',
                                 '../../app/payments/adminPaymentController.js'
                             ]
                         })
@@ -986,10 +913,9 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
-                                '../../js/bootstrap.min.js',
                                 '../../plugin/popup/style.css',
                                 '../../angular/angular-ui-bootstarp.js',
-                                '../../plugin/popup/jquery.leanModal.min.js',
+                                '../../angular/angular-utils-pagination/dirPagination.js',
                                 '../../app/payments/adminPaymentController.js'
                             ]
                         })
@@ -1004,8 +930,8 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
-                                '../../js/bootstrap.min.js',
                                 '../../angular/angular-ui-bootstarp.js',
+                                '../../angular/angular-utils-pagination/dirPagination.js',
                                 '../../app/payments/adminPaymentController.js'
                             ]
                         })
@@ -1020,8 +946,8 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
-                                '../../js/bootstrap.min.js',
                                 '../../angular/angular-ui-bootstarp.js',
+                                '../../angular/angular-utils-pagination/dirPagination.js',
                                 '../../app/payments/adminPaymentController.js'
                             ]
                         })
@@ -1036,7 +962,6 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
-                                '../../js/bootstrap.min.js',
                                 '../../angular/angular-ui-bootstarp.js',
                                 '../../angular/angular-utils-pagination/dirPagination.js',
                                 '../../app/payments/adminPaymentController.js'
@@ -1053,10 +978,9 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
-                                '../../js/bootstrap.min.js',
                                 '../../plugin/popup/style.css',
                                 '../../angular/angular-ui-bootstarp.js',
-                                '../../plugin/popup/jquery.leanModal.min.js',
+                                '../../angular/angular-utils-pagination/dirPagination.js',
                                 '../../app/payments/adminPaymentController.js'
                             ]
                         })
@@ -1071,7 +995,6 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
-                                '../../js/bootstrap.min.js',
                                 '../../app/faq/faqController.js'
                             ]
                         })
@@ -1086,7 +1009,6 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
-                                '../../js/bootstrap.min.js',
                                 '../../app/instruction/instructionController.js'
                             ]
                         })
@@ -1101,7 +1023,6 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
-                                '../../js/bootstrap.min.js',
                                 '../../app/termsOfUse/termsOfUseController.js'
                             ]
                         })
@@ -1116,7 +1037,6 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
-                                '../../js/bootstrap.min.js',
                                 '../../app/privacyPolicy/privacyPolicyController.js'
                             ]
                         })
@@ -1131,7 +1051,6 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
-                                '../../js/bootstrap.min.js',
                                 '../../app/settings/basicInfoController.js'
                             ]
                         })

@@ -2,7 +2,7 @@
  * Created by user on 26-09-2015.
  */
 
-var adminApp = angular.module('adminApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','ui.select','foodServiceModule']);
+var adminApp = angular.module('adminApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','ui.select','foodServiceModule','angularUtils.directives.dirPagination']);
 
 adminApp.controller('FoodUploadController', ['$q','$scope', 'FileUploader', function($q,$scope, FileUploader) {
     //Start code for uploader//

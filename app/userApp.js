@@ -60,7 +60,6 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../css/custom-inputs.css',
                                 '../../css/vertical_tab.css',
                                 '../../plugin/popup/style.css',
-                                '../../plugin/popup/jquery.leanModal.min.js',
                                 '../../css/ngPercentageCircle.css',
                                 '../../app/userDashboard/ngPercentageCircle.js',
                                 '../../app/userDashboard/userDashboardService.js',
@@ -125,7 +124,6 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         files:[
                             '../../angular/angular-utils-pagination/dirPagination.js',
                             '../../plugin/popup/style.css',
-                            '../../plugin/popup/jquery.leanModal.min.js',
                             '../../app/course/courseController.js'
                         ]
                     })
@@ -142,7 +140,6 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                             files:[
                                 '../../angular/angular-utils-pagination/dirPagination.js',
                                 '../../plugin/popup/style.css',
-                                '../../plugin/popup/jquery.leanModal.min.js',
                                 '../../app/course/courseController.js'
                             ]
                         })
@@ -174,7 +171,6 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                             files:[
                                 '../../angular/angular-utils-pagination/dirPagination.js',
                                 '../../plugin/popup/style.css',
-                                '../../plugin/popup/jquery.leanModal.min.js',
                                 '../../app/payments/userPaymentController.js'
                             ]
                         })
@@ -191,7 +187,6 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                             files:[
                                 '../../angular/angular-utils-pagination/dirPagination.js',
                                 '../../plugin/popup/style.css',
-                                '../../plugin/popup/jquery.leanModal.min.js',
                                 '../../app/payments/userPaymentController.js'
                             ]
                         })
@@ -265,7 +260,6 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                             name:'userApp',
                             files:[
                                 '../../plugin/vertical-carousel/vertical-carousel.js',
-                                '../../plugin/vertical-carousel/vertical-carousel.css',
                                 '../../angular/angular-utils-pagination/dirPagination.js',
                                 '../../app/userCoach/userCoachController.js'
                             ]
@@ -282,11 +276,9 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                             name:'userApp',
                             files:[
                                 '../../plugin/vertical-carousel/vertical-carousel.js',
-                                '../../plugin/vertical-carousel/vertical-carousel.css',
                                 '../../angular/angular-utils-pagination/dirPagination.js',
                                 '../../app/userCoach/userCoachController.js',
-                                '../../plugin/popup/style.css',
-                                '../../plugin/popup/jquery.leanModal.min.js'
+                                '../../plugin/popup/style.css'
                             ]
                         })
                     }]
@@ -352,7 +344,8 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'userApp',
                             files:[
-                                '../../app/settings/basicInfoController.js'
+                                '../../app/settings/basicInfoController.js',
+                                'https://maps.googleapis.com/maps/api/js'
                             ]
                         })
                     }]
@@ -367,9 +360,7 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                             name:'userApp',
                             files:[
                                 '../../plugin/popup/style.css',
-                                '../../plugin/popup/jquery.leanModal.min.js',
                                 '../../css/profile-image-upload.css',
-                                '../../css/password.css',
                                 '../../js/image-upload.js',
                                 '../../app/userProfile/userProfileController.js'
                             ]
@@ -473,7 +464,6 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                             name:'userApp',
                             files:[
                                 '../../plugin/popup/style.css',
-                                '../../plugin/popup/jquery.leanModal.min.js',
                                 '../../app/goal/goalController.js',
                                 '../../angular/angular-utils-pagination/dirPagination.js',
                                 '../../plugin/dateRange/daterangepicker.css',
@@ -507,7 +497,6 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                             name:'userApp',
                             files:[
                                 '../../plugin/popup/style.css',
-                                '../../plugin/popup/jquery.leanModal.min.js',
                                 '../../app/goal/goalController.js'
                             ]
                         })
@@ -524,7 +513,6 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                             name:'userApp',
                             files:[
                                 '../../plugin/popup/style.css',
-                                '../../plugin/popup/jquery.leanModal.min.js',
                                 '../../app/goal/goalController.js'
                             ]
                         })

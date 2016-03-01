@@ -280,7 +280,7 @@ adminApp.controller('AdminPaymentController',['$scope','requestHandler','Flash',
     };
 
     $scope.coachSubscribersListInit=function(){
-        $scope.itemsPerPage = 1;
+        $scope.itemsPerPage = 10;
         $scope.subscriberSearch="";
         $scope.sortId="";
         $scope.sorttype="";

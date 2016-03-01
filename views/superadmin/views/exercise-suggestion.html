@@ -37,7 +37,7 @@
                             <a href="#exerciseSuggestionDetail/{{exercisesuggestion.suggestionid}}" class="btn-sm btn-primary btn-sm-override">View</a>
                             <a href="" class="btn-xs btn-success hint--top" ng-click="doApproveExerciseSuggestion(exercisesuggestion.suggestionid)" ng-show="exercisesuggestion.exercisestatus==0" data-hint="Approve"><span>&#10004;</span></a>
                             <a href="" class="btn-xs btn-danger hint--top" ng-click="doRejectExerciseSuggestion(exercisesuggestion.suggestionid)" ng-show="exercisesuggestion.exercisestatus==0" data-hint="Reject"><span>&#x2716;</span></a>
-                            <a href="#exercise-add/{{exercisesuggestion.suggestionid}}" class="btn-sm btn-success" ng-show="exercisesuggestion.exercisestatus==1" >Add Exercise</a>
+                            <a href="#exercise-add/{{exercisesuggestion.suggestionid}}" class="btn-sm btn-success btn-sm-override" ng-show="exercisesuggestion.exercisestatus==1" >Add Exercise</a>
                             <span class="label-danger" ng-show="exercisesuggestion.exercisestatus==2">Rejected</span>
                             <span class="label-success" ng-show="exercisesuggestion.exercisestatus==3">Approved</span>
                         </td>

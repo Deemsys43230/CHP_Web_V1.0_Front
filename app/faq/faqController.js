@@ -1,7 +1,7 @@
 /**
  * Created by Deemsys on 9/19/2015.
  */
-var adminApp = angular.module('adminApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate']);
+var adminApp = angular.module('adminApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','angularUtils.directives.dirPagination']);
 
 adminApp.controller('FAQController',['$scope','requestHandler','Flash','siteMenuService',function($scope,requestHandler,Flash,siteMenuService){
 
