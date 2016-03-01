@@ -995,6 +995,7 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
+                                '../../angular/angular-utils-pagination/dirPagination.js',
                                 '../../app/faq/faqController.js'
                             ]
                         })
@@ -1051,6 +1052,7 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
+                                'https://maps.googleapis.com/maps/api/js',
                                 '../../app/settings/basicInfoController.js'
                             ]
                         })
