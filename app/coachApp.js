@@ -86,7 +86,6 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'coachApp',
                             files:[
-                                '../../js/bootstrap.min.js',
                                 '../../plugin/popup/style.css',
                                 '../../angular/angular-utils-pagination/dirPagination.js',
                                 '../../app/coachMembers/coachMembersController.js'
@@ -103,8 +102,8 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'coachApp',
                             files:[
-                                '../../js/bootstrap.min.js',
                                 '../../plugin/popup/style.css',
+                                '../../angular/angular-utils-pagination/dirPagination.js',
                                 '../../app/coachMembers/coachMembersController.js'
                             ]
                         })
@@ -119,7 +118,6 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'coachApp',
                             files:[
-
                                 '../../app/forums/forumsController.js',
                                 '../../angular/angular-utils-pagination/dirPagination.js'
                             ]
@@ -135,9 +133,7 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'coachApp',
                             files:[
-                                '../../js/bootstrap.min.js',
-                                '../../plugin/text-editor/summernote.js',
-                                '../../plugin/text-editor/summernote.css',
+                                '../../angular/angular-utils-pagination/dirPagination.js',
                                 '../../app/forums/forumsController.js'
                             ]
                         })
@@ -152,9 +148,6 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'coachApp',
                             files:[
-                                '../../js/bootstrap.min.js',
-                                '../../plugin/text-editor/summernote.js',
-                                '../../plugin/text-editor/summernote.css',
                                 '../../app/forums/forumsController.js'
                             ]
                         })
@@ -169,6 +162,7 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'coachApp',
                             files:[
+                                '../../angular/angular-utils-pagination/dirPagination.js',
                                 '../../app/forums/forumsController.js'
                             ]
                         })
@@ -212,8 +206,7 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                             name:'coachApp',
                             files:[
                                 '../../app/course/courseController.js',
-                                '../../plugin/popup/style.css',
-                                '../../plugin/popup/jquery.leanModal.min.js'
+                                '../../plugin/popup/style.css'
                             ]
                         })
                     }]
@@ -228,8 +221,7 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                             name:'coachApp',
                             files:[
                                 '../../app/course/courseController.js',
-                                '../../plugin/popup/style.css',
-                                '../../plugin/popup/jquery.leanModal.min.js'
+                                '../../plugin/popup/style.css'
                             ]
                         })
                     }]
@@ -276,7 +268,6 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                             name:'coachApp',
                             files:[
                                 '../../plugin/popup/style.css',
-                                '../../plugin/popup/jquery.leanModal.min.js',
                                 '../../css/course-image-upload.css',
                                 '../../js/image-upload.js',
                                 '../../plugin/text-editor/summernote.js',
@@ -296,7 +287,6 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                             name:'coachApp',
                             files:[
                                 '../../plugin/popup/style.css',
-                                '../../plugin/popup/jquery.leanModal.min.js',
                                 '../../css/course-image-upload.css',
                                 '../../js/image-upload.js',
                                 '../../plugin/text-editor/summernote.js',
@@ -330,10 +320,10 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'coachApp',
                             files:[
+                                '../../angular/angular-utils-pagination/dirPagination.js',
                                 '../../app/payments/coachPaymentController.js',
                                 '../../angular/angular-ui-bootstarp.js',
-                                '../../plugin/popup/style.css',
-                                '../../plugin/popup/jquery.leanModal.min.js'
+                                '../../plugin/popup/style.css'
                             ]
                         })
                     }]
@@ -363,6 +353,7 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'coachApp',
                             files:[
+                                '../../angular/angular-utils-pagination/dirPagination.js',
                                 '../../app/payments/coachPaymentController.js'
                             ]
                         })
@@ -408,6 +399,7 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'coachApp',
                             files:[
+                                'https://maps.googleapis.com/maps/api/js',
                                 '../../app/settings/basicInfoController.js'
                             ]
                         })

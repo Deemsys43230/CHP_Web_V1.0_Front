@@ -13,7 +13,7 @@ module.exports=function(grunt){
                     {
                         mangle: false,
                         expand: true,
-                        src: ['app/*.js','app/**/*.js','js/*.js','angular/output.js','!app/userDashboard/userDashboardController.js'],
+                        src: ['app/*.js','app/**/*.js','js/*.js','angular/output1.js','angular/output.js','!app/userDashboard/userDashboardController.js'],
                         dest: 'CyberHealth/'
                     }
                 ]
@@ -25,7 +25,7 @@ module.exports=function(grunt){
            },
            dist: {
               /*src: ['angular/angular-cookies.js', 'angular/ocLazyLoad.min.js', 'angular/angular-animate-1.4.3.js','angular/angular-flash.min.js','js/jquery.migrate.js','js/jquery.fitvids.js','js/nivo-lightbox.min.js','js/owl.carousel.min.js','js/jquery.isotope.min.js','js/jquery.appear.js','js/count-to.js','js/jquery.textillate.js','js/jquery.lettering.js','js/jquery.easypiechart.min.js','plugin/scroll/jquery.nicescroll.min.js','js/jquery.parallax.js','js/mediaelement-and-player.js','angular/angular-touch.js','plugin/dateRange/moment.js','angular/roundProgress.js','angular/ui-bootstrap-tpls-0.14.0.js','js/prefixfree.min.js','plugin/highchart/highchart.js','plugin/highchart/highchart-more.js','angular/angular-count-to.min.js','angular/angular-nicescroll.js'],*/
-               src: ['js/modernizrr.js','js/bootstrap.min.js','plugin/popup/jquery.leanModal.min.js'],
+               src: ['js/modernizrr.js','plugin/popup/jquery.leanModal.min.js'],
               dest: 'angular/output1.js'
            }
        },
@@ -57,7 +57,7 @@ module.exports=function(grunt){
            target: {
                files: [{
                    expand: true,
-                   src: ['css/*.css','plugin/**/*.css','!css/style.css'],
+                   src: ['css/*.css','plugin/**/*.css'],
                    dest: 'Cyberhealth/',
                    ext: '.css'
                }]

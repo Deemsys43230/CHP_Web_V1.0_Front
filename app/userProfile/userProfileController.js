@@ -3,7 +3,7 @@
  */
 var userApp= angular.module('userApp', ['ngRoute','oc.lazyLoad','ngCookies','requestModule','flash','ngAnimate','ui.bootstrap']);
 
-userApp.controller('UserProfileController',['$scope','requestHandler','Flash',function($scope,requestHandler,Flash) {
+userApp.controller('UserProfileController',['$scope','requestHandler','Flash',function($scope,requestHandler,Flash,$window) {
 
     $scope.doGetProfile=function(){
 
@@ -20,8 +20,25 @@ userApp.controller('UserProfileController',['$scope','requestHandler','Flash',fu
                 $scope.userProfile.preferfood = "1";
             }
 
-            if($scope.userProfile.isProfileUpdated == 1){
+            var year = $scope.userProfile.dob.slice(6,10);
+            var month = $scope.userProfile.dob.slice(3,5);
+            month = $scope.birthdayformat[parseInt(month)-1];
+            var day = $scope.userProfile.dob.slice(0,2);
 
+            $(document).ready(function(){
+                $.dobPicker({
+                    daySelector: '#dobday', /* Required */
+                    monthSelector: '#dobmonth', /* Required */
+                    yearSelector: '#dobyear', /* Required */
+                    dayDefault: day, /* Optional */
+                    monthDefault: month, /* Optional */
+                    yearDefault: year, /* Optional */
+                    minimumAge: 8, /* Optional */
+                    maximumAge: 100 /* Optional */
+                });
+            });
+
+            if($scope.userProfile.isProfileUpdated == 1){
 
                 $.each($scope.countries, function(index,value) {
                     if(value.code == $scope.userProfile.country){
@@ -108,11 +125,8 @@ userApp.controller('UserProfileController',['$scope','requestHandler','Flash',fu
                     //document.privacyForm.elements['cmn-toggle-7'].checked = false;
                 }
             });
-
         });
-
-
-        };
+    };
 
     $scope.refreshImage=function(){
         requestHandler.getRequest("getUserId/","").then(function(response){
@@ -125,6 +139,16 @@ userApp.controller('UserProfileController',['$scope','requestHandler','Flash',fu
             });
             $scope.spinner=false;
         });
+    };
+
+    $scope.changeBirthday=function(){
+
+        $scope.userProfile.dob = $('#dobday').val()+'/'+ $('#dobmonth').val() +'/'+$('#dobyear').val();
+        var focusSelect = $('#inputFocusForDatePicker');
+        console.log($scope.userProfile.dob);
+        focusSelect.focus();
+        focusSelect.blur();
+        $('html, body').animate({scrollTop: 0}, 0);
     };
 
     $scope.doUpdateProfile= function () {
@@ -143,6 +167,7 @@ userApp.controller('UserProfileController',['$scope','requestHandler','Flash',fu
     $scope.imageAdded=false;
     $scope.imageUploaded=true;
     $scope.spinner=false;
+    $scope.birthdayformat=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
 
     $scope.fileNameChanged = function(element){
         if(!$scope.imageAdded){
@@ -175,6 +200,7 @@ userApp.controller('UserProfileController',['$scope','requestHandler','Flash',fu
 
     //To Enable the update button if changes occur.
     $scope.isClean = function() {
+        console.log(angular.equals ($scope.orginalUserProfile, $scope.userProfile));
         return angular.equals ($scope.orginalUserProfile, $scope.userProfile);
     };
 
@@ -4645,7 +4671,7 @@ userApp.directive('widthAboutMe', function() {
                 setTimeout(function(){
                     var windowheight=$("html").width();
                     if(windowheight<1200&&windowheight>992){
-                        windowheight = Math.round((49*windowheight)/100);
+                        windowheight = Math.round((40*windowheight)/100);
                         $('.profile_input_textarea').css({"width":windowheight+"px"});
                     }else if(windowheight>1200){
                         windowheight = Math.round((52.5*windowheight)/100);

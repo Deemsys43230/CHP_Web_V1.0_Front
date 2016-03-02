@@ -7063,10 +7063,10 @@ input.userdob {
 select.main {
     height: 32px;
     line-height: 18px!important;
-    padding: 0 25px 0 5px!important;
+    padding: 0 25px 0 0!important;
     text-indent:5px;
     width: 90%;
-    border: 0px !important;
+    border: 0 !important;
     outline: none !important;
     color: #333;
     border-radius: 0 !important;
@@ -8911,7 +8911,6 @@ a.profile_button:hover{
 }
 
 a.forum_button {
-    width: 100% !important;
     padding:9px 20px;
     font-size: 14px;
     text-align: center;
@@ -10082,7 +10081,7 @@ input.search-input{
 input.section-input{
     display: block;
     width:100%;
-    padding: 8px 80px 8px 20px;
+    padding: 8px 80px 8px 15px;
     border:1px solid #DDD;
     color:#666;
 }
