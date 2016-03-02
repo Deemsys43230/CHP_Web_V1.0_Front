@@ -1,2 +1,1 @@
-require('./dirPagination');
-module.exports = 'angularUtils.directives.dirPagination';
+require("./dirPagination"),module.exports="angularUtils.directives.dirPagination";
