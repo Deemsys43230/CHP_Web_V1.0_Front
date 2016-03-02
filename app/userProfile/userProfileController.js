@@ -3,7 +3,7 @@
  */
 var userApp= angular.module('userApp', ['ngRoute','oc.lazyLoad','ngCookies','requestModule','flash','ngAnimate','ui.bootstrap']);
 
-userApp.controller('UserProfileController',['$scope','requestHandler','Flash',function($scope,requestHandler,Flash,$window) {
+userApp.controller('UserProfileController',['$scope','requestHandler','Flash',function($scope,requestHandler,Flash) {
 
     $scope.doGetProfile=function(){
 
@@ -33,7 +33,7 @@ userApp.controller('UserProfileController',['$scope','requestHandler','Flash',fu
                     dayDefault: day, /* Optional */
                     monthDefault: month, /* Optional */
                     yearDefault: year, /* Optional */
-                    minimumAge: 8, /* Optional */
+                    minimumAge: 3, /* Optional */
                     maximumAge: 100 /* Optional */
                 });
             });
@@ -145,7 +145,6 @@ userApp.controller('UserProfileController',['$scope','requestHandler','Flash',fu
 
         $scope.userProfile.dob = $('#dobday').val()+'/'+ $('#dobmonth').val() +'/'+$('#dobyear').val();
         var focusSelect = $('#inputFocusForDatePicker');
-        console.log($scope.userProfile.dob);
         focusSelect.focus();
         focusSelect.blur();
         $('html, body').animate({scrollTop: 0}, 0);
@@ -200,7 +199,6 @@ userApp.controller('UserProfileController',['$scope','requestHandler','Flash',fu
 
     //To Enable the update button if changes occur.
     $scope.isClean = function() {
-        console.log(angular.equals ($scope.orginalUserProfile, $scope.userProfile));
         return angular.equals ($scope.orginalUserProfile, $scope.userProfile);
     };
 
