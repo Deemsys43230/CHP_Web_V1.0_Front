@@ -2934,7 +2934,7 @@ hr{
 .panel-title a.collapsed .control-icon {
 	-webkit-transform: rotate(-180deg);
 	-moz-transform: rotate(-180deg);
-	-ms-transform: rotate(-180deg);
+	transform: rotate(-180deg);
 	-o-transform: rotate(-180deg);
 }
 
@@ -3037,7 +3037,7 @@ hr{
 	right: -2px;
 	-webkit-transform: rotate(-45deg);
 	-moz-transform: rotate(-45deg);
-	-ms-transform: rotate(-45deg);
+	transform: rotate(-45deg);
 	-o-transform: rotate(-45deg);
 }
 
@@ -5863,10 +5863,6 @@ footer a:hover {
 	background-color: #36C4F3
 }
 
-.contact-widget {
-	background: url(../images/map.png) center bottom no-repeat;
-}
-
 .contact-widget span {
 	font-weight: 700;
 }
@@ -6538,7 +6534,7 @@ ul.footer-nav li a:hover {
   -webkit-transform: rotate(360deg);
   -moz-transform: rotate(360deg);
   -o-transform: rotate(360deg);
-  -ms-transform: rotate(360deg);
+  transform: rotate(360deg);
 }
 
 .services-2-text {
@@ -6738,7 +6734,7 @@ h4.count-text{
   -webkit-transform: rotate(360deg);
   -moz-transform: rotate(360deg);
   -o-transform: rotate(360deg);
-  -ms-transform: rotate(360deg);  
+  transform: rotate(360deg);
 }
 
 .services-3-text {
@@ -6996,6 +6992,7 @@ h4.count-text{
     -webkit-transform: rotate(45deg);
     -moz-transform: rotate(45deg);
     -o-transform: rotate(45deg);
+    transform: rotate(45deg);
     border: 1px solid #e7e7e7;
     right: -5px;
     border-left: 0 none;
