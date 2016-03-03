@@ -61,11 +61,11 @@ commonApp.controller('CommonController',['$scope','requestHandler','Flash','$rou
         });
     };
 
+   // To display the user Testimonial list on load
+/*    setTimeout($scope.doGetNewsByUser(),5000);
+    setTimeout($scope.doGetTestimonialsByUser(),5000);
+    setTimeout($scope.doGetDashboardCount(),5000);*/
 
-
-
-
-    // To display the user Testimonial list on load
     $scope.doGetNewsByUser();
     $scope.doGetTestimonialsByUser();
     $scope.doGetDashboardCount();
