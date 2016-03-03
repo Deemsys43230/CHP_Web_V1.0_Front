@@ -98,8 +98,13 @@ $(window).resize(function () {
 
 /*Scroll*/
 $(document).ready(function() {
-    $('body').niceScroll();  // The document page (body)
-    });
+    $('body').niceScroll({
+        cursorcolor: "#424242",
+        cursorwidth: "8px",
+        cursorborder: "1px solid #424242",
+        cursorborderradius: 0
+    });  // The document page (body)
+});
 
 $(document).ready(function () {
     $('#pswd').keyup(function () {
