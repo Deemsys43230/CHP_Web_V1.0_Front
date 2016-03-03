@@ -55,7 +55,7 @@ commonApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                             return $ocLazyLoad.load({
                                 name:'commonApp',
                                 files:[
-                                    'http://d1707mp3jqgbeq.cloudfront.net/plugin/vertical-carousel/vertical-carousel.js',
+                                    '../../plugin/vertical-carousel/vertical-carousel.js',
                                     '../../app/commonController.js'
                                 ]
                             })
