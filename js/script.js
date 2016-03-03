@@ -6,21 +6,21 @@ $(document).ready(function ($) {
     /*---------------------------------------------------*/
     /* Progress Bar
     /*---------------------------------------------------*/
-    $('.skill-shortcode').appear(function() {
+    /*$('.skill-shortcode').appear(function() {
   		$('.progress').each(function(){ 
     		$('.progress-bar').css('width',  function(){ return ($(this).attr('data-percentage')+'%')});
   		});
-	},{accY: -100});
+	},{accY: -100});*/
 
 	
     /*--------------------------------------------------*/
     /* Counter
     /*--------------------------------------------------*/
 
-    $('.timer').countTo();
+    /*$('.timer').countTo();
     $('.counter-item').appear(function() {
         $('.timer').countTo();
-    },{accY: -100});
+    },{accY: -100});*/
 
 	
 	/*----------------------------------------------------*/
@@ -363,7 +363,7 @@ $(document).ready(function ($) {
 	/*	Css3 Transition
 	/*----------------------------------------------------*/
 	
-	$('*').each(function(){
+	/*$('*').each(function(){
 		if($(this).attr('data-animation')) {
 			var $animationName = $(this).attr('data-animation'),
 				$animationDelay = "delay-"+$(this).attr('data-animation-delay');
@@ -372,7 +372,7 @@ $(document).ready(function ($) {
 				$(this).addClass('animated').addClass($animationDelay);
 			});
 		}
-	});
+	});*/
 	
 	
 	
@@ -381,7 +381,7 @@ $(document).ready(function ($) {
 	/*	Pie Charts
 	/*----------------------------------------------------*/
 	
-	var pieChartClass = 'pieChart',
+	/*var pieChartClass = 'pieChart',
         pieChartLoadedClass = 'pie-chart-loaded';
 		
 	function initPieCharts() {
@@ -404,7 +404,7 @@ $(document).ready(function ($) {
 			});
 		});
 	}
-	initPieCharts();
+	initPieCharts();*/
 	
 	
 	
@@ -458,11 +458,11 @@ $(document).ready(function ($) {
 	/*	Nivo Lightbox
 	/*----------------------------------------------------*/
 	
-	$('.lightbox').nivoLightbox({
+	/*$('.lightbox').nivoLightbox({
 		effect: 'fadeScale',
 		keyboardNav: true,
 		errorMessage: 'The requested content cannot be loaded. Please try again later.'
-	});
+	});*/
 	
 	
 	/*----------------------------------------------------*/
@@ -485,15 +485,15 @@ $(document).ready(function ($) {
 	/*	Tooltips & Fit Vids & Parallax & Text Animations
 	/*----------------------------------------------------*/
 	
-	$("body").fitVids();
+	/*$("body").fitVids();*/
 	
 	$('.itl-tooltip').tooltip();
 	
-	$('.bg-parallax').each(function() {
+	/*$('.bg-parallax').each(function() {
 		$(this).parallax("30%", 0.2);
-	});
+	});*/
 	
-	$('.tlt').textillate({
+	/*$('.tlt').textillate({
 		loop: true,
 		in: {
 			effect: 'fadeInUp',
@@ -511,7 +511,7 @@ $(document).ready(function ($) {
 			shuffle: false,
 			reverse: true
 		}
-	});
+	});*/
 	
 	
 	
@@ -589,7 +589,7 @@ $(document).ready(function ($) {
 /*	Portfolio Isotope
 /*----------------------------------------------------*/
 
-jQuery(window).load(function(){
+/*jQuery(window).load(function(){
 	
 	var $container = $('#portfolio');
 	$container.isotope({
@@ -626,7 +626,9 @@ jQuery(window).load(function(){
         return "";
 	});
 	
-});
+});*/
+
+
 /* ----------------- End JS Document ----------------- */
 
 

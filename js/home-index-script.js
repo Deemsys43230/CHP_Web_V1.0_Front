@@ -99,6 +99,7 @@ $(window).resize(function () {
 /*Scroll*/
 $(document).ready(function() {
     $('body').niceScroll({
+        zindex: 10000,
         cursorcolor: "#424242",
         cursorwidth: "8px",
         cursorborder: "1px solid #424242",
