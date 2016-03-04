@@ -484,6 +484,7 @@ commonApp.directive("emailexists",['$q', '$timeout','requestHandler', function (
                 var defer = $q.defer();
                 $timeout(function () {
                     var isNew;
+                    console.log(modelValue);
                     var sendRequest=requestHandler.postRequest("checkEmailExist/",{"emailid":modelValue}).then(function(response){
                         isNew=response.data.Response_status;
                     });

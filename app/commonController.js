@@ -1,6 +1,6 @@
 var commonApp = angular.module('commonApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate']);
 
-commonApp.controller('CommonController',['$scope','requestHandler','Flash','$routeParams','$sce','$rootScope',function($scope,requestHandler,Flash,$routeParams,$sce,$rootScope) {
+commonApp.controller('CommonController',['$scope','requestHandler','Flash','$routeParams','$sce','$rootScope','$timeout',function($scope,requestHandler,Flash,$routeParams,$sce,$rootScope,$timeout) {
 
 
     $scope.countFrom = 0;
@@ -62,10 +62,18 @@ commonApp.controller('CommonController',['$scope','requestHandler','Flash','$rou
     };
 
    // To display the user Testimonial list on load
+    /*$scope.init=function(){
+        $scope.doGetNewsByUser();
+        $scope.doGetTestimonialsByUser();
+        $scope.doGetDashboardCount();
+    };*/
 
-    $scope.doGetNewsByUser();
-    $scope.doGetTestimonialsByUser();
-    $scope.doGetDashboardCount();
+    $timeout(function(){
+        $scope.doGetNewsByUser();
+        $scope.doGetTestimonialsByUser();
+        $scope.doGetDashboardCount();
+    });
+
 }]);
 
 
