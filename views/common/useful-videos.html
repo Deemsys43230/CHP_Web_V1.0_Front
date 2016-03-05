@@ -16,7 +16,6 @@
             </div>
             <!-- End Blog Posts -->
 
-
             <!--Sidebar-->
             <div class="col-lg-4 col-md-5 col-sm-5 sidebar right-sidebar">
                 <h4 class="classic-title"><span>Other Videos</span></h4>
@@ -26,7 +25,7 @@
                     <ul class="remove-style">
                         <li ng-repeat="video in videoList">
                             <div class="widget-thumb">
-                                <a href="" ng-click="doGetVideo($index,1)"><img class="override" src="{{video.image|trustUrl}}" alt=""/></a>
+                                <a href="" ng-click="doGetVideo($index,1)"><img class="override" ng-src="{{video.image}}" alt=""/></a>
                             </div>
                             <div class="widget-content">
                                 <h5><a href="" class="text-bold" ng-click="doGetVideo($index,1)">{{video.title}}</a></h5>

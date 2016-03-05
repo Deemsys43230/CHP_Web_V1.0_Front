@@ -50,14 +50,16 @@
             <div class="row">
                 <div class="col-md-7">
                     <!-- Start Contact Info -->
-                    <ul class="contact-details remove-style">
-                        <li><a href=""><i class="fa fa-map-marker"></i> {{commonDetails.streetaddress}}, {{commonDetails.state}}, {{commonDetails.city}} {{commonDetails.zipcode}}</a>
-                        </li>
-                        <li><a href=""><i class="fa fa-envelope-o"></i> {{commonDetails.supportemail}}</a>
-                        </li>
-                        <li><a href=""><i class="fa fa-phone"></i> {{commonDetails.mobile}}</a>
-                        </li>
-                    </ul>
+                    <div ng-hide="hideValue" ng-cloak class="ng-cloak" >
+                        <ul class="contact-details remove-style">
+                            <li><a><i class="fa fa-map-marker"></i> {{address}}</a>
+                            </li>
+                            <li><a><i class="fa fa-envelope-o"></i> {{commonDetails.supportemail}}</a>
+                            </li>
+                            <li class="hidden-sm"><a><i class="fa fa-phone"></i> {{commonDetails.mobile}}</a>
+                            </li>
+                        </ul>
+                    </div>
                     <!-- End Contact Info -->
                 </div><!-- .col-md-6 -->
                 <div class="col-md-5">
@@ -166,7 +168,7 @@
                 <div class="footer-widget mail-subscribe-widget">
                     <h4>Get in touch<span class="head-line"></span></h4>
                     <p class="margin-bottom-10">For more information or clarifications please contact us through the mail</p>
-                    <a href="" class="text-orange">{{commonDetails.supportemail}}</a>
+                    <a class="text-orange">{{commonDetails.supportemail}}</a>
                     <!--<form class="subscribe">
                         <input type="text" placeholder="mail@example.com">
                         <input type="submit" class="btn-system" value="Send">

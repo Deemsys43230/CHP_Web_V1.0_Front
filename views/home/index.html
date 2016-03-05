@@ -42,16 +42,18 @@
     <div class="top-bar">
         <div class="container">
             <div class="row">
-                <div class="col-lg-8 col-md-8 col-sm-8">
+                <div class="col-lg-8 col-md-8 col-sm-8" ng-init="init()">
                     <!-- Start Contact Info -->
-                    <ul class="contact-details remove-style">
-                        <li><a href=""><i class="fa fa-map-marker"></i> {{commonDetails.streetaddress}}, {{commonDetails.state}}, {{commonDetails.city}} {{commonDetails.zipcode}}</a>
-                        </li>
-                        <li><a href=""><i class="fa fa-envelope-o"></i> {{commonDetails.supportemail}}</a>
-                        </li>
-                        <li class="hidden-sm"><a href=""><i class="fa fa-phone"></i> {{commonDetails.mobile}}</a>
-                        </li>
-                    </ul>
+                    <div ng-hide="hideValue" ng-cloak class="ng-cloak">
+                        <ul class="contact-details remove-style">
+                            <li><a><i class="fa fa-map-marker"></i> {{address}}</a>
+                            </li>
+                            <li><a><i class="fa fa-envelope-o"></i> {{commonDetails.supportemail}}</a>
+                            </li>
+                            <li class="hidden-sm"><a><i class="fa fa-phone"></i> {{commonDetails.mobile}}</a>
+                            </li>
+                        </ul>
+                    </div>
                     <!-- End Contact Info -->
                 </div><!-- .col-md-6 -->
                 <div class="col-lg-4 col-md-4 col-sm-4 padding-left-0">
@@ -89,7 +91,7 @@
                     <i class="fa fa-bars"></i>
                 </button>
                 <!-- End Toggle Nav Link For Mobiles -->
-                <a class="navbar-brand" href="#index">
+                <a class="navbar-brand" href="../../">
                     <!--<img alt="" src="../../images/bephit.png">-->
                     <img width="209" height="57" alt="" src="../../images/cyber-logo.png">
                 </a>
@@ -97,7 +99,7 @@
             <div class="navbar-collapse collapse">
                 <!-- Start Navigation List -->
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a class="{{activeClass.index}}" href="#index">Home</a></li>
+                    <li><a class="{{activeClass.index}}" href="../../">Home</a></li>
                     <li><a class="{{activeClass.howItWork}}" href="#howItWork">How It Works</a></li>
                     <li><a class="{{activeClass.usefulVideos}}" href="#usefulVideos">Useful Videos</a></li>
                     <!--<li><a class="{{activeClass.portfolio}}" href="#portfolio">Portfolio</a></li>-->
@@ -112,215 +114,11 @@
     <!-- End Header Logo & Naviagtion -->
 </header>
 
-<!-- login or register popup-->
-<div id="modal" class="popupContainer width-28" style="display:none;">
-    <header class="popupHeader width-100">
-        <span class="header_title">Login</span>
-        <span class="modal_close pull-right"><i class="fa fa-times"></i></span>
-    </header>
+<div ng-include src="'../common/login-popup.html'"></div>
 
-    <section class="popupBody">
-
-        <div class="user_login">
-            <!-- Social Login -->
-            <!--<div class="">
-                <a href="#" class="social_box fb">
-                    <span class="icon"><i class="fa fa-facebook"></i></span>
-                    <span class="icon_title">Login with Facebook</span>
-                </a>
-            </div>-->
-
-            <!-- Username & Password Login form -->
-            <!--<div class="centeredText">
-                <span>Or</span>
-            </div>-->
-
-            <div flash-message="3000" ></div>
-           <!-- <div ng-show="sessionValue==1"><span class="text-red">Your session has been expired.<br/>Please login again!!!</span></div>-->
-            <form name="loginForm" novalidate>
-
-                <p>Email ID</p>
-                <input type="email" name="username" ng-model="username" ng-keypress="checkIfEnterKeyWasPressedForLogin($event)" required validate-email/>
-                    <span ng-show="loginForm.username.$dirty&&loginForm.username.$invalid && !loginForm.username.$pristine">
-                    <span class="error-message" ng-show="loginForm.username.$error.required"><span>Required.</span></span>
-                    <span class="error-message" ng-show="loginForm.username.$error.email"><span>Enter&nbsp;valid&nbsp;Email&nbsp;ID.</span></span>
-                    </span>
-                <p>Password</p>
-                <input type="password" name="password" ng-keypress="checkIfEnterKeyWasPressedForLogin($event)" required ng-model="password"/>
-                    <span ng-show="loginForm.password.$dirty&&loginForm.password.$invalid && !loginForm.password.$pristine">
-                    <span class="error-message" ng-show="loginForm.password.$error.required"><span>Required.</span></span>
-                    </span>
-                <a href="#" id="forgot_password" data-ng-click="reset()" class="forgot_password text-center">Forgot password?</a>
-                <div class="action_btns">
-                    <div class="one_half"><a class="btn btn_red" ng-class="{'button-disable':loginForm.$invalid}" ng-click="doLogin()">Login</a></div>
-                    <div class="one_half last"><a id="register_form" class="btn">Register</a></div>
-                </div>
-            </form>
-        </div>
-
-        <!-- Reset Password -->
-        <div class="reset_password">
-            <div flash-message="3000" ></div>
-            <form name="forgotPasswordForm" novalidate>
-                <p>Email ID</p>
-                <input type="email" name="emailid" required validate-email ng-model="emailid"/>
-                    <span ng-show="forgotPasswordForm.emailid.$dirty&&forgotPasswordForm.emailid.$invalid && !forgotPasswordForm.emailid.$pristine">
-                    <span class="error-message" ng-show="forgotPasswordForm.emailid.$error.required"><span>Required.</span></span>
-                    <span class="error-message" ng-show="forgotPasswordForm.emailid.$error.email"><span>Enter&nbsp;valid&nbsp;Email&nbsp;ID.</span></span>
-                    </span>
-                <div class="action_btns margin-top-20">
-                    <div class="one_half"><a href="#" class="btn back_btn" data-ng-click="reset()"><i class="fa fa-angle-double-left"></i> Back</a></div>
-                    <div class="one_half last"><a id="check_secret" class="btn btn_red"  ng-class="{'button-disable':forgotPasswordForm.$invalid}" ng-click="doForgotPassword()">Submit</a></div>
-                </div>
-            </form>
-
-        </div>
-
-        <!-- Answer for Secret Question -->
-        <div class="secret_question">
-            <div flash-message="3000" ></div>
-            <form name="secretAnswerForm" novalidate>
-                <p>Secret Question :</p>
-                <p class="text-bold" ng-if="secretQuestion==1">What was the name of your first pet?</p>
-                <p class="text-bold" ng-if="secretQuestion==2">What is the name of your best friend?</p>
-                <p class="text-bold" ng-if="secretQuestion==3">What is your favourite dish?</p>
-                <p class="text-bold" ng-if="secretQuestion==4">What is the name of your favourite film star ?</p>
-                <p class="text-bold" ng-if="secretQuestion==5">What is the name of your favourite sport's team?</p>
-                <p class="text-bold" ng-if="secretQuestion==6">What is your Dream job?</p>
-
-
-                <p>Secret Answer</p>
-                <input type="password" name="secretAnswer" ng-model="secretAnswer" required/>
-                    <span ng-show="forgotPasswordForm.secretAnswer.$dirty&&forgotPasswordForm.secretAnswer.$invalid && !forgotPasswordForm.secretAnswer.$pristine">
-                        <span class="error-message" ng-show="forgotPasswordForm.secretAnswer.$error.required"><span>Required.</span></span>
-                    </span>
-                <div class="action_btns margin-top-20">
-                    <div class="one_half"><a href="#"  data-ng-click="reset()" class="btn back_btn_forgotPassword"><i class="fa fa-angle-double-left"></i> Back</a></div>
-                    <div class="one_half last"><a ng-class="{'button-disable':forgotPasswordForm.$invalid}" ng-click="doSecretAnswerCheck()" class="btn btn_red">Submit</a></div>
-                </div>
-            </form>
-        </div>
-
-        <!-- Register Form -->
-        <div class="user_register">
-            <!--<div class="">
-                <a href="#" class="social_box fb">
-                    <span class="icon"><i class="fa fa-facebook"></i></span>
-                    <span class="icon_title">Sign Up with Facebook</span>
-                </a>
-            </div>
-            <div class="centeredText">
-                <span>Or</span>
-            </div>-->
-            <div flash-message="3000" ></div>
-            <form name="registerForm" novalidate>
-                <p>Name</p>
-                <input type="text" name="name" ng-pattern="/^ *([a-zA-Z]+ ?)+ *$/"  ng-model="userForm.name" maxlength="30" required/>
-                    <span ng-show="registerForm.name.$dirty&&registerForm.name.$invalid && !registerForm.name.$pristine">
-                        <span class="error-message" ng-show="registerForm.name.$error.required"><span>Required.</span></span>
-                         <span class="error-message" ng-show="registerForm.name.$error.pattern"><span>Enter&nbsp;valid&nbsp;Name.</span></span>
-                    </span>
-                <p>Email ID</p>
-                <input type="email" name="emailid" ng-model="userForm.emailid"  required validate-email emailexists/>
-                    <span ng-show="registerForm.emailid.$dirty&&registerForm.emailid.$invalid && !registerForm.emailid.$pristine">
-                        <span class="error-message" ng-show="registerForm.emailid.$error.required"><span>Required.</span></span>
-                       <span class="error-message" ng-show="registerForm.emailid.$error.email"><span>Enter&nbsp;valid&nbsp;Email&nbsp;ID.</span></span>
-
-                    </span>
-                <span class="error-message" ng-show="registerForm.emailid.$error.emailexists"><span>Email&nbsp;ID&nbsp;Already&nbsp;Exist.</span></span>
-                <p>Password</p>
-                <input type="password"  name="password" id="pswd" ng-model="userForm.password" ng-pattern="/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-])(?!.*\s).{6,}$/"  maxlength="20"required/>
-                    <span ng-show="registerForm.password.$dirty&&registerForm.password.$invalid && !registerForm.password.$pristine">
-                        <span class="error-message" ng-show="registerForm.password.$error.required"><span>Required.</span></span>
-                          <span class="error-message" ng-show="registerForm.password.$error.pattern"><span>Condition&nbsp;not&nbsp;satisfied</span></span>
-                    </span>
-                <p>Confirm Password</p>
-                <input type="password" name="confirmPassword" ng-disabled="registerForm.password.$invalid" required ng-model="confirmpassword" compare-to="userForm.password"/>
-                    <span ng-show="registerForm.confirmPassword.$dirty&&registerForm.confirmPassword.$invalid && !registerForm.confirmPassword.$pristine">
-                        <span class="error-message" ng-show="registerForm.confirmPassword.$error.compareTo"><span>Password&nbsp;don't&nbsp;match.</span></span>
-                    </span>
-                <div class="action_btns margin-top-20">
-                    <div class="one_half"><a href="#" data-ng-click="reset()" class="btn back_btn"><i class="fa fa-angle-double-left"></i> Back</a></div>
-                    <div class="one_half last"><a id="register_form2" ng-disabled="registerForm.$invalid" class="btn btn_red">Proceed <i class="fa fa-angle-double-right"></i></a></div>
-                </div>
-            </form>
-            <div id="pswd_info">
-                <h4>Password must meet the following requirements:</h4>
-
-                <ul class="remove-style">
-                    <li id="letter" class="invalid">At least <strong>one small letter</strong>
-
-                    </li>
-                    <li id="capital" class="invalid">At least <strong>one capital letter</strong>
-
-                    </li>
-                    <li id="number" class="invalid">At least <strong>one number</strong>
-
-                    </li>
-                    <li id="special" class="invalid">At least <strong>one special character</strong>
-
-                    </li>
-                    <li id="length" class="invalid">Be at least <strong>6 characters</strong>
-
-                    </li>
-                    <li id="space" class="valid">Should not allow space
-
-                    </li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- Register Form Continuation-->
-        <div class="user_register1">
-            <form name="registerForm2" novalidate>
-                <p>Security Question</p>
-                <select  ng-model="userForm.secretquestion" name="secretquestion"  required>
-                    <option value="">--Select Security Question--</option>
-                    <option value="1">What was the name of your first pet?</option>
-                    <option value="2">What is the name of your best friend?</option>
-                    <option value="3">What is your favourite dish?</option>
-                    <option value="4">What is the name of your favourite film star ?</option>
-                    <option value="5">What is the name of your favourite sport's team?</option>
-                    <option value="6">What is your Dream job?</option>
-                </select>
-                <span ng-show="registerForm2.secretquestion.$invalid && !registerForm2.secretquestion.$pristine">
-                    <span class="error-message" ng-show="registerForm2.secretquestion.$error.required"><span>Required.</span></span>
-                </span>
-                <p>Answer</p>
-                <input type="text" name="secretanswer" ng-model="userForm.secretanswer" maxlength="150" required/>
-                <span ng-show="registerForm2.secretanswer.$invalid && !registerForm2.secretanswer.$pristine">
-                    <span class="error-message" ng-show="registerForm2.secretanswer.$error.required"><span>Required.</span></span>
-                </span>
-                <div class="action_btns margin-top-20">
-                    <div class="one_half"><a href="#" class="btn back_btn_register"><i class="fa fa-angle-double-left"></i> Back</a></div>
-                    <div class="one_half last"><a ng-click="register(userForm)" ng-disabled="registerForm2.$invalid" class="btn btn_red">Register</a></div>
-                </div>
-            </form>
-        </div>
-    </section>
+<div class="white-background min-height-550">
+    <div ng-view autoscroll="true"></div>
 </div>
-
-<!-- delete section popup-->
-<div id="section-modal" class="popupContainer width-28" style="display:none;left: 36%!important;top:60px!important;">
-    <header class="popupHeader width-100">
-        <span class="header_title">Alert</span>
-        <span class="modal_close"><i class="fa fa-times"></i></span>
-    </header>
-
-    <section class="popupBody">
-        <!-- Register Form -->
-        <div class="common_model">
-            <div class="text-center"><img width="118" height="100" src="../../images/alert-ring.png"/></div><br/>
-            <h5 class="text-center">Your session has been expired<br/>Please login again!!!</h5>
-            <div class="action_btns margin-top-20 margin-bottom-10">
-                <div class="one_half"><a href="#modal"  data-ng-click="reset()" class="btn btn_red modal_trigger relogin">OK</a></div>
-                <div class="one_half last"><a onclick="return false;" class="btn back_btn modal_close">Cancel</a></div>
-            </div>
-        </div>
-    </section>
-</div>
-
-<div ng-view autoscroll="true"></div>
 
 <!-- Start Footer Section -->
 <footer>
@@ -422,12 +220,12 @@
 <!-- Go To Top Link -->
 <a href="#" class="back-to-top"><i class="fa fa-angle-up"></i></a>
 
-<div id="loader">
+<!--<div id="loader">
     <div class="spinner">
         <div class="dot1"></div>
         <div class="dot2"></div>
     </div>
-</div>
+</div>-->
 
 
 <!-- JS  -->

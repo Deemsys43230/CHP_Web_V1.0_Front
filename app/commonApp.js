@@ -48,18 +48,34 @@ commonApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
         }]);
 
         $routeProvider.
-            when('/index', {
-                templateUrl: '../common/index.html',
+            when('/home', {
+                templateUrl: 'views/common/index.html',
                 resolve: {
                         loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                             return $ocLazyLoad.load({
                                 name:'commonApp',
                                 files:[
-                                    '../../plugin/vertical-carousel/vertical-carousel.js',
-                                    '../../app/commonController.js'
+                                    'plugin/vertical-carousel/vertical-carousel.js',
+                                    'app/commonController.js'
                                 ]
                             })
                         }]
+
+                },
+                controller:'CommonController'
+            }).
+            when('/home/:id', {
+                templateUrl: 'views/common/index.html',
+                resolve: {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'commonApp',
+                            files:[
+                                'plugin/vertical-carousel/vertical-carousel.js',
+                                'app/commonController.js'
+                            ]
+                        })
+                    }]
 
                 },
                 controller:'CommonController'
@@ -216,12 +232,26 @@ commonApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 controller:'UsefulVideosController'
             }).
             otherwise({
-                redirectTo: '/index'
+                redirectTo: '/home'
             });
     }]);
 
 //Internal Login Details
-commonApp.controller('LoginController',['$scope','requestHandler','Flash','$window','$location',function($scope,requestHandler,Flash,$window,$location){
+commonApp.controller('LoginController',['$scope','requestHandler','Flash','$window','$location','$element',function($scope,requestHandler,Flash,$window,$location,$element){
+
+    $scope.hideValue=1;
+
+    $scope.getSocialMediaDetails=function(){
+        requestHandler.getRequest("contactus/","").then(function(response){
+            $scope.commonDetails = response.data.Contactus[0];
+            $scope.address=$scope.commonDetails.streetaddress+', '+$scope.commonDetails.state+', '+$scope.commonDetails.city+', '+$scope.commonDetails.zipcode;
+            $scope.hideValue=0;
+        });
+    };
+
+    $scope.init=function(){
+        $scope.getSocialMediaDetails();
+    };
 
     $scope.$on('$routeChangeStart', function(next, current) {
         $scope.activeClass={};
@@ -230,10 +260,14 @@ commonApp.controller('LoginController',['$scope','requestHandler','Flash','$wind
     });
 
     $scope.reset=function(){
-        $scope.loginForm.$setPristine();
-        $scope.forgotPasswordForm.$setPristine();
-        $scope.registerForm.$setPristine();
-        $scope.registerForm2.$setPristine();
+        var loginForm = $element.find('form').eq(0).controller('form');
+        loginForm.$setPristine();
+        var forgotPasswordForm = $element.find('form').eq(1).controller('form');
+        forgotPasswordForm.$setPristine();
+        var registerForm = $element.find('form').eq(2).controller('form');
+        registerForm.$setPristine();
+        var registerForm2 = $element.find('form').eq(3).controller('form');
+        registerForm2.$setPristine();
         $scope.username='';
         $scope.password='';
         $scope.emailid='';
@@ -245,13 +279,7 @@ commonApp.controller('LoginController',['$scope','requestHandler','Flash','$wind
         };
     };
 
-    $scope.getSocialMediaDetails=function(){
-        requestHandler.getRequest("contactus/","").then(function(response){
-            $scope.commonDetails = response.data.Contactus[0];
-        });
-    };
 
-    $scope.getSocialMediaDetails();
 
     //Login
     $scope.doLogin=function(){
@@ -271,26 +299,23 @@ commonApp.controller('LoginController',['$scope','requestHandler','Flash','$wind
                 //Get Logged In User
                 requestHandler.getRequest("getUserId/","").then(function(response){
 
-                    console.log("Role:"+response.data.Login.roleid);
                    if(response.data.Login.roleid==3){
-                       console.log("Role:"+response.data.User_Profile.isProfileUpdated);
                        if(response.data.User_Profile.isProfileUpdated==0){
-                          $window.location.href="../user/#/profile";
+                          $window.location.href=requestHandler.domainURL()+"views/user/#/profile";
                        }else{
-                           $window.location.href="../user/#/dashboard";
+                           $window.location.href=requestHandler.domainURL()+"views/user/#/dashboard";
                        }
                    }
                     else if(response.data.Login.roleid==2){
-                       console.log("Role:"+response.data.User_Profile.isProfileUpdated);
                        if(response.data.User_Profile.isProfileUpdated==0){
-                           $window.location.href="../coach/#/profile";
+                           $window.location.href=requestHandler.domainURL()+"views/coach/#/profile";
                        }else{
-                           $window.location.href="../coach/#/dashboard";
+                           $window.location.href=requestHandler.domainURL()+"views/coach/#/dashboard";
                        }
                    }
                     else if(response.data.Login.roleid==1){
                        $scope.reset();
-                       $window.location.href="../superadmin/#/dashboard";
+                       $window.location.href=requestHandler.domainURL()+"views/superadmin/#/dashboard";
                    }
                 });
 
@@ -316,8 +341,6 @@ commonApp.controller('LoginController',['$scope','requestHandler','Flash','$wind
         }
         requestHandler.postRequest("registerUser/",$scope.userForm).then(function(response){
 
-            console.log($scope.userForm);
-            console.log(response.data.Response);
             if(response.data.Response===0){
                 errorMessage(Flash,"Something went wrong! Please Try again later!")
             }
@@ -398,6 +421,7 @@ commonApp.controller('LoginController',['$scope','requestHandler','Flash','$wind
             }
         });
     };
+
 }]);
 
 //To Display success message
@@ -484,7 +508,6 @@ commonApp.directive("emailexists",['$q', '$timeout','requestHandler', function (
                 var defer = $q.defer();
                 $timeout(function () {
                     var isNew;
-                    console.log(modelValue);
                     var sendRequest=requestHandler.postRequest("checkEmailExist/",{"emailid":modelValue}).then(function(response){
                         isNew=response.data.Response_status;
                     });
@@ -543,3 +566,112 @@ commonApp.directive('validateUrl', function() {
         }
     };
 });
+
+/*commonApp.controller('CommonController',['$scope','requestHandler','Flash','$location','$sce','$rootScope','$timeout',function($scope,requestHandler,Flash,$location,$sce,$rootScope,$timeout) {
+
+
+    $scope.countFrom = 0;
+
+    if($location.$$absUrl.slice(-6).toString()== "logout"){
+        *//* $rootScope.sessionValue = 1;*//*
+        $(".modal_trigger").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
+
+        $(function(){
+            $("#lean_overlay").fadeTo(1000);
+            $("#section-modal").fadeIn(600);
+            $(".common_model").show();
+        });
+
+        $(".modal_close").click(function(){
+            $(".common_model").hide();
+            $("#section-modal").hide();
+            $("#lean_overlay").hide();
+        });
+
+        $(".relogin").click(function(){
+            $("#section-modal").hide();
+        });
+
+        $("#lean_overlay").click(function(){
+            $(".common_model").hide();
+            $("#section-modal").hide();
+            $("#lean_overlay").hide();
+        });
+    }
+    // To display Testimonials as user
+    $scope.doGetNewsByUser = function () {
+        requestHandler.getRequest("getLatestNewsByUser/", "").then(function (response) {
+            $scope.usernewslist = response.data.News;
+            newscarousel();
+        }, function () {
+            errorMessage(Flash, "Please try again later!")
+        });
+    };
+
+    // To display Testimonials as user
+    $scope.doGetTestimonialsByUser=function(){
+        requestHandler.getRequest("getTestimonialListByUser/", "").then(function(response){
+            $scope.usertestimoniallist=response.data.Testimonials;
+        },function(){
+            errorMessage(Flash,"Please try again later!")
+        });
+    };
+
+    $scope.doGetDashboardCount=function(){
+        requestHandler.getRequest("getStatistics/","").then(function(response){
+            $scope.adminCountList=response.data.Stats;
+            $scope.memberCount = $scope.adminCountList.membercount;
+            $scope.exerciseCount = $scope.adminCountList.exercisecount;
+            $scope.foodCount = $scope.adminCountList.foodcount;
+            $scope.courseCount = $scope.adminCountList.publishedcourses;
+
+        });
+    };
+
+    // To display the user Testimonial list on load
+    *//*$scope.init=function(){
+     $scope.doGetNewsByUser();
+     $scope.doGetTestimonialsByUser();
+     $scope.doGetDashboardCount();
+     };*//*
+
+    $timeout(function(){
+        $scope.doGetNewsByUser();
+        $scope.doGetTestimonialsByUser();
+        $scope.doGetDashboardCount();
+    });
+
+}]);
+
+
+
+// render image to view in list
+commonApp.filter('trusted', ['$sce', function ($sce) {
+    return function(url) {
+        return $sce.trustAsResourceUrl(url);
+    };
+}]);
+
+
+commonApp.filter('html', ['$sce', function ($sce) {
+    return function (text) {
+        return $sce.trustAsHtml(text);
+    };
+}]);
+
+commonApp.filter('toSec', function() {
+
+    return function(input) {
+
+        dateArgs = input.match(/\d{2,4}/g),
+            year = dateArgs[2],
+            month = parseInt(dateArgs[1]) - 1,
+            day = dateArgs[0],
+            hour = dateArgs[3],
+            minutes = dateArgs[4];
+
+        var result = new Date(year, month, day, hour, minutes).getTime();
+
+        return result || '';
+    };
+});*/

@@ -34,7 +34,8 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         }
                         case 403: {
                             // alert("Your session has been expired.Please login again!!!");
-                            $window.location.href="../../views/home/#/index?session=logout";
+                            /*$window.location.href="../../views/home/#/index?session=logout";*/
+                            $window.location.href="../../#/home/logout";
                             //$location.path("/login");
                             break;
                         }
@@ -1075,6 +1076,8 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
     }]);
 //Initial Controller for Username
 adminApp.controller("InitialController",['$scope','requestHandler','$location',function($scope,requestHandler,$location){
+    $scope.hideValue=1;
+
     requestHandler.getRequest("getUserId/","").then(function(response){
         $scope.username=response.data.User_Profile.name;
     });
@@ -1088,7 +1091,9 @@ adminApp.controller("InitialController",['$scope','requestHandler','$location',f
     $scope.getSocialMediaDetails=function(){
         requestHandler.getRequest("contactus/","").then(function(response){
             $scope.commonDetails = response.data.Contactus[0];
+            $scope.address=$scope.commonDetails.streetaddress+', '+$scope.commonDetails.state+', '+$scope.commonDetails.city+', '+$scope.commonDetails.zipcode;
             $scope.contactUsDetails=$scope.commonDetails;
+            $scope.hideValue=0;
         });
     };
 
@@ -1099,11 +1104,9 @@ adminApp.controller("InitialController",['$scope','requestHandler','$location',f
 adminApp.controller("LogoutController",['$cookies','$scope','$window','requestHandler',function($cookies,$scope,$window,requestHandler){
 
     $scope.doLogout=function(){
-
-
         $cookies.remove("X-CSRFToken",{path: '/'});
         $cookies.put('sessionid',undefined);
-        $window.location.href="../../#/index";
+        $window.location.href="../../#/home";
     };
 
 }]);

@@ -32,7 +32,7 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         }
                         case 403: {
                          // alert("Your session has been expired.Please login again!!!");
-                            $window.location.href="../../views/home/#/index?session=logout";
+                            $window.location.href="../../#/home/logout";
 
                           // $location.path("/login");
                             break;
@@ -584,6 +584,8 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
 
 //Initial Controller for Username
 userApp.controller("UserInitialController",['$scope','requestHandler','$location',function($scope,requestHandler,$location){
+    $scope.hideValue=1;
+
     requestHandler.getRequest("getUserId/","").then(function(response){
         $scope.username=response.data.User_Profile.name;
     });
@@ -597,6 +599,8 @@ userApp.controller("UserInitialController",['$scope','requestHandler','$location
     $scope.getSocialMediaDetails=function(){
         requestHandler.getRequest("contactus/","").then(function(response){
             $scope.commonDetails = response.data.Contactus[0];
+            $scope.address=$scope.commonDetails.streetaddress+', '+$scope.commonDetails.state+', '+$scope.commonDetails.city+', '+$scope.commonDetails.zipcode;
+            $scope.hideValue=0;
         });
     };
 
@@ -611,7 +615,7 @@ userApp.controller("UserLogoutController",['$cookies','$scope','$window',functio
 
         $cookies.remove("X-CSRFToken",{path: '/'});
         $cookies.put('sessionid',undefined);
-        $window.location.href="../../#/index";
+        $window.location.href="../../#/home";
     };
 
 }]);

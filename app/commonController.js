@@ -4,8 +4,9 @@ commonApp.controller('CommonController',['$scope','requestHandler','Flash','$rou
 
 
     $scope.countFrom = 0;
+    console.log($routeParams.id);
 
-    if($routeParams.session== "logout"){
+    if($routeParams.id== "logout"){
        /* $rootScope.sessionValue = 1;*/
 
 

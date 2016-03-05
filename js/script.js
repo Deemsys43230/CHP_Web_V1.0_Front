@@ -2,7 +2,6 @@
 
 $(document).ready(function ($) {
 	"use strict";
-
     /*---------------------------------------------------*/
     /* Progress Bar
     /*---------------------------------------------------*/
@@ -703,7 +702,7 @@ setActiveStyleSheet(title);
 
 
 $(document).ready(function(){
-	
+
 	// Styles Switcher
 	$(document).ready(function(){
 		$('.open-switcher').click(function(){
@@ -719,7 +718,7 @@ $(document).ready(function(){
 			}
 		});
 	});
-	
+
 	//Top Bar Switcher
 	$(".topbar-style").change(function(){
         var topbar=$(".top-bar");
@@ -737,7 +736,7 @@ $(document).ready(function(){
 			$(window).resize();
 		}
 	});
-	
+
 	//Layout Switcher
 	$(".layout-style").change(function(){
 		if( $(this).val() == 1){
@@ -748,7 +747,7 @@ $(document).ready(function(){
 			$(window).resize();
 		}
 	});
-	
+
 	//Background Switcher
 	$('.switcher-box .bg-list li a').click(function() {
 		var current = $('.switcher-box select[id=layout-style]').find('option:selected').val();

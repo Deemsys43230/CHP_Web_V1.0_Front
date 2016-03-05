@@ -44,14 +44,16 @@
                 <div class="row">
                     <div class="col-md-7">
                         <!-- Start Contact Info -->
-                        <ul class="contact-details remove-style">
-                            <li><a href=""><i class="fa fa-map-marker"></i> {{commonDetails.streetaddress}}, {{commonDetails.state}}, {{commonDetails.city}} {{commonDetails.zipcode}}</a>
-                            </li>
-                            <li><a href=""><i class="fa fa-envelope-o"></i> {{commonDetails.supportemail}}</a>
-                            </li>
-                            <li><a href=""><i class="fa fa-phone"></i> {{commonDetails.mobile}}</a>
-                            </li>
-                        </ul>
+                        <div ng-hide="hideValue" ng-cloak class="ng-cloak" >
+                            <ul class="contact-details remove-style">
+                                <li><a><i class="fa fa-map-marker"></i> {{address}}</a>
+                                </li>
+                                <li><a><i class="fa fa-envelope-o"></i> {{commonDetails.supportemail}}</a>
+                                </li>
+                                <li class="hidden-sm"><a><i class="fa fa-phone"></i> {{commonDetails.mobile}}</a>
+                                </li>
+                            </ul>
+                        </div>
                         <!-- End Contact Info -->
                     </div><!-- .col-md-6 -->
                     <div class="col-md-5">
@@ -250,12 +252,6 @@
 <!-- Go To Top Link -->
 <a href="#" class="back-to-top"><i class="fa fa-angle-up"></i></a>
 
-<div id="loader">
-    <div class="spinner">
-        <div class="dot1"></div>
-        <div class="dot2"></div>
-    </div>
-</div>
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>

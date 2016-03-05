@@ -1410,6 +1410,10 @@ header {
     -o-transition: all 0.4s ease-in-out;
 }
 
+.hidden-header{
+    height : 110px;
+}
+
 .fixed-header {
 	opacity: 0.95;
 	box-shadow: 0 3px 3px -3px rgba(0, 0, 0, 0.2);
@@ -6757,7 +6761,7 @@ h4.count-text{
 
 .services-3 p {
   color: #ACB2B8;
-  margin: 0px 0px 0px 0px;
+  margin: 0;
   text-align:right; 
 }
 
