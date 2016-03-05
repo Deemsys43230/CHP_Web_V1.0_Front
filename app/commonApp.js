@@ -80,10 +80,10 @@ commonApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'CommonController'
             }).
-            when('/howItWork', {
+            when('/how-it-work', {
                 templateUrl: '../common/how-it-work.html'
             }).
-            when('/aboutUs', {
+            when('/aboutus', {
                 templateUrl: '../common/about.html'
             }).
             when('/portfolio', {
@@ -161,7 +161,7 @@ commonApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'NewsUserController'
             }).
-            when('/FAQ', {
+            when('/faq', {
                 templateUrl: '../common/FAQ.html',
                 resolve: {
                     loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
@@ -189,7 +189,7 @@ commonApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'InstructionCommonController'
             }).
-            when('/termsofuse', {
+            when('/terms-of-use', {
                 templateUrl: '../common/termsofuse.html',
                 resolve: {
                     loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
@@ -217,7 +217,7 @@ commonApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'PrivacyPolicyCommonController'
             }).
-            when('/usefulVideos', {
+            when('/useful-videos', {
                 templateUrl: '../common/useful-videos.html',
                 resolve: {
                     loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {

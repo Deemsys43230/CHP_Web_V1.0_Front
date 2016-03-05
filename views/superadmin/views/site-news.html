@@ -11,7 +11,7 @@
         </div>
         <div class="col-md-9 min-height-450" ng-init="init()">
             <a href="#dashboard" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back to Dashboard</a>
-            <a href="#addLatestNews" class="back-button pull-right margin-left-5"><i class="fa fa-plus-circle"></i> Add Latest News</a>
+            <a href="#add-latest-news" class="back-button pull-right margin-left-5"><i class="fa fa-plus-circle"></i> Add Latest News</a>
             <!-- Stat Search -->
             <div class="pull-right" id="hidden-search">
                 <a href="#" onclick="return false;" class="show-list-search search_button margin-left-5"><i class="fa fa-search"></i></a>
@@ -46,8 +46,8 @@
                     <td><span class="line-clamp-lg">{{latestnews.title}}</span></td>
                     <td>{{latestnews.datetime}}</td>
                     <td>
-                        <a href="#viewLatestNews/{{latestnews.newsid}}" class="btn-xs btn-primary">View Details</a>
-                        <a href="#editLatestNews/{{latestnews.newsid}}" class="btn-xs btn-warning">Edit</a>
+                        <a href="#view-latest-news/{{latestnews.newsid}}" class="btn-xs btn-primary">View Details</a>
+                        <a href="#edit-latest-news/{{latestnews.newsid}}" class="btn-xs btn-warning">Edit</a>
                         <a href="" class="btn-xs btn-success" ng-click="doEnableDisableLatestNews(latestnews.newsid)" ng-show="latestnews.status==0">&nbsp;&nbsp;Publish&nbsp;&nbsp;</a>
                         <a href="" class="btn-xs btn-danger" ng-click="doEnableDisableLatestNews(latestnews.newsid)" ng-hide="latestnews.status==0">Unpublish</a>
                     </td>

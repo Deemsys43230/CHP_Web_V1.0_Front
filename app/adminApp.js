@@ -101,7 +101,7 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'FAQController'
             }).
-            when('/viewFAQ/:id', {
+            when('/view-faq/:id', {
                 templateUrl: 'views/site-view-FAQ.html',
                 resolve: {
                     loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
@@ -131,7 +131,7 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'InstructionController'
             }).
-            when('/privacyPolicy', {
+            when('/privacy-policy', {
                 templateUrl: 'views/site-policy.html',
                 resolve: {
                     loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
@@ -147,7 +147,7 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'PrivacyPolicyController'
             }).
-            when('/termsOfUse', {
+            when('/terms-of-use', {
                 templateUrl: 'views/site-termsofuse.html',
                 resolve: {
                     loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
@@ -163,7 +163,7 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'TermsOfUseController'
             }).
-            when('/latestNews', {
+            when('/latest-news', {
                 templateUrl: 'views/site-news.html',
                 resolve: {
                     loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
@@ -178,7 +178,7 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'LatestNewsController'
             }).
-            when('/addLatestNews', {
+            when('/add-latest-news', {
                 templateUrl: 'views/site-add-or-edit-news.html',
                 resolve: {
                     loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
@@ -194,7 +194,7 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'LatestNewsController'
             }).
-            when('/editLatestNews/:id', {
+            when('/edit-latest-news/:id', {
                 templateUrl: 'views/site-add-or-edit-news.html',
                 resolve: {
                     loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
@@ -210,7 +210,7 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'LatestNewsEditController'
             }).
-            when('/viewLatestNews/:id', {
+            when('/view-latest-news/:id', {
                 templateUrl: 'views/site-view-news.html',
                 resolve: {
                     loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
@@ -239,7 +239,7 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'ForumsController'
             }).
-            when('/viewForum/:id', {
+            when('/view-forum/:id', {
                 templateUrl: 'views/site-view-forum.html',
                 resolve: {
                     loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
@@ -254,7 +254,7 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'ForumsEditController'
             }).
-            when('/editForum/:id', {
+            when('/edit-forum/:id', {
                 templateUrl: 'views/site-add-or-edit-forum.html',
                 resolve: {
                     loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
@@ -268,7 +268,7 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'ForumsEditController'
             }).
-            when('/addForum', {
+            when('/add-forum', {
                 templateUrl: 'views/site-add-or-edit-forum.html',
                 resolve: {
                     loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
@@ -299,7 +299,7 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'TestimonialController'
             }).
-            when('/addTestimonial', {
+            when('/add-testimonial', {
                 templateUrl: 'views/site-add-or-edit-testimonial.html',
                 resolve: {
                     loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
@@ -317,7 +317,7 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'TestimonialController'
             }).
-            when('/editTestimonial/:id', {
+            when('/edit-testimonial/:id', {
                 templateUrl: 'views/site-add-or-edit-testimonial.html',
                 resolve: {
                     loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
@@ -335,7 +335,7 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'TestimonialEditController'
             }).
-            when('/viewTestimonial/:id', {
+            when('/view-testimonial/:id', {
                 templateUrl: 'views/site-view-testimonial.html',
                 controller:'TestimonialEditController'
             }).
@@ -522,7 +522,7 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 type:1,//For Add type=1
                 isNew:true
             }).
-            when('/exerciseType', {
+            when('/exercise-type', {
                 templateUrl: 'views/exercise-type.html',
                 resolve: {
                     loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
@@ -552,7 +552,7 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'ContactUsController'
             }).
-            when('/mobileApp', {
+            when('/mobile-app', {
                 templateUrl: 'views/settings-mobile-app.html',
                 resolve: {
                     loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
@@ -566,7 +566,7 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'MobileAppSettingsController'
             }).
-            when('/paypalSettings', {
+            when('/paypal-settings', {
                 templateUrl: 'views/settings-paypal.html',
                 resolve: {
                     loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
@@ -580,7 +580,7 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'PaypalSettingsController'
             }).
-            when('/socialMediaSettings', {
+            when('/social-media-settings', {
                 templateUrl: 'views/settings-socialmedia.html',
                 resolve: {
                     loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
@@ -594,7 +594,7 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'SocialMediaSettingsController'
             }).
-            when('/serverSettings', {
+            when('/server-settings', {
                 templateUrl: 'views/settings-server.html',
                 resolve: {
                     loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
@@ -668,7 +668,7 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'FoodDetailsViewController'
             }).
-            when('/addFood', {
+            when('/add-food', {
                 templateUrl: 'views/food-add-or-edit.html',
                 resolve: {
                     loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
@@ -693,7 +693,7 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 type:1,//For Add type=1
                 isNew:true
             }).
-            when('/addFood/:id', {
+            when('/add-food/:id', {
                 templateUrl: 'views/food-add-or-edit.html',
                 resolve: {
                     loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
@@ -719,7 +719,7 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 type:1,//For Add type=1
                 isNew:true
             }).
-            when('/uploadFood', {
+            when('/upload-food', {
                 templateUrl: 'views/upload-food.html',
                 resolve: {
                     loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
@@ -734,7 +734,7 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'FoodController'
             }).
-            when('/foodCategory', {
+            when('/food-category', {
                 templateUrl: 'views/food-category.html',
                 resolve: {
                     loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
@@ -750,7 +750,7 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'FoodCategoryController'
             }).
-            when('/foodMeasure', {
+            when('/food-measure', {
                 templateUrl: 'views/food-Measure.html',
                 resolve: {
                     loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
@@ -766,7 +766,7 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'FoodMeasureController'
             }).
-            when('/foodSuggestion', {
+            when('/food-suggestion', {
                 templateUrl: 'views/food-Suggestion.html',
                 resolve: {
                     loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
@@ -782,7 +782,7 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'FoodSuggestionController'
             }).
-            when('/foodSuggestionDetail/:id', {
+            when('/food-suggestion-detail/:id', {
                 templateUrl: 'views/food-view-suggestion.html',
                 resolve: {
                     loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
@@ -798,7 +798,7 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'FoodSuggestionViewController'
             }).
-            when('/exerciseSuggestion', {
+            when('/exercise-suggestion', {
                 templateUrl: 'views/exercise-suggestion.html',
                 resolve: {
                     loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
@@ -814,7 +814,7 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'ExerciseSuggestionController'
             }).
-            when('/exerciseSuggestionDetail/:id', {
+            when('/exercise-suggestion-detail/:id', {
                 templateUrl: 'views/exercise-view-suggestion.html',
                 resolve: {
                     loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
@@ -845,7 +845,7 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'CourseAdminController'
             }).
-            when('/coursePending', {
+            when('/course-pending', {
                 templateUrl: 'views/course-pending.html',
                 resolve: {
                     loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
@@ -862,7 +862,7 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 controller:'CourseAdminController'
             }).
 
-            when('/courseDetail/:id', {
+            when('/course-detail/:id', {
                 templateUrl: '../user/views/course-details.html',
                 resolve: {
                     loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
@@ -877,7 +877,7 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'CourseAdminController'
             }).
-            when('/courseView/:id', {
+            when('/course-view/:id', {
                 templateUrl: '../user/views/course-view.html',
                 resolve: {
                     loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
@@ -907,7 +907,7 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'AdminPaymentController'
             }).
-            when('/courseSubscribersList/:id', {
+            when('/course-subscribers-list/:id', {
                 templateUrl: 'views/payments-course-subscribers.html',
                 resolve: {
                     loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
@@ -924,7 +924,7 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'AdminPaymentController'
             }).
-            when('/courseSubscriberDetails/:id', {
+            when('/course-subscriber-details/:id', {
                 templateUrl: 'views/payments-course-subscriber-details.html',
                 resolve: {
                     loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
@@ -940,7 +940,7 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'AdminPaymentController'
             }).
-            when('/coachSubscriberDetails/:id', {
+            when('/coach-subscriber-details/:id', {
                 templateUrl: 'views/payments-coach-subscriber-details.html',
                 resolve: {
                     loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
@@ -956,7 +956,7 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'AdminPaymentController'
             }).
-            when('/coachPayment', {
+            when('/coach-payment', {
                 templateUrl: 'views/payments-coach.html',
                 resolve: {
                     loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
@@ -972,7 +972,7 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'AdminPaymentController'
             }).
-            when('/coachSubscribersList/:id', {
+            when('/coach-subscribers-list/:id', {
                 templateUrl: 'views/payments-coach-subscribers.html',
                 resolve: {
                     loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
@@ -989,8 +989,8 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'AdminPaymentController'
             }).
-            when('/FAQ', {
-                templateUrl: '../common/FAQ.html',
+            when('/faq', {
+                templateUrl: '../common/faq.html',
                 resolve: {
                     loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
@@ -1018,7 +1018,7 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'InstructionCommonController'
             }).
-            when('/termsofuse', {
+            when('/terms-of-use', {
                 templateUrl: '../../views/common/termsofuse.html',
                 resolve: {
                     loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
@@ -1672,13 +1672,13 @@ adminApp.factory("siteMenuService", function () {
         {
             "name": "Privacy Policy",
             "icon": "pencil",
-            "href": "privacyPolicy",
+            "href": "privacy-policy",
             "active": ""
         },
         {
             "name": "Terms Of Use",
             "icon": "file-text",
-            "href": "termsOfUse",
+            "href": "terms-of-use",
             "active": ""
         },
         {
@@ -1692,7 +1692,7 @@ adminApp.factory("siteMenuService", function () {
             "id":2,
             "name": "Latest News",
             "icon": "newspaper-o",
-            "href": "latestNews",
+            "href": "latest-news",
             "active": ""
         },
         {
@@ -1711,25 +1711,25 @@ adminApp.factory("siteMenuService", function () {
         {
             "name": "Mobile App",
             "icon": "tablet",
-            "href": "mobileApp",
+            "href": "mobile-app",
             "active": ""
         },
         {
             "name": "Payment Info",
             "icon": "dollar",
-            "href": "paypalSettings",
+            "href": "paypal-settings",
             "active": ""
         },
         {
             "name": "Server",
             "icon": "server",
-            "href": "serverSettings",
+            "href": "server-settings",
             "active": ""
         },
         {
             "name": "Social Media",
             "icon": "connectdevelop",
-            "href": "socialMediaSettings",
+            "href": "social-media-settings",
             "active": ""
         }
     ];

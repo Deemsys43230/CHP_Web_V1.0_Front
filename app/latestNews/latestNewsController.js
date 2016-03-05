@@ -36,7 +36,7 @@ adminApp.controller('LatestNewsController',['$scope','requestHandler','Flash','$
         requestHandler.postRequest("admin/insertorupdateLatestNews/",$scope.latest).then(function(response){
 
             successMessage(Flash,"Successfully Added");
-            $location.path("latestNews");
+            $location.path("latest-news");
         }, function () {
             errorMessage(Flash, "Please try again later!")
         });
@@ -107,7 +107,7 @@ adminApp.controller('LatestNewsEditController',['$scope','requestHandler','Flash
     $scope.doUpdateLatestNews = function(){
         requestHandler.putRequest("admin/insertorupdateLatestNews/",$scope.latest).then(function(response){
             successMessage(Flash,"Successfully Updated");
-            $location.path("latestNews");
+            $location.path("latest-news");
 
         }, function () {
             errorMessage(Flash, "Please try again later!")

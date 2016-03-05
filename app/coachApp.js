@@ -80,7 +80,7 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'CoachProfileController'
             }).
-            when('/mymembers', {
+            when('/my-members', {
                 templateUrl: 'views/member.html',
                 resolve: {
                     loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
@@ -96,7 +96,7 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'CoachMembersController'
             }).
-            when('/memberView/:id', {
+            when('/member-view/:id', {
                 templateUrl: 'views/member-view.html',
                 resolve: {
                     loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
@@ -127,7 +127,7 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'ForumsCoachController'
             }).
-            when('/addforum', {
+            when('/add-forum', {
                 templateUrl: '../user/views/forum-add.html',
                 resolve: {
                     loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
@@ -142,7 +142,7 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'ForumsCoachController'
             }).
-            when('/editForum/:id', {
+            when('/edit-forum/:id', {
                 templateUrl: '../user/views/forum-add.html',
                 resolve: {
                     loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
@@ -156,7 +156,7 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'ForumsCoachEditController'
             }).
-            when('/forumDetails/:id', {
+            when('/forum-details/:id', {
                 templateUrl: '../user/views/forum-details.html',
                 resolve: {
                     loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
@@ -199,7 +199,7 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'CourseController'
             }).
-            when('/courseView/:id', {
+            when('/course-view/:id', {
                 templateUrl: 'views/course-view.html',
                 resolve: {
                     loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
@@ -214,7 +214,7 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'CourseController'
             }).
-            when('/courseSection/:sectionId', {
+            when('/course-section/:sectionId', {
                 templateUrl: 'views/course-section.html',
                 resolve: {
                     loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
@@ -229,7 +229,7 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'CourseController'
             }).
-            when('/courseSectionEdit/:sectionId', {
+            when('/course-section-edit/:sectionId', {
                 templateUrl: 'views/course-section-add-edit.html',
                 resolve: {
                     loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
@@ -245,7 +245,7 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'CourseEditController'
             }).
-            when('/courseSectionAdd/:courseId', {
+            when('/course-section-add/:courseId', {
                 templateUrl: 'views/course-section-add-edit.html',
                 resolve: {
                     loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
@@ -261,7 +261,7 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'CourseEditController'
             }).
-            when('/courseEdit/:id', {
+            when('/course-edit/:id', {
                 templateUrl: 'views/course-add-edit.html',
                 resolve: {
                     loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
@@ -280,7 +280,7 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'CourseEditController'
             }).
-            when('/courseAdd', {
+            when('/course-add', {
                 templateUrl: 'views/course-add-edit.html',
                 resolve: {
                     loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
@@ -314,7 +314,7 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller: 'CoachPaymentController'
             }).
-            when('/subscribersList/:id', {
+            when('/subscribers-list/:id', {
                 templateUrl: 'views/payment-subscribers-list.html',
                 resolve: {
                     loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
@@ -331,7 +331,7 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller: 'CoachPaymentController'
             }).
-            when('/subscribersPayments', {
+            when('/subscribers-payments', {
                 templateUrl: 'views/payment-subscription.html',
                 resolve: {
                     loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
@@ -347,7 +347,7 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller: 'CoachPaymentController'
             }).
-            when('/subscriptionDetails/:id', {
+            when('/subscription-details/:id', {
                 templateUrl: 'views/payment-subscription-details.html',
                 resolve: {
                     loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
@@ -362,7 +362,7 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller: 'CoachPaymentController'
             }).
-            when('/paymentSettings', {
+            when('/payment-settings', {
                 templateUrl: 'views/payment-settings.html',
                 resolve: {
                     loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
@@ -377,7 +377,7 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller: 'CoachPaymentSettingsController'
             }).
-            when('/subscriptionPanel', {
+            when('/subscription-panel', {
                 templateUrl: 'views/payment-subscription-panel.html',
                 resolve: {
                     loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
@@ -408,8 +408,8 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'ContactUsDetailsController'
             }).
-            when('/FAQ', {
-                templateUrl: '../common/FAQ.html',
+            when('/faq', {
+                templateUrl: '../common/faq.html',
                 resolve: {
                     loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
@@ -436,7 +436,7 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'InstructionCommonController'
             }).
-            when('/termsofuse', {
+            when('/terms-of-use', {
                 templateUrl: '../common/termsofuse.html',
                 resolve: {
                     loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {

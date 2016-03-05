@@ -414,7 +414,7 @@ adminApp.controller('CourseAdminController',['$scope','requestHandler','Flash','
          requestHandler.postRequest("admin/publishCourse/",{"courseid":course}).then(function(response){
 
                 $scope.pendingcourselist();
-                $location.path('coursePending');
+                $location.path('course-pending');
                 successMessage(Flash,"Successfully Published");
 
             },function(){
@@ -426,7 +426,7 @@ adminApp.controller('CourseAdminController',['$scope','requestHandler','Flash','
     $scope.doRejectCourse = function(course){
         requestHandler.postRequest("admin/rejectCourse/",{"courseid":course,"comments":$scope.comments}).then(function(response){
                 $scope.pendingcourselist();
-                $location.path('coursePending');
+                $location.path('course-pending');
                 successMessage(Flash,"Successfully Rejected");
         },function(){
             errorMessage(Flash,"Please try again later!")
@@ -721,7 +721,7 @@ coachApp.controller('CourseController',['$scope','requestHandler','Flash','$rout
         requestHandler.postRequest("coach/sendCourseForReview/",{"courseid":id}).then(function(response) {
             successMessage(Flash,"Course Sent for Review!");
             if(!$routeParams.id){
-                $location.path("courseView/"+id);
+                $location.path("course-view/"+id);
             }
             else $scope.getCourseDetails();
         },function(){
@@ -735,7 +735,7 @@ coachApp.controller('CourseController',['$scope','requestHandler','Flash','$rout
 
             if($routeParams.sectionId == $scope.deleteSectionId){
 
-                $location.path("courseView/"+id);
+                $location.path("course-view/"+id);
             }
             else if($routeParams.sectionId != $scope.deleteSectionId){
 
@@ -846,7 +846,7 @@ coachApp.controller('CourseEditController',['$scope','requestHandler','Flash','$
         $scope.addSection=function(){
             $scope.loaded=true;
             requestHandler.postRequest("coach/insertCourseSection/",$scope.sectionDetails).then(function(response) {
-                $location.path("courseSection/"+response.data.CourseSection.sectionid);
+                $location.path("course-section/"+response.data.CourseSection.sectionid);
                 $scope.loaded=false;
                 successMessage(Flash,"Section Successfully Added!");
             },function(){
@@ -962,7 +962,7 @@ coachApp.controller('CourseEditController',['$scope','requestHandler','Flash','$
                 $scope.loaded=true;
                 requestHandler.postRequest("coach/insertCourse/",$scope.courseDetails).then(function(response) {
                     $scope.loaded=false;
-                    $location.path("courseView/"+response.data.Course.courseid);
+                    $location.path("course-view/"+response.data.Course.courseid);
                 },function(){
                     errorMessage(Flash,"Please try again later!")
                 });
@@ -972,7 +972,7 @@ coachApp.controller('CourseEditController',['$scope','requestHandler','Flash','$
             $scope.loaded=true;
             requestHandler.postRequest("coach/insertCourse/",$scope.courseDetails).then(function(response) {
                 $scope.loaded=false;
-                $location.path("courseView/"+response.data.Course.courseid);
+                $location.path("course-view/"+response.data.Course.courseid);
             },function(){
                 errorMessage(Flash,"Please try again later!")
             });
@@ -1008,7 +1008,7 @@ coachApp.controller('CourseEditController',['$scope','requestHandler','Flash','$
            // courseUpdate.promoimage = base64Img;
 
             requestHandler.putRequest("coach/updateCourse/",courseUpdate).then(function(response) {
-                $location.path("courseView/"+response.data.Course.courseid);
+                $location.path("course-view/"+response.data.Course.courseid);
                 successMessage(Flash,"Course Updated Successfully!");
             },function(){
                 errorMessage(Flash,"Please try again later!")
@@ -1053,7 +1053,7 @@ coachApp.controller('CourseEditController',['$scope','requestHandler','Flash','$
         sectionUpdate.sectioncontent = $scope.sectionDetails.sectioncontent;
 
         requestHandler.putRequest("coach/updateCourseSection/",sectionUpdate).then(function(response) {
-            $location.path("courseSection/"+response.data.CourseSection.sectionid);
+            $location.path("course-section/"+response.data.CourseSection.sectionid);
             $scope.loaded=false;
             successMessage(Flash,"Section Updated Successfully!");
         },function(){

@@ -6,10 +6,10 @@
         <div id="demography-content" class="height-auto" ng-init="viewinit()">
             <div class="col-lg-12 col-md-12 col-sm-12">
                 <div class="margin-rl">
-                   <span ng-hide="courseDetails.enrollmentStatus==0" ng-if="courseDetails.role=='user'"> <a href="#myCourses" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back</a></span>
+                   <span ng-hide="courseDetails.enrollmentStatus==0" ng-if="courseDetails.role=='user'"> <a href="#my-courses" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back</a></span>
                    <span ng-show="courseDetails.enrollmentStatus==0" ng-if="courseDetails.role=='user'"><a href="#courses" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back</a></span>
                     <span ng-hide="courseDetails.publishedon==null" ng-if="courseDetails.role=='admin'"><a href="#course" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back</a></span>
-                    <span ng-show="courseDetails.publishedon==null" ng-if="courseDetails.role=='admin'"><a href="#coursePending" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back</a></span>
+                    <span ng-show="courseDetails.publishedon==null" ng-if="courseDetails.role=='admin'"><a href="#course-pending" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back</a></span>
                     <div flash-message="2000" class="col-md-4 pull-right"></div>
                     <h4 class="classic-title"><span>Course Details</span></h4>
                     <div ng-if="loaded">
@@ -64,10 +64,10 @@
                             <h4 class="text-muted margin-tb-10 wrap">{{courseDetails.coursesubtitle}}</h4>
                             <p class="margin-tb-10 wrap"  ng-bind-html="courseDetails.coursedescription | html"></p>
 
-                            <h5 class="margin-bottom-10 wrap" ng-repeat="sections in sectionList" ng-hide="courseDetails.enrollmentStatus==0" ng-if="courseDetails.role=='user'">Section {{$index+1}} : <a href="#courseView/{{sections.sectionid}}" class="wrap">{{sections.sectiontitle}}</a></h5>
+                            <h5 class="margin-bottom-10 wrap" ng-repeat="sections in sectionList" ng-hide="courseDetails.enrollmentStatus==0" ng-if="courseDetails.role=='user'">Section {{$index+1}} : <a href="#course-view/{{sections.sectionid}}" class="wrap">{{sections.sectiontitle}}</a></h5>
                             <h5 class="margin-bottom-10 wrap" ng-repeat="sections in sectionList" ng-show="courseDetails.enrollmentStatus==0" ng-if="courseDetails.role=='user'">Section {{$index+1}} : <a href="" ng-click="checkenroll()" class="wrap">{{sections.sectiontitle}}</a></h5>
-                            <h5 class="margin-bottom-10 wrap" ng-repeat="sections in sectionList" ng-hide="courseDetails.publishedon==null" ng-if="courseDetails.role=='admin'">Section {{$index+1}} : <a href="#courseView/{{sections.sectionid}}" class="wrap">{{sections.sectiontitle}}</a></h5>
-                            <h5 class="margin-bottom-10 wrap" ng-repeat="sections in sectionList" ng-show="courseDetails.publishedon==null" ng-if="courseDetails.role=='admin'">Section {{$index+1}} : <a href="#courseView/{{sections.sectionid}}" class="wrap">{{sections.sectiontitle}}</a></h5>
+                            <h5 class="margin-bottom-10 wrap" ng-repeat="sections in sectionList" ng-hide="courseDetails.publishedon==null" ng-if="courseDetails.role=='admin'">Section {{$index+1}} : <a href="#course-view/{{sections.sectionid}}" class="wrap">{{sections.sectiontitle}}</a></h5>
+                            <h5 class="margin-bottom-10 wrap" ng-repeat="sections in sectionList" ng-show="courseDetails.publishedon==null" ng-if="courseDetails.role=='admin'">Section {{$index+1}} : <a href="#course-view/{{sections.sectionid}}" class="wrap">{{sections.sectiontitle}}</a></h5>
                         </div>
                     </div>
                 </div>

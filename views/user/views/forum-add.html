@@ -21,7 +21,7 @@
 
             <div class="col-lg-12 col-md-12 col-sm-12 min-height-450" >
                 <div class="col-lg-12 col-md-12 col-sm-12">
-                    <a href="#forumDetails/{{forumDetails.postid}}" class="back-button pull-right margin-left-10" ng-hide="isNew"><i class="fa fa-arrow-circle-o-left"></i> Back to Forum</a>
+                    <a href="#forum-details/{{forumDetails.postid}}" class="back-button pull-right margin-left-10" ng-hide="isNew"><i class="fa fa-arrow-circle-o-left"></i> Back to Forum</a>
                     <a href="#forums" class="back-button pull-right margin-left-10" ng-show="isNew"><i class="fa fa-arrow-circle-o-left"></i> Back to Forums List</a>
                     <h3 class="margin-bottom-10"><i class="fa fa-pencil"></i> &nbsp;{{title}}</h3>
                     <div class="col-lg-12 col-md-12 col-sm-12 no-padding">
@@ -61,7 +61,7 @@
                     <a href="" class="btn btn-success" ng-disabled="ForumForm.$invalid" ng-click="doAddForum()" ng-show="isNew">Add Forum</a>
                     <a href="" class="btn btn-success" ng-disabled="ForumForm.$invalid || isClean()" ng-click="doUpdateForum()" ng-hide="isNew">Save Changes</a>
                     <a href="#forums" class="btn btn-warning" ng-show="isNew">Cancel</a>
-                    <a href="#forumDetails/{{forumDetails.postid}}" class="btn btn-warning" ng-hide="isNew">Cancel</a>
+                    <a href="#forum-details/{{forumDetails.postid}}" class="btn btn-warning" ng-hide="isNew">Cancel</a>
                 </div>
             </div>
         </div>

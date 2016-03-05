@@ -14,7 +14,7 @@
                 <!-- End Search -->
 
                 <h3 class="pull-right text-orange">TOTAL EARN : <span class="text-red text-bold">{{totalearnings}} $</span> &nbsp;&nbsp;&nbsp;</h3>
-                <h5 class="classic-title"><span><a href="#payments"><i class="fa fa-money"></i>&nbsp;&nbsp;COURSE PAYMENTS</a></span>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#subscribersPayments"><i class="fa fa-dollar"></i>&nbsp;&nbsp;SUBSCRIPTION PAYMENTS</a></h5>
+                <h5 class="classic-title"><span><a href="#payments"><i class="fa fa-money"></i>&nbsp;&nbsp;COURSE PAYMENTS</a></span>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#subscribers-payments"><i class="fa fa-dollar"></i>&nbsp;&nbsp;SUBSCRIPTION PAYMENTS</a></h5>
             </div>
 
             <div class="col-md-12">
@@ -43,7 +43,7 @@
                         <td>{{mycourse.courseamount}} </td>
                         <td>{{mycourse.enrollcount}}</td>
                         <td>{{mycourse.toatlearnings}} </td>
-                        <td><a class="btn-xs btn-primary" href="#subscribersList/{{mycourse.courseid}}">View Details</a></td>
+                        <td><a class="btn-xs btn-primary" href="#subscribers-list/{{mycourse.courseid}}">View Details</a></td>
                     </tr>
                     <tr ng-show="myCourses.length==0"><td colspan="7" class="text-center">No Records Found !!!</td></tr>
                     </tbody>

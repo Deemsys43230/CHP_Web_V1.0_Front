@@ -31,7 +31,7 @@
         <div ng-switch-default>
             <div class="col-md-12" ng-repeat="userforum in userforumlist | filter:forumsearch">
                 <div class="col-md-8 no-padding">
-                    <h5 class="wrap"><a href="#forumDetails/{{userforum.postid}}">{{userforum.posttitle}}</a></h5>
+                    <h5 class="wrap"><a href="#forum-details/{{userforum.postid}}">{{userforum.posttitle}}</a></h5>
                     <p class="forum-list-content wrap">{{userforum.postdescription}}</p>
                 </div>
                 <div class="col-md-2 text-center">

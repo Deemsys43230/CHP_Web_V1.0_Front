@@ -220,7 +220,7 @@ userApp.controller('ForumsUserController',['$scope','requestHandler','Flash','$r
 
             $scope.postid = response.data['Forum details'].postid;
             successMessage(Flash,"Successfully Added");
-            $location.path("forumDetails/"+$scope.postid);
+            $location.path("forum-details/"+$scope.postid);
         }, function () {
             errorMessage(Flash, "Please try again later!")
         });
@@ -356,7 +356,7 @@ userApp.controller('ForumsUserEditController',['$scope','requestHandler','Flash'
         requestHandler.putRequest("updateForum/",$scope.forumDetails).then(function(response){
             $scope.postid = response.data['Forum details'].postid;
             successMessage(Flash,"Successfully Updated");
-            $location.path("forumDetails/"+$scope.postid);
+            $location.path("forum-details/"+$scope.postid);
         }, function () {
             errorMessage(Flash, "Please try again later!")
         });
@@ -457,7 +457,7 @@ coachApp.controller('ForumsCoachController',['$scope','requestHandler','Flash','
         requestHandler.postRequest("insertForum/",$scope.forumDetails).then(function(response){
             $scope.postid = response.data['Forum details'].postid;
             successMessage(Flash,"Successfully Added");
-            $location.path("forumDetails/"+$scope.postid);
+            $location.path("forum-details/"+$scope.postid);
         }, function () {
             errorMessage(Flash, "Please try again later!")
         });
@@ -610,7 +610,7 @@ coachApp.controller('ForumsCoachEditController',['$scope','requestHandler','Flas
         requestHandler.putRequest("updateForum/",$scope.forumDetails).then(function(response){
             $scope.postid = response.data['Forum details'].postid;
             successMessage(Flash,"Successfully Updated");
-            $location.path("forumDetails/"+$scope.postid);
+            $location.path("forum-details/"+$scope.postid);
         }, function () {
             errorMessage(Flash, "Please try again later!")
         });

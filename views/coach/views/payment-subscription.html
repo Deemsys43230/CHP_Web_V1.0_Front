@@ -11,7 +11,7 @@
                 </form>
                 <!-- End Search -->
                 <h3 class="pull-right text-orange">TOTAL EARN : <span class="text-bold text-red">{{subscriptiontotalearnings}} $</span>&nbsp;&nbsp;&nbsp;</h3>
-                <h5 class="classic-title"><a href="#payments"><i class="fa fa-money"></i>&nbsp;&nbsp;COURSE PAYMENTS</a>&nbsp;&nbsp;|&nbsp;&nbsp;<span><a href="#subscribersPayments"><i class="fa fa-dollar"></i>&nbsp;&nbsp;SUBSCRIPTION PAYMENTS</a></span></h5>
+                <h5 class="classic-title"><a href="#payments"><i class="fa fa-money"></i>&nbsp;&nbsp;COURSE PAYMENTS</a>&nbsp;&nbsp;|&nbsp;&nbsp;<span><a href="#subscribers-payments"><i class="fa fa-dollar"></i>&nbsp;&nbsp;SUBSCRIPTION PAYMENTS</a></span></h5>
             </div>
 
             <div class="col-md-12">
@@ -43,7 +43,7 @@
                         <td>{{subscriber.todate}}</td>
                         <!--<td>{{subscriber.outwardid}}</td>-->
                         <td><span ng-show="subscriber.outwardid!=undefined">{{subscriber.outwardid}}</span><span ng-show="subscriber.outwardid==undefined" class="text-red">Please Contact Admin for Transaction Details</span></td>
-                        <td><a class="btn-xs btn-primary" href="#subscriptionDetails/{{subscriber.paymentid}}">View Details</a></td>
+                        <td><a class="btn-xs btn-primary" href="#subscription-details/{{subscriber.paymentid}}">View Details</a></td>
                     </tr>
                     </tbody>
                 </table>

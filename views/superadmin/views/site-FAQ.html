@@ -103,7 +103,7 @@
                     <td><span class="line-clamp-sm">{{faq.question}}</span></td>
                     <td><span class="line-clamp-lg">{{faq.answer}}</span></td>
                     <td>
-                        <a href="#viewFAQ/{{faq.faqid}}" class="btn-xs btn-primary">View Details</a>
+                        <a href="#view-faq/{{faq.faqid}}" class="btn-xs btn-primary">View Details</a>
                         <a href="" onclick="return false;" class="btn-xs btn-warning" ng-click="doGetFAQByID(faq.faqid)">Edit</a>
                         <a href="" class="btn-xs btn-success" ng-click="doEnableDisable(faq.faqid)" ng-show="faq.status==0">Enable</a>
                         <a href="" class="btn-xs btn-danger" ng-click="doEnableDisable(faq.faqid)" ng-hide="faq.status==0">Disable</a>

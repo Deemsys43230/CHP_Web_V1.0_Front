@@ -5,7 +5,7 @@
     <div class="row">
 
         <div class="col-md-12 min-height-450" ng-init="coachSubscribersListInit()">
-            <a href="#coachPayment" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back to coach list</a>
+            <a href="#coach-payment" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back to coach list</a>
             <!-- Stat Search -->
             <form class="form-wrapper pull-right" novalidate>
                 <input type="text" placeholder="Search here..." ng-model="subscriberSearch" ng-change="doGetCoachSubscribersList()" required>
@@ -48,7 +48,7 @@
                         <span ng-show="subscriber.enrollmentstatus==1" class="text-green">Active</span>
                         <span ng-show="subscriber.enrollmentstatus==0" class="text-red">In active</span>
                     </td>
-                    <td><a href="#coachSubscriberDetails/{{subscriber.paymentid}}" class="btn-xs btn-primary">View Details</a></td>
+                    <td><a href="#coach-subscriber-details/{{subscriber.paymentid}}" class="btn-xs btn-primary">View Details</a></td>
                 </tr>
                 </tbody>
             </table>

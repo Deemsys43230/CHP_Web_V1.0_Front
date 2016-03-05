@@ -11,7 +11,7 @@
                 <h4 class="classic-title"><span>Most Viewed</span></h4>
                 <div id="showMostViewed" class="wrap">
                     <div ng-repeat="userforum in userforumlist | limitTo:20">
-                        <h5><a class="forum-topic wrap" href="#forumDetails/{{userforum.postid}}">{{userforum.posttitle}}</a></h5>
+                        <h5><a class="forum-topic wrap" href="#forum-details/{{userforum.postid}}">{{userforum.posttitle}}</a></h5>
                         <hr/>
                     </div>
                 </div>
@@ -26,7 +26,7 @@
                     <h1>FORUMS</h1>
                 </div>
                 <div class="col-lg-9 col-md-9 col-sm-9">
-                    <span class="col-lg-5 col-md-5 col-sm-5"><a href="#addforum" class="forum_button col-lg-12 col-md-12 col-sm-12" ><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;Add New Post</a></span>
+                    <span class="col-lg-5 col-md-5 col-sm-5"><a href="#add-forum" class="forum_button col-lg-12 col-md-12 col-sm-12" ><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;Add New Post</a></span>
                     <span class="col-lg-7 col-md-7 col-sm-7 no-padding"><input type="text" class="search-input" ng-model="forumsearch" placeholder="Search forum topics here..."></span>
                 </div>
                 <div class="col-lg-12 col-md-12 col-sm-12">
@@ -63,7 +63,7 @@
                                 <p>{{userforum.postedon}}</p>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6 no-padding">
-                                <h5 class="wrap"><a href="#forumDetails/{{userforum.postid}}">{{userforum.posttitle}}</a></h5>
+                                <h5 class="wrap"><a href="#forum-details/{{userforum.postid}}">{{userforum.posttitle}}</a></h5>
                                 <p class="forum-list-content wrap">{{userforum.postdescription}}</p>
                             </div>
                             <div class="col-lg-2 col-md-2 col-sm-2 text-center">

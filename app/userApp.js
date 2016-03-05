@@ -85,7 +85,7 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                     }]
                 }
             }).
-            when('/myCourses', {
+            when('/my-courses', {
                 templateUrl: 'views/courses-my.html',
                 resolve: {
                     loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
@@ -115,7 +115,7 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'CourseController'
             }).
-            when('/courseView/:id', {
+            when('/course-view/:id', {
                 templateUrl: 'views/course-view.html',
                 resolve: {
                 loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
@@ -131,7 +131,7 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
             },
             controller:'CourseController'
             }).
-            when('/courseDetail/:id', {
+            when('/course-detail/:id', {
                 templateUrl: 'views/course-details.html',
                 resolve: {
                     loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
@@ -147,7 +147,7 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'CourseController'
             }).
-            when('/courseCategory/:id', {
+            when('/course-category/:id', {
                 templateUrl: 'views/course-category.html',
                 resolve: {
                     loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
@@ -178,7 +178,7 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller: 'UserPaymentController'
             }).
-            when('/coachPayments', {
+            when('/coach-payments', {
                 templateUrl: 'views/payments-coach.html',
                 resolve: {
                     loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
@@ -222,7 +222,7 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller: 'UserPaymentController'
             }).
-            when('/paymentSettings', {
+            when('/payment-settings', {
                 templateUrl: 'views/payment-settings.html',
                 resolve: {
                     loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
@@ -252,7 +252,7 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller: 'UserCoachController'
             }).
-            when('/coachSearch', {
+            when('/coach-search', {
                 templateUrl: 'views/coach-search.html',
                 resolve: {
                     loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
@@ -268,7 +268,7 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller: 'UserCoachController'
             }).
-            when('/coachView/:id', {
+            when('/coach-view/:id', {
                 templateUrl: 'views/coach-user-view.html',
                 resolve: {
                     loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
@@ -414,7 +414,7 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'ForumsUserController'
             }).
-            when('/addforum', {
+            when('/add-forum', {
                 templateUrl: 'views/forum-add.html',
                 resolve: {
                     loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
@@ -428,7 +428,7 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'ForumsUserController'
             }).
-            when('/editForum/:id', {
+            when('/edit-forum/:id', {
                 templateUrl: 'views/forum-add.html',
                 resolve: {
                     loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
@@ -442,7 +442,7 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'ForumsUserEditController'
             }).
-            when('/forumDetails/:id', {
+            when('/forum-details/:id', {
                 templateUrl: 'views/forum-details.html',
                 resolve: {
                     loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
@@ -456,7 +456,7 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'ForumsUserController'
             }).
-            when('/groupGoal', {
+            when('/group-goal', {
                 templateUrl: 'views/group-goal.html',
                 resolve: {
                     loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
@@ -474,7 +474,7 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'GoalController'
             }).
-            when('/groupGoalRequest', {
+            when('/group-goal-request', {
                 templateUrl: 'views/group-goal-request.html',
                 resolve: {
                     loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
@@ -489,7 +489,7 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'GoalController'
             }).
-            when('/groupGoalView/:id', {
+            when('/group-goal-view/:id', {
                 templateUrl: 'views/group-goal-view.html',
                 resolve: {
                     loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
@@ -505,7 +505,7 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 controller:'GoalController',
                 request:0
             }).
-            when('/groupGoalRequest/:id', {
+            when('/group-goal-request/:id', {
                 templateUrl: 'views/group-goal-view.html',
                 resolve: {
                     loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
@@ -521,8 +521,8 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 controller:'GoalController',
                 request:1
             }).
-            when('/FAQ', {
-                templateUrl: '../common/FAQ.html',
+            when('/faq', {
+                templateUrl: '../common/faq.html',
                 resolve: {
                     loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
@@ -549,7 +549,7 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'InstructionCommonController'
             }).
-            when('/termsofuse', {
+            when('/terms-of-use', {
                 templateUrl: '../common/termsofuse.html',
                 resolve: {
                     loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {

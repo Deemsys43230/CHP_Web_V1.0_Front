@@ -136,8 +136,8 @@ userApp.controller('GoalController',['$scope','requestHandler','Flash','$route',
 
     $scope.doExitGroup=function(){
         requestHandler.deleteRequest("user/rejectOrExistGoalMember/",{"goalid" : $routeParams.id}).then(function(response){
-            if($scope.isRequest)$location.path('/groupGoalRequest');
-            else $location.path('/groupGoal');
+            if($scope.isRequest)$location.path('/group-goal-request');
+            else $location.path('/group-goal');
             successMessage(Flash,"Successfully Exit!");
             $scope.doGetMyGoalList();
         },function(){
@@ -148,7 +148,7 @@ userApp.controller('GoalController',['$scope','requestHandler','Flash','$route',
     $scope.doAcceptGroup=function(){
         requestHandler.putRequest("user/acceptGoal/",{"goalid" : $routeParams.id}).then(function(response){
              successMessage(Flash,"Successfully Accepted!");
-            $location.path('/groupGoalView/'+$routeParams.id);
+            $location.path('/group-goal-view/'+$routeParams.id);
            // $scope.doGetMyGoalList();
         },function(){
             errorMessage(Flash,"Please try again later!");
@@ -255,7 +255,7 @@ userApp.controller('GoalController',['$scope','requestHandler','Flash','$route',
         requestHandler.putRequest("user/acceptGoal/",{"goalid":id}).then(function(){
             successMessage(Flash,"Successfully Joined!");
             $("#modal_trigger1").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
-            $location.path('/groupGoalView/'+id);
+            $location.path('/group-goal-view/'+id);
            // $scope.doGetMyGoalList();
         },function(){
             errorMessage(Flash,"Please try again later!");

@@ -55,7 +55,7 @@
                         <td>{{coursesPayment.coachamount}}</td>
                         <td>{{coursesPayment.inwardid}}</td>
                         <td><span ng-show="coursesPayment.outwardid!=undefined">{{coursesPayment.outwardid}}</span><span ng-show="coursesPayment.outwardid==undefined"><a href="" ng-click="doManualPay(coursesPayment.paymentid,coachid)" class="btn-dis btn-xs btn-success" ng-disabled="loaddisable">Manual Pay</a></span></td>
-                        <td><a href="#courseSubscriberDetails/{{coursesPayment.paymentid}}" class="btn-xs btn-primary">View Details</a></td>
+                        <td><a href="#course-subscriber-details/{{coursesPayment.paymentid}}" class="btn-xs btn-primary">View Details</a></td>
                     </tr>
                     </tbody>
                 </table>

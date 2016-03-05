@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-md-12 min-height-450">
                 <a href="#dashboard" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back to Dashboard</a>
-                <a href="#courseAdd" class="back-button pull-right margin-left-5"><i class="fa fa-plus-circle"></i> Create New Course</a>
+                <a href="#course-add" class="back-button pull-right margin-left-5"><i class="fa fa-plus-circle"></i> Create New Course</a>
                 <div flash-message="2000" class="col-md-4 pull-right no-padding"></div>
                 <h4 class="classic-title"><span>My Courses <span class="text-red">({{myCourseList.length}})</span> </span></h4>
                 <div class="row margin-top-10 margin-bottom-10">
@@ -16,7 +16,7 @@
                         </div>
                     </div>
                     <div class="col-md-4" ng-repeat="courseList in myCourseList"  ng-show="myCourseList.length!=0">
-                        <a href="#courseView/{{courseList.courseid}}">
+                        <a href="#course-view/{{courseList.courseid}}">
                             <div class="dashboard">
                                 <span ng-show="courseList.coursestatus==1"><img class="course-status" src="../../images/draft.png"></span>
                                 <span ng-show="courseList.coursestatus==2"><img class="course-status" src="../../images/pending.png"></span>
@@ -47,7 +47,7 @@
                     <div class="col-md-12" ng-show="myCourseList.length==0">                        
                         <h1 class="col-md-12 margin-top-50 text-gray text-center">
                         NO COURSES FOUND!!!<br/><br/>
-                        <a class="btn btn-warning btn-sm" href="#courseAdd"><i class="fa fa-book"></i>&nbsp;&nbsp;Create a New Course</a>
+                        <a class="btn btn-warning btn-sm" href="#course-add"><i class="fa fa-book"></i>&nbsp;&nbsp;Create a New Course</a>
                     </h1>
 
                     </div>
