@@ -12,6 +12,7 @@ requestHandlerApp.factory("requestHandler",['$http',function($http,$location){
     var domain="http://182.75.114.194:8080";
     var hostedDomain="http://182.75.114.194:8080/api/v1/";
     var paymentURL="http://182.75.114.194:8080/views/user";
+    var domainURL="http://182.75.114.194:8080";
 
     var urlLength = 33;
     var exerciselength=13;
@@ -62,6 +63,10 @@ requestHandlerApp.factory("requestHandler",['$http',function($http,$location){
 
     requestObj.paymentURL=function(){
         return paymentURL;
+    };
+
+    requestObj.domainURL=function(){
+        return domainURL;
     };
 
     requestObj.convertUrl=function(imageurl){
