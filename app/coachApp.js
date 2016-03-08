@@ -480,7 +480,6 @@ coachApp.controller("CoachInitialController",['$scope','requestHandler','$locati
         var page = $location.url().substr(1);
         page=page.split('-');
         var currentPage=page[0];
-        console.log(currentPage);
         $scope.activeClass[currentPage]='active';
     });
 

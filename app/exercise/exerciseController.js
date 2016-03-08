@@ -2,7 +2,7 @@
  * Created by user on 26-09-2015.
  */
 
-var adminApp = angular.module('adminApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','ui.select','exerciseServiceModule','angularUtils.directives.dirPagination','fileReader']);
+var adminApp = angular.module('adminApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','ui.select','exerciseServiceModule','angularUtils.directives.dirPagination']);
 
 adminApp.filter('propsFilter', function() {
 	return function(items, props) {

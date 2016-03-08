@@ -1,5 +1,3 @@
-
-
 var adminApp= angular.module('adminApp', ['ngRoute','oc.lazyLoad','ngCookies','requestModule','ngAnimate']);
 
 adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
@@ -13,7 +11,7 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
         //Do For Cross Orgin Management
         $httpProvider.defaults.withCredentials = true;
 
-        $httpProvider.interceptors.push(['$q','$location','$cookies','$window',function ($q, $location,$cookies,$window) {
+        $httpProvider.interceptors.push(['$q','$location','$injector','$cookies','$window',function ($q, $location,$injector,$cookies,$window) {
 
             return {
 
@@ -50,8 +48,6 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 }
             };
         }]);
-        $routeProvider.$inject = ['$ocLazyLoad'];
-
         $routeProvider.
             when('/dashboard', {
                 templateUrl: 'views/dashboard.html',
@@ -463,6 +459,7 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../css/category-select.css',
                                 '../../css/category-select-bootstrap.css',
                                 '../../app/exercise/exerciseService.js',
+                                '../../angular/angular-utils-pagination/dirPagination.js',
                                 '../../app/exercise/exerciseController.js'
                             ]
                         })
@@ -487,6 +484,7 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../css/category-select.css',
                                 '../../css/category-select-bootstrap.css',
                                 '../../app/exercise/exerciseService.js',
+                                '../../angular/angular-utils-pagination/dirPagination.js',
                                 '../../app/exercise/exerciseController.js'
                             ]
                         })
@@ -632,9 +630,11 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'adminApp',
                             files:[
+
                                 '../../plugin/popup/style.css',
                                 '../../css/food-image-upload.css',
                                 '../../js/image-upload.js',
+                                '../../js/category-select.js',
                                 '../../css/custom-inputs.css',
                                 'https://cdn.rawgit.com/angular-ui/ui-select/master/dist/select.min.js',
                                 '../../css/multiSelect.css',

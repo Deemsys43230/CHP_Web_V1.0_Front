@@ -255,9 +255,7 @@ if (typeof Object.create !== 'function') {
         return this.each( function () {
 
             var newsBox = Object.create( NewsBox );
-
             newsBox.init( options, this );
-            console.log(newsBox);
 
         });
     };
