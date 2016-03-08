@@ -9,12 +9,11 @@ requestHandlerApp.factory("requestHandler",['$http',function($http,$location){
   /*  var hostedDomain="http://www.deemsysinc.net/api/v1/";
     var urlLength = 15;
     var exerciselength=13;*/
+    var domain="http://182.75.114.194:8080";
+    var hostedDomain="http://182.75.114.194:8080/api/v1/";
+    var paymentURL="http://182.75.114.194:8080/views/user";
 
-    var hostedDomain="http://192.168.1.236/api/v1/";
-    var paymentURL="http://192.168.1.236/cyber/cyberhealth/views/user";
-    var domainURL="http://192.168.1.236/cyber/cyberhealth/";
-
-    var urlLength = 14;
+    var urlLength = 33;
     var exerciselength=13;
 
     requestObj.getRequest=function(requestURL,params){
@@ -65,20 +64,14 @@ requestHandlerApp.factory("requestHandler",['$http',function($http,$location){
         return paymentURL;
     };
 
-    requestObj.domainURL=function(){
-        return domainURL;
-    };
-
     requestObj.convertUrl=function(imageurl){
-        var url = imageurl.substring(imageurl.indexOf("/")+ urlLength, imageurl.length);
+        var url = domain+imageurl.substring(imageurl.indexOf("/")+ urlLength, imageurl.length);
         return url;
     };
 
     requestObj.convertUrlExercise=function(imageurl){
       //  alert(imageurl);
         var exerciseurl = imageurl.substring(imageurl.indexOf("/")+ urlLength, imageurl.length-exerciselength);
-        console.log(exerciseurl);
-     //   alert(exerciseurl);
         return exerciseurl;
 
 
