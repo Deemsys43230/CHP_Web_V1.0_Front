@@ -257,7 +257,7 @@ commonApp.controller('LoginController',['$scope','requestHandler','Flash','$wind
         $scope.activeClass={};
         var page = $location.url().substr(1);
         page=page.split('-');
-        currentPage=page[0];
+        var currentPage=page[0];
         $scope.activeClass[currentPage]='active';
     });
 

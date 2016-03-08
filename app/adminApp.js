@@ -147,7 +147,7 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'PrivacyPolicyController'
             }).
-            when('/terms-of-use', {
+            when('/terms-of-use-edit', {
                 templateUrl: 'views/site-termsofuse.html',
                 resolve: {
                     loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
@@ -1678,7 +1678,7 @@ adminApp.factory("siteMenuService", function () {
         {
             "name": "Terms Of Use",
             "icon": "file-text",
-            "href": "terms-of-use",
+            "href": "terms-of-use-edit",
             "active": ""
         },
         {
