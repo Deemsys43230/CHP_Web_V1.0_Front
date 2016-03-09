@@ -253,9 +253,13 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
     //Search Function for food
     $scope.inputChanged = function(searchStr) {
 
-        if(searchStr.length>=3){
+       // alert(searchStr.length);
+        if(searchStr.length >=3){
+            $scope.loadingFoods=true;
             if($scope.foodSearchResult.length==0){
+
                 $scope.loadingFoods=true;
+               // alert("if");
             }
             var userFoodDiaryDetailPromise=UserDashboardService.searchFood(searchStr,$scope.userFood.sessionid);
             return userFoodDiaryDetailPromise.then(function(result){
@@ -389,6 +393,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
     //Search Function for exercise
     $scope.inputChangedExercise = function(searchStr) {
         if(searchStr.length>=3){
+            $scope.loadingExercise=true;
             if($scope.exerciseSearchResult.length==0){
                 $scope.loadingExercise=true;
             }

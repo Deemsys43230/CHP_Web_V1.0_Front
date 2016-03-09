@@ -677,11 +677,12 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                             files:[
                                 '../../plugin/popup/style.css',
                                 '../../css/food-image-upload.css',
-                                '../../css/custom-inputs.css',
                                 '../../js/category-select.js',
                                 '../../css/multiSelect.css',
                                 '../../css/category-select.css',
                                 '../../css/category-select-bootstrap.css',
+                                '../../css/custom-inputs.css',
+                                '../../angular/angular-utils-pagination/dirPagination.js',
                                 '../../app/food/foodService.js',
                                 '../../app/food/foodController.js'
                             ]

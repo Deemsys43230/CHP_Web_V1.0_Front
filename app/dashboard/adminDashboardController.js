@@ -1,6 +1,6 @@
 var adminApp = angular.module('adminApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','countTo']);
 
-adminApp.controller('AdminDashboardController',['$scope','requestHandler','Flash',function($scope,requestHandler,Flash) {
+adminApp.controller('AdminDashboardController',['$scope','requestHandler',function($scope,requestHandler) {
     $scope.countFrom = 0;
     //Get Coach List
     $scope.doGetAdminDashboardCount=function(){
