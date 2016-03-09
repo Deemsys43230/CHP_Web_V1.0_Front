@@ -37,7 +37,7 @@
                             <a href="#foodSuggestionDetail/{{suggestion.suggestionid}}" class="btn-sm btn-primary btn-sm-override">View</a>
                             <a href="" class="btn-xs btn-success hint--top" ng-click="doApproveFoodSuggestion(suggestion.suggestionid)" ng-show="suggestion.foodstatus==0" data-hint="Approve"><span>&#10004;</span></a>
                             <a href="" class="btn-xs btn-danger hint--top" ng-click="doRejectFoodSuggestion(suggestion.suggestionid)" ng-show="suggestion.foodstatus==0" data-hint="Reject"><span>&#x2716;</span></a>
-                            <a href="#addFood/{{suggestion.suggestionid}}" class="btn-sm btn-success"  ng-show="suggestion.foodstatus==1" >Add Food</a>
+                            <a href="#add-food/{{suggestion.suggestionid}}" class="btn-sm btn-success"  ng-show="suggestion.foodstatus==1" >Add Food</a>
                             <span class="label-danger"  ng-show="suggestion.foodstatus==2">Rejected</span>
                             <span class="label-success"  ng-show="suggestion.foodstatus==3">Approved</span>
                         </td>
