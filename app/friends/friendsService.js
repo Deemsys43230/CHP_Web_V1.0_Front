@@ -24,11 +24,13 @@ userApp.factory("FriendsService",['requestHandler','Flash',function(requestHandl
 
    //Search friends
     userFriendsServiceObj.doSearchFriends= function (name) {
+
         return requestHandler.postRequest("user/searchFriends/",{"name":name}).then(function(response){
             return response.data.Friends_List;
-        },function(response){
+        } ,function(response){
             errorMessage(Flash,"Please try again later");
         })
+
     };
 
     //Invite friends

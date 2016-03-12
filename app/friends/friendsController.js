@@ -58,10 +58,21 @@ userApp.controller('FriendsController',['$scope','requestHandler','Flash','Frien
     };
 
     $scope.searchFriends=function(){
+        if($scope.friendsearch.length >=3){
+        $scope.loaded=true;
+        var getSearchFriendsPromise=FriendsService.doSearchFriends($scope.friendsearch);
+        getSearchFriendsPromise.then(function(result){
+            $scope.searchFriendsList=result;
+            $scope.loaded=false;
+        });
+        }
+        if($scope.friendsearch == ""){
         var getSearchFriendsPromise=FriendsService.doSearchFriends($scope.friendsearch);
         getSearchFriendsPromise.then(function(result){
             $scope.searchFriendsList=result;
         });
+        }
+       // $scope.loaded=false;
     };
 
     $scope.inviteFriends=function(id){
