@@ -3,53 +3,53 @@
 
 <div class="white-background" ng-cloak class="ng-cloak">
     <h3 class="text-center margin-tb-10 text-green text-bold">Your Goal</h3>
-    <div class="col-md-12 no-padding">
-        <div class="col-md-6">Duration<span class="pull-right">:</span></div>
-        <div class="col-md-6 no-padding">{{goalDetails.startdate}} - {{goalDetails.enddate}}</div>
+    <div class="col-md-12 col-sm-12 no-padding">
+        <div class="col-md-6 col-sm-6">Duration<span class="pull-right">:</span></div>
+        <div class="col-md-6 col-sm-6 no-padding">{{goalDetails.startdate}} - {{goalDetails.enddate}}</div>
     </div>
-    <div ng-hide="goalExpired" class="col-md-12 no-padding">
-        <div class="col-md-6">Remaining Days<span class="pull-right">:</span></div>
-        <div class="col-md-6 no-padding">{{remainingDates}}</div>
+    <div ng-hide="goalExpired" class="col-md-12 col-sm-12 no-padding">
+        <div class="col-md-6 col-sm-6">Remaining Days<span class="pull-right">:</span></div>
+        <div class="col-md-6 col-sm-6 no-padding">{{remainingDates}}</div>
     </div>
-    <div ng-show="goalExpired" class="col-md-12 no-padding">
-        <div class="col-md-6">Goal Status<span class="pull-right">:</span></div>
-        <div class="col-md-6 no-padding text-red">Expired</div>
+    <div ng-show="goalExpired" class="col-md-12 col-sm-12 no-padding">
+        <div class="col-md-6 col-sm-6">Goal Status<span class="pull-right">:</span></div>
+        <div class="col-md-6 col-sm-6 no-padding text-red">Expired</div>
     </div>
-    <div ng-show="goalExpired" class="col-md-12 no-padding">
-        <div class="col-md-6">Target Days<span class="pull-right">:</span></div>
-        <div class="col-md-6 no-padding">{{targetDays}} <small>days</small></div>
+    <div ng-show="goalExpired" class="col-md-12 col-sm-12 no-padding">
+        <div class="col-md-6 col-sm-6">Target Days<span class="pull-right">:</span></div>
+        <div class="col-md-6 col-sm-6 no-padding">{{targetDays}} <small>days</small></div>
     </div>
-    <div ng-show="goalExpired" class="col-md-12 no-padding">
-        <div class="col-md-6">Initial Weight <small>(Kgs)</small><span class="pull-right">:</span></div>
-        <div class="col-md-6 no-padding">{{goalDetails.initialweight}}</div>
+    <div ng-show="goalExpired" class="col-md-12 col-sm-12 no-padding">
+        <div class="col-md-6 col-sm-6">Initial Weight<span class="pull-right">:</span></div>
+        <div class="col-md-6 col-sm-6 no-padding">{{goalDetails.initialweight}} <small>Kgs</small></div>
     </div>
-    <div class="col-md-12 no-padding">
-        <div class="col-md-6">Target Weight <small>(Kgs)</small><span class="pull-right">:</span></div>
-        <div class="col-md-6 no-padding">{{goalDetails.targetweight}}</div>
+    <div class="col-md-12 col-sm-12 no-padding">
+        <div class="col-md-6 col-sm-6">Target Weight<span class="pull-right">:</span></div>
+        <div class="col-md-6 col-sm-6 no-padding">{{goalDetails.targetweight}} <small>Kgs</small></div>
     </div>
-    <div ng-hide="goalExpired" class="col-md-12 no-padding">
-        <div class="col-md-6">Current Weight <small>(Kgs)</small><span class="pull-right">:</span></div>
-        <div class="col-md-6 no-padding">{{demography.weight}}</div>
+    <div ng-hide="goalExpired" class="col-md-12 col-sm-12 no-padding">
+        <div class="col-md-6 col-sm-6">Current Weight<span class="pull-right">:</span></div>
+        <div class="col-md-6 col-sm-6 no-padding">{{demography.weight}} <small>Kgs</small></div>
     </div>
-    <div ng-show="goalExpired" class="col-md-12 no-padding">
-        <div class="col-md-6">Achieved Weight <small>(Kgs)</small><span class="pull-right">:</span></div>
-        <div class="col-md-6 no-padding">{{achievedWeight}}</div>
+    <div ng-show="goalExpired" class="col-md-12 col-sm-12 no-padding">
+        <div class="col-md-6 col-sm-6">Achieved Weight<span class="pull-right">:</span></div>
+        <div class="col-md-6 col-sm-6 no-padding">{{achievedWeight}} <small>Kgs</small></div>
     </div>
-    <div ng-show="goalExpired" class="col-md-12 no-padding margin-bottom-7">
-        <div class="col-md-6">Goal Result<span class="pull-right">:</span></div>
-        <div class="col-md-6 no-padding">
+    <div ng-show="goalExpired" class="col-md-12 col-sm-12 no-padding margin-bottom-7">
+        <div class="col-md-6 col-sm-6">Goal Result<span class="pull-right">:</span></div>
+        <div class="col-md-6 col-sm-6 no-padding">
             <span ng-show="achieveStatus==0" class="text-red">Not Achieved</span>
             <span ng-show="achieveStatus==1" class="text-orange">Partially Achieved</span>
             <span ng-show="achieveStatus==2" class="text-green">Achieved</span>
         </div>
     </div>
 
-    <div ng-hide="goalExpired" class="col-md-12 margin-top-5">
+    <div ng-hide="goalExpired" class="col-md-12 col-sm-12 margin-top-5">
         <p>Target Progress</p>
         <div id="targetGraph"></div>
     </div>
 
-    <div class="col-md-12 margin-top-10 text-center">
+    <div class="col-md-12 col-sm-12 margin-top-10 text-center no-padding">
         <a class="target_button green_button" ng-click="updateGoalDetails()">Update Goal</a>
         <span ng-show="viewGraphButton"><a class="target_button orange_button" ng-click="doGetWeightLogGraph()">View Graph</a></span>
         <a class="target_button red_button" ng-click="deteteGoal()">Reset Goal</a>

@@ -152,14 +152,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         //Set values according to the api calls
         $scope.userFood.foodid=$scope.userSelectedFoodDetails.foodid;
         $scope.userFood.measureid=$scope.userFood.measure.measureid;
-        if($scope.selectedDate==selectedDate){
-            $scope.userFood.addeddate=$scope.selectedDate;
-        }
-        else
-        {
-            $scope.userFood.addeddate=$scope.selectedDate.format("dd/mm/yyyy");
-        }
-
+        $scope.userFood.addeddate=document.getElementById("main-start-date").value;
         $scope.userFood.servings=parseInt($scope.userFood.servings);
 
         var foodInsertPromise=UserDashboardService.doInsertUserFood($scope.userFood);
@@ -182,19 +175,11 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         $scope.userFood.servings=parseInt($scope.userFood.servings);
         var foodInsertPromise=UserDashboardService.doUpdateUserFood($scope.userFood);
         foodInsertPromise.then(function(){
-            if($scope.selectedDate==selectedDate){
-                $scope.loadFoodDiary($scope.selectedDate);
-                $scope.doGetIntakeBruntByDate($scope.selectedDate);
-                $scope.goGetDailyIntakeGraph($scope.selectedDate);
-                $scope.goGetSessionGraph($scope.storedSessionId);
-            }
-            else
-            {
-                $scope.loadFoodDiary($scope.selectedDate.format("dd/mm/yyyy"));
-                $scope.doGetIntakeBruntByDate($scope.selectedDate.format("dd/mm/yyyy"));
-                $scope.goGetDailyIntakeGraph($scope.selectedDate.format("dd/mm/yyyy"));
-                $scope.goGetSessionGraph($scope.storedSessionId);
-            }
+            var date = document.getElementById("main-start-date").value;
+            $scope.loadFoodDiary(date);
+            $scope.doGetIntakeBruntByDate(date);
+            $scope.goGetDailyIntakeGraph(date);
+            $scope.goGetSessionGraph($scope.storedSessionId);
             $scope.doGetHistoryReport();
         });
 
@@ -205,18 +190,11 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         $scope.loaded=true;
         var foodDeletePromise=UserDashboardService.doDeleteUserFood(userFoodId);
         foodDeletePromise.then(function(){
-            if($scope.selectedDate==selectedDate){
-                $scope.loadFoodDiary($scope.selectedDate);
-                $scope.doGetIntakeBruntByDate($scope.selectedDate);
-                $scope.goGetDailyIntakeGraph($scope.selectedDate);
-                $scope.goGetSessionGraph($scope.storedSessionId);
-            }
-            else{
-                $scope.loadFoodDiary($scope.selectedDate.format("dd/mm/yyyy"));
-                $scope.doGetIntakeBruntByDate($scope.selectedDate.format("dd/mm/yyyy"));
-                $scope.goGetDailyIntakeGraph($scope.selectedDate.format("dd/mm/yyyy"));
-                $scope.goGetSessionGraph($scope.storedSessionId);
-            }
+            var date = document.getElementById("main-start-date").value;
+            $scope.loadFoodDiary(date);
+            $scope.doGetIntakeBruntByDate(date);
+            $scope.goGetDailyIntakeGraph(date);
+            $scope.goGetSessionGraph($scope.storedSessionId);
             $scope.doGetHistoryReport();
         });
     };
@@ -270,6 +248,9 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
             });
         }
         else{
+            $('.dropdown-menu').animate({
+                scrollTop: 0
+            }, 0);
             return {};
         }
 
@@ -443,14 +424,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
     $scope.doInsertUserExercise=function(){
         //Set values according to the api calls
         $scope.userExercise.exerciseid=$scope.userSelectedExerciseDetails.exerciseid;
-
-        if($scope.selectedDate==selectedDate){
-            $scope.userExercise.date=$scope.selectedDate;
-        }
-        else
-        {
-            $scope.userExercise.date=$scope.selectedDate.format("dd/mm/yyyy");
-        }
+        $scope.userExercise.date=document.getElementById("main-start-date").value;
         $scope.userExercise.workoutvalue=parseInt($scope.userExercise.workoutvalue);
 
         var exerciseInsertPromise=UserDashboardService.doInsertUserExercise($scope.userExercise);
@@ -467,14 +441,9 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         $scope.loaded=true;
         var exerciseDeletePromise=UserDashboardService.doDeleteUserExercise(userExerciseId);
         exerciseDeletePromise.then(function(){
-            if($scope.selectedDate==selectedDate){
-                $scope.loadExerciseDiary($scope.selectedDate);
-                $scope.doGetIntakeBruntByDate($scope.selectedDate);
-            }
-            else{
-                $scope.loadExerciseDiary($scope.selectedDate.format("dd/mm/yyyy"));
-                $scope.doGetIntakeBruntByDate($scope.selectedDate.format("dd/mm/yyyy"));
-            }
+            var date = document.getElementById("main-start-date").value;
+            $scope.loadExerciseDiary(date);
+            $scope.doGetIntakeBruntByDate(date);
             $scope.doGetHistoryReport();
         });
     };
@@ -533,15 +502,9 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
 
         var exerciseInsertPromise=UserDashboardService.doUpdateUserExercise($scope.userExercise);
         exerciseInsertPromise.then(function(){
-            if($scope.selectedDate==selectedDate){
-                $scope.loadExerciseDiary($scope.selectedDate);
-                $scope.doGetIntakeBruntByDate($scope.selectedDate);
-            }
-            else
-            {
-                $scope.loadExerciseDiary($scope.selectedDate.format("dd/mm/yyyy"));
-                $scope.doGetIntakeBruntByDate($scope.selectedDate.format("dd/mm/yyyy"));
-            }
+            var date = document.getElementById("main-start-date").value;
+            $scope.loadExerciseDiary(date);
+            $scope.doGetIntakeBruntByDate(date);
             $scope.doGetHistoryReport();
         });
 
@@ -556,7 +519,6 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
 
     //Calories caluclation for exercose
     $scope.doCalculateCaloriesExercise=function(){
-        console.log($scope.userExercise);
         if($scope.userExercise.workoutvalue==0){
             $scope.current=$scope.caloriesSpent=0;
         }
@@ -902,9 +864,6 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
             endDate:endDate,
             weight:parseFloat(document.getElementById("target").value)
         };
-        //console.log($scope.originalUpdateGoalWeight);
-        //console.log(newUpdateGoal);
-        //console.log(angular.equals($scope.originalUpdateGoalWeight,newUpdateGoal));
         return angular.equals($scope.originalUpdateGoalWeight,newUpdateGoal);
     };
 
@@ -1071,13 +1030,13 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
                         useHTML: true,
                         formatter: function() {
                             if(this.value == "Protein")
-                                return this.value+'<br/><img src="../../images/i-protein.jpg"/>';
+                                return this.value+'<br/><img class="hidden-md" src="../../images/i-protein.jpg"/>';
                             else if(this.value == "Fat")
-                                return '&nbsp;&nbsp;'+this.value+'&nbsp;&nbsp;'+'<br/><img src="../../images/i-fats.jpg"/>';
+                                return '&nbsp;&nbsp;'+this.value+'&nbsp;&nbsp;'+'<br/><img class="hidden-md" src="../../images/i-fats.jpg"/>';
                             else if(this.value == "Carbs")
-                                return this.value+'<br/><img src="../../images/i-carbs.jpg"/>';
+                                return this.value+'<br/><img class="hidden-md" src="../../images/i-carbs.jpg"/>';
                             else if(this.value == "Fibre")
-                                return '&nbsp;'+this.value+'&nbsp;'+'<br/><img src="../../images/i-fibre.jpg"/>';
+                                return '&nbsp;'+this.value+'&nbsp;'+'<br/><img class="hidden-md" src="../../images/i-fibre.jpg"/>';
                             else
                                 return this.value;
                         }
@@ -1177,13 +1136,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
 
     $scope.goGetSessionGraph = function(id){
         $scope.loaded=true;
-        var date;
-        if($scope.selectedDate==selectedDate){
-            date = $scope.selectedDate;
-        }
-        else{
-            date = $scope.selectedDate.format("dd/mm/yyyy");
-        }
+        var date=document.getElementById("main-start-date").value;
         $scope.storedSessionId = id;
 
         if(!$scope.storedSessionId){}
@@ -1473,30 +1426,22 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
     }
     selectedDate = dd+'/'+mm+'/'+yyyy;
     $scope.weightLogDate = selectedDate;
-    $scope.selectedDate = selectedDate;
     $scope.todayDate = selectedDate;
+    $scope.selectedDate = selectedDate;
     $window.goalStartDate = $window.goalEndDate = selectedDate;
 
     //Initialize
-    $scope.initialLoadFoodAndExercise=function(){
-        if($scope.selectedDate==selectedDate){
-            $scope.loadFoodDiary($scope.selectedDate);
-            $scope.loadExerciseDiary($scope.selectedDate);
-            $scope.doGetIntakeBruntByDate($scope.selectedDate);
-            $scope.goGetDailyIntakeGraph($scope.selectedDate);
-        }
-        else{
-            $scope.loadFoodDiary($scope.selectedDate.format("dd/mm/yyyy"));
-            $scope.loadExerciseDiary($scope.selectedDate.format("dd/mm/yyyy"));
-            $scope.doGetIntakeBruntByDate($scope.selectedDate.format("dd/mm/yyyy"));
-            $scope.goGetDailyIntakeGraph($scope.selectedDate.format("dd/mm/yyyy"));
-        }
+    $scope.initialLoadFoodAndExercise=function(date){
+        $scope.loadFoodDiary(date);
+        $scope.loadExerciseDiary(date);
+        $scope.doGetIntakeBruntByDate(date);
+        $scope.goGetDailyIntakeGraph(date);
         $scope.doGetWeightGoal();
-        $scope.doGetWeightLog(selectedDate);
+        $scope.doGetWeightLog(date);
         $scope.goGetSessionGraph($scope.storedSessionId);
     };
 
-    $scope.initialLoadFoodAndExercise();
+    $scope.initialLoadFoodAndExercise(selectedDate);
     $scope.doGetCoachAdvices();
 
     //circle round
@@ -1523,7 +1468,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         var transform = ($scope.isSemi ? '' : 'translateY(-50%) ') + 'translateX(-50%)';
 
         return {
-            'top': $scope.isSemi ? 'auto' : '50%',
+            'top': $scope.isSemi ? 'auto' : '52%',
             'bottom': $scope.isSemi ? '5%' : 'auto',
             'left': '50%',
             'transform': transform,
@@ -1900,21 +1845,4 @@ userApp.directive('shouldFocus', function(){
         }
     };
 });
-
-/*userApp.directive('dropDownHeight', function(){
- return {
- link: function($scope, $element) {
- $scope.$watch(function() {
- setTimeout(function(){
- var selectclass = $('.custom-popup-wrapper .dropdown-menu li');
- if ($element.height()==parseInt($('.custom-popup-wrapper .dropdown-menu').css('max-height'))) {
- selectclass.css({"paddingRight":"10px"});
- } else {
- selectclass.css({"paddingRight":"0"});
- }
- }, 0);
- });
- }
- }
- });*/
 

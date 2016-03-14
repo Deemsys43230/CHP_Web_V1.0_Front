@@ -6,19 +6,19 @@
     <h3 class="text-center margin-tb-10 text-green text-bold">
         <span ng-show="updateGoal==0">Set</span><span ng-show="updateGoal==1">Update</span> Your Goal
     </h3>
-    <div class="col-md-12">
+    <div class="col-lg-12 col-md-12 col-sm-12">
         <h5 class="text-italic text-center">"A goal properly set is halfway reached."</h5>
         <p class="margin-tb-5 text-center">
             Set your individual goal right away!
         </p>
     </div>
-    <div class="col-md-5 margin-top-15">Target {{targetText}}<span class="pull-right">:</span></div>
-    <div class="col-md-7 margin-top-10">
+    <div class="col-lg-5 col-md-5 col-sm-5 margin-top-15 padding-right-0">Target {{targetText}}<span class="pull-right">:</span></div>
+    <div class="col-lg-7 col-md-7 col-sm-7 margin-top-10 padding-left-8">
         <input type="text" id="set-date" class="profile_input" block>
     </div>
-    <div class="col-md-5 margin-top-15">Target Weight<small>(Kgs)</small><span class="pull-right">:</span></div>
+    <div class="col-lg-5 col-md-5 col-sm-5 margin-top-15 padding-right-0">Target Weight<small>(Kgs)</small><span class="pull-right">:</span></div>
     <form name="setGoalForm" novalidate>
-        <div class="col-md-7 margin-top-10">
+        <div class="col-lg-7 col-md-7 col-sm-7 margin-top-10 padding-left-8">
             <input id="target" type="text"  name="targetweight" ng-model="weight" class="profile_input" required maxlength="5" validate-Float1>
             <span ng-show="setGoalForm.targetweight.$dirty&&setGoalForm.targetweight.$invalid">
                 <span class="error-message" ng-show="setGoalForm.targetweight.$error.required"><span>Required.</span></span>
@@ -26,7 +26,7 @@
             </span>
         </div>
 
-        <div class="col-md-12 margin-top-20 text-center">
+        <div class="col-lg-12 col-md-12 col-sm-12 margin-top-20 text-center">
             <span ng-show="updateGoal==0"><a class="btn-dis weight_button" ng-disabled="setGoalForm.$invalid" ng-click="setGoal()">Set Goal</a></span>
             <span ng-show="updateGoal==1"><a class="btn-dis target_button green_button" ng-disabled="setGoalForm.$invalid" ng-click="doUpdateGoal()">Update Goal</a></span>
             <span ng-show="updateGoal==1"><a class="btn-dis target_button red_button" ng-click="cancelUpdate()">Cancel</a></span>
