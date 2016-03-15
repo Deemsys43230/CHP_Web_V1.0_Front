@@ -5,6 +5,8 @@ var coachApp= angular.module('coachApp', ['ngRoute','oc.lazyLoad','ngCookies','r
 
 coachApp.controller('CoachProfileController',['$scope','requestHandler','Flash',function($scope,requestHandler,Flash) {
 
+        $scope.birthdayformat=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+
         // Function to convert image url to base64
         $scope.convertImgToBase64=function(url, callback, outputFormat){
             var img = new Image();
@@ -31,6 +33,24 @@ coachApp.controller('CoachProfileController',['$scope','requestHandler','Flash',
                 if($scope.userProfile.gender == null){
                     $scope.userProfile.gender = "1";
                 }
+
+                var year = $scope.userProfile.dob.slice(6,10);
+                var month = $scope.userProfile.dob.slice(3,5);
+                month = $scope.birthdayformat[parseInt(month)-1];
+                var day = $scope.userProfile.dob.slice(0,2);
+
+                $(document).ready(function(){
+                    $.dobPicker({
+                        daySelector: '#dobday', /* Required */
+                        monthSelector: '#dobmonth', /* Required */
+                        yearSelector: '#dobyear', /* Required */
+                        dayDefault: day, /* Optional */
+                        monthDefault: month, /* Optional */
+                        yearDefault: year, /* Optional */
+                        minimumAge: 3, /* Optional */
+                        maximumAge: 100 /* Optional */
+                    });
+                });
 
                 if($scope.userProfile.isProfileUpdated == 1){
 
@@ -88,9 +108,15 @@ coachApp.controller('CoachProfileController',['$scope','requestHandler','Flash',
                 });
             });
 
+        };
 
+        $scope.changeBirthday=function(){
 
-
+            $scope.userProfile.dob = $('#dobday').val()+'/'+ $('#dobmonth').val() +'/'+$('#dobyear').val();
+            var focusSelect = $('#inputFocusForDatePicker');
+            focusSelect.focus();
+            focusSelect.blur();
+            $('html, body').animate({scrollTop: 0}, 0);
         };
 
         $scope.refreshImage=function(){
@@ -4606,6 +4632,30 @@ coachApp.directive('validFile',function(){
                     ngModel.$render();
                 })
             })
+        }
+    }
+});
+
+coachApp.directive('widthAboutMe', function() {
+    return {
+        link: function($scope, $element) {
+            $scope.$watch(function() {
+                setTimeout(function(){
+                    var windowheight=$("html").width();
+                    if(windowheight<1200&&windowheight>992){
+                        windowheight = Math.round((40*windowheight)/100);
+                        $('.profile_input_textarea').css({"width":windowheight+"px"});
+                    }else if(windowheight>1200){
+                        windowheight = Math.round((52.5*windowheight)/100);
+                        $('.profile_input_textarea').css({"width":windowheight+"px"});
+                    }
+                    else if(windowheight<=992&&windowheight>=479){
+                        windowheight = Math.round((37*windowheight)/100);
+                        $('.profile_input_textarea').css({"width":windowheight+"px"});
+                    }
+
+                }, 0);
+            });
         }
     }
 });

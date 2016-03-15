@@ -369,6 +369,10 @@
     }
 
     body {
+        background: #ffffff;
+    }
+
+    body.back-image{
         background: url(../images/gym-1.jpg) fixed no-repeat;
         background-size: 100% auto;
         -webkit-background-size: 100% auto;
@@ -410,7 +414,6 @@
 	#main-slide .carousel-indicators{
 		display: none;
 	}
-    
 }
 
 
@@ -422,6 +425,28 @@
 }
 
 @media (min-width: 768px){
+
+    .course-grid{
+        height: 150px!important;
+    }
+
+    .hight-125{
+        height:105px!important;
+    }
+
+    h5.classic-title {
+        font-size: 14px!important;
+    }
+
+    .form-wrapper {
+        width: 180px!important;
+    }
+
+    .form-wrapper input {
+        width: 150px!important;
+    }
+
+    .fa-5x{font-size:4em!important;}
 
     .nav-tabs > li > a.historyOverride{
         padding: 6px 10px;
@@ -501,6 +526,14 @@
         height: 730px;
     }
 
+    #profile.profile-coach{
+        height: 830px;
+    }
+
+    #profile-content.profile-coach{
+        height: 830px;
+    }
+
     .service-box-image-responsive{
         margin-top: 90px;
     }
@@ -571,9 +604,34 @@
         width:320px;
     }
 
+    .form-wrapper {
+        width: 180px!important;
+    }
+
+    .form-wrapper input {
+        width: 150px!important;
+    }
+
+    h5.classic-title {
+        font-size: 14px!important;
+    }
+
 }
 
 @media (min-width: 1120px)and (max-width: 1200px){
+
+    h5.classic-title {
+        font-size: 15px!important;
+    }
+
+    .form-wrapper {
+        width: 200px!important;
+    }
+
+    .form-wrapper input {
+        width: 170px!important;
+    }
+
     .nav-tabs > li > a {
         padding: 10px 16px;
     }
@@ -599,6 +657,20 @@
 
 
 @media (min-width: 992px){
+
+    .hight-125{
+        height:115px!important;
+    }
+
+    .course-grid{
+        height: 160px!important;
+    }
+
+    .display-style{
+        display: block;
+    }
+
+    .fa-5x{font-size:4em!important;}
 
     .nav-tabs > li > a.historyOverride{
         padding: 6px 15px;
@@ -681,6 +753,14 @@
 
     #profile-content{
         height: 730px;
+    }
+
+    #profile.profile-coach{
+        height: 830px;
+    }
+
+    #profile-content.profile-coach{
+        height: 830px;
     }
 
     input[type=radio]+ label
@@ -768,6 +848,32 @@
 
 
 @media (min-width: 1200px){
+
+    .hight-125{
+        height:125px!important;
+    }
+
+    .course-grid{
+        height: 170px!important;
+    }
+
+    h5.classic-title {
+        font-size: 16px!important;
+    }
+
+    .form-wrapper {
+        width: 250px!important;
+    }
+
+    .form-wrapper input {
+        width: 220px!important;
+    }
+
+    .display-style{
+        display: inline-block;
+    }
+
+    .fa-5x{font-size:5em!important;}
 
     #weight_level{
         margin-left:120px!important;
@@ -858,6 +964,14 @@
 
     #profile-content{
         height: 490px;
+    }
+
+    #profile.profile-coach{
+        height: 530px;
+    }
+
+    #profile-content.profile-coach{
+        height: 530px;
     }
 
     input[type=radio]+ label

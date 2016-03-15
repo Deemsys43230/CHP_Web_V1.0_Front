@@ -4,7 +4,7 @@
 <div class="page-banner" ng-cloak class="ng-cloak">
     <div class="container">
         <div class="row">
-            <div class="col-md-12 min-height-450">
+            <div class="col-lg-12 col-md-12 col-sm-12 min-height-450">
                 <span ng-show="isAdd==0"><a href="#course-view/{{courseDetails.courseid}}" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back</a></span>
                 <span ng-show="isAdd==1"><a href="#course" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back</a></span>
                 <div flash-message="2000" class="col-md-4 pull-right no-padding"></div>
@@ -16,13 +16,13 @@
                         </div>
                     </div>
                     <form name="courseForm" novalidate>
-                        <div class="col-md-2 margin-top-7">
+                        <div class="col-lg-2 col-md-3 col-sm-3 margin-top-7">
                             <h4>Course Name <span class="pull-right">:</span></h4><br/>
                             <h4 class="margin-top-10">Course Subtitle <span class="pull-right">:</span></h4><br/>
                             <h4 class="margin-top-10">Course Category <span class="pull-right">:</span></h4><br/>
                             <h4 class="margin-top-10">Course Price <span class="pull-right">:</span></h4>
                         </div>
-                        <div class="col-md-7">
+                        <div class="col-lg-7 col-md-6 col-sm-6">
                             <span ng-show="courseForm.title.$dirty&&courseForm.title.$invalid">
                                 <span class="error-message textarea-errormessage40" ng-show="courseForm.title.$error.required"><span>Required.</span></span>
                             </span>
@@ -46,23 +46,23 @@
                             <input class="search-input margin-top-15" name="price"  placeholder="Enter course price" ng-model="courseDetails.price" maxlength="7" required valid-floatnumberzero>
                             <p class="text-red margin-top-5"><b>Note : Price "zero" will be consider as free course.</b></p>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-lg-3 col-md-3 col-sm-3">
                             <span ng-show="isAdd==1"><img src="{{courseDetails.promoimage | trusted}}"></span>
                             <span ng-show="isAdd==0"><img ng-src="{{courseDetails.promoimage | trusted}}"></span>
                             <a ng-click="openCourseImageModel()" id="modal_trigger" href="" class="btn btn-sm btn-warning margin-top-10">Change Course Image</a>
                         </div>
-                        <div class="col-md-12 no-padding">
-                            <div class="col-md-2 margin-top-15">
+                        <div class="col-lg-12 col-md-12 col-sm-12 no-padding">
+                            <div class="col-lg-2 col-md-3 col-sm-3 margin-top-15">
                                 <h4>Course Description <span class="pull-right">:</span></h4>
                             </div>
-                            <div class="col-md-10 margin-top-10">
+                            <div class="col-lg-10 col-md-9 col-sm-9 margin-top-10">
                                 <span ng-show="courseForm.content.$dirty&&courseForm.content.$invalid">
                                     <span class="error-message textarea-errormessage40" ng-show="courseForm.content.$error.required"><span>Required.</span></span>
                                 </span>
                                 <div summernote config="options" name="content"  ng-model="courseDetails.coursedescription" required></div>
                             </div>
                         </div>
-                        <div class="col-md-12 text-center margin-top-15">
+                        <div class="col-lg-12 col-md-12 col-sm-12 text-center margin-top-15">
                             <span ng-show="isAdd==1"><a href="" ng-disabled="courseForm.$invalid" class="btn btn-success" ng-click="doAddCourse()">Save Course</a></span>
                             <span ng-show="isAdd==0"><a href="" ng-disabled="isCleanCourse() || courseForm.$invalid" class="btn btn-success" ng-click="doUpdateCourse()">Save Changes</a></span>
                             <span ng-show="isAdd==0"><a href="#course-view/{{courseDetails.courseid}}" class="btn btn-danger">Cancel</a></span>

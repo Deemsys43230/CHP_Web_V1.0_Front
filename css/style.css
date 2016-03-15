@@ -2310,6 +2310,11 @@ a.update-button:hover{
 /*	   03 - Main Page Elements
 /*------------------------------------------*/
 
+.row-alter{
+    margin-right: -15px;
+    margin-left: -15px;
+}
+
 .page-banner {
     padding:30px 0;
     background: #fff;
@@ -7162,8 +7167,13 @@ a.register_button:visited{
 }
 
 .course-image-1{
-    height: 125px;
-    width: auto;
+    max-height: 125px;
+    width: 100%;
+    height:auto;
+}
+
+.hight-125{
+    height:125px;
 }
 
 .course-name{
@@ -8485,6 +8495,7 @@ a:hover, a:visited, a:link, a:active
     border: 0;
     background: #eee;
     color: #555;
+    border-radius:0;
 }
 
 
@@ -8733,6 +8744,9 @@ a:hover, a:visited, a:link, a:active
     height:520px!important;
 }
 
+#profile-content .row h5{
+    font-size:13px!important;
+}
 
 #profile{
 	display: block;
@@ -10106,6 +10120,7 @@ input.section-input{
     padding: 8px 80px 8px 15px;
     border:1px solid #DDD;
     color:#666;
+    border-radius: 0;
 }
 
 textarea.forum-textarea{

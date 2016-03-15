@@ -400,7 +400,6 @@ adminApp.controller('CourseAdminController',['$scope','requestHandler','Flash','
         requestHandler.getRequest("admin/listOfPendingCourses/","").then(function(response) {
             $scope.pendingCourseList = response.data.pendingcourses;
             $scope.pendingCount = [$scope.pendingCourseList.length];
-            console.log($scope.pendingCount);
             $scope.page = "pending";
             $scope.paginationLoad=true;
 
@@ -897,7 +896,6 @@ coachApp.controller('CourseEditController',['$scope','requestHandler','Flash','$
             $scope.courseDetails = response.data['Course details'];
             $scope.courseDetails.promoimage = $scope.courseDetails.promoimage+"?decache="+Math.random();
             $scope.originalCourseDetails = angular.copy($scope.courseDetails);
-            console.log(angular.equals ($scope.originalCourseDetails, $scope.courseDetails));
             $('.image-editor').cropit({
                 imageState: {
                     src: $scope.courseDetails.promoimage+"?decache="+Math.random()
@@ -916,9 +914,6 @@ coachApp.controller('CourseEditController',['$scope','requestHandler','Flash','$
 
     //To Enable the update button if changes occur.
     $scope.isCleanCourse = function() {
-        console.log("ori",$scope.originalCourseDetails);
-        console.log("adssd",$scope.courseDetails);
-        console.log(angular.equals ($scope.originalCourseDetails, $scope.courseDetails));
         return angular.equals ($scope.originalCourseDetails, $scope.courseDetails);
 
     };

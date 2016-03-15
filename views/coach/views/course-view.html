@@ -9,49 +9,47 @@
     table td.sorter {color: #f80; width: 25px; cursor: move;}
 </style>
 
-
-
 <!-- Start Page Banner -->
 
 <div class="page-banner" ng-cloak class="ng-cloak">
     <div class="container">
         <div class="row">
-            <div class="col-md-12 min-height-450">
+            <div class="col-lg-12 col-md-12 col-sm-12 min-height-450">
                 <a href="#course" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back</a>
                 <span ng-show="courseDetails.canedit==1 && courseSections.length!=0">
                     <a href="#course-section-add/{{courseDetails.courseid}}?cancelvalue=0" class="back-button pull-right margin-left-5"><i class="fa fa-plus-circle"></i> Add Section</a>
                     <a ng-click="reviewModel()" id="modal_trigger1" href="" class="back-button pull-right margin-left-5"><i class="fa fa-paper-plane"></i> Send to Review</a>
                 </span>
-                <div flash-message="2000" class="col-md-3 pull-right no-padding"></div>
+                <div flash-message="2000" class="col-lg-3 col-md-4 col-sm-4 pull-right no-padding"></div>
                 <h4 class="classic-title">
                     <span ng-show="courseDetails.canedit==0">Course View</span>
                     <span ng-show="courseDetails.canedit==1">Edit Course</span>&nbsp;
                 </h4>
                 <div class="row margin-top-10 margin-bottom-10">
-                    <div class="col-md-3">
+                    <div class="col-lg-3 col-md-4 col-sm-4">
                         <div class="height-190"><img class="max-height-180" ng-src="{{courseDetails.promoimage | trusted}}"></div>
                         <h5 class="row text-muted">
-                            <span class="col-md-5">Category</span>
-                            <span class="col-md-7">: {{courseDetails.categoryname}}</span>
-                            <span class="col-md-5">Price</span>
-                            <span class="col-md-7">
+                            <span class="col-lg-5 col-md-5 col-sm-5">Category</span>
+                            <span class="col-lg-7 col-md-7 col-sm-7">: {{courseDetails.categoryname}}</span>
+                            <span class="col-lg-5 col-md-5 col-sm-5">Price</span>
+                            <span class="col-lg-7 col-md-7 col-sm-7">
                                 : <span ng-show="courseDetails.price==0" class="text-green text-bold">Free</span>
                                 <span ng-hide="courseDetails.price==0" class="text-red text-bold">{{courseDetails.price}} $</span>
                             </span>
-                            <span class="col-md-5">No. of Enrolls</span>
-                            <span class="col-md-7">
+                            <span class="col-lg-5 col-md-5 col-sm-5">No. of Enrolls</span>
+                            <span class="col-lg-7 col-md-7 col-sm-7">
                                 : <span ng-show="courseDetails.enrollcount==0">----</span>
                                 <span ng-hide="courseDetails.enrollcount==0">{{courseDetails.enrollcount}}</span>
                             </span>
-                            <span class="col-md-5">Created On</span>
-                            <span class="col-md-7">: {{courseDetails.createdon}}</span>
-                            <span class="col-md-5">Reviewed On</span>
-                            <span class="col-md-7">
+                            <span class="col-lg-5 col-md-5 col-sm-5">Created On</span>
+                            <span class="col-lg-7 col-md-7 col-sm-7">: {{courseDetails.createdon}}</span>
+                            <span class="col-lg-5 col-md-5 col-sm-5">Reviewed On</span>
+                            <span class="col-lg-7 col-md-7 col-sm-7">
                                 : <span ng-show="!courseDetails.reviewdate">----</span>
                                 <span ng-hide="!courseDetails.reviewdate">{{courseDetails.reviewdate}}</span>
                             </span>
-                            <span class="col-md-5">Published On</span>
-                            <span class="col-md-7">
+                            <span class="col-lg-5 col-md-5 col-sm-5">Published On</span>
+                            <span class="col-lg-7 col-md-7 col-sm-7">
                                 : <span ng-show="!courseDetails.publishedon">----</span>
                                 <span ng-hide="!courseDetails.publishedon">{{courseDetails.publishedon}}</span>
                             </span>
@@ -59,7 +57,7 @@
                         <span ng-show="courseDetails.canedit==1"><a href="#course-edit/{{courseDetails.courseid}}" class="main-button blue_back margin-top-10">Edit Basic Info</a></span>
                         <span ng-show="courseDetails.canedit==1"><a ng-click="deleteModel()" id="modal_trigger" href="" class="main-button red_back margin-top-10">Delete course</a></span>
                     </div>
-                    <div class="col-md-9 no-padding">
+                    <div class="col-lg-9 col-md-8 col-sm-8 no-padding">
                         <h2 class="wrap margin-right-20">{{courseDetails.coursename}}</h2>
                         <div ng-if="loaded">
                             <div class="loader-style">
@@ -70,19 +68,19 @@
                         <p class="margin-top-10 margin-right-20 wrap" ng-bind-html="courseDetails.coursedescription | html"></p>
                         <div class="margin-top-15">
                             <div ng-show="courseSections.length==0 && courseDetails.canedit==1" class="margin-top-20">
-                                <div class="col-md-5">
+                                <div class="col-lg-5 col-md-5 col-sm-5">
                                     <img class="pull-right" src="../../images/no-section.png"/>
                                 </div>
-                                <div class="col-md-7 margin-top-10">
+                                <div class="col-lg-7 col-md-7 col-sm-7 margin-top-10">
                                     <h2 class="text-gray">no section added</h2>
                                     <a href="#course-section-add/{{courseDetails.courseid}}?cancelvalue=0" class="main-button margin-top-10">Add Section</a>
                                 </div>
                             </div>
-                            <div ng-show="courseDetails.canedit==0" class="col-md-12 no-padding">
+                            <div ng-show="courseDetails.canedit==0" class="col-lg-12 col-md-12 col-sm-12 no-padding">
                                 <h5 ng-repeat="section in courseSections" class="margin-bottom-5 margin-right-20 wrap">Section {{section.sequenceno}} : <a href="#course-section/{{section.sectionid}}" >{{section.sectiontitle}}</a>&nbsp;&nbsp;&nbsp;<span ng-show="courseDetails.canedit==1"><a href="#course-section-edit/{{section.sectionid}}" class="fa fa-pencil"></a></span></h5>
                             </div>
                         </div>
-                        <div class="col-md-12 no-padding hidden-x" ng-show="courseDetails.canedit==1">
+                        <div class="col-lg-12 col-md-12 col-sm-12 no-padding hidden-x" ng-show="courseDetails.canedit==1">
 
                             <table class="sorting-table" attr-sample="thetable">
                                 <tbody>
@@ -188,10 +186,6 @@
         </div>
     </section>
 </div>
-
-
-
-
 
 <!-- End Page Banner -->
 
