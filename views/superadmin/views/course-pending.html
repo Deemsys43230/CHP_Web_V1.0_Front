@@ -67,8 +67,7 @@
     <section class="popupBody">
         <!-- Register Form -->
         <div class="common_model">
-            <form name="courseRejectForm" ng-init="pendingcourselist()">
-
+            <form name="courseRejectForm">
                 <p>Reason for course rejection:</p>
                 <textarea type="text" class="height-150" name="comments"  maxlength="300"  ng-model="comments"  required/></textarea>
                 <span ng-show="courseRejectForm.comments.$dirty&&courseRejectForm.comments.$invalid">
@@ -82,6 +81,8 @@
         </div>
     </section>
 </div>
+
+
 
 <!-- create coach popup-->
 <div id="modal" class="popupContainer" style="display:none;left: 37%!important;">

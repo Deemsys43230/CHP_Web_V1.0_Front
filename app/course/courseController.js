@@ -138,7 +138,6 @@ userApp.controller('CourseController',['$scope','requestHandler','Flash','$route
     };
 
     $scope.checkenroll = function(){
-
         $(function(){
             $("#lean_overlay").fadeTo(1000);
             $("#enrollmodal").fadeIn(600);
@@ -458,9 +457,7 @@ adminApp.controller('CourseAdminController',['$scope','requestHandler','Flash','
     });
 
     $scope.modal =function(courseid){
-
-
-        $scope.courseid = courseid;
+         $scope.courseid = courseid;
 
         $("html, body").animate({
             scrollTop: 0
@@ -476,7 +473,7 @@ adminApp.controller('CourseAdminController',['$scope','requestHandler','Flash','
         $(".modal_close").click(function(){
             $(".common_model").hide();
             $(".modalRejectCourse").hide();
-            $("#lean_overlay").hide()
+            $("#lean_overlay").hide();
             $scope.resetrejectdata();
         });
 
@@ -490,7 +487,6 @@ adminApp.controller('CourseAdminController',['$scope','requestHandler','Flash','
     };
 
     $scope.acceptModal=function(courseid){
-
         $scope.courseid = courseid;
         $("html, body").animate({
             scrollTop: 0
