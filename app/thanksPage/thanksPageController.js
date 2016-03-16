@@ -28,24 +28,22 @@ userApp.controller('ThanksSubscribePageController',['$scope','requestHandler','$
     }
     else{
         var paymentConfirmDetails={};
-        paymentConfirmDetails.payId=paymentResponse.paymentId;
-        paymentConfirmDetails.payerId=paymentResponse.PayerID;
-        paymentConfirmDetails.coachid=parseInt($routeParams.id);
-        paymentConfirmDetails.month=parseInt($routeParams.month);
+        paymentConfirmDetails.accesskey=paymentResponse.accesskey;
 
         $scope.doExcecutePayment = function(paymentConfirmDetails){
-            requestHandler.postRequest("user/subscribeCoachExecute/",paymentConfirmDetails).then(function(response){
+            requestHandler.postRequest("user/executePayByToken/",paymentConfirmDetails).then(function(response){
+                alert("ok");
                 if(response.data.Response_status==0){
                     $scope.completed=true;
                     $scope.transactionSucceed=false;
-                    $scope.urlPage=requestHandler.paymentURL()+"/#/coachSearch";
+                    $scope.urlPage=requestHandler.paymentURL()+"/#/coach-search";
                     $scope.countDownTimer($scope.urlPage,"coach search");
                 }
                 else{
                     $scope.thanksEnroll="YOUR SUBSCRIPTION WAS SUCCESSFULLY COMPLETED";
                     $scope.transactionSucceed=true;
                     $scope.completed=true;
-                    $scope.urlPage=requestHandler.paymentURL()+"/#/coachView/"+$routeParams.id;
+                    $scope.urlPage=requestHandler.paymentURL()+"/#/coach-view/"+$routeParams.id;
                     $scope.countDownTimer($scope.urlPage,"coach view");
                 }
             },function(){
@@ -85,19 +83,15 @@ userApp.controller('ThanksEnrollPageController',['$scope','requestHandler','$loc
     if($.isEmptyObject(paymentResponse)){
         $scope.completed=true;
         $scope.transactionSucceed=true;
-        $scope.urlPage=requestHandler.paymentURL()+"/#/courseDetail/"+$routeParams.id;
+        $scope.urlPage=requestHandler.paymentURL()+"/#/course-detail/"+$routeParams.id;
         $scope.countDownTimer($scope.urlPage,"course");
     }
     else{
         var paymentConfirmDetails={};
-        paymentConfirmDetails.payId=paymentResponse.paymentId;
-        paymentConfirmDetails.payerId=paymentResponse.PayerID;
-        paymentConfirmDetails.courseid=parseInt($routeParams.id);
-
-        console.log(paymentConfirmDetails);
+        paymentConfirmDetails.accesskey=paymentResponse.accesskey;
 
         $scope.doExcecutePayment = function(paymentConfirmDetails){
-            requestHandler.postRequest("user/enrollCourseExecute/",paymentConfirmDetails).then(function(response){
+            requestHandler.postRequest("user/executePayByToken/",paymentConfirmDetails).then(function(response){
                 if(response.data.Response_status==0){
                     $scope.completed=true;
                     $scope.transactionSucceed=false;
@@ -105,10 +99,10 @@ userApp.controller('ThanksEnrollPageController',['$scope','requestHandler','$loc
                     $scope.countDownTimer($scope.urlPage,"course search");
                 }
                 else{
-                    $scope.thanksEnroll="YOUR HAVE SUCCESSFULLY ENROLLED THIS COURSE";
+                    $scope.thanksEnroll="YOU HAVE SUCCESSFULLY ENROLLED THIS COURSE";
                     $scope.transactionSucceed=true;
                     $scope.completed=true;
-                    $scope.urlPage=requestHandler.paymentURL()+"/#/courseDetail/"+$routeParams.id;
+                    $scope.urlPage=requestHandler.paymentURL()+"/#/course-detail/"+$routeParams.id;
                     $scope.countDownTimer($scope.urlPage,"course");
                 }
             },function(){

@@ -17,8 +17,13 @@ adminApp.controller('PaypalSettingsController',['$scope','requestHandler','Flash
     $scope.doGetPaypalSettings= function () {
         requestHandler.getRequest("admin/getappdetails/","").then(function(response){
 
-             $scope.paypalSettings=response.data.App_settings[0];
-
+            $scope.paypalSettings=response.data.App_settings[0];
+            if($scope.paypalSettings.paypaltype==null){
+                $scope.paypalSettings.paypaltype="1";
+            }else{
+                $scope.paypalSettings.paypaltype=$scope.paypalSettings.paypaltype.toString();
+            }
+            $scope.paypalSettings.adminPassword="";
             $scope.paypalSettings.coursepurchaseshare = $scope.paypalSettings.coursepurchaseshare.toString();
             $scope.paypalSettings.coachsubscribeshare = $scope.paypalSettings.coachsubscribeshare.toString();
             original=angular.copy($scope.paypalSettings);
@@ -29,11 +34,21 @@ adminApp.controller('PaypalSettingsController',['$scope','requestHandler','Flash
     };
 
     $scope.doUpdatePaypalSettings=function(){
+        $scope.paypalSettings.paypaltype=parseInt($scope.paypalSettings.paypaltype);
         requestHandler.putRequest("admin/updatePayPalDetails",$scope.paypalSettings).then(function(response){
+            if(response.data.Response_status=="1"){
+                $scope.doGetPaypalSettings();
+                $scope.confirmPasswordForm.$setPristine();
+                successMessage(Flash,"Successfully Updated!");
+            }else{
+                $scope.paypalSettings.adminPassword="";
+                $scope.confirmPasswordForm.$setPristine();
+                errorMessage(Flash,"Invalid data provided");
+            }
 
-
-            successMessage(Flash,"Successfully Updated!");
         },function(){
+            $scope.paypalSettings.adminPassword="";
+            $scope.confirmPasswordForm.$setPristine();
             errorMessage(Flash,"Please try again later");
         });
     };

@@ -571,6 +571,7 @@ adminApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name: 'adminApp',
                             files: [
+                                '../../plugin/popup/style.css',
                                 '../../app/settings/paypalController.js'
                             ]
                         })

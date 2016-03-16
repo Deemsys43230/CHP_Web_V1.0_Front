@@ -120,18 +120,18 @@ userApp.controller('CourseController',['$scope','requestHandler','Flash','$route
             $scope.paginationLoad=true;
         });
     };
-
     $scope.doEnrollCourse = function(course){
         $scope.entrolling="Enrolling Please Wait";
         $scope.enrollButtonStatus=true;
         requestHandler.postRequest("user/enrollCourse/",{"courseid":course,"returnUrl":requestHandler.paymentURL()+"/#/thanksEnrollPage/"+course,"cancelUrl":requestHandler.paymentURL()+"/#/courses"}).then(function(response){
+
             if(response.data.transactionStatus==1){
-                window.location=response.data.approveURL.href;
+              window.location=response.data.approveURL ;
             }
             else if(response.data.transactionStatus==2){
-                window.location=requestHandler.paymentURL()+"/#/thanksEnrollPage/"+course;
+              window.location=requestHandler.paymentURL()+"/#/thanksEnrollPage/"+course;
             }
-            //successMessage(Flash,"Successfully Enrolled");
+            // successMessage(Flash,"Successfully Enrolled");
         },function(){
             errorMessage(Flash,"Please try again later!")
         });

@@ -181,9 +181,9 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
         $scope.subscribeButtonStatus=true;
         $scope.subscribing[month]=true;
 
-        requestHandler.postRequest("user/subscribeCoach/",{"coachid":coach,"month":month,"returnUrl":requestHandler.paymentURL()+"/#/thanksSubscribePage/"+coach+"/"+month,"cancelUrl":requestHandler.paymentURL()+"/#/coachSearch"}).then(function(response){
+        requestHandler.postRequest("user/subscribeCoach/",{"coachid":coach,"month":month,"returnUrl":requestHandler.paymentURL()+"/#/thanksSubscribePage/"+coach+"/"+month,"cancelUrl":requestHandler.paymentURL()+"/#/coach-search"}).then(function(response){
             if(response.data.transactionStatus==1){
-                window.location=response.data.approveURL.href;
+                window.location=response.data.approveURL;
             }
             else if(response.data.transactionStatus==2){
                 window.location=requestHandler.paymentURL()+"/#/thanksSubscribePage/"+coach+"/"+month;
