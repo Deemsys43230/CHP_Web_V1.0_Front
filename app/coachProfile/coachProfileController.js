@@ -34,29 +34,25 @@ coachApp.controller('CoachProfileController',['$scope','requestHandler','Flash',
                     $scope.userProfile.gender = "1";
                 }
 
-                var year,month,day;
-
                 if($scope.userProfile.dob == null){
-                    year = 1980;
-                    month = "Jan";
-                    day = 01;
-                }else{
-                    year = $scope.userProfile.dob.slice(6,10);
-                    var monthno = $scope.userProfile.dob.slice(3,5);
-                    month = $scope.birthdayformat[parseInt(monthno)-1];
-                    day = $scope.userProfile.dob.slice(0,2);
+                    $scope.userProfile.dob='01/01/1980';
                 }
+
+                var year = $scope.userProfile.dob.slice(6,10);
+                var month = $scope.userProfile.dob.slice(3,5);
+                month = $scope.birthdayformat[parseInt(month)-1];
+                var day = $scope.userProfile.dob.slice(0,2);
 
                 $(document).ready(function(){
                     $.dobPicker({
-                        daySelector: '#dobday',  //Required
-                        monthSelector: '#dobmonth',  //Required
-                        yearSelector: '#dobyear',  //Required
-                        dayDefault: day,  //Optional
-                        monthDefault: month,  //Optional
-                        yearDefault: year,  //Optional
-                        minimumAge: 3,  //Optional
-                        maximumAge: 100  //Optional
+                        daySelector: '#dobday', /* Required */
+                        monthSelector: '#dobmonth', /* Required */
+                        yearSelector: '#dobyear', /* Required */
+                        dayDefault: day, /* Optional */
+                        monthDefault: month, /* Optional */
+                        yearDefault: year, /* Optional */
+                        minimumAge: 3, /* Optional */
+                        maximumAge: 100 /* Optional */
                     });
                 });
 
