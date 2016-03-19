@@ -149,6 +149,7 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'coachApp',
                             files:[
+                                '../../angular/angular-utils-pagination/dirPagination.js',
                                 '../../app/forums/forumsController.js'
                             ]
                         })

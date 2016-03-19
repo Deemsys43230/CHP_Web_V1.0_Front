@@ -12,7 +12,7 @@ adminApp.factory("ExerciseService",['requestHandler',function(requestHandler){
             });  
             return response.data.Exercise_Tag_Data;
         },function(response){
-            alert("Not able to pull Food Tag");
+            console.log("Not able to pull Food Tag");
         })
     };
     //End Get Food Tags

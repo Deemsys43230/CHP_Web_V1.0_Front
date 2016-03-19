@@ -84,7 +84,6 @@ coachApp.controller('CoachProfileController',['$scope','requestHandler','Flash',
                     $scope.userProfile.country=$scope.countries[''];
                 }
 
-                //alert($scope.userProfile.imageurl);
                 $scope.userProfile.imageurl=$scope.userProfile.imageurl+"?decache="+Math.random();
                 //$scope.userProfile.imageurl=$scope.userProfile.imageurl.substring($scope.userProfile.imageurl.indexOf("/") + 14, $scope.userProfile.imageurl.length);
 
@@ -4435,7 +4434,6 @@ coachApp.controller('CoachProfileController',['$scope','requestHandler','Flash',
             {name:'Nord', code:'ND', "countryid":1094}
         ];
         $scope.updateCountry = function(){
-            //alert("hi");
             $scope.availableStates = [];
             $.each($scope.states, function(index,value){
                 if(value.countryid == $scope.userProfile.countrySelect.id){

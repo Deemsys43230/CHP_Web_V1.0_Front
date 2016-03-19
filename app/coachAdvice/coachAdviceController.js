@@ -18,7 +18,6 @@ coachApp.controller('CoachAdviceController',['$scope','requestHandler','Flash',f
     $scope.doInsertOrUpdateMyAdvice=function(){
 
         requestHandler.postRequest("coach/insertorupdatecoachadvices/",$scope.myadvice).then(function(response){
-            console.log(response);
             $scope.doGetCoachMyAdvice();
             successMessage(Flash,"Successfully Updated");
         }, function () {

@@ -9,7 +9,7 @@ adminApp.factory("FoodService",['requestHandler',function(requestHandler){
        return requestHandler.getRequest("admin/getFoodCategoryByStatus","").then(function(response){
           return response.data.Food_Category;
         },function(response){
-            alert("Not able to pull Food Measure List");
+            console.log("Not able to pull Food Measure List");
         })
     };
     //End Get Food Categories
@@ -19,7 +19,7 @@ adminApp.factory("FoodService",['requestHandler',function(requestHandler){
          return requestHandler.getRequest("admin/getFoodTag","").then(function(response){
             return response.data.Food_Tag_Data;
         },function(response){
-            alert("Not able to pull Food Tag");
+             console.log("Not able to pull Food Tag");
         })
     };
     //End Get Food Tags
@@ -199,7 +199,7 @@ adminApp.factory("FoodService",['requestHandler',function(requestHandler){
             return foodMeasureListAll;
 
         },function(response){
-            alert("Not able to pull Food Measure List");
+            console.log("Not able to pull Food Measure List");
         })
     };
     //End Get Food Measures

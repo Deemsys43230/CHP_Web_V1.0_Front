@@ -31,8 +31,7 @@ adminApp.controller('LatestNewsController',['$scope','requestHandler','Flash','$
 
     //To add Latest News
     $scope.doAddLatestNews=function(){
-        /*$('#summernote-news').code().find('*').css('font-family','inherit');
-              alert($scope.latest.description);*/
+        /*$('#summernote-news').code().find('*').css('font-family','inherit');*/
         requestHandler.postRequest("admin/insertorupdateLatestNews/",$scope.latest).then(function(response){
 
             successMessage(Flash,"Successfully Added");
@@ -116,8 +115,6 @@ adminApp.controller('LatestNewsEditController',['$scope','requestHandler','Flash
 
     //To Enable the update button if changes occur.
     $scope.isClean = function() {
-        console.log(originalnews);
-        console.log($scope.latest);
         return angular.equals (originalnews, $scope.latest);
     };
 

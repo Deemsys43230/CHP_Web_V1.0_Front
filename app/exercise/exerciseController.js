@@ -91,7 +91,6 @@ adminApp.controller('ExerciseViewController',['$scope','requestHandler','Flash',
 	$scope.activeClass = {exerciselist:'active'};
 
 	$scope.doGetExerciseByID=function(){
-		//alert("hi");
 		$scope.loaded=true;
 		requestHandler.postRequest("admin/getExerciseDetailByadmin/",{"exerciseid":$routeParams.id}).then(function(response){
 			$scope.exerciseDetail=response.data.ExerciseDetail.exercise;
@@ -300,8 +299,6 @@ adminApp.controller('ExerciseEditController',['$q','$scope','requestHandler','Fl
 
 	    //updatedExerciseDetails.levels = $scope.exerciseDetail.type.levels;
         $q.all([tagPromise]).then(function(){
-
-            console.log(updatedExerciseDetails);
             requestHandler.postRequest("admin/insertExercise/",updatedExerciseDetails).then(function (response) {
                 if (response.data.Response_status == 1) {
                     successMessage(Flash,"Exercise Added Successfully!");

@@ -43,7 +43,7 @@
                     <input type="hidden" ng-model="pendingcourse.page"/>
                     <td>
                         <a href="#course-detail/{{pendingcourse.courseid}}" class="btn-xs btn-primary">View</a>
-                        <a href="" class="btn-xs btn-success" id="modal_trigger1" ng-click="acceptModal(pendingcourse.courseid)">Accept</a>
+                        <a href="" class="btn-xs btn-success modal_trigger1" ng-click="acceptModal(pendingcourse.courseid)">Accept</a>
                         <a href="" class="btn-xs btn-danger modal_trigger" ng-click="modal(pendingcourse.courseid)">Reject</a>
                     </td>
                 </tr>
@@ -83,7 +83,7 @@
 </div>
 
 <!-- create coach popup-->
-<div id="modal" class="popupContainer" style="display:none;left: 37%!important;">
+<div class="popupContainer modalAcceptCourse" style="display:none;left: 37%!important;">
     <header class="popupHeader">
         <span class="header_title">Confirmation</span>
         <span class="modal_close"><i class="fa fa-times"></i></span>
@@ -108,5 +108,5 @@
 
 <script type="text/javascript">
     $(".modal_trigger").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
-    $("#modal_trigger1").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
+    $(".modal_trigger1").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
 </script>

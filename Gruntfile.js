@@ -3,7 +3,7 @@ module.exports=function(grunt){
         watch: {
         	options: { nospawn: true },
             scripts: {
-                files: ['app/*.js','app/**/*.js','js/*.js','!app/userDashboard/userDashboardController.js','css/*.css','views/**/*.html','plugin/**/*.css','images/*.{png,jpg,gif}','images/**/*.{png,jpg,gif}','views/**/*.html','!views/user/views/dashboard.html','index.html'],
+                files: ['app/*.js','app/**/*.js','js/*.js','plugin/**/*.js','!app/userDashboard/userDashboardController.js','css/*.css','views/**/*.html','index.html','plugin/**/*.css','images/*.{png,jpg,gif}','images/**/*.{png,jpg,gif}','views/**/*.html','!views/user/views/dashboard.html'],
                 tasks: ['newer:uglify','newer:cssmin','newer:imagemin','newer:htmlmin']
             }
         },
@@ -29,12 +29,6 @@ module.exports=function(grunt){
               dest: 'angular/output1.js'
            }
        },
-       ngmin: {
-           controllers: {
-               src: ['app/course/courseController.js'],
-               dest: 'app/course/courseController1.js'
-           }
-       },
        imagemin: {                         // Task
           dynamic: {                         // Another target
                files: [{
@@ -53,7 +47,7 @@ module.exports=function(grunt){
                },
                files: [{
                    expand:true,
-                   src: ['views/**/*.html','!views/user/views/dashboard.html'],   // Actual patterns to match
+                   src: ['views/**/*.html','index.html','!views/user/views/dashboard.html'],   // Actual patterns to match
                    dest: 'CyberHealth/'
 
                }]
@@ -63,7 +57,7 @@ module.exports=function(grunt){
            target: {
                files: [{
                    expand: true,
-                   src: ['css/*.css','plugin/**/*.css','!css/style.css'],
+                   src: ['css/*.css','plugin/**/*.css'],
                    dest: 'Cyberhealth/',
                    ext: '.css'
                }]
@@ -77,7 +71,6 @@ module.exports=function(grunt){
     grunt.loadNpmTasks('grunt-contrib-imagemin');
     grunt.loadNpmTasks('grunt-contrib-htmlmin');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
-    grunt.loadNpmTasks('grunt-ngmin');
     grunt.loadNpmTasks('grunt-newer');
     grunt.registerTask('default', ['newer:uglify', 'watch']);
 };

@@ -421,6 +421,7 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'userApp',
                             files:[
+                                '../../angular/angular-utils-pagination/dirPagination.js',
                                 '../../app/forums/forumsController.js'
                             ]
                         })
@@ -435,6 +436,7 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'userApp',
                             files:[
+                                '../../angular/angular-utils-pagination/dirPagination.js',
                                 '../../app/forums/forumsController.js'
                             ]
                         })
@@ -449,6 +451,7 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'userApp',
                             files:[
+                                '../../angular/angular-utils-pagination/dirPagination.js',
                                 '../../app/forums/forumsController.js'
                             ]
                         })
@@ -497,6 +500,7 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                             name:'userApp',
                             files:[
                                 '../../plugin/popup/style.css',
+                                '../../angular/angular-utils-pagination/dirPagination.js',
                                 '../../app/goal/goalController.js'
                             ]
                         })

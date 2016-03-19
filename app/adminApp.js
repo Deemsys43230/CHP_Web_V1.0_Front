@@ -118,7 +118,7 @@ adminApp.config([
           function ($ocLazyLoad) {
             return $ocLazyLoad.load({
               name: 'adminApp',
-              files: ['../../app/faq/faqController.js']
+              files: ['../../angular/angular-utils-pagination/dirPagination.js','../../app/faq/faqController.js']
             });
           }
         ]
@@ -204,6 +204,7 @@ adminApp.config([
             return $ocLazyLoad.load({
               name: 'adminApp',
               files: [
+                  '../../angular/angular-utils-pagination/dirPagination.js',
                 '../../plugin/text-editor/summernote.js',
                 '../../plugin/text-editor/summernote.css',
                 '../../app/latestNews/latestNewsController.js'
@@ -222,6 +223,7 @@ adminApp.config([
             return $ocLazyLoad.load({
               name: 'adminApp',
               files: [
+                  '../../angular/angular-utils-pagination/dirPagination.js',
                 '../../plugin/text-editor/summernote.js',
                 '../../plugin/text-editor/summernote.css',
                 '../../app/latestNews/latestNewsController.js'
@@ -239,7 +241,7 @@ adminApp.config([
           function ($ocLazyLoad) {
             return $ocLazyLoad.load({
               name: 'adminApp',
-              files: ['../../app/latestNews/latestNewsController.js']
+              files: ['../../angular/angular-utils-pagination/dirPagination.js','../../app/latestNews/latestNewsController.js']
             });
           }
         ]
@@ -287,7 +289,7 @@ adminApp.config([
           function ($ocLazyLoad) {
             return $ocLazyLoad.load({
               name: 'adminApp',
-              files: ['../../app/forums/forumsController.js']
+              files: ['../../angular/angular-utils-pagination/dirPagination.js','../../app/forums/forumsController.js']
             });
           }
         ]
@@ -301,7 +303,7 @@ adminApp.config([
           function ($ocLazyLoad) {
             return $ocLazyLoad.load({
               name: 'adminApp',
-              files: ['../../app/forums/forumsController.js']
+              files: ['../../angular/angular-utils-pagination/dirPagination.js','../../app/forums/forumsController.js']
             });
           }
         ]
@@ -335,6 +337,7 @@ adminApp.config([
             return $ocLazyLoad.load({
               name: 'adminApp',
               files: [
+                  '../../angular/angular-utils-pagination/dirPagination.js',
                 '../../app/testimonial/testimonialController.js',
                 '../../plugin/text-editor/summernote.js',
                 '../../plugin/text-editor/summernote.css',
@@ -355,6 +358,7 @@ adminApp.config([
             return $ocLazyLoad.load({
               name: 'adminApp',
               files: [
+                  '../../angular/angular-utils-pagination/dirPagination.js',
                 '../../app/testimonial/testimonialController.js',
                 '../../plugin/text-editor/summernote.js',
                 '../../plugin/text-editor/summernote.css',
@@ -368,6 +372,22 @@ adminApp.config([
       controller: 'TestimonialEditController'
     }).when('/view-testimonial/:id', {
       templateUrl: 'views/site-view-testimonial.html',
+        resolve: {
+            loadMyFiles: [
+                '$ocLazyLoad',
+                function ($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name: 'adminApp',
+                        files: [
+                            '../../angular/angular-utils-pagination/dirPagination.js',
+                            '../../app/testimonial/testimonialController.js',
+                            '../../css/testimonial-image-upload.css',
+                            '../../js/image-upload.js'
+                        ]
+                    });
+                }
+            ]
+        },
       controller: 'TestimonialEditController'
     }).when('/member', {
       templateUrl: 'views/member.html',
@@ -394,7 +414,7 @@ adminApp.config([
           function ($ocLazyLoad) {
             return $ocLazyLoad.load({
               name: 'adminApp',
-              files: ['../../app/member/memberController.js']
+              files: ['../../angular/angular-utils-pagination/dirPagination.js','../../app/member/memberController.js']
             });
           }
         ]
@@ -428,6 +448,7 @@ adminApp.config([
               name: 'adminApp',
               files: [
                 '../../css/profile-image-upload.css',
+                  '../../angular/angular-utils-pagination/dirPagination.js',
                 '../../js/image-upload.js',
                 '../../app/coach/coachController.js'
               ]
@@ -481,7 +502,12 @@ adminApp.config([
           function ($ocLazyLoad) {
             return $ocLazyLoad.load({
               name: 'adminApp',
-              files: ['../../app/exercise/exerciseController.js']
+              files: [
+                  '../../angular/angular-utils-pagination/dirPagination.js',
+                  '../../js/category-select.js',
+                  '../../app/exercise/exerciseService.js',
+                  '../../app/exercise/exerciseController.js'
+              ]
             });
           }
         ]
@@ -693,6 +719,7 @@ adminApp.config([
                 '../../js/image-upload.js',
                 '../../js/category-select.js',
                 '../../css/custom-inputs.css',
+                '../../angular/angular-utils-pagination/dirPagination.js',
                 'https://cdn.rawgit.com/angular-ui/ui-select/master/dist/select.min.js',
                 '../../css/multiSelect.css',
                 '../../css/category-select.css',
@@ -717,6 +744,8 @@ adminApp.config([
             return $ocLazyLoad.load({
               name: 'adminApp',
               files: [
+                  '../../angular/angular-utils-pagination/dirPagination.js',
+                  'https://cdn.rawgit.com/angular-ui/ui-select/master/dist/select.min.js',
                 '../../plugin/popup/style.css',
                 '../../app/food/foodService.js',
                 '../../app/food/foodController.js'
@@ -952,6 +981,7 @@ adminApp.config([
               name: 'adminApp',
               files: [
                 '../../plugin/popup/style.css',
+                  '../../angular/angular-utils-pagination/dirPagination.js',
                 '../../app/course/courseController.js'
               ]
             });
@@ -967,7 +997,11 @@ adminApp.config([
           function ($ocLazyLoad) {
             return $ocLazyLoad.load({
               name: 'adminApp',
-              files: ['../../app/course/courseController.js']
+              files: [
+                  '../../angular/angular-utils-pagination/dirPagination.js',
+                  '../../plugin/popup/style.css',
+                  '../../app/course/courseController.js'
+              ]
             });
           }
         ]
@@ -1159,7 +1193,54 @@ adminApp.config([
         ]
       },
       controller: 'ContactUsController'
-    }).when('/portfolio', { templateUrl: '../common/portfolio.html' }).when('/singleProject', { templateUrl: '../common/single-project.html' }).when('/blog', { templateUrl: '../common/blog.html' }).otherwise({ redirectTo: '/dashboard' });
+    }).when('/portfolio', {
+        templateUrl: '../common/portfolio.html'
+    }).when('/singleProject', {
+        templateUrl: '../common/single-project.html'
+    }).when('/blog', {
+            templateUrl: '../common/blog.html',
+            resolve: {
+                loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name:'adminApp',
+                        files:[
+                            '../../app/blog/blogController.js'
+                        ]
+                    })
+                }]
+            },
+            controller:'BlogController'
+        }).
+            when('/singleBlog1', {
+                templateUrl: '../common/single-blog1.html',
+                resolve: {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'adminApp',
+                            files:[
+                                '../../app/blog/blogController.js'
+                            ]
+                        })
+                    }]
+                },
+                controller:'BlogController'
+            }).
+            when('/singleBlog2', {
+                templateUrl: '../common/single-blog2.html',
+                resolve: {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'adminApp',
+                            files:[
+                                '../../app/blog/blogController.js'
+                            ]
+                        })
+                    }]
+                },
+                controller:'BlogController'
+    }).otherwise({
+        redirectTo: '/dashboard'
+    });
   }
 ]);
 //Initial Controller for Username
@@ -1512,7 +1593,6 @@ adminApp.directive('uiSelectRequired', function () {
   return {
     require: 'ngModel',
     link: function (scope, elm, attrs, ngModel) {
-      // console.log(ngModel);
       ngModel.$validators.uiSelectRequired = function (modelValue, viewValue) {
         /* return modelValue && modelValue.length;*/
         var determineVal;
@@ -1589,8 +1669,6 @@ adminApp.directive('checkboxGroup', function () {
               checkedCount++;
             }
           });
-          //  console.log('minRequired', minRequired);
-          //  console.log('checkedCount', checkedCount);
           var minRequiredValidity = checkedCount >= minRequired;
           angular.forEach(ngModels, function (ngModel) {
             ngModel.$setValidity('checkboxGroup-minRequired', minRequiredValidity, self);
@@ -1791,7 +1869,6 @@ adminApp.directive('focusMe', [
       link: function (scope, element, attrs) {
         var model = $parse(attrs.focusMe);
         scope.$watch(model, function (value) {
-          console.log('value=', value);
           if (value === true) {
             $timeout(function () {
               element[0].focus();
@@ -1801,7 +1878,6 @@ adminApp.directive('focusMe', [
         // to address @blesh's comment, set attribute value to 'false'
         // on blur event:
         element.bind('blur', function () {
-          console.log('blur');
           scope.$apply(model.assign(scope, false));
         });
       }

@@ -89,9 +89,7 @@ adminApp.controller('ForumsEditController',['$scope','requestHandler','Flash','$
 
         requestHandler.postRequest("getForumDetailByAdmin/",{"postid":$routeParams.id}).then(function(response){
             originalforum=angular.copy(response.data['Forum details']);
-            console.log("ori",originalforum);
             $scope.forumDetails=response.data['Forum details'];
-            console.log("adsd",$scope.forumDetails);
             $scope.loaded=false;
         },function(){
             errorMessage(Flash,"Please try again later!")
@@ -149,7 +147,6 @@ adminApp.controller('ForumsEditController',['$scope','requestHandler','Flash','$
     };
 
     $scope.isClean=function(){
-        console.log(angular.equals(originalforum, $scope.forumDetails));
         return angular.equals(originalforum, $scope.forumDetails);
     };
 

@@ -32,7 +32,6 @@ adminApp.controller('InstructionController',['$scope','requestHandler','Flash','
     $scope.doUpdateInstructions=function(){
 
         requestHandler.putRequest("admin/updateLegal/",$scope.instructions).then(function(response){
-            console.log(response);
             $scope.doGetInstruction();
             successMessage(Flash,"Successfully Updated");
         }, function () {

@@ -6,8 +6,9 @@
     <div class="row">
         <div class="col-md-12">
             <a href="#food" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back to Food List</a>
-            <h4 class="classic-title"><span>Food Management</span></h4>
-            <div class="col-md-10">
+            <a href="#food-edit/{{foodDetails.foodid}}" class="back-button pull-right margin-left-5"><i class="fa fa-pencil"></i> Edit Food</a>
+            <h4 class="classic-title"><span>Food View</span></h4>
+            <div class="col-md-10 no-padding margin-top-10">
                 <div class="row margin-bottom-10">
                     <div class="col-md-2">
                         Food Id :
@@ -84,7 +85,7 @@
             <div class="col-md-2 coach-details">
                 <img id="food-image-change" ng-src="{{foodDetails.foodImagePath}}"/><br/><br/>
             </div>
-            <div class="col-md-12">
+            <div class="col-md-12 no-padding margin-top-10">
                 <div class="row margin-bottom-10">
                     <div class="col-md-12">
                         <table class="table table-bordered">

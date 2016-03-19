@@ -33,7 +33,6 @@ adminApp.controller('TermsOfUseController',['$scope','requestHandler','Flash','$
     $scope.doUpdateTermsOfUse=function(){
 
         requestHandler.putRequest("admin/updateLegal/",$scope.terms).then(function(response){
-            console.log(response);
             $scope.doGetTermsOfUse();
             successMessage(Flash,"Successfully Updated");
         }, function () {

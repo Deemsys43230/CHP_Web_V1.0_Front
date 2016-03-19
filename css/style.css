@@ -7066,7 +7066,7 @@ input.userdob {
 select.main {
     height: 32px;
     line-height: 18px!important;
-    padding: 0 25px 0 0!important;
+    padding: 0 25px 0 5px!important;
     text-indent:5px;
     width: 90%;
     border: 0 !important;
@@ -8788,6 +8788,10 @@ a:hover, a:visited, a:link, a:active
 	-moz-box-shadow: 1px 1px 5px rgba(0,0,0,0.3);
 	box-shadow: 1px 1px 5px rgba(0,0,0,0.3);
 	padding: 20px !important;
+}
+
+#demography-content .row h5{
+    font-size: 13px!important;
 }
 
 .height-auto{

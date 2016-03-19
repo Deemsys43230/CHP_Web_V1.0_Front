@@ -97,7 +97,7 @@
 <!--Food Template-->
 <script type="text/ng-template" id="foodTemplate.html">
     <a>
-        <img class="img-circle" ng-src="{{match.model.foodImagePath}}50x50.jpg" width="35">&nbsp;
+        <img ng-if="match.model.foodImagePath" class="img-circle" ng-src="{{match.model.foodImagePath}}50x50.jpg" width="35">&nbsp;
         <span ng-show="match.model.issuitable==1" class="green">&nbsp;</span>
         <span ng-show="match.model.issuitable==0" class="red">&nbsp;</span>
         <span class="wrap" ng-bind-html="match.label | uibTypeaheadHighlight:query"></span>&nbsp;
@@ -122,7 +122,7 @@
 <!--Exercise Template-->
 <script type="text/ng-template" id="exerciseTemplate.html">
     <a>
-        <img class="img-circle" ng-src="{{match.model.imagepath}}50x50.jpg" width="35">&nbsp;
+        <img ng-if="match.model.imagepath" class="img-circle" ng-src="{{match.model.imagepath}}50x50.jpg" width="35">&nbsp;
         <span class="wrap" ng-bind-html="match.label | uibTypeaheadHighlight:query"></span>
     </a>
 </script>
@@ -288,7 +288,7 @@
                     <div id="scrollheightfood" ng-if="showExercise==0">
                         <ul class="food remove-style">
                             <li class="col-lg-12 col-md-12 col-sm-12" ng-repeat="foodDiaryData in userFoodDiaryData | orderBy:'$index':true">
-                                <div class="col-lg-2 col-md-2 col-sm-2 no-padding"><img ng-src="{{foodDiaryData.foodImagePath+'50x50.jpg'}}"></div>
+                                <div class="col-lg-2 col-md-2 col-sm-2 no-padding"><img ng-if="foodDiaryData.foodImagePath" ng-src="{{foodDiaryData.foodImagePath+'50x50.jpg'}}"></div>
                                 <div class="col-lg-10 col-md-10 col-sm-10 no-padding">
                                     <a href="" class="pull-right food_close" title="Delete Food" ng-click="doDeleteUserFood(foodDiaryData.userfoodid)">x</a>
                                     <div class="food_name">
@@ -348,7 +348,7 @@
                     <div id="scrollheightexercise" ng-if="showExercise==1">
                         <ul class="exercise remove-style">
                             <li class="col-lg-12 col-md-12 col-sm-12" ng-repeat="exerciseDiaryData in userExerciseDiaryDataAll | orderBy:'$index':true">
-                                <div class="col-lg-2 col-md-2 col-sm-2 no-padding"><img ng-src="{{exerciseDiaryData.exerciseImagePath+'50x50.jpg'}}"></div>
+                                <div class="col-lg-2 col-md-2 col-sm-2 no-padding"><img ng-if="exerciseDiaryData.exerciseImagePath" ng-src="{{exerciseDiaryData.exerciseImagePath+'50x50.jpg'}}"></div>
                                 <div class="col-lg-10 col-md-10 col-sm-10 no-padding">
                                     <a href="" class="pull-right exercise_close" title="Delete Exercise" ng-click="doDeleteUserExercise(exerciseDiaryData.userexercisemapid)">x</a>
                                     <div class="exercise_name">{{exerciseDiaryData.Exercise.exercisename}}</div>
@@ -701,7 +701,7 @@
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12">
                         <div class="col-lg-1 col-md-1 col-sm-1 no-padding">
-                            <img class="img-circle border-image" ng-src="{{userSelectedFoodDetails.foodImagePath+'50x50.jpg'}}">
+                            <img ng-if="userSelectedFoodDetails.foodImagePath" class="img-circle border-image" ng-src="{{userSelectedFoodDetails.foodImagePath+'50x50.jpg'}}">
                         </div>
                         <div class="col-lg-11 col-md-11 col-sm-11">
                             <div class="text-italic">Food Name:</div>
@@ -788,7 +788,7 @@
                     <div class="col-lg-6 col-md-6 col-sm-6">
                         <form name="ExerciseAddForm" novalidate>
                             <div class="col-lg-2 col-md-2 col-sm-2 no-padding">
-                                <img class="img-circle" ng-src="{{userSelectedExerciseDetails.imagepath+'50x50.jpg'}}">
+                                <img ng-if="userSelectedExerciseDetails.imagepath" class="img-circle" ng-src="{{userSelectedExerciseDetails.imagepath+'50x50.jpg'}}">
                             </div>
                             <div class="col-lg-10 col-md-10 col-sm-10">
                                 <h5>Exercise Name:</h5>
@@ -991,6 +991,7 @@
             $(this).addClass("active");
         });
 
+
     });
 
     $(document).ready(function() {
@@ -1052,6 +1053,9 @@
         });
 
     });
+
+
+
 </script>
 
 <script>

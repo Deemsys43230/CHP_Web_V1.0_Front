@@ -32,7 +32,6 @@ adminApp.controller('PrivacyPolicyController',['$scope','requestHandler','Flash'
     $scope.doUpdatePrivacyPolicy=function(){
 
         requestHandler.putRequest("admin/updateLegal/",$scope.privacypolicydetails).then(function(response){
-            console.log(response);
             $scope.doGetPrivacyPolicy();
             successMessage(Flash,"Successfully Updated");
         }, function () {
@@ -57,7 +56,6 @@ adminApp.controller('PrivacyPolicyCommonController',['$scope','requestHandler','
         requestHandler.getRequest("getLegalByAll/Privacypolicy/", "").then(function(response){
 
             $scope.userprivacypolicydetails=response.data.Legal_Data;
-            console.log($scope.userprivacypolicydetails);
         },function(){
             errorMessage(Flash,"Please try again later!")
         });
@@ -85,7 +83,6 @@ commonApp.controller('PrivacyPolicyCommonController',['$scope','requestHandler',
         requestHandler.getRequest("getLegalByAll/Privacypolicy/", "").then(function(response){
 
             $scope.userprivacypolicydetails=response.data.Legal_Data;
-            console.log($scope.userprivacypolicydetails);
         },function(){
             errorMessage(Flash,"Please try again later!")
         });
@@ -114,7 +111,6 @@ coachApp.controller('PrivacyPolicyCommonController',['$scope','requestHandler','
         requestHandler.getRequest("getLegalByAll/Privacypolicy/", "").then(function(response){
 
             $scope.userprivacypolicydetails=response.data.Legal_Data;
-            console.log($scope.userprivacypolicydetails);
         },function(){
             errorMessage(Flash,"Please try again later!")
         });
@@ -141,7 +137,6 @@ userApp.controller('PrivacyPolicyCommonController',['$scope','requestHandler','F
         requestHandler.getRequest("getLegalByAll/Privacypolicy/", "").then(function(response){
 
             $scope.userprivacypolicydetails=response.data.Legal_Data;
-            console.log($scope.userprivacypolicydetails);
         },function(){
             errorMessage(Flash,"Please try again later!")
         });

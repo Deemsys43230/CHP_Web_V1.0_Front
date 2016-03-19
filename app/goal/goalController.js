@@ -295,10 +295,6 @@ userApp.controller('GoalController',['$scope','requestHandler','Flash','$route',
 
 }]);
 
-userApp.controller('GoalViewController',function() {
-   // alert("okay");
-});
-
 // render image to view in list
 userApp.filter('trusted', ['$sce', function ($sce) {
     return function(url) {

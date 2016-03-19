@@ -46,16 +46,15 @@ userApp.controller('CourseController',['$scope','requestHandler','Flash','$route
             $scope.sectionDetail = response.data.sectiondetail;
             requestHandler.postRequest("getSectionList/",{"courseid":$scope.sectionDetail.courseid}).then(function(response) {
                 $scope.sectionList = response.data.course;
-                $scope.sectionLength=$scope.sectionList.length;
                 $.each($scope.sectionList,function(index,value){
-                    if(value.sectionid == $routeParams.id){
+                    value.sequenceno=index + 1;
+                    /*if(value.sectionid == $routeParams.id){
                         $scope.currentIndex = index;
                         $scope.sectionno = index + 1;
                     }
                     if($scope.sectionList.length === 1){
                         $scope.nextdisable = true;
-                    }
-
+                    }*/
                 });
 
             });
@@ -65,14 +64,11 @@ userApp.controller('CourseController',['$scope','requestHandler','Flash','$route
     };
 
     $scope.courseSectionDetailsbyId =function(id){
+        $("html, body").animate({
+            scrollTop: 0
+        }, 600);
         requestHandler.postRequest("user/sectionDetail/",{"sectionid":id}).then(function(response) {
             $scope.sectionDetail = response.data.sectiondetail;
-            $.each($scope.sectionList,function(index,value){
-                if(value.sectionid == id){
-                    $scope.currentIndex = index;
-                    $scope.sectionno = index + 1;
-                }
-            });
         },function(){
             errorMessage(Flash,"Please try again later!")
         });
@@ -123,7 +119,7 @@ userApp.controller('CourseController',['$scope','requestHandler','Flash','$route
     $scope.doEnrollCourse = function(course){
         $scope.entrolling="Enrolling Please Wait";
         $scope.enrollButtonStatus=true;
-        requestHandler.postRequest("user/enrollCourse/",{"courseid":course,"returnUrl":requestHandler.paymentURL()+"/#/thanksEnrollPage/"+course,"cancelUrl":requestHandler.paymentURL()+"/#/courses"}).then(function(response){
+        requestHandler.postRequest("user/enrollCourse/",{"courseid":course,"returnUrl":requestHandler.paymentURL()+"/#/thanksEnrollPage/"+course,"cancelUrl":requestHandler.paymentURL()+"/#/course-detail/"+course}).then(function(response){
 
             if(response.data.transactionStatus==1){
               window.location=response.data.approveURL ;
@@ -157,57 +153,20 @@ userApp.controller('CourseController',['$scope','requestHandler','Flash','$route
         });
     };
 
-
-    $scope.nextdisable = false;
-    $scope.prevdisable = true;
-
-    $scope.getNextIndex = function() {
-        requestHandler.postRequest("getSectionList/",{"courseid":$scope.sectionDetail.courseid}).then(function(response) {
-            $scope.sectionList = response.data.course;
-            var nextIndex = $scope.currentIndex+1;
-            $scope.sectionno = nextIndex + 1;
-            if( nextIndex === $scope.sectionList.length -1){
-
-                //move to start if at list end
-                $scope.nextdisable = true;
+    $scope.getNextIndex = function(currentSequence) {
+        $.each($scope.sectionList,function(index,value){
+            if(value.sequenceno==(currentSequence+1)){
+                $scope.courseSectionDetailsbyId(value.sectionid);
             }
-
-            $scope.sectionList=response.data.course[nextIndex];
-            requestHandler.postRequest("user/sectionDetail/",{"sectionid":$scope.sectionList.sectionid}).then(function(response) {
-                $scope.sectionDetail = response.data.sectiondetail;
-
-                requestHandler.postRequest("getSectionList/",{"courseid":$scope.sectionDetail.courseid}).then(function(response) {
-                    $scope.sectionList = response.data.course;
-                });
-            });
-            $scope.currentIndex= nextIndex;
-            $scope.prevdisable=false;
-
         });
 
     };
 
-    $scope.getPreviousIndex = function() {
-
-        requestHandler.postRequest("getSectionList/",{"courseid":$scope.sectionDetail.courseid}).then(function(response) {
-            $scope.sectionList = response.data.course;
-            var prevIndex = $scope.currentIndex-1;
-            $scope.sectionno = prevIndex +1;
-            if( prevIndex === 0 ){
-                //move to start if at list end
-                $scope.prevdisable = true;
+    $scope.getPreviousIndex = function(currentSequence) {
+        $.each($scope.sectionList,function(index,value){
+            if(value.sequenceno==(currentSequence-1)){
+                $scope.courseSectionDetailsbyId(value.sectionid);
             }
-            $scope.sectionList=response.data.course[prevIndex];
-            requestHandler.postRequest("user/sectionDetail/",{"sectionid":$scope.sectionList.sectionid}).then(function(response) {
-                $scope.sectionDetail = response.data.sectiondetail;
-
-                requestHandler.postRequest("getSectionList/",{"courseid":$scope.sectionDetail.courseid}).then(function(response) {
-                    $scope.sectionList = response.data.course;
-                });
-            });
-            $scope.currentIndex= prevIndex;
-            $scope.nextdisable=false;
-
         });
     };
 
@@ -307,20 +266,11 @@ adminApp.controller('CourseAdminController',['$scope','requestHandler','Flash','
 
         requestHandler.postRequest("admin/getSectionDetail/",{"sectionid":$routeParams.id}).then(function(response) {
             $scope.sectionDetail = response.data['Section Detail'];
-            $scope.sectionno=1;
-
             requestHandler.postRequest("getSectionList/",{"courseid":$scope.sectionDetail.courseid}).then(function(response) {
                 $scope.sectionList = response.data.course;
                 $scope.sectionLength=$scope.sectionList.length;
                 $.each($scope.sectionList,function(index,value){
-                    if(value.sectionid == $routeParams.id){
-                        $scope.currentIndex = index;
-                        $scope.sectionno = index + 1;
-                    }
-                    if($scope.sectionList.length === 1){
-                        $scope.nextdisable = true;
-                    }
-
+                    value.sequenceno=index + 1;
                 });
             });
         },function(){
@@ -329,70 +279,31 @@ adminApp.controller('CourseAdminController',['$scope','requestHandler','Flash','
     };
 
     $scope.courseSectionDetailsbyId =function(id){
+        $("html, body").animate({
+            scrollTop: 0
+        }, 600);
         requestHandler.postRequest("admin/getSectionDetail/",{"sectionid":id}).then(function(response) {
             $scope.sectionDetail = response.data['Section Detail'];
-            $.each($scope.sectionList,function(index,value){
-                if(value.sectionid == id){
-                    $scope.currentIndex = index;
-                    $scope.sectionno = index + 1;
-                }
-            });
         },function(){
             errorMessage(Flash,"Please try again later!")
         });
 
     };
 
-    var currentIndex = 0;
-    $scope.nextdisable = false;
-    $scope.prevdisable = true;
-
-    $scope.getNextIndex = function() {
-        requestHandler.postRequest("getSectionList/",{"courseid":$scope.sectionDetail.courseid}).then(function(response) {
-            $scope.sectionList = response.data.course;
-            var nextIndex = currentIndex+1;
-            $scope.sectionno = nextIndex +1;
-            if( nextIndex === $scope.sectionList.length -1) {
-
-                //move to start if at list end
-                $scope.nextdisable = true;
+    $scope.getNextIndex = function(currentSequence) {
+        $.each($scope.sectionList,function(index,value){
+            if(value.sequenceno==(currentSequence+1)){
+                $scope.courseSectionDetailsbyId(value.sectionid);
             }
-
-            $scope.sectionList=response.data.course[nextIndex];
-            requestHandler.postRequest("admin/getSectionDetail/",{"sectionid":$scope.sectionList.sectionid}).then(function(response) {
-                $scope.sectionDetail = response.data['Section Detail'];
-
-                requestHandler.postRequest("getSectionList/",{"courseid":$scope.sectionDetail.courseid}).then(function(response) {
-                    $scope.sectionList = response.data.course;
-                });
-            });
-            currentIndex= nextIndex;
-            $scope.prevdisable=false;
-
         });
 
     };
 
-    $scope.getPreviousIndex = function() {
-
-        requestHandler.postRequest("getSectionList/",{"courseid":$scope.sectionDetail.courseid}).then(function(response) {
-            $scope.sectionList = response.data.course;
-            var prevIndex = currentIndex-1;
-            $scope.sectionno = prevIndex +1;
-            if( prevIndex === 0 ){
-                //move to start if at list end
-                $scope.prevdisable = true;
+    $scope.getPreviousIndex = function(currentSequence) {
+        $.each($scope.sectionList,function(index,value){
+            if(value.sequenceno==(currentSequence-1)){
+                $scope.courseSectionDetailsbyId(value.sectionid);
             }
-            $scope.sectionList=response.data.course[prevIndex];
-            requestHandler.postRequest("admin/getSectionDetail/",{"sectionid":$scope.sectionList.sectionid}).then(function(response) {
-                $scope.sectionDetail = response.data['Section Detail'];
-                requestHandler.postRequest("getSectionList/",{"courseid":$scope.sectionDetail.courseid}).then(function(response) {
-                    $scope.sectionList = response.data.course;
-                });
-            });
-            currentIndex= prevIndex;
-            $scope.nextdisable=false;
-
         });
     };
 
@@ -487,24 +398,26 @@ adminApp.controller('CourseAdminController',['$scope','requestHandler','Flash','
 
     $scope.acceptModal=function(courseid){
         $scope.courseid = courseid;
+
         $("html, body").animate({
             scrollTop: 0
         }, 600);
+
         $(function(){
             $("#lean_overlay").fadeTo(1000);
-            $("#modal").fadeIn(600);
+            $(".modalAcceptCourse").fadeIn(600);
             $(".common_model").show();
         });
 
         $(".modal_close").click(function(){
             $(".common_model").hide();
-            $("#modal").hide();
+            $(".modalAcceptCourse").hide();
             $("#lean_overlay").hide();
         });
 
         $("#lean_overlay").click(function(){
             $(".common_model").hide();
-            $("#modal").hide();
+            $(".modalAcceptCourse").hide();
             $("#lean_overlay").hide();
         });
     };

@@ -96,10 +96,32 @@ commonApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 templateUrl: '../common/blog.html'
             }).
             when('/singleBlog1', {
-                templateUrl: '../common/single-blog1.html'
+                templateUrl: '../common/single-blog1.html',
+                resolve: {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'commonApp',
+                            files:[
+                                '../../app/blog/blogController.js'
+                            ]
+                        })
+                    }]
+                },
+                controller:'BlogController'
             }).
             when('/singleBlog2', {
-                templateUrl: '../common/single-blog2.html'
+                templateUrl: '../common/single-blog2.html',
+                resolve: {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'commonApp',
+                            files:[
+                                '../../app/blog/blogController.js'
+                            ]
+                        })
+                    }]
+                },
+                controller:'BlogController'
             }).
             when('/contact', {
                 templateUrl: '../common/contact.html',
@@ -568,112 +590,3 @@ commonApp.directive('validateUrl', function() {
         }
     };
 });
-
-/*commonApp.controller('CommonController',['$scope','requestHandler','Flash','$location','$sce','$rootScope','$timeout',function($scope,requestHandler,Flash,$location,$sce,$rootScope,$timeout) {
-
-
-    $scope.countFrom = 0;
-
-    if($location.$$absUrl.slice(-6).toString()== "logout"){
-        *//* $rootScope.sessionValue = 1;*//*
-        $(".modal_trigger").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
-
-        $(function(){
-            $("#lean_overlay").fadeTo(1000);
-            $("#section-modal").fadeIn(600);
-            $(".common_model").show();
-        });
-
-        $(".modal_close").click(function(){
-            $(".common_model").hide();
-            $("#section-modal").hide();
-            $("#lean_overlay").hide();
-        });
-
-        $(".relogin").click(function(){
-            $("#section-modal").hide();
-        });
-
-        $("#lean_overlay").click(function(){
-            $(".common_model").hide();
-            $("#section-modal").hide();
-            $("#lean_overlay").hide();
-        });
-    }
-    // To display Testimonials as user
-    $scope.doGetNewsByUser = function () {
-        requestHandler.getRequest("getLatestNewsByUser/", "").then(function (response) {
-            $scope.usernewslist = response.data.News;
-            newscarousel();
-        }, function () {
-            errorMessage(Flash, "Please try again later!")
-        });
-    };
-
-    // To display Testimonials as user
-    $scope.doGetTestimonialsByUser=function(){
-        requestHandler.getRequest("getTestimonialListByUser/", "").then(function(response){
-            $scope.usertestimoniallist=response.data.Testimonials;
-        },function(){
-            errorMessage(Flash,"Please try again later!")
-        });
-    };
-
-    $scope.doGetDashboardCount=function(){
-        requestHandler.getRequest("getStatistics/","").then(function(response){
-            $scope.adminCountList=response.data.Stats;
-            $scope.memberCount = $scope.adminCountList.membercount;
-            $scope.exerciseCount = $scope.adminCountList.exercisecount;
-            $scope.foodCount = $scope.adminCountList.foodcount;
-            $scope.courseCount = $scope.adminCountList.publishedcourses;
-
-        });
-    };
-
-    // To display the user Testimonial list on load
-    *//*$scope.init=function(){
-     $scope.doGetNewsByUser();
-     $scope.doGetTestimonialsByUser();
-     $scope.doGetDashboardCount();
-     };*//*
-
-    $timeout(function(){
-        $scope.doGetNewsByUser();
-        $scope.doGetTestimonialsByUser();
-        $scope.doGetDashboardCount();
-    });
-
-}]);
-
-
-
-// render image to view in list
-commonApp.filter('trusted', ['$sce', function ($sce) {
-    return function(url) {
-        return $sce.trustAsResourceUrl(url);
-    };
-}]);
-
-
-commonApp.filter('html', ['$sce', function ($sce) {
-    return function (text) {
-        return $sce.trustAsHtml(text);
-    };
-}]);
-
-commonApp.filter('toSec', function() {
-
-    return function(input) {
-
-        dateArgs = input.match(/\d{2,4}/g),
-            year = dateArgs[2],
-            month = parseInt(dateArgs[1]) - 1,
-            day = dateArgs[0],
-            hour = dateArgs[3],
-            minutes = dateArgs[4];
-
-        var result = new Date(year, month, day, hour, minutes).getTime();
-
-        return result || '';
-    };
-});*/

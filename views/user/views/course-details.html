@@ -55,8 +55,8 @@
                                 <!--<h5 class="margin-top-10" ng-show="courseDetails.enrollmentStatus==0"><i class="fa fa-users text-gray"></i> - {{courseDetails.enrollcount}} Students</h5>
                                 <h5 class="margin-top-10"><i class="fa fa-book text-gray"></i> - {{sectionList.length}} Sections</h5>-->
                             </div>
-                            <span ng-show="courseDetails.enrollmentStatus==0" ng-if="courseDetails.role=='user'"><a href=""class="col-lg-12 col-md-12 col-sm-12 suggest_button margin-top-10 btn" ng-disabled="enrollButtonStatus" ng-click="doEnrollCourse(courseDetails.courseid)"><span ng-show="enrollButtonStatus==true"><span class="three-quarters-loader">Loading…</span></span>&nbsp;{{entrolling}}</a></span>
-                            <span ng-show="courseDetails.publishedon==null" ng-if="courseDetails.role=='admin'" ><a href="" id="modal_trigger1" class="col-lg-12 col-md-12 col-sm-12 suggest_button margin-top-10 btn" ng-click="acceptModal(courseDetails.courseid)">Accept this course</a></span>
+                            <span ng-show="courseDetails.enrollmentStatus==0" ng-if="courseDetails.role=='user'"><a href="" class="col-lg-12 col-md-12 col-sm-12 suggest_button margin-top-10 btn" ng-disabled="enrollButtonStatus" ng-click="doEnrollCourse(courseDetails.courseid)"><span ng-show="enrollButtonStatus==true"><span class="three-quarters-loader">Loading…</span></span>&nbsp;{{entrolling}}</a></span>
+                            <span ng-show="courseDetails.publishedon==null" ng-if="courseDetails.role=='admin'" ><a href="" class="col-lg-12 col-md-12 col-sm-12 suggest_button margin-top-10 accept_modal_trigger btn" ng-click="acceptModal(courseDetails.courseid)">Accept this course</a></span>
                             <span ng-show="courseDetails.publishedon==null" ng-if="courseDetails.role=='admin'"><a href="" class="col-lg-12 col-md-12 col-sm-12 suggest_button red_button modal_trigger btn" ng-click="modal(courseDetails.courseid)">Reject this course</a></span>
                         </div>
                         <div class="col-lg-9 col-md-8 col-sm-8">
@@ -88,7 +88,7 @@
         <div class="common_model">
             <form name="courseRejectForm" novalidate>
                 <p>Reason for course rejection:</p>
-                <textarea type="text" class="height-150" name="comments"  maxlength="300" ng-model="comments" required/></textarea>
+                <textarea type="text" class="height-150" name="comments"  maxlength="300" ng-model="comments" required></textarea>
                 <span ng-show="courseRejectForm.comments.$dirty&&courseRejectForm.comments.$invalid">
                        <span class="error-message textarea-errormessage-110" ng-show="courseRejectForm.comments.$error.required"><span>Required.</span></span>
                     </span>
@@ -103,7 +103,7 @@
 
 
 <!-- create accept popup-->
-<div id="modal" class="popupContainer" style="display:none;left: 37%!important;">
+<div class="popupContainer modalAcceptCourse" style="display:none;left: 39%!important;">
     <header class="popupHeader">
         <span class="header_title">Confirmation</span>
         <span class="modal_close"><i class="fa fa-times"></i></span>
@@ -144,13 +144,7 @@
 
 <script type="text/javascript" src="../../js/script.js"></script>
 
-<script type="text/javascript">
-    $("#modal_trigger1").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
+<script>
+    $(".accept_modal_trigger").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
     $(".modal_trigger").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
 </script>
-
-<style>
-    [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
-        display: none !important;
-    }
-</style>

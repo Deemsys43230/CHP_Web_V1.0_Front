@@ -242,7 +242,7 @@ adminApp.controller("FoodDetailsViewController",['$scope','requestHandler','$rou
                 $scope.foodDetails.notSuitableFor="-"
             }
         },function(response){
-            alert("Not able to pull Food Measure List");
+            console.log("Not able to pull Food Measure List");
         })
     };
     //End Get Particular Food Details
@@ -291,10 +291,8 @@ adminApp.controller("FoodDetailsEditController",['$q','$scope','requestHandler',
 
             original=angular.copy($scope.foodDetails);
 
-            console.log($scope.foodDetails);
-
         },function(response){
-            alert("Not able to pull Food Measure List");
+            console.log("Not able to pull Food Measure List");
         });
     };
     //End Get
@@ -363,7 +361,6 @@ adminApp.controller("FoodDetailsEditController",['$q','$scope','requestHandler',
 
         $q.all([tagPromise]).then(function(){
             requestHandler.putRequest("admin/updateFood/", $scope.foodDetails).then(function (response) {
-                console.log($scope.foodDetails);
                 if (response.data.Response_status == 1) {
                     successMessage(Flash,"Food Updated Successfully!");
                     $scope.doGetFoodDetails();
@@ -372,7 +369,7 @@ adminApp.controller("FoodDetailsEditController",['$q','$scope','requestHandler',
                     $scope.doingUpdate=false;
                 }
             }, function (response) {
-                alert("Not able to pull Food Tag");
+                console.log("Not able to pull Food Tag");
                 $scope.spinner=false;
                 $scope.doingUpdate=false;
             });
@@ -483,7 +480,6 @@ adminApp.controller("FoodDetailsEditController",['$q','$scope','requestHandler',
     };
 
     $scope.isClean=function(){
-        console.log(angular.equals(original, $scope.foodDetails));
         return angular.equals(original, $scope.foodDetails);
     };
 

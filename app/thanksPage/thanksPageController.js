@@ -4,7 +4,7 @@ userApp.controller('ThanksSubscribePageController',['$scope','requestHandler','$
     $scope.completed=false;
     $scope.transactionSucceed=true;
     $scope.enroll="SUBSCRIPTION";
-    $scope.thanksEnroll="WE HAVE PROCESSING WITH YOUR PAYMENTS";
+    $scope.thanksEnroll="WE HAVE PROCESSING WITH YOUR SUBSCRIPTION";
 
     $scope.countDownTimer = function(url,redirectPageName){
         var delay = 5 ;
@@ -32,7 +32,6 @@ userApp.controller('ThanksSubscribePageController',['$scope','requestHandler','$
 
         $scope.doExcecutePayment = function(paymentConfirmDetails){
             requestHandler.postRequest("user/executePayByToken/",paymentConfirmDetails).then(function(response){
-                alert("ok");
                 if(response.data.Response_status==0){
                     $scope.completed=true;
                     $scope.transactionSucceed=false;
@@ -53,7 +52,6 @@ userApp.controller('ThanksSubscribePageController',['$scope','requestHandler','$
                 $scope.countDownTimer($scope.urlPage,"coach search");
             });
         };
-        console.log(paymentConfirmDetails);
         $scope.doExcecutePayment(paymentConfirmDetails);
     }
 }]);
@@ -64,7 +62,7 @@ userApp.controller('ThanksEnrollPageController',['$scope','requestHandler','$loc
     $scope.completed=false;
     $scope.transactionSucceed=true;
     $scope.enroll="ENROLLMENT";
-    $scope.thanksEnroll="WE HAVE PROCESSING WITH YOUR PAYMENTS";
+    $scope.thanksEnroll="WE HAVE PROCESSING WITH YOUR ENROLLMENT";
 
     $scope.countDownTimer = function(url,redirectPageName){
         var delay = 5 ;

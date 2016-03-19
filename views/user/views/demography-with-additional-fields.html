@@ -1,0 +1,257 @@
+
+<div class="page-banner1" ng-cloak class="ng-cloak">
+    <div id="w" class="clearfix">
+        <div id="demography-content">
+            <form name="demographyForm">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div flash-message="2000" class="col-lg-3 col-md-4 col-sm-4 no-padding pull-right"></div>
+                    <h5 class="classic-title"><span><a href="#demography"><i class="fa fa-male"></i>&nbsp;&nbsp;DEMOGRAPHY</a></span>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#nutrients"><i class="fa fa-apple"></i>&nbsp;&nbsp;NUTRIENTS</a></h5>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4 col-md-6 col-sm-6 margin-top-15">
+                        <div class="col-lg-8 col-md-7 col-sm-7 padding-top-4 padding-right-0">
+                            <h5>Height <sup class="text-red">*</sup> <small>(cm)</small> <span class="pull-right">:</span></h5>
+                        </div>
+                        <div class="col-lg-4 col-md-5 col-sm-5 padding-right-0">
+                            <input class="demography_input" name="height" ng-pattern="/^\-?\d+((\.|\,)\d+)?$/" ng-model="demography.height" required/>
+                            <span ng-show="demographyForm.height.$dirty&&demographyForm.height.$invalid">
+                                <span class="error-message textarea-errormessage40" ng-show="demographyForm.height.$error.required"><span>Required.</span></span>
+                                <span class="error-message textarea-errormessage40" ng-show="demographyForm.height.$error.pattern"><span>Invalid&nbsp;Format.</span></span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-6 margin-top-15">
+                        <div class="col-lg-8 col-md-7 col-sm-7 padding-top-4 padding-right-0">
+                            <h5>Weight <sup class="text-red">*</sup> <small>(Kg)</small> <span class="pull-right">:</span></h5>
+                        </div>
+                        <div class="col-lg-4 col-md-5 col-sm-5 padding-right-0">
+                            <input class="demography_input" name="weight" ng-pattern="/^\-?\d+((\.|\,)\d+)?$/" ng-model="demography.weight" required/>
+                            <span ng-show="demographyForm.weight.$dirty&&demographyForm.weight.$invalid">
+                                 <span class="error-message textarea-errormessage40" ng-show="demographyForm.weight.$error.required"><span>Required.</span></span>
+                                 <span class="error-message textarea-errormessage40" ng-show="demographyForm.weight.$error.pattern"><span>Invalid&nbsp;Format.</span></span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-6 margin-top-15">
+                        <div class="col-lg-8 col-md-7 col-sm-7 padding-top-4 padding-right-0">
+                            <h5>Hip <sup class="text-red">*</sup> <small>(Inch)</small> <span class="pull-right">:</span></h5>
+                        </div>
+                        <div class="col-lg-4 col-md-5 col-sm-5 padding-right-0">
+                            <input class="demography_input" name="hip" ng-pattern="/^\-?\d+((\.|\,)\d+)?$/" ng-model="demography.hip" required/>
+                            <span ng-show="demographyForm.hip.$dirty&&demographyForm.hip.$invalid">
+                                <span class="error-message textarea-errormessage40" ng-show="demographyForm.hip.$error.required"><span>Required.</span></span>
+                                <span class="error-message textarea-errormessage40" ng-show="demographyForm.hip.$error.pattern"><span>Invalid&nbsp;Format.</span></span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-6 margin-top-15">
+                        <div class="col-lg-8 col-md-7 col-sm-7 padding-top-4 padding-right-0">
+                            <h5>Waist <sup class="text-red">*</sup> <small>(Inch)</small> <span class="pull-right">:</span></h5>
+                        </div>
+                        <div class="col-lg-4 col-md-5 col-sm-5 padding-right-0">
+                            <input class="demography_input" name="waist" ng-pattern="/^\-?\d+((\.|\,)\d+)?$/" ng-model="demography.waist" required/>
+                            <span ng-show="demographyForm.waist.$dirty&&demographyForm.waist.$invalid">
+                                <span class="error-message textarea-errormessage40" ng-show="demographyForm.waist.$error.required"><span>Required.</span></span>
+                                <span class="error-message textarea-errormessage40" ng-show="demographyForm.waist.$error.pattern"><span>Invalid&nbsp;Format.</span></span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-6 margin-top-15">
+                        <div class="col-lg-8 col-md-7 col-sm-7 padding-top-4 padding-right-0">
+                            <h5>Blood Group <span class="pull-right">:</span></h5>
+                        </div>
+                        <div class="col-lg-4 col-md-5 col-sm-5 padding-right-0">
+                            <select class="form-control main"  ng-model="demography.bloodgroup" name="bloodgroup">
+                                <option value="">--Select--</option>
+                                <option value="1">A +ve</option>
+                                <option value="2">B +ve</option>
+                                <option value="3">O +ve</option>
+                                <option value="4">AB +ve</option>
+                                <option value="5">A -ve</option>
+                                <option value="6">B -ve</option>
+                                <option value="7">O -ve</option>
+                                <option value="8">AB -ve</option>
+                            </select>
+                            <!--<span ng-show="demographyForm.bloodgroup.$dirty&&demographyForm.bloodgroup.$invalid">
+                                    <span class="error-message" ng-show="demographyForm.bloodgroup.$error.required"><span>Required.</span></span>
+                            </span>-->
+                            <span class="error" ng-show="myForm.service_id.$dirty && myForm.service_id.$invalid">Select service</span>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-6 margin-top-15">
+                        <div class="col-lg-8 col-md-7 col-sm-7 padding-top-4 padding-right-0">
+                            <h5>Blood Pressure <span class="pull-right">:</span></h5>
+                        </div>
+                        <div class="col-lg-4 col-md-5 col-sm-5 padding-right-0">
+                            <input class="demography_input" name="bloodpressure" ng-model="demography.bloodpressure"/>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-6 margin-top-15">
+                        <div class="col-lg-8 col-md-7 col-sm-7 padding-top-4 padding-right-0 padding-right-0">
+                            <h5>Systolic Blood Pressure <small>(mmHg)</small> <span class="pull-right">:</span></h5>
+                        </div>
+                        <div class="col-lg-4 col-md-5 col-sm-5 padding-right-0">
+                            <input class="demography_input" name="systolicbloodpressure" ng-pattern="/^\-?\d+((\.|\,)\d+)?$/" ng-model="demography.systolicbloodpressure"/>
+                            <span ng-show="demographyForm.systolicbloodpressure.$dirty&&demographyForm.systolicbloodpressure.$invalid">
+                                <span class="error-message textarea-errormessage40" ng-show="demographyForm.systolicbloodpressure.$error.pattern"><span>Invalid&nbsp;Format.</span></span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-6 margin-top-15">
+                        <div class="col-lg-8 col-md-7 col-sm-7 padding-top-4 padding-right-0 padding-right-0">
+                            <h5>Diastollic Blood Pressure <small>(mmHg)</small> <span class="pull-right">:</span></h5>
+                        </div>
+                        <div class="col-lg-4 col-md-5 col-sm-5 padding-right-0">
+                            <input class="demography_input" name="diastolicbloodpressure" ng-pattern="/^\-?\d+((\.|\,)\d+)?$/" ng-model="demography.diastolicbloodpressure"/>
+                            <span ng-show="demographyForm.diastolicbloodpressure.$dirty&&demographyForm.diastolicbloodpressure.$invalid">
+                                <span class="error-message textarea-errormessage40" ng-show="demographyForm.diastolicbloodpressure.$error.pattern"><span>Invalid&nbsp;Format.</span></span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-6 margin-top-15">
+                        <div class="col-lg-8 col-md-7 col-sm-7 padding-top-4 padding-right-0 padding-right-0">
+                            <h5>HDL Cholestrol <small>(mg/dL)</small> <span class="pull-right">:</span></h5>
+                        </div>
+                        <div class="col-lg-4 col-md-5 col-sm-5 padding-right-0">
+                            <input class="demography_input" name="HDLcholestrol" ng-pattern="/^\-?\d+((\.|\,)\d+)?$/" ng-model="demography.HDLcholestrol"/>
+                            <span ng-show="demographyForm.HDLcholestrol.$dirty&&demographyForm.HDLcholestrol.$invalid">
+                                <span class="error-message textarea-errormessage40" ng-show="demographyForm.HDLcholestrol.$error.pattern"><span>Invalid&nbsp;Format.</span></span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-6 margin-top-15">
+                        <div class="col-lg-8 col-md-7 col-sm-7 padding-top-4 padding-right-0 padding-right-0">
+                            <h5>LDL Cholestrol <small>(mg/dL)</small> <span class="pull-right">:</span></h5>
+                        </div>
+                        <div class="col-lg-4 col-md-5 col-sm-5 padding-right-0">
+                            <input class="demography_input" name="LDLcholestrol" ng-pattern="/^\-?\d+((\.|\,)\d+)?$/" ng-model="demography.LDLcholestrol"/>
+                            <span ng-show="demographyForm.LDLcholestrol.$dirty&&demographyForm.LDLcholestrol.$invalid">
+                                <span class="error-message textarea-errormessage40" ng-show="demographyForm.LDLcholestrol.$error.pattern"><span>Invalid&nbsp;Format.</span></span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-6 margin-top-15">
+                        <div class="col-lg-8 col-md-7 col-sm-7 padding-top-4 padding-right-0 padding-right-0">
+                            <h5>Triglycerides <small>(mg/dL)</small> <span class="pull-right">:</span></h5>
+                        </div>
+                        <div class="col-lg-4 col-md-5 col-sm-5 padding-right-0">
+                            <input class="demography_input" name="triglycerides" ng-pattern="/^\-?\d+((\.|\,)\d+)?$/" ng-model="demography.triglycerides"/>
+                            <span ng-show="demographyForm.triglycerides.$dirty&&demographyForm.triglycerides.$invalid">
+                                <span class="error-message textarea-errormessage40" ng-show="demographyForm.triglycerides.$error.pattern"><span>Invalid&nbsp;Format.</span></span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-6 margin-top-15">
+                        <div class="col-lg-8 col-md-7 col-sm-7 padding-top-4 padding-right-0 padding-right-0">
+                            <h5>HbA1c <small>(mmol/mol)</small> <span class="pull-right">:</span></h5>
+                        </div>
+                        <div class="col-lg-4 col-md-5 col-sm-5 padding-right-0">
+                            <input class="demography_input" name="HbA1c" ng-pattern="/^\-?\d+((\.|\,)\d+)?$/" ng-model="demography.HbA1c"/>
+                            <span ng-show="demographyForm.HbA1c.$dirty&&demographyForm.HbA1c.$invalid">
+                                <span class="error-message textarea-errormessage40" ng-show="demographyForm.HbA1c.$error.pattern"><span>Invalid&nbsp;Format.</span></span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-6 margin-top-15">
+                        <div class="col-lg-8 col-md-7 col-sm-7 padding-top-4 padding-right-0">
+                            <h5>BMI <small>(Kg/m<sup>2</sup>)</small> <span class="pull-right">:</span></h5>
+                        </div>
+                        <div class="col-lg-4 col-md-5 col-sm-5 padding-right-0">
+                            <input class="demography_input" name="bmi" ng-pattern="/^\-?\d+((\.|\,)\d+)?$/" ng-model="demography.bmi" ng-disabled="true"/>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-6 margin-top-15">
+                        <div class="col-lg-8 col-md-7 col-sm-7 padding-top-4 padding-right-0">
+                            <h5>Protein <span class="pull-right">:</span></h5>
+                        </div>
+                        <div class="col-lg-4 col-md-5 col-sm-5 padding-right-0">
+                            <input class="demography_input" name="protein" ng-model="demography.protein" ng-disabled="true"/>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-6 margin-top-15">
+                        <div class="col-lg-8 col-md-7 col-sm-7 padding-top-4 padding-right-0">
+                            <h5>Fat <span class="pull-right">:</span></h5>
+                        </div>
+                        <div class="col-lg-4 col-md-5 col-sm-5 padding-right-0">
+                            <input class="demography_input" name="fat" ng-model="demography.fat" ng-disabled="true"/>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-6 margin-top-15">
+                        <div class="col-lg-8 col-md-7 col-sm-7 padding-top-4 padding-right-0">
+                            <h5>Carbo Hydrate <span class="pull-right">:</span></h5>
+                        </div>
+                        <div class="col-lg-4 col-md-5 col-sm-5 padding-right-0">
+                            <input class="demography_input" name="carbo" ng-model="demography.carbo" ng-disabled="true"/>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-6 margin-top-15">
+                        <div class="col-lg-8 col-md-7 col-sm-7 padding-top-4 padding-right-0">
+                            <h5>Fiber <span class="pull-right">:</span></h5>
+                        </div>
+                        <div class="col-lg-4 col-md-5 col-sm-5 padding-right-0">
+                            <input class="demography_input" name="fibre" ng-model="demography.fibre" ng-disabled="true"/>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-6 margin-top-15">
+                        <div class="col-lg-8 col-md-7 col-sm-7 padding-top-4 padding-right-0">
+                            <h5>Calories Intake <span class="pull-right">:</span></h5>
+                        </div>
+                        <div class="col-lg-4 col-md-5 col-sm-5 padding-right-0">
+                            <input class="demography_input" name="calorieintake" ng-model="demography.calorieintake" ng-disabled="true"/>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-6 margin-top-15">
+                        <div class="col-lg-8 col-md-7 col-sm-7 padding-top-4 padding-right-0 padding-right-0">
+                            <h5>Fasting Blood Glucose <small>(mmol/L)</small> <span class="pull-right">:</span></h5>
+                        </div>
+                        <div class="col-lg-4 col-md-5 col-sm-5 padding-right-0">
+                            <input class="demography_input" name="fastingbloodglucose" ng-pattern="/^\-?\d+((\.|\,)\d+)?$/" ng-model="demography.fastingbloodglucose"/>
+                            <span ng-show="demographyForm.fastingbloodglucose.$dirty&&demographyForm.fastingbloodglucose.$invalid">
+                                <span class="error-message textarea-errormessage40" ng-show="demographyForm.fastingbloodglucose.$error.pattern"><span>Invalid&nbsp;Format.</span></span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-6 margin-top-15">
+                        <div class="col-lg-8 col-md-7 col-sm-7 padding-top-4 padding-right-0 padding-right-0">
+                            <h5>Postprandial Blood Glucose <small>(mmol/L)</small> <span class="pull-right">:</span></h5>
+                        </div>
+                        <div class="col-lg-4 col-md-5 col-sm-5 padding-right-0">
+                            <input class="demography_input" name="postprandialbloodglucose" ng-pattern="/^\-?\d+((\.|\,)\d+)?$/" ng-model="demography.postprandialbloodglucose"/>
+                            <span ng-show="demographyForm.postprandialbloodglucose.$dirty&&demographyForm.postprandialbloodglucose.$invalid">
+                                <span class="error-message textarea-errormessage40" ng-show="demographyForm.postprandialbloodglucose.$error.pattern"><span>Invalid&nbsp;Format.</span></span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-6 margin-top-15">
+                        <div class="col-lg-8 col-md-7 col-sm-7 padding-top-4 padding-right-0">
+                            <h5>Patient Type <span class="pull-right">:</span></h5>
+                        </div>
+                        <div class="col-lg-4 col-md-5 col-sm-5 padding-right-0">
+                            <checkbox-group>
+                                <span class="fh-checkbox">
+                                    <input type="checkbox" id="type1" name="obesity" ng-model="demography.obesity" ng-true-value="'1'" ng-false-value="'0'"  ng-checked="demography.obesity=='1'">
+                                    <label for="type1">Obesity</label>
+                                </span>
+                            </checkbox-group>
+                            <checkbox-group>
+                                <span class="fh-checkbox">
+                                    <input type="checkbox" id="type2" name="diabetes" ng-model="demography.diabetes" ng-true-value="'1'" ng-false-value="'0'"  ng-checked="demography.diabetes=='1'">
+                                    <label for="type2">Diabetes</label>
+                                 </span>
+                            </checkbox-group>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-12 col-md-12 col-sm-12"><hr/></div>
+
+                <div class="col-lg-12 col-md-12 col-sm-12 text-center margin-tb-10">
+                    <a href="" class="btn register_button" ng-disabled="isCleanDemography() || demographyForm.$invalid" ng-click="doUpdateDemography()" >Save Changes</a>
+                    <a href="#dashboard" class="btn cancel_button">Cancel</a>
+                </div>
+            </form>
+        </div><!-- @end #content -->
+    </div><!-- @end #w -->
+</div>
+
+<script type="text/javascript" src="../../js/script.js"></script>
