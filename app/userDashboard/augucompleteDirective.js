@@ -13,6 +13,7 @@ angular.module('angucomplete', [] )
                 "placeholder": "@placeholder",
                 "selectedObject": "=selectedobject",
                 "url": "@url",
+                "url": "@url",
                 "titleField": "@titlefield",
                 "descriptionField": "@descriptionfield",
                 "imageField": "@imagefield",

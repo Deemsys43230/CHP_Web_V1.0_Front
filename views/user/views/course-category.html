@@ -25,7 +25,7 @@
                 <div ng-show="courseList.length>0">
                     <div dir-paginate="courses in courseList = ( categoryCourses |startsWithLetterCourse : courseSearch | itemsPerPage: 9)"  ng-show="categoryCourses.length!=0">
                         <div class="col-lg-4 col-md-4 col-sm-4 no-padding">
-                            <a href="#coursedetail/{{courses.courseid}}">
+                            <a href="#course-detail/{{courses.courseid}}">
                                 <div class="dashboard arrange">
                                     <span ng-hide="courses.enrollmentStatus==0"><img class="user-course-status" src="../../images/enrolled.png"></span>
                                     <div class="course-grid-user">

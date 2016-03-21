@@ -95,7 +95,7 @@ commonApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
             when('/blog', {
                 templateUrl: '../common/blog.html'
             }).
-            when('/singleBlog1', {
+            when('/single-blog1', {
                 templateUrl: '../common/single-blog1.html',
                 resolve: {
                     loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
@@ -109,7 +109,7 @@ commonApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'BlogController'
             }).
-            when('/singleBlog2', {
+            when('/single-blog2', {
                 templateUrl: '../common/single-blog2.html',
                 resolve: {
                     loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {

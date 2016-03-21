@@ -1211,7 +1211,7 @@ adminApp.config([
             },
             controller:'BlogController'
         }).
-            when('/singleBlog1', {
+            when('/single-blog1', {
                 templateUrl: '../common/single-blog1.html',
                 resolve: {
                     loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
@@ -1225,7 +1225,7 @@ adminApp.config([
                 },
                 controller:'BlogController'
             }).
-            when('/singleBlog2', {
+            when('/single-blog2', {
                 templateUrl: '../common/single-blog2.html',
                 resolve: {
                     loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
