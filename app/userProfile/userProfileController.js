@@ -4669,10 +4669,10 @@ userApp.directive('widthAboutMe', function() {
                 setTimeout(function(){
                     var windowheight=$("html").width();
                     if(windowheight<1200&&windowheight>992){
-                        windowheight = Math.round((40*windowheight)/100);
+                        windowheight = Math.round((40.7*windowheight)/100);
                         $('.profile_input_textarea').css({"width":windowheight+"px"});
                     }else if(windowheight>1200){
-                        windowheight = Math.round((52.5*windowheight)/100);
+                        windowheight = Math.round((52.7*windowheight)/100);
                         $('.profile_input_textarea').css({"width":windowheight+"px"});
                     }
                     else if(windowheight<=992&&windowheight>=479){

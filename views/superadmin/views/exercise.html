@@ -31,15 +31,15 @@
             <div class="min-height-380">
                 <table class="table table-bordered table-striped">
                     <thead>
-                    <tr class="warning">
-                        <th class="col-md-2">Exercise ID</th>
-                        <th class="col-md-5">Exercise Name</th>
+                    <tr class="warning sort-icon">
+                        <th class="col-md-2">Exercise ID&nbsp;<i ng-click="sortExerciseId()" class="{{sortexerciseidicon}}"></i></th>
+                        <th class="col-md-5">Exercise Name&nbsp;&nbsp;<i ng-click="sortExerciseName()" class="{{sortexercisenameicon}}"></i></th>
                         <!--<th class="col-md-3">Exercise Type</th>-->
                         <th class="col-md-2">Options</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr dir-paginate="exercise in exercisefilter = (exerciseList |startsWithLetterExercise: exercisesearch| itemsPerPage: 9)" ng-show="exerciseList.length!=0">
+                    <tr dir-paginate="exercise in exercisefilter = (exerciseList |startsWithLetterExercise: exercisesearch|orderBy:sortKey:reverse| itemsPerPage: 9)" current-page="newPageNumber" ng-show="exerciseList.length!=0">
                         <td>{{exercise.exerciseid}}</td>
                         <td title="{{exercise.exercisename}}"><span class="line-clamp-md">{{exercise.exercisename}}</span></td>
                        <!-- <td title="{{exercise.exercisetypename}}"><span class="line-clamp-sm">{{exercise.exercisetypename}}</span></td>-->
@@ -55,8 +55,21 @@
                 </table>
             </div>
             <!-- Start Pagination -->
-            <dir-pagination-controls ng-show="paginationLoad" max-size="5" direction-links="true"
-                                     boundary-links="true"> </dir-pagination-controls>
+            <div class="col-lg-2 col-md-2 col-sm-3 no-padding">
+                <div class="input-group pull-right">
+                    <input type="text" ng-model="pagenumber" class="form-control search-pagination" placeholder="Page no.." only-digits>
+                      <span class="input-group-btn">
+                        <button class="btn btn-secondary" ng-click="goToPage()" type="button">Go!</button>
+                      </span>
+                </div>
+            </div>
+            <div class="col-lg-10 col-md-10 col-sm-9">
+                <dir-pagination-controls ng-show="paginationLoad" max-size="5" direction-links="true"
+                                         boundary-links="true"> </dir-pagination-controls>
+            </div>
+
+
+        </div>
 
             <!-- End Pagination -->
         </div>

@@ -42,7 +42,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr dir-paginate="food in foodfilter=(foodList | startsWithLetterFood: foodsearch |orderBy:sortKey:reverse | itemsPerPage: 10)" ng-show="foodList.length!=0">
+                <tr dir-paginate="food in foodfilter=(foodList | startsWithLetterFood: foodsearch |orderBy:sortKey:reverse | itemsPerPage: 10)" current-page="newPageNumber" ng-show="foodList.length!=0">
                     <td>{{food.foodid}}</td>
                     <td title="{{food.foodname}}"><span class="line-clamp-lg">{{food.foodname}}</span></td>
                     <!--<td><span class="line-clamp-xxs">
@@ -70,8 +70,23 @@
             </table>
 
             <!-- Start Pagination -->
-            <dir-pagination-controls ng-show="paginationLoad" max-size="5" direction-links="true"
-                                     boundary-links="true"> </dir-pagination-controls>
+            <div class="col-lg-2 col-md-2 col-sm-3 no-padding">
+                <div class="input-group pull-right">
+                    <input type="text" ng-model="pagenumber" class="form-control search-pagination" placeholder="Page no.." only-digits>
+                      <span class="input-group-btn">
+                        <button class="btn btn-secondary" ng-click="goToPage()" type="button">Go!</button>
+                      </span>
+                </div>
+            </div>
+            <div class="col-lg-10 col-md-10 col-sm-9">
+                <dir-pagination-controls ng-show="paginationLoad" max-size="5" direction-links="true"
+                                         boundary-links="true"> </dir-pagination-controls>
+                </div>
+
+
+            </div>
+
+
 
             <!-- End Pagination -->
         </div>

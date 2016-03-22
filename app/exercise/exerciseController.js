@@ -56,6 +56,25 @@ adminApp.controller('ExerciseController',['$scope','requestHandler','Flash',func
 	};
 	//End Get Exercise List
 
+    $scope.sortexerciseidicon="fa fa-caret-down";
+    $scope.sortexercisenameicon = "fa fa-caret-down";
+
+    //sorting by Exercise Id
+    $scope.sortExerciseId = function(){
+        $scope.sortKey='exerciseid';
+        $scope.reverse = !$scope.reverse;
+        if($scope.sortexerciseidicon=="fa fa-caret-down")$scope.sortexerciseidicon="fa fa-caret-up";
+        else $scope.sortexerciseidicon="fa fa-caret-down";
+    };
+
+    //sorting by Exercise name
+    $scope.sortExerciseName = function(){
+        $scope.sortKey='exercisename';
+        $scope.reverse = !$scope.reverse;
+        if($scope.sortexercisenameicon=="fa fa-caret-down") $scope.sortexercisenameicon="fa fa-caret-up";
+        else $scope.sortexercisenameicon="fa fa-caret-down";
+    };
+
 	//Enable Disable Exercise
 	$scope.doEnableDisable=function(exerciseId){
 
@@ -83,6 +102,14 @@ adminApp.controller('ExerciseController',['$scope','requestHandler','Flash',func
 	//End Initial Load
 
 	$scope.init();
+
+    $scope.pagenumber="";
+    $scope.newPageNumber=1;
+
+    $scope.goToPage=function(){
+        $scope.newPageNumber=$scope.pagenumber;
+        $scope.pagenumber="";
+    }
 
 }]);
 

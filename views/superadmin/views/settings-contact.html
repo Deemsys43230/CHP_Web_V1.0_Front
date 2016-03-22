@@ -44,7 +44,7 @@
                         <h4>Zipcode :</h4>
                     </div>
                     <div class="col-md-9">
-                        <input class="form-control margin-bottom-20" name="zipcode"  ng-minlength="6" ng-model="contactUs.zipcode"  maxlength="6" validate-number required>
+                        <input class="form-control margin-bottom-20" name="zipcode"  ng-minlength="5" ng-model="contactUs.zipcode"  maxlength="6" validate-number required>
                         <span ng-show="contactUsForm.zipcode.$dirty&&contactUsForm.zipcode.$invalid">
                                 <span class="error-message" ng-show="contactUsForm.zipcode.$error.required"><span>Required.</span></span>
                              <span class="error-message" ng-show="!contactUsForm.zipcode.$error.required&&contactUsForm.zipcode.$error.validateNumber"><span>Invalid&nbsp;Format.</span></span>

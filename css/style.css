@@ -1102,212 +1102,6 @@ input[type="submit"] {
     background-color: transparent;
 }
 
-@media (min-width: 1200px) and (max-width: 1250px){
-    /*.container {
-        width: 1100px !important;
-    }*/
-    /*#w{
-        width: 1080px !important;
-    }*/
-
-    /*#content{
-        width: 560px !important;
-    }*/
-
-    /*.tab-content{
-        width: 530px !important;
-    }*/
-
-    /*.content-1 {
-        width: 335px !important;
-    }*/
-
-    /*.food_scrollbar
-    {
-        width: 345px !important;
-    }*/
-
-    /*.content-weight{
-        width: 360px !important;
-    }*/
-
-    /*.outerline{
-        width: 530px !important; ;
-    }*/
-
-    .content-goal{
-        width: 490px !important;
-    }
-
-   /* #profile-content{
-        width:790px!important;
-    }*/
-
-    /*.profile_input_textarea
-    {
-        width:583px!important;
-    }*/
-
-    /*#demography-content{
-        width:1080px!important;
-    }*/
-}
-
-@media (min-width: 1250px) {
-    /*.container {
-        width: 1170px;
-    }*/
-    /*#w{
-        width: 1150px !important;
-    }*/
-
-   /* #content{
-        width: 630px !important;
-    }*/
-
-    /*.tab-content{
-        width: 600px !important;
-    }*/
-
-    /*.content-1 {
-        width: 405px !important;
-    }*/
-
-    /*.food_scrollbar
-    {
-        width: 415px !important;
-    }*/
-
-    /*.content-weight{
-        width: 330px !important;
-    }*/
-
-    /*.outerline{
-        width: 600px !important; ;
-    }*/
-
-    .content-goal{
-        width: 560px !important;
-    }
-
-   /* #profile-content{
-        width:860px!important;
-    }*/
-
-    /*.profile_input_textarea
-    {
-        width:653px!important;
-    }*/
-
-    /*#demography-content{
-        width:1150px!important;
-    }*/
-}
-
-@media (min-width: 1300px) {
-    /*.container {
-        width: 1220px;
-    }*/
-
-    /*#w{
-        width: 1190px !important;
-    }*/
-
-    /*#content{
-        width: 670px !important;
-    }
-*/
-    /*.tab-content{
-        width: 640px !important;
-    }*/
-
-    /*.content-1 {
-        width: 445px !important;
-    }*/
-
-    /*.food_scrollbar
-    {
-        width: 455px !important;
-    }*/
-
-    /*.content-weight{
-        width: 370px !important;
-    }*/
-
-    /*.outerline{
-        width: 640px !important; ;
-    }*/
-
-    .content-goal{
-        width: 600px !important;
-    }
-
-    /*#profile-content{
-        width:900px!important;
-    }*/
-
-    /*.profile_input_textarea
-    {
-        width:693px!important;
-    }*/
-
-    /*#demography-content{
-        width:1190px!important;
-    }*/
-}
-
-@media (min-width: 1350px) {
-    /*.container {
-        width: 1250px;
-    }*/
-
-    /*#w{
-        width: 1220px !important;
-    }*/
-
-   /* #content{
-        width: 700px !important;
-    }*/
-
-    /*.tab-content{
-        width: 670px !important;
-    }*/
-
-    /*.content-1 {
-        width: 475px !important;
-    }*/
-
-    /*.food_scrollbar
-    {
-        width: 485px !important;
-    }*/
-
-    /*.content-weight{
-        width: 400px !important;
-    }*/
-
-    .content-goal{
-        width: 630px !important;
-    }
-
-    /*.outerline{
-        width: 670px !important; ;
-    }*/
-
-   /* #profile-content{
-        width:930px!important;
-    }*/
-
-    /*.profile_input_textarea
-    {
-        width:723px!important;
-    }*/
-
-    /*#demography-content{
-        width:1220px!important;
-    }*/
-}
-
 .boxed-page {
   position: relative;
   width: 95%;
@@ -3231,6 +3025,26 @@ hr{
   	border:0;
   	text-transform: uppercase;
   	font-weight: 400;
+}
+
+.search-pagination{
+    outline: none;
+    border: 1px solid #eee !important;
+    -webkit-box-shadow: none !important;
+    -moz-box-shadow: none !important;
+    box-shadow: none !important;
+}
+
+.btn-secondary:hover{
+    background-color: #f8ba01;
+    color: #ffffff;
+}
+
+.btn-secondary:focus{
+    outline: none;
+    -webkit-box-shadow: none !important;
+    -moz-box-shadow: none !important;
+    box-shadow: none !important;
 }
 
 .btn-system:last-child {
@@ -7700,9 +7514,8 @@ a.title_button:hover{
 
 .food_scrollbar
 {
-    float: left;
     position: relative;
-    width: 99%;
+    width: 99%!important;
     height: 310px;
     background: none;
     overflow-y: scroll;

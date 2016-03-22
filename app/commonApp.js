@@ -290,7 +290,9 @@ commonApp.controller('LoginController',['$scope','requestHandler','Flash','$wind
         forgotPasswordForm.$setPristine();
         var registerForm = $element.find('form').eq(2).controller('form');
         registerForm.$setPristine();
-        var registerForm2 = $element.find('form').eq(3).controller('form');
+        var registerForm1 = $element.find('form').eq(3).controller('form');
+        registerForm1.$setPristine();
+        var registerForm2 = $element.find('form').eq(4).controller('form');
         registerForm2.$setPristine();
         $scope.username='';
         $scope.password='';
@@ -590,3 +592,31 @@ commonApp.directive('validateUrl', function() {
         }
     };
 });
+
+commonApp.factory('myGoogleAnalytics', [
+    '$rootScope', '$window', '$location',
+    function ($rootScope, $window, $location) {
+
+        var myGoogleAnalytics = {};
+
+        /**
+         * Set the page to the current location path
+         * and then send a pageview to log path change.
+         */
+        myGoogleAnalytics.sendPageview = function() {
+            if ($window.ga) {
+                $window.ga('set', 'page', $location.path());
+                $window.ga('send', 'pageview');
+            }
+        };
+
+        // subscribe to events
+        $rootScope.$on('$viewContentLoaded', myGoogleAnalytics.sendPageview);
+
+        return myGoogleAnalytics;
+    }
+]).run(['myGoogleAnalytics',
+        function(myGoogleAnalytics) {
+            // inject self
+        }
+    ]);

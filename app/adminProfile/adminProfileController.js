@@ -4565,6 +4565,31 @@ adminApp.controller('AdminProfileController',['$scope','requestHandler','Flash',
     maxDate: new Date()// mm/dd/yyyy
 });
 
+adminApp.directive('widthAboutMe', function() {
+    return {
+        link: function($scope, $element) {
+            $scope.$watch(function() {
+                setTimeout(function(){
+                    var windowheight=$("html").width();
+                    if(windowheight<1200&&windowheight>992){
+                        windowheight = Math.round((40*windowheight)/100);
+                        $('.profile_input_textarea').css({"width":windowheight+"px"});
+                    }else if(windowheight>1200){
+                        windowheight = Math.round((52.7*windowheight)/100);
+                        $('.profile_input_textarea').css({"width":windowheight+"px"});
+                    }
+                    else if(windowheight<=992&&windowheight>=479){
+                        windowheight = Math.round((37*windowheight)/100);
+                        $('.profile_input_textarea').css({"width":windowheight+"px"});
+                    }
+
+                }, 0);
+            });
+        }
+    }
+});
+
+
 // render image to view in list
 adminApp.filter('trusted', ['$sce', function ($sce) {
     return function(url) {

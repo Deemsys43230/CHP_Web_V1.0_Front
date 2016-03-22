@@ -56,27 +56,10 @@
                                          <span class="error-message textarea-errormessage10" ng-show="userProfileForm.name.$error.pattern"><span>Enter&nbsp;valid&nbsp;Name.</span></span>
                                     </span>
                                 </div>
-                            </div>
-                            <div class="col-lg-6 col-md-12 col-sm-12">
-                                <div class="hidden-lg"><div class="col-sm-12 margin-top-10"></div></div>
-                                <div class="col-lg-4 col-md-4 col-sm-4 padding-top-4 padding-right-0">
-                                    <h5>Country <span class="pull-right">:</span></h5>
-                                </div>
-                                <div class="col-lg-8 col-md-8 col-sm-8"><!--{{userProfile.country}}-->
-                                    <select class="full-width main margin-bottom-1" name="country"  ng-model="userProfile.countrySelect" ng-options="country.name for country in countries track by country.code" ng-init="addCountry()" ng-change="updateCountry()" required>
-                                        <option value="">-- Select a Country --</option>
-                                    </select>
-                                    <!--<input class="profile_input" name="country" ng-model="userProfile.country" maxlength="20" required/>-->
-                                    <span ng-show="userProfileForm.country.$dirty&&userProfileForm.country.$invalid">
-                                        <span class="error-message textarea-errormessage10" ng-show="userProfileForm.country.$error.required"><span>Required.</span></span>
-                                    </span>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-md-12 col-sm-12 margin-top-10">
-                                <div class="col-lg-4 col-md-4 col-sm-4 padding-top-4 padding-right-0">
+                                <div class="col-lg-4 col-md-4 col-sm-4 padding-top-4 padding-right-0 margin-top-10">
                                     <h5>DOB <span class="pull-right">:</span></h5>
                                 </div>
-                                <div class="col-lg-8 col-md-8 col-sm-8" ng-model="userProfile.dob">
+                                <div class="col-lg-8 col-md-8 col-sm-8 margin-top-10" ng-model="userProfile.dob">
                                     <div class="col-lg-3 col-md-3 col-sm-3 no-padding">
                                         <select id="dobday" onchange="angular.element(this).scope().changeBirthday()" class="full-width main"></select>
                                     </div>
@@ -107,12 +90,62 @@
                                             <span class="error-message textarea-errormessage10" ng-show="userProfileForm.dob.$error.required"><span>Required.</span></span>
                                         </span>
                                 </div>
+                                <div class="col-lg-4 col-md-4 col-sm-4 padding-top-4 padding-right-0 margin-top-10">
+                                    <h5>Email ID <span class="pull-right">:</span></h5>
+                                </div>
+                                <div class="col-lg-8 col-md-8 col-sm-8 margin-top-10">
+                                    <input class="profile_input" ng-model="userProfile.emailid" ng-disabled="true" required/>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-4 padding-top-4 padding-right-0 margin-top-10">
+                                    <h5>Mobile <span class="pull-right">:</span></h5>
+                                </div>
+                                <div class="col-lg-8 col-md-8 col-sm-8 margin-top-10">
+                                    <input class="profile_input" name="phone" ng-pattern="/^\d+$/"  ng-model="userProfile.phone" ng-minlength="10" maxlength="10" required />
+                                        <span ng-show="userProfileForm.phone.$dirty&&userProfileForm.phone.$invalid">
+                                             <span class="error-message textarea-errormessage10" ng-show="userProfileForm.phone.$error.required"><span>Required.</span></span>
+                                              <span class="error-message textarea-errormessage10" ng-show="userProfileForm.phone.$error.pattern"><span>Invalid&nbsp;Format.</span></span>
+                                             <span class="error-message textarea-errormessage10" ng-show="!userProfileForm.phone.$error.pattern&&userProfileForm.phone.$error.minlength"><span>Should&nbsp;be&nbsp;of&nbsp;length&nbsp;10.</span></span>
+                                         </span>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-4 padding-top-4 padding-right-0 margin-top-10">
+                                    <h5>Gender <span class="pull-right">:</span></h5>
+                                </div>
+                                <div class="col-lg-8 col-md-8 col-sm-8 margin-top-10" >
+                                    <input type="radio" id="1" name="sex" value="1" ng-model="userProfile.gender"   required/>
+                                    <label for="1">Male</label>
+                                    <input type="radio" id="2" name="sex" value="2" ng-model="userProfile.gender"   required/>
+                                    <label for="2">Female</label>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-4 padding-top-4 padding-right-0 margin-top-5">
+                                    <h5>Prefer Food <span class="pull-right">:</span></h5>
+                                </div>
+                                <div class="col-lg-8 col-md-8 col-sm-8 margin-top-5">
+                                    <input type="radio" id="india" class="height" name="preferfood" value="1" ng-model="userProfile.preferfood"/>
+                                    <label for="india">Indian</label>
+                                    <input type="radio" id="us" class="height" name="preferfood" value="2" ng-model="userProfile.preferfood"/>
+                                    <label for="us">US</label>
+                                    <input type="radio" id="general" class="height" name="preferfood" value="3" ng-model="userProfile.preferfood"/>
+                                    <label for="general">None</label>
+                                </div>
                             </div>
-                            <div class="col-lg-6 col-md-12 col-sm-12 margin-top-10">
+                            <div class="col-lg-6 col-md-12 col-sm-12">
+                                <div class="hidden-lg"><div class="col-sm-12 margin-top-5"></div></div>
                                 <div class="col-lg-4 col-md-4 col-sm-4 padding-top-4 padding-right-0">
+                                    <h5>Country <span class="pull-right">:</span></h5>
+                                </div>
+                                <div class="col-lg-8 col-md-8 col-sm-8"><!--{{userProfile.country}}-->
+                                    <select class="full-width main margin-bottom-1" name="country"  ng-model="userProfile.countrySelect" ng-options="country.name for country in countries track by country.code" ng-init="addCountry()" ng-change="updateCountry()" required>
+                                        <option value="">-- Select a Country --</option>
+                                    </select>
+                                    <!--<input class="profile_input" name="country" ng-model="userProfile.country" maxlength="20" required/>-->
+                                    <span ng-show="userProfileForm.country.$dirty&&userProfileForm.country.$invalid">
+                                        <span class="error-message textarea-errormessage10" ng-show="userProfileForm.country.$error.required"><span>Required.</span></span>
+                                    </span>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-4 padding-top-4 padding-right-0 margin-top-10">
                                     <h5>State <span class="pull-right">:</span></h5>
                                 </div>
-                                <div class="col-lg-8 col-md-8 col-sm-8"><!--{{userProfile.state}}-->
+                                <div class="col-lg-8 col-md-8 col-sm-8 margin-top-10"><!--{{userProfile.state}}-->
                                     <select class="full-width main margin-bottom-1" name="state" ng-model="userProfile.stateSelect" ng-options="state.name for state in availableStates track by state.code" required>
                                         <option value="">-- Select a State --</option>
                                     </select>
@@ -121,46 +154,20 @@
                                 <span class="error-message textarea-errormessage10" ng-show="userProfileForm.state.$error.required"><span>Required.</span></span>
                                          </span>
                                 </div>
-                            </div>
-                            <div class="col-lg-6 col-md-12 col-sm-12 margin-top-10">
-                                <div class="col-lg-4 col-md-4 col-sm-4 padding-top-4 padding-right-0">
-                                    <h5>Email ID <span class="pull-right">:</span></h5>
-                                </div>
-                                <div class="col-lg-8 col-md-8 col-sm-8">
-                                    <input class="profile_input" ng-model="userProfile.emailid" ng-disabled="true" required/>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-6 col-md-12 col-sm-12 margin-top-10">
-                                <div class="col-lg-4 col-md-4 col-sm-4 padding-top-4 padding-right-0">
+                                <div class="col-lg-4 col-md-4 col-sm-4 padding-top-4 padding-right-0 margin-top-10">
                                     <h5>City <span class="pull-right">:</span></h5>
                                 </div>
-                                <div class="col-lg-8 col-md-8 col-sm-8">
+                                <div class="col-lg-8 col-md-8 col-sm-8 margin-top-10">
                                     <input class="profile_input" name="city" ng-pattern="/^ *([a-zA-Z]+ ?)+ *$/" ng-model="userProfile.city" maxlength="20" required/>
                                          <span ng-show="userProfileForm.city.$dirty&&userProfileForm.city.$invalid">
                                              <span class="error-message textarea-errormessage10" ng-show="userProfileForm.city.$error.required"><span>Required.</span></span>
                                              <span class="error-message textarea-errormessage10" ng-show="userProfileForm.city.$error.pattern"><span>Invalid&nbsp;city.</span></span>
                                          </span>
                                 </div>
-                            </div>
-                            <div class="col-lg-6 col-md-12 col-sm-12 margin-top-10">
-                                <div class="col-lg-4 col-md-4 col-sm-4 padding-top-4 padding-right-0">
-                                    <h5>Mobile <span class="pull-right">:</span></h5>
-                                </div>
-                                <div class="col-lg-8 col-md-8 col-sm-8">
-                                    <input class="profile_input" name="phone" ng-pattern="/^\d+$/"  ng-model="userProfile.phone" ng-minlength="10" maxlength="10" required />
-                                        <span ng-show="userProfileForm.phone.$dirty&&userProfileForm.phone.$invalid">
-                                             <span class="error-message textarea-errormessage10" ng-show="userProfileForm.phone.$error.required"><span>Required.</span></span>
-                                              <span class="error-message textarea-errormessage10" ng-show="userProfileForm.phone.$error.pattern"><span>Invalid&nbsp;Format.</span></span>
-                                             <span class="error-message textarea-errormessage10" ng-show="!userProfileForm.phone.$error.pattern&&userProfileForm.phone.$error.minlength"><span>Should&nbsp;be&nbsp;of&nbsp;length&nbsp;10.</span></span>
-                                         </span>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-md-12 col-sm-12 margin-top-10">
-                                <div class="col-lg-4 col-md-4 col-sm-4 padding-top-4 padding-right-0">
+                                <div class="col-lg-4 col-md-4 col-sm-4 padding-top-4 padding-right-0 margin-top-10">
                                     <h5>Zipcode <span class="pull-right">:</span></h5>
                                 </div>
-                                <div class="col-lg-8 col-md-8 col-sm-8">
+                                <div class="col-lg-8 col-md-8 col-sm-8 margin-top-10">
                                     <input class="profile_input" name="zipcode" ng-pattern="/^\d{5,6}$/" ng-model="userProfile.zipcode" maxlength="6" minlength="5" required/>
                                         <span ng-show="userProfileForm.zipcode.$dirty&&userProfileForm.zipcode.$invalid">
                                             <span class="error-message textarea-errormessage10" ng-show="userProfileForm.zipcode.$error.required"><span>Required.</span></span>
@@ -168,12 +175,10 @@
                                             <span class="error-message textarea-errormessage10" ng-show="!userProfileForm.zipcode.$error.pattern&&userProfileForm.zipcode.$error.minlength"><span>Should&nbsp;be&nbsp;of&nbsp;length&nbsp;5.</span></span>
                                          </span>
                                 </div>
-                            </div>
-                            <div class="col-lg-6 col-md-12 col-sm-12 margin-top-10">
-                                <div class="col-lg-4 col-md-4 col-sm-4 padding-top-4 padding-right-0">
+                                <div class="col-lg-4 col-md-4 col-sm-4 padding-top-4 padding-right-0 margin-top-10">
                                     <h5>Secret&nbsp;Question<span class="pull-right">:</span></h5>
                                 </div>
-                                <div class="col-lg-8 col-md-8 col-sm-8">
+                                <div class="col-lg-8 col-md-8 col-sm-8 margin-top-10">
                                     <!-- <input class="profile_input" name="secretquestion" ng-model="userProfile.secretquestion" maxlength="150" required/>-->
                                     <select class="full-width main"  ng-model="userProfile.secretquestion" name="secretquestion" required>
                                         <option value="">--Select secret question--</option>
@@ -188,41 +193,14 @@
                                 <span class="error-message textarea-errormessage10" ng-show="userProfileForm.secretquestion.$error.required"><span>Required.</span></span>
                                          </span>
                                 </div>
-                            </div>
-
-                            <div class="col-lg-6 col-md-12 col-sm-12 margin-top-10">
-                                <div class="col-lg-4 col-md-4 col-sm-4 padding-top-4 padding-right-0">
-                                    <h5>Gender <span class="pull-right">:</span></h5>
-                                </div>
-                                <div class="col-lg-8 col-md-8 col-sm-8" >
-                                    <input type="radio" id="1" name="sex" value="1" ng-model="userProfile.gender"   required/>
-                                    <label for="1">Male</label>
-                                    <input type="radio" id="2" name="sex" value="2" ng-model="userProfile.gender"   required/>
-                                    <label for="2">Female</label>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-md-12 col-sm-12 margin-top-5">
-                                <div class="col-lg-4 col-md-4 col-sm-4 padding-top-4 padding-right-0">
+                                <div class="col-lg-4 col-md-4 col-sm-4 padding-top-4 padding-right-0 margin-top-10">
                                     <h5>Secret&nbsp;Answer<span class="pull-right">:</span></h5>
                                 </div>
-                                <div class="col-lg-8 col-md-8 col-sm-8">
+                                <div class="col-lg-8 col-md-8 col-sm-8 margin-top-10 margin-bottom-5">
                                     <input class="profile_input" name="secretanswer" ng-model="userProfile.secretanswer" maxlength="150" required/>
                                         <span ng-show="userProfileForm.secretanswer.$dirty&&userProfileForm.secretanswer.$invalid">
                                 <span class="error-message textarea-errormessage10" ng-show="userProfileForm.secretanswer.$error.required"><span>Required.</span></span>
                                          </span>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-md-12 col-sm-12 margin-top-5">
-                                <div class="col-lg-4 col-md-4 col-sm-4 padding-top-4 padding-right-0">
-                                    <h5>Prefer Food <span class="pull-right">:</span></h5>
-                                </div>
-                                <div class="col-lg-8 col-md-8 col-sm-8">
-                                    <input type="radio" id="india" class="height" name="preferfood" value="1" ng-model="userProfile.preferfood"/>
-                                    <label for="india">Indian</label>
-                                    <input type="radio" id="us" class="height" name="preferfood" value="2" ng-model="userProfile.preferfood"/>
-                                    <label for="us">US</label>
-                                    <input type="radio" id="general" class="height" name="preferfood" value="3" ng-model="userProfile.preferfood"/>
-                                    <label for="general">None</label>
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-12 col-sm-12 margin-top-5" width-about-me>
@@ -238,7 +216,6 @@
                                     <textarea id="inputFocusForDatePicker" class="profile_input_textarea" name="about" ng-model="userProfile.about" maxlength="300" ng-blur="showCount=0" ng-focus="showCount=1" required></textarea>
                                 </div>
                             </div>
-
                             <div class="col-lg-12 col-md-12 col-sm-12 text-center margin-top-10">
                                 <a href="" class="btn register_button" ng-click="doUpdateProfile()" ng-disabled="isClean() || userProfileForm.$invalid">Save Changes</a>
                                 <a href="#dashboard" class="btn cancel_button">Cancel</a>
