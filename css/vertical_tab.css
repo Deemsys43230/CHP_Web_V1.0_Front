@@ -211,6 +211,8 @@ html[xmlns] .clearfix { display: block; }
 }
 
 .outerline{
+    position: relative;
+    display: inline-block;
     height: 480px;
     padding: 5px;
     margin: 0 10px 10px 10px;
