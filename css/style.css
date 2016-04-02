@@ -14982,3 +14982,10 @@ ul.post-meta li a:hover {
     margin-left: 10px;
     width:115px;
 }
+
+.highlight-menu-item{
+    background-color: #f8ba01;
+    padding:5px 10px;
+    color: #fff;
+    border-radius: 3px;
+}

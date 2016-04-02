@@ -253,6 +253,23 @@ commonApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'UsefulVideosController'
             }).
+            when('/healthy-tips', {
+                templateUrl: '../common/healthy-tips.html'
+            }).
+            when('/healthy-tips-1', {
+                templateUrl: '../common/healthy-tips-1.html',
+                resolve: {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'commonApp',
+                            files:[
+                                '../../app/usefulVideos/usefulVideosController.js'
+                            ]
+                        })
+                    }]
+                },
+                controller:'UsefulVideosController'
+            }).
             otherwise({
                 redirectTo: '/home'
             });
