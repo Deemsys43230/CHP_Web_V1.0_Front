@@ -34,11 +34,15 @@ adminApp.controller('FAQController',['$scope','requestHandler','Flash','siteMenu
     var original="";
 
     $scope.doAddFAQ=function() {
-
+        if($('.search-list-form').css('display') != 'none'){
+            $(".search-list-form").hide();
+        }
+        $scope.faqsearch="";
         $scope.loaded=true;
         requestHandler.postRequest("admin/insertorupdateFAQList/",$scope.faq).then(function (response) {
             $scope.doGetAllFAQ();
             successMessage(Flash,"Successfully Added");
+            $scope.reset();
             $scope.loaded=false;
             $scope.paginationLoad=true;
         }, function () {
@@ -47,7 +51,10 @@ adminApp.controller('FAQController',['$scope','requestHandler','Flash','siteMenu
     };
 
     $scope.doUpdateFAQ=function(){
-
+        if($('.search-list-form').css('display') != 'none'){
+            $(".search-list-form").hide();
+            $(".search-list-form").show(2400);
+        }
         requestHandler.putRequest("admin/insertorupdateFAQList/",$scope.faq).then(function(response){
             $scope.doGetAllFAQ();
             successMessage(Flash,"Successfully Updated");
@@ -59,7 +66,10 @@ adminApp.controller('FAQController',['$scope','requestHandler','Flash','siteMenu
     };
 
     $scope.doEnableDisable=function(id){
-
+        if($('.search-list-form').css('display') != 'none'){
+            $(".search-list-form").hide();
+            $(".search-list-form").show(2400);
+        }
         $scope.loaded=true;
         requestHandler.postRequest("admin/disableFAQList/",{'faqid':id}).then(function(response){
             $scope.loaded=false;
@@ -110,6 +120,13 @@ adminApp.controller('FAQController',['$scope','requestHandler','Flash','siteMenu
         $scope.paginationLoad=false;
         $scope.doGetAllFAQ();
     };
+
+    // Search Food Type
+    $('.show-list-search').click(function() {
+        $('.search-list-form').toggle(300);
+        $scope.pagenumber="";
+        $('.search-list-form input').focus();
+    });
 
 }]);
 
@@ -215,6 +232,24 @@ coachApp.controller('FAQCommonController',['$scope','requestHandler','Flash',fun
     $scope.doGetUserFAQ();
 
 }]);
+
+adminApp.filter('startsWithLetterFood', function () {
+
+    return function (items, foodsearch) {
+        var filtered = [];
+        var letterMatch = new RegExp(foodsearch, 'i');
+        if(!items){}
+        else{
+            for (var i = 0; i < items.length; i++) {
+                var item = items[i];
+                if (letterMatch.test(item.question) || letterMatch.test(item.answer)) {
+                    filtered.push(item);
+                }
+            }
+        }
+        return filtered;
+    };
+});
 
 
 

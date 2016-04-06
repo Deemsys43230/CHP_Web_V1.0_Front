@@ -10,8 +10,8 @@
                     </div>
                     <div class="media-body">
                         <h4>{{usertestimonialdetails.title}}</h4>
-                        <p class="margin-top-10 wrap">{{usertestimonialdetails.description}}</p>
-                        <div class="margin-top-10 pull-right"><strong>-&nbsp;{{usertestimonialdetails.givenby}}</strong></div>
+                        <p class="margin-top-10 wrap" ng-bind-html="usertestimonialdetails.description | html"></p>
+                        <div class="margin-top-10 text-italic"><strong>-&nbsp;{{usertestimonialdetails.givenby}}</strong></div>
                     </div>
                 </div>
             </div>

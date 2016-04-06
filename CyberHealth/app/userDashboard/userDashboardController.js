@@ -1237,21 +1237,40 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
             //To get frequently asked exercise
             var advicePromise=UserDashboardService.getCoachIndividualDetail(response.data.Coach_Advice);
 
-            var emptyCoach=[{coachid: "n1",coachname: ""},{coachid: "n2",coachname: ""},{coachid: "n3",coachname: ""},{coachid: "n4",coachname: ""}];
+            var adviceCoachList=[];
 
-            if(advicePromise.length<3){
-                for(i=advicePromise.length;i<3;i++){
-                    advicePromise.push(emptyCoach[i]);
+            $.each(advicePromise, function(index,value) {
+                adviceCoachList.push(value.coachid);
+            });
+
+            requestHandler.getRequest("user/getmyCoachList/", "").then(function(response){
+                $scope.coachlist=response.data.getmyCoachList;
+                $.each($scope.coachlist, function(index,coach) {
+                    if(adviceCoachList.indexOf(coach.userid)==-1){
+                        var addCoach={};
+                        addCoach.coachid=coach.userid;
+                        addCoach.coachname=coach.name;
+                        addCoach.coachimage=coach.imageurl;
+                        addCoach.description="";
+                        advicePromise.push(addCoach);
+                    }
+                });
+
+                var emptyCoach=[{coachid: "n1",coachname: ""},{coachid: "n2",coachname: ""},{coachid: "n3",coachname: ""},{coachid: "n4",coachname: ""}];
+
+                if(advicePromise.length<3){
+                    for(i=advicePromise.length;i<3;i++){
+                        advicePromise.push(emptyCoach[i]);
+                    }
                 }
-            }
-            else{
-                advicePromise.push(emptyCoach[0]);
-            }
+                else{
+                    advicePromise.push(emptyCoach[0]);
+                }
+                $scope.coachadvice =advicePromise;
+                $scope.usercoachadvicedetails=$scope.coachadvice[0];
 
-            $scope.coachadvice =advicePromise;
-            $scope.usercoachadvicedetails=$scope.coachadvice[0];
-
-            coachAdviceCarousel();
+                coachAdviceCarousel();
+            });
 
         },function(){
             console.log("Please try again later!");

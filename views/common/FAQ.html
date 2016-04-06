@@ -16,10 +16,10 @@
                         <div class="loader"></div>
                     </div>
                 </div>
-                <div ng-repeat="userfaq in faqfilter = (userfaqlist | filter :{question : faqsearch})" ng-show="userfaq.length!=0">
-                    <div class="news-block margin-top-7">
-                        <h4 class="text-muted">{{userfaq.question}}</h4>
-                        <h5 class="text-justify margin-top-7 text-darkgray">{{userfaq.answer}}</h5>
+                <div ng-repeat="userfaq in faqfilter = (userfaqlist | filter :faqsearch)" ng-show="userfaq.length!=0">
+                    <div class="news-block-user">
+                        <h5 class="text-muted">{{userfaq.question}}</h5>
+                        <p class="text-justify margin-top-7 margin-bottom-5 text-darkgray">{{userfaq.answer}}</p>
                     </div>
                 </div>
                 <div ng-show="userfaq.length==0 || !faqfilter.length">
