@@ -24,3 +24,14 @@ var adminApp= angular.module('adminApp', ['ngRoute','oc.lazyLoad','ngCookies','r
 adminApp.controller('HealthyTipsController',['$scope','requestHandler','Flash',function($scope,requestHandler,Flash) {
     $scope.activeClass.healthy='active';
 }]);
+
+commonApp.controller('HealthyTipsListController',['$scope','requestHandler','Flash','$location',function($scope,requestHandler,Flash,$location) {
+    setTimeout(function(){
+        if(!$location.search().id){}
+        else{
+            var searchId="#"+$location.search().id;
+            var offset = $(searchId).offset().top-75;
+            $("html, body").animate({ scrollTop: offset }, "slow");
+        }
+    }, 100);
+}]);

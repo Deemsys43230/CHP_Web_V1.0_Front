@@ -62,11 +62,17 @@
         <!-- Register Form -->
         <div class="user_register">
             <form name="coachRegisterForm" novalidate>
-                <p>Name</p>
-                <input type="text" ng-pattern="/^ *([a-zA-Z]+ ?)+ *$/" ng-model="coach.name" name="coachName" required maxlength="45" focus-me="shouldBeOpen"/>
-                <span ng-show="coachRegisterForm.coachName.$dirty&&coachRegisterForm.coachName.$invalid">
-                    <span class="error-message" ng-show="coachRegisterForm.coachName.$error.required"><span>Required.</span></span>
-                    <span class="error-message" ng-show="coachRegisterForm.coachName.$error.pattern"><span>Enter&nbsp;valid&nbsp;Name.</span></span>
+                <p>First name</p>
+                <input type="text" ng-pattern="/^ *([a-zA-Z]+ ?)+ *$/" ng-model="coach.firstname" name="firstname" required maxlength="45" focus-me="shouldBeOpen"/>
+                <span ng-show="coachRegisterForm.firstname.$dirty&&coachRegisterForm.firstname.$invalid">
+                    <span class="error-message" ng-show="coachRegisterForm.firstname.$error.required"><span>Required.</span></span>
+                    <span class="error-message" ng-show="coachRegisterForm.firstname.$error.pattern"><span>Enter&nbsp;valid&nbsp;Name.</span></span>
+                </span>
+                <p>Last name</p>
+                <input type="text" ng-pattern="/^ *([a-zA-Z]+ ?)+ *$/" ng-model="coach.lastname" name="lastname" required maxlength="45"/>
+                <span ng-show="coachRegisterForm.lastname.$dirty&&coachRegisterForm.lastname.$invalid">
+                    <span class="error-message" ng-show="coachRegisterForm.lastname.$error.required"><span>Required.</span></span>
+                    <span class="error-message" ng-show="coachRegisterForm.lastname.$error.pattern"><span>Enter&nbsp;valid&nbsp;Name.</span></span>
                 </span>
 
                 <p>Email</p>
