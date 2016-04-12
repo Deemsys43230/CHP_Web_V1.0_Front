@@ -34,4 +34,10 @@ commonApp.controller('HealthyTipsListController',['$scope','requestHandler','Fla
             $("html, body").animate({ scrollTop: offset }, "slow");
         }
     }, 100);
+
+    $scope.focusToIndividualTips=function(id){
+        var searchId="#"+id;
+        var offset = $(searchId).offset().top-75;
+        $("html, body").animate({ scrollTop: offset }, "slow");
+    };
 }]);

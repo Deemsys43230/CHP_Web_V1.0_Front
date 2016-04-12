@@ -105,13 +105,13 @@
             <div flash-message="3000" ></div>
             <form name="registerForm" novalidate>
                 <p>First name</p>
-                <input type="text" name="firstname" ng-pattern="/^ *([a-zA-Z]+ ?)+ *$/"  ng-model="userForm.firstname" maxlength="30" required/>
+                <input type="text" name="firstname" ng-pattern="/^ *([a-zA-Z]+ ?)+ *$/"  ng-model="userForm.firstname" maxlength="24" required/>
                     <span ng-show="registerForm.firstname.$dirty&&registerForm.firstname.$invalid && !registerForm.firstname.$pristine">
                         <span class="error-message" ng-show="registerForm.firstname.$error.required"><span>Required.</span></span>
                          <span class="error-message" ng-show="registerForm.firstname.$error.pattern"><span>Enter&nbsp;valid&nbsp;Name.</span></span>
                     </span>
                 <p>Last name</p>
-                <input type="text" name="lastname" ng-pattern="/^ *([a-zA-Z]+ ?)+ *$/"  ng-model="userForm.lastname" maxlength="30" required/>
+                <input type="text" name="lastname" ng-pattern="/^ *([a-zA-Z]+ ?)+ *$/"  ng-model="userForm.lastname" maxlength="24" required/>
                     <span ng-show="registerForm.lastname.$dirty&&registerForm.lastname.$invalid && !registerForm.name.$pristine">
                         <span class="error-message" ng-show="registerForm.lastname.$error.required"><span>Required.</span></span>
                          <span class="error-message" ng-show="registerForm.lastname.$error.pattern"><span>Enter&nbsp;valid&nbsp;Name.</span></span>
