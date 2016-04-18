@@ -6,6 +6,7 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
     $scope.coachreview = {ratinglevel:1};
     $scope.averageRate=0.1;
     $scope.paginationLoad=false;
+
     var myCoachIdListArray = [];
     // $scope.disablereview=false;
 
@@ -68,11 +69,18 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
 
     $scope.doGetCoachRatings= function (id) {
         $scope.reviewload=true;
+        $scope.coachReviews={};
         requestHandler.getRequest("getRatingsandReviews/"+id, "").then(function(response){
             $scope.coachReviews=response.data.Ratings_Reviews.Reviews;
+            $scope.reviews=response.data.Ratings_Reviews;
             $scope.reviewload=false;
+            $scope.totalRatings = $scope.reviews.totalRatings;
+            $scope.avgRatings = $scope.reviews.averageRatings;
+            if($scope.avgRatings==0)
+                $scope.averageRate=0.1;
+            else
+                $scope.averageRate=$scope.reviews.averageRatings;
         });
-
     };
 
     $scope.doGetCoachDetailsByUser= function (id){
@@ -138,9 +146,10 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
                 $scope.usercoachdetails.zipcode = "NA";
             }
 
+            $scope.viewload=false;
         });
 
-        requestHandler.getRequest("getRatingsandReviews/"+id, "").then(function (response) {
+        /*requestHandler.getRequest("getRatingsandReviews/"+id, "").then(function (response) {
             $scope.coachReviews = response.data.Ratings_Reviews;
             $scope.viewload=false;
             $scope.totalRatings = $scope.coachReviews.totalRatings;
@@ -151,11 +160,8 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
             else
                 $scope.averageRate=$scope.coachReviews.averageRatings;
         },function(){
-        },function(){
             errorMessage(Flash,"Please try again later!")
-        });
-
-
+        });*/
     };
 
     $scope.doGetMyCoachListByUser=function(){
@@ -191,32 +197,6 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
         },function(){
             errorMessage(Flash,"Please try again later!")
         });
-    };
-
-    $scope.coachListInit=function(){
-        $scope.doGetMyCoachListByUser();
-    };
-
-    $scope.userCoachInit=function(){
-        $scope.doGetCoachListByUser();
-
-        $scope.coach = {
-            status: 'coach-view'
-        };
-    };
-
-
-    $scope.userCoachViewInit=function(){
-        $scope.disablereview=true;
-        $scope.checkReview();
-        $scope.doGetCoachDetailsByUser($routeParams.id);
-        $scope.coachView = {
-            status: 'coach-reviews'
-        };
-        $scope.doGetCoachRatings($routeParams.id);
-        $scope.subscribed=1;
-
-
     };
 
     $scope.coachReview=function(id){
@@ -300,22 +280,34 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
                 else{
                     $scope.disablereview = false;
                 }
-                /*
-                 $.each($scope.checkReviews,function(index,value){
-
-                 if(value.review_user == $scope.loginuserid){
-                 $scope.disablereview = true;
-                 }
-                 else{
-                 $scope.disablereview = false;
-                 }
-
-                 });*/
-
             });
 
         });
     };
+
+    $scope.userCoachViewInit=function(){
+        $scope.disablereview=true;
+        $scope.checkReview();
+        $scope.doGetCoachDetailsByUser($routeParams.id);
+        $scope.coachView = {
+            status: 'coach-reviews'
+        };
+        $scope.doGetCoachRatings($routeParams.id);
+        $scope.subscribed=1;
+    };
+
+    $scope.coachListInit=function(){
+        $scope.doGetMyCoachListByUser();
+    };
+
+    $scope.userCoachInit=function(){
+        $scope.doGetCoachListByUser();
+
+        $scope.coach = {
+            status: 'coach-view'
+        };
+    };
+
 }]);
 
 

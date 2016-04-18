@@ -202,6 +202,7 @@ userApp.controller('ForumsUserController',['$scope','requestHandler','Flash','$r
     $scope.isNew = true;
     $scope.title = "Add Forum";
     $scope.activeClass.forums='active';
+    $scope.forumActive=$routeParams.id;
 
     //summer note
     $scope.options = {
@@ -440,6 +441,7 @@ coachApp.controller('ForumsCoachController',['$scope','requestHandler','Flash','
     $scope.isNew = true;
     $scope.title = "Add Forum";
     $scope.activeClass.forums='active';
+    $scope.forumActive=$routeParams.id;
 
     //summer note
     $scope.options = {

@@ -9977,7 +9977,11 @@ a.forum-topic{
 
 a.forum-topic:hover{
     cursor: pointer;
-    color:#57cb85;
+    color:#f8ba01;
+}
+
+a.forum-topic.forums-active{
+    color:#f8ba01;
 }
 
 a.abuse{
