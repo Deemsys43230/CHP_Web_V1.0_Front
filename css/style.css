@@ -5522,10 +5522,10 @@ ul.post-meta li, ul.post-meta li a {
 }
 
 .sidebar .widget-popular-posts .widget-content h5 {
-	font-size: 14px;
+	font-size: 13px;
 	line-height: 19px;
 	margin-bottom: 5px;
-	font-weight: 300;
+	font-weight: 600;
 }
 
 .sidebar .widget-popular-posts .widget-content span {
@@ -8373,6 +8373,10 @@ a:hover, a:visited, a:link, a:active
 
 .text-orange{
     color:#f8ba01 !important ;
+}
+
+.text-white{
+    color:#fff !important ;
 }
 
 .coach-details p{
