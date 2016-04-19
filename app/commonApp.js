@@ -394,6 +394,34 @@ commonApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'HealthyTipsController'
             }).
+            when('/healthy-tips-10', {
+                templateUrl: '../common/healthy-tips-10.html',
+                resolve: {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'commonApp',
+                            files:[
+                                '../../app/healthyTips/healthyTipsController.js'
+                            ]
+                        })
+                    }]
+                },
+                controller:'HealthyTipsController'
+            }).
+            when('/healthy-tips-11', {
+                templateUrl: '../common/healthy-tips-11.html',
+                resolve: {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'commonApp',
+                            files:[
+                                '../../app/healthyTips/healthyTipsController.js'
+                            ]
+                        })
+                    }]
+                },
+                controller:'HealthyTipsController'
+            }).
             otherwise({
                 redirectTo: '/home'
             });
