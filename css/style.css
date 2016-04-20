@@ -15021,3 +15021,10 @@ ul.post-meta li a:hover {
     color: #fff;
     border-radius: 3px;
 }
+
+br {
+    content: "";
+    margin: 2em;
+    display: block;
+    font-size: 40%;
+}
