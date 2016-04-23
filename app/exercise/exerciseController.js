@@ -192,7 +192,7 @@ adminApp.controller('ExerciseEditController',['$q','$scope','requestHandler','Fl
 
 	//get type list for drop down
 	$scope.doGetExcerciseTypeList=function(){
-		requestHandler.getRequest("admin/listofTypes/","").then(function(response){
+		requestHandler.getRequest("admin/listofEnabledTypes/","").then(function(response){
 			$scope.typeListForDropDown = response.data.ExerciseType_Data;
 
 		},function(){

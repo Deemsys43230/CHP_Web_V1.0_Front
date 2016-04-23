@@ -15022,7 +15022,7 @@ ul.post-meta li a:hover {
     border-radius: 3px;
 }
 
-br {
+#content-page .project-media br {
     content: "";
     margin: 2em;
     display: block;
