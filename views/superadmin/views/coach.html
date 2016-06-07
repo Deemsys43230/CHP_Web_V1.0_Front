@@ -52,14 +52,13 @@
 </div>
 
 <!-- create coach popup-->
-<div id="modal" class="popupContainer" style="display:none;">
+<!--<div id="modal" class="popupContainer" style="display:none;">
     <header class="popupHeader">
         <span class="header_title">Add Coach</span>
         <span class="modal_close"><i class="fa fa-times"></i></span>
     </header>
 
     <section class="popupBody">
-        <!-- Register Form -->
         <div class="user_register">
             <form name="coachRegisterForm" novalidate>
                 <p>First name</p>
@@ -101,6 +100,88 @@
             </form>
         </div>
     </section>
+</div>-->
+
+
+<!-- login or register popup-->
+<div id="modal" class="popupContainer width-28" style="display:none;">
+    <header class="popupHeader width-100">
+        <span class="header_title">Add Coach</span>
+        <span class="modal_close pull-right"><i class="fa fa-times"></i></span>
+    </header>
+
+    <section class="popupBody">
+
+        <!-- Register Form -->
+        <div class="user_register">
+            <div flash-message="3000" ></div>
+            <form name="coachRegisterForm" novalidate>
+                <p>First name</p>
+                <input type="text" ng-pattern="/^ *([a-zA-Z]+ ?)+ *$/" ng-model="coach.firstname" name="firstname" required maxlength="24" focus-me="shouldBeOpen"/>
+                <span ng-show="coachRegisterForm.firstname.$dirty&&coachRegisterForm.firstname.$invalid">
+                    <span class="error-message" ng-show="coachRegisterForm.firstname.$error.required"><span>Required.</span></span>
+                    <span class="error-message" ng-show="coachRegisterForm.firstname.$error.pattern"><span>Enter&nbsp;valid&nbsp;Name.</span></span>
+                </span>
+                <p>Last name</p>
+                <input type="text" ng-pattern="/^ *([a-zA-Z]+ ?)+ *$/" ng-model="coach.lastname" name="lastname" required maxlength="24"/>
+                <span ng-show="coachRegisterForm.lastname.$dirty&&coachRegisterForm.lastname.$invalid">
+                    <span class="error-message" ng-show="coachRegisterForm.lastname.$error.required"><span>Required.</span></span>
+                    <span class="error-message" ng-show="coachRegisterForm.lastname.$error.pattern"><span>Enter&nbsp;valid&nbsp;Name.</span></span>
+                </span>
+
+                <p>Email</p>
+                <input type="email" name="emailid" ng-model="coach.emailid" required validate-email emailexists/>
+                <span ng-show="coachRegisterForm.emailid.$dirty&&coachRegisterForm.emailid.$invalid && !coachRegisterForm.emailid.$pristine">
+                    <span class="error-message" ng-show="coachRegisterForm.emailid.$error.required"><span>Required.</span></span>
+                    <span class="error-message" ng-show="coachRegisterForm.emailid.$error.email"><span>Enter&nbsp;valid&nbsp;Email&nbsp;ID</span></span>
+                </span>
+                <span class="error-message" ng-show="coachRegisterForm.emailid.$error.emailexists"><span>Email&nbsp;ID&nbsp;Already&nbsp;Exist.</span></span>
+                <p>Password</p>
+                <input type="password" name="password" ng-pattern="/^[^ ]+$/" ng-model="coach.password" required minlength="6" maxlength="20"/>
+                 <span ng-show="coachRegisterForm.password.$dirty&&coachRegisterForm.password.$invalid">
+                    <span class="error-message" ng-show="coachRegisterForm.password.$error.required"><span>Required.</span></span>
+                     <span class="error-message" ng-show="coachRegisterForm.password.$error.pattern"><span>Password&nbsp;doesn't&nbsp;allow&nbsp;space.</span></span>
+                      <span class="error-message" ng-show="!coachRegisterForm.password.$error.pattern&&coachRegisterForm.password.$error.minlength"><span>Should&nbsp;be&nbsp;of&nbsp;length&nbsp;6.</span></span>
+                </span>
+                <p>Confirm Password</p>
+                <input type="password" name="confirm_password" ng-model="confirm_password"  compare-to="coach.password" maxlength="20">
+                <span ng-show="coachRegisterForm.confirm_password.$dirty&&coachRegisterForm.confirm_password.$invalid">
+                    <span class="error-message" ng-show="coachRegisterForm.confirm_password.$error.compareTo"><span>Password&nbsp;don't&nbsp;match.</span></span>
+                </span>
+                <div class="action_btns margin-top-20">
+                    <div class="one_half"><a href="" data-ng-click="reset()" class="btn back_btn modal_close">Cancel</a></div>
+                    <div class="one_half last"><a id="register_form2" class="btn btn_red">Proceed <i class="fa fa-angle-double-right"></i></a></div>
+                </div>
+            </form>
+        </div>
+
+        <!-- Register Form Continuation-->
+        <div class="user_register1">
+            <form name="coachRegisterForm" novalidate>
+                <p>Specialist in </p>
+                <input type="text" name="secretanswer" ng-model="userForm.secretanswer" maxlength="150" required/>
+                <span ng-show="registerForm2.secretanswer.$invalid && !registerForm2.secretanswer.$pristine">
+                    <span class="error-message" ng-show="registerForm2.secretanswer.$error.required"><span>Required.</span></span>
+                </span>
+                <p>Qualification</p>
+                <input type="text" name="secretanswer" ng-model="userForm.secretanswer" maxlength="150" required/>
+                <span ng-show="registerForm2.secretanswer.$invalid && !registerForm2.secretanswer.$pristine">
+                    <span class="error-message" ng-show="registerForm2.secretanswer.$error.required"><span>Required.</span></span>
+                </span>
+                <p>Experience</p>
+                <input type="text" name="secretanswer" ng-model="userForm.secretanswer" maxlength="150" required/>
+                <span ng-show="registerForm2.secretanswer.$invalid && !registerForm2.secretanswer.$pristine">
+                    <span class="error-message" ng-show="registerForm2.secretanswer.$error.required"><span>Required.</span></span>
+                </span>
+                <div class="action_btns margin-top-20">
+                    <div class="one_half"><a href="" id="register_form" class="btn back_btn_register"><i class="fa fa-angle-double-left"></i> Back</a></div>
+                    <div class="one_half last"><a ng-click="register(userForm)" ng-disabled="registerForm2.$invalid" class="btn btn_red modal_close">Add Coach</a></div>
+                </div>
+            </form>
+        </div>
+    </section>
+</div>
+
 </div>
 
 <!-- Start Page Banner -->
@@ -113,6 +194,28 @@
     $("#modal_trigger").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
 
     $(function(){
+
         $(".user_register").show();
-    })
+
+        // Calling Register Form
+        $("#register_form").click(function(){
+            $(".user_register").show();
+            $(".user_register1").hide();
+            return false;
+        });
+
+        // Calling Register Form
+        $("#modal_trigger").click(function(){
+            $(".user_register").show();
+            $(".user_register1").hide();
+            return false;
+        });
+
+        // Calling Register Form
+        $("#register_form2").click(function(){
+            $(".user_register").hide();
+            $(".user_register1").show();
+            return false;
+        });
+    });
 </script>
