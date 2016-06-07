@@ -1238,7 +1238,27 @@ adminApp.config([
                     }]
                 },
                 controller:'BlogController'
-    }).otherwise({
+    }).when('/activity-logs', {
+            templateUrl: 'views/activity-logs.html',
+            resolve: {
+                loadMyFiles: [
+                    '$ocLazyLoad',
+                    function ($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name: 'adminApp',
+                            files: [
+                                '../../angular/angular-ui-bootstarp.js',
+                                '../../angular/angular-utils-pagination/dirPagination.js',
+                                '../../app/activityLogs/adminActivityLogsController.js',
+                                '../../plugin/dateRange/daterangepicker.css',
+                                '../../plugin/dateRange/daterangepicker.js'
+                            ]
+                        });
+                    }
+                ]
+            },
+            controller: 'AdminActivityLogsController'})
+        .otherwise({
         redirectTo: '/dashboard'
     });
   }

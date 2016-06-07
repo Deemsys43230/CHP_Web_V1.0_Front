@@ -1,0 +1,15 @@
+<div class="container" ng-cloak class="ng-cloak"><div class="row"><div class="col-md-12 min-height-450" ng-init="init()"><a href="#dashboard" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back to Dashboard</a><form class="form-wrapper pull-right" novalidate><input type="text" placeholder="Search here..." value="" ng-change="doGetCoursePaymentDetails();" ng-model="courseSearch" required> <button type="submit"><i class="fa fa-search"></i></button></form><div class="col-lg-5 col-md-5 col-sm-5 text-right pull-right"><input hidden id="main-start-date" ng-model="selectedDate"><div id="ui-datepicker" class="pull-right main-datepicker"><input type="text" id="main-date" class="profile_input override" block></div><div class="margin-top-5 pull-right"><i class="fa fa-calendar"></i> Date</div></div><h5 class="classic-title"><span><a href=""><i class="fa fa-money"></i>&nbsp;&nbsp;COURSE PAYMENT</a></span></h5><div ng-if="loaded"><div class="loader-style"><br><br><br><div class="loader"></div></div></div><table class="table table-striped table-bordered"><thead><tr class="warning sort-icon"><th class="col-md-1">Log ID<i ng-click="sortingLogs('2')" class="{{sortIcon[2]}} pull-right"></i></th><th class="col-md-3">Date and time</th><th class="col-md-8">Activity</th></tr></thead><tbody><tr ng-show="courses.length < 0"><td colspan="9" class="text-center">Loading new data!!</td></tr><tr ng-show="courses.length == 0"><td colspan="9" class="text-center">No Results!!!</td></tr><tr ng-repeat="course in courses"><td>{{$index}}</td><td>07/06/2016 12:29:03 PM</td><td>Exercise bicycling, mountain, uphill, vigorous disabled</td></tr></tbody></table><pagination ng-show="total_count>itemsPerPage" max-size="8" items-per-page="itemsPerPage" total-items="total_count" direction-links="true" boundary-links="true" ng-model="currentPage" ng-change="doGetCoursePaymentDetails()"></pagination></div></div></div><script type="text/javascript" src="../../js/script.js"></script><script type="text/javascript">$(document).ready(function() {
+
+        var options = {
+            maxDate : new Date(),
+            endDate : new Date(),
+            opens:'left',
+            singleDatePicker: true
+        };
+
+        $('#main-date').daterangepicker(options, function(start, end, label) {
+            angular.element(document.getElementById('main-date')).scope().initialLoadFoodAndExercise(start.format('DD/MM/YYYY'));
+            document.getElementById("main-start-date").value = start.format('DD/MM/YYYY');
+        });
+
+    });</script>
