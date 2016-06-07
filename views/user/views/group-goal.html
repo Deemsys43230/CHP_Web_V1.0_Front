@@ -40,10 +40,10 @@
                             <span ng-show="goalList.goalstatus==1" class="text-orange">In Progress</span>
                             <span ng-show="goalList.goalstatus==2" class="text-green">Completed</span>
                         </td>
-                        <td>{{goalList.members}}</td>
+                        <td>{{goalList.goalMemberCount}}</td>
                         <td>
                             <a href="#group-goal-view/{{goalList.goalid}}" class="btn-xs btn-primary">View Details</a>
-                            <a href="" ng-class="{'disabled-class': (goalList.isowner==0 || goalList.goalstatus==2)}" class="btn-xs btn-danger" ng-click="doConfirmation(goalList.goalid)">Delete</a>
+                            <a href="" ng-show="goalList.candelete==1 && goalList.goalMemberCount<= 1" class="btn-xs btn-danger" ng-click="doConfirmation(goalList.goalid)">Delete</a>
                         </td>
                     </tr>
                     </tbody>

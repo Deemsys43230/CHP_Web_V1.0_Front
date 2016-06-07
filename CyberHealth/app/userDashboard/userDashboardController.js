@@ -115,7 +115,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
                         originalmeasure = angular.copy(value);
                     }
                 });
-                $scope.userFood.servings=parseInt(result.measureid.servings);
+                $scope.userFood.servings=parseFloat(result.measureid.servings);
                 originalservings = angular.copy(result.measureid.servings);
                 $scope.current=$scope.caloriesIntake=result.measureid.calories;
                 $scope.current=$scope.current.toFixed(2);
@@ -153,7 +153,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         $scope.userFood.foodid=$scope.userSelectedFoodDetails.foodid;
         $scope.userFood.measureid=$scope.userFood.measure.measureid;
         $scope.userFood.addeddate=document.getElementById("main-start-date").value;
-        $scope.userFood.servings=parseInt($scope.userFood.servings);
+        $scope.userFood.servings=parseFloat($scope.userFood.servings);
 
         var foodInsertPromise=UserDashboardService.doInsertUserFood($scope.userFood);
         foodInsertPromise.then(function(){
@@ -172,7 +172,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         $scope.userFood.userfoodid= $scope.userFood.userfoodid;
         $scope.userFood.foodid= $scope.userFood.foodid;
         $scope.userFood.measureid=$scope.userFood.measure.measureid;
-        $scope.userFood.servings=parseInt($scope.userFood.servings);
+        $scope.userFood.servings=parseFloat($scope.userFood.servings);
         var foodInsertPromise=UserDashboardService.doUpdateUserFood($scope.userFood);
         foodInsertPromise.then(function(){
             var date = document.getElementById("main-start-date").value;

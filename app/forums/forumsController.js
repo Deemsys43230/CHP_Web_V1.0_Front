@@ -236,11 +236,11 @@ userApp.controller('ForumsUserController',['$scope','requestHandler','Flash','$r
 
            $scope.userforumlist=response.data['Forum details'];
 
-            $.each($scope.userforumlist, function(index,value) {
+            /*$.each($scope.userforumlist, function(index,value) {
                 requestHandler.postRequest("listofAnswers/", {"postid":value.postid}).then(function(response){
                     value.totalcomment=response.data.ForumDiscussionData.length;
                 });
-            });
+            });*/
             $('#showMostViewed').hide();
             $('#showMostViewed').show(700);
             $scope.loaded=false;

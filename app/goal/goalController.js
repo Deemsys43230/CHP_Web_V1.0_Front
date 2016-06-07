@@ -15,7 +15,7 @@ userApp.controller('GoalController',['$scope','requestHandler','Flash','$route',
             $scope.myRequestGoalList = [];
             $.each(response.data.MyGoallist,function(index,value){
                 requestHandler.postRequest("user/getGoalMemberList/",{"goalid" : value.goalid}).then(function(response){
-                    value.members=response.data.Goal_Data.length;
+                   // value.members=response.data.Goal_Data.length;
                     if(value.activestatus==1)$scope.myGoalList.push(value);
                     else $scope.myRequestGoalList.push(value);
                 })

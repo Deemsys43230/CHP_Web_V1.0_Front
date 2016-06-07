@@ -28,7 +28,8 @@
                     <th class="col-md-1">User ID</th>
                     <th class="col-md-4">Name</th>
                     <th class="col-md-1">Gender</th>
-                    <th class="col-md-4">Email ID</th>
+                    <th class="col-md-3">Email ID</th>
+                    <th class="col-md-1">Status</th>
                     <th class="col-md-2">Options</th>
                 </tr>
                 </thead>
@@ -38,6 +39,10 @@
                     <td>{{user.name}}</td>
                     <td><span ng-if="user.gender==1">Male</span><span ng-if="user.gender==2">Female</span></td>
                     <td>{{user.emailid}}</td>
+                    <td>
+                        <a href="" class="btn-xs btn-success hint--top"  ng-show="user.isActive==1" data-hint="Active User"><span>&#10004;</span></a>
+                        <a href="" class="btn-xs btn-danger hint--top"  ng-show="user.isActive==0" data-hint="Inactive User"><span>&#x2716;</span></a>
+                    </td>
                     <td>
                         <a href="#member-view/{{user.userid}}" class="btn-xs btn-primary">View Details</a>
                         <a href="" class="btn-xs btn-success" ng-click="doEnableDisableUser(user.userid)" ng-show="user.isenabled==0">Enable</a>
