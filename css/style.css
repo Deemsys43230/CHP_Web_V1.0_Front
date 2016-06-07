@@ -15028,3 +15028,10 @@ ul.post-meta li a:hover {
     display: block;
     font-size: 40%;
 }
+
+.reset{
+    margin-top:10px;
+    height: 30px;
+    padding:8px 0;
+    font-size:15px;
+}

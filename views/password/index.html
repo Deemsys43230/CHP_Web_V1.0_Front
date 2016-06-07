@@ -1,0 +1,73 @@
+<!doctype html>
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><html lang="en" class="no-js"> <![endif]-->
+
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+    <meta name="description" content="Cyberhealths is modern and digital way of weight loss, weight gain, and fitness program. Also we offer online courses for all health aspects.">
+
+    <!-- Basic -->
+    <title>Cyberhealths::Beta</title>
+    <!-- Bootstrap CSS  -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"/>
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css"/>
+
+
+    <!-- Custom links  -->
+    <!-- combine of style, passowrd, font-site, yellow, spinner, loader css files  -->
+    <link rel="stylesheet" type="text/css" href="../../css/style.css" media="screen"/>
+    <!-- Responsive CSS Styles  -->
+    <link rel="stylesheet" type="text/css" href="../../css/responsive.css" media="screen"/>
+    <!--Message flash-->
+    <link type="text/css" rel="stylesheet" href="../../css/angular-flash.css"/>
+    <!-- Favicons-->
+    <link rel="shortcut icon" href="../../images/favicon.ico" type="image/x-icon"/>
+
+
+
+</head>
+
+<body ng-app="passwordApp" style="background: #fff!important;">
+
+<!-- Full Body Container -->
+<div id="container" ng-controller="ResetPasswordController">
+    <div class="col-md-6 col-sm-8 col-md-offset-3 col-sm-offset-2">
+        <br/><br/><br/>
+        <div  class="text-center"><img src="../../images/cyber-logo.png"></div>
+        <br/>
+        <h1 class="margin-top-10">Reset Password</h1>
+        <hr/>
+        <!--<div class="reset text-red">Invalid Access Token. May your token has been expired</div>-->
+        <div class="reset text-green">Your Access Token has been verified successfully, please reset your password.</div>
+        <br/>
+        <h5 class="text-muted">New Password</h5>
+        <input class="search-input margin-top-10" name="price" ng-model="courseDetails.price" required>
+        <br/>
+        <h5 class="text-muted">Confirm New Password</h5>
+        <input class="search-input margin-top-10" name="price" ng-model="courseDetails.price" required>
+        <br/>
+        <a href="" class="btn btn-success">Change Password</a>
+    </div>
+</div>
+<!-- End Full Body Container -->
+
+<!-- JS  -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+<!-- ANGULAR JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.5/angular.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.5/angular-animate.min.js"></script>
+<script src="../../angular/angular-flash.min.js"></script>
+
+<!--[if IE 8]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+<!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+<script src="../../app/requestHandler.js"></script>
+<script src="../../app/resetPassword/resetPasswordController.js"></script>
+
+</body>
+</html>

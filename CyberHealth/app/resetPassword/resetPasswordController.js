@@ -1,0 +1,1 @@
+var passwordApp=angular.module("passwordApp",["requestModule","flash","ngAnimate"]);passwordApp.controller("ResetPasswordController",["$scope","requestHandler","Flash","$location",function(a,b,c,d){}]);
