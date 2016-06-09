@@ -1,1 +1,91 @@
-var requestHandlerApp=angular.module("requestModule",[]);requestHandlerApp.factory("requestHandler",["$http",function(a,b){var c={},d="http://localhost",e="http://localhost/api/v1/",f="http://localhost/Cyberhealths/cyberhealth/views/user",g="http://localhost/Cyberhealths/cyberhealth/",h=33,i=13;return c.getRequest=function(b,c){return b=e+b,a.get(b,c).then(function(a){return console.log(a),a})},c.putRequest=function(b,c){return b=e+b,a.put(b,c).then(function(a){return console.log(a),a})},c.postRequest=function(b,c){return b=e+b,a.post(b,c).then(function(a){return a})},c.deleteRequest=function(b,c){return b=e+b,a["delete"](b,{data:c}).then(function(a){return a},function(a){return a})},c.loginRequest=function(b,c){return requestURL=e+"/login/",a.post(requestURL,{username:b,password:c}).then(function(a){return a},function(a){return a})},c.paymentURL=function(){return f},c.domainURL=function(){return g},c.convertUrl=function(a){var b=d+a.substring(a.indexOf("/")+h,a.length);return b},c.convertUrlExercise=function(a){var b=a.substring(a.indexOf("/")+h,a.length-i);return b},c.alerting=function(){alert("ok deal")},c}]);
+var requestHandlerApp=angular.module("requestModule",[]);
+
+requestHandlerApp.factory("requestHandler",['$http',function($http,$location){
+    
+    var requestObj={};
+
+    //*IMPORTANT*//
+    /*For deployment*/
+  /*  var hostedDomain="http://www.deemsysinc.net/api/v1/";
+    var urlLength = 15;
+    var exerciselength=13;*/
+    var domain="http://localhost";
+    var hostedDomain="http://localhost/api/v1/";
+    var paymentURL="http://localhost/cyber/cyberhealth/views/user";
+    var domainURL="http://localhost/cyber/cyberhealth/";
+
+    var urlLength = 33;
+    var exerciselength=13;
+
+    requestObj.getRequest=function(requestURL,params){
+        requestURL=hostedDomain+requestURL;
+         return $http.get(requestURL,params).then(function (response) {
+            console.log(response);
+            return response;
+         });
+    };
+
+    requestObj.putRequest=function(requestURL,params){
+        requestURL=hostedDomain+requestURL;
+        return $http.put(requestURL,params).then(function (response) {
+            console.log(response);
+            return response;
+        });
+    };
+
+    requestObj.postRequest=function(requestURL,params){      
+         
+         requestURL=hostedDomain+requestURL;
+    
+         return $http.post(requestURL,params).then(function (response) {
+            return response;
+         });
+    };
+
+    requestObj.deleteRequest=function(requestURL,params){
+        requestURL=hostedDomain+requestURL;
+        return $http.delete(requestURL,{data:params}).then(function(response){
+            return response;
+         },function(response){
+            return response;
+        });
+    };
+
+    requestObj.loginRequest=function(username,password){
+         requestURL=hostedDomain+'/login/';
+         return $http.post(requestURL,{"username":username,"password":password}).then(function(response){
+            return response;
+        },function(response){
+             return response;
+         });
+
+    };
+
+    requestObj.paymentURL=function(){
+        return paymentURL;
+    };
+
+
+    requestObj.domainURL=function(){
+        return domainURL;
+    };
+
+    requestObj.convertUrl=function(imageurl){
+        var url = domain+imageurl.substring(imageurl.indexOf("/")+ urlLength, imageurl.length);
+        return url;
+    };
+
+    requestObj.convertUrlExercise=function(imageurl){
+      //  alert(imageurl);
+        var exerciseurl = imageurl.substring(imageurl.indexOf("/")+ urlLength, imageurl.length-exerciselength);
+        return exerciseurl;
+
+
+    };
+    requestObj.alerting=function(){
+      alert("ok deal");
+    };
+
+    return requestObj;
+
+}]);

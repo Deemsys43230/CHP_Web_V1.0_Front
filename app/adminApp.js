@@ -882,6 +882,24 @@ adminApp.config([
         ]
       },
       controller: 'FoodSuggestionController'
+    }).when('/admin-food-suggestion', {
+      templateUrl: 'views/admin-food-Suggestion.html',
+      resolve: {
+        loadMyFiles: [
+          '$ocLazyLoad',
+          function ($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name: 'adminApp',
+              files: [
+                '../../plugin/popup/style.css',
+                '../../angular/angular-utils-pagination/dirPagination.js',
+                '../../app/foodSuggestion/adminFoodSuggestionController.js'
+              ]
+            });
+          }
+        ]
+      },
+      controller: 'AdminFoodSuggestionController'
     }).when('/food-suggestion-detail/:id', {
       templateUrl: 'views/food-view-suggestion.html',
       resolve: {
@@ -936,6 +954,24 @@ adminApp.config([
         ]
       },
       controller: 'ExerciseSuggestionDetailViewController'
+    }).when('/admin-exercise-suggestion', {
+        templateUrl: 'views/admin-exercise-suggestion.html',
+        resolve: {
+            loadMyFiles: [
+                '$ocLazyLoad',
+                function ($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name: 'adminApp',
+                        files: [
+                            '../../plugin/popup/style.css',
+                            '../../angular/angular-utils-pagination/dirPagination.js',
+                            '../../app/exerciseSuggestion/adminExerciseSuggestionController.js'
+                        ]
+                    });
+                }
+            ]
+        },
+        controller: 'AdminExerciseSuggestionController'
     }).when('/course', {
       templateUrl: 'views/course.html',
       resolve: {
