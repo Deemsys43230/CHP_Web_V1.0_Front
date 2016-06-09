@@ -150,32 +150,32 @@
                 </span>
                 <div class="action_btns margin-top-20">
                     <div class="one_half"><a href="" data-ng-click="reset()" class="btn back_btn modal_close">Cancel</a></div>
-                    <div class="one_half last"><a id="register_form2" class="btn btn_red">Proceed <i class="fa fa-angle-double-right"></i></a></div>
+                    <div class="one_half last"><a id="register_form2" ng-disabled="coachRegisterForm.$invalid" class="btn btn_red">Proceed <i class="fa fa-angle-double-right"></i></a></div>
                 </div>
             </form>
         </div>
 
         <!-- Register Form Continuation-->
         <div class="user_register1">
-            <form name="coachRegisterForm" novalidate>
+            <form name="coachRegisterForm1" novalidate>
                 <p>Specialist in </p>
-                <input type="text" name="secretanswer" ng-model="userForm.secretanswer" maxlength="150" required/>
-                <span ng-show="registerForm2.secretanswer.$invalid && !registerForm2.secretanswer.$pristine">
-                    <span class="error-message" ng-show="registerForm2.secretanswer.$error.required"><span>Required.</span></span>
+                <input type="text" name="specialist" ng-model="coach.specialist" maxlength="150" required/>
+                <span ng-show="coachRegisterForm1.specialist.$invalid && !coachRegisterForm1.specialist.$pristine">
+                    <span class="error-message" ng-show="coachRegisterForm1.specialist.$error.required"><span>Required.</span></span>
                 </span>
                 <p>Qualification</p>
-                <input type="text" name="secretanswer" ng-model="userForm.secretanswer" maxlength="150" required/>
-                <span ng-show="registerForm2.secretanswer.$invalid && !registerForm2.secretanswer.$pristine">
-                    <span class="error-message" ng-show="registerForm2.secretanswer.$error.required"><span>Required.</span></span>
+                <input type="text" name="qualification" ng-model="coach.qualification" maxlength="150" required/>
+                <span ng-show="coachRegisterForm1.qualification.$invalid && !coachRegisterForm1.qualification.$pristine">
+                    <span class="error-message" ng-show="coachRegisterForm1.qualification.$error.required"><span>Required.</span></span>
                 </span>
                 <p>Experience</p>
-                <input type="text" name="secretanswer" ng-model="userForm.secretanswer" maxlength="150" required/>
-                <span ng-show="registerForm2.secretanswer.$invalid && !registerForm2.secretanswer.$pristine">
-                    <span class="error-message" ng-show="registerForm2.secretanswer.$error.required"><span>Required.</span></span>
+                <input type="text" name="experience" ng-model="coach.experience" maxlength="150" required/>
+                <span ng-show="coachRegisterForm1.experience.$invalid && !coachRegisterForm1.experience.$pristine">
+                    <span class="error-message" ng-show="coachRegisterForm1.experience.$error.required"><span>Required.</span></span>
                 </span>
                 <div class="action_btns margin-top-20">
                     <div class="one_half"><a href="" id="register_form" class="btn back_btn_register"><i class="fa fa-angle-double-left"></i> Back</a></div>
-                    <div class="one_half last"><a ng-click="register(userForm)" ng-disabled="registerForm2.$invalid" class="btn btn_red modal_close">Add Coach</a></div>
+                    <div class="one_half last"><a ng-click="doAddCoach(coach)" ng-disabled="coachRegisterForm1.$invalid" class="btn btn_red modal_close">Add Coach</a></div>
                 </div>
             </form>
         </div>

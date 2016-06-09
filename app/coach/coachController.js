@@ -34,7 +34,7 @@ adminApp.controller('CoachController',['$scope','requestHandler','Flash',functio
     $scope.doAddCoach= function () {
         //Set Coach Role
         $scope.coach.role=2;
-
+console.log($scope.coach);
       requestHandler.postRequest("admin/registerCoach/",$scope.coach).then(function(){
             successMessage(Flash,"Successfully Registered");
             /*To Close Modal*/
@@ -45,6 +45,7 @@ adminApp.controller('CoachController',['$scope','requestHandler','Flash',functio
           $scope.doGetCoachList();
           $scope.coach={};
           $scope.confirm_password="";
+          $scope.coachRegisterForm=false;
           $scope.coachRegisterForm=false;
       },function(){
            errorMessage(Flash,"Please Try Again Later");

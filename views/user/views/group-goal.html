@@ -37,8 +37,10 @@
                             <span ng-show="goalList.goaltype==2">Weight Gain</span>
                         </td>
                         <td>
-                            <span ng-show="goalList.goalstatus==1" class="text-orange">In Progress</span>
-                            <span ng-show="goalList.goalstatus==2" class="text-green">Completed</span>
+                            <span ng-show="goalList.goalstatus==1 && goalList.isExpired ==0" class="text-orange">In Progress</span>
+                            <span ng-show="goalList.goalstatus==1 && goalList.isExpired ==1" class="text-green">Completed</span>
+                            <span ng-show="goalList.goalstatus==2 && goalList.isExpired ==0" class="text-green">Completed</span>
+                            <span ng-show="goalList.goalstatus==2 && goalList.isExpired ==1" class="text-green">Completed</span>
                         </td>
                         <td>{{goalList.goalMemberCount}}</td>
                         <td>
