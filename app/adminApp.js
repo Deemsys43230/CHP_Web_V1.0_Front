@@ -1294,6 +1294,24 @@ adminApp.config([
                 ]
             },
             controller: 'AdminActivityLogsController'})
+        .when('/user-feedback', {
+            templateUrl: 'views/user-feedback.html',
+            resolve: {
+                loadMyFiles: [
+                    '$ocLazyLoad',
+                    function ($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name: 'adminApp',
+                            files: [
+                                '../../angular/angular-ui-bootstarp.js',
+                                '../../angular/angular-utils-pagination/dirPagination.js',
+                                '../../app/userFeedback/userFeedbackController.js'
+                            ]
+                        });
+                    }
+                ]
+            },
+            controller: 'UserFeedbackController'})
         .otherwise({
         redirectTo: '/dashboard'
     });

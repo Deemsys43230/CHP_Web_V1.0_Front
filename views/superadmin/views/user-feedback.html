@@ -1,0 +1,66 @@
+
+
+<!-- Start Page Banner -->
+<div class="container" ng-cloak class="ng-cloak">
+    <div class="row">
+
+        <div class="col-md-12 min-height-450" ng-init="init()">
+            <a href="#dashboard" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back to Dashboard</a>
+            <a href="" class="btn btn-sm btn-danger pull-right">Remove All</a>
+            <select class="pull-right margin-right-10 ">
+                <option>Option 1</option>
+                <option>Option 2</option>
+                <option>Option 3</option>
+                <option>Option 4</option>
+                <option>Option 5</option>
+                <option>Option 6</option>
+            </select>
+            <h5 class="pull-right margin-top-3">Search By : &nbsp;&nbsp;</h5>
+            <h5 class="classic-title"><span><a href=""><i class="fa fa-money"></i>&nbsp;&nbsp;COURSE PAYMENT</a></span></h5>
+            <div ng-if="loaded">
+                <div class="loader-style">
+                    <br/><br/><br/>
+                    <div class="loader"></div>
+                </div>
+            </div>
+            <table class="table table-striped table-bordered">
+                <thead>
+                <tr class="warning sort-icon">
+                    <th class="select-all" width="10"><input type="checkbox"/></th>
+                    <th class="col-md-3">User name</th>
+                    <th class="col-md-8">Email ID</th>
+                    <th class="col-md-8">Phone number</th>
+                    <th class="col-md-8">Platform</th>
+                    <th class="col-md-8">Feed back</th>
+                    <th class="col-md-8">Option</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-show="courses.length < 0"><td colspan="9" class="text-center">Loading new data!!</td></tr>
+                <tr ng-show="courses.length == 0"><td colspan="9" class="text-center">No Results!!!</td></tr>
+                <tr ng-repeat="course in courses">
+                    <td width="10"><input type="checkbox"/></td>
+                    <td>User name</td>
+                    <td>07/06/2016 12:29:03 PM</td>
+                    <td>Exercise bicycling, mountain, uphill, vigorous disabled</td>
+                </tr>
+                </tbody>
+            </table>
+            <pagination
+                    ng-show="total_count>itemsPerPage"
+                    max-size="8"
+                    items-per-page="itemsPerPage"
+                    total-items="total_count"
+                    direction-links="true"
+                    boundary-links="true"
+                    ng-model="currentPage"
+                    ng-change="doGetCoursePaymentDetails()">
+            </pagination>
+
+        </div>
+    </div>
+</div>
+
+<!-- End Page Banner -->
+
+<script type="text/javascript" src="../../js/script.js"></script>

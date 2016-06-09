@@ -15035,3 +15035,7 @@ ul.post-meta li a:hover {
     padding:8px 0;
     font-size:15px;
 }
+
+.select-all{
+    width:10px
+}
