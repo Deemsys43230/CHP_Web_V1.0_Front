@@ -221,17 +221,17 @@
     <p id="feedback_button"><img src="../../images/feedback.png"></p>
 
     <form id="feedback-form">
-        <input class="section-input margin-top-5" placeholder="Name"/>
-        <input class="section-input margin-top-10" placeholder="Email ID"/>
-        <input class="section-input margin-top-10" placeholder="Phone number"/>
-        <select class="full-width course-select margin-top-10">
+        <input class="section-input margin-top-5" name="name" ng-model="feedback.name" placeholder="Name"/>
+        <input class="section-input margin-top-10" name="email" ng-model="feedback.email" placeholder="Email ID"/>
+        <input class="section-input margin-top-10" name="phoneNumber" ng-model="feedback.phoneNumber" placeholder="Phone number"/>
+        <select class="full-width course-select margin-top-10" name="platform" ng-model="feedback.platform">
             <option>Select device you are using</option>
             <option>Web</option>
             <option>iOS</option>
             <option>Android</option>
         </select>
-        <textarea class="forum-textarea" placeholder="Feedback"></textarea>
-        <a href="" class="main-button">Submit feedback</a>
+        <textarea class="forum-textarea" name="feedback" ng-model="feedback.feedback" placeholder="Feedback"></textarea>
+        <a href="" class="main-button" ng-click="addUserFeedback()">Submit feedback</a>
     </form>
 </div>
 

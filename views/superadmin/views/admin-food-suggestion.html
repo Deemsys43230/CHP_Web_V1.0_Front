@@ -23,32 +23,32 @@
                         <h5 class="margin-top-5 pull-right">Country :</h5>
                     </div>
                     <div class="col-sm-2">
-                        <select class="form-control">
-                            <option>India</option>
-                            <option>United State</option>
-                            <option>Both</option>
+                        <select class="form-control" name="country">
+                            <option value="1">India</option>
+                            <option value="2">United State</option>
+                            <option value="3">Both</option>
                         </select>
                     </div>
                     <div class="col-sm-2">
                         <h5 class="margin-top-5 pull-right">Session :</h5>
                     </div>
                     <div class="col-sm-2">
-                        <select class="form-control">
-                            <option>Break Fast</option>
-                            <option>Brunch</option>
-                            <option>Lunch</option>
-                            <option>Snacks</option>
-                            <option>Dinner</option>
+                        <select class="form-control" name="session">
+                            <option value="1">Break Fast</option>
+                            <option value="2">Brunch</option>
+                            <option value="3">Lunch</option>
+                            <option value="4">Snacks</option>
+                            <option value="5">Dinner</option>
                         </select>
                     </div>
                     <div class="col-sm-2">
                         <h5 class="margin-top-5 pull-right">Category :</h5>
                     </div>
                     <div class="col-sm-2">
-                        <select class="form-control">
-                            <option>Obesity</option>
-                            <option>Diabetes</option>
-                            <option>Normal</option>
+                        <select class="form-control" name="category">
+                            <option value="1">Obesity</option>
+                            <option value="2">Diabetes</option>
+                            <option value="3">Normal</option>
                         </select>
                     </div>
                 </div>
@@ -64,7 +64,7 @@
                         </select>
                     </div>
                     <div class="col-sm-2">
-                        <a href="" class="btn btn-success">Add Food</a>
+                        <a href="" class="btn btn-success" ng-click="addSuggestFood()">Add Food</a>
                     </div>
                 </div>
                 <table class="col-sm-12 table table-bordered table-striped margin-top-15">
@@ -76,14 +76,15 @@
                     </tr>
                     </thead>
                     <tbody>
+                    <!-- <tr dir-paginate="foodsuggestion in foodSuggestedList | itemsPerPage: 9" ng-show="foodSuggestedList.length!=0">-->
                     <tr>
                         <td>id</td>
                         <td>Food name</span></td>
-                        <td><a href="" class="btn btn-xs btn-danger">Remove</a></td>
+                        <td><a href="" class="btn btn-xs btn-danger" ng-click="removeSuggestFood(id)">Remove</a></td>
                     </tr>
-                    <tr>
+                    <!--<tr ng-show="foodSuggestedList.length==0">
                         <td colspan="3" class="text-center">No Records Found !!!</td>
-                    </tr>
+                    </tr>-->
                     </tbody>
                 </table>
 

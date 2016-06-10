@@ -673,6 +673,10 @@ commonApp.controller('LoginController',['$scope','requestHandler','Flash','$wind
         });
     };
 
+    $scope.addUserFeedback=function(){
+
+    };
+
 }]);
 
 //To Display success message

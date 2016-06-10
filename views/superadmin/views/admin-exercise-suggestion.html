@@ -23,10 +23,10 @@
                         <h5 class="margin-top-5">Category</h5>
                     </div>
                     <div class="col-sm-3">
-                        <select class="form-control">
-                            <option>Obesity</option>
-                            <option>Diabetes</option>
-                            <option>Normal</option>
+                        <select class="form-control" name="exerciseCategory" ng-model="suggestion.exerciseCategory" ng-change="getSuggestedExercise()">
+                            <option value="1" >Obesity</option>
+                            <option value="2">Diabetes</option>
+                            <option value="3">Normal</option>
                         </select>
                     </div>
                 </div>
@@ -42,7 +42,7 @@
                         </select>
                     </div>
                     <div class="col-sm-2">
-                        <a href="" class="btn btn-success">Add Exercise</a>
+                        <a href="" class="btn btn-success" ng-click="addSuggestExercise()">Add Exercise</a>
                     </div>
                 </div>
                 <table class="col-sm-12 table table-bordered table-striped margin-top-15">
@@ -54,21 +54,22 @@
                     </tr>
                     </thead>
                     <tbody>
+                   <!-- <tr dir-paginate="exercisesuggestion in exerciseSuggestedList | itemsPerPage: 9" ng-show="exerciseSuggestedList.length!=0">-->
                     <tr>
                         <td>id</td>
                         <td>Exercise name</span></td>
-                        <td><a href="" class="btn btn-xs btn-danger">Remove</a></td>
+                        <td><a href="" class="btn btn-xs btn-danger" ng-click="removeSuggestExercise(id)">Remove</a></td>
                     </tr>
-                    <tr>
+                    <!--<tr ng-show="exerciseSuggestedList.length==0">
                         <td colspan="3" class="text-center">No Records Found !!!</td>
-                    </tr>
+                    </tr>-->
                     </tbody>
                 </table>
 
             </div>
 
             <!-- Start Pagination -->
-            <dir-pagination-controls ng-show="paginationLoad"  direction-links="true"  boundary-links="true"> </dir-pagination-controls>
+          <!--  <dir-pagination-controls ng-show="paginationLoad"  direction-links="true"  boundary-links="true"> </dir-pagination-controls>-->
             <!-- End Pagination -->
         </div>
     </div>

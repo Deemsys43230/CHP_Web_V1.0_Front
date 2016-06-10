@@ -3,69 +3,39 @@ var adminApp = angular.module('adminApp', ['ngRoute','oc.lazyLoad','requestModul
 adminApp.controller('AdminFoodSuggestionController',['$scope','requestHandler','Flash',function($scope,requestHandler,Flash) {
     $scope.activeClass = {adminfoodsuggestion: 'active'};
 
-    $scope.doGetAllFoodSuggestion = function () {
-        $scope.loaded = true;
+    $scope.getSuggestedFood=function(){
 
-        requestHandler.getRequest("admin/getFoodSuggestion/", "").then(function (response) {
-            $scope.foodSuggestionList = response.data.Food_Suggestion_Data;
-            $scope.loaded = false;
-            $scope.paginationLoad = true;
-        }, function () {
-            errorMessage(Flash, "Please try again later!")
-        });
+        $scope.foodSuggestedList="";
+        /* requestHandler.getRequest("admin/getExerciseSuggestion/", "").then(function (response) {
+         $scope.exerciseSuggestionList = response.data.Exercise_Suggestion_Data;
+         $scope.loaded = false;
+         $scope.paginationLoad = true;
+         }, function () {
+         errorMessage(Flash, "Please try again later!")
+         });*/
     };
 
-    $scope.doApproveFoodSuggestion=function(id){
-        $scope.loaded=true;
-        requestHandler.postRequest("admin/approveFoodSuggestion/",{'suggestionid':id}).then(function(response){
-            $scope.loaded=false;
-            $scope.doGetAllFoodSuggestion();
-            successMessage(Flash,"Successfully Updated");
+    $scope.addSuggestFood=function(){
 
-        },function(){
-            errorMessage(Flash,"Please try again later!")
-        });
     };
 
-    $scope.doRejectFoodSuggestion=function(id){
-        $scope.loaded=true;
-        requestHandler.postRequest("admin/rejectFoodSuggestion/",{'suggestionid':id}).then(function(response){
-            $scope.loaded=false;
-            $scope.doGetAllFoodSuggestion();
-            successMessage(Flash,"Successfully Updated");
+    $scope.removeSuggestFood=function(id){
 
-        },function(){
-            errorMessage(Flash,"Please try again later!")
-        });
+        /*$scope.loaded=true;
+         requestHandler.postRequest("admin/rejectExerciseSuggestion/",{'suggestionid':id}).then(function(response){
+         $scope.loaded=false;
+         $scope.doGetAllExerciseSuggestion();
+         successMessage(Flash,"Successfully Updated");
+
+         },function(){
+         errorMessage(Flash,"Please try again later!")
+         });*/
     };
 
-    //Initial Load
-    $scope.init = function () {
-        $scope.paginationLoad = false;
-        $scope.doGetAllFoodSuggestion();
+    $scope.init=function(){
+        $scope.getSuggestedFood();
     };
 
+    $scope.init();
 }]);
 
-adminApp.controller('FoodSuggestionViewController',['$scope','requestHandler','Flash','$routeParams','$sce',function($scope,requestHandler,Flash,$routeParams,$sce) {
-    $scope.activeClass = {suggestion: 'active'};
-
-    //Exercise Detail View Suggestion
-    $scope.doViewFoodSuggestion= function () {
-        $scope.loaded = true;
-        requestHandler.postRequest("admin/getFoodSuggestionDetail/",{'suggestionid':$routeParams.id}).then(function(response){
-            $scope.myImgSrc = $sce.trustAsResourceUrl(response.data.Food_Suggestion_Data.user_imageurl+"?decache="+Math.random());
-            $scope.viewFoodSuggestionDetails = response.data.Food_Suggestion_Data;
-            //View the image in ng-src for view testimonials
-
-            $scope.loaded = false;
-            $scope.paginationLoad = true;
-
-        },  function () {
-            errorMessage(Flash, "Please try again later!")
-        });
-    };
-
-    $scope.doViewFoodSuggestion();
-
-}]);

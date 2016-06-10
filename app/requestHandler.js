@@ -11,8 +11,8 @@ requestHandlerApp.factory("requestHandler",['$http',function($http,$location){
     var exerciselength=13;*/
     var domain="http://localhost";
     var hostedDomain="http://localhost/api/v1/";
-    var paymentURL="http://localhost/cyber/cyberhealth/views/user";
-    var domainURL="http://localhost/cyber/cyberhealth/";
+    var paymentURL="http://localhost/cyberhealths/cyberhealth/views/user";
+    var domainURL="http://localhost/cyberhealths/cyberhealth/";
 
     var urlLength = 33;
     var exerciselength=13;
