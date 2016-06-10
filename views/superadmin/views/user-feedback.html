@@ -6,17 +6,14 @@
 
         <div class="col-md-12 min-height-450" ng-init="init()">
             <a href="#dashboard" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back to Dashboard</a>
-            <a href="" class="btn btn-sm btn-danger pull-right">Remove All</a>
-            <select class="pull-right margin-right-10 ">
-                <option>Option 1</option>
-                <option>Option 2</option>
-                <option>Option 3</option>
-                <option>Option 4</option>
-                <option>Option 5</option>
-                <option>Option 6</option>
+            <a class="target_button red_button remove-button pull-right"><i class="fa fa-trash"></i> &nbsp;Remove All</a>
+            <select class="pull-right margin-right-10 select-feedback">
+                <option>Web</option>
+                <option>iOS</option>
+                <option>Android</option>
             </select>
-            <h5 class="pull-right margin-top-3">Search By : &nbsp;&nbsp;</h5>
-            <h5 class="classic-title"><span><a href=""><i class="fa fa-money"></i>&nbsp;&nbsp;COURSE PAYMENT</a></span></h5>
+            <h5 class="pull-right margin-top-3">Search Platform By : &nbsp;&nbsp;</h5>
+            <h5 class="classic-title"><span><a href=""><i class="fa fa-envelope"></i>&nbsp;&nbsp;USERS FEEDBACK</a></span></h5>
             <div ng-if="loaded">
                 <div class="loader-style">
                     <br/><br/><br/>
@@ -27,12 +24,13 @@
                 <thead>
                 <tr class="warning sort-icon">
                     <th class="select-all" width="10"><input type="checkbox"/></th>
-                    <th class="col-md-3">User name</th>
-                    <th class="col-md-8">Email ID</th>
-                    <th class="col-md-8">Phone number</th>
-                    <th class="col-md-8">Platform</th>
-                    <th class="col-md-8">Feed back</th>
-                    <th class="col-md-8">Option</th>
+                    <th class="col-md-2">User name</th>
+                    <th class="col-md-2">Email ID</th>
+                    <th class="col-md-1">Date</th>
+                    <th class="col-md-1">Phone no.</th>
+                    <th class="col-md-1">Platform</th>
+                    <th class="col-md-4">Feed back</th>
+                    <th class="col-md-1">Option</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -41,8 +39,12 @@
                 <tr ng-repeat="course in courses">
                     <td width="10"><input type="checkbox"/></td>
                     <td>User name</td>
-                    <td>07/06/2016 12:29:03 PM</td>
+                    <td>username@gmail.com</td>
+                    <td>07/06/2016</td>
+                    <td>6346783423</td>
+                    <td>iOS</td>
                     <td>Exercise bicycling, mountain, uphill, vigorous disabled</td>
+                    <td><a href="" class="btn btn-xs btn-danger">Remove</a></td>
                 </tr>
                 </tbody>
             </table>

@@ -7102,6 +7102,18 @@ a.target_button{
     box-shadow: 0px 0px 1px rgba(0,0,0,0.2);
 }
 
+a.target_button.remove-button{
+    margin-top: 0!important;
+    font-weight: normal!important;
+    padding:4px 20px 5px 20px !important;
+}
+
+select.select-feedback{
+    padding:5px 7px;
+    width: 120px;
+    line-height:14px;
+}
+
 .green_button{
     background-color:limegreen;
 }
