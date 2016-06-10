@@ -13,7 +13,7 @@ module.exports=function(grunt){
                     {
                         mangle: false,
                         expand: true,
-                        src: ['app/*.js','app/**/*.js','js/*.js','plugin/**/*.js','angular/**/*.js','angular/*.js','!app/userDashboard/userDashboardController.js','!js/analytics.js'],
+                        src: ['app/*.js','app/**/*.js','js/*.js','plugin/**/*.js','angular/**/*.js','angular/*.js','!app/userDashboard/userDashboardController.js','css/*.css','!js/analytics.js'],
                         dest: 'CyberHealth/'
                     }
                 ]

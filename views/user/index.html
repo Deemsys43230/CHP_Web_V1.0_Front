@@ -254,6 +254,24 @@
 </div>
 <!-- End Container -->
 
+<div id="form">
+    <p id="feedback_button"><img src="../../images/feedback.png"></p>
+
+    <form id="feedback-form">
+        <input class="section-input margin-top-5" placeholder="Name"/>
+        <input class="section-input margin-top-10" placeholder="Email ID"/>
+        <input class="section-input margin-top-10" placeholder="Phone number"/>
+        <select class="full-width course-select margin-top-10">
+            <option>Select device you are using</option>
+            <option>Web</option>
+            <option>iOS</option>
+            <option>Android</option>
+        </select>
+        <textarea class="forum-textarea" placeholder="Feedback"></textarea>
+        <a href="" class="main-button">Submit feedback</a>
+    </form>
+</div>
+
 <!-- Go To Top Link -->
 <a href="#" class="back-to-top"><i class="fa fa-angle-up"></i></a>
 
@@ -335,6 +353,12 @@
             cursorborder: "1px solid #424242",
             cursorborderradius: 0
         });  // The document page (body)
+    });
+
+    $(document).ready(function(){
+        $("#feedback_button").click(function(){
+            $("#feedback-form").slideToggle();
+        });
     });
 
 </script>
