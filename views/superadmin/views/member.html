@@ -40,8 +40,8 @@
                     <td><span ng-if="user.gender==1">Male</span><span ng-if="user.gender==2">Female</span></td>
                     <td>{{user.emailid}}</td>
                     <td>
-                        <a href="" class="btn-xs btn-success hint--top"  ng-show="user.isActive==1" data-hint="Active User"><span>&#10004;</span></a>
-                        <a href="" class="btn-xs btn-danger hint--top"  ng-show="user.isActive==0" data-hint="Inactive User"><span>&#x2716;</span></a>
+                        <span class="text-green"  ng-show="user.isActive==1"><i class="fa fa-caret-up" aria-hidden="true"></i> Active</span>
+                        <span class="text-red"  ng-show="user.isActive==0"><i class="fa fa-caret-down" aria-hidden="true"></i> InActive</span>
                     </td>
                     <td>
                         <a href="#member-view/{{user.userid}}" class="btn-xs btn-primary">View Details</a>
@@ -49,7 +49,7 @@
                         <a href="" class="btn-xs btn-danger" ng-click="doEnableDisableUser(user.userid)" ng-hide="user.isenabled==0">Disable</a>
                     </td>
                 </tr>
-                <tr ng-show="userList.length==0 || !userfilter.length "><td colspan="5" class="text-center">No Records Found !!!</td></tr>
+                <tr ng-show="userList.length==0 || !userfilter.length "><td colspan="6" class="text-center">No Records Found !!!</td></tr>
                 </tbody>
             </table>
             <!-- Start Pagination -->

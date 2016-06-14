@@ -145,7 +145,7 @@
                 </span>
                 <p>Confirm Password</p>
                 <input type="password" name="confirm_password" ng-model="confirm_password"  compare-to="coach.password" maxlength="20">
-                <span ng-show="coachRegisterForm.confirm_password.$dirty&&coachRegisterForm.confirm_password.$invalid">
+                <span ng-show="coachRegisterForm.confirm_password.$dirty&&coachRegisterForm.confirm_password.$invalid&& !coachRegisterForm.confirm_password.$pristine">
                     <span class="error-message" ng-show="coachRegisterForm.confirm_password.$error.compareTo"><span>Password&nbsp;don't&nbsp;match.</span></span>
                 </span>
                 <div class="action_btns margin-top-20">
@@ -159,19 +159,20 @@
         <div class="user_register1">
             <form name="coachRegisterForm1" novalidate>
                 <p>Specialist in </p>
-                <input type="text" name="specialist" ng-model="coach.specialist" maxlength="150" required/>
-                <span ng-show="coachRegisterForm1.specialist.$invalid && !coachRegisterForm1.specialist.$pristine">
+                <input type="text" name="specialist" ng-model="coach.specialist" maxlength="30" required/>
+                <span ng-show="coachRegisterForm1.specialist.$invalid &&coachRegisterForm1.specialist.$dirty&& !coachRegisterForm1.specialist.$pristine">
                     <span class="error-message" ng-show="coachRegisterForm1.specialist.$error.required"><span>Required.</span></span>
                 </span>
                 <p>Qualification</p>
-                <input type="text" name="qualification" ng-model="coach.qualification" maxlength="150" required/>
-                <span ng-show="coachRegisterForm1.qualification.$invalid && !coachRegisterForm1.qualification.$pristine">
+                <input type="text" name="qualification" ng-model="coach.qualification" maxlength="30" required/>
+                <span ng-show="coachRegisterForm1.qualification.$invalid && coachRegisterForm1.qualification.$dirty&& !coachRegisterForm1.qualification.$pristine">
                     <span class="error-message" ng-show="coachRegisterForm1.qualification.$error.required"><span>Required.</span></span>
                 </span>
                 <p>Experience</p>
-                <input type="text" name="experience" ng-model="coach.experience" maxlength="150" required/>
-                <span ng-show="coachRegisterForm1.experience.$invalid && !coachRegisterForm1.experience.$pristine">
+                <input type="text" name="experience" ng-pattern="/^\d+$/" ng-model="coach.experience" maxlength="30" required/>
+                <span ng-show="coachRegisterForm1.experience.$invalid && coachRegisterForm1.experience.$dirty && !coachRegisterForm1.experience.$pristine">
                     <span class="error-message" ng-show="coachRegisterForm1.experience.$error.required"><span>Required.</span></span>
+                     <span class="error-message" ng-show="coachRegisterForm1.experience.$error.pattern"><span>Invalid &nbsp;Data.</span></span>
                 </span>
                 <div class="action_btns margin-top-20">
                     <div class="one_half"><a href="" id="register_form" class="btn back_btn_register"><i class="fa fa-angle-double-left"></i> Back</a></div>
