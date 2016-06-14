@@ -587,7 +587,7 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
 }]);
 
 //Initial Controller for Username
-userApp.controller("UserInitialController",['$scope','requestHandler','$location',function($scope,requestHandler,$location){
+userApp.controller("UserInitialController",['$scope','requestHandler','$location','Flash',function($scope,requestHandler,$location,Flash){
     $scope.hideValue=1;
 
     requestHandler.getRequest("getUserId/","").then(function(response){
@@ -609,6 +609,16 @@ userApp.controller("UserInitialController",['$scope','requestHandler','$location
     };
 
     $scope.getSocialMediaDetails();
+
+    $scope.addUserFeedback=function(){
+        $scope.userFeedback= FeedbackService.addUserFeedback($scope.feedback);
+
+        $scope.userFeedback.then(function(result){
+            successMessage(Flash,"Successfully posted");
+            $scope.feedback={};
+            $scope.feedbackForm.$setPristine();
+        });
+    };
 
 }]);
 

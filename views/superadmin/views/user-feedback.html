@@ -7,7 +7,7 @@
         <div class="col-md-12 min-height-450" ng-init="init()">
             <a href="#dashboard" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back to Dashboard</a>
             <a class="target_button red_button remove-button pull-right"><i class="fa fa-trash"></i> &nbsp;Remove All</a>
-            <select class="pull-right margin-right-10 select-feedback" ng-change="getUserFeedBackDetails()">
+            <select class="pull-right margin-right-10 select-feedback"ng-model="platform" ng-change="getUserFeedBackDetails()">
                 <option>Web</option>
                 <option>iOS</option>
                 <option>Android</option>
@@ -34,20 +34,20 @@
                 </tr>
                 </thead>
                 <tbody>
-                <!-- <tr dir-paginate="userFeedback in userFeedbackList | itemsPerPage: 9" ng-show="userFeedbackList.length!=0">-->
-                <tr>
-                    <td width="10"><input type="checkbox" value="{{county.id}}" name="group" id="{{county.id}}"/></td>
-                    <td>User name</td>
-                    <td>username@gmail.com</td>
-                    <td>07/06/2016</td>
-                    <td>6346783423</td>
-                    <td>iOS</td>
-                    <td>Exercise bicycling, mountain, uphill, vigorous disabled</td>
+                 <tr ng-repeat="userFeedback in userFeedbackList" ng-show="userFeedbackList.length!=0">
+
+                    <td width="10"><input type="checkbox" value="{{userFeedback.feedbackid}}" name="group" id="{{userFeedback.feedbackid}}"/></td>
+                    <td>{{userFeedback.name}}</td>
+                    <td>{{userFeedback.emailId}}</td>
+                    <td>{{userFeedback.datetime}}</td>
+                    <td>{{userFeedback.mobile}}</td>
+                    <td>{{userFeedback.platform}}</td>
+                    <td>{{userFeedback.description}}</td>
                     <td><a href="" class="btn btn-xs btn-danger">Remove</a></td>
                 </tr>
-                <!--<tr ng-show="userFeedbackList.length==0">
+               <tr ng-show="userFeedbackList.length==0">
                         <td colspan="8" class="text-center">No Records Found !!!</td>
-                    </tr>-->
+                    </tr>
                 </tbody>
             </table>
             <pagination

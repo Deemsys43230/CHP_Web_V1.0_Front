@@ -1,0 +1,1 @@
+var feedbackApp=angular.module("feedbackServiceModule",["requestModule"]);feedbackApp.factory("FeedbackService",["requestHandler",function(a){var b={};return b.addUserFeedback=function(b){return a.postRequest("addFeedback/",b).then(function(a){return a})},b}]);

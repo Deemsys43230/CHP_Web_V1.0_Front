@@ -493,6 +493,16 @@ coachApp.controller("CoachInitialController",['$scope','requestHandler','$locati
     };
 
     $scope.getSocialMediaDetails();
+
+    $scope.addUserFeedback=function(){
+        $scope.userFeedback= FeedbackService.addUserFeedback($scope.feedback);
+
+        $scope.userFeedback.then(function(result){
+            successMessage(Flash,"Successfully posted");
+            $scope.feedback={};
+            $scope.feedbackForm.$setPristine();
+        });
+    };
 }]);
 
 //Controller For Logout

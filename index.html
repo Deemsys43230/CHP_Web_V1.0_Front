@@ -375,18 +375,32 @@
 <div id="form">
     <p id="feedback_button"><img src="images/feedback.png"></p>
 
-    <form id="feedback-form">
-        <input class="section-input margin-top-5" placeholder="Name"/>
-        <input class="section-input margin-top-10" placeholder="Email ID"/>
-        <input class="section-input margin-top-10" placeholder="Phone number"/>
-        <select class="full-width course-select margin-top-10">
-            <option>Select device you are using</option>
-            <option>Web</option>
-            <option>iOS</option>
-            <option>Android</option>
+    <form id="feedback-form" name="feedbackForm">
+        <div flash-message="2000" ></div>
+        <input class="section-input margin-top-5" name="name" ng-model="feedback.name" placeholder="Name*" required/>
+         <span ng-show="feedbackForm.name.$dirty&&feedbackForm.name.$invalid">
+             <span class="error-message" ng-show="feedbackForm.name.$error.required"><span>Required.</span></span>
+         </span>
+        <input type="email" class="section-input margin-top-10" name="emailid" ng-model="feedback.emailId" placeholder="Email ID*" validate-email required/>
+        <span ng-show="feedbackForm.emailid.$dirty&&feedbackForm.emailid.$invalid">
+             <span class="error-message" ng-show="feedbackForm.emailid.$error.required"><span>Required.</span></span>
+             <span class="error-message" ng-show="feedbackForm.emailid.$error.email"><span>Enter&nbsp;valid&nbsp;Email&nbsp;ID.</span></span>
+        </span>
+        <input class="section-input margin-top-10" name="mobile" ng-model="feedback.mobile" placeholder="Phone number"/>
+        <select class="full-width course-select margin-top-10" name="platform" ng-model="feedback.platform" required>
+            <option value="">Select your platform*</option>
+            <option value="WEB">WEB</option>
+            <option value="IOS">IOS</option>
+            <option value="ANDROID">ANDROID</option>
         </select>
-        <textarea class="forum-textarea" placeholder="Feedback"></textarea>
-        <a href="" class="main-button">Submit feedback</a>
+        <span ng-show="feedbackForm.platform.$dirty&&feedbackForm.platform.$invalid">
+             <span class="error-message textarea-errormessage55" ng-show="feedbackForm.platform.$error.required"><span>Required.</span></span>
+         </span>
+        <textarea class="forum-textarea" name="description" ng-model="feedback.description" placeholder="Description* " required></textarea>
+            <span ng-show="feedbackForm.description.$dirty&&feedbackForm.description.$invalid ">
+             <span class="error-message textarea-errormessage-70" ng-show="feedbackForm.description.$error.required"><span>Required.</span></span>
+         </span>
+        <a href="" class="btn main-button" ng-click="addUserFeedback()" ng-disabled="feedbackForm.$invalid">Submit feedback </a>
     </form>
 </div>
 
@@ -438,6 +452,7 @@
 <script type="text/javascript" src="plugin/popup/jquery.leanModal.min.js"></script>
 
 <script src="app/requestHandler.js"></script>
+<script src="app/userFeedback/userFeedbackService.js"></script>
 <script src="app/commonApp.js"></script>
 <script src="js/home-index-script.js"></script>
 

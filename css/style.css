@@ -8454,8 +8454,15 @@ a:hover, a:visited, a:link, a:active
 .textarea-errormessage30{
 	top: 30px;
 }
+
+.textarea-errormessage-40{
+    top: -40px;
+}
 .textarea-errormessage-60{
 	top: -60px;
+}
+.textarea-errormessage-70{
+    top: -70px;
 }
 .textarea-errormessage-100{
 	top: -100px;
