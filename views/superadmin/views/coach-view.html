@@ -22,7 +22,7 @@
                 <div class="col-md-4 no-padding"><strong>Qualification</strong></div>
                 <div class="col-md-8">: {{usercoachdetails.qualification}}</div>
                 <div class="col-md-4 no-padding"><strong>Experience</strong></div>
-                <div class="col-md-8">: {{usercoachdetails.experience}} years</div>
+                <div class="col-md-8">:<span ng-show="years>0"> {{years}} <span ng-show="years==1">year</span><span ng-show="years>1">years</span> </span><span ng-show="months>0"> {{months}} <span ng-show="months==1">month</span><span ng-show="months>1"> months</span></span></div>
                 <div class="col-md-4 no-padding"><strong>Contact</strong></div>
                 <div class="col-md-8">: {{usercoachdetails.phone}}</div>
                 <div class="col-md-4 no-padding"><strong>DOB</strong></div>

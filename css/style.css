@@ -7113,7 +7113,17 @@ select.select-feedback{
     width: 120px;
     line-height:14px;
 }
+.search-feedback{
+    padding:5px 7px;
+    width: 250px;
+    line-height:14px;
 
+}
+select.select-activity{
+    padding:5px 7px;
+    width: 160px;
+    line-height:14px;
+}
 .green_button{
     background-color:limegreen;
 }
@@ -7125,7 +7135,7 @@ select.select-feedback{
 }
 
 .red_button{
-    background-color:#ff4c4c !important;
+    background-color:#d43f3a !important;
 }
 
 .red_button:hover{

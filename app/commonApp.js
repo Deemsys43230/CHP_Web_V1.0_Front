@@ -678,7 +678,7 @@ commonApp.controller('LoginController',['$scope','requestHandler','Flash','$wind
         $scope.userFeedback= FeedbackService.addUserFeedback($scope.feedback);
 
         $scope.userFeedback.then(function(result){
-            successMessage(Flash,"Successfully posted");
+            successMessage(Flash,"Thanks for your feedback!");
             $scope.feedback={};
             $scope.feedbackForm.$setPristine();
         });

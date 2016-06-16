@@ -2,6 +2,7 @@ var adminApp = angular.module('adminApp', ['ngRoute','oc.lazyLoad','requestModul
 
 adminApp.controller('AdminActivityLogsController',['$scope','requestHandler','Flash','$routeParams',function($scope,requestHandler,Flash,$routeParams) {
 
+    $scope.searchVal = 1;
     $scope.loaddisable=false;
     $scope.currentPage=1;
         //Main Function returns the list
@@ -64,8 +65,7 @@ adminApp.controller('AdminActivityLogsController',['$scope','requestHandler','Fl
         var selectedDate = new Date();
         var dd = selectedDate.getDate();
         var mm = selectedDate.getMonth()+1; //January is 0!
-
-        var yyyy = selectedDate.getFullYear();
+         var yyyy = selectedDate.getFullYear();
         if(dd<10){
             dd='0'+dd
         }
@@ -84,7 +84,6 @@ adminApp.controller('AdminActivityLogsController',['$scope','requestHandler','Fl
         //Object + 1 icons needed NOTE //Initialize Icon
         $scope.sortIcon=['fa fa-caret-down','fa fa-caret-down'];
         $scope.doGetActivityLogs($scope.selectedDate);
-
 
     };
 

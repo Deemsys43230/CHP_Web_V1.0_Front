@@ -7,34 +7,24 @@
         <div class="col-md-12 min-height-450" ng-init="init()">
             <a href="#dashboard" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back to Dashboard</a>
             <!-- Stat Search -->
-            <form class="form-wrapper pull-right" novalidate>
-                <input type="text" placeholder="Search here..." value="" ng-change="doGetActivityLogsPage(selectedDate)" ng-model="searchText" required>
-                <button type="submit" ><i class="fa fa-search"></i></button>
-            </form>
-            <div class="col-lg-5 col-md-5 col-sm-5 text-right pull-right">
+
+            <div ng-show="searchVal==1" class="text-right pull-right">
                 <input hidden id="main-start-date" ng-model="selectedDate">
                 <div id="ui-datepicker" class="pull-right main-datepicker">
                     <input type="text" id="main-date" class="profile_input override" block>
-                    <!--<div class="input-group ui-datepicker">
-                        <input ng-click="open($event)" ng-change="initialLoadFoodAndExercise()" type="text"
-                               ng-keypress="prevent()"
-                               class="profile_input override"
-                               id = "popup"
-                               uib-datepicker-popup="{{format}}"
-                               ng-model="selectedDate"
-                               is-open="opened"
-                               min="minDate"
-                               max="maxDate"
-                               popup-placement="auto top-right"
-                               data-show-weeks="false"
-                               show-button-bar="false"
-                               datepicker-options="dateOptions"
-                               date-disabled="disabled(date, mode)"
-                               ng-required="true"
-                               close-text="Close" required>
-                    </div>-->
                 </div>
                 <div class="margin-top-5 pull-right"><i class="fa fa-calendar"></i> Date</div>
+            </div>
+            <form ng-hide="searchVal==1" class="form-wrapper pull-right margin-right-10" novalidate>
+                <input type="text" placeholder="Search here..." value="" ng-change="doGetActivityLogsPage(selectedDate)" ng-model="searchText" required>
+                <button type="submit" ><i class="fa fa-search"></i></button>
+            </form>
+            <div>
+                <select class="pull-right margin-right-10 select-activity"   ng-model="searchVal" ng-init="searchVal='1'">
+                    <option value="1">Search By Date</option>
+                    <option value="0">Search By Activity</option>
+
+                </select>
             </div>
             <!-- End Search -->
             <h5 class="classic-title"><span><a href=""><i class="fa fa-calendar-check-o"></i>&nbsp;&nbsp;ACTIVITY LOGS</a></span></h5>

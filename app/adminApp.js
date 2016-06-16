@@ -893,7 +893,8 @@ adminApp.config([
               files: [
                 '../../plugin/popup/style.css',
                 '../../angular/angular-utils-pagination/dirPagination.js',
-                '../../app/foodSuggestion/adminFoodSuggestionController.js'
+                '../../app/foodSuggestion/adminFoodSuggestionController.js',
+                 '../../app/userDashboard/userDashboardService.js',
               ]
             });
           }

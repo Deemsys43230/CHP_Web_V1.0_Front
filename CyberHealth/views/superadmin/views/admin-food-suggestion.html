@@ -1,1 +1,106 @@
-<div class="container" ng-cloak class="ng-cloak"><div class="row"><div class="col-md-3"><h4 class="classic-title"><span>Exercise Management</span></h4><div ng-include src="'views/food-menu.html'" onload="activeClass"></div></div><div class="col-md-9" ng-init="init()"><a href="#dashboard" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back to Dashboard</a><div flash-message="2000" class="col-md-4 pull-right no-padding"></div><h4 class="classic-title"><span><i class="fa fa-edit"></i> &nbsp;Admin Food Suggestion</span></h4><div ng-if="loaded"><div class="loader-style"><div class="loader"></div></div></div><div class="min-height-385"><div class="col-sm-12 no-padding margin-top-10"><div class="col-sm-2"><h5 class="margin-top-5 pull-right">Country :</h5></div><div class="col-sm-2"><select class="form-control" name="country"><option value="1">India</option><option value="2">United State</option><option value="3">Both</option></select></div><div class="col-sm-2"><h5 class="margin-top-5 pull-right">Session :</h5></div><div class="col-sm-2"><select class="form-control" name="session"><option value="1">Break Fast</option><option value="2">Brunch</option><option value="3">Lunch</option><option value="4">Snacks</option><option value="5">Dinner</option></select></div><div class="col-sm-2"><h5 class="margin-top-5 pull-right">Category :</h5></div><div class="col-sm-2"><select class="form-control" name="category"><option value="1">Obesity</option><option value="2">Diabetes</option><option value="3">Normal</option></select></div></div><div class="col-sm-12 margin-tb-5"><hr></div><div class="col-sm-12 no-padding"><div class="col-sm-10"><select class="form-control"><option>Obesity</option><option>Diabetes</option><option>Normal</option></select></div><div class="col-sm-2"><a href="" class="btn btn-success" ng-click="addSuggestFood()">Add Food</a></div></div><table class="col-sm-12 table table-bordered table-striped margin-top-15"><thead><tr class="warning"><th class="col-md-2">Sl no.</th><th class="col-md-8">Suggested Food Name</th><th class="col-md-2">Option</th></tr></thead><tbody><tr><td>id</td><td>Food name</td><td><a href="" class="btn btn-xs btn-danger" ng-click="removeSuggestFood(id)">Remove</a></td></tr></tbody></table></div><dir-pagination-controls ng-show="paginationLoad" direction-links="true" boundary-links="true"></dir-pagination-controls></div></div></div><script type="text/javascript" src="../../js/script.js"></script>
+<style xmlns="http://www.w3.org/1999/html">/*weight level*/
+
+    #weight_level{
+        position:relative;
+        height:200px;
+        width:90px;
+        margin-top:20px;
+        margin-left:120px;
+        font-size: 13px;
+        overflow:hidden;
+        background-color: #eee;
+    }
+    .weight_level{
+        position:absolute;
+        width: 90px;
+        bottom: 0;
+        background-color: #003366;
+    }
+    .red{
+        background-color: #ff1a1a;
+    }
+    .green{
+        background-color: limegreen;
+    }
+    .yellow{
+        background-color: #f8ba01;
+    }
+
+    .custom-popup-wrapper {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 92%;
+        z-index: 1000;
+        display: none;
+        background-color: #fff;
+        padding:5px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
+    }
+
+    .custom-popup-wrapper > .dropdown-menu {
+        position: static;
+        float: none;
+        width: 100%;
+        padding:0;
+        display: block;
+        min-width: 160px;
+        max-height: 300px;
+        overflow-y: scroll;
+        background-color: transparent;
+        border: none;
+        border-radius: 0;
+        box-shadow: none;
+    }
+
+    .custom-popup-wrapper > .dropdown-menu > .active > a,
+    .custom-popup-wrapper > .dropdown-menu > .active > a:hover,
+    .custom-popup-wrapper > .dropdown-menu > .active > a:focus {
+        background-color: #dadada!important;
+        color: #333;
+    }
+
+    .custom-popup-wrapper > .dropdown-menu >li>a{
+        border-bottom: 1px solid #f5f5f5;
+        width: 100%;
+        padding:7px 10px;
+        font-size: 15px;
+    }
+
+    .custom-popup-wrapper > .dropdown-menu >li>a span.wrap{
+        display: inline-block;
+        width: 85%;
+        margin-top:0;
+        white-space: pre-wrap !important;
+    }
+
+    .custom-popup-wrapper > .dropdown-menu >li>a>img{
+        display: inline-block;
+        vertical-align: top;
+        border: 2px solid #c0c0c0;
+    }
+
+    .custom-popup-wrapper > .dropdown-menu >li>a>span{
+        display: inline-block;
+        vertical-align: top;
+        margin-top:2px;
+    }</style><script type="text/ng-template" id="foodTemplate.html"><a>
+        <img ng-if="match.model.foodImagePath" class="img-circle" ng-src="{{match.model.foodImagePath}}50x50.jpg" width="35">&nbsp;
+        <span ng-show="match.model.issuitable==1" class="green">&nbsp;</span>
+        <span ng-show="match.model.issuitable==0" class="red">&nbsp;</span>
+        <span class="wrap" ng-bind-html="match.label | uibTypeaheadHighlight:query"></span>&nbsp;
+    </a></script><script type="text/ng-template" id="customPopupTemplate.html"><div class="custom-popup-wrapper"
+         ng-style="{top: position().top+'px', left: position().left+'px'}"
+         ng-show="isOpen() && !moveInProgress"
+         style="display: block;"
+         aria-hidden="{{!isOpen()}}">
+        <ul class="dropdown-menu remove-style" role="listbox">
+            <li ng-repeat="match in matches track by $index" ng-class="{active: isActive($index) }"
+                should-focus="isActive($index)" ng-click="selectMatch($index)" role="option" id="{{::match.id}}">
+                <div uib-typeahead-match index="$index" match="match" query="query" template-url="templateUrl"></div>
+            </li>
+        </ul>
+    </div></script><div class="container" ng-cloak class="ng-cloak"><div class="row"><div class="col-md-3"><h4 class="classic-title"><span>Exercise Management</span></h4><div ng-include src="'views/food-menu.html'" onload="activeClass"></div></div><div class="col-md-9" ng-init="init()"><a href="#dashboard" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back to Dashboard</a><div flash-message="2000" class="col-md-4 pull-right no-padding"></div><h4 class="classic-title"><span><i class="fa fa-edit"></i> &nbsp;Admin Food Suggestion</span></h4><div ng-if="loaded"><div class="loader-style"><div class="loader"></div></div></div><div class="min-height-385"><div class="col-sm-12 no-padding margin-top-10"><div class="col-sm-2"><h5 class="margin-top-5 pull-right">Country :</h5></div><div class="col-sm-2"><select class="form-control" name="country" ng-model="foodChoices.country" ng-init="foodChoices.country='1'" ng-change="getSuggestedFood()"><option value="1">India</option><option value="2">United States</option><option value="3">Both</option></select></div><div class="col-sm-2"><h5 class="margin-top-5 pull-right">Session :</h5></div><div class="col-sm-2"><select class="form-control" name="session" ng-model="foodChoices.session" ng-init="foodChoices.session='1'" ng-change="getSuggestedFood()"><option value="1">Break Fast</option><option value="2">Brunch</option><option value="3">Lunch</option><option value="4">Snacks</option><option value="5">Dinner</option></select></div><div class="col-sm-2"><h5 class="margin-top-5 pull-right">Category :</h5></div><div class="col-sm-2"><select class="form-control" name="category" ng-model="foodChoices.patienttype" ng-init="foodChoices.patienttype='1'" ng-change="getSuggestedFood()"><option value="1">Obesity</option><option value="2">Diabetes</option><option value="3">Normal</option></select></div></div><div class="col-sm-12 margin-tb-5"><hr></div><div class="col-sm-12 no-padding"><div class="col-sm-10"><div class="col-lg-12 col-md-12 col-sm-12 no-padding"><div class="content-1"><input class="profile_input" type="text" ng-model="selectedFood" placeholder="Search Food" uib-typeahead="food as food.foodname for food in inputChanged($viewValue)" typeahead-popup-template-url="customPopupTemplate.html" typeahead-template-url="foodTemplate.html" typeahead-on-select="foodSelected()" typeahead-class="form-control"></div><div class="search-loading" ng-show="loadingFoods"><i class="fa fa-spinner fa-pulse"></i>&nbsp;&nbsp;Searching Foods...</div></div></div><div class="col-sm-2"><a href="" class="btn btn-success" ng-click="addSuggestFood()">Add Food</a></div></div><table class="col-sm-12 table table-bordered table-striped margin-top-15"><thead><tr class="warning"><th class="col-md-8">Suggested Food Name</th><th class="col-md-2">Option</th></tr></thead><tbody><tr dir-paginate="foodchoice in foodSuggestedList | itemsPerPage: 9" ng-show="foodSuggestedList.length!=0"><td>{{foodchoice.foodName}}</td><td><a href="" class="btn btn-xs btn-danger" ng-click="removeSuggestFood(id)">Remove</a></td></tr><tr ng-show="foodSuggestedList.length==0"><td colspan="3" class="text-center">No Records Found !!!</td></tr></tbody></table></div><dir-pagination-controls ng-show="paginationLoad" max-size="5" direction-links="true" boundary-links="true"></dir-pagination-controls></div></div></div><script type="text/javascript" src="../../js/script.js"></script>

@@ -17,43 +17,66 @@ adminApp.controller('UserFeedbackController',['$scope','requestHandler','Flash',
 
         requestHandler.postRequest("admin/getFeedback/", $scope.params).then(function(response){
             $scope.userFeedbackList=response.data.feedbackList;
+            $.each($scope.userFeedbackList, function(index,value) {
+            if(value.mobile==null){
+                value.mobile="N/A";
+            }
+            });
             $scope.total_count=response.data.totalrecords;
             $scope.loaded=false;
         });
     };
 
-    $scope.removeUserFeedBackDetails=function(){
 
-    };
     $scope.feedbackid=[];
     $scope.isChecked=function(){
         $scope.getUserFeedBackDetails();
-        alert("hi");
-        console.log($scope.userFeedbackList);
-        console.log($scope.total_count);
         if($scope.total_count>0){
-            alert("hello");
             $.each($scope.userFeedbackList, function(index,value) {
                 if(document.getElementById('checkAll').checked==true){
                     $scope.feedbackid.push(value.feedbackid);
                     $("#"+value.feedbackid).checked==true;
-                    //$("#"+value.id).prop('checked',$(this).prop("checked"));
-
+                    $scope.removeDisable=false;
                 }
                 else if(document.getElementById('checkAll').checked==false){
                     $scope.feedbackid=[];
-                    //$("#"+value.id).prop('checked', $(this).prop("checked"));
                     $("#"+value.feedbackid).checked==false;
+                    $scope.removeDisable=true;
                 }
             });
 
         }
     };
 
+    $scope.selectedFeedback=function(feedbackId){
+        var idx=$scope.feedbackid.indexOf(feedbackId);
+        // Already Selected Items
+        if(idx>-1){
+            $scope.feedbackid.splice(idx,1);
+        }
+        // Add New Items
+        else{
+            $scope.feedbackid.push(feedbackId);
+        }
+        console.log($scope.feedbackid);
+
+    };
+
+    $scope.removeFeedback=function(){
+
+        requestHandler.postRequest("admin/deleteFeedback/",{'feedbackid':$scope.feedbackid} ).then(function(response){
+            $scope.getUserFeedBackDetails();
+            successMessage(Flash,"Successfully Removed");
+        });
+
+    };
+
+
     $scope.init=function(){
         $scope.itemsPerPage = 10;
         $scope.searchText=" ";
         $scope.getUserFeedBackDetails();
+        $scope.removeDisable=true;
     };
 
     $scope.init();

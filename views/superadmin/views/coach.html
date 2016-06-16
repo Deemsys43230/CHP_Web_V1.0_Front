@@ -168,8 +168,8 @@
                 <span ng-show="coachRegisterForm1.qualification.$invalid && coachRegisterForm1.qualification.$dirty&& !coachRegisterForm1.qualification.$pristine">
                     <span class="error-message" ng-show="coachRegisterForm1.qualification.$error.required"><span>Required.</span></span>
                 </span>
-                <p>Experience</p>
-                <input type="text" name="experience" ng-pattern="/^\d+$/" ng-model="coach.experience" maxlength="30" required/>
+                <p>Experience(In months)</p>
+                <input type="text" name="experience" ng-pattern="/^\d+$/" ng-model="coach.experience" maxlength="3" required/>
                 <span ng-show="coachRegisterForm1.experience.$invalid && coachRegisterForm1.experience.$dirty && !coachRegisterForm1.experience.$pristine">
                     <span class="error-message" ng-show="coachRegisterForm1.experience.$error.required"><span>Required.</span></span>
                      <span class="error-message" ng-show="coachRegisterForm1.experience.$error.pattern"><span>Invalid &nbsp;Data.</span></span>

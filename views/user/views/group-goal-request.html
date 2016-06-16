@@ -42,7 +42,7 @@
                             <span ng-show="goalList.goaltype==1">Weight Loss</span>
                             <span ng-show="goalList.goaltype==2">Weight Gain</span>
                         </td>
-                        <td>{{goalList.members}}</td>
+                        <td>{{goalList.goalMemberCount}}</td>
                         <td>
                             <a href="#group-goal-request/{{goalList.goalid}}" class="btn-xs btn-primary">View</a>
                             <a href="" class="btn-xs btn-warning" ng-click="doAcceptGoalRequest(goalList.goalid)">Accept</a>

@@ -48,10 +48,8 @@
                                 <span ng-show="goalDetail.goaltype==2">Weight Gain</span>
                             </div>
                             <div>
-                                <span ng-show="goalDetail.status==1 && goalDetail.isExpired ==0" class="text-green">Active</span>
-                                <span ng-show="goalDetail.status==1 && goalDetail.isExpired ==1" class="text-red">Completed</span>
-                                <span ng-show="goalDetail.status==2 && goalDetail.isExpired ==0" class="text-red">Completed</span>
-                                <span ng-show="goalDetail.status==2 && goalDetail.isExpired ==1" class="text-red">Completed</span>
+                                <span ng-show="goalDetail.status==1" class="text-green">Active</span>
+                                <span ng-show="goalDetail.status==2" class="text-red">Completed</span>
                             </div>
                             <div>{{goalDetail.goalMemberCount}}</div>
                         </div>
@@ -63,7 +61,7 @@
                         </div>
                         <div ng-hide="isRequest">
                             <span><a href="" class="target_button green_button" ng-click="viewRank()">View Rank</a></span>
-                            <span ng-show="goalDetail.candelete==1"><a href="#modal" ng-click="resetdata()" id="modal_trigger" class="target_button orange_button" >Add Members</a></span>
+                            <span ng-show="goalDetail.candelete==1 && goalDetail.isExpired==0"><a href="#modal" ng-click="resetdata()" id="modal_trigger" class="target_button orange_button" >Add Members</a></span>
                             <span ng-show="goalDetail.candelete==1"><a class="target_button red_button" ng-click="doConfirmation(goalList.goalid)">Finish Goal</a></span>
                             <span ng-show="goalDetail.candelete==0"><a class="target_button red_button" ng-click="doExitConfirmation()">Exit from Goal</a></span>
                         </div>

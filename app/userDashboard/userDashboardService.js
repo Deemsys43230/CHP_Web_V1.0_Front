@@ -26,7 +26,18 @@ adminApp.factory("UserDashboardService",['requestHandler',function(requestHandle
         });
     };
 
+    userDashboardServiceObj.searchFoodByAdmin=function(searchStr,session){
+
+        return requestHandler.postRequest("searchFoodListByAdmin/",{"foodname":searchStr,"foodsession":session}).then(function (response) {
+            var searchResponse=response.data.Food_Data;
+            return searchResponse.slice(0,50);
+        }, function () {
+            console.log("Please try again later!")
+        });
+    };
+
     userDashboardServiceObj.searchFood=function(searchStr,session){
+
         return requestHandler.postRequest("searchFoodListByUser/",{"foodname":searchStr,"foodsession":session}).then(function (response) {
             var searchResponse=response.data.Food_Data;
             return searchResponse.slice(0,50);
