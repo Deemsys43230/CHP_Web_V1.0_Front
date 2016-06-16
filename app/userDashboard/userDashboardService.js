@@ -153,6 +153,15 @@ adminApp.factory("UserDashboardService",['requestHandler',function(requestHandle
         });
     };
 
+    userDashboardServiceObj.searchExerciseByAdmin=function(searchStr){
+        return requestHandler.postRequest("admin/searchExercisebyAdmin/",{"exercisename":searchStr}).then(function (response) {
+            var exerciseSearchResponse=response.data.exercisesData;
+            return exerciseSearchResponse.slice(0,50);
+        }, function () {
+            console.log("Please try again later!")
+        });
+    };
+
     userDashboardServiceObj.searchExercise=function(searchStr){
         return requestHandler.postRequest("user/searchExercisebyUser/",{"exercisename":searchStr}).then(function (response) {
             var exerciseSearchResponse=response.data.exercisesData;

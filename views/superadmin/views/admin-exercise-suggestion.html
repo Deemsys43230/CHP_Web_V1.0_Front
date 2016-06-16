@@ -1,4 +1,121 @@
+<style xmlns="http://www.w3.org/1999/html">
+    /*weight level*/
 
+    #weight_level{
+        position:relative;
+        height:200px;
+        width:90px;
+        margin-top:20px;
+        margin-left:120px;
+        font-size: 13px;
+        overflow:hidden;
+        background-color: #eee;
+    }
+    .weight_level{
+        position:absolute;
+        width: 90px;
+        bottom: 0;
+        background-color: #003366;
+    }
+    .red{
+        background-color: #ff1a1a;
+    }
+    .green{
+        background-color: limegreen;
+    }
+    .yellow{
+        background-color: #f8ba01;
+    }
+
+    .custom-popup-wrapper {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 92%;
+        z-index: 1000;
+        display: none;
+        background-color: #fff;
+        padding:5px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
+    }
+
+    .custom-popup-wrapper > .dropdown-menu {
+        position: static;
+        float: none;
+        width: 100%;
+        padding:0;
+        display: block;
+        min-width: 160px;
+        max-height: 300px;
+        overflow-y: scroll;
+        background-color: transparent;
+        border: none;
+        border-radius: 0;
+        box-shadow: none;
+    }
+
+    .custom-popup-wrapper > .dropdown-menu > .active > a,
+    .custom-popup-wrapper > .dropdown-menu > .active > a:hover,
+    .custom-popup-wrapper > .dropdown-menu > .active > a:focus {
+        background-color: #dadada!important;
+        color: #333;
+    }
+
+    .custom-popup-wrapper > .dropdown-menu >li>a{
+        border-bottom: 1px solid #f5f5f5;
+        width: 100%;
+        padding:7px 10px;
+        font-size: 15px;
+    }
+
+    .custom-popup-wrapper > .dropdown-menu >li>a span.wrap{
+        display: inline-block;
+        width: 85%;
+        margin-top:0;
+        white-space: pre-wrap !important;
+    }
+
+    .custom-popup-wrapper > .dropdown-menu >li>a>img{
+        display: inline-block;
+        vertical-align: top;
+        border: 2px solid #c0c0c0;
+    }
+
+    .custom-popup-wrapper > .dropdown-menu >li>a>span{
+        display: inline-block;
+        vertical-align: top;
+        margin-top:2px;
+    }
+
+
+</style>
+
+
+<script type="text/ng-template" id="customPopupTemplate.html">
+    <div class="custom-popup-wrapper"
+         ng-style="{top: position().top+'px', left: position().left+'px'}"
+         ng-show="isOpen() && !moveInProgress"
+         style="display: block;"
+         aria-hidden="{{!isOpen()}}">
+        <ul class="dropdown-menu remove-style" role="listbox">
+            <li ng-repeat="match in matches track by $index" ng-class="{active: isActive($index) }"
+                should-focus="isActive($index)" ng-click="selectMatch($index)" role="option" id="{{::match.id}}">
+                <div uib-typeahead-match index="$index" match="match" query="query" template-url="templateUrl"></div>
+            </li>
+        </ul>
+    </div>
+</script>
+
+<!--Exercise Template-->
+<script type="text/ng-template" id="exerciseTemplate.html">
+    <a>
+        <img ng-if="match.model.imagepath" class="img-circle" ng-src="{{match.model.imagepath}}50x50.jpg" width="35">&nbsp;
+        <span class="wrap" ng-bind-html="match.label | uibTypeaheadHighlight:query"></span>
+    </a>
+</script>
 <!-- Start Page Banner -->
 <div class="container" ng-cloak class="ng-cloak">
     <div class="row">
@@ -18,12 +135,13 @@
                 </div>
             </div>
             <div class="min-height-385">
+                <div class="row">
                 <div class="col-sm-12 no-padding margin-top-10">
                     <div class="col-sm-2">
                         <h5 class="margin-top-5">Category</h5>
                     </div>
                     <div class="col-sm-3">
-                        <select class="form-control" name="exerciseCategory" ng-model="suggestion.exerciseCategory" ng-change="getSuggestedExercise()">
+                        <select class="form-control" name="exerciseCategory" ng-model="exerciseChoices.patienttye" ng-init="exerciseChoices.patienttye='1'" ng-change="getSuggestedExercise()">
                             <option value="1" >Obesity</option>
                             <option value="2">Diabetes</option>
                             <option value="3">Normal</option>
@@ -35,41 +153,40 @@
                 </div>
                 <div class="col-sm-12 no-padding">
                     <div class="col-sm-10">
-                        <select class="form-control">
-                            <option>Obesity</option>
-                            <option>Diabetes</option>
-                            <option>Normal</option>
-                        </select>
+                        <div class="col-lg-12 col-md-12 no-padding">
+                            <input class="form-control" type="text" ng-model="selectedExercise" placeholder="Search Exercise" uib-typeahead="exercise as exercise.exercisename for exercise in inputChangedExercise($viewValue)" typeahead-popup-template-url="customPopupTemplate.html" typeahead-template-url="exerciseTemplate.html" typeahead-on-select="exerciseSelected()" typeahead-class="form-control">
+                            <div class="search-loading" ng-show="loadingExercise"><i class="fa fa-spinner fa-pulse"></i>&nbsp;&nbsp;Searching Exercise...</div>
+                        </div>
+
                     </div>
                     <div class="col-sm-2">
                         <a href="" class="btn btn-success" ng-click="addSuggestExercise()">Add Exercise</a>
                     </div>
                 </div>
+                    </div>
                 <table class="col-sm-12 table table-bordered table-striped margin-top-15">
                     <thead>
                     <tr class="warning">
-                        <th class="col-md-2">Sl no.</th>
                         <th class="col-md-8">Suggested Exercise Name</th>
                         <th class="col-md-2">Option</th>
                     </tr>
                     </thead>
                     <tbody>
-                   <!-- <tr dir-paginate="exercisesuggestion in exerciseSuggestedList | itemsPerPage: 9" ng-show="exerciseSuggestedList.length!=0">-->
-                    <tr>
-                        <td>id</td>
-                        <td>Exercise name</span></td>
-                        <td><a href="" class="btn btn-xs btn-danger" ng-click="removeSuggestExercise(id)">Remove</a></td>
+                   <tr dir-paginate="exercisechoice in exerciseSuggestedList | itemsPerPage: 9" ng-show="exerciseSuggestedList.length!=0">
+
+                        <td>{{exercisechoice.exerciseName}}</span></td>
+                        <td><a href="" class="btn btn-xs btn-danger" ng-click="removeSuggestExercise(exercisechoice.exerciseid)">Remove</a></td>
                     </tr>
-                    <!--<tr ng-show="exerciseSuggestedList.length==0">
+                    <tr ng-show="exerciseSuggestedList.length==0">
                         <td colspan="3" class="text-center">No Records Found !!!</td>
-                    </tr>-->
+                    </tr>
                     </tbody>
                 </table>
 
             </div>
 
             <!-- Start Pagination -->
-          <!--  <dir-pagination-controls ng-show="paginationLoad"  direction-links="true"  boundary-links="true"> </dir-pagination-controls>-->
+            <dir-pagination-controls ng-show="paginationLoad"  direction-links="true"  boundary-links="true"> </dir-pagination-controls>
             <!-- End Pagination -->
         </div>
     </div>

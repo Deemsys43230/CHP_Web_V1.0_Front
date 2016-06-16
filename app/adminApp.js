@@ -931,6 +931,7 @@ adminApp.config([
                 '../../plugin/popup/style.css',
                 '../../angular/angular-utils-pagination/dirPagination.js',
                 '../../app/exerciseSuggestion/exerciseSuggestionController.js'
+
               ]
             });
           }
@@ -966,7 +967,8 @@ adminApp.config([
                         files: [
                             '../../plugin/popup/style.css',
                             '../../angular/angular-utils-pagination/dirPagination.js',
-                            '../../app/exerciseSuggestion/adminExerciseSuggestionController.js'
+                            '../../app/exerciseSuggestion/adminExerciseSuggestionController.js',
+                            '../../app/userDashboard/userDashboardService.js'
                         ]
                     });
                 }

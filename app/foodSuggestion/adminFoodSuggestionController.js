@@ -11,9 +11,7 @@ adminApp.controller('AdminFoodSuggestionController',['$scope','requestHandler','
         if(searchStr.length >=3){
             $scope.loadingFoods=true;
             if($scope.foodSearchResult.length==0){
-
                 $scope.loadingFoods=true;
-                // alert("if");
             }
             var userFoodDiaryDetailPromise=UserDashboardService.searchFoodByAdmin(searchStr,$scope.userFood.sessionid);
             return userFoodDiaryDetailPromise.then(function(result){
@@ -53,21 +51,27 @@ adminApp.controller('AdminFoodSuggestionController',['$scope','requestHandler','
 
         requestHandler.postRequest("admin/addAdminFoodSuggestions/",$scope.foodChoices).then(function(response){
             successMessage(Flash,"Successfully Added!!");
+            $scope.selectedFood="";
             $scope.getSuggestedFood();
+            $scope.foodChoices.country=$scope.foodChoices.country.toString();
+            $scope.foodChoices.session=$scope.foodChoices.session.toString();
+            $scope.foodChoices.patienttype=$scope.foodChoices.patienttype.toString();
         });
     };
 
     $scope.removeSuggestFood=function(id){
 
-        /*$scope.loaded=true;
-         requestHandler.postRequest("admin/rejectExerciseSuggestion/",{'suggestionid':id}).then(function(response){
-         $scope.loaded=false;
-         $scope.doGetAllExerciseSuggestion();
-         successMessage(Flash,"Successfully Updated");
-
-         },function(){
-         errorMessage(Flash,"Please try again later!")
-         });*/
+        $scope.foodChoices.country=parseInt($scope.foodChoices.country);
+        $scope.foodChoices.session=parseInt($scope.foodChoices.session);
+        $scope.foodChoices.patienttype=parseInt($scope.foodChoices.patienttype);
+        $scope.foodChoices.foodid = id;
+        requestHandler.postRequest("admin/deleteAdminFoodSuggestions/",$scope.foodChoices).then(function(response){
+            successMessage(Flash,"Successfully Removed!!");
+            $scope.getSuggestedFood();
+            $scope.foodChoices.country=$scope.foodChoices.country.toString();
+            $scope.foodChoices.session=$scope.foodChoices.session.toString();
+            $scope.foodChoices.patienttype=$scope.foodChoices.patienttype.toString();
+        });
     };
 
     $scope.init=function(){
