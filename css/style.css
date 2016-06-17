@@ -1,35 +1,6 @@
 /* CSS Document */
 
-/*
-	Theme Name: Margo
-	Description: Margo - Responsive Template
-	Version: 1.0
-	Author: iThemesLab
-	Website: http://ithemeslab.com
-*/
-
-/* ------------------------------------------ */
-/*             TABLE OF CONTENTS
-/* ------------------------------------------ */
-/*   01 - General & Basic Styles   */
-/*   02 - Header & Navigation      */
-/*   03 - Slider                   */
-/*   04 - Main Page Elements       */
-/*   05 - Revolution Slider        */
-/*   06 - Shortcodes Elements      */
-/*   07 - Portfolio Styles         */
-/*   08 - Single Project Styles    */
-/*   09 - Blog Styles              */
-/*   10 - Single post Styles       */
-/*   11 - Sidebar Styles           */
-/*   12 - Footer Styles 		   */
-/*   13 - Plugins Styles 	  	   */
-
-
-/*------------------------------------------*/
-/*	     01 - General & Basic Styles
-/*------------------------------------------*/
-body {
+body{
 	font-family: 'trebuchet ms', sans-serif;
 	font-size: 14px;
     line-height: 21px;
@@ -5382,6 +5353,63 @@ ul.post-meta li, ul.post-meta li a {
     margin-right: 15px!important;
 }
 
+.suggest-carousel .post-row{
+    margin-left:27px;
+    margin-top: 4px;
+    width: 84%;
+    height: 27px;
+    z-index: 5!important;
+}
+
+.suggest-carousel-style .owl-prev{
+    float:left;
+    text-align: center;
+    width: 20px!important;
+    height: 27px!important;
+    line-height: 30px;
+    padding:2px;
+    border-radius: 0!important;
+}
+
+.suggest-carousel-style .owl-next{
+    float:right;
+    text-align: center;
+    width: 20px!important;
+    height: 27px!important;
+    line-height: 30px;
+    padding:2px;
+    border-radius: 0!important;
+}
+
+.suggest-carousel-style .owl-prev:hover,.suggest-carousel-style .owl-next:hover{
+    background-color: #ccc!important;
+    border-color: #ccc!important;
+}
+
+.suggest-carousel-style .owl-buttons{
+    width: 99%;
+    margin-top: 54px;
+    margin-right:2px;
+    z-index: 0!important;
+    border:1px solid red;
+}
+
+.suggest-item{
+    position: relative;
+    z-index: 5!important;
+    height: 27px;
+    font-size: 13px;
+    padding: 2px 7px;
+    background-color: #eee;
+    color: #666;
+    cursor: pointer!important;
+}
+
+.suggest-item:hover{
+    background-color: #ddd!important;
+    cursor: pointer!important;
+}
+
 
 /*------------------------------------------*/
 /*			10 - SideBar Styles
@@ -7385,6 +7413,25 @@ ul.tabs li.active{
     box-shadow: 0px 0px 3px rgba(0,0,0,0.3);
 }
 
+.suggest-label{
+    background: #16cb7f;
+    color: #fff;
+    font-size: 14px;
+    width:100%;
+    text-align: center;
+    padding:7px;
+    height: 35px;
+}
+
+.content-suggest {
+    margin: 5px 10px 10px 10px;
+    width: 95%;
+    background: #FFFFFF;
+    -webkit-box-shadow: 0px 0px 3px rgba(0,0,0,0.3);
+    -moz-box-shadow: 0px 0px 3px rgba(0,0,0,0.3);
+    box-shadow: 0px 0px 3px rgba(0,0,0,0.3);
+}
+
 .content-weight {
     padding: 10px;
     margin: 5px 5px 15px 5px;
@@ -7538,7 +7585,7 @@ a.title_button:hover{
 {
     position: relative;
     width: 99%!important;
-    height: 310px;
+    height: 270px;
     background: none;
     overflow-y: scroll;
     overflow-x:hidden;
@@ -7546,7 +7593,7 @@ a.title_button:hover{
 }
 
 .exercise-height{
-    height: 350px !important;
+    height: 305px !important;
 }
 
 /*food*/
@@ -7564,7 +7611,7 @@ ul.food img{
 }
 
 ul.food li{
-    margin: 3px 10px 10px 0;
+    margin: 3px 10px 7px 0;
     padding: 10px;
     -webkit-box-shadow: 0 0 3px rgba(0,0,0,0.3);
     -moz-box-shadow: 0 0 3px rgba(0,0,0,0.3);
@@ -15090,9 +15137,48 @@ ul.post-meta li a:hover {
 #feedback-form{
     display:none;
     z-index: 100!important;
-    box-shadow: 0 0 9px #999;
+    box-shadow: 0 0 9px rgba(0, 0, 0, 0.4);
+    -o-box-shadow: 0 0 9px rgba(0, 0, 0, 0.4);
+    -moz-box-shadow: 0 0 9px rgba(0, 0, 0, 0.4);
+    -webkit-box-shadow: 0 0 9px rgba(0, 0, 0, 0.4);
     background: #fff;
     margin:0;
     padding:15px;
     border-top:3px solid #f8ba01;
 }
+
+.suggested-food{
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    -o-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.slideImg {
+    position: relative;
+    height: 35px;
+}
+
+.slideImg ul { list-style: none; margin: 0;padding:0;height: 35px;}
+
+.slideImg li {
+    float: left;
+    margin:5px 5px 0 0;
+    padding:1px;
+    height: 35px;
+}
+
+.slideImg li a{
+    height:35px;
+    font-size:13px;
+    padding: 5px 10px 5px 10px;
+    background: #eee;
+    color: #666;
+}
+
+.slideImg li a:hover{
+    background: #ccc;
+    color: #444;
+}
+
+.rotate-prev {position: absolute;}

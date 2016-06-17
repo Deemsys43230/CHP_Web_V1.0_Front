@@ -153,7 +153,7 @@
 
                 <li class="history" ng-click="getHistory()">
                     <a href="#history"><i class="fa fa-history fa-4x hidden-md"></i><span>History</span>
-                        <p class="hidden-md hidden-sm">Get daily tips for you</p>
+                        <p class="hidden-md hidden-sm">Get your history</p>
                     </a>
                 </li>
 
@@ -302,9 +302,29 @@
                                                 </ul>
                                             </div>
 
-                                            <div ng-show="userFoodDiaryData.length==0 || userFoodDiaryDataAll.length==0" class="text-center"><br/>
+                                            <div ng-show="userFoodDiaryData.length==0 || userFoodDiaryDataAll.length==0" class="text-center margin-top-10">
                                                 <img src="../../images/no-food.png" width="150" height="150">
                                                 <h1 class="text-gray margin-top-15">  NO FOOD ADDED!!!</h1>
+                                            </div>
+                                        </div>
+                                        <div class="content-suggest clearfix">
+                                            <div class="col-sm-3 no-padding">
+                                                <div class="suggest-label">Food for you</div>
+                                            </div>
+                                            <div class="col-sm-9 no-padding">
+                                                <div class="slideImg" id="food-suggestion">
+                                                    <div class="slideMain">
+                                                        <ul class="slide1">
+                                                            <li><a href="">BK Sundae - Chocolate</a></li>
+                                                            <li><a href="">Sundakai</a></li>
+                                                            <li><a href="">Samai</a></li>
+                                                            <li><a href="">Sunfeast</a></li>
+                                                            <li><a href="">Aloo tikki</a></li>
+                                                            <li><a href="">Roasted</a></li>
+                                                            <li><a href="">Fruit</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -364,13 +384,34 @@
                                                 <h1 class="text-gray margin-top-15">  NO EXERCISE ADDED!!!</h1>
                                             </div>
                                         </div>
+                                        <div class="margin-top-5"></div>
+                                        <div class="content-suggest clearfix">
+                                            <div class="col-sm-4 no-padding">
+                                                <div class="suggest-label">Exercise for you</div>
+                                            </div>
+                                            <div class="col-sm-8 no-padding">
+                                                <div class="slideImg" id="exercise-suggestion">
+                                                    <div class="slideMain">
+                                                        <ul class="slide3">
+                                                            <li><a href="">BK Sundae - Chocolate</a></li>
+                                                            <li><a href="">Sundakai</a></li>
+                                                            <li><a href="">Samai</a></li>
+                                                            <li><a href="">Sunfeast</a></li>
+                                                            <li><a href="">Aloo tikki</a></li>
+                                                            <li><a href="">Roasted</a></li>
+                                                            <li><a href="">Fruit</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="col-lg-3 col-md-3 col-sm-3 no-padding dashboard-6">
                                         <div class="content-3">
                                             <a id="modal_trigger_exercise" href="#modal-exercise" ng-click="resetexercisedata()" onclick="return false;" class="suggest_button override-width">Suggest Exercise</a>
                                             <div class="suggest_content">
+                                                <h6>Frequently Used</h6>
                                                 <div class="suggest_option" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#eee'}">
-                                                    <h6>Frequently Used</h6>
                                                     <span ng-repeat="frequentexercise in frequentExerciseList" ng-click="frequentExercise(frequentexercise.exerciseid)">{{frequentexercise.exercisename}}</span>
                                                 </div>
                                             </div>
@@ -918,6 +959,13 @@
     </section>
 </div>
 
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("#food-suggestion").rotate();
+        $("#exercise-suggestion").rotating();
+    });
+</script>
+
 <script type="text/javascript" src="../../js/script.js"></script>
 
 <script type="text/javascript">
@@ -1125,3 +1173,5 @@
         },500);
     }
 </script>
+
+
