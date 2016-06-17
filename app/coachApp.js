@@ -1,4 +1,4 @@
-var coachApp= angular.module('coachApp', ['ngRoute','oc.lazyLoad','ngCookies','requestModule','ngAnimate']);
+var coachApp= angular.module('coachApp', ['ngRoute','oc.lazyLoad','ngCookies','requestModule','ngAnimate','flash','feedbackServiceModule']);
 
 coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
 
@@ -471,7 +471,7 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
     }]);
 
 //Initial Controller for Username
-coachApp.controller("CoachInitialController",['$scope','requestHandler','$location',function($scope,requestHandler,$location){
+coachApp.controller("CoachInitialController",['$scope','requestHandler','$location','FeedbackService','Flash',function($scope,requestHandler,$location,FeedbackService,Flash){
     $scope.hideValue=1;
     requestHandler.getRequest("getUserId/","").then(function(response){
         $scope.username=response.data.User_Profile.name;

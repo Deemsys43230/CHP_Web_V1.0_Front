@@ -1,4 +1,4 @@
-var userApp= angular.module('userApp', ['ngRoute','oc.lazyLoad','ngCookies','requestModule','ngAnimate','flash']);
+var userApp= angular.module('userApp', ['ngRoute','oc.lazyLoad','ngCookies','requestModule','ngAnimate','flash','feedbackServiceModule']);
 
 userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
 
@@ -587,7 +587,7 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
 }]);
 
 //Initial Controller for Username
-userApp.controller("UserInitialController",['$scope','requestHandler','$location','Flash',function($scope,requestHandler,$location,Flash){
+userApp.controller("UserInitialController",['$scope','requestHandler','$location','Flash','FeedbackService',function($scope,requestHandler,$location,Flash,FeedbackService){
     $scope.hideValue=1;
 
     requestHandler.getRequest("getUserId/","").then(function(response){
