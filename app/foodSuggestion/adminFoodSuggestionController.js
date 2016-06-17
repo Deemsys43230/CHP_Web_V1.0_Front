@@ -31,6 +31,7 @@ adminApp.controller('AdminFoodSuggestionController',['$scope','requestHandler','
     };
     $scope.foodChoices={};
     $scope.foodSelected=function(){
+        $scope.isAddFood=false;
         $scope.foodChoices.foodid = $scope.selectedFood.foodid;
     };
 
@@ -52,6 +53,7 @@ adminApp.controller('AdminFoodSuggestionController',['$scope','requestHandler','
         requestHandler.postRequest("admin/addAdminFoodSuggestions/",$scope.foodChoices).then(function(response){
             successMessage(Flash,"Successfully Added!!");
             $scope.selectedFood="";
+            $scope.isAddFood=true;
             $scope.getSuggestedFood();
             $scope.foodChoices.country=$scope.foodChoices.country.toString();
             $scope.foodChoices.session=$scope.foodChoices.session.toString();
@@ -76,6 +78,7 @@ adminApp.controller('AdminFoodSuggestionController',['$scope','requestHandler','
 
     $scope.init=function(){
         $scope.getSuggestedFood();
+        $scope.isAddFood=true;
     };
 
     $scope.init();

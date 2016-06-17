@@ -22,15 +22,20 @@ adminApp.controller('AdminExerciseSuggestionController',['$scope','requestHandle
 
     $scope.exerciseChoices={};
     $scope.exerciseSelected=function(){
+        $scope.isAddExercise=false;
         $scope.exerciseChoices.exerciseid = $scope.selectedExercise.exerciseid;
     };
 
     $scope.getSuggestedExercise=function(){
 
         delete $scope.exerciseChoices.exerciseid;
+        $scope.exerciseChoices.activitytype=parseInt($scope.exerciseChoices.activitytype);
+        $scope.exerciseChoices.patienttype=parseInt($scope.exerciseChoices.patienttype);
         requestHandler.postRequest("admin/getAdminExerciseSuggestions/",$scope.exerciseChoices).then(function(response){
 
             $scope.exerciseSuggestedList=response.data.exerciseSuggestion;
+            $scope.exerciseChoices.activitytype=$scope.exerciseChoices.activitytype.toString();
+            $scope.exerciseChoices.patienttype=$scope.exerciseChoices.patienttype.toString();
 
         });
 
@@ -43,13 +48,15 @@ adminApp.controller('AdminExerciseSuggestionController',['$scope','requestHandle
         requestHandler.postRequest("admin/addAdminExerciseSuggestions/",$scope.exerciseChoices).then(function(response){
             successMessage(Flash,"Successfully Added!!");
             $scope.selectedExercise="";
+            $scope.isAddExercise=true;
             $scope.getSuggestedExercise();
             $scope.exerciseChoices.activitytype=$scope.exerciseChoices.activitytype.toString();
             $scope.exerciseChoices.patienttype=$scope.exerciseChoices.patienttype.toString();
         });
     };
 
-    $scope.removeSuggestExercise=function(id){ $scope.exerciseChoices.activitytype=parseInt($scope.exerciseChoices.activitytype);
+    $scope.removeSuggestExercise=function(id){
+        $scope.exerciseChoices.activitytype=parseInt($scope.exerciseChoices.activitytype);
         $scope.exerciseChoices.patienttype=parseInt($scope.exerciseChoices.patienttype);
 
         $scope.exerciseChoices.exerciseid = id;
@@ -63,7 +70,8 @@ adminApp.controller('AdminExerciseSuggestionController',['$scope','requestHandle
 
     $scope.init=function(){
         $scope.getSuggestedExercise();
-    }
+        $scope.isAddExercise=true;
+    };
 
     $scope.init();
 

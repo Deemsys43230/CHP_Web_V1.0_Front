@@ -141,10 +141,22 @@
                         <h5 class="margin-top-5">Category</h5>
                     </div>
                     <div class="col-sm-3">
-                        <select class="form-control" name="exerciseCategory" ng-model="exerciseChoices.patienttye" ng-init="exerciseChoices.patienttye='1'" ng-change="getSuggestedExercise()">
+                        <select class="form-control" name="exerciseCategory" ng-model="exerciseChoices.patienttype" ng-init="exerciseChoices.patienttype='1'" ng-change="getSuggestedExercise()">
                             <option value="1" >Obesity</option>
                             <option value="2">Diabetes</option>
                             <option value="3">Normal</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2">
+                        <h5 class="margin-top-5">Activity Type :</h5>
+                    </div>
+                    <div class="col-sm-2">
+                        <select class="form-control" name="activity type" ng-model="exerciseChoices.activitytype" ng-init="exerciseChoices.activitytype='1'" ng-change="getSuggestedExercise()">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
                         </select>
                     </div>
                 </div>
@@ -160,7 +172,7 @@
 
                     </div>
                     <div class="col-sm-2">
-                        <a href="" class="btn btn-success" ng-click="addSuggestExercise()">Add Exercise</a>
+                        <a href="" class="btn btn-success" ng-disabled="isAddExercise" ng-click="addSuggestExercise()">Add Exercise</a>
                     </div>
                 </div>
                     </div>
@@ -174,8 +186,8 @@
                     <tbody>
                    <tr dir-paginate="exercisechoice in exerciseSuggestedList | itemsPerPage: 9" ng-show="exerciseSuggestedList.length!=0">
 
-                        <td>{{exercisechoice.exerciseName}}</span></td>
-                        <td><a href="" class="btn btn-xs btn-danger" ng-click="removeSuggestExercise(exercisechoice.exerciseid)">Remove</a></td>
+                        <td>{{exercisechoice.exerciseName}}{{exercisechoice.exerciseId}}</span></td>
+                        <td><a href="" class="btn btn-xs btn-danger" ng-click="removeSuggestExercise(exercisechoice.exerciseId)">Remove</a></td>
                     </tr>
                     <tr ng-show="exerciseSuggestedList.length==0">
                         <td colspan="3" class="text-center">No Records Found !!!</td>
