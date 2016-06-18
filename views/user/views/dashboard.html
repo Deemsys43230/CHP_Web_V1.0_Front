@@ -315,13 +315,7 @@
                                                 <div class="slideImg" id="food-suggestion">
                                                     <div class="slideMain">
                                                         <ul class="slide1">
-                                                            <li><a href="">BK Sundae - Chocolate</a></li>
-                                                            <li><a href="">Sundakai</a></li>
-                                                            <li><a href="">Samai</a></li>
-                                                            <li><a href="">Sunfeast</a></li>
-                                                            <li><a href="">Aloo tikki</a></li>
-                                                            <li><a href="">Roasted</a></li>
-                                                            <li><a href="">Fruit</a></li>
+                                                            <li ng-repeat="suggestedFood in adminSuggestedFood"><a href="" ng-click="suggestedFoodByAdmin(suggestedFood.foodId)">{{suggestedFood.foodName}}</a></li>
                                                         </ul>
                                                     </div>
                                                 </div>
@@ -393,13 +387,7 @@
                                                 <div class="slideImg" id="exercise-suggestion">
                                                     <div class="slideMain">
                                                         <ul class="slide3">
-                                                            <li><a href="">BK Sundae - Chocolate</a></li>
-                                                            <li><a href="">Sundakai</a></li>
-                                                            <li><a href="">Samai</a></li>
-                                                            <li><a href="">Sunfeast</a></li>
-                                                            <li><a href="">Aloo tikki</a></li>
-                                                            <li><a href="">Roasted</a></li>
-                                                            <li><a href="">Fruit</a></li>
+                                                            <li ng-repeat="suggestedExercise in adminSuggestedExercise"><a href="" ng-click="suggestedExerciseByAdmin(suggestedExercise.exerciseId)">{{suggestedExercise.exerciseName}}</a></li>
                                                         </ul>
                                                     </div>
                                                 </div>

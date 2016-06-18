@@ -216,15 +216,15 @@
                                     <h5>Prefer Metric<span class="pull-right">:</span></h5>
                                 </div>
                                 <div class="col-lg-8 col-md-8 col-sm-8 margin-top-10">
-                                    <!-- <input class="profile_input" name="secretquestion" ng-model="userProfile.secretquestion" maxlength="150" required/>-->
-                                    <select class="full-width main" name="secretquestion" required>
+
+                                    <select class="full-width main" name="unitPreference" ng-model="userProfile.unitPreference" required>
                                         <option value="">--Select Metric--</option>
-                                        <option value="1">Option 1</option>
-                                        <option value="2">Option 2</option>
+                                        <option value="1">Metric</option>
+                                        <option value="2">United States</option>
                                     </select>
-                                       <!-- <span ng-show="userProfileForm.secretquestion.$dirty&&userProfileForm.secretquestion.$invalid">
-                                <span class="error-message textarea-errormessage10" ng-show="userProfileForm.secretquestion.$error.required"><span>Required.</span></span>
-                                         </span>-->
+                                    <span ng-show="userProfileForm.unitPreference.$dirty&&userProfileForm.unitPreference.$invalid">
+                                <span class="error-message textarea-errormessage10" ng-show="userProfileForm.unitPreference.$error.required"><span>Required.</span></span>
+                                         </span>
                                 </div>
                                 <div class="col-lg-12 hidden-md hidden-sm padding-right-0 margin-top-5 text-right">
                                 </div>

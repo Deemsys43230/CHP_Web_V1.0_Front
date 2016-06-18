@@ -11,7 +11,10 @@ userApp.controller('DemographyController',['$scope','requestHandler','Flash','$l
             $scope.demography.weight=$scope.demography.weight.toString();
             $scope.demography.hip=$scope.demography.hip.toString();
             $scope.demography.waist=$scope.demography.waist.toString();
+            $scope.demography.userPlanType = $scope.demography.userPlanType.toString();
+            $scope.demography.userActivityType = $scope.demography.userActivityType.toString();
 
+            console.log("df",$scope.demography);
             originalDemography=angular.copy(response.data.Demography_Data);
 
         });
@@ -89,6 +92,11 @@ userApp.controller('DemographyController',['$scope','requestHandler','Flash','$l
     };
 
     $scope.doUpdateDemography= function () {
+
+        if($scope.demography.heightFeet && $scope.demography.heightInches){
+            $scope.demography.height = $scope.demography.heightFeet +'.'+$scope.demography.heightInches;
+            $scope.demography.height = parseFloat($scope.demography.height);
+        }
             $scope.demography.height = parseFloat($scope.demography.height);
             $scope.demography.weight = parseFloat($scope.demography.weight);
             $scope.demography.hip = parseFloat($scope.demography.hip);
@@ -121,6 +129,8 @@ userApp.controller('DemographyController',['$scope','requestHandler','Flash','$l
     };
 
     $scope.isCleanDemography =function(){
+        console.log("ori",originalDemography);
+        console.log("asd", $scope.demography);
             return angular.equals(originalDemography, $scope.demography);
     };
 
@@ -137,7 +147,20 @@ userApp.controller('DemographyController',['$scope','requestHandler','Flash','$l
         }
     };
 
-    $scope.doGetDemographyandNutrition();
+    $scope.getUserId = function () {
+
+        requestHandler.getRequest("getUserId/","").then(function(response) {
+            $scope.userProfile = response.data.User_Profile;
+        });
+    };
+
+
+    $scope.init=function(){
+        $scope.getUserId();
+        $scope.doGetDemographyandNutrition();
+    };
+
+    $scope.init();
 }]);
 
 

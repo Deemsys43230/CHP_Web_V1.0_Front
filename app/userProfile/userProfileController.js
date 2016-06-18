@@ -89,9 +89,13 @@ userApp.controller('UserProfileController',['$scope','requestHandler','Flash',fu
             delete $scope.userProfile.userid;
             delete $scope.userProfile.isProfileUpdated;
             delete $scope.userProfile.status;
+            $scope.userProfile.unitPreference =  $scope.userProfile.unitPreference.toString();
 
             //Copy Original
+
             $scope.orginalUserProfile=angular.copy($scope.userProfile);
+
+
 
         });
 
@@ -155,9 +159,10 @@ userApp.controller('UserProfileController',['$scope','requestHandler','Flash',fu
         delete $scope.userProfile.createdon;
         $scope.userProfile.country = $scope.userProfile.countrySelect.code;
         $scope.userProfile.state = $scope.userProfile.stateSelect.code;
+        $scope.userProfile.unitPreference =parseInt($scope.userProfile.unitPreference);
 
         requestHandler.putRequest("updateProfile/",$scope.userProfile).then(function(){
-
+            $scope.userProfile.unitPreference =  $scope.userProfile.unitPreference.toString();
             $scope.doGetProfile();
             successMessage(Flash,"Successfully Updated");
         });
@@ -199,6 +204,7 @@ userApp.controller('UserProfileController',['$scope','requestHandler','Flash',fu
 
     //To Enable the update button if changes occur.
     $scope.isClean = function() {
+
         return angular.equals ($scope.orginalUserProfile, $scope.userProfile);
     };
 

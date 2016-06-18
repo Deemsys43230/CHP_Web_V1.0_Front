@@ -82,6 +82,20 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         });
     };
 
+
+    //On Select suggested foods
+    $scope.suggestedFoodByAdmin=function(foodid){
+        $scope.isNew=true;
+        $scope.title= "Add Food";
+        $scope.loaded=true;
+        var getFoodDetailPromise=UserDashboardService.doGetSelectedFoodDetails(foodid);
+        getFoodDetailPromise.then(function(result){
+            $scope.userSelectedFoodDetails=result;
+            $scope.loaded=false;
+            $scope.doUserAddFood();
+        });
+    };
+
     //On Select search function
     $scope.foodSelected=function(){
         $scope.isNew=true;
@@ -213,7 +227,13 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
 
     //Load Details Based on session
     $scope.loadSessionDetails=function(){
+        $scope.suggest={};
+        $scope.suggest.session = $scope.userFood.sessionid;
+        requestHandler.postRequest("user/getUserFoodSuggestions/",$scope.suggest).then(function(response){
+            $scope.adminSuggestedFood = response.data.foodSuggestion;
+        });
         switch(parseInt($scope.userFood.sessionid)){
+
             case 1:$scope.userFoodDiaryData=$scope.userFoodDiaryDataAll.BreakFast;
                 break;
             case 2:$scope.userFoodDiaryData=$scope.userFoodDiaryDataAll.Brunch;
@@ -400,6 +420,19 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         });
     };
 
+    //On Select frequent exercise
+    $scope.suggestedExerciseByAdmin=function(exerciseid){
+        $scope.isNew=true;
+        $scope.title= "Add Exercise";
+        $scope.loaded=true;
+        var getExerciseDetailPromise=UserDashboardService.doGetSelectedExerciseDetails(exerciseid);
+        getExerciseDetailPromise.then(function(result){
+            $scope.userSelectedExerciseDetails=result;
+            $scope.loaded=false;
+            $scope.doUserAddExercise();
+        });
+    };
+
     //On Select search exercise function
     $scope.exerciseSelected=function(){
         $scope.isNew=true;
@@ -418,6 +451,10 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         userExerciseDiaryDetailPromise.then(function(result){
             $scope.userExerciseDiaryDataAll=result;
             $scope.loaded=false;
+        });
+
+        requestHandler.getRequest("user/getUserExerciseSuggestions/","").then(function(response){
+            $scope.adminSuggestedExercise = response.data.exerciseSuggestion;
         });
     };
     //Insert User Exercise
