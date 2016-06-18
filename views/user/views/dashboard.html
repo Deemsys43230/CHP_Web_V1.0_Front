@@ -312,13 +312,16 @@
                                                 <div class="suggest-label">Food for you</div>
                                             </div>
                                             <div class="col-sm-9 no-padding">
-                                                <div class="slideImg" id="food-suggestion">
+                                                <marquee class="feedbackslide" behavior="scroll" direction="left" onmouseover="this.stop();" onmouseout="this.start();" scrollamount="3">
+                                                    <span ng-repeat="suggestedFood in adminSuggestedFood" class="slideFeedback"><a href="" ng-click="suggestedFoodByAdmin(suggestedFood.foodId)">{{suggestedFood.foodName}}</a></span>
+                                                </marquee>
+                                                <!--<div class="slideImg" id="food-suggestion">
                                                     <div class="slideMain">
                                                         <ul class="slide1">
                                                             <li ng-repeat="suggestedFood in adminSuggestedFood"><a href="" ng-click="suggestedFoodByAdmin(suggestedFood.foodId)">{{suggestedFood.foodName}}</a></li>
                                                         </ul>
                                                     </div>
-                                                </div>
+                                                </div>-->
                                             </div>
                                         </div>
                                     </div>
@@ -384,13 +387,16 @@
                                                 <div class="suggest-label">Exercise for you</div>
                                             </div>
                                             <div class="col-sm-8 no-padding">
-                                                <div class="slideImg" id="exercise-suggestion">
+                                                <marquee class="feedbackslide" behavior="scroll" direction="left" onmouseover="this.stop();" onmouseout="this.start();" scrollamount="3">
+                                                    <span ng-repeat="suggestedExercise in adminSuggestedExercise" class="slideFeedback"><a href="" ng-click="suggestedExerciseByAdmin(suggestedExercise.exerciseId)">{{suggestedExercise.exerciseName}}</a></span>
+                                                </marquee>
+                                                <!--<div class="slideImg" id="exercise-suggestion">
                                                     <div class="slideMain">
                                                         <ul class="slide3">
                                                             <li ng-repeat="suggestedExercise in adminSuggestedExercise"><a href="" ng-click="suggestedExerciseByAdmin(suggestedExercise.exerciseId)">{{suggestedExercise.exerciseName}}</a></li>
                                                         </ul>
                                                     </div>
-                                                </div>
+                                                </div>-->
                                             </div>
                                         </div>
                                     </div>
@@ -828,6 +834,9 @@
                             <div class="col-lg-10 col-md-10 col-sm-10">
                                 <h5>Exercise Name:</h5>
                                 <span>{{userSelectedExerciseDetails.exercisename}}</span>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <hr/>
                             </div>
 
                             <!--<h5 class="margin-top-10">Select Level:</h5>

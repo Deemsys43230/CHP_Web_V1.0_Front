@@ -374,6 +374,8 @@
 
 <div id="form">
     <p id="feedback_button"><img src="images/feedback.png"></p>
+    <div class="feedback-margin-adjust">
+
 
     <form id="feedback-form" name="feedbackForm">
         <div flash-message="2000" ></div>
@@ -387,7 +389,7 @@
              <span class="error-message" ng-show="feedbackForm.emailid.$error.email"><span>Enter&nbsp;valid&nbsp;Email&nbsp;ID.</span></span>
         </span>
         <input class="section-input margin-top-10" name="mobile" ng-model="feedback.mobile" placeholder="Phone number"/>
-        <select class="full-width course-select margin-top-10" name="platform" ng-model="feedback.platform" required>
+        <select class="full-width course-select feedbk margin-top-10" name="platform" ng-model="feedback.platform" required>
             <option value="">Select your platform*</option>
             <option value="WEB">Web</option>
             <option value="IOS">ios</option>
@@ -402,6 +404,7 @@
          </span>
         <a href="" class="btn main-button" ng-click="addUserFeedback()" ng-disabled="feedbackForm.$invalid">Submit feedback </a>
     </form>
+    </div>
 </div>
 
 </div>
@@ -460,7 +463,13 @@
 
     $(document).ready(function(){
         $("#feedback_button").click(function(){
-            $("#feedback-form").slideToggle();
+            if($('#form').css('left')=='0px'){
+                $("#feedback-form").slideToggle(800);
+                $('#form').animate({left:'-300px'},  500);
+            }else{
+                $('#form').animate({left:'0'},  500);
+                $("#feedback-form").slideToggle(300);
+            }
         });
     });
 </script>

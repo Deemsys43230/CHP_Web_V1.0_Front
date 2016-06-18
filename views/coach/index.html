@@ -249,7 +249,7 @@
     <!-- End Footer Section -->
     <div id="form">
         <p id="feedback_button"><img src="../../images/feedback.png"></p>
-
+        <div class="feedback-margin-adjust">
         <form id="feedback-form" name="feedbackForm">
             <div flash-message="2000" ></div>
             <input class="section-input margin-top-5" name="name" ng-model="feedback.name" placeholder="Name*" required/>
@@ -277,6 +277,7 @@
          </span>
             <a href="" class="btn main-button" ng-click="addUserFeedback()" ng-disabled="feedbackForm.$invalid">Submit feedback </a>
         </form>
+            </div>
     </div>
 </div>
 <!-- End Container -->
@@ -367,7 +368,13 @@
 <script type="text/javascript">
     $(document).ready(function(){
         $("#feedback_button").click(function(){
-            $("#feedback-form").slideToggle();
+            if($('#form').css('left')=='0px'){
+                $("#feedback-form").slideToggle(800);
+                $('#form').animate({left:'-300px'},  500);
+            }else{
+                $('#form').animate({left:'0'},  500);
+                $("#feedback-form").slideToggle(300);
+            }
         });
     });
 </script>

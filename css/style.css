@@ -6952,6 +6952,10 @@ select.course-select {
     appearance: none;
 }
 
+select.course-select.feedbk{
+    padding: 0 25px 0 5px!important;
+}
+
 #select-item:first-child {
     display: none;
 }
@@ -15118,16 +15122,16 @@ ul.post-meta li a:hover {
 
 #form{
     position: fixed;
-    bottom: 0;
-    left:68%;
+    left: -300px;
+    top:25%;
     z-index: 100!important;
-    width:370px;
+    width:300px;
     padding:0;
     margin:0;
 }
 
 #form p{
-    margin:0;
+    margin-right:-48px;
     text-align: right;
     padding:0;
     background-color:transparent;
@@ -15145,6 +15149,10 @@ ul.post-meta li a:hover {
     margin:0;
     padding:15px;
     border-top:3px solid #f8ba01;
+}
+
+.feedback-margin-adjust{
+    margin-top:-149px !important;
 }
 
 .suggested-food{
@@ -15182,3 +15190,27 @@ ul.post-meta li a:hover {
 }
 
 .rotate-prev {position: absolute;}
+
+marquee.feedbackslide{
+    height: 25px;
+    margin-top:5px;
+}
+
+.slideFeedback{
+    margin:5px 5px 0 0;
+    padding:1px;
+    height: 25px;
+}
+
+.slideFeedback a{
+    height:25px;
+    font-size:13px;
+    padding: 5px 10px 5px 10px;
+    background: #eee;
+    color: #666;
+}
+
+.slideFeedback a:hover{
+    background: #ccc;
+    color: #444;
+}
