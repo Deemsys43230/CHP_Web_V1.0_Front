@@ -84,6 +84,7 @@
                     <span ng-show="forgotPasswordForm.secretAnswer.$dirty&&forgotPasswordForm.secretAnswer.$invalid && !forgotPasswordForm.secretAnswer.$pristine">
                         <span class="error-message" ng-show="forgotPasswordForm.secretAnswer.$error.required"><span>Required.</span></span>
                     </span>
+                <a href="#" data-ng-click="reset()" class="forgot_password text-center">Reset Password without security question</a>
                 <div class="action_btns margin-top-20">
                     <div class="one_half"><a href="#"  data-ng-click="reset()" class="btn back_btn_forgotPassword"><i class="fa fa-angle-double-left"></i> Back</a></div>
                     <div class="one_half last"><a ng-class="{'button-disable':forgotPasswordForm.$invalid}" ng-click="doSecretAnswerCheck()" class="btn btn_red">Submit</a></div>

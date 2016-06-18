@@ -15,12 +15,16 @@
                 </div>
                 <div class="margin-top-5 pull-right"><i class="fa fa-calendar"></i> Date</div>
             </div>
-            <form ng-hide="searchVal==1" class="form-wrapper pull-right margin-right-10" novalidate>
-                <input type="text" placeholder="Search here..." value="" ng-change="doGetActivityLogsPage(selectedDate)" ng-model="searchText" required>
+            <div ng-hide="searchVal==1" class="col-md-2 pull-right no-padding">
+                <input class="form-control margin-right-10" type="text"  ng-change="doGetActivityLogsPage(selectedDate)" ng-model="searchText" placeholder="Search here..."/>
+            </div>
+
+            <!--<form ng-hide="searchVal==1" class="form-wrapper pull-right margin-right-10" novalidate>
+                <input type="text" placeholder="Search here..." value="" ng-change="doGetActivityLogsPage(selectedDate)" ng-model="searchText" >
                 <button type="submit" ><i class="fa fa-search"></i></button>
-            </form>
+            </form>-->
             <div>
-                <select class="pull-right margin-right-10 select-activity"   ng-model="searchVal" ng-init="searchVal='1'">
+                <select class="pull-right margin-right-10 select-activity form-control"   ng-model="searchVal" ng-init="searchVal='1'">
                     <option value="1">Search By Date</option>
                     <option value="0">Search By Activity</option>
 

@@ -56,14 +56,19 @@ adminApp.controller('UserFeedbackController',['$scope','requestHandler','Flash',
         }
         // Add New Items
         else{
+           $scope.removeSingleDisable = false;
             $scope.feedbackid.push(feedbackId);
         }
-        console.log($scope.feedbackid);
+
+
 
     };
 
     $scope.removeFeedback=function(){
-
+        if($('.search-list-form').css('display') != 'none'){
+            $(".search-list-form").hide();
+            $(".search-list-form").show(2400);
+        }
         requestHandler.postRequest("admin/deleteFeedback/",{'feedbackid':$scope.feedbackid} ).then(function(response){
             $scope.getUserFeedBackDetails();
             successMessage(Flash,"Successfully Removed");
@@ -71,6 +76,11 @@ adminApp.controller('UserFeedbackController',['$scope','requestHandler','Flash',
 
     };
 
+    // Search toggle
+    $('.show-list-search').click(function() {
+        $('.search-list-form').toggle(300);
+        $('.search-list-form input').focus();
+    });
 
     $scope.init=function(){
         $scope.itemsPerPage = 10;

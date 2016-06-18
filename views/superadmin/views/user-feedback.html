@@ -6,9 +6,18 @@
 
         <div class="col-md-12 min-height-450" ng-init="init()">
             <a href="#dashboard" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back to Dashboard</a>
-            <a class="target_button btn btn-danger remove-button pull-right" ng-click="removeFeedback()" ng-disabled="removeDisable"><i class="fa fa-trash"></i> &nbsp;Remove All</a>
-
-            <input type="text" class="pull-right margin-right-10 search-feedback" ng-model="platform" ng-change="getUserFeedBackDetails()" placeholder="Search by Platform or Feedback"/>
+            <a class="target_button btn btn-danger remove-button pull-right  margin-left-5" ng-click="removeFeedback()" ng-disabled="removeDisable"><i class="fa fa-trash"></i> &nbsp;Remove All</a>
+            <!-- Stat Search -->
+            <div class="pull-right" id="hidden-search">
+                <a href="#" onclick="return false;" class="show-list-search search_button margin-left-5"><i class="fa fa-search"></i></a>
+                <div class="search-list-form override">
+                    <form autocomplete="off" class="searchform">
+                        <input type="text" ng-model="platform" ng-change="getUserFeedBackDetails()" placeholder="Search by Platform or Feedback">
+                    </form>
+                </div>
+            </div>
+            <!-- End Search -->
+            <!--<input type="text" class="pull-right margin-right-10 search-feedback" ng-model="platform" ng-change="getUserFeedBackDetails()" placeholder="Search by Platform or Feedback"/>-->
             <div flash-message="2000" class="col-md-4 margin-right-10 pull-right"></div>
             <h5 class="classic-title"><span><a href=""><i class="fa fa-envelope"></i>&nbsp;&nbsp;USERS FEEDBACK</a></span></h5>
             <div ng-if="loaded">
@@ -40,7 +49,7 @@
                     <td>{{userFeedback.mobile}}</td>
                     <td>{{userFeedback.platform}}</td>
                     <td>{{userFeedback.description}}</td>
-                    <td><a href="" class="btn btn-xs btn-danger" ng-click="removeFeedback()">Remove</a></td>
+                    <td><a href="" class="btn btn-xs btn-danger"  ng-click="removeFeedback()">Remove</a></td>
                 </tr>
                <tr ng-show="userFeedbackList.length==0">
                         <td colspan="8" class="text-center">No Records Found !!!</td>

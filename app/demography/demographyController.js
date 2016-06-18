@@ -14,7 +14,16 @@ userApp.controller('DemographyController',['$scope','requestHandler','Flash','$l
             $scope.demography.userPlanType = $scope.demography.userPlanType.toString();
             $scope.demography.userActivityType = $scope.demography.userActivityType.toString();
 
-            console.log("df",$scope.demography);
+
+            if($scope.userProfile.unitPreference==2){
+                $scope.demography.height = $scope.demography.height.toString();
+
+                var heightarray=$scope.demography.height.split('.');
+                var heightSplit=new Array();
+                heightSplit= heightarray;
+                $scope.demography.heightFeet = heightSplit[0];
+                $scope.demography.heightInches=heightSplit[1];
+            }
             originalDemography=angular.copy(response.data.Demography_Data);
 
         });
@@ -129,8 +138,6 @@ userApp.controller('DemographyController',['$scope','requestHandler','Flash','$l
     };
 
     $scope.isCleanDemography =function(){
-        console.log("ori",originalDemography);
-        console.log("asd", $scope.demography);
             return angular.equals(originalDemography, $scope.demography);
     };
 

@@ -18,14 +18,23 @@
                                 <span ng-show="userProfile.unitPreference==2">
                                 <input class="demography_input" style="width:49px;" name="heightFeet" maxlength="1" ng-pattern="/^\-?\d+((\.|\,)\d+)?$/" ng-model="demography.heightFeet" ng-required="userProfile.unitPreference==2"/>
                                 <input class="demography_input" style="width:49px;" name="heightInches" maxlength="2" ng-pattern="/^\-?\d+((\.|\,)\d+)?$/" ng-model="demography.heightInches" ng-required="userProfile.unitPreference==2"/>
+                               <span ng-show="demographyForm.heightFeet.$dirty&&demographyForm.heightFeet.$invalid">
+                                <span class="error-message textarea-errormessage40-left50" ng-show="demographyForm.heightFeet.$error.required"><span>Required.</span></span>
+                                <span class="error-message textarea-errormessage40-left50" ng-show="demographyForm.heightFeet.$error.pattern"><span>Invalid&nbsp;Format.</span></span>
+                            </span>
+                                    <span ng-show="demographyForm.heightInches.$dirty&&demographyForm.heightInches.$invalid">
+                                <span class="error-message textarea-errormessage40-right30" ng-show="demographyForm.heightInches.$error.required"><span>Required.</span></span>
+                                <span class="error-message textarea-errormessage40-right30" ng-show="demographyForm.heightInches.$error.pattern"><span>Invalid&nbsp;Format.</span></span>
+                            </span>
                                 </span>
                                 <span ng-show="userProfile.unitPreference==1">
                                      <input class="demography_input"  name="height" ng-pattern="/^\-?\d+((\.|\,)\d+)?$/" ng-model="demography.height" ng-required="userProfile.unitPreference==1"/>
-                                </span>
-                            <span ng-show="demographyForm.height.$dirty&&demographyForm.height.$invalid">
+                                    <span ng-show="demographyForm.height.$dirty&&demographyForm.height.$invalid">
                                 <span class="error-message textarea-errormessage40" ng-show="demographyForm.height.$error.required"><span>Required.</span></span>
                                 <span class="error-message textarea-errormessage40" ng-show="demographyForm.height.$error.pattern"><span>Invalid&nbsp;Format.</span></span>
                             </span>
+                                </span>
+
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-12 margin-top-15">

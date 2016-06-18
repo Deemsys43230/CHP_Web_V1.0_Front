@@ -388,7 +388,11 @@
              <span class="error-message" ng-show="feedbackForm.emailid.$error.required"><span>Required.</span></span>
              <span class="error-message" ng-show="feedbackForm.emailid.$error.email"><span>Enter&nbsp;valid&nbsp;Email&nbsp;ID.</span></span>
         </span>
-        <input class="section-input margin-top-10" name="mobile" ng-model="feedback.mobile" placeholder="Phone number"/>
+        <input class="section-input margin-top-10" name="mobile" ng-model="feedback.mobile" ng-pattern="/^\d+$/" ng-minlength="10" maxlength="10" placeholder="Phone number"/>
+        <span ng-show="feedbackForm.mobile.$dirty&&feedbackForm.mobile.$invalid">
+             <span class="error-message " ng-show="feedbackForm.mobile.$error.pattern"><span>Invalid&nbsp;Format.</span></span>
+             <span class="error-message " ng-show="!feedbackForm.mobile.$error.pattern&&feedbackForm.mobile.$error.minlength"><span>Should&nbsp;be&nbsp;of&nbsp;length&nbsp;10.</span></span>
+          </span>
         <select class="full-width course-select feedbk margin-top-10" name="platform" ng-model="feedback.platform" required>
             <option value="">Select your platform*</option>
             <option value="WEB">Web</option>
