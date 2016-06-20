@@ -22,7 +22,12 @@ userApp.controller('DemographyController',['$scope','requestHandler','Flash','$l
                 var heightSplit=new Array();
                 heightSplit= heightarray;
                 $scope.demography.heightFeet = heightSplit[0];
+                if(heightSplit[1]==undefined){
+                    $scope.demography.heightInches= 0;
+                }else{
                 $scope.demography.heightInches=heightSplit[1];
+                }
+               // console.log(heightSplit[1]);
             }
             originalDemography=angular.copy(response.data.Demography_Data);
 
@@ -104,7 +109,9 @@ userApp.controller('DemographyController',['$scope','requestHandler','Flash','$l
 
         if($scope.demography.heightFeet && $scope.demography.heightInches){
             $scope.demography.height = $scope.demography.heightFeet +'.'+$scope.demography.heightInches;
-            $scope.demography.height = parseFloat($scope.demography.height);
+
+           // $scope.demography.height = parseFloat($scope.demography.height);
+
         }
             $scope.demography.height = parseFloat($scope.demography.height);
             $scope.demography.weight = parseFloat($scope.demography.weight);
@@ -158,13 +165,15 @@ userApp.controller('DemographyController',['$scope','requestHandler','Flash','$l
 
         requestHandler.getRequest("getUserId/","").then(function(response) {
             $scope.userProfile = response.data.User_Profile;
+            $scope.doGetDemographyandNutrition();
         });
+
     };
 
 
     $scope.init=function(){
         $scope.getUserId();
-        $scope.doGetDemographyandNutrition();
+
     };
 
     $scope.init();

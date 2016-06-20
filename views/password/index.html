@@ -47,15 +47,15 @@
         <br/>
         <h5 class="text-muted">New Password</h5>
         <input  type="password" class="search-input margin-top-10" name="newPassword" ng-model="reset.newPassword" required>
-         <span ng-show="resetPasswordForm.newPassword.$dirty && resetPasswordForm.newPassword.$invalid && !resetPasswordForm.newPassword.$pristine">
+       <!--  <span ng-show="resetPasswordForm.newPassword.$dirty && resetPasswordForm.newPassword.$invalid && !resetPasswordForm.newPassword.$pristine">
                <span class="error-message" ng-show="resetPasswordForm.newPassword.$error.required"><span>Required.</span></span>
-         </span>
+         </span>-->
         <br/>
         <h5 class="text-muted">Confirm New Password</h5>
         <input type="password" class="search-input margin-top-10" ng-disabled="resetPasswordForm.newPassword.$invalid" name="confirmPassword" ng-model="confirmPassword" compare-to="reset.newPassword" required>
-         <span ng-show="resetPasswordForm.confirmPassword.$dirty&&resetPasswordForm.confirmPassword.$invalid && !resetPasswordForm.confirmPassword.$pristine">
+         <!--<span ng-show="resetPasswordForm.confirmPassword.$dirty&&resetPasswordForm.confirmPassword.$invalid && !resetPasswordForm.confirmPassword.$pristine">
                         <span class="error-message" ng-show="resetPasswordForm.confirmPassword.$error.compareTo"><span>Password&nbsp;don't&nbsp;match.</span></span>
-                    </span>
+                    </span>-->
         <br/>
         <a href="" ng-click="resetPassword()" ng-disabled="resetPasswordForm.$invalid" class="btn btn-success">Change Password</a>
     </div>

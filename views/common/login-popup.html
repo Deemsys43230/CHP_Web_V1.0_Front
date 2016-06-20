@@ -84,7 +84,7 @@
                     <span ng-show="forgotPasswordForm.secretAnswer.$dirty&&forgotPasswordForm.secretAnswer.$invalid && !forgotPasswordForm.secretAnswer.$pristine">
                         <span class="error-message" ng-show="forgotPasswordForm.secretAnswer.$error.required"><span>Required.</span></span>
                     </span>
-                <a href="#" data-ng-click="reset()" class="forgot_password text-center">Reset Password without security question</a>
+                <a href="#" data-ng-click="reset()" class="forgot_password text-center reset_link">Reset Password without security question</a>
                 <div class="action_btns margin-top-20">
                     <div class="one_half"><a href="#"  data-ng-click="reset()" class="btn back_btn_forgotPassword"><i class="fa fa-angle-double-left"></i> Back</a></div>
                     <div class="one_half last"><a ng-class="{'button-disable':forgotPasswordForm.$invalid}" ng-click="doSecretAnswerCheck()" class="btn btn_red">Submit</a></div>
@@ -92,6 +92,51 @@
             </form>
         </div>
 
+        <div class="new_password_form">
+            <div flash-message="3000" ></div>
+            <form name="newPasswordForm" novalidate>
+
+                <p>New Password</p>
+                <input type="password" name="newpassword" id="newpswd" ng-pattern="/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-])(?!.*\s).{6,}$/"  maxlength="20"  ng-model="newpassword" required/>
+                   <span ng-show="newPasswordForm.newpassword.$dirty&&newPasswordForm.newpassword.$invalid && !newPasswordForm.newpassword.$pristine">
+                        <span class="error-message" ng-show="newPasswordForm.newpassword.$error.required"><span>Required.</span></span>
+                          <span class="error-message" ng-show="newPasswordForm.newpassword.$error.pattern"><span>Condition&nbsp;not&nbsp;satisfied</span></span>
+                    </span>
+                <p>Confirm Password</p>
+                <input type="password" name="confirmPassword" ng-disabled="newPasswordForm.newpassword.$invalid" ng-model="confirmPassword" required compare-to="newpassword"/>
+                   <span ng-show="newPasswordForm.confirmPassword.$dirty&&newPasswordForm.confirmPassword.$invalid && !newPasswordForm.confirmPassword.$pristine">
+                        <span class="error-message" ng-show="newPasswordForm.confirmPassword.$error.compareTo"><span>Password&nbsp;don't&nbsp;match.</span></span>
+                    </span>
+               <div class="action_btns margin-top-20">
+                    <div class="one_half"><a class="btn btn_red" ng-class="{'button-disable':newPasswordForm.$invalid}" ng-click="changePassword()">Submit</a></div>
+                    <div class="one_half last"><a  class="btn">Cancel</a></div>
+                </div>
+            </form>
+            <div id="new_pswd_info">
+                <h4>Password must meet the following requirements:</h4>
+
+                <ul class="remove-style">
+                    <li id="letter1" class="invalid">At least <strong>one small letter</strong>
+
+                    </li>
+                    <li id="capital1" class="invalid">At least <strong>one capital letter</strong>
+
+                    </li>
+                    <li id="number1" class="invalid">At least <strong>one number</strong>
+
+                    </li>
+                    <li id="special1" class="invalid">At least <strong>one special character</strong>
+
+                    </li>
+                    <li id="length1" class="invalid">Be at least <strong>6 characters</strong>
+
+                    </li>
+                    <li id="space1" class="valid">Should not allow space
+
+                    </li>
+                </ul>
+            </div>
+        </div>
         <!-- Register Form -->
         <div class="user_register">
             <!--<div class="">
@@ -210,6 +255,7 @@
             $(".user_login").hide();
             $(".secret_question").hide();
             $(".reset_password").show();
+            $(".new_password_form").hide();
             $(".header_title").text('Reset Password');
             return false;
         });
@@ -220,7 +266,9 @@
             $(".secret_question").hide();
             $(".user_register").show();
             $(".user_register1").hide();
+            $(".new_password_form").hide();
             $(".header_title").text('Register');
+
             $("#pswd_info").hide();
             return false;
         });
@@ -232,6 +280,7 @@
             $(".secret_question").hide();
             $(".user_register").hide();
             $(".user_register1").show();
+            $(".new_password_form").hide();
             $(".header_title").text('Register');
             return false;
         });
@@ -242,6 +291,7 @@
             $(".user_register").hide();
             $(".secret_question").hide();
             $(".user_login").show();
+            $(".new_password_form").hide();
             $(".header_title").text('Login');
             return false;
         });
@@ -252,6 +302,7 @@
             $(".user_register").hide();
             $(".secret_question").hide();
             $(".user_login").hide();
+            $(".new_password_form").hide();
             $(".header_title").text('Reset Password');
             return false;
         });
@@ -263,6 +314,7 @@
             $(".user_register1").hide();
             $(".secret_question").hide();
             $(".user_login").hide();
+            $(".new_password_form").hide();
             $(".header_title").text('Login');
             return false;
         });
@@ -273,6 +325,7 @@
             $(".secret_question").hide();
             $(".user_register1").hide();
             $(".user_login").show();
+            $(".new_password_form").hide();
             $(".header_title").text('Login');
             return false;
         });
@@ -377,6 +430,110 @@
             $('#pswd_info').show();
         }).blur(function () {
             $('#pswd_info').hide();
+        });
+
+
+
+
+        //Password condition for new password
+
+        $('#newpswd').keyup(function () {
+            // set password variable
+            var newpswd = $('#newpswd').val();
+            if (newpswd.length < 6) {
+                $('#length1').removeClass('valid').addClass('invalid');
+            } else {
+                $('#length1').removeClass('invalid').addClass('valid');
+            }
+//validate letter
+            if (newpswd.match(/[a-z]/)) {
+                $('#letter1').removeClass('invalid').addClass('valid');
+            } else {
+                $('#letter1').removeClass('valid').addClass('invalid');
+            }
+//validate capital letter
+            if (newpswd.match(/[A-Z]/)) {
+                $('#capital1').removeClass('invalid').addClass('valid');
+            } else {
+                $('#capital1').removeClass('valid').addClass('invalid');
+            }
+
+//validate number
+            if (newpswd.match(/\d/)) {
+                $('#number1').removeClass('invalid').addClass('valid');
+            } else {
+                $('#number1').removeClass('valid').addClass('invalid');
+            }
+
+            if (newpswd.match(/\s/)) {
+                $('#space1').removeClass('valid').addClass('invalid');
+            } else {
+                $('#space1').removeClass('invalid').addClass('valid');
+            }
+
+            if (newpswd.match(/[#?!@$%^&*-]/)) {
+                $('#special1').removeClass('invalid').addClass('valid');
+            } else {
+                $('#special1').removeClass('valid').addClass('invalid');
+            }
+
+            if ($('#new_pswd_info li.invalid').length == 0) {
+                $('#new_pswd_info').fadeOut();
+            } else {
+                $('#new_pswd_info').fadeIn();
+            }
+        });
+        $('#newpswd').focus(function () {
+            // set password variable
+            var newpswd = $('#newpswd').val();
+            if (newpswd.length < 6) {
+                $('#length1').removeClass('valid').addClass('invalid');
+            } else {
+                $('#length1').removeClass('invalid').addClass('valid');
+            }
+//validate letter
+            if (newpswd.match(/[a-z]/)) {
+                $('#letter1').removeClass('invalid').addClass('valid');
+            } else {
+                $('#letter1').removeClass('valid').addClass('invalid');
+            }
+//validate capital letter
+            if (newpswd.match(/[A-Z]/)) {
+                $('#capital1').removeClass('invalid').addClass('valid');
+            } else {
+                $('#capital1').removeClass('valid').addClass('invalid');
+            }
+
+//validate number
+            if (newpswd.match(/\d/)) {
+                $('#number1').removeClass('invalid').addClass('valid');
+            } else {
+                $('#number1').removeClass('valid').addClass('invalid');
+            }
+
+            if (newpswd.match(/\s/)) {
+                $('#space1').removeClass('valid').addClass('invalid');
+            } else {
+                $('#space1').removeClass('invalid').addClass('valid');
+            }
+
+            if (newpswd.match(/[#?!@$%^&*-]/)) {
+                $('#special1').removeClass('invalid').addClass('valid');
+            } else {
+                $('#special1').removeClass('valid').addClass('invalid');
+            }
+
+            if ($('#new_pswd_info li.invalid').length == 0) {
+                $('#new_pswd_info').fadeOut();
+            } else {
+                $('#new_pswd_info').fadeIn();
+            }
+        });
+        $('#newpswd').keyup(function () {
+        }).focus(function () {
+            $('#new_pswd_info').show();
+        }).blur(function () {
+            $('#new_pswd_info').hide();
         });
     });
 </script>

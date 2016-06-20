@@ -484,7 +484,7 @@ commonApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
     }]);
 
 //Internal Login Details
-commonApp.controller('LoginController',['$scope','requestHandler','Flash','$window','$location','$element','FeedbackService',function($scope,requestHandler,Flash,$window,$location,$element,FeedbackService){
+commonApp.controller('LoginController',['$scope','requestHandler','Flash','$window','$location','$element','FeedbackService','$rootScope',function($scope,requestHandler,Flash,$window,$location,$element,FeedbackService,$rootScope){
 
     $scope.hideValue=1;
 
@@ -600,6 +600,7 @@ commonApp.controller('LoginController',['$scope','requestHandler','Flash','$wind
                 $(".user_register").hide();
                 $(".secret_question").hide();
                 $(".user_register1").hide();
+                $(".new_password_form").hide();
                 $(".user_login").show();
                 $(".header_title").text('Login');
                 successMessage(Flash,"Registration Successful!");
@@ -624,6 +625,7 @@ commonApp.controller('LoginController',['$scope','requestHandler','Flash','$wind
                 $(".user_login").hide();
                 $(".reset_password").hide();
                 $(".user_register").hide();
+                $(".new_password_form").hide();
                 $(".secret_question").show();
                 $(".header_title").text('Register');
                 $scope.secretQuestion=response.data.secretquestion;
@@ -633,6 +635,7 @@ commonApp.controller('LoginController',['$scope','requestHandler','Flash','$wind
                 $(".user_register").hide();
                 $(".secret_question").hide();
                 $(".user_register1").hide();
+                $(".new_password_form").hide();
                 $(".user_login").show();
                 $(".header_title").text('Login');
                 successMessage(Flash,"Please check your Email<br/>to reset the password!");
@@ -656,7 +659,16 @@ commonApp.controller('LoginController',['$scope','requestHandler','Flash','$wind
     //Check Secret Answer
     $scope.doSecretAnswerCheck=function(){
         //send secret answer
-        requestHandler.postRequest("forgotPassword/",{"emailid":$scope.emailid,"secretanswer":$scope.secretAnswer}).then(function(response){
+        $(".user_login").hide();
+        $(".reset_password").hide();
+        $(".user_register").hide();
+        $(".secret_question").hide();
+        $(".new_password_form").show();
+        $(".header_title").text('Reset Password');
+
+
+
+      /* requestHandler.postRequest("forgotPassword/",{"emailid":$scope.emailid,"secretanswer":$scope.secretAnswer}).then(function(response){
             if(response.data.Response_status==0){
                 errorMessage(Flash,"Incorrect Secret Answer!");
             }
@@ -665,12 +677,30 @@ commonApp.controller('LoginController',['$scope','requestHandler','Flash','$wind
                 $(".user_register").hide();
                 $(".secret_question").hide();
                 $(".user_register1").hide();
-                $(".user_login").show();
-                $(".header_title").text('Login');
+                $(".user_login").hide();
+               $(".header_title").text('Login');
+                $rootScope.emailId="sample@gmail.com";
+                $window.location.href = "#password/";
                 //Lets show the secret question
-                successMessage(Flash,"Please check your registered email!!");
+               successMessage(Flash,"Please check your registered email!!");*//**//*
+
             }
-        });
+        });*/
+    };
+
+    $scope.changePassword = function(){
+         $scope.newpassword;
+        $(".reset_password").hide();
+        $(".user_register").hide();
+        $(".secret_question").hide();
+        $(".user_register1").hide();
+        $(".new_password_form").hide();
+        $(".user_login").show();
+        $(".header_title").text('Login');
+        successMessage(Flash,"Reset Password Successfull! Please Login");
+        $scope.newpassword="";
+        $scope.confirmPassword="";
+        $scope.newPasswordForm.$setPristine();
     };
 
     $scope.addUserFeedback=function(){

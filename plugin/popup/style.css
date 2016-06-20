@@ -262,3 +262,7 @@ form p{
     -moz-appearance: none;
     appearance: none;
 }
+
+.new_password_form {display: none;}
+.new_password_form label {display: block; margin-bottom:5px;}
+.new_password_form input[type="text"], .new_password_form input[type="email"], .new_password_form input[type="password"] {display: block; line-height:16px;-webkit-border-radius: 0;width:100%; padding: 12px 13px; border:1px solid #DDD; color:#666;}
