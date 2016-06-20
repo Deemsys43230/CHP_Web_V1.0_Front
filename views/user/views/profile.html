@@ -217,14 +217,19 @@
                                 </div>
                                 <div class="col-lg-8 col-md-8 col-sm-8 margin-top-10">
 
-                                    <select class="full-width main" name="unitPreference" ng-model="userProfile.unitPreference" required>
+                                    <input type="radio" id="indian" class="height" name="preferfood" value="1" ng-model="userProfile.unitPreference"/>
+                                    <label for="indian">Indian</label>
+                                    <input type="radio" id="unitedState" class="height" name="preferfood" value="2" ng-model="userProfile.unitPreference"/>
+                                    <label for="unitedState">US</label>
+
+                                    <!--<select class="full-width main" name="unitPreference" ng-model="userProfile.unitPreference" required>
                                         <option value="">--Select Metric--</option>
                                         <option value="1">Metric</option>
                                         <option value="2">United States</option>
                                     </select>
                                     <span ng-show="userProfileForm.unitPreference.$dirty&&userProfileForm.unitPreference.$invalid">
                                 <span class="error-message textarea-errormessage10" ng-show="userProfileForm.unitPreference.$error.required"><span>Required.</span></span>
-                                         </span>
+                                         </span>-->
                                 </div>
                                 <div class="col-lg-12 hidden-md hidden-sm padding-right-0 margin-top-5 text-right">
                                 </div>
