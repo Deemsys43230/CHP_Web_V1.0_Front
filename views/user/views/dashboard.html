@@ -572,7 +572,7 @@
         <div class="dashboard-3 hidden-sm" ng-show="historyReport==0">
             <div id="update">
                 <div class="row">
-                    <div class="col-lg-4 hidden-md">
+                    <!--<div class="col-lg-4 hidden-md">
                         <img ng-src="{{userProfileImage | trusted}}">
                     </div>
                     <div class="col-lg-8 col-md-12 padding-response">
@@ -591,7 +591,37 @@
                                 <h6>{{demography.height}}<small>&nbsp;cm</small></h6>
                             </div>
                         </div>
-                    </div>
+                    </div>-->
+                    <form name="weightLogForm" novalidate>
+                        <!--<div class="col-lg-6 col-md-6 col-sm-6 text-center">
+                            <h1 class="fa-5x fa fa-tachometer text-green"></h1>
+                            <h4 class="margin-top-10">UPDATE WEIGHT</h4>
+                        </div>-->
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <h5 class="margin-bottom-15">UPDATE WEIGHT</h5>
+                            <div class="col-lg-4 col-md-4 col-sm-4 no-padding margin-top-3">
+                                <span>Date <span class="pull-right">:</span></span>
+                            </div>
+                            <div class="col-lg-8 col-md-8 col-sm-8 no-padding-right padding-left-8">
+                                <input type="text" id="weight-log-date" class="profile_input weightoverride" block>
+                                <input id="weightLogDate" hidden>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-4 no-padding margin-top-15">
+                                <span>Weight<span class="pull-right">:</span></span>
+                            </div>
+                            <div class="col-lg-8 col-md-8 col-sm-8 margin-top-10 no-padding-right padding-left-8">
+                                <input class="profile_input weightoverride" id="weightLog" name="weight" ng-model="weightlog" maxlength="5" required validate-Float1/>
+                            <span ng-show="weightLogForm.weight.$dirty&&weightLogForm.weight.$invalid">
+                                <span class="error-message textarea-errormessage10" ng-show="weightLogForm.weight.$error.required"><span>Required.</span></span>
+                                <span class="error-message textarea-errormessage10" ng-show="!weightLogForm.weight.$error.required&&weightLogForm.weight.$error.validateFloat1"><span>Invalid&nbsp;Data.</span></span>
+                            </span>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 text-center margin-top-10 margin-bottom-5">
+                                <a href="" class="btn-dis suggest_button override-width no-margin-bottom" ng-disabled="isCleanWeight() || weightLogForm.$invalid||spinner" ng-click="weightLogEntry(1)">
+                                    <span ng-if="spinner"><span class="three-quarters-loader">Loading…</span></span>{{weightUpdateText}}</a>
+                            </div>
+                        </div>
+                    </form>
                 </div>
                 <hr/>
                 <h6>Nutrients Intake</h6>
@@ -956,11 +986,89 @@
     </section>
 </div>
 
+<div class="hidden-lg hidden-md" id="weight-form">
+    <p id="weight_button"><img src="../../images/update-weight.png"></p>
+
+    <div class="update-weight-margin-adjust clearfix">
+        <form id="update-weight-form" class="clearfix" name="weightLogForm" novalidate>
+            <div class="col-lg-12 col-md-12 col-sm-12 clearfix">
+                <h5 class="margin-bottom-15">UPDATE WEIGHT</h5>
+                <div class="col-lg-4 col-md-4 col-sm-4 no-padding margin-top-3">
+                    <span>Date <span class="pull-right">:</span></span>
+                </div>
+                <div class="col-lg-8 col-md-8 col-sm-8 no-padding-right padding-left-8">
+                    <input type="text" id="weight-log-date1" class="profile_input weightoverride" block>
+                    <input id="weightLogDate1" hidden>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 no-padding margin-top-15">
+                    <span>Weight<span class="pull-right">:</span></span>
+                </div>
+                <div class="col-lg-8 col-md-8 col-sm-8 margin-top-10 no-padding-right padding-left-8">
+                    <input class="profile_input weightoverride" id="weightLog1" name="weight" ng-model="weightlog" maxlength="5" required validate-Float1/>
+                            <span ng-show="weightLogForm.weight.$dirty&&weightLogForm.weight.$invalid">
+                                <span class="error-message textarea-errormessage10" ng-show="weightLogForm.weight.$error.required"><span>Required.</span></span>
+                                <span class="error-message textarea-errormessage10" ng-show="!weightLogForm.weight.$error.required&&weightLogForm.weight.$error.validateFloat1"><span>Invalid&nbsp;Data.</span></span>
+                            </span>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 text-center margin-top-10 margin-bottom-5">
+                    <a href="" class="btn-dis suggest_button override-width no-margin-bottom" ng-disabled="isCleanWeight1() || weightLogForm.$invalid||spinner" ng-click="weightLogEntry(2)">
+                        <span ng-if="spinner"><span class="three-quarters-loader">Loading…</span></span>{{weightUpdateText}}</a>
+                </div>
+            </div>
+        </form>
+
+        <!--<form name="feedbackForm">
+            <div flash-message="2000" ></div>
+            <input class="section-input margin-top-5" name="name" ng-model="feedback.name" placeholder="Name*" required/>
+         <span ng-show="feedbackForm.name.$dirty&&feedbackForm.name.$invalid">
+             <span class="error-message" ng-show="feedbackForm.name.$error.required"><span>Required.</span></span>
+         </span>
+            <input type="email" class="section-input margin-top-10" name="emailid" ng-model="feedback.emailId" placeholder="Email ID*" validate-email required/>
+        <span ng-show="feedbackForm.emailid.$dirty&&feedbackForm.emailid.$invalid">
+             <span class="error-message" ng-show="feedbackForm.emailid.$error.required"><span>Required.</span></span>
+             <span class="error-message" ng-show="feedbackForm.emailid.$error.email"><span>Enter&nbsp;valid&nbsp;Email&nbsp;ID.</span></span>
+        </span>
+            <input class="section-input margin-top-10" name="mobile" ng-model="feedback.mobile" ng-pattern="/^\d+$/" ng-minlength="10" maxlength="10" placeholder="Phone number"/>
+        <span ng-show="feedbackForm.mobile.$dirty&&feedbackForm.mobile.$invalid">
+             <span class="error-message " ng-show="feedbackForm.mobile.$error.pattern"><span>Invalid&nbsp;Format.</span></span>
+             <span class="error-message " ng-show="!feedbackForm.mobile.$error.pattern&&feedbackForm.mobile.$error.minlength"><span>Should&nbsp;be&nbsp;of&nbsp;length&nbsp;10.</span></span>
+          </span>
+            <select class="full-width course-select feedbk margin-top-10" name="platform" ng-model="feedback.platform" required>
+                <option value="">Select your platform*</option>
+                <option value="WEB">Web</option>
+                <option value="IOS">ios</option>
+                <option value="ANDROID">Android</option>
+            </select>
+        <span ng-show="feedbackForm.platform.$dirty&&feedbackForm.platform.$invalid">
+             <span class="error-message textarea-errormessage55" ng-show="feedbackForm.platform.$error.required"><span>Required.</span></span>
+         </span>
+            <textarea class="forum-textarea" name="description" ng-model="feedback.description" placeholder="Description* " required></textarea>
+            <span ng-show="feedbackForm.description.$dirty&&feedbackForm.description.$invalid ">
+             <span class="error-message textarea-errormessage-70" ng-show="feedbackForm.description.$error.required"><span>Required.</span></span>
+         </span>
+            <a href="" class="btn main-button" ng-click="addUserFeedback()" ng-disabled="feedbackForm.$invalid">Submit feedback </a>
+        </form>-->
+    </div>
+</div>
+
 <script type="text/javascript">
     $(document).ready(function(){
         $("#food-suggestion").rotate();
         $("#exercise-suggestion").rotating();
     });
+
+    $(document).ready(function(){
+        $("#weight_button").click(function(){
+            if($('#weight-form').css('right')=='0px'){
+                $("#update-weight-form").slideToggle(800);
+                $('#weight-form').animate({right:'-300px'},  500);
+            }else{
+                $('#weight-form').animate({right:'0px'},  500);
+                $("#update-weight-form").slideToggle(300);
+            }
+        });
+    });
+
 </script>
 
 <script type="text/javascript" src="../../js/script.js"></script>
@@ -1169,6 +1277,25 @@
             controlls.find('.owl-next').html('<i class="fa fa-angle-right"></i>');
         },500);
     }
+
+    $(document).ready(function() {
+
+        var options = {
+            drops:'down',
+            opens:'left',
+            maxDate : new Date(),
+            singleDatePicker: true
+        };
+
+        $('#weight-log-date1').daterangepicker(options, function(start, end, label) {
+            document.getElementById("weightLogDate1").value = start.format('DD/MM/YYYY');
+            var scope = angular.element($("#weight-log-date1")).scope();
+            scope.doGetWeightLog(start.format('DD/MM/YYYY'),2);
+        });
+
+    });
 </script>
+
+
 
 

@@ -8,7 +8,7 @@
 
         <div class="content-weight height-165">
             <div class="row margin-right-2 margin-top-15">
-                <form name="weightLogForm" novalidate>
+                <!--<form name="weightLogForm" novalidate>
                     <div class="col-lg-6 col-md-6 col-sm-6 text-center">
                         <h1 class="fa-5x fa fa-tachometer text-green"></h1>
                         <h4 class="margin-top-10">UPDATE WEIGHT</h4>
@@ -36,7 +36,7 @@
                                 <span ng-if="spinner"><span class="three-quarters-loader">Loading…</span></span>{{weightUpdateText}}</a>
                         </div>
                     </div>
-                </form>
+                </form>-->
             </div>
         </div>
     </div>
@@ -122,7 +122,7 @@
     $(document).ready(function() {
 
         var options = {
-            drops:'up',
+            drops:'down',
             opens:'left',
             maxDate : new Date(),
             singleDatePicker: true
@@ -131,7 +131,7 @@
         $('#weight-log-date').daterangepicker(options, function(start, end, label) {
             document.getElementById("weightLogDate").value = start.format('DD/MM/YYYY');
             var scope = angular.element($("#weight-log-date")).scope();
-            scope.doGetWeightLog(start.format('DD/MM/YYYY'));
+            scope.doGetWeightLog(start.format('DD/MM/YYYY'),1);
         });
 
     });

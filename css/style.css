@@ -7219,6 +7219,10 @@ a.suggest_button.override-width{
     line-height: 25px;
 }
 
+a.suggest_button.no-margin-bottom{
+    margin-bottom:0 !important;
+}
+
 .suggest_list_style{
     border-bottom: 1px dotted #ededed;
     padding-bottom:7px;
@@ -7288,6 +7292,10 @@ a.suggest_button.override-width{
 
 .no-padding{
     padding: 0px !important;
+}
+
+.no-padding-right{
+    padding-right: 0px !important;
 }
 
 /* user main page session selection */
@@ -8644,7 +8652,7 @@ a:hover, a:visited, a:link, a:active
 	-webkit-box-shadow: 1px 1px 5px rgba(0,0,0,0.3);
 	-moz-box-shadow: 1px 1px 5px rgba(0,0,0,0.3);
 	box-shadow: 1px 1px 5px rgba(0,0,0,0.3);
-	padding: 20px !important;
+	padding: 10px 20px !important;
 }
 
 .height-520{
@@ -15202,6 +15210,45 @@ ul.post-meta li a:hover {
 .feedback-margin-adjust{
     margin-top:-149px !important;
 }
+
+
+#weight-form{
+    position: fixed;
+    right: -300px;
+    top:27%;
+    z-index: 100!important;
+    width:300px;
+    padding:0;
+    margin:0;
+}
+
+#weight-form p{
+    margin-left:-39px;
+    text-align: left;
+    padding:0;
+    background-color:transparent;
+    cursor:pointer;
+}
+
+#update-weight-form{
+    display:none;
+    z-index: 100!important;
+    box-shadow: 0 0 9px rgba(0, 0, 0, 0.4);
+    -o-box-shadow: 0 0 9px rgba(0, 0, 0, 0.4);
+    -moz-box-shadow: 0 0 9px rgba(0, 0, 0, 0.4);
+    -webkit-box-shadow: 0 0 9px rgba(0, 0, 0, 0.4);
+    background: #fff;
+    margin:0;
+    padding:15px;
+    border-top:3px solid #f8ba01;
+    border-left:3px solid #f8ba01;
+    border-bottom:3px solid #f8ba01;
+}
+
+.update-weight-margin-adjust{
+    margin-top:-151px !important;
+}
+
 
 .suggested-food{
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);

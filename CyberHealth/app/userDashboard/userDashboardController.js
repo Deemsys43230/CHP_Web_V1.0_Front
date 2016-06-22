@@ -82,6 +82,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         });
     };
 
+
     //On Select suggested foods
     $scope.suggestedFoodByAdmin=function(foodid){
         $scope.isNew=true;
@@ -232,6 +233,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
             $scope.adminSuggestedFood = response.data.foodSuggestion;
         });
         switch(parseInt($scope.userFood.sessionid)){
+
             case 1:$scope.userFoodDiaryData=$scope.userFoodDiaryDataAll.BreakFast;
                 break;
             case 2:$scope.userFoodDiaryData=$scope.userFoodDiaryDataAll.Brunch;
@@ -760,26 +762,35 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         });
     };
 
-    $scope.doGetWeightLog=function(date){
+    $scope.doGetWeightLog=function(date,id){
 
         var weightLogPromise=UserDashboardService.doGetWeightLogDetails(date);
         weightLogPromise.then(function(result){
             var weightlogdetails=result.Weight_logs;
             if(!weightlogdetails.weight){
                 $scope.originalWeight="";
-                $("#weightLog").val('');
+                if(id==1)
+                    $("#weightLog").val('');
+                else
+                    $("#weightLog1").val('');
             }
             else{
                 $scope.weightlog=$scope.originalWeight=weightlogdetails.weight;
-                $("#weightLog").val(weightlogdetails.weight);
+                if(id==1)
+                    $("#weightLog").val(weightlogdetails.weight);
+                else
+                    $("#weightLog1").val(weightlogdetails.weight);
             }
         });
     };
 
-    $scope.weightLogEntry=function(){
+    $scope.weightLogEntry=function(id){
         $scope.weightUpdateText="Updating...";
         $scope.spinner=true;
-        $scope.doInsertOrUpdateWeightLog($("#weight-log-date").val(),parseFloat($("#weightLog").val()));
+        if(id==1)
+            $scope.doInsertOrUpdateWeightLog($("#weight-log-date").val(),parseFloat($("#weightLog").val()));
+        else
+            $scope.doInsertOrUpdateWeightLog($("#weight-log-date1").val(),parseFloat($("#weightLog1").val()));
     };
 
     //TO Insert weight Goal Log
@@ -803,6 +814,10 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
 
     $scope.isCleanWeight=function(){
         return angular.equals(parseFloat($("#weightLog").val()), parseFloat($scope.originalWeight));
+    };
+
+    $scope.isCleanWeight1=function(){
+        return angular.equals(parseFloat($("#weightLog1").val()), parseFloat($scope.originalWeight));
     };
 
 
