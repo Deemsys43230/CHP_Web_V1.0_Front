@@ -15,7 +15,7 @@ passwordApp.controller('ResetPasswordController',['$scope','requestHandler','Fla
     };
 
     $scope.verifyToken=function(){
-        $scope.response=2;
+        $scope.response=1;
     };
 
     $scope.init=function(){

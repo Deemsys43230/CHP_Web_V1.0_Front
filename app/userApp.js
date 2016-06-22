@@ -615,12 +615,12 @@ userApp.controller("UserInitialController",['$scope','requestHandler','$location
 
         $scope.userFeedback.then(function(result){
             $scope.isFeedback=true;
-            successMessage(Flash,"Thanks for your feedback!");
             $scope.feedback={};
             $scope.feedbackForm.$setPristine();
         });
 
         $timeout(function () {
+            $scope.isFeedback=false;
             if($('#form').css('left')=='0px'){
                 $("#feedback-form").slideToggle(800);
                 $('#form').animate({left:'-300px'},  500);

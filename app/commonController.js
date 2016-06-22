@@ -9,10 +9,16 @@ commonApp.controller('CommonController',['$scope','requestHandler','Flash','$rou
             $(".popupContainer").addClass('left-36');
             $("#lean_overlay").fadeTo(1000);
             $("#modal").fadeIn(600);
-            $(".modal_trigger").click();
-            successMessage(Flash,"Reset Password Successfull! Please Login");
+            /*$(".modal_trigger").click();*/
+            $(".reset_password").hide();
+            $(".user_register").hide();
+            $(".secret_question").hide();
+            $(".user_register1").hide();
+            $(".user_login").show();
+            $(".new_password_form").hide();
+            $(".header_title").text('Login');
         });
-
+        successMessage(Flash,"Reset Password Successfull! Please Login");
     }
 
 
