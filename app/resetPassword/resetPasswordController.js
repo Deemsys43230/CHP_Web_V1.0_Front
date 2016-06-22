@@ -1,18 +1,31 @@
 /**
  * Created by Deemsys on 9/19/2015.
  */
-var commonApp = angular.module('commonApp', ['requestModule','flash','ngAnimate']);
+var passwordApp = angular.module('passwordApp', ['requestModule','flash','ngAnimate']);
 
-commonApp.controller('ResetPasswordController',['$scope','requestHandler','Flash','$location','$rootScope',function($scope,requestHandler,Flash,$location,$rootScope){
+passwordApp.controller('ResetPasswordController',['$scope','requestHandler','Flash','$location','$rootScope','$window',function($scope,requestHandler,Flash,$location,$rootScope,$window){
 
-    console.log($rootScope.emailId);
+
     $scope.resetPassword=function(){
-
+        $scope.reset.newpassword;
+        $window.location.href="../../#/home/password";
+        $scope.newpassword="";
+        $scope.confirmPassword="";
+        $scope.resetPasswordForm.$setPristine();
     };
 
+    $scope.verifyToken=function(){
+        $scope.response=2;
+    };
+
+    $scope.init=function(){
+       $scope.verifyToken();
+    };
+
+    $scope.init();
 }]);
 
-/*
+
 // Compare Confirm Password
 passwordApp.directive('compareTo',function() {
     return {
@@ -32,4 +45,4 @@ passwordApp.directive('compareTo',function() {
             });
         }
     };
-});*/
+});

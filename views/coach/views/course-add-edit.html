@@ -39,12 +39,13 @@
                                 <option value="" selected hidden />
                             </select>
 
-                            <span ng-show="courseForm.price.$dirty&&courseForm.price.$invalid">
-                                <span class="error-message textarea-errormessage55" ng-show="courseForm.price.$error.required"><span>Required.</span></span>
-                                <span class="error-message textarea-errormessage55" ng-show="!courseForm.price.$error.required&& courseForm.price.$error.validateFloat1"><span>Invalid&nbsp;Data.</span></span>
-                            </span>
+
                             <input class="search-input margin-top-15" name="price"  placeholder="Enter course price" ng-model="courseDetails.price" maxlength="7" required valid-floatnumberzero>
                             <p class="text-red margin-top-5"><b>Note : Price "zero" will be consider as free course.</b></p>
+                             <span ng-show="courseForm.price.$dirty&&courseForm.price.$invalid">
+                                <span class="error-message margin-top25" ng-show="courseForm.price.$error.required"><span>Required.</span></span>
+                                <span class="error-message margin-top25" ng-show="!courseForm.price.$error.required&& courseForm.price.$error.validateFloat1"><span>Invalid&nbsp;Data.</span></span>
+                            </span>
                         </div>
                         <div class="col-lg-3 col-md-3 col-sm-3">
                             <span ng-show="isAdd==1"><img src="{{courseDetails.promoimage | trusted}}"></span>

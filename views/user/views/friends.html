@@ -93,6 +93,12 @@
                                             <td>Zipcode</td>
                                             <td>{{viewMemberDetails.zipcode}}</td>
                                         </tr>
+                                        <tr ng-if="viewMemberDetails.isprivacy==0">
+                                            <td>Food Style</td>
+                                            <td ng-if="viewMemberDetails.preferfood==1">Indian</td>
+                                            <td ng-if="viewMemberDetails.preferfood==2">US</td>
+                                            <td ng-if="viewMemberDetails.preferfood==3">None</td>
+                                        </tr>
                                         <tr>
                                             <td>About</td>
                                             <td>{{viewMemberDetails.about}}</td>
@@ -254,7 +260,7 @@
                             </div>
                             <div class="col-lg-10 col-md-10 col-sm-11">
                                 <h5 class="wrap">{{searchfriends.name}}</h5>
-                                <!--<p class="margin-bottom-5" ng-if="searchfriends.isPrivacy == 1">{{searchfriends.emailid}}</p>-->
+                                <p class="margin-bottom-5">{{searchfriends.emailid}}</p>
                                 <div class="margin-top-5">
                                     <a href="" class="invite_button" ng-if="searchfriends.friendStatus == 0" ng-click="inviteFriends(searchfriends.userid)">Invite</a>
                                     <a href="" class="invite_button request_sent" ng-if="searchfriends.friendStatus == 1" ng-click="denyFriends(searchfriends.userid)">Cancel Request</a>

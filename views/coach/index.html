@@ -251,7 +251,7 @@
         <p id="feedback_button"><img src="../../images/feedback.png"></p>
         <div class="feedback-margin-adjust">
         <form id="feedback-form" name="feedbackForm">
-            <div flash-message="2000" ></div>
+            <div flash-message="2000" ng-show="isFeedback"></div>
             <input class="section-input margin-top-5" name="name" ng-model="feedback.name" placeholder="Name*" required/>
          <span ng-show="feedbackForm.name.$dirty&&feedbackForm.name.$invalid">
              <span class="error-message" ng-show="feedbackForm.name.$error.required"><span>Required.</span></span>

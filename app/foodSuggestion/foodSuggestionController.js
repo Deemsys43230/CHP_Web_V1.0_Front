@@ -15,7 +15,17 @@ adminApp.controller('FoodSuggestionController',['$scope','requestHandler','Flash
         });
     };
 
+    // Search food suggestion
+    $('.show-list-search').click(function() {
+        $('.search-list-form').toggle(300);
+        $('.search-list-form input').focus();
+    });
+
     $scope.doApproveFoodSuggestion=function(id){
+        if($('.search-list-form').css('display') != 'none'){
+            $(".search-list-form").hide();
+            $(".search-list-form").show(2400);
+        }
         $scope.loaded=true;
         requestHandler.postRequest("admin/approveFoodSuggestion/",{'suggestionid':id}).then(function(response){
             $scope.loaded=false;
@@ -28,6 +38,10 @@ adminApp.controller('FoodSuggestionController',['$scope','requestHandler','Flash
     };
 
     $scope.doRejectFoodSuggestion=function(id){
+        if($('.search-list-form').css('display') != 'none'){
+            $(".search-list-form").hide();
+            $(".search-list-form").show(2400);
+        }
         $scope.loaded=true;
         requestHandler.postRequest("admin/rejectFoodSuggestion/",{'suggestionid':id}).then(function(response){
             $scope.loaded=false;

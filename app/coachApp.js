@@ -471,7 +471,7 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
     }]);
 
 //Initial Controller for Username
-coachApp.controller("CoachInitialController",['$scope','requestHandler','$location','FeedbackService','Flash',function($scope,requestHandler,$location,FeedbackService,Flash){
+coachApp.controller("CoachInitialController",['$scope','requestHandler','$location','FeedbackService','Flash','$timeout',function($scope,requestHandler,$location,FeedbackService,Flash,$timeout){
     $scope.hideValue=1;
     requestHandler.getRequest("getUserId/","").then(function(response){
         $scope.username=response.data.User_Profile.name;
@@ -494,14 +494,25 @@ coachApp.controller("CoachInitialController",['$scope','requestHandler','$locati
 
     $scope.getSocialMediaDetails();
 
+    $scope.isFeedback=false;
     $scope.addUserFeedback=function(){
         $scope.userFeedback= FeedbackService.addUserFeedback($scope.feedback);
 
         $scope.userFeedback.then(function(result){
+            $scope.isFeedback=true;
             successMessage(Flash,"Thanks for your feedback!");
             $scope.feedback={};
             $scope.feedbackForm.$setPristine();
         });
+        $timeout(function () {
+            if($('#form').css('left')=='0px'){
+                $("#feedback-form").slideToggle(800);
+                $('#form').animate({left:'-300px'},  500);
+            }else{
+                $('#form').animate({left:'0'},  500);
+                $("#feedback-form").slideToggle(300);
+            }
+        },2000);
     };
 }]);
 

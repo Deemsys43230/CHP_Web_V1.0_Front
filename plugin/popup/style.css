@@ -11,6 +11,10 @@
     display: none;
 }
 
+.left-36{
+    left:36%!important;
+}
+
 .popupContainer{
 	position:absolute;
 	width:330px !important;

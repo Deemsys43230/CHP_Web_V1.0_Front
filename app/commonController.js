@@ -4,9 +4,19 @@ commonApp.controller('CommonController',['$scope','requestHandler','Flash','$rou
 
 
     $scope.countFrom = 0;
+    if($routeParams.id=="password"){
+        $(function(){
+            $(".popupContainer").addClass('left-36');
+            $("#lean_overlay").fadeTo(1000);
+            $("#modal").fadeIn(600);
+            $(".modal_trigger").click();
+            successMessage(Flash,"Reset Password Successfull! Please Login");
+        });
+
+    }
+
+
     if($routeParams.id== "logout"){
-
-
 
         $(function(){
             $("#lean_overlay").fadeTo(1000);

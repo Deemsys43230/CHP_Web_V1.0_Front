@@ -152,7 +152,7 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
             $scope.viewload=false;
         });
 
-        /*requestHandler.getRequest("getRatingsandReviews/"+id, "").then(function (response) {
+        requestHandler.getRequest("getRatingsandReviews/"+id, "").then(function (response) {
             $scope.coachReviews = response.data.Ratings_Reviews;
             $scope.viewload=false;
             $scope.totalRatings = $scope.coachReviews.totalRatings;
@@ -164,7 +164,7 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
                 $scope.averageRate=$scope.coachReviews.averageRatings;
         },function(){
             errorMessage(Flash,"Please try again later!")
-        });*/
+        });
     };
 
     $scope.doGetMyCoachListByUser=function(){

@@ -84,7 +84,7 @@
                     <span ng-show="forgotPasswordForm.secretAnswer.$dirty&&forgotPasswordForm.secretAnswer.$invalid && !forgotPasswordForm.secretAnswer.$pristine">
                         <span class="error-message" ng-show="forgotPasswordForm.secretAnswer.$error.required"><span>Required.</span></span>
                     </span>
-                <a href="#" data-ng-click="reset()" class="forgot_password text-center reset_link">Reset Password without security question</a>
+                <a href="views/password" data-ng-click="reset()" class="forgot_password text-center reset_link">Reset Password without security question</a>
                 <div class="action_btns margin-top-20">
                     <div class="one_half"><a href="#"  data-ng-click="reset()" class="btn back_btn_forgotPassword"><i class="fa fa-angle-double-left"></i> Back</a></div>
                     <div class="one_half last"><a ng-class="{'button-disable':forgotPasswordForm.$invalid}" ng-click="doSecretAnswerCheck()" class="btn btn_red">Submit</a></div>
@@ -249,6 +249,31 @@
     $(".modal_trigger").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
 
     $(function(){
+
+
+        $('.modal_close').click(function(){
+            $(".popupContainer").removeClass('left-36');
+            $(".reset_password").hide();
+            $(".user_register").hide();
+            $(".secret_question").hide();
+            $(".user_register1").hide();
+            $(".user_login").hide();
+            $(".new_password_form").hide();
+            $("#modal").hide();
+            $("#lean_overlay").hide();
+        });
+
+        $("#lean_overlay").click(function(){
+            $(".popupContainer").removeClass('left-36');
+            $(".reset_password").hide();
+            $(".user_register").hide();
+            $(".secret_question").hide();
+            $(".user_register1").hide();
+            $(".user_login").hide();
+            $(".new_password_form").hide();
+            $("#modal").hide();
+            $("#lean_overlay").hide();
+        });
 
         // Calling Login Form
         $("#forgot_password").click(function(){

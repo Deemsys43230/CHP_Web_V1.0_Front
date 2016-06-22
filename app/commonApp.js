@@ -484,7 +484,7 @@ commonApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
     }]);
 
 //Internal Login Details
-commonApp.controller('LoginController',['$scope','requestHandler','Flash','$window','$location','$element','FeedbackService','$rootScope',function($scope,requestHandler,Flash,$window,$location,$element,FeedbackService,$rootScope){
+commonApp.controller('LoginController',['$scope','requestHandler','Flash','$window','$location','$element','FeedbackService','$rootScope','$routeParams',function($scope,requestHandler,Flash,$window,$location,$element,FeedbackService,$rootScope,$routeParams){
 
     $scope.hideValue=1;
 
@@ -702,16 +702,29 @@ commonApp.controller('LoginController',['$scope','requestHandler','Flash','$wind
         $scope.confirmPassword="";
         $scope.newPasswordForm.$setPristine();
     };
-
+    $scope.isFeedback=false;
     $scope.addUserFeedback=function(){
 
         $scope.userFeedback= FeedbackService.addUserFeedback($scope.feedback);
 
         $scope.userFeedback.then(function(result){
+            $scope.isFeedback=true;
             successMessage(Flash,"Thanks for your feedback!");
             $scope.feedback={};
             $scope.feedbackForm.$setPristine();
+
         });
+        $timeout(function () {
+            if($('#form').css('left')=='0px'){
+                $("#feedback-form").slideToggle(800);
+                $('#form').animate({left:'-300px'},  500);
+            }else{
+                $('#form').animate({left:'0'},  500);
+                $("#feedback-form").slideToggle(300);
+            }
+        },2000);
+
+
 
     };
 

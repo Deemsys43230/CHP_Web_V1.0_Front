@@ -15,7 +15,17 @@ adminApp.controller('ExerciseSuggestionController',['$scope','requestHandler','F
         });
     };
 
+    // Search exercise suggestion
+    $('.show-list-search').click(function() {
+        $('.search-list-form').toggle(300);
+        $('.search-list-form input').focus();
+    });
+
     $scope.doApproveExerciseSuggestion=function(id){
+        if($('.search-list-form').css('display') != 'none'){
+            $(".search-list-form").hide();
+            $(".search-list-form").show(2400);
+        }
         $scope.loaded=true;
         requestHandler.postRequest("admin/approveExerciseSuggestion/",{'suggestionid':id}).then(function(response){
             $scope.loaded=false;
@@ -28,6 +38,10 @@ adminApp.controller('ExerciseSuggestionController',['$scope','requestHandler','F
     };
 
     $scope.doRejectExerciseSuggestion=function(id){
+        if($('.search-list-form').css('display') != 'none'){
+            $(".search-list-form").hide();
+            $(".search-list-form").show(2400);
+        }
         $scope.loaded=true;
         requestHandler.postRequest("admin/rejectExerciseSuggestion/",{'suggestionid':id}).then(function(response){
             $scope.loaded=false;

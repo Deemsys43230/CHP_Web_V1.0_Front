@@ -587,7 +587,7 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
 }]);
 
 //Initial Controller for Username
-userApp.controller("UserInitialController",['$scope','requestHandler','$location','Flash','FeedbackService',function($scope,requestHandler,$location,Flash,FeedbackService){
+userApp.controller("UserInitialController",['$scope','requestHandler','$location','Flash','FeedbackService','$timeout',function($scope,requestHandler,$location,Flash,FeedbackService,$timeout){
     $scope.hideValue=1;
 
     requestHandler.getRequest("getUserId/","").then(function(response){
@@ -609,15 +609,26 @@ userApp.controller("UserInitialController",['$scope','requestHandler','$location
     };
 
     $scope.getSocialMediaDetails();
-
+    $scope.isFeedback=false;
     $scope.addUserFeedback=function(){
         $scope.userFeedback= FeedbackService.addUserFeedback($scope.feedback);
 
         $scope.userFeedback.then(function(result){
+            $scope.isFeedback=true;
             successMessage(Flash,"Thanks for your feedback!");
             $scope.feedback={};
             $scope.feedbackForm.$setPristine();
         });
+
+        $timeout(function () {
+            if($('#form').css('left')=='0px'){
+                $("#feedback-form").slideToggle(800);
+                $('#form').animate({left:'-300px'},  500);
+            }else{
+                $('#form').animate({left:'0'},  500);
+                $("#feedback-form").slideToggle(300);
+            }
+        },2000);
     };
 
 }]);
@@ -637,6 +648,8 @@ userApp.controller("UserLogoutController",['$cookies','$scope','$window',functio
 
 //To Display success message
 //For User Messages
+
+
 function successMessage(Flash,message){
 
     Flash.dismiss();

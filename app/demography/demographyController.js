@@ -15,6 +15,7 @@ userApp.controller('DemographyController',['$scope','requestHandler','Flash','$l
             $scope.demography.userActivityType = $scope.demography.userActivityType.toString();
 
 
+
             if($scope.userProfile.unitPreference==2){
                 $scope.demography.height = $scope.demography.height.toString();
 
@@ -27,7 +28,6 @@ userApp.controller('DemographyController',['$scope','requestHandler','Flash','$l
                 }else{
                 $scope.demography.heightInches=heightSplit[1];
                 }
-               // console.log(heightSplit[1]);
             }
             originalDemography=angular.copy(response.data.Demography_Data);
 
@@ -125,6 +125,7 @@ userApp.controller('DemographyController',['$scope','requestHandler','Flash','$l
         if($scope.demography.diabetes == '0'){
             $scope.demography.diabetes="";
         }
+
             requestHandler.putRequest("user/insertorupdateDemography/",$scope.demography).then(function(response){
                 $scope.doGetDemographyandNutrition();
                 //$location.path("/demography");
@@ -186,3 +187,56 @@ userApp.filter('trusted', ['$sce', function ($sce) {
         return $sce.trustAsResourceUrl(url);
     };
 }]);
+
+userApp.directive('lowerThan', [
+
+    function() {
+
+        var link = function($scope, $element, $attrs, ctrl) {
+
+            var validate = function(viewValue) {
+                var comparisonModel = $attrs.lowerThan;
+
+
+                if(!viewValue || !comparisonModel){
+                    // It's valid because we have nothing to compare against
+                    ctrl.$setValidity('lowerThan', true);
+                }
+                var plantype=$scope.plantype;
+                // It's valid if model is lower than the model we're comparing against
+                if(plantype==3){
+                ctrl.$setValidity('lowerThan', parseInt(viewValue, 10) < parseInt(comparisonModel, 10) );
+                }
+                if(plantype==2){
+                ctrl.$setValidity('greaterThan', parseInt(viewValue, 10) > parseInt(comparisonModel, 10) );
+                 }
+                return viewValue;
+            };
+
+
+
+            ctrl.$parsers.unshift(validate);
+            ctrl.$formatters.push(validate);
+            if(plantype==3){
+            $attrs.$observe('lowerThan', function(comparisonModel){
+                return validate(ctrl.$viewValue);
+            });
+            }
+            if(plantype==2){
+            $attrs.$observe('greaterThan', function(comparisonModel){
+                return validate(ctrl.$viewValue);
+            });
+            }
+
+        };
+
+        return {
+            require: 'ngModel',
+            link: link,
+            scope: { 'plantype': '=' }
+        };
+
+    }
+]);
+
+
