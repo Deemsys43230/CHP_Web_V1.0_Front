@@ -6,7 +6,6 @@ body{
     line-height: 21px;
 	font-weight: 300;
 	color: #666;
-    overflow-y: hidden;
     background: url(../images/gym.jpg) no-repeat fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -6471,6 +6470,7 @@ ul.footer-nav li a:hover {
 
 .pricing .counter-item h5 {
     font-size:30px;
+    line-height: 35px;
 }
 
 .counter-item {
@@ -7837,6 +7837,10 @@ ul.exercise li .exercise_name{
 
 .padding-left-8{
     padding-left:8px!important;
+}
+
+.padding-left-0{
+    padding-left:0px!important;
 }
 
 .weight_measure{
@@ -9587,7 +9591,7 @@ input[type=range]:focus::-ms-fill-upper {
 	white-space: nowrap; }
 
 .label-success {
-    padding: 3px!important;
+    padding: 3px 7px!important;
     border: 1px solid #4cae4c;
     color: #4cae4c;
     font-size: 11px;
@@ -9599,7 +9603,7 @@ input[type=range]:focus::-ms-fill-upper {
 
 .label-danger{
     font-weight: bold;
-    padding: 3px!important;
+    padding: 3px 7px!important;
     border: 1px solid #d43f3a;
     color: #d43f3a;
     font-size: 11px;
@@ -15185,10 +15189,10 @@ ul.post-meta li a:hover {
 
 #form{
     position: fixed;
-    left: -300px;
+    left: -270px;
     top:25%;
-    z-index: 100!important;
-    width:300px;
+    z-index: 100000!important;
+    width:270px;
     padding:0;
     margin:0;
 }
@@ -15322,4 +15326,8 @@ marquee.feedbackslide{
 .reset_link{
     color: blue !important;
     text-decoration: underline !important;
+}
+
+#dailyUpdateBudgetGraph{
+    height:170px;
 }

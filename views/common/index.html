@@ -134,6 +134,7 @@
                             <a onclick="return false;"  href="#" class="next vertical-carousel-control pull-right"><span class="fa fa-angle-up"></span></a>
                         </div>
                         <h4 class="classic-title"><span>Others Says</span></h4>
+                        <br/>
                         <ul class="vertical-items remove-style">
                             <li class="news-item" ng-repeat="usertestimonial in usertestimoniallist">
                                 <div class="media testimonial-inner">
@@ -448,8 +449,8 @@
                     items : itemsNum,
                     itemsDesktop : [1000,deskitemsNum],
                     itemsDesktopSmall : [900,desksmallitemsNum],
-                    itemsTablet: [600,tabletitemsNum],
-                    itemsMobile : false,
+                    itemsTablet: [768,2],
+                    itemsMobile : [600,1],
                     transitionStyle : "goDown"
                 });
             });

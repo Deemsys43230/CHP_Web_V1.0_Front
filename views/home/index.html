@@ -5,7 +5,7 @@
 <html lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta name="description" content="Cyberhealths is modern and digital way of weight loss, weight gain, and fitness program. Also we offer online courses for all health aspects.">
 
     <!-- Basic -->
@@ -44,15 +44,15 @@
     <div class="top-bar">
         <div class="container">
             <div class="row">
-                <div class="col-lg-8 col-md-8 col-sm-8" ng-init="init()">
+                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-5 hidden-xss" ng-init="init()">
                     <!-- Start Contact Info -->
                     <div ng-hide="hideValue" ng-cloak class="ng-cloak">
                         <ul class="contact-details remove-style">
-                            <li><a><i class="fa fa-map-marker"></i> {{address}}</a>
+                            <li class="hidden-xs"><a><i class="fa fa-map-marker"></i> {{address}}</a>
                             </li>
-                            <li><a><i class="fa fa-envelope-o"></i> {{commonDetails.supportemail}}</a>
+                            <li class="hidden-xss"><a><i class="fa fa-envelope-o"></i> {{commonDetails.supportemail}}</a>
                             </li>
-                            <li class="hidden-sm"><a><i class="fa fa-phone"></i> {{commonDetails.mobile}}</a>
+                            <li class="hidden-sm hidden-xs"><a><i class="fa fa-phone"></i> {{commonDetails.mobile}}</a>
                             </li>
                         </ul>
                     </div>
@@ -64,16 +64,16 @@
                         <li>
                             <a class="login itl-tooltip modal_trigger"  data-ng-click="reset()" data-placement="bottom" title="Login / Register" href="#modal">Login / Register</a>
                         </li>
-                        <li>
+                        <li class="hidden-xss">
                             <a class="facebook itl-tooltip" data-placement="bottom" title="Facebook" target="_blank" href="{{commonDetails.facebookurl}}"><i class="fa fa-facebook"></i></a>
                         </li>
-                        <li>
+                        <li class="hidden-xss">
                             <a class="twitter itl-tooltip" data-placement="bottom" title="Twitter"  target="_blank" href="{{commonDetails.twitterurl}}"><i class="fa fa-twitter"></i></a>
                         </li>
-                        <li>
+                        <li class="hidden-xss">
                             <a class="google itl-tooltip" data-placement="bottom" title="Google Plus"  target="_blank" href="{{commonDetails.googleurl}}"><i class="fa fa-google-plus"></i></a>
                         </li>
-                        <li>
+                        <li class="hidden-xss">
                             <a class="linkdin itl-tooltip" data-placement="bottom" title="Linkedin"  target="_blank" href="{{commonDetails.linkedinurl}}"><i class="fa fa-linkedin"></i></a>
                         </li>
                     </ul>
@@ -94,8 +94,8 @@
                 </button>
                 <!-- End Toggle Nav Link For Mobiles -->
                 <a class="navbar-brand" href="../../">
-                    <!--<img alt="" src="../../images/bephit.png">-->
-                    <img width="209" height="57" alt="" src="../../images/cyber-logo.png">
+                    <img class="hidden-xs hidden-sm" width="209" height="57" alt="" src="../../images/cyber-logo.png">
+                    <img class="hidden-md hidden-lg" width="180" height="49" alt="" src="../../images/cyber-logo-small.png">
                 </a>
             </div>
             <div class="navbar-collapse collapse">
@@ -239,7 +239,10 @@
 </div>-->
 
 <div id="form">
-    <p id="feedback_button"><img src="../../images/feedback.png"></p>
+    <p id="feedback_button">
+        <img class="hidden-xs" src="../../images/feedback.png">
+        <img class="hidden-lg hidden-md hidden-sm" src="../../images/feedback-1.png">
+    </p>
     <div class="feedback-margin-adjust">
     <form id="feedback-form" name="feedbackForm">
         <div class="text-green" ng-show="isFeedback">Thanks for your feedback!!!</div>
@@ -334,7 +337,7 @@
         $("#feedback_button").click(function(){
             if($('#form').css('left')=='0px'){
                 $("#feedback-form").slideToggle(800);
-                $('#form').animate({left:'-300px'},  500);
+                $('#form').animate({left:'-270px'},  500);
             }else{
                 $('#form').animate({left:'0'},  500);
                 $("#feedback-form").slideToggle(300);

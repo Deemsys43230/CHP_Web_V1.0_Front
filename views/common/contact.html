@@ -2,7 +2,7 @@
 <!-- Start Content -->
 <div id="content-page" ng-cloak class="ng-cloak">
     <div id="w" class="clearfix">
-        <div class="col-lg-8 col-md-7 col-sm-12">
+        <div class="col-lg-8 col-md-7 col-sm-12 col-xs-12">
             <!-- Classic Heading -->
             <h4 class="classic-title"><span>Contact Us</span></h4>
             <div my-map=""></div>
@@ -35,7 +35,7 @@
             <!-- End Contact Form -->
         </div>
 
-        <div class="col-lg-4 col-md-5 col-sm-12">
+        <div class="col-lg-4 col-md-5 col-sm-12 col-xs-12">
             <!-- Classic Heading -->
             <h4 class="classic-title"><span>Information</span></h4>
             <!-- Some Info -->
@@ -46,47 +46,47 @@
             <!-- Info - Icons List -->
             <ul ng-if="contactUsDetails.streetaddress" class="icons-list remove-style">
                 <li>
-                        <span class="col-lg-5 col-md-5 col-sm-2 no-padding">
+                        <span class="col-lg-5 col-md-5 col-sm-2 col-xs-4 no-padding">
                             <i class="fa fa-building">  </i>
                             <strong>Address<span class="pull-right">:</span></strong>
                         </span>
-                        <span class="col-lg-7 col-md-7 col-sm-10 margin-bottom-10">
+                        <span class="col-lg-7 col-md-7 col-sm-10 col-xs-8 margin-bottom-10">
                             {{contactUsDetails.streetaddress}},<br/>{{contactUsDetails.city}},<br/>{{contactUsDetails.state}},{{contactUsDetails.zipcode}}
                         </span>
                 </li>
                 <li>
-                        <span class="col-lg-5 col-md-5 col-sm-2 no-padding">
+                        <span class="col-lg-5 col-md-5 col-sm-2 col-xs-4 no-padding">
                             <i class="fa fa-envelope-o"></i>
                             <strong>Email ID<span class="pull-right">:</span></strong>
                         </span>
-                        <span class="col-lg-7 col-md-7 col-sm-10 margin-bottom-10">
+                        <span class="col-lg-7 col-md-7 col-sm-10 col-xs-8 margin-bottom-10">
                             {{contactUsDetails.supportemail}}
                         </span>
                 </li>
                 <li>
-                        <span class="col-lg-5 col-md-5 col-sm-2 no-padding">
+                        <span class="col-lg-5 col-md-5 col-sm-2 col-xs-4 no-padding">
                             <i class="fa fa-tablet"></i>
                             <strong>Phone<span class="pull-right">:</span></strong>
                         </span>
-                        <span class="col-lg-7 col-md-7 col-sm-10 margin-bottom-10">
+                        <span class="col-lg-7 col-md-7 col-sm-10 col-xs-8 margin-bottom-10">
                             {{contactUsDetails.mobile}}
                         </span>
                 </li>
                 <li>
-                        <span class="col-lg-5 col-md-5 col-sm-2 no-padding">
+                        <span class="col-lg-5 col-md-5 col-sm-2 col-xs-4 no-padding">
                             <i class="fa fa-phone"></i>
                             <strong>Landline<span class="pull-right">:</span></strong>
                         </span>
-                        <span class="col-lg-7 col-md-7 col-sm-10 margin-bottom-10">
+                        <span class="col-lg-7 col-md-7 col-sm-10 col-xs-8 margin-bottom-10">
                             {{contactUsDetails.landline}}
                         </span>
                 </li>
                 <li>
-                        <span class="col-lg-5 col-md-5 col-sm-2 no-padding">
+                        <span class="col-lg-5 col-md-5 col-sm-2 col-xs-4 no-padding">
                             <i class="fa fa-globe"></i>
-                            <strong>Company URL<span class="pull-right">:</span></strong>
+                            <strong><span class="hidden-xss">Company</span> URL<span class="pull-right">:</span></strong>
                         </span>
-                        <span class="col-lg-7 col-md-7 col-sm-10 margin-bottom-10">
+                        <span class="col-lg-7 col-md-7 col-sm-10 col-xs-8 margin-bottom-10">
                             {{contactUsDetails.companyurl}}
                         </span>
                 </li>

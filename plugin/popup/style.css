@@ -1,7 +1,7 @@
 
 #lean_overlay {
     position: fixed;
-    z-index:99998;
+    z-index:999998;
     top: 0;
     left: 0;
     height:100%;
@@ -22,7 +22,7 @@
 	left:45%;
     top:100px!important;
 	background: #FFF;
-    z-index:99999 !important;
+    z-index:999999 !important;
 }
 
 .popupContainer-width{

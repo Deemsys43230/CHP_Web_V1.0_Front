@@ -372,9 +372,15 @@ $(document).ready(function ($) {
 			});
 		}
 	});*/
-	
-	
-	
+
+    var deviceWidth = $( window ).width();
+
+    $('.navbar-collapse ul li').click(function(){
+        if(deviceWidth<768){
+            $('.collapse').collapse('hide');
+        }
+    });
+
 	
 	/*----------------------------------------------------*/
 	/*	Pie Charts
@@ -404,10 +410,7 @@ $(document).ready(function ($) {
 		});
 	}
 	initPieCharts();*/
-	
-	
-	
-	
+
 	
 	/*----------------------------------------------------*/
 	/*	Animation Progress Bars

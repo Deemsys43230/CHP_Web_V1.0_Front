@@ -12,6 +12,20 @@
     <section class="popupBody">
 
         <div class="user_login">
+
+            <div class="mobileApp">
+                <b>Dear User,</b>
+                <p class="margin-top-10">We have mobile app for better user experience. Please find below link for mobile App.</p>
+                <br/>
+                <div class="android">
+                    This is andriod
+                    <a href="" class="main-button">Get Mobile App Here</a>
+                </div>
+                <div class="iphone">
+                    This is iphone
+                    <a href="" class="main-button">Get Mobile App Here</a>
+                </div>
+            </div>
             <!-- Social Login -->
             <!--<div class="">
                 <a href="#" class="social_box fb">
@@ -24,28 +38,29 @@
             <!--<div class="centeredText">
                 <span>Or</span>
             </div>-->
+            <div class="noMobileApp">
+                <div flash-message="3000" ></div>
+                <!-- <div ng-show="sessionValue==1"><span class="text-red">Your session has been expired.<br/>Please login again!!!</span></div>-->
+                <form name="loginForm" novalidate>
 
-            <div flash-message="3000" ></div>
-            <!-- <div ng-show="sessionValue==1"><span class="text-red">Your session has been expired.<br/>Please login again!!!</span></div>-->
-            <form name="loginForm" novalidate>
-
-                <p>Email ID</p>
-                <input type="email" name="username" ng-model="username" ng-keypress="checkIfEnterKeyWasPressedForLogin($event)" required validate-email/>
-                    <span ng-show="loginForm.username.$dirty&&loginForm.username.$invalid && !loginForm.username.$pristine">
-                    <span class="error-message" ng-show="loginForm.username.$error.required"><span>Required.</span></span>
-                    <span class="error-message" ng-show="loginForm.username.$error.email"><span>Enter&nbsp;valid&nbsp;Email&nbsp;ID.</span></span>
-                    </span>
-                <p>Password</p>
-                <input type="password" name="password" ng-keypress="checkIfEnterKeyWasPressedForLogin($event)" required ng-model="password"/>
-                    <span ng-show="loginForm.password.$dirty&&loginForm.password.$invalid && !loginForm.password.$pristine">
-                    <span class="error-message" ng-show="loginForm.password.$error.required"><span>Required.</span></span>
-                    </span>
-                <a href="#" id="forgot_password" data-ng-click="reset()" class="forgot_password text-center">Forgot password?</a>
-                <div class="action_btns">
-                    <div class="one_half"><a class="btn btn_red" ng-class="{'button-disable':loginForm.$invalid}" ng-click="doLogin()">Login</a></div>
-                    <div class="one_half last"><a id="register_form" class="btn">Register</a></div>
-                </div>
-            </form>
+                    <p>Email ID</p>
+                    <input type="email" name="username" ng-model="username" ng-keypress="checkIfEnterKeyWasPressedForLogin($event)" required validate-email/>
+                        <span ng-show="loginForm.username.$dirty&&loginForm.username.$invalid && !loginForm.username.$pristine">
+                        <span class="error-message" ng-show="loginForm.username.$error.required"><span>Required.</span></span>
+                        <span class="error-message" ng-show="loginForm.username.$error.email"><span>Enter&nbsp;valid&nbsp;Email&nbsp;ID.</span></span>
+                        </span>
+                    <p>Password</p>
+                    <input type="password" name="password" ng-keypress="checkIfEnterKeyWasPressedForLogin($event)" required ng-model="password"/>
+                        <span ng-show="loginForm.password.$dirty&&loginForm.password.$invalid && !loginForm.password.$pristine">
+                        <span class="error-message" ng-show="loginForm.password.$error.required"><span>Required.</span></span>
+                        </span>
+                    <a href="#" id="forgot_password" data-ng-click="reset()" class="forgot_password text-center">Forgot password?</a>
+                    <div class="action_btns">
+                        <div class="one_half"><a class="btn btn_red" ng-class="{'button-disable':loginForm.$invalid}" ng-click="doLogin()">Login</a></div>
+                        <div class="one_half last"><a id="register_form" class="btn">Register</a></div>
+                    </div>
+                </form>
+            </div>
         </div>
 
         <!-- Reset Password -->
@@ -246,6 +261,28 @@
 
 <script>
 
+    /*var device = (/android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(navigator.userAgent.toLowerCase()));*/
+    var isAndroid = (/android/i.test(navigator.userAgent.toLowerCase()));
+    var isIphone = (/iphone/i.test(navigator.userAgent.toLowerCase()));
+
+    $(".android").hide();
+    $(".iphone").hide();
+    $(".mobileApp").hide();
+    $(".noMobileApp").show();
+
+    if(isAndroid){
+        $(".mobileApp").show();
+        $(".noMobileApp").hide();
+        $(".android").show();
+        $(".iphone").hide();
+    }
+    else if(isIphone){
+        $(".mobileApp").show();
+        $(".noMobileApp").hide();
+        $(".android").hide();
+        $(".iphone").show();
+    }
+
     $(".modal_trigger").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
 
     $(function(){
@@ -352,6 +389,8 @@
             $(".user_login").show();
             $(".new_password_form").hide();
             $(".header_title").text('Login');
+            if(isAndroid||isIphone)
+            $(".header_title").text('Recommended');
             return false;
         });
     });
