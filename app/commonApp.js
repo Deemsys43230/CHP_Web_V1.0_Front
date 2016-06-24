@@ -483,6 +483,7 @@ commonApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
             });
     }]);
 
+
 //Internal Login Details
 commonApp.controller('LoginController',['$scope','requestHandler','Flash','$window','$location','$element','FeedbackService','$rootScope','$routeParams','$timeout',function($scope,requestHandler,Flash,$window,$location,$element,FeedbackService,$rootScope,$routeParams,$timeout){
 
@@ -551,10 +552,17 @@ commonApp.controller('LoginController',['$scope','requestHandler','Flash','$wind
                 requestHandler.getRequest("getUserId/","").then(function(response){
 
                    if(response.data.Login.roleid==3){
-                       if(response.data.User_Profile.isProfileUpdated==0){
+                       if(response.data.User_Profile.isProfileUpdated==0 && response.data.demography.demoUpdatedstatus==0){
                           $window.location.href=requestHandler.domainURL()+"views/user/#/profile";
-                       }else{
+
+                       }
+                       else if(response.data.User_Profile.isProfileUpdated==1 && response.data.demography.demoUpdatedstatus==0){
+                           $window.location.href=requestHandler.domainURL()+"views/user/#/demography";
+
+                       }
+                       else if(response.data.User_Profile.isProfileUpdated==1 && response.data.demography.demoUpdatedstatus==1){
                            $window.location.href=requestHandler.domainURL()+"views/user/#/dashboard";
+
                        }
                    }
                     else if(response.data.Login.roleid==2){

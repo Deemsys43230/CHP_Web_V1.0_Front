@@ -24,6 +24,8 @@
     <!-- CSS Styles  -->
     <!-- combine of style, passowrd, font-site, yellow, spinner, loader css files  -->
     <link rel="stylesheet" type="text/css" href="../../css/style.css" media="screen">
+
+    <link rel="stylesheet" type="text/css" href="../../plugin/popup/style.css" media="screen">
      <!-- Responsive CSS Styles  -->
     <link rel="stylesheet" type="text/css" href="../../css/responsive.css" media="screen">
      <!--Message flash-->
@@ -292,6 +294,31 @@
 </div>
 
 </div>
+
+<div id="review-modal" class="popupContainer" style="display:none;left: 37%!important;">
+    <header class="popupHeader">
+        <span class="header_title">Alert</span>
+        <span class="modal_close"><i class="fa fa-times"></i></span>
+    </header>
+
+    <section class="popupBody">
+        <!-- Register Form -->
+        <div class="common_model">
+            <div class="text-center"><img src="../../images/alert-ring.png"/></div><br/>
+            <div ng-show="checkPath==0">
+                <h5 class="text-center">Please Update your profile <br/> to continue</h5>
+            </div>
+            <div ng-show="checkPath==1">
+                <h5  class="text-center">Please Update your demography<br/> to continue</h5>
+            </div>
+            <div class="action_btns margin-top-20">
+                <div class="col-md-8 col-md-offset-2">
+                    <div class=" modal_close"><a onclick="return false;" class="btn btn_red back_btn">OK</a></div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
 <!-- End Container -->
 <!-- Go To Top Link -->
 <a href="#" class="back-to-top"><i class="fa fa-angle-up"></i></a>
@@ -349,6 +376,8 @@
 <script>
     "use strict";
     // Page Loader
+
+    $("#modal_trigger").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
     $(window).load(function () {
         $('#loader').fadeOut();
     });

@@ -3,6 +3,7 @@ var commonApp = angular.module('commonApp', ['ngRoute','oc.lazyLoad','requestMod
 commonApp.controller('CommonController',['$scope','requestHandler','Flash','$routeParams','$sce','$rootScope','$timeout',function($scope,requestHandler,Flash,$routeParams,$sce,$rootScope,$timeout) {
 
 
+
     $scope.countFrom = 0;
     if($routeParams.id=="password"){
         $(function(){

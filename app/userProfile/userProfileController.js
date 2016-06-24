@@ -3,7 +3,7 @@
  */
 var userApp= angular.module('userApp', ['ngRoute','oc.lazyLoad','ngCookies','requestModule','flash','ngAnimate','ui.bootstrap']);
 
-userApp.controller('UserProfileController',['$scope','requestHandler','Flash',function($scope,requestHandler,Flash) {
+userApp.controller('UserProfileController',['$scope','requestHandler','Flash','$location','$timeout','$rootScope',function($scope,requestHandler,Flash,$location,$timeout,$rootScope) {
 
     $scope.doGetProfile=function(){
 
@@ -161,10 +161,25 @@ userApp.controller('UserProfileController',['$scope','requestHandler','Flash',fu
         $scope.userProfile.state = $scope.userProfile.stateSelect.code;
         $scope.userProfile.unitPreference =parseInt($scope.userProfile.unitPreference);
 
+        requestHandler.getRequest("getUserId/","").then(function(response){
+        if(response.data.User_Profile.isProfileUpdated==0){
+            $scope.demographyNavigation = true;
+        }
+        else if(response.data.User_Profile.isProfileUpdated==1){
+            $scope.demographyNavigation = false;
+        }
         requestHandler.putRequest("updateProfile/",$scope.userProfile).then(function(){
             $scope.userProfile.unitPreference =  $scope.userProfile.unitPreference.toString();
             $scope.doGetProfile();
             successMessage(Flash,"Successfully Updated");
+            $timeout(function () {
+                if($scope.demographyNavigation==true && response.data.demography.demoUpdatedstatus==0){
+                $location.path("demography");
+                }
+                   $scope.demographyNavigation = false;
+
+            },2000);
+        });
         });
     };
 
@@ -200,7 +215,9 @@ userApp.controller('UserProfileController',['$scope','requestHandler','Flash',fu
         });
     };
 
-    $scope.doGetProfile();
+        $scope.doGetProfile();
+
+
 
     //To Enable the update button if changes occur.
     $scope.isClean = function() {

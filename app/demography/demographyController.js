@@ -1,5 +1,5 @@
 var userApp= angular.module('userApp', ['ngRoute','oc.lazyLoad','ngCookies','requestModule','flash']);
-userApp.controller('DemographyController',['$scope','requestHandler','Flash','$location',function($scope,requestHandler,Flash,$location) {
+userApp.controller('DemographyController',['$scope','requestHandler','Flash','$location','$timeout',function($scope,requestHandler,Flash,$location,$timeout) {
     var originalDemography="";
     var originalNutrition="";
     $scope.doGetDemographyandNutrition = function () {
@@ -125,15 +125,28 @@ userApp.controller('DemographyController',['$scope','requestHandler','Flash','$l
         if($scope.demography.diabetes == '0'){
             $scope.demography.diabetes="";
         }
-
+        requestHandler.getRequest("getUserId/","").then(function(response){
+            if(response.data.demography.demoUpdatedstatus==0){
+                $scope.dashboardNavigation = true;
+            }
+            else if(response.data.demography.demoUpdatedstatus==1){
+                $scope.dashboardNavigation = false;
+            }
             requestHandler.putRequest("user/insertorupdateDemography/",$scope.demography).then(function(response){
                 $scope.doGetDemographyandNutrition();
-                //$location.path("/demography");
+
                 successMessage(Flash,"Successfully Updated");
+                $timeout(function () {
+                    if($scope.dashboardNavigation == true){
+                    $location.path("/dashboard");
+                    }
+                    $scope.dashboardNavigation = false;
+                },1000);
 
             }, function () {
                 errorMessage(Flash, "Please try again later!")
             });
+        });
     };
 
     $scope.doUpdateNutrition= function () {
@@ -202,12 +215,14 @@ userApp.directive('lowerThan', [
                     // It's valid because we have nothing to compare against
                     ctrl.$setValidity('lowerThan', true);
                 }
-                var plantype=$scope.plantype;
+
+                var plantype="";
+                plantype=$scope.plantype;
                 // It's valid if model is lower than the model we're comparing against
                 if(plantype==3){
                 ctrl.$setValidity('lowerThan', parseInt(viewValue, 10) < parseInt(comparisonModel, 10) );
                 }
-                if(plantype==2){
+                else if(plantype==2){
                 ctrl.$setValidity('greaterThan', parseInt(viewValue, 10) > parseInt(comparisonModel, 10) );
                  }
                 return viewValue;
@@ -217,20 +232,20 @@ userApp.directive('lowerThan', [
 
             ctrl.$parsers.unshift(validate);
             ctrl.$formatters.push(validate);
-            if(plantype==3){
+
             $attrs.$observe('lowerThan', function(comparisonModel){
                 return validate(ctrl.$viewValue);
             });
-            }
-            if(plantype==2){
+
+           /* if(plantype==2){
             $attrs.$observe('greaterThan', function(comparisonModel){
                 return validate(ctrl.$viewValue);
-            });
-            }
+            });*/
+
 
         };
 
-        return {
+        return  {
             require: 'ngModel',
             link: link,
             scope: { 'plantype': '=' }

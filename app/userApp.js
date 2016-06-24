@@ -587,19 +587,84 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
 }]);
 
 //Initial Controller for Username
-userApp.controller("UserInitialController",['$scope','requestHandler','$location','Flash','FeedbackService','$timeout',function($scope,requestHandler,$location,Flash,FeedbackService,$timeout){
+userApp.controller("UserInitialController",['$scope','requestHandler','$location','Flash','FeedbackService','$timeout','$rootScope',function($scope,requestHandler,$location,Flash,FeedbackService,$timeout,$rootScope){
     $scope.hideValue=1;
 
     requestHandler.getRequest("getUserId/","").then(function(response){
         $scope.username=response.data.User_Profile.name;
+        $scope.userProfile=response.data.User_Profile;
+        $scope.demo = response.data.demography;
+
+        if($scope.userProfile.isProfileUpdated==0 && $scope.demo.demoUpdatedstatus==0) {
+            $rootScope.checkPath =0;
+        }
+        else if($scope.userProfile.isProfileUpdated==1 && $scope.demo.demoUpdatedstatus==0) {
+            $rootScope.checkPath=1;
+            $window.location.href=requestHandler.domainURL()+"views/user/#/profile";
+        }
+        else if($scope.userProfile.isProfileUpdated==1 && $scope.demo.demoUpdatedstatus==1) {
+            $rootScope.checkPath=2;
+        }
+    });
+
+    $scope.$watch('checkPath', function() {
+        $scope.popupOpen($rootScope.checkPath);
     });
 
     $scope.$on('$routeChangeStart', function(next, current) {
+
         $scope.activeClass={};
         var currentPage = $location.url().substr(1);
         $scope.activeClass[currentPage]='active';
+
+        $scope.popupOpen($rootScope.checkPath);
     });
 
+    $scope.popupOpen=function(pathVar){
+        $("html, body").animate({
+            scrollTop: 0
+        }, 600);
+        if(pathVar==0){
+            $(function(){
+                $("#lean_overlay").fadeTo(1000);
+                $("#review-modal").fadeIn(600);
+                $(".common_model").show();
+            });
+
+            $(".modal_close").click(function(){
+                $(".common_model").hide();
+                $("#review-modal").hide();
+                $("#lean_overlay").hide();
+            });
+
+            $("#lean_overlay").click(function(){
+                $(".common_model").hide();
+                $("#review-modal").hide();
+                $("#lean_overlay").hide();
+            });
+            $location.path("profile");
+        }
+        else if (pathVar==1){
+            $(function(){
+                $("#lean_overlay").fadeTo(1000);
+                $("#review-modal").fadeIn(600);
+                $(".common_model").show();
+            });
+
+            $(".modal_close").click(function(){
+                $(".common_model").hide();
+                $("#review-modal").hide();
+                $("#lean_overlay").hide();
+            });
+
+            $("#lean_overlay").click(function(){
+                $(".common_model").hide();
+                $("#review-modal").hide();
+                $("#lean_overlay").hide();
+            });
+            $location.path("demography");
+        }
+    };
     $scope.getSocialMediaDetails=function(){
         requestHandler.getRequest("contactus/","").then(function(response){
             $scope.commonDetails = response.data.Contactus[0];
@@ -644,10 +709,6 @@ userApp.controller("UserLogoutController",['$cookies','$scope','$window',functio
     };
 
 }]);
-
-
-//To Display success message
-//For User Messages
 
 
 function successMessage(Flash,message){
