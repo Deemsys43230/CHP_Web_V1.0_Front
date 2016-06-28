@@ -171,6 +171,7 @@ userApp.controller('UserProfileController',['$scope','requestHandler','Flash','$
         requestHandler.putRequest("updateProfile/",$scope.userProfile).then(function(){
             $scope.userProfile.unitPreference =  $scope.userProfile.unitPreference.toString();
             $scope.doGetProfile();
+            $rootScope.checkPath=1;
             successMessage(Flash,"Successfully Updated");
             $timeout(function () {
                 if($scope.demographyNavigation==true && response.data.demography.demoUpdatedstatus==0){

@@ -1,5 +1,5 @@
 var userApp= angular.module('userApp', ['ngRoute','oc.lazyLoad','ngCookies','requestModule','flash']);
-userApp.controller('DemographyController',['$scope','requestHandler','Flash','$location','$timeout',function($scope,requestHandler,Flash,$location,$timeout) {
+userApp.controller('DemographyController',['$rootScope','$scope','requestHandler','Flash','$location','$timeout',function($rootScope,$scope,requestHandler,Flash,$location,$timeout) {
     var originalDemography="";
     var originalNutrition="";
     $scope.doGetDemographyandNutrition = function () {
@@ -134,7 +134,7 @@ userApp.controller('DemographyController',['$scope','requestHandler','Flash','$l
             }
             requestHandler.putRequest("user/insertorupdateDemography/",$scope.demography).then(function(response){
                 $scope.doGetDemographyandNutrition();
-
+                $rootScope.checkPath=2;
                 successMessage(Flash,"Successfully Updated");
                 $timeout(function () {
                     if($scope.dashboardNavigation == true){
@@ -159,6 +159,8 @@ userApp.controller('DemographyController',['$scope','requestHandler','Flash','$l
     };
 
     $scope.isCleanDemography =function(){
+        console.log("ori",originalDemography);
+        console.log("asd",$scope.demography);
             return angular.equals(originalDemography, $scope.demography);
     };
 

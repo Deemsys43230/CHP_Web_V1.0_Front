@@ -3,7 +3,8 @@ var adminApp=angular.module('foodServiceModule',['requestModule']);
 adminApp.factory("FoodService",['requestHandler',function(requestHandler){
 
     var foodServiceObj={};
-    
+
+
     //Get Categories
     foodServiceObj.doGetCategories= function () {
        return requestHandler.getRequest("admin/getFoodCategoryByStatus","").then(function(response){

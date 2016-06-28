@@ -32,7 +32,7 @@ adminApp.controller('AdminFoodSuggestionController',['$scope','requestHandler','
     $scope.foodChoices={};
     $scope.foodSelected=function(){
         $scope.isAddFood=false;
-        $scope.foodChoices.foodid = $scope.selectedFood.foodid;
+        //$scope.foodChoices.foodid = $scope.selectedFood.foodid;
     };
 
     $scope.getSuggestedFood=function(){
@@ -46,19 +46,50 @@ adminApp.controller('AdminFoodSuggestionController',['$scope','requestHandler','
     };
 
     $scope.addSuggestFood=function(){
-        $scope.foodChoices.country=parseInt($scope.foodChoices.country);
-        $scope.foodChoices.session=parseInt($scope.foodChoices.session);
-        $scope.foodChoices.patienttype=parseInt($scope.foodChoices.patienttype);
+        requestHandler.postRequest("admin/getAdminFoodSuggestions/",$scope.foodChoices).then(function(response){
 
-        requestHandler.postRequest("admin/addAdminFoodSuggestions/",$scope.foodChoices).then(function(response){
-            successMessage(Flash,"Successfully Added!!");
-            $scope.selectedFood="";
-            $scope.isAddFood=true;
-            $scope.getSuggestedFood();
-            $scope.foodChoices.country=$scope.foodChoices.country.toString();
-            $scope.foodChoices.session=$scope.foodChoices.session.toString();
-            $scope.foodChoices.patienttype=$scope.foodChoices.patienttype.toString();
+            $scope.foodSuggestedList=response.data.foodSuggestion;
+
+            $.each($scope.foodSuggestedList, function(index,value) {
+                if(value.foodId == $scope.selectedFood.foodid){
+                    $scope.foodExists =true;
+                }
+                else{
+                    $scope.foodExists =false;
+                }
+            });
+
+            if($scope.foodExists){
+                errorMessage(Flash,"Food already exists!!");
+                $scope.selectedFood="";
+                $scope.isAddFood=true;
+                $scope.getSuggestedFood();
+                $scope.foodChoices.country=$scope.foodChoices.country.toString();
+                $scope.foodChoices.session=$scope.foodChoices.session.toString();
+                $scope.foodChoices.patienttype=$scope.foodChoices.patienttype.toString();
+            }
+            else{
+                $scope.foodChoices.foodid = $scope.selectedFood.foodid;
+                $scope.foodChoices.country=parseInt($scope.foodChoices.country);
+                $scope.foodChoices.session=parseInt($scope.foodChoices.session);
+                $scope.foodChoices.patienttype=parseInt($scope.foodChoices.patienttype);
+
+                requestHandler.postRequest("admin/addAdminFoodSuggestions/",$scope.foodChoices).then(function(response){
+                    successMessage(Flash,"Successfully Added!!");
+                    $scope.selectedFood="";
+                    $scope.isAddFood=true;
+                    $scope.getSuggestedFood();
+                    $scope.foodChoices.country=$scope.foodChoices.country.toString();
+                    $scope.foodChoices.session=$scope.foodChoices.session.toString();
+                    $scope.foodChoices.patienttype=$scope.foodChoices.patienttype.toString();
+                });
+            }
+
+
         });
+
+
+
     };
 
     $scope.removeSuggestFood=function(id){

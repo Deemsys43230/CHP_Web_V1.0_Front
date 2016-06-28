@@ -314,9 +314,10 @@
                                                 <h1 class="text-gray margin-top-15">  NO FOOD ADDED!!!</h1>
                                             </div>
                                         </div>
-                                        <div class="content-suggest clearfix">
+
+                                        <div class="content-suggest clearfix" ng-show="adminSuggestedFood.length>0" >
                                             <div class="col-sm-3 no-padding">
-                                                <div class="suggest-label">Food for you</div>
+                                                <div class="suggest-label">Food Choices</div>
                                             </div>
                                             <div class="col-sm-9 no-padding">
                                                 <marquee class="feedbackslide" behavior="scroll" direction="left" onmouseover="this.stop();" onmouseout="this.start();" scrollamount="3">
@@ -389,9 +390,9 @@
                                             </div>
                                         </div>
                                         <div class="margin-top-5"></div>
-                                        <div class="content-suggest clearfix">
+                                        <div class="content-suggest clearfix" ng-show="adminSuggestedExercise.length>0">
                                             <div class="col-sm-4 no-padding">
-                                                <div class="suggest-label">Exercise for you</div>
+                                                <div class="suggest-label">Exercise Choices</div>
                                             </div>
                                             <div class="col-sm-8 no-padding">
                                                 <marquee class="feedbackslide" behavior="scroll" direction="left" onmouseover="this.stop();" onmouseout="this.start();" scrollamount="3">

@@ -724,18 +724,14 @@ commonApp.controller('LoginController',['$scope','requestHandler','Flash','$wind
 
         $timeout(function () {
             $scope.isFeedback=false;
-            if($('#form').css('left')=='0px'){
-                $("#feedback-form").slideToggle(800);
-                $('#form').animate({left:'-300px'},  500);
-            }else{
-                $('#form').animate({left:'0'},  500);
-                $("#feedback-form").slideToggle(300);
-            }
+            $("#feedback_button").click();
         },2000);
 
 
 
     };
+
+
 
 }]);
 

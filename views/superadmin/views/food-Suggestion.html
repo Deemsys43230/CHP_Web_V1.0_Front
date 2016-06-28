@@ -9,12 +9,21 @@
         </div>
         <div class="col-md-9" ng-init="init()">
             <a href="#dashboard" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back to Dashboard</a>
+            <div>
+                <select class="pull-right margin-left-5 select-activity form-control"   ng-model="suggestionsearch.foodstatus" ng-change="clearText()">
+                    <option value="">--Search--</option>
+                    <option value="3">Rejected</option>
+                    <option value="2">Approved</option>
+                    <option value="1">Add Food</option>
+
+                </select>
+            </div>
             <!-- Stat Search -->
             <div class="pull-right" id="hidden-search">
                 <a href="#" onclick="return false;" class="show-list-search search_button margin-left-5"><i class="fa fa-search"></i></a>
                 <div class="search-list-form override">
                     <form autocomplete="off" class="searchform">
-                        <input type="text" ng-model="suggestionsearch" placeholder="Search here...">
+                        <input type="text" ng-model="suggestionsearch.foodname" placeholder="Search by Food">
                     </form>
                 </div>
             </div>

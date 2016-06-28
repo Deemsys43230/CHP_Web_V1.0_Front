@@ -33,10 +33,9 @@
                     <th class="col-md-2">User name</th>
                     <th class="col-md-2">Email ID</th>
                     <th class="col-md-1">Date</th>
-                    <th class="col-md-1">Phone no.</th>
                     <th class="col-md-1">Platform</th>
                     <th class="col-md-4">Feed back</th>
-                    <th class="col-md-1">Option</th>
+                    <th class="col-md-2">Option</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -46,13 +45,15 @@
                     <td>{{userFeedback.name}}</td>
                     <td>{{userFeedback.emailId}}</td>
                     <td>{{userFeedback.datetime}}</td>
-                    <td>{{userFeedback.mobile}}</td>
                     <td>{{userFeedback.platform}}</td>
-                    <td>{{userFeedback.description}}</td>
-                    <td><a href="" class="btn btn-xs btn-danger"  ng-click="removeFeedback()">Remove</a></td>
+                    <td><span class="line-clamp-md-low">{{userFeedback.description}}</span></td>
+                    <td>
+                        <a href="" class="btn btn-xs btn-primary" ng-click="viewFeedback(userFeedback.feedbackid)">View</a>
+                        <a href="" class="btn btn-xs btn-danger"   ng-click="removeFeedbackSingle(userFeedback.feedbackid)">Remove</a>
+                    </td>
                 </tr>
                <tr ng-show="userFeedbackList.length==0">
-                        <td colspan="8" class="text-center">No Records Found !!!</td>
+                        <td colspan="7" class="text-center">No Records Found !!!</td>
                     </tr>
                 </tbody>
             </table>
@@ -72,5 +73,58 @@
 </div>
 
 <!-- End Page Banner -->
+<div id="category" class="popupContainer" style="display:none;left:37%!important;">
+    <header class="popupHeader">
+        <span class="header_title">fsdfsdfsdsdfs</span>
+        <span class="modal_close"><i class="fa fa-times"></i></span>
+    </header>
+
+    <section class="popupBody">
+        <!-- Register Form -->
+        <div class="common_model">
+            <table class="table table-bordered table-striped">
+              <tr>
+                  <td class="col-md-6" >Username</td>
+                  <td class="col-md-6" >{{userFeedbackDetails.name}}</td>
+              </tr>
+                <tr>
+                    <td class="col-md-6" >Email ID</td>
+                    <td class="col-md-6" >{{userFeedbackDetails.emailId}}</td>
+                </tr>
+                <tr>
+                    <td class="col-md-6" >PhoneNumber</td>
+                    <td class="col-md-6" >{{userFeedbackDetails.mobile}}</td>
+                </tr>
+                <tr>
+                    <td class="col-md-6" >Platform</td>
+                    <td class="col-md-6" >{{userFeedbackDetails.platform}}</td>
+                </tr> <tr>
+                <td class="col-md-6" >Date</td>
+                <td class="col-md-6" >{{userFeedbackDetails.datetime}}</td>
+            </tr>
+                <tr>
+                    <td class="col-md-6" >Username</td>
+                    <td class="col-md-6" >{{userFeedbackDetails.name}}</td>
+                </tr>
+
+
+            </table>
+               <!-- <div class="col-md-6">Username</div> <div class="col-md-6">{{userFeedbackDetails.name}}</div>
+                <div class="col-md-6">Email ID</div> <div class="col-md-6">{{userFeedbackDetails.emailId}}</div>
+                <div class="col-md-6">Phone Number</div> <div class="col-md-6">{{userFeedbackDetails.mobile}}</div>
+                <div class="col-md-6">Platform</div> <div class="col-md-6">{{userFeedbackDetails.platform}}</div>
+                <div class="col-md-6">Date</div> <div class="col-md-6">{{userFeedbackDetails.datetime}}</div>
+                <div class="col-md-6">Feedback</div> <div class="col-md-6">{{userFeedbackDetails.description}}</div>
+-->
+</div>
+        </div>
+    </section>
+</div>
+
+<!-- End Page Banner -->
 
 <script type="text/javascript" src="../../js/script.js"></script>
+
+<script type="text/javascript">
+    $("#modal_category").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
+</script>

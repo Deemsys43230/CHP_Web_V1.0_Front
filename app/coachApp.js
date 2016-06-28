@@ -505,14 +505,16 @@ coachApp.controller("CoachInitialController",['$scope','requestHandler','$locati
         });
         $timeout(function () {
             $scope.isFeedback=false;
-            if($('#form').css('left')=='0px'){
-                $("#feedback-form").slideToggle(800);
-                $('#form').animate({left:'-300px'},  500);
-            }else{
-                $('#form').animate({left:'0'},  500);
-                $("#feedback-form").slideToggle(300);
-            }
+            $("#feedback_button").click();
         },2000);
+    };
+
+    $scope.getFeedback=function(){
+        requestHandler.getRequest("getUserId/","").then(function(response){
+            $scope.feedback={};
+            $scope.feedback.name=response.data.User_Profile.name;
+            $scope.feedback.emailId=response.data.User_Profile.emailid;
+        });
     };
 }]);
 

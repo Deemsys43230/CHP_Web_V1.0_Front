@@ -698,6 +698,7 @@ adminApp.config([
                 '../../js/category-select.js',
                 '../../angular/angular-utils-pagination/dirPagination.js',
                 '../../app/food/foodService.js',
+                  '../../app/food/pageService.js',
                 '../../app/food/foodController.js'
               ]
             });
@@ -1306,6 +1307,7 @@ adminApp.config([
                         return $ocLazyLoad.load({
                             name: 'adminApp',
                             files: [
+                                '../../plugin/popup/style.css',
                                 '../../angular/angular-ui-bootstarp.js',
                                 '../../angular/angular-utils-pagination/dirPagination.js',
                                 '../../app/userFeedback/userFeedbackController.js'
@@ -1315,6 +1317,7 @@ adminApp.config([
                 ]
             },
             controller: 'UserFeedbackController'})
+
         .otherwise({
         redirectTo: '/dashboard'
     });
@@ -1322,10 +1325,10 @@ adminApp.config([
 ]);
 //Initial Controller for Username
 adminApp.controller('InitialController', [
-  '$scope',
+    '$route','$routeParams', '$rootScope','$scope',
   'requestHandler',
   '$location',
-  function ($scope, requestHandler, $location) {
+  function ($route,$routeParams,$rootScope,$scope, requestHandler, $location) {
     $scope.hideValue = 1;
     requestHandler.getRequest('getUserId/', '').then(function (response) {
       $scope.username = response.data.User_Profile.name;
@@ -1334,7 +1337,7 @@ adminApp.controller('InitialController', [
       $scope.activeClass = {};
       var currentPage = $location.url().substr(1);
       $scope.activeClass[currentPage] = 'active';
-    });
+      });
     $scope.getSocialMediaDetails = function () {
       requestHandler.getRequest('contactus/', '').then(function (response) {
         $scope.commonDetails = response.data.Contactus[0];
@@ -1344,6 +1347,14 @@ adminApp.controller('InitialController', [
       });
     };
     $scope.getSocialMediaDetails();
+
+      $rootScope.$route=$route;
+      $rootScope.$routeParams=$routeParams;
+      $rootScope.$on('$routeChangeSuccess',function(event,current,previous){
+          if(previous!=undefined){
+              $rootScope.previousState=previous.$$route.originalPath;
+          }
+      });
   }
 ]);
 //Controller For Logout

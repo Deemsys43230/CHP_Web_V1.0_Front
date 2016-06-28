@@ -163,7 +163,14 @@
                     Today's Update
                 </h5>
             </div>
-            <div class="col-lg-6 col-md-12 col-sm-12 text-center">
+            <div class="col-lg-12 col-md-12 col-sm-12 padding-left-0 padding-right-10">
+                <div id="dailyUpdateBudgetGraph"></div>
+                <div class="col-sm-12">
+                    <h6 ng-show="0"><span class="fa fa fa-thumbs-up text-green">&nbsp;&nbsp;</span>Above <span class="label-success">215</span> calories</h6>
+                    <h6 ng-show="1"><span class="fa fa fa-thumbs-down text-red">&nbsp;&nbsp;</span>Under <span class="label-danger">215</span> calories</h6>
+                </div>
+            </div>
+            <!--<div class="col-lg-6 col-md-12 col-sm-12 text-center">
                 <h5>Gain</h5>
                 <div class="circle-wrapper">
                     <div class="circle-progress ng-cloak font-14" ng-style="getStyle()">{{currentGain}}</div>
@@ -206,7 +213,7 @@
                     </div>
                 </div>
                 <p class="text-gray">of {{averageSpent}} cals.</p>
-            </div>
+            </div>-->
         </li>
     </ul>
 </div>
@@ -307,9 +314,10 @@
                         <h1 class="text-gray margin-top-15">  NO FOOD ADDED!!!</h1>
                     </div>
                 </div>
-                <div class="content-suggest clearfix">
+
+                <div class="content-suggest clearfix" ng-show="adminSuggestedFood.length>0" >
                     <div class="col-sm-3 no-padding">
-                        <div class="suggest-label">Food for you</div>
+                        <div class="suggest-label">Food Choices</div>
                     </div>
                     <div class="col-sm-9 no-padding">
                         <marquee class="feedbackslide" behavior="scroll" direction="left" onmouseover="this.stop();" onmouseout="this.start();" scrollamount="3">
@@ -382,9 +390,9 @@
                     </div>
                 </div>
                 <div class="margin-top-5"></div>
-                <div class="content-suggest clearfix">
+                <div class="content-suggest clearfix" ng-show="adminSuggestedExercise.length>0">
                     <div class="col-sm-4 no-padding">
-                        <div class="suggest-label">Exercise for you</div>
+                        <div class="suggest-label">Exercise Choices</div>
                     </div>
                     <div class="col-sm-8 no-padding">
                         <marquee class="feedbackslide" behavior="scroll" direction="left" onmouseover="this.stop();" onmouseout="this.start();" scrollamount="3">

@@ -8513,6 +8513,16 @@ a:hover, a:visited, a:link, a:active
     left: 30px;
 }
 
+.textarea-errormessage40-right60{
+    top: 40px;
+    left: 60px;
+}
+
+.textarea-errormessage40-right90{
+    top: 40px;
+    left: 90px;
+}
+
 .textarea-errormessage20-left{
     top: 42px;
     left: -25px;
@@ -15330,4 +15340,12 @@ marquee.feedbackslide{
 
 #dailyUpdateBudgetGraph{
     height:170px;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0;
 }

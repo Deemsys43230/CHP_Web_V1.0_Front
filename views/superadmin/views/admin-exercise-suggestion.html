@@ -186,7 +186,7 @@
                     <tbody>
                    <tr dir-paginate="exercisechoice in exerciseSuggestedList | itemsPerPage: 9" ng-show="exerciseSuggestedList.length!=0">
 
-                        <td>{{exercisechoice.exerciseName}}{{exercisechoice.exerciseId}}</span></td>
+                        <td>{{exercisechoice.exerciseName}}</span></td>
                         <td><a href="" class="btn btn-xs btn-danger" ng-click="removeSuggestExercise(exercisechoice.exerciseId)">Remove</a></td>
                     </tr>
                     <tr ng-show="exerciseSuggestedList.length==0">

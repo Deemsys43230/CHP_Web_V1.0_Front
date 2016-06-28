@@ -600,14 +600,15 @@ userApp.controller("UserInitialController",['$scope','requestHandler','$location
         }
         else if($scope.userProfile.isProfileUpdated==1 && $scope.demo.demoUpdatedstatus==0) {
             $rootScope.checkPath=1;
-            $window.location.href=requestHandler.domainURL()+"views/user/#/profile";
         }
         else if($scope.userProfile.isProfileUpdated==1 && $scope.demo.demoUpdatedstatus==1) {
             $rootScope.checkPath=2;
         }
     });
 
-    $scope.$watch('checkPath', function() {
+
+
+  $scope.$watch('checkPath', function() {
         $scope.popupOpen($rootScope.checkPath);
     });
 
@@ -616,7 +617,6 @@ userApp.controller("UserInitialController",['$scope','requestHandler','$location
         $scope.activeClass={};
         var currentPage = $location.url().substr(1);
         $scope.activeClass[currentPage]='active';
-
         $scope.popupOpen($rootScope.checkPath);
     });
 
@@ -664,6 +664,10 @@ userApp.controller("UserInitialController",['$scope','requestHandler','$location
             });
             $location.path("demography");
         }
+        else if(pathVar==2){
+          //  $location.path("dashboard");
+
+        }
     };
     $scope.getSocialMediaDetails=function(){
         requestHandler.getRequest("contactus/","").then(function(response){
@@ -686,14 +690,16 @@ userApp.controller("UserInitialController",['$scope','requestHandler','$location
 
         $timeout(function () {
             $scope.isFeedback=false;
-            if($('#form').css('left')=='0px'){
-                $("#feedback-form").slideToggle(800);
-                $('#form').animate({left:'-300px'},  500);
-            }else{
-                $('#form').animate({left:'0'},  500);
-                $("#feedback-form").slideToggle(300);
-            }
+            $("#feedback_button").click();
         },2000);
+    };
+
+    $scope.getFeedback=function(){
+        requestHandler.getRequest("getUserId/","").then(function(response){
+            $scope.feedback={};
+            $scope.feedback.name=response.data.User_Profile.name;
+            $scope.feedback.emailId=response.data.User_Profile.emailid;
+        });
     };
 
 }]);

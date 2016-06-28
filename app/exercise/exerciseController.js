@@ -43,7 +43,6 @@ adminApp.controller('ExerciseController',['$scope','requestHandler','Flash',func
 	//Get Exercise List
 	$scope.doGetAllExercise=function(){
 
-		var typevalue="";
 		$scope.loaded=true;
 		requestHandler.getRequest("admin/listofExercise/","").then(function(response){
 			$scope.exerciseList=response.data.listexercises;
@@ -77,7 +76,10 @@ adminApp.controller('ExerciseController',['$scope','requestHandler','Flash',func
 
 	//Enable Disable Exercise
 	$scope.doEnableDisable=function(exerciseId){
-
+        if($('.search-list-form').css('display') != 'none'){
+            $(".search-list-form").hide();
+            $(".search-list-form").show(2400);
+        }
 		$scope.loaded=true;
 		requestHandler.postRequest("admin/enableordisableExercise/",{"exerciseid":exerciseId}).then(function(response){
 			if(response.data.Response_status==1){
@@ -101,6 +103,13 @@ adminApp.controller('ExerciseController',['$scope','requestHandler','Flash',func
 	};
 	//End Initial Load
 
+    // Search Food Type
+    $('.show-list-search').click(function() {
+        $('.search-list-form').toggle(300);
+        $scope.pagenumber="";
+        $('.search-list-form input').focus();
+    });
+
 	$scope.init();
 
     $scope.pagenumber="";
@@ -109,7 +118,7 @@ adminApp.controller('ExerciseController',['$scope','requestHandler','Flash',func
     $scope.goToPage=function(){
         $scope.newPageNumber=$scope.pagenumber;
         $scope.pagenumber="";
-    }
+    };
 
 }]);
 

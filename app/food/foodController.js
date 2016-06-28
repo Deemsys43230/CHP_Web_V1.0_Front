@@ -2,7 +2,7 @@
  * Created by user on 26-09-2015.
  */
 
-var adminApp = angular.module('adminApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','ui.select','foodServiceModule','angularUtils.directives.dirPagination']);
+var adminApp = angular.module('adminApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','ui.select','foodServiceModule','angularUtils.directives.dirPagination','pageModule']);
 
 adminApp.controller('FoodUploadController', ['$q','$scope', 'FileUploader', function($q,$scope, FileUploader) {
     //Start code for uploader//
@@ -59,7 +59,7 @@ adminApp.controller('FoodUploadController', ['$q','$scope', 'FileUploader', func
 }]);
 
 
-adminApp.controller('FoodController',['$scope','requestHandler','Flash',function ($scope,requestHandler,Flash) {
+adminApp.controller('FoodController',['$rootScope','$scope','requestHandler','Flash','pageService',function ($rootScope,$scope,requestHandler,Flash,pageService) {
 
 
     //sidebar menu active class
@@ -180,7 +180,7 @@ adminApp.controller('FoodController',['$scope','requestHandler','Flash',function
 
         if($('.search-list-form').css('display') != 'none'){
             $(".search-list-form").hide();
-            $(".search-list-form").show(2400);
+            $(".search-list-form").show(3400);
         }
 
         requestHandler.postRequest("admin/enableordisableFood/",{"foodid":foodId}).then(function(response){
@@ -220,12 +220,31 @@ adminApp.controller('FoodController',['$scope','requestHandler','Flash',function
         $('.search-list-form input').focus();
     });
     $scope.pagenumber="";
-    $scope.newPageNumber=1;
+    if($rootScope.previousState=="/food-view/:id"||$rootScope.previousState=="/food-edit/:id"){
+
+        $scope.newPageNumber=pageService.getNewPageNumber();
+        $scope.foodsearch =pageService.getSearchFood();
+        if($scope.foodsearch!=""){
+            $('.show-list-search').click();
+        }
+    }else{
+        pageService.setSearchFood("");
+        pageService.setNewPageNumber(1);
+        $scope.newPageNumber=1;
+        $scope.foodsearch="";
+    }
+
 
     $scope.goToPage=function(){
-        $scope.newPageNumber=$scope.pagenumber;
+        pageService.setNewPageNumber($scope.pagenumber);
+        $scope.newPageNumber=pageService.getNewPageNumber();
         $scope.pagenumber="";
-    }
+    };
+
+    $scope.$watch('[newPageNumber,foodsearch]', function() {
+        pageService.setNewPageNumber($scope.newPageNumber);
+        pageService.setSearchFood($scope.foodsearch);
+    });
 
 }]);
 

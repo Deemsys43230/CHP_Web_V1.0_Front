@@ -1001,3 +1001,22 @@ coachApp.filter('html', ['$sce', function ($sce) {
         return $sce.trustAsHtml(text);
     };
 }]);
+
+coachApp.directive('summernoteRequired', function () {
+    return {
+        require: 'ngModel',
+        restrict: '',
+        link: function (scope, elm, attrs, ngModel) {
+            // only apply the validator if ngModel is present and Angular has added the email validator
+            ngModel.$validators.summernoteRequired = function (modelValue) {
+                if(modelValue==""|| modelValue=="<p><br></p>"){
+                    return false;
+                }
+                else{
+                    return true;
+                }
+                return URL_REGEXP.test(modelValue);
+            };
+        }
+    };
+});

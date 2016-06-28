@@ -213,7 +213,7 @@
                                          </span>
                                 </div>
                                 <div class="col-lg-4 col-md-4 col-sm-4 padding-top-4 padding-right-0 margin-top-10">
-                                    <h5>Prefer Metric<span class="pull-right">:</span></h5>
+                                    <h5>Prefer Unit<span class="pull-right">:</span></h5>
                                 </div>
                                 <div class="col-lg-8 col-md-8 col-sm-8 margin-top-10">
 
@@ -268,7 +268,7 @@
 
     <section class="popupBody">
         <!-- Register Form -->
-        <div class="common_model">
+        <div id="modal-1" class="common_model">
             <div class="image-editor">
                 <div class="cropit-image-preview center-block"></div>
                 <div class="image-size-label">
@@ -299,7 +299,7 @@
 
     <section class="popupBody">
         <!-- Register Form -->
-        <div class="common_model">
+        <div id="modal-2" class="common_model">
             <form name="changePasswordForm" novalidate>
                 <p>Current Password</p>
                 <input type="password" name="oldPassword" ng-model="changePassword.oldPassword" maxlength="20" required/>
@@ -356,17 +356,17 @@
 <script type="text/javascript">
     $("#modal_trigger").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
 
-    $(function(){
-        $(".common_model").show();
-    })
+    $("#modal_trigger").click(function(){
+        $("#modal-1").show();
+    });
 </script>
 
 <script type="text/javascript">
     $("#modal_trigger1").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
+    $("#modal_trigger1").click(function(){
+        $("#modal-2").show();
+    });
 
-    $(function(){
-        $(".common_model").show();
-    })
 </script>
 
 <script>

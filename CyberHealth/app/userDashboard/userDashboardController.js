@@ -762,6 +762,47 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         });
     };
 
+    $('#dailyUpdateBudgetGraph').highcharts({
+        chart: {
+            type: 'bar'
+        },
+        title: {
+            text: null
+        },
+        xAxis: {
+            categories: ['Budget', 'Gain', 'Brunt', 'Net']
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: null
+            }
+        },
+        credits:{enabled:false},
+        exporting:{enabled:false},
+        legend:{enabled:false},
+        plotOptions: {
+            series: {
+                dataLabels: {
+                    enabled: true,
+                    style:{fontSize:10},
+                    formatter:function() {
+                        return this.point.y;
+                    }
+                }
+            }
+        },
+        series: [{
+            name: 'Units',
+            data: [
+                {y:2195,color:"orange"},
+                {y:1542,color:"limegreen"},
+                {y:643,color:"red"},
+                {y:-862,color:"#ffcc00"}],
+            showInLegend: false
+        }]
+    });
+
     $scope.doGetWeightLog=function(date,id){
 
         var weightLogPromise=UserDashboardService.doGetWeightLogDetails(date);
