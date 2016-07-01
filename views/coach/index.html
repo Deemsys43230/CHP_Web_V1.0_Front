@@ -250,7 +250,7 @@
     <div id="form" ng-init="getFeedback()">
         <p id="feedback_button"><img src="../../images/feedback.png"></p>
         <div class="feedback-margin-adjust">
-        <form id="feedback-form" name="feedbackForm">
+        <form id="feedback-form" name="feedbackForm" novalidate>
             <div class="text-green" ng-show="isFeedback">Thanks for your feedback!!!</div>
             <input class="section-input margin-top-5" name="name" ng-model="feedback.name" placeholder="Name*" required/>
          <span ng-show="feedbackForm.name.$dirty&&feedbackForm.name.$invalid">

@@ -41,7 +41,7 @@
                 <tbody>
                  <tr ng-repeat="userFeedback in userFeedbackList" ng-show="userFeedbackList.length!=0">
 
-                    <td width="10"><input type="checkbox" value="{{userFeedback.feedbackid}}" name="group" id="{{userFeedback.feedbackid}}" ng-checked="feedbackid.indexOf(userFeedback.feedbackid)>-1" ng-click="selectedFeedback(userFeedback.feedbackid)"/></td>
+                    <td width="10"><input type="checkbox" value="{{userFeedback.feedbackid}}" name="group" id="{{userFeedback.feedbackid}}" ng-checked="selected"  ng-click="selectedFeedback(userFeedback.feedbackid)"/></td>
                     <td>{{userFeedback.name}}</td>
                     <td>{{userFeedback.emailId}}</td>
                     <td>{{userFeedback.datetime}}</td>
@@ -73,8 +73,8 @@
 </div>
 
 <!-- End Page Banner -->
-<div id="category" class="popupContainer" style="display:none;left:37%!important;">
-    <header class="popupHeader">
+<div id="category" class="popupContainer width" style="display:none;left:37%!important;">
+    <header class="popupHeader width-100">
         <span class="header_title">fsdfsdfsdsdfs</span>
         <span class="modal_close"><i class="fa fa-times"></i></span>
     </header>
@@ -103,8 +103,8 @@
                 <td class="col-md-6" >{{userFeedbackDetails.datetime}}</td>
             </tr>
                 <tr>
-                    <td class="col-md-6" >Username</td>
-                    <td class="col-md-6" >{{userFeedbackDetails.name}}</td>
+                    <td class="col-md-6" >Feedback</td>
+                    <td class="col-md-6" >{{userFeedbackDetails.description}}</td>
                 </tr>
 
 

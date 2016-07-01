@@ -23,7 +23,6 @@ adminApp.controller('AdminExerciseSuggestionController',['$scope','requestHandle
     $scope.exerciseChoices={};
     $scope.exerciseSelected=function(){
         $scope.isAddExercise=false;
-        $scope.exerciseExists =false;
         //$scope.exerciseChoices.exerciseid = $scope.selectedExercise.exerciseid;
     };
 
@@ -43,29 +42,22 @@ adminApp.controller('AdminExerciseSuggestionController',['$scope','requestHandle
     };
 
     $scope.addSuggestExercise=function(){
-        requestHandler.postRequest("admin/getAdminExerciseSuggestions/",$scope.exerciseChoices).then(function(response){
 
-            $scope.exerciseSuggestedList=response.data.exerciseSuggestion;
-
+            $scope.exerciseExists =false;
             $.each($scope.exerciseSuggestedList, function(index,value) {
-
                 if(value.exerciseId == $scope.selectedExercise.exerciseid){
                     $scope.exerciseExists =true;
                 }
-                else{
-                    $scope.exerciseExists =false;
-                }
             });
 
-            if($scope.exerciseExists){
+            if($scope.exerciseExists == true){
                 errorMessage(Flash,"Exercise already exists!!");
                 $scope.selectedExercise="";
                 $scope.isAddExercise=true;
-                $scope.getSuggestedExercise();
                 $scope.exerciseChoices.activitytype=$scope.exerciseChoices.activitytype.toString();
                 $scope.exerciseChoices.patienttype=$scope.exerciseChoices.patienttype.toString();
             }
-            else{
+            else if($scope.exerciseExists == false){
                 $scope.exerciseChoices.exerciseid = $scope.selectedExercise.exerciseid;
                 $scope.exerciseChoices.activitytype=parseInt($scope.exerciseChoices.activitytype);
                 $scope.exerciseChoices.patienttype=parseInt($scope.exerciseChoices.patienttype);
@@ -77,13 +69,10 @@ adminApp.controller('AdminExerciseSuggestionController',['$scope','requestHandle
                     $scope.getSuggestedExercise();
                     $scope.exerciseChoices.activitytype=$scope.exerciseChoices.activitytype.toString();
                     $scope.exerciseChoices.patienttype=$scope.exerciseChoices.patienttype.toString();
+
                 });
             }
-        });
-
-
-
-    };
+     };
 
     $scope.removeSuggestExercise=function(id){
         $scope.exerciseChoices.activitytype=parseInt($scope.exerciseChoices.activitytype);

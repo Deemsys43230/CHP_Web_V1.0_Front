@@ -19,9 +19,7 @@
                             <div class="col-md-12 image-editor">
 
                                 <h4>User Image</h4>
-                                     <span ng-show="inputContainsFile">
-                                     <span class="error-message textarea-errormessage20" ng-show="testimonialForm.image.$error.required"><span>Required.</span></span>
-                                </span>
+
                                 <div class="cropit-image-preview"></div>
                                 <p class="image-size-label">
                                     Resize image
@@ -33,7 +31,7 @@
                                 <div class="margin-top-20 col-md-12 no-padding">
                                     <div class="fileUpload btn btn-xs btn-primary">
                                         <span>Choose File</span>
-                                        <input type="file" name="image" class="upload cropit-image-input" valid-file required  ng-model="testimonials.imageurl" onblur="angular.element(this).scope().fileNameChanged(this)"/>
+                                        <input type="file" name="image" class="upload cropit-image-input" valid-file  ng-model="testimonials.imageurl" ng-click="doUpdateImage();"/>
 
                                     </div>
                                 </div>
@@ -72,8 +70,8 @@
                 </form>
             </div>
             <div class="text-center margin-top-10">
-                <a href="" class="btn btn-success" ng-click="doAddTestimonials()" ng-disabled="testimonialForm.$invalid" ng-show="isNew">Add Testimonial</a>
-                <a href="" class="btn btn-success"  ng-click="doUpdateTestimonials()" ng-hide="isNew">Save Changes</a>
+                <a href="" class="btn btn-success" ng-click="doAddTestimonials()" ng-disabled="testimonialForm.$invalid || isCleanTestimonial()" ng-show="isNew">Add Testimonial</a>
+                <a href="" class="btn btn-success"  ng-click="doUpdateTestimonials()" ng-disabled="testimonialForm.$invalid || isCleanTestimonial()" ng-hide="isNew">Save Changes</a>
                 <a href="#testimonials" class="btn btn-warning">Cancel</a>
             </div>
         </div>

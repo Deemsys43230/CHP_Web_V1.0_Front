@@ -22,21 +22,22 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
 
     //Modal Popup to add user food
     $scope.doUserAddFood=function(){
+        alert("hi");
         $(function(){
             $("#lean_overlay").fadeTo(1000);
             $("#modal-add-food").fadeIn(600);
-            $(".user_register").show();
+            $("#addFood").show();
 
         });
         $(".modal_close").click(function(){
-            $(".user_register").hide();
+            $(".addFood").hide();
             $("#modal-add-food").hide();
             $("#lean_overlay").hide();
             $scope.resetdata();
         });
 
         $("#lean_overlay").click(function(){
-            $(".user_register").hide();
+            $(".addFood").hide();
             $("#modal-add-food").hide();
             $("#lean_overlay").hide();
             $scope.resetdata();
@@ -49,7 +50,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         $(function(){
             $("#lean_overlay").fadeTo(1000);
             $("#modal-add-exercise").fadeIn(600);
-            $(".user_register").show();
+            $("#addExercise").show();
 
         });
 

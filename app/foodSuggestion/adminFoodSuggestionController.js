@@ -32,6 +32,7 @@ adminApp.controller('AdminFoodSuggestionController',['$scope','requestHandler','
     $scope.foodChoices={};
     $scope.foodSelected=function(){
         $scope.isAddFood=false;
+
         //$scope.foodChoices.foodid = $scope.selectedFood.foodid;
     };
 
@@ -45,25 +46,20 @@ adminApp.controller('AdminFoodSuggestionController',['$scope','requestHandler','
         });
     };
 
+
+
     $scope.addSuggestFood=function(){
-        requestHandler.postRequest("admin/getAdminFoodSuggestions/",$scope.foodChoices).then(function(response){
 
-            $scope.foodSuggestedList=response.data.foodSuggestion;
-
-            $.each($scope.foodSuggestedList, function(index,value) {
-                if(value.foodId == $scope.selectedFood.foodid){
-                    $scope.foodExists =true;
-                }
-                else{
-                    $scope.foodExists =false;
-                }
-            });
-
+        $scope.foodExists = false;
+        $.each($scope.foodSuggestedList, function(index,value) {
+            if(value.foodId === $scope.selectedFood.foodid){
+                $scope.foodExists =true;
+            }
+        });
             if($scope.foodExists){
                 errorMessage(Flash,"Food already exists!!");
                 $scope.selectedFood="";
                 $scope.isAddFood=true;
-                $scope.getSuggestedFood();
                 $scope.foodChoices.country=$scope.foodChoices.country.toString();
                 $scope.foodChoices.session=$scope.foodChoices.session.toString();
                 $scope.foodChoices.patienttype=$scope.foodChoices.patienttype.toString();
@@ -84,13 +80,10 @@ adminApp.controller('AdminFoodSuggestionController',['$scope','requestHandler','
                     $scope.foodChoices.patienttype=$scope.foodChoices.patienttype.toString();
                 });
             }
-
-
-        });
+        };
 
 
 
-    };
 
     $scope.removeSuggestFood=function(id){
 

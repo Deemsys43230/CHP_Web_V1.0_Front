@@ -35,13 +35,17 @@ adminApp.controller('UserFeedbackController',['$scope','requestHandler','Flash',
             $.each($scope.userFeedbackList, function(index,value) {
                 if(document.getElementById('checkAll').checked==true){
                     $scope.feedbackid.push(value.feedbackid);
-                    $("#"+value.feedbackid).checked==true;
+                   // $("#"+value.feedbackid).checked==true;
+                    $('#'+value.feedbackid).attr('checked','checked');
                     $scope.removeDisable=false;
+                    $scope.selected=true;
                 }
                 else if(document.getElementById('checkAll').checked==false){
                     $scope.feedbackid=[];
-                    $("#"+value.feedbackid).checked==false;
+                    //$("#"+value.feedbackid).checked==false;
+                    $('#'+value.feedbackid).prop('checked', false);
                     $scope.removeDisable=true;
+                    $scope.selected=false;
                 }
             });
 
@@ -49,16 +53,21 @@ adminApp.controller('UserFeedbackController',['$scope','requestHandler','Flash',
     };
 
     $scope.selectedFeedback=function(feedbackId){
-        document.getElementById('checkAll').checked=false
-        $scope.removeDisable=false;
+
+        /*document.getElementById('checkAll').checked=false;
+        $scope.removeDisable=false;*/
         var idx=$scope.feedbackid.indexOf(feedbackId);
-        alert(idx);
+
         // Already Selected Items
         if(idx>-1){
+            document.getElementById('checkAll').checked=false;
+            $scope.removeDisable=true;
             $scope.feedbackid.splice(idx,1);
         }
         // Add New Items
         else{
+            alert(idx+"else");
+            $scope.removeDisable=false;
             $scope.feedbackid.push(feedbackId);
         }
 
@@ -67,6 +76,7 @@ adminApp.controller('UserFeedbackController',['$scope','requestHandler','Flash',
     };
 
     $scope.removeFeedback=function(){
+        document.getElementById('checkAll').checked=false;
         if($('.search-list-form').css('display') != 'none'){
             $(".search-list-form").hide();
             $(".search-list-form").show(2400);
@@ -135,7 +145,7 @@ adminApp.controller('UserFeedbackController',['$scope','requestHandler','Flash',
 
     $scope.init=function(){
         $scope.itemsPerPage = 10;
-        $scope.searchText=" ";
+        $scope.searchText="";
         $scope.getUserFeedBackDetails();
         $scope.removeDisable=true;
     };

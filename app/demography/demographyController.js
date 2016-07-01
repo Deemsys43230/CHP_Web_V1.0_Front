@@ -27,8 +27,10 @@ userApp.controller('DemographyController',['$rootScope','$scope','requestHandler
                     $scope.demography.heightInches= 0;
                 }else{
                 $scope.demography.heightInches=heightSplit[1];
+               $scope.demography.heightInches=parseInt($scope.demography.heightInches);
                 }
             }
+            console.log(response.data.Demography_Data);
             originalDemography=angular.copy(response.data.Demography_Data);
 
         });
@@ -106,7 +108,6 @@ userApp.controller('DemographyController',['$rootScope','$scope','requestHandler
     };
 
     $scope.doUpdateDemography= function () {
-
         if($scope.demography.heightFeet && $scope.demography.heightInches){
             $scope.demography.height = $scope.demography.heightFeet +'.'+$scope.demography.heightInches;
 
@@ -118,6 +119,7 @@ userApp.controller('DemographyController',['$rootScope','$scope','requestHandler
             $scope.demography.hip = parseFloat($scope.demography.hip);
             $scope.demography.obesity=parseFloat($scope.demography.obesity);
             $scope.demography.diabetes=parseFloat($scope.demography.diabetes);
+        $scope.demography.targetweight=parseFloat($scope.demography.targetweight);
 
        if( $scope.demography.obesity == '0'){
            $scope.demography.obesity="";
@@ -202,6 +204,8 @@ userApp.filter('trusted', ['$sce', function ($sce) {
         return $sce.trustAsResourceUrl(url);
     };
 }]);
+
+
 
 userApp.directive('lowerThan', [
 

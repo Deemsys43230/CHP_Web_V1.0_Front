@@ -28,6 +28,11 @@ adminApp.controller('TestimonialController',['$scope','requestHandler','Flash','
         }
     };
 
+    $scope.imageUpload=false;
+    $scope.doUpdateImage=function(){
+        $scope.imageUpload=true;
+    };
+
     //summer note
     $scope.options = {
         height: 200
@@ -49,9 +54,13 @@ adminApp.controller('TestimonialController',['$scope','requestHandler','Flash','
     $scope.doAddTestimonials=function(){
 
         //Convert the image to base 64
-        $scope.testimonials.imageurl = $('.image-editor').cropit('export');
 
-
+        if(!$scope.imageUpload){
+            delete $scope.testimonials.imageurl;
+        }
+        else{
+            $scope.testimonials.imageurl = $('.image-editor').cropit('export');
+        }
         requestHandler.postRequest("admin/insertorupdateTestimonial/",$scope.testimonials).then(function(response){
 
             successMessage(Flash,"Successfully Added");
@@ -134,6 +143,7 @@ adminApp.controller('TestimonialEditController',['$scope','requestHandler','Flas
             //Set values to display data in edit testimonial
             $scope.testimonials=response.data.Testimonials;
 
+            $scope. originalTestimonial=angular.copy(response.data.Testimonials);
            /* // Change the url hostname to localhost
             $scope.testimonials.imageurl = requestHandler.convertUrl( $scope.testimonials.imageurl);
             $scope.testimonials.imageurl = "http://localhost"+$scope.testimonials.imageurl;*/
@@ -169,16 +179,27 @@ adminApp.controller('TestimonialEditController',['$scope','requestHandler','Flas
         img.src = url;
     };
 
+    $scope.imageUpload=false;
+    $scope.doUpdateImage=function(){
+        $scope.imageUpload=true;
+    };
+
     //To update Latest News
     $scope.doUpdateTestimonials = function(){
 
+        if(!$scope.imageUpload){
+            delete $scope.testimonials.imageurl;
+        }
+        else{
+            $scope.testimonials.imageurl = $('.image-editor').cropit('export');
         $scope.convertImgToBase64($scope.testimonials.imageurl, function(base64Img){
 
             //Convert the image url to base64 when image is not edited
             $scope.testimonials.imageurl=base64Img;
 
-            //Convert the image url to base64 when image is edited
-            $scope.testimonials.imageurl = $('.image-editor').cropit('export');
+        });
+        }//Convert the image url to base64 when image is edited
+
 
             requestHandler.putRequest("admin/insertorupdateTestimonial/",$scope.testimonials).then(function(response){
                 successMessage(Flash,"Successfully Updated");
@@ -187,8 +208,12 @@ adminApp.controller('TestimonialEditController',['$scope','requestHandler','Flas
             }, function () {
                 errorMessage(Flash, "Please try again later!")
             });
-        });
 
+
+    };
+
+    $scope.isCleanTestimonial = function() {
+        return angular.equals ($scope. originalTestimonial, $scope.testimonials);
     };
     //Display Edit Page with date On load
     $scope.doGetTestimonialsAdminByID();
