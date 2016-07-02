@@ -674,7 +674,7 @@ commonApp.controller('LoginController',['$scope','requestHandler','Flash','$wind
                 $(".new_password_form").hide();
                 $(".user_login").show();
                 $(".header_title").text('Login');
-                successMessage(Flash,"Please Check your emailid!");
+                successMessage(Flash,"Please Check your emailID!");
             }
         });
     };

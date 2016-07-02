@@ -32,7 +32,7 @@
     left:30%;
     top:50px!important;
     background: #FFF;
-    z-index:99999 !important;
+    z-index:999999 !important;
 }
 
 .action_btns .btn {padding:10px 20px; background: #F4F4F2;}

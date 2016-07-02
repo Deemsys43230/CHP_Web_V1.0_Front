@@ -145,7 +145,7 @@ adminApp.controller('UserFeedbackController',['$scope','requestHandler','Flash',
 
     $scope.init=function(){
         $scope.itemsPerPage = 10;
-        $scope.searchText="";
+        $scope.searchText=" ";
         $scope.getUserFeedBackDetails();
         $scope.removeDisable=true;
     };

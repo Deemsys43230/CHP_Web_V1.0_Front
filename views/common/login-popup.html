@@ -110,7 +110,7 @@
         <div class="new_password_form">
             <div flash-message="3000" ></div>
             <form name="newPasswordForm" novalidate>
-
+                <p><b>Please Enter your New Password</b></p>
                 <p>New Password</p>
                 <input type="password" name="newpassword" id="newpswd" ng-pattern="/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-])(?!.*\s).{6,}$/"  maxlength="20"  ng-model="newpassword" required/>
                    <span ng-show="newPasswordForm.newpassword.$dirty&&newPasswordForm.newpassword.$invalid && !newPasswordForm.newpassword.$pristine">
@@ -124,7 +124,7 @@
                     </span>
                <div class="action_btns margin-top-20">
                     <div class="one_half"><a class="btn btn_red" ng-class="{'button-disable':newPasswordForm.$invalid}" ng-click="changePassword()">Submit</a></div>
-                    <div class="one_half last"><a  class="btn">Cancel</a></div>
+                    <div class="one_half last"><a  class="btn modal_close">Cancel</a></div>
                 </div>
             </form>
             <div id="new_pswd_info">
