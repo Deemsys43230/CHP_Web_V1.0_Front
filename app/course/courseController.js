@@ -10,14 +10,43 @@ userApp.controller('CourseController',['$scope','requestHandler','Flash','$route
     $scope.activeClass.myCourses='active';
 
     $scope.mycourselist = function(){
-        $scope.loaded=true;
+       $scope.loaded=true;
         requestHandler.getRequest("user/getMyCourseList/","").then(function(response) {
             $scope.myCourseList = response.data.published_Course;
             $scope.loaded=false;
+            $scope.formatMyCourseByCategory();
         },function(){
             errorMessage(Flash,"Please try again later!")
         });
+
+
+
     };
+
+    $scope.formatMyCourseByCategory=function(){
+
+        requestHandler.getRequest("getCoursecategory/","").then(function(response){
+            $scope.allCategory=$scope.allCategoryCourses=response.data.coursecategory;
+            $.each($scope.allCategory,function(index,category){
+                category.courses=[];
+                $.each($scope.myCourseList,function(index,courses){
+                    if(category.categoryid==courses.categoryid)
+                    category.courses.push(courses);
+                });
+                if(index==($scope.allCategory.length)-1){
+                    callCarousel();
+                    window.setTimeout(function() {
+                        $scope.$apply(function() {
+                            $scope.loaded=false;
+                        });
+                    }, 900);
+                }
+            });
+            console.log($scope.allCategory);
+        });
+
+    };
+
 
     $scope.courseDetails =function(){
         $scope.loaded=true;
@@ -97,6 +126,7 @@ userApp.controller('CourseController',['$scope','requestHandler','Flash','$route
             $.each($scope.allCategory,function(index,courses){
                 requestHandler.postRequest("searchPublishedCourse/",{"categoryid":courses.categoryid,"coursename":"","ownername":""}).then(function(response){
                     $scope.allCategoryCourses[index].categoryCourses=response.data.published_Course;
+                    console.log("asdf",$scope.allCategoryCourses);
                     if(index==($scope.allCategory.length)-1){
                         callCarousel();
                         window.setTimeout(function() {
