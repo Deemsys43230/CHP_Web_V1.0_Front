@@ -18,6 +18,7 @@ adminApp.controller('PaypalSettingsController',['$scope','requestHandler','Flash
         requestHandler.getRequest("admin/getappdetails/","").then(function(response){
 
             $scope.paypalSettings=response.data.App_settings[0];
+
             if($scope.paypalSettings.paypaltype==null){
                 $scope.paypalSettings.paypaltype="1";
             }else{

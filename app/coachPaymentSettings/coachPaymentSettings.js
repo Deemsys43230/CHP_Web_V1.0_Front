@@ -20,6 +20,7 @@ coachApp.controller('CoachPaymentSettingsController',['$scope','requestHandler',
         requestHandler.getRequest("getUserSettings/","").then(function(response){
             original = angular.copy(response.data.User_Settings[0]);
             $scope.paypalDetails=response.data.User_Settings[0];
+            console.log( $scope.paypalDetails);
 
         },function(response){
             errorMessage(Flash,"Please Try again later");

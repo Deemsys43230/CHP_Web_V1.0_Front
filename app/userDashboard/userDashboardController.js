@@ -22,7 +22,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
 
     //Modal Popup to add user food
     $scope.doUserAddFood=function(){
-        
+
         $(function(){
             $("#lean_overlay").fadeTo(1000);
             $("#modal-add-food").fadeIn(600);

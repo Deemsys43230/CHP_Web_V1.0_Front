@@ -32,9 +32,9 @@
                     <th class="select-all" width="10"><input type="checkbox" id="checkAll" ng-click="isChecked()"/></th>
                     <th class="col-md-2">User name</th>
                     <th class="col-md-2">Email ID</th>
-                    <th class="col-md-1">Date</th>
+                    <th class="col-md-2">Date</th>
                     <th class="col-md-1">Platform</th>
-                    <th class="col-md-4">Feed back</th>
+                    <th class="col-md-3">Feed back</th>
                     <th class="col-md-2">Option</th>
                 </tr>
                 </thead>
@@ -48,8 +48,8 @@
                     <td>{{userFeedback.platform}}</td>
                     <td><span class="line-clamp-md-low">{{userFeedback.description}}</span></td>
                     <td>
-                        <a href="" class="btn btn-xs btn-primary" ng-click="viewFeedback(userFeedback.feedbackid)">View</a>
-                        <a href="" class="btn btn-xs btn-danger"   ng-click="removeFeedbackSingle(userFeedback.feedbackid)">Remove</a>
+                        <a href="" class="btn-xs btn-primary" ng-click="viewFeedback(userFeedback.feedbackid)">View</a>
+                        <a href="" class="btn-xs btn-danger"   ng-click="removeFeedbackSingle(userFeedback.feedbackid)">Remove</a>
                     </td>
                 </tr>
                <tr ng-show="userFeedbackList.length==0">

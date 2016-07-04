@@ -502,6 +502,7 @@ coachApp.controller("CoachInitialController",['$scope','requestHandler','$locati
             $scope.isFeedback=true;
             $scope.feedback={};
             $scope.feedbackForm.$setPristine();
+            $scope.getFeedback();
         });
         $timeout(function () {
             $scope.isFeedback=false;

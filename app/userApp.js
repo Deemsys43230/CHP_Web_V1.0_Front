@@ -686,6 +686,7 @@ userApp.controller("UserInitialController",['$scope','requestHandler','$location
             $scope.isFeedback=true;
             $scope.feedback={};
             $scope.feedbackForm.$setPristine();
+            $scope.getFeedback();
         });
 
         $timeout(function () {
