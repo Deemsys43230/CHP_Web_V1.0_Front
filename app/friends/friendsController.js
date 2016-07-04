@@ -115,6 +115,20 @@ userApp.controller('FriendsController',['$scope','requestHandler','Flash','Frien
         })
     };
 
+    //UnFriend
+    $scope.unFriend=function(id){
+        var unFriendPromise = FriendsService.doUnFriend(id);
+        unFriendPromise.then(function(result){
+            if(result.data.Response_status ==1){
+                successMessage(Flash,"Successfully&nbsp;Unfriend");
+                $scope.initialLoad();
+            }
+            else if(result.data.Response_status == 0){
+                errorMessage(Flash,"No friends found");
+            }
+        })
+    };
+
     //user view details
     $scope.doViewMembers= function (id) {
         $scope.viewDetails=1;

@@ -60,6 +60,14 @@ userApp.factory("FriendsService",['requestHandler','Flash',function(requestHandl
         })
     };
 
+    userFriendsServiceObj.doUnFriend= function (id) {
+        return requestHandler.postRequest("user/unfriend/",{"friendId":id}).then(function(response){
+            return response;
+        },function(response){
+            errorMessage(Flash,"Please try again later");
+        })
+    };
+
     return userFriendsServiceObj;
 
 }]);

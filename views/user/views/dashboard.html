@@ -605,15 +605,13 @@
                             <h1 class="fa-5x fa fa-tachometer text-green"></h1>
                             <h4 class="margin-top-10">UPDATE WEIGHT</h4>
                         </div>-->
+
                         <div class="col-lg-12 col-md-12 col-sm-12">
                             <h5 class="margin-bottom-15">UPDATE WEIGHT</h5>
-                            <div class="col-lg-4 col-md-4 col-sm-4 no-padding margin-top-3">
-                                <span>Date <span class="pull-right">:</span></span>
-                            </div>
-                            <div class="col-lg-8 col-md-8 col-sm-8 no-padding-right padding-left-8">
-                                <input type="text" id="weight-log-date" class="profile_input weightoverride" block>
-                                <input id="weightLogDate" hidden>
-                            </div>
+                            <div>
+                            <span ng-if="disableUpdateWeight==false">On Today</span>
+                            <span ng-if="disableUpdateWeight==true">On {{selectDate}}</span>
+                                </div>
                             <div class="col-lg-4 col-md-4 col-sm-4 no-padding margin-top-15">
                                 <span>Weight<span class="pull-right">:</span></span>
                             </div>
@@ -625,7 +623,7 @@
                             </span>
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12 text-center margin-top-10 margin-bottom-5">
-                                <a href="" class="btn-dis suggest_button override-width no-margin-bottom" ng-disabled="isCleanWeight() || weightLogForm.$invalid||spinner" ng-click="weightLogEntry(1)">
+                                <a href="" class="btn-dis suggest_button override-width no-margin-bottom" ng-disabled="weightLogForm.$invalid || spinner || disableUpdateWeight" ng-click="weightLogEntry(1)">
                                     <span ng-if="spinner"><span class="three-quarters-loader">Loading…</span></span>{{weightUpdateText}}</a>
                             </div>
                         </div>

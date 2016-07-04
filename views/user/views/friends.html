@@ -39,7 +39,9 @@
                         <div ng-hide="viewDetails==1">
                         <div class="col-lg-3 col-md-3 col-sm-3" ng-repeat="myfriends in friendsfilter=( myFriendsList | filter: {name : myfriendssearch} | startFrom:currentPage*pageSize | limitTo:pageSize)" ng-show="myFriendsList.length!=0">
                             <a href="" ng-click="doViewMembers(myfriends.userid)" class="img-shadow"><img ng-src="{{myfriends.imageurl | trusted}}"/></a>
-                            <h5 class="wrap"><a href="" ng-click="doViewMembers(myfriends.userid)">{{myfriends.name}}</a></h5>
+                            <h5 class="wrap">
+                                <a href="" ng-cloak class="ng-cloak" ng-click="doViewMembers(myfriends.userid)">{{myfriends.name}}</a>
+                            </h5>
                         </div>
                         <h1 class="col-lg-12 col-md-12 col-sm-12 margin-top-50 text-gray text-center" ng-show="!friendsfilter.length" ng-if="!loaded">
                             <img src="../../images/no-friend.png" width="150" height="150"/><br/>
@@ -50,6 +52,7 @@
                             <div class="col-lg-12 col-md-12 col-sm-12">
                                 <div class="col-lg-3 col-md-3 col-sm-3 no-padding">
                                     <div class="margin-right-20"><img class="border-image" ng-src="{{myImgSrc}}"/></div>
+                                    <div class="margin-right-20 text-center"><a href="" ng-cloak class="btn btn-xs btn-danger margin-top-10" ng-click="unFriend(viewMemberDetails.userid)">Unfriend</a></div>
                                 </div>
                                 <div class="col-lg-9 col-md-9 col-sm-9 no-padding">
                                     <table class="table table-bordered table-striped">

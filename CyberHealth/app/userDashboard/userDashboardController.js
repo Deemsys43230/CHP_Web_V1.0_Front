@@ -22,6 +22,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
 
     //Modal Popup to add user food
     $scope.doUserAddFood=function(){
+
         $(function(){
             $("#lean_overlay").fadeTo(1000);
             $("#modal-add-food").fadeIn(600);
@@ -829,7 +830,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         $scope.weightUpdateText="Updating...";
         $scope.spinner=true;
         if(id==1)
-            $scope.doInsertOrUpdateWeightLog($("#weight-log-date").val(),parseFloat($("#weightLog").val()));
+            $scope.doInsertOrUpdateWeightLog($scope.UserDate,parseFloat($("#weightLog").val()));
         else
             $scope.doInsertOrUpdateWeightLog($("#weight-log-date1").val(),parseFloat($("#weightLog1").val()));
     };
@@ -1522,6 +1523,22 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         });
     };
 
+    $scope.getUserTimeZone=function(date){
+        requestHandler.getRequest("getUserTimeZone/","").then(function(response){
+            $scope.UserTimeZone = response.data.time;
+            $scope.UserDate = $scope.UserTimeZone.slice(0,10);
+            $scope.UserDate= new Date($scope.UserDate).format("mm/dd/yyyy");
+            $scope.selectDate =new Date(date).format("mm/dd/yyyy");
+
+            if( $scope.UserDate === $scope.selectDate){
+                $scope.disableUpdateWeight=false;
+            }
+            else{
+                $scope.disableUpdateWeight=true;
+            }
+        });
+    };
+
     //To Display current date
     var selectedDate = new Date();
     var dd = selectedDate.getDate();
@@ -1549,6 +1566,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         $scope.doGetWeightGoal();
         $scope.doGetWeightLog(date);
         $scope.goGetSessionGraph($scope.storedSessionId);
+        $scope.getUserTimeZone(date);
     };
 
     $scope.initialLoadFoodAndExercise(selectedDate);

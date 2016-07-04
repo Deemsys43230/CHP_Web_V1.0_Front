@@ -15,6 +15,7 @@
                         </div>
                         <div class="col-lg-11 col-md-10 col-sm-10 no-padding">
                             <h4 class="wrap">{{usernewsdetails.title}}</h4>
+                            <span ng-show="usernewsdetails.isUpdated==1" class="text-red font-12"><i >Updated</i></span>
                             <p class="margin-top-10 wrap"  ng-bind-html="usernewsdetails.description | html"></p>
                         </div>
                     </div>
@@ -38,6 +39,7 @@
                                     </div>
                                     <div class="testimonials-carousel-content">
                                         <a href="" onclick="doGetNewsDetails($(this).attr('data-value'));return false;" data-value="{{usernews.newsid}}">{{usernews.title}}</a>
+                                        <span ng-show="usernews.isUpdated==1" class="text-red font-12"><i >Updated</i></span>
                                         <p class="changeHeight" ng-bind-html="usernews.description | html"></p>
                                     </div>
                                 </div>
