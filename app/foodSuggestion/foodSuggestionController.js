@@ -15,9 +15,7 @@ adminApp.controller('FoodSuggestionController',['$scope','requestHandler','Flash
         });
     };
 
-    $scope.clearText=function(){
-        $scope.suggestionsearch.foodname="";
-    };
+
     // Search food suggestion
     $('.show-list-search').click(function() {
         $('.search-list-form').toggle(300);
