@@ -163,12 +163,56 @@
                     Today's Update
                 </h5>
             </div>
-            <div class="col-lg-12 col-md-12 col-sm-12 padding-left-0 padding-right-10">
+            <!--<div class="col-lg-12 col-md-12 col-sm-12 padding-left-0 padding-right-10">
                 <div id="dailyUpdateBudgetGraph"></div>
                 <div class="col-sm-12">
                     <h6 ng-show="0"><span class="fa fa fa-thumbs-up text-green">&nbsp;&nbsp;</span>Above <span class="label-success">215</span> calories</h6>
                     <h6 ng-show="1"><span class="fa fa fa-thumbs-down text-red">&nbsp;&nbsp;</span>Under <span class="label-danger">215</span> calories</h6>
                 </div>
+            </div>-->
+            <div class="col-lg-6 col-md-12 col-sm-12 text-center">
+                <h6>Budget Vs Net</h6>
+                <div class="circle-wrapper">
+                    <div class="circle-progress ng-cloak font-14" ng-style="getStyle()">{{currentGain}}</div>
+                    <div round-progress
+                         max="averageIntake"
+                         current="currentGain"
+                         color="{{currentGainColour}}"
+                         bgcolor="{{ bgColor }}"
+                         radius="37"
+                         semi="isSemi"
+                         rounded="rounded"
+                         stroke="6"
+                         clockwise="clockwise"
+                         responsive="responsive"
+                         duration="{{ duration }}"
+                         animation="{{ currentAnimation }}"
+                         offset="{{ offset }}">
+                    </div>
+                </div>
+                <p class="text-gray">of {{averageIntake}} cals.</p>
+            </div>
+            <div class="col-lg-6 col-md-12 col-sm-12 no-padding margin-top-15">
+                <div class="label-update">
+                    <span class="label-text">Gain</span>
+                    <span class="label-count green">1220</span>
+                </div>
+                <div class="label-update">
+                    <span class="label-text">Brunt</span>
+                    <span class="label-count red">343</span>
+                </div>
+                <div class="label-update">
+                    <span class="label-text">Budget</span>
+                    <span class="label-count blue">1756</span>
+                </div>
+                <div class="label-update">
+                    <span class="label-text">Net</span>
+                    <span class="label-count orange">335</span>
+                </div>
+
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 margin-top-15">
+                <h6 ng-show="1"><span class="fa fa fa-thumbs-down text-red">&nbsp;&nbsp;</span>Under <span class="label-danger">215</span> calories</h6>
             </div>
             <!--<div class="col-lg-6 col-md-12 col-sm-12 text-center">
                 <h5>Gain</h5>
@@ -681,6 +725,24 @@
                             </div>
                             <div ng-show="isHistoryEmpty==1" class="text-center">
                                 <br/><br/><br/>
+
+                                <!--<ul class="horizon-swiper">
+                                    <li class="horizon-item active">
+                                        <a class="historyOverride" href="#tab-4" data-toggle="tab" onclick="return false;" ng-click="setHistoryType(1)"><span class="hidden-md hidden-sm">Calories</span> Intaken</a>
+                                    </li>
+                                    <li class="horizon-item">
+                                        bad
+                                    </li>
+                                    <li class="horizon-item">
+                                        twitter
+                                    </li>
+                                    <li class="horizon-item">
+                                        facebook
+                                    </li>
+                                    <li class="horizon-item">
+                                        rank
+                                    </li>
+                                </ul>-->
                                 <img src="../../images/no-dates.png" width="200" height="200">
                                 <h1 class="text-gray">NO DATES SELECTED</h1>
                             </div>
@@ -1058,6 +1120,7 @@
 </div>
 
 <script type="text/javascript">
+
     $(document).ready(function(){
         $("#food-suggestion").rotate();
         $("#exercise-suggestion").rotating();
@@ -1080,6 +1143,7 @@
 <script type="text/javascript" src="../../js/script.js"></script>
 
 <script type="text/javascript">
+
     $("#modal_trigger_food").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
     $(function(){
         $(".common_model").show();
@@ -1299,9 +1363,15 @@
             scope.doGetWeightLog(start.format('DD/MM/YYYY'),2);
         });
 
+
     });
 </script>
 
-
+<script type="text/javascript">
+    ( function ( $ ) {
+        'use strict';
+        $('.horizon-swiper').horizonSwiper();
+    } )( jQuery );
+</script>
 
 

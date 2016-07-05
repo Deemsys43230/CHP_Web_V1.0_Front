@@ -763,7 +763,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         });
     };
 
-    $('#dailyUpdateBudgetGraph').highcharts({
+    /*$('#dailyUpdateBudgetGraph').highcharts({
         chart: {
             type: 'bar'
         },
@@ -802,7 +802,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
                 {y:-862,color:"#ffcc00"}],
             showInLegend: false
         }]
-    });
+    });*/
 
     $scope.doGetWeightLog=function(date,id){
 
@@ -840,7 +840,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         requestHandler.postRequest("user/weightlogInsertorUpdate/",{"date":date,"weight":weight}).then(function(response){
             if(date==selectedDate && $scope.updateGoal==1){
                 $window.currentweight = weight;
-                refreshGraph();
+                /*refreshGraph();*/
                 $scope.updateAverageGainSpent(date);
             }
             $scope.spinner=false;

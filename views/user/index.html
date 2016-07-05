@@ -153,7 +153,9 @@
 </header>
 <!-- End Header -->
 
-<div ng-view autoscroll="true"></div>
+<div class="default-banner">
+    <div ng-view autoscroll="true"></div>
+</div>
 
 <!-- Start Footer Section -->
 <footer>
@@ -261,16 +263,16 @@
     <div class="feedback-margin-adjust">
     <form id="feedback-form" name="feedbackForm" novalidate>
         <div class="alert-success-small" ng-show="isFeedback">Thanks for your feedback!!!</div>
-        <input class="section-input margin-top-5" name="name" ng-model="feedback.name" placeholder="Name*" required/>
+        <input class="search-input margin-top-5" name="name" ng-model="feedback.name" placeholder="Name*" required/>
          <span ng-show="feedbackForm.name.$dirty&&feedbackForm.name.$invalid">
              <span class="error-message" ng-show="feedbackForm.name.$error.required"><span>Required.</span></span>
          </span>
-        <input type="email" class="section-input margin-top-10" name="emailid" ng-model="feedback.emailId" placeholder="Email ID*" validate-email required/>
+        <input type="email" class="search-input margin-top-10" name="emailid" ng-model="feedback.emailId" placeholder="Email ID*" validate-email required/>
         <span ng-show="feedbackForm.emailid.$dirty&&feedbackForm.emailid.$invalid">
              <span class="error-message" ng-show="feedbackForm.emailid.$error.required"><span>Required.</span></span>
              <span class="error-message" ng-show="feedbackForm.emailid.$error.email"><span>Enter&nbsp;valid&nbsp;Email&nbsp;ID.</span></span>
         </span>
-        <input class="section-input margin-top-10" name="mobile" ng-model="feedback.mobile" ng-pattern="/^\d+$/" ng-minlength="10" maxlength="10" placeholder="Phone number"/>
+        <input class="search-input margin-top-10" name="mobile" ng-model="feedback.mobile" ng-pattern="/^\d+$/" ng-minlength="10" maxlength="10" placeholder="Phone number"/>
         <span ng-show="feedbackForm.mobile.$dirty&&feedbackForm.mobile.$invalid">
              <span class="error-message " ng-show="feedbackForm.mobile.$error.pattern"><span>Invalid&nbsp;Format.</span></span>
              <span class="error-message " ng-show="!feedbackForm.mobile.$error.pattern&&feedbackForm.mobile.$error.minlength"><span>Should&nbsp;be&nbsp;of&nbsp;length&nbsp;10.</span></span>

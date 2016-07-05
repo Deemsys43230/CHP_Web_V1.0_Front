@@ -65,7 +65,10 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../app/userDashboard/userDashboardService.js',
                                 '../../app/userDashboard/userDashboardController.js',
                                 '../../plugin/dateRange/daterangepicker.css',
-                                '../../plugin/dateRange/daterangepicker.js'
+                                '../../plugin/dateRange/daterangepicker.js',
+                                '../../css/horizon-swiper.min.css',
+                                '../../css/horizon-theme.min.css',
+                                '../../js/horizon-swiper.min.js'
                             ]
                         })}]},
                 controller:'UserDashboardController'

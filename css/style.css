@@ -15352,3 +15352,128 @@ input[type=number]::-webkit-outer-spin-button {
     appearance: none;
     margin: 0;
 }
+
+.default-banner {
+    background: rgba(255,255,255,0.9);
+    min-height:500px;
+}
+
+.label-update{
+    background:#fff;
+    box-shadow: inset 0 0 3px #ccc;
+    float:left;
+    color:#555;
+    font-size:12px;
+    padding:0!important;
+    margin-bottom:7px;
+    font-weight:bold;
+}
+
+.label-update span.label-text{
+    padding:5px 3px 5px 8px;
+    margin:0!important;
+    width:55px!important;
+    height: 20px;
+    line-height: 12px;
+    float: left;
+}
+
+.label-update span.label-count{
+    padding:3px 5px 4px 5px;
+    margin:0!important;
+    color:#ffffff !important;
+}
+
+.label-update span.label-count.red{
+    background-color:#eb6b22;
+}
+
+.label-update span.label-count.green{
+    background-color:#65bb34;
+}
+
+.label-update span.label-count.blue{
+    background-color:#3591cd;
+}
+
+.label-update span.label-count.orange{
+    background-color:#f8ba01;
+}
+
+.horizon-swiper {
+    width:100%;
+    padding: 0 5px
+}
+.horizon-item {
+    width: 300px
+}
+
+.horizon-swiper .horizon-item {
+    padding: 6px 1px
+}
+
+button {
+    -webkit-appearance: button;
+    cursor: pointer
+}
+
+
+.horizon-swiper {
+    border: 0px !important;
+}
+
+.horizon-swiper > li > a {
+    font-weight: 600;
+    color: #666;
+    padding: 10px 20px;
+    background-color: #f9f9f9;
+    border-radius: 0px !important;
+    border: 0px !important;
+    margin-right: 7px !important;
+}
+
+.horizon-swiper > li > a.historyOverride{
+    font-weight: 600;
+    color: #666;
+    padding: 6px 12px;
+    background-color: #f9f9f9;
+    border-radius: 0px !important;
+    border: 0px !important;
+    margin-right: 7px !important;
+}
+
+.horizon-swiper > li > a i {
+    padding-right: 6px;
+}
+
+.horizon-swiper > li > a:hover, .horizon-swiper > li > a:focus {
+    color: #f8ba01 !important;
+    background-color: #fff !important;
+    -webkit-box-shadow: 0px 0px 3px rgba(0,0,0,0.3);
+    -moz-box-shadow:  0px 0px 3px rgba(0,0,0,0.3);
+    box-shadow:  0px 0px 3px rgba(0,0,0,0.3);
+}
+
+.horizon-swiper > li.active > a, .horizon-swiper > li.active > a:hover, .horizon-swiper > li.active > a:focus {
+    background-color: #fff;
+    color: #f8ba01 !important;
+    -webkit-box-shadow:  0px 0px 3px rgba(0,0,0,0.3);
+    -moz-box-shadow:  0px 0px 3px rgba(0,0,0,0.3);
+    box-shadow: 0px 0px 3px rgba(0,0,0,0.3);
+}
+
+.horizon-swiper > li > a.historyOverride:hover, .horizon-swiper > li > a.historyOverride:focus {
+    color: #ff0066 !important;
+    background-color: #fff !important;
+    -webkit-box-shadow: 0px 0px 3px rgba(0,0,0,0.3);
+    -moz-box-shadow:  0px 0px 3px rgba(0,0,0,0.3);
+    box-shadow:  0px 0px 3px rgba(0,0,0,0.3);
+}
+
+.horizon-swiper > li.active > a.historyOverride, .horizon-swiper > li.active > a.historyOverride:hover, .horizon-swiper > li.active > a.historyOverride:focus {
+    background-color: #fff;
+    color: #ff0066 !important;
+    -webkit-box-shadow:  0px 0px 3px rgba(0,0,0,0.3);
+    -moz-box-shadow:  0px 0px 3px rgba(0,0,0,0.3);
+    box-shadow: 0px 0px 3px rgba(0,0,0,0.3);
+}
