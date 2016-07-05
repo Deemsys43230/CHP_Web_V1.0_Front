@@ -15401,68 +15401,38 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .horizon-swiper {
-    width:100%;
-    padding: 0 5px
-}
-.horizon-item {
-    width: 300px
+    position:relative;
+    width:100%!important;
+    padding: 0 5px;
+    margin: 0!important;
+    background-color: transparent!important;
 }
 
 .horizon-swiper .horizon-item {
-    padding: 6px 1px
+    padding: 5px 2px;
 }
 
-button {
+.horizon-swiper .horizon-item.last {
+    width:85px;
+    visibility:hidden;
+}
+
+button{
     -webkit-appearance: button;
     cursor: pointer
 }
 
-
-.horizon-swiper {
-    border: 0px !important;
-}
-
-.horizon-swiper > li > a {
-    font-weight: 600;
-    color: #666;
-    padding: 10px 20px;
-    background-color: #f9f9f9;
-    border-radius: 0px !important;
-    border: 0px !important;
-    margin-right: 7px !important;
-}
-
-.horizon-swiper > li > a.historyOverride{
+.horizon-swiper .horizon-item a.historyOverride{
     font-weight: 600;
     color: #666;
     padding: 6px 12px;
-    background-color: #f9f9f9;
-    border-radius: 0px !important;
-    border: 0px !important;
+    background-color: #f9f9f9!important;
+    border-radius: 0 !important;
+    border: 0 !important;
     margin-right: 7px !important;
 }
 
-.horizon-swiper > li > a i {
-    padding-right: 6px;
-}
-
-.horizon-swiper > li > a:hover, .horizon-swiper > li > a:focus {
-    color: #f8ba01 !important;
-    background-color: #fff !important;
-    -webkit-box-shadow: 0px 0px 3px rgba(0,0,0,0.3);
-    -moz-box-shadow:  0px 0px 3px rgba(0,0,0,0.3);
-    box-shadow:  0px 0px 3px rgba(0,0,0,0.3);
-}
-
-.horizon-swiper > li.active > a, .horizon-swiper > li.active > a:hover, .horizon-swiper > li.active > a:focus {
-    background-color: #fff;
-    color: #f8ba01 !important;
-    -webkit-box-shadow:  0px 0px 3px rgba(0,0,0,0.3);
-    -moz-box-shadow:  0px 0px 3px rgba(0,0,0,0.3);
-    box-shadow: 0px 0px 3px rgba(0,0,0,0.3);
-}
-
-.horizon-swiper > li > a.historyOverride:hover, .horizon-swiper > li > a.historyOverride:focus {
+.horizon-swiper .horizon-item a.historyOverride:hover, .horizon-swiper .horizon-item a.historyOverride:focus {
     color: #ff0066 !important;
     background-color: #fff !important;
     -webkit-box-shadow: 0px 0px 3px rgba(0,0,0,0.3);
@@ -15470,8 +15440,8 @@ button {
     box-shadow:  0px 0px 3px rgba(0,0,0,0.3);
 }
 
-.horizon-swiper > li.active > a.historyOverride, .horizon-swiper > li.active > a.historyOverride:hover, .horizon-swiper > li.active > a.historyOverride:focus {
-    background-color: #fff;
+.horizon-swiper .horizon-item.active a.historyOverride, .horizon-swiper .horizon-item.active a.historyOverride:hover, .horizon-swiper .horizon-item.active a.historyOverride:focus {
+    background-color: #fff!important;
     color: #ff0066 !important;
     -webkit-box-shadow:  0px 0px 3px rgba(0,0,0,0.3);
     -moz-box-shadow:  0px 0px 3px rgba(0,0,0,0.3);

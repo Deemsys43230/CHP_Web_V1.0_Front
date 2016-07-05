@@ -151,7 +151,7 @@
             </a>
         </li>
 
-        <li class="history" ng-click="getHistory()">
+        <li id="history-menu" class="history" ng-click="getHistory()">
             <a href="#history"><i class="fa fa-history fa-4x hidden-md"></i><span>History</span>
                 <p class="hidden-md hidden-sm">Get your history</p>
             </a>
@@ -682,14 +682,34 @@
     <div id="contentHistory">
         <div id="history"  class="contentblock hidden">
             <div class="col-lg-12 col-md-12 col-sm-12 no-padding margin-top-10">
-                <div class="col-lg-7 col-md-7 col-sm-7 padding-rl-10">
+                <div class="col-lg-7 col-md-7 col-sm-7 no-padding">
                     <!-- Nav Tabs -->
-                    <ul class="nav nav-tabs">
+                    <!--<ul class="nav nav-tabs">
                         <li class="active"><a class="historyOverride" href="#tab-4" data-toggle="tab" onclick="return false;" ng-click="setHistoryType(1)"><span class="hidden-md hidden-sm">Calories</span> Intaken</a></li>
                         <li><a href="#tab-4" class="historyOverride" data-toggle="tab" onclick="return false;" ng-click="setHistoryType(2)"><span class="hidden-md hidden-sm">Calories</span> Burnt</a></li>
                         <li><a href="#tab-4" class="historyOverride" data-toggle="tab" onclick="return false;" ng-click="setHistoryType(3)">Exercise Minutes</a></li>
                         <li><a href="#tab-4" class="historyOverride" data-toggle="tab" onclick="return false;" ng-click="setHistoryType(4)">Weight Log</a></li>
+                    </ul>-->
+
+                    <ul class="horizon-swiper">
+                        <li class="horizon-item active">
+                            <a class="historyOverride" href="#tab-4" data-toggle="tab" onclick="return false;" ng-click="setHistoryType(1)"><span class="hidden-md hidden-sm">Calories</span>&nbsp;Intaken</a>
+                        </li>
+                        <li class="horizon-item">
+                            <a href="#tab-4" class="historyOverride" data-toggle="tab" onclick="return false;" ng-click="setHistoryType(2)"><span class="hidden-md hidden-sm">Calories</span>&nbsp;Burnt</a>
+                        </li>
+                        <li class="horizon-item">
+                            <a href="#tab-4" class="historyOverride" data-toggle="tab" onclick="return false;" ng-click="setHistoryType(3)">Exercise&nbsp;Minutes</a>
+                        </li>
+                        <li class="horizon-item">
+                            <a href="#tab-4" class="historyOverride" data-toggle="tab" onclick="return false;" ng-click="setHistoryType(4)">Weight&nbsp;Log</a>
+                        </li>
+                        <li class="horizon-item">
+                            <a class="historyOverride" href="#tab-4" data-toggle="tab" onclick="return false;" ng-click="setHistoryType(5)">Budget vs Net Log</a>
+                        </li>
+                        <li class="horizon-item last"></li>
                     </ul>
+
                 </div>
 
                 <div class="col-lg-5 col-md-5 col-sm-5 padding-left-0 padding-right-10">
@@ -725,24 +745,6 @@
                             </div>
                             <div ng-show="isHistoryEmpty==1" class="text-center">
                                 <br/><br/><br/>
-
-                                <!--<ul class="horizon-swiper">
-                                    <li class="horizon-item active">
-                                        <a class="historyOverride" href="#tab-4" data-toggle="tab" onclick="return false;" ng-click="setHistoryType(1)"><span class="hidden-md hidden-sm">Calories</span> Intaken</a>
-                                    </li>
-                                    <li class="horizon-item">
-                                        bad
-                                    </li>
-                                    <li class="horizon-item">
-                                        twitter
-                                    </li>
-                                    <li class="horizon-item">
-                                        facebook
-                                    </li>
-                                    <li class="horizon-item">
-                                        rank
-                                    </li>
-                                </ul>-->
                                 <img src="../../images/no-dates.png" width="200" height="200">
                                 <h1 class="text-gray">NO DATES SELECTED</h1>
                             </div>
@@ -1370,7 +1372,20 @@
 <script type="text/javascript">
     ( function ( $ ) {
         'use strict';
-        $('.horizon-swiper').horizonSwiper();
+
+        $("#history-menu").click(function(){
+            setTimeout(function(){
+                $('.horizon-swiper').horizonSwiper();
+                $('.horizon-swiper').css('width','100');
+            },250)
+        });
+
+        $('.horizon-swiper  li').click(function() {
+            $('.horizon-swiper  li').removeClass('active');
+            $(this).addClass('active');
+        });
+
+
     } )( jQuery );
 </script>
 
