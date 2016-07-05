@@ -1,0 +1,1 @@
+var adminApp=angular.module("pageModule",[]);adminApp.service("pageService",function(){var a=1,b="";this.setNewPageNumber=function(b){a=b},this.getNewPageNumber=function(){return a},this.setSearchFood=function(a){b=a},this.getSearchFood=function(){return b}});
