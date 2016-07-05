@@ -173,10 +173,10 @@
                     <div class="col-lg-6 col-md-12 col-sm-12 text-center">
                         <h6>Budget Vs Net</h6>
                         <div class="circle-wrapper">
-                            <div class="circle-progress ng-cloak font-14" ng-style="getStyle()">{{currentGain}}</div>
+                            <div class="circle-progress ng-cloak font-14" ng-style="getStyle()">{{Net}}</div>
                             <div round-progress
-                                 max="averageIntake"
-                                 current="currentGain"
+                                 max="Budget"
+                                 current="Net"
                                  color="{{currentGainColour}}"
                                  bgcolor="{{ bgColor }}"
                                  radius="37"
@@ -190,29 +190,30 @@
                                  offset="{{ offset }}">
                             </div>
                         </div>
-                        <p class="text-gray">of {{averageIntake}} cals.</p>
+                        <p class="text-gray">of {{Budget}} cals.</p>
                     </div>
                     <div class="col-lg-6 col-md-12 col-sm-12 no-padding margin-top-15">
                         <div class="label-update">
+                            <span class="label-text">Budget</span>
+                            <span class="label-count blue">{{budgetDetails.Budget}}</span>
+                        </div>
+                        <div class="label-update">
                             <span class="label-text">Gain</span>
-                            <span class="label-count green">1220</span>
+                            <span class="label-count green">{{budgetDetails.Intake}}</span>
                         </div>
                         <div class="label-update">
                             <span class="label-text">Brunt</span>
-                            <span class="label-count red">343</span>
-                        </div>
-                        <div class="label-update">
-                            <span class="label-text">Budget</span>
-                            <span class="label-count blue">1756</span>
+                            <span class="label-count red">{{budgetDetails.Burnt}}</span>
                         </div>
                         <div class="label-update">
                             <span class="label-text">Net</span>
-                            <span class="label-count orange">335</span>
+                            <span class="label-count orange">{{budgetDetails.Net}}</span>
                         </div>
 
                     </div>
                     <div class="col-lg-12 col-md-12 col-sm-12 margin-top-15">
-                        <h6 ng-show="1"><span class="fa fa fa-thumbs-down text-red">&nbsp;&nbsp;</span>Under <span class="label-danger">215</span> calories</h6>
+                        <h6 ng-show="budgetDetails.OverorUnderStatus==1"><span class="fa fa fa-thumbs-down text-red">&nbsp;&nbsp;</span>Over <span class="label-danger">{{budgetDetails.OverorUnderValue}}</span> calories</h6>
+                        <h6 ng-show="budgetDetails.OverorUnderStatus==2"><span class="fa fa fa-thumbs-up text-green">&nbsp;&nbsp;</span>Under <span class="label-success">{{budgetDetails.OverorUnderValue}}</span> calories</h6>
                     </div>
                     <!--<div class="col-lg-6 col-md-12 col-sm-12 text-center">
                         <h5>Gain</h5>

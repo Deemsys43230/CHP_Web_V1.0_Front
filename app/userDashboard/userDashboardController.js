@@ -177,6 +177,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
             $scope.goGetDailyIntakeGraph($scope.userFood.addeddate);
             $scope.goGetSessionGraph($scope.storedSessionId);
             $scope.doGetHistoryReport();
+            $scope.getBudget($scope.userFood.addeddate);
         });
 
     };
@@ -196,6 +197,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
             $scope.goGetDailyIntakeGraph(date);
             $scope.goGetSessionGraph($scope.storedSessionId);
             $scope.doGetHistoryReport();
+            $scope.getBudget(date);
         });
 
     };
@@ -211,6 +213,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
             $scope.goGetDailyIntakeGraph(date);
             $scope.goGetSessionGraph($scope.storedSessionId);
             $scope.doGetHistoryReport();
+            $scope.getBudget(date);
         });
     };
 
@@ -470,6 +473,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
             $scope.loadExerciseDiary($scope.userExercise.date);
             $scope.doGetIntakeBruntByDate($scope.userExercise.date);
             $scope.doGetHistoryReport();
+            $scope.getBudget($scope.userExercise.date);
         });
 
     };
@@ -483,6 +487,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
             $scope.loadExerciseDiary(date);
             $scope.doGetIntakeBruntByDate(date);
             $scope.doGetHistoryReport();
+            $scope.getBudget(date);
         });
     };
     var originallevel="";
@@ -544,6 +549,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
             $scope.loadExerciseDiary(date);
             $scope.doGetIntakeBruntByDate(date);
             $scope.doGetHistoryReport();
+            $scope.getBudget(date);
         });
 
     };
@@ -1523,6 +1529,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         });
     };
 
+    //Get user time zone for update weight log
     $scope.getUserTimeZone=function(date){
         requestHandler.getRequest("getUserTimeZone/","").then(function(response){
             $scope.UserTimeZone = response.data.time;
@@ -1538,6 +1545,22 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
           }
         });
     };
+
+    //Budget value
+    $scope.getBudget=function(date){
+        requestHandler.postRequest("user/getTotalCalorieDetailForDate/",{"date":date}).then(function(response){
+            $scope.budgetDetails = response.data.BudgetDetail;
+            $scope.Budget= $scope.budgetDetails.Budget;
+            $scope.Net = $scope.budgetDetails.Net;
+            if($scope.budgetDetails.OverorUnderStatus==1){
+                $scope.currentGainColour="red";
+            }
+            else if($scope.budgetDetails.OverorUnderStatus==2){
+                $scope.currentGainColour="limegreen";
+            }
+         });
+    };
+
 
     //To Display current date
     var selectedDate = new Date();
@@ -1567,6 +1590,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         $scope.doGetWeightLog(date);
         $scope.goGetSessionGraph($scope.storedSessionId);
         $scope.getUserTimeZone(date);
+        $scope.getBudget(date);
     };
 
     $scope.initialLoadFoodAndExercise(selectedDate);
