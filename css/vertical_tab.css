@@ -83,7 +83,7 @@
     background: #f2f2f2;
 }
 
-#sidemenu li a {
+#sidemenu li a.menu-items{
   display: block;
   padding: 10px 20px;
   height: 60px;
@@ -119,16 +119,16 @@
     margin-bottom: 10px;
 }
 
-#sidemenu li a:hover {
+#sidemenu li a.menu-items:hover {
   background: #f2f2f2;
 }
 
-#sidemenu li a strong {
+#sidemenu li a.menu-items strong {
   display: block;
   margin-top: 5px;
 }
 
-#sidemenu li a.open {
+#sidemenu li a.menu-items.open {
   width: 100%;
   background: #fff;
   position: relative;
@@ -138,12 +138,12 @@
     box-shadow: 1px 1px 5px rgba(0,0,0,0.3);
 }
 
-#sidemenu li.daily_update a.open {
+#sidemenu li.daily_update a.menu-items.open {
     color: #f8ba01;
     border-left: 4px solid #f8ba01;
 }
 
-#sidemenu li.advice a.open {
+#sidemenu li.advice a.menu-items.open {
     color: red;
     border-left: 4px solid red;
 }
@@ -152,7 +152,7 @@
     color: red;
 }
 
-#sidemenu li.history a.open {
+#sidemenu li.history a.menu-items.open {
     color: #ff0066;
     border-left: 4px solid #ff0066;
 }
@@ -161,12 +161,12 @@
     color: #ff0066;
 }
 
-#sidemenu li.weight a.open {
+#sidemenu li.weight a.menu-items.open {
     color: limegreen;
     border-left: 4px solid limegreen;
 }
 
-#sidemenu span.horizontal a.open {
+#sidemenu span.horizontal a.menu-items.open {
     color: blue;
     border-top: 4px solid blue;
 }
@@ -196,17 +196,17 @@
 html[xmlns] .clearfix { display: block; }
 * html .clearfix { height: 1%; }
 
-#sidemenu li a i{
+#sidemenu li a.menu-items i{
    font-size: 16px;
    width: 25px;
  }
 
-#sidemenu li a span{
+#sidemenu li a.menu-items span{
     font-size: 16px;
     font-weight: bold;
 }
 
-#sidemenu li a p{
+#sidemenu li a.menu-items p{
     padding-left: 20px;
 }
 

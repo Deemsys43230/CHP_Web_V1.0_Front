@@ -134,35 +134,30 @@
             <ul id="sidemenu">
 
                 <li class="daily_update" ng-click="otherThanHistory()">
-                    <a href="#daily_update" class="open"><i class="fa fa-child fa-4x hidden-md"></i><span>Daily Updates</span>
+                    <a href="#daily_update" class="open menu-items"><i class="fa fa-child fa-4x hidden-md"></i><span>Daily Updates</span>
                         <p class="hidden-md hidden-sm">Enter your Daily Updates</p>
                     </a>
                 </li>
 
                 <li class="weight" ng-click="otherThanHistory()">
-                    <a href="#weight"><i class="fa fa-tachometer fa-4x hidden-md"></i><span>Weight & Goal</span>
+                    <a class="menu-items" href="#weight"><i class="fa fa-tachometer fa-4x hidden-md"></i><span>Weight & Goal</span>
                         <p class="hidden-md hidden-sm">Update Weight & Set Goal</p>
                     </a>
                 </li>
 
                 <li class="advice" ng-click="otherThanHistory()">
-                    <a href="#advice"><i class="fa fa-exclamation-triangle fa-4x hidden-md"></i><span>Advices</span>
+                    <a class="menu-items" href="#advice"><i class="fa fa-exclamation-triangle fa-4x hidden-md"></i><span>Advices</span>
                         <p class="hidden-md hidden-sm">Get daily tips for you</p>
                     </a>
                 </li>
 
                 <li id="history-menu" class="history" ng-click="getHistory()">
-                    <a href="#history"><i class="fa fa-history fa-4x hidden-md"></i><span>History</span>
+                    <a class="menu-items" href="#history"><i class="fa fa-history fa-4x hidden-md"></i><span>History</span>
                         <p class="hidden-md hidden-sm">Get your history</p>
                     </a>
                 </li>
 
                 <li class="calories">
-                    <div class="text">
-                        <h5>
-                            Today's Update
-                        </h5>
-                    </div>
                     <!--<div class="col-lg-12 col-md-12 col-sm-12 padding-left-0 padding-right-10">
                         <div id="dailyUpdateBudgetGraph"></div>
                         <div class="col-sm-12">
@@ -170,50 +165,28 @@
                             <h6 ng-show="1"><span class="fa fa fa-thumbs-down text-red">&nbsp;&nbsp;</span>Under <span class="label-danger">215</span> calories</h6>
                         </div>
                     </div>-->
-                    <div class="col-lg-6 col-md-12 col-sm-12 text-center">
-                        <h6>Budget Vs Net</h6>
-                        <div class="circle-wrapper">
-                            <div class="circle-progress ng-cloak font-14" ng-style="getStyle()">{{Net}}</div>
-                            <div round-progress
-                                 max="Budget"
-                                 current="Net"
-                                 color="{{currentGainColour}}"
-                                 bgcolor="{{ bgColor }}"
-                                 radius="37"
-                                 semi="isSemi"
-                                 rounded="rounded"
-                                 stroke="6"
-                                 clockwise="clockwise"
-                                 responsive="responsive"
-                                 duration="{{ duration }}"
-                                 animation="{{ currentAnimation }}"
-                                 offset="{{ offset }}">
+                    <div class="col-lg-12 col-md-12 col-sm-12 margin-top-5">
+                        <form name="weightLogForm" novalidate>
+                            <h5 class="margin-bottom-15">UPDATE WEIGHT</h5>
+                            <div>
+                                <span ng-if="disableUpdateWeight==false">On Today</span>
+                                <span ng-if="disableUpdateWeight==true">On {{selectDate}}</span>
                             </div>
-                        </div>
-                        <p class="text-gray">of {{Budget}} cals.</p>
-                    </div>
-                    <div class="col-lg-6 col-md-12 col-sm-12 no-padding margin-top-15">
-                        <div class="label-update">
-                            <span class="label-text">Budget</span>
-                            <span class="label-count blue">{{budgetDetails.Budget}}</span>
-                        </div>
-                        <div class="label-update">
-                            <span class="label-text">Gain</span>
-                            <span class="label-count green">{{budgetDetails.Intake}}</span>
-                        </div>
-                        <div class="label-update">
-                            <span class="label-text">Brunt</span>
-                            <span class="label-count red">{{budgetDetails.Burnt}}</span>
-                        </div>
-                        <div class="label-update">
-                            <span class="label-text">Net</span>
-                            <span class="label-count orange">{{budgetDetails.Net}}</span>
-                        </div>
-
-                    </div>
-                    <div class="col-lg-12 col-md-12 col-sm-12 margin-top-15">
-                        <h6 ng-show="budgetDetails.OverorUnderStatus==1"><span class="fa fa fa-thumbs-down text-red">&nbsp;&nbsp;</span>Over <span class="label-danger">{{budgetDetails.OverorUnderValue}}</span> calories</h6>
-                        <h6 ng-show="budgetDetails.OverorUnderStatus==2"><span class="fa fa fa-thumbs-up text-green">&nbsp;&nbsp;</span>Under <span class="label-success">{{budgetDetails.OverorUnderValue}}</span> calories</h6>
+                            <div class="col-lg-6 col-md-6 col-sm-6 no-padding margin-top-15">
+                                <span>Weight<span class="pull-right">:</span></span>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 margin-top-10 no-padding-right padding-left-8">
+                                <input class="profile_input weightoverride" id="weightLog" name="weight" ng-model="weightlog" maxlength="5" required validate-Float1/>
+                                <span ng-show="weightLogForm.weight.$dirty&&weightLogForm.weight.$invalid">
+                                    <span class="error-message textarea-errormessage10" ng-show="weightLogForm.weight.$error.required"><span>Required.</span></span>
+                                    <span class="error-message textarea-errormessage10" ng-show="!weightLogForm.weight.$error.required&&weightLogForm.weight.$error.validateFloat1"><span>Invalid&nbsp;Data.</span></span>
+                                </span>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 text-center margin-top-20 margin-bottom-5">
+                                <button onclick="return false;" class="btn-dis suggest_button override-width no-margin-bottom" ng-disabled="weightLogForm.$invalid || spinner || disableUpdateWeight" ng-click="weightLogEntry(1)">
+                                    <span ng-if="spinner"><span class="three-quarters-loader">Loading…</span></span>{{weightUpdateText}}</button>
+                            </div>
+                        </form>
                     </div>
                     <!--<div class="col-lg-6 col-md-12 col-sm-12 text-center">
                         <h5>Gain</h5>
@@ -625,6 +598,7 @@
         <div class="dashboard-3 hidden-sm" ng-show="historyReport==0">
             <div id="update">
                 <div class="row">
+                    <h5 class="col-md-12 margin-bottom-7">Today's Update</h5>
                     <!--<div class="col-lg-4 hidden-md">
                         <img ng-src="{{userProfileImage | trusted}}">
                     </div>
@@ -645,36 +619,68 @@
                             </div>
                         </div>
                     </div>-->
-                    <form name="weightLogForm" novalidate>
+
                         <!--<div class="col-lg-6 col-md-6 col-sm-6 text-center">
                             <h1 class="fa-5x fa fa-tachometer text-green"></h1>
                             <h4 class="margin-top-10">UPDATE WEIGHT</h4>
                         </div>-->
 
-                        <div class="col-lg-12 col-md-12 col-sm-12">
-                            <h5 class="margin-bottom-15">UPDATE WEIGHT</h5>
-                            <div>
-                            <span ng-if="disableUpdateWeight==false">On Today</span>
-                            <span ng-if="disableUpdateWeight==true">On {{selectDate}}</span>
-                                </div>
-                            <div class="col-lg-4 col-md-4 col-sm-4 no-padding margin-top-15">
-                                <span>Weight<span class="pull-right">:</span></span>
-                            </div>
-                            <div class="col-lg-8 col-md-8 col-sm-8 margin-top-10 no-padding-right padding-left-8">
-                                <input class="profile_input weightoverride" id="weightLog" name="weight" ng-model="weightlog" maxlength="5" required validate-Float1/>
-                            <span ng-show="weightLogForm.weight.$dirty&&weightLogForm.weight.$invalid">
-                                <span class="error-message textarea-errormessage10" ng-show="weightLogForm.weight.$error.required"><span>Required.</span></span>
-                                <span class="error-message textarea-errormessage10" ng-show="!weightLogForm.weight.$error.required&&weightLogForm.weight.$error.validateFloat1"><span>Invalid&nbsp;Data.</span></span>
+                        <div class="col-lg-12 col-md-12 col-sm-12 margin-bottom-5">
+
+                            <h6>Budget Vs Net &nbsp;-&nbsp;
+                                <span ng-show="budgetDetails.OverorUnderStatus==1"><span class="fa fa fa-thumbs-down text-red">&nbsp;&nbsp;</span>Over Budget</span>
+                                <span ng-show="budgetDetails.OverorUnderStatus==2"><span class="fa fa fa-thumbs-up text-green">&nbsp;&nbsp;</span>Under Budget</span>
                             </span>
-                            </div>
-                            <div class="col-lg-12 col-md-12 col-sm-12 text-center margin-top-10 margin-bottom-5">
-                                <a href="" class="btn-dis suggest_button override-width no-margin-bottom" ng-disabled="weightLogForm.$invalid || spinner || disableUpdateWeight" ng-click="weightLogEntry(1)">
-                                    <span ng-if="spinner"><span class="three-quarters-loader">Loading…</span></span>{{weightUpdateText}}</a>
-                            </div>
+                            </h6>
                         </div>
-                    </form>
+                        <div class="col-lg-5 col-md-12 col-sm-12 margin-top-10">
+                            <div class="circle-wrapper">
+                                <div class="circle-progress ng-cloak font-14" ng-style="getStyle()">{{Net}}</div>
+                                <div round-progress
+                                     max="Budget"
+                                     current="Net"
+                                     color="{{currentGainColour}}"
+                                     bgcolor="{{ bgColor }}"
+                                     radius="37"
+                                     semi="isSemi"
+                                     rounded="rounded"
+                                     stroke="6"
+                                     clockwise="clockwise"
+                                     responsive="responsive"
+                                     duration="{{ duration }}"
+                                     animation="{{ currentAnimation }}"
+                                     offset="{{ offset }}">
+                                </div>
+                            </div>
+                            <p class="text-gray">of {{Budget}} cals.</p>
+                        </div>
+
+                    <div class="col-lg-7 col-md-12 col-sm-12 no-padding margin-top-5">
+                        <div class="label-update">
+                            <span class="label-text">Budget</span>
+                            <span class="label-count blue">{{budgetDetails.Budget}}</span>
+                        </div>
+                        <div class="label-update">
+                            <span class="label-text">Gain</span>
+                            <span class="label-count green">{{budgetDetails.Intake}}</span>
+                        </div>
+                        <div class="label-update">
+                            <span class="label-text">Brunt</span>
+                            <span class="label-count red">{{budgetDetails.Burnt}}</span>
+                        </div>
+                        <div class="label-update">
+                            <span class="label-text">Net</span>
+                            <span class="label-count orange">{{budgetDetails.Net}}</span>
+                        </div>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 margin-top-5">
+                        <h6 ng-show="budgetDetails.OverorUnderStatus==1"><div class="label-danger">You are consumed {{budgetDetails.OverorUnderValue}} more calories. Do Exercise.</div></h6>
+                        <h6 ng-show="budgetDetails.OverorUnderStatus==2"><div class="label-success">You could take {{budgetDetails.OverorUnderValue}} more calories to reach Budget Value.</div></h6>
+                    </div>
                 </div>
-                <hr/>
+                <div class="margin-tb-5">
+                    <hr/>
+                </div>
                 <h6>Nutrients Intake</h6>
                 <div id="dailyIntake" class="margin-top-15"></div>
             </div>
