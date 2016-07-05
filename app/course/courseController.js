@@ -126,7 +126,6 @@ userApp.controller('CourseController',['$scope','requestHandler','Flash','$route
             $.each($scope.allCategory,function(index,courses){
                 requestHandler.postRequest("searchPublishedCourse/",{"categoryid":courses.categoryid,"coursename":"","ownername":""}).then(function(response){
                     $scope.allCategoryCourses[index].categoryCourses=response.data.published_Course;
-                    console.log("asdf",$scope.allCategoryCourses);
                     if(index==($scope.allCategory.length)-1){
                         callCarousel();
                         window.setTimeout(function() {
@@ -146,6 +145,19 @@ userApp.controller('CourseController',['$scope','requestHandler','Flash','$route
             $scope.paginationLoad=true;
         });
     };
+
+    $scope.MycourseCategory=function(){
+        $scope.categoryMycourses=[];
+        requestHandler.getRequest("user/getMyCourseList/","").then(function(response) {
+            $scope.myCourseList = response.data.published_Course;
+        $.each($scope.myCourseList,function(index,courses){
+            if(courses.categoryid==$routeParams.id)
+                $scope.categoryMycourses.push(courses);
+        });
+            console.log("mycar",$scope.categoryMycourses);
+        });
+    };
+
     $scope.doEnrollCourse = function(course){
         $scope.entrolling="Enrolling Please Wait";
         $scope.enrollButtonStatus=true;
@@ -211,6 +223,11 @@ userApp.controller('CourseController',['$scope','requestHandler','Flash','$route
     $scope.categorycourseinit=function(){
         $scope.paginationLoad=false;
         $scope.categoryCourseList();
+    };
+
+    $scope.categorymycourseinit=function(){
+        $scope.paginationLoad=false;
+        $scope.MycourseCategory();
     };
 
     $scope.viewinit=function(){

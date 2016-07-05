@@ -162,6 +162,21 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'CourseController'
             }).
+            when('/mycourse-category/:id', {
+                templateUrl: 'views/mycourses-category.html',
+                resolve: {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'userApp',
+                            files:[
+                                '../../angular/angular-utils-pagination/dirPagination.js',
+                                '../../app/course/courseController.js'
+                            ]
+                        })
+                    }]
+                },
+                controller:'CourseController'
+            }).
             when('/payments', {
                 templateUrl: 'views/payments.html',
                 resolve: {
