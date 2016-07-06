@@ -66,7 +66,6 @@ adminApp.controller('UserFeedbackController',['$scope','requestHandler','Flash',
         }
         // Add New Items
         else{
-            alert(idx+"else");
             $scope.removeDisable=false;
             $scope.feedbackid.push(feedbackId);
         }

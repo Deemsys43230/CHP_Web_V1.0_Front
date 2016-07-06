@@ -1409,6 +1409,8 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         }
         var monthNames= ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
         var historyReport = [];
+        var netVal =[];
+        var budgetdate=[];
         var titles={};
         if($scope.historyType==1){
             requestHandler.postRequest("user/calorieGraphbyDates/", {"fromdate":startDate,"todate":endDate}).then(function(response){
@@ -1463,7 +1465,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
                 titles.color='blue';
                 $scope.drawHistoryGraph(historyReport,titles);
             });
-        }else{
+        }else if($scope.historyType==4){
             requestHandler.postRequest("/user/getWeightLogGraph/", {"startdate":startDate,"enddate":endDate}).then(function(response){
                 $scope.historyRecord=response.data.Weight_logs;
                 $.each($scope.historyRecord, function(index,value) {
@@ -1479,6 +1481,26 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
                 titles.yaxis="Weight (Kgs)";
                 titles.color='#f8ba01';
                 $scope.drawHistoryGraph(historyReport,titles);
+            });
+        }
+        else{
+            requestHandler.postRequest("/user/budgetGraphbyDates/", {"startdate":startDate,"enddate":endDate}).then(function(response){
+                $scope.historyRecord=response.data.BudgetList;
+                $.each($scope.historyRecord, function(index,value) {
+                    var history = [];
+                    var date = value.date.split("/");
+                    history.push(monthNames[(date[1]-1)]+' '+date[0]);
+                    history.push(parseFloat(value.Budget));
+                    netVal.push(value.Net);
+                    budgetdate.push(monthNames[(date[1]-1)]+' '+date[0]);
+                    historyReport.push(history);
+                });
+                titles.title="Budget Vs Net Graph ( "+startDate+" - "+endDate+" )";
+                titles.name="Budget";
+                titles.suffix=" cals";
+                titles.yaxis="Calories (Cal)";
+                titles.color='#f8ba01';
+                $scope.drawHistoryGraphForBudget(historyReport,titles,netVal,budgetdate);
             });
         }
 
@@ -1527,6 +1549,64 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
                 data: data
             }]
         });
+    };
+
+    $scope.drawHistoryGraphForBudget=function(data,titles,data1,data2){
+        console.log("asda",data1);
+        $scope.loaded=false;
+        $('#historyGraph').highcharts({
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: titles.title
+            },
+            xAxis: {
+                categories: data2
+            },tooltip:{
+                enabled:true,
+                backgroundColor:'rgba(255, 255, 255, 1)',
+                borderWidth:1,
+                shadow:true,
+                style:{fontSize:'10px',padding:5,zIndex:500},
+                formatter:false,
+                valueSuffix: titles.suffix
+            },
+            yAxis: {
+                title: {
+                    text: titles.yaxis
+                },
+                plotLines: [{
+                    value: 0,
+                    width: 1,
+                    color:titles.color
+                }]
+            },
+            colors: [
+                titles.color
+            ],
+            exporting: {
+                enabled: false
+            },
+            credits: {
+                enabled: false
+            },
+            legend:{enabled:false},
+            series: [{
+                type: 'column',
+                name: 'Net',
+                data: data1
+            },{
+                type: 'spline',
+                name: 'Budget',
+                data: data,
+                marker: {
+                    lineWidth: 2,
+                    lineColor: Highcharts.getOptions().colors[3],
+                    fillColor: 'white'
+                }
+            }]
+            });
     };
 
     //Get user time zone for update weight log
