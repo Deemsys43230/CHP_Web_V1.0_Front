@@ -161,9 +161,12 @@ userApp.controller('DemographyController',['$rootScope','$scope','requestHandler
     };
 
     $scope.isCleanDemography =function(){
-        console.log("ori",originalDemography);
-        console.log("asd",$scope.demography);
+        if($scope.isUpdated==0){
+            return false;
+        }
+        else if($scope.isUpdated==1){
             return angular.equals(originalDemography, $scope.demography);
+        }
     };
 
     $scope.isCleanNutrition =function(){
@@ -183,6 +186,8 @@ userApp.controller('DemographyController',['$rootScope','$scope','requestHandler
 
         requestHandler.getRequest("getUserId/","").then(function(response) {
             $scope.userProfile = response.data.User_Profile;
+           $scope.isUpdated = response.data.demography.demoUpdatedstatus;
+
             $scope.doGetDemographyandNutrition();
         });
 
