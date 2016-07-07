@@ -2,13 +2,13 @@
 
 <!-- Start Page Banner -->
     <div class="col-lg-7 col-md-8 col-sm-7 no-padding" ng-cloak class="ng-cloak">
-        <div class="content-weight height-280">
+        <div class="content-weight height-460">
             <div ng-include src="'views/'+goal.status+'.html'"></div>
         </div>
 
-        <div class="content-weight height-165">
+        <!--<div class="content-weight height-95">
             <div class="row margin-right-2 margin-top-15">
-                <!--<form name="weightLogForm" novalidate>
+                <form name="weightLogForm" novalidate>
                     <div class="col-lg-6 col-md-6 col-sm-6 text-center">
                         <h1 class="fa-5x fa fa-tachometer text-green"></h1>
                         <h4 class="margin-top-10">UPDATE WEIGHT</h4>
@@ -36,9 +36,9 @@
                                 <span ng-if="spinner"><span class="three-quarters-loader">Loading…</span></span>{{weightUpdateText}}</a>
                         </div>
                     </div>
-                </form>-->
+                </form>
             </div>
-        </div>
+        </div>-->
     </div>
     <div class="col-lg-5 col-md-4 col-sm-5 weight-level-section">
         <div id="weight_level">
@@ -61,7 +61,7 @@
             <h5>Idle Weight <span class="pull-right">: &nbsp;</span></h5>
         </div>
         <div class="col-lg-4 col-md-12 col-sm-4 no-padding">
-            <h5><span class="yellow">&nbsp;&nbsp;</span><i>&nbsp;{{idealWeight}} Kgs</i></h5>
+            <h5><span class="yellow">&nbsp;&nbsp;</span><i>&nbsp;{{idealWeight}} <small><span ng-show="userProfile.unitPreference==1">Kgs</span><span ng-show="userProfile.unitPreference==2">lbs</span></small></i></h5>
         </div>
         <div class="col-lg-8 col-md-12 col-sm-8 padding-response-inverse">
             <div class="margin-top-10 hidden-md"></div>
@@ -69,12 +69,12 @@
         </div>
         <div class="col-lg-4 col-md-12 col-sm-4 no-padding">
             <div class="margin-top-10 hidden-md"></div>
-            <h5><span class="green">&nbsp;&nbsp;</span><i>&nbsp;{{demography.weight}} Kgs</i></h5>
+            <h5><span class="green">&nbsp;&nbsp;</span><i>&nbsp;{{demography.weight}} <small><span ng-show="userProfile.unitPreference==1">Kgs</span><span ng-show="userProfile.unitPreference==2">lbs</span></small></i></h5>
         </div>
         <div class="col-lg-12 col-md-12 col-sm-12 margin-top-10 text-italic padding-response-inverse">
             <div class="margin-right-20">
-                <div ng-show="upweight == 1"><p>Your Are Adviced to increase the weight by {{balanceweight}} Kgs to reach your <strong>IDEAL WEIGHT</strong></p></div>
-                <div ng-show="upweight == 0"><p>Your Are Adviced to decrease the weight by {{balanceweight}} Kgs to reach your <strong>IDEAL WEIGHT</strong></p></div>
+                <div ng-show="upweight == 1"><p>Your Are Adviced to increase the weight by {{balanceweight}} <small><span ng-show="userProfile.unitPreference==1">Kgs</span><span ng-show="userProfile.unitPreference==2">lbs</span></small> to reach your <strong>IDEAL WEIGHT</strong></p></div>
+                <div ng-show="upweight == 0"><p>Your Are Adviced to decrease the weight by {{balanceweight}} <small><span ng-show="userProfile.unitPreference==1">Kgs</span><span ng-show="userProfile.unitPreference==2">lbs</span></small> to reach your <strong>IDEAL WEIGHT</strong></p></div>
                 <div ng-show="upweight == 2"><p>Your Are in <strong>IDEAL WEIGHT</strong></p></div>
             </div>
         </div>

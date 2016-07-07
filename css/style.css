@@ -8331,8 +8331,20 @@ ul.sidebar-menu li a{
     height: 280px !important;
 }
 
+.height-340{
+    height: 340px !important;
+}
+
 .height-350{
     height: 350px !important;
+}
+
+.height-460{
+    height:460px!important;
+}
+
+.height-95{
+    height: 95px !important;
 }
 
 .height-150{

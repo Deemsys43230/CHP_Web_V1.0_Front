@@ -173,7 +173,7 @@
                         <span ng-if="disableUpdateWeight==true">On {{selectDate}}</span>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 no-padding margin-top-15">
-                        <span>Weight<span class="pull-right">:</span></span>
+                        <span>Weight <small>(<span ng-show="userProfile.unitPreference==1">Kgs</span><span ng-show="userProfile.unitPreference==2">lbs</span>)</small><span class="pull-right">:</span></span>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 margin-top-10 no-padding-right padding-left-8">
                         <input class="profile_input weightoverride" id="weightLog" name="weight" ng-model="weightlog" maxlength="5" required validate-Float1/>
@@ -338,7 +338,7 @@
                         <div class="suggest-label">Food Choices</div>
                     </div>
                     <div class="col-sm-9 no-padding">
-                        <marquee class="feedbackslide" behavior="scroll" direction="left" onmouseover="this.stop();" onmouseout="this.start();" scrollamount="3">
+                        <marquee class="feedbackslide" behavior="scroll" direction="left" onmouseover="this.setAttribute('scrollamount', 0, 0);this.stop();" onmouseout="this.setAttribute('scrollamount', 2, 0);this.start();" scrollamount="3">
                             <span ng-repeat="suggestedFood in adminSuggestedFood" class="slideFeedback"><a href="" ng-click="suggestedFoodByAdmin(suggestedFood.foodId)">{{suggestedFood.foodName}}</a></span>
                         </marquee>
                         <!--<div class="slideImg" id="food-suggestion">
@@ -413,7 +413,7 @@
                         <div class="suggest-label">Exercise Choices</div>
                     </div>
                     <div class="col-sm-8 no-padding">
-                        <marquee class="feedbackslide" behavior="scroll" direction="left" onmouseover="this.stop();" onmouseout="this.start();" scrollamount="3">
+                        <marquee class="feedbackslide" behavior="scroll" direction="left" onmouseover="this.setAttribute('scrollamount', 0, 0);this.stop();" onmouseout="this.setAttribute('scrollamount', 2, 0);this.start();" scrollamount="3">
                             <span ng-repeat="suggestedExercise in adminSuggestedExercise" class="slideFeedback"><a href="" ng-click="suggestedExerciseByAdmin(suggestedExercise.exerciseId)">{{suggestedExercise.exerciseName}}</a></span>
                         </marquee>
                         <!--<div class="slideImg" id="exercise-suggestion">
@@ -756,6 +756,7 @@
                                 <h1 class="text-gray">NO DATES SELECTED</h1>
                             </div>
                         </div>
+
                     </div>
                 </div>
                 <!-- End Tab Panels -->
@@ -1068,28 +1069,58 @@
 
     <div class="update-weight-margin-adjust clearfix">
         <form id="update-weight-form" class="clearfix" name="weightLogForm" novalidate>
-            <div class="col-lg-12 col-md-12 col-sm-12 clearfix">
-                <h5 class="margin-bottom-15">UPDATE WEIGHT</h5>
-                <div class="col-lg-4 col-md-4 col-sm-4 no-padding margin-top-3">
-                    <span>Date <span class="pull-right">:</span></span>
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 margin-bottom-5">
+
+                    <h6>Budget Vs Net &nbsp;-&nbsp;
+                        <span ng-show="budgetDetails.OverorUnderStatus==1"><span class="fa fa fa-thumbs-down text-red">&nbsp;&nbsp;</span>Over Budget</span>
+                        <span ng-show="budgetDetails.OverorUnderStatus==2"><span class="fa fa fa-thumbs-up text-green">&nbsp;&nbsp;</span>Under Budget</span>
+                        </span>
+                    </h6>
                 </div>
-                <div class="col-lg-8 col-md-8 col-sm-8 no-padding-right padding-left-8">
-                    <input type="text" id="weight-log-date1" class="profile_input weightoverride" block>
-                    <input id="weightLogDate1" hidden>
+                <div class="col-lg-6 col-md-6 col-sm-6 margin-top-10 text-center">
+                    <div class="circle-wrapper">
+                        <div class="circle-progress ng-cloak font-14" ng-style="getStyle()">{{Net}}</div>
+                        <div round-progress
+                             max="Budget"
+                             current="Net"
+                             color="{{currentGainColour}}"
+                             bgcolor="{{ bgColor }}"
+                             radius="37"
+                             semi="isSemi"
+                             rounded="rounded"
+                             stroke="6"
+                             clockwise="clockwise"
+                             responsive="responsive"
+                             duration="{{ duration }}"
+                             animation="{{ currentAnimation }}"
+                             offset="{{ offset }}">
+                        </div>
+                    </div>
+                    <div class="text-gray">of {{Budget}} cals.</div>
                 </div>
-                <div class="col-lg-4 col-md-4 col-sm-4 no-padding margin-top-15">
-                    <span>Weight<span class="pull-right">:</span></span>
+
+                <div class="col-lg-6 col-md-6 col-sm-6 no-padding margin-top-5">
+                    <div class="label-update">
+                        <span class="label-text">Budget</span>
+                        <span class="label-count blue">{{budgetDetails.Budget}}</span>
+                    </div>
+                    <div class="label-update">
+                        <span class="label-text">Gain</span>
+                        <span class="label-count green">{{budgetDetails.Intake}}</span>
+                    </div>
+                    <div class="label-update">
+                        <span class="label-text">Brunt</span>
+                        <span class="label-count red">{{budgetDetails.Burnt}}</span>
+                    </div>
+                    <div class="label-update">
+                        <span class="label-text">Net</span>
+                        <span class="label-count orange">{{budgetDetails.Net}}</span>
+                    </div>
                 </div>
-                <div class="col-lg-8 col-md-8 col-sm-8 margin-top-10 no-padding-right padding-left-8">
-                    <input class="profile_input weightoverride" id="weightLog1" name="weight" ng-model="weightlog" maxlength="5" required validate-Float1/>
-                            <span ng-show="weightLogForm.weight.$dirty&&weightLogForm.weight.$invalid">
-                                <span class="error-message textarea-errormessage10" ng-show="weightLogForm.weight.$error.required"><span>Required.</span></span>
-                                <span class="error-message textarea-errormessage10" ng-show="!weightLogForm.weight.$error.required&&weightLogForm.weight.$error.validateFloat1"><span>Invalid&nbsp;Data.</span></span>
-                            </span>
-                </div>
-                <div class="col-lg-12 col-md-12 col-sm-12 text-center margin-top-10 margin-bottom-5">
-                    <a href="" class="btn-dis suggest_button override-width no-margin-bottom" ng-disabled="isCleanWeight1() || weightLogForm.$invalid||spinner" ng-click="weightLogEntry(2)">
-                        <span ng-if="spinner"><span class="three-quarters-loader">Loading…</span></span>{{weightUpdateText}}</a>
+                <div class="col-lg-12 col-md-12 col-sm-12 margin-top-5">
+                    <h6 ng-show="budgetDetails.OverorUnderStatus==1"><div class="label-danger">You are consumed {{budgetDetails.OverorUnderValue}} more calories. Do Exercise.</div></h6>
+                    <h6 ng-show="budgetDetails.OverorUnderStatus==2"><div class="label-success">You could take {{budgetDetails.OverorUnderValue}} more calories to reach Budget Value.</div></h6>
                 </div>
             </div>
         </form>
