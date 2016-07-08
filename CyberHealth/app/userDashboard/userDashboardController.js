@@ -368,7 +368,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
                 var insertSuggestedFoodPromise=UserDashboardService.doAddSuggestedFood($scope.foodSuggest);
 
                 insertSuggestedFoodPromise.then(function(result){
-                    successMessage(Flash,"Thanks&nbsp;for&nbsp;the&nbspsuggestion!!");
+                    successMessage(Flash,"Thanks&nbsp;for&nbsp;the&nbsp;suggestion.You&nbsp;will&nbsp;<br/>receive&nbsp;a&nbsp;mail&nbsp;once&nbsp;food&nbsp;is approved!!");
                     $scope.resetdata();
                 },function(){
                     errorMessage(Flash, "Please try again later!");
@@ -387,7 +387,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         var insertSuggestedExercisePromise=UserDashboardService.doAddSuggestedExercise($scope.exerciseSuggest);
 
         insertSuggestedExercisePromise.then(function(result){
-            successMessage(Flash,"Thanks&nbsp;for&nbsp;the&nbspsuggestion!!");
+            successMessage(Flash,"Thanks&nbsp;for&nbsp;the&nbsp;suggestion.You&nbsp;will&nbsp;<br/>receive&nbsp;a&nbsp;mail&nbsp;once&nbsp;food&nbsp;is approved!!");
             $scope.resetexercisedata();
         },function(){
             errorMessage(Flash, "Please try again later!");
@@ -1690,6 +1690,10 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
                 }
             }]
         });
+    };
+
+    $scope.datePicker = function(){
+        $("#main-date").click();
     };
 
     //Get user time zone for update weight log

@@ -23,7 +23,7 @@
                     <span ng-show="goalDetail.goaltype==2"><img src="../../images/weight-gain.png"></span>
                 </div>
                 <div class="col-lg-8 col-md-8 col-sm-8">
-                    <h4>{{goalDetail.title}}&nbsp;</h4>
+                    <h4 class="wrap">{{goalDetail.title}}&nbsp;</h4>
                     <p class="margin-top-5">{{goalDetail.description}}&nbsp;</p><br/>
                     <div class="col-lg-2 col-md-2 col-sm-2 no-padding height-60">
                         <img class="img-circle" ng-src="{{goalDetail.user_imageurl|trusted}}">
@@ -33,30 +33,43 @@
                         <p>{{goalDetail.user_name}}&nbsp;</p>
                     </div>
                     <div class="col-lg-12 col-md-12 col-sm-12 no-padding margin-top-10">
-                        <div class="col-lg-4 col-md-5 col-sm-6 no-padding">
-                            <div class="text-bold">Start Date <span class="pull-right">:</span></div>
-                            <div class="text-bold">End Date <span class="pull-right">:</span></div>
-                            <div class="text-bold">Goal Type <span class="pull-right">:</span></div>
-                            <div class="text-bold">Goal Status <span class="pull-right">:</span></div>
-                            <div class="text-bold">Participants <span class="pull-right">:</span></div>
-                            <div class="text-bold">Target Weight <span class="pull-right">:</span></div>
-                            <div class="text-bold">Actual Weight<span class="pull-right">:</span></div>
-                        </div>
-                        <div class="col-lg-8 col-md-7 col-sm-6">
-                            <div>{{goalDetail.startdate}}</div>
-                            <div>{{goalDetail.enddate}}</div>
-                            <div>
-                                <span ng-show="goalDetail.goaltype==1">Weight Loss</span>
-                                <span ng-show="goalDetail.goaltype==2">Weight Gain</span>
-                            </div>
-                            <div>
-                                <span ng-show="goalDetail.status==1" class="text-green">Active</span>
-                                <span ng-show="goalDetail.status==2" class="text-red">Completed</span>
-                            </div>
-                            <div>{{goalDetail.goalMemberCount}}</div>
-                            <div>{{goalDetail.targetweight}}</div>
-                            <div>{{goalDetail.actualweight}}</div>
-                        </div>
+                        <table class="table table-bordered table-striped">
+                            <tr>
+                                <td>Start Date</td>
+                                <td>{{goalDetail.startdate}}</td>
+                            </tr>
+                            <tr>
+                                <td>End Date</td>
+                                <td>{{goalDetail.enddate}}</td>
+                            </tr>
+                            <tr>
+                                <td>Goal Type</td>
+                                <td>
+                                    <span ng-show="goalDetail.goaltype==1">Weight Loss</span>
+                                    <span ng-show="goalDetail.goaltype==2">Weight Gain</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Goal Status</td>
+                                <td>
+                                    <span ng-show="goalDetail.status==1" class="text-green">Active</span>
+                                    <span ng-show="goalDetail.status==2" class="text-red">Completed</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Participants</td>
+                                <td>{{goalDetail.goalMemberCount}}</td>
+                            </tr>
+                            <tr>
+                                <td>Target Weight</td>
+                                <td>{{goalDetail.targetweight}}</td>
+                            </tr>
+                            <tr>
+                                <td>Actual Weight</td>
+                                <td>{{goalDetail.actualweight}}</td>
+                            </tr>
+                        </table>
+
                     </div>
                     <div class="col-lg-12 col-md-12 col-sm-12 no-padding margin-top-10" ng-hide="goalDetail.status==2">
                         <div ng-show="isRequest">

@@ -159,6 +159,19 @@ userApp.controller('GoalController',['$scope','requestHandler','Flash','$route',
         $scope.createGoal={};
         $scope.createGoalForm.$setPristine();
         $scope.createGoal.goaltype=1;
+
+            var options = {
+                minDate : new Date,
+                startDate : new Date,
+                endDate : new Date,
+                singleDatePicker:true
+            };
+
+            $('#set-goal-date').daterangepicker(options, function(start, end, label) {
+                document.getElementById("start").value = start.format('DD/MM/YYYY');
+                document.getElementById("end").value = end.format('DD/MM/YYYY');
+            });
+
         $(function(){
             $("#lean_overlay").fadeTo(1000);
             $("#createGoal").fadeIn(600);
@@ -180,6 +193,30 @@ userApp.controller('GoalController',['$scope','requestHandler','Flash','$route',
             $scope.shouldBeOpen = false;
         });
     };
+
+   /* $scope.doAddWeightPopup=function(){
+        $scope.updateWeightForm.$setPristine();
+        $(function(){
+            $("#lean_overlay").fadeTo(1000);
+            $("#updateWeight").fadeIn(600);
+            $(".common_model").show();
+            $scope.shouldBeOpen = true;
+        });
+
+        $(".modal_close").click(function(){
+            $(".common_model").hide();
+            $("#updateWeight").hide();
+            $("#lean_overlay").hide();
+            $scope.shouldBeOpen = false;
+        });
+
+        $("#lean_overlay").click(function(){
+            $(".common_model").hide();
+            $("#updateWeight").hide();
+            $("#lean_overlay").hide();
+            $scope.shouldBeOpen = false;
+        });
+    };*/
 
     $scope.viewRank=function(){
         requestHandler.postRequest("user/rankGoalList/",{"goalid" : $routeParams.id}).then(function(response){
@@ -231,17 +268,37 @@ userApp.controller('GoalController',['$scope','requestHandler','Flash','$route',
     }
     selectedDate = dd+'/'+mm+'/'+yyyy;
 
+    /*$scope.getWeightLog=function(){
+        requestHandler.postRequest("user/getWeightLogByDate/",{"date":selectedDate}).then(function(response){
+            alert(selectedDate);
+            $scope.userCurrentWeight = response.data.Weight_logs.weight;
+            alert($scope.userCurrentWeight);
+            if($scope.userCurrentWeight != ""){
+                $scope.doAddWeightPopup();
+               // $scope.doAddGoalPopup();
+            }
+            else if($scope.userCurrentWeight == ""){
+                $scope.doAddWeightPopup();
+            }
+        });
+    };*/
+
+   /* $scope.updateWeightLog=function(){
+        $scope.weightlog=parseFloat($scope.weightlog);
+        requestHandler.postRequest("user/weightlogInsertorUpdate/",{"date":selectedDate,"weight":$scope.weightlog}).then(function(response){
+         $scope.doAddGoalPopup();
+        }, function () {
+            errorMessage(Flash, "Please try again later!")
+        });
+
+    };*/
+
     $scope.doCreateGoal=function(){
         $scope.loaded=true;
-        if(document.getElementById("start").value==""){
-            $scope.createGoal.startdate=$scope.createGoal.enddate=selectedDate;
-        }
-        else{
-            $scope.createGoal.startdate=document.getElementById("start").value;
-            $scope.createGoal.enddate=document.getElementById("end").value;
-        }
-        $scope.createGoal.goaltype=parseInt($scope.createGoal.goaltype);
 
+        $scope.createGoal.enddate=document.getElementById("start").value;
+        $scope.createGoal.goaltype=parseInt($scope.createGoal.goaltype);
+        $scope.createGoal.targetweight=parseFloat($scope.createGoal.targetweight);
         requestHandler.postRequest("user/insertUserGoal/",$scope.createGoal).then(function(response){
             successMessage(Flash,"Goal Successfully Created!");
             $scope.doGetMyGoalList();

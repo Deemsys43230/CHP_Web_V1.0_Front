@@ -85,6 +85,12 @@
                 </span>
                 <p>Goal Duration</p>
                 <input type="text" id="set-goal-date" required/>
+                <p>Goal Target Weight</p>
+                <input type="text"  name="weight" ng-model="createGoal.targetweight" maxlength="5" required validate-Float1/>
+                <span ng-show="createGoalForm.weight.$dirty&&createGoalForm.weight.$invalid">
+                    <span class="error-message" ng-show="createGoalForm.weight.$error.required"><span>Required.</span></span>
+                    <span class="error-message" ng-show="!createGoalForm.weight.$error.required&&createGoalForm.weight.$error.validateFloat1"><span>Invalid&nbsp;Data.</span></span>
+                </span>
                 <p>Goal Type</p>
                 <div class="row margin-bottom-5 margin-top-3">
                     <div class="col-lg-6 col-md-6 col-sm-6">
@@ -109,7 +115,31 @@
         </div>
     </section>
 </div>
+<!-- Update Weight popup -->
+<div id="updateWeight" class="popupContainer" style="display:none;left:37%!important;">
+    <header class="popupHeader">
+        <span class="header_title">Update Weight</span>
+        <span class="modal_close"><i class="fa fa-times"></i></span>
+    </header>
 
+    <section class="popupBody">
+        <!-- Register Form -->
+        <div class="common_model">
+            <form name="updateWeightForm" novalidate>
+                <p>Current Weight</p>
+                <input type="text"  name="weight" ng-model="weightlog" maxlength="5" required validate-Float1/>
+                <span ng-show="updateWeightForm.weight.$dirty&&updateWeightForm.weight.$invalid">
+                    <span class="error-message" ng-show="updateWeightForm.weight.$error.required"><span>Required.</span></span>
+                    <span class="error-message" ng-show="!updateWeightForm.weight.$error.required&&updateWeightForm.weight.$error.validateFloat1"><span>Invalid&nbsp;Data.</span></span>
+                </span>
+                <div class="action_btns margin-top-20">
+                    <div class="one_half"><a class="btn btn_red modal_close" onclick="return false" ng-disabled="updateWeightForm.$invalid" ng-click="updateWeightLog()">Create Goal</a></div>
+                    <div class="one_half last modal_close"><a onclick="return false;" class="btn back_btn">Cancel</a></div>
+                </div>
+            </form>
+        </div>
+    </section>
+</div>
 <!-- create coach popup-->
 <div id="confirmation" class="popupContainer" style="display:none;left:37%!important;">
     <header class="popupHeader">
@@ -140,17 +170,17 @@
 <script type="text/javascript">
     $(".modal-createGoal").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
 
-    setTimeout(function(){
+   /* setTimeout(function(){
         var options = {
             minDate : new Date,
             startDate : new Date,
             endDate : new Date,
-            singleDatePicker:false
+            singleDatePicker:true
         };
 
         $('#set-goal-date').daterangepicker(options, function(start, end, label) {
             document.getElementById("start").value = start.format('DD/MM/YYYY');
             document.getElementById("end").value = end.format('DD/MM/YYYY');
         });
-    },1000);
+    },1000);*/
 </script>

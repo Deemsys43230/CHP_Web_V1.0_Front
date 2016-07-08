@@ -247,7 +247,9 @@
     </ul>
 </div>
 <div class="col-lg-5 col-md-5 col-sm-5 margin-top-5 text-right">
+    <div class="margin-top-5 pull-right" >&nbsp;&nbsp;<i class="fa fa-calendar" ng-click="datePicker()"></i></div>
     <input hidden id="main-start-date" ng-model="selectedDate">
+
     <div id="ui-datepicker" class="pull-right main-datepicker">
         <input type="text" id="main-date" class="profile_input override" block>
         <!--<div class="input-group ui-datepicker">
@@ -269,7 +271,7 @@
                    close-text="Close" required>
         </div>-->
     </div>
-    <div class="margin-top-5 pull-right"><i class="fa fa-calendar"></i> Date</div>
+    <div class="margin-top-5 pull-right">Date</div>
 </div>
 
 <div class="col-lg-12 col-md-12 col-sm-12">
@@ -756,7 +758,6 @@
                                 <h1 class="text-gray">NO DATES SELECTED</h1>
                             </div>
                         </div>
-
                     </div>
                 </div>
                 <!-- End Tab Panels -->
@@ -778,7 +779,7 @@
 
     <section class="popupBody">
         <!-- Register Form -->
-        <div flash-message="2000"></div>
+        <div flash-message="3000"></div>
         <div class="common_model">
 
             <form name="foodSuggestForm" id="suggestform" novalidate>
@@ -812,7 +813,7 @@
 
     <section class="popupBody">
         <!-- Register Form -->
-        <div flash-message="2000"></div>
+        <div flash-message="3000"></div>
         <div class="common_model">
             <form name="exerciseSuggestForm" novalidate>
                 <p>Exercise Name:</p>

@@ -162,26 +162,35 @@ userApp.controller('UserProfileController',['$scope','requestHandler','Flash','$
         $scope.userProfile.unitPreference =parseInt($scope.userProfile.unitPreference);
 
         requestHandler.getRequest("getUserId/","").then(function(response){
+            $scope.demoStatus=response.data.demography.demoUpdatedstatus;
         if(response.data.User_Profile.isProfileUpdated==0){
+
             $scope.demographyNavigation = true;
         }
         else if(response.data.User_Profile.isProfileUpdated==1){
+
             $scope.demographyNavigation = false;
         }
-        requestHandler.putRequest("updateProfile/",$scope.userProfile).then(function(){
-            $scope.userProfile.unitPreference =  $scope.userProfile.unitPreference.toString();
-            $scope.doGetProfile();
-            $rootScope.checkPath=1;
-            successMessage(Flash,"Successfully Updated");
-            $timeout(function () {
-                if($scope.demographyNavigation==true && response.data.demography.demoUpdatedstatus==0){
-                $location.path("demography");
-                }
-                   $scope.demographyNavigation = false;
 
-            },2000);
-        });
-        });
+            requestHandler.putRequest("updateProfile/",$scope.userProfile).then(function(){
+                $scope.userProfile.unitPreference =  $scope.userProfile.unitPreference.toString();
+                $scope.doGetProfile();
+
+                successMessage(Flash,"Successfully Updated");
+                $timeout(function () {
+                    if($scope.demographyNavigation==true && $scope.demoStatus==0){
+                        $rootScope.checkPath=1;
+                        $location.path("demography");
+
+                    }
+                    $scope.demographyNavigation = false;
+
+
+                },2000);
+            });
+            });
+
+
     };
 
     $scope.imageAdded=false;

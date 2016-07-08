@@ -234,7 +234,7 @@ userApp.directive('lowerThan', [
                 ctrl.$setValidity('lowerThan', parseInt(viewValue, 10) < parseInt(comparisonModel, 10) );
                 }
                 else if(plantype==2){
-                ctrl.$setValidity('greaterThan', parseInt(viewValue, 10) > parseInt(comparisonModel, 10) );
+                ctrl.$setValidity('lowerThan', parseInt(viewValue, 10) > parseInt(comparisonModel, 10) );
                  }
                 return viewValue;
             };
@@ -248,10 +248,6 @@ userApp.directive('lowerThan', [
                 return validate(ctrl.$viewValue);
             });
 
-           /* if(plantype==2){
-            $attrs.$observe('greaterThan', function(comparisonModel){
-                return validate(ctrl.$viewValue);
-            });*/
 
 
         };
