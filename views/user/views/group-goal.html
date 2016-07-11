@@ -3,7 +3,7 @@
     <div id="w" class="clearfix">
         <div id="demography-content">
             <div class="col-lg-12 col-md-12 col-sm-12">
-                <a href="" class="back-button pull-right margin-left-5 modal-createGoal" ng-click="doAddGoalPopup()"><i class="fa fa-plus-circle"></i> Create Goal</a>
+                <a href="" class="back-button pull-right margin-left-5 modal-createGoal" ng-click="doAddWeightPopup()"><i class="fa fa-plus-circle"></i> Create Goal</a>
                 <div flash-message="2000" class="col-lg-4 col-md-4 col-sm-4 pull-right no-padding"></div>
                 <h5 class="classic-title"><span><a href="#group-goal"><i class="fa fa-bullseye"></i>&nbsp;&nbsp;MY GOALS</a></span>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#group-goal-request"><i class="fa fa-paper-plane"></i>&nbsp;&nbsp;GOAL REQUEST&nbsp;<b ng-hide="!myRequestGoalList.length" class="text-red text-bold">({{myRequestGoalList.length}})</b></a></h5>
             </div>
@@ -83,14 +83,18 @@
                 <span ng-show="createGoalForm.title.$dirty&&createGoalForm.title.$invalid && !createGoalForm.title.$pristine">
                     <span class="error-message" ng-show="createGoalForm.title.$error.required"><span>Required.</span></span>
                 </span>
+                <div class="one_half">
                 <p>Goal Duration</p>
-                <input type="text" id="set-goal-date" required/>
+                <input type="text" id="set-goal-date"  required/></div>
+                <div class="one_half last margin-bottom-10">
                 <p>Goal Target Weight</p>
+
                 <input type="text"  name="weight" ng-model="createGoal.targetweight" maxlength="5" required validate-Float1/>
                 <span ng-show="createGoalForm.weight.$dirty&&createGoalForm.weight.$invalid">
                     <span class="error-message" ng-show="createGoalForm.weight.$error.required"><span>Required.</span></span>
                     <span class="error-message" ng-show="!createGoalForm.weight.$error.required&&createGoalForm.weight.$error.validateFloat1"><span>Invalid&nbsp;Data.</span></span>
                 </span>
+                </div>
                 <p>Goal Type</p>
                 <div class="row margin-bottom-5 margin-top-3">
                     <div class="col-lg-6 col-md-6 col-sm-6">
@@ -133,7 +137,7 @@
                     <span class="error-message" ng-show="!updateWeightForm.weight.$error.required&&updateWeightForm.weight.$error.validateFloat1"><span>Invalid&nbsp;Data.</span></span>
                 </span>
                 <div class="action_btns margin-top-20">
-                    <div class="one_half"><a class="btn btn_red modal_close" onclick="return false" ng-disabled="updateWeightForm.$invalid" ng-click="updateWeightLog()">Create Goal</a></div>
+                    <div class="one_half"><a class="btn btn_red" onclick="return false" ng-disabled="updateWeightForm.$invalid" ng-click="updateWeightLog()">Proceed</a></div>
                     <div class="one_half last modal_close"><a onclick="return false;" class="btn back_btn">Cancel</a></div>
                 </div>
             </form>

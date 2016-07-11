@@ -32,6 +32,19 @@
                         <h6>Created By</h6>
                         <p>{{goalDetail.user_name}}&nbsp;</p>
                     </div>
+                    <div class="circle margin-top60 margin-left30  pull-right">{{goalDetail.actualweight}}/{{goalDetail.targetweight}}</div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 no-padding margin-top-10" ng-hide="goalDetail.status==2">
+                        <div ng-show="isRequest">
+                            <span><a href="" class="target_button green_button" ng-click="doAcceptGroup()">Join Goal</a></span>
+                            <span><a class="target_button red_button" ng-click="doExitConfirmation()">Exit from Goal</a></span>
+                        </div>
+                        <div ng-hide="isRequest">
+                            <span><a href="" class="target_button green_button" ng-click="viewRank()">View Rank</a></span>
+                            <span ng-show="goalDetail.candelete==1 && goalDetail.isExpired==0"><a href="#modal" ng-click="resetdata()" id="modal_trigger" class="target_button orange_button" >Add Members</a></span>
+                            <span ng-show="goalDetail.candelete==1"><a class="target_button red_button" ng-click="doConfirmation(goalList.goalid)">Finish Goal</a></span>
+                            <span ng-show="goalDetail.candelete==0"><a class="target_button red_button" ng-click="doExitConfirmation()">Exit from Goal</a></span>
+                        </div>
+                    </div>
                     <div class="col-lg-12 col-md-12 col-sm-12 no-padding margin-top-10">
                         <table class="table table-bordered table-striped">
                             <tr>
@@ -71,18 +84,7 @@
                         </table>
 
                     </div>
-                    <div class="col-lg-12 col-md-12 col-sm-12 no-padding margin-top-10" ng-hide="goalDetail.status==2">
-                        <div ng-show="isRequest">
-                            <span><a href="" class="target_button green_button" ng-click="doAcceptGroup()">Join Goal</a></span>
-                            <span><a class="target_button red_button" ng-click="doExitConfirmation()">Exit from Goal</a></span>
-                        </div>
-                        <div ng-hide="isRequest">
-                            <span><a href="" class="target_button green_button" ng-click="viewRank()">View Rank</a></span>
-                            <span ng-show="goalDetail.candelete==1 && goalDetail.isExpired==0"><a href="#modal" ng-click="resetdata()" id="modal_trigger" class="target_button orange_button" >Add Members</a></span>
-                            <span ng-show="goalDetail.candelete==1"><a class="target_button red_button" ng-click="doConfirmation(goalList.goalid)">Finish Goal</a></span>
-                            <span ng-show="goalDetail.candelete==0"><a class="target_button red_button" ng-click="doExitConfirmation()">Exit from Goal</a></span>
-                        </div>
-                    </div>
+
                 </div>
             </div>
 

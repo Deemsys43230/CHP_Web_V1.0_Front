@@ -176,6 +176,7 @@ userApp.controller('GoalController',['$scope','requestHandler','Flash','$route',
             $("#lean_overlay").fadeTo(1000);
             $("#createGoal").fadeIn(600);
             $(".common_model").show();
+            $("#updateWeight").hide();
             $scope.shouldBeOpen = true;
         });
 
@@ -194,7 +195,7 @@ userApp.controller('GoalController',['$scope','requestHandler','Flash','$route',
         });
     };
 
-   /* $scope.doAddWeightPopup=function(){
+    $scope.doAddWeightPopup=function(){
         $scope.updateWeightForm.$setPristine();
         $(function(){
             $("#lean_overlay").fadeTo(1000);
@@ -216,7 +217,7 @@ userApp.controller('GoalController',['$scope','requestHandler','Flash','$route',
             $("#lean_overlay").hide();
             $scope.shouldBeOpen = false;
         });
-    };*/
+    };
 
     $scope.viewRank=function(){
         requestHandler.postRequest("user/rankGoalList/",{"goalid" : $routeParams.id}).then(function(response){
@@ -268,30 +269,33 @@ userApp.controller('GoalController',['$scope','requestHandler','Flash','$route',
     }
     selectedDate = dd+'/'+mm+'/'+yyyy;
 
-    /*$scope.getWeightLog=function(){
-        requestHandler.postRequest("user/getWeightLogByDate/",{"date":selectedDate}).then(function(response){
-            alert(selectedDate);
-            $scope.userCurrentWeight = response.data.Weight_logs.weight;
-            alert($scope.userCurrentWeight);
-            if($scope.userCurrentWeight != ""){
-                $scope.doAddWeightPopup();
-               // $scope.doAddGoalPopup();
-            }
-            else if($scope.userCurrentWeight == ""){
-                $scope.doAddWeightPopup();
-            }
+    $scope.getUserTimeZone=function(){
+        requestHandler.getRequest("getUserTimeZone/","").then(function(response){
+            $scope.UserTimeZone = response.data.time;
+            $scope.UserDate = $scope.UserTimeZone.slice(0,10);
+            $scope.UserDate= new Date($scope.UserDate).format("mm/dd/yyyy");
         });
-    };*/
+    };
 
-   /* $scope.updateWeightLog=function(){
+    $scope.getUserTimeZone();
+
+    $scope.getWeightLog=function(){
+        requestHandler.postRequest("user/getWeightLogByDate/",{"date":selectedDate}).then(function(response){
+          //  alert(selectedDate);
+            $scope.weightlog = response.data.Weight_logs.weight;
+
+        });
+    };
+    $scope.getWeightLog();
+    $scope.updateWeightLog=function(){
         $scope.weightlog=parseFloat($scope.weightlog);
-        requestHandler.postRequest("user/weightlogInsertorUpdate/",{"date":selectedDate,"weight":$scope.weightlog}).then(function(response){
+        requestHandler.postRequest("user/weightlogInsertorUpdate/",{"date":$scope.UserDate,"weight":$scope.weightlog}).then(function(response){
          $scope.doAddGoalPopup();
         }, function () {
             errorMessage(Flash, "Please try again later!")
         });
 
-    };*/
+    };
 
     $scope.doCreateGoal=function(){
         $scope.loaded=true;

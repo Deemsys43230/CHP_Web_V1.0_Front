@@ -106,20 +106,20 @@ adminApp.controller('ExerciseController',['$scope','requestHandler','Flash',func
     // Search Food Type
     $('.show-list-search').click(function() {
         $('.search-list-form').toggle(300);
-        $scope.pagenumber="";
+        $scope.pagenumbers="";
         $('.search-list-form input').focus();
     });
 
 	$scope.init();
 
-    $scope.pagenumber="";
-    $scope.newPageNumber=1;
+    $scope.pagenumbers="";
+    $scope.newPageNumbers=1;
 
     $scope.goToPage=function(){
-        $scope.newPageNumber=$scope.pagenumber;
-        $scope.pagenumber="";
+        $scope.newPageNumbers=$scope.pagenumbers;
+        $scope.pagenumbers="";
     };
-
+alert()
 }]);
 
 adminApp.controller('ExerciseViewController',['$scope','requestHandler','Flash','$routeParams',function($scope,requestHandler,Flash,$routeParams){

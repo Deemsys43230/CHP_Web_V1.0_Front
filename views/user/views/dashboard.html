@@ -355,7 +355,7 @@
                                     </div>
                                     <div class="col-lg-3 col-md-3 col-sm-3 no-padding dashboard-6">
                                         <div class="content-3">
-                                            <a id="modal_trigger_food" href="#modal-food" ng-click="resetdata()" onclick="return false;" class="suggest_button override-width">Suggest Food</a>
+                                            <a id="modal_trigger_food" href="#modal-food" ng-click="resetdata(); msg()" onclick="return false;" class="suggest_button override-width">Suggest Food</a>
                                             <div class="suggest_content">
                                                 <h6 class="margin-bottom-13">Frequently Used</h6>
                                                 <div class="suggest_option" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#eee'}">
@@ -430,7 +430,7 @@
                                     </div>
                                     <div class="col-lg-3 col-md-3 col-sm-3 no-padding dashboard-6">
                                         <div class="content-3">
-                                            <a id="modal_trigger_exercise" href="#modal-exercise" ng-click="resetexercisedata()" onclick="return false;" class="suggest_button override-width">Suggest Exercise</a>
+                                            <a id="modal_trigger_exercise" href="#modal-exercise" ng-click="resetexercisedata(); msg()" onclick="return false;" class="suggest_button override-width">Suggest Exercise</a>
                                             <div class="suggest_content">
                                                 <h6>Frequently Used</h6>
                                                 <div class="suggest_option" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#eee'}">
@@ -779,7 +779,7 @@
 
     <section class="popupBody">
         <!-- Register Form -->
-        <div flash-message="6000"></div>
+        <div class="alert-success" ng-show="isAddFood">Thanks&nbsp;for&nbsp;the&nbsp;suggestion.You&nbsp;will&nbsp;<br/>receive&nbsp;a&nbsp;mail&nbsp;once&nbsp;food&nbsp;is approved!!</div>
         <div class="common_model">
 
             <form name="foodSuggestForm" id="suggestform" novalidate>
@@ -813,7 +813,7 @@
 
     <section class="popupBody">
         <!-- Register Form -->
-        <div flash-message="3000"></div>
+        <div class="alert-success" ng-show="isAddExercise">Thanks&nbsp;for&nbsp;the&nbsp;suggestion.You&nbsp;will&nbsp;<br/>receive&nbsp;a&nbsp;mail&nbsp;once&nbsp;food&nbsp;is approved!!</div>
         <div class="common_model">
             <form name="exerciseSuggestForm" novalidate>
             <p>Exercise Name:</p>

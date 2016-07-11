@@ -361,6 +361,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
     });
 
     // Insert suggest food
+    $scope.isAddFood =false;
     $scope.doAddSuggestFood=function(){
 
         requestHandler.postRequest("user/searchFoodnamebyUser/",{"foodname":$scope.foodSuggest.foodname}).then(function(response){
@@ -368,7 +369,8 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
                 var insertSuggestedFoodPromise=UserDashboardService.doAddSuggestedFood($scope.foodSuggest);
 
                 insertSuggestedFoodPromise.then(function(result){
-                    successMessage(Flash,"Thanks&nbsp;for&nbsp;the&nbsp;suggestion.You&nbsp;will&nbsp;<br/>receive&nbsp;a&nbsp;mail&nbsp;once&nbsp;food&nbsp;is approved!!");
+                    $scope.isAddFood =true;
+                  //  successMessage(Flash,"Thanks&nbsp;for&nbsp;the&nbsp;suggestion.You&nbsp;will&nbsp;<br/>receive&nbsp;a&nbsp;mail&nbsp;once&nbsp;food&nbsp;is approved!!");
                     $scope.resetdata();
                 },function(){
                     errorMessage(Flash, "Please try again later!");
@@ -382,12 +384,19 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
 
     };
 
+    $scope.msg=function(){
+        $scope.isAddFood =false;
+        $scope.isAddExercise=false;
+    };
     // Insert suggest exercise
+
+    $scope.isAddExercise=false;
     $scope.doAddSuggestExercise=function(){
         var insertSuggestedExercisePromise=UserDashboardService.doAddSuggestedExercise($scope.exerciseSuggest);
 
         insertSuggestedExercisePromise.then(function(result){
-            successMessage(Flash,"Thanks&nbsp;for&nbsp;the&nbsp;suggestion.You&nbsp;will&nbsp;<br/>receive&nbsp;a&nbsp;mail&nbsp;once&nbsp;food&nbsp;is approved!!");
+            $scope.isAddExercise=true;
+            //successMessage(Flash,"Thanks&nbsp;for&nbsp;the&nbsp;suggestion.You&nbsp;will&nbsp;<br/>receive&nbsp;a&nbsp;mail&nbsp;once&nbsp;food&nbsp;is approved!!");
             $scope.resetexercisedata();
         },function(){
             errorMessage(Flash, "Please try again later!");
@@ -589,6 +598,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         $scope.current=$scope.caloriesIntake=0;
         $scope.max = 100;
         $scope.userSelectedFoodDetails={};
+        //$scope.isAddFood=false;
 
     };
 
@@ -1552,11 +1562,13 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
             requestHandler.postRequest("/user/getWeightLogGraph/", {"startdate":startDate,"enddate":endDate}).then(function(response){
                 $scope.historyRecord=response.data.Weight_logs;
                 $.each($scope.historyRecord, function(index,value) {
+                    if(value.userentry ==1){
                     var history = [];
                     var date = value.date.split("/");
                     history.push(monthNames[(date[1]-1)]+' '+date[0]);
                     history.push(parseFloat(value.weight));
                     historyReport.push(history);
+                    }
                 });
                 titles.title="Weight Log Graph ( "+startDate+" - "+endDate+" )";
                 titles.name="Weight Log";

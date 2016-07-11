@@ -39,7 +39,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr dir-paginate="exercise in exercisefilter = (exerciseList |startsWithLetterExercise: exercisesearch|orderBy:sortKey:reverse| itemsPerPage: 9)" current-page="newPageNumber" ng-show="exerciseList.length!=0">
+                    <tr dir-paginate="exercise in exercisefilter = (exerciseList |startsWithLetterExercise: exercisesearch|orderBy:sortKey:reverse| itemsPerPage: 9)" current-page="newPageNumbers" ng-show="exerciseList.length!=0">
                         <td>{{exercise.exerciseid}}</td>
                         <td title="{{exercise.exercisename}}"><span class="line-clamp-md">{{exercise.exercisename}}</span></td>
                        <!-- <td title="{{exercise.exercisetypename}}"><span class="line-clamp-sm">{{exercise.exercisetypename}}</span></td>-->
@@ -57,15 +57,14 @@
             <!-- Start Pagination -->
             <div class="col-lg-2 col-md-2 col-sm-3 no-padding">
                 <div class="input-group pull-right">
-                    <input type="text" ng-model="pagenumber" class="form-control search-pagination" placeholder="Page no.." only-digits>
+                    <input type="text" ng-model="pagenumbers" class="form-control search-pagination" placeholder="Page no.." only-digits>
                       <span class="input-group-btn">
                         <button class="btn btn-secondary" ng-click="goToPage()" type="button">Go!</button>
                       </span>
                 </div>
             </div>
             <div class="col-lg-10 col-md-10 col-sm-9">
-                <dir-pagination-controls ng-show="paginationLoad" max-size="5" direction-links="true"
-                                         boundary-links="true" > </dir-pagination-controls>
+                <dir-pagination-controls ng-show="paginationLoad" max-size="5" direction-links="true"  boundary-links="true" > </dir-pagination-controls>
             </div>
 
 
