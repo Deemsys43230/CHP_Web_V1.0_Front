@@ -9,10 +9,10 @@ requestHandlerApp.factory("requestHandler",['$http',function($http,$location){
   /*  var hostedDomain="http://www.deemsysinc.net/api/v1/";
     var urlLength = 15;
     var exerciselength=13;*/
-    var domain="http://localhost";
-    var hostedDomain="http://localhost/api/v1/";
-    var paymentURL="http://localhost/cyberhealths/cyberhealth/views/user";
-    var domainURL="http://localhost/cyberhealths/cyberhealth/";
+    var domain=window.location.origin;
+    var hostedDomain=domain+"/api/v1/";
+    var paymentURL=domain+"/CyberHealth/views/user";
+    var domainURL=domain+"/CyberHealth/";
 
     var urlLength = 33;
     var exerciselength=13;
