@@ -116,10 +116,9 @@ adminApp.controller('ExerciseController',['$scope','requestHandler','Flash',func
     $scope.newPageNumbers=1;
 
     $scope.goToPage=function(){
-        $scope.newPageNumbers=$scope.pagenumbers;
+        $scope.newPageNumbers=parseInt($scope.pagenumbers);
         $scope.pagenumbers="";
     };
-alert()
 }]);
 
 adminApp.controller('ExerciseViewController',['$scope','requestHandler','Flash','$routeParams',function($scope,requestHandler,Flash,$routeParams){

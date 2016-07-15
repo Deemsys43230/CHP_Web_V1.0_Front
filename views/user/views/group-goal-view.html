@@ -65,8 +65,11 @@
                             <tr>
                                 <td>Goal Status</td>
                                 <td>
-                                    <span ng-show="goalDetail.status==1" class="text-green">Active</span>
-                                    <span ng-show="goalDetail.status==2" class="text-red">Completed</span>
+                                    <span ng-show="goalDetail.status==1 && goalDetail.isExpired==0" class="text-orange">Active</span>
+                                    <span ng-show="goalDetail.status==1 && goalDetail.isExpired==1" class="text-red">Expired</span>
+                                    <span ng-show="goalDetail.status==2 && goalDetail.isExpired==1" class="text-green">Completed</span>
+                                    <span ng-show="goalDetail.status==2 && goalDetail.isExpired==0" class="text-green">Completed</span>
+
                                 </td>
                             </tr>
                             <tr>

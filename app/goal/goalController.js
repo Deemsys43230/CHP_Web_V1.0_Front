@@ -11,18 +11,18 @@ userApp.controller('GoalController',['$scope','requestHandler','Flash','$route',
         $scope.paginationLoad=false;
         $scope.loaded=true;
         requestHandler.getRequest("user/getMyGoallist","").then(function(response){
-            $scope.myGoalList = [];
-            $scope.myRequestGoalList = [];
-            $.each(response.data.MyGoallist,function(index,value){
+            $scope.myGoalList = response.data.MyGoallist;
+
+            /*$.each(response.data.MyGoallist,function(index,value){
                 requestHandler.postRequest("user/getGoalMemberList/",{"goalid" : value.goalid}).then(function(response){
                    // value.members=response.data.Goal_Data.length;
                     if(value.activestatus==1)$scope.myGoalList.push(value);
                     else $scope.myRequestGoalList.push(value);
                 })
-            });
+            });*/
             $scope.loaded=false;
             $scope.paginationLoad=true;
-        })
+        });
     };
 
     $scope.doGetViewGoal=function(){
@@ -195,7 +195,8 @@ userApp.controller('GoalController',['$scope','requestHandler','Flash','$route',
         });
     };
 
-    $scope.doAddWeightPopup=function(){
+    $scope.doAddWeightPopup=function(goalid){
+        $scope.acceptGoalId=goalid;
         $scope.updateWeightForm.$setPristine();
         $(function(){
             $("#lean_overlay").fadeTo(1000);
@@ -277,7 +278,21 @@ userApp.controller('GoalController',['$scope','requestHandler','Flash','$route',
         });
     };
 
-    $scope.getUserTimeZone();
+
+
+    $scope.checkUserWeightEntry=function(){
+        requestHandler.postRequest("/user/getWeightLogGraph/", {"startdate": $scope.UserDate,"enddate": $scope.UserDate}).then(function(response){
+            $scope.UserWeightEntry=response.data.Weight_logs[0].userentry;
+
+            if($scope.UserWeightEntry==0){
+                $scope.doAddWeightPopup();
+
+            }
+            else if($scope.UserWeightEntry==1){
+                $scope.doAddGoalPopup();
+            }
+        });
+    };
 
     $scope.getWeightLog=function(){
         requestHandler.postRequest("user/getWeightLogByDate/",{"date":selectedDate}).then(function(response){
@@ -286,23 +301,48 @@ userApp.controller('GoalController',['$scope','requestHandler','Flash','$route',
 
         });
     };
-    $scope.getWeightLog();
-    $scope.updateWeightLog=function(){
+
+    $scope.init=function(){
+        $scope.getUserTimeZone();
+        $scope.getWeightLog();
+    };
+
+    $scope.init();
+
+    $scope.updateWeightLog=function(id){
+
         $scope.weightlog=parseFloat($scope.weightlog);
+        if(id==1){
         requestHandler.postRequest("user/weightlogInsertorUpdate/",{"date":$scope.UserDate,"weight":$scope.weightlog}).then(function(response){
          $scope.doAddGoalPopup();
+
         }, function () {
             errorMessage(Flash, "Please try again later!")
         });
+        }
+        else if(id==2){
+            requestHandler.postRequest("user/weightlogInsertorUpdate/",{"date":$scope.UserDate,"weight":$scope.weightlog}).then(function(response){
+                $scope.doAcceptGoalRequest($scope.acceptGoalId,$scope.weightlog);
+
+            }, function () {
+                errorMessage(Flash, "Please try again later!")
+            });
+        }
 
     };
 
     $scope.doCreateGoal=function(){
         $scope.loaded=true;
 
-        $scope.createGoal.enddate=document.getElementById("start").value;
+        if(document.getElementById("start").value==""){
+            $scope.createGoal.enddate=selectedDate;
+        }
+        else{
+            $scope.createGoal.enddate=document.getElementById("start").value;
+        }
         $scope.createGoal.goaltype=parseInt($scope.createGoal.goaltype);
         $scope.createGoal.targetweight=parseFloat($scope.createGoal.targetweight);
+        $scope.createGoal.userweight=$scope.weightlog;
         requestHandler.postRequest("user/insertUserGoal/",$scope.createGoal).then(function(response){
             successMessage(Flash,"Goal Successfully Created!");
             $scope.doGetMyGoalList();
@@ -311,9 +351,23 @@ userApp.controller('GoalController',['$scope','requestHandler','Flash','$route',
             errorMessage(Flash,"Please try again later!");
         });
     };
+    $scope.acceptGoalCheck=function(goalid){
+        requestHandler.postRequest("/user/getWeightLogGraph/", {"startdate": $scope.UserDate,"enddate": $scope.UserDate}).then(function(response){
+            $scope.UserWeightEntry=response.data.Weight_logs[0].userentry;
 
-    $scope.doAcceptGoalRequest=function(id){
-        requestHandler.putRequest("user/acceptGoal/",{"goalid":id}).then(function(){
+            if($scope.UserWeightEntry==0){
+                $scope.doAddWeightPopup(goalid);
+
+            }
+            else if($scope.UserWeightEntry==1){
+                $scope.doAcceptGoalRequest(goalid,$scope.weightlog);
+            }
+        });
+    };
+
+    $scope.doAcceptGoalRequest=function(id,weight){
+
+        requestHandler.putRequest("user/acceptGoal/",{"goalid":id,"currentweight":weight}).then(function(){
             successMessage(Flash,"Successfully Joined!");
             $("#modal_trigger1").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
             $location.path('/group-goal-view/'+id);

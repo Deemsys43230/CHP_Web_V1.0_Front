@@ -339,10 +339,10 @@
                                             <div class="col-sm-3 no-padding">
                                                 <div class="suggest-label">Food Choices</div>
                                             </div>
-                                            <div class="col-sm-9 no-padding">
-                                                <marquee class="feedbackslide" behavior="scroll" direction="left" onmouseover="this.setAttribute('scrollamount', 0, 0);this.stop();" onmouseout="this.setAttribute('scrollamount', 2, 0);this.start();" scrollamount="3">
+                                            <div class="col-sm-9 no-padding" id="marquee">
+                                              <!--  <marquee class="feedbackslide" behavior="scroll" direction="left" onmouseover="this.setAttribute('scrollamount', 0, 0);this.stop();" onmouseout="this.setAttribute('scrollamount', 3, 0);this.start();" scrollamount="3">
                                                     <span ng-repeat="suggestedFood in adminSuggestedFood" class="slideFeedback"><a href="" ng-click="suggestedFoodByAdmin(suggestedFood.foodId)">{{suggestedFood.foodName}}</a></span>
-                                                </marquee>
+                                                </marquee>-->
                                                 <!--<div class="slideImg" id="food-suggestion">
                                                     <div class="slideMain">
                                                         <ul class="slide1">
@@ -779,7 +779,7 @@
 
     <section class="popupBody">
         <!-- Register Form -->
-        <div class="alert-success" ng-show="isAddFood">Thanks&nbsp;for&nbsp;the&nbsp;suggestion.You&nbsp;will&nbsp;<br/>receive&nbsp;a&nbsp;mail&nbsp;once&nbsp;food&nbsp;is approved!!</div>
+        <div class="user-success" ng-show="isAddFood">Thanks&nbsp;for&nbsp;the&nbsp;suggestion.You&nbsp;will&nbsp;<br/>receive&nbsp;a&nbsp;mail&nbsp;once&nbsp;food&nbsp;is approved!!</div>
         <div class="common_model">
 
             <form name="foodSuggestForm" id="suggestform" novalidate>
@@ -813,7 +813,7 @@
 
     <section class="popupBody">
         <!-- Register Form -->
-        <div class="alert-success" ng-show="isAddExercise">Thanks&nbsp;for&nbsp;the&nbsp;suggestion.You&nbsp;will&nbsp;<br/>receive&nbsp;a&nbsp;mail&nbsp;once&nbsp;food&nbsp;is approved!!</div>
+        <div class="user-success" ng-show="isAddExercise">Thanks&nbsp;for&nbsp;the&nbsp;suggestion.You&nbsp;will&nbsp;<br/>receive&nbsp;a&nbsp;mail&nbsp;once&nbsp;food&nbsp;is approved!!</div>
         <div class="common_model">
             <form name="exerciseSuggestForm" novalidate>
             <p>Exercise Name:</p>
@@ -1044,7 +1044,31 @@
         </div>
     </section>
 </div>
+<!-- Update Weight popup -->
+<div id="updateWeight" class="popupContainer" style="display:none;left:37%!important;">
+    <header class="popupHeader">
+        <span class="header_title">Update Weight</span>
+        <span class="modal_close"><i class="fa fa-times"></i></span>
+    </header>
 
+    <section class="popupBody">
+        <!-- Register Form -->
+        <div class="common_model">
+            <form name="updateWeightForm" novalidate>
+                <p>Current Weight</p>
+                <input type="text"  name="weight" ng-model="weightlog" maxlength="5" required validate-Float1/>
+                <span ng-show="updateWeightForm.weight.$dirty&&updateWeightForm.weight.$invalid">
+                    <span class="error-message" ng-show="updateWeightForm.weight.$error.required"><span>Required.</span></span>
+                    <span class="error-message" ng-show="!updateWeightForm.weight.$error.required&&updateWeightForm.weight.$error.validateFloat1"><span>Invalid&nbsp;Data.</span></span>
+                </span>
+                <div class="action_btns margin-top-20">
+                    <div class="one_half"><a class="btn btn_red modal_close" onclick="return false" ng-disabled="updateWeightForm.$invalid" ng-click="updateWeightLog()">Proceed</a></div>
+                    <div class="one_half last modal_close"><a onclick="return false;" class="btn back_btn">Cancel</a></div>
+                </div>
+            </form>
+        </div>
+    </section>
+</div>
 
 <!-- Weight Goal Confirmation-->
 <div id="goal-delete-confirmation" class="popupContainer" style="display:none;left:37%!important;">
@@ -1329,6 +1353,14 @@
 </script>
 
 <script>
+    function mouseover(e){
+         e.setAttribute ('scrollamount', 0, 0);e.stop();
+    }
+
+    function mouseout(e){
+        e.setAttribute ('scrollamount', 3, 0);e.start();
+    }
+
     function coachAdviceCarousel(){
         setTimeout(function(){
             $('.advice-carousel').each(function(){
@@ -1426,6 +1458,8 @@
 
 
     } )( jQuery );
+
+
 </script>
 
 

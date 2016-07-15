@@ -5,7 +5,9 @@ userApp.controller('DemographyController',['$rootScope','$scope','requestHandler
     $scope.doGetDemographyandNutrition = function () {
 
         requestHandler.getRequest("user/getDemography/","").then(function(response) {
+            if($scope.isUpdated==1){
             $scope.demography = response.data.Demography_Data;
+
             //Copy Original
             $scope.demography.height=$scope.demography.height.toString();
             $scope.demography.weight=$scope.demography.weight.toString();
@@ -30,7 +32,7 @@ userApp.controller('DemographyController',['$rootScope','$scope','requestHandler
                $scope.demography.heightInches=parseInt($scope.demography.heightInches);
                 }
             }
-            console.log(response.data.Demography_Data);
+            }
             originalDemography=angular.copy(response.data.Demography_Data);
 
         });
