@@ -286,8 +286,8 @@
                             <select class="form-control main"  ng-model="demography.userPlanType" name="userPlanType">
                                 <option value="">--Select--</option>
                                 <option value="1">Maintain weight</option>
-                                <option value="2">Weight gain</option>
-                                <option value="3">Weight loss</option>
+                                <option value="2">Weight loss</option>
+                                <option value="3">Weight gain</option>
                             </select>
                         </div>
                     </div>
@@ -300,8 +300,8 @@
                         </div>
                         <span ng-show="demographyForm.targetWeight.$dirty&&demographyForm.targetWeight.$invalid">
                                  <span class="error-message textarea-errormessage40" ng-show="demographyForm.targetWeight.$error.required"><span>Required.</span></span>
-                                 <span class="error-message textarea-errormessage40" ng-show="!demographyForm.targetWeight.$error.required&&demographyForm.targetWeight.$error.lowerThan&&demography.userPlanType==3"><span>Should&nbsp;be&nbsp;less&nbsp;than&nbsp;your&nbsp;weight</span></span>
-                                 <span class="error-message textarea-errormessage40" ng-show="!demographyForm.targetWeight.$error.required&&demographyForm.targetWeight.$error.lowerThan&&demography.userPlanType==2"><span>Should&nbsp;be&nbsp;greater&nbsp;than&nbsp;your&nbsp;weight</span></span>
+                                 <span class="error-message textarea-errormessage40" ng-show="!demographyForm.targetWeight.$error.required&&demographyForm.targetWeight.$error.lowerThan&&demography.userPlanType==2"><span>Should&nbsp;be&nbsp;less&nbsp;than&nbsp;your&nbsp;weight</span></span>
+                                 <span class="error-message textarea-errormessage40" ng-show="!demographyForm.targetWeight.$error.required&&demographyForm.targetWeight.$error.lowerThan&&demography.userPlanType==3"><span>Should&nbsp;be&nbsp;greater&nbsp;than&nbsp;your&nbsp;weight</span></span>
                         </span>
                     </div>
 

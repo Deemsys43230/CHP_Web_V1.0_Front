@@ -232,10 +232,10 @@ userApp.directive('lowerThan', [
                 var plantype="";
                 plantype=$scope.plantype;
                 // It's valid if model is lower than the model we're comparing against
-                if(plantype==3){
+                if(plantype==2){
                 ctrl.$setValidity('lowerThan', parseInt(viewValue, 10) < parseInt(comparisonModel, 10) );
                 }
-                else if(plantype==2){
+                else if(plantype==3){
                 ctrl.$setValidity('lowerThan', parseInt(viewValue, 10) > parseInt(comparisonModel, 10) );
                  }
                 return viewValue;

@@ -96,12 +96,12 @@
 
 <!--Food Template-->
 <script type="text/ng-template" id="foodTemplate.html">
-    <a>
-        <img ng-if="match.model.foodImagePath" class="img-circle" ng-src="{{match.model.foodImagePath}}50x50.jpg" width="35">&nbsp;
-        <span ng-show="match.model.issuitable==1" class="green">&nbsp;</span>
-        <span ng-show="match.model.issuitable==0" class="red">&nbsp;</span>
-        <span class="wrap" ng-bind-html="match.label | uibTypeaheadHighlight:query"></span>&nbsp;
-    </a>
+  <a>
+      <img ng-if="match.model.foodImagePath" class="img-circle" ng-src="{{match.model.foodImagePath}}50x50.jpg" width="35">&nbsp;
+      <span ng-show="match.model.issuitable==1" class="green">&nbsp;</span>
+      <span ng-show="match.model.issuitable==0" class="red">&nbsp;</span>
+      <span class="wrap" ng-bind-html="match.label | uibTypeaheadHighlight:query"></span>&nbsp;
+  </a>
 </script>
 
 <script type="text/ng-template" id="customPopupTemplate.html">
@@ -121,651 +121,651 @@
 
 <!--Exercise Template-->
 <script type="text/ng-template" id="exerciseTemplate.html">
-    <a>
-        <img ng-if="match.model.imagepath" class="img-circle" ng-src="{{match.model.imagepath}}50x50.jpg" width="35">&nbsp;
-        <span class="wrap" ng-bind-html="match.label | uibTypeaheadHighlight:query"></span>
-    </a>
+  <a>
+      <img ng-if="match.model.imagepath" class="img-circle" ng-src="{{match.model.imagepath}}50x50.jpg" width="35">&nbsp;
+      <span class="wrap" ng-bind-html="match.label | uibTypeaheadHighlight:query"></span>
+  </a>
 </script>
 
 <div class="page-banner1" ng-cloak class="ng-cloak">
 
-<div id="w" class="clearfix">
-<div class="dashboard-1">
-    <ul id="sidemenu">
+    <div id="w" class="clearfix">
+        <div class="dashboard-1">
+            <ul id="sidemenu">
 
-        <li class="daily_update" ng-click="otherThanHistory()">
-            <a href="#daily_update" class="open menu-items"><i class="fa fa-child fa-4x hidden-md"></i><span>Daily Updates</span>
-                <p class="hidden-md hidden-sm">Enter your Daily Updates</p>
-            </a>
-        </li>
+                <li class="daily_update" ng-click="otherThanHistory()">
+                    <a href="#daily_update" class="open menu-items"><i class="fa fa-child fa-4x hidden-md"></i><span>Daily Updates</span>
+                        <p class="hidden-md hidden-sm">Enter your Daily Updates</p>
+                    </a>
+                </li>
 
-        <li class="weight" ng-click="otherThanHistory()">
-            <a class="menu-items" href="#weight"><i class="fa fa-tachometer fa-4x hidden-md"></i><span>Weight & Goal</span>
-                <p class="hidden-md hidden-sm">Update Weight & Set Goal</p>
-            </a>
-        </li>
+                <li class="weight" ng-click="otherThanHistory()">
+                    <a class="menu-items" href="#weight"><i class="fa fa-tachometer fa-4x hidden-md"></i><span>Weight & Goal</span>
+                        <p class="hidden-md hidden-sm">Update Weight & Set Goal</p>
+                    </a>
+                </li>
 
-        <li class="advice" ng-click="otherThanHistory()">
-            <a class="menu-items" href="#advice"><i class="fa fa-exclamation-triangle fa-4x hidden-md"></i><span>Advices</span>
-                <p class="hidden-md hidden-sm">Get daily tips for you</p>
-            </a>
-        </li>
+                <li class="advice" ng-click="otherThanHistory()">
+                    <a class="menu-items" href="#advice"><i class="fa fa-exclamation-triangle fa-4x hidden-md"></i><span>Advices</span>
+                        <p class="hidden-md hidden-sm">Get daily tips for you</p>
+                    </a>
+                </li>
 
-        <li id="history-menu" class="history" ng-click="getHistory()">
-            <a class="menu-items" href="#history"><i class="fa fa-history fa-4x hidden-md"></i><span>History</span>
-                <p class="hidden-md hidden-sm">Get your history</p>
-            </a>
-        </li>
+                <li id="history-menu" class="history" ng-click="getHistory()">
+                    <a class="menu-items" href="#history"><i class="fa fa-history fa-4x hidden-md"></i><span>History</span>
+                        <p class="hidden-md hidden-sm">Get your history</p>
+                    </a>
+                </li>
 
-        <li class="calories">
-            <!--<div class="col-lg-12 col-md-12 col-sm-12 padding-left-0 padding-right-10">
-                <div id="dailyUpdateBudgetGraph"></div>
-                <div class="col-sm-12">
-                    <h6 ng-show="0"><span class="fa fa fa-thumbs-up text-green">&nbsp;&nbsp;</span>Above <span class="label-success">215</span> calories</h6>
-                    <h6 ng-show="1"><span class="fa fa fa-thumbs-down text-red">&nbsp;&nbsp;</span>Under <span class="label-danger">215</span> calories</h6>
-                </div>
-            </div>-->
-            <div class="col-lg-12 col-md-12 col-sm-12 margin-top-5">
-                <form name="weightLogForm" novalidate>
-                    <h5 class="margin-bottom-15">UPDATE WEIGHT</h5>
-                    <div>
-                        <span ng-if="disableUpdateWeight==false">On Today</span>
-                        <span ng-if="disableUpdateWeight==true">On {{selectDate}}</span>
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6 no-padding margin-top-15">
-                        <span>Weight <small>(<span ng-show="userProfile.unitPreference==1">Kgs</span><span ng-show="userProfile.unitPreference==2">lbs</span>)</small><span class="pull-right">:</span></span>
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6 margin-top-10 no-padding-right padding-left-8">
-                        <input class="profile_input weightoverride" id="weightLog" name="weight" ng-model="weightlog" maxlength="5" required validate-Float1/>
+                <li class="calories">
+                    <!--<div class="col-lg-12 col-md-12 col-sm-12 padding-left-0 padding-right-10">
+                        <div id="dailyUpdateBudgetGraph"></div>
+                        <div class="col-sm-12">
+                            <h6 ng-show="0"><span class="fa fa fa-thumbs-up text-green">&nbsp;&nbsp;</span>Above <span class="label-success">215</span> calories</h6>
+                            <h6 ng-show="1"><span class="fa fa fa-thumbs-down text-red">&nbsp;&nbsp;</span>Under <span class="label-danger">215</span> calories</h6>
+                        </div>
+                    </div>-->
+                    <div class="col-lg-12 col-md-12 col-sm-12 margin-top-5">
+                        <form name="weightLogForm" novalidate>
+                            <h5 class="margin-bottom-15">UPDATE WEIGHT</h5>
+                            <div>
+                                <span ng-if="disableUpdateWeight==false">On Today</span>
+                                <span ng-if="disableUpdateWeight==true">On {{selectDate}}</span>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 no-padding margin-top-15">
+                                <span>Weight <small>(<span ng-show="userProfile.unitPreference==1">Kgs</span><span ng-show="userProfile.unitPreference==2">lbs</span>)</small><span class="pull-right">:</span></span>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 margin-top-10 no-padding-right padding-left-8">
+                                <input class="profile_input weightoverride" id="weightLog" name="weight" ng-model="weightlog" maxlength="5" required validate-Float1/>
                                 <span ng-show="weightLogForm.weight.$dirty&&weightLogForm.weight.$invalid">
                                     <span class="error-message textarea-errormessage10" ng-show="weightLogForm.weight.$error.required"><span>Required.</span></span>
                                     <span class="error-message textarea-errormessage10" ng-show="!weightLogForm.weight.$error.required&&weightLogForm.weight.$error.validateFloat1"><span>Invalid&nbsp;Data.</span></span>
                                 </span>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 text-center margin-top-20 margin-bottom-5">
+                                <button onclick="return false;" class="btn-dis suggest_button override-width no-margin-bottom" ng-disabled="weightLogForm.$invalid || spinner || disableUpdateWeight" ng-click="weightLogEntry(1)">
+                                    <span ng-if="spinner"><span class="three-quarters-loader">Loading…</span></span>{{weightUpdateText}}</button>
+                            </div>
+                        </form>
                     </div>
-                    <div class="col-lg-12 col-md-12 col-sm-12 text-center margin-top-20 margin-bottom-5">
-                        <button onclick="return false;" class="btn-dis suggest_button override-width no-margin-bottom" ng-disabled="weightLogForm.$invalid || spinner || disableUpdateWeight" ng-click="weightLogEntry(1)">
-                            <span ng-if="spinner"><span class="three-quarters-loader">Loading…</span></span>{{weightUpdateText}}</button>
-                    </div>
-                </form>
-            </div>
-            <!--<div class="col-lg-6 col-md-12 col-sm-12 text-center">
-                <h5>Gain</h5>
-                <div class="circle-wrapper">
-                    <div class="circle-progress ng-cloak font-14" ng-style="getStyle()">{{currentGain}}</div>
-                    <div round-progress
-                         max="averageIntake"
-                         current="currentGain"
-                         color="{{currentGainColour}}"
-                         bgcolor="{{ bgColor }}"
-                         radius="37"
-                         semi="isSemi"
-                         rounded="rounded"
-                         stroke="6"
-                         clockwise="clockwise"
-                         responsive="responsive"
-                         duration="{{ duration }}"
-                         animation="{{ currentAnimation }}"
-                         offset="{{ offset }}">
-                    </div>
-                </div>
-                <p class="text-gray">of {{averageIntake}} cals.</p>
-            </div>
-            <div class="col-lg-6 col-md-12 col-sm-12 text-center">
-                <h5>Spent</h5>
-                <div class="circle-wrapper">
-                    <div class="circle-progress ng-cloak font-14" ng-style="getStyle()">{{currentSpent}}</div>
-                    <div round-progress
-                         max="averageSpent"
-                         current="currentSpent"
-                         color="{{currentSpentColour}}"
-                         bgcolor="{{ bgColor }}"
-                         radius="37"
-                         semi="isSemi"
-                         rounded="rounded"
-                         stroke="6"
-                         clockwise="clockwise"
-                         responsive="responsive"
-                         duration="{{ duration }}"
-                         animation="{{ currentAnimation }}"
-                         offset="{{ offset }}">
-                    </div>
-                </div>
-                <p class="text-gray">of {{averageSpent}} cals.</p>
-            </div>-->
-        </li>
-    </ul>
-</div>
-<div class="dashboard-2" ng-show="historyReport==0">
-<div id="content">
-<div id="daily_update">
-<div class="col-lg-7 col-md-7 col-sm-7">
-    <!-- Nav Tabs -->
-    <ul class="nav nav-tabs">
-        <li class="active" ng-click="showExercise=0"><a href="#tab-1" data-toggle="tab" onclick="return false;">Food Gain</a></li>
-        <li ng-click="showExercise=1"><a href="#tab-2" data-toggle="tab" onclick="return false;">Energy Spent</a></li>
-        <li><a href="#tab-3" data-toggle="tab" onclick="return false;">Graphs</a></li>
-    </ul>
-</div>
-<div class="col-lg-5 col-md-5 col-sm-5 margin-top-5 text-right">
-    <div class="margin-top-5 pull-right" >&nbsp;&nbsp;<i class="fa fa-calendar" ng-click="datePicker()"></i></div>
-    <input hidden id="main-start-date" ng-model="selectedDate">
-
-    <div id="ui-datepicker" class="pull-right main-datepicker">
-        <input type="text" id="main-date" class="profile_input override" block>
-        <!--<div class="input-group ui-datepicker">
-            <input ng-click="open($event)" ng-change="initialLoadFoodAndExercise()" type="text"
-                   ng-keypress="prevent()"
-                   class="profile_input override"
-                   id = "popup"
-                   uib-datepicker-popup="{{format}}"
-                   ng-model="selectedDate"
-                   is-open="opened"
-                   min="minDate"
-                   max="maxDate"
-                   popup-placement="auto top-right"
-                   data-show-weeks="false"
-                   show-button-bar="false"
-                   datepicker-options="dateOptions"
-                   date-disabled="disabled(date, mode)"
-                   ng-required="true"
-                   close-text="Close" required>
-        </div>-->
-    </div>
-    <div class="margin-top-5 pull-right">Date</div>
-</div>
-
-<div class="col-lg-12 col-md-12 col-sm-12">
-<!-- Tab panels -->
-<div class="tab-content">
-<!-- Tab Content 1 -->
-<div class="tab-pane in active padding-top-5" id="tab-1">
-    <div class="tab_container">
-        <div class="tab_content">
-            <div class="col-lg-9 col-md-9 col-sm-9 no-padding dashboard-5">
-                <div class="col-lg-12 col-md-12 col-sm-12 no-padding">
-                    <div class="session">
-                        <input type="radio" id="breakFast" value="1"  ng-click="loadSessionDetails()" ng-model="userFood.sessionid"/>
-                        <label for="breakFast">Breakfast</label>
-                        <input type="radio" id="brunch" ng-click="loadSessionDetails()" value="2" ng-model="userFood.sessionid"/>
-                        <label for="brunch" >Brunch</label>
-                        <input type="radio"  ng-click="loadSessionDetails()" id="lunch" value="3" ng-model="userFood.sessionid"/>
-                        <label for="lunch">Lunch</label>
-                        <input type="radio"  ng-click="loadSessionDetails()" id="snacks" value="4" ng-model="userFood.sessionid"/>
-                        <label for="snacks">Snacks</label>
-                        <input type="radio" ng-click="loadSessionDetails()" id="dinner" value="5" ng-model="userFood.sessionid"/>
-                        <label for="dinner">Dinner</label>
-                    </div>
-                </div>
-                <div class="col-lg-12 col-md-12 col-sm-12 no-padding">
-                    <div class="content-1">
-                        <input class="profile_input" type="text" ng-model="selectedFood" placeholder="Search Food" uib-typeahead="food as food.foodname for food in inputChanged($viewValue)" typeahead-popup-template-url="customPopupTemplate.html" typeahead-template-url="foodTemplate.html" typeahead-on-select="foodSelected()" typeahead-class="form-control">
-                    </div>
-                    <div class="search-loading" ng-show="loadingFoods"><i class="fa fa-spinner fa-pulse"></i>&nbsp;&nbsp;Searching Foods...</div>
-                </div>
-                <div class="food_scrollbar" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',horizrailenabled: false,background:'#eee'}" >
-                    <div ng-if="loaded">
-                        <div class="loader-style-dashboard">
-                            <div class="loader"></div>
+                    <!--<div class="col-lg-6 col-md-12 col-sm-12 text-center">
+                        <h5>Gain</h5>
+                        <div class="circle-wrapper">
+                            <div class="circle-progress ng-cloak font-14" ng-style="getStyle()">{{currentGain}}</div>
+                            <div round-progress
+                                 max="averageIntake"
+                                 current="currentGain"
+                                 color="{{currentGainColour}}"
+                                 bgcolor="{{ bgColor }}"
+                                 radius="37"
+                                 semi="isSemi"
+                                 rounded="rounded"
+                                 stroke="6"
+                                 clockwise="clockwise"
+                                 responsive="responsive"
+                                 duration="{{ duration }}"
+                                 animation="{{ currentAnimation }}"
+                                 offset="{{ offset }}">
+                            </div>
                         </div>
+                        <p class="text-gray">of {{averageIntake}} cals.</p>
                     </div>
-                    <div id="scrollheightfood" ng-if="showExercise==0">
-                        <ul class="food remove-style">
-                            <li class="col-lg-12 col-md-12 col-sm-12" ng-repeat="foodDiaryData in userFoodDiaryData | orderBy:'$index':true">
-                                <div class="col-lg-2 col-md-2 col-sm-2 no-padding"><img ng-if="foodDiaryData.foodImagePath" ng-src="{{foodDiaryData.foodImagePath+'50x50.jpg'}}"></div>
-                                <div class="col-lg-10 col-md-10 col-sm-10 no-padding">
-                                    <a href="" class="pull-right food_close" title="Delete Food" ng-click="doDeleteUserFood(foodDiaryData.userfoodid)">x</a>
-                                    <div class="food_name">
-                                        <span ng-show="foodDiaryData.issuitable==1" class="green">&nbsp;</span>
-                                        <span ng-show="foodDiaryData.issuitable==0" class="red">&nbsp;</span>&nbsp;{{foodDiaryData.foodname}}
+                    <div class="col-lg-6 col-md-12 col-sm-12 text-center">
+                        <h5>Spent</h5>
+                        <div class="circle-wrapper">
+                            <div class="circle-progress ng-cloak font-14" ng-style="getStyle()">{{currentSpent}}</div>
+                            <div round-progress
+                                 max="averageSpent"
+                                 current="currentSpent"
+                                 color="{{currentSpentColour}}"
+                                 bgcolor="{{ bgColor }}"
+                                 radius="37"
+                                 semi="isSemi"
+                                 rounded="rounded"
+                                 stroke="6"
+                                 clockwise="clockwise"
+                                 responsive="responsive"
+                                 duration="{{ duration }}"
+                                 animation="{{ currentAnimation }}"
+                                 offset="{{ offset }}">
+                            </div>
+                        </div>
+                        <p class="text-gray">of {{averageSpent}} cals.</p>
+                    </div>-->
+                </li>
+            </ul>
+        </div>
+        <div class="dashboard-2" ng-show="historyReport==0">
+            <div id="content">
+                <div id="daily_update">
+                    <div class="col-lg-7 col-md-7 col-sm-7">
+                        <!-- Nav Tabs -->
+                        <ul class="nav nav-tabs">
+                            <li class="active" ng-click="showExercise=0"><a href="#tab-1" data-toggle="tab" onclick="return false;">Food Gain</a></li>
+                            <li ng-click="showExercise=1"><a href="#tab-2" data-toggle="tab" onclick="return false;">Energy Spent</a></li>
+                            <li><a href="#tab-3" data-toggle="tab" onclick="return false;">Graphs</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-5 col-md-5 col-sm-5 margin-top-5 text-right">
+                        <div class="margin-top-5 pull-right" >&nbsp;&nbsp;<i class="fa fa-calendar" ng-click="datePicker()"></i></div>
+                        <input hidden id="main-start-date" ng-model="selectedDate">
+
+                        <div id="ui-datepicker" class="pull-right main-datepicker">
+                            <input type="text" id="main-date" class="profile_input override" block>
+                            <!--<div class="input-group ui-datepicker">
+                                <input ng-click="open($event)" ng-change="initialLoadFoodAndExercise()" type="text"
+                                       ng-keypress="prevent()"
+                                       class="profile_input override"
+                                       id = "popup"
+                                       uib-datepicker-popup="{{format}}"
+                                       ng-model="selectedDate"
+                                       is-open="opened"
+                                       min="minDate"
+                                       max="maxDate"
+                                       popup-placement="auto top-right"
+                                       data-show-weeks="false"
+                                       show-button-bar="false"
+                                       datepicker-options="dateOptions"
+                                       date-disabled="disabled(date, mode)"
+                                       ng-required="true"
+                                       close-text="Close" required>
+                            </div>-->
+                        </div>
+                        <div class="margin-top-5 pull-right">Date</div>
+                    </div>
+
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <!-- Tab panels -->
+                        <div class="tab-content">
+                        <!-- Tab Content 1 -->
+                        <div class="tab-pane in active padding-top-5" id="tab-1">
+                            <div class="tab_container">
+                                <div class="tab_content">
+                                    <div class="col-lg-9 col-md-9 col-sm-9 no-padding dashboard-5">
+                                        <div class="col-lg-12 col-md-12 col-sm-12 no-padding">
+                                            <div class="session">
+                                                <input type="radio" id="breakFast" value="1"  ng-click="loadSessionDetails()" ng-model="userFood.sessionid"/>
+                                                <label for="breakFast">Breakfast</label>
+                                                <input type="radio" id="brunch" ng-click="loadSessionDetails()" value="2" ng-model="userFood.sessionid"/>
+                                                <label for="brunch" >Brunch</label>
+                                                <input type="radio"  ng-click="loadSessionDetails()" id="lunch" value="3" ng-model="userFood.sessionid"/>
+                                                <label for="lunch">Lunch</label>
+                                                <input type="radio"  ng-click="loadSessionDetails()" id="snacks" value="4" ng-model="userFood.sessionid"/>
+                                                <label for="snacks">Snacks</label>
+                                                <input type="radio" ng-click="loadSessionDetails()" id="dinner" value="5" ng-model="userFood.sessionid"/>
+                                                <label for="dinner">Dinner</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12 col-md-12 col-sm-12 no-padding">
+                                            <div class="content-1">
+                                                <input class="profile_input" type="text" ng-model="selectedFood" placeholder="Search Food" uib-typeahead="food as food.foodname for food in inputChanged($viewValue)" typeahead-popup-template-url="customPopupTemplate.html" typeahead-template-url="foodTemplate.html" typeahead-on-select="foodSelected()" typeahead-class="form-control">
+                                            </div>
+                                            <div class="search-loading" ng-show="loadingFoods"><i class="fa fa-spinner fa-pulse"></i>&nbsp;&nbsp;Searching Foods...</div>
+                                        </div>
+                                        <div class="food_scrollbar" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',horizrailenabled: false,background:'#eee'}" >
+                                            <div ng-if="loaded">
+                                                <div class="loader-style-dashboard">
+                                                    <div class="loader"></div>
+                                                </div>
+                                            </div>
+                                            <div id="scrollheightfood" ng-if="showExercise==0">
+                                                <ul class="food remove-style">
+                                                    <li class="col-lg-12 col-md-12 col-sm-12" ng-repeat="foodDiaryData in userFoodDiaryData | orderBy:'$index':true">
+                                                        <div class="col-lg-2 col-md-2 col-sm-2 no-padding"><img ng-if="foodDiaryData.foodImagePath" ng-src="{{foodDiaryData.foodImagePath+'50x50.jpg'}}"></div>
+                                                        <div class="col-lg-10 col-md-10 col-sm-10 no-padding">
+                                                            <a href="" class="pull-right food_close" title="Delete Food" ng-click="doDeleteUserFood(foodDiaryData.userfoodid)">x</a>
+                                                            <div class="food_name">
+                                                                <span ng-show="foodDiaryData.issuitable==1" class="green">&nbsp;</span>
+                                                                <span ng-show="foodDiaryData.issuitable==0" class="red">&nbsp;</span>&nbsp;{{foodDiaryData.foodname}}
+                                                            </div>
+                                                            <div class="margin-top-10">
+                                                                <span class="pull-right text-green text-bold"><strong><i class="fa fa-angle-up"></i>&nbsp;{{foodDiaryData.measureid.calories}}  calories</strong></span>
+                                                                <div class="select_food">
+                                                                    <span class="text-bold">Quantity : </span>{{foodDiaryData.measureid.servings}}&nbsp;{{foodDiaryData.measureid.measurename}}&nbsp;&nbsp;<a href="" ng-click="doEditUserFood(foodDiaryData.foodid,foodDiaryData.userfoodid)" title="Edit Food"><i class="fa fa-pencil"></i></a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+
+                                            <div ng-show="userFoodDiaryData.length==0 || userFoodDiaryDataAll.length==0" class="text-center margin-top-10">
+                                                <img src="../../images/no-food.png" width="150" height="150">
+                                                <h1 class="text-gray margin-top-15">  NO FOOD ADDED!!!</h1>
+                                            </div>
+                                        </div>
+
+                                        <div class="content-suggest clearfix" ng-show="adminSuggestedFood.length>0" >
+                                            <div class="col-sm-3 no-padding">
+                                                <div class="suggest-label">Food Choices</div>
+                                            </div>
+                                            <div class="col-sm-9 no-padding" id="marquee">
+                                              <!--  <marquee class="feedbackslide" behavior="scroll" direction="left" onmouseover="this.setAttribute('scrollamount', 0, 0);this.stop();" onmouseout="this.setAttribute('scrollamount', 3, 0);this.start();" scrollamount="3">
+                                                    <span ng-repeat="suggestedFood in adminSuggestedFood" class="slideFeedback"><a href="" ng-click="suggestedFoodByAdmin(suggestedFood.foodId)">{{suggestedFood.foodName}}</a></span>
+                                                </marquee>-->
+                                                <!--<div class="slideImg" id="food-suggestion">
+                                                    <div class="slideMain">
+                                                        <ul class="slide1">
+                                                            <li ng-repeat="suggestedFood in adminSuggestedFood"><a href="" ng-click="suggestedFoodByAdmin(suggestedFood.foodId)">{{suggestedFood.foodName}}</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>-->
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="margin-top-10">
-                                        <span class="pull-right text-green text-bold"><strong><i class="fa fa-angle-up"></i>&nbsp;{{foodDiaryData.measureid.calories}}  calories</strong></span>
-                                        <div class="select_food">
-                                            <span class="text-bold">Quantity : </span>{{foodDiaryData.measureid.servings}}&nbsp;{{foodDiaryData.measureid.measurename}}&nbsp;&nbsp;<a href="" ng-click="doEditUserFood(foodDiaryData.foodid,foodDiaryData.userfoodid)" title="Edit Food"><i class="fa fa-pencil"></i></a>
+                                    <div class="col-lg-3 col-md-3 col-sm-3 no-padding dashboard-6">
+                                        <div class="content-3">
+                                            <a id="modal_trigger_food" href="#modal-food" ng-click="resetdata(); msg()" onclick="return false;" class="suggest_button override-width">Suggest Food</a>
+                                            <div class="suggest_content">
+                                                <h6 class="margin-bottom-13">Frequently Used</h6>
+                                                <div class="suggest_option" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#eee'}">
+                                                    <span ng-repeat="frequentfood in frequentFoodList" ng-click="frequentFood(frequentfood.foodid)" class="wrap-all">{{frequentfood.foodname}}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div><!-- #tab1 -->
+
+                            </div> <!-- .tab_container -->
+                        </div>
+                        <!-- Tab Content 2 -->
+                        <div class="tab-pane padding-top-5" id="tab-2">
+                            <div class="tab_container">
+                                <div class="tab_content">
+                                    <div class="col-lg-9 col-md-9 col-sm-9 no-padding dashboard-5">
+                                        <div class="col-lg-12 col-md-12 no-padding">
+                                            <div class="content-1">
+                                                <input class="profile_input" type="text" ng-model="selectedExercise" placeholder="Search Exercise" uib-typeahead="exercise as exercise.exercisename for exercise in inputChangedExercise($viewValue)" typeahead-popup-template-url="customPopupTemplate.html" typeahead-template-url="exerciseTemplate.html" typeahead-on-select="exerciseSelected()" typeahead-class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="search-loading" ng-show="loadingExercise"><i class="fa fa-spinner fa-pulse"></i>&nbsp;&nbsp;Searching Exercise...</div>
+                                        <div class="food_scrollbar exercise-height" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#eee'}" >
+                                            <div ng-if="loaded">
+                                                <div class="loader-style-dashboard">
+                                                    <div class="loader"></div>
+                                                </div>
+                                            </div>
+                                            <div id="scrollheightexercise" ng-if="showExercise==1">
+                                                <ul class="exercise remove-style">
+                                                    <li class="col-lg-12 col-md-12 col-sm-12" ng-repeat="exerciseDiaryData in userExerciseDiaryDataAll | orderBy:'$index':true">
+                                                        <div class="col-lg-2 col-md-2 col-sm-2 no-padding"><img ng-if="exerciseDiaryData.exerciseImagePath" ng-src="{{exerciseDiaryData.exerciseImagePath+'50x50.jpg'}}"></div>
+                                                        <div class="col-lg-10 col-md-10 col-sm-10 no-padding">
+                                                            <a href="" class="pull-right exercise_close" title="Delete Exercise" ng-click="doDeleteUserExercise(exerciseDiaryData.userexercisemapid)">x</a>
+                                                            <div class="exercise_name">{{exerciseDiaryData.Exercise.exercisename}}</div>
+                                                            <div class="margin-top-10">
+                                                                <span class="pull-right text-red text-bold"><strong><i class="fa fa-angle-down"></i>&nbsp;{{exerciseDiaryData.calories}}  calories</strong></span>
+                                                                <div class="select_food">
+                                                                    <span class="text-bold">Workout :</span> {{exerciseDiaryData.workoutvalue}}&nbsp;minutes&nbsp;&nbsp;<a href="" ng-click="doEditUserExercise(exerciseDiaryData.Exercise.exerciseid,exerciseDiaryData.userexercisemapid)" title="Edit Exercise"><i class="fa fa-pencil"></i></a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+
+                                            <div ng-show="userExerciseDiaryDataAll.length==0" class="text-center"><br/><br/>
+                                                <img src="../../images/no-exercise.png" width="150" height="150">
+                                                <h1 class="text-gray margin-top-15">  NO EXERCISE ADDED!!!</h1>
+                                            </div>
+                                        </div>
+                                        <div class="margin-top-5"></div>
+                                        <div class="content-suggest clearfix" ng-show="adminSuggestedExercise.length>0">
+                                            <div class="col-sm-4 no-padding">
+                                                <div class="suggest-label">Exercise Choices</div>
+                                            </div>
+                                            <div class="col-sm-8 no-padding">
+                                                <marquee class="feedbackslide" behavior="scroll" direction="left" onmouseover="this.setAttribute('scrollamount', 0, 0);this.stop();" onmouseout="this.setAttribute('scrollamount', 2, 0);this.start();" scrollamount="3">
+                                                    <span ng-repeat="suggestedExercise in adminSuggestedExercise" class="slideFeedback"><a href="" ng-click="suggestedExerciseByAdmin(suggestedExercise.exerciseId)">{{suggestedExercise.exerciseName}}</a></span>
+                                                </marquee>
+                                                <!--<div class="slideImg" id="exercise-suggestion">
+                                                    <div class="slideMain">
+                                                        <ul class="slide3">
+                                                            <li ng-repeat="suggestedExercise in adminSuggestedExercise"><a href="" ng-click="suggestedExerciseByAdmin(suggestedExercise.exerciseId)">{{suggestedExercise.exerciseName}}</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>-->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3 col-sm-3 no-padding dashboard-6">
+                                        <div class="content-3">
+                                            <a id="modal_trigger_exercise" href="#modal-exercise" ng-click="resetexercisedata(); msg()" onclick="return false;" class="suggest_button override-width">Suggest Exercise</a>
+                                            <div class="suggest_content">
+                                                <h6>Frequently Used</h6>
+                                                <div class="suggest_option" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#eee'}">
+                                                    <span ng-repeat="frequentexercise in frequentExerciseList" ng-click="frequentExercise(frequentexercise.exerciseid)">{{frequentexercise.exercisename}}</span>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div ng-show="userFoodDiaryData.length==0 || userFoodDiaryDataAll.length==0" class="text-center margin-top-10">
-                        <img src="../../images/no-food.png" width="150" height="150">
-                        <h1 class="text-gray margin-top-15">  NO FOOD ADDED!!!</h1>
-                    </div>
-                </div>
-
-                <div class="content-suggest clearfix" ng-show="adminSuggestedFood.length>0" >
-                    <div class="col-sm-3 no-padding">
-                        <div class="suggest-label">Food Choices</div>
-                    </div>
-                    <div class="col-sm-9 no-padding" id="marquee">
-                        <!--  <marquee class="feedbackslide" behavior="scroll" direction="left" onmouseover="this.setAttribute('scrollamount', 0, 0);this.stop();" onmouseout="this.setAttribute('scrollamount', 3, 0);this.start();" scrollamount="3">
-                              <span ng-repeat="suggestedFood in adminSuggestedFood" class="slideFeedback"><a href="" ng-click="suggestedFoodByAdmin(suggestedFood.foodId)">{{suggestedFood.foodName}}</a></span>
-                          </marquee>-->
-                        <!--<div class="slideImg" id="food-suggestion">
-                            <div class="slideMain">
-                                <ul class="slide1">
-                                    <li ng-repeat="suggestedFood in adminSuggestedFood"><a href="" ng-click="suggestedFoodByAdmin(suggestedFood.foodId)">{{suggestedFood.foodName}}</a></li>
-                                </ul>
                             </div>
-                        </div>-->
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-3 no-padding dashboard-6">
-                <div class="content-3">
-                    <a id="modal_trigger_food" href="#modal-food" ng-click="resetdata(); msg()" onclick="return false;" class="suggest_button override-width">Suggest Food</a>
-                    <div class="suggest_content">
-                        <h6 class="margin-bottom-13">Frequently Used</h6>
-                        <div class="suggest_option" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#eee'}">
-                            <span ng-repeat="frequentfood in frequentFoodList" ng-click="frequentFood(frequentfood.foodid)" class="wrap-all">{{frequentfood.foodname}}</span>
                         </div>
-                    </div>
-                </div>
-            </div>
 
-        </div><!-- #tab1 -->
+                        <!-- Tab Content 3 -->
+                        <div class="tab-pane padding-top-5" id="tab-3">
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12 graphs">
+                                    <input type="radio" id="gainSpent" value="1"  ng-click="graphOne()" ng-model="graphs"/>
+                                    <label for="gainSpent">Gain vs Spent</label>
+                                    <input type="radio" id="nutrients" ng-click="graphTwo()" value="2" ng-model="graphs"/>
+                                    <label for="nutrients" >Nutrients Graph by Session</label>
+                                </div>
+                            </div>
+                            <div class="graph-content" >
+                                <div ng-if="loaded" class="col-lg-12 col-md-12 col-sm-12">
+                                    <div class="loader-style-dashboard"><br/><br/>
+                                        <div class="loader"></div>
+                                    </div>
+                                </div>
+                                <div ng-show="graphs==1" class="margin-top-5">
+                                    <div ng-hide="userFoodDiaryDataAll.length==0&&userExerciseDiaryDataAll==0" class="margin-top-10">
+                                        <div class="col-lg-4 col-md-4 col-sm-4 text-right gain-list">
+                                            <div class="text-green text-bold">Gain</div>
+                                            <hr/>
+                                            <div class="suggest_option_graph" ng-nicescroll nice-option="{cursorcolor: '#777',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#f1f1f1'}">
+                                                <p ng-repeat="food in userFoodDiaryDataAll.BreakFast" class="wrap suggest_list_style">
+                                                    {{food.foodname}}</p>
+                                                <p ng-repeat="food in userFoodDiaryDataAll.Brunch" class="wrap suggest_list_style">
+                                                    {{food.foodname}}</p>
+                                                <p ng-repeat="food in userFoodDiaryDataAll.Lunch" class="wrap suggest_list_style">
+                                                    {{food.foodname}}</p>
+                                                <p ng-repeat="food in userFoodDiaryDataAll.Evening" class="wrap suggest_list_style">
+                                                    {{food.foodname}}</p>
+                                                <p ng-repeat="food in userFoodDiaryDataAll.Dinner" class="wrap suggest_list_style">
+                                                    {{food.foodname}}</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-4 col-sm-4 no-padding">
+                                            <div id="gainVsSpent"></div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-4 col-sm-4 gain-list">
+                                            <div class="text-red text-bold">Spent</div>
+                                            <hr/>
+                                            <div class="suggest_option_graph" ng-nicescroll nice-option="{cursorcolor: '#777',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#f1f1f1'}">
+                                                <p ng-repeat="exerciseDiaryData in userExerciseDiaryDataAll" class="wrap text-left suggest_list_style">
+                                                    {{exerciseDiaryData.Exercise.exercisename}}</p>
+                                            </div>
+                                        </div>
 
-    </div> <!-- .tab_container -->
-</div>
-<!-- Tab Content 2 -->
-<div class="tab-pane padding-top-5" id="tab-2">
-    <div class="tab_container">
-        <div class="tab_content">
-            <div class="col-lg-9 col-md-9 col-sm-9 no-padding dashboard-5">
-                <div class="col-lg-12 col-md-12 no-padding">
-                    <div class="content-1">
-                        <input class="profile_input" type="text" ng-model="selectedExercise" placeholder="Search Exercise" uib-typeahead="exercise as exercise.exercisename for exercise in inputChangedExercise($viewValue)" typeahead-popup-template-url="customPopupTemplate.html" typeahead-template-url="exerciseTemplate.html" typeahead-on-select="exerciseSelected()" typeahead-class="form-control">
-                    </div>
-                </div>
-                <div class="search-loading" ng-show="loadingExercise"><i class="fa fa-spinner fa-pulse"></i>&nbsp;&nbsp;Searching Exercise...</div>
-                <div class="food_scrollbar exercise-height" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#eee'}" >
-                    <div ng-if="loaded">
-                        <div class="loader-style-dashboard">
-                            <div class="loader"></div>
-                        </div>
-                    </div>
-                    <div id="scrollheightexercise" ng-if="showExercise==1">
-                        <ul class="exercise remove-style">
-                            <li class="col-lg-12 col-md-12 col-sm-12" ng-repeat="exerciseDiaryData in userExerciseDiaryDataAll | orderBy:'$index':true">
-                                <div class="col-lg-2 col-md-2 col-sm-2 no-padding"><img ng-if="exerciseDiaryData.exerciseImagePath" ng-src="{{exerciseDiaryData.exerciseImagePath+'50x50.jpg'}}"></div>
-                                <div class="col-lg-10 col-md-10 col-sm-10 no-padding">
-                                    <a href="" class="pull-right exercise_close" title="Delete Exercise" ng-click="doDeleteUserExercise(exerciseDiaryData.userexercisemapid)">x</a>
-                                    <div class="exercise_name">{{exerciseDiaryData.Exercise.exercisename}}</div>
-                                    <div class="margin-top-10">
-                                        <span class="pull-right text-red text-bold"><strong><i class="fa fa-angle-down"></i>&nbsp;{{exerciseDiaryData.calories}}  calories</strong></span>
-                                        <div class="select_food">
-                                            <span class="text-bold">Workout :</span> {{exerciseDiaryData.workoutvalue}}&nbsp;minutes&nbsp;&nbsp;<a href="" ng-click="doEditUserExercise(exerciseDiaryData.Exercise.exerciseid,exerciseDiaryData.userexercisemapid)" title="Edit Exercise"><i class="fa fa-pencil"></i></a>
+                                    </div>
+                                    <div ng-show="userFoodDiaryDataAll.length==0&&userExerciseDiaryDataAll==0" class="text-center">
+                                        <br/><br/><br/>
+                                        <img src="../../images/no-update.png" width="150" height="150">
+                                        <h1 class="text-gray">NO UPDATE!!!</h1>
+                                    </div>
+                                </div>
+                                <div ng-show="graphs==2" class="margin-top-5">
+                                    <div class="col-lg-6 col-md-5 col-sm-5">
+                                        <h5 class="margin-bottom-5">Choose session</h5>
+                                        <select class="full-width main"  ng-model="graphSessionId" ng-change="loadSessionFood(graphSessionId)" name="graph" required>
+                                            <option value="1">Breakfast</option>
+                                            <option value="2">Brunch</option>
+                                            <option value="3">Lunch</option>
+                                            <option value="4">Snacks</option>
+                                            <option value="5">Dinner</option>
+                                        </select>
+                                        <div ng-show="graphResponse==1">
+                                            <h6 class="margin-tb-10">Foods Intaken</h6>
+                                            <div class="foodlistGraph gain-list" ng-nicescroll nice-option="{cursorcolor: '#777',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#f1f1f1'}">
+                                                <p ng-repeat="food in userSessionFoods" class="wrap suggest_list_style">{{food.foodname}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-7 col-sm-7">
+                                        <div ng-show="graphResponse==1">
+                                            <h5>Nutrients Graph</h5>
+                                            <div id="sessionGraph" class="sessionGraph margin-top-15"></div>
+                                        </div>
+                                        <div ng-show="graphResponse==0" class="text-center">
+                                            <br/><br/>
+                                            <img src="../../images/no-update.png" width="150" height="150">
+                                            <h1 class="text-gray">NO UPDATE!!!</h1>
                                         </div>
                                     </div>
                                 </div>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div ng-show="userExerciseDiaryDataAll.length==0" class="text-center"><br/><br/>
-                        <img src="../../images/no-exercise.png" width="150" height="150">
-                        <h1 class="text-gray margin-top-15">  NO EXERCISE ADDED!!!</h1>
-                    </div>
-                </div>
-                <div class="margin-top-5"></div>
-                <div class="content-suggest clearfix" ng-show="adminSuggestedExercise.length>0">
-                    <div class="col-sm-4 no-padding">
-                        <div class="suggest-label">Exercise Choices</div>
-                    </div>
-                    <div class="col-sm-8 no-padding">
-                        <marquee class="feedbackslide" behavior="scroll" direction="left" onmouseover="this.setAttribute('scrollamount', 0, 0);this.stop();" onmouseout="this.setAttribute('scrollamount', 2, 0);this.start();" scrollamount="3">
-                            <span ng-repeat="suggestedExercise in adminSuggestedExercise" class="slideFeedback"><a href="" ng-click="suggestedExerciseByAdmin(suggestedExercise.exerciseId)">{{suggestedExercise.exerciseName}}</a></span>
-                        </marquee>
-                        <!--<div class="slideImg" id="exercise-suggestion">
-                            <div class="slideMain">
-                                <ul class="slide3">
-                                    <li ng-repeat="suggestedExercise in adminSuggestedExercise"><a href="" ng-click="suggestedExerciseByAdmin(suggestedExercise.exerciseId)">{{suggestedExercise.exerciseName}}</a></li>
-                                </ul>
                             </div>
-                        </div>-->
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-3 no-padding dashboard-6">
-                <div class="content-3">
-                    <a id="modal_trigger_exercise" href="#modal-exercise" ng-click="resetexercisedata(); msg()" onclick="return false;" class="suggest_button override-width">Suggest Exercise</a>
-                    <div class="suggest_content">
-                        <h6>Frequently Used</h6>
-                        <div class="suggest_option" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#eee'}">
-                            <span ng-repeat="frequentexercise in frequentExerciseList" ng-click="frequentExercise(frequentexercise.exerciseid)">{{frequentexercise.exercisename}}</span>
+                            <!-- @end #content -->
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Tab Content 3 -->
-<div class="tab-pane padding-top-5" id="tab-3">
-    <div class="row">
-        <div class="col-lg-12 col-md-12 col-sm-12 graphs">
-            <input type="radio" id="gainSpent" value="1"  ng-click="graphOne()" ng-model="graphs"/>
-            <label for="gainSpent">Gain vs Spent</label>
-            <input type="radio" id="nutrients" ng-click="graphTwo()" value="2" ng-model="graphs"/>
-            <label for="nutrients" >Nutrients Graph by Session</label>
-        </div>
-    </div>
-    <div class="graph-content" >
-        <div ng-if="loaded" class="col-lg-12 col-md-12 col-sm-12">
-            <div class="loader-style-dashboard"><br/><br/>
-                <div class="loader"></div>
-            </div>
-        </div>
-        <div ng-show="graphs==1" class="margin-top-5">
-            <div ng-hide="userFoodDiaryDataAll.length==0&&userExerciseDiaryDataAll==0" class="margin-top-10">
-                <div class="col-lg-4 col-md-4 col-sm-4 text-right gain-list">
-                    <div class="text-green text-bold">Gain</div>
-                    <hr/>
-                    <div class="suggest_option_graph" ng-nicescroll nice-option="{cursorcolor: '#777',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#f1f1f1'}">
-                        <p ng-repeat="food in userFoodDiaryDataAll.BreakFast" class="wrap suggest_list_style">
-                            {{food.foodname}}</p>
-                        <p ng-repeat="food in userFoodDiaryDataAll.Brunch" class="wrap suggest_list_style">
-                            {{food.foodname}}</p>
-                        <p ng-repeat="food in userFoodDiaryDataAll.Lunch" class="wrap suggest_list_style">
-                            {{food.foodname}}</p>
-                        <p ng-repeat="food in userFoodDiaryDataAll.Evening" class="wrap suggest_list_style">
-                            {{food.foodname}}</p>
-                        <p ng-repeat="food in userFoodDiaryDataAll.Dinner" class="wrap suggest_list_style">
-                            {{food.foodname}}</p>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-4 no-padding">
-                    <div id="gainVsSpent"></div>
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-4 gain-list">
-                    <div class="text-red text-bold">Spent</div>
-                    <hr/>
-                    <div class="suggest_option_graph" ng-nicescroll nice-option="{cursorcolor: '#777',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#f1f1f1'}">
-                        <p ng-repeat="exerciseDiaryData in userExerciseDiaryDataAll" class="wrap text-left suggest_list_style">
-                            {{exerciseDiaryData.Exercise.exercisename}}</p>
+                        </div>
+                        <!-- End Tab Panels -->
                     </div>
                 </div>
 
-            </div>
-            <div ng-show="userFoodDiaryDataAll.length==0&&userExerciseDiaryDataAll==0" class="text-center">
-                <br/><br/><br/>
-                <img src="../../images/no-update.png" width="150" height="150">
-                <h1 class="text-gray">NO UPDATE!!!</h1>
-            </div>
-        </div>
-        <div ng-show="graphs==2" class="margin-top-5">
-            <div class="col-lg-6 col-md-5 col-sm-5">
-                <h5 class="margin-bottom-5">Choose session</h5>
-                <select class="full-width main"  ng-model="graphSessionId" ng-change="loadSessionFood(graphSessionId)" name="graph" required>
-                    <option value="1">Breakfast</option>
-                    <option value="2">Brunch</option>
-                    <option value="3">Lunch</option>
-                    <option value="4">Snacks</option>
-                    <option value="5">Dinner</option>
-                </select>
-                <div ng-show="graphResponse==1">
-                    <h6 class="margin-tb-10">Foods Intaken</h6>
-                    <div class="foodlistGraph gain-list" ng-nicescroll nice-option="{cursorcolor: '#777',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#f1f1f1'}">
-                        <p ng-repeat="food in userSessionFoods" class="wrap suggest_list_style">{{food.foodname}}</p>
+                <div id="weight" class="contentblock hidden">
+                    <div class="outerline">
+                        <div ng-include src="'views/'+graph.status+'.html'"></div>
                     </div>
-                </div>
-            </div>
-            <div class="col-lg-6 col-md-7 col-sm-7">
-                <div ng-show="graphResponse==1">
-                    <h5>Nutrients Graph</h5>
-                    <div id="sessionGraph" class="sessionGraph margin-top-15"></div>
-                </div>
-                <div ng-show="graphResponse==0" class="text-center">
-                    <br/><br/>
-                    <img src="../../images/no-update.png" width="150" height="150">
-                    <h1 class="text-gray">NO UPDATE!!!</h1>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- @end #content -->
-</div>
-</div>
-<!-- End Tab Panels -->
-</div>
-</div>
+                </div><!-- @end #ideas-content -->
 
-<div id="weight" class="contentblock hidden">
-    <div class="outerline">
-        <div ng-include src="'views/'+graph.status+'.html'"></div>
-    </div>
-</div><!-- @end #ideas-content -->
-
-<div id="advice" class="contentblock hidden">
-    <div class="outerline">
-        <div class="col-lg-12 col-md-12 col-sm-12 margin-top-5" >
-            <h4 class="margin-bottom-15">Coach Advices</h4>
-            <div class="row min-height-200">
-                <div class="latest-posts-classic advice-carousel advice-carousel-style touch-carousel"  data-appeared-items="3" data-navigation="true" >
-                    <!-- Posts 1 -->
-                    <div ng-repeat="mycoachadvice in coachadvice">
-                        <div class="post-row hide-margin-bottom item col-lg-12 col-md-12 col-sm-12">
-                            <div ng-hide="mycoachadvice.coachname==''">
-                                <div class="advice-hover" ng-class="{activecoach:mycoachadvice.coachid==usercoachadvicedetails.coachid}" ng-click="setCoachDeatails(mycoachadvice)">
-                                    <img class="border-image img-shadow" width="100%" height="auto" ng-src="{{mycoachadvice.coachimage||trusted}}">
-                                    <h5 class="wrap advice-name">{{mycoachadvice.coachname}}</h5>
+                <div id="advice" class="contentblock hidden">
+                    <div class="outerline">
+                        <div class="col-lg-12 col-md-12 col-sm-12 margin-top-5" >
+                            <h4 class="margin-bottom-15">Coach Advices</h4>
+                            <div class="row min-height-200">
+                                <div class="latest-posts-classic advice-carousel advice-carousel-style touch-carousel"  data-appeared-items="3" data-navigation="true" >
+                                    <!-- Posts 1 -->
+                                    <div ng-repeat="mycoachadvice in coachadvice">
+                                        <div class="post-row hide-margin-bottom item col-lg-12 col-md-12 col-sm-12">
+                                            <div ng-hide="mycoachadvice.coachname==''">
+                                                <div class="advice-hover" ng-class="{activecoach:mycoachadvice.coachid==usercoachadvicedetails.coachid}" ng-click="setCoachDeatails(mycoachadvice)">
+                                                    <img class="border-image img-shadow" width="100%" height="auto" ng-src="{{mycoachadvice.coachimage||trusted}}">
+                                                    <h5 class="wrap advice-name">{{mycoachadvice.coachname}}</h5>
+                                                </div>
+                                            </div>
+                                            <div ng-show="mycoachadvice.coachname==''">
+                                                <img class="border-image" src="../../images/buy-coach.jpg" width="100%" height="auto">
+                                                <div class="advice-button"><a href="#coach-search" class="main-button redish_back ">Add Coach</a></div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div ng-show="mycoachadvice.coachname==''">
-                                <img class="border-image" src="../../images/buy-coach.jpg" width="100%" height="auto">
-                                <div class="advice-button"><a href="#coach-search" class="main-button redish_back ">Add Coach</a></div>
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12 margin-top-7">
+                                    <div ng-hide="usercoachadvicedetails.coachname==''">
+                                        <div ng-hide="usercoachadvicedetails.description==''" class="col-lg-12 col-md-12 col-sm-12 no-padding margin-top-5"><span class="pull-right text-italic">Last Updated On : {{usercoachadvicedetails.date}}</span>
+                                            <br/><div class="margin-top-7 wrap">{{usercoachadvicedetails.description}}</div>
+                                            <div class="margin-top-7 wrap text-italic">- {{usercoachadvicedetails.coachname}}</div>
+                                        </div>
+                                        <div ng-show="usercoachadvicedetails.description==''" class="col-lg-12 col-md-12 col-sm-12 no-padding margin-top-5">
+                                            <div class="col-lg-5 col-md-5 col-sm-5 no-padding text-right margin-top-30">
+                                                <img src="../../images/no-advice.png" width="120" height="120"/>
+                                            </div>
+                                            <div class="col-lg-7 col-md-7 col-sm-7">
+                                                <br/><br/>
+                                                <h1 class="text-gray">No Advice Available</h1>
+                                                <h5 class="text-gray margin-top-10"><i>Respected coach have not <br/>update their advice.</i></h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div ng-show="usercoachadvicedetails.coachname==''">
+                                        <div class="col-lg-5 col-md-5 col-sm-5 no-padding text-right margin-top-30">
+                                            <img src="../../images/no-coach-small.png" width="120" height="120"/>
+                                        </div>
+                                        <div class="col-lg-7 col-md-7 col-sm-7">
+                                            <br/><br/>
+                                            <h1 class="text-gray">No Coach Subscribed</h1>
+                                            <h5 class="text-gray margin-top-10"><i>Do Subscribe coach to <br/>gain advice from them.</i></h5>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12 margin-top-7">
-                    <div ng-hide="usercoachadvicedetails.coachname==''">
-                        <div ng-hide="usercoachadvicedetails.description==''" class="col-lg-12 col-md-12 col-sm-12 no-padding margin-top-5"><span class="pull-right text-italic">Last Updated On : {{usercoachadvicedetails.date}}</span>
-                            <br/><div class="margin-top-7 wrap">{{usercoachadvicedetails.description}}</div>
-                            <div class="margin-top-7 wrap text-italic">- {{usercoachadvicedetails.coachname}}</div>
-                        </div>
-                        <div ng-show="usercoachadvicedetails.description==''" class="col-lg-12 col-md-12 col-sm-12 no-padding margin-top-5">
-                            <div class="col-lg-5 col-md-5 col-sm-5 no-padding text-right margin-top-30">
-                                <img src="../../images/no-advice.png" width="120" height="120"/>
+                </div><!-- @end #ideas-content -->
+            </div><!-- @end #content -->
+        </div>
+        <div class="dashboard-3 hidden-sm" ng-show="historyReport==0">
+            <div id="update">
+                <div class="row">
+                    <h5 class="col-md-12 margin-bottom-7">Today's Update</h5>
+                    <!--<div class="col-lg-4 hidden-md">
+                        <img ng-src="{{userProfileImage | trusted}}">
+                    </div>
+                    <div class="col-lg-8 col-md-12 padding-response">
+                        <h4 class="one-line-shade" title="{{userProfile.name}}">{{userProfile.name}}&nbsp;</h4>
+                        <p>{{userProfile.phone}}&nbsp;</p>
+                        <p class="one-line-shade" title="{{userProfile.emailid}}">{{userProfile.emailid}}&nbsp;</p>
+                        <div class="margin-top-7">
+                            <div class="col-lg-4 col-md-4 no-padding">
+                                <h6>Age</h6>
+                                <h6>Weight</h6>
+                                <h6>Height</h6>
                             </div>
-                            <div class="col-lg-7 col-md-7 col-sm-7">
-                                <br/><br/>
-                                <h1 class="text-gray">No Advice Available</h1>
-                                <h5 class="text-gray margin-top-10"><i>Respected coach have not <br/>update their advice.</i></h5>
+                            <div class="col-lg-8 col-md-8">
+                                <h6>{{userProfile.age}}<small>&nbsp;Years</small></h6>
+                                <h6>{{demography.weight}}<small>&nbsp;kgs</small></h6>
+                                <h6>{{demography.height}}<small>&nbsp;cm</small></h6>
                             </div>
                         </div>
-                    </div>
-                    <div ng-show="usercoachadvicedetails.coachname==''">
-                        <div class="col-lg-5 col-md-5 col-sm-5 no-padding text-right margin-top-30">
-                            <img src="../../images/no-coach-small.png" width="120" height="120"/>
+                    </div>-->
+
+                        <!--<div class="col-lg-6 col-md-6 col-sm-6 text-center">
+                            <h1 class="fa-5x fa fa-tachometer text-green"></h1>
+                            <h4 class="margin-top-10">UPDATE WEIGHT</h4>
+                        </div>-->
+
+                        <div class="col-lg-12 col-md-12 col-sm-12 margin-bottom-5">
+
+                            <h6>Budget Vs Net &nbsp;-&nbsp;
+                                <span ng-show="budgetDetails.OverorUnderStatus==1"><span class="fa fa fa-thumbs-down text-red">&nbsp;&nbsp;</span>Over Budget</span>
+                                <span ng-show="budgetDetails.OverorUnderStatus==2"><span class="fa fa fa-thumbs-up text-green">&nbsp;&nbsp;</span>Under Budget</span>
+                            </span>
+                            </h6>
                         </div>
-                        <div class="col-lg-7 col-md-7 col-sm-7">
-                            <br/><br/>
-                            <h1 class="text-gray">No Coach Subscribed</h1>
-                            <h5 class="text-gray margin-top-10"><i>Do Subscribe coach to <br/>gain advice from them.</i></h5>
+                        <div class="col-lg-5 col-md-12 col-sm-12 margin-top-10">
+                            <div class="circle-wrapper">
+                                <div class="circle-progress ng-cloak font-14" ng-style="getStyle()">{{Net}}</div>
+                                <div round-progress
+                                     max="Budget"
+                                     current="Net"
+                                     color="{{currentGainColour}}"
+                                     bgcolor="{{ bgColor }}"
+                                     radius="37"
+                                     semi="isSemi"
+                                     rounded="rounded"
+                                     stroke="6"
+                                     clockwise="clockwise"
+                                     responsive="responsive"
+                                     duration="{{ duration }}"
+                                     animation="{{ currentAnimation }}"
+                                     offset="{{ offset }}">
+                                </div>
+                            </div>
+                            <p class="text-gray">of {{Budget}} cals.</p>
+                        </div>
+
+                    <div class="col-lg-7 col-md-12 col-sm-12 no-padding margin-top-5">
+                        <div class="label-update">
+                            <span class="label-text">Budget</span>
+                            <span class="label-count blue">{{budgetDetails.Budget}}</span>
+                        </div>
+                        <div class="label-update">
+                            <span class="label-text">Gain</span>
+                            <span class="label-count green">{{budgetDetails.Intake}}</span>
+                        </div>
+                        <div class="label-update">
+                            <span class="label-text">Brunt</span>
+                            <span class="label-count red">{{budgetDetails.Burnt}}</span>
+                        </div>
+                        <div class="label-update">
+                            <span class="label-text">Net</span>
+                            <span class="label-count orange">{{budgetDetails.Net}}</span>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div><!-- @end #ideas-content -->
-</div><!-- @end #content -->
-</div>
-<div class="dashboard-3 hidden-sm" ng-show="historyReport==0">
-    <div id="update">
-        <div class="row">
-            <h5 class="col-md-12 margin-bottom-7">Today's Update</h5>
-            <!--<div class="col-lg-4 hidden-md">
-                <img ng-src="{{userProfileImage | trusted}}">
-            </div>
-            <div class="col-lg-8 col-md-12 padding-response">
-                <h4 class="one-line-shade" title="{{userProfile.name}}">{{userProfile.name}}&nbsp;</h4>
-                <p>{{userProfile.phone}}&nbsp;</p>
-                <p class="one-line-shade" title="{{userProfile.emailid}}">{{userProfile.emailid}}&nbsp;</p>
-                <div class="margin-top-7">
-                    <div class="col-lg-4 col-md-4 no-padding">
-                        <h6>Age</h6>
-                        <h6>Weight</h6>
-                        <h6>Height</h6>
-                    </div>
-                    <div class="col-lg-8 col-md-8">
-                        <h6>{{userProfile.age}}<small>&nbsp;Years</small></h6>
-                        <h6>{{demography.weight}}<small>&nbsp;kgs</small></h6>
-                        <h6>{{demography.height}}<small>&nbsp;cm</small></h6>
+                    <div class="col-lg-12 col-md-12 col-sm-12 margin-top-5">
+                        <h6 ng-show="budgetDetails.OverorUnderStatus==1"><div class="label-danger">You are consumed {{budgetDetails.OverorUnderValue}} more calories. Do Exercise.</div></h6>
+                        <h6 ng-show="budgetDetails.OverorUnderStatus==2"><div class="label-success">You could take {{budgetDetails.OverorUnderValue}} more calories to reach Budget Value.</div></h6>
                     </div>
                 </div>
-            </div>-->
-
-            <!--<div class="col-lg-6 col-md-6 col-sm-6 text-center">
-                <h1 class="fa-5x fa fa-tachometer text-green"></h1>
-                <h4 class="margin-top-10">UPDATE WEIGHT</h4>
-            </div>-->
-
-            <div class="col-lg-12 col-md-12 col-sm-12 margin-bottom-5">
-
-                <h6>Budget Vs Net &nbsp;-&nbsp;
-                    <span ng-show="budgetDetails.OverorUnderStatus==1"><span class="fa fa fa-thumbs-down text-red">&nbsp;&nbsp;</span>Over Budget</span>
-                    <span ng-show="budgetDetails.OverorUnderStatus==2"><span class="fa fa fa-thumbs-up text-green">&nbsp;&nbsp;</span>Under Budget</span>
-                    </span>
-                </h6>
-            </div>
-            <div class="col-lg-5 col-md-12 col-sm-12 margin-top-10">
-                <div class="circle-wrapper">
-                    <div class="circle-progress ng-cloak font-14" ng-style="getStyle()">{{Net}}</div>
-                    <div round-progress
-                         max="Budget"
-                         current="Net"
-                         color="{{currentGainColour}}"
-                         bgcolor="{{ bgColor }}"
-                         radius="37"
-                         semi="isSemi"
-                         rounded="rounded"
-                         stroke="6"
-                         clockwise="clockwise"
-                         responsive="responsive"
-                         duration="{{ duration }}"
-                         animation="{{ currentAnimation }}"
-                         offset="{{ offset }}">
-                    </div>
+                <div class="margin-tb-5">
+                    <hr/>
                 </div>
-                <p class="text-gray">of {{Budget}} cals.</p>
-            </div>
-
-            <div class="col-lg-7 col-md-12 col-sm-12 no-padding margin-top-5">
-                <div class="label-update">
-                    <span class="label-text">Budget</span>
-                    <span class="label-count blue">{{budgetDetails.Budget}}</span>
-                </div>
-                <div class="label-update">
-                    <span class="label-text">Gain</span>
-                    <span class="label-count green">{{budgetDetails.Intake}}</span>
-                </div>
-                <div class="label-update">
-                    <span class="label-text">Brunt</span>
-                    <span class="label-count red">{{budgetDetails.Burnt}}</span>
-                </div>
-                <div class="label-update">
-                    <span class="label-text">Net</span>
-                    <span class="label-count orange">{{budgetDetails.Net}}</span>
-                </div>
-            </div>
-            <div class="col-lg-12 col-md-12 col-sm-12 margin-top-5">
-                <h6 ng-show="budgetDetails.OverorUnderStatus==1"><div class="label-danger">You are consumed {{budgetDetails.OverorUnderValue}} more calories. Do Exercise.</div></h6>
-                <h6 ng-show="budgetDetails.OverorUnderStatus==2"><div class="label-success">You could take {{budgetDetails.OverorUnderValue}} more calories to reach Budget Value.</div></h6>
+                <h6>Nutrients Intake</h6>
+                <div id="dailyIntake" class="margin-top-15"></div>
             </div>
         </div>
-        <div class="margin-tb-5">
-            <hr/>
-        </div>
-        <h6>Nutrients Intake</h6>
-        <div id="dailyIntake" class="margin-top-15"></div>
-    </div>
-</div>
-<div class="dashboard-4" ng-show="historyReport==1">
-    <div id="contentHistory">
-        <div id="history"  class="contentblock hidden">
-            <div class="col-lg-12 col-md-12 col-sm-12 no-padding margin-top-10">
-                <div class="col-lg-7 col-md-7 col-sm-7 no-padding">
-                    <!-- Nav Tabs -->
-                    <!--<ul class="nav nav-tabs">
-                        <li class="active"><a class="historyOverride" href="#tab-4" data-toggle="tab" onclick="return false;" ng-click="setHistoryType(1)"><span class="hidden-md hidden-sm">Calories</span> Intaken</a></li>
-                        <li><a href="#tab-4" class="historyOverride" data-toggle="tab" onclick="return false;" ng-click="setHistoryType(2)"><span class="hidden-md hidden-sm">Calories</span> Burnt</a></li>
-                        <li><a href="#tab-4" class="historyOverride" data-toggle="tab" onclick="return false;" ng-click="setHistoryType(3)">Exercise Minutes</a></li>
-                        <li><a href="#tab-4" class="historyOverride" data-toggle="tab" onclick="return false;" ng-click="setHistoryType(4)">Weight Log</a></li>
-                    </ul>-->
+        <div class="dashboard-4" ng-show="historyReport==1">
+            <div id="contentHistory">
+                <div id="history"  class="contentblock hidden">
+                    <div class="col-lg-12 col-md-12 col-sm-12 no-padding margin-top-10">
+                        <div class="col-lg-7 col-md-7 col-sm-7 no-padding">
+                            <!-- Nav Tabs -->
+                            <!--<ul class="nav nav-tabs">
+                                <li class="active"><a class="historyOverride" href="#tab-4" data-toggle="tab" onclick="return false;" ng-click="setHistoryType(1)"><span class="hidden-md hidden-sm">Calories</span> Intaken</a></li>
+                                <li><a href="#tab-4" class="historyOverride" data-toggle="tab" onclick="return false;" ng-click="setHistoryType(2)"><span class="hidden-md hidden-sm">Calories</span> Burnt</a></li>
+                                <li><a href="#tab-4" class="historyOverride" data-toggle="tab" onclick="return false;" ng-click="setHistoryType(3)">Exercise Minutes</a></li>
+                                <li><a href="#tab-4" class="historyOverride" data-toggle="tab" onclick="return false;" ng-click="setHistoryType(4)">Weight Log</a></li>
+                            </ul>-->
 
-                    <ul class="horizon-swiper">
-                        <li class="horizon-item active">
-                            <a class="historyOverride" href="#tab-4" data-toggle="tab" onclick="return false;" ng-click="setHistoryType(1)"><span class="hidden-md hidden-sm">Calories</span>&nbsp;Intaken</a>
-                        </li>
-                        <li class="horizon-item">
-                            <a href="#tab-4" class="historyOverride" data-toggle="tab" onclick="return false;" ng-click="setHistoryType(2)"><span class="hidden-md hidden-sm">Calories</span>&nbsp;Burnt</a>
-                        </li>
-                        <li class="horizon-item">
-                            <a href="#tab-4" class="historyOverride" data-toggle="tab" onclick="return false;" ng-click="setHistoryType(3)">Exercise&nbsp;Minutes</a>
-                        </li>
-                        <li class="horizon-item">
-                            <a href="#tab-4" class="historyOverride" data-toggle="tab" onclick="return false;" ng-click="setHistoryType(4)">Weight&nbsp;Log</a>
-                        </li>
-                        <li class="horizon-item">
-                            <a class="historyOverride" href="#tab-4" data-toggle="tab" onclick="return false;" ng-click="setHistoryType(5)">Budget vs Net Log</a>
-                        </li>
-                        <li class="horizon-item last"></li>
-                    </ul>
+                            <ul class="horizon-swiper">
+                                <li class="horizon-item active">
+                                    <a class="historyOverride" href="#tab-4" data-toggle="tab" onclick="return false;" ng-click="setHistoryType(1)"><span class="hidden-md hidden-sm">Calories</span>&nbsp;Intaken</a>
+                                </li>
+                                <li class="horizon-item">
+                                    <a href="#tab-4" class="historyOverride" data-toggle="tab" onclick="return false;" ng-click="setHistoryType(2)"><span class="hidden-md hidden-sm">Calories</span>&nbsp;Burnt</a>
+                                </li>
+                                <li class="horizon-item">
+                                    <a href="#tab-4" class="historyOverride" data-toggle="tab" onclick="return false;" ng-click="setHistoryType(3)">Exercise&nbsp;Minutes</a>
+                                </li>
+                                <li class="horizon-item">
+                                    <a href="#tab-4" class="historyOverride" data-toggle="tab" onclick="return false;" ng-click="setHistoryType(4)">Weight&nbsp;Log</a>
+                                </li>
+                                <li class="horizon-item">
+                                    <a class="historyOverride" href="#tab-4" data-toggle="tab" onclick="return false;" ng-click="setHistoryType(5)">Budget vs Net Log</a>
+                                </li>
+                                <li class="horizon-item last"></li>
+                            </ul>
 
-                </div>
+                        </div>
 
-                <div class="col-lg-5 col-md-5 col-sm-5 padding-left-0 padding-right-10">
-                    <div class="pull-right">
-                        <div class="input-group">
-                            <input type="text" id="history-graph-date" class="history_input pull-right" block>
+                        <div class="col-lg-5 col-md-5 col-sm-5 padding-left-0 padding-right-10">
+                            <div class="pull-right">
+                                <div class="input-group">
+                                    <input type="text" id="history-graph-date" class="history_input pull-right" block>
                                     <span class="pull-right margin-top-5 text-right"><i class="fa fa-calendar"></i>&nbsp;Date <span class="hidden-md hidden-sm">Range</span>:&nbsp;
                                     </span>
                                     <span class="input-group-btn">
                                         <button class="btn history" ng-click="doGetHistoryReport()" type="button">Go!</button>
                                     </span>
-                        </div><!-- /input-group -->
-                    </div>
-                </div>
-            </div>
-
-            <input id="history-start" hidden />
-            <input id="history-end" hidden/>
-
-            <div class="col-lg-12 col-md-12 col-sm-12 padding-rl-10">
-                <!-- Tab panels -->
-                <div class="tab-content contentHistoryOverride">
-                    <!-- Tab Content 1 -->
-                    <div class="tab-pane in active padding-top-5" id="tab-4">
-                        <div ng-if="loaded" class="col-lg-12 col-md-12 col-sm-12">
-                            <div class="loader-style-dashboard"><br/><br/>
-                                <div class="loader"></div>
-                            </div>
-                        </div>
-                        <div class="col-lg-12 col-md-12 col-sm-12">
-                            <div ng-show="isHistoryEmpty==0">
-                                <div id="historyGraph" class="margin-top-5"></div>
-                            </div>
-                            <div ng-show="isHistoryEmpty==1" class="text-center">
-                                <br/><br/><br/>
-                                <img src="../../images/no-dates.png" width="200" height="200">
-                                <h1 class="text-gray">NO DATES SELECTED</h1>
+                                </div><!-- /input-group -->
                             </div>
                         </div>
                     </div>
-                </div>
-                <!-- End Tab Panels -->
+
+                    <input id="history-start" hidden />
+                    <input id="history-end" hidden/>
+
+                    <div class="col-lg-12 col-md-12 col-sm-12 padding-rl-10">
+                        <!-- Tab panels -->
+                        <div class="tab-content contentHistoryOverride">
+                            <!-- Tab Content 1 -->
+                            <div class="tab-pane in active padding-top-5" id="tab-4">
+                                <div ng-if="loaded" class="col-lg-12 col-md-12 col-sm-12">
+                                    <div class="loader-style-dashboard"><br/><br/>
+                                        <div class="loader"></div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                    <div ng-show="isHistoryEmpty==0">
+                                        <div id="historyGraph" class="margin-top-5"></div>
+                                    </div>
+                                    <div ng-show="isHistoryEmpty==1" class="text-center">
+                                        <br/><br/><br/>
+                                        <img src="../../images/no-dates.png" width="200" height="200">
+                                        <h1 class="text-gray">NO DATES SELECTED</h1>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End Tab Panels -->
+                    </div>
+                </div><!-- @end #ideas-content -->
             </div>
-        </div><!-- @end #ideas-content -->
-    </div>
-</div>
-</div><!-- @end #w -->
+        </div>
+    </div><!-- @end #w -->
 
 
 </div>
@@ -783,23 +783,23 @@
         <div class="common_model">
 
             <form name="foodSuggestForm" id="suggestform" novalidate>
-                <p>Food Name:</p>
-                <input type="text" name="foodname" data-foodid="foodSuggest.foodid" ng-model="foodSuggest.foodname" ng-pattern="/^ *([a-zA-Z]+ ?)+ *$/" maxlength="100" foodexists required />
+            <p>Food Name:</p>
+            <input type="text" name="foodname" data-foodid="foodSuggest.foodid" ng-model="foodSuggest.foodname" ng-pattern="/^ *([a-zA-Z]+ ?)+ *$/" maxlength="100" foodexists required />
              <span ng-show="foodSuggestForm.foodname.$dirty&&foodSuggestForm.foodname.$invalid">
                                 <span class="error-message" ng-show="foodSuggestForm.foodname.$error.required"><span>Required.</span></span>
                              <span class="error-message" ng-show="foodSuggestForm.foodname.$error.pattern"><span>Enter&nbsp;Valid&nbsp;name.</span></span>
                  <span class="error-message" ng-show="foodSuggestForm.foodname.$error.foodexists"><span>Food&nbsp;Already&nbsp;Exists</span></span>
                          </span>
-                <p>Food Description:</p>
-                <textarea type="text" class="height-150" name="fooddescription" ng-model="foodSuggest.fooddescription" maxlength="300" required/></textarea>
+            <p>Food Description:</p>
+            <textarea type="text" class="height-150" name="fooddescription" ng-model="foodSuggest.fooddescription" maxlength="300" required/></textarea>
                 <span ng-show="foodSuggestForm.fooddescription.$dirty&&foodSuggestForm.fooddescription.$invalid">
                     <span class="error-message textarea-errormessage-110" ng-show="foodSuggestForm.fooddescription.$error.required"><span>Required.</span></span>
                  </span>
-                <div class="action_btns margin-top-20">
-                    <div class="one_half"><a href="" class="btn btn_blue" ng-disabled="foodSuggestForm.$invalid" ng-click="doAddSuggestFood()">Suggest</a></div>
-                    <div class="one_half last modal_close"><a class="btn btn_red">Close</a></div>
-                </div>
-            </form>
+            <div class="action_btns margin-top-20">
+                <div class="one_half"><a href="" class="btn btn_blue" ng-disabled="foodSuggestForm.$invalid" ng-click="doAddSuggestFood()">Suggest</a></div>
+                <div class="one_half last modal_close"><a class="btn btn_red">Close</a></div>
+            </div>
+                </form>
         </div>
     </section>
 </div>
@@ -816,22 +816,22 @@
         <div class="user-success" ng-show="isAddExercise">Thanks&nbsp;for&nbsp;the&nbsp;suggestion.You&nbsp;will&nbsp;<br/>receive&nbsp;a&nbsp;mail&nbsp;once&nbsp;food&nbsp;is approved!!</div>
         <div class="common_model">
             <form name="exerciseSuggestForm" novalidate>
-                <p>Exercise Name:</p>
-                <input type="text" name="exercisename" data-exerciseid="exerciseSuggest.exerciseid" ng-model="exerciseSuggest.exercisename" ng-pattern="/^ *([a-zA-Z0-9]+ ?)+ *$/" maxlength="100" exerciseexists required />
+            <p>Exercise Name:</p>
+            <input type="text" name="exercisename" data-exerciseid="exerciseSuggest.exerciseid" ng-model="exerciseSuggest.exercisename" ng-pattern="/^ *([a-zA-Z0-9]+ ?)+ *$/" maxlength="100" exerciseexists required />
             <span ng-show="exerciseSuggestForm.exercisename.$dirty&&exerciseSuggestForm.exercisename.$invalid">
                                 <span class="error-message" ng-show="exerciseSuggestForm.exercisename.$error.required"><span>Required.</span></span>
                              <span class="error-message" ng-show="exerciseSuggestForm.exercisename.$error.pattern"><span>Enter&nbsp;Valid&nbsp;name.</span></span>
              <span class="error-message" ng-show="exerciseSuggestForm.exercisename.$error.exerciseexists"><span>Exercise&nbsp;already&nbsp;exists.</span></span>
             </span>
-                <p>Exercise Description:</p>
-                <textarea type="text" class="height-150" name="description" ng-model="exerciseSuggest.description"maxlength="300"  required/></textarea>
+            <p>Exercise Description:</p>
+            <textarea type="text" class="height-150" name="description" ng-model="exerciseSuggest.description"maxlength="300"  required/></textarea>
              <span ng-show="exerciseSuggestForm.description.$dirty&&exerciseSuggestForm.description.$invalid">
                     <span class="error-message textarea-errormessage-110" ng-show="exerciseSuggestForm.description.$error.required"><span>Required.</span></span>
                  </span>
-                <div class="action_btns margin-top-20">
-                    <div class="one_half"><a href="" class="btn btn_blue" ng-disabled="exerciseSuggestForm.$invalid" ng-click="doAddSuggestExercise()">Suggest</a></div>
-                    <div class="one_half last modal_close"><a class="btn btn_red">Cancel</a></div>
-                </div>
+            <div class="action_btns margin-top-20">
+                <div class="one_half"><a href="" class="btn btn_blue" ng-disabled="exerciseSuggestForm.$invalid" ng-click="doAddSuggestExercise()">Suggest</a></div>
+                <div class="one_half last modal_close"><a class="btn btn_red">Cancel</a></div>
+            </div>
             </form>
         </div>
     </section>
@@ -866,21 +866,21 @@
                     </div>
                     <div class="col-lg-7 col-md-7 col-sm-7">
                         <form name="FoodAddForm" novalidate>
-                            <div class="col-lg-12 col-md-12 col-sm-12 no-padding">
-                                <h5 class="margin-top-10">Select Measure:</h5>
-                                <select name="measure" ng-model="userFood.measure" ng-options="measure.measurename for measure in userSelectedFoodDetails.measureid track by measure.measureid" ng-change="doCalculateCalories()" required>
-                                    <option value="">-- Select Measure --</option>
-                                </select>
+                        <div class="col-lg-12 col-md-12 col-sm-12 no-padding">
+                        <h5 class="margin-top-10">Select Measure:</h5>
+                            <select name="measure" ng-model="userFood.measure" ng-options="measure.measurename for measure in userSelectedFoodDetails.measureid track by measure.measureid" ng-change="doCalculateCalories()" required>
+                                <option value="">-- Select Measure --</option>
+                            </select>
                              <span ng-show="FoodAddForm.measure.$dirty&&FoodAddForm.measure.$invalid">
                                      <span class="error-message" ng-show="FoodAddForm.measure.$error.required"><span>Required.</span></span>
                              </span>
-                                <h5 class="margin-top-10">Value</h5>
-                                <input type="text"   ng-disabled="!userFood.measure" name="servings" ng-model="userFood.servings" ng-change="doCalculateCalories()" maxlength="7" required validate-Float1>
+                        <h5 class="margin-top-10">Value</h5>
+                        <input type="text"   ng-disabled="!userFood.measure" name="servings" ng-model="userFood.servings" ng-change="doCalculateCalories()" maxlength="7" required validate-Float1>
                         <span ng-show="FoodAddForm.servings.$dirty&&FoodAddForm.servings.$invalid">
                                  <span class="error-message" ng-show="FoodAddForm.servings.$error.required"><span>Required.</span></span>
                              <span class="error-message" ng-show="!FoodAddForm.servings.$error.required&&FoodAddForm.servings.$error.validateFloat1"><span>Invalid&nbsp;data.</span></span>
                             </span>
-                            </div>
+                         </div>
                         </form>
                     </div>
 
@@ -1057,12 +1057,12 @@
             <form name="updateWeightForm" novalidate>
                 <p>Current Weight</p>
                 <input type="text"  name="weight" ng-model="weightlog" maxlength="5" required validate-Float1/>
-                <span ng-show="updateWeightForm.weight.$dirty&&updateWeightForm.weight.$invalid">
+                <span ng-show="updateWeightForm.weight.$dirty && updateWeightForm.weight.$invalid">
                     <span class="error-message" ng-show="updateWeightForm.weight.$error.required"><span>Required.</span></span>
                     <span class="error-message" ng-show="!updateWeightForm.weight.$error.required&&updateWeightForm.weight.$error.validateFloat1"><span>Invalid&nbsp;Data.</span></span>
                 </span>
                 <div class="action_btns margin-top-20">
-                    <div class="one_half"><a class="btn btn_red modal_close" onclick="return false" ng-disabled="updateWeightForm.$invalid" ng-click="updateWeightLog()">Proceed</a></div>
+                    <div class="one_half"><a class="btn btn_red modal_close" onclick="return false" ng-disabled="updateWeightForm.$invalid" ng-click="updateWeightLogAndEndDate(choice)">Proceed</a></div>
                     <div class="one_half last modal_close"><a onclick="return false;" class="btn back_btn">Cancel</a></div>
                 </div>
             </form>
@@ -1095,58 +1095,58 @@
     <div class="update-weight-margin-adjust clearfix">
         <form id="update-weight-form" class="clearfix" name="weightLogForm" novalidate>
             <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12 margin-bottom-5">
+            <div class="col-lg-12 col-md-12 col-sm-12 margin-bottom-5">
 
-                    <h6>Budget Vs Net &nbsp;-&nbsp;
-                        <span ng-show="budgetDetails.OverorUnderStatus==1"><span class="fa fa fa-thumbs-down text-red">&nbsp;&nbsp;</span>Over Budget</span>
-                        <span ng-show="budgetDetails.OverorUnderStatus==2"><span class="fa fa fa-thumbs-up text-green">&nbsp;&nbsp;</span>Under Budget</span>
-                        </span>
-                    </h6>
-                </div>
-                <div class="col-lg-6 col-md-6 col-sm-6 margin-top-10 text-center">
-                    <div class="circle-wrapper">
-                        <div class="circle-progress ng-cloak font-14" ng-style="getStyle()">{{Net}}</div>
-                        <div round-progress
-                             max="Budget"
-                             current="Net"
-                             color="{{currentGainColour}}"
-                             bgcolor="{{ bgColor }}"
-                             radius="37"
-                             semi="isSemi"
-                             rounded="rounded"
-                             stroke="6"
-                             clockwise="clockwise"
-                             responsive="responsive"
-                             duration="{{ duration }}"
-                             animation="{{ currentAnimation }}"
-                             offset="{{ offset }}">
-                        </div>
+                <h6>Budget Vs Net &nbsp;-&nbsp;
+                    <span ng-show="budgetDetails.OverorUnderStatus==1"><span class="fa fa fa-thumbs-down text-red">&nbsp;&nbsp;</span>Over Budget</span>
+                    <span ng-show="budgetDetails.OverorUnderStatus==2"><span class="fa fa fa-thumbs-up text-green">&nbsp;&nbsp;</span>Under Budget</span>
+                    </span>
+                </h6>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6 margin-top-10 text-center">
+                <div class="circle-wrapper">
+                    <div class="circle-progress ng-cloak font-14" ng-style="getStyle()">{{Net}}</div>
+                    <div round-progress
+                         max="Budget"
+                         current="Net"
+                         color="{{currentGainColour}}"
+                         bgcolor="{{ bgColor }}"
+                         radius="37"
+                         semi="isSemi"
+                         rounded="rounded"
+                         stroke="6"
+                         clockwise="clockwise"
+                         responsive="responsive"
+                         duration="{{ duration }}"
+                         animation="{{ currentAnimation }}"
+                         offset="{{ offset }}">
                     </div>
-                    <div class="text-gray">of {{Budget}} cals.</div>
                 </div>
+                <div class="text-gray">of {{Budget}} cals.</div>
+            </div>
 
-                <div class="col-lg-6 col-md-6 col-sm-6 no-padding margin-top-5">
-                    <div class="label-update">
-                        <span class="label-text">Budget</span>
-                        <span class="label-count blue">{{budgetDetails.Budget}}</span>
-                    </div>
-                    <div class="label-update">
-                        <span class="label-text">Gain</span>
-                        <span class="label-count green">{{budgetDetails.Intake}}</span>
-                    </div>
-                    <div class="label-update">
-                        <span class="label-text">Brunt</span>
-                        <span class="label-count red">{{budgetDetails.Burnt}}</span>
-                    </div>
-                    <div class="label-update">
-                        <span class="label-text">Net</span>
-                        <span class="label-count orange">{{budgetDetails.Net}}</span>
-                    </div>
+            <div class="col-lg-6 col-md-6 col-sm-6 no-padding margin-top-5">
+                <div class="label-update">
+                    <span class="label-text">Budget</span>
+                    <span class="label-count blue">{{budgetDetails.Budget}}</span>
                 </div>
-                <div class="col-lg-12 col-md-12 col-sm-12 margin-top-5">
-                    <h6 ng-show="budgetDetails.OverorUnderStatus==1"><div class="label-danger">You are consumed {{budgetDetails.OverorUnderValue}} more calories. Do Exercise.</div></h6>
-                    <h6 ng-show="budgetDetails.OverorUnderStatus==2"><div class="label-success">You could take {{budgetDetails.OverorUnderValue}} more calories to reach Budget Value.</div></h6>
+                <div class="label-update">
+                    <span class="label-text">Gain</span>
+                    <span class="label-count green">{{budgetDetails.Intake}}</span>
                 </div>
+                <div class="label-update">
+                    <span class="label-text">Brunt</span>
+                    <span class="label-count red">{{budgetDetails.Burnt}}</span>
+                </div>
+                <div class="label-update">
+                    <span class="label-text">Net</span>
+                    <span class="label-count orange">{{budgetDetails.Net}}</span>
+                </div>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 margin-top-5">
+                <h6 ng-show="budgetDetails.OverorUnderStatus==1"><div class="label-danger">You are consumed {{budgetDetails.OverorUnderValue}} more calories. Do Exercise.</div></h6>
+                <h6 ng-show="budgetDetails.OverorUnderStatus==2"><div class="label-success">You could take {{budgetDetails.OverorUnderValue}} more calories to reach Budget Value.</div></h6>
+            </div>
             </div>
         </form>
 
@@ -1354,7 +1354,7 @@
 
 <script>
     function mouseover(e){
-        e.setAttribute ('scrollamount', 0, 0);e.stop();
+         e.setAttribute ('scrollamount', 0, 0);e.stop();
     }
 
     function mouseout(e){

@@ -3,12 +3,19 @@
 
 <div class="white-background" ng-cloak class="ng-cloak">
     <h3 class="text-center margin-tb-10 text-green text-bold">Your Goal</h3>
+
+    <div class="col-lg-12 col-md-12 col-sm-12 margin-top-10 margin-bottom-10"  ng-show="goalPossibilitycheck==0">
+        <h5><div class="label-danger">Your goal is not possible to complete.</div></h5>
+    </div>
+
+
     <div class="col-md-12 col-sm-12 no-padding">
+
         <div class="col-md-6 col-sm-6">Plan Type<span class="pull-right">:</span></div>
         <div class="col-md-6 col-sm-6 no-padding">
             <span ng-show="goalDetails.planType == '1'">Maintain Weight</span>
-            <span ng-show="goalDetails.planType == '2'">Weight Gain</span>
-            <span ng-show="goalDetails.planType == '3'">Weight Loss</span>
+            <span ng-show="goalDetails.planType == '3'">Weight Gain</span>
+            <span ng-show="goalDetails.planType == '2'">Weight Loss</span>
         </div>
     </div>
     <div class="col-md-12 col-sm-12 no-padding">
@@ -16,8 +23,8 @@
         <div class="col-md-6 col-sm-6 no-padding">
             <span ng-show="goalDetails.planchoice == '5'">Custom</span>
             <span ng-show="goalDetails.planchoice != '5'">
-                <span ng-show="goalDetails.planType == '2'">Gain</span>
-                <span ng-show="goalDetails.planType == '3'">Lose</span>
+                <span ng-show="goalDetails.planType == '3'">Gain</span>
+                <span ng-show="goalDetails.planType == '2'">Lose</span>
                 <span ng-show="goalDetails.planchoice == '1'">1/4</span>
                 <span ng-show="goalDetails.planchoice == '2'">1/2</span>
                 <span ng-show="goalDetails.planchoice == '3'">3/4</span>
@@ -62,7 +69,7 @@
     </div>
     <div ng-hide="goalExpired" class="col-md-12 col-sm-12 no-padding">
         <div class="col-md-6 col-sm-6">Current Weight<span class="pull-right">:</span></div>
-        <div class="col-md-6 col-sm-6 no-padding">{{demography.weight}} <small><span ng-show="userProfile.unitPreference==1">Kgs</span><span ng-show="userProfile.unitPreference==2">lbs</span></small></div>
+        <div class="col-md-6 col-sm-6 no-padding">{{weightlog}} <small><span ng-show="userProfile.unitPreference==1">Kgs</span><span ng-show="userProfile.unitPreference==2">lbs</span></small></div>
     </div>
     <div ng-show="goalExpired" class="col-md-12 col-sm-12 no-padding">
         <div class="col-md-6 col-sm-6">Achieved Weight<span class="pull-right">:</span></div>
@@ -83,9 +90,9 @@
     </div>
 
     <div class="col-md-12 col-sm-12 margin-top-10 text-center no-padding">
-        <a class="target_button green_button" ng-click="updateGoalDetails(demography.weight)">Update Goal</a>
+        <span ng-show="goalDetails.planType==2"><a class="target_button green_button" ng-click="updateGoalDetails(weightlog)">Edit Goal</a></span>
         <span ng-show="viewGraphButton"><a class="target_button orange_button" ng-click="doGetWeightLogGraph()">View Graph</a></span>
-        <a class="target_button red_button" ng-click="deteteGoal()">Reset Goal</a>
+        <a href="#demography" class="target_button red_button" >Change Plan</a>
     </div>
 </div>
 
