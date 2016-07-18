@@ -176,10 +176,10 @@
                                 <span>Weight <small>(<span ng-show="userProfile.unitPreference==1">Kgs</span><span ng-show="userProfile.unitPreference==2">lbs</span>)</small><span class="pull-right">:</span></span>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6 margin-top-10 no-padding-right padding-left-8">
-                                <input class="profile_input weightoverride" id="weightLog" name="weight" ng-model="weightlog" maxlength="5" required validate-Float1/>
-                                <span ng-show="weightLogForm.weight.$dirty&&weightLogForm.weight.$invalid">
-                                    <span class="error-message textarea-errormessage10" ng-show="weightLogForm.weight.$error.required"><span>Required.</span></span>
-                                    <span class="error-message textarea-errormessage10" ng-show="!weightLogForm.weight.$error.required&&weightLogForm.weight.$error.validateFloat1"><span>Invalid&nbsp;Data.</span></span>
+                                <input class="profile_input weightoverride" id="weightLog" name="curweight" ng-model="weightlog" maxlength="5" required validate-Float1/>
+                                <span ng-show="weightLogForm.curweight.$dirty&&weightLogForm.curweight.$invalid">
+                                    <span class="error-message textarea-errormessage10" ng-show="weightLogForm.curweight.$error.required"><span>Required.</span></span>
+                                    <span class="error-message textarea-errormessage10" ng-show="!weightLogForm.curweight.$error.required&&weightLogForm.curweight.$error.validateFloat1"><span>Invalid&nbsp;Data.</span></span>
                                 </span>
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12 text-center margin-top-20 margin-bottom-5">
@@ -1093,7 +1093,7 @@
     <p id="weight_button"><img src="../../images/update-weight.png"></p>
 
     <div class="update-weight-margin-adjust clearfix">
-        <form id="update-weight-form" class="clearfix" name="weightLogForm" novalidate>
+        <form id="update-weight-form" class="clearfix" name="budgetForm" novalidate>
             <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 margin-bottom-5">
 

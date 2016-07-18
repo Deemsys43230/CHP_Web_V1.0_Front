@@ -90,7 +90,7 @@
     </div>
 
     <div class="col-md-12 col-sm-12 margin-top-10 text-center no-padding">
-        <span ng-show="goalDetails.planType==2"><a class="target_button green_button" ng-click="updateGoalDetails(weightlog)">Edit Goal</a></span>
+        <span ng-hide="goalDetails.planType==1"><a class="target_button green_button" ng-click="updateGoalDetails(weightlog)">Edit Goal</a></span>
         <span ng-show="viewGraphButton"><a class="target_button orange_button" ng-click="doGetWeightLogGraph()">View Graph</a></span>
         <a href="#demography" class="target_button red_button" >Change Plan</a>
     </div>
