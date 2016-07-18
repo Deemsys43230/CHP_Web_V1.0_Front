@@ -1920,6 +1920,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         requestHandler.getRequest("getUserTimeZone/","").then(function(response){
             $scope.UserTimeZone = response.data.time;
             $scope.UserDate = $scope.UserTimeZone.slice(0,10);
+            $scope.selectDate = date;
             if( $scope.UserDate == date){
                $scope.disableUpdateWeight=false;
             }
