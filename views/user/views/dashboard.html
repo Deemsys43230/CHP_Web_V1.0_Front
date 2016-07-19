@@ -1069,6 +1069,24 @@
         </div>
     </section>
 </div>
+<!--Custom Goal Alert-->
+<div id="custom-goal-confirmation" class="popupContainer" style="display:none;left:37%!important;">
+    <header class="popupHeader">
+        <span class="header_title">Confirmation</span>
+        <span class="modal_close"><i class="fa fa-times"></i></span>
+    </header>
+
+    <section class="popupBody">
+        <!-- Register Form -->
+        <div class="common_model">
+            This goal is not possible to complete on {{userChosenDate}}.Your estimated date to complete this goal on {{customPossibleDate}}.Click proceed to update the goal on estimated date
+            <div class="action_btns margin-top-20">
+                <div class="one_half modal_close"><a href="" class="btn btn_blue" ng-click="checkCustomGoal()">Proceed</a></div>
+                <div class="one_half last modal_close"><a class="btn btn_red" ng-click="customGoalClear()">Cancel</a></div>
+            </div>
+        </div>
+    </section>
+</div>
 
 <!-- Weight Goal Confirmation-->
 <div id="goal-delete-confirmation" class="popupContainer" style="display:none;left:37%!important;">

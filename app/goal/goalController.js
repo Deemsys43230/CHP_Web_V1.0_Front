@@ -11,15 +11,13 @@ userApp.controller('GoalController',['$scope','requestHandler','Flash','$route',
         $scope.paginationLoad=false;
         $scope.loaded=true;
         requestHandler.getRequest("user/getMyGoallist","").then(function(response){
-            $scope.myGoalList = response.data.MyGoallist;
-
-            /*$.each(response.data.MyGoallist,function(index,value){
-                requestHandler.postRequest("user/getGoalMemberList/",{"goalid" : value.goalid}).then(function(response){
-                   // value.members=response.data.Goal_Data.length;
-                    if(value.activestatus==1)$scope.myGoalList.push(value);
+            $scope.myGoalList = [];
+            $scope.myRequestGoalList=[];
+           $.each(response.data.MyGoallist,function(index,value){
+               if(value.activestatus==1)$scope.myGoalList.push(value);
                     else $scope.myRequestGoalList.push(value);
-                })
-            });*/
+
+            });
             $scope.loaded=false;
             $scope.paginationLoad=true;
         });
@@ -274,7 +272,7 @@ userApp.controller('GoalController',['$scope','requestHandler','Flash','$route',
         requestHandler.getRequest("getUserTimeZone/","").then(function(response){
             $scope.UserTimeZone = response.data.time;
             $scope.UserDate = $scope.UserTimeZone.slice(0,10);
-            $scope.UserDate= new Date($scope.UserDate).format("mm/dd/yyyy");
+           // $scope.UserDate= new Date($scope.UserDate).format("mm/dd/yyyy");
         });
     };
 

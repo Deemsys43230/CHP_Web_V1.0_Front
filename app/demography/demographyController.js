@@ -170,6 +170,29 @@ userApp.controller('DemographyController',['$rootScope','$scope','requestHandler
             return angular.equals(originalDemography, $scope.demography);
         }
     };
+    $scope.weightlossError=false;
+    $scope.weightgainError=false;
+    $scope.planChangeValidation = function(plantype){
+       $scope.weight=$scope.demography.weight;
+       $scope.targetweight =$scope.demography.targetweight;
+
+        if(plantype==2){
+           if( $scope.targetweight < $scope.weight){
+               $scope.weightlossError=false;
+           }
+            else{
+               $scope.weightlossError=true;
+           }
+        }
+        else if(plantype==3){
+            if( $scope.targetweight > $scope.weight){
+                $scope.weightgainError=false;
+            }
+            else{
+                $scope.weightgainError=true;
+            }
+        }
+    };
 
     $scope.isCleanNutrition =function(){
         return angular.equals(originalNutrition, $scope.nutrients);
@@ -189,7 +212,7 @@ userApp.controller('DemographyController',['$rootScope','$scope','requestHandler
         requestHandler.getRequest("getUserId/","").then(function(response) {
             $scope.userProfile = response.data.User_Profile;
            $scope.isUpdated = response.data.demography.demoUpdatedstatus;
-
+            $scope.userdemo =response.data.demography;
             $scope.doGetDemographyandNutrition();
         });
 
@@ -198,7 +221,7 @@ userApp.controller('DemographyController',['$rootScope','$scope','requestHandler
 
     $scope.init=function(){
         $scope.getUserId();
-
+        $scope.doGetDemographyandNutrition();
     };
 
     $scope.init();

@@ -15539,3 +15539,8 @@ button.suggest_button.no-margin-bottom{
     text-align:center;
     background:#00A300
 }
+
+.fa-big{
+    font-size: 30px;
+    color : #57cb85;
+}

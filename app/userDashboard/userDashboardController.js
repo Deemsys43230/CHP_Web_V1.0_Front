@@ -352,7 +352,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
                 }
 
                 $window.idealWeightlevel = $scope.idealWeightlevel.toFixed(2);
-                setTimeout(viewWeightGraph(),10);
+                viewWeightGraph();
             }
 
         });
@@ -1203,18 +1203,16 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         $scope.setGoalDetails.currentweight=$scope.demography.weight;
         if($scope.goalDetails.planType==2){
         $scope.setGoalDetails.goalchoice=parseInt($scope.goalchoice);
-            if($scope.setGoalDetails.goalchoice==5 && !$scope.customResponse){
-
+            if($scope.setGoalDetails.goalchoice==5){
                 if(document.getElementById("start").value==''){
                     $scope.setGoalDetails.enddate = selectedDate;
                 }
                 else{
                     $scope.setGoalDetails.enddate=document.getElementById("start").value;
+
                 }
             }
-            else if($scope.setGoalDetails.goalchoice==5 && $scope.customResponse ){
-                $scope.setGoalDetails.enddate =$scope.customPossibleDate;
-            }
+
 
         }
         else if($scope.goalDetails.planType==3){
@@ -1233,18 +1231,52 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         }
 
 
-
+        $scope.userChosenDate = $scope.setGoalDetails.enddate;
         requestHandler.postRequest("user/weightgoalInsertorUpdate/",$scope.setGoalDetails).then(function(response){
 
-                $scope.doGetWeightGoal();
-            $scope.getBudget(selectedDate);
+            if(response.data.Response_status==0){
 
+            $scope.customResponse = response.data.Response_status;
+            $scope.goalPossiblityStatus =10;
+            $scope.customPossibleDate =  response.data.possibledate;
+
+            $scope.setGoalDetails.enddate=$scope.customPossibleDate;
+                $(function(){
+                    $("#lean_overlay").fadeTo(1000);
+                    $("#custom-goal-confirmation").fadeIn(600);
+                    $(".common_model").show();
+                    $scope.shouldBeOpen = true;
+                });
+
+                $(".modal_close").click(function(){
+                    $(".common_model").hide();
+                    $("#custom-goal-confirmation").hide();
+                    $("#lean_overlay").hide();
+                    $scope.shouldBeOpen = false;
+                });
+
+                $("#lean_overlay").click(function(){
+                    $(".common_model").hide();
+                    $("#custom-goal-confirmation").hide();
+                    $("#lean_overlay").hide();
+                    $scope.shouldBeOpen = false;
+                });
+            }
+            else{
+
+                $scope.doGetWeightGoal();
+                $scope.getBudget(selectedDate);
+            }
 
         },function(){
             errorMessage(Flash, "Please try again later!");
         });
     };
 
+    //Clear popup close
+    $scope.customGoalClear = function(){
+        $scope.setGoalDetails.enddate=$scope.enddate;
+    };
     //Do Check Possible Date on Custom update goal
     $scope.checkCustomGoal=function(){
         $scope.setGoalDetails={};
@@ -1253,7 +1285,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         $scope.setGoalDetails.currentweight=$scope.demography.weight;
         $scope.setGoalDetails.goalchoice=parseInt($scope.goalchoice);
 
-        if($scope.setGoalDetails.goalchoice==5){
+        if($scope.setGoalDetails.goalchoice==5 && $scope.customResponse!=0){
 
             if(document.getElementById("start").value==''){
                 $scope.setGoalDetails.enddate = selectedDate;
@@ -1261,6 +1293,10 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
             else{
                 $scope.setGoalDetails.enddate=document.getElementById("start").value;
             }
+        }
+        else if($scope.setGoalDetails.goalchoice==5 && $scope.customResponse==0){
+            alert("res");
+            $scope.setGoalDetails.enddate=$scope.customPossibleDate;
         }
 
         else{
@@ -1270,6 +1306,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
 
         $scope.userChosenDate = $scope.setGoalDetails.enddate;
         requestHandler.postRequest("user/weightgoalInsertorUpdate/",$scope.setGoalDetails).then(function(response){
+
             if(response.data.Response_status==0){
                 $scope.customResponse = response.data.Response_status;
                 $scope.goalPossiblityStatus =10;
@@ -1277,6 +1314,11 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
 
                 $scope.setGoalDetails.enddate=$scope.customPossibleDate;
 
+            }
+            else if(response.data.Response_status==1){
+
+                $scope.doGetWeightGoal();
+                $scope.getBudget(selectedDate);
             }
 
 
@@ -1927,7 +1969,6 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
             else{
               $scope.disableUpdateWeight=true;
              }
-            console.log($scope.disableUpdateWeight);
         });
     };
 
