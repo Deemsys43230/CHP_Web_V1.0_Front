@@ -4,7 +4,7 @@
 <div class="container" ng-cloak class="ng-cloak">
     <div class="row">
 
-        <div class="col-md-12 min-height-450" ng-init="init()">
+        <div class="col-md-12 min-height-450">
             <a href="#dashboard" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back to Dashboard</a>
             <a class="target_button btn btn-danger remove-button pull-right  margin-left-5" ng-click="removeFeedback()" ng-disabled="removeDisable"><i class="fa fa-trash"></i> &nbsp;Remove All</a>
             <!-- Stat Search -->
@@ -35,7 +35,7 @@
                     <th class="col-md-2">Date</th>
                     <th class="col-md-1">Platform</th>
                     <th class="col-md-3">Feed back</th>
-                    <th class="col-md-2">Option</th>
+                    <th class="col-md-2">Options</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -46,10 +46,10 @@
                     <td>{{userFeedback.emailId}}</td>
                     <td>{{userFeedback.datetime}}</td>
                     <td>{{userFeedback.platform}}</td>
-                    <td><span class="line-clamp-md-low">{{userFeedback.description}}</span></td>
+                    <td><span class="line-clamp-sm" title="{{userFeedback.description}}">{{userFeedback.description}}</span></td>
                     <td>
                         <a href="" class="btn-xs btn-primary" ng-click="viewFeedback(userFeedback.feedbackid)">View</a>
-                        <a href="" class="btn-xs btn-danger"   ng-click="removeFeedbackSingle(userFeedback.feedbackid)">Remove</a>
+                        <a href="" class="btn-xs btn-danger"  ng-click="removeFeedbackSingle(userFeedback.feedbackid)">Remove</a>
                     </td>
                 </tr>
                <tr ng-show="userFeedbackList.length==0">
@@ -117,7 +117,6 @@
                 <div class="col-md-6">Feedback</div> <div class="col-md-6">{{userFeedbackDetails.description}}</div>
 -->
 </div>
-        </div>
     </section>
 </div>
 

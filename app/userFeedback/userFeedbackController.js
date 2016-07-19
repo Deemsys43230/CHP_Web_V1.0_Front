@@ -89,6 +89,7 @@ adminApp.controller('UserFeedbackController',['$scope','requestHandler','Flash',
     };
 
     $scope.removeFeedbackSingle=function(feedbackid){
+        alert("hi");
         $scope.feedbackid.push(feedbackid);
         if($('.search-list-form').css('display') != 'none'){
             $(".search-list-form").hide();
