@@ -660,7 +660,7 @@ userApp.controller("UserInitialController",['$scope','requestHandler','$location
                 $("#review-modal").hide();
                 $("#lean_overlay").hide();
             });
-           // $location.path("profile");
+           $location.path("profile");
         }
         else if (pathVar==1){
             $(function(){
@@ -680,7 +680,7 @@ userApp.controller("UserInitialController",['$scope','requestHandler','$location
                 $("#review-modal").hide();
                 $("#lean_overlay").hide();
             });
-           // $location.path("demography");
+            $location.path("demography");
         }
         else if(pathVar==2){
           //  $location.path("dashboard");

@@ -1056,7 +1056,7 @@ coachApp.directive('summernoteRequired', function () {
         link: function (scope, elm, attrs, ngModel) {
             // only apply the validator if ngModel is present and Angular has added the email validator
             ngModel.$validators.summernoteRequired = function (modelValue) {
-                if(modelValue==""|| modelValue=="<p><br></p>" || modelValue=="<br>"){
+                if(modelValue==undefined || modelValue==""|| modelValue=="<p><br></p>" || modelValue=="<br>"){
                     return false;
                 }
                 else{

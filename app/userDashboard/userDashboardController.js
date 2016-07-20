@@ -358,12 +358,13 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
                 $scope.graph = {
                     status: 'goal'
                 };
-                setTimeout(viewWeightGraph(),10);
+                viewWeightGraph();
             }
 
         });
     };
-    $scope.doGetDemograph();
+
+    //$scope.doGetDemograph();
 
     //To get frequently asked foods
     var frequentFoodPromise=UserDashboardService.doGetFrequentlyAdded();
