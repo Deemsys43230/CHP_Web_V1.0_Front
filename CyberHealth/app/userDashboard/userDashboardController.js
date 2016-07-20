@@ -322,6 +322,9 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
                     }
 
                     $window.idealWeightlevel = $scope.idealWeightlevel.toFixed(2);
+                    $scope.graph = {
+                        status: 'goal'
+                    };
                     setTimeout(viewWeightGraph(),10);
                 });
             }
@@ -352,12 +355,16 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
                 }
 
                 $window.idealWeightlevel = $scope.idealWeightlevel.toFixed(2);
+                $scope.graph = {
+                    status: 'goal'
+                };
                 viewWeightGraph();
             }
 
         });
     };
-    $scope.doGetDemograph();
+
+    //$scope.doGetDemograph();
 
     //To get frequently asked foods
     var frequentFoodPromise=UserDashboardService.doGetFrequentlyAdded();
@@ -1295,7 +1302,6 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
             }
         }
         else if($scope.setGoalDetails.goalchoice==5 && $scope.customResponse==0){
-            alert("res");
             $scope.setGoalDetails.enddate=$scope.customPossibleDate;
         }
 
