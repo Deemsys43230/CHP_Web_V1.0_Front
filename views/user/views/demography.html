@@ -48,8 +48,8 @@
                                 <h5>Weight <sup class="text-red">*</sup><span ng-show="userProfile.unitPreference==1"><small>(kgs)</small></span> <span ng-show="userProfile.unitPreference==2"><small>(lbs)</small></span>  <span class="pull-right">:</span></h5>
                             </div>
                             <div class="col-lg-4 col-md-5 col-sm-5 padding-right-0">
-                                <input class="demography_input" name="weight" maxlength="6" ng-model="demography.weight" required validate-Float1/>
-                            <span ng-show="demographyForm.weight.$dirty&&demographyForm.weight.$invalid">
+                                <input class="demography_input" name="weight" maxlength="6" ng-model="demography.weight" required validate-Float1 ng-change="planChangeValidation(demography.userPlanType)"/>
+                                 <span ng-show="demographyForm.weight.$dirty&&demographyForm.weight.$invalid">
                                  <span class="error-message textarea-errormessage40" ng-show="demographyForm.weight.$error.required"><span>Required.</span></span>
                                  <span class="error-message textarea-errormessage40" ng-show="!demographyForm.weight.$error.required && demographyForm.weight.$error.validateFloat1"><span>Invalid&nbsp;Format.</span></span>
                             </span>
@@ -283,7 +283,7 @@
                             <h5>Plan Type <span class="pull-right">:</span></h5>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-5 padding-right-0">
-                            <select class="form-control main"  ng-model="demography.userPlanType" ng-init="demography.userPlanType='1'" ng-change="planChangeValidation(demography.userPlanType)" name="userPlanType">
+                            <select class="form-control main"  ng-model="demography.userPlanType" ng-init="demography.userPlanType='1'"  name="userPlanType" ng-change="planChangeValidation(demography.userPlanType)">
                                 <option value="">--Select--</option>
                                 <option value="1">Maintain weight</option>
                                 <option value="2">Weight loss</option>
@@ -296,15 +296,16 @@
                             <h5>Target Weight<span ng-show="userProfile.unitPreference==1"><small>(kgs)</small></span> <span ng-show="userProfile.unitPreference==2"><small>(lbs)</small></span> <span class="pull-right">:</span></h5>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-5 padding-right-0">
-                            <input class="demography_input"  name="targetWeight" ng-model="demography.targetweight" data-plantype="demography.userPlanType" ng-required="demography.userPlanType==2 || demography.userPlanType == 3"  lower-than="{{demography.weight}}" ng-change="planChangeValidation(demography.userPlanType)"/>
+
+                            <input class="demography_input"  name="targetWeight" ng-model="demography.targetweight" ng-required="demography.userPlanType==2 || demography.userPlanType == 3"  ng-change="planChangeValidation(demography.userPlanType)" />
                         </div>
-                         <span class="error-message textarea-errormessage40" ng-show="!demographyForm.targetWeight.$error.required&&weightlossError"><span>Should&nbsp;be&nbsp;less&nbsp;than&nbsp;your&nbsp;weight</span></span>
+                        <span class="error-message textarea-errormessage40" ng-show="!demographyForm.targetWeight.$error.required&&weightlossError"><span>Should&nbsp;be&nbsp;less&nbsp;than&nbsp;your&nbsp;weight</span></span>
                         <span class="error-message textarea-errormessage40" ng-show="!demographyForm.targetWeight.$error.required&&weightgainError"><span>Should&nbsp;be&nbsp;greater&nbsp;than&nbsp;your&nbsp;weight</span></span>
 
                         <span ng-show="demographyForm.targetWeight.$dirty&&demographyForm.targetWeight.$invalid">
                                  <span class="error-message textarea-errormessage40" ng-show="demographyForm.targetWeight.$error.required"><span>Required.</span></span>
-                                 <span class="error-message textarea-errormessage40" ng-show="!demographyForm.targetWeight.$error.required&&demographyForm.targetWeight.$error.lowerThan&&demography.userPlanType==2"><span>Should&nbsp;be&nbsp;less&nbsp;than&nbsp;your&nbsp;weight</span></span>
-                                 <span class="error-message textarea-errormessage40" ng-show="!demographyForm.targetWeight.$error.required&&demographyForm.targetWeight.$error.lowerThan&&demography.userPlanType==3"><span>Should&nbsp;be&nbsp;greater&nbsp;than&nbsp;your&nbsp;weight</span></span>
+                            <!-- <span class="error-message textarea-errormessage40" ng-show="!demographyForm.targetWeight.$error.required&&demographyForm.targetWeight.$error.lowerThan&&demography.userPlanType==2"><span>Should&nbsp;be&nbsp;less&nbsp;than&nbsp;your&nbsp;weight</span></span>
+                                 <span class="error-message textarea-errormessage40" ng-show="!demographyForm.targetWeight.$error.required&&demographyForm.targetWeight.$error.lowerThan&&demography.userPlanType==3"><span>Should&nbsp;be&nbsp;greater&nbsp;than&nbsp;your&nbsp;weight</span></span>-->
                         </span>
                     </div>
 

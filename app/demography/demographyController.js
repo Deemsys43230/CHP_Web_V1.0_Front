@@ -175,7 +175,10 @@ userApp.controller('DemographyController',['$rootScope','$scope','requestHandler
     $scope.planChangeValidation = function(plantype){
        $scope.weight=$scope.demography.weight;
        $scope.targetweight =$scope.demography.targetweight;
-
+        if(plantype==1){
+            $scope.weightlossError=false;
+            $scope.weightgainError=false;
+        }
         if(plantype==2){
            if( $scope.targetweight < $scope.weight){
                $scope.weightlossError=false;
@@ -185,6 +188,7 @@ userApp.controller('DemographyController',['$rootScope','$scope','requestHandler
            }
         }
         else if(plantype==3){
+            $scope.weightlossError=false;
             if( $scope.targetweight > $scope.weight){
                 $scope.weightgainError=false;
             }
@@ -240,7 +244,6 @@ userApp.filter('trusted', ['$sce', function ($sce) {
 userApp.directive('lowerThan', [
 
     function() {
-
         var link = function($scope, $element, $attrs, ctrl) {
 
             var validate = function(viewValue) {
@@ -285,5 +288,38 @@ userApp.directive('lowerThan', [
 
     }
 ]);
+
+userApp.directive('checkWeight', function () {
+
+    return {
+        require: 'ngModel',
+        restrict: '',
+        link: function (scope, elm, attrs, ctrl) {
+         ctrl.$validators.checkWeight = function (modelValue) {
+           var planType=scope.demography.userPlanType;
+           var currentWeight=scope.demography.weight;
+            if(planType!=1){
+                 if(planType==2){
+                     if(modelValue>currentWeight){
+                         scope.isCheckError=true;
+                         return false;
+                     }else{
+                         return true;
+                     }
+                 }else if(planType==3){
+                     if(modelValue<currentWeight){
+                         return false;
+                     }else{
+                         return true;
+                     }
+                 }
+             }else{
+                return false;
+             }
+
+         }
+        }
+    };
+});
 
 
