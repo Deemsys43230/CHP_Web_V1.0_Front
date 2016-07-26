@@ -6,7 +6,18 @@ body{
     line-height: 21px;
 	font-weight: 300;
 	color: #666;
-    background: url(../images/gym.jpg) no-repeat fixed;
+    /*background-attachment: fixed;
+    background-repeat: no-repeat;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;*/
+}
+
+body.back-image{
+    background: url(../images/gym.jpg);
+    background-attachment: fixed;
+    background-repeat: no-repeat;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -799,10 +810,10 @@ strong, b {
 	font-weight: 600;
 }
 
-img {
+/*img {
 	max-width: 100%;
 	height: auto;
-}
+}*/
 
 ul.remove-style, ol {
 	list-style: none;
@@ -6544,8 +6555,9 @@ h4.count-text{
     width:100%;
     padding: 0;
     margin: 0;
-    background: url(../images/food-1.jpg) fixed no-repeat;
-    background-size: cover;
+    background:rgba(0,0,0,0.4);
+    /*background: url(../images/food-1.jpg) fixed no-repeat;
+    background-size: cover;*/
 }
 
 .parallax-text-container{
@@ -6627,8 +6639,9 @@ h4.count-text{
 }
 
 .purchase {
-    background: rgba(0,0,0,0.3);
-    padding: 120px 0;
+    background: rgba(0,0,0,0.1);
+    /*padding: 120px 0;*/
+    padding: 30px 0;
 }
 
 .navbar-collapse {
@@ -6885,8 +6898,9 @@ h4.count-text{
     width:100%;
     padding: 0;
     margin: 0;
-    background: url(../images/fit-11.jpg) fixed no-repeat;
-    background-size: cover;
+    background:rgba(0,0,0,0.4);
+    /*background: url(../images/fit-11.jpg) fixed no-repeat;
+    background-size: cover;*/
 }
 
 .pricing-section h1{
@@ -7206,12 +7220,12 @@ select.select-activity{
 }
 
 .orange_button{
-    background-color:#ffb732;
+    background-color:#ffb732!important;
 }
 
 .orange_button:hover{
     color: #fff;
-    background-color:#ffa500;
+    background-color:#ffa500!important;
     cursor: pointer;
 }
 
@@ -10111,6 +10125,15 @@ input.section-input{
     border-radius: 0;
 }
 
+input.calculator-input{
+    display: block;
+    width:100%;
+    padding: 8px 50px 8px 10px;
+    border:1px solid #DDD;
+    color:#666;
+    border-radius: 0;
+}
+
 textarea.forum-textarea{
     -webkit-border-radius: 0;
     -webkit-appearance: none;
@@ -10273,6 +10296,18 @@ input.friend-search{
     top:-35px;
     background-color: #ddd;
     font-size: 15px;
+    padding: 5px 0;
+    font-weight: bold
+}
+
+.text-unit{
+    position: absolute;
+    width:40px;
+    text-align: center;
+    right:4px;
+    top:-35px;
+    background-color: #ededed!important;
+    font-size: 14px;
     padding: 5px 0;
     font-weight: bold
 }
@@ -15540,7 +15575,102 @@ button.suggest_button.no-margin-bottom{
     background:#00A300
 }
 
-.fa-big{
-    font-size: 30px;
-    color : #57cb85;
+.calculator-section{
+    padding:20px 10px!important;
+    height:auto;
+    background-color:#f6f6f6;
+    min-height:220px;
+}
+
+.quote-rotate {
+    position: absolute;
+    top: 10px;
+    opacity: 0;
+    overflow: visible;
+    visibility: hidden;
+    transition: opacity, 0.3s, ease;
+    padding-bottom: 10px;
+}
+
+.quotes {
+    position: relative;
+    margin: 50px auto 0;
+}
+
+.quotes p{
+    text-transform: uppercase;
+    font-size:25px;
+    line-height:33px;
+    font-weight:400;
+}
+
+.show{
+    opacity: 1;
+    visibility: visible;
+}
+
+.dot-fill { background-color: black; }
+
+.nav-dot:last-of-type { margin: 0; }
+
+.slideshow-element{
+    opacity:0;
+}
+
+.slideshow-element h1{
+    position: absolute;
+    text-transform: uppercase;
+    line-height:33px;
+    font-weight:400;
+}
+
+.slider-hight{
+    height:450px;
+}
+
+.calendar-button{
+    border-radius:0!important;
+    height:39px;
+    padding:8px 13px!important;
+}
+
+.slider-font{
+    font-size:35px;
+    font-family:  Century Gothic, sans-serif;
+    color:#fff;
+    font-weight:200;
+    text-shadow:2px 2px 0 #444;
+}
+
+.slider-font span.small{
+    color:#fff;
+    font-size:30px;
+}
+
+.slider-font h1{
+    color:#fff;
+    font-family:  Century Gothic, sans-serif;;
+}
+
+h1.slider-font{
+    line-height:55px!important;
+}
+
+h1.slider-font .h4{
+    font-weight:600;
+    text-transform: none!important;
+}
+
+h1.slider-font .h4 ul li{
+    line-height:30px;
+}
+
+.slider-font a{
+    font-family:inherit;
+    text-shadow:none;
+    line-height:25px!important;
+}
+
+a.button-wrap:hover li{
+    color:#fff!important;
 }

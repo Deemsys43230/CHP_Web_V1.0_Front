@@ -56,6 +56,7 @@ commonApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 name:'commonApp',
                                 files:[
                                     'plugin/vertical-carousel/vertical-carousel.js',
+                                    'css/stepProgressBar.css',
                                     'app/commonController.js'
                                 ]
                             })

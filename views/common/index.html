@@ -43,11 +43,11 @@
         <div class="row">
             <div class="col-md-9 col-sm-8 col-lg-8">
                 <!-- Start Recent Posts Carousel -->
-                <div class="latest-posts">
+                <!--<div class="latest-posts">
                     <h4 class="classic-title"><span>Our Features</span></h4>
                     <section>
                         <div class="latest-posts-classic projects-carousel touch-carousel">
-                            <!-- Start Profile -->
+                            &lt;!&ndash; Start Profile &ndash;&gt;
                             <div class="post-row item profile">
                                 <div class="image-wrap"><img src="images/feature-1.jpg" width="100%" height="auto" ></div>
 
@@ -59,9 +59,9 @@
                                     burned your form.
                                 </p>
                             </div>
-                            <!-- End Profile -->
+                            &lt;!&ndash; End Profile &ndash;&gt;
 
-                            <!-- Start Profile -->
+                            &lt;!&ndash; Start Profile &ndash;&gt;
                             <div class="post-row item profile">
                                 <div class="image-wrap"><img src="images/feature-2.jpg" width="100%" height="auto"> </div>
 
@@ -73,9 +73,9 @@
                                     a hat in real time.
                                 </p>
                             </div>
-                            <!-- End Profile -->
+                            &lt;!&ndash; End Profile &ndash;&gt;
 
-                            <!-- Start Profile -->
+                            &lt;!&ndash; Start Profile &ndash;&gt;
                             <div class="post-row item profile">
                                 <div class="image-wrap"><img src="images/feature-3.jpg" width="100%" height="auto"> </div>
 
@@ -87,9 +87,9 @@
                                     temperature your body is operating at.
                                 </p>
                             </div>
-                            <!-- End Profile -->
+                            &lt;!&ndash; End Profile &ndash;&gt;
 
-                            <!-- Start Profile -->
+                            &lt;!&ndash; Start Profile &ndash;&gt;
                             <div class="post-row item profile">
                                 <div class="image-wrap"><img src="images/feature-4.jpg" width="100%" height="auto"> </div>
 
@@ -101,9 +101,9 @@
                                     your heart rate.
                                 </p>
                             </div>
-                            <!-- End Profile -->
+                            &lt;!&ndash; End Profile &ndash;&gt;
 
-                            <!-- Start Profile -->
+                            &lt;!&ndash; Start Profile &ndash;&gt;
                             <div class="post-row item profile">
                                 <div class="image-wrap"><img src="images/feature-5.jpg" width="100%" height="auto"> </div>
 
@@ -116,14 +116,97 @@
                                     sensitive for easier navigation.
                                 </p>
                             </div>
-                            <!-- End Profile -->
+                            &lt;!&ndash; End Profile &ndash;&gt;
 
                         </div>
                     </section>
 
 
-                </div>
+                </div>-->
                 <!-- End Recent Posts Carousel -->
+                <div class="row">
+                    <h4 class="classic-title"><span>Our Features</span></h4>
+                    <div class="col-md-12 col-sm-12 col-xs-12 no-padding">
+                        sample Text sample Textsample Textsample Textsample Textsample Textsample
+                        Textsample Textsample Textsample Textsample Textsample Text
+                        sample Text sample Textsample Textsample Textsample Textsample Textsample
+                        Textsample Textsample Textsample Textsample Textsample Text<br/><br/>
+                        sample Text sample Textsample Textsample Textsample Textsample Textsample
+                        Textsample Textsample Textsample Textsample Textsample Text
+                    </div>
+                    <div class="col-md-12 col-sm-12 col-xs-12 calculator-section margin-top-10">
+                        <form name="calculateForm" ng-show="showForm">
+                            <div class="col-md-12 col-sm-12 col-xs-12"><h3 class="text-muted margin-bottom-15">Calculate Your BMI</h3></div>
+                        <div class="col-md-12 col-sm-12 col-xs-12 no-padding">
+                            <div class="col-md-6 col-sm-6 col-xs-12 no-padding">
+                                <h5 class="col-md-4 col-sm-4 col-xs-12 margin-top-10">Height</h5>
+                                <div class="col-md-4 col-sm-4 col-xs-6">
+                                    <input class="calculator-input" name="feet" ng-model="feet" maxlength="2" required>
+                                    <div class="text-count-position"><span class="text-unit">ft</span></div>
+                                </div>
+                                <div class="col-md-4 col-sm-4 col-xs-6">
+                                    <input class="calculator-input" name="inches" ng-model="inches" maxlength="2" required>
+                                    <div class="text-count-position"><span class="text-unit">in</span></div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6 no-padding">
+                                <h5 class="col-md-4 col-sm-4 margin-top-10">Birth Day</h5>
+                                <div class="col-md-8 col-sm-8">
+                                    <input class="search-input" placeholder="dd/mm/yyyy" type="text" data-beatpicker="true" data-beatpicker-position="['*','*']" data-beatpicker-format="['DD','MM','YYYY']" data-beatpicker-disable="{from:[2016,1,1],to:'>'}" data-beatpicker-module="gotoDate,today,clear">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-sm-12 no-padding margin-top-10">
+                            <div class="col-md-6 col-sm-6 no-padding">
+                                <h5 class="col-md-4 col-sm-4 margin-top-10">Weight</h5>
+                                <div class="col-md-8 col-sm-8">
+                                    <input class="calculator-input" name="weight" ng-model="weight" maxlength="3" required>
+                                    <div class="text-count-position"><span class="text-unit">lbs</span></div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6 no-padding">
+                                <h5 class="col-md-4 col-sm-4 margin-top-10">Email ID</h5>
+                                <div class="col-md-8 col-sm-8">
+                                    <input class="search-input"/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 col-sm-12 no-padding margin-top-10">
+                            <div class="col-md-6 col-sm-6 no-padding">
+                                <h5 class="col-md-4 col-sm-4 margin-top-10">Gender</h5>
+                                <div class="col-md-8 col-sm-8 margin-top-5">
+                                    <input type="radio" id="1" name="sex" value="1" ng-model="gender" required/>
+                                    <label for="1">Male</label>
+                                    <input type="radio" id="2" name="sex" value="2" ng-model="gender" required/>
+                                    <label for="2">Female</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6 margin-top-10 text-right">
+                                <a href="" class="btn-dis main_button red_button" ng-disabled="calculateForm.$invalid" ng-click="calculateEMI()">GET MY RESULT</a>
+                            </div>
+                        </div>
+
+                        <!--<div class="col-md-12 no-padding margin-top-10 text-center">
+                            <a href="" class="btn-dis forum_button red_button" ng-disabled="calculateForm.$invalid" ng-click="calculateEMI()">GET MY RESULT</a>
+                        </div>-->
+                        </form>
+                        <div ng-show="!showForm">
+                            <div class="col-md-12 col-sm-12">
+                                <a href="" class="pull-right btn btn-xs btn-warning" ng-click="returnToCalculate()">Click to Re-check</a>
+                                <h1 class="text-muted"><small>Your BMI is</small> <span class="bmi-color">{{emiValue}}</span></h1>
+                            </div>
+                            <div class="col-md-12 col-sm-12">
+                                <div id="myGoal"></div>
+                                <div class="margin-top-15">
+                                    <i><small>Losing weight will lower your BMI and can help reduce your risk of heart disease, stroke, some cancers, type 2 diabetes
+                                        and other health conditions. Weight loss success can be yours when you stick to a healthy, lower-calorie meal plan.
+                                    </small><a href="" id="loginNow">Login Now</a></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div class="col-md-3 col-sm-4 col-lg-4">
@@ -276,7 +359,7 @@
         <div class="row pricing">
             <div class="col-md-12">
                 <div class="counter-item">
-                    <h5>Why CYBERHEALTH?</h5>
+                    <h5>Why CYBERHEALTHS?</h5>
                     <h6>
                         At least one out of three adults in the United States has higher than normal blood sugar, also known as pre-diabetes. Without prevention, pre-diabetes can transition to diabetes within 10 years. This problem is exploding in countries like India. We are planning to develop a hybrid model of in-person contact and online interactions for diabetes prevention. In-person contact will be limited to few sessions, such as the core curriculum and interaction with a diabetes educator are addressed through online delivery. Education and counseling will be offered through interactions via phone, email or video conference.
                         <br/><br/>
@@ -388,6 +471,87 @@
 </div>
 <!-- End Client/Partner Section -->
 <script type="text/javascript" src="js/script.js"></script>
+<script type="text/javascript" src="js/jquery.stepProgressBar.js"></script>
+<script type="text/javascript" src="js/BeatPicker.js"></script>
+
+<script>
+
+    function callGraph(){
+        $('#myGoal').stepProgressBar({
+            currentValue: 0,
+            steps: [
+                {
+                    topLabel: ' ',
+                    value: 0
+                },
+                {
+                    topLabel: ' ',
+                    value: 9.25,
+                    bottomLabel: '<span style="color: #00b8e6">UNDERWEIGHT</span>'
+                },
+                {
+                    value: 18.5,
+                    bottomLabel: ' '
+                },
+                {
+                    topLabel: ' ',
+                    value: 21.75,
+                    bottomLabel: '<span style="color: #66cc00">HEALTHY</span>'
+                },
+                {
+                    value: 25,
+                    bottomLabel: ' '
+                },
+                {
+                    topLabel: ' ',
+                    value: 27.5,
+                    bottomLabel: '<span style="color: #e4ac01">OVERWEIGHT</span>'
+                },
+                {
+                    value: 30,
+                    bottomLabel: ' '
+                },
+                {
+                    topLabel: ' ',
+                    value: 35,
+                    bottomLabel: '<span style="color: #ff5c33">OBESE</span>'
+                },
+                {
+                    topLabel: ' ',
+                    value: 40,
+                    bottomLabel: ' '
+                }
+            ],
+            unit: ' '
+        });
+
+        if(emi>0&&emi<18.5){
+            $('.step-progressbar-bar').find('.step-progressbar-progress').css("background-color","#00b8e6");
+            $('.bmi-color').css("color","#00b8e6");
+        }else if(emi>=18.5&&emi<25){
+            $('.step-progressbar-bar').find('.step-progressbar-progress').css("background-color","#66cc00");
+            $('.bmi-color').css("color","#66cc00");
+        }else if(emi>=25&&emi<30){
+            $('.step-progressbar-bar').find('.step-progressbar-progress').css("background-color","#e4ac01");
+            $('.bmi-color').css("color","#e4ac01");
+        }else{
+            $('.step-progressbar-bar').find('.step-progressbar-progress').css("background-color","#ff5c33");
+            $('.bmi-color').css("color","#ff5c33");
+        }
+        setTimeout(function(){
+            refreshGraph()
+        },200);
+    };
+
+    function refreshGraph(){
+        $('#myGoal').stepProgressBar('setCurrentValue', emi);
+    };
+
+    $('#loginNow').click(function(){
+        $('.modal_trigger').click();
+    });
+
+</script>
 
 <script type="text/javascript">
     $(function () {

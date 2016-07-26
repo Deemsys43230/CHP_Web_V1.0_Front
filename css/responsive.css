@@ -158,6 +158,22 @@
 
 @media (max-width: 768px) {
 
+    h1.slider-font .h4{
+        font-size:15px!important;
+    }
+
+    h1.slider-font .h4 ul li{
+        line-height:20px!important;
+    }
+
+    .slider-font{
+        font-size:30px!important;
+    }
+
+    .slider-hight{
+        height:400px;
+    }
+
     #form p{
         margin-right:-35px!important;
     }
@@ -1211,5 +1227,24 @@
     .navbar-default .navbar-nav{
         width: 85%!important;
         margin: 20px 0 20px 0!important;
+    }
+
+    .slider-font{
+        font-size:25px!important;
+        line-height: 30px;
+    }
+
+    .slider-font{
+        font-size:25px!important;
+        line-height: 30px;
+    }
+
+    .slider-font span.small{
+        color:#fff;
+        font-size:25px;
+    }
+
+    h1.slider-font{
+        line-height:35px!important;
     }
 }

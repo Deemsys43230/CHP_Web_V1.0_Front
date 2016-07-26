@@ -1,10 +1,12 @@
 var commonApp = angular.module('commonApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate']);
 
-commonApp.controller('CommonController',['$scope','requestHandler','Flash','$routeParams','$sce','$rootScope','$timeout',function($scope,requestHandler,Flash,$routeParams,$sce,$rootScope,$timeout) {
+commonApp.controller('CommonController',['$scope','requestHandler','Flash','$routeParams','$sce','$rootScope','$timeout','$window',function($scope,requestHandler,Flash,$routeParams,$sce,$rootScope,$timeout,$window) {
 
 
 
     $scope.countFrom = 0;
+    $window.emi=0;
+
     if($routeParams.id=="password"){
         $(function(){
             $(".popupContainer").addClass('left-36');
@@ -83,6 +85,19 @@ commonApp.controller('CommonController',['$scope','requestHandler','Flash','$rou
         $scope.doGetTestimonialsByUser();
         $scope.doGetDashboardCount();
     };*/
+    $scope.showForm=true;
+
+    $scope.calculateEMI=function(){
+        var inches = (12*$scope.feet)+(1*$scope.inches);
+        $scope.emiValue=(($scope.weight*703)/(inches*inches)).toFixed(2);
+        $window.emi=$scope.emiValue;
+        $scope.showForm=false;
+        callGraph();
+    };
+
+    $scope.returnToCalculate=function(){
+        $scope.showForm=true;
+    };
 
     $timeout(function(){
         $scope.doGetNewsByUser();

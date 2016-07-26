@@ -623,6 +623,29 @@ userApp.controller("UserInitialController",['$scope','requestHandler','$location
         }
     });
 
+    $scope.socialMedia=function(){
+        $("html, body").animate({
+            scrollTop: 0
+        }, 600);
+        $(function(){
+            $("#lean_overlay").fadeTo(1000);
+            $("#social-modal").fadeIn(600);
+            $(".common_model").show();
+        });
+
+        $(".modal_close").click(function(){
+            $(".common_model").hide();
+            $("#social-modal").hide();
+            $("#lean_overlay").hide();
+        });
+
+        $("#lean_overlay").click(function(){
+            $(".common_model").hide();
+            $("#social-modal").hide();
+            $("#lean_overlay").hide();
+        });
+    };
+
 
 
   $scope.$watch('checkPath', function() {
@@ -687,6 +710,7 @@ userApp.controller("UserInitialController",['$scope','requestHandler','$location
 
         }
     };
+
     $scope.getSocialMediaDetails=function(){
         requestHandler.getRequest("contactus/","").then(function(response){
             $scope.commonDetails = response.data.Contactus[0];

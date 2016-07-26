@@ -12,28 +12,38 @@
 
     <!-- Basic -->
     <title>Cyberhealths::Beta</title>
+
+    <!-- Favicons-->
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon"/>
+
     <!-- Bootstrap CSS  -->
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"/>
 
     <!-- Font Awesome CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css"/>
 
+    <!-- slide show -->
+    <link type="text/css" rel="stylesheet" href="css/supersized.css"/>
+    <link type="text/css" rel="stylesheet" href="css/supersized.shutter.css"/>
 
     <!-- Custom links  -->
     <!-- combine of style, passowrd, font-site, yellow, spinner, loader css files  -->
     <link rel="stylesheet" type="text/css" href="css/style.css" media="screen"/>
+
     <!-- Responsive CSS Styles  -->
     <link rel="stylesheet" type="text/css" href="css/responsive.css" media="screen"/>
     <!-- Pop-up Styles  -->
     <link type="text/css" rel="stylesheet" href="plugin/popup/style.css"/>
+
     <!--Message flash-->
-    <link type="text/css" rel="stylesheet" href="css/angular-flash.css"/>
-    <!-- Favicons-->
-    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon"/>
+    <link type="text/css" rel="stylesheet" href="css/angular-flash.css" />
+
+
+    <link type="text/css" rel="stylesheet" href="css/BeatPicker.css"/>
 
 </head>
 
-<body class="back-image" ng-app="commonApp">
+<body ng-app="commonApp">
 
 <!-- Full Body Container -->
 <div id="container" class="boxed-page" ng-controller="LoginController">
@@ -141,10 +151,57 @@
 
 <!-- Start Purchase Section -->
 <div class="section purchase">
-    <div class="container">
+    <div class="container slider-hight">
+        <div class="col-md-7 col-sm-7 col-xs-10">
+            <div id="text-slideshow">
+                <div class="slideshow-element">
+                    <h1 class="slider-font margin-bottom-20">
+                        <span class="hidden-xs"><br/></span>
+                        <span class="small">MIGHTY HEALTH SOLUTION FOR YOUR LIFETIME</span><br/>
+                        <div class="h4 margin-top-20">
+                            <br/>
+                            Just record your weight. WE,<br/><br/>
+                            <div class="col-md-12">
+                                <div class="col-md-12">
+                                <ul>
+                                    <li>Reveal your daily needed calorie budget. GRAB IT!</li>
+                                    <li>Provide you a better food and exercise catalogue.</li>
+                                    <li>Assist you with needed advices on time from our experts.</li>
+                                </ul>
+                                    </div>
+                            </div>
+
+                        </div>
+                    </h1>
+                </div>
+                <div class="slideshow-element">
+                    <img width="100%" height="auto" src="images/responsive.png"/>
+                    <div class="slider-font">
+                        <h1>Modern way of Digital Weight Loss Solution for this modern world</h1>
+                    </div>
+                    </div>
+                <div class="slideshow-element">
+                    <h1 class="slider-font margin-bottom-20">
+                        <span class="hidden-xs"><br/></span>
+                        <span>ARE YOU STILL THINKING OF YOUR HEALTH PROBLEM? NO WORRIES!</span><br/>
+                        <div class="h4"><br/>
+                            Register with us! Your health dreams are taken care by us.
+                        </div>
+                        <a href="" class="btn-system btn-large" onclick="$('#loginNow').click()"><i class="fa fa-user"></i> Register Now</a>
+                    </h1>
+                </div>
+            </div>
+        </div>
+
 
         <!-- Start Video Section Content -->
-        <div class="section-video-content text-center">
+        <!--<div class="col-md-7">
+            <img width="100%" height="auto" src="images/responsive.png"/>
+            <h1 class=" wite-text uppercase text-center">
+                Modern way of Digital Weight <br/>Loss Solution for this modern world
+            </h1>
+        </div>-->
+        <div class="section-video-content text-center hidden">
 
             <!-- Start Animations Text -->
             <!--<h1 class="fittext wite-text uppercase tlt">
@@ -182,7 +239,8 @@
             <!-- Start Big Heading -->
             <!--<div class="big-title text-center" data-animation="fadeInDown" data-animation-delay="01">-->
             <div class="big-title text-center">
-                <h1>This is Our Latest <strong>Work</strong></h1>
+                <!--<h1>This is Our Latest <strong>Work</strong></h1>-->
+                <h1>Achieve your health with <strong>Our Features</strong></h1>
             </div>
             <hr/>
             <!-- End Big Heading -->
@@ -455,9 +513,11 @@
 <script src="app/userFeedback/userFeedbackService.js"></script>
 <script src="app/commonApp.js"></script>
 <script src="js/home-index-script.js"></script>
+<script type="text/javascript" src="js/jquery.easing.min.js"></script>
+<script type="text/javascript" src="js/supersized.3.2.7.min.js"></script>
+<script type="text/javascript" src="js/supersized.shutter.min.js"></script>
 
 <script type="text/javascript">
-
     $(document).ready(function(){
         $("#feedback_button").click(function(){
             if($('#form').css('left')=='0px'){
@@ -469,6 +529,50 @@
             }
         });
     });
+
+</script>
+
+<script type="text/javascript">
+
+    jQuery(function($){
+        $.supersized({
+
+            // Functionality
+            slide_interval          :   6000,		// Length between transitions
+            transition              :   1, 			// 0-None, 1-Fade, 2-Slide Top, 3-Slide Right, 4-Slide Bottom, 5-Slide Left, 6-Carousel Right, 7-Carousel Left
+            transition_speed		:	700,		// Speed of transition
+
+            // Components
+            slide_links				:	'blank',	// Individual links for each slide (Options: false, 'num', 'name', 'blank')
+            slides 					:  	[			// Slideshow Images
+                {image : 'images/slider-back-1.jpg', title : '', thumb : '', url : ''},
+                {image : 'images/slider-back-4.jpg', title : '', thumb : '', url : ''},
+                {image : 'images/slider-back-5.jpg', title : '', thumb : '', url : ''}
+            ]
+
+        });
+
+        (function($){
+            $("#text-slideshow > div:gt(0)").hide();
+            $('.slideshow-element').css('opacity',1);
+            var count=1;
+            theme = {
+                beforeAnimation:function(){
+                    if(count!=1){
+
+                        $('#text-slideshow > div:first')
+                                .fadeOut(0)
+                                .next()
+                                .fadeIn(1000)
+                                .end()
+                                .appendTo('#text-slideshow');
+                    }
+                    count+=1;
+                }
+            };
+        })(jQuery);
+    });
+
 
 </script>
 
