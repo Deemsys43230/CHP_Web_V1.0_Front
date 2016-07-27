@@ -63,10 +63,6 @@
 		top: 0;
 	}
 
-    .navbar-default{
-        padding:10px;
-    }
-
 	.quote-buttons {
 		text-align: center;
 	}
@@ -156,10 +152,14 @@
 	
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
 
     h1.slider-font .h4{
         font-size:15px!important;
+    }
+
+    .navbar-default{
+        padding:7px 10px 7px 10px;
     }
 
     h1.slider-font .h4 ul li{
@@ -464,32 +464,6 @@
 
 @media (min-width : 768px) and (max-width: 991px) {
 
-    .parallax{
-        width:100%;
-        padding: 0;
-        margin: 0;
-        background: url(../images/food-2.jpg) no-repeat;
-        background-size: cover;
-    }
-
-    .pricing-section{
-        width:100%;
-        padding: 0;
-        margin: 0;
-        background: url(../images/fit-12.jpg) no-repeat;
-        background-size: cover;
-    }
-
-    body {
-        background: #ffffff;
-    }
-
-    body.back-image{
-        background: url(../images/gym-1.jpg) fixed no-repeat;
-        background-size: 100% auto;
-        -webkit-background-size: 100% auto;
-    }
-
     #main-slide .slider-content h2{
 		font-size: 52px;
 	}
@@ -503,7 +477,6 @@
 		margin-top: 5px;
 		font-size: 16px;
 	}
-    
 }
 
 
@@ -1246,5 +1219,37 @@
 
     h1.slider-font{
         line-height:35px!important;
+    }
+}
+
+.sm-hide, .xsm-hide{
+    display: none;
+}
+
+.sm-show, .xsm-show{
+    display: inline;
+}
+
+@media (min-width: 768px) and (max-width: 1120px) {
+    .sm-show{
+        display: none!important;
+    }
+
+    .sm-hide{
+        display: inline!important;
+    }
+
+    .navbar-default .navbar-nav .dropdown.sm-device{
+        display: inline;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 850px) {
+    .xsm-show{
+        display: none!important;
+    }
+
+    .xsm-hide{
+        display: inline!important;
     }
 }

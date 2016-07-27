@@ -88,10 +88,10 @@ commonApp.controller('CommonController',['$scope','requestHandler','Flash','$rou
     $scope.showForm=true;
 
     $scope.calculateEMI=function(){
+        $scope.showForm=false;
         var inches = (12*$scope.feet)+(1*$scope.inches);
         $scope.emiValue=(($scope.weight*703)/(inches*inches)).toFixed(2);
         $window.emi=$scope.emiValue;
-        $scope.showForm=false;
         callGraph();
     };
 

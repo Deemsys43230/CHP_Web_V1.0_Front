@@ -41,7 +41,7 @@
 <div class="section service">
     <div class="container">
         <div class="row">
-            <div class="col-md-9 col-sm-8 col-lg-8">
+            <div class="col-md-9 col-sm-7 col-lg-8">
                 <!-- Start Recent Posts Carousel -->
                 <!--<div class="latest-posts">
                     <h4 class="classic-title"><span>Our Features</span></h4>
@@ -138,7 +138,7 @@
                         <form name="calculateForm" ng-show="showForm">
                             <div class="col-md-12 col-sm-12 col-xs-12"><h3 class="text-muted margin-bottom-15">Calculate Your BMI</h3></div>
                         <div class="col-md-12 col-sm-12 col-xs-12 no-padding">
-                            <div class="col-md-6 col-sm-6 col-xs-12 no-padding">
+                            <div class="col-md-6 col-sm-12 col-xs-12 no-padding">
                                 <h5 class="col-md-4 col-sm-4 col-xs-12 margin-top-10">Height</h5>
                                 <div class="col-md-4 col-sm-4 col-xs-6">
                                     <input class="calculator-input" name="feet" ng-model="feet" maxlength="2" required>
@@ -149,7 +149,8 @@
                                     <div class="text-count-position"><span class="text-unit">in</span></div>
                                 </div>
                             </div>
-                            <div class="col-md-6 col-sm-6 no-padding">
+                            <div class="col-md-6 col-sm-12 no-padding">
+                                <div class="hidden-lg hidden-md"><div class="margin-top-10"></div></div>
                                 <h5 class="col-md-4 col-sm-4 margin-top-10">Birth Day</h5>
                                 <div class="col-md-8 col-sm-8">
                                     <input class="search-input" placeholder="dd/mm/yyyy" type="text" data-beatpicker="true" data-beatpicker-position="['*','*']" data-beatpicker-format="['DD','MM','YYYY']" data-beatpicker-disable="{from:[2016,1,1],to:'>'}" data-beatpicker-module="gotoDate,today,clear">
@@ -157,14 +158,15 @@
                             </div>
                         </div>
                         <div class="col-md-12 col-sm-12 no-padding margin-top-10">
-                            <div class="col-md-6 col-sm-6 no-padding">
+                            <div class="col-md-6 col-sm-12 no-padding">
                                 <h5 class="col-md-4 col-sm-4 margin-top-10">Weight</h5>
                                 <div class="col-md-8 col-sm-8">
                                     <input class="calculator-input" name="weight" ng-model="weight" maxlength="3" required>
-                                    <div class="text-count-position"><span class="text-unit">lbs</span></div>
+                                    <div class="text-count-position"><span class="text-unit lbs">lbs</span></div>
                                 </div>
                             </div>
-                            <div class="col-md-6 col-sm-6 no-padding">
+                            <div class="col-md-6 col-sm-12 no-padding">
+                                <div class="hidden-lg hidden-md"><div class="margin-top-10"></div></div>
                                 <h5 class="col-md-4 col-sm-4 margin-top-10">Email ID</h5>
                                 <div class="col-md-8 col-sm-8">
                                     <input class="search-input"/>
@@ -173,7 +175,7 @@
                         </div>
 
                         <div class="col-md-12 col-sm-12 no-padding margin-top-10">
-                            <div class="col-md-6 col-sm-6 no-padding">
+                            <div class="col-md-6 col-sm-12 no-padding">
                                 <h5 class="col-md-4 col-sm-4 margin-top-10">Gender</h5>
                                 <div class="col-md-8 col-sm-8 margin-top-5">
                                     <input type="radio" id="1" name="sex" value="1" ng-model="gender" required/>
@@ -182,7 +184,8 @@
                                     <label for="2">Female</label>
                                 </div>
                             </div>
-                            <div class="col-md-6 col-sm-6 margin-top-10 text-right">
+                            <div class="col-md-6 col-sm-12 margin-top-10 text-right">
+                                <div class="hidden-lg hidden-md"><div class="margin-top-10"></div></div>
                                 <a href="" class="btn-dis main_button red_button" ng-disabled="calculateForm.$invalid" ng-click="calculateEMI()">GET MY RESULT</a>
                             </div>
                         </div>
@@ -191,7 +194,7 @@
                             <a href="" class="btn-dis forum_button red_button" ng-disabled="calculateForm.$invalid" ng-click="calculateEMI()">GET MY RESULT</a>
                         </div>-->
                         </form>
-                        <div ng-show="!showForm">
+                        <div ng-hide="showForm">
                             <div class="col-md-12 col-sm-12">
                                 <a href="" class="pull-right btn btn-xs btn-warning" ng-click="returnToCalculate()">Click to Re-check</a>
                                 <h1 class="text-muted"><small>Your BMI is</small> <span class="bmi-color">{{emiValue}}</span></h1>
@@ -205,11 +208,12 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="hidden-lg hidden-md"><div class="margin-top-10"></div></div>
                     </div>
                 </div>
             </div>
 
-            <div class="col-md-3 col-sm-4 col-lg-4">
+            <div class="col-md-3 col-sm-5 col-lg-4">
                 <div class="panel no-margin no-box-shadow">
                     <div class="panel-body no-padding">
                         <div ng-show="usertestimoniallist.length>3">

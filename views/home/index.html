@@ -44,13 +44,13 @@
     <div class="top-bar">
         <div class="container">
             <div class="row">
-                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-5 hidden-xss" ng-init="init()">
+                <div class="col-lg-8 col-md-8 col-sm-7 col-xs-5 hidden-xss" ng-init="init()">
                     <!-- Start Contact Info -->
-                    <div ng-hide="hideValue" ng-cloak class="ng-cloak">
-                        <ul class="contact-details remove-style">
+                    <div ng-hide="hideValue" ng-cloak class="ng-cloak" >
+                        <ul class="contact-details remove-style" >
                             <li class="hidden-xs"><a><i class="fa fa-map-marker"></i> {{address}}</a>
                             </li>
-                            <li class="hidden-xss"><a><i class="fa fa-envelope-o"></i> {{commonDetails.supportemail}}</a>
+                            <li class="hidden-sm hidden-xss"><a><i class="fa fa-envelope-o"></i> {{commonDetails.supportemail}}</a>
                             </li>
                             <li class="hidden-sm hidden-xs"><a><i class="fa fa-phone"></i> {{commonDetails.mobile}}</a>
                             </li>
@@ -58,7 +58,7 @@
                     </div>
                     <!-- End Contact Info -->
                 </div><!-- .col-md-6 -->
-                <div class="col-lg-4 col-md-4 col-sm-4 padding-left-0">
+                <div class="col-lg-4 col-md-4 col-sm-5 padding-left-0">
                     <!-- Start Social Links-->
                     <ul class="social-list remove-style">
                         <li>
@@ -94,8 +94,8 @@
                 </button>
                 <!-- End Toggle Nav Link For Mobiles -->
                 <a class="navbar-brand" href="../../">
-                    <img class="hidden-xs hidden-sm" width="209" height="57" alt="" src="../../images/cyber-logo.png">
-                    <img class="hidden-md hidden-lg" width="180" height="49" alt="" src="../../images/cyber-logo-small.png">
+                    <img class="hidden-xs" width="209" height="57" alt="" src="../../images/cyber-logo.png">
+                    <img class="hidden-md hidden-lg hidden-sm" width="180" height="49" alt="" src="../../images/cyber-logo-small.png">
                 </a>
             </div>
             <div class="navbar-collapse collapse">
@@ -104,11 +104,19 @@
                     <li><a class="{{activeClass.index}}" href="../../">Home</a></li>
                     <li><a class="{{activeClass.healthy}}" href="#healthy-tips"><span class="highlight-menu-item">Healthy Tips</span></a></li>
                     <li><a class="{{activeClass.how}}" href="#how-it-work">How It Works</a></li>
-                    <li><a class="{{activeClass.useful}}" href="#useful-videos">Useful Videos</a></li>
-                    <!--<li><a class="{{activeClass.portfolio}}" href="#portfolio">Portfolio</a></li>-->
-                    <li><a class="{{activeClass.blog}}" href="#blog">Blogs</a></li>
-                    <li><a class="{{activeClass.aboutus}}" href="#aboutus">About Us</a></li>
-                    <li><a class="{{activeClass.contact}}" href="#contact">Contact Us</a></li>
+                    <li class="xsm-show"><a class="{{activeClass.useful}}" href="#useful-videos">Useful Videos</a></li>
+                    <li class="sm-show"><a class="{{activeClass.blog}}" href="#blog">Blogs</a></li>
+                    <li class="sm-show"><a class="{{activeClass.aboutus}}" href="#aboutus">About Us</a></li>
+                    <li class="sm-show"><a class="{{activeClass.contact}}" href="#contact">Contact Us</a></li>
+                    <li class="dropdown sm-device">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="">More<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li class="xsm-hide"><a class="{{activeClass.useful}}" href="#useful-videos">Useful Videos</a></li>
+                            <li class="sm-hide"><a class="{{activeClass.blog}}" href="#blog">Blogs</a></li>
+                            <li class="sm-hide"><a class="{{activeClass.aboutus}}" href="#aboutus">About Us</a></li>
+                            <li class="sm-hide"><a class="{{activeClass.contact}}" href="#contact">Contact Us</a></li>
+                        </ul>
+                    </li>
                 </ul>
                 <!-- End Navigation List -->
             </div>
