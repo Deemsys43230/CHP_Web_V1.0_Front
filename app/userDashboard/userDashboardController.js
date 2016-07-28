@@ -364,7 +364,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         });
     };
 
-    //$scope.doGetDemograph();
+    $scope.doGetDemograph();
 
     //To get frequently asked foods
     var frequentFoodPromise=UserDashboardService.doGetFrequentlyAdded();
@@ -641,6 +641,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         $scope.graph = {
             status: 'goal'
         };
+        $scope.doGetDemograph();
         setTimeout(viewWeightGraph(), 10);
     };
 
@@ -675,7 +676,6 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         requestHandler.getRequest("user/getWeightGoal/","").then(function(response){
 
             if(response.data.Response_status==0){
-
                 $scope.updateGoal=0;
                 $window.singlePicker = true;
                 $window.minimumDate = new Date();

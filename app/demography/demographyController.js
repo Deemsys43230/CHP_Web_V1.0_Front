@@ -17,7 +17,6 @@ userApp.controller('DemographyController',['$rootScope','$scope','requestHandler
             $scope.demography.userActivityType = $scope.demography.userActivityType.toString();
 
 
-
             if($scope.userProfile.unitPreference==2){
                 $scope.demography.height = $scope.demography.height.toString();
 
@@ -121,7 +120,7 @@ userApp.controller('DemographyController',['$rootScope','$scope','requestHandler
             $scope.demography.hip = parseFloat($scope.demography.hip);
             $scope.demography.obesity=parseFloat($scope.demography.obesity);
             $scope.demography.diabetes=parseFloat($scope.demography.diabetes);
-        $scope.demography.targetweight=parseFloat($scope.demography.targetweight);
+             $scope.demography.targetweight=parseFloat($scope.demography.targetweight);
 
        if( $scope.demography.obesity == '0'){
            $scope.demography.obesity="";
@@ -137,6 +136,7 @@ userApp.controller('DemographyController',['$rootScope','$scope','requestHandler
                 $scope.dashboardNavigation = false;
             }
             requestHandler.putRequest("user/insertorupdateDemography/",$scope.demography).then(function(response){
+                if(response.data.Response_status==1){
                 $scope.doGetDemographyandNutrition();
                 $rootScope.checkPath=2;
                 successMessage(Flash,"Successfully Updated");
@@ -146,10 +146,59 @@ userApp.controller('DemographyController',['$rootScope','$scope','requestHandler
                     }
                     $scope.dashboardNavigation = false;
                 },1000);
+                }
+                else if(response.data.Response_status==2){
+                    if(response.data.eligibilityPlan ==1){
+                        $("html, body").animate({
+                            scrollTop: 0
+                        }, 600);
+                        $scope.eligibilityPlan=response.data.eligibilityPlan;
+                        $(function(){
+                            $("#lean_overlay").fadeTo(1000);
+                            $("#updateAlert").fadeIn(600);
+                            $(".common_model").show();
+                        });
 
+                        $(".modal_close").click(function(){
+                            $(".common_model").hide();
+                            $("#updateAlert").hide();
+                            $("#lean_overlay").hide();
+                        });
+
+                        $("#lean_overlay").click(function(){
+                            $(".common_model").hide();
+                            $("#updateAlert").hide();
+                            $("#lean_overlay").hide();
+                        });
+                    }
+                    else  if(response.data.eligibilityPlan ==3){
+                        $("html, body").animate({
+                            scrollTop: 0
+                        }, 600);
+                        $scope.eligibilityPlan=response.data.eligibilityPlan;
+                        $(function(){
+                            $("#lean_overlay").fadeTo(1000);
+                            $("#updateAlert").fadeIn(800);
+                            $(".common_model").show();
+                        });
+
+                        $(".modal_close").click(function(){
+                            $(".common_model").hide();
+                            $("#updateAlert").hide();
+                            $("#lean_overlay").hide();
+                        });
+
+                        $("#lean_overlay").click(function(){
+                            $(".common_model").hide();
+                            $("#updateAlert").hide();
+                            $("#lean_overlay").hide();
+                        });
+                    }
+                }
             }, function () {
                 errorMessage(Flash, "Please try again later!")
             });
+
         });
     };
 
@@ -167,6 +216,9 @@ userApp.controller('DemographyController',['$rootScope','$scope','requestHandler
             return false;
         }
         else if($scope.isUpdated==1){
+            console.log("ori",originalDemography);
+            console.log("da",$scope.demography);
+            console.log(angular.equals(originalDemography, $scope.demography));
             return angular.equals(originalDemography, $scope.demography);
         }
     };

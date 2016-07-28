@@ -395,6 +395,7 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                             name:'userApp',
                             files:[
                                 '../../css/custom-inputs.css',
+                                '../../plugin/popup/style.css',
                                 '../../app/demography/demographyController.js'
                             ]
                         })

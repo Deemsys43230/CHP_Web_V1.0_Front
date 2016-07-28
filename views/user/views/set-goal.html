@@ -119,12 +119,11 @@
             minDate : goalStartDate,
             startDate : goalStartDate,
             endDate : goalEndDate,
-            singleDatePicker: singlePicker
+            singleDatePicker: true
         };
 
         $('#set-gain-date').daterangepicker(gainoptions, function(start1, end1, label) {
             document.getElementById("start1").value = start1.format('DD/MM/YYYY');
-            alert(document.getElementById("start1").value);
             document.getElementById("end1").value = end1.format('DD/MM/YYYY');
             //angular.element(document.getElementById('set-date')).scope().checkCustomGoal(start.format('DD/MM/YYYY'));
         });
