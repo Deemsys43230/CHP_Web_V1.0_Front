@@ -216,9 +216,6 @@ userApp.controller('DemographyController',['$rootScope','$scope','requestHandler
             return false;
         }
         else if($scope.isUpdated==1){
-            console.log("ori",originalDemography);
-            console.log("da",$scope.demography);
-            console.log(angular.equals(originalDemography, $scope.demography));
             return angular.equals(originalDemography, $scope.demography);
         }
     };
