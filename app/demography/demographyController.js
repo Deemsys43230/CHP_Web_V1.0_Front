@@ -232,6 +232,7 @@ userApp.controller('DemographyController',['$rootScope','$scope','requestHandler
             $scope.weightgainError=false;
         }
         if(plantype==2){
+            $scope.weightgainError=false;
            if( $scope.targetweight < $scope.weight){
                $scope.weightlossError=false;
            }
