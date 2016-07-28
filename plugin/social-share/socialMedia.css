@@ -1,0 +1,115 @@
+@charset "utf-8";
+/* CSS Document */
+
+/*** Social Media ****************************************************/
+.cv-social-media {
+	width:100%;
+	margin:0;
+	padding:0;
+	overflow:hidden;
+	list-style:none;
+}
+
+.cv-social-media li {
+	width:42px;
+	height:35px;
+	display:inline-block;
+	font-size:26px;
+	background:#CCC;
+	float:left;
+	padding:8px 0px 0px 4px;
+	margin:0px 3px 0px 3px;
+}
+
+.cv-social-media a {
+	display:block;
+	width:100%;
+	height:100%;
+	margin:0px 10px 0px 0px;
+	color:#FFF;
+	
+		-webkit-animation-duration: 2s;
+	   -moz-animation-duration: 2s;
+	     -o-animation-duration: 2s;
+	        animation-duration: 2s;
+			
+	-webkit-animation-fill-mode: both;
+	   -moz-animation-fill-mode: both;
+	     -o-animation-fill-mode: both;
+	        animation-fill-mode: both;
+}
+
+.cv-social-media a:hover {
+	display:block;
+	
+	-webkit-animation-name: fadeInUp;
+	-moz-animation-name: fadeInUp;
+	-o-animation-name: fadeInUp;
+	animation-name: fadeInUp;
+	
+			-webkit-animation-duration: 1s;
+	   -moz-animation-duration: 1s;
+	     -o-animation-duration: 1s;
+	        animation-duration: 1s;
+			
+	-webkit-animation-fill-mode: both;
+	   -moz-animation-fill-mode: both;
+	     -o-animation-fill-mode: both;
+	        animation-fill-mode: both;
+}
+
+#facebook {
+	background:#3b5998;
+}
+
+#twitter {
+	background:#00a0d1;
+}
+
+#linkedin{
+    background:#0077B5;
+}
+
+#google-plus{
+    background:#d34836;
+}
+
+#pinterest {
+	background:#910101;
+}
+
+#youtube {
+	background:#c4302b;
+}
+
+#tumblr {
+	background:#34526f;
+}
+
+#flickr {
+	background:#F3F;
+}
+
+#digg {
+	background:#036;
+}
+
+#delicious {
+	background:#03C;
+}
+
+#smashmag {
+	background:#F30;
+}
+
+#email {
+	background:#9C0;
+}
+
+#stackoverflow {
+	background:#F60;
+}
+
+#vimeo {
+	background:#069;
+}
