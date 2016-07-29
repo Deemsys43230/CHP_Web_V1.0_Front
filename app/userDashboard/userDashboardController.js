@@ -301,6 +301,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
                         dividevalue=4;
                     }
                     $scope.idealWeight = ($scope.demography.height - 100 -(($scope.demography.height -150)/dividevalue));
+                    $scope.idealWeight=$scope.idealWeight.toFixed(2);
 
                     if($scope.demography.weight < $scope.idealWeight){
                         $scope.upweight =1;
@@ -334,6 +335,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
                     dividevalue=4;
                 }
                 $scope.idealWeight = ($scope.demography.height - 100 -(($scope.demography.height -150)/dividevalue));
+                $scope.idealWeight=$scope.idealWeight.toFixed(2);
 
                 if($scope.demography.weight < $scope.idealWeight){
                     $scope.upweight =1;
@@ -917,6 +919,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
             $scope.doGetWeightLog(date);
             $scope.doGetDemograph();
             $scope.getBudget(date);
+            $scope.doGetWeightGoal();
         }, function () {
             errorMessage(Flash, "Please try again later!")
         });
