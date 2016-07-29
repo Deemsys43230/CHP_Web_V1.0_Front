@@ -9,6 +9,10 @@ adminApp.controller('UserFeedbackController',['$scope','requestHandler','Flash',
         $scope.offset=($scope.currentPage-1)*$scope.itemsPerPage;
         $scope.limit=$scope.currentPage*$scope.itemsPerPage;
 
+        if(!$scope.searchText){
+            $scope.searchText="";
+        }
+
         $scope.params={
             "limit":$scope.limit,
             "offset":$scope.offset,
@@ -89,7 +93,6 @@ adminApp.controller('UserFeedbackController',['$scope','requestHandler','Flash',
     };
 
     $scope.removeFeedbackSingle=function(feedbackid){
-        alert("hi");
         $scope.feedbackid.push(feedbackid);
         if($('.search-list-form').css('display') != 'none'){
             $(".search-list-form").hide();
@@ -145,7 +148,7 @@ adminApp.controller('UserFeedbackController',['$scope','requestHandler','Flash',
 
     $scope.init=function(){
         $scope.itemsPerPage = 10;
-        $scope.searchText=" ";
+        $scope.searchText="";
         $scope.getUserFeedBackDetails();
         $scope.removeDisable=true;
     };

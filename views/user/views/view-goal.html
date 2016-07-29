@@ -71,18 +71,18 @@
         <div class="col-md-6 col-sm-6">Current Weight<span class="pull-right">:</span></div>
         <div class="col-md-6 col-sm-6 no-padding">{{weightlog}} <small><span ng-show="userProfile.unitPreference==1">Kgs</span><span ng-show="userProfile.unitPreference==2">lbs</span></small></div>
     </div>
-    <div ng-show="goalExpired" class="col-md-12 col-sm-12 no-padding">
-        <div class="col-md-6 col-sm-6">Achieved Weight<span class="pull-right">:</span></div>
-        <div class="col-md-6 col-sm-6 no-padding">{{achievedWeight}} <small><span ng-show="userProfile.unitPreference==1">Kgs</span><span ng-show="userProfile.unitPreference==2">lbs</span></small></div>
-    </div>
-    <div ng-show="goalExpired" class="col-md-12 col-sm-12 no-padding margin-bottom-7">
-        <div class="col-md-6 col-sm-6">Goal Result<span class="pull-right">:</span></div>
+    <div class="col-md-12 col-sm-12 no-padding">
+        <div class="col-md-6 col-sm-6">Goal Status<span class="pull-right">:</span></div>
         <div class="col-md-6 col-sm-6 no-padding">
-            <span ng-show="achieveStatus==0" class="text-red">Not Achieved</span>
-            <span ng-show="achieveStatus==1" class="text-orange">Partially Achieved</span>
-            <span ng-show="achieveStatus==2" class="text-green">Achieved</span>
+            <span ng-show="goalDetails.goalachievedstatus==0" class="text-orange">In Progress</span>
+            <span ng-show="goalDetails.goalachievedstatus==1" class="text-green">Achieved</span>
+            <span ng-show="goalDetails.goalachievedstatus==2" class="text-red">Yet to start</span>
+            <span ng-show="goalDetails.goalachievedstatus==3" class="text-green">Achieved and Reducing more</span>
+            <span ng-show="goalDetails.goalachievedstatus==4" class="text-green">Achieved and Exceeding more</span>
+            <span ng-show="goalDetails.goalachievedstatus==5" class="text-red">Expired</span>
         </div>
     </div>
+
 
     <div ng-hide="goalExpired" class="col-md-12 col-sm-12 margin-top-5">
         <p>Target Progress</p>

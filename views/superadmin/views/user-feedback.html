@@ -12,7 +12,7 @@
                 <a href="#" onclick="return false;" class="show-list-search search_button margin-left-5"><i class="fa fa-search"></i></a>
                 <div class="search-list-form override">
                     <form autocomplete="off" class="searchform">
-                        <input type="text" ng-model="platform" ng-change="getUserFeedBackDetails()" placeholder="Search by Platform or Feedback">
+                        <input type="text" ng-model="searchText" ng-change="getUserFeedBackDetails()" placeholder="Search by Platform or Feedback">
                     </form>
                 </div>
             </div>
@@ -39,7 +39,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                 <tr ng-repeat="userFeedback in userFeedbackList" ng-show="userFeedbackList.length!=0">
+                 <tr dir-paginate="userFeedback in userFeedbackList | itemsPerPage: recordsPerPage" ng-show="userFeedbackList.length!=0">
 
                     <td width="10"><input type="checkbox" value="{{userFeedback.feedbackid}}" name="group" id="{{userFeedback.feedbackid}}" ng-checked="selected"  ng-click="selectedFeedback(userFeedback.feedbackid)"/></td>
                     <td>{{userFeedback.name}}</td>
@@ -65,7 +65,7 @@
                     direction-links="true"
                     boundary-links="true"
                     ng-model="currentPage"
-                    ng-change="doGetCoursePaymentDetails()">
+                    ng-change="getUserFeedBackDetails()">
             </pagination>
 
         </div>

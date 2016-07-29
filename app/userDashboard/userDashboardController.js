@@ -916,6 +916,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
             $scope.weightUpdateText="Update Weight";
             $scope.doGetWeightLog(date);
             $scope.doGetDemograph();
+            $scope.getBudget(date);
         }, function () {
             errorMessage(Flash, "Please try again later!")
         });

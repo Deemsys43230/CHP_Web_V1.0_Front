@@ -23,7 +23,6 @@
         <div class="col-lg-5 col-md-5 col-sm-5 margin-top-15 padding-right-0">Goal Type<span class="pull-right">:</span></div>
         <div class="col-lg-7 col-md-7 col-sm-7 margin-top-10 padding-left-8" ng-show="preferMetric==1">
             <select class="full-width main margin-bottom-1" name="goalchoice" ng-change="doCheckPossibleDate(goalchoice)" ng-model="goalchoice" ng-required="plantype==2 && preferMetric==1">
-                <option value="">--Select--</option>
                 <option value="1">lose 1/4 kg per week</option>
                 <option value="2">lose 1/2 kg per week</option>
                 <option value="3">lose 3/4 kg per week</option>
@@ -33,7 +32,6 @@
         </div>
         <div class="col-lg-7 col-md-7 col-sm-7 margin-top-10 padding-left-8" ng-hide="preferMetric==1">
             <select class="full-width main margin-bottom-1" name="goalchoice" ng-change="doCheckPossibleDate(goalchoice)"  ng-model="goalchoice" ng-required="plantype==2 && !preferMetric==1">
-                <option value="">--Select--</option>
                 <option value="1">lose 1/2 lb per week</option>
                 <option value="2">lose 1 lb per week</option>
                 <option value="3">lose 1 1/2 lbs per week</option>
