@@ -9684,6 +9684,15 @@ input[type=range]:focus::-ms-fill-upper {
     font-weight: bold;
 }
 
+.label-info{
+    padding: 3px 7px!important;
+    border: 1px solid #3591cd;;
+    color: #3591cd;
+    font-size: 11px;
+    background-color: transparent;
+    border-radius: 3px;
+    font-weight: bold;
+}
 
 .label-danger{
     font-weight: bold;
@@ -15702,4 +15711,12 @@ h1.slider-font .h4 ul li{
 
 a.button-wrap:hover li{
     color:#fff!important;
+}
+.fa-big{
+    font-size: 30px;
+    color:#16cb7f;
+}
+
+.mouse-pointer{
+    cursor: pointer;
 }

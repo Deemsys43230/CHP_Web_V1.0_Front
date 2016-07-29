@@ -173,7 +173,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         var foodInsertPromise=UserDashboardService.doInsertUserFood($scope.userFood);
         foodInsertPromise.then(function(){
             $scope.loadFoodDiary( $scope.userFood.addeddate);
-            /*$scope.doGetIntakeBruntByDate( $scope.userFood.addeddate);*/
+           $scope.doGetIntakeBruntByDate( $scope.userFood.addeddate);
             $scope.goGetDailyIntakeGraph($scope.userFood.addeddate);
             $scope.goGetSessionGraph($scope.storedSessionId);
             $scope.doGetHistoryReport();
@@ -193,7 +193,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         foodInsertPromise.then(function(){
             var date = document.getElementById("main-start-date").value;
             $scope.loadFoodDiary(date);
-            /*$scope.doGetIntakeBruntByDate(date);*/
+           $scope.doGetIntakeBruntByDate(date);
             $scope.goGetDailyIntakeGraph(date);
             $scope.goGetSessionGraph($scope.storedSessionId);
             $scope.doGetHistoryReport();
@@ -209,7 +209,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         foodDeletePromise.then(function(){
             var date = document.getElementById("main-start-date").value;
             $scope.loadFoodDiary(date);
-            /*$scope.doGetIntakeBruntByDate(date);*/
+            $scope.doGetIntakeBruntByDate(date);
             $scope.goGetDailyIntakeGraph(date);
             $scope.goGetSessionGraph($scope.storedSessionId);
             $scope.doGetHistoryReport();
@@ -492,7 +492,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         var exerciseInsertPromise=UserDashboardService.doInsertUserExercise($scope.userExercise);
         exerciseInsertPromise.then(function(){
             $scope.loadExerciseDiary($scope.userExercise.date);
-            /*$scope.doGetIntakeBruntByDate($scope.userExercise.date);*/
+            $scope.doGetIntakeBruntByDate($scope.userExercise.date);
             $scope.doGetHistoryReport();
             $scope.getBudget($scope.userExercise.date);
         });
@@ -506,7 +506,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         exerciseDeletePromise.then(function(){
             var date = document.getElementById("main-start-date").value;
             $scope.loadExerciseDiary(date);
-            /*$scope.doGetIntakeBruntByDate(date);*/
+            $scope.doGetIntakeBruntByDate(date);
             $scope.doGetHistoryReport();
             $scope.getBudget(date);
         });
@@ -568,7 +568,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         exerciseInsertPromise.then(function(){
             var date = document.getElementById("main-start-date").value;
             $scope.loadExerciseDiary(date);
-            /*$scope.doGetIntakeBruntByDate(date);*/
+            $scope.doGetIntakeBruntByDate(date);
             $scope.doGetHistoryReport();
             $scope.getBudget(date);
         });
@@ -1078,11 +1078,12 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
     //To Update Goal Details
     $scope.updateGoalDetails=function(currentWeight){
       //  $scope.setGoalTypeOptions(1);
+        $scope.goalPossiblityStatus =0;
         $scope.targetText = 'End Date';
         $window.singlePicker = true;
         $scope.originalUpdateGoalWeight={
             endDate:$scope.goalDetails.enddate,
-            weight:$scope.goalDetails.targetweight
+            weight:$scope.goalDetails.targetweights
         };
         var startformat = $scope.goalDetails.startdate.slice(6,10)+','+$scope.goalDetails.startdate.slice(3,5)+','+$scope.goalDetails.startdate.slice(0,2);
         var currentformat = selectedDate.slice(6,10)+','+selectedDate.slice(3,5)+','+selectedDate.slice(0,2);
@@ -1103,6 +1104,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
 
 
         $scope.weight = $scope.goalDetails.targetweight;
+        $scope.currentEnddate= $scope.goalDetails.enddate;
         if($scope.goalDetails.planType==2){
         $scope.goalchoice=$scope.goalDetails.planchoice.toString();
         }
@@ -1244,7 +1246,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
             if(response.data.Response_status==0){
 
             $scope.customResponse = response.data.Response_status;
-            $scope.goalPossiblityStatus =10;
+            $scope.goalPossiblityStatus =0;
             $scope.customPossibleDate =  response.data.possibledate;
 
             $scope.setGoalDetails.enddate=$scope.customPossibleDate;
@@ -1336,37 +1338,43 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
     // Get Calories Brunt And Intake deatils by date
     $scope.doGetIntakeBruntByDate = function(date){
         requestHandler.postRequest("user/getTotalCalorieDetailForDate/",{"date":date}).then(function(response){
-            $scope.calorieGraph=response.data.Calorie_Graph;
+           $scope.calorieGraph=response.data.BudgetDetail;
 
-            if($scope.calorieGraph.intakecalorie=="") $scope.calorieGraph.intakecalorie=0;
-            if($scope.calorieGraph.burntcalorie=="") $scope.calorieGraph.burntcalorie=0;
+
+
+            if($scope.calorieGraph.Intake=="") $scope.calorieGraph.Intake=0;
+            if($scope.calorieGraph.Burnt=="") $scope.calorieGraph.Burnt=0;
+            else  if($scope.calorieGraph.Burnt!=""){
+                $scope.calorieGraph.Burnt=Math.abs($scope.calorieGraph.Burnt);
+            }
+
 
             $scope.averageIntake=Math.round($scope.calorieGraph.averagecalorieintake);
             $scope.averageSpent=Math.round($scope.calorieGraph.averagecalorieburnt);
 
-            $scope.currentGain=$scope.calorieGraph.intakecalorie;
+            $scope.currentGain=$scope.calorieGraph.Intake;
             $scope.currentGain=$scope.currentGain.toFixed(2);
 
-            if($scope.averageIntake<$scope.calorieGraph.intakecalorie){
+          /*  if($scope.averageIntake<$scope.calorieGraph.intakecalorie){
                 $scope.currentGainColour="red";
             }else $scope.currentGainColour="limegreen";
-
-            $scope.currentSpent=$scope.calorieGraph.burntcalorie;
+*/
+            $scope.currentSpent=$scope.calorieGraph.Burnt;
             $scope.currentSpent=$scope.currentSpent.toFixed(2);
 
-            if($scope.averageSpent<$scope.calorieGraph.burntcalorie){
+           /* if($scope.averageSpent<$scope.calorieGraph.burntcalorie){
                 $scope.currentSpentColour="red";
             }else $scope.currentSpentColour="orange";
-
+*/
             var gainedCalories;
             var spentCalories;
-            if($scope.calorieGraph.intakecalorie>$scope.calorieGraph.burntcalorie)
-                spentCalories = parseFloat(($scope.calorieGraph.intakecalorie - $scope.calorieGraph.burntcalorie).toFixed(2));
+            if($scope.calorieGraph.Intake>$scope.calorieGraph.Burnt)
+                spentCalories = parseFloat(($scope.calorieGraph.Intake - $scope.calorieGraph.Burnt).toFixed(2));
             else spentCalories =0;
-            if($scope.calorieGraph.intakecalorie<$scope.calorieGraph.burntcalorie)
-                gainedCalories = parseFloat(($scope.calorieGraph.burntcalorie - $scope.calorieGraph.intakecalorie).toFixed(2));
+            if($scope.calorieGraph.Intake<$scope.calorieGraph.Burnt)
+                gainedCalories = parseFloat(($scope.calorieGraph.Burnt - $scope.calorieGraph.Intake).toFixed(2));
             else gainedCalories =0;
-            if($scope.calorieGraph.intakecalorie==$scope.calorieGraph.burntcalorie){
+            if($scope.calorieGraph.Intake==$scope.calorieGraph.Burnt){
                 gainedCalories =0;
                 spentCalories =0;
             }
@@ -1419,7 +1427,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
                     stack: 'male'
                 },{
                     name: 'Intake',
-                    data: [$scope.calorieGraph.intakecalorie],
+                    data: [$scope.calorieGraph.Intake],
                     color: 'limegreen',
                     stack: 'male'
                 }, {
@@ -1428,8 +1436,8 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
                     data: [spentCalories],
                     stack: 'female'
                 },{
-                    name: 'Brunt',
-                    data: [$scope.calorieGraph.burntcalorie],
+                    name: 'Burnt',
+                    data: [$scope.calorieGraph.Burnt],
                     color: 'red',
                     stack: 'female'
                 }]
@@ -2016,7 +2024,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
     $scope.initialLoadFoodAndExercise=function(date){
         $scope.loadFoodDiary(date);
         $scope.loadExerciseDiary(date);
-        /*$scope.doGetIntakeBruntByDate(date);*/
+        $scope.doGetIntakeBruntByDate(date);
         $scope.goGetDailyIntakeGraph(date);
         $scope.doGetWeightGoal();
         $scope.doGetWeightLog(date);
