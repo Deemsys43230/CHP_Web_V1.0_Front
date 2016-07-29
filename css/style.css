@@ -2388,7 +2388,9 @@ input[type="submit"] {
 .margin-bottom-5 {
     margin-bottom: 5px !important;
 }
-
+.margin-bottom-2 {
+    margin-bottom: 2px !important;
+}
 .margin-bottom-1 {
     margin-bottom: 1px !important;
 }
@@ -15719,4 +15721,8 @@ a.button-wrap:hover li{
 
 .mouse-pointer{
     cursor: pointer;
+}
+.goal-border{
+    border-bottom: 1px solid #d3d3d3;
+    margin-bottom: 2px;
 }

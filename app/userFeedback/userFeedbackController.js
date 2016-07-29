@@ -2,7 +2,9 @@ var adminApp = angular.module('adminApp', ['ngRoute','oc.lazyLoad','requestModul
 
 adminApp.controller('UserFeedbackController',['$scope','requestHandler','Flash','$routeParams',function($scope,requestHandler,Flash,$routeParams) {
 
+
     $scope.currentPage=1;
+
     $scope.getUserFeedBackDetails= function(){
 
         $scope.loaded=true;
@@ -31,6 +33,10 @@ adminApp.controller('UserFeedbackController',['$scope','requestHandler','Flash',
         });
     };
 
+    $scope.searchFeedbackDetails=function(){
+      $scope.currentPage=1;
+      $scope.getUserFeedBackDetails();
+    };
 
     $scope.feedbackid=[];
     $scope.isChecked=function(){
