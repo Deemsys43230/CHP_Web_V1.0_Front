@@ -123,14 +123,14 @@
                 </div>
             </form>
             <div class="text-center">
-                <a id="modal_trigger" href="#modal" onclick="return false;" class="btn btn-success" ng-disabled="doGetPaypalSettings_isClean() || paypalSettingsForm.$invalid">Save Changes</a>
+                <a id="modal_trigger" href="#updatemodal" onclick="return false;" class="btn btn-success" ng-disabled="doGetPaypalSettings_isClean() || paypalSettingsForm.$invalid" ng-click="updateCheck()">Save Changes</a>
             </div>
         </div>
     </div>
 </div>
 
 <!-- create coach popup-->
-<div id="modal" class="popupContainer" style="display:none;">
+<div id="updatemodal" class="popupContainer" style="display:none;">
     <header class="popupHeader">
         <span class="header_title">Change Paypal Settings</span>
         <span class="modal_close"><i class="fa fa-times"></i></span>

@@ -1087,6 +1087,25 @@
         </div>
     </section>
 </div>
+<!--Update Goal Alert-->
+<div id="updateGoalAlert" class="popupContainer" style="display:none;left:37%!important;">
+    <header class="popupHeader">
+        <span class="header_title">Alert</span>
+        <span class="modal_close"><i class="fa fa-times"></i></span>
+    </header>
+
+    <section class="popupBody">
+        <!-- Register Form -->
+        <div class="common_model">
+            <span ng-show="doWeightGoalUpdate=='loss'" >Your current weight is less than your target weight.Please change your plan.</span>
+            <span ng-show="doWeightGoalUpdate=='gain'" >Your current weight is greater than your target weight.Please change your plan.</span>
+            <div class="action_btns margin-top-20">
+                <div class="one_half modal_close"><a href="" class="btn btn_blue" >OK</a></div>
+                <div class="one_half last modal_close"><a class="btn btn_red">Cancel</a></div>
+            </div>
+        </div>
+    </section>
+</div>
 
 <!-- Weight Goal Confirmation-->
 <div id="goal-delete-confirmation" class="popupContainer" style="display:none;left:37%!important;">

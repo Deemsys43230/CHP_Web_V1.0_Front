@@ -34,6 +34,30 @@ adminApp.controller('PaypalSettingsController',['$scope','requestHandler','Flash
 
     };
 
+    $scope.updateCheck=function(){
+        $("html, body").animate({
+            scrollTop: 0
+        }, 600);
+        $(function(){
+            $("#lean_overlay").fadeTo(1000);
+            $("#updatemodal").fadeIn(600);
+            $(".common_model").show();
+
+        });
+        $(".modal_close").click(function(){
+            $(".common_model").hide();
+            $("#updatemodal").hide();
+            $("#lean_overlay").hide();
+        });
+
+        $("#lean_overlay").click(function(){
+            $(".common_model").hide();
+            $("#updatemodal").hide();
+            $("#lean_overlay").hide();
+        });
+
+    };
+
     $scope.doUpdatePaypalSettings=function(){
         $scope.paypalSettings.paypaltype=parseInt($scope.paypalSettings.paypaltype);
         requestHandler.putRequest("admin/updatePayPalDetails",$scope.paypalSettings).then(function(response){

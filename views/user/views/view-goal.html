@@ -25,12 +25,20 @@
             <span ng-show="goalDetails.planchoice != '5'">
                 <span ng-show="goalDetails.planType == '3'">Gain</span>
                 <span ng-show="goalDetails.planType == '2'">Lose</span>
+                <span ng-show="userProfile.unitPreference == '1'">
                 <span ng-show="goalDetails.planchoice == '1'">1/4</span>
                 <span ng-show="goalDetails.planchoice == '2'">1/2</span>
                 <span ng-show="goalDetails.planchoice == '3'">3/4</span>
                 <span ng-show="goalDetails.planchoice == '4'">1</span>
                 <span ng-show="userProfile.unitPreference == '1'">Kg</span>
+                </span>
+                <span ng-show="userProfile.unitPreference == '2'">
+                <span ng-show="goalDetails.planchoice == '1'">1/2</span>
+                <span ng-show="goalDetails.planchoice == '2'">1</span>
+                <span ng-show="goalDetails.planchoice == '3'">1 1/2</span>
+                <span ng-show="goalDetails.planchoice == '4'">2</span>
                 <span ng-show="userProfile.unitPreference == '2'">lb</span>
+                </span>
                 per week
             </span>
         </div>
@@ -52,16 +60,8 @@
         <div class="col-md-6 col-sm-6 no-padding">{{remainingDates}} <small>days</small></div>
     </div>
     <div ng-show="goalExpired" class="col-md-12 col-sm-12 no-padding goal-border">
-        <div class="col-md-6 col-sm-6 margin-bottom-2">Goal Status<span class="pull-right">:</span></div>
-        <div class="col-md-6 col-sm-6 no-padding text-red">Expired</div>
-    </div>
-    <div ng-show="goalExpired" class="col-md-12 col-sm-12 no-padding goal-border">
         <div class="col-md-6 col-sm-6 margin-bottom-2">Target Days<span class="pull-right">:</span></div>
         <div class="col-md-6 col-sm-6 no-padding">{{targetDays}} <small>days</small></div>
-    </div>
-    <div ng-show="goalExpired" class="col-md-12 col-sm-12 no-padding goal-border">
-        <div class="col-md-6 col-sm-6 margin-bottom-2">Initial Weight<span class="pull-right">:</span></div>
-        <div class="col-md-6 col-sm-6 no-padding">{{goalDetails.initialweight}} <small><span ng-show="userProfile.unitPreference==1">Kgs</span><span ng-show="userProfile.unitPreference==2">lbs</span></small></div>
     </div>
     <div class="col-md-12 col-sm-12 no-padding goal-border">
         <div class="col-md-6 col-sm-6 margin-bottom-2">Target Weight<span class="pull-right">:</span></div>
