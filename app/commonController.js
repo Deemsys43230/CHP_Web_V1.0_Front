@@ -85,12 +85,34 @@ commonApp.controller('CommonController',['$scope','requestHandler','Flash','$rou
         $scope.doGetTestimonialsByUser();
         $scope.doGetDashboardCount();
     };*/
+    $scope.units=1;
+    $scope.test=function(){
+       if($scope.units==1){
+           $scope.units=2;
+           $scope.height="";
+           $scope.weight="";
+       }
+       else if($scope.units==2){
+           $scope.units=1;
+           $scope.feet="";
+           $scope.inches="";
+           $scope.weight="";
+       }
+    };
+
     $scope.showForm=true;
 
     $scope.calculateEMI=function(){
         $scope.showForm=false;
+        if($scope.units==1){
+            $scope.weightCal=$scope.weight/0.4536;
+            $scope.heightCal=$scope.height/2.54;
+            $scope.emiValue=(($scope.weightCal*703)/($scope.heightCal*$scope.heightCal)).toFixed(2);
+        }
+        else if($scope.units==2){
         var inches = (12*$scope.feet)+(1*$scope.inches);
         $scope.emiValue=(($scope.weight*703)/(inches*inches)).toFixed(2);
+        }
         $window.emi=$scope.emiValue;
         callGraph();
     };

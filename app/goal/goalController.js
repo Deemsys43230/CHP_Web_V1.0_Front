@@ -220,6 +220,7 @@ userApp.controller('GoalController',['$scope','requestHandler','Flash','$route',
 
     $scope.viewRank=function(){
         requestHandler.postRequest("user/rankGoalList/",{"goalid" : $routeParams.id}).then(function(response){
+            $scope.goalType = response.data.GoalType;
             $scope.rankList=response.data.Goal_Data;
             if($scope.goalDetail.status==1){
                 $(function(){

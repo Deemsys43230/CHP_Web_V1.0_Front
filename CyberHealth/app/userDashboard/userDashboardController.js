@@ -300,6 +300,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
                     if($scope.userProfile.gender==1){
                         dividevalue=4;
                     }
+
                     $scope.idealWeight = ($scope.demography.height - 100 -(($scope.demography.height -150)/dividevalue));
                     $scope.idealWeight=$scope.idealWeight.toFixed(2);
 
@@ -334,27 +335,71 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
                 if($scope.userProfile.gender==1){
                     dividevalue=4;
                 }
-                $scope.idealWeight = ($scope.demography.height - 100 -(($scope.demography.height -150)/dividevalue));
-                $scope.idealWeight=$scope.idealWeight.toFixed(2);
+                if($scope.userProfile.unitPreference==1){
+                    $scope.heightCal = $scope.demography.height/100;
+                    $scope.heightCal = $scope.heightCal * $scope.heightCal;
 
-                if($scope.demography.weight < $scope.idealWeight){
-                    $scope.upweight =1;
-                    $scope.idealWeightlevel = $scope.demography.weight/$scope.idealWeight;
-                    $scope.idealWeightlevel = ($scope.idealWeightlevel*100)/2;
-                    $scope.balanceweight = $scope.idealWeight - $scope.demography.weight;
-                    $scope.balanceweight = $scope.balanceweight.toFixed(2);
+                    $scope.idealWeight = 22 * $scope.heightCal;
+                    $scope.idealWeight=$scope.idealWeight.toFixed(2);
+
+                    if($scope.demography.weight < $scope.idealWeight){
+                        $scope.upweight =1;
+                        $scope.idealWeightlevel = $scope.demography.weight/$scope.idealWeight;
+                        $scope.idealWeightlevel = ($scope.idealWeightlevel*100)/2;
+                        $scope.balanceweight = $scope.idealWeight - $scope.demography.weight;
+                        $scope.balanceweight = $scope.balanceweight.toFixed(2);
+                    }
+                    else if($scope.demography.weight > $scope.idealWeight){
+                        $scope.upweight =0;
+                        $scope.idealWeightlevel = $scope.idealWeight/$scope.demography.weight;
+                        $scope.idealWeightlevel = 100-($scope.idealWeightlevel*100)/2;
+                        $scope.balanceweight =  $scope.demography.weight - $scope.idealWeight ;
+                        $scope.balanceweight = $scope.balanceweight.toFixed(2);
+                    }else{
+                        $scope.upweight =2;
+                        $scope.idealWeightlevel = 1;
+                        $scope.idealWeightlevel = ($scope.idealWeightlevel*100)/2;
+                    }
                 }
-                else if($scope.demography.weight > $scope.idealWeight){
-                    $scope.upweight =0;
-                    $scope.idealWeightlevel = $scope.idealWeight/$scope.demography.weight;
-                    $scope.idealWeightlevel = 100-($scope.idealWeightlevel*100)/2;
-                    $scope.balanceweight =  $scope.demography.weight - $scope.idealWeight ;
-                    $scope.balanceweight = $scope.balanceweight.toFixed(2);
-                }else{
-                    $scope.upweight =2;
-                    $scope.idealWeightlevel = 1;
-                    $scope.idealWeightlevel = ($scope.idealWeightlevel*100)/2;
+
+                else if($scope.userProfile.unitPreference==2){
+                    $scope.heightFeet = $scope.demography.height.toString().split(".")[0];
+                    $scope.heightInches = $scope.demography.height.toString().split(".")[1];
+
+                    $scope.heightTotal = ((parseInt($scope.heightFeet) * 12 ) + parseInt($scope.heightInches)) ;
+                    $scope.heightTotal = $scope.heightTotal * 2.54 ;
+                    $scope.heightCal = $scope.heightTotal/100;
+                    $scope.heightCal = $scope.heightCal * $scope.heightCal;
+                    $scope.idealWeight = 22 * $scope.heightCal;
+                    $scope.idealWeight =$scope.idealWeight / 0.4536;
+                    $scope.idealWeight=$scope.idealWeight.toFixed(2);
+
+                    $scope.weightCal = $scope.demography.weight * 0.4536 ;
+                    $scope.weightCal = $scope.demography.weight.toFixed(2);
+
+
+                    if($scope.weightCal < $scope.idealWeight){
+                        $scope.upweight =1;
+                        $scope.idealWeightlevel = $scope.weightCal/$scope.idealWeight;
+                        $scope.idealWeightlevel = ($scope.idealWeightlevel*100)/2;
+                        $scope.balanceweight = $scope.idealWeight - $scope.weightCal;
+                        $scope.balanceweight = $scope.balanceweight.toFixed(2);
+                    }
+                    else if($scope.weightCal > $scope.idealWeight){
+                        $scope.upweight =0;
+                        $scope.idealWeightlevel = $scope.idealWeight/$scope.weightCal;
+                        $scope.idealWeightlevel = 100-($scope.idealWeightlevel*100)/2;
+                        $scope.balanceweight =  $scope.weightCal - $scope.idealWeight ;
+                        $scope.balanceweight = $scope.balanceweight.toFixed(2);
+                    }else{
+                        $scope.upweight =2;
+                        $scope.idealWeightlevel = 1;
+                        $scope.idealWeightlevel = ($scope.idealWeightlevel*100)/2;
+                    }
+
                 }
+
+
 
                 $window.idealWeightlevel = $scope.idealWeightlevel.toFixed(2);
                 $scope.graph = {

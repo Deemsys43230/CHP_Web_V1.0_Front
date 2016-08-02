@@ -145,7 +145,7 @@
                     <h4 class="margin-top-5">Rank List</h4>
                     <hr/>
                     <div class="height-335" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#eee'}">
-                        <div ng-repeat="ranking in rankList | orderBy:'rank'">
+                        <div ng-repeat="ranking in rankList | orderBy:'rank'" ng-show="ranking.rank<=5">
                             <div class="col-lg-2 col-md-2 col-sm-2">
                                 <span ng-if="ranking.rank<4"><img ng-src="../../images/rank-{{ranking.rank}}.jpg"></span>
                                 <span ng-if="ranking.rank>=4"><img src="../../images/rank-high.png"></span>
@@ -224,17 +224,18 @@
 
     <section class="popupBody">
         <!-- Register Form -->
-        <div class="common_model">
-            <div class="margin-top-10" ng-repeat="rank in rankList | limitTo:3">
+        <div class="common_model rank-scroll">
+            <div class="margin-top-10" ng-repeat="rank in rankList | orderBy:'rank'" ng-show="rank.rank<=5" >
                 <div class="col-lg-2 col-md-2 col-sm-2 no-padding text-center">
-                    <img class="img-circle" ng-src="../../images/rank-{{rank.rank}}.jpg">
+                    <span ng-if="rank.rank<4"><img ng-src="../../images/rank-{{rank.rank}}.jpg"></span>
+                    <span ng-if="rank.rank>=4"><img src="../../images/rank-high.png"></span>
                 </div>
                 <div class="col-lg-2 col-md-2 col-sm-2">
                     <img class="img-circle" ng-src="{{rank.user_imageurl | trusted}}">
                 </div>
                 <div class="col-lg-8 col-md-8 col-sm-8">
                     <h4 class="wrap">{{rank.user_name}}</h4>
-                    <p>Weight : {{rank.weight}} kgs</p>
+                    <p>Weight : {{rank.weight}} kgs | <span ng-show="goalType==1">Loss</span><span ng-show="goalType==2">Gain</span> {{rank.weightrange}} Kgs</p>
                 </div>
                 <div class="col-lg-12 col-md-12 col-sm-12 no-padding">
                     <hr/>
@@ -291,13 +292,6 @@
     </section>
 </div>
 
-
-<script type="text/javascript" src="../../js/script.js"></script>
-
-<script type="text/javascript">
-    $("#modal_trigger").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
-</script>
-
 <!-- Update Weight popup -->
 <div id="updateWeight" class="popupContainer" style="display:none;left:37%!important;">
     <header class="popupHeader">
@@ -323,3 +317,10 @@
         </div>
     </section>
 </div>
+
+<script type="text/javascript" src="../../js/script.js"></script>
+
+<script type="text/javascript">
+    $("#modal_trigger").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
+</script>
+
