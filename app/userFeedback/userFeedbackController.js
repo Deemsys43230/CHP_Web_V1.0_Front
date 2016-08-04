@@ -3,10 +3,11 @@ var adminApp = angular.module('adminApp', ['ngRoute','oc.lazyLoad','requestModul
 adminApp.controller('UserFeedbackController',['$scope','requestHandler','Flash','$routeParams',function($scope,requestHandler,Flash,$routeParams) {
 
 
+
     $scope.currentPage=1;
 
     $scope.getUserFeedBackDetails= function(){
-
+        $('#checkAll').removeAttr('checked','checked');
         $scope.loaded=true;
         $scope.offset=($scope.currentPage-1)*$scope.itemsPerPage;
         $scope.limit=$scope.currentPage*$scope.itemsPerPage;
@@ -40,8 +41,9 @@ adminApp.controller('UserFeedbackController',['$scope','requestHandler','Flash',
 
     $scope.feedbackid=[];
     $scope.isChecked=function(){
-        $scope.getUserFeedBackDetails();
+       // $scope.getUserFeedBackDetails();
         if($scope.total_count>0){
+
             $.each($scope.userFeedbackList, function(index,value) {
                 if(document.getElementById('checkAll').checked==true){
                     $scope.feedbackid.push(value.feedbackid);

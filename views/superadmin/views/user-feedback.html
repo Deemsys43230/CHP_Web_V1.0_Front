@@ -41,7 +41,7 @@
                 <tbody>
                  <tr dir-paginate="userFeedback in userFeedbackList | itemsPerPage: 10" current-page="currentPage" total-items="total_count" ng-show="userFeedbackList.length!=0">
 
-                    <td width="10"><input type="checkbox" value="{{userFeedback.feedbackid}}" name="group" id="{{userFeedback.feedbackid}}" ng-checked="selected"  ng-click="selectedFeedback(userFeedback.feedbackid)"/></td>
+                    <td width="10"><input type="checkbox" value="{{userFeedback.feedbackid}}" name="group" id="{{userFeedback.feedbackid}}"  ng-click="selectedFeedback(userFeedback.feedbackid)"/></td>
                     <td>{{userFeedback.name}}</td>
                     <td>{{userFeedback.emailId}}</td>
                     <td>{{userFeedback.datetime}}</td>
@@ -69,9 +69,10 @@
 </div>
 
 <!-- End Page Banner -->
-<div id="category" class="popupContainer width" style="display:none;left:37%!important;">
+<div id="category" class="popupContainer-width-big" style="display:none;">
+    <div class="center-block">
     <header class="popupHeader width-100">
-        <span class="header_title">fsdfsdfsdsdfs</span>
+        <span class="header_title">Feedback</span>
         <span class="modal_close"><i class="fa fa-times"></i></span>
     </header>
 
@@ -81,11 +82,11 @@
             <table class="table table-bordered table-striped">
               <tr>
                   <td class="col-md-6" >Username</td>
-                  <td class="col-md-6" >{{userFeedbackDetails.name}}</td>
+                  <td class="col-md-6 wrap" >{{userFeedbackDetails.name}}</td>
               </tr>
                 <tr>
                     <td class="col-md-6" >Email ID</td>
-                    <td class="col-md-6" >{{userFeedbackDetails.emailId}}</td>
+                    <td class="col-md-6 wrap" >{{userFeedbackDetails.emailId}}</td>
                 </tr>
                 <tr>
                     <td class="col-md-6" >PhoneNumber</td>
@@ -94,26 +95,20 @@
                 <tr>
                     <td class="col-md-6" >Platform</td>
                     <td class="col-md-6" >{{userFeedbackDetails.platform}}</td>
-                </tr> <tr>
-                <td class="col-md-6" >Date</td>
-                <td class="col-md-6" >{{userFeedbackDetails.datetime}}</td>
-            </tr>
-                <tr>
-                    <td class="col-md-6" >Feedback</td>
-                    <td class="col-md-6" >{{userFeedbackDetails.description}}</td>
                 </tr>
-
-
+                <tr>
+                    <td class="col-md-6" >Date</td>
+                    <td class="col-md-6" >{{userFeedbackDetails.datetime}}</td>
+               </tr>
+                <tr class="wrap">
+                    <td class="col-md-6" >Feedback</td>
+                    <td class="col-md-6 wrap-all wrap" >{{userFeedbackDetails.description}}</td>
+                </tr>
             </table>
-               <!-- <div class="col-md-6">Username</div> <div class="col-md-6">{{userFeedbackDetails.name}}</div>
-                <div class="col-md-6">Email ID</div> <div class="col-md-6">{{userFeedbackDetails.emailId}}</div>
-                <div class="col-md-6">Phone Number</div> <div class="col-md-6">{{userFeedbackDetails.mobile}}</div>
-                <div class="col-md-6">Platform</div> <div class="col-md-6">{{userFeedbackDetails.platform}}</div>
-                <div class="col-md-6">Date</div> <div class="col-md-6">{{userFeedbackDetails.datetime}}</div>
-                <div class="col-md-6">Feedback</div> <div class="col-md-6">{{userFeedbackDetails.description}}</div>
--->
+
 </div>
     </section>
+        </div>
 </div>
 
 <!-- End Page Banner -->

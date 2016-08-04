@@ -35,6 +35,16 @@
     z-index:999999 !important;
 }
 
+.popupContainer-width-big{
+    position:absolute;
+    width:800px !important;
+    height: auto;
+    left:20%;
+    top:70px!important;
+    background: #FFF;
+    z-index:999999 !important;
+}
+
 .action_btns .btn {padding:10px 20px; background: #F4F4F2;}
 .btn_red {background: #ED6347 !important; color: #FFF !important;}
 .btn_blue {background: #7A8EB8 !important; color: #FFF !important;}

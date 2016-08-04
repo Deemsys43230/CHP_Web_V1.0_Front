@@ -23,6 +23,8 @@ userApp.controller('GoalController',['$scope','requestHandler','Flash','$route',
         });
     };
 
+
+
     $scope.doGetViewGoal=function(){
         $scope.isRequest=$route.current.request;
         requestHandler.postRequest("user/getIndividualGoalDetail/",{"goalid" :$routeParams.id}).then(function(response){
@@ -222,6 +224,12 @@ userApp.controller('GoalController',['$scope','requestHandler','Flash','$route',
         requestHandler.postRequest("user/rankGoalList/",{"goalid" : $routeParams.id}).then(function(response){
             $scope.goalType = response.data.GoalType;
             $scope.rankList=response.data.Goal_Data;
+            $.each($scope.rankList,function(index,value){
+                value.weightVal="";
+                value.weightVal = Math.abs(value.weightrange);
+
+            });
+
             if($scope.goalDetail.status==1){
                 $(function(){
                     $("#lean_overlay").fadeTo(1000);

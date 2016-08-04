@@ -113,14 +113,16 @@
 }
 .beatpicker .days .cell-parent li.cell.date-disabled:hover {
     background-color: #c2c2c2;
-    color: #fff
+    color: #fff;
+    cursor: not-allowed;
 }
 .beatpicker .days .cell-parent li.cell.not-notable {
     color: #ababab
 }
 .beatpicker .days .cell-parent li.cell.date-disabled,
 .days .cell-parent li.cell.not-notable.date-disabled {
-    color: #c6c6c6
+    color: #c6c6c6;
+    cursor: not-allowed;
 }
 .beatpicker .days .cell.notable-today {
     background-color: #4184a9;

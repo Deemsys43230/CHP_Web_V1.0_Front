@@ -2,8 +2,6 @@ var commonApp = angular.module('commonApp', ['ngRoute','oc.lazyLoad','requestMod
 
 commonApp.controller('CommonController',['$scope','requestHandler','Flash','$routeParams','$sce','$rootScope','$timeout','$window',function($scope,requestHandler,Flash,$routeParams,$sce,$rootScope,$timeout,$window) {
 
-
-
     $scope.countFrom = 0;
     $window.emi=0;
 
@@ -102,7 +100,9 @@ commonApp.controller('CommonController',['$scope','requestHandler','Flash','$rou
 
     $scope.showForm=true;
 
+
     $scope.calculateEMI=function(){
+        $scope.dob= document.getElementById("mypicker").value;
         $scope.showForm=false;
         if($scope.units==1){
             $scope.weightCal=$scope.weight/0.4536;
@@ -160,4 +160,22 @@ commonApp.filter('toSec', function() {
 
         return result || '';
     };
+});
+commonApp.directive('picker', function() {
+    return {
+        restrict: 'A',
+        require : 'ngModel',
+        link : function (scope, element, attrs, ngModelCtrl) {
+            $(function(){
+                element.picker({
+                    dateFormat:'dd/mm/yy',
+                    onSelect:function (date) {
+                        scope.$apply(function () {
+                            ngModelCtrl.$setViewValue(date);
+                        });
+                    }
+                });
+            });
+        }
+    }
 });

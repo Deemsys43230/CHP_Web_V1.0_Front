@@ -32,7 +32,10 @@
                         <h6>Created By</h6>
                         <p>{{goalDetail.user_name}}&nbsp;</p>
                     </div>
-                    <div class="circle margin-top60 margin-left30  pull-right">{{goalDetail.actualweight}}/{{goalDetail.targetweight}}</div>
+                    <div class="circle margin-top60 margin-left30  pull-right">
+                        <span>{{goalDetail.actualweight}}/{{goalDetail.targetweight}}</span>
+                        <div class="goal-circle-unit"><span ng-show="userProfile.unitPreference==1">(kgs)</span><span ng-hide="userProfile.unitPreference==1">(lbs)</span></div>
+                    </div>
                     <div class="col-lg-12 col-md-12 col-sm-12 no-padding margin-top-10" ng-hide="goalDetail.status==2">
                         <div ng-show="isRequest">
                             <span><a href="" class="target_button green_button" ng-click="acceptGoalCheck(goalDetail.goalid)">Join Goal</a></span>
@@ -77,11 +80,11 @@
                                 <td>{{goalDetail.goalMemberCount}}</td>
                             </tr>
                             <tr>
-                                <td>Target Weight</td>
+                                <td>Target Weight <span ng-show="userProfile.unitPreference==1">(kgs)</span><span ng-hide="userProfile.unitPreference==1">(lbs)</span></td>
                                 <td>{{goalDetail.targetweight}}</td>
                             </tr>
                             <tr>
-                                <td>Actual Weight</td>
+                                <td>Actual Weight <span ng-show="userProfile.unitPreference==1">(kgs)</span><span ng-hide="userProfile.unitPreference==1">(lbs)</span></td>
                                 <td>{{goalDetail.actualweight}}</td>
                             </tr>
                         </table>
@@ -235,7 +238,13 @@
                 </div>
                 <div class="col-lg-8 col-md-8 col-sm-8">
                     <h4 class="wrap">{{rank.user_name}}</h4>
-                    <p>Weight : {{rank.weight}} kgs | <span ng-show="goalType==1">Loss</span><span ng-show="goalType==2">Gain</span> {{rank.weightrange}} Kgs</p>
+                    <p>Weight : {{rank.weight}} kgs |
+                      <span ng-show="rank.weightrange==0">
+                            <span ng-show="goalDetail.goaltype==1">Loss</span>
+                            <span ng-show="goalDetail.goaltype==2">Gain</span>
+                        </span>
+                        <span ng-show="rank.weightrange < 0">Loss</span>
+                        <span ng-show="rank.weightrange > 0">Gain</span> {{rank.weightVal}} Kgs</p>
                 </div>
                 <div class="col-lg-12 col-md-12 col-sm-12 no-padding">
                     <hr/>

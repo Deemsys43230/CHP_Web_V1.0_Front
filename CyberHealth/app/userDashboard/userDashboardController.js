@@ -340,21 +340,21 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
                     $scope.heightCal = $scope.heightCal * $scope.heightCal;
 
                     $scope.idealWeight = 22 * $scope.heightCal;
-                    $scope.idealWeight=$scope.idealWeight.toFixed(2);
+                    $scope.idealWeight=$scope.idealWeight.toFixed(1);
 
                     if($scope.demography.weight < $scope.idealWeight){
                         $scope.upweight =1;
                         $scope.idealWeightlevel = $scope.demography.weight/$scope.idealWeight;
                         $scope.idealWeightlevel = ($scope.idealWeightlevel*100)/2;
                         $scope.balanceweight = $scope.idealWeight - $scope.demography.weight;
-                        $scope.balanceweight = $scope.balanceweight.toFixed(2);
+                        $scope.balanceweight = $scope.balanceweight.toFixed(1);
                     }
                     else if($scope.demography.weight > $scope.idealWeight){
                         $scope.upweight =0;
                         $scope.idealWeightlevel = $scope.idealWeight/$scope.demography.weight;
                         $scope.idealWeightlevel = 100-($scope.idealWeightlevel*100)/2;
                         $scope.balanceweight =  $scope.demography.weight - $scope.idealWeight ;
-                        $scope.balanceweight = $scope.balanceweight.toFixed(2);
+                        $scope.balanceweight = $scope.balanceweight.toFixed(1);
                     }else{
                         $scope.upweight =2;
                         $scope.idealWeightlevel = 1;
@@ -372,25 +372,25 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
                     $scope.heightCal = $scope.heightCal * $scope.heightCal;
                     $scope.idealWeight = 22 * $scope.heightCal;
                     $scope.idealWeight =$scope.idealWeight / 0.4536;
-                    $scope.idealWeight=$scope.idealWeight.toFixed(2);
+                    $scope.idealWeight=$scope.idealWeight.toFixed(1);
+                    $scope.idealWeight=parseFloat($scope.idealWeight);
 
                     $scope.weightCal = $scope.demography.weight * 0.4536 ;
                     $scope.weightCal = $scope.demography.weight.toFixed(2);
-
-
+                    $scope.weightCal=parseFloat($scope.weightCal);
                     if($scope.weightCal < $scope.idealWeight){
                         $scope.upweight =1;
                         $scope.idealWeightlevel = $scope.weightCal/$scope.idealWeight;
                         $scope.idealWeightlevel = ($scope.idealWeightlevel*100)/2;
                         $scope.balanceweight = $scope.idealWeight - $scope.weightCal;
-                        $scope.balanceweight = $scope.balanceweight.toFixed(2);
+                        $scope.balanceweight = $scope.balanceweight.toFixed(1);
                     }
                     else if($scope.weightCal > $scope.idealWeight){
                         $scope.upweight =0;
                         $scope.idealWeightlevel = $scope.idealWeight/$scope.weightCal;
                         $scope.idealWeightlevel = 100-($scope.idealWeightlevel*100)/2;
                         $scope.balanceweight =  $scope.weightCal - $scope.idealWeight ;
-                        $scope.balanceweight = $scope.balanceweight.toFixed(2);
+                        $scope.balanceweight = $scope.balanceweight.toFixed(1);
                     }else{
                         $scope.upweight =2;
                         $scope.idealWeightlevel = 1;
@@ -951,6 +951,14 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
             $scope.doInsertOrUpdateWeightLog($("#weight-log-date1").val(),parseFloat($("#weightLog1").val()));
     };
 
+    $scope.checkGoalStatus=function(date){
+        requestHandler.postRequest("checkGoalStatus/",{"date":date}).then(function(response){
+
+            $scope.budgetCheck = response.data.goalPossiblity;
+          //  alert($scope.budgetCheck);
+        });
+    };
+
     //TO Insert weight Goal Log
     $scope.doInsertOrUpdateWeightLog=function(date,weight){
         requestHandler.postRequest("user/weightlogInsertorUpdate/",{"date":date,"weight":weight}).then(function(response){
@@ -965,6 +973,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
             $scope.doGetDemograph();
             $scope.getBudget(date);
             $scope.doGetWeightGoal();
+            $scope.checkGoalStatus(date);
         }, function () {
             errorMessage(Flash, "Please try again later!")
         });
@@ -1053,7 +1062,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
 
         $scope.goalchoice=parseInt(value);
         if(value==5){
-
+            $scope.goalPossiblityStatus=1;
         }
         else{
             requestHandler.postRequest("checkgoalenddate/",{"currentweight":$scope.demography.weight,"goalchoice":$scope.goalchoice}).then(function(response){
@@ -2121,6 +2130,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         $scope.goGetSessionGraph($scope.storedSessionId);
         $scope.getUserTimeZone(date);
         $scope.getBudget(date);
+        $scope.checkGoalStatus(date);
     };
 
     $scope.initialLoadFoodAndExercise(selectedDate);
