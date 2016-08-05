@@ -2340,7 +2340,12 @@ input[type="submit"] {
 }
 
 .margin-top-30 {
-    margin-top: 30px;
+     margin-top: 30px;
+}
+
+
+.margin-top-50 {
+    margin-top: 50px;
 }
 
 .margin-top-3 {
@@ -15608,15 +15613,16 @@ button.suggest_button.no-margin-bottom{
 }
 .circle
 {
-    width:100px;
-    height:100px;
+    width:120px;
+    height:120px;
     border-radius:250px;
     border: 3px solid #00A300;
     font-size:20px;
     color:#fff;
     line-height:75px;
     text-align:center;
-    background:#00A300
+    background:#00A300;
+    padding-top: 15px;
 }
 
 .calculator-section{

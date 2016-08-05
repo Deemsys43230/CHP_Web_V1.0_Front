@@ -27,6 +27,7 @@ userApp.controller('GoalController',['$scope','requestHandler','Flash','$route',
 
     $scope.doGetViewGoal=function(){
         $scope.isRequest=$route.current.request;
+        console.log("asd",$route.current.request);
         requestHandler.postRequest("user/getIndividualGoalDetail/",{"goalid" :$routeParams.id}).then(function(response){
             $scope.goalDetail=response.data.Goal_Data;
             if($scope.goalDetail.status==2){
@@ -230,7 +231,7 @@ userApp.controller('GoalController',['$scope','requestHandler','Flash','$route',
 
             });
 
-            if($scope.goalDetail.status==1){
+           /* if($scope.goalDetail.status==1){*/
                 $(function(){
                     $("#lean_overlay").fadeTo(1000);
                     $("#modal1").fadeIn(600);
@@ -248,7 +249,7 @@ userApp.controller('GoalController',['$scope','requestHandler','Flash','$route',
                     $("#modal1").hide();
                     $("#lean_overlay").hide();
                 });
-            }
+           /* }*/
 
         },function(){
             errorMessage(Flash,"Please try again later!");

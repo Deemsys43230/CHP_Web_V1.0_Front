@@ -188,50 +188,53 @@
                             </div>
                         </form>
                     </div>
-                    <!--<div class="col-lg-6 col-md-12 col-sm-12 text-center">
-                        <h5>Gain</h5>
-                        <div class="circle-wrapper">
-                            <div class="circle-progress ng-cloak font-14" ng-style="getStyle()">{{currentGain}}</div>
-                            <div round-progress
-                                 max="averageIntake"
-                                 current="currentGain"
-                                 color="{{currentGainColour}}"
-                                 bgcolor="{{ bgColor }}"
-                                 radius="37"
-                                 semi="isSemi"
-                                 rounded="rounded"
-                                 stroke="6"
-                                 clockwise="clockwise"
-                                 responsive="responsive"
-                                 duration="{{ duration }}"
-                                 animation="{{ currentAnimation }}"
-                                 offset="{{ offset }}">
-                            </div>
-                        </div>
-                        <p class="text-gray">of {{averageIntake}} cals.</p>
+                    <div class="col-lg-12 col-md-12 col-sm-12 margin-top-5">
+                        <h6 ng-show="budgetCheck==0"><div class="label-danger">You are going under our recommended budget value. Please change your plan.</div></h6>
                     </div>
-                    <div class="col-lg-6 col-md-12 col-sm-12 text-center">
-                        <h5>Spent</h5>
-                        <div class="circle-wrapper">
-                            <div class="circle-progress ng-cloak font-14" ng-style="getStyle()">{{currentSpent}}</div>
-                            <div round-progress
-                                 max="averageSpent"
-                                 current="currentSpent"
-                                 color="{{currentSpentColour}}"
-                                 bgcolor="{{ bgColor }}"
-                                 radius="37"
-                                 semi="isSemi"
-                                 rounded="rounded"
-                                 stroke="6"
-                                 clockwise="clockwise"
-                                 responsive="responsive"
-                                 duration="{{ duration }}"
-                                 animation="{{ currentAnimation }}"
-                                 offset="{{ offset }}">
+                        <!--<div class="col-lg-6 col-md-12 col-sm-12 text-center">
+                            <h5>Gain</h5>
+                            <div class="circle-wrapper">
+                                <div class="circle-progress ng-cloak font-14" ng-style="getStyle()">{{currentGain}}</div>
+                                <div round-progress
+                                     max="averageIntake"
+                                     current="currentGain"
+                                     color="{{currentGainColour}}"
+                                     bgcolor="{{ bgColor }}"
+                                     radius="37"
+                                     semi="isSemi"
+                                     rounded="rounded"
+                                     stroke="6"
+                                     clockwise="clockwise"
+                                     responsive="responsive"
+                                     duration="{{ duration }}"
+                                     animation="{{ currentAnimation }}"
+                                     offset="{{ offset }}">
+                                </div>
                             </div>
+                            <p class="text-gray">of {{averageIntake}} cals.</p>
                         </div>
-                        <p class="text-gray">of {{averageSpent}} cals.</p>
-                    </div>-->
+                        <div class="col-lg-6 col-md-12 col-sm-12 text-center">
+                            <h5>Spent</h5>
+                            <div class="circle-wrapper">
+                                <div class="circle-progress ng-cloak font-14" ng-style="getStyle()">{{currentSpent}}</div>
+                                <div round-progress
+                                     max="averageSpent"
+                                     current="currentSpent"
+                                     color="{{currentSpentColour}}"
+                                     bgcolor="{{ bgColor }}"
+                                     radius="37"
+                                     semi="isSemi"
+                                     rounded="rounded"
+                                     stroke="6"
+                                     clockwise="clockwise"
+                                     responsive="responsive"
+                                     duration="{{ duration }}"
+                                     animation="{{ currentAnimation }}"
+                                     offset="{{ offset }}">
+                                </div>
+                            </div>
+                            <p class="text-gray">of {{averageSpent}} cals.</p>
+                        </div>-->
                 </li>
             </ul>
         </div>
@@ -676,6 +679,7 @@
                         </div>
                     </div>
                     <div class="col-lg-12 col-md-12 col-sm-12 margin-top-5">
+                        <!--<h6 ng-show="budgetCheck==0"><div class="label-danger">You are going under our recommended budget value. Please change your weight plan.</div></h6>-->
                         <h6 ng-show="budgetDetails.OverorUnderStatus==1"><div class="label-danger">You are consumed {{budgetDetails.OverorUnderValue}} more calories. Do Exercise.</div></h6>
                         <h6 ng-show="budgetDetails.OverorUnderStatus==2"><div class="label-success">You could take {{budgetDetails.OverorUnderValue}} more calories to reach Budget Value.</div></h6>
                     </div>
@@ -1171,7 +1175,7 @@
                     <span class="label-count green">{{budgetDetails.Intake}}</span>
                 </div>
                 <div class="label-update">
-                    <span class="label-text">Brunt</span>
+                    <span class="label-text">Burnt</span>
                     <span class="label-count red">{{budgetDetails.Burnt}}</span>
                 </div>
                 <div class="label-update">

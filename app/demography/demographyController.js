@@ -9,7 +9,7 @@ userApp.controller('DemographyController',['$rootScope','$scope','requestHandler
             $scope.demography = response.data.Demography_Data;
 
             //Copy Original
-            $scope.demography.height=$scope.demography.height.toString();
+           // $scope.demography.height=$scope.demography.height.toString();
             $scope.demography.weight=$scope.demography.weight.toString();
             $scope.demography.hip=$scope.demography.hip.toString();
             $scope.demography.waist=$scope.demography.waist.toString();
@@ -30,6 +30,7 @@ userApp.controller('DemographyController',['$rootScope','$scope','requestHandler
                 $scope.demography.heightInches=heightSplit[1];
                $scope.demography.heightInches=parseInt($scope.demography.heightInches);
                 }
+                $scope.demography.height=parseInt($scope.demography.height);
             }
             }
             originalDemography=angular.copy(response.data.Demography_Data);
@@ -368,6 +369,54 @@ userApp.directive('checkWeight', function () {
              }
 
          }
+        }
+    };
+});
+
+userApp.directive('validDecimalnumber', function() {
+    return {
+        require: '?ngModel',
+        link: function(scope, element, attrs, ngModelCtrl) {
+            if(!ngModelCtrl) {
+                return;
+            }
+
+            ngModelCtrl.$parsers.push(function(val) {
+                if (angular.isUndefined(val)) {
+                    var val = '';
+                }
+
+                var clean = val.replace(/[^0-9\.]/g, '');
+                var negativeCheck = clean.split('-');
+                var decimalCheck = clean.split('.');
+                if(!angular.isUndefined(negativeCheck[1])) {
+                    negativeCheck[1] = negativeCheck[1].slice(0, negativeCheck[1].length);
+                    clean =negativeCheck[0] + '-' + negativeCheck[1];
+                    if(negativeCheck[0].length > 0) {
+                        clean =negativeCheck[0];
+                    }
+
+                }
+
+                if(!angular.isUndefined(decimalCheck[1])) {
+                    decimalCheck[1] = decimalCheck[1].slice(0,1);
+                    clean =decimalCheck[0] + '.' + decimalCheck[1];
+                }
+
+
+                if (val !== clean) {
+                    ngModelCtrl.$setViewValue(clean);
+                    ngModelCtrl.$render();
+                }
+                return clean;
+            });
+
+            element.bind('keypress', function(event) {
+
+                     if(event.keyCode === 32) {
+                          event.preventDefault();
+                    }
+            });
         }
     };
 });

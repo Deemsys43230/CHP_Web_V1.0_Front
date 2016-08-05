@@ -955,7 +955,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         requestHandler.postRequest("checkGoalStatus/",{"date":date}).then(function(response){
 
             $scope.budgetCheck = response.data.goalPossiblity;
-          //  alert($scope.budgetCheck);
+            //alert($scope.budgetCheck);
         });
     };
 
@@ -1921,6 +1921,12 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
                 $scope.drawHistoryGraph(historyReport,titles);
             });
         }else if($scope.historyType==4){
+            if($scope.userProfile.unitPreference==1){
+                $scope.unit="Kgs";
+            }
+            else if($scope.userProfile.unitPreference==2){
+                $scope.unit="Lbs";
+            }
             requestHandler.postRequest("/user/getWeightLogGraph/", {"startdate":startDate,"enddate":endDate}).then(function(response){
                 $scope.historyRecord=response.data.Weight_logs;
                 $.each($scope.historyRecord, function(index,value) {
@@ -1932,10 +1938,11 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
                         historyReport.push(history);
                     }
                 });
+
                 titles.title="Weight Log Graph ( "+startDate+" - "+endDate+" )";
                 titles.name="Weight Log";
-                titles.suffix=" Kgs";
-                titles.yaxis="Weight (Kgs)";
+                titles.suffix=$scope.unit;
+                titles.yaxis="Weight (" + $scope.unit + ")";
                 titles.color='#f8ba01';
                 $scope.drawHistoryGraph(historyReport,titles);
             });
