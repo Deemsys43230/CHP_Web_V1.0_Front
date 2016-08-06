@@ -30,9 +30,9 @@ userApp.controller('GoalController',['$scope','requestHandler','Flash','$route',
         console.log("asd",$route.current.request);
         requestHandler.postRequest("user/getIndividualGoalDetail/",{"goalid" :$routeParams.id}).then(function(response){
             $scope.goalDetail=response.data.Goal_Data;
-            if($scope.goalDetail.status==2){
+           /* if($scope.goalDetail.status==2){
                 $scope.viewRank();
-            }
+            }*/
         });
     };
 
