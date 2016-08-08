@@ -7,6 +7,7 @@ adminApp.controller('UserFeedbackController',['$scope','requestHandler','Flash',
     $scope.currentPage=1;
 
     $scope.getUserFeedBackDetails= function(){
+     //   $scope.removeDisable=true;
         $('#checkAll').removeAttr('checked','checked');
         $scope.loaded=true;
         $scope.offset=($scope.currentPage-1)*$scope.itemsPerPage;
@@ -31,6 +32,7 @@ adminApp.controller('UserFeedbackController',['$scope','requestHandler','Flash',
             });
             $scope.total_count=response.data.totalrecords;
             $scope.loaded=false;
+            $scope.isChecked();
         });
     };
 
