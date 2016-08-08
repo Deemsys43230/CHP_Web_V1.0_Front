@@ -45,8 +45,13 @@
                         <td>{{goalList.goalMemberCount}}</td>
                         <td>
                             <a href="#group-goal-request/{{goalList.goalid}}" class="btn-xs btn-primary">View</a>
+                            <span ng-show="goalList.isExpired==0">
                             <a href="" class="btn-xs btn-warning" ng-click="acceptGoalCheck(goalList.goalid)">Accept</a>
                             <a href="" class="btn-xs btn-danger" ng-click="doDeleteGoalRequest(goalList.goalid)">Reject</a>
+                            </span>
+                            <span ng-hide="goalList.isExpired==0">
+                                <a href="" class="btn-xs btn-danger" ng-click="doDeleteGoalRequest(goalList.goalid)">Remove</a>
+                            </span>
                         </td>
                     </tr>
                     </tbody>

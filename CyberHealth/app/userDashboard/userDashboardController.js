@@ -1390,26 +1390,37 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         $scope.setGoalDetails={};
 
 
+
+        $scope.goalType=$scope.goalDetails.planType;
         $scope.setGoalDetails.currentweight=$scope.demography.weight;
         $scope.setGoalDetails.goalchoice=parseInt($scope.goalchoice);
 
-        if($scope.setGoalDetails.goalchoice==5 && $scope.customResponse!=0){
+        if($scope.goalType==2){
+            if($scope.setGoalDetails.goalchoice==5 && $scope.customResponse!=0){
 
-            if(document.getElementById("start").value==''){
+                if(document.getElementById("start").value==''){
+                    $scope.setGoalDetails.enddate = selectedDate;
+                }
+                else{
+                    $scope.setGoalDetails.enddate=document.getElementById("start").value;
+                }
+            }
+            else if($scope.setGoalDetails.goalchoice==5 && $scope.customResponse==0){
+                $scope.setGoalDetails.enddate=$scope.customPossibleDate;
+            }
+
+            else{
+                $scope.setGoalDetails.enddate=$scope.enddate;
+            }
+        }
+        else if($scope.goalType==3){
+            if(document.getElementById("start1").value==''){
                 $scope.setGoalDetails.enddate = selectedDate;
             }
             else{
-                $scope.setGoalDetails.enddate=document.getElementById("start").value;
+                $scope.setGoalDetails.enddate=$scope.customPossibleDate;
             }
         }
-        else if($scope.setGoalDetails.goalchoice==5 && $scope.customResponse==0){
-            $scope.setGoalDetails.enddate=$scope.customPossibleDate;
-        }
-
-        else{
-            $scope.setGoalDetails.enddate=$scope.enddate;
-        }
-
 
         $scope.userChosenDate = $scope.setGoalDetails.enddate;
         requestHandler.postRequest("user/weightgoalInsertorUpdate/",$scope.setGoalDetails).then(function(response){

@@ -73,8 +73,12 @@ adminApp.controller('UserFeedbackController',['$scope','requestHandler','Flash',
         // Already Selected Items
         if(idx>-1){
             document.getElementById('checkAll').checked=false;
-            $scope.removeDisable=true;
+
+
             $scope.feedbackid.splice(idx,1);
+            if($scope.feedbackid.length==0){
+                $scope.removeDisable=true;
+            }
         }
         // Add New Items
         else{

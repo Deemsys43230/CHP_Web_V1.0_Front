@@ -34,7 +34,7 @@ coachApp.controller('CoachPaymentSettingsController',['$scope','requestHandler',
             if(response.data.Response_status==0){
                 errorMessage(Flash,"Invalid paypal emailId!!!")
             }
-            else if(response.data.Response_status==0){
+            else if(response.data.Response_status==1){
                 successMessage(Flash,"Successfully Updated!");
                 $scope.getSettingDetails();
             }

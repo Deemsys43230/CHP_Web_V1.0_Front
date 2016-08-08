@@ -387,7 +387,7 @@ userApp.directive('validDecimalnumber', function() {
                 }
 
                 var clean = val.replace(/[^0-9\.]/g, '');
-                var negativeCheck = clean.split('-');
+                 var negativeCheck = clean.split('-');
                 var decimalCheck = clean.split('.');
                 if(!angular.isUndefined(negativeCheck[1])) {
                     negativeCheck[1] = negativeCheck[1].slice(0, negativeCheck[1].length);
@@ -403,6 +403,20 @@ userApp.directive('validDecimalnumber', function() {
                     clean =decimalCheck[0] + '.' + decimalCheck[1];
                 }
 
+                var firstchar = val.slice(0,1);
+                var input = val.indexOf(' ');
+                var inputs = val.indexOf('.');
+
+                if(firstchar==0){
+                    clean=val.slice(0,0);
+                }
+
+                if(input==-1 && inputs!=-1 && val.length==3){
+                    clean=val;
+                }
+                else if(input==-1 && inputs==-1 && val.length>3){
+                    clean=val.slice(0,3);
+                }
 
                 if (val !== clean) {
                     ngModelCtrl.$setViewValue(clean);
