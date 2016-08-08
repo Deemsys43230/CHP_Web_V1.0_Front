@@ -9,7 +9,7 @@ userApp.controller('DemographyController',['$rootScope','$scope','requestHandler
             $scope.demography = response.data.Demography_Data;
 
             //Copy Original
-           // $scope.demography.height=$scope.demography.height.toString();
+          // $scope.demography.height=$scope.demography.height.toString();
             $scope.demography.weight=$scope.demography.weight.toString();
             $scope.demography.hip=$scope.demography.hip.toString();
             $scope.demography.waist=$scope.demography.waist.toString();
@@ -249,6 +249,17 @@ userApp.controller('DemographyController',['$rootScope','$scope','requestHandler
         }
     };
 
+    $scope.maxheight=false;
+    $scope.maxCheck = function(height){
+        if(height<=394){
+            $scope.maxheight=false;
+        }
+        else if(height>394){
+            $scope.maxheight=true;
+        }
+
+    };
+
     $scope.isCleanNutrition =function(){
         return angular.equals(originalNutrition, $scope.nutrients);
     };
@@ -381,9 +392,10 @@ userApp.directive('validDecimalnumber', function() {
                 return;
             }
 
+            var val='';
             ngModelCtrl.$parsers.push(function(val) {
                 if (angular.isUndefined(val)) {
-                    var val = '';
+                    val = '';
                 }
 
                 var clean = val.replace(/[^0-9\.]/g, '');
@@ -408,7 +420,7 @@ userApp.directive('validDecimalnumber', function() {
                 var inputs = val.indexOf('.');
 
                 if(firstchar==0){
-                    clean=val.slice(0,0);
+                    clean=val.substr(1);
                 }
 
                 if(input==-1 && inputs!=-1 && val.length==3){
@@ -418,9 +430,22 @@ userApp.directive('validDecimalnumber', function() {
                     clean=val.slice(0,3);
                 }
 
+              /*  if(val<=394){
+                    clean =val;
+                    ngModelCtrl.$validators.validDecimalnumber = function(val) {
+                        return  true;
+                    };
+                }
+                else if (val>394){
+                    ngModelCtrl.$validators.validDecimalnumber = function(val) {
+                        return  false;
+                    };
+                }*/
+
                 if (val !== clean) {
                     ngModelCtrl.$setViewValue(clean);
                     ngModelCtrl.$render();
+
                 }
                 return clean;
             });

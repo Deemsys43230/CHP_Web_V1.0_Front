@@ -20,7 +20,7 @@
                             <div class="col-lg-4 col-md-5 col-sm-5 padding-right-0">
                                 <span ng-show="userProfile.unitPreference==2">
                                 <input class="demography_input" style="width:49px;" name="heightFeet" maxlength="1"  ng-pattern="/^\s*(?=.*[1-9])\d*(?:\.\d{0,8})?\s*$/" ng-model="demography.heightFeet" ng-required="userProfile.unitPreference==2"/>
-                                <input type="number" class="demography_input" style="width:49px;" name="heightInches" maxlength="2" max="11" ng-pattern="/^\-?\d+((\.|\,)\d+)?$/" ng-model="demography.heightInches" ng-required="userProfile.unitPreference==2"/>
+                                <input type="number" class="demography_input"  style="width:49px;" onkeypress="return isNumeric(event)" oninput="maxLengthCheck(this)" name="heightInches" maxlength="2" max="11" ng-pattern="/^\-?\d+((\.|\,)\d+)?$/" ng-model="demography.heightInches" ng-required="userProfile.unitPreference==2"/>
 
                                <span ng-show="demographyForm.heightFeet.$dirty&&demographyForm.heightFeet.$invalid">
                                 <span class="error-message textarea-errormessage40-left50" ng-show="demographyForm.heightFeet.$error.required"><span>Required.</span></span>
@@ -34,12 +34,13 @@
                             </span>
                                 </span>
                                 <span ng-show="userProfile.unitPreference==1">
-                                     <input type="number" class="demography_input" maxlength="5" valid-decimalnumber name="height" ng-model="demography.height" max="394" ng-required="userProfile.unitPreference==1"/>
-                                    <span ng-show="demographyForm.height.$dirty&&demographyForm.height.$invalid">
-                                <span class="error-message textarea-errormessage40" ng-show="demographyForm.height.$error.required"><span>Required.</span></span>
-                                <span class="error-message textarea-errormessage40" ng-show="!demographyForm.height.$error.required && demographyForm.height.$error.validateFloat1"><span>Invalid&nbsp;Format.</span></span>
-                                 <span class="error-message textarea-errormessage40-right60"  ng-show="demographyForm.height.$error.max"><span>Height&nbsp;should&nbsp;not&nbsp;exceed&nbsp;394</span></span>
-                            </span>
+                                     <input class="demography_input" maxlength="5" name="height" onkeypress="return isNumeric(event)" oninput="maxLengthCheck(this)" ng-model="demography.height"  ng-required="userProfile.unitPreference==1" ng-change="maxCheck(demography.height)"  valid-decimalnumber/>
+                                <span class="error-message textarea-errormessage40-right60" ng-show="!demographyForm.targetWeight.$error.required&&maxheight"><span>Height&nbsp;should&nbsp;not&nbsp;exceed&nbsp;394</span></span>
+                                <span ng-show="demographyForm.height.$dirty&&demographyForm.height.$invalid">
+                                     <span class="error-message textarea-errormessage40" ng-show="demographyForm.height.$error.required"><span>Required.</span></span>
+                                     <span class="error-message textarea-errormessage40" ng-show="!demographyForm.height.$error.required && demographyForm.height.$error.validateFloat1"><span>Invalid&nbsp;Format.</span></span>
+                                     <span class="error-message textarea-errormessage40-right60"  ng-show="demographyForm.height.$error.max"><span>Height&nbsp;should&nbsp;not&nbsp;exceed&nbsp;394</span></span>
+                                </span>
                                 </span>
 
                             </div>
@@ -327,7 +328,7 @@
                     </div>
                 <div class="col-lg-12 col-md-12 col-sm-12"><hr/></div>
                 <div class="col-lg-12 col-md-12 col-sm-12 text-center margin-tb-10">
-                    <a href="" class="btn register_button" ng-disabled="isCleanDemography() || demographyForm.$invalid || weightlossError || weightgainError"  ng-click="doUpdateDemography()" >Save Changes</a>
+                    <a href="" class="btn register_button" ng-disabled="isCleanDemography() || demographyForm.$invalid || weightlossError || weightgainError || maxheight"  ng-click="doUpdateDemography()" >Save Changes</a>
                     <a href="#dashboard" class="btn cancel_button">Cancel</a>
                 </div>
             </form>
@@ -358,4 +359,24 @@
 <script type="text/javascript" src="../../js/script.js"></script>
 <script>
     $("#modal_trigger").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
+</script>
+
+<script>
+
+    function maxLengthCheck(object) {
+        if (object.value.length > object.maxLength)
+            object.value = object.value.slice(0, object.maxLength)
+
+    }
+
+    function isNumeric (evt) {
+        var theEvent = evt || window.event;
+        var key = theEvent.keyCode || theEvent.which;
+        key = String.fromCharCode (key);
+        var regex = /[0-9]/;
+        if ( !regex.test(key) ) {
+            theEvent.returnValue = false;
+            if(theEvent.preventDefault) theEvent.preventDefault();
+        }
+    }
 </script>
