@@ -34,12 +34,11 @@
                             </span>
                                 </span>
                                 <span ng-show="userProfile.unitPreference==1">
-                                     <input class="demography_input" maxlength="5" name="height" onkeypress="return isNumeric(event)" oninput="maxLengthCheck(this)" ng-model="demography.height"  ng-required="userProfile.unitPreference==1" ng-change="maxCheck(demography.height)"  valid-decimalnumber/>
+                                     <input class="demography_input" maxlength="5" name="height" ng-pattern="/^[0-9]/" oninput="maxLengthCheck(this)" ng-model="demography.height"  ng-required="userProfile.unitPreference==1" ng-change="maxCheck(demography.height)"  valid-decimalnumber/>
                                 <span class="error-message textarea-errormessage40-right60" ng-show="!demographyForm.targetWeight.$error.required&&maxheight"><span>Height&nbsp;should&nbsp;not&nbsp;exceed&nbsp;394</span></span>
                                 <span ng-show="demographyForm.height.$dirty&&demographyForm.height.$invalid">
                                      <span class="error-message textarea-errormessage40" ng-show="demographyForm.height.$error.required"><span>Required.</span></span>
-                                     <span class="error-message textarea-errormessage40" ng-show="!demographyForm.height.$error.required && demographyForm.height.$error.validateFloat1"><span>Invalid&nbsp;Format.</span></span>
-                                     <span class="error-message textarea-errormessage40-right60"  ng-show="demographyForm.height.$error.max"><span>Height&nbsp;should&nbsp;not&nbsp;exceed&nbsp;394</span></span>
+                                    <span class="error-message textarea-errormessage40" ng-show="demographyForm.height.$error.pattern"><span>Invalid&nbsp;Format.</span></span>
                                 </span>
                                 </span>
 
@@ -369,7 +368,7 @@
 
     }
 
-    function isNumeric (evt) {
+   /* function isNumeric (evt) {
         var theEvent = evt || window.event;
         var key = theEvent.keyCode || theEvent.which;
         key = String.fromCharCode (key);
@@ -378,5 +377,5 @@
             theEvent.returnValue = false;
             if(theEvent.preventDefault) theEvent.preventDefault();
         }
-    }
+    }*/
 </script>

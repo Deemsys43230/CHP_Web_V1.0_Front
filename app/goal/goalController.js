@@ -310,9 +310,16 @@ userApp.controller('GoalController',['$scope','requestHandler','Flash','$route',
         });
     };
 
+    $scope.doGetProfile=function(){
+        requestHandler.getRequest("getUserId/","").then(function(response){
+            $scope.userProfile=response.data.User_Profile;
+        });
+    };
+
     $scope.init=function(){
         $scope.getUserTimeZone();
         $scope.getWeightLog();
+        $scope.doGetProfile();
     };
 
     $scope.init();
@@ -360,6 +367,7 @@ userApp.controller('GoalController',['$scope','requestHandler','Flash','$route',
         });
     };
     $scope.acceptGoalCheck=function(goalid){
+
         requestHandler.postRequest("/user/getWeightLogGraph/", {"startdate": $scope.UserDate,"enddate": $scope.UserDate}).then(function(response){
             $scope.UserWeightEntry=response.data.Weight_logs[0].userentry;
 
@@ -387,7 +395,7 @@ userApp.controller('GoalController',['$scope','requestHandler','Flash','$route',
 
     $scope.doDeleteGoalRequest=function(id){
         requestHandler.deleteRequest("user/rejectOrExistGoalMember/",{"goalid":id}).then(function(){
-            successMessage(Flash,"Successfully Exited!");
+            successMessage(Flash,"Successfully Removed!");
             $scope.doGetMyGoalList();
         },function(){
             errorMessage(Flash,"Please try again later!");

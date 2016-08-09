@@ -38,7 +38,8 @@
                     </div>
                     <div class="col-lg-12 col-md-12 col-sm-12 no-padding margin-top-10">
                         <div ng-show="isRequest">
-                            <span><a href="" class="target_button green_button" ng-click="acceptGoalCheck(goalDetail.goalid)">Join Goal</a></span>
+                            <span ng-show="goalDetail.isExpired==0"><a href="" class="target_button green_button" ng-click="acceptGoalCheck(goalDetail.goalid)">Join Goal</a></span>
+                           <!-- <span ng-hide="goalDetail.isExpired==0"><a href="" class="target_button green_button" ng-click="doDeleteGoalRequest(goalDetail.goalid)">Remove Goal</a></span>-->
                             <span><a class="target_button red_button" ng-click="doExitConfirmation()">Exit from Goal</a></span>
                         </div>
                         <div ng-hide="isRequest">
@@ -320,7 +321,7 @@
         <!-- Register Form -->
         <div class="common_model">
             <form name="updateWeightForm" novalidate>
-                <p>Current Weight</p>
+                <p>Current Weight <small>(<span ng-show="userProfile.unitPreference==1">Kgs</span><span ng-show="userProfile.unitPreference==2">lbs</span>)</small></p>
                 <input type="text"  name="weight" ng-model="weightlog" maxlength="5" required validate-Float1/>
                 <span ng-show="updateWeightForm.weight.$dirty&&updateWeightForm.weight.$invalid">
                     <span class="error-message" ng-show="updateWeightForm.weight.$error.required"><span>Required.</span></span>

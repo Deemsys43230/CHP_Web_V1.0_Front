@@ -148,7 +148,7 @@ userApp.controller('UserPaymentController',['$scope','requestHandler','Flash','$
     $scope.doUpdatePaypalDetails=function(){
         requestHandler.putRequest("updateUserSettings/",$scope.paypalDetails).then(function(response){
             if(response.data.Response_status==0){
-                errorMessage(Flash,"Invalid paypal emailId!!!")
+                errorMessage(Flash,"Invalid Paypal Email ID!!!")
             }
             else if(response.data.Response_status==1){
                 successMessage(Flash,"Successfully Updated!");

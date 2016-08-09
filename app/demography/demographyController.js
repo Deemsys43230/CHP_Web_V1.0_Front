@@ -415,11 +415,16 @@ userApp.directive('validDecimalnumber', function() {
                     clean =decimalCheck[0] + '.' + decimalCheck[1];
                 }
 
-                var firstchar = val.slice(0,1);
+                var firstcharzero = val.slice(0,1);
+                var firstchardot = val.slice(0,1);
                 var input = val.indexOf(' ');
                 var inputs = val.indexOf('.');
 
-                if(firstchar==0){
+                if(firstcharzero==0){
+                    clean=val.substr(1);
+                }
+
+                if(firstchardot=='.'){
                     clean=val.substr(1);
                 }
 
