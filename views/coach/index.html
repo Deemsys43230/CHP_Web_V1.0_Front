@@ -276,7 +276,7 @@
         <span ng-show="feedbackForm.platform.$dirty&&feedbackForm.platform.$invalid">
              <span class="error-message textarea-errormessage55" ng-show="feedbackForm.platform.$error.required"><span>Required.</span></span>
          </span>
-            <textarea class="forum-textarea" name="description" ng-model="feedback.description" placeholder="Description* " required></textarea>
+            <textarea class="forum-textarea" name="description" ng-model="feedback.description" placeholder="Description* " maxlength="500" required></textarea>
             <span ng-show="feedbackForm.description.$dirty&&feedbackForm.description.$invalid ">
              <span class="error-message textarea-errormessage-70" ng-show="feedbackForm.description.$error.required"><span>Required.</span></span>
          </span>
