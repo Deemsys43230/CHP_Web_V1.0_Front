@@ -8589,13 +8589,24 @@ a:hover, a:visited, a:link, a:active
  }
 
 .textarea-errormessage40-left50{
-    top: 40px;
+     top: 40px;
+     left: -50px;
+ }
+
+.textarea-errormessage8-left50{
+    top: 8px;
     left: -50px;
 }
+
 
 .textarea-errormessage40-right30{
     top: 40px;
     left: 30px;
+}
+
+.textarea-errormessage8-right20{
+    top: 8px;
+    left: 20px;
 }
 
 .textarea-errormessage40-right60{

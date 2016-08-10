@@ -28,7 +28,7 @@ userApp.controller('DemographyController',['$rootScope','$scope','requestHandler
                     $scope.demography.heightInches= 0;
                 }else{
                 $scope.demography.heightInches=heightSplit[1];
-               $scope.demography.heightInches=parseInt($scope.demography.heightInches);
+             //  $scope.demography.heightInches=parseInt($scope.demography.heightInches);
                 }
                 $scope.demography.height=parseInt($scope.demography.height);
             }
@@ -222,9 +222,11 @@ userApp.controller('DemographyController',['$rootScope','$scope','requestHandler
     };
     $scope.weightlossError=false;
     $scope.weightgainError=false;
+
     $scope.planChangeValidation = function(plantype){
-       $scope.weight=$scope.demography.weight;
-       $scope.targetweight =$scope.demography.targetweight;
+       $scope.weight=parseFloat($scope.demography.weight);
+       $scope.targetweight =parseFloat($scope.demography.targetweight);
+
         if(plantype==1){
             $scope.weightlossError=false;
             $scope.weightgainError=false;
@@ -247,6 +249,8 @@ userApp.controller('DemographyController',['$rootScope','$scope','requestHandler
                 $scope.weightgainError=true;
             }
         }
+       // $scope.weight=$scope.demography.weight.toString();
+        //$scope.targetweight =$scope.demography.targetweight.toString();
     };
 
     $scope.maxheight=false;
@@ -383,6 +387,18 @@ userApp.directive('checkWeight', function () {
         }
     };
 });
+userApp.directive('validateMoney', function() {
+    var MONEY_EXPR = /^(\d+\.[\d]|\d+\.[\d]|\d+)$/;
+    return {
+        require : 'ngModel',
+        restrict : '',
+        link : function(scope, elm, attrs, ngModel) {
+            ngModel.$validators.validateMoney = function(modelValue) {
+                return MONEY_EXPR.test(modelValue);
+            };
+        }
+    };
+});
 
 userApp.directive('validDecimalnumber', function() {
     return {
@@ -392,9 +408,9 @@ userApp.directive('validDecimalnumber', function() {
                 return;
             }
 
-            var val='';
+            var val;
             ngModelCtrl.$parsers.push(function(val) {
-                if (angular.isUndefined(val)) {
+         if (angular.isUndefined(val)) {
                     val = '';
                 }
 
@@ -414,15 +430,18 @@ userApp.directive('validDecimalnumber', function() {
                     decimalCheck[1] = decimalCheck[1].slice(0,1);
                     clean =decimalCheck[0] + '.' + decimalCheck[1];
                 }
-
                 var firstcharzero = val.slice(0,1);
                 var firstchardot = val.slice(0,1);
                 var input = val.indexOf(' ');
                 var inputs = val.indexOf('.');
+                 var lastval = val.charAt(val.length-1);
+
+
 
                 if(firstcharzero==0){
                     clean=val.substr(1);
                 }
+
 
                 if(firstchardot=='.'){
                     clean=val.substr(1);
@@ -435,17 +454,6 @@ userApp.directive('validDecimalnumber', function() {
                     clean=val.slice(0,3);
                 }
 
-              /*  if(val<=394){
-                    clean =val;
-                    ngModelCtrl.$validators.validDecimalnumber = function(val) {
-                        return  true;
-                    };
-                }
-                else if (val>394){
-                    ngModelCtrl.$validators.validDecimalnumber = function(val) {
-                        return  false;
-                    };
-                }*/
 
                 if (val !== clean) {
                     ngModelCtrl.$setViewValue(clean);
@@ -455,9 +463,9 @@ userApp.directive('validDecimalnumber', function() {
                 return clean;
             });
 
-            element.bind('keypress', function(event) {
+            element.bind('keydown', function(e) {
 
-                     if(event.keyCode === 32) {
+                    if(event.keyCode === 32 && event.which ===32) {
                           event.preventDefault();
                     }
             });
