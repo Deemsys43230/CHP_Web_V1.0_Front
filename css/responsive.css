@@ -106,7 +106,7 @@
 	}
 	
 	.pricing-tables .pricing-table {
-		//width: 50% !important;
+		/* width: 50% !important; vinothkumarrepo 11Aug16 */
 		margin-bottom: 15px;
 	}
 	
@@ -863,7 +863,7 @@
     }
 
     .spinner-profile{
-        width:180px:
+        width:180px; /* vinothkumarrepo 11Aug16 */
         height:180px;
         padding:78px 81px;
     }
@@ -1075,7 +1075,7 @@
 
 
     .spinner-profile{
-        width: 200px:
+        width: 200px; /* vinothkumarrepo 11Aug16 */
         height:200px!important;
         padding:89px 92px;
     }
