@@ -135,7 +135,7 @@
                         Textsample Textsample Textsample Textsample Textsample Text
                     </div>
                     <div class="col-md-12 col-sm-12 col-xs-12 calculator-section margin-top-10">
-                        <form name="calculateForm" ng-show="showForm" novalidate ng-submit="calculateForm.$valid && calculateEMI()">
+                        <form name="calculateForm" ng-show="showForm" novalidate>
                             <div class="col-md-12 col-sm-12 col-xs-12">
                                 <h3 class="text-muted margin-bottom-15 col-md-4">Calculate Your BMI</h3>
                                 <div class="col-md-4 margin-top5 margin-bottom-15 unit">
@@ -188,7 +188,8 @@
                                 <div class="hidden-lg hidden-md"><div class="margin-top-10"></div></div>
                                 <h5 class="col-md-4 col-sm-4 margin-top-10">D O B<sup class="text-red">*</sup></h5>
                                 <div class="col-md-8 col-sm-8">
-                                    <input class="search-input picker-image-textbox" name="dob" picker ng-model="dob" placeholder="dd/mm/yyyy" class="fa fa-calendar" type="text" data-beatpicker-id="myDatePicker" data-beatpicker="true" data-beatpicker-position="['*','*']" data-beatpicker-format="['DD','MM','YYYY']" data-beatpicker-disable="{from:[2016,1,1],to:'>'}" data-beatpicker-module="gotoDate,today,clear" required>
+                                    <!--input class="search-input picker-image-textbox" name="dob" picker ng-model="dob" placeholder="dd/mm/yyyy" class="fa fa-calendar" type="text" data-beatpicker-id="myDatePicker" data-beatpicker="true" data-beatpicker-position="['*','*']" data-beatpicker-format="['DD','MM','YYYY']" data-beatpicker-disable="{from:[2016,1,1],to:'>'}" data-beatpicker-module="gotoDate,today,clear" required-->
+                                    <input name='dob' class="search-input" id="dobForBMI" ng-model="dob" required />
                                     <div class="text-error-message">
                                     <span ng-show="bmiSubmitted">
                                            <span ng-show="calculateForm.dob.$error.required"><span>Required.</span></span>
@@ -241,7 +242,7 @@
                             </div>
                             <div class="col-md-6 col-sm-12 margin-top-10 text-right">
                                 <div class="hidden-lg hidden-md"><div class="margin-top-10"></div></div>
-                                <a href="" class="btn-dis main_button red_button" ng-click="bmiSubmitted=true">GET MY RESULT</a>
+                                <a href="" class="btn-dis main_button red_button" ng-click="bmiSubmitted=true; calculateEMI(calculateForm.$valid)">GET MY RESULT</a>
                             </div>
                         </div>
 
@@ -613,12 +614,22 @@
 </script>
 
 <script type="text/javascript">
-
+/*
     myDatePicker.on("select", function (data) {
         var selectedDate = myDatePicker.getSelectedDate();
         document.getElementById("mypicker").value=selectedDate;
 
-    });
+    }); */
+    
+    $(function() {
+    $('#dobForBMI').datepicker({
+                // Consistent format with the HTML5 picker
+                    dateFormat : 'dd/mm/yy',
+                    maxDate: new Date()
+                },
+                // Localization
+                $.datepicker.regional['us']);
+  });
 
     $(function () {
         $(".vertical-items").bootstrapNews({

@@ -101,8 +101,8 @@ commonApp.controller('CommonController',['$scope','requestHandler','Flash','$rou
     $scope.showForm=true;
 
 
-    $scope.calculateEMI=function(){
-        $scope.dob= document.getElementById("mypicker").value;
+    $scope.calculateEMI=function(validation){
+        if(validation){
         $scope.showForm=false;
         if($scope.units==1){
             $scope.weightCal=$scope.weight/0.4536;
@@ -115,6 +115,7 @@ commonApp.controller('CommonController',['$scope','requestHandler','Flash','$rou
         }
         $window.emi=$scope.emiValue;
         callGraph();
+      }
     };
 
     $scope.returnToCalculate=function(){
