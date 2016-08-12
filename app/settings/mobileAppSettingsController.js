@@ -39,7 +39,7 @@ adminApp.controller("MobileAppSettingsController",['$scope','requestHandler','Fl
     };
 
     $scope.collectDetails= function () {
-        requestHandler.getRequest("admin/getmobileinfo","").then(function(response){
+        requestHandler.getRequest("admin/getmobileinfo/","").then(function(response){
 
             $scope.mobileInfoWindows=response.data.Mobile_Info[2];
             $scope.mobileInfoAndroid=response.data.Mobile_Info[0];
@@ -59,7 +59,7 @@ adminApp.controller("MobileAppSettingsController",['$scope','requestHandler','Fl
     };
 
     $scope.doUpdateIos=function(){
-        requestHandler.putRequest("admin/updatemobileinfo",$scope.mobileInfoIos).then(function(response){
+        requestHandler.putRequest("admin/updatemobileinfo/",$scope.mobileInfoIos).then(function(response){
             $scope.mobileInfoIos=response.data.Mobile_Info;
             $scope.copyOrginal_Ios($scope.mobileInfoIos);
             successMessage(Flash,"Successfully updated!");
@@ -69,7 +69,7 @@ adminApp.controller("MobileAppSettingsController",['$scope','requestHandler','Fl
     };
 
     $scope.doUpdateAndroid=function(){
-        requestHandler.putRequest("admin/updatemobileinfo",$scope.mobileInfoAndroid).then(function(response){
+        requestHandler.putRequest("admin/updatemobileinfo/",$scope.mobileInfoAndroid).then(function(response){
             $scope.mobileInfoAndroid=response.data.Mobile_Info;
             $scope.copyOrginal_Android($scope.mobileInfoAndroid);
             successMessage(Flash,"Successfully updated!");
@@ -80,7 +80,7 @@ adminApp.controller("MobileAppSettingsController",['$scope','requestHandler','Fl
 
 
     $scope.doUpdateWindows= function () {
-        requestHandler.putRequest("admin/updatemobileinfo",$scope.mobileInfoWindows).then(function(response){
+        requestHandler.putRequest("admin/updatemobileinfo/",$scope.mobileInfoWindows).then(function(response){
             $scope.mobileInfoWindows=response.data.Mobile_Info;
             $scope.copyOrginal_Windows($scope.mobileInfoWindows);
             successMessage(Flash,"Successfully updated!");

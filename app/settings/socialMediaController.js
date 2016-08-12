@@ -15,7 +15,7 @@ adminApp.controller('SocialMediaSettingsController',['$scope','requestHandler','
     });
 
     $scope.doGetSocialMedia= function () {
-        requestHandler.getRequest("admin/getappdetails","").then(function(response){
+        requestHandler.getRequest("admin/getappdetails/","").then(function(response){
             original=angular.copy(response.data.App_settings[0]);
              $scope.socialMedia=response.data.App_settings[0];
         },function(response){
@@ -25,7 +25,7 @@ adminApp.controller('SocialMediaSettingsController',['$scope','requestHandler','
     };
 
     $scope.doUpdateSocialMedia=function(){
-        requestHandler.putRequest("admin/updateSocialURLDetails",$scope.socialMedia).then(function(response){
+        requestHandler.putRequest("admin/updateSocialURLDetails/",$scope.socialMedia).then(function(response){
             original=angular.copy($scope.socialMedia);
             successMessage(Flash,"Successfully Updated!");
         },function(){

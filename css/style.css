@@ -7935,14 +7935,14 @@ ul.exercise li .exercise_name{
     font-size:10px!important;
      vertical-align: middle;
      border-bottom: 1px solid #ddd;
-     color: #ffcc00;
+     color: limegreen;
  }
 
 .weight_measure .level_low{
     line-height: 93px;
     vertical-align: middle;
     border-bottom: 1px solid #ddd;
-    color: limegreen;
+    color: #ffcc00;
 }
 
 .text-red{

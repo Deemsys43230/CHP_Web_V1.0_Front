@@ -15,7 +15,7 @@ adminApp.controller('ContactUsController',['$scope','requestHandler','Flash','si
 
     /*VIEW ALL*/
     var original="";
-    $scope.copyOrginal_contactUs=function(contactUs){
+  $scope.copyOrginal_contactUs=function(contactUs){
         $scope.contactUs=contactUs;
         $scope.contactUs.zipcode = $scope.contactUs.zipcode.toString();
         original=angular.copy( $scope.contactUs);
@@ -24,7 +24,7 @@ adminApp.controller('ContactUsController',['$scope','requestHandler','Flash','si
     $scope.doGetContactUs= function () {
         requestHandler.getRequest("admin/getappdetails/","").then(function(response){
             $scope.contactUs = response.data.App_settings[0];
-            $scope.copyOrginal_contactUs($scope.contactUs);
+             $scope.copyOrginal_contactUs($scope.contactUs);
 
         },function(response){
             errorMessage(Flash,"Please Try again later");
@@ -33,9 +33,10 @@ adminApp.controller('ContactUsController',['$scope','requestHandler','Flash','si
     };
                 /*UPDATE DETAILS*/
     $scope.doUpdateContactUs=function(){
-        requestHandler.putRequest("admin/updateAddressDetails",$scope.contactUs).then(function(response){
-            $scope.copyOrginal_contactUs($scope.contactUs);
+        requestHandler.putRequest("admin/updateAddressDetails/",$scope.contactUs).then(function(response){
+            $scope.doGetContactUs();
             successMessage(Flash,"Successfully Updated!");
+
         },function(){
             errorMessage(Flash,"Please try again later");
         });

@@ -24,7 +24,7 @@ adminApp.controller('ServerSettingsController',['$scope','requestHandler','Flash
 
                 /*VIEW ALL*/
     $scope.doGetServerSettings= function () {
-        requestHandler.getRequest("admin/getappdetails","").then(function(response){
+        requestHandler.getRequest("admin/getappdetails/","").then(function(response){
             $scope.serverSettings=response.data.App_settings[0];
             $scope.copyOrginal_serverSettings($scope.serverSettings);
 
@@ -36,7 +36,7 @@ adminApp.controller('ServerSettingsController',['$scope','requestHandler','Flash
 
                 /*UPDATE SERVER*/
     $scope.doUpdateServerSettings=function(){
-        requestHandler.putRequest("admin/updateEmailDetails",$scope.serverSettings).then(function(response){
+        requestHandler.putRequest("admin/updateEmailDetails/",$scope.serverSettings).then(function(response){
             $scope.copyOrginal_serverSettings($scope.serverSettings);
             successMessage(Flash,"Successfully Updated!");
         },function(){

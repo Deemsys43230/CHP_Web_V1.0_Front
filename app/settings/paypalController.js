@@ -60,7 +60,7 @@ adminApp.controller('PaypalSettingsController',['$scope','requestHandler','Flash
 
     $scope.doUpdatePaypalSettings=function(){
         $scope.paypalSettings.paypaltype=parseInt($scope.paypalSettings.paypaltype);
-        requestHandler.putRequest("admin/updatePayPalDetails",$scope.paypalSettings).then(function(response){
+        requestHandler.putRequest("admin/updatePayPalDetails/",$scope.paypalSettings).then(function(response){
             if(response.data.Response_status=="1"){
                 $scope.doGetPaypalSettings();
                 $scope.confirmPasswordForm.$setPristine();

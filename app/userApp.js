@@ -951,6 +951,82 @@ userApp.directive('focusMe',['$timeout','$parse', function($timeout, $parse) {
     };
 }]);
 
+userApp.directive('validDecimalnumber', function() {
+    return {
+        require: '?ngModel',
+        link: function(scope, element, attrs, ngModelCtrl) {
+            if(!ngModelCtrl) {
+                return;
+            }
+
+            var val;
+            ngModelCtrl.$parsers.push(function(val) {
+                if (angular.isUndefined(val)) {
+                    val = '';
+                }
+
+                var clean = val.replace(/[^0-9\.]/g, '');
+                var negativeCheck = clean.split('-');
+                var decimalCheck = clean.split('.');
+                if(!angular.isUndefined(negativeCheck[1])) {
+                    negativeCheck[1] = negativeCheck[1].slice(0, negativeCheck[1].length);
+                    clean =negativeCheck[0] + '-' + negativeCheck[1];
+                    if(negativeCheck[0].length > 0) {
+                        clean =negativeCheck[0];
+                    }
+
+                }
+
+                if(!angular.isUndefined(decimalCheck[1])) {
+                    decimalCheck[1] = decimalCheck[1].slice(0,1);
+                    clean =decimalCheck[0] + '.' + decimalCheck[1];
+                }
+                var firstcharzero = val.slice(0,1);
+                var firstchardot = val.slice(0,1);
+                var input = val.indexOf(' ');
+                var inputs = val.indexOf('.');
+                var lastval = val.charAt(val.length-1);
+
+
+
+                if(firstcharzero==0){
+                    clean=val.substr(1);
+                }
+
+
+                if(firstchardot=='.'){
+                    clean=val.substr(1);
+                }
+
+                if(input==-1 && inputs!=-1 && val.length==3){
+                    clean=val;
+                }
+                else if(input==-1 && inputs==-1 && val.length>3){
+                    clean=val.slice(0,3);
+                }
+
+
+                if (val !== clean) {
+                    ngModelCtrl.$setViewValue(clean);
+                    ngModelCtrl.$render();
+
+                }
+                return clean;
+            });
+
+            element.bind('keydown', function(e) {
+
+                if(event.keyCode === 32 && event.which ===32) {
+                    event.preventDefault();
+                }
+            });
+        }
+    };
+});
+
+
+
+
 userApp.factory('myGoogleAnalytics', [
         '$rootScope', '$window', '$location',
         function ($rootScope, $window, $location) {

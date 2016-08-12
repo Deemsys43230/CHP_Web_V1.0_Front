@@ -61,7 +61,7 @@
             <h5>Ideal Weight <span class="pull-right">: &nbsp;</span></h5>
         </div>
         <div class="col-lg-4 col-md-12 col-sm-4 no-padding">
-            <h5><span class="yellow">&nbsp;&nbsp;</span><i>&nbsp;{{idealWeight}} <small><span ng-show="userProfile.unitPreference==1">Kgs</span><span ng-show="userProfile.unitPreference==2">lbs</span></small></i></h5>
+            <h5><span class="green">&nbsp;&nbsp;</span><i>&nbsp;{{idealWeight}} <small><span ng-show="userProfile.unitPreference==1">Kgs</span><span ng-show="userProfile.unitPreference==2">lbs</span></small></i></h5>
         </div>
         <div class="col-lg-8 col-md-12 col-sm-8 padding-response-inverse">
             <div class="margin-top-10 hidden-md"></div>
@@ -69,7 +69,7 @@
         </div>
         <div class="col-lg-4 col-md-12 col-sm-4 no-padding">
             <div class="margin-top-10 hidden-md"></div>
-            <h5><span class="green">&nbsp;&nbsp;</span><i>&nbsp;{{demography.weight}} <small><span ng-show="userProfile.unitPreference==1">Kgs</span><span ng-show="userProfile.unitPreference==2">lbs</span></small></i></h5>
+            <h5><span class="yellow">&nbsp;&nbsp;</span><i>&nbsp;{{demography.weight}} <small><span ng-show="userProfile.unitPreference==1">Kgs</span><span ng-show="userProfile.unitPreference==2">lbs</span></small></i></h5>
         </div>
         <div class="col-lg-12 col-md-12 col-sm-12 margin-top-10 text-italic padding-response-inverse">
             <div class="margin-right-20">
@@ -92,19 +92,19 @@
         var selectoritem = $('#col');
         if (idealWeightlevel <= 47) {
             selectoritem.animate({height: ha}, 1200);
-            if(selectoritem.hasClass('yellow')){
-                selectoritem.removeClass('yellow');
+            if(selectoritem.hasClass('green')){
+                selectoritem.removeClass('green');
             }else if(selectoritem.hasClass('red')){
                 selectoritem.removeClass('red');
             }
-            selectoritem.addClass('green');
+            selectoritem.addClass('yellow');
         }
         else if(idealWeightlevel >= 53) {
             selectoritem.animate({height: ha}, 1200);
-            if(selectoritem.hasClass('yellow')){
-                selectoritem.removeClass('yellow');
-            }else if(selectoritem.hasClass('green')){
+            if(selectoritem.hasClass('green')){
                 selectoritem.removeClass('green');
+            }else if(selectoritem.hasClass('yellow')){
+                selectoritem.removeClass('yellow');
             }
             selectoritem.addClass('red');
         }
@@ -112,10 +112,10 @@
             selectoritem.animate({height: ha}, 1200);
             if(selectoritem.hasClass('red')){
                 selectoritem.removeClass('red');
-            }else if(selectoritem.hasClass('green')){
-                selectoritem.removeClass('green');
+            }else if(selectoritem.hasClass('yellow')){
+                selectoritem.removeClass('yellow');
             }
-            selectoritem.addClass('yellow');
+            selectoritem.addClass('green');
         }
     }
 </script>
