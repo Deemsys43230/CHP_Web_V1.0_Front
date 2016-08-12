@@ -255,10 +255,10 @@ userApp.controller('DemographyController',['$rootScope','$scope','requestHandler
 
     $scope.maxheight=false;
     $scope.maxCheck = function(height){
-        if(height<=394){
+        if(height<394){
             $scope.maxheight=false;
         }
-        else if(height>394){
+        else if(height>=394){
             $scope.maxheight=true;
         }
 
