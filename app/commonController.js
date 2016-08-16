@@ -162,21 +162,23 @@ commonApp.filter('toSec', function() {
         return result || '';
     };
 });
-commonApp.directive('picker', function() {
+commonApp.directive('dateValidation', function() {
     return {
         restrict: 'A',
         require : 'ngModel',
-        link : function (scope, element, attrs, ngModelCtrl) {
-            $(function(){
-                element.picker({
-                    dateFormat:'dd/mm/yy',
-                    onSelect:function (date) {
-                        scope.$apply(function () {
-                            ngModelCtrl.$setViewValue(date);
-                        });
-                    }
-                });
-            });
-        }
+        link : function (scope, element, attrs, ctrl) {
+            
+              ctrl.$parsers.unshift(function(value) {
+                if(value){
+                  // test and set the validity after update.
+                  var valid = value.charAt(2) == '/' && value.charAt(5) == '/' && value.length == 10;
+                  ctrl.$setValidity('invalidDate', valid);
+                }
+
+                // if it's valid, return the value to the model,
+                // otherwise return undefined.
+                return valid ? value : "undefined";
+        });
     }
+};
 });

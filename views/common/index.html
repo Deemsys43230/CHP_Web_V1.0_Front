@@ -189,10 +189,17 @@
                                 <h5 class="col-md-4 col-sm-4 margin-top-10">D O B<sup class="text-red">*</sup></h5>
                                 <div class="col-md-8 col-sm-8">
                                     <!--input class="search-input picker-image-textbox" name="dob" picker ng-model="dob" placeholder="dd/mm/yyyy" class="fa fa-calendar" type="text" data-beatpicker-id="myDatePicker" data-beatpicker="true" data-beatpicker-position="['*','*']" data-beatpicker-format="['DD','MM','YYYY']" data-beatpicker-disable="{from:[2016,1,1],to:'>'}" data-beatpicker-module="gotoDate,today,clear" required-->
-                                    <input name='dob' class="search-input" id="dobForBMI" ng-model="dob" required />
+                                    <div class="input-group">
+                                    <input name='dob' class="search-input" id="dobForBMI" date-validation
+                                           ng-model="dob" placeholder="dd/mm/yyyy" required />
+                                    <span class="input-group-addon" id="dobIcon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                    </div>
                                     <div class="text-error-message">
                                     <span ng-show="bmiSubmitted">
-                                       <span ng-show="calculateForm.dob.$error.required"><span>Required.</span></span>
+                                           <span ng-show="calculateForm.dob.$error.invalidDate">Invalid date.</span>
+                                           <span ng-show="calculateForm.dob.$error.required"><span>Please enter a valid date.</span></span>
                                     </span>
                                     </div>
                                 </div>
@@ -629,6 +636,12 @@
                 },
                 // Localization
                 $.datepicker.regional['us']);
+  });
+  $(function() {
+      $('#dobIcon').click(function(){
+          $('#dobForBMI').focus();
+      }
+              );
   });
 
     $(function () {
