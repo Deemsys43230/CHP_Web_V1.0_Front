@@ -86,7 +86,6 @@ adminApp.controller('CoachViewController',['$scope','requestHandler','Flash','$r
     $scope.paginationLoad=false;
 
     $scope.doGetCoachDetailsByUser= function (id){
-
         $scope.coach = {
             status: 'coach-view'
         };
@@ -94,10 +93,12 @@ adminApp.controller('CoachViewController',['$scope','requestHandler','Flash','$r
         $scope.viewload=true;
 
         requestHandler.getRequest("getCoachIndividualDetailbyAdmin/"+id, "").then(function(response){
-
             $scope.usercoachdetails=response.data.getCoachIndividualDetail;
+
+            if($scope.usercoachdetails.experience!=null){
             $scope.years = Math.trunc($scope.usercoachdetails.experience / 12);
             $scope.months = $scope.usercoachdetails.experience %12;
+            }
 
             if($scope.usercoachdetails.about==null){
                 $scope.usercoachdetails.about = "NA";

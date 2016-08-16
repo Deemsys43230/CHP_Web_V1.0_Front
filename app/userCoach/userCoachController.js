@@ -102,8 +102,10 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
 
             $scope.usercoachdetails=response.data.getCoachIndividualDetail;
 
+            if($scope.usercoachdetails.experience!=null){
             $scope.years = Math.trunc($scope.usercoachdetails.experience / 12);
             $scope.months = $scope.usercoachdetails.experience %12;
+            }
 
             if($scope.usercoachdetails.about==null){
                 $scope.usercoachdetails.about = "NA";
