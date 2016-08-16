@@ -96,7 +96,6 @@ adminApp.controller('CoachViewController',['$scope','requestHandler','Flash','$r
         requestHandler.getRequest("getCoachIndividualDetailbyAdmin/"+id, "").then(function(response){
 
             $scope.usercoachdetails=response.data.getCoachIndividualDetail;
-
             $scope.years = Math.trunc($scope.usercoachdetails.experience / 12);
             $scope.months = $scope.usercoachdetails.experience %12;
 
@@ -229,7 +228,7 @@ adminApp.directive("averageStarRating", function() {
             "      <i class='fa fa-star'></i>" + //&#9733
             "    </li>" +
             "  </ul>" +
-            "  <ul class='rating foreground' class='readonly' style='width:{{filledInStarsContainerWidth}}%'>" +
+            "  <ul class='rating foreground' class='readonly' ng-attr-style='width:{{filledInStarsContainerWidth}}%'>" +
             "    <li ng-repeat='star in stars' class='star filled'>" +
             "      <i class='fa fa-star'></i>" + //&#9733
             "    </li>" +
