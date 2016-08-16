@@ -955,8 +955,41 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         requestHandler.postRequest("checkGoalStatus/",{"date":date}).then(function(response){
 
             $scope.budgetCheck = response.data.goalPossiblity;
-            //alert($scope.budgetCheck);
+
+            if($scope.budgetCheck == 0){
+            $(function(){
+                $("#lean_overlay").fadeTo(1000);
+                $("#budgetAlert").fadeIn(600);
+                $(".common_model").show();
+                $scope.shouldBeOpen = true;
+            });
+
+            $(".modal_close").click(function(){
+                $(".common_model").hide();
+                $("#budgetAlert").hide();
+                $("#lean_overlay").hide();
+                $scope.shouldBeOpen = false;
+            });
+
+            $("#lean_overlay").click(function(){
+                $(".common_model").hide();
+                $("#budgetAlert").hide();
+                $("#lean_overlay").hide();
+                $scope.shouldBeOpen = false;
+            });
+            }
         });
+    };
+
+    $scope.budgetChangePlan = function(){
+        $timeout(function(){
+        $("#updateWeightGoal").click();
+           $scope.updateGoalDetails($scope.weight);
+        });
+
+      /* $("#updateWeightGoal").click(function(){
+
+       });*/
     };
 
     //TO Insert weight Goal Log
@@ -2087,6 +2120,8 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
     $scope.datePicker = function(){
         $("#main-date").click();
     };
+
+
 
     //Get user time zone for update weight log
     $scope.getUserTimeZone=function(date){

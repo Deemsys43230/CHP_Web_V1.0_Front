@@ -192,7 +192,7 @@
                                     <input name='dob' class="search-input" id="dobForBMI" ng-model="dob" required />
                                     <div class="text-error-message">
                                     <span ng-show="bmiSubmitted">
-                                           <span ng-show="calculateForm.dob.$error.required"><span>Required.</span></span>
+                                       <span ng-show="calculateForm.dob.$error.required"><span>Required.</span></span>
                                     </span>
                                     </div>
                                 </div>
@@ -286,7 +286,7 @@
                                     </div>
                                     <div class="testimonials-carousel-content">
                                         <a href="views/home/#/testimonials/{{usertestimonial.testimonialid}}">{{usertestimonial.title}}</a>
-                                        <p ng-bind-html="usertestimonial.description | html"></p>
+                                        <div class="wrap wrap-all"><p ng-bind-html="usertestimonial.description | html"></p></div>
                                         <div><strong>-&nbsp;{{usertestimonial.givenby}}</strong></div>
                                     </div>
                                 </div>

@@ -140,7 +140,7 @@
         </li>
 
         <li class="weight" ng-click="otherThanHistory()">
-            <a class="menu-items" href="#weight" ng-click="doGetDemograph()"><i class="fa fa-tachometer fa-4x hidden-md"></i><span>Weight & Goal</span>
+            <a class="menu-items" id="updateWeightGoal" href="#weight" ng-click="doGetDemograph()"><i class="fa fa-tachometer fa-4x hidden-md"></i><span>Weight & Goal</span>
                 <p class="hidden-md hidden-sm">Update Weight & Set Goal</p>
             </a>
         </li>
@@ -1105,6 +1105,26 @@
             <span ng-show="doWeightGoalUpdate=='gain'" >Your current weight is greater than your target weight.Please change your plan.</span>
             <div class="action_btns margin-top-20">
                 <div class="modal_close"><a href="" class="btn btn_blue" >OK</a></div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- Budget Alert-->
+
+<div id="budgetAlert" class="popupContainer" style="display:none;left:37%!important;">
+    <header class="popupHeader">
+        <span class="header_title">Alert</span>
+        <span class="modal_close"><i class="fa fa-times"></i></span>
+    </header>
+
+    <section class="popupBody">
+        <!-- Register Form -->
+        <div class="common_model">
+            <span ng-show="budgetCheck==0" >You are going under our recommended budget value. Please change your plan.</span>
+            <div class="action_btns margin-top-20">
+                <div class="one_half modal_close"><a href="" ng-click="budgetChangePlan()" class="btn btn_blue" >Change Plan</a></div>
+                <div class="one_half last modal_close"><a class="btn btn_red">Cancel</a></div>
             </div>
         </div>
     </section>
