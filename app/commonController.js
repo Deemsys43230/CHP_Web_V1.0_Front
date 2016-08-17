@@ -171,7 +171,7 @@ commonApp.directive('dateValidation', function() {
               ctrl.$parsers.unshift(function(value) {
                 if(value){
                   // test and set the validity after update.
-                  var valid = value.charAt(2) == '/' && value.charAt(5) == '/' && value.length == 10;
+                  var valid = value.charAt(2) == '/' && value.charAt(5) == '/' && value.length == 10 && checkDate(value);
                   ctrl.$setValidity('invalidDate', valid);
                 }
 
@@ -179,6 +179,19 @@ commonApp.directive('dateValidation', function() {
                 // otherwise return undefined.
                 return valid ? value : "undefined";
         });
+                
+                checkDate = function(inputDate) {
+                    var dd = parseInt(inputDate.substr(0,2));
+                    var mm = parseInt(inputDate.substr(3,4))-1;
+                    var yy = parseInt(inputDate.substr(6,9));
+                    var currentDate = new Date();
+                    var userDOB = new Date(yy, mm, dd);
+                    var minDate = new Date(1800, 0, 0);
+                    if((userDOB > currentDate)||(userDOB < minDate) || (dd > 31) || (mm > 11)) 
+                        return false;                    
+                    else 
+                        return true;                    
+                };
     }
 };
 });
