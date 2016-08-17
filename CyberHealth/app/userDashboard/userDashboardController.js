@@ -701,6 +701,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
 
 
     $scope.doGetWeightGoal=function(){
+        $scope.weightGraph=true;
         requestHandler.getRequest("getUserId/","").then(function(response){
             $scope.userProfile=response.data.User_Profile;
             $scope.demographydetail=response.data.demography;
@@ -995,11 +996,11 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
     //TO Insert weight Goal Log
     $scope.doInsertOrUpdateWeightLog=function(date,weight){
         requestHandler.postRequest("user/weightlogInsertorUpdate/",{"date":date,"weight":weight}).then(function(response){
-            /*if(date==selectedDate && $scope.updateGoal==1){
-             $window.currentweight = weight;
-             refreshGraph();
-             *//*$scope.updateAverageGainSpent(date);*//*
-             }*/
+            if(date==selectedDate && $scope.weightGraph){
+                $window.currentweight = weight;
+                refreshGraph();
+                /*$scope.updateAverageGainSpent(date);*/
+            }
             $scope.spinner=false;
             $scope.weightUpdateText="Update Weight";
             $scope.doGetWeightLog(date);
@@ -1169,6 +1170,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
     //To Update Goal Details
     $scope.updateGoalDetails=function(currentWeight){
         //  $scope.setGoalTypeOptions(1);
+        $scope.weightGraph=false;
         $scope.goalPossiblityStatus =0;
         $scope.targetText = 'End Date';
         $window.singlePicker = true;

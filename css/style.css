@@ -9442,7 +9442,7 @@ input[type=range]:focus::-ms-fill-upper {
 }
 
 .news-item .testimonials-carousel-content div::after{
-	content:"\00a0";
+	/*content:"\00a0";*/
 	position:absolute;
 	bottom:0;
 	right:20px;
