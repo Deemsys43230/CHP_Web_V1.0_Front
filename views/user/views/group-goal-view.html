@@ -129,7 +129,7 @@
                                     </div>
                                     <div ng-show="goalDetail.candelete==1">
                                         <span ng-show="member.isownerstatus==1"><a href="" class="invite_button disabled">Admin</a></span>
-                                        <span ng-show="member.isownerstatus==0"><a href="" class="invite_button request_sent" ng-click="doRemoveMember(member.userid)">Remove</a></span>
+                                        <span ng-show="member.isownerstatus==0 && member.status==0"><a href="" class="invite_button request_sent" ng-click="doRemoveMember(member.userid)">Remove</a></span>
                                     </div>
                                 </div>
                                 <div class="col-lg-12 col-md-12 col-sm-12 no-padding">

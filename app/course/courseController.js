@@ -18,10 +18,7 @@ userApp.controller('CourseController',['$scope','requestHandler','Flash','$route
         },function(){
             errorMessage(Flash,"Please try again later!")
         });
-
-
-
-    };
+ };
 
     $scope.formatMyCourseByCategory=function(){
 
@@ -575,12 +572,14 @@ coachApp.controller('CourseController',['$scope','requestHandler','Flash','$rout
         $scope.getCourseDetails();
 
         if($scope.courseSections!=0){
-            RowSorter('table[attr-sample=thetable]', {
+           RowSorter('table[attr-sample=thetable]', {
+            /*    var sorter = $('#table1').rowSorter({*/
                 handler: 'td.sorter',
                 stickFirstRow : true,
                 stickLastRow  : false,
                 onDragStart: function(tbody, row, index)
                 {
+                    console.log("drag", tbody , row, index);
                     log('start index is ' + index);
                 },
                 onDrop: function(tbody, row, new_index, old_index)
@@ -775,6 +774,33 @@ coachApp.controller('CourseController',['$scope','requestHandler','Flash','$rout
             $("#lean_overlay").hide();
         });
     };
+
+    $scope.checkBrowser=function(){
+    if((navigator.userAgent.indexOf("MSIE") != -1 ) || (!!document.documentMode == true )) //IF IE > 10
+    {
+        $(function(){
+            $("#lean_overlay").fadeTo(1000);
+            $("#browser-modal").fadeIn(600);
+            $(".common_model").show();
+        });
+
+        $(".modal_close").click(function(){
+            $(".common_model").hide();
+            $("#browser-modal").hide();
+            $("#lean_overlay").hide();
+        });
+
+        $("#lean_overlay").click(function(){
+            $(".common_model").hide();
+            $("#browser-modal").hide();
+            $("#lean_overlay").hide();
+        });
+    }
+        else{
+        $location.path("course-add");
+    }
+    };
+
 
 }]);
 

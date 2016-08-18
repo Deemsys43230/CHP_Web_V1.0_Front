@@ -548,7 +548,6 @@ commonApp.controller('LoginController',['$scope','requestHandler','Flash','$wind
             if(response.data.Response_status===""){
 
                 successMessage(Flash,"Login Successful!");
-
                 //Get Logged In User
                 requestHandler.getRequest("getUserId/","").then(function(response){
 

@@ -193,7 +193,9 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'coachApp',
                             files:[
+                                '../../plugin/popup/style.css',
                                 '../../app/course/courseController.js'
+
                             ]
                         })
                     }]
