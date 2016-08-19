@@ -56,6 +56,9 @@
                         </h5>
                         <span ng-show="courseDetails.canedit==1"><a href="#course-edit/{{courseDetails.courseid}}" class="main-button blue_back margin-top-10">Edit Basic Info</a></span>
                         <span ng-show="courseDetails.canedit==1"><a ng-click="deleteModel()" id="modal_trigger" href="" class="main-button red_back margin-top-10">Delete course</a></span>
+                        <div class="col-lg-12 col-md-12 col-sm-12 margin-top-20">
+                            <h6 ng-show="browser==1"><div class="label-danger">We recommended you to use Google Chrome / Mozilla Firefox browser to Create/Edit course.</div></h6>
+                        </div>
                     </div>
                     <div class="col-lg-9 col-md-8 col-sm-8 no-padding">
                         <h2 class="wrap margin-right-20">{{courseDetails.coursename}}</h2>

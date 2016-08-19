@@ -801,7 +801,13 @@ coachApp.controller('CourseController',['$scope','requestHandler','Flash','$rout
     }
     };
 
-
+    if((navigator.userAgent.indexOf("MSIE") != -1 ) || (!!document.documentMode == true )) //IF IE > 10
+    {
+        $scope.browser = 1;
+    }
+    else{
+        $scope.browser = 0;
+    }
 }]);
 
 coachApp.controller('CourseEditController',['$scope','requestHandler','Flash','$routeParams','$location',function($scope,requestHandler,Flash,$routeParams,$location) {
@@ -1058,6 +1064,8 @@ coachApp.controller('CourseEditController',['$scope','requestHandler','Flash','$
             $("#lean_overlay").hide();
         });
     };
+
+
 
 }]);
 
