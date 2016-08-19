@@ -109,6 +109,35 @@ userApp.controller('DemographyController',['$rootScope','$scope','requestHandler
         originalNutrition=angular.copy($scope.nutrients);
     };
 
+    $scope.checkGoalStatus=function(date){
+        requestHandler.postRequest("checkGoalStatus/",{"date":date}).then(function(response){
+
+            $scope.budgetCheck = response.data.goalPossiblity;
+            if($scope.budgetCheck == 0){
+                $(function(){
+                    $("#lean_overlay").fadeTo(1000);
+                    $("#budgetAlert").fadeIn(600);
+                    $(".common_model").show();
+                    $scope.shouldBeOpen = true;
+                });
+
+                $(".modal_close").click(function(){
+                    $(".common_model").hide();
+                    $("#budgetAlert").hide();
+                    $("#lean_overlay").hide();
+                    $scope.shouldBeOpen = false;
+                });
+
+                $("#lean_overlay").click(function(){
+                    $(".common_model").hide();
+                    $("#budgetAlert").hide();
+                    $("#lean_overlay").hide();
+                    $scope.shouldBeOpen = false;
+                });
+            }
+        });
+    };
+
     $scope.doUpdateDemography= function () {
         if($scope.demography.heightFeet && $scope.demography.heightInches){
             $scope.demography.height = $scope.demography.heightFeet +'.'+$scope.demography.heightInches;
@@ -139,6 +168,7 @@ userApp.controller('DemographyController',['$rootScope','$scope','requestHandler
             requestHandler.putRequest("user/insertorupdateDemography/",$scope.demography).then(function(response){
                 if(response.data.Response_status==1){
                 $scope.doGetDemographyandNutrition();
+                $scope.checkGoalStatus(selectedDate);
                 $rootScope.checkPath=2;
                 successMessage(Flash,"Successfully Updated");
                 $timeout(function () {
@@ -288,6 +318,18 @@ userApp.controller('DemographyController',['$rootScope','$scope','requestHandler
 
     };
 
+    var selectedDate = new Date();
+    var dd = selectedDate.getDate();
+    var mm = selectedDate.getMonth()+1; //January is 0!
+
+    var yyyy = selectedDate.getFullYear();
+    if(dd<10){
+        dd='0'+dd
+    }
+    if(mm<10){
+        mm='0'+mm
+    }
+    selectedDate = dd+'/'+mm+'/'+yyyy;
 
     $scope.init=function(){
         $scope.getUserId();

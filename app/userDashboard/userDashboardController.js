@@ -952,6 +952,13 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         $scope.doInsertOrUpdateWeightLog($("#weight-log-date1").val(),parseFloat($("#weightLog1").val()));
     };
 
+    $scope.checkGoalOnLoad = function(date){
+        requestHandler.postRequest("checkGoalStatus/",{"date":date}).then(function(response){
+
+            $scope.budgetCheck = response.data.goalPossiblity;
+        });
+    };
+
     $scope.checkGoalStatus=function(date){
         requestHandler.postRequest("checkGoalStatus/",{"date":date}).then(function(response){
 
@@ -2185,7 +2192,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         $scope.goGetSessionGraph($scope.storedSessionId);
         $scope.getUserTimeZone(date);
         $scope.getBudget(date);
-        $scope.checkGoalStatus(date);
+        $scope.checkGoalOnLoad(date);
     };
 
     $scope.initialLoadFoodAndExercise(selectedDate);
