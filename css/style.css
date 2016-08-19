@@ -9726,6 +9726,16 @@ input[type=range]:focus::-ms-fill-upper {
     border-radius: 3px;
 }
 
+.label-red{
+    font-weight: bold;
+    padding: 3px 7px!important;
+    border: 1px solid #ff0000;
+    color: #ff0000;
+    font-size: 11px;
+    background-color: transparent;
+    border-radius: 3px;
+}
+
 .btn-sm.btn-sm-override,
 .btn-group-sm.btn-sm-override > .btn {
     padding: 3px 5px !important;
@@ -15787,47 +15797,47 @@ a.button-wrap:hover li{
 /* @group Blink */
 
 .blink {
-    -webkit-animation: blink 4s linear infinite;
-    -moz-animation: blink 4s linear infinite;
-    -ms-animation: blink 4s linear infinite;
-    -o-animation: blink 4s linear infinite;
-    animation: blink 4s linear infinite;
+    -webkit-animation: blink 1s linear infinite;
+    -moz-animation: blink 1s linear infinite;
+    -ms-animation: blink 1s linear infinite;
+    -o-animation: blink 1s linear infinite;
+    animation: blink 1s linear infinite;
 
 }
 
 @-webkit-keyframes blink {
     0% { opacity: 1; }
-    50% { opacity: 0; }
+    50% { opacity: 1; }
     50.01% { opacity: 0; }
-    100% { opacity: 1; }
+    100% { opacity: 0; }
 }
 
 @-moz-keyframes blink {
     0% { opacity: 1; }
-    50% { opacity: 0; }
+    50% { opacity: 1; }
     50.01% { opacity: 0; }
-    100% { opacity: 1; }
+    100% { opacity: 0; }
 }
 
 @-ms-keyframes blink {
     0% { opacity: 1; }
-    50% { opacity: 0; }
+    50% { opacity: 1; }
     50.01% { opacity: 0; }
-    100% { opacity: 1; }
+    100% { opacity: 0; }
 }
 
 @-o-keyframes blink {
     0% { opacity: 1; }
-    50% { opacity: 0; }
+    50% { opacity: 1; }
     50.01% { opacity: 0; }
-    100% { opacity: 1; }
+    100% { opacity: 0; }
 }
 
 @keyframes blink {
     0% { opacity: 1; }
-    50% { opacity:0; }
+    50% { opacity:1; }
     50.01% { opacity: 0; }
-    100% { opacity: 1; }
+    100% { opacity: 0; }
 }
 .blink:hover {
     -webkit-animation: none;
