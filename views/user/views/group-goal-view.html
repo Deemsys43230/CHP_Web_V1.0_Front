@@ -125,7 +125,8 @@
                                 <div class="col-lg-3 col-md-3 col-sm-3 margin-top-3">
                                     <div ng-show="goalDetail.candelete==0">
                                         <span ng-show="member.isownerstatus==1"><a href="" class="invite_button disabled">Admin</a></span>
-                                        <span ng-show="member.isownerstatus==0"><a href="" class="invite_button request_sent disabled">Member</a></span>
+                                        <span ng-show="member.isownerstatus==0 && member.status==0"><a href="" class="invite_button request_sent" ng-click="doRemoveMember(member.userid)">Remove</a></span>
+                                        <span ng-show="member.isownerstatus==0 && member.status==1"><a href="" class="invite_button request_sent disabled">Member</a></span>
                                     </div>
                                     <div ng-show="goalDetail.candelete==1">
                                         <span ng-show="member.isownerstatus==1"><a href="" class="invite_button disabled">Admin</a></span>

@@ -1355,7 +1355,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         $scope.setGoalDetails.goalchoice=parseInt($scope.goalchoice);
             if($scope.setGoalDetails.goalchoice==5){
                 if(document.getElementById("start").value==''){
-                    $scope.setGoalDetails.enddate = selectedDate;
+                    $scope.setGoalDetails.enddate = $scope.goalDetails.enddate;
                 }
                 else{
                     $scope.setGoalDetails.enddate=document.getElementById("start").value;

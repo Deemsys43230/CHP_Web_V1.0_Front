@@ -31,7 +31,7 @@
                                     </div>
                                     <div class="testimonials-carousel-content">
                                         <a href="" onclick="doGetTestimonialDetails($(this).attr('data-value'));return false;" data-value="{{usertestimonial.testimonialid}}">{{usertestimonial.title}}</a>
-                                        <p ng-bind-html="usertestimonial.description | html"></p>
+                                        <div class="wrap wrap-all"><p ng-bind-html="usertestimonial.description | html"></p></div>
                                         <div><strong>-&nbsp;{{usertestimonial.givenby}}</strong></div>
                                     </div>
                                 </div>
