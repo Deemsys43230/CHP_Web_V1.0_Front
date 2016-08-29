@@ -38,6 +38,7 @@
     <!-- Custom links  -->
     <!-- combine of style, passowrd, font-site, yellow, spinner, loader css files  -->
     <link rel="stylesheet" type="text/css" href="css/style.css" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="css/homeFeatures.css"/>
 
     <!-- Responsive CSS Styles  -->
     <link rel="stylesheet" type="text/css" href="css/responsive.css" media="screen"/>
@@ -266,80 +267,67 @@
             <hr/>
             <!-- End Big Heading -->
 
-            <div>
-                <!-- Start Service Icon 2 -->
-                <!--<div class="col-lg-4 col-md-4 col-sm-5 service-box service-center" data-animation="fadeIn" data-animation-delay="03">-->
-                <div class="col-lg-4 col-md-4 col-sm-5 col-xs-12 service-box service-center">
-                    <div class="row">
-                        <div class="service-content service-content-right col-md-8 col-lg-8 col-sm-9 col-xs-10">
-                            <h4>HUGE FOOD CATALOGUE</h4>
-                            <p>More than 10,000 different styles of healthy foods and its nutrient details</p>
-                        </div>
-                        <div class="service-icon col-md-4 col-lg-4 col-sm-3 col-xs-2 no-padding">
-                            <i class="fa fa-cutlery icon-large"></i>
-                        </div>
-                    </div>
-                    <div class="row margin-right-20">
-                        <div class="service-content service-content-right col-md-8 col-lg-8 col-sm-9 col-xs-10">
-                            <h4>LARGE EXERCISE DATABASE</h4>
-                            <p>Large amount of exercises with latest trends</p>
-                        </div>
-                        <div class="service-icon col-md-4 col-lg-4 col-sm-3 col-xs-2 no-padding">
-                            <i class="fa fa-bicycle icon-large"></i>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="service-content service-content-right col-md-8 col-lg-8 col-sm-9 col-xs-10">
-                            <h4>PREFERRED FOOD TIPS</h4>
-                            <p>Provide preferred food to keep our users healthy</p>
-                        </div>
-                        <div class="service-icon col-md-4 col-lg-4 col-sm-3 col-xs-2 no-padding">
-                            <i class="fa fa-lightbulb-o icon-large"></i>
-                        </div>
-                    </div>
+        <div>
+        
+            <div class="col-md-4 col-lg-4 featInfo" style="margin-top: 5%">
+                <div id="feat1" 
+                     onmouseover='clearInterval(fAnim); zoomOutAll(); 
+                         jQuery("#featImage").attr("src", "images/feat1.gif"); 
+                         featInfoZoomIn("feat1")' onmouseout="startFeatAnim()">
+                <div id="feat1h">HEALTH PROGRAM</div>
+                <p id="feat1p">Choose your own weight program to guide you.</p>
                 </div>
-                <!-- End Service Icon 2 -->
 
-                <!-- Start Service Icon 3 -->
-                <!--<div class="col-lg-4 col-md-4 col-sm-2 service-box service-center no-padding" data-animation="fadeIn" data-animation-delay="02">-->
-                <div class="col-lg-4 col-md-4 col-sm-2 hidden-xs service-box service-center no-padding">
-                    <img class="service-box-image-responsive" src="images/fit-5.png" width="100%" height="auto">
+                <div id="feat2"
+                     onmouseover='clearInterval(fAnim); zoomOutAll(); 
+                         jQuery("#featImage").attr("src", "images/feat2.gif"); 
+                         featInfoZoomIn("feat2")' onmouseout="startFeatAnim()">
+                <div id="feat2h">CALORIE TRACKING</div>
+                <p id="feat2p">Track your Budget Calorie daily for your weight.</p>
                 </div>
-                <!-- End Service Icon 3 -->
 
-                <!-- Start Service Icon 4 -->
-                <!--<div class="col-lg-4 col-md-4 col-sm-5 service-box service-center" data-animation="fadeIn" data-animation-delay="03">-->
-                <div class="col-lg-4 col-md-4 col-sm-5 service-box service-center">
-                    <div class="row">
-                        <div class="service-icon col-md-4 col-lg-4 col-sm-3 col-xs-2 no-padding">
-                            <i class="fa fa-male icon-large"></i>
-                        </div>
-                        <div class="service-content service-content-left col-md-8 col-lg-8 col-sm-9 col-xs-10">
-                            <h4 class="text-left">COACH ADVICES</h4>
-                            <p class="text-left">Daily coach advices to achieve your goals </p>
-                        </div>
-                    </div>
-                    <div class="row margin-left-20">
-                        <div class="service-icon col-md-4 col-lg-4 col-sm-3 col-xs-2 no-padding">
-                            <i class="fa fa-thumb-tack icon-large"></i>
-                        </div>
-                        <div class="service-content service-content-left col-md-8 col-lg-8 col-sm-9 col-xs-10">
-                            <h4 class="text-left">SET GOAL FACILITY</h4>
-                            <p class="text-left">Users can set the goal to make the body fitness faster</p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="service-icon col-md-4 col-lg-4 col-sm-3 col-xs-2 no-padding">
-                            <i class="fa fa-cogs icon-large"></i>
-                        </div>
-                        <div class="service-content service-content-left col-md-8 col-lg-8 col-sm-9 col-xs-10">
-                            <h4 class="text-left">VALUE ADDED SERVICES</h4>
-                            <p class="text-left">We also provides useful Courses, Blogs, News as value added services</p>
-                        </div>
-                    </div>
+                <div id="feat3"
+                     onmouseover='clearInterval(fAnim); zoomOutAll(); 
+                         jQuery("#featImage").attr("src", "images/feat3.gif"); 
+                         featInfoZoomIn("feat3")' onmouseout="startFeatAnim()">
+                <div id="feat3h">GROUP GOALS</div>
+                <p id="feat3p">Make friends and participate in group goals</p>
                 </div>
-                <!-- End Service Icon 4 -->
             </div>
+
+            <div class="col-md-4 col-lg-4">
+                <img id="featImage" src="images/feat1.gif" 
+                     style="width: 100%; border-radius: 15px" alt="Our features"/>
+            </div>
+
+            <div class="col-md-4 col-lg-4 featInfo" style="margin-top: 5%">
+                <div id="feat4"
+                     onmouseover='clearInterval(fAnim); zoomOutAll(); 
+                         jQuery("#featImage").attr("src", "images/feat4.gif"); 
+                         featInfoZoomIn("feat4")' onmouseout="startFeatAnim()">
+                <div id="feat4h">COACH ADVICES</div>
+                <p id="feat4p">Subscribe coaches to assist you.</p>
+                </div>
+
+                <div id="feat5"
+                     onmouseover='clearInterval(fAnim); zoomOutAll(); 
+                         jQuery("#featImage").attr("src", "images/feat5.gif"); 
+                         featInfoZoomIn("feat5")' onmouseout="startFeatAnim()">
+                <div id="feat5h">BUILT-IN DIARIES</div>
+                <p id="feat5p">Huge Food & Exercise Dairy made available for you.</p>
+                </div>
+
+                <div id="feat6"
+                     onmouseover='clearInterval(fAnim); zoomOutAll(); 
+                         jQuery("#featImage").attr("src", "images/feat6.gif"); 
+                         featInfoZoomIn("feat6")' onmouseout="startFeatAnim()">
+                <div id="feat6h">ENROLL COURSES</div>
+                <p id="feat6p">Useful Courses for your healthy life from our experts.</p>
+                </div>
+
+            </div>
+        
+        </div>
         </div><!-- .row -->
     </div><!-- .container -->
 </div>
@@ -599,6 +587,9 @@
 
 
 </script>
+<!-- Features block - animation scripts -->
+        <script src="js/featImgAnim.js"></script>
+        <script> featInfoZoomIn('feat1'); startFeatAnim(); </script>
 
 </body>
 </html>

@@ -1,0 +1,25 @@
+
+.featInfo > div {
+    margin-bottom: 20px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.featInfo p {
+    display: none;
+    color: white;
+    font-size: large;
+    font-weight: bolder;
+}
+
+.featInfo div {
+    padding-bottom: 10px;
+}
+
+#feat1, #feat2, #feat3, #feat1p, #feat2p, #feat3p {
+    text-align: right;
+}
+
+#feat1h, #feat2h, #feat3h, #feat4h, #feat5h, #feat6h {
+    font-size: x-large;
+}
