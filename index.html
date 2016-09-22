@@ -38,7 +38,6 @@
     <!-- Custom links  -->
     <!-- combine of style, passowrd, font-site, yellow, spinner, loader css files  -->
     <link rel="stylesheet" type="text/css" href="css/style.css" media="screen"/>
-    <link rel="stylesheet" type="text/css" href="css/homeFeatures.css"/>
 
     <!-- Responsive CSS Styles  -->
     <link rel="stylesheet" type="text/css" href="css/responsive.css" media="screen"/>
@@ -205,10 +204,10 @@
                 <div class="slideshow-element">
                     <h1 class="slider-font margin-bottom-20">
                         <span class="hidden-xs"><br/></span>
-                        <span>ARE YOU STILL THINKING OF YOUR HEALTH PROBLEM? NO WORRIES!</span><br/>
-                        <div class="h4"><br/>
+                        <span>ARE YOU STILL THINKING OF YOUR HEALTH PROBLEM<span style="font-family: Tahoma, Verdana, Segoe, sans-serif;">?</span> NO WORRIES!</span><br/>
+                        <span class="h4"><br/>
                             Register with us! Your health dreams are taken care by us.
-                        </div>
+                        </span>
                         <a href="" class="btn-system btn-large" onclick="$('#loginNow').click()"><i class="fa fa-user"></i> Register Now</a>
                     </h1>
                 </div>
@@ -256,81 +255,77 @@
 <!-- Start Services Section -->
 <div class="section service">
     <div class="container">
-        <div class="row">
+      <div class="row">
 
             <!-- Start Big Heading -->
             <!--<div class="big-title text-center" data-animation="fadeInDown" data-animation-delay="01">-->
-            <div class="big-title text-center">
-                <!--<h1>This is Our Latest <strong>Work</strong></h1>-->
-                <h1>Achieve your health with <strong>Our Features</strong></h1>
-            </div>
-            <hr/>
+        <div class="big-title text-center">
+            <!--<h1>This is Our Latest <strong>Work</strong></h1>-->
+            <h1>Achieve your health with <strong>Our Features</strong></h1>
+        </div>
+        <hr/>
             <!-- End Big Heading -->
+            
+            <div class="col-md-12" style="padding-top: 45px">
+                <center>
+                <img src="images/info/features.png" style="width: 95%; padding-bottom: 50px" />
+                </center>
+            </div>
+<!-- Removed        
+            <div class="col-md-12">
+                <center style="width: 1200px; height: 500px">
+                <embed src="images/info/flash-feature.swf" style="width: 95%; height: 95%" loop="false">
+                </center>
+            </div>
+            
+            <div id="featureSVG"></div>
+            <div id="featContent" class="col-md-12 no-padding" >
+            <img src="images/info/000.png" id="featImage" style="margin:0px;width:1500px;"/>
 
-        <div>
-        
-            <div class="col-md-4 col-lg-4 featInfo" style="margin-top: 5%">
-                <div id="feat1" 
-                     onmouseover='clearInterval(fAnim); zoomOutAll(); 
-                         jQuery("#featImage").attr("src", "images/feat1.gif"); 
-                         featInfoZoomIn("feat1")' onmouseout="startFeatAnim()">
-                <div id="feat1h">HEALTH PROGRAM</div>
-                <p id="feat1p">Choose your own weight program to guide you.</p>
+            <div class="col-md-4 col-lg-4 featInfo" style="padding: 0; margin-top: 5%">
+                <div id="feat1">
+                    <div id="feat1h">HEALTH PROGRAM</div>
+                    <p id="feat1p">Choose your own weight program to guide you.</p>
                 </div>
 
-                <div id="feat2"
-                     onmouseover='clearInterval(fAnim); zoomOutAll(); 
-                         jQuery("#featImage").attr("src", "images/feat2.gif"); 
-                         featInfoZoomIn("feat2")' onmouseout="startFeatAnim()">
-                <div id="feat2h">CALORIE TRACKING</div>
-                <p id="feat2p">Track your Budget Calorie daily for your weight.</p>
+                <div id="feat2">
+                    <div id="feat2h">CALORIE TRACKING</div>
+                    <p id="feat2p">Track your Budget Calorie daily for your weight.</p>
                 </div>
 
-                <div id="feat3"
-                     onmouseover='clearInterval(fAnim); zoomOutAll(); 
-                         jQuery("#featImage").attr("src", "images/feat3.gif"); 
-                         featInfoZoomIn("feat3")' onmouseout="startFeatAnim()">
-                <div id="feat3h">GROUP GOALS</div>
-                <p id="feat3p">Make friends and participate in group goals</p>
+                <div id="feat3">
+                    <div id="feat3h">GROUP GOALS</div>
+                    <p id="feat3p">Make friends and participate in group goals</p>
                 </div>
             </div>
 
-            <div class="col-md-4 col-lg-4">
+            <div class="col-md-4 col-lg-4" id="featImgDiv" style="border-radius: 5px">
                 <img id="featImage" src="images/feat1.gif" 
                      style="width: 100%; border-radius: 15px" alt="Our features"/>
             </div>
 
-            <div class="col-md-4 col-lg-4 featInfo" style="margin-top: 5%">
-                <div id="feat4"
-                     onmouseover='clearInterval(fAnim); zoomOutAll(); 
-                         jQuery("#featImage").attr("src", "images/feat4.gif"); 
-                         featInfoZoomIn("feat4")' onmouseout="startFeatAnim()">
-                <div id="feat4h">COACH ADVICES</div>
-                <p id="feat4p">Subscribe coaches to assist you.</p>
+            <div class="col-md-4 col-lg-4 featInfo" style="padding: 0; margin-top: 5%">
+                <div id="feat4" class="pull-right">
+                    <div id="feat4h">COACH ADVICES</div>
+                    <p id="feat4p">Subscribe coaches to assist you.</p>
                 </div>
 
-                <div id="feat5"
-                     onmouseover='clearInterval(fAnim); zoomOutAll(); 
-                         jQuery("#featImage").attr("src", "images/feat5.gif"); 
-                         featInfoZoomIn("feat5")' onmouseout="startFeatAnim()">
-                <div id="feat5h">BUILT-IN DIARIES</div>
-                <p id="feat5p">Huge Food & Exercise Dairy made available for you.</p>
+                <div id="feat5" class="pull-right">
+                    <div id="feat5h">BUILT-IN DIARIES</div>
+                    <p id="feat5p">Huge Food & Exercise Dairy made available for you.</p>
                 </div>
 
-                <div id="feat6"
-                     onmouseover='clearInterval(fAnim); zoomOutAll(); 
-                         jQuery("#featImage").attr("src", "images/feat6.gif"); 
-                         featInfoZoomIn("feat6")' onmouseout="startFeatAnim()">
-                <div id="feat6h">ENROLL COURSES</div>
-                <p id="feat6p">Useful Courses for your healthy life from our experts.</p>
+                <div id="feat6" class="pull-right">
+                    <div id="feat6h">ENROLL COURSES</div>
+                    <p id="feat6p">Useful Courses for your healthy life from our experts.</p>
                 </div>
-
+-->
             </div>
         
         </div>
         </div><!-- .row -->
     </div><!-- .container -->
-</div>
+
 <!-- End Services Section -->
 
 <div ng-view autoscroll="true"></div>
@@ -471,7 +466,6 @@
     </div>
 </div>
 
-</div>
 <!-- End Full Body Container -->
 
 <!-- Go To Top Link -->
@@ -587,9 +581,5 @@
 
 
 </script>
-<!-- Features block - animation scripts -->
-        <script src="js/featImgAnim.js"></script>
-        <script> featInfoZoomIn('feat1'); startFeatAnim(); </script>
-
 </body>
 </html>
