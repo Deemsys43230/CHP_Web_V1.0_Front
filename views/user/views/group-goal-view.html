@@ -44,7 +44,7 @@
                         </div>
                         <div ng-hide="isRequest">
                             <span><a href="" class="target_button green_button" ng-click="viewRank()">View Rank</a></span>
-                            <span ng-show="goalDetail.candelete==1 && goalDetail.isExpired==0"><a href="#modal" ng-click="resetdata()" id="modal_trigger" class="target_button orange_button" >Add Members</a></span>
+                            <span ng-show="goalDetail.candelete==1 && goalDetail.isExpired==0 && goalDetail.status!=2"><a href="#modal" ng-click="resetdata()" id="modal_trigger" class="target_button orange_button" >Add Members</a></span>
                             <span ng-show="goalDetail.candelete==1 && goalDetail.status!=2"><a class="target_button red_button" ng-click="doConfirmation(goalList.goalid)">Finish Goal</a></span>
                             <span ng-show="goalDetail.candelete==0 && goalDetail.status!=2"><a class="target_button red_button" ng-click="doExitConfirmation()">Exit from Goal</a></span>
                         </div>
@@ -219,7 +219,7 @@
                 <div ng-show="myRemainderFriendsList==0">
                     <h1 class="col-lg-12 col-md-12 col-sm-12 margin-top-30 text-gray text-center">
                         <img src="../../images/no-friend.png"><br/>
-                        NO FRIENDS FOUND!!!<br/>
+                        No friend is available to be listed here!<br/>
                         <a class="main-button modal_close margin-top-20" href="#friends">&nbsp;&nbsp;<i class="fa fa-users"></i>&nbsp;&nbsp;Find Friends Here&nbsp;&nbsp;</a>
                     </h1>
                 </div>

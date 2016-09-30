@@ -844,6 +844,15 @@ i {
 	font-size: 1.1em;
 }
 
+/*index.html [main page] - ln 182 [slider section] */
+.divH1 {    
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 700;
+	margin: 0;
+        font-size: large;
+	line-height: 30px;
+}
+
 h1, h2, h3, h4, h5, h6 {
 	font-family: 'Open Sans', sans-serif;
 	font-weight: 600;
@@ -7091,6 +7100,21 @@ a.register_button:visited{
     color: #57cb85;
 }
 
+a.register_button[disabled] {
+    border: none;
+    color: #2F4F4F;
+    font-weight: normal;
+    background: #C0C0C0
+}
+
+.blink_plantype {
+  animation: blinker 1s linear infinite;
+}
+
+@keyframes blinker {  
+  50% { opacity: 0; }
+}
+
 .course-image-1{
     max-height: 125px;
     width: 100%;
@@ -7513,6 +7537,22 @@ ul.tabs li.active{
     padding:7px;
     height: 35px;
 }
+
+/*views/user/views/dashboard.html - ln342*/
+.suggest-div{
+    background: #3591cd;/*#f8ba01;*/
+    color: #fff;
+    font-size: small;
+    width:100%;
+    text-align: center;
+    padding:7px;
+    height: 35px;
+    border-left: 1px solid #d3d3d3;
+    border-top: 1px solid #d3d3d3;
+    border-bottom: 1px solid #d3d3d3;
+    border-right: 1px solid white
+}
+
 
 .content-suggest {
     margin: 5px 10px 10px 10px;

@@ -84,14 +84,14 @@ commonApp.controller('CommonController',['$scope','requestHandler','Flash','$rou
         $scope.doGetDashboardCount();
     };*/
     $scope.units=1;
-    $scope.test=function(){
-       if($scope.units==1){
-           $scope.units=2;
+    $scope.test=function(unitVar){
+       if(unitVar=='mUnit'){
+           $scope.units=1;
            $scope.height="";
            $scope.weight="";
        }
-       else if($scope.units==2){
-           $scope.units=1;
+       else if(unitVar){
+           $scope.units=2;
            $scope.feet="";
            $scope.inches="";
            $scope.weight="";
@@ -102,19 +102,44 @@ commonApp.controller('CommonController',['$scope','requestHandler','Flash','$rou
 
 
     $scope.calculateEMI=function(validation){
+        $scope.bmiUnder = false;
+        $scope.bmiHealthy = false;
+        $scope.bmiOver = false;
+        $scope.bmiObese = false;
+        $scope.minWeight = 0;
+        $scope.maxWeight = 0;
+        $scope.weightRange = "";
         if(validation){
         $scope.showForm=false;
         if($scope.units==1){
             $scope.weightCal=$scope.weight/0.4536;
             $scope.heightCal=$scope.height/2.54;
             $scope.emiValue=(($scope.weightCal*703)/($scope.heightCal*$scope.heightCal)).toFixed(2);
+            var mHt = $scope.height/100; //Height in meter
+            $scope.minWeight = 18.6 * mHt * mHt; $scope.maxWeight = 24.9 * mHt * mHt; //Min and max weight
+            $scope.weightRange = ""+Math.round($scope.minWeight)+" and "+Math.round($scope.maxWeight)+" kgs";
         }
         else if($scope.units==2){
-        var inches = (12*$scope.feet)+(1*$scope.inches);
-        $scope.emiValue=(($scope.weight*703)/(inches*inches)).toFixed(2);
+            var inches = (12*$scope.feet)+(1*$scope.inches);
+            $scope.emiValue=(($scope.weight*703)/(inches*inches)).toFixed(2);
+            $scope.minWeight = ((18.6 * inches * inches) / 703); //Min weight lbs
+            $scope.maxWeight = ((24.9 * inches * inches) / 703); //Max weight lbs
+            $scope.weightRange = ""+Math.round($scope.minWeight)+" and "+Math.round($scope.maxWeight)+" lbs";
         }
         $window.emi=$scope.emiValue;
         callGraph();
+        if($scope.emiValue < 18.5) {
+            $scope.bmiUnder = true;
+        }
+        else if($scope.emiValue > 18.5 && $scope.emiValue < 25) {
+            $scope.bmiHealthy = true;
+        }
+        else if($scope.emiValue > 25 && $scope.emiValue < 30) {
+            $scope.bmiOver = true;
+        }
+        else if($scope.emiValue > 30) {
+            $scope.bmiObese = true;
+        }
       }
     };
 

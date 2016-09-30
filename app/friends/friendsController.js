@@ -97,7 +97,7 @@ userApp.controller('FriendsController',['$scope','requestHandler','Flash','Frien
                 $scope.initialLoad();
             }
             else if(result.data.Response_status == 0){
-                errorMessage(Flash,"No Friends found");
+                errorMessage(Flash,"No Request Received");
             }
         })
     };
@@ -110,7 +110,7 @@ userApp.controller('FriendsController',['$scope','requestHandler','Flash','Frien
                 $scope.initialLoad();
             }
             else if(result.data.Response_status == 0){
-                errorMessage(Flash,"No friends found");
+                errorMessage(Flash,"No Request Received");
             }
         })
     };
@@ -124,7 +124,7 @@ userApp.controller('FriendsController',['$scope','requestHandler','Flash','Frien
                 $scope.initialLoad();
             }
             else if(result.data.Response_status == 0){
-                errorMessage(Flash,"No friends found");
+                errorMessage(Flash,"No Request Received");
             }
         })
     };

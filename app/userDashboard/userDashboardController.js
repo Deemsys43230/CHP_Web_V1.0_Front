@@ -1,6 +1,6 @@
 var userApp= angular.module('userApp', ['ngRoute','oc.lazyLoad','ngCookies','requestModule','flash','ngAnimate','ngTouch','ngPercentDisplay','userDashboardServiceModule','angular-svg-round-progress','ui.bootstrap','angular-nicescroll']);
 
-userApp.controller('UserDashboardController',function($scope,$window,requestHandler,Flash,UserDashboardService,$interval,roundProgressService,limitToFilter,$timeout,$compile) {
+userApp.controller('UserDashboardController',function($scope,$window,requestHandler,Flash,UserDashboardService,$interval,roundProgressService,limitToFilter,$timeout,$compile,$location,$rootScope) {
     $scope.foodSearchResult = [];
     $scope.userFood={};
     $scope.userFood.sessionid=1;
@@ -1344,6 +1344,11 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         }
     };
 
+    $scope.highlightPlan = function() {
+        $rootScope.planHighlight = true;
+        $location.url('/demography');
+    }
+
     //To Do Update Goal
     $scope.doUpdateGoal=function(){
 
@@ -1572,22 +1577,22 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
                     }
                 },
 
-                series: [{
-                    name: 'Spent',
-                    data: [gainedCalories],
-                    color: '#eee',
-                    stack: 'male'
-                },{
+                series: [//{
+                    //name: 'Spent',
+                    //data: [gainedCalories],
+                    //color: '#eee',
+                    //stack: 'male'},
+                {
                     name: 'Intake',
                     data: [$scope.calorieGraph.Intake],
                     color: 'limegreen',
                     stack: 'male'
-                }, {
-                    name: 'Gained',
-                    color: '#eee',
-                    data: [spentCalories],
-                    stack: 'female'
-                },{
+                },// {
+                  //   name: 'Gained',
+                  //   color: '#eee',
+                  //   data: [spentCalories],
+                  //   stack: 'female' }
+                {
                     name: 'Burnt',
                     data: [$scope.calorieGraph.Burnt],
                     color: 'red',
@@ -1930,10 +1935,11 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
                     history.push(parseFloat(value.calorie));
                     historyReport.push(history);
                 });
-                titles.title="Calories Intaken Graph ( "+startDate+" - "+endDate+" )";
+                titles.title="Calories Gained Graph ( "+startDate+" - "+endDate+" )";
                 titles.name="Calories Gained";
                 titles.suffix=" cals";
                 titles.yaxis="Calories (cal)";
+                titles.xaxis="Number of days";
                 titles.color='limegreen';
                 $scope.drawHistoryGraph(historyReport,titles);
             });
@@ -1952,6 +1958,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
                 titles.name="Calories Burned";
                 titles.suffix=" cals";
                 titles.yaxis="Calories (cal)";
+                titles.xaxis="Number of days";
                 titles.color='red';
                 $scope.drawHistoryGraph(historyReport,titles);
             });
@@ -1970,6 +1977,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
                 titles.name="Exercise Minutes";
                 titles.suffix=" mints";
                 titles.yaxis="Minutes";
+                titles.xaxis="Number of days";
                 titles.color='blue';
                 $scope.drawHistoryGraph(historyReport,titles);
             });
@@ -1996,6 +2004,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
                 titles.name="Weight Log";
                 titles.suffix=$scope.unit;
                 titles.yaxis="Weight (" + $scope.unit + ")";
+                titles.xaxis="Number of days";
                 titles.color='#f8ba01';
                 $scope.drawHistoryGraph(historyReport,titles);
             });
@@ -2016,6 +2025,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
                 titles.name="Budget";
                 titles.suffix=" cals";
                 titles.yaxis="Calories (Cal)";
+                titles.xaxis="Date Range";
                 titles.color='#f8ba01';
                 $scope.drawHistoryGraphForBudget(historyReport,titles,netVal,budgetdate);
             });
@@ -2030,6 +2040,10 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
                 text: titles.title
             },
             xAxis: {
+                    title: {
+                    text: titles.xaxis
+                },
+
                 categories: []
             },
             tooltip:{
@@ -2079,6 +2093,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
                 text: titles.title
             },
             xAxis: {
+                title: {text: titles.xaxis},
                 categories: data2
             },tooltip:{
                 enabled:true,
@@ -2434,6 +2449,7 @@ userApp.directive('hcGraph', function () {
                     x: -20
                 },
                 xAxis: {
+                    title: {text: 'Number of days'},
                     categories: []
                 },
                 yAxis: {
@@ -2508,6 +2524,7 @@ userApp.directive('historyGraph', function () {
                     x: -20
                 },
                 xAxis: {
+                    title: {text: 'Number of days'},
                     categories: []
                 },
                 yAxis: {

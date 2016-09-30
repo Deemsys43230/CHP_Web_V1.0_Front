@@ -19,7 +19,7 @@
         </div>
     </div>
     <div class="col-md-12 col-sm-12 no-padding goal-border  ">
-        <div class="col-md-6 col-sm-6 margin-bottom-2">Goal Type<span class="pull-right">:</span></div>
+        <div class="col-md-6 col-sm-6 margin-bottom-2">Goal Option<span class="pull-right">:</span></div>
         <div class="col-md-6 col-sm-6 no-padding">
             <span ng-show="goalDetails.planchoice == '5'">Custom</span>
             <span ng-show="goalDetails.planchoice != '5'">
@@ -44,10 +44,6 @@
         </div>
     </div>
     <div class="col-md-12 col-sm-12 no-padding goal-border">
-        <div class="col-md-6 col-sm-6 margin-bottom-2">Initial Weight<span class="pull-right">:</span></div>
-        <div class="col-md-6 col-sm-6 no-padding">{{goalDetails.initialweight}} <small><span ng-show="userProfile.unitPreference==1">Kgs</span><span ng-show="userProfile.unitPreference==2">lbs</span></small></div>
-    </div>
-    <div class="col-md-12 col-sm-12 no-padding goal-border">
         <div class="col-md-6 col-sm-6 margin-bottom-2">Start Date<span class="pull-right">:</span></div>
         <div class="col-md-6 col-sm-6 no-padding">{{goalDetails.startdate}}</div>
     </div>
@@ -58,6 +54,10 @@
     <div ng-hide="goalExpired" class="col-md-12 col-sm-12 no-padding goal-border">
         <div class="col-md-6 col-sm-6 margin-bottom-2">Remaining Days<span class="pull-right">:</span></div>
         <div class="col-md-6 col-sm-6 no-padding">{{remainingDates}} <small>days</small></div>
+    </div>
+    <div class="col-md-12 col-sm-12 no-padding goal-border">
+        <div class="col-md-6 col-sm-6 margin-bottom-2">Initial Weight<span class="pull-right">:</span></div>
+        <div class="col-md-6 col-sm-6 no-padding">{{goalDetails.initialweight}} <small><span ng-show="userProfile.unitPreference==1">Kgs</span><span ng-show="userProfile.unitPreference==2">lbs</span></small></div>
     </div>
     <div ng-show="goalExpired" class="col-md-12 col-sm-12 no-padding goal-border">
         <div class="col-md-6 col-sm-6 margin-bottom-2">Target Days<span class="pull-right">:</span></div>
@@ -85,14 +85,14 @@
 
 
     <div ng-hide="goalExpired" class="col-md-12 col-sm-12 margin-top-5">
-        <p>Target Progress</p>
+        <p>Goal Progress</p>
         <div id="targetGraph"></div>
     </div>
 
     <div class="col-md-12 col-sm-12 margin-top-10 text-center no-padding">
         <span ng-hide="goalDetails.planType==1"><a class="target_button green_button" ng-click="updateGoalDetails(weightlog)">Edit Goal</a></span>
         <span ng-show="viewGraphButton"><a class="target_button orange_button" ng-click="doGetWeightLogGraph()">View Graph</a></span>
-        <a href="#demography" class="target_button red_button" >Change Plan</a>
+        <a href="" class="target_button red_button" ng-click="highlightPlan()">Change Plan</a>
     </div>
 </div>
 

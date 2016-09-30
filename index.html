@@ -53,7 +53,7 @@
     
         <!-- Date picker requires jQuery-UI -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.0/jquery-ui.min.css"/>
-
+        <style>svg {width: 100%; height: 100%}</style>
 </head>
 
 <body ng-app="commonApp">
@@ -176,10 +176,10 @@
         <div class="col-md-7 col-sm-9 col-xs-10">
             <div id="text-slideshow">
                 <div class="slideshow-element">
-                    <h1 class="slider-font margin-bottom-20">
+                    <div class="slider-font margin-bottom-20" style="padding-top: 60px">
                         <span class="hidden-xs"><br/></span>
-                        <span class="small">MIGHTY HEALTH SOLUTION FOR YOUR LIFETIME</span><br/>
-                        <div class="h4 margin-top-20">
+                        <h1><span class="small">RIGHT PLACE TO DETERMINE AND PROLONG A HEALTHY LIFE</span></h1><br/>
+                        <div class="divH1 h4 margin-top-20" style="padding-top: 20px">
                             <br/>
                             Just record your weight. WE,<br/><br/>
                             <div class="col-md-12">
@@ -193,22 +193,22 @@
                             </div>
 
                         </div>
-                    </h1>
+                    </div>
                 </div>
                 <div class="slideshow-element">
                     <img width="100%" height="auto" src="images/responsive.png"/>
                     <div class="slider-font">
-                        <h1>Modern way of Digital Weight Loss Solution for this modern world</h1>
+                        <h1>RECORD YOUR DAILY INTAKE AND WORKOUT ROUTINES ANYWHERE & ANYTIME!</h1>
                     </div>
                     </div>
                 <div class="slideshow-element">
                     <h1 class="slider-font margin-bottom-20">
                         <span class="hidden-xs"><br/></span>
-                        <span>ARE YOU STILL THINKING OF YOUR HEALTH PROBLEM<span style="font-family: Tahoma, Verdana, Segoe, sans-serif;">?</span> NO WORRIES!</span><br/>
+                        <span>ACHIEVE HEALTH & FITNESS WITH HEALTHY NUTRITIONAL FOOD STYLE<span style="font-family: Tahoma, Verdana, Segoe, sans-serif;">?</span> NO WORRIES!</span><br/>
                         <span class="h4"><br/>
                             Register with us! Your health dreams are taken care by us.
                         </span>
-                        <a href="" class="btn-system btn-large" onclick="$('#loginNow').click()"><i class="fa fa-user"></i> Register Now</a>
+                        <a href="" class="btn-system btn-large" onclick="$('.loginNow').click()"><i class="fa fa-user"></i> Register Now</a>
                     </h1>
                 </div>
             </div>
@@ -267,8 +267,8 @@
             <!-- End Big Heading -->
             
             <div class="col-md-12" style="padding-top: 45px">
-                <center>
-                <img src="images/info/features.png" style="width: 95%; padding-bottom: 50px" />
+                <center><div id="featuresDiv" style="width: 95%; padding-bottom: 50px"></div>
+                <!--img src="images/info/features.svg" style="width: 95%; padding-bottom: 50px" /-->
                 </center>
             </div>
 <!-- Removed        
@@ -327,8 +327,11 @@
     </div><!-- .container -->
 
 <!-- End Services Section -->
-
-<div ng-view autoscroll="true"></div>
+<div class="container">
+    <div class="row">
+        <div ng-view autoscroll="true"></div>
+    </div>
+</div>
 
 <!-- Start Footer Section -->
 <footer>
@@ -376,7 +379,7 @@
             <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                 <div class="footer-widget social-widget">
                     <h4>Mobile Apps<span class="head-line"></span></h4>
-                    <p>Get our mobile apps for handly use</p>
+                    <p>Get our mobile apps for handy use shortly</p>
                     <img width="213" height="36" title="Coming Soon" class="margin-top-20" src="images/available.png">
                 </div>
             </div><!-- .col-md-3 -->
@@ -579,7 +582,7 @@
         })(jQuery);
     });
 
-
+$('#featuresDiv').load('images/info/features.svg');
 </script>
 </body>
 </html>

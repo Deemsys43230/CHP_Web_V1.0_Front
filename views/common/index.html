@@ -124,15 +124,18 @@
 
                 </div>-->
                 <!-- End Recent Posts Carousel -->
-                <div class="row">
-                    <h4 class="classic-title"><span>Our Features</span></h4>
+                <div class="row"><a name="bmicalc">
+                        <h4 class="classic-title"><span>Know Your BMI</span></h4></a>
                     <div class="col-md-12 col-sm-12 col-xs-12 no-padding">
-                        sample Text sample Textsample Textsample Textsample Textsample Textsample
-                        Textsample Textsample Textsample Textsample Textsample Text
-                        sample Text sample Textsample Textsample Textsample Textsample Textsample
-                        Textsample Textsample Textsample Textsample Textsample Text<br/><br/>
-                        sample Text sample Textsample Textsample Textsample Textsample Textsample
-                        Textsample Textsample Textsample Textsample Textsample Text
+                        <div>
+                            Body Mass Index, or BMI, is used to identify whether you are lying in a 
+                            healthy weight range for your height. Knowing your BMI helps you to know 
+                            whether you are underweight, healthy weight, overweight, or obese for your 
+                            height range.<br/><br/>
+                        </div>
+                        <div>
+                            Choose US or Metric measures and fill the form to know your BMI result.
+                        </div>
                     </div>
                     <div class="col-md-12 col-sm-12 col-xs-12 calculator-section margin-top-10">
                         <form name="calculateForm" ng-show="showForm" novalidate>
@@ -140,10 +143,10 @@
                                 <h3 class="text-muted margin-bottom-15 col-md-4">Calculate Your BMI</h3>
                                 <div class="col-md-4 margin-top5 margin-bottom-15 unit">
                                     <div class="btn-group" data-toggle="buttons">
-                                        <label class="btn btn-default active unit-toggle-label"  ng-click="test()">
+                                        <label class="btn btn-default active unit-toggle-label"  ng-click="test('mUnit')">
                                             <input type="radio" name="unit" ng-model="units"  id="option1" autocomplete="off"> Metric
                                         </label>
-                                        <label class="btn btn-default unit-toggle-label"  ng-click="test()">
+                                        <label class="btn btn-default unit-toggle-label"  ng-click="test('uUnit')">
                                             <input type="radio" name="unit" ng-model="units"  id="option2" autocomplete="off"> &nbsp;&nbsp;&nbsp;US&nbsp;&nbsp;&nbsp;
                                         </label>
                                     </div>
@@ -265,9 +268,53 @@
                             <div class="col-md-12 col-sm-12">
                                 <div id="myGoal"></div>
                                 <div class="margin-top-15">
-                                    <i><small>Losing weight will lower your BMI and can help reduce your risk of heart disease, stroke, some cancers, type 2 diabetes
-                                        and other health conditions. Weight loss success can be yours when you stick to a healthy, lower-calorie meal plan.
-                                    </small><a href="" id="loginNow">Login Now</a></i>
+                                    <i>
+                                        <small ng-show="bmiUnder">
+                                                You are underweight for your height. You need to maintain your weight range between 
+                                                <b>{{ weightRange }}</b> for a strong and healthy life.<br/><br/>
+                                                Being underweight may weaken your immune system and put you at threat. 
+                                                For better health intake foods with essential nutrients on time and burn the extra 
+                                                calories. <br/><br/>
+                                                Set a fitness goal and start tracking your daily intake, calories burnt with 
+                                                cyberhealths and reach your target weight in a healthy manner. 
+                                                <button class="loginNow btn btn-default">Sign up</button> with 
+                                                cyberhealths and commit to be fit.
+                                        </small>
+                                        <small ng-show="bmiHealthy">
+                                            You are sustaining a healthy weight for your height. You need to maintain your 
+                                            weight range between <b>{{ weightRange }}</b> for a strong and healthy life.<br/><br/>
+                                            Maintain a healthy weight range by eating healthy, with appropriate workout 
+                                            routines. Having healthy snacks in-between helps you to be nutritionally fit. <br/><br/>
+                                            Set a fitness goal and start tracking your daily intake, calories burnt with 
+                                            cyberhealths and maintain your weight in a healthy manner. 
+                                            <button class="loginNow btn btn-default">Sign up</button> with 
+                                            cyberhealths and commit to be fit.
+                                        </small>
+                                        <small ng-show="bmiOver">
+                                            You are overweight for your height. You need to maintain your weight range 
+                                            between <b>{{ weightRange }}</b> for a strong and healthy life. <br/><br/>
+                                            Excess weight also increases your likelihood of developing other problems 
+                                            linked to coronary heart disease, high blood sugar & cholesterol, etc. 
+                                            To achieve and maintain a healthy weight, eat healthy foods with proper 
+                                            workout routines. Having healthy food helps you to be nutritionally fit.<br/><br/>
+                                            Set a fitness goal and start tracking your daily intake, calories burnt with 
+                                            cyberhealths and reduce your weight in a healthy manner. 
+                                            <button class="loginNow btn btn-default">Sign up</button> with 
+                                            cyberhealths and commit to be fit.
+                                        </small>
+                                        <small ng-show="bmiObese">
+                                            You are obese for your height. You need to maintain your weight range 
+                                            between <b>{{ weightRange }}</b> for a strong and healthy life. <br/><br/>
+                                            Excess weight also increases your likelihood of developing other problems 
+                                            linked to coronary heart disease, high blood sugar & cholesterol, etc. 
+                                            Follow a healthy eating plan. Know your daily calorie needs and achieve 
+                                            it with healthy nutritional diet.<br/><br/>
+                                            Set a fitness goal and start tracking your daily intake, calories burnt 
+                                            with cyberhealths and reduce your weight in a healthy manner. 
+                                            <button class="loginNow btn btn-default">Sign up</button> with 
+                                            cyberhealths and commit to be fit.                                            
+                                        </small>
+                                    </i>                                    
                                 </div>
                             </div>
                         </div>
@@ -551,10 +598,11 @@
         $('#myGoal').stepProgressBar('setCurrentValue', emi);
     };
 
-    $('#loginNow').click(function(){
+    $('.loginNow').click(function(){
         $('.modal_trigger').click();
+        $("#register_form").click();
     });
-
+    
 </script>
 
 <script type="text/javascript">

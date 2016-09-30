@@ -139,6 +139,7 @@ userApp.controller('DemographyController',['$rootScope','$scope','requestHandler
     };
 
     $scope.doUpdateDemography= function () {
+        $rootScope.planHighlight = false;
         if($scope.demography.heightFeet && $scope.demography.heightInches){
             $scope.demography.height = $scope.demography.heightFeet +'.'+$scope.demography.heightInches;
 

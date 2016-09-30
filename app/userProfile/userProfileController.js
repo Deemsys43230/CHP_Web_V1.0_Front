@@ -155,6 +155,7 @@ userApp.controller('UserProfileController',['$scope','requestHandler','Flash','$
     };
 
     $scope.doUpdateProfile= function () {
+        $rootScope.update1 = true; //Pass value 'true' when directed from 'Change your plan' option
         delete $scope.userProfile.imageurl;
         delete $scope.userProfile.createdon;
         $scope.userProfile.country = $scope.userProfile.countrySelect.code;

@@ -169,8 +169,7 @@
                         <form name="weightLogForm" novalidate>
                             <h5 class="margin-bottom-15">UPDATE WEIGHT</h5>
                             <div>
-                                <span ng-if="disableUpdateWeight==false">On Today</span>
-                                <span ng-if="disableUpdateWeight==true">On {{selectDate}}</span>
+                                <span>On {{selectDate}}</span>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6 no-padding margin-top-15">
                                 <span>Weight <small>(<span ng-show="userProfile.unitPreference==1">Kgs</span><span ng-show="userProfile.unitPreference==2">lbs</span>)</small><span class="pull-right">:</span></span>
@@ -189,7 +188,7 @@
                         </form>
                     </div>
                     <div class="col-lg-12 col-md-12 col-sm-12 margin-top-5">
-                        <h6 ng-show="budgetCheck==0"><div class="label-red blink">You are going under our recommended budget value. Please change your plan.</div></h6>
+                        <h6 ng-show="budgetCheck==0"><div class="label-red blink">You are going under the recommended budget value. Please <span ng-click="budgetChangePlan()" style="cursor: pointer"><u>click here</u></span> to change your plan.</div></h6>
                     </div>
                         <!--<div class="col-lg-6 col-md-12 col-sm-12 text-center">
                             <h5>Gain</h5>
@@ -244,7 +243,7 @@
                     <div class="col-lg-7 col-md-7 col-sm-7">
                         <!-- Nav Tabs -->
                         <ul class="nav nav-tabs">
-                            <li class="active" ng-click="showExercise=0"><a href="#tab-1" data-toggle="tab" onclick="return false;">Food Gain</a></li>
+                            <li class="active" ng-click="showExercise=0"><a href="#tab-1" data-toggle="tab" onclick="return false;">Food Intake</a></li>
                             <li ng-click="showExercise=1"><a href="#tab-2" data-toggle="tab" onclick="return false;">Energy Spent</a></li>
                             <li><a href="#tab-3" data-toggle="tab" onclick="return false;">Graphs</a></li>
                         </ul>
@@ -340,7 +339,7 @@
 
                                         <div class="content-suggest clearfix" ng-show="adminSuggestedFood.length>0" >
                                             <div class="col-sm-3 no-padding">
-                                                <div class="suggest-label">Food Choices</div>
+                                                <div class="suggest-div">Food Choices</div>
                                             </div>
                                             <div class="col-sm-9 no-padding" id="marquee">
                                               <!--  <marquee class="feedbackslide" behavior="scroll" direction="left" onmouseover="this.setAttribute('scrollamount', 0, 0);this.stop();" onmouseout="this.setAttribute('scrollamount', 3, 0);this.start();" scrollamount="3">
@@ -451,7 +450,7 @@
                             <div class="row">
                                 <div class="col-lg-12 col-md-12 col-sm-12 graphs">
                                     <input type="radio" id="gainSpent" value="1"  ng-click="graphOne()" ng-model="graphs"/>
-                                    <label for="gainSpent">Gain vs Spent</label>
+                                    <label for="gainSpent">Gained vs Burnt</label>
                                     <input type="radio" id="nutrients" ng-click="graphTwo()" value="2" ng-model="graphs"/>
                                     <label for="nutrients" >Nutrients Graph by Session</label>
                                 </div>
@@ -465,7 +464,7 @@
                                 <div ng-show="graphs==1" class="margin-top-5">
                                     <div ng-hide="userFoodDiaryDataAll.length==0&&userExerciseDiaryDataAll==0" class="margin-top-10">
                                         <div class="col-lg-4 col-md-4 col-sm-4 text-right gain-list">
-                                            <div class="text-green text-bold">Gain</div>
+                                            <div class="text-green text-bold">Gained</div>
                                             <hr/>
                                             <div class="suggest_option_graph" ng-nicescroll nice-option="{cursorcolor: '#777',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#f1f1f1'}">
                                                 <p ng-repeat="food in userFoodDiaryDataAll.BreakFast" class="wrap suggest_list_style">
@@ -484,7 +483,7 @@
                                             <div id="gainVsSpent"></div>
                                         </div>
                                         <div class="col-lg-4 col-md-4 col-sm-4 gain-list">
-                                            <div class="text-red text-bold">Spent</div>
+                                            <div class="text-red text-bold">Burnt</div>
                                             <hr/>
                                             <div class="suggest_option_graph" ng-nicescroll nice-option="{cursorcolor: '#777',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#f1f1f1'}">
                                                 <p ng-repeat="exerciseDiaryData in userExerciseDiaryDataAll" class="wrap text-left suggest_list_style">
@@ -603,7 +602,13 @@
         <div class="dashboard-3 hidden-sm" ng-show="historyReport==0">
             <div id="update">
                 <div class="row">
-                    <h5 class="col-md-12 margin-bottom-7">Today's Update</h5>
+                    <h5 class="col-md-12 margin-bottom-7">
+                        Budget Vs Net&nbsp;-&nbsp;
+                        <span style="font-size: small">
+                                <span ng-show="budgetDetails.OverorUnderStatus==1"><span class="fa fa fa-thumbs-down text-red">&nbsp;&nbsp;</span>Over Budget</span>
+                                <span ng-show="budgetDetails.OverorUnderStatus==2"><span class="fa fa fa-thumbs-up text-green">&nbsp;&nbsp;</span>Under Budget</span>
+                        </span>
+                    </h5>
                     <!--<div class="col-lg-4 hidden-md">
                         <img ng-src="{{userProfileImage | trusted}}">
                     </div>
@@ -630,14 +635,14 @@
                             <h4 class="margin-top-10">UPDATE WEIGHT</h4>
                         </div>-->
 
-                        <div class="col-lg-12 col-md-12 col-sm-12 margin-bottom-5">
+                        <!--div class="col-lg-12 col-md-12 col-sm-12 margin-bottom-5">
 
-                            <h6>Budget Vs Net &nbsp;-&nbsp;
+                            <h6>
                                 <span ng-show="budgetDetails.OverorUnderStatus==1"><span class="fa fa fa-thumbs-down text-red">&nbsp;&nbsp;</span>Over Budget</span>
                                 <span ng-show="budgetDetails.OverorUnderStatus==2"><span class="fa fa fa-thumbs-up text-green">&nbsp;&nbsp;</span>Under Budget</span>
                             </span>
                             </h6>
-                        </div>
+                        </div-->
                         <div class="col-lg-5 col-md-12 col-sm-12 margin-top-10">
                             <div class="circle-wrapper">
                                 <div class="circle-progress ng-cloak font-14" ng-style="getStyle()">{{Net}}</div>
@@ -666,7 +671,7 @@
                             <span class="label-count blue">{{budgetDetails.Budget}}</span>
                         </div>
                         <div class="label-update">
-                            <span class="label-text">Gain</span>
+                            <span class="label-text">Gained</span>
                             <span class="label-count green">{{budgetDetails.Intake}}</span>
                         </div>
                         <div class="label-update">
@@ -680,8 +685,8 @@
                     </div>
                     <div class="col-lg-12 col-md-12 col-sm-12 margin-top-5">
                         <!--<h6 ng-show="budgetCheck==0"><div class="label-danger">You are going under our recommended budget value. Please change your weight plan.</div></h6>-->
-                        <h6 ng-show="budgetDetails.OverorUnderStatus==1"><div class="label-danger">You are consumed {{budgetDetails.OverorUnderValue}} more calories. Do Exercise.</div></h6>
-                        <h6 ng-show="budgetDetails.OverorUnderStatus==2"><div class="label-success">You could take {{budgetDetails.OverorUnderValue}} more calories to reach Budget Value.</div></h6>
+                        <h6 ng-show="budgetDetails.OverorUnderStatus==1"><div class="label-danger">You have consumed {{budgetDetails.OverorUnderValue}} more calories. Please do exercise.</div></h6>
+                        <h6 ng-show="budgetDetails.OverorUnderStatus==2"><div class="label-success">You should take {{budgetDetails.OverorUnderValue}} more calories to reach today’s budget.</div></h6>
                     </div>
                 </div>
                 <div class="margin-tb-5">
@@ -706,7 +711,7 @@
 
                             <ul class="horizon-swiper">
                                 <li class="horizon-item active">
-                                    <a class="historyOverride" href="#tab-4" data-toggle="tab" onclick="return false;" ng-click="setHistoryType(1)"><span class="hidden-md hidden-sm">Calories</span>&nbsp;Intaken</a>
+                                    <a class="historyOverride" href="#tab-4" data-toggle="tab" onclick="return false;" ng-click="setHistoryType(1)"><span class="hidden-md hidden-sm">Calories</span>&nbsp;Gained</a>
                                 </li>
                                 <li class="horizon-item">
                                     <a href="#tab-4" class="historyOverride" data-toggle="tab" onclick="return false;" ng-click="setHistoryType(2)"><span class="hidden-md hidden-sm">Calories</span>&nbsp;Burnt</a>
@@ -1121,7 +1126,7 @@
     <section class="popupBody">
         <!-- Register Form -->
         <div class="common_model">
-            <span ng-show="budgetCheck==0" >You are going under our recommended budget value. Please change your plan.</span>
+            <span ng-show="budgetCheck==0" >You are going under the recommended budget value. Please change your plan.</span>
             <div class="action_btns margin-top-20">
                 <div class="one_half modal_close"><a href="" ng-click="budgetChangePlan()" class="btn btn_blue" >Change Plan</a></div>
                 <div class="one_half last modal_close"><a class="btn btn_red">Cancel</a></div>

@@ -667,7 +667,9 @@ userApp.controller("UserInitialController",['$scope','requestHandler','$location
             scrollTop: 0
         }, 600);
         if(pathVar==0){
-            $(function(){
+           $location.path("profile");
+           $rootScope.$on( "$routeChangeStart", function() {
+                $(function(){
                 $("#lean_overlay").fadeTo(1000);
                 $("#review-modal").fadeIn(600);
                 $(".common_model").show();
@@ -684,10 +686,12 @@ userApp.controller("UserInitialController",['$scope','requestHandler','$location
                 $("#review-modal").hide();
                 $("#lean_overlay").hide();
             });
-           $location.path("profile");
+           });
         }
         else if (pathVar==1){
-            $(function(){
+           $location.path("demography");
+           $rootScope.$on( "$routeChangeStart", function() {
+                $(function(){
                 $("#lean_overlay").fadeTo(1000);
                 $("#review-modal").fadeIn(600);
                 $(".common_model").show();
@@ -704,7 +708,7 @@ userApp.controller("UserInitialController",['$scope','requestHandler','$location
                 $("#review-modal").hide();
                 $("#lean_overlay").hide();
             });
-            $location.path("demography");
+        });
         }
         else if(pathVar==2){
           //  $location.path("dashboard");

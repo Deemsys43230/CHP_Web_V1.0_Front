@@ -208,7 +208,7 @@
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-12 margin-top-15">
                             <div class="col-lg-8 col-md-7 col-sm-7 padding-top-4 padding-right-0 padding-right-0">
-                                <h5>HbA1c <small>(mmol/mol)</small> <span class="pull-right">:</span></h5>
+                                <h5>HbA<sub>1c</sub> <small>(mmol/mol)</small> <span class="pull-right">:</span></h5>
                             </div>
                             <div class="col-lg-4 col-md-5 col-sm-5 padding-right-0">
                                 <input class="demography_input" name="HbA1c" ng-pattern="/^\-?\d+((\.|\,)\d+)?$/" maxlength="6" ng-model="demography.HbA1c"/>
@@ -309,9 +309,19 @@
                         </div>
                         </div>
 
-                    <div class="col-lg-12 col-md-12 col-sm-12 margin-top-15 clearfix" style="border-left:1px solid #eee">
+                    <div class="col-lg-12 col-md-12 col-sm-12 margin-top-15 clearfix" style="border-left:1px solid #eee" id="demoPlantype">
                         <div class="col-lg-6 col-md-6 col-sm-7 padding-top-4 padding-right-0">
                             <h5>Plan Type <span class="pull-right">:</span></h5>
+                            <div ng-if=planHighlight style="color: red" id="planUpdate">
+                                <b class="blink_plantype">Please update the plan.</b>
+                                <script>
+                                    setTimeout(planHide, 6000); 
+                                    function planHide(){ 
+                                        jQuery('#planUpdate').css({opacity:0}); 
+                                    }
+                                </script>
+                            </div>
+                            <!--h5 ng-if=planHighlight><span style="font-weight: bold; font-size: x-large; color: orange">Plan Type</span><span class="pull-right">:</span></h5-->
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-5 padding-right-0">
                             <select class="form-control main"  ng-model="demography.userPlanType" ng-init="demography.userPlanType='1'"  name="userPlanType" ng-change="planChangeValidation(demography.userPlanType)">
@@ -323,7 +333,7 @@
                     </div>
                     <div ng-show="demography.userPlanType == 2 || demography.userPlanType == 3" class="col-lg-12 col-md-12 col-sm-12 margin-top-15 clearfix" style="border-left:1px solid #eee">
                         <div class="col-lg-6 col-md-6 col-sm-7 padding-top-4 padding-right-0">
-                            <h5>Target Weight<span ng-show="userProfile.unitPreference==1"><small>(kgs)</small></span> <span ng-show="userProfile.unitPreference==2"><small>(lbs)</small></span> <span class="pull-right">:</span></h5>
+                            <h5>Target Weight <span ng-show="userProfile.unitPreference==1"><small>(kgs)</small></span> <span ng-show="userProfile.unitPreference==2"><small>(lbs)</small></span> <span class="pull-right">:</span></h5>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-5 padding-right-0">
 
@@ -341,7 +351,7 @@
 
                     <div class="col-lg-12 col-md-12 col-sm-12 margin-top-15 clearfix" style="border-left:1px solid #eee">
                         <div class="col-lg-6 col-md-6 col-sm-7 padding-top-4 padding-right-0">
-                            <h5>Activity Type <span class="pull-right">:</span></h5>
+                            <h5>Activity Level <span class="pull-right">:</span></h5>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-5 padding-right-0">
                             <select class="form-control main"  ng-model="demography.userActivityType" ng-init="demography.userActivityType='3'" name="userActivityType">
@@ -395,7 +405,7 @@
     <section class="popupBody">
         <!-- Register Form -->
         <div class="common_model">
-            <span ng-show="budgetCheck==0" >You are going under our recommended budget value. Please change your plan.</span>
+            <span ng-show="budgetCheck==0" >You are going under the recommended budget value. Please change your plan.</span>
             <div class="action_btns margin-top-20">
                 <div class="modal_close"><a href=""  class="btn btn_blue" >OK</a></div>
             </div>

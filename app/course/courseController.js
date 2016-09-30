@@ -156,7 +156,7 @@ userApp.controller('CourseController',['$scope','requestHandler','Flash','$route
     };
 
     $scope.doEnrollCourse = function(course){
-        $scope.entrolling="Enrolling Please Wait";
+        $scope.entrolling="We are processing your request";
         $scope.enrollButtonStatus=true;
         requestHandler.postRequest("user/enrollCourse/",{"courseid":course,"returnUrl":requestHandler.paymentURL()+"/#/thanksEnrollPage/"+course,"cancelUrl":requestHandler.paymentURL()+"/#/course-detail/"+course}).then(function(response){
 

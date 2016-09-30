@@ -48,6 +48,7 @@
 .action_btns .btn {padding:10px 20px; background: #F4F4F2;}
 .btn_red {background: #ED6347 !important; color: #FFF !important;}
 .btn_blue {background: #7A8EB8 !important; color: #FFF !important;}
+.btn_blue[disabled] {background: grey !important; color: #FFF !important; border: none}
 
 .action_btns .btn:hover {background: #E4E4E2;}
 .btn_red:hover {background: #C12B05 !important;color: #fff !important;}
@@ -216,7 +217,8 @@ form p{
 }
 
 .width-28{
-    width: 28% !important;
+    /*Login form ['Back' button changed to 'Already have an account?' - additional space required]*/
+    width: 32% !important; 
 }
 
 .width-60{
