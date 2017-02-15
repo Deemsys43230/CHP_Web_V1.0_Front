@@ -330,7 +330,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
                     setTimeout(viewWeightGraph(),10);
                 });
             }
-            else{
+              else{
                 var dividevalue=2;
                 if($scope.userProfile.gender==1){
                     dividevalue=4;
@@ -361,7 +361,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
                         $scope.idealWeightlevel = ($scope.idealWeightlevel*100)/2;
                     }
                 }
-
+            
                 else if($scope.userProfile.unitPreference==2){
                     $scope.heightFeet = $scope.demography.height.toString().split(".")[0];
                     $scope.heightInches = $scope.demography.height.toString().split(".")[1];
@@ -406,8 +406,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
                     status: 'goal'
                 };
                 setTimeout(viewWeightGraph(),10);
-            }
-
+            } 
         });
     };
 

@@ -254,48 +254,49 @@ commonApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'UsefulVideosController'
             }).
-             when('/new-tips', {
-                templateUrl: '../common/new-tips.html',
+
+             when('/disease-control-tips', {
+                templateUrl: '../common/disease-control-tips.html',
                 resolve: {
                     loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'commonApp',
                             files:[
-                                '../../app/newTips/newTipsController.js'
+                                '../../app/diseaseControlTips/diseaseControlTipsController.js'
                             ]
                         })
                     }]
                 },
-                controller:'NewTipsListController'
+                controller:'DiseaseControlTipsListController'
             }).
-            when('/new-tips-1', {
-                templateUrl: '../common/new-tips-1.html',
+            when('/disease-control-tips-1', {
+                templateUrl: '../common/disease-control-tips-1.html',
                 resolve: {
                     loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'commonApp',
                             files:[
-                                '../../app/newTips/newTipsController.js'
+                                '../../app/diseaseControlTips/diseaseControlTipsController.js'
                             ]
                         })
                     }]
                 },
-                controller:'NewTipsController'
+                controller:'diseaseControlTipsController'
             }).
             
-            when('/new-tips-6', {
-                templateUrl: '../common/new-tips-6.html',
+            when('/disease-control-tips-2', {
+                templateUrl: '../common/disease-control-tips-2.html',
                 resolve: {
                     loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'commonApp',
                             files:[
-                                '../../app/newTips/newTipsController.js'
+                                '../../app/diseaseControlTips/diseaseControlTipsController.js'
                             ]
                         })
                     }]
                 },
-                controller:'NewTipsController'
+                controller:'diseaseControlTipsController'
             }).
 
 

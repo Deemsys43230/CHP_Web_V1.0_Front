@@ -351,7 +351,7 @@
                                                             <li ng-repeat="suggestedFood in adminSuggestedFood"><a href="" ng-click="suggestedFoodByAdmin(suggestedFood.foodId)">{{suggestedFood.foodName}}</a></li>
                                                         </ul>
                                                     </div>
-                                                </div>-->
+                                                </div> -->
                                             </div>
                                         </div>
                                     </div>
@@ -543,12 +543,12 @@
 
                 <div id="advice" class="contentblock hidden">
                     <div class="outerline">
-                        <div class="col-lg-12 col-md-12 col-sm-12 margin-top-5" >
+                        <div class="col-lg-12 col-md-12 col-sm-12 margin-top-10" >
                             <h4 class="margin-bottom-15">Coach Advices</h4>
-                            <div class="row min-height-200">
-                                <div class="latest-posts-classic advice-carousel advice-carousel-style touch-carousel"  data-appeared-items="3" data-navigation="true" >
+                            <!-- <div class="row min-height-200">
+                                 <div class="latest-posts-classic advice-carousel advice-carousel-style touch-carousel"  data-appeared-items="3" data-navigation="true" >
                                     <!-- Posts 1 -->
-                                    <div ng-repeat="mycoachadvice in coachadvice">
+                                    <!-- <div ng-repeat="mycoachadvice in coachadvice">
                                         <div class="post-row hide-margin-bottom item col-lg-12 col-md-12 col-sm-12">
                                             <div ng-hide="mycoachadvice.coachname==''">
                                                 <div class="advice-hover" ng-class="{activecoach:mycoachadvice.coachid==usercoachadvicedetails.coachid}" ng-click="setCoachDeatails(mycoachadvice)">
@@ -562,11 +562,11 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
+                                </div> 
+                            </div>-->
                             <div class="row">
-                                <div class="col-lg-12 col-md-12 col-sm-12 margin-top-7">
-                                    <div ng-hide="usercoachadvicedetails.coachname==''">
+                                <div class="col-lg-12 col-md-12 col-sm-12 margin-top-50">
+                                    <!-- <div ng-hide="usercoachadvicedetails.coachname==''">
                                         <div ng-hide="usercoachadvicedetails.description==''" class="col-lg-12 col-md-12 col-sm-12 no-padding margin-top-5"><span class="pull-right text-italic">Last Updated On : {{usercoachadvicedetails.date}}</span>
                                             <br/><div class="margin-top-7 wrap">{{usercoachadvicedetails.description}}</div>
                                             <div class="margin-top-7 wrap text-italic">- {{usercoachadvicedetails.coachname}}</div>
@@ -578,18 +578,19 @@
                                             <div class="col-lg-7 col-md-7 col-sm-7">
                                                 <br/><br/>
                                                 <h1 class="text-gray">No Advice Available!!!</h1>
-                                               <!-- <h5 class="text-gray margin-top-10"><i>Respected coach have not <br/>update their advice.</i></h5>-->
+                                               <h5 class="text-gray margin-top-10"><i>Respected coach have not <br/>update their advice.</i></h5>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> -->
                                     <div ng-show="usercoachadvicedetails.coachname==''">
-                                        <div class="col-lg-5 col-md-5 col-sm-5 no-padding text-right margin-top-30">
-                                            <img src="../../images/no-coach-small.png" width="120" height="120"/>
-                                        </div>
-                                        <div class="col-lg-7 col-md-7 col-sm-7">
-                                            <br/><br/>
-                                            <h1 class="text-gray">No Coach Subscribed</h1>
-                                            <h5 class="text-gray margin-top-10"><i>Subscribe and get advices from our experts.</i></h5>
+                                        <div class="margin-top-50">
+                                            <div class="col-lg-5 col-md-5 col-sm-5 margin-top-10">
+                                                <img class="pull-right" src="../../images/coming-soon.png" width="200" height="200">
+                                            </div>
+                                            <div class="col-lg-5 col-md-5 col-sm-5 margin-top-10">
+                                                <h1 class="text-gray margin-top-50">COMING SOON...</h1><br/>
+                                                <!--<a class="main-button" href="#coach-search"><i class="fa fa-pencil-square-o"></i>&nbsp;&nbsp;Subscribe Here</a> -->
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
