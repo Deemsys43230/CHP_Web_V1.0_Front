@@ -1,4 +1,4 @@
-var commonApp= angular.module('commonApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','ngCookies','feedbackServiceModule']);
+var commonApp= angular.module('commonApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','ngCookies']);
 
 commonApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
 
@@ -298,8 +298,34 @@ commonApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'diseaseControlTipsController'
             }).
-
-
+            when('/disease-control-tips-3', {
+                templateUrl: '../common/disease-control-tips-3.html',
+                resolve: {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'commonApp',
+                            files:[
+                                '../../app/diseaseControlTips/diseaseControlTipsController.js'
+                            ]
+                        })
+                    }]
+                },
+                controller:'diseaseControlTipsController'
+            }).
+            when('/disease-control-tips-4', {
+                templateUrl: '../common/disease-control-tips-4.html',
+                resolve: {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'commonApp',
+                            files:[
+                                '../../app/diseaseControlTips/diseaseControlTipsController.js'
+                            ]
+                        })
+                    }]
+                },
+                controller:'diseaseControlTipsController'
+            }).
 
             when('/healthy-tips', {
                 templateUrl: '../common/healthy-tips.html',
@@ -531,9 +557,8 @@ commonApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
             });
     }]);
 
-
 //Internal Login Details
-commonApp.controller('LoginController',['$scope','requestHandler','Flash','$window','$location','$element','FeedbackService','$rootScope','$routeParams','$timeout',function($scope,requestHandler,Flash,$window,$location,$element,FeedbackService,$rootScope,$routeParams,$timeout){
+commonApp.controller('LoginController',['$scope','requestHandler','Flash','$window','$location','$element',function($scope,requestHandler,Flash,$window,$location,$element){
 
     $scope.hideValue=1;
 
@@ -595,21 +620,15 @@ commonApp.controller('LoginController',['$scope','requestHandler','Flash','$wind
             if(response.data.Response_status===""){
 
                 successMessage(Flash,"Login Successful!");
+
                 //Get Logged In User
                 requestHandler.getRequest("getUserId/","").then(function(response){
 
                    if(response.data.Login.roleid==3){
-                       if(response.data.User_Profile.isProfileUpdated==0 && response.data.demography.demoUpdatedstatus==0){
+                       if(response.data.User_Profile.isProfileUpdated==0){
                           $window.location.href=requestHandler.domainURL()+"views/user/#/profile";
-
-                       }
-                       else if(response.data.User_Profile.isProfileUpdated==1 && response.data.demography.demoUpdatedstatus==0){
-                           $window.location.href=requestHandler.domainURL()+"views/user/#/demography";
-
-                       }
-                       else if(response.data.User_Profile.isProfileUpdated==1 && response.data.demography.demoUpdatedstatus==1){
+                       }else{
                            $window.location.href=requestHandler.domainURL()+"views/user/#/dashboard";
-
                        }
                    }
                     else if(response.data.Login.roleid==2){
@@ -655,7 +674,6 @@ commonApp.controller('LoginController',['$scope','requestHandler','Flash','$wind
                 $(".user_register").hide();
                 $(".secret_question").hide();
                 $(".user_register1").hide();
-                $(".new_password_form").hide();
                 $(".user_login").show();
                 $(".header_title").text('Login');
                 successMessage(Flash,"Registration Successful!");
@@ -680,7 +698,6 @@ commonApp.controller('LoginController',['$scope','requestHandler','Flash','$wind
                 $(".user_login").hide();
                 $(".reset_password").hide();
                 $(".user_register").hide();
-                $(".new_password_form").hide();
                 $(".secret_question").show();
                 $(".header_title").text('Register');
                 $scope.secretQuestion=response.data.secretquestion;
@@ -690,7 +707,6 @@ commonApp.controller('LoginController',['$scope','requestHandler','Flash','$wind
                 $(".user_register").hide();
                 $(".secret_question").hide();
                 $(".user_register1").hide();
-                $(".new_password_form").hide();
                 $(".user_login").show();
                 $(".header_title").text('Login');
                 successMessage(Flash,"Please check your Email<br/>to reset the password!");
@@ -710,24 +726,8 @@ commonApp.controller('LoginController',['$scope','requestHandler','Flash','$wind
             $scope.doLogin();
         }
     };
-    //Send Email forgot password
-    $scope.doSendEmail=function(){
-        requestHandler.postRequest("forgotPassword/",{"emailid":$scope.emailid,"secretanswer":"","option":1}).then(function(response){
-            if(response.data.Response_status==2){
-                $(".reset_password").hide();
-                $(".user_register").hide();
-                $(".secret_question").hide();
-                $(".user_register1").hide();
-                $(".new_password_form").hide();
-                $(".user_login").show();
-                $(".header_title").text('Login');
-                successMessage(Flash,"Please Check your emailID!");
-            }
-        });
-    };
 
-
-    //Check Secret Answer
+//Check Secret Answer
     $scope.doSecretAnswerCheck=function(){
 
         requestHandler.postRequest("forgotPassword/",{"emailid":$scope.emailid,"secretanswer":$scope.secretanswer,"option":2}).then(function(response){
@@ -797,7 +797,6 @@ commonApp.controller('LoginController',['$scope','requestHandler','Flash','$wind
 
 
 }]);
-
 //To Display success message
 //For User Messages
 function successMessage(Flash,message){
