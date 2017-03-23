@@ -1,4 +1,4 @@
-var commonApp= angular.module('commonApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','ngCookies']);
+var commonApp= angular.module('commonApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','ngCookies','feedbackServiceModule']);
 
 commonApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
 
@@ -558,7 +558,7 @@ commonApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
     }]);
 
 //Internal Login Details
-commonApp.controller('LoginController',['$scope','requestHandler','Flash','$window','$location','$element',function($scope,requestHandler,Flash,$window,$location,$element){
+commonApp.controller('LoginController',['$scope','requestHandler','Flash','$window','$location','$element','FeedbackService','$timeout',function($scope,requestHandler,Flash,$window,$location,$element,FeedbackService,$timeout){
 
     $scope.hideValue=1;
 
@@ -773,13 +773,11 @@ commonApp.controller('LoginController',['$scope','requestHandler','Flash','$wind
 
 
     };
-    $scope.isFeedback=false;
+$scope.isFeedback=false;
     $scope.addUserFeedback=function(){
-
         $scope.userFeedback= FeedbackService.addUserFeedback($scope.feedback);
-
         $scope.userFeedback.then(function(result){
-            $scope.isFeedback=true;
+           $scope.isFeedback=true;
             $scope.feedback={};
             $scope.feedbackForm.$setPristine();
 

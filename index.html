@@ -1,4 +1,17 @@
+<style>
+    .hidden-header{
+    height : 80px !important;
+}
+.centerize { 
+    text-align: center;
+    margin-top: 150px;
+}
+.btn-small {
+    padding: 14px 50px !important;
+}
 
+
+</style>
 
 <!doctype html>
 <!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
@@ -63,50 +76,6 @@
 <!-- Start Header Section -->
 <div class="hidden-header"></div>
 <header class="clearfix">
-    <!-- Start Top Bar -->
-    <div class="top-bar">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-md-8 col-sm-7 col-xs-5 hidden-xss" ng-init="init()">
-                    <!-- Start Contact Info -->
-                    <div ng-hide="hideValue" ng-cloak class="ng-cloak" >
-                        <ul class="contact-details remove-style" >
-                            <li class="hidden-xs"><a><i class="fa fa-map-marker"></i> {{address}}</a>
-                            </li>
-                            <li class="hidden-sm hidden-xss"><a><i class="fa fa-envelope-o"></i> {{commonDetails.supportemail}}</a>
-                            </li>
-                            <li class="hidden-sm hidden-xs"><a><i class="fa fa-phone"></i> {{commonDetails.mobile}}</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <!-- End Contact Info -->
-                </div><!-- .col-md-6 -->
-                <div class="col-lg-4 col-md-4 col-sm-5 padding-left-0">
-                    <!-- Start Social Links-->
-                    <ul class="social-list remove-style">
-                        <li>
-                            <a class="login itl-tooltip modal_trigger"  data-ng-click="reset()" data-placement="bottom" title="Login / Register" href="#modal">Login / Register</a>
-                        </li>
-                        <li class="hidden-xss">
-                            <a class="facebook itl-tooltip" data-placement="bottom" title="Facebook" target="_blank" href="{{commonDetails.facebookurl}}"><i class="fa fa-facebook"></i></a>
-                        </li>
-                        <li class="hidden-xss">
-                            <a class="twitter itl-tooltip" data-placement="bottom" title="Twitter"  target="_blank" href="{{commonDetails.twitterurl}}"><i class="fa fa-twitter"></i></a>
-                        </li>
-                        <li class="hidden-xss">
-                            <a class="google itl-tooltip" data-placement="bottom" title="Google Plus"  target="_blank" href="{{commonDetails.googleurl}}"><i class="fa fa-google-plus"></i></a>
-                        </li>
-                        <li class="hidden-xss">
-                            <a class="linkdin itl-tooltip" data-placement="bottom" title="Linkedin"  target="_blank" href="{{commonDetails.linkedinurl}}"><i class="fa fa-linkedin"></i></a>
-                        </li>
-                    </ul>
-                    <!-- End Social Links -->
-                </div><!-- .col-md-6 -->
-            </div><!-- .row -->
-        </div><!-- .container -->
-    </div><!-- .top-bar -->
-    <!-- End Top Bar -->
-
     <!-- Start  Logo & Naviagtion  -->
     <div class="navbar navbar-default navbar-top">
         <div class="container">
@@ -125,21 +94,9 @@
                 <!-- Start Navigation List -->
                 <ul class="nav navbar-nav navbar-right">
                     <li><a class="active" href="">Home</a></li>
-                    <li><a class="{{activeClass.healthy}}" href="views/home/#/healthy-tips"><span class="highlight-menu-item">Healthy Tips</span></a></li>
-                    <li><a class="{{activeClass.new}}" href="views/home/#/disease-control-tips">Disease Control</span></a></li>
-                    <li><a href="views/home/#/how-it-work">How It Works</a></li>
-                    <li class="xsm-show"><a href="views/home/#/useful-videos">Useful Videos</a></li>
-                    <li class="sm-show"><a class="{{activeClass.blog}}" href="views/home/#/blog">Blogs</a></li>
-                    <li class="sm-show"><a href="views/home/#/aboutus">About Us</a></li>
-                    <li class="sm-show"><a href="views/home/#/contact">Contact Us</a></li>
-                    <li class="dropdown sm-device">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="">More<span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li class="xsm-hide"><a href="views/home/#/useful-videos">Useful Videos</a></li>
-                            <li class="sm-hide"><a class="{{activeClass.blog}}" href="views/home/#/blog">Blogs</a></li>
-                            <li class="sm-hide"><a href="views/home/#/aboutus">About Us</a></li>
-                            <li class="sm-hide"><a href="views/home/#/contact">Contact Us</a></li>
-                        </ul>
+                    <li><a class="{{activeClass.healthy}}" href="views/home/#/healthy-tips"><span class="highlight-menu-item">Healthy Living</span></a></li>
+                    <li class="social-list remove-style">
+                        <a class="login itl-tooltip modal_trigger"  data-ng-click="reset()" data-placement="bottom" title="Login / Register" href="#modal">Login / Register</a>
                     </li>
                 </ul>
                 <!-- End Navigation List -->
@@ -257,130 +214,179 @@
 <!-- Start Services Section -->
 <div class="section service">
     <div class="container">
-      <div class="row">
+        <div class="row">
+            <div class="page-content">
+                <div class="col-md-8 col-lg-8 col-sm-8 col-xs-12">
+                <!-- Classic Heading -->
+                <h4 class="classic-title"><span>How it works</span></h4>
 
-            <!-- Start Big Heading -->
-            <!--<div class="big-title text-center" data-animation="fadeInDown" data-animation-delay="01">-->
-        <div class="big-title text-center">
-            <!--<h1>This is Our Latest <strong>Work</strong></h1>-->
-            <h1>Achieve your health with <strong>Our Features</strong></h1>
-        </div>
-        <hr/>
-            <!-- End Big Heading -->
-            
-            <div class="col-md-12" style="padding-top: 45px">
-                <center><div id="featuresDiv" style="width: 95%; padding-bottom: 50px"></div>
-                <!--img src="images/info/features.svg" style="width: 95%; padding-bottom: 50px" /-->
-                </center>
+                    <div class="row">
+                    <!-- Start Service Icon 1 -->
+                        <div class="col-md-6 col-lg-6 col-sm-6 col-xs-12 service-box service-icon-left-more">
+                            <div class="service-icon">
+                                <i class="fa fa-sign-in icon-medium"></i>
+                            </div>
+                            <div class="service-content">
+                                <h4 class="text-orange text-bold">1. Become a Member - It's Free</h4>
+                                <p>
+                                    Join today and start enjoying our valuable features and get exclusive 
+                                    access to our food and exercise diary.
+                                </p>
+                            </div>
+                        </div>
+                    <!-- End Service Icon 1 -->
+
+                    <!-- Start Service Icon 2 -->
+                    <div class="col-md-6 col-lg-6 col-sm-6 col-xs-12 service-box service-icon-left-more">
+                        <div class="service-icon">
+                            <i class="fa fa-pencil icon-medium"></i>
+                        </div>
+                        <div class="service-content">
+                            <h4 class="text-orange text-bold">2. Update Your Profile</h4>
+                            <p>
+                                Updating your profile and demography details to become more
+                                comfortable with the system.
+                            </p>
+                        </div>
+                    </div>
+                    <!-- End Service Icon 2 -->
+
+                    </div>
+
+                    <div class="row">
+                    <!-- Start Service Icon 3 -->
+                        <div class="col-md-6 col-lg-6 col-sm-6 col-xs-12 service-box service-icon-left-more">
+                            <div class="service-icon">
+                                <i class="fa fa-refresh icon-medium"></i>
+                            </div>
+                            <div class="service-content">
+                                <h4 class="text-orange text-bold">3. Daily Updates</h4>
+                                <p>Keep updated your daily Food Intakes and Workouts.</p>
+                            </div>
+                        </div>
+                        <!-- End Service Icon 3 -->
+
+                        <!-- Start Service Icon 4 -->
+                        <div class="col-md-6 col-lg-6 col-sm-6 col-xs-12 service-box service-icon-left-more">
+                            <div class="service-icon">
+                                <i class="fa fa-bullseye icon-medium"></i>
+                            </div>
+                            <div class="service-content">
+                                <h4 class="text-orange text-bold">4. Set up your Goal</h4>
+                                <p>Create your own individual goals and monitor your daily progress.</p>
+                            </div>
+                        </div>
+                        <!-- End Service Icon 4 -->
+                    </div>
+
+                    <div class="row">
+
+                    <!-- Start Service Icon 5 -->
+                        <div class="col-md-6 col-lg-6 col-sm-6 col-xs-12 service-box service-icon-left-more">
+                            <div class="service-icon">
+                                <i class="fa fa-user-plus icon-medium"></i>
+                            </div>
+                            <div class="service-content">
+                                <h4 class="text-orange text-bold">5. Subscribe Coach</h4>
+                                <p>Subscribe our health experts and get advices to achieve your goals.</p>
+                            </div>
+                        </div>
+                        <!-- End Service Icon 5 -->
+
+                        <!-- Start Service Icon 6 -->
+                        <div class="col-md-6 col-lg-6 col-sm-6 col-xs-12 service-box service-icon-left-more">
+                            <div class="service-icon">
+                                <i class="fa fa-book icon-medium"></i>
+                            </div>
+                            <div class="service-content">
+                                <h4 class="text-orange text-bold">6. Courses</h4>
+                                <p>Search and enroll courses to know more about healthy life.</p>
+                            </div>
+                        </div>
+                        <!-- End Service Icon 6 -->
+                        <div class="col-xs-12 hidden-lg hidden-md hidden-sm">
+                            <br/><br/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 col-lg-4 col-sm-4 col-xs-12">
+
+                    <!-- Classic Heading -->
+                    <h4 class="classic-title"><span>Upcoming Features</span></h4>
+
+                    <!-- Accordion -->
+                    <div class="panel-group" id="accordion">
+
+                        <!-- Start Accordion 1 -->
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse-one" onclick="return false;">
+                                        <i class="fa fa-angle-up control-icon"></i>
+                                        <i class="fa fa-mobile"></i> Mobile Apps
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="collapse-one" class="panel-collapse collapse in">
+                                <div class="panel-body">Cyberhealths Mobile App is all set to smack your hand phones shortly. 
+                                    It is accessible on all leading mobile platforms such as iOS, 
+                                    Android and Windows. Make the best use of this opportunity.
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End Accordion 1 -->
+
+                        <!-- Start Accordion 2 -->
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse-tow" class="collapsed" onclick="return false;">
+                                        <i class="fa fa-angle-up control-icon"></i>
+                                        <i class="fa fa-comments"></i> Chat and Messaging
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="collapse-tow" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    Get ready to catch up with your friends and coaches with the chat 
+                                    & messaging feature. We'll do all we can, to make your experience 
+                                    the best.
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End Accordion 2 -->
+
+                        <!-- Start Accordion 3 -->
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse-three" class="collapsed" onclick="return false;">
+                                        <i class="fa fa-angle-up control-icon"></i>
+                                        <i class="fa fa-tint"></i> Wearable Device
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="collapse-three" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    In the world of new innovation & technology, fitness tracking wearable
+                                    devices is soon to be launched for your ease.
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End Accordion 3 -->
+                        <div class="centerize">
+                        <a href="" class="btn-system btn-small" onclick="$('.loginNow').click()"><i class="fa fa-user"></i> Register</a>
+                    </div>
+
+                    </div>
+                    <!-- End Accordion -->
+                </div>
             </div>
-
             </div>
-        
         </div>
-        </div><!-- .row -->
-    </div><!-- .container -->
-
-<!-- End Services Section -->
-<div class="container">
-    <div class="row">
-        <div ng-view autoscroll="true"></div>
     </div>
-</div>
-
-<!-- Start Footer Section -->
-<footer>
-    <div class="container">
-        <div class="row footer-widgets">
-
-            <!-- Start Subscribe & Social Links Widget -->
-            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                <div class="footer-widget mail-subscribe-widget">
-                    <h4>Get in touch<span class="head-line"></span></h4>
-                    <p class="margin-bottom-10">For more information or clarifications please contact us through the mail</p>
-                    <div class="text-orange">{{commonDetails.supportemail}}</div>
-                    <!--<form class="subscribe">
-                        <input type="text" placeholder="mail@example.com">
-                        <input type="submit" class="btn-system" value="Send">
-                    </form>-->
-                </div>
-            </div><!-- .col-md-3 -->
-            <!-- End Subscribe & Social Links Widget -->
-
-            <!-- Start Twitter Widget -->
-            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                <div class="footer-widget social-widget">
-                    <h4>Follow Us<span class="head-line"></span></h4>
-                    <p>Join our social network to stay up to date and get notices about our new releases!</p>
-                    <ul class="remove-style social-icons margin-top-10">
-                        <li>
-                            <a class="facebook" target="_blank" href="{{commonDetails.facebookurl}}"><i class="fa fa-facebook"></i></a>
-                        </li>
-                        <li>
-                            <a class="twitter" target="_blank" href="{{commonDetails.twitterurl}}"><i class="fa fa-twitter"></i></a>
-                        </li>
-                        <li>
-                            <a class="google" target="_blank" href="{{commonDetails.googleurl}}"><i class="fa fa-google-plus"></i></a>
-                        </li>
-                        <li>
-                            <a class="linkdin" target="_blank" href="{{commonDetails.linkedinurl}}"><i class="fa fa-linkedin"></i></a>
-                        </li>
-                    </ul>
-                </div>
-            </div><!-- .col-md-3 -->
-            <!-- End Twitter Widget -->
-
-            <!-- Start Flickr Widget -->
-            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                <div class="footer-widget social-widget">
-                    <h4>Mobile Apps<span class="head-line"></span></h4>
-                    <p>Get our mobile apps for handy use shortly</p>
-                    <img width="213" height="36" title="Coming Soon" class="margin-top-20" src="images/available.png">
-                </div>
-            </div><!-- .col-md-3 -->
-            <!-- End Flickr Widget -->
-
-            <!-- Start Contact Widget -->
-            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                <div class="footer-widget contact-widget">
-                    <h4><img width="209" height="57" src="images/cyber-logo-footer.png" alt="Footer Logo" /></h4>
-                    <ul class="remove-style">
-                        <li><span>Phone Number:</span> {{commonDetails.mobile}}</li>
-                        <li><span>Email:</span> {{commonDetails.supportemail}}</li>
-                        <li><span>Website:</span> www.cyberhealths.com</li>
-                    </ul>
-                </div>
-            </div><!-- .col-md-3 -->
-            <!-- End Contact Widget -->
-
-        </div><!-- .row -->
-
-        <!-- Start Copyright -->
-        <div class="copyright-section">
-            <div class="row">
-                <div class="col-md-6">
-                    <p>&copy; 2016 Deemsys Inc -  All Rights Reserved</p>
-                </div><!-- .col-md-6 -->
-                <div class="col-md-6">
-                    <ul class="footer-nav remove-style">
-                        <li><a href="views/home/#/policy">Privacy Policy</a>
-                        </li>
-                        <li><a href="views/home/#/how-it-work">How It Works</a>
-                        </li>
-                        <li><a href="views/home/#/terms-of-use">Terms Of Use</a>
-                        </li>
-                        <li><a href="views/home/#/faq">FAQ</a>
-                        </li>
-                        <li><a href="views/home/#/contact">Contact Us</a>
-                        </li>
-                    </ul>
-                </div><!-- .col-md-6 -->
-            </div><!-- .row -->
-        </div>
-        <!-- End Copyright -->
-    </div>
-</footer>
-<!-- End Footer Section -->
-
+    <!-- End Footer Section -->
 <div id="form">
     <p id="feedback_button">
         <img class="hidden-xs" src="images/feedback.png">
@@ -421,7 +427,97 @@
         <a href="" class="btn main-button" ng-click="addUserFeedback()" ng-disabled="feedbackForm.$invalid">Submit feedback </a>
     </form>
     </div>
+</div> 
 </div>
+<!-- End Content -->
+
+<!-- End Services Section -->
+<div class="container">
+    <div class="row">
+        <div ng-view autoscroll="true"></div>
+    </div>
+</div>
+
+<!-- Start Footer Section -->
+<footer>
+    <div class="container">
+        <div class="row footer-widgets">
+    
+            <!-- Start Twitter Widget -->
+            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                <div class="footer-widget social-widget">
+                    <h4>Follow Us<span class="head-line"></span></h4>
+                    <p>Join our social network to stay up to date and get notices about our new releases!</p>
+                    <ul class="remove-style social-icons margin-top-10">
+                        <li>
+                            <a class="facebook" target="_blank" href="{{commonDetails.facebookurl}}"><i class="fa fa-facebook"></i></a>
+                        </li>
+                        <li>
+                            <a class="twitter" target="_blank" href="{{commonDetails.twitterurl}}"><i class="fa fa-twitter"></i></a>
+                        </li>
+                        <li>
+                            <a class="google" target="_blank" href="{{commonDetails.googleurl}}"><i class="fa fa-google-plus"></i></a>
+                        </li>
+                        <li>
+                            <a class="linkdin" target="_blank" href="{{commonDetails.linkedinurl}}"><i class="fa fa-linkedin"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div><!-- .col-md-3 -->
+            <!-- End Twitter Widget -->
+
+            <!-- Start Flickr Widget -->
+            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                <div class="footer-widget social-widget">
+                    <h4>Mobile Apps<span class="head-line"></span></h4>
+                    <p>Get our mobile apps for handy use shortly</p>
+                    <img width="213" height="36" title="Coming Soon" class="margin-top-20" src="images/available.png">
+                </div>
+            </div><!-- .col-md-3 -->
+            <!-- End Flickr Widget -->
+
+            <!-- Start Contact Widget -->
+            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                <div class="footer-widget contact-widget">
+                    <h4><img width="209" height="57" src="images/cyber-logo-footer.png" alt="Footer Logo" /></h4>
+                    <!-- <ul class="remove-style">
+                        <li><span>Phone Number:</span> {{commonDetails.mobile}}</li>
+                        <li><span>Email:</span> {{commonDetails.supportemail}}</li>
+                        <li><span>Website:</span> www.cyberhealths.com</li>
+                    </ul> -->
+                </div>
+            </div><!-- .col-md-3 -->
+            <!-- End Contact Widget -->
+
+        </div><!-- .row -->
+
+        <!-- Start Copyright -->
+        <div class="copyright-section">
+            <div class="row">
+                <div class="col-md-6">
+                    <p>&copy; 2016 Deemsys Inc -  All Rights Reserved</p>
+                </div><!-- .col-md-6 -->
+                <div class="col-md-6">
+                    <ul class="footer-nav remove-style">
+                        
+                        <li><a href="views/home/#/aboutus">About Us</a>
+                        </li>
+                        <li><a href="views/home/#/terms-of-use">Terms Of Use</a>
+                        </li>
+                        <li><a href="views/home/#/policy">Privacy Policy</a>
+                        </li>
+                        <li><a href="views/home/#/faq">FAQ</a>
+                        </li>
+                        <li><a href="views/home/#/contact">Contact Us</a>
+                        </li>
+                    </ul>
+                </div><!-- .col-md-6 -->
+            </div><!-- .row -->
+        </div>
+        <!-- End Copyright -->
+    </div>
+</footer>
+
 
 <!-- End Full Body Container -->
 

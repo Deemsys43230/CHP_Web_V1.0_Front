@@ -40,50 +40,7 @@
 <!-- Start Header Section -->
 <div class="hidden-header"></div>
 <header class="clearfix">
-    <!-- Start Top Bar -->
-    <div class="top-bar">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-md-8 col-sm-7 col-xs-5 hidden-xss" ng-init="init()">
-                    <!-- Start Contact Info -->
-                    <div ng-hide="hideValue" ng-cloak class="ng-cloak" >
-                        <ul class="contact-details remove-style" >
-                            <li class="hidden-xs"><a><i class="fa fa-map-marker"></i> {{address}}</a>
-                            </li>
-                            <li class="hidden-sm hidden-xss"><a><i class="fa fa-envelope-o"></i> {{commonDetails.supportemail}}</a>
-                            </li>
-                            <li class="hidden-sm hidden-xs"><a><i class="fa fa-phone"></i> {{commonDetails.mobile}}</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <!-- End Contact Info -->
-                </div><!-- .col-md-6 -->
-                <div class="col-lg-4 col-md-4 col-sm-5 padding-left-0">
-                    <!-- Start Social Links-->
-                     <ul class="social-list remove-style">
-                        <li>
-                            <a class="login itl-tooltip modal_trigger"  data-ng-click="reset()" data-placement="bottom" title="Login / Register" href="#modal">Login / Register</a>
-                        </li>
-                        <li class="hidden-xss">
-                            <a class="facebook itl-tooltip" data-placement="bottom" title="Facebook" target="_blank" href="{{commonDetails.facebookurl}}"><i class="fa fa-facebook"></i></a>
-                        </li>
-                        <li class="hidden-xss">
-                            <a class="twitter itl-tooltip" data-placement="bottom" title="Twitter"  target="_blank" href="{{commonDetails.twitterurl}}"><i class="fa fa-twitter"></i></a>
-                        </li>
-                        <li class="hidden-xss">
-                            <a class="google itl-tooltip" data-placement="bottom" title="Google Plus"  target="_blank" href="{{commonDetails.googleurl}}"><i class="fa fa-google-plus"></i></a>
-                        </li>
-                        <li class="hidden-xss">
-                            <a class="linkdin itl-tooltip" data-placement="bottom" title="Linkedin"  target="_blank" href="{{commonDetails.linkedinurl}}"><i class="fa fa-linkedin"></i></a>
-                        </li>
-                    </ul>
-                    <!-- End Social Links -->
-                </div><!-- .col-md-6 -->
-            </div><!-- .row -->
-        </div><!-- .container -->
-    </div><!-- .top-bar -->
-    <!-- End Top Bar -->
-
+   
     <!-- Start  Logo & Naviagtion  -->
     <div class="navbar navbar-default navbar-top">
         <div class="container">
@@ -102,22 +59,10 @@
                 <!-- Start Navigation List -->
                 <ul class="nav navbar-nav navbar-right">
                     <li><a class="{{activeClass.index}}" href="../../">Home</a></li>
-                    <li><a class="{{activeClass.healthy}}" href="#healthy-tips"><span class="highlight-menu-item">Healthy Tips</span></a></li>
-                    <li><a class="{{activeClass.disease}}" href="#disease-control-tips">Disease Control</span></a></li>
-                    <li><a class="{{activeClass.how}}" href="#how-it-work">How It Works</a></li>
-                    <li class="xsm-show"><a class="{{activeClass.useful}}" href="#useful-videos">Useful Videos</a></li>
-                    <li class="sm-show"><a class="{{activeClass.blog}}" href="#blog">Blogs</a></li>
-                    <li class="sm-show"><a class="{{activeClass.aboutus}}" href="#aboutus">About Us</a></li>
-                    <li class="sm-show"><a class="{{activeClass.contact}}" href="#contact">Contact Us</a></li>
-                    <li class="dropdown sm-device">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="">More<span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li class="xsm-hide"><a class="{{activeClass.useful}}" href="#useful-videos">Useful Videos</a></li>
-                            <li class="sm-hide"><a class="{{activeClass.blog}}" href="#blog">Blogs</a></li>
-                            <li class="sm-hide"><a class="{{activeClass.aboutus}}" href="#aboutus">About Us</a></li>
-                            <li class="sm-hide"><a class="{{activeClass.contact}}" href="#contact">Contact Us</a></li>
-                        </ul>
-                    </li>
+                    <li><a class="{{activeClass.healthy}}" href="#healthy-tips"><span class="highlight-menu-item">Healthy Living</span></a></li>
+                    <li>
+                        <a class="login itl-tooltip modal_trigger"  data-ng-click="reset()" data-placement="bottom" title="Login / Register" href="#modal">Login / Register</a>
+                        </li>
                 </ul>
                 <!-- End Navigation List -->
             </div>
@@ -137,22 +82,8 @@
     <div class="container">
         <div class="row footer-widgets">
 
-            <!-- Start Subscribe & Social Links Widget -->
-            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                <div class="footer-widget mail-subscribe-widget">
-                    <h4>Get in touch<span class="head-line"></span></h4>
-                    <p class="margin-bottom-10">For more information or clarifications please contact us through the mail</p>
-                    <div class="text-orange">{{commonDetails.supportemail}}</div>
-                    <!--<form class="subscribe">
-                        <input type="text" placeholder="mail@example.com">
-                        <input type="submit" class="btn-system" value="Send">
-                    </form>-->
-                </div>
-            </div><!-- .col-md-3 -->
-            <!-- End Subscribe & Social Links Widget -->
-
             <!-- Start Twitter Widget -->
-            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
                 <div class="footer-widget social-widget">
                     <h4>Follow Us<span class="head-line"></span></h4>
                     <p>Join our social network to stay up to date and get notices about our new releases!</p>
@@ -175,7 +106,7 @@
             <!-- End Twitter Widget -->
 
             <!-- Start Flickr Widget -->
-            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
                 <div class="footer-widget social-widget">
                     <h4>Mobile Apps<span class="head-line"></span></h4>
                     <p>Get our mobile apps for handy use shortly</p>
@@ -185,14 +116,14 @@
             <!-- End Flickr Widget -->
 
             <!-- Start Contact Widget -->
-            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
                 <div class="footer-widget contact-widget">
                     <h4><img width="209" height="57" src="../../images/cyber-logo-footer.png" alt="Footer Logo" /></h4>
-                    <ul class="remove-style">
+                    <!-- <ul class="remove-style">
                         <li><span>Phone Number:</span> {{commonDetails.mobile}}</li>
                         <li><span>Email:</span> {{commonDetails.supportemail}}</li>
                         <li><span>Website:</span> www.cyberhealths.com</li>
-                    </ul>
+                    </ul> -->
                 </div>
             </div><!-- .col-md-3 -->
             <!-- End Contact Widget -->
@@ -207,12 +138,12 @@
                 </div><!-- .col-md-6 -->
                 <div class="col-md-6">
                     <ul class="footer-nav remove-style">
-                        <li><a href="#policy">Privacy Policy</a>
-                        </li>
-                        <li><a href="#how-it-work">How It Works</a>
-                        </li>
+                        <li><a href="#aboutus">About Us</a>
+                        </li>                       
                         <li><a href="#terms-of-use">Terms Of Use</a>
                         </li>
+                        <li><a href="#policy">Privacy Policy</a>
+                        </li> 
                         <li><a href="#faq">FAQ</a>
                         </li>
                         <li><a href="#contact">Contact Us</a>

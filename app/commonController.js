@@ -89,12 +89,14 @@ commonApp.controller('CommonController',['$scope','requestHandler','Flash','$rou
            $scope.units=1;
            $scope.height="";
            $scope.weight="";
+           $scope.dob="";
        }
        else if(unitVar){
            $scope.units=2;
            $scope.feet="";
            $scope.inches="";
            $scope.weight="";
+           $scope.dob="";
        }
     };
 
@@ -187,6 +189,7 @@ commonApp.filter('toSec', function() {
         return result || '';
     };
 });
+//Common Date Validation Directive
 commonApp.directive('dateValidation', function() {
     return {
         restrict: 'A',
@@ -212,11 +215,97 @@ commonApp.directive('dateValidation', function() {
                     var currentDate = new Date();
                     var userDOB = new Date(yy, mm, dd);
                     var minDate = new Date(1800, 0, 0);
-                    if((userDOB > currentDate)||(userDOB < minDate) || (dd > 31) || (mm > 11)) 
-                        return false;                    
+                    if((userDOB > currentDate)||(userDOB < minDate) || (dd > 31) || (mm > 11)) {
+
+                    
+                     return false; 
+                    }
+                                          
                     else 
                         return true;                    
                 };
     }
 };
 });
+
+//Date Directive for US BMI calculation
+commonApp.directive('dateValidationUs', function() {
+    return {
+        restrict: 'A',
+        require : 'ngModel',
+        link : function (scope, element, attrs, ctrl) {
+            
+              ctrl.$parsers.unshift(function(value) {
+                if(value){
+                  // test and set the validity after update.
+                  var valid = value.charAt(2) == '/' && value.charAt(5) == '/' && value.length == 10 && checkDateUS(value);
+                  ctrl.$setValidity('invalidDate', valid);
+                }
+
+                // if it's valid, return the value to the model,
+                // otherwise return undefined.
+                return valid ? value : "undefined";
+        });
+                
+                checkDateUS = function(inputDate) {
+                    var mm = parseInt(inputDate.substr(0,2));
+                    var dd = parseInt(inputDate.substr(3,4));
+                    var yy = parseInt(inputDate.substr(6,9));
+
+                    var currentDate = new Date(yy,mm,dd);
+                    var userDOB = new Date(yy, mm, dd);
+                    var minDate = new Date(1800, 0, 0);
+                    if((userDOB > currentDate)||(userDOB < minDate) || (dd > 31) || (mm > 11)) {
+                        return false; 
+                    }                                        
+                    else 
+                    {
+                        return true;         
+                    }
+                                   
+                };
+    }
+};
+});
+
+//Date Directive for Metric BMI calculation
+commonApp.directive('dateValidationIn', function() {
+    return {
+        restrict: 'A',
+        require : 'ngModel',
+        link : function (scope, element, attrs, ctrl) {
+            
+              ctrl.$parsers.unshift(function(value) {
+                if(value){
+                  // test and set the validity after update.
+                  var valid = value.charAt(2) == '/' && value.charAt(5) == '/' && value.length == 10 && checkDateIN(value);
+                  ctrl.$setValidity('invalidDate', valid);
+                }
+
+                // if it's valid, return the value to the model,
+                // otherwise return undefined.
+                return valid ? value : "undefined";
+        });
+                
+                checkDateIN = function(inputDate) {
+                    var dd = parseInt(inputDate.substr(0,2));
+                    var mm = parseInt(inputDate.substr(3,4))-1;
+                    var yy = parseInt(inputDate.substr(6,9));
+                    var currentDate = new Date();
+                    var userDOB = new Date(yy, mm, dd);
+                    var minDate = new Date(1800, 0, 0);
+                    if((userDOB > currentDate)||(userDOB < minDate) || (dd > 31) || (mm > 11)) {
+
+                    
+                     return false; 
+                    }
+                                          
+                    else 
+                        return true;                    
+                };
+    }
+};
+});
+
+
+
