@@ -1,49 +1,99 @@
 
 <!-- Start Content -->
-<div id="content-page" ng-cloak class="ng-cloak">
+<div id="content-page"   ng-cloak class="ng-cloak">
     <div id="w" class="clearfix">
-        <div class="col-lg-8 col-md-7 col-sm-12 col-xs-12">
-            <!-- Classic Heading -->
-            <h4 class="classic-title"><span>Contact Us</span></h4>
-            <div my-map=""></div>
+        <div flash-message="2000" class="col-md-4 pull-right no-padding"></div>
+        <div class="col-lg-8 col-md-7 col-sm-7">
+      <h4 class="classic-title"><span>Contact Us</span></h4>
+           <!-- <div my-map=""></div>-->
             <!-- Start Contact Form -->
-            <!--<form role="form" class="contact-form" id="contact-form" method="post">
+            <div class="row" style="margin-top: 2%">
+            <form class="contact-form" id="contact-form" name="contactForm" ng-submit="contactForm.$valid && doSendEmail()" ng-model="contactForm" novalidate>
+
+                <input type="hidden" name="formValid" id="formValid" data-ng-model="formError" ng-value="contactForm.$valid">
                 <div class="form-group">
-                    <div class="controls">
-                        <input type="text" placeholder="Name" name="name">
+                    <div class="col-md-12">
+                        <div class="col-md-5"> FirstName<span class="pull-right">:</span></div>
+                        <div class="col-md-6">
+                            <input type="text" placeholder="FirstName" ng-model="contact.firstname"  name="firstname" required validate-alpha-with-space>
+                             <span ng-show="submitted||contactForm.firstname.$dirty">
+                             <span class="error-message" ng-show="contactForm.firstname.$error.required"><span>Required</span></span>
+                             <span class="error-message" ng-show="contactForm.firstname.$error.validateAlphaWithSpace"><span>Invalid&nbsp;Name</span></span>
+                            </span>
+                        </div>
+                     </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <div class="col-md-5"> LastName<span class="pull-right">:</span></div>
+                        <div class="col-md-6"><input type="text" placeholder="LastName" ng-model="contact.lastname" name="lastname" required validate-alpha-with-space>
+                            <span ng-show="submitted||contactForm.lastname.$dirty">
+                            <span class="error-message" ng-show="contactForm.lastname.$error.required"><span>Required</span></span>
+                            <span class="error-message" ng-show="contactForm.lastname.$error.validateAlphaWithSpace"><span>Invalid&nbsp;Name</span></span>
+                            </span>
+                        </div>
                     </div>
                 </div>
                 <div class="form-group">
-                    <div class="controls">
-                        <input type="email" class="email" placeholder="Email" name="email">
+                    <div class="col-md-12">
+                        <div class="col-md-5">Email ID<span class="pull-right">:</span></div>
+                        <div class="col-md-6">
+                            <input type="text" placeholder="Email ID" ng-model="contact.email" name="email" required validate-email>
+                            <span ng-show="submitted||contactForm.email.$dirty">
+                            <span class="error-message" ng-show="contactForm.email.$error.required"><span>Required</span></span>
+                            <span class="error-message" ng-show="contactForm.email.$error.validateEmail"><span>Invalid&nbsp;Email</span></span>
+                            </span>
+                        </div>
                     </div>
                 </div>
                 <div class="form-group">
-                    <div class="controls">
-                        <input type="text" class="requiredField" placeholder="Subject" name="subject">
+                    <div class="col-md-12">
+                        <div class="col-md-5">PhoneNumber<span class="pull-right">:</span></div>
+                        <div class="col-md-6">
+                            <input type="text" placeholder="PhoneNumber" ng-model="contact.phone" name="phoneNumber" required validate-phone-number>
+                            <span ng-show="submitted||contactForm.phoneNumber.$dirty">
+                            <span class="error-message" ng-show="contactForm.phoneNumber.$error.required"><span>Required</span></span>
+                            <span class="error-message" ng-show="contactForm.phoneNumber.$error.validatePhoneNumber"><span>Invalid&nbsp;Number</span></span> </span> </span>
+                        </div>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <div class="controls">
-                        <textarea rows="7"  placeholder="Message" name="message"></textarea>
-                    </div>
-                </div>
+                    <div class="col-md-12">
+                        <div class="col-md-5">Message Text<span class="pull-right">:</span></div>
+                        <div class="col-md-6">
+                            <textarea rows="7" placeholder="MessageText" ng-model="contact.message" name="message" required maxlength="250"></textarea>
+                             <span ng-show="submitted||contactForm.message.$dirty">
+                            <span class="error-message" ng-show="contactForm.message.$error.required" style="bottom: 55px;"><span>Required</span></span>
 
-                <button type="submit" id="submit" class="btn-system btn-large">Send</button><div id="success" style="color:#34495e;"></div>
-            </form>-->
+                           </span>
+                        </div>
+                  </div>
+                    </div>
+                <div class="col-md-12 text-center" style="margin-top: 3%" >
+                <button type="submit" class="btn-system btn-large" ng-click="submitted=true||doSendEmail()">Submit</button>
+           </div>
+            </form>
             <!-- End Contact Form -->
         </div>
+            </div>
 
         <div class="col-lg-4 col-md-5 col-sm-12 col-xs-12">
-            <!-- Classic Heading -->
+            <div class="col-md-12" style="margin-top:15%">
+            <img alt="" src="../../images/yellow-contact-us.png" width="85%" height="85%">
+            </div>
+            </div>
+</div>
+<!--
+        <div class="col-lg-4 col-md-5 col-sm-12 col-xs-12">
+            &lt;!&ndash; Classic Heading &ndash;&gt;
             <h4 class="classic-title"><span>Information</span></h4>
-            <!-- Some Info -->
-            <!--p>You can contact us from the below information!!!</p>
-            <!-- Divider -->
-            <!--div class="hr3 margin-bottom-15"></div-->
+            &lt;!&ndash; Some Info &ndash;&gt;
+            &lt;!&ndash;p>You can contact us from the below information!!!</p>
+            &lt;!&ndash; Divider &ndash;&gt;
+            &lt;!&ndash;div class="hr3 margin-bottom-15"></div&ndash;&gt;
 
-            <!-- Info - Icons List -->
+            &lt;!&ndash; Info - Icons List &ndash;&gt;
             <ul ng-if="contactUsDetails.streetaddress" class="icons-list remove-style">
                 <li>
                         <span class="col-lg-5 col-md-5 col-sm-4 col-xs-4 no-padding">
@@ -92,22 +142,26 @@
                 </li>
             </ul>
 
-            <!-- Divider -->
+            &lt;!&ndash; Divider &ndash;&gt;
             <div class="hr1 margin-bottom-15"></div>
 
-            <!-- Classic Heading-->
-            <!--<h4 class="classic-title"><span>Working Hours</span></h4>
+            &lt;!&ndash; Classic Heading&ndash;&gt;
+            &lt;!&ndash;<h4 class="classic-title"><span>Working Hours</span></h4>
 
             &lt;!&ndash; Info - List &ndash;&gt;
 				<ul class="list-unstyled">
 					<li><strong>Monday - Friday</strong> - 9am to 5pm</li>
 					<li><strong>Saturday</strong> - 9am to 2pm</li>
 					<li><strong>Sunday</strong> - Closed</li>
-				</ul>-->
+				</ul>&ndash;&gt;
 
-        </div>
+        </div>-->
 	</div>
 </div>
 <!-- End content -->
+
+
+
+
 
 <script type="text/javascript" src="../../js/script.js"></script>

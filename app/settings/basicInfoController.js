@@ -3,7 +3,7 @@
  */
 var adminApp = angular.module('adminApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate']);
 
-adminApp.controller('ContactUsController',['$scope','requestHandler','Flash','siteMenuService','$location',function($scope,requestHandler,Flash,siteMenuService,$location){
+adminApp.controller('ContactUsController',['$scope','requestHandler','Flash','siteMenuService','$location','$http',function($scope,requestHandler,Flash,siteMenuService,$location,$http){
 
     $scope.siteMenuList = siteMenuService;
     $.each($scope.siteMenuList,function(index,value){
@@ -12,6 +12,8 @@ adminApp.controller('ContactUsController',['$scope','requestHandler','Flash','si
         }
         else value.active = ""
     });
+
+
 
     /*VIEW ALL*/
     var original="";
@@ -133,7 +135,22 @@ adminApp.directive('myMap', function() {
 var commonApp = angular.module('commonApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate']);
 commonApp.controller('ContactUsDetailsController',['$scope','requestHandler','Flash',function($scope,requestHandler,Flash) {
 
-    // To Get the Contact Us details for user
+// To Send User Contact Detail to the Admin
+     $scope.doSendEmail=function(){
+
+         requestHandler.postRequest("sendSupportEmail/",$scope.contact).then(function(response){
+            $scope.contact=response.data;
+            successMessage(Flash,"User Details are Successfully Send");
+        }, function () {
+
+            errorMessage(Flash, "Please try again later!")
+        });
+           $scope.contactForm.$setPristine();
+            $scope.submitted=false;
+    };
+
+
+   /* // To Get the Contact Us details for user
     $scope.doGetContactUsDetails= function () {
         requestHandler.getRequest("contactus/","").then(function(response){
             $scope.contactUsDetails=response.data.Contactus[0];
@@ -145,7 +162,7 @@ commonApp.controller('ContactUsDetailsController',['$scope','requestHandler','Fl
     };
 
     //Display Contact Us details on load
-    $scope.doGetContactUsDetails();
+    $scope.doGetContactUsDetails();*/
 
 }]);
 
@@ -233,6 +250,19 @@ commonApp.directive('myMap', function() {
 
 var userApp = angular.module('userApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate']);
 userApp.controller('ContactUsDetailsController',['$scope','requestHandler','Flash',function($scope,requestHandler,Flash) {
+
+// To Send User Contact Detail to the Admin
+    $scope.doSendEmail=function(){
+      requestHandler.postRequest("sendSupportEmail/",$scope.contact).then(function(response){
+            $scope.contact=response.data;
+            successMessage(Flash,"User Details are Successfully Send");
+        }, function () {
+
+            errorMessage(Flash, "Please try again later!")
+        });
+        $scope.contactForm.$setPristine();
+        $scope.submitted=false;
+    };
 
     // To Get the Contact Us details for user
     $scope.doGetContactUsDetails= function () {
