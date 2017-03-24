@@ -14,8 +14,9 @@
     <div class="container">
         <div class="row">
                 <div class="col-md-12">
-                <div class="row"><a name="bmicalc">
-                        <h4 class="classic-title"><span>Know Your BMI</span></h4></a>
+                <div class="row">
+                    <a name="bmicalc">
+                    <h4 class="classic-title"><span>Know Your BMI</span></h4></a>
                     <div class="col-md-12 col-sm-12 col-xs-12 no-padding">
                         <div>
                             Body Mass Index, or BMI, is used to identify whether you are lying in a 
@@ -42,60 +43,60 @@
                                     </div>
                                 </div>
                             </div>
-                        <div class="col-md-12 col-sm-12 col-xs-12 no-padding">
-                            <div class="col-md-6 col-sm-12 col-xs-12 no-padding">
-                                <h5 class="col-md-4 col-sm-4 col-xs-12 margin-top-10">Height <sup class="text-red">*</sup></h5>
-                                <div ng-show="units==2">
-                                <div class="col-md-4 col-sm-4 col-xs-6">
-                                    <input class="calculator-input" name="feet" ng-model="feet" maxlength="2" ng-required="units==2">
-                                    <div class="text-count-position"><span class="text-unit">ft</span></div>
-                                    <div class="text-error-message">
-                                    <span ng-show="bmiSubmitted">
-                                        <span ng-show="calculateForm.feet.$error.required"><span>Required.</span></span>
-                                    </span>
-                                    </div>
-                                </div>
-                                <div class="col-md-4 col-sm-4 col-xs-6">
-                                    <input class="calculator-input" name="inches" ng-model="inches" maxlength="2" ng-required="units==2">
-                                    <div class="text-count-position"><span class="text-unit">in</span></div>
-                                    <div class="text-error-message">
-                                    <span ng-show="bmiSubmitted">
-                                        <span ng-show="calculateForm.inches.$error.required"><span>Required.</span></span>
-                                    </span>
-                                    </div>
-                                </div>
-                                </div>
-                                <div ng-show="units==1">
-                                    <div class="col-md-8 col-sm-8">
-                                        <input class="calculator-input" name="height" ng-model="height" maxlength="3" ng-required="units==1">
-                                        <div class="text-count-position"><span class="text-unit lbs">cm</span></div>
+                            <div class="col-md-12 col-sm-12 col-xs-12 no-padding">
+                                <div class="col-md-6 col-sm-12 col-xs-12 no-padding">
+                                    <h5 class="col-md-4 col-sm-4 col-xs-12 margin-top-10">Height <sup class="text-red">*</sup></h5>
+                                    <div ng-show="units==2">
+                                    <div class="col-md-4 col-sm-4 col-xs-6">
+                                        <input class="calculator-input" name="feet" ng-model="feet" maxlength="2" ng-required="units==2">
+                                        <div class="text-count-position"><span class="text-unit">ft</span></div>
                                         <div class="text-error-message">
                                         <span ng-show="bmiSubmitted">
-                                           <span ng-show="calculateForm.height.$error.required"><span>Required.</span></span>
+                                            <span ng-show="calculateForm.feet.$error.required"><span>Required.</span></span>
+                                        </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-4 col-xs-6">
+                                        <input class="calculator-input" name="inches" ng-model="inches" maxlength="2" ng-required="units==2">
+                                        <div class="text-count-position"><span class="text-unit">in</span></div>
+                                        <div class="text-error-message">
+                                        <span ng-show="bmiSubmitted">
+                                            <span ng-show="calculateForm.inches.$error.required"><span>Required.</span></span>
+                                        </span>
+                                        </div>
+                                    </div>
+                                    </div>
+                                    <div ng-show="units==1">
+                                        <div class="col-md-8 col-sm-8">
+                                            <input class="calculator-input" name="height" ng-model="height" maxlength="3" ng-required="units==1">
+                                            <div class="text-count-position"><span class="text-unit lbs">cm</span></div>
+                                            <div class="text-error-message">
+                                            <span ng-show="bmiSubmitted">
+                                               <span ng-show="calculateForm.height.$error.required"><span>Required.</span></span>
+                                            </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div ng-show="units==2">
+                                <div class="col-md-6 col-sm-12 no-padding">
+                                    <div class="hidden-lg hidden-md"><div class="margin-top-10"></div></div>
+                                    <h5 class="col-md-4 col-sm-4 margin-top-10">D O B<sup class="text-red">*</sup></h5>
+                                    <div class="col-md-8 col-sm-8">
+                                        <div class="input-group">
+                                        <input type="text" name='dob' class="search-input" id="dobForBMI" date-options="dateOptions" date-validation-us ng-model="dob" placeholder="mm/dd/yyyy" required />
+                                        <span class="input-group-addon" id="dobIcon">
+                                            <span class="glyphicon glyphicon-calendar"></span>
+                                        </span>
+                                        </div>
+                                        <div class="text-error-message">
+                                        <span ng-show="bmiSubmitted">
+                                               <span ng-show="calculateForm.dob.$error.invalidDate">Invalid date.</span>
+                                               <span ng-show="calculateForm.dob.$error.required"><span>Please enter a valid date.</span></span>
                                         </span>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div ng-show="units==2">
-                            <div class="col-md-6 col-sm-12 no-padding">
-                                <div class="hidden-lg hidden-md"><div class="margin-top-10"></div></div>
-                                <h5 class="col-md-4 col-sm-4 margin-top-10">D O B<sup class="text-red">*</sup></h5>
-                                <div class="col-md-8 col-sm-8">
-                                    <div class="input-group">
-                                    <input type="text" name='dob' class="search-input" id="dobForBMI" date-options="dateOptions" date-validation-us ng-model="dob" placeholder="mm/dd/yyyy" required />
-                                    <span class="input-group-addon" id="dobIcon">
-                                        <span class="glyphicon glyphicon-calendar"></span>
-                                    </span>
-                                    </div>
-                                    <div class="text-error-message">
-                                    <span ng-show="bmiSubmitted">
-                                           <span ng-show="calculateForm.dob.$error.invalidDate">Invalid date.</span>
-                                           <span ng-show="calculateForm.dob.$error.required"><span>Please enter a valid date.</span></span>
-                                    </span>
-                                    </div>
-                                </div>
-                            </div>
                             </div>
                             <div ng-show="units==1">
                             <div class="col-md-6 col-sm-12 no-padding">

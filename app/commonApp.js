@@ -559,8 +559,7 @@ commonApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
 
 //Internal Login Details
 commonApp.controller('LoginController',['$scope','requestHandler','Flash','$window','$location','$element','FeedbackService','$timeout',function($scope,requestHandler,Flash,$window,$location,$element,FeedbackService,$timeout){
-
-    $scope.hideValue=1;
+ $scope.hideValue=1;
 
     $scope.getSocialMediaDetails=function(){
         requestHandler.getRequest("contactus/","").then(function(response){
@@ -574,6 +573,7 @@ commonApp.controller('LoginController',['$scope','requestHandler','Flash','$wind
         $scope.getSocialMediaDetails();
     };
 
+     $scope.init();
     $scope.$on('$routeChangeStart', function(next, current) {
         $scope.activeClass={};
         var page = $location.url().substr(1);

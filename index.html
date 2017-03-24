@@ -73,215 +73,190 @@
 
 <!-- Full Body Container -->
 <div id="container" class="boxed-page" ng-controller="LoginController">
-<!-- Start Header Section -->
-<div class="hidden-header"></div>
-<header class="clearfix">
-    <!-- Start  Logo & Naviagtion  -->
-    <div class="navbar navbar-default navbar-top">
-        <div class="container">
-            <div class="navbar-header">
-                <!-- Stat Toggle Nav Link For Mobiles -->
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <i class="fa fa-bars"></i>
-                </button>
-                <!-- End Toggle Nav Link For Mobiles -->
-                <a class="navbar-brand" href="">
-                    <img class="hidden-xs" width="209" height="57" alt="" src="images/cyber-logo.png">
-                    <img class="hidden-md hidden-lg hidden-sm" width="180" height="49" alt="" src="images/cyber-logo-small.png">
-                </a>
-            </div>
-            <div class="navbar-collapse collapse">
-                <!-- Start Navigation List -->
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a class="active" href="">Home</a></li>
-                    <li><a class="{{activeClass.healthy}}" href="views/home/#/healthy-tips"><span class="highlight-menu-item">Healthy Living</span></a></li>
-                    <li class="social-list remove-style">
-                        <a class="login itl-tooltip modal_trigger"  data-ng-click="reset()" data-placement="bottom" title="Login / Register" href="#modal">Login / Register</a>
-                    </li>
-                </ul>
-                <!-- End Navigation List -->
+    <!-- Start Header Section -->
+    <div class="hidden-header"></div>
+    <header class="clearfix">
+        <!-- Start  Logo & Naviagtion  -->
+        <div class="navbar navbar-default navbar-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <!-- Stat Toggle Nav Link For Mobiles -->
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <i class="fa fa-bars"></i>
+                    </button>
+                    <!-- End Toggle Nav Link For Mobiles -->
+                    <a class="navbar-brand" href="">
+                        <img class="hidden-xs" width="209" height="57" alt="" src="images/cyber-logo.png">
+                        <img class="hidden-md hidden-lg hidden-sm" width="180" height="49" alt="" src="images/cyber-logo-small.png">
+                    </a>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <!-- Start Navigation List -->
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a class="active" href="">Home</a></li>
+                        <li><a class="{{activeClass.healthy}}" href="views/home/#/healthy-tips"><span class="highlight-menu-item">Healthy Living</span></a></li>
+                        <li class="social-list remove-style">
+                            <a class="login itl-tooltip modal_trigger"  data-ng-click="reset()" data-placement="bottom" title="Login / Register" href="#modal">Login / Register</a>
+                        </li>
+                    </ul>
+                    <!-- End Navigation List -->
+                </div>
             </div>
         </div>
-    </div>
-    <!-- End Header Logo & Naviagtion -->
-</header>
-
-<!-- delete section popup-->
-<div id="section-modal" class="popupContainer width-28" style="display:none;left: 36%!important">
-    <header class="popupHeader width-100">
-        <span class="header_title">Alert</span>
-        <span class="modal_close"><i class="fa fa-times"></i></span>
     </header>
+    <!-- End Header Logo & Naviagtion -->
 
-    <section class="popupBody">
-        <!-- Register Form -->
-        <div class="common_model">
-            <div class="text-center"><img width="118" height="100" src="images/alert-ring.png"/></div><br/>
-            <h5 class="text-center">Your session has been expired<br/>Please login again!!!</h5>
-            <div class="action_btns margin-top-20 margin-bottom-10">
-                <div class="one_half"><a href="#modal"  data-ng-click="reset()" class="btn btn_red modal_trigger relogin">OK</a></div>
-                <div class="one_half last"><a onclick="return false;" class="btn back_btn modal_close">Cancel</a></div>
+    <!-- Login Alert section popup-->
+    <div id="section-modal" class="popupContainer width-28" style="display:none;left: 36%!important">
+        <header class="popupHeader width-100">
+            <span class="header_title">Alert</span>
+            <span class="modal_close"><i class="fa fa-times"></i></span>
+        </header>
+        <section class="popupBody">
+            <!-- Register Form -->
+            <div class="common_model">
+                <div class="text-center"><img width="118" height="100" src="images/alert-ring.png"/></div><br/>
+                <h5 class="text-center">Your session has been expired<br/>Please login again!!!</h5>
+                <div class="action_btns margin-top-20 margin-bottom-10">
+                    <div class="one_half"><a href="#modal"  data-ng-click="reset()" class="btn btn_red modal_trigger relogin">OK</a></div>
+                    <div class="one_half last"><a onclick="return false;" class="btn back_btn modal_close">Cancel</a></div>
+                </div>
             </div>
-        </div>
-    </section>
-</div>
+        </section>
+    </div>
 
-<div ng-include src="'views/common/login-popup.html'"></div>
+    <div ng-include src="'views/common/login-popup.html'"></div>
 
-<!-- Start Purchase Section -->
-<div class="section purchase">
-    <div class="container slider-hight">
-        <div class="col-md-7 col-sm-9 col-xs-10">
-            <div id="text-slideshow">
-                <div class="slideshow-element">
-                    <div class="slider-font margin-bottom-20" style="padding-top: 60px">
-                        <span class="hidden-xs"><br/></span>
-                        <h1><span class="small">YOU'VE COME TO THE RIGHT PLACE.<br/>Determine a healthy life-style for prolonging your life.</span></h1><br/><br/><br/>
-                        <div class="divH1 h4 margin-top-20" style="padding-top: 20px">
-                            <br/>
-                            Just record your weight. We,<br/><br/>
-                            <div class="col-md-12">
+    <!-- Start Purchase Section -->
+    <div class="section purchase">
+        <div class="container slider-hight">
+            <div class="col-md-7 col-sm-9 col-xs-10">
+                <div id="text-slideshow">
+                    <div class="slideshow-element">
+                        <div class="slider-font margin-bottom-20" style="padding-top: 60px">
+                            <span class="hidden-xs"><br/></span>
+                            <h1><span class="small">YOU'VE COME TO THE RIGHT PLACE.<br/>Determine a healthy life-style for prolonging your life.</span></h1><br/><br/><br/>
+                            <div class="divH1 h4 margin-top-20" style="padding-top: 20px">
+                                <br/>
+                                Just record your weight. We,<br/><br/>
                                 <div class="col-md-12">
-                                <ul>
-                                    <li>Reveal your daily needed calorie budget. Grab it and Get Started!!</li>
-                                    <li>Provide you a better food and exercise catalogue.</li>
-                                    <li>Asist you with in-time pertinent advice from our knowledgable experts.</li>
-                                </ul>
+                                    <div class="col-md-12">
+                                        <ul>
+                                            <li>Reveal your daily needed calorie budget. Grab it and Get Started!!</li>
+                                            <li>Provide you a better food and exercise catalogue.</li>
+                                            <li>Asist you with in-time pertinent advice from our knowledgable experts.</li>
+                                        </ul>
                                     </div>
+                                </div>
                             </div>
-
                         </div>
                     </div>
-                </div>
-                <div class="slideshow-element">
-                    <img width="100%" height="auto" src="images/responsive.png"/>
-                    <div class="slider-font">
-                        <h1>RECORD YOUR DAILY INTAKE AND WORKOUT ROUTINES ANYWHERE AT ANYTIME!</h1>
+                    <div class="slideshow-element">
+                        <img width="100%" height="auto" src="images/responsive.png"/>
+                        <div class="slider-font">
+                            <h1>RECORD YOUR DAILY INTAKE AND WORKOUT ROUTINES ANYWHERE AT ANYTIME!</h1>
+                        </div>
                     </div>
+                    <div class="slideshow-element">
+                        <h1 class="slider-font margin-bottom-20">
+                            <span class="hidden-xs"><br/></span>
+                            <span>ACHIEVE YOUR HEALTH AND FITNESS  GOAL WITH A HEALTHY AND NUTIROTIONAL FOOD HABIT.<span style="font-family: Tahoma, Verdana, Segoe, sans-serif;"><br/>
+                            <span class="h4"><br/>
+                                Register with us! we wil take care of you.
+                            </span>
+                            <a href="" class="btn-system btn-large" onclick="$('.loginNow').click()"><i class="fa fa-user"></i> Register Now</a>
+                        </h1>
                     </div>
-                <div class="slideshow-element">
-                    <h1 class="slider-font margin-bottom-20">
-                        <span class="hidden-xs"><br/></span>
-                        <span>ACHIEVE YOUR HEALTH AND FITNESS  GOAL WITH A HEALTHY AND NUTIROTIONAL FOOD HABIT.<span style="font-family: Tahoma, Verdana, Segoe, sans-serif;"><br/>
-                        <span class="h4"><br/>
-                            Register with us! we wil take care of you.
-                        </span>
-                        <a href="" class="btn-system btn-large" onclick="$('.loginNow').click()"><i class="fa fa-user"></i> Register Now</a>
-                    </h1>
                 </div>
             </div>
-        </div>
+
+            <div class="section-video-content text-center hidden">
+                <h1 class="fittext wite-text uppercase">
+                    Modern way of Digital Weight <br/>Loss Solution for this modern world
+                </h1>
+
+                <!-- End Animations Text -->
 
 
+                <!-- Start Buttons -->
+                <a class="btn-system btn-large"><i class="fa fa-download"></i> Get Our Mobile App Soon</a>
 
-        <!-- Start Video Section Content -->
-        <!--<div class="col-md-7">
-            <img width="100%" height="auto" src="images/responsive.png"/>
-            <h1 class=" wite-text uppercase text-center">
-                Modern way of Digital Weight <br/>Loss Solution for this modern world
-            </h1>
-        </div>-->
-        <div class="section-video-content text-center hidden">
+            </div>
+            <!-- End Section Content -->
+        </div><!-- .container -->
+    </div>
+    <!-- End Purchase Section -->
 
-            <!-- Start Animations Text -->
-            <!--<h1 class="fittext wite-text uppercase tlt">
-                      <span class="texts">
-                        <span>Modern</span>
-                        <span>Clean</span>
-                        <span>Awesome</span>
-                        <span>Cool</span>
-                        <span>Great</span>
-                      </span>
-                Margo is Ready for <br/>Business, Agency <strong>or</strong> Creative Portfolios
-            </h1>-->
-            <h1 class="fittext wite-text uppercase">
-                Modern way of Digital Weight <br/>Loss Solution for this modern world
-            </h1>
+    <!-- Start Services Section -->
+    <div class="section service">
+        <div class="container">
+            <div class="row">
+                <div class="page-content">
+                    <div class="col-md-8 col-lg-8 col-sm-8 col-xs-12">
+                    <!-- Classic Heading -->
+                    <h4 class="classic-title"><span>How it works</span></h4>
 
-            <!-- End Animations Text -->
-
-
-            <!-- Start Buttons -->
-            <a class="btn-system btn-large"><i class="fa fa-download"></i> Get Our Mobile App Soon</a>
-
-        </div>
-        <!-- End Section Content -->
-
-    </div><!-- .container -->
-</div>
-<!-- End Purchase Section -->
-
-<!-- Start Services Section -->
-<div class="section service">
-    <div class="container">
-        <div class="row">
-            <div class="page-content">
-                <div class="col-md-8 col-lg-8 col-sm-8 col-xs-12">
-                <!-- Classic Heading -->
-                <h4 class="classic-title"><span>How it works</span></h4>
-
-                    <div class="row">
-                    <!-- Start Service Icon 1 -->
-                        <div class="col-md-6 col-lg-6 col-sm-6 col-xs-12 service-box service-icon-left-more">
-                            <div class="service-icon">
-                                <i class="fa fa-sign-in icon-medium"></i>
+                        <div class="row">
+                            <!-- Start Service Icon 1 -->
+                            <div class="col-md-6 col-lg-6 col-sm-6 col-xs-12 service-box service-icon-left-more">
+                                <div class="service-icon">
+                                    <i class="fa fa-sign-in icon-medium"></i>
+                                </div>
+                                <div class="service-content">
+                                    <h4 class="text-orange text-bold">1. Become a Member - It's Free</h4>
+                                    <p> 
+                                        Join today and start enjoying our valuable features and get exclusive 
+                                        access to our food and exercise diary.
+                                    </p>
+                                </div>
                             </div>
-                            <div class="service-content">
-                                <h4 class="text-orange text-bold">1. Become a Member - It's Free</h4>
-                                <p>
-                                    Join today and start enjoying our valuable features and get exclusive 
-                                    access to our food and exercise diary.
-                                </p>
+                            <!-- End Service Icon 1 -->
+
+                            <!-- Start Service Icon 2 -->
+                            <div class="col-md-6 col-lg-6 col-sm-6 col-xs-12 service-box service-icon-left-more">
+                                <div class="service-icon">
+                                    <i class="fa fa-pencil icon-medium"></i>
+                                </div>
+                                <div class="service-content">
+                                    <h4 class="text-orange text-bold">2. Update Your Profile</h4>
+                                    <p>
+                                        Updating your profile and demography details to become more
+                                        comfortable with the system.
+                                    </p>
+                                </div>
                             </div>
+                            <!-- End Service Icon 2 -->
                         </div>
-                    <!-- End Service Icon 1 -->
 
-                    <!-- Start Service Icon 2 -->
-                    <div class="col-md-6 col-lg-6 col-sm-6 col-xs-12 service-box service-icon-left-more">
-                        <div class="service-icon">
-                            <i class="fa fa-pencil icon-medium"></i>
-                        </div>
-                        <div class="service-content">
-                            <h4 class="text-orange text-bold">2. Update Your Profile</h4>
-                            <p>
-                                Updating your profile and demography details to become more
-                                comfortable with the system.
-                            </p>
-                        </div>
-                    </div>
-                    <!-- End Service Icon 2 -->
+                        <div class="row">
+                            <!-- Start Service Icon 3 -->
+                            <div class="col-md-6 col-lg-6 col-sm-6 col-xs-12 service-box service-icon-left-more">
+                                <div class="service-icon">
+                                    <i class="fa fa-refresh icon-medium"></i>
+                                </div>
+                                <div class="service-content">
+                                    <h4 class="text-orange text-bold">3. Daily Updates</h4>
+                                    <p>Keep updated your daily Food Intakes and Workouts.</p>
+                                </div>
+                            </div>
+                            <!-- End Service Icon 3 -->
 
-                    </div>
-
-                    <div class="row">
-                    <!-- Start Service Icon 3 -->
-                        <div class="col-md-6 col-lg-6 col-sm-6 col-xs-12 service-box service-icon-left-more">
-                            <div class="service-icon">
-                                <i class="fa fa-refresh icon-medium"></i>
+                            <!-- Start Service Icon 4 -->
+                            <div class="col-md-6 col-lg-6 col-sm-6 col-xs-12 service-box service-icon-left-more">
+                                <div class="service-icon">
+                                    <i class="fa fa-bullseye icon-medium"></i>
+                                </div>
+                                <div class="service-content">
+                                    <h4 class="text-orange text-bold">4. Set up your Goal</h4>
+                                    <p>Create your own individual goals and monitor your daily progress.</p>
+                                </div>
                             </div>
-                            <div class="service-content">
-                                <h4 class="text-orange text-bold">3. Daily Updates</h4>
-                                <p>Keep updated your daily Food Intakes and Workouts.</p>
-                            </div>
+                            <!-- End Service Icon 4 -->
                         </div>
-                        <!-- End Service Icon 3 -->
-
-                        <!-- Start Service Icon 4 -->
-                        <div class="col-md-6 col-lg-6 col-sm-6 col-xs-12 service-box service-icon-left-more">
-                            <div class="service-icon">
-                                <i class="fa fa-bullseye icon-medium"></i>
-                            </div>
-                            <div class="service-content">
-                                <h4 class="text-orange text-bold">4. Set up your Goal</h4>
-                                <p>Create your own individual goals and monitor your daily progress.</p>
-                            </div>
-                        </div>
-                        <!-- End Service Icon 4 -->
-                    </div>
 
                     <div class="row">
 
-                    <!-- Start Service Icon 5 -->
+                        <!-- Start Service Icon 5 -->
                         <div class="col-md-6 col-lg-6 col-sm-6 col-xs-12 service-box service-icon-left-more">
                             <div class="service-icon">
                                 <i class="fa fa-user-plus icon-medium"></i>
@@ -386,6 +361,7 @@
             </div>
         </div>
     </div>
+
     <!-- End Footer Section -->
 <div id="form">
     <p id="feedback_button">
@@ -440,7 +416,7 @@
 
 <!-- Start Footer Section -->
 <footer>
-    <div class="container">
+    <div class="container" ng-controller="LoginController">
         <div class="row footer-widgets">
     
             <!-- Start Twitter Widget -->
