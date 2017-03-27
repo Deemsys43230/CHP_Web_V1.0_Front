@@ -14,8 +14,7 @@ adminApp.controller('ContactUsController',['$scope','requestHandler','Flash','si
     });
 
 
-
-    /*VIEW ALL*/
+/*VIEW ALL*/
     var original="";
   $scope.copyOrginal_contactUs=function(contactUs){
         $scope.contactUs=contactUs;
@@ -49,7 +48,27 @@ adminApp.controller('ContactUsController',['$scope','requestHandler','Flash','si
     };
     $scope.doGetContactUs();
 
+
+
+
+// To Send User Contact Detail to the Admin
+    $scope.doSendEmail=function(){
+
+        requestHandler.postRequest("sendSupportEmail/",$scope.contact).then(function(response){
+            $scope.contact=response.data;
+            successMessage(Flash,"User Details are Successfully Send");
+        }, function () {
+
+            errorMessage(Flash, "Please try again later!")
+        });
+        $scope.contactForm.$setPristine();
+        $scope.submitted=false;
+    };
+
 }]);
+
+
+
 
 adminApp.directive('myMap', function() {
     // directive link function
@@ -365,6 +384,21 @@ userApp.directive('myMap', function() {
 
 var coachApp = angular.module('coachApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate']);
 coachApp.controller('ContactUsDetailsController',['$scope','requestHandler','Flash',function($scope,requestHandler,Flash) {
+
+
+    // To Send User Contact Detail to the Admin
+    $scope.doSendEmail=function(){
+
+        requestHandler.postRequest("sendSupportEmail/",$scope.contact).then(function(response){
+            $scope.contact=response.data;
+            successMessage(Flash,"User Details are Successfully Send");
+        }, function () {
+
+            errorMessage(Flash, "Please try again later!")
+        });
+        $scope.contactForm.$setPristine();
+        $scope.submitted=false;
+    };
 
     // To Get the Contact Us details for user
     $scope.doGetContactUsDetails= function () {

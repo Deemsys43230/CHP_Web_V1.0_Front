@@ -1643,6 +1643,65 @@ adminApp.directive('validateEmail', function () {
     }
   };
 });
+
+
+
+
+//Check For Only Alphabets with space
+adminApp.directive('validateAlphaWithSpace', function() {
+    var ALPHA_WITH_SPACE = /^ *([a-zA-Z]+ ?)+ *$/;
+
+    return {
+        require: 'ngModel',
+        restrict: '',
+        link: function(scope, elm, attrs, ctrl) {
+            // only apply the validator if ngModel is present and Angular has added the Integer validator
+            ctrl.$validators.validateAlphaWithSpace = function(modelValue) {
+                return  ctrl.$isEmpty(modelValue) || ALPHA_WITH_SPACE.test(modelValue);
+            };
+        }
+    };
+});
+
+
+//Check for Email Validation
+adminApp.directive('validateEmail', function() {
+    var EMAIL_ID = /^[_A-Za-z0-9-]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9-]+)*(\.[A-Za-z]{2,5})$/;
+
+    return {
+        require: 'ngModel',
+        restrict: '',
+        link: function(scope, elm, attrs, ctrl) {
+            // only apply the validator if ngModel is present and Angular has added the Integer validator
+            ctrl.$validators.validateEmail = function(modelValue) {
+                return  ctrl.$isEmpty(modelValue) || EMAIL_ID.test(modelValue);
+            };
+        }
+    };
+});
+
+
+//Check For PhoneNumber Validation
+adminApp.directive('validatePhoneNumber', function() {
+    var USA_MOB_EXPR = /^(\([0-9]{3}\) |[0-9]{3}-)[0-9]{3}-[0-9]{4}$/;
+    var USA_MOB_EXPR_NOSPACE = /^(\([0-9]{3}\)|[0-9]{3}-)[0-9]{3}-[0-9]{4}$/;
+    var USA_MOB_EXPR_NO = /^[0-9]{10}$/;
+    return {
+        require : 'ngModel',
+        restrict : '',
+        link : function(scope, elm, attrs, ngModel) {
+            ngModel.$validators.validatePhoneNumber = function(modelValue) {
+                if (modelValue == "" || modelValue == undefined) {
+                    return true;
+                } else {
+                    return USA_MOB_EXPR_NO.test(modelValue);
+                }
+
+            };
+        }
+    };
+});
+
 //Check For URL Validation
 adminApp.directive('validateUrl', function () {
   var URL_REGEXP = /^http(s)?:\/\/(www\.)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/;
