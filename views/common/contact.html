@@ -13,9 +13,9 @@
                 <input type="hidden" name="formValid" id="formValid" data-ng-model="formError" ng-value="contactForm.$valid">
                 <div class="form-group">
                     <div class="col-md-12">
-                        <div class="col-md-5"> FirstName<span class="pull-right">:</span></div>
-                        <div class="col-md-6">
-                            <input type="text" placeholder="FirstName" ng-model="contact.firstname"  name="firstname" required validate-alpha-with-space>
+                        <div class="col-md-5" style="padding-left: 150px;!important"> First name<span class="pull-right">:</span></div>
+                        <div class="col-md-7">
+                            <input type="text" placeholder="First name" ng-model="contact.firstname"  name="firstname" required validate-alpha-with-space>
                              <span ng-show="submitted||contactForm.firstname.$dirty">
                              <span class="error-message" ng-show="contactForm.firstname.$error.required"><span>Required</span></span>
                              <span class="error-message" ng-show="contactForm.firstname.$error.validateAlphaWithSpace"><span>Invalid&nbsp;Name</span></span>
@@ -25,8 +25,8 @@
                 </div>
                 <div class="form-group">
                     <div class="col-md-12">
-                        <div class="col-md-5"> LastName<span class="pull-right">:</span></div>
-                        <div class="col-md-6"><input type="text" placeholder="LastName" ng-model="contact.lastname" name="lastname" required validate-alpha-with-space>
+                        <div class="col-md-5" style="padding-left: 150px;!important"> Last name<span class="pull-right">:</span></div>
+                        <div class="col-md-7"><input type="text" placeholder="Last name" ng-model="contact.lastname" name="lastname" required validate-alpha-with-space>
                             <span ng-show="submitted||contactForm.lastname.$dirty">
                             <span class="error-message" ng-show="contactForm.lastname.$error.required"><span>Required</span></span>
                             <span class="error-message" ng-show="contactForm.lastname.$error.validateAlphaWithSpace"><span>Invalid&nbsp;Name</span></span>
@@ -36,8 +36,8 @@
                 </div>
                 <div class="form-group">
                     <div class="col-md-12">
-                        <div class="col-md-5">Email ID<span class="pull-right">:</span></div>
-                        <div class="col-md-6">
+                        <div class="col-md-5" style="padding-left: 150px;!important">Email ID<span class="pull-right">:</span></div>
+                        <div class="col-md-7">
                             <input type="text" placeholder="Email ID" ng-model="contact.email" name="email" required validate-email>
                             <span ng-show="submitted||contactForm.email.$dirty">
                             <span class="error-message" ng-show="contactForm.email.$error.required"><span>Required</span></span>
@@ -48,9 +48,9 @@
                 </div>
                 <div class="form-group">
                     <div class="col-md-12">
-                        <div class="col-md-5">PhoneNumber<span class="pull-right">:</span></div>
-                        <div class="col-md-6">
-                            <input type="text" placeholder="PhoneNumber" ng-model="contact.phone" name="phoneNumber" required validate-phone-number>
+                        <div class="col-md-5" style="padding-left: 150px;!important">Phone number<span class="pull-right">:</span></div>
+                        <div class="col-md-7">
+                            <input type="text" placeholder="Phone number" ng-model="contact.phone" name="phoneNumber" required validate-phone-number>
                             <span ng-show="submitted||contactForm.phoneNumber.$dirty">
                             <span class="error-message" ng-show="contactForm.phoneNumber.$error.required"><span>Required</span></span>
                             <span class="error-message" ng-show="contactForm.phoneNumber.$error.validatePhoneNumber"><span>Invalid&nbsp;Number</span></span> </span> </span>
@@ -60,9 +60,9 @@
 
                 <div class="form-group">
                     <div class="col-md-12">
-                        <div class="col-md-5">Message Text<span class="pull-right">:</span></div>
-                        <div class="col-md-6">
-                            <textarea rows="7" placeholder="MessageText" ng-model="contact.message" name="message" required maxlength="250"></textarea>
+                        <div class="col-md-5" style="padding-left: 150px;!important">Message<span class="pull-right">:</span></div>
+                        <div class="col-md-7">
+                            <textarea rows="7" placeholder="Message" ng-model="contact.message" name="message" required maxlength="250"></textarea>
                              <span ng-show="submitted||contactForm.message.$dirty">
                             <span class="error-message" ng-show="contactForm.message.$error.required" style="bottom: 55px;"><span>Required</span></span>
 
