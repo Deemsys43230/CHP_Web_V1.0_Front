@@ -56,7 +56,7 @@ adminApp.controller('ContactUsController',['$scope','requestHandler','Flash','si
 
         requestHandler.postRequest("sendSupportEmail/",$scope.contact).then(function(response){
             $scope.contact=response.data;
-            successMessage(Flash,"User Details are Successfully Send");
+            successMessage(Flash,"Thanks For Contacting Us");
         }, function () {
 
             errorMessage(Flash, "Please try again later!")
@@ -159,7 +159,7 @@ commonApp.controller('ContactUsDetailsController',['$scope','requestHandler','Fl
 
          requestHandler.postRequest("sendSupportEmail/",$scope.contact).then(function(response){
             $scope.contact=response.data;
-            successMessage(Flash,"User Details are Successfully Send");
+            successMessage(Flash,"Thanks For Contacting Us");
         }, function () {
 
             errorMessage(Flash, "Please try again later!")
@@ -274,7 +274,7 @@ userApp.controller('ContactUsDetailsController',['$scope','requestHandler','Flas
     $scope.doSendEmail=function(){
       requestHandler.postRequest("sendSupportEmail/",$scope.contact).then(function(response){
             $scope.contact=response.data;
-            successMessage(Flash,"User Details are Successfully Send");
+            successMessage(Flash,"Thanks For Contacting Us");
         }, function () {
 
             errorMessage(Flash, "Please try again later!")
@@ -391,7 +391,7 @@ coachApp.controller('ContactUsDetailsController',['$scope','requestHandler','Fla
 
         requestHandler.postRequest("sendSupportEmail/",$scope.contact).then(function(response){
             $scope.contact=response.data;
-            successMessage(Flash,"User Details are Successfully Send");
+            successMessage(Flash,"Thanks For Contacting Us");
         }, function () {
 
             errorMessage(Flash, "Please try again later!")
