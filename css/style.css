@@ -15888,3 +15888,10 @@ a.button-wrap:hover li{
 }
 
 /* @end */
+/*Seal Css*/
+.secure-seal{
+    padding:10px 10px 10px 10px;
+    width:209px;
+    background-color:#ddd;
+    border-radius:5px;
+}
