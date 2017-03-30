@@ -47,7 +47,7 @@ module.exports=function(grunt){
                },
                files: [{
                    expand:true,
-                   src: ['views/**/*.html','index.html','!views/user/views/dashboard.html'],   // Actual patterns to match
+                   src: ['views/**/*.html','index.html','!views/user/views/dashboard.html','!views/common/disease-control-tips-3.html'],   // Actual patterns to match
                    dest: 'CyberHealth/'
 
                }]

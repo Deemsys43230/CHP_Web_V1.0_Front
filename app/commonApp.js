@@ -604,7 +604,21 @@ commonApp.controller('LoginController',['$scope','requestHandler','Flash','$wind
         };
     };
 
-
+    //Send Email forgot password
+    $scope.doSendEmail=function(){
+        requestHandler.postRequest("forgotPassword/",{"emailid":$scope.emailid,"secretanswer":"","option":1}).then(function(response){
+            if(response.data.Response_status==2){
+                $(".reset_password").hide();
+                $(".user_register").hide();
+                $(".secret_question").hide();
+                $(".user_register1").hide();
+                $(".new_password_form").hide();
+                $(".user_login").show();
+                $(".header_title").text('Login');
+                successMessage(Flash,"Please Check your E-mail ID!");
+            }
+        });
+    };
 
     //Login
     $scope.doLogin=function(){

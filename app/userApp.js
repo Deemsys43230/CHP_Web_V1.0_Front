@@ -52,6 +52,31 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
         $routeProvider.
             when('/dashboard', {
                 templateUrl: 'views/dashboard.html',
+                fromGoal:false,
+                resolve: {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'userApp',
+                            files:[
+                                '../../css/custom-inputs.css',
+                                '../../css/vertical_tab.css',
+                                '../../plugin/popup/style.css',
+                                '../../css/ngPercentageCircle.css',
+                                '../../app/userDashboard/ngPercentageCircle.js',
+                                '../../app/userDashboard/userDashboardService.js',
+                                '../../app/userDashboard/userDashboardController.js',
+                                '../../plugin/dateRange/daterangepicker.css',
+                                '../../plugin/dateRange/daterangepicker.js',
+                                '../../css/horizon-swiper.min.css',
+                                '../../css/horizon-theme.min.css',
+                                '../../js/horizon-swiper.min.js'
+                            ]
+                        })}]},
+                controller:'UserDashboardController'
+            }).
+            when('/individualGoal', {
+                templateUrl: 'views/dashboard.html',
+                fromGoal:true,
                 resolve: {
                     loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
@@ -711,8 +736,7 @@ userApp.controller("UserInitialController",['$scope','requestHandler','$location
         });
         }
         else if(pathVar==2){
-          //  $location.path("dashboard");
-
+               // $location.path("dashboard");
         }
     };
 
