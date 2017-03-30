@@ -1006,7 +1006,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         requestHandler.postRequest("user/weightlogInsertorUpdate/",{"date":date,"weight":weight}).then(function(response){
             if(date==selectedDate && $scope.weightGraph){
                 $window.currentweight = weight;
-                refreshGraph();
+                //refreshGraph();
                /*$scope.updateAverageGainSpent(date);*/
             }
             $scope.spinner=false;
