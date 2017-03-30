@@ -91,7 +91,7 @@
                                 <h5>Hip <sup class="text-red">*</sup> <small>(Inch)</small> <span class="pull-right">:</span></h5>
                             </div>
                             <div class="col-lg-4 col-md-5 col-sm-5 padding-right-0">
-                                <input class="demography_input" name="hip" ng-pattern=" /^\s*(?=.*[1-9])\d*(?:\.\d{0,8})?\s*$/" maxlength="2"  ng-model="demography.hip" required/>
+                                <input class="demography_input" name="hip" ng-pattern="/^[0-9]{1,8}$/" maxlength="2"  ng-model="demography.hip" required/>
                             <span ng-show="demographyForm.hip.$dirty&&demographyForm.hip.$invalid">
                                 <span class="error-message textarea-errormessage40" ng-show="demographyForm.hip.$error.required"><span>Required.</span></span>
                                 <span class="error-message textarea-errormessage40" ng-show="demographyForm.hip.$error.pattern"><span>Invalid&nbsp;Format.</span></span>
@@ -103,7 +103,7 @@
                                 <h5>Waist <sup class="text-red">*</sup> <small>(Inch)</small> <span class="pull-right">:</span></h5>
                             </div>
                             <div class="col-lg-4 col-md-5 col-sm-5 padding-right-0">
-                                <input class="demography_input" name="waist" ng-pattern="/^\s*(?=.*[1-9])\d*(?:\.\d{0,8})?\s*$/"maxlength="2"  ng-model="demography.waist" required/>
+                                <input class="demography_input" name="waist" ng-pattern="/^[0-9]{1,8}$/" maxlength="2"  ng-model="demography.waist" required/>
                             <span ng-show="demographyForm.waist.$dirty&&demographyForm.waist.$invalid">
                                 <span class="error-message textarea-errormessage40" ng-show="demographyForm.waist.$error.required"><span>Required.</span></span>
                                 <span class="error-message textarea-errormessage40" ng-show="demographyForm.waist.$error.pattern"><span>Invalid&nbsp;Format.</span></span>

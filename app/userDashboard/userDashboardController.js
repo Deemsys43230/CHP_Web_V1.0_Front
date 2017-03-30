@@ -823,6 +823,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
 
                     $window.currentweight = $scope.demography.weight;
                     $window.targetweight = $scope.goalDetails.targetweight;
+                    $window.unit=$scope.userProfile.unitPreference==1?"Kgs":"Lbs";
                     $scope.goal = {
                         status: 'view-goal'
                     };
@@ -1033,31 +1034,43 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         $scope.graph = {
             status: 'goal-graph'
         };
+
+        if($scope.userProfile.unitPreference==1){
+            $scope.unit="Kgs";
+        }
+        else if($scope.userProfile.unitPreference==2){
+            $scope.unit="Lbs";
+        }
         var monthNames= ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+        var titles={};
+        var budgetdate=[];
         requestHandler.postRequest("user/getWeightLogGraph/",{"startdate":$scope.goalDetails.startdate.toString(),"enddate":$scope.goalDetails.enddate.toString()}).then(function(response){
             $scope.weightlogGraph=response.data.Weight_logs;
             var weightLogs = [];
-            var dateRange=[];
             $.each($scope.weightlogGraph, function(index,value) {
                 if(value.userentry ==1){
-                var weightLog = [];
-                var date = value.date.split("/");
-                weightLog.push(monthNames[(date[1]-1)]+' '+date[0]);
-                weightLog.push(value.weight);
-                dateRange.push(monthNames[(date[1]-1)]+' '+date[0]);
-                weightLogs.push(weightLog);
+                    var weightLog = [];
+                    var date = value.date.split("/");
+                    weightLog.push(monthNames[(date[1]-1)]+' '+date[0]);
+                    weightLog.push(value.weight);
+                    budgetdate.push(monthNames[(date[1]-1)]+' '+date[0]);
+                    weightLogs.push(weightLog);
+
                 }
             });
+            titles.title="Goal Graph";
+            titles.name="Weight";
+            titles.suffix=" "+$scope.unit;
+            titles.yaxis="Weight (" + $scope.unit + ")";
+            titles.xaxis="Number of days";
+            $scope.drawGoalGraph(weightLogs,titles,budgetdate);
+
             $scope.weightGraphValue = weightLogs;
             $scope.weightGraph = limitToFilter($scope.weightGraphValue, 30);
-            console.log($scope.weightGraph);
-            $scope.dateRange= dateRange;
-            console.log($scope.dateRange);
         }, function () {
             errorMessage(Flash, "Please try again later!")
         });
     };
-
     $scope.deteteGoal=function(){
         $(function(){
             $("#lean_overlay").fadeTo(1000);
@@ -2158,6 +2171,55 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
     $scope.datePicker = function(){
         $("#main-date").click();
     };
+    $scope.drawGoalGraph=function(data,titles,data1){
+        console.log(data);
+        $('#goalGraph').highcharts({
+            title: {
+                text: titles.title
+            },
+            xAxis: {
+                title: {
+                    text: titles.xaxis
+                },
+
+                categories: data1
+            },
+            tooltip:{
+                enabled:true,
+                backgroundColor:'rgba(255, 255, 255, 1)',
+                borderWidth:1,
+                shadow:true,
+                style:{fontSize:'10px',padding:5,zIndex:500},
+                formatter:false,
+                valueSuffix: titles.suffix
+            },
+
+            yAxis: {
+                title: {
+                    text: titles.yaxis
+                },
+                plotLines: [{
+                    value: 0,
+                    width: 1,
+                    color: '#f8ba01'
+                }]
+            },
+            colors: [
+                '#f8ba01'
+            ],
+            exporting: {
+                enabled: false
+            },
+            credits: {
+                enabled: false
+            },
+            legend:{enabled:false},
+            series: [ {
+                name: titles.name,
+                data: data
+            }]
+        });
+    };
 
 
 
@@ -2435,7 +2497,7 @@ userApp.filter('trusted', ['$sce', function ($sce) {
  };
  });*/
 
-// Graph chart
+/*// Graph chart
 userApp.directive('hcGraph', function () {
     return {
         restrict: 'C',
@@ -2510,7 +2572,7 @@ userApp.directive('hcGraph', function () {
 
         }
     }
-});
+});*/
 
 // Graph chart
 userApp.directive('historyGraph', function () {
