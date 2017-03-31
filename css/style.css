@@ -5893,7 +5893,6 @@ ul.footer-nav li:first-child {
 
 ul.footer-nav li a {
     display: inline-block;
-    text-transform: uppercase;
     text-decoration: none;
     transition: all 0.2s ease-in-out;
     -moz-transition: all 0.2s ease-in-out;
