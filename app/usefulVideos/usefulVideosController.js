@@ -108,7 +108,7 @@ commonApp.directive('myYoutube',['$sce', function($sce) {
         link: function (scope) {
             scope.$watch('code',function (newVal) {
                 if (newVal) {
-                    scope.url = $sce.trustAsResourceUrl("http://www.youtube.com/embed/" + newVal+"?wmode=transparent;autoplay="+scope.autoplay);
+                    scope.url = $sce.trustAsResourceUrl("https://www.youtube.com/embed/" + newVal+"?wmode=transparent;autoplay="+scope.autoplay);
                 }
             });
         }
