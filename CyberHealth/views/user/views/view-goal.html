@@ -3,7 +3,8 @@
     };
     //-------------------------------------------------------
     Highcharts.setOptions({
-        credits:{enabled:false},
+
+ credits:{enabled:false},
         exporting:{enabled:false},
         legend:{enabled:false},
         title:{text:''},
@@ -31,7 +32,7 @@
             shadow:true,
             style:{fontSize:'10px',padding:2},
             formatter:function() {
-                return this.series.name + ": <strong>" + Highcharts.numberFormat(this.y,2) +" Kgs"+ "</strong>";
+                return this.series.name + ": <strong>" + Highcharts.numberFormat(this.y,2) + " "+ unit + "</strong>";
             }
         },
         plotOptions:{
