@@ -1188,7 +1188,9 @@ adminApp.config([
         ]
       },
       controller: 'InstructionCommonController'
-    }).when('/terms-of-use', {
+    }).when('/aboutus', {
+          templateUrl: '../common/about.html'
+      }).when('/terms-of-use', {
       templateUrl: '../../views/common/termsofuse.html',
       resolve: {
         loadMyFiles: [

@@ -395,6 +395,9 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'ContactUsDetailsController'
             }).
+            when('/aboutus', {
+                templateUrl: '../common/about.html'
+            }).
             when('/profile', {
                 templateUrl: 'views/profile.html',
                 resolve: {
@@ -412,6 +415,7 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'UserProfileController'
             }).
+
             when('/demography', {
                 templateUrl: 'views/demography.html',
                 resolve: {

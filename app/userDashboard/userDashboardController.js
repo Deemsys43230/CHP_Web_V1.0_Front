@@ -1661,11 +1661,11 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
                             if(this.value == "Protein")
                                 return this.value+'<br/><img class="hidden-md" src="../../images/i-protein.jpg"/>';
                             else if(this.value == "Fat")
-                                return '&nbsp;&nbsp;'+this.value+'&nbsp;&nbsp;'+'<br/><img class="hidden-md" src="../../images/i-fats.jpg"/>';
+                                return '&nbsp;&nbsp;'+this.value+'&nbsp;&nbsp;&nbsp;&nbsp;'+'<br/><img class="hidden-md" src="../../images/i-fats.jpg"/>';
                             else if(this.value == "Carbs")
-                                return this.value+'<br/><img class="hidden-md" src="../../images/i-carbs.jpg"/>';
+                                return this.value+'&nbsp;'+'<br/><img class="hidden-md" src="../../images/i-carbs.jpg"/>';
                             else if(this.value == "Fibre")
-                                return '&nbsp;'+this.value+'&nbsp;'+'<br/><img class="hidden-md" src="../../images/i-fibre.jpg"/>';
+                                return '&nbsp;'+this.value+'&nbsp;&nbsp;'+'<br/><img class="hidden-md" src="../../images/i-fibre.jpg"/>';
                             else
                                 return this.value;
                         }
@@ -1695,11 +1695,67 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
                 credits: {
                     enabled: false
                 },
-                legend:{enabled:true},
+                legend:{
+                    enabled:true,
+                   itemStyle:{
+                       align:'left'
+
+                   }
+            },
+                plotOptions: {
+                    series: {
+                        events: {
+                            legendItemClick: function(event) {
+                                var selected = this.index;
+                                var allSeries = this.chart.series;
+
+                                $.each(allSeries, function(index, series) {
+                                    if (selected == index) {
+                                        if (series.visible == true) {
+                                            series.visible=false;
+                                            series.hide();
+                                        }
+                                        else {
+                                            series.visible=true;
+                                            series.show();
+                                        }
+                                    }
+
+                                });
+                                var count=0;
+                                $.each(allSeries, function(index,series) {
+                                    if (series.visible == true) {
+
+                                     }
+                                        else {
+                                              count++; //increasing series click count
+                                             }
+                                });
+
+                                if(count==2){
+                                    $.each(allSeries, function(index, series) {
+                                        if (selected == index) {
+                                            if (series.visible == true) {
+                                                series.hide();
+                                            }
+                                            else {
+                                                series.show();
+                                            }
+                                        }
+
+                                    });
+
+}
+                                return false;
+                            }
+                        }
+                    }
+                },
+
                 series: [{
                     type: 'column',
-                    name:'Units',
-                    data: [
+                    name:'Consumed',
+                  data: [
                         {
                             name: 'Protein',
                             color: 'limegreen',
@@ -1716,15 +1772,17 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
                             name: 'Fibre',
                             color: '#ffcc00',
                             y: parseFloat($scope.calorieIntakeGraph.fibre)
-                        }]
+                        }],
+                    visible:true
                 },  {
                     type: 'spline',
-                    name: 'Average',
+                    name: 'Required',
                     data: [
                         parseFloat($scope.calorieIntakeGraph.averageprotein),
                         parseFloat($scope.calorieIntakeGraph.averagefat),
                         parseFloat($scope.calorieIntakeGraph.averagecarbo),
                         parseFloat($scope.calorieIntakeGraph.averagefibre)],
+                    visible:true,
                     marker: {
                         lineWidth: 1,
                         lineColor: Highcharts.getOptions().colors[1],
@@ -1792,11 +1850,11 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
                                 if(this.value == "Protein")
                                     return this.value+'<br/><img src="../../images/i-protein.jpg"/>';
                                 else if(this.value == "Fat")
-                                    return '&nbsp;&nbsp;'+this.value+'&nbsp;&nbsp;'+'<br/><img src="../../images/i-fats.jpg"/>';
+                                    return '&nbsp;&nbsp;'+this.value+'&nbsp;&nbsp;&nbsp;&nbsp'+'<br/><img src="../../images/i-fats.jpg"/>';
                                 else if(this.value == "Carbs")
                                     return this.value+'<br/><img src="../../images/i-carbs.jpg"/>';
                                 else if(this.value == "Fibre")
-                                    return this.value+'<br/><img src="../../images/i-fibre.jpg"/>';
+                                    return this.value+'&nbsp;&nbsp;'+'<br/><img src="../../images/i-fibre.jpg"/>';
                                 else
                                     return this.value;
                             }
@@ -1828,7 +1886,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
                         enabled: false
                     },
                     legend:{enabled:false},
-                    series: [{
+                        series: [{
                         type: 'column',
                         showInLegend:false,
                         name:'Unit',
@@ -1850,7 +1908,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
                                 color: '#ffcc00',
                                 y: parseFloat($scope.calorieIntakeGraph.fibre)
                             }]
-                    }]
+                        }]
                 });
                 $scope.loaded=false;
 
@@ -2117,7 +2175,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
                 type: 'column'
             },
             title: {
-                text: titles.titlesle
+                text: titles.title
             },
             xAxis: {
                 title: {text: titles.xaxis},
@@ -2171,6 +2229,8 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
     $scope.datePicker = function(){
         $("#main-date").click();
     };
+
+    //Weight Goal Graph
     $scope.drawGoalGraph=function(data,titles,data1){
         console.log(data);
         $('#goalGraph').highcharts({

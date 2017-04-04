@@ -411,6 +411,9 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'ContactUsDetailsController'
             }).
+            when('/aboutus', {
+                templateUrl: '../common/about.html'
+            }).
             when('/faq', {
                 templateUrl: '../common/faq.html',
                 resolve: {
