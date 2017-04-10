@@ -97,16 +97,17 @@
                     </div>
                 </div>
                 <h5>Measures :</h5>
-                    <span ng-show="foodForm.foodMeasureName.$invalid">
-                        <span class="text-red">Required.</span>
-                    </span>
-                 <div class="form-group col-md-9 no-padding">
-                    <ui-select multiple ng-model="foodDetails.measureid" theme="select2" ng-disabled="disabled" name="foodMeasureId" class="form-control" ui-select-required on-remove="removeFoodMeasure($item)">
+
+                <div class="form-group col-md-9 no-padding">
+                    <ui-select multiple ng-model="foodDetails.measureid" theme="select2" ng-disabled="disabled" name="foodMeasureId" class="form-control" on-remove="removeFoodMeasure($item)" ui-select-required>
                         <ui-select-match placeholder="Type and Add Measures">{{$item.measurename}}</ui-select-match>
                         <ui-select-choices repeat="foodMeasure in foodMeasureListAll | propsFilter: {measurename: $select.search}">
                             {{foodMeasure.measurename}}
                         </ui-select-choices>
                     </ui-select>
+                      <span ng-show="foodForm.foodMeasureId.$dirty&&foodForm.foodMeasureId.$invalid">
+                            <span class="error-message" ng-show="foodForm.foodMeasureId.$error.uiSelectRequired"><span>Required.</span></span>
+                     </span>
                 </div>
 
                 <br/>
