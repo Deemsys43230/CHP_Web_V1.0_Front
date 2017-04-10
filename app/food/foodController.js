@@ -337,6 +337,10 @@ adminApp.controller("FoodDetailsEditController",['$q','$scope','requestHandler',
         $scope.progress = progress.loaded / progress.total;
     });
 
+    $scope.google=function(item){
+        console.log(item);
+    }
+
     $scope.doRefreshPreview=function(){
         $scope.foodDetails.foodimage=$scope.foodDetails.foodImagePath;
         $scope.inputContainsFile = true;
@@ -435,13 +439,38 @@ adminApp.controller("FoodDetailsEditController",['$q','$scope','requestHandler',
         //Set session
         $scope.foodDetails.sessionSet=FoodService.setSessionValues($scope.foodDetails.sessionid);
 
+
+
         //Set Measure Values
         var foodMeasurePromise=FoodService.doGetMeasures($scope.foodDetails.measureid);
+        
         foodMeasurePromise.then(function(result){
-            $scope.foodMeasureListAll=result;
+            $scope.foodMeasureListAll=[]; 
+             $.each(result, function(index,value){
+                var addMeasureSet=FoodService.getMeasureSet();
+                addMeasureSet.measureid=value.measureid;
+                addMeasureSet.measurename=value.measurename;
+                addMeasureSet.status=value.status;  
+                $scope.foodMeasureListAll.push(addMeasureSet);
+            });
+
         });
     };
     //End Set
+
+    //While Removing Measure from the ui select list
+    $scope.removeFoodMeasure=function(item){
+        var addMeasureSet=FoodService.getMeasureSet();
+        addMeasureSet.measureid=item.measureid;
+        addMeasureSet.measurename=item.measurename;
+        addMeasureSet.status=item.status;  
+        //Remove Existing one
+        $scope.foodMeasureListAll.splice($scope.foodMeasureListAll.indexOf(item),1);
+        //Add Refreshed One
+        $scope.foodMeasureListAll.push(addMeasureSet);
+
+    }
+
 
     //Do Add Food Details
     $scope.doAddFoodDetails= function () {
