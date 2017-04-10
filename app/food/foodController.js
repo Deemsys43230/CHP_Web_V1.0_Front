@@ -310,7 +310,8 @@ adminApp.controller("FoodDetailsEditController",['$q','$scope','requestHandler',
             //Set Measure Values
             var foodMeasurePromise=FoodService.doGetMeasures($scope.foodDetails.measureid);
             foodMeasurePromise.then(function(result){
-                $scope.foodMeasureListAll=result;
+               $scope.foodMeasureListAll=result;
+
             });
 
             //Set Region Values
@@ -445,15 +446,7 @@ adminApp.controller("FoodDetailsEditController",['$q','$scope','requestHandler',
         var foodMeasurePromise=FoodService.doGetMeasures($scope.foodDetails.measureid);
         
         foodMeasurePromise.then(function(result){
-            $scope.foodMeasureListAll=[]; 
-             $.each(result, function(index,value){
-                var addMeasureSet=FoodService.getMeasureSet();
-                addMeasureSet.measureid=value.measureid;
-                addMeasureSet.measurename=value.measurename;
-                addMeasureSet.status=value.status;  
-                $scope.foodMeasureListAll.push(addMeasureSet);
-            });
-
+            $scope.foodMeasureListAll=result;
         });
     };
     //End Set

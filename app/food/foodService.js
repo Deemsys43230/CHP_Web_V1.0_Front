@@ -28,34 +28,34 @@ adminApp.factory("FoodService",['requestHandler',function(requestHandler){
     //Measure Object
     foodServiceObj.getMeasureSet=function(){
         //Create Measure set object
-        var measureSet={"polyunsaturatedfat": "",
-            "folicacid": "",
-            "vitaminE": "",
-            "vitaminC": "",
-            "zinc": "",
-            "vitaminA": "",
-            "protein": "",
-            "vitaminK": "",
-            "saturatedfat":"",
-            "niacin": "",
-            "fibre": "",
-            "measureid": "",
-            "sodium": "",
-            "thiamin": "",
-            "sugar": "",
-            "potassium": "",
-            "fat": "",
-            "vitaminB12": "",
-            "vitaminB6": "",
-            "calories": "",
-            "value": "",
-            "phosphorous": "",
-            "calcium": "",
-            "riboflavin": "",
-            "iron": "",
-            "monounsaturatedfat": "",
-            "measurename": "",
-            "carbo": ""
+        var measureSet={"polyunsaturatedfat": null,
+            "folicacid": null,
+            "vitaminE": null,
+            "vitaminC": null,
+            "zinc": null,
+            "vitaminA": null,
+            "protein": null,
+            "vitaminK":null,
+            "saturatedfat":null,
+            "niacin": null,
+            "fibre": null,
+            "measureid": null,
+            "sodium": null,
+            "thiamin": null,
+            "sugar": null,
+            "potassium": null,
+            "fat": null,
+            "vitaminB12": null,
+            "vitaminB6": null,
+            "calories": null,
+            "value": null,
+            "phosphorous": null,
+            "calcium": null,
+            "riboflavin": null,
+            "iron": null,
+            "monounsaturatedfat": null,
+            "measurename": null,
+            "carbo": null
         };
         return measureSet;
     };
@@ -189,14 +189,19 @@ adminApp.factory("FoodService",['requestHandler',function(requestHandler){
         return requestHandler.getRequest("admin/viewfoodMeasure","").then(function(response){
             var foodMeasureListAll=response.data.viewfoodMeasure;
             $.each(foodMeasureListAll, function(index,listValue) {
-                listValue.checked=false;
-                $.each(measureid, function(index,messureValue) {
+
+             var addMeasureSet=foodServiceObj.getMeasureSet();
+             addMeasureSet.measureid=listValue.measureid;
+             addMeasureSet.measurename=listValue.measurename;
+             addMeasureSet.status=listValue.status; 
+             foodMeasureListAll[index]=addMeasureSet;
+
+                $.each(measureid, function(measureIndex,messureValue) {
                     if(messureValue.measureid==listValue.measureid){
-                        listValue.checked=true;
+                        foodMeasureListAll[index]=messureValue;
                     }
                 });
             });
-
             return foodMeasureListAll;
 
         },function(response){
