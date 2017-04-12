@@ -389,6 +389,93 @@ adminApp.config([
             ]
         },
       controller: 'TestimonialEditController'
+    }).when('/disease-control', {
+            templateUrl: 'views/site-disease-control.html',
+            resolve: {
+                loadMyFiles: [
+                    '$ocLazyLoad',
+                    function ($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name: 'adminApp',
+                            files: [
+                                '../../angular/angular-utils-pagination/dirPagination.js',
+                                '../../app/diseaseControl/diseaseControlController.js',
+                                '../../css/testimonial-image-upload.css',
+                                '../../js/image-upload.js'
+                            ]
+                        });
+                    }
+                ]
+            },
+            controller: 'DiseaseControlController'
+    }).when('/add-disease-control', {
+        templateUrl: 'views/site-add-or-edit-disease-control.html',
+        resolve: {
+            loadMyFiles: [
+                '$ocLazyLoad',
+                function ($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name: 'adminApp',
+                        files: [
+                            '../../angular/angular-utils-pagination/dirPagination.js',
+                            '../../app/diseaseControl/diseaseControlController.js',
+                            '../../plugin/text-editor/summernote.js',
+                            '../../plugin/text-editor/summernote.css',
+                            '../../css/testimonial-image-upload.css',
+                            '../../js/image-upload.js',
+                            '../../plugin/dateRange/daterangepicker.css',
+                            '../../plugin/dateRange/daterangepicker.js'
+                        ]
+                    });
+                }
+            ]
+        },
+        controller: 'DiseaseControlController'
+    }).when('/edit-disease-control', {
+       templateUrl: 'views/site-add-or-edit-disease-control.html',
+            resolve: {
+                loadMyFiles: [
+                    '$ocLazyLoad',
+                    function ($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name: 'adminApp',
+                            files: [
+                                '../../angular/angular-utils-pagination/dirPagination.js',
+                                '../../app/diseaseControl/diseaseControlController.js',
+                                '../../plugin/text-editor/summernote.js',
+                                '../../plugin/text-editor/summernote.css',
+                                '../../css/testimonial-image-upload.css',
+                                '../../js/image-upload.js',
+                                '../../plugin/dateRange/daterangepicker.css',
+                                '../../plugin/dateRange/daterangepicker.js'
+                            ]
+                        });
+                    }
+                ]
+            },
+            controller: 'DiseaseControlEditController'
+        })
+    .when('/view-disease-control', {
+            templateUrl: 'views/site-view-disease-control.html',
+            resolve: {
+                loadMyFiles: [
+                    '$ocLazyLoad',
+                    function ($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name: 'adminApp',
+                            files: [
+                                '../../angular/angular-utils-pagination/dirPagination.js',
+                                '../../app/diseaseControl/diseaseControlController.js',
+                                '../../plugin/text-editor/summernote.js',
+                                '../../plugin/text-editor/summernote.css',
+                                '../../css/testimonial-image-upload.css',
+                                '../../js/image-upload.js'
+                            ]
+                        });
+                    }
+                ]
+            },
+            controller: 'DiseaseControlEditController'
     }).when('/member', {
       templateUrl: 'views/member.html',
       resolve: {
@@ -686,7 +773,46 @@ adminApp.config([
         ]
       },
       controller: 'ServerSettingsController'
-    }).when('/food', {
+
+    }).when('/vendor-settings', {
+          templateUrl: 'views/site-vendor.html',
+       resolve: {
+            loadMyFiles: [
+                '$ocLazyLoad',
+                function ($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name: 'adminApp',
+                        files: ['../../app/settings/vendorController.js']
+                    });
+                }
+            ]
+        },
+        controller: 'VendorSettingsController'
+       })
+        .when('/vendor-edit-settings', {
+            templateUrl: 'views/site-vendor-edit.html',
+            resolve: {
+                loadMyFiles: [
+                    '$ocLazyLoad',
+                    function ($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name: 'adminApp',
+                            files: [
+                            '../../plugin/popup/style.css',
+                            '../../css/food-image-upload.css',
+                            '../../js/image-upload.js',
+                            '../../js/category-select.js',
+                            '../../css/multiSelect.css',
+                            '../../css/category-select.css',
+                            '../../css/category-select-bootstrap.css',
+                           '../../app/settings/vendorController.js']
+                        });
+                    }
+                ]
+            },
+            controller: 'VendorEditSettingsController'
+        })
+        .when('/food', {
       templateUrl: 'views/food.html',
       resolve: {
         loadMyFiles: [
@@ -2006,7 +2132,23 @@ adminApp.factory('siteMenuService', function () {
         'icon': 'connectdevelop',
         'href': 'social-media-settings',
         'active': ''
+      },
+
+      {
+
+          'name': 'Vendor Settings',
+          'icon': 'cog',
+          'href': 'vendor-settings',
+          'active': ''
+      },
+      {
+
+          'name': 'Disease Control',
+          'icon': 'users',
+          'href': 'disease-control',
+          'active': ''
       }
+
     ];
   return site;
 });
