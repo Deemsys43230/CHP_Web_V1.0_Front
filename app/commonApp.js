@@ -326,7 +326,6 @@ commonApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'diseaseControlTipsController'
             }).
-
             when('/healthy-tips', {
                 templateUrl: '../common/healthy-tips.html',
                 resolve: {
@@ -411,7 +410,6 @@ commonApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'HealthyTipsController'
             }).
-
             when('/healthy-tips-6', {
                 templateUrl: '../common/healthy-tips-6.html',
                 resolve: {
@@ -540,20 +538,6 @@ commonApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
             }).
             when('/healthy-tips-15', {
                 templateUrl: '../common/healthy-tips-15.html',
-                resolve: {
-                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
-                        return $ocLazyLoad.load({
-                            name:'commonApp',
-                            files:[
-                                '../../app/healthyTips/healthyTipsController.js'
-                            ]
-                        })
-                    }]
-                },
-                controller:'HealthyTipsController'
-            }).
-             when('/healthy-tips-16', {
-                templateUrl: '../common/healthy-tips-16.html',
                 resolve: {
                     loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({

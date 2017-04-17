@@ -272,22 +272,7 @@
 <script src="../../app/userFeedback/userFeedbackService.js"></script>
 <script src="../../app/commonApp.js"></script>
 <script src="../../js/home-index-script.js"></script>
-
-
-
-<script type="text/javascript">
-    $(document).ready(function(){
-        $("#feedback_button").click(function(){
-            if($('#form').css('left')=='0px'){
-                $("#feedback-form").slideToggle(800);
-                $('#form').animate({left:'-270px'},  500);
-            }else{
-                $('#form').animate({left:'0'},  500);
-                $("#feedback-form").slideToggle(300);
-            }
-        });
-    });
-</script>
+<script src="../../js/feedback.js"></script>
 
 </body>
 </html>
