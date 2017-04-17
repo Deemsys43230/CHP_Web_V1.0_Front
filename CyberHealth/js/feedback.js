@@ -1,0 +1,1 @@
+$(document).ready(function(){$("#feedback_button").click(function(){"0px"==$("#form").css("left")?($("#feedback-form").slideToggle(800),$("#form").animate({left:"-270px"},500)):($("#form").animate({left:"0"},500),$("#feedback-form").slideToggle(300))})});

@@ -2133,17 +2133,17 @@ adminApp.factory('siteMenuService', function () {
         'href': 'social-media-settings',
         'active': ''
       },
-
+/*
       {
 
           'name': 'Vendor Settings',
           'icon': 'cog',
           'href': 'vendor-settings',
           'active': ''
-      },
+      },*/
       {
 
-          'name': 'Disease Control',
+          'name': 'CDC - Disease Control',
           'icon': 'users',
           'href': 'disease-control',
           'active': ''

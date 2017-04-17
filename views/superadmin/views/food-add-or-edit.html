@@ -96,7 +96,11 @@
                         <div class="loader"></div>
                     </div>
                 </div>
-                <h5>Measures :</h5>
+                <h5>Measures :
+                <span ng-show="foodForm.foodMeasureId.$invalid">
+                        <span class="text-red">Required.</span>
+                </span>
+                </h5>
                 <div class="form-group col-md-9 no-padding">
                     <ui-select multiple ng-model="foodDetails.measureid" theme="select2" ng-disabled="disabled" name="foodMeasureId" class="form-control" on-remove="removeFoodMeasure($item)" ui-select-required>
                         <ui-select-match placeholder="Type and Add Measures">{{$item.measurename}}</ui-select-match>
@@ -131,7 +135,7 @@
                     </thead>
                     <tbody>
                         <tr  ng-class="animate-repeat" ng-repeat="measureDetail in foodDetails.measureid" ng-form="mineralForm">
-                            <td>{{measureDetail.measurename}}</td>
+                            <td><b>{{measureDetail.measurename}}</b></td>
                             <td class="input_mineral">
                                 <input type="text" name="measureValue" ng-model="measureDetail.value" maxlength="3" required validate-Float1/>
                                 <span ng-show="mineralForm.measureValue.$dirty&&mineralForm.measureValue.$invalid">
