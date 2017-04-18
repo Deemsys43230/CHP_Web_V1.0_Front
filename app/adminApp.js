@@ -389,8 +389,8 @@ adminApp.config([
             ]
         },
       controller: 'TestimonialEditController'
-    }).when('/disease-control', {
-            templateUrl: 'views/site-disease-control.html',
+    }).when('/cdc-list', {
+            templateUrl: 'views/site-cdc-list.html',
             resolve: {
                 loadMyFiles: [
                     '$ocLazyLoad',
@@ -399,7 +399,7 @@ adminApp.config([
                             name: 'adminApp',
                             files: [
                                 '../../angular/angular-utils-pagination/dirPagination.js',
-                                '../../app/diseaseControl/diseaseControlController.js',
+                                '../../app/diseaseControlTips/adminDiseaseControlController.js',
                                 '../../css/testimonial-image-upload.css',
                                 '../../js/image-upload.js'
                             ]
@@ -408,8 +408,8 @@ adminApp.config([
                 ]
             },
             controller: 'DiseaseControlController'
-    }).when('/add-disease-control', {
-        templateUrl: 'views/site-add-or-edit-disease-control.html',
+    }).when('/add-cdc', {
+        templateUrl: 'views/site-add-or-edit-cdc.html',
         resolve: {
             loadMyFiles: [
                 '$ocLazyLoad',
@@ -418,7 +418,7 @@ adminApp.config([
                         name: 'adminApp',
                         files: [
                             '../../angular/angular-utils-pagination/dirPagination.js',
-                            '../../app/diseaseControl/diseaseControlController.js',
+                            '../../app/diseaseControlTips/adminDiseaseControlController.js',
                             '../../plugin/text-editor/summernote.js',
                             '../../plugin/text-editor/summernote.css',
                             '../../css/testimonial-image-upload.css',
@@ -431,8 +431,8 @@ adminApp.config([
             ]
         },
         controller: 'DiseaseControlController'
-    }).when('/edit-disease-control', {
-       templateUrl: 'views/site-add-or-edit-disease-control.html',
+    }).when('/edit-cdc/:sid', {
+       templateUrl: 'views/site-add-or-edit-cdc.html',
             resolve: {
                 loadMyFiles: [
                     '$ocLazyLoad',
@@ -441,7 +441,7 @@ adminApp.config([
                             name: 'adminApp',
                             files: [
                                 '../../angular/angular-utils-pagination/dirPagination.js',
-                                '../../app/diseaseControl/diseaseControlController.js',
+                                '../../app/diseaseControlTips/adminDiseaseControlController.js',
                                 '../../plugin/text-editor/summernote.js',
                                 '../../plugin/text-editor/summernote.css',
                                 '../../css/testimonial-image-upload.css',
@@ -455,8 +455,8 @@ adminApp.config([
             },
             controller: 'DiseaseControlEditController'
         })
-    .when('/view-disease-control', {
-            templateUrl: 'views/site-view-disease-control.html',
+    .when('/view-cdc/:sid', {
+            templateUrl: 'views/site-view-cdc.html',
             resolve: {
                 loadMyFiles: [
                     '$ocLazyLoad',
@@ -465,7 +465,7 @@ adminApp.config([
                             name: 'adminApp',
                             files: [
                                 '../../angular/angular-utils-pagination/dirPagination.js',
-                                '../../app/diseaseControl/diseaseControlController.js',
+                                '../../app/diseaseControlTips/adminDiseaseControlController.js',
                                 '../../plugin/text-editor/summernote.js',
                                 '../../plugin/text-editor/summernote.css',
                                 '../../css/testimonial-image-upload.css',
@@ -2143,9 +2143,9 @@ adminApp.factory('siteMenuService', function () {
       },*/
       {
 
-          'name': 'CDC - Disease Control',
+          'name': 'CDC Syndication',
           'icon': 'users',
-          'href': 'disease-control',
+          'href': 'cdc-list',
           'active': ''
       }
 
