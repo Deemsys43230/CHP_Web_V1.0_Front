@@ -30,14 +30,35 @@ commonApp.controller('HealthyTipsListController',['$scope','requestHandler','Fla
         if(!$location.search().id){}
         else{
             var searchId="#"+$location.search().id;
+            var pageNo = Math.floor(($scope.tId-$location.search().id)/10+1);
+            if($scope.pageNo!=pageNo){
+            $scope.pageNo=pageNo;
+            setTimeout(function(){ var searchId="#"+$location.search().id;
+            var offset = $(searchId).offset().top-75;
+            $("html, body").animate({ scrollTop: offset }, "slow"); }, 100);
+        }else{
+            var searchId="#"+$location.search().id;
             var offset = $(searchId).offset().top-75;
             $("html, body").animate({ scrollTop: offset }, "slow");
         }
-    }, 300);
+        }
+    });
 
     $scope.focusToIndividualTips=function(id){
-        var searchId="#"+id;
-        var offset = $(searchId).offset().top-75;
-        $("html, body").animate({ scrollTop: offset }, "slow");
+    
+        $scope.tId;
+       var pageNo = Math.floor(($scope.tId-id)/10+1);
+       
+        if($scope.pageNo!=pageNo){
+            $scope.pageNo=pageNo;
+            setTimeout(function(){ var searchId="#"+id;
+            var offset = $(searchId).offset().top-75;
+            $("html, body").animate({ scrollTop: offset }, "slow"); }, 300);
+        }else{
+            var searchId="#"+id;
+            var offset = $(searchId).offset().top-75;
+            $("html, body").animate({ scrollTop: offset }, "slow");
+        }
+        
     };
 }]);
