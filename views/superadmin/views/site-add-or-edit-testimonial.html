@@ -17,21 +17,12 @@
                         <img>
                         <div class="col-md-2">
                             <div class="col-md-12 image-editor">
-
                                 <h4>User Image</h4>
-
-                                <div class="cropit-image-preview"></div>
-                                <p class="image-size-label">
-                                    Resize image
-                                </p>
-                                <div class="col-md-10 no-padding">
-                                    <input type="range" class="cropit-image-zoom-input">
-                                </div>
-
+                                <div class="cropit-image-preview"><input type="hidden" id="base64"/></div>
                                 <div class="margin-top-20 col-md-12 no-padding">
                                     <div class="fileUpload btn btn-xs btn-primary">
                                         <span>Choose File</span>
-                                        <input type="file" name="image" class="upload cropit-image-input" valid-file  ng-model="testimonials.imageurl" ng-click="doUpdateImage();"/>
+                                        <input type="file" id="image" name="image" class="upload export cropit-image-input" valid-file  ng-model="testimonials.imageurl" ng-click="doUpdateImage();"/>
 
                                     </div>
                                 </div>
@@ -81,3 +72,17 @@
 <!-- End Page Banner -->
 
 <script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript">
+function el(id){return document.getElementById(id);} // Get elem by ID
+
+function readImage() {
+    if ( this.files && this.files[0] ) {
+        var FR= new FileReader();
+        FR.onload = function(e) {   
+             el("base64").value=e.target.result;
+        };       
+        FR.readAsDataURL( this.files[0] );
+    }
+}
+el("image").addEventListener("change", readImage, false);
+</script>

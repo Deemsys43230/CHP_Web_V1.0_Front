@@ -59,15 +59,16 @@ adminApp.controller('TestimonialController',['$scope','requestHandler','Flash','
             delete $scope.testimonials.imageurl;
         }
         else{
-            $scope.testimonials.imageurl = $('.image-editor').cropit('export');
+            $scope.testimonials.imageurl = document.getElementById("base64").value;
         }
-        requestHandler.postRequest("admin/insertorupdateTestimonial/",$scope.testimonials).then(function(response){
+        console.log($scope.testimonials.imageurl);
+            requestHandler.postRequest("admin/insertorupdateTestimonial/",$scope.testimonials).then(function(response){
 
-            successMessage(Flash,"Successfully Added");
-            $location.path("testimonials");
-        }, function () {
-            errorMessage(Flash, "Please try again later!")
-        });
+                successMessage(Flash,"Successfully Added");
+                $location.path("testimonials");
+            }, function () {
+                errorMessage(Flash, "Please try again later!")
+            });
     };
 
 

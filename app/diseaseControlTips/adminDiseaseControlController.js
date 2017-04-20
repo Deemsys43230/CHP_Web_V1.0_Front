@@ -69,13 +69,25 @@ adminApp.controller('DiseaseControlController',['$scope','requestHandler','Flash
     $scope.doAddHealthyTips=function(){
 
         //Convert the image to base 64
+        var thumbnail_image_base64=document.getElementById("thumbnail_image_base64").value;
+        var banner_image_base64=document.getElementById("banner_image_base64").value;
 
-        if(!$scope.imageUpload){
+        if(banner_image_base64==""){
             delete $scope.healthyliving.imageurl;
         }
         else{
-            $scope.healthyliving.imageurl = $('.image-editor').cropit('export');
+            $scope.healthyliving.imageurl = banner_image_base64;            
         }
+
+        //For Thumbnail Image
+        if(thumbnail_image_base64==""){
+            delete $scope.healthyliving.thumbnailurl;
+        }
+        else{
+            $scope.healthyliving.thumbnailurl = thumbnail_image_base64;            
+        }
+
+
         requestHandler.postRequest("admin/insertorupdateHealthyLiving/",$scope.healthyliving).then(function(response){
             successMessage(Flash,"Successfully Added");
             $location.path("cdc-list");
@@ -96,7 +108,22 @@ adminApp.controller('DiseaseControlController',['$scope','requestHandler','Flash
         }
 
     };
-
+    // Function to convert image url to base64
+    $scope.convertImgToBase64=function(url, callback, outputFormat){
+        var img = new Image();
+        img.crossOrigin = 'Anonymous';
+        img.onload = function(){
+            var canvas = document.createElement('CANVAS');
+            var ctx = canvas.getContext('2d');
+            canvas.height = this.height;
+            canvas.width = this.width;
+            ctx.drawImage(this,0,0);
+            var dataURL = canvas.toDataURL(outputFormat || 'image/jpg');
+            callback(dataURL);
+            canvas = null;
+        };
+        img.src = url;
+    };
 
     $scope.init = function(){
 

@@ -21,14 +21,14 @@
                                 <h5>Thumbnail</h5>
 
                                 <div class="cropit-image-preview">
-
+                                    <input type="hidden" id="thumbnail_image_base64"/>
                                 </div>
 
 
                                 <div class="margin-top-20 col-md-12 no-padding">
                                     <div class="fileUpload btn btn-xs btn-primary">
                                         <span>Choose File</span>
-                                        <input type="file" name="image" class="upload cropit-image-input" valid-file  ng-model="healthyliving.imageurl" ng-click="doUpdateImage();"/>
+                                        <input type="file" id="thumbnail_image" name="image" class="upload cropit-image-input" valid-file  ng-model="healthyliving.imageurl" ng-click="doUpdateImage();"/>
 
                                     </div>
                                 </div>
@@ -38,12 +38,12 @@
                                 <h5>Banner</h5>
 
                                 <div class="cropit-image-preview">
-
+                                     <input type="hidden" id="banner_image_base64"/>   
                                 </div>
                                   <div class="margin-top-20 col-md-12 no-padding">
                                     <div class="fileUpload btn btn-xs btn-primary">
                                         <span>Choose File</span>
-                                        <input type="file" name="image" class="upload cropit-image-input" valid-file  ng-model="healthyliving.imageurl" ng-click="doUpdateImage();"/>
+                                        <input type="file" id="banner_image" name="image" class="upload cropit-image-input" valid-file  ng-model="healthyliving.imageurl" ng-click="doUpdateImage();"/>
                                     </div>
                                 </div>
                             </div>
@@ -51,7 +51,7 @@
                         </div>
                         <div class="col-md-10">
                             <div class="col-md-3">
-                                <h4>Title</h4>
+                                <h4>Title:</h4>
                             </div>
                             <div class="col-md-9 margin-bottom-20">
                                 <input class="form-control" name="title" ng-model="healthyliving.title" required>
@@ -60,7 +60,7 @@
                              </span>
                             </div>
                             <div class="col-md-3">
-                                <h4>Short Description</h4>
+                                <h4>Short Description:</h4>
                             </div>
                             <div class="col-md-9 margin-bottom-20">
                                 <textarea type="text" class="height-150 form-control" name="description" ng-model="healthyliving.shortdescription" required></textarea>
@@ -69,7 +69,7 @@
                              </span>
                             </div>
                             <div class="col-md-3">
-                                <h4>Date</h4>
+                                <h4>Date:</h4>
                             </div>
                             <div class="col-md-9 margin-bottom-20">
                             <div class="input-group">
@@ -82,7 +82,7 @@
                             </div>
 
                             <div class="col-md-3">
-                                <h4>Content</h4>
+                                <h4>Content:</h4>
                             </div>
                             <div class="col-md-9 margin-bottom-20">
                             <span ng-show="summernote_touched==1&&diseasecontrolForm.content.$invalid">
@@ -106,24 +106,35 @@
 <!-- End Page Banner -->
 
 <script type="text/javascript" src="../../js/script.js"></script>
-<!--
 <script type="text/javascript">
-    $(document).ready(function() {
-        var options = {
-            maxDate : new Date(),
-            startDate : new Date(),
-            endDate : new Date(),
-            singleDatePicker: true,
-            opens:'left',
-             dateLimit: {
-                days: 31
-            }
-        };
+function el(id){return document.getElementById(id);} // Get elem by ID
 
-        $('#disease-control-date').daterangepicker(options, function(start) {
-            document.getElementById("main-date").value = start.format('DD/MM/YYYY');
-    });
-    });
-        </script>-->
+function readThumbnailImage() {
+    if ( this.files && this.files[0] ) {
+        var FR= new FileReader();
+        FR.onload = function(e) {   
+             el('thumbnail_image_base64').value=e.target.result;
+        };       
+        FR.readAsDataURL( this.files[0] );
+    }
+}
+function readBannerImage() {
+    if ( this.files && this.files[0] ) {
+        var FR= new FileReader();
+        FR.onload = function(e) {   
+             el('banner_image_base64').value=e.target.result;
+        };       
+        FR.readAsDataURL( this.files[0] );
+    }
+}
+el("thumbnail_image").addEventListener("change", readThumbnailImage, false);
+el("banner_image").addEventListener("change", readBannerImage, false);
+
+$('.summernote').summernote({
+     oninit: function() {
+         $("div.note-editor button[data-event='codeview']").click();
+     }
+});
 
 
+</script>
