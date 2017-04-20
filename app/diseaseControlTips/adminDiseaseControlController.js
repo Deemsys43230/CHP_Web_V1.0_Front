@@ -34,11 +34,11 @@ adminApp.controller('DiseaseControlController',['$scope','requestHandler','Flash
 
     //summer note
     $scope.options = {
-        height: 250
+       height: 250
     };
 
 
-    $scope.imageUpload=false;
+  $scope.imageUpload=false;
     $scope.doUpdateImage=function(){
         $scope.imageUpload=true;
     };
@@ -48,6 +48,7 @@ adminApp.controller('DiseaseControlController',['$scope','requestHandler','Flash
         requestHandler.getRequest("admin/getHealthyLivingList/", "").then(function(response){
             $scope.adminhealthytips=response.data.healthyliving;
            $scope.loaded=false;
+            $scope.paginationLoad=true;
            },function(){
             errorMessage(Flash,"Please try again later!")
         });
@@ -98,7 +99,10 @@ adminApp.controller('DiseaseControlController',['$scope','requestHandler','Flash
 
 
     $scope.init = function(){
+
+        $scope.paginationLoad=false;
        $scope.doGetHealthyListByAdmin();
+
     };
     //For image upload
     $('.image-editor').cropit();
