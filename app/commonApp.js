@@ -85,7 +85,19 @@ commonApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 templateUrl: '../common/how-it-work.html'
             }).
             when('/aboutus', {
-                templateUrl: '../common/about.html'
+                templateUrl: '../common/about.html',
+                resolve: {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'commonApp',
+                            files:[
+                                '../../app/instruction/instructionController.js'
+                            ]
+                        })
+                    }]
+                },
+                controller:'InstructionCommonController'
+
             }).
             when('/portfolio', {
                 templateUrl: '../common/portfolio.html'
@@ -197,8 +209,8 @@ commonApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                     }]
                 },
                 controller:'FAQCommonController'
-            }).
-            when('/instructions', {
+            })
+          /*  when('/instructions', {
                 templateUrl: '../common/instruction.html',
                 resolve: {
                     loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
@@ -211,7 +223,7 @@ commonApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                     }]
                 },
                 controller:'InstructionCommonController'
-            }).
+            })*/.
             when('/terms-of-use', {
                 templateUrl: '../common/termsofuse.html',
                 resolve: {

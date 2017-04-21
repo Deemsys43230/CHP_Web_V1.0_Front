@@ -396,7 +396,19 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 controller:'ContactUsDetailsController'
             }).
             when('/aboutus', {
-                templateUrl: '../common/about.html'
+                templateUrl: '../common/about.html',
+                resolve: {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'commonApp',
+                            files:[
+                                '../../app/instruction/instructionController.js'
+                            ]
+                        })
+                    }]
+                },
+                controller:'InstructionCommonController'
+
             }).
             when('/profile', {
                 templateUrl: 'views/profile.html',

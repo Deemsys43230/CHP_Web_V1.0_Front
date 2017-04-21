@@ -124,7 +124,7 @@ adminApp.config([
         ]
       },
       controller: 'FAQViewController'
-    }).when('/instruction', {
+    }).when('/about-us', {
       templateUrl: 'views/site-instruction.html',
       resolve: {
         loadMyFiles: [
@@ -1315,8 +1315,20 @@ adminApp.config([
       },
       controller: 'InstructionCommonController'
     }).when('/aboutus', {
-          templateUrl: '../common/about.html'
-      }).when('/terms-of-use', {
+            templateUrl: '../common/about.html',
+            resolve: {
+                loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name:'commonApp',
+                        files:[
+                            '../../app/instruction/instructionController.js'
+                        ]
+                    })
+                }]
+            },
+            controller:'InstructionCommonController'
+
+        }).when('/terms-of-use', {
       templateUrl: '../../views/common/termsofuse.html',
       resolve: {
         loadMyFiles: [
@@ -2065,9 +2077,9 @@ adminApp.factory('siteMenuService', function () {
         'active': ''
       },
       {
-        'name': 'Instruction',
-        'icon': 'exclamation-circle',
-        'href': 'instruction',
+        'name': 'About Us',
+        'icon': 'building-o',
+        'href': 'about-us',
         'active': ''
       },
       {
@@ -2144,7 +2156,7 @@ adminApp.factory('siteMenuService', function () {
       {
 
           'name': 'CDC Syndication',
-          'icon': 'users',
+          'icon': 'file-code-o',
           'href': 'cdc-list',
           'active': ''
       }
