@@ -5,8 +5,8 @@ var adminApp = angular.module('adminApp', ['ngRoute','oc.lazyLoad','requestModul
 adminApp.controller('DiseaseControlController',['$scope','requestHandler','Flash','$location','siteMenuService',function($scope,requestHandler,Flash,$location,siteMenuService) {
 
     $scope.isNew=true;
-
-    $scope.title='Add CDC';
+    $scope.contentBtnTxt="Add CDC";
+   $scope.title='Add CDC';
     $scope.siteMenuList = siteMenuService;
 
     $.each($scope.siteMenuList,function(index,value){
@@ -33,9 +33,9 @@ adminApp.controller('DiseaseControlController',['$scope','requestHandler','Flash
     };
 
     //summer note
-    $scope.options = {
+   /* $scope.options = {
        height: 250
-    };
+    };*/
 
 
   $scope.imageUpload=false;
@@ -94,6 +94,8 @@ adminApp.controller('DiseaseControlController',['$scope','requestHandler','Flash
         }, function () {
             errorMessage(Flash, "Please try again later!")
         });
+           $scope.contentBtnTxt="Submitting...";
+
     };
 
     $scope.deleteHealthyTips=function(sid){
@@ -131,10 +133,11 @@ adminApp.controller('DiseaseControlController',['$scope','requestHandler','Flash
        $scope.doGetHealthyListByAdmin();
 
     };
-    //For image upload
-    $('.image-editor').cropit();
+    //For bannerimage upload
+    $('.image-editor-banner').cropit();
 
-
+    //For thumbnailimage upload
+    $('.image-editor-thumbnail').cropit();
 
 }]);
 
@@ -142,6 +145,7 @@ adminApp.controller('DiseaseControlController',['$scope','requestHandler','Flash
 adminApp.controller('DiseaseControlEditController',['$scope','requestHandler','Flash','$location','$routeParams','$sce','siteMenuService',function($scope,requestHandler,Flash,$location,$routeParams,$sce,siteMenuService) {
 
     $scope.isNew=false;
+    $scope.contentBtnTxt="Save Changes";
     $scope.siteMenuList = siteMenuService;
 
     $.each($scope.siteMenuList,function(index,value){
@@ -153,26 +157,37 @@ adminApp.controller('DiseaseControlEditController',['$scope','requestHandler','F
     $scope.title='Edit CDC';
 
     //summer note
-    $scope.options = {
+  /*  $scope.options = {
         height: 250
     };
+*/
    var original ="";
 
     //To display HealthyTips based on id
     $scope.doGetHealthyTipsAdminByID=function(){
        requestHandler.getRequest("admin/getHealthyLivingListById/"+$routeParams.sid,"").then(function(response){
-          //View the image in ng-src for view page
-            $scope.myImgSrc = $sce.trustAsResourceUrl(response.data.healthyliving.imageurl+"?decache="+Math.random());
+          //View the bannerimage in ng-src for view page
+            $scope.myBannerImgSrc = $sce.trustAsResourceUrl(response.data.healthyliving.imageurl+"?decache="+Math.random());
 
-            //Set values to display data in edit healthytips
+          //View the thumbnailimage in ng-src for view page
+           $scope.myThumbnailImgSrc = $sce.trustAsResourceUrl(response.data.healthyliving.thumbnailurl+"?decache="+Math.random());
+           //Set values to display data in edit healthytips
             $scope.healthyliving=response.data.healthyliving;
-                // View the image in image cropit preview in edit page
-            $('.image-editor').cropit({
-                imageState: {
-                    src: $scope.healthyliving.imageurl+"?decache="+Math.random()
-                }
-            });
 
+
+
+                // View the bannerimage in image cropit preview in edit page
+            $('.image-editor-banner').cropit({
+                    imageState: {
+                        src: $scope.healthyliving.imageurl+"?decache="+Math.random()
+                    }
+            });
+           // View the thumbnailimage in image cropitt preview in edit page
+           $('.image-editor-thumbnail').cropit({
+               imageState: {
+                   src: $scope.healthyliving.thumbnailurl+"?decache="+Math.random()
+               }
+           });
 
         },function(){
             errorMessage(Flash,"Please try again later!")
@@ -223,23 +238,25 @@ adminApp.controller('DiseaseControlEditController',['$scope','requestHandler','F
 
     //To update healthy tips
     $scope.doUpdateHealthyTips = function(){
+        //Convert the image to base 64
+        var thumbnail_image_base64=document.getElementById("thumbnail_image_base64").value;
+        var banner_image_base64=document.getElementById("banner_image_base64").value;
 
-        if(!$scope.imageUpload){
+        if(banner_image_base64==""){
             delete $scope.healthyliving.imageurl;
         }
         else{
-            $scope.healthyliving.imageurl = $('.image-editor').cropit('export');
-            $scope.convertImgToBase64($scope.healthyliving.imageurl, function(base64Img){
+            $scope.healthyliving.imageurl = banner_image_base64;
+        }
 
-                //Convert the image url to base64 when image is not edited
-                $scope.healthyliving.imageurl=base64Img;
-
-                console.log(base64Img);
-            });
-        }//Convert the image url to base64 when image is edited
-
-
-        requestHandler.putRequest("admin/insertorupdateHealthyLiving/",$scope.healthyliving).then(function(response){
+        //For Thumbnail Image
+        if(thumbnail_image_base64==""){
+            delete $scope.healthyliving.thumbnailurl;
+        }
+        else{
+            $scope.healthyliving.thumbnailurl = thumbnail_image_base64;
+        }
+      requestHandler.putRequest("admin/insertorupdateHealthyLiving/",$scope.healthyliving).then(function(response){
             successMessage(Flash,"Successfully Updated");
             $location.path("cdc-list");
 
@@ -247,8 +264,9 @@ adminApp.controller('DiseaseControlEditController',['$scope','requestHandler','F
             errorMessage(Flash, "Please try again later!")
         });
 
-
+        $scope.contentBtnTxt="Submitting...";
     };
+
     $scope.doGetHealthyTipsAdminByID();
 
 }]);
@@ -267,6 +285,20 @@ adminApp.directive('validFile',function(){
         link:function(scope,el,attrs,ngModel){
             //change event is fired when file is selected
             el.bind('change',function(){
+                scope.$apply(function(){
+                    ngModel.$setViewValue(el.val());
+                    ngModel.$render();
+                })
+            })
+        }
+    }
+});
+
+adminApp.directive('ngModel',function(){
+    return {
+        require:'ngModel',
+        link:function(scope,el,attrs,ngModel){
+         el.bind('change',function(){
                 scope.$apply(function(){
                     ngModel.$setViewValue(el.val());
                     ngModel.$render();

@@ -8460,7 +8460,9 @@ ul.sidebar-menu li a{
 .height-150{
     height: 150px !important;
 }
-
+.height-300 {
+    height: 300px !important;
+}
 .height-190{
     height: 190px !important;
 }
