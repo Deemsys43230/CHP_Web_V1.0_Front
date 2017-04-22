@@ -20,7 +20,7 @@ adminApp.controller('InstructionController',['$scope','requestHandler','Flash','
 
     $scope.doGetInstruction=function(){
         $scope.loaded=true;
-        requestHandler.getRequest("getLegalByName/Instructions/", "").then(function(response){
+        requestHandler.getRequest("getLegalByName/Aboutus/", "").then(function(response){
             original=angular.copy(response.data.Legal_Data);
             $scope.instructions=response.data.Legal_Data;
             $scope.loaded=false;
@@ -52,7 +52,7 @@ adminApp.controller('InstructionController',['$scope','requestHandler','Flash','
 adminApp.controller('InstructionCommonController',['$scope','requestHandler','Flash',function($scope,requestHandler,Flash) {
 
     $scope.doGetUserInstruction=function(){
-        requestHandler.getRequest("getLegalByAll/Instructions/", "").then(function(response){
+        requestHandler.getRequest("getLegalByAll/Aboutus/", "").then(function(response){
             $scope.userinstructions=response.data.Legal_Data;
         },function(){
             errorMessage(Flash,"Please try again later!")
@@ -76,7 +76,7 @@ var commonApp = angular.module('commonApp', ['ngRoute','oc.lazyLoad','requestMod
 commonApp.controller('InstructionCommonController',['$scope','requestHandler','Flash',function($scope,requestHandler,Flash) {
 
     $scope.doGetUserInstruction=function(){
-        requestHandler.getRequest("getLegalByAll/Instructions/", "").then(function(response){
+        requestHandler.getRequest("getLegalByAll/Aboutus/", "").then(function(response){
             $scope.userinstructions=response.data.Legal_Data;
         },function(){
             errorMessage(Flash,"Please try again later!")
@@ -100,7 +100,7 @@ var userApp = angular.module('userApp', ['ngRoute','oc.lazyLoad','requestModule'
 userApp.controller('InstructionCommonController',['$scope','requestHandler','Flash',function($scope,requestHandler,Flash) {
 
     $scope.doGetUserInstruction=function(){
-        requestHandler.getRequest("getLegalByAll/Instructions/", "").then(function(response){
+        requestHandler.getRequest("getLegalByAll/Aboutus/", "").then(function(response){
             $scope.userinstructions=response.data.Legal_Data;
         },function(){
             errorMessage(Flash,"Please try again later!")
@@ -125,7 +125,7 @@ var coachApp = angular.module('coachApp', ['ngRoute','oc.lazyLoad','requestModul
 coachApp.controller('InstructionCommonController',['$scope','requestHandler','Flash',function($scope,requestHandler,Flash) {
 
     $scope.doGetUserInstruction=function(){
-        requestHandler.getRequest("getLegalByAll/Instructions/", "").then(function(response){
+        requestHandler.getRequest("getLegalByAll/Aboutus/", "").then(function(response){
             $scope.userinstructions=response.data.Legal_Data;
         },function(){
             errorMessage(Flash,"Please try again later!")
