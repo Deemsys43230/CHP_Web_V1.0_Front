@@ -21,10 +21,10 @@
                                 <div class="loader"></div>
                             </div>
                         </div>
-                            <span ng-show="termsOfUseForm.content.$dirty&&termsOfUseForm.content.$invalid">
+                            <span ng-show="summernote_touched==1&&termsOfUseForm.content.$invalid">
                                 <span class="error-message textarea-errormessage40" ng-show="termsOfUseForm.content.$error.required"><span>Required.</span></span>
                             </span>
-                        <div summernote config="options" name="content"  ng-model="terms.content" required></div>
+                        <div summernote config="options" name="content" ng-model="terms.content" required ng-init="summernote_touched=0" ng-change="summernote_touched=1"></div>
                     </div>
                 </form>
             </div>
