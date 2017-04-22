@@ -1446,7 +1446,7 @@
                         trigger: "hover",
                         placement: d || "top"
                     }).on("click", function() {
-                        a(this).tooltip("hide")
+                        a(this).tooltip("option","hide")
                     })
                 },
                 q = [

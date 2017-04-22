@@ -5,8 +5,9 @@ var adminApp = angular.module('adminApp', ['ngRoute','oc.lazyLoad','requestModul
 adminApp.controller('DiseaseControlController',['$scope','requestHandler','Flash','$location','siteMenuService',function($scope,requestHandler,Flash,$location,siteMenuService) {
 
     $scope.isNew=true;
+    $scope.submitContent=false;
     $scope.contentBtnTxt="Add CDC";
-   $scope.title='Add CDC';
+    $scope.title='Add CDC';
     $scope.siteMenuList = siteMenuService;
 
     $.each($scope.siteMenuList,function(index,value){
@@ -94,7 +95,9 @@ adminApp.controller('DiseaseControlController',['$scope','requestHandler','Flash
         }, function () {
             errorMessage(Flash, "Please try again later!")
         });
-           $scope.contentBtnTxt="Submitting...";
+        $scope.submitContent=true;
+
+        $scope.contentBtnTxt="Submitting...";
 
     };
 
@@ -145,6 +148,8 @@ adminApp.controller('DiseaseControlController',['$scope','requestHandler','Flash
 adminApp.controller('DiseaseControlEditController',['$scope','requestHandler','Flash','$location','$routeParams','$sce','siteMenuService',function($scope,requestHandler,Flash,$location,$routeParams,$sce,siteMenuService) {
 
     $scope.isNew=false;
+    $scope.submitContent=false;
+
     $scope.contentBtnTxt="Save Changes";
     $scope.siteMenuList = siteMenuService;
 
@@ -264,6 +269,7 @@ adminApp.controller('DiseaseControlEditController',['$scope','requestHandler','F
             errorMessage(Flash, "Please try again later!")
         });
 
+        $scope.submitContent=true;
         $scope.contentBtnTxt="Submitting...";
     };
 

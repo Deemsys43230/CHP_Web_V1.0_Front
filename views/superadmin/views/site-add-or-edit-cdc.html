@@ -83,19 +83,19 @@
                                 <h4>Content:</h4>
                             </div>
                             <div class="col-md-9 margin-bottom-20">
-                            <span ng-show="summernote_touched==1&&diseasecontrolForm.content.$invalid">
+                            <span ng-show="diseasecontrolForm.content.$dirty&&diseasecontrolForm.content.$invalid">
                                <span class="error-message textarea-errormessage40" ng-show="diseasecontrolForm.content.$error.required" style="top:55px;"><span>Required.</span></span>
                             </span>
                                 <!--<div summernote class="summernote" config="options" name="content"  ng-model="healthyliving.content" ng-init="summernote_touched=0" ng-change="summernote_touched=1" required></div>-->
-                                <textarea class="height-300 form-control" ng-model="healthyliving.content" required></textarea>
+                                <textarea class="height-300 form-control" name="content" ng-model="healthyliving.content" required></textarea>
                             </div>
                         </div>
                     </div>
                 </form>
             </div>
             <div class="text-center margin-top-10">
-                <a href="" class="btn btn-success" ng-click="doAddHealthyTips()" ng-disabled="diseasecontrolForm.$invalid" ng-show="isNew">{{contentBtnTxt}}</a>
-                <a href="" class="btn btn-success" ng-click="doUpdateHealthyTips()" ng-disabled="diseasecontrolForm.$invalid" ng-hide="isNew">{{contentBtnTxt}}</a>
+                <a href="" class="btn btn-success" ng-click="doAddHealthyTips()" ng-disabled="diseasecontrolForm.$invalid||submitContent" ng-show="isNew">{{contentBtnTxt}}</a>
+                <a href="" class="btn btn-success" ng-click="doUpdateHealthyTips()" ng-disabled="diseasecontrolForm.$invalid||submitContent" ng-hide="isNew">{{contentBtnTxt}}</a>
                 <a href="#cdc-list" class="btn btn-warning">Cancel</a>
             </div>
         </div>
