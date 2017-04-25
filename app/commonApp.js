@@ -1,4 +1,5 @@
-var commonApp= angular.module('commonApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','ngCookies','feedbackServiceModule']);
+angular.module("commonApp", []);
+var commonApp= angular.module('commonApp', ['ngRoute','oc.lazyLoad','ngCookies','requestModule','flash','ngAnimate','feedbackServiceModule','angularUtils.directives.dirPagination']);
 
 commonApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
 
@@ -55,7 +56,7 @@ commonApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                             return $ocLazyLoad.load({
                                 name:'commonApp',
                                 files:[
-                                    'plugin/vertical-carousel/vertical-carousel.js',
+                                   'plugin/vertical-carousel/vertical-carousel.js',
                                     'css/stepProgressBar.css',
                                     'app/commonController.js'
                                 ]
@@ -274,7 +275,8 @@ commonApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'commonApp',
                             files:[
-                                '../../app/diseaseControlTips/diseaseControlTipsController.js'
+                             '../../angular/angular-utils-pagination/dirPagination.js',
+                             '../../app/diseaseControlTips/diseaseControlTipsController.js'
                             ]
                         })
                     }]

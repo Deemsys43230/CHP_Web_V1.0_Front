@@ -42,21 +42,16 @@ commonApp.controller('DiseaseControlTipsListController',['$scope','requestHandle
         $("html, body").animate({ scrollTop: offset }, "slow");
     };
 
-
-   /* $scope.embed_code="<!-- Markup for HTML (Factors in Placement and Enrollment of Primary Care Patientsin YMCA&#39;s Diabetes Prevention Program, Bronx, New York,2010-2015) --><div class=\"rid_08184eef_309335\" data-apiroot=\"//tools.cdc.gov/api\" data-mediatype=\"html\" data-mediaid=\"309335\" data-stripscripts=\"true\" data-stripanchors=\"false\" data-stripimages=\"false\" data-stripcomments=\"true\" data-stripstyles=\"true\" data-cssclasses=\"syndicate\" data-ids=\"\" data-xpath=\"\" data-oe=\"UTF-8\" data-of=\"XHTML\" data-ns=\"\" data-postprocess=\"\" data-nw=\"true\" data-iframe=\"true\" data-cdc-widget=\"syndicationIframe\" data-apiembedsrc=\"//tools.cdc.gov/api/embed/html/js/embed-2.0.3.js\" data-iframeembedsrc=\"//tools.cdc.gov/TemplatePackage/contrib/widgets/tp-widget-external-loader.js\" data-font=\"\"></div><script src='//tools.cdc.gov/TemplatePackage/contrib/widgets/tp-widget-external-loader.js' ></script><noscript>You need javascript enabled to view this content or go to &lt;a href='//tools.cdc.gov/api/v2/resources/media/309335/noscript'&gt;source URL&lt;/a&gt;.</noscript>";
-
-    $('#content').html($scope.embed_code);
-*/
     // Get list of CDC content
     $scope.getCDCList=function(){
        requestHandler.getRequest("getHealthyLivingListByUser/","").then(function(response){
           $scope.cdcContentList=response.data.healthyliving;
-           //console.log($scope.cdcContentList.syndicateid);
+//console.log($scope.cdcContentList.syndicateid);
        });
     };
 
     $scope.init=function(){
-        $scope.getCDCList();
+    $scope.getCDCList();
     };
 
     $scope.init();
