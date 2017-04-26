@@ -36,7 +36,7 @@
                                 <a href="" ng-click="focusToIndividualTips(content.syndicateid)"><img ng-src="{{content.thumbnailurl}}" alt=""  width="65" height="65"/></a>
                             </div>
                             <div class="widget-content">
-                                <h5><a href="../diseasecontrol/index.html?id={{content.syndicateid}}">{{content.title}}</a></h5>
+                                <h5 style="word-wrap: break-word;"><a href="../diseasecontrol/index.html?id={{content.syndicateid}}">{{content.title}}</a></h5>
                                 <span>{{content.date}}</span>
                             </div>
                             <div class="clearfix"></div>
@@ -62,13 +62,13 @@
                     <!-- Post Content -->
                     <div class="post-content1">
                         <div class="post-type"><i class="fa fa-picture-o"></i></div>
-                        <h2><a href="../diseasecontrol/index.html?id={{content.syndicateid}}">{{content.title}}</a></h2>
+                        <h2 style="word-wrap: break-word;"><a href="../diseasecontrol/index.html?id={{content.syndicateid}}">{{content.title}}</a></h2>
                         <ul class="post-meta remove-style">
                             <li>By <a href="">Cyber Health</a></li>
                             <li>{{content.date}}</li>
                             <!--<div class="margin-top-20 wrap" ng-bind-html="content.content | html"></div>-->
                         </ul>
-                        <p>{{content.shortdescription}}</p>
+                        <p style="word-wrap: break-word;">{{content.shortdescription}}</p>
                         <a class="main-button page_reload" href="../diseasecontrol/index.html?id={{content.syndicateid}}">Read More <i class="fa fa-angle-right"></i></a>
                     </div>
                  </div>

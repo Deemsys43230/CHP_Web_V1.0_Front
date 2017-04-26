@@ -61,7 +61,7 @@
                                 <h4>Short Description:</h4>
                             </div>
                             <div class="col-md-9 margin-bottom-20">
-                                <textarea type="text" class="height-150 form-control" name="description" ng-model="healthyliving.shortdescription" required></textarea>
+                                <textarea type="text" class="height-150 form-control" name="description" ng-model="healthyliving.shortdescription" maxlength="300" required></textarea>
                                     <span ng-show="diseasecontrolForm.description.$dirty&&diseasecontrolForm.description.$invalid">
                                   <span class="error-message" ng-show="diseasecontrolForm.description.$error.required" style="bottom: 100px;"><span>Required.</span></span>
                              </span>
