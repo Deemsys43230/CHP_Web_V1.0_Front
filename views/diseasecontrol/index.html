@@ -76,7 +76,7 @@
         <div class="container">
            <a href="../home/#disease-control-tips" class="back-button pull-right">Back to Disease Control list</a>
             <h4 class="classic-title"><span>{{title}}</span></h4>
-            <span id="content"></span>
+            <div id="content"></div>
         </div>
     </div>
 
@@ -244,14 +244,16 @@
 
 
 <script>
-    // Page Loader
-    $(window).load(function() {
-        // Animate loader off screen
-        setTimeout(function(){
-        $(".loader").fadeOut();
-        }, 2000);
-    });
-
+    var divHeight = $("#content").css("height");
+    setInterval(function(){
+        if(divHeight !== $("#content").css("height")){
+            divHeight = $("#content").css("height");
+            if(divHeight.substring(0,divHeight.indexOf('p'))>=200){
+               $(".loader").fadeOut(); 
+               $('body').getNiceScroll().remove();
+            }
+        }
+    },200);
 
 </script>
 <script src="../../app/requestHandler.js"></script>
