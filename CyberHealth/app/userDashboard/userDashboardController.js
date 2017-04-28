@@ -823,6 +823,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
 
                     $window.currentweight = $scope.demography.weight;
                     $window.targetweight = $scope.goalDetails.targetweight;
+                  $window.unit=$scope.userProfile.unitPreference==1?"Kgs":"Lbs";
                     $scope.goal = {
                         status: 'view-goal'
                     };
@@ -1005,7 +1006,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         requestHandler.postRequest("user/weightlogInsertorUpdate/",{"date":date,"weight":weight}).then(function(response){
             if(date==selectedDate && $scope.weightGraph){
                 $window.currentweight = weight;
-                refreshGraph();
+                //refreshGraph();
                /*$scope.updateAverageGainSpent(date);*/
             }
             $scope.spinner=false;
@@ -1033,31 +1034,43 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         $scope.graph = {
             status: 'goal-graph'
         };
+
+        if($scope.userProfile.unitPreference==1){
+            $scope.unit="Kgs";
+        }
+        else if($scope.userProfile.unitPreference==2){
+            $scope.unit="Lbs";
+        }
         var monthNames= ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+        var titles={};
+        var budgetdate=[];
         requestHandler.postRequest("user/getWeightLogGraph/",{"startdate":$scope.goalDetails.startdate.toString(),"enddate":$scope.goalDetails.enddate.toString()}).then(function(response){
             $scope.weightlogGraph=response.data.Weight_logs;
             var weightLogs = [];
-            var dateRange=[];
             $.each($scope.weightlogGraph, function(index,value) {
                 if(value.userentry ==1){
-                var weightLog = [];
-                var date = value.date.split("/");
-                weightLog.push(monthNames[(date[1]-1)]+' '+date[0]);
-                weightLog.push(value.weight);
-                dateRange.push(monthNames[(date[1]-1)]+' '+date[0]);
-                weightLogs.push(weightLog);
+                    var weightLog = [];
+                    var date = value.date.split("/");
+                    weightLog.push(monthNames[(date[1]-1)]+' '+date[0]);
+                    weightLog.push(value.weight);
+                    budgetdate.push(monthNames[(date[1]-1)]+' '+date[0]);
+                    weightLogs.push(weightLog);
+
                 }
             });
+            titles.title="Goal Graph";
+            titles.name="Weight";
+            titles.suffix=" "+$scope.unit;
+            titles.yaxis="Weight (" + $scope.unit + ")";
+            titles.xaxis="Number of days";
+            $scope.drawGoalGraph(weightLogs,titles,budgetdate);
+
             $scope.weightGraphValue = weightLogs;
             $scope.weightGraph = limitToFilter($scope.weightGraphValue, 30);
-            console.log($scope.weightGraph);
-            $scope.dateRange= dateRange;
-            console.log($scope.dateRange);
         }, function () {
             errorMessage(Flash, "Please try again later!")
         });
     };
-
     $scope.deteteGoal=function(){
         $(function(){
             $("#lean_overlay").fadeTo(1000);
@@ -1648,11 +1661,11 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
                             if(this.value == "Protein")
                                 return this.value+'<br/><img class="hidden-md" src="../../images/i-protein.jpg"/>';
                             else if(this.value == "Fat")
-                                return '&nbsp;&nbsp;'+this.value+'&nbsp;&nbsp;'+'<br/><img class="hidden-md" src="../../images/i-fats.jpg"/>';
+                                return '&nbsp;&nbsp;'+this.value+'&nbsp;&nbsp;&nbsp;&nbsp;'+'<br/><img class="hidden-md" src="../../images/i-fats.jpg"/>';
                             else if(this.value == "Carbs")
-                                return this.value+'<br/><img class="hidden-md" src="../../images/i-carbs.jpg"/>';
+                                return this.value+'&nbsp;'+'<br/><img class="hidden-md" src="../../images/i-carbs.jpg"/>';
                             else if(this.value == "Fibre")
-                                return '&nbsp;'+this.value+'&nbsp;'+'<br/><img class="hidden-md" src="../../images/i-fibre.jpg"/>';
+                                return '&nbsp;'+this.value+'&nbsp;&nbsp;'+'<br/><img class="hidden-md" src="../../images/i-fibre.jpg"/>';
                             else
                                 return this.value;
                         }
@@ -1682,11 +1695,70 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
                 credits: {
                     enabled: false
                 },
-                legend:{enabled:true},
+                legend:{
+                    enabled:true,
+                   itemStyle:{
+                      fontSize:'10px',
+                      align: 'left',
+                      verticalAlign: 'top'
+
+
+                   }
+            },
+                plotOptions: {
+                    series: {
+                        events: {
+                            legendItemClick: function(event) {
+                                var selected = this.index;
+                                var allSeries = this.chart.series;
+
+                                $.each(allSeries, function(index, series) {
+                                    if (selected == index) {
+                                        if (series.visible == true) {
+                                            series.visible=false;
+                                            series.hide();
+                                        }
+                                        else {
+                                            series.visible=true;
+                                            series.show();
+                                        }
+                                    }
+
+                                });
+                                var count=0;
+                                $.each(allSeries, function(index,series) {
+                                    if (series.visible == true) {
+
+                                     }
+                                        else {
+                                              count++; //increasing series click count
+                                             }
+                                });
+
+                                if(count==2){
+                                    $.each(allSeries, function(index, series) {
+                                        if (selected == index) {
+                                            if (series.visible == true) {
+                                                series.hide();
+                                            }
+                                            else {
+                                                series.show();
+                                            }
+                                        }
+
+                                    });
+
+}
+                                return false;
+                            }
+                        }
+                    }
+                },
+
                 series: [{
                     type: 'column',
-                    name:'Units',
-                    data: [
+                    name:'Consumed',
+                  data: [
                         {
                             name: 'Protein',
                             color: 'limegreen',
@@ -1703,15 +1775,17 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
                             name: 'Fibre',
                             color: '#ffcc00',
                             y: parseFloat($scope.calorieIntakeGraph.fibre)
-                        }]
+                        }],
+                    visible:true
                 },  {
                     type: 'spline',
-                    name: 'Average',
+                    name: 'Required',
                     data: [
                         parseFloat($scope.calorieIntakeGraph.averageprotein),
                         parseFloat($scope.calorieIntakeGraph.averagefat),
                         parseFloat($scope.calorieIntakeGraph.averagecarbo),
                         parseFloat($scope.calorieIntakeGraph.averagefibre)],
+                    visible:true,
                     marker: {
                         lineWidth: 1,
                         lineColor: Highcharts.getOptions().colors[1],
@@ -1731,6 +1805,9 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
 
     $scope.graphTwo=function(){
         $scope.graphs=2;
+    };
+    $scope.graphThree=function(){
+        $scope.graphs=3;
     };
 
     $scope.loadSessionFood=function(){
@@ -1779,11 +1856,11 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
                                 if(this.value == "Protein")
                                     return this.value+'<br/><img src="../../images/i-protein.jpg"/>';
                                 else if(this.value == "Fat")
-                                    return '&nbsp;&nbsp;'+this.value+'&nbsp;&nbsp;'+'<br/><img src="../../images/i-fats.jpg"/>';
+                                    return '&nbsp;&nbsp;'+this.value+'&nbsp;&nbsp;&nbsp;&nbsp'+'<br/><img src="../../images/i-fats.jpg"/>';
                                 else if(this.value == "Carbs")
                                     return this.value+'<br/><img src="../../images/i-carbs.jpg"/>';
                                 else if(this.value == "Fibre")
-                                    return this.value+'<br/><img src="../../images/i-fibre.jpg"/>';
+                                    return this.value+'&nbsp;&nbsp;'+'<br/><img src="../../images/i-fibre.jpg"/>';
                                 else
                                     return this.value;
                             }
@@ -1815,7 +1892,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
                         enabled: false
                     },
                     legend:{enabled:false},
-                    series: [{
+                        series: [{
                         type: 'column',
                         showInLegend:false,
                         name:'Unit',
@@ -1837,7 +1914,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
                                 color: '#ffcc00',
                                 y: parseFloat($scope.calorieIntakeGraph.fibre)
                             }]
-                    }]
+                        }]
                 });
                 $scope.loaded=false;
 
@@ -2104,7 +2181,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
                 type: 'column'
             },
             title: {
-                text: titles.titlesle
+                text: titles.title
             },
             xAxis: {
                 title: {text: titles.xaxis},
@@ -2157,6 +2234,57 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
 
     $scope.datePicker = function(){
         $("#main-date").click();
+    };
+
+    //Weight Goal Graph
+    $scope.drawGoalGraph=function(data,titles,data1){
+        console.log(data);
+        $('#goalGraph').highcharts({
+            title: {
+                text: titles.title
+            },
+            xAxis: {
+                title: {
+                    text: titles.xaxis
+                },
+
+                categories: data1
+            },
+            tooltip:{
+                enabled:true,
+                backgroundColor:'rgba(255, 255, 255, 1)',
+                borderWidth:1,
+                shadow:true,
+                style:{fontSize:'10px',padding:5,zIndex:500},
+                formatter:false,
+                valueSuffix: titles.suffix
+            },
+
+            yAxis: {
+                title: {
+                    text: titles.yaxis
+                },
+                plotLines: [{
+                    value: 0,
+                    width: 1,
+                    color: '#f8ba01'
+                }]
+            },
+            colors: [
+                '#f8ba01'
+            ],
+            exporting: {
+                enabled: false
+            },
+            credits: {
+                enabled: false
+            },
+            legend:{enabled:false},
+            series: [ {
+                name: titles.name,
+                data: data
+            }]
+        });
     };
 
 
@@ -2435,7 +2563,7 @@ userApp.filter('trusted', ['$sce', function ($sce) {
  };
  });*/
 
-// Graph chart
+/*// Graph chart
 userApp.directive('hcGraph', function () {
     return {
         restrict: 'C',
@@ -2510,7 +2638,7 @@ userApp.directive('hcGraph', function () {
 
         }
     }
-});
+});*/
 
 // Graph chart
 userApp.directive('historyGraph', function () {

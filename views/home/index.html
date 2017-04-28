@@ -37,6 +37,13 @@
 
 <body class="back-image" ng-app="commonApp">
 
+<div id="loader">
+    <div class="spinner">
+        <div class="dot1"></div>
+        <div class="dot2"></div>
+    </div>
+</div>
+
 <!-- Full Body Container -->
 <div id="container" class="boxed-page" ng-controller="LoginController">
 <!-- Start Header Section -->
@@ -74,9 +81,17 @@
 
 <div ng-include src="'../common/login-popup.html'"></div>
 
+
 <div class="white-background min-height-1550">
     <div ng-view autoscroll="true"></div>
 </div>
+  <!--  <div>
+     <div class="loader-style">
+            <div class='loader'></div></div>
+        <div class="white-background" ng-view autoscroll="true" style="min-height: 1550px;"></div>
+    </div>-->
+
+   <!-- <div class="white-background" ng-view autoscroll="true" style="min-height: 1550px;"></div>-->
 
 <!-- Start Footer Section -->
 <footer>
@@ -222,7 +237,7 @@
 
 <!-- Go To Top Link -->
 <a href="#" class="back-to-top"><i class="fa fa-angle-up"></i></a>
-
+    <!-- For page loader style !-->
 <!--<div id="loader">
     <div class="spinner">
         <div class="dot1"></div>

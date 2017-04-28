@@ -823,7 +823,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
 
                     $window.currentweight = $scope.demography.weight;
                     $window.targetweight = $scope.goalDetails.targetweight;
-                    $window.unit=$scope.userProfile.unitPreference==1?"Kgs":"Lbs";
+                  $window.unit=$scope.userProfile.unitPreference==1?"Kgs":"Lbs";
                     $scope.goal = {
                         status: 'view-goal'
                     };
@@ -1698,7 +1698,10 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
                 legend:{
                     enabled:true,
                    itemStyle:{
-                       align:'left'
+                      fontSize:'10px',
+                      align: 'left',
+                      verticalAlign: 'top'
+
 
                    }
             },
@@ -1802,6 +1805,9 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
 
     $scope.graphTwo=function(){
         $scope.graphs=2;
+    };
+    $scope.graphThree=function(){
+        $scope.graphs=3;
     };
 
     $scope.loadSessionFood=function(){
