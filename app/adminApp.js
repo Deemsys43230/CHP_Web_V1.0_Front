@@ -775,21 +775,24 @@ adminApp.config([
       controller: 'ServerSettingsController'
 
     }).when('/vendor-settings', {
-          templateUrl: 'views/site-vendor.html',
+          templateUrl: 'views/site-vendorlist.html',
        resolve: {
             loadMyFiles: [
                 '$ocLazyLoad',
                 function ($ocLazyLoad) {
                     return $ocLazyLoad.load({
                         name: 'adminApp',
-                        files: ['../../app/settings/vendorController.js']
+
+                        files:
+                            [  '../../angular/angular-utils-pagination/dirPagination.js',
+                                '../../app/settings/vendorController.js']
                     });
                 }
             ]
         },
         controller: 'VendorSettingsController'
        })
-        .when('/vendor-edit-settings', {
+        .when('/vendor-edit-settings/:id', {
             templateUrl: 'views/site-vendor-edit.html',
             resolve: {
                 loadMyFiles: [
@@ -798,14 +801,27 @@ adminApp.config([
                         return $ocLazyLoad.load({
                             name: 'adminApp',
                             files: [
-                            '../../plugin/popup/style.css',
-                            '../../css/food-image-upload.css',
-                            '../../js/image-upload.js',
-                            '../../js/category-select.js',
-                            '../../css/multiSelect.css',
-                            '../../css/category-select.css',
-                            '../../css/category-select-bootstrap.css',
-                           '../../app/settings/vendorController.js']
+                          '../../js/image-upload.js',
+                          '../../angular/angular-utils-pagination/dirPagination.js',
+                             '../../app/settings/vendorController.js']
+                        });
+                    }
+                ]
+            },
+            controller: 'VendorEditSettingsController'
+        })
+        .when('/vendor-view/:id', {
+            templateUrl: 'views/site-vendor-view.html',
+            resolve: {
+                loadMyFiles: [
+                    '$ocLazyLoad',
+                    function ($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name: 'adminApp',
+                            files: [
+                                '../../js/image-upload.js',
+                                '../../angular/angular-utils-pagination/dirPagination.js',
+                                '../../app/settings/vendorController.js']
                         });
                     }
                 ]
@@ -1021,7 +1037,7 @@ adminApp.config([
                 '../../plugin/popup/style.css',
                 '../../angular/angular-utils-pagination/dirPagination.js',
                 '../../app/foodSuggestion/adminFoodSuggestionController.js',
-                 '../../app/userDashboard/userDashboardService.js',
+                 '../../app/userDashboard/userDashboardService.js'
               ]
             });
           }
@@ -2145,14 +2161,13 @@ adminApp.factory('siteMenuService', function () {
         'href': 'social-media-settings',
         'active': ''
       },
-/*
       {
 
-          'name': 'Vendor Settings',
-          'icon': 'cog',
-          'href': 'vendor-settings',
+          'name':'Vendor Settings',
+          'icon':'cog',
+          'href':'vendor-settings',
           'active': ''
-      },*/
+      },
       {
 
           'name': 'CDC Syndication',

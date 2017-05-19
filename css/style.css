@@ -8482,6 +8482,12 @@ ul.sidebar-menu li a{
 .margin-bottom-40{
     margin-bottom: 40px !important;
 }
+.margin-top-30{
+    margin-top: 30px !important;
+}
+.margin-top-50{
+    margin-top: 50px !important;
+}
 
 a:hover, a:visited, a:link, a:active
 {
@@ -15896,4 +15902,24 @@ a.button-wrap:hover li{
     width:209px;
     background-color:#ddd;
     border-radius:5px;
+}
+.blink_me {
+    animation: blinker 1s linear infinite;
+}
+.invite-button{
+    background-color: #f8ba01;
+    border: 3px solid #f8ba01;
+    color: #fff;
+    text-align: center;
+}
+.thumbnail-width{
+    height: 100px;
+    width: 102px;
+}
+.word-wrap{
+    word-wrap: break-word !important;
+}
+.mini-thumbnail-width{
+    height: 40px;
+    width: 50px;
 }
