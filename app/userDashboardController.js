@@ -14,7 +14,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
     $scope.workoutvalue=0;
     $window.singlePicker = false;
     $window.minimumDate = new Date();
-    $scope.weightUpdateText="Update Weight";
+    //$scope.weightUpdateText="Update";
     $scope.graphs=1;
     $scope.historyReport=0;
     $scope.historyType=1;
@@ -1009,7 +1009,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
                /*$scope.updateAverageGainSpent(date);*/
             }
             $scope.spinner=false;
-            $scope.weightUpdateText="Update Weight";
+            $scope.weightUpdateText="Update";
             $scope.doGetWeightLog(date);
             $scope.doGetDemograph();
             $scope.getBudget(date);
@@ -2172,6 +2172,21 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
             }
             else{
               $scope.disableUpdateWeight=true;
+             }
+        });
+    };
+
+      //Get user time zone for update weight log
+    $scope.getUserTimeZone=function(date){
+        requestHandler.getRequest("getUserTimeZone/","").then(function(response){
+            $scope.UserTimeZone = response.data.time;
+            $scope.UserDate = $scope.UserTimeZone.slice(0,10);
+            $scope.selectDate = date;
+            if( $scope.UserDate == date){
+               $scope.disableUpdateWater=false;
+            }
+            else{
+              $scope.disableUpdateWater=true;
              }
         });
     };

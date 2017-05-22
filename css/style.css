@@ -3379,6 +3379,27 @@ ul.icons-list li i {
 .tab-content p:last-child {
 	margin-bottom: 0;
 }
+.tab-content1 {
+    margin: 10px 10px;
+    height: 470px;
+    -webkit-box-shadow: inset 0px 0px 3px rgba(0,0,0,0.3);
+    -moz-box-shadow: inset 0px 0px 3px rgba(0,0,0,0.3);
+    box-shadow: inset 0px 0px 3px rgba(0,0,0,0.3);
+
+}
+
+.tab-content1.contentHistoryOverride{
+
+    height: 470px !important;
+}
+
+.tab-content1 p {
+    margin-bottom: 15px;
+}
+
+.tab-content1 p:last-child {
+    margin-bottom: 0;
+}
 
 
 /*************** Icons ***************/
@@ -7619,7 +7640,7 @@ ul.tabs li.active{
     -webkit-box-shadow: 0px 0px 3px rgba(0,0,0,0.3);
     -moz-box-shadow: 0px 0px 3px rgba(0,0,0,0.3);
     box-shadow: 0px 0px 3px rgba(0,0,0,0.3);
-    height: 365px;
+    height: 325px;
 }
 
 .content_scrollbar
@@ -8460,9 +8481,7 @@ ul.sidebar-menu li a{
 .height-150{
     height: 150px !important;
 }
-.height-300 {
-    height: 300px !important;
-}
+
 .height-190{
     height: 190px !important;
 }
@@ -8481,12 +8500,6 @@ ul.sidebar-menu li a{
 
 .margin-bottom-40{
     margin-bottom: 40px !important;
-}
-.margin-top-30{
-    margin-top: 30px !important;
-}
-.margin-top-50{
-    margin-top: 50px !important;
 }
 
 a:hover, a:visited, a:link, a:active
@@ -8812,14 +8825,28 @@ a:hover, a:visited, a:link, a:active
 	margin: 0;
 	border-top: 4px solid orange;
 	width: 100%;
-	height: 500px;
+	height: 210px;
 	float: right;
 	z-index: 1;
 	background-color: #fff;
 	-webkit-box-shadow: 1px 1px 5px rgba(0,0,0,0.3);
 	-moz-box-shadow: 1px 1px 5px rgba(0,0,0,0.3);
 	box-shadow: 1px 1px 5px rgba(0,0,0,0.3);
-	padding: 10px 20px !important;
+	padding: 5px 10px 5px 10px !important;
+}
+#medical{
+    display: block;
+    margin: 0;
+    border-top: 1px solid orange;
+    width: 100%;
+    height: 290px;
+    float: right;
+    z-index: 1;
+    background-color: #fff;
+    -webkit-box-shadow: 1px 1px 5px rgba(0,0,0,0.3);
+    -moz-box-shadow: 1px 1px 5px rgba(0,0,0,0.3);
+    box-shadow: 1px 1px 5px rgba(0,0,0,0.3);
+    padding: 0px 10px 10px 5px !important;
 }
 
 .height-520{
@@ -8952,6 +8979,7 @@ a:hover, a:visited, a:link, a:active
 {
     padding: 5px 10px;
 }
+
 
 .coach_input
 {
@@ -10609,9 +10637,16 @@ a.cancel:hover{
 
 #historyGraph{
     width: 100%;
-    height: 420px
+    height: 420px;
 }
-
+#viewGraph{
+    width: 100%;
+    height: 370px;
+}
+#excerciseGraph{
+    width: 100%;
+    height: 370px;
+}
 #gainVsSpent{
     width:150px;
     height: 330px;
@@ -15602,11 +15637,11 @@ input[type=number] {
 }
 
 .horizon-swiper .horizon-item {
-    padding: 5px 2px;
+    padding: 50px 2px;
 }
 
 .horizon-swiper .horizon-item.last {
-    width:85px;
+    width:100px;
     visibility:hidden;
 }
 
@@ -15615,17 +15650,16 @@ button{
     cursor: pointer
 }
 
-.horizon-swiper .horizon-item a.historyOverride{
+.horizon-swiper .horizon-item div.historyOverride{
     font-weight: 600;
     color: #666;
-    padding: 6px 12px;
+    padding: 3px 10px 5px 5px;
     background-color: #f9f9f9!important;
     border-radius: 0 !important;
-    border: 0 !important;
     margin-right: 7px !important;
 }
 
-.horizon-swiper .horizon-item a.historyOverride:hover, .horizon-swiper .horizon-item a.historyOverride:focus {
+.horizon-swiper .horizon-item a.historyOverride:hover, .horizon-item div.historyOverride:hover, .horizon-swiper .horizon-item div.historyOverride:focus {
     color: #ff0066 !important;
     background-color: #fff !important;
     -webkit-box-shadow: 0px 0px 3px rgba(0,0,0,0.3);
@@ -15633,7 +15667,7 @@ button{
     box-shadow:  0px 0px 3px rgba(0,0,0,0.3);
 }
 
-.horizon-swiper .horizon-item.active a.historyOverride, .horizon-swiper .horizon-item.active a.historyOverride:hover, .horizon-swiper .horizon-item.active a.historyOverride:focus {
+.horizon-swiper .horizon-item.active div.historyOverride, .horizon-swiper .horizon-item.active a.historyOverride:hover, .horizon-item.active div.historyOverride:hover, .horizon-swiper .horizon-item.active div.historyOverride:focus {
     background-color: #fff!important;
     color: #ff0066 !important;
     -webkit-box-shadow:  0px 0px 3px rgba(0,0,0,0.3);
@@ -15657,6 +15691,7 @@ button.suggest_button {
     color: #fff;
 }
 
+
 button.suggest_button:hover{
     background-color: #16b56f;
     color: #fff;
@@ -15678,7 +15713,58 @@ button.suggest_button.override-width{
 button.suggest_button.no-margin-bottom{
     margin-bottom:0 !important;
 }
-
+button.add_button {
+    margin-bottom:9px;
+    height: 45px;
+    font-weight: bold;
+    line-height: 40px;
+    display: block;
+    position: relative;
+    font-size: 14px;
+    width: 110%;
+    padding: 3px ;
+    border:0;
+    text-align: center;
+    background-color: #16cb7f;
+    color: #fff;
+}
+button.add_button:hover{
+    background-color: #16b56f;
+    color: #fff;
+    cursor: pointer;
+}
+button.add_button.override-width{
+    color: #fff;
+    cursor: pointer;
+    height: 32px;
+    line-height: 25px;
+}
+button.reduce_button {
+    margin-bottom:9px;
+    height: 45px;
+    font-weight: bold;
+    line-height: 40px;
+    display: block;
+    position: relative;
+    font-size: 14px;
+    width: 110%;
+    padding: 3px ;
+    border:0;
+    text-align: center;
+    background-color: #EC1A1A;
+    color: #fff;
+}
+button.reduce_button.override-width{
+    color: #fff;
+    cursor: pointer;
+    height: 32px;
+    line-height: 25px;
+}
+button.reduce_button:hover{
+    background-color: #E31414;
+    color: #fff;
+    cursor: pointer;
+}
 .user-success {
     color: #fff;
     background-color: #00A300;
@@ -15903,23 +15989,192 @@ a.button-wrap:hover li{
     background-color:#ddd;
     border-radius:5px;
 }
-.blink_me {
-    animation: blinker 1s linear infinite;
+.new-update{
+    float:left;
+    color:#555;
+    font-size:13px;
+    padding:0!important;
+    margin-bottom:0px;
+    font-weight:bold;
 }
-.invite-button{
+.new-update span.sleep-text {
+    padding: 7px 3px 0px 0px;
+    margin: 0!important;
+    height: 23px;
+    line-height: 14px;
+    float: left;
+    
+}
+.new-update span.vital-text {
+    padding: 5px 0px 5px 45px;
+    margin: 0!important;
+    height: 23px;
+    line-height: 14px;
+    float: left;
+    
+}
+.new-update span.sleep-count {
+    min-width: 65px!important;
+    float: right;
+    text-align: right!important;
+    line-height: 14px;
+    padding: 5px;
+    margin-top: 2px;
+    color: #ffffff !important;
+}
+.new-update span.sleep-count.brown{
+    background-color:#00897b;
+}
+.new-update span.sleep-count.green{
+    background-color:#FCB612;
+}
+.new-update span.sleep-count.gray{
+    background-color:#e4635d;
+}
+.level-update {
+    float:left;
+    color:#555;
+    font-size:13px;
+    padding:0!important;
+    margin-bottom:7px;
+    font-weight:bold;
+    
+}
+.level-update span.level-text {
+    padding: 7px 0px 0px 7px;
+    margin: 0!important;
+    height: 23px;
+    line-height: 14px;
+    float: left;
+    
+}
+.level-update span.level-count {
+    min-width: 70px!important;
+    float: right;
+    text-align: right!important;
+    line-height: 14px;
+    padding: 5px;
+    margin-top: 2px;
+    margin-right: 5px;
+    color: #ffffff !important;
+}
+.level-update span.level-count.blue{
+    background-color:#42c0fb;
+}
+.level-update span.level-count.red{
+    background-color:#E63E0A;
+}
+
+.labe-update{
+    background:#fff;
+    box-shadow: inset 0 0 3px #ccc;
+    float:left;
+    color:#555;
+    font-size:13px;
+    padding:0!important;
+    margin-left:45px !important;
+    font-weight:bold;
+}
+
+.labe-update span.labe-text{
+    padding:5px 3px 5px 8px;
+    margin:0!important;
+    width:60px!important;
+    height: 23px;
+    line-height: 14px;
+    float: left;
+}
+
+.labe-update span.labe-count{
+    min-width:40px!important;
+    float: right;
+    text-align: right!important;
+    line-height: 14px;
+    padding:5px;
+    margin:0!important;
+    color:#ffffff !important;
+}
+
+.bp-update{
+    background:#fff;
+    box-shadow: inset 0 0 3px #ccc;
+    float:left;
+    color:#555;
+    font-size:13px;
+    padding:0!important;
+    margin-bottom:7px;
+    font-weight:bold;
+}
+.bp-update span.bp-text{
+    padding:5px 3px 5px 3px;
+    margin:0!important;
+    width:65px!important;
+    height: 23px;
+    line-height: 14px;
+    float: left;
+}
+.bp-update span.bp-count{
+    min-width:55px!important;
+    float: right;
+    text-align: right!important;
+    line-height: 14px;
+    padding:5px;
+    margin:0!important;
+    color:#ffffff !important;
+}
+.bp-update span.bp-count.blue{
+    background-color: #FF4500;
+}
+.bp-update span.bp-count.green{
+    background-color:#DAA520;
+}
+
+.bp-update span.bp-count.red{
+    background-color:#778899;
+}
+
+
+.tab {
+   
+    height: 52px;
+    width: 130px;
+    margin-left: 5px;
+    margin-top: 5px;
+    -webkit-box-shadow: inset 0px 0px 3px rgba(0,0,0,0.3);
+    -moz-box-shadow: inset 0px 0px 3px rgba(0,0,0,0.3);
+    box-shadow: inset 0px 0px 3px rgba(0,0,0,0.3);
+}
+
+.tab-vital {
+   
+    height: 109px;
+    width: 130px;
+    margin-top: 5px;
+    margin-left: 5px;
+    -webkit-box-shadow: inset 0px 0px 3px rgba(0,0,0,0.3);
+    -moz-box-shadow: inset 0px 0px 3px rgba(0,0,0,0.3);
+    box-shadow: inset 0px 0px 3px rgba(0,0,0,0.3);
+}
+.log {
+
+    padding-bottom: 5px;
+    border-bottom: 1px solid #eee;
+}
+.medical-post {
+
+    padding-bottom: 70px;
+    border-bottom: 1px solid #eee;
+}
+.medical-post-1 {
+
+    padding-bottom: 55px;
+    border-bottom: 1px solid #eee;
+}
+.app-button .main-button {
+    padding: 10px 70px!important;
+    margin-left: 10px;
+    margin-top: 10px;
+}
+a.main-button.orange_back {
     background-color: #f8ba01;
-    border: 3px solid #f8ba01;
-    color: #fff;
-    text-align: center;
-}
-.thumbnail-width{
-    height: 100px;
-    width: 102px;
-}
-.word-wrap{
-    word-wrap: break-word !important;
-}
-.mini-thumbnail-width{
-    height: 40px;
-    width: 50px;
 }

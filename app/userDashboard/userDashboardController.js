@@ -14,7 +14,10 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
     $scope.workoutvalue=0;
     $window.singlePicker = false;
     $window.minimumDate = new Date();
-    $scope.weightUpdateText="Update Weight";
+    $scope.weightUpdateText="Update";
+    $scope.wearableUpdateText="Connect";
+    $scope.waterAddText="+ Add";
+    $scope.waterReduceText="- Reduce";
     $scope.graphs=1;
     $scope.historyReport=0;
     $scope.historyType=1;
@@ -177,7 +180,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
            $scope.doGetIntakeBruntByDate( $scope.userFood.addeddate);
             $scope.goGetDailyIntakeGraph($scope.userFood.addeddate);
             $scope.goGetSessionGraph($scope.storedSessionId);
-            $scope.doGetHistoryReport();
+            $scope.doGetHistoryReport("historyGraph");
             $scope.getBudget($scope.userFood.addeddate);
         });
 
@@ -197,7 +200,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
            $scope.doGetIntakeBruntByDate(date);
             $scope.goGetDailyIntakeGraph(date);
             $scope.goGetSessionGraph($scope.storedSessionId);
-            $scope.doGetHistoryReport();
+            $scope.doGetHistoryReport("historyGraph");
             $scope.getBudget(date);
         });
 
@@ -213,7 +216,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
             $scope.doGetIntakeBruntByDate(date);
             $scope.goGetDailyIntakeGraph(date);
             $scope.goGetSessionGraph($scope.storedSessionId);
-            $scope.doGetHistoryReport();
+            $scope.doGetHistoryReport("historyGraph");
             $scope.getBudget(date);
         });
     };
@@ -540,7 +543,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         exerciseInsertPromise.then(function(){
             $scope.loadExerciseDiary($scope.userExercise.date);
             $scope.doGetIntakeBruntByDate($scope.userExercise.date);
-            $scope.doGetHistoryReport();
+            $scope.doGetHistoryReport("historyGraph");
             $scope.getBudget($scope.userExercise.date);
         });
 
@@ -554,7 +557,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
             var date = document.getElementById("main-start-date").value;
             $scope.loadExerciseDiary(date);
             $scope.doGetIntakeBruntByDate(date);
-            $scope.doGetHistoryReport();
+            $scope.doGetHistoryReport("historyGraph");
             $scope.getBudget(date);
         });
     };
@@ -616,7 +619,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
             var date = document.getElementById("main-start-date").value;
             $scope.loadExerciseDiary(date);
             $scope.doGetIntakeBruntByDate(date);
-            $scope.doGetHistoryReport();
+            $scope.doGetHistoryReport("historyGraph");
             $scope.getBudget(date);
         });
 
@@ -943,7 +946,8 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
             }
         });
     };
-
+   
+  
     $scope.weightLogEntry=function(id){
         $scope.weightUpdateText="Updating...";
         $scope.spinner=true;
@@ -952,6 +956,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         else
         $scope.doInsertOrUpdateWeightLog($("#weight-log-date1").val(),parseFloat($("#weightLog1").val()));
     };
+
 
     $scope.checkGoalOnLoad = function(date){
         requestHandler.postRequest("checkGoalStatus/",{"date":date}).then(function(response){
@@ -1010,7 +1015,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
                /*$scope.updateAverageGainSpent(date);*/
             }
             $scope.spinner=false;
-            $scope.weightUpdateText="Update Weight";
+            $scope.weightUpdateText="Update";
             $scope.doGetWeightLog(date);
             $scope.doGetDemograph();
             $scope.getBudget(date);
@@ -1029,6 +1034,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         return angular.equals(parseFloat($("#weightLog1").val()), parseFloat($scope.originalWeight));
     };
 
+    
 
     $scope.doGetWeightLogGraph=function(){
         $scope.graph = {
@@ -1071,6 +1077,9 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
             errorMessage(Flash, "Please try again later!")
         });
     };
+
+
+
     $scope.deteteGoal=function(){
         $(function(){
             $("#lean_overlay").fadeTo(1000);
@@ -1172,6 +1181,9 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         });
 
     };
+
+
+
     //To Delete Goal
     $scope.doDeleteGoal=function(){
         requestHandler.postRequest("user/deleteWeightGoal/",{"date":selectedDate,"currentweight":$scope.demography.weight}).then(function(response){
@@ -1924,6 +1936,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         }
     };
 
+
     $scope.doGetCoachAdvices = function(){
         requestHandler.getRequest("user/getCoachAdvicesByUser/", "").then(function(response){
 
@@ -1979,19 +1992,39 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         if($('#history-start').val()=='') $scope.isHistoryEmpty=1;
         else $scope.isHistoryEmpty=0;
     };
-
+    $scope.getViewGraph=function(){
+        $scope.historyReport=0;
+        if($('#history-start').val()=='') $scope.isViewGraphEmpty=1;
+        else $scope.isViewGraphEmpty=0;
+    };
+    $scope.getViewGraph1=function(){
+        $scope.historyReport=0;
+        if($('#history-start').val()=='') $scope.isViewEmpty=1;
+        else $scope.isViewEmpty=0;
+    };
     $scope.otherThanHistory=function(){
         $scope.historyReport=0;
     };
 
-    $scope.setHistoryType=function(id){
+    $scope.setHistoryType=function(id,divId){
+        
         $scope.historyType=id;
         if($('#history-start').val()==''){}
-        else $scope.doGetHistoryReport();
+        else $scope.doGetHistoryReport(divId);
     };
-
-    $scope.doGetHistoryReport=function(){
-        $scope.isHistoryEmpty=0;
+    $scope.setGraphType=function(id,divId){
+        
+        $scope.historyType=id;
+        if($('#history-start').val()==''){}
+        else $scope.doGetGraphReport(divId);
+    };
+    $scope.setExcerciseType=function(id,divId){
+        $scope.historyType=id;
+        if($('#history-start').val()==''){}
+        else $scope.doGetGraph(divId);
+    };
+    $scope.doGetGraph=function(divId){
+        $scope.isViewEmpty=0;
         $scope.loaded=true;
         var startDate;
         var endDate;
@@ -2008,6 +2041,48 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         var budgetdate=[];
         var historyDates=[];
         var titles={};
+        
+        if($scope.historyType==3){
+            requestHandler.postRequest("user/getExerciseMinutesUsingDates/", {"fromdate":startDate,"todate":endDate}).then(function(response){
+                $scope.historyRecord=response.data.ExerciseMinutesUsingDates;
+                $.each($scope.historyRecord, function(index,value) {
+                    var history = [];
+                    var date = value.date.split("/");
+                    history.push(monthNames[(date[1]-1)]+' '+date[0]);
+                    history.push(parseFloat(value.workoutvalue));
+                    historyDates.push(monthNames[(date[1]-1)]+' '+date[0]);
+                    historyReport.push(history);
+                });
+                titles.title="Exercise Minutes Graph ( "+startDate+" - "+endDate+" )";
+                titles.name="Exercise Minutes";
+                titles.suffix=" mints";
+                titles.yaxis="Minutes";
+                titles.xaxis="Date Range";
+                titles.color='blue';
+                $scope.drawHistoryGraph(historyReport,historyDates,titles,divId);
+            });
+        }
+
+    };
+    $scope.doGetGraphReport=function(divId){
+        $scope.isViewGraphEmpty=0;
+        $scope.loaded=true;
+        var startDate;
+        var endDate;
+        if($('#history-start').val()==''){
+            startDate = endDate = selectedDate;
+        }
+        else{
+            startDate = $('#history-start').val();
+            endDate = $('#history-end').val();
+        }
+        var monthNames= ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+        var historyReport = [];
+        var netVal =[];
+        var budgetdate=[];
+        var historyDates=[];
+        var titles={};
+        
         if($scope.historyType==1){
             requestHandler.postRequest("user/calorieGraphbyDates/", {"fromdate":startDate,"todate":endDate}).then(function(response){
                 $scope.historyRecord=response.data.calorieGraphbyDates;
@@ -2025,7 +2100,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
                 titles.yaxis="Calories (cal)";
                 titles.xaxis="Date Range";
                 titles.color='limegreen';
-                $scope.drawHistoryGraph(historyReport,historyDates,titles);
+                $scope.drawHistoryGraph(historyReport,historyDates,titles,divId);
             });
         }
         else if($scope.historyType==2){
@@ -2045,8 +2120,70 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
                 titles.yaxis="Calories (cal)";
                 titles.xaxis="Date Range";
                 titles.color='red';
-                $scope.drawHistoryGraph(historyReport,historyDates,titles);
+                $scope.drawHistoryGraph(historyReport,historyDates,titles,divId);
             });
+        }
+
+    };
+    $scope.doGetHistoryReport=function(divId){
+        $scope.isHistoryEmpty=0;
+        $scope.loaded=true;
+        var startDate;
+        var endDate;
+        if($('#history-start').val()==''){
+            startDate = endDate = selectedDate;
+        }
+        else{
+            startDate = $('#history-start').val();
+            endDate = $('#history-end').val();
+        }
+        var monthNames= ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+        var historyReport = [];
+        var netVal =[];
+        var budgetdate=[];
+        var historyDates=[];
+        var titles={};
+        
+        if($scope.historyType==1){
+            requestHandler.postRequest("user/calorieGraphbyDates/", {"fromdate":startDate,"todate":endDate}).then(function(response){
+                $scope.historyRecord=response.data.calorieGraphbyDates;
+                $.each($scope.historyRecord, function(index,value) {
+                    var history = [];
+                    var date = value.date.split("/");
+                    history.push(monthNames[(date[1]-1)]+' '+date[0]);
+                    history.push(parseFloat(value.calorie));
+                    historyDates.push(monthNames[(date[1]-1)]+' '+date[0]);
+                    historyReport.push(history);
+                });
+                titles.title="Calories Gained Graph ( "+startDate+" - "+endDate+" )";
+                titles.name="Calories Gained";
+                titles.suffix=" cals";
+                titles.yaxis="Calories (cal)";
+                titles.xaxis="Date Range";
+                titles.color='limegreen';
+                $scope.drawHistoryGraph(historyReport,historyDates,titles,divId);
+            });
+        }
+        else if($scope.historyType==2){
+            requestHandler.postRequest("user/getCalorieBurntGraphByDates/", {"fromdate":startDate,"todate":endDate}).then(function(response){
+                $scope.historyRecord=response.data.CalorieBurntGraphbyDates;
+                $.each($scope.historyRecord, function(index,value) {
+                    var history = [];
+                    var date = value.date.split("/");
+                    history.push(monthNames[(date[1]-1)]+' '+date[0]);
+                    history.push(parseFloat(value.calorie));
+                    historyDates.push(monthNames[(date[1]-1)]+' '+date[0]);
+                    historyReport.push(history);
+                });
+                titles.title="Calories Brunt Graph ( "+startDate+" - "+endDate+" )";
+                titles.name="Calories Burned";
+                titles.suffix=" cals";
+                titles.yaxis="Calories (cal)";
+                titles.xaxis="Date Range";
+                titles.color='red';
+                $scope.drawHistoryGraph(historyReport,historyDates,titles,divId);
+            });
+
         }
         else if($scope.historyType==3){
             requestHandler.postRequest("user/getExerciseMinutesUsingDates/", {"fromdate":startDate,"todate":endDate}).then(function(response){
@@ -2065,7 +2202,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
                 titles.yaxis="Minutes";
                 titles.xaxis="Date Range";
                 titles.color='blue';
-                $scope.drawHistoryGraph(historyReport,historyDates,titles);
+                $scope.drawHistoryGraph(historyReport,historyDates,titles,divId);
             });
         }else if($scope.historyType==4){
             if($scope.userProfile.unitPreference==1){
@@ -2093,7 +2230,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
                 titles.yaxis="Weight (" + $scope.unit + ")";
                 titles.xaxis="Date Range";
                 titles.color='#f8ba01';
-                $scope.drawHistoryGraph(historyReport,historyDates,titles);
+                $scope.drawHistoryGraph(historyReport,historyDates,titles,divId);
             });
         }
         else{
@@ -2114,17 +2251,18 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
                 titles.yaxis="Calories (Cal)";
                 titles.xaxis="Date Range";
                 titles.color='#f8ba01';
-                $scope.drawHistoryGraphForBudget(historyReport,titles,netVal,budgetdate);
+                $scope.drawHistoryGraphForBudget(historyReport,titles,netVal,budgetdate,divId);
             });
         }
 
     };
 
-    $scope.drawHistoryGraph=function(data,dataX,titles){
+    $scope.drawHistoryGraph=function(data,dataX,titles,divId){
         console.log(data);
         console.log(titles);
         $scope.loaded=false;
-        $('#historyGraph').highcharts({
+        $('#'+divId).highcharts({
+             
             title: {
                 text: titles.title
             },
@@ -2144,6 +2282,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
                 valueSuffix: titles.suffix
             },
             yAxis: {
+
                 title: {
                     text: titles.yaxis
                 },
@@ -2162,21 +2301,73 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
             credits: {
                 enabled: false
             },
+           
             legend:{enabled:false},
-            series: [ {
+            series: [{
+                type: 'column',
                 name: titles.name,
                 data: data
+            
+            }]
+        });
+        $('#excerciseGraph').highcharts({
+            
+            title: {
+                text: titles.title
+            },
+            xAxis: {
+                    title: {
+                    text: titles.xaxis
+                },
+                categories: dataX
+            },
+            tooltip:{
+                enabled:true,
+                backgroundColor:'rgba(255, 255, 255, 1)',
+                borderWidth:1,
+                shadow:true,
+                style:{fontSize:'10px',padding:5,zIndex:500},
+                formatter:false,
+                valueSuffix: titles.suffix
+            },
+            yAxis: {
+
+                title: {
+                    text: titles.yaxis
+                },
+                plotLines: [{
+                    value: 0,
+                    width: 1,
+                    color:titles.color
+                }]
+            },
+            colors: [
+                titles.color
+            ],
+            exporting: {
+                enabled: false
+            },
+            credits: {
+                enabled: false
+            },
+           
+            legend:{enabled:false},
+            series: [{
+                type: 'column',
+                name: titles.name,
+                data: data
+            
             }]
         });
     };
 
-    $scope.drawHistoryGraphForBudget=function(data,titles,data1,data2){
+    $scope.drawHistoryGraphForBudget=function(data,titles,data1,data2,divId){
         console.log(data);
         console.log(titles);
         console.log(data1);
         console.log(data2);
         $scope.loaded=false;
-        $('#historyGraph').highcharts({
+        $('#'+divId).highcharts({
             chart: {
                 type: 'column'
             },
@@ -2229,11 +2420,16 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
                     fillColor: 'white'
                 }
             }]
-            });
+        });
+        
     };
 
     $scope.datePicker = function(){
         $("#main-date").click();
+    };
+
+    $scope.datePickerGraph = function(){
+        $("#history-graph").click();
     };
 
     //Weight Goal Graph
@@ -2304,6 +2500,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         });
     };
 
+
     //Budget value
     $scope.getBudget=function(date){
         requestHandler.postRequest("user/getTotalCalorieDetailForDate/",{"date":date}).then(function(response){
@@ -2319,6 +2516,106 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
          });
     };
 
+
+    //for get water level entry
+    $scope.waterlog=0;
+    $scope.doGetWaterLog=function(date,id){
+
+        var waterLogPromise=UserDashboardService.doGetWaterLogDetails(date);
+        waterLogPromise.then(function(result){
+            var waterlogdetails=result.Water_log;
+            
+                $scope.waterlog = waterlogdetails.milliliters;
+                $scope.waterlogoz = waterlogdetails.ounces;           
+        });
+    };
+
+    //TO Insert water Log
+    $scope.doAddOrReduceWatertLog=function(id){
+        //$scope.disableReduceWater=false;
+        if(id==0){
+            $scope.addspin=true;
+            $scope.waterAddText="Updating...";
+            if($scope.addlogUnit==1){
+                requestHandler.postRequest("user/waterlogInsertorUpdate/",{"date":$scope.UserDate,"milliliters":parseInt($scope.waterlog) + parseInt($scope.addlog),"oz":""}).then(function(response){
+                    $scope.addspin=false;
+                    $scope.waterAddText="+ Add";
+                    $scope.doGetWaterLog($scope.UserDate);
+                }, function () {
+                     errorMessage(Flash, "Please try again later!")
+                });
+            }
+            else{
+                requestHandler.postRequest("user/waterlogInsertorUpdate/",{"date":$scope.UserDate,"milliliters":"","oz":parseInt($scope.waterlogoz) + parseInt($scope.addlog)}).then(function(response){
+                    $scope.addspin=false;
+                    $scope.waterAddText="+ Add";  
+                    $scope.doGetWaterLog($scope.UserDate);                 
+                }, function () {
+                     errorMessage(Flash, "Please try again later!")
+                });
+
+            }
+        }
+        else{
+            if($scope.waterlog>$scope.addlog){
+                $scope.reducespin=true;
+                $scope.waterReduceText="Updating...";
+                if($scope.addlogUnit==1){
+                    requestHandler.postRequest("user/waterlogInsertorUpdate/",{"date":$scope.UserDate,"milliliters":parseInt($scope.waterlog) - parseInt($scope.addlog),"oz":""}).then(function(response){
+                        $scope.reducespin=false;
+                        $scope.waterReduceText="- Reduce";
+                        $scope.doGetWaterLog($scope.UserDate);
+                    }, function () {
+                        errorMessage(Flash, "Please try again later!")
+                    });
+                }
+                else{
+                    $scope.disableForReduce=($scope.waterlogoz<=$scope.addlog);
+                    requestHandler.postRequest("user/waterlogInsertorUpdate/",{"date":$scope.UserDate,"milliliters":"","oz":parseInt($scope.waterlogoz) - parseInt($scope.addlog)}).then(function(response){
+                        $scope.reducespin=false;
+                        $scope.waterReduceText="- Reduce";
+                        $scope.doGetWaterLog($scope.UserDate);                          
+                    }, function () {
+                        errorMessage(Flash, "Please try again later!")
+                    });
+                }
+            }
+        }     
+    };
+
+    // for water log update
+    $scope.updateWaterLog=function(){
+        $scope.waterlog=parseFloat($scope.waterlog);
+        requestHandler.postRequest("user/waterlogInsertorUpdate/",{"date":$scope.UserDate,"milliliters":$scope.waterlog,"oz":$scope.waterlogoz}).then(function(response){
+
+        }, function () {
+            errorMessage(Flash, "Please try again later!")
+        });
+
+    };
+
+    $scope.$watch('addlog', function() {
+        if($scope.addlogUnit==1){
+            if ($scope.waterlog<=$scope.addlog) {
+                $scope.isReduceEnable=true;
+            }else
+            $scope.isReduceEnable=false;
+        }
+        else{
+            if ($scope.waterlogoz<=$scope.addlog) {
+                $scope.isReduceEnable=true;
+            }else
+            $scope.isReduceEnable=false;
+        }
+    });
+
+    //for get wearable vendor list
+    $scope.OpenPopupWindow = function () {
+        $scope.loader=false;
+        $scope.wearableUpdateText="Connecting...";
+        $scope.device=true;
+        $window.open("https://www.fitbit.com/oauth2/authorize?response_type=code&client_id=228JGS&redirect_uri=http://182.75.114.194/ch-v2/views/devices/index.html&scope=activity%20heartrate%20location%20nutrition%20profile%20settings%20sleep%20", "_self");          
+        }
 
     //To Display current date
     var selectedDate = new Date();
@@ -2346,6 +2643,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         $scope.goGetDailyIntakeGraph(date);
         $scope.doGetWeightGoal();
         $scope.doGetWeightLog(date);
+        $scope.doGetWaterLog(date);
         $scope.goGetSessionGraph($scope.storedSessionId);
         $scope.getUserTimeZone(date);
         $scope.getBudget(date);

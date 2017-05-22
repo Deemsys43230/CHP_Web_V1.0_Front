@@ -239,9 +239,16 @@ adminApp.factory("UserDashboardService",['requestHandler',function(requestHandle
         });
     };
 
-    //Frequently Added Exercise
+    //Frequently Added Weight
     userDashboardServiceObj.doGetWeightLogDetails=function(date){
         return requestHandler.postRequest("user/getWeightLogByDate/",{"date":date}).then(function(response) {
+            return response.data;
+        });
+    };
+
+    //Frequently Added Water
+    userDashboardServiceObj.doGetWaterLogDetails=function(date){
+        return requestHandler.postRequest("user/getWaterLogByDate/",{"date":date}).then(function(response) {
             return response.data;
         });
     };
