@@ -98,6 +98,31 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         })}]},
                 controller:'UserDashboardController'
             }).
+            when('/connectDevice', {
+                templateUrl: 'views/dashboard.html',
+                fromDevice:true,
+                resolve: {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'userApp',
+                            files:[
+                                '../../css/custom-inputs.css',
+                                '../../css/vertical_tab.css',
+                                '../../plugin/popup/style.css',
+                                '../../css/ngPercentageCircle.css',
+                                '../../app/userDashboard/ngPercentageCircle.js',
+                                '../../app/userDashboard/userDashboardService.js',
+                                '../../app/userDashboard/userDashboardController.js',
+                                '../../plugin/dateRange/daterangepicker.css',
+                                '../../plugin/dateRange/daterangepicker.js',
+                                '../../css/horizon-swiper.min.css',
+                                '../../css/horizon-theme.min.css',
+                                '../../js/horizon-swiper.min.js'
+                            ]
+                        })}]},
+                controller:'UserDashboardController'
+            }).
+           
             when('/register', {
                 templateUrl: 'views/register.html',
                 resolve: {

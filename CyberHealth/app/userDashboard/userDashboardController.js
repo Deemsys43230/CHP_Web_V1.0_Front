@@ -15,15 +15,19 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
     $window.singlePicker = false;
     $window.minimumDate = new Date();
     $scope.weightUpdateText="Update";
-    $scope.wearableUpdateText="Connect";
     $scope.waterAddText="+ Add";
     $scope.waterReduceText="- Reduce";
+    $scope.wearableText="Disconnect";
     $scope.graphs=1;
     $scope.historyReport=0;
     $scope.historyType=1;
     $scope.showExercise=0;
     if($route.current.$$route.fromGoal)
         $("#updateWeightGoal").click();
+    if($route.current.$$route.fromDevice){
+         $("#appAndDevice").click();
+    }
+    
     //Modal Popup to add user food
     $scope.doUserAddFood=function(){
 
@@ -2604,13 +2608,53 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
     });
 
     //for get wearable vendor list
-    $scope.OpenPopupWindow = function () {
+    $scope.OpenFitbitWindow = function (authorizeurl,vendorid) {
+         $rootScope.vendorid= vendorid;
         $scope.loader=false;
-        $scope.wearableUpdateText="Connecting...";
-        $scope.device=true;
-        $window.open("https://www.fitbit.com/oauth2/authorize?response_type=code&client_id=228JGS&redirect_uri=http://182.75.114.194/ch-v2/views/devices/index.html&scope=activity%20heartrate%20location%20nutrition%20profile%20settings%20sleep%20", "_self");          
+        //$scope.wearableFitbitText="Connecting...";
+        $scope.device=true;        
+        $window.open(authorizeurl+"&state="+vendorid,"_self");
         }
 
+    $scope.doGetVendorlist = function(){
+        requestHandler.getRequest("getWearableVendorsListByUser","").then(function(response) {
+            $scope.vendorList = response.data.vendorlist;
+        },function(){
+            errorMessage(Flash,"Please try again later!")
+        });
+    };
+    $scope.wearableinit = function(){
+        $scope.doGetVendorlist();   
+    }
+
+    // For show and Hide button
+    $scope.isActive = function(isactive) {
+
+    if (isactive == 0)
+      return true;
+    else 
+      return false;
+
+    };
+    $scope.doGetDisonnectDetails=function(logid){
+        $scope.wearableText="Disconnecting...";
+        $scope.logid=logid;
+        return requestHandler.postRequest("disconnectUserWearable/",{"logid":$scope.logid}).then(function(response) {
+            if(response.data.Response=="Success"){  
+                console.log("Success");
+                
+        }   
+        });
+            };
+
+    //To display daily activities 
+    $scope.doGetWearableDateByDate = function(date){
+        return requestHandler.postRequest("user/getWearableDataForDate/",{"date": date}).then(function(response) {  
+            console.log(response.data.wearable);
+            $scope.wearable=response.data.wearable;
+        });
+    };
+    
     //To Display current date
     var selectedDate = new Date();
     var dd = selectedDate.getDate();
@@ -2642,6 +2686,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         $scope.getUserTimeZone(date);
         $scope.getBudget(date);
         $scope.checkGoalOnLoad(date);
+        $scope.doGetWearableDateByDate(date);
     };
 
     $scope.initialLoadFoodAndExercise(selectedDate);

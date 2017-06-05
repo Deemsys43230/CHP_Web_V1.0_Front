@@ -541,6 +541,10 @@
         width: 20%;
         display:inline-block;
     }
+    .dashboard-3{
+        width: 25%;
+        display:inline-block;
+    }
 
     .dashboard-2{
         width: 79%;
@@ -552,6 +556,9 @@
         display:inline-block;
     }
 
+    .width {
+        width: 80%;
+    }
     #sidemenu li a {
         padding: 7px 5px 7px 12px!important;
         height: 38px !important;
@@ -665,7 +672,7 @@
 
 @media (min-width: 992px)and (max-width: 1120px){
     .nav-tabs > li > a {
-        padding: 10px 12px;
+        padding: 8px 10px;
     }
 
     .session input[type=radio] + label{
@@ -761,6 +768,7 @@
         padding: 6px 15px;
     }
 
+
     #gainVsSpent{
         width:140px;
     }
@@ -778,17 +786,17 @@
     }
 
     .dashboard-1{
-        width: 15%;
+        width: 14%;
         display:inline-block;
     }
 
     .dashboard-2{
-        width: 63%;
+        width: 58%;
         display:inline-block;
     }
 
     .dashboard-3{
-        width: 21%;
+        width: 27%;
         display:inline-block;
     }
 
@@ -796,12 +804,14 @@
         width: 84%;
         display:inline-block;
     }
-
-    #sidemenu li a {
-        padding: 7px 5px 7px 12px!important;
-        height: 38px !important;
+    .font-size-md {
+        font-size: 12px;
+        line-height: 22px;
     }
 
+    .width {
+        width: 90%;
+    }
     #sidemenu li.calories {
         padding: 8px 0 !important;
         height: 308px !important;
@@ -1003,17 +1013,17 @@
     }
 
     .dashboard-1{
-        width: 18%;
+        width: 17%;
         display:inline-block;
     }
 
     .dashboard-2{
-        width: 60%;
+        width: 54%;
         display:inline-block;
     }
 
     .dashboard-3{
-        width: 21%;
+        width: 28%;
         display:inline-block;
     }
 
@@ -1021,9 +1031,15 @@
         width: 81%;
         display:inline-block;
     }
-
+.width {
+    width: 70%;
+}
+    .font-size-md {
+        font-size: 14px;
+        line-height: 22px;
+    }
     .nav-tabs > li > a {
-        padding: 10px 20px;
+        padding: 10px 15px;
     }
 
     .search-list-form.override form input{
@@ -1147,11 +1163,11 @@
 
 @media (min-width: 1200px) and (max-width: 1300px){
     .session input[type=radio] + label{
-        padding: 0 15px ;
+        padding: 0 10px ;
     }
     #sidemenu li a {
-        padding: 10px 5px 10px 15px !important;
-        height:60px!important;
+        padding: 8px 5px 8px 15px !important;
+        height:55px!important;
     }
 
     #targetGraph{
