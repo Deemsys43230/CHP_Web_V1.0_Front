@@ -67,7 +67,14 @@ userApp.factory("FriendsService",['requestHandler','Flash',function(requestHandl
             errorMessage(Flash,"Please try again later");
         })
     };
-
+    //Send email invitation to friend
+    userFriendsServiceObj.doSendEmail= function (name,email) {
+        return requestHandler.postRequest("sendInvitationEmail/",{"sendername":name,"friendemailid":email}).then(function(response){
+            return response;
+        },function(response){
+            errorMessage(Flash,"Please try again later");
+        })
+    };
     return userFriendsServiceObj;
 
 }]);

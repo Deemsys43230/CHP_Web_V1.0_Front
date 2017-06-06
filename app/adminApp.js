@@ -2163,7 +2163,7 @@ adminApp.factory('siteMenuService', function () {
       },
       {
 
-          'name':'Vendor Settings',
+          'name':'Weight Log',
           'icon':'cog',
           'href':'vendor-settings',
           'active': ''

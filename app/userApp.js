@@ -388,6 +388,7 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'userApp',
                             files:[
+                                '../../plugin/popup/style.css',
                                 '../../app/friends/friendsController.js',
                                 '../../app/friends/friendsService.js'
                             ]
@@ -1179,3 +1180,20 @@ userApp.factory('myGoogleAnalytics', [
             // inject self
         }
     ]);
+
+userApp.filter('startsWithLetter', function () {
+    return function (items, searchHistory) {
+        var filtered = [];
+        var letterMatch = new RegExp(searchHistory, 'i');
+        if (!items) {
+        } else {
+            for (var i = 0; i < items.length; i++) {
+                var item = items[i];
+                if (letterMatch.test(item.name)) {
+                    filtered.push(item);
+                }
+            }
+        }
+        return filtered;
+    };
+});

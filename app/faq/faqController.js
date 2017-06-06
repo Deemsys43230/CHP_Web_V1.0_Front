@@ -235,9 +235,9 @@ coachApp.controller('FAQCommonController',['$scope','requestHandler','Flash',fun
 
 adminApp.filter('startsWithLetterFood', function () {
 
-    return function (items, foodsearch) {
+    return function (items, faqsearch) {
         var filtered = [];
-        var letterMatch = new RegExp(foodsearch, 'i');
+        var letterMatch = new RegExp(faqsearch, 'i');
         if(!items){}
         else{
             for (var i = 0; i < items.length; i++) {

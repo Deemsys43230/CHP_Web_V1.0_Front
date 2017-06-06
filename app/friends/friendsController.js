@@ -129,6 +129,18 @@ userApp.controller('FriendsController',['$scope','requestHandler','Flash','Frien
         })
     };
 
+    //DO send Email Invitation
+    $scope.doSendEmail=function(name,email){
+        var doSendEmailPromise = FriendsService.doSendEmail(name,email);
+        doSendEmailPromise.then(function(result){
+            if(result.data.Response_status ==1){
+                successMessage(Flash,"Invitation&nbsp;Successfully&nbsp;Send");
+                $scope.initialLoad();
+            }
+        })
+    };
+
+
     //user view details
     $scope.doViewMembers= function (id) {
         $scope.viewDetails=1;
@@ -168,6 +180,30 @@ userApp.controller('FriendsController',['$scope','requestHandler','Flash','Frien
         });
     };
 
+    $scope.doInviteFriendPopup=function(){
+        $scope.sendEmail={};
+        $scope.inviteFriendsForm.$setPristine();
+      $(function(){
+            $("#lean_overlay").fadeTo(1000);
+            $("#sendEmail").fadeIn(600);
+            $(".common_model").show();
+             $scope.shouldBeOpen = true;
+        });
+
+        $(".modal_close").click(function(){
+            $(".common_model").hide();
+            $("#sendEmail").hide();
+            $("#lean_overlay").hide();
+            $scope.shouldBeOpen = false;
+        });
+
+        $("#lean_overlay").click(function(){
+            $(".common_model").hide();
+            $("#sendEmail").hide();
+            $("#lean_overlay").hide();
+            $scope.shouldBeOpen = false;
+        });
+    };
     //Onload
     $scope.initialLoad=function(){
         $scope.myFriends();

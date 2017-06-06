@@ -993,126 +993,97 @@ a.main-button:hover, input[type="submit"]:hover {
                 </div>
             </div>
         </div>
-            
-                <div class="dashboard-4" ng-show="historyReport==1" ng-show"showGraph==2">
-                    <div id="contentHistory">
-                        <div id="history"  class="contentblock hidden">
-                            
-                            <input id="history-start" hidden />
-                            <input id="history-end" hidden/>
-                            
-                            <div class="col-lg-12 col-md-12 col-sm-12 padding-rl-10" ng-hide="showGraph==1">
-                                <div class="tab-content1 contentHistoryOverride">
-                                <div class="col-lg-12 col-md-12 col-sm-12  margin-top-20">
-                                    <div class="col-lg-4 col-md-4 col-sm-4"  ng-click="setHistoryType(1,'historyGraph-multiple')" style="padding-left: 20px;">
-                                        <div class="horizon-swiper" ng-click="title=1">
-                                            <div class="horizon-item" ng-click="showGraph=1">
-                                                <div  class="historyOverride">
-                                                    <img src="../../images/gain.png" style="width: 95px;">
-                                                    <a href="#tab-4" class="historyOverride" style="color: #666;" data-toggle="tab" onclick="return false;" ><span class="hidden-md hidden-sm">Calories</span>&nbsp;Gained</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-4 col-sm-4" ng-click="setHistoryType(2,'historyGraph-multiple')" style="padding-left: 30px;">
-                                        <div class="horizon-swiper"  ng-click="title=2">
-                                            <div class="horizon-item" ng-click="showGraph=1">
-                                                <div  class="historyOverride" style=" padding: 3px 28px 5px 5px;">
-                                                    <img src="../../images/burnt.png" style="width: 95px;">
-                                                    <a href="#tab-4" class="historyOverride" style="color: #666;" data-toggle="tab" onclick="return false;" ><span class="hidden-md hidden-sm">Calories</span>&nbsp;Burnt</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-4 col-sm-4" ng-click="setHistoryType(3,'historyGraph-multiple')"style="padding-left: 30px;">
-                                        <div class="horizon-swiper" ng-click="title=3">
-                                            <div class="horizon-item" ng-click="showGraph=1">
-                                                <div  class="historyOverride">
-                                                    <img src="../../images/exercise.png" style="width: 95px;">
-                                                    <a href="#tab-4" class="historyOverride" style="color: #666;" data-toggle="tab" onclick="return false;" >Exercise&nbsp;Minutes</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-12 col-md-12 col-sm-12 no-padding margin-top-20">
-                                    <div class="col-lg-4 col-md-4 col-sm-4" ng-click="setHistoryType(4,'historyGraph-multiple')" style="padding-left: 40px;">
-                                        <div class="horizon-swiper"  ng-click="title=4">
-                                            <div class="horizon-item" ng-click="showGraph=1">
-                                                <div  class="historyOverride" style=" padding: 3px 35px 5px 5px;">
-                                                    <img src="../../images/log.png" style="width: 95px;">
-                                                    <a href="#tab-4" class="historyOverride" style="color: #666;" data-toggle="tab" onclick="return false;" >Weight&nbsp;Log</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-4 col-sm-4" ng-click="setHistoryType(5,'historyGraph-multiple')" style="padding-left: 30px;">
-                                        <div  class="horizon-swiper"  ng-click="title=5">
-                                            <div class="horizon-item" ng-click="showGraph=1">
-                                                <div  class="historyOverride">
-                                                    <img src="../../images/budget.png" style="width: 95px;">
-                                                    <a href="#tab-4" class="historyOverride" style="color: #666;" data-toggle="tab" onclick="return false;" >Budget vs Net Log</a>
-                                                </div>
-                                            </div>
+
+        <div class="dashboard-4" ng-show="historyReport==1" ng-show="showGraph==2" ng-hide="watergraphs=1">
+        <div id="contentHistory">
+            <div id="history"  class="contentblock hidden">
+
+                <input id="history-start" hidden />
+                <input id="history-end" hidden />
+
+                <div class="col-lg-12 col-md-12 col-sm-12" ng-hide="showGraph==1">
+
+                    <div class="tab-content1 contentHistoryOverride min-height-200 friends-scroll-responsive" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#eee'}">
+
+                        <!-- Stat Search -->
+                        <div class="col-lg-4 col-md-4 col-sm-4 pull-right margin-top-10">
+                          <div class="input-group">
+                                <input type="text"  class="history_input pull-right" placeholder="Search history here..." ng-model="searchHistory">
+                                   <span class="input-group-btn">
+                                         <button class="btn history" type="button"><i class="fa fa-search"></i></button>
+                                   </span>
+                          </div>
+                        </div>
+                        <!-- End Search -->
+                        <div class="col-lg-12 col-md-12 col-sm-12" ng-repeat="graphCategory in historyGraph"  ng-hide="historyfilter.length==0">
+                            <h4 class="margin-top-10" style="text-transform: uppercase;padding-left: 20px;">{{graphCategory.graphCategory}}</h4>
+                            <hr style="padding-left: 20px;padding-right: 20px;"/>
+                            <div class="col-lg-3 col-md-3 col-sm-6" ng-repeat="graph in historyfilter = (graphCategory.graphs | startsWithLetter:searchHistory)"  ng-show="graphCategory.graphs.length!=0">
+                                <div id="{{graph.id}}" class="horizon-swiper" ng-click="setHistoryType(graph.id,'historyGraph-multiple')" >
+                                    <div class="horizon-item" ng-click="showGraph=1"  style="display: block">
+                                        <div  class="historyOverride" style=" padding: 3px 35px 5px 5px;font-size: 16px;">
+                                            <img style="width: 50px;" ng-src="{{graph.imageSrc}}">
+                                            <a href="#tab-4" style="color: #666;" data-toggle="tab" onclick="return false;">{{graph.name}}</a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                    </div>
-                    <!-- Tab panels -->
-                    <div id="tab-4" ng-show="showGraph==1" class="tab-pane in active padding-top-5">
-                            <div class="col-lg-12 col-md-12 col-sm-12 padding-left-0 padding-right-10">
-                                <div class="col-md-3 col-lg-3 col-sm-3" style="padding-top: 5px;">
-                                    <a href="" ng-click="showGraph=2" class="back-button pull-left margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back</a>
-                                </div>
-                                <div class="col-md-3 col-lg-3 col-sm-3 text-center" style="padding-top: 10px;">
-                                    <div ng-show="title==1" class="categories"><b> Calories Gained </b></div>
-                                    <div ng-show="title==2" class="categories"><b> Calories Burnt </b> </div>
-                                    <div ng-show="title==3" class="categories"><b> Exersice Minutes </b></div>
-                                    <div ng-show="title==4" class="categories"><b> Weight Log </b></div>
-                                    <div ng-show="title==5" class="categories"><b> Budget vs Log </b></div>
-                                </div>
+                        </div>
+                        <div ng-show="graphCategory.graphs.length==0" class="text-center margin-top-50">
+                            <h3 class="text-gray">NO RECORDS FOUND!!!</h3><br/><br/><br/>
+                        </div>
 
-                                <div class="col-lg-6 col-md-6 col-sm-6 pull-right" style="padding-top: 5px;">
-                                    <div class="input-group">
-                                        <input type="text" id="history-graph-date" class="history_input pull-right" block>
+                    </div> <!--end of tab content1-->
+                </div> <!--end of col-md-12-->
+
+                <!-- Tab panels -->
+                <div id="tab-4" ng-show="showGraph==1" class="tab-pane in active padding-top-5">
+                    <div class="col-lg-12 col-md-12 col-sm-12 padding-left-0 padding-right-10">
+                        <div class="col-md-3 col-lg-3 col-sm-3" style="padding-top: 5px;">
+                           <a href="" ng-click="showGraph=2" class="back-button pull-left margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back</a>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 pull-right" style="padding-top: 5px;">
+                            <div class="input-group">
+                                <input type="text" id="history-graph-date" class="history_input pull-right" block>
                                         <span class="pull-right margin-top-5 text-right"><i class="fa fa-calendar"></i>&nbsp;Date <span class="hidden-md hidden-sm">Range</span>:&nbsp;
                                         </span>
                                         <span class="input-group-btn">
                                         <button class="btn history" ng-click="doGetHistoryReport('historyGraph-multiple')" type="button">Go!</button>
                                         </span>
-                                    </div><!-- /input-group -->
-                                </div>
-                            
-                                <!-- Tab Content 1 -->
-                                <div class="tab-content2 contentHistoryOverride" style="margin-left: 10px; border-right-width: 10px;">
-                                    <div ng-if="loaded" class="col-lg-12 col-md-12 col-sm-12">
-                                        <div class="loader-style-dashboard"><br/><br/>
-                                            <div class="loader"></div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-12 col-md-12 col-sm-12"> 
-                                        <div ng-show="isHistoryEmpty==0">
-                                            <div id="historyGraph-multiple"></div>
-                                        </div>
-                                        <div ng-show="isHistoryEmpty==1" class="text-center">
-                                            <br/><br/><br/>
-
-                                            <img src="../../images/no-dates.png" width="200" height="200">
-                                            <h1 class="text-gray">NO DATES SELECTED</h1>
-                                        </div>
-                                    </div>
+                            </div><!-- /input-group -->
+                        </div>
+                    <!-- Tab Content 1 -->
+                        <div class="tab-content2 contentHistoryOverride" style="margin-left: 10px; border-right-width: 10px;">
+                            <div ng-if="loaded" class="col-lg-12 col-md-12 col-sm-12">
+                                <div class="loader-style-dashboard"><br/><br/>
+                                    <div class="loader"></div>
                                 </div>
                             </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <div ng-show="isHistoryEmpty==0">
+                                    <div id="historyGraph-multiple"></div>
+                                </div>
+                                <div ng-show="isHistoryEmpty==1" class="text-center">
+                                    <br/><br/><br/>
+
+                                    <img src="../../images/no-dates.png" width="200" height="200">
+                                    <h1 class="text-gray">NO DATES SELECTED</h1>
+                                </div>
+                            </div>
+                            <div style="text-align: center;padding-top: 5px;" ng-show="waterGraphs">
+                                <input type="radio" id="ml" ng-change="setHistoryType(14,'historyGraph-multiple')"  value="14" name="ml" ng-model="historyType"/>
+                                <label for="ml" style="background-color: #00ccff">Ml</label>
+                                <input type="radio" id="oz" ng-change="setHistoryType(15,'historyGraph-multiple')"  value="15" name="oz" ng-model="historyType"/>
+                                <label for="oz" style="background-color: #ff9999">Oz</label>
+                            </div>
+                        </div>
+
                     </div>
-                    <!-- End Tab Panels -->
-                </div><!-- @end #ideas-content -->
-            </div>
-        </div>
+
+                </div>
+                <!-- End Tab Panels -->
     </div><!-- @end #w -->
-
-
-</div>
+  </div>
 
 <!-- Food Suggestion popup-->
 <div id="modal-food" class="popupContainer" style="display:none;">
