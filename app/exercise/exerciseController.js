@@ -15,7 +15,7 @@ adminApp.filter('propsFilter', function() {
 				var keys = Object.keys(props);
 				for (var i = 0; i < keys.length; i++) {
 					var prop = keys[i];
-					var text = props[prop].toLowerCase();
+                    var text = props[prop].toLowerCase();
 					if (item[prop].toString().toLowerCase().indexOf(text) !== -1) {
 						itemMatches = true;
 						break;
@@ -131,19 +131,22 @@ adminApp.controller('ExerciseViewController',['$scope','requestHandler','Flash',
 			$scope.exerciseDetail=response.data.ExerciseDetail.exercise;
 		    $scope.exerciseDetail.imagepath=$scope.exerciseDetail.imagepath+"200x200.jpg"+"?decache="+Math.random();
 			$scope.exerciseDetail.tags =response.data.ExerciseDetail.tags;
-			requestHandler.postRequest("admin/getTypeDetail/",{"typeid":$scope.exerciseDetail.exercisetypeid}).then(function(response){
-			$scope.typename = response.data.ExerciseType_Data;
-				$scope.exerciseDetail.exercisetypename=$scope.typename.typename;
+            $scope.exerciseDetail.unit =response.data.ExerciseDetail.levels;
+            $scope.exerciseDetail.level =response.data.ExerciseDetail.levels.levels;
 
-			});
+            $scope.exerciseDetail.category = {"categoryid":$scope.exerciseDetail.categoryid,"categoryname":$scope.exerciseDetail.categoryname,"status":1};
 
-			$scope.loaded=false;
+            $scope.exerciseDetail.type = {"typeid":$scope.exerciseDetail.typeid,"typename":$scope.exerciseDetail.typename,"status":1};
+
+
+
+  $scope.loaded=false;
 		},function(){
 			errorMessage(Flash,"Please try again later!")
 		});
 	};
 
-	//Display FAQ On load
+	//Display Exercise On load
 	$scope.doGetExerciseByID();
 }]);
 
@@ -153,6 +156,7 @@ adminApp.controller('ExerciseEditController',['$q','$scope','requestHandler','Fl
 	var original="";
 	$scope.title=$route.current.title;
 	$scope.type=$route.current.type;
+    $scope.level=$route.current.level;
 	$scope.isNew=$route.current.isNew;
 	$scope.imageUpload=false;
     $scope.inputContainsFile = true;
@@ -171,21 +175,27 @@ adminApp.controller('ExerciseEditController',['$q','$scope','requestHandler','Fl
 	$scope.doGetExcerciseDetails=function(){
 		$scope.loaded=true;
 		requestHandler.postRequest("admin/getExerciseDetailByadmin/",{"exerciseid":$routeParams.id}).then(function(response){
-
 			$scope.exerciseDetail=response.data.ExerciseDetail.exercise;
 
-			$scope.exerciseDetail.type = {"typeid":$scope.exerciseDetail.exercisetypeid,"typename":$scope.exerciseDetail.exercisetypename,"status":1};
+            $scope.exerciseDetail.category = {"categoryid":$scope.exerciseDetail.categoryid,"categoryname":$scope.exerciseDetail.categoryname,"status":1};
 
-		    $scope.originalImage=$scope.exerciseDetail.imageurl+"?decache="+Math.random();
+			$scope.exerciseDetail.type = {"typeid":$scope.exerciseDetail.typeid,"typename":$scope.exerciseDetail.typename,"status":1};
+
+            $scope.originalImage=$scope.exerciseDetail.imageurl+"?decache="+Math.random();
 		    // $scope.originalImage=$scope.exerciseDetail.imageurl.substring($scope.exerciseDetail.imageurl.indexOf("/")+14,$scope.exerciseDetail.imageurl.length)
 
 
 			$scope.exerciseDetail.imageurl=$scope.exerciseDetail.imageurl+"?decache="+Math.random();
             $scope.exerciseDetail.imagepath=$scope.exerciseDetail.imagepath+"200x200.jpg"+"?decache="+Math.random();
 		    $scope.exerciseDetail.tags =response.data.ExerciseDetail.tags;
-			$scope.exerciseDetail.met=$scope.exerciseDetail.MET;
+            $scope.exerciseDetail.level =response.data.ExerciseDetail.levels.levels;
+            $scope.exerciseDetail.unit =response.data.ExerciseDetail.levels;
+            if($scope.exerciseDetail.repsavailable==null){
+                $scope.exerciseDetail.repsavailable=0;
+            }
+           $scope.exerciseDetail.repsavailable=parseInt($scope.exerciseDetail.repsavailable);
 
-			original=angular.copy($scope.exerciseDetail);
+    original=angular.copy($scope.exerciseDetail);
 
 		   /* //push corresponding level
 			var selectedLevel = ExerciseService.getSelectedLevel($scope.exerciseDetail.type);
@@ -198,6 +208,17 @@ adminApp.controller('ExerciseEditController',['$q','$scope','requestHandler','Fl
 		});
 	};
 
+
+    //get exercise category list for drop down
+    $scope.doGetExcerciseCategoryList=function(){
+        requestHandler.getRequest("admin/listofEnabledCategories/","").then(function(response){
+            $scope.categoryListForDropDown = response.data.Category;
+
+        },function(){
+            errorMessage(Flash,"Please try again later!")
+        });
+    };
+
 	//get type list for drop down
 	$scope.doGetExcerciseTypeList=function(){
 		requestHandler.getRequest("admin/listofEnabledTypes/","").then(function(response){
@@ -208,29 +229,48 @@ adminApp.controller('ExerciseEditController',['$q','$scope','requestHandler','Fl
 		});
 	};
 
-	/*//Change Exercise Type
-	$scope.doChangeExerciseType=function(id){
-		if($scope.type==2){
-			if(id==original.type.typeid){
-				$scope.exerciseDetail.type = original.type;
-			}
-			else{
-				$scope.loaded=true;
-				requestHandler.postRequest("admin/gettypeIndividualDetail/",{"typeid":id}).then(function(response){
-					$scope.exerciseDetail.type = response.data.IndividualtypeData;
-					$scope.loaded=false;
-				});
-			}
-		}
-		else{
-			$scope.loaded=true;
-			requestHandler.postRequest("admin/gettypeIndividualDetail/",{"typeid":id}).then(function(response){
-				$scope.exerciseDetail.type = response.data.IndividualtypeData;
-				$scope.loaded=false;
-			});
-		}
+    //get exercise unit list for drop down
+    $scope.doGetExcerciseUnitList=function(){
+        requestHandler.getRequest("admin/getexerciseunits/","").then(function(response){
+            $scope.unitListForDropDown = response.data.units;
 
-	};*/
+        },function(){
+            errorMessage(Flash,"Please try again later!")
+        });
+    };
+
+  //get exercise level list for drop down
+    $scope.doGetExcerciseLevelList=function(){
+        requestHandler.getRequest("admin/listofEnabledLevels/","").then(function(response){
+            $scope.levelListForDropDown = response.data.ExerciseLevel_Data;
+        },function(){
+            errorMessage(Flash,"Please try again later!")
+        });
+    };
+
+  /*//Change Exercise Type
+    $scope.doChangeExerciseType=function(id){
+        if($scope.type==2){
+            if(id==original.type.typeid){
+                $scope.exerciseDetail.type = original.type;
+            }
+            else{
+                $scope.loaded=true;
+                requestHandler.postRequest("admin/gettypeIndividualDetail/",{"typeid":id}).then(function(response){
+                    $scope.exerciseDetail.type = response.data.IndividualtypeData;
+                    $scope.loaded=false;
+                });
+            }
+        }
+        else{
+            $scope.loaded=true;
+            requestHandler.postRequest("admin/gettypeIndividualDetail/",{"typeid":id}).then(function(response){
+                $scope.exerciseDetail.type = response.data.IndividualtypeData;
+                $scope.loaded=false;
+            });
+        }
+
+    };*/
 
 	//Exercise Image Upload Controller
 	$scope.getFile = function () {
@@ -260,6 +300,7 @@ adminApp.controller('ExerciseEditController',['$q','$scope','requestHandler','Fl
 	$scope.doUpdateExerciseDetail=function(){
 		$scope.doingUpdate=true;
         $scope.spinner=true;
+
 		var updatedExerciseDetails={};
 		updatedExerciseDetails.exerciseid=$scope.exerciseDetail.exerciseid;
 		updatedExerciseDetails.exercisename=$scope.exerciseDetail.exercisename;
@@ -268,10 +309,13 @@ adminApp.controller('ExerciseEditController',['$q','$scope','requestHandler','Fl
 			updatedExerciseDetails.imageurl=$scope.exerciseDetail.exerciseimage;
 		}
 
-		updatedExerciseDetails.typeid=$scope.exerciseDetail.type.typeid;
-		updatedExerciseDetails.MET = $scope.exerciseDetail.met;
+        updatedExerciseDetails.typeid=$scope.exerciseDetail.type.typeid;
+        updatedExerciseDetails.categoryid=$scope.exerciseDetail.category.categoryid;
+        updatedExerciseDetails.unitid=$scope.exerciseDetail.unit.unitid;
+        updatedExerciseDetails.repsavailable=parseInt($scope.exerciseDetail.repsavailable);
 
-		var tagArray=[];
+
+        var tagArray=[];
 		var tagPromise;
 		$.each($scope.exerciseDetail.tags, function(index,value) {
 			if(value.tagid!=null){
@@ -284,6 +328,19 @@ adminApp.controller('ExerciseEditController',['$q','$scope','requestHandler','Fl
 			}
 		});
 		updatedExerciseDetails.tagid = tagArray;
+
+
+        //Level Array Operation starts
+        var levelArray=[];
+        var metArray=[];
+        $.each($scope.exerciseDetail.level, function(index,value) {
+            levelArray.push(value.levelid);
+            metArray.push(parseInt(value.MET));
+        });
+
+        updatedExerciseDetails.tagid = tagArray;
+        updatedExerciseDetails.levelid=levelArray;
+        updatedExerciseDetails.MET=metArray;
 
         $q.all([tagPromise]).then(function(){
             requestHandler.putRequest("admin/updateExercise/",updatedExerciseDetails).then(function (response) {
@@ -302,8 +359,8 @@ adminApp.controller('ExerciseEditController',['$q','$scope','requestHandler','Fl
 
 	};
 
-	$scope.doAddExerciseDetail=function(){
 
+	$scope.doAddExerciseDetail=function(){
         $scope.doingUpdate=true;
         $scope.spinner=true;
         var updatedExerciseDetails={};
@@ -314,7 +371,10 @@ adminApp.controller('ExerciseEditController',['$q','$scope','requestHandler','Fl
         }
 
 		updatedExerciseDetails.typeid=$scope.exerciseDetail.type.typeid;
-		updatedExerciseDetails.MET = parseInt($scope.exerciseDetail.met);
+        updatedExerciseDetails.categoryid=$scope.exerciseDetail.category.categoryid;
+        updatedExerciseDetails.unitid=$scope.exerciseDetail.unit.unitid;
+        updatedExerciseDetails.repsavailable=parseInt($scope.exerciseDetail.repsavailable);
+
 
 		//Tag Array Operation starts
 		var tagArray=[];
@@ -329,7 +389,19 @@ adminApp.controller('ExerciseEditController',['$q','$scope','requestHandler','Fl
 				});
 			}
 		});
+
+
+        //Level Array Operation starts
+        var levelArray=[];
+        var metArray=[];
+        $.each($scope.exerciseDetail.level, function(index,value) {
+            levelArray.push(value.levelid);
+            metArray.push(parseFloat(value.MET));
+        });
+
 		updatedExerciseDetails.tagid = tagArray;
+        updatedExerciseDetails.levelid=levelArray;
+        updatedExerciseDetails.MET=metArray;
 		//Tag Array Ends
 
 	    //updatedExerciseDetails.levels = $scope.exerciseDetail.type.levels;
@@ -374,10 +446,11 @@ adminApp.controller('ExerciseEditController',['$q','$scope','requestHandler','Fl
 	$scope.doSetExcerciseDetails=function(){
 		$scope.exerciseDetail={};
 		$scope.loaded=true;
+        $scope.exerciseDetail.repsavailable="0";
 		$scope.exerciseDetail.imagepath='../../images/No_image_available.jpg';
 
 		//push corresponding level
-	   /* requestHandler.postRequest("admin/gettypeIndividualDetail/",{"typeid":1}).then(function(response){
+	      /* requestHandler.postRequest("admin/gettypeIndividualDetail/",{"typeid":1}).then(function(response){
 			$scope.exerciseDetail.type = response.data.IndividualtypeData;
 			var selectedLevel = ExerciseService.getSelectedLevel($scope.exerciseDetail.type);
 			$scope.level = {selected : selectedLevel};
@@ -413,15 +486,21 @@ adminApp.controller('ExerciseEditController',['$q','$scope','requestHandler','Fl
 		});
 	});
 
-	//Initialize Page
+ // for Initialize Page
 	//Get Exercise Details
 	$q.all([excerciseTagPromise]).then(function(){
         if($scope.type==1){
             $scope.doGetExcerciseTypeList();
             $scope.doSetExcerciseDetails();
+            $scope.doGetExcerciseCategoryList();
+            $scope.doGetExcerciseLevelList();
+            $scope.doGetExcerciseUnitList();
         }else if($scope.type==2){
             $scope.doGetExcerciseTypeList();
             $scope.doGetExcerciseDetails();
+            $scope.doGetExcerciseCategoryList();
+            $scope.doGetExcerciseLevelList();
+            $scope.doGetExcerciseUnitList();
         }
 	});
 

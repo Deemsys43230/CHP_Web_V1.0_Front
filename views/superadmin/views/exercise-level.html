@@ -1,0 +1,105 @@
+
+<!-- Start Page Banner -->
+<div class="container" ng-cloak class="ng-cloak">
+    <div class="row">
+
+        <div class="col-md-3">
+            <h4 class="classic-title"><span>Exercise Management</span></h4>
+            <div ng-include src="'views/exercise-menu.html'" onload="activeClass"></div>
+        </div>
+        <div class="col-md-9">
+            <a href="#dashboard" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back to Dashboard</a>
+            <a id="modal_exerciseLevel" ng-click="reset()" href="#exerciseLevel" class="back-button pull-right margin-left-5"><i class="fa fa-plus-circle"></i> Add Exercise Level</a>
+            <!-- Stat Search -->
+            <div class="pull-right" id="hidden-search">
+                <a href="#" onclick="return false;" class="show-list-search search_button margin-left-5"><i class="fa fa-search"></i></a>
+                <div class="search-list-form override">
+                    <form autocomplete="off" class="searchform">
+                        <input type="text" ng-model="levelsearch" placeholder="Search here...">
+                    </form>
+                </div>
+            </div>
+            <!-- End Search -->
+            <div flash-message="2000" class="col-md-5 pull-right no-padding"></div>
+            <h4 class="classic-title"><span><i class="fa fa-align-center"></i> &nbsp;Exercise Level</span></h4>
+
+
+            <div ng-if="loaded">
+                <div class="loader-style">
+                    <div class="loader"></div>
+                </div>
+            </div>
+            <div class="min-height-380">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                    <tr class="warning">
+                        <th class="col-md-2">Level ID</th>
+                        <th class="col-md-6">Level Name</th>
+                        <th class="col-md-4">Options</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr dir-paginate="list in exerciselevelfilter = (exerciseLevelList |filter: levelsearch | itemsPerPage: 9)" ng-show="exerciseLevelList.length!=0">
+                        <td>{{list.levelid}}</td>
+                        <td title="{{list.levelname}}">
+                            <span class="line-clamp-sm">
+                                {{list.levelname}}
+                            </span>
+                        </td>
+                        <td>
+
+                            <a href="" class="btn-dis btn-xs btn-warning" ng-disabled="list.canedit==0" ng-click="doEditExerciseLevel(list.levelid)">Edit</a>
+                            <a href="" class="btn-xs btn-success" ng-click="doEnableDisableExerciseLevel(list.levelid)" ng-hide="list.status==1">Enable</a>
+                            <a href="" class="btn-xs btn-danger" ng-click="doEnableDisableExerciseLevel(list.levelid)" ng-show="list.status==1">Disable</a>
+                            <a href="" class="btn-dis btn-xs btn-danger" ng-disabled="list.canedit==0" ng-click="doDeleteExerciseLevel(list.levelid)">Delete</a>
+                        </td>
+                    </tr>
+                    <tr ng-show="exerciselevelfilter.length==0" class="text-center"><td colspan="3">No Records Found !!!</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- Start Pagination -->
+            <dir-pagination-controls ng-show="paginationLoad" max-size="5" direction-links="true"
+                                     boundary-links="true"> </dir-pagination-controls>
+            <!-- End Pagination -->
+        </div>
+    </div>
+</div>
+
+<!-- Category popup-->
+<div id="exerciseLevel" class="popupContainer-width" style="display:none;">
+    <header class="popupHeader width-100">
+        <span class="header_title">{{title}}</span>
+        <span class="modal_close"><i class="fa fa-times"></i></span>
+    </header>
+
+
+    <section class="popupBody">
+        <div class="common_model">
+            <form name="exerciseLevelAddForm" novalidate>
+                <p>Exercise Level Name</p>
+                <input type="text" name="exerciseLevelName"  data-typeid="exerciseCategory.categoryid" ng-pattern="/^ *([a-zA-Z]+ ?)+ *$/" ng-model="exerciseLevel.levelname" maxlength="45" levelnameexists required focus-me="shouldBeOpen"/>
+                <span ng-show="exerciseLevelAddForm.exerciseLevelName.$dirty && exerciseLevelAddForm.exerciseLevelName.$invalid">
+                    <span class="error-message" ng-show="exerciseLevelAddForm.exerciseLevelName.$error.required"><span>Required.</span></span>
+                    <span class="error-message" ng-show="exerciseLevelAddForm.exerciseLevelName.$error.pattern"><span>Enter&nbsp;Valid&nbsp;name.</span></span>
+                    <span class="error-message" ng-show="exerciseLevelAddForm.exerciseLevelName.$error.levelnameexists"><span>Level&nbsp;Already&nbsp;Exists</span></span>
+                </span>
+
+
+                <div class="action_btns margin-top-20">
+                    <div class="one_half" ng-show="isNew"><a href="" class="btn btn_red modal_close" ng-disabled="exerciseLevelAddForm.$invalid" ng-click="doAddExerciseLevel()">Save Exercise Level </a></div>
+                    <div class="one_half" ng-hide="isNew"><a href="" class="btn btn_red modal_close" ng-disabled="exerciseLevelAddForm.$invalid || isClean()" ng-click="doUpdateExerciseCategory()">Update Exercise Level </a></div>
+                    <div class="one_half last modal_close"><a id="register_form" class="btn">Cancel</a></div>
+                </div>
+            </form>
+        </div>
+    </section>
+</div>
+
+
+
+<script type="text/javascript" src="../../js/script.js"></script>
+
+<script type="text/javascript">
+    $("#modal_exerciseLevel").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
+</script>

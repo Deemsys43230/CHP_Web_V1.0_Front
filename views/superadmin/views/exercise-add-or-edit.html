@@ -31,23 +31,78 @@
                             <span ng-show="exerciseForm.tags.$dirty&&exerciseForm.tags.$invalid">
                             <span class="error-message" ng-show="exerciseForm.tags.$error.uiSelectRequired"><span>Required.</span></span>
                         </span>
-                        <br/>
-                        <h5>Exercise Type : <span ng-show="exerciseForm.type.$invalid"> <b class="text-red small-font">(Required)</b> </span></h5>
+                    </div>
+
+                        <h5>Category : <span ng-show="exerciseForm.category.$invalid"> <b class="text-red small-font">(Required)</b> </span></h5>
+                    <div class="form-group">
+                        <ui-select ng-model="exerciseDetail.category" theme="select2" ng-disabled="disabled" name="category" class="form-control" required>
+                            <ui-select-match placeholder="Select Exercise category">{{$select.selected.categoryname}}</ui-select-match>
+                            <ui-select-choices repeat="category in categoryListForDropDown | propsFilter: {categoryname: $select.search}">
+                                {{category.categoryname}}
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+
+                        <h5>Type : <span ng-show="exerciseForm.type.$invalid"> <b class="text-red small-font">(Required)</b> </span></h5>
+                    <div class="form-group">
                         <ui-select ng-model="exerciseDetail.type" theme="select2" ng-disabled="disabled" name="type" class="form-control" required>
                             <ui-select-match placeholder="Type and Select Exercise types">{{$select.selected.typename}}</ui-select-match>
                             <ui-select-choices repeat="type in typeListForDropDown | propsFilter: {typename: $select.search}">
                                 {{type.typename}}
                             </ui-select-choices>
                         </ui-select>
-
-
-                        <br/>
-                        <h5>MET :</h5>
-                        <input type="text" class="form-control"  name="met" ng-model="exerciseDetail.met" maxlength="7" required validate-Float/>
-                        <span ng-show="exerciseForm.met.$dirty&&exerciseForm.met.$invalid">
-                            <span class="error-message" ng-show="exerciseForm.met.$error.required"><span>Required.</span></span>
-                            <span class="error-message" ng-show="!exerciseForm.met.$error.required&&exerciseForm.met.$error.validateFloat"> <span>Invalid&nbsp;data.</span></span>
-                        </span>
+                        </div>
+                        <h5 class="margin-tb-5">Repsavailable:</h5>
+                        <div class="col-md-1"></div>
+                        <div class="col-md-11">
+                            <input type="radio" id="yes" class="height" name="reps" value="1" ng-model="exerciseDetail.repsavailable"/>
+                            <label for="yes">Yes</label>
+                            <input type="radio" id="no" class="height" name="reps" value="0" ng-model="exerciseDetail.repsavailable"/>
+                            <label for="no">No</label>
+                         </div>
+                        <h5>Unit : <span ng-show="exerciseForm.unit.$invalid"> <b class="text-red small-font">(Required)</b> </span></h5>
+                    <div class="form-group">
+                        <ui-select ng-model="exerciseDetail.unit" theme="select2" ng-disabled="disabled" name="unit" class="form-control" required>
+                            <ui-select-match placeholder="Exercise Units">{{$select.selected.unitname}}</ui-select-match>
+                            <ui-select-choices repeat="unit in unitListForDropDown | propsFilter: {unitname: $select.search}">
+                                {{unit.unitname}}
+                            </ui-select-choices>
+                        </ui-select>
+                        </div>
+                        <h5>Levels :</h5>
+                    <div class="form-group">
+                        <ui-select multiple  ng-model="exerciseDetail.level" theme="select2" ng-disabled="disabled" name="level" class="form-control" ui-select-required>
+                            <ui-select-match placeholder="Type and Select levels">{{$item.levelname}}</ui-select-match>
+                            <ui-select-choices repeat="level in levelListForDropDown | propsFilter: {levelname: $select.search}">
+                                {{level.levelname}}
+                            </ui-select-choices>
+                        </ui-select>
+                         <span ng-show="exerciseForm.level.$dirty&&exerciseForm.level.$invalid">
+                            <span class="error-message" ng-show="exerciseForm.level.$error.uiSelectRequired"><span>Required.</span></span>
+                    </span>
+                    <div class="col-md-12 no-padding margin-top-15">
+                        <table class="table table-bordered">
+                        <thead>
+                        <tr class="success">
+                            <th class="col-md-2 text-center">Level Name</th>
+                            <th class="col-md-2 text-center">MET Value</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr  ng-class="animate-repeat" ng-repeat="level in exerciseDetail.level" ng-form="levelForm">
+                        <td><b>{{level.levelname}}</b></td>
+                        <td class="input_mineral">
+                            <input type="text" name="metValue" ng-model="level.MET" maxlength="7" required validate-Float/>
+                                <span ng-show="levelForm.metValue.$dirty&&levelForm.metValue.$invalid">
+                                    <span class="error-message textarea-errormessage20" ng-show="levelForm.metValue.$error.required"><span>Required.</span></span>
+                                    <span class="error-message textarea-errormessage20" ng-show="!levelForm.metValue.$error.required&&levelForm.metValue.$error.validateFloat"><span>Invalid&nbsp;data.</span></span>
+                                </span>
+                        </td>
+                        </tr>
+                        <tr ng-show="exerciseDetail.level.length==null"><td colspan="2" class="text-center">No Levels Selected !!!</td></tr>
+                        </tbody>
+                        </table>
+                        </div>
                     </div>
                 </div>
                 <div class="col-md-3 coach-details text-center margin-top-10">

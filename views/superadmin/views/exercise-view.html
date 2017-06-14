@@ -30,20 +30,66 @@
                         <div class="col-md-8">{{exerciseDetail.exercisename}}</div>
                     </div>
                     <div class="row margin-top-10">
-                        <div class="col-md-4  text-bold">Exercise Type<span class="pull-right">:</span></div>
-                        <div class="col-md-8">{{exerciseDetail.exercisetypename}}
-                        </div>
-                    </div>
-                    <div class="row margin-top-10">
                         <div class="col-md-4  text-bold">Exercise Tags<span class="pull-right">:</span></div>
                         <div class="col-md-8"><span ng-repeat="tags in exerciseDetail.tags">{{tags.tagname}}{{$last ? '' : ','}}</span></div>
                     </div>
                     <div class="row margin-top-10">
+                        <div class="col-md-4  text-bold">Exercise Category<span class="pull-right">:</span></div>
+                        <div class="col-md-8">{{exerciseDetail.categoryname}}</div>
+                    </div>
+                    <div class="row margin-top-10">
+                        <div class="col-md-4  text-bold">Exercise Type<span class="pull-right">:</span></div>
+                        <div class="col-md-8">{{exerciseDetail.typename}}
+                        </div>
+                    </div>
+                    <div class="row margin-top-10">
+                        <div class="col-md-4  text-bold">Repsavailable<span class="pull-right">:</span></div>
+                        <div class="col-md-8">{{exerciseDetail.repsavailable==0?'No':'Yes'}}
+                        </div>
+                    </div>
+                    <div class="row margin-top-10">
+                        <div class="col-md-4  text-bold">Exercise Unit<span class="pull-right">:</span></div>
+                        <div class="col-md-8">{{exerciseDetail.unit.unitname}}
+                        </div>
+                    </div>
+                    <div class="row margin-top-10">
+                        <div class="col-md-4  text-bold">Status<span class="pull-right">:</span></div>
+                        <div class="col-md-8">
+                            <a class="btn-xs btn-success" ng-hide="exerciseDetail.status==0">Enable</a>
+                            <a class="btn-xs btn-danger" ng-show="exerciseDetail.status==0">Disable</a>
+                        </div>
+                    </div>
+                  <!--  <div class="row margin-top-10">
                         <div class="col-md-4  text-bold">MET<span class="pull-right">:</span></div>
                         <div class="col-md-8">{{exerciseDetail.MET}}</div>
-                    </div>
+                    </div>-->
 
                 </div>
+
+                <div class="col-md-12 no-padding margin-top-10">
+                    <div class="row margin-bottom-10">
+                        <div class="col-md-12">
+                            <table class="table table-bordered">
+                                <thead>
+                                <tr class="success">
+                                    <th class="col-md-1 text-center">Levels</th>
+                                    <th class="col-md-1 text-center"> MET Value</th>
+                                </tr>
+                                </thead>
+                                <tbody ng-repeat="level in exerciseDetail.level">
+                                <tr>
+                                    <td class="text-center">{{level.levelname}}</td>
+                                    <td class="text-center">{{level.MET}}</td>
+                            </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
             </div>
 
             <!--<div class="row margin-top-10">

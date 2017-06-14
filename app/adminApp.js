@@ -700,7 +700,62 @@ adminApp.config([
         ]
       },
       controller: 'ExerciseTypeController'
-    }).when('/settings', {
+    }).when('/exercise-category', {
+            templateUrl: 'views/exercise-category.html',
+            resolve: {
+                loadMyFiles: [
+                    '$ocLazyLoad',
+                    function ($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name: 'adminApp',
+                            files: [
+                                '../../plugin/popup/style.css',
+                                '../../angular/angular-utils-pagination/dirPagination.js',
+                                '../../app/exerciseCategory/exerciseCategoryController.js'
+                            ]
+                        });
+                    }
+                ]
+            },
+            controller: 'ExerciseCategoryController'
+        }).when('/exercise-level', {
+            templateUrl: 'views/exercise-level.html',
+            resolve: {
+                loadMyFiles: [
+                    '$ocLazyLoad',
+                    function ($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name: 'adminApp',
+                            files: [
+                                '../../plugin/popup/style.css',
+                                '../../angular/angular-utils-pagination/dirPagination.js',
+                                '../../app/exerciseLevel/exerciseLevelController.js'
+                            ]
+                        });
+                    }
+                ]
+            },
+            controller: 'ExerciseLevelController'
+        })
+        .when('/exercise-unit', {
+            templateUrl: 'views/exercise-unit.html',
+            resolve: {
+                loadMyFiles: [
+                    '$ocLazyLoad',
+                    function ($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name: 'adminApp',
+                            files: [
+                                '../../plugin/popup/style.css',
+                                '../../angular/angular-utils-pagination/dirPagination.js',
+                                '../../app/exerciseUnit/exerciseUnitController.js'
+                        ]
+                        });
+                    }
+                ]
+            },
+            controller: 'ExerciseUnitController'
+        }).when('/settings', {
       templateUrl: 'views/settings-contact.html',
       resolve: {
         loadMyFiles: [
@@ -1753,6 +1808,73 @@ adminApp.directive('typenameexists', [
     };
   }
 ]);
+//Exercise Category name Already Exists
+adminApp.directive('categorynameexists', [
+    '$q',
+    '$timeout',
+    'requestHandler',
+    function ($q, $timeout, requestHandler) {
+        return {
+            restrict: 'A',
+            require: 'ngModel',
+            scope: { 'categoryid': '=' },
+            link: function (scope, element, attributes, ngModel) {
+                ngModel.$asyncValidators.categorynameexists = function (modelValue) {
+                    var defer = $q.defer();
+                    $timeout(function () {
+                        var categoryid = scope.categoryid;
+                        var sendRequest = requestHandler.postRequest('admin/checkCategoryName/', {
+                            'categoryname': modelValue,
+                            'categoryid': categoryid
+                        }).then(function (response) {
+                            if (response.data.Response_status == 0) {
+                                defer.resolve();
+                            } else {
+                                defer.reject();
+                            }
+                        });
+                    }, 10);
+                    return defer.promise;
+                };
+            }
+        };
+    }
+]);
+
+
+//Exercise Level name Already Exists
+adminApp.directive('levelnameexists', [
+    '$q',
+    '$timeout',
+    'requestHandler',
+    function ($q, $timeout, requestHandler) {
+        return {
+            restrict: 'A',
+            require: 'ngModel',
+            scope: { 'levelid': '=' },
+            link: function (scope, element, attributes, ngModel) {
+                ngModel.$asyncValidators.levelnameexists = function (modelValue) {
+                    var defer = $q.defer();
+                    $timeout(function () {
+                        var levelid = scope.levelid;
+                        var sendRequest = requestHandler.postRequest('admin/checkLevelName/', {
+                            'levelname': modelValue,
+                            'levelid': levelid
+                        }).then(function (response) {
+                            if (response.data.Response_status == 0) {
+                                defer.resolve();
+                            } else {
+                                defer.reject();
+                            }
+                        });
+                    }, 10);
+                    return defer.promise;
+                };
+            }
+        };
+    }
+]);
+
 // Compare Confirm Password
 adminApp.directive('compareTo', function () {
   return {
