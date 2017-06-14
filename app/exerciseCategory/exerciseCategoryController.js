@@ -89,7 +89,7 @@ adminApp.controller('ExerciseCategoryController',['$scope','requestHandler','Fla
  //To get exercise category detail using categoryId
     $scope.doEditExerciseCategory=function(id){
         $scope.isNew = false;
-        $scope.title = "Edit Exercise Category";
+        $scope.title = "Edit Category";
         $scope.exerciseCategoryAddForm.$setPristine();
 
         $(function(){
@@ -199,7 +199,7 @@ adminApp.controller('ExerciseCategoryController',['$scope','requestHandler','Fla
     $scope.reset=function(){
         $scope.exerciseCategory={};
         $scope.exerciseCategory.categoryname="";
-        $scope.title = "Add Exercise Category";
+        $scope.title = "Add Category";
         $scope.isNew = true;
         $scope.exerciseCategoryAddForm.$setPristine();
         $(function(){

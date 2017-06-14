@@ -83,7 +83,7 @@ adminApp.controller('ExerciseTypeController',['$scope','requestHandler','Flash',
 
     $scope.doEditExerciseType=function(id){
         $scope.isNew = false;
-        $scope.title = "Edit Exercise Type";
+        $scope.title = "Edit Type";
         $scope.exerciseTypeAddForm.$setPristine();
 
         $(function(){
@@ -194,7 +194,7 @@ delete $scope.exerciseType.status;
     $scope.reset=function(){
         $scope.exerciseType={};
         $scope.exerciseType.typename="";
-        $scope.title = "Add Exercise Type";
+        $scope.title = "Add Type";
         $scope.isNew = true;
         $scope.exerciseTypeAddForm.$setPristine();
         $(function(){

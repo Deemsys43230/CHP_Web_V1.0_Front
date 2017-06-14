@@ -56,7 +56,7 @@ adminApp.controller('ExerciseLevelController',['$scope','requestHandler','Flash'
     //To get exercise category detail using levelId
     $scope.doEditExerciseLevel=function(id){
         $scope.isNew = false;
-        $scope.title = "Edit Exercise Level";
+        $scope.title = "Edit Level";
         $scope.exerciseLevelAddForm.$setPristine();
 
         $(function(){
@@ -167,7 +167,7 @@ adminApp.controller('ExerciseLevelController',['$scope','requestHandler','Flash'
     $scope.reset=function(){
         $scope.exerciseLevel={};
         $scope.exerciseLevel.levelname="";
-        $scope.title = "Add Exercise Level";
+        $scope.title = "Add Level";
         $scope.isNew = true;
         $scope.exerciseLevelAddForm.$setPristine();
         $(function(){
