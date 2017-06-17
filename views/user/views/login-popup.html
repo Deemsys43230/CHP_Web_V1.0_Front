@@ -1,0 +1,603 @@
+
+
+<div ng-controller="LoginController">
+
+<!-- login or register popup-->
+<div id="modal" class="popupContainer width-28" style="display:none;">
+    <header class="popupHeader width-100">
+        <span class="header_title">Login</span>
+        <span class="modal_close pull-right"><i class="fa fa-times"></i></span>
+    </header>
+
+    <section class="popupBody">
+
+        <div class="user_login">
+
+            <div class="mobileApp">
+                <b>Dear User,</b>
+                <p class="margin-top-10">We have mobile app for better user experience. Please find below link for mobile App.</p>
+                <br/>
+                <div class="android">
+                    This is andriod
+                    <a href="" class="main-button">Get Mobile App Here</a>
+                </div>
+                <div class="iphone">
+                    This is iphone
+                    <a href="" class="main-button">Get Mobile App Here</a>
+                </div>
+            </div>
+            <!-- Social Login -->
+            <!--<div class="">
+                <a href="#" class="social_box fb">
+                    <span class="icon"><i class="fa fa-facebook"></i></span>
+                    <span class="icon_title">Login with Facebook</span>
+                </a>
+            </div>-->
+
+            <!-- Username & Password Login form -->
+            <!--<div class="centeredText">
+                <span>Or</span>
+            </div>-->
+            <div class="noMobileApp">
+                <div flash-message="3000" ></div>
+                <!-- <div ng-show="sessionValue==1"><span class="text-red">Your session has been expired.<br/>Please login again!!!</span></div>-->
+                <form name="loginForm" novalidate>
+
+                    <p>Email ID</p>
+                    <input type="email" name="username" ng-model="username" ng-keypress="checkIfEnterKeyWasPressedForLogin($event)" required validate-email/>
+                        <span ng-show="loginForm.username.$dirty&&loginForm.username.$invalid && !loginForm.username.$pristine">
+                        <span class="error-message" ng-show="loginForm.username.$error.required"><span>Required.</span></span>
+                        <span class="error-message" ng-show="loginForm.username.$error.email"><span>Enter&nbsp;valid&nbsp;Email&nbsp;ID.</span></span>
+                        </span>
+                    <p>Password</p>
+                    <input type="password" name="password" ng-keypress="checkIfEnterKeyWasPressedForLogin($event)" required ng-model="password"/>
+                        <span ng-show="loginForm.password.$dirty&&loginForm.password.$invalid && !loginForm.password.$pristine">
+                        <span class="error-message" ng-show="loginForm.password.$error.required"><span>Required.</span></span>
+                        </span>
+                    <a href="#" id="forgot_password" data-ng-click="reset()" class="forgot_password text-center">Forgot password?</a>
+                    <div class="action_btns">
+                        <div class="one_half"><a class="btn btn_red" ng-class="{'button-disable':loginForm.$invalid}" ng-click="doLogin()">Login</a></div>
+                        <div class="one_half last"><a id="register_form" class="btn">Register</a></div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Reset Password -->
+        <div class="reset_password">
+            <div flash-message="3000" ></div>
+            <form name="forgotPasswordForm" novalidate>
+                <p>Email ID</p>
+                <input type="email" name="emailid" required validate-email ng-model="emailid"/>
+                    <span ng-show="forgotPasswordForm.emailid.$dirty&&forgotPasswordForm.emailid.$invalid && !forgotPasswordForm.emailid.$pristine">
+                    <span class="error-message" ng-show="forgotPasswordForm.emailid.$error.required"><span>Required.</span></span>
+                    <span class="error-message" ng-show="forgotPasswordForm.emailid.$error.email"><span>Enter&nbsp;valid&nbsp;Email&nbsp;ID.</span></span>
+                    </span>
+                <div class="action_btns margin-top-20">
+                    <div class="one_half"><a href="#" class="btn back_btn" data-ng-click="reset()"><i class="fa fa-angle-double-left"></i> Back</a></div>
+                    <div class="one_half last"><a id="check_secret" class="btn btn_red"  ng-class="{'button-disable':forgotPasswordForm.$invalid}" ng-click="doForgotPassword()">Submit</a></div>
+                </div>
+            </form>
+
+        </div>
+
+        <!-- Answer for Secret Question -->
+        <div class="secret_question">
+            <div flash-message="3000" ></div>
+            <form name="secretAnswerForm" novalidate>
+                <p>Secret Question :</p>
+                <p class="text-bold" ng-if="secretQuestion==1">What was the name of your first pet?</p>
+                <p class="text-bold" ng-if="secretQuestion==2">What is the name of your best friend?</p>
+                <p class="text-bold" ng-if="secretQuestion==3">What is your favourite dish?</p>
+                <p class="text-bold" ng-if="secretQuestion==4">What is the name of your favourite film star ?</p>
+                <p class="text-bold" ng-if="secretQuestion==5">What is the name of your favourite sport's team?</p>
+                <p class="text-bold" ng-if="secretQuestion==6">What is your Dream job?</p>
+
+
+                <p>Secret Answer</p>
+                <input type="password" name="secretAnswer" ng-model="secretanswer" required/>
+                    <span ng-show="forgotPasswordForm.secretAnswer.$dirty&&forgotPasswordForm.secretAnswer.$invalid && !forgotPasswordForm.secretAnswer.$pristine">
+                        <span class="error-message" ng-show="forgotPasswordForm.secretAnswer.$error.required"><span>Required.</span></span>
+                    </span>
+                <a href="" ng-click="doSendEmail()" class="forgot_password text-center reset_link">Reset Password without security question</a>
+                <div class="action_btns margin-top-20">
+                    <div class="one_half"><a href="#"  data-ng-click="reset()" class="btn back_btn_forgotPassword"><i class="fa fa-angle-double-left"></i> Back</a></div>
+                    <div class="one_half last"><a ng-class="{'button-disable':forgotPasswordForm.$invalid}" ng-click="doSecretAnswerCheck()" class="btn btn_red">Submit</a></div>
+                </div>
+            </form>
+        </div>
+
+        <div class="new_password_form">
+            <div flash-message="3000" ></div>
+            <form name="newPasswordForm" novalidate>
+                <p><b>Please Enter your New Password</b></p>
+                <p>New Password</p>
+                <input type="password" name="newpassword" id="newpswd" ng-pattern="/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-])(?!.*\s).{6,}$/"  maxlength="20"  ng-model="newpassword" required/>
+                   <span ng-show="newPasswordForm.newpassword.$dirty&&newPasswordForm.newpassword.$invalid && !newPasswordForm.newpassword.$pristine">
+                        <span class="error-message" ng-show="newPasswordForm.newpassword.$error.required"><span>Required.</span></span>
+                          <span class="error-message" ng-show="newPasswordForm.newpassword.$error.pattern"><span>Condition&nbsp;not&nbsp;satisfied</span></span>
+                    </span>
+                <p>Confirm Password</p>
+                <input type="password" name="confirmPassword" ng-disabled="newPasswordForm.newpassword.$invalid" ng-model="confirmPassword" required compare-to="newpassword"/>
+                   <span ng-show="newPasswordForm.confirmPassword.$dirty&&newPasswordForm.confirmPassword.$invalid && !newPasswordForm.confirmPassword.$pristine">
+                        <span class="error-message" ng-show="newPasswordForm.confirmPassword.$error.compareTo"><span>Password&nbsp;don't&nbsp;match.</span></span>
+                    </span>
+               <div class="action_btns margin-top-20">
+                    <div class="one_half"><a class="btn btn_red" ng-class="{'button-disable':newPasswordForm.$invalid}" ng-click="changePassword()">Submit</a></div>
+                    <div class="one_half last"><a  class="btn modal_close">Cancel</a></div>
+                </div>
+            </form>
+            <div id="new_pswd_info">
+                <h4>Password must meet the following requirements:</h4>
+
+                <ul class="remove-style">
+                    <li id="letter1" class="invalid">At least <strong>one small letter</strong>
+
+                    </li>
+                    <li id="capital1" class="invalid">At least <strong>one capital letter</strong>
+
+                    </li>
+                    <li id="number1" class="invalid">At least <strong>one number</strong>
+
+                    </li>
+                    <li id="special1" class="invalid">At least <strong>one special character</strong>
+
+                    </li>
+                    <li id="length1" class="invalid">Be at least <strong>6 characters</strong>
+
+                    </li>
+                    <li id="space1" class="valid">Should not allow space
+
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- Register Form -->
+        <div class="user_register">
+            <!--<div class="">
+                <a href="#" class="social_box fb">
+                    <span class="icon"><i class="fa fa-facebook"></i></span>
+                    <span class="icon_title">Sign Up with Facebook</span>
+                </a>
+            </div>
+            <div class="centeredText">
+                <span>Or</span>
+            </div>-->
+            <div flash-message="3000" ></div>
+            <form name="registerForm" novalidate>
+                <p>First name</p>
+                <input type="text" name="firstname" ng-pattern="/^ *([a-zA-Z]+ ?)+ *$/"  ng-model="userForm.firstname" maxlength="24" required/>
+                    <span ng-show="registerForm.firstname.$dirty&&registerForm.firstname.$invalid && !registerForm.firstname.$pristine">
+                        <span class="error-message" ng-show="registerForm.firstname.$error.required"><span>Required.</span></span>
+                         <span class="error-message" ng-show="registerForm.firstname.$error.pattern"><span>Enter&nbsp;valid&nbsp;Name.</span></span>
+                    </span>
+                <p>Last name</p>
+                <input type="text" name="lastname" ng-pattern="/^ *([a-zA-Z]+ ?)+ *$/"  ng-model="userForm.lastname" maxlength="24" required/>
+                    <span ng-show="registerForm.lastname.$dirty&&registerForm.lastname.$invalid && !registerForm.name.$pristine">
+                        <span class="error-message" ng-show="registerForm.lastname.$error.required"><span>Required.</span></span>
+                         <span class="error-message" ng-show="registerForm.lastname.$error.pattern"><span>Enter&nbsp;valid&nbsp;Name.</span></span>
+                    </span>
+                <p>Email ID</p>
+                <input type="email" name="emailid" ng-model="userForm.emailid"  required validate-email emailexists/>
+                    <span ng-show="registerForm.emailid.$dirty&&registerForm.emailid.$invalid && !registerForm.emailid.$pristine">
+                        <span class="error-message" ng-show="registerForm.emailid.$error.required"><span>Required.</span></span>
+                       <span class="error-message" ng-show="registerForm.emailid.$error.email"><span>Enter&nbsp;valid&nbsp;Email&nbsp;ID.</span></span>
+
+                    </span>
+                <span class="error-message" ng-show="registerForm.emailid.$error.emailexists"><span>Email&nbsp;ID&nbsp;Already&nbsp;Exist.</span></span>
+                <p>Password</p>
+                <input type="password"  name="password" id="pswd" ng-model="userForm.password" ng-pattern="/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-])(?!.*\s).{6,}$/"  maxlength="20"required/>
+                    <span ng-show="registerForm.password.$dirty&&registerForm.password.$invalid && !registerForm.password.$pristine">
+                        <span class="error-message" ng-show="registerForm.password.$error.required"><span>Required.</span></span>
+                          <span class="error-message" ng-show="registerForm.password.$error.pattern"><span>Condition&nbsp;not&nbsp;satisfied</span></span>
+                    </span>
+                <p>Confirm Password</p>
+                <input type="password" name="confirmPassword" ng-disabled="registerForm.password.$invalid" required ng-model="confirmpassword" compare-to="userForm.password"/>
+                    <span ng-show="registerForm.confirmPassword.$dirty&&registerForm.confirmPassword.$invalid && !registerForm.confirmPassword.$pristine">
+                        <span class="error-message" ng-show="registerForm.confirmPassword.$error.compareTo"><span>Password&nbsp;don't&nbsp;match.</span></span>
+                    </span>
+                <div class="action_btns margin-top-20">
+                    <div class="one_half"><a href="#" data-ng-click="reset()" class="btn back_btn"><i class="fa fa-angle-double-left"></i> Already have an account?</a></div>
+                    <div class="one_half last"><a id="register_form2" ng-disabled="registerForm.$invalid" class="btn btn_red">Proceed <i class="fa fa-angle-double-right"></i></a></div>
+                </div>
+            </form>
+            <div id="pswd_info">
+                <h4>Password must meet the following requirements:</h4>
+
+                <ul class="remove-style">
+                    <li id="letter" class="invalid">At least <strong>one small letter</strong>
+
+                    </li>
+                    <li id="capital" class="invalid">At least <strong>one capital letter</strong>
+
+                    </li>
+                    <li id="number" class="invalid">At least <strong>one number</strong>
+
+                    </li>
+                    <li id="special" class="invalid">At least <strong>one special character</strong>
+
+                    </li>
+                    <li id="length" class="invalid">Be at least <strong>6 characters</strong>
+
+                    </li>
+                    <li id="space" class="valid">Should not allow space
+
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Register Form Continuation-->
+        <div class="user_register1">
+            <form name="registerForm2" novalidate>
+                <p>Security Question</p>
+                <select  ng-model="userForm.secretquestion" name="secretquestion"  required>
+                    <option value="">--Select Security Question--</option>
+                    <option value="1">What was the name of your first pet?</option>
+                    <option value="2">What is the name of your best friend?</option>
+                    <option value="3">What is your favourite dish?</option>
+                    <option value="4">What is the name of your favourite film star ?</option>
+                    <option value="5">What is the name of your favourite sport's team?</option>
+                    <option value="6">What is your Dream job?</option>
+                </select>
+                <span ng-show="registerForm2.secretquestion.$invalid && !registerForm2.secretquestion.$pristine">
+                    <span class="error-message" ng-show="registerForm2.secretquestion.$error.required"><span>Required.</span></span>
+                </span>
+                <p>Answer</p>
+                <input type="text" name="secretanswer" ng-model="userForm.secretanswer" maxlength="150" required/>
+                <span ng-show="registerForm2.secretanswer.$invalid && !registerForm2.secretanswer.$pristine">
+                    <span class="error-message" ng-show="registerForm2.secretanswer.$error.required"><span>Required.</span></span>
+                </span>
+                <div class="action_btns margin-top-20">
+                    <div class="one_half"><a href="#" class="btn back_btn_register"><i class="fa fa-angle-double-left"></i> Back</a></div>
+                    <div class="one_half last"><a ng-click="register(userForm)" ng-disabled="registerForm2.$invalid" class="btn btn_red">Register</a></div>
+                </div>
+            </form>
+        </div>
+    </section>
+</div>
+
+</div>
+
+<script>
+
+    /*var device = (/android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(navigator.userAgent.toLowerCase()));*/
+    var isAndroid = (/android/i.test(navigator.userAgent.toLowerCase()));
+    var isIphone = (/iphone/i.test(navigator.userAgent.toLowerCase()));
+
+    $(".android").hide();
+    $(".iphone").hide();
+    $(".mobileApp").hide();
+    $(".noMobileApp").show();
+
+    if(isAndroid){
+        $(".mobileApp").show();
+        $(".noMobileApp").hide();
+        $(".android").show();
+        $(".iphone").hide();
+    }
+    else if(isIphone){
+        $(".mobileApp").show();
+        $(".noMobileApp").hide();
+        $(".android").hide();
+        $(".iphone").show();
+    }
+
+    $(".modal_trigger").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
+
+    $(function(){
+
+
+        $('.modal_close').click(function(){
+            $(".popupContainer").removeClass('left-36');
+            $(".reset_password").hide();
+            $(".user_register").hide();
+            $(".secret_question").hide();
+            $(".user_register1").hide();
+            $(".user_login").hide();
+            $(".new_password_form").hide();
+            $("#modal").hide();
+            $("#lean_overlay").hide();
+        });
+
+        $("#lean_overlay").click(function(){
+            $(".popupContainer").removeClass('left-36');
+            $(".reset_password").hide();
+            $(".user_register").hide();
+            $(".secret_question").hide();
+            $(".user_register1").hide();
+            $(".user_login").hide();
+            $(".new_password_form").hide();
+            $("#modal").hide();
+            $("#lean_overlay").hide();
+        });
+
+        // Calling Login Form
+        $("#forgot_password").click(function(){
+            $(".user_login").hide();
+            $(".secret_question").hide();
+            $(".reset_password").show();
+            $(".new_password_form").hide();
+            $(".header_title").text('Reset Password');
+            return false;
+        });
+
+// Calling Register Form
+        $("#register_form").click(function(){
+            $(".user_login").hide();
+            $(".secret_question").hide();
+            $(".user_register").show();
+            $(".user_register1").hide();
+            $(".new_password_form").hide();
+            $(".header_title").text('Register');
+
+            $("#pswd_info").hide();
+            return false;
+        });
+
+
+// Calling Register Form
+        $("#register_form2").click(function(){
+            $(".user_login").hide();
+            $(".secret_question").hide();
+            $(".user_register").hide();
+            $(".user_register1").show();
+            $(".new_password_form").hide();
+            $(".header_title").text('Register');
+            return false;
+        });
+
+// Going back to Social Forms
+        $(".back_btn").click(function(){
+            $(".reset_password").hide();
+            $(".user_register").hide();
+            $(".secret_question").hide();
+            $(".user_login").show();
+            $(".new_password_form").hide();
+            $(".header_title").text('Login');
+            return false;
+        });
+
+// Going back to Forgot Password Forms
+        $(".back_btn_forgotPassword").click(function(){
+            $(".reset_password").show();
+            $(".user_register").hide();
+            $(".secret_question").hide();
+            $(".user_login").hide();
+            $(".new_password_form").hide();
+            $(".header_title").text('Reset Password');
+            return false;
+        });
+
+// Going back to Social Forms
+        $(".back_btn_register").click(function(){
+            $(".reset_password").hide();
+            $(".user_register").show();
+            $(".user_register1").hide();
+            $(".secret_question").hide();
+            $(".user_login").hide();
+            $(".new_password_form").hide();
+            $(".header_title").text('Login');
+            return false;
+        });
+
+        $(".modal_trigger").click(function(){
+            $(".reset_password").hide();
+            $(".user_register").hide();
+            $(".secret_question").hide();
+            $(".user_register1").hide();
+            $(".user_login").show();
+            $(".new_password_form").hide();
+            $(".header_title").text('Login');
+            if(isAndroid||isIphone)
+            $(".header_title").text('Recommended');
+            return false;
+        });
+    });
+
+
+    $(document).ready(function () {
+        $('#pswd').keyup(function () {
+            // set password variable
+            var pswd = $('#pswd').val();
+            if (pswd.length < 6) {
+                $('#length').removeClass('valid').addClass('invalid');
+            } else {
+                $('#length').removeClass('invalid').addClass('valid');
+            }
+//validate letter
+            if (pswd.match(/[a-z]/)) {
+                $('#letter').removeClass('invalid').addClass('valid');
+            } else {
+                $('#letter').removeClass('valid').addClass('invalid');
+            }
+//validate capital letter
+            if (pswd.match(/[A-Z]/)) {
+                $('#capital').removeClass('invalid').addClass('valid');
+            } else {
+                $('#capital').removeClass('valid').addClass('invalid');
+            }
+
+//validate number
+            if (pswd.match(/\d/)) {
+                $('#number').removeClass('invalid').addClass('valid');
+            } else {
+                $('#number').removeClass('valid').addClass('invalid');
+            }
+
+            if (pswd.match(/\s/)) {
+                $('#space').removeClass('valid').addClass('invalid');
+            } else {
+                $('#space').removeClass('invalid').addClass('valid');
+            }
+
+            if (pswd.match(/[#?!@$%^&*-]/)) {
+                $('#special').removeClass('invalid').addClass('valid');
+            } else {
+                $('#special').removeClass('valid').addClass('invalid');
+            }
+
+            if ($('#pswd_info li.invalid').length == 0) {
+                $('#pswd_info').fadeOut();
+            } else {
+                $('#pswd_info').fadeIn();
+            }
+        });
+        $('#pswd').focus(function () {
+            // set password variable
+            var pswd = $('#pswd').val();
+            if (pswd.length < 6) {
+                $('#length').removeClass('valid').addClass('invalid');
+            } else {
+                $('#length').removeClass('invalid').addClass('valid');
+            }
+//validate letter
+            if (pswd.match(/[a-z]/)) {
+                $('#letter').removeClass('invalid').addClass('valid');
+            } else {
+                $('#letter').removeClass('valid').addClass('invalid');
+            }
+//validate capital letter
+            if (pswd.match(/[A-Z]/)) {
+                $('#capital').removeClass('invalid').addClass('valid');
+            } else {
+                $('#capital').removeClass('valid').addClass('invalid');
+            }
+
+//validate number
+            if (pswd.match(/\d/)) {
+                $('#number').removeClass('invalid').addClass('valid');
+            } else {
+                $('#number').removeClass('valid').addClass('invalid');
+            }
+
+            if (pswd.match(/\s/)) {
+                $('#space').removeClass('valid').addClass('invalid');
+            } else {
+                $('#space').removeClass('invalid').addClass('valid');
+            }
+
+            if (pswd.match(/[#?!@$%^&*-]/)) {
+                $('#special').removeClass('invalid').addClass('valid');
+            } else {
+                $('#special').removeClass('valid').addClass('invalid');
+            }
+
+            if ($('#pswd_info li.invalid').length == 0) {
+                $('#pswd_info').fadeOut();
+            } else {
+                $('#pswd_info').fadeIn();
+            }
+        });
+        $('#pswd').keyup(function () {
+        }).focus(function () {
+            $('#pswd_info').show();
+        }).blur(function () {
+            $('#pswd_info').hide();
+        });
+
+
+
+
+        //Password condition for new password
+
+        $('#newpswd').keyup(function () {
+            // set password variable
+            var newpswd = $('#newpswd').val();
+            if (newpswd.length < 6) {
+                $('#length1').removeClass('valid').addClass('invalid');
+            } else {
+                $('#length1').removeClass('invalid').addClass('valid');
+            }
+//validate letter
+            if (newpswd.match(/[a-z]/)) {
+                $('#letter1').removeClass('invalid').addClass('valid');
+            } else {
+                $('#letter1').removeClass('valid').addClass('invalid');
+            }
+//validate capital letter
+            if (newpswd.match(/[A-Z]/)) {
+                $('#capital1').removeClass('invalid').addClass('valid');
+            } else {
+                $('#capital1').removeClass('valid').addClass('invalid');
+            }
+
+//validate number
+            if (newpswd.match(/\d/)) {
+                $('#number1').removeClass('invalid').addClass('valid');
+            } else {
+                $('#number1').removeClass('valid').addClass('invalid');
+            }
+
+            if (newpswd.match(/\s/)) {
+                $('#space1').removeClass('valid').addClass('invalid');
+            } else {
+                $('#space1').removeClass('invalid').addClass('valid');
+            }
+
+            if (newpswd.match(/[#?!@$%^&*-]/)) {
+                $('#special1').removeClass('invalid').addClass('valid');
+            } else {
+                $('#special1').removeClass('valid').addClass('invalid');
+            }
+
+            if ($('#new_pswd_info li.invalid').length == 0) {
+                $('#new_pswd_info').fadeOut();
+            } else {
+                $('#new_pswd_info').fadeIn();
+            }
+        });
+        $('#newpswd').focus(function () {
+            // set password variable
+            var newpswd = $('#newpswd').val();
+            if (newpswd.length < 6) {
+                $('#length1').removeClass('valid').addClass('invalid');
+            } else {
+                $('#length1').removeClass('invalid').addClass('valid');
+            }
+//validate letter
+            if (newpswd.match(/[a-z]/)) {
+                $('#letter1').removeClass('invalid').addClass('valid');
+            } else {
+                $('#letter1').removeClass('valid').addClass('invalid');
+            }
+//validate capital letter
+            if (newpswd.match(/[A-Z]/)) {
+                $('#capital1').removeClass('invalid').addClass('valid');
+            } else {
+                $('#capital1').removeClass('valid').addClass('invalid');
+            }
+
+//validate number
+            if (newpswd.match(/\d/)) {
+                $('#number1').removeClass('invalid').addClass('valid');
+            } else {
+                $('#number1').removeClass('valid').addClass('invalid');
+            }
+
+            if (newpswd.match(/\s/)) {
+                $('#space1').removeClass('valid').addClass('invalid');
+            } else {
+                $('#space1').removeClass('invalid').addClass('valid');
+            }
+
+            if (newpswd.match(/[#?!@$%^&*-]/)) {
+                $('#special1').removeClass('invalid').addClass('valid');
+            } else {
+                $('#special1').removeClass('valid').addClass('invalid');
+            }
+
+            if ($('#new_pswd_info li.invalid').length == 0) {
+                $('#new_pswd_info').fadeOut();
+            } else {
+                $('#new_pswd_info').fadeIn();
+            }
+        });
+        $('#newpswd').keyup(function () {
+        }).focus(function () {
+            $('#new_pswd_info').show();
+        }).blur(function () {
+            $('#new_pswd_info').hide();
+        });
+    });
+</script>

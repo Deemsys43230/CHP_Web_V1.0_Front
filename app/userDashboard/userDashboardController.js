@@ -1,6 +1,6 @@
 var userApp= angular.module('userApp', ['ngRoute','oc.lazyLoad','ngCookies','requestModule','flash','ngAnimate','ngTouch','ngPercentDisplay','userDashboardServiceModule','angular-svg-round-progress','ui.bootstrap','angular-nicescroll']);
 
-userApp.controller('UserDashboardController',function($scope,$window,requestHandler,Flash,UserDashboardService,$interval,roundProgressService,limitToFilter,$timeout,$compile,$location,$rootScope,$route) {
+userApp.controller('UserDashboardController',['$scope','$window','requestHandler','Flash','UserDashboardService','$interval','roundProgressService','limitToFilter','$timeout','$compile','$location','$rootScope','$route',function($scope,$window,requestHandler,Flash,UserDashboardService,$interval,roundProgressService,limitToFilter,$timeout,$compile,$location,$rootScope,$route) {
     $scope.foodSearchResult = [];
     $scope.userFood={};
     $scope.userFood.sessionid=1;
@@ -22,6 +22,10 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
     $scope.historyReport=0;
     $scope.historyType=1;
     $scope.showExercise=0;
+    slidemenu();
+    daterangepicker();
+    modeltrigger();
+    tabcontent();
     if($route.current.$$route.fromGoal)
         $("#updateWeightGoal").click();
     if($route.current.$$route.fromDevice){
@@ -888,6 +892,12 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         });
     };
 
+    $scope.isshowGraph = false;     
+    $scope.showGraph = function () {        
+       //If DIV is visible it will be hidden and vice versa.        
+       $scope.isshowGraph = $scope.isshowGraph ? false : true;      
+    }
+    
     /*$('#dailyUpdateBudgetGraph').highcharts({
         chart: {
             type: 'bar'
@@ -943,10 +953,16 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
             }
             else{
                 $scope.weightlog=$scope.originalWeight=weightlogdetails.weight;
-                if(id==1)
-                $("#weightLog").val(weightlogdetails.weight);
-                else
-                $("#weightLog1").val(weightlogdetails.weight);
+                $scope.fat=$scope.originalFat=weightlogdetails.fat;
+                if(id==1){
+                    $("#weightLog").val(weightlogdetails.weight);
+                    $("#fatLog").val(weightlogdetails.fat);
+                }                
+                else{
+                   $("#weightLog1").val(weightlogdetails.weight);
+                   $("#fatLog1").val(weightlogdetails.fat);   
+                }
+                
             }
         });
     };
@@ -956,7 +972,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         $scope.weightUpdateText="Updating...";
         $scope.spinner=true;
         if(id==1)
-        $scope.doInsertOrUpdateWeightLog($scope.UserDate,parseFloat($("#weightLog").val()));
+        $scope.doInsertOrUpdateWeightLog($scope.UserDate,parseFloat($("#weightLog").val()),parseFloat($("#fatLog").val()));
         else
         $scope.doInsertOrUpdateWeightLog($("#weight-log-date1").val(),parseFloat($("#weightLog1").val()));
     };
@@ -1011,10 +1027,11 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
     };
 
     //TO Insert weight Goal Log
-    $scope.doInsertOrUpdateWeightLog=function(date,weight){
-        requestHandler.postRequest("user/weightlogInsertorUpdate/",{"date":date,"weight":weight}).then(function(response){
+    $scope.doInsertOrUpdateWeightLog=function(date,weight,fat){
+        requestHandler.postRequest("user/weightlogInsertorUpdate/",{"date":date,"weight":weight,"fat":$scope.fat}).then(function(response){
             if(date==selectedDate && $scope.weightGraph){
                 $window.currentweight = weight;
+                $window.fat= fat;
                 //refreshGraph();
                /*$scope.updateAverageGainSpent(date);*/
             }
@@ -1819,7 +1836,9 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
     $scope.graphTwo=function(){
         $scope.graphs=2;
     };
-
+    $scope.dailyIntake=function(){      
+        $scope.graphs=3;        
+        };
     $scope.loadSessionFood=function(){
         switch(parseInt($scope.graphSessionId)){
             case 1:$scope.userSessionFoods=$scope.userFoodDiaryDataAll.BreakFast;
@@ -3289,9 +3308,12 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
     $scope.datePicker = function(){
         $("#main-date").click();
     };
-
     $scope.datePickerGraph = function(){
         $("#history-graph").click();
+        $("#history-view").click();
+    };
+    $scope.datePickerHistoryGraph = function(){
+        $("#history-graph-date").click();
     };
 
     //Weight Goal Graph
@@ -3729,7 +3751,7 @@ userApp.controller('UserDashboardController',function($scope,$window,requestHand
         return dateFormat(this, mask, utc);
     };
 
-}).constant('uibdatepickerPopupConfig', {
+}]).constant('uibdatepickerPopupConfig', {
     datepickerPopup: "dd/MM/yyyy",
     closeOnDateSelection: true,
     appendToBody: true,
@@ -3962,3 +3984,220 @@ userApp.directive('shouldFocus', function(){
     };
 });
 
+//for dashboard side menu open functionaliteis
+function slidemenu() {
+    $('#sidemenu a').on('click', function(e){
+        e.preventDefault();
+
+        if($(this).hasClass('open')) {
+            // do nothing because the link is already open
+        } else {
+            var oldcontent = $('#sidemenu a.open').attr('href');
+            var newcontent = $(this).attr('href');
+
+            $(oldcontent).fadeOut('fast', function(){
+                $(newcontent).fadeIn().removeClass('hidden');
+                $(oldcontent).addClass('hidden');
+            });
+
+
+            $('#sidemenu a').removeClass('open');
+            $(this).addClass('open');
+        }
+    });
+};
+//for dashboard main date
+function daterangepicker() {
+    $("#main-date").click();
+    var options = {
+        maxDate : new Date(),
+        endDate : new Date(),
+        opens:'left',
+        singleDatePicker: true
+    };
+
+    $('#main-date').daterangepicker(options, function(start, end, label) {
+        angular.element(document.getElementById('main-date')).scope().initialLoadFoodAndExercise(start.format('DD/MM/YYYY'));
+        document.getElementById("main-start-date").value = start.format('DD/MM/YYYY');
+    });
+
+//for food intake and excersize view graph date picker
+    $("#history-graph").click();
+    $("#history-view").click();
+    var options = {
+        maxDate : new Date(),
+        startDate : new Date(),
+        endDate : new Date(),
+        singleDatePicker: false,
+        opens:'left',
+        showDropdowns: true,
+        dateLimit: {
+            days: 31
+        },
+        ranges:{
+            'Last Week': [moment().subtract(6,'days'), moment()]
+        }
+    };
+
+    $('#history-graph').daterangepicker(options, function(start, end, label) {
+        document.getElementById("history-start").value = start.format('DD/MM/YYYY');
+        document.getElementById("history-end").value = end.format('DD/MM/YYYY');
+    });
+    $('#history-view').daterangepicker(options, function(start, end, label) {
+        document.getElementById("history-start").value = start.format('DD/MM/YYYY');
+        document.getElementById("history-end").value = end.format('DD/MM/YYYY');
+    });
+
+    $("#history-graph-date").click();
+    var options = {
+        maxDate : new Date(),
+        startDate : new Date(),
+        endDate : new Date(),
+        singleDatePicker: false,
+        opens:'left',
+        showDropdowns: true,
+        dateLimit: {
+            days: 31
+        },
+        ranges:{
+            'Last Week': [moment().subtract(6,'days'), moment()],
+            'Last 2 Weeks': [moment().subtract(13,'days'), moment()],
+            'Last 3 Weeks': [moment().subtract(20,'days'), moment()],
+            'This Month': [moment().subtract(0,'month').startOf('month'), moment()],
+            'Last Month': [moment().subtract(1,'month').startOf('month'), moment().subtract(1,'month').endOf('month')]
+        }
+    };
+
+    $('#history-graph-date').daterangepicker(options, function(start, end, label) {
+        document.getElementById("history-start").value = start.format('DD/MM/YYYY');
+        document.getElementById("history-end").value = end.format('DD/MM/YYYY');
+    });
+
+    $("#weight-log-date1").click();
+    var options = {
+        drops:'down',
+        opens:'left',
+        maxDate : new Date(),
+        singleDatePicker: true
+    };
+
+    $('#weight-log-date1').daterangepicker(options, function(start, end, label) {
+        document.getElementById("weightLogDate1").value = start.format('DD/MM/YYYY');
+        var scope = angular.element($("#weight-log-date1")).scope();
+        scope.doGetWeightLog(start.format('DD/MM/YYYY'),2);
+    });
+};
+
+//for food and excersize popup
+function modeltrigger() {
+    $("#modal_trigger_food").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
+    $(function(){
+        $(".common_model").show();
+    });
+
+    $("#modal_trigger_exercise").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
+
+    $(function(){
+        $(".common_model").show();
+    });
+
+    $("#weight_button").click(function(){
+        if($('#weight-form').css('right')=='0px'){
+            $("#update-weight-form").slideToggle(800);
+            $('#weight-form').animate({right:'-300px'},  500);
+        }else{
+            $('#weight-form').animate({right:'0px'},  500);
+            $("#update-weight-form").slideToggle(300);
+        }
+    });
+};
+
+//for food intake and excersize tab content
+
+function tabcontent() {
+    $(".tab_content").show();
+
+    $("ul.session li").click(function() {
+        $("ul.session li").removeClass("active");
+        $(this).addClass("active");
+    });
+
+
+    $(".tab_content").show();
+
+    $("ul.graphs li").click(function() {
+        $("ul.graphs li").removeClass("active");
+        $(this).addClass("active");
+    });
+
+};
+
+//for adivce tab coach carousel
+
+ function mouseover(e){
+         e.setAttribute ('scrollamount', 0, 0);e.stop();
+    }
+
+    function mouseout(e){
+        e.setAttribute ('scrollamount', 3, 0);e.start();
+    }
+
+    function coachAdviceCarousel(){
+        setTimeout(function(){
+            $('.advice-carousel').each(function(){
+
+                var owl = jQuery(this),
+                        itemsNum = $(this).attr('data-appeared-items'),
+                        sliderNavigation = $(this).attr('data-navigation'),
+                        returnSliderNavigation,
+                        deskitemsNum,
+                        desksmallitemsNum,
+                        tabletitemsNum;
+
+                if ( sliderNavigation == 'false' || sliderNavigation == '0' ) {
+                    returnSliderNavigation = false;
+                }else {
+                    returnSliderNavigation = true;
+                }
+                if( itemsNum == 1) {
+                    deskitemsNum = 1;
+                    desksmallitemsNum = 1;
+                    tabletitemsNum = 1;
+                }
+                else if (itemsNum >= 2 && itemsNum < 4) {
+
+                    deskitemsNum = itemsNum;
+                    desksmallitemsNum = itemsNum - 1;
+                    tabletitemsNum = itemsNum - 1;
+                }
+                else if (itemsNum >= 4 && itemsNum < 8) {
+                    deskitemsNum = itemsNum -1;
+                    desksmallitemsNum = itemsNum - 2;
+                    tabletitemsNum = itemsNum - 3;
+                }
+                else {
+                    deskitemsNum = itemsNum -3;
+                    desksmallitemsNum = itemsNum - 6;
+                    tabletitemsNum = itemsNum - 8;
+                }
+                owl.owlCarousel({
+                    slideSpeed : 300,
+                    stopOnHover: true,
+                    autoPlay: false,
+                    navigation : returnSliderNavigation,
+                    pagination: false,
+                    lazyLoad : true,
+                    items : itemsNum,
+                    itemsDesktop : [1000,deskitemsNum],
+                    itemsDesktopSmall : [900,desksmallitemsNum],
+                    itemsTablet: [600,tabletitemsNum],
+                    itemsMobile : false,
+                    transitionStyle : "goDown"
+                });
+            });
+
+            var controlls=$('.advice-carousel-style');
+            controlls.find('.owl-prev').html('<i class="fa fa-angle-left"></i>');
+            controlls.find('.owl-next').html('<i class="fa fa-angle-right"></i>');
+        },500);
+    }

@@ -3,7 +3,7 @@ module.exports=function(grunt){
         watch: {
         	options: { nospawn: true },
             scripts: {
-                files: ['app/*.js','app/**/*.js','js/*.js','plugin/**/*.js','!app/userDashboard/userDashboardController.js','css/*.css','views/**/*.html','index.html','plugin/**/*.css','images/*.{png,jpg,gif}','images/**/*.{png,jpg,gif}','views/**/*.html','!views/user/views/dashboard.html'],
+                files: ['app/*.js','app/**/*.js','js/*.js','plugin/**/*.js','css/*.css','views/**/*.html','index.html','plugin/**/*.css','images/*.{png,jpg,gif}','images/**/*.{png,jpg,gif}','views/**/*.html'],
                 tasks: ['newer:uglify','newer:cssmin','newer:imagemin','newer:htmlmin']
             }
         },
@@ -13,7 +13,7 @@ module.exports=function(grunt){
                     {
                         mangle: false,
                         expand: true,
-                        src: ['app/*.js','app/**/*.js','js/*.js','plugin/**/*.js','angular/**/*.js','angular/*.js','!app/userDashboard/userDashboardController.js','!js/analytics.js'],
+                        src: ['app/*.js','app/**/*.js','js/*.js','plugin/**/*.js','angular/**/*.js','angular/*.js'],
                         dest: 'CyberHealth/'
                     }
                 ]
@@ -47,7 +47,7 @@ module.exports=function(grunt){
                },
                files: [{
                    expand:true,
-                   src: ['views/**/*.html','index.html','!views/user/views/dashboard.html','!views/common/disease-control-tips-3.html'],   // Actual patterns to match
+                   src: ['views/**/*.html','index.html','!views/common/disease-control-tips-3.html'],   // Actual patterns to match
                    dest: 'CyberHealth/'
 
                }]

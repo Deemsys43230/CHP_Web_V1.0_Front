@@ -1,137 +1,4 @@
 
-<style xmlns="http://www.w3.org/1999/html">
-    /*weight level*/
-.horizon-swiper.arrows {
-     padding: 0 0px;
-}
-.outerline-1 {
-    position: relative;
-    padding-bottom: 8px;
-    border-bottom: 1px solid #ededed;
-   
-}
-.content-h {
-    background: #FFFFFF;
-    padding: 10px!important;
-    -webkit-box-shadow: 0px 0px 3px rgba(0,0,0,0.3);
-    -moz-box-shadow: 0px 0px 3px rgba(0,0,0,0.3);
-    box-shadow: 0px 0px 3px rgba(0,0,0,0.3);
-    height: 300px;
-    width: 250px;
-
-}
-
-a.main-button:hover, input[type="submit"]:hover {
-    background: #444 !important;
-    color: #fff !important;
-}
-    #weight_level{
-        position:relative;
-        height:200px;
-        width:90px;
-        margin-top:20px;
-        margin-left:120px;
-        font-size: 13px;
-        overflow:hidden;
-        background-color: #eee;
-    }
-    .weight_level{
-        position:absolute;
-        width: 90px;
-        bottom: 0;
-        background-color: #003366;
-    }
-    .red{
-        background-color: #ff1a1a;
-    }
-    .green{
-        background-color: limegreen;
-    }
-    .yellow{
-        background-color: #f8ba01;
-    }
-
-    .custom-popup-wrapper {
-        position: absolute;
-        top: 100%;
-        left: 0;
-        width: 92%;
-        z-index: 1000;
-        display: none;
-        background-color: #fff;
-        padding:5px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
-        box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
-    }
-
-    .custom-popup-wrapper > .dropdown-menu {
-        position: static;
-        float: none;
-        width: 100%;
-        padding:0;
-        display: block;
-        min-width: 160px;
-        max-height: 300px;
-        overflow-y: scroll;
-        background-color: transparent;
-        border: none;
-        border-radius: 0;
-        box-shadow: none;
-    }
-
-    .custom-popup-wrapper > .dropdown-menu > .active > a,
-    .custom-popup-wrapper > .dropdown-menu > .active > a:hover,
-    .custom-popup-wrapper > .dropdown-menu > .active > a:focus {
-        background-color: #dadada!important;
-        color: #333;
-    }
-
-    .custom-popup-wrapper > .dropdown-menu >li>a{
-        border-bottom: 1px solid #f5f5f5;
-        width: 100%;
-        padding:7px 10px;
-        font-size: 15px;
-    }
-
-    .custom-popup-wrapper > .dropdown-menu >li>a span.wrap{
-        display: inline-block;
-        width: 85%;
-        margin-top:0;
-        white-space: pre-wrap !important;
-    }
-
-    .custom-popup-wrapper > .dropdown-menu >li>a>img{
-        display: inline-block;
-        vertical-align: top;
-        border: 2px solid #c0c0c0;
-    }
-
-    .custom-popup-wrapper > .dropdown-menu >li>a>span{
-        display: inline-block;
-        vertical-align: top;
-        margin-top:2px;
-    }
-    #sidemenu li.app a.menu-items.open {
-    color: dodgerblue;
-    border-left: 4px solid dodgerblue;
-}
-#sidemenu li.log a.menu-items.open {
-    color: lightseagreen;
-    border-left: 4px solid lightseagreen;
-}
-#sidemenu li.calories {
-
-    height: 105px !important;
-    border-left: 4px solid deepskyblue;
-}
-
-#dailyIntake{
-    width: 280px;
-    height: 310px !important;
-}
-</style>
 
 <!--Food Template-->
 <script type="text/ng-template" id="foodTemplate.html">
@@ -530,12 +397,12 @@ a.main-button:hover, input[type="submit"]:hover {
                                 <!-- @end #content -->
                             </div>
 
-                            <!-- Tab view graph for calories intake and burnt-->
+                           <!-- Tab view graph for calories intake and burnt-->
                             <div class="tab-pane padding-top-5" id="graph">
                                 <div class="tab_container">
                                     <div class="col-lg-12 col-md-12 col-sm-12 no-padding">
                                         <div class="col-lg-1 col-md-1 col-sm-1 no-padding">
-                                        <a href="#tab-1" class="back-button pull-left margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> </a>
+                                        <a href="#tab-1" class="target_button green_button pull-left margin-left-5" style="margin-top: 0px"><i class="fa fa-arrow-circle-o-left"></i> </a>
                                         </div>
                                         <div class="col-lg-4 col-md-4 col-sm-4 no-padding">
                                             <!-- Nav Tabs -->
@@ -563,7 +430,7 @@ a.main-button:hover, input[type="submit"]:hover {
                                         <!-- Tab panels -->
                                         
                                             <!-- Tab Content 1 -->
-                                            <div class="tab-pane in active padding-top-5" id="tab-4">
+                                            <div class="tab-pane in active padding-top-5">
                                                 <div ng-if="loaded" class="col-lg-12 col-md-12 col-sm-12">
                                                     <div class="loader-style-dashboard"><br/><br/>
                                                         <div class="loader"></div>
@@ -589,12 +456,12 @@ a.main-button:hover, input[type="submit"]:hover {
                             <!-- Ends Tab view graph -->
 
 
-                            <!-- Tab view graph for calories intake and burnt-->
+                            <!-- Tab view graph for Excersize and burnt-->
                             <div class="tab-pane padding-top-5" id="exercise-graph">
                                 <div class="tab_container">
                                     <div class="col-lg-12 col-md-12 col-sm-12 no-padding">
                                         <div class="col-lg-1 col-md-1 col-sm-1 no-padding">
-                                        <a href="#tab-2" class="back-button pull-left margin-left-5" data-toggle="tab" onclick="return false;"><i class="fa fa-arrow-circle-o-left"></i> </a>
+                                        <a href="#tab-2" class="target_button green_button pull-left margin-left-5" style="margin-top: 0px" data-toggle="tab" onclick="return false;"><i class="fa fa-arrow-circle-o-left"></i> </a>
                                         </div>
                                         <div class="col-lg-4 col-md-4 col-sm-4 no-padding">
                                             <!-- Nav Tabs -->
@@ -622,7 +489,7 @@ a.main-button:hover, input[type="submit"]:hover {
                                         <!-- Tab panels -->
                                         
                                             <!-- Tab Content 1 -->
-                                            <div class="tab-pane in active padding-top-5" id="tab-4">
+                                            <div class="tab-pane in active padding-top-5">
                                                 <div ng-if="loaded" class="col-lg-12 col-md-12 col-sm-12">
                                                     <div class="loader-style-dashboard"><br/><br/>
                                                         <div class="loader"></div>
@@ -645,7 +512,7 @@ a.main-button:hover, input[type="submit"]:hover {
                                     </div>
                                 </div>
                             </div>
-                            <!-- Ends Tab view graph -->                            
+                            <!-- Ends Tab view graph -->         
                         </div>
                         <!-- End Tab Panels -->
                     </div>
@@ -744,41 +611,42 @@ a.main-button:hover, input[type="submit"]:hover {
                                 <div class="col-lg-12 col-md-12 col-sm-12 margin-top-10" >                            
                                     <form name="weightLogForm" novalidate>
                                         <div class="col-lg-6 col-md-6 col-sm-6 margin-top-20 no-padding">
-                                        <h5 class="margin-bottom-15">UPDATE WEIGHT</h5>
-                                    </div>
-                                    <div class="col-lg-6 col-md-6 col-sm-6 no-padding">
-                                        <img src="../../images/log.png">
-                                    </div>
-                                    <div class="col-lg-12 col-md-12 col-sm-12 no-padding">
-                                        <div class="col-lg-6 col-md-6 col-sm-6 no-padding margin-top-15">
-                                            <span>Weight <small>(<span ng-show="userProfile.unitPreference==1">Kgs</span><span ng-show="userProfile.unitPreference==2">lbs</span>)</small><span class="pull-right">:</span></span>
+                                            <h5 class="margin-bottom-15">UPDATE WEIGHT</h5>
                                         </div>
-                                        <div class="col-lg-6 col-md-6 col-sm-6 margin-top-10 no-padding-right padding-left-8">
-                                            <input class="profile_input weightoverride" id="weightLog" name="curweight" ng-model="weightlog" maxlength="5" required valid-decimalnumber />
-                                            <span ng-show="weightLogForm.curweight.$dirty&&weightLogForm.curweight.$invalid">
-                                                <span class="error-message textarea-errormessage10" ng-show="weightLogForm.curweight.$error.required"><span>Required.</span></span>
-                                            </span>
+                                        <div class="col-lg-6 col-md-6 col-sm-6 no-padding">
+                                            <img src="../../images/log.png">
                                         </div>
-                                    </div>
-                                    <div class="col-lg-12 col-md-12 col-sm-12 no-padding">                               
-                                        <div class="col-lg-6 col-md-6 col-sm-6 no-padding margin-top-15">
-                                            <span>Fat <small>(<span>Units</span>)</small><span class="pull-right">:</span></span>
+                                        <div class="col-lg-12 col-md-12 col-sm-12 no-padding">
+                                            <div class="col-lg-6 col-md-6 col-sm-6 no-padding margin-top-15">
+                                                <span>Weight <small>(<span ng-show="userProfile.unitPreference==1">Kgs</span><span ng-show="userProfile.unitPreference==2">lbs</span>)</small><span class="pull-right">:</span></span>
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 col-sm-6 margin-top-10 no-padding-right padding-left-8">
+                                                <input class="profile_input weightoverride" id="weightLog" name="curweight" ng-model="weightlog" maxlength="5" required valid-decimalnumber />
+                                                <span ng-show="weightLogForm.curweight.$dirty&&weightLogForm.curweight.$invalid">
+                                                    <span class="error-message textarea-errormessage10" ng-show="weightLogForm.curweight.$error.required"><span>Required.</span></span>
+                                                </span>
+                                            </div>
                                         </div>
-                                        <div class="col-lg-6 col-md-6 col-sm-6 margin-top-10 no-padding-right padding-left-8">
-                                            <input class="profile_input weightoverride" id="weightLog" name="curweight" ng-model="weightlog" maxlength="15" required valid-decimalnumber />
-                                            <span ng-show="weightLogForm.curweight.$dirty&&weightLogForm.curweight.$invalid">
-                                                <span class="error-message textarea-errormessage10" ng-show="weightLogForm.curweight.$error.required"></span>
-                                                 <!-- <span class="error-message textarea-errormessage10" ng-show="!weightLogForm.curweight.$error.required&&weightLogForm.curweight.$error.validateFloat1"><span>Invalid&nbsp;Data.</span></span>-->
-                                            </span>
-                                        </div>
-                                        <div class="col-lg-12 col-md-12 col-sm-12 text-center margin-top-20">
-                                            <button onclick="return false;" class="btn-dis suggest_button override-width no-margin-bottom" ng-disabled="weightLogForm.$invalid || spinner || disableUpdateWeight" ng-click="weightLogEntry(1)">
-                                            <span ng-if="spinner"><span class="three-quarters-loader">Loading…</span></span>{{weightUpdateText}}</button><br/>
-                                        </div>
-                                    </div>       
+                                    </form>
+                                    <form name="fatLogForm" novalidate>
+                                        <div class="col-lg-12 col-md-12 col-sm-12 no-padding">                               
+                                            <div class="col-lg-6 col-md-6 col-sm-6 no-padding margin-top-15">
+                                                <span>Fat <small>(<span>Units</span>)</small><span class="pull-right">:</span></span>
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 col-sm-6 margin-top-10 no-padding-right padding-left-8">
+                                                <input class="profile_input weightoverride" id="fatLog" name="curfat" ng-model="fat" maxlength="5" required valid-decimalnumber />
+                                                <span ng-show="fatLogForm.curfat.$dirty&&fatLogForm.curfat.$invalid">
+                                                    <span class="error-message textarea-errormessage10" ng-show="fatLogForm.curfat.$error.required"></span>
+                                                </span>
+                                            </div>
+                                            <div class="col-lg-12 col-md-12 col-sm-12 text-center margin-top-20">
+                                                <button onclick="return false;" class="btn-dis suggest_button override-width no-margin-bottom" ng-disabled="weightLogForm.$invalid || spinner || disableUpdateWeight" ng-click="weightLogEntry(1)">
+                                                <span ng-if="spinner"><span class="three-quarters-loader">Loading…</span></span>{{weightUpdateText}}</button><br/>
+                                            </div>
+                                        </div>       
                                     </form>
                                 </div>                      
-                            </div> 
+                            </div>
                     
                             <!-- for Water level % -->
                             <div class="col-lg-5 col-md-5 col-sm-5 no-padding box">
@@ -925,21 +793,21 @@ a.main-button:hover, input[type="submit"]:hover {
                     <div class="col-lg-4 col-md-4 col-sm-4 no-padding right-border">
                         <div class="new-update">
                             <div class="sleep-textcolor">Sleep</div>
-                            <img class="img-width" src="../../images/sleep.png">
+                            <img class="img-width" src="../../images/sleep.png"/>
                             <div class="count brownText text-font">{{wearable.sleep==null?"N/A":wearable.sleep}}</div>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-4 no-padding right-border">
                         <div class="new-update">
                             <div class="heart-textcolor">Heart&nbsp;Beat</div>
-                            <img class="img-width" src="../../images/heart1.gif">
+                            <img class="img-width" src="../../images/heart1.gif"/>
                             <div class="count redText text-font">{{wearable.restingheartrate==null?"N/A":wearable.restingheartrate}}</div>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-4 no-padding">
                         <div class="new-update">
                             <div class="water-textcolor">Water&nbsp;Level</div>
-                            <img class="img-width" src="../../images/fat.png">
+                            <img class="img-width" src="../../images/fat.png"/>
                             <div class="count blueText text-font">{{waterlog}}/{{waterlogoz}}</div>
                         </div>
                     </div>
@@ -949,21 +817,21 @@ a.main-button:hover, input[type="submit"]:hover {
                     <div class="col-lg-4 col-md-4 col-sm-4 no-padding right-border">
                         <div class="new-update">
                             <div class="floor-textcolor">Floors</div>
-                            <img class="img-width" src="../../images/floor.png">
+                            <img class="img-width" src="../../images/floor.png"/>
                             <div class="count grayText text-font">{{wearable.floors==null?"N/A":wearable.floors}}</div>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-4 no-padding right-border">
                         <div class="new-update">
                             <div class="steps-textcolor">Steps</div>
-                            <img class="img-width" src="../../images/step.png">
+                            <img class="img-width" src="../../images/step.png"/>
                             <div class="count greenText text-font">{{wearable.steps==null?"N/A":wearable.steps}}</div>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-4 no-padding">
                         <div class="new-update">
                             <div class="fat-textcolor">Fat&nbsp;Burn</div>
-                            <img class="img-width" src="../../images/fat1.png">
+                            <img class="img-width" src="../../images/fat1.png"/>
                             <div class="count lightGreenText text-font">{{wearable.heartfatburn==null?"N/A":wearable.heartfatburn}}</div> 
                         </div>
                     </div>
@@ -972,24 +840,24 @@ a.main-button:hover, input[type="submit"]:hover {
                     <div class="col-lg-4 col-md-4 col-sm-4 no-padding right-border">
                         <div class="new-update">
                             <div class="bloodpessure-textcolor">BP<span><small>(mg/dl)</small></span></div>
-                            <img class="img-width" src="../../images/bloodpressure.png">    
+                            <img class="img-width" src="../../images/bloodpressure.png"/>    
                             <div class="count skyBlueText text-font">{{wearable.systolic==null?"N/A":wearable.systolic}}/{{wearable.systolic==null?"N/A":wearable.diastolic}}</div>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-4 no-padding right-border">
                         <div class="new-update">
                             <div class="bloodoxygen-textcolor">BO2</div>
-                            <img class="img-width" src="../../images/bloodoxygen.png">    
+                            <img class="img-width" src="../../images/bloodoxygen.png"/>    
                             <div class="count pinkText text-font">{{wearable.bloodoxygen==null?"N/A":wearable.bloodoxygen}}</div>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-4 no-padding">
                         <div class="new-update">
                             <div class="bloodglucose-textcolor">BG</div>
-                            <img class="img-width" src="../../images/bloodglucose.png">    
-                            <div class="count darkRedText text-font">{{wearable.randombloodglucose==null?"N/A":wearable.randombloodglucose}}/{{wearable.fastingbloodglucose==null?"N/A":wearable.fastingbloodglucose}}</div>
+                                <img class="img-width" src="../../images/bloodglucose.png"/>    
+                                <div class="count darkRedText text-font" title="Random Glucose/Fasting Glucose">{{wearable.randombloodglucose==null?"N/A":wearable.randombloodglucose}}/{{wearable.fastingbloodglucose==null?"N/A":wearable.fastingbloodglucose}}</div>
                         </div>
-                    </div>                                       
+                    </div>                                        
                 </div>
             </div>
         </div>
@@ -1107,7 +975,7 @@ a.main-button:hover, input[type="submit"]:hover {
                  <span class="error-message" ng-show="foodSuggestForm.foodname.$error.foodexists"><span>Food&nbsp;Already&nbsp;Exists</span></span>
                          </span>
             <p>Food Description:</p>
-            <textarea type="text" class="height-150" name="fooddescription" ng-model="foodSuggest.fooddescription" maxlength="300" required/></textarea>
+            <textarea type="text" class="height-150" name="fooddescription" ng-model="foodSuggest.fooddescription" maxlength="300" required></textarea>
                 <span ng-show="foodSuggestForm.fooddescription.$dirty&&foodSuggestForm.fooddescription.$invalid">
                     <span class="error-message textarea-errormessage-110" ng-show="foodSuggestForm.fooddescription.$error.required"><span>Required.</span></span>
                  </span>
@@ -1140,7 +1008,7 @@ a.main-button:hover, input[type="submit"]:hover {
              <span class="error-message" ng-show="exerciseSuggestForm.exercisename.$error.exerciseexists"><span>Exercise&nbsp;already&nbsp;exists.</span></span>
             </span>
             <p>Exercise Description:</p>
-            <textarea type="text" class="height-150" name="description" ng-model="exerciseSuggest.description"maxlength="300"  required/></textarea>
+            <textarea type="text" class="height-150" name="description" ng-model="exerciseSuggest.description"maxlength="300"  required></textarea>
              <span ng-show="exerciseSuggestForm.description.$dirty&&exerciseSuggestForm.description.$invalid">
                     <span class="error-message textarea-errormessage-110" ng-show="exerciseSuggestForm.description.$error.required"><span>Required.</span></span>
                  </span>
@@ -1558,21 +1426,21 @@ a.main-button:hover, input[type="submit"]:hover {
                     <div class="col-lg-4 col-md-4 col-sm-4 no-padding right-border">
                         <div class="new-update">
                             <div class="sleep-textcolor">Sleep</div>
-                            <img class="img-width" src="../../images/sleep.png">
+                            <img class="img-width" src="../../images/sleep.png"/>
                             <div class="count brownText text-font">{{wearable.sleep==null?"N/A":wearable.sleep}}</div>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-4 no-padding right-border">
                         <div class="new-update">
                             <div class="heart-textcolor">Heart&nbsp;Beat</div>
-                            <img class="img-width" src="../../images/heart1.gif">
+                            <img class="img-width" src="../../images/heart1.gif"/>
                             <div class="count redText text-font">{{wearable.restingheartrate==null?"N/A":wearable.restingheartrate}}</div>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-4 no-padding">
                         <div class="new-update">
                             <div class="water-textcolor">Water&nbsp;Level</div>
-                            <img class="img-width" src="../../images/fat.png">
+                            <img class="img-width" src="../../images/fat.png"/>
                             <div class="count blueText text-font">{{waterlog}}/{{waterlogoz}}</div>
                         </div>
                     </div>
@@ -1582,11 +1450,11 @@ a.main-button:hover, input[type="submit"]:hover {
                     <div class="col-lg-4 col-md-4 col-sm-4 no-padding right-border">
                         <div class="new-update">
                             <div class="floor-textcolor">Floors</div>
-                            <img class="img-width" src="../../images/floor.png">
+                            <img class="img-width" src="../../images/floor.png"/>
                             <div class="count grayText text-font">{{wearable.floors==null?"N/A":wearable.floors}}</div>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 no-padding right-border">
+                    <div class="col-lg-4 col-md-4 col-sm-4 no-padding right-border"/>
                         <div class="new-update">
                             <div class="steps-textcolor">Steps</div>
                             <img class="img-width" src="../../images/step.png">
@@ -1596,7 +1464,7 @@ a.main-button:hover, input[type="submit"]:hover {
                     <div class="col-lg-4 col-md-4 col-sm-4 no-padding">
                         <div class="new-update">
                             <div class="fat-textcolor">Fat&nbsp;Burn</div>
-                            <img class="img-width" src="../../images/fat1.png">
+                            <img class="img-width" src="../../images/fat1.png"/>
                             <div class="count lightGreenText text-font">{{wearable.heartfatburn==null?"N/A":wearable.heartfatburn}}</div> 
                         </div>
                     </div>
@@ -1605,335 +1473,31 @@ a.main-button:hover, input[type="submit"]:hover {
                     <div class="col-lg-4 col-md-4 col-sm-4 no-padding right-border">
                         <div class="new-update">
                             <div class="bloodpessure-textcolor">BP<span><small>(mg/dl)</small></span></div>
-                            <img class="img-width" src="../../images/bloodpressure.png">    
+                            <img class="img-width" src="../../images/bloodpressure.png"/>    
                             <div class="count skyBlueText text-font">{{wearable.systolic==null?"N/A":wearable.systolic}}/{{wearable.systolic==null?"N/A":wearable.diastolic}}</div>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-4 no-padding right-border">
                         <div class="new-update">
                             <div class="bloodoxygen-textcolor">BO2</div>
-                            <img class="img-width" src="../../images/bloodoxygen.png">    
+                            <img class="img-width" src="../../images/bloodoxygen.png"/>    
                             <div class="count pinkText text-font">{{wearable.bloodoxygen==null?"N/A":wearable.bloodoxygen}}</div>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-4 no-padding">
                         <div class="new-update">
                             <div class="bloodglucose-textcolor">BG</div>
-                            <img class="img-width" src="../../images/bloodglucose.png">    
+                            <img class="img-width" src="../../images/bloodglucose.png"/>    
                             <div class="count darkRedText text-font">{{wearable.randombloodglucose==null?"N/A":wearable.randombloodglucose}}/{{wearable.fastingbloodglucose==null?"N/A":wearable.fastingbloodglucose}}</div>
                         </div>
-                    </div>                                       
+                    </div>
                 </div>
             </div>
-        </form>        
+        </form>
     </div>
 </div>
-
-<script type="text/javascript">
-
-    $(document).ready(function(){
-        $("#food-suggestion").rotate();
-        $("#exercise-suggestion").rotating();
-    });
-
-    $(document).ready(function(){
-        $("#weight_button").click(function(){
-            if($('#weight-form').css('right')=='0px'){
-                $("#update-weight-form").slideToggle(800);
-                $('#weight-form').animate({right:'-300px'},  500);
-            }else{
-                $('#weight-form').animate({right:'0px'},  500);
-                $("#update-weight-form").slideToggle(300);
-            }
-        });
-    });
-
-</script>
+</div>
 
 <script type="text/javascript" src="../../js/script.js"></script>
-
-<script type="text/javascript">
-
-    $("#modal_trigger_food").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
-    $(function(){
-        $(".common_model").show();
-    })
-</script>
-
-<script type="text/javascript">
-    $("#modal_trigger_exercise").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
-
-    $(function(){
-        $(".common_model").show();
-    });
-
-</script>
-
-<script type="text/javascript">
-    $(function(){
-        $('#sidemenu a').on('click', function(e){
-            e.preventDefault();
-
-            if($(this).hasClass('open')) {
-                // do nothing because the link is already open
-            } else {
-                var oldcontent = $('#sidemenu a.open').attr('href');
-                var newcontent = $(this).attr('href');
-
-                $(oldcontent).fadeOut('fast', function(){
-                    $(newcontent).fadeIn().removeClass('hidden');
-                    $(oldcontent).addClass('hidden');
-                });
-
-
-                $('#sidemenu a').removeClass('open');
-                $(this).addClass('open');
-            }
-        });
-    });
-</script>
-
-<script type="text/javascript">
-    $(function(){
-        $('#graphmenu a').on('click', function(e){
-            e.preventDefault();
-
-            if($(this).hasClass('open')) {
-                // do nothing because the link is already open
-            } else {
-                var oldcontent = $('#graphmenu a.open').attr('href');
-                var newcontent = $(this).attr('href');
-
-                $(oldcontent).fadeOut('fast', function(){
-                    $(newcontent).fadeIn().removeClass('hidden');
-                    $(oldcontent).addClass('hidden');
-                });
-
-
-                $('#graphmenu a').removeClass('open');
-                $(this).addClass('open');
-            }
-        });
-    });
-</script>
-
-<!--new tab script-->
-
-<script type="text/javascript">
-
-    $(document).ready(function() {
-
-        $(".tab_content").show();
-
-        $("ul.session li").click(function() {
-            $("ul.session li").removeClass("active");
-            $(this).addClass("active");
-        });
-
-
-    });
-
-    $(document).ready(function() {
-
-        $(".tab_content").show();
-
-        $("ul.graphs li").click(function() {
-            $("ul.graphs li").removeClass("active");
-            $(this).addClass("active");
-        });
-
-    });
-
-</script>
-
-
-<script type="text/javascript">
-    $(document).ready(function() {
-
-        var options = {
-            maxDate : new Date(),
-            endDate : new Date(),
-            opens:'left',
-            singleDatePicker: true
-        };
-
-        $('#main-date').daterangepicker(options, function(start, end, label) {
-            angular.element(document.getElementById('main-date')).scope().initialLoadFoodAndExercise(start.format('DD/MM/YYYY'));
-            document.getElementById("main-start-date").value = start.format('DD/MM/YYYY');
-        });
-
-    });
-</script>
-
-<script type="text/javascript">
-    $(document).ready(function() {
-        var options = {
-            maxDate : new Date(),
-            startDate : new Date(),
-            endDate : new Date(),
-            singleDatePicker: false,
-            opens:'left',
-            showDropdowns: true,
-            dateLimit: {
-                days: 31
-            },
-            ranges:{
-                'Last Week': [moment().subtract(6,'days'), moment()],
-                'Last 2 Weeks': [moment().subtract(13,'days'), moment()],
-                'Last 3 Weeks': [moment().subtract(20,'days'), moment()],
-                'This Month': [moment().subtract(0,'month').startOf('month'), moment()],
-                'Last Month': [moment().subtract(1,'month').startOf('month'), moment().subtract(1,'month').endOf('month')]
-            }
-        };
-
-        $('#history-graph-date').daterangepicker(options, function(start, end, label) {
-            document.getElementById("history-start").value = start.format('DD/MM/YYYY');
-            document.getElementById("history-end").value = end.format('DD/MM/YYYY');
-        });
-    });
-
-</script>
-
-<script type="text/javascript">
-    $(document).ready(function() {
-        var options = {
-            maxDate : new Date(),
-            startDate : new Date(),
-            endDate : new Date(),
-            singleDatePicker: false,
-            opens:'left',
-            showDropdowns: true,
-            dateLimit: {
-                days: 31
-            },
-            ranges:{
-                'Last Week': [moment().subtract(6,'days'), moment()]
-            }
-        };
-
-        $('#history-graph').daterangepicker(options, function(start, end, label) {
-            document.getElementById("history-start").value = start.format('DD/MM/YYYY');
-            document.getElementById("history-end").value = end.format('DD/MM/YYYY');
-        });
-        $('#history-view').daterangepicker(options, function(start, end, label) {
-            document.getElementById("history-start").value = start.format('DD/MM/YYYY');
-            document.getElementById("history-end").value = end.format('DD/MM/YYYY');
-        })
-    });
-
-</script>
-
-
-
-<script>
-    function mouseover(e){
-         e.setAttribute ('scrollamount', 0, 0);e.stop();
-    }
-
-    function mouseout(e){
-        e.setAttribute ('scrollamount', 3, 0);e.start();
-    }
-
-    function coachAdviceCarousel(){
-        setTimeout(function(){
-            $('.advice-carousel').each(function(){
-
-                var owl = jQuery(this),
-                        itemsNum = $(this).attr('data-appeared-items'),
-                        sliderNavigation = $(this).attr('data-navigation'),
-                        returnSliderNavigation,
-                        deskitemsNum,
-                        desksmallitemsNum,
-                        tabletitemsNum;
-
-                if ( sliderNavigation == 'false' || sliderNavigation == '0' ) {
-                    returnSliderNavigation = false;
-                }else {
-                    returnSliderNavigation = true;
-                }
-                if( itemsNum == 1) {
-                    deskitemsNum = 1;
-                    desksmallitemsNum = 1;
-                    tabletitemsNum = 1;
-                }
-                else if (itemsNum >= 2 && itemsNum < 4) {
-
-                    deskitemsNum = itemsNum;
-                    desksmallitemsNum = itemsNum - 1;
-                    tabletitemsNum = itemsNum - 1;
-                }
-                else if (itemsNum >= 4 && itemsNum < 8) {
-                    deskitemsNum = itemsNum -1;
-                    desksmallitemsNum = itemsNum - 2;
-                    tabletitemsNum = itemsNum - 3;
-                }
-                else {
-                    deskitemsNum = itemsNum -3;
-                    desksmallitemsNum = itemsNum - 6;
-                    tabletitemsNum = itemsNum - 8;
-                }
-                owl.owlCarousel({
-                    slideSpeed : 300,
-                    stopOnHover: true,
-                    autoPlay: false,
-                    navigation : returnSliderNavigation,
-                    pagination: false,
-                    lazyLoad : true,
-                    items : itemsNum,
-                    itemsDesktop : [1000,deskitemsNum],
-                    itemsDesktopSmall : [900,desksmallitemsNum],
-                    itemsTablet: [600,tabletitemsNum],
-                    itemsMobile : false,
-                    transitionStyle : "goDown"
-                });
-            });
-
-            var controlls=$('.advice-carousel-style');
-            controlls.find('.owl-prev').html('<i class="fa fa-angle-left"></i>');
-            controlls.find('.owl-next').html('<i class="fa fa-angle-right"></i>');
-        },500);
-    }
-
-    $(document).ready(function() {
-
-        var options = {
-            drops:'down',
-            opens:'left',
-            maxDate : new Date(),
-            singleDatePicker: true
-        };
-
-        $('#weight-log-date1').daterangepicker(options, function(start, end, label) {
-            document.getElementById("weightLogDate1").value = start.format('DD/MM/YYYY');
-            var scope = angular.element($("#weight-log-date1")).scope();
-            scope.doGetWeightLog(start.format('DD/MM/YYYY'),2);
-        });
-
-
-    });
-</script>
-
-<!--
-<script type="text/javascript">
-    ( function ( $ ) {
-        'use strict';
-
-        $("#history-menu").click(function(){
-            setTimeout(function(){
-                $('.horizon-swiper').horizonSwiper();
-                $('.horizon-swiper').css('width','100');
-            },250)
-        });
-
-        $('.horizon-swiper  li').click(function() {
-            $('.horizon-swiper  li').removeClass('active');
-            $(this).addClass('active');
-        });
-
-
-    } )( jQuery );
-
-
-</script> -->
 
 
