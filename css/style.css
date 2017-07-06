@@ -4259,12 +4259,18 @@ h5.classic-title.friend{
     font-size: 14px!important;
     line-height: 18px!important;
 }
+.invite-button{
+    background-color: #f8ba01;
+    color:#fff;
+    border: 3px solid  #f8ba01;
+}
 
 h5.classic-title span {
     padding-bottom: 10px;
     border-bottom: 3px solid #f8ba01;
     font-weight: 600;
 }
+
 
 h5.classic-title a{
     color: #777;
@@ -6795,6 +6801,9 @@ h4.count-text{
 .margin-top-50{
      margin-top:50px !important;
  }
+.margin-left-100{
+      margin-left: 100px !important;
+ }
 
 .wrap-all{
     word-break: break-all;
@@ -7288,7 +7297,14 @@ select.select-activity{
 .green_button{
     background-color:limegreen;
 }
-
+.filter_button{
+    background-color:#f8ba01;
+    padding: 1px 5px;
+}
+.custom_button{
+    background-color:#3591cd;
+    padding: 1px 5px;
+}
 .green_button:hover{
     color: #fff;
     background-color:#0db600;
@@ -16084,6 +16100,12 @@ a.main-button.red_back {
 .padding-left-20{
     padding-left: 20px;
 }
+.padding-left-220{
+    padding-left:220px;!important;
+}
+.padding-right-20{
+    padding-right:20px;!important;
+}
 .no-padding-right{
     padding-right: 0px;
 }
@@ -16268,6 +16290,18 @@ a.main-button:hover, input[type="submit"]:hover {
     display: inline-block;
     vertical-align: top;
     margin-top:2px;
+}
+.popup_image{
+    float: left;
+    margin-top: 2px;
+}
+.modal_span{
+    float: left;
+    width: 80%;padding: 0 0 0 5px;
+}
+.modal-text{
+    font-size: 13px;
+    color: #65bb34;
 }
 .sidemenu li.app a.menu-items.open {
     color: dodgerblue;

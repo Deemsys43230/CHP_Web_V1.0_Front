@@ -1,7 +1,7 @@
 
 
 <!--Food Template-->
-<script type="text/ng-template" id="foodTemplate.html">
+<script type="text/ng-template" id="foodTemplate.html" xmlns="http://www.w3.org/1999/html">
   <a>
       <img ng-if="match.model.foodImagePath" class="img-circle" ng-src="{{match.model.foodImagePath}}50x50.jpg" width="35">&nbsp;
       <span ng-show="match.model.issuitable==1" class="green">&nbsp;</span>
@@ -25,12 +25,18 @@
     </div>
 </script>
 
+
 <!--Exercise Template-->
 <script type="text/ng-template" id="exerciseTemplate.html">
-  <a>
-      <img ng-if="match.model.imagepath" class="img-circle" ng-src="{{match.model.imagepath}}50x50.jpg" width="35">&nbsp;
-      <span class="wrap" ng-bind-html="match.label | uibTypeaheadHighlight:query"></span>
-  </a>
+
+    <a class="col-md-12">
+        <img ng-if="match.model.imagepath" class="img-circle popup_image" ng-src="{{match.model.imagepath}}50x50.jpg" width="37">
+      <span class="modal_span">
+      <span class="wrap"  ng-bind-html="match.label | uibTypeaheadHighlight:query"></span><br/>
+      <span class="wrap modal-text" title="Category">{{match.model.categoryname}}&nbsp;|<span style="color: #3591cd" title="Type">&nbsp;{{match.model.typename}}</span></span>
+      </span>
+    </a>
+    </div>
 </script>
 
 <div class="page-banner1" ng-cloak class="ng-cloak">
@@ -98,7 +104,7 @@
                         <!-- Nav Tabs -->
                         <ul class="nav nav-tabs">
                             <li class="active" ng-click="showExercise=0"><a href="#tab-1" data-toggle="tab" onclick="return false;">Food Intake</a></li>
-                            <li ng-click="showExercise=1"><a href="#tab-2" data-toggle="tab" onclick="return false;">Energy Spent</a></li>
+                            <li ng-click="showExercise=1;doGetCategoryandTypeExercise();" ><a href="#tab-2" data-toggle="tab" onclick="return false;">Energy Spent</a></li>
                             <li><a href="#tab-3" data-toggle="tab" onclick="return false;">Graphs</a></li>
                         </ul>
                     </div>
@@ -193,14 +199,14 @@
                                         <div class="col-lg-3 col-md-3 col-sm-3 no-padding dashboard-6">
                                             <div class="content-3">
                                                 <a id="modal_trigger_food" href="#modal-food" ng-click="resetdata(); msg()" onclick="return false;" class="suggest_button override-width">Suggest Food</a>
-                                                <div class="suggest_content">
+                                                <div class="suggest_content" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#eee'}">
                                                     <h6 class="margin-bottom-13">Frequently Used</h6>
-                                                    <div class="suggest_option" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#eee'}">
+                                                    <div class="suggest_option">
                                                         <span ng-repeat="frequentfood in frequentFoodList" ng-click="frequentFood(frequentfood.foodid)" class="wrap-all">{{frequentfood.foodname}}</span>
                                                     </div>
                                                 </div>
                                                 <a href="#graph" data-toggle="tab" ng-click="getViewGraph()" onclick="return false;" class="suggest_button override-width" style="margin-top: 9px;">View Graph</a>
-                                                
+
                                             </div>
                                         </div>
                                     </div><!-- #tab1 -->
@@ -210,11 +216,15 @@
                             <div class="tab-pane padding-top-5" id="tab-2">
                                 <div class="tab_container" id="back-exercise">
                                     <div class="tab_content">
-                                        <div class="col-lg-9 col-md-9 col-sm-9 no-padding dashboard-5">
+                                <div class="col-lg-9 col-md-9 col-sm-9 no-padding dashboard-5">
                                             <div class="col-lg-12 col-md-12 no-padding">
-                                                <div class="content-1">
-                                                    <input class="profile_input" type="text" ng-model="selectedExercise" placeholder="Search Exercise" uib-typeahead="exercise as exercise.exercisename for exercise in inputChangedExercise($viewValue)" typeahead-popup-template-url="customPopupTemplate.html" typeahead-template-url="exerciseTemplate.html" typeahead-on-select="exerciseSelected()" typeahead-class="form-control">
-                                                </div>
+                                             <div class="session">
+                                                 <a id="modal_trigger_filter" href="#modal-filter" ng-click="doFilterPopup();" onclick="return false;" class="target_button filter_button" type="button"><i class="fa fa-filter"></i>&nbsp;Filter</a>
+                                                 <a id="modal_trigger_custom_exercise" href="#modal-custom-exercise" ng-click="doUserAddCustomExercise();resetexercisedata();" onclick="return false;" class="target_button custom_button" type="button"><i class="fa fa-plus"></i>&nbsp;Add Custom Exercise</a>
+                                            </div>
+                                            <div class="content-1">
+                                                <input class="profile_input" type="text" ng-model="selectedExercise" placeholder="Search Exercise" uib-typeahead="exercise as exercise.exercisename for exercise in inputChangedExercise($viewValue)" typeahead-popup-template-url="customPopupTemplate.html" typeahead-template-url="exerciseTemplate.html" typeahead-on-select="exerciseSelected()" typeahead-class="form-control">
+                                            </div>
                                             </div>
                                             <div class="search-loading" ng-show="loadingExercise"><i class="fa fa-spinner fa-pulse"></i>&nbsp;&nbsp;Searching Exercise...</div>
                                             <div class="food_scrollbar exercise-height" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#eee'}" >
@@ -223,17 +233,32 @@
                                                         <div class="loader"></div>
                                                     </div>
                                                 </div>
-                                                <div id="scrollheightexercise" ng-if="showExercise==1">
-                                                    <ul class="exercise remove-style">
-                                                        <li class="col-lg-12 col-md-12 col-sm-12" ng-repeat="exerciseDiaryData in userExerciseDiaryDataAll | orderBy:'$index':true">
-                                                            <div class="col-lg-2 col-md-2 col-sm-2 no-padding"><img ng-if="exerciseDiaryData.exerciseImagePath" ng-src="{{exerciseDiaryData.exerciseImagePath+'50x50.jpg'}}"></div>
+                                                <div id="scrollheightexercise">
+                                                  <ul class="exercise remove-style">
+                                                        <li class="col-lg-12 col-md-12 col-sm-12" ng-repeat="exerciseDiaryData in userExerciseDiaryDataAll.ExerciseData | orderBy:'$index':true">
+                                                            <div class="col-lg-2 col-md-2 col-sm-2 no-padding"><img ng-if="exerciseDiaryData.imagepath" ng-src="{{exerciseDiaryData.imagepath+'50x50.jpg'}}"></div>
                                                             <div class="col-lg-10 col-md-10 col-sm-10 no-padding">
                                                                 <a href="" class="pull-right exercise_close" title="Delete Exercise" ng-click="doDeleteUserExercise(exerciseDiaryData.userexercisemapid)">x</a>
                                                                 <div class="exercise_name">{{exerciseDiaryData.Exercise.exercisename}}</div>
                                                                 <div class="margin-top-10">
                                                                     <span class="pull-right text-red text-bold"><strong><i class="fa fa-angle-down"></i>&nbsp;{{exerciseDiaryData.calories}}  calories</strong></span>
                                                                     <div class="select_food">
-                                                                        <span class="text-bold">Workout :</span> {{exerciseDiaryData.workoutvalue}}&nbsp;minutes&nbsp;&nbsp;<a href="" ng-click="doEditUserExercise(exerciseDiaryData.Exercise.exerciseid,exerciseDiaryData.userexercisemapid)" title="Edit Exercise"><i class="fa fa-pencil"></i></a>
+                                                                        <span class="text-bold">Workout :</span> {{exerciseDiaryData.workoutvalue}}&nbsp;seconds&nbsp;&nbsp;<a href="" ng-click="doEditUserExercise(exerciseDiaryData.Exercise.exerciseid,exerciseDiaryData.userexercisemapid,exerciseDiaryData.isCustom)" title="Edit Exercise"><i class="fa fa-pencil"></i></a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                    <ul class="exercise remove-style">
+                                                        <li class="col-lg-12 col-md-12 col-sm-12" ng-repeat="customDiaryData in userExerciseDiaryDataAll.customExercise | orderBy:'$index':true">
+                                                            <div class="col-lg-2 col-md-2 col-sm-2 no-padding"><img ng-if="customDiaryData.imagepath" ng-src="{{customDiaryData.imagepath+'50x50.jpg'}}"></div>
+                                                            <div class="col-lg-10 col-md-10 col-sm-10 no-padding">
+                                                                <a href="" class="pull-right exercise_close" title="Delete Exercise" ng-click="doDeleteUserCustomExercise(customDiaryData.id,customDiaryData.isCustom)">x</a>
+                                                                <div class="exercise_name">{{customDiaryData.exercisename}}</div>
+                                                                <div class="margin-top-10">
+                                                                    <span class="pull-right text-red text-bold"><strong><i class="fa fa-angle-down"></i>&nbsp;{{customDiaryData.calories}}  calories</strong></span>
+                                                                    <div class="select_food">
+                                                                        <span class="text-bold">Workout :</span> {{customDiaryData.workoutvalue}}&nbsp;seconds&nbsp;&nbsp;<a href="" ng-click="doEditUserCustomExercise(customDiaryData.id,customDiaryData.isCustom)" title="Edit Exercise"><i class="fa fa-pencil"></i></a>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -267,9 +292,9 @@
                                         <div class="col-lg-3 col-md-3 col-sm-3 no-padding dashboard-6">
                                             <div class="content-3">
                                                 <a id="modal_trigger_exercise" href="#modal-exercise" ng-click="resetexercisedata(); msg()" onclick="return false;" class="suggest_button override-width">Suggest Exercise</a>
-                                                <div class="suggest_content">
+                                                <div class="suggest_content" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#eee'}">
                                                     <h6>Frequently Used</h6>
-                                                    <div class="suggest_option" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#eee'}">
+                                                    <div class="suggest_option">
                                                         <span ng-repeat="frequentexercise in frequentExerciseList" ng-click="frequentExercise(frequentexercise.exerciseid)">{{frequentexercise.exercisename}}</span>
                                                     </div>
                                                 </div>
@@ -327,8 +352,10 @@
                                                 <div class="text-red text-bold">Burnt</div>
                                                 <hr/>
                                                 <div class="suggest_option_graph" ng-nicescroll nice-option="{cursorcolor: '#777',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#f1f1f1'}">
-                                                    <p ng-repeat="exerciseDiaryData in userExerciseDiaryDataAll" class="wrap text-left suggest_list_style">
+                                                    <p ng-repeat="exerciseDiaryData in userExerciseDiaryDataAll.ExerciseData" class="wrap text-left suggest_list_style">
                                                         {{exerciseDiaryData.Exercise.exercisename}}</p>
+                                                        <p ng-repeat="customDiaryData in userExerciseDiaryDataAll.customExercise" class="wrap text-left suggest_list_style">
+                                                        {{customDiaryData.exercisename}}</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -887,9 +914,9 @@
                             <h4 class="margin-top-10" style="text-transform: uppercase;padding-left: 20px;">{{graphCategory.graphCategory}}</h4>
                             <hr style="padding-left: 20px;padding-right: 20px;"/>
                             <div class="col-lg-3 col-md-3 col-sm-6" ng-repeat="graph in historyfilter = (graphCategory.graphs | startsWithLetter:searchHistory)"  ng-show="graphCategory.graphs.length!=0">
-                                <div id="{{graph.id}}" class="horizon-swiper" ng-click="setHistoryType(graph.id,'historyGraph-multiple')" >
-                                    <div class="horizon-item" ng-click="showGraph=1"  style="display: block">
-                                        <div  class="historyOverride" style=" padding: 3px 35px 5px 5px;font-size: 16px;">
+                                <div id="{{graph.id}}" class="horizon-swiper" ng-click="setHistoryType(graph.id,'historyGraph-multiple')">
+                                    <div class="horizon-item" ng-click="showGraph=1"  style="display: block;padding: 15px 1px;">
+                                        <div class="historyOverride" style=" padding: 3px 35px 5px 0px;font-size: 15px;">
                                             <img style="width: 50px;" ng-src="{{graph.imageSrc}}">
                                             <a href="#tab-4" style="color: #666;" data-toggle="tab" onclick="return false;">{{graph.name}}</a>
                                         </div>
@@ -1131,21 +1158,50 @@
                             <div class="col-lg-12 col-md-12 col-sm-12">
                                 <hr/>
                             </div>
-
-                            <!--<h5 class="margin-top-10">Select Level:</h5>
-                            <select name="levelid" ng-model="userExercise.levelid" ng-options="level.levelname for level in userSelectedExerciseDetails.type.levels track by level.levelid" ng-change="doCalculateCaloriesExercise()" required>
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <h5>Category : <span>{{userSelectedExerciseDetails.categoryname}}</span></h5>
+                                <hr/>
+                            </div><br/>
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <h5>Unit : <span>{{userSelectedExerciseDetails.levels.unitname}}</span></h5>
+                                <hr/>
+                            </div><br/>
+                            <h5  class="margin-top-10"  ng-show="userSelectedExerciseDetails.repsavailable==1">Reps Value</h5>
+                            <input type="text" ng-pattern="/(^[1-9]\d{0,8}$)/"  name="reps" ng-model="userExercise.reps"  maxlength="3" ng-show="userSelectedExerciseDetails.repsavailable==1">
+                             <span ng-show="ExerciseAddForm.reps.$dirty&&ExerciseAddForm.reps.$invalid">
+                                 <span class="error-message" ng-show="ExerciseAddForm.reps.$error.required"><span>Required.</span></span>
+                                  <span class="error-message" ng-show="ExerciseAddForm.reps.$error.pattern"><span>Invalid&nbsp;Data.</span></span>
+                             </span>
+                            <h5 class="margin-top-10">Select Level:</h5>
+                            <select name="levelid" ng-model="userExercise.selectedLevel" ng-options="levels.levelname for levels in userSelectedExerciseDetails.levels.levels track by levels.levelid" ng-change="doCalculateCaloriesExercise()" required>
                                 <option value="">-- Select Level --</option>
                             </select>
                              <span ng-show="ExerciseAddForm.levelid.$dirty&&ExerciseAddForm.levelid.$invalid">
-                                     <span class="error-message" ng-show="ExerciseAddForm.levelid.$error.required"><span>Required.</span></span>
-                             </span>--><br/><br/>
-                            <h5  class="margin-top-10">Timings(minutes)</h5>
-                            <input type="text" ng-pattern="/(^[1-9]\d{0,8}$)/"  name="workoutvalue" ng-model="userExercise.workoutvalue" ng-change="doCalculateCaloriesExercise()"  maxlength="3" required>
-                             <span ng-show="ExerciseAddForm.workoutvalue.$dirty&&ExerciseAddForm.workoutvalue.$invalid">
-                                 <span class="error-message" ng-show="ExerciseAddForm.workoutvalue.$error.required"><span>Required.</span></span>
-                                  <span class="error-message" ng-show="ExerciseAddForm.workoutvalue.$error.pattern"><span>Invalid&nbsp;Data.</span></span>
+                                <span class="error-message" ng-show="ExerciseAddForm.levelid.$error.required"><span>Required.</span></span>
                              </span>
-                        </form>
+                            <h5 class="margin-top-10">Timings</h5>
+                            <div class="col-lg-4 col-md-4 col-sm-4 margin-top-10"><span>Hours</span>
+                               <input type="text" name="hours" ng-model="workoutvalueHours" ng-change="doCalculateCaloriesExercise()"  maxlength="7" style="width: 130%">
+                                  <!-- <span ng-show="ExerciseAddForm.hours.$dirty&&ExerciseAddForm.hours.$invalid">
+                                      <span class="error-message" ng-show="ExerciseAddForm.hours.$error.required"><span>Required.</span></span>
+                                      <span class="error-message" ng-show="ExerciseAddForm.hours.$error.pattern"><span>Invalid&nbsp;Data.</span></span>
+                                   </span>-->
+                           </div>
+                            <div class="col-lg-4 col-md-4 col-sm-4 margin-top-10"><span>Minutes</span>
+                                <input type="text" ng-pattern="/(^[1-9]\d{0,8}$)/" name="minutes" ng-model="workoutvalueMinutes" ng-change="doCalculateCaloriesExercise()"  maxlength="7" required style="width: 130%">
+                                   <span ng-show="ExerciseAddForm.minutes.$dirty&&ExerciseAddForm.minutes.$invalid">
+                                      <span class="error-message" ng-show="ExerciseAddForm.minutes.$error.required"><span>Required.</span></span>
+                                      <span class="error-message" ng-show="ExerciseAddForm.minutes.$error.pattern"><span>Invalid&nbsp;Data.</span></span>
+                                   </span>
+                                </div>
+                            <div class="col-lg-4 col-md-4 col-sm-4 margin-top-10"><span>Seconds</span>
+                                <input type="text" name="seconds" ng-model="workoutvalueSeconds" ng-change="doCalculateCaloriesExercise()"  maxlength="7" style="width: 130%">
+                                 <!--  <span ng-show="ExerciseAddForm.seconds.$dirty&&ExerciseAddForm.seconds.$invalid">
+                                      <span class="error-message" ng-show="ExerciseAddForm.seconds.$error.required"><span>Required.</span></span>
+                                      <span class="error-message" ng-show="ExerciseAddForm.seconds.$error.pattern"><span>Invalid&nbsp;Data.</span></span>
+                                   </span>-->
+                            </div>
+                    </form>
                     </div>
 
                     <div class="col-lg-6 col-md-6 col-sm-6 text-center">
@@ -1181,6 +1237,133 @@
         </section>
     </div>
 </div>
+     </div>
+
+
+
+    <!-- Insert Custom Exercise popup-->
+    <div id="modal-custom-exercise" class="popupContainer-width" style="display:none;">
+        <div class="center-block">
+            <header class="popupHeader width-100">
+                <span class="header_title">{{title}}</span>
+                <span class="modal_close"><i class="fa fa-times"></i></span>
+            </header>
+            <section class="popupBody">
+                <!-- Register Form -->
+                <div class="common_model">
+                    <form name="customExerciseAddForm" novalidate>
+                        <h5  class="margin-top-10">Exercise Name</h5>
+                        <input type="text" name="name" ng-model="customExercise.exercisename" required>
+                                 <span ng-show="customExerciseAddForm.name.$dirty&&customExerciseAddForm.name.$invalid">
+                                 <span class="error-message" ng-show="customExerciseAddForm.name.$error.required"><span>Required.</span></span>
+                                 </span>
+                        <h5  class="margin-top-10">Calories</h5>
+                        <input type="text" name="calories" ng-model="customExercise.calories"  maxlength="7" required validate-float>
+                                  <span ng-show="customExerciseAddForm.calories.$dirty&&customExerciseAddForm.calories.$invalid">
+                                  <span class="error-message" ng-show="customExerciseAddForm.calories.$error.required"><span>Required.</span></span>
+                                  <span class="error-message" ng-show="customExerciseAddForm.calories.$error.validateFloat"><span>Invalid&nbsp;Data.</span></span>
+                                  </span>
+                        <h5  class="margin-top-10">Workout Value</h5>
+                        <div class="col-lg-12 col-md-12 col-sm-12" style="padding:0">
+                        <div class="col-lg-4 col-md-4 col-sm-4 margin-top-10"><span>Hours</span>
+                            <input type="text" name="customhours" ng-model="selectedHours" maxlength="7">
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 margin-top-10"><span>Minutes</span>
+                            <input type="text" ng-pattern="/(^[1-9]\d{0,8}$)/" name="customminutes" ng-model="selectedMinutes"  maxlength="7" required>
+                                   <span ng-show="customExerciseAddForm.customminutes.$dirty&&customExerciseAddForm.customminutes.$invalid">
+                                      <span class="error-message" ng-show="customExerciseAddForm.customminutes.$error.required"><span>Required.</span></span>
+                                      <span class="error-message" ng-show="customExerciseAddForm.customminutes.$error.pattern"><span>Invalid&nbsp;Data.</span></span>
+                                   </span>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 margin-top-10"><span>Seconds</span>
+                            <input type="text" name="customseconds" ng-model="selectedSeconds" maxlength="7">
+                       </div>
+                            </div>
+                       <h5  class="margin-top-10">Reps Value</h5>
+                        <input type="text" ng-pattern="/(^[1-9]\d{0,8}$)/"  name="reps" ng-model="customExercise.reps"  maxlength="3"  required>
+                                 <span ng-show="customExerciseAddForm.reps.$dirty&&customExerciseAddForm.reps.$invalid">
+                                 <span class="error-message" ng-show="customExerciseAddForm.reps.$error.required"><span>Required.</span></span>
+                                 <span class="error-message" ng-show="customExerciseAddForm.reps.$error.pattern"><span>Invalid&nbsp;Data.</span></span>
+                                 </span>
+                        <div class="action_btns margin-top-20">
+                            <div class="one_half" ng-show="isNew"><a href="#" onclick="return false;" ng-disabled="customExerciseAddForm.$invalid" class="btn btn_blue modal_close" ng-click="doInsertUserCustomExercise()">Add Custom Exercise</a></div>
+                             <div class="one_half" ng-hide="isNew"><a href="#" onclick="return false;" ng-disabled="CustomExerciseAddForm.$invalid" class="btn btn_blue modal_close" ng-click="doUpdateUserCustomExercise()">Update Custom Exercise</a></div>
+                            <div class="one_half last modal_close"><a class="btn btn_red">Cancel</a></div>
+                        </div>
+                    </form>
+                </div>
+            </section>
+        </div>
+    </div>
+
+
+<!--    Exercise filter popup-->
+
+        <div id="modal-filter" class="popupContainer-width-big" style="display:none;left: 15%;">
+            <header class="popupHeader-big">
+                <span class="header_title"> Exercise Filter</span>
+                <span class="modal_close"><i class="fa fa-times"></i></span>
+            </header>
+
+            <section class="popupBody">
+
+                <div class="common_model">
+                    <form name="exerciseFilterForm" novalidate>
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <div class="col-lg-4 col-md-4 col-sm-4">
+                                <p style="font-weight: bold;font-size: 14px;">CATEGORY </p>
+                            </div>
+                            <div class="col-lg-8 col-md-8 col-sm-8 padding-left-220">
+                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                    <a href="" class="popupHeader-big-a-content-green" ng-click="categoryAllChecked()">SELECT ALL </a>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                    <a href="" class="popupHeader-big-a-content-red" ng-click="categoryAllUnChecked()">DESELECT ALL</a>
+                                </div>
+                            </div>
+                        </div>
+                        &nbsp;
+                        <div class="row margin-bottom-5 margin-top-3">
+                            <div class="col-lg-3 col-md-3 col-sm-6" ng-repeat="category in categorylist">
+                            <span class="fh-checkbox" required>
+                                <input type="checkbox" name="category" id="category{{category.categoryid}}" ng-model="category.isChecked">
+                                <label for="category{{category.categoryid}}">{{category.categoryname}}</label>
+                            </span>
+                            </div>
+                        </div>
+                        <hr/>
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <div class="col-lg-4 col-md-4 col-sm-4">
+                                <p style="font-weight: bold;font-size: 14px;">TYPE </p>
+                            </div>
+                            <div class="col-lg-8 col-md-8 col-sm-8 padding-left-220">
+                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                    <a href="" class="popupHeader-big-a-content-green" ng-click="typeAllChecked()">SELECT ALL</a>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                    <a href="" class="popupHeader-big-a-content-red" ng-click="typeAllUnChecked()">DESELECT ALL</a>
+                                </div>
+                            </div>
+                        </div>
+                        <hr/>&nbsp;
+                        <div class="row margin-bottom-5 margin-top-3">
+                            <div class="col-lg-3 col-md-3 col-sm-6" ng-repeat="type in typelist">
+                               <span class="fh-checkbox" required>
+                                   <input type="checkbox" id="type{{type.typeid}}" name="type" ng-model="type.isChecked">
+                                   <label for="type{{type.typeid}}">{{type.typename}}</label>
+                              </span>
+                            </div>
+                        </div>
+                        <div class="action_btns margin-top-20 margin-left-100">
+                            <div class="col-lg-5 col-md-5 col-sm-5"><a href="" class="btn btn_red modal_close" ng-disabled="exerciseFilterForm.$invalid" ng-click="doApplyFilter()">Apply Filter</a></div>
+                            <div class="col-lg-5 col-md-5 col-sm-5"><a href="" class="btn back_btn" ng-click="doClearFilter()">Clear Filter</a></div>
+                        </div>
+                    </form>
+                </div>
+            </section>
+        </div>
+
+
 
 <!-- Weight Goal Confirmation-->
 <div id="goal-confirmation" class="popupContainer" style="display:none;left:37%!important;">
@@ -1499,5 +1682,4 @@
 </div>
 
 <script type="text/javascript" src="../../js/script.js"></script>
-
 

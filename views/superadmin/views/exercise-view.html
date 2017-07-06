@@ -44,7 +44,7 @@
                     </div>
                     <div class="row margin-top-10">
                         <div class="col-md-4  text-bold">Repsavailable<span class="pull-right">:</span></div>
-                        <div class="col-md-8">{{exerciseDetail.repsavailable==0?'No':'Yes'}}
+                        <div class="col-md-8">{{exerciseDetail.repsavailable==0?'No':(exerciseDetail.repsavailable==null?'No':'Yes')}}
                         </div>
                     </div>
                     <div class="row margin-top-10">

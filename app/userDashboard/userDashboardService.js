@@ -101,7 +101,6 @@ adminApp.factory("UserDashboardService",['requestHandler',function(requestHandle
     userDashboardServiceObj.doGetUserDetails=function(){
         return requestHandler.getRequest("getUserId/","").then(function(response){
             userProfile=response.data.User_Profile;
-
             //For Age calculation
             var today = new Date();
             if(userProfile.dob == null){
@@ -162,8 +161,8 @@ adminApp.factory("UserDashboardService",['requestHandler',function(requestHandle
         });
     };
 
-    userDashboardServiceObj.searchExercise=function(searchStr){
-        return requestHandler.postRequest("user/searchExercisebyUser/",{"exercisename":searchStr}).then(function (response) {
+    userDashboardServiceObj.searchExercise=function(searchStr,category,type){
+        return requestHandler.postRequest("user/searchExercisebyUser/",{"exercisename":searchStr,"category":category,"type":type}).then(function (response) {
             var exerciseSearchResponse=response.data.exercisesData;
             return exerciseSearchResponse.slice(0,50);
         }, function () {
@@ -171,29 +170,47 @@ adminApp.factory("UserDashboardService",['requestHandler',function(requestHandle
         });
     };
 
-    //On Select Exercise From list
+ //On Select Exercise From list
     userDashboardServiceObj.doGetSelectedExerciseDetails= function (exerciseid) {
         return requestHandler.postRequest("user/getExerciseDetailByuser/",{"exerciseid":exerciseid}).then(function (response) {
             var userSelectedExerciseDetails=response.data.ExerciseDetail;
-
-            $.each(userSelectedExerciseDetails, function(index,value){
-                value.imageurl=value.imageurl+"/50x50.jpg";
-            });
-
+            userSelectedExerciseDetails.imagepath=userSelectedExerciseDetails.imagepath+"50x50.jpg";
             return userSelectedExerciseDetails;
         }, function () {
             console.log("Please try again later!")
         });
     };
 
+
+
     //Get Exercise by date
     userDashboardServiceObj.getExerciseDiary=function(date){
         return requestHandler.postRequest("user/getListOfExerciseByDate/",{"date":date}).then(function (response) {
-            return response.data.ExerciseData;
+            return response.data;
         }, function () {
             console.log("Please try again later!")
         });
     };
+
+    //Get exercise list
+    userDashboardServiceObj.doGetUserExerciseList=function(){
+        return requestHandler.getRequest("user/listofExerciseByUser/","").then(function (response) {
+            return response;
+        }, function () {
+            console.log("Please try again later!");
+        });
+    };
+
+
+    //Insert Custom Exercise
+    userDashboardServiceObj.doInsertUserCustomExercise=function(customExercise){
+        return requestHandler.postRequest("user/insertCustomExercise/",customExercise).then(function (response) {
+            return response;
+        }, function () {
+            console.log("Please try again later!");
+        });
+    };
+
 
     //Insert User Exercise to diary
     userDashboardServiceObj.doInsertUserExercise=function(userExercise){
@@ -213,11 +230,41 @@ adminApp.factory("UserDashboardService",['requestHandler',function(requestHandle
         });
     };
 
-    //Get User exercise Details
-    userDashboardServiceObj.doGetUserExerciseDetails=function(userExerciseId){
+    //Delete User  Custom Exercise to diary
+    userDashboardServiceObj.doDeleteUserCustomExercise=function(userExerciseId){
+        return requestHandler.postRequest("user/deleteUserExercise/",{"userexercisemapid":userExerciseId,"isCustom":1}).then(function (response) {
+            return response;
+        }, function () {
+            console.log("Please try again later!");
+        });
+    };
 
-        return requestHandler.postRequest("user/getSavedExerciseDetailByUUID/",{"userexercisemapid":userExerciseId}).then(function (response) {
+    //Get User exercise Details
+    userDashboardServiceObj.doGetUserExerciseDetails=function(userExerciseId,isCustom){
+
+        return requestHandler.postRequest("user/getSavedExerciseDetailByUUID/",{"userexercisemapid":userExerciseId,"isCustom":0}).then(function (response) {
             return response.data.ExerciseData;
+        }, function () {
+            console.log("Please try again later!");
+        });
+    };
+
+
+
+    //Get User  Custom exercise Details
+
+    userDashboardServiceObj.doGetUserCustomExerciseDetails=function(userExerciseId,isCustom){
+
+        return requestHandler.postRequest("user/getSavedExerciseDetailByUUID/",{"userexercisemapid":userExerciseId,"isCustom":1}).then(function (response) {
+            return response.data.ExerciseData;
+        }, function () {
+            console.log("Please try again later!");
+        });
+    };
+
+    userDashboardServiceObj.doUpdateUserCustomExercise=function(customExercise){
+        return requestHandler.postRequest("user/updateCustomExercise/",customExercise).then(function (response) {
+            return response;
         }, function () {
             console.log("Please try again later!");
         });

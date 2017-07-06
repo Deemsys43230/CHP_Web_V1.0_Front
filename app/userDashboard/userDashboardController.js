@@ -10,8 +10,18 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
     $scope.max=$scope.gainGraphMax=100;
     $scope.exerciseSearchResult = [];
     $scope.userExercise={};
+    $scope.customExercise={};
+    $scope.exercisename='';
+    $scope.reps='';
+    $scope.calories='';
     $scope.caloriesSpent=0;
     $scope.workoutvalue=0;
+    $scope.workoutvalueMinutes=0;
+    $scope.workoutvalueSeconds=0;
+    $scope.workoutvalueHours=0;
+    $scope.selectedMinutes=0;
+    $scope.selectedSeconds=0;
+    $scope.selectedHours=0;
     $window.singlePicker = false;
     $window.minimumDate = new Date();
     $scope.weightUpdateText="Update";
@@ -82,7 +92,33 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
         $scope.selectedExercise="";
     };
 
-    //On Select frequent foods
+   //To Insert User Custom Exercise
+        $scope.doUserAddCustomExercise=function(){
+            $(function(){
+                $("#lean_overlay").fadeTo(1000);
+                $("#modal-custom-exercise").fadeIn(600);
+                $(".user_register").show();
+            });
+
+            $(".modal_close").click(function(){
+                $(".user_register").hide();
+                $("#modal-custom-exercise").hide();
+                $("#lean_overlay").hide();
+                $scope.resetexercisedata();
+            });
+
+            $("#lean_overlay").click(function(){
+                $(".user_register").hide();
+                $("#modal-custom-exercise").hide();
+                $("#lean_overlay").hide();
+                $scope.resetexercisedata();
+
+            });
+        };
+
+
+
+        //On Select frequent foods
     $scope.frequentFood=function(foodid){
         $scope.isNew=true;
         $scope.title= "Add Food";
@@ -205,7 +241,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
         foodInsertPromise.then(function(){
             var date = document.getElementById("main-start-date").value;
             $scope.loadFoodDiary(date);
-           $scope.doGetIntakeBruntByDate(date);
+            $scope.doGetIntakeBruntByDate(date);
             $scope.goGetDailyIntakeGraph(date);
             $scope.goGetSessionGraph($scope.storedSessionId);
             $scope.doGetHistoryReport("historyGraph");
@@ -481,7 +517,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
             if($scope.exerciseSearchResult.length==0){
                 $scope.loadingExercise=true;
             }
-            var userExerciseDiaryDetailPromise=UserDashboardService.searchExercise(searchStr);
+            var userExerciseDiaryDetailPromise=UserDashboardService.searchExercise(searchStr,$scope.selectedCategory,$scope.selectedType);
             return userExerciseDiaryDetailPromise.then(function(result){
                 $scope.exerciseSearchResult=result;
                 $scope.loadingExercise=false;
@@ -527,6 +563,107 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
         });
     };
 
+ $scope.doFilterPopup=function(){
+    $(function(){
+        $("#lean_overlay").fadeTo(1000);
+        $("#modal-filter").fadeIn(600);
+        $(".common_model").show();
+        $scope.shouldBeOpen = true;
+    });
+
+    $(".modal_close").click(function(){
+        $(".common_model").hide();
+        $("#modal-filter").hide();
+        $("#lean_overlay").hide();
+        $scope.shouldBeOpen = false;
+    });
+
+    $("#lean_overlay").click(function(){
+        $(".common_model").hide();
+        $("#modal-filter").hide();
+        $("#lean_overlay").hide();
+        $scope.shouldBeOpen = false;
+
+    });
+    };
+
+    //Filter exercise category and type
+    $scope.selectedCategory=[];
+    $scope.selectedType=[];
+    $scope.doGetCategoryandTypeExercise=function(){
+    requestHandler.getRequest("user/exercisetypeandcategorylist/","").then(function(response){
+            $scope.categorylist=response.data.exercisecategory;
+            //Add Checked Object for Selection
+            $.each($scope.categorylist, function(index,value){
+                    value.isChecked=false;
+                       });
+
+            $scope.typelist=response.data.exercisetype;
+
+            //Add Checked Object for Selection
+            $.each($scope.typelist, function(index,value){
+                value.isChecked=false;
+            });
+         //Check All Category
+           $scope.categoryAllChecked=function(){
+               $.each($scope.categorylist, function(index,value){
+                        value.isChecked=true;
+                    });
+           };
+
+        // UnCheck All Category
+           $scope.categoryAllUnChecked=function(){
+               $.each($scope.categorylist, function(index,value){
+                   value.isChecked=false;
+               });
+           };
+
+        //Check All Type
+        $scope.typeAllChecked=function(){
+            $.each($scope.typelist, function(index,value){
+                value.isChecked=true;
+
+               });
+        };
+        //UnCheck All Category
+        $scope.typeAllUnChecked=function(){
+            $.each($scope.typelist, function(index,value){
+                value.isChecked=false;
+
+            });
+        };
+
+        //Apply filter for searching exercise
+        $scope.doApplyFilter=function(){
+            $.each($scope.categorylist, function(index,value){
+                if (value.isChecked==true) {
+                  $scope.selectedCategory.push(value.categoryid);
+                }
+            });
+            $.each($scope.typelist, function(index,value){
+                if (value.isChecked==true) {
+                    $scope.selectedType.push(value.typeid);
+                }
+            });
+        };
+        //To Clear filter
+        $scope.doClearFilter=function(){
+            $.each($scope.categorylist, function(index,value){
+                value.isChecked=false;
+                $scope.selectedCategory=[];
+            });
+            $.each($scope.typelist, function(index,value){
+                value.isChecked=false;
+                $scope.selectedType=[];
+            });
+        };
+
+    },function(){
+                    errorMessage(Flash, "Please try again later!");
+                });
+       };
+
+
     //On load Exercise Diary
     $scope.loadExerciseDiary=function(selectedDate){
         $scope.loaded=true;
@@ -540,15 +677,23 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
             $scope.adminSuggestedExercise = response.data.exerciseSuggestion;
         });
     };
-    //Insert User Exercise
+
+        var listExercisePromise=UserDashboardService.doGetUserExerciseList();
+        listExercisePromise.then(function(result){
+            $scope.exerciselist =result;
+        });
+
+        //Insert User Exercise
     $scope.doInsertUserExercise=function(){
         //Set values according to the api calls
         $scope.userExercise.exerciseid=$scope.userSelectedExerciseDetails.exerciseid;
         $scope.userExercise.date=document.getElementById("main-start-date").value;
-        $scope.userExercise.workoutvalue=parseInt($scope.userExercise.workoutvalue);
+        $scope.userExercise.levelunitid= $scope.userExercise.selectedLevel.levelunitid;
 
-        var exerciseInsertPromise=UserDashboardService.doInsertUserExercise($scope.userExercise);
+
+       var exerciseInsertPromise=UserDashboardService.doInsertUserExercise($scope.userExercise);
         exerciseInsertPromise.then(function(){
+           /* $scope.doGetUserExerciseList();*/
             $scope.loadExerciseDiary($scope.userExercise.date);
             $scope.doGetIntakeBruntByDate($scope.userExercise.date);
             $scope.doGetHistoryReport("historyGraph");
@@ -571,30 +716,39 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
     };
     var originallevel="";
     var originaltiming="";
-    //On Select edit exercise
-    $scope.doEditUserExercise=function(exerciseid,userexercisemapid){
+     var originalreps="";
+  //On Select edit exercise
+    $scope.doEditUserExercise=function(exerciseid,userexercisemapid,isCustom){
 
         $scope.isNew=false;
         $scope.title= "Edit Exercise";
         $scope.loaded=true;
-        var getExerciseDetailForEditPromise=UserDashboardService.doGetSelectedExerciseDetails(exerciseid);
+
+
+    var getExerciseDetailForEditPromise=UserDashboardService.doGetSelectedExerciseDetails(exerciseid);
         getExerciseDetailForEditPromise.then(function(result){
 
-
             $scope.userSelectedExerciseDetails=result;
-            var getUserExerciseDetailsPromise=UserDashboardService.doGetUserExerciseDetails(userexercisemapid);
+            var getUserExerciseDetailsPromise=UserDashboardService.doGetUserExerciseDetails(userexercisemapid,isCustom);
+
             getUserExerciseDetailsPromise.then(function(result){
-                $scope.userExercise.userexercisemapid=userexercisemapid;
-                $scope.userExercise.exerciseid=exerciseid;
-                //$scope.userExercise.levelid=result.User_exercise_data.Level;
-                /* $.each($scope.userSelectedExerciseDetails.type.levels, function(index,value) {
-                 if(value.levelid == result.User_exercise_data.Level.levelid){
-                 $scope.userExercise.levelid = value;
-                 originallevel=angular.copy(value);
-                 }
-                 });*/
-                $scope.userExercise.workoutvalue=parseInt(result.workoutvalue);
+
+              $scope.userExercise.userexercisemapid=userexercisemapid;
+              $scope.userExercise.exerciseid=exerciseid;
+
+           $.each($scope.userSelectedExerciseDetails.levels.levels, function(index,value) {
+                    if(value.levelunitid == result.levelunitid){
+                        $scope.userExercise.selectedLevel= value;
+                        originallevel = angular.copy(value);
+                    }
+                });
+                $scope.userExercise.workoutvalue=(result.workoutvalue);
+                $scope.workoutvalueMinutes=Math.round((result.workoutvalue/60)%60);
+                $scope.workoutvalueSeconds=Math.round(result.workoutvalue%60);
+                $scope.workoutvalueHours=Math.round(result.workoutvalue/3600);
                 originaltiming = parseInt(result.workoutvalue);
+                $scope.userExercise.reps=parseInt(result.reps);
+                originalreps = parseInt(result.reps);
                 $scope.current=$scope.caloriesSpent=result.calories;
                 $scope.current=$scope.current.toFixed(2);
                 if(($scope.current.length-3)>2) $scope.max=100+((String($scope.current|0).slice(0, -2))*100);
@@ -607,8 +761,9 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
     };
 
     $scope.isCleanExercise=function(){
-        return angular.equals(originallevel, $scope.userExercise.levelid)&& angular.equals(originaltiming, $scope.userExercise.workoutvalue);
+        return angular.equals(originallevel, $scope.userExercise.selectedLevel.levelunitid)&& angular.equals(originaltiming, $scope.userExercise.workoutvalue);
     };
+
 
     //Update User Exercise
     $scope.doUpdateUserExercise=function(){
@@ -619,9 +774,8 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
 
         $scope.userExercise.userexercisemapid= $scope.userExercise.userexercisemapid;
         $scope.userExercise.exerciseid= $scope.userExercise.exerciseid;
-        $scope.userExercise.levelid=$scope.userExercise.levelid.levelid;
+        $scope.userExercise.levelunitid=$scope.userExercise.selectedLevel.levelunitid;
         $scope.userExercise.workoutvalue=parseInt($scope.userExercise.workoutvalue);
-
         var exerciseInsertPromise=UserDashboardService.doUpdateUserExercise($scope.userExercise);
         exerciseInsertPromise.then(function(){
             var date = document.getElementById("main-start-date").value;
@@ -633,32 +787,113 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
 
     };
 
-
-    //To get frequently asked exercise
+  //To get frequently asked exercise
     var frequentExercisePromise=UserDashboardService.doGetFrequentlyUsedExercise();
     frequentExercisePromise.then(function(result){
         $scope.frequentExerciseList =result;
     });
 
+
     //Calories caluclation for exercose
     $scope.doCalculateCaloriesExercise=function(){
-        if($scope.userExercise.workoutvalue==0){
+        $scope.userExercise.workoutvalue=parseInt($scope.workoutvalueHours*3600)+ parseInt($scope.workoutvalueMinutes*60)+ parseInt($scope.workoutvalueSeconds);
+    if($scope.userExercise.workoutvalue==0){
             $scope.current=$scope.caloriesSpent=0;
         }
         if(!$scope.userExercise.workoutvalue>0){
             $scope.current=$scope.caloriesSpent=0;
         }
         else{
-            $scope.current=$scope.caloriesSpent=$scope.userSelectedExerciseDetails.MET*$scope.demography.weight*($scope.userExercise.workoutvalue/60);
-
+            $scope.current=$scope.caloriesSpent=$scope.userExercise.selectedLevel.MET*$scope.demography.weight*parseFloat($scope.userExercise.workoutvalue/3600);
+         /*   $scope.current=$scope.caloriesSpent=$scope.customExercise.calories;*/
             $scope.current=$scope.current.toFixed(2);
             if(($scope.current.length-3)>2) $scope.max=$scope.max+((String($scope.current|0).slice(0, -2))*100);
             else $scope.max=100;
         }
-
     };
 
-    //Clear suggest food model values
+        //To insert custom exercise
+        $scope.doInsertUserCustomExercise=function(){
+           $scope.customExercise.reps=parseInt($scope.customExercise.reps);
+           $scope.customExercise.date=document.getElementById("main-start-date").value;
+            $scope.customExercise.workoutvalue=parseInt($scope.selectedHours*3600)+ parseInt($scope.selectedMinutes*60)+ parseInt($scope.selectedSeconds);
+           var customExerciseInsertPromise=UserDashboardService.doInsertUserCustomExercise($scope.customExercise);
+            customExerciseInsertPromise.then(function(){
+              $scope.loadExerciseDiary($scope.customExercise.date);
+                $scope.doGetIntakeBruntByDate($scope.customExercise.date);
+                $scope.doGetHistoryReport("historyGraph");
+                $scope.getBudget($scope.customExercise.date);
+            });
+
+        };
+
+
+        //On Select user custom exercise
+
+            $scope.doEditUserCustomExercise=function(id,isCustom){
+            $scope.isNew=false;
+            $scope.title= "Edit Custom Exercise";
+            $scope.loaded=true;
+
+            var getUserCustomExerciseDetailsPromise=UserDashboardService.doGetUserCustomExerciseDetails(id,isCustom);
+            getUserCustomExerciseDetailsPromise.then(function(result){
+                $scope.customExercise.id=id;
+                $scope.customExercise.exercisename=result.exercisename;
+                $scope.customExercise.calories=result.calories;
+                $scope.customExercise.workoutvalue=(result.workoutvalue);
+                $scope.selectedMinutes=Math.round((result.workoutvalue/60)%60);
+                $scope.selectedSeconds=Math.round(result.workoutvalue%60);
+                $scope.selectedHours=Math.round(result.workoutvalue/3600);
+                originaltiming = result.workoutvalue;
+                $scope.customExercise.reps=parseInt(result.reps);
+                originalreps = parseInt(result.reps);
+                $scope.loaded=false;
+               $scope.doUserAddCustomExercise();
+            });
+
+        };
+
+     /*   $scope.isCleanCustomExercise=function(){
+            return angular.equals(originalreps,$scope.customExercise.reps)&& angular.equals(originaltiming, $scope.customExercise.workoutvalue);
+        };*/
+  //Update User Exercise
+        $scope.doUpdateUserCustomExercise=function(){
+            //Set values according to the api calls
+            if($scope.customExercise.date!=null){
+                delete $scope.customExercise.date;
+            }
+            $scope.customExercise.workoutvalue=parseInt($scope.selectedHours*3600)+ parseInt($scope.selectedMinutes*60)+ parseInt($scope.selectedSeconds);
+            $scope.customExercise.date=document.getElementById("main-start-date").value;
+            $scope.customExercise.reps=parseInt($scope.customExercise.reps);
+            $scope.customExercise.calories = $scope.customExercise.calories.toString();
+            $scope.customExercise.workoutvalue= $scope.customExercise.workoutvalue.toString();
+               var customExerciseInsertPromise=UserDashboardService.doUpdateUserCustomExercise($scope.customExercise);
+               customExerciseInsertPromise.then(function(){
+                var date = document.getElementById("main-start-date").value;
+                $scope.loadExerciseDiary(date);
+                $scope.doGetIntakeBruntByDate(date);
+                $scope.doGetHistoryReport("historyGraph");
+                $scope.getBudget(date);
+
+            });
+
+        };
+
+  //To delete user custom exercise
+        $scope.doDeleteUserCustomExercise= function (userExerciseId,isCustom) {
+            $scope.loaded=true;
+            var customExerciseDeletePromise=UserDashboardService.doDeleteUserCustomExercise(userExerciseId,isCustom);
+            customExerciseDeletePromise.then(function(){
+                var date = document.getElementById("main-start-date").value;
+                $scope.loadExerciseDiary(date);
+                $scope.doGetIntakeBruntByDate(date);
+                $scope.doGetHistoryReport("historyGraph");
+                $scope.getBudget(date);
+            });
+        };
+
+
+        //Clear suggest food model values
     $scope.resetdata=function(){
         $scope.foodSuggest={};
         $scope.foodSuggestForm.$setPristine();
@@ -676,16 +911,31 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
     $scope.resetexercisedata=function(){
         $scope.exerciseSuggest={};
         $scope.exerciseSuggestForm.$setPristine();
-        $scope.userExercise.levelid="";
+        $scope.userExercise.selectedLevel="";
+        $scope.userExercise.repsavailable="";
         $scope.userExercise.workoutvalue="";
+        $scope.workoutvalueMinutes=0;
+        $scope.workoutvalueSeconds=0;
+        $scope.workoutvalueHours=0;
         $scope.ExerciseAddForm.$setPristine();
+        $scope.title = "Add Custom Exercise";
+        $scope.isNew = true;
+        $scope.customExercise.reps="";
+        $scope.customExercise.workoutvalue="";
+        $scope.selectedHours="";
+        $scope.selectedMinutes="";
+        $scope.selectedSeconds="";
+        $scope.customExercise.exercisename="";
+        $scope.customExercise.calories="";
+        $scope.customExerciseAddForm.$setPristine();
         $scope.current=$scope.caloriesSpent=0;
         $scope.max = 100;
         $scope.userSelectedExerciseDetails={};
+ };
 
-    };
 
-    //Weight and Set Goal
+
+        //Weight and Set Goal
     $scope.goal = {
         status: 'set-goal'
     };
@@ -1555,8 +1805,6 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
             else  if($scope.calorieGraph.Burnt!=""){
                 $scope.calorieGraph.Burnt=Math.abs($scope.calorieGraph.Burnt);
             }
-
-
             $scope.averageIntake=Math.round($scope.calorieGraph.averagecalorieintake);
             $scope.averageSpent=Math.round($scope.calorieGraph.averagecalorieburnt);
 
@@ -2050,8 +2298,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
             'name': 'Calories Gained',
             "imageSrc": "../../images/gain.png"
 
-        },
-            {
+        }, {
                 'id': 2,
                 'name': 'Calories Burnt',
                 "imageSrc": "../../images/burnt.png"
@@ -2629,7 +2876,6 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
 
     $scope.drawHistoryGraph=function(data,dataX,titles,divId){
         console.log(data);
-        console.log(titles);
         $scope.loaded=false;
         $('#'+divId).highcharts({
              
@@ -3573,10 +3819,47 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
         $scope.getBudget(date);
         $scope.checkGoalOnLoad(date);
         $scope.doGetWearableDateByDate(date);
+
+
+
     };
 
     $scope.initialLoadFoodAndExercise(selectedDate);
     $scope.doGetCoachAdvices();
+//For Minutes calculation in  Dropdown
+        $scope.Rangem = function(start, end) {
+            var result = [];
+            for (var i = start; i <= end; i++) {
+                result.push(i);
+            }
+            return result;
+        };
+        $scope.minutesList=$scope.Rangem(1,1000);
+/*
+        $scope.config = {
+            optgroupLabelField: 'data',
+            optgroupValueField: 'data',
+            valueField: 'data',
+            labelField: 'data',
+            searchField: 'data',
+            placeholder: 'Select MM',
+            maxItems: 1,
+            preload: true
+        };
+        $scope.minutesList = ["1","2","3"];*/
+
+
+
+//For Seconds calculation in  Dropdown
+        $scope.Ranges = function(start, end) {
+            var result = [];
+            for (var i = start; i <= end; i++) {
+                result.push(i);
+            }
+            return result;
+        };
+
+        $scope.secondsList=$scope.Ranges(1,1000);
 
     //circle round
     $scope.offset =         0;
@@ -4072,6 +4355,7 @@ function daterangepicker() {
         document.getElementById("history-start").value = start.format('DD/MM/YYYY');
         document.getElementById("history-end").value = end.format('DD/MM/YYYY');
     });
+
 
     $("#weight-log-date1").click();
     var options = {
