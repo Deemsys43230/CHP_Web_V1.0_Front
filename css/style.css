@@ -855,7 +855,7 @@ i {
 
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Open Sans', sans-serif;
-    font-weight: 600;
+    font-weight: 500;
     margin: 0;
     color: #555;
 }
@@ -3306,7 +3306,7 @@ ul.icons-list li i {
 }
 
 .nav-tabs > li > a {
-    font-weight: 600;
+    font-weight: 500;
     color: #666;
     padding: 10px 20px;
     background-color: #f9f9f9;
@@ -3316,7 +3316,7 @@ ul.icons-list li i {
 }
 
 .nav-tabs > li > a.historyOverride{
-    font-weight: 600;
+    font-weight: 500;
     color: #666;
     padding: 6px 3px;
     background-color: #f9f9f9;
@@ -7266,7 +7266,7 @@ a.target_button{
     margin-top: 5px;
     color: white;
     display: inline-block;
-    font-weight: bold;
+    font-weight: normal;
     -webkit-box-shadow: 0px 0px 1px rgba(0,0,0,0.2);
     -moz-box-shadow: 0px 0px 1px rgba(0,0,0,0.2);
     box-shadow: 0px 0px 1px rgba(0,0,0,0.2);
@@ -7334,7 +7334,7 @@ select.select-activity{
 a.suggest_button {
     margin-bottom:9px;
     height: 45px;
-    font-weight: bold;
+    font-weight: normal;
     line-height: 40px;
     display: block;
     position: relative;
@@ -7462,7 +7462,7 @@ a.suggest_button.no-margin-bottom{
     height: 31px;
     line-height: 31px;
     color: #666 !important;
-    font-weight: 600 !important;
+    font-weight: 500 !important;
     background: #f9f9f9;
 }
 
@@ -7499,7 +7499,7 @@ a.suggest_button.no-margin-bottom{
     height: 31px;
     line-height: 31px;
     color: #666 !important;
-    font-weight: 600 !important;
+    font-weight: 500 !important;
     background: #f9f9f9;
 }
 
@@ -8651,7 +8651,7 @@ a:hover, a:visited, a:link, a:active
 }
 
 .text-bold{
-    font-weight: bold;
+    font-weight: normal;
 }
 
 .text-italic{
@@ -15615,7 +15615,7 @@ input[type=number] {
     font-size:13px;
     padding:0!important;
     margin-bottom:7px;
-    font-weight:bold;
+    font-weight:normal;
 }
 
 .label-update span.label-text{
@@ -15676,7 +15676,7 @@ button{
 }
 
 .horizon-swiper .horizon-item div.historyOverride{
-    font-weight: 600;
+    font-weight: 500;
     color: #666;
     padding: 3px 10px 5px 5px;
     background-color: #f9f9f9!important;
@@ -15703,7 +15703,7 @@ button{
 button.suggest_button {
     margin-bottom:9px;
     height: 45px;
-    font-weight: bold;
+    font-weight: normal;
     line-height: 40px;
     display: block;
     position: relative;
@@ -15744,7 +15744,7 @@ button.add_button {
     display: block;
     position: relative;
     font-size: 14px;
-    width: 110%;
+    width: 100%;
     padding: 3px ;
     border:0;
     text-align: center;
@@ -15759,7 +15759,7 @@ button.add_button:hover{
 button.add_button.override-width{
     color: #fff;
     cursor: pointer;
-    height: 25px;
+    height: 35px;
     line-height: 15px;
 }
 button.reduce_button {
@@ -15770,7 +15770,7 @@ button.reduce_button {
     display: block;
     position: relative;
     font-size: 14px;
-    width: 110%;
+    width: 100%;
     padding: 3px ;
     border:0;
     text-align: center;
@@ -15780,7 +15780,7 @@ button.reduce_button {
 button.reduce_button.override-width{
     color: #fff;
     cursor: pointer;
-    height: 25px;
+    height: 35px;
     line-height: 15px;
 }
 button.reduce_button:hover{
@@ -15889,7 +15889,7 @@ h1.slider-font{
 }
 
 h1.slider-font .h4{
-    font-weight:600;
+    font-weight:500;
     text-transform: none!important;
 }
 
@@ -16016,9 +16016,9 @@ a.button-wrap:hover li{
     text-align: center;
     color:#555;
     font-size:13px;
-    padding:0!important;
+    padding:5px 0 5px 0!important;
     margin-bottom:0px;
-    font-weight:bold;
+    font-weight:normal;
 }
 .new-update div.sleep-text {
     /*padding-top: 5px;*/
@@ -16031,8 +16031,13 @@ a.button-wrap:hover li{
     text-align: center;
     color: deepskyblue;
 }
+.sync_button{
+    background-color: #ff5010;
+    margin-top: 5px;
+    width: 140px;
+}
 .text-font{
-    font-size: 18px;
+    font-size: 13px;
 }
 .new-update div.count.brownText{
 
@@ -16133,6 +16138,9 @@ a.main-button.red_back {
 .img-width{
     width: 45px;
     height: 45px;
+    margin-top: -6px;
+    padding-left: 2px;
+    vertical-align:0;
 }
 .sleep-textcolor{
     color: #00887a;
@@ -16163,6 +16171,10 @@ a.main-button.red_back {
 }
 .border{
     border-bottom: 1px solid #d3d3d3;
+
+}
+.border-top{
+    border-top: 1px solid #d3d3d3;
 }
 .right-border{
     border-right: 1px solid #d3d3d3;
@@ -16171,7 +16183,8 @@ a.main-button.red_back {
     position: relative;
     display: inline-block;
     height: 230px;
-    margin: 5px 10px 10px 10px;
+    margin: 5px 2px 5px 5px;
+    min-width: 310px;
     -webkit-box-shadow: inset 0 0 3px rgba(0,0,0,0.3);
     -moz-box-shadow: inset 0 0 3px rgba(0,0,0,0.3);
     box-shadow: inset 0 0 3px rgba(0,0,0,0.3);
@@ -16179,8 +16192,8 @@ a.main-button.red_back {
 .inner_box {
     position: relative;
     display: inline-block;
-    height: 110px;
-    width: 240px;
+    height: 115px;
+    width: 190px;
     margin-top: 3px;
     -webkit-box-shadow: inset 0 0 3px rgba(0,0,0,0.3);
     -moz-box-shadow: inset 0 0 3px rgba(0,0,0,0.3);
@@ -16336,6 +16349,9 @@ a.main-button:hover, input[type="submit"]:hover {
     width: 280px;
     height: 310px !important;
 }
+option[default] {
+    display: none;
+}
 .popover {
     position: absolute;
     top: 0;
@@ -16459,3 +16475,4 @@ a.main-button:hover, input[type="submit"]:hover {
     border-right-width: 0;
     border-left-color: #fff;
 }
+

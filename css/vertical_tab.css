@@ -203,7 +203,7 @@ html[xmlns] .clearfix { display: block; }
 
 #sidemenu li a.menu-items span{
     font-size: 16px;
-    font-weight: bold;
+    font-weight: normal;
 }
 
 #sidemenu li a.menu-items p{
