@@ -7363,6 +7363,11 @@ a.suggest_button.override-width{
     height: 32px;
     line-height: 25px;
 }
+a.sync_button{
+    background-color: #ff5010;
+    margin-top: 5px;
+    width: 140px;
+}
 
 a.suggest_button.no-margin-bottom{
     margin-bottom:0 !important;
@@ -16031,11 +16036,7 @@ a.button-wrap:hover li{
     text-align: center;
     color: deepskyblue;
 }
-.sync_button{
-    background-color: #ff5010;
-    margin-top: 5px;
-    width: 140px;
-}
+
 .text-font{
     font-size: 13px;
 }
