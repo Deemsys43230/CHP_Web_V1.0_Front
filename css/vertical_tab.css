@@ -30,12 +30,12 @@
 
 /* side navigation */
 #sidemenu {
-  margin: 0;
-  padding: 0;
-  float: left;
-  width: 100%;
-  background: transparent;
-  height: 500px;
+    margin: 0;
+    padding: 0;
+    float: left;
+    width: 100%;
+    background: transparent;
+    height: 500px;
 }
 
 
@@ -63,7 +63,7 @@
     color: #555;
     text-decoration: none;
     padding: 0 22px;
-    font-weight: bold;
+    font-weight: normal;
     font-size: 15px;
     margin-right: 2px;
 }
@@ -84,12 +84,12 @@
 }
 
 #sidemenu li a.menu-items{
-  display: block;
-  padding: 10px 20px;
-  height: 60px;
-  overflow-y: hidden;
-  color: #555;
-  text-decoration: none;
+    display: block;
+    padding: 10px 20px;
+    height: 60px;
+    overflow-y: hidden;
+    color: #555;
+    text-decoration: none;
 }
 
 #sidemenu li p{
@@ -109,7 +109,7 @@
     text-decoration: none;
     width: 100%;
     border-left: 4px solid dodgerblue ;
- }
+}
 
 #sidemenu li.calories .text{
     margin: 0 10px 10px 10px !important;
@@ -120,19 +120,19 @@
 }
 
 #sidemenu li a.menu-items:hover {
-  background: #f2f2f2;
+    background: #f2f2f2;
 }
 
 #sidemenu li a.menu-items strong {
-  display: block;
-  margin-top: 5px;
+    display: block;
+    margin-top: 5px;
 }
 
 #sidemenu li a.menu-items.open {
-  width: 100%;
-  background: #fff;
-  position: relative;
-  z-index: 10;
+    width: 100%;
+    background: #fff;
+    position: relative;
+    z-index: 10;
     -webkit-box-shadow: 1px 1px 5px rgba(0,0,0,0.3);
     -moz-box-shadow: 1px 1px 5px rgba(0,0,0,0.3);
     box-shadow: 1px 1px 5px rgba(0,0,0,0.3);
@@ -173,33 +173,33 @@
 
 /* extra styles */
 .bigtxtfield {
-  display: block;
-  width: 350px;
-  color: #555;
-  padding: 4px 6px;
-  margin-bottom: 15px;
+    display: block;
+    width: 350px;
+    color: #555;
+    padding: 4px 6px;
+    margin-bottom: 15px;
 }
 
 .bigtxtarea {
-  display: block;
-  width: 440px;
-  height: 90px;
-  padding: 5px 9px;
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  color: #555;
-  font-size: 1.2em;
+    display: block;
+    width: 440px;
+    height: 90px;
+    padding: 5px 9px;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    color: #555;
+    font-size: 1.2em;
 }
 
 .clearfix:after { content: "."; display: block; clear: both; visibility: hidden; line-height: 0; height: 0; }
 .clearfix { display: inline-block; }
- 
+
 html[xmlns] .clearfix { display: block; }
 * html .clearfix { height: 1%; }
 
 #sidemenu li a.menu-items i{
-   font-size: 16px;
-   width: 25px;
- }
+    font-size: 16px;
+    width: 25px;
+}
 
 #sidemenu li a.menu-items span{
     font-size: 16px;

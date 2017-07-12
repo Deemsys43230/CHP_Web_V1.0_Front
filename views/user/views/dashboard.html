@@ -1,8 +1,7 @@
 
 
 <!--Food Template-->
-<script type="text/ng-template" id="foodTemplate.html" xmlns="http://www.w3.org/1999/html"
-        xmlns="http://www.w3.org/1999/html">
+<script type="text/ng-template" id="foodTemplate.html" xmlns="http://www.w3.org/1999/html">
   <a>
       <img ng-if="match.model.foodImagePath" class="img-circle" ng-src="{{match.model.foodImagePath}}50x50.jpg" width="35">&nbsp;
       <span ng-show="match.model.issuitable==1" class="green">&nbsp;</span>
@@ -58,7 +57,7 @@
                     </a>
                 </li>
 
-              <!--  <li class="advice" ng-click="otherThanHistory()">
+               <!-- <li class="advice" ng-click="otherThanHistory()">
                     <a class="menu-items" href="#advice"><i class="fa fa-exclamation-triangle fa-4x hidden-md"></i><span>Advices</span>
                         <p class="hidden-md hidden-sm">Get daily tips for you</p>
                     </a>
@@ -109,7 +108,7 @@
                             <li><a href="#tab-3" data-toggle="tab" onclick="return false;">Graphs</a></li>
                         </ul>
                     </div>
-                   <div class="col-lg-2 col-md-2 col-sm-2" style="padding-left: 5px"><a href="" ng-click="doSyncDevices()" onclick="return false;" class="suggest_button override-width sync_button" type="button"  ng-disabled="connectDevice">&nbsp;{{syncBtnTxt}}&nbsp;</a></div>
+                    <div class="col-lg-2 col-md-2 col-sm-2" style="padding-left: 5px"><a href="" ng-click="doSyncDevices()" onclick="return false;" class="sync_button override-width"  ng-disabled="connectDevice" disabled>&nbsp;{{syncBtnTxt}}&nbsp;</a></div>
                     <div class="col-lg-4 col-md-4 col-sm-4 margin-top-5 padding-rl text-right">
                         <div class="margin-top-5 pull-right mouse-pointer" >&nbsp;&nbsp;<i class="fa fa-calendar" ng-click="datePicker()"></i></div>
                         <input hidden id="main-start-date" ng-model="selectedDate">
@@ -221,7 +220,7 @@
                                 <div class="col-lg-9 col-md-9 col-sm-9 no-padding dashboard-5">
                                             <div class="col-lg-12 col-md-12 no-padding">
                                              <div class="session">
-                                                 <a id="modal_trigger_filter" href="#modal-filter" ng-click="doFilterPopup();" onclick="return false;" class="target_button filter_button" type="button"><i class="fa fa-filter"></i>&nbsp;Filter</a>
+                                                 <a id="modal_trigger_filter" href="#modal-filter" ng-click="doFilterPopup();" onclick="return false;" class="target_button filter_button" type="button" style="width: 250px;"><i class="fa fa-filter"></i>&nbsp;Filter<small><span ng-repeat="category in categorylist">&nbsp;<span class="line-clamp-md" ng-if="category.isChecked">{{category.categoryname}}</span></span></small><small><span ng-repeat="type in typelist">&nbsp;<span class="line-clamp-md" ng-if="type.isChecked">{{type.typename}}</span></span></small></a>
                                                  <a id="modal_trigger_custom_exercise" href="#modal-custom-exercise" ng-click="doUserAddCustomExercise();resetexercisedata();" onclick="return false;" class="target_button custom_button" type="button"><i class="fa fa-plus"></i>&nbsp;Add Custom Exercise</a>
                                             </div>
                                             <div class="content-1">
@@ -245,7 +244,7 @@
                                                                 <div class="margin-top-10">
                                                                     <span class="pull-right text-red text-bold"><strong><i class="fa fa-angle-down"></i>&nbsp;{{exerciseDiaryData.calories}}  calories</strong></span>
                                                                     <div class="select_food">
-                                                                        <span class="text-bold">Workout :</span><small>{{exerciseDiaryData.unit.workoutvalueHours}}&nbsp;hours&nbsp;</small><a href="" ng-click="doEditUserExercise(exerciseDiaryData.Exercise.exerciseid,exerciseDiaryData.userexercisemapid,exerciseDiaryData.isCustom)" title="Edit Exercise"><i class="fa fa-pencil"></i></a>
+                                                                        <span class="text-bold">Workout :</span> {{exerciseDiaryData.workoutvalue}}&nbsp;seconds&nbsp;&nbsp;<a href="" ng-click="doEditUserExercise(exerciseDiaryData.Exercise.exerciseid,exerciseDiaryData.userexercisemapid,exerciseDiaryData.isCustom)" title="Edit Exercise"><i class="fa fa-pencil"></i></a>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -260,7 +259,7 @@
                                                                 <div class="margin-top-10">
                                                                     <span class="pull-right text-red text-bold"><strong><i class="fa fa-angle-down"></i>&nbsp;{{customDiaryData.calories}}  calories</strong></span>
                                                                     <div class="select_food">
-                                                                        <span class="text-bold">Workout :</span> <small>{{customDiaryData.workoutvalue}}&nbsp;seconds&nbsp;<a href="" ng-click="doEditUserCustomExercise(customDiaryData.id,customDiaryData.isCustom)" title="Edit Exercise"><i class="fa fa-pencil"></i></a>
+                                                                        <span class="text-bold">Workout :</span> {{customDiaryData.workoutvalue}}&nbsp;seconds&nbsp;&nbsp;<a href="" ng-click="doEditUserCustomExercise(customDiaryData.id,customDiaryData.isCustom)" title="Edit Exercise"><i class="fa fa-pencil"></i></a>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -300,7 +299,7 @@
                                                         <span ng-repeat="frequentexercise in frequentExerciseList" ng-click="frequentExercise(frequentexercise.exerciseid)">{{frequentexercise.exercisename}}</span>
                                                     </div>
                                                 </div>
-                                               <!-- <a href="#exercise-graph" data-toggle="tab" ng-click="getViewGraph1()" onclick="return false;" class="suggest_button override-width" style="margin-top: 9px;">View Graph</a>-->
+                                                <a href="#exercise-graph" data-toggle="tab" ng-click="getViewGraph1()" onclick="return false;" class="suggest_button override-width" style="margin-top: 9px;">View Graph</a>
                                                 
                                             </div>
 
@@ -314,7 +313,7 @@
                             <div class="tab-pane padding-top-5" id="tab-3">
                                 <div class="row">
                                     <div class="col-lg-12 col-md-12 col-sm-12 graphs">
-                                     <!--   <input type="radio" id="gainSpent" value="1"  ng-click="graphOne()" ng-model="graphs"/>
+                                       <!-- <input type="radio" id="gainSpent" value="1"  ng-click="graphOne()" ng-model="graphs"/>
                                         <label for="gainSpent">Gained vs Burnt</label>-->
                                         <input type="radio" id="nutrients" ng-click="graphTwo()" value="2" ng-model="graphs"/>
                                         <label for="nutrients" >Nutrients Graph by Session</label>
@@ -329,7 +328,7 @@
                                             <div class="loader"></div>
                                         </div>
                                     </div>
-                              <!--      <div ng-show="graphs==1" class="margin-top-5">
+                               <!--     <div ng-show="graphs==1" class="margin-top-5">
                                         <div ng-hide="userFoodDiaryDataAll.length==0&&userExerciseDiaryDataAll==0" class="margin-top-10">
                                             <div class="col-lg-4 col-md-4 col-sm-4 text-right gain-list">
                                                 <div class="text-green text-bold">Gained</div>
@@ -553,7 +552,7 @@
                     </div>
                 </div><!-- @end #ideas-content -->
 
-             <!--   <div id="advice" class="contentblock hidden">
+         <!--       <div id="advice" class="contentblock hidden">
                     <div class="outerline">
                         <div class="col-lg-12 col-md-12 col-sm-12 margin-top-10" >
                             <h4 class="margin-bottom-15">Coach Advices</h4>
@@ -645,12 +644,12 @@
                                         <hr/>
                                     </div>
                                     <div class="col-lg-4 col-md-4 col-sm-4 margin-top-20 no-padding">
-                                         <div class="col-lg-12 col-md-12 col-sm-12 no-padding">
-                                                <img src="../../images/log.png">
-                                         </div>
+                                        <div class="col-lg-12 col-md-12 col-sm-12 no-padding">
+                                            <img src="../../images/log.png">
+                                        </div>
                                     </div>
 
-                                        <div class="col-lg-8 col-md-8 col-sm-8 margin-top-10 no-padding">
+                                    <div class="col-lg-8 col-md-8 col-sm-8 margin-top-10 no-padding">
                                         <form name="weightLogForm" novalidate>
                                             <div class="col-lg-12 col-md-12 col-sm-12 no-padding">
                                                 <div class="col-lg-6 col-md-6 col-sm-6 no-padding margin-top-15">
@@ -665,27 +664,27 @@
                                             </div>
                                         </form>
 
-                                    <form name="fatLogForm" novalidate>
-                                        <div class="col-lg-12 col-md-12 col-sm-12 no-padding">                               
-                                            <div class="col-lg-6 col-md-6 col-sm-6 no-padding margin-top-10">
-                                                <span>Fat <small>(<span>Units</span>)</small><span class="pull-right">:</span></span>
-                                            </div>
-                                            <div class="col-lg-6 col-md-6 col-sm-6 margin-top-10 no-padding-right padding-left-8">
-                                                <input class="profile_input weightoverride" id="fatLog" name="curfat" ng-model="fat" maxlength="5" required valid-decimalnumber />
+                                        <form name="fatLogForm" novalidate>
+                                            <div class="col-lg-12 col-md-12 col-sm-12 no-padding">
+                                                <div class="col-lg-6 col-md-6 col-sm-6 no-padding margin-top-10">
+                                                    <span>Fat <small>(<span>%</span>)</small><span class="pull-right">:</span></span>
+                                                </div>
+                                                <div class="col-lg-6 col-md-6 col-sm-6 margin-top-10 no-padding-right padding-left-8">
+                                                    <input class="profile_input weightoverride" id="fatLog" name="curfat" ng-model="fat" maxlength="5" required valid-decimalnumber />
                                                 <span ng-show="fatLogForm.curfat.$dirty&&fatLogForm.curfat.$invalid">
                                                     <span class="error-message textarea-errormessage10" ng-show="fatLogForm.curfat.$error.required"></span>
                                                 </span>
+                                                </div>
+                                                <div class="col-lg-12 col-md-12 col-sm-12 text-center margin-top-20">
+                                                    <button onclick="return false;" class="btn-dis suggest_button override-width no-margin-bottom" ng-disabled="weightLogForm.$invalid || spinner || disableUpdateWeight" ng-click="weightLogEntry(1)">
+                                                        <span ng-if="spinner"><span class="three-quarters-loader">Loading…</span></span>{{weightUpdateText}}</button><br/>
+                                                </div>
                                             </div>
-                                            <div class="col-lg-12 col-md-12 col-sm-12 text-center margin-top-20">
-                                                <button onclick="return false;" class="btn-dis suggest_button override-width no-margin-bottom" ng-disabled="weightLogForm.$invalid || spinner || disableUpdateWeight" ng-click="weightLogEntry(1)">
-                                                <span ng-if="spinner"><span class="three-quarters-loader">Loading…</span></span>{{weightUpdateText}}</button><br/>
-                                            </div>
-                                        </div>       
-                                    </form>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
-                                </div>
-                    
+
                             <!-- for Water level % -->
                             <div class="col-lg-5 col-md-5 col-sm-5 box">
                                 <div class="col-lg-12 col-md-12 col-sm-12 no-padding" >
@@ -694,7 +693,7 @@
                                     </div>
                                     <div class="col-lg-12 col-md-12 col-sm-12 text-center">
                                         <hr/>
-                                        </div>
+                                    </div>
                                     <div class="col-lg-4 col-md-4 col-sm-4 margin-top-20 no-padding">
                                         <div class="col-lg-12 col-md-12 col-sm-12 no-padding">
                                             <img src="../../images/water.jpg">
@@ -702,52 +701,42 @@
 
                                     </div>
                                     <div class="col-lg-8 col-md-8 col-sm-8 margin-top-10 no-padding">
-                                    <form name="waterLogForm" novalidate >
-                                        <div class="col-md-12 col-md-12 col-sm-12 margin-top-10">
-                                            <lable class="waterlog-text" id="addLog" name="curentrwater" ng-model="waterlog"><b><span>{{waterlog}}&nbsp;<small>ml</small></span> / <span>{{waterlogoz}}&nbsp;<small>oz</small></span></b></lable>
-                                        </div>
-
-                                         <div class="col-md-12 col-md-12 col-sm-12 no-padding inner_box ">
-                                             <div class="col-md-12 col-md-12 col-sm-12 margin-top-10">
-                                                 <span>Log Water</span>
-                                             </div>
-
-                                         <!--<div class="col-md-12 col-md-12 col-sm-12 no-padding margin-top-10">
-                                         <!--<div class="col-md-12 col-md-12 col-sm-12 no-padding margin-top-10">
-                                                <span>Consumed : </span>
+                                        <form name="waterLogForm" novalidate >
+                                            <div class="col-md-12 col-md-12 col-sm-12 margin-top-10">
                                                 <lable class="waterlog-text" id="addLog" name="curentrwater" ng-model="waterlog"><b><span>{{waterlog}}&nbsp;<small>ml</small></span> / <span>{{waterlogoz}}&nbsp;<small>oz</small></span></b></lable>
-                                         </div>-->
-                                         <!-- <div class="col-md-12 col-md-12 col-sm-12 no-padding margin-top-10">
-                                                <span>Log Water : </span>
-                                                 <lable class="waterlog-text" id="addLog" name="curentrwater" ng-model="waterlog"><b><span>{{waterlog}}<small>ml</small></span> / <span>{{waterlogoz}}<small>oz</small></span></b></lable>
-                                         </div>-->
-                                         <div class="col-lg-5 col-md-5 col-sm-5 margin-top-5">
-                                                <input class="profile_input weightoverride " type="text" id="waterLog" name="curwater" ng-model="addlog" maxlength="5" required valid-decimalnumber style="width: 70px;"/>
+                                            </div>
+
+                                            <div class="col-md-12 col-md-12 col-sm-12 no-padding inner_box ">
+                                                <div class="col-md-12 col-md-12 col-sm-12 margin-top-10">
+                                                    <span>Log Water</span>
+                                                </div>
+                                                <div class="col-lg-5 col-md-5 col-sm-5 margin-top-5">
+                                                    <input class="profile_input weightoverride " type="text" id="waterLog" name="curwater" ng-model="addlog" maxlength="5" required valid-decimalnumber style="width: 70px;"/>
                                                 <span ng-show="waterLogForm.curwater.$dirty&&waterLogForm.curwater.$invalid">
                                                     <span class="error-message textarea-errormessage10" ng-show="waterLogForm.curwater.$error.required"><span>Required.</span></span>
                                                 </span>
-                                         </div>
-                                            <div class="col-lg-7 col-md-7 col-sm-7 margin-top-5">
-                                                <select class="profile_input weightoverride full-width main" ng-model="addlogUnit" style="width: 70px;">
-                                                    <option value="" default selected>Select</option>
-                                                    <option value="1">ml</option>
-                                                    <option value="2">oz</option>
-                                                </select> 
+                                                </div>
+                                                <div class="col-lg-7 col-md-7 col-sm-7 margin-top-5">
+                                                    <select class="profile_input weightoverride full-width main" ng-model="addlogUnit" style="width: 70px;">
+                                                        <option value="" default selected>Select</option>
+                                                        <option value="1">ml</option>
+                                                        <option value="2">oz</option>
+                                                    </select>
+                                                </div>
+
+                                                <div class="col-lg-6 col-md-6 col-sm-6 text-center margin-top-5 pull-right">
+                                                    <button  onclick="return false;" class="btn-dis add_button override-width no-margin-bottom" ng-disabled="waterLogForm.$invalid || addspin || disableAddWater" ng-click="doAddOrReduceWatertLog(0)">
+                                                        <span ng-if="addspin"><span class="three-quarters-loader">Loading…</span></span>{{waterAddText}}</button>
+                                                </div>
+                                                <!--   <div class="col-lg-6 col-md-6 col-sm-6 text-center margin-top-5">
+                                                        <button  onclick="return false;" class="btn-dis reduce_button override-width no-margin-bottom" ng-disabled="waterLogForm.$invalid || reducespin || isReduceEnable" ng-click="doAddOrReduceWatertLog(1)">
+                                                        <span ng-if="reducespin"><span class="three-quarters-loader">Loading…</span></span>{{waterReduceText}}</button>
+                                                    </div>-->
                                             </div>
 
-                                        <div class="col-lg-6 col-md-6 col-sm-6 text-center margin-top-5 pull-right">
-                                            <button  onclick="return false;" class="btn-dis add_button override-width no-margin-bottom" ng-disabled="waterLogForm.$invalid || addspin || disableAddWater" ng-click="doAddOrReduceWatertLog(0)">
-                                            <span ng-if="addspin"><span class="three-quarters-loader">Loading…</span></span>{{waterAddText}}</button>
-                                        </div>
-                                    <!--   <div class="col-lg-6 col-md-6 col-sm-6 text-center margin-top-5">
-                                            <button  onclick="return false;" class="btn-dis reduce_button override-width no-margin-bottom" ng-disabled="waterLogForm.$invalid || reducespin || isReduceEnable" ng-click="doAddOrReduceWatertLog(1)">
-                                            <span ng-if="reducespin"><span class="three-quarters-loader">Loading…</span></span>{{waterReduceText}}</button>
-                                        </div>-->
-                                            </div>
-
-                                    </form>
-                                </div>
+                                        </form>
                                     </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -756,7 +745,6 @@
 
             </div><!-- @end #content -->
         </div>
-
 
         <div class="dashboard-3 hidden-sm" ng-show="historyReport==0">
             <div id="update">
@@ -842,7 +830,7 @@
                             <span class="label-count orange">{{budgetDetails.Net}}</span>
                         </div>
                     </div>
-                    <div class="col-lg-12 col-md-12 col-sm-12 margin-top-10">
+                    <div class="col-lg-12 col-md-12 col-sm-12">
                         <!--<h6 ng-show="budgetCheck==0"><div class="label-danger">You are going under our recommended budget value. Please change your weight plan.</div></h6>-->
                         <h6 ng-show="budgetDetails.OverorUnderStatus==1"><div class="label-danger">You have consumed {{budgetDetails.OverorUnderValue}} more calories. Please do exercise.</div></h6>
                         <h6 ng-show="budgetDetails.OverorUnderStatus==2"><div class="label-success">You should take {{budgetDetails.OverorUnderValue}} more calories to reach today’s budget.</div></h6>
@@ -850,21 +838,16 @@
                 </div>
                 <div class="col-md-12 col-lg-12 col-sm-12 no-padding margin-top-10 border">
                     <div class="col-lg-4 col-md-4 col-sm-4 no-padding right-border">
-                            <div class="new-update">
-                                <div class="col-md-12 col-lg-12 col-sm-12 sleep-textcolor margin-top-5">Sleep</div>
-                                   <div class="col-md-4 col-lg-4 col-sm-4 no-padding margin-top-5">
-                                        <img class="img-width" src="../../images/sleep.png"/>
-                                    </div>
-                                    <div class="col-md-8 col-lg-8 col-sm-8 no-padding">
-                                        <div class="count brownText text-font"><small>{{wearable.sleep==null?"N/A":wearable.sleep}}</small></div>
-                                         <div class="count brownText text-font"><small>(minutes)</small></div>
-                                         </div>
+                        <div class="new-update">
+                            <div class="col-md-12 col-lg-12 col-sm-12 sleep-textcolor margin-top-5">Sleep</div>
+                            <div class="col-md-4 col-lg-4 col-sm-4 no-padding margin-top-5">
+                                <img class="img-width" src="../../images/sleep.png"/>
                             </div>
-                       <!-- <div class="new-update">
-                            <div class="sleep-textcolor">Sleep</div>
-                            <img class="img-width" src="../../images/sleep.png"/>
-                            <div class="count brownText text-font">{{wearable.sleep==null?"N/A":wearable.sleep}}</div>
-                        </div>-->
+                            <div class="col-md-8 col-lg-8 col-sm-8 no-padding">
+                                <div class="count brownText text-font"><small>{{wearable.sleep==null?"N/A":wearable.sleep}}</small></div>
+                                <div class="count brownText text-font"><small>(minutes)</small></div>
+                            </div>
+                        </div>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-4 no-padding right-border">
                         <div class="new-update">
@@ -891,7 +874,6 @@
                         </div>
                     </div>
                 </div>
-                <br/>
                 <div class="col-md-12 col-lg-12 col-sm-12 no-padding border">
                     <div class="col-lg-4 col-md-4 col-sm-4 no-padding right-border">
                         <div class="new-update">
@@ -928,11 +910,11 @@
                                 <div class="count pinkText text-font"><small>(%)</small></div>
                             </div>
                         </div>
-                </div>
                     </div>
+                </div>
                 <div class="col-md-12 col-lg-12 col-sm-12 no-padding">
                     <div class="col-lg-6 col-md-6 col-sm-6 no-padding right-border">
-                         <div class="new-update">
+                        <div class="new-update">
                             <div class="col-md-12 col-lg-12 col-sm-12 bloodpessure-textcolor margin-top-5">Blood Pressure</div>
                             <div class="col-md-4 col-lg-4 col-sm-4 no-padding margin-top-10">
                                 <img class="img-width" src="../../images/heart1.gif"/>
@@ -957,10 +939,9 @@
                             </div>
                         </div>
 
-                        </div>
                     </div>
+                </div>
                 <div class="col-md-12 col-lg-12 col-sm-12 no-padding border">
-                    </div>
                 </div>
             </div>
         </div>
@@ -1056,6 +1037,7 @@
     </div><!-- @end #w -->
   </div>
         </div>
+
 <!-- Food Suggestion popup-->
 <div id="modal-food" class="popupContainer" style="display:none;">
     <header class="popupHeader">
@@ -1422,7 +1404,7 @@
                         </div>
                         <hr/>&nbsp;
                         <div class="row margin-bottom-5 margin-top-3">
-                            <div class="col-lg-3 col-md-3 col-sm-6" ng-repeat="type in typelist" >
+                            <div class="col-lg-3 col-md-3 col-sm-6" ng-repeat="type in typelist">
                                <span class="fh-checkbox" required>
                                    <input type="checkbox" id="type{{type.typeid}}" name="type" ng-model="type.isChecked">
                                    <label for="type{{type.typeid}}">{{type.typename}}</label>
@@ -1680,77 +1662,114 @@
                         <h6 ng-show="budgetDetails.OverorUnderStatus==2"><div class="label-success">You should take {{budgetDetails.OverorUnderValue}} more calories to reach today’s budget.</div></h6>
                     </div>
                 </div>
-                <div class="col-md-12 col-lg-12 col-sm-12 margin-top-5 no-padding border">
-                    <div class="col-lg-4 col-md-4 col-sm-4 no-padding right-border">
-                        <div class="new-update">
-                            <div class="sleep-textcolor">Sleep<span><small>(minutes)</small></span></div>
+            <div class="col-md-12 col-lg-12 col-sm-12 no-padding margin-top-10 border">
+                <div class="col-lg-4 col-md-4 col-sm-4 no-padding right-border">
+                    <div class="new-update">
+                        <div class="col-md-12 col-lg-12 col-sm-12 sleep-textcolor margin-top-5">Sleep</div>
+                        <div class="col-md-4 col-lg-4 col-sm-4 no-padding margin-top-5">
                             <img class="img-width" src="../../images/sleep.png"/>
-                            <div class="count brownText text-font">{{wearable.sleep==null?"NA":wearable.sleep}}</div>
+                        </div>
+                        <div class="col-md-8 col-lg-8 col-sm-8 no-padding">
+                            <div class="count brownText text-font"><small>{{wearable.sleep==null?"N/A":wearable.sleep}}</small></div>
+                            <div class="count brownText text-font"><small>(minutes)</small></div>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 no-padding right-border">
-                        <div class="new-update">
-                            <div class="heart-textcolor">Heart&nbsp;Beat</div>
-                            <img class="img-width" src="../../images/heart1.gif"/>
-                            <div class="count redText text-font">{{wearable.restingheartrate==null?"NA":wearable.restingheartrate}}</div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 no-padding right-border">
+                    <div class="new-update">
+                        <div class="col-md-12 col-lg-12 col-sm-12 heart-textcolor margin-top-5">Heart&nbsp;Beat</div>
+                        <div class="col-md-4 col-lg-4 col-sm-4 no-padding margin-top-5">
+                            <img class="img-width" src="../../images/bloodpressure.png"/>
+                        </div>
+                        <div class="col-md-8 col-lg-8 col-sm-8 no-padding">
+                            <div class="count redText text-font"><small>{{wearable.restingheartrate==null?"N/A":wearable.restingheartrate}}</small></div>
+                            <div class="count redText text-font"><small>(rest)</small></div>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 no-padding">
-                        <div class="new-update">
-                            <div class="water-textcolor">Water&nbsp;Level</div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 no-padding">
+                    <div class="new-update">
+                        <div class="col-md-12 col-lg-12 col-sm-12 water-textcolor margin-top-5">Water&nbsp;Level</div>
+                        <div class="col-md-4 col-lg-4 col-sm-4 no-padding margin-top-5">
                             <img class="img-width" src="../../images/fat.png"/>
-                            <div class="count blueText">{{waterlog}}ml/{{waterlogoz}}oz</div>
                         </div>
-                    </div>
-                </div>
-                <br/>
-                <div class="col-md-12 col-lg-12 col-sm-12 no-padding border">
-                    <div class="col-lg-4 col-md-4 col-sm-4 no-padding right-border">
-                        <div class="new-update">
-                            <div class="floor-textcolor">Floors</div>
-                            <img class="img-width" src="../../images/floor.png"/>
-                            <div class="count grayText text-font">{{wearable.floors==null?"NA":wearable.floors}}</div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 no-padding right-border"/>
-                        <div class="new-update">
-                            <div class="steps-textcolor">Steps</div>
-                            <img class="img-width" src="../../images/step.png">
-                            <div class="count greenText text-font">{{wearable.steps==null?"NA":wearable.steps}}</div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 no-padding">
-                        <div class="new-update">
-                            <div class="fat-textcolor">Fat&nbsp;Burn</div>
-                            <img class="img-width" src="../../images/fat1.png"/>
-                            <div class="count lightGreenText text-font">{{wearable.heartfatburn==null?"NA":wearable.heartfatburn}}</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-12 col-lg-12 col-sm-12 no-padding">
-                    <div class="col-lg-4 col-md-4 col-sm-4 no-padding right-border">
-                        <div class="new-update">
-                            <div class="bloodpessure-textcolor">BP<span><small>(mg/dl)</small></span></div>
-                            <img class="img-width" src="../../images/bloodpressure.png"/>    
-                            <div class="count skyBlueText text-font">{{wearable.systolic==null?"NA":wearable.systolic}}/{{wearable.systolic==null?"NA":wearable.diastolic}}</div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 no-padding right-border">
-                        <div class="new-update">
-                            <div class="bloodoxygen-textcolor">BO2</div>
-                            <img class="img-width" src="../../images/bloodoxygen.png"/>    
-                            <div class="count pinkText text-font">{{wearable.bloodoxygen==null?"NA":wearable.bloodoxygen}}</div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 no-padding">
-                        <div class="new-update">
-                            <div class="bloodglucose-textcolor">BG</div>
-                            <img class="img-width" src="../../images/bloodglucose.png"/>    
-                            <div class="count darkRedText text-font">{{wearable.randombloodglucose==null?"NA":wearable.randombloodglucose}}/{{wearable.fastingbloodglucose==null?"NA":wearable.fastingbloodglucose}}</div>
+                        <div class="col-md-8 col-lg-8 col-sm-8 no-padding">
+                            <div class="count skyBlueText text-font"><small>{{waterlog}}/{{waterlogoz}}</small></div>
+                            <div class="count skyBlueText text-font"><small>ml/oz</small></div>
                         </div>
                     </div>
                 </div>
             </div>
+            <div class="col-md-12 col-lg-12 col-sm-12 no-padding border">
+                <div class="col-lg-4 col-md-4 col-sm-4 no-padding right-border">
+                    <div class="new-update">
+                        <div class="col-md-12 col-lg-12 col-sm-12 floor-textcolor margin-top-5">Floors</div>
+                        <div class="col-md-4 col-lg-4 col-sm-4 no-padding margin-top-5">
+                            <img class="img-width" src="../../images/floor.png"/>
+                        </div>
+                        <div class="col-md-8 col-lg-8 col-sm-8 no-padding">
+                            <div class="count grayText text-font"><small>{{wearable.steps==null?"N/A":wearable.steps}}</small></div>
+                            <div class="count grayText text-font"><small>(floor)</small></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 no-padding right-border">
+                    <div class="new-update">
+                        <div class="col-md-12 col-lg-12 col-sm-12 steps-textcolor margin-top-5">Steps</div>
+                        <div class="col-md-4 col-lg-4 col-sm-4 no-padding margin-top-5">
+                            <img class="img-width" src="../../images/step.png"/>
+                        </div>
+                        <div class="col-md-8 col-lg-8 col-sm-8 no-padding">
+                            <div class="count greenText text-font"><small>{{wearable.steps==null?"N/A":wearable.steps}}</small></div>
+                            <div class="count greenText text-font"><small>(count)</small></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 no-padding">
+                    <div class="new-update">
+                        <div class="col-md-12 col-lg-12 col-sm-12 bloodoxygen-textcolor margin-top-5"><small>Blood Oxygen</small></div>
+                        <div class="col-md-4 col-lg-4 col-sm-4 no-padding margin-top-5">
+                            <img class="img-width" src="../../images/bloodoxygen.png"/>
+                        </div>
+                        <div class="col-md-8 col-lg-8 col-sm-8 no-padding">
+                            <div class="count pinkText text-font"><small>{{wearable.bloodoxygen==null?"N/A":wearable.bloodoxygen}}</small></div>
+                            <div class="count pinkText text-font"><small>(%)</small></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 col-lg-12 col-sm-12 no-padding">
+                <div class="col-lg-6 col-md-6 col-sm-6 no-padding right-border">
+                    <div class="new-update">
+                        <div class="col-md-12 col-lg-12 col-sm-12 bloodpessure-textcolor margin-top-5">Blood Pressure</div>
+                        <div class="col-md-4 col-lg-4 col-sm-4 no-padding margin-top-10">
+                            <img class="img-width" src="../../images/heart1.gif"/>
+                        </div>
+                        <div class="col-md-8 col-lg-8 col-sm-8 no-padding">
+                            <div class="count skyBlueText text-font" title="Systolic Blood Pressure/Diastolic Blood Pressure"><small>{{wearable.systolic==null?"N/A":wearable.systolic}} / {{wearable.diastolic==null?"N/A":wearable.diastolic}}</small></div>
+                            <div class="count skyBlueText text-font" title="Systolic Blood Pressure/Diastolic Blood Pressure"><small>(systolic / diastolic) (mmHg)</small></div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-lg-6 col-md-6 col-sm-6 no-padding">
+                    <div class="new-update">
+                        <div class="col-md-12 col-lg-12 col-sm-12 bloodglucose-textcolor margin-top-5">Blood Glucose</div>
+                        <div class="col-md-4 col-lg-4 col-sm-4 no-padding margin-top-10">
+                            <img class="img-width" src="../../images/bloodglucose.png"/>
+                        </div>
+                        <div class="col-md-8 col-lg-8 col-sm-8 no-padding">
+                            <div class="count darkRedText text-font" title="Random Glucose/Fasting Glucose"><small>{{wearable.randombloodglucose==null?"N/A":wearable.randombloodglucose}} / {{wearable.fastingbloodglucose==null?"N/A":wearable.fastingbloodglucose}}</small></div>
+                            <div class="count darkRedText text-font" title="Random Glucose/Fasting Glucose"><small>(random / fast) (mg/dl)</small></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-md-12 col-lg-12 col-sm-12 no-padding border">
+            </div>
+
         </form>
     </div>
 </div>
