@@ -613,14 +613,17 @@
                 <div id="app" class="contentblock hidden">
                     <div class="outerline">                       
                         <form name="wearableForm">
-                            <div class="col-lg-12 col-md-12 col-sm-12 margin-top-10" ng-init="wearableinit()">
+                            <div class="col-lg-12 col-md-12 col-sm-12 margin-top-10" ng-init="wearableinit()" >
                                 <h4 class="margin-bottom-15">App & Devices</h4>
-                                <div class="row min-height-200">
+                                <hr/>
+                                <div class="row" style="max-height:400px;" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#eee'}">
                                     <!-- Posts Wearable list -->
-                                    <div class="col-lg-4 col-md-4 col-sm-4" ng-repeat="wearable in vendorList">
-                                        <img ng-src="{{wearable.imageurl}}">
-                                        <div class="app-button"><a href="" class="main-button orange_back" ng-disabled="wearableForm.$invalid || loader" ng-click="OpenFitbitWindow(wearable.authorizeurl,wearable.vendorid)" ng-show="isActive(wearable.isactive)"><span ng-if="device"><span></span></span>Connect</a></div>
-                                        <div class="app-button"><a href="" class="main-button orange_back" ng-disabled="wearableForm.$invalid || loader" ng-click="doGetDisonnectDetails(wearable.logid)" ng-show="!isActive(wearable.isactive)"><span ng-if="device"><span></span></span>{{wearableText}}</a></div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6" ng-repeat="wearable in vendorList" style="padding:10px;">
+                                        <div class="col-md-4 col-sm-4 col-xs-4"><img ng-src="{{wearable.imageurl}}"></div>
+                                        <div class="col-md-8 col-sm-8 col-xs-8">
+                                            <h3>{{wearable.vendorname}}</h3><p>{{wearable.scope}}</p>
+                                            <div class="app-button"><a href="" class="main-button orange_back" ng-disabled="wearableForm.$invalid || loader" ng-click="OpenFitbitWindow(wearable.authorizeurl,wearable.vendorid)" ng-show="isActive(wearable.isactive)"><span ng-if="device"><span></span></span>{{wearable.connectionStatus}}</a><a href="" class="main-button red_back" ng-disabled="wearableForm.$invalid || loader" ng-click="wearable.connectionStatus='Disconnecting..';doGetDisonnectDetails(wearable.logid)" ng-show="!isActive(wearable.isactive)"><span ng-if="device"><span></span></span>{{wearable.connectionStatus}}</a></div>
+                                            </div>                                        
                                     </div>
                                 </div>
                             </div>
@@ -812,7 +815,7 @@
                             <p class="text-gray text-center">of {{Budget}} cals.</p>
                         </div>
 
-                    <div class="col-lg-7 col-md-7 col-sm-7 no-padding">
+                    <div class="col-lg-7 col-md-7 col-sm-7">
                         <div class="label-update">
                             <span class="label-text">Budget</span>
                             <span class="label-count blue">{{budgetDetails.Budget}}</span>
@@ -1568,6 +1571,25 @@
         </div>
     </section>
 </div>
+
+<!-- Connect Using Mobile Confirmation-->
+<div id="connect-using-mobile" class="popupContainer" style="display:none;left:37%!important;">
+    <header class="popupHeader">
+        <span class="header_title">Information</span>
+        <span class="modal_close"><i class="fa fa-times"></i></span>
+    </header>
+
+    <section class="popupBody">
+        <!-- Register Form -->
+        <div class="common_model">
+            This Device can be connected only through {{appDevice}} Mobile App!
+            <div class="action_btns margin-top-20">
+                <div class="modal_close"><a href="" class="btn btn_red" >Got it!</a></div>
+            </div>
+        </div>
+    </section>
+</div>
+
 
 <div class="hidden-lg hidden-md" id="weight-form">
     <p id="weight_button"><img src="../../images/update-weight.png"></p>

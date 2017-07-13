@@ -3778,16 +3778,27 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
 
         //for get wearable vendor list
         $scope.OpenFitbitWindow = function (authorizeurl,vendorid) {
-            $rootScope.vendorid= vendorid;
-            $scope.loader=false;
-            //$scope.wearableFitbitText="Connecting...";
-            $scope.device=true;
-            $window.open(authorizeurl+"&state="+vendorid,"_self");
+           if(vendorid==4||vendorid==5){
+                $scope.connectionDeviceAlert(vendorid);
+            }else{
+                $rootScope.vendorid= vendorid;
+                $scope.loader=false;
+                //$scope.wearableFitbitText="Connecting...";
+                $scope.device=true;
+                $window.open(authorizeurl+"&state="+requestHandler.domainURL()+"/views/devices/index.html?state="+vendorid,"_self");
+          
+            }
         }
 
         $scope.doGetVendorlist = function(){
             requestHandler.getRequest("getWearableVendorsListByUser","").then(function(response) {
                 $scope.vendorList = response.data.vendorlist;
+                $.each($scope.vendorList,function(index,value){
+                    if(value.isactive==0)
+                        value.connectionStatus="Connect";
+                    else
+                        value.connectionStatus="Disconnect";
+                });
             },function(){
                 errorMessage(Flash,"Please try again later!")
             });
@@ -3810,11 +3821,35 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
             $scope.logid=logid;
             return requestHandler.postRequest("disconnectUserWearable/",{"logid":$scope.logid}).then(function(response) {
                 if(response.data.Response=="Success"){
-                    console.log("Success");
-
+                        $window.location.href = '../user/#/connectDevice'; 
+                        $scope.doGetVendorlist();
                 }
             });
         };
+
+        $scope.connectionDeviceAlert=function(vendorid){
+            if(vendorid==4)
+                $scope.appDevice="Android";
+            else
+                $scope.appDevice="iPhone";
+            $(function(){
+                $("#lean_overlay").fadeTo(1000);
+                $("#connect-using-mobile").fadeIn(600);
+                $(".common_model").show();
+
+            });
+            $(".modal_close").click(function(){
+                $(".common_model").hide();
+                $("#connect-using-mobile").hide();
+                $("#lean_overlay").hide();
+            });
+
+            $("#lean_overlay").click(function(){
+                $(".common_model").hide();
+                $("#connect-using-mobile").hide();
+                $("#lean_overlay").hide();
+            });
+        }
 
         //To display daily activities 
         $scope.doGetWearableDateByDate = function(date){

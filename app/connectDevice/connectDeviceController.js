@@ -11,14 +11,13 @@ function get(name){
 		$scope.code=(get('code'));
 		console.log($scope.code);
 		$scope.state=(get('state'));
-		alert($scope.state);
 		//Connect wearble device
 		$scope.doGetConnectDetails=function(code){
- 		return requestHandler.postRequest("connectUserWearable/",{"vendorid":$scope.state,"code":$scope.code}).then(function(response) {
+ 		return requestHandler.postRequest("connectUserWearable/",{"vendorid":parseInt($scope.state),"code":$scope.code}).then(function(response) {
  			console.log(response.data.Response);
         	if(response.data.Response=="Success"){	
         		$window.location.href = '../user/#/connectDevice';
-        		//$location.path("../users/views/#dashboard");
+        		////$location.path("../users/views/#dashboard");
 		}	
 		else
 			console.log("something went wrong please try later");
