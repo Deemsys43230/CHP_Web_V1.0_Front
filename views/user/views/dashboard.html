@@ -108,7 +108,7 @@
                             <li><a href="#tab-3" data-toggle="tab" onclick="return false;">Graphs</a></li>
                         </ul>
                     </div>
-                    <div class="col-lg-2 col-md-2 col-sm-2" style="padding-left: 5px"><a href="" ng-click="doSyncDevices()" onclick="return false;" class="sync_button override-width"  ng-disabled="connectDevice" disabled>&nbsp;{{syncBtnTxt}}&nbsp;</a></div>
+                    <div class="col-lg-2 col-md-2 col-sm-2" style="padding-left: 5px"><button href="" ng-click="doSyncDevices()" onclick="return false;" class="btn sync_button override-width"  ng-disabled="connectDevice" disabled>&nbsp;{{syncBtnTxt}}&nbsp;</button></div>
                     <div class="col-lg-4 col-md-4 col-sm-4 margin-top-5 padding-rl text-right">
                         <div class="margin-top-5 pull-right mouse-pointer" >&nbsp;&nbsp;<i class="fa fa-calendar" ng-click="datePicker()"></i></div>
                         <input hidden id="main-start-date" ng-model="selectedDate">
@@ -217,12 +217,11 @@
                             <div class="tab-pane padding-top-5" id="tab-2">
                                 <div class="tab_container" id="back-exercise">
                                     <div class="tab_content">
-                                <div class="col-lg-9 col-md-9 col-sm-9 no-padding dashboard-5">
+                                    <div class="col-lg-9 col-md-9 col-sm-9 no-padding dashboard-5">
                                             <div class="col-lg-12 col-md-12 no-padding">
                                              <div class="session">
-                                                 <a id="modal_trigger_filter" href="#modal-filter" ng-click="doFilterPopup();" onclick="return false;" class="target_button filter_button" type="button" style="width: 250px;"><i class="fa fa-filter"></i>&nbsp;Filter<small><span ng-repeat="category in categorylist">&nbsp;<span class="line-clamp-md" ng-if="category.isChecked">{{category.categoryname}}</span></span></small><small><span ng-repeat="type in typelist">&nbsp;<span class="line-clamp-md" ng-if="type.isChecked">{{type.typename}}</span></span></small></a>
-                                                 <a id="modal_trigger_custom_exercise" href="#modal-custom-exercise" ng-click="doUserAddCustomExercise();resetexercisedata();" onclick="return false;" class="target_button custom_button" type="button"><i class="fa fa-plus"></i>&nbsp;Add Custom Exercise</a>
-                                            </div>
+                                                 <a id="modal_trigger_filter" href="#modal-filter" ng-click="doFilterPopup();" onclick="return false;" class="target_button filter_button" type="button"><i class="fa fa-filter"></i>&nbsp;Filter&nbsp;<small><span ng-repeat="category in displayFilteredCategory" title="Category">{{category}} {{$last ? '' : ','}}</span>&nbsp;&nbsp;<span ng-repeat="type in displayFilteredType" title="Type">{{type}} {{$last ? '' : ','}}</span></small></a>
+                                             </div>
                                             <div class="content-1">
                                                 <input class="profile_input" type="text" ng-model="selectedExercise" placeholder="Search Exercise" uib-typeahead="exercise as exercise.exercisename for exercise in inputChangedExercise($viewValue)" typeahead-popup-template-url="customPopupTemplate.html" typeahead-template-url="exerciseTemplate.html" typeahead-on-select="exerciseSelected()" typeahead-class="form-control">
                                             </div>
@@ -244,7 +243,7 @@
                                                                 <div class="margin-top-10">
                                                                     <span class="pull-right text-red text-bold"><strong><i class="fa fa-angle-down"></i>&nbsp;{{exerciseDiaryData.calories}}  calories</strong></span>
                                                                     <div class="select_food">
-                                                                        <span class="text-bold">Workout :</span> {{exerciseDiaryData.workoutvalue}}&nbsp;seconds&nbsp;&nbsp;<a href="" ng-click="doEditUserExercise(exerciseDiaryData.Exercise.exerciseid,exerciseDiaryData.userexercisemapid,exerciseDiaryData.isCustom)" title="Edit Exercise"><i class="fa fa-pencil"></i></a>
+                                                                        <span class="text-bold">Workout :</span>{{exerciseDiaryData.userExerciseWorkoutDisplayValue}}&nbsp;&nbsp;<a href="" ng-click="doEditUserExercise(exerciseDiaryData.Exercise.exerciseid,exerciseDiaryData.userexercisemapid,exerciseDiaryData.isCustom)" title="Edit Exercise"><i class="fa fa-pencil"></i></a>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -259,7 +258,7 @@
                                                                 <div class="margin-top-10">
                                                                     <span class="pull-right text-red text-bold"><strong><i class="fa fa-angle-down"></i>&nbsp;{{customDiaryData.calories}}  calories</strong></span>
                                                                     <div class="select_food">
-                                                                        <span class="text-bold">Workout :</span> {{customDiaryData.workoutvalue}}&nbsp;seconds&nbsp;&nbsp;<a href="" ng-click="doEditUserCustomExercise(customDiaryData.id,customDiaryData.isCustom)" title="Edit Exercise"><i class="fa fa-pencil"></i></a>
+                                                                        <span class="text-bold">Workout : </span>{{customDiaryData.customExerciseWorkoutDisplayValue}}&nbsp;&nbsp;<a href="" ng-click="doEditUserCustomExercise(customDiaryData.id,customDiaryData.isCustom)" title="Edit Exercise"><i class="fa fa-pencil"></i></a>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -299,10 +298,8 @@
                                                         <span ng-repeat="frequentexercise in frequentExerciseList" ng-click="frequentExercise(frequentexercise.exerciseid)">{{frequentexercise.exercisename}}</span>
                                                     </div>
                                                 </div>
-                                                <a href="#exercise-graph" data-toggle="tab" ng-click="getViewGraph1()" onclick="return false;" class="suggest_button override-width" style="margin-top: 9px;">View Graph</a>
-                                                
-                                            </div>
-
+                                                    <a id="modal_trigger_custom_exercise" href="#modal-custom-exercise" ng-click="doUserAddCustomExercise();resetexercisedata();" onclick="return false;" class="custom_button" type="button"><i class="fa fa-plus"></i>&nbsp;Add Custom Exercise</a>
+                                             </div>
                                         </div>
                                     </div>
                                 </div>
@@ -319,7 +316,6 @@
                                         <label for="nutrients" >Nutrients Graph by Session</label>
                                         <input type="radio" id="nutrient" ng-click="dailyIntake()" value="3" ng-model="graphs"/>
                                         <label for="nutrient" >Nutrients Intake</label>
-
                                     </div>
                                 </div>
                                 <div class="graph-content" >

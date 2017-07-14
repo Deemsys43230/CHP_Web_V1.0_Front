@@ -7299,6 +7299,10 @@ select.select-activity{
 .filter_button{
     background-color:#f8ba01;
     padding: 1px 5px;
+    width: 435px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 a.custom_button{
     font-size: 14px;

@@ -650,17 +650,20 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
 
                     });
                 };
-
                 //Apply filter for searching exercise
                 $scope.doApplyFilter=function(){
+                    $scope.displayFilteredCategory=[];
+                    $scope.displayFilteredType=[];
                     $.each($scope.categorylist, function(index,value){
                         if (value.isChecked==true) {
                             $scope.selectedCategory.push(value.categoryid);
+                            $scope.displayFilteredCategory.push(value.categoryname);
                         }
                     });
                     $.each($scope.typelist, function(index,value){
                         if (value.isChecked==true) {
                             $scope.selectedType.push(value.typeid);
+                            $scope.displayFilteredType.push(value.typename);
                         }
                     });
                 };
@@ -689,17 +692,14 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
             userExerciseDiaryDetailPromise.then(function(result){
                 $scope.userExerciseDiaryDataAll=result;
                 $scope.loaded=false;
-                $.each($scope.userExerciseDiaryDataAll.ExerciseData, function(index,value) {
-                    $scope.userExerciseDiaryDataAll.workoutvalueMinutes=Math.round((value.workoutvalue/60)%60);
-                    $scope.userExerciseDiaryDataAll.workoutvalueSeconds=Math.round(value.workoutvalue%60);
-                    $scope.userExerciseDiaryDataAll.workoutvalueHours=Math.round(value.workoutvalue/3600);
+                //For Normal Exercise Workout Conversion
+                $.each($scope.userExerciseDiaryDataAll.ExerciseData,function(index,value){
+                    value.userExerciseWorkoutDisplayValue=Math.round(value.workoutvalue/3600) +" Hrs "+Math.round(value.workoutvalue/60)%60 +" Mins "+Math.round(value.workoutvalue%60)+" Secs";
                 });
-
-                /*    console.log( $scope.userExerciseDiaryDataAll.workoutvalueHours);
-                 console.log( $scope.userExerciseDiaryDataAll.workoutvalueMinutes);
-                 console.log( $scope.userExerciseDiaryDataAll.workoutvalueSeconds);*/
-
-
+                //For Custom Exercise Workout Conversion
+                $.each($scope.userExerciseDiaryDataAll.customExercise,function(index,value){
+                    value.customExerciseWorkoutDisplayValue=Math.round(value.workoutvalue/3600) +" Hrs "+Math.round(value.workoutvalue/60)%60 +" Mins "+Math.round(value.workoutvalue%60)+" Secs";
+                });
             });
 
             requestHandler.getRequest("user/getUserExerciseSuggestions/","").then(function(response){
@@ -722,7 +722,6 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
 
             var exerciseInsertPromise=UserDashboardService.doInsertUserExercise($scope.userExercise);
             exerciseInsertPromise.then(function(){
-                /* $scope.doGetUserExerciseList();*/
                 $scope.loadExerciseDiary($scope.userExercise.date);
                 $scope.doGetIntakeBruntByDate($scope.userExercise.date);
                 $scope.doGetHistoryReport("historyGraph");
@@ -881,10 +880,6 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
             });
 
         };
-
-        /*   $scope.isCleanCustomExercise=function(){
-         return angular.equals(originalreps,$scope.customExercise.reps)&& angular.equals(originaltiming, $scope.customExercise.workoutvalue);
-         };*/
         //Update User Exercise
         $scope.doUpdateUserCustomExercise=function(){
             //Set values according to the api calls
@@ -1822,7 +1817,6 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
             });
         };
 
-        /*
          // Get Calories Brunt And Intake deatils by date
          $scope.doGetIntakeBruntByDate = function(date){
          requestHandler.postRequest("user/getTotalCalorieDetailForDate/",{"date":date}).then(function(response){
@@ -1841,20 +1835,18 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
          $scope.currentGain=$scope.calorieGraph.Intake;
          $scope.currentGain=$scope.currentGain.toFixed(2);
 
-         */
-        /*  if($scope.averageIntake<$scope.calorieGraph.intakecalorie){
+          if($scope.averageIntake<$scope.calorieGraph.intakecalorie){
          $scope.currentGainColour="red";
          }else $scope.currentGainColour="limegreen";
-         *//*
+
 
          $scope.currentSpent=$scope.calorieGraph.Burnt;
          $scope.currentSpent=$scope.currentSpent.toFixed(2);
 
-         */
-        /* if($scope.averageSpent<$scope.calorieGraph.burntcalorie){
+         if($scope.averageSpent<$scope.calorieGraph.burntcalorie){
          $scope.currentSpentColour="red";
          }else $scope.currentSpentColour="orange";
-         *//*
+
 
          var gainedCalories;
          var spentCalories;
@@ -1944,7 +1936,6 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
          $scope.averageSpent=Math.round(response.data.Calorie_Graph.averagecalorieburnt);
          });
          };
-         */
 
         $scope.goGetDailyIntakeGraph = function(date){
 
@@ -3881,7 +3872,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
         $scope.initialLoadFoodAndExercise=function(date){
             $scope.loadFoodDiary(date);
             $scope.loadExerciseDiary(date);
-            /*  $scope.doGetIntakeBruntByDate(date);*/
+           /* $scope.doGetIntakeBruntByDate(date);*/
             $scope.goGetDailyIntakeGraph(date);
             $scope.doGetWeightGoal();
             $scope.doGetWeightLog(date);
@@ -3889,6 +3880,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
             $scope.goGetSessionGraph($scope.storedSessionId);
             $scope.getUserTimeZone(date);
             $scope.getBudget(date);
+            $scope.graphTwo();
             $scope.checkGoalOnLoad(date);
             $scope.doGetWearableDateByDate(date);
 
@@ -3898,25 +3890,6 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
 
         $scope.initialLoadFoodAndExercise(selectedDate);
         $scope.doGetCoachAdvices();
-        $scope.Rangem = function(start, end) {
-            var result = [];
-            for (var i = start; i <= end; i++) {
-                result.push(i);
-            }
-            return result;
-        };
-        $scope.minutesList=$scope.Rangem(1,1000);
-//For Seconds calculation in  Dropdown
-        $scope.Ranges = function(start, end) {
-            var result = [];
-            for (var i = start; i <= end; i++) {
-                result.push(i);
-            }
-            return result;
-        };
-
-        $scope.secondsList=$scope.Ranges(1,1000);
-
         //circle round
         $scope.offset =         0;
         $scope.timerCurrent =   0;
