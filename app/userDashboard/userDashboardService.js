@@ -174,7 +174,7 @@ adminApp.factory("UserDashboardService",['requestHandler',function(requestHandle
     userDashboardServiceObj.doGetSelectedExerciseDetails= function (exerciseid) {
         return requestHandler.postRequest("user/getExerciseDetailByuser/",{"exerciseid":exerciseid}).then(function (response) {
             var userSelectedExerciseDetails=response.data.ExerciseDetail;
-            userSelectedExerciseDetails.imagepath=userSelectedExerciseDetails.imagepath+"50x50.jpg";
+            userSelectedExerciseDetails.imagepath=userSelectedExerciseDetails.imagepath+"200x200.jpg";
             return userSelectedExerciseDetails;
         }, function () {
             console.log("Please try again later!")

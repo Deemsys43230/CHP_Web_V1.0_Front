@@ -128,6 +128,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
                     $location.path("dashboard");
                     $scope.connectDevice=false;
                     $scope.syncBtnTxt="Sync Now";
+                    $scope.initialLoadFoodAndExercise(selectedDate);
                 },
                 function () {
                     errorMessage(Flash, "Please try again later!")
@@ -2318,71 +2319,69 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
             if($('#history-start').val()==''){}
             else $scope.doGetGraph(divId);
         };
-//To Display User History Graph
+        
+        //To Display User History Graph
         $scope.historyGraph = [
-            {"graphCategory":"CALORIES GRAPH","graphCategoryId":1,"graphs":[{
-
-                'id': 1,
-                'name': 'Calories Gained',
-                "imageSrc": "../../images/gain.png"
-
-            }, {
-                'id': 2,
-                'name': 'Calories Burnt',
-                "imageSrc": "../../images/burnt.png"
-
-            },
-                {
-                    'id': 5,
-                    'name': 'Budget vs Net Log',
-                    "imageSrc": "../../images/budget.png"
-                }]
-            },
-            {"graphCategory":"EXERCISE GRAPH","graphCategoryId":2,"graphs":[{
+                 {"graphCategory":"ACTIVITY GRAPH","graphCategoryId":1,"graphs":[
+            {
                 'id': 3,
                 'name': 'Exercise Minutes',
                 "imageSrc": "../../images/exercise.png"
-            }]
-            }, {"graphCategory":"DAILY ACTIVITY GRAPH","graphCategoryId":3,"graphs":[{
+            },
+            {
+                    'id': 10,
+                    'name': 'Floor Graph',
+                    "imageSrc": "../../images/floor.png"
+
+            },
+            {
+                    'id': 7,
+                    'name': 'Steps Value',
+                    "imageSrc": "../../images/step.png"
+
+            },
+            {
+                    'id': 12,
+                    'name': 'Sleep Rate',
+                    "imageSrc": "../../images/sleep.jpg"
+            }
+
+            ]
+            },
+
+
+            {"graphCategory":"CALORIES GRAPH","graphCategoryId":1,"graphs":[{
                 'id': 6,
                 'name': 'Nutricients Intake',
                 "imageSrc": "../../images/FoodNutrition_Icon.png"
 
             },
-                {
-                    'id': 10,
-                    'name': 'Floor Graph',
-                    "imageSrc": "../../images/floor.png"
-
-                },
-                {
-                    'id': 7,
-                    'name': 'Steps Value',
-                    "imageSrc": "../../images/step.png"
-
-                },
+            {
+                'id': 5,
+                'name': 'Budget vs Net Log',
+                "imageSrc": "../../images/budget.png"
+            }]
+            },
+            {"graphCategory":"HEART RATE GRAPH","graphCategoryId":3,"graphs":[
+                
                 {
                     'id': 11,
                     'name': 'Heart Rate',
                     "imageSrc": "../../images/heartpeak.ico"
 
                 },
-                {
-                    'id': 12,
-                    'name': 'Sleep Rate',
-                    "imageSrc": "../../images/sleep.jpg"
-                }]
+                ]
             },{"graphCategory":"BLOOD GLUCOSE GRAPH","graphCategoryId":4,"graphs":[{
                 'id': 8,
                 'name': 'Blood Glucose',
                 "imageSrc": "../../images/blood.png"
 
-            },
-                {
+            }
+                /*{
                     'id': 9,
                     'name': 'Blood Oxygen',
                     "imageSrc": "../../images/oxygen.png"
-                }]
+                }*/]
 
             },{"graphCategory":"BLOOD PRESSURE GRAPH","graphCategoryId":5,"graphs":[{
 
@@ -2390,12 +2389,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
                 'name': 'Blood Pressure',
                 "imageSrc": "../../images/bp.png"
             }]
-            }, {"graphCategory":"LOG GRAPH","graphCategoryId":6,"graphs":[{
-                'id': 4,
-                'name':'Weight Log',
-                "imageSrc": "../../images/log.png"
-
-            },
+            }, {"graphCategory":"WATER INTAKE GRAPH","graphCategoryId":6,"graphs":[
                 {
                     'id': 14,
                     'name': 'Water Level',
@@ -2403,7 +2397,9 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
 
                 }]
 
-            }];
+            }
+            ];
+
         $scope.doGetGraph=function(divId){
             $scope.isViewEmpty=0;
             $scope.loaded=true;

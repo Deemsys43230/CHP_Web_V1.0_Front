@@ -7388,11 +7388,11 @@ button.sync_button{
     color: #fff;
     background-color: #ff5010;
     margin-top: 5px;
-    width: 140px;
+    width: 120px;
 }
 
 button.sync_button:hover{
-    background-color: #ff5010;
+    background-color: #d24b1a;
     color: #fff;
     cursor: pointer;
 }
@@ -7890,6 +7890,11 @@ ul.exercise li span.pull-right{
 ul.exercise li .exercise_name{
     font-size: 15px;
     font-weight:bold !important;
+}
+.add-exercise-img{
+    border-radius: 5px;
+    border: solid 2px #f3f3f3;
+    padding: 2px;
 }
 
 .select_food{

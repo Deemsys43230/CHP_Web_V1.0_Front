@@ -28,7 +28,6 @@
 
 <!--Exercise Template-->
 <script type="text/ng-template" id="exerciseTemplate.html">
-
     <a class="col-md-12">
         <img ng-if="match.model.imagepath" class="img-circle popup_image" ng-src="{{match.model.imagepath}}50x50.jpg" width="37">
       <span class="modal_span">
@@ -100,13 +99,15 @@
         <div class="dashboard-2" ng-show="historyReport==0">
             <div id="content">
                 <div id="daily_update">
-                    <div class="col-lg-6 col-md-6 col-sm-6 padding-lr">
+                    <div class="col-lg-8 col-md-8 col-sm-8 padding-lr">
                         <!-- Nav Tabs -->
-                        <ul class="nav nav-tabs">
+                        <ul class="nav nav-tabs pull-left">
                             <li class="active" ng-click="showExercise=0"><a href="#tab-1" data-toggle="tab" onclick="return false;">Food Intake</a></li>
                             <li ng-click="showExercise=1;doGetCategoryandTypeExercise();" ><a href="#tab-2" data-toggle="tab" onclick="return false;">Energy Spent</a></li>
                             <li><a href="#tab-3" data-toggle="tab" onclick="return false;">Graphs</a></li>
+                            <li>
                         </ul>
+                        <a href="" ng-click="doSyncDevices()" onclick="return false;" class="sync_button override-width pull-left"  ng-disabled="connectDevice" disabled><i class="fa fa-exchange" aria-hidden="true"></i>&nbsp;{{syncBtnTxt}}&nbsp;</a>
                     </div>
                     <div class="col-lg-2 col-md-2 col-sm-2" style="padding-left: 5px"><button href="" ng-click="doSyncDevices()" onclick="return false;" class="btn sync_button override-width"  ng-disabled="connectDevice" disabled>&nbsp;{{syncBtnTxt}}&nbsp;</button></div>
                     <div class="col-lg-4 col-md-4 col-sm-4 margin-top-5 padding-rl text-right">
@@ -957,7 +958,7 @@
                     <div class="tab-content1 contentHistoryOverride min-height-200 friends-scroll-responsive" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#eee'}">
 
                         <!-- Stat Search -->
-                        <div class="col-lg-4 col-md-4 col-sm-4 pull-right margin-top-10">
+                        <div class="col-lg-12 col-md-12 col-sm-12 pull-right margin-top-10">
                           <div class="input-group">
                                 <input type="text"  class="history_input pull-right" placeholder="Search history here..." ng-model="searchHistory">
                                    <span class="input-group-btn">
@@ -966,10 +967,10 @@
                           </div>
                         </div>
                         <!-- End Search -->
-                        <div class="col-lg-12 col-md-12 col-sm-12" ng-repeat="graphCategory in historyGraph"  ng-hide="historyfilter.length==0">
+                        <div class="col-lg-6 col-md-6 col-sm-6" ng-repeat="graphCategory in historyGraph"  ng-hide="historyfilter.length==0">
                             <h4 class="margin-top-10" style="text-transform: uppercase;padding-left: 20px;">{{graphCategory.graphCategory}}</h4>
                             <hr style="padding-left: 20px;padding-right: 20px;"/>
-                            <div class="col-lg-3 col-md-3 col-sm-6" ng-repeat="graph in historyfilter = (graphCategory.graphs | startsWithLetter:searchHistory)"  ng-show="graphCategory.graphs.length!=0">
+                            <div class="col-lg-6 col-md-6 col-sm-6" ng-repeat="graph in historyfilter = (graphCategory.graphs | startsWithLetter:searchHistory)"  ng-show="graphCategory.graphs.length!=0">
                                 <div id="{{graph.id}}" class="horizon-swiper" ng-click="setHistoryType(graph.id,'historyGraph-multiple')">
                                     <div class="horizon-item" ng-click="showGraph=1"  style="display: block;padding: 15px 1px;">
                                         <div class="historyOverride" style=" padding: 3px 35px 5px 0px;font-size: 15px;">
@@ -1204,24 +1205,12 @@
                 <div class="row">
                     <div class="col-lg-6 col-md-6 col-sm-6">
                         <form name="ExerciseAddForm" novalidate>
-                            <div class="col-lg-2 col-md-2 col-sm-2 no-padding">
-                                <img ng-if="userSelectedExerciseDetails.imagepath" class="img-circle" ng-src="{{userSelectedExerciseDetails.imagepath+'50x50.jpg'}}">
-                            </div>
-                            <div class="col-lg-10 col-md-10 col-sm-10">
-                                <h5>Exercise Name:</h5>
-                                <span>{{userSelectedExerciseDetails.exercisename}}</span>
-                            </div>
-                            <div class="col-lg-12 col-md-12 col-sm-12">
-                                <hr/>
-                            </div>
-                            <div class="col-lg-12 col-md-12 col-sm-12">
-                                <h5>Category : <span>{{userSelectedExerciseDetails.categoryname}}</span></h5>
-                                <hr/>
-                            </div><br/>
-                            <div class="col-lg-12 col-md-12 col-sm-12">
-                                <h5>Unit : <span>{{userSelectedExerciseDetails.levels.unitname}}</span></h5>
-                                <hr/>
-                            </div><br/>
+                            <h5>Exercise Name:&nbsp;<strong>{{userSelectedExerciseDetails.exercisename}}</strong></h5>
+                            <hr/>  
+                            <h5>Category : <span>{{userSelectedExerciseDetails.categoryname}}</span></h5>
+                            <hr/>  
+                            <h5>Unit : <span>{{userSelectedExerciseDetails.levels.unitname}}</span></h5>
+                            <hr/>  
                             <h5  class="margin-top-10"  ng-show="userSelectedExerciseDetails.repsavailable==1">Reps Value</h5>
                             <input type="text" ng-pattern="/(^[1-9]\d{0,8}$)/"  name="reps" ng-model="userExercise.reps"  maxlength="3" ng-show="userSelectedExerciseDetails.repsavailable==1">
                              <span ng-show="ExerciseAddForm.reps.$dirty&&ExerciseAddForm.reps.$invalid">
@@ -1261,6 +1250,9 @@
                     </div>
 
                     <div class="col-lg-6 col-md-6 col-sm-6 text-center">
+                        <div class="no-padding" style="height:220px;">
+                                <img class="add-exercise-img" ng-if="userSelectedExerciseDetails.imagepath" ng-src="{{userSelectedExerciseDetails.imagepath}}">
+                         </div>
                         <h5>Calories Spent</h5>
                         <div class="circle-wrapper">
                             <div class="circle-progress ng-cloak" ng-style="getStyle()">{{current}}<br/><small>Calories</small></div>
@@ -1680,14 +1672,15 @@
                         <h6 ng-show="budgetDetails.OverorUnderStatus==2"><div class="label-success">You should take {{budgetDetails.OverorUnderValue}} more calories to reach today’s budget.</div></h6>
                     </div>
                 </div>
+                dffgfghfghfgh667567567
             <div class="col-md-12 col-lg-12 col-sm-12 no-padding margin-top-10 border">
                 <div class="col-lg-4 col-md-4 col-sm-4 no-padding right-border">
-                    <div class="new-update">
-                        <div class="col-md-12 col-lg-12 col-sm-12 sleep-textcolor margin-top-5">Sleep</div>
+                    <div class="new-update">                        
                         <div class="col-md-4 col-lg-4 col-sm-4 no-padding margin-top-5">
                             <img class="img-width" src="../../images/sleep.png"/>
                         </div>
                         <div class="col-md-8 col-lg-8 col-sm-8 no-padding">
+                            <p class="sleep-textcolor">Sleep</p>
                             <div class="count brownText text-font"><small>{{wearable.sleep==null?"N/A":wearable.sleep}}</small></div>
                             <div class="count brownText text-font"><small>(minutes)</small></div>
                         </div>
