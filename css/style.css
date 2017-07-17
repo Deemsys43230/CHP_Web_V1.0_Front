@@ -7389,6 +7389,7 @@ button.sync_button{
     background-color: #ff5010;
     margin-top: 5px;
     width: 120px;
+    border:1px #ff5010;
 }
 
 button.sync_button:hover{
@@ -16186,7 +16187,6 @@ a.main-button.red_back {
     height: 45px;
     margin-top: -6px;
     padding-left: 2px;
-    vertical-align:0;
 }
 .sleep-textcolor{
     color: #00887a;

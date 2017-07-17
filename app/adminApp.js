@@ -2285,7 +2285,7 @@ adminApp.factory('siteMenuService', function () {
       },
       {
 
-          'name':'Weight Log',
+          'name':'Apps & Devices',
           'icon':'cog',
           'href':'vendor-settings',
           'active': ''

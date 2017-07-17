@@ -655,6 +655,8 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
                 $scope.doApplyFilter=function(){
                     $scope.displayFilteredCategory=[];
                     $scope.displayFilteredType=[];
+                    $scope.selectedCategory=[];
+                    $scope.selectedType=[];
                     $.each($scope.categorylist, function(index,value){
                         if (value.isChecked==true) {
                             $scope.selectedCategory.push(value.categoryid);
@@ -1034,7 +1036,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
                         var date1 = selectedDate.slice(6,10)+'-'+selectedDate.slice(3,5)+'-'+selectedDate.slice(0,2);
                         var date2 = $scope.goalDetails.enddate.slice(6,10)+'-'+$scope.goalDetails.enddate.slice(3,5)+'-'+$scope.goalDetails.enddate.slice(0,2);
 
-
+                       console.log(date1) ;
                         var date1_ms;
 
                         if (new Date(dateCompare).getTime() > new Date(date1).getTime()) {
@@ -2305,6 +2307,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
             $scope.historyType=id;
             if($('#history-start').val()==''){
                 $scope.showGraph=1;
+                $scope.doGetHistoryReport(divId);
             }
             else $scope.doGetHistoryReport(divId);
         };
@@ -2322,7 +2325,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
         
         //To Display User History Graph
         $scope.historyGraph = [
-                 {"graphCategory":"ACTIVITY GRAPH","graphCategoryId":1,"graphs":[
+                 {"graphCategory":"ACTIVITY","graphCategoryId":1,"graphs":[
             {
                 'id': 3,
                 'name': 'Exercise Minutes',
@@ -2350,7 +2353,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
             },
 
 
-            {"graphCategory":"CALORIES GRAPH","graphCategoryId":1,"graphs":[{
+            {"graphCategory":"CALORIES","graphCategoryId":1,"graphs":[{
                 'id': 6,
                 'name': 'Nutricients Intake',
                 "imageSrc": "../../images/FoodNutrition_Icon.png"
@@ -2362,16 +2365,16 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
                 "imageSrc": "../../images/budget.png"
             }]
             },
-            {"graphCategory":"HEART RATE GRAPH","graphCategoryId":3,"graphs":[
+            {"graphCategory":"HEART RATE","graphCategoryId":3,"graphs":[
                 
                 {
                     'id': 11,
                     'name': 'Heart Rate',
                     "imageSrc": "../../images/heartpeak.ico"
 
-                },
+                }
                 ]
-            },{"graphCategory":"BLOOD GLUCOSE GRAPH","graphCategoryId":4,"graphs":[{
+            },{"graphCategory":"BLOOD GLUCOSE","graphCategoryId":4,"graphs":[{
                 'id': 8,
                 'name': 'Blood Glucose',
                 "imageSrc": "../../images/blood.png"
@@ -2383,13 +2386,13 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
                     "imageSrc": "../../images/oxygen.png"
                 }*/]
 
-            },{"graphCategory":"BLOOD PRESSURE GRAPH","graphCategoryId":5,"graphs":[{
+            },{"graphCategory":"BLOOD PRESSURE","graphCategoryId":5,"graphs":[{
 
                 'id': 13,
                 'name': 'Blood Pressure',
                 "imageSrc": "../../images/bp.png"
             }]
-            }, {"graphCategory":"WATER INTAKE GRAPH","graphCategoryId":6,"graphs":[
+            }, {"graphCategory":"WATER INTAKE","graphCategoryId":6,"graphs":[
                 {
                     'id': 14,
                     'name': 'Water Level',
@@ -2397,19 +2400,26 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
 
                 }]
 
+            },
+            {"graphCategory":"BODY TEMPERATURE","graphCategoryId":7,"graphs":[{
+
+                'id': 16,
+                'name': 'Body Temperature',
+                "imageSrc": "../../images/temperature.png"
+            }]
             }
             ];
 
         $scope.doGetGraph=function(divId){
             $scope.isViewEmpty=0;
             $scope.loaded=true;
-            var startDate;
             var endDate;
             if($('#history-start').val()==''){
-                startDate = endDate = selectedDate;
+              startDate=startDate;
+              endDate = selectedDate;
             }
             else{
-                startDate = $('#history-start').val();
+                startDate =$('#history-start').val();
                 endDate = $('#history-end').val();
             }
             var monthNames= ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -2442,10 +2452,10 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
         $scope.doGetGraphReport=function(divId){
             $scope.isViewGraphEmpty=0;
             $scope.loaded=true;
-            var startDate;
             var endDate;
             if($('#history-start').val()==''){
-                startDate = endDate = selectedDate;
+                startDate =startDate;
+                endDate = selectedDate;
             }
             else{
                 startDate = $('#history-start').val();
@@ -2511,17 +2521,17 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
             var minutes = Math.abs(minutes) % 60;
             minutes=((minutes < 10 && minutes >= 0) ? '0' : '') + minutes;
 
-            return sign + hours +'hrs '+minutes + 'min';
+            return sign + hours +'hrs '+minutes + 'mins';
         };
 
         $scope.doGetHistoryReport=function(divId){
             $scope.isHistoryEmpty=0;
             $scope.loaded=true;
             $scope.waterGraphs=false;
-            var startDate;
             var endDate;
             if($('#history-start').val()==''){
-                startDate = endDate = selectedDate;
+                startDate = startDate;
+                endDate = selectedDate;
             }
             else{
                 startDate = $('#history-start').val();
@@ -2597,7 +2607,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
                     titles.title="Exercise Minutes Graph ( "+startDate+" - "+endDate+" )";
                     titles.graphType='column';
                     titles.name="Exercise Minutes";
-                    titles.suffix=" mints";
+                    titles.suffix=" mins";
                     titles.yaxis="Minutes";
                     titles.xaxis="Date Range";
                     titles.color='blue';
@@ -2774,9 +2784,9 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
                     });
                     titles.title="Floor Graph( "+startDate+" - "+endDate+" )";
                     titles.graphType='spline';
-                    titles.name="Floor's Walked";
-                    titles.suffix="  floor";
-                    titles.yaxis="Floor (fts)";
+                    titles.name="Floors Walked";
+                    titles.suffix="  floor (s)";
+                    titles.yaxis="Floors";
                     titles.xaxis="Date Range";
                     titles.color='brown';
                     $scope.drawHistoryGraph(historyReport,historyDates,titles,divId);
@@ -2819,7 +2829,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
                     titles.title="Sleep Rate Graph( "+startDate+" - "+endDate+" )";
                     titles.graphType='spline';
                     titles.name="Sleep";
-                    titles.suffix="  minutes";
+                    titles.suffix="  mins";
                     titles.yaxis="Sleep (minutes)";
                     titles.xaxis="Date Range";
                     titles.color='#339966';
@@ -2887,8 +2897,30 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
                     titles.suffix="  oz";
                     titles.yaxis="Water Level (oz)";
                     titles.xaxis="Date Range";
-                    titles.color='#ff9999';
+                    titles.color='#ff4da6';
                     $scope.drawWaterlogOzHistoryGraph(historyReport,historyDates,titles,divId);
+                });
+            }
+            else if($scope.historyType==16){
+
+                requestHandler.postRequest("user/getWearableDataGraph/", {"startdate":startDate,"enddate":endDate}).then(function(response){
+                    $scope.historyRecord=response.data.wearable;
+                    $.each($scope.historyRecord, function(index,value) {
+                        var history = [];
+                        var date = value.date.split("/");
+                        history.push(monthNames[(date[1]-1)]+' '+date[0]);
+                        history.push(value.bodytemperature);
+                        historyDates.push(monthNames[(date[1]-1)]+' '+date[0]);
+                        historyReport.push(history);
+                    });
+                    titles.title="Body Temperature Graph( "+startDate+" - "+endDate+" )";
+                    titles.graphType='areaspline';
+                    titles.name="Body Temperature";
+                    titles.suffix="  °F";
+                    titles.yaxis="Fahrenheit";
+                    titles.xaxis="Date Range";
+                    titles.color='#ff4d4d';
+                    $scope.drawHistoryGraph(historyReport,historyDates,titles,divId);
                 });
             }
             //All Ready Show the Graph
@@ -3123,7 +3155,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
                     data:dataP ,          // to display protein value
                     tooltip: {
 
-                        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                        headerFormat: '<span style="font-size:10px">{point.key} </span> <table>',
                         pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
                             '<td style="padding:0"><b>{point.y:.2f} g</b></td></tr>',
                         footerFormat: '</table>',
@@ -3142,7 +3174,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
                     data:dataFa ,        // to display fiber value
                     tooltip: {
 
-                        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                        headerFormat: '<span style="font-size:10px">{point.key} </span> <table>',
                         pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
                             '<td style="padding:0"><b>{point.y:.2f} g</b></td></tr>',
                         footerFormat: '</table>',
@@ -3161,7 +3193,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
                     data:dataC,          // to display fat value
                     tooltip: {
 
-                        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                        headerFormat: '<span style="font-size:10px">{point.key} </span> <table>',
                         pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
                             '<td style="padding:0"><b>{point.y:.2f} g</b></td></tr>',
                         footerFormat: '</table>',
@@ -3181,7 +3213,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
                     data:dataFr,        // to display fibre value
                     tooltip: {
 
-                        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                        headerFormat: '<span style="font-size:10px">{point.key} </span> <table>',
                         pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
                             '<td style="padding:0"><b>{point.y:.2f} g</b></td></tr>',
                         footerFormat: '</table>',
@@ -3585,6 +3617,9 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
         $scope.datePickerHistoryGraph = function(){
             $("#history-graph-date").click();
         };
+        $scope.weekHistoryGraph = function(){
+            $("#history-graph-week").click();
+        };
 
         //Weight Goal Graph
         $scope.drawGoalGraph=function(data,titles,data1){
@@ -3859,6 +3894,22 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
             mm='0'+mm
         }
         selectedDate = dd+'/'+mm+'/'+yyyy;
+
+        //To display history start date
+        var startDate=new Date();
+        var date = startDate.getDate()-6;
+        var month = startDate.getMonth()+1; //January is 0!
+
+        var year = startDate.getFullYear();
+        if(date<10){
+            date='0'+date
+        }
+        if(month<10){
+            month='0'+month
+        }
+        startDate = date+'/'+month+'/'+year;
+
+
         $scope.weightLogDate = selectedDate;
         $scope.todayDate = selectedDate;
         $scope.selectedDate = selectedDate;
@@ -3868,7 +3919,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
         $scope.initialLoadFoodAndExercise=function(date){
             $scope.loadFoodDiary(date);
             $scope.loadExerciseDiary(date);
-           /* $scope.doGetIntakeBruntByDate(date);*/
+           // $scope.doGetIntakeBruntByDate(date);  deprecated
             $scope.goGetDailyIntakeGraph(date);
             $scope.doGetWeightGoal();
             $scope.doGetWeightLog(date);
@@ -3879,9 +3930,6 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
             $scope.graphTwo();
             $scope.checkGoalOnLoad(date);
             $scope.doGetWearableDateByDate(date);
-
-
-
         };
 
         $scope.initialLoadFoodAndExercise(selectedDate);
@@ -4332,6 +4380,8 @@ function daterangepicker() {
 //for food intake and excersize view graph date picker
     $("#history-graph").click();
     $("#history-view").click();
+
+
     var options = {
         maxDate : new Date(),
         startDate : new Date(),
@@ -4355,11 +4405,13 @@ function daterangepicker() {
         document.getElementById("history-start").value = start.format('DD/MM/YYYY');
         document.getElementById("history-end").value = end.format('DD/MM/YYYY');
     });
+    var startDate=new Date();
+    startDate.setDate(startDate.getDate()-6);
 
     $("#history-graph-date").click();
     var options = {
         maxDate : new Date(),
-        startDate : new Date(),
+        startDate :startDate,
         endDate : new Date(),
         singleDatePicker: false,
         opens:'left',
@@ -4381,8 +4433,7 @@ function daterangepicker() {
         document.getElementById("history-end").value = end.format('DD/MM/YYYY');
     });
 
-
-    $("#weight-log-date1").click();
+ $("#weight-log-date1").click();
     var options = {
         drops:'down',
         opens:'left',

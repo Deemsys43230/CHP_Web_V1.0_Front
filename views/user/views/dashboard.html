@@ -107,9 +107,8 @@
                             <li><a href="#tab-3" data-toggle="tab" onclick="return false;">Graphs</a></li>
                             <li>
                         </ul>
-                        <a href="" ng-click="doSyncDevices()" onclick="return false;" class="sync_button override-width pull-left"  ng-disabled="connectDevice" disabled><i class="fa fa-exchange" aria-hidden="true"></i>&nbsp;{{syncBtnTxt}}&nbsp;</a>
+                        <button href="" ng-click="doSyncDevices()" onclick="return false;" class="sync_button override-width pull-left"  ng-disabled="connectDevice" disabled><i class="fa fa-exchange" aria-hidden="true"></i>&nbsp;{{syncBtnTxt}}&nbsp;</button>
                     </div>
-                    <div class="col-lg-2 col-md-2 col-sm-2" style="padding-left: 5px"><button href="" ng-click="doSyncDevices()" onclick="return false;" class="btn sync_button override-width"  ng-disabled="connectDevice" disabled>&nbsp;{{syncBtnTxt}}&nbsp;</button></div>
                     <div class="col-lg-4 col-md-4 col-sm-4 margin-top-5 padding-rl text-right">
                         <div class="margin-top-5 pull-right mouse-pointer" >&nbsp;&nbsp;<i class="fa fa-calendar" ng-click="datePicker()"></i></div>
                         <input hidden id="main-start-date" ng-model="selectedDate">
@@ -956,9 +955,12 @@
                 <div class="col-lg-12 col-md-12 col-sm-12" ng-hide="showGraph==1">
 
                     <div class="tab-content1 contentHistoryOverride min-height-200 friends-scroll-responsive" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#eee'}">
+                        <div class="col-lg-6 col-md-6 col-sm-6 margin-top-10" style="border: solid red 0px;">
+                            <h4 style="text-transform: uppercase;padding-left: 20px;">Graphs</h4>
+                        </div>
+                    <!-- Stat Search -->
+                        <div class="col-lg-6 col-md-6 col-sm-6 pull-right margin-top-10" style="border: solid blue 0px;">
 
-                        <!-- Stat Search -->
-                        <div class="col-lg-12 col-md-12 col-sm-12 pull-right margin-top-10">
                           <div class="input-group">
                                 <input type="text"  class="history_input pull-right" placeholder="Search history here..." ng-model="searchHistory">
                                    <span class="input-group-btn">
@@ -967,8 +969,8 @@
                           </div>
                         </div>
                         <!-- End Search -->
-                        <div class="col-lg-6 col-md-6 col-sm-6" ng-repeat="graphCategory in historyGraph"  ng-hide="historyfilter.length==0">
-                            <h4 class="margin-top-10" style="text-transform: uppercase;padding-left: 20px;">{{graphCategory.graphCategory}}</h4>
+                        <div class="col-lg-6 col-md-6 col-sm-6 margin-top-10" ng-repeat="graphCategory in historyGraph"  ng-hide="historyfilter.length==0">
+                            <h4 style="text-transform: uppercase;padding-left: 20px;">{{graphCategory.graphCategory}}</h4>
                             <hr style="padding-left: 20px;padding-right: 20px;"/>
                             <div class="col-lg-6 col-md-6 col-sm-6" ng-repeat="graph in historyfilter = (graphCategory.graphs | startsWithLetter:searchHistory)"  ng-show="graphCategory.graphs.length!=0">
                                 <div id="{{graph.id}}" class="horizon-swiper" ng-click="setHistoryType(graph.id,'historyGraph-multiple')">
@@ -1021,13 +1023,14 @@
                                     <img src="../../images/no-dates.png" width="200" height="200">
                                     <h1 class="text-gray">NO DATES SELECTED</h1>
                                 </div>
+                                <div style="text-align: center;padding-top: 5px;" ng-show="waterGraphs">
+                                    <input type="radio" id="ml" ng-change="setHistoryType(14,'historyGraph-multiple')"  value="14" name="ml" ng-model="historyType"/>
+                                    <label for="ml" style="background-color: #00ccff">Ml</label>
+                                    <input type="radio" id="oz" ng-change="setHistoryType(15,'historyGraph-multiple')"  value="15" name="oz" ng-model="historyType"/>
+                                    <label for="oz" style="background-color: #ff4da6">Oz</label>
+                                </div>
                             </div>
-                            <div style="text-align: center;padding-top: 5px;" ng-show="waterGraphs">
-                                <input type="radio" id="ml" ng-change="setHistoryType(14,'historyGraph-multiple')"  value="14" name="ml" ng-model="historyType"/>
-                                <label for="ml" style="background-color: #00ccff">Ml</label>
-                                <input type="radio" id="oz" ng-change="setHistoryType(15,'historyGraph-multiple')"  value="15" name="oz" ng-model="historyType"/>
-                                <label for="oz" style="background-color: #ff9999">Oz</label>
-                            </div>
+
                         </div>
 
                     </div>
