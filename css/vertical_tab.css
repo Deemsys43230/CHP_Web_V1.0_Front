@@ -166,6 +166,16 @@
     border-left: 4px solid limegreen;
 }
 
+#sidemenu li.app a.menu-items.open {
+    color: #eb6b22;
+    border-left: 4px solid #eb6b22;
+}
+
+#sidemenu li.log a.menu-items.open {
+    color: #00bfff;
+    border-left: 4px solid #00bfff;
+}
+
 #sidemenu span.horizontal a.menu-items.open {
     color: blue;
     border-top: 4px solid blue;
