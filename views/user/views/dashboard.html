@@ -220,7 +220,7 @@
                                     <div class="col-lg-9 col-md-9 col-sm-9 no-padding dashboard-5">
                                             <div class="col-lg-12 col-md-12 no-padding">
                                              <div class="session">
-                                                 <a id="modal_trigger_filter" href="#modal-filter" ng-click="doFilterPopup();" onclick="return false;" class="target_button filter_button" type="button"><i class="fa fa-filter"></i>&nbsp;Filter&nbsp;<small><span ng-repeat="category in displayFilteredCategory" title="Category">{{category}} {{$last ? '|' : ','}}</span>&nbsp;<span ng-repeat="type in displayFilteredType" title="Type">{{type}} {{$last ? '' : ','}}</span></small></a>
+                                                 <a id="modal_trigger_filter" href="#modal-filter" ng-click="doFilterPopup();" onclick="return false;" class="target_button filter_button" type="button"><i class="fa fa-filter"></i>&nbsp;Filter&nbsp;<small><span ng-repeat="category in displayFilteredCategory" title="Category">{{category}} {{$last ? '|' : ','}}</span>&nbsp;&nbsp;<span ng-repeat="type in displayFilteredType" title="Type">{{type}} {{$last ? '' : ','}}</span></small></a>
                                              </div>
                                             <div class="content-1">
                                                 <input class="profile_input" type="text" ng-model="selectedExercise" placeholder="Search Exercise" uib-typeahead="exercise as exercise.exercisename for exercise in inputChangedExercise($viewValue)" typeahead-popup-template-url="customPopupTemplate.html" typeahead-template-url="exerciseTemplate.html" typeahead-on-select="exerciseSelected()" typeahead-class="form-control">
@@ -977,15 +977,16 @@
                                 <h4 style="text-transform: uppercase;padding-left: 20px;">{{graphCategory.graphCategory}}</h4>
                                 <hr style="padding-left: 20px;padding-right: 20px;"/>
                             <div class="col-md-6 col-sm-6 col-xs-6" ng-repeat="graph in historyfilter = (graphCategory.graphs | startsWithLetter:searchHistory)"  ng-show="graphCategory.graphs.length!=0">
-                                <div id="{{graph.id}}" ng-click="setHistoryType(graph.id,'historyGraph-multiple')">
+                                <div id="{{graph.id}}" class="horizon-swiper" ng-click="setHistoryType(graph.id,'historyGraph-multiple')">
                                      <div class="horizon-item" ng-click="showGraph=1"  style="display: block;padding: 15px 1px;">
-                                       <div class="historyOverride" style=" padding: 3px 35px 5px 0px;font-size: 15px;">
+                                        <div class="historyOverride" style=" padding: 3px 35px 5px 0px;font-size: 15px;">
                                             <img style="width: 50px;" ng-src="{{graph.imageSrc}}">
                                             <a href="#tab-4" style="color: #666;" data-toggle="tab" onclick="return false;">{{graph.name}}</a>
-                                       </div>
-                                      </div>
-                                 </div>
+                                        </div>
+                                     </div>
+                                </div>
                             </div>
+                    </div>
 
                         <div ng-show="graphCategory.graphs.length==0" class="text-center margin-top-50">
                             <h3 class="text-gray">NO RECORDS FOUND!!!</h3><br/><br/><br/>
