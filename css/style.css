@@ -16540,3 +16540,17 @@ margin-top: 10px;
     border-right-width: 0;
     border-left-color: #fff;
 }
+.weight-text-font{
+    font-size: x-large;
+     text-align: center;
+     color: #00bfff;
+}
+
+.row.display-flex {
+    display: flex;
+    flex-wrap: wrap;
+}
+.row.display-flex > [class*='col-'] {
+    display: flex;
+    flex-direction: column;
+}

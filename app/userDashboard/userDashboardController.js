@@ -2380,7 +2380,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
                 "imageSrc": "../../images/blood.png"
 
             }
-                /*{
+               /* {
                     'id': 9,
                     'name': 'Blood Oxygen',
                     "imageSrc": "../../images/oxygen.png"
@@ -3808,9 +3808,9 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
                 //$scope.wearableFitbitText="Connecting...";
                 $scope.device=true;
                 $window.open(authorizeurl+"&state="+requestHandler.domainURL()+"/views/devices/index.html?state="+vendorid,"_self");
-          
+
             }
-        }
+        };
 
         $scope.doGetVendorlist = function(){
             requestHandler.getRequest("getWearableVendorsListByUser","").then(function(response) {
