@@ -2361,7 +2361,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
             },
             {
                 'id': 5,
-                'name': 'Budget vs Net Log',
+                'name': 'Budget vs Net',
                 "imageSrc": "../../images/budget.png"
             }]
             },
@@ -2926,9 +2926,6 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
             //All Ready Show the Graph
             $scope.showGraph=1;
         };
-
-
-
 
         $scope.drawHistoryGraph=function(data,dataX,titles,divId){
             console.log(data);
@@ -3802,14 +3799,19 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
         $scope.OpenFitbitWindow = function (authorizeurl,vendorid) {
            if(vendorid==4||vendorid==5){
                 $scope.connectionDeviceAlert(vendorid);
-            }else{
+           }else{
+               $scope.connectionDeviceInformationAlert(authorizeurl,vendorid);
+
+              }
+        };
+   //To open fitbit window
+        $scope.proceedOpenFitBitWindow=function (authorizeurl,vendorid){
                 $rootScope.vendorid= vendorid;
                 $scope.loader=false;
                 //$scope.wearableFitbitText="Connecting...";
                 $scope.device=true;
                 $window.open(authorizeurl+"&state="+requestHandler.domainURL()+"/views/devices/index.html?state="+vendorid,"_self");
 
-            }
         };
 
         $scope.doGetVendorlist = function(){
@@ -3871,7 +3873,29 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
                 $("#connect-using-mobile").hide();
                 $("#lean_overlay").hide();
             });
-        }
+        };
+        $scope.connectionDeviceInformationAlert=function(authorizeurl,vendorid){
+            $scope.authorizeurl=authorizeurl;
+            $scope.vendorid=vendorid;
+             $(function(){
+                $("#lean_overlay").fadeTo(1000);
+                $("#connect-using-web").fadeIn(600);
+                $(".common_model").show();
+
+            });
+            $(".modal_close").click(function(){
+                $(".common_model").hide();
+                $("#connect-using-web").hide();
+                $("#lean_overlay").hide();
+            });
+
+            $("#lean_overlay").click(function(){
+                $(".common_model").hide();
+                $("#connect-using-web").hide();
+                $("#lean_overlay").hide();
+            });
+        };
+
 
         //To display daily activities 
         $scope.doGetWearableDateByDate = function(date){

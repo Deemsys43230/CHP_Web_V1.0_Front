@@ -610,9 +610,14 @@
                     <div class="outerline">                       
                         <form name="wearableForm">
                             <div class="col-lg-12 col-md-12 col-sm-12 margin-top-10" ng-init="wearableinit()" >
-                                <h4 class="margin-bottom-15">App & Devices</h4>
-                                <hr/>
-                                <div class="row" style="max-height:400px;" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#eee'}">
+                                <div class="col-lg-12 col-md-12 col-sm-12 no-padding">
+                                     <h4>App & Devices</h4>
+                                     <button href="" ng-click="doSyncDevices()" onclick="return false;" class="sync_button override-width pull-right" style="margin-top: -25px;" ng-disabled="connectDevice" disabled><i class="fa fa-exchange" aria-hidden="true"></i>&nbsp;{{syncBtnTxt}}&nbsp;</button>
+                                </div>
+                                <div class="col-lg-12 col-md-12 col-sm-12 no-padding">
+                                    <hr/>
+                                </div>
+                                <div class="col-lg-12 col-md-12 col-sm-12 no-padding" style="max-height:400px;" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#eee'}">
                                     <!-- Posts Wearable list -->
                                     <div class="col-lg-6 col-md-6 col-sm-6" ng-repeat="wearable in vendorList" style="padding:10px;">
                                         <div class="col-md-4 col-sm-4 col-xs-4"><img ng-src="{{wearable.imageurl}}"></div>
@@ -835,112 +840,123 @@
                         <h6 ng-show="budgetDetails.OverorUnderStatus==2"><div class="label-success">You should take {{budgetDetails.OverorUnderValue}} more calories to reach today’s budget.</div></h6>
                     </div>
                 </div>
-                <div class="col-md-12 col-lg-12 col-sm-12 no-padding margin-top-10 border">
-                    <div class="col-lg-4 col-md-4 col-sm-4 no-padding right-border">
-                        <div class="new-update">
+                <div class="col-md-12 col-lg-12 col-sm-12 no-padding margin-top-10">
+                    <div class="col-lg-4 col-md-4 col-sm-4 no-padding">
+                        <div class="new-update ">
                             <div class="col-md-12 col-lg-12 col-sm-12 sleep-textcolor margin-top-5">Sleep</div>
+                            <div class="col-md-12 col-lg-12 col-sm-12 no-padding well-image common-border sleep-border">
                             <div class="col-md-4 col-lg-4 col-sm-4 no-padding margin-top-5">
                                 <img class="img-width" src="../../images/sleep.png"/>
                             </div>
                             <div class="col-md-8 col-lg-8 col-sm-8 no-padding">
-                                <div class="count brownText text-font"><small>{{wearable.sleep==null?"N/A":wearable.sleep}}</small></div>
-                                <div class="count brownText text-font"><small>(minutes)</small></div>
+                                <div class="sleep-textcolor" ><small>{{wearable.sleep==null?"N/A":wearable.sleep}}</small></div>
+                                <div class="sleep-textcolor"><small>(minutes)</small></div>
+                            </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 no-padding right-border">
+                    <div class="col-lg-4 col-md-4 col-sm-4 no-padding">
                         <div class="new-update">
                             <div class="col-md-12 col-lg-12 col-sm-12 heart-textcolor margin-top-5">Heart&nbsp;Beat</div>
+                            <div class="col-md-12 col-lg-12 col-sm-12 no-padding well-image common-border heart-border">
                             <div class="col-md-4 col-lg-4 col-sm-4 no-padding margin-top-5">
                                 <img class="img-width" src="../../images/bloodpressure.png"/>
                             </div>
                             <div class="col-md-8 col-lg-8 col-sm-8 no-padding">
-                                <div class="count redText text-font"><small>{{wearable.restingheartrate==null?"N/A":wearable.restingheartrate}}</small></div>
-                                <div class="count redText text-font"><small>(rest)</small></div>
+                                <div class="heart-textcolor"><small>{{wearable.restingheartrate==null?"N/A":wearable.restingheartrate}}</small></div>
+                                <div class="heart-textcolor"><small>(rest)</small></div>
                             </div>
+                        </div>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-4 no-padding">
                         <div class="new-update">
                             <div class="col-md-12 col-lg-12 col-sm-12 water-textcolor margin-top-5">Water&nbsp;Level</div>
+                            <div class="col-md-12 col-lg-12 col-sm-12 no-padding well-image common-border water-border">
                             <div class="col-md-4 col-lg-4 col-sm-4 no-padding margin-top-5">
                                 <img class="img-width" src="../../images/fat.png"/>
                             </div>
                             <div class="col-md-8 col-lg-8 col-sm-8 no-padding">
-                                <div class="count skyBlueText text-font"><small>{{waterlog}}/{{waterlogoz}}</small></div>
-                                <div class="count skyBlueText text-font"><small>ml/oz</small></div>
+                                <div class="water-textcolor"><small>{{waterlog}}/{{waterlogoz}}</small></div>
+                                <div class="water-textcolor"><small>ml/oz</small></div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-12 col-lg-12 col-sm-12 no-padding border">
-                    <div class="col-lg-4 col-md-4 col-sm-4 no-padding right-border">
-                        <div class="new-update">
-                            <div class="col-md-12 col-lg-12 col-sm-12 floor-textcolor margin-top-5">Floors</div>
-                            <div class="col-md-4 col-lg-4 col-sm-4 no-padding margin-top-5">
-                                <img class="img-width" src="../../images/floor.png"/>
-                            </div>
-                            <div class="col-md-8 col-lg-8 col-sm-8 no-padding">
-                                <div class="count grayText text-font"><small>{{wearable.steps==null?"N/A":wearable.steps}}</small></div>
-                                <div class="count grayText text-font"><small>(floor)</small></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 no-padding right-border">
-                        <div class="new-update">
-                            <div class="col-md-12 col-lg-12 col-sm-12 steps-textcolor margin-top-5">Steps</div>
-                            <div class="col-md-4 col-lg-4 col-sm-4 no-padding margin-top-5">
-                                <img class="img-width" src="../../images/step.png"/>
-                            </div>
-                            <div class="col-md-8 col-lg-8 col-sm-8 no-padding">
-                                <div class="count greenText text-font"><small>{{wearable.steps==null?"N/A":wearable.steps}}</small></div>
-                                <div class="count greenText text-font"><small>(count)</small></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 no-padding">
-                        <div class="new-update">
-                            <div class="col-md-12 col-lg-12 col-sm-12 bloodoxygen-textcolor margin-top-5"><small>Blood Oxygen</small></div>
-                            <div class="col-md-4 col-lg-4 col-sm-4 no-padding margin-top-5">
-                                <img class="img-width" src="../../images/bloodoxygen.png"/>
-                            </div>
-                            <div class="col-md-8 col-lg-8 col-sm-8 no-padding">
-                                <div class="count pinkText text-font"><small>{{wearable.bloodoxygen==null?"N/A":wearable.bloodoxygen}}</small></div>
-                                <div class="count pinkText text-font"><small>(%)</small></div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-12 col-lg-12 col-sm-12 no-padding">
-                    <div class="col-lg-6 col-md-6 col-sm-6 no-padding right-border">
+                    <div class="col-lg-4 col-md-4 col-sm-4 no-padding">
                         <div class="new-update">
-                            <div class="col-md-12 col-lg-12 col-sm-12 bloodpessure-textcolor margin-top-5">Blood Pressure</div>
+                            <div class="col-md-12 col-lg-12 col-sm-12 floor-textcolor margin-top-5">Floors</div>
+                            <div class="col-md-12 col-lg-12 col-sm-12 no-padding well-image common-border floor-border">
+                            <div class="col-md-4 col-lg-4 col-sm-4 no-padding margin-top-5">
+                                <img class="img-width" src="../../images/floor.png"/>
+                            </div>
+                            <div class="col-md-8 col-lg-8 col-sm-8 no-padding">
+                                <div class="floor-textcolor"><small>{{wearable.steps==null?"N/A":wearable.steps}}</small></div>
+                                <div class="floor-textcolor"><small>(floor)</small></div>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 no-padding">
+                        <div class="new-update">
+                            <div class="col-md-12 col-lg-12 col-sm-12 steps-textcolor margin-top-5">Steps</div>
+                            <div class="col-md-12 col-lg-12 col-sm-12 no-padding well-image common-border steps-border">
+                            <div class="col-md-4 col-lg-4 col-sm-4 no-padding margin-top-5">
+                                <img class="img-width" src="../../images/step.png"/>
+                            </div>
+                            <div class="col-md-8 col-lg-8 col-sm-8 no-padding">
+                                <div class="steps-textcolor"><small>{{wearable.steps==null?"N/A":wearable.steps}}</small></div>
+                                <div class="steps-textcolor"><small>(count)</small></div>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 no-padding">
+                        <div class="new-update">
+                            <div class="col-md-12 col-lg-12 col-sm-12 bloodoxygen-textcolor margin-top-5"><small>Blood&nbsp;Oxygen</small></div>
+                            <div class="col-md-12 col-lg-12 col-sm-12 no-padding well-image common-border bloodoxygen-border">
+                            <div class="col-md-4 col-lg-4 col-sm-4 no-padding margin-top-5">
+                                <img class="img-width" src="../../images/bloodoxygen.png"/>
+                            </div>
+                            <div class="col-md-8 col-lg-8 col-sm-8 no-padding">
+                                <div class="bloodoxygen-textcolor"><small>{{wearable.bloodoxygen==null?"N/A":wearable.bloodoxygen}}</small></div>
+                                <div class="bloodoxygen-textcolor"><small>(%)</small></div>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 col-lg-12 col-sm-12 no-padding">
+                    <div class="col-lg-6 col-md-6 col-sm-6 no-padding">
+                        <div class="new-update">
+                            <div class="col-md-12 col-lg-12 col-sm-12 bloodpessure-textcolor margin-top-5">Blood&nbsp;Pressure</div>
+                            <div class="col-md-12 col-lg-12 col-sm-12 no-padding well-image common-border bloodpessure-border">
                             <div class="col-md-4 col-lg-4 col-sm-4 no-padding margin-top-10">
                                 <img class="img-width" src="../../images/heart1.gif"/>
                             </div>
                             <div class="col-md-8 col-lg-8 col-sm-8 no-padding">
-                                <div class="count skyBlueText text-font" title="Systolic Blood Pressure/Diastolic Blood Pressure"><small>{{wearable.systolic==null?"N/A":wearable.systolic}} / {{wearable.diastolic==null?"N/A":wearable.diastolic}}</small></div>
-                                <div class="count skyBlueText text-font" title="Systolic Blood Pressure/Diastolic Blood Pressure"><small>(systolic / diastolic) (mmHg)</small></div>
+                                <div class="bloodpessure-textcolor" title="Systolic Blood Pressure/Diastolic Blood Pressure"><small>{{wearable.systolic==null?"N/A":wearable.systolic}} / {{wearable.diastolic==null?"N/A":wearable.diastolic}}</small></div>
+                                <div class="bloodpessure-textcolor" title="Systolic Blood Pressure/Diastolic Blood Pressure"><small>(systolic&nbsp;/&nbsp;diastolic)<br/>(mmHg)</small></div>
+                            </div>
                             </div>
                         </div>
                     </div>
-
-
-                    <div class="col-lg-6 col-md-6 col-sm-6 no-padding">
+                <div class="col-lg-6 col-md-6 col-sm-6 no-padding">
                         <div class="new-update">
                             <div class="col-md-12 col-lg-12 col-sm-12 bloodglucose-textcolor margin-top-5">Blood Glucose</div>
+                            <div class="col-md-12 col-lg-12 col-sm-12 no-padding well-image common-border bloodglucose-border">
                             <div class="col-md-4 col-lg-4 col-sm-4 no-padding margin-top-10">
                                 <img class="img-width" src="../../images/bloodglucose.png"/>
                             </div>
                             <div class="col-md-8 col-lg-8 col-sm-8 no-padding">
-                                <div class="count darkRedText text-font" title="Random Glucose/Fasting Glucose"><small>{{wearable.randombloodglucose==null?"N/A":wearable.randombloodglucose}} / {{wearable.fastingbloodglucose==null?"N/A":wearable.fastingbloodglucose}}</small></div>
-                                <div class="count darkRedText text-font" title="Random Glucose/Fasting Glucose"><small>(random / fast) (mg/dl)</small></div>
+                                <div class="bloodglucose-textcolor" title="Random Glucose/Fasting Glucose"><small>{{wearable.randombloodglucose==null?"N/A":wearable.randombloodglucose}} / {{wearable.fastingbloodglucose==null?"N/A":wearable.fastingbloodglucose}}</small></div>
+                                <div class="bloodglucose-textcolor" title="Random Glucose/Fasting Glucose"><small>(random / fast)<br/>(mg/dl)</small></div>
                             </div>
                         </div>
-
+                       </div>
                     </div>
-                </div>
-                <div class="col-md-12 col-lg-12 col-sm-12 no-padding border">
                 </div>
             </div>
         </div>
@@ -973,15 +989,15 @@
                     <div class="col-md-12 col-sm-12 col-xs-12">
                         <hr/>
                     </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6 margin-top-10" ng-repeat="graphCategory in historyGraph"  ng-hide="historyfilter.length==0">
+                    <div class="col-md-6 col-sm-6 col-xs-6 margin-top-10" ng-repeat="graphCategory in historyGraph"  ng-hide="historyfilter.length==0">
                                 <h4 style="text-transform: uppercase;padding-left: 20px;">{{graphCategory.graphCategory}}</h4>
                                 <hr style="padding-left: 20px;padding-right: 20px;"/>
                             <div class="col-md-6 col-sm-6 col-xs-6" ng-repeat="graph in historyfilter = (graphCategory.graphs | startsWithLetter:searchHistory)"  ng-show="graphCategory.graphs.length!=0">
                                 <div id="{{graph.id}}" class="horizon-swiper" ng-click="setHistoryType(graph.id,'historyGraph-multiple')">
                                      <div class="horizon-item" ng-click="showGraph=1"  style="display: block;padding: 15px 1px;">
                                         <div class="historyOverride" style=" padding: 3px 35px 5px 0px;font-size: 15px;">
-                                            <img style="width: 50px;" ng-src="{{graph.imageSrc}}">
-                                            <a href="#tab-4" style="color: #666;" data-toggle="tab" onclick="return false;">{{graph.name}}</a>
+                                         <img style="width: 50px;" ng-src="{{graph.imageSrc}}">
+                                         <a href="#tab-4" style="color: #666;" data-toggle="tab" onclick="return false;">{{graph.name}}</a>
                                         </div>
                                      </div>
                                 </div>
@@ -1585,6 +1601,25 @@
         </div>
     </section>
 </div>
+    <!-- Connect Using Web Confirmation-->
+    <div id="connect-using-web" class="popupContainer" style="display:none;left:37%!important;">
+        <header class="popupHeader">
+            <span class="header_title">Information</span>
+            <span class="modal_close"><i class="fa fa-times"></i></span>
+        </header>
+
+        <section class="popupBody">
+            <!-- Register Form -->
+            <div class="common_model">
+                <form name="wearableForm">
+                By Connecting to this device,other related trackers will be disconnected.
+                <div class="action_btns margin-top-20">
+                    <div class="modal_close"><a href="" class="btn btn_red" ng-click="proceedOpenFitBitWindow(authorizeurl,vendorid)">Got it!</a></div>
+                </div>
+                </form>
+            </div>
+        </section>
+    </div>
 
 <div class="hidden-lg hidden-md" id="weight-form">
     <p id="weight_button"><img src="../../images/update-weight.png"></p>
@@ -1679,114 +1714,124 @@
                         <h6 ng-show="budgetDetails.OverorUnderStatus==2"><div class="label-success">You should take {{budgetDetails.OverorUnderValue}} more calories to reach today’s budget.</div></h6>
                     </div>
                 </div>
-            <div class="col-md-12 col-lg-12 col-sm-12 no-padding margin-top-10 border">
-                <div class="col-lg-4 col-md-4 col-sm-4 no-padding right-border">
-                    <div class="new-update">                        
-                        <div class="col-md-4 col-lg-4 col-sm-4 no-padding margin-top-5">
-                            <img class="img-width" src="../../images/sleep.png"/>
-                        </div>
-                        <div class="col-md-8 col-lg-8 col-sm-8 no-padding">
-                            <p class="sleep-textcolor">Sleep</p>
-                            <div class="count brownText text-font"><small>{{wearable.sleep==null?"N/A":wearable.sleep}}</small></div>
-                            <div class="count brownText text-font"><small>(minutes)</small></div>
+            <div class="col-md-12 col-lg-12 col-sm-12 no-padding margin-top-10">
+                <div class="col-lg-4 col-md-4 col-sm-4 no-padding">
+                    <div class="new-update ">
+                        <div class="col-md-12 col-lg-12 col-sm-12 sleep-textcolor margin-top-5">Sleep</div>
+                        <div class="col-md-12 col-lg-12 col-sm-12 no-padding well-image common-border sleep-border">
+                            <div class="col-md-4 col-lg-4 col-sm-4 no-padding margin-top-5">
+                                <img class="img-width" src="../../images/sleep.png"/>
+                            </div>
+                            <div class="col-md-8 col-lg-8 col-sm-8 no-padding">
+                                <div class="sleep-textcolor" ><small>{{wearable.sleep==null?"N/A":wearable.sleep}}</small></div>
+                                <div class="sleep-textcolor"><small>(minutes)</small></div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-4 col-sm-4 no-padding right-border">
+                <div class="col-lg-4 col-md-4 col-sm-4 no-padding">
                     <div class="new-update">
                         <div class="col-md-12 col-lg-12 col-sm-12 heart-textcolor margin-top-5">Heart&nbsp;Beat</div>
-                        <div class="col-md-4 col-lg-4 col-sm-4 no-padding margin-top-5">
-                            <img class="img-width" src="../../images/bloodpressure.png"/>
-                        </div>
-                        <div class="col-md-8 col-lg-8 col-sm-8 no-padding">
-                            <div class="count redText text-font"><small>{{wearable.restingheartrate==null?"N/A":wearable.restingheartrate}}</small></div>
-                            <div class="count redText text-font"><small>(rest)</small></div>
+                        <div class="col-md-12 col-lg-12 col-sm-12 no-padding well-image common-border heart-border">
+                            <div class="col-md-4 col-lg-4 col-sm-4 no-padding margin-top-5">
+                                <img class="img-width" src="../../images/bloodpressure.png"/>
+                            </div>
+                            <div class="col-md-8 col-lg-8 col-sm-8 no-padding">
+                                <div class="heart-textcolor"><small>{{wearable.restingheartrate==null?"N/A":wearable.restingheartrate}}</small></div>
+                                <div class="heart-textcolor"><small>(rest)</small></div>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-4 no-padding">
                     <div class="new-update">
                         <div class="col-md-12 col-lg-12 col-sm-12 water-textcolor margin-top-5">Water&nbsp;Level</div>
-                        <div class="col-md-4 col-lg-4 col-sm-4 no-padding margin-top-5">
-                            <img class="img-width" src="../../images/fat.png"/>
-                        </div>
-                        <div class="col-md-8 col-lg-8 col-sm-8 no-padding">
-                            <div class="count skyBlueText text-font"><small>{{waterlog}}/{{waterlogoz}}</small></div>
-                            <div class="count skyBlueText text-font"><small>ml/oz</small></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-12 col-lg-12 col-sm-12 no-padding border">
-                <div class="col-lg-4 col-md-4 col-sm-4 no-padding right-border">
-                    <div class="new-update">
-                        <div class="col-md-12 col-lg-12 col-sm-12 floor-textcolor margin-top-5">Floors</div>
-                        <div class="col-md-4 col-lg-4 col-sm-4 no-padding margin-top-5">
-                            <img class="img-width" src="../../images/floor.png"/>
-                        </div>
-                        <div class="col-md-8 col-lg-8 col-sm-8 no-padding">
-                            <div class="count grayText text-font"><small>{{wearable.steps==null?"N/A":wearable.steps}}</small></div>
-                            <div class="count grayText text-font"><small>(floor)</small></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-4 no-padding right-border">
-                    <div class="new-update">
-                        <div class="col-md-12 col-lg-12 col-sm-12 steps-textcolor margin-top-5">Steps</div>
-                        <div class="col-md-4 col-lg-4 col-sm-4 no-padding margin-top-5">
-                            <img class="img-width" src="../../images/step.png"/>
-                        </div>
-                        <div class="col-md-8 col-lg-8 col-sm-8 no-padding">
-                            <div class="count greenText text-font"><small>{{wearable.steps==null?"N/A":wearable.steps}}</small></div>
-                            <div class="count greenText text-font"><small>(count)</small></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-4 no-padding">
-                    <div class="new-update">
-                        <div class="col-md-12 col-lg-12 col-sm-12 bloodoxygen-textcolor margin-top-5"><small>Blood Oxygen</small></div>
-                        <div class="col-md-4 col-lg-4 col-sm-4 no-padding margin-top-5">
-                            <img class="img-width" src="../../images/bloodoxygen.png"/>
-                        </div>
-                        <div class="col-md-8 col-lg-8 col-sm-8 no-padding">
-                            <div class="count pinkText text-font"><small>{{wearable.bloodoxygen==null?"N/A":wearable.bloodoxygen}}</small></div>
-                            <div class="count pinkText text-font"><small>(%)</small></div>
+                        <div class="col-md-12 col-lg-12 col-sm-12 no-padding well-image common-border water-border">
+                            <div class="col-md-4 col-lg-4 col-sm-4 no-padding margin-top-5">
+                                <img class="img-width" src="../../images/fat-image.png"/>
+                            </div>
+                            <div class="col-md-8 col-lg-8 col-sm-8 no-padding">
+                                <div class="water-textcolor"><small>{{waterlog}}/{{waterlogoz}}</small></div>
+                                <div class="water-textcolor"><small>ml/oz</small></div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="col-md-12 col-lg-12 col-sm-12 no-padding">
-                <div class="col-lg-6 col-md-6 col-sm-6 no-padding right-border">
+                <div class="col-lg-4 col-md-4 col-sm-4 no-padding">
                     <div class="new-update">
-                        <div class="col-md-12 col-lg-12 col-sm-12 bloodpessure-textcolor margin-top-5">Blood Pressure</div>
-                        <div class="col-md-4 col-lg-4 col-sm-4 no-padding margin-top-10">
-                            <img class="img-width" src="../../images/heart1.gif"/>
-                        </div>
-                        <div class="col-md-8 col-lg-8 col-sm-8 no-padding">
-                            <div class="count skyBlueText text-font" title="Systolic Blood Pressure/Diastolic Blood Pressure"><small>{{wearable.systolic==null?"N/A":wearable.systolic}} / {{wearable.diastolic==null?"N/A":wearable.diastolic}}</small></div>
-                            <div class="count skyBlueText text-font" title="Systolic Blood Pressure/Diastolic Blood Pressure"><small>(systolic / diastolic) (mmHg)</small></div>
+                        <div class="col-md-12 col-lg-12 col-sm-12 floor-textcolor margin-top-5">Floors</div>
+                        <div class="col-md-12 col-lg-12 col-sm-12 no-padding well-image common-border floor-border">
+                            <div class="col-md-4 col-lg-4 col-sm-4 no-padding margin-top-5">
+                                <img class="img-width" src="../../images/floor.png"/>
+                            </div>
+                            <div class="col-md-8 col-lg-8 col-sm-8 no-padding">
+                                <div class="floor-textcolor"><small>{{wearable.steps==null?"N/A":wearable.steps}}</small></div>
+                                <div class="floor-textcolor"><small>(floor)</small></div>
+                            </div>
                         </div>
                     </div>
                 </div>
-
-
+                <div class="col-lg-4 col-md-4 col-sm-4 no-padding">
+                    <div class="new-update">
+                        <div class="col-md-12 col-lg-12 col-sm-12 steps-textcolor margin-top-5">Steps</div>
+                        <div class="col-md-12 col-lg-12 col-sm-12 no-padding well-image common-border steps-border">
+                            <div class="col-md-4 col-lg-4 col-sm-4 no-padding margin-top-5">
+                                <img class="img-width" src="../../images/step.png"/>
+                            </div>
+                            <div class="col-md-8 col-lg-8 col-sm-8 no-padding">
+                                <div class="steps-textcolor"><small>{{wearable.steps==null?"N/A":wearable.steps}}</small></div>
+                                <div class="steps-textcolor"><small>(count)</small></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 no-padding">
+                    <div class="new-update">
+                        <div class="col-md-12 col-lg-12 col-sm-12 bloodoxygen-textcolor margin-top-5"><small>Blood&nbsp;Oxygen</small></div>
+                        <div class="col-md-12 col-lg-12 col-sm-12 no-padding well-image common-border bloodoxygen-border">
+                            <div class="col-md-4 col-lg-4 col-sm-4 no-padding margin-top-5">
+                                <img class="img-width" src="../../images/bloodoxygen.png"/>
+                            </div>
+                            <div class="col-md-8 col-lg-8 col-sm-8 no-padding">
+                                <div class="bloodoxygen-textcolor"><small>{{wearable.bloodoxygen==null?"N/A":wearable.bloodoxygen}}</small></div>
+                                <div class="bloodoxygen-textcolor"><small>(%)</small></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 col-lg-12 col-sm-12 no-padding">
                 <div class="col-lg-6 col-md-6 col-sm-6 no-padding">
                     <div class="new-update">
-                        <div class="col-md-12 col-lg-12 col-sm-12 bloodglucose-textcolor margin-top-5">Blood Glucose</div>
-                        <div class="col-md-4 col-lg-4 col-sm-4 no-padding margin-top-10">
-                            <img class="img-width" src="../../images/bloodglucose.png"/>
-                        </div>
-                        <div class="col-md-8 col-lg-8 col-sm-8 no-padding">
-                            <div class="count darkRedText text-font" title="Random Glucose/Fasting Glucose"><small>{{wearable.randombloodglucose==null?"N/A":wearable.randombloodglucose}} / {{wearable.fastingbloodglucose==null?"N/A":wearable.fastingbloodglucose}}</small></div>
-                            <div class="count darkRedText text-font" title="Random Glucose/Fasting Glucose"><small>(random / fast) (mg/dl)</small></div>
+                        <div class="col-md-12 col-lg-12 col-sm-12 bloodpessure-textcolor margin-top-5">Blood&nbsp;Pressure</div>
+                        <div class="col-md-12 col-lg-12 col-sm-12 no-padding well-image common-border bloodpessure-border">
+                            <div class="col-md-4 col-lg-4 col-sm-4 no-padding margin-top-10">
+                                <img class="img-width" src="../../images/heart1.gif"/>
+                            </div>
+                            <div class="col-md-8 col-lg-8 col-sm-8 no-padding">
+                                <div class="bloodpessure-textcolor" title="Systolic Blood Pressure/Diastolic Blood Pressure"><small>{{wearable.systolic==null?"N/A":wearable.systolic}} / {{wearable.diastolic==null?"N/A":wearable.diastolic}}</small></div>
+                                <div class="bloodpessure-textcolor" title="Systolic Blood Pressure/Diastolic Blood Pressure"><small>(systolic/diastolic)(mmHg)</small></div>
+                            </div>
                         </div>
                     </div>
-
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 no-padding">
+                    <div class="new-update">
+                        <div class="col-md-12 col-lg-12 col-sm-12 bloodglucose-textcolor margin-top-5">Blood&nbsp;Glucose</div>
+                        <div class="col-md-12 col-lg-12 col-sm-12 no-padding well-image common-border bloodglucose-border">
+                            <div class="col-md-4 col-lg-4 col-sm-4 no-padding margin-top-10">
+                                <img class="img-width" src="../../images/bloodglucose.png"/>
+                            </div>
+                            <div class="col-md-8 col-lg-8 col-sm-8 no-padding">
+                                <div class="bloodglucose-textcolor" title="Random Glucose/Fasting Glucose"><small>{{wearable.randombloodglucose==null?"N/A":wearable.randombloodglucose}} / {{wearable.fastingbloodglucose==null?"N/A":wearable.fastingbloodglucose}}</small></div>
+                                <div class="bloodglucose-textcolor" title="Random Glucose/Fasting Glucose"><small>(random/fast)(mg/dl)</small></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="col-md-12 col-lg-12 col-sm-12 no-padding border">
-            </div>
-
         </form>
     </div>
 </div>
