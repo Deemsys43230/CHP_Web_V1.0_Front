@@ -1227,17 +1227,19 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
                         $("#weightLog").val('');
                     else
                         $("#weightLog1").val('');
+
                 }
                 else{
                     $scope.weightlog=$scope.originalWeight=weightlogdetails.weight;
                     $scope.fat=$scope.originalFat=weightlogdetails.fat;
+                    console.log($scope.fat);
                     if(id==1){
                         $("#weightLog").val(weightlogdetails.weight);
                         $("#fatLog").val(weightlogdetails.fat);
                     }
                     else{
                         $("#weightLog1").val(weightlogdetails.weight);
-                        $("#fatLog1").val(weightlogdetails.fat);
+                        $("#fatLogCurrent").val(weightlogdetails.fat);
                     }
 
                 }
@@ -1251,7 +1253,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
             if(id==1)
                 $scope.doInsertOrUpdateWeightLog($scope.UserDate,parseFloat($("#weightLog").val()),parseFloat($("#fatLog").val()));
             else
-                $scope.doInsertOrUpdateWeightLog($("#weight-log-date1").val(),parseFloat($("#weightLog1").val()));
+                $scope.doInsertOrUpdateWeightLog($("#weight-log-date1").val(),parseFloat($("#weightLog1").val()),parseFloat($("#fatLogCurrent").val()));
         };
 
 
@@ -1308,7 +1310,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
             requestHandler.postRequest("user/weightlogInsertorUpdate/",{"date":date,"weight":weight,"fat":$scope.fat}).then(function(response){
                 if(date==selectedDate && $scope.weightGraph){
                     $window.currentweight = weight;
-                    $window.fat= fat;
+                    $window.fat=fat;
                     //refreshGraph();
                     /*$scope.updateAverageGainSpent(date);*/
                 }
@@ -1331,6 +1333,12 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
         $scope.isCleanWeight1=function(){
             return angular.equals(parseFloat($("#weightLog1").val()), parseFloat($scope.originalWeight));
         };
+        $scope.isCleanFat=function(){
+            return angular.equals(parseFloat($("#fatLog").val()), parseFloat($scope.originalFat));
+        };
+        $scope.isCleanCurrentFat=function(){
+            return angular.equals(parseFloat($("#fatLogCurrent").val()), parseFloat($scope.originalFat));
+        };
 
 
 
@@ -1347,12 +1355,13 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
             }
             var monthNames= ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
             var titles={};
+            var endDate=selectedDate;
             var budgetdate=[];
-            requestHandler.postRequest("user/getWeightLogGraph/",{"startdate":$scope.goalDetails.startdate.toString(),"enddate":$scope.goalDetails.enddate.toString()}).then(function(response){
+            requestHandler.postRequest("user/getWeightLogGraph/",{"startdate":startDate,"enddate":endDate}).then(function(response){
                 $scope.weightlogGraph=response.data.Weight_logs;
                 var weightLogs = [];
                 $.each($scope.weightlogGraph, function(index,value) {
-                    if(value.userentry ==1){
+                    if(value.userentry ==0||1){
                         var weightLog = [];
                         var date = value.date.split("/");
                         weightLog.push(monthNames[(date[1]-1)]+' '+date[0]);
@@ -1366,9 +1375,8 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
                 titles.name="Weight";
                 titles.suffix=" "+$scope.unit;
                 titles.yaxis="Weight (" + $scope.unit + ")";
-                titles.xaxis="Number of days";
+                titles.xaxis="Date Range";
                 $scope.drawGoalGraph(weightLogs,titles,budgetdate);
-
                 $scope.weightGraphValue = weightLogs;
                 $scope.weightGraph = limitToFilter($scope.weightGraphValue, 30);
             }, function () {
@@ -3621,6 +3629,8 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
         //Weight Goal Graph
         $scope.drawGoalGraph=function(data,titles,data1){
             console.log(data);
+            console.log(data1);
+            console.log(titles);
             $('#goalGraph').highcharts({
                 title: {
                     text: titles.title

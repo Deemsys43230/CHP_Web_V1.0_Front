@@ -1,0 +1,167 @@
+<!-- Start Page Banner -->
+<div class="container" ng-cloak class="ng-cloak">
+    <div class="row">
+
+        <div class="col-md-3">
+            <h4 class="classic-title"><span>Settings</span></h4>
+            <div ng-include src="'views/site-menu.html'" onload="activeClass"></div>
+        </div>
+        <div class="col-md-9">
+            <a href="#dashboard" class="back-button pull-right margin-left-10"><i class="fa fa-arrow-circle-o-left"></i> Back to Dashboard</a>
+            <div flash-message="2000" class="col-md-4 pull-right"></div>
+            <h4 class="classic-title"><span><i class="fa fa-dollar"></i> &nbsp;Razor Payment Info</span></h4>
+            <form name="paypalSettingsForm" novalidate>
+                <div class="row form-set">
+                    <div class="col-md-3 margin-top-10">
+                        <h4>Razor Email ID <span class="pull-right">:</span></h4>
+                    </div>
+                    <div class="col-md-9 margin-top-10">
+                        <input type="email" class="form-control margin-bottom-20" name="paypalid" ng-model="paypalSettings.paypalid" maxlength="100" required validate-email>
+                         <span ng-show="paypalSettingsForm.paypalid.$dirty&&paypalSettingsForm.paypalid.$invalid">
+                                <span class="error-message" ng-show="paypalSettingsForm.paypalid.$error.required"><span>Required.</span></span>
+                              <span class="error-message" ng-show="paypalSettingsForm.paypalid.$error.email"><span>Enter&nbsp;valid&nbsp;Email&nbsp;ID</span></span>
+                         </span>
+                    </div>
+                    <div class="col-md-3">
+                        <h4>Razor Name <span class="pull-right">:</span></h4>
+                    </div>
+                    <div class="col-md-9">
+                        <input class="form-control margin-bottom-20" name="paypalname" ng-model="paypalSettings.paypalname" maxlength="100" required>
+                         <span ng-show="paypalSettingsForm.paypalname.$dirty&&paypalSettingsForm.paypalname.$invalid">
+                                <span class="error-message" ng-show="paypalSettingsForm.paypalname.$error.required"><span>Required.</span></span>
+                         </span>
+                    </div>
+
+                 <!--   <div class="col-md-3">
+                        <h4>App User ID <span class="pull-right">:</span></h4>
+                    </div>
+                    <div class="col-md-9">
+                        <input type="text" class="form-control margin-bottom-20" name="appUserId" ng-model="paypalSettings.paypalappuserid" required>
+                         <span ng-show="paypalSettingsForm.appUserId.$dirty&&paypalSettingsForm.appUserId.$invalid">
+                                <span class="error-message" ng-show="paypalSettingsForm.appUserId.$error.required"><span>Required.</span></span>
+                         </span>
+                    </div>
+                    <div class="col-md-3">
+                        <h4>App Password <span class="pull-right">:</span></h4>
+                    </div>
+                    <div class="col-md-9">
+                        <input type="password" class="form-control margin-bottom-20" name="appPassword" ng-model="paypalSettings.paypalapppassword" required>
+                         <span ng-show="paypalSettingsForm.appPassword.$dirty&&paypalSettingsForm.appPassword.$invalid">
+                                <span class="error-message" ng-show="paypalSettingsForm.appPassword.$error.required"><span>Required.</span></span>
+                         </span>
+                    </div>
+                    <div class="col-md-3">
+                        <h4>App Signature <span class="pull-right">:</span></h4>
+                    </div>
+                    <div class="col-md-9">
+                        <input type="text" class="form-control margin-bottom-20" name="appSignature" ng-model="paypalSettings.paypalappsignature" required>
+                         <span ng-show="paypalSettingsForm.appSignature.$dirty&&paypalSettingsForm.appSignature.$invalid">
+                                <span class="error-message" ng-show="paypalSettingsForm.appSignature.$error.required"><span>Required.</span></span>
+                         </span>
+                    </div>-->
+                    <div class="col-md-3">
+                        <h4>Client ID <span class="pull-right">:</span></h4>
+                    </div>
+                    <div class="col-md-9">
+                        <input type="text" class="form-control margin-bottom-20" name="clientId" ng-model="paypalSettings.clientid" required>
+                         <span ng-show="paypalSettingsForm.clientId.$dirty&&paypalSettingsForm.clientId.$invalid">
+                                <span class="error-message" ng-show="paypalSettingsForm.clientId.$error.required"><span>Required.</span></span>
+                         </span>
+                    </div>
+                    <div class="col-md-3">
+                        <h4>Client Secret<span class="pull-right">:</span></h4>
+                    </div>
+                    <div class="col-md-9">
+                        <input type="text" class="form-control margin-bottom-20" name="clientSecret" ng-model="paypalSettings.clientsecret" required>
+                         <span ng-show="paypalSettingsForm.clientSecret.$dirty&&paypalSettingsForm.clientSecret.$invalid">
+                                <span class="error-message" ng-show="paypalSettingsForm.clientSecret.$error.required"><span>Required.</span></span>
+                         </span>
+                    </div>
+                    <div class="col-md-3">
+                        <h4>Course Share %<span class="pull-right">:</span></h4>
+                    </div>
+                    <div class="col-md-9">
+                        <input type="text" class="form-control margin-bottom-20" name="courseSharePercentage" ng-model="paypalSettings.coursepurchaseshare" maxlength="5" required validate-Float>
+                         <span ng-show="paypalSettingsForm.courseSharePercentage.$dirty&&paypalSettingsForm.courseSharePercentage.$invalid">
+                                <span class="error-message" ng-show="paypalSettingsForm.courseSharePercentage.$error.required"><span>Required.</span></span>
+                              <span class="error-message" ng-show="!paypalSettingsForm.courseSharePercentage.$error.required&&paypalSettingsForm.courseSharePercentage.$error.validateFloat"><span>Invalid&nbsp;Format.</span></span>
+                         </span>
+                    </div>
+                    <div class="col-md-3">
+                        <h4>Coach Share %<span class="pull-right">:</span></h4>
+                    </div>
+                    <div class="col-md-9">
+                        <input type="text" class="form-control margin-bottom-20" name="coachSharePercentage" ng-model="paypalSettings.coachsubscribeshare" maxlength="5" required validate-Float>
+                         <span ng-show="paypalSettingsForm.coachSharePercentage.$dirty&&paypalSettingsForm.coachSharePercentage.$invalid">
+                                <span class="error-message" ng-show="paypalSettingsForm.coachSharePercentage.$error.required"><span>Required.</span></span>
+                              <span class="error-message" ng-show="!paypalSettingsForm.coachSharePercentage.$error.required&&paypalSettingsForm.coachSharePercentage.$error.validateFloat"><span>Invalid&nbsp;Format.</span></span>
+                         </span>
+                    </div>
+                   <!-- <div class="col-md-3">
+                        <h4>Paypal Type <span class="pull-right">:</span></h4>
+                    </div>
+                    <div class="col-md-9 margin-bottom-15">
+                        <input type="radio" id="1" name="sex" value="1" ng-model="paypalSettings.paypaltype"   required/>
+                        <label for="1">Live</label>
+                        <input type="radio" id="2" name="sex" value="2" ng-model="paypalSettings.paypaltype"   required/>
+                        <label for="2">Sandbox</label>
+                        &lt;!&ndash;<input type="text" class="form-control margin-bottom-20" name="appId" ng-model="paypalSettings.paypaltype" required>
+                         <span ng-show="paypalSettingsForm.appId.$dirty&&paypalSettingsForm.appId.$invalid">
+                                <span class="error-message" ng-show="paypalSettingsForm.appId.$error.required"><span>Required.</span></span>
+                         </span>&ndash;&gt;
+                    </div>-->
+                  <!--  <div class="col-md-3">
+                        <h4>App ID <span class="pull-right">:</span></h4>
+                    </div>
+                    <div class="col-md-9">
+                        <input type="text" class="form-control margin-bottom-20" name="appId" ng-model="paypalSettings.paypalappid" required>
+                         <span ng-show="paypalSettingsForm.appId.$dirty&&paypalSettingsForm.appId.$invalid">
+                                <span class="error-message" ng-show="paypalSettingsForm.appId.$error.required"><span>Required.</span></span>
+                         </span>
+                    </div>-->
+
+                </div>
+            </form>
+            <div class="text-center">
+                <a id="modal_trigger" href="#updatemodal" onclick="return false;" class="btn btn-success" ng-disabled="doGetPaypalSettings_isClean() || paypalSettingsForm.$invalid" ng-click="updateCheck()">Save Changes</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- create coach popup-->
+<div id="updatemodal" class="popupContainer" style="display:none;">
+    <header class="popupHeader">
+        <span class="header_title">Change Paypal Settings</span>
+        <span class="modal_close"><i class="fa fa-times"></i></span>
+    </header>
+
+    <section class="popupBody">
+        <!-- Register Form -->
+        <div class="common_model">
+            <form name="confirmPasswordForm" novalidate>
+                <h6 class="text-red">Are you sure want to update paypal settings?</h6>
+                <p>Password</p>
+                <input type="password" name="adminPassword" id="pswd" ng-model="paypalSettings.adminPassword" required/>
+                 <span ng-show="confirmPasswordForm.adminPassword.$dirty&&confirmPasswordForm.adminPassword.$invalid && !confirmPasswordForm.confirmPassword.$pristine">
+                    <span class="error-message" ng-show="confirmPasswordForm.adminPassword.$error.required"><span>Required.</span></span>
+                </span>
+                <div class="action_btns margin-top-20">
+                    <div class="one_half"><a class="btn btn_red modal_close" onclick="return false" ng-disabled="confirmPasswordForm.$invalid" ng-click="doUpdatePaypalSettings()">Change Details</a></div>
+                    <div class="one_half last modal_close"><a onclick="return false;" class="btn back_btn">Cancel</a></div>
+                </div>
+            </form>
+        </div>
+    </section>
+</div>
+
+<!-- End Page Banner -->
+
+<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript">
+    $("#modal_trigger").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
+
+    $(function(){
+        $(".common_model").show();
+    })
+</script>

@@ -286,15 +286,14 @@ userApp.controller('DemographyController',['$rootScope','$scope','requestHandler
 
     $scope.maxheight=false;
     $scope.maxCheck = function(height){
-        if(height<394){
+        if(height<393.7){
             $scope.maxheight=false;
         }
-        else if(height>=394){
+        else if(height>=393.7){
             $scope.maxheight=true;
         }
 
     };
-
     $scope.isCleanNutrition =function(){
         return angular.equals(originalNutrition, $scope.nutrients);
     };

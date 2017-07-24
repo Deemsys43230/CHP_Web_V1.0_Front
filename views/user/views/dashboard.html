@@ -86,7 +86,8 @@
                             </div>
                                  
                             <div class="col-lg-6 col-md-6 col-sm-6 no-padding margin-top-20">
-                                <span class="weight-text-font">{{weightlog}} <small><span ng-show="userProfile.unitPreference==1">Kgs</span><span ng-show="userProfile.unitPreference==2">lbs</span></small></span>
+                                <span class="weight-text-font">{{weightlog}}&nbsp;<small><span ng-show="userProfile.unitPreference==1">Kgs</span><span ng-show="userProfile.unitPreference==2">lbs</span></small></span>
+                               <!-- <span class="weight-text-font">{{fat}}&nbsp;(%)</span>-->
                             </div>
                         </form>
                     </div>                       
@@ -657,12 +658,14 @@
                                         <form name="weightLogForm" novalidate>
                                             <div class="col-lg-12 col-md-12 col-sm-12 no-padding">
                                                 <div class="col-lg-6 col-md-6 col-sm-6 no-padding margin-top-15">
-                                                    <span>Weight <small>(<span ng-show="userProfile.unitPreference==1">Kgs</span><span ng-show="userProfile.unitPreference==2">lbs</span>)</small><span class="pull-right">:</span></span>
+                                                    <span>Weight {{weightlogdetails}} <small>(<span ng-show="userProfile.unitPreference==1">Kgs</span><span ng-show="userProfile.unitPreference==2">lbs</span>)</small><span class="pull-right">:</span></span>
                                                 </div>
                                                 <div class="col-lg-6 col-md-6 col-sm-6 margin-top-10 no-padding-right padding-left-8">
-                                                    <input class="profile_input weightoverride" id="weightLog" name="curweight" ng-model="weightlog" maxlength="5" required valid-decimalnumber />
-                                                <span ng-show="weightLogForm.curweight.$dirty&&weightLogForm.curweight.$invalid">
+                                                    <input class="profile_input weightoverride" id="weightLog" name="curweight" ng-model="weightlog" maxlength="6" required valid-decimalnumber/>
+                                                    <!--<span class="error-message textarea-errormessage40-right60" ng-show="weightLogForm.curweight.$error.required&&maxweight"><span>Weight&nbsp;should&nbsp;not&nbsp;exceed&nbsp;2205</span></span>-->
+                                                    <span ng-show="weightLogForm.curweight.$dirty&&weightLogForm.curweight.$invalid">
                                                     <span class="error-message textarea-errormessage10" ng-show="weightLogForm.curweight.$error.required"><span>Required.</span></span>
+                                                    <!--<span class="error-message textarea-errormessage10" ng-show="weightLogForm.curweight.$error.validDecimalnumber"><span>Invalid Format.</span></span>-->
                                                 </span>
                                                 </div>
                                             </div>
@@ -671,16 +674,16 @@
                                         <form name="fatLogForm" novalidate>
                                             <div class="col-lg-12 col-md-12 col-sm-12 no-padding">
                                                 <div class="col-lg-6 col-md-6 col-sm-6 no-padding margin-top-10">
-                                                    <span>Fat <small>(<span>%</span>)</small><span class="pull-right">:</span></span>
+                                                    <span>Fat<small>(<span>%</span>)</small><span class="pull-right">:</span></span>
                                                 </div>
                                                 <div class="col-lg-6 col-md-6 col-sm-6 margin-top-10 no-padding-right padding-left-8">
                                                     <input class="profile_input weightoverride" id="fatLog" name="curfat" ng-model="fat" maxlength="5" required valid-decimalnumber />
                                                 <span ng-show="fatLogForm.curfat.$dirty&&fatLogForm.curfat.$invalid">
-                                                    <span class="error-message textarea-errormessage10" ng-show="fatLogForm.curfat.$error.required"></span>
+                                                    <!--<span class="error-message textarea-errormessage10" ng-show="fatLogForm.curfat.$error.required"><span>Required.</span></span>-->
                                                 </span>
                                                 </div>
                                                 <div class="col-lg-12 col-md-12 col-sm-12 text-center margin-top-20">
-                                                    <button onclick="return false;" class="btn-dis suggest_button override-width no-margin-bottom" ng-disabled="weightLogForm.$invalid || spinner || disableUpdateWeight" ng-click="weightLogEntry(1)">
+                                                    <button onclick="return false;" class="btn-dis suggest_button override-width no-margin-bottom" ng-disabled="weightLogForm.$invalid || fatLogForm.$invalid ||spinner || disableUpdateWeight" ng-click="weightLogEntry(1)">
                                                         <span ng-if="spinner"><span class="three-quarters-loader">Loading…</span></span>{{weightUpdateText}}</button><br/>
                                                 </div>
                                             </div>
@@ -715,17 +718,21 @@
                                                     <span>Log Water</span>
                                                 </div>
                                                 <div class="col-lg-5 col-md-5 col-sm-5 margin-top-5">
-                                                    <input class="profile_input weightoverride " type="text" id="waterLog" name="curwater" ng-model="addlog" maxlength="5" required valid-decimalnumber style="width: 70px;"/>
+                                                    <input class="profile_input weightoverride " type="text" id="waterLog" name="curwater" ng-model="addlog" ng-pattern="/^0*[1-9]\d*$/" maxlength="5" required  style="width: 70px;"/>
                                                 <span ng-show="waterLogForm.curwater.$dirty&&waterLogForm.curwater.$invalid">
                                                     <span class="error-message textarea-errormessage10" ng-show="waterLogForm.curwater.$error.required"><span>Required.</span></span>
-                                                </span>
+                                                    <span class="error-message textarea-errormessage10" ng-show="waterLogForm.curwater.$error.pattern"><span>Invalid&nbsp;Format.</span></span>
+                                                 </span>
                                                 </div>
                                                 <div class="col-lg-7 col-md-7 col-sm-7 margin-top-5">
-                                                    <select class="profile_input weightoverride full-width main" ng-model="addlogUnit" style="width: 70px;">
-                                                        <option value="" default selected>Select</option>
+                                                    <select class="profile_input weightoverride full-width main" name="addlogUnit" ng-model="addlogUnit" style="width: 70px;" required>
+                                                        <option value="" defalut selected>Select</option>
                                                         <option value="1">ml</option>
                                                         <option value="2">oz</option>
                                                     </select>
+                                                      <span ng-show="waterLogForm.addlogUnit.$dirty&&waterLogForm.addlogUnit.$invalid">
+                                                    <span class="error-message textarea-errormessage10" ng-show="waterLogForm.addlogUnit.$error.required"><span>Required.</span></span>
+                                                    </span>
                                                 </div>
 
                                                 <div class="col-lg-6 col-md-6 col-sm-6 text-center margin-top-5 pull-right">

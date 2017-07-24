@@ -82,11 +82,12 @@
         <h5>Weight <sup class="text-red">*</sup><span ng-show="userProfile.unitPreference==1"><small>(kgs)</small></span> <span ng-show="userProfile.unitPreference==2"><small>(lbs)</small></span>  <span class="pull-right">:</span> </h5>
     </div>
     <div class="col-lg-4 col-md-5 col-sm-5 padding-right-0">
-        <input class="demography_input" name="weight" maxlength="5" ng-model="demography.weight" ng-change="planChangeValidation(demography.userPlanType)" required valid-decimalnumber />
-                                 <span ng-show="demographyForm.weight.$dirty&&demographyForm.weight.$invalid">
-                                 <span class="error-message textarea-errormessage40" ng-show="demographyForm.weight.$error.required"><span>Required.</span></span>
-                                 <!--<span class="error-message textarea-errormessage40" ng-show="!demographyForm.weight.$error.required && demographyForm.weight.$error.validateFloat1"><span>Invalid&nbsp;Format.</span></span>-->
-                            </span>
+        <input class="demography_input" name="weight" maxlength="6" ng-model="demography.weight" ng-pattern="/^[0-9]/" ng-change="planChangeValidation(demography.userPlanType);" required/>
+              <span ng-show="demographyForm.weight.$dirty&&demographyForm.weight.$invalid">
+              <span class="error-message textarea-errormessage40" ng-show="demographyForm.weight.$error.required"><span>Required.</span></span>
+              <span class="error-message textarea-errormessage40" ng-show="demographyForm.weight.$error.pattern"><span>Invalid&nbsp;Format.</span></span>
+              <!--<span class="error-message textarea-errormessage40" ng-show="!demographyForm.weight.$error.required && demographyForm.weight.$error.validateFloat1"><span>Invalid&nbsp;Format.</span></span>-->
+              </span>
     </div>
 </div>
 <div class="col-lg-6 col-md-6 col-sm-12 margin-top-15">
@@ -94,7 +95,7 @@
         <h5>Hip <sup class="text-red">*</sup> <small>(Inches)</small> <span class="pull-right">:</span></h5>
     </div>
     <div class="col-lg-4 col-md-5 col-sm-5 padding-right-0">
-        <input class="demography_input" name="hip" ng-pattern="/^[0-9]{1,8}$/" maxlength="2"  ng-model="demography.hip" required/>
+        <input class="demography_input" name="hip" ng-pattern="/^0*[1-9]\d*$/" maxlength="2"  ng-model="demography.hip" required/>
                             <span ng-show="demographyForm.hip.$dirty&&demographyForm.hip.$invalid">
                                 <span class="error-message textarea-errormessage40" ng-show="demographyForm.hip.$error.required"><span>Required.</span></span>
                                 <span class="error-message textarea-errormessage40" ng-show="demographyForm.hip.$error.pattern"><span>Invalid&nbsp;Format.</span></span>
@@ -106,7 +107,7 @@
         <h5>Waist <sup class="text-red">*</sup><small>(Inches)</small> <span class="pull-right">:</span></h5>
     </div>
     <div class="col-lg-4 col-md-5 col-sm-5 padding-right-0">
-        <input class="demography_input" name="waist" ng-pattern="/^[0-9]{1,8}$/" maxlength="2"  ng-model="demography.waist" required/>
+        <input class="demography_input" name="waist" ng-pattern="/^0*[1-9]\d*$/" maxlength="2"  ng-model="demography.waist" required/>
                             <span ng-show="demographyForm.waist.$dirty&&demographyForm.waist.$invalid">
                                 <span class="error-message textarea-errormessage40" ng-show="demographyForm.waist.$error.required"><span>Required.</span></span>
                                 <span class="error-message textarea-errormessage40" ng-show="demographyForm.waist.$error.pattern"><span>Invalid&nbsp;Format.</span></span>
@@ -118,7 +119,7 @@
         <h5>BMI <small>(Kg/m<sup>2</sup>)</small> <span class="pull-right">:</span><span class="pull-right">&nbsp;<a href="" data-toggle="popover" data-trigger="hover" title="BMI" data-content="The weight in kilograms divided by the square of the height in meters, a measure of body fat that gives an indication of nutritional status."><i class="fa fa-info-circle"></i></a>&nbsp;</span></h5>
     </div>
     <div class="col-lg-4 col-md-5 col-sm-5 padding-right-0">
-        <input class="demography_input" name="bmi"  ng-model="demography.bmi"/>
+        <input class="demography_input" name="bmi"  ng-model="demography.bmi" ng-disabled="true"/>
     </div>
 </div>
 <div class="col-lg-12 col-md-12 col-sm-12">
@@ -142,7 +143,7 @@
         <h5>Protein <small>(g)</small> <span class="pull-right">:</span></h5>
     </div>
     <div class="col-lg-4 col-md-5 col-sm-5 padding-right-0">
-        <input class="demography_input" name="protein" ng-model="demography.protein"/>
+        <input class="demography_input" name="protein" ng-model="demography.protein" ng-disabled="true"/>
     </div>
 </div>
 <div class="col-lg-6 col-md-6 col-sm-12 margin-top-15">
@@ -150,7 +151,7 @@
         <h5>Fat  <small>(g)</small> <span class="pull-right">:</span></h5>
     </div>
     <div class="col-lg-4 col-md-5 col-sm-5 padding-right-0">
-        <input class="demography_input" name="fat" ng-model="demography.fat"/>
+        <input class="demography_input" name="fat" ng-model="demography.fat" ng-disabled="true"/>
     </div>
 </div>
 <div class="col-lg-6 col-md-6 col-sm-12 margin-top-15">
@@ -158,7 +159,7 @@
         <h5>Carbo Hydrate <small>(g)</small> <span class="pull-right">:</span></h5>
     </div>
     <div class="col-lg-4 col-md-5 col-sm-5 padding-right-0">
-        <input class="demography_input" name="carbo" ng-model="demography.carbo"/>
+        <input class="demography_input" name="carbo" ng-model="demography.carbo" ng-disabled="true"/>
     </div>
 </div>
 <div class="col-lg-6 col-md-6 col-sm-12 margin-top-15">
@@ -166,7 +167,7 @@
         <h5>Fiber <small>(g)</small> <span class="pull-right">:</span></h5>
     </div>
     <div class="col-lg-4 col-md-5 col-sm-5 padding-right-0">
-        <input class="demography_input" name="fibre" ng-model="demography.fibre"/>
+        <input class="demography_input" name="fibre" ng-model="demography.fibre" ng-disabled="true"/>
     </div>
 </div>
 <div class="col-lg-12 col-md-12 col-sm-12">
@@ -202,9 +203,9 @@
         <h5>Systolic Blood Pressure <small>(mmHg)</small> <span class="pull-right">:</span><span class="pull-right">&nbsp;<a href="" data-toggle="popover" data-trigger="hover" title="Systolic Blood Pressure" data-content="When your heart beats, it contracts and pushes blood through the arteries to the rest of your body.This force creates pressure on the arteries.This is called systolic blood pressure."><i class="fa fa-info-circle"></i></a>&nbsp; </span> </h5>
     </div>
     <div class="col-lg-4 col-md-5 col-sm-5 padding-right-0">
-        <input class="demography_input" name="systolicbloodpressure" maxlength="6" ng-model="demography.systolicbloodpressure" validate-Float1/>
+        <input class="demography_input" name="systolicbloodpressure" maxlength="3" ng-model="demography.systolicbloodpressure" ng-pattern="/^\-?\d+((\.|\,)\d+)?$/"/>
                             <span ng-show="demographyForm.systolicbloodpressure.$dirty&&demographyForm.systolicbloodpressure.$invalid">
-                                <span class="error-message textarea-errormessage40" ng-show="demographyForm.systolicbloodpressure.$error.validateFloat1"><span>Invalid&nbsp;Format.</span></span>
+                                <span class="error-message textarea-errormessage40" ng-show="demographyForm.systolicbloodpressure.$error.pattern"><span>Invalid&nbsp;Format.</span></span>
                             </span>
     </div>
 </div>
@@ -213,9 +214,9 @@
         <h5>Diastollic Blood Pressure <small>(mmHg)</small> <span class="pull-right">:</span><span class="pull-right">&nbsp;<a href="" data-toggle="popover" data-trigger="hover" title="Diastollic Blood Pressure" data-content="The diastolic blood pressure number or the bottom number indicates the pressure in the arteries when heart rest between beats."><i class="fa fa-info-circle"></i></a>&nbsp; </span> </h5>
     </div>
     <div class="col-lg-4 col-md-5 col-sm-5 padding-right-0">
-        <input class="demography_input" name="diastolicbloodpressure" maxlength="6"  ng-model="demography.diastolicbloodpressure" validate-Float1/>
+        <input class="demography_input" name="diastolicbloodpressure" maxlength="3"  ng-model="demography.diastolicbloodpressure" ng-pattern="/^\-?\d+((\.|\,)\d+)?$/"/>
                             <span ng-show="demographyForm.diastolicbloodpressure.$dirty&&demographyForm.diastolicbloodpressure.$invalid">
-                                <span class="error-message textarea-errormessage40" ng-show="demographyForm.diastolicbloodpressure.$error.validateFloat1"><span>Invalid&nbsp;Format.</span></span>
+                                <span class="error-message textarea-errormessage40" ng-show="demographyForm.diastolicbloodpressure.$error.pattern"><span>Invalid&nbsp;Format.</span></span>
                             </span>
     </div>
 </div>
@@ -399,23 +400,22 @@
         <div class="col-lg-6 col-md-6 col-sm-5 padding-right-0">
             <checkbox-group>
                                 <span class="fh-checkbox">
-                                    <input type="checkbox" id="type1" name="obesity" ng-model="demography.obesity" ng-true-value="'1'" ng-false-value="'0'"  ng-checked="demography.obesity=='1'">
+                                    <input type="checkbox" id="type1" name="obesity" onclick="return false;" ng-model="demography.obesity" ng-true-value="'1'" ng-false-value="'0'"  ng-checked="demography.obesity=='1'" readonly="true">
                                     <label for="type1">Obese</label>
                                 </span>
             </checkbox-group>
             <checkbox-group>
                                 <span class="fh-checkbox">
-                                    <input type="checkbox" id="type2" name="diabetes" ng-model="demography.diabetes" ng-true-value="'1'" ng-false-value="'0'"  ng-checked="demography.diabetes=='1'">
+                                    <input type="checkbox" id="type2" name="diabetes" onclick="return false;" ng-model="demography.diabetes" ng-true-value="'1'" ng-false-value="'0'"  ng-checked="demography.diabetes=='1'" readonly="true">
                                     <label for="type2">Diabetic</label>
                                  </span>
             </checkbox-group>
 
 
         </div>
-        <div class="col-lg-12 col-md-12 col-sm-12 demo_status">
+        <!--<div class="col-lg-12 col-md-12 col-sm-12 demo_status">
             {{demography.obesity==1?'Diabetic':(demography.diabetes==1?'Diabetic':'Pre Diabetic')}}
-
-        </div>
+         </div>-->
     </div>
 
 
@@ -447,7 +447,7 @@
         </div>
         <div class="col-lg-6 col-md-6 col-sm-5 padding-right-0">
 
-            <input class="demography_input"  name="targetWeight" ng-model="demography.targetweight" ng-required="demography.userPlanType==2 || demography.userPlanType == 3"  ng-change="planChangeValidation(demography.userPlanType)" maxlength="5" valid-decimalnumber/>
+            <input class="demography_input"  name="targetWeight" ng-model="demography.targetweight" ng-required="demography.userPlanType==2 || demography.userPlanType == 3"  ng-change="planChangeValidation(demography.userPlanType);" maxlength="6"/>
         </div>
         <span class="error-message textarea-errormessage40" ng-show="!demographyForm.targetWeight.$error.required&&weightlossError"><span>Should&nbsp;be&nbsp;less&nbsp;than&nbsp;your&nbsp;weight</span></span>
         <span class="error-message textarea-errormessage40" ng-show="!demographyForm.targetWeight.$error.required&&weightgainError"><span>Should&nbsp;be&nbsp;greater&nbsp;than&nbsp;your&nbsp;weight</span></span>

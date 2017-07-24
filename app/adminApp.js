@@ -800,7 +800,41 @@ adminApp.config([
         ]
       },
       controller: 'PaypalSettingsController'
-    }).when('/social-media-settings', {
+    }).when('/razor-payment-settings', {
+            templateUrl: 'views/settings-razor.html',
+            resolve: {
+                loadMyFiles: [
+                    '$ocLazyLoad',
+                    function ($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name: 'adminApp',
+                            files: [
+                                '../../plugin/popup/style.css',
+                                '../../app/settings/razorSettingsController.js'
+                            ]
+                        });
+                    }
+                ]
+            },
+            controller: 'RazorSettingsController'
+        }).when('/authorizeNet-payment-settings', {
+            templateUrl: 'views/settings-authorizeNet.html',
+            resolve: {
+                loadMyFiles: [
+                    '$ocLazyLoad',
+                    function ($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name: 'adminApp',
+                            files: [
+                                '../../plugin/popup/style.css',
+                                '../../app/settings/authorizeNetSettingsController.js'
+                            ]
+                        });
+                    }
+                ]
+            },
+            controller: 'AuthorizeNetSettingsController'
+        }).when('/social-media-settings', {
       templateUrl: 'views/settings-socialmedia.html',
       resolve: {
         loadMyFiles: [
@@ -2270,6 +2304,18 @@ adminApp.factory('siteMenuService', function () {
         'icon': 'dollar',
         'href': 'paypal-settings',
         'active': ''
+      },
+      {
+          'name': 'Razor Settings',
+          'icon': 'dollar',
+          'href': 'razor-payment-settings',
+          'active': ''
+      },
+      {
+          'name': 'Authorize.Net Settings',
+          'icon': 'credit-card',
+          'href': 'authorizeNet-payment-settings',
+          'active': ''
       },
       {
         'name': 'Server',
