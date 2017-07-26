@@ -317,20 +317,23 @@ userApp.controller('DemographyController',['$rootScope','$scope','requestHandler
        // $scope.weight=$scope.demography.weight.toString();
         //$scope.targetweight =$scope.demography.targetweight.toString();
     };
+
+
    //To Check maximum height
     $scope.maxheight=false;
-    $scope.maxCheck = function(height){
-        if(parseFloat(height)<393.7){
+    $scope.maxHeightCheck = function(height){
+        if(height<393.7){
             $scope.maxheight=false;
         }
-        else if(parseFloat(height)>=393.7){
+        else if(height>=393.7){
             $scope.maxheight=true;
         }
+
     };
 
     //To check maximum Weight
     $scope.maxweight=false;
-    $scope.maxCheck = function(weight){
+    $scope.maxWeightCheck = function(weight){
         if(weight<2204.4){
             $scope.maxweight=false;
         }
