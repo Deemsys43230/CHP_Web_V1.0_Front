@@ -21,9 +21,8 @@
         <h5>Height<sup class="text-red">*</sup> <span ng-show="userProfile.unitPreference==1"><small>(cms)</small></span> <span ng-show="userProfile.unitPreference==2"><small>(feet,inches)</small></span> <span class="pull-right">:</span></h5>
     </div>
     <div class="col-lg-4 col-md-5 col-sm-5 padding-right-0">
-                                <span ng-show="userProfile.unitPreference==2"  onchange="angular.element(this).scope().bmiCalculation(this)" >
-
-                                    <select  class="form-control main" style="width:49px;" id="heightfeet" name="heightFeet" ng-model="demography.heightFeet" ng-required="userProfile.unitPreference==2">
+                                <span ng-show="userProfile.unitPreference==2">
+                                    <select  class="form-control main" style="width:49px;" id="heightfeet" name="heightFeet" ng-model="demography.heightFeet" ng-required="userProfile.unitPreference==2" onchange="angular.element(this).scope().bmiCalculation(this)">
                                         <option value="">--Feet--</option>
                                         <option value="1">1</option>
                                         <option value="2">2</option>
@@ -38,7 +37,7 @@
                                         <option value="11">11</option>
                                         <option value="12">12</option>
                                     </select>
-                                    <select  class="form-control main" style="width:49px;margin-top: -28px;margin-left: 51px;"  id="heightinches" name="heightInches"  ng-model="demography.heightInches" ng-required="userProfile.unitPreference==2">
+                                    <select  class="form-control main" style="width:49px;margin-top: -28px;margin-left: 51px;"  id="heightinches" name="heightInches"  ng-model="demography.heightInches" ng-required="userProfile.unitPreference==2" onchange="angular.element(this).scope().bmiCalculation(this)">
                                         <option value="">--Inches--</option>
                                         <option value="1">1</option>
                                         <option value="2">2</option>
@@ -59,10 +58,10 @@
                                    <span class="error-message textarea-errormessage8-right20" ng-show="demographyForm.heightInches.$error.required"><span>Required.</span></span>
                                </span>
                                 </span>
-                                <span ng-show="userProfile.unitPreference==1"  onchange="angular.element(this).scope().bmiCalculation(this)">
-                                     <input class="demography_input" maxlength="5" id="height" name="height" ng-pattern="/^[0-9]/" oninput="maxLengthCheck(this)" ng-model="demography.height"  ng-required="userProfile.unitPreference==1" ng-change="maxCheck(demography.height)"/>
-                                <span class="error-message textarea-errormessage40-right60" ng-show="!demographyForm.targetWeight.$error.required&&maxheight"><span>Height&nbsp;should&nbsp;not&nbsp;exceed&nbsp;394</span></span>
-                                <span ng-show="demographyForm.height.$dirty&&demographyForm.height.$invalid">
+                                <span ng-show="userProfile.unitPreference==1">
+                                     <input class="demography_input" maxlength="5" id="height" name="height" ng-pattern="/^[0-9]/" ng-model="demography.height" ng-required="userProfile.unitPreference==1" ng-change="maxCheck(demography.height)" required onchange="angular.element(this).scope().bmiCalculation(this)"/>
+                                     <span ng-show="demographyForm.height.$dirty&&demographyForm.height.$invalid">
+                                    <span class="error-message textarea-errormessage40-right60" ng-show="!demographyForm.height.$error.required&&maxheight"><span>Height&nbsp;should&nbsp;not&nbsp;exceed&nbsp;394</span></span>
                                      <span class="error-message textarea-errormessage40" ng-show="demographyForm.height.$error.required"><span>Required.</span></span>
                                     <span class="error-message textarea-errormessage40" ng-show="demographyForm.height.$error.pattern"><span>Invalid&nbsp;Format.</span></span>
                                 </span>
@@ -75,16 +74,16 @@
         <h5>Weight <sup class="text-red">*</sup><span ng-show="userProfile.unitPreference==1"><small>(kgs)</small></span> <span ng-show="userProfile.unitPreference==2"><small>(lbs)</small></span>  <span class="pull-right">:</span> </h5>
     </div>
     <div class="col-lg-4 col-md-5 col-sm-5 padding-right-0">
-        <span ng-show="userProfile.unitPreference==1"  onchange="angular.element(this).scope().bmiCalculation(this)">
-        <input class="demography_input" id="weightkgs" name="weight" maxlength="5" ng-model="demography.weight" ng-change="planChangeValidation(demography.userPlanType);" required valid-float1/>
+        <span ng-show="userProfile.unitPreference==1">
+        <input class="demography_input" id="weightkgs" name="weight" maxlength="5" ng-model="demography.weight" ng-change="planChangeValidation(demography.userPlanType);" required valid-float1 onchange="angular.element(this).scope().bmiCalculation(this)"/>
            <span ng-show="demographyForm.weight.$dirty&&demographyForm.weight.$invalid">
                <span class="error-message textarea-errormessage40" ng-show="demographyForm.weight.$error.required"><span>Required.</span></span>
                <span class="error-message textarea-errormessage40" ng-show="demographyForm.weight.$error.validFloat1"><span>Invalid&nbsp;Format.</span></span>
            </span>
         </span>
-        <span ng-show="userProfile.unitPreference==2" onchange="angular.element(this).scope().bmiCalculation(this)">
-        <input class="demography_input" name="weight" id="weightlbs" maxlength="6" ng-model="demography.weight" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" ng-required="userProfile.unitPreference==2" ng-change="planChangeValidation(demography.userPlanType);maxCheck(demography.weight)" required/>
-        <span class="error-message textarea-errormessage40-right60" ng-show="!demographyForm.targetWeight.$error.required&&maxweight"><span>Please&nbsp;Enter&nbsp;Valid&nbsp;Weight.</span></span>
+        <span ng-show="userProfile.unitPreference==2" >
+        <input class="demography_input" name="weight" id="weightlbs" maxlength="6" ng-model="demography.weight" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" ng-required="userProfile.unitPreference==2" ng-change="planChangeValidation(demography.userPlanType);maxCheck(demography.weight)" required onchange="angular.element(this).scope().bmiCalculation(this)"/>
+        <span class="error-message textarea-errormessage40-right60" ng-show="!demographyForm.weight.$error.required&&maxweight"><span>Please&nbsp;Enter&nbsp;Valid&nbsp;Weight.</span></span>
            <span ng-show="demographyForm.weight.$dirty&&demographyForm.weight.$invalid">
                <span class="error-message textarea-errormessage40" ng-show="demographyForm.weight.$error.required"><span>Required.</span></span>
                <span class="error-message textarea-errormessage40" ng-show="demographyForm.weight.$error.pattern"><span>Invalid&nbsp;Format.</span></span>
@@ -448,8 +447,9 @@
             <h5>Target Weight <span ng-show="userProfile.unitPreference==1"><small>(kgs)</small></span> <span ng-show="userProfile.unitPreference==2"><small>(lbs)</small></span> <span class="pull-right">:</span></h5>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-5 padding-right-0">
-           <input class="demography_input"  name="targetWeight" maxlength="6" ng-model="demography.targetweight" ng-required="demography.userPlanType==2 || demography.userPlanType == 3"  ng-change="planChangeValidation(demography.userPlanType);"/>
+           <input class="demography_input"  name="targetWeight" maxlength="6" ng-model="demography.targetweight" ng-required="demography.userPlanType==2 || demography.userPlanType == 3"  ng-change="planChangeValidation(demography.userPlanType);maxTargetWeightCheck(demography.targetweight);"/>
         </div>
+        <span class="error-message textarea-errormessage40-right60" ng-show="!demographyForm.targetWeight.$error.required&&maxTargetWeight" style="top:0;left: 30px;"><span>Please&nbsp;Enter&nbsp;Valid&nbsp;Weight.</span></span>
         <span class="error-message textarea-errormessage40" ng-show="!demographyForm.targetWeight.$error.required&&weightlossError"><span>Should&nbsp;be&nbsp;less&nbsp;than&nbsp;your&nbsp;weight</span></span>
         <span class="error-message textarea-errormessage40" ng-show="!demographyForm.targetWeight.$error.required&&weightgainError"><span>Should&nbsp;be&nbsp;greater&nbsp;than&nbsp;your&nbsp;weight</span></span>
         <span ng-show="demographyForm.targetWeight.$dirty&&demographyForm.targetWeight.$invalid">

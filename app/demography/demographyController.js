@@ -34,6 +34,7 @@ userApp.controller('DemographyController',['$rootScope','$scope','requestHandler
             }
             }
             originalDemography=angular.copy(response.data.Demography_Data);
+            // For onchange event
             $scope.bmiCalculation();
             $scope.bmiCheck();
 
@@ -67,7 +68,6 @@ userApp.controller('DemographyController',['$rootScope','$scope','requestHandler
             $("#heightinches").val($scope.demography.heightInches);
             $("#weightlbs").val($scope.demography.weight);
             var inches = (12* $scope.demography.heightFeet)+(1*  $scope.demography.heightInches);
-            console.log(inches);
             $("#bmivalue").val($scope.calBmi);
             $scope.calBmi=(($scope.demography.weight*703)/(inches*inches)).toFixed(2);
         }
@@ -317,17 +317,18 @@ userApp.controller('DemographyController',['$rootScope','$scope','requestHandler
        // $scope.weight=$scope.demography.weight.toString();
         //$scope.targetweight =$scope.demography.targetweight.toString();
     };
-
+   //To Check maximum height
     $scope.maxheight=false;
     $scope.maxCheck = function(height){
-        if(height<393.7){
+        if(parseFloat(height)<393.7){
             $scope.maxheight=false;
         }
-        else if(height>=393.7){
+        else if(parseFloat(height)>=393.7){
             $scope.maxheight=true;
         }
-
     };
+
+    //To check maximum Weight
     $scope.maxweight=false;
     $scope.maxCheck = function(weight){
         if(weight<2204.4){
@@ -335,6 +336,18 @@ userApp.controller('DemographyController',['$rootScope','$scope','requestHandler
         }
         else if(weight>=2204.4){
             $scope.maxweight=true;
+        }
+
+    };
+
+    //TO check Maximum target Weight
+    $scope.maxTargetWeight=false;
+    $scope.maxTargetWeightCheck = function(targetWeight){
+        if(targetWeight<2204.4){
+            $scope.maxTargetWeight=false;
+        }
+        else if(targetWeight>=2204.4){
+            $scope.maxTargetWeight=true;
         }
 
     };
