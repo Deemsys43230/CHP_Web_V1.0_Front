@@ -22,7 +22,7 @@
     </div>
     <div class="col-lg-4 col-md-5 col-sm-5 padding-right-0">
                                 <span ng-show="userProfile.unitPreference==2">
-                                    <select  class="form-control main" style="width:49px;" id="heightfeet" name="heightFeet" ng-model="demography.heightFeet" ng-required="userProfile.unitPreference==2" onchange="angular.element(this).scope().bmiCalculation(this)">
+                                    <select  class="form-control main" style="width:49px;" id="heightfeet" name="heightFeet" ng-model="demography.heightFeet" ng-required="userProfile.unitPreference==2" ng-change="bmiCalculation();">
                                         <option value="">--Feet--</option>
                                         <option value="1">1</option>
                                         <option value="2">2</option>
@@ -37,7 +37,7 @@
                                         <option value="11">11</option>
                                         <option value="12">12</option>
                                     </select>
-                                    <select  class="form-control main" style="width:49px;margin-top: -28px;margin-left: 51px;"  id="heightinches" name="heightInches"  ng-model="demography.heightInches" ng-required="userProfile.unitPreference==2" onchange="angular.element(this).scope().bmiCalculation(this)">
+                                    <select  class="form-control main" style="width:49px;margin-top: -28px;margin-left: 51px;"  id="heightinches" name="heightInches"  ng-model="demography.heightInches" ng-required="userProfile.unitPreference==2" ng-change="bmiCalculation();">
                                         <option value="">--Inches--</option>
                                         <option value="1">1</option>
                                         <option value="2">2</option>
@@ -59,7 +59,7 @@
                                </span>
                                 </span>
                                 <span ng-show="userProfile.unitPreference==1">
-                                     <input class="demography_input" maxlength="5" id="height" name="height" ng-pattern="/^[0-9]/" ng-model="demography.height"  ng-required="userProfile.unitPreference==1" ng-change="maxHeightCheck(demography.height)" onchange="angular.element(this).scope().bmiCalculation(this)"/>
+                                     <input class="demography_input" maxlength="5" id="height" name="height" ng-pattern="/^[0-9]/" ng-model="demography.height"  ng-required="userProfile.unitPreference==1" ng-change="maxHeightCheck(demography.height);bmiCalculation();"/>
                                 <span class="error-message textarea-errormessage40-right60" ng-show="!demographyForm.height.$error.required&&maxheight"><span>Height&nbsp;should&nbsp;not&nbsp;exceed&nbsp;394</span></span>
                                 <span ng-show="demographyForm.height.$dirty&&demographyForm.height.$invalid">
                                      <span class="error-message textarea-errormessage40" ng-show="demographyForm.height.$error.required"><span>Required.</span></span>
@@ -74,14 +74,14 @@
     </div>
     <div class="col-lg-4 col-md-5 col-sm-5 padding-right-0">
         <span ng-show="userProfile.unitPreference==1">
-        <input class="demography_input" id="weightkgs" name="weight" maxlength="5" ng-model="demography.weight" ng-change="planChangeValidation(demography.userPlanType);" required valid-float1 onchange="angular.element(this).scope().bmiCalculation(this)"/>
+        <input class="demography_input" id="weightkgs" name="weight" maxlength="5" ng-model="demography.weight" ng-change="planChangeValidation(demography.userPlanType);bmiCalculation();" required valid-float1/>
            <span ng-show="demographyForm.weight.$dirty&&demographyForm.weight.$invalid">
                <span class="error-message textarea-errormessage40" ng-show="demographyForm.weight.$error.required"><span>Required.</span></span>
                <span class="error-message textarea-errormessage40" ng-show="demographyForm.weight.$error.validFloat1"><span>Invalid&nbsp;Format.</span></span>
            </span>
         </span>
         <span ng-show="userProfile.unitPreference==2" >
-        <input class="demography_input" name="weight" id="weightlbs" maxlength="6" ng-model="demography.weight" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" ng-required="userProfile.unitPreference==2" ng-change="planChangeValidation(demography.userPlanType);maxWeightCheck(demography.weight)" required onchange="angular.element(this).scope().bmiCalculation(this)"/>
+        <input class="demography_input" name="weight" id="weightlbs" maxlength="6" ng-model="demography.weight" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" ng-required="userProfile.unitPreference==2" ng-change="planChangeValidation(demography.userPlanType);maxWeightCheck(demography.weight);bmiCalculation();" required />
         <span class="error-message textarea-errormessage40-right60" ng-show="!demographyForm.weight.$error.required&&maxweight"><span>Please&nbsp;Enter&nbsp;Valid&nbsp;Weight.</span></span>
            <span ng-show="demographyForm.weight.$dirty&&demographyForm.weight.$invalid">
                <span class="error-message textarea-errormessage40" ng-show="demographyForm.weight.$error.required"><span>Required.</span></span>
@@ -119,7 +119,7 @@
         <h5>BMI <small>(Kg/m<sup>2</sup>)</small> <span class="pull-right">:</span><span class="pull-right">&nbsp;<a href="" data-toggle="popover" data-trigger="hover" title="BMI" data-content="The weight in kilograms divided by the square of the height in meters, a measure of body fat that gives an indication of nutritional status."><i class="fa fa-info-circle"></i></a>&nbsp;</span></h5>
     </div>
     <div class="col-lg-4 col-md-5 col-sm-5 padding-right-0">
-        <input class="demography_input" name="bmi"  id="bmivalue" ng-model="demography.bmi" ng-disabled="true" onchange="angular.element(this).scope().bmiCalculation(this)" value={{calBmi}}>
+        <input class="demography_input" name="bmi"  id="bmivalue" ng-model="demography.bmi" ng-disabled="true">
     </div>
 </div>
 <div class="col-lg-12 col-md-12 col-sm-12">
@@ -401,13 +401,13 @@
             <checkbox-group>
                                 <span class="fh-checkbox">
                                     <input type="checkbox" id="type1" name="obesity" onclick="return false;" ng-model="demography.obesity" ng-true-value="'1'" ng-false-value="'0'"  ng-checked="demography.obesity=='1'" readonly="true">
-                                    <label for="type1">Obese</label>
+                                    <label for="type1"  style="cursor:default;">Obese</label>
                                 </span>
             </checkbox-group>
             <checkbox-group>
                                 <span class="fh-checkbox">
                                     <input type="checkbox" id="type2" name="diabetes" onclick="return false;" ng-model="demography.diabetes" ng-true-value="'1'" ng-false-value="'0'"  ng-checked="demography.diabetes=='1'" readonly="true">
-                                    <label for="type2">Diabetic</label>
+                                    <label for="type2" style="cursor:default;">Diabetic</label>
                                  </span>
             </checkbox-group>
 

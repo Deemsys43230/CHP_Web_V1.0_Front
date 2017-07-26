@@ -54,26 +54,22 @@ userApp.controller('DemographyController',['$rootScope','$scope','requestHandler
 
     //BMI Calculation for demography page onchange event
     $scope.bmiCalculation=function(){
-        if($scope.userProfile.unitPreference==1){
-            $("#weightkgs").val($scope.demography.weight);
-            $("#height").val($scope.demography.height);
+        if(Number($scope.demography.height)&&Number($scope.demography.weight)){
+             if($scope.userProfile.unitPreference==1){
+            $scope.demography.bmi="";
             $scope.weightBmi= $scope.demography.weight/0.4536;
             $scope.heightBmi= $scope.demography.height/2.54;
-            $("#bmivalue").val($scope.calBmi);
-            $scope.calBmi=(($scope.weightBmi*703)/($scope.heightBmi*$scope.heightBmi)).toFixed(2);
+            $scope.demography.bmi=parseInt(($scope.weightBmi*703)/($scope.heightBmi*$scope.heightBmi)).toFixed(2);
 
         }
         else if($scope.userProfile.unitPreference==2){
-            $("#heightfeet").val($scope.demography.heightFeet);
-            $("#heightinches").val($scope.demography.heightInches);
-            $("#weightlbs").val($scope.demography.weight);
             var inches = (12* $scope.demography.heightFeet)+(1*  $scope.demography.heightInches);
-            $("#bmivalue").val($scope.calBmi);
-            $scope.calBmi=(($scope.demography.weight*703)/(inches*inches)).toFixed(2);
+            $scope.demography.bmi=(($scope.demography.weight*703)/(inches*inches)).toFixed(2);
         }
 
         //To check the Obesity Status
            $scope.bmiCheck();
+       }       
 
     };
 
@@ -371,16 +367,16 @@ userApp.controller('DemographyController',['$rootScope','$scope','requestHandler
     //For Obesity Condition based on BMI Value
     $scope.bmiCheck=function(){
         $scope.bmiStatus = "";
-        if($scope.calBmi <18.5){
+        if($scope.demography.bmi <18.5){
             $scope.bmiStatus ="You are Suffer UnderWeight";
         }
-        else if($scope.calBmi > 18.5 && $scope.calBmi < 25){
+        else if($scope.demography.bmi > 18.5 && $scope.demography.bmi < 25){
             $scope.bmiStatus ="Healthy";
         }
-        else if($scope.calBmi >25 && $scope.calBmi < 30){
+        else if($scope.demography.bmi >25 && $scope.demography.bmi < 30){
             $scope.bmiStatus ="You are Suffer OverWeight";
         }
-        else if($scope.calBmi >30){
+        else if($scope.demography.bmi >30){
             $scope.bmiStatus ="Obesity";
         }
     };

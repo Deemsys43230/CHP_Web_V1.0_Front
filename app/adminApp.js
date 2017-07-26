@@ -14,7 +14,7 @@ adminApp.config([
       debug: false,
       events: true
     });
-    //Do For Cross Orgin Management
+    //Do For Cross Orgin Managements
     $httpProvider.defaults.withCredentials = true;
     $httpProvider.interceptors.push([
       '$q',
