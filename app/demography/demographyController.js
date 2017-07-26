@@ -34,6 +34,9 @@ userApp.controller('DemographyController',['$rootScope','$scope','requestHandler
             }
             }
             originalDemography=angular.copy(response.data.Demography_Data);
+            $scope.bmiCalculation();
+            $scope.bmiCheck();
+
 
         });
         requestHandler.getRequest("user/getNutrition/","").then(function(response) {
@@ -44,6 +47,34 @@ userApp.controller('DemographyController',['$rootScope','$scope','requestHandler
         },function(){
             errorMessage(Flash,"Please try again later!")
         });
+    };
+
+
+
+    //BMI Calculation for demography page onchange event
+    $scope.bmiCalculation=function(){
+        if($scope.userProfile.unitPreference==1){
+            $("#weightkgs").val($scope.demography.weight);
+            $("#height").val($scope.demography.height);
+            $scope.weightBmi= $scope.demography.weight/0.4536;
+            $scope.heightBmi= $scope.demography.height/2.54;
+            $("#bmivalue").val($scope.calBmi);
+            $scope.calBmi=(($scope.weightBmi*703)/($scope.heightBmi*$scope.heightBmi)).toFixed(2);
+
+        }
+        else if($scope.userProfile.unitPreference==2){
+            $("#heightfeet").val($scope.demography.heightFeet);
+            $("#heightinches").val($scope.demography.heightInches);
+            $("#weightlbs").val($scope.demography.weight);
+            var inches = (12* $scope.demography.heightFeet)+(1*  $scope.demography.heightInches);
+            console.log(inches);
+            $("#bmivalue").val($scope.calBmi);
+            $scope.calBmi=(($scope.demography.weight*703)/(inches*inches)).toFixed(2);
+        }
+
+        //To check the Obesity Status
+           $scope.bmiCheck();
+
     };
 
     $scope.nutritionToString = function(nutrition){
@@ -140,6 +171,7 @@ userApp.controller('DemographyController',['$rootScope','$scope','requestHandler
 
     $scope.doUpdateDemography= function () {
         $rootScope.planHighlight = false;
+
         if($scope.demography.heightFeet && $scope.demography.heightInches){
             $scope.demography.height = $scope.demography.heightFeet +'.'+$scope.demography.heightInches;
 
@@ -159,6 +191,8 @@ userApp.controller('DemographyController',['$rootScope','$scope','requestHandler
         if($scope.demography.diabetes == '0'){
             $scope.demography.diabetes="";
         }
+
+
         requestHandler.getRequest("getUserId/","").then(function(response){
             if(response.data.demography.demoUpdatedstatus==0){
                 $scope.dashboardNavigation = true;
@@ -294,6 +328,16 @@ userApp.controller('DemographyController',['$rootScope','$scope','requestHandler
         }
 
     };
+    $scope.maxweight=false;
+    $scope.maxCheck = function(weight){
+        if(weight<2204.4){
+            $scope.maxweight=false;
+        }
+        else if(weight>=2204.4){
+            $scope.maxweight=true;
+        }
+
+    };
     $scope.isCleanNutrition =function(){
         return angular.equals(originalNutrition, $scope.nutrients);
     };
@@ -306,6 +350,25 @@ userApp.controller('DemographyController',['$rootScope','$scope','requestHandler
             $scope.demography.obesity="";
         }
     };
+
+
+    //For Obesity Condition based on BMI Value
+    $scope.bmiCheck=function(){
+        $scope.bmiStatus = "";
+        if($scope.calBmi <18.5){
+            $scope.bmiStatus ="You are Suffer UnderWeight";
+        }
+        else if($scope.calBmi > 18.5 && $scope.calBmi < 25){
+            $scope.bmiStatus ="Healthy";
+        }
+        else if($scope.calBmi >25 && $scope.calBmi < 30){
+            $scope.bmiStatus ="You are Suffer OverWeight";
+        }
+        else if($scope.calBmi >30){
+            $scope.bmiStatus ="Obesity";
+        }
+    };
+
 
     $scope.getUserId = function () {
 

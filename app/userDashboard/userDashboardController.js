@@ -1225,23 +1225,19 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
                     $scope.originalWeight="";
                     if(id==1)
                         $("#weightLog").val('');
-                    else
+                     else
                         $("#weightLog1").val('');
-
-                }
+                     }
                 else{
                     $scope.weightlog=$scope.originalWeight=weightlogdetails.weight;
                     $scope.fat=$scope.originalFat=weightlogdetails.fat;
-                    console.log($scope.fat);
                     if(id==1){
                         $("#weightLog").val(weightlogdetails.weight);
                         $("#fatLog").val(weightlogdetails.fat);
                     }
                     else{
                         $("#weightLog1").val(weightlogdetails.weight);
-                        $("#fatLogCurrent").val(weightlogdetails.fat);
                     }
-
                 }
             });
         };
@@ -1250,10 +1246,14 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
         $scope.weightLogEntry=function(id){
             $scope.weightUpdateText="Updating...";
             $scope.spinner=true;
-            if(id==1)
-                $scope.doInsertOrUpdateWeightLog($scope.UserDate,parseFloat($("#weightLog").val()),parseFloat($("#fatLog").val()));
-            else
-                $scope.doInsertOrUpdateWeightLog($("#weight-log-date1").val(),parseFloat($("#weightLog1").val()),parseFloat($("#fatLogCurrent").val()));
+            if(id==1){
+                $scope.doInsertOrUpdateWeightLog($scope.UserDate,parseFloat($("#weightLog").val()));
+            }
+
+            else{
+                 $scope.doInsertOrUpdateWeightLog($("#weight-log-date1").val(),parseFloat($("#weightLog1").val()));
+            }
+
         };
 
 
@@ -1333,13 +1333,19 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
         $scope.isCleanWeight1=function(){
             return angular.equals(parseFloat($("#weightLog1").val()), parseFloat($scope.originalWeight));
         };
-        $scope.isCleanFat=function(){
-            return angular.equals(parseFloat($("#fatLog").val()), parseFloat($scope.originalFat));
-        };
-        $scope.isCleanCurrentFat=function(){
-            return angular.equals(parseFloat($("#fatLogCurrent").val()), parseFloat($scope.originalFat));
-        };
 
+
+        //For maximum height validation
+        $scope.maxweight=false;
+        $scope.maxCheck = function(){
+            if(parseFloat($scope.weightlog)<=2204.4){
+                $scope.maxweight=false;
+            }
+            else if($scope.weightlog>2204.4){
+                $scope.maxweight=true;
+            }
+
+        };
 
 
         $scope.doGetWeightLogGraph=function(){
@@ -3733,7 +3739,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
                 $scope.addspin=true;
                 $scope.waterAddText="Updating...";
                 if($scope.addlogUnit==1){
-                    requestHandler.postRequest("user/waterlogInsertorUpdate/",{"date":$scope.UserDate,"milliliters":parseInt($scope.waterlog) + parseInt($scope.addlog),"oz":""}).then(function(response){
+                    requestHandler.postRequest("user/waterlogInsertorUpdate/",{"date":$scope.UserDate,"milliliters":parseInt($scope.waterlog),"oz":""}).then(function(response){
                         $scope.addspin=false;
                         $scope.waterAddText="+ Add";
                         $scope.doGetWaterLog($scope.UserDate);
@@ -3742,7 +3748,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
                     });
                 }
                 else{
-                    requestHandler.postRequest("user/waterlogInsertorUpdate/",{"date":$scope.UserDate,"milliliters":"","oz":parseInt($scope.waterlogoz) + parseInt($scope.addlog)}).then(function(response){
+                    requestHandler.postRequest("user/waterlogInsertorUpdate/",{"date":$scope.UserDate,"milliliters":"","oz":parseInt($scope.waterlogoz)}).then(function(response){
                         $scope.addspin=false;
                         $scope.waterAddText="+ Add";
                         $scope.doGetWaterLog($scope.UserDate);

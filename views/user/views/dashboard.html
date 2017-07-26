@@ -87,7 +87,7 @@
                                  
                             <div class="col-lg-6 col-md-6 col-sm-6 no-padding margin-top-20">
                                 <span class="weight-text-font">{{weightlog}}&nbsp;<small><span ng-show="userProfile.unitPreference==1">Kgs</span><span ng-show="userProfile.unitPreference==2">lbs</span></small></span>
-                               <!-- <span class="weight-text-font">{{fat}}&nbsp;(%)</span>-->
+                              <!--  <span class="weight-text-font">{{fat}}&nbsp;(%)</span>-->
                             </div>
                         </form>
                     </div>                       
@@ -658,13 +658,16 @@
                                         <form name="weightLogForm" novalidate>
                                             <div class="col-lg-12 col-md-12 col-sm-12 no-padding">
                                                 <div class="col-lg-6 col-md-6 col-sm-6 no-padding margin-top-15">
-                                                    <span>Weight {{weightlogdetails}} <small>(<span ng-show="userProfile.unitPreference==1">Kgs</span><span ng-show="userProfile.unitPreference==2">lbs</span>)</small><span class="pull-right">:</span></span>
+                                                    <span>Weight  <small>(<span ng-show="userProfile.unitPreference==1">Kgs</span><span ng-show="userProfile.unitPreference==2">lbs</span>)</small><span class="pull-right">:</span></span>
                                                 </div>
                                                 <div class="col-lg-6 col-md-6 col-sm-6 margin-top-10 no-padding-right padding-left-8">
-                                                    <input class="profile_input weightoverride" id="weightLog" name="curweight" ng-model="weightlog" maxlength="6" required valid-decimalnumber/>
-                                                    <!--<span class="error-message textarea-errormessage40-right60" ng-show="weightLogForm.curweight.$error.required&&maxweight"><span>Weight&nbsp;should&nbsp;not&nbsp;exceed&nbsp;2205</span></span>-->
+                                                    <input class="profile_input weightoverride" id="weightLog" name="curweight" ng-model="weightlog" maxlength="6" ng-change="maxCheck()" required/>
+                                                    <span ng-show="userProfile.unitPreference==2">
+                                                       <span class="error-message textarea-errormessage40-right60" ng-show="!weightLogForm.curweight.$error.required&&maxweight"><span style="bottom: 70px;">Please&nbsp;Enter&nbsp;Valid&nbsp;Weight.</span></span>
+                                                    </span>
                                                     <span ng-show="weightLogForm.curweight.$dirty&&weightLogForm.curweight.$invalid">
                                                     <span class="error-message textarea-errormessage10" ng-show="weightLogForm.curweight.$error.required"><span>Required.</span></span>
+
                                                     <!--<span class="error-message textarea-errormessage10" ng-show="weightLogForm.curweight.$error.validDecimalnumber"><span>Invalid Format.</span></span>-->
                                                 </span>
                                                 </div>
@@ -683,8 +686,8 @@
                                                 </span>
                                                 </div>
                                                 <div class="col-lg-12 col-md-12 col-sm-12 text-center margin-top-20">
-                                                    <button onclick="return false;" class="btn-dis suggest_button override-width no-margin-bottom" ng-disabled="weightLogForm.$invalid || fatLogForm.$invalid ||spinner || disableUpdateWeight" ng-click="weightLogEntry(1)">
-                                                        <span ng-if="spinner"><span class="three-quarters-loader">Loading…</span></span>{{weightUpdateText}}</button><br/>
+                                                    <button onclick="return false;" class="btn-dis suggest_button override-width no-margin-bottom" ng-disabled="weightLogForm.$invalid ||spinner || disableUpdateWeight" ng-click="weightLogEntry(1)">
+                                                      <span ng-if="spinner"><span class="three-quarters-loader">Loading…</span></span>{{weightUpdateText}}</button><br/>
                                                 </div>
                                             </div>
                                         </form>
