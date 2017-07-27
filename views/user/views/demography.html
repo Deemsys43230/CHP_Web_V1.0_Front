@@ -203,7 +203,7 @@
         <h5>Systolic Blood Pressure <small>(mmHg)</small> <span class="pull-right">:</span><span class="pull-right">&nbsp;<a href="" data-toggle="popover" data-trigger="hover" title="Systolic Blood Pressure" data-content="When your heart beats, it contracts and pushes blood through the arteries to the rest of your body.This force creates pressure on the arteries.This is called systolic blood pressure."><i class="fa fa-info-circle"></i></a>&nbsp; </span> </h5>
     </div>
     <div class="col-lg-4 col-md-5 col-sm-5 padding-right-0">
-        <input class="demography_input" name="systolicbloodpressure" maxlength="3" ng-model="demography.systolicbloodpressure" ng-pattern="/^\-?\d+((\.|\,)\d+)?$/"/>
+        <input class="demography_input" name="systolicbloodpressure" maxlength="3" ng-model="demography.systolicbloodpressure" ng-pattern="/^0*[1-9]\d*$/"/>
                             <span ng-show="demographyForm.systolicbloodpressure.$dirty&&demographyForm.systolicbloodpressure.$invalid">
                                 <span class="error-message textarea-errormessage40" ng-show="demographyForm.systolicbloodpressure.$error.pattern"><span>Invalid&nbsp;Format.</span></span>
                             </span>
@@ -214,7 +214,7 @@
         <h5>Diastollic Blood Pressure <small>(mmHg)</small> <span class="pull-right">:</span><span class="pull-right">&nbsp;<a href="" data-toggle="popover" data-trigger="hover" title="Diastollic Blood Pressure" data-content="The diastolic blood pressure number or the bottom number indicates the pressure in the arteries when heart rest between beats."><i class="fa fa-info-circle"></i></a>&nbsp; </span> </h5>
     </div>
     <div class="col-lg-4 col-md-5 col-sm-5 padding-right-0">
-        <input class="demography_input" name="diastolicbloodpressure" maxlength="3"  ng-model="demography.diastolicbloodpressure" ng-pattern="/^\-?\d+((\.|\,)\d+)?$/"/>
+        <input class="demography_input" name="diastolicbloodpressure" maxlength="3"  ng-model="demography.diastolicbloodpressure" ng-pattern="/^0*[1-9]\d*$/"/>
                             <span ng-show="demographyForm.diastolicbloodpressure.$dirty&&demographyForm.diastolicbloodpressure.$invalid">
                                 <span class="error-message textarea-errormessage40" ng-show="demographyForm.diastolicbloodpressure.$error.pattern"><span>Invalid&nbsp;Format.</span></span>
                             </span>

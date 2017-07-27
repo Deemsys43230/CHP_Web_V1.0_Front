@@ -27,7 +27,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
         $scope.weightUpdateText="Update";
         $scope.syncBtnTxt="Sync Now";
         $scope.connectDevice=false;
-        $scope.waterAddText="+ Add";
+        $scope.waterAddText="+ Log";
         $scope.waterReduceText="- Reduce";
         $scope.wearableText="Disconnect";
         $scope.graphs=1;
@@ -3739,18 +3739,18 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
                 $scope.addspin=true;
                 $scope.waterAddText="Updating...";
                 if($scope.addlogUnit==1){
-                    requestHandler.postRequest("user/waterlogInsertorUpdate/",{"date":$scope.UserDate,"milliliters":parseInt($scope.waterlog),"oz":""}).then(function(response){
+                    requestHandler.postRequest("user/waterlogInsertorUpdate/",{"date":$scope.UserDate,"milliliters":parseInt($scope.addlog),"oz":""}).then(function(response){
                         $scope.addspin=false;
-                        $scope.waterAddText="+ Add";
+                        $scope.waterAddText="+ Log";
                         $scope.doGetWaterLog($scope.UserDate);
                     }, function () {
                         errorMessage(Flash, "Please try again later!")
                     });
                 }
                 else{
-                    requestHandler.postRequest("user/waterlogInsertorUpdate/",{"date":$scope.UserDate,"milliliters":"","oz":parseInt($scope.waterlogoz)}).then(function(response){
+                    requestHandler.postRequest("user/waterlogInsertorUpdate/",{"date":$scope.UserDate,"milliliters":"","oz":parseInt($scope.addlog)}).then(function(response){
                         $scope.addspin=false;
-                        $scope.waterAddText="+ Add";
+                        $scope.waterAddText="+ Log";
                         $scope.doGetWaterLog($scope.UserDate);
                     }, function () {
                         errorMessage(Flash, "Please try again later!")
