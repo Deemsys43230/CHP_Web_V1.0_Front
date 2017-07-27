@@ -1,0 +1,11 @@
+
+<div class="row sidebar-active">
+    <div class="col-md-12 margin-bottom-10"><input class="form-control" placeholder="Search menu here..." ng-model="searchMenu"></div>
+	    <div class="col-md-12 no-padding">
+	    	<ul class="sidebar-menu remove-style">
+	    		
+	            <li ng-repeat="coach in coachMenuList | startsWithLetter:searchMenu" class="{{coach.active}}"><a href="#{{coach.href}}"><i class="fa fa-{{coach.icon}}"></i> &nbsp;{{coach.name}}</a></li>
+	        </ul>
+        </div>
+    </div>
+</div>

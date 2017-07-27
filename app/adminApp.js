@@ -14,7 +14,7 @@ adminApp.config([
       debug: false,
       events: true
     });
-    //Do For Cross Orgin Managements
+    //Do For Cross Orgin Management
     $httpProvider.defaults.withCredentials = true;
     $httpProvider.interceptors.push([
       '$q',
@@ -525,6 +525,24 @@ adminApp.config([
         ]
       },
       controller: 'CoachController'
+    }).when('/invitation-list', {
+      templateUrl: 'views/invitation-list.html',
+      resolve: {
+        loadMyFiles: [
+          '$ocLazyLoad',
+          function ($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name: 'adminApp',
+              files: [
+                '../../plugin/popup/style.css',
+                '../../angular/angular-utils-pagination/dirPagination.js',
+                '../../app/coach/coachController.js'
+              ]
+            });
+          }
+        ]
+      },
+      controller: 'CoachController'
     }).when('/coach-view/:id', {
       templateUrl: 'views/coach-view.html',
       resolve: {
@@ -544,6 +562,44 @@ adminApp.config([
         ]
       },
       controller: 'CoachViewController'
+    }).when('/invitation-view/:id', {
+      templateUrl: 'views/invitation-view.html',
+      resolve: {
+        loadMyFiles: [
+          '$ocLazyLoad',
+          function ($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name: 'adminApp',
+              files: [
+                '../../css/profile-image-upload.css',
+                  '../../angular/angular-utils-pagination/dirPagination.js',
+                '../../js/image-upload.js',
+                '../../app/coach/coachController.js'
+              ]
+            });
+          }
+        ]
+      },
+      controller: 'CoachController'
+    }).when('/add-coach/:id', {
+      templateUrl: 'views/add-coach.html',
+      resolve: {
+        loadMyFiles: [
+          '$ocLazyLoad',
+          function ($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name: 'adminApp',
+              files: [
+                '../../css/profile-image-upload.css',
+                  '../../angular/angular-utils-pagination/dirPagination.js',
+                '../../js/image-upload.js',
+                '../../app/coach/coachController.js'
+              ]
+            });
+          }
+        ]
+      },
+      controller: 'CoachController'
     }).when('/coach-edit', {
       templateUrl: 'views/coach-edit.html',
       resolve: {
@@ -800,41 +856,7 @@ adminApp.config([
         ]
       },
       controller: 'PaypalSettingsController'
-    }).when('/razor-payment-settings', {
-            templateUrl: 'views/settings-razor.html',
-            resolve: {
-                loadMyFiles: [
-                    '$ocLazyLoad',
-                    function ($ocLazyLoad) {
-                        return $ocLazyLoad.load({
-                            name: 'adminApp',
-                            files: [
-                                '../../plugin/popup/style.css',
-                                '../../app/settings/razorSettingsController.js'
-                            ]
-                        });
-                    }
-                ]
-            },
-            controller: 'RazorSettingsController'
-        }).when('/authorizeNet-payment-settings', {
-            templateUrl: 'views/settings-authorizeNet.html',
-            resolve: {
-                loadMyFiles: [
-                    '$ocLazyLoad',
-                    function ($ocLazyLoad) {
-                        return $ocLazyLoad.load({
-                            name: 'adminApp',
-                            files: [
-                                '../../plugin/popup/style.css',
-                                '../../app/settings/authorizeNetSettingsController.js'
-                            ]
-                        });
-                    }
-                ]
-            },
-            controller: 'AuthorizeNetSettingsController'
-        }).when('/social-media-settings', {
+    }).when('/social-media-settings', {
       templateUrl: 'views/settings-socialmedia.html',
       resolve: {
         loadMyFiles: [
@@ -2306,18 +2328,6 @@ adminApp.factory('siteMenuService', function () {
         'active': ''
       },
       {
-          'name': 'Razor Settings',
-          'icon': 'dollar',
-          'href': 'razor-payment-settings',
-          'active': ''
-      },
-      {
-          'name': 'Authorize.Net Settings',
-          'icon': 'credit-card',
-          'href': 'authorizeNet-payment-settings',
-          'active': ''
-      },
-      {
         'name': 'Server',
         'icon': 'server',
         'href': 'server-settings',
@@ -2347,6 +2357,27 @@ adminApp.factory('siteMenuService', function () {
     ];
   return site;
 });
+
+adminApp.factory('coachMenuService', function () {
+  var coach = [
+     
+      {
+        'id': 1,
+        'name': 'Invitation List',
+        'icon': 'envelope',
+        'href': 'invitation-list',
+        'active': ''
+      },
+      {
+        'name': 'Coach List', 
+        'icon': 'users',
+        'href': 'coach',
+        'active': ''
+      }];
+  return coach;
+});
+
+
 adminApp.directive('focusMe', [
   '$timeout',
   '$parse',

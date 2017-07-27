@@ -1,9 +1,19 @@
 /**
- * Created by Deemsys on 9/21/2015.
+ * Created by Deemsys on 9/21/2017.
  */
 var adminApp = angular.module('adminApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','angularUtils.directives.dirPagination']);
 
-adminApp.controller('CoachController',['$scope','requestHandler','Flash',function($scope,requestHandler,Flash) {
+adminApp.controller('CoachController',['$scope','requestHandler','Flash','coachMenuService','$location','$routeParams',function($scope,requestHandler,Flash,coachMenuService,$location,$routeParams) {
+    $scope.inviteId = $routeParams.id;
+    console.log($routeParams.id);
+    // For coach management side menu
+    $scope.coachMenuList = coachMenuService;
+    $.each($scope.coachMenuList,function(index,value){
+        if(value.href==$location.path().substr(1)){
+            value.active = "active";
+        }
+        else value.active = ""
+    });
 
     //Get Coach List
     $scope.doGetCoachList=function(){
@@ -14,6 +24,114 @@ adminApp.controller('CoachController',['$scope','requestHandler','Flash',functio
             $scope.paginationLoad=true;
         });
     };
+
+    //Get Invitation List
+    $scope.doGetInvitationList=function(){
+        $scope.loaded=true;
+        requestHandler.getRequest("admin/getinterestedcoachlist/","").then(function(response){
+            $scope.invitationList=response.data.coaches;
+            // console.log($scope.invitationList);
+            $scope.loaded=false;
+            $scope.paginationLoad=true;
+        });
+    };
+
+     //Get Individual Invitation List
+    $scope.doViewInvitationList=function(){
+        $scope.loaded=true;
+        requestHandler.getRequest("admin/getinterestedcoachlist/","").then(function(response){
+            $scope.invitationList=response.data.coaches;
+            console.log($scope.invitationList);
+            $scope.loaded=false;
+            $scope.paginationLoad=true;
+            var coaches = $scope.invitationList;
+
+            //Looping to find the coach detail
+            $.each($scope.invitationList,function(index,value){
+                if(value.id==$routeParams.id){
+                    $scope.invitationDetails=value;
+                }
+            });
+
+        });
+    };
+
+
+    //Post Delete Invitation List
+
+    $scope.doDeleteInvitationList=function(Id){
+        $scope.loaded=true;
+        requestHandler.postRequest("admin/deletecoachinterest/",{"id":$scope.InvitationId}).then(function(response){
+            $scope.loaded=false;
+            $scope.paginationLoad=true;
+            $scope.doGetInvitationList();
+        },function(){
+            errorMessage(Flash,"Please try again later!")
+        });
+    };
+
+    // Do Add as a coach with Edit
+    $scope.doGetInvitationByID = function() {
+        $scope.loaded=true;
+        requestHandler.getRequest("admin/getinterestedcoachlist/","").then(function(response){
+            $scope.invitationList=response.data.coaches;
+            $scope.loaded=false;
+            $scope.paginationLoad=true;
+            var coaches = $scope.invitationList;
+
+            //Looping to find the coach detail
+            $.each($scope.invitationList,function(index,value){
+                if(value.id==$routeParams.id){
+                    $scope.invitationDetails=value;
+                }
+            });
+
+        });
+    };
+
+    //Alert Delete Model
+    $scope.deleteModel=function(Id){
+        $scope.InvitationId = Id;
+        $(function(){
+            $("#lean_overlay").fadeTo(1000);
+            $("#modal").fadeIn(600);
+            $(".common_model").show();
+        });
+
+        $(".modal_close").click(function(){
+            $(".common_model").hide();
+            $("#modal").hide();
+            $("#lean_overlay").hide();
+        });
+
+        $("#lean_overlay").click(function(){
+            $(".common_model").hide();
+            $("#modal").hide();
+            $("#lean_overlay").hide();
+        });
+    };
+
+    //Alert for Confirm add as a coach
+    $scope.confirmModel=function(){
+        $(function(){
+            $("#lean_overlay").fadeTo(1000);
+            $("#modal").fadeIn(600);
+            $(".common_model").show();
+        });
+
+        $(".modal_close").click(function(){
+            $(".common_model").hide();
+            $("#modal").hide();
+            $("#lean_overlay").hide();
+        });
+
+        $("#lean_overlay").click(function(){
+            $(".common_model").hide();
+            $("#modal").hide();
+            $("#lean_overlay").hide();
+        });
+    };
+
 
     //Enable Disable coach
     $scope.doEnableDisableCoach=function(coachId){
@@ -30,11 +148,9 @@ adminApp.controller('CoachController',['$scope','requestHandler','Flash',functio
         });
     };
 
-    //Add New Coach
+    //Add New Coach from coach list and Clik add as a coach button
     $scope.doAddCoach= function () {
-        //Set Coach Role
-        $scope.coach.role=2;
-      requestHandler.postRequest("admin/registerCoach/",$scope.coach).then(function(){
+      requestHandler.postRequest("admin/registerCoach/",$scope.invitationDetails).then(function(){
             successMessage(Flash,"Successfully Registered");
             /*To Close Modal*/
              $(".common_model").hide();
@@ -42,17 +158,28 @@ adminApp.controller('CoachController',['$scope','requestHandler','Flash',functio
              $("#lean_overlay").hide();
           /*End Close Modal*/
           $scope.doGetCoachList();
-          $scope.reset();
+          $location.path('invitation-list');
 
       },function(){
            errorMessage(Flash,"Please Try Again Later");
       });
     };
 
+    //Display view Individual Invitation Details By Id
+    $scope.invitationCoachViewInit=function(){
+        $scope.doViewInvitationList();
+    };
+
+    //Display view Invitation Details for add as a coach
+    $scope.editInvitationInit=function(){
+        $scope.doGetInvitationByID();
+    };
+
     //Initial Load
     $scope.init = function(){
         $scope.paginationLoad=false;
         $scope.doGetCoachList();
+        $scope.doGetInvitationList();
     };
 
     // Search Food Type
@@ -204,6 +331,27 @@ adminApp.filter('startsWithLettercoach', function () {
 
         var filtered = [];
         var letterMatch = new RegExp(coachsearch, 'i');
+        if(!items){}
+        else{
+            for (var i = 0; i < items.length; i++) {
+                var item = items[i];
+                if (letterMatch.test(item.emailid) || letterMatch.test(item.name) ) {
+
+                    filtered.push(item);
+                }
+            }
+
+        }
+        return filtered;
+    };
+});
+
+adminApp.filter('startsWithLettercoach', function () {
+
+    return function (items, invitationsearch) {
+
+        var filtered = [];
+        var letterMatch = new RegExp(invitationsearch, 'i');
         if(!items){}
         else{
             for (var i = 0; i < items.length; i++) {
