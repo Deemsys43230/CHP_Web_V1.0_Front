@@ -623,6 +623,7 @@ commonApp.controller('LoginController',['$scope','requestHandler','Flash','$wind
     });
 
     $scope.reset=function(){
+        $scope.emailNotVerified=false;    
         var loginForm = $element.find('form').eq(0).controller('form');
         loginForm.$setPristine();
         var forgotPasswordForm = $element.find('form').eq(1).controller('form');
@@ -655,6 +656,7 @@ commonApp.controller('LoginController',['$scope','requestHandler','Flash','$wind
                 $(".new_password_form").hide();
                 $(".user_login").show();
                 $(".header_title").text('Login');
+                $scope.emailNotVerified=false;
                 successMessage(Flash,"Please Check your E-mail ID!");
             }
         });
@@ -662,6 +664,7 @@ commonApp.controller('LoginController',['$scope','requestHandler','Flash','$wind
 
     //Login
     $scope.doLogin=function(){
+        $scope.emailNotVerified=false;
         requestHandler.loginRequest($scope.username,$scope.password).then(function(response){
 
             if(response.data.Response_status===0){
@@ -670,6 +673,9 @@ commonApp.controller('LoginController',['$scope','requestHandler','Flash','$wind
             }
             if(response.data.Response_status==="User not allowed"){
                 errorMessage(Flash,"Your Account has been disabled!<br/>Please Contact Administrator.");
+            }
+            if(response.data.Response_status===2){
+                $scope.emailNotVerified=true;
             }
             if(response.data.Response_status===""){
 
@@ -738,38 +744,58 @@ commonApp.controller('LoginController',['$scope','requestHandler','Flash','$wind
 
     //Forgot Password
     $scope.doForgotPassword=function(){
-        //request for secret question
-        requestHandler.postRequest("getSecretQuestion/",{"emailid":$scope.emailid}).then(function(response){
+        if($scope.linkType==='forgot'){
+            //request for secret question
+            requestHandler.postRequest("getSecretQuestion/",{"emailid":$scope.emailid}).then(function(response){
 
-            if(response.data.Response_status==0){
-                errorMessage(Flash,"Email ID doesn't Exist!");
-            }
-            if(response.data.Response_status=="User not allowed"){
-                errorMessage(Flash,"Your Account has been disabled!<br/>Please Contact Administrator.");
-            }
-            else if(response.data.Response_status==1){
-                //Lets show the secret question
-                $(".user_login").hide();
-                $(".reset_password").hide();
-                $(".user_register").hide();
-                $(".secret_question").show();
-                $(".header_title").text('Register');
-                $scope.secretQuestion=response.data.secretquestion;
-            }
-            else if(response.data.Response_status==2){
-                $(".reset_password").hide();
-                $(".user_register").hide();
-                $(".secret_question").hide();
-                $(".user_register1").hide();
-                $(".user_login").show();
-                $(".header_title").text('Login');
-                successMessage(Flash,"Please check your Email<br/>to reset the password!");
-                $scope.emailid="";
-                $scope.forgotPasswordForm.$setPristine();
-            }else if(response.data.Response_status=="User not allowed"){
-                errorMessage(Flash,"Email ID not allowed!");
-            }
-        });
+                if(response.data.Response_status==0){
+                    errorMessage(Flash,"Email ID doesn't Exist!");
+                }
+                if(response.data.Response_status=="User not allowed"){
+                    errorMessage(Flash,"Your Account has been disabled!<br/>Please Contact Administrator.");
+                }
+                else if(response.data.Response_status==1){
+                    //Lets show the secret question
+                    $(".user_login").hide();
+                    $(".reset_password").hide();
+                    $(".user_register").hide();
+                    $(".secret_question").show();
+                    $(".header_title").text('Register');
+                    $scope.secretQuestion=response.data.secretquestion;
+                }
+                else if(response.data.Response_status==2){
+                    $(".reset_password").hide();
+                    $(".user_register").hide();
+                    $(".secret_question").hide();
+                    $(".user_register1").hide();
+                    $(".user_login").show();
+                    $(".header_title").text('Login');
+                    successMessage(Flash,"Please check your Email<br/>to reset the password!");
+                    $scope.emailid="";
+                    $scope.forgotPasswordForm.$setPristine();
+                }else if(response.data.Response_status=="User not allowed"){
+                    errorMessage(Flash,"Email ID not allowed!");
+                }
+            });
+        }else{
+            requestHandler.postRequest("verifyEmailId/",{"emailid":$scope.emailid}).then(function(response){
+                if(response.data.Response_status==2){
+                    errorMessage(Flash,"Email ID doesn't Exist!");
+                }
+                else if(response.data.Response_status==1){
+                    $(".reset_password").hide();
+                    $(".user_register").hide();
+                    $(".secret_question").hide();
+                    $(".user_register1").hide();
+                    $(".user_login").show();
+                    $(".header_title").text('Login');
+                    $scope.emailNotVerified=false;    
+                    successMessage(Flash,"Please check your Email! Verification Link Sent Successful!");
+                    $scope.forgotPasswordForm.$setPristine();
+                }
+            });
+        }
+                
     };
 
     //Enter Key Login

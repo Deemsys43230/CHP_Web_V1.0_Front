@@ -148,7 +148,7 @@ form p{
 
 .reset_password1 .checkbox {margin-bottom: 10px; clear: both; overflow: hidden;}
 .forgot_password1 {display:block; margin: 15px 0 15px; clear: both; overflow: hidden; text-decoration: none; color:#ED6347;}
-
+.resend_link {color:#337ab7;text-decoration: underline !important;}
 /* Social Login Form */
 /* User Register Form */
 .common_model {display: none;}

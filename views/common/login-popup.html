@@ -39,7 +39,8 @@
                 <span>Or</span>
             </div>-->
             <div class="noMobileApp">
-                <div flash-message="3000" ></div>
+                <div flash-message="5000" ></div>
+                <div class="well danger-back" ng-show="emailNotVerified" ng-init="emailNotVerified=false">Please Verify Your Email by Clicking the link sent. Don't have the link?&nbsp;<a href="#" id="resend_link" ng-click="linkType='resend'" class="resend_link">Click Here to Resend Link</a></div>
                 <!-- <div ng-show="sessionValue==1"><span class="text-red">Your session has been expired.<br/>Please login again!!!</span></div>-->
                 <form name="loginForm" novalidate>
 
@@ -54,7 +55,7 @@
                         <span ng-show="loginForm.password.$dirty&&loginForm.password.$invalid && !loginForm.password.$pristine">
                         <span class="error-message" ng-show="loginForm.password.$error.required"><span>Required.</span></span>
                         </span>
-                    <a href="#" id="forgot_password" data-ng-click="reset()" class="forgot_password text-center">Forgot password?</a>
+                    <a href="#" id="forgot_password" data-ng-click="reset();linkType='forgot'" class="forgot_password text-center">Forgot password?</a>
                     <div class="action_btns">
                         <div class="one_half"><a class="btn btn_red" ng-class="{'button-disable':loginForm.$invalid}" ng-click="doLogin()">Login</a></div>
                         <div class="one_half last"><a id="register_form" class="btn">Register</a></div>
@@ -321,6 +322,17 @@
             $(".header_title").text('Reset Password');
             return false;
         });
+
+        // Resend Verification Link
+        $("#resend_link").click(function(){
+            $(".user_login").hide();
+            $(".secret_question").hide();
+            $(".reset_password").show();
+            $(".new_password_form").hide();
+            $(".header_title").text('Verify Email ID');
+            return false;
+        });
+
 
 // Calling Register Form
         $("#register_form").click(function(){

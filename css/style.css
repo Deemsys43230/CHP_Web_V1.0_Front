@@ -16356,3 +16356,7 @@ a.main-button:hover, input[type="submit"]:hover {
     color: #666;
     padding: 3px 3px 6px 7px;
 }
+.danger-back{
+    background-color: #ffd7d6;
+    color:black;
+}
