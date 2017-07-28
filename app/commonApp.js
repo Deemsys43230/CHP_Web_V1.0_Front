@@ -592,6 +592,34 @@ commonApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'HealthyTipsController'
             }).
+              when('/coach', {
+                templateUrl: '../common/coach.html',
+                resolve: {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'commonApp',
+                            files:[
+                                '../../app/indexCoach/indexCoachController.js'
+                            ]
+                        })
+                    }]
+                },
+                controller:'CoachController'
+            }).
+               when('/coach-form/:id', {
+                templateUrl: '../common/coach-form.html',
+                resolve: {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'commonApp',
+                            files:[
+                                '../../app/indexCoach/indexCoachController.js'
+                            ]
+                        })
+                    }]
+                },
+                controller:'CoachController'
+            }).
             otherwise({
                 redirectTo: '/home'
             });

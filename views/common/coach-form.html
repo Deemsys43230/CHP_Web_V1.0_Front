@@ -1,0 +1,154 @@
+<div class="page-banner1" ng-cloak class="ng-cloak">
+    <div id="w" class="clearfix">
+
+        <div class="col-lg-12 col-md-12 col-sm-12">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="margin-top-5 no-padding pull-right">
+                        <a href="#coach" class="back-button pull-right margin-left-5 margin-top5 hidden-sm"><i class="fa fa-arrow-circle-o-left"></i>&nbsp;<span class="hidden-md">Back</span></a>
+                    </div>
+                    <div class="col-lg-5 col-md-5 col-sm-6 pull-right no-padding">
+                        <div flash-message="3000" ></div>
+                    </div>
+                    <h5 class="classic-title margin-bottom-10"><span><i class="fa fa-user"></i> &nbsp;INVITATION FORM</span></h5>
+                </div>
+
+                <form name="coachDetailsForm" novalidate>{{pricingPlanDetails.id}}
+                    <div class="col-lg-8 col-md-7 col-sm-7 padding-topleft">
+                        <div class="form-group">
+                            <div class="col-lg-3 col-md-5 col-sm-12 margin-top-10">
+                                <div> First Name <span class="pull-right">:</span></div>
+                            </div>
+                            <div class="col-lg-8 col-md-7 col-sm-12 margin-top-10">
+                                <input class="coach-input" placeholder="First name" name="firstname" ng-model="coach.firstname" maxlength="25" required validate-alpha-with-space/>
+                                <span ng-show="coachDetailsForm.firstname.$dirty && coachDetailsForm.firstname.$invalid">
+                                    <span class="error-message textarea-errormessage10" ng-show="coachDetailsForm.firstname.$error.required"><span>Required.</span></span>
+                                    <span class="error-message textarea-errormessage10" ng-show="coachDetailsForm.firstname.$error.validateAlphaWithSpace"><span>Enter&nbsp;valid&nbsp;Name.</span></span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-3 col-md-5 col-sm-12 margin-top-10">
+                                <div> Last Name <span class="pull-right">:</span></div>
+                            </div>
+                            <div class="col-lg-8 col-md-7 col-sm-12 margin-top-10">
+                                <input class="coach-input" placeholder="Last Name" name="lastname" ng-model="coach.lastname" maxlength="25" required validate-alpha-with-space/>
+                                <span ng-show="coachDetailsForm.lastname.$dirty && coachDetailsForm.lastname.$invalid">
+                                    <span class="error-message textarea-errormessage10" ng-show="coachDetailsForm.lastname.$error.required"><span>Required.</span></span>
+                                    <span class="error-message textarea-errormessage10" ng-show="coachDetailsForm.lastname.$error.validateAlphaWithSpace"><span>Enter&nbsp;valid&nbsp;Name.</span></span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-3 col-md-5 col-sm-12 margin-top-10">
+                                <div> Email Id <span class="pull-right">:</span></div>
+                            </div>
+                            <div class="col-lg-8 col-md-7 col-sm-12 margin-top-10">
+                                <input class="coach-input" placeholder="example@gmail.com" name="emailid" ng-model="coach.emailid" maxlength="25" required validate-email/>
+                                <span ng-show="coachDetailsForm.emailid.$dirty && coachDetailsForm.emailid.$invalid">
+                                    <span class="error-message textarea-errormessage10" ng-show="coachDetailsForm.emailid.$error.required"><span>Required.</span></span>
+                                    <span class="error-message textarea-errormessage10" ng-show="coachDetailsForm.emailid.$error.validateEmail"><span>Enter&nbsp;valid&nbsp;Email.</span></span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-3 col-md-5 col-sm-12 margin-top-10">
+                                <div> Phone Number <span class="pull-right">:</span></div>
+                            </div>
+                            <div class="col-lg-8 col-md-7 col-sm-12 margin-top-10">
+                                <input class="coach-input" placeholder="Phone Number" name="phone" ng-model="coach.phone" maxlength="10" required validate-phone-number/>
+                                <span ng-show="coachDetailsForm.phone.$dirty && coachDetailsForm.phone.$invalid">
+                                    <span class="error-message textarea-errormessage10" ng-show="coachDetailsForm.phone.$error.required"><span>Required.</span></span>
+                                    <span class="error-message textarea-errormessage10" ng-show="coachDetailsForm.phone.$error.validatePhoneNumber"><span>Enter&nbsp;valid&nbsp;Number.</span></span>
+                                </span>
+                            </div>
+                        </div>
+                        <!-- <div class="form-group">
+                            <div class="col-lg-3 col-md-5 col-sm-12 margin-top-10">
+                                <div> Plan Choice <span class="pull-right">:</span></div>
+                            </div>
+                            <div class="col-lg-8 col-md-7 col-sm-12 margin-top-10">
+                                <input class="coach-input" ng-model="coach" ng-disabled="true" required/>
+                            </div>
+                        </div> -->
+                        <div class="form-group">
+                            <div class="col-lg-3 col-md-5 col-sm-12 margin-top-10">
+                                <div> Referral <span class="pull-right">:</span></div>
+                            </div>
+                            <div class="col-lg-8 col-md-7 col-sm-12 margin-top-10">
+                                <input class="coach-input" placeholder="Referral" name="ref" maxlength="4" ng-pattern="/^\d+$/" ng-model="coach.referral" required/>
+                                <span ng-show="coachDetailsForm.ref.$dirty && coachDetailsForm.ref.$invalid">
+                                    <span class="error-message textarea-errormessage10" ng-show="coachDetailsForm.ref.$error.required"><span>Required.</span></span>
+                                    <span class="error-message textarea-errormessage10" ng-show="coachDetailsForm.ref.$error.pattern"><span>Enter&nbsp;valid&nbsp;Data.</span></span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-3 col-md-5 col-sm-12 margin-top-10">
+                                <div> Qualification <span class="pull-right">:</span></div>
+                            </div>
+                            <div class="col-lg-8 col-md-7 col-sm-12 margin-top-10">
+                                <input class="coach-input" placeholder="Qualification" name="qualify" ng-model="coach.qualification" maxlength="25" required validate-alpha-with-space/>
+                                <span ng-show="coachDetailsForm.qualify.$dirty && coachDetailsForm.qualify.$invalid">
+                                    <span class="error-message textarea-errormessage10" ng-show="coachDetailsForm.qualify.$error.required"><span>Required.</span></span>
+                                    <span class="error-message textarea-errormessage10" ng-show="coachDetailsForm.qualify.$error.validateAlphaWithSpace"><span>Enter&nbsp;valid&nbsp;Data.</span></span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-3 col-md-5 col-sm-12 margin-top-10">
+                                <div> Specialist <span class="pull-right">:</span></div>
+                            </div>
+                            <div class="col-lg-8 col-md-7 col-sm-12 margin-top-10">
+                                <input class="field-input" placeholder="Specialist" name="specl" maxlength="25" ng-model="coach.specialist" required validate-alpha-with-space/>
+                                <span ng-show="coachDetailsForm.specl.$dirty && coachDetailsForm.specl.$invalid">
+                                    <span class="error-message textarea-errormessage10" ng-show="coachDetailsForm.specl.$error.required"><span>Required.</span></span>
+                                    <span class="error-message textarea-errormessage10" ng-show="coachDetailsForm.specl.$error.validateAlphaWithSpace"><span>Enter&nbsp;valid&nbsp;Data.</span></span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-3 col-md-5 col-sm-12 margin-top-10">
+                                <div> Experience <span class="pull-right">:</span></div>
+                            </div>
+                            <div class="col-lg-8 col-md-7 col-sm-12 margin-top-10 exp-text">
+                                <input class="field-input" placeholder="Experience" name="exp" maxlength="4" ng-pattern="/^\d+$/" ng-model="coach.experience" required/>
+                                <span class="inside-text">In Months</span>
+                                <span ng-show="coachDetailsForm.exp.$dirty && coachDetailsForm.exp.$invalid">
+                                    <span class="error-message textarea-errormessage10" ng-show="coachDetailsForm.exp.$error.required"><span>Required.</span></span>
+                                    <span class="error-message textarea-errormessage10" ng-show="coachDetailsForm.exp.$error.pattern"><span>Enter&nbsp;valid&nbsp;Data.</span></span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-3 col-md-5 col-sm-12 margin-top-10">
+                                <div>About Me <span class="pull-right">:</span></div>
+                                <p><span ng-hide="showCount && coachDetailsForm.about.length">&nbsp;</span><span ng-show="showCount && coachDetailsForm.about.length"><span class="text-bold text-red" style="font-size: 14px">{{ (300-coachDetailsForm.about.length) }}</span> Characters Remaining</span></p>
+                            </div>
+                            <div class="col-lg-8 col-md-7 col-sm-12 margin-top-10">
+                                <span ng-show="coachDetailsForm.about.$dirty&& coachDetailsForm.about.$invalid">
+                                    <span class="error-message textarea-errormessage40" ng-show="coachDetailsForm.about.$error.required"><span>Required.</span></span>
+                                </span>
+                                <textarea id="inputFocusForDatePicker" class="profile_input_textarea" name="about" ng-model="coach.about" maxlength="300" ng-blur="showCount=0" ng-focus="showCount=1" required></textarea>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 text-center margin-top-50">
+                            <a id="modal_trigger" href="" type="button" class="price-button btn" ng-disabled="isClean() || coachDetailsForm.$invalid" ng-click="doGetCoachDetails()">Submit</a>
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 text-center margin-top-50"></div>
+                    </div>
+                </form>
+                <div class="col-lg-4 col-md-5 col-sm-12 col-xs-12 margin-top-30">
+                    <div class="col-md-12" style="margin-top:15%">
+                        <!-- <a href="mailto:support@cyberhealths.com"> -->
+                            <img alt="" src="../../images/invite.png" style="height: 280px; width: 300px;" >
+                        <!-- </a> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+        
+<script type="text/javascript" src="../../js/script.js"></script>
+

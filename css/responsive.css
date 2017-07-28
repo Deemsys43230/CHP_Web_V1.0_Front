@@ -344,6 +344,9 @@
         color: inherit!important;
         border-radius: 0;
     }
+    .plan {
+        width: 47%;
+    }
 
 }
 @media only screen and (max-width: 479px) { 
@@ -477,6 +480,9 @@
         margin-top: 5px;
         font-size: 16px;
     }
+    .plan {
+        width: 47%;
+    }
 }
 
 
@@ -506,6 +512,9 @@
     
     #main-slide .item .slider-content{
         display: none;
+    }
+    .plan {
+        width: 47%;
     }
 }
 
@@ -1235,6 +1244,9 @@
 
     h1.slider-font{
         line-height:35px!important;
+    }
+    .plan {
+        width: 88%;
     }
 }
 

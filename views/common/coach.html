@@ -1,0 +1,75 @@
+
+
+<!-- Start Content -->
+<div id="content-page" ng-cloak class="ng-cloak">
+    <div class="container">
+        <div class="row blog-page">
+            <div class="col-md-12 col-lg-12 col-sm-12 margin-bottom-10">
+
+                <h4 class="classic-title"><span>Coach Subscription Plans</a>
+                </h4>
+            </div>
+            <div ng-if="viewload">
+                <div class="loader-style">
+                    <div class="loader"></div>
+                </div>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 margin-top-5">
+                <div class="col-md-2 margin-bottom-15 unit  pull-right">
+                    <div class="btn-group" data-toggle="buttons">
+                        <label class="btn btn-default active unit-toggle-label"  ng-click="test('mUnit')">
+                            <input type="radio" name="unit" ng-model="units"  id="option1" autocomplete="off">&nbsp;&nbsp;&nbsp;INR&nbsp;&nbsp;&nbsp;
+                        </label>
+                        <label class="btn btn-default unit-toggle-label"  ng-click="test('uUnit')">
+                            <input type="radio" name="unit" ng-model="units"  id="option2" autocomplete="off"> &nbsp;&nbsp;&nbsp;USD&nbsp;&nbsp;&nbsp;
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div id="coach-table">
+                <div class="plans">
+                    <div class="plan" ng-repeat="pricingPlan in pricingPlanDetails">
+                        <div class="coach">
+                            <span style="color:{{pricingPlan.plancolor}}">{{pricingPlan.planname}}</span>
+                        </div>
+                        <div ng-show="units==1">
+                            <span class="price" style="background-color:{{pricingPlan.plancolor}}">
+                                <span>Rs:{{pricingPlan.priceINR}}</span><br/>
+                            </span>
+                        </div>
+                        <div ng-hide="units==1">
+                            <span class="price" style="background-color:{{pricingPlan.plancolor}}">
+                                <span>$:{{pricingPlan.priceUSD}}</small></span>
+                            </span>
+                        </div>
+                        <div class="coach">
+                            <h4>Clients Count</h4>
+                            <span>{{pricingPlan.clientscount}}</span>
+                        </div>
+                        <div class="coach">
+                            <h4>Total Discount</h4>
+                            <span>{{pricingPlan.discount}}</span>
+                        </div>
+                        <div class="coach">
+                            <h4>Features</h4>
+                            <span>{{pricingPlan.features}}</span>
+                        </div> 
+                        <br>
+                        <h4>Discount</h4>
+                        <ul class="features remove-style">
+                            <li ng-show="units==1">Rs:{{pricingPlan.discountINR}}</li>
+                            <li ng-hide="units==1">$:{{pricingPlan.discountUSD}}</li>
+                        </ul>
+                        <a href="#coach-form/{{pricingPlan.id}}" class="price-button btn button" ng-disabled="subscribeButtonStatus">
+                            Subscribe
+                        </a><br/>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 text-center margin-top-50">
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="../../js/script.js"></script>
