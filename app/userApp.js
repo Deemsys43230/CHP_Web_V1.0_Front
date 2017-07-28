@@ -1056,6 +1056,23 @@ userApp.directive('validatePhoneNumber', function() {
     };
 });
 
+
+//Check for Number is greater than zero Validation
+userApp.directive('validateZero', function() {
+    var NUMBER = /^(0*[1-9][0-9]*([\.\,][0-9]+)?|0+[\.\,][0-9]*[1-9][0-9]*)$/;
+
+    return {
+        require: 'ngModel',
+        restrict: '',
+        link: function(scope, elm, attrs, ctrl) {
+            // only apply the validator if ngModel is present and Angular has added the Integer validator
+            ctrl.$validators.validateZero = function(modelValue) {
+                return  ctrl.$isEmpty(modelValue) || NUMBER.test(modelValue);
+            };
+        }
+    };
+});
+
 userApp.directive('focusMe',['$timeout','$parse', function($timeout, $parse) {
     return {
         //scope: true,   // optionally create a child scope

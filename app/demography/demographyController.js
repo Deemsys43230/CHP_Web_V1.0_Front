@@ -30,7 +30,7 @@ userApp.controller('DemographyController',['$rootScope','$scope','requestHandler
                 $scope.demography.heightInches=heightSplit[1];
              //  $scope.demography.heightInches=parseInt($scope.demography.heightInches);
                 }
-                $scope.demography.height=parseInt($scope.demography.height);
+                $scope.demography.height=$scope.demography.height.toString();
             }
             }
             originalDemography=angular.copy(response.data.Demography_Data);
@@ -59,7 +59,7 @@ userApp.controller('DemographyController',['$rootScope','$scope','requestHandler
             $scope.demography.bmi="";
             $scope.weightBmi= $scope.demography.weight/0.4536;
             $scope.heightBmi= $scope.demography.height/2.54;
-            $scope.demography.bmi=parseInt(($scope.weightBmi*703)/($scope.heightBmi*$scope.heightBmi)).toFixed(2);
+            $scope.demography.bmi=(($scope.weightBmi*703)/($scope.heightBmi*$scope.heightBmi)).toFixed(2);
 
         }
         else if($scope.userProfile.unitPreference==2){
@@ -169,18 +169,15 @@ userApp.controller('DemographyController',['$rootScope','$scope','requestHandler
         $rootScope.planHighlight = false;
 
         if($scope.demography.heightFeet && $scope.demography.heightInches){
-            $scope.demography.height = $scope.demography.heightFeet +'.'+$scope.demography.heightInches;
-
-           // $scope.demography.height = parseFloat($scope.demography.height);
+            $scope.demography.height =$scope.demography.heightFeet+'.'+$scope.demography.heightInches;
 
         }
-            $scope.demography.height = parseFloat($scope.demography.height);
+            $scope.demography.height =$scope.demography.height.toString();
             $scope.demography.weight = parseFloat($scope.demography.weight);
             $scope.demography.hip = parseFloat($scope.demography.hip);
             $scope.demography.obesity=parseFloat($scope.demography.obesity);
             $scope.demography.diabetes=parseFloat($scope.demography.diabetes);
              $scope.demography.targetweight=parseFloat($scope.demography.targetweight);
-
        if( $scope.demography.obesity == '0'){
            $scope.demography.obesity="";
        }
@@ -318,10 +315,10 @@ userApp.controller('DemographyController',['$rootScope','$scope','requestHandler
    //To Check maximum height
     $scope.maxheight=false;
     $scope.maxHeightCheck = function(height){
-        if(height<393.7){
+        if(height<=393.7){
             $scope.maxheight=false;
         }
-        else if(height>=393.7){
+        else if(height>393.7){
             $scope.maxheight=true;
         }
 
@@ -330,10 +327,10 @@ userApp.controller('DemographyController',['$rootScope','$scope','requestHandler
     //To check maximum Weight
     $scope.maxweight=false;
     $scope.maxWeightCheck = function(weight){
-        if(weight<2204.4){
+        if(weight <=2204.4){
             $scope.maxweight=false;
         }
-        else if(weight>=2204.4){
+        else if(weight >2204.4){
             $scope.maxweight=true;
         }
 
@@ -342,10 +339,10 @@ userApp.controller('DemographyController',['$rootScope','$scope','requestHandler
     //TO check Maximum target Weight
     $scope.maxTargetWeight=false;
     $scope.maxTargetWeightCheck = function(targetWeight){
-        if(targetWeight<2204.4){
+        if(targetWeight<=2204.4){
             $scope.maxTargetWeight=false;
         }
-        else if(targetWeight>=2204.4){
+        else if(targetWeight>2204.4){
             $scope.maxTargetWeight=true;
         }
 
@@ -370,10 +367,10 @@ userApp.controller('DemographyController',['$rootScope','$scope','requestHandler
         if($scope.demography.bmi <18.5){
             $scope.bmiStatus ="You are Suffer UnderWeight";
         }
-        else if($scope.demography.bmi > 18.5 && $scope.demography.bmi < 25){
+        else if($scope.demography.bmi > 18.5 && $scope.demography.bmi <= 25){
             $scope.bmiStatus ="Healthy";
         }
-        else if($scope.demography.bmi >25 && $scope.demography.bmi < 30){
+        else if($scope.demography.bmi >25 && $scope.demography.bmi <= 30){
             $scope.bmiStatus ="You are Suffer OverWeight";
         }
         else if($scope.demography.bmi >30){

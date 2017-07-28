@@ -7407,10 +7407,6 @@ button.sync_button.override-width{
     height: 32px;
     line-height: 25px;
 }
-input[type=text]:disabled {
-    background: #ff5010;
-}
-
 a.suggest_button.no-margin-bottom{
     margin-bottom:0 !important;
 }
@@ -16252,6 +16248,12 @@ a.main-button.red_back {
 .bloodglucose-border{
     border: 2px solid #df4444;
 
+}
+.bodytemperature-border{
+    border: 2px solid #069da2;
+}
+.bodytemperature-textcolor{
+   color: #069da2;
 }
 .waterlog-text{
     color: deepskyblue;

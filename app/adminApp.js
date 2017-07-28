@@ -856,20 +856,48 @@ adminApp.config([
         ]
       },
       controller: 'PaypalSettingsController'
-    }).when('/social-media-settings', {
-      templateUrl: 'views/settings-socialmedia.html',
-      resolve: {
-        loadMyFiles: [
-          '$ocLazyLoad',
-          function ($ocLazyLoad) {
-            return $ocLazyLoad.load({
-              name: 'adminApp',
-              files: ['../../app/settings/socialMediaController.js']
-            });
-          }
-        ]
-      },
-      controller: 'SocialMediaSettingsController'
+        }) .when('/razor-payment-settings', {
+                templateUrl: 'views/settings-razor.html',
+                resolve: {
+                    loadMyFiles: [
+                        '$ocLazyLoad',
+                        function ($ocLazyLoad) {
+                            return $ocLazyLoad.load({
+                                name: 'adminApp',
+                                files: ['../../app/settings/razorSettingsController.js']
+                            });
+                        }
+                    ]
+                },
+                controller: 'RazorSettingsController'
+        }).when('/authorizeNet-payment-settings', {
+              templateUrl: 'views/settings-authorizeNet.html',
+              resolve: {
+                  loadMyFiles: [
+                      '$ocLazyLoad',
+                      function ($ocLazyLoad) {
+                          return $ocLazyLoad.load({
+                              name: 'adminApp',
+                              files: ['../../app/settings/authorizeNetSettingsController.js']
+                          });
+                      }
+                  ]
+              },
+              controller: 'AuthorizeNetSettingsController'
+          }).when('/social-media-settings', {
+                templateUrl: 'views/settings-socialmedia.html',
+                resolve: {
+                    loadMyFiles: [
+                        '$ocLazyLoad',
+                        function ($ocLazyLoad) {
+                            return $ocLazyLoad.load({
+                                name: 'adminApp',
+                                files: ['../../app/settings/socialMediaController.js']
+                            });
+                        }
+                    ]
+                },
+                controller: 'SocialMediaSettingsController'
     }).when('/server-settings', {
       templateUrl: 'views/settings-server.html',
       resolve: {
@@ -2326,6 +2354,18 @@ adminApp.factory('siteMenuService', function () {
         'icon': 'dollar',
         'href': 'paypal-settings',
         'active': ''
+      },
+      {
+          'name': 'Razor Payment Settings',
+          'icon': 'dollar',
+          'href': 'razor-payment-settings',
+          'active': ''
+      },
+      {
+          'name': 'Authorize.Net Settings',
+          'icon': 'credit-card',
+          'href': 'authorizeNet-payment-settings',
+          'active': ''
       },
       {
         'name': 'Server',

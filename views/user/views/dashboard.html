@@ -661,15 +661,22 @@
                                                     <span>Weight  <small>(<span ng-show="userProfile.unitPreference==1">Kgs</span><span ng-show="userProfile.unitPreference==2">lbs</span>)</small><span class="pull-right">:</span></span>
                                                 </div>
                                                 <div class="col-lg-6 col-md-6 col-sm-6 margin-top-10 no-padding-right padding-left-8">
-                                                    <input class="profile_input weightoverride" id="weightLog" name="curweight" ng-model="weightlog" maxlength="6" ng-change="maxCheck()" required/>
-                                                    <span ng-show="userProfile.unitPreference==2">
-                                                       <span class="error-message textarea-errormessage40-right60" ng-show="!weightLogForm.curweight.$error.required&&maxweight"><span style="bottom: 70px;">Please&nbsp;Enter&nbsp;Valid&nbsp;Weight.</span></span>
+                                                    <span ng-show="userProfile.unitPreference==1">
+                                                     <input class="profile_input weightoverride" id="weightLog" name="weightkgs" ng-model="weightlog" maxlength="5" required validate-zero/>
+                                                         <span ng-show="weightLogForm.weightkgs.$dirty&&weightLogForm.weightkgs.$invalid">
+                                                         <span class="error-message textarea-errormessage10" ng-show="weightLogForm.weightkgs.$error.required"><span>Required.</span></span>
+                                                         <span class="error-message textarea-errormessage10" ng-show="weightLogForm.weightkgs.$error.validateZero"><span>Invalid&nbsp;Format.</span></span>
                                                     </span>
-                                                    <span ng-show="weightLogForm.curweight.$dirty&&weightLogForm.curweight.$invalid">
-                                                    <span class="error-message textarea-errormessage10" ng-show="weightLogForm.curweight.$error.required"><span>Required.</span></span>
+                                                    </span>
+                                                   <span ng-show="userProfile.unitPreference==2">
+                                                      <input class="profile_input weightoverride" name="weightlbs" ng-model="weightlog" maxlength="6" ng-change="maxCheck()" required validate-zero/>
+                                                           <span class="error-message textarea-errormessage40-right60" ng-show="!weightLogForm.weightlbs.$error.required&&maxweight"><span style="bottom: 70px;">Please&nbsp;Enter&nbsp;Valid&nbsp;Weight.</span></span>
+                                                           <span ng-show="weightLogForm.weightlbs.$dirty&&weightLogForm.weightlbs.$invalid">
+                                                           <span class="error-message textarea-errormessage10" ng-show="weightLogForm.weightlbs.$error.required"><span>Required.</span></span>
+                                                           <span class="error-message textarea-errormessage10" ng-show="weightLogForm.weightlbs.$error.validateZero"><span>Invalid&nbsp;Format.</span></span>
+                                                           </span>
+                                                   </span>
 
-                                                    <!--<span class="error-message textarea-errormessage10" ng-show="weightLogForm.curweight.$error.validDecimalnumber"><span>Invalid Format.</span></span>-->
-                                                </span>
                                                 </div>
                                             </div>
                                         </form>
@@ -680,9 +687,9 @@
                                                     <span>Fat<small>(<span>%</span>)</small><span class="pull-right">:</span></span>
                                                 </div>
                                                 <div class="col-lg-6 col-md-6 col-sm-6 margin-top-10 no-padding-right padding-left-8">
-                                                    <input class="profile_input weightoverride" id="fatLog" name="curfat" ng-model="fat" maxlength="5" required valid-decimalnumber />
+                                                    <input class="profile_input weightoverride" id="fatLog" name="curfat" ng-model="fat" maxlength="3" required ng-pattern="/^\-?\d+((\.|\,)\d+)?$/" />
                                                 <span ng-show="fatLogForm.curfat.$dirty&&fatLogForm.curfat.$invalid">
-                                                    <!--<span class="error-message textarea-errormessage10" ng-show="fatLogForm.curfat.$error.required"><span>Required.</span></span>-->
+                                                    <span class="error-message textarea-errormessage10" ng-show="fatLogForm.curfat.$error.pattern"><span>Invalid&nbsp;Format.</span></span>
                                                 </span>
                                                 </div>
                                                 <div class="col-lg-12 col-md-12 col-sm-12 text-center margin-top-20">
@@ -874,7 +881,7 @@
                             </div>
                             <div class="col-md-8 col-lg-8 col-sm-8 no-padding">
                                 <div class="heart-textcolor"><small>{{wearable.restingheartrate==null?"N/A":wearable.restingheartrate}}</small></div>
-                                <div class="heart-textcolor"><small>(rest)</small></div>
+                                <div class="heart-textcolor"><small>(bpm)</small></div>
                             </div>
                         </div>
                         </div>
@@ -894,7 +901,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-12 col-lg-12 col-sm-12 no-padding">
+                <div class="col-md-12 col-lg-12 col-sm-12 no-padding margin-top-10">
                     <div class="col-lg-4 col-md-4 col-sm-4 no-padding">
                         <div class="new-update">
                             <div class="col-md-12 col-lg-12 col-sm-12 floor-textcolor margin-top-5">Floors</div>
@@ -903,7 +910,7 @@
                                 <img class="img-width" src="../../images/floor.png"/>
                             </div>
                             <div class="col-md-8 col-lg-8 col-sm-8 no-padding">
-                                <div class="floor-textcolor"><small>{{wearable.steps==null?"N/A":wearable.steps}}</small></div>
+                                <div class="floor-textcolor"><small>{{wearable.floors==null?"N/A":wearable.floors}}</small></div>
                                 <div class="floor-textcolor"><small>(floor)</small></div>
                             </div>
                             </div>
@@ -938,34 +945,48 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-12 col-lg-12 col-sm-12 no-padding">
-                    <div class="col-lg-6 col-md-6 col-sm-6 no-padding">
+                <div class="col-md-12 col-lg-12 col-sm-12 no-padding margin-top-10">
+                    <div class="col-lg-4 col-md-4 col-sm-4 no-padding">
                         <div class="new-update">
-                            <div class="col-md-12 col-lg-12 col-sm-12 bloodpessure-textcolor margin-top-5">Blood&nbsp;Pressure</div>
+                            <div class="col-md-12 col-lg-12 col-sm-12 bloodpessure-textcolor margin-top-5"><small>Blood&nbsp;Pressure</small></div>
                             <div class="col-md-12 col-lg-12 col-sm-12 no-padding well-image common-border bloodpessure-border">
                             <div class="col-md-4 col-lg-4 col-sm-4 no-padding margin-top-10">
                                 <img class="img-width" src="../../images/heart1.gif"/>
                             </div>
                             <div class="col-md-8 col-lg-8 col-sm-8 no-padding">
                                 <div class="bloodpessure-textcolor" title="Systolic Blood Pressure/Diastolic Blood Pressure"><small>{{wearable.systolic==null?"N/A":wearable.systolic}} / {{wearable.diastolic==null?"N/A":wearable.diastolic}}</small></div>
-                                <div class="bloodpessure-textcolor" title="Systolic Blood Pressure/Diastolic Blood Pressure"><small>(systolic&nbsp;/&nbsp;diastolic)<br/>(mmHg)</small></div>
+                                <div class="bloodpessure-textcolor" title="Systolic Blood Pressure/Diastolic Blood Pressure"><small>(mmHg)</small></div>
                             </div>
                             </div>
                         </div>
                     </div>
-                <div class="col-lg-6 col-md-6 col-sm-6 no-padding">
+                <div class="col-lg-4 col-md-4 col-sm-4 no-padding">
                         <div class="new-update">
-                            <div class="col-md-12 col-lg-12 col-sm-12 bloodglucose-textcolor margin-top-5">Blood Glucose</div>
+                            <div class="col-md-12 col-lg-12 col-sm-12 bloodglucose-textcolor margin-top-5"><small>Blood&nbsp;Glucose</small></div>
                             <div class="col-md-12 col-lg-12 col-sm-12 no-padding well-image common-border bloodglucose-border">
                             <div class="col-md-4 col-lg-4 col-sm-4 no-padding margin-top-10">
                                 <img class="img-width" src="../../images/bloodglucose.png"/>
                             </div>
                             <div class="col-md-8 col-lg-8 col-sm-8 no-padding">
                                 <div class="bloodglucose-textcolor" title="Random Glucose/Fasting Glucose"><small>{{wearable.randombloodglucose==null?"N/A":wearable.randombloodglucose}} / {{wearable.fastingbloodglucose==null?"N/A":wearable.fastingbloodglucose}}</small></div>
-                                <div class="bloodglucose-textcolor" title="Random Glucose/Fasting Glucose"><small>(random / fast)<br/>(mg/dl)</small></div>
+                                <div class="bloodglucose-textcolor" title="Random Glucose/Fasting Glucose"><small>(mg/dl)</small></div>
                             </div>
                         </div>
                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 no-padding">
+                        <div class="new-update">
+                            <div class="col-md-12 col-lg-12 col-sm-12 bodytemperature-textcolor margin-top-5"><small>Body&nbsp;Temperature</small></div>
+                            <div class="col-md-12 col-lg-12 col-sm-12 no-padding well-image common-border bodytemperature-border">
+                                <div class="col-md-4 col-lg-4 col-sm-4 no-padding margin-top-10">
+                                    <img class="img-width" src="../../images/smalltemp.png"/>
+                                </div>
+                                <div class="col-md-8 col-lg-8 col-sm-8 no-padding">
+                                    <div class="bodytemperature-textcolor"><small>{{wearable.bodytemperature==null?"N/A":wearable.bodytemperature}}</small></div>
+                                    <div class="bodytemperature-textcolor"><small>(<sup>o</sup>F)</small></div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

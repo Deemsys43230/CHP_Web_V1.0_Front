@@ -2419,7 +2419,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
 
                 'id': 16,
                 'name': 'Body Temperature',
-                "imageSrc": "../../images/temperature.png"
+                "imageSrc": "../../images/smalltemp.png"
             }]
             }
             ];
