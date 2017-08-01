@@ -2350,12 +2350,12 @@ adminApp.factory('siteMenuService', function () {
         'active': ''
       },
       {
-        'name': 'Payment Info',
+        'name': 'Payment Settings',
         'icon': 'dollar',
         'href': 'paypal-settings',
         'active': ''
       },
-      {
+      /*{
           'name': 'Razor Payment Settings',
           'icon': 'dollar',
           'href': 'razor-payment-settings',
@@ -2366,7 +2366,7 @@ adminApp.factory('siteMenuService', function () {
           'icon': 'credit-card',
           'href': 'authorizeNet-payment-settings',
           'active': ''
-      },
+      },*/
       {
         'name': 'Server',
         'icon': 'server',
