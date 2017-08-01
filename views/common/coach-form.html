@@ -7,7 +7,7 @@
                     <div class="margin-top-5 no-padding pull-right">
                         <a href="#coach" class="back-button pull-right margin-left-5 margin-top5 hidden-sm"><i class="fa fa-arrow-circle-o-left"></i>&nbsp;<span class="hidden-md">Back</span></a>
                     </div>
-                    <div class="col-lg-5 col-md-5 col-sm-6 pull-right no-padding">
+                    <div class="col-md-3 pull-right no-padding">
                         <div flash-message="3000" ></div>
                     </div>
                     <h5 class="classic-title margin-bottom-10"><span><i class="fa fa-user"></i> &nbsp;INVITATION FORM</span></h5>
@@ -100,7 +100,7 @@
                                 <div> Specialist <span class="pull-right">:</span></div>
                             </div>
                             <div class="col-lg-8 col-md-7 col-sm-12 margin-top-10">
-                                <input class="field-input" placeholder="Specialist" name="specl" maxlength="25" ng-model="coach.specialist" required validate-alpha-with-space/>
+                                <input class="coach-input" placeholder="Specialist" name="specl" maxlength="25" ng-model="coach.specialist" required validate-alpha-with-space/>
                                 <span ng-show="coachDetailsForm.specl.$dirty && coachDetailsForm.specl.$invalid">
                                     <span class="error-message textarea-errormessage10" ng-show="coachDetailsForm.specl.$error.required"><span>Required.</span></span>
                                     <span class="error-message textarea-errormessage10" ng-show="coachDetailsForm.specl.$error.validateAlphaWithSpace"><span>Enter&nbsp;valid&nbsp;Data.</span></span>
@@ -112,7 +112,7 @@
                                 <div> Experience <span class="pull-right">:</span></div>
                             </div>
                             <div class="col-lg-8 col-md-7 col-sm-12 margin-top-10 exp-text">
-                                <input class="field-input" placeholder="Experience" name="exp" maxlength="4" ng-pattern="/^\d+$/" ng-model="coach.experience" required/>
+                                <input class="coach-input" placeholder="Experience" name="exp" maxlength="4" ng-pattern="/^\d+$/" ng-model="coach.experience" required/>
                                 <span class="inside-text">In Months</span>
                                 <span ng-show="coachDetailsForm.exp.$dirty && coachDetailsForm.exp.$invalid">
                                     <span class="error-message textarea-errormessage10" ng-show="coachDetailsForm.exp.$error.required"><span>Required.</span></span>
@@ -129,7 +129,7 @@
                                 <span ng-show="coachDetailsForm.about.$dirty&& coachDetailsForm.about.$invalid">
                                     <span class="error-message textarea-errormessage40" ng-show="coachDetailsForm.about.$error.required"><span>Required.</span></span>
                                 </span>
-                                <textarea id="inputFocusForDatePicker" class="profile_input_textarea" name="about" ng-model="coach.about" maxlength="300" ng-blur="showCount=0" ng-focus="showCount=1" required></textarea>
+                                <textarea id="inputFocusForDatePicker" class="coach_input_textarea" name="about" ng-model="coach.about" maxlength="300" ng-blur="showCount=0" ng-focus="showCount=1" required></textarea>
                             </div>
                         </div>
                         <div class="col-lg-12 col-md-12 col-sm-12 text-center margin-top-50">
