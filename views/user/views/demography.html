@@ -59,7 +59,7 @@
                                </span>
                                 </span>
                                 <span ng-show="userProfile.unitPreference==1">
-                                     <input class="demography_input" maxlength="5" id="height" name="height"  ng-model="demography.height" ng-required="userProfile.unitPreference==1" validate-zero  ng-change="maxHeightCheck(demography.height);bmiCalculation();"/>
+                                     <input class="demography_input" maxlength="5" id="height" name="height"  ng-model="demography.height" ng-required="userProfile.unitPreference==1" validate-zero onkeypress="return validateFloatKeyPress(this,event);" ng-change="maxHeightCheck(demography.height);bmiCalculation();"/>
                                 <span class="error-message textarea-errormessage40-right60" ng-show="!demographyForm.height.$error.required&&maxheight"><span>Height&nbsp;should&nbsp;not&nbsp;exceed&nbsp;394</span></span>
                                 <span ng-show="demographyForm.height.$dirty&&demographyForm.height.$invalid">
                                      <span class="error-message textarea-errormessage40" ng-show="demographyForm.height.$error.required"><span>Required.</span></span>
@@ -74,14 +74,14 @@
     </div>
     <div class="col-lg-4 col-md-5 col-sm-5 padding-right-0">
         <span ng-show="userProfile.unitPreference==1">
-        <input class="demography_input" id="weightkgs" name="weightkgs" maxlength="5" ng-model="demography.weight" ng-change="planChangeValidation(demography.userPlanType);bmiCalculation();" required validate-zero/>
+        <input class="demography_input" id="weightkgs" name="weightkgs" maxlength="5" ng-model="demography.weight" ng-change="planChangeValidation(demography.userPlanType);bmiCalculation();" onkeypress="return validateFloatKeyPress(this,event);" required validate-zero/>
            <span ng-show="demographyForm.weightkgs.$dirty&&demographyForm.weightkgs.$invalid">
                <span class="error-message textarea-errormessage40" ng-show="demographyForm.weightkgs.$error.required"><span>Required.</span></span>
                <span class="error-message textarea-errormessage40" ng-show="demographyForm.weightkgs.$error.validateZero"><span>Invalid&nbsp;Format.</span></span>
            </span>
         </span>
         <span ng-show="userProfile.unitPreference==2" >
-        <input class="demography_input" name="weightlbs" id="weightlbs" maxlength="6" ng-model="demography.weight" ng-required="userProfile.unitPreference==2" ng-change="planChangeValidation(demography.userPlanType);maxWeightCheck(demography.weight);bmiCalculation();" required validate-zero/>
+        <input class="demography_input" name="weightlbs" id="weightlbs" maxlength="6" ng-model="demography.weight" ng-required="userProfile.unitPreference==2" onkeypress="return validateFloatKeyPress(this,event);" ng-change="planChangeValidation(demography.userPlanType);maxWeightCheck(demography.weight);bmiCalculation();" required validate-zero/>
         <span class="error-message textarea-errormessage40-right60" ng-show="!demographyForm.weightlbs.$error.required&&maxweight"><span>Please&nbsp;Enter&nbsp;Valid&nbsp;Weight.</span></span>
            <span ng-show="demographyForm.weightlbs.$dirty&&demographyForm.weightlbs.$invalid">
                <span class="error-message textarea-errormessage40" ng-show="demographyForm.weightlbs.$error.required"><span>Required.</span></span>
@@ -451,7 +451,7 @@
             <h5>Target Weight <span ng-show="userProfile.unitPreference==1"><small>(kgs)</small></span> <span ng-show="userProfile.unitPreference==2"><small>(lbs)</small></span> <span class="pull-right">:</span></h5>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-5 padding-right-0">
-           <input class="demography_input"  name="targetWeight" maxlength="6" ng-model="demography.targetweight" ng-required="demography.userPlanType==2 || demography.userPlanType == 3"  ng-change="planChangeValidation(demography.userPlanType);maxTargetWeightCheck(demography.targetweight);"/>
+           <input class="demography_input"  name="targetWeight" maxlength="6" ng-model="demography.targetweight" ng-required="demography.userPlanType==2 || demography.userPlanType == 3" onkeypress="return validateFloatKeyPress(this,event);"  ng-change="planChangeValidation(demography.userPlanType);maxTargetWeightCheck(demography.targetweight);"/>
         </div>
         <span class="error-message textarea-errormessage40-right60" ng-show="!demographyForm.targetWeight.$error.required&&maxTargetWeight" style="top:0;left: 30px;"><span>Please&nbsp;Enter&nbsp;Valid&nbsp;Weight.</span></span>
         <span class="error-message textarea-errormessage40" ng-show="!demographyForm.targetWeight.$error.required&&weightlossError"><span>Should&nbsp;be&nbsp;less&nbsp;than&nbsp;your&nbsp;weight</span></span>
@@ -574,5 +574,36 @@
     $(document).ready(function(){
         $('[data-toggle="popover"]').popover();
     });
+//for restricting keypress event after (dot)
+    function validateFloatKeyPress(el, evt) {
+        var charCode = (evt.which) ? evt.which : event.keyCode;
+        var number = el.value.split('.');
+        if (charCode != 46 && charCode > 31 && (charCode < 48 || charCode > 57)) {
+            return false;
+        }
+        //just one dot
+        if(number.length>1 && charCode == 46){
+            return false;
+        }
+        // for backspace issue in firefox
+        if(charCode== 8){
+            return true;
+        }
+        //get the carat position
+        var caratPos = getSelectionStart(el);
+        var dotPos = el.value.indexOf(".");
+        if( caratPos > dotPos && dotPos>-1 && (number[1].length > 0)){
+            return false;
+        }
+        return true;
+    }
+    function getSelectionStart(o) {
+        if (o.createTextRange) {
+            var r = document.selection.createRange().duplicate()
+            r.moveEnd('character', o.value.length)
+            if (r.text == '') return o.value.length
+            return o.value.lastIndexOf(r.text)
+        } else return o.selectionStart
+    }
 
 </script>

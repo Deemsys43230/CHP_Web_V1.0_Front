@@ -167,13 +167,15 @@
             <div flash-message="3000" ></div>
             <form name="registerForm" novalidate>
                 <p>First name</p>
-                <input type="text" name="firstname" ng-pattern="/^ *([a-zA-Z]+ ?)+ *$/"  ng-model="userForm.firstname" maxlength="24" required/>
+                <input type="text" name="firstname" ng-pattern="/^ *([a-zA-Z]+ ?)+ *$/"  ng-model="userForm.firstname" maxlength="24" required ng-minlength="3"/>
                     <span ng-show="registerForm.firstname.$dirty&&registerForm.firstname.$invalid && !registerForm.firstname.$pristine">
+                  <span class="error-message" ng-show="registerForm.firstname.$error.minlength"><span>First&nbsp;Name&nbsp;Should&nbsp;Contain&nbsp;Atleast&nbsp;3&nbsp;Characters.</span></span>
                         <span class="error-message" ng-show="registerForm.firstname.$error.required"><span>Required.</span></span>
                          <span class="error-message" ng-show="registerForm.firstname.$error.pattern"><span>Enter&nbsp;valid&nbsp;Name.</span></span>
                     </span>
                 <p>Last name</p>
-                <input type="text" name="lastname" ng-pattern="/^ *([a-zA-Z]+ ?)+ *$/"  ng-model="userForm.lastname" maxlength="24" required/>
+                <input type="text" name="lastname" ng-pattern="/^ *([a-zA-Z]+ ?)+ *$/"  ng-model="userForm.lastname" maxlength="24" required ng-minlength="3"/>
+                <span class="error-message" ng-show="registerForm.lastname.$error.minlength"><span>Last&nbsp;Name&nbsp;Should&nbsp;Contain&nbsp;Atleast&nbsp;3&nbsp;Characters.</span></span>
                     <span ng-show="registerForm.lastname.$dirty&&registerForm.lastname.$invalid && !registerForm.name.$pristine">
                         <span class="error-message" ng-show="registerForm.lastname.$error.required"><span>Required.</span></span>
                          <span class="error-message" ng-show="registerForm.lastname.$error.pattern"><span>Enter&nbsp;valid&nbsp;Name.</span></span>
@@ -187,7 +189,7 @@
                     </span>
                 <span class="error-message" ng-show="registerForm.emailid.$error.emailexists"><span>Email&nbsp;ID&nbsp;Already&nbsp;Exist.</span></span>
                 <p>Password</p>
-                <input type="password"  name="password" id="pswd" ng-model="userForm.password" ng-pattern="/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-])(?!.*\s).{6,}$/"  maxlength="20"required/>
+                <input type="password"  name="password" id="pswd" ng-model="userForm.password" ng-pattern="/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-])(?!.*\s).{6,}$/"  maxlength="20" required/>
                     <span ng-show="registerForm.password.$dirty&&registerForm.password.$invalid && !registerForm.password.$pristine">
                         <span class="error-message" ng-show="registerForm.password.$error.required"><span>Required.</span></span>
                           <span class="error-message" ng-show="registerForm.password.$error.pattern"><span>Condition&nbsp;not&nbsp;satisfied</span></span>

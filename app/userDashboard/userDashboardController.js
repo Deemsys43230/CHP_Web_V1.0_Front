@@ -121,21 +121,36 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
 
 
         $scope.doSyncDevices=function(){
-            $scope.connectDevice=true;
-            $scope.syncBtnTxt="Synchronizing...";
             var date = document.getElementById("main-start-date").value;
             requestHandler.postRequest("user/syncWearableData/",{"date":date}).then(function(response){
-                    $location.path("dashboard");
-                    $scope.connectDevice=false;
-                    $scope.syncBtnTxt="Sync Now";
-                    $scope.initialLoadFoodAndExercise(selectedDate);
-                },
+            $scope.connectDevice=true;
+            $scope.syncBtnTxt="Synchronizing...";
+              $scope.doGetConnectedDevices();
+              $location.path("dashboard");
+              $scope.initialLoadFoodAndExercise(selectedDate);
+                    },
                 function () {
                     errorMessage(Flash, "Please try again later!")
                 });
         };
-
-
+        $scope.doGetConnectedDevices=function(){
+            requestHandler.getRequest("getWearableVendorsListByUser/","").then(function(response){
+                $scope.vendorlist=response.data;
+                $scope.connectDevice=false;
+                var isActive=0;
+                $.each($scope.vendorlist, function(index,value) {
+                        if(value.isactive==1){
+                            isActive++;
+                        }
+                  });
+                if(isActive>0){
+                   $scope.syncBtnTxt="Sync Completed";
+                }
+                else{
+                   $scope.syncBtnTxt="No Devices Connected";
+                }
+                });
+        };
 
         //On Select frequent foods
         $scope.frequentFood=function(foodid){
@@ -1036,7 +1051,6 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
                         var date1 = selectedDate.slice(6,10)+'-'+selectedDate.slice(3,5)+'-'+selectedDate.slice(0,2);
                         var date2 = $scope.goalDetails.enddate.slice(6,10)+'-'+$scope.goalDetails.enddate.slice(3,5)+'-'+$scope.goalDetails.enddate.slice(0,2);
 
-                       console.log(date1) ;
                         var date1_ms;
 
                         if (new Date(dateCompare).getTime() > new Date(date1).getTime()) {
@@ -1335,7 +1349,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
         };
 
 
-        //For maximum height validation
+        //For maximum Weight validation
         $scope.maxweight=false;
         $scope.maxCheck = function(){
             if(parseFloat($scope.weightlog)<=2204.4){
@@ -3935,20 +3949,20 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
         }
         selectedDate = dd+'/'+mm+'/'+yyyy;
 
-        //To display history start date
-        var startDate=new Date();
-        var date = startDate.getDate()-6;
-        var month = startDate.getMonth()+1; //January is 0!
-
-        var year = startDate.getFullYear();
-        if(date<10){
-            date='0'+date
+        //To display lastWeek
+        function getLastWeek(){
+            var today = new Date();
+            var lastWeek = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 6);
+            return lastWeek ;
         }
-        if(month<10){
-            month='0'+month
-        }
-        startDate = date+'/'+month+'/'+year;
 
+        var lastWeek = getLastWeek();
+        var lastWeekMonth = lastWeek.getMonth() + 1;
+        var lastWeekDay = lastWeek.getDate();
+        var lastWeekYear = lastWeek.getFullYear();
+        var lastWeekDisplay = lastWeekMonth + "/" + lastWeekDay + "/" + lastWeekYear;
+        var lastWeekDisplayPadded = ("00" + lastWeekDay.toString()).slice(-2)+ "/" + ("00" + lastWeekMonth .toString()).slice(-2)+ "/" + ("0000" + lastWeekYear .toString()).slice(-4);
+        var startDate=lastWeekDisplayPadded;
 
         $scope.weightLogDate = selectedDate;
         $scope.todayDate = selectedDate;
@@ -3970,6 +3984,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
             $scope.graphTwo();
             $scope.checkGoalOnLoad(date);
             $scope.doGetWearableDateByDate(date);
+           // $scope.doSyncDevices(date);
         };
 
         $scope.initialLoadFoodAndExercise(selectedDate);
@@ -4531,6 +4546,38 @@ function tabcontent() {
     });
 
 };
+//for restricting keypress event allow 2 digits after (dot)
+function validateFloatKeyPress2(el, evt) {
+    var charCode = (evt.which) ? evt.which : event.keyCode;
+    var number = el.value.split('.');
+    if (charCode != 46 && charCode > 31 && (charCode < 48 || charCode > 57)) {
+        return false;
+    }
+    //just one dot
+    if(number.length>1 && charCode == 46){
+        return false;
+    }
+    // for backspace issue in firefox
+    if(charCode== 8){
+        return true;
+    }
+    //get the carat position
+    var caratPos = getSelectionStart(el);
+    var dotPos = el.value.indexOf(".");
+    if( caratPos > dotPos && dotPos>-1 && (number[1].length > 1)){
+        return false;
+    }
+    return true;
+}
+
+function getSelectionStart(o) {
+    if (o.createTextRange) {
+        var r = document.selection.createRange().duplicate()
+        r.moveEnd('character', o.value.length)
+        if (r.text == '') return o.value.length
+        return o.value.lastIndexOf(r.text)
+    } else return o.selectionStart
+}
 
 //for adivce tab coach carousel
 
@@ -4600,4 +4647,36 @@ function coachAdviceCarousel(){
         controlls.find('.owl-prev').html('<i class="fa fa-angle-left"></i>');
         controlls.find('.owl-next').html('<i class="fa fa-angle-right"></i>');
     },500);
+}
+//for restricting keypress event after (dot)
+function validateFloatKeyPress(el, evt) {
+    var charCode = (evt.which) ? evt.which : event.keyCode;
+    var number = el.value.split('.');
+    if (charCode != 46 && charCode > 31 && (charCode < 48 || charCode > 57)) {
+        return false;
+    }
+    //just one dot
+    if(number.length>1 && charCode == 46){
+        return false;
+    }
+    // for backspace issue in firefox
+    if(charCode== 8){
+        return true;
+    }
+    //get the carat position
+    var caratPos = getSelectionStart(el);
+    var dotPos = el.value.indexOf(".");
+    if( caratPos > dotPos && dotPos>-1 && (number[1].length > 0)){
+        return false;
+    }
+    return true;
+}
+
+function getSelectionStart(o) {
+    if (o.createTextRange) {
+        var r = document.selection.createRange().duplicate()
+        r.moveEnd('character', o.value.length)
+        if (r.text == '') return o.value.length
+        return o.value.lastIndexOf(r.text)
+    } else return o.selectionStart
 }

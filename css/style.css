@@ -7380,7 +7380,6 @@ button.sync_button{
     height: 45px;
     font-weight: normal;
     line-height: 40px;
-    display: block;
     position: relative;
     font-size: 14px;
     padding: 3px ;
@@ -7388,8 +7387,9 @@ button.sync_button{
     color: #fff;
     background-color: #ff5010;
     margin-top: 5px;
-    width: 120px;
+    min-width: 120px;
     border:1px #ff5010;
+    display: inline-block;
 }
 
 button.sync_button:hover{
