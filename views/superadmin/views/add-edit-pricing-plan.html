@@ -1,0 +1,107 @@
+
+<!-- Start Page Banner -->
+
+<div class="container" ng-cloak class="ng-cloak">
+    <div class="row">
+
+        <div class="col-md-3">
+            <h4 class="classic-title"><span>Site Management</span></h4>
+            <div ng-include src="'views/site-menu.html'" onload="activeClass"></div>
+        </div>
+        <div class="col-md-9">
+            <a href="#pricing-plan-list" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back to Pricing Plan List</a>
+            <h4 class="classic-title"><span><i class="fa fa-inr"></i>&nbsp;{{title}}</span></h4>
+            <div class="row">
+                <form name="pricingplanForm">
+
+                        <div class="col-md-12">
+                            <div class="col-md-4">
+                                <h4>Plan Name</h4>
+                            </div>
+                            <div class="col-md-8 margin-bottom-20">
+                                <input class="form-control" name="planname" ng-model="pricingplan.planname" required validate-alpha-with-space maxlength="100">
+                                    <span ng-show="pricingplanForm.planname.$dirty&&pricingplanForm.planname.$invalid">
+                                  <span class="error-message" ng-show="pricingplanForm.planname.$error.required"><span>Required.</span></span>
+                                  <span class="error-message" ng-show="pricingplanForm.planname.$error.validateAlphaWithSpace"><span>Invalid&nbsp;Format.</span></span>
+                             </span>
+                            </div>
+                            <div class="col-md-4">
+                                <h4>Price INR&nbsp;(₹)</h4>
+                            </div>
+                            <div class="col-md-8 margin-bottom-20">
+                                <input type="text" class="form-control" name="priceinr" ng-model="pricingplan.priceINR" maxlength="10" required valid-number>
+                                    <span ng-show="pricingplanForm.priceinr.$dirty&&pricingplanForm.priceinr.$invalid">
+                                  <span class="error-message" ng-show="pricingplanForm.priceinr.$error.required"><span>Required.</span></span>
+                                  <span class="error-message" ng-show="pricingplanForm.priceinr.$error.validNumber"><span>Invalid&nbsp;Format.</span></span>
+                             </span>
+                            </div>
+                            <div class="col-md-4">
+                                <h4>Price USD&nbsp;($)</h4>
+                            </div>
+                            <div class="col-md-8 margin-bottom-20">
+                                <input type="text" class="form-control" name="priceusd" ng-model="pricingplan.priceUSD" maxlength="10" required valid-number>
+                                    <span ng-show="pricingplanForm.priceusd.$dirty&&pricingplanForm.priceusd.$invalid">
+                                  <span class="error-message" ng-show="pricingplanForm.priceusd.$error.required"><span>Required.</span></span>
+                                        <span class="error-message" ng-show="pricingplanForm.priceusd.$error.validNumber"><span>Invalid&nbsp;.</span></span>
+                             </span>
+                            </div>
+                            <div class="col-md-4">
+                                <h4>No.of.Counts</h4>
+                            </div>
+                            <div class="col-md-8 margin-bottom-20">
+                                <input type="text" class="form-control" name="count" ng-model="pricingplan.clientscount" maxlength="10" required validate-integer>
+                                    <span ng-show="pricingplanForm.count.$dirty&&pricingplanForm.count.$invalid">
+                                  <span class="error-message" ng-show="pricingplanForm.count.$error.required"><span>Required.</span></span>
+                                        <span class="error-message" ng-show="pricingplanForm.count.$error.validateInteger"><span>Invalid&nbsp;Format.</span></span>
+                             </span>
+                            </div>
+                            <div class="col-md-4">
+                                <h4>Discount</h4>
+                            </div>
+                            <div class="col-md-8 margin-bottom-20">
+                                <input type="text" class="form-control" name="discount" ng-model="pricingplan.discount" maxlength="10" required valid-number>
+                                    <span ng-show="pricingplanForm.discount.$dirty&&pricingplanForm.discount.$invalid">
+                                  <span class="error-message" ng-show="pricingplanForm.discount.$error.required"><span>Required.</span></span>
+                                  <span class="error-message" ng-show="pricingplanForm.discount.$error.validNumber"><span>Required.</span></span>
+                             </span>
+                            </div>
+                            <div class="col-md-4">
+                                <h4>Plan Color</h4>
+                            </div>
+                            <div class="col-md-8 margin-bottom-20">
+                                <div class="input-group" id="demo">
+                                    <input type="text"  class="form-control" ng-model="pricingplan.plancolor"/>
+                                    <span class="input-group-addon"><i></i></span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <h4>Features</h4>
+                            </div>
+                            <div class="col-md-8 margin-bottom-20">
+                                <textarea type="text" class="height-150 form-control" name="features" ng-model="pricingplan.features" maxlength="200" required></textarea>
+                                    <span ng-show="pricingplanForm.features.$dirty&&pricingplanForm.features.$invalid">
+                                  <span class="error-message" ng-show="pricingplanForm.features.$error.required"><span>Required.</span></span>
+                             </span>
+                            </div>
+                        </div>
+                </form>
+            </div>
+            <div class="text-center margin-top-10">
+                <a href="" class="btn btn-success"  ng-disabled="pricingplanForm.$invalid||submitContent" ng-click="doAddCoachPricingPlan()" ng-show="isNew">{{contentBtnTxt}}</a>
+                <a href="" class="btn btn-success"  ng-disabled="pricingplanForm.$invalid ||submitContent" ng-hide="isNew" ng-click="doUpdatePricingPlan()">{{contentBtnTxt}}</a>
+                <a href="#pricing-plan-list" class="btn btn-warning">Cancel</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- End Page Banner -->
+
+<script type="text/javascript" src="../../js/script.js"></script>
+    <script>
+    $(function() {
+        $('#demo').colorpicker();
+    });
+</script>
+
+

@@ -70,7 +70,7 @@
         <div class="common_model">
             <form name="measureForm">
                 <p>Measure Name</p>
-                <input type="text"  name="measure" data-measureid="list.measureid"  ng-pattern="/^ *([a-zA-Z]+ ?)+ *$/" ng-model="list.measurename" maxlength="45" measureexists required focus-me="shouldBeOpen">
+                <input type="text"  name="measure" data-measureid="list.measureid"  ng-pattern="/^[ A-Za-z,&+-]*$/" ng-model="list.measurename" maxlength="45" measureexists required focus-me="shouldBeOpen">
                          <span ng-show="measureForm.measure.$dirty&&measureForm.measure.$invalid">
                                 <span class="error-message" ng-show="measureForm.measure.$error.required"><span>Required.</span></span>
                              <span class="error-message" ng-show="measureForm.measure.$error.pattern"><span>Invalid&nbsp;Measure.</span></span>

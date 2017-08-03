@@ -1280,24 +1280,171 @@
                              </span>
                             <h5 class="margin-top-10">Timings</h5>
                             <div class="col-lg-4 col-md-4 col-sm-4 margin-top-10"><span>Hours</span>
-                               <input type="text" name="hours" ng-model="workoutvalueHours" ng-change="doCalculateCaloriesExercise()"  maxlength="7" style="width: 130%">
+                            <!-- <input type="text" name="hours" ng-model="workoutvalueHours" ng-change="doCalculateCaloriesExercise()"  maxlength="7" style="width: 130%">-->
+                                <select class="form-control" name="hours"  ng-model="workoutvalueHours" ng-init="workoutvalueHours='0'" ng-change="doCalculateCaloriesExercise()" style="width: 130%">
+                                   <option value="0">00</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+                                    <option value="13">13</option>
+                                    <option value="14">14</option>
+                                    <option value="15">15</option>
+                                    <option value="16">16</option>
+                                    <option value="17">17</option>
+                                    <option value="18">18</option>
+                                    <option value="19">19</option>
+                                    <option value="20">20</option>
+                                    <option value="21">21</option>
+                                    <option value="22">22</option>
+                                    <option value="23">23</option>
+                                </select>
                                   <!-- <span ng-show="ExerciseAddForm.hours.$dirty&&ExerciseAddForm.hours.$invalid">
                                       <span class="error-message" ng-show="ExerciseAddForm.hours.$error.required"><span>Required.</span></span>
-                                      <span class="error-message" ng-show="ExerciseAddForm.hours.$error.pattern"><span>Invalid&nbsp;Data.</span></span>
                                    </span>-->
                            </div>
                             <div class="col-lg-4 col-md-4 col-sm-4 margin-top-10"><span>Minutes</span>
-                                <input type="text" ng-pattern="/(^[1-9]\d{0,8}$)/" name="minutes" ng-model="workoutvalueMinutes" ng-change="doCalculateCaloriesExercise()"  maxlength="7" required style="width: 130%">
-                                   <span ng-show="ExerciseAddForm.minutes.$dirty&&ExerciseAddForm.minutes.$invalid">
+                               <!-- <input type="text" ng-pattern="/(^[1-9]\d{0,8}$)/" name="minutes" ng-model="workoutvalueMinutes" ng-change="doCalculateCaloriesExercise()"  maxlength="7" required style="width: 130%">-->
+                                <select class="form-control" name="minutes"  ng-model="workoutvalueMinutes" ng-init="workoutvalueMinutes='0'" ng-change="doCalculateCaloriesExercise()" required style="width: 130%">
+                                    <option value="0">00</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+                                    <option value="13">13</option>
+                                    <option value="14">14</option>
+                                    <option value="15">15</option>
+                                    <option value="16">16</option>
+                                    <option value="17">17</option>
+                                    <option value="18">18</option>
+                                    <option value="19">19</option>
+                                    <option value="20">20</option>
+                                    <option value="21">21</option>
+                                    <option value="22">22</option>
+                                    <option value="23">23</option>
+                                    <option value="24">24</option>
+                                    <option value="25">25</option>
+                                    <option value="26">26</option>
+                                    <option value="27">27</option>
+                                    <option value="28">28</option>
+                                    <option value="29">29</option>
+                                    <option value="30">30</option>
+                                    <option value="31">31</option>
+                                    <option value="32">32</option>
+                                    <option value="33">33</option>
+                                    <option value="34">34</option>
+                                    <option value="35">35</option>
+                                    <option value="36">36</option>
+                                    <option value="37">37</option>
+                                    <option value="38">38</option>
+                                    <option value="39">39</option>
+                                    <option value="40">40</option>
+                                    <option value="41">41</option>
+                                    <option value="42">42</option>
+                                    <option value="43">43</option>
+                                    <option value="44">44</option>
+                                    <option value="45">45</option>
+                                    <option value="46">46</option>
+                                    <option value="47">47</option>
+                                    <option value="48">48</option>
+                                    <option value="49">49</option>
+                                    <option value="50">50</option>
+                                    <option value="51">51</option>
+                                    <option value="52">52</option>
+                                    <option value="53">53</option>
+                                    <option value="54">54</option>
+                                    <option value="55">55</option>
+                                    <option value="56">56</option>
+                                    <option value="57">57</option>
+                                    <option value="58">58</option>
+                                    <option value="59">59</option>
+                                </select>
+                                  <!-- <span ng-show="ExerciseAddForm.minutes.$dirty&&ExerciseAddForm.minutes.$invalid">
                                       <span class="error-message" ng-show="ExerciseAddForm.minutes.$error.required"><span>Required.</span></span>
-                                      <span class="error-message" ng-show="ExerciseAddForm.minutes.$error.pattern"><span>Invalid&nbsp;Data.</span></span>
-                                   </span>
+                                   </span>-->
                                 </div>
                             <div class="col-lg-4 col-md-4 col-sm-4 margin-top-10"><span>Seconds</span>
-                                <input type="text" name="seconds" ng-model="workoutvalueSeconds" ng-change="doCalculateCaloriesExercise()"  maxlength="7" style="width: 130%">
-                                 <!--  <span ng-show="ExerciseAddForm.seconds.$dirty&&ExerciseAddForm.seconds.$invalid">
+                                <!--<input type="text" name="seconds" ng-model="workoutvalueSeconds" ng-change="doCalculateCaloriesExercise()"  maxlength="7" style="width: 130%">-->
+                                <select class="form-control" name="seconds"  ng-model="workoutvalueSeconds" ng-init="workoutvalueSeconds='0'" ng-change="doCalculateCaloriesExercise()" style="width: 130%">
+                                    <option value="0">00</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+                                    <option value="13">13</option>
+                                    <option value="14">14</option>
+                                    <option value="15">15</option>
+                                    <option value="16">16</option>
+                                    <option value="17">17</option>
+                                    <option value="18">18</option>
+                                    <option value="19">19</option>
+                                    <option value="20">20</option>
+                                    <option value="21">21</option>
+                                    <option value="22">22</option>
+                                    <option value="23">23</option>
+                                    <option value="24">24</option>
+                                    <option value="25">25</option>
+                                    <option value="26">26</option>
+                                    <option value="27">27</option>
+                                    <option value="28">28</option>
+                                    <option value="29">29</option>
+                                    <option value="30">30</option>
+                                    <option value="31">31</option>
+                                    <option value="32">32</option>
+                                    <option value="33">33</option>
+                                    <option value="34">34</option>
+                                    <option value="35">35</option>
+                                    <option value="36">36</option>
+                                    <option value="37">37</option>
+                                    <option value="38">38</option>
+                                    <option value="39">39</option>
+                                    <option value="40">40</option>
+                                    <option value="41">41</option>
+                                    <option value="42">42</option>
+                                    <option value="43">43</option>
+                                    <option value="44">44</option>
+                                    <option value="45">45</option>
+                                    <option value="46">46</option>
+                                    <option value="47">47</option>
+                                    <option value="48">48</option>
+                                    <option value="49">49</option>
+                                    <option value="50">50</option>
+                                    <option value="51">51</option>
+                                    <option value="52">52</option>
+                                    <option value="53">53</option>
+                                    <option value="54">54</option>
+                                    <option value="55">55</option>
+                                    <option value="56">56</option>
+                                    <option value="57">57</option>
+                                    <option value="58">58</option>
+                                    <option value="59">59</option>
+                                </select>
+                                  <!-- <span ng-show="ExerciseAddForm.seconds.$dirty&&ExerciseAddForm.seconds.$invalid">
                                       <span class="error-message" ng-show="ExerciseAddForm.seconds.$error.required"><span>Required.</span></span>
-                                      <span class="error-message" ng-show="ExerciseAddForm.seconds.$error.pattern"><span>Invalid&nbsp;Data.</span></span>
                                    </span>-->
                             </div>
                     </form>
@@ -1331,8 +1478,8 @@
                 </div>
 
                 <div class="action_btns margin-top-20">
-                    <div class="one_half" ng-show="isNew"><a href="#" onclick="return false;" ng-disabled="ExerciseAddForm.$invalid" class="btn btn_blue modal_close" ng-click="doInsertUserExercise()">Add Exercise</a></div>
-                    <div class="one_half" ng-hide="isNew"><a href="#" onclick="return false;" ng-disabled="ExerciseAddForm.$invalid ||  isCleanExercise()" class="btn btn_blue modal_close" ng-click="doUpdateUserExercise()">Update Exercise</a></div>
+                    <div class="one_half" ng-show="isNew"><a href="#" onclick="return false;" ng-disabled="ExerciseAddForm.$invalid ||current==0" class="btn btn_blue modal_close" ng-click="doInsertUserExercise()">Add Exercise</a></div>
+                    <div class="one_half" ng-hide="isNew"><a href="#" onclick="return false;" ng-disabled="ExerciseAddForm.$invalid ||  isCleanExercise() || current==0" class="btn btn_blue modal_close" ng-click="doUpdateUserExercise()">Update Exercise</a></div>
                     <div class="one_half last modal_close"><a class="btn btn_red">Cancel</a></div>
                 </div>
             </div>
@@ -1352,7 +1499,7 @@
             </header>
             <section class="popupBody">
                 <!-- Register Form -->
-                <div class="common_model">
+                <div class="common_model user_register1">
                     <form name="customExerciseAddForm" novalidate>
                         <h5  class="margin-top-10">Exercise Name</h5>
                         <input type="text" name="name" ng-model="customExercise.exercisename" required>
@@ -1366,21 +1513,175 @@
                                   <span class="error-message" ng-show="customExerciseAddForm.calories.$error.validateFloat"><span>Invalid&nbsp;Data.</span></span>
                                   </span>
                         <h5  class="margin-top-10">Workout Value</h5>
-                        <div class="col-lg-12 col-md-12 col-sm-12" style="padding:0">
-                        <div class="col-lg-4 col-md-4 col-sm-4 margin-top-10"><span>Hours</span>
-                            <input type="text" name="customhours" ng-model="selectedHours" maxlength="7">
+                        <div class="col-lg-4 col-md-4 col-sm-4 margin-top-10 "><span>Hours</span>
+                           <!-- <input type="text" name="customhours" ng-model="selectedHours" maxlength="7">-->
+                            <select class="form-control" name="customhours"  ng-model="selectedHours" ng-init="selectedHours='0'">
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                                <option value="13">13</option>
+                                <option value="14">14</option>
+                                <option value="15">15</option>
+                                <option value="16">16</option>
+                                <option value="17">17</option>
+                                <option value="18">18</option>
+                                <option value="19">19</option>
+                                <option value="20">20</option>
+                                <option value="21">21</option>
+                                <option value="22">22</option>
+                                <option value="23">23</option>
+                            </select>
+                             <!--  <span ng-show="customExerciseAddForm.customhours.$dirty&&customExerciseAddForm.customhours.$invalid">
+                                   <span class="error-message" ng-show="customExerciseAddForm.customhours.$error.required"><span>Required.</span></span>
+                               </span>-->
                         </div>
                         <div class="col-lg-4 col-md-4 col-sm-4 margin-top-10"><span>Minutes</span>
-                            <input type="text" ng-pattern="/(^[1-9]\d{0,8}$)/" name="customminutes" ng-model="selectedMinutes"  maxlength="7" required>
-                                   <span ng-show="customExerciseAddForm.customminutes.$dirty&&customExerciseAddForm.customminutes.$invalid">
+                            <!--<input type="text" ng-pattern="/(^[1-9]\d{0,8}$)/" name="customminutes" ng-model="selectedMinutes"  maxlength="7" required>-->
+                            <select class="form-control" name="minutes"  ng-model="selectedMinutes" ng-init="selectedMinutes='0'">
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                                <option value="13">13</option>
+                                <option value="14">14</option>
+                                <option value="15">15</option>
+                                <option value="16">16</option>
+                                <option value="17">17</option>
+                                <option value="18">18</option>
+                                <option value="19">19</option>
+                                <option value="20">20</option>
+                                <option value="21">21</option>
+                                <option value="22">22</option>
+                                <option value="23">23</option>
+                                <option value="24">24</option>
+                                <option value="25">25</option>
+                                <option value="26">26</option>
+                                <option value="27">27</option>
+                                <option value="28">28</option>
+                                <option value="29">29</option>
+                                <option value="30">30</option>
+                                <option value="31">31</option>
+                                <option value="32">32</option>
+                                <option value="33">33</option>
+                                <option value="34">34</option>
+                                <option value="35">35</option>
+                                <option value="36">36</option>
+                                <option value="37">37</option>
+                                <option value="38">38</option>
+                                <option value="39">39</option>
+                                <option value="40">40</option>
+                                <option value="41">41</option>
+                                <option value="42">42</option>
+                                <option value="43">43</option>
+                                <option value="44">44</option>
+                                <option value="45">45</option>
+                                <option value="46">46</option>
+                                <option value="47">47</option>
+                                <option value="48">48</option>
+                                <option value="49">49</option>
+                                <option value="50">50</option>
+                                <option value="51">51</option>
+                                <option value="52">52</option>
+                                <option value="53">53</option>
+                                <option value="54">54</option>
+                                <option value="55">55</option>
+                                <option value="56">56</option>
+                                <option value="57">57</option>
+                                <option value="58">58</option>
+                                <option value="59">59</option>
+                            </select>
+                                <!--   <span ng-show="customExerciseAddForm.customminutes.$dirty&&customExerciseAddForm.customminutes.$invalid">
                                       <span class="error-message" ng-show="customExerciseAddForm.customminutes.$error.required"><span>Required.</span></span>
-                                      <span class="error-message" ng-show="customExerciseAddForm.customminutes.$error.pattern"><span>Invalid&nbsp;Data.</span></span>
-                                   </span>
+                                  </span>-->
                         </div>
                         <div class="col-lg-4 col-md-4 col-sm-4 margin-top-10"><span>Seconds</span>
-                            <input type="text" name="customseconds" ng-model="selectedSeconds" maxlength="7">
+                            <!--<input type="text" name="customseconds" ng-model="selectedSeconds" maxlength="7">-->
+                            <select class="form-control" name="customseconds"  ng-model="selectedSeconds" ng-init="selectedSeconds='0'">
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                                <option value="13">13</option>
+                                <option value="14">14</option>
+                                <option value="15">15</option>
+                                <option value="16">16</option>
+                                <option value="17">17</option>
+                                <option value="18">18</option>
+                                <option value="19">19</option>
+                                <option value="20">20</option>
+                                <option value="21">21</option>
+                                <option value="22">22</option>
+                                <option value="23">23</option>
+                                <option value="24">24</option>
+                                <option value="25">25</option>
+                                <option value="26">26</option>
+                                <option value="27">27</option>
+                                <option value="28">28</option>
+                                <option value="29">29</option>
+                                <option value="30">30</option>
+                                <option value="31">31</option>
+                                <option value="32">32</option>
+                                <option value="33">33</option>
+                                <option value="34">34</option>
+                                <option value="35">35</option>
+                                <option value="36">36</option>
+                                <option value="37">37</option>
+                                <option value="38">38</option>
+                                <option value="39">39</option>
+                                <option value="40">40</option>
+                                <option value="41">41</option>
+                                <option value="42">42</option>
+                                <option value="43">43</option>
+                                <option value="44">44</option>
+                                <option value="45">45</option>
+                                <option value="46">46</option>
+                                <option value="47">47</option>
+                                <option value="48">48</option>
+                                <option value="49">49</option>
+                                <option value="50">50</option>
+                                <option value="51">51</option>
+                                <option value="52">52</option>
+                                <option value="53">53</option>
+                                <option value="54">54</option>
+                                <option value="55">55</option>
+                                <option value="56">56</option>
+                                <option value="57">57</option>
+                                <option value="58">58</option>
+                                <option value="59">59</option>
+                            </select>
                        </div>
-                            </div>
+                            <!-- <span ng-show="customExerciseAddForm.customseconds.$dirty&&customExerciseAddForm.customseconds.$invalid">
+                                  <span class="error-message" ng-show="customExerciseAddForm.customseconds.$error.required"><span>Required.</span></span>
+                             </span>-->
+
                        <h5  class="margin-top-10">Reps Value</h5>
                         <input type="text" ng-pattern="/(^[1-9]\d{0,8}$)/"  name="reps" ng-model="customExercise.reps"  maxlength="3"  required>
                                  <span ng-show="customExerciseAddForm.reps.$dirty&&customExerciseAddForm.reps.$invalid">
@@ -1388,8 +1689,8 @@
                                  <span class="error-message" ng-show="customExerciseAddForm.reps.$error.pattern"><span>Invalid&nbsp;Data.</span></span>
                                  </span>
                         <div class="action_btns margin-top-20">
-                            <div class="one_half" ng-show="isNew"><a href="#" onclick="return false;" ng-disabled="customExerciseAddForm.$invalid" class="btn btn_blue modal_close" ng-click="doInsertUserCustomExercise()">Add Custom Exercise</a></div>
-                             <div class="one_half" ng-hide="isNew"><a href="#" onclick="return false;" ng-disabled="CustomExerciseAddForm.$invalid" class="btn btn_blue modal_close" ng-click="doUpdateUserCustomExercise()">Update Custom Exercise</a></div>
+                            <div class="one_half" ng-show="isNew"><a href="#" onclick="return false;" ng-disabled="customExerciseAddForm.$invalid ||selectedSeconds==0&&selectedMinutes==0&&selectedHours==0" class="btn btn_blue modal_close" ng-click="doInsertUserCustomExercise()">Add Custom Exercise</a></div>
+                             <div class="one_half" ng-hide="isNew"><a href="#" onclick="return false;" ng-disabled="CustomExerciseAddForm.$invalid ||selectedSeconds==0&&selectedMinutes==0&&selectedHours==0" class="btn btn_blue modal_close" ng-click="doUpdateUserCustomExercise()">Update Custom Exercise</a></div>
                             <div class="one_half last modal_close"><a class="btn btn_red">Cancel</a></div>
                         </div>
                     </form>
@@ -1427,7 +1728,7 @@
                         &nbsp;
                         <div class="row margin-bottom-5 margin-top-3">
                             <div class="col-lg-3 col-md-3 col-sm-6" ng-repeat="category in categorylist">
-                            <span class="fh-checkbox" required>
+                            <span class="fh-checkbox"  style="white-space: nowrap" required>
                                 <input type="checkbox" name="category" id="category{{category.categoryid}}" ng-model="category.isChecked">
                                 <label for="category{{category.categoryid}}">{{category.categoryname}}</label>
                             </span>
@@ -1450,7 +1751,7 @@
                         <hr/>&nbsp;
                         <div class="row margin-bottom-5 margin-top-3">
                             <div class="col-lg-3 col-md-3 col-sm-6" ng-repeat="type in typelist">
-                               <span class="fh-checkbox" required>
+                               <span class="fh-checkbox" style="white-space: nowrap" required>
                                    <input type="checkbox" id="type{{type.typeid}}" name="type" ng-model="type.isChecked">
                                    <label for="type{{type.typeid}}">{{type.typename}}</label>
                               </span>

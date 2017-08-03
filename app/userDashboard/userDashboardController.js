@@ -92,6 +92,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
                 $scope.resetexercisedata();
             });
             $scope.selectedExercise="";
+
         };
 
         //To Insert User Custom Exercise
@@ -712,11 +713,11 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
                 $scope.loaded=false;
                 //For Normal Exercise Workout Conversion
                 $.each($scope.userExerciseDiaryDataAll.ExerciseData,function(index,value){
-                    value.userExerciseWorkoutDisplayValue=Math.round(value.workoutvalue/3600) +" Hrs "+Math.round(value.workoutvalue/60)%60 +" Mins "+Math.round(value.workoutvalue%60)+" Secs";
+                    value.userExerciseWorkoutDisplayValue=Math.floor(value.workoutvalue/3600) +" Hrs "+Math.floor((value.workoutvalue%3600)/60) +" Mins "+Math.floor((value.workoutvalue%3600)%60)+" Secs";
                 });
                 //For Custom Exercise Workout Conversion
                 $.each($scope.userExerciseDiaryDataAll.customExercise,function(index,value){
-                    value.customExerciseWorkoutDisplayValue=Math.round(value.workoutvalue/3600) +" Hrs "+Math.round(value.workoutvalue/60)%60 +" Mins "+Math.round(value.workoutvalue%60)+" Secs";
+                    value.customExerciseWorkoutDisplayValue=Math.floor(value.workoutvalue/3600) +" Hrs "+Math.floor((value.workoutvalue%3600)/60) +" Mins "+Math.floor((value.workoutvalue%3600)%60)+" Secs";
                 });
             });
 
@@ -789,9 +790,9 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
                         }
                     });
                     $scope.userExercise.workoutvalue=(result.workoutvalue);
-                    $scope.workoutvalueMinutes=Math.round((result.workoutvalue/60)%60);
-                    $scope.workoutvalueSeconds=Math.round(result.workoutvalue%60);
-                    $scope.workoutvalueHours=Math.round(result.workoutvalue/3600);
+                    $scope.workoutvalueMinutes=Math.floor((result.workoutvalue%3600)/60).toString();
+                    $scope.workoutvalueSeconds=Math.floor((result.workoutvalue%3600)%60).toString();
+                    $scope.workoutvalueHours=Math.floor(result.workoutvalue/3600).toString();
                     originaltiming = parseInt(result.workoutvalue);
                     $scope.userExercise.reps=parseInt(result.reps);
                     originalreps = parseInt(result.reps);
@@ -843,6 +844,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
         //Calories caluclation for exercose
         $scope.doCalculateCaloriesExercise=function(){
             $scope.userExercise.workoutvalue=parseInt($scope.workoutvalueHours*3600)+ parseInt($scope.workoutvalueMinutes*60)+ parseInt($scope.workoutvalueSeconds);
+            console.log($scope.workoutvalueHours);
             if($scope.userExercise.workoutvalue==0){
                 $scope.current=$scope.caloriesSpent=0;
             }
@@ -887,9 +889,9 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
                 $scope.customExercise.exercisename=result.exercisename;
                 $scope.customExercise.calories=result.calories;
                 $scope.customExercise.workoutvalue=(result.workoutvalue);
-                $scope.selectedMinutes=Math.round((result.workoutvalue/60)%60);
-                $scope.selectedSeconds=Math.round(result.workoutvalue%60);
-                $scope.selectedHours=Math.round(result.workoutvalue/3600);
+                $scope.selectedMinutes=Math.floor((result.workoutvalue%3600)/60).toString();
+                $scope.selectedSeconds=Math.floor((result.workoutvalue%3600)%60).toString();
+                $scope.selectedHours=Math.floor(result.workoutvalue/3600).toString();
                 originaltiming = result.workoutvalue;
                 $scope.customExercise.reps=parseInt(result.reps);
                 originalreps = parseInt(result.reps);

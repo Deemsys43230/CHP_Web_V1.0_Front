@@ -309,7 +309,76 @@ adminApp.config([
         ]
       },
       controller: 'ForumsController'
-    }).when('/testimonials', {
+    }).when('/pricing-plan-list', {
+            templateUrl: 'views/pricing-plan-list.html',
+            resolve: {
+                loadMyFiles: [
+                    '$ocLazyLoad',
+                    function ($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name: 'adminApp',
+                            files: [
+                                '../../angular/angular-utils-pagination/dirPagination.js',
+                                '../../app/pricingPlan/pricingPlanController.js'
+                            ]
+                        });
+                    }
+                ]
+            },
+            controller: 'PricingPlanController'
+        })
+        .when('/add-pricing-plan', {
+            templateUrl: 'views/add-edit-pricing-plan.html',
+            resolve: {
+                loadMyFiles: [
+                    '$ocLazyLoad',
+                    function ($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name: 'adminApp',
+                            files: [
+                                '../../angular/angular-utils-pagination/dirPagination.js',
+                                '../../app/pricingPlan/pricingPlanController.js'
+                            ]
+                        });
+                    }
+                ]
+            },
+            controller: 'PricingPlanController'
+        }).when('/edit-pricing-plan/:id', {
+            templateUrl: 'views/add-edit-pricing-plan.html',
+            resolve: {
+                loadMyFiles: [
+                    '$ocLazyLoad',
+                    function ($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name: 'adminApp',
+                            files: [
+                                '../../angular/angular-utils-pagination/dirPagination.js',
+                                '../../app/pricingPlan/pricingPlanController.js'
+                            ]
+                        });
+                    }
+                ]
+            },
+            controller: 'PricingPlanEditController'
+        }).when('/view-pricing-plan/:id', {
+            templateUrl: 'views/view-pricing-plan.html',
+            resolve: {
+                loadMyFiles: [
+                    '$ocLazyLoad',
+                    function ($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name: 'adminApp',
+                            files: [
+                                '../../angular/angular-utils-pagination/dirPagination.js',
+                                '../../app/pricingPlan/pricingPlanController.js'
+                            ]
+                        });
+                    }
+                ]
+            },
+            controller: 'PricingPlanEditController'
+        }).when('/testimonials', {
       templateUrl: 'views/site-testimonials.html',
       resolve: {
         loadMyFiles: [
@@ -2273,6 +2342,7 @@ adminApp.directive('validateInteger', function () {
     }
   };
 });
+
 adminApp.filter('startsWithLetter', function () {
   return function (items, searchMenu) {
     var filtered = [];
@@ -2288,6 +2358,73 @@ adminApp.filter('startsWithLetter', function () {
     }
     return filtered;
   };
+});
+adminApp.directive('validateImgFileExt', function() {
+    return {
+        require: 'ngModel',
+        link: function(scope, elem, attrs, ctrl) {
+            elem.on('change', function  (evt) {
+                scope.$apply(function(value){
+                    var files = evt.currentTarget.files[0];
+                    fileExt = files.name.substring(files.name.lastIndexOf('.')+1);
+                    var type=["jpg","gif","png","jpeg"];
+
+                    if (fileExt && type.indexOf(fileExt)!=-1){
+                        ctrl.$setValidity('validateImgFileExt', true);
+                    }
+                    else{
+                        ctrl.$setValidity('validateImgFileExt', false);
+                    }
+                });
+            });
+        }
+    };
+});
+
+adminApp.directive('validNumber', function() {
+    return {
+        require: '?ngModel',
+        link: function(scope, element, attrs, ngModelCtrl) {
+            if(!ngModelCtrl) {
+                return;
+            }
+
+            ngModelCtrl.$parsers.push(function(val) {
+                if (angular.isUndefined(val)) {
+                    var val = '';
+                }
+
+                var clean = val.replace(/[^-0-9\.]/g, '');
+                var negativeCheck = clean.split('-');
+                var decimalCheck = clean.split('.');
+                if(!angular.isUndefined(negativeCheck[1])) {
+                    negativeCheck[1] = negativeCheck[1].slice(0, negativeCheck[1].length);
+                    clean =negativeCheck[0] + '-' + negativeCheck[1];
+                    if(negativeCheck[0].length > 0) {
+                        clean =negativeCheck[0];
+                    }
+
+                }
+
+                if(!angular.isUndefined(decimalCheck[1])) {
+                    decimalCheck[1] = decimalCheck[1].slice(0,2);
+                    clean =decimalCheck[0] + '.' + decimalCheck[1];
+                }
+
+                if (val !== clean) {
+                    ngModelCtrl.$setViewValue(clean);
+                    ngModelCtrl.$render();
+                }
+                return clean;
+            });
+
+            element.bind('keypress', function(event) {
+                if(event.keyCode === 32) {
+                    event.preventDefault();
+                }
+            });
+        }
+    };
 });
 adminApp.factory('siteMenuService', function () {
   var site = [
@@ -2336,6 +2473,12 @@ adminApp.factory('siteMenuService', function () {
         'icon': 'comments',
         'href': 'forums',
         'active': ''
+      },
+      {
+          'name': 'Coach Pricing Plan',
+          'icon': 'inr',
+          'href': 'pricing-plan-list',
+          'active': ''
       },
       {
         'name': 'Address Info',

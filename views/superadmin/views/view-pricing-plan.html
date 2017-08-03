@@ -1,0 +1,69 @@
+<div class="container" ng-cloak class="ng-cloak">
+    <div class="row">
+
+        <div class="col-md-3">
+            <h4 class="classic-title"><span>Site Management</span></h4>
+            <div ng-include src="'views/site-menu.html'" onload="activeClass"></div>
+        </div>
+        <div class="col-md-9" ng-init="viewInit()">
+            <a href="#pricing-plan-list" class="back-button pull-right"><i class="fa fa-arrow-circle-o-left"></i> Back to Pricing Plan List</a>
+            <div flash-message="2000" class="col-md-4 pull-right"></div>
+            <h4 class="classic-title"><span><i class="fa fa-eye"></i> &nbsp;View Pricing Plan</span></h4>
+
+            <div ng-if="loaded">
+                <div class="loader-style">
+                    <div class="loader"></div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-12">
+                    <h4 class="text-center" style="text-transform: uppercase;color: #f8ba01 !important;font-weight: bold">{{pricingplan.planname}} Details</h4>
+                    <hr/>
+                </div>
+                <div class="col-md-12">
+                    <table class="table table-bordered table-striped">
+                        <tr>
+                            <td class="col-md-4">Plan Name</td>
+                            <td class="col-md-8">{{pricingplan.planname}}</td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">Price INR&nbsp;(₹)</td>
+                            <td class="col-md-8">{{pricingplan.priceINR}}</td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">Phone USD&nbsp;($)</td>
+                            <td class="col-md-8">{{pricingplan.priceUSD}}</td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">Clients Count</td>
+                            <td class="col-md-8">{{pricingplan.clientscount}}</td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">Plan Color</td>
+                            <td class="col-md-8">{{pricingplan.plancolor}}</td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">Discount</td>
+                            <td class="col-md-8">{{pricingplan.discount}}</td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">Discount INR&nbsp;(₹)</td>
+                            <td class="col-md-8">{{pricingplan.discountINR}}</td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-3">Discount USD&nbsp;($)</td>
+                            <td class="col-md-9">{{pricingplan.discountUSD}}</td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">Features</td>
+                            <td class="col-md-8">{{pricingplan.features}}</td>
+                        </tr>
+                    </table>
+                </div>
+        </div>
+    </div>
+</div>
+<!-- End Page Banner -->
+
+<script type="text/javascript" src="../../js/script.js"></script>
+
