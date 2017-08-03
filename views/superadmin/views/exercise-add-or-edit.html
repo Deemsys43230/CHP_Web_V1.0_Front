@@ -52,7 +52,7 @@
                             </ui-select-choices>
                         </ui-select>
                         </div>
-                        <h5 class="margin-tb-5">Repsavailable:</h5>
+                        <h5 class="margin-tb-5">Reps available:</h5>
                         <div class="col-md-1"></div>
                         <div class="col-md-11">
                             <input type="radio" id="yes" class="height" name="reps" value="1" ng-model="exerciseDetail.repsavailable"/>
@@ -142,7 +142,7 @@
                 <div class="one_half">
                     <div class="fileUpload food-button">
                         <span>Choose Image</span>
-                        <input type="file" name="image" accept="image/*" valid-file  ng-model="exerciseDetail.exerciseimage" class="upload" ng-file-select="onFileSelect($files)"/>
+                        <input type="file" name="image" accept="image/*" ng-model="exerciseDetail.exerciseimage" class="upload" ng-file-select="onFileSelect($files)"/>
                     </div>
                 </div>
                 <div class="one_half last"><a href="" onclick="return false;" class="btn food-button export modal_close" ng-disabled="inputContainsFile" ng-click="doUpdateExerciseImage();" >Save Image</a></div>

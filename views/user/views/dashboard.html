@@ -296,7 +296,7 @@
                                                 <div class="suggest_content" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#eee'}">
                                                     <h6>Frequently Used</h6>
                                                     <div class="suggest_option">
-                                                        <span ng-repeat="frequentexercise in frequentExerciseList" ng-click="frequentExercise(frequentexercise.exerciseid)">{{frequentexercise.exercisename}}</span>
+                                                        <span ng-repeat="frequentexercise in frequentExerciseList" ng-click="frequentExercise(frequentexercise.exerciseid,frequentexercise.isCustom)">{{frequentexercise.exercisename}}</span>
                                                     </div>
                                                 </div>
                                                     <a id="modal_trigger_custom_exercise" href="#modal-custom-exercise" ng-click="doUserAddCustomExercise();resetexercisedata();" onclick="return false;" class="custom_button" type="button"><i class="fa fa-plus"></i>&nbsp;Add Custom Exercise</a>
@@ -1139,7 +1139,7 @@
         <div class="common_model">
             <form name="exerciseSuggestForm" novalidate>
             <p>Exercise Name:</p>
-            <input type="text" name="exercisename" data-exerciseid="exerciseSuggest.exerciseid" ng-model="exerciseSuggest.exercisename" ng-pattern="/^ *([a-zA-Z0-9]+ ?)+ *$/" maxlength="100" exerciseexists required />
+            <input type="text" name="exercisename" data-exerciseid="exerciseSuggest.exerciseid" ng-model="exerciseSuggest.exercisename" ng-pattern="/^ *([a-zA-Z]+ ?)+ *$/" maxlength="100" exerciseexists required />
             <span ng-show="exerciseSuggestForm.exercisename.$dirty&&exerciseSuggestForm.exercisename.$invalid">
                                 <span class="error-message" ng-show="exerciseSuggestForm.exercisename.$error.required"><span>Required.</span></span>
                              <span class="error-message" ng-show="exerciseSuggestForm.exercisename.$error.pattern"><span>Enter&nbsp;Valid&nbsp;name.</span></span>
@@ -1507,7 +1507,8 @@
                                  <span class="error-message" ng-show="customExerciseAddForm.name.$error.required"><span>Required.</span></span>
                                  </span>
                         <h5  class="margin-top-10">Calories</h5>
-                        <input type="text" name="calories" ng-model="customExercise.calories"  maxlength="7" required validate-float>
+                        <input type="text" name="calories" ng-model="customExercise.calories"  maxlength="5" required validate-float ng-change="maxCalorieValueCheck()">
+                        <span class="error-message" ng-show="!customExerciseAddForm.calories.$error.required&&maxcalories"><span>Please&nbsp;Enter&nbsp;Valid&nbsp;Value.</span></span>
                                   <span ng-show="customExerciseAddForm.calories.$dirty&&customExerciseAddForm.calories.$invalid">
                                   <span class="error-message" ng-show="customExerciseAddForm.calories.$error.required"><span>Required.</span></span>
                                   <span class="error-message" ng-show="customExerciseAddForm.calories.$error.validateFloat"><span>Invalid&nbsp;Data.</span></span>
@@ -1683,11 +1684,12 @@
                              </span>-->
 
                        <h5  class="margin-top-10">Reps Value</h5>
-                        <input type="text" ng-pattern="/(^[1-9]\d{0,8}$)/"  name="reps" ng-model="customExercise.reps"  maxlength="3"  required>
+                        <input type="text" ng-pattern="/(^[1-9]\d{0,8}$)/" name="reps" ng-model="customExercise.reps"  maxlength="3" ng-change="maxRepsValueCheck()">
+                        <span class="error-message" ng-show="!customExerciseAddForm.reps.$error.required&&maxreps"><span>Please&nbsp;Enter&nbsp;Valid&nbsp;Value.</span></span>
                                  <span ng-show="customExerciseAddForm.reps.$dirty&&customExerciseAddForm.reps.$invalid">
-                                 <span class="error-message" ng-show="customExerciseAddForm.reps.$error.required"><span>Required.</span></span>
+                                    <!-- <span class="error-message" ng-show="customExerciseAddForm.reps.$error.required"><span>Required.</span></span>-->
                                  <span class="error-message" ng-show="customExerciseAddForm.reps.$error.pattern"><span>Invalid&nbsp;Data.</span></span>
-                                 </span>
+                               </span>
                         <div class="action_btns margin-top-20">
                             <div class="one_half" ng-show="isNew"><a href="#" onclick="return false;" ng-disabled="customExerciseAddForm.$invalid ||selectedSeconds==0&&selectedMinutes==0&&selectedHours==0" class="btn btn_blue modal_close" ng-click="doInsertUserCustomExercise()">Add Custom Exercise</a></div>
                              <div class="one_half" ng-hide="isNew"><a href="#" onclick="return false;" ng-disabled="CustomExerciseAddForm.$invalid ||selectedSeconds==0&&selectedMinutes==0&&selectedHours==0" class="btn btn_blue modal_close" ng-click="doUpdateUserCustomExercise()">Update Custom Exercise</a></div>

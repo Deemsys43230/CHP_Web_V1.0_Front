@@ -562,15 +562,21 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
         };
 
         //On Select frequent exercise
-        $scope.frequentExercise=function(exerciseid){
+        $scope.frequentExercise=function(exerciseid,isCustom){
             $scope.isNew=true;
             $scope.title= "Add Exercise";
             $scope.loaded=true;
-            var getExerciseDetailPromise=UserDashboardService.doGetSelectedExerciseDetails(exerciseid);
+            var getExerciseDetailPromise=UserDashboardService.doGetSelectedExerciseDetails(exerciseid,isCustom);
             getExerciseDetailPromise.then(function(result){
                 $scope.userSelectedExerciseDetails=result;
                 $scope.loaded=false;
-                $scope.doUserAddExercise();
+               if(isCustom==0){
+                   $scope.doUserAddExercise();
+               }
+             else if(isCustom==1){
+                   $scope.doUserAddCustomExercise();
+               }
+
             });
         };
 
@@ -602,19 +608,19 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
             $(function(){
                 $("#lean_overlay").fadeTo(1000);
                 $("#modal-filter").fadeIn(600);
-                $(".common_model").show();
+                $(".user_register").show();
                 $scope.shouldBeOpen = true;
             });
 
             $(".modal_close").click(function(){
-                $(".common_model").hide();
+                $(".user_register").hide();
                 $("#modal-filter").hide();
                 $("#lean_overlay").hide();
                 $scope.shouldBeOpen = false;
             });
 
             $("#lean_overlay").click(function(){
-                $(".common_model").hide();
+                $(".user_register").hide();
                 $("#modal-filter").hide();
                 $("#lean_overlay").hide();
                 $scope.shouldBeOpen = false;
@@ -739,6 +745,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
             $scope.userExercise.levelunitid= $scope.userExercise.selectedLevel.levelunitid;
 
 
+
             var exerciseInsertPromise=UserDashboardService.doInsertUserExercise($scope.userExercise);
             exerciseInsertPromise.then(function(){
                 $scope.loadExerciseDiary($scope.userExercise.date);
@@ -844,7 +851,6 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
         //Calories caluclation for exercose
         $scope.doCalculateCaloriesExercise=function(){
             $scope.userExercise.workoutvalue=parseInt($scope.workoutvalueHours*3600)+ parseInt($scope.workoutvalueMinutes*60)+ parseInt($scope.workoutvalueSeconds);
-            console.log($scope.workoutvalueHours);
             if($scope.userExercise.workoutvalue==0){
                 $scope.current=$scope.caloriesSpent=0;
             }
@@ -853,7 +859,6 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
             }
             else{
                 $scope.current=$scope.caloriesSpent=$scope.userExercise.selectedLevel.MET*$scope.demography.weight*parseFloat($scope.userExercise.workoutvalue/3600);
-                /*   $scope.current=$scope.caloriesSpent=$scope.customExercise.calories;*/
                 $scope.current=$scope.current.toFixed(2);
                 if(($scope.current.length-3)>2) $scope.max=$scope.max+((String($scope.current|0).slice(0, -2))*100);
                 else $scope.max=100;
@@ -934,6 +939,30 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
                 $scope.doGetHistoryReport("historyGraph");
                 $scope.getBudget(date);
             });
+        };
+
+        //Maximum calorie value check
+        $scope.maxcalories=false;
+        $scope.maxCalorieValueCheck = function(){
+            if(parseInt($scope.customExercise.calories)<=5000){
+                $scope.maxcalories=false;
+            }
+            else if(parseInt($scope.customExercise.calories) >5000){
+                $scope.maxcalories=true;
+            }
+
+        };
+
+        //Reps Value max check
+        $scope.maxreps=false;
+        $scope.maxRepsValueCheck = function(){
+            if(parseInt($scope.customExercise.reps)<=100){
+                $scope.maxreps=false;
+            }
+            else if(parseInt($scope.customExercise.reps) >100){
+                $scope.maxreps=true;
+            }
+
         };
 
 
