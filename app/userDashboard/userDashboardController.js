@@ -850,7 +850,11 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
 
         //Calories caluclation for exercose
         $scope.doCalculateCaloriesExercise=function(){
-            $scope.userExercise.workoutvalue=parseInt($scope.workoutvalueHours*3600)+ parseInt($scope.workoutvalueMinutes*60)+ parseInt($scope.workoutvalueSeconds);
+            $scope.userExercise.workoutvalue=0;
+            $scope.userExercise.workoutvalue+=parseInt($scope.workoutvalueHours)*3600;
+            $scope.userExercise.workoutvalue+=parseInt($scope.workoutvalueMinutes)*60;
+            $scope.userExercise.workoutvalue+=parseInt($scope.workoutvalueSeconds);
+            console.log( $scope.userExercise.workoutvalue);
             if($scope.userExercise.workoutvalue==0){
                 $scope.current=$scope.caloriesSpent=0;
             }
@@ -858,8 +862,16 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
                 $scope.current=$scope.caloriesSpent=0;
             }
             else{
-                $scope.current=$scope.caloriesSpent=$scope.userExercise.selectedLevel.MET*$scope.demography.weight*parseFloat($scope.userExercise.workoutvalue/3600);
-                $scope.current=$scope.current.toFixed(2);
+                if($scope.userProfile.unitPreference==2){
+                    $scope.current=$scope.caloriesSpent=$scope.userExercise.selectedLevel.MET*($scope.demography.weight*0.45359237).toFixed(1)*($scope.userExercise.workoutvalue/3600);
+                    $scope.current=($scope.current).toFixed(2);
+                }
+                else if($scope.userProfile.unitPreference==1){
+                    $scope.current=$scope.caloriesSpent=$scope.userExercise.selectedLevel.MET*($scope.demography.weight)*($scope.userExercise.workoutvalue/3600);
+                    $scope.current=($scope.current).toFixed(2);
+                }
+
+            console.log($scope.current);
                 if(($scope.current.length-3)>2) $scope.max=$scope.max+((String($scope.current|0).slice(0, -2))*100);
                 else $scope.max=100;
             }
@@ -4448,6 +4460,7 @@ function slidemenu() {
         }
     });
 };
+/*
 //for dashboard main date
 function daterangepicker() {
     $("#main-date").click();
@@ -4462,8 +4475,10 @@ function daterangepicker() {
         angular.element(document.getElementById('main-date')).scope().initialLoadFoodAndExercise(start.format('DD/MM/YYYY'));
         document.getElementById("main-start-date").value = start.format('DD/MM/YYYY');
     });
+*/
 
 //for food intake and excersize view graph date picker
+function daterangepicker(){
     $("#history-graph").click();
     $("#history-view").click();
 

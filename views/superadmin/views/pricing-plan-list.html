@@ -21,13 +21,16 @@
                 <thead>
                 <tr class="warning">
                     <th class="col-md-3">Plan Name</th>
-                    <th class="col-md-3">Price</th>
-                    <th class="col-md-1">ClientsCount</th>
+                    <th class="col-md-2">Price</th>
+                    <th class="col-md-2">Clients Count</th>
                     <th class="col-md-1">Discount</th>
                     <th class="col-md-3">Options</th>
                 </tr>
                 </thead>
                 <tbody>
+                <tr >
+
+                </tr>
                 <tr dir-paginate="data in pricingplanlist | itemsPerPage: 9" pagination-id="pricingplan" ng-show="pricingplanlist.length != 0">
                     <td>{{data.planname}}</td>
                     <td><span class="line-clamp-sm" style="width: 15%">₹&nbsp;{{data.priceINR}}&nbsp;|&nbsp;$&nbsp;{{data.priceUSD}}</span></td>
@@ -38,8 +41,6 @@
                         <a href="" class="btn-xs btn-success" ng-click="doEnableDisablePricingPlan(data.id)" ng-show="data.status==0">Enable</a>
                         <a href="" class="btn-xs btn-danger" ng-click="doEnableDisablePricingPlan(data.id)" ng-hide="data.status==0">Disable</a>
                         <a href="" class="btn-xs btn-danger" ng-click="deletePricingPlan(data.id)">Delete</a>
-
-
                     </td>
                 </tr>
                 <tr ng-show="pricingplan.length == 0"><td colspan="5" class="text-center">No Records Found!!!</td></tr>
