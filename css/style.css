@@ -16588,6 +16588,148 @@ margin-top: 10px;
     color:black;
 }
 
+/* Coach Pricing Plan */
+/*For Index page coach design*/
+/*For Index page coach design*/
+
+#coach-table {
+    margin:10px 0 0 10px;
+    text-align: center;
+    width: 100%; 
+}
+
+.plans {
+    width: 100%;
+    margin: 0 auto;
+    margin-top: 40px;
+}
+.plan {
+    width: 24%;
+    background: #fdfdfd;
+    color: #fff;
+    float: left;
+    height: 500px !important;
+    -moz-box-shadow: 0 0 3px rgba(0, 0, 0, .3);
+    -webkit-box-shadow: 0 0 3px rgba(0, 0, 0, .3);
+    box-shadow: 0 0 3px rgba(0, 0, 0, .3);
+    z-index: 10 !important;
+}
+
+.plan .price {
+    display: block;
+    width: 100%;
+    background-color: #ff9933;
+    margin: 15px 0 10px 0;
+    text-align: center;
+    font-size: 23px;
+    padding: 17px 0 17px 0;
+}
+
+.plan .price small{
+    font-size:14px !important;
+}
+
+.coach-input {
+    font-size: 12px;
+    line-height: 18px;
+    color: #333;
+    padding: 7px 10px;
+    width: 100%;
+    border:0 !important;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    -webkit-box-shadow: inset 0px 0px 3px rgba(0,0,0,0.3);
+    -moz-box-shadow: inset 0px 0px 3px rgba(0,0,0,0.3);
+    box-shadow: inset 0px 0px 3px rgba(0,0,0,0.3);
+    -webkit-border-radius: 0;
+    outline: 0;
+    margin: 0;
+}
+
+.coach_input_textarea
+{
+    font-size: 14px;
+    color: #333;
+    padding: 5px 8px;
+    height:90px;
+    width: 100%;
+    border:0px !important;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    -webkit-box-shadow: inset 0px 0px 3px rgba(0,0,0,0.3);
+    -moz-box-shadow: inset 0px 0px 3px rgba(0,0,0,0.3);
+    box-shadow: inset 0px 0px 3px rgba(0,0,0,0.3);
+    -webkit-border-radius: 0;
+    outline: 0;
+    margin: 0;
+}
+
+.padding-topleft {
+    padding-left: 150px;
+    padding-top: 50px;
+}
+.exp-text .inside-text { 
+    position: absolute;
+    top: 1px;
+    right: 16px;
+    background-color: #eee;
+    color: #666;
+    padding: 3px 3px 6px 7px;
+}
+.coach {
+    padding: 10px 0 0 0;
+}
+.coach span {
+    display: block;
+    text-align: center;
+    color: #999999;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.coach span:first-of-type {
+    font-size: 23px;
+}
+.coach span:last-of-type {
+    font-size: 13px;
+}
+
+.price-button.disabled{
+    cursor: not-allowed;
+    -moz-box-shadow: 0 0 3px rgba(0, 0, 0, .1);
+    -webkit-box-shadow: 0 0 3px rgba(0, 0, 0, .1);
+    box-shadow: 0 0 3px rgba(0, 0, 0, .1);
+}
+
+.price-button:hover.disabled{
+    zoom: 100% !important;
+}
+
+.price-button.disabled a{
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.price-button.disabled .deal span{
+    color: #e3e3e3;
+}
+
+.price-button.disabled .price{
+    background-color: #ddd;
+}
+
+.price-button.disabled ul.features{
+    color: #e3e3e3;
+}
+
+.price-button.disabled a{
+    background-color: #e3e3e3;
+}
+
+.price-button:hover{
+    zoom: 110%;
+}
+
 /*For Index page coach design*/
 
 #coach-table {

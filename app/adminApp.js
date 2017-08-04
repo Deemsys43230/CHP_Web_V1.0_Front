@@ -665,7 +665,7 @@ adminApp.config([
             return $ocLazyLoad.load({
               name: 'adminApp',
               files: [
-                '../../plugin/popup/style.css',
+                '../../css/custom-inputs.css',
                 '../../angular/angular-utils-pagination/dirPagination.js',
                 '../../app/coach/coachController.js'
               ]
@@ -767,6 +767,45 @@ adminApp.config([
         ]
       },
       controller: 'CoachViewController'
+    }).when('/coach-subscriptions', {
+      templateUrl: 'views/coach-subscriptions.html',
+      resolve: {
+        loadMyFiles: [
+          '$ocLazyLoad',
+          function ($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name: 'adminApp',
+              files: [
+                '../../css/profile-image-upload.css',                
+                '../../css/custom-inputs.css',
+                  '../../angular/angular-utils-pagination/dirPagination.js',
+                '../../js/image-upload.js',
+                '../../app/coach/coachSubscriptionController.js'
+              ]
+            });
+          }
+        ]
+      },
+      controller: 'CoachSubscriptionController'
+    }).when('/coach-subscriptions/:id', {
+      templateUrl: 'views/coach-subscriptions-individual.html',
+      resolve: {
+        loadMyFiles: [
+          '$ocLazyLoad',
+          function ($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name: 'adminApp',
+              files: [
+                '../../css/profile-image-upload.css',
+                  '../../angular/angular-utils-pagination/dirPagination.js',
+                '../../js/image-upload.js',
+                '../../app/coach/coachSubscriptionController.js'
+              ]
+            });
+          }
+        ]
+      },
+      controller: 'IndividualCoachSubscriptionController'
     }).when('/exercise', {
       templateUrl: 'views/exercise.html',
       resolve: {
@@ -1587,6 +1626,24 @@ adminApp.config([
         ]
       },
       controller: 'AdminPaymentController'
+    }).when('/failed-payment', {
+      templateUrl: 'views/payment-failed.html',
+      resolve: {
+        loadMyFiles: [
+          '$ocLazyLoad',
+          function ($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name: 'adminApp',
+              files: [
+                '../../angular/angular-ui-bootstarp.js',
+                '../../angular/angular-utils-pagination/dirPagination.js',
+                '../../app/payments/adminPaymentController.js'
+              ]
+            });
+          }
+        ]
+      },
+      controller: 'AdminFailedPaymentController'
     }).when('/faq', {
       templateUrl: '../common/faq.html',
       resolve: {
@@ -2642,6 +2699,12 @@ adminApp.factory('coachMenuService', function () {
         'name': 'Coach List', 
         'icon': 'users',
         'href': 'coach',
+        'active': ''
+      },
+      {
+        'name': 'Subscriptions', 
+        'icon': 'dollar',
+        'href': 'coach-subscriptions',
         'active': ''
       }];
   return coach;

@@ -72,16 +72,28 @@ adminApp.controller('AdminPaymentController',['$scope','requestHandler','Flash',
 
 
     //Coach List
-    $scope.doGetCoachList = function(){
+    $scope.doGetAllCoachSubscriptions = function(){
         $scope.loaded=true;
+
+       $scope.getAllSubscriptionParam={
+            "limit":$scope.getAllSubscriptionPagination.itemsPerPage,
+            "offset":($scope.getAllSubscriptionPagination.pageNumber-1)*$scope.getAllSubscriptionPagination.itemsPerPage,
+            "coachid":$routeParams.id,
+            "searchname":""
+        };
+
         //In practice this should be in a factory.
-        requestHandler.getRequest("admin/coachListPayment/","").then(function(response){
-            $scope.coachList = response.data.CoachList;
+        requestHandler.postRequest("admin/getallsubscriptions/",$scope.getAllSubscriptionParam).then(function(response){
+            $scope.subscriptionDetails = response.data;
             $scope.loaded=false;
             $scope.paginationLoad=true;
         });
     };
     //End coach list
+
+    $scope.$watch("getAllSubscriptionPagination.pageNumber",function(){
+        $scope.doGetAllCoachSubscriptions();
+    });
 
     //Detail of subscribers
     $scope.doGetCoachSubscribersList = function(){
@@ -275,8 +287,7 @@ adminApp.controller('AdminPaymentController',['$scope','requestHandler','Flash',
 
     $scope.coachListInit=function(){
         $scope.paginationLoad=false;
-        $scope.doGetCoachList();
-        $scope.totalEarnByCoaches();
+        $scope.getAllSubscriptionPagination={"itemsPerPage":10,"pageNumber":1};
     };
 
     $scope.coachSubscribersListInit=function(){
@@ -299,6 +310,20 @@ adminApp.controller('AdminPaymentController',['$scope','requestHandler','Flash',
          $scope.doGetCoachSubscriberDetailView();
     };
 
+
+    //Send Invoice Phase 2
+    $scope.doSendSubscriptionInvoice=function(paymentid){
+        requestHandler.postRequest("admin/sendsubscriptioninvoice/",{"paymentid":paymentid}).then(function(response){
+            successMessage(Flash,"Sent Successfull");
+        });
+    };
+
+    //Send Renew Subscription
+    $scope.doSendRenewSubscription=function(paymentid){
+        requestHandler.postRequest("admin/renewsubscriptionmail/",{"paymentid":paymentid}).then(function(response){
+            successMessage(Flash,"Sent Successfull");
+        });
+    }
 
     $scope.doManualPay=function(paymentid,coachid){
 
@@ -375,3 +400,50 @@ adminApp.filter('startsWithLetterFood', function () {
         return filtered;
     };
 });
+
+//Admin Failed Payment
+adminApp.controller('AdminFailedPaymentController',['$scope','requestHandler','Flash','$routeParams',function($scope,requestHandler,Flash,$routeParams) {
+
+   //Main Function returns the list
+    $scope.doGetFailedPaymentList = function(){
+
+        $scope.loaded=true;
+
+        $scope.params={
+            "limit":10,
+            "offset":0,
+            "searchname":""
+        };
+
+        //In practice this should be in a factory.
+        requestHandler.postRequest("admin/pendingtransactions/",$scope.params).then(function(response){
+            $scope.failedPaymentHistory = response.data;
+            $scope.loaded=false;
+        });
+    };
+    //End Function returns the list
+
+    //Verify Payment
+    $scope.doVerifyPayment=function(paymentid){
+        requestHandler.postRequest("admin/retrypayment/",{"paymentid":paymentid}).then(function(response){
+            if(response.data.Response_status==0){
+                errorMessage(Flash,response.data.Error);       
+            }else{
+                successMessage(Flash,"Successfully Verified");
+            }
+        });
+    };
+    //End Verify Payment
+
+    //Init Function
+    $scope.init=function(){
+        $scope.getFailedPaymentPagination={"itemsPerPage":10,"pageNumber":1};       
+    }
+
+    $scope.$watch("getFailedPaymentPagination.pageNumber",function(){
+         $scope.doGetFailedPaymentList();
+    })
+
+}]);
+
+  

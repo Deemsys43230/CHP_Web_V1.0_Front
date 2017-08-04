@@ -5,7 +5,6 @@ var adminApp = angular.module('adminApp', ['ngRoute','oc.lazyLoad','requestModul
 
 adminApp.controller('CoachController',['$scope','requestHandler','Flash','coachMenuService','$location','$routeParams',function($scope,requestHandler,Flash,coachMenuService,$location,$routeParams) {
     $scope.inviteId = $routeParams.id;
-    console.log($routeParams.id);
     // For coach management side menu
     $scope.coachMenuList = coachMenuService;
     $.each($scope.coachMenuList,function(index,value){
@@ -18,8 +17,16 @@ adminApp.controller('CoachController',['$scope','requestHandler','Flash','coachM
     //Get Coach List
     $scope.doGetCoachList=function(){
         $scope.loaded=true;
-        requestHandler.getRequest("admin/getallCoachListbyAdmin/","").then(function(response){
-            $scope.coachList=response.data.getallCoachListbyAdmin;
+
+        //Param
+        $scope.param={
+                    "limit":$scope.pagination.itemsPerPage,
+                    "offset":($scope.pagination.pageNumber-1)*$scope.pagination.itemsPerPage,
+                    "searchname":""
+                    };
+
+        requestHandler.postRequest("admin/getcoacheslist/",$scope.param).then(function(response){
+            $scope.coachList=response.data; 
             $scope.loaded=false;
             $scope.paginationLoad=true;
         });
@@ -177,8 +184,9 @@ adminApp.controller('CoachController',['$scope','requestHandler','Flash','coachM
 
     //Initial Load
     $scope.init = function(){
+        $scope.coachList={};
         $scope.paginationLoad=false;
-        $scope.doGetCoachList();
+        $scope.pagination={"itemsPerPage":9,"pageNumber":1};
         $scope.doGetInvitationList();
     };
 
@@ -203,6 +211,11 @@ adminApp.controller('CoachController',['$scope','requestHandler','Flash','coachM
             $(".search-list-form").hide();
         }
     };
+
+    $scope.$watch("pagination.pageNumber",function(){
+       $scope.doGetCoachList();
+    });
+
 
 }]);
 
