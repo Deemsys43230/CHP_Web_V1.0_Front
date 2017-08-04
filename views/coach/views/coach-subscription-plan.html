@@ -1,7 +1,7 @@
 
 
 <!-- Start Content -->
-<div id="content-page" ng-cloak class="ng-cloak">
+<div class="page-banner" ng-cloak class="ng-cloak">
     <div class="container">
         <div class="row blog-page">
             <div class="col-md-12 col-lg-12 col-sm-12 margin-bottom-10">
@@ -60,9 +60,8 @@
                             <li ng-show="units==1">Rs:{{pricingPlan.discountINR}}</li>
                             <li ng-hide="units==1">$:{{pricingPlan.discountUSD}}</li>
                         </ul>
-                        <a href="#coach-form/{{pricingPlan.id}}" class="price-button btn button" ng-disabled="subscribeButtonStatus">
-                            Subscribe
-                        </a><br/>
+                        <a ng-show="units==1" href="" class="price-button btn button" ng-click="doGetSubscirbeCreateRazor(pricingPlan.id)">Subscribe</a>
+                        <a ng-hide="units==1" href="" class="price-button btn button" ng-click="authorizePaymentModel(pricingPlan.id,pricingPlan.discountUSD)">Subscribe</a><br/>
                     </div>
                 </div>
             </div>
@@ -72,4 +71,152 @@
     </div>
 </div>
 
+<!-- payment popup-->
+<!-- <div id="select-payment-modal" class="popupContainer" style="display:none;left: 37%!important;">
+    <header class="popupHeader">
+        <span class="header_title text-center">Choose Payment Type</span>
+        <span class="modal_close"><i class="fa fa-times"></i></span>
+    </header>
+
+    <section class="popupBody">
+        <div id="modal-content" class="common_model">
+            <div class="text-center">
+                <a href="" class="btn btn_red modal_close buttons" ng-click="doGetSubscirbeCreateRazor()">Razor Payment</a>
+            </div>
+            <br/>
+            <div class="text-center">
+                <a href="" class="btn btn_blue buttons" ng-click="authorizePaymentModel()">Authorize.net Payment</a>
+            </div>
+        </div>
+    </section>
+</div> -->
+
+
+<!-- Get Card Details for Authorize.net payment popup-->
+<div id="authorize-details-modal" class="authorizepopupContainer" style="display:none!important; left: 35%!important;">
+    <header class="authorizePopupHeader">
+        <span class="modal_close"><i class="fa fa-times"></i></span>
+        <h1 class="authorize-header">{{username}}</h1>
+        <h2 class="authorize-header">$.{{PlanChoicePriceUSD}}</span>
+    </header>
+
+    <section class="popupBody">
+        <div flash-message="2000"></div>
+        <div id="modal-payment-content">
+            <form name="cardDetailsForm" novalidate>
+                <div class="col-lg-12 col-md-12 col-sm-12 no-padding authorize-group">
+                    <h5 for="owner">Name</h5>
+                    <input type="text" class="form-control" ng-model="authorize.name" name="name" maxlength="25" required validate-alpha-with-space/>
+                    <span ng-show="cardDetailsForm.name.$dirty && cardDetailsForm.name.$invalid">
+                        <span class="error-message textarea-errormessage10" ng-show="cardDetailsForm.name.$error.required"><span>Required.</span></span>
+                        <span class="error-message textarea-errormessage10" ng-show="cardDetailsForm.name.$error.validateAlphaWithSpace"><span>Enter&nbsp;valid&nbsp;Name.</span></span>
+                    </span>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 no-padding authorize-group" id="card-number-field">
+                    <h5 for="cardNumber">Card Number</h5>
+                    <input type="text" class="form-control" maxlength="16" ng-pattern="/^\d+$/" ng-model="authorize.cardNumber" name="cardNumber">
+                    <span ng-show="cardDetailsForm.cardNumber.$dirty && cardDetailsForm.cardNumber.$invalid">
+                        <span class="error-message textarea-errormessage10" ng-show="cardDetailsForm.cardNumber.$error.required"><span>Required.</span></span>
+                        <span class="error-message textarea-errormessage10" ng-show="cardDetailsForm.cardNumber.$error.pattern"><span>Enter&nbsp;valid&nbsp;Data.</span></span>
+                    </span>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 no-padding authorize-group owner">
+                    <div class="col-lg-6 no-padding authorize-group CVV">
+                        <h5 for="cvv">CVV</h5>
+                        <input type="password" class="form-control" maxlength="3" ng-pattern="/^\d+$/" ng-model="authorize.cardCode" name="cvv">
+                        <span ng-show="cardDetailsForm.cvv.$dirty && cardDetailsForm.cvv.$invalid">
+                        <span class="error-message textarea-errormessage10" ng-show="cardDetailsForm.cvv.$error.required"><span>Required.</span></span>
+                        <span class="error-message textarea-errormessage10" ng-show="cardDetailsForm.cvv.$error.pattern"><span>Enter&nbsp;valid&nbsp;Data.</span></span>
+                    </span>
+                    </div>
+                    <div class="col-lg-6 authorize-group" id="expiration-date">
+                        <h5>Expiration Date</h5>
+                        <select class="col-lg-6 authorize-group date" ng-model="authorize.expirationDate_mm" required>
+                            <option value=""> mm </option>
+                            <option value="01">01</option>
+                            <option value="02">02 </option>
+                            <option value="03">03</option>
+                            <option value="04">04</option>
+                            <option value="05">05</option>
+                            <option value="06">06</option>
+                            <option value="07">07</option>
+                            <option value="08">08</option>
+                            <option value="09">09</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                        </select>
+                        <select class="col-lg-6 authorize-group date" ng-model="authorize.expirationDate_yy">
+                            <option value=""> yyyy </option>
+                            <option value="16"> 2016</option>
+                            <option value="17"> 2017</option>
+                            <option value="18"> 2018</option>
+                            <option value="19"> 2019</option>
+                            <option value="20"> 2020</option>
+                            <option value="21"> 2021</option>
+                            <option value="22"> 2022</option>
+                            <option value="23"> 2023</option>
+                            <option value="24"> 2024</option>
+                            <option value="25"> 2025</option>
+                            <option value="26"> 2026</option>
+                            <option value="27"> 2027</option>
+                            <option value="28"> 2028</option>
+                            <option value="29"> 2029</option>
+                            <option value="30"> 2030</option>
+                            <option value="31"> 2031</option>
+                            <option value="32"> 2032</option>
+                            <option value="33"> 2033</option>
+                            <option value="34"> 2034</option>
+                            <option value="35"> 2035</option>
+                            <option value="36"> 2036</option>
+                            <option value="37"> 2037</option>
+                            <option value="38"> 2038</option>
+                            <option value="39"> 2039</option>
+                            <option value="40"> 2040</option>
+                        </select>
+                    </div>
+                </div>
+                <h1 class="text-bold text-orange">{{displayMessage}}</h1>
+                <div class="text-center">
+                    <a href="" class="btn btn_green modeal-close buttons" id="confirm-purchase" ng-click="doGetSubscirbeCreateAuthorizeNet()">Submit</a>
+                </div>
+            </form>
+        </div>
+    </section>
+</div>
+
+
 <script type="text/javascript" src="../../js/script.js"></script>
+
+<script type="text/javascript">
+    $("#modal_trigger").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
+
+    $(function(){
+
+        $(".user_register").show();
+
+        // Calling Register Form
+        $("#register_form").click(function(){
+            $(".user_register").show();
+            $(".user_register1").hide();
+            return false;
+        });
+
+        // modal trigger Form
+        $("#modal_trigger").click(function(){
+            $(".user_register").show();
+            $(".user_register1").hide();
+            return false;
+        });
+
+        // Calling Register Second Form
+        $("#register_form2").click(function(){
+            $(".user_register").hide();
+            $(".user_register1").show();
+            return false;
+        });
+    });
+</script>
+
+
+

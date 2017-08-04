@@ -216,17 +216,17 @@
                                 <span class="error-message textarea-errormessage10" ng-show="userProfileForm.secretanswer.$error.required"><span>Required.</span></span>
                                          </span>
                                 </div>
-                                <div class="col-lg-12 hidden-md hidden-sm padding-right-0 margin-bottom-7 text-right">
+                                <!-- <div class="col-lg-12 hidden-md hidden-sm padding-right-0 margin-bottom-7 text-right">
                                     <p>&nbsp;</p>
-                                </div>
+                                </div> -->
                             </div>
 
-                            <div class="col-lg-6 col-md-12 col-sm-12 margin-top-10" width-about-me>
-                                <div class="col-lg-4 col-md-4 col-sm-4 padding-top-4 padding-right-0">
+                            <div class="col-lg-6 col-md-12 col-sm-12" width-about-me>
+                                <div class="col-lg-4 col-md-4 col-sm-4 padding-right-0 margin-top-10">
                                     <h5>About Me <span class="pull-right">:</span></h5>
                                     <p><span ng-hide="showCount && userProfile.about.length">&nbsp;</span><span ng-show="showCount && userProfile.about.length"><span class="text-bold text-red" style="font-size: 14px">{{ (300-userProfile.about.length) }}</span> Characters Remaining</span></p>
                                 </div>
-                                <div class="col-lg-8 col-md-8 col-sm-8 padding-top-4">
+                                <div class="col-lg-8 col-md-8 col-sm-8 margin-top-5 margin-bottom-5">
                                         <span ng-show="userProfileForm.about.$dirty&&userProfileForm.about.$invalid">
                                              <span class="error-message textarea-errormessage40" ng-show="userProfileForm.about.$error.required"><span>Required.</span></span>
                                          </span>

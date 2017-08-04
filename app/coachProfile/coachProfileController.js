@@ -4645,6 +4645,29 @@ coachApp.directive('widthAboutMe', function() {
                 setTimeout(function(){
                     var windowheight=$("html").width();
                     if(windowheight<1200&&windowheight>992){
+                        windowheight = Math.round((40.7*windowheight)/100);
+                        $('.profile_input_textarea').css({"width":windowheight+"px"});
+                    }else if(windowheight>1200){
+                        windowheight = Math.round((19.7*windowheight)/100);
+                        $('.profile_input_textarea').css({"width":windowheight+"px"});
+                    }
+                    else if(windowheight<=992&&windowheight>=479){
+                        windowheight = Math.round((38.5*windowheight)/100);
+                        $('.profile_input_textarea').css({"width":windowheight+"px"});
+                    }
+
+                }, 0);
+            });
+        }
+    }
+});
+/*coachApp.directive('widthAboutMe', function() {
+    return {
+        link: function($scope, $element) {
+            $scope.$watch(function() {
+                setTimeout(function(){
+                    var windowheight=$("html").width();
+                    if(windowheight<1200&&windowheight>992){
                         windowheight = Math.round((40*windowheight)/100);
                         $('.profile_input_textarea').css({"width":windowheight+"px"});
                     }else if(windowheight>1200){
@@ -4660,7 +4683,7 @@ coachApp.directive('widthAboutMe', function() {
             });
         }
     }
-});
+});*/
 
 /*
  userApp.directive('numbersOnly', function(){

@@ -89,13 +89,47 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                             files:[
                                 '../../plugin/popup/style.css',
                                 '../../angular/angular-utils-pagination/dirPagination.js',
-                                '../../app/coachMembers/coachSubscriptionController.js'
+                                '../../app/coachMembers/coachSubscriptionController.js',
+                                'https://checkout.razorpay.com/v1/checkout.js'
                             ]
                         })
                     }]
                 },
                 controller:'CoachSubscriptionController'
             }).
+            when('/subscription-razor-payments/:payid', {
+                templateUrl: 'views/payment-success.html',
+                resolve: {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'coachApp',
+                            files:[
+                                '../../plugin/popup/style.css',
+                                '../../angular/angular-utils-pagination/dirPagination.js',
+                                '../../app/coachMembers/subscriptionThanksController.js'
+                            ]
+                        })
+                    }]
+                },
+                controller:'ThanksRazorSubscribePageController'
+            }).
+            when('/subscription-payments', {
+                templateUrl: 'views/payment-success.html',
+                resolve: {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'coachApp',
+                            files:[
+                                '../../plugin/popup/style.css',
+                                '../../angular/angular-utils-pagination/dirPagination.js',
+                                '../../app/coachMembers/subscriptionThanksController.js'
+                            ]
+                        })
+                    }]
+                },
+                controller:'AuthorizeThanksSubscribePageController'
+            }).
+            
             when('/my-members', {
                 templateUrl: 'views/member.html',
                 resolve: {
