@@ -25,8 +25,8 @@
                     <th class="col-md-3">Options</th>
                 </tr>
                 </thead>
-                <tbody>
-                <tr dir-paginate="article in adminarticles | itemsPerPage: 10" pagination-id="article" ng-show="adminarticles.length != 0">
+                <tbody><!-- Page:{{adminArticlePagination.pageNumber}}||{{adminarticles.totalrecords}} -->
+                <tr dir-paginate="article in adminarticles.articles | itemsPerPage:adminArticlePagination.itemsPerPage" pagination-id="article" ng-show="adminarticles.length != 0" current-page="adminArticlePagination.pageNumber" total-items="adminarticles.totalrecords">
                     <td><span class="line-clamp-lg">{{article.title}}</span></td>
                     <td><span class="line-clamp-sm">{{article.by}}</span></td>
                     <td>

@@ -43,12 +43,12 @@ adminApp.controller('ArticleController',['$scope','requestHandler','Flash','$loc
         $scope.loaded=true;
 
         $scope.getArticlesParam= {
-                        "limit":10,
-                        "offset":0
+                        "limit": $scope.adminArticlePagination.itemsPerPage,
+                        "offset":($scope.adminArticlePagination.pageNumber-1)*$scope.adminArticlePagination.itemsPerPage
                         };
 
         requestHandler.postRequest("admin/admingetarticles/", $scope.getArticlesParam).then(function(response){
-            $scope.adminarticles=response.data.articles;
+            $scope.adminarticles=response.data;
             $scope.loaded=false;
             $scope.paginationLoad=true;
         },function(){
@@ -94,8 +94,14 @@ adminApp.controller('ArticleController',['$scope','requestHandler','Flash','$loc
     // Display Articles For admin view On Page Load
     $scope.init = function(){
         $scope.paginationLoad=false;
-        $scope.doGetArticlesByAdmin();
+
+        $scope.adminArticlePagination={"pageNumber":1,"itemsPerPage":10};
+
     };
+
+    $scope.$watch("adminArticlePagination.pageNumber",function(){
+        $scope.doGetArticlesByAdmin();
+    });
 
     //For image upload
     $('.image-editor').cropit();
@@ -266,7 +272,7 @@ $scope.getArticlesParam= {
                         "offset":0
                         };
     // To display Testimonials as user
-    $scope.doGetTestimonialsByUser=function(){
+    $scope.doGetArticlesByUser=function(){
         requestHandler.postRequest("user/usergetarticles/", $scope.getArticlesParam).then(function(response){
       $scope.usertestimoniallist=response.data.Testimonials;
 
@@ -278,7 +284,7 @@ $scope.getArticlesParam= {
         });
     };
 
-    $scope.doGetTestimonialDetailsByUser= function (id) {
+    $scope.doGetArticleDetailsByUser= function (id) {
         requestHandler.getRequest("getTestimonialDetail/"+id, "").then(function(response){
 
             //View the image in ng-src for view testimonials

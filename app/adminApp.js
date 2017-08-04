@@ -2536,7 +2536,7 @@ adminApp.factory('siteMenuService', function () {
       {
         'id': 5,
         'name': 'Articles',
-        'icon': 'comment',
+        'icon': 'list-alt',
         'href': 'articles',
         'active': ''
       },
