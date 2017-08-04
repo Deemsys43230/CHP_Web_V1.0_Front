@@ -16952,3 +16952,19 @@ select.date:focus {
     background: #187535 !important; 
     color: #fff!important;
 }
+.coach-profile_input_textarea{
+    font-size: 14px;
+    color: #333;
+    padding: 5px 8px;
+    height: 84px;
+    width: 100%;
+    border: 0px !important;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    -webkit-box-shadow: inset 0px 0px 3px rgba(0,0,0,0.3);
+    -moz-box-shadow: inset 0px 0px 3px rgba(0,0,0,0.3);
+    box-shadow: inset 0px 0px 3px rgba(0,0,0,0.3);
+    -webkit-border-radius: 0;
+    outline: 0;
+    margin: 0;
+}

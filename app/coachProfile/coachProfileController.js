@@ -4645,10 +4645,10 @@ coachApp.directive('widthAboutMe', function() {
                 setTimeout(function(){
                     var windowheight=$("html").width();
                     if(windowheight<1200&&windowheight>992){
-                        windowheight = Math.round((40.7*windowheight)/100);
+                        windowheight = Math.round((41.7*windowheight)/100);
                         $('.profile_input_textarea').css({"width":windowheight+"px"});
                     }else if(windowheight>1200){
-                        windowheight = Math.round((19.7*windowheight)/100);
+                        windowheight = Math.round((54.9*windowheight)/100);
                         $('.profile_input_textarea').css({"width":windowheight+"px"});
                     }
                     else if(windowheight<=992&&windowheight>=479){
