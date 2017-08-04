@@ -78,20 +78,20 @@
                         <p class="hidden-md hidden-sm">Update Weight</p>
                     </a>
                 </li>
-                <li class="calories" style="height: 150px;">                  
+                <li class="calories" style="height: 150px;">
                     <div class="col-lg-12 col-md-12 col-sm-12 no-padding">
                         <form name="weightLogForm" novalidate>
                             <h5 class="margin-left-10 font-size-md"><b>CURRENT WEIGHT</b></h5>
                             <div class="col-lg-6 col-md-6 col-sm-6 no-padding">
-                                <img class="width margin-left-5" src="../../images/log.jpg"> 
+                                <img class="width margin-left-5" src="../../images/log.jpg">
                             </div>
-                                 
+
                             <div class="col-lg-6 col-md-6 col-sm-6 no-padding margin-top-20">
                                 <span class="weight-text-font">{{weightlog}}&nbsp;<small><span ng-show="userProfile.unitPreference==1">Kgs</span><span ng-show="userProfile.unitPreference==2">lbs</span></small></span>
                               <!--  <span class="weight-text-font">{{fat}}&nbsp;(%)</span>-->
                             </div>
                         </form>
-                    </div>                       
+                    </div>
                 </li>
             </ul>
         </div>
@@ -101,7 +101,7 @@
         <div class="dashboard-2" ng-show="historyReport==0">
             <div id="content">
                 <div id="daily_update">
-                    <div class="col-lg-12 col-md-12 col-sm-12 padding-lr" style="padding-right: 3px;">
+                    <div class="col-lg-12 col-md-12 col-sm-12 padding-lr">
                         <!-- Nav Tabs -->
                         <ul class="nav nav-tabs pull-left">
                             <li class="active" ng-click="showExercise=0"><a href="#tab-1" data-toggle="tab" onclick="return false;">Food Intake</a></li>
@@ -305,7 +305,7 @@
                                     </div>
                                 </div>
                             </div>
-                        
+
 
                             <!-- Tab Content 3 -->
                             <div class="tab-pane padding-top-5" id="tab-3">
@@ -394,7 +394,7 @@
                                     </div>
                                     <div ng-show="graphs==3" class="margin-top-5">
                                         <div class="col-lg-6 col-md-5 col-sm-5">
-                                            
+
                                             <div>
                                                 <h5 class="margin-tb-10">Foods Intaken</h5>
                                                 <div class="foodlistGraph gain-list" ng-nicescroll nice-option="{cursorcolor: '#777',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#f1f1f1'}">
@@ -453,7 +453,7 @@
 
                                     <div class="col-lg-12 col-md-12 col-sm-12 padding-rl-10">
                                         <!-- Tab panels -->
-                                        
+
                                             <!-- Tab Content 1 -->
                                             <div class="tab-pane in active padding-top-5">
                                                 <div ng-if="loaded" class="col-lg-12 col-md-12 col-sm-12">
@@ -473,7 +473,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        
+
                                         <!-- End Tab Panels -->
                                     </div>
                                 </div>
@@ -492,7 +492,7 @@
                                             <!-- Nav Tabs -->
                                             <ul class="nav nav-tabs">
                                                 <li class="active"><a class="historyOverride" href="#tab-4" data-toggle="tab" onclick="return false;" ng-click="setExcerciseType(3,'viewGraph')"><span class="hidden-md hidden-sm">Exercise</span> Minutes</a></li>
-                                                
+
                                             </ul>
                                         </div>
 
@@ -512,7 +512,7 @@
 
                                     <div class="col-lg-12 col-md-12 col-sm-12 padding-rl-10">
                                         <!-- Tab panels -->
-                                        
+
                                             <!-- Tab Content 1 -->
                                             <div class="tab-pane in active padding-top-5">
                                                 <div ng-if="loaded" class="col-lg-12 col-md-12 col-sm-12">
@@ -532,12 +532,12 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        
+
                                         <!-- End Tab Panels -->
                                     </div>
                                 </div>
                             </div>
-                            <!-- Ends Tab view graph -->         
+                            <!-- Ends Tab view graph -->
                         </div>
                         <!-- End Tab Panels -->
                     </div>
@@ -570,7 +570,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div> 
+                                </div>
                             </div>
                             <div class="row">
                                 <div class="col-lg-12 col-md-12 col-sm-12 margin-top-20">
@@ -589,7 +589,7 @@
                                                <h5 class="text-gray margin-top-10"><i>Respected coach have not <br/>update their advice.</i></h5>
                                             </div>
                                         </div>
-                                    </div> 
+                                    </div>
                                     <div ng-show="usercoachadvicedetails.coachname==''">
                                       <div class="col-lg-5 col-md-5 col-sm-5 no-padding text-right margin-top-30">
                                           <img src="../../images/no-coach-small.png" width="120" height="120"/>
@@ -608,7 +608,7 @@
 
                 <!-- Starts App and Device post -->
                 <div id="app" class="contentblock hidden">
-                    <div class="outerline">                       
+                    <div class="outerline">
                         <form name="wearableForm">
                             <div class="col-lg-12 col-md-12 col-sm-12 margin-top-10" ng-init="wearableinit()" >
                                 <div class="col-lg-12 col-md-12 col-sm-12 no-padding">
@@ -625,7 +625,7 @@
                                         <div class="col-md-8 col-sm-8 col-xs-8">
                                             <h3>{{wearable.vendorname}}</h3><p>{{wearable.scope}}</p>
                                             <div class="app-button"><a href="" class="main-button orange_back" ng-disabled="wearableForm.$invalid || loader" ng-click="OpenFitbitWindow(wearable.authorizeurl,wearable.vendorid)" ng-show="isActive(wearable.isactive)"><span ng-if="device"><span></span></span>{{wearable.connectionStatus}}</a><a href="" class="main-button red_back" ng-disabled="wearableForm.$invalid || loader" ng-click="wearable.connectionStatus='Disconnecting..';doGetDisonnectDetails(wearable.logid)" ng-show="!isActive(wearable.isactive)"><span ng-if="device"><span></span></span>{{wearable.connectionStatus}}</a></div>
-                                            </div>                                        
+                                            </div>
                                     </div>
                                 </div>
                             </div>
@@ -640,7 +640,7 @@
                     <div class="outerline">
                         <div class="col-lg-12 col-md-12 col-sm-12 log margin-top-5 text-right"><i class="fa fa-calendar"></i>&nbsp;&nbsp;<span>Date: {{selectDate}}</span></div>
                         <div class="col-lg-12 col-md-12 col-sm-12 no-padding">
-                            <div class="col-lg-5 col-md-5 col-sm-5 box">
+                            <div class="col-lg-5 col-md-5 col-sm-5 box" style="margin-right: 0">
                                 <div class="col-lg-12 col-md-12 col-sm-12 no-padding">
                                     <div class="col-lg-12 col-md-12 col-sm-12 text-center">
                                         <h5 class="margin-top-20">UPDATE WEIGHT</h5>
@@ -703,7 +703,7 @@
                             </div>
 
                             <!-- for Water level % -->
-                            <div class="col-lg-5 col-md-5 col-sm-5 box">
+                            <div class="col-lg-5 col-md-5 col-sm-5 box" style="margin-right: 0">
                                 <div class="col-lg-12 col-md-12 col-sm-12 no-padding" >
                                     <div class="col-lg-12 col-md-12 col-sm-12 text-center">
                                         <h5 class="margin-top-20">WATER LEVEL&nbsp;%</h5>
@@ -1260,11 +1260,11 @@
                     <div class="col-lg-6 col-md-6 col-sm-6">
                         <form name="ExerciseAddForm" novalidate>
                             <h5>Exercise Name:&nbsp;<strong>{{userSelectedExerciseDetails.exercisename}}</strong></h5>
-                            <hr/>  
+                            <hr/>
                             <h5>Category : <span>{{userSelectedExerciseDetails.categoryname}}</span></h5>
-                            <hr/>  
+                            <hr/>
                             <h5>Unit : <span>{{userSelectedExerciseDetails.levels.unitname}}</span></h5>
-                            <hr/>  
+                            <hr/>
                             <h5  class="margin-top-10"  ng-show="userSelectedExerciseDetails.repsavailable==1">Reps Value</h5>
                             <input type="text" ng-pattern="/(^[1-9]\d{0,8}$)/"  name="reps" ng-model="userExercise.reps"  maxlength="3" ng-show="userSelectedExerciseDetails.repsavailable==1">
                              <span ng-show="ExerciseAddForm.reps.$dirty&&ExerciseAddForm.reps.$invalid">
@@ -2081,7 +2081,7 @@
                         <div class="col-md-12 col-lg-12 col-sm-12 water-textcolor margin-top-5">Water&nbsp;Level</div>
                         <div class="col-md-12 col-lg-12 col-sm-12 no-padding well-image common-border water-border">
                             <div class="col-md-4 col-lg-4 col-sm-4 no-padding margin-top-5">
-                                <img class="img-width" src="../../images/fat-image.png"/>
+                                <img class="img-width" src="../../images/fat.png"/>
                             </div>
                             <div class="col-md-8 col-lg-8 col-sm-8 no-padding">
                                 <div class="water-textcolor"><small>{{waterlog}}/{{waterlogoz}}</small></div>
@@ -2185,4 +2185,21 @@
 </div>
 
 <script type="text/javascript" src="../../js/script.js"></script>
+        <script>
+            //for dashboard main date
+            function daterangepicker() {
+                $("#main-date").click();
+                var options = {
+                    maxDate : new Date(),
+                    endDate : new Date(),
+                    opens:'left',
+                    singleDatePicker: true
+                };
+
+                $('#main-date').daterangepicker(options, function(start, end, label) {
+                    angular.element(document.getElementById('main-date')).scope().initialLoadFoodAndExercise(start.format('DD/MM/YYYY'));
+                    document.getElementById("main-start-date").value = start.format('DD/MM/YYYY');
+                });
+            };
+        </script>
 

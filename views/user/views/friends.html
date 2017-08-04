@@ -300,9 +300,10 @@
         <div class="common_model">
             <form name="inviteFriendsForm" novalidate>
                 <p>Recipient Name</p>
-               <input type="text" name="name" ng-model="sendEmail.sendername" maxlength="50" required focus-me="shouldBeOpen"/>
+               <input type="text" name="name" ng-model="sendEmail.sendername" ng-pattern="/^ *([a-zA-Z]+ ?)+ *$/" maxlength="50" required focus-me="shouldBeOpen"/>
                <span ng-show="inviteFriendsForm.name.$dirty&&inviteFriendsForm.name.$invalid && !inviteFriendsForm.name.$pristine">
                    <span class="error-message" ng-show="inviteFriendsForm.name.$error.required"><span>Required.</span></span>
+                    <span class="error-message" ng-show="inviteFriendsForm.name.$error.pattern"><span>Invalid&nbsp;Format.</span></span>
                </span>
                <p>Recipient Email ID</p>
                <input type="text" name="email" ng-model="sendEmail.friendemailid" maxlength="50" required focus-me="shouldBeOpen" validate-email/>
