@@ -458,6 +458,86 @@ adminApp.config([
             ]
         },
       controller: 'TestimonialEditController'
+    }).when('/articles', {
+      templateUrl: 'views/site-articles.html',
+      resolve: {
+        loadMyFiles: [
+          '$ocLazyLoad',
+          function ($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name: 'adminApp',
+              files: [
+                '../../angular/angular-utils-pagination/dirPagination.js',
+                '../../app/article/articleController.js',
+                '../../css/testimonial-image-upload.css',
+                '../../js/image-upload.js'
+              ]
+            });
+          }
+        ]
+      },
+      controller: 'ArticleController'
+    }).when('/add-article', {
+      templateUrl: 'views/site-add-or-edit-article.html',
+      resolve: {
+        loadMyFiles: [
+          '$ocLazyLoad',
+          function ($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name: 'adminApp',
+              files: [
+                  '../../angular/angular-utils-pagination/dirPagination.js',
+                '../../app/article/articleController.js',
+                '../../plugin/text-editor/summernote.js',
+                '../../plugin/text-editor/summernote.css',
+                '../../css/testimonial-image-upload.css',
+                '../../js/image-upload.js'
+              ]
+            });
+          }
+        ]
+      },
+      controller: 'ArticleController'
+    }).when('/edit-article/:id', {
+      templateUrl: 'views/site-add-or-edit-article.html',
+      resolve: {
+        loadMyFiles: [
+          '$ocLazyLoad',
+          function ($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name: 'adminApp',
+              files: [
+                  '../../angular/angular-utils-pagination/dirPagination.js',
+                '../../app/article/articleController.js',
+                '../../plugin/text-editor/summernote.js',
+                '../../plugin/text-editor/summernote.css',
+                '../../css/testimonial-image-upload.css',
+                '../../js/image-upload.js'
+              ]
+            });
+          }
+        ]
+      },
+      controller: 'ArticleEditController'
+    }).when('/view-article/:id', {
+      templateUrl: 'views/site-view-article.html',
+        resolve: {
+            loadMyFiles: [
+                '$ocLazyLoad',
+                function ($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name: 'adminApp',
+                        files: [
+                            '../../angular/angular-utils-pagination/dirPagination.js',
+                            '../../app/article/articleController.js',
+                            '../../css/testimonial-image-upload.css',
+                            '../../js/image-upload.js'
+                        ]
+                    });
+                }
+            ]
+        },
+      controller: 'ArticleEditController'
     }).when('/cdc-list', {
             templateUrl: 'views/site-cdc-list.html',
             resolve: {
@@ -2451,6 +2531,13 @@ adminApp.factory('siteMenuService', function () {
         'name': 'Terms Of Use',
         'icon': 'file-text',
         'href': 'terms-of-use-edit',
+        'active': ''
+      },
+      {
+        'id': 5,
+        'name': 'Articles',
+        'icon': 'comment',
+        'href': 'articles',
         'active': ''
       },
       {
