@@ -723,15 +723,16 @@ adminApp.config([
                 '../../css/profile-image-upload.css',
                   '../../angular/angular-utils-pagination/dirPagination.js',
                 '../../js/image-upload.js',
-                '../../app/coach/coachController.js'
+                '../../app/coach/coachAddEditController.js'
               ]
             });
           }
         ]
       },
-      controller: 'CoachController'
-    }).when('/add-coach/:id', {
-      templateUrl: 'views/add-coach.html',
+      controller: 'CoachAddEditController'
+    }).
+    when('/add-edit-coach', {
+      templateUrl: 'views/add-edit-coach.html',
       resolve: {
         loadMyFiles: [
           '$ocLazyLoad',
@@ -742,13 +743,32 @@ adminApp.config([
                 '../../css/profile-image-upload.css',
                   '../../angular/angular-utils-pagination/dirPagination.js',
                 '../../js/image-upload.js',
-                '../../app/coach/coachController.js'
+                '../../app/coach/CoachAddEditController.js'
               ]
             });
           }
         ]
       },
-      controller: 'CoachController'
+      controller: 'CoachAddEditController'
+    }).when('/add-edit-coach/:id', {
+      templateUrl: 'views/add-edit-coach.html',
+      resolve: {
+        loadMyFiles: [
+          '$ocLazyLoad',
+          function ($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name: 'adminApp',
+              files: [
+                '../../css/profile-image-upload.css',
+                  '../../angular/angular-utils-pagination/dirPagination.js',
+                '../../js/image-upload.js',
+                '../../app/coach/CoachAddEditController.js'
+              ]
+            });
+          }
+        ]
+      },
+      controller: 'CoachAddEditController'
     }).when('/coach-edit', {
       templateUrl: 'views/coach-edit.html',
       resolve: {
@@ -2696,12 +2716,14 @@ adminApp.factory('coachMenuService', function () {
         'active': ''
       },
       {
+        'id': 2,
         'name': 'Coach List', 
         'icon': 'users',
         'href': 'coach',
         'active': ''
       },
       {
+        'id': 3,
         'name': 'Subscriptions', 
         'icon': 'dollar',
         'href': 'coach-subscriptions',

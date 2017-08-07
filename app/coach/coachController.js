@@ -20,10 +20,10 @@ adminApp.controller('CoachController',['$scope','requestHandler','Flash','coachM
 
         //Param
         $scope.param={
-                    "limit":$scope.pagination.itemsPerPage,
-                    "offset":($scope.pagination.pageNumber-1)*$scope.pagination.itemsPerPage,
-                    "searchname":""
-                    };
+            "limit":$scope.pagination.itemsPerPage,
+            "offset":($scope.pagination.pageNumber-1)*$scope.pagination.itemsPerPage,
+            "searchname":""
+        };
 
         requestHandler.postRequest("admin/getcoacheslist/",$scope.param).then(function(response){
             $scope.coachList=response.data; 
@@ -37,31 +37,11 @@ adminApp.controller('CoachController',['$scope','requestHandler','Flash','coachM
         $scope.loaded=true;
         requestHandler.getRequest("admin/getinterestedcoachlist/","").then(function(response){
             $scope.invitationList=response.data.coaches;
-            // console.log($scope.invitationList);
             $scope.loaded=false;
             $scope.paginationLoad=true;
         });
     };
 
-     //Get Individual Invitation List
-    $scope.doViewInvitationList=function(){
-        $scope.loaded=true;
-        requestHandler.getRequest("admin/getinterestedcoachlist/","").then(function(response){
-            $scope.invitationList=response.data.coaches;
-            console.log($scope.invitationList);
-            $scope.loaded=false;
-            $scope.paginationLoad=true;
-            var coaches = $scope.invitationList;
-
-            //Looping to find the coach detail
-            $.each($scope.invitationList,function(index,value){
-                if(value.id==$routeParams.id){
-                    $scope.invitationDetails=value;
-                }
-            });
-
-        });
-    };
 
 
     //Post Delete Invitation List
@@ -77,49 +57,9 @@ adminApp.controller('CoachController',['$scope','requestHandler','Flash','coachM
         });
     };
 
-    // Do Add as a coach with Edit
-    $scope.doGetInvitationByID = function() {
-        $scope.loaded=true;
-        requestHandler.getRequest("admin/getinterestedcoachlist/","").then(function(response){
-            $scope.invitationList=response.data.coaches;
-            $scope.loaded=false;
-            $scope.paginationLoad=true;
-            var coaches = $scope.invitationList;
-
-            //Looping to find the coach detail
-            $.each($scope.invitationList,function(index,value){
-                if(value.id==$routeParams.id){
-                    $scope.invitationDetails=value;
-                }
-            });
-
-        });
-    };
-
     //Alert Delete Model
     $scope.deleteModel=function(Id){
         $scope.InvitationId = Id;
-        $(function(){
-            $("#lean_overlay").fadeTo(1000);
-            $("#modal").fadeIn(600);
-            $(".common_model").show();
-        });
-
-        $(".modal_close").click(function(){
-            $(".common_model").hide();
-            $("#modal").hide();
-            $("#lean_overlay").hide();
-        });
-
-        $("#lean_overlay").click(function(){
-            $(".common_model").hide();
-            $("#modal").hide();
-            $("#lean_overlay").hide();
-        });
-    };
-
-    //Alert for Confirm add as a coach
-    $scope.confirmModel=function(){
         $(function(){
             $("#lean_overlay").fadeTo(1000);
             $("#modal").fadeIn(600);
@@ -155,32 +95,7 @@ adminApp.controller('CoachController',['$scope','requestHandler','Flash','coachM
         });
     };
 
-    //Add New Coach from coach list and Clik add as a coach button
-    $scope.doAddCoach= function () {
-      requestHandler.postRequest("admin/registerCoach/",$scope.invitationDetails).then(function(){
-            successMessage(Flash,"Successfully Registered");
-            /*To Close Modal*/
-             $(".common_model").hide();
-             $("#modal").hide();
-             $("#lean_overlay").hide();
-          /*End Close Modal*/
-          $scope.doGetCoachList();
-          $location.path('invitation-list');
-
-      },function(){
-           errorMessage(Flash,"Please Try Again Later");
-      });
-    };
-
-    //Display view Individual Invitation Details By Id
-    $scope.invitationCoachViewInit=function(){
-        $scope.doViewInvitationList();
-    };
-
-    //Display view Invitation Details for add as a coach
-    $scope.editInvitationInit=function(){
-        $scope.doGetInvitationByID();
-    };
+    
 
     //Initial Load
     $scope.init = function(){
@@ -331,6 +246,8 @@ adminApp.controller('CoachViewController',['$scope','requestHandler','Flash','$r
     };
 }]);
 
+
+
 // render image to view in list
 adminApp.filter('trusted', ['$sce', function ($sce) {
     return function(url) {
@@ -338,7 +255,7 @@ adminApp.filter('trusted', ['$sce', function ($sce) {
     };
 }]);
 
-adminApp.filter('startsWithLettercoach', function () {
+adminApp.filter('startsWithLettertotalcoach', function () {
 
     return function (items, coachsearch) {
 

@@ -5,7 +5,7 @@ adminApp.controller('IndividualCoachSubscriptionController',['$scope','requestHa
 	// For coach management side menu
     $scope.coachMenuList = coachMenuService;
     $.each($scope.coachMenuList,function(index,value){
-        if(value.href==$location.path().substr(1)){
+        if(value.id==2){
             value.active = "active";
         }
         else value.active = ""
@@ -44,7 +44,7 @@ adminApp.controller('CoachSubscriptionController',['$scope','requestHandler','Fl
     // For coach management side menu
     $scope.coachMenuList = coachMenuService;
     $.each($scope.coachMenuList,function(index,value){
-        if(value.href==$location.path().substr(1)){
+        if(value.id==3){
             value.active = "active";
         }
         else value.active = ""

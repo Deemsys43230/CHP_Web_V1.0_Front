@@ -9063,6 +9063,7 @@ height:200px!important;
     color: #333;
     padding: 5px 8px;
     height:90px;
+    width: 100%;
     border:0px !important;
     -moz-appearance: none;
     -webkit-appearance: none;
@@ -16967,4 +16968,71 @@ select.date:focus {
     -webkit-border-radius: 0;
     outline: 0;
     margin: 0;
+}
+
+
+/*For coach Notification css*/
+
+.nav-item__badge {
+    top: 14px;
+    left: 50%;
+    height: 15px;
+    line-height: 14px;
+    background-color: #ff2c33;
+    border-radius: 14px;
+    z-index: 1;
+}
+.nav-item__badge {
+    position: absolute;
+    padding: 0 4px;
+}
+.nav-item__badge-count{
+    height:2px;
+    width:8px;
+    border-radius:50%;
+    color:#fff;
+    overflow:hidden;
+    margin:6px auto 0;
+}
+#notification_form{
+    position: fixed;
+    right: 47px;
+    top:25%;
+    z-index: 100000!important;
+    width:270px;
+    padding:0;
+    margin:0;
+}
+
+#notification_form p{
+    margin-left:-39px;
+    padding:0;
+    background-color:transparent;
+    cursor:pointer;
+}
+#notification-form{
+    display:none;
+    z-index: 100!important;
+    box-shadow: 0 0 9px rgba(0, 0, 0, 0.4);
+    -o-box-shadow: 0 0 9px rgba(0, 0, 0, 0.4);
+    -moz-box-shadow: 0 0 9px rgba(0, 0, 0, 0.4);
+    -webkit-box-shadow: 0 0 9px rgba(0, 0, 0, 0.4);
+    background: #fff;
+    margin:0;
+    padding:15px;
+    /*border-top:3px solid #f8ba01;
+    border-right:3px solid #f8ba01;
+    border-left:3px solid #f8ba01;
+    border-bottom:3px solid #f8ba01;*/
+}
+
+.notification-margin-adjust{
+    margin-top: -50px !important;
+}
+.notify-bar{
+    position: relative;
+    border-top: 1px solid rgba(0, 0, 0, 0.04);
+}
+.notification-color{
+    color: blue;
 }

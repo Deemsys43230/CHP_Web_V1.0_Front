@@ -80,6 +80,23 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'CoachProfileController'
             }).
+            when('/coach-subscription', {
+                templateUrl: 'views/coach-subscription.html',
+                resolve: {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'coachApp',
+                            files:[
+                                '../../plugin/popup/style.css',
+                                '../../angular/angular-utils-pagination/dirPagination.js',
+                                '../../app/coachMembers/coachSubscriptionController.js',
+                                'https://checkout.razorpay.com/v1/checkout.js'
+                            ]
+                        })
+                    }]
+                },
+                controller:'CoachSubscriptionController'
+            }).
             when('/coach-subscription-plan', {
                 templateUrl: 'views/coach-subscription-plan.html',
                 resolve: {
@@ -95,7 +112,7 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         })
                     }]
                 },
-                controller:'CoachSubscriptionController'
+                controller:'SubscriptionController'
             }).
             when('/subscription-razor-payments/:payid', {
                 templateUrl: 'views/payment-success.html',
@@ -584,6 +601,28 @@ coachApp.controller("CoachInitialController",['$scope','requestHandler','$locati
             $scope.feedback.emailId=response.data.User_Profile.emailid;
         });
     };
+    $scope.getCoachNotifiaction = function(){
+        requestHandler.getRequest("coach/notifications/","").then(function(response){
+            $scope.notification = response.data.notifications;
+
+            var notifications = $scope.notification;
+
+            $scope.allNotifications = notifications.length;
+            $scope.coachNotification = [];
+
+            $.each($scope.notification,function(index,value){
+                $scope.coachNotification.push(value);
+            });
+
+        });
+    };
+    //Initalize the get functions
+    $scope.init=function(){
+        $scope.getCoachNotifiaction();
+    };
+
+    $scope.init();
+
 }]);
 
 //Controller For Logout

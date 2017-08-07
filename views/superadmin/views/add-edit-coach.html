@@ -4,7 +4,7 @@
             <h4 class="classic-title"><span>Coach Management</span></h4>
             <div ng-include src="'views/coach-menu.html'" onload="activeClass"></div>
         </div>
-        <div class="col-md-9" ng-init="editInvitationInit()">
+        <div class="col-md-9" ng-init="init()">
             <div ng-if="modalloaded">
                 <div class="loader-style">
                     <div class="loader"></div>
@@ -14,9 +14,7 @@
                 <div class="margin-top-5 no-padding pull-right">
                     <a href="#invitation-list" class="back-button pull-right margin-left-5 margin-top5 hidden-sm"><i class="fa fa-arrow-circle-o-left"></i>&nbsp;<span class="hidden-md">Back</span></a>
                 </div>
-                <div class="col-lg-5 col-md-5 col-sm-6 pull-right no-padding">
-                    <div flash-message="3000" ></div>
-                </div>
+                <div flash-message="3000" class="col-md-3 pull-right no-padding"></div>
                 <h5 class="classic-title margin-bottom-10"><span><i class="fa fa-user"></i> &nbsp;ADD COACH</span></h5>
             </div>
 
@@ -27,7 +25,7 @@
                                 <div> First Name <span class="pull-right">:</span></div>
                             </div>
                             <div class="col-lg-8 col-md-7 col-sm-12 margin-top-10">
-                                <input class="coach-input" name="firstname" ng-model="invitationDetails.firstname" maxlength="25" required validate-alpha-with-space/>
+                                <input class="coach-input" placeholder="First Name" name="firstname" ng-model="invitationDetails.firstname" maxlength="25" required validate-alpha-with-space/>
                                 <span ng-show="coachDetailsForm.firstname.$dirty && coachDetailsForm.firstname.$invalid">
                                     <span class="error-message textarea-errormessage10" ng-show="coachDetailsForm.firstname.$error.required"><span>Required.</span></span>
                                     <span class="error-message textarea-errormessage10" ng-show="coachDetailsForm.firstname.$error.validateAlphaWithSpace"><span>Enter&nbsp;valid&nbsp;Name.</span></span>
@@ -39,7 +37,7 @@
                                 <div> Last Name <span class="pull-right">:</span></div>
                             </div>
                             <div class="col-lg-8 col-md-7 col-sm-12 margin-top-10">
-                                <input class="coach-input" name="lastname" ng-model="invitationDetails.lastname" maxlength="25" required validate-alpha-with-space/>
+                                <input class="coach-input" placeholder="last Name" name="lastname" ng-model="invitationDetails.lastname" maxlength="25" required validate-alpha-with-space/>
                                 <span ng-show="coachDetailsForm.lastname.$dirty && coachDetailsForm.lastname.$invalid">
                                     <span class="error-message textarea-errormessage10" ng-show="coachDetailsForm.lastname.$error.required"><span>Required.</span></span>
                                     <span class="error-message textarea-errormessage10" ng-show="coachDetailsForm.lastname.$error.validateAlphaWithSpace"><span>Enter&nbsp;valid&nbsp;Name.</span></span>
@@ -51,7 +49,7 @@
                                 <div> Email Id <span class="pull-right">:</span></div>
                             </div>
                             <div class="col-lg-8 col-md-7 col-sm-12 margin-top-10">
-                                <input class="coach-input" name="emailid" ng-model="invitationDetails.emailid" maxlength="25" required validate-email/>
+                                <input class="coach-input" placeholder="Email Id" name="emailid" ng-model="invitationDetails.emailid" maxlength="25" required validate-email/>
                                 <span ng-show="coachDetailsForm.emailid.$dirty && coachDetailsForm.emailid.$invalid">
                                     <span class="error-message textarea-errormessage10" ng-show="coachDetailsForm.emailid.$error.required"><span>Required.</span></span>
                                     <span class="error-message textarea-errormessage10" ng-show="coachDetailsForm.emailid.$error.validateEmail"><span>Enter&nbsp;valid&nbsp;Email.</span></span>
@@ -63,7 +61,7 @@
                                 <div> Phone Number <span class="pull-right">:</span></div>
                             </div>
                             <div class="col-lg-8 col-md-7 col-sm-12 margin-top-10">
-                                <input class="coach-input" name="phone" ng-model="invitationDetails.phone" maxlength="10" required validate-phone-number/>
+                                <input class="coach-input" placeholder="Phone Number" name="phone" ng-model="invitationDetails.phone" maxlength="10" required validate-phone-number/>
                                 <span ng-show="coachDetailsForm.phone.$dirty && coachDetailsForm.phone.$invalid">
                                     <span class="error-message textarea-errormessage10" ng-show="coachDetailsForm.phone.$error.required"><span>Required.</span></span>
                                     <span class="error-message textarea-errormessage10" ng-show="coachDetailsForm.phone.$error.validatePhoneNumber"><span>Enter&nbsp;valid&nbsp;Number.</span></span>
@@ -75,7 +73,7 @@
                                 <div> Referral <span class="pull-right">:</span></div>
                             </div>
                             <div class="col-lg-8 col-md-7 col-sm-12 margin-top-10">
-                                <input class="coach-input" name="ref" maxlength="4" ng-pattern="/^\d+$/" ng-model="invitationDetails.referral" required/>
+                                <input class="coach-input" placeholder="Referral" name="ref" maxlength="4" ng-pattern="/^\d+$/" ng-model="invitationDetails.referral" required/>
                                 <span ng-show="coachDetailsForm.ref.$dirty && coachDetailsForm.ref.$invalid">
                                     <span class="error-message textarea-errormessage10" ng-show="coachDetailsForm.ref.$error.required"><span>Required.</span></span>
                                     <span class="error-message textarea-errormessage10" ng-show="coachDetailsForm.ref.$error.pattern"><span>Enter&nbsp;valid&nbsp;Data.</span></span>

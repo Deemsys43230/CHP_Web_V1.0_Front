@@ -120,7 +120,10 @@
                             <a class="{{activeClass.course}}" href="#course">Courses</a>
                         </li>
                         <li>
-                            <a class="{{activeClass.my}}" href="#coach-subscription-plan">Members</a>
+                            <a class="{{activeClass.my}}" href="#coach-subscription">Members</a>
+                        </li>
+                        <li>
+                            <a class="{{activeClass.sub}}" href="#coach-subscription-plan">Subcription</a>
                         </li>
                         <li>
                             <a class="{{activeClass.advices}}" href="#advices">Advices</a>
@@ -135,8 +138,11 @@
                         </li>
                         <li><a class="{{activeClass.forums}}" href="#forums">Forums</a>
                         </li>
-                        <li><a class="{{activeClass.contact}}" href="#contact">Contact Us</a>
+                        <li id="notification_button">
+                            <a href=""><i class="fa fa-bell fa-lg notification-color" style="font-size: 1.95em;" aria-hidden="true"></i><span class="nav-item__badge"><span aria-hidden="true" class="nav-item__badge-count">{{allNotifications}}</span></span></a>
+                            
                         </li>
+
                     </ul>
                     <!-- End Navigation List -->
                 </div>
@@ -261,6 +267,20 @@
         </form>
             </div>
     </div>
+
+<!-- For Coach Notification  -->
+    <div id="notification_form">
+        <p id="notification_button"></p>
+        <div class="notification-margin-adjust">
+            <form id="notification-form">
+                <ul class="dropdown remove-style" ng-repeat="notification in coachNotification">
+                    <li style="padding: 0px 16px;">{{notification.description}}</li>
+                </ul>
+            </form>
+
+        </div>
+    </div>
+
 </div>
 <!-- End Container -->
 
@@ -310,6 +330,7 @@
 <script type="text/javascript" src="../../angular/angular-nicescroll.js"></script>
 <script type="text/javascript" src="../../plugin/popup/jquery.leanModal.min.js"></script>
 
+
 <script src="../../app/requestHandler.js"></script>
 <script src="../../app/userFeedback/userFeedbackService.js"></script>
 <script src="../../app/coachApp.js"></script>
@@ -356,6 +377,20 @@
             }else{
                 $('#form').animate({left:'0'},  500);
                 $("#feedback-form").slideToggle(300);
+            }
+        });
+    });
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("#notification_button").click(function(){
+            if($('#notification_form').css('right')=='0px'){
+                $("#notification-form").slideToggle(800);
+                $('#notification_form').animate({top:'-270px'},  500);
+            }else{
+                $('#notification_form').animate({top:'160px'},  500);
+                $("#notification-form").slideToggle(300);
             }
         });
     });

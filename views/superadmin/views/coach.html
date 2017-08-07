@@ -9,7 +9,7 @@
                 <div class="row min-height-385"> 
                     <div class="col-md-12" ng-init="init()" >
                         <a href="#dashboard" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back to Dashboard</a>
-                        <a id="modal_trigger" href="#modal" class="back-button pull-right margin-left-5" ng-click="reset()"><i class="fa fa-plus-circle"></i> Add Coach</a>
+                        <a href="#add-edit-coach" class="back-button pull-right margin-left-5"><i class="fa fa-plus-circle"></i> Add Coach</a>
                         <!-- Stat Search -->
                         <div class="pull-right" id="hidden-search">
                             <a href="#" onclick="return false;" class="show-list-search search_button margin-left-5"><i class="fa fa-search"></i></a>
@@ -35,7 +35,11 @@
                                 <th class="col-md-6">Options</th>
                             </tr>
                             </thead>
+
+
                             <tbody >
+                                <tr>
+                            </tr>
                             <tr dir-paginate="coach in coachList.coachlist | itemsPerPage: pagination.itemsPerPage" total-items="coachList.totalrecords" current-page="pagination.pageNumber" ng-show="coachList.length!=0" pagination-id="adminCoachListPaginate">
                                 <td><span class="line-clamp-sm">{{coach.name}}</span></td>
                                 <td><span class="line-clamp-sm">{{coach.emailid}}</span></td>
@@ -43,11 +47,12 @@
                                     <a href="#coach-view/{{coach.userid}}" class="btn-xs btn-primary">View Details</a>
                                     <a href="" class="btn-xs btn-success" ng-click="doEnableDisableCoach(coach.userid)" ng-show="coach.isenabled==0">Enable</a>
                                     <a href="" class="btn-xs btn-danger" ng-click="doEnableDisableCoach(coach.userid)" ng-hide="coach.isenabled==0">Disable</a>
-                                     <a href="#coach-subscriptions/{{coach.userid}}" class="btn-xs btn-warning">Subscriptions</a>
+                                    <a href="#coach-subscriptions/{{coach.userid}}" class="btn-xs btn-warning">Subscriptions</a>
                                 </td>
                             </tr>
+
+                            <!-- <tr ng-show="coachList.length==0"><td colspan="3" class="text-center">No Records Found !!!</td></tr> -->
                             <tr ng-show="coachList.length==0"><td colspan="3" class="text-center">No Records Found !!!</td></tr>
-                            <!--<tr ng-show="!coachfilter.length"><td colspan="3" class="text-center">No Records Found !!!</td></tr>-->
                             </tbody>
                         </table>
                         <!-- Start Pagination -->
