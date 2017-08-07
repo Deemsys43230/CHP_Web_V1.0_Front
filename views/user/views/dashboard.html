@@ -109,7 +109,7 @@
                             <li><a href="#tab-3" data-toggle="tab" onclick="return false;">Graphs</a></li>
                             <li>
                         </ul>
-                        <button href="" ng-click="doSyncDevices()" onclick="return false;" class="sync_button override-width pull-left"  ng-disabled="connectDevice"><i class="fa fa-exchange" aria-hidden="true"></i>&nbsp;{{syncBtnTxt}}&nbsp;</button>
+                        <button href="" ng-click="doSyncDevices(0)" onclick="return false;" class="sync_button override-width pull-left"  ng-disabled="connectDevice"><i class="fa fa-exchange" aria-hidden="true"></i>&nbsp;{{syncBtnTxt}}&nbsp;</button>
 
                         <div class="margin-top-5 pull-right mouse-pointer" >&nbsp;&nbsp;<i class="fa fa-calendar" ng-click="datePicker()"></i></div>
                         <input hidden id="main-start-date" ng-model="selectedDate">
@@ -613,7 +613,7 @@
                             <div class="col-lg-12 col-md-12 col-sm-12 margin-top-10" ng-init="wearableinit()" >
                                 <div class="col-lg-12 col-md-12 col-sm-12 no-padding">
                                      <h4>App & Devices</h4>
-                                     <button href="" ng-click="doSyncDevices()" onclick="return false;" class="sync_button override-width pull-right" style="margin-top: -25px;" ng-disabled="connectDevice" disabled><i class="fa fa-exchange" aria-hidden="true"></i>&nbsp;{{syncBtnTxt}}&nbsp;</button>
+                                     <button href="" ng-click="doSyncDevices(1)" onclick="return false;" class="sync_button override-width pull-right" style="margin-top: -25px;" ng-disabled="connectDevice" disabled><i class="fa fa-exchange" aria-hidden="true"></i>&nbsp;{{syncBtnTxt}}&nbsp;</button>
                                 </div>
                                 <div class="col-lg-12 col-md-12 col-sm-12 no-padding">
                                     <hr/>

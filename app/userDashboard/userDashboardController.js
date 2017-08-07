@@ -121,14 +121,18 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
 
 
 
-        $scope.doSyncDevices=function(){
-            var date = document.getElementById("main-start-date").value;
-            requestHandler.postRequest("user/syncWearableData/",{"date":date}).then(function(response){
+        $scope.doSyncDevices=function(id){
             $scope.connectDevice=true;
             $scope.syncBtnTxt="Synchronizing...";
+        var date = document.getElementById("main-start-date").value;
+            requestHandler.postRequest("user/syncWearableData/",{"date":date}).then(function(response){
               $scope.doGetConnectedDevices();
-              $location.path("dashboard");
-              $scope.initialLoadFoodAndExercise(selectedDate);
+                    if(id=0){
+                        $location.path("dashboard");
+                    }
+
+              $scope.connectDevice=false;
+            $scope.initialLoadFoodAndExercise(selectedDate);
                     },
                 function () {
                     errorMessage(Flash, "Please try again later!")
@@ -136,8 +140,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
         };
         $scope.doGetConnectedDevices=function(){
             requestHandler.getRequest("getWearableVendorsListByUser/","").then(function(response){
-                $scope.vendorlist=response.data;
-                $scope.connectDevice=false;
+                $scope.vendorlist=response.data.vendorlist;
                 var isActive=0;
                 $.each($scope.vendorlist, function(index,value) {
                         if(value.isactive==1){
@@ -3884,7 +3887,6 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
                 //$scope.wearableFitbitText="Connecting...";
                 $scope.device=true;
                 $window.open(authorizeurl+"&state="+requestHandler.domainURL()+"/views/devices/index.html?state="+vendorid,"_self");
-
         };
 
         $scope.doGetVendorlist = function(){
