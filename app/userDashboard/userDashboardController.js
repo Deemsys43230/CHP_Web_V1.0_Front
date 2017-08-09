@@ -268,6 +268,18 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
 
         };
 
+        //To Check maximum food value
+        $scope.maxfoodvalue=false;
+        $scope.maxFoodValueCheck = function(){
+            if(parseFloat($scope.userFood.servings <=999.9)){
+                $scope.maxfoodvalue=false;
+            }
+            else if(parseFloat($scope.userFood.servings >999.9)){
+                $scope.maxfoodvalue=true;
+            }
+
+        };
+
         //Update User Food
         $scope.doUpdateUserFood=function(){
             //Set values according to the api calls
@@ -866,12 +878,12 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
             }
             else{
                 if($scope.userProfile.unitPreference==2){
-                    $scope.current=$scope.caloriesSpent=$scope.userExercise.selectedLevel.MET*($scope.demography.weight*0.45359237).toFixed(1)*($scope.userExercise.workoutvalue/3600);
-                    $scope.current=($scope.current).toFixed(2);
+                    $scope.current=$scope.caloriesSpent=$scope.userExercise.selectedLevel.MET*($scope.demography.weight*0.453592)*($scope.userExercise.workoutvalue/3600);
+                    $scope.current=($scope.current).toFixed(5);
                 }
                 else if($scope.userProfile.unitPreference==1){
                     $scope.current=$scope.caloriesSpent=$scope.userExercise.selectedLevel.MET*($scope.demography.weight)*($scope.userExercise.workoutvalue/3600);
-                    $scope.current=($scope.current).toFixed(2);
+                    $scope.current=($scope.current).toFixed(5);
                 }
 
             console.log($scope.current);
@@ -1301,6 +1313,16 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
                 }
             });
         };
+        $scope.maxfat=false;
+        $scope.maxFatValueCheck = function(){
+            if(parseFloat($scope.fat)<=100.0){
+                $scope.maxfat=false;
+            }
+            else if(parseFloat($scope.fat) >100.0){
+                $scope.maxfat=true;
+            }
+
+        };
 
 
         $scope.weightLogEntry=function(id){
@@ -1395,13 +1417,25 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
         };
 
 
-        //For maximum Weight validation
+        //For maximum Weight validation lbs
         $scope.maxweight=false;
         $scope.maxCheck = function(){
             if(parseFloat($scope.weightlog)<=2204.4){
                 $scope.maxweight=false;
             }
             else if($scope.weightlog>2204.4){
+                $scope.maxweight=true;
+            }
+
+        };
+
+        //For maximum Weight validation kgs
+        $scope.maxweight=false;
+        $scope.maxWeightCheck = function(){
+            if(parseFloat($scope.weightlog)<=999.9){
+                $scope.maxweight=false;
+            }
+            else if($scope.weightlog>999.9){
                 $scope.maxweight=true;
             }
 
@@ -1621,6 +1655,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
                 status: 'set-goal'
             };
         };
+
 
         $scope.setGoalTypeOptions=function(id){
             var checkPlanType;
@@ -3930,7 +3965,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
             if(vendorid==4)
                 $scope.appDevice="Android";
             else
-                $scope.appDevice="iPhone";
+                $scope.appDevice="ios";
             $(function(){
                 $("#lean_overlay").fadeTo(1000);
                 $("#connect-using-mobile").fadeIn(600);

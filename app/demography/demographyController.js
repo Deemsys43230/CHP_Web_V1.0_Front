@@ -336,7 +336,20 @@ userApp.controller('DemographyController',['$rootScope','$scope','requestHandler
 
     };
 
-    //TO check Maximum target Weight
+//To Check maximum Weight in kgs
+    $scope.maxweightkgs=false;
+    $scope.maxWeightCheckKgs = function(weight){
+        if(weight <=999.9){
+            $scope.maxweightkgs=false;
+        }
+        else if(weight >999.9){
+            $scope.maxweightkgs=true;
+        }
+
+    };
+
+
+    //TO check Maximum target Weight in lbs
     $scope.maxTargetWeight=false;
     $scope.maxTargetWeightCheck = function(targetWeight){
         if(targetWeight<=2204.4){
@@ -344,6 +357,18 @@ userApp.controller('DemographyController',['$rootScope','$scope','requestHandler
         }
         else if(targetWeight>2204.4){
             $scope.maxTargetWeight=true;
+        }
+
+    };
+
+    //TO check Maximum target Weight in kgs
+    $scope.maxTargetWeightKgs=false;
+    $scope.maxTargetWeightCheckKgs = function(targetWeight){
+        if(targetWeight<=999.9){
+            $scope.maxTargetWeightKgs=false;
+        }
+        else if(targetWeight>999.9){
+            $scope.maxTargetWeightKgs=true;
         }
 
     };

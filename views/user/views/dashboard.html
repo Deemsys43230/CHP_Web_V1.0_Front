@@ -662,14 +662,15 @@
                                                 </div>
                                                 <div class="col-lg-6 col-md-6 col-sm-6 margin-top-10 no-padding-right padding-left-8">
                                                     <span ng-show="userProfile.unitPreference==1">
-                                                     <input class="profile_input weightoverride" id="weightLog" name="weightkgs" ng-model="weightlog" maxlength="5" required validate-zero onkeypress="return validateFloatKeyPress(this,event);"/>
+                                                     <input class="profile_input weightoverride" id="weightLog" name="weightkgs" ng-model="weightlog" maxlength="5" required validate-zero  ng-change="maxWeightCheck()"onkeypress="return validateFloatKeyPress(this,event);"/>
+                                                        <span class="error-message textarea-errormessage40-right60" ng-show="!weightLogForm.weightkgs.$error.required&&maxweight"><span style="bottom: 70px;">Please&nbsp;Enter&nbsp;Valid&nbsp;Weight.</span></span>
                                                          <span ng-show="weightLogForm.weightkgs.$dirty&&weightLogForm.weightkgs.$invalid">
                                                          <span class="error-message textarea-errormessage10" ng-show="weightLogForm.weightkgs.$error.required"><span>Required.</span></span>
                                                          <span class="error-message textarea-errormessage10" ng-show="weightLogForm.weightkgs.$error.validateZero"><span>Invalid&nbsp;Format.</span></span>
                                                     </span>
                                                     </span>
                                                    <span ng-show="userProfile.unitPreference==2">
-                                                      <input class="profile_input weightoverride" name="weightlbs" ng-model="weightlog" maxlength="6" ng-change="maxCheck()" required validate-zero onkeypress="return validateFloatKeyPress(this,event);"/>
+                                                      <input class="profile_input weightoverride" name="weightlbs" ng-model="weightlog"  ng-change="maxCheck()" maxlength="6" required validate-zero onkeypress="return validateFloatKeyPress(this,event);"/>
                                                            <span class="error-message textarea-errormessage40-right60" ng-show="!weightLogForm.weightlbs.$error.required&&maxweight"><span style="bottom: 70px;">Please&nbsp;Enter&nbsp;Valid&nbsp;Weight.</span></span>
                                                            <span ng-show="weightLogForm.weightlbs.$dirty&&weightLogForm.weightlbs.$invalid">
                                                            <span class="error-message textarea-errormessage10" ng-show="weightLogForm.weightlbs.$error.required"><span>Required.</span></span>
@@ -687,10 +688,13 @@
                                                     <span>Fat<small>(<span>%</span>)</small><span class="pull-right">:</span></span>
                                                 </div>
                                                 <div class="col-lg-6 col-md-6 col-sm-6 margin-top-10 no-padding-right padding-left-8">
-                                                    <input class="profile_input weightoverride" id="fatLog" name="curfat" ng-model="fat" maxlength="4" required ng-pattern="/^\-?\d+((\.|\,)\d+)?$/" onkeypress="return validateFloatKeyPress(this,event);"/>
-                                                <span ng-show="fatLogForm.curfat.$dirty&&fatLogForm.curfat.$invalid">
-                                                    <span class="error-message textarea-errormessage10" ng-show="fatLogForm.curfat.$error.pattern"><span>Invalid&nbsp;Format.</span></span>
-                                                </span>
+                                                    <input class="profile_input weightoverride decimal" id="fatLog" name="curfat" ng-model="fat" maxlength="5" required ng-change="maxFatValueCheck()" validate-zero/>
+                                                    <span class="error-message" ng-show="!fatLogForm.curfat.$error.required&&maxfat"><span>Please&nbsp;Enter&nbsp;Valid&nbsp;Value.</span></span>
+                                                    <span ng-show="fatLogForm.curfat.$dirty&&fatLogForm.curfat.$invalid">
+                                                    <span class="error-message" ng-show="fatLogForm.curfat.$error.validateZero"><span>Invalid&nbsp;Data.</span></span>
+                                                    </span>
+
+
                                                 </div>
                                                 <div class="col-lg-12 col-md-12 col-sm-12 text-center margin-top-20">
                                                     <button onclick="return false;" class="btn-dis suggest_button override-width no-margin-bottom" ng-disabled="weightLogForm.$invalid ||spinner || disableUpdateWeight" ng-click="weightLogEntry(1)">
@@ -719,7 +723,7 @@
                                     </div>
                                     <div class="col-lg-8 col-md-8 col-sm-8 margin-top-10 no-padding">
                                         <form name="waterLogForm" novalidate >
-                                            <div class="col-md-12 col-md-12 col-sm-12 margin-top-10">
+                                            <div class="row margin-top-10" style="margin-right: 0;margin-left: -4px;">
                                                 <lable class="waterlog-text" id="addLog" name="curentrwater" ng-model="waterlog"><b><span>{{waterlog}}&nbsp;<small>ml</small></span> / <span>{{waterlogoz}}&nbsp;<small>oz</small></span></b></lable>
                                             </div>
 
@@ -888,13 +892,13 @@
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-4 no-padding">
                         <div class="new-update">
-                            <div class="col-md-12 col-lg-12 col-sm-12 water-textcolor margin-top-5">Water&nbsp;Level</div>
+                            <div class="water-textcolor margin-top-5">Water&nbsp;Level</div>
                             <div class="col-md-12 col-lg-12 col-sm-12 no-padding well-image common-border water-border">
                             <div class="col-md-4 col-lg-4 col-sm-4 no-padding margin-top-5">
                                 <img class="img-width" src="../../images/fat.png"/>
                             </div>
                             <div class="col-md-8 col-lg-8 col-sm-8 no-padding">
-                                <div class="water-textcolor"><small>{{waterlog}}/{{waterlogoz}}</small></div>
+                                <div class="water-textcolor row" style="font-size: 78%"><small>{{waterlog}}/{{waterlogoz}}</small></div>
                                 <div class="water-textcolor"><small>ml/oz</small></div>
                             </div>
                             </div>
@@ -1107,10 +1111,11 @@
 
             <form name="foodSuggestForm" id="suggestform" novalidate>
             <p>Food Name:</p>
-            <input type="text" name="foodname" data-foodid="foodSuggest.foodid" ng-model="foodSuggest.foodname" maxlength="100" foodexists required />
+            <input type="text" name="foodname" data-foodid="foodSuggest.foodid" ng-model="foodSuggest.foodname" ng-pattern="/^ *([a-zA-Z]+ ?)+ *$/" maxlength="100" foodexists required />
              <span ng-show="foodSuggestForm.foodname.$dirty&&foodSuggestForm.foodname.$invalid">
                   <span class="error-message" ng-show="foodSuggestForm.foodname.$error.required"><span>Required.</span></span>
                   <span class="error-message" ng-show="foodSuggestForm.foodname.$error.foodexists"><span>Food&nbsp;Already&nbsp;Exists</span></span>
+                  <span class="error-message" ng-show="foodSuggestForm.foodname.$error.pattern"><span>Invalid&nbsp;Format.</span></span>
                  </span>
             <p>Food Description:</p>
             <textarea type="text" class="height-150" name="fooddescription" ng-model="foodSuggest.fooddescription" maxlength="300" required></textarea>
@@ -1196,11 +1201,12 @@
                              <span ng-show="FoodAddForm.measure.$dirty&&FoodAddForm.measure.$invalid">
                                      <span class="error-message" ng-show="FoodAddForm.measure.$error.required"><span>Required.</span></span>
                              </span>
-                        <h5 class="margin-top-10">Value</h5>
-                        <input type="text"   ng-disabled="!userFood.measure" name="servings" ng-model="userFood.servings" ng-change="doCalculateCalories()" maxlength="6" onkeypress="return validateFloatKeyPress2(this,event);" required validate-Float1>
-                        <span ng-show="FoodAddForm.servings.$dirty&&FoodAddForm.servings.$invalid">
-                                 <span class="error-message" ng-show="FoodAddForm.servings.$error.required"><span>Required.</span></span>
-                             <span class="error-message" ng-show="!FoodAddForm.servings.$error.required&&FoodAddForm.servings.$error.validateFloat1"><span>Invalid&nbsp;data.</span></span>
+                        <h5 class="margin-top-10">Value </h5>
+                        <input type="text"  ng-disabled="!userFood.measure" name="servings"  ng-model="userFood.servings" ng-change="doCalculateCalories();maxFoodValueCheck();"  required validate-zero>
+                            <span class="error-message" ng-show="!FoodAddForm.servings.$error.required&&maxfoodvalue"><span>Please&nbsp;Enter&nbsp;Valid&nbsp;Value.</span></span>
+                            <span ng-show="FoodAddForm.servings.$dirty&&FoodAddForm.servings.$invalid">
+                               <span class="error-message" ng-show="FoodAddForm.servings.$error.required"><span>Required.</span></span>
+                               <span class="error-message" ng-show="!FoodAddForm.servings.$error.required&&FoodAddForm.servings.$error.validateZero"><span>Invalid&nbsp;data.</span></span>
                             </span>
                          </div>
                         </form>
@@ -2201,5 +2207,31 @@
                     document.getElementById("main-start-date").value = start.format('DD/MM/YYYY');
                 });
             };
+            $(function () {
+                $('#fatLog').bind('paste', function () {
+                    var self = this;
+                    setTimeout(function () {
+                        if (!/^[0-9]{1,2}(\.[0-9]{1,4})?$/.test($(self).val())) $(self).val('');
+                    }, 0);
+                });
+
+                $('.decimal').keypress(function (e) {
+                    var character = String.fromCharCode(e.keyCode)
+                    var newValue = this.value + character;
+                    if (isNaN(newValue) || hasDecimalPlace(newValue, 2)) {
+                        e.preventDefault();
+                        return false;
+                    }
+                    // for backspace issue in firefox
+                    if(e.keyCode== 8){
+                        return true;
+                    }
+                });
+
+                function hasDecimalPlace(value, x) {
+                    var pointIndex = value.indexOf('.');
+                    return  pointIndex >= 0 && pointIndex < value.length - x;
+                }
+            });
         </script>
 

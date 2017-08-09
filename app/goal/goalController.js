@@ -402,6 +402,31 @@ userApp.controller('GoalController',['$scope','requestHandler','Flash','$route',
         });
     };
 
+//For maximum Weight validation lbs
+    $scope.maxweight=false;
+    $scope.maxCheck = function(weight){
+        if(weight<=2204.4){
+            $scope.maxweight=false;
+        }
+        else if(weight>2204.4){
+            $scope.maxweight=true;
+        }
+
+    };
+
+//For maximum Weight validation kgs
+    $scope.maxweight=false;
+    $scope.maxWeightCheck = function(weight){
+        if(parseFloat( weight)<=999.9){
+            $scope.maxweight=false;
+        }
+        else if(weight>999.9){
+            $scope.maxweight=true;
+        }
+
+    };
+
+
     $scope.resetdata = function(){
         $scope.friendsearch = "";
         $(function(){
