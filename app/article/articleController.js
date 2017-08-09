@@ -67,8 +67,8 @@ adminApp.controller('ArticleController',['$scope','requestHandler','Flash','$loc
         else{
             $scope.articles.imageurl = document.getElementById("base64").value;
         }
-        console.log($scope.articles.imageurl);
-            requestHandler.postRequest("admin/insertorupdatearticle/",$scope.articles).then(function(response){
+        
+        requestHandler.postRequest("admin/insertorupdatearticle/",$scope.articles).then(function(response){
 
                 successMessage(Flash,"Successfully Added");
                 $location.path("articles");
@@ -155,12 +155,9 @@ adminApp.controller('ArticleEditController',['$scope','requestHandler','Flash','
             //View the image in ng-src for view articles
             $scope.myImgSrc = $sce.trustAsResourceUrl(response.data.article.imageurl+"?decache="+Math.random());
           
-            
-    
             //Set values to display data in edit article
             $scope.articles=response.data.article;
             
-
             $scope. originalArticle=angular.copy(response.data.article);
            /* // Change the url hostname to localhost
             $scope.testimonials.imageurl = requestHandler.convertUrl( $scope.testimonials.imageurl);

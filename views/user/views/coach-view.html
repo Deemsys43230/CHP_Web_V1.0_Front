@@ -8,29 +8,71 @@
     </div>
     <div ng-show="usercoachlist.length>0">
         <div class="col-lg-8 col-md-8 col-sm-8 height-320 margin-bottom-10">
-            <h3 class="text-orange margin-bottom-10">{{usercoachdetails.name}}</h3>
-            <div class="col-lg-3 col-md-5 col-sm-5 no-padding"><strong>Specialist<span class="pull-right">:</span></strong></div>
-            <div class="col-lg-9 col-md-7 col-sm-7 wrap">{{usercoachdetails.specialist}}</div>
-            <div class="col-lg-3 col-md-5 col-sm-5 no-padding"><strong>Qualification<span class="pull-right">:</span></strong></div>
-            <div class="col-lg-9 col-md-7 col-sm-7 wrap">{{usercoachdetails.qualification}}</div>
-            <div class="col-lg-3 col-md-5 col-sm-5 no-padding"><strong>Experience<span class="pull-right">:</span></strong></div>
-            <div class="col-lg-9 col-md-7 col-sm-7 wrap"><span ng-show="years==undefined"> NA </span><span ng-show="years>0"> {{years}} <span ng-show="years==1">Year&nbsp;</span><span ng-show="years>1">Years&nbsp;</span> </span><span ng-show="months>0"> {{months}} <span ng-show="months==1">Month</span><span ng-show="months>1"> Months</span></span></div>
-            <div class="col-lg-12 col-md-12 col-sm-12 no-padding margin-top-10"><strong>About Me :</strong></div>
-            <div class="col-lg-12 col-md-12 col-sm-12 no-padding wrap-all">{{usercoachdetails.about}}</div>
+            <h2><strong>COACH DETAILS</strong></h2>  
+
+          <table class="table table-bordered table-striped margin-top-10">
+                <tr>
+                    <td class="col-md-4">Name</td>
+                    <td class="col-md-8">{{usercoachdetails.name}}</td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">Email Id</td>
+                    <td class="col-md-8">{{usercoachdetails.emailid}}</td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">Date of Birth</td>
+                    <td class="col-md-8">{{usercoachdetails.dob}}</td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">Phone Number</td>
+                    <td class="col-md-8">{{usercoachdetails.phone}}</td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">Specialist</td>
+                    <td class="col-md-8">{{usercoachdetails.specialist}}</td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">Qualification</td>
+                    <td class="col-md-8">{{usercoachdetails.qualification}}</td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">Experience</td>
+                    <td class="col-md-8">{{usercoachdetails.experience}}</td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">Relationship</td>
+                    <td class="col-md-8">{{usercoachdetails.relationship}}</td>
+                </tr>
+           </table>                     
+            <div class="col-lg-12 col-md-12 col-sm-12 text-center" ng-show="usercoachdetails.relationship!=2">
+              <span><a href="" class="btn register_button" ng-show="usercoachdetails.relationship=='NA'"> Send Invitation </a></span>
+              <span><a href="" class="btn register_button" ng-show="usercoachdetails.relationship==1"> Invitation Sent </a></span>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 text-center" ng-show="usercoachdetails.relationship==2">
+              <span><a href="" class="btn register_button" ng-click="acceptCoachInvitationsByUser(usercoachdetails.userid)">Accept</a></span>&nbsp;
+              <span><a href="" class="btn register_button request_sent" ng-click="denyCoachInvitationsByUser(usercoachdetails.userid)"> Deny</a></span>
+            </div>  
+            <div class="col-lg-12 col-md-12 col-sm-12 text-center">
+                <span><a href="" ng-cloak class="btn register_button disabled" ng-show="usercoachdetails.relationship==3">Invitation Accepted</a></span>
+                <span><a href="" ng-cloak class="btn register_button disabled" ng-show="usercoachdetails.relationship==3">Invitation Declined</a></span>
+            </div>    
         </div>
-        <div class="col-lg-4 col-md-4 col-sm-4">
+        <div class="col-lg-4 col-md-4 col-sm-4" style="text-align: center;">
+            <div class="col-md-12 col-md-12 col-sm-12">
             <img ng-src="{{usercoachdetails.imageurl | trusted}}"/>
-            <h5 class="margin-tb-10">Average Ratings : {{coachReviews.averageRatings}}</h5>
-            <average-star-rating ng-model="averageRate" max="5"></average-star-rating>
-            ( {{coachReviews.totalRatings}} Reviews )
+            <h3 class="text-orange margin-bottom-10 text-uppercase margin-top-7">{{usercoachdetails.name}}</h3>
+            <h5 class="margin-tb-10">Average Ratings : {{averageRate}}</h5>
+            <div class="margin-left-69"><average-star-rating ng-model="averageRate" max="5"></average-star-rating></div>
+            ( {{totalRatings}} Reviews )
             <span class="col-lg-12 col-md-12 col-sm-12 margin-top-10 no-padding" ng-if="coachReviews.averageRatings!=0"><a href="" class="btn-sm btn-warning" ng-click="coachReview(usercoachdetails.userid)">View Reviews</a></span>
+            </div>
         </div>
-        <div class="col-lg-12 col-md-12 col-sm-12 text-center">
+        <!-- <div class="col-lg-12 col-md-12 col-sm-12 text-center">
             <span ng-show="usercoachdetails.coachEnrollStatus==0"><a href="" class="btn register_button" ng-click="priceTable(usercoachdetails.userid)"> Subscribe </a></span>
             <span ng-show="usercoachdetails.coachEnrollStatus==2"><a href="" class="btn register_button" ng-click="priceTable(usercoachdetails.userid)"> Renew Subscription </a></span>
-            <span ng-show="usercoachdetails.coachEnrollStatus==1"><a href="" class="btn register_button" disabled> Subscribed </a></span>
+            <span ng-show="usercoachdetails.coachEnrollStatus==1"><a href="" class="btn register_button" disabled> Subscribed </a></span> -->
             <!-- <span ng-hide="usercoachdetails.coachEnrollStatus==0"><a href="" ng-click="doUnsubscribeCoach(usercoachdetails.userid)" class="btn cancel_button"> Unsubscribe </a></span>-->
-        </div>
+        <!-- </div> -->
     </div>
 
     <div ng-show="usercoachlist.length==0" class="text-center margin-top-50">

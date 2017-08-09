@@ -797,6 +797,7 @@ div[ng-include].ng-enter {
     height: 31px;
     width: 103px;
     overflow: hidden;
+   /* margin-left: 69px;*/
 }
 .average-rating-container .background,
 .average-rating-container .foreground {
@@ -2424,6 +2425,10 @@ input[type="submit"] {
     padding-top: 5px !important;
 }
 
+.padding-top-15{
+    padding-top: 15px !important;
+}
+
 .height-310{
     height: 310px!important;
 }
@@ -2454,6 +2459,10 @@ input[type="submit"] {
 
 .margin-right-2{
     margin-right: 2px!important;
+}
+
+.margin-left-69{
+    margin-left: 69px;
 }
 
 #col0{
@@ -7141,6 +7150,16 @@ a.register_button[disabled] {
     background: #C0C0C0
 }
 
+a.register_button.request_sent{
+    color: #FF4F4F !important;
+    border-color: #FF4F4F !important;
+}
+
+a.register_button.request_sent:hover{
+    color: #FFF !important;
+    background-color: #FF4F4F !important;
+}
+
 .blink_plantype {
     animation: blinker 1s linear infinite;
 }
@@ -7709,7 +7728,7 @@ ul.tabs li.active{
 
 .content_scrollbar
 {
-    height: 350px;
+    height: 328px;
     width: 100%;
     background: none;
     overflow-y: scroll;
@@ -16631,20 +16650,20 @@ margin-top: 10px;
 }
 
 .coach-input {
-    font-size: 12px;
-    line-height: 18px;
-    color: #333;
-    padding: 7px 10px;
-    width: 100%;
+    font-size: 14px !important;
+    line-height: 18px !important;
+    color: #333 !important;
+    padding: 7px 10px !important;
+    width: 100% !important;
     border:0 !important;
-    -moz-appearance: none;
-    -webkit-appearance: none;
-    -webkit-box-shadow: inset 0px 0px 3px rgba(0,0,0,0.3);
-    -moz-box-shadow: inset 0px 0px 3px rgba(0,0,0,0.3);
-    box-shadow: inset 0px 0px 3px rgba(0,0,0,0.3);
-    -webkit-border-radius: 0;
-    outline: 0;
-    margin: 0;
+    -moz-appearance: none !important;
+    -webkit-appearance: none !important;
+    -webkit-box-shadow: inset 0px 0px 3px rgba(0,0,0,0.3) !important;
+    -moz-box-shadow: inset 0px 0px 3px rgba(0,0,0,0.3) !important;
+    box-shadow: inset 0px 0px 3px rgba(0,0,0,0.3) !important;
+    -webkit-border-radius: 0 !important;
+    outline: 0 !important;
+    margin: 0 !important;
 }
 
 .coach_input_textarea
@@ -16953,6 +16972,7 @@ select.date:focus {
     background: #187535 !important; 
     color: #fff!important;
 }
+
 .coach-profile_input_textarea{
     font-size: 14px;
     color: #333;
@@ -17035,4 +17055,5 @@ select.date:focus {
 }
 .notification-color{
     color: blue;
+
 }

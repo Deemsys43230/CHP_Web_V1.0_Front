@@ -10,19 +10,20 @@
             <div class="col-lg-12 col-md-12 col-sm-12">
                 <!--<a href="#dashboard" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back to Dashboard</a>-->
                 <div flash-message="2000" class="col-lg-3 col-md-3 col-sm-3 no-padding pull-right"></div>
-                <h5 class="classic-title"><a href="#coach"><i class="fa fa-male"></i>&nbsp;&nbsp;MY COACH</a>&nbsp;&nbsp;|&nbsp;&nbsp;<span><a href="#coach-search"><i class="fa fa-search"></i>&nbsp;&nbsp;COACH SEARCH</a></span></h5>
+                <h5 class="classic-title"><a href="#coach"><i class="fa fa-male"></i>&nbsp;&nbsp;MY COACH</a>&nbsp;&nbsp;|&nbsp;&nbsp;<span><a href="#coach-search"><i class="fa fa-search"></i>&nbsp;&nbsp;COACH SEARCH</a></span>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#coach-invitations"><i class="fa fa-envelope"></i>&nbsp;&nbsp;COACH INVITATION</a></h5>
             </div>
             <div class="col-lg-4 col-md-5 col-sm-5 margin-bottom-10">
                 <div class="search-content">
-                    <input class="coach_input" ng-model="coachsearch" placeholder="Search coach here..">
+                    <input class="coach-input" ng-model="coachsearch" placeholder="Search coach here..">
                 </div>
+                
                 <div ng-if="loaded">
                     <div class="loader-style">
                         <div class="loader"></div>
                     </div>
                 </div>
                 <div class="coach-list">
-                    <div class="content_scrollbar" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#eee'}">
+                    <div class="content_scrollbar" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#eee'}" scroller>
                         <div ng-show="usercoachlist.length>0" class="coach-view-width">
                             <div class="coach-view col-lg-12 col-md-12 col-sm-12" ng-class="{'active': usercoach.userid == usercoachdetails.userid }" ng-repeat="usercoach in usercoachfilter = (usercoachlist | startsWithLetterSearch : coachsearch )" ng-click="doGetCoachDetailsByUser(usercoach.userid)">
                                 <div class="col-lg-2 col-md-2 col-sm-2 no-padding">
@@ -51,7 +52,10 @@
                         </div>
 
                     </div>
+                   
                 </div>
+
+
             </div>
             <div class="col-lg-8 col-md-7 col-sm-7">
                 <div ng-include src="'views/'+coach.status+'.html'"></div>

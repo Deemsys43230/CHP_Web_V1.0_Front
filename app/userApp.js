@@ -322,6 +322,7 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
             }).
             when('/coach-search', {
                 templateUrl: 'views/coach-search.html',
+                coachInvitations:false,
                 resolve: {
                     loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
@@ -347,6 +348,23 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../angular/angular-utils-pagination/dirPagination.js',
                                 '../../app/userCoach/userCoachController.js',
                                 '../../plugin/popup/style.css'
+                            ]
+                        })
+                    }]
+                },
+                controller: 'UserCoachController'
+            }).
+            when('/coach-invitations', {
+                templateUrl: 'views/coach-invitations-view.html',
+                coachInvitations:true,
+                resolve: {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'userApp',
+                            files:[
+                                '../../plugin/vertical-carousel/vertical-carousel.js',
+                                '../../angular/angular-utils-pagination/dirPagination.js',
+                                '../../app/userCoach/userCoachController.js'
                             ]
                         })
                     }]
