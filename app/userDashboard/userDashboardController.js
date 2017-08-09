@@ -270,11 +270,11 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
 
         //To Check maximum food value
         $scope.maxfoodvalue=false;
-        $scope.maxFoodValueCheck = function(){
-            if(parseFloat($scope.userFood.servings <=999.9)){
+        $scope.maxFoodValueCheck = function(value){
+            if(value<=999.99){
                 $scope.maxfoodvalue=false;
             }
-            else if(parseFloat($scope.userFood.servings >999.9)){
+            else if(value >999.99){
                 $scope.maxfoodvalue=true;
             }
 
@@ -4497,7 +4497,6 @@ function slidemenu() {
         }
     });
 };
-/*
 //for dashboard main date
 function daterangepicker() {
     $("#main-date").click();
@@ -4512,14 +4511,10 @@ function daterangepicker() {
         angular.element(document.getElementById('main-date')).scope().initialLoadFoodAndExercise(start.format('DD/MM/YYYY'));
         document.getElementById("main-start-date").value = start.format('DD/MM/YYYY');
     });
-*/
 
 //for food intake and excersize view graph date picker
-function daterangepicker(){
     $("#history-graph").click();
     $("#history-view").click();
-
-
     var options = {
         maxDate : new Date(),
         startDate : new Date(),
@@ -4545,11 +4540,12 @@ function daterangepicker(){
     });
     var startDate=new Date();
     startDate.setDate(startDate.getDate()-6);
+    console.log(startDate);
 
     $("#history-graph-date").click();
     var options = {
         maxDate : new Date(),
-        startDate :startDate,
+        startDate :new Date(),
         endDate : new Date(),
         singleDatePicker: false,
         opens:'left',
@@ -4571,7 +4567,8 @@ function daterangepicker(){
         document.getElementById("history-end").value = end.format('DD/MM/YYYY');
     });
 
- $("#weight-log-date1").click();
+
+    $("#weight-log-date1").click();
     var options = {
         drops:'down',
         opens:'left',
@@ -4629,38 +4626,6 @@ function tabcontent() {
     });
 
 };
-//for restricting keypress event allow 2 digits after (dot)
-function validateFloatKeyPress2(el, evt) {
-    var charCode = (evt.which) ? evt.which : event.keyCode;
-    var number = el.value.split('.');
-    if (charCode != 46 && charCode > 31 && (charCode < 48 || charCode > 57)) {
-        return false;
-    }
-    //just one dot
-    if(number.length>1 && charCode == 46){
-        return false;
-    }
-    // for backspace issue in firefox
-    if(charCode== 8){
-        return true;
-    }
-    //get the carat position
-    var caratPos = getSelectionStart(el);
-    var dotPos = el.value.indexOf(".");
-    if( caratPos > dotPos && dotPos>-1 && (number[1].length > 1)){
-        return false;
-    }
-    return true;
-}
-
-function getSelectionStart(o) {
-    if (o.createTextRange) {
-        var r = document.selection.createRange().duplicate()
-        r.moveEnd('character', o.value.length)
-        if (r.text == '') return o.value.length
-        return o.value.lastIndexOf(r.text)
-    } else return o.selectionStart
-}
 
 //for adivce tab coach carousel
 
@@ -4730,36 +4695,4 @@ function coachAdviceCarousel(){
         controlls.find('.owl-prev').html('<i class="fa fa-angle-left"></i>');
         controlls.find('.owl-next').html('<i class="fa fa-angle-right"></i>');
     },500);
-}
-//for restricting keypress event after (dot)
-function validateFloatKeyPress(el, evt) {
-    var charCode = (evt.which) ? evt.which : event.keyCode;
-    var number = el.value.split('.');
-    if (charCode != 46 && charCode > 31 && (charCode < 48 || charCode > 57)) {
-        return false;
-    }
-    //just one dot
-    if(number.length>1 && charCode == 46){
-        return false;
-    }
-    // for backspace issue in firefox
-    if(charCode== 8){
-        return true;
-    }
-    //get the carat position
-    var caratPos = getSelectionStart(el);
-    var dotPos = el.value.indexOf(".");
-    if( caratPos > dotPos && dotPos>-1 && (number[1].length > 0)){
-        return false;
-    }
-    return true;
-}
-
-function getSelectionStart(o) {
-    if (o.createTextRange) {
-        var r = document.selection.createRange().duplicate()
-        r.moveEnd('character', o.value.length)
-        if (r.text == '') return o.value.length
-        return o.value.lastIndexOf(r.text)
-    } else return o.selectionStart
 }
