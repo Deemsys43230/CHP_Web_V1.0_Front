@@ -879,11 +879,11 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
             else{
                 if($scope.userProfile.unitPreference==2){
                     $scope.current=$scope.caloriesSpent=$scope.userExercise.selectedLevel.MET*($scope.demography.weight*0.453592)*($scope.userExercise.workoutvalue/3600);
-                    $scope.current=($scope.current).toFixed(5);
+                    $scope.current=($scope.current).toFixed(2);
                 }
                 else if($scope.userProfile.unitPreference==1){
                     $scope.current=$scope.caloriesSpent=$scope.userExercise.selectedLevel.MET*($scope.demography.weight)*($scope.userExercise.workoutvalue/3600);
-                    $scope.current=($scope.current).toFixed(5);
+                    $scope.current=($scope.current).toFixed(2);
                 }
 
             console.log($scope.current);
@@ -1619,7 +1619,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
             $window.singlePicker = true;
             $scope.originalUpdateGoalWeight={
                 endDate:$scope.goalDetails.enddate,
-                weight:$scope.goalDetails.targetweights
+                weight:$scope.goalDetails.targetweight
             };
             var startformat = $scope.goalDetails.startdate.slice(6,10)+','+$scope.goalDetails.startdate.slice(3,5)+','+$scope.goalDetails.startdate.slice(0,2);
             var currentformat = selectedDate.slice(6,10)+','+selectedDate.slice(3,5)+','+selectedDate.slice(0,2);
@@ -1642,7 +1642,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
             $scope.weight = $scope.goalDetails.targetweight;
             $scope.currentEnddate= $scope.goalDetails.enddate;
             if($scope.goalDetails.planType==2){
-                $scope.goalchoice=$scope.goalDetails.planchoice.toString();
+                $scope.goalchoice=$scope.goalDetails.planchoice;
             }
             $scope.currentweight=currentWeight;
             if (new Date(startformat).getTime() >= new Date(currentformat).getTime()) {
@@ -2464,7 +2464,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
 
             {"graphCategory":"CALORIES","graphCategoryId":1,"graphs":[{
                 'id': 6,
-                'name': 'Nutricients Intake',
+                'name': 'Nutrients Intake',
                 "imageSrc": "../../images/FoodNutrition_Icon.png"
 
             },
@@ -2806,8 +2806,8 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
                     var proteinPercentage=totalProtein/100;
                     var fatPercentage=totalFat/100;
                     var carboPercentage=totalCarbo/100;
-                    titles.title="Nutricients Graph( "+startDate+" - "+endDate+" )";
-                    titles.name="Nutricients";
+                    titles.title="Nutrients Graph( "+startDate+" - "+endDate+" )";
+                    titles.name="Nutrients";
                     titles.yaxis="Units (grams)";
                     titles.xaxis="Date Range";
                     titles.color='#ff8000';
@@ -3201,7 +3201,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
             });
 
         };
-        //for nutricients intake graph
+        //for Nutrients intake graph
 
         $scope.drawNutrientsGraph=function(dataP,titles,dataFr,dataFa,dataC,dataAf,dataAp,dataAfa,dataAC,dataD,divId){
             console.log(dataP);
@@ -4545,7 +4545,7 @@ function daterangepicker() {
     $("#history-graph-date").click();
     var options = {
         maxDate : new Date(),
-        startDate :new Date(),
+        startDate :startDate,
         endDate : new Date(),
         singleDatePicker: false,
         opens:'left',
