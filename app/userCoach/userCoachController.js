@@ -107,6 +107,7 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
         $scope.coachReviews={};
         requestHandler.postRequest("getCoachRatingsandReviews/"+id+"/", $scope.coachRatingPagination).then(function (response) {
             $scope.coachReviews=response.data.reviews;
+            $scope.canReview= response.data.canreview;
             $scope.reviews=response.data.reviews;
             $scope.reviewload=false;
             $scope.totalRatings = response.data.totalrecords;
@@ -261,7 +262,9 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
     };
 
     $scope.coachReview=function(id){
+       
         $scope.doGetCoachRatings(id);
+       
         $scope.subscribed=0;
         $scope.coachViewId=id;
         $scope.coach = {
@@ -316,17 +319,12 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
         $scope.reviewForm.$setPristine();
     };
 
-
-
     $scope.checkReview=function(){
 
         $scope.checkReviews="";
 
-        requestHandler.getRequest("getUserId/","").then(function(response){
-            $scope.userProfile=response.data.User_Profile;
-            $scope.loginuserid = $scope.userProfile.userid;
-            requestHandler.getRequest("getRatingsandReviews/"+$routeParams.id, "").then(function (response) {
-                $scope.checkReviews = response.data.Ratings_Reviews.Reviews;
+            requestHandler.postRequest("getCoachRatingsandReviews/"+$routeParams.id+"/", $scope.coachRatingPagination).then(function (response) {
+                $scope.checkReviews = response.data.reviews;
 
                 userTypeArray=[];
                 $.each($scope.checkReviews, function(index,userid) {
@@ -335,7 +333,7 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
 
                 $scope.check=userTypeArray;
 
-                if($scope.check.indexOf($scope.loginuserid) !=-1){
+                if($scope.check.indexOf(userid.review_user) !=-1){
                     $scope.disablereview = true;
                 }
                 else{
@@ -343,8 +341,8 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
                 }
             });
 
-        });
     };
+
     $scope.userCoachViewInit=function(){
         $scope.disablereview=true;
         $scope.checkReview();

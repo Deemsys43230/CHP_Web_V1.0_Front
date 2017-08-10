@@ -14,7 +14,7 @@
             </div>
             <span ng-if="subscribed==0"><a href="" ng-click="coachView(coachViewId)" class="btn-sm btn-warning pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i>&nbsp;Back</a></span>
             <span ng-if="subscribed==1"><a href="#coach" class="btn-sm btn-warning pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i>&nbsp;Back</a></span>
-            <span ng-if="subscribed==1"><a id="modal_review" ng-click="reset()" href="#review" class="btn-sm btn-success pull-right margin-left-5"><i class="fa fa-plus-circle"></i> Add Reviews</a></span>
+            <span ng-show="canReview!=0"><a id="modal_review" ng-click="reset()" href="#review" class="btn-sm btn-success pull-right margin-left-5"><i class="fa fa-plus-circle"></i> Add Reviews</a></span>
             <h4 class="classic-title"><span>Reviews</span></h4>
             <div class="content_scrollbar" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#eee'}">
                 <div ng-repeat="reviews in coachReviews" class="margin-right-10">
@@ -40,7 +40,44 @@
         </div>
     </div>
 </div>
+<div id="review" class="popupContainer" style="display:none;">
+    <header class="popupHeader">
+        <span class="header_title">Add Reviews</span>
+        <span class="modal_close"><i class="fa fa-times"></i></span>
+    </header>
 
+    <section class="popupBody">
+        <!-- Register Form -->
+        <div class="common_model">
+            <form name="reviewForm">
+                <p>Rate the coach</p>
+                <div><star-rating ng-model="coachreview" ></star-rating></div>
+                <p>Review Summary</p>
+                <input type="text" name="reviewtitle" ng-model="coachreview.reviewtitle"  maxlength="100"  required/>
+                <span ng-show="reviewForm.reviewtitle.$dirty&&reviewForm.reviewtitle.$invalid">
+                                <span class="error-message" ng-show="reviewForm.reviewtitle.$error.required"><span>Required.</span></span>
+                         </span>
+                <p>Review:</p>
+                <textarea type="text" class="height-150" name="reviewdescription" ng-model="coachreview.reviewdescription"maxlength="300"  required></textarea>
+             <span ng-show="reviewForm.reviewdescription.$dirty&&reviewForm.reviewdescription.$invalid">
+                    <span class="error-message textarea-errormessage-110" ng-show="reviewForm.reviewdescription.$error.required"><span>Required.</span></span>
+                 </span>
+                <div class="action_btn margin-top-20 text-center">
+                    <div><a href="" class="btn btn_red" ng-class="{modal_close:reviewForm.$invalid}" ng-disabled="reviewForm.$invalid"  ng-click="doAddReview()">Add Review </a></div>
+                </div>
+            </form>
+        </div>
+    </section>
+</div>
 
 
 <script type="text/javascript" src="../../js/script.js"></script>
+
+<script type="text/javascript">
+    $("#modal_review").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
+    $(function(){
+        $(".common_model").show();
+    })
+</script>
+
+
