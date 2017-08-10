@@ -879,11 +879,11 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
             else{
                 if($scope.userProfile.unitPreference==2){
                     $scope.current=$scope.caloriesSpent=$scope.userExercise.selectedLevel.MET*($scope.demography.weight*0.453592)*($scope.userExercise.workoutvalue/3600);
-                    $scope.current=($scope.current).toFixed(2);
+                    $scope.current=Math.abs($scope.current).toFixed(2);
                 }
                 else if($scope.userProfile.unitPreference==1){
                     $scope.current=$scope.caloriesSpent=$scope.userExercise.selectedLevel.MET*($scope.demography.weight)*($scope.userExercise.workoutvalue/3600);
-                    $scope.current=($scope.current).toFixed(2);
+                    $scope.current=Math.abs($scope.current).toFixed(2);
                 }
 
             console.log($scope.current);
