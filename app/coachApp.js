@@ -447,6 +447,22 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller: 'CoachPaymentSettingsController'
             }).
+            when('/settings', {
+                templateUrl: 'views/coach-settings.html',
+                resolve: {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'coachApp',
+                            files:[
+                                '../../plugin/popup/style.css',
+                                '../../angular/angular-utils-pagination/dirPagination.js',
+                                '../../app/coachSettings/coachSettingsController.js'
+                            ]
+                        })
+                    }]
+                },
+                controller: 'CoachSettingsController'
+            }).
             when('/subscription-panel', {
                 templateUrl: 'views/payment-subscription-panel.html',
                 resolve: {
