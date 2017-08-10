@@ -119,7 +119,7 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
     };
 
     $scope.doGetCoachDetailsByUser= function (id){
-
+        $scope.usercoachdetails={};
         $scope.coach = {
             status: 'coach-view'
         };
@@ -237,7 +237,7 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
     //Send Interest to coach
     $scope.doSendInterestToCoach=function(coachid){
         $scope.sendInterestParam={"coachid":coachid};
-        requestHandler.postRequest("user/sendinteresttocoach/",$scope.sendInterestParam).then(function(){
+        requestHandler.postRequest("user/sendinteresttocoach/",$scope.sendInterestParam).then(function(response){
             if(response.data.Response_status==1){
                 successMessage(Flash,"Interest Sent Successfully");
                 $scope.doGetCoachDetailsByUser(coachid);
