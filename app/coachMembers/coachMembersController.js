@@ -3,22 +3,44 @@
  */
 var coachApp = angular.module('coachApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','angularUtils.directives.dirPagination']);
 
-coachApp.controller('CoachMembersController',['$scope','requestHandler',function($scope,requestHandler) {
+coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter",function($scope,requestHandler,$filter) {
 
-    //Get Coach List
-    $scope.doGetMyMembers=function(){
+    //Get Coaches List
+    $scope.doGetMyMembers=function(currentGroupId){
+        $scope.currentGroupId=currentGroupId;
+        $scope.clients=[];
         $scope.loaded=true;
-        requestHandler.getRequest("coach/getSubscribedusers/","").then(function(response){
-            $scope.myMembersList=response.data.getSubscribedusers;
+        requestHandler.getRequest("/coach/myclients/","").then(function(response){
+            if($scope.currentGroupId==0)
+                $scope.clients=response.data.clients;
+            else
+                {
+                    $.each(response.data.clients,function(index,value){
+                        if($scope.currentGroupId==value.groupid){
+                            $scope.clients.push(value);
+                        }                           
+                    });                   
+                }
             $scope.loaded=false;
             $scope.paginationLoad=true;
         });
 
     };
+
+    //Get Groups List
+    $scope.doGetGroupList=function(){
+        requestHandler.getRequest("coach/getGroups/").then(function(response){
+            $scope.groupsList=$scope.groupsList.concat(response.data.Groups);
+            $scope.groupsList=$scope.groupsList.concat({"id": null, "coachid": null, "groupname": "Un Assigned", "status": 1});
+        })
+    }
+
     //Initial Load
     $scope.init = function(){
         $scope.paginationLoad=false;
-        $scope.doGetMyMembers();
+        $scope.groupsList=[{"id": 0, "coachid": null, "groupname": "All Clients", "status": 1}];
+        $scope.doGetGroupList();
+        $scope.doGetMyMembers(0);
     };
 
     // Search Food Type

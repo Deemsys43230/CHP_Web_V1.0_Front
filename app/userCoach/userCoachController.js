@@ -221,23 +221,7 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
 
     $scope.subscribeButtonStatus=false;
     $scope.subscribing=[];
-
-    /*$scope.doSubscribeCoach = function(coach,month){
-
-        $scope.subscribeButtonStatus=true;
-        $scope.subscribing[month]=true;
-
-        requestHandler.postRequest("user/subscribeCoach/",{"coachid":coach,"month":month,"returnUrl":requestHandler.paymentURL()+"/#/thanksSubscribePage/"+coach+"/"+month,"cancelUrl":requestHandler.paymentURL()+"/#/coach-search"}).then(function(response){
-            if(response.data.transactionStatus==1){
-                window.location=response.data.approveURL;
-            }
-            else if(response.data.transactionStatus==2){
-                window.location=requestHandler.paymentURL()+"/#/thanksSubscribePage/"+coach+"/"+month;
-            }
-        },function(){
-            errorMessage(Flash,"Please try again later!")
-        });
-    };*/
+  
     $scope.acceptCoachInvitationsByUser=function(id){
         requestHandler.postRequest("user/acceptinvitation/",{'coachid':id}).then(function(response){
            if(response.data.Response_status==1){
@@ -249,6 +233,19 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
             errorMessage(Flash,"Please try again later!");
         });
     };
+
+    //Send Interest to coach
+    $scope.doSendInterestToCoach=function(coachid){
+        $scope.sendInterestParam={"coachid":coachid};
+        requestHandler.postRequest("user/sendinteresttocoach/",$scope.sendInterestParam).then(function(){
+            if(response.data.Response_status==1){
+                successMessage(Flash,"Interest Sent Successfully");
+                $scope.doGetCoachDetailsByUser(coachid);
+            }else{
+                errorMessage(Flash,"Please try again later!");
+            }
+        });
+    }
 
     $scope.denyCoachInvitationsByUser=function(id){
         requestHandler.postRequest("user/denyinvitation/",{'coachid':id}).then(function(response){
