@@ -53,11 +53,16 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
             });
           
             $q.all([ratingPromise]).then(function(){
+               // $scope.usercoachlist= response.data.coaches;
                 $scope.usercoachlist= $scope.usercoachlist.concat(response.data.coaches);
                 console.log("User Coach list",$scope.usercoachlist);
-                if(loadCoachDetail){                    
+                console.log(loadCoachDetail);
+                if(loadCoachDetail){ 
                     //Load First Coach Default
-                    $scope.doGetCoachDetailsByUser($scope.usercoachlist[0].userid); 
+                        if($scope.usercoachlist.length>0)
+                        {
+                             $scope.doGetCoachDetailsByUser($scope.usercoachlist[0].userid); 
+                        }
                 }
 
                 if($scope.usercoachlist==0){
