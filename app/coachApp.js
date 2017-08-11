@@ -80,6 +80,22 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'CoachProfileController'
             }).
+             when('/coach-invitations', {
+                templateUrl: 'views/coach-invitations.html',
+                resolve: {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'coachApp',
+                            files:[
+                                '../../plugin/popup/style.css',
+                                '../../angular/angular-utils-pagination/dirPagination.js',
+                                '../../app/coachMembers/coachInvitationsController.js'
+                            ]
+                        })
+                    }]
+                },
+                controller:'CoachInvitationController'
+            }).
             when('/coach-subscription', {
                 templateUrl: 'views/coach-subscription.html',
                 resolve: {
