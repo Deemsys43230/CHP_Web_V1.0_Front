@@ -8,46 +8,69 @@
                     <div flash-message="2000" class="col-md-3 no-padding pull-right"></div>
                     <h5 class="classic-title"><span><a href="#coach"><i class="fa fa-male"></i>&nbsp;&nbsp;MY COACH</a></span>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#coach-search"><i class="fa fa-search"></i>&nbsp;&nbsp;COACH SEARCH</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#coach-invitations"><i class="fa fa-envelope"></i>&nbsp;&nbsp;COACH INVITATION</a></h5>
                 </div>
-                <div class="col-lg-5 col-md-5 col-sm-12">
+                <div class="col-lg-6 col-md-6 col-sm-12">
                     <div class="col-lg-4 col-md-3 col-sm-2 no-padding">
-                        <img ng-src="{{usercoachdetails.imageurl | trusted}}"/>
+                        <img class="coach_image" ng-src="{{usercoachdetails.imageurl | trusted}}"/>
                         <h5 class="margin-tb-10">Average Ratings : {{avgRatings}}</h5>
                         <div><average-star-rating ng-model="averageRate" max="5"></average-star-rating></div>
-                        <div>( {{totalRatings}} Reviews )</div>
+                        <div>( {{totalRatings}} Reviews )</div><hr/>
+                        <div><strong>About Me :</strong></div>
+                        <div>{{usercoachdetails.about}}</div>
                     </div>
                     <div class="col-lg-8 col-md-9 col-sm-10">
-                        <h3 class="text-orange wrap">{{usercoachdetails.name}}&nbsp;</h3>
-                        <div class="margin-bottom-10 wrap">{{usercoachdetails.emailid}}&nbsp;</div>
-                        <div class="col-lg-5 col-md-5 col-sm-2 no-padding"><strong>Specialist<span class="pull-right">:</span></strong></div>
-                        <div class="col-lg-7 col-md-7 col-sm-4 wrap">{{usercoachdetails.specialist}}</div>
-                        <div class="col-lg-5 col-md-5 col-sm-2 no-padding"><strong>Qualification<span class="pull-right">:</span></strong></div>
-                        <div class="col-lg-7 col-md-7 col-sm-4 wrap">{{usercoachdetails.qualification}}</div>
-                        <div class="col-lg-5 col-md-5 col-sm-2 no-padding"><strong>Experience<span class="pull-right">:</span></strong></div>
-                        <div class="col-lg-7 col-md-7 col-sm-4 wrap"><span ng-show="years==undefined"> NA </span><span ng-show="years>0"> {{years}} <span ng-show="years==1">Year&nbsp;</span><span ng-show="years>1">Years&nbsp;</span></span><span ng-show="months>0"> {{months}} <span ng-show="months==1">Month</span><span ng-show="months>1"> Months</span></span></div>
-                        <div class="col-lg-5 col-md-5 col-sm-2 no-padding"><strong>Contact<span class="pull-right">:</span></strong></div>
-                        <div class="col-lg-7 col-md-7 col-sm-4 wrap">{{usercoachdetails.phone}}</div>
-                        <div class="col-lg-5 col-md-5 col-sm-2 no-padding"><strong>DOB<span class="pull-right">:</span></strong></div>
-                        <div class="col-lg-7 col-md-7 col-sm-4 wrap">{{usercoachdetails.dob}}</div>
-                        <div class="col-lg-5 col-md-5 col-sm-2 no-padding"><strong>Country<span class="pull-right">:</span></strong></div>
-                        <div class="col-lg-7 col-md-7 col-sm-4 wrap">{{usercoachdetails.country}}</div>
-                        <div class="col-lg-5 col-md-5 col-sm-2 no-padding"><strong>State<span class="pull-right">:</span></strong></div>
-                        <div class="col-lg-7 col-md-7 col-sm-4 wrap">{{usercoachdetails.state}}</div>
-                        <div class="col-lg-5 col-md-5 col-sm-2 no-padding"><strong>City<span class="pull-right">:</span></strong></div>
-                        <div class="col-lg-7 col-md-7 col-sm-4 wrap">{{usercoachdetails.city}}</div>
-                        <div class="col-lg-5 col-md-5 col-sm-2 no-padding"><strong>Zipcode<span class="pull-right">:</span></strong></div>
-                        <div class="col-lg-7 col-md-7 col-sm-4 wrap">{{usercoachdetails.zipcode}}</div>
-                        <!--Tablet responsibility-->
-                        <div class="hidden-md hidden-lg no-padding col-sm-12 margin-top-10"><strong>About Me :</strong></div>
-                        <div class="hidden-md hidden-lg no-padding col-sm-12">{{usercoachdetails.about}}</div>
+                        <h3 class="text-orange margin-bottom-5 wrap">{{usercoachdetails.name}}&nbsp;&nbsp;</h3>
+                        <div class="wrap"><i class="fa fa-inbox"></i>&nbsp;&nbsp;{{usercoachdetails.emailid}}&nbsp;&nbsp;&nbsp;</div>
+                        <div class="margin-bottom-10 wrap"><i class="fa fa-phone"></i>&nbsp;&nbsp;{{usercoachdetails.phone}}&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                        <table class="table table-bordered table-striped" style="padding: 0px;">
+                            <tr>
+                                <td class="col-md-4">Business Name</td>
+                                <td class="col-md-8 wrap">{{usercoachdetails.businessname}}</td>
+                            </tr>
+                            <tr>
+                                <td class="col-md-4">Business Address</td>
+                                <td class="col-md-8 wrap">{{usercoachdetails.businessaddress}}</td>
+                            </tr> 
+                            <tr>
+                                <td class="col-md-4">Specialist</td>
+                                <td class="col-md-8 wrap">{{usercoachdetails.specialist}}</td>
+                            </tr>
+                            <tr>
+                                <td class="col-md-4">Qualification</td>
+                                <td class="col-md-8 wrap">{{usercoachdetails.qualification}}</td>
+                            </tr>
+                            <tr>
+                                <td class="col-md-4">Experience</td>
+                                <td class="col-md-8 wrap"><span ng-show="years==undefined"> NA </span><span ng-show="years>0"> {{years}} <span ng-show="years==1">Year&nbsp;</span><span ng-show="years>1">Years&nbsp;</span></span><span ng-show="months>0"> {{months}} <span ng-show="months==1">Month</span><span ng-show="months>1"> Months</span></span></td>
+                            </tr>
+                            <tr>
+                                <td class="col-md-4">Date of Birth</td>
+                                <td class="col-md-8 wrap">{{usercoachdetails.dob}}</td>
+                            </tr>
+                            <tr>
+                                <td class="col-md-4">City</td>
+                                <td class="col-md-8 wrap">{{usercoachdetails.city}}</td>
+                            </tr>
+                            <tr>
+                                <td class="col-md-4">State</td>
+                                <td class="col-md-8 wrap">{{usercoachdetails.state}}</td>
+                            </tr>
+                            <tr>
+                                <td class="col-md-4">Country</td>
+                                <td class="col-md-8 wrap">{{usercoachdetails.country}}</td>
+                            </tr>
+                            <tr>
+                                <td class="col-md-4">Zip</td>
+                                <td class="col-md-8 wrap">{{usercoachdetails.zipcode}}</td>
+                            </tr>
+                        </table>    
+                     
                         <!--Tablet responsibility-->
                     </div>
                     <!--Tablet responsibility-->
-                    <div class="hidden-sm col-lg-12 col-md-12 no-padding margin-top-10"><strong>About Me :</strong></div>
-                    <div class="hidden-sm col-lg-12 col-md-12 no-padding">{{usercoachdetails.about}}</div>
-                    <div class="hidden-md hidden-lg col-sm-12 no-padding margin-tb-10"><hr/></div>
+                   
                     <!--Tablet responsibility-->
                 </div>
-                <div class="col-lg-7 col-md-7 col-sm-12">
+                <div class="col-lg-6 col-md-6 col-sm-12">
                     <a href="#coach" class="btn-sm btn-warning pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i>&nbsp;Back</a>
                     <span ng-hide="disablereview"><a id="modal_review" ng-click="reset()" href="#review"  class="btn-sm btn-success pull-right margin-left-5"><i class="fa fa-plus-circle"></i> Add Reviews</a></span>
                     <h4 class="classic-title"><span>Reviews</span></h4>

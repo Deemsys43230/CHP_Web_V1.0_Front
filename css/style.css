@@ -2426,6 +2426,9 @@ input[type="submit"] {
 .margin-bottom-1 {
     margin-bottom: 1px !important;
 }
+.margin-left-69{
+    margin-left: 69px !important;
+}
 
 .padding-top-4{
     padding-top: 4px;
@@ -2433,6 +2436,9 @@ input[type="submit"] {
 
 .padding-top-5{
     padding-top: 5px !important;
+}
+.padding-top-15{
+    padding-top: 15px !important;
 }
 
 .height-310{
@@ -7159,6 +7165,16 @@ a.register_button[disabled] {
     color: #2F4F4F;
     font-weight: normal;
     background: #C0C0C0
+}
+
+a.register_button.request_sent{
+    color: #FF4F4F !important;
+    border-color: #FF4F4F !important;
+}
+
+a.register_button.request_sent:hover{
+    color: #FFF !important;
+    background-color: #FF4F4F !important;
 }
 
 .blink_plantype {
@@ -17093,3 +17109,10 @@ select.date:focus {
 .dropdown:hover .dropdown-content {
     display: block;
 }
+
+ /*User Caoch Design*/
+
+ .coach_image{
+    max-width: 80% !important;
+    height: auto !important;
+ }

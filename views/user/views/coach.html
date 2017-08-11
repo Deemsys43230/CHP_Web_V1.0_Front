@@ -42,9 +42,9 @@
                         <tr class="warning">
                             <th class="col-lg-2 col-md-2 col-sm-2">Name</th>
                             <th class="col-lg-3 col-md-3 col-sm-3">Email ID</th>
-                            <th class="col-lg-2 col-md-2 col-sm-2">Subscribed On</th>
-                            <th class="col-lg-2 col-md-2 col-sm-2">Expiry Date</th>
-                            <th class="col-lg-1 col-md-1 col-sm-1">Status</th>
+                            <th class="col-lg-2 col-md-2 col-sm-2">Phone Number</th>
+                            <th class="col-lg-2 col-md-2 col-sm-2">Messages</th>
+                            <th class="col-lg-1 col-md-1 col-sm-1">Events</th>
                              <th class="col-lg-2 col-md-2 col-sm-2">Options</th>
                         </tr>
                         </thead>
@@ -52,15 +52,12 @@
                         <tr dir-paginate="mycoach in mycoachfilter = (mycoachlist |startsWithLetter : mycoachsearch  | itemsPerPage: 8)" ng-show="mycoachlist.length!=0">
                             <td title="{{mycoach.name}}"><span class="line-clamp-xxs">{{mycoach.name}}</span></td>
                             <td title="{{mycoach.emailid}}"><span class="line-clamp-sm">{{mycoach.emailid}}</span></td>
-                           <td>{{mycoach.subscription_fromdate}}</td>
-                            <td>{{mycoach.subscription_todate}}</td>
-                            <td>
-                                <span ng-show="mycoach.coachEnrollStatus==1" class="text-green">Active</span>
-                                <span ng-show="mycoach.coachEnrollStatus==2" class="text-red">Expired</span>
-                            </td>
+                           <td title="{{mycoach.phone}}">{{mycoach.phone}}</td>
+                            <td title="{{mycoach.unreadmessagecount}}">{{mycoach.unreadmessagecount}}</td>
+                            <td title="{{mycoach.upcomingeventscount}}">{{mycoach.upcomingeventscount}}</td>
                             <td>
                                 <a href="#coach-view/{{mycoach.userid}}" class="btn-xs btn-primary">View Details</a>
-                                <span ng-show="mycoach.coachEnrollStatus==2 && mycoach.isenabled==1"><a href="#coach-search?renew={{mycoach.userid}}" class="btn-xs btn-success">Renew</a></span>
+                                <span><a href="" ng-click="doRemoveMyCoachByUser(mycoach.userid)" class="btn-xs btn-danger">Remove</a></span>
                             </td>
                         </tr>
                         <tr ng-show="!mycoachfilter.length"><td colspan="6" class="text-center">No Records Found !!!</td></tr>

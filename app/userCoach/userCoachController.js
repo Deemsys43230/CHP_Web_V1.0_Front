@@ -1,4 +1,4 @@
-var userApp = angular.module('userApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','angularUtils.directives.dirPagination','angular-nicescroll','infinite-scroll']);
+var userApp = angular.module('userApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','angularUtils.directives.dirPagination','angular-nicescroll']);
 
 userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$location','$q','$routeParams','$route',function($scope,requestHandler,Flash,$location,$q,$routeParams,$route) {
 
@@ -54,7 +54,7 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
           
             $q.all([ratingPromise]).then(function(){
                 $scope.usercoachlist= $scope.usercoachlist.concat(response.data.coaches);
-
+                console.log("User Coach list",$scope.usercoachlist);
                 if(loadCoachDetail){                    
                     //Load First Coach Default
                     $scope.doGetCoachDetailsByUser($scope.usercoachlist[0].userid); 
@@ -205,15 +205,17 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
     $scope.subscribeButtonStatus=false;
     $scope.subscribing=[];
   
-    $scope.acceptCoachInvitationsByUser=function(id){
-        requestHandler.postRequest("user/acceptinvitation/",{'coachid':id}).then(function(response){
-           if(response.data.Response_status==1){
-            successMessage(Flash,"Invitation Accepted");
+    $scope.acceptCoachInvitationsByUser=function(coachid){
+        requestHandler.postRequest("user/acceptinvitation/",{"coachid":coachid}).then(function(response){
+           if(response.data.Response_status==0){
+                successMessage(Flash,"Invitation Accepted");
+                $scope.doGetCoachDetailsByUser(coachid);
            }else{
-            errorMessage(Flash,"Please try again later!");
+            alert("Error");
+                errorMessage(Flash,"Please try again later!");
            }
-        },function(){
-            errorMessage(Flash,"Please try again later!");
+        }, function(){
+                errorMessage(Flash,"Please try again later!");
         });
     };
 
@@ -228,20 +230,34 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
                 errorMessage(Flash,"Please try again later!");
             }
         });
-    }
+    };
 
-    $scope.denyCoachInvitationsByUser=function(id){
-        requestHandler.postRequest("user/denyinvitation/",{'coachid':id}).then(function(response){
-            
+    $scope.denyCoachInvitationsByUser=function(coachid){
+        requestHandler.postRequest("user/denyinvitation/",{'coachid':coachid}).then(function(response){
            if(response.data.Response_status==1){
-            successMessage(Flash,"Invitation Declined");
+                successMessage(Flash,"Invitation Declined");
+                $scope.doGetCoachDetailsByUser(coachid);
            }else{
-            errorMessage(Flash,"Please try again later!");
+                errorMessage(Flash,"Please try again later!");
            }
-        },function(){
-            errorMessage(Flash,"Please try again later!");
+        }, function(){
+                errorMessage(Flash,"Please try again later!");
         });
     };
+
+    // Remove Coach from My Coach list
+    $scope.doRemoveMyCoachByUser=function(coachid){
+        $scope.removeCoachParam= {"coachid":coachid};
+        requestHandler.postRequest("user/removecoach/",$scope.removeCoachParam).then(function(response){
+             if(response.data.Response_status==1){
+                successMessage(Flash,"Coach Removed Successfully");
+                $scope.doGetMyCoachListByUser();
+             }else{
+                errorMessage(Flash,"Please try again later!");
+             }
+        });
+    };
+
 
     $scope.coachReview=function(id){
        
