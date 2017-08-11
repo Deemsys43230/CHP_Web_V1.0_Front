@@ -1,4 +1,4 @@
-var userApp = angular.module('userApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','angularUtils.directives.dirPagination','angular-nicescroll']);
+var userApp = angular.module('userApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','angularUtils.directives.dirPagination','angular-nicescroll','infinite-scroll']);
 
 userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$location','$q','$routeParams','$route',function($scope,requestHandler,Flash,$location,$q,$routeParams,$route) {
 
@@ -17,14 +17,16 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
         $('.search-list-form input').focus();
     });
 
-
-    $scope.userCoachPagination= {
-                                "limit":200,
-                                "searchname":"",
-                                "offset":0
-                               };
     // To display Coach list by user
-    $scope.doGetCoachListByUser=function(){
+    $scope.doGetCoachListByUser=function(loadCoachDetail){
+        $scope.scrollnation.scrollEndCount=$scope.scrollnation.scrollEndCount+1;
+
+
+         $scope.userCoachPagination= {
+                                "limit":$scope.scrollnation.itemsPerScroll,
+                                "searchname":"",
+                                "offset":($scope.scrollnation.scrollEndCount)*$scope.scrollnation.itemsPerScroll
+                               };
        
         if($scope.coachInvitations){
             $scope.request=requestHandler.getRequest("user/userreadinvitations/",{});
@@ -34,18 +36,9 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
 
         
         $scope.request.then(function(response){
-            $scope.usercoachlist=response.data.coaches;
-
-            if($routeParams.renew){
-                $scope.doGetCoachDetailsByUser($routeParams.renew);
-            }
-            else{
-                if($scope.usercoachlist.length>0)
-                    $scope.doGetCoachDetailsByUser(response.data.coaches[0].userid);
-            }
-
+           
             var ratingPromise;
-            $.each($scope.usercoachlist, function(index,value){
+            $.each(response.data.coaches, function(index,value){
                 value.averageRating=0.1;
                 ratingPromise=$scope.doGetRatingsByCoach(value.userid);
                // console.log("Rating Promise", ratingPromise);
@@ -58,13 +51,15 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
                     value.totalReviews= result.totalrecords;
                 });
             });
-             $.each($scope.usercoachlist, function(index,value){
-                 
-             });
-
-
+          
             $q.all([ratingPromise]).then(function(){
-                $scope.usercoachlist=$scope.usercoachlist;
+                $scope.usercoachlist= $scope.usercoachlist.concat(response.data.coaches);
+
+                if(loadCoachDetail){                    
+                    //Load First Coach Default
+                    $scope.doGetCoachDetailsByUser($scope.usercoachlist[0].userid); 
+                }
+
                 if($scope.usercoachlist==0){
 
                 }else{
@@ -73,19 +68,6 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
                     };
                 }
             });
-
-          /*  $scope.items = [];
-            $scope.counter = 0;
-            $scope.loadMore = function(){
-                $scope.userCoachPagination.limit = 1;
-                while ($scope.userCoachPagination.limit< 50) {
-                    $scope.items.push(++$scope.counter);
-                    $scope.userCoachPagination.limit++;
-                }
-            }
-            $scope.loadMore();*/
-                        
-
         },function(){
             errorMessage(Flash,"Please try again later!")
         });
@@ -359,8 +341,10 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
     };
 
     $scope.userCoachInit=function(){
-        $scope.doGetCoachListByUser();
 
+        $scope.scrollnation={"itemsPerScroll":4,"scrollEndCount":-1};    
+        $scope.usercoachlist=[];   
+        $scope.doGetCoachListByUser(true);
         $scope.coach = {
             status: 'coach-view'
         };
