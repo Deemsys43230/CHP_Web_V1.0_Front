@@ -111,6 +111,17 @@
                     </a>
                 </div>
                 <div class="navbar-collapse collapse">
+                     <div class="dropdown pull-right notify-menu">
+                          <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-bell fa-lg notification-color" style=" font-size: 1.80em;" aria-hidden="true"></i><span ng-hide="allNotifications == 0"class="nav-item__badge"><span aria-hidden="true" class="nav-item__badge-count">{{allNotifications}}</span></span></a>&nbsp;<span class="fa fa-caret-down"></span>
+                          <div class="dropdown-content" ng-repeat="notification in coachNotification" ng-hide="allNotifications == 0">                            
+                            <a ng-show="notification.nofiticationid == 1" href="#payments">{{notification.description}}</a>
+                            <a ng-show="notification.nofiticationid == 2" href="#subscription">{{notification.description}}</a>
+                            <a ng-show="notification.nofiticationid == 3" href="">{{notification.description}}</a>
+                          </div>
+                            <div class="dropdown-content" ng-show="allNotifications == 0">
+                                <a  href="">No Notification</a>
+                            </div>
+                        </div>
                     <!-- Start Navigation List -->
                     <ul class="nav navbar-nav navbar-right active-class">
                         <li>
@@ -123,7 +134,7 @@
                             <a class="{{activeClass.my}}" href="#coach-subscription">Members</a>
                         </li>
                         <li>
-                            <a class="{{activeClass.sub}}" href="#coach-subscription-plan">Subcription</a>
+                            <a class="{{activeClass.sub}}" href="#subscription">Subcription</a>
                         </li>
                         <li>
                             <a class="{{activeClass.advices}}" href="#advices">Advices</a>
@@ -138,11 +149,6 @@
                         </li>
                         <li><a class="{{activeClass.forums}}" href="#forums">Forums</a>
                         </li>
-                        <li id="notification_button">
-                            <a href=""><i class="fa fa-bell fa-lg notification-color" style="font-size: 1.95em;" aria-hidden="true"></i><span class="nav-item__badge"><span aria-hidden="true" class="nav-item__badge-count">{{allNotifications}}</span></span></a>
-                            
-                        </li>
-
                     </ul>
                     <!-- End Navigation List -->
                 </div>
@@ -268,18 +274,6 @@
             </div>
     </div>
 
-<!-- For Coach Notification  -->
-    <div id="notification_form">
-        <p id="notification_button"></p>
-        <div class="notification-margin-adjust">
-            <form id="notification-form">
-                <ul class="dropdown remove-style" ng-repeat="notification in coachNotification">
-                    <li style="padding: 0px 16px;">{{notification.description}}</li>
-                </ul>
-            </form>
-
-        </div>
-    </div>
 
 </div>
 <!-- End Container -->
@@ -377,20 +371,6 @@
             }else{
                 $('#form').animate({left:'0'},  500);
                 $("#feedback-form").slideToggle(300);
-            }
-        });
-    });
-</script>
-
-<script type="text/javascript">
-    $(document).ready(function(){
-        $("#notification_button").click(function(){
-            if($('#notification_form').css('right')=='0px'){
-                $("#notification-form").slideToggle(800);
-                $('#notification_form').animate({top:'-270px'},  500);
-            }else{
-                $('#notification_form').animate({top:'160px'},  500);
-                $("#notification-form").slideToggle(300);
             }
         });
     });

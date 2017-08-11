@@ -1,25 +1,8 @@
-/**
- * Created by Deemsys on 3/19/2016.
- */
 var coachApp= angular.module('coachApp', ['ngRoute','oc.lazyLoad','ngCookies','requestModule','flash','ngAnimate']);
 
-coachApp.controller('CoachSubscriptionController',['$scope','requestHandler','Flash','$routeParams','$location',function($scope,requestHandler,Flash,$routeParams,$location) {
-    $scope.activeClass.my='active';
-     $scope.activeClass.coach='';
-
-    $scope.planId = $routeParams.id;
-
-    // Get Coach is Subscription Active
-    $scope.doGetCoachSubscription = function() {
-      requestHandler.getRequest("coach/isSubscriptionActive/","").then(function(response){
-        $scope.responseStatus = response.data;
-        if (response.data.Response_status == 1) {
-          $location.path('my-members');
-        };
-      },function() {
-        errorMessage(Flash,"Please try again later!");
-      });
-    };
+coachApp.controller('SubscriptionController',['$scope','requestHandler','Flash','$routeParams','$location',function($scope,requestHandler,Flash,$routeParams,$location) {
+    
+    $scope.activeClass.coach='active';
 
     $scope.doGetPricingPlans = function() {
       requestHandler.getRequest("getactivePricingPlans/","").then(function(response){
@@ -125,16 +108,13 @@ coachApp.controller('CoachSubscriptionController',['$scope','requestHandler','Fl
 
     $scope.paymentSuccess=function(razorPaymentId){
       window.location.href="#/subscription-razor-payments/"+razorPaymentId;
-      alert("ok");
     };
 
     $scope.init = function() {
       $scope.doGetPricingPlans();
-      $scope.doGetCoachSubscription();
     };
 
     $scope.init();
 
 
 }]);
-

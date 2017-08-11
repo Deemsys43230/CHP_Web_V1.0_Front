@@ -97,7 +97,7 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'CoachSubscriptionController'
             }).
-            when('/coach-subscription-plan', {
+            when('/subscription', {
                 templateUrl: 'views/coach-subscription-plan.html',
                 resolve: {
                     loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
@@ -106,7 +106,7 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                             files:[
                                 '../../plugin/popup/style.css',
                                 '../../angular/angular-utils-pagination/dirPagination.js',
-                                '../../app/coachMembers/coachSubscriptionController.js',
+                                '../../app/coachMembers/subscriptionController.js',
                                 'https://checkout.razorpay.com/v1/checkout.js'
                             ]
                         })
@@ -630,8 +630,11 @@ coachApp.controller("CoachInitialController",['$scope','requestHandler','$locati
                 $scope.coachNotification.push(value);
             });
 
+
         });
     };
+
+
     //Initalize the get functions
     $scope.init=function(){
         $scope.getCoachNotifiaction();
