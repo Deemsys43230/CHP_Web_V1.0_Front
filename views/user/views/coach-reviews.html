@@ -14,33 +14,46 @@
             </div>
             <span ng-if="subscribed==0"><a href="" ng-click="coachView(coachViewId)" class="btn-sm btn-warning pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i>&nbsp;Back</a></span>
             <span ng-if="subscribed==1"><a href="#coach" class="btn-sm btn-warning pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i>&nbsp;Back</a></span>
-            <span ng-show="canReview!=0"><a id="modal_review" ng-click="reset()" href="#review" class="btn-sm btn-success pull-right margin-left-5"><i class="fa fa-plus-circle"></i> Add Reviews</a></span>
+            <span ng-show="canReview!=0"><a id="modal_reviews" ng-click="reset(reviewForm)" href="#reviews" class="btn-sm btn-success pull-right margin-left-5"><i class="fa fa-plus-circle"></i> Add Reviews</a></span>
             <h4 class="classic-title"><span>Reviews</span></h4>
-            <div class="content_scrollbar" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#eee'}">
-                <div ng-repeat="reviews in coachReviews" class="margin-right-10">
-                    <div class="col-lg-1 col-md-1 col-sm-1 no-padding">
-                        <img class="img-circle" ng-src="{{reviews.review_imageurl | trusted}}">
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4">
-                        <strong class="wrap">{{reviews.review_username}}</strong><br/>
-                        <span class="small-font text-gray">{{reviews.reviewddatetime}}</span>
-                    </div>
-                    <div class="col-lg-5 col-md-4 col-sm-4">
-                        <strong>{{reviews.reviewtitle}}</strong><br/>
-                        <span class="small-font text-gray wrap">{{reviews.reviewdescription}}</span>
-                    </div>
+            <div ng-show="totalRatings!=0">
+                <div class="content_scrollbar" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#eee'}">
+                    <div ng-repeat="reviews in coachReviews" class="margin-right-10">
+                        <div class="col-lg-1 col-md-1 col-sm-1 no-padding">
+                            <img class="img-circle" ng-src="{{reviews.review_imageurl | trusted}}">
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4">
+                            <strong class="wrap">{{reviews.review_username}}</strong><br/>
+                            <span class="small-font text-gray">{{reviews.reviewddatetime}}</span>
+                        </div>
+                        <div class="col-lg-5 col-md-4 col-sm-4">
+                            <strong>{{reviews.reviewtitle}}</strong><br/>
+                            <span class="small-font text-gray wrap">{{reviews.reviewdescription}}</span>
+                        </div>
 
-                    <div class="col-lg-2 col-md-3 col-sm-3 no-padding">
-                        Ratings : {{reviews.ratinglevel}}<br/>
-                        <average-star-rating ng-model="reviews.ratinglevel" max="5"></average-star-rating>
+                        <div class="col-lg-2 col-md-3 col-sm-3 no-padding">
+                            Ratings : {{reviews.ratinglevel}}<br/>
+                            <average-star-rating ng-model="reviews.ratinglevel" max="5"></average-star-rating>
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 no-padding margin-tb-5"><hr/></div>
                     </div>
-                    <div class="col-lg-12 col-md-12 col-sm-12 no-padding margin-tb-5"><hr/></div>
+                </div>
+            </div>    
+            <div ng-show="totalRatings==0">
+                <div class="row">
+                    <div class="panel no-margin no-box-shadow">
+                        <div class="panel-body"><div class="text-center margin-top-40">
+                              <img src="../../images/no-reviews.png" width="176" height="120"/>
+                                <h1 class="text-gray">NO REVIEWS</h1><br/><br/><br/>
+                          </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<div id="review" class="popupContainer" style="display:none;">
+<div id="reviews" class="popupContainer" style="display:none;">
     <header class="popupHeader">
         <span class="header_title">Add Reviews</span>
         <span class="modal_close"><i class="fa fa-times"></i></span>
@@ -50,6 +63,8 @@
         <!-- Register Form -->
         <div class="common_model">
             <form name="reviewForm">
+               
+                <input type="text" id="formValid" name="formValid" data-ng-model="formError" ng-value="reviewForm.$valid"/>
                 <p>Rate the coach</p>
                 <div><star-rating ng-model="coachreview" ></star-rating></div>
                 <p>Review Summary</p>
@@ -63,7 +78,7 @@
                     <span class="error-message textarea-errormessage-110" ng-show="reviewForm.reviewdescription.$error.required"><span>Required.</span></span>
                  </span>
                 <div class="action_btn margin-top-20 text-center">
-                    <div><a href="" class="btn btn_red" ng-class="{modal_close:reviewForm.$invalid}" ng-disabled="reviewForm.$invalid"  ng-click="doAddReview()">Add Review </a></div>
+                    <div><a href="" class="btn btn_red" ng-class="{modal_close:reviewForm.$invalid}" ng-disabled="reviewForm.$invalid"  ng-click="doAddCoachReview()">Add Review </a></div>
                 </div>
             </form>
         </div>
@@ -74,10 +89,9 @@
 <script type="text/javascript" src="../../js/script.js"></script>
 
 <script type="text/javascript">
-    $("#modal_review").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
+    $("#modal_reviews").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
     $(function(){
         $(".common_model").show();
     })
 </script>
-
 

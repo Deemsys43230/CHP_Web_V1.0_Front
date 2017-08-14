@@ -53,10 +53,8 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
             });
           
             $q.all([ratingPromise]).then(function(){
-               // $scope.usercoachlist= response.data.coaches;
+             
                 $scope.usercoachlist= $scope.usercoachlist.concat(response.data.coaches);
-                console.log("User Coach list",$scope.usercoachlist);
-                console.log(loadCoachDetail);
                 if(loadCoachDetail){ 
                     //Load First Coach Default
                         if($scope.usercoachlist.length>0)
@@ -79,7 +77,7 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
     };
 
     $scope.coachRatingPagination={
-                                    "limit":3,
+                                    "limit":10,
                                     "offset":0
                                  };
 
@@ -267,7 +265,6 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
     $scope.coachReview=function(id){
        
         $scope.doGetCoachRatings(id);
-       
         $scope.subscribed=0;
         $scope.coachViewId=id;
         $scope.coach = {
@@ -315,11 +312,21 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
         });
     };
 
+    $scope.doAddCoachReview=function(){
+        $scope.coachreview.review_coach=$scope.usercoachdetails.userid;
+        requestHandler.postRequest("user/insertRatingsandReviews/",$scope.coachreview).then(function(response){
 
-    $scope.reset=function(){
+            successMessage(Flash,"Successfully Added");
+            $scope.coachReview($scope.coachreview.review_coach);
+        }, function () {
+            errorMessage(Flash, "Please try again later!")
+        });
+    };
+
+    $scope.reset=function(reviewForm){
         $scope.coachreview.reviewtitle="";
         $scope.coachreview.reviewdescription="";
-        $scope.reviewForm.$setPristine();
+        reviewForm.$setPristine();
     };
 
     $scope.checkReview=function(){
@@ -336,10 +343,10 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
 
                 $scope.check=userTypeArray;
 
-                if($scope.check.indexOf(userid.review_user) !=-1){
+                $scope.canReview= response.data.canreview;
+                if($scope.canReview==0){
                     $scope.disablereview = true;
-                }
-                else{
+                }else{
                     $scope.disablereview = false;
                 }
             });
@@ -492,20 +499,5 @@ userApp.filter('startsWithLetterSearch', function () {
             }
         }
         return filtered;
-    };
-});
-
-
-userApp.directive('scroller', function () {
-    return {
-        restrict: 'A',
-        link: function (scope, elem, attrs) {
-            rawElement = elem[0]; // new
-            elem.bind('scroll', function () {
-                if((rawElement.scrollTop + rawElement.offsetHeight+5) >= rawElement.scrollHeight){ //new
-                    scope.$apply('loadMore()');
-                }
-            });
-        }
     };
 });
