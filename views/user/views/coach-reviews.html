@@ -17,7 +17,7 @@
             <span ng-show="canReview!=0"><a id="modal_reviews" ng-click="reset(reviewForm)" href="#reviews" class="btn-sm btn-success pull-right margin-left-5"><i class="fa fa-plus-circle"></i> Add Reviews</a></span>
             <h4 class="classic-title"><span>Reviews</span></h4>
             <div ng-show="totalRatings!=0">
-                <div class="content_scrollbar" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#eee'}">
+                <div class="content_scrollbar" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#eee'}" nice-scroll-end="doGetCoachRatings(coachViewId)">
                     <div ng-repeat="reviews in coachReviews" class="margin-right-10">
                         <div class="col-lg-1 col-md-1 col-sm-1 no-padding">
                             <img class="img-circle" ng-src="{{reviews.review_imageurl | trusted}}">
@@ -64,7 +64,7 @@
         <div class="common_model">
             <form name="reviewForm">
                
-                <input type="text" id="formValid" name="formValid" data-ng-model="formError" ng-value="reviewForm.$valid"/>
+                <input type="hidden" id="formValid" name="formValid" data-ng-model="formError" ng-value="reviewForm.$valid"/>
                 <p>Rate the coach</p>
                 <div><star-rating ng-model="coachreview" ></star-rating></div>
                 <p>Review Summary</p>

@@ -260,7 +260,7 @@ adminApp.directive('validFile',function(){
     }
 });
 
-var commonApp = angular.module('commonApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate']);
+/*var commonApp = angular.module('commonApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate']);
 
 commonApp.controller('ArticleUserController',['$scope','requestHandler','Flash','$sce','$routeParams',function($scope,requestHandler,Flash,$sce,$routeParams){
 
@@ -268,7 +268,7 @@ $scope.getArticlesParam= {
                         "limit":10,
                         "offset":0
                         };
-    // To display Testimonials as user
+    
     $scope.doGetArticlesByUser=function(){
         requestHandler.postRequest("user/usergetarticles/", $scope.getArticlesParam).then(function(response){
       $scope.usertestimoniallist=response.data.Testimonials;
@@ -282,10 +282,10 @@ $scope.getArticlesParam= {
     };
 
     $scope.doGetArticleDetailsByUser= function (id) {
-        requestHandler.getRequest("getTestimonialDetail/"+id, "").then(function(response){
+        requestHandler.getRequest("getTestimonialDetail/"+id, "").then(function(response){*/
 
             //View the image in ng-src for view testimonials
-            $scope.myImgSrc = $sce.trustAsResourceUrl(response.data.Testimonials.imageurl+"?decache="+Math.random());
+         /*   $scope.myImgSrc = $sce.trustAsResourceUrl(response.data.Testimonials.imageurl+"?decache="+Math.random());
 
             $scope.usertestimonialdetails=response.data.Testimonials
 
@@ -295,15 +295,15 @@ $scope.getArticlesParam= {
 
         return false;
 
-    };
+    };*/
 
     // To display the user Testimonial list on load
-    $scope.doGetTestimonialsByUser();
+   /* $scope.doGetTestimonialsByUser();
     $scope.doGetTestimonialDetailsByUser($routeParams.id);
 
 
 }]);
-
+*/
 // render image to view in list
 commonApp.filter('trusted', ['$sce', function ($sce) {
     return function(url) {

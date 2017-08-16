@@ -77,7 +77,7 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
     };
 
     $scope.coachRatingPagination={
-                                    "limit":10,
+                                    "limit":4,
                                     "offset":0
                                  };
 
@@ -89,11 +89,16 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
 
     $scope.doGetCoachRatings= function (id) {
         $scope.reviewload=true;
-        $scope.coachReviews={};
-        requestHandler.postRequest("getCoachRatingsandReviews/"+id+"/", $scope.coachRatingPagination).then(function (response) {
-            $scope.coachReviews=response.data.reviews;
+        $scope.scrollnation.scrollEndCount= $scope.scrollnation.scrollEndCount+1;
+
+        $scope.coachRatingScrollnation={
+                                    "limit":$scope.scrollnation.itemsPerScroll,
+                                    "offset":($scope.scrollnation.scrollEndCount)*$scope.scrollnation.itemsPerScroll
+                                 };
+
+        requestHandler.postRequest("getCoachRatingsandReviews/"+id+"/", $scope.coachRatingScrollnation).then(function (response) {
+            $scope.coachReviews= $scope.coachReviews.concat(response.data.reviews);
             $scope.canReview= response.data.canreview;
-            $scope.reviews=response.data.reviews;
             $scope.reviewload=false;
             $scope.totalRatings = response.data.totalrecords;
             $scope.avgRatings = response.data.averageratings;
@@ -263,7 +268,8 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
 
 
     $scope.coachReview=function(id){
-       
+        $scope.scrollnation={"itemsPerScroll": 4,"scrollEndCount":-1};
+        $scope.coachReviews=[];
         $scope.doGetCoachRatings(id);
         $scope.subscribed=0;
         $scope.coachViewId=id;
@@ -331,35 +337,43 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
 
     $scope.checkReview=function(){
 
-        $scope.checkReviews="";
+        $scope.scrollnation.scrollEndCount= $scope.scrollnation.scrollEndCount+1;
 
-            requestHandler.postRequest("getCoachRatingsandReviews/"+$routeParams.id+"/", $scope.coachRatingPagination).then(function (response) {
-                $scope.checkReviews = response.data.reviews;
+        $scope.coachRatingScrollnation={
+                                    "limit":$scope.scrollnation.itemsPerScroll,
+                                    "offset":($scope.scrollnation.scrollEndCount)*$scope.scrollnation.itemsPerScroll
+                                 };
 
-                userTypeArray=[];
-                $.each($scope.checkReviews, function(index,userid) {
-                    userTypeArray.push(userid.review_user);
-                });
+        requestHandler.postRequest("getCoachRatingsandReviews/"+$routeParams.id+"/", $scope.coachRatingPagination).then(function (response) {
+            $scope.checkReviews = $scope.checkReviews.concat(response.data.reviews);
 
-                $scope.check=userTypeArray;
-
-                $scope.canReview= response.data.canreview;
-                if($scope.canReview==0){
-                    $scope.disablereview = true;
-                }else{
-                    $scope.disablereview = false;
-                }
+            userTypeArray=[];
+            $.each(response.data.reviews, function(index,userid) {
+                userTypeArray.push(userid.review_user);
             });
+
+            $scope.check=userTypeArray;
+
+            $scope.canReview= response.data.canreview;
+            if($scope.canReview==0){
+                $scope.disablereview = true;
+            }else{
+                $scope.disablereview = false;
+            }
+        });
 
     };
 
     $scope.userCoachViewInit=function(){
+        $scope.scrollnation={"itemsPerScroll": 4,"scrollEndCount":-1};
+        $scope.checkReviews=[];
         $scope.disablereview=true;
         $scope.checkReview();
         $scope.doGetCoachDetailsByUser($routeParams.id);
         $scope.coachView = {
             status: 'coach-reviews'
         };
+        $scope.coachReviews=[];
         $scope.doGetCoachRatings($routeParams.id);
         $scope.subscribed=1;
     };
