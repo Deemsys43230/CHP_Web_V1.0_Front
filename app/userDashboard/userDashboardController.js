@@ -577,22 +577,24 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
         };
 
         //On Select frequent exercise
-        $scope.frequentExercise=function(exerciseid,isCustom){
+        $scope.frequentExercise=function(exerciseid,isCustom,exercisename){
             $scope.isNew=true;
             $scope.title= "Add Exercise";
             $scope.loaded=true;
-            var getExerciseDetailPromise=UserDashboardService.doGetSelectedExerciseDetails(exerciseid,isCustom);
-            getExerciseDetailPromise.then(function(result){
-                $scope.userSelectedExerciseDetails=result;
-                $scope.loaded=false;
-               if(isCustom==0){
-                   $scope.doUserAddExercise();
-               }
-             else if(isCustom==1){
-                   $scope.doUserAddCustomExercise();
-               }
+            if(isCustom==0){
+                var getExerciseDetailPromise=UserDashboardService.doGetSelectedExerciseDetails(exerciseid);
+                getExerciseDetailPromise.then(function(result){
+                    $scope.userSelectedExerciseDetails=result;
+                    $scope.loaded=false;
+                    $scope.doUserAddExercise();
+                });
+             }
+            else if(isCustom==1){
+                $scope.title= "Add Custom Exercise";
+                $scope.customExercise.exercisename=exercisename;
+                $scope.doUserAddCustomExercise();
+            }
 
-            });
         };
 
         //On Select frequent exercise
@@ -3060,7 +3062,6 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
                     valueSuffix: titles.suffix
                 },
                 yAxis: {
-
                     title: {
                         text: titles.yaxis
                     },
@@ -3085,7 +3086,6 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
                     type: titles.graphType,
                     name: titles.name,
                     data: data
-
                 }]
             });
             $('#excerciseGraph').highcharts({
@@ -3109,6 +3109,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
                     valueSuffix: titles.suffix
                 },
                 yAxis: {
+                    minRange:0,
 
                     title: {
                         text: titles.yaxis
@@ -3129,13 +3130,14 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
                     enabled: false
                 },
 
+
+
                 legend:{enabled:false},
                 series: [{
                     type: 'column',
                     name: titles.name,
                     data: data
-
-                }]
+                      }]
             });
         };
 
@@ -3189,6 +3191,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
                     name: 'Net',
                     data: data1
                 },{
+
                     type: 'spline',
                     name: 'Budget',
                     data: data,
@@ -3222,7 +3225,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
 
                 },
                 yAxis: {
-                    min: 0,
+
                     title: {
                         text: titles.yaxis
                     },
@@ -3442,7 +3445,6 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
 
                 },
                 yAxis: {
-                    min: 0,
                     title: {
                         text: titles.yaxis
                     },
@@ -3524,7 +3526,6 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
 
                 },
                 yAxis: {
-                    min: 0,
                     title: {
                         text: titles.yaxis
                     },
@@ -3599,7 +3600,6 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
                     valueSuffix: titles.suffix
                 },
                 yAxis: {
-
                     title: {
                         text: titles.yaxis
                     },
@@ -4513,6 +4513,7 @@ function daterangepicker() {
     });
 
 //for food intake and excersize view graph date picker
+
     $("#history-graph").click();
     $("#history-view").click();
     var options = {
@@ -4696,6 +4697,7 @@ function coachAdviceCarousel(){
         controlls.find('.owl-next').html('<i class="fa fa-angle-right"></i>');
     },500);
 }
+
 //for restricting keypress event after (dot)
 function validateFloatKeyPress1(el, evt) {
     var charCode = (evt.which) ? evt.which : event.keyCode;
