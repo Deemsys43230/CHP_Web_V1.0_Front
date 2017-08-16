@@ -197,7 +197,7 @@
     <section class="popupBody">
         <!-- Register Form -->
         <div class="common_model">
-            <input type="text" placeholder="Search friends here.." ng-model="friendsearch">{{myRemainderFriendsList.Friends_List}}
+            <input type="text" placeholder="Search friends here.." ng-model="friendsearch">
             <hr/>
             <div class="margin-top-10 height-350" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#eee'}">
                 <div ng-repeat="myFriends in myRemainderFriendsListFilter = (myRemainderFriendsList  | startsWithLetterRemain:friendsearch)" ng-show="myRemainderFriendsList!=0">

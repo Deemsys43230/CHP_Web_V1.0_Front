@@ -57,8 +57,9 @@
                                         </div>
                                     </div>
                                     <div class="col-md-4 col-sm-4 col-xs-6">
-                                        <input class="calculator-input" name="inches" ng-model="inches" maxlength="2" ng-required="units==2">
+                                        <input class="calculator-input" name="inches" ng-model="inches" maxlength="2" ng-required="units==2" ng-change="maxHeightCheck(inches)">
                                         <div class="text-count-position"><span class="text-unit">in</span></div>
+                                        <span class="text-error-message" ng-show="!calculateForm.inches.$error.required&&maxHeightInches"><span>Please&nbsp;Enter&nbsp;Valid&nbsp;Height</span></span>
                                         <div class="text-error-message">
                                         <span ng-show="bmiSubmitted">
                                             <span ng-show="calculateForm.inches.$error.required"><span>Required.</span></span>
@@ -68,7 +69,7 @@
                                     </div>
                                     <div ng-show="units==1">
                                         <div class="col-md-8 col-sm-8">
-                                            <input class="calculator-input" name="height" ng-model="height" maxlength="3" ng-required="units==1">
+                                            <input class="calculator-input" name="height" ng-model="height" maxlength="5" ng-required="units==1" onkeypress="return validateFloatKeyPress(this,event);">
                                             <div class="text-count-position"><span class="text-unit lbs">cm</span></div>
                                             <div class="text-error-message">
                                             <span ng-show="bmiSubmitted">
@@ -124,7 +125,7 @@
                             <div class="col-md-6 col-sm-12 no-padding">
                                 <h5 class="col-md-4 col-sm-4 margin-top-10">Weight <sup class="text-red">*</sup></h5>
                                 <div class="col-md-8 col-sm-8">
-                                    <input class="calculator-input" name="weight" ng-model="weight" maxlength="3" required>
+                                    <input class="calculator-input" name="weight" ng-model="weight" maxlength="5" required onkeypress="return validateFloatKeyPress(this,event);">
                                     <div class="text-count-position"><span class="text-unit lbs"><span ng-show="units==1">kgs</span><span ng-show="units==2">lbs</span></span></div>
                                     <div class="text-error-message">
                                     <span ng-show="bmiSubmitted">
@@ -164,7 +165,7 @@
                             </div>
                             <div class="col-md-6 col-sm-12 margin-top-10 text-right">
                                 <div class="hidden-lg hidden-md"><div class="margin-top-10"></div></div>
-                                <a href="" class="btn-dis main_button red_button" ng-click="bmiSubmitted=true; calculateEMI(calculateForm.$valid)">GET MY RESULT</a>
+                                <a href="" class="btn-dis main_button red_button" ng-click="bmiSubmitted=true; calculateEMI(calculateForm.$valid)" ng-disabled="maxHeightInches">GET MY RESULT</a>
                             </div>
                         </div>
 
@@ -483,4 +484,37 @@
             carousel.find('.owl-next').html('<i class="fa fa-angle-right"></i>');
         },500);
     }
+
+
+//for restricting keypress event after (dot)
+function validateFloatKeyPress(el, evt) {
+    var charCode = (evt.which) ? evt.which : event.keyCode;
+    var number = el.value.split('.');
+    if (charCode != 46 && charCode > 31 && (charCode < 48 || charCode > 57)) {
+        return false;
+    }
+    //just one dot
+    if(number.length>1 && charCode == 46){
+        return false;
+    }
+    // for backspace issue in firefox
+    if(charCode== 8){
+        return true;
+    }
+    //get the carat position
+    var caratPos = getSelectionStart(el);
+    var dotPos = el.value.indexOf(".");
+    if( caratPos > dotPos && dotPos>-1 && (number[1].length > 0)){
+        return false;
+    }
+    return true;
+}
+function getSelectionStart(o) {
+    if (o.createTextRange) {
+        var r = document.selection.createRange().duplicate()
+        r.moveEnd('character', o.value.length)
+        if (r.text == '') return o.value.length
+        return o.value.lastIndexOf(r.text)
+    } else return o.selectionStart
+}
 </script>

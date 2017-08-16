@@ -106,7 +106,7 @@
                         <ul class="nav nav-tabs pull-left">
                             <li class="active" ng-click="showExercise=0"><a href="#tab-1" data-toggle="tab" onclick="return false;">Food Intake</a></li>
                             <li ng-click="showExercise=1;doGetCategoryandTypeExercise();" ><a href="#tab-2" data-toggle="tab" onclick="return false;">Energy Spent</a></li>
-                            <li><a href="#tab-3" data-toggle="tab" onclick="return false;">Graphs</a></li>
+                            <!--<li><a href="#tab-3" data-toggle="tab" onclick="return false;">Graphs</a></li>-->
                             <li>
                         </ul>
                         <button href="" ng-click="doSyncDevices(0)" onclick="return false;" class="sync_button override-width pull-left"  ng-disabled="connectDevice"><i class="fa fa-exchange" aria-hidden="true"></i>&nbsp;{{syncBtnTxt}}&nbsp;</button>
@@ -201,13 +201,13 @@
                                         <div class="col-lg-3 col-md-3 col-sm-3 no-padding dashboard-6">
                                             <div class="content-3">
                                                 <a id="modal_trigger_food" href="#modal-food" ng-click="resetdata(); msg()" onclick="return false;" class="suggest_button override-width">Suggest Food</a>
-                                                <div class="suggest_content" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#eee'}">
+                                                <div class="suggest_content" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#eee'}" style="height: 365px;">
                                                     <h6 class="margin-bottom-13">Frequently Used</h6>
                                                     <div class="suggest_option">
                                                         <span ng-repeat="frequentfood in frequentFoodList" ng-click="frequentFood(frequentfood.foodid)" class="wrap-all">{{frequentfood.foodname}}</span>
                                                     </div>
                                                 </div>
-                                                <a href="#graph" data-toggle="tab" ng-click="getViewGraph()" onclick="return false;" class="suggest_button override-width" style="margin-top: 9px;">View Graph</a>
+                                               <!-- <a href="#graph" data-toggle="tab" ng-click="getViewGraph()" onclick="return false;" class="suggest_button override-width" style="margin-top: 9px;">View Graph</a>-->
 
                                             </div>
                                         </div>
@@ -221,7 +221,7 @@
                                     <div class="col-lg-9 col-md-9 col-sm-9 no-padding dashboard-5">
                                             <div class="col-lg-12 col-md-12 no-padding">
                                              <div class="session">
-                                                 <a id="modal_trigger_filter" href="#modal-filter" ng-click="doFilterPopup();" onclick="return false;" class="target_button filter_button" type="button"><i class="fa fa-filter"></i>&nbsp;Filter&nbsp;<small><span ng-repeat="category in displayFilteredCategory" title="Category">{{category}} {{$last ? '|' : ','}}</span>&nbsp;&nbsp;<span ng-repeat="type in displayFilteredType" title="Type">{{type}} {{$last ? '' : ','}}</span></small></a>
+                                                 <a id="modal_trigger_filter" href="#modal-filter" ng-click="doFilterPopup();" onclick="return false;" class="target_button filter_button" type="button"><i class="fa fa-filter"></i>&nbsp;Filter&nbsp;<small><span ng-repeat="category in displayFilteredCategory" title="Category">&nbsp;{{category}}{{$last ? '|' : ','}}</span><span ng-repeat="type in displayFilteredType" title="Type">{{type}}{{$last ? '' : ','}}&nbsp;</span></small></a>
                                              </div>
                                             <div class="content-1">
                                                 <input class="profile_input" type="text" ng-model="selectedExercise" placeholder="Search Exercise" uib-typeahead="exercise as exercise.exercisename for exercise in inputChangedExercise($viewValue)" typeahead-popup-template-url="customPopupTemplate.html" typeahead-template-url="exerciseTemplate.html" typeahead-on-select="exerciseSelected()" typeahead-class="form-control">
@@ -296,7 +296,7 @@
                                                 <div class="suggest_content" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#eee'}">
                                                     <h6>Frequently Used</h6>
                                                     <div class="suggest_option">
-                                                        <span ng-repeat="frequentexercise in frequentExerciseList" ng-click="frequentExercise(frequentexercise.exerciseid,frequentexercise.isCustom)">{{frequentexercise.exercisename}}</span>
+                                                        <span ng-repeat="frequentexercise in frequentExerciseList" ng-click="frequentExercise(frequentexercise.exerciseid,frequentexercise.isCustom,frequentexercise.exercisename)">{{frequentexercise.exercisename}}</span>
                                                     </div>
                                                 </div>
                                                     <a id="modal_trigger_custom_exercise" href="#modal-custom-exercise" ng-click="doUserAddCustomExercise();resetexercisedata();" onclick="return false;" class="custom_button" type="button"><i class="fa fa-plus"></i>&nbsp;Add Custom Exercise</a>
@@ -307,12 +307,12 @@
                             </div>
 
 
-                            <!-- Tab Content 3 -->
+                        <!--    &lt;!&ndash; Tab Content 3 &ndash;&gt;
                             <div class="tab-pane padding-top-5" id="tab-3">
                                 <div class="row">
                                     <div class="col-lg-12 col-md-12 col-sm-12 graphs">
-                                       <!-- <input type="radio" id="gainSpent" value="1"  ng-click="graphOne()" ng-model="graphs"/>
-                                        <label for="gainSpent">Gained vs Burnt</label>-->
+                                       &lt;!&ndash; <input type="radio" id="gainSpent" value="1"  ng-click="graphOne()" ng-model="graphs"/>
+                                        <label for="gainSpent">Gained vs Burnt</label>&ndash;&gt;
                                         <input type="radio" id="nutrients" ng-click="graphTwo()" value="2" ng-model="graphs"/>
                                         <label for="nutrients" >Nutrients Graph by Session</label>
                                         <input type="radio" id="nutrient" ng-click="dailyIntake()" value="3" ng-model="graphs"/>
@@ -325,7 +325,7 @@
                                             <div class="loader"></div>
                                         </div>
                                     </div>
-                               <!--     <div ng-show="graphs==1" class="margin-top-5">
+                               &lt;!&ndash;     <div ng-show="graphs==1" class="margin-top-5">
                                         <div ng-hide="userFoodDiaryDataAll.length==0&&userExerciseDiaryDataAll==0" class="margin-top-10">
                                             <div class="col-lg-4 col-md-4 col-sm-4 text-right gain-list">
                                                 <div class="text-green text-bold">Gained</div>
@@ -362,7 +362,7 @@
                                             <img src="../../images/no-update.png" width="150" height="150">
                                             <h1 class="text-gray">NO UPDATE!!!</h1>
                                         </div>
-                                    </div>-->
+                                    </div>&ndash;&gt;
                                     <div ng-show="graphs==2" class="margin-top-5">
                                         <div class="col-lg-6 col-md-5 col-sm-5">
                                             <h5 class="margin-bottom-5">Choose session</h5>
@@ -419,8 +419,8 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- @end #content -->
-                            </div>
+                                &lt;!&ndash; @end #content &ndash;&gt;
+                            </div>-->
 
                            <!-- Tab view graph for calories intake and burnt-->
                             <div class="tab-pane padding-top-5" id="graph">
@@ -662,7 +662,7 @@
                                                 </div>
                                                 <div class="col-lg-6 col-md-6 col-sm-6 margin-top-10 no-padding-right padding-left-8">
                                                     <span ng-show="userProfile.unitPreference==1">
-                                                     <input class="profile_input weightoverride" id="weightLog" name="weightkgs" ng-model="weightlog" maxlength="5" required validate-zero  ng-change="maxWeightCheck()"onkeypress="return validateFloatKeyPress(this,event);"/>
+                                                     <input class="profile_input weightoverride" id="weightLog" name="weightkgs" ng-model="weightlog" maxlength="5" required validate-zero  ng-change="maxWeightCheck()"/>
                                                         <span class="error-message textarea-errormessage40-right60" ng-show="!weightLogForm.weightkgs.$error.required&&maxweight"><span style="bottom: 70px;">Please&nbsp;Enter&nbsp;Valid&nbsp;Weight.</span></span>
                                                          <span ng-show="weightLogForm.weightkgs.$dirty&&weightLogForm.weightkgs.$invalid">
                                                          <span class="error-message textarea-errormessage10" ng-show="weightLogForm.weightkgs.$error.required"><span>Required.</span></span>
@@ -670,7 +670,7 @@
                                                     </span>
                                                     </span>
                                                    <span ng-show="userProfile.unitPreference==2">
-                                                      <input class="profile_input weightoverride" name="weightlbs" ng-model="weightlog"  ng-change="maxCheck()" maxlength="6" required validate-zero onkeypress="return validateFloatKeyPress(this,event);"/>
+                                                      <input class="profile_input weightoverride" name="weightlbs" ng-model="weightlog"  ng-change="maxCheck()" maxlength="6" required validate-zero/>
                                                            <span class="error-message textarea-errormessage40-right60" ng-show="!weightLogForm.weightlbs.$error.required&&maxweight"><span style="bottom: 70px;">Please&nbsp;Enter&nbsp;Valid&nbsp;Weight.</span></span>
                                                            <span ng-show="weightLogForm.weightlbs.$dirty&&weightLogForm.weightlbs.$invalid">
                                                            <span class="error-message textarea-errormessage10" ng-show="weightLogForm.weightlbs.$error.required"><span>Required.</span></span>
@@ -1144,10 +1144,10 @@
         <div class="common_model">
             <form name="exerciseSuggestForm" novalidate>
             <p>Exercise Name:</p>
-            <input type="text" name="exercisename" data-exerciseid="exerciseSuggest.exerciseid" ng-model="exerciseSuggest.exercisename" ng-pattern="/^ *([a-zA-Z]+ ?)+ *$/" maxlength="100" exerciseexists required />
+            <input type="text" name="exercisename" data-exerciseid="exerciseSuggest.exerciseid" ng-model="exerciseSuggest.exercisename" maxlength="100" exerciseexists required validate-all-characters/>
             <span ng-show="exerciseSuggestForm.exercisename.$dirty&&exerciseSuggestForm.exercisename.$invalid">
                                 <span class="error-message" ng-show="exerciseSuggestForm.exercisename.$error.required"><span>Required.</span></span>
-                             <span class="error-message" ng-show="exerciseSuggestForm.exercisename.$error.pattern"><span>Enter&nbsp;Valid&nbsp;name.</span></span>
+                             <span class="error-message" ng-show="exerciseSuggestForm.exercisename.$error.validateAllCharacters"><span>Enter&nbsp;Valid&nbsp;name.</span></span>
              <span class="error-message" ng-show="exerciseSuggestForm.exercisename.$error.exerciseexists"><span>Exercise&nbsp;already&nbsp;exists.</span></span>
             </span>
             <p>Exercise Description:</p>
@@ -1261,7 +1261,7 @@
 
         <section class="popupBody">
             <!-- Register Form -->
-            <div class="user_register" >
+            <div class="user_register">
                 <div class="row">
                     <div class="col-lg-6 col-md-6 col-sm-6">
                         <form name="ExerciseAddForm" novalidate>
@@ -1287,7 +1287,7 @@
                             <h5 class="margin-top-10">Timings</h5>
                             <div class="col-lg-4 col-md-4 col-sm-4 margin-top-10"><span>Hours</span>
                             <!-- <input type="text" name="hours" ng-model="workoutvalueHours" ng-change="doCalculateCaloriesExercise()"  maxlength="7" style="width: 130%">-->
-                                <select class="form-control" name="hours"  ng-model="workoutvalueHours" ng-init="workoutvalueHours='0'" ng-change="doCalculateCaloriesExercise()" style="width: 130%">
+                                <select class="form-control" name="hours"  ng-model="workoutvalueHours" ng-init="workoutvalueHours='0'" ng-change="doCalculateCaloriesExercise()" style="width: 130%;padding: 7px 12px;">
                                    <option value="0">00</option>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
@@ -1319,7 +1319,7 @@
                            </div>
                             <div class="col-lg-4 col-md-4 col-sm-4 margin-top-10"><span>Minutes</span>
                                <!-- <input type="text" ng-pattern="/(^[1-9]\d{0,8}$)/" name="minutes" ng-model="workoutvalueMinutes" ng-change="doCalculateCaloriesExercise()"  maxlength="7" required style="width: 130%">-->
-                                <select class="form-control" name="minutes"  ng-model="workoutvalueMinutes" ng-init="workoutvalueMinutes='0'" ng-change="doCalculateCaloriesExercise()" required style="width: 130%">
+                                <select class="form-control" name="minutes"  ng-model="workoutvalueMinutes" ng-init="workoutvalueMinutes='0'" ng-change="doCalculateCaloriesExercise()" required style="width: 130%;padding: 7px 12px;">
                                     <option value="0">00</option>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
@@ -1387,7 +1387,7 @@
                                 </div>
                             <div class="col-lg-4 col-md-4 col-sm-4 margin-top-10"><span>Seconds</span>
                                 <!--<input type="text" name="seconds" ng-model="workoutvalueSeconds" ng-change="doCalculateCaloriesExercise()"  maxlength="7" style="width: 130%">-->
-                                <select class="form-control" name="seconds"  ng-model="workoutvalueSeconds" ng-init="workoutvalueSeconds='0'" ng-change="doCalculateCaloriesExercise()" style="width: 130%">
+                                <select class="form-control" name="seconds"  ng-model="workoutvalueSeconds" ng-init="workoutvalueSeconds='0'" ng-change="doCalculateCaloriesExercise()" style="width: 130%;padding: 7px 12px;">
                                     <option value="0">00</option>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
@@ -2192,7 +2192,7 @@
 
 <script type="text/javascript" src="../../js/script.js"></script>
         <script>
-            //for dashboard main date
+    /*        //for dashboard main date
             function daterangepicker() {
                 $("#main-date").click();
                 var options = {
@@ -2206,7 +2206,7 @@
                     angular.element(document.getElementById('main-date')).scope().initialLoadFoodAndExercise(start.format('DD/MM/YYYY'));
                     document.getElementById("main-start-date").value = start.format('DD/MM/YYYY');
                 });
-            };
+            };*/
             $(function () {
                 $('#fatLog').bind('paste', function () {
                     var self = this;

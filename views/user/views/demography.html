@@ -82,7 +82,7 @@
            </span>
         </span>
         <span ng-show="userProfile.unitPreference==2" >
-        <input class="demography_input" name="weightlbs" id="weightlbs" maxlength="6" ng-model="demography.weight" ng-required="userProfile.unitPreference==2" onkeypress="return validateFloatKeyPress(this,event);" ng-change="planChangeValidation(demography.userPlanType);maxWeightCheck(demography.weight);bmiCalculation();" required validate-zero/>
+        <input class="demography_input" name="weightlbs" id="weightlbs" maxlength="6" ng-model="demography.weight" ng-required="userProfile.unitPreference==2"  ng-change="planChangeValidation(demography.userPlanType);maxWeightCheck(demography.weight);bmiCalculation();" required validate-zero/>
         <span class="error-message textarea-errormessage40-right60" ng-show="!demographyForm.weightlbs.$error.required&&maxweight"><span>Please&nbsp;Enter&nbsp;Valid&nbsp;Weight.</span></span>
            <span ng-show="demographyForm.weightlbs.$dirty&&demographyForm.weightlbs.$invalid">
                <span class="error-message textarea-errormessage40" ng-show="demographyForm.weightlbs.$error.required"><span>Required.</span></span>
@@ -222,14 +222,6 @@
     </div>
 </div>
 
-<!--<div class="col-lg-6 col-md-6 col-sm-12 margin-top-15 ">
-    <div class="col-lg-8 col-md-7 col-sm-7 padding-top-4 padding-right-0">
-        <h5>Blood Pressure <span class="pull-right">:</span></h5>
-    </div>
-    <div class="col-lg-4 col-md-5 col-sm-5 padding-right-0">
-        <input class="demography_input" name="bloodpressure" ng-model="demography.bloodpressure"/>
-    </div>
-</div>-->
 <div class="col-lg-12 col-md-12 col-sm-12">
     <div class="col-lg-12 col-md-12 col-sm-12 margin-top-15">
         <hr/>
@@ -246,18 +238,8 @@
                             </span>
     </div>
 </div>
-<div class="col-lg-12 col-md-12 col-sm-12">
-    <div class="col-lg-12 col-md-12 col-sm-12 margin-top-15 demo_status ">
-        {{demography.HDLcholestrolCategory}}
-    </div>
-</div>
-<div class="col-lg-12 col-md-12 col-sm-12">
-    <div class="col-lg-12 col-md-12 col-sm-12 margin-top-15">
-        <hr/>
-    </div>
-</div>
 
-<div class="col-lg-6 col-md-6 col-sm-12 margin-top-15">
+<div class="col-lg-6 col-md-6 col-sm-12">
     <div class="col-lg-8 col-md-7 col-sm-7 padding-top-4 padding-right-0 padding-right-0">
         <h5>LDL Cholestrol <small>(mg/dL)</small> <span class="pull-right">:</span><span class="pull-right">&nbsp;<a href="" data-toggle="popover" data-trigger="hover" title="LDL Cholestrol" data-content="Low-density lipoprotein cholesterol, commonly reffered as a bad cholesterol.Lipoproteins, which are combination of fats (lipids) and proteins,are the form in which lipids are transported in the blood."><i class="fa fa-info-circle"></i></a>&nbsp; </span> </h5>
     </div>
@@ -266,12 +248,6 @@
                             <span ng-show="demographyForm.LDLcholestrol.$dirty&&demographyForm.LDLcholestrol.$invalid">
                                 <span class="error-message textarea-errormessage40" ng-show="demographyForm.LDLcholestrol.$error.pattern"><span>Invalid&nbsp;Format.</span></span>
                             </span>
-    </div>
-</div>
-
-<div class="col-lg-12 col-md-12 col-sm-12">
-    <div class="col-lg-12 col-md-12 col-sm-12 margin-top-15 demo_status">
-        {{demography.LDLcholestrolCategory}}
     </div>
 </div>
 <div class="col-lg-12 col-md-12 col-sm-12">
@@ -311,11 +287,7 @@
                             </span>
     </div>
 </div>
-<div class="col-lg-12 col-md-12 col-sm-12">
-    <div class="col-lg-12 col-md-12 col-sm-12 margin-top-15">
-        <hr/>
-    </div>
-</div>
+
 <div class="col-lg-6 col-md-6 col-sm-12 margin-top-15">
     <div class="col-lg-8 col-md-7 col-sm-7 padding-top-4 padding-right-0 padding-right-0">
         <h5>Fasting Blood Glucose <small>(mg/dL)</small> <span class="pull-right">:</span><span class="pull-right">&nbsp;<a href="" data-toggle="popover" data-trigger="hover" title="Fasting Blood Glucose" data-content="A fasting glucose is a blood glucose test that determines the amount of a type of sugar,called glucose,in the blood before breakfast in the morning."><i class="fa fa-info-circle"></i></a>&nbsp; </span> </h5>
@@ -327,11 +299,7 @@
                             </span>
     </div>
 </div>
-<div class="col-lg-12 col-md-12 col-sm-12">
-    <div class="col-lg-12 col-md-12 col-sm-12 margin-top-15">
-        <hr/>
-    </div>
-</div>
+
 <div class="col-lg-6 col-md-6 col-sm-12 margin-top-15">
     <div class="col-lg-8 col-md-7 col-sm-7 padding-top-4 padding-right-0 padding-right-0">
         <h5>Postprandial Blood Glucose <small>(mg/dL)</small> <span class="pull-right">:</span><span class="pull-right">&nbsp;<a href="" data-toggle="popover" data-trigger="hover" title="Postprandial Blood Glucose" data-content="A postprandial glucose is a blood glucose test that determines the amount of a type of sugar, called glucose in the blood after a meal."><i class="fa fa-info-circle"></i></a>&nbsp; </span> </h5>
@@ -343,13 +311,6 @@
                             </span>
     </div>
 </div>
-<div class="col-lg-12 col-md-12 col-sm-12">
-    <div class="col-lg-12 col-md-12 col-sm-12 margin-top-15">
-        <hr/>
-    </div>
-</div>
-
-
 <div class="col-lg-6 col-md-6 col-sm-12 margin-top-15">
     <div class="col-lg-8 col-md-7 col-sm-7  padding-top-4 padding-right-0 padding-right-0">
         <h5>Random Blood Glucose <small>(mg/dL)</small> <span class="pull-right">:</span><span class="pull-right">&nbsp;<a href="" data-toggle="popover" data-trigger="hover" title="Random Blood Glucose" data-content="A random glucose is a blood glucose test that determines the amount of a type of sugar, called glucose in the blood after meal anytime a day."><i class="fa fa-info-circle"></i></a>&nbsp; </span> </h5>
@@ -462,7 +423,7 @@
          </span>
         </span>
         <span ng-show="userProfile.unitPreference==2" >
-           <input class="demography_input"  name="targetWeight"  ng-model="demography.targetweight" maxlength="5" ng-required="demography.userPlanType==2 || demography.userPlanType == 3" onkeypress="return validateFloatKeyPress(this,event);"  ng-change="planChangeValidation(demography.userPlanType);maxTargetWeightCheck(demography.targetweight);"/>
+           <input class="demography_input"  name="targetWeight"  ng-model="demography.targetweight" maxlength="6" ng-required="demography.userPlanType==2 || demography.userPlanType == 3" onkeypress="return validateFloatKeyPress(this,event);"  ng-change="planChangeValidation(demography.userPlanType);maxTargetWeightCheck(demography.targetweight);"/>
         <span class="error-message textarea-errormessage40-right60" ng-show="!demographyForm.targetWeight.$error.required&&maxTargetWeight" style="top:0;left: 30px;"><span>Please&nbsp;Enter&nbsp;Valid&nbsp;Weight.</span></span>
         <span class="error-message textarea-errormessage40" ng-show="!demographyForm.targetWeight.$error.required&&weightlossError"><span>Should&nbsp;be&nbsp;less&nbsp;than&nbsp;your&nbsp;weight</span></span>
         <span class="error-message textarea-errormessage40" ng-show="!demographyForm.targetWeight.$error.required&&weightgainError"><span>Should&nbsp;be&nbsp;greater&nbsp;than&nbsp;your&nbsp;weight</span></span>
@@ -513,7 +474,7 @@
 </div>
 <div class="col-lg-12 col-md-12 col-sm-12"><hr/></div>
 <div class="col-lg-12 col-md-12 col-sm-12 text-center margin-tb-10">
-    <a href="" class="btn register_button" ng-disabled="isCleanDemography() || demographyForm.$invalid || weightlossError || weightgainError || maxheight || maxweightkgs || maxweight || maxTargetWeightKgs || maxTargetWeight"  ng-click="doUpdateDemography()" >Save Changes</a>
+    <a href="" class="btn register_button" ng-disabled="isCleanDemography() || demographyForm.$invalid || weightlossError || weightgainError || maxheight || maxweightkgs ||  maxweight || maxTargetWeightKgs || maxTargetWeight"  ng-click="doUpdateDemography()" >Save Changes</a>
     <a href="#dashboard" class="btn cancel_button">Cancel</a>
 </div>
 </form>

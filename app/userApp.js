@@ -1052,6 +1052,21 @@ userApp.directive('validateEmail', function() {
     };
 });
 
+//Check for All Charactor  Validation
+userApp.directive('validateAllCharacters', function() {
+    var ALL_CHARACTERS = /^[a-zA-Z0-9?=.*!@#$%^&*_\-\S\s]+$/;
+
+    return {
+        require: 'ngModel',
+        restrict: '',
+        link: function(scope, elm, attrs, ctrl) {
+            // only apply the validator if ngModel is present and Angular has added the Integer validator
+            ctrl.$validators.validateEmail = function(modelValue) {
+                return  ctrl.$isEmpty(modelValue) || ALL_CHARACTERS .test(modelValue);
+            };
+        }
+    };
+});
 
 //Check For PhoneNumber Validation
 userApp.directive('validatePhoneNumber', function() {

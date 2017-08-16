@@ -145,6 +145,19 @@ commonApp.controller('CommonController',['$scope','requestHandler','Flash','$rou
       }
     };
 
+
+
+    //To check maximum Height
+    $scope.maxHeightInches=false;
+    $scope.maxHeightCheck = function(height){
+        if(height <=11){
+            $scope.maxHeightInches=false;
+        }
+        else if(height >11){
+            $scope.maxHeightInches=true;
+        }
+
+    };
     $scope.returnToCalculate=function(){
         $scope.showForm=true;
     };
