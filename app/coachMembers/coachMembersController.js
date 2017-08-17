@@ -1,7 +1,7 @@
 /**
  * Created by Deemsys on 9/21/2015.
  */
-var coachApp = angular.module('coachApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','angularUtils.directives.dirPagination']);
+var coachApp = angular.module('coachApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','angularUtils.directives.dirPagination','angular-nicescroll']);
 
 coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter",function($scope,requestHandler,$filter) {
 
@@ -21,6 +21,8 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
                         }                           
                     });                   
                 }
+            if($scope.clients.length>0)
+                $scope.doGetClientsDetailsByCoach($scope.clients[0].userid);
             $scope.loaded=false;
             $scope.paginationLoad=true;
         });
@@ -33,7 +35,34 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
             $scope.groupsList=$scope.groupsList.concat(response.data.Groups);
             $scope.groupsList=$scope.groupsList.concat({"id": null, "coachid": null, "groupname": "Un Assigned", "status": 1});
         })
-    }
+    };
+
+
+    //Duplicate value For clients individual profile view
+
+    $scope.doGetClientsDetailsByCoach= function (id){
+        $scope.coachclientdetails={};
+        $scope.member = {
+            status: 'member-view'
+        };
+
+        requestHandler.getRequest("getUserProfile/"+id, "").then(function(response){
+
+            $scope.coachclientdetails=response.data.userprofile;
+            $scope.coachclientdetails.age = "-";
+
+        $scope.viewload=true;
+
+    });
+    };
+
+    $scope.doMessagetool=function(){
+
+        $(".ember1275").click(function(){
+            $(".msg-overlay-list-bubble").hide();
+            $("#ember1275").hide();
+        });
+    };
 
     //Initial Load
     $scope.init = function(){
@@ -41,6 +70,7 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
         $scope.groupsList=[{"id": 0, "coachid": null, "groupname": "All Clients", "status": 1}];
         $scope.doGetGroupList();
         $scope.doGetMyMembers(0);
+        $scope.doGetClientsDetailsByCoach(0);
     };
 
     // Search Food Type
@@ -120,3 +150,10 @@ coachApp.filter('startsWithLetterMember', function () {
         return filtered;
     };
 });
+
+// render image to view in list
+coachApp.filter('trusted', ['$sce', function ($sce) {
+    return function(url) {
+        return $sce.trustAsResourceUrl(url);
+    };
+}]);
