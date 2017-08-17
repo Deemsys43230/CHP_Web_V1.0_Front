@@ -6809,7 +6809,7 @@ h4.count-text{
 }
 
 .margin-left-30{
-    margin0-left: 30px !important;
+    margin-left: 30px !important;
 }
 
 
@@ -17174,6 +17174,8 @@ select.date:focus {
 
 .client-content {
     height: 120px;
+    width: 135px;
+    border-radius: 10px;
     -webkit-box-shadow: inset 0px 0px 3px rgba(0,0,0,0.3);
     -moz-box-shadow: inset 0px 0px 3px rgba(0,0,0,0.3);
     box-shadow: inset 0px 0px 3px rgba(0,0,0,0.3);
@@ -17197,7 +17199,15 @@ select.date:focus {
     -moz-box-shadow: inset 0px 0px 3px rgba(0,0,0,0.3);
     box-shadow: inset 0px 0px 3px rgba(0,0,0,0.3);
 }
-
+.demo-font{
+    font-size: xx-large;
+    text-align: center;
+    color: deepskyblue;
+    padding: 30px 22px;
+}
+.margin-rl-30 {
+    margin: 0 30px!important;
+}
 /*For Sticky Notes*/
 
 .sticky-notes{
@@ -17221,7 +17231,13 @@ select.date:focus {
     z-index: 10 !important;
 }
 .notesSpan{
-    background-color: #6488bf;
-    padding: 3px 15px 3px 15px;
+    background-color: #5a4c05;
     color: #fff;
+}
+.activity{
+    font-weight: 500;
+    color: #666;
+    background-color: #f9f9f9;
+    border-radius: 10px !important;
+    border: 2px solid #ddd !important;
 }

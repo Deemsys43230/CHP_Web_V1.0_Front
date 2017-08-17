@@ -55,20 +55,17 @@
                 </div>
             </div>
             <div class="col-lg-4 col-md-4 col-sm-4 no-padding">
-                <span class="notesSpan margin-left-100">Notes </span>
+                <span class="col-lg-12 col-sm-12 col-md-12 notesSpan text-center">Notes </span>
                 <div ng-model="invitationDetails.referral">
                     <textarea id="stickyNotes" style="overflow:auto" class="sticky-notes"></textarea>
                 </div>
             </div>
         </div>
-        <div class="col-lg-12 col-md-12 col-sm-12 margin-top-10 no-padding border-bottom">
-            <h2 class="text-color"><strong><i class="fa fa-male"></i>&nbsp;&nbsp;DEMOGRAPHY</strong></h2>                    
-            <div class="col-lg-12 col-md-12 col-sm-12">
-                <div class="text-center" style="font-size: 17px;">Basic Details</div>
-            </div>
+        <div class="col-lg-12 col-md-12 col-sm-12 margin-top-10 no-padding">
+            <h2 class="classic-title text-color"><span class="sub-title"><strong><i class="fa fa-male"></i>&nbsp;&nbsp;DEMOGRAPHY</strong></span></h2>   
             <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12 no-padding margin-top-15">
-                    <div class="col-lg-3 col-md-3 col-sm-3 font">
+                <div class="col-lg-12 col-md-12 col-sm-12 padding-rl-10 margin-top-15">
+                    <div class="col-lg-3 col-sm-3 col-md-3 demo-font client-content margin-rl-30">
                         <span ng-show="coachclientdetails.unitPreference==1">
                             <span ng-model="demography.weight">156</span>
                         </span>
@@ -76,45 +73,66 @@
                             <span  ng-model="demography.weight">28</span>                                       
                         </span></br/></br/>
                         <span class="text-bold">
-                            <h4>Height <span ng-show="coachclientdetails.unitPreference==1"><small>(cms)</small></span> <span ng-show="coachclientdetails.unitPreference==2"><small>(feet,inches)</small></span></h4>
-                        </span>
-                    </div>   
-                    <div class="col-lg-3 col-md-3 col-sm-3 font">
-                        <span ng-show="coachclientdetails.unitPreference==1">
-                            <span ng-model="demography.weight">52</span>
-                        </span>
-                        <span ng-show="coachclientdetails.unitPreference==2" >
-                            <span ng-model="demography.weight">24.5</span>                                           
-                        </span><br/><br/>   
-                        <span class="text-bold">
-                            <h4>Weight <span ng-show="coachclientdetails.unitPreference==1"><small>(kgs)</small></span> <span ng-show="coachclientdetails.unitPreference==2"><small>(lbs)</small></span></h4>
-                        </span>
+                                <h4>Height <span ng-show="coachclientdetails.unitPreference==1"><small>(cms)</small></span> <span ng-show="coachclientdetails.unitPreference==2"><small>(feet,inches)</small></span></h4>
+                            </span>
+                        </div>   
+                        <div class="col-lg-3 col-sm-3 col-md-3 demo-font client-content margin-rl-30">
+                            <span ng-show="coachclientdetails.unitPreference==1">
+                                <span ng-model="demography.weight">52</span>
+                            </span>
+                            <span ng-show="coachclientdetails.unitPreference==2" >
+                                <span ng-model="demography.weight">24.5</span>                                           
+                            </span><br/><br/>   
+                            <span class="text-bold">
+                                <h4>Weight <span ng-show="coachclientdetails.unitPreference==1"><small>(kgs)</small></span> <span ng-show="coachclientdetails.unitPreference==2"><small>(lbs)</small></span></h4>
+                            </span>
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 demo-font client-content margin-rl-30">
+                            <span ng-model="demography.bmi"> 20.93 </span><br/><br/>
+                            <span class="text-bold">
+                                <h5>BMI <small>(Kg/m<sup>2</sup>)</small></h5>
+                            </span>                                    
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 demo-font client-content margin-rl-30">
+                            <span ng-model="demography.target"> 65 </span><br/><br/>
+                            <span class="text-bold">
+                                <h5>Target Weight</h5>
+                            </span>
+                        </div>
                     </div>
-                    <div class="col-lg-3 col-md-3 col-sm-3 font">
-                        <span ng-model="demography.bmi"> 20.93 </span><br/><br/>
-                        <span class="text-bold">
-                            <h5>BMI <small>(Kg/m<sup>2</sup>)</small></h5>
-                        </span>                                    
-                    </div>
-                    <div class="col-lg-3 col-md-3 col-sm-3 font">
-                        <span ng-model="demography.target"> 65 </span><br/><br/>
-                        <span class="text-bold">
-                            <h5>Target Weight</h5>
-                        </span>
-                    </div>
-                </div>
-                <div class="col-lg-12 col-sm-12 col-md-12 margin-top-20 margin-bottom-10">
-                    <div class="col-lg-4 col-md-4 col-sm-4">
-                        <span class="text-bold">User Type<span>:</span></span>                                   
-                        <span ng-model="demography.type"> Diabetic </span>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4">
-                        <span class="text-bold">Plan Type<span>:</span></span>
-                        <span ng-model="demography.plan"> Weight Loss </span>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4">
-                        <span class="text-bold">Activity Level<span>:</span></span>
-                        <span ng-model="demography.activity"> Heavy </span>
+                    <div class="col-md-12 col-lg-12 col-sm-12 padding-rl-10 margin-top-10">
+                        <div class="col-md-1 col-lg-1">
+                        </div>
+                        <div class="col-lg-3 col-sm-3 col-md-3 margin-left-30">
+                            <div class="col-md-12 col-lg-12 col-sm-12 no-padding text-bold margin-top-10">User Type</div>
+                            <div class="margin-top-10">
+                                <img style="width:45px;" src="../../images/obese.png"/>
+                                <!-- <img style="width:45px;" src="../../images/diabetes.png"/> -->
+                            </div>
+                            <div class="margin-top-10">
+                                <div>Diabetic</div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-3 col-md-3">
+                            <div class="col-md-12 col-lg-12 col-sm-12 no-padding text-bold margin-top-10">Plan Type</div>
+                            <div class="margin-top-10">
+                                <img style="width:45px;" src="../../images/obese.png"/>
+                            </div>
+                            <div class="margin-top-10">
+                                <div>Diabetic</div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-3 col-md-3">
+                            <div class="col-md-12 col-lg-12 col-sm-12 no-padding text-bold margin-top-10">Activity Level</div>
+                                <div class="margin-top-10">
+                                    <img style="width:45px;" src="../../images/obese.png"/>
+
+                                </div>
+                                <div class="margin-top-10">
+                                    <div>Diabetic</div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -283,13 +301,13 @@
             </div>
         </div>
         <div class="col-lg-12 col-md-12 col-sm-12">
-            <h2 class="text-color"><strong><i class="fa fa-male"></i>&nbsp;&nbsp;DAILY ACTIVITY</strong></h2>
-            <div class="col-md-12 col-lg-12 col-sm-12 border margin-top-10">
-                <div class="col-lg-3 col-md-3 col-sm-3">
-                    <div class="new-update ">
+            <h2 class="classic-title text-color"><span class="sub-title"><strong><i class="fa fa-male"></i>&nbsp;&nbsp;DAILY ACTIVITY</strong></span></h2>   
+            <div class="col-md-12 col-lg-12 col-sm-12 margin-top-10">
+                <div class="col-lg-2 col-md-2 col-sm-2 no-padding activity margin-rl">
+                    <div class="new-update">
                         <div class="col-md-12 col-lg-12 col-sm-12 sleep-textcolor text-bold margin-top-5">Sleep</div>
                         <div class="col-md-4 col-lg-4 col-sm-4 no-padding margin-top-5">
-                            <img style="width: 40px;height: 40px;" src="../../images/sleep.png"/>
+                            <img class="img-width" src="../../images/sleep.png"/>
                         </div>
                         <div class="col-md-8 col-lg-8 col-sm-8 no-padding">
                             <div class="text-bold" ><small>{{wearable.sleep==null?"N/A":wearable.sleep}}</small></div>
@@ -297,11 +315,11 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-2 col-md-2 col-sm-2 no-padding">
+                <div class="col-lg-2 col-md-2 col-sm-2 no-padding activity margin-rl">
                     <div class="new-update">
                         <div class="col-md-12 col-lg-12 col-sm-12 heart-textcolor text-bold margin-top-5">Heart&nbsp;Beat</div>
                         <div class="col-md-4 col-lg-4 col-sm-4 no-padding margin-top-5">
-                            <img src="../../images/bloodpressure.png"/>
+                            <img class="img-width" src="../../images/bloodpressure.png"/>
                         </div>
                         <div class="col-md-8 col-lg-8 col-sm-8 no-padding">
                             <div class="text-bold"><small>{{wearable.restingheartrate==null?"N/A":wearable.restingheartrate}}</small></div>
@@ -309,11 +327,11 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-2 col-md-2 col-sm-2 no-padding">
+                <div class="col-lg-2 col-md-2 col-sm-2 no-padding activity margin-rl">
                     <div class="new-update">
                         <div class=" col-md-12 col-lg-12 col-sm-12 water-textcolor margin-top-5 text-bold">Water&nbsp;Level</div>
                         <div class="col-md-4 col-lg-4 col-sm-4 no-padding margin-top-5">
-                            <img src="../../images/fat.png"/>
+                            <img class="img-width" src="../../images/fat.png"/>
                         </div>
                         <div class="col-md-8 col-lg-8 col-sm-8 no-padding">
                             <div class="text-bold" style="font-size: 78%"><small>{{waterlog}}/{{waterlogoz}}</small></div>
@@ -321,11 +339,11 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-2 col-md-2 col-sm-2 no-padding">
+                <div class="col-lg-2 col-md-2 col-sm-2 no-padding activity margin-rl">
                     <div class="new-update">
                         <div class="col-md-12 col-lg-12 col-sm-12 floor-textcolor text-bold margin-top-5">Floors</div>
                         <div class="col-md-4 col-lg-4 col-sm-4 no-padding margin-top-5">
-                            <img src="../../images/floor.png"/>
+                            <img class="img-width" src="../../images/floor.png"/>
                         </div>
                         <div class="col-md-8 col-lg-8 col-sm-8 no-padding">
                             <div class="text-bold"><small>{{wearable.floors==null?"N/A":(wearable.floors==0?"N/A":wearable.floors)}}</small></div>
@@ -333,11 +351,11 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-2 col-lg-2 col-sm-2 no-padding">
+                <div class="col-md-2 col-lg-2 col-sm-2 no-padding activity margin-rl">
                     <div class="new-update">
                         <div class="col-md-12 col-lg-12 col-sm-12 steps-textcolor text-bold margin-top-5">Steps</div>
                         <div class="col-md-4 col-lg-4 col-sm-4 no-padding margin-top-5">
-                            <img src="../../images/step.png"/>
+                            <img class="img-width" src="../../images/step.png"/>
                         </div>
                         <div class="col-md-8 col-lg-8 col-sm-8 no-padding">
                             <div class="text-bold"><small>{{wearable.steps==null?"N/A":(wearable.steps==0?"N/A":wearable.steps)}}</small></div>
@@ -347,11 +365,11 @@
                 </div>
             </div>
             <div class="col-md-12 col-lg-12 col-sm-12 margin-top-10 pull-right">
-                <div class="col-md-3 col-lg-3 col-sm-3">
+                <div class="col-md-2 col-lg-2 col-sm-2 no-padding activity margin-rl">
                     <div class="new-update">
                         <div class="col-md-12 col-lg-12 col-sm-12 bloodoxygen-textcolor text-bold margin-top-5"><small>Blood&nbsp;Oxygen</small></div>
                         <div class="col-md-4 col-lg-4 col-sm-4 no-padding margin-top-5">
-                            <img style="width: 40px;height: 40px;" src="../../images/bloodoxygen.png"/>
+                            <img class="img-width" src="../../images/bloodoxygen.png"/>
                         </div>
                         <div class="col-md-8 col-lg-8 col-sm-8 no-padding">
                             <div class="text-bold"><small>{{wearable.bloodoxygen==null?"N/A":wearable.bloodoxygen}}</small></div>
@@ -359,11 +377,11 @@
                         </div>
                     </div>
                 </div>                    
-                <div class="col-md-2 col-lg-2 col-sm-2 no-padding">
+                <div class="col-md-2 col-lg-2 col-sm-2 no-padding activity margin-rl">
                     <div class="new-update">
                         <div class="col-md-12 col-lg-12 col-sm-12 bloodpessure-textcolor text-bold margin-top-5"><small>Blood&nbsp;Pressure</small></div>
-                        <div class="col-md-4 col-lg-4 col-sm-4 no-padding margin-top-10">
-                            <img style="width: 40px;height: 40px;" class="img-width" src="../../images/heart1.gif"/>
+                        <div class="col-md-4 col-lg-4 col-sm-4 no-padding margin-top-5">
+                            <img class="img-width" src="../../images/heart1.gif"/>
                         </div>
                         <div class="col-md-8 col-lg-8 col-sm-8 no-padding">
                             <div class="text-bold" title="Systolic Blood Pressure/Diastolic Blood Pressure"><small>{{wearable.systolic==null?"N/A":wearable.systolic}} / {{wearable.diastolic==null?"N/A":wearable.diastolic}}</small></div>
@@ -371,11 +389,11 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-2 col-lg-2 col-sm-2 no-padding">
+                <div class="col-md-2 col-lg-2 col-sm-2 no-padding activity margin-rl">
                     <div class="new-update">
                         <div class="col-md-12 col-lg-12 col-sm-12 bloodglucose-textcolor text-bold margin-top-5"><small>Blood&nbsp;Glucose</small></div>
-                        <div class="col-md-4 col-lg-4 col-sm-4 no-padding margin-top-10">
-                            <img style="height: 32px;" src="../../images/bloodglucose.png"/>
+                        <div class="col-md-4 col-lg-4 col-sm-4 no-padding margin-top-5">
+                            <img class="img-width" src="../../images/bloodglucose.png"/>
                         </div>
                         <div class="col-md-8 col-lg-8 col-sm-8 no-padding">
                             <div class="text-bold" title="Random Glucose/Fasting Glucose"><small>{{wearable.randombloodglucose==null?"N/A":wearable.randombloodglucose}} / {{wearable.fastingbloodglucose==null?"N/A":wearable.fastingbloodglucose}}</small></div>
@@ -383,11 +401,11 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-2 col-lg-2 col-sm-2 no-padding">
+                <div class="col-md-2 col-lg-2 col-sm-2 no-padding activity margin-rl">
                     <div class="new-update text-center">
                         <div class="col-md-12 col-lg-12 col-sm-12 bodytemperature-textcolor text-bold margin-top-5"><small>Body&nbsp;Temperature</small></div>
-                        <div class="col-md-4 col-lg-4 col-sm-4 no-padding margin-top-10">
-                            <img style="height: 32px;" src="../../images/smalltemp.png"/>
+                        <div class="col-md-4 col-lg-4 col-sm-4 no-padding margin-top-5">
+                            <img class="img-width" src="../../images/smalltemp.png"/>
                         </div>
                         <div class="col-md-8 col-lg-8 col-sm-8 no-padding">
                             <div class="text-bold"><small>{{wearable.bodytemperature==null?"N/A":wearable.bodytemperature}}</small></div>
@@ -397,8 +415,8 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-12 col-md-12 col-sm-12 margin-top-10 no-padding border-bottom">
-            <h2 class="text-color"><strong><i class="fa fa-male"></i>&nbsp;&nbsp;GRAPHS</strong></h2>
+        <div class="col-lg-12 col-md-12 col-sm-12 margin-top-10 no-padding">
+            <h2 class="classic-title text-color"><span class="sub-title"><strong><i class="fa fa fa-bar-chart"></i>&nbsp;&nbsp;GRAPHS</strong></span></h2>
             <h2 class="text-center"><strong>&nbsp;&nbsp;Activity</strong></h2>
             <div class="col-lg-6 col-md-6 col-sm-12 no-padding">
                 <div id="excersize" style="height:350px;"></div>
