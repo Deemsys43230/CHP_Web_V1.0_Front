@@ -161,8 +161,7 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                     }]
                 },
                 controller:'AuthorizeThanksSubscribePageController'
-            }).
-            
+            }).            
             when('/my-members', {
                 templateUrl: 'views/member.html',
                 resolve: {
@@ -178,6 +177,22 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                     }]
                 },
                 controller:'CoachMembersController'
+            }).
+            when('/coach-invitations', {
+                templateUrl: 'views/coach-invitations.html',
+                resolve: {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'coachApp',
+                            files:[
+                                '../../plugin/popup/style.css',
+                                '../../angular/angular-utils-pagination/dirPagination.js',
+                                '../../app/coachInvitations/coachInvitationController.js'
+                            ]
+                        })
+                    }]
+                },
+                controller:'CoachInvitationController'
             }).
             when('/member-view/:id', {
                 templateUrl: 'views/member-view.html',
