@@ -2437,8 +2437,13 @@ input[type="submit"] {
 .padding-top-5{
     padding-top: 5px !important;
 }
+
 .padding-top-15{
     padding-top: 15px !important;
+}
+
+.padding-right-37{
+    padding-right: 37px !important;
 }
 
 .height-310{

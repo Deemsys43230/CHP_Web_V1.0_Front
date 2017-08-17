@@ -386,6 +386,24 @@ adminApp.controller('CourseAdminController',['$scope','requestHandler','Flash','
         });
     };
 
+    // doChangeAutoReviewSetting Auto Review Admin Course
+    $scope.doChangeAutoReviewSetting=function(){
+        requestHandler.getRequest("admin/canreview/","").then(function(response){
+            // canAutoReview=1
+            if(response.data.Response_status==1){
+                successMessage(Flash,"Successfully Updated");
+            }else{
+                errorMessage(Flash,"Please try again later!");
+            }
+        });   
+    };
+
+    $scope.getCourseCanReviewSetting=function(){
+         requestHandler.getRequest("admin/getappdetails/","").then(function(response){
+            $scope.canReview=response.data.App_settings[0].canautoreview;
+         });
+    };
+
     $scope.viewinit = function(){
         $scope.courseDetails();
         $scope.courseSectionList();
@@ -393,6 +411,7 @@ adminApp.controller('CourseAdminController',['$scope','requestHandler','Flash','
 
     $scope.publishedCourses=function(){
     $scope.courselist();
+    $scope.getCourseCanReviewSetting();
     $scope.pendingcourselist();
     };
 

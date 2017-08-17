@@ -1474,6 +1474,7 @@ adminApp.config([
             return $ocLazyLoad.load({
               name: 'adminApp',
               files: [
+                '../../css/custom-inputs.css',
                 '../../app/course/courseController.js',
                 '../../angular/angular-utils-pagination/dirPagination.js'
               ]
@@ -1492,6 +1493,7 @@ adminApp.config([
               name: 'adminApp',
               files: [
                 '../../plugin/popup/style.css',
+                '../../css/custom-inputs.css',
                 '../../angular/angular-utils-pagination/dirPagination.js',
                 '../../app/course/courseController.js'
               ]
