@@ -145,9 +145,9 @@ userApp.controller('FriendsController',['$scope','requestHandler','Flash','Frien
     $scope.doViewMembers= function (id) {
         $scope.viewDetails=1;
         $scope.loaded = true;
-        requestHandler.getRequest("getUserIndividualDetail/"+id,"").then(function(response){
-            $scope.myImgSrc = $sce.trustAsResourceUrl(response.data.getUserIndividualDetail.imageurl+"?decache="+Math.random());
-            $scope.viewMemberDetails = response.data.getUserIndividualDetail;
+        requestHandler.getRequest("getUserProfile/"+id,"").then(function(response){
+            $scope.myImgSrc = $sce.trustAsResourceUrl(response.data.userprofile.imageurl+"?decache="+Math.random());
+            $scope.viewMemberDetails = response.data.userprofile;
             //View the image in ng-src for view testimonials
 
             if($scope.viewMemberDetails.about==null){

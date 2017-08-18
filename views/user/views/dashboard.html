@@ -671,7 +671,7 @@
                                                     </span>
                                                    <span ng-show="userProfile.unitPreference==2">
                                                       <input class="profile_input weightoverride" name="weightlbs" ng-model="weightlog"  ng-change="maxCheck()" maxlength="6" required validate-zero/>
-                                                           <span class="error-message textarea-errormessage40-right60" ng-show="!weightLogForm.weightlbs.$error.required&&maxweight"><span style="bottom: 70px;">Please&nbsp;Enter&nbsp;Valid&nbsp;Weight.</span></span>
+                                                           <span class="error-message textarea-errormessage40-right60" ng-show="!weightLogForm.weightlbs.$error.required&&maxweightlbs"><span style="bottom: 70px;">Please&nbsp;Enter&nbsp;Valid&nbsp;Weight.</span></span>
                                                            <span ng-show="weightLogForm.weightlbs.$dirty&&weightLogForm.weightlbs.$invalid">
                                                            <span class="error-message textarea-errormessage10" ng-show="weightLogForm.weightlbs.$error.required"><span>Required.</span></span>
                                                            <span class="error-message textarea-errormessage10" ng-show="weightLogForm.weightlbs.$error.validateZero"><span>Invalid&nbsp;Format.</span></span>
@@ -697,8 +697,8 @@
 
                                                 </div>
                                                 <div class="col-lg-12 col-md-12 col-sm-12 text-center margin-top-20">
-                                                    <button onclick="return false;" class="btn-dis suggest_button override-width no-margin-bottom" ng-disabled="weightLogForm.$invalid ||spinner || disableUpdateWeight || maxweight || maxfat" ng-click="weightLogEntry(1)">
-                                                      <span ng-if="spinner"><span class="three-quarters-loader">Loading…</span></span>{{weightUpdateText}}</button><br/>
+                                                    <button onclick="return false;" class="btn-dis suggest_button override-width no-margin-bottom" ng-disabled="weightLogForm.$invalid ||spinner || disableUpdateWeight || maxweight || maxfat || maxweightlbs" ng-click="weightLogEntry(1)">
+                                                      <span ng-if="spinner"><span class="three-quarters-loader">Loading…</span></span>{{weightUpdateText}}</button><br/>{{maxweightlbs}}   {{maxweight}}
                                                 </div>
                                             </div>
                                         </form>
@@ -2192,7 +2192,7 @@
 
 <script type="text/javascript" src="../../js/script.js"></script>
         <script>
-    /*        //for dashboard main date
+//for dashboard main date
             function daterangepicker() {
                 $("#main-date").click();
                 var options = {
@@ -2206,7 +2206,79 @@
                     angular.element(document.getElementById('main-date')).scope().initialLoadFoodAndExercise(start.format('DD/MM/YYYY'));
                     document.getElementById("main-start-date").value = start.format('DD/MM/YYYY');
                 });
-            };*/
+
+//for food intake and excersize view graph date picker
+
+                $("#history-graph").click();
+                $("#history-view").click();
+                var options = {
+                    maxDate : new Date(),
+                    startDate : new Date(),
+                    endDate : new Date(),
+                    singleDatePicker: false,
+                    opens:'left',
+                    showDropdowns: true,
+                    dateLimit: {
+                        days: 31
+                    },
+                    ranges:{
+                        'Last Week': [moment().subtract(6,'days'), moment()]
+                    }
+                };
+
+                $('#history-graph').daterangepicker(options, function(start, end, label) {
+                    document.getElementById("history-start").value = start.format('DD/MM/YYYY');
+                    document.getElementById("history-end").value = end.format('DD/MM/YYYY');
+                });
+                $('#history-view').daterangepicker(options, function(start, end, label) {
+                    document.getElementById("history-start").value = start.format('DD/MM/YYYY');
+                    document.getElementById("history-end").value = end.format('DD/MM/YYYY');
+                });
+                var startDate=new Date();
+                startDate.setDate(startDate.getDate()-6);
+                console.log(startDate);
+
+                $("#history-graph-date").click();
+                var options = {
+                    maxDate : new Date(),
+                    startDate :startDate,
+                    endDate : new Date(),
+                    singleDatePicker: false,
+                    opens:'left',
+                    showDropdowns: true,
+                    dateLimit: {
+                        days: 31
+                    },
+                    ranges:{
+                        'Last Week': [moment().subtract(6,'days'), moment()],
+                        'Last 2 Weeks': [moment().subtract(13,'days'), moment()],
+                        'Last 3 Weeks': [moment().subtract(20,'days'), moment()],
+                        'This Month': [moment().subtract(0,'month').startOf('month'), moment()],
+                        'Last Month': [moment().subtract(1,'month').startOf('month'), moment().subtract(1,'month').endOf('month')]
+                    }
+                };
+
+                $('#history-graph-date').daterangepicker(options, function(start, end, label) {
+                    document.getElementById("history-start").value = start.format('DD/MM/YYYY');
+                    document.getElementById("history-end").value = end.format('DD/MM/YYYY');
+                });
+
+
+                $("#weight-log-date1").click();
+                var options = {
+                    drops:'down',
+                    opens:'left',
+                    maxDate : new Date(),
+                    singleDatePicker: true
+                };
+
+                $('#weight-log-date1').daterangepicker(options, function(start, end, label) {
+                    document.getElementById("weightLogDate1").value = start.format('DD/MM/YYYY');
+                    var scope = angular.element($("#weight-log-date1")).scope();
+                    scope.doGetWeightLog(start.format('DD/MM/YYYY'),2);
+                });
+            };
+    //For Fat value keypress event
             $(function () {
                 $('#fatLog').bind('paste', function () {
                     var self = this;

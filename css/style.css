@@ -17125,6 +17125,13 @@ select.date:focus {
     max-width: 80% !important;
     height: auto !important;
  }
+ /*User coach relationship status*/
+.relationship-text{
+    padding-left: 180px !important;
+    margin-top: -15px;
+    color: #3c763d;
+}
+ }
 
  /*For coach filter */
 .modal-content-coach {

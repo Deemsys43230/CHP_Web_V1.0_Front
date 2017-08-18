@@ -1420,13 +1420,13 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
 
 
         //For maximum Weight validation lbs
-        $scope.maxweight=false;
+        $scope.maxweightlbs=false;
         $scope.maxCheck = function(){
-            if(parseFloat($scope.weightlog)<=2204.4){
-                $scope.maxweight=false;
+            if(parseFloat($scope.weightlog) <=2204.4){
+                $scope.maxweightlbs=false;
             }
-            else if($scope.weightlog>2204.4){
-                $scope.maxweight=true;
+            else if(parseFloat($scope.weightlog)>2204.4){
+                $scope.maxweightlbs=true;
             }
 
         };
@@ -3062,6 +3062,10 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
                     valueSuffix: titles.suffix
                 },
                 yAxis: {
+                    minPadding: 0,
+                    maxPadding: 0,
+                    min: 1,
+
                     title: {
                         text: titles.yaxis
                     },
@@ -4497,93 +4501,6 @@ function slidemenu() {
         }
     });
 };
-//for dashboard main date
-function daterangepicker() {
-    $("#main-date").click();
-    var options = {
-        maxDate : new Date(),
-        endDate : new Date(),
-        opens:'left',
-        singleDatePicker: true
-    };
-
-    $('#main-date').daterangepicker(options, function(start, end, label) {
-        angular.element(document.getElementById('main-date')).scope().initialLoadFoodAndExercise(start.format('DD/MM/YYYY'));
-        document.getElementById("main-start-date").value = start.format('DD/MM/YYYY');
-    });
-
-//for food intake and excersize view graph date picker
-
-    $("#history-graph").click();
-    $("#history-view").click();
-    var options = {
-        maxDate : new Date(),
-        startDate : new Date(),
-        endDate : new Date(),
-        singleDatePicker: false,
-        opens:'left',
-        showDropdowns: true,
-        dateLimit: {
-            days: 31
-        },
-        ranges:{
-            'Last Week': [moment().subtract(6,'days'), moment()]
-        }
-    };
-
-    $('#history-graph').daterangepicker(options, function(start, end, label) {
-        document.getElementById("history-start").value = start.format('DD/MM/YYYY');
-        document.getElementById("history-end").value = end.format('DD/MM/YYYY');
-    });
-    $('#history-view').daterangepicker(options, function(start, end, label) {
-        document.getElementById("history-start").value = start.format('DD/MM/YYYY');
-        document.getElementById("history-end").value = end.format('DD/MM/YYYY');
-    });
-    var startDate=new Date();
-    startDate.setDate(startDate.getDate()-6);
-    console.log(startDate);
-
-    $("#history-graph-date").click();
-    var options = {
-        maxDate : new Date(),
-        startDate :startDate,
-        endDate : new Date(),
-        singleDatePicker: false,
-        opens:'left',
-        showDropdowns: true,
-        dateLimit: {
-            days: 31
-        },
-        ranges:{
-            'Last Week': [moment().subtract(6,'days'), moment()],
-            'Last 2 Weeks': [moment().subtract(13,'days'), moment()],
-            'Last 3 Weeks': [moment().subtract(20,'days'), moment()],
-            'This Month': [moment().subtract(0,'month').startOf('month'), moment()],
-            'Last Month': [moment().subtract(1,'month').startOf('month'), moment().subtract(1,'month').endOf('month')]
-        }
-    };
-
-    $('#history-graph-date').daterangepicker(options, function(start, end, label) {
-        document.getElementById("history-start").value = start.format('DD/MM/YYYY');
-        document.getElementById("history-end").value = end.format('DD/MM/YYYY');
-    });
-
-
-    $("#weight-log-date1").click();
-    var options = {
-        drops:'down',
-        opens:'left',
-        maxDate : new Date(),
-        singleDatePicker: true
-    };
-
-    $('#weight-log-date1').daterangepicker(options, function(start, end, label) {
-        document.getElementById("weightLogDate1").value = start.format('DD/MM/YYYY');
-        var scope = angular.element($("#weight-log-date1")).scope();
-        scope.doGetWeightLog(start.format('DD/MM/YYYY'),2);
-    });
-};
-
 //for food and excersize popup
 function modeltrigger() {
     $("#modal_trigger_food").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });

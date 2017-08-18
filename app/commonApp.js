@@ -703,6 +703,7 @@ commonApp.controller('LoginController',['$scope','requestHandler','Flash','$wind
                 errorMessage(Flash,"Your Account has been disabled!<br/>Please Contact Administrator.");
             }
             if(response.data.Response_status===2){
+                $scope.lastAccessedEmailId=$scope.username;
                 $scope.emailNotVerified=true;
             }
             if(response.data.Response_status===""){
@@ -770,6 +771,8 @@ commonApp.controller('LoginController',['$scope','requestHandler','Flash','$wind
         });
     };
 
+
+
     //Forgot Password
     $scope.doForgotPassword=function(){
         if($scope.linkType==='forgot'){
@@ -806,9 +809,9 @@ commonApp.controller('LoginController',['$scope','requestHandler','Flash','$wind
                 }
             });
         }else{
-            requestHandler.postRequest("verifyEmailId/",{"emailid":$scope.emailid}).then(function(response){
+            requestHandler.postRequest("verifyEmailId/",{"emailid":$scope.lastAccessedEmailId}).then(function(response){
                 if(response.data.Response_status==2){
-                    errorMessage(Flash,"Email ID doesn't Exist!");
+                   errorMessage(Flash,"Email ID doesn't Exist!");
                 }
                 else if(response.data.Response_status==1){
                     $(".reset_password").hide();
@@ -817,7 +820,7 @@ commonApp.controller('LoginController',['$scope','requestHandler','Flash','$wind
                     $(".user_register1").hide();
                     $(".user_login").show();
                     $(".header_title").text('Login');
-                    $scope.emailNotVerified=false;    
+                    $scope.emailNotVerified=false;
                     successMessage(Flash,"Please check your Email! Verification Link Sent Successful!");
                     $scope.forgotPasswordForm.$setPristine();
                 }
