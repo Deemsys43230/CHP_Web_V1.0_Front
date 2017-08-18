@@ -17256,6 +17256,13 @@ select.date:focus {
     float:right;
     margin-right:20px;
 }
+.chat-window .col-md-2, .col-md-10{
+    padding:0;
+}
+.avatar img {
+    display: block;
+    width: 100%;
+}
 .chat-window > div > .panel{
     border-radius: 5px 5px 0 0;
 }

@@ -13,7 +13,6 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
         requestHandler.getRequest("/coach/myclients/","").then(function(response){
             //Intialize the array
             $scope.selectedGroupId=[];
-
             $.each($scope.groupsList,function(index,value){
                 if(value.isSelected)
                     $scope.selectedGroupId.push(value.id);
@@ -23,7 +22,6 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
                 $scope.clients=response.data.clients;
             else
                 {
-                    alert($scope.selectedGroupId);
                     $.each(response.data.clients,function(index,value){
                         if($scope.selectedGroupId.indexOf(value.groupid)!=-1){
                             $scope.clients.push(value);
@@ -53,21 +51,44 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
 
 
     //Duplicate value For clients individual profile view
-
     $scope.doGetClientsDetailsByCoach= function (id){
         $scope.coachclientdetails={};
         $scope.member = {
             status: 'member-view'
         };
+        if(id!=0){
+             requestHandler.getRequest("/getUserProfile/"+id, "").then(function(response){
+                $scope.coachclientdetails=response.data.userprofile;
+                $scope.coachclientdetails.age = "-";
+                $scope.viewload=true;
 
-        requestHandler.getRequest("getUserProfile/"+id, "").then(function(response){
+                //Get Chat Message
+                $scope.doGetChatMessage(id);
 
-            $scope.coachclientdetails=response.data.userprofile;
-            $scope.coachclientdetails.age = "-";
+          });
+        }
+       
+    };
 
-        $scope.viewload=true;
+    //Do Get Chat Message
+    $scope.doGetChatMessage=function(id){
+        $scope.currentChatTargetId=id;
+        $scope.getMessageParam={"targetid":id,"offset":0};
+        requestHandler.postRequest("/readMessage/",$scope.getMessageParam).then(function(response){
+            $scope.chatMessages=response.data.chats;
+            $scope.chat={"message":""};
+            setTimeout(function(){ $('.msg_container_base').scrollTop($('.msg_container_base')[0].scrollHeight); }, 500);
+            
+        });
+    };
 
-    });
+    //Do Send Chat Message
+    $scope.doSendChatMessage=function(){
+             $scope.getSendMessageParam={"targetid":$scope.currentChatTargetId,"message":$scope.chat.message};
+            requestHandler.postRequest("/sendMessage/",$scope.getSendMessageParam).then(function(response){
+                $scope.doGetChatMessage($scope.currentChatTargetId);
+            });
+       
     };
 
 
@@ -104,21 +125,6 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
         };
     };
 
-    //Budget value get it from user side
-/*    $scope.getBudget=function(date){
-        requestHandler.postRequest("user/getTotalCalorieDetailForDate/",{"date":date}).then(function(response){
-            $scope.budgetDetails = response.data.BudgetDetail;
-            $scope.Budget= $scope.budgetDetails.Budget;
-            $scope.Net = $scope.budgetDetails.Net;
-            if($scope.budgetDetails.OverorUnderStatus==1){
-                $scope.currentGainColour="red";
-            }
-            else if($scope.budgetDetails.OverorUnderStatus==2){
-                $scope.currentGainColour="limegreen";
-            }
-         });
-    };
-*/
     //Initial Load
     $scope.init = function(){
         $scope.paginationLoad=false;
