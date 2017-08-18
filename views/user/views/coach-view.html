@@ -7,7 +7,7 @@
         </div>
     </div>
     <div ng-show="usercoachlist.length>0">
-        <div class="col-lg-8 col-md-8 col-sm-8 height-320 margin-bottom-10">
+        <div class="col-lg-8 col-md-8 col-sm-8 margin-bottom-10">
             <h2><strong>COACH DETAILS</strong></h2>  
 
           <table class="table table-bordered table-striped margin-top-10">
@@ -25,15 +25,15 @@
                 </tr>
               <tr>
                   <td class="col-md-4">Gender</td>
-                  <td class="col-md-8">{{usercoachdetails.gender==1?'Male':Female}}</td>
+                  <td class="col-md-8">{{usercoachdetails.gender==null?'NA':(usercoachdetails.gender==1?'Male':Female)}}</td>
               </tr>
               <tr>
                   <td class="col-md-4">Business Name</td>
-                  <td class="col-md-8">{{usercoachdetails.businessname==null?"-":usercoachdetails.businessname}}</td>
+                  <td class="col-md-8">{{usercoachdetails.businessname==null?"NA":usercoachdetails.businessname}}</td>
               </tr>
               <tr>
                   <td class="col-md-4">Business Address</td>
-                  <td class="col-md-8">{{usercoachdetails.businessaddress==null?"-":usercoachdetails.businessaddress}}</td>
+                  <td class="col-md-8">{{usercoachdetails.businessaddress==null?"NA":usercoachdetails.businessaddress}}</td>
               </tr>
                 <tr>
                     <td class="col-md-4">Phone Number</td>
