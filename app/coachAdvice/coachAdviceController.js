@@ -5,10 +5,10 @@ coachApp.controller('CoachAdviceController',['$scope','requestHandler','Flash',f
 
     var original="";
     $scope.doGetCoachMyAdvice=function(){
-        requestHandler.getRequest("coach/getCoachAdvicesByCoach/", "").then(function(response){
+        requestHandler.getRequest("coach/getquote/", "").then(function(response){
 
-            original=angular.copy(response.data.User_Settings);
-            $scope.myadvice=response.data.User_Settings;
+            original=angular.copy(response.data.quote);
+            $scope.myadvice=response.data.quote;
 
         },function(){
             errorMessage(Flash,"Please try again later!")
@@ -17,7 +17,7 @@ coachApp.controller('CoachAdviceController',['$scope','requestHandler','Flash',f
 
     $scope.doInsertOrUpdateMyAdvice=function(){
 
-        requestHandler.postRequest("coach/insertorupdatecoachadvices/",$scope.myadvice).then(function(response){
+        requestHandler.postRequest("coach/updatequote/",$scope.myadvice).then(function(response){
             $scope.doGetCoachMyAdvice();
             successMessage(Flash,"Successfully Updated");
         }, function () {
@@ -28,7 +28,7 @@ coachApp.controller('CoachAdviceController',['$scope','requestHandler','Flash',f
 
     $scope.doEnableDisableMyAdvice=function(){
 
-        requestHandler.putRequest("coach/updateCoachAdvicesStatus/","").then(function(response){
+        requestHandler.getRequest("coach/enableordisablequote/","").then(function(response){
 
             $scope.doGetCoachMyAdvice();
             successMessage(Flash,"Successfully Updated");
