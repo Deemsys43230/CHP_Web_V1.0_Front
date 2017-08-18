@@ -47,20 +47,19 @@
            
         </div>
         <div class="col-lg-4 col-md-4 col-sm-4" style="text-align: center;">
-            <div class="col-md-12 col-md-12 col-sm-12">
+            <div class="col-md-12 col-md-12 col-sm-12 margin-top-10">
             <img ng-src="{{coachuserdetails.imageurl | trusted}}"/>
             <h3 class="text-orange margin-bottom-10 text-uppercase margin-top-7">{{coachuserdetails.name}}</h3>
             <h5 class="margin-bottom-10 margin-top-7"><strong>{{coachuserdetails.emailid}}</strong></h5>
-            <span><a href="" class="btn register_button">Send Invitation</a></span>
+            <span><a href="" class="btn register_button" ng-click="doSendInvitationByCoach(coachuserdetails.userid)" ng-show="!invitationSent">Send Invitation</a></span>
+            <h3  class="text-success" ng-show="invitationSent"><i class="fa fa-check-circle">&nbsp;&nbsp;Invitation Sent </i></h3>
         </div>
     </div>
-
+    </div>
     <div ng-show="coachuserlist.length==0" class="text-center margin-top-50">
         <img src="../../images/no-coach.png" width="200" height="200"/>
-        <h1 class="text-gray">NO USER FOUND!!!</h1>
+        <h1 class="text-gray">NO USER FOUND!!!</h1><br/>
     </div>
-
-</div>
 
 <script type="text/javascript" src="../../js/script.js"></script>
 

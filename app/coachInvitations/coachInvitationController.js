@@ -5,24 +5,48 @@ var coachApp = angular.module('coachApp', ['ngRoute','oc.lazyLoad','requestModul
 
 coachApp.controller('CoachInvitationController',['$scope','requestHandler','Flash',function($scope,requestHandler,Flash) {
 
-    $scope.doGetUserListByCoach=function(){
+
+
+    $scope.doGetUserListByCoach=function(loadUserDetail){   
+
+        if(loadUserDetail){
+            $scope.coachuserlist=[];
+            $scope.scrollnation.scrollEndCount=-1;
+        }
+
        $scope.scrollnation.scrollEndCount= $scope.scrollnation.scrollEndCount+1;
        $scope.coachUserPagination={
 							       	"limit":$scope.scrollnation.itemsPerScroll,
-									"searchname":"",
+									"searchname":$scope.coachsearch,
 									"offset":($scope.scrollnation.scrollEndCount)*$scope.scrollnation.itemsPerScroll
 							       }	
-       requestHandler.postRequest("coach/coachreadinvitations/",$scope.coachUserPagination).then(function(response){
-         $scope.coachuserlist=$scope.coachuserlist.concat(response.data.users);
-         if($scope.coachuserlist.length>0){
-       		 $scope.doGetUserDetailsByCoach($scope.coachuserlist[0].userid);
-    		}
-       }, function(){
-       	  errorMessage(Flash,"Please try again later!");
-       });
 
+       if($scope.invitationType==1){
+             $scope.request= requestHandler.postRequest("coach/coachreadinvitations/",$scope.coachUserPagination);           
+       }else{
+             $scope.request=requestHandler.postRequest("coach/searchuser/",$scope.coachUserPagination);      
+       }
+
+        $scope.request.then(function(response){
+
+             $scope.coachuserlist=$scope.coachuserlist.concat(response.data.users);
+             if(loadUserDetail){
+                 if($scope.coachuserlist.length>0){
+                     $scope.doGetUserDetailsByCoach($scope.coachuserlist[0].userid);
+                    }
+            }
+           }, function(){
+              errorMessage(Flash,"Please try again later!");
+           });
+       
+       
     };
 
+    $scope.$watch("invitationType",function(){
+         $scope.doGetUserListByCoach(true);
+    });
+
+ 
     $scope.doGetUserDetailsByCoach=function(id){
          $scope.coachuserdetails={};        
          $scope.viewload=true;
@@ -57,10 +81,63 @@ coachApp.controller('CoachInvitationController',['$scope','requestHandler','Flas
          });
     };
 
+    
+    $scope.doSendInvitationByCoach=function(userid){
+        $scope.sendInvitationParam={'userid':userid, 'emailid':null}
+          requestHandler.postRequest("coach/sendinvitationtouser/",$scope.sendInvitationParam).then(function(response){
+            if(response.data.Response_status==1){
+                successMessage(Flash,"Invitation Sent Successfully");
+                $scope.invitationSent=true;
+                $scope.doGetUserDetailsByCoach(userid);
+            }else{
+                errorMessage(Flash,"Please try again later!");
+            }
+          });
+    };
+
+    $scope.doSendEmailInvitationByCoach=function(emailid){
+        $scope.sendEmailInvitationParam={'userid':null, 'emailid':emailid}
+          requestHandler.postRequest("coach/sendinvitationtouser/",$scope.sendEmailInvitationParam).then(function(response){
+            if(response.data.Response_status==1){
+                successMessage(Flash,"Invitation Sent Successfully");
+                $scope.coachUserInit();
+            }else{
+                errorMessage(Flash,"Please try again later!");
+            }
+          });
+    };
+
+    $scope.doInviteUserPopup=function(){
+        $scope.sendEmail={};
+        $scope.inviteUserForm.$setPristine();
+      $(function(){
+            $("#lean_overlay").fadeTo(1000);
+            $("#coachSendEmail").fadeIn(600);
+            $(".common_model").show();
+             $scope.shouldBeOpen = true;
+        });
+
+        $(".modal_close").click(function(){
+            $(".common_model").hide();
+            $("#coachSendEmail").hide();
+            $("#lean_overlay").hide();
+            $scope.shouldBeOpen = false;
+        });
+
+        $("#lean_overlay").click(function(){
+            $(".common_model").hide();
+            $("#coachSendEmail").hide();
+            $("#lean_overlay").hide();
+            $scope.shouldBeOpen = false;
+        });
+    };
+
 	$scope.coachUserInit=function(){
+
 		$scope.scrollnation={"itemsPerScroll":4, "scrollEndCount": -1}
 		$scope.coachuserlist=[];
-		$scope.doGetUserListByCoach(true);
+		$scope.invitationType=1;
+        $scope.coachsearch="";
 	};
 
 }]);
