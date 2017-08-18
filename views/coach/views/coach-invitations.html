@@ -9,19 +9,20 @@
                     <a href="#dashboard" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back <span class="hidden-md hidden-sm">to Dashboard</span></a>
                 </div>
                 
-                <h5><button type="submit" class="invite-button modal-inviteUsers pull-right" ng-click="doInviteUserPopup()"><i class="fa fa-user-plus"></i>&nbsp;&nbsp;Invite User</button></h5>
-
+                <h5><button type="submit" class="invite-button modal-inviteUsers pull-right margin-left-5" ng-click="doInviteUserPopup()"><i class="fa fa-user-plus"></i>&nbsp;&nbsp;Invite User</button></h5>
                 <div flash-message="2000" class="col-lg-3 col-md-3 col-sm-3 pull-right no-padding"></div>
+                
                 <h5 class="classic-title"><a href="#my-members"><i class="fa fa-money"></i>&nbsp;&nbsp;CLIENTS</a>&nbsp;&nbsp;|&nbsp;&nbsp;<span><a href="#coach-invitations"><i class="fa fa-dollar"></i>&nbsp;&nbsp;INVITATIONS</a></span></h5>
             </div>           
             <div class="col-lg-4 col-md-5 col-sm-5 margin-bottom-10">
 
                 <div>
-                    <input type="radio" id="interest" value="1" ng-model="invitationType" checked="checked"><label for="interest">Interested Users</label>&nbsp;<input type="radio" id="new" value="2" ng-model="invitationType"><label for="new">New User</label>
+                    <input type="radio" id="interest" value="1" ng-model="invitationType" checked="checked"><label for="interest">Interested Users</label>
+                    <input type="radio" id="new" value="2" ng-model="invitationType"><label for="new">New User</label>
                 </div>
                 
                 <div class="search-content">
-                    <input class="coach-input" ng-change="doGetUserListByCoach(true);" ng-model="coachsearch" placeholder="Search user here..">
+                    <input class="coach-input" ng-change="doGetUserListByCoach(true);" ng-model="coachsearch" placeholder="Search users here..">
                 </div>
                 <div ng-if="loaded">
                     <div class="loader-style">
@@ -74,13 +75,7 @@
         <!-- Register Form -->
         <div class="common_model">
             <form name="inviteUserForm" novalidate>
-                <p>Recipient Name</p>
-               <input type="text" name="name" ng-model="sendEmail.sendername" ng-pattern="/^ *([a-zA-Z]+ ?)+ *$/" maxlength="50" required focus-me="shouldBeOpen"/>
-               <span ng-show="inviteUserForm.name.$dirty&&inviteUserForm.name.$invalid && !inviteUserForm.name.$pristine">
-                   <span class="error-message" ng-show="inviteUserForm.name.$error.required"><span>Required.</span></span>
-                    <span class="error-message" ng-show="inviteUserForm.name.$error.pattern"><span>Invalid&nbsp;Format.</span></span>
-               </span>
-               <p>Recipient Email ID</p>
+               <p>Inviting User Email ID</p>
                <input type="text" name="email" ng-model="sendEmail.useremailid" maxlength="50" required focus-me="shouldBeOpen" validate-email/>
                <span ng-show="inviteUserForm.email.$dirty&&inviteUserForm.email.$invalid && !inviteUserForm.email.$pristine">
                    <span class="error-message" ng-show="inviteUserForm.email.$error.required"><span>Required.</span></span>
