@@ -16,40 +16,40 @@
             <div class=" col-lg-6 col-md-6 col-sm-6 margin-top-5">  
                 <h2 class="text-color"><strong>{{coachclientdetails.name}}</strong></h2>
                 <div class="col-lg-12 col-md-12 col-sm-12 row margin-bottom-10">
-                    <div class="col-md-5 col-lg-5 col-sm-5 no-padding text-bold">
+                    <div class="col-lg-6 col-md-6 col-sm-6 no-padding text-bold">
                         Gender <span class="pull-right">:</span>
                     </div>
-                    <div class="col-lg-7 col-md-7 col-sm-7">
+                    <div class="col-lg-6 col-md-6 col-sm-6">
                         {{coachclientdetails.gender==1?"Male":"Female"}}
                     </div>
-                    <div class="col-md-5 col-lg-5 col-sm-5 no-padding text-bold">
+                    <div class="col-lg-6 col-md-6 col-sm-6 no-padding text-bold">
                         Age <span class="pull-right">:</span>
                     </div>
-                    <div class="col-lg-7 col-md-7 col-sm-7">
+                    <div class="col-lg-6 col-md-6 col-sm-6">
                         {{coachclientdetails.age}}
                     </div>
-                    <div class="col-md-5 col-lg-5 col-sm-5 no-padding text-bold">
+                    <div class="col-lg-6 col-md-6 col-sm-6 no-padding text-bold">
                         Country <span class="pull-right">:</span>
                     </div>
-                    <div class="col-lg-7 col-md-7 col-sm-7">
+                    <div class="col-lg-6 col-md-6 col-sm-6">
                         {{coachclientdetails.country ==IN?"India":"USA"}}
                     </div>
-                    <div class="col-md-5 col-lg-5 col-sm-5 no-padding text-bold">
+                    <div class="col-lg-6 col-md-6 col-sm-6 no-padding text-bold">
                         Prefer Food <span class="pull-right">:</span>
                     </div>
-                    <div class="col-lg-7 col-md-7 col-sm-7">
+                    <div class="col-lg-6 col-md-6 col-sm-6">
                         {{coachclientdetails.preferfood ==1?"Indian":"Western"}}
                     </div>
-                    <div class="col-md-5 col-lg-5 col-sm-5 no-padding text-bold">
+                    <div class="col-lg-6 col-md-6 col-sm-6 no-padding text-bold">
                         Unit Preference<span class="pull-right">:</span>
                     </div>
-                    <div class="col-lg-7 col-md-7 col-sm-7">
+                    <div class="col-lg-6 col-md-6 col-sm-6">
                         {{coachclientdetails.unitPreference ==1?"Metric":"US"}}
                     </div>
-                    <div class="col-md-5 col-lg-5 col-sm-5 no-padding text-bold">
+                    <div class="col-md-6 col-lg-6 col-sm-6 no-padding text-bold">
                         About <span class="pull-right">:</span>
                     </div>
-                    <div class="col-lg-7 col-md-7 col-sm-7">
+                    <div class="col-lg-6 col-md-6 col-sm-6">
                         {{coachclientdetails.about}}
                     </div>
                 </div>
@@ -65,18 +65,21 @@
             <h2 class="classic-title text-color"><span class="sub-title"><strong><i class="fa fa-male"></i>&nbsp;&nbsp;DEMOGRAPHY</strong></span></h2>   
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 padding-rl-10 margin-top-15">
-                    <div class="col-lg-3 col-sm-3 col-md-3 demo-font client-content margin-rl-30">
-                        <span ng-show="coachclientdetails.unitPreference==1">
-                            <span ng-model="demography.weight">156</span>
-                        </span>
-                        <span ng-show="coachclientdetails.unitPreference==2" >
-                            <span  ng-model="demography.weight">28</span>                                       
-                        </span></br/></br/>
-                        <span class="text-bold">
+                    <div class="col-lg-3 col-sm-3 col-md-3 text-center">
+                        <div class="demo-font client-content">
+                            <span ng-show="coachclientdetails.unitPreference==1">
+                                <span ng-model="demography.weight">156</span>
+                            </span>
+                            <span ng-show="coachclientdetails.unitPreference==2" >
+                                <span  ng-model="demography.weight">28</span>                                       
+                            </span></br/></br/>
+                            <span class="text-bold">
                                 <h4>Height <span ng-show="coachclientdetails.unitPreference==1"><small>(cms)</small></span> <span ng-show="coachclientdetails.unitPreference==2"><small>(feet,inches)</small></span></h4>
                             </span>
-                        </div>   
-                        <div class="col-lg-3 col-sm-3 col-md-3 demo-font client-content margin-rl-30">
+                        </div> 
+                    </div>  
+                    <div class="col-lg-3 col-sm-3 col-md-3 text-center">
+                        <div class="demo-font client-content">
                             <span ng-show="coachclientdetails.unitPreference==1">
                                 <span ng-model="demography.weight">52</span>
                             </span>
@@ -87,224 +90,213 @@
                                 <h4>Weight <span ng-show="coachclientdetails.unitPreference==1"><small>(kgs)</small></span> <span ng-show="coachclientdetails.unitPreference==2"><small>(lbs)</small></span></h4>
                             </span>
                         </div>
-                        <div class="col-lg-2 col-md-2 col-sm-2 demo-font client-content margin-rl-30">
+                    </div>
+                    <div class="col-lg-3 col-sm-3 col-md-3 text-center">
+                        <div class="demo-font client-content">
                             <span ng-model="demography.bmi"> 20.93 </span><br/><br/>
                             <span class="text-bold">
                                 <h5>BMI <small>(Kg/m<sup>2</sup>)</small></h5>
                             </span>                                    
                         </div>
-                        <div class="col-lg-2 col-md-2 col-sm-2 demo-font client-content margin-rl-30">
+                    </div>
+                    <div class="col-lg-3 col-sm-3 col-md-3 text-center">
+                        <div class="demo-font client-content">
                             <span ng-model="demography.target"> 65 </span><br/><br/>
                             <span class="text-bold">
                                 <h5>Target Weight</h5>
                             </span>
                         </div>
                     </div>
-                    <div class="col-md-12 col-lg-12 col-sm-12 padding-rl-10 margin-top-10">
-                        <div class="col-md-1 col-lg-1">
+                    <div class="col-md-12 col-lg-12 col-sm-12 margin-top-10">
+                        <div class="col-md-1 col-lg-1"></div>
+                        <div class="col-lg-3 col-sm-3 col-md-3 text-center">
+                            <h4 class="text-bold margin-top-10">User Type</h4>
+                            <img class="margin-top-10" style="width:60px;" src="../../images/obese_diabetes.png"/>
+                                <!-- <img style="width:45px;" src="../../images/diabetes.jpg"/> -->
+                            <div class="margin-top-10">Diabetic</div>
                         </div>
-                        <div class="col-lg-3 col-sm-3 col-md-3 margin-left-30">
-                            <div class="col-md-12 col-lg-12 col-sm-12 no-padding text-bold margin-top-10">User Type</div>
-                            <div class="margin-top-10">
-                                <img style="width:45px;" src="../../images/obese.png"/>
-                                <!-- <img style="width:45px;" src="../../images/diabetes.png"/> -->
-                            </div>
-                            <div class="margin-top-10">
-                                <div>Diabetic</div>
-                            </div>
+                        <div class="col-lg-3 col-sm-3 col-md-3 text-center">
+                            <h4 class="text-bold margin-top-10">Plan Type</h4>
+                            <img class="margin-top-10" style="width:60px;" src="../../images/weight_loss.png"/>
+                            <div class="margin-top-10">Weight Loss</div>
                         </div>
-                        <div class="col-lg-3 col-sm-3 col-md-3">
-                            <div class="col-md-12 col-lg-12 col-sm-12 no-padding text-bold margin-top-10">Plan Type</div>
-                            <div class="margin-top-10">
-                                <img style="width:45px;" src="../../images/obese.png"/>
-                            </div>
-                            <div class="margin-top-10">
-                                <div>Diabetic</div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-sm-3 col-md-3">
-                            <div class="col-md-12 col-lg-12 col-sm-12 no-padding text-bold margin-top-10">Activity Level</div>
-                                <div class="margin-top-10">
-                                    <img style="width:45px;" src="../../images/obese.png"/>
-
-                                </div>
-                                <div class="margin-top-10">
-                                    <div>Diabetic</div>
-                                </div>
-                            </div>
+                        <div class="col-lg-3 col-sm-3 col-md-3 text-center">
+                            <h4 class="text-bold margin-top-10">Activity Level</h4>
+                            <img class="margin-top-10" style="width:60px;" src="../../images/very-heavy.png"/>
+                            <div class="margin-top-10">Heavy</div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-12 col-md-12 col-sm-12">
-                <div class="accordion-group puul-right">
-                    <div id="collapseTwo" class="accordion-body collapse">
-                        <div class="accordion-inner medical-content">
-                            <div class="col-lg-12 col-md-12 col-sm-12 margin-top-10 margin-bottom-5 no-padding border">
-                                <div class="col-lg-12 col-md-12 col-sm-12">
-                                    <div class="text-center" style="font-size: 17px;">Basic Nutrients</div>
-                                </div>
-                                <div class="col-lg-12 col-md-12 col-sm-12">
-                                    <div class="col-lg-6 col-md-6 col-sm-6 no-padding margin-top-15">
-                                        <div class="col-lg-6 col-md-6 col-sm-6 no-padding">
-                                            <h5>Hip<small>(Inches)</small><span class="pull-right">:</span></h5>
-                                        </div>
-                                        <div class="col-lg-6 col-md-6 col-sm-6 padding-right-0">
-                                            <span ng-model="demography.protein"> 30 </span>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 col-md-6 col-sm-6 no-padding margin-top-15">
-                                        <div class="col-lg-6 col-md-6 col-sm-6 no-padding">
-                                            <h5>Waist <small>(Inches)</small><span class="pull-right">:</span></h5>
-                                        </div>
-                                        <div class="col-lg-6 col-md-6 col-sm-6 padding-right-0">
-                                            <span ng-model="demography.fat"> 75 </span>
-                                        </div>
-                                    </div>                        
-                                </div>
-                                <div class="col-lg-12 col-md-12 col-sm-12">
-                                    <div class="col-lg-6 col-md-6 col-sm-6 no-padding margin-top-15">
-                                        <div class="col-lg-6 col-md-6 col-sm-6 no-padding">
-                                            <h5>Protein <small>(g)</small> <span class="pull-right">:</span></h5>
-                                        </div>
-                                        <div class="col-lg-6 col-md-6 col-sm-6 padding-right-0">
-                                            <span ng-model="demography.protein"> 73 </span>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 col-md-6 col-sm-6 no-padding margin-top-15">
-                                        <div class="col-lg-6 col-md-6 col-sm-6 no-padding">
-                                            <h5>Fat  <small>(g)</small> <span class="pull-right">:</span></h5>
-                                        </div>
-                                        <div class="col-lg-6 col-md-6 col-sm-6 padding-right-0">
-                                            <span ng-model="demography.fat"> 52 </span>
-                                        </div>
-                                    </div>                        
-                                </div>
-                                <div class="col-lg-12 col-md-12 col-sm-12 margin-bottom-5">
-                                    <div class="col-lg-6 col-md-6 col-sm-6 no-padding margin-top-15">
-                                        <div class="col-lg-6 col-md-6 col-sm-6 no-padding">
-                                            <h5>Carbo Hydrate <small>(g)</small> <span class="pull-right">:</span></h5>
-                                        </div>
-                                        <div class="col-lg-6 col-md-6 col-sm-6 padding-right-0">
-                                            <span ng-model="demography.carbo"> 214 </span>
-                                        </div>
-                                    </div>                        
-                                    <div class="col-lg-6 col-md-6 col-sm-6 no-padding margin-top-15">
-                                        <div class="col-lg-6 col-md-6 col-sm-6 no-padding">
-                                            <h5>Fiber <small>(g)</small> <span class="pull-right">:</span></h5>
-                                        </div>
-                                        <div class="col-lg-6 col-md-6 col-sm-6 padding-right-0">
-                                            <span ng-model="demography.fibre"> 23 </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-12 col-md-12 col-sm-12 no-padding margin-top-10 margin-bottom-5">
-                                <div class="col-lg-12 col-md-12 col-sm-12 margin-bottom-10">
-                                    <div class="text-center" style="font-size: 17px;">Medical Details</div>
-                                </div>
-                                <div class="col-lg-12 col-md-12 col-sm-12 no-padding margin-top-10">
-                                    <div class="col-lg-6 col-md-6 col-sm-6">
-                                        <div class="col-lg-9 col-md-7 col-sm-8 no-padding">
-                                            <h5>Blood Group <span class="pull-right">:</span></h5>
-                                        </div>
-                                        <div class="col-lg-3 col-md-5 col-sm-4">
-                                            <span>O+ve</span>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 col-md-6 col-sm-6 no-padding">
-                                        <div class="col-lg-9 col-md-7 col-sm-8 no-padding">
-                                            <h5>HbA<sub>1c</sub> <small>(%)</small> <span class="pull-right">:</span> </h5>
-                                        </div>
-                                        <div class="col-lg-3 col-md-5 col-sm-4">
-                                            <span> -- </span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-12 col-md-12 col-sm-12 no-padding margin-top-10">
-                                    <div class="col-lg-6 col-md-6 col-sm-6">
-                                        <div class="col-lg-9 col-md-9 col-sm-9 no-padding">
-                                            <h5>Systolic Blood Pressure <small>(mmHg)</small><span class="pull-right">:</span></h5>
-                                        </div>
-                                        <div class="col-lg-3 col-md-3 col-sm-3">
-                                            <span ng-model="demography.systolicbloodpressure"> -- </span>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 col-md-6 col-sm-6 no-padding">
-                                        <div class="col-lg-9 col-md-9 col-sm-9 no-padding">
-                                            <h5>Diastollic Blood Pressure <small>(mmHg)</small> <span class="pull-right">:</span></h5>
-                                        </div>
-                                        <div class="col-lg-3 col-md-3 col-sm-3 padding-right-0">
-                                            <span ng-model="demography.diastolicbloodpressure"> -- </span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-12 col-md-12 col-sm-12 no-padding margin-top-10">
-                                    <div class="col-lg-6 col-md-6 col-sm-6">
-                                        <div class="col-lg-9 col-md-9 col-sm-9 no-padding">
-                                            <h5>HDL Cholestrol <small>(mg/dL)</small> <span class="pull-right">:</span></h5>
-                                        </div>
-                                        <div class="col-lg-3 col-md-3 col-sm-3">
-                                            <span> -- </span>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 col-md-6 col-sm-6 no-padding">
-                                        <div class="col-lg-9 col-md-9 col-sm-9 no-padding">
-                                            <h5>LDL Cholestrol <small>(mg/dL)</small> <span class="pull-right">:</span></h5>
-                                        </div>
-                                        <div class="col-lg-3 col-md-3 col-sm-3">
-                                            <span> -- </span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-12 col-md-12 col-sm-12 no-padding margin-top-10">
-                                    <div class="col-lg-6 col-md-6 col-sm-6">
-                                        <div class="col-lg-9 col-md-9 col-sm-9 no-padding">
-                                            <h5>Triglycerides <small>(mg/dL)</small> <span class="pull-right">:</span></h5>
-                                        </div>
-                                        <div class="col-lg-3 col-md-3 col-sm-3">
-                                            <span> -- </span>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 col-md-6 col-sm-6 no-padding">
-                                        <div class="col-lg-9 col-md-9 col-sm-9 no-padding">
-                                            <h5>Random Blood Glucose <small>(mg/dL)</small> <span class="pull-right">:</span> </h5>
-                                        </div>
-                                        <div class="col-lg-3 col-md-3 col-sm-3">
-                                            <span> -- </span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-12 col-md-12 col-sm-12 no-padding margin-top-10">
-                                    <div class="col-lg-6 col-md-6 col-sm-6">
-                                        <div class="col-lg-9 col-md-9 col-sm-9 no-padding">
-                                            <h5>Fasting Blood Glucose <small>(mg/dL)</small> <span class="pull-right">:</span></h5>
-                                        </div>
-                                        <div class="col-lg-3 col-md-3 col-sm-3">
-                                            <span> -- </span>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 col-md-6 col-sm-6 no-padding">
-                                        <div class="col-lg-9 col-md-9 col-sm-9 no-padding">
-                                            <h5>Postprandial Blood Glucose <small>(mg/dL)</small> <span class="pull-right">:</span></h5>
-                                        </div>
-                                        <div class="col-lg-3 col-md-3 col-sm-3">
-                                            <span> -- </span>
-                                        </div>
-                                    </div>                                            
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <a href="" id="ShowMore" class="text-color pull-right" data-toggle="collapse" data-target="#collapseTwo">Show More...</a>
             </div>
         </div>
-        <div class="col-lg-12 col-md-12 col-sm-12">
-            <h2 class="classic-title text-color"><span class="sub-title"><strong><i class="fa fa-male"></i>&nbsp;&nbsp;DAILY ACTIVITY</strong></span></h2>   
-            <div class="col-md-12 col-lg-12 col-sm-12 margin-top-10">
-                <div class="col-lg-2 col-md-2 col-sm-2 no-padding activity margin-rl">
-                    <div class="new-update">
+        <div class="col-lg-12 col-md-12 col-sm-12 margin-top-10">
+            <div class="accordion-group puul-right">
+                <div id="collapseTwo" class="accordion-body collapse">
+                    <div class="accordion-inner medical-content">
+                        <div class="col-lg-12 col-md-12 col-sm-12 margin-top-10 margin-bottom-5 no-padding border">
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <div class="text-center" style="font-size: 17px;">Basic Nutrients</div>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <div class="col-lg-6 col-md-6 col-sm-6 no-padding margin-top-10">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 no-padding">
+                                        <h5>Hip<small>(Inches)</small><span class="pull-right">:</span></h5>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 padding-right-0">
+                                        <span ng-model="demography.protein"> 30 </span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6 no-padding margin-top-10">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 no-padding">
+                                        <h5>Waist <small>(Inches)</small><span class="pull-right">:</span></h5>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 padding-right-0">
+                                        <span ng-model="demography.fat"> 75 </span>
+                                    </div>
+                                </div>                        
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <div class="col-lg-6 col-md-6 col-sm-6 no-padding margin-top-10">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 no-padding">
+                                        <h5>Protein <small>(g)</small> <span class="pull-right">:</span></h5>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 padding-right-0">
+                                        <span ng-model="demography.protein"> 73 </span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6 no-padding margin-top-10">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 no-padding">
+                                        <h5>Fat  <small>(g)</small> <span class="pull-right">:</span></h5>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 padding-right-0">
+                                        <span ng-model="demography.fat"> 52 </span>
+                                    </div>
+                                </div>                        
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 margin-bottom-5">
+                                <div class="col-lg-6 col-md-6 col-sm-6 no-padding margin-top-10">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 no-padding">
+                                        <h5>Carbo Hydrate <small>(g)</small> <span class="pull-right">:</span></h5>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 padding-right-0">
+                                        <span ng-model="demography.carbo"> 214 </span>
+                                    </div>
+                                </div>                        
+                                <div class="col-lg-6 col-md-6 col-sm-6 no-padding margin-top-10">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 no-padding">
+                                        <h5>Fiber <small>(g)</small> <span class="pull-right">:</span></h5>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 padding-right-0">
+                                        <span ng-model="demography.fibre"> 23 </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 no-padding margin-top-10 margin-bottom-5">
+                            <div class="col-lg-12 col-md-12 col-sm-12 margin-bottom-10">
+                                <div class="text-center" style="font-size: 17px;">Medical Details</div>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 no-padding margin-top-10">
+                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                    <div class="col-lg-9 col-md-7 col-sm-8 no-padding">
+                                        <h5>Blood Group <span class="pull-right">:</span></h5>
+                                    </div>
+                                    <div class="col-lg-3 col-md-5 col-sm-4">
+                                        <span>O+ve</span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6 no-padding">
+                                    <div class="col-lg-9 col-md-7 col-sm-8 no-padding">
+                                        <h5>HbA<sub>1c</sub> <small>(%)</small> <span class="pull-right">:</span> </h5>
+                                    </div>
+                                    <div class="col-lg-3 col-md-5 col-sm-4">
+                                        <span> -- </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 no-padding margin-top-10">
+                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                    <div class="col-lg-9 col-md-9 col-sm-9 no-padding">
+                                        <h5>Systolic Blood Pressure <small>(mmHg)</small><span class="pull-right">:</span></h5>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3 col-sm-3">
+                                        <span ng-model="demography.systolicbloodpressure"> -- </span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6 no-padding">
+                                    <div class="col-lg-9 col-md-9 col-sm-9 no-padding">
+                                        <h5>Diastollic Blood Pressure <small>(mmHg)</small> <span class="pull-right">:</span></h5>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3 col-sm-3 padding-right-0">
+                                        <span ng-model="demography.diastolicbloodpressure"> -- </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 no-padding margin-top-10">
+                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                    <div class="col-lg-9 col-md-9 col-sm-9 no-padding">
+                                        <h5>HDL Cholestrol <small>(mg/dL)</small> <span class="pull-right">:</span></h5>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3 col-sm-3">
+                                        <span> -- </span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6 no-padding">
+                                    <div class="col-lg-9 col-md-9 col-sm-9 no-padding">
+                                        <h5>LDL Cholestrol <small>(mg/dL)</small> <span class="pull-right">:</span></h5>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3 col-sm-3">
+                                        <span> -- </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 no-padding margin-top-10">
+                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                    <div class="col-lg-9 col-md-9 col-sm-9 no-padding">
+                                        <h5>Triglycerides <small>(mg/dL)</small> <span class="pull-right">:</span></h5>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3 col-sm-3">
+                                        <span> -- </span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6 no-padding">
+                                    <div class="col-lg-9 col-md-9 col-sm-9 no-padding">
+                                        <h5>Random Blood Glucose <small>(mg/dL)</small> <span class="pull-right">:</span> </h5>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3 col-sm-3">
+                                        <span> -- </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 no-padding margin-top-10">
+                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                    <div class="col-lg-9 col-md-9 col-sm-9 no-padding">
+                                        <h5>Fasting Blood Glucose <small>(mg/dL)</small> <span class="pull-right">:</span></h5>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3 col-sm-3">
+                                        <span> -- </span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6 no-padding">
+                                    <div class="col-lg-9 col-md-9 col-sm-9 no-padding">
+                                        <h5>Postprandial Blood Glucose <small>(mg/dL)</small> <span class="pull-right">:</span></h5>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3 col-sm-3">
+                                        <span> -- </span>
+                                    </div>
+                                </div>                                            
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <a href="" id="ShowMore" class="text-color pull-right margin-top-10" data-toggle="collapse" data-target="#collapseTwo">Show More...</a>
+        </div>
+        <div class="col-lg-12 col-md-12 col-sm-12 no-padding">  
+            <div class="col-md-8 col-lg-8 col-sm-8 no-padding margin-top-10">
+                <h2 class="classic-title text-color"><span class="sub-title"><strong><i class="fa fa-male"></i>&nbsp;&nbsp;DAILY ACTIVITY</strong></span></h2> 
+                <div class="col-lg-12 col-md-12 col-sm-12 no-padding text-center">
+                    <div class="col-lg-3 col-md-3 col-sm-3 no-padding activity margin-left-30">
                         <div class="col-md-12 col-lg-12 col-sm-12 sleep-textcolor text-bold margin-top-5">Sleep</div>
                         <div class="col-md-4 col-lg-4 col-sm-4 no-padding margin-top-5">
                             <img class="img-width" src="../../images/sleep.png"/>
@@ -314,9 +306,7 @@
                             <div class="text-bold"><small>(minutes)</small></div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-2 col-md-2 col-sm-2 no-padding activity margin-rl">
-                    <div class="new-update">
+                    <div class="col-lg-3 col-md-3 col-sm-3 no-padding activity margin-left-30">
                         <div class="col-md-12 col-lg-12 col-sm-12 heart-textcolor text-bold margin-top-5">Heart&nbsp;Beat</div>
                         <div class="col-md-4 col-lg-4 col-sm-4 no-padding margin-top-5">
                             <img class="img-width" src="../../images/bloodpressure.png"/>
@@ -326,10 +316,8 @@
                             <div class="text-bold"><small>(bpm)</small></div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-2 col-md-2 col-sm-2 no-padding activity margin-rl">
-                    <div class="new-update">
-                        <div class=" col-md-12 col-lg-12 col-sm-12 water-textcolor margin-top-5 text-bold">Water&nbsp;Level</div>
+                    <div class="col-lg-3 col-md-3 col-sm-3 no-padding activity margin-left-30">
+                        <div class=" col-md-12 col-lg-12 col-sm-12 water-textcolor margin-top-5 no-padding text-center text-bold">Water&nbsp;Level</div>
                         <div class="col-md-4 col-lg-4 col-sm-4 no-padding margin-top-5">
                             <img class="img-width" src="../../images/fat.png"/>
                         </div>
@@ -339,8 +327,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-2 col-md-2 col-sm-2 no-padding activity margin-rl">
-                    <div class="new-update">
+                <div class="col-lg-12 col-md-12 col-sm-12 text-center no-padding margin-top-10">
+                    <div class="col-lg-3 col-md-3 col-sm-3 no-padding activity margin-left-30">
                         <div class="col-md-12 col-lg-12 col-sm-12 floor-textcolor text-bold margin-top-5">Floors</div>
                         <div class="col-md-4 col-lg-4 col-sm-4 no-padding margin-top-5">
                             <img class="img-width" src="../../images/floor.png"/>
@@ -350,9 +338,7 @@
                             <div class="text-bold"><small>(floor)</small></div>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-2 col-lg-2 col-sm-2 no-padding activity margin-rl">
-                    <div class="new-update">
+                    <div class="col-lg-3 col-md-3 col-sm-3 no-padding activity margin-left-30">
                         <div class="col-md-12 col-lg-12 col-sm-12 steps-textcolor text-bold margin-top-5">Steps</div>
                         <div class="col-md-4 col-lg-4 col-sm-4 no-padding margin-top-5">
                             <img class="img-width" src="../../images/step.png"/>
@@ -362,12 +348,8 @@
                             <div class="text-bold"><small>(count)</small></div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="col-md-12 col-lg-12 col-sm-12 margin-top-10 pull-right">
-                <div class="col-md-2 col-lg-2 col-sm-2 no-padding activity margin-rl">
-                    <div class="new-update">
-                        <div class="col-md-12 col-lg-12 col-sm-12 bloodoxygen-textcolor text-bold margin-top-5"><small>Blood&nbsp;Oxygen</small></div>
+                    <div class="col-lg-3 col-md-3 col-sm-3 no-padding activity margin-left-30">
+                        <div class="col-md-12 col-lg-12 col-sm-12 bloodoxygen-textcolor text-bold no-padding text-center margin-top-5"><small>Blood&nbsp;Oxygen</small></div>
                         <div class="col-md-4 col-lg-4 col-sm-4 no-padding margin-top-5">
                             <img class="img-width" src="../../images/bloodoxygen.png"/>
                         </div>
@@ -376,10 +358,10 @@
                             <div class="text-bold"><small>(%)</small></div>
                         </div>
                     </div>
-                </div>                    
-                <div class="col-md-2 col-lg-2 col-sm-2 no-padding activity margin-rl">
-                    <div class="new-update">
-                        <div class="col-md-12 col-lg-12 col-sm-12 bloodpessure-textcolor text-bold margin-top-5"><small>Blood&nbsp;Pressure</small></div>
+                </div>
+                <div class="col-md-12 col-lg-12 col-sm-12 no-padding margin-top-10 pull-right">                                    
+                    <div class="col-lg-3 col-md-3 col-sm-3 no-padding activity margin-left-30">
+                        <div class="col-md-12 col-lg-12 col-sm-12 bloodpessure-textcolor text-bold no-padding text-center text-center margin-top-5"><small>Blood&nbsp;Pressure</small></div>
                         <div class="col-md-4 col-lg-4 col-sm-4 no-padding margin-top-5">
                             <img class="img-width" src="../../images/heart1.gif"/>
                         </div>
@@ -388,10 +370,8 @@
                             <div class="text-bold" title="Systolic Blood Pressure/Diastolic Blood Pressure"><small>(mmHg)</small></div>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-2 col-lg-2 col-sm-2 no-padding activity margin-rl">
-                    <div class="new-update">
-                        <div class="col-md-12 col-lg-12 col-sm-12 bloodglucose-textcolor text-bold margin-top-5"><small>Blood&nbsp;Glucose</small></div>
+                    <div class="col-lg-3 col-md-3 col-sm-3 no-padding activity margin-left-30">
+                        <div class="col-md-12 col-lg-12 col-sm-12 bloodglucose-textcolor text-center no-padding text-bold margin-top-5"><small>Blood&nbsp;Glucose</small></div>
                         <div class="col-md-4 col-lg-4 col-sm-4 no-padding margin-top-5">
                             <img class="img-width" src="../../images/bloodglucose.png"/>
                         </div>
@@ -400,10 +380,8 @@
                             <div class="text-bold" title="Random Glucose/Fasting Glucose"><small>(mg/dl)</small></div>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-2 col-lg-2 col-sm-2 no-padding activity margin-rl">
-                    <div class="new-update text-center">
-                        <div class="col-md-12 col-lg-12 col-sm-12 bodytemperature-textcolor text-bold margin-top-5"><small>Body&nbsp;Temperature</small></div>
+                    <div class="col-lg-3 col-md-3 col-sm-3 no-padding activity margin-left-30">
+                        <div class="col-md-12 col-lg-12 col-sm-12 bodytemperature-textcolor text-center no-padding text-bold margin-top-5"><small>Body&nbsp;Temperature</small></div>
                         <div class="col-md-4 col-lg-4 col-sm-4 no-padding margin-top-5">
                             <img class="img-width" src="../../images/smalltemp.png"/>
                         </div>
@@ -411,6 +389,63 @@
                             <div class="text-bold"><small>{{wearable.bodytemperature==null?"N/A":wearable.bodytemperature}}</small></div>
                             <div class="text-bold"><small>(<sup>o</sup>F)</small></div>
                         </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-lg-4 col-sm-4 margin-top-10">
+                <h2 class="classic-title text-color"><span class="sub-title"><strong><i class="fa fa-male"></i>&nbsp;&nbsp;DAILY BUDGETS</strong></span></h2>
+                <div class="row">
+                    <h5 class="col-lg-12 col-md-12 col-sm-12 margin-bottom-5">
+                        Budget Vs Net&nbsp;-&nbsp;
+                        <span style="font-size: small">
+                                <span ng-show="budgetDetails.OverorUnderStatus==1"><span class="fa fa fa-thumbs-down text-red">&nbsp;&nbsp;</span>Over Budget</span>
+                                <span ng-show="budgetDetails.OverorUnderStatus==2"><span class="fa fa fa-thumbs-up text-green">&nbsp;&nbsp;</span>Under Budget</span>
+                        </span>
+                    </h5>
+                        <div class="col-lg-5 col-md-12 col-sm-12 margin-top-10">
+                            <div class="circle-wrapper">
+                                <div class="circle-progress ng-cloak font-14" ng-style="getStyle()">{{Net}}</div>
+                                <div    round-progress
+                                     max="Budget"
+                                     current="Net"
+                                     color="{{currentGainColour}}"
+                                     bgcolor="{{ bgColor }}"
+                                     radius="37"
+                                     semi="isSemi"
+                                     rounded="rounded"
+                                     stroke="6"
+                                     clockwise="clockwise"
+                                     responsive="responsive"
+                                     duration="{{ duration }}"
+                                     animation="{{ currentAnimation }}"
+                                     offset="{{ offset }}">
+                                </div>
+                            </div>
+                            <p class="text-gray text-center">of {{Budget}} cals.</p>
+                        </div>
+
+                    <div class="col-lg-7 col-md-12 col-sm-12">
+                        <div class="label-update">
+                            <span class="label-text">Budget</span>
+                            <span class="label-count blue">{{budgetDetails.Budget}}</span>
+                        </div>
+                        <div class="label-update">
+                            <span class="label-text">Gained</span>
+                            <span class="label-count green">{{budgetDetails.Intake}}</span>
+                        </div>
+                        <div class="label-update">
+                            <span class="label-text">Burnt</span>
+                            <span class="label-count red">{{budgetDetails.Burnt}}</span>
+                        </div>
+                        <div class="label-update">
+                            <span class="label-text">Net</span>
+                            <span class="label-count orange">{{budgetDetails.Net}}</span>
+                        </div>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <!--<h6 ng-show="budgetCheck==0"><div class="label-danger">You are going under our recommended budget value. Please change your weight plan.</div></h6>-->
+                        <h6 ng-show="budgetDetails.OverorUnderStatus==1"><div class="label-danger">You have consumed {{budgetDetails.OverorUnderValue}} more calories. Please do exercise.</div></h6>
+                        <h6 ng-show="budgetDetails.OverorUnderStatus==2"><div class="label-success">You should take {{budgetDetails.OverorUnderValue}} more calories to reach today’s budget.</div></h6>
                     </div>
                 </div>
             </div>
@@ -539,7 +574,7 @@
         <img src="../../images/no-coach-small.png" width="120" height="120"/>
         <h3 class="text-gray">NO CLIENTS FOUND!!!</h3><br/><br/><br/>
     </div>
-</div> 
+</div>    
 
    
 

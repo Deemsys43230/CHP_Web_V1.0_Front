@@ -11,7 +11,7 @@
                 <h5 class="classic-title"><span><a href="#my-members"><i class="fa fa-money"></i>&nbsp;&nbsp;CLIENTS</a></span>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#coach-invitations"><i class="fa fa-dollar"></i>&nbsp;&nbsp;INVITATIONS</a></h5>
             </div>
             <div class="col-lg-3 col-md-3 col-sm-3">
-                <h4 class="classic-title"><span class="sub-title">Members</span><span class="sub-title pull-right"><a type="button" class="btn-sm btn-warning" href="" data-toggle="modal" data-target="#myModal">Filter By Group</a></span></h4>
+                <h4 class="classic-title"><span class="sub-title">Members</span><span class="sub-title pull-right"><a type="button" class="btn-sm btn-warning" href="" data-toggle="modal" data-target="#myModal" data-toggle="tooltip" title={{currentGroupName}}>Filter By Group</a></span></h4>
                 <div class="search-content">
                     <input class="coach-input" ng-model="clientSearch" placeholder="Search clients here..">
                 </div>
@@ -53,21 +53,30 @@
         <div class="modal-content-coach">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                <h4 class="modal-title" id="myModalLabel">Choose Your </h4>
+                <h4 class="modal-title" id="myModalLabel">Filter By Group </h4>
             </div>
             <div class="modal-body">
-                <div class="checkbox">
-                    <label style="background-color: white; width: 32%" ng-repeat="group in groupsList">
-                        <input type="checkbox" value="" ng-click="doGetMyMembers(group.id)" data-dismiss="modal" aria-label="Close">&nbsp;{{group.groupname}}</input>
-                    </label>
+                <div class="row">
+                    <checkbox-group ng-repeat="group in groupsList">
+                        <span class="col-md-4 no-padding fh-checkbox">
+                            <input type="checkbox" id="{{group.id}}" ng-model="group.isSelected" ng-true-value="true" ng-false-value="false"/>&nbsp;&nbsp;
+                            <label for="{{group.id}}" style="cursor:default;" aria-label="Close">{{group.groupname}}</label>&nbsp;
+                        </span>
+                    </checkbox-group>
                 </div>
             </div>
-           <!--  <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-            </div> -->
+            <div class="modal-footer">
+                <button class="btn btn-warning" ng-click="doGetMyMembers(group.id)">Filter</button>
+            </div>
         </div>
     </div> 
 </div>
 <!-- End Page Banner -->
 
 <script type="text/javascript" src="../../js/script.js"></script>
+
+<script>
+$(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip();   
+});
+</script>

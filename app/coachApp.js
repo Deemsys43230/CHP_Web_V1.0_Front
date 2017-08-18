@@ -186,7 +186,8 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                             files:[
                                 '../../plugin/popup/style.css',
                                 '../../angular/angular-utils-pagination/dirPagination.js',
-                                '../../app/coachMembers/coachMembersController.js'
+                                '../../app/coachMembers/coachMembersController.js',
+                                 '../../css/custom-inputs.css'
                             ]
                         })
                     }]

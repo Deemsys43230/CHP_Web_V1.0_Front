@@ -1,22 +1,31 @@
 /**
  * Created by Deemsys on 9/21/2015.
  */
-var coachApp = angular.module('coachApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','angularUtils.directives.dirPagination','angular-nicescroll']);
+var coachApp = angular.module('coachApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','angularUtils.directives.dirPagination','angular-nicescroll','angular-svg-round-progress']);
 
-coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter",function($scope,requestHandler,$filter) {
+coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter",function($scope,requestHandler,$filter,roundProgressService) {
 
     //Get Coaches List
-    $scope.doGetMyMembers=function(currentGroupId){
-        $scope.currentGroupId=currentGroupId;
+    $scope.doGetMyMembers=function(){
+      
         $scope.clients=[];
         $scope.loaded=true;
         requestHandler.getRequest("/coach/myclients/","").then(function(response){
-            if($scope.currentGroupId==0)
+            //Intialize the array
+            $scope.selectedGroupId=[];
+
+            $.each($scope.groupsList,function(index,value){
+                if(value.isSelected)
+                    $scope.selectedGroupId.push(value.id);
+            });
+
+            if($scope.selectedGroupId.length==0)
                 $scope.clients=response.data.clients;
             else
                 {
+                    alert($scope.selectedGroupId);
                     $.each(response.data.clients,function(index,value){
-                        if($scope.currentGroupId==value.groupid){
+                        if($scope.selectedGroupId.indexOf(value.groupid)!=-1){
                             $scope.clients.push(value);
                         }                           
                     });                   
@@ -31,9 +40,14 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
 
     //Get Groups List
     $scope.doGetGroupList=function(){
-        requestHandler.getRequest("coach/getGroups/").then(function(response){
-            $scope.groupsList=$scope.groupsList.concat(response.data.Groups);
-            $scope.groupsList=$scope.groupsList.concat({"id": null, "coachid": null, "groupname": "Un Assigned", "status": 1});
+       requestHandler.getRequest("coach/getGroups/").then(function(response){
+             $scope.groupsList=[];
+            $scope.groupsList=response.data.Groups;
+            $scope.groupsList.push({"id": null, "coachid": null, "groupname": "Un Assigned", "status": 1});
+
+            $.each($scope.groupsList,function(index,value){
+                value.isSelected=false;
+            });
         })
     };
 
@@ -56,21 +70,62 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
     });
     };
 
-    $scope.doMessagetool=function(){
 
-        $(".ember1275").click(function(){
-            $(".msg-overlay-list-bubble").hide();
-            $("#ember1275").hide();
-        });
+    //circle round
+    $scope.offset =         0;
+    $scope.timerCurrent =   0;
+    $scope.uploadCurrent =  0;
+    $scope.stroke =         12;
+    $scope.radius =         70;
+    $scope.isSemi =         false;
+    $scope.rounded =        false;
+    $scope.responsive =     false;
+    $scope.clockwise =      true;
+    $scope.bgColor =        '#ddd';
+    $scope.duration =       1000;
+    $scope.currentAnimation = 'easeOutCubic';
+
+    $scope.animations = [];
+
+/*    angular.forEach(roundProgressService.animations, function(value, key){
+        $scope.animations.push(key);
+    });*/
+
+    $scope.getStyle = function(){
+        var transform = ($scope.isSemi ? '' : 'translateY(-50%) ') + 'translateX(-50%)';
+
+        return {
+            'top': $scope.isSemi ? 'auto' : '52%',
+            'bottom': $scope.isSemi ? '5%' : 'auto',
+            'left': '50%',
+            'transform': transform,
+            '-moz-transform': transform,
+            '-webkit-transform': transform
+        };
     };
 
+    //Budget value get it from user side
+/*    $scope.getBudget=function(date){
+        requestHandler.postRequest("user/getTotalCalorieDetailForDate/",{"date":date}).then(function(response){
+            $scope.budgetDetails = response.data.BudgetDetail;
+            $scope.Budget= $scope.budgetDetails.Budget;
+            $scope.Net = $scope.budgetDetails.Net;
+            if($scope.budgetDetails.OverorUnderStatus==1){
+                $scope.currentGainColour="red";
+            }
+            else if($scope.budgetDetails.OverorUnderStatus==2){
+                $scope.currentGainColour="limegreen";
+            }
+         });
+    };
+*/
     //Initial Load
     $scope.init = function(){
         $scope.paginationLoad=false;
-        $scope.groupsList=[{"id": 0, "coachid": null, "groupname": "All Clients", "status": 1}];
         $scope.doGetGroupList();
         $scope.doGetMyMembers(0);
         $scope.doGetClientsDetailsByCoach(0);
+        $scope.currentGroupName = "All Clients"
     };
 
     // Search Food Type
