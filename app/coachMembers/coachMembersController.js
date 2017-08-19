@@ -3,7 +3,7 @@
  */
 var coachApp = angular.module('coachApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','angularUtils.directives.dirPagination','angular-nicescroll','angular-svg-round-progress']);
 
-coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter",function($scope,requestHandler,$filter,roundProgressService) {
+coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter","Flash",function($scope,requestHandler,$filter,roundProgressService,Flash) {
 
     //Get Coaches List
     $scope.doGetMyMembers=function(){
@@ -31,13 +31,16 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
                         }                           
                     });                   
                 }
-            if($scope.clients.length>0)
+            if($scope.clients.length>0){
                 $scope.doGetClientsDetailsByCoach($scope.clients[0].userid);
+                $scope.doGetNotesByCoach($scope.clients[0].userid);
+            }
             $scope.loaded=false;
             $scope.paginationLoad=true;
         });
 
     };
+
 
     $scope.doGetAllClients = function(){
         requestHandler.getRequest("/coach/myclients/","").then(function(response){
@@ -76,6 +79,32 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
     });
     };
 
+        // Notes for User Written by Coach reference
+
+    // Insert or Update Notes
+        $scope.doInsertOrUpdateNotes = function(userid){
+            $scope.notes= $scope.Notes.notes;
+
+            requestHandler.postRequest("coach/updatenotes/",{"userid":userid,"notes":$scope.notes}).then(function(response){
+                if(response.data.Response == "Success"){
+                    $('#notesButton').hide();
+                    scrollBottom: 0
+                }
+            });
+        };
+        //Get Users Individual Notes
+    $scope.doGetNotesByCoach = function(userid){
+        requestHandler.postRequest("coach/getnotes/",{"userid":userid}).then(function(response){
+            $scope.Notes = response.data.Notes;
+        });
+    };
+
+    //Clear all Notes for Individual Notes
+    $scope.doClearAllNotes = function(userid){
+        $scope.Notes.notes ="";
+        console.log($scope.Notes.notes);
+        $scope.doInsertOrUpdateNotes(userid);
+    };
 
     //circle round
     $scope.offset =         0;
@@ -110,28 +139,13 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
         };
     };
 
-    //Budget value get it from user side
-/*    $scope.getBudget=function(date){
-        requestHandler.postRequest("user/getTotalCalorieDetailForDate/",{"date":date}).then(function(response){
-            $scope.budgetDetails = response.data.BudgetDetail;
-            $scope.Budget= $scope.budgetDetails.Budget;
-            $scope.Net = $scope.budgetDetails.Net;
-            if($scope.budgetDetails.OverorUnderStatus==1){
-                $scope.currentGainColour="red";
-            }
-            else if($scope.budgetDetails.OverorUnderStatus==2){
-                $scope.currentGainColour="limegreen";
-            }
-         });
-    };
-*/
     //Initial Load
     $scope.init = function(){
         $scope.paginationLoad=false;
         $scope.doGetGroupList();
         $scope.doGetMyMembers(0);
         $scope.doGetClientsDetailsByCoach(0);
-        $scope.currentGroupName = "All Clients"
+        $scope.doGetNotesByCoach();
     };
 
     // Search Food Type

@@ -17239,6 +17239,7 @@ select.date:focus {
 .notesSpan{
     background-color: #5a4c05;
     color: #fff;
+    padding: 5px;
 }
 
 .activity{
