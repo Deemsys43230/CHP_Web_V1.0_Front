@@ -58,15 +58,16 @@
             <div class="modal-body">
                 <div class="row">
                     <checkbox-group ng-repeat="group in groupsList">
-                        <span class="col-md-4 no-padding fh-checkbox">
+                        <span class="col-md-4 no-padding fh-checkbox" class="modal_close">
                             <input type="checkbox" id="{{group.id}}" ng-model="group.isSelected" ng-true-value="true" ng-false-value="false"/>&nbsp;&nbsp;
-                            <label for="{{group.id}}" style="cursor:default;" aria-label="Close">{{group.groupname}}</label>&nbsp;
+                            <label for="{{group.id}}" style="cursor:default;">{{group.groupname}}</label>&nbsp;
                         </span>
                     </checkbox-group>
                 </div>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-warning" ng-click="doGetMyMembers(group.id)">Filter</button>
+                <button class="btn btn-warning" ng-click="doGetMyMembers()" data-dismiss="modal" aria-label="Close">Filter</button>
+                <button class="btn btn-danger" ng-click="doGetAllClients()" data-dismiss="modal" aria-label="Close">Reset</button>
             </div>
         </div>
     </div> 
@@ -75,8 +76,3 @@
 
 <script type="text/javascript" src="../../js/script.js"></script>
 
-<script>
-$(document).ready(function(){
-    $('[data-toggle="tooltip"]').tooltip();   
-});
-</script>
