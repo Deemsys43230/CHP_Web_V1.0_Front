@@ -100,7 +100,7 @@
                 <div class="one_half last margin-bottom-10">
                 <p class="row" style="margin-left: -9px;margin-left: 0">Goal Target Weight&nbsp;<small>(<span ng-show="userProfile.unitPreference==1">Kgs</span><span ng-show="userProfile.unitPreference==2">lbs</span>)</small></p>
                    <span ng-show="userProfile.unitPreference==1">
-                      <input type="text"  name="weightkgs" ng-model="createGoal.targetweight" ng-change="maxWeightCheck(createGoal.targetweight)" maxlength="5" required  validate-zero/>
+                      <input type="text"  name="weightkgs" ng-model="createGoal.targetweight" ng-change="maxWeightCheck(createGoal.targetweight)" required onkeypress="return validateFloatKeyPress(this,event);" validate-zero/>
                                <span class="error-message" ng-show="!createGoalForm.weightkgs.$error.required&&maxweight"><span>Please&nbsp;Enter&nbsp;Valid&nbsp;Weight.</span></span>
                                <span ng-show="createGoalForm.weightkgs.$dirty&&createGoalForm.weightkgs.$invalid">
                                     <span class="error-message" ng-show="createGoalForm.weightkgs.$error.required"><span>Required.</span></span>
@@ -108,7 +108,7 @@
                                </span>
                    </span>
                    <span ng-show="userProfile.unitPreference==2">
-                      <input type="text"  name="weightlbs" ng-model="createGoal.targetweight" required ng-change="maxCheck(createGoal.targetweight)" maxlength="6" validate-zero/>
+                      <input type="text"  name="weightlbs" ng-model="createGoal.targetweight" required ng-change="maxCheck(createGoal.targetweight)" onkeypress="return validateFloatKeyPress(this,event);" validate-zero/>
                              <span class="error-message" ng-show="!createGoalForm.weightlbs.$error.required&&maxweight"><span>Please&nbsp;Enter&nbsp;Valid&nbsp;Weight.</span></span>
                              <span ng-show="createGoalForm.weightlbs.$dirty&&createGoalForm.weightlbs.$invalid">
                                   <span class="error-message" ng-show="createGoalForm.weightlbs.$error.required"><span>Required.</span></span>
@@ -158,7 +158,7 @@
             <form name="updateWeightForm" novalidate>
                 <p>Current Weight <small>(<span ng-show="userProfile.unitPreference==1">Kgs</span><span ng-show="userProfile.unitPreference==2">lbs</span>)</small></p>
                 <span ng-show="userProfile.unitPreference==1">
-                  <input type="text"  name="weightkgs" ng-model="weightlog" maxlength="5" required validate-zero ng-change="maxWeightCheck(weightlog)"/>
+                  <input type="text"  name="weightkgs" ng-model="weightlog" required validate-zero ng-change="maxWeightCheck(weightlog)" onkeypress="return validateFloatKeyPress(this,event);"/>
                       <span class="error-message" ng-show="!updateWeightForm.weightkgs.$error.required&&maxweight"><span>Please&nbsp;Enter&nbsp;Valid&nbsp;Weight.</span></span>
                         <span ng-show="updateWeightForm.weightkgs.$dirty&&updateWeightForm.weightkgs.$invalid">
                             <span class="error-message" ng-show="updateWeightForm.weightkgs.$error.required"><span>Required.</span></span>
@@ -166,7 +166,7 @@
                         </span>
                 </span>
                   <span ng-show="userProfile.unitPreference==2">
-                      <input type="text"  name="weightlbs" ng-model="weightlog" required ng-change="maxCheck(weightlog)"  validate-zero maxlength="6"/>
+                      <input type="text"  name="weightlbs" ng-model="weightlog" required ng-change="maxCheck(weightlog)"  validate-zero onkeypress="return validateFloatKeyPress(this,event);"/>
                          <span class="error-message" ng-show="!updateWeightForm.weightlbs.$error.required&&maxweight"><span>Please&nbsp;Enter&nbsp;Valid&nbsp;Weight.</span></span>
                              <span ng-show="updateWeightForm.weightlbs.$dirty&&updateWeightForm.weightlbs.$invalid">
                                  <span class="error-message" ng-show="updateWeightForm.weightlbs.$error.required"><span>Required.</span></span>

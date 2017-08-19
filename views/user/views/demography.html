@@ -74,7 +74,7 @@
     </div>
     <div class="col-lg-4 col-md-5 col-sm-5 padding-right-0">
         <span ng-show="userProfile.unitPreference==1">
-        <input class="demography_input" id="weightkgs" name="weightkgs" maxlength="5" ng-model="demography.weight" ng-change="planChangeValidation(demography.userPlanType);bmiCalculation();maxWeightCheckKgs(demography.weight)" onkeypress="return validateFloatKeyPress(this,event);" required validate-zero/>
+        <input class="demography_input" id="weightkgs" name="weightkgs"  ng-model="demography.weight" ng-change="planChangeValidation(demography.userPlanType);bmiCalculation();maxWeightCheckKgs(demography.weight)" onkeypress="return validateFloatKeyPress(this,event);" required validate-zero/>
              <span class="error-message textarea-errormessage40-right60" ng-show="!demographyForm.weightkgs.$error.required&&maxweightkgs"><span>Please&nbsp;Enter&nbsp;Valid&nbsp;Weight.</span></span>
            <span ng-show="demographyForm.weightkgs.$dirty&&demographyForm.weightkgs.$invalid">
                <span class="error-message textarea-errormessage40" ng-show="demographyForm.weightkgs.$error.required"><span>Required.</span></span>
@@ -82,7 +82,7 @@
            </span>
         </span>
         <span ng-show="userProfile.unitPreference==2" >
-        <input class="demography_input" name="weightlbs" id="weightlbs" maxlength="6" ng-model="demography.weight" ng-required="userProfile.unitPreference==2"  ng-change="planChangeValidation(demography.userPlanType);maxWeightCheck(demography.weight);bmiCalculation();" required validate-zero/>
+        <input class="demography_input" name="weightlbs" id="weightlbs" ng-model="demography.weight" ng-required="userProfile.unitPreference==2"  ng-change="planChangeValidation(demography.userPlanType);maxWeightCheck(demography.weight);bmiCalculation();" onkeypress="return validateFloatKeyPress(this,event);" required validate-zero/>
         <span class="error-message textarea-errormessage40-right60" ng-show="!demographyForm.weightlbs.$error.required&&maxweight"><span>Please&nbsp;Enter&nbsp;Valid&nbsp;Weight.</span></span>
            <span ng-show="demographyForm.weightlbs.$dirty&&demographyForm.weightlbs.$invalid">
                <span class="error-message textarea-errormessage40" ng-show="demographyForm.weightlbs.$error.required"><span>Required.</span></span>
@@ -414,7 +414,7 @@
         </div>
         <div class="col-lg-6 col-md-6 col-sm-5 padding-right-0">
         <span ng-show="userProfile.unitPreference==1" >
-           <input class="demography_input"  name="targetWeightkgs"  ng-model="demography.targetweight" maxlength="5" ng-required="demography.userPlanType==2 || demography.userPlanType == 3"  onkeypress="return validateFloatKeyPress(this,event);"  ng-change="planChangeValidation(demography.userPlanType);maxTargetWeightCheckKgs(demography.targetweight);"/>
+           <input class="demography_input"  name="targetWeightkgs"  ng-model="demography.targetweight" ng-required="demography.userPlanType==2 || demography.userPlanType == 3"  onkeypress="return validateFloatKeyPress(this,event);"  ng-change="planChangeValidation(demography.userPlanType);maxTargetWeightCheckKgs(demography.targetweight);"/>
         <span class="error-message textarea-errormessage40-right60" ng-show="!demographyForm.targetWeightkgs.$error.required&&maxTargetWeightKgs" style="top:0;left: 30px;"><span>Please&nbsp;Enter&nbsp;Valid&nbsp;Weight.</span></span>
         <span class="error-message textarea-errormessage40" ng-show="!demographyForm.targetWeightkgs.$error.required&&weightlossError"><span>Should&nbsp;be&nbsp;less&nbsp;than&nbsp;your&nbsp;weight</span></span>
         <span class="error-message textarea-errormessage40" ng-show="!demographyForm.targetWeightkgs.$error.required&&weightgainError"><span>Should&nbsp;be&nbsp;greater&nbsp;than&nbsp;your&nbsp;weight</span></span>
@@ -423,7 +423,7 @@
          </span>
         </span>
         <span ng-show="userProfile.unitPreference==2" >
-           <input class="demography_input"  name="targetWeight"  ng-model="demography.targetweight" maxlength="6" ng-required="demography.userPlanType==2 || demography.userPlanType == 3" onkeypress="return validateFloatKeyPress(this,event);"  ng-change="planChangeValidation(demography.userPlanType);maxTargetWeightCheck(demography.targetweight);"/>
+           <input class="demography_input"  name="targetWeight"  ng-model="demography.targetweight" ng-required="demography.userPlanType==2 || demography.userPlanType == 3" onkeypress="return validateFloatKeyPress(this,event);"  ng-change="planChangeValidation(demography.userPlanType);maxTargetWeightCheck(demography.targetweight);"/>
         <span class="error-message textarea-errormessage40-right60" ng-show="!demographyForm.targetWeight.$error.required&&maxTargetWeight" style="top:0;left: 30px;"><span>Please&nbsp;Enter&nbsp;Valid&nbsp;Weight.</span></span>
         <span class="error-message textarea-errormessage40" ng-show="!demographyForm.targetWeight.$error.required&&weightlossError"><span>Should&nbsp;be&nbsp;less&nbsp;than&nbsp;your&nbsp;weight</span></span>
         <span class="error-message textarea-errormessage40" ng-show="!demographyForm.targetWeight.$error.required&&weightgainError"><span>Should&nbsp;be&nbsp;greater&nbsp;than&nbsp;your&nbsp;weight</span></span>
