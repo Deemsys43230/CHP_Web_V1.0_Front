@@ -52,28 +52,32 @@ coachApp.controller('CoachInvitationController',['$scope','requestHandler','Flas
          $scope.viewload=true;
          requestHandler.getRequest("getUserProfile/"+id,"").then(function(response){
          	$scope.coachuserdetails= response.data.userprofile;
+
+            if($scope.coachuserdetails.relationship==null){
+              $scope.coachuserdetails.relationship="NA";
+            }
             
-            if($scope.coachuserdetails.about=="null"){
+            if($scope.coachuserdetails.about==null){
             	$scope.coachuserdetails.about="NA";
             }
 
-            if($scope.coachuserdetails.phone=="null"){
+            if($scope.coachuserdetails.phone==null){
             	$scope.coachuserdetails.phone="NA";
             }
 
-            if($scope.coachuserdetails.city=="null"){
+            if($scope.coachuserdetails.city==null){
             	$scope.coachuserdetails.city="NA";
             }
 
-            if($scope.coachuserdetails.state=="null"){
+            if($scope.coachuserdetails.state==null){
             	$scope.coachuserdetails.state="NA";
             }
 
-            if($scope.coachuserdetails.country=="null"){
+            if($scope.coachuserdetails.country==null){
             	$scope.coachuserdetails.country="NA"
             }
 
-            if($scope.coachuserdetails.zipcode=="null"){
+            if($scope.coachuserdetails.zipcode==null){
             	$scope.coachuserdetails.zipcode="NA";
             }
 
@@ -104,6 +108,18 @@ coachApp.controller('CoachInvitationController',['$scope','requestHandler','Flas
             }else{
                 errorMessage(Flash,"Please try again later!");
             }
+          });
+    };
+
+    $scope.doRemoveInvitationsByCoach=function(userid){
+        $scope.removeInvitationsParam={'userid': userid};
+          requestHandler.postRequest("coach/deleteinterest/",$scope.removeInvitationsParam).then(function(response){
+             if(response.data.Response_status==1){
+                successMessage(Flash,"Invitation Removed Successfully");
+                $scope.doGetUserListByCoach(true);
+             }else{
+                errorMessage(Flash,"Please try again later!");
+             }
           });
     };
 
