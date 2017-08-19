@@ -96,7 +96,6 @@
 
 
                 <p>Secret Answer</p>
-                <input type="password" name="secretAnswer" ng-model="secretanswer" required/>
                     <span ng-show="forgotPasswordForm.secretAnswer.$dirty&&forgotPasswordForm.secretAnswer.$invalid && !forgotPasswordForm.secretAnswer.$pristine">
                         <span class="error-message" ng-show="forgotPasswordForm.secretAnswer.$error.required"><span>Required.</span></span>
                     </span>
@@ -166,6 +165,7 @@
             </div>-->
             <div flash-message="3000" ></div>
             <form name="registerForm" novalidate>
+                 <input type="text" id="referralId" name="referralId" ng-model="userForm.referralId"/>
                 <p>First name</p>
                 <input type="text" name="firstname" ng-pattern="/^ *([a-zA-Z]+ ?)+ *$/"  ng-model="userForm.firstname" maxlength="24" required ng-minlength="3"/>
                     <span ng-show="registerForm.firstname.$dirty&&registerForm.firstname.$invalid && !registerForm.firstname.$pristine">
@@ -303,6 +303,31 @@
     }
 
     $(".modal_trigger").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
+
+    function getParamFromURL(name) {
+        var url = location.href;
+        name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
+        var regexS = "[\\?&]"+name+"=([^&#]*)";
+        var regex = new RegExp( regexS );
+        var results = regex.exec( url );
+        return results == null ? null : results[1];
+    }
+
+    function checkPopUpAction(referralId){
+     
+        if(referralId){
+            setTimeout(function(){ $(".modal_trigger").click(); }, 1000);
+        }else{
+            var showLogin=getParamFromURL("showLogin");
+            if(showLogin){
+                setTimeout(function(){ $(".modal_trigger").click(); }, 1000);
+            }
+        }   
+    }
+
+    //Call Methos
+    var referralId=getParamFromURL("referral");
+    checkPopUpAction(referralId);
 
     $(function(){
 

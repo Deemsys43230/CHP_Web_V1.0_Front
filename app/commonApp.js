@@ -629,6 +629,8 @@ commonApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
 commonApp.controller('LoginController',['$scope','requestHandler','Flash','$window','$location','$element','FeedbackService','$timeout',function($scope,requestHandler,Flash,$window,$location,$element,FeedbackService,$timeout){
  $scope.hideValue=1;
 
+
+
     $scope.getSocialMediaDetails=function(){
         requestHandler.getRequest("contactus/","").then(function(response){
             $scope.commonDetails = response.data.Contactus[0];
@@ -753,6 +755,8 @@ commonApp.controller('LoginController',['$scope','requestHandler','Flash','$wind
             delete $scope.userForm.secretquestion;
             delete $scope.userForm.secretanswer;
         }
+        $scope.userForm.referralId=$window.referralId;
+        $window.referralId=null;
         requestHandler.postRequest("registerUser/",$scope.userForm).then(function(response){
 
             if(response.data.Response===0){

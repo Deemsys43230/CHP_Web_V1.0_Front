@@ -9,7 +9,7 @@
                     <a href="#dashboard" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back <span class="hidden-md hidden-sm">to Dashboard</span></a>
                 </div>
                 
-                <h5><button type="submit" class="invite-button modal-inviteUsers pull-right margin-left-5" ng-click="doInviteUserPopup()"><i class="fa fa-user-plus"></i>&nbsp;&nbsp;Invite User</button></h5>
+                
                 <div flash-message="2000" class="col-lg-3 col-md-3 col-sm-3 pull-right no-padding"></div>
                 
                 <h5 class="classic-title"><a href="#my-members"><i class="fa fa-money"></i>&nbsp;&nbsp;CLIENTS</a>&nbsp;&nbsp;|&nbsp;&nbsp;<span><a href="#coach-invitations"><i class="fa fa-dollar"></i>&nbsp;&nbsp;INVITATIONS</a></span></h5>
@@ -46,6 +46,7 @@
                         <div ng-show="coachuserfilter.length==0" class="text-center margin-top-50">
                             <img src="../../images/no-coach-small.png" width="120" height="120"/>
                             <h3 class="text-gray">NO USER FOUND!!!</h3><br/>
+                            <h5 ng-show="invitationType==2"><button type="submit" class="invite-button modal-inviteUsers margin-left-5" ng-click="doInviteUserPopup()"><i class="fa fa-user-plus"></i>&nbsp;&nbsp;Invite User via Email</button></h5>
                             <!-- <div class="col-lg-12 col-md-12 col-sm-12">
                                <h5><button type="submit" class="invite-button modal-inviteUsers text-center" ng-click="doInviteUserPopup()"><i class="fa fa-user-plus"></i>&nbsp;&nbsp;Invite User</button></h5>
                             </div> -->

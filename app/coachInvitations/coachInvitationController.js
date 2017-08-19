@@ -104,7 +104,7 @@ coachApp.controller('CoachInvitationController',['$scope','requestHandler','Flas
           requestHandler.postRequest("coach/sendinvitationtouser/",$scope.sendEmailInvitationParam).then(function(response){
             if(response.data.Response_status==1){
                 successMessage(Flash,"Invitation Sent Successfully");
-                $scope.coachUserInit();
+                //$scope.coachUserInit();
             }else{
                 errorMessage(Flash,"Please try again later!");
             }
