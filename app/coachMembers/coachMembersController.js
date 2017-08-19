@@ -74,8 +74,25 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
             $scope.coachclientdetails=response.data.userprofile;
             $scope.coachclientdetails.age = "-";
 
-        $scope.viewload=true;
 
+    //Do Get Chat Message
+    $scope.doGetChatMessage=function(id){
+        $scope.currentChatTargetId=id;
+        $scope.getMessageParam={"targetid":id,"offset":0};
+        requestHandler.postRequest("/readMessage/",$scope.getMessageParam).then(function(response){
+            $scope.chatMessages=response.data.chats;
+            $scope.chat={"message":""};
+
+            $scope.unreadChatMessageCount=0;
+            $.each($scope.chatMessages,function(index,value){
+                if(value.status==0){
+                    $scope.unreadChatMessageCount+=1;
+                }
+            });
+            
+            setTimeout(function(){ $('.msg_container_base').scrollTop($('.msg_container_base')[0].scrollHeight); }, 500);
+
+        $scope.viewload=true;
     });
     };
 
@@ -146,6 +163,7 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
         $scope.doGetMyMembers(0);
         $scope.doGetClientsDetailsByCoach(0);
         $scope.doGetNotesByCoach();
+        
     };
 
     // Search Food Type
