@@ -17171,7 +17171,8 @@ select.date:focus {
 
 .client-view.active,.client-view.active h5,.client-view.active h6{
     cursor: pointer;
-    color: #f8ba01;
+    color: #fff;
+    background-color: #f8ba01;
 }
 
 .client-view .img-circle{
@@ -17376,3 +17377,11 @@ select.date:focus {
     bottom:0;
 }
 /*End Chat*/
+
+/* For Group Select checkbox*/
+.group-checkbox{
+
+    padding: 0px 10px 0px 0px;
+    background: none;
+    margin-bottom: 0px;    
+}

@@ -23,12 +23,21 @@
                 <div class="coach-list">
                     <div class="content_scrollbar" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#eee'}" scroller>
                         <div  ng-show="clients.length!=0" class="padding-right-10">
-                            <div class="client-view col-lg-12 col-md-12 col-sm-12" ng-class="{'active': client.userid == coachclientdetails.userid }" ng-repeat="client in clientFilter=(clients | startsWithLetterMember : clientSearch.firstname | filter:clientSearch.groupid )" ng-click="doGetClientsDetailsByCoach(client.userid)">
+                            <div class="client-view col-lg-12 col-md-12 col-sm-12" ng-class="{'active': client.userid == coachclientdetails.userid }" ng-repeat="client in clientFilter=(clients | startsWithLetterMember : clientSearch.firstname | filter:clientSearch.groupid )" ng-click="doGetClientsProfileDetailsByCoach(client.userid)">
                                 <div class="col-lg-2 col-md-2 col-sm-2 no-padding">
                                     <img class="img-circle" ng-src="{{client.imageurl}}">
                                 </div>
                                 <div class="col-lg-10 col-md-10 col-sm-10 no-padding">
-                                    <h5 class="col-lg-12 col-md-12 col-sm-12 padding-lr">{{client.name}}</h5>
+                                    <h5 class="col-lg-11 col-md-11 col-sm-11 padding-lr">{{client.name}}</h5>
+                                    <div class="col-lg-1 col-md-1 col-sm-1 row text-center">
+                                            <checkbox-group>
+                                                <span class="fh-checkbox">
+                                                    <label class="group-checkbox">
+                                                        <input type="checkbox" id="{{client.userid}}" ng-model="user.isSelected" ng-true-value="true" ng-false-value="false"/>
+                                                    </label>
+                                                </span>
+                                            </checkbox-group>
+                                        </div>
                                     <h6 class="col-lg-12 col-md-12 col-sm-12 padding-lr">{{client.emailid}}</h6>
                                 </div>
                             </div> 

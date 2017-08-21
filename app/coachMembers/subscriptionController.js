@@ -2,7 +2,7 @@ var coachApp= angular.module('coachApp', ['ngRoute','oc.lazyLoad','ngCookies','r
 
 coachApp.controller('SubscriptionController',['$scope','requestHandler','Flash','$routeParams','$location',function($scope,requestHandler,Flash,$routeParams,$location) {
     
-    $scope.activeClass.coach='active';
+    $scope.activeClass.sub='active';
 
     $scope.doGetPricingPlans = function() {
       requestHandler.getRequest("getactivePricingPlans/","").then(function(response){
