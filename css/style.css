@@ -17220,7 +17220,7 @@ select.date:focus {
 
     float: left;
     height: 150px !important;
-    font-size: 18px;
+    font-size: 14px;
     background: #efdd85;
     color: #333;
     padding: 7px 10px;
@@ -17234,7 +17234,7 @@ select.date:focus {
     -webkit-border-radius: 5px;
     outline: 0;
     margin: 0;
-    z-index: 10 !important;
+    z-index: 1;
 }
 .notesSpan{
     background-color: #5a4c05;
@@ -17256,6 +17256,7 @@ select.date:focus {
     position:fixed;
     float:right;
     margin-right:20px;
+    z-index: 2;
 }
 .chat-window .col-md-2, .col-md-10{
     padding:0;
@@ -17390,4 +17391,8 @@ select.date:focus {
     color: red;
     font-size: small;
     text-decoration: underline !important;
+}
+/*Message Read*/
+.message-read{
+    color:#00fc09;
 }

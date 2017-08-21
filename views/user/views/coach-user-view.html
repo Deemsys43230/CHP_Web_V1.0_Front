@@ -139,14 +139,14 @@
                                     </span>
                                 </div>
                                 <div class="col-md-4 col-xs-4" style="text-align: right;">
-                                    <a href=""><span id="minim_chat_window" class="glyphicon glyphicon-plus icon_minim" ng-click="doReadChatMessage();"></span></a>
+                                    <a href=""><span id="minim_chat_window" class="glyphicon glyphicon-plus icon_minim panel-collapsed" ng-click="doReadChatMessage();"></span></a>
                                 </div>
                             </div>
                             <div class="panel-body msg_container_base" style="display:none;">
                                 <div class="row msg_container" ng-repeat="chatMessage in chatMessages">
                                     <div class="col-md-10 col-xs-10" ng-if="chatMessage.sentby==3">
                                         <div class="messages msg_sent">
-                                            <p>{{chatMessage.message}}</p>
+                                            <p>{{chatMessage.message}}</p><i ng-show="chatMessage.status==1" class="fa fa-check message-read" aria-hidden="true"></i>
                                             <time datetime="2009-11-13T20:00">{{chatMessage.datetime}}</time>
                                         </div>
                                     </div>

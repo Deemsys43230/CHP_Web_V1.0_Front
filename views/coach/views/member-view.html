@@ -513,14 +513,14 @@
                         </span>
                     </div>
                     <div class="col-md-4 col-xs-4" style="text-align: right;">
-                        <a href=""><span id="minim_chat_window" class="glyphicon glyphicon-plus icon_minim" ng-click="doReadChatMessage();"></span></a>
+                        <a href=""><span id="minim_chat_window" class="glyphicon glyphicon-plus icon_minim panel-collapsed" ng-click="doReadChatMessage();"></span></a>
                     </div>
                 </div>
                 <div class="panel-body msg_container_base" style="display:none;">
                     <div class="row msg_container" ng-repeat="chatMessage in chatMessages">
                         <div class="col-md-10 col-xs-10" ng-if="chatMessage.sentby==2">
                             <div class="messages msg_sent">
-                                <p>{{chatMessage.message}}</p>
+                                <p>{{chatMessage.message}}</p><i ng-show="chatMessage.status==1" class="fa fa-check message-read" aria-hidden="true"></i>
                                 <time datetime="2009-11-13T20:00">{{chatMessage.datetime}}</time>
                             </div>
                         </div>
@@ -920,26 +920,6 @@ $(document).on('click', '.panel-heading span.icon_minim', function (e) {
         $this.removeClass('panel-collapsed');
         $this.removeClass('glyphicon-plus').addClass('glyphicon-minus');
     }
-});
-$(document).on('focus', '.panel-footer input.chat_input', function (e) {
-    var $this = $(this);
-    if ($('#minim_chat_window').hasClass('panel-collapsed')) {
-        $this.parents('.panel').find('.panel-body').slideDown();
-        $('#minim_chat_window').removeClass('panel-collapsed');
-        $('#minim_chat_window').removeClass('glyphicon-plus').addClass('glyphicon-minus');
-    }
-});
-$(document).on('click', '#new_chat', function (e) {
-    var size = $( ".chat-window:last-child" ).css("margin-left");
-     size_total = parseInt(size) + 400;
-    alert(size_total);
-    var clone = $( "#chat_window_1" ).clone().appendTo( ".container" );
-    clone.css("margin-left", size_total);
-});
-$(document).on('click', '.icon_close', function (e) {
-    alert("deal");  
-    //$(this).parent().parent().parent().parent().remove();
-    $( "#chat_window_1" ).remove();
 });
 
 $(window).scroll(function() {
