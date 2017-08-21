@@ -88,10 +88,10 @@
                                 <div> Qualification <span class="pull-right">:</span></div>
                             </div>
                             <div class="col-lg-8 col-md-7 col-sm-12 margin-top-10">
-                                <input class="coach-input" placeholder="Qualification" name="qualify" ng-model="coach.qualification" maxlength="25" required validate-alpha-with-space/>
+                                <input class="coach-input" placeholder="Qualification" name="qualify" ng-model="coach.qualification" maxlength="25" required validate-alpha-with-characters/>
                                 <span ng-show="coachDetailsForm.qualify.$dirty && coachDetailsForm.qualify.$invalid">
                                     <span class="error-message textarea-errormessage10" ng-show="coachDetailsForm.qualify.$error.required"><span>Required.</span></span>
-                                    <span class="error-message textarea-errormessage10" ng-show="coachDetailsForm.qualify.$error.validateAlphaWithSpace"><span>Enter&nbsp;valid&nbsp;Data.</span></span>
+                                    <span class="error-message textarea-errormessage10" ng-show="coachDetailsForm.qualify.$error.validateAlphaWithCharacters"><span>Enter&nbsp;valid&nbsp;Data.</span></span>
                                 </span>
                             </div>
                         </div>

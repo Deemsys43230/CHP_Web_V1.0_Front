@@ -57,6 +57,18 @@ adminApp.controller('PaypalSettingsController',['$scope','requestHandler','Flash
         });
 
     };
+    //To Check maximum share percentage
+    $scope.maxValue=false;
+    $scope.maxShareCheck = function(share){
+        if(share<=99.99){
+            $scope.maxValue=false;
+        }
+        else if(share>99.99){
+            $scope.maxValue=true;
+        }
+
+    };
+
 
     $scope.doUpdatePaypalSettings=function(){
         $scope.paypalSettings.paypaltype=parseInt($scope.paypalSettings.paypaltype);
@@ -85,3 +97,8 @@ adminApp.controller('PaypalSettingsController',['$scope','requestHandler','Flash
     $scope.doGetPaypalSettings();
 
 }]);
+
+
+
+
+

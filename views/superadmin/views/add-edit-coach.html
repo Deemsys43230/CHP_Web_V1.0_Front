@@ -12,7 +12,7 @@
             </div>
             <div class="col-lg-12 col-md-12 col-sm-12">
                 <div class="margin-top-5 no-padding pull-right">
-                    <a href="#invitation-list" class="back-button pull-right margin-left-5 margin-top5 hidden-sm"><i class="fa fa-arrow-circle-o-left"></i>&nbsp;<span class="hidden-md">Back</span></a>
+                    <a href="#coach" class="back-button pull-right margin-left-5 margin-top5 hidden-sm"><i class="fa fa-arrow-circle-o-left"></i>&nbsp;<span class="hidden-md">Back</span></a>
                 </div>
                 <div flash-message="3000" class="col-md-3 pull-right no-padding"></div>
                 <h5 class="classic-title margin-bottom-10"><span><i class="fa fa-user"></i> &nbsp;ADD COACH</span></h5>
@@ -49,11 +49,13 @@
                                 <div> Email Id <span class="pull-right">:</span></div>
                             </div>
                             <div class="col-lg-8 col-md-7 col-sm-12 margin-top-10">
-                                <input class="coach-input" placeholder="Email Id" name="emailid" ng-model="invitationDetails.emailid" maxlength="25" required validate-email/>
+                                <input class="coach-input" placeholder="Email Id" name="emailid" ng-model="invitationDetails.emailid" maxlength="25" required validate-email emailexists/>
                                 <span ng-show="coachDetailsForm.emailid.$dirty && coachDetailsForm.emailid.$invalid">
                                     <span class="error-message textarea-errormessage10" ng-show="coachDetailsForm.emailid.$error.required"><span>Required.</span></span>
                                     <span class="error-message textarea-errormessage10" ng-show="coachDetailsForm.emailid.$error.validateEmail"><span>Enter&nbsp;valid&nbsp;Email.</span></span>
+                                    <span class="error-message" ng-show="coachDetailsForm.emailid.$error.emailexists"><span>Email&nbsp;ID&nbsp;Already&nbsp;Exist.</span></span>
                                 </span>
+
                             </div>
                         </div>
                         <div class="form-group">
@@ -97,10 +99,10 @@
                                 <div> Qualification <span class="pull-right">:</span></div>
                             </div>
                             <div class="col-lg-8 col-md-7 col-sm-12 margin-top-10">
-                                <input class="coach-input" placeholder="Qualification" name="qualify" ng-model="invitationDetails.qualification" maxlength="25" required validate-alpha-with-space/>
+                                <input class="coach-input" placeholder="Qualification" name="qualify" ng-model="invitationDetails.qualification" maxlength="25" required validate-alpha-with-characters/>
                                 <span ng-show="coachDetailsForm.qualify.$dirty && coachDetailsForm.qualify.$invalid">
                                     <span class="error-message textarea-errormessage10" ng-show="coachDetailsForm.qualify.$error.required"><span>Required.</span></span>
-                                    <span class="error-message textarea-errormessage10" ng-show="coachDetailsForm.qualify.$error.validateAlphaWithSpace"><span>Enter&nbsp;valid&nbsp;Data.</span></span>
+                                    <span class="error-message textarea-errormessage10" ng-show="coachDetailsForm.qualify.$error.validateAlphaWithCharacters"><span>Enter&nbsp;valid&nbsp;Data.</span></span>
                                 </span>
                             </div>
                         </div>

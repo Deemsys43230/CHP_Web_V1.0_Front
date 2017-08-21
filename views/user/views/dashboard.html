@@ -695,7 +695,7 @@
                                                     </span>
                                                 </div>
                                                 <div class="col-lg-12 col-md-12 col-sm-12 text-center margin-top-20">
-                                                    <button onclick="return false;" class="btn-dis suggest_button override-width no-margin-bottom" ng-disabled="weightLogForm.$invalid ||fatLogForm.$invalid || spinner || maxweight || maxfat || maxweightlbs " ng-click="weightLogEntry(1)">
+                                                    <button onclick="return false;" class="btn-dis suggest_button override-width no-margin-bottom" ng-disabled="weightLogForm.$invalid || spinner || maxweight || maxfat || maxweightlbs " ng-click="weightLogEntry(1)">
                                                       <span ng-if="spinner"><span class="three-quarters-loader">Loading…</span></span>{{weightUpdateText}}</button><br/>
                                                 </div>
                                             </div>
@@ -1109,11 +1109,11 @@
 
             <form name="foodSuggestForm" id="suggestform" novalidate>
             <p>Food Name:</p>
-            <input type="text" name="foodname" data-foodid="foodSuggest.foodid" ng-model="foodSuggest.foodname" ng-pattern="/^ *([a-zA-Z]+ ?)+ *$/" maxlength="100" foodexists required />
+            <input type="text" name="foodname" data-foodid="foodSuggest.foodid" ng-model="foodSuggest.foodname" validate-all-characters maxlength="100" foodexists required />
              <span ng-show="foodSuggestForm.foodname.$dirty&&foodSuggestForm.foodname.$invalid">
                   <span class="error-message" ng-show="foodSuggestForm.foodname.$error.required"><span>Required.</span></span>
                   <span class="error-message" ng-show="foodSuggestForm.foodname.$error.foodexists"><span>Food&nbsp;Already&nbsp;Exists</span></span>
-                  <span class="error-message" ng-show="foodSuggestForm.foodname.$error.pattern"><span>Invalid&nbsp;Format.</span></span>
+                  <span class="error-message" ng-show="foodSuggestForm.foodname.$error.validateAllCharacters"><span>Invalid&nbsp;Format.</span></span>
                  </span>
             <p>Food Description:</p>
             <textarea type="text" class="height-150" name="fooddescription" ng-model="foodSuggest.fooddescription" maxlength="300" required></textarea>

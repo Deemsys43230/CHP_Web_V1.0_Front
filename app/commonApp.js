@@ -1115,3 +1115,19 @@ commonApp.factory('myGoogleAnalytics', [
             // inject self
         }
     ]);
+
+//Check for All alpha with space and special character  Validation
+commonApp.directive('validateAlphaWithCharacters', function() {
+    var ALPHA_CHARACTERS = /^[a-zA-Z @!#\$\^%&*()+=\-\[\]\\\';,\.\/\{\}\|\":_<>\?]+$/;
+
+    return {
+        require: 'ngModel',
+        restrict: '',
+        link: function(scope, elm, attrs, ctrl) {
+            // only apply the validator if ngModel is present and Angular has added the Integer validator
+            ctrl.$validators.validateAlphaWithCharacters = function(modelValue) {
+                return  ctrl.$isEmpty(modelValue) || ALPHA_CHARACTERS .test(modelValue);
+            };
+        }
+    };
+});

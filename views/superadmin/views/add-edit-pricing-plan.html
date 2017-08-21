@@ -46,7 +46,7 @@
                              </span>
                             </div>
                             <div class="col-md-4">
-                                <h4>No.of.Counts</h4>
+                                <h4>No.of Counts</h4>
                             </div>
                             <div class="col-md-8 margin-bottom-20">
                                 <input type="text" class="form-control" name="count" ng-model="pricingplan.clientscount" maxlength="10" required validate-integer>
@@ -56,10 +56,11 @@
                              </span>
                             </div>
                             <div class="col-md-4">
-                                <h4>Discount</h4>
+                                <h4>Discount&nbsp;(%)</h4>
                             </div>
                             <div class="col-md-8 margin-bottom-20">
-                                <input type="text" class="form-control" name="discount" ng-model="pricingplan.discount" maxlength="10" required valid-number>
+                                <input type="text" class="form-control" name="discount" ng-model="pricingplan.discount" required  onkeypress="return validateFloatKeyPress(this,event);" ng-change="maxDiscountCheck(pricingplan.discount)">
+                                <span class="error-message" ng-show="!pricingplanForm.discount.$error.required&&maxValue"><span>Please&nbsp;Enter&nbsp;Valid&nbsp;Value.</span></span>
                                     <span ng-show="pricingplanForm.discount.$dirty&&pricingplanForm.discount.$invalid">
                                   <span class="error-message" ng-show="pricingplanForm.discount.$error.required"><span>Required.</span></span>
                                   <span class="error-message" ng-show="pricingplanForm.discount.$error.validNumber"><span>Required.</span></span>
@@ -87,8 +88,8 @@
                 </form>
             </div>
             <div class="text-center margin-top-10">
-                <a href="" class="btn btn-success"  ng-disabled="pricingplanForm.$invalid||submitContent" ng-click="doAddCoachPricingPlan()" ng-show="isNew">{{contentBtnTxt}}</a>
-                <a href="" class="btn btn-success"  ng-disabled="pricingplanForm.$invalid ||submitContent" ng-hide="isNew" ng-click="doUpdatePricingPlan()">{{contentBtnTxt}}</a>
+                <a href="" class="btn btn-success"  ng-disabled="pricingplanForm.$invalid||submitContent || maxValue" ng-click="doAddCoachPricingPlan()" ng-show="isNew">{{contentBtnTxt}}</a>
+                <a href="" class="btn btn-success"  ng-disabled="pricingplanForm.$invalid ||submitContent || maxValue" ng-hide="isNew" ng-click="doUpdatePricingPlan()">{{contentBtnTxt}}</a>
                 <a href="#pricing-plan-list" class="btn btn-warning">Cancel</a>
             </div>
         </div>

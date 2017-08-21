@@ -18,6 +18,20 @@ adminApp.controller('PricingPlanController',['$scope','requestHandler','Flash','
     });
 
 
+    //To Check maximum Discount percentage
+    $scope.maxValue=false;
+    $scope.maxDiscountCheck = function(discount){
+        if(discount<=99.9){
+            $scope.maxValue=false;
+        }
+        else if(discount>99.9){
+            $scope.maxValue=true;
+        }
+
+    };
+
+
+
     // To display Pricingplan admin view
     $scope.doGetPricingPlan=function(){
         $scope.loaded=true;
@@ -87,6 +101,19 @@ adminApp.controller('PricingPlanEditController',['$scope','requestHandler','Flas
 
     });
     $scope.title='Edit Pricing Plan';
+
+    //To Check maximum Discount percentage
+    $scope.maxValue=false;
+    $scope.maxDiscountCheck = function(discount){
+        if(discount<=99.9){
+            $scope.maxValue=false;
+        }
+        else if(discount>99.9){
+            $scope.maxValue=true;
+        }
+
+    };
+
 
 
 
