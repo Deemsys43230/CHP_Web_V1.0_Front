@@ -104,7 +104,7 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
             }
            
         };
-
+     
     /* For clients Individual Demograpgy Details BY Coach */
 
     $scope.doGetClientsDemographyDetailsByCoach = function(id){
@@ -177,19 +177,40 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
         });
     };
 
+    //Do Set Chat Message as Read 
+    $scope.doReadChatMessage=function(){
+      $scope.setReadMessageParam={"targetid":$scope.currentChatTargetId};
+      requestHandler.postRequest("setMessageRead/", $scope.setReadMessageParam).then(function(response){
+          if(response.data.Response_status==1){
+            $scope.unreadChatMessageCount=0;
+            $scope.showMessageCount=false; 
+          }
+      })
+    };
+
     //Do Get Chat Message
     $scope.doGetChatMessage=function(id){
         $scope.currentChatTargetId=id;
         $scope.getMessageParam={"targetid":id,"offset":0};
         requestHandler.postRequest("/readMessage/",$scope.getMessageParam).then(function(response){
             $scope.chatMessages=response.data.chats;
+            $scope.chatMessages.coachid= response.data.chats[0].coachid;
+
+            requestHandler.getRequest("/getUserProfile/"+$scope.chatMessages.coachid, "").then(function(response){
+                 $scope.userImageUrl=response.data.userprofile.imageurl;
+            });
             $scope.chat={"message":""};
 
             $scope.unreadChatMessageCount=0;
             $.each($scope.chatMessages,function(index,value){
-                if(value.status==0){
+                if(value.status==0 && value.sentby==3){
                     $scope.unreadChatMessageCount+=1;
+                    $scope.showMessageCount=true;
                 }
+                else{
+                     $scope.showMessageCount=false;
+                }
+
             });
             setTimeout(function(){ $('.msg_container_base').scrollTop($('.msg_container_base')[0].scrollHeight); }, 500);
         });
@@ -197,16 +218,16 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
 
     //Do Send Chat Message
     $scope.doSendChatMessage=function(){
-             $scope.getSendMessageParam={"targetid":$scope.currentChatTargetId,"message":$scope.chat.message};
-            requestHandler.postRequest("/sendMessage/",$scope.getSendMessageParam).then(function(response){
-                $scope.doGetChatMessage($scope.currentChatTargetId);
-            });
+         $scope.getSendMessageParam={"targetid":$scope.currentChatTargetId,"message":$scope.chat.message};
+        requestHandler.postRequest("/sendMessage/",$scope.getSendMessageParam).then(function(response){
+            $scope.doGetChatMessage($scope.currentChatTargetId);
+        });
        
     };
 
-        // Notes for User Written by Coach reference
+    // Notes for User Written by Coach reference
 
-// Insert or Update Notes
+   // Insert or Update Notes
     $scope.doInsertOrUpdateNotes = function(userid){
         $scope.notes= $scope.Notes.notes;
 

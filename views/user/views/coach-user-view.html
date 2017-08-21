@@ -127,6 +127,56 @@
                     </div>
                 </div>
             </form>
+
+                <div class="chat-window col-xs-5 col-md-3" id="chat_window_1">
+                    <div class="col-xs-12 col-md-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading chat-top-bar">
+                                <div class="col-md-8 col-xs-8">
+                                    <h3 class="panel-title"><span class="glyphicon glyphicon-comment"></span> Chat - {{usercoachdetails.firstname}}</h3>
+                                    <span class="nav-item__badge" style="position: absolute; margin-left: 20px; margin-top: -9px;" ng-show="showMessageCount">
+                                    <span aria-hidden="true" class="nav-item__badge-count ng-binding">{{unreadChatMessageCount}}</span>
+                                    </span>
+                                </div>
+                                <div class="col-md-4 col-xs-4" style="text-align: right;">
+                                    <a href=""><span id="minim_chat_window" class="glyphicon glyphicon-plus icon_minim" ng-click="doReadChatMessage();"></span></a>
+                                </div>
+                            </div>
+                            <div class="panel-body msg_container_base" style="display:none;">
+                                <div class="row msg_container" ng-repeat="chatMessage in chatMessages">
+                                    <div class="col-md-10 col-xs-10" ng-if="chatMessage.sentby==3">
+                                        <div class="messages msg_sent">
+                                            <p>{{chatMessage.message}}</p>
+                                            <time datetime="2009-11-13T20:00">{{chatMessage.datetime}}</time>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 col-xs-2 avatar no-padding" ng-if="chatMessage.sentby==3">
+                                        <img src="{{userImageUrl}}" class=" img-responsive ">
+                                    </div>
+
+                                    <div class="col-md-2 col-xs-2 avatar no-padding" ng-if="chatMessage.sentby==2">
+                                        <img src="{{usercoachdetails.imageurl}}" class=" img-responsive ">
+                                    </div>
+                                    <div class="col-md-10 col-xs-10"  ng-if="chatMessage.sentby==2">
+                                        <div class="messages msg_receive">
+                                            <p>{{chatMessage.message}}</p>
+                                            <time datetime="2009-11-13T20:00">{{chatMessage.datetime}}</time>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel-footer">
+                                <div class="input-group">
+                                    <input id="btn-input" type="text" ng-model="chat.message" class="form-control input-sm chat_input" placeholder="Write your message here..." />
+                                    <span class="input-group-btn">
+                                    <button class="btn btn-sm btn-warning" id="btn-chat" ng-click="doSendChatMessage();">Send</button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    
         </div><!-- @end #content -->
     </div><!-- @end #w -->
 </div>
@@ -169,4 +219,53 @@
     $(function(){
         $(".common_model").show();
     })
+</script>
+<script type="text/javascript">
+    $(document).on('click', '.panel-heading span.icon_minim', function (e) {
+        var $this = $(this);
+        if (!$this.hasClass('panel-collapsed')) {
+            $this.parents('.panel').find('.panel-body').slideUp();
+            $this.addClass('panel-collapsed');
+            $this.removeClass('glyphicon-minus').addClass('glyphicon-plus');
+        } else {
+             $this.parents('.panel').find('.panel-body').slideDown();
+            $this.removeClass('panel-collapsed');
+            $this.removeClass('glyphicon-plus').addClass('glyphicon-minus');
+        }
+    });
+    $(document).on('focus', '.panel-footer input.chat_input', function (e) {
+        var $this = $(this);
+        if ($('#minim_chat_window').hasClass('panel-collapsed')) {
+            $this.parents('.panel').find('.panel-body').slideDown();
+            $('#minim_chat_window').removeClass('panel-collapsed');
+            $('#minim_chat_window').removeClass('glyphicon-plus').addClass('glyphicon-minus');
+        }
+    });
+    $(document).on('click', '#new_chat', function (e) {
+        var size = $( ".chat-window:last-child" ).css("margin-left");
+         size_total = parseInt(size) + 400;
+        alert(size_total);
+        var clone = $( "#chat_window_1" ).clone().appendTo( ".container" );
+        clone.css("margin-left", size_total);
+    });
+    $(document).on('click', '.icon_close', function (e) {
+        //$(this).parent().parent().parent().parent().remove();
+        $( "#chat_window_1" ).remove();
+    });
+    
+    $(window).scroll(function(){
+      if($(window).scrollTop() + $(window).height() > ($(document).height()-300)) {
+      $("#chat_window_1").animate({
+                'position':'absolute', 
+                'margin-bottom':'275px'
+            },10);
+       }else{
+
+        $("#chat_window_1").animate({
+                    'position':'fixed',
+                    'margin-bottom':'0px'
+                },10);
+       }
+      
+    });
 </script>

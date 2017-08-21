@@ -210,6 +210,51 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
 
     };
 
+    //Do Set Chat Message as Read 
+    $scope.doReadChatMessage=function(){
+      $scope.setReadMessageParam={"targetid":$scope.currentChatTargetId};
+      requestHandler.postRequest("setMessageRead/", $scope.setReadMessageParam).then(function(response){
+          if(response.data.Response_status==1){
+            $scope.unreadChatMessageCount=0;
+            $scope.showMessageCount=false; 
+          }
+      })
+    };
+
+    // Do Get Chat Message
+    $scope.doGetChatMessage=function(id){
+        $scope.currentChatTargetId= id;
+        $scope.getMessageParam={"targetid":id,"offset":0};
+        requestHandler.postRequest("readMessage/",$scope.getMessageParam).then(function(response){
+            $scope.chatMessages= response.data.chats;
+            $scope.chatMessages.userid= response.data.chats[0].userid;
+            requestHandler.getRequest("getUserProfile/"+$scope.chatMessages.userid, "").then(function(response){
+                 $scope.userImageUrl=response.data.userprofile.imageurl;
+            });
+            $scope.chat={"message":""};
+            $scope.unreadChatMessageCount=0;
+            $.each($scope.chatMessages,function(index,value){
+                if(value.status==0 && value.sentby==2){
+                    $scope.unreadChatMessageCount+=1;
+                    $scope.showMessageCount=true;
+                }
+                else{
+                     $scope.showMessageCount=false;
+                }
+
+            });
+            setTimeout(function(){ $('.msg_container_base').scrollTop($('.msg_container_base')[0].scrollHeight); }, 500);
+        });
+    };
+
+    //Do Send Chat Message
+    $scope.doSendChatMessage=function(){
+        $scope.getSendMessageParam={"targetid":$scope.currentChatTargetId,"message":$scope.chat.message};
+        requestHandler.postRequest("/sendMessage/",$scope.getSendMessageParam).then(function(response){
+            $scope.doGetChatMessage($scope.currentChatTargetId);
+        });
+    };
+
     $scope.subscribeButtonStatus=false;
     $scope.subscribing=[];
   
@@ -376,6 +421,7 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
         $scope.coachReviews=[];
         $scope.doGetCoachRatings($routeParams.id);
         $scope.subscribed=1;
+        $scope.doGetChatMessage($routeParams.id);
     };
 
     $scope.coachListInit=function(){
