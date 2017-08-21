@@ -17384,3 +17384,10 @@ select.date:focus {
     background: none;
     margin-bottom: 0px;    
 }
+
+/* For Remove User color*/
+.remove-text-color{
+    color: red;
+    font-size: small;
+    text-decoration: underline !important;
+}

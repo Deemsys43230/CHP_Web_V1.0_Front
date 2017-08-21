@@ -1,8 +1,8 @@
 
-<div class="col-lg-12 col-md-12 col-sm-12 no-padding" ng-init="init()" ng-show="isActive">
+<div class="col-lg-12 col-md-12 col-sm-12 no-padding" ng-cloak class="ng-cloak" ng-init="init()" ng-show="isActive">
     <!-- <div flash-message="2000" class="col-lg-4 col-md-4 col-sm-4 pull-right"></div> -->
         <h3 class="classic-title"><span class="sub-title">Client Details</span>
-            <a href=""  class="pull-right" ng-click="doRemoveUserByCoach(coachclientdetails.userid)">Remove User</a>
+            <a href=""  class="remove-text-color pull-right" ng-click="doRemoveUserByCoach(coachclientdetails.userid)">Remove User</a>
         </h3>
         <div ng-if="loaded">
             <div class="loader-style">
@@ -118,16 +118,22 @@
                             <h4 class="text-bold margin-top-10">User Type</h4>
                                 <img class="margin-top-10" ng-show="demographyDeatil.obesity ==1" style="width:60px;" src="../../images/obese.png"/>
                                 <img class="margin-top-10" ng-show="demographyDeatil.diabetes == 1" style="width:60px;" src="../../images/diabetes.jpg"/>
-                                <img class="margin-top-10" ng-show="demographyDeatil.diabetes == null && demographyDeatil.obesity == null" style="width:60px;" src="../../images/obese_diabetes.png"/>
-                            <div class="margin-top-10">{{demographyDeatil.obesity==1?"Obesity":"Diabetes"}}</div>
-                            <div class="margin-top-10" ng-show="demographyDeatil.diabetes == null && demographyDeatil.obesity == null">None</div>
+                                <img class="margin-top-10" ng-show="demographyDeatil.obesity == 1 && demographyDeatil.diabetes == 1" style="width:60px;" src="../../images/obese_diabetes.png"/>
+                                <img class="margin-top-10" ng-show="demographyDeatil.obesity == null && demographyDeatil.diabetes == null" style="width:60px;" src="../../images/healthy.png"/>
+
+                            <div class="margin-top-10" ng-show="demographyDeatil.diabetes == 1">Diabetes</div>
+                            <div class="margin-top-10" ng-show="demographyDeatil.diabetes == 1">Obese</div>
+                            <div class="margin-top-10" ng-show="demographyDeatil.obesity == 1" && ng-show="demographyDeatil.obesity == 1">Obese & Diabetes}}</div>
+                            <div class="margin-top-10" ng-show="demographyDeatil.diabetes == null && demographyDeatil.obesity == null">Normal</div>
                         </div>
                         <div class="col-lg-3 col-sm-3 col-md-3 text-center">
                             <h4 class="text-bold margin-top-10">Plan Type</h4>
-                             <img class="margin-top-10" ng-show="demographyDeatil.userPlanType ==1" style="width:60px;" src="../../images/weight_loss.png"/>
-                                <img class="margin-top-10" ng-show="demographyDeatil.userPlanType == 2" style="width:60px;" src="../../images/weight_gain.png"/>
-                                <img class="margin-top-10" ng-show="demographyDeatil.userPlanType == null && demographyDeatil.userPlanType == null" style="width:60px;" src="../../images/weight_maintain.png"/>
-                            <div class="margin-top-10">{{demographyDeatil.userPlanType == 1?"Weight Loss":"Weight Gain"}}</div>
+                                <img class="margin-top-10" ng-show="demographyDeatil.userPlanType ==1" style="width:60px;" src="../../images/weight_maintain.png"/>
+                                <img class="margin-top-10" ng-show="demographyDeatil.userPlanType == 2" style="width:60px;" src="../../images/weight_loss.png"/>
+                                <img class="margin-top-10" ng-show="demographyDeatil.userPlanType == 3" style="width:60px;" src="../../images/weight_gain.png"/>
+                                <div class="margin-top-10" ng-show="demographyDeatil.userPlanType == 1">Weight Maintain</div>
+                                <div class="margin-top-10" ng-show="demographyDeatil.userPlanType == 2">Weight Loss</div>
+                                <div class="margin-top-10" ng-show="demographyDeatil.userPlanType == 3">Weight Gain</div>
                         </div>
                         <div class="col-lg-3 col-sm-3 col-md-3 text-center">
                             <h4 class="text-bold margin-top-10">Activity Level</h4>
@@ -219,7 +225,14 @@
                                         <h5>Blood Group <span class="pull-right">:</span></h5>
                                     </div>
                                     <div class="col-lg-3 col-md-5 col-sm-4">
-                                        <span>{{demographyDeatil.bloodgroup}}</span>
+                                        <span ng-show="demographyDeatil.bloodgroup==1">A +ve</span>
+                                        <span ng-show="demographyDeatil.bloodgroup==2">B +ve</span>
+                                        <span ng-show="demographyDeatil.bloodgroup==3">O +ve</span>
+                                        <span ng-show="demographyDeatil.bloodgroup==4">AB +ve</span>
+                                        <span ng-show="demographyDeatil.bloodgroup==5">A -ve</span>
+                                        <span ng-show="demographyDeatil.bloodgroup==6">B -ve</span>
+                                        <span ng-show="demographyDeatil.bloodgroup==7">O -ve</span>
+                                        <span ng-show="demographyDeatil.bloodgroup==8">AB -ve</span>
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-6 no-padding">
@@ -227,7 +240,7 @@
                                         <h5>HbA<sub>1c</sub> <small>(%)</small> <span class="pull-right">:</span> </h5>
                                     </div>
                                     <div class="col-lg-3 col-md-5 col-sm-4">
-                                        <span> {{demographyDeatil.HbA1c}} </span>
+                                        <span> {{demographyDeatil.HbA1c==null?"N/A":demographyDeatil.HbA1c}} </span>
                                     </div>
                                 </div>
                             </div>
@@ -237,7 +250,7 @@
                                         <h5>Systolic Blood Pressure <small>(mmHg)</small><span class="pull-right">:</span></h5>
                                     </div>
                                     <div class="col-lg-3 col-md-3 col-sm-3">
-                                        <span ng-model="demography.systolicbloodpressure">{{demographyDeatil.systolicbloodpressure}} </span>
+                                        <span>{{demographyDeatil.systolicbloodpressure==null?"N/A":demographyDeatil.systolicbloodpressure}} </span>
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-6 no-padding">
@@ -245,7 +258,7 @@
                                         <h5>Diastollic Blood Pressure <small>(mmHg)</small> <span class="pull-right">:</span></h5>
                                     </div>
                                     <div class="col-lg-3 col-md-3 col-sm-3 padding-right-0">
-                                        <span ng-model="demography.diastolicbloodpressure"> {{demographyDeatil.diastolicbloodpressure}} </span>
+                                        <span> {{demographyDeatil.diastolicbloodpressure==null?"N/A":demographyDeatil.diastolicbloodpressure}} </span>
                                     </div>
                                 </div>
                             </div>
@@ -255,7 +268,7 @@
                                         <h5>HDL Cholestrol <small>(mg/dL)</small> <span class="pull-right">:</span></h5>
                                     </div>
                                     <div class="col-lg-3 col-md-3 col-sm-3">
-                                        <span> {{demographyDeatil.HDLcholestrol}} </span>
+                                        <span> {{demographyDeatil.HDLcholestrol==null?"N/A":demographyDeatil.HDLcholestrol}} </span>
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-6 no-padding">
@@ -263,7 +276,7 @@
                                         <h5>LDL Cholestrol <small>(mg/dL)</small> <span class="pull-right">:</span></h5>
                                     </div>
                                     <div class="col-lg-3 col-md-3 col-sm-3">
-                                        <span>{{demographyDeatil.LDLcholestrol}} </span>
+                                        <span>{{demographyDeatil.LDLcholestrol==null?"N/A":demographyDeatil.LDLcholestrol}} </span>
                                     </div>
                                 </div>
                             </div>
@@ -273,7 +286,7 @@
                                         <h5>Triglycerides <small>(mg/dL)</small> <span class="pull-right">:</span></h5>
                                     </div>
                                     <div class="col-lg-3 col-md-3 col-sm-3">
-                                        <span> {{demographyDeatil.triglycerides}} </span>
+                                        <span> {{demographyDeatil.triglycerides==null?"N/A":demographyDeatil.triglycerides}} </span>
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-6 no-padding">
@@ -281,7 +294,7 @@
                                         <h5>Random Blood Glucose <small>(mg/dL)</small> <span class="pull-right">:</span> </h5>
                                     </div>
                                     <div class="col-lg-3 col-md-3 col-sm-3">
-                                        <span> {{demographyDeatil.randombloodglucose}} </span>
+                                        <span> {{demographyDeatil.randombloodglucose==null?"N/A":demographyDeatil.randombloodglucose}} </span>
                                     </div>
                                 </div>
                             </div>
@@ -291,7 +304,7 @@
                                         <h5>Fasting Blood Glucose <small>(mg/dL)</small> <span class="pull-right">:</span></h5>
                                     </div>
                                     <div class="col-lg-3 col-md-3 col-sm-3">
-                                        <span> {{demographyDeatil.fastingbloodglucose}} </span>
+                                        <span> {{demographyDeatil.fastingbloodglucose==null?"N/A":demographyDeatil.fastingbloodglucose}} </span>
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-6 no-padding">
@@ -299,7 +312,7 @@
                                         <h5>Postprandial Blood Glucose <small>(mg/dL)</small> <span class="pull-right">:</span></h5>
                                     </div>
                                     <div class="col-lg-3 col-md-3 col-sm-3">
-                                        <span> {{demographyDeatil.postprandialbloodglucose}}</span>
+                                        <span> {{demographyDeatil.postprandialbloodglucose==null?"N/A":demographyDeatil.postprandialbloodglucose}}</span>
                                     </div>
                                 </div>                                            
                             </div>
@@ -339,7 +352,7 @@
                             <img class="img-width" src="../../images/fat.png"/>
                         </div>
                         <div class="col-md-8 col-lg-8 col-sm-8 no-padding">
-                            <div class="text-bold" style="font-size: 78%"><small>{{waterlog}}/{{waterlogoz}}</small></div>
+                            <div class="text-bold" style="font-size: 78%">{{water.milliliters}}/{{water.ounces}}</div>
                             <div class="text-bold"><small>ml/oz</small></div>
                         </div>
                     </div>

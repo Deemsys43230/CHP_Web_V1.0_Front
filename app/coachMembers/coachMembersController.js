@@ -52,6 +52,10 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
         $scope.doGetNotesByCoach(id);  
         //Demography Details
         $scope.doGetClientsDemographyDetailsByCoach(id);
+        //Health profile Details
+        $scope.doGetClientHealthProfileDetailsByCoach(id);
+        //Graph  for oneweek
+        $scope.doGetClientGraphDetailsByCoach(id);
 
 
     };
@@ -121,69 +125,63 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
         requestHandler.getRequest("getUserDemography/"+id, "").then(function(response){
             $scope.demographyDeatil = response.data.demography;
 
-            if($scope.demographyDeatil.obesity==null){
-                $scope.demographyDeatil.obesity = "N/A";
-            }
-            if($scope.demographyDeatil.diabetes==null){
-                $scope.demographyDeatil.diabetes = "N/A";
-            }
-            if($scope.demographyDeatil.height==null){
-                $scope.demographyDeatil.height = "N/A";
-            }
-            if($scope.demographyDeatil.weight==null){
-                $scope.demographyDeatil.weight = "N/A";
-            }
-            if($scope.demographyDeatil.fat==null){
-                demographyDeatil.fat = "N/A";
-            }
-            if($scope.demographyDeatil.fibre==null){
-                $scope.demographyDeatil.fibre = "N/A";
-            }
-            if($scope.demographyDeatil.hip==null){
-                $scope.demographyDeatil.hip = "N/A";
-            }
-            if($scope.demographyDeatil.waist==null){
-                $scope.demographyDeatil.waist = "N/A";
-            }
-            if($scope.demographyDeatil.bmi==null){
-                demographyDeatil.bmi = "N/A";
-            }
-            if($scope.demographyDeatil.bloodgroup==null){
-                $scope.demographyDeatil.bloodgroup = "N/A";
-            }
-            if($scope.demographyDeatil.protien==null){
-                $scope.demographyDeatil.protien = "N/A";
-            }
-            if($scope.demographyDeatil.carbo==null){
-                $scope.demographyDeatil.carbo = "N/A";
-            }
-            if($scope.demographyDeatil.systolicbloodpressure==null){
-                $scope.demographyDeatil.systolicbloodpressure = "N/A";
-            }
-            if($scope.demographyDeatil.diastolicbloodpressure==null){
-                $scope.demographyDeatil.diastolicbloodpressure = "N/A";
-            }
-            if($scope.demographyDeatil.HDLcholestrol==null){
-                $scope.demographyDeatil.HDLcholestrol = "N/A";
-            }
-            if($scope.demographyDeatil.LDLcholestrol==null){
-                $scope.demographyDeatil.LDLcholestrol = "N/A";
-            }
-            if($scope.demographyDeatil.triglycerides==null){
-                $scope.demographyDeatil.triglycerides = "N/A";
-            }
-            if($scope.demographyDeatil.HbA1c==null){
-                $scope.demographyDeatil.HbA1c = "N/A";
-            }
-            if($scope.demographyDeatil.fastingbloodglucose==null){
-                $scope.demographyDeatil.fastingbloodglucose = "N/A";
-            }
-            if($scope.demographyDeatil.randombloodglucose==null){
-                $scope.demographyDeatil.randombloodglucose = "N/A";
-            }
-            if($scope.demographyDeatil.postprandialbloodglucose==null){
-                $scope.demographyDeatil.postprandialbloodglucose = "N/A";
-            }
+        });
+    };
+
+
+    /*For clients Individual daily activities details By Coach */
+
+    $scope.doGetClientHealthProfileDetailsByCoach = function(userid){
+        var today = new Date(); 
+        var dd = today.getDate(); 
+        var mm = today.getMonth()+1; 
+        //January is 0! 
+        var yyyy = today.getFullYear(); 
+        if(dd<10){
+            dd='0'+dd
+        } 
+        if(mm<10){
+            mm='0'+mm
+        } 
+        var today = dd+'/'+mm+'/'+yyyy;
+
+        requestHandler.postRequest("coach/userhealthprofile/",{"userid":userid,"startdate":today,"enddate":today}).then(function(response){
+          
+            //get the array
+            $.each(response.data.healthprofile,function(index,value){
+                $scope.wearable = value.wearables;
+                $scope.water = value.waterlog;
+            });
+        });
+    };
+
+    $scope.doGetClientGraphDetailsByCoach = function(userid){
+        var today = new Date(); 
+        var dd = today.getDate(); 
+        var mm = today.getMonth()+1; 
+        //January is 0! 
+        var yyyy = today.getFullYear(); 
+        if(dd<10){
+            dd='0'+dd
+        } 
+        if(mm<10){
+            mm='0'+mm
+        } 
+
+        var ed = today.getDate()-6;
+        if(ed<10){
+            ed='0'+ed
+        }
+        var today = dd+'/'+mm+'/'+yyyy;
+        var enddate = ed+'/'+mm+'/'+yyyy; 
+        requestHandler.postRequest("coach/userhealthprofile/",{"userid":userid,"startdate":enddate,"enddate":today}).then(function(response){
+          
+            //get the array
+            $.each(response.data.healthprofile,function(index,value){
+                $scope.wearable = value.wearables;
+                console.log($scope.wearable);
+                $scope.water = value.waterlog;
+            });
         });
     };
 
@@ -197,6 +195,7 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
           }
       })
     };
+
 
     //Do Get Chat Message
     $scope.doGetChatMessage=function(id){
