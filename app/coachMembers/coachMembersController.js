@@ -62,17 +62,24 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
 
 
     //Duplicate value For clients individual profile view
-
     $scope.doGetClientsDetailsByCoach= function (id){
-        $scope.coachclientdetails={};
-        $scope.member = {
-            status: 'member-view'
+            $scope.coachclientdetails={};
+            $scope.member = {
+                status: 'member-view'
+            };
+            if(id!=0){
+                 requestHandler.getRequest("/getUserProfile/"+id, "").then(function(response){
+                    $scope.coachclientdetails=response.data.userprofile;
+                    $scope.coachclientdetails.age = "-";
+                    $scope.viewload=true;
+
+                    //Get Chat Message
+                    $scope.doGetChatMessage(id);
+
+              });
+            }
+           
         };
-
-        requestHandler.getRequest("getUserProfile/"+id, "").then(function(response){
-
-            $scope.coachclientdetails=response.data.userprofile;
-            $scope.coachclientdetails.age = "-";
 
 
     //Do Get Chat Message
@@ -89,26 +96,32 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
                     $scope.unreadChatMessageCount+=1;
                 }
             });
-            
             setTimeout(function(){ $('.msg_container_base').scrollTop($('.msg_container_base')[0].scrollHeight); }, 500);
+        });
+    };
 
-        $scope.viewload=true;
-    });
+    //Do Send Chat Message
+    $scope.doSendChatMessage=function(){
+             $scope.getSendMessageParam={"targetid":$scope.currentChatTargetId,"message":$scope.chat.message};
+            requestHandler.postRequest("/sendMessage/",$scope.getSendMessageParam).then(function(response){
+                $scope.doGetChatMessage($scope.currentChatTargetId);
+            });
+       
     };
 
         // Notes for User Written by Coach reference
 
-    // Insert or Update Notes
-        $scope.doInsertOrUpdateNotes = function(userid){
-            $scope.notes= $scope.Notes.notes;
+// Insert or Update Notes
+    $scope.doInsertOrUpdateNotes = function(userid){
+        $scope.notes= $scope.Notes.notes;
 
-            requestHandler.postRequest("coach/updatenotes/",{"userid":userid,"notes":$scope.notes}).then(function(response){
-                if(response.data.Response == "Success"){
-                    $('#notesButton').hide();
-                    scrollBottom: 0
-                }
-            });
-        };
+        requestHandler.postRequest("coach/updatenotes/",{"userid":userid,"notes":$scope.notes}).then(function(response){
+            if(response.data.Response == "Success"){
+                $('#notesButton').hide();
+                scrollBottom: 0
+            }
+        });
+    };
         //Get Users Individual Notes
     $scope.doGetNotesByCoach = function(userid){
         requestHandler.postRequest("coach/getnotes/",{"userid":userid}).then(function(response){
