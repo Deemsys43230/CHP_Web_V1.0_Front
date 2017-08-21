@@ -16,12 +16,13 @@ $scope.inviteId = $routeParams.id;
     //Add New Coach from coach list and Clik add as a coach button
     $scope.doAddCoach= function () {
       requestHandler.postRequest("admin/registerCoach/",$scope.invitationDetails).then(function(){
-            successMessage(Flash,"Successfully Registered");
+            successMessage(Flash,"Coach Added Successfully");
             /*To Close Modal*/
              $(".common_model").hide();
              $("#modal").hide();
              $("#lean_overlay").hide();
           /*End Close Modal*/
+           $location.path("coach");
 
       },function(){
            errorMessage(Flash,"Please Try Again Later");
@@ -44,6 +45,38 @@ $scope.inviteId = $routeParams.id;
                 }
             });
 
+            switch ($scope.invitationDetails.referral.toString()) {
+                    case "1":
+                        $scope.invitationDetails.referral="Friend";
+                        break;
+                    case "2":
+                        $scope.invitationDetails.referral="Email";
+                        break;
+                    case "3":
+                        $scope.invitationDetails.referral="Search Engine";
+                        break;
+                    case "4":
+                        $scope.invitationDetails.referral="TV/Radio";
+                        break;
+                    case "5":
+                        $scope.invitationDetails.referral="Website";
+                        break;
+                    case "6":
+                        $scope.invitationDetails.referral="Newspaper";
+                        break;
+                    case "7":
+                        $scope.invitationDetails.referral="Facebook";
+                        break;
+                    case "8":
+                        $scope.invitationDetails.referral="Twitter";
+                        break;
+                    case "9":
+                        $scope.invitationDetails.referral="Linked In";
+                        break;
+                    case "10":
+                        $scope.invitationDetails.referral="Other";
+                        break;
+                    }
         });
     };
 
@@ -52,19 +85,19 @@ $scope.inviteId = $routeParams.id;
     $scope.confirmModel=function(){
         $(function(){
             $("#lean_overlay").fadeTo(1000);
-            $("#modal").fadeIn(600);
+            $("#confirm_modal").fadeIn(600);
             $(".common_model").show();
         });
 
         $(".modal_close").click(function(){
             $(".common_model").hide();
-            $("#modal").hide();
+            $("#confirm_modal").hide();
             $("#lean_overlay").hide();
         });
 
         $("#lean_overlay").click(function(){
             $(".common_model").hide();
-            $("#modal").hide();
+            $("#confirm_modal").hide();
             $("#lean_overlay").hide();
         });
 
@@ -94,12 +127,11 @@ $scope.inviteId = $routeParams.id;
 
     //Display view Individual Invitation Details By Id
     $scope.invitationCoachViewInit=function(){
-        $scope.doViewInvitationList();
+        $scope.doGetInvitationByID();
     };
 
 
     $scope.init= function() {
-       $scope.doGetInvitationByID();
+       $scope.doViewInvitationList();
     };
-    $scope.init();
 }]);

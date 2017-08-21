@@ -16654,7 +16654,6 @@ margin-top: 10px;
     background: #fdfdfd;
     color: #fff;
     float: left;
-    height: 500px !important;
     -moz-box-shadow: 0 0 3px rgba(0, 0, 0, .3);
     -webkit-box-shadow: 0 0 3px rgba(0, 0, 0, .3);
     box-shadow: 0 0 3px rgba(0, 0, 0, .3);
@@ -16789,15 +16788,15 @@ margin-top: 10px;
     margin-top: 40px;
 }
 .plan {
-    width: 25%;
     background: #fdfdfd;
     color: #fff;
     float: left;
-    height: 500px !important;
+    min-height: 510px !important;
     -moz-box-shadow: 0 0 3px rgba(0, 0, 0, .3);
     -webkit-box-shadow: 0 0 3px rgba(0, 0, 0, .3);
     box-shadow: 0 0 3px rgba(0, 0, 0, .3);
     z-index: 10 !important;
+    margin:5px;
 }
 
 .plan .price {
@@ -16850,7 +16849,7 @@ margin-top: 10px;
 }
 
 .padding-topleft {
-    padding-left: 150px;
+    padding-left: 100px;
     padding-top: 50px;
 }
 .exp-text .inside-text { 

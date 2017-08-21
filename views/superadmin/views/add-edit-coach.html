@@ -75,7 +75,19 @@
                                 <div> Referral <span class="pull-right">:</span></div>
                             </div>
                             <div class="col-lg-8 col-md-7 col-sm-12 margin-top-10">
-                                <input class="coach-input" placeholder="Referral" name="ref" maxlength="4" ng-pattern="/^\d+$/" ng-model="invitationDetails.referral" required/>
+                                <select class="full-width main margin-bottom-1" ng-model="invitationDetails.referral" required>
+                                    <option value="">-- Select --</option>
+                                    <option value="1">Friend</option>
+                                    <option value="2">Email</option>
+                                    <option value="3">Search Engine</option>
+                                    <option value="4">TV/Radio</option>
+                                    <option value="5">Website</option>
+                                    <option value="6">Newspaper</option>
+                                    <option value="7">Facebook</option>
+                                    <option value="8">Twitter</option>
+                                    <option value="9">Linked In</option>
+                                    <option value="10">Other</option>
+                                </select>  
                                 <span ng-show="coachDetailsForm.ref.$dirty && coachDetailsForm.ref.$invalid">
                                     <span class="error-message textarea-errormessage10" ng-show="coachDetailsForm.ref.$error.required"><span>Required.</span></span>
                                     <span class="error-message textarea-errormessage10" ng-show="coachDetailsForm.ref.$error.pattern"><span>Enter&nbsp;valid&nbsp;Data.</span></span>
@@ -144,7 +156,7 @@
                             </div>
                         </div>
                         <div class="col-lg-12 col-md-12 col-sm-12 text-center margin-top-50">
-                            <a id="modal_trigger" href="" class="price-button btn" ng-click="confirmModel()" ng-disabled="isClean() || coachDetailsForm.$invalid">Submit</a>
+                            <a id="confirm_modal_trigger" href="#confirm_modal" class="price-button btn" ng-click="confirmModel()" ng-disabled="isClean() || coachDetailsForm.$invalid">Submit</a>
                         </div>
                         <div class="col-lg-12 col-md-12 col-sm-12 text-center margin-top-50"></div>
                     </div>
@@ -154,7 +166,7 @@
 </div>
 
 <!-- delete confirmation popup-->
-<div id="modal" class="popupContainer" style="display:none;left: 37%!important;">
+<div id="confirm_modal" class="popupContainer" style="display:none;left: 37%!important;">
     <header class="popupHeader">
         <span class="header_title">Confirmation</span>
         <span class="modal_close"><i class="fa fa-times"></i></span>
@@ -176,8 +188,7 @@
 <script type="text/javascript" src="../../js/script.js"></script>
 
 <script type="text/javascript">
-    $("#modal_trigger").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
-
+    $("#confirm_modal_trigger").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
     $(function(){
 
         $(".user_register").show();
@@ -202,5 +213,5 @@
             $(".user_register1").show();
             return false;
         });
-    });
+    });  
 </script>

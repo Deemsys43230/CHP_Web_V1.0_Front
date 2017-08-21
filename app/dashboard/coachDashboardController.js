@@ -1,6 +1,6 @@
 var coachApp = angular.module('coachApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','countTo']);
 
-coachApp.controller('CoachDashboardController',['$scope','requestHandler','Flash',function($scope,requestHandler,Flash) {
+coachApp.controller('CoachDashboardController',['$scope','requestHandler','Flash','$location',function($scope,requestHandler,Flash,$location) {
     $scope.countFrom = 0;
     //Get Coach List
     $scope.doGetCoachDashboardCount=function(){
@@ -12,6 +12,18 @@ coachApp.controller('CoachDashboardController',['$scope','requestHandler','Flash
 
         });
     };
+
+
+    //Check for Active Subscription
+    $scope.doNavigateToMembersList=function(){
+        requestHandler.getRequest("/coach/isSubscriptionActive/","").then(function(response){
+            if(response.data.Response_status==1)
+                $location.path("my-members");
+            else
+                $location.path("subscription");
+        });
+    };
+
     $scope.doGetCoachDashboardCount();
 
 }]);

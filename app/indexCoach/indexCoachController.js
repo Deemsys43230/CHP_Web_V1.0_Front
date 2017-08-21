@@ -12,7 +12,7 @@ commonApp.controller('CoachController',['$scope','requestHandler','Flash','$rout
     $scope.doGetCoachDetails=function(){
         $scope.coach.planchoice = $scope.planId;
         requestHandler.postRequest("placecoachinterest/",$scope.coach).then(function(response){
-           successMessage(Flash,"Successfully Registered");
+           successMessage(Flash,"Thank You for Your Interest");
           $scope.coach={};
          $scope.coachDetailsForm.$setPristine();
         },function(){

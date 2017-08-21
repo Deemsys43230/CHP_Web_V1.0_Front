@@ -34,12 +34,12 @@
                         </div>
                         <div ng-show="units==1">
                             <span class="price" style="background-color:{{pricingPlan.plancolor}}">
-                                <span>Rs:{{pricingPlan.priceINR}}</span><br/>
+                                <span>Rs {{pricingPlan.priceINR}}</span><br/>
                             </span>
                         </div>
                         <div ng-hide="units==1">
                             <span class="price" style="background-color:{{pricingPlan.plancolor}}">
-                                <span>$:{{pricingPlan.priceUSD}}</small></span>
+                                <span>$ {{pricingPlan.priceUSD}}</small></span>
                             </span>
                         </div>
                         <div class="coach">
@@ -57,12 +57,15 @@
                         <br>
                         <h4>Discount</h4>
                         <ul class="features remove-style">
-                            <li ng-show="units==1">Rs:{{pricingPlan.discountINR}}</li>
-                            <li ng-hide="units==1">$:{{pricingPlan.discountUSD}}</li>
+                            <li ng-show="units==1">Rs {{pricingPlan.discountINR}}</li>
+                            <li ng-hide="units==1">$ {{pricingPlan.discountUSD}}</li>
                         </ul>
+                        <div>
                         <a href="#coach-form/{{pricingPlan.id}}" class="price-button btn button" ng-disabled="subscribeButtonStatus">
                             Subscribe
-                        </a><br/>
+                        </a>
+                    </div>
+                        <br/>
                     </div>
                 </div>
             </div>

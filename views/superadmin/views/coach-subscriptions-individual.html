@@ -9,7 +9,7 @@
            
                 <div class="row min-height-385"> 
                     <div class="col-md-12" ng-init="init()">
-                        <a href="#coach" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back to Coaches</a>
+                        <a href="#coach" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back to Coach List</a>
                         <!-- <div class="pull-right" id="hidden-search">
                             <a href="#" onclick="return false;" class="show-list-search search_button margin-left-5"><i class="fa fa-search"></i></a>
                             <div class="search-list-form override">
@@ -54,7 +54,7 @@
                                     <a href="#coach-subscription/{{subscriptionHistory.paymentid}}" class="btn-xs btn-primary">View Details</a>
                                 </td>
                             </tr>
-                            <tr ng-show="subscriptionHistoryList.length==0"><td colspan="8" class="text-center">No Records Found !!!</td></tr>
+                            <tr ng-show="subscriptionHistoryList.history.length==0"><td colspan="9" class="text-center">No Subscriptions Found !!!</td></tr>
                             </tbody>
                         </table>
                         <!-- Start Pagination -->

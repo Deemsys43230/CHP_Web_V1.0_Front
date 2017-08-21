@@ -3,8 +3,9 @@
  */
 var coachApp = angular.module('coachApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','angularUtils.directives.dirPagination','angular-nicescroll','angular-svg-round-progress']);
 
-coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter","Flash",function($scope,requestHandler,$filter,roundProgressService,Flash) {
+coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter","Flash","$location",function($scope,requestHandler,$filter,Flash,$location,roundProgressService) {
 
+    $scope.isActive=false;
     //Get Coaches List
     $scope.doGetMyMembers=function(){
       
@@ -32,9 +33,7 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
                     });                   
                 }
             if($scope.clients.length>0){
-                $scope.doGetClientsProfileDetailsByCoach($scope.clients[0].userid);
-                $scope.doGetClientsDemographyDetailsByCoach($scope.clients[0].userid);
-                $scope.doGetNotesByCoach($scope.clients[0].userid);
+               $scope.doGetIndividualClientDetail($scope.clients[0].userid);
             }
             $scope.loaded=false;
             $scope.paginationLoad=true;
@@ -43,6 +42,21 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
     };
 
 
+    //Get Individual Memeber Details
+    $scope.doGetIndividualClientDetail=function(id){
+        //Get Profile Detail
+        $scope.doGetClientsProfileDetailsByCoach(id);  
+        //Get Chat Message
+        $scope.doGetChatMessage(id);
+        //Do Get Notes
+        $scope.doGetNotesByCoach(id);  
+        //Demography Details
+        $scope.doGetClientsDemographyDetailsByCoach(id);
+
+
+    };
+
+    //Get All Client List
     $scope.doGetAllClients = function(){
         requestHandler.getRequest("/coach/myclients/","").then(function(response){
             $scope.clients = response.data.clients;
@@ -96,11 +110,7 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
                     $scope.coachclientdetails = coachclientdetails;
 
                     $scope.viewload=true;
-
-                    //Get Chat Message
-                    $scope.doGetChatMessage(id);
-
-              });
+                  });
             }
            
         };
@@ -298,13 +308,17 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
 
     //Initial Load
     $scope.init = function(){
-        $scope.paginationLoad=false;
-        $scope.doGetGroupList();
-        $scope.doGetMyMembers(0);
-        $scope.doGetClientsProfileDetailsByCoach(0);
-        $scope.doGetClientsDemographyDetailsByCoach(0);
-        $scope.doGetNotesByCoach();
-        
+            requestHandler.getRequest("/coach/isSubscriptionActive/","").then(function(response){
+                if(response.data.Response_status!=0){
+                        $scope.isActive=true;
+                        $scope.paginationLoad=false;
+                        $scope.doGetGroupList();
+                        $scope.doGetMyMembers(0);
+                }else{
+                    $location.path("subscription");
+                }
+             
+            });
     };
 
     // Search Food Type

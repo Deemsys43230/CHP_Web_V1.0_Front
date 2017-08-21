@@ -14,7 +14,9 @@
                 </div>
 
                 <form name="coachDetailsForm" novalidate>
+                 
                     <div class="col-lg-8 col-md-7 col-sm-7 padding-topleft">
+                       <h3><b>To Become a Coach, Please Submit the Form Below</b></h3><br/>
                         <div class="form-group">
                             <div class="col-lg-3 col-md-5 col-sm-12 margin-top-10">
                                 <div> First Name <span class="pull-right">:</span></div>
@@ -41,7 +43,7 @@
                         </div>
                         <div class="form-group">
                             <div class="col-lg-3 col-md-5 col-sm-12 margin-top-10">
-                                <div> Email Id <span class="pull-right">:</span></div>
+                                <div> Email ID <span class="pull-right">:</span></div>
                             </div>
                             <div class="col-lg-8 col-md-7 col-sm-12 margin-top-10">
                                 <input class="coach-input" placeholder="example@gmail.com" name="emailid" ng-model="coach.emailid" maxlength="25" required validate-email/>
@@ -71,18 +73,7 @@
                                 <input class="coach-input" ng-model="coach" ng-disabled="true" required/>
                             </div>
                         </div> -->
-                        <div class="form-group">
-                            <div class="col-lg-3 col-md-5 col-sm-12 margin-top-10">
-                                <div> Referral <span class="pull-right">:</span></div>
-                            </div>
-                            <div class="col-lg-8 col-md-7 col-sm-12 margin-top-10">
-                                <input class="coach-input" placeholder="Referral" name="ref" maxlength="4" ng-pattern="/^\d+$/" ng-model="coach.referral" required/>
-                                <span ng-show="coachDetailsForm.ref.$dirty && coachDetailsForm.ref.$invalid">
-                                    <span class="error-message textarea-errormessage10" ng-show="coachDetailsForm.ref.$error.required"><span>Required.</span></span>
-                                    <span class="error-message textarea-errormessage10" ng-show="coachDetailsForm.ref.$error.pattern"><span>Enter&nbsp;valid&nbsp;Data.</span></span>
-                                </span>
-                            </div>
-                        </div>
+                        
                         <div class="form-group">
                             <div class="col-lg-3 col-md-5 col-sm-12 margin-top-10">
                                 <div> Qualification <span class="pull-right">:</span></div>
@@ -130,6 +121,30 @@
                                     <span class="error-message textarea-errormessage40" ng-show="coachDetailsForm.about.$error.required"><span>Required.</span></span>
                                 </span>
                                 <textarea id="inputFocusForDatePicker" class="coach_input_textarea" name="about" ng-model="coach.about" maxlength="300" ng-blur="showCount=0" ng-focus="showCount=1" required></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-3 col-md-5 col-sm-12 margin-top-10">
+                                <div> How do you know about us? <span class="pull-right">:</span></div>
+                            </div>
+                            <div class="col-lg-8 col-md-7 col-sm-12 margin-top-10">
+                                <select class="full-width main margin-bottom-1" ng-model="coach.referral" ng-init="coach.referral=""" required>
+                                    <option value="">-- Select --</option>
+                                    <option value="1">Friend</option>
+                                    <option value="2">Email</option>
+                                    <option value="3">Search Engine</option>
+                                    <option value="4">TV/Radio</option>
+                                    <option value="5">Website</option>
+                                    <option value="6">Newspaper</option>
+                                    <option value="7">Facebook</option>
+                                    <option value="8">Twitter</option>
+                                    <option value="9">Linked In</option>
+                                    <option value="10">Other</option>
+                                </select>                               
+                                <span ng-show="coachDetailsForm.ref.$dirty && coachDetailsForm.ref.$invalid">
+                                    <span class="error-message textarea-errormessage10" ng-show="coachDetailsForm.ref.$error.required"><span>Required.</span></span>
+                                    <span class="error-message textarea-errormessage10" ng-show="coachDetailsForm.ref.$error.pattern"><span>Enter&nbsp;valid&nbsp;Data.</span></span>
+                                </span>
                             </div>
                         </div>
                         <div class="col-lg-12 col-md-12 col-sm-12 text-center margin-top-50">
