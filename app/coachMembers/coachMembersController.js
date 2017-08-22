@@ -63,9 +63,12 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
     //Get All Client List
     $scope.doGetAllClients = function(){
         requestHandler.getRequest("/coach/myclients/","").then(function(response){
-            $scope.clients = response.data.clients;
+        $scope.clients = response.data.clients;
+            $.each($scope.groupsList,function(index,value){
+                value.isSelected=false;
+            });
         });
-    };
+   };
     //Get Groups List
     $scope.doGetGroupList=function(){
        requestHandler.getRequest("coach/getGroups/").then(function(response){

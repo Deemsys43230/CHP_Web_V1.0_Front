@@ -23,7 +23,7 @@
                 <div class="coach-list">
                     <div class="content_scrollbar" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#eee'}" scroller>
                         <div  ng-show="clients.length!=0" class="padding-right-10">
-                            <div class="client-view col-lg-12 col-md-12 col-sm-12" ng-class="{'active': client.userid == coachclientdetails.userid }" ng-repeat="client in clientFilter=(clients | startsWithLetterMember : clientSearch.firstname | filter:clientSearch.groupid )" ng-click="doGetIndividualClientDetail(client.userid)">
+                            <div class="client-view col-lg-12 col-md-12 col-sm-12" ng-class="{'active': client.userid == coachclientdetails.userid }" ng-repeat="client in clientFilter=(clients | startsWithLetterMember : clientSearch)" ng-click="doGetClientsDetailsByCoach(client.userid)">
                                 <div class="col-lg-2 col-md-2 col-sm-2 no-padding">
                                     <img class="img-circle" ng-src="{{client.imageurl}}">
                                 </div>

@@ -203,10 +203,10 @@ adminApp.controller('CoachViewController',['$scope','requestHandler','Flash','$r
 
 
 
-        requestHandler.getRequest("getRatingsandReviews/"+id, "").then(function (response) {
-            $scope.coachReviews = response.data.Ratings_Reviews;
+        requestHandler.postRequest("getCoachRatingsandReviews/"+id+"/",$scope.coachRatingPagination).then(function (response) {
+            $scope.coachReviews = response.data.reviews;
             $scope.viewload=false;
-            $scope.totalRatings = $scope.coachReviews.totalRatings;
+            $scope.totalRatings = $scope.coachReviews.totalrecords;
             $scope.avgRatings = $scope.coachReviews.averageRatings;
 
             if($scope.coachReviews.averageRatings==0)
@@ -221,9 +221,10 @@ adminApp.controller('CoachViewController',['$scope','requestHandler','Flash','$r
     };
 
     $scope.doGetCoachRatings= function (id) {
+        alert("inside rating and reviews");
         $scope.reviewload=true;
-        requestHandler.getRequest("getRatingsandReviews/"+id, "").then(function(response){
-            $scope.coachReviews=response.data.Ratings_Reviews.Reviews;
+        requestHandler.postRequest("getCoachRatingsandReviews/"+id+"/",$scope.coachRatingPagination).then(function(response){
+            $scope.coachReviews=response.data.reviews;
             $scope.reviewload=false;
         });
     };

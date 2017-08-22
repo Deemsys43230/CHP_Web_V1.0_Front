@@ -77,10 +77,11 @@
         <div class="common_model">
             <form name="inviteUserForm" novalidate>
                <p>Inviting User Email ID</p>
-               <input type="text" name="email" ng-model="sendEmail.useremailid" maxlength="50" required focus-me="shouldBeOpen" validate-email/>
+               <input type="text" name="email" ng-model="sendEmail.useremailid" maxlength="50" required focus-me="shouldBeOpen" validate-email emailexists/>
                <span ng-show="inviteUserForm.email.$dirty&&inviteUserForm.email.$invalid && !inviteUserForm.email.$pristine">
                    <span class="error-message" ng-show="inviteUserForm.email.$error.required"><span>Required.</span></span>
                     <span class="error-message" ng-show="inviteUserForm.email.$error.validateEmail"><span>Invalid&nbsp;Email&nbsp;ID.</span></span>
+                    <span class="error-message" ng-show="inviteUserForm.email.$error.emailexists"><span>Email&nbsp;ID&nbsp;Already&nbsp;Exist.</span></span>
                </span>
 
                <div class="action_btns margin-top-20">

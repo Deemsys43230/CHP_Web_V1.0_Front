@@ -1079,3 +1079,66 @@ coachApp.factory('myGoogleAnalytics', [
             // inject self
         }
     ]);
+
+
+//Check for All Charactor  Validation
+coachApp.directive('validateAllCharacters', function() {
+    var ALL_CHARACTERS = /^[a-zA-Z0-9?=.*!@#$%^&*_\-\S\s]+$/;
+
+    return {
+        require: 'ngModel',
+        restrict: '',
+        link: function(scope, elm, attrs, ctrl) {
+            // only apply the validator if ngModel is present and Angular has added the Integer validator
+            ctrl.$validators.validateEmail = function(modelValue) {
+                return  ctrl.$isEmpty(modelValue) || ALL_CHARACTERS .test(modelValue);
+            };
+        }
+    };
+});
+
+
+//Check for Email Already Exists
+coachApp.directive("emailexists",['$q', '$timeout','requestHandler', function ($q, $timeout,requestHandler) {
+
+    var CheckEmailExists = function (isNew) {
+
+        var returnvalue;
+        if(isNew===1)
+            returnvalue=true;
+        else
+            returnvalue=false;
+
+        return returnvalue;
+    };
+
+    return {
+        restrict: "A",
+        require: "ngModel",
+        link: function (scope, element, attributes, ngModel) {
+            ngModel.$asyncValidators.emailexists = function (modelValue) {
+                var defer = $q.defer();
+                $timeout(function () {
+                    var isNew;
+                    var sendRequest=requestHandler.postRequest("checkEmailExist/",{"emailid":modelValue}).then(function(response){
+                        isNew=response.data.Response_status;
+                    });
+
+                    sendRequest.then(function(){
+
+                        if (CheckEmailExists(isNew)){
+                            defer.resolve();
+                        }
+                        else{
+                            defer.reject();
+                        }
+                    });
+                    isNew = false;
+                }, 10);
+
+                return defer.promise;
+            }
+        }
+    };
+}]);
+
