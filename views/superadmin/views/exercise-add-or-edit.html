@@ -69,10 +69,16 @@
                             </ui-select-choices>
                         </ui-select>
                         </div>
+
+                        <h5>Video Url:</h5>
+                      <input class="form-control" name="videosource" maxlength="100" ng-model="exerciseDetail.videosource" required/>
+                        <span ng-show="excersiseForm.videosource.$dirty$$excerciseForm.videosource.$invalid"> 
+                            <span class="error-message" ng-show="excerciseForm.videosource.$error.required"><span>Required</span></span>
+                        </span><br/> 
+
                         <h5>Levels :  <span ng-show="exerciseForm.level.$invalid">
                         <span class="text-red">Required.</span>
                         </span></h5>
-
                     <div class="form-group">
                         <ui-select multiple  ng-model="exerciseDetail.level" theme="select2" ng-disabled="disabled" name="level" class="form-control" ui-select-required>
                             <ui-select-match placeholder="Type and Select levels">{{$item.levelname}}</ui-select-match>

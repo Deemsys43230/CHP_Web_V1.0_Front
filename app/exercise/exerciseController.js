@@ -194,6 +194,7 @@ adminApp.controller('ExerciseEditController',['$q','$scope','requestHandler','Fl
                 $scope.exerciseDetail.repsavailable=0;
             }
            $scope.exerciseDetail.repsavailable=parseInt($scope.exerciseDetail.repsavailable);
+           $scope.exerciseDetail.videosource=$scope.exerciseDetail.videosource; 
 
     original=angular.copy($scope.exerciseDetail);
 
@@ -313,7 +314,7 @@ adminApp.controller('ExerciseEditController',['$q','$scope','requestHandler','Fl
         updatedExerciseDetails.categoryid=$scope.exerciseDetail.category.categoryid;
         updatedExerciseDetails.unitid=$scope.exerciseDetail.unit.unitid;
         updatedExerciseDetails.repsavailable=parseInt($scope.exerciseDetail.repsavailable);
-
+    	updatedExerciseDetails.videosource=$scope.exerciseDetail.videosource;
 
         var tagArray=[];
 		var tagPromise;
@@ -374,7 +375,7 @@ adminApp.controller('ExerciseEditController',['$q','$scope','requestHandler','Fl
         updatedExerciseDetails.categoryid=$scope.exerciseDetail.category.categoryid;
         updatedExerciseDetails.unitid=$scope.exerciseDetail.unit.unitid;
         updatedExerciseDetails.repsavailable=parseInt($scope.exerciseDetail.repsavailable);
-
+        updatedExerciseDetails.videosource=$scope.exerciseDetail.videosource;
 
 		//Tag Array Operation starts
 		var tagArray=[];
