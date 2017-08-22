@@ -70,10 +70,10 @@
                         </ui-select>
                         </div>
 
-                        <h5>Video Url:</h5>
-                      <input class="form-control" name="videosource" maxlength="100" ng-model="exerciseDetail.videosource" required/>
+                        <h5>Video URL:</h5>
+                      <input class="form-control" name="videosource" maxlength="100" ng-model="exerciseDetail.videosource"/>
                         <span ng-show="excersiseForm.videosource.$dirty$$excerciseForm.videosource.$invalid"> 
-                            <span class="error-message" ng-show="excerciseForm.videosource.$error.required"><span>Required</span></span>
+                            <span class="error-message" ng-show="excerciseForm.videosource.$error.validateUrl"><span>Enter&nbsp;valid&nbsp;URL.</span></span>
                         </span><br/> 
 
                         <h5>Levels :  <span ng-show="exerciseForm.level.$invalid">

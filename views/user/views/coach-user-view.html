@@ -5,8 +5,10 @@
             <form name="userCoachForm">
                 <div class="col-lg-12 col-md-12 col-sm-12">
                     <!--<a href="#dashboard" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back to Dashboard</a>-->
+                    <a href="#coach" class="btn-sm btn-warning pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i>&nbsp;Back</a>
                     <div flash-message="2000" class="col-md-3 no-padding pull-right"></div>
                     <h5 class="classic-title"><span><a href="#coach"><i class="fa fa-male"></i>&nbsp;&nbsp;MY COACH</a></span>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#coach-search"><i class="fa fa-search"></i>&nbsp;&nbsp;COACH SEARCH</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#coach-invitations"><i class="fa fa-envelope"></i>&nbsp;&nbsp;COACH INVITATION</a></h5>
+
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-12">
                     <div class="col-lg-4 col-md-3 col-sm-2 no-padding">
@@ -80,7 +82,17 @@
                     <!--Tablet responsibility-->
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-12">
-                    <a href="#coach" class="btn-sm btn-warning pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i>&nbsp;Back</a>
+                   <!--  <div class="pinched"><p></p></div> -->
+                  <div class="talk-bubble tri-right left-in">
+                  <div class="talktext">
+                    <p>{{coachAdvice.description}}</p>
+                  </div>
+                </div>
+                      
+                    <!-- <div class="callout right" ng-model="coachAdvice.description">{{coachAdvice.description}}</div> -->
+                   <!--  <textarea class="height-150 forum-textarea ng-pristine ng-valid-maxlength ng-valid ng-valid-required ng-touched" name="description" ng-model="coachAdvice.description" maxlength="350"  required="" ng-readonly="coachAdvice.description" style="box-shadow: 5px 5px 5px #999999; border-bottom-left-radius: 1em;"></textarea>
+                    <br/> -->
+                    <div>
                     <span ng-hide="disablereview"><a id="modal_review" ng-click="reset(reviewForm)" href="#review"  class="btn-sm btn-success pull-right margin-left-5"><i class="fa fa-plus-circle"></i> Add Reviews</a></span>
                     <h4 class="classic-title"><span>Reviews</span></h4>
                     <div ng-show="totalRatings!=0">
@@ -112,7 +124,7 @@
                                 </div>
                             </div>
                         </div>
-
+                     </div>
                     </div>
                     <div ng-show="totalRatings==0">
                         <div class="row">
@@ -254,18 +266,20 @@
     });
     
     $(window).scroll(function(){
-      if($(window).scrollTop() + $(window).height() > ($(document).height()-300)) {
+      if($(window).scrollTop() + $(window).height() > ($(document).height()-185)) {
       $("#chat_window_1").animate({
-                'position':'absolute', 
+                 
                 'margin-bottom':'275px'
             },10);
        }else{
 
         $("#chat_window_1").animate({
-                    'position':'fixed',
+                    
                     'margin-bottom':'0px'
                 },10);
        }
       
     });
+
+    document.querySelectorAll('body')[0].style.backgroundColor = 'whiteSmoke';
 </script>

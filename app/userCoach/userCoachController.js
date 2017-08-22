@@ -409,6 +409,16 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
 
     };
 
+    //Do Get Coach Advices
+    $scope.doGetCoachAdviceByUser=function(coachid){
+        requestHandler.getRequest("user/getcoachquote/"+coachid+"/","").then(function(response){
+            $scope.coachAdvice= response.data.quotes;
+            $scope.coachAdvice.description=response.data.quotes.description;
+        }, function(){
+            errorMessage(Flash,"Please try again later!");
+        });
+    };
+
     $scope.userCoachViewInit=function(){
         $scope.scrollnation={"itemsPerScroll": 4,"scrollEndCount":-1};
         $scope.checkReviews=[];
@@ -422,6 +432,7 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
         $scope.doGetCoachRatings($routeParams.id);
         $scope.subscribed=1;
         $scope.doGetChatMessage($routeParams.id);
+        $scope.doGetCoachAdviceByUser($routeParams.id);
     };
 
     $scope.coachListInit=function(){
