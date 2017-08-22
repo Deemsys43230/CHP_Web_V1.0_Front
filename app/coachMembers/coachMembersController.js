@@ -33,6 +33,9 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
                     });                   
                 }
             if($scope.clients.length>0){
+
+                 // for Assign button show
+                 
                $scope.doGetIndividualClientDetail($scope.clients[0].userid);
             }
             $scope.loaded=false;
@@ -40,7 +43,6 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
         });
 
     };
-
 
     //Get Individual Memeber Details
     $scope.doGetIndividualClientDetail=function(id){
@@ -82,6 +84,39 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
         })
     };
 
+    // For Assign to Group  
+    $scope.SelectModel =function(param){
+        //Intialize the array
+        $scope.selectedClientId=[];
+
+        $.each($scope.clients,function(index,value){
+            if(value.isChecked)
+                $scope.selectedClientId.push(value.userid);
+        });
+        console.log($scope.selectedClientId);
+        if($scope.selectedClientId.length==0){
+            $("#selectModel").modal('show');
+        }else{
+            if(param==1){
+                $("#groupButton").modal('show');
+            }else{
+                $("#groupMessage").modal('show');
+            }
+        }
+    };
+
+    $scope.doAssignGroup = function(){
+        alert($scope.assignGroup);
+        $.each($scope.selectedClientId,function(index,value){
+            alert(value);
+             requestHandler.postRequest("coach/assignusertogroup/",{"groupid":$scope.assignGroup,"userid":value}).then(function(response){
+             },function(){
+                successMessage(Flash, "Successfully Added!");
+                $scope.doGetAllClients();
+            });
+        });
+       
+    };
 
     // For clients individual User profile view
     $scope.doGetClientsProfileDetailsByCoach= function (id){
@@ -182,7 +217,6 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
             //get the array
             $.each(response.data.healthprofile,function(index,value){
                 $scope.wearable = value.wearables;
-                console.log($scope.wearable);
                 $scope.water = value.waterlog;
             });
         });
@@ -260,7 +294,6 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
     //Clear all Notes for Individual Notes
     $scope.doClearAllNotes = function(userid){
         $scope.Notes.notes ="";
-        console.log($scope.Notes.notes);
         $scope.doInsertOrUpdateNotes(userid);
     };
 
@@ -383,16 +416,17 @@ coachApp.controller('MembersViewController',['$scope','requestHandler','Flash','
 
 }]);
 
-coachApp.filter('startsWithLetterMember', function () {
+coachApp.filter('startsWithLetterSearch', function () {
 
-    return function (items, membersearch) {
+    return function (items, clientsearch) {
         var filtered = [];
-        var letterMatch = new RegExp(membersearch, 'i');
+        var letterMatch = new RegExp(clientsearch, 'i');
         if(!items){}
         else{
             for (var i = 0; i < items.length; i++) {
                 var item = items[i];
-                if (letterMatch.test(item.name) || letterMatch.test(item.emailid)) {
+                if (letterMatch.test(item.emailid) || letterMatch.test(item.name) || letterMatch.test(item.businessaddress
+                    || letterMatch.test(item.phone) || letterMatch.test(item.specialist)) ) {
                     filtered.push(item);
                 }
             }

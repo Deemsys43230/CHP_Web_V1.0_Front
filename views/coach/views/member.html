@@ -13,7 +13,7 @@
             <div class="col-lg-3 col-md-3 col-sm-3">
                 <h4 class="classic-title"><span class="sub-title">Members</span><span class="sub-title pull-right"><a type="button" class="btn-sm btn-warning" href="" data-toggle="modal" data-target="#myModal" data-toggle="tooltip" title={{currentGroupName}}>Filter By Group</a></span></h4>
                 <div class="search-content">
-                    <input class="coach-input" ng-model="clientSearch" placeholder="Search clients here..">
+                    <input class="coach-input" ng-model="clientsearch" placeholder="Search clients here..">
                 </div>
                 <div ng-if="loaded">
                     <div class="loader-style">
@@ -21,24 +21,41 @@
                     </div>
                 </div>
                 <div class="coach-list">
+                    <div flash-message="2000"></div>
                     <div class="content_scrollbar" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#eee'}" scroller>
                         <div  ng-show="clients.length!=0" class="padding-right-10">
-                            <div class="client-view col-lg-12 col-md-12 col-sm-12" ng-class="{'active': client.userid == coachclientdetails.userid }" ng-repeat="client in clientFilter=(clients | startsWithLetterMember : clientSearch)" ng-click="doGetClientsDetailsByCoach(client.userid)">
-                                <div class="col-lg-2 col-md-2 col-sm-2 no-padding">
-                                    <img class="img-circle" ng-src="{{client.imageurl}}">
+                            <div class="
+                            btn-group pull-right">
+                                <a class="btn btn-success pull-rignt dropdown-toggle" data-toggle="dropdown" href="" style="padding:0px 12px;"> Do Action 
+                                    <span class="caret"></span> 
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a data-toggle="dropdown" href="" ng-click="SelectModel(1)"> Assign Group </a>
+                                    </li>
+                                    <li>
+                                        <a data-toggle="dropdown" href="" ng-click="SelectModel(2)"> Send Group Message </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="client-view col-lg-12 col-md-12 col-sm-12" ng-class="{'active': client.userid == coachclientdetails.userid }" ng-repeat="client in clientFilter=(clients | startsWithLetterSearch : clientsearch | filter:clientsearch.groupid )">
+                                <div class="col-lg-11 col-md-11 col-sm-11 no-padding" ng-click="doGetIndividualClientDetail(client.userid)">
+                                    <div class="col-lg-2 col-md-2 col-sm-2 no-padding">
+                                        <img class="img-circle" ng-src="{{client.imageurl}}">
+                                    </div>
+                                    <div class="col-lg-10 col-md-10 col-sm-10 no-padding">
+                                        <h5 class="col-lg-12 col-md-12 col-sm-12 no-padding">{{client.name}}</h5>
+                                        <h6 class="col-lg-12 col-md-12 col-sm-12 no-padding">{{client.emailid}}</h6>
+                                    </div>
                                 </div>
-                                <div class="col-lg-10 col-md-10 col-sm-10 no-padding">
-                                    <h5 class="col-lg-11 col-md-11 col-sm-11 padding-lr">{{client.name}}</h5>
-                                    <div class="col-lg-1 col-md-1 col-sm-1 row text-center">
-                                            <checkbox-group>
-                                                <span class="fh-checkbox">
-                                                    <label class="group-checkbox">
-                                                        <input type="checkbox" id="{{client.userid}}" ng-model="user.isSelected" ng-true-value="true" ng-false-value="false"/>
-                                                    </label>
-                                                </span>
-                                            </checkbox-group>
-                                        </div>
-                                    <h6 class="col-lg-12 col-md-12 col-sm-12 padding-lr">{{client.emailid}}</h6>
+                                <div class="col-lg-1 col-md-1 col-sm-1 row text-center">
+                                    <checkbox-group>
+                                        <span class="fh-checkbox">
+                                            <label class="group-checkbox">
+                                                <input class="btnShow" type="checkbox" ng-model="client.isChecked"  ng-true-value="true" ng-false-value="false"/>
+                                            </label>
+                                        </span>
+                                    </checkbox-group>
                                 </div>
                             </div> 
                         </div>
@@ -81,7 +98,77 @@
         </div>
     </div> 
 </div>
-<!-- End Page Banner -->
+
+
+<!-- For Assign group popup -->
+
+<div class="modal fade" id="groupButton" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content-coach">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <h4 class="modal-title" id="myModalLabel">Filter By Group </h4>
+            </div>
+            <div class="modal-body">
+                <div class="row padding-right-0">
+                    <select class="assign-control" ng-model="assignGroup">
+                        <option value="">--Select--</option>
+                        <option value="{{group.id}}" ng-repeat="group in groupsList">{{group.groupname}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-success" ng-click="doAssignGroup(group.id)" data-dismiss="modal" aria-label="Close">Assign</button>
+            </div>
+        </div>
+    </div> 
+</div>
+
+<!-- For send group message popup -->
+
+<div class="modal fade" id="groupMessage" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content-coach">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <h4 class="modal-title" id="myModalLabel">Send Group Message</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row padding-right-0">
+                    <form name="messageForm" novalidate>
+                        <textarea class="message-textarea" name="message" ng-model="feedback.message" placeholder="Description* " maxlength="500" required></textarea>
+                        <span ng-show="feedbackForm.message.$dirty&&feedbackForm.message.$invalid ">
+                            <span class="error-message textarea-errormessage-70" ng-show="feedbackForm.message.$error.required"><span>Required.</span></span>
+                        </span>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" ng-click="dosendGroupMessage(group.id)" data-dismiss="modal" aria-label="Close">Send</button>
+            </div>
+        </div>
+    </div> 
+</div>
+
+<!-- For  Error Message alert Assign group popup -->
+
+<div class="modal fade" id="selectModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content-coach">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <h4 class="modal-title" id="myModalLabel">Alert</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row padding-right-0">
+                    <p class="text-center">Please Select Atleast One Client </p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" data-dismiss="modal" aria-label="Close">Got It!</button>
+            </div>
+        </div>
+    </div> 
+</div>
 
 <script type="text/javascript" src="../../js/script.js"></script>
-
