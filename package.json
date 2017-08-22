@@ -27,6 +27,7 @@
     "grunt-ngmin": "0.0.3"
   },
   "dependencies": {
+    "angular-bootstrap-colorpicker": "^3.0.31",
     "grunt": "^1.0.1"
   }
 }

@@ -1,7 +1,7 @@
 /**
  * Created by Deemsys on 1/8/17.
  */
-var adminApp = angular.module('adminApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','summernote','angularUtils.directives.dirPagination']);
+var adminApp = angular.module('adminApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','summernote','angularUtils.directives.dirPagination','colorpicker.module']);
 adminApp.controller('PricingPlanController',['$scope','requestHandler','Flash','$location','siteMenuService',function($scope,requestHandler,Flash,$location,siteMenuService) {
     $scope.isNew=true;
     $scope.submitContent=false;
@@ -81,7 +81,25 @@ adminApp.controller('PricingPlanController',['$scope','requestHandler','Flash','
         }
 
     };
-    $scope.doGetPricingPlan();
+
+
+    //Get Random Pricing Plan Color
+    $scope.setRandomColor=function (){
+          var letters = '0123456789ABCDEF';
+          var color = '#';
+          for (var i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)];
+          }
+          $scope.pricingplan.plancolor=color;
+    }; 
+
+    $scope.init=function(){
+        $scope.pricingplan={"plancolor":"#00000"}
+         $scope.doGetPricingPlan();
+         $scope.setRandomColor();
+    }
+    
+    $scope.init();
 
 }]);
 
@@ -113,8 +131,6 @@ adminApp.controller('PricingPlanEditController',['$scope','requestHandler','Flas
         }
 
     };
-
-
 
 
     //To display pricing plan details based on

@@ -17,7 +17,7 @@ coachApp.controller('CoachDashboardController',['$scope','requestHandler','Flash
     //Check for Active Subscription
     $scope.doNavigateToMembersList=function(){
         requestHandler.getRequest("/coach/isSubscriptionActive/","").then(function(response){
-            if(response.data.Response_status==1)
+            if(response.data.isActive==1)
                 $location.path("my-members");
             else
                 $location.path("subscription");
