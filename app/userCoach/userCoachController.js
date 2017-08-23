@@ -260,12 +260,9 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
   
     $scope.acceptCoachInvitationsByUser=function(coachid){
         requestHandler.postRequest("user/acceptinvitation/",{"coachid":coachid}).then(function(response){
-           if(response.data.Response_status==0){
+           if(response.data.Response_status==1){
                 successMessage(Flash,"Invitation Accepted");
-                $scope.doGetCoachDetailsByUser(coachid);
-           }else{
-            alert("Error");
-                errorMessage(Flash,"Please try again later!");
+                $scope.userCoachInit();
            }
         }, function(){
                 errorMessage(Flash,"Please try again later!");
@@ -278,10 +275,10 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
         requestHandler.postRequest("user/sendinteresttocoach/",$scope.sendInterestParam).then(function(response){
             if(response.data.Response_status==1){
                 successMessage(Flash,"Interest Sent Successfully");
-                $scope.doGetCoachDetailsByUser(coachid);
-            }else{
-                errorMessage(Flash,"Please try again later!");
+                $scope.userCoachInit();
             }
+        }, function(){
+                errorMessage(Flash,"Please try again later!");
         });
     };
 
@@ -290,8 +287,6 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
            if(response.data.Response_status==1){
                 successMessage(Flash,"Invitation Declined");
                 $scope.doGetCoachDetailsByUser(coachid);
-           }else{
-                errorMessage(Flash,"Please try again later!");
            }
         }, function(){
                 errorMessage(Flash,"Please try again later!");
