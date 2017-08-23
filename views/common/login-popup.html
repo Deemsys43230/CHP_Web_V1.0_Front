@@ -96,8 +96,9 @@
 
 
                 <p>Secret Answer</p>
-                    <span ng-show="forgotPasswordForm.secretAnswer.$dirty&&forgotPasswordForm.secretAnswer.$invalid && !forgotPasswordForm.secretAnswer.$pristine">
-                        <span class="error-message" ng-show="forgotPasswordForm.secretAnswer.$error.required"><span>Required.</span></span>
+                <input type="text" name="secretAnswer" ng-model="secretanswer" maxlength="20" required/>
+                    <span ng-show="secretAnswerForm.secretAnswer.$dirty&&secretAnswerForm.secretAnswer.$invalid && !secretAnswerForm.secretAnswer.$pristine">
+                        <span class="error-message" ng-show="secretAnswerForm.secretAnswer.$error.required"><span>Required.</span></span>
                     </span>
                 <a href="" ng-click="doSendEmail()" class="forgot_password text-center reset_link">Reset Password without security question</a>
                 <div class="action_btns margin-top-20">
@@ -165,7 +166,7 @@
             </div>-->
             <div flash-message="3000" ></div>
             <form name="registerForm" novalidate>
-                 <input type="text" id="referralId" name="referralId" ng-model="userForm.referralId"/>
+                 <!--<input type="hidden" id="referralId" name="referralId" ng-model="userForm.referralId"/>-->
                 <p>First name</p>
                 <input type="text" name="firstname" ng-pattern="/^ *([a-zA-Z]+ ?)+ *$/"  ng-model="userForm.firstname" maxlength="24" required ng-minlength="3"/>
                     <span ng-show="registerForm.firstname.$dirty&&registerForm.firstname.$invalid && !registerForm.firstname.$pristine">
@@ -287,11 +288,11 @@
         $(".iphone").show();
     }
 
-    var url="http://localhost/CH852/#/home?show=true"
+/*    var url="http://localhost/CH852/#/home?show=true"
     var captured = /show=([^&]+)/.exec(url)[1];
     var result = captured ? captured : 'myDefaultValue';
-    console.log(result);
-
+    console.log(result);*/
+/*
     if(result=='true'){
         $(".reset_password").hide();
         $(".user_register").hide();
@@ -300,7 +301,7 @@
         $(".user_login").show();
         $(".new_password_form").hide();
         $(".header_title").text('Login');
-    }
+    }*/
 
     $(".modal_trigger").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
 

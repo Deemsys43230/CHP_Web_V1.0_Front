@@ -8,10 +8,15 @@
         <div class="col-md-5">
             <div class="col-md-4 no-padding">
                 <img class="coach-view-image" ng-src="{{usercoachdetails.imageurl | trusted}}"/>
+                <div ng-hide="avgRatings==0">
                 <h5 class="margin-bottom-10">Average Ratings : {{avgRatings}}</h5>
                 <div><average-star-rating ng-model="averageRate" max="5"></average-star-rating></div>
                 <div>( {{totalRatings}} Reviews )</div>
-
+                </div>
+                <!--For No reviews in coach-->
+                <div ng-show="avgRatings==0" class="col-md-12 col-md-12 col-sm-12 text-center">
+                    <h4 class="text-gray">No Reviews </h4>
+                </div>
             </div>
             <div class="col-md-8">
                 <h3 class="text-orange">{{usercoachdetails.name}}&nbsp;</h3>

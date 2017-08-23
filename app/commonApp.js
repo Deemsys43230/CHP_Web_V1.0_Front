@@ -795,7 +795,7 @@ commonApp.controller('LoginController',['$scope','requestHandler','Flash','$wind
                     $(".reset_password").hide();
                     $(".user_register").hide();
                     $(".secret_question").show();
-                    $(".header_title").text('Register');
+                    $(".header_title").text('Forgot Password');
                     $scope.secretQuestion=response.data.secretquestion;
                 }
                 else if(response.data.Response_status==2){

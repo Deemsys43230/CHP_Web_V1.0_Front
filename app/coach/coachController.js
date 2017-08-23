@@ -22,7 +22,7 @@ adminApp.controller('CoachController',['$scope','requestHandler','Flash','coachM
         $scope.param={
             "limit":$scope.pagination.itemsPerPage,
             "offset":($scope.pagination.pageNumber-1)*$scope.pagination.itemsPerPage,
-            "searchname":""
+            "searchname":$scope.coachsearch
         };
 
         requestHandler.postRequest("admin/getcoacheslist/",$scope.param).then(function(response){
@@ -139,6 +139,10 @@ adminApp.controller('CoachViewController',['$scope','requestHandler','Flash','$r
 
     $scope.averageRate=0.1;
     $scope.paginationLoad=false;
+    $scope.coachRatingPagination={
+        "limit":4,
+        "offset":0
+    };
 
     $scope.doGetCoachDetailsByUser= function (id){
         $scope.coach = {
@@ -201,31 +205,30 @@ adminApp.controller('CoachViewController',['$scope','requestHandler','Flash','$r
 
         });
 
-
-
-        requestHandler.postRequest("getCoachRatingsandReviews/"+id+"/",$scope.coachRatingPagination).then(function (response) {
-            $scope.coachReviews = response.data.reviews;
-            $scope.viewload=false;
-            $scope.totalRatings = $scope.coachReviews.totalrecords;
-            $scope.avgRatings = $scope.coachReviews.averageRatings;
-
-            if($scope.coachReviews.averageRatings==0)
-                $scope.averageRate=0.1;
-            else
-                $scope.averageRate=$scope.coachReviews.averageRatings;
-        },function(){
-        },function(){
-            errorMessage(Flash,"Please try again later!")
-        });
+        $scope.doGetCoachRatings(id);
 
     };
 
+
     $scope.doGetCoachRatings= function (id) {
-        alert("inside rating and reviews");
         $scope.reviewload=true;
-        requestHandler.postRequest("getCoachRatingsandReviews/"+id+"/",$scope.coachRatingPagination).then(function(response){
-            $scope.coachReviews=response.data.reviews;
+        $scope.scrollnation.scrollEndCount= $scope.scrollnation.scrollEndCount+1;
+
+        $scope.coachRatingScrollnation={
+            "limit":$scope.scrollnation.itemsPerScroll,
+            "offset":($scope.scrollnation.scrollEndCount)*$scope.scrollnation.itemsPerScroll
+        };
+        requestHandler.postRequest("getCoachRatingsandReviews/"+id+"/", $scope.coachRatingPagination).then(function(response){
+
+            $scope.coachReviews= $scope.coachReviews.concat(response.data.reviews);
+            $scope.canReview= response.data.canreview;
             $scope.reviewload=false;
+            $scope.totalRatings = response.data.totalrecords;
+            $scope.avgRatings = response.data.averageratings;
+            if($scope.avgRatings==0)
+                $scope.averageRate=0.1;
+            else
+                $scope.averageRate=$scope.avgRatings;
         });
     };
 
@@ -238,12 +241,13 @@ adminApp.controller('CoachViewController',['$scope','requestHandler','Flash','$r
     };
 
     $scope.userCoachViewInit=function(){
+        $scope.scrollnation={"itemsPerScroll":4,"scrollEndCount":-1};
+        /*$scope.checkReviews=[];*/
         $scope.doGetCoachDetailsByUser($routeParams.id);
+        $scope.coachReviews=[];
         $scope.coachView = {
             status: 'coach-reviews'
         };
-        $scope.doGetCoachRatings($routeParams.id);
-
     };
 }]);
 

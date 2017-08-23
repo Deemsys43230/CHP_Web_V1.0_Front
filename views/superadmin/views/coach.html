@@ -15,7 +15,7 @@
                             <a href="#" onclick="return false;" class="show-list-search search_button margin-left-5"><i class="fa fa-search"></i></a>
                             <div class="search-list-form override">
                                 <form autocomplete="off" class="searchform">
-                                    <input type="text" ng-model="coachsearch"  placeholder="Search here...">
+                                    <input type="text" ng-model="coachsearch" ng-init="coachsearch=''"  ng-change="doGetCoachList()" placeholder="Search here...">
                                 </form>
                             </div>
                         </div>
@@ -40,7 +40,7 @@
                             <tbody >
                                 <tr>
                             </tr>
-                            <tr dir-paginate="coach in coachfilter = (coachList.coachlist | startsWithLettercoach:coachsearch | itemsPerPage: 13)" ng-show="coachList.length!=0">
+                                <tr dir-paginate="coach in coachList.coachlist | itemsPerPage: pagination.itemsPerPage" total-items="coachList.totalrecords" current-page="pagination.pageNumber" ng-show="coachList.length!=0" pagination-id="adminCoachListPaginate">
                                 <td><span class="line-clamp-sm">{{coach.name}}</span></td>
                                 <td><span class="line-clamp-sm">{{coach.emailid}}</span></td>
                                 <td>
@@ -51,11 +51,11 @@
                                 </td>
                             </tr>
 
-                           <tr ng-show="coachList.length==0 || coachfilter.length==0 "><td colspan="3" class="text-center">No Records Found !!!</td></tr>
+                            <tr ng-show="coachList.length==0||coachList.totalrecords==0"><td colspan="3" class="text-center">No Records Found !!!</td></tr>
                             </tbody>
                         </table>
                         <!-- Start Pagination -->
-                        <dir-pagination-controls ng-show="paginationLoad" boundary-links="true"> </dir-pagination-controls>
+                        <dir-pagination-controls ng-show="paginationLoad" boundary-links="true" pagination-id="adminCoachListPaginate"> </dir-pagination-controls>
                         <!-- End Pagination -->
                     </div>
                 </div>

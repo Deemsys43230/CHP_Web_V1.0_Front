@@ -16,9 +16,9 @@ adminApp.controller('MemberController',['$scope','requestHandler','Flash','$rout
     //user view details
     $scope.doViewMembers= function () {
         $scope.loaded = true;
-        requestHandler.getRequest("getUserIndividualDetail/"+$routeParams.id,"").then(function(response){
-            $scope.myImgSrc = $sce.trustAsResourceUrl(response.data.getUserIndividualDetail.imageurl+"?decache="+Math.random());
-            $scope.viewMemberDetails = response.data.getUserIndividualDetail;
+        requestHandler.getRequest("getUserProfile/"+$routeParams.id,"").then(function(response){
+            $scope.myImgSrc = $sce.trustAsResourceUrl(response.data.userprofile.imageurl+"?decache="+Math.random());
+            $scope.viewMemberDetails = response.data.userprofile;
             //View the image in ng-src for view testimonials
 
             if($scope.viewMemberDetails.about==null){

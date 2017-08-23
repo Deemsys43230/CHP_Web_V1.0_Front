@@ -51,10 +51,10 @@
             <img ng-src="{{coachuserdetails.imageurl | trusted}}"/>
             <h3 class="text-orange margin-bottom-10 text-uppercase margin-top-7">{{coachuserdetails.name}}</h3>
             <h5 class="margin-bottom-10 margin-top-7"><strong>{{coachuserdetails.emailid}}</strong></h5>
-            
-            <span><a href="" class="btn register_button" ng-click="doSendInvitationByCoach(coachuserdetails.userid)" ng-show="!invitationSent">Send Invitation</a></span>
-            <div class="text-uppercase margin-top-7"><a href="" ng-hide="invitationSent" ng-if="coachuserdetails.relationship!='NA'" ng-click="doRemoveInvitationsByCoach(coachuserdetails.userid);"><strong>Remove Interests</strong></a></div>
-            <h3  class="text-success" ng-show="invitationSent"><i class="fa fa-check-circle">&nbsp;&nbsp;Invitation Sent </i></h3>
+            <span><a href="" class="btn register_button" ng-click="doSendInvitationByCoach(coachuserdetails.userid)" ng-show="coachuserdetails.relationship==1 ||coachuserdetails.relationship=='NA'">Send Invitation</a></span>
+            <div class="text-uppercase margin-top-7"><a href="" ng-hide="invitationSent" ng-if="coachuserdetails.relationship==1" ng-click="doRemoveInvitationsByCoach(coachuserdetails.userid);"><strong>Remove Interests</strong></a></div>
+            <h3  class="text-success" ng-show="coachuserdetails.relationship==2"><i class="fa fa-check-circle">&nbsp;&nbsp;Invitation Sent </i></h3>
+            <h3  class="text-success" ng-show="coachuserdetails.relationship==3 ||coachuserdetails.relationship==4 "><i class="fa fa-user">&nbsp;&nbsp;Already a Member</i></h3>
         </div>
     </div>
     </div>
