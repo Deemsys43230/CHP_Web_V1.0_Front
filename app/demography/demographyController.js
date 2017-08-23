@@ -414,6 +414,30 @@ userApp.controller('DemographyController',['$rootScope','$scope','requestHandler
         });
 
     };
+    //TO check Maximum 2 digit validation for HbA1c
+    $scope.maxHbaValue=false;
+    $scope.maxHbaValueCheck = function(){
+        if($scope.demography.HbA1c <= 100){
+            $scope.maxHbaValue=false;
+        }
+        else if($scope.demography.HbA1c > 100){
+            $scope.maxHbaValue=true;
+        }
+
+    };
+
+
+  //TO check Maximum 2 digit validation for bloodoxygen
+    $scope.maxValue=false;
+    $scope.maxValueCheck = function(){
+        if($scope.demography.bloodoxygen <= 100){
+            $scope.maxValue=false;
+        }
+        else if($scope.demography.bloodoxygen > 100){
+            $scope.maxValue=true;
+        }
+
+    };
 
     var selectedDate = new Date();
     var dd = selectedDate.getDate();
@@ -493,6 +517,7 @@ userApp.directive('lowerThan', [
 
     }
 ]);
+
 
 userApp.directive('checkWeight', function () {
 

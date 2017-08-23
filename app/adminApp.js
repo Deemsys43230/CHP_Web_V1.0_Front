@@ -2719,7 +2719,7 @@ adminApp.factory('coachMenuService', function () {
       },
       {
         'id': 2,
-        'name': 'Coach List', 
+        'name': 'Coach List',
         'icon': 'users',
         'href': 'coach',
         'active': ''

@@ -232,9 +232,9 @@
         <h5>HDL Cholestrol <small>(mg/dL)</small> <span class="pull-right">:</span><span class="pull-right">&nbsp;<a href="" data-toggle="popover" data-trigger="hover" title="HDL Cholestrol" data-content="High-density lipoprotein cholesterol is the well-behaved good cholesterol.It removes harmful bad cholesterol from where it doesn't belong."><i class="fa fa-info-circle"></i></a>&nbsp; </span> </h5>
     </div>
     <div class="col-lg-4 col-md-5 col-sm-5 padding-right-0">
-        <input class="demography_input" name="HDLcholestrol" ng-pattern="/^\-?\d+((\.|\,)\d+)?$/" maxlength="6" ng-model="demography.HDLcholestrol"/>
+        <input class="demography_input" name="HDLcholestrol" validate-only-numbers maxlength="3" ng-model="demography.HDLcholestrol"/>
                             <span ng-show="demographyForm.HDLcholestrol.$dirty&&demographyForm.HDLcholestrol.$invalid">
-                                <span class="error-message textarea-errormessage40" ng-show="demographyForm.HDLcholestrol.$error.pattern"><span>Invalid&nbsp;Format.</span></span>
+                                <span class="error-message textarea-errormessage40" ng-show="demographyForm.HDLcholestrol.$error.validateOnlyNumbers"><span>Invalid&nbsp;Format.</span></span>
                             </span>
     </div>
 </div>
@@ -244,9 +244,9 @@
         <h5>LDL Cholestrol <small>(mg/dL)</small> <span class="pull-right">:</span><span class="pull-right">&nbsp;<a href="" data-toggle="popover" data-trigger="hover" title="LDL Cholestrol" data-content="Low-density lipoprotein cholesterol, commonly reffered as a bad cholesterol.Lipoproteins, which are combination of fats (lipids) and proteins,are the form in which lipids are transported in the blood."><i class="fa fa-info-circle"></i></a>&nbsp; </span> </h5>
     </div>
     <div class="col-lg-4 col-md-5 col-sm-5 padding-right-0">
-        <input class="demography_input" name="LDLcholestrol" ng-pattern="/^\-?\d+((\.|\,)\d+)?$/" maxlength="6" ng-model="demography.LDLcholestrol"/>
+        <input class="demography_input" name="LDLcholestrol" validate-only-numbers maxlength="3" ng-model="demography.LDLcholestrol"/>
                             <span ng-show="demographyForm.LDLcholestrol.$dirty&&demographyForm.LDLcholestrol.$invalid">
-                                <span class="error-message textarea-errormessage40" ng-show="demographyForm.LDLcholestrol.$error.pattern"><span>Invalid&nbsp;Format.</span></span>
+                                <span class="error-message textarea-errormessage40" ng-show="demographyForm.LDLcholestrol.$error.validateOnlyNumbers"><span>Invalid&nbsp;Format.</span></span>
                             </span>
     </div>
 </div>
@@ -260,9 +260,9 @@
         <h5>Triglycerides <small>(mg/dL)</small> <span class="pull-right">:</span><span class="pull-right">&nbsp;<a href="" data-toggle="popover"  data-trigger="hover" title="Triglycerides" data-content="Triglycerides are the most common type of fat in the body;they store excess energy from your diet."><i class="fa fa-info-circle"></i></a>&nbsp; </span> </h5>
     </div>
     <div class="col-lg-4 col-md-5 col-sm-5 padding-right-0">
-        <input class="demography_input" name="triglycerides" ng-pattern="/^\-?\d+((\.|\,)\d+)?$/" maxlength="6" ng-model="demography.triglycerides"/>
+        <input class="demography_input" name="triglycerides" validate-only-numbers maxlength="3" ng-model="demography.triglycerides"/>
                             <span ng-show="demographyForm.triglycerides.$dirty&&demographyForm.triglycerides.$invalid">
-                                <span class="error-message textarea-errormessage40" ng-show="demographyForm.triglycerides.$error.pattern"><span>Invalid&nbsp;Format.</span></span>
+                                <span class="error-message textarea-errormessage40" ng-show="demographyForm.triglycerides.$error.validateOnlyNumbers"><span>Invalid&nbsp;Format.</span></span>
                             </span>
     </div>
 </div>
@@ -281,7 +281,8 @@
         <h5>HbA<sub>1c</sub> <small>(%)</small> <span class="pull-right">:</span><span class="pull-right">&nbsp;<a href="" data-toggle="popover" data-trigger="hover" title="HbA1c" data-content="HbA1c refers to glycated haemoglobin (A1c), which identies average plasma glucose concentration."><i class="fa fa-info-circle"></i></a>&nbsp; </span> </h5>
     </div>
     <div class="col-lg-4 col-md-5 col-sm-5 padding-right-0">
-        <input class="demography_input" name="HbA1c" ng-pattern="/^\-?\d+((\.|\,)\d+)?$/" maxlength="6" ng-model="demography.HbA1c"/>
+        <input class="demography_input" name="HbA1c" ng-pattern="/^\-?\d+((\.|\,)\d+)?$/" ng-model="demography.HbA1c" ng-change="maxHbaValueCheck()" onkeypress="return validateFloatKeyPress(this,event);"/>
+        <span class="error-message textarea-errormessage40" ng-show="!demographyForm.HbA1c.$error.required&&maxHbaValue"><span>Please&nbsp;Enter&nbsp;Valid&nbsp;Weight.</span></span>
                             <span ng-show="demographyForm.HbA1c.$dirty&&demographyForm.HbA1c.$invalid">
                                 <span class="error-message textarea-errormessage40" ng-show="demographyForm.HbA1c.$error.pattern"><span>Invalid&nbsp;Format.</span></span>
                             </span>
@@ -293,9 +294,9 @@
         <h5>Fasting Blood Glucose <small>(mg/dL)</small> <span class="pull-right">:</span><span class="pull-right">&nbsp;<a href="" data-toggle="popover" data-trigger="hover" title="Fasting Blood Glucose" data-content="A fasting glucose is a blood glucose test that determines the amount of a type of sugar,called glucose,in the blood before breakfast in the morning."><i class="fa fa-info-circle"></i></a>&nbsp; </span> </h5>
     </div>
     <div class="col-lg-4 col-md-5 col-sm-5 padding-right-0">
-        <input class="demography_input" name="fastingbloodglucose" ng-pattern="/^\-?\d+((\.|\,)\d+)?$/" maxlength="6" ng-model="demography.fastingbloodglucose"/>
+        <input class="demography_input" name="fastingbloodglucose" validate-only-numbers maxlength="3" ng-model="demography.fastingbloodglucose"/>
                             <span ng-show="demographyForm.fastingbloodglucose.$dirty&&demographyForm.fastingbloodglucose.$invalid">
-                                <span class="error-message textarea-errormessage40" ng-show="demographyForm.fastingbloodglucose.$error.pattern"><span>Invalid&nbsp;Format.</span></span>
+                                <span class="error-message textarea-errormessage40" ng-show="demographyForm.fastingbloodglucose.$error.validateOnlyNumbers"><span>Invalid&nbsp;Format.</span></span>
                             </span>
     </div>
 </div>
@@ -305,9 +306,9 @@
         <h5>Postprandial Blood Glucose <small>(mg/dL)</small> <span class="pull-right">:</span><span class="pull-right">&nbsp;<a href="" data-toggle="popover" data-trigger="hover" title="Postprandial Blood Glucose" data-content="A postprandial glucose is a blood glucose test that determines the amount of a type of sugar, called glucose in the blood after a meal."><i class="fa fa-info-circle"></i></a>&nbsp; </span> </h5>
     </div>
     <div class="col-lg-4 col-md-5 col-sm-5 padding-right-0">
-        <input class="demography_input" name="postprandialbloodglucose" ng-pattern="/^\-?\d+((\.|\,)\d+)?$/" maxlength="6" ng-model="demography.postprandialbloodglucose"/>
+        <input class="demography_input" name="postprandialbloodglucose" validate-only-numbers maxlength="3" ng-model="demography.postprandialbloodglucose"/>
                             <span ng-show="demographyForm.postprandialbloodglucose.$dirty&&demographyForm.postprandialbloodglucose.$invalid">
-                                <span class="error-message textarea-errormessage40" ng-show="demographyForm.postprandialbloodglucose.$error.pattern"><span>Invalid&nbsp;Format.</span></span>
+                                <span class="error-message textarea-errormessage40" ng-show="demographyForm.postprandialbloodglucose.$error.validateOnlyNumbers"><span>Invalid&nbsp;Format.</span></span>
                             </span>
     </div>
 </div>
@@ -316,9 +317,9 @@
         <h5>Random Blood Glucose <small>(mg/dL)</small> <span class="pull-right">:</span><span class="pull-right">&nbsp;<a href="" data-toggle="popover" data-trigger="hover" title="Random Blood Glucose" data-content="A random glucose is a blood glucose test that determines the amount of a type of sugar, called glucose in the blood after meal anytime a day."><i class="fa fa-info-circle"></i></a>&nbsp; </span> </h5>
     </div>
     <div class="col-lg-4 col-md-5 col-sm-5 padding-right-0">
-        <input class="demography_input" name="randombloodglucose" ng-pattern="/^\-?\d+((\.|\,)\d+)?$/" maxlength="6" ng-model="demography.randombloodglucose"/>
+        <input class="demography_input" name="randombloodglucose" validate-only-numbers maxlength="3" ng-model="demography.randombloodglucose"/>
                             <span ng-show="demographyForm.randombloodglucose.$dirty&&demographyForm.randombloodglucose.$invalid">
-                                <span class="error-message textarea-errormessage40" ng-show="demographyForm.randombloodglucose.$error.pattern"><span>Invalid&nbsp;Format.</span></span>
+                                <span class="error-message textarea-errormessage40" ng-show="demographyForm.randombloodglucose.$error.validateOnlyNumbers"><span>Invalid&nbsp;Format.</span></span>
                             </span>
     </div>
 </div>
@@ -338,7 +339,8 @@
         <h5>Blood Oxygen <small>(%)</small> <span class="pull-right">:</span><span class="pull-right">&nbsp;<a href="" data-toggle="popover" data-trigger="hover" title="Blood Oxygen" data-content="Oxygen saturation is a term referring to the fraction of oxygen-saturated haemoglobin relative to total haemoglobin (unsaturated+saturated) in the blood."><i class="fa fa-info-circle"></i></a>&nbsp; </span> </h5>
     </div>
     <div class="col-lg-4 col-md-5 col-sm-5 padding-right-0">
-        <input class="demography_input" name="bloodoxygen" ng-pattern="/^\-?\d+((\.|\,)\d+)?$/" maxlength="6" ng-model="demography.bloodoxygen"/>
+        <input class="demography_input" name="bloodoxygen" ng-pattern="/^\-?\d+((\.|\,)\d+)?$/"  ng-model="demography.bloodoxygen" ng-change="maxValueCheck()" onkeypress="return validateFloatKeyPress(this,event);"/>
+        <span class="error-message textarea-errormessage40" ng-show="!demographyForm.bloodoxygen.$error.required&&maxValue"><span>Please&nbsp;Enter&nbsp;Valid&nbsp;Weight.</span></span>
                             <span ng-show="demographyForm.bloodoxygen.$dirty&&demographyForm.bloodoxygen.$invalid">
                                 <span class="error-message textarea-errormessage40" ng-show="demographyForm.bloodoxygen.$error.pattern"><span>Invalid&nbsp;Format.</span></span>
                             </span>
@@ -474,7 +476,7 @@
 </div>
 <div class="col-lg-12 col-md-12 col-sm-12"><hr/></div>
 <div class="col-lg-12 col-md-12 col-sm-12 text-center margin-tb-10">
-    <a href="" class="btn register_button" ng-disabled="isCleanDemography() || demographyForm.$invalid || weightlossError || weightgainError || maxheight || maxweightkgs ||  maxweight || maxTargetWeightKgs || maxTargetWeight"  ng-click="doUpdateDemography()" >Save Changes</a>
+    <a href="" class="btn register_button" ng-disabled="isCleanDemography() || demographyForm.$invalid || weightlossError || weightgainError || maxheight || maxweightkgs ||  maxweight || maxTargetWeightKgs || maxTargetWeight || maxValue || maxHbaValue"  ng-click="doUpdateDemography()" >Save Changes</a>
     <a href="#dashboard" class="btn cancel_button">Cancel</a>
 </div>
 </form>
@@ -547,36 +549,5 @@
     $(document).ready(function(){
         $('[data-toggle="popover"]').popover();
     });
-//for restricting keypress event after (dot)
-    function validateFloatKeyPress(el, evt) {
-        var charCode = (evt.which) ? evt.which : event.keyCode;
-        var number = el.value.split('.');
-        if (charCode != 46 && charCode > 31 && (charCode < 48 || charCode > 57)) {
-            return false;
-        }
-        //just one dot
-        if(number.length>1 && charCode == 46){
-            return false;
-        }
-        // for backspace issue in firefox
-        if(charCode== 8){
-            return true;
-        }
-        //get the carat position
-        var caratPos = getSelectionStart(el);
-        var dotPos = el.value.indexOf(".");
-        if( caratPos > dotPos && dotPos>-1 && (number[1].length > 0)){
-            return false;
-        }
-        return true;
-    }
-    function getSelectionStart(o) {
-        if (o.createTextRange) {
-            var r = document.selection.createRange().duplicate()
-            r.moveEnd('character', o.value.length)
-            if (r.text == '') return o.value.length
-            return o.value.lastIndexOf(r.text)
-        } else return o.selectionStart
-    }
 
 </script>
