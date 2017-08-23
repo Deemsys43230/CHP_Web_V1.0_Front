@@ -2,13 +2,13 @@
 <div class="col-lg-12 col-md-12 col-sm-12 no-padding" ng-cloak class="ng-cloak" ng-init="init()" ng-show="isActive">
     <!-- <div flash-message="2000" class="col-lg-4 col-md-4 col-sm-4 pull-right"></div> -->
         <h3 class="classic-title"><span class="sub-title">Client Details</span>
-            <p  class="remove-text-color pull-right" ng-click="doRemoveUserByCoach(coachclientdetails.userid)">Remove User</p>
+            <p  class="remove-text-color pull-right" ng-show="clients.length>0" ng-click="doRemoveUserByCoach(coachclientdetails.userid)">Remove User</p>
         </h3>
         <div ng-if="loaded">
             <div class="loader-style">
                 <div class="loader"></div>
         </div>
-    </div>
+        </div>
 
     <div ng-show="clients.length>0">
         <div class="col-lg-12 col-md-12 col-sm-12">

@@ -618,10 +618,15 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
     }]);
 
 //Initial Controller for Username
-coachApp.controller("CoachInitialController",['$scope','requestHandler','$location','FeedbackService','Flash','$timeout',function($scope,requestHandler,$location,FeedbackService,Flash,$timeout){
+coachApp.controller("CoachInitialController",['$scope','requestHandler','$location','FeedbackService','Flash','$timeout','$rootScope',function($scope,requestHandler,$location,FeedbackService,Flash,$timeout,$rootScope){
     $scope.hideValue=1;
     requestHandler.getRequest("getUserId/","").then(function(response){
         $scope.username=response.data.User_Profile.name;
+        $scope.isProfileUpdated=response.data.User_Profile.isProfileUpdated;
+        if($scope.isProfileUpdated==0){
+            $location.path("/profile");
+            $rootScope.isProfileUpdated=false;
+        }
     });
     $scope.$on('$routeChangeStart', function(next, current) {
         $scope.activeClass={};
@@ -629,6 +634,29 @@ coachApp.controller("CoachInitialController",['$scope','requestHandler','$locati
         page=page.split('-');
         var currentPage=page[0];
         $scope.activeClass[currentPage]='active';
+        if($scope.isProfileUpdated==0){
+            if(!$rootScope.isProfileUpdated){
+                 $(function(){
+                $("#lean_overlay").fadeTo(1000);
+                $("#coach-profile-alert-modal").fadeIn(600);
+                $(".common_model").show();
+            });
+
+            $(".modal_close").click(function(){
+                $(".common_model").hide();
+                $("#coach-profile-alert-modal").hide();
+                $("#lean_overlay").hide();
+            });
+
+            $("#lean_overlay").click(function(){
+                $(".common_model").hide();
+                $("#coach-profile-alert-modal").hide();
+                $("#lean_overlay").hide();
+            });
+            $location.path("/profile");
+            }           
+        }
+            
     });
 
     $scope.getSocialMediaDetails=function(){

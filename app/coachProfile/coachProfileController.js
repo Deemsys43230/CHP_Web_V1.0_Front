@@ -3,7 +3,7 @@
  */
 var coachApp= angular.module('coachApp', ['ngRoute','oc.lazyLoad','ngCookies','requestModule','flash','ngAnimate','ui.bootstrap']);
 
-coachApp.controller('CoachProfileController',['$scope','requestHandler','Flash',function($scope,requestHandler,Flash) {
+coachApp.controller('CoachProfileController',['$scope','requestHandler','Flash',"$rootScope",function($scope,requestHandler,Flash,$rootScope) {
 
         $scope.birthdayformat=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
 
@@ -144,6 +144,7 @@ coachApp.controller('CoachProfileController',['$scope','requestHandler','Flash',
 
                 requestHandler.putRequest("updateProfile/",$scope.userProfile).then(function(){
                     $scope.doGetProfile();
+                    $rootScope.isProfileUpdated=true;
                     successMessage(Flash,"Successfully Updated");
 
             });
