@@ -26,6 +26,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
         $window.minimumDate = new Date();
         $scope.weightUpdateText="Update";
         $scope.syncBtnTxt="Sync Now";
+        $scope.sync_btn_background_color="#ff5010";
         $scope.connectDevice=false;
         $scope.waterAddText="+ Log";
         $scope.waterReduceText="- Reduce";
@@ -132,7 +133,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
                     }
 
               $scope.connectDevice=false;
-            $scope.initialLoadFoodAndExercise(selectedDate);
+            $scope.initialLoadFoodAndExercise(date);
                     },
                 function () {
                     errorMessage(Flash, "Please try again later!")
@@ -149,6 +150,11 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
                   });
                 if(isActive>0){
                    $scope.syncBtnTxt="Sync Completed";
+                   $scope.sync_btn_background_color="#35900d";
+                   $timeout(function(){
+                        $scope.syncBtnTxt="Sync Now";
+                        $scope.sync_btn_background_color="#ff5010";
+                   },3000)
                 }
                 else{
                    $scope.syncBtnTxt="No Devices Connected";
