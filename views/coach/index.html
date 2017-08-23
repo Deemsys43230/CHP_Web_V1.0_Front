@@ -31,7 +31,7 @@
     <link rel="shortcut icon" href="../../images/favicon.ico" type="image/x-icon"/>
 
 </head>
-<body ng-app="coachApp" class="back-image">
+<body ng-app="coachApp" class="back-image" ng-cloak class="ng-cloak">
 
 <!-- Container -->
 <div id="container" class="boxed-page" ng-controller="CoachInitialController">
@@ -131,7 +131,7 @@
                             <a class="{{activeClass.course}}" href="#course">Courses</a>
                         </li>
                         <li>
-                            <a class="{{activeClass.my}}" href="#coach-subscription">Members</a>
+                            <a class="{{activeClass.my}}" href="#my-members">Members</a>
                         </li>
                         <li>
                             <a class="{{activeClass.sub}}" href="#subscription">Subcription</a>
@@ -253,6 +253,7 @@
         </div>
     </section>
 </div>
+
 <!-- End Container -->
 
 <!-- Go To Top Link -->

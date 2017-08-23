@@ -11,7 +11,7 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
         //Do For Cross Orgin Management
         $httpProvider.defaults.withCredentials = true;
 
-        $httpProvider.interceptors.push(['$q','$location','$injector','$cookies','$window',function ($q, $location,$injector,$cookies,$window) {
+        $httpProvider.interceptors.push(['$q','$location','$injector','$cookies','$window',"$rootScope",function ($q, $location,$injector,$cookies,$window,$rootScope) {
 
             return {
 
@@ -180,6 +180,10 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
             when('/my-members', {
                 templateUrl: 'views/member.html',
                 resolve: {
+                    check:["$location","$rootScope",function($location,$rootScope){
+                        if(!$rootScope.isSubscriptionActive)
+                            $location.path("subscription");
+                    }],
                     loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'coachApp',
@@ -628,6 +632,19 @@ coachApp.controller("CoachInitialController",['$scope','requestHandler','$locati
             $rootScope.isProfileUpdated=false;
         }
     });
+
+    requestHandler.getRequest("/coach/isSubscriptionActive/","").then(function(response){
+            if(response.data.isActive==1){
+                $rootScope.isSubscriptionActive=true;
+                $scope.membersPageNavigateLink="#my-members";
+            }
+            else{   
+                $rootScope.isSubscriptionActive=false;
+                $scope.membersPageNavigateLink="#subscription";
+            }
+
+    });
+
     $scope.$on('$routeChangeStart', function(next, current) {
         $scope.activeClass={};
         var page = $location.url().substr(1);
