@@ -525,11 +525,11 @@
                             </div>
                         </div>
                         <div class="col-md-2 col-xs-2 avatar no-padding" ng-if="chatMessage.sentby==2">
-                            <img src="{{userImageUrl}}" class=" img-responsive ">
+                            <img ng-src="{{coachImageUrl}}" class=" img-responsive ">
                         </div>
 
                         <div class="col-md-2 col-xs-2 avatar no-padding" ng-if="chatMessage.sentby==3">
-                            <img src="{{coachclientdetails.imageurl}}" class=" img-responsive ">
+                            <img ng-src="{{coachclientdetails.imageurl}}" class=" img-responsive ">
                         </div>
                         <div class="col-md-10 col-xs-10"  ng-if="chatMessage.sentby==3">
                             <div class="messages msg_receive">

@@ -17398,143 +17398,46 @@ select.date:focus {
     color:#00fc09;
 }
  
-
-.pinched {
-  position:relative;
-  padding:15px;
-  margin:50px 0 3em;
-  text-align:center;
-  color:#fff;
-  background: linear-gradient(#00bcd4, #f9d835);
-    background-image: linear-gradient(rgb(243, 150, 28), rgb(249, 216, 53));
-    background-position-x: initial;
-    background-position-y: initial;
-    background-size: initial;
-    background-repeat-x: initial;
-    background-repeat-y: initial;
-    background-attachment: initial;
-    background-origin: initial;
-    background-clip: initial;
-    background-color: initial;
-  -webkit-border-radius:10px;
-  -moz-border-radius:10px;
-  border-radius:10px;
-}
-
-/* creates a rectangle of the colour wanted for the pointy bit */
-.pinched:before {
-  content:"";
-  position:absolute;
-  top:-20px;
-  left:50%;
-  width:100px;
-  height:20px;
-  margin:0 0 0 -50px;
-  background: linear-gradient(#00bcd4, #f9d835);
-    background-image: linear-gradient(rgb(243, 150, 28), rgb(249, 216, 53));
-    background-position-x: initial;
-    background-position-y: initial;
-    background-size: initial;
-    background-repeat-x: initial;
-    background-repeat-y: initial;
-    background-attachment: initial;
-    background-origin: initial;
-    background-clip: initial;
-    background-color: initial;
-}
-
-/* creates a rounded rectangle to cover part of the rectangle generated above */
-.pinched:after {
-  content:"";
-  position:absolute;
-  top:-20px;
-  left:0;
-  width:50%;
-  height:20px;
-  background:#fff;
-  -webkit-border-bottom-right-radius:15px;
-  -moz-border-radius-bottomright:15px;
-  border-bottom-right-radius:15px;
-}
-
-/* creates the other rounded rectangle */
-.pinched > :first-child:before {
-  content:"";
-  position:absolute;
-  top:-20px;
-  right:0;
-  width:50%;
-  height:20px;
-  background:#fff;
-  -webkit-border-bottom-left-radius:15px;
-  -moz-border-radius-bottomleft:15px;
-  border-bottom-left-radius:15px;
-}
-
 .talk-bubble {
     margin: 40px;
-  display: inline-block;
-  position: relative;
+    display: inline-block;
+    position: relative;
     width: 100%;
-    height: auto;
-    color: #ccc;
-    background-color: #f8ba01;
-}
-.border{
-  border: 8px solid #666;
-}
-.round{
-  border-radius: 30px;
-    -webkit-border-radius: 30px;
-    -moz-border-radius: 30px;
-
+    height: 161px;
+    background: linear-gradient(rgba(255, 255, 128, 1), rgb(204, 255, 204));
+    background-image: linear-gradient(rgb(255, 255, 128), rgb(204, 255, 204));
+    margin-left:-38px;
+    margin-top:-3px;
+    border-radius: 1em;
 }
 
-/* Right triangle, left side slightly down */
-.tri-right.border.left-in:before {
-    content: ' ';
-    position: absolute;
-    width: 0;
-    height: 0;
-  left: -40px;
-    right: auto;
-  top: 30px;
-    bottom: auto;
-    border: 20px solid;
-    border-color: #f8ba01 #f8ba01 transparent transparent;
-}
 .tri-right.left-in:after{
     content: ' ';
     position: absolute;
-    width: 0;
+    width: 10px;
     height: 0;
-  left: -20px;
+    left: -22px;
     right: auto;
-  top: 38px;
+    top: 31px;
     bottom: auto;
     border: 12px solid;
-    border-color: #f8ba01 #f8ba01 transparent transparent;
+    border-color: #f3ff93 #f3ff93 transparent transparent;
 }
-
-
 
 /* talk bubble contents */
 .talktext{
-  padding: 1em;
+    padding: 1em;
     text-align: left;
-  line-height: 1.5em;
+    line-height: 1.5em;
 }
 .talktext p{
   /* remove webkit p margins */
-  -webkit-margin-before: 0em;
-  -webkit-margin-after: 0em;
-}
-
-
+    color: black
+   -webkit-margin-before: 0em;
+   -webkit-margin-after: 0em;
 }
 
 /*For Assign Client to group*/
-
 .assign-control {
     display: block;
     width: 86%;

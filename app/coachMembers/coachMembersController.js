@@ -243,7 +243,7 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
             $scope.chatMessages.coachid= response.data.chats[0].coachid;
 
             requestHandler.getRequest("/getUserProfile/"+$scope.chatMessages.coachid, "").then(function(response){
-                 $scope.userImageUrl=response.data.userprofile.imageurl;
+                 $scope.coachImageUrl=response.data.userprofile.imageurl;
             });
             $scope.chat={"message":""};
 

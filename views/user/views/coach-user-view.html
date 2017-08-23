@@ -82,17 +82,11 @@
                     <!--Tablet responsibility-->
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-12">
-                   <!--  <div class="pinched"><p></p></div> -->
                   <div class="talk-bubble tri-right left-in">
-                  <div class="talktext">
-                    <p>{{coachAdvice.description}}</p>
+                     <div class="talktext">
+                         <p>{{coachAdvice.description}}</p>
+                     </div>
                   </div>
-                </div>
-                      
-                    <!-- <div class="callout right" ng-model="coachAdvice.description">{{coachAdvice.description}}</div> -->
-                   <!--  <textarea class="height-150 forum-textarea ng-pristine ng-valid-maxlength ng-valid ng-valid-required ng-touched" name="description" ng-model="coachAdvice.description" maxlength="350"  required="" ng-readonly="coachAdvice.description" style="box-shadow: 5px 5px 5px #999999; border-bottom-left-radius: 1em;"></textarea>
-                    <br/> -->
-                    <div>
                     <span ng-hide="disablereview"><a id="modal_review" ng-click="reset(reviewForm)" href="#review"  class="btn-sm btn-success pull-right margin-left-5"><i class="fa fa-plus-circle"></i> Add Reviews</a></span>
                     <h4 class="classic-title"><span>Reviews</span></h4>
                     <div ng-show="totalRatings!=0">
@@ -163,11 +157,11 @@
                                         </div>
                                     </div>
                                     <div class="col-md-2 col-xs-2 avatar no-padding" ng-if="chatMessage.sentby==3">
-                                        <img src="{{userImageUrl}}" class=" img-responsive ">
+                                        <img ng-src="{{userImageUrl}}" class=" img-responsive ">
                                     </div>
 
                                     <div class="col-md-2 col-xs-2 avatar no-padding" ng-if="chatMessage.sentby==2">
-                                        <img src="{{usercoachdetails.imageurl}}" class=" img-responsive ">
+                                        <img ng-src="{{usercoachdetails.imageurl}}" class=" img-responsive ">
                                     </div>
                                     <div class="col-md-10 col-xs-10"  ng-if="chatMessage.sentby==2">
                                         <div class="messages msg_receive">
