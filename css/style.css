@@ -17406,7 +17406,7 @@ select.date:focus {
     height: 161px;
     background: linear-gradient(rgba(255, 255, 128, 1), rgb(204, 255, 204));
     background-image: linear-gradient(rgb(255, 255, 128), rgb(204, 255, 204));
-    margin-left:-38px;
+    margin-left:-2px;
     margin-top:-3px;
     border-radius: 1em;
 }
@@ -17416,12 +17416,12 @@ select.date:focus {
     position: absolute;
     width: 10px;
     height: 0;
-    left: -22px;
+    left: -46px;
     right: auto;
     top: 31px;
     bottom: auto;
-    border: 12px solid;
-    border-color: #f3ff93 #f3ff93 transparent transparent;
+    border: 24px solid;
+    border-color: #eeff9a #eeff9a transparent transparent;
 }
 
 /* talk bubble contents */

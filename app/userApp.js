@@ -629,6 +629,22 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 controller:'GoalController',
                 request:1
             }).
+            when('/medications', {
+                templateUrl: 'views/medications.html',
+                resolve: {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'userApp',
+                            files:[
+                                '../../plugin/popup/style.css',
+                                '../../angular/angular-utils-pagination/dirPagination.js',
+                                '../../app/medication/userMedicationController.js'
+                            ]
+                        })
+                    }]
+                },
+                controller:'UserMedicationController'
+            }).
             when('/faq', {
                 templateUrl: '../common/faq.html',
                 resolve: {
