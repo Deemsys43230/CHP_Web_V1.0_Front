@@ -1,0 +1,72 @@
+<!-- Start Page Banner -->
+
+<div class="page-banner" ng-cloak class="ng-cloak">
+    <div class="container">
+        <div class="row">
+            <a href="#events" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back to Event List</a>
+            <div flash-message="2000" class="col-md-3 no-padding pull-right"></div>
+            <h5 class="classic-title"><span>EVENT DETAILS</span></h5>
+            <div class="col-md-9">
+                <div ng-if="modalloaded">
+                    <div class="loader-style">
+                        <div class="loader"></div>
+                    </div>
+                </div>
+                
+                <div class="col-md-12 margin-top-15">
+                    <table class="table table-bordered table-striped">
+                        <tr>
+                            <td class="col-md-4">Event Id</td>
+                            <td class="col-md-8">{{eventDetails.id}}</td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">Event Name</td>
+                            <td class="col-md-8">{{eventDetails.eventname}}</td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">Event Description</td>
+                            <td class="col-md-8">{{eventDetails.description}}</td>
+                        </tr>   
+                        <tr>
+                            <td class="col-md-4">Event Date</td>
+                            <td class="col-md-8">{{eventDetails.datetime}}</td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">Duration</td>
+                            <td class="col-md-8">{{eventDetails.duration}}</td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">Attendees Count</td>
+                            <td class="col-md-8">{{eventDetails.attendeescount}}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <h5 class="classic-title"><span class="sub-title"><strong><i class="fa fa-user"></i>&nbsp;&nbsp;ATTENDEES DETAILS</strong></span></h5> 
+                <div class="content_scrollbar" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#eee'}" scroller>
+                    <div  ng-show="attendees.length!=0" class="padding-right-10 margin-top-15">
+                        <div class="col-lg-12 col-md-12 col-sm-12" ng-repeat="attendee in attendeesFilter=(attendees)">
+                            <div class="col-lg-12 col-md-12 col-sm-12 no-padding">
+                                <div class="col-lg-2 col-md-2 col-sm-2 no-padding">
+                                    <img class="img-circle" ng-src="{{attendee.imageurl}}">
+                                </div>
+                                <div class="col-lg-10 col-md-10 col-sm-10">
+                                    <h5 class="col-lg-12 col-md-12 col-sm-12">{{attendee.name}}</h5>
+                                    <h5 class="col-lg-12 col-md-12 col-sm-12">{{attendee.emailid}}</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div ng-show="attendees.length==0 || !attendeesFilter.length" class="text-center margin-top-50">
+                        <img src="../../images/no-coach-small.png" width="120" height="120"/>
+                        <h3 class="text-gray">NO ATTENDEES FOUND!!!</h3><br/><br/><br/>
+                    </div>
+                </div>
+        </div>
+    </div><!-- @end #content -->
+</div>
+
+<script type="text/javascript" src="../../js/script.js"></script>
+
+
