@@ -12,7 +12,7 @@
                         <img ng-src="{{userProfile.imageurl | trusted}}">
                     </div>
                     <input type="hidden" ng-model="userProfile.imageurl" name="profileImage" id="profileImageId"/>
-                    <div class="change-image"><a id="modal_trigger" href="#modal" class="btn btn-xs btn-warning">Change</a></div>
+                    <div class="change-image"><a id="modal_trigger" href="#modal" class="btn btn-xs btn-warning" >Change</a></div>
                     <h4 class="margin-top-20">{{orginalUserProfile.name}}</h4>
                     <p>{{orginalUserProfile.emailid}}</p>
                     <p>{{orginalUserProfile.phone}}</p>
@@ -267,22 +267,35 @@
     </header>
 
     <section class="popupBody">
+     
         <!-- Register Form -->
         <div id="modal-1" class="common_model">
-            <div class="image-editor">
-                <div class="cropit-image-preview center-block"></div>
-                <div class="image-size-label">
+
+        
+                 <div class="image-editor">
+
+                  <div class="cropit-image-preview center-block"></div>
+
+                 <div class="image-size-label">
                     Resize image
                 </div>
+                 <span class="error-message textarea-errormessage10" ng-show="sizeError" ng-cloak ><span>Upload&nbsp;Image&nbsp;Size&nbsp;Minimum&nbsp;of&nbsp;200x200</span></span>
+
                 <input type="range" class="cropit-image-zoom-input">
-                <h6 class="text-red text-center margin-tb-10">Note : Upload Image Size Minimum of 200x200</h6>
+
+                <h6 class="text-black; text-center margin-tb-10">Note : Upload Image Size Minimum of 200x200</h6>
+                 
+                
+                
+              
                 <div class="action_btns margin-top-20">
                     <div class="one_half">
                         <div class="fileUpload food-button" >
                             <span>Choose File</span>
-                            <input type="file" class="upload cropit-image-input" valid-file required  ng-model="testimonials.imageurl" onchange="angular.element(this).scope().fileNameChanged(this)"/>
+                            <input type="file" id="imgfile" class="upload cropit-image-input" valid-file required  ng-model="testimonials.imageurl" ng-change="fileNameChanged()"/>
                         </div>
                     </div>
+
                     <div class="one_half last"><a href="" onclick="return false;" class="btn food-button export modal_close" ng-disabled="imageUploaded" ng-click="doUpdateProfileImage()">Upload Image</a></div>
                 </div>
             </div>
@@ -295,7 +308,7 @@
     <header class="popupHeader">
         <span class="header_title">Change Password</span>
         <span class="modal_close"><i class="fa fa-times"></i></span>
-    </header>
+    </hea
 
     <section class="popupBody">
         <!-- Register Form -->

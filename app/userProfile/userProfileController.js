@@ -89,7 +89,7 @@ userApp.controller('UserProfileController',['$scope','requestHandler','Flash','$
             delete $scope.userProfile.userid;
             delete $scope.userProfile.isProfileUpdated;
             delete $scope.userProfile.status;
-            $scope.userProfile.unitPreference =  $scope.userProfile.unitPreference.toString();
+            $scope.userProfile.unitPreference=$scope.userProfile.unitPreference.toString();
 
             //Copy Original
 
@@ -194,25 +194,65 @@ userApp.controller('UserProfileController',['$scope','requestHandler','Flash','$
 
     };
 
-    $scope.imageAdded=false;
-    $scope.imageUploaded=true;
+  $scope.imageAdded=false;
+   $scope.imageUploaded=true;
     $scope.spinner=false;
+     $scope.sizeError=false;
     $scope.birthdayformat=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
 
-    $scope.fileNameChanged = function(element){
-        if(!$scope.imageAdded){
-            if(element.files.length > 0){
-                $scope.inputContainsFile = false;
-                $scope.imageAdded=true;
-                $scope.imageUploaded=false;
-            }
+    $scope.fileNameChanged = function(){
+    
+       if(!$scope.imageAdded){
+      var imgFile=document.getElementById('imgfile').files;
+       if(imgFile.length > 0){
+        
+             
+         var _URL = window.URL || window.webkitURL;
+
+   var file=document.getElementById('imgfile').files[0];
+        img = new Image();
+        
+        img.onload = function () {
+    
+            if(this.width < 200 && this.height < 200)   //checking the height and width of imagefile while uploading  
+            {
+               
+                $timeout( function(){         //timeout for image preview
+                $scope.sizeError=true;
+                $scope.imageUploaded=true;
+               
+            },100);
+
+                 }
+                 else
+                 {
+
+                      $timeout( function(){   
+                     $scope.sizeError=false;
+                $scope.inputContainsFile=false;
+                 $scope.imageAdded=true;
+                  $scope.imageUploaded=false;
+                 
+             },100);
+                 }
+                   
+                 } 
+            
+        img.src = _URL.createObjectURL(file);
+               
+            
+               }
+
+            
             else{
-                $scope.inputContainsFile = true;
+        
+                $scope.inputContainsFile=true;
                 $scope.imageAdded=false;
                 $scope.imageUploaded=true;
             }
-        }
-    };
+       }
+    }
+
 
     $scope.doUpdateProfileImage=function(){
         //Convert the image to base 64
@@ -4686,6 +4726,7 @@ userApp.directive('validFile',function(){
         link:function(scope,el,attrs,ngModel){
             //change event is fired when file is selected
             el.bind('change',function(){
+                //alert("invalid file");
                 scope.$apply(function(){
                     ngModel.$setViewValue(el.val());
                     ngModel.$render();
