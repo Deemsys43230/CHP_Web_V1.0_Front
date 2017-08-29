@@ -142,6 +142,7 @@
                                     <div class="text-error-message">
                                     <span ng-show="bmiSubmitted">
                                        <span ng-show="calculateForm.email.$error.required"><span>Required.</span></span>
+                                        <span ng-show="calculateForm.email.$error.validateEmail"><span>Invalid&nbsp;Format.</span></span>
                                     </span>
                                     </div>
                                 </div>

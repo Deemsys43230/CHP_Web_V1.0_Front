@@ -74,12 +74,16 @@ adminApp.controller('AdminPaymentController',['$scope','requestHandler','Flash',
     //Coach List
     $scope.doGetAllCoachSubscriptions = function(){
         $scope.loaded=true;
+        if($scope.coachPaymentSearch==undefined){
+            $scope.coachPaymentSearch="";
+        }
 
-       $scope.getAllSubscriptionParam={
+
+            $scope.getAllSubscriptionParam={
             "limit":$scope.getAllSubscriptionPagination.itemsPerPage,
             "offset":($scope.getAllSubscriptionPagination.pageNumber-1)*$scope.getAllSubscriptionPagination.itemsPerPage,
             "coachid":$routeParams.id,
-            "searchname":""
+           "searchname":$scope.coachPaymentSearch
         };
 
         //In practice this should be in a factory.
@@ -404,21 +408,28 @@ adminApp.filter('startsWithLetterFood', function () {
 //Admin Failed Payment
 adminApp.controller('AdminFailedPaymentController',['$scope','requestHandler','Flash','$routeParams',function($scope,requestHandler,Flash,$routeParams) {
 
+// For pagination
+    $scope.getFailedPaymentPagination={"itemsPerPage":10,"pageNumber":1};
+
    //Main Function returns the list
     $scope.doGetFailedPaymentList = function(){
 
         $scope.loaded=true;
 
+    if($scope.coachFailedPaymentSearch==undefined){
+        $scope.coachFailedPaymentSearch="";
+    }
         $scope.params={
-            "limit":10,
-            "offset":0,
-            "searchname":""
+            "limit":$scope.getFailedPaymentPagination.itemsPerPage,
+            "offset":($scope.getFailedPaymentPagination.pageNumber-1)*$scope.getFailedPaymentPagination.itemsPerPage,
+            "searchname":$scope.coachFailedPaymentSearch
         };
 
         //In practice this should be in a factory.
         requestHandler.postRequest("admin/pendingtransactions/",$scope.params).then(function(response){
             $scope.failedPaymentHistory = response.data;
             $scope.loaded=false;
+            $scope.paginationLoad=true;
         });
     };
     //End Function returns the list
@@ -437,11 +448,11 @@ adminApp.controller('AdminFailedPaymentController',['$scope','requestHandler','F
 
     //Init Function
     $scope.init=function(){
-        $scope.getFailedPaymentPagination={"itemsPerPage":10,"pageNumber":1};       
+        $scope.paginationLoad=false;
     }
 
     $scope.$watch("getFailedPaymentPagination.pageNumber",function(){
-         $scope.doGetFailedPaymentList();
+        $scope.doGetFailedPaymentList();
     })
 
 }]);

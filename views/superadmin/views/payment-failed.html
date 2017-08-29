@@ -7,7 +7,7 @@
             <a href="#dashboard" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back to Dashboard</a>
             <!-- Stat Search -->
             <form class="form-wrapper pull-right" novalidate>
-                <input type="text" placeholder="Search here..." ng-model="coachSearch" required>
+                <input type="text" placeholder="Search here..." ng-model="coachFailedPaymentSearch" ng-init="coachFailedPaymentSearch=''" ng-change="doGetFailedPaymentList()" required>
                 <button type="submit" ><i class="fa fa-search"></i></button>
             </form>
             <!-- End Search -->            
@@ -32,9 +32,12 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-show="coachLists.length < 0"><td colspan="6" class="text-center">Loading new data!!</td></tr>
-                <tr ng-show="coachLists.length == 0"><td colspan="6" class="text-center">No Results!!!</td></tr>
-                <tr dir-paginate="payment in failedPaymentHistory.history | itemsPerPage: 5" current-page="1" total-items="20">
+                <tr>
+
+                </tr>
+                <tr ng-show="coachLists.length < 0"><td colspan="7" class="text-center">Loading new data!!</td></tr>
+                <tr ng-show="coachLists.length == 0 || failedPaymentHistory.totalrecords==0"><td colspan="7" class="text-center">No Results!!!</td></tr>
+                <tr dir-paginate="payment in failedPaymentHistory.history | itemsPerPage: getFailedPaymentPagination.itemsPerPage" current-page="getFailedPaymentPagination.pageNumber" total-items="failedPaymentHistory.totalrecords"  pagination-id="failedPaymentPaginate">
                     <td>{{payment.username}}</td>
                     <td>{{payment.useremail}}</td>
                     <td>{{payment.userphone}}</td>
@@ -46,7 +49,7 @@
                 </tbody>
             </table>
             <!-- Start Pagination -->
-            <dir-pagination-controls ng-show="paginationLoad" max-size="5" direction-links="true"
+            <dir-pagination-controls ng-show="paginationLoad" max-size="5" direction-links="true" pagination-id="failedPaymentPaginate"
                                      boundary-links="true"> </dir-pagination-controls>
 
             <!-- End Pagination -->

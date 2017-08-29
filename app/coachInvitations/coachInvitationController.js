@@ -116,7 +116,7 @@ coachApp.controller('CoachInvitationController',['$scope','requestHandler','Flas
           requestHandler.postRequest("coach/deleteinterest/",$scope.removeInvitationsParam).then(function(response){
              if(response.data.Response_status==1){
                 successMessage(Flash,"Invitation Removed Successfully");
-                $scope.doGetUserListByCoach(true);
+                $scope.doGetUserDetailsByCoach(userid);
              }else{
                 errorMessage(Flash,"Please try again later!");
              }

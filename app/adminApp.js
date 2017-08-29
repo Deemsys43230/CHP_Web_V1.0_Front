@@ -807,8 +807,8 @@ adminApp.config([
         ]
       },
       controller: 'CoachSubscriptionController'
-    }).when('/coach-subscriptions/:id', {
-      templateUrl: 'views/coach-subscriptions-individual.html',
+    }).when('/coach-subscription-view/:id', {
+      templateUrl: 'views/coach-subscription-view.html',
       resolve: {
         loadMyFiles: [
           '$ocLazyLoad',
@@ -825,8 +825,27 @@ adminApp.config([
           }
         ]
       },
-      controller: 'IndividualCoachSubscriptionController'
-    }).when('/exercise', {
+      controller: 'CoachSubscriptionViewController'
+    }).when('/coach-subscriptions/:id', {
+            templateUrl: 'views/coach-subscriptions-individual.html',
+            resolve: {
+                loadMyFiles: [
+                    '$ocLazyLoad',
+                    function ($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name: 'adminApp',
+                            files: [
+                                '../../css/profile-image-upload.css',
+                                '../../angular/angular-utils-pagination/dirPagination.js',
+                                '../../js/image-upload.js',
+                                '../../app/coach/coachSubscriptionController.js'
+                            ]
+                        });
+                    }
+                ]
+            },
+            controller: 'IndividualCoachSubscriptionController'
+        }).when('/exercise', {
       templateUrl: 'views/exercise.html',
       resolve: {
         loadMyFiles: [

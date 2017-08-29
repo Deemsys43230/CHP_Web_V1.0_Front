@@ -1196,3 +1196,98 @@ coachApp.factory('myGoogleAnalytics', [
             // inject self
         }
     ]);
+
+
+//Check for All Charactor  Validation
+coachApp.directive('validateAllCharacters', function() {
+    var ALL_CHARACTERS = /^[a-zA-Z0-9?=.*!@#$%^&*_\-\S\s]+$/;
+
+    return {
+        require: 'ngModel',
+        restrict: '',
+        link: function(scope, elm, attrs, ctrl) {
+            // only apply the validator if ngModel is present and Angular has added the Integer validator
+            ctrl.$validators.validateEmail = function(modelValue) {
+                return  ctrl.$isEmpty(modelValue) || ALL_CHARACTERS .test(modelValue);
+            };
+        }
+    };
+});
+
+
+//Check for Email Already Exists
+coachApp.directive("emailexists",['$q', '$timeout','requestHandler', function ($q, $timeout,requestHandler) {
+
+    var CheckEmailExists = function (isNew) {
+
+        var returnvalue;
+        if(isNew===1)
+            returnvalue=true;
+        else
+            returnvalue=false;
+
+        return returnvalue;
+    };
+
+    return {
+        restrict: "A",
+        require: "ngModel",
+        link: function (scope, element, attributes, ngModel) {
+            ngModel.$asyncValidators.emailexists = function (modelValue) {
+                var defer = $q.defer();
+                $timeout(function () {
+                    var isNew;
+                    var sendRequest=requestHandler.postRequest("checkEmailExist/",{"emailid":modelValue}).then(function(response){
+                        isNew=response.data.Response_status;
+                    });
+
+                    sendRequest.then(function(){
+
+                        if (CheckEmailExists(isNew)){
+                            defer.resolve();
+                        }
+                        else{
+                            defer.reject();
+                        }
+                    });
+                    isNew = false;
+                }, 10);
+
+                return defer.promise;
+            }
+        }
+    };
+}]);
+//for restricting keypress event two digit after (dot)
+function validateFloatKeyPress1(el, evt) {
+    var charCode = (evt.which) ? evt.which : event.keyCode;
+    var number = el.value.split('.');
+    if (charCode != 46 && charCode > 31 && (charCode < 48 || charCode > 57)) {
+        return false;
+    }
+    //just one dot
+    if(number.length>1 && charCode == 46){
+        return false;
+    }
+    // for backspace issue in firefox
+    if(charCode== 8){
+        return true;
+    }
+    //get the carat position
+    var caratPos = getSelectionStart(el);
+    var dotPos = el.value.indexOf(".");
+    if( caratPos > dotPos && dotPos>-1 && (number[1].length > 1)){
+        return false;
+    }
+    return true;
+}
+function getSelectionStart(o) {
+    if (o.createTextRange) {
+        var r = document.selection.createRange().duplicate()
+        r.moveEnd('character', o.value.length)
+        if (r.text == '') return o.value.length
+        return o.value.lastIndexOf(r.text)
+    } else return o.selectionStart
+}
+
+

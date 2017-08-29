@@ -40,11 +40,12 @@
                             </select>
 
 
-                            <input class="search-input margin-top-15" name="price"  placeholder="Enter course price" ng-model="courseDetails.price" maxlength="7" required valid-floatnumberzero>
+                            <input class="search-input margin-top-15" name="price"  placeholder="Enter course price" ng-model="courseDetails.price" required valid-floatnumberzero ng-change="maxPriceValueCheck(courseDetails.price)" onkeypress="return validateFloatKeyPress1(this,event);">
                             <p class="text-red margin-top-5"><b>Note : Price "zero" will be consider as free course.</b></p>
+                            <span class="error-message margin-top25" ng-show="!courseForm.price.$error.required&&maxPriceValue"><span>Please&nbsp;Enter&nbsp;Valid&nbsp;Price.</span></span>
                              <span ng-show="courseForm.price.$dirty&&courseForm.price.$invalid">
                                 <span class="error-message margin-top25" ng-show="courseForm.price.$error.required"><span>Required.</span></span>
-                                <span class="error-message margin-top25" ng-show="!courseForm.price.$error.required&& courseForm.price.$error.validateFloat1"><span>Invalid&nbsp;Data.</span></span>
+                                <span class="error-message margin-top25" ng-show="!courseForm.price.$error.required&& courseForm.price.$error.validFloatnumberzero "><span>Invalid&nbsp;Data.</span></span>
                             </span>
                         </div>
                         <div class="col-lg-3 col-md-3 col-sm-3">
@@ -64,8 +65,8 @@
                             </div>
                         </div>
                         <div class="col-lg-12 col-md-12 col-sm-12 text-center margin-top-15">
-                            <span ng-show="isAdd==1"><a href="" ng-disabled="courseForm.$invalid" class="btn btn-success" ng-click="doAddCourse()">Save Course</a></span>
-                            <span ng-show="isAdd==0"><a href="" ng-disabled="isCleanCourse() || courseForm.$invalid" class="btn btn-success" ng-click="doUpdateCourse()">Save Changes</a></span>
+                            <span ng-show="isAdd==1"><a href="" ng-disabled="courseForm.$invalid || maxPriceValue" class="btn btn-success" ng-click="doAddCourse()">Save Course</a></span>
+                            <span ng-show="isAdd==0"><a href="" ng-disabled="isCleanCourse() || courseForm.$invalid || maxPriceValue" class="btn btn-success" ng-click="doUpdateCourse()">Save Changes</a></span>
                             <span ng-show="isAdd==0"><a href="#course-view/{{courseDetails.courseid}}" class="btn btn-danger">Cancel</a></span>
                             <span ng-show="isAdd==1"><a href="#course" class="btn btn-danger">Cancel</a></span>
                         </div>

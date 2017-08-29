@@ -7,7 +7,7 @@
             <a href="#dashboard" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back to Dashboard</a>
             <!-- Stat Search -->
             <form class="form-wrapper pull-right" novalidate>
-                <input type="text" placeholder="Search here..." ng-model="coachSearch" required>
+                <input type="text" placeholder="Search here..." ng-model="coachPaymentSearch"  ng-init="coachPaymentSearch=''" ng-change="doGetAllCoachSubscriptions()" required>
                 <button type="submit" ><i class="fa fa-search"></i></button>
             </form>
             <!-- End Search -->            
@@ -37,9 +37,12 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-show="coachLists.length < 0"><td colspan="6" class="text-center">Loading new data!!</td></tr>
-                <tr ng-show="coachLists.length == 0"><td colspan="6" class="text-center">No Results!!!</td></tr>
-                <tr dir-paginate="subscription in subscriptionDetails.history | itemsPerPage: getAllSubscriptionPagination.itemsPerPage" current-page="getAllSubscriptionPagination.pageNumber" total-items="subscriptionDetails.totalrecords">
+                <tr>
+
+                </tr>
+                <tr ng-show="coachLists.length < 0"><td colspan="12" class="text-center">Loading new data!!</td></tr>
+                <tr ng-show="coachLists.length == 0 ||subscriptionDetails.totalrecords==0 "><td colspan="12" class="text-center">No Results!!!</td></tr>
+                <tr dir-paginate="subscription in subscriptionDetails.history | itemsPerPage: getAllSubscriptionPagination.itemsPerPage" current-page="getAllSubscriptionPagination.pageNumber" total-items="subscriptionDetails.totalrecords" pagination-id="subscriptionDetailsPaginate">
                     <td>{{subscription.username}}</td>
                     <td>{{subscription.useremail}}</td>
                     <td>{{subscription.planname}}</td>
@@ -52,10 +55,11 @@
                     <td>{{subscription.clientscount}}</td>
                     <td><a href="#coach-subscribers-list/{{coach.coachid}}" class="btn-xs btn-primary">View&nbsp;Details</a>&nbsp;<a class="btn-xs btn-warning" href="" ng-click="doSendSubscriptionInvoice(subscription.paymentId)">Send&nbsp;Invoice</a>&nbsp;<a class="btn-xs btn-warning" href="" ng-click="doSendRenewSubscription(subscription.paymentId)">Send&nbsp;Renew&nbsp;Mail</a></td>
                 </tr>
+
                 </tbody>
             </table>
             <!-- Start Pagination -->
-            <dir-pagination-controls ng-show="paginationLoad" max-size="5" direction-links="true"
+            <dir-pagination-controls ng-show="paginationLoad" max-size="5" direction-links="true" pagination-id="subscriptionDetailsPaginate"
                                      boundary-links="true"> </dir-pagination-controls>
 
             <!-- End Pagination -->

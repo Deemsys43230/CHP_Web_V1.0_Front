@@ -88,3 +88,32 @@ adminApp.controller('CoachSubscriptionController',['$scope','requestHandler','Fl
     });
 
 }]);
+
+adminApp.controller('CoachSubscriptionViewController',['$scope','requestHandler','Flash','coachMenuService','$location','$routeParams',function($scope,requestHandler,Flash,coachMenuService,$location,$routeParams) {
+
+
+    // For coach management side menu
+    $scope.coachMenuList = coachMenuService;
+    $.each($scope.coachMenuList,function(index,value){
+        if(value.id==3){
+            value.active = "active";
+        }
+        else value.active = ""
+    });
+
+//For admin subscription detail
+/*    $scope.params={
+        "paymentid":$routeParams.id
+    };*/
+    $scope.doViewAdminSubscriptionsDetails=function(){
+        $scope.loaded=true;
+        requestHandler.postRequest("admin/adminsubscriptiondetail/",{"paymentid":$routeParams.id}).then(function(response){
+            $scope.subscriptionHistory=response.data.subscriptionhistory;
+            $scope.paymentHistory=response.data.paymenthistory;
+            $scope.loaded=false;
+        });
+    };
+    //Initialize
+        $scope.doViewAdminSubscriptionsDetails();
+
+}]);

@@ -1085,6 +1085,18 @@ coachApp.controller('CourseEditController',['$scope','requestHandler','Flash','$
     };
 
 
+    //TO check Maximum digits validation for course price
+    $scope.maxPriceValue=false;
+    $scope.maxPriceValueCheck = function(price){
+        if(price<= 99999.99){
+            $scope.maxPriceValue=false;
+        }
+        else if(price> 99999.99){
+            $scope.maxPriceValue=true;
+        }
+
+    }
+
 
 }]);
 

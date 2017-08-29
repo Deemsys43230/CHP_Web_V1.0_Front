@@ -868,7 +868,7 @@
                                 <img class="img-width" src="../../images/sleep.png"/>
                             </div>
                             <div class="col-md-8 col-lg-8 col-sm-8 no-padding">
-                                <div class="sleep-textcolor" ><small>{{wearable.sleep==null?"N/A":wearable.sleep}}</small></div>
+                                <div class="sleep-textcolor" ><small>{{wearable.sleep==null?"NA":wearable.sleep}}</small></div>
                                 <div class="sleep-textcolor"><small>(minutes)</small></div>
                             </div>
                             </div>
@@ -882,7 +882,7 @@
                                 <img class="img-width" src="../../images/bloodpressure.png"/>
                             </div>
                             <div class="col-md-8 col-lg-8 col-sm-8 no-padding">
-                                <div class="heart-textcolor"><small>{{wearable.restingheartrate==null?"N/A":wearable.restingheartrate}}</small></div>
+                                <div class="heart-textcolor"><small>{{wearable.restingheartrate==null?"NA":wearable.restingheartrate}}</small></div>
                                 <div class="heart-textcolor"><small>(bpm)</small></div>
                             </div>
                         </div>
@@ -912,7 +912,7 @@
                                 <img class="img-width" src="../../images/floor.png"/>
                             </div>
                             <div class="col-md-8 col-lg-8 col-sm-8 no-padding">
-                                <div class="floor-textcolor"><small>{{wearable.floors==null?"N/A":(wearable.floors==0?"N/A":wearable.floors)}}</small></div>
+                                <div class="floor-textcolor"><small>{{wearable.floors==null?"NA":(wearable.floors==0?"NA":wearable.floors)}}</small></div>
                                 <div class="floor-textcolor"><small>(floor)</small></div>
                             </div>
                             </div>
@@ -926,7 +926,7 @@
                                 <img class="img-width" src="../../images/step.png"/>
                             </div>
                             <div class="col-md-8 col-lg-8 col-sm-8 no-padding">
-                                <div class="steps-textcolor"><small>{{wearable.steps==null?"N/A":(wearable.steps==0?"N/A":wearable.steps)}}</small></div>
+                                <div class="steps-textcolor"><small>{{wearable.steps==null?"NA":(wearable.steps==0?"NA":wearable.steps)}}</small></div>
                                 <div class="steps-textcolor"><small>(count)</small></div>
                             </div>
                             </div>
@@ -940,7 +940,7 @@
                                 <img class="img-width" src="../../images/bloodoxygen.png"/>
                             </div>
                             <div class="col-md-8 col-lg-8 col-sm-8 no-padding">
-                                <div class="bloodoxygen-textcolor"><small>{{wearable.bloodoxygen==null?"N/A":wearable.bloodoxygen}}</small></div>
+                                <div class="bloodoxygen-textcolor"><small>{{wearable.bloodoxygen==null?"NA":wearable.bloodoxygen}}</small></div>
                                 <div class="bloodoxygen-textcolor"><small>(%)</small></div>
                             </div>
                             </div>
@@ -956,7 +956,7 @@
                                 <img class="img-width" src="../../images/heart1.gif"/>
                             </div>
                             <div class="col-md-8 col-lg-8 col-sm-8 no-padding">
-                                <div class="bloodpessure-textcolor" title="Systolic Blood Pressure/Diastolic Blood Pressure"><small>{{wearable.systolic==null?"N/A":wearable.systolic}} / {{wearable.diastolic==null?"N/A":wearable.diastolic}}</small></div>
+                                <div class="bloodpessure-textcolor" title="Systolic Blood Pressure/Diastolic Blood Pressure"><small>{{wearable.systolic==null?"NA":wearable.systolic}} / {{wearable.diastolic==null?"NA":wearable.diastolic}}</small></div>
                                 <div class="bloodpessure-textcolor" title="Systolic Blood Pressure/Diastolic Blood Pressure"><small>(mmHg)</small></div>
                             </div>
                             </div>
@@ -970,7 +970,7 @@
                                 <img class="img-width" style="height: 32px;" src="../../images/bloodglucose.png"/>
                             </div>
                             <div class="col-md-8 col-lg-8 col-sm-8 no-padding">
-                                <div class="bloodglucose-textcolor" title="Random Glucose/Fasting Glucose"><small>{{wearable.randombloodglucose==null?"N/A":wearable.randombloodglucose}} / {{wearable.fastingbloodglucose==null?"N/A":wearable.fastingbloodglucose}}</small></div>
+                                <div class="bloodglucose-textcolor" title="Random Glucose/Fasting Glucose"><small>{{wearable.randombloodglucose==null?"NA":wearable.randombloodglucose}} / {{wearable.fastingbloodglucose==null?"NA":wearable.fastingbloodglucose}}</small></div>
                                 <div class="bloodglucose-textcolor" title="Random Glucose/Fasting Glucose"><small>(mg/dl)</small></div>
                             </div>
                         </div>
@@ -984,7 +984,7 @@
                                     <img class="img-width" style="height: 32px;" src="../../images/smalltemp.png"/>
                                 </div>
                                 <div class="col-md-8 col-lg-8 col-sm-8 no-padding">
-                                    <div class="bodytemperature-textcolor"><small>{{wearable.bodytemperature==null?"N/A":wearable.bodytemperature}}</small></div>
+                                    <div class="bodytemperature-textcolor"><small>{{wearable.bodytemperature==null?"NA":wearable.bodytemperature}}</small></div>
                                     <div class="bodytemperature-textcolor"><small>(<sup>o</sup>F)</small></div>
                                 </div>
                             </div>
@@ -1520,7 +1520,7 @@
                         <h5  class="margin-top-10">Workout Value</h5>
                         <div class="col-lg-4 col-md-4 col-sm-4 margin-top-10 "><span>Hours</span>
                            <!-- <input type="text" name="customhours" ng-model="selectedHours" maxlength="7">-->
-                            <select class="form-control" name="customhours"  ng-model="selectedHours" ng-init="selectedHours='0'">
+                            <select class="form-control" name="customhours"  ng-model="selectedHours" ng-init="selectedHours='0'" style="padding: 7px 12px;">
                                 <option value="0">0</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
@@ -1552,7 +1552,7 @@
                         </div>
                         <div class="col-lg-4 col-md-4 col-sm-4 margin-top-10"><span>Minutes</span>
                             <!--<input type="text" ng-pattern="/(^[1-9]\d{0,8}$)/" name="customminutes" ng-model="selectedMinutes"  maxlength="7" required>-->
-                            <select class="form-control" name="minutes"  ng-model="selectedMinutes" ng-init="selectedMinutes='0'">
+                            <select class="form-control" name="minutes"  ng-model="selectedMinutes" ng-init="selectedMinutes='0'" style="padding: 7px 12px;">
                                 <option value="0">0</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
@@ -1620,7 +1620,7 @@
                         </div>
                         <div class="col-lg-4 col-md-4 col-sm-4 margin-top-10"><span>Seconds</span>
                             <!--<input type="text" name="customseconds" ng-model="selectedSeconds" maxlength="7">-->
-                            <select class="form-control" name="customseconds"  ng-model="selectedSeconds" ng-init="selectedSeconds='0'">
+                            <select class="form-control" name="customseconds"  ng-model="selectedSeconds" ng-init="selectedSeconds='0'" style="padding: 7px 12px;">
                                 <option value="0">0</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
@@ -2060,7 +2060,7 @@
                                 <img class="img-width" src="../../images/sleep.png"/>
                             </div>
                             <div class="col-md-8 col-lg-8 col-sm-8 no-padding">
-                                <div class="sleep-textcolor" ><small>{{wearable.sleep==null?"N/A":wearable.sleep}}</small></div>
+                                <div class="sleep-textcolor" ><small>{{wearable.sleep==null?"NA":wearable.sleep}}</small></div>
                                 <div class="sleep-textcolor"><small>(minutes)</small></div>
                             </div>
                         </div>
@@ -2074,7 +2074,7 @@
                                 <img class="img-width" src="../../images/bloodpressure.png"/>
                             </div>
                             <div class="col-md-8 col-lg-8 col-sm-8 no-padding">
-                                <div class="heart-textcolor"><small>{{wearable.restingheartrate==null?"N/A":wearable.restingheartrate}}</small></div>
+                                <div class="heart-textcolor"><small>{{wearable.restingheartrate==null?"NA":wearable.restingheartrate}}</small></div>
                                 <div class="heart-textcolor"><small>(rest)</small></div>
                             </div>
                         </div>
@@ -2104,7 +2104,7 @@
                                 <img class="img-width" src="../../images/floor.png"/>
                             </div>
                             <div class="col-md-8 col-lg-8 col-sm-8 no-padding">
-                                <div class="floor-textcolor"><small>{{wearable.floors==null?"N/A":(wearable.floors==0?"N/A":wearable.floors)}}</small></div>
+                                <div class="floor-textcolor"><small>{{wearable.floors==null?"NA":(wearable.floors==0?"NA":wearable.floors)}}</small></div>
                                 <div class="floor-textcolor"><small>(floor)</small></div>
                             </div>
                         </div>
@@ -2118,7 +2118,7 @@
                                 <img class="img-width" src="../../images/step.png"/>
                             </div>
                             <div class="col-md-8 col-lg-8 col-sm-8 no-padding">
-                                <div class="steps-textcolor"><small>{{wearable.steps==null?"N/A":(wearable.steps==0?"N/A":wearable.steps)}}</small></div>
+                                <div class="steps-textcolor"><small>{{wearable.steps==null?"NA":(wearable.steps==0?"NA":wearable.steps)}}</small></div>
                                 <div class="steps-textcolor"><small>(count)</small></div>
                             </div>
                         </div>
@@ -2132,7 +2132,7 @@
                                 <img class="img-width" src="../../images/bloodoxygen.png"/>
                             </div>
                             <div class="col-md-8 col-lg-8 col-sm-8 no-padding">
-                                <div class="bloodoxygen-textcolor"><small>{{wearable.bloodoxygen==null?"N/A":wearable.bloodoxygen}}</small></div>
+                                <div class="bloodoxygen-textcolor"><small>{{wearable.bloodoxygen==null?"NA":wearable.bloodoxygen}}</small></div>
                                 <div class="bloodoxygen-textcolor"><small>(%)</small></div>
                             </div>
                         </div>
@@ -2148,7 +2148,7 @@
                                 <img class="img-width" src="../../images/heart1.gif"/>
                             </div>
                             <div class="col-md-8 col-lg-8 col-sm-8 no-padding">
-                                <div class="bloodpessure-textcolor" title="Systolic Blood Pressure/Diastolic Blood Pressure"><small>{{wearable.systolic==null?"N/A":wearable.systolic}} / {{wearable.diastolic==null?"N/A":wearable.diastolic}}</small></div>
+                                <div class="bloodpessure-textcolor" title="Systolic Blood Pressure/Diastolic Blood Pressure"><small>{{wearable.systolic==null?"NA":wearable.systolic}} / {{wearable.diastolic==null?"NA":wearable.diastolic}}</small></div>
                                 <div class="bloodpessure-textcolor" title="Systolic Blood Pressure/Diastolic Blood Pressure"><small>(mmHg)</small></div>
                             </div>
                         </div>
@@ -2162,7 +2162,7 @@
                                 <img class="img-width" style="height: 32px;" src="../../images/bloodglucose.png"/>
                             </div>
                             <div class="col-md-8 col-lg-8 col-sm-8 no-padding">
-                                <div class="bloodglucose-textcolor" title="Random Glucose/Fasting Glucose"><small>{{wearable.randombloodglucose==null?"N/A":wearable.randombloodglucose}} / {{wearable.fastingbloodglucose==null?"N/A":wearable.fastingbloodglucose}}</small></div>
+                                <div class="bloodglucose-textcolor" title="Random Glucose/Fasting Glucose"><small>{{wearable.randombloodglucose==null?"NA":wearable.randombloodglucose}} / {{wearable.fastingbloodglucose==null?"NA":wearable.fastingbloodglucose}}</small></div>
                                 <div class="bloodglucose-textcolor" title="Random Glucose/Fasting Glucose"><small>(mg/dl)</small></div>
                             </div>
                         </div>
@@ -2176,7 +2176,7 @@
                                 <img class="img-width" style="height: 32px;" src="../../images/smalltemp.png"/>
                             </div>
                             <div class="col-md-8 col-lg-8 col-sm-8 no-padding">
-                                <div class="bodytemperature-textcolor"><small>{{wearable.bodytemperature==null?"N/A":wearable.bodytemperature}}</small></div>
+                                <div class="bodytemperature-textcolor"><small>{{wearable.bodytemperature==null?"NA":wearable.bodytemperature}}</small></div>
                                 <div class="bodytemperature-textcolor"><small>(<sup>o</sup>F)</small></div>
                             </div>
                         </div>
