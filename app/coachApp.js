@@ -179,21 +179,29 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
             }).            
             when('/my-members', {
                 templateUrl: 'views/member.html',
-                resolve: {
-                    check:["$location","$rootScope",function($location,$rootScope){
-                        if(!$rootScope.isSubscriptionActive)
-                            $location.path("subscription");
-                    }],
+                resolve: {                   
                     loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'coachApp',
                             files:[
                                 '../../plugin/popup/style.css',
-                                '../../angular/angular-utils-pagination/dirPagination.js',
                                 '../../app/coachMembers/coachMembersController.js',
+                                '../../angular/angular-utils-pagination/dirPagination.js',
                                  '../../css/custom-inputs.css'
                             ]
                         })
+                    }],
+                     check:["$location","$rootScope","requestHandler",function($location,$rootScope,requestHandler){
+                         requestHandler.getRequest("/coach/isSubscriptionActive/","").then(function(response){
+                            if(response.data.isActive==1){
+                                $rootScope.isSubscriptionActive=true;
+                            }else{   
+                                $rootScope.isSubscriptionActive=false;
+                                $location.path("#subscription");
+                            }
+
+                         });
+                        
                     }]
                 },
                 controller:'CoachMembersController'
@@ -703,18 +711,6 @@ coachApp.controller("CoachInitialController",['$scope','requestHandler','$locati
             $location.path("/profile");
             $rootScope.isProfileUpdated=false;
         }
-    });
-
-    requestHandler.getRequest("/coach/isSubscriptionActive/","").then(function(response){
-            if(response.data.isActive==1){
-                $rootScope.isSubscriptionActive=true;
-                $scope.membersPageNavigateLink="#my-members";
-            }
-            else{   
-                $rootScope.isSubscriptionActive=false;
-                $scope.membersPageNavigateLink="#subscription";
-            }
-
     });
 
     $scope.$on('$routeChangeStart', function(next, current) {

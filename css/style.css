@@ -4314,6 +4314,13 @@ h5.classic-title span a{
     color: #f8ba01;
 }
 
+h5.classic-title .active-tab {
+    padding-bottom: 10px;
+    border-bottom: 3px solid #f8ba01;
+    font-weight: 600;
+    color: #f8ba01;
+}
+
 .big-title {
     margin-bottom: 20px;
 }
@@ -17211,7 +17218,7 @@ select.date:focus {
     float: left;
     height: 150px !important;
     font-size: 14px;
-    background: #efdd85;
+    background: #fff9de;
     color: #333;
     padding: 7px 10px;
     width: 100%;

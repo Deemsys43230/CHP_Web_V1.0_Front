@@ -46,12 +46,12 @@
                                 <td><span class="line-clamp-md">{{subscriptionHistory.planprice}}</span></td>
                                 <td><span class="line-clamp-md">{{subscriptionHistory.discountprice}}</span></td>
                                 <td><span class="line-clamp-md">{{subscriptionHistory.currencytype}}</span></td>
-                                <td><span class="line-clamp-md">{{subscriptionHistory.startdate}}</span></td>
-                                 <td><span class="line-clamp-md">{{subscriptionHistory.enddate}}</span></td>
-                                  <td><span class="line-clamp-md">{{subscriptionHistory.bufferdate}}</span></td>
-                                  <td><span class="line-clamp-md">{{subscriptionHistory.clientscount}}</span></td>
+                                <td><span>{{subscriptionHistory.startdate}}</span></td>
+                                 <td><span>{{subscriptionHistory.enddate}}</span></td>
+                                  <td><span>{{subscriptionHistory.bufferdate}}</span></td>
+                                  <td><span>{{subscriptionHistory.clientscount}}</span></td>
                                 <td>
-                                    <a href="#coach-subscription/{{subscriptionHistory.paymentid}}" class="btn-xs btn-primary">View Details</a>
+                                    <a href="#coach-subscription-view/{{subscriptionHistory.paymentid}}/coach-list" class="btn-xs btn-primary">View Details</a>
                                 </td>
                             </tr>
                             <tr ng-show="subscriptionHistoryList.history.length==0"><td colspan="9" class="text-center">No Subscriptions Found !!!</td></tr>

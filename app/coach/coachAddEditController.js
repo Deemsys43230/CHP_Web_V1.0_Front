@@ -3,12 +3,22 @@ var adminApp = angular.module('adminApp', ['ngRoute','oc.lazyLoad','requestModul
 
 adminApp.controller('CoachAddEditController',['$scope','requestHandler','Flash','coachMenuService','$location','$routeParams',function($scope,requestHandler,Flash,coachMenuService,$location,$routeParams) {
 
-$scope.inviteId = $routeParams.id;
+    $scope.inviteId = $routeParams.id;
 
     // For coach management side menu
      $scope.coachMenuList = coachMenuService;
+
+     if($scope.inviteId!=undefined){
+        $scope.selectedMenu=1;
+        $scope.backTo="#invitation-list";
+    }else{
+        $scope.selectedMenu=2;   
+        $scope.backTo="#coach";
+    }
+     
+
         $.each($scope.coachMenuList,function(index,value){
-            if(value.id==1){
+            if(value.id==$scope.selectedMenu){
                 value.active = "active";
             }
             else value.active = ""

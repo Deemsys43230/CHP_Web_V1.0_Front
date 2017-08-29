@@ -317,6 +317,7 @@ adminApp.controller('AdminPaymentController',['$scope','requestHandler','Flash',
 
     //Send Invoice Phase 2
     $scope.doSendSubscriptionInvoice=function(paymentid){
+        alert(paymentid);
         requestHandler.postRequest("admin/sendsubscriptioninvoice/",{"paymentid":paymentid}).then(function(response){
             successMessage(Flash,"Sent Successfull");
         });

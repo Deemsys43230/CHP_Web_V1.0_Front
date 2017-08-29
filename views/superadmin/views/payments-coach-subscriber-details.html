@@ -1,130 +1,188 @@
 
-
-<!-- Start Page Banner -->
 <div class="container" ng-cloak class="ng-cloak">
-    <div class="row">
-        <div class="col-md-12 min-height-450 margin-bottom-20" ng-init="coachSubscribersDetailInit()">
-            <a href="#coach-subscribers-list/{{coachSubscriptionDetailView.coachdetail.coachid}}" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back to subscribers list</a>
-            <h5 class="classic-title"><span><i class="fa fa-male"></i>&nbsp;&nbsp;COACH SUBSCRIPTION - PAYMENT DETAILS</span></h5>
-            <div ng-if="loaded">
+    <div class="row" ng-init="invitationCoachViewInit()">
+         <div class="col-md-12">
+            <div ng-if="modalloaded">
                 <div class="loader-style">
-                    <br/><br/><br/>
                     <div class="loader"></div>
                 </div>
             </div>
-            <div class="col-md-2 no-padding">
-                <h4>SUBSCRIBER DETAILS</h4><br/>
-                <img class="margin-bottom-10" ng-src="{{coachSubscriptionDetailView.userdetail.userimage|trusted}}">
-                <h5 class="wrap">{{coachSubscriptionDetailView.userdetail.username}}</h5>
-                <h6 class="wrap">{{coachSubscriptionDetailView.userdetail.useremailid}}</h6>
+            <a href="{{backTo}}" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back</a>
+            <div flash-message="2000" class="col-md-3 no-padding pull-right"></div>
+            <h5 class="classic-title"><span>SUBSCRIPTION DETAILS</span></h5>
+           
+            <div class="row">
+                <div class="col-md-6">
+                <h4 class="text-center text-bold margin-bottom-15 margin-top-10"> Subscription Details</h4>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <td class="col-md-4 text-bold">User Name</td>
+                        <td class="col-md-8">{{subscriptionHistory.username}}</td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4 text-bold"> User Email ID</td>
+                        <td class="col-md-8">{{subscriptionHistory.useremail}}</td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4 text-bold">Phone Number</td>
+                        <td class="col-md-8">{{subscriptionHistory.userphone}}</td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4 text-bold">Plan Choice</td>
+                        <td class="col-md-8">{{subscriptionHistory.planchoice}}</td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4 text-bold">Coach ID</td>
+                        <td class="col-md-8">{{subscriptionHistory.coachid}}</td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4 text-bold">Plan Name</td>
+                        <td class="col-md-8">{{subscriptionHistory.planname}}</td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4 text-bold">Plan Price</td>
+                        <td class="col-md-8">{{subscriptionHistory.planprice}}</td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4 text-bold">Discount</td>
+                        <td class="col-md-9">{{subscriptionHistory.discount}}</td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4 text-bold">Discount Price</td>
+                        <td class="col-md-8">{{subscriptionHistory.discountprice}}</td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4 text-bold">Currency Type</td>
+                        <td class="col-md-8">{{subscriptionHistory.currencytype}}</td>
+                    <tr>
+                        <td class="col-md-4  text-bold">Start Date</td>
+                        <td class="col-md-8">{{subscriptionHistory.startdate}}</td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4 text-bold">End Date</td>
+                        <td class="col-md-8">{{subscriptionHistory.enddate}}</td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4 text-bold">Buffer Date</td>
+                        <td class="col-md-8">{{subscriptionHistory.bufferdate}}</td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4 text-bold">Clients Count</td>
+                        <td class="col-md-8">{{subscriptionHistory.clientscount}}</td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4 text-bold">Status</td>
+                        <td class="col-md-8">{{subscriptionHistory.status}}</td>
+                    </tr>
+                </table>
             </div>
-            <div class="col-md-8">
-                <h4 class="col-md-12 text-center">SUBSCRIPTION DETAILS<br/></h4>
-                <h4 class="col-md-12 text-gray margin-bottom-15 margin-top-10">Inward Details</h4>
-                <div class="col-md-12">
-                    <table class="table table-bordered table-striped">
-                        <tr>
-                            <td class="col-md-4">Inward ID</td>
-                            <td class="col-md-8">{{coachSubscriptionDetailView.inwarddetail.inwardid}}</td>
-                        </tr>
-                        <tr>
-                            <td>Payer Email ID</td>
-                            <td>{{coachSubscriptionDetailView.inwarddetail.payeremail}}</td>
-                        </tr>
-                        <tr>
-                            <td>Paypal Firstname</td>
-                            <td>{{coachSubscriptionDetailView.inwarddetail.paypalfirstname}}</td>
-                        </tr>
-                        <tr>
-                            <td>Paypal Lastname</td>
-                            <td>{{coachSubscriptionDetailView.inwarddetail.paypallastname}}</td>
-                        </tr>
-                        <tr>
-                            <td>Payer ID</td>
-                            <td>{{coachSubscriptionDetailView.inwarddetail.payerID}}</td>
-                        </tr>
-                        <tr>
-                            <td>Transaction ID</td>
-                            <td>{{coachSubscriptionDetailView.inwarddetail.transactionid}}</td>
-                        </tr>
-                        <tr>
-                            <td>Transaction Date</td>
-                            <td>{{coachSubscriptionDetailView.inwarddetail.transactiondate}}</td>
-                        </tr>
-                       <!-- <tr>
-                            <td>Transaction Fee</td>
-                            <td>{{coachSubscriptionDetailView.inwarddetail.transactionfee}}</td>
-                        </tr>-->
-                        <tr>
-                            <td>Transaction Amount</td>
-                            <td>{{coachSubscriptionDetailView.inwarddetail.transactionamount}}</td>
-                        </tr>
-                        <tr>
-                            <td>Transaction Status</td>
-                            <td>{{coachSubscriptionDetailView.inwarddetail.transactionstatus}}</td>
-                        </tr>
-                        <tr>
-                            <td>Currency Code</td>
-                            <td>{{coachSubscriptionDetailView.inwarddetail.currencycode}}</td>
-                        </tr>
-                    </table>
+            <div class="col-md-6">
+
+                <h4 class="text-center text-bold margin-bottom-15 margin-top-10"> Payment Details</h4>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <td class="col-md-4 text-bold">User Name</td>
+                        <td class="col-md-8">{{paymentHistory.username==null?'NA':paymentHistory.username}}</td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4 text-bold"> User Email ID</td>
+                        <td class="col-md-8">{{paymentHistory.useremail==null?'NA':paymentHistory.useremail}}</td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4 text-bold">Phone Number</td>
+                        <td class="col-md-8">{{paymentHistory.userphone==null?'NA':paymentHistory.userphone}}</td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4 text-bold">Transaction ID</td>
+                        <td class="col-md-8">{{paymentHistory.transactionid==null?'NA':paymentHistory.transactionid}}</td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4 text-bold">Transaction Date</td>
+                        <td class="col-md-8">{{paymentHistory.transactiondate==null?'NA':paymentHistory.transactiondate}}</td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4 text-bold">Price</td>
+                        <td class="col-md-8">{{paymentHistory.price==null?'NA':paymentHistory.price}}</td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4 text-bold">InternetHandling Charge</td>
+                        <td class="col-md-8">{{paymentHistory.internethandlingcharge==null?'NA':paymentHistory.internethandlingcharge}}</td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-3 text-bold">Total Price</td>
+                        <td class="col-md-9">{{paymentHistory.totalprice==null?'NA':paymentHistory.totalprice}}</td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4 text-bold">Customer IP</td>
+                        <td class="col-md-8">{{paymentHistory.customerIP==null?'NA':paymentHistory.customerIP}}</td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4 text-bold">Payment Method</td>
+                        <td class="col-md-8">{{paymentHistory.paymentmethod==null?'NA':paymentHistory.paymentmethod}}</td>
+                    <tr>
+                        <td class="col-md-4 text-bold">Auth Code</td>
+                        <td class="col-md-8">{{paymentHistory.authcode==null?'NA':paymentHistory.authcode}}</td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4 text-bold">End Date</td>
+                        <td class="col-md-8">{{paymentHistory.responsecode==null?'NA':paymentHistory.responsecode}}</td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4 text-bold">Response Code</td>
+                        <td class="col-md-8">{{paymentHistory.avscode==null?'NA':paymentHistory.avscode}}</td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4 text-bold">Card Response Code</td>
+                        <td class="col-md-8">{{paymentHistory.cardresponsecode==null?'NA':paymentHistory.cardresponsecode}}</td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4 text-bold">Order ID</td>
+                        <td class="col-md-8">{{paymentHistory.orderid==null?'NA':paymentHistory.orderid}}</td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4 text-bold">Bank Name</td>
+                        <td class="col-md-8">{{paymentHistory.bankname==null?'NA':paymentHistory.bankname}}</td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4 text-bold">Card ID</td>
+                        <td class="col-md-8">{{paymentHistory.cardid==null?'NA':paymentHistory.cardid}}</td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4 text-bold">Wallet Name</td>
+                        <td class="col-md-8">{{paymentHistory.walletname==null?'NA':paymentHistory.walletname}}</td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4 text-bold">VPA</td>
+                        <td class="col-md-8">{{paymentHistory.vpa==null?'NA':paymentHistory.vpa}}</td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4 text-bold">Razor Email</td>
+                        <td class="col-md-8">{{paymentHistory.razoremail==null?'NA':paymentHistory.razoremail}}</td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4 text-bold">Razor Contact</td>
+                        <td class="col-md-8">{{paymentHistory.razorcontact==null?'NA':paymentHistory.razorcontact}}</td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4 text-bold">Transaction Status</td>
+                        <td class="col-md-8">{{paymentHistory.transactionstatus==null?'NA':paymentHistory.transactionstatus}}</td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4 text-bold"> Razor Status</td>
+                        <td class="col-md-8">{{paymentHistory.razorstatus==null?'NA':paymentHistory.razorstatus}}</td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4  text-bold">Status</td>
+                        <td class="col-md-8">{{paymentHistory.status==null?'NA':paymentHistory.status}}</td>
+                    </tr>
+                </table>
+            </div>
                 </div>
-                <h4 class="col-md-12 text-gray margin-bottom-10">Outward Details</h4>
-                <div class="col-md-12">
-                    <table class="table table-bordered table-striped">
-                        <tr>
-                            <td class="col-md-4">Outward ID</td>
-                            <td class="col-md-8">{{coachSubscriptionDetailView.outwarddetail.outwardid}}</td>
-                        </tr>
-                        <tr>
-                            <td>Amount</td>
-                            <td>{{coachSubscriptionDetailView.outwarddetail.amount}}</td>
-                        </tr>
-                        <tr>
-                            <td>Receiver Email ID</td>
-                            <td>{{coachSubscriptionDetailView.outwarddetail.receiveremailid}}</td>
-                        </tr>
-                        <tr>
-                            <td>Receiver Account ID</td>
-                            <td>{{coachSubscriptionDetailView.outwarddetail.receiveraccountid}}</td>
-                        </tr>
-                        <tr>
-                            <td>Sender Email ID</td>
-                            <td>{{coachSubscriptionDetailView.outwarddetail.senderemailid}}</td>
-                        </tr>
-                        <tr>
-                            <td>Sender Account ID</td>
-                            <td>{{coachSubscriptionDetailView.outwarddetail.senderaccountid}}</td>
-                        </tr>
-                        <tr>
-                            <td>Transaction ID</td>
-                            <td>{{coachSubscriptionDetailView.outwarddetail.transactionid}}</td>
-                        </tr>
-                        <tr>
-                            <td>Transaction Date</td>
-                            <td>{{coachSubscriptionDetailView.outwarddetail.transactiondate}}</td>
-                        </tr>
-                        <tr>
-                            <td>Transaction Status</td>
-                            <td>{{coachSubscriptionDetailView.outwarddetail.transactionstatus}}</td>
-                        </tr>
-                        <tr>
-                            <td>Currency Code</td>
-                            <td>{{coachSubscriptionDetailView.outwarddetail.currencycode}}</td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-            <div class="col-md-2 no-padding">
-                <h4>COACH DETAILS</h4><br/>
-                <img class="margin-bottom-10" ng-src="{{coachSubscriptionDetailView.coachdetail.coachimage|trusted}}">
-                <h5 class="wrap">{{coachSubscriptionDetailView.coachdetail.coachname}}</h5>
-                <h6 class="wrap">{{coachSubscriptionDetailView.coachdetail.coachemailid}}</h6>
-            </div>
         </div>
     </div>
-</div>
+</div><!-- @end #content -->
 
-<!-- End Page Banner -->
 
 <script type="text/javascript" src="../../js/script.js"></script>
+
+

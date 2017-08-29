@@ -6,7 +6,8 @@ var coachApp = angular.module('coachApp', ['ngRoute','oc.lazyLoad','requestModul
 coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter","Flash","$location","$rootScope",function($scope,requestHandler,$filter,Flash,$location,$rootScope,roundProgressService) {
 
     $scope.isActive=false;
-  
+
+    
     //Get Coaches List
     $scope.doGetMyMembers=function(){
       
@@ -47,6 +48,7 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
 
     //Get Individual Memeber Details
     $scope.doGetIndividualClientDetail=function(id){
+        $scope.currentClientId=id;
         //Get Profile Detail
         $scope.doGetClientsProfileDetailsByCoach(id);  
         //Get Chat Message
@@ -59,6 +61,10 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
         $scope.doGetClientHealthProfileDetailsByCoach(id);
         //Graph  for oneweek
         $scope.doGetClientGraphDetailsByCoach(id);
+        //Get Tracking Plan Details
+        $scope.doGetTrainingPlanDetails(id);
+        //Get Medication List
+        $scope.doGetMedicationList(id);
 
 
     };
@@ -241,11 +247,14 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
         $scope.getMessageParam={"targetid":id,"offset":0};
         requestHandler.postRequest("/readMessage/",$scope.getMessageParam).then(function(response){
             $scope.chatMessages=response.data.chats;
-            $scope.chatMessages.coachid= response.data.chats[0].coachid;
+            if(response.data.chats.length!=0){
+                $scope.chatMessages.coachid= response.data.chats[0].coachid;
 
-            requestHandler.getRequest("/getUserProfile/"+$scope.chatMessages.coachid, "").then(function(response){
-                 $scope.coachImageUrl=response.data.userprofile.imageurl;
-            });
+                requestHandler.getRequest("/getUserProfile/"+$scope.chatMessages.coachid, "").then(function(response){
+                     $scope.coachImageUrl=response.data.userprofile.imageurl;
+                });
+            }
+           
             $scope.chat={"message":""};
 
             $scope.unreadChatMessageCount=0;
@@ -271,6 +280,9 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
         });
        
     };
+
+
+
 
     // Notes for User Written by Coach reference
 
@@ -309,6 +321,52 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
         });
     };
 
+
+    /*Get Medication List*/
+     $scope.doGetMedicationList = function(userid){
+        requestHandler.postRequest("coach/coachgetmedications/",{"userid":userid}).then(function(response){
+            $scope.medicationList = response.data.medications;
+        });
+    };
+
+    /*Get traning plan details*/
+
+    $scope.doGetTrainingPlanDetails = function(userid){
+        $scope.param={
+            "limit":$scope.pagination.itemsPerPage,
+            "offset":($scope.pagination.pageNumber-1)*$scope.pagination.itemsPerPage
+        };
+        $scope.param.userid = userid;
+        requestHandler.postRequest("coach/getTrainingPlans/",$scope.param).then(function(response){
+            $scope.planList = response.data.history;
+        });
+    };
+
+    /*Get Individual plans view*/
+
+    $scope.doGetPlansView = function(id){
+        
+        requestHandler.getRequest("coach/getTrainingPlandetail/"+id,"").then(function(response){
+            $scope.planView = response.data.history;
+
+             $(".tracking-plan-viewall-div").hide();
+             $(".tracking-plan-view-div").show();
+             $(".tracking-plan-add-div").hide();
+        });
+    };
+
+    //do Insert New Plans
+
+    $scope.doInsertTrainingPlan = function(){
+        $scope.planDetails.userid = $scope.currentClientId;
+        requestHandler.postRequest("coach/insertTrainingPlan/",$scope.planDetails).then(function(response){
+            console.log(response.data);
+        },function(){
+            successMessage(Flash, "Successfully Plan Added!");
+            $scope.doGetTrainingPlanDetails(userid);
+        });
+    };
+
     //circle round
     $scope.offset =         0;
     $scope.timerCurrent =   0;
@@ -344,17 +402,10 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
 
     //Initial Load
     $scope.init = function(){
-            requestHandler.getRequest("/coach/isSubscriptionActive/","").then(function(response){
-                if(response.data.Response_status!=0){
-                        $scope.isActive=true;
                         $scope.paginationLoad=false;
+                        $scope.pagination={"itemsPerPage":9,"pageNumber":1};
                         $scope.doGetGroupList();
                         $scope.doGetMyMembers(0);
-                }else{
-                    $location.path("subscription");
-                }
-             
-            });
     };
 
     // Search Food Type

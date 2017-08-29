@@ -91,15 +91,33 @@ adminApp.controller('CoachSubscriptionController',['$scope','requestHandler','Fl
 
 adminApp.controller('CoachSubscriptionViewController',['$scope','requestHandler','Flash','coachMenuService','$location','$routeParams',function($scope,requestHandler,Flash,coachMenuService,$location,$routeParams) {
 
+    $scope.processMenu=true;
+    //Fro Menu active and back button   
+   if($routeParams.from=="coach-list"){
+        $scope.selectedMenuId=2;
+        $scope.backTo="#coach";
+    }else if($routeParams.from=="subscription-list"){
+        $scope.selectedMenuId=3;
+        $scope.backTo="#coach-subscriptions";
+    }else if($routeParams.from=="coach-payments"){
+        $scope.processMenu=false;
+        $scope.backTo="#coach-payment";
+    }else if($routeParams.from=="failed-payments"){
+        $scope.processMenu=false;
+        $scope.backTo="#failed-payment";
+    }
 
     // For coach management side menu
+    if($scope.processMenu){
     $scope.coachMenuList = coachMenuService;
     $.each($scope.coachMenuList,function(index,value){
-        if(value.id==3){
+        if(value.id==$scope.selectedMenuId){
             value.active = "active";
         }
         else value.active = ""
     });
+    }
+   
 
 //For admin subscription detail
 /*    $scope.params={

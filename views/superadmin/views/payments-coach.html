@@ -53,7 +53,7 @@
                     <td>{{subscription.enddate}}</td>
                     <td>{{subscription.bufferdate}}</td>
                     <td>{{subscription.clientscount}}</td>
-                    <td><a href="#coach-subscribers-list/{{coach.coachid}}" class="btn-xs btn-primary">View&nbsp;Details</a>&nbsp;<a class="btn-xs btn-warning" href="" ng-click="doSendSubscriptionInvoice(subscription.paymentId)">Send&nbsp;Invoice</a>&nbsp;<a class="btn-xs btn-warning" href="" ng-click="doSendRenewSubscription(subscription.paymentId)">Send&nbsp;Renew&nbsp;Mail</a></td>
+                    <td><a href="#payment-subscription-detail-view/{{subscription.paymentid}}/coach-payments" class="btn-xs btn-primary">View&nbsp;Details</a>&nbsp;<a class="btn-xs btn-warning" href="" ng-click="doSendSubscriptionInvoice(subscription.paymentid)">Send&nbsp;Invoice</a>&nbsp;<a class="btn-xs btn-warning" href="" ng-click="doSendRenewSubscription(subscription.paymentid)">Send&nbsp;Renew&nbsp;Mail</a></td>
                 </tr>
 
                 </tbody>
