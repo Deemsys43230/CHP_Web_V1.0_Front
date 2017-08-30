@@ -29,11 +29,11 @@
                 <div class="table-responsive">
                     <table class="table table-striped table-bordered">
                         <thead>
-                            <tr>
+                            <tr class="warning">
                                 <th class="col-lg-2 col-md-2 col-sm-2">Medicine Name</th>
                                 <th class="col-lg-2 col-md-2 col-sm-2">Dosage</th>
                                 <th class="col-lg-2 col-md-2 col-sm-2">Notes</th>
-                                <th class="col-lg-2 col-md-2 col-sm-2">Is Sharable</th>
+                                <th class="col-lg-2 col-md-2 col-sm-2">Is Sharable?</th>
                                 <th class="col-lg-2 col-md-2 col-sm-2">Options</th>
                             </tr>    
                         </thead>
@@ -101,7 +101,7 @@
                     <textarea class="forum-textarea" name="notes" ng-model="medication.notes" required></textarea>
                 </div>      
                 <div class="col-lg-8 col-md-8 col-sm-8">  
-                    <div class="col-md-2 no-padding"><p class="padding-top-4" style="margin-top:0;">Is&nbsp;Shared</p></div> 
+                    <div class="col-md-2 no-padding"><p class="padding-top-4" style="margin-top:0;">Is&nbsp;Sharable?</p></div> 
                     <div class="col-lg-3 col-md-3 col-sm-3 col-md-offset-1 text-center no-padding">
                         <input id="yes" type="radio" ng-model="medication.issharable" value="1">
                           <label for="yes">Yes</label>
@@ -148,7 +148,7 @@
                     <td class="col-md-6 wrap">{{userMedicationDetails.notes}}</td>
                 </tr>
                 <tr>
-                    <td class="col-md-6">Is sharable ?</td>
+                    <td class="col-md-6">Is Sharable?</td>
                     <td class="col-md-6">{{userMedicationDetails.issharable==1?'Yes':'No'}}</td>
                 </tr>
             </table>

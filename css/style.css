@@ -17145,8 +17145,7 @@ select.date:focus {
 /* For coach clients view */
 
 .client-view{
-    margin: 3px 0 5px 3px;
-    padding: 5px;
+    padding: 10px;
     -webkit-box-shadow: 0 0 3px rgba(0,0,0,0.3);
     -moz-box-shadow: 0 0 3px rgba(0,0,0,0.3);
     box-shadow: 0 0 3px rgba(0,0,0,0.3);
@@ -17490,3 +17489,25 @@ input.date-input{
     margin: 0;
     appearance: none;
 }
+/*Member Group Accordian*/
+h3.accordion{
+    margin: 0;
+}
+.accordion a{
+    padding: 10px;
+    background: #ddd;
+    color: #333;
+    text-decoration: none;
+    display: block;
+    margin-bottom: 1px;
+    font-size: 14px;
+    font-weight: bold;
+}
+.accordion-content{
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin: 1px 0;
+    min-height: 100px;
+    overflow: hidden;
+}
+/*End Member Group Accordian*/

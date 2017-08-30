@@ -7,6 +7,10 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
 
     $scope.isActive=false;
 
+    $scope.accordion={
+        "current":null
+    };
+
     
     //Get Coaches List
     $scope.doGetMyMembers=function(){
@@ -15,30 +19,29 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
         $scope.loaded=true;
         requestHandler.getRequest("/coach/myclients/","").then(function(response){
             //Intialize the array
-            $scope.selectedGroupId=[];
-
-            $.each($scope.groupsList,function(index,value){
-                if(value.isSelected)
-                    $scope.selectedGroupId.push(value.id);
+            $.each(response.data.clients,function(clientIndex,client){               
+                $.each($scope.groupsList,function(groupIndex,group){
+                    $scope.clients.push(client);
+                    if(group.clients==undefined){
+                       group.clients=[]; 
+                    }                            
+                    if(client.groupid==null){
+                        client.groupid=0;
+                    }
+                    if(group.id==client.groupid){                      
+                        group.clients.push(client);
+                    }
+                });
             });
-
-            if($scope.selectedGroupId.length==0)
-                $scope.clients=response.data.clients;
-            else
-                {
-                    $.each(response.data.clients,function(index,value){
-                        if(value.groupid==null)
-                            value.groupid=0;
-                        if($scope.selectedGroupId.indexOf(value.groupid)!=-1){
-                            $scope.clients.push(value);
-                        }                           
-                    });                   
-                }
-            if($scope.clients.length>0){
-
-                 // for Assign button show
-                 
-               $scope.doGetIndividualClientDetail($scope.clients[0].userid);
+       if($scope.clients.length>0){
+               $.each($scope.groupsList,function(groupIndex,group){
+                    if(group.clients.length>0){
+                        $scope.accordion.current=group.id;
+                        $scope.doGetIndividualClientDetail(group.clients[0].userid);
+                        return false;
+                    }
+               });
+               
             }
             $scope.loaded=false;
             $scope.paginationLoad=true;
@@ -68,6 +71,11 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
 
 
     };
+
+    //Refresh Accordian
+    $scope.refreshAccordian=function(){
+        $scope.$apply();
+    }
 
     //Get All Client List
     $scope.doGetAllClients = function(){

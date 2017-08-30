@@ -8,6 +8,8 @@ userApp.controller('CourseController',['$scope','requestHandler','Flash','$route
     $scope.entrolling="Enroll course";
     $scope.enrollButtonStatus=false;
     $scope.activeClass.myCourses='active';
+    $scope.coursereview = {ratinglevel:1};
+    $scope.averageRate=0.1;
 
     $scope.mycourselist = function(){
        $scope.loaded=true;
@@ -51,11 +53,43 @@ userApp.controller('CourseController',['$scope','requestHandler','Flash','$route
             $scope.courseDetails = response.data.coursedetail;
             $scope.courseDetails.role= "user";
             $scope.loaded=false;
+
+            //Load Rating and reviews
+            $scope.getCourseRatingAndReview();
+
         },function(){
             errorMessage(Flash,"Please try again later!")
         });
 
     };
+
+    //Ratings and Reviews
+    $scope.getCourseRatingAndReview=function(){
+        $scope.ratingReviewParam={
+            "limit":2,
+            "offset":0
+        };
+        requestHandler.postRequest("getCourseRatingsandReviews/"+parseInt($routeParams.id)+"/",$scope.ratingReviewParam).then(function(response) {
+            $scope.courseReviews=response.data;
+            $scope.averageRate=$scope.courseReviews.averageratings;
+             $scope.totalRatings = response.data.totalrecords;
+        },function(){
+            errorMessage(Flash,"Please try again later!")
+        });
+    }
+    //Insert Rate and Reviews
+    $scope.doInsertRatingAndReviews=function(){
+        $scope.coursereview.review_coach=$scope.courseDetails.ownerid;
+        $scope.coursereview.review_course=parseInt($routeParams.id);
+        requestHandler.postRequest("/user/insertRatingsandReviews/",$scope.coursereview).then(function(response) {
+           successMessage(Flash,"Successfully Reviewed!");
+           $scope.getCourseRatingAndReview();
+        },function(){
+            errorMessage(Flash,"Please try again later!")
+        });
+
+    }
+
 
     $scope.courseSectionList =function(){
         requestHandler.postRequest("getSectionList/",{"courseid":$routeParams.id}).then(function(response) {
@@ -1129,6 +1163,82 @@ coachApp.directive('summernoteRequired', function () {
                 }
                // return URL_REGEXP.test(modelValue);
             };
+        }
+    };
+});
+
+userApp.directive("starRating", function() {
+    return {
+        restrict : "EA",
+        template : "<ul class='rating' ng-class='{readonly: readonly}'>" +
+            "  <li ng-repeat='star in stars' ng-class='star' ng-click='toggle($index)'>" +
+            "    <i class='fa fa-star'></i>" + //&#9733
+            "  </li>" +
+            "</ul>",
+        scope : {
+            ratingValue : "=ngModel",
+            max : "=?", //optional: default is 5
+            readonly: "=?"
+        },
+        link : function(scope, elem, attrs) {
+            if (scope.max == undefined) { scope.max = 5; }
+            function updateStars() {
+                scope.stars = [];
+                for (var i = 0; i < scope.max; i++) {
+                    scope.stars.push({
+                        filled : (i < scope.ratingValue.ratinglevel)
+                    });
+                }
+            };
+            scope.toggle = function(index) {
+                if (scope.readonly == undefined || scope.readonly == false){
+                    scope.ratingValue.ratinglevel = index + 1;
+                    scope.onRatingSelected({
+                        ratinglevel: index + 1
+                    });
+                }
+            };
+            scope.$watch("ratingValue.ratinglevel", function(oldVal, newVal) {
+                if (newVal) { updateStars(); }
+            });
+        }
+    };
+});
+
+
+
+userApp.directive("averageStarRating", function() {
+    return {
+        restrict : "EA",
+        template : "<div class='average-rating-container'>" +
+            "  <ul class='rating background' class='readonly'>" +
+            "    <li ng-repeat='star in stars' class='star'>" +
+            "      <i class='fa fa-star'></i>" + //&#9733
+            "    </li>" +
+            "  </ul>" +
+            "  <ul class='rating foreground' class='readonly' ng-attr-style='width:{{filledInStarsContainerWidth}}%'>" +
+            "    <li ng-repeat='star in stars' class='star filled'>" +
+            "      <i class='fa fa-star'></i>" + //&#9733
+            "    </li>" +
+            "  </ul>" +
+            "</div>",
+        scope : {
+            averageRatingValue : "=ngModel",
+            max : "=?" //optional: default is 5
+        },
+        link : function(scope, elem, attrs) {
+            if (scope.max == undefined) { scope.max = 5; }
+            function updateStars() {
+                scope.stars = [];
+                for (var i = 0; i < scope.max; i++) {
+                    scope.stars.push({});
+                }
+                var starContainerMaxWidth = 76; //%
+                scope.filledInStarsContainerWidth = scope.averageRatingValue / scope.max * starContainerMaxWidth;
+            }
+            scope.$watch("averageRatingValue", function(oldVal, newVal) {
+                if (newVal) { updateStars(); }
+            });
         }
     };
 });
