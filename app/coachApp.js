@@ -312,6 +312,38 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'CoachAdviceController'
             }).
+            when('/coach-plans', {
+                templateUrl: 'views/coach-plans.html',
+                resolve: {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'coachApp',
+                            files:[
+                                '../../plugin/popup/style.css',
+                                '../../app/coachPlans/coachPlanController.js',
+                                '../../angular/angular-utils-pagination/dirPagination.js'
+                            ]
+                        })
+                    }]
+                },
+                controller:'CoachPlanController'
+            }).
+            when('/coach-plans-view/:id', {
+                templateUrl: 'views/coach-plans-view.html',
+                resolve: {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'coachApp',
+                            files:[
+                                '../../plugin/popup/style.css',
+                                '../../app/coachPlans/coachPlanController.js',
+                                '../../angular/angular-utils-pagination/dirPagination.js'
+                            ]
+                        })
+                    }]
+                },
+                controller:'ViewCoachPlanController'
+            }).
             when('/course', {
                 templateUrl: 'views/course.html',
                 resolve: {

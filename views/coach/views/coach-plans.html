@@ -1,0 +1,45 @@
+
+<!-- Start Page Banner -->
+
+<div class="page-banner" ng-cloak class="ng-cloak">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <a href="#dashboard" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back to Dashboard</a>
+                <div flash-message="2000" class="col-lg-3 col-md-3 col-sm-3 pull-right no-padding"></div>
+                <h5 class="classic-title"><a href="#advices">My Advice</a>&nbsp;&nbsp;|&nbsp;&nbsp;<span><a href="#coach-plans">My Plans</a></span></h5>
+                
+
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                            <tr class="warning">
+                                <th>Plan Name</th>
+                                <th>Plan Description</th>
+                                <th>Plan Duration</th>
+                                <th>Options</th>
+                            </tr>    
+                        </thead>
+                        <tbody>
+                            <tr dir-paginate="plan in coachPlanList.plans | itemsPerPage:pagination.itemsPerPage" ng-show="coachPlanList.plans.length!=0" total-items="coachPlanList.totalrecords" current-page="pagination.pageNumber">
+                                <td>{{plan.planname}}</td>
+                                <td>{{plan.description}}</td>
+                                <td>{{plan.plandays}}</td>
+                                <td>
+                                    <a href="#coach-plans-view/{{plan.id}}" class="btn-xs btn-primary">My Plan</a>
+                                </td>
+                            </tr>    
+                            <tr ng-show="coachPlanList.plans.length==0"><td colspan="4" class="text-center">No Records Found !!!</td></tr>
+                        </tbody>    
+                    </table>    
+                   <!-- Start Pagination -->
+                    <dir-pagination-controls ng-show="paginationLoad" boundary-links="true"> </dir-pagination-controls>
+                    <!-- End Pagination -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- End Page Banner -->
+
+<script type="text/javascript" src="../../js/script.js"></script>
+

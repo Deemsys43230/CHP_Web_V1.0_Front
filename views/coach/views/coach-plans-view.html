@@ -1,0 +1,741 @@
+
+<!-- Start Page Banner -->
+
+<div class="page-banner" ng-cloak class="ng-cloak">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 min-height-450" ng-init="food-plansViewInit()">
+                <span><a href="#coach-food-plans" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back</a></span>
+                <div flash-message="2000" class="col-md-4 pull-right no-padding"></div>
+                <h4 class="classic-title"><span>My Plans</span></h4>
+                <div class="row margin-top-10 margin-bottom-10">
+                    <div ng-if="loaded">
+                        <div class="loader-style">
+                            <div class="loader"></div>
+                        </div>
+                    </div>
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                            <tr class="warning">
+                                <th colspan="6"><h2 class="text-center"><strong>Healthy diet for weight maintain in 30 days</strong></h2></th>
+                            </tr>
+                        </thead>
+                    <tr>
+                        <th class="col-md-1 text-center" style="margin-top:15px"><strong>Plans</strong></th>
+                        <th class="col-md-2 text-center"><strong>Breakfast</strong></th>
+                        <th class="col-md-2 text-center"><strong>Brunch</strong></th>
+                        <th class="col-md-2 text-center"><strong>Lunch</strong></th>
+                        <th class="col-md-2 text-center"><strong>Snacks</strong></th>
+                        <th class="col-md-2 text-center"><strong>Dinner</strong></th>
+                    </tr>
+                    <tr>
+                        <td class="col-md-1 food-plans text-center align-bottom">DAY 1</td>
+                        <td class="food-plans">
+                           
+                          <!--   <a href="" class="stickyNav">Add Food</a> -->
+                        </td>
+                        <td class="food-plans">
+                           
+                          <!--   <a href="" class="stickyNav">Add Food</a> -->
+                        </td>
+                        <td class="food-plans">
+                           
+                          <!--   <a href="" class="stickyNav">Add Food</a> -->
+                        </td>
+                        <td class="food-plans">
+                            
+                          <!--   <a href="" class="stickyNav">Add Food</a> -->
+                        </td>
+                        <td class="food-plans">
+                            
+                          <!--   <a href="" class="stickyNav">Add Food</a> -->
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="col-md-1 food-plans text-center">DAY 2</td>
+                        <td class="food-plans">
+                            <div class="food-plans-breakfast text-center">
+                                <span>2 Hard Boiled Eggs</span>
+                            </div>
+                             <div class="food-plans-breakfast text-center">
+                                <span>Milk/Coffee</span>
+                            </div>
+                            <div class="food-plans-breakfast text-center">
+                                <span>1 cup Papaya shake</span>
+                            </div>
+                          <!--   <a href="" class="stickyNav">Add Food</a> -->
+                        </td>
+                        <td class="food-plans">
+                            <div class="food-plans-brunch text-center">
+                                <span>1 Apple</span>
+                            </div>
+                             <div class="food-plans-brunch text-center">
+                                <span>Peanut Butter</span>
+                            </div>
+                            <div class="food-plans-brunch text-center">
+                                <span>2 Egg White</span>
+                            </div>
+                          <!--   <a href="" class="stickyNav">Add Food</a> -->
+                        </td>
+                        <td class="food-plans">
+                            <div class="food-plans-lunch text-center">
+                                <span>Greek Yogurt</span>
+                            </div>
+                             <div class="food-plans-lunch text-center">
+                                <span>Strawberries</span>
+                            </div>
+                            <div class="food-plans-lunch text-center">
+                                <span>12 Almonds</span>
+                            </div>
+                          <!--   <a href="" class="stickyNav">Add Food</a> -->
+                        </td>
+                        <td class="food-plans">
+                            <div class="food-plans-snacks text-center">
+                                <span>Green Tea</span>
+                            </div>
+                             <div class="food-plans-snacks text-center">
+                                <span>Natural Peanut</span>
+                            </div>
+                          <!--   <a href="" class="stickyNav">Add Food</a> -->
+                        </td>
+                        <td class="food-plans">
+                            <div class="food-plans-dinner text-center">
+                                <span>Tilapia</span>
+                            </div>
+                             <div class="food-plans-dinner text-center">
+                                <span>Veggie Mix</span>
+                            </div>
+                            <div class="food-plans-dinner text-center">
+                                <span>Sweet Potato</span>
+                            </div>
+                          <!--   <a href="" class="stickyNav">Add Food</a> -->
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="col-md-1 food-plans text-center">DAY 3</td>
+                        <td class="food-plans">
+                            <div class="food-plans-breakfast text-center">
+                                <span>2 Hard Boiled Eggs</span>
+                            </div>
+                             <div class="food-plans-breakfast text-center">
+                                <span>Milk/Coffee</span>
+                            </div>
+                            <div class="food-plans-breakfast text-center">
+                                <span>1 cup Papaya shake</span>
+                            </div>
+                          <!--   <a href="" class="stickyNav">Add Food</a> -->
+                        </td>
+                        <td class="food-plans">
+                            <div class="food-plans-brunch text-center">
+                                <span>1 Apple</span>
+                            </div>
+                             <div class="food-plans-brunch text-center">
+                                <span>Peanut Butter</span>
+                            </div>
+                            <div class="food-plans-brunch text-center">
+                                <span>2 Egg White</span>
+                            </div>
+                          <!--   <a href="" class="stickyNav">Add Food</a> -->
+                        </td>
+                        <td class="food-plans">
+                            <div class="food-plans-lunch text-center">
+                                <span>Greek Yogurt</span>
+                            </div>
+                             <div class="food-plans-lunch text-center">
+                                <span>Strawberries</span>
+                            </div>
+                            <div class="food-plans-lunch text-center">
+                                <span>12 Almonds</span>
+                            </div>
+                          <!--   <a href="" class="stickyNav">Add Food</a> -->
+                        </td>
+                        <td class="food-plans">
+                            <div class="food-plans-snacks text-center">
+                                <span>Green Tea</span>
+                            </div>
+                             <div class="food-plans-snacks text-center">
+                                <span>Natural Peanut</span>
+                            </div>
+                          <!--   <a href="" class="stickyNav">Add Food</a> -->
+                        </td>
+                        <td class="food-plans">
+                            <div class="food-plans-dinner text-center">
+                                <span>Tilapia</span>
+                            </div>
+                             <div class="food-plans-dinner text-center">
+                                <span>Veggie Mix</span>
+                            </div>
+                            <div class="food-plans-dinner text-center">
+                                <span>Sweet Potato</span>
+                            </div>
+                          <!--   <a href="" class="stickyNav">Add Food</a> -->
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="col-md-1 food-plans text-center">DAY 4</td>
+                        <td class="food-plans">
+                            <div class="food-plans-breakfast text-center">
+                                <span>2 Hard Boiled Eggs</span>
+                            </div>
+                             <div class="food-plans-breakfast text-center">
+                                <span>Milk/Coffee</span>
+                            </div>
+                            <div class="food-plans-breakfast text-center">
+                                <span>1 cup Papaya shake</span>
+                            </div>
+                          <!--   <a href="" class="stickyNav">Add Food</a> -->
+                        </td>
+                        <td class="food-plans">
+                            <div class="food-plans-brunch text-center">
+                                <span>1 Apple</span>
+                            </div>
+                             <div class="food-plans-brunch text-center">
+                                <span>Peanut Butter</span>
+                            </div>
+                            <div class="food-plans-brunch text-center">
+                                <span>2 Egg White</span>
+                            </div>
+                          <!--   <a href="" class="stickyNav">Add Food</a> -->
+                        </td>
+                        <td class="food-plans">
+                            <div class="food-plans-lunch text-center">
+                                <span>Greek Yogurt</span>
+                            </div>
+                             <div class="food-plans-lunch text-center">
+                                <span>Strawberries</span>
+                            </div>
+                            <div class="food-plans-lunch text-center">
+                                <span>12 Almonds</span>
+                            </div>
+                          <!--   <a href="" class="stickyNav">Add Food</a> -->
+                        </td>
+                        <td class="food-plans">
+                            <div class="food-plans-snacks text-center">
+                                <span>Green Tea</span>
+                            </div>
+                             <div class="food-plans-snacks text-center">
+                                <span>Natural Peanut</span>
+                            </div>
+                          <!--   <a href="" class="stickyNav">Add Food</a> -->
+                        </td>
+                        <td class="food-plans">
+                            <div class="food-plans-dinner text-center">
+                                <span>Tilapia</span>
+                            </div>
+                             <div class="food-plans-dinner text-center">
+                                <span>Veggie Mix</span>
+                            </div>
+                            <div class="food-plans-dinner text-center">
+                                <span>Sweet Potato</span>
+                            </div>
+                          <!--   <a href="" class="stickyNav">Add Food</a> -->
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="col-md-1 food-plans text-center">DAY 5</td>
+                        <td class="food-plans">
+                            <div class="food-plans-breakfast text-center">
+                                <span>2 Hard Boiled Eggs</span>
+                            </div>
+                             <div class="food-plans-breakfast text-center">
+                                <span>Milk/Coffee</span>
+                            </div>
+                            <div class="food-plans-breakfast text-center">
+                                <span>1 cup Papaya shake</span>
+                            </div>
+                          <!--   <a href="" class="stickyNav">Add Food</a> -->
+                        </td>
+                        <td class="food-plans">
+                            <div class="food-plans-brunch text-center">
+                                <span>1 Apple</span>
+                            </div>
+                             <div class="food-plans-brunch text-center">
+                                <span>Peanut Butter</span>
+                            </div>
+                            <div class="food-plans-brunch text-center">
+                                <span>2 Egg White</span>
+                            </div>
+                          <!--   <a href="" class="stickyNav">Add Food</a> -->
+                        </td>
+                        <td class="food-plans">
+                            <div class="food-plans-lunch text-center">
+                                <span>Greek Yogurt</span>
+                            </div>
+                             <div class="food-plans-lunch text-center">
+                                <span>Strawberries</span>
+                            </div>
+                            <div class="food-plans-lunch text-center">
+                                <span>12 Almonds</span>
+                            </div>
+                          <!--   <a href="" class="stickyNav">Add Food</a> -->
+                        </td>
+                        <td class="food-plans">
+                            <div class="food-plans-snacks text-center">
+                                <span>Green Tea</span>
+                            </div>
+                             <div class="food-plans-snacks text-center">
+                                <span>Natural Peanut</span>
+                            </div>
+                          <!--   <a href="" class="stickyNav">Add Food</a> -->
+                        </td>
+                        <td class="food-plans">
+                            <div class="food-plans-dinner text-center">
+                                <span>Tilapia</span>
+                            </div>
+                             <div class="food-plans-dinner text-center">
+                                <span>Veggie Mix</span>
+                            </div>
+                            <div class="food-plans-dinner text-center">
+                                <span>Sweet Potato</span>
+                            </div>
+                          <!--   <a href="" class="stickyNav">Add Food</a> -->
+                        </td>
+                    </tr>
+
+
+                    <tr>
+                        <td class="col-md-1 food-plans text-center">DAY 6</td>
+                        <td class="food-plans">
+                            <div class="food-plans-breakfast text-center">
+                                <span>2 Hard Boiled Eggs</span>
+                            </div>
+                             <div class="food-plans-breakfast text-center">
+                                <span>Milk/Coffee</span>
+                            </div>
+                            <div class="food-plans-breakfast text-center">
+                                <span>1 cup Papaya shake</span>
+                            </div>
+                          <!--   <a href="" class="stickyNav">Add Food</a> -->
+                        </td>
+                        <td class="food-plans">
+                            <div class="food-plans-brunch text-center">
+                                <span>1 Apple</span>
+                            </div>
+                             <div class="food-plans-brunch text-center">
+                                <span>Peanut Butter</span>
+                            </div>
+                            <div class="food-plans-brunch text-center">
+                                <span>2 Egg White</span>
+                            </div>
+                          <!--   <a href="" class="stickyNav">Add Food</a> -->
+                        </td>
+                        <td class="food-plans">
+                            <div class="food-plans-lunch text-center">
+                                <span>Greek Yogurt</span>
+                            </div>
+                             <div class="food-plans-lunch text-center">
+                                <span>Strawberries</span>
+                            </div>
+                            <div class="food-plans-lunch text-center">
+                                <span>12 Almonds</span>
+                            </div>
+                          <!--   <a href="" class="stickyNav">Add Food</a> -->
+                        </td>
+                        <td class="food-plans">
+                            <div class="food-plans-snacks text-center">
+                                <span>Green Tea</span>
+                            </div>
+                             <div class="food-plans-snacks text-center">
+                                <span>Natural Peanut</span>
+                            </div>
+                          <!--   <a href="" class="stickyNav">Add Food</a> -->
+                        </td>
+                        <td class="food-plans">
+                            <div class="food-plans-dinner text-center">
+                                <span>Tilapia</span>
+                            </div>
+                             <div class="food-plans-dinner text-center">
+                                <span>Veggie Mix</span>
+                            </div>
+                            <div class="food-plans-dinner text-center">
+                                <span>Sweet Potato</span>
+                            </div>
+                          <!--   <a href="" class="stickyNav">Add Food</a> -->
+                        </td>
+                    </tr>
+
+
+                    <tr>
+                        <td class="col-md-1 food-plans text-center">DAY 7</td>
+                        <td class="food-plans">
+                            <div class="food-plans-breakfast text-center">
+                                <span>2 Hard Boiled Eggs</span>
+                            </div>
+                             <div class="food-plans-breakfast text-center">
+                                <span>Milk/Coffee</span>
+                            </div>
+                            <div class="food-plans-breakfast text-center">
+                                <span>1 cup Papaya shake</span>
+                            </div>
+                          <!--   <a href="" class="stickyNav">Add Food</a> -->
+                        </td>
+                        <td class="food-plans">
+                            <div class="food-plans-brunch text-center">
+                                <span>1 Apple</span>
+                            </div>
+                             <div class="food-plans-brunch text-center">
+                                <span>Peanut Butter</span>
+                            </div>
+                            <div class="food-plans-brunch text-center">
+                                <span>2 Egg White</span>
+                            </div>
+                          <!--   <a href="" class="stickyNav">Add Food</a> -->
+                        </td>
+                        <td class="food-plans">
+                            <div class="food-plans-lunch text-center">
+                                <span>Greek Yogurt</span>
+                            </div>
+                             <div class="food-plans-lunch text-center">
+                                <span>Strawberries</span>
+                            </div>
+                            <div class="food-plans-lunch text-center">
+                                <span>12 Almonds</span>
+                            </div>
+                          <!--   <a href="" class="stickyNav">Add Food</a> -->
+                        </td>
+                        <td class="food-plans">
+                            <div class="food-plans-snacks text-center">
+                                <span>Green Tea</span>
+                            </div>
+                             <div class="food-plans-snacks text-center">
+                                <span>Natural Peanut</span>
+                            </div>
+                          <!--   <a href="" class="stickyNav">Add Food</a> -->
+                        </td>
+                        <td class="food-plans">
+                            <div class="food-plans-dinner text-center">
+                                <span>Tilapia</span>
+                            </div>
+                             <div class="food-plans-dinner text-center">
+                                <span>Veggie Mix</span>
+                            </div>
+                            <div class="food-plans-dinner text-center">
+                                <span>Sweet Potato</span>
+                            </div>
+                          <!--   <a href="" class="stickyNav">Add Food</a> -->
+                        </td>
+                    </tr>
+
+
+                    <tr>
+                        <td class="col-md-1 food-plans text-center">DAY 8</td>
+                        <td class="food-plans">
+                            <div class="food-plans-breakfast text-center">
+                                <span>2 Hard Boiled Eggs</span>
+                            </div>
+                             <div class="food-plans-breakfast text-center">
+                                <span>Milk/Coffee</span>
+                            </div>
+                            <div class="food-plans-breakfast text-center">
+                                <span>1 cup Papaya shake</span>
+                            </div>
+                          <!--   <a href="" class="stickyNav">Add Food</a> -->
+                        </td>
+                        <td class="food-plans">
+                            <div class="food-plans-brunch text-center">
+                                <span>1 Apple</span>
+                            </div>
+                             <div class="food-plans-brunch text-center">
+                                <span>Peanut Butter</span>
+                            </div>
+                            <div class="food-plans-brunch text-center">
+                                <span>2 Egg White</span>
+                            </div>
+                          <!--   <a href="" class="stickyNav">Add Food</a> -->
+                        </td>
+                        <td class="food-plans">
+                            <div class="food-plans-lunch text-center">
+                                <span>Greek Yogurt</span>
+                            </div>
+                             <div class="food-plans-lunch text-center">
+                                <span>Strawberries</span>
+                            </div>
+                            <div class="food-plans-lunch text-center">
+                                <span>12 Almonds</span>
+                            </div>
+                          <!--   <a href="" class="stickyNav">Add Food</a> -->
+                        </td>
+                        <td class="food-plans">
+                            <div class="food-plans-snacks text-center">
+                                <span>Green Tea</span>
+                            </div>
+                             <div class="food-plans-snacks text-center">
+                                <span>Natural Peanut</span>
+                            </div>
+                          <!--   <a href="" class="stickyNav">Add Food</a> -->
+                        </td>
+                        <td class="food-plans">
+                            <div class="food-plans-dinner text-center">
+                                <span>Tilapia</span>
+                            </div>
+                             <div class="food-plans-dinner text-center">
+                                <span>Veggie Mix</span>
+                            </div>
+                            <div class="food-plans-dinner text-center">
+                                <span>Sweet Potato</span>
+                            </div>
+                          <!--   <a href="" class="stickyNav">Add Food</a> -->
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="col-md-1 food-plans text-center">DAY 9</td>
+                        <td class="food-plans">
+                            <div class="food-plans-breakfast text-center">
+                                <span>2 Hard Boiled Eggs</span>
+                            </div>
+                             <div class="food-plans-breakfast text-center">
+                                <span>Milk/Coffee</span>
+                            </div>
+                            <div class="food-plans-breakfast text-center">
+                                <span>1 cup Papaya shake</span>
+                            </div>
+                          <!--   <a href="" class="stickyNav">Add Food</a> -->
+                        </td>
+                        <td class="food-plans">
+                            <div class="food-plans-brunch text-center">
+                                <span>1 Apple</span>
+                            </div>
+                             <div class="food-plans-brunch text-center">
+                                <span>Peanut Butter</span>
+                            </div>
+                            <div class="food-plans-brunch text-center">
+                                <span>2 Egg White</span>
+                            </div>
+                          <!--   <a href="" class="stickyNav">Add Food</a> -->
+                        </td>
+                        <td class="food-plans">
+                            <div class="food-plans-lunch text-center">
+                                <span>Greek Yogurt</span>
+                            </div>
+                             <div class="food-plans-lunch text-center">
+                                <span>Strawberries</span>
+                            </div>
+                            <div class="food-plans-lunch text-center">
+                                <span>12 Almonds</span>
+                            </div>
+                          <!--   <a href="" class="stickyNav">Add Food</a> -->
+                        </td>
+                        <td class="food-plans">
+                            <div class="food-plans-snacks text-center">
+                                <span>Green Tea</span>
+                            </div>
+                             <div class="food-plans-snacks text-center">
+                                <span>Natural Peanut</span>
+                            </div>
+                          <!--   <a href="" class="stickyNav">Add Food</a> -->
+                        </td>
+                        <td class="food-plans">
+                            <div class="food-plans-dinner text-center">
+                                <span>Tilapia</span>
+                            </div>
+                             <div class="food-plans-dinner text-center">
+                                <span>Veggie Mix</span>
+                            </div>
+                            <div class="food-plans-dinner text-center">
+                                <span>Sweet Potato</span>
+                            </div>
+                          <!--   <a href="" class="stickyNav">Add Food</a> -->
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="col-md-1 food-plans text-center">DAY 10</td>
+                        <td class="food-plans">
+                            <div class="food-plans-breakfast text-center">
+                                <span>2 Hard Boiled Eggs</span>
+                            </div>
+                             <div class="food-plans-breakfast text-center">
+                                <span>Milk/Coffee</span>
+                            </div>
+                            <div class="food-plans-breakfast text-center">
+                                <span>1 cup Papaya shake</span>
+                            </div>
+                          <!--   <a href="" class="stickyNav">Add Food</a> -->
+                        </td>
+                        <td class="food-plans">
+                            <div class="food-plans-brunch text-center">
+                                <span>1 Apple</span>
+                            </div>
+                             <div class="food-plans-brunch text-center">
+                                <span>Peanut Butter</span>
+                            </div>
+                            <div class="food-plans-brunch text-center">
+                                <span>2 Egg White</span>
+                            </div>
+                          <!--   <a href="" class="stickyNav">Add Food</a> -->
+                        </td>
+                        <td class="food-plans">
+                            <div class="food-plans-lunch text-center">
+                                <span>Greek Yogurt</span>
+                            </div>
+                             <div class="food-plans-lunch text-center">
+                                <span>Strawberries</span>
+                            </div>
+                            <div class="food-plans-lunch text-center">
+                                <span>12 Almonds</span>
+                            </div>
+                          <!--   <a href="" class="stickyNav">Add Food</a> -->
+                        </td>
+                        <td class="food-plans">
+                            <div class="food-plans-snacks text-center">
+                                <span>Green Tea</span>
+                            </div>
+                             <div class="food-plans-snacks text-center">
+                                <span>Natural Peanut</span>
+                            </div>
+                          <!--   <a href="" class="stickyNav">Add Food</a> -->
+                        </td>
+                        <td class="food-plans">
+                            <div class="food-plans-dinner text-center">
+                                <span>Tilapia</span>
+                            </div>
+                             <div class="food-plans-dinner text-center">
+                                <span>Veggie Mix</span>
+                            </div>
+                            <div class="food-plans-dinner text-center">
+                                <span>Sweet Potato</span>
+                            </div>
+                          <!--   <a href="" class="stickyNav">Add Food</a> -->
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="col-md-1 food-plans text-center">DAY 1</td>
+                        <td class="food-plans">
+                            <div class="food-plans-breakfast text-center">
+                                <span>2 Hard Boiled Eggs</span>
+                            </div>
+                             <div class="food-plans-breakfast text-center">
+                                <span>Milk/Coffee</span>
+                            </div>
+                            <div class="food-plans-breakfast text-center">
+                                <span>1 cup Papaya shake</span>
+                            </div>
+                          <!--   <a href="" class="stickyNav">Add Food</a> -->
+                        </td>
+                        <td class="food-plans">
+                            <div class="food-plans-brunch text-center">
+                                <span>1 Apple</span>
+                            </div>
+                             <div class="food-plans-brunch text-center">
+                                <span>Peanut Butter</span>
+                            </div>
+                            <div class="food-plans-brunch text-center">
+                                <span>2 Egg White</span>
+                            </div>
+                          <!--   <a href="" class="stickyNav">Add Food</a> -->
+                        </td>
+                        <td class="food-plans">
+                            <div class="food-plans-lunch text-center">
+                                <span>Greek Yogurt</span>
+                            </div>
+                             <div class="food-plans-lunch text-center">
+                                <span>Strawberries</span>
+                            </div>
+                            <div class="food-plans-lunch text-center">
+                                <span>12 Almonds</span>
+                            </div>
+                          <!--   <a href="" class="stickyNav">Add Food</a> -->
+                        </td>
+                        <td class="food-plans">
+                            <div class="food-plans-snacks text-center">
+                                <span>Green Tea</span>
+                            </div>
+                             <div class="food-plans-snacks text-center">
+                                <span>Natural Peanut</span>
+                            </div>
+                          <!--   <a href="" class="stickyNav">Add Food</a> -->
+                        </td>
+                        <td class="food-plans">
+                            <div class="food-plans-dinner text-center">
+                                <span>Tilapia</span>
+                            </div>
+                             <div class="food-plans-dinner text-center">
+                                <span>Veggie Mix</span>
+                            </div>
+                            <div class="food-plans-dinner text-center">
+                                <span>Sweet Potato</span>
+                            </div>
+                          <!--   <a href="" class="stickyNav">Add Food</a> -->
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="col-md-1 food-plans text-center">DAY 1</td>
+                        <td class="food-plans">
+                            <div class="food-plans-breakfast text-center">
+                                <span>2 Hard Boiled Eggs</span>
+                            </div>
+                             <div class="food-plans-breakfast text-center">
+                                <span>Milk/Coffee</span>
+                            </div>
+                            <div class="food-plans-breakfast text-center">
+                                <span>1 cup Papaya shake</span>
+                            </div>
+                          <!--   <a href="" class="stickyNav">Add Food</a> -->
+                        </td>
+                        <td class="food-plans">
+                            <div class="food-plans-brunch text-center">
+                                <span>1 Apple</span>
+                            </div>
+                             <div class="food-plans-brunch text-center">
+                                <span>Peanut Butter</span>
+                            </div>
+                            <div class="food-plans-brunch text-center">
+                                <span>2 Egg White</span>
+                            </div>
+                          <!--   <a href="" class="stickyNav">Add Food</a> -->
+                        </td>
+                        <td class="food-plans">
+                            <div class="food-plans-lunch text-center">
+                                <span>Greek Yogurt</span>
+                            </div>
+                             <div class="food-plans-lunch text-center">
+                                <span>Strawberries</span>
+                            </div>
+                            <div class="food-plans-lunch text-center">
+                                <span>12 Almonds</span>
+                            </div>
+                          <!--   <a href="" class="stickyNav">Add Food</a> -->
+                        </td>
+                        <td class="food-plans">
+                            <div class="food-plans-snacks text-center">
+                                <span>Green Tea</span>
+                            </div>
+                             <div class="food-plans-snacks text-center">
+                                <span>Natural Peanut</span>
+                            </div>
+                          <!--   <a href="" class="stickyNav">Add Food</a> -->
+                        </td>
+                        <td class="food-plans">
+                            <div class="food-plans-dinner text-center">
+                                <span>Tilapia</span>
+                            </div>
+                             <div class="food-plans-dinner text-center">
+                                <span>Veggie Mix</span>
+                            </div>
+                            <div class="food-plans-dinner text-center">
+                                <span>Sweet Potato</span>
+                            </div>
+                          <!--   <a href="" class="stickyNav">Add Food</a> -->
+                        </td>
+                    </tr>
+
+
+
+                </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Page Banner -->
+<script type="text/javascript" src="../../js/script.js"></script>
+
+
+
