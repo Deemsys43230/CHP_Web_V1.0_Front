@@ -17516,31 +17516,20 @@ h3.accordion{
 .food-plans{
     position: relative;
     width: 30px;
+    padding: none;
 }
 
-.food-plans-breakfast{
-    color: #3e7348;
-    font-weight: bold;
+.food-plans div.food{
+    padding: 2px;
+    border: solid 1px #f8e7b4;
+    margin-top: 2px;
+    background: #fcfaf2;
+    color:#66471e;
+    border-radius: 2px;
 }
-
-.food-plans-brunch{
-    color: #bb1919;
-    font-weight: bold;
-}
-
-.food-plans-lunch{
-    color: #dcd21e;
-    font-weight: bold;
-}
-
-.food-plans-snacks{
-    color: #d3793a;
-    font-weight: bold;
-}
-
-.food-plans-dinner{
-    color: #572893;
-    font-weight: bold;
+.food-plans div i.fa{
+    vertical-align: middle;
+    float: right;
 }
 
 .stickyNav{
@@ -17548,6 +17537,16 @@ h3.accordion{
     left: 95px;
 }
 
-.food-plan .day{
+.food-plans .day{
     min-height: 100px;
+}
+.food-plans div a.food-plan-add-food{
+    color:blue;
+    margin-top: 50px;
+    font-size: 12px;
+    text-decoration: underline; !important;
+    font-style: italic;
+}
+.food-plans div{
+    vertical-align: bottom;
 }

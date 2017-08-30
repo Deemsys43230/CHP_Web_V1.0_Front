@@ -36,17 +36,38 @@ $scope.doViewCoachPlans=function(){
   $scope.coachPlanId= $routeParams.id;
          requestHandler.getRequest("coach/plandetail/"+$scope.coachPlanId+"/", "").then(function(response){
             $scope.foodlist= response.data.plan.foodlist;
-           console.log($scope.foodlist);
-           $scope.foodlist=[];
-           $.each($scope.foodlist, function(index,value){
-             $scope.foodlist.push({
-             	"day": value.day,
-             	"foodname": value.foodname,
-             	"measurecount": value.measurecount,
-             	"foodmeasurename": value.foodmeasurename,
-             	"foodsessioname": value.foodsessioname
-             })
-           });
+            
+            //First We need to group up days
+            $scope.plandetail=response.data.plan.plandetail;
+           
+            //Initialize
+            $scope.mealPlanDetailList=[];
+
+            //create array of days
+            for(var i=1;i<=$scope.plandetail.plandays;i++)
+            {
+              $scope.mealPlanDetailList.push(
+                  {
+                    "day":"Day "+i,
+                    "dayId":i,
+                    "foods":[
+                              {"sessionId":1,"sessionName":"BreakFast","foodItems":[]},
+                              {"sessionId":2,"sessionName":"Brunch","foodItems":[]},
+                              {"sessionId":3,"sessionName":"Lunch","foodItems":[]},
+                              {"sessionId":4,"sessionName":"Snacks","foodItems":[]},
+                              {"sessionId":5,"sessionName":"Dinner","foodItems":[]},  
+                            ]
+                  }
+                );
+            }
+            console.log($scope.mealPlanDetailList[2]);
+
+            //We need to group up the food
+            $.each($scope.foodlist,function(index,value){
+              $scope.mealPlanDetailList[value.day-1].foods[value.foodsessionid-1].foodItems.push(value);
+            });
+
+            console.log($scope.mealPlanDetailList);
           
         },function(){
             errorMessage(Flash,"Please try again later!")
