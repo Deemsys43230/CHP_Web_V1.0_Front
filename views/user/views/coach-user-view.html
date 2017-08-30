@@ -17,7 +17,7 @@
                         <div><average-star-rating ng-model="averageRate" max="5"></average-star-rating></div>
                         <div>( {{totalRatings}} Reviews )</div><hr/>
                         <div><strong>About Me :</strong></div>
-                        <div>{{usercoachdetails.about}}</div>
+                        <div class="wrap-all">{{usercoachdetails.about}}</div>
                     </div>
                     <div class="col-lg-8 col-md-9 col-sm-10">
                         <h3 class="text-orange margin-bottom-5 wrap">{{usercoachdetails.name}}&nbsp;&nbsp;</h3>
@@ -26,43 +26,43 @@
                         <table class="table table-bordered table-striped" style="padding: 0px;table-layout:fixed;">
                             <tr>
                                 <td class="col-md-4">Business Name</td>
-                                <td class="col-md-8 wrap">{{usercoachdetails.businessname}}</td>
+                                <td class="col-md-8 wrap-all">{{usercoachdetails.businessname}}</td>
                             </tr>
                             <tr>
                                 <td class="col-md-4">Business Address</td>
-                                <td class="col-md-8 wrap">{{usercoachdetails.businessaddress}}</td>
+                                <td class="col-md-8 wrap-all">{{usercoachdetails.businessaddress}}</td>
                             </tr> 
                             <tr>
                                 <td class="col-md-4">Specialist</td>
-                                <td class="col-md-8 wrap">{{usercoachdetails.specialist}}</td>
+                                <td class="col-md-8 wrap-all">{{usercoachdetails.specialist}}</td>
                             </tr>
                             <tr>
                                 <td class="col-md-4">Qualification</td>
-                                <td class="col-md-8 wrap">{{usercoachdetails.qualification}}</td>
+                                <td class="col-md-8 wrap-all">{{usercoachdetails.qualification}}</td>
                             </tr>
                             <tr>
                                 <td class="col-md-4">Experience</td>
-                                <td class="col-md-8 wrap"><span ng-show="years==undefined"> NA </span><span ng-show="years>0"> {{years}} <span ng-show="years==1">Year&nbsp;</span><span ng-show="years>1">Years&nbsp;</span></span><span ng-show="months>0"> {{months}} <span ng-show="months==1">Month</span><span ng-show="months>1"> Months</span></span></td>
+                                <td class="col-md-8 wrap-all"><span ng-show="years==undefined"> NA </span><span ng-show="years>0"> {{years}} <span ng-show="years==1">Year&nbsp;</span><span ng-show="years>1">Years&nbsp;</span></span><span ng-show="months>0"> {{months}} <span ng-show="months==1">Month</span><span ng-show="months>1"> Months</span></span></td>
                             </tr>
                             <tr>
                                 <td class="col-md-4">Date of Birth</td>
-                                <td class="col-md-8 wrap">{{usercoachdetails.dob}}</td>
+                                <td class="col-md-8 wrap-all">{{usercoachdetails.dob}}</td>
                             </tr>
                             <tr>
                                 <td class="col-md-4">City</td>
-                                <td class="col-md-8 wrap">{{usercoachdetails.city}}</td>
+                                <td class="col-md-8 wrap-all">{{usercoachdetails.city}}</td>
                             </tr>
                             <tr>
                                 <td class="col-md-4">State</td>
-                                <td class="col-md-8 wrap">{{usercoachdetails.state}}</td>
+                                <td class="col-md-8 wrap-all">{{usercoachdetails.state}}</td>
                             </tr>
                             <tr>
                                 <td class="col-md-4">Country</td>
-                                <td class="col-md-8 wrap">{{usercoachdetails.country}}</td>
+                                <td class="col-md-8 wrap-all">{{usercoachdetails.country}}</td>
                             </tr>
                             <tr>
                                 <td class="col-md-4">Zip</td>
-                                <td class="col-md-8 wrap">{{usercoachdetails.zipcode}}</td>
+                                <td class="col-md-8 wrap-all">{{usercoachdetails.zipcode}}</td>
                             </tr>
                         </table>    
                      

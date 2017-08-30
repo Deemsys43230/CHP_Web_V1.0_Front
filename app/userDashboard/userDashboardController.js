@@ -598,6 +598,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
             else if(isCustom==1){
                 $scope.title= "Add Custom Exercise";
                 $scope.customExercise.exercisename=exercisename;
+                $scope.loaded=false;
                 $scope.doUserAddCustomExercise();
             }
 
@@ -1216,7 +1217,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
             }
             $scope.setGoalDetails.enddate=$scope.enddate;
             $scope.setGoalDetails.currentweight=$scope.demography.weight;
-            $scope.setGoalDetails.goalchoice=$scope.goalchoice;
+            $scope.setGoalDetails.goalchoice=$scope.goalchoice.toString();
 
 
             if($scope.demography.weight!=""){
@@ -1650,7 +1651,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
             $scope.weight = $scope.goalDetails.targetweight;
             $scope.currentEnddate= $scope.goalDetails.enddate;
             if($scope.goalDetails.planType==2){
-                $scope.goalchoice=$scope.goalDetails.planchoice;
+                $scope.goalchoice=$scope.goalDetails.planchoice.toString();
             }
             $scope.currentweight=currentWeight;
             if (new Date(startformat).getTime() >= new Date(currentformat).getTime()) {
@@ -1885,7 +1886,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
 
             $scope.goalType=$scope.goalDetails.planType;
             $scope.setGoalDetails.currentweight=$scope.demography.weight;
-            $scope.setGoalDetails.goalchoice=parseInt($scope.goalchoice);
+            $scope.setGoalDetails.goalchoice=$scope.goalchoice.toString();
 
             if($scope.goalType==2){
                 if($scope.setGoalDetails.goalchoice==5 && $scope.customResponse!=0){
@@ -3739,10 +3740,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
 
         //Weight Goal Graph
         $scope.drawGoalGraph=function(data,titles,data1){
-            console.log(data);
-            console.log(data1);
-            console.log(titles);
-            $('#goalGraph').highcharts({
+          $('#goalGraph').highcharts({
                 title: {
                     text: titles.title
                 },
@@ -3766,6 +3764,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
                 yAxis: {
                     title: {
                         text: titles.yaxis
+
                     },
                     plotLines: [{
                         value: 0,
@@ -3965,7 +3964,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
             $scope.logid=logid;
             return requestHandler.postRequest("disconnectUserWearable/",{"logid":$scope.logid}).then(function(response) {
                 if(response.data.Response=="Success"){
-                        $window.location.href = '../user/#/connectDevice'; 
+                        //$window.location.href = '../user/#/connectDevice';
                         $scope.doGetVendorlist();
                 }
             });
