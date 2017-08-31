@@ -277,7 +277,7 @@ adminApp.controller("FoodDetailsViewController",['$scope','requestHandler','$rou
 
 }]);
 
-adminApp.controller("FoodDetailsEditController",['$q','$scope','requestHandler','FoodService','$routeParams','Flash','$route','fileReader','$location',function($q,$scope,requestHandler,FoodService,$routeParams,Flash,$route,fileReader,$location){
+adminApp.controller("FoodDetailsEditController",['$q','$scope','requestHandler','FoodService','$routeParams','Flash','$route','fileReader','$location','$timeout',function($q,$scope,requestHandler,FoodService,$routeParams,Flash,$route,fileReader,$location,$timeout){
 
     var original="";
     $scope.title=$route.current.title;
@@ -324,10 +324,43 @@ adminApp.controller("FoodDetailsEditController",['$q','$scope','requestHandler',
         });
     };
     //End Get
+     $scope.foTypeError=false;
+     $scope.foSizeError=false;
 
-    //Food Image Upload Controller
+    //Food Image  Controller
     $scope.getFile = function () {
+         $scope.foTypeError=false;
+     $scope.foSizeError=false;
         $scope.progress = 0;
+        var imgfoFile=document.getElementById('imgfofile').files[0];
+        var imgfoName=imgfoFile.name;
+         var validFormats = ['jpg','jpeg','png'];
+        var extn = imgfoName.split(".").pop();       //getting extension of selected file
+         if(validFormats.indexOf(extn) == -1){       //checking file extension wih valid file format extesion
+            $timeout( function(){ 
+            $scope.foTypeError=true;    
+           $scope.progress = 0;
+           $scope.foodDetails.foodimage ="../../images/No_image_available.jpg";
+              $scope.inputContainsFile = true;
+       },100);
+            
+                }
+                var _URL = window.URL || window.webkitURL;
+        img = new Image();
+         img.onload = function () {
+        if(this.width < 1000 || this.height < 1000)   //checking the height and width of imagefile while uploading  
+            {
+                 $timeout( function(){  //timeout for image preview
+                $scope.foSizeError=true;       
+               $scope.progress = 0;
+           $scope.foodDetails.foodimage ="../../images/No_image_available.jpg";
+              $scope.inputContainsFile = true;
+               
+            },100);
+                 } 
+             }
+            
+        img.src = _URL.createObjectURL(imgfoFile);    
         fileReader.readAsDataUrl($scope.file, $scope).then(function(result) {
             $scope.foodDetails.foodimage = result;
             $scope.inputContainsFile = false;

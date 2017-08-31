@@ -151,7 +151,7 @@ adminApp.controller('ExerciseViewController',['$scope','requestHandler','Flash',
 }]);
 
 
-adminApp.controller('ExerciseEditController',['$q','$scope','requestHandler','Flash','$routeParams','$route','ExerciseService','fileReader','$location',function($q,$scope,requestHandler,Flash,$routeParams,$route,ExerciseService,fileReader,$location){
+adminApp.controller('ExerciseEditController',['$q','$scope','requestHandler','Flash','$routeParams','$route','ExerciseService','fileReader','$location','$timeout',function($q,$scope,requestHandler,Flash,$routeParams,$route,ExerciseService,fileReader,$location,$timeout){
 
 	var original="";
 	$scope.title=$route.current.title;
@@ -272,11 +272,47 @@ adminApp.controller('ExerciseEditController',['$q','$scope','requestHandler','Fl
         }
 
     };*/
-
+     $scope.exTypeError=false;
+     $scope.exSizeError=false;
 	//Exercise Image Upload Controller
 	$scope.getFile = function () {
+
+		 $scope.exTypeError=false;
+     $scope.exSizeError=false;
 		$scope.progress = 0;
+		var imgexFile=document.getElementById('imgexfile').files[0];
+		var imgexName=imgexFile.name;
+		alert(imgexName);
+		 var validFormats = ['jpg','jpeg','png'];
+		var extn = imgexName.split(".").pop();     //getting extension of selected file
+		 if(validFormats.indexOf(extn) == -1){     //checking file extension wih valid file format extesion
+		  	$timeout( function(){ 
+			$scope.exTypeError=true;    
+             $scope.progress = 0;
+             $scope.exerciseDetail.exerciseimage ="../../images/No_image_available.jpg";
+              $scope.inputContainsFile = true;
+       },100);
+		  	
+                }
+                var _URL = window.URL || window.webkitURL;
+        img = new Image();
+         img.onload = function () {
+    if(this.width < 1000 || this.height < 1000)   //checking the height and width of imagefile while uploading  
+            {
+                 $timeout( function(){  //timeout for image preview
+                $scope.exSizeError=true;       
+               $scope.progress = 0;
+           $scope.exerciseDetail.exerciseimage ="../../images/No_image_available.jpg";
+              $scope.inputContainsFile = true;
+               
+            },100);
+                 } 
+             }
+            
+        img.src = _URL.createObjectURL(imgexFile);
+
 		fileReader.readAsDataUrl($scope.file, $scope).then(function(result) {
+			
 			$scope.exerciseDetail.exerciseimage = result;
             $scope.inputContainsFile = false;
 		});
@@ -290,6 +326,20 @@ adminApp.controller('ExerciseEditController',['$q','$scope','requestHandler','Fl
 		$scope.exerciseDetail.exerciseimage=$scope.exerciseDetail.imagepath;
         $scope.inputContainsFile = true;
 	};
+
+    /*  $scope.onFileChoose=function()
+      {
+      	alert("iminside");
+      	var imgexFile=document.getElementById('imgexfile').files[0];
+      	 if(imgexFile.type!=="image/*"){// check more condition with MIME type 
+           alert("Not a img file.");
+           //$scope.Iserror=true;
+            //return false;
+            }     
+
+      };*/
+
+
 
 	//Update Exercise Image
 	$scope.doUpdateExerciseImage=function(){
@@ -512,17 +562,17 @@ adminApp.controller('ExerciseEditController',['$q','$scope','requestHandler','Fl
 
 //Image Upload
 adminApp.directive("ngFileSelect",function(){
-	return {
+	//alert("Not a img file.");
+return {
 		link: function($scope,el){
 
 			el.bind("change", function(e){
-
+//alert("Not a img file.");
 				$scope.file = (e.srcElement || e.target).files[0];
 				$scope.getFile();
 			})
 		}
-	}
-});
+	}});
 
 // render image to view in list
 adminApp.filter('trusted', ['$sce', function ($sce) {

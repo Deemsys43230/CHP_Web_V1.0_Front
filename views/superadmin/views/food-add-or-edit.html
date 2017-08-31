@@ -439,14 +439,17 @@
         <div class="common_model">
             <p>Preview:</p>
             <img class="food-preview center-block" ng-src="{{foodDetails.foodimage}}"/>
-            <h6 class="text-red text-center margin-tb-10">Note : Upload Image Size 1000x1000</h6>
+            <h6 class="text-black text-center margin-tb-10">Note : Upload Image Size 1000x1000</h6>
+            <span class="error-message textarea-errormessage10" ng-show="foTypeError" ng-cloak ><span>Upload&nbsp;only&nbsp;a&nbsp;Valid&nbsp;Formats&nbsp;:&nbsp;['jpg','jpeg','png']</span></span>
+            <span class="error-message textarea-errormessage10" ng-show="foSizeError" ng-cloak ><span>Upload&nbsp;Image&nbsp;Size&nbsp;Minimum&nbsp;of&nbsp;1000x1000</span></span>
             <p>Progress:</p>
+            
             <progress class="food-progress" value="{{progress}}"></progress>
             <div class="action_btns margin-top-10">
                 <div class="one_half">
                     <div class="fileUpload food-button">
                         <span>Choose Image</span>
-                        <input type="file" name="image" valid-file accept="image/*" ng-model="foodDetails.foodimage" class="upload" ng-file-select="onFileSelect($files)"/>
+                        <input type="file" name="image" id='imgfofile' valid-file accept="image/*" ng-model="foodDetails.foodimage" class="upload" ng-file-select="onFileSelect($files)"/>
                     </div>
                 </div>
                 <div class="one_half last"><a href="" onclick="return false;" class="btn food-button export modal_close" id="submit_button" ng-click="doUpdateFoodImage();" ng-disabled="inputContainsFile">Save Image</a></div>

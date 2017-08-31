@@ -141,6 +141,7 @@ userApp.controller('UserProfileController',['$scope','requestHandler','Flash','$
                     src: $scope.userProfile.imageurl
                 }
             });
+            
             $scope.spinner=false;
         });
     };
@@ -194,61 +195,61 @@ userApp.controller('UserProfileController',['$scope','requestHandler','Flash','$
 
     };
 
-  $scope.imageAdded=false;
-   $scope.imageUploaded=true;
-    $scope.spinner=false;
+     $scope.imageAdded=false;
+     $scope.imageUploaded=true;
+     $scope.spinner=false;
      $scope.sizeError=false;
+     $scope.fileTypeError=false;
     $scope.birthdayformat=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
 
     $scope.fileNameChanged = function(){
-    
-       if(!$scope.imageAdded){
-      var imgFile=document.getElementById('imgfile').files;
+                 $scope.sizeError=false;
+                 $scope.fileTypeError=false; 
+      if(!$scope.imageAdded){
+       var imgFile=document.getElementById('imgfile').files;
        if(imgFile.length > 0){
-        
-             
-         var _URL = window.URL || window.webkitURL;
-
-   var file=document.getElementById('imgfile').files[0];
-        img = new Image();
-        
+        var _URL = window.URL || window.webkitURL;
+         
+        var imgusFile=document.getElementById('imgfile').files[0];
+        var imgusName=imgusFile.name;
+        var validFormats = ['jpg','jpeg','png'];
+        var extn = imgusName.split(".").pop();     //getting extension of selected file
+          if(validFormats.indexOf(extn) == -1){    //checking file extension wih valid file format extesion
+         
+            $timeout( function(){ 
+            $scope.fileTypeError=true;    
+            $scope.imageUploaded=true;
+            $scope.imageAdded=false;
+          },100);
+         }    
+     
+         img = new Image();
         img.onload = function () {
-    
-            if(this.width < 200 && this.height < 200)   //checking the height and width of imagefile while uploading  
+         if(this.width < 200 && this.height < 200)   //checking the height and width of imagefile while uploading  
             {
                
                 $timeout( function(){         //timeout for image preview
                 $scope.sizeError=true;
                 $scope.imageUploaded=true;
-               
-            },100);
+                 $scope.imageAdded=false;  
+                },100);
 
                  }
-                 else
-                 {
-
-                      $timeout( function(){   
-                     $scope.sizeError=false;
+                  }
+                  img.src = _URL.createObjectURL(imgusFile);
                 $scope.inputContainsFile=false;
-                 $scope.imageAdded=true;
-                  $scope.imageUploaded=false;
-                 
-             },100);
-                 }
-                   
-                 } 
-            
-        img.src = _URL.createObjectURL(file);
-               
-            
-               }
+                $scope.imageAdded=true;
+                $scope.imageUploaded=false;       
+           
+                    }
 
             
-            else{
-        
+            else {
                 $scope.inputContainsFile=true;
                 $scope.imageAdded=false;
-                $scope.imageUploaded=true;
+                $scope.imageUploaded=true;  
+        
+               
             }
        }
     }
