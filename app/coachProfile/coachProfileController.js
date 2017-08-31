@@ -3,8 +3,7 @@
  */
 var coachApp= angular.module('coachApp', ['ngRoute','oc.lazyLoad','ngCookies','requestModule','flash','ngAnimate','ui.bootstrap']);
 
-coachApp.controller('CoachProfileController',['$scope','requestHandler','Flash',"$rootScope",function($scope,requestHandler,Flash,$rootScope) {
-
+coachApp.controller('CoachProfileController',['$scope','requestHandler','Flash','$timeout',"$rootScope",function($scope,requestHandler,Flash,$timeout,$rootScope) {
         $scope.birthdayformat=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
 
         // Function to convert image url to base64
@@ -153,10 +152,44 @@ coachApp.controller('CoachProfileController',['$scope','requestHandler','Flash',
         $scope.imageAdded=false;
         $scope.imageUploaded=true;
         $scope.spinner=false;
-
-        $scope.fileNameChanged = function(element){
+         $scope.sizeError=false;
+     $scope.fileTypeError=false;
+        $scope.fileNameChanged = function(){
+             $scope.sizeError=false;
+     $scope.fileTypeError=false;
             if(!$scope.imageAdded){
-                if(element.files.length > 0){
+                //if(element.files.length > 0){
+                    var imgFile=document.getElementById('coimgfile').files;
+       if(imgFile.length > 0){
+        var _URL = window.URL || window.webkitURL;
+         
+        var imgusFile=document.getElementById('coimgfile').files[0];
+        var imgusName=imgusFile.name;
+        var validFormats = ['jpg','jpeg','png'];
+        var extn = imgusName.split(".").pop();     //getting extension of selected file
+          if(validFormats.indexOf(extn) == -1){    //checking file extension wih valid file format extesion
+         
+            $timeout( function(){ 
+            $scope.fileTypeError=true;    
+            $scope.imageUploaded=true;
+            $scope.imageAdded=false;
+          },100);
+         }    
+     
+         img = new Image();
+        img.onload = function () {
+         if(this.width < 200 && this.height < 200)   //checking the height and width of imagefile while uploading  
+            {
+               
+                $timeout( function(){         //timeout for image preview
+                $scope.sizeError=true;
+                $scope.imageUploaded=true;
+                 $scope.imageAdded=false;  
+                },100);
+
+                 }
+                  }
+                  img.src = _URL.createObjectURL(imgusFile);
                     $scope.inputContainsFile = false;
                     $scope.imageAdded=true;
                     $scope.imageUploaded=false;

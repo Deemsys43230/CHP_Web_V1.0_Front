@@ -268,13 +268,15 @@
                 <div class="image-size-label">
                     Resize image
                 </div>
+                   <span class="error-message textarea-errormessage10" ng-show="sizeError" ng-cloak ><span>Upload&nbsp;Image&nbsp;Size&nbsp;Minimum&nbsp;of&nbsp;200x200</span></span>
+                 <span class="error-message textarea-errormessage10" ng-show="fileTypeError" ng-cloak ><span>Upload&nbsp;only&nbsp;a&nbsp;Valid&nbsp;Formats&nbsp;:&nbsp;['jpg','jpeg','png']</span></span>
                 <input type="range" class="cropit-image-zoom-input">
                 <h6 class="text-red text-center margin-tb-10">Note : Upload Image Size Minimum of 200x200</h6>
                 <div class="action_btns margin-top-20">
                     <div class="one_half">
                         <div class="fileUpload food-button" >
                             <span>Choose File</span>
-                            <input type="file" class="upload cropit-image-input" valid-file required  ng-model="testimonials.imageurl" onchange="angular.element(this).scope().fileNameChanged(this)"/>
+                            <input type="file" id="coimgfile" class="upload cropit-image-input" valid-file required  ng-model="testimonials.imageurl" ng-change="fileNameChanged()"/>
                         </div>
                     </div>
                     <div class="one_half last"><a href="" onclick="return false;" class="btn food-button export modal_close" ng-disabled="imageUploaded" ng-click="doUpdateProfileImage()">Upload Image</a></div>
