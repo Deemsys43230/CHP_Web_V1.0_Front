@@ -12,7 +12,7 @@
                 </div>
             </div>
             <div class="col-md-10 no-padding">
-                <table class="table table-bordered table-striped">
+                <table class="table table-bordered table-striped wrap-all" style="table-layout: fixed">
                     <tr>
                         <td class="col-md-3">Name</td>
                         <td class="col-md-9">{{viewMemberDetails.name}}</td>
@@ -40,27 +40,27 @@
                         <td>About</td>
                         <td>{{viewMemberDetails.about}}</td>
                     </tr>
-                    <tr ng-if="viewMemberDetails.isprivacy==0">
+                    <tr>
                         <td>DOB</td>
                         <td>{{viewMemberDetails.dob}}</td>
                     </tr>
-                    <tr ng-if="viewMemberDetails.isprivacy==0">
+                    <tr>
                         <td>Phone</td>
                         <td>{{viewMemberDetails.phone}}</td>
                     </tr>
-                    <tr ng-if="viewMemberDetails.isprivacy==0">
+                    <tr>
                         <td>Country</td>
                         <td>{{viewMemberDetails.country}}</td>
                     </tr>
-                    <tr ng-if="viewMemberDetails.isprivacy==0">
+                    <tr>
                         <td>State</td>
                         <td>{{viewMemberDetails.state}}</td>
                     </tr>
-                    <tr ng-if="viewMemberDetails.isprivacy==0">
+                    <tr>
                         <td>City</td>
                         <td>{{viewMemberDetails.city}}</td>
                     </tr>
-                    <tr ng-if="viewMemberDetails.isprivacy==0">
+                    <tr>
                         <td>Zipcode</td>
                         <td>{{viewMemberDetails.zipcode}}</td>
                     </tr>

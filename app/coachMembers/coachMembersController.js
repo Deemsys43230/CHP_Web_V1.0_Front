@@ -289,9 +289,6 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
        
     };
 
-
-
-
     // Notes for User Written by Coach reference
 
    // Insert or Update Notes
@@ -300,6 +297,7 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
 
         requestHandler.postRequest("coach/updatenotes/",{"userid":userid,"notes":$scope.notes}).then(function(response){
             if(response.data.Response == "Success"){
+                $scope.doGetNotesByCoach(userid);
                 $('#notesButton').hide();
                 scrollBottom: 0
             }
@@ -307,6 +305,8 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
     };
         //Get Users Individual Notes
     $scope.doGetNotesByCoach = function(userid){
+        $scope.Notes="";
+        $('#notesButton').hide();
         requestHandler.postRequest("coach/getnotes/",{"userid":userid}).then(function(response){
             $scope.Notes = response.data.Notes;
         });
@@ -324,8 +324,30 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
         requestHandler.postRequest("coach/removeuser/",{"userid":userid}).then(function(response){
             $scope.Result = response.data.Response;
             if(response.data.Response == "Success"){
+               successMessage(Flash, "User Successfully Removed!");
                 $scope.doGetMyMembers();
             };
+        });
+    };
+
+    //Alert for Remove user from coach
+    $scope.removeUser=function(){
+        $(function(){
+            $("#lean_overlay").fadeTo(1000);
+            $("#modal").fadeIn(600);
+            $(".common_model").show();
+        });
+
+        $(".modal_close").click(function(){
+            $(".common_model").hide();
+            $("#modal").hide();
+            $("#lean_overlay").hide();
+        });
+
+        $("#lean_overlay").click(function(){
+            $(".common_model").hide();
+            $("#modal").hide();
+            $("#lean_overlay").hide();
         });
     };
 
@@ -349,6 +371,9 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
             $scope.planList = response.data.history;
         });
     };
+
+
+
 
     /*Get Individual plans view*/
 
@@ -375,6 +400,18 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
         });
     };
 
+
+    //TO check Maximum digits validation for training plan amount
+    $scope.maxAmount=false;
+    $scope.maxAmountCheck = function(amount){
+        if(amount<= 99999.99){
+            $scope.maxAmount=false;
+        }
+        else if(amount> 99999.99){
+            $scope.maxAmount=true;
+        }
+
+    }
     //circle round
     $scope.offset =         0;
     $scope.timerCurrent =   0;

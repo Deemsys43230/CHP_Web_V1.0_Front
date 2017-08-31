@@ -1,6 +1,9 @@
 <div class="col-lg-12 col-md-12 col-sm-12 no-padding" ng-cloak class="ng-cloak" ng-init="init()">
     <!-- <div flash-message="2000" class="col-lg-4 col-md-4 col-sm-4 pull-right"></div> -->
     <h5 class="classic-title"><a href="" class="active-tab profile-details"><i class="fa fa-user"></i>&nbsp;&nbsp;Profile</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="" class="tracking-plan"><i class="fa fa-gg"></i>&nbsp;&nbsp;Training Plans </a>|&nbsp;&nbsp;<a href="" class="medication"><i class="fa fa-medkit"></i>&nbsp;&nbsp;Medications&nbsp;<small class="badge">{{medicationList.length}}</small></a></h5>
+        <h3 class="classic-title"><span class="sub-title">Client Details</span>
+            <a href=""  class="remove-text-color pull-right" ng-show="clients.length>0" ng-click="removeUser()">Remove User</a>
+        </h3>
         <div ng-if="loaded">
             <div class="loader-style">
                 <div class="loader"></div>
@@ -60,7 +63,7 @@
                     <a href="" id="notesButton" type="button" style="padding:0px 12px;" class="btn btn-success pull-right" ng-click="doInsertOrUpdateNotes(coachclientdetails.userid)">Save</a>
                 </span>
                 <div ng-model="invitationDetails.referral">
-                    <textarea id="stickyNotes" style="overflow:auto" class="sticky-notes" ng-model="Notes.notes"></textarea>
+                    <textarea id="stickyNotes" style="overflow:auto" class="sticky-notes" ng-model="Notes.notes" placeholder="Notes here..."></textarea>
                 </div>
             </div>
         </div>
@@ -120,8 +123,8 @@
                                 <img class="margin-top-10" ng-show="demographyDeatil.obesity == null && demographyDeatil.diabetes == null" style="width:60px;" src="../../images/healthy.png"/>
 
                             <div class="margin-top-10" ng-show="demographyDeatil.diabetes == 1">Diabetes</div>
-                            <div class="margin-top-10" ng-show="demographyDeatil.diabetes == 1">Obese</div>
-                            <div class="margin-top-10" ng-show="demographyDeatil.obesity == 1" && ng-show="demographyDeatil.obesity == 1">Obese & Diabetes}}</div>
+                            <div class="margin-top-10" ng-show="demographyDeatil.obesity == 1">Obese</div>
+                            <div class="margin-top-10" ng-show="demographyDeatil.diabetes == 1 && demographyDeatil.obesity == 1">Obese & Diabetes</div>
                             <div class="margin-top-10" ng-show="demographyDeatil.diabetes == null && demographyDeatil.obesity == null">Normal</div>
                         </div>
                         <div class="col-lg-3 col-sm-3 col-md-3 text-center">
@@ -631,7 +634,7 @@
                                 <div>Start Date<span class="pull-right">:</span></div>
                             </div>
                             <div class="col-lg-8 col-md-7 col-sm-12 margin-top-10">
-                                <input class="coach-input" placeholder="Start Date" name="startdate" ng-model="planDetails.startdate" maxlength="10" required/>
+                                <input class="coach-input input-group" id="start-date"  placeholder="Start Date" name="startdate" ng-model="planDetails.startdate" required  readonly style="background-color: white;cursor: pointer;"/>
                                 <span ng-show="coachDetailsForm.startdate.$dirty && coachDetailsForm.startdate.$invalid">
                                     <span class="error-message textarea-errormessage10" ng-show="coachDetailsForm.startdate.$error.required"><span>Required.</span></span>
                                     <span class="error-message textarea-errormessage10" ng-show="coachDetailsForm.startdate.$error.validatePhoneNumber"><span>Enter&nbsp;valid&nbsp;Date.</span></span>
@@ -644,10 +647,10 @@
                                 <div>End Date<span class="pull-right">:</span></div>
                             </div>
                             <div class="col-lg-8 col-md-7 col-sm-12 margin-top-10">
-                                <input class="coach-input" placeholder="End Date" name="phone" ng-model="planDetails.enddate" maxlength="10" required/>
-                                <span ng-show="coachDetailsForm.phone.$dirty && coachDetailsForm.phone.$invalid">
-                                    <span class="error-message textarea-errormessage10" ng-show="coachDetailsForm.phone.$error.required"><span>Required.</span></span>
-                                    <span class="error-message textarea-errormessage10" ng-show="coachDetailsForm.phone.$error.validatePhoneNumber"><span>Enter&nbsp;valid&nbsp;Date.</span></span>
+                                <input class="coach-input" id="end-date" placeholder="End Date" name="enddate" ng-model="planDetails.enddate" required  readonly style="background-color: white;cursor: pointer;"/>
+                                <span ng-show="coachDetailsForm.enddate.$dirty && coachDetailsForm.enddate.$invalid">
+                                    <span class="error-message textarea-errormessage10" ng-show="coachDetailsForm.enddate.$error.required"><span>Required.</span></span>
+                                    <span class="error-message textarea-errormessage10" ng-show="coachDetailsForm.enddate.$error.validatePhoneNumber"><span>Enter&nbsp;valid&nbsp;Date.</span></span>
                                 </span>
                             </div>
                         </div>
@@ -669,11 +672,12 @@
                                 <div>Amount<span class="pull-right">:</span></div>
                             </div>
                             <div class="col-lg-8 col-md-7 col-sm-12 margin-top-10">
-                                <input class="coach-input" placeholder="Amount" name="phone" ng-model="planDetails.amount" maxlength="10" required/>
-                                <span ng-show="coachDetailsForm.phone.$dirty && coachDetailsForm.phone.$invalid">
-                                    <span class="error-message textarea-errormessage10" ng-show="coachDetailsForm.phone.$error.required"><span>Required.</span></span>
-                                    <span class="error-message textarea-errormessage10" ng-show="coachDetailsForm.phone.$error.validatePhoneNumber"><span>Enter&nbsp;valid&nbsp;Date.</span></span>
-                                </span>
+                                <input class="coach-input" placeholder="Amount" name="amount" ng-model="planDetails.amount" required  validate-float1 ng-change="maxAmountCheck(planDetails.amount)" onkeypress="return validateFloatKeyPress1(this,event);"/>
+                                <span class="error-message textarea-errormessage10" ng-show="!coachDetailsForm.amount.$error.required&&maxAmount"><span>Please&nbsp;Enter&nbsp;Valid&nbsp;Amount.</span></span>
+                                <span ng-show="coachDetailsForm.amount.$dirty && coachDetailsForm.amount.$invalid">
+                                    <span class="error-message textarea-errormessage10" ng-show="coachDetailsForm.amount.$error.required"><span>Required.</span></span>
+                                    <span class="error-message textarea-errormessage10" ng-show="coachDetailsForm.amount.$error.validateFloat1"><span>Invalid&nbsp;Data.</span></span>
+                                 </span>
                             </div>
                         </div>
                         <div class="form-group">
@@ -701,7 +705,7 @@
                             </div>
                         </div>
                         <div class="col-lg-12 col-md-12 col-sm-12 text-center margin-top-50">
-                            <a href="" class="price-button btn" ng-click="  ()" ng-disabled="isClean() || coachDetailsForm.$invalid">Submit</a>
+                            <a href="" class="price-button btn"  ng-disabled="isClean() || coachDetailsForm.$invalid">Submit</a>
                         </div>
                         <div class="col-lg-12 col-md-12 col-sm-12 text-center margin-top-50"></div>
                     </div>
@@ -749,8 +753,9 @@
             <div class="panel panel-default" style="margin-bottom:0px;">
                 <div class="panel-heading chat-top-bar">
                     <div class="col-md-8 col-xs-8">
-                        <h3 class="panel-title"><span class="glyphicon glyphicon-comment"></span class="wrap"> Chat - {{coachclientdetails.firstname}}</h3>
-                        <span class="nav-item__badge" style="position: absolute; margin-left: 20px; margin-top: -9px;" ng-show="showMessageCount">
+
+                        <h3 class="panel-title"><span class="glyphicon glyphicon-comment wrap"></span> Chat - {{coachclientdetails.firstname}}</h3>
+                         <span class="nav-item__badge" style="position: absolute; margin-left: 20px; margin-top: -9px;" ng-show="showMessageCount">
                             <span aria-hidden="true" class="nav-item__badge-count ng-binding">{{unreadChatMessageCount}}</span>
                         </span>
                     </div>
@@ -798,13 +803,64 @@
         <img src="../../images/no-coach-small.png" width="120" height="120"/>
         <h3 class="text-gray">NO CLIENTS FOUND!!!</h3><br/><br/><br/>
     </div>
-</div>    
+</div>
 
-   
+
+
+<!-- Remove user  confirmation popup-->
+<div id="modal" class="popupContainer" style="display:none;left: 15%!important;margin-top: -100px;">
+    <header class="popupHeader">
+        <span class="header_title">Confirmation</span>
+        <span class="modal_close"><i class="fa fa-times"></i></span>
+    </header>
+
+    <section class="popupBody">
+        <!-- Register Form -->
+        <div class="common_model">
+            <div class="text-center"><img src="../../images/alert-ring.png"/></div><br/>
+            <h5 class="text-center">Are you sure want to delete this User?</h5>
+            <div class="action_btns margin-top-20">
+                <div class="one_half"><a href="" class="btn btn_red modal_close" ng-click="doRemoveUserByCoach(coachclientdetails.userid)">Yes</a></div>
+                <div class="one_half last modal_close"><a onclick="return false;" class="btn back_btn">No</a></div>
+            </div>
+        </div>
+    </section>
+</div>
 
 
 
 <script type="text/javascript" src="../../js/script.js"></script>
+
+
+<script type="text/javascript">
+    // for modal popup
+$(".modal").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
+
+    //for training start date and end date
+            $(function () {
+                $("#start-date").datepicker({
+                    changeMonth: true, changeYear: true,dateFormat: 'dd-mm-yy',
+                    yearRange: "-26:+20",
+                    //numberOfMonths: 2,
+                    onSelect: function (selected) {
+                        var dt = new Date(selected);
+                        dt.setDate(dt.getDate() + 1);
+                        $("#end-date").datepicker("option", "minDate", dt);
+                    }
+                });
+                $("#end-date").datepicker({
+                    //numberOfMonths: 2,
+                    changeMonth: true, changeYear: true,dateFormat: 'dd-mm-yy',
+                    yearRange: "-26:+20",
+                    onSelect: function (selected) {
+                        var dt = new Date(selected);
+                           dt.setDate(dt.getDate() - 1);
+                        $("#start-date").datepicker("option", "maxDate", dt);
+                    }
+                });
+            });
+</script>
+
 
 <script type="text/javascript">
 Highcharts.chart('excersize', {

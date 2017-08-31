@@ -30,16 +30,16 @@
                 <div id="coach-table" class="plans">
                     <div class="plan" ng-repeat="pricingPlan in pricingPlanDetails">
                         <div class="coach">
-                            <span style="color:{{pricingPlan.plancolor}}">{{pricingPlan.planname}}</span>
+                            <span ng-style="{'color': pricingPlan.plancolor}">{{pricingPlan.planname}}</span>
                         </div>
                         <div ng-show="units==1">
-                            <span class="price" style="background-color:{{pricingPlan.plancolor}}">
+                            <span class="price"  ng-style="{'background-color': pricingPlan.plancolor}">
                                 <span>Rs {{pricingPlan.discountINR}}</span><br/>
                                 <span class="text-strike"><small>Rs {{pricingPlan.priceINR}}</small></span>
                             </span>
                         </div>
                         <div ng-hide="units==1">
-                            <span class="price" style="background-color:{{pricingPlan.plancolor}}">
+                            <span class="price"  ng-style="{'background-color': pricingPlan.plancolor}">
                                 <span>Rs {{pricingPlan.discountUSD}}</span><br/>
                                 <span class="text-strike"><small>Rs {{pricingPlan.priceUSD}}</small></span>
                             </span>

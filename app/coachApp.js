@@ -187,7 +187,9 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../plugin/popup/style.css',
                                 '../../app/coachMembers/coachMembersController.js',
                                 '../../angular/angular-utils-pagination/dirPagination.js',
-                                 '../../css/custom-inputs.css'
+                                 '../../css/custom-inputs.css',
+                                '../../plugin/dateRange/daterangepicker.css',
+                                '../../plugin/dateRange/daterangepicker.js'
                             ]
                         })
                     }],
@@ -197,7 +199,7 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 $rootScope.isSubscriptionActive=true;
                             }else{   
                                 $rootScope.isSubscriptionActive=false;
-                                $location.path("#subscription");
+                                $location.path("subscription");
                             }
 
                          });
@@ -667,7 +669,7 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../angular/angular-utils-pagination/dirPagination.js',
                                 '../../app/coachEvent/eventController.js',
                                 '../../plugin/dateRange/daterangepicker.css',
-                                '../../plugin/dateRange/daterangepicker.js',
+                                '../../plugin/dateRange/daterangepicker.js'
                             ]
                         })
                     }]
