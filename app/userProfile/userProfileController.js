@@ -225,7 +225,7 @@ userApp.controller('UserProfileController',['$scope','requestHandler','Flash','$
      
          img = new Image();
         img.onload = function () {
-         if(this.width < 200 && this.height < 200)   //checking the height and width of imagefile while uploading  
+         if(this.width < 200 || this.height < 200)   //checking the height and width of imagefile while uploading  
             {
                
                 $timeout( function(){         //timeout for image preview

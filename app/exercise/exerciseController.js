@@ -282,7 +282,7 @@ adminApp.controller('ExerciseEditController',['$q','$scope','requestHandler','Fl
 		$scope.progress = 0;
 		var imgexFile=document.getElementById('imgexfile').files[0];
 		var imgexName=imgexFile.name;
-		alert(imgexName);
+	
 		 var validFormats = ['jpg','jpeg','png'];
 		var extn = imgexName.split(".").pop();     //getting extension of selected file
 		 if(validFormats.indexOf(extn) == -1){     //checking file extension wih valid file format extesion
