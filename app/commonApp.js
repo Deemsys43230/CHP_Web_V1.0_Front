@@ -755,7 +755,7 @@ commonApp.controller('LoginController',['$scope','requestHandler','Flash','$wind
             delete $scope.userForm.secretquestion;
             delete $scope.userForm.secretanswer;
         }
-        $scope.userForm.referralId=$window.referralId;
+        $scope.userForm.referralid=$window.referralId;
         $window.referralId=null;
         requestHandler.postRequest("registerUser/",$scope.userForm).then(function(response){
 
