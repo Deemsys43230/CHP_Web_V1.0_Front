@@ -55,7 +55,6 @@
                             <div class="food" ng-repeat="foodItem in mealPlanDetail.foods[0].foodItems">
                                 {{foodItem.foodname}}<i class="fa fa-times-circle" ng-click="doDeleteFoodItemFromPlan(foodItem.id);"></i>
                             </div>
-                            <!-- <input class="profile_input" type="text" ng-model="selectedFood" placeholder="Search Food" uib-typeahead="food as food.foodname for food in inputChanged($viewValue)" typeahead-popup-template-url="customPopupTemplate.html" typeahead-template-url="foodTemplate.html" typeahead-on-select="foodSelected()" typeahead-class="form-control"> -->
                             <div><a href="" class="food-plan-add-food"  ng-click="doCoachAddFood()">Add Food</a></div>
                         </td>
                         <td class="food-plans">                           
@@ -117,6 +116,7 @@
                             <input class="profile_input" type="text" ng-model="selectedFood" placeholder="Search Food" uib-typeahead="food as food.foodname for food in inputChanged($viewValue)" typeahead-popup-template-url="customPopupTemplate.html" typeahead-template-url="foodTemplate.html" typeahead-on-select="foodSelected()" typeahead-class="form-control">
                         </div>
                         <div class="search-loading" ng-show="loadingFoods"><i class="fa fa-spinner fa-pulse"></i>&nbsp;&nbsp;Searching Foods...</div>
+                       
                     </div><br/>
                     <div>
                     <div class="col-lg-12 col-md-12 col-sm-12">
@@ -138,7 +138,7 @@
                         <form name="FoodAddForm" novalidate>
                         <div class="col-lg-12 col-md-12 col-sm-12 no-padding">
                         <h5 class="margin-top-10">Select Measure:</h5>
-                            <select name="measure" ng-model="userFood.measure" ng-options="measure.measurename for measure in userSelectedFoodDetails.measureid track by measure.measureid" ng-change="doCalculateCalories()" required>
+                            <select name="measure" ng-model="userFood.measure" ng-options="measure.measurename for measure in userSelectedFoodDetails.measure track by measure.measureid" ng-change="doCalculateCalories()" required>
                                 <option value="">-- Select Measure --</option>
                             </select>
                              <span ng-show="FoodAddForm.measure.$dirty&&FoodAddForm.measure.$invalid">

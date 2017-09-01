@@ -1,6 +1,6 @@
-var coachApp = angular.module('coachApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','angularUtils.directives.dirPagination']);
+var coachApp = angular.module('coachApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','ngPercentDisplay','angularUtils.directives.dirPagination','ui.bootstrap']);
 
-coachApp.controller('CoachMealPlanController',['$scope','requestHandler','Flash',function($scope,requestHandler,Flash) {
+coachApp.controller('CoachMealPlanController',['$scope','requestHandler','Flash','roundProgressService',function($scope,requestHandler,Flash,roundProgressService) {
 $scope.activeClass.advices='active';
 
 $scope.doGetCoachPlanList=function(){
@@ -60,15 +60,15 @@ $scope.doViewCoachPlans=function(){
                 );
             }
 
-          // Group Json object of plan  
-          Object.keys($scope.plan).forEach(function(key){
-            $.each($scope.plan[key].foods,function(index,value){
-              $scope.mealPlanDetailList[value.day-1].foods[value.foodsessionid-1].foodItems.push(value);
-            });
+          // Group Json object of plan 
           
+          Object.keys($scope.plan).forEach(function(key){
+              $.each($scope.plan[key].foods,function(index,value){
+                $scope.mealPlanDetailList[value.day-1].foods[value.foodsessionid-1].foodItems.push(value);
+              });
+              // console.log($scope.mealPlanDetailList);
           });
-
-           console.log("Mealplanlist",$scope.mealPlanDetailList);
+          
         },function(){
             errorMessage(Flash,"Please try again later!")
         });
@@ -79,6 +79,7 @@ $scope.doCoachAddFood=function(){
     $scope.isNew=true;
     $scope.title="Add Food";
     $scope.addFood=false;
+    $scope.foodSelected();
     $(function(){
         $("#lean_overlay").fadeTo(1000);
         $("#add-food-modal").fadeIn(600);
@@ -103,12 +104,14 @@ $scope.doCoachAddFood=function(){
 };
 
 $scope.resetdata=function(){
+    $scope.selectedFood="";
     $scope.FoodAddForm.$setPristine();
     $scope.userSelectedFoodDetails={};
 };
 
 //Search Function for food
 $scope.inputChanged = function(searchStr) {
+
     if(searchStr.length >=3){
         $scope.loadingFoods=true;
         if($scope.foodSearchResult.length==0){
@@ -116,12 +119,11 @@ $scope.inputChanged = function(searchStr) {
             $scope.loadingFoods=true;
         }
 
-        requestHandler.postRequest("coach/searchFoodListByCoach/",{'foodname':searchStr}).then(function(response){
+        requestHandler.postRequest("coach/searchFoodListByCoach/",{'foodname':"idli"}).then(function(response){
           $scope.foodSearchResult= response.data.foods;
           $scope.loadingFoods=false;
           return $scope.foodSearchResult;
         });
-        $scope.addFood=true;
        
     }
     else{
@@ -133,15 +135,44 @@ $scope.inputChanged = function(searchStr) {
 
 };
 
-$scope.selectedFood=function(){
+$scope.foodSelected=function(){
     $scope.isNew=true;
     $scope.title= "Add Food";
     $scope.addFood=true;
-    requestHandler.postRequest("coach/getFoodDetailByCoach/",$scope.selectedFood.foodid).then(function(){
+    requestHandler.postRequest("coach/getFoodDetailByCoach/", {'foodid':'512'}).then(function(response){
         $scope.userSelectedFoodDetails= response.data.Food_Data;
+        $scope.addFood=true;
     }, function(){
           errorMessage(Flash,"Please try again later!");
     });
+};
+
+//Calories caluclation for food
+$scope.doCalculateCalories=function(){
+    if($scope.userFood.servings==0){
+        $scope.current=$scope.caloriesIntake=0;
+    }
+    if(!$scope.userFood.servings>0){
+        $scope.current=$scope.caloriesIntake=0;
+    }
+    else{
+        $scope.current=$scope.caloriesIntake=$scope.userFood.measure.calories*$scope.userFood.servings;
+        $scope.current=$scope.current.toFixed(2);
+        if(($scope.current.length-3)>2) $scope.max=100+((String($scope.current|0).slice(0, -2))*100);
+        else $scope.max=100;
+    }
+};
+
+//To Check maximum food value
+$scope.maxfoodvalue=false;
+$scope.maxFoodValueCheck = function(value){
+    if(value<=999.99){
+        $scope.maxfoodvalue=false;
+    }
+    else if(value >999.99){
+        $scope.maxfoodvalue=true;
+    }
+
 };
 
 $scope.doDeleteFoodItemFromPlan=function(id){
@@ -159,6 +190,9 @@ $scope.doDeleteFoodItemFromPlan=function(id){
 };
 
 $scope.plansViewInit=function(){
+  $scope.userFood={};
+  $scope.current=$scope.caloriesIntake=0;
+  $scope.max=100;
   $scope.foodSearchResult = [];
    $scope.doViewCoachPlans();
 };

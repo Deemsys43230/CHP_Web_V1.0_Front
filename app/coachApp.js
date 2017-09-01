@@ -337,13 +337,11 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'coachApp',
                             files:[
-                                '../../css/custom-inputs.css',
-                                '../../css/vertical_tab.css',
                                 '../../plugin/popup/style.css',
                                 '../../css/ngPercentageCircle.css',
                                 '../../app/coachPlans/ngPercentageCircle.js',
                                 '../../app/coachPlans/coachPlanController.js',
-                                '../../angular/angular-utils-pagination/dirPagination.js'
+                                '../../angular/angular-utils-pagination/dirPagination.js',
                             ]
                         })
                     }]
