@@ -314,7 +314,7 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'CoachAdviceController'
             }).
-            when('/coach-plans', {
+            when('/coach-meal-plans', {
                 templateUrl: 'views/coach-plans.html',
                 resolve: {
                     loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
@@ -328,10 +328,30 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         })
                     }]
                 },
-                controller:'CoachPlanController'
+                controller:'CoachMealPlanController'
             }).
             when('/coach-plans-view/:id', {
                 templateUrl: 'views/coach-plans-view.html',
+                resolve: {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'coachApp',
+                            files:[
+                                '../../css/custom-inputs.css',
+                                '../../css/vertical_tab.css',
+                                '../../plugin/popup/style.css',
+                                '../../css/ngPercentageCircle.css',
+                                '../../app/coachPlans/ngPercentageCircle.js',
+                                '../../app/coachPlans/coachPlanController.js',
+                                '../../angular/angular-utils-pagination/dirPagination.js'
+                            ]
+                        })
+                    }]
+                },
+                controller:'ViewCoachPlanController'
+            }).
+            when('/coach-workout-plans', {
+                templateUrl: 'views/coach-workout-plans.html',
                 resolve: {
                     loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
@@ -344,7 +364,7 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         })
                     }]
                 },
-                controller:'ViewCoachPlanController'
+                controller:'CoachWorkoutPlanController'
             }).
             when('/course', {
                 templateUrl: 'views/course.html',

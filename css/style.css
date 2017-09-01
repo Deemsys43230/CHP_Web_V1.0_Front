@@ -17530,6 +17530,7 @@ h3.accordion{
 .food-plans div i.fa{
     vertical-align: middle;
     float: right;
+    cursor: pointer;
 }
 
 .stickyNav{
