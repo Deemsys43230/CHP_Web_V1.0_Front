@@ -24,7 +24,7 @@
 <div class="page-banner" ng-cloak class="ng-cloak">
     <div class="container">
         <div class="row">
-            <div class="col-lg-12 col-md-12 col-sm-12 min-height-450" ng-init="food-plansViewInit()">
+            <div class="col-lg-12 col-md-12 col-sm-12 min-height-450">
                 <span><a href="#coach-meal-plans" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back</a></span>
                 <div flash-message="2000" class="col-md-4 pull-right no-padding"></div>
                 <h4 class="classic-title"><span>My Plans</span></h4>
@@ -55,42 +55,39 @@
                             <div class="food" ng-repeat="foodItem in mealPlanDetail.foods[0].foodItems">
                                 {{foodItem.foodname}}<i class="fa fa-times-circle" ng-click="doDeleteFoodItemFromPlan(foodItem.id);"></i>
                             </div>
-                            <div><a href="" class="food-plan-add-food"  ng-click="doCoachAddFood()">Add Food</a></div>
+                            <div><a href="" class="food-plan-add-food text-bottom" ng-click="doCoachAddFood(mealPlanDetail.dayId,mealPlanDetail.foods[0].sessionId)">Add Food</a></div>
                         </td>
                         <td class="food-plans">                           
                              <!--Brunch-->
                              <div class="food" ng-repeat="foodItem in mealPlanDetail.foods[1].foodItems">
                                 {{foodItem.foodname}}<i class="fa fa-times-circle" ng-click="doDeleteFoodItemFromPlan(foodItem.id);"></i>
                             </div>
-                            <div><a href="" class="food-plan-add-food text-bottom" ng-click="doCoachAddFood()">Add Food</a></div>
+                            <div><a href="" class="food-plan-add-food text-bottom" ng-click="doCoachAddFood(mealPlanDetail.dayId,mealPlanDetail.foods[1].sessionId)">Add Food</a></div>
                         </td>
                         <td class="food-plans">                           
                             <!--Lunch-->
                             <div class="food" ng-repeat="foodItem in mealPlanDetail.foods[2].foodItems">
                                 {{foodItem.foodname}}<i class="fa fa-times-circle" ng-click="doDeleteFoodItemFromPlan(foodItem.id);"></i>
                             </div>
-                            <div><a href="" class="food-plan-add-food text-bottom" ng-click="doCoachAddFood()">Add Food</a></div>
+                            <div><a href="" class="food-plan-add-food text-bottom" ng-click="doCoachAddFood(mealPlanDetail.dayId,mealPlanDetail.foods[2].sessionId)">Add Food</a></div>
                         </td>
                         <td class="food-plans">                            
                             <!--Snacks-->
                             <div class="food" ng-repeat="foodItem in mealPlanDetail.foods[3].foodItems">
                                 {{foodItem.foodname}}<i class="fa fa-times-circle" ng-click="doDeleteFoodItemFromPlan(foodItem.id);"></i>
                             </div>
-                            <div><a href="" class="food-plan-add-food text-bottom" ng-click="doCoachAddFood()">Add Food</a></div>
+                            <div><a href="" class="food-plan-add-food text-bottom" ng-click="doCoachAddFood(mealPlanDetail.dayId,mealPlanDetail.foods[3].sessionId)">Add Food</a></div>
                         </td>
                         <td class="food-plans">                            
                              <!--Dinner-->
                              <div class="food" ng-repeat="foodItem in mealPlanDetail.foods[4].foodItems">
                                 {{foodItem.foodname}}<i class="fa fa-times-circle" ng-click="doDeleteFoodItemFromPlan(foodItem.id);"></i>
                             </div>
-                            <div><a href="" class="food-plan-add-food text-bottom" ng-click="doCoachAddFood()">Add Food</a></div>
+                            <div><a href="" class="food-plan-add-food text-bottom" ng-click="doCoachAddFood(mealPlanDetail.dayId,mealPlanDetail.foods[4].sessionId)">Add Food</a></div>
                         </td>
                     </tr>
-
                    
                     </tr>
-
-
 
                 </table>
                 </div>
@@ -118,7 +115,7 @@
                         <div class="search-loading" ng-show="loadingFoods"><i class="fa fa-spinner fa-pulse"></i>&nbsp;&nbsp;Searching Foods...</div>
                        
                     </div><br/>
-                    <div>
+                    <div ng-show="addFood">
                     <div class="col-lg-12 col-md-12 col-sm-12">
                         <div class="col-lg-1 col-md-1 col-sm-1 no-padding">
                             <img ng-if="userSelectedFoodDetails.foodImagePath" class="img-circle border-image" ng-src="{{userSelectedFoodDetails.foodImagePath+'50x50.jpg'}}">
@@ -136,6 +133,8 @@
                     </div>
                     <div class="col-lg-7 col-md-7 col-sm-7">
                         <form name="FoodAddForm" novalidate>
+                        <input type="hidden" value="{{planDay}}" ng-model="userFood.day"/>   
+                        <input type="text" value="{{foodSessionId}}" ng-model="userFood.foodsessionid" /> 
                         <div class="col-lg-12 col-md-12 col-sm-12 no-padding">
                         <h5 class="margin-top-10">Select Measure:</h5>
                             <select name="measure" ng-model="userFood.measure" ng-options="measure.measurename for measure in userSelectedFoodDetails.measure track by measure.measureid" ng-change="doCalculateCalories()" required>
@@ -181,7 +180,7 @@
                 </div>
 
                 <div class="action_btns margin-tb-20 col-lg-12 col-md-12 col-sm-12 no-padding">
-                    <div class="one_half" ng-show="isNew"><a href="#" onclick="return false;" ng-disabled="FoodAddForm.$invalid || maxfoodvalue" class="btn btn_blue modal_close" ng-click="doInsertUserFood()">Add Food</a></div>
+                    <div class="one_half" ng-show="isNew"><a href="#" onclick="return false;" ng-disabled="FoodAddForm.$invalid || maxfoodvalue" class="btn btn_blue modal_close" ng-click="doInsertFoodPlanByCoach()">Add Food</a></div>
                     <div class="one_half" ng-hide="isNew"><a href="#" onclick="return false;" ng-disabled="FoodAddForm.$invalid || isCleanFood() || maxfoodvalue" class="btn btn_blue modal_close"  ng-click="doUpdateUserFood()">Update Food</a></div>
                     <div class="one_half last modal_close"><a class="btn btn_red">Cancel</a></div>
                 </div>

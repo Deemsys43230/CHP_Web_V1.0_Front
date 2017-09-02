@@ -322,8 +322,11 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                             name:'coachApp',
                             files:[
                                 '../../plugin/popup/style.css',
-                                '../../app/coachPlans/coachPlanController.js',
-                                '../../angular/angular-utils-pagination/dirPagination.js'
+                                '../../css/ngPercentageCircle.css',
+                                '../../app/userDashboard/ngPercentageCircle.js',
+                                '../../angular/angular-utils-pagination/dirPagination.js',
+                                '../../app/userDashboard/userDashboardService.js',
+                                '../../app/coachPlans/coachPlanController.js'
                             ]
                         })
                     }]
@@ -339,9 +342,9 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                             files:[
                                 '../../plugin/popup/style.css',
                                 '../../css/ngPercentageCircle.css',
-                                '../../app/coachPlans/ngPercentageCircle.js',
-                                '../../app/coachPlans/coachPlanController.js',
-                                '../../angular/angular-utils-pagination/dirPagination.js',
+                                '../../app/userDashboard/ngPercentageCircle.js',
+                                '../../app/userDashboard/userDashboardService.js',
+                                '../../app/coachPlans/coachPlanController.js'
                             ]
                         })
                     }]
@@ -356,8 +359,11 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                             name:'coachApp',
                             files:[
                                 '../../plugin/popup/style.css',
-                                '../../app/coachPlans/coachPlanController.js',
-                                '../../angular/angular-utils-pagination/dirPagination.js'
+                                '../../css/ngPercentageCircle.css',
+                                '../../app/userDashboard/ngPercentageCircle.js',
+                                 '../../angular/angular-utils-pagination/dirPagination.js',
+                                 '../../app/userDashboard/userDashboardService.js',
+                                '../../app/coachPlans/coachPlanController.js'
                             ]
                         })
                     }]

@@ -1,10 +1,10 @@
-var coachApp = angular.module('coachApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','ngPercentDisplay','angularUtils.directives.dirPagination','ui.bootstrap']);
+var coachApp = angular.module('coachApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','ngPercentDisplay','angular-svg-round-progress','userDashboardServiceModule','angularUtils.directives.dirPagination','ui.bootstrap']);
 
-coachApp.controller('CoachMealPlanController',['$scope','requestHandler','Flash','roundProgressService',function($scope,requestHandler,Flash,roundProgressService) {
+coachApp.controller('CoachMealPlanController',['$scope','requestHandler','Flash',function($scope,requestHandler,Flash) {
 $scope.activeClass.advices='active';
 
 $scope.doGetCoachPlanList=function(){
-
+  $scope.loaded=true;
 	$scope.coachPlanPagination={
 						"limit":$scope.pagination.itemsPerPage,
 						"offset":($scope.pagination.pageNumber-1)*$scope.pagination.itemsPerPage
@@ -12,8 +12,11 @@ $scope.doGetCoachPlanList=function(){
 
    requestHandler.postRequest("coach/myplans/",$scope.coachPlanPagination).then(function(response){
      $scope.coachPlanList= response.data;
+     $scope.loaded=false;
    	 $scope.paginationLoad=true;
-   });
+   },function(){
+      errorMessage(Flash,"Please try again later!")
+  });
 };
 
 $scope.init=function(){
@@ -26,11 +29,9 @@ $scope.$watch("pagination.pageNumber",function(){
 	$scope.doGetCoachPlanList();
 });
 
-$scope.init();
-
 }]);
 
-coachApp.controller('ViewCoachPlanController',['$scope','requestHandler','Flash','$routeParams',function($scope,requestHandler,Flash,$routeParams) {
+coachApp.controller('ViewCoachPlanController',['$scope','requestHandler','Flash','$routeParams','UserDashboardService','roundProgressService',function($scope,requestHandler,Flash,$routeParams,UserDashboardService,roundProgressService) {
 
 $scope.doViewCoachPlans=function(){
   $scope.coachPlanId= $routeParams.id;
@@ -75,11 +76,13 @@ $scope.doViewCoachPlans=function(){
      
 };
 
-$scope.doCoachAddFood=function(){
+$scope.doCoachAddFood=function(planDay,foodSessionId){
     $scope.isNew=true;
     $scope.title="Add Food";
     $scope.addFood=false;
-    $scope.foodSelected();
+    $scope.planDay= planDay;
+    $scope.foodSessionId=foodSessionId;
+ 
     $(function(){
         $("#lean_overlay").fadeTo(1000);
         $("#add-food-modal").fadeIn(600);
@@ -118,13 +121,13 @@ $scope.inputChanged = function(searchStr) {
 
             $scope.loadingFoods=true;
         }
-
-        requestHandler.postRequest("coach/searchFoodListByCoach/",{'foodname':"idli"}).then(function(response){
-          $scope.foodSearchResult= response.data.foods;
-          $scope.loadingFoods=false;
-          return $scope.foodSearchResult;
+        var userFoodDiaryDetailPromise=UserDashboardService.searchFoodByCoach(searchStr);
+        return userFoodDiaryDetailPromise.then(function(result){
+            var foods = [];
+            $scope.foodSearchResult=result;
+            $scope.loadingFoods=false;
+            return $scope.foodSearchResult;
         });
-       
     }
     else{
         $('.dropdown-menu').animate({
@@ -132,16 +135,16 @@ $scope.inputChanged = function(searchStr) {
         }, 0);
         return {};
     }
-
 };
 
 $scope.foodSelected=function(){
     $scope.isNew=true;
     $scope.title= "Add Food";
-    $scope.addFood=true;
-    requestHandler.postRequest("coach/getFoodDetailByCoach/", {'foodid':'512'}).then(function(response){
-        $scope.userSelectedFoodDetails= response.data.Food_Data;
+    $scope.selectedFoodParam={'foodid': $scope.selectedFood.foodid};
+    requestHandler.postRequest("coach/getFoodDetailByCoach/", $scope.selectedFoodParam).then(function(response){
         $scope.addFood=true;
+        $scope.userSelectedFoodDetails= response.data.Food_Data;
+        
     }, function(){
           errorMessage(Flash,"Please try again later!");
     });
@@ -175,6 +178,26 @@ $scope.maxFoodValueCheck = function(value){
 
 };
 
+//Insert User Food
+$scope.doInsertFoodPlanByCoach=function(){
+    //Set values according to the api calls
+    $scope.userFood.planid= $routeParams.id;
+    $scope.userFood.day= $scope.userFood.day;
+    $scope.userFood.foodsessionid= $scope.userFood.foodsessionid;
+    $scope.userFood.foodid=$scope.userSelectedFoodDetails.foodid;
+    $scope.userFood.foodmeasureid=$scope.userFood.measure.measureid;
+    
+    requestHandler.postRequest("coach/insertorupdatefoodplan/",$scope.userfood).then(function(response){
+        if(response.data.Response_status==1){
+          successMessage(Flash,"Successfully Added");
+          $scope.doViewCoachPlans();
+        }
+    }, function(){
+          errorMessage(Flash,"Please try again later!");
+    });
+
+};
+
 $scope.doDeleteFoodItemFromPlan=function(id){
   if(confirm("Are you sure you want to delete food item?")){
     $scope.deleteFoodItemParam={'id':id};
@@ -194,9 +217,43 @@ $scope.plansViewInit=function(){
   $scope.current=$scope.caloriesIntake=0;
   $scope.max=100;
   $scope.foodSearchResult = [];
-   $scope.doViewCoachPlans();
+  $scope.doViewCoachPlans();
 };
 
+$scope.plansViewInit();
+
+//circle round
+    $scope.offset =         0;
+    $scope.timerCurrent =   0;
+    $scope.uploadCurrent =  0;
+    $scope.stroke =         12;
+    $scope.radius =         70;
+    $scope.isSemi =         false;
+    $scope.rounded =        false;
+    $scope.responsive =     false;
+    $scope.clockwise =      true;
+    $scope.bgColor =        '#ddd';
+    $scope.duration =       1000;
+    $scope.currentAnimation = 'easeOutCubic';
+
+    $scope.animations = [];
+
+    angular.forEach(roundProgressService.animations, function(value, key){
+        $scope.animations.push(key);
+    });
+
+    $scope.getStyle = function(){
+        var transform = ($scope.isSemi ? '' : 'translateY(-50%) ') + 'translateX(-50%)';
+
+        return {
+            'top': $scope.isSemi ? 'auto' : '52%',
+            'bottom': $scope.isSemi ? '5%' : 'auto',
+            'left': '50%',
+            'transform': transform,
+            '-moz-transform': transform,
+            '-webkit-transform': transform
+        };
+    };
 }]);	
 
 coachApp.controller('CoachWorkoutPlanController',['$scope','requestHandler','Flash',function($scope,requestHandler,Flash) {
