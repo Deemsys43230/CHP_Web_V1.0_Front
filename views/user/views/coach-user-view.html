@@ -83,7 +83,7 @@
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-12">
                   <div class="talk-bubble tri-right left-in">
-                     <div class="talktext">
+                     <div class="talktext wrap-all">
                          <p>{{coachAdvice.description}}</p>
                      </div>
                   </div>
@@ -102,12 +102,12 @@
                                         <img class="img-circle" ng-src="{{reviews.review_imageurl | trusted}}">
                                     </div>
                                     <div class="col-lg-4 col-md-4 col-sm-4">
-                                        <strong class="wrap">{{reviews.review_username}}</strong><br/>
+                                        <strong class="wrap-all">{{reviews.review_username}}</strong><br/>
                                         <span class="small-font text-gray">{{reviews.reviewddatetime}}</span>
                                     </div>
-                                    <div class="col-lg-5 col-md-4 col-sm-4">
-                                        <strong class="wrap">{{reviews.reviewtitle}}</strong><br/>
-                                        <span class="small-font text-gray wrap">{{reviews.reviewdescription}}</span>
+                                    <div class="col-lg-5 col-md-4 col-sm-4 wrap-all">
+                                        <strong>{{reviews.reviewtitle}}</strong><br/>
+                                        <span class="small-font text-gray">{{reviews.reviewdescription}}</span>
                                     </div>
 
                                     <div class="col-lg-2 col-md-3 col-sm-3 no-padding">
