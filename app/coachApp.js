@@ -362,14 +362,33 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../plugin/popup/style.css',
                                 '../../css/ngPercentageCircle.css',
                                 '../../app/userDashboard/ngPercentageCircle.js',
-                                 '../../angular/angular-utils-pagination/dirPagination.js',
-                                 '../../app/userDashboard/userDashboardService.js',
-                                '../../app/coachPlans/coachPlanController.js'
+                                '../../angular/angular-utils-pagination/dirPagination.js',
+                                '../../app/userDashboard/userDashboardService.js',
+                                '../../app/coachPlans/coachWorkoutPlanController.js'
                             ]
                         })
                     }]
                 },
                 controller:'CoachWorkoutPlanController'
+            }).
+            when('/coach-workout-plans-view/:id', {
+                templateUrl: 'views/coach-workout-plans-view.html',
+                resolve: {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'coachApp',
+                            files:[
+                                '../../css/custom-inputs.css',
+                                '../../plugin/popup/style.css',
+                                '../../css/ngPercentageCircle.css',
+                                '../../app/userDashboard/ngPercentageCircle.js',
+                                '../../app/userDashboard/userDashboardService.js',
+                                '../../app/coachPlans/coachWorkoutPlanController.js'
+                            ]
+                        })
+                    }]
+                },
+                controller:'ViewCoachWorkoutPlanController'
             }).
             when('/course', {
                 templateUrl: 'views/course.html',

@@ -1,17 +1,17 @@
 var coachApp = angular.module('coachApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','ngPercentDisplay','angular-svg-round-progress','angularUtils.directives.dirPagination','userDashboardServiceModule','ui.bootstrap']);
 
-coachApp.controller('CoachMealPlanController',['$scope','requestHandler','Flash',function($scope,requestHandler,Flash) {
+coachApp.controller('CoachWorkoutPlanController',['$scope','requestHandler','Flash',function($scope,requestHandler,Flash) {
 $scope.activeClass.advices='active';
 
-$scope.doGetCoachPlanList=function(){
+$scope.doGetCoachWorkoutPlanList=function(){
   $scope.loaded=true;
-	$scope.coachPlanPagination={
-						"limit":$scope.pagination.itemsPerPage,
-						"offset":($scope.pagination.pageNumber-1)*$scope.pagination.itemsPerPage
-					};
+  $scope.coachWorkoutPlanPagination={
+  									"limit": $scope.pagination.itemsPerPage,
+  									"offset": ($scope.pagination.pageNumber-1)*$scope.pagination.itemsPerPage
+  									};
 
-   requestHandler.postRequest("coach/myplans/",$scope.coachPlanPagination).then(function(response){
-     $scope.coachPlanList= response.data;
+   requestHandler.postRequest("coach/myplans/",$scope.coachWorkoutPlanPagination).then(function(response){
+     $scope.coachWorkoutPlanList= response.data;
      $scope.loaded=false;
    	 $scope.paginationLoad=true;
    },function(){
@@ -20,18 +20,19 @@ $scope.doGetCoachPlanList=function(){
 };
 
 $scope.init=function(){
+	$scope.pagination= {"itemsPerPage": 8, "pageNumber": 1}
 	$scope.paginationLoad=false;
-	$scope.pagination={"itemsPerPage":4,"pageNumber":1};
-	
 };
 
-$scope.$watch("pagination.pageNumber",function(){
-	$scope.doGetCoachPlanList();
+$scope.$watch("pagination.pageNumber", function(){
+	$scope.doGetCoachWorkoutPlanList();
 });
+
+$scope.init();
 
 }]);
 
-coachApp.controller('ViewCoachPlanController',['$scope','requestHandler','Flash','$routeParams','UserDashboardService','roundProgressService',function($scope,requestHandler,Flash,$routeParams,UserDashboardService,roundProgressService) {
+coachApp.controller('ViewCoachWorkoutPlanController',['$scope','requestHandler','Flash','$routeParams','UserDashboardService','roundProgressService',function($scope,requestHandler,Flash,$routeParams,UserDashboardService,roundProgressService) {
 
 $scope.doViewCoachPlans=function(){
   $scope.coachPlanId= $routeParams.id;

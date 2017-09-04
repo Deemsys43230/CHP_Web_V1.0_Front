@@ -27,12 +27,12 @@
                         </tr>    
                     </thead>
                     <tbody>
-                        <tr dir-paginate="plan in coachWorkoutPlanList.plans | itemsPerPage:pagination.itemsPerPage" ng-show="coachWorkoutPlanList.plans.length!=0 && plan.plantype==2" total-items="coachWorkoutPlanList.totalrecords" current-page="pagination.pageNumber">
+                        <tr dir-paginate="plan in coachWorkoutPlanList.plans | itemsPerPage:pagination.itemsPerPage" ng-show="coachWorkoutPlanList.plans.length!=0 && plan.plantype==2" current-page="pagination.pageNumber" total-items="coachWorkoutPlanList.totalrecords">
                             <td>{{plan.planname}}</td>
                             <td>{{plan.description}}</td>
                             <td>{{plan.plandays}}</td>
                             <td>
-                                <a href="#coach-plans-view/{{plan.id}}" class="btn-xs btn-primary">My Plan</a>
+                                <a href="#coach-workout-plans-view/{{plan.id}}" class="btn-xs btn-primary">My Plan</a>
                             </td>
                         </tr>    
                         <tr ng-show="coachWorkoutPlanList.plans.length==0"><td colspan="4" class="text-center">No Records Found !!!</td></tr>
