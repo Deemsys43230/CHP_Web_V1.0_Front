@@ -68,6 +68,9 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
         $scope.doGetTrainingPlanDetails(id);
         //Get Medication List
         $scope.doGetMedicationList(id);
+        // Reload TrainingPlan List
+        $scope.reloadTrainingplanList();
+
 
 
     };
@@ -75,7 +78,8 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
     //Refresh Accordian
     $scope.refreshAccordian=function(){
         $scope.$apply();
-    }
+    };
+
 
     //Get All Client List
     $scope.doGetAllClients = function(){
@@ -421,6 +425,12 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
     };
 
 
+// Reload training plan list page while adding user training plan
+    $scope.reloadTrainingplanList=function(){
+        $(".tracking-plan-viewall-div").show();
+        $(".tracking-plan-view-div").hide();
+        $(".tracking-plan-add-div").hide();
+    };
 
 
     /*Get Individual plans view*/
