@@ -9,21 +9,21 @@
                 <span ng-show="isAdd==1"><a href="#events" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back</a></span>
                 <div flash-message="2000" class="col-md-4 pull-right no-padding"></div>
                 <h4 class="classic-title"><span>{{eventTitle}}</span></h4>
-                <div class="row margin-top-10 margin-bottom-10">
+                <div class="col-lg-12 col-md-12 col-sm-12 row margin-top-10 margin-bottom-10">
                     <div ng-if="loaded">
                         <div class="loader-style">
                             <div class="loader"></div>
                         </div>
                     </div>
                     <form name="courseForm" novalidate>
-                        <div class="col-lg-4 col-md-4 col-sm-4 margin-top-7">
-                            <h4 ng-show="isAdd==0">Event No <span class="pull-right">:</span></h4><br/>
+                        <div class="col-lg-3 col-md-3 col-sm-3 margin-left-200 margin-top-7">
+                            <h4 class="margin-top-10" ng-show="isAdd==0">Event No <span class="pull-right">:</span></h4><br/>
                             <h4 class="margin-top-10">Event Name <span class="pull-right">:</span></h4><br/>
                             <h4 class="margin-top-10">Event Description <span class="pull-right">:</span></h4><br/>
                             <h4 class="margin-top-10">Event Date <span class="pull-right">:</span></h4><br/>
                             <h4 class="margin-top-10">Event Duration <span class="pull-right">:</span></h4>
                         </div>
-                        <div class="col-lg-8 col-md-8 col-sm-8 margin-top-7">
+                        <div class="col-lg-5 col-md-5 col-sm-5 margin-top-7">
                             <input class="section-input disabled-class" ng-show="isAdd==0" maxlength="150" name="id" placeholder="null" ng-model="eventDetails.id" ng-disabled>
 
                             <span ng-show="courseForm.name.$dirty&&courseForm.name.$invalid">
@@ -34,26 +34,17 @@
                             <span ng-show="courseForm.discription.$dirty&&courseForm.discription.$invalid">
                                 <span class="error-message textarea-errormessage55" ng-show="courseForm.discription.$error.required"><span>Required.</span></span>
                             </span>
-                            <input class="section-input margin-top-15" maxlength="200" name="discription" placeholder="Enter Event Discription" ng-model="eventDetails.description" required>
+                            <input class="section-input margin-top-15" maxlength="200" name="discription" placeholder="Enter Event Description" ng-model="eventDetails.description" required>
 
-                            <!--  <span ng-show="courseForm.date.$dirty&&courseForm.date.$invalid">
-                                <span class="error-message textarea-errormessage40" ng-show="courseForm.date.$error.required"><span>Required.</span></span>
-                            </span>
-                            <input class="section-input margin-top-15" maxlength="150" name="date" hidden id="main-start-date" placeholder="Enter Event Date" ng-model="eventDetails.datetime" required>
-
-                             -->
                             <div class="input-group">
                                 <input hidden id="main-start-date" ng-model="eventDetails.datetime">
                                     
                                 </input>
                                 <!-- <input type="text" name='startdate' class="date-input" id="main-start-date" date-options="dateOptions" date-validation-in ng-model="eventDetails.datetime" placeholder="Enter Event Date" required /> -->
-                                <div id="ui-datepicker" class="pull-right">
-                                    <input type="text" id="main-date" class="section-input margin-top-15" style="width:310%" ng-model="eventDetails.datetime">
-                                </div>
-                                <div class="margin-top-5 pull-right mouse-pointer" >&nbsp;&nbsp;<i class="fa fa-calendar" ng-click="datePicker()"></i></div>
-                              <!--   <span class="input-group-addon" id="dobIcon">
-                                    <span class="glyphicon glyphicon-calendar"></span>
-                                </span> -->
+                                
+                                <input id="main-date" name='startdate' class="section-input margin-top-15 cal-width" placeholder="Enter Event Date" ng-model="eventDetails.datetime" date-validation-in required>
+                                <div id="ui-datepicker"></div>
+                                <div class="margin-top-15 mouse-pointer cal-icon">&nbsp;&nbsp;<i class="fa fa-calendar" ng-click="datePicker()"></i></div>
                             </div>
 
                             <span ng-show="courseForm.duration.$dirty&&courseForm.duration.$invalid">

@@ -17078,7 +17078,7 @@ select.date:focus {
 /*dropdown menu for notification */
 
 .notify-menu {
-    padding: 28px 0px 28px 20px;
+    padding: 28px 10px 0px 30px;
 }
 
 .dropdown {
@@ -17489,6 +17489,18 @@ input.date-input{
     margin: 0;
     appearance: none;
 }
+.cal-icon{
+   display: table-cell;
+   padding-left:170px;
+}
+
+.cal-width{
+    width:185% !important;
+}
+.margin-left-200{
+    margin-left: 200px;
+}
+
 /*Member Group Accordian*/
 h3.accordion{
     margin: 0;

@@ -6,9 +6,6 @@ coachApp.controller('EventController',['$scope','requestHandler','Flash','$route
 
 	daterangepicker();
 
-	$scope.datePickerGraph = function(){
-        $("#history-graph").click();
-    };
 
     //For single date selection
     $scope.datePicker = function(){
@@ -18,6 +15,8 @@ coachApp.controller('EventController',['$scope','requestHandler','Flash','$route
     /*Do get All Event Deatils By Coach*/
 
     //To Display current date
+
+        //Always Start date for a week
         var selectedDate = new Date();
         var dd = selectedDate.getDate();
         var mm = selectedDate.getMonth()+1; //January is 0!
@@ -32,30 +31,38 @@ coachApp.controller('EventController',['$scope','requestHandler','Flash','$route
         selectedDate = dd+'/'+mm+'/'+yyyy;
 
         var startDate = selectedDate;
-        var endDate = selectedDate;
-/*
-        if($('#history-start').val()==''){
-            alert("okay");
-            var enddate = selectedDate;
+
+        //Always end date for a week
+        var toDate=new Date();
+            toDate.setDate(toDate.getDate()+6);
+
+        var dd = toDate.getDate();
+        var mm = toDate.getMonth()+1; //January is 0!
+
+        var yyyy = toDate.getFullYear();
+        if(dd<10){
+            dd='0'+dd
+        }
+        if(mm<10){
+            mm='0'+mm
+        }
+        toDate = dd+'/'+mm+'/'+yyyy;
+        var endDate = toDate;
+
+	$scope.doGetEventsByCoach = function(){
+       if($('#history-end').val()==''){
+            startDate = startDate;
+            endDate = endDate;
         }
         else{
-           var endDate= document.getElementById("history-end").value;
-           alert(endDate);
-        }*/
-
-        if($('#history-start').val()==''){
-                startDate = startDate;
-                endDate = selectedDate;
-            }
-            else{
-                startDate = $('#history-start').val();
-                endDate = $('#history-end').val();
-            }
-
-    
-	$scope.doGetEventsByCoach = function(){
+            startDate = $('#history-start').val();
+            endDate = $('#history-end').val();
+           
+        }
 		requestHandler.postRequest("coach/getevents/",{"fromdate":selectedDate,"todate":endDate}).then(function(response){
 			$scope.eventList= response.data.events;
+            $scope.loaded=false;
+            $scope.paginationLoad=true;
 		});
 	};
 
@@ -107,7 +114,6 @@ coachApp.controller('EventController',['$scope','requestHandler','Flash','$route
     $scope.doInsertOrUpdateEvents = function(){
         $scope.eventDetails.id=null;
         $scope.eventDetails.datetime=document.getElementById("main-start-date").value;
-        console.log($scope.eventDetails);
         requestHandler.postRequest("coach/insertorupdateevent/",$scope.eventDetails).then(function(response){
 			$scope.result= response.data.Response;
 			if(response.data.Response == "Success"){
@@ -182,6 +188,8 @@ coachApp.controller('EventEditController',['$scope','requestHandler','Flash','$r
     $scope.doGetAttendees = function(eventId){
         requestHandler.postRequest("coach/eventattendees/",{"id":eventId}).then(function(response){
             $scope.attendees = response.data.attendees;
+            $scope.loaded=false;
+            $scope.paginationLoad=true;
         });
     };
 

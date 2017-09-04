@@ -445,6 +445,20 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
         });
     };
 
+
+    //Do get coach upcoming Events
+    $scope.doGetUpcomingEvents = function(coachid){
+        requestHandler.postRequest("user/upcomingevents/",{"coachid":coachid}).then(function(response){
+            $scope.coachEvent = response.data.attendees;
+        });
+    };
+
+    $scope.userSetAttendence = function(eventid){
+        requestHandler.postRequest("user/setattendence/",{"id":eventid}).then(function(response){
+
+        });
+    };
+
     $scope.userCoachViewInit=function(){
         $scope.scrollnation={"itemsPerScroll": 4,"scrollEndCount":-1};
         $scope.checkReviews=[];
@@ -459,6 +473,7 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
         $scope.subscribed=1;
         $scope.doGetChatMessage($routeParams.id);
         $scope.doGetCoachAdviceByUser($routeParams.id);
+        $scope.doGetUpcomingEvents($routeParams.id);
     };
 
     $scope.coachListInit=function(){
@@ -473,6 +488,7 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
         $scope.coach = {
             status: 'coach-view'
         };
+
     };
 }]);
 

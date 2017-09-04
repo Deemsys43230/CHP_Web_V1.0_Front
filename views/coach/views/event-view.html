@@ -2,11 +2,11 @@
 
 <div class="page-banner" ng-cloak class="ng-cloak">
     <div class="container">
-        <div class="row">
+        <div class="row height-460">
             <a href="#events" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back to Event List</a>
             <div flash-message="2000" class="col-md-3 no-padding pull-right"></div>
             <h5 class="classic-title"><span>EVENT DETAILS</span></h5>
-            <div class="col-md-9">
+            <div class="col-md-5">
                 <div ng-if="modalloaded">
                     <div class="loader-style">
                         <div class="loader"></div>
@@ -42,9 +42,35 @@
                     </table>
                 </div>
             </div>
-            <div class="col-md-3">
-                <h5 class="classic-title"><span class="sub-title"><strong><i class="fa fa-user"></i>&nbsp;&nbsp;ATTENDEES DETAILS</strong></span></h5> 
-                <div class="content_scrollbar" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#eee'}" scroller>
+            <div class="col-md-7">
+                <h5 class="classic-title"><span class="sub-title"><strong><i class="fa fa-user"></i>&nbsp;&nbsp;ATTENDEES DETAILS</strong></span></h5>
+                <table class="table table-striped table-bordered">
+                    <thead>
+                        <tr class="warning">
+                            <th class="col-md-3">Name</th>
+                            <th class="col-md-5">Email</th>
+                            <th class="col-md-4">Phone Number</th>
+                        </tr>
+                    </thead>
+
+                    <tbody >
+                        <tr dir-paginate="attendee in attendeesFilter = (attendees | itemsPerPage: 9)" ng-show="attendees.length!=0">
+                            <td><span class="line-clamp-md">{{attendee.name}}</span></td>
+                            <td><span class="line-clamp-md">{{attendee.emailid}}</span></td>
+                            <td>
+                                {{attendee.phone}}
+                            </td>
+                        </tr>
+                        <tr ng-show="attendees.length==0 || !attendeesFilter.length "><td colspan="6" class="text-center">No Records Found !!!</td></tr>
+                    </tbody>
+                </table>  
+                <!-- Start Pagination -->
+                <dir-pagination-controls class="text-center" ng-show="paginationLoad" boundary-links="true"> </dir-pagination-controls>
+                <!-- End Pagination -->
+
+
+
+                <!-- <div class="content_scrollbar" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#eee'}" scroller>
                     <div  ng-show="attendees.length!=0" class="padding-right-10 margin-top-15">
                         <div class="col-lg-12 col-md-12 col-sm-12" ng-repeat="attendee in attendeesFilter=(attendees)">
                             <div class="col-lg-12 col-md-12 col-sm-12 no-padding">
@@ -62,7 +88,7 @@
                         <img src="../../images/no-coach-small.png" width="120" height="120"/>
                         <h3 class="text-gray">NO ATTENDEES FOUND!!!</h3><br/><br/><br/>
                     </div>
-                </div>
+                </div> -->
         </div>
     </div><!-- @end #content -->
 </div>

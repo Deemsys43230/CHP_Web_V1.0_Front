@@ -462,6 +462,14 @@
     #main-slide .slider-content h2{
         font-size: 68px;
     }
+    .cal-icon{
+       display: table-cell;
+       padding-left:40px;
+    }
+
+    .cal-width{
+        width:128% !important;
+    }
 }
 
 
@@ -482,6 +490,13 @@
     }
     .plan {
         width: 47%;
+    }
+    .cal-icon{
+       display: table-cell;
+       padding-left:50px;
+    }
+    .cal-width{
+        width:134% !important;
     }
 }
 
@@ -716,7 +731,14 @@
     h5.classic-title {
         font-size: 14px!important;
     }
-
+    /*.cal-icon{
+       display: table-cell;
+       padding-left:40px;
+    }
+    .cal-width{
+        width:133% !important;
+    }*/
+    
 }
 
 @media (min-width: 1120px)and (max-width: 1200px){
@@ -753,6 +775,13 @@
 
     .session input[type=radio] + label{
         padding: 0 12px ;
+    }
+    .cal-icon{
+       display: table-cell;
+       padding-left:80px;
+    }
+    .cal-width{
+        width:148% !important;
     }
 }
 
@@ -1040,9 +1069,9 @@
         width: 81%;
         display:inline-block;
     }
-.width {
-    width: 70%;
-}
+    .width {
+        width: 70%;
+    }
     .font-size-md {
         font-size: 14px;
         line-height: 22px;
@@ -1134,6 +1163,14 @@
         font-size: 14px;
         margin-bottom: 10px;
     }
+    .cal-icon{
+       display: table-cell;
+       padding-left:170px;
+    }
+
+    .cal-width{
+        width:184% !important;
+    }
 }
 
 @media (min-width: 992px) and (max-width: 1200px){
@@ -1181,6 +1218,14 @@
 
     #targetGraph{
         width:330px;
+    }
+    .cal-icon{
+       display: table-cell;
+       padding-left:155px;
+    }
+
+    .cal-width{
+        width:174% !important;
     }
 
 }
