@@ -35,7 +35,7 @@
                         </tr>
                         <tr>
                             <td class="col-md-4">Plan Choice</td>
-                            <td class="col-md-8">{{invitationDetails.planchoice}}</td>
+                            <td class="col-md-8"><span ng-repeat="pricingPlan in pricingPlanList | filter : {id: invitationDetails.planchoice} :true">{{pricingPlan.planname}}</span></td>
                         </tr>
                         <tr>
                             <td class="col-md-4">Qualification</td>

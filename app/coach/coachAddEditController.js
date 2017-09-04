@@ -52,7 +52,7 @@ adminApp.controller('CoachAddEditController',['$scope','requestHandler','Flash',
             $.each($scope.invitationList,function(index,value){
                 if(value.id==$routeParams.id){
                     $scope.invitationDetails=value;
-                }
+                 }
             });
 
             switch ($scope.invitationDetails.referral.toString()) {
@@ -129,19 +129,29 @@ adminApp.controller('CoachAddEditController',['$scope','requestHandler','Flash',
             $.each($scope.invitationList,function(index,value){
                 if(value.id==$routeParams.id){
                     $scope.invitationDetails=value;
+                   
                 }
             });
 
         });
     };
 
+    //Populate  Plan Dropdown
+    $scope.doGetPlanList=function(){
+        requestHandler.getRequest("admin/getPricingPlans/","").then(function(response){
+            $scope.pricingPlanList=response.data.PricingPlans;
+        });
+    }
+
     //Display view Individual Invitation Details By Id
     $scope.invitationCoachViewInit=function(){
+        $scope.doGetPlanList();
         $scope.doGetInvitationByID();
     };
 
 
     $scope.init= function() {
+        $scope.doGetPlanList();
        $scope.doViewInvitationList();
     };
 }]);

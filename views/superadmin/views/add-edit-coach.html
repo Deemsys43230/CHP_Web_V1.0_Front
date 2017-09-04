@@ -98,7 +98,10 @@
                                 <div> Plan Choice <span class="pull-right">:</span></div>
                             </div>
                             <div class="col-lg-8 col-md-7 col-sm-12 margin-top-10">
-                                <input class="coach-input" placeholder="Plan Choice" name="plan" ng-model="invitationDetails.planchoice" maxlength="25" required/>
+                                <select class="full-width main margin-bottom-1"  ng-model="invitationDetails.planchoice" 
+                                    ng-options="pricingPlan.id as pricingPlan.planname for pricingPlan in pricingPlanList" required>
+                                  <option value="" selected="selected">--Select--</option>
+                                </select>
                                 <span ng-show="coachDetailsForm.plan.$dirty && coachDetailsForm.plan.$invalid">
                                     <span class="error-message textarea-errormessage10" ng-show="coachDetailsForm.plan.$error.required"><span>Required.</span></span>
                                     <!-- <span class="error-message textarea-errormessage10" ng-show="coachDetailsForm.plan.$error.validateAlphaWithSpace"><span>Enter&nbsp;valid&nbsp;Data.</span></span> -->
