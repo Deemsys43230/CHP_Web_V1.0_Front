@@ -1135,19 +1135,20 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
                         // Convert both dates to milliseconds
                         var date2_ms = new Date(date2).getTime();
 
+
                         // Calculate the difference in milliseconds
                         var difference_ms = date2_ms - date1_ms;
 
-                        // Convert back to days
-                        $scope.remainingDates = Math.round(difference_ms/ONE_DAY);
+              // Convert back to days
+                        $scope.remainingDates = (difference_ms/ONE_DAY);
+                        console.log($scope.remainingDates);
                         if($scope.remainingDates<0){
                             $scope.remainingDates=0;
                             $scope.goalExpired=1;
                             var dateinitial = new Date(dateCompare).getTime();
                             var diff_ms = date2_ms - dateinitial;
                             $scope.targetDays = Math.round(diff_ms/ONE_DAY);
-
-                            var weightLogPromise=UserDashboardService.doGetAchievedWeight($scope.goalDetails.enddate);
+                           var weightLogPromise=UserDashboardService.doGetAchievedWeight($scope.goalDetails.enddate);
                             weightLogPromise.then(function(result){
                                 $scope.achievedWeight = result;
                                 var targetWeightLossOrGain=0;
@@ -1466,7 +1467,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
             var titles={};
             var endDate=selectedDate;
             var budgetdate=[];
-            requestHandler.postRequest("user/getWeightLogGraph/",{"startdate":startDate,"enddate":endDate}).then(function(response){
+            requestHandler.postRequest("user/getWeightLogGraph/",{"startdate":$scope.goalDetails.startdate,"enddate":$scope.goalDetails.enddate}).then(function(response){
                 $scope.weightlogGraph=response.data.Weight_logs;
                 var weightLogs = [];
                 $.each($scope.weightlogGraph, function(index,value) {
@@ -1477,17 +1478,16 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
                         weightLog.push(value.weight);
                         budgetdate.push(monthNames[(date[1]-1)]+' '+date[0]);
                         weightLogs.push(weightLog);
-
                     }
-                });
+                  });
                 titles.title="Goal Graph";
                 titles.name="Weight";
                 titles.suffix=" "+$scope.unit;
                 titles.yaxis="Weight (" + $scope.unit + ")";
                 titles.xaxis="Date Range";
                 $scope.drawGoalGraph(weightLogs,titles,budgetdate);
-                $scope.weightGraphValue = weightLogs;
-                $scope.weightGraph = limitToFilter($scope.weightGraphValue, 30);
+                $scope.weightGraphValue = weightLogs
+                //$scope.weightGraph = limitToFilter($scope.weightGraphValue, 30);
             }, function () {
                 errorMessage(Flash, "Please try again later!")
             });
@@ -1817,7 +1817,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
 
             }
             else if($scope.goalDetails.planType==3){
-                $scope.setGoalDetails.goalchoice="";
+                $scope.setGoalDetails.goalchoice=parseInt($scope.goalchoice);
 
                 if(document.getElementById("start1").value==''){
                     $scope.setGoalDetails.enddate = $scope.goalDetails.enddate;
@@ -1886,7 +1886,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
 
             $scope.goalType=$scope.goalDetails.planType;
             $scope.setGoalDetails.currentweight=$scope.demography.weight;
-            $scope.setGoalDetails.goalchoice=$scope.goalchoice.toString();
+            $scope.setGoalDetails.goalchoice=parseInt($scope.goalchoice);
 
             if($scope.goalType==2){
                 if($scope.setGoalDetails.goalchoice==5 && $scope.customResponse!=0){
@@ -3697,7 +3697,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
             });
         };
 
-// HistoryGraph Search Filter
+//HistoryGraph Search Filter
 
         // html filter (render text as html)
         userApp.filter('html', ['$sce', function ($sce) {
@@ -3740,6 +3740,8 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
 
         //Weight Goal Graph
         $scope.drawGoalGraph=function(data,titles,data1){
+
+
           $('#goalGraph').highcharts({
                 title: {
                     text: titles.title

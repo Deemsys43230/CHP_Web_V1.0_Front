@@ -129,7 +129,7 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
             $scope.usercoachdetails=response.data.userprofile;
 
             if($scope.usercoachdetails.experience!=null){
-            $scope.years = Math.trunc($scope.usercoachdetails.experience / 12);
+            $scope.years = Math.floor($scope.usercoachdetails.experience / 12);
             $scope.months = $scope.usercoachdetails.experience %12;
             }
 

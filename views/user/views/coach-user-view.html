@@ -84,6 +84,32 @@
                        
                         <!--Tablet responsibility-->
                     </div>
+
+                    <div class="col-lg-12 col-md-12 col-sm-12 text-center">
+                        <h3  class="relationship-text" ng-show="usercoachdetails.relationship==null"><i class="fa fa-user-o" aria-hidden="true">&nbsp;&nbsp;Unknown User</i></h3>
+                        <h3  class="relationship-text" ng-show="usercoachdetails.relationship==1"><i class="fa fa-check-circle" aria-hidden="true">&nbsp;&nbsp;Interest Sent by User to Coach </i></h3>
+                        <h3  class="relationship-text" ng-show="usercoachdetails.relationship==2"><i class="fa fa-envelope" aria-hidden="true">&nbsp;&nbsp;Coach Sent Invitation to User </i></h3>
+                        <h3  class="relationship-text" ng-show="usercoachdetails.relationship==3"><i class="fa fa-group" aria-hidden="true">&nbsp;&nbsp;Connected</i></h3>
+                        <h3  class="relationship-text" ng-show="usercoachdetails.relationship==4"><i class="fa fa-group" aria-hidden="true">&nbsp;&nbsp;Connected</i></h3>
+                        <h3  class="relationship-text" ng-show="usercoachdetails.relationship==5"><i class="fa fa-sign-out" aria-hidden="true">&nbsp;&nbsp;Disconnected </i></h3>
+                    </div>
+                    <!--Tablet responsibility-->
+                   
+                    <!--Tablet responsibility-->
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                  <div class="talk-bubble tri-right left-in">
+                     <div class="talktext wrap-all">
+                      <p style="font-weight: normal"><span style="font-size:35px;color:  #e60000">?</span>&nbsp;{{coachAdvice.description}}&nbsp;&nbsp;<span style="font-size:35px;color:  #e60000">?</span></p>
+                     </div>
+                  </div>
+                    <span ng-hide="disablereview"><a id="modal_review" ng-click="reset(reviewForm)" href="#review"  class="btn-sm btn-success pull-right margin-left-5"><i class="fa fa-plus-circle"></i> Add Reviews</a></span>
+                    <h4 class="classic-title"><span>Reviews</span></h4>
+                    <div ng-show="totalRatings!=0">
+                        <div class="col-lg-12 col-md-12 col-sm-12 no-padding">
+                            <div ng-if="reviewload">
+                                <div class="loader-style">
+                                    <div class="loader"></div>
                     <div class="col-lg-6 col-md-6 col-sm-12">
                       <div class="talk-bubble tri-right left-in">
                          <div class="talktext wrap-all">

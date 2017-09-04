@@ -178,6 +178,19 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
         requestHandler.getRequest("getUserDemography/"+id, "").then(function(response){
             $scope.demographyDeatil = response.data.demography;
 
+            // For height inches and feet calculation based on user unit preference
+                $scope.demographyDeatil.height = $scope.demographyDeatil.height.toString();
+
+                var heightarray=$scope.demographyDeatil.height.split('.');
+                var heightSplit=new Array();
+                heightSplit= heightarray;
+                $scope.demographyDeatil.heightFeet = heightSplit[0];
+                if(heightSplit[1]==undefined){
+                    $scope.demographyDeatil.heightInches= 0;
+                }else{
+                    $scope.demographyDeatil.heightInches=heightSplit[1];
+                }
+                $scope.demographyDeatil.height=$scope.demographyDeatil.height.toString();
         });
     };
 
@@ -348,8 +361,10 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
 
     //Clear all Notes for Individual Notes
     $scope.doClearAllNotes = function(userid){
-        $scope.Notes.notes ="";
-        $scope.doInsertOrUpdateNotes(userid);
+            $scope.Notes.notes ="";
+           $scope.doInsertOrUpdateNotes(userid);
+
+
     };
 
     // For remove user by coach from all groups
@@ -358,14 +373,13 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
         requestHandler.postRequest("coach/removeuser/",{"userid":userid}).then(function(response){
             $scope.Result = response.data.Response;
             if(response.data.Response == "Success"){
-               successMessage(Flash, "User Successfully Removed!");
                 $scope.doGetMyMembers();
-            };
+            }
         });
     };
 
-    //Alert for Remove user from coach
-    $scope.removeUser=function(){
+    //Alert Popup for Remove user from coach
+    $scope.doRemoveUser=function(){
         $(function(){
             $("#lean_overlay").fadeTo(1000);
             $("#modal").fadeIn(600);

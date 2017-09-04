@@ -1242,3 +1242,22 @@ userApp.directive("averageStarRating", function() {
         }
     };
 });
+
+//Course Search Filter
+userApp.filter('startsWithLetterCourse', function () {
+
+    return function (items, coursesearch) {
+        var filtered = [];
+        var letterMatch = new RegExp(coursesearch, 'i');
+        if(!items){}
+        else{
+            for (var i = 0; i < items.length; i++) {
+                var item = items[i];
+                if (letterMatch.test(item.coursename) || letterMatch.test(item.categoryname)) {
+                    filtered.push(item);
+                }
+            }
+        }
+        return filtered;
+    };
+});

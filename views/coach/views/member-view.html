@@ -1,6 +1,6 @@
 <div class="col-lg-12 col-md-12 col-sm-12 no-padding" ng-cloak class="ng-cloak" ng-init="init()">
     <!-- <div flash-message="2000" class="col-lg-4 col-md-4 col-sm-4 pull-right"></div> -->
-    <h5 class="classic-title"><a href="" class="active-tab profile-details"><i class="fa fa-user"></i>&nbsp;&nbsp;Profile</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="" class="tracking-plan"><i class="fa fa-gg"></i>&nbsp;&nbsp;Training Plans </a>|&nbsp;&nbsp;<a href="" class="medication"><i class="fa fa-medkit"></i>&nbsp;&nbsp;Medications&nbsp;<small class="badge">{{medicationList.length}}</small></a> <a href=""  class="remove-text-color pull-right" ng-show="clients.length>0" ng-click="removeUser()">Remove User</a></h5>
+    <h5 class="classic-title"><a href="" class="active-tab profile-details"><i class="fa fa-user"></i>&nbsp;&nbsp;Profile</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="" class="tracking-plan"><i class="fa fa-gg"></i>&nbsp;&nbsp;Training Plans </a>|&nbsp;&nbsp;<a href="" class="medication"><i class="fa fa-medkit"></i>&nbsp;&nbsp;Medications&nbsp;<small class="badge">{{medicationList.length}}</small></a> <a href=""  class="remove-text-color pull-right" ng-show="clients.length>0" ng-click="doRemoveUser()">Remove User</a></h5>
       
         <div ng-if="loaded">
             <div class="loader-style">
@@ -20,61 +20,61 @@
                   <div class="col-lg-6 col-md-6 col-sm-6 no-padding text-bold">
                         Gender <span class="pull-right">:</span>
                     </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="col-lg-6 col-md-6 col-sm-6  wrap-all">
                         {{coachclientdetails.gender==1?"Male":"Female"}}
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 no-padding text-bold">
                         Age <span class="pull-right">:</span>
                     </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="col-lg-6 col-md-6 col-sm-6  wrap-all">
                         {{coachclientdetails.age}}
                     </div>
                     <div class="col-md-6 col-lg-6 col-sm-6 no-padding text-bold">
                         City <span class="pull-right">:</span>
                     </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="col-lg-6 col-md-6 col-sm-6  wrap-all">
                         {{coachclientdetails.city}}
                     </div>
                     <div class="col-md-6 col-lg-6 col-sm-6 no-padding text-bold">
                         State <span class="pull-right">:</span>
                     </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="col-lg-6 col-md-6 col-sm-6  wrap-all">
                         {{coachclientdetails.state}}
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 no-padding text-bold">
                         Country <span class="pull-right">:</span>
                     </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="col-lg-6 col-md-6 col-sm-6  wrap-all">
                         {{coachclientdetails.country}}
                     </div>
                     <div class="col-md-6 col-lg-6 col-sm-6 no-padding text-bold">
                         Zip <span class="pull-right">:</span>
                     </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="col-lg-6 col-md-6 col-sm-6  wrap-all">
                         {{coachclientdetails.zipcode}}
                     </div>
                     <div class="col-md-6 col-lg-6 col-sm-6 no-padding text-bold">
                         Phone <span class="pull-right">:</span>
                     </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="col-lg-6 col-md-6 col-sm-6  wrap-all">
                         {{coachclientdetails.phone}}
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 no-padding text-bold">
                         Prefer Food <span class="pull-right">:</span>
                     </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="col-lg-6 col-md-6 col-sm-6  wrap-all">
                         {{coachclientdetails.preferfood ==1?"Indian":"Western"}}
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 no-padding text-bold">
                         Unit Preference<span class="pull-right">:</span>
                     </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="col-lg-6 col-md-6 col-sm-6  wrap-all">
                         {{coachclientdetails.unitPreference ==1?"Metric":"US"}}
                     </div>
                     <div class="col-md-6 col-lg-6 col-sm-6 no-padding text-bold">
                         About <span class="pull-right">:</span>
                     </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="col-md-6 col-lg-6 col-sm-6 wrap-all">
                         {{coachclientdetails.about}}
                     </div>
             </div>
@@ -100,7 +100,7 @@
                                 <span>{{demographyDeatil.height}}</span>
                             </span>
                             <span ng-show="coachclientdetails.unitPreference==2" >
-                                <span>{{demographyDeatil.height}}</span>                                       
+                                <span> {{demographyDeatil.heightFeet}}<sup style="color: deepskyblue">'</sup>&nbsp;{{demographyDeatil.heightInches}}<sup style="color: deepskyblue">"</sup></span>
                             </span></br/></br/>
                             <span class="text-bold">
                                 <h4>Height <span ng-show="coachclientdetails.unitPreference==1"><small>(cms)</small></span> <span ng-show="coachclientdetails.unitPreference==2"><small>(feet,inches)</small></span></h4>
@@ -130,9 +130,9 @@
                     </div>
                     <div class="col-lg-3 col-sm-3 col-md-3 text-center">
                         <div class="demo-font client-content">
-                            <span> {{demographyDeatil.targetweight}} </span><br/><br/>
+                            <span> {{demographyDeatil.targetweight==null?'NA':demographyDeatil.targetweight}} </span><br/><br/>
                             <span class="text-bold">
-                                <h5>Target Weight</h5>
+                                <h5>Target Weight &nbsp;<span ng-show="coachclientdetails.unitPreference==1"><small>(kgs)</small></span> <span ng-show="coachclientdetails.unitPreference==2"><small>(lbs)</small></span></h5>
                             </span>
                         </div>
                     </div>
@@ -140,13 +140,13 @@
                         <div class="col-md-1 col-lg-1"></div>
                         <div class="col-lg-3 col-sm-3 col-md-3 text-center">
                             <h4 class="text-bold margin-top-10">User Type</h4>
-                                <img class="margin-top-10" ng-show="demographyDeatil.obesity ==1" style="width:60px;" src="../../images/obese.png"/>
-                                <img class="margin-top-10" ng-show="demographyDeatil.diabetes == 1" style="width:60px;" src="../../images/diabetes.jpg"/>
-                                <img class="margin-top-10" ng-show="demographyDeatil.obesity == 1 && demographyDeatil.diabetes == 1" style="width:60px;" src="../../images/obese_diabetes.png"/>
-                                <img class="margin-top-10" ng-show="demographyDeatil.obesity == null && demographyDeatil.diabetes == null" style="width:60px;" src="../../images/healthy.png"/>
+                                <img class="margin-top-10" ng-show="demographyDeatil.diabetes == 1 && demographyDeatil.obesity == null" style="width:60px;" src="../../images/diabetes.jpg"/>
+                                <img class="margin-top-10" ng-show="demographyDeatil.obesity == 1 && demographyDeatil.diabetes == null" style="width:60px;" src="../../images/obese.png"/>
+                                <img class="margin-top-10" ng-show="demographyDeatil.diabetes == 1 && demographyDeatil.obesity == 1" style="width:60px;" src="../../images/obese_diabetes.png"/>
+                                <img class="margin-top-10" ng-show="demographyDeatil.diabetes == null && demographyDeatil.obesity == null" style="width:60px;" src="../../images/healthy.png"/>
 
-                            <div class="margin-top-10" ng-show="demographyDeatil.diabetes == 1">Diabetes</div>
-                            <div class="margin-top-10" ng-show="demographyDeatil.obesity == 1">Obese</div>
+                            <div class="margin-top-10" ng-show="demographyDeatil.diabetes == 1 && demographyDeatil.obesity == null">Diabetes</div>
+                            <div class="margin-top-10" ng-show="demographyDeatil.obesity == 1 && demographyDeatil.diabetes == null">Obese</div>
                             <div class="margin-top-10" ng-show="demographyDeatil.diabetes == 1 && demographyDeatil.obesity == 1">Obese & Diabetes</div>
                             <div class="margin-top-10" ng-show="demographyDeatil.diabetes == null && demographyDeatil.obesity == null">Normal</div>
                         </div>
@@ -159,25 +159,25 @@
                                 <div class="margin-top-10" ng-show="demographyDeatil.userPlanType == 2">Weight Loss</div>
                                 <div class="margin-top-10" ng-show="demographyDeatil.userPlanType == 3">Weight Gain</div>
                         </div>
-                        <div class="col-lg-3 col-sm-3 col-md-3 text-center">
+                        <div class="col-lg-4 col-sm-4 col-md-4 text-center">
                             <h4 class="text-bold margin-top-10">Activity Level</h4>
                             <img class="margin-top-10" ng-show="demographyDeatil.userActivityType == 1" style="width:60px;" src="../../images/no-exercise.png"/>
                             <img class="margin-top-10" ng-show="demographyDeatil.userActivityType == 2" style="width:60px;" src="../../images/little-no.png"/>
                             <img class="margin-top-10" ng-show="demographyDeatil.userActivityType == 3" style="width:60px;" src="../../images/moderate.png"/>
                             <img class="margin-top-10" ng-show="demographyDeatil.userActivityType == 4" style="width:60px;" src="../../images/heavy.png"/>
                             <img class="margin-top-10" ng-show="demographyDeatil.userActivityType == 5" style="width:60px;" src="../../images/very-heavy.png"/>
-                            <div class="margin-top-10" ng-show="demographyDeatil.userActivityType == 1">Little to No Excersize</div>
-                            <div class="margin-top-10" ng-show="demographyDeatil.userActivityType == 2">Little Excersize</div>
-                            <div class="margin-top-10" ng-show="demographyDeatil.userActivityType == 3">Moderate Excersize</div>
-                            <div class="margin-top-10" ng-show="demographyDeatil.userActivityType == 4">Heavy Excersize</div>
-                            <div class="margin-top-10" ng-show="demographyDeatil.userActivityType == 5">Very Heavy Excersize</div>
+                            <div class="margin-top-10" ng-show="demographyDeatil.userActivityType == 1">Little to no exercise</div>
+                            <div class="margin-top-10" ng-show="demographyDeatil.userActivityType == 2">Light Exercise&nbsp;(1-3 days per week)</div>
+                            <div class="margin-top-10" ng-show="demographyDeatil.userActivityType == 3">Moderate Exercise&nbsp;(3-5 days per week)</div>
+                            <div class="margin-top-10" ng-show="demographyDeatil.userActivityType == 4">Heavy Exercise&nbsp;(6-7 days per week)</div>
+                            <div class="margin-top-10" ng-show="demographyDeatil.userActivityType == 5">Very Heavy Exercise&nbsp;(Twice per day, extra heavy workouts)</div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-lg-12 col-md-12 col-sm-12 margin-top-10">
-            <div class="accordion-group puul-right">
+        <div class="container margin-top-10">
+            <div class="accordion-group pull-right">
                 <div id="collapseTwo" class="accordion-body collapse">
                     <div class="accordion-inner medical-content">
                         <div class="col-lg-12 col-md-12 col-sm-12 margin-top-10 margin-bottom-5 no-padding border">
@@ -239,12 +239,11 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-12 col-md-12 col-sm-12 no-padding margin-top-10 margin-bottom-5">
-                            <div class="col-lg-12 col-md-12 col-sm-12 margin-bottom-10">
+                        <div class="col-lg-12 col-md-12 col-sm-12 no-padding margin-top-10">
+                            <div class="col-lg-12 col-md-12 col-sm-12">
                                 <div class="text-center" style="font-size: 17px;">Medical Details</div>
                             </div>
-                            <div class="col-lg-12 col-md-12 col-sm-12 no-padding margin-top-10">
-                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                <div class="col-lg-6 col-md-6 col-sm-6 margin-top-10">
                                     <div class="col-lg-9 col-md-7 col-sm-8 no-padding">
                                         <h5>Blood Group <span class="pull-right">:</span></h5>
                                     </div>
@@ -259,17 +258,9 @@
                                         <span ng-show="demographyDeatil.bloodgroup==8">AB -ve</span>
                                     </div>
                                 </div>
-                                <div class="col-lg-6 col-md-6 col-sm-6 no-padding">
-                                    <div class="col-lg-9 col-md-7 col-sm-8 no-padding">
-                                        <h5>HbA<sub>1c</sub> <small>(%)</small> <span class="pull-right">:</span> </h5>
-                                    </div>
-                                    <div class="col-lg-3 col-md-5 col-sm-4">
-                                        <span> {{demographyDeatil.HbA1c==null?"N/A":demographyDeatil.HbA1c}} </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-12 col-md-12 col-sm-12 no-padding margin-top-10">
-                                <div class="col-lg-6 col-md-6 col-sm-6">
+
+
+                                <div class="col-lg-6 col-md-6 col-sm-6 margin-top-10">
                                     <div class="col-lg-9 col-md-9 col-sm-9 no-padding">
                                         <h5>Systolic Blood Pressure <small>(mmHg)</small><span class="pull-right">:</span></h5>
                                     </div>
@@ -277,22 +268,29 @@
                                         <span>{{demographyDeatil.systolicbloodpressure==null?"N/A":demographyDeatil.systolicbloodpressure}} </span>
                                     </div>
                                 </div>
-                                <div class="col-lg-6 col-md-6 col-sm-6 no-padding">
+                                <div class="col-lg-6 col-md-6 col-sm-6 margin-top-10">
                                     <div class="col-lg-9 col-md-9 col-sm-9 no-padding">
                                         <h5>Diastollic Blood Pressure <small>(mmHg)</small> <span class="pull-right">:</span></h5>
                                     </div>
-                                    <div class="col-lg-3 col-md-3 col-sm-3 padding-right-0">
+                                    <div class="col-lg-3 col-md-3 col-sm-3">
                                         <span> {{demographyDeatil.diastolicbloodpressure==null?"N/A":demographyDeatil.diastolicbloodpressure}} </span>
                                     </div>
                                 </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <div class="col-lg-12 col-md-12 col-sm-12 margin-top-10">
+                                    <hr/>
+                                </div>
                             </div>
-                            <div class="col-lg-12 col-md-12 col-sm-12 no-padding margin-top-10">
+
                                 <div class="col-lg-6 col-md-6 col-sm-6">
                                     <div class="col-lg-9 col-md-9 col-sm-9 no-padding">
                                         <h5>HDL Cholestrol <small>(mg/dL)</small> <span class="pull-right">:</span></h5>
                                     </div>
                                     <div class="col-lg-3 col-md-3 col-sm-3">
                                         <span> {{demographyDeatil.HDLcholestrol==null?"N/A":demographyDeatil.HDLcholestrol}} </span>
+                                    </div>
+                                    <div class="col-lg-12 col-md-12 col-sm-12 demo_status_coach margin-top-10">
+                                        <span>{{demographyDeatil.HDLcholestrolCategory}}</span>
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-6 no-padding">
@@ -302,9 +300,16 @@
                                     <div class="col-lg-3 col-md-3 col-sm-3">
                                         <span>{{demographyDeatil.LDLcholestrol==null?"N/A":demographyDeatil.LDLcholestrol}} </span>
                                     </div>
+                                    <div class="col-lg-12 col-md-12 col-sm-12 demo_status_coach margin-top-10">
+                                        <span>{{demographyDeatil.LDLcholestrolCategory}}</span>
+                                    </div>
+                                </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <div class="col-lg-12 col-md-12 col-sm-12 margin-top-10">
+                                    <hr/>
                                 </div>
                             </div>
-                            <div class="col-lg-12 col-md-12 col-sm-12 no-padding margin-top-10">
+
                                 <div class="col-lg-6 col-md-6 col-sm-6">
                                     <div class="col-lg-9 col-md-9 col-sm-9 no-padding">
                                         <h5>Triglycerides <small>(mg/dL)</small> <span class="pull-right">:</span></h5>
@@ -312,18 +317,36 @@
                                     <div class="col-lg-3 col-md-3 col-sm-3">
                                         <span> {{demographyDeatil.triglycerides==null?"N/A":demographyDeatil.triglycerides}} </span>
                                     </div>
+                                    <div class="col-lg-12 col-md-12 col-sm-12 demo_status_coach margin-top-10">
+                                        <span>{{demographyDeatil.triglyceridesCategory}}</span>
+                                    </div>
                                 </div>
-                                <div class="col-lg-6 col-md-6 col-sm-6 no-padding">
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <div class="col-lg-12 col-md-12 col-sm-12 margin-top-10">
+                                    <hr/>
+                                </div>
+                            </div>
+
+
+
+                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                <div class="col-lg-9 col-md-9 col-sm-9 no-padding">
+                                    <h5>HbA<sub>1c</sub> <small>(%)</small> <span class="pull-right">:</span> </h5>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-3">
+                                    <span> {{demographyDeatil.HbA1c==null?"N/A":demographyDeatil.HbA1c}} </span>
+                                </div>
+                            </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6">
                                     <div class="col-lg-9 col-md-9 col-sm-9 no-padding">
                                         <h5>Random Blood Glucose <small>(mg/dL)</small> <span class="pull-right">:</span> </h5>
                                     </div>
                                     <div class="col-lg-3 col-md-3 col-sm-3">
                                         <span> {{demographyDeatil.randombloodglucose==null?"N/A":demographyDeatil.randombloodglucose}} </span>
                                     </div>
+
                                 </div>
-                            </div>
-                            <div class="col-lg-12 col-md-12 col-sm-12 no-padding margin-top-10">
-                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                <div class="col-lg-6 col-md-6 col-sm-6 margin-top-10">
                                     <div class="col-lg-9 col-md-9 col-sm-9 no-padding">
                                         <h5>Fasting Blood Glucose <small>(mg/dL)</small> <span class="pull-right">:</span></h5>
                                     </div>
@@ -331,16 +354,18 @@
                                         <span> {{demographyDeatil.fastingbloodglucose==null?"N/A":demographyDeatil.fastingbloodglucose}} </span>
                                     </div>
                                 </div>
-                                <div class="col-lg-6 col-md-6 col-sm-6 no-padding">
+                                <div class="col-lg-6 col-md-6 col-sm-6 margin-top-10">
                                     <div class="col-lg-9 col-md-9 col-sm-9 no-padding">
                                         <h5>Postprandial Blood Glucose <small>(mg/dL)</small> <span class="pull-right">:</span></h5>
                                     </div>
                                     <div class="col-lg-3 col-md-3 col-sm-3">
                                         <span> {{demographyDeatil.postprandialbloodglucose==null?"N/A":demographyDeatil.postprandialbloodglucose}}</span>
                                     </div>
-                                </div>                                            
+                                </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 demo_status_coach margin-top-10">
+                                <span>{{demographyDeatil.diabetesCategory}}</span>
                             </div>
-                        </div>
+                       </div>
                     </div>
                 </div>
             </div>
@@ -630,7 +655,7 @@
                     <div class="col-lg-8 col-md-7 col-sm-7">
                         <div class="form-group">
                             <div class="col-lg-4 col-md-5 col-sm-12 margin-top-10">
-                                <div> Sunbscription Name <span class="pull-right">:</span></div>
+                                <div> Subscription Name <span class="pull-right">:</span></div>
                             </div>
                             <div class="col-lg-8 col-md-7 col-sm-12 margin-top-10">
                                 <input class="coach-input" placeholder="Sunbscription Name" name="firstname" ng-model="planDetails.subscriptionname" maxlength="25" required/>
@@ -728,7 +753,7 @@
                             </div>
                         </div>
                         <div class="col-lg-12 col-md-12 col-sm-12 text-center margin-top-50">
-                            <a href="" class="price-button btn"  ng-disabled="isClean() || coachDetailsForm.$invalid">Submit</a>
+                            <a href="" class="price-button btn" ng-click="doInsertTrainingPlan()" ng-disabled="maxAmount">Submit</a>
                         </div>
                         <div class="col-lg-12 col-md-12 col-sm-12 text-center margin-top-50"></div>
                     </div>
@@ -858,30 +883,6 @@
 <script type="text/javascript">
     // for modal popup
 $(".modal").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
-
-    //for training start date and end date
-            $(function () {
-                $("#start-date").datepicker({
-                    changeMonth: true, changeYear: true,dateFormat: 'dd-mm-yy',
-                    yearRange: "-26:+20",
-                    //numberOfMonths: 2,
-                    onSelect: function (selected) {
-                        var dt = new Date(selected);
-                        dt.setDate(dt.getDate() + 1);
-                        $("#end-date").datepicker("option", "minDate", dt);
-                    }
-                });
-                $("#end-date").datepicker({
-                    //numberOfMonths: 2,
-                    changeMonth: true, changeYear: true,dateFormat: 'dd-mm-yy',
-                    yearRange: "-26:+20",
-                    onSelect: function (selected) {
-                        var dt = new Date(selected);
-                           dt.setDate(dt.getDate() - 1);
-                        $("#start-date").datepicker("option", "maxDate", dt);
-                    }
-                });
-            });
 </script>
 
 
@@ -1317,6 +1318,7 @@ $(document).ready(function(){
            $(".tracking-plan-viewall-div").hide();
            $(".tracking-plan-view-div").hide();
            $(".tracking-plan-add-div").show();
+
        });
 
         $(".tracking-plan-viewall").click(function(){

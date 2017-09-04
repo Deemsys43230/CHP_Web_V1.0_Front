@@ -5,19 +5,29 @@
     <div id="w" class="clearfix">
         <div id="demography-content" class="height-auto" ng-init="mycourseinit()">
             <div class="col-lg-12 col-md-12 col-sm-12">
+                <div ng-show="myCourseList.length!=0">
+                    <div class="pull-right" id="hidden-search">
+                        <a href="" onclick="return false;" class="show-list-search search_button margin-left-5" style="margin-right: 10px"><i class="fa fa-search"></i></a>
+                        <div class="search-list-form override">
+                            <form autocomplete="off" class="searchform" novalidate>
+                                <input type="text" ng-model="coursesearch" placeholder="Search here...">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Search -->
                 <div class="margin-rl">
                     <div flash-message="2000" class="col-lg-3 col-md-3 col-sm-3 no-padding pull-right"></div>
                     <h5 class="classic-title"><span><a href="#my-courses"><i class="fa fa-male"></i>&nbsp;&nbsp;MY COURSES</a></span>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#courses"><i class="fa fa-search"></i>&nbsp;&nbsp;COURSE SEARCH</a></h5>
                 </div>
             </div>
-
             <div class="col-lg-12 col-md-12 col-sm-12 margin-bottom-10">
                 <div ng-if="loaded">
                     <div class="loader-style">
                         <div class="loader"></div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-4 col-sm-4 no-padding" ng-repeat="mycourses in myCourseList" ng-show="!myCourseList.length==0">
+                <div class="col-lg-4 col-md-4 col-sm-4 no-padding" ng-repeat="mycourses in mycoursefilter=(myCourseList | startsWithLetterCourse:coursesearch)" ng-show="!myCourseList.length==0">
                     <a href="#course-detail/{{mycourses.courseid}}">
                         <div class="dashboard arrange">
                             <div class="course-grid-user">
@@ -39,7 +49,7 @@
                         </div>
                     </a>
                 </div>
-                <div class="margin-top-50" ng-show="myCourseList.length==0">
+                <div class="margin-top-50" ng-show="myCourseList.length==0 || mycoursefilter.length==0">
                     <div class="col-lg-6 col-md-6 col-sm-6">
                         <img class="margin-top-20 pull-right" src="../../images/no-courses.png" width="250" height="167"></div>
                     <div class="col-lg-6 col-md-6 col-sm-6">

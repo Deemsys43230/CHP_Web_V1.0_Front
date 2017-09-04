@@ -9031,6 +9031,11 @@ a:hover, a:visited, a:link, a:active
     font-size: 17px;
     font-style: italic
 }
+.demo_status_coach{
+    color: #f8ba01;
+    font-size: 14px;
+    font-style: italic
+}
 .height-auto{
     height: auto !important;
     min-height: 500px !important;
@@ -17196,7 +17201,9 @@ select.date:focus {
     font-weight: 600;
 }
 .medical-content {
-    height: 370px;
+   min-height: 520px;
+    height: auto;
+    /*min-height: 500px;*/
     -webkit-box-shadow: inset 0px 0px 3px rgba(0,0,0,0.3);
     -moz-box-shadow: inset 0px 0px 3px rgba(0,0,0,0.3);
     box-shadow: inset 0px 0px 3px rgba(0,0,0,0.3);
@@ -17215,7 +17222,7 @@ select.date:focus {
 .sticky-notes{
 
     float: left;
-    height: 250px !important;
+    height: 180px !important;
     font-size: 14px;
     background: #fff9de;
     color: #333;
