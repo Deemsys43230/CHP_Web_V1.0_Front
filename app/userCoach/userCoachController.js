@@ -234,6 +234,7 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
             $scope.chat={"message":""};
             $scope.unreadChatMessageCount=0;
             $.each($scope.chatMessages,function(index,value){
+                value.selectedChat=0;
                 if(value.status==0 && value.sentby==2){
                     $scope.unreadChatMessageCount+=1;
                     $scope.showMessageCount=true;
@@ -253,6 +254,36 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
         requestHandler.postRequest("/sendMessage/",$scope.getSendMessageParam).then(function(response){
             $scope.doGetChatMessage($scope.currentChatTargetId);
         });
+    };
+
+    //Do Send Chat Message
+    $scope.doDeleteChatMessage=function(){
+        $scope.deleteChatParam={"messageids":$scope.deleteChatLogId};
+        requestHandler.postRequest("/deleteMessage/",$scope.deleteChatParam).then(function(response){
+            $scope.doGetChatMessage($scope.currentChatTargetId);
+        });
+       //Reset Array
+       $scope.deletingChatCount=0;
+       $scope.deleteChatLogId=[];
+    };
+
+    //Do Select Chat
+    $scope.doSelectChat=function(chatMessage){
+        if(chatMessage.selectedChat==0)
+            chatMessage.selectedChat=1;
+        else
+            chatMessage.selectedChat=0;
+        //Reset array
+        $scope.deletingChatCount=0;
+        $scope.deleteChatLogId=[];
+        $.each($scope.chatMessages,function(index,value){
+            if(value.selectedChat==1){
+                $scope.deleteChatLogId.push(value.logid);
+                $scope.deletingChatCount+=1;
+            }             
+        });
+        
+
     };
 
     $scope.subscribeButtonStatus=false;

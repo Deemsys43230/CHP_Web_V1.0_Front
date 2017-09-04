@@ -253,6 +253,7 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
     $scope.doGetChatMessage=function(id){
         $scope.currentChatTargetId=id;
         $scope.getMessageParam={"targetid":id,"offset":0};
+
         requestHandler.postRequest("/readMessage/",$scope.getMessageParam).then(function(response){
             $scope.chatMessages=response.data.chats;
             if(response.data.chats.length!=0){
@@ -266,17 +267,21 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
             $scope.chat={"message":""};
 
             $scope.unreadChatMessageCount=0;
+
+            var newMessageFound=0;
+            $scope.showMessageCount=false;
             $.each($scope.chatMessages,function(index,value){
+                value.selectedChat=0;
+                value.firstNewMessage=0;
                 if(value.status==0 && value.sentby==3){
                     $scope.unreadChatMessageCount+=1;
                     $scope.showMessageCount=true;
+                    if(newMessageFound==0){
+                        value.firstNewMessage=1;
+                        newMessageFound=1;
+                    }
                 }
-                else{
-                     $scope.showMessageCount=false;
-                }
-
             });
-            setTimeout(function(){ $('.msg_container_base').scrollTop($('.msg_container_base')[0].scrollHeight); }, 500);
         });
     };
 
@@ -287,6 +292,35 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
             $scope.doGetChatMessage($scope.currentChatTargetId);
         });
        
+    };
+    //Do Send Chat Message
+    $scope.doDeleteChatMessage=function(){
+        $scope.deleteChatParam={"messageids":$scope.deleteChatLogId};
+        requestHandler.postRequest("/deleteMessage/",$scope.deleteChatParam).then(function(response){
+            $scope.doGetChatMessage($scope.currentChatTargetId);
+        });
+       //Reset Array
+       $scope.deletingChatCount=0;
+       $scope.deleteChatLogId=[];
+    };
+
+    //Do Select Chat
+    $scope.doSelectChat=function(chatMessage){
+        if(chatMessage.selectedChat==0)
+            chatMessage.selectedChat=1;
+        else
+            chatMessage.selectedChat=0;
+        //Reset array
+        $scope.deletingChatCount=0;
+        $scope.deleteChatLogId=[];
+        $.each($scope.chatMessages,function(index,value){
+            if(value.selectedChat==1){
+                $scope.deleteChatLogId.push(value.logid);
+                $scope.deletingChatCount+=1;
+            }             
+        });
+        
+
     };
 
     // Notes for User Written by Coach reference
