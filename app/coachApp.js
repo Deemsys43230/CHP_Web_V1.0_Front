@@ -340,6 +340,7 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'coachApp',
                             files:[
+                                '../../css/custom-inputs.css',
                                 '../../plugin/popup/style.css',
                                 '../../css/ngPercentageCircle.css',
                                 '../../app/userDashboard/ngPercentageCircle.js',

@@ -23,71 +23,71 @@
 </script>
 <div class="page-banner" ng-cloak class="ng-cloak">
     <div class="container">
-        <div class="row">
-            <div class="col-lg-12 col-md-12 col-sm-12 min-height-450">
-                <span><a href="#coach-meal-plans" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back</a></span>
-                <div flash-message="2000" class="col-md-4 pull-right no-padding"></div>
-                <h4 class="classic-title"><span>My Plans</span></h4>
-                <div class="row margin-top-10 margin-bottom-10">
-                    <div ng-if="loaded">
-                        <div class="loader-style">
-                            <div class="loader"></div>
+        <div class="row min-height-450" ng-init="plansViewInit()">
+        <div class="col-md-12 col-md-12 col-sm-12">
+            <span><a href="#coach-meal-plans" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back</a></span>
+            <div flash-message="2000" class="col-md-4 pull-right no-padding"></div>
+            <h4 class="classic-title"><span>My Plans</span></h4>
+        </div>
+            
+        <div class="col-md-12 col-md-12 col-sm-12 margin-top-10 margin-bottom-10">    
+            <div ng-if="loaded">
+                <div class="loader-style">
+                    <div class="loader"></div>
+                </div>
+            </div>
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr class="warning">
+                            <th colspan="6"><h2 class="text-center"><strong>{{plandetail.description}}</strong></h2></th>
+                        </tr>
+                    </thead>
+                <tr>
+                    <th class="col-md-1 text-center" style="margin-top:15px"><strong>Plans</strong></th>
+                    <th class="col-md-2 text-center"><strong>Breakfast</strong></th>
+                    <th class="col-md-2 text-center"><strong>Brunch</strong></th>
+                    <th class="col-md-2 text-center"><strong>Lunch</strong></th>
+                    <th class="col-md-2 text-center"><strong>Snacks</strong></th>
+                    <th class="col-md-2 text-center"><strong>Dinner</strong></th>
+                </tr>
+                <tr ng-repeat="mealPlanDetail in mealPlanDetailList" ng-init="$last ? doIntializeLeanModal() : null">
+                    <td class="col-md-1 food-plans text-center align-bottom">{{mealPlanDetail.day}}</td>
+                    <td class="food-plans">                           
+                        <!--Breakfast-->
+                        <div class="food" ng-repeat="foodItem in mealPlanDetail.foods[0].foodItems">
+                            {{foodItem.foodname}}<i class="fa fa-times-circle" ng-click="doDeleteFoodItemFromPlan(foodItem.id);"></i>
                         </div>
-                    </div>
-                    <table class="table table-bordered table-striped">
-                        <thead>
-                            <tr class="warning">
-                                <th colspan="6"><h2 class="text-center"><strong>{{plandetail.description}}</strong></h2></th>
-                            </tr>
-                        </thead>
-                    <tr>
-                        <th class="col-md-1 text-center" style="margin-top:15px"><strong>Plans</strong></th>
-                        <th class="col-md-2 text-center"><strong>Breakfast</strong></th>
-                        <th class="col-md-2 text-center"><strong>Brunch</strong></th>
-                        <th class="col-md-2 text-center"><strong>Lunch</strong></th>
-                        <th class="col-md-2 text-center"><strong>Snacks</strong></th>
-                        <th class="col-md-2 text-center"><strong>Dinner</strong></th>
-                    </tr>
-                    <tr ng-repeat="mealPlanDetail in mealPlanDetailList">
-                        <td class="col-md-1 food-plans text-center align-bottom">{{mealPlanDetail.day}}</td>
-                        <td class="food-plans">                           
-                            <!--Breakfast-->
-                            <div class="food" ng-repeat="foodItem in mealPlanDetail.foods[0].foodItems">
-                                {{foodItem.foodname}}<i class="fa fa-times-circle" ng-click="doDeleteFoodItemFromPlan(foodItem.id);"></i>
-                            </div>
-                            <div><a href="" class="food-plan-add-food text-bottom" ng-click="doCoachAddFood(mealPlanDetail.dayId,mealPlanDetail.foods[0].sessionId)">Add Food</a></div>
-                        </td>
-                        <td class="food-plans">                           
-                             <!--Brunch-->
-                             <div class="food" ng-repeat="foodItem in mealPlanDetail.foods[1].foodItems">
-                                {{foodItem.foodname}}<i class="fa fa-times-circle" ng-click="doDeleteFoodItemFromPlan(foodItem.id);"></i>
-                            </div>
-                            <div><a href="" class="food-plan-add-food text-bottom" ng-click="doCoachAddFood(mealPlanDetail.dayId,mealPlanDetail.foods[1].sessionId)">Add Food</a></div>
-                        </td>
-                        <td class="food-plans">                           
-                            <!--Lunch-->
-                            <div class="food" ng-repeat="foodItem in mealPlanDetail.foods[2].foodItems">
-                                {{foodItem.foodname}}<i class="fa fa-times-circle" ng-click="doDeleteFoodItemFromPlan(foodItem.id);"></i>
-                            </div>
-                            <div><a href="" class="food-plan-add-food text-bottom" ng-click="doCoachAddFood(mealPlanDetail.dayId,mealPlanDetail.foods[2].sessionId)">Add Food</a></div>
-                        </td>
-                        <td class="food-plans">                            
-                            <!--Snacks-->
-                            <div class="food" ng-repeat="foodItem in mealPlanDetail.foods[3].foodItems">
-                                {{foodItem.foodname}}<i class="fa fa-times-circle" ng-click="doDeleteFoodItemFromPlan(foodItem.id);"></i>
-                            </div>
-                            <div><a href="" class="food-plan-add-food text-bottom" ng-click="doCoachAddFood(mealPlanDetail.dayId,mealPlanDetail.foods[3].sessionId)">Add Food</a></div>
-                        </td>
-                        <td class="food-plans">                            
-                             <!--Dinner-->
-                             <div class="food" ng-repeat="foodItem in mealPlanDetail.foods[4].foodItems">
-                                {{foodItem.foodname}}<i class="fa fa-times-circle" ng-click="doDeleteFoodItemFromPlan(foodItem.id);"></i>
-                            </div>
-                            <div><a href="" class="food-plan-add-food text-bottom" ng-click="doCoachAddFood(mealPlanDetail.dayId,mealPlanDetail.foods[4].sessionId)">Add Food</a></div>
-                        </td>
-                    </tr>
-                   
-                    </tr>
+                        <div><a id="modal_trigger_food" href="#modal-add-food" class="food-plan-add-food text-bottom" ng-click="doCoachAddFood(mealPlanDetail.dayId,mealPlanDetail.foods[0].sessionId);">Add Food</a></div>
+                    </td>
+                    <td class="food-plans">                           
+                         <!--Brunch-->
+                         <div class="food" ng-repeat="foodItem in mealPlanDetail.foods[1].foodItems">
+                            {{foodItem.foodname}}<i class="fa fa-times-circle" ng-click="doDeleteFoodItemFromPlan(foodItem.id);"></i>
+                        </div>
+                        <div><a id="modal_trigger_food" href="#modal-add-food" class="food-plan-add-food text-bottom" ng-click="doCoachAddFood(mealPlanDetail.dayId,mealPlanDetail.foods[1].sessionId);">Add Food</a></div>
+                    </td>
+                    <td class="food-plans">                           
+                        <!--Lunch-->
+                        <div class="food" ng-repeat="foodItem in mealPlanDetail.foods[2].foodItems">
+                            {{foodItem.foodname}}<i class="fa fa-times-circle" ng-click="doDeleteFoodItemFromPlan(foodItem.id);"></i>
+                        </div>
+                        <div><a id="modal_trigger_food" href="#modal-add-food" class="food-plan-add-food text-bottom" ng-click="doCoachAddFood(mealPlanDetail.dayId,mealPlanDetail.foods[2].sessionId);">Add Food</a></div>
+                    </td>
+                    <td class="food-plans">                            
+                        <!--Snacks-->
+                        <div class="food" ng-repeat="foodItem in mealPlanDetail.foods[3].foodItems">
+                            {{foodItem.foodname}}<i class="fa fa-times-circle" ng-click="doDeleteFoodItemFromPlan(foodItem.id);"></i>
+                        </div>
+                        <div><a id="modal_trigger_food" href="#modal-add-food" class="food-plan-add-food text-bottom" ng-click="doCoachAddFood(mealPlanDetail.dayId,mealPlanDetail.foods[3].sessionId);">Add Food</a></div>
+                    </td>
+                    <td class="food-plans">                            
+                         <!--Dinner-->
+                         <div class="food" ng-repeat="foodItem in mealPlanDetail.foods[4].foodItems">
+                            {{foodItem.foodname}}<i class="fa fa-times-circle" ng-click="doDeleteFoodItemFromPlan(foodItem.id);"></i>
+                        </div>
+                        <div><a id="modal_trigger_food" href="#modal-add-food" class="food-plan-add-food text-bottom" ng-click="doCoachAddFood(mealPlanDetail.dayId,mealPlanDetail.foods[4].sessionId);">Add Food</a></div>
+                    </td>
+                </tr>
 
                 </table>
                 </div>
@@ -97,7 +97,7 @@
 </div>
 <!-- End Page Banner -->
 <!-- User Add Food-->
-<div id="add-food-modal" class="popupContainer-width" style="display:none;">
+<div id="modal-add-food" class="popupContainer-width" style="display:none;">
     <div class="center-block">
         <header class="popupHeader width-100">
             <span class="header_title">{{title}}</span>
@@ -133,8 +133,8 @@
                     </div>
                     <div class="col-lg-7 col-md-7 col-sm-7">
                         <form name="FoodAddForm" novalidate>
-                        <input type="hidden" value="{{planDay}}" ng-model="userFood.day"/>   
-                        <input type="text" value="{{foodSessionId}}" ng-model="userFood.foodsessionid" /> 
+                        <input type="hidden" ng-model="userFood.day"/>   
+                        <input type="hidden" ng-model="userFood.foodsessionid" /> 
                         <div class="col-lg-12 col-md-12 col-sm-12 no-padding">
                         <h5 class="margin-top-10">Select Measure:</h5>
                             <select name="measure" ng-model="userFood.measure" ng-options="measure.measurename for measure in userSelectedFoodDetails.measure track by measure.measureid" ng-change="doCalculateCalories()" required>
@@ -143,13 +143,25 @@
                              <span ng-show="FoodAddForm.measure.$dirty&&FoodAddForm.measure.$invalid">
                                      <span class="error-message" ng-show="FoodAddForm.measure.$error.required"><span>Required.</span></span>
                              </span>
-                        <h5 class="margin-top-10">Value </h5>
-                        <input type="text"  ng-disabled="!userFood.measure" name="servings"  maxlength="6" ng-model="userFood.servings" ng-change="doCalculateCalories();maxFoodValueCheck(userFood.servings)" onkeypress="return validateFloatKeyPress1(this,event);"  required validate-zero >
-                            <span class="error-message" ng-show="!FoodAddForm.servings.$error.required&&maxfoodvalue"><span>Please&nbsp;Enter&nbsp;Valid&nbsp;Value.</span></span>
-                            <span ng-show="FoodAddForm.servings.$dirty&&FoodAddForm.servings.$invalid">
-                               <span class="error-message" ng-show="FoodAddForm.servings.$error.required"><span>Required.</span></span>
-                               <span class="error-message" ng-show="!FoodAddForm.servings.$error.required&&FoodAddForm.servings.$error.validateZero"><span>Invalid&nbsp;data.</span></span>
+                        <h5 class="margin-top-10">Value:</h5>
+                        <input type="text"  ng-disabled="!userFood.measure" name="measurecount"  maxlength="6" ng-model="userFood.measurecount" ng-change="doCalculateCalories();maxFoodValueCheck(userFood.measurecount)" onkeypress="return validateFloatKeyPress1(this,event);"  required validate-zero>
+                            <span class="error-message" ng-show="!FoodAddForm.measurecount.$error.required&&maxfoodvalue"><span>Please&nbsp;Enter&nbsp;Valid&nbsp;Value.</span></span>
+                            <span ng-show="FoodAddForm.measurecount.$dirty&&FoodAddForm.measurecount.$invalid">
+                               <span class="error-message" ng-show="FoodAddForm.measurecount.$error.required"><span>Required.</span></span>
+                               <span class="error-message" ng-show="!FoodAddForm.measurecount.$error.required&&FoodAddForm.measurecount.$error.validateZero"><span>Invalid&nbsp;data.</span></span>
                             </span>
+                        <!-- <div class="col-lg-12 col-md-12 col-sm-12 margin-top-10 no-padding">  
+                            <h5>Is&nbsp;Optional?</h5>
+                            <div class="col-lg-4 col-md-4 col-sm-4 text-center no-padding">
+                                <input id="yes" type="radio" ng-model="userFood.isoptional" value="1">
+                                  <label for="yes">Yes</label>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-4 no-padding text-center">
+                                <input id="no" type="radio" ng-model="userFood.isoptional" value="0">
+                                  <label for="no">No</label>
+                            </div> 
+                        </div> -->
+                         
                          </div>
                         </form>
                     </div>
@@ -189,10 +201,7 @@
     </div>
 </div>
 
-<script type="text/javascript" src="../../js/script.js"></script>
-<script>
-    $("#add-food-modal").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
-</script>
 
+<script type="text/javascript" src="../../js/script.js"></script>
 
 
