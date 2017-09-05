@@ -6,9 +6,9 @@ coachApp.controller('CoachDashboardController',['$scope','requestHandler','Flash
     $scope.doGetCoachDashboardCount=function(){
         requestHandler.getRequest("getStatistics/","").then(function(response){
             $scope.coachCountList=response.data.Stats;
-            $scope.myMemberCount = $scope.coachCountList.subscriptioncount;
+            $scope.myMemberCount = $scope.coachCountList.membercount;
             $scope.myCourseCount = $scope.coachCountList.publishedcourses;
-            $scope.myPayCount = $scope.coachCountList.totalincome
+            $scope.myPayCount = $scope.coachCountList.totalincome;
 
         });
     };
