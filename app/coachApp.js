@@ -141,9 +141,54 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 'https://checkout.razorpay.com/v1/checkout.js'
                             ]
                         })
+                    }],
+                    check:["$location","$rootScope","requestHandler",function($location,$rootScope,requestHandler,$scope){
+                        requestHandler.getRequest("coach/isSubscriptionActive/","").then(function(response){
+                            if(response.data.isActive == 0){
+                                $rootScope.isSubscriptionActive=true;
+                            }
+                            else{
+                                $rootScope.isSubscriptionActive=false;
+                                $location.path('coach-subscription-history');
+                            }
+                        });
                     }]
                 },
                 controller:'SubscriptionController'
+            }).
+            when('/change-subscription', {
+                templateUrl: 'views/coach-subscription-plan.html',
+                resolve: {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'coachApp',
+                            files:[
+                                '../../plugin/popup/style.css',
+                                '../../angular/angular-utils-pagination/dirPagination.js',
+                                '../../app/coachMembers/subscriptionController.js',
+                                'https://checkout.razorpay.com/v1/checkout.js'
+                            ]
+                        })
+                    }]
+                },
+                controller:'SubscriptionController'
+            }).
+            when('/coach-subscription-history', {
+                templateUrl: 'views/coach-my-subscription-plan.html',
+                resolve: {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'coachApp',
+                            files:[
+                                '../../plugin/popup/style.css',
+                                '../../angular/angular-utils-pagination/dirPagination.js',
+                                '../../app/coachMembers/mySubscriptionController.js',
+                                'https://checkout.razorpay.com/v1/checkout.js'
+                            ]
+                        })
+                    }]
+                },
+                controller:'MySubscriptionController'
             }).
             when('/subscription-razor-payments/:payid', {
                 templateUrl: 'views/payment-success.html',
@@ -193,7 +238,7 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                             ]
                         })
                     }],
-                     check:["$location","$rootScope","requestHandler",function($location,$rootScope,requestHandler){
+                    check:["$location","$rootScope","requestHandler",function($location,$rootScope,requestHandler){
                          requestHandler.getRequest("/coach/isSubscriptionActive/","").then(function(response){
                             if(response.data.isActive==1){
                                 $rootScope.isSubscriptionActive=true;
@@ -224,22 +269,6 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'CoachInvitationController'
             }).
-           /* when('/member-view/:id', {
-                templateUrl: 'views/member-view.html',
-                resolve: {
-                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
-                        return $ocLazyLoad.load({
-                            name:'coachApp',
-                            files:[
-                                '../../plugin/popup/style.css',
-                                '../../angular/angular-utils-pagination/dirPagination.js',
-                                '../../app/coachMembers/coachMembersController.js'
-                            ]
-                        })
-                    }]
-                },
-                controller:'MembersViewController'
-            }).*/
             when('/forums', {
                 templateUrl: '../user/views/forums.html',
                 resolve: {

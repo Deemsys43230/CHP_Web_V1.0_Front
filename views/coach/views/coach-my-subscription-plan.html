@@ -1,0 +1,94 @@
+<!-- Start page Banner -->
+<div class="page-banner" ng-cloak class="ng-cloak">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-lg-12 col-sm-12">
+
+                <h4 class="classic-title"><span>My Subscription Plans</span>
+                </h4>
+            </div>
+            <div ng-if="viewload">
+                <div class="loader-style">
+                    <div class="loader"></div>
+                </div>
+            </div>
+            
+            <div class="col-md-12 margin-top-10">
+                <div class="margin-bottom-10 pull-right">
+                    <a type="button" href="#change-subscription" class="btn btn-md btn-success">Change Plan</a>
+                </div>
+                <table class="margin-top-10 table table-striped table-bordered ">
+                    <tbody>
+                        <tr>
+                            <td class="col-md-3">Plan Name</td>
+                            <td class="col-md-3">{{coachActivePlan.planname}}</td>
+                            <td class="col-md-3">Plan Price / Currency Type</td>
+                            <td class="col-md-3">{{coachActivePlan.planprice}} / {{coachActivePlan.currencytype}}</td>
+                        </tr>
+                        <tr>
+                            <td>Start Date</td>
+                            <td>{{coachActivePlan.startdate}}</td>
+                            <td>End Date</td>
+                            <td>{{coachActivePlan.enddate}}</td>
+                        </tr>
+                        <tr>
+                            <td>Discount</td>
+                            <td>{{coachActivePlan.discount}}</td>
+                            <td>Total Price</td>
+                            <td>{{coachActivePlan.discountprice}}</td>
+                        </tr>
+                        <tr>
+                            <td>Buffer Date</td>
+                            <td>{{coachActivePlan.bufferdate}}</td>
+                            <td>Clients Count</td>
+                            <td>{{coachActivePlan.clientscount}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <h5 class="classic-title"><span class="sub-title"><strong>Subscription History</strong></span></h5>
+                <div ng-if="loaded">
+                    <div class="loader-style">
+                        <div class="loader"></div>
+                    </div>
+                </div>
+                <table class="table table-striped table-bordered margin-top-20">
+                    <thead>
+                        <tr class="warning">
+                            <th class="col-md-2">Name</th>
+                            <th class="col-md-2">Currency Type</th>
+                            <th class="col-md-1">Price</th>
+                            <th class="col-md-1">Discount</th>
+                            <th class="col-md-1">Total Price</th>
+                            <th class="col-md-1">Start Date</th>
+                            <th class="col-md-1">End Date</th>
+                            <th class="col-md-1">Buffer Date</th>
+                            <th class="col-md-1">Clients Count</th>
+                        </tr>
+                    </thead>
+
+                    <tbody >
+                        <tr dir-paginate="subscriptionHistory in subscriptionPlanHistoryFilter = (subscriptionPlanHistory | itemsPerPage: 9)" ng-show="subscriptionPlanHistory.length!=0">
+                            <td>{{subscriptionHistory.planname}}</td>
+                            <td>{{subscriptionHistory.currencytype}}</td>
+                            <td>{{subscriptionHistory.planprice}}</td>
+                            <td>{{subscriptionHistory.discount}}</td>
+                            <td>{{subscriptionHistory.discountprice}}</td>
+                            <td>{{subscriptionHistory.startdate}}</td>
+                            <td>{{subscriptionHistory.enddate}}</td>
+                            <td>{{subscriptionHistory.bufferdate}}</td>
+                            <td>{{subscriptionHistory.clientscount}}</td>
+                            
+                        </tr>
+                        <tr ng-show="subscriptionPlanHistory.length==0 || !subscriptionPlanHistoryFilter.length">
+                            <td colspan="8" class="text-center">No Records Found !!!</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <!-- Start Pagination -->
+                <dir-pagination-controls ng-show="paginationLoad" boundary-links="true"> </dir-pagination-controls>
+                <!-- End Pagination -->
+            </div>
+            
+        </div>
