@@ -17582,3 +17582,10 @@ div.foodvalues{
     opacity: 0.4;
     background-color: #ecc964;
 }
+
+.current-subscription-status{
+    position: absolute;
+    right: -3px;
+    top:-4px;
+    z-index: 20;
+}
