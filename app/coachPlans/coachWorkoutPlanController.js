@@ -34,176 +34,164 @@ $scope.init();
 
 coachApp.controller('ViewCoachWorkoutPlanController',['$scope','requestHandler','Flash','$routeParams','UserDashboardService','roundProgressService',function($scope,requestHandler,Flash,$routeParams,UserDashboardService,roundProgressService) {
 
-$scope.doViewCoachPlans=function(){
+$scope.doviewCoachWorkoutPlans=function(){
   $scope.coachPlanId= $routeParams.id;
-         requestHandler.getRequest("coach/plandetail/"+$scope.coachPlanId+"/", "").then(function(response){
-            $scope.plan= response.data.plan;
-            //First We need to group up days
-            $scope.plandetail=response.data.plan.plandetail;
-           
-            //Initialize
-            $scope.mealPlanDetailList=[];
+  requestHandler.getRequest("coach/plandetail/"+$scope.coachPlanId+"/", "").then(function(response){
+      $scope.plan= response.data.plan;
 
-            //create array of days
-            for(var i=1;i<=$scope.plandetail.plandays;i++)
-            {
-              $scope.mealPlanDetailList.push(
-                  {
-                    "day":"Day "+i,
-                    "dayId":i,
-                    "foods":[
-                              {"sessionId":1,"sessionName":"BreakFast","foodItems":[]},
-                              {"sessionId":2,"sessionName":"Brunch","foodItems":[]},
-                              {"sessionId":3,"sessionName":"Lunch","foodItems":[]},
-                              {"sessionId":4,"sessionName":"Snacks","foodItems":[]},
-                              {"sessionId":5,"sessionName":"Dinner","foodItems":[]},  
-                            ]
-                  }
-                );
-            }
+      $scope.plandetail= response.data.plan.plandetail;
 
-          // Group Json object of plan 
-          
-          Object.keys($scope.plan).forEach(function(key){
-              $.each($scope.plan[key].foods,function(index,value){
-                $scope.mealPlanDetailList[value.day-1].foods[value.foodsessionid-1].foodItems.push(value);
-              });
-          });
-          
-        },function(){
-            errorMessage(Flash,"Please try again later!")
+      $scope.workoutPlanDetailList=[];
+
+      for(var i=1; i<=$scope.plandetail.plandays; i++){
+         $scope.workoutPlanDetailList.push(
+          {
+              "day":"Day "+i,
+              "dayId": i,
+              "workouts":[]
+          }
+         );
+      }
+
+      console.log($scope.workoutPlanDetailList[0]);
+      //Group json object
+      Object.keys($scope.plan).forEach(function(key){
+        $.each($scope.plan[key].workouts,function(index,value){
+            $scope.workoutPlanDetailList[value.day-1].workouts.push(value);
         });
-     
+      });
+
+  },function(){
+      errorMessage(Flash,"Please try again later!")
+  });
 };
 
 //Initialize Modal Popup after ng-repeat
 $scope.doIntializeLeanModal=function()
 {
-    $("#modal_trigger_food").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
+    $(".modal_trigger_exercise").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
     $(function(){
         $(".user_register").show();
     });
 }
 
-$scope.doCoachAddFood=function(planDay,foodSessionId){
+$scope.doCoachAddExercise=function(planDay){
 
-    $scope.userFood={};
-    $scope.userFood.day= planDay;
-    $scope.userFood.foodsessionid=foodSessionId;
-    $scope.addFood=false;
+    $scope.userExercise={};
+    $scope.userExercise.day= planDay;
+    $scope.addExcercise=false;
     $scope.isNew=true;
-    $scope.title="Add Food";
+    $scope.title= "Add Exercise";
 
     $(function(){
-            $("#lean_overlay").fadeTo(1000);
-            $("#modal-add-food").fadeIn(600);
-            $(".user_register").show();
-          
-        });
+          $("#lean_overlay").fadeTo(1000);
+          $("#modal-add-exercise").fadeIn(600);
+          $(".user_register").show();
 
-        $(".modal_close").click(function(){
-            $(".user_register").hide();
-            $("#modal-add-food").hide();
-            $("#lean_overlay").hide();
-            $scope.resetdata();
-        });
+      });
 
-        $("#lean_overlay").click(function(){
-            $(".user_register").hide();
-            $("#modal-add-food").hide();
-            $("#lean_overlay").hide();
-            $scope.resetdata();
-        });
+      $(".modal_close").click(function(){
+          $(".user_register").hide();
+          $("#modal-add-exercise").hide();
+          $("#lean_overlay").hide();
+          $scope.resetexercisedata();
+      });
+
+      $("#lean_overlay").click(function(){
+          $(".user_register").hide();
+          $("#modal-add-exercise").hide();
+          $("#lean_overlay").hide();
+          $scope.resetexercisedata();
+      });
     
 };
 
-$scope.resetdata=function(){
-    $scope.userFood={};
-    $scope.userFood.measure="";
-    $scope.userFood.measurecount=[];
-    $scope.selectedFood="";
-    $scope.FoodAddForm.$setPristine();
-    $scope.current=$scope.caloriesIntake=0;
+//Clear suggest exercise model values
+$scope.resetexercisedata=function(){
+    $scope.userExercise.selectedLevel="";
+    $scope.userExercise.repsavailable="";
+    $scope.userExercise.workoutvalue="";
+    $scope.workoutvalueMinutes=0;
+    $scope.workoutvalueSeconds=0;
+    $scope.workoutvalueHours=0;
+    $scope.ExerciseAddForm.$setPristine();
+    $scope.current=$scope.caloriesSpent=0;
     $scope.max = 100;
-    $scope.userSelectedFoodDetails={};
+    $scope.userSelectedExerciseDetails={};
 };
 
-//Search Function for food
-$scope.inputChanged = function(searchStr) {
-
-    if(searchStr.length >=3){
-        $scope.loadingFoods=true;
-        if($scope.foodSearchResult.length==0){
-
-            $scope.loadingFoods=true;
+$scope.selectedCategory=[];
+$scope.selectedType=[];
+//Search Function for exercise
+$scope.inputChangedExercise = function(searchStr) {
+    if(searchStr.length){
+        $scope.loadingExercise=true;
+        if($scope.exerciseSearchResult.length==0){
+            $scope.loadingExercise=true;
         }
-        var userFoodDiaryDetailPromise=UserDashboardService.searchFoodByCoach(searchStr);
-        return userFoodDiaryDetailPromise.then(function(result){
-            var foods = [];
-            $scope.foodSearchResult=result;
-            $scope.loadingFoods=false;
-            return $scope.foodSearchResult;
+        var userExerciseDiaryDetailPromise=UserDashboardService.searchExerciseByCoach(searchStr,$scope.selectedCategory,$scope.selectedType);
+        return userExerciseDiaryDetailPromise.then(function(result){
+            $scope.exerciseSearchResult=result;
+            $scope.loadingExercise=false;
+            return $scope.exerciseSearchResult;
         });
     }
-    else{
-        $('.dropdown-menu').animate({
-            scrollTop: 0
-        }, 0);
-        return {};
-    }
 };
 
-$scope.foodSelected=function(){
-    $scope.selectedFoodParam={'foodid': $scope.selectedFood.foodid};
-    requestHandler.postRequest("coach/getFoodDetailByCoach/", $scope.selectedFoodParam).then(function(response){
-        $scope.addFood=true;
-        $scope.userSelectedFoodDetails= response.data.Food_Data;
+//On Select search exercise function
+$scope.exerciseSelected=function(){
+  $scope.selectedWorkoutParam={'exerciseid': $scope.selectedExercise.exerciseid};
+    requestHandler.postRequest("coach/getExerciseDetailbyCoach/", $scope.selectedWorkoutParam).then(function(response){
+        $scope.addExercise=true;
+        $scope.userSelectedExerciseDetails= response.data.ExerciseDetail;
         
     }, function(){
           errorMessage(Flash,"Please try again later!");
     });
 };
 
-//Calories caluclation for food
-$scope.doCalculateCalories=function(){
-    if($scope.userFood.measurecount==0){
-        $scope.current=$scope.caloriesIntake=0;
+//Calories caluclation for exercose
+$scope.doCalculateCaloriesExercise=function(){
+    $scope.userExercise.workoutvalue=0;
+    $scope.userExercise.workoutvalue+=parseInt($scope.workoutvalueHours)*3600;
+    $scope.userExercise.workoutvalue+=parseInt($scope.workoutvalueMinutes)*60;
+    $scope.userExercise.workoutvalue+=parseInt($scope.workoutvalueSeconds);
+    console.log( $scope.userExercise.workoutvalue);
+    if($scope.userExercise.workoutvalue==0){
+        $scope.current=$scope.caloriesSpent=0;
     }
-    if(!$scope.userFood.measurecount>0){
-        $scope.current=$scope.caloriesIntake=0;
+    if(!$scope.userExercise.workoutvalue>0){
+        $scope.current=$scope.caloriesSpent=0;
     }
     else{
-        $scope.current=$scope.caloriesIntake=$scope.userFood.measure.calories*$scope.userFood.measurecount;
-        $scope.current=$scope.current.toFixed(2);
-        if(($scope.current.length-3)>2) $scope.max=100+((String($scope.current|0).slice(0, -2))*100);
+        if($scope.userProfile.unitPreference==2){
+            $scope.current=$scope.caloriesSpent=$scope.userExercise.selectedLevel.MET*($scope.demography.weight*0.453592)*($scope.userExercise.workoutvalue/3600);
+            $scope.current=Math.abs($scope.current).toFixed(2);
+        }
+        else if($scope.userProfile.unitPreference==1){
+            $scope.current=$scope.caloriesSpent=$scope.userExercise.selectedLevel.MET*($scope.demography.weight)*($scope.userExercise.workoutvalue/3600);
+            $scope.current=Math.abs($scope.current).toFixed(2);
+        }
+
+    console.log($scope.current);
+        if(($scope.current.length-3)>2) $scope.max=$scope.max+((String($scope.current|0).slice(0, -2))*100);
         else $scope.max=100;
     }
 };
 
-//To Check maximum food value
-$scope.maxfoodvalue=false;
-$scope.maxFoodValueCheck = function(value){
-    if(value<=999.99){
-        $scope.maxfoodvalue=false;
-    }
-    else if(value >999.99){
-        $scope.maxfoodvalue=true;
-    }
 
-};
-
-//Insert User Food
-$scope.doInsertFoodPlanByCoach=function(){
+//Insert  Exercise
+$scope.doInsertExerciseByCoach=function(){
     //Set values according to the api calls
-    $scope.userFood.planid= $routeParams.id;  
-    $scope.userFood.foodid=$scope.userSelectedFoodDetails.foodid;
-    $scope.userFood.foodmeasureid=$scope.userFood.measure.measureid;
-    $scope.userFood.isoptional=1;
-    
-    requestHandler.postRequest("coach/insertorupdatefoodplan/",$scope.userFood).then(function(response){
+    $scope.userExercise.planid= $routeParams.id;
+    $scope.userExercise.exerciseid=$scope.userSelectedExerciseDetails.exerciseid;
+    $scope.userExercise.unitlevelid= $scope.userExercise.selectedLevel.levelunitid;
+    $scope.userExercise.isoptional=1;
+
+    requestHandler.postRequest("coach/insertorupdateexerciseplan/",$scope.userExercise).then(function(response){
         if(response.data.Response_status==1){
           successMessage(Flash,"Successfully Added");
-          $scope.doViewCoachPlans();
+          $scope.doviewCoachWorkoutPlans();
         }
     }, function(){
           errorMessage(Flash,"Please try again later!");
@@ -211,10 +199,10 @@ $scope.doInsertFoodPlanByCoach=function(){
 
 };
 
-$scope.doDeleteFoodItemFromPlan=function(id){
-  if(confirm("Are you sure you want to delete food item?")){
-    $scope.deleteFoodItemParam={'id':id};
-    requestHandler.postRequest("coach/deletefoodplan/",$scope.deleteFoodItemParam).then(function(response){
+$scope.doDeleteExerciseFromPlan=function(id){
+  if(confirm("Are you sure you want to delete exercise?")){
+    $scope.deleteExerciseParam={'id':id};
+    requestHandler.postRequest("coach/deleteexerciseplan/",$scope.deleteExerciseParam).then(function(response){
        if(response.data.Response_status==1){
           successMessage(Flash,"Successfully Deleted");
           $scope.doViewCoachPlans();
@@ -225,13 +213,12 @@ $scope.doDeleteFoodItemFromPlan=function(id){
   }
 };
 
-$scope.plansViewInit=function(){
-  $scope.userFood={};
-  $scope.current=$scope.caloriesIntake=0;
-  $scope.max=100;
-  $scope.foodSearchResult = [];
-  $scope.doViewCoachPlans();
-  
+$scope.workoutPlansInit=function(){
+  $scope.exerciseFilter= false;
+  $scope.current=$scope.caloriesSpent=0;
+  $scope.max = 100;
+  $scope.doviewCoachWorkoutPlans();
+  $scope.exerciseSearchResult=[];
 };
 
 //circle round
@@ -266,4 +253,5 @@ $scope.plansViewInit=function(){
             '-webkit-transform': transform
         };
     };
+
 }]);	

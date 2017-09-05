@@ -170,6 +170,15 @@ adminApp.factory("UserDashboardService",['requestHandler',function(requestHandle
         });
     };
 
+    userDashboardServiceObj.searchExerciseByCoach=function(searchStr,category,type){
+        return requestHandler.postRequest("coach/searchExercisebyCoach/",{"exercisename":searchStr,"category":category,"type":type}).then(function (response) {
+            var exerciseSearchResponse=response.data.exercisesData;
+            return exerciseSearchResponse.slice(0,50);
+        }, function () {
+            console.log("Please try again later!")
+        });
+    };
+
     userDashboardServiceObj.searchExercise=function(searchStr,category,type){
         return requestHandler.postRequest("user/searchExercisebyUser/",{"exercisename":searchStr,"category":category,"type":type}).then(function (response) {
             var exerciseSearchResponse=response.data.exercisesData;
