@@ -29,7 +29,7 @@
             <div class="col-md-12 col-sm-12 col-sm-12">
                 <div id="coach-table" class="plans">
                     <div class="col-lg-3 col-sm-12 col-md-3 plan no-padding" ng-repeat="pricingPlan in pricingPlanDetails">
-                         <span><img class="current-subscription-status" src="../../images/published.png"></span>
+                         <span ng-show="pricingPlan.currentActivePlan==1"><img class="current-subscription-status" src="../../images/active.png"></span>
                         <div class="coach">
                             <span ng-style="{'color': pricingPlan.plancolor}">{{pricingPlan.planname}}</span>
                         </div>
@@ -37,6 +37,7 @@
                             <span class="price"  ng-style="{'background-color': pricingPlan.plancolor}">
                                 <span>Rs {{pricingPlan.discountINR}}</span><br/>
                                 <span class="text-strike"><small>Rs {{pricingPlan.priceINR}}</small></span>
+                                
                             </span>
                         </div>
                         <div ng-hide="units==1">
@@ -58,13 +59,8 @@
                             <span>{{pricingPlan.features}}</span>
                         </div> 
                         <br>
-                        <!-- <h4>Discount</h4>
-                        <ul class="features remove-style">
-                            <li ng-show="units==1">Rs:{{pricingPlan.discountINR}}</li>
-                            <li ng-hide="units==1">$:{{pricingPlan.discountUSD}}</li>
-                        </ul> -->
-                        <a ng-show="units==1" href="" class="price-button btn button" ng-click="doGetSubscirbeCreateRazor(pricingPlan.id)">Subscribe</a>
-                        <a ng-hide="units==1" href="" class="price-button btn button" ng-click="authorizePaymentModel(pricingPlan.id,pricingPlan.discountUSD)">Subscribe</a><br/>
+                        <a ng-show="units==1" href="" ng-disabled="pricingPlan.currentActivePlan==1" class="price-button btn button" ng-click="doGetSubscirbeCreateRazor(pricingPlan.id)">Subscribe</a>
+                        <a ng-hide="units==1" href="" ng-disabled="pricingPlan.currentActivePlan==1" class="price-button btn button" ng-click="authorizePaymentModel(pricingPlan.id,pricingPlan.discountUSD)">Subscribe</a><br/>
                     </div>
                 </div>
             </div>

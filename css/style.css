@@ -17583,6 +17583,11 @@ div.foodvalues{
     background-color: #ecc964;
 }
 
+/*Subscription plan*/
+.font-weight{
+    font-weight: bold;
+}
+
 .current-subscription-status{
     position: absolute;
     right: -3px;

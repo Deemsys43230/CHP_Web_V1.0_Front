@@ -7,7 +7,18 @@ coachApp.controller('SubscriptionController',['$scope','requestHandler','Flash',
     $scope.doGetPricingPlans = function() {
       requestHandler.getRequest("getactivePricingPlans/","").then(function(response){
           $scope.pricingPlanDetails = response.data.PricingPlans;
-      });
+          requestHandler.getRequest("/coach/isSubscriptionActive/","").then(function(response){
+              $scope.currentActivePlan=response.data.subscription;
+              $.each($scope.pricingPlanDetails,function(index,value){
+
+                if(value.id==$scope.currentActivePlan.planchoice){
+                  value.currentActivePlan=true;
+                }else{
+                  value.currentActivePlan=false;
+                }
+              });
+          });
+       });
     };
 
     //For USA and metric button 
@@ -112,6 +123,7 @@ coachApp.controller('SubscriptionController',['$scope','requestHandler','Flash',
 
     $scope.init = function() {
       $scope.doGetPricingPlans();
+        
     };
 
     $scope.init();
