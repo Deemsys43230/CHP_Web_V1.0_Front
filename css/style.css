@@ -17552,6 +17552,34 @@ div.foodvalues{
     border: none;
 }
 
+.exercise-plans{
+    position: relative;
+    width: 30px;
+    padding: none;
+}
+
+
+.exercise-plans div.exercise{
+    padding: 5px;
+    border: solid 1px #ffcc33;
+    margin-bottom: 10px;
+    background: #ffffff;
+    color:#000000;
+    border-radius: 2px;
+}
+
+.exercise .name_values{
+    padding-left: 5px;
+    background-color: none;
+    border: none;
+}
+
+.exercise .time{
+    padding-left: 5px;
+    background-color: #ffeebb;
+    border: none;
+}
+
 .food-plans div i.fa{
     vertical-align: middle;
     float: right;
