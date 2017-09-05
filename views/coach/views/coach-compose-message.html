@@ -1,0 +1,47 @@
+
+<!-- Start Page Banner -->
+
+<div class="page-banner" ng-cloak class="ng-cloak">
+    <div class="container">
+        <div class="row">
+             <div class="col-lg-12 col-md-12 col-sm-12" ng-init="coachUserInit()">
+    
+                <a href="#dashboard" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back <span class="hidden-md hidden-sm">to Dashboard</span></a>
+                <div flash-message="2000" class="col-lg-3 col-md-3 col-sm-3 pull-right"></div>
+                
+                <h5 class="classic-title"><a href="#my-members"><i class="fa fa-money"></i>&nbsp;&nbsp;CLIENTS</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#coach-invitations"><i class="fa fa-dollar"></i>&nbsp;&nbsp;INVITATIONS</a>&nbsp;&nbsp;|&nbsp;&nbsp;<span><a href="#coach-invitations"><i class="fa fa-envelope"></i>&nbsp;&nbsp;SEND MESSAGE</a></span></h5></h5>
+            </div>           
+            <div class="col-lg-8 col-md-8 col-sm-8 margin-bottom-10">
+                <form name="adviceForm" novalidate>
+                    <p class="pull-right" ng-show="showCount && myadvice.description.length"><span class="text-bold text-red">{{ (350-myadvice.description.length) }}</span> Characters left&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+                    <p class="pull-right" ng-hide="showCount && myadvice.description.length">&nbsp;</p>
+                    <h5 class="text-muted">Compose Your Message :</h5>
+                    <textarea class="height-150 forum-textarea" name="description" ng-model="myadvice.description" maxlength="350" ng-blur="showCount=0" ng-focus="showCount=1" required></textarea>
+                     <span ng-show="adviceForm.description.$dirty&&adviceForm.description.$invalid">
+                                      <span class="error-message textarea-errormessage40" ng-show="adviceForm.description.$error.required"><span>Required.</span></span>
+                                 </span>
+
+
+
+                    <div class="text-center">
+                        <a href="" class="btn btn-success" ng-disabled="adviceForm.$invalid || isClean()" ng-click="doInsertOrUpdateMyAdvice()">Save Advice</a>
+                        <a href="#dashboard" class="btn btn-warning">Cancel</a>
+                        <span ng-show="myadvice.status==0"><a href=""  class="btn btn-success" ng-click="doEnableDisableMyAdvice()">Enable&nbsp;</a></span>
+                        <span ng-hide="myadvice.status==0"><a href="" class="btn btn-danger" ng-click="doEnableDisableMyAdvice()">Disable</a></span>
+                    </div>
+                </form>
+              
+            </div>
+             <div class="col-lg-4 col-md-4 col-sm-4 margin-bottom-10">
+                    <h5 class="text-muted margin-bottom-10">Send To :&nbsp;&nbsp;</h5>
+                    <input type="radio" id="clients" value="1" ng-model="sendToType" checked="checked"><label for="clients">Individual Clients</label>
+                    <input type="radio" id="groups" value="2" ng-model="sendToType"><label for="groups">Groups</label>
+                    <h5 class="text-muted">Select Members</h5>
+              
+            </div>
+        </div><!-- @end #content -->
+    </div><!-- @end #w -->
+</div>
+
+
+<script type="text/javascript" src="../../js/script.js"></script>

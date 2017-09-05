@@ -78,7 +78,7 @@ $scope.doViewCoachPlans=function(){
 //Initialize Modal Popup after ng-repeat
 $scope.doIntializeLeanModal=function()
 {
-    $("#modal_trigger_food").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
+    $(".modal_trigger_food").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
     $(function(){
         $(".user_register").show();
     });
@@ -90,6 +90,7 @@ $scope.doCoachAddFood=function(planDay,foodSessionId){
     $scope.userFood.day= planDay;
     $scope.userFood.foodsessionid=foodSessionId;
     $scope.addFood=false;
+    $scope.showSearch=true;
     $scope.isNew=true;
     $scope.title="Add Food";
 
@@ -114,6 +115,55 @@ $scope.doCoachAddFood=function(planDay,foodSessionId){
             $scope.resetdata();
         });
     
+};
+
+$scope.doEditFoodItemFromPlan=function(id){
+   
+   $scope.userFood={};
+    requestHandler.postRequest("coach/foodplandetail/",{"id":id}).then(function(response){
+      $scope.userSelectedFoodDetails=response.data.fooddetail;
+      $scope.userSavedFoodDetails=response.data.savedfoodplan;
+
+      $.each($scope.userSelectedFoodDetails.measure,function(index,value){
+        if(value.measureid==$scope.userSavedFoodDetails.foodmeasureid){
+          $scope.userFood.measure=value;
+        }
+      });
+
+      $scope.userFood.measurecount=$scope.userSavedFoodDetails.measurecount;
+      $scope.userFood.id=$scope.userSavedFoodDetails.id;
+      $scope.userFood.foodsessionid=$scope.userSavedFoodDetails.foodsessionid;
+      $scope.userFood.day=$scope.userSavedFoodDetails.day;
+      $scope.doCalculateCalories();  
+      $scope.userFood.calorieintake=$scope.caloriesIntake;
+      console.log($scope.userFood);
+    });
+    $scope.addFood=true;
+    $scope.showSearch=false;
+    $scope.isNew=false;
+    $scope.title="Edit Food";
+
+    $(function(){
+            $("#lean_overlay").fadeTo(1000);
+            $("#modal-add-food").fadeIn(600);
+            $(".user_register").show();
+          
+        });
+
+        $(".modal_close").click(function(){
+            $(".user_register").hide();
+            $("#modal-add-food").hide();
+            $("#lean_overlay").hide();
+            $scope.resetdata();
+        });
+
+        $("#lean_overlay").click(function(){
+            $(".user_register").hide();
+            $("#modal-add-food").hide();
+            $("#lean_overlay").hide();
+            $scope.resetdata();
+        });
+      
 };
 
 $scope.resetdata=function(){
@@ -197,6 +247,7 @@ $scope.doInsertFoodPlanByCoach=function(){
     $scope.userFood.planid= $routeParams.id;  
     $scope.userFood.foodid=$scope.userSelectedFoodDetails.foodid;
     $scope.userFood.foodmeasureid=$scope.userFood.measure.measureid;
+    $scope.userFood.calorieintake=$scope.caloriesIntake;
     $scope.userFood.isoptional=1;
     
     requestHandler.postRequest("coach/insertorupdatefoodplan/",$scope.userFood).then(function(response){

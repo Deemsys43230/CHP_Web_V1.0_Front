@@ -243,7 +243,7 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
             ed='0'+ed
         }
         var today = dd+'/'+mm+'/'+yyyy;
-        var enddate = ed+'/'+mm+'/'+yyyy; 
+        var enddate = dd+'/'+mm+'/'+yyyy; 
         requestHandler.postRequest("coach/userhealthprofile/",{"userid":userid,"startdate":enddate,"enddate":today}).then(function(response){
           
             //get the array

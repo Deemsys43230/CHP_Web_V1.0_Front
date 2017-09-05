@@ -17540,12 +17540,18 @@ h3.accordion{
 
 .food-plans div.food{
     padding: 2px;
-    border: solid 1px #f8e7b4;
-    margin-top: 2px;
-    background: #fcfaf2;
-    color:#66471e;
+    border: solid 1px #ffcc33;
+    margin-bottom: 10px;
+    background: #ffffff;
+    color:#000000;
     border-radius: 2px;
 }
+
+div.foodvalues{
+    background-color: #ffeebb;
+    border: none;
+}
+
 .food-plans div i.fa{
     vertical-align: middle;
     float: right;

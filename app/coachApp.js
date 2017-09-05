@@ -110,7 +110,24 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                     }]
                 },
                 controller:'CoachInvitationController'
-             }).
+             }).                          
+             when('/coach-compose-message', {
+                templateUrl: 'views/coach-compose-message.html',
+                coachInvitations:true,
+                resolve: {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'coachApp',
+                            files:[
+                                '../../plugin/vertical-carousel/vertical-carousel.js',
+                                '../../angular/angular-utils-pagination/dirPagination.js',
+                                '../../app/coachComposeMessage/coachComposeMessageController.js'
+                            ]
+                        })
+                    }]
+                },
+                controller: 'CoachComposeMessageController'
+            }).
              when('/coach-subscription', {
                 templateUrl: 'views/coach-subscription.html',
                 resolve: {
@@ -350,12 +367,12 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'coachApp',
                             files:[
+                                '../../app/userDashboard/userDashboardService.js',
+                                '../../app/coachPlans/coachPlanController.js',
                                 '../../plugin/popup/style.css',
                                 '../../css/ngPercentageCircle.css',
                                 '../../app/userDashboard/ngPercentageCircle.js',
-                                '../../angular/angular-utils-pagination/dirPagination.js',
-                                '../../app/userDashboard/userDashboardService.js',
-                                '../../app/coachPlans/coachPlanController.js'
+                                '../../angular/angular-utils-pagination/dirPagination.js'
                             ]
                         })
                     }]
@@ -369,12 +386,12 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'coachApp',
                             files:[
+                                '../../app/userDashboard/userDashboardService.js',
+                                '../../app/coachPlans/coachPlanController.js',
                                 '../../css/custom-inputs.css',
                                 '../../plugin/popup/style.css',
                                 '../../css/ngPercentageCircle.css',
-                                '../../app/userDashboard/ngPercentageCircle.js',
-                                '../../app/userDashboard/userDashboardService.js',
-                                '../../app/coachPlans/coachPlanController.js'
+                                '../../app/userDashboard/ngPercentageCircle.js'
                             ]
                         })
                     }]

@@ -808,31 +808,36 @@
                         </span>
                     </div>
                     <div class="col-md-4 col-xs-4" style="text-align: right;">
+                        <a href="" ng-click="doDeleteChatMessage()" ng-show="deleteChatLogId.length>0"><i class="fa fa-trash"></i></a>
                         <a href=""><span id="minim_chat_window" class="glyphicon glyphicon-plus icon_minim panel-collapsed" ng-click="doReadChatMessage();"></span></a>
                     </div>
                 </div>
-                <div class="panel-body msg_container_base" style="display:none;">
-                    <div class="row msg_container" ng-repeat="chatMessage in chatMessages">
-                        <div class="col-md-10 col-xs-10" ng-if="chatMessage.sentby==2">
-                            <div class="messages msg_sent">
-                                <p>{{chatMessage.message}}</p>
-                                <time datetime="2009-11-13T20:00">{{chatMessage.datetime}}</time>
-                            </div>
-                        </div>
-                        <div class="col-md-2 col-xs-2 avatar no-padding" ng-if="chatMessage.sentby==2">
-                            <img ng-src="{{coachImageUrl}}" class=" img-responsive ">
-                        </div>
 
-                        <div class="col-md-2 col-xs-2 avatar no-padding" ng-if="chatMessage.sentby==3">
-                            <img ng-src="{{coachclientdetails.imageurl}}" class=" img-responsive ">
-                        </div>
-                        <div class="col-md-10 col-xs-10"  ng-if="chatMessage.sentby==3">
-                            <div class="messages msg_receive">
-                                <p>{{chatMessage.message}}</p>
-                                <time datetime="2009-11-13T20:00">{{chatMessage.datetime}}</time>
+                <div class="panel-body msg_container_base" style="display:none;">
+                    <div  ng-repeat="chatMessage in chatMessages" ng-click="doSelectChat(chatMessage);">
+                     <div class="row" ng-if="chatMessage.firstNewMessage==1"><center><span class="label label-default">New Messages</span></center></div>
+                        <div class="row msg_container">
+                            <div class="col-md-10 col-xs-10" ng-if="chatMessage.sentby==2">
+                                <div class="messages msg_sent">
+                                    <p>{{chatMessage.message}}</p><i ng-show="chatMessage.status==1" class="fa fa-check message-read" aria-hidden="true"></i>
+                                    <time datetime="2009-11-13T20:00">{{chatMessage.datetime}}</time>
+                                </div>
                             </div>
+                            <div class="col-md-2 col-xs-2 avatar no-padding" ng-if="chatMessage.sentby==2">
+                                <img ng-src="{{coachImageUrl}}" class=" img-responsive ">
+                            </div>
+
+                            <div class="col-md-2 col-xs-2 avatar no-padding" ng-if="chatMessage.sentby==3">
+                                <img ng-src="{{coachclientdetails.imageurl}}" class=" img-responsive ">
+                            </div>
+                            <div class="col-md-10 col-xs-10"  ng-if="chatMessage.sentby==3">
+                                <div class="messages msg_receive">
+                                    <p>{{chatMessage.message}}</p>
+                                    <time datetime="2009-11-13T20:00">{{chatMessage.datetime}}</time>
+                                </div>
+                            </div>
+                            <div ng-show="chatMessages.length==0"><h3 class="text-gray">NO MESSAGES FOUND!!!</h3></div>
                         </div>
-                        <div ng-show="chatMessages.length==0"><h3 class="text-gray">NO MESSAGES FOUND!!!</h3></div>
                     </div>
                 </div>
                 <div class="panel-footer">
@@ -1231,6 +1236,15 @@ $('.msg-overlay-list-bubble--is-minimized').click(function(){
 
   $(".sticky-notes").animate({ scrollTop: $(document).height() }, "slow");
 
+
+$(document).on('click','.msg_container',function(e){
+     var $this = $(this);
+    if (!$this.hasClass('chat-selected')) {
+        $this.addClass('chat-selected');
+    }else {
+        $this.removeClass('chat-selected');
+    }
+});
 
 $(document).on('click', '.panel-heading span.icon_minim', function (e) {
     var $this = $(this);
