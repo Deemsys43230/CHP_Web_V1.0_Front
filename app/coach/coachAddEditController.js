@@ -136,22 +136,29 @@ adminApp.controller('CoachAddEditController',['$scope','requestHandler','Flash',
         });
     };
 
-    //Populate  Plan Dropdown
+/*
     $scope.doGetPlanList=function(){
         requestHandler.getRequest("admin/getPricingPlans/","").then(function(response){
             $scope.pricingPlanList=response.data.PricingPlans;
         });
     }
-
+*/
+ //Populate  active Pricing Plan Dropdown
+    $scope.doGetPricingPlans = function() {
+        requestHandler.getRequest("getactivePricingPlans/","").then(function(response){
+            $scope.pricingPlanList = response.data.PricingPlans;
+            console.log($scope.pricingPlanDetails);
+        });
+    };
     //Display view Individual Invitation Details By Id
     $scope.invitationCoachViewInit=function(){
-        $scope.doGetPlanList();
+        $scope.doGetPricingPlans();
         $scope.doGetInvitationByID();
     };
 
 
     $scope.init= function() {
-        $scope.doGetPlanList();
+        $scope.doGetPricingPlans();
        $scope.doViewInvitationList();
     };
 }]);

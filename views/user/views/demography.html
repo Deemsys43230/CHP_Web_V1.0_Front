@@ -229,7 +229,7 @@
 </div>
 <div class="col-lg-6 col-md-6 col-sm-12">
     <div class="col-lg-8 col-md-7 col-sm-7 padding-top-4 padding-right-0 padding-right-0">
-        <h5>HDL Cholestrol <small>(mg/dL)</small> <span class="pull-right">:</span><span class="pull-right">&nbsp;<a href="" data-toggle="popover" data-trigger="hover" title="HDL Cholestrol" data-content="High-density lipoprotein cholesterol is the well-behaved good cholesterol.It removes harmful bad cholesterol from where it doesn't belong."><i class="fa fa-info-circle"></i></a>&nbsp; </span> </h5>
+        <h5>HDL Cholesterol <small>(mg/dL)</small> <span class="pull-right">:</span><span class="pull-right">&nbsp;<a href="" data-toggle="popover" data-trigger="hover" title="HDL Cholestrol" data-content="High-density lipoprotein cholesterol is the well-behaved good cholesterol.It removes harmful bad cholesterol from where it doesn't belong."><i class="fa fa-info-circle"></i></a>&nbsp; </span> </h5>
     </div>
     <div class="col-lg-4 col-md-5 col-sm-5 padding-right-0">
         <input class="demography_input" name="HDLcholestrol" validate-only-numbers maxlength="3" ng-model="demography.HDLcholestrol"/>
@@ -237,11 +237,15 @@
                                 <span class="error-message textarea-errormessage40" ng-show="demographyForm.HDLcholestrol.$error.validateOnlyNumbers"><span>Invalid&nbsp;Format.</span></span>
                             </span>
     </div>
+    <div class="col-lg-12 col-md-12 col-sm-12">
+        <div class="col-lg-12 col-md-12 col-sm-12 margin-top-15 demo_status">
+            {{demography.HDLcholestrolCategory}}
+        </div>
+    </div>
 </div>
-
 <div class="col-lg-6 col-md-6 col-sm-12">
     <div class="col-lg-8 col-md-7 col-sm-7 padding-top-4 padding-right-0 padding-right-0">
-        <h5>LDL Cholestrol <small>(mg/dL)</small> <span class="pull-right">:</span><span class="pull-right">&nbsp;<a href="" data-toggle="popover" data-trigger="hover" title="LDL Cholestrol" data-content="Low-density lipoprotein cholesterol, commonly reffered as a bad cholesterol.Lipoproteins, which are combination of fats (lipids) and proteins,are the form in which lipids are transported in the blood."><i class="fa fa-info-circle"></i></a>&nbsp; </span> </h5>
+        <h5>LDL Cholesterol <small>(mg/dL)</small> <span class="pull-right">:</span><span class="pull-right">&nbsp;<a href="" data-toggle="popover" data-trigger="hover" title="LDL Cholestrol" data-content="Low-density lipoprotein cholesterol, commonly reffered as a bad cholesterol.Lipoproteins, which are combination of fats (lipids) and proteins,are the form in which lipids are transported in the blood."><i class="fa fa-info-circle"></i></a>&nbsp; </span> </h5>
     </div>
     <div class="col-lg-4 col-md-5 col-sm-5 padding-right-0">
         <input class="demography_input" name="LDLcholestrol" validate-only-numbers maxlength="3" ng-model="demography.LDLcholestrol"/>
@@ -249,7 +253,13 @@
                                 <span class="error-message textarea-errormessage40" ng-show="demographyForm.LDLcholestrol.$error.validateOnlyNumbers"><span>Invalid&nbsp;Format.</span></span>
                             </span>
     </div>
+    <div class="col-lg-12 col-md-12 col-sm-12">
+        <div class="col-lg-12 col-md-12 col-sm-12 margin-top-15 demo_status">
+            {{demography.LDLcholestrolCategory}}
+        </div>
+    </div>
 </div>
+
 <div class="col-lg-12 col-md-12 col-sm-12">
     <div class="col-lg-12 col-md-12 col-sm-12 margin-top-15">
         <hr/>
@@ -369,13 +379,13 @@
         <div class="col-lg-6 col-md-6 col-sm-5 padding-right-0">
             <checkbox-group>
                                 <span class="fh-checkbox">
-                                    <input type="checkbox" id="type1" name="obesity" onclick="return false;" ng-model="demography.obesity" ng-true-value="'1'" ng-false-value="'0'"  ng-checked="demography.obesity=='1'" readonly="true">
+                                    <input type="checkbox" id="type1" name="obesity" onclick="return false;" ng-model="demography.obesity" ng-true-value="'1'" ng-false-value="'0'"  readonly="true">
                                     <label for="type1"  style="cursor:default;">Obese</label>
                                 </span>
             </checkbox-group>
             <checkbox-group>
                                 <span class="fh-checkbox">
-                                    <input type="checkbox" id="type2" name="diabetes" onclick="return false;" ng-model="demography.diabetes" ng-true-value="'1'" ng-false-value="'0'"  ng-checked="demography.diabetes=='1'" readonly="true">
+                                    <input type="checkbox" id="type2" name="diabetes" onclick="return false;" ng-model="demography.diabetes" ng-true-value="'1'" ng-false-value="'0'" readonly="true">
                                     <label for="type2" style="cursor:default;">Diabetic</label>
                                  </span>
             </checkbox-group>

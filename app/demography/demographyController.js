@@ -175,16 +175,11 @@ userApp.controller('DemographyController',['$rootScope','$scope','requestHandler
             $scope.demography.height =$scope.demography.height.toString();
             $scope.demography.weight = parseFloat($scope.demography.weight);
             $scope.demography.hip = parseFloat($scope.demography.hip);
-            $scope.demography.obesity=parseFloat($scope.demography.obesity);
-            $scope.demography.diabetes=parseFloat($scope.demography.diabetes);
              $scope.demography.targetweight=parseFloat($scope.demography.targetweight);
-       if( $scope.demography.obesity == '0'){
-           $scope.demography.obesity="";
-       }
-        if($scope.demography.diabetes == '0'){
-            $scope.demography.diabetes="";
-        }
 
+
+        delete $scope.demography.obesity;
+        delete $scope.demography.diabetes;
 
         requestHandler.getRequest("getUserId/","").then(function(response){
             if(response.data.demography.demoUpdatedstatus==0){
@@ -375,16 +370,6 @@ userApp.controller('DemographyController',['$rootScope','$scope','requestHandler
     $scope.isCleanNutrition =function(){
         return angular.equals(originalNutrition, $scope.nutrients);
     };
-
-    $scope.valcheck=function(){
-        if($scope.demography.obesity == "true"){
-            $scope.demography.obesity ="1";
-        }
-        else{
-            $scope.demography.obesity="";
-        }
-    };
-
 
     //For Obesity Condition based on BMI Value
     $scope.bmiCheck=function(){
