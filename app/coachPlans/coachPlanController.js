@@ -12,6 +12,7 @@ $scope.doGetCoachPlanList=function(){
 
    requestHandler.postRequest("coach/myplans/",$scope.coachPlanPagination).then(function(response){
      $scope.coachPlanList= response.data;
+     console.log($scope.coachPlanList);
      $scope.loaded=false;
    	 $scope.paginationLoad=true;
    },function(){
@@ -19,9 +20,115 @@ $scope.doGetCoachPlanList=function(){
   });
 };
 
+//Reset Scope
+$scope.reset=function(){
+    $scope.mealPlan={};
+    $scope.mealPlan.planname="";
+    $scope.mealPlan.plandays="";
+    $scope.mealPlan.description="";
+    $scope.mealPlanForm.$setPristine();
+    $scope.isNew = true;
+    $scope.title = "Add Meal Plan";
+
+    $(function(){
+        $("#lean_overlay").fadeTo(1000);
+        $("#meal-plan").fadeIn(600);
+        $(".common_model").show();
+        $scope.shouldBeOpen = true;
+    });
+
+    $(".modal_close").click(function(){
+        $(".common_model").hide();
+        $("#meal-plan").hide();
+        $("#lean_overlay").hide();
+        $scope.shouldBeOpen = false;
+    });
+
+    $("#lean_overlay").click(function(){
+        $(".common_model").hide();
+        $("#meal-plan").hide();
+        $("#lean_overlay").hide();
+        $scope.shouldBeOpen = false;
+    });
+
+};
+
+$scope.doAddMealPlanByCoach=function(){
+    requestHandler.postRequest("coach/insertorupdatemealplan/",$scope.mealPlan).then(function(response){
+       $scope.doGetCoachPlanList();
+         successMessage(Flash,"Successfully Added");
+         $scope.loaded=false;
+         $scope.paginationLoad=true;  
+     }, function(){
+      errorMessage(Flash,"Please try again later!");
+     });
+};
+
+$scope.doEditCoachMealPlan=function(id){
+    $scope.isNew = false;
+    $scope.title = "Edit Meal Plan";
+
+    $(function(){
+        $("#lean_overlay").fadeTo(1000);
+        $("#meal-plan").fadeIn(600);
+        $(".common_model").show();
+        $scope.shouldBeOpen = true;
+    });
+
+    $scope.loaded=true;
+    $scope.coachPlanPagination={
+        "limit":$scope.pagination.itemsPerPage,
+        "offset":($scope.pagination.pageNumber-1)*$scope.pagination.itemsPerPage
+      };
+
+    requestHandler.postRequest("coach/myplans/",$scope.coachPlanPagination).then(function(response){
+        $scope.coachPlanList= response.data.plans;
+        $scope.loaded=false;
+    });
+    
+    $.each($scope.coachPlanList.plans,function(index,value){
+       if(value.id==id){
+          $scope.mealPlan=value;
+          $scope.original= angular.copy($scope.mealPlan);
+       }
+    });
+    
+    $(".modal_close").click(function(){
+        $(".common_model").hide();
+        $("#meal-plan").hide();
+        $("#lean_overlay").hide();
+        $scope.shouldBeOpen = false;
+    });
+
+    $("#lean_overlay").click(function(){
+        $(".common_model").hide();
+        $("#meal-plan").hide();
+        $("#lean_overlay").hide();
+        $scope.shouldBeOpen = false;
+    });
+};
+
+$scope.isClean=function(){
+  return angular.equals($scope.original, $scope.mealPlan);
+};    
+
+$scope.doDeleteCoachMealPlan=function(id){
+    if(confirm("Are you sure you want to delete?")){
+      requestHandler.postRequest("coach/deleteplan/",{'id':id}).then(function(response){
+          if(response.data.Response_status==1){
+            successMessage(Flash,"Successfully Deleted");
+            $scope.doGetCoachPlanList();
+       }
+    }, function(){
+          errorMessage(Flash,"Please try again later!");
+    });
+  }
+};
+
 $scope.init=function(){
+  $scope.original={};
 	$scope.paginationLoad=false;
-	$scope.pagination={"itemsPerPage":4,"pageNumber":1};
+	$scope.pagination={"itemsPerPage":8,"pageNumber":1};
 	
 };
 
@@ -50,6 +157,7 @@ $scope.doViewCoachPlans=function(){
                   {
                     "day":"Day "+i,
                     "dayId":i,
+                    "totalCalories":0,
                     "foods":[
                               {"sessionId":1,"sessionName":"BreakFast","foodItems":[]},
                               {"sessionId":2,"sessionName":"Brunch","foodItems":[]},
@@ -63,8 +171,9 @@ $scope.doViewCoachPlans=function(){
 
           // Group Json object of plan 
          $.each($scope.plan, function (key, obj) {
-              console.log(JSON.stringify(obj));
               if(key!='plandetail'){
+                alert(key.substring(3));
+                $scope.mealPlanDetailList[key.substring(3)-1].totalCalories=obj.actualcalories;
                 $.each(obj.foods, function (index, value) {
                  $scope.mealPlanDetailList[value.day-1].foods[value.foodsessionid-1].foodItems.push(value);
                 });

@@ -468,7 +468,7 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
             "offset":($scope.mealPlanPagination.pageNumber-1)*$scope.mealPlanPagination.itemsPerPage
         };   
         requestHandler.postRequest("user/getplans/",$scope.getMealPlanParams).then(function(response){
-            $scope.myMealPlanList=response.data.plans;
+            $scope.myMealPlanList=response.data;
         });
     };
 
@@ -491,6 +491,7 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
                   {
                     "day":"Day "+i,
                     "dayId":i,
+                    "totalCalories":0,
                     "foods":[
                               {"sessionId":1,"sessionName":"BreakFast","foodItems":[]},
                               {"sessionId":2,"sessionName":"Brunch","foodItems":[]},
@@ -505,6 +506,7 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
           // Group Json object of plan 
          $.each($scope.plandetail, function (key, obj) {            
               if(key.startsWith("day")){
+                $scope.mealPlanDetailList[key.substring(3)-1].totalCalories=obj.actualcalories;
                 $.each(obj.foods, function (index, value) {
                  $scope.mealPlanDetailList[value.day-1].foods[value.foodsessionid-1].foodItems.push(value);
                 });
@@ -513,6 +515,56 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
 
          console.log($scope.mealPlanDetailList);
          
+        },function(){
+            errorMessage(Flash,"Please try again later!")
+        });
+    };
+
+    //Workout Plan
+    $scope.doGetCoachWorkoutPlans=function(targetid){
+        $scope.workPlanDetailView=false;
+
+       $scope.getWorkoutPlanParams={
+            "targetid":targetid,
+            "limit":$scope.workoutPlanPagination.itemsPerPage,
+            "offset":($scope.workoutPlanPagination.pageNumber-1)*$scope.workoutPlanPagination.itemsPerPage
+        };   
+        requestHandler.postRequest("user/getplans/",$scope.getWorkoutPlanParams).then(function(response){
+            $scope.myworkoutPlanList=response.data;
+        });
+    };
+
+    //Laod Food Meal Plan Details
+    $scope.doLoadWorkoutPlanDetails=function(mapId){
+        $scope.workPlanDetailView=true;
+
+        requestHandler.postRequest("getplandetail/",{"mapid":mapId}).then(function(response){
+        $scope.plan= response.data.plan;
+            //First We need to group up days
+            $scope.plandetail=response.data.plandetail;
+           
+            //Initialize
+            $scope.workoutPlanDetailList=[];
+
+            for(var i=1; i<=$scope.plandetail.plandays; i++){
+                $scope.workoutPlanDetailList.push(
+                {
+                  "day":"Day "+i,
+                  "dayId": i,
+                  "workouts":[]
+                }
+                );
+            }
+
+          // Group Json object of plan 
+          $.each($scope.plandetail, function (key, obj) {            
+              if(key.startsWith("day")){
+                $.each(obj.workouts, function (index, value) {
+                 $scope.workoutPlanDetailList[value.day-1].workouts.push(value);
+                });
+              }              
+          });
+
         },function(){
             errorMessage(Flash,"Please try again later!")
         });
@@ -536,9 +588,16 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
 
         //Initializ Page
         $scope.mealPlanPagination={"itemsPerPage":10,"pageNumber":1};
-
-        $scope.doGetCoachMealPlans($routeParams.id);
+        $scope.workoutPlanPagination={"itemsPerPage":10,"pageNumber":1};
     };
+
+    $scope.$watch("mealPlanPagination.pageNumber",function(){
+        $scope.doGetCoachMealPlans($routeParams.id);
+    }); 
+
+    $scope.$watch("workoutPlanPagination.pageNumber",function(){
+        $scope.doGetCoachWorkoutPlans($routeParams.id);
+    }); 
 
     $scope.coachListInit=function(){
         $scope.doGetMyCoachListByUser();

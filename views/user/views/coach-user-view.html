@@ -178,7 +178,7 @@
                                 </tr>    
                             </thead>
                             <tbody>
-                                <tr dir-paginate="plan in myMealPlanList | itemsPerPage:pagination.itemsPerPage" ng-show="coachPlanList.length!=0 && plan.plantype==1" total-items="coachPlanList.totalrecords" current-page="pagination.pageNumber">
+                                <tr dir-paginate="plan in myMealPlanList.plans | itemsPerPage:pagination.itemsPerPage" ng-show="myMealPlanList.plans.length!=0 && plan.plantype==1" total-items="myMealPlanList.totalrecords" current-page="pagination.pageNumber">
                                     <td>{{plan.planname}}</td>
                                     <td>{{plan.description}}</td>
                                     <td>{{plan.plandays}}</td>
@@ -187,9 +187,12 @@
                                         <a href="" ng-click="doLoadMealPlanDetails(plan.mapid)" class="btn-xs btn-primary">View Plan</a>
                                     </td>
                                 </tr>    
-                                <tr ng-show="coachPlanList.length==0"><td colspan="4" class="text-center">No Records Found !!!</td></tr>
+                                <tr ng-show="myMealPlanList.plans.length==0"><td colspan="4" class="text-center">No Records Found !!!</td></tr>
                             </tbody>    
                         </table>
+                        <!-- Start Pagination -->
+                <dir-pagination-controls ng-show="paginationLoad" boundary-links="true"> </dir-pagination-controls>
+                <!-- End Pagination -->
              <table class="table table-bordered table-striped" ng-show="planDetailView">
                     <thead>
                         <tr class="warning">
@@ -205,7 +208,12 @@
                     <th class="col-md-2 text-center"><strong>Dinner</strong></th>
                 </tr>
                 <tr ng-repeat="mealPlanDetail in mealPlanDetailList" ng-init="$last ? doIntializeLeanModal() : null">
-                    <td class="col-md-1 food-plans text-center align-bottom">{{mealPlanDetail.day}}</td>
+                    <td class="col-md-1 food-plans text-center align-bottom">
+                        {{mealPlanDetail.day}}
+                        <div class="foodcalorie badge">
+                        {{mealPlanDetail.totalCalories}}&nbsp;KCals&nbsp;<i class="fa fa-arrow-up"></i>
+                        </div>
+                    </td>
                     <td class="food-plans">                           
                         <!--Breakfast-->
                         <div class="food" ng-repeat="foodItem in mealPlanDetail.foods[0].foodItems">
@@ -251,12 +259,70 @@
                         </div>
                     </td>
                 </tr>
-</table>
+            </table>
                     </div>
 
                     <div class="workoutplan-details-div">
-                        <p>Workout Plan</p>
+                        <a href="" ng-show="planDetailView" class="btn-sm btn-warning pull-right margin-left-5 margin-bottom-10"  ng-click="planDetailView=false"><i class="fa fa-arrow-circle-o-left"></i>&nbsp;Back to Plans</a>
+                         <table class="table table-bordered table-striped" ng-hide="workPlanDetailView">
+                            <thead>
+                                <tr class="warning">
+                                    <th>Plan Name</th>
+                                    <th>Description</th>
+                                    <th>Duration</th>
+                                    <th>Status</th>
+                                    <th>Options</th>
+                                </tr>    
+                            </thead>
+                            <tbody>
+                                <tr dir-paginate="plan in myworkoutPlanList.plans | itemsPerPage:pagination.itemsPerPage" ng-show="myworkoutPlanList.plans.length!=0 && plan.plantype==2" total-items="myworkoutPlanList.totalrecords" current-page="pagination.pageNumber">
+                                    <td>{{plan.planname}}</td>
+                                    <td>{{plan.description}}</td>
+                                    <td>{{plan.plandays}}</td>
+                                    <td>{{plan.userplanstatus}}</td>
+                                    <td>
+                                        <a href="" ng-click="doLoadWorkoutPlanDetails(plan.mapid)" class="btn-xs btn-primary">View Plan</a>
+                                    </td>
+                                </tr>    
+                                <tr ng-show="myworkoutPlanList.plans.length==0"><td colspan="4" class="text-center">No Records Found !!!</td></tr>
+                            </tbody>    
+                        </table>
+               <!-- Start Pagination -->
+                <dir-pagination-controls ng-show="paginationLoad" boundary-links="true"> </dir-pagination-controls>
+                <!-- End Pagination -->
+                <table class="table table-bordered table-striped" ng-show="workPlanDetailView">
+                    <thead>
+                        <tr class="warning">
+                            <th colspan="6"><h2 class="text-center"><strong>{{plandetail.description}}</strong></h2></th>
+                        </tr>
+                    </thead>
+                <tr>
+                    <th class="col-md-3 text-center" style="margin-top:15px"><strong>Plans</strong></th>
+                    <th class="col-md-9 text-center"><strong>Excercise Name</strong></th>
+                </tr>
+                <tr ng-repeat="workoutPlanDetail in workoutPlanDetailList" ng-init="$last ? doIntializeLeanModal() : null">
+                    <td class="col-md-1 food-plans text-center align-bottom">{{workoutPlanDetail.day}}
+                       <div valign="bottom"><a href="modal-add-exercise" class="food-plan-add-food text-bottom modal_trigger_exercise" ng-click="doCoachAddExercise(workoutPlanDetail.day)">Add Exercise</a></div>     
+                    </td>
+                    <td class="exercise-plans">
+                        <div class="col-md-4" ng-repeat="workoutItem in workoutPlanDetail.workouts">
+                                <div class="exercise">
+                                    <span class="name_values">{{workoutItem.exercisename}}</span>
+                                    <i class="fa fa-times-circle pull-right" ng-click="doDeleteExerciseFromPlan(workoutItem.id);"></i>&nbsp;
+                                    <i class="fa fa-edit pull-right" ng-click="doEditExerciseFromPlan(workoutItem.id);"></i>&nbsp;&nbsp;
+                                    <div class="time">
+                                        {{workoutItem.minutes}}&nbsp;Minutes
+                                    </div>
+                                    <div class="name_values">
+                                        {{workoutItem.categoryname}}&nbsp;&nbsp;|&nbsp;&nbsp;{{workoutItem.typename}}
+                                    </div>
+                                </div>
+                        </div>
                     </div>
+                    </td>
+                </tr>
+                </table>
+                </div>
                 </div>
                 </form>
 

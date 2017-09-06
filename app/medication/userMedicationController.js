@@ -35,7 +35,7 @@ userApp.controller('UserMedicationController',['$scope','requestHandler','Flash'
         $scope.medication.issharable= 0;
         $scope.medicationForm.$setPristine();
         $scope.isNew = true;
-        $scope.title = "Add Group";
+        $scope.title = "Add Medication";
 
         if($('.search-list-form').css('display') != 'none'){
             $(".search-list-form").hide();

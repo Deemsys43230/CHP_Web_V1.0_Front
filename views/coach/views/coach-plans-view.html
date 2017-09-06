@@ -51,7 +51,12 @@
                     <th class="col-md-2 text-center"><strong>Dinner</strong></th>
                 </tr>
                 <tr ng-repeat="mealPlanDetail in mealPlanDetailList" ng-init="$last ? doIntializeLeanModal() : null">
-                    <td class="col-md-1 food-plans text-center align-bottom">{{mealPlanDetail.day}}</td>
+                    <td class="col-md-1 food-plans text-center align-bottom">
+                        {{mealPlanDetail.day}}
+                        <div class="foodcalorie badge">
+                        {{mealPlanDetail.totalCalories}}&nbsp;KCals&nbsp;<i class="fa fa-arrow-up"></i>
+                        </div>
+                    </td>
                     <td class="food-plans">                           
                         <!--Breakfast-->
                         <div class="food" ng-repeat="foodItem in mealPlanDetail.foods[0].foodItems">

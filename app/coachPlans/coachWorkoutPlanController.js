@@ -19,7 +19,117 @@ $scope.doGetCoachWorkoutPlanList=function(){
   });
 };
 
+//Reset Scope
+$scope.reset=function(){
+    $scope.workoutPlan={};
+    $scope.workoutPlan.planname="";
+    $scope.workoutPlan.plandays="";
+    $scope.workoutPlan.intensity="";
+    $scope.workoutPlan.level="";
+    $scope.workoutPlan.goodfor="";
+    $scope.workoutPlan.equipments="";
+    $scope.workoutPlan.description="";
+    $scope.workoutPlanForm.$setPristine();
+    $scope.isNew = true;
+    $scope.title = "Add Workout Plan";
+
+    $(function(){
+        $("#lean_overlay").fadeTo(1000);
+        $("#workout-plan").fadeIn(600);
+        $(".common_model").show();
+        $scope.shouldBeOpen = true;
+    });
+
+    $(".modal_close").click(function(){
+        $(".common_model").hide();
+        $("#workout-plan").hide();
+        $("#lean_overlay").hide();
+        $scope.shouldBeOpen = false;
+    });
+
+    $("#lean_overlay").click(function(){
+        $(".common_model").hide();
+        $("#workout-plan").hide();
+        $("#lean_overlay").hide();
+        $scope.shouldBeOpen = false;
+    });
+
+};
+
+$scope.doAddWorkoutPlanByCoach=function(){
+    requestHandler.postRequest("coach/insertorupdateworkoutplan/",$scope.workoutPlan).then(function(response){
+       $scope.doGetCoachWorkoutPlanList();
+         successMessage(Flash,"Successfully Added");
+         $scope.loaded=false;
+         $scope.paginationLoad=true;  
+     }, function(){
+      errorMessage(Flash,"Please try again later!");
+     });
+};
+
+$scope.doEditCoachWorkoutPlan=function(id){
+    $scope.isNew = false;
+    $scope.title = "Edit Workout Plan";
+
+    $(function(){
+        $("#lean_overlay").fadeTo(1000);
+        $("#workout-plan").fadeIn(600);
+        $(".common_model").show();
+        $scope.shouldBeOpen = true;
+    });
+
+    $scope.loaded=true;
+    $scope.coachWorkoutPlanPagination={
+                    "limit": $scope.pagination.itemsPerPage,
+                    "offset": ($scope.pagination.pageNumber-1)*$scope.pagination.itemsPerPage
+                    };
+
+    requestHandler.postRequest("coach/myplans/",$scope.coachWorkoutPlanPagination).then(function(response){
+        $scope.coachWorkoutPlanList= response.data.plans;
+        $scope.loaded=false;
+    });
+    
+    $.each($scope.coachWorkoutPlanList.plans,function(index,value){
+       if(value.id==id){
+          $scope.workoutPlan=value;
+          original= angular.copy($scope.workoutPlan);
+       }
+    });
+    
+    $(".modal_close").click(function(){
+        $(".common_model").hide();
+        $("#workout-plan").hide();
+        $("#lean_overlay").hide();
+        $scope.shouldBeOpen = false;
+    });
+
+    $("#lean_overlay").click(function(){
+        $(".common_model").hide();
+        $("#workout-plan").hide();
+        $("#lean_overlay").hide();
+        $scope.shouldBeOpen = false;
+    });
+};
+
+$scope.isClean=function(){
+  return angular.equals(original, $scope.workoutPlan);
+};    
+
+$scope.doDeleteCoachWorkoutPlan=function(id){
+    if(confirm("Are you sure you want to delete?")){
+      requestHandler.postRequest("coach/deleteplan/",{'id':id}).then(function(response){
+          if(response.data.Response_status==1){
+            successMessage(Flash,"Successfully Deleted");
+            $scope.doGetCoachWorkoutPlanList();
+       }
+    }, function(){
+          errorMessage(Flash,"Please try again later!");
+    });
+  }
+};
+
 $scope.init=function(){
+  var original="";
 	$scope.pagination= {"itemsPerPage": 8, "pageNumber": 1}
 	$scope.paginationLoad=false;
 };
@@ -53,7 +163,6 @@ $scope.doviewCoachWorkoutPlans=function(){
          );
       }
 
-      console.log($scope.workoutPlanDetailList[0]);
       //Group json object
       Object.keys($scope.plan).forEach(function(key){
         $.each($scope.plan[key].workouts,function(index,value){
@@ -79,6 +188,7 @@ $scope.doCoachAddExercise=function(planDay){
 
     $scope.userExercise={};
     $scope.userExercise.day= planDay;
+    $scope.showSearch=true;
     $scope.addExcercise=false;
     $scope.isNew=true;
     $scope.title= "Add Exercise";
@@ -179,13 +289,57 @@ $scope.doCalculateCaloriesExercise=function(){
     }
 };
 
+$scope.doEditExerciseFromPlan=function(id){
+  $scope.userExercise={};
+    requestHandler.postRequest("coach/exerciseplandetail/",id).then(function(response){
+        $scope.userSelectedExerciseDetails= response.data.exercisedetail;
+        $scope.userSavedExerciseDetails= response.data.savedexerciseplan;
+
+        $.each($scope.userSavedExerciseDetails.levels,function(index,value){
+           if(value.levels.levelid==$scope.userSavedExerciseDetails.unitlevelid){
+              $scope.userExercise.selectedLevel=value;
+           }
+        });  
+
+        $scope.userExercise.id= $scope.userSavedExerciseDetails.id;
+        $scope.userExercise.day= $scope.userSavedExerciseDetails.day;
+        $scope.doCalculateCaloriesExercise();
+        $scope.userFood.calorieburn=$scope.caloriesSpent;      
+    });
+
+        $scope.addExercise=true;
+        $scope.showSearch=false;
+        $scope.isNew=false;
+        $scope.title="Edit Exercise";
+
+        $(function(){
+                $("#lean_overlay").fadeTo(1000);
+                $("#modal-add-exercise").fadeIn(600);
+                $(".user_register").show();
+              
+            });
+
+            $(".modal_close").click(function(){
+                $(".user_register").hide();
+                $("#modal-add-exercise").hide();
+                $("#lean_overlay").hide();
+                $scope.resetdata();
+            });
+
+            $("#lean_overlay").click(function(){
+                $(".user_register").hide();
+                $("#modal-add-exercise").hide();
+                $("#lean_overlay").hide();
+                $scope.resetdata();
+            });
+};
 
 //Insert  Exercise
 $scope.doInsertExerciseByCoach=function(){
     //Set values according to the api calls
     $scope.userExercise.planid= $routeParams.id;
     $scope.userExercise.exerciseid=$scope.userSelectedExerciseDetails.exerciseid;
-    $scope.userExercise.unitlevelid= $scope.userExercise.selectedLevel.levelunitid;
+    $scope.userExercise.unitlevelid= $scope.userExercise.selectedLevel.levelid;
     $scope.userExercise.isoptional=1;
 
     requestHandler.postRequest("coach/insertorupdateexerciseplan/",$scope.userExercise).then(function(response){
@@ -205,7 +359,7 @@ $scope.doDeleteExerciseFromPlan=function(id){
     requestHandler.postRequest("coach/deleteexerciseplan/",$scope.deleteExerciseParam).then(function(response){
        if(response.data.Response_status==1){
           successMessage(Flash,"Successfully Deleted");
-          $scope.doViewCoachPlans();
+          $scope.doviewCoachWorkoutPlans();
        }
     }, function(){
           errorMessage(Flash,"Please try again later!");
