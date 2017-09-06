@@ -62,13 +62,15 @@ $scope.doViewCoachPlans=function(){
             }
 
           // Group Json object of plan 
-          
-          Object.keys($scope.plan).forEach(function(key){
-              $.each($scope.plan[key].foods,function(index,value){
-                $scope.mealPlanDetailList[value.day-1].foods[value.foodsessionid-1].foodItems.push(value);
-              });
+         $.each($scope.plan, function (key, obj) {
+              console.log(JSON.stringify(obj));
+              if(key!='plandetail'){
+                $.each(obj.foods, function (index, value) {
+                 $scope.mealPlanDetailList[value.day-1].foods[value.foodsessionid-1].foodItems.push(value);
+                });
+              }              
           });
-          
+         
         },function(){
             errorMessage(Flash,"Please try again later!")
         });

@@ -458,6 +458,65 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
 
         });
     };
+    //Food Meal Plan
+    $scope.doGetCoachMealPlans=function(targetid){
+        $scope.planDetailView=false;
+
+       $scope.getMealPlanParams={
+            "targetid":targetid,
+            "limit":$scope.mealPlanPagination.itemsPerPage,
+            "offset":($scope.mealPlanPagination.pageNumber-1)*$scope.mealPlanPagination.itemsPerPage
+        };   
+        requestHandler.postRequest("user/getplans/",$scope.getMealPlanParams).then(function(response){
+            $scope.myMealPlanList=response.data.plans;
+        });
+    };
+
+    //Laod Food Meal Plan Details
+    $scope.doLoadMealPlanDetails=function(mapId){
+        $scope.planDetailView=true;
+
+        requestHandler.postRequest("getplandetail/",{"mapid":mapId}).then(function(response){
+        $scope.plan= response.data.plan;
+            //First We need to group up days
+            $scope.plandetail=response.data.plandetail;
+           
+            //Initialize
+            $scope.mealPlanDetailList=[];
+
+            //create array of days
+            for(var i=1;i<=$scope.plandetail.plandays;i++)
+            {
+              $scope.mealPlanDetailList.push(
+                  {
+                    "day":"Day "+i,
+                    "dayId":i,
+                    "foods":[
+                              {"sessionId":1,"sessionName":"BreakFast","foodItems":[]},
+                              {"sessionId":2,"sessionName":"Brunch","foodItems":[]},
+                              {"sessionId":3,"sessionName":"Lunch","foodItems":[]},
+                              {"sessionId":4,"sessionName":"Snacks","foodItems":[]},
+                              {"sessionId":5,"sessionName":"Dinner","foodItems":[]},  
+                            ]
+                  }
+                );
+            }
+
+          // Group Json object of plan 
+         $.each($scope.plandetail, function (key, obj) {            
+              if(key.startsWith("day")){
+                $.each(obj.foods, function (index, value) {
+                 $scope.mealPlanDetailList[value.day-1].foods[value.foodsessionid-1].foodItems.push(value);
+                });
+              }              
+          });
+
+         console.log($scope.mealPlanDetailList);
+         
+        },function(){
+            errorMessage(Flash,"Please try again later!")
+        });
+    };
 
     $scope.userCoachViewInit=function(){
         $scope.scrollnation={"itemsPerScroll": 4,"scrollEndCount":-1};
@@ -474,6 +533,11 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
         $scope.doGetChatMessage($routeParams.id);
         $scope.doGetCoachAdviceByUser($routeParams.id);
         $scope.doGetUpcomingEvents($routeParams.id);
+
+        //Initializ Page
+        $scope.mealPlanPagination={"itemsPerPage":10,"pageNumber":1};
+
+        $scope.doGetCoachMealPlans($routeParams.id);
     };
 
     $scope.coachListInit=function(){
