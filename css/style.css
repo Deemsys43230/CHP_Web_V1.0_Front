@@ -17623,3 +17623,27 @@ div.foodvalues{
     top:-4px;
     z-index: 20;
 }
+/*  Client Profile */
+.client-card{
+    height: 150px;
+    border:solid 1px #ddd;
+    border-radius: 5px;
+    box-shadow: 1px 1px #f3f3f3;
+    padding:10px;
+}
+.client-card .client-card-img{
+    width:25%;
+    height: 75px;
+    border-radius: 50%;
+}
+.client-card-details{
+    float: right;
+    width: 70%;
+    padding: 5px;
+}
+.client-status{
+    width: 100%;
+    padding: 2px 5px 2px 5px;
+    margin:20px 0px 10px 0px;
+    background-color: #ffec6d;
+}

@@ -1620,6 +1620,28 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
 
 }]);
 
+coachApp.controller('MyMembersController',['$scope','requestHandler','Flash','$routeParams',function($scope,requestHandler,Flash,$routeParams){
+
+    $scope.getMyClientsList=function(){
+         requestHandler.getRequest("coach/myclients/","").then(function(response){
+            $scope.myClients=response.data.clients;
+        },function(){
+            successMessage(Flash, "Successfully Plan Added!");
+            $scope.doGetTrainingPlanDetails(userid);
+        });
+    }
+
+
+    $scope.init=function(){
+        $scope.getMyClientsList();
+    }
+
+    //My Members Init
+    $scope.init();
+
+
+}]);
+
 coachApp.controller('MembersViewController',['$scope','requestHandler','Flash','$routeParams','$sce',function($scope,requestHandler,Flash,$routeParams,$sce) {
 
     $scope.activeClass.mymembers='active';
