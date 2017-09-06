@@ -1,6 +1,6 @@
 <div class="col-lg-12 col-md-12 col-sm-12 no-padding" ng-cloak class="ng-cloak" ng-init="init()">
     <!-- <div flash-message="2000" class="col-lg-4 col-md-4 col-sm-4 pull-right"></div> -->
-    <h5 class="classic-title"><a href="" class="active-tab profile-details"><i class="fa fa-user"></i>&nbsp;&nbsp;Profile</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="" class="tracking-plan"><i class="fa fa-gg"></i>&nbsp;&nbsp;Training Plans </a>|&nbsp;&nbsp;<a href="" class="medication"><i class="fa fa-medkit"></i>&nbsp;&nbsp;Medications&nbsp;<small class="badge">{{medicationList.length}}</small></a> <a href=""  class="remove-text-color pull-right" ng-show="clients.length>0" ng-click="doRemoveUser()">Remove User</a></h5>
+    <h5 class="classic-title"><a href="" class="active-tab profile-details"><i class="fa fa-user"></i>&nbsp;&nbsp;Profile</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="" class="stats"><i class="fa fa-history"></i>&nbsp;&nbsp;Stats </a>|&nbsp;&nbsp;<a href="" class="tracking-plan"><i class="fa fa-gg"></i>&nbsp;&nbsp;Training Plans </a>|&nbsp;&nbsp;<a href="" class="medication"><i class="fa fa-medkit"></i>&nbsp;&nbsp;Medications&nbsp;<small class="badge">{{medicationList.length}}</small></a> <a href=""  class="remove-text-color pull-right" ng-show="clients.length>0" ng-click="doRemoveUser()">Remove User</a></h5>
       
         <div ng-if="loaded">
             <div class="loader-style">
@@ -10,7 +10,7 @@
     <div class="profile-details-div">
     <div ng-show="clients.length>0">
         <div class="col-lg-12 col-md-12 col-sm-12">
-              <h2 class="classic-title text-color"><span class="sub-title"><strong><i class="fa fa-user"></i>&nbsp;&nbsp;Profile</strong></span></h2> 
+              <!-- <h2 class="classic-title text-color"><span class="sub-title"><strong><i class="fa fa-user"></i>&nbsp;&nbsp;Profile</strong></span></h2> --> 
              <div class=" col-lg-6 col-md-6 col-sm-6" style="padding: 8px;">
                 <div class="col-md-4">
                 <img class="img-circle" style="width:140px;" ng-src="{{coachclientdetails.imageurl}}">
@@ -92,115 +92,111 @@
         </div>
         <div class="col-lg-12 col-md-12 col-sm-12 margin-top-10 no-padding">
             <h2 class="classic-title text-color"><span class="sub-title"><strong><i class="fa fa-male"></i>&nbsp;&nbsp;DEMOGRAPHY</strong></span></h2>   
-            <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12 padding-rl-10 margin-top-15">
-                    <div class="col-lg-3 col-sm-3 col-md-3 text-center">
-                        <div class="demo-font client-content">
-                            <span ng-show="coachclientdetails.unitPreference==1">
-                                <span>{{demographyDeatil.height}}</span>
-                            </span>
-                            <span ng-show="coachclientdetails.unitPreference==2" >
-                                <span> {{demographyDeatil.heightFeet}}<sup style="color: deepskyblue">'</sup>&nbsp;{{demographyDeatil.heightInches}}<sup style="color: deepskyblue">"</sup></span>
-                            </span></br/></br/>
-                            <span class="text-bold">
-                                <h4>Height <span ng-show="coachclientdetails.unitPreference==1"><small>(cms)</small></span> <span ng-show="coachclientdetails.unitPreference==2"><small>(feet,inches)</small></span></h4>
-                            </span>
-                        </div> 
-                    </div>  
-                    <div class="col-lg-3 col-sm-3 col-md-3 text-center">
-                        <div class="demo-font client-content">
-                            <span ng-show="coachclientdetails.unitPreference==1">
-                                <span>{{demographyDeatil.weight}}</span>
-                            </span>
-                            <span ng-show="coachclientdetails.unitPreference==2" >
-                                <span>{{demographyDeatil.weight}}</span>                                           
-                            </span><br/><br/>   
-                            <span class="text-bold">
-                                <h4>Weight <span ng-show="coachclientdetails.unitPreference==1"><small>(kgs)</small></span> <span ng-show="coachclientdetails.unitPreference==2"><small>(lbs)</small></span></h4>
-                            </span>
-                        </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 no-padding margin-top-15">
+                <div class="col-lg-2 col-sm-2 col-md-2">
+                    <div class="demo-font client-content">
+                        <span ng-show="coachclientdetails.unitPreference==1">
+                            <span>{{demographyDeatil.height}}</span>
+                        </span>
+                        <span ng-show="coachclientdetails.unitPreference==2" >
+                            <span> {{demographyDeatil.heightFeet}}<sup style="color: deepskyblue">'</sup>&nbsp;{{demographyDeatil.heightInches}}<sup style="color: deepskyblue">"</sup></span>
+                        </span></br/></br/>
+                        <span class="text-bold">
+                            <h4>Height <span ng-show="coachclientdetails.unitPreference==1"><small>(cms)</small></span> <span ng-show="coachclientdetails.unitPreference==2"><small>(feet,inches)</small></span></h4>
+                        </span>
+                    </div> 
+                </div>  
+                <div class="col-lg-2 col-sm-2 col-md-2">
+                    <div class="demo-font client-content">
+                        <span ng-show="coachclientdetails.unitPreference==1">
+                            <span>{{demographyDeatil.weight}}</span>
+                        </span>
+                        <span ng-show="coachclientdetails.unitPreference==2" >
+                            <span>{{demographyDeatil.weight}}</span>                                           
+                        </span><br/><br/>   
+                        <span class="text-bold">
+                            <h4>Weight <span ng-show="coachclientdetails.unitPreference==1"><small>(kgs)</small></span> <span ng-show="coachclientdetails.unitPreference==2"><small>(lbs)</small></span></h4>
+                        </span>
                     </div>
-                    <div class="col-lg-3 col-sm-3 col-md-3 text-center">
-                        <div class="demo-font client-content">
-                            <span>{{demographyDeatil.bmi}}</span><br/><br/>
-                            <span class="text-bold">
-                                <h5>BMI <small>(Kg/m<sup>2</sup>)</small></h5>
-                            </span>                                    
-                        </div>
+                </div>
+                <div class="col-lg-2 col-sm-2 col-md-2">
+                    <div class="demo-font client-content">
+                        <span>{{demographyDeatil.hip}}</span><br/><br/>
+                        <span class="text-bold">
+                            <h5>Hip<small>(Inches)</small></small></h5>
+                        </span>                                    
                     </div>
-                    <div class="col-lg-3 col-sm-3 col-md-3 text-center">
-                        <div class="demo-font client-content">
-                            <span> {{demographyDeatil.targetweight==null?'NA':demographyDeatil.targetweight}} </span><br/><br/>
-                            <span class="text-bold">
-                                <h5>Target Weight &nbsp;<span ng-show="coachclientdetails.unitPreference==1"><small>(kgs)</small></span> <span ng-show="coachclientdetails.unitPreference==2"><small>(lbs)</small></span></h5>
-                            </span>
-                        </div>
+                </div>
+                <div class="col-lg-2 col-sm-2 col-md-2">
+                    <div class="demo-font client-content">
+                        <span>{{demographyDeatil.waist}}</span><br/><br/>
+                        <span class="text-bold">
+                            <h5>Waist <small>(Inches)</h5>
+                        </span>                                    
                     </div>
-                    <div class="col-md-12 col-lg-12 col-sm-12 margin-top-10">
-                        <div class="col-md-1 col-lg-1"></div>
-                        <div class="col-lg-3 col-sm-3 col-md-3 text-center">
-                            <h4 class="text-bold margin-top-10">User Type</h4>
-                                <img class="margin-top-10" ng-show="demographyDeatil.diabetes == 1 && demographyDeatil.obesity == null" style="width:60px;" src="../../images/diabetes.jpg"/>
-                                <img class="margin-top-10" ng-show="demographyDeatil.obesity == 1 && demographyDeatil.diabetes == null" style="width:60px;" src="../../images/obese.png"/>
-                                <img class="margin-top-10" ng-show="demographyDeatil.diabetes == 1 && demographyDeatil.obesity == 1" style="width:60px;" src="../../images/obese_diabetes.png"/>
-                                <img class="margin-top-10" ng-show="demographyDeatil.diabetes == null && demographyDeatil.obesity == null" style="width:60px;" src="../../images/healthy.png"/>
+                </div>
+                <div class="col-lg-2 col-sm-2 col-md-2">
+                    <div class="demo-font client-content">
+                        <span>{{demographyDeatil.bmi}}</span><br/><br/>
+                        <span class="text-bold">
+                            <h5>BMI <small>(Kg/m<sup>2</sup>)</small></h5>
+                        </span>                                    
+                    </div>
+                </div>
+                <div class="col-lg-2 col-sm-2 col-md-2">
+                    <div class="demo-font client-content">
+                        <span> {{demographyDeatil.targetweight==null?'NA':demographyDeatil.targetweight}} </span><br/><br/>
+                        <span class="text-bold">
+                            <h5>Target Weight &nbsp;<span ng-show="coachclientdetails.unitPreference==1"><small>(kgs)</small></span> <span ng-show="coachclientdetails.unitPreference==2"><small>(lbs)</small></span></h5>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-md-12 col-lg-12 col-sm-12 margin-top-10 margin-bottom-10">
+                    <div class="col-md-1 col-lg-1"></div>
+                    <div class="col-lg-3 col-sm-3 col-md-3 text-center">
+                        <h4 class="text-bold margin-top-10">User Type</h4>
+                            <img class="margin-top-10" ng-show="demographyDeatil.diabetes == 1 && demographyDeatil.obesity == null" style="width:60px;" src="../../images/diabetes.jpg"/>
+                            <img class="margin-top-10" ng-show="demographyDeatil.obesity == 1 && demographyDeatil.diabetes == null" style="width:60px;" src="../../images/obese.png"/>
+                            <img class="margin-top-10" ng-show="demographyDeatil.diabetes == 1 && demographyDeatil.obesity == 1" style="width:60px;" src="../../images/obese_diabetes.png"/>
+                            <img class="margin-top-10" ng-show="demographyDeatil.diabetes == null && demographyDeatil.obesity == null" style="width:60px;" src="../../images/healthy.png"/>
 
-                            <div class="margin-top-10" ng-show="demographyDeatil.diabetes == 1 && demographyDeatil.obesity == null">Diabetes</div>
-                            <div class="margin-top-10" ng-show="demographyDeatil.obesity == 1 && demographyDeatil.diabetes == null">Obese</div>
-                            <div class="margin-top-10" ng-show="demographyDeatil.diabetes == 1 && demographyDeatil.obesity == 1">Obese & Diabetes</div>
-                            <div class="margin-top-10" ng-show="demographyDeatil.diabetes == null && demographyDeatil.obesity == null">Normal</div>
-                        </div>
-                        <div class="col-lg-3 col-sm-3 col-md-3 text-center">
-                            <h4 class="text-bold margin-top-10">Plan Type</h4>
-                                <img class="margin-top-10" ng-show="demographyDeatil.userPlanType ==1" style="width:60px;" src="../../images/weight_maintain.png"/>
-                                <img class="margin-top-10" ng-show="demographyDeatil.userPlanType == 2" style="width:60px;" src="../../images/weight_loss.png"/>
-                                <img class="margin-top-10" ng-show="demographyDeatil.userPlanType == 3" style="width:60px;" src="../../images/weight_gain.png"/>
-                                <div class="margin-top-10" ng-show="demographyDeatil.userPlanType == 1">Weight Maintain</div>
-                                <div class="margin-top-10" ng-show="demographyDeatil.userPlanType == 2">Weight Loss</div>
-                                <div class="margin-top-10" ng-show="demographyDeatil.userPlanType == 3">Weight Gain</div>
-                        </div>
-                        <div class="col-lg-4 col-sm-4 col-md-4 text-center">
-                            <h4 class="text-bold margin-top-10">Activity Level</h4>
-                            <img class="margin-top-10" ng-show="demographyDeatil.userActivityType == 1" style="width:60px;" src="../../images/no-exercise.png"/>
-                            <img class="margin-top-10" ng-show="demographyDeatil.userActivityType == 2" style="width:60px;" src="../../images/little-no.png"/>
-                            <img class="margin-top-10" ng-show="demographyDeatil.userActivityType == 3" style="width:60px;" src="../../images/moderate.png"/>
-                            <img class="margin-top-10" ng-show="demographyDeatil.userActivityType == 4" style="width:60px;" src="../../images/heavy.png"/>
-                            <img class="margin-top-10" ng-show="demographyDeatil.userActivityType == 5" style="width:60px;" src="../../images/very-heavy.png"/>
-                            <div class="margin-top-10" ng-show="demographyDeatil.userActivityType == 1">Little to no exercise</div>
-                            <div class="margin-top-10" ng-show="demographyDeatil.userActivityType == 2">Light Exercise&nbsp;(1-3 days per week)</div>
-                            <div class="margin-top-10" ng-show="demographyDeatil.userActivityType == 3">Moderate Exercise&nbsp;(3-5 days per week)</div>
-                            <div class="margin-top-10" ng-show="demographyDeatil.userActivityType == 4">Heavy Exercise&nbsp;(6-7 days per week)</div>
-                            <div class="margin-top-10" ng-show="demographyDeatil.userActivityType == 5">Very Heavy Exercise&nbsp;(Twice per day, extra heavy workouts)</div>
-                        </div>
+                        <div class="margin-top-10" ng-show="demographyDeatil.diabetes == 1 && demographyDeatil.obesity == null">Diabetes</div>
+                        <div class="margin-top-10" ng-show="demographyDeatil.obesity == 1 && demographyDeatil.diabetes == null">Obese</div>
+                        <div class="margin-top-10" ng-show="demographyDeatil.diabetes == 1 && demographyDeatil.obesity == 1">Obese & Diabetes</div>
+                        <div class="margin-top-10" ng-show="demographyDeatil.diabetes == null && demographyDeatil.obesity == null">Normal</div>
+                    </div>
+                    <div class="col-lg-3 col-sm-3 col-md-3 text-center">
+                        <h4 class="text-bold margin-top-10">Plan Type</h4>
+                            <img class="margin-top-10" ng-show="demographyDeatil.userPlanType ==1" style="width:60px;" src="../../images/weight_maintain.png"/>
+                            <img class="margin-top-10" ng-show="demographyDeatil.userPlanType == 2" style="width:60px;" src="../../images/weight_loss.png"/>
+                            <img class="margin-top-10" ng-show="demographyDeatil.userPlanType == 3" style="width:60px;" src="../../images/weight_gain.png"/>
+                            <div class="margin-top-10" ng-show="demographyDeatil.userPlanType == 1">Weight Maintain</div>
+                            <div class="margin-top-10" ng-show="demographyDeatil.userPlanType == 2">Weight Loss</div>
+                            <div class="margin-top-10" ng-show="demographyDeatil.userPlanType == 3">Weight Gain</div>
+                    </div>
+                    <div class="col-lg-4 col-sm-4 col-md-4 text-center">
+                        <h4 class="text-bold margin-top-10">Activity Level</h4>
+                        <img class="margin-top-10" ng-show="demographyDeatil.userActivityType == 1" style="width:60px;" src="../../images/no-exercise.png"/>
+                        <img class="margin-top-10" ng-show="demographyDeatil.userActivityType == 2" style="width:60px;" src="../../images/little-no.png"/>
+                        <img class="margin-top-10" ng-show="demographyDeatil.userActivityType == 3" style="width:60px;" src="../../images/moderate.png"/>
+                        <img class="margin-top-10" ng-show="demographyDeatil.userActivityType == 4" style="width:60px;" src="../../images/heavy.png"/>
+                        <img class="margin-top-10" ng-show="demographyDeatil.userActivityType == 5" style="width:60px;" src="../../images/very-heavy.png"/>
+                        <div class="margin-top-10" ng-show="demographyDeatil.userActivityType == 1">Little to no exercise</div>
+                        <div class="margin-top-10" ng-show="demographyDeatil.userActivityType == 2">Light Exercise&nbsp;(1-3 days per week)</div>
+                        <div class="margin-top-10" ng-show="demographyDeatil.userActivityType == 3">Moderate Exercise&nbsp;(3-5 days per week)</div>
+                        <div class="margin-top-10" ng-show="demographyDeatil.userActivityType == 4">Heavy Exercise&nbsp;(6-7 days per week)</div>
+                        <div class="margin-top-10" ng-show="demographyDeatil.userActivityType == 5">Very Heavy Exercise&nbsp;(Twice per day, extra heavy workouts)</div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="container margin-top-10">
+        <div class="margin-top-10">
             <div class="accordion-group pull-right">
                 <div id="collapseTwo" class="accordion-body collapse">
                     <div class="accordion-inner medical-content">
                         <div class="col-lg-12 col-md-12 col-sm-12 margin-top-10 margin-bottom-5 no-padding border">
                             <div class="col-lg-12 col-md-12 col-sm-12">
-                                <div class="text-center" style="font-size: 17px;">Basic Nutrients</div>
-                            </div>
-                            <div class="col-lg-12 col-md-12 col-sm-12">
-                                <div class="col-lg-6 col-md-6 col-sm-6 no-padding margin-top-10">
-                                    <div class="col-lg-6 col-md-6 col-sm-6 no-padding">
-                                        <h5>Hip<small>(Inches)</small><span class="pull-right">:</span></h5>
-                                    </div>
-                                    <div class="col-lg-6 col-md-6 col-sm-6 padding-right-0">
-                                        <span> {{demographyDeatil.hip}} </span>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 col-md-6 col-sm-6 no-padding margin-top-10">
-                                    <div class="col-lg-6 col-md-6 col-sm-6 no-padding">
-                                        <h5>Waist <small>(Inches)</small><span class="pull-right">:</span></h5>
-                                    </div>
-                                    <div class="col-lg-6 col-md-6 col-sm-6 padding-right-0">
-                                        <span> {{demographyDeatil.waist}} </span>
-                                    </div>
-                                </div>                        
+                                <div class="text-center" style="font-size: 17px;">Required Nutrients</div>
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12">
                                 <div class="col-lg-6 col-md-6 col-sm-6 no-padding margin-top-10">
@@ -326,9 +322,6 @@
                                     <hr/>
                                 </div>
                             </div>
-
-
-
                             <div class="col-lg-6 col-md-6 col-sm-6">
                                 <div class="col-lg-9 col-md-9 col-sm-9 no-padding">
                                     <h5>HbA<sub>1c</sub> <small>(%)</small> <span class="pull-right">:</span> </h5>
@@ -369,190 +362,201 @@
                     </div>
                 </div>
             </div>
-            <a href="" id="ShowMore" class="text-color pull-right margin-top-10" data-toggle="collapse" data-target="#collapseTwo">Show More...</a>
-        </div>
-        <div class="col-lg-12 col-md-12 col-sm-12 no-padding">  
-            <div class="col-md-8 col-lg-8 col-sm-8 no-padding margin-top-10">
-                <h2 class="classic-title text-color"><span class="sub-title"><strong><i class="fa fa-male"></i>&nbsp;&nbsp;DAILY ACTIVITY</strong></span></h2> 
-                <div class="col-lg-12 col-md-12 col-sm-12 no-padding text-center">
-                    <div class="col-lg-3 col-md-3 col-sm-3 no-padding activity margin-left-30">
-                        <div class="col-md-12 col-lg-12 col-sm-12 sleep-textcolor text-bold margin-top-5">Sleep</div>
-                        <div class="col-md-4 col-lg-4 col-sm-4 no-padding margin-top-5">
-                            <img class="img-width" src="../../images/sleep.png"/>
-                        </div>
-                        <div class="col-md-8 col-lg-8 col-sm-8 no-padding">
-                            <div class="text-bold" ><small>{{wearable.sleep==null?"N/A":wearable.sleep}}</small></div>
-                            <div class="text-bold"><small>(minutes)</small></div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-3 col-sm-3 no-padding activity margin-left-30">
-                        <div class="col-md-12 col-lg-12 col-sm-12 heart-textcolor text-bold margin-top-5">Heart&nbsp;Beat</div>
-                        <div class="col-md-4 col-lg-4 col-sm-4 no-padding margin-top-5">
-                            <img class="img-width" src="../../images/bloodpressure.png"/>
-                        </div>
-                        <div class="col-md-8 col-lg-8 col-sm-8 no-padding">
-                            <div class="text-bold"><small>{{wearable.restingheartrate==null?"N/A":wearable.restingheartrate}}</small></div>
-                            <div class="text-bold"><small>(bpm)</small></div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-3 col-sm-3 no-padding activity margin-left-30">
-                        <div class=" col-md-12 col-lg-12 col-sm-12 water-textcolor margin-top-5 no-padding text-center text-bold">Water&nbsp;Level</div>
-                        <div class="col-md-4 col-lg-4 col-sm-4 no-padding margin-top-5">
-                            <img class="img-width" src="../../images/fat.png"/>
-                        </div>
-                        <div class="col-md-8 col-lg-8 col-sm-8 no-padding">
-                            <div class="text-bold" style="font-size: 78%">{{water.milliliters}}/{{water.ounces}}</div>
-                            <div class="text-bold"><small>ml/oz</small></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-12 col-md-12 col-sm-12 text-center no-padding margin-top-10">
-                    <div class="col-lg-3 col-md-3 col-sm-3 no-padding activity margin-left-30">
-                        <div class="col-md-12 col-lg-12 col-sm-12 floor-textcolor text-bold margin-top-5">Floors</div>
-                        <div class="col-md-4 col-lg-4 col-sm-4 no-padding margin-top-5">
-                            <img class="img-width" src="../../images/floor.png"/>
-                        </div>
-                        <div class="col-md-8 col-lg-8 col-sm-8 no-padding">
-                            <div class="text-bold"><small>{{wearable.floors==null?"N/A":(wearable.floors==0?"N/A":wearable.floors)}}</small></div>
-                            <div class="text-bold"><small>(floor)</small></div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-3 col-sm-3 no-padding activity margin-left-30">
-                        <div class="col-md-12 col-lg-12 col-sm-12 steps-textcolor text-bold margin-top-5">Steps</div>
-                        <div class="col-md-4 col-lg-4 col-sm-4 no-padding margin-top-5">
-                            <img class="img-width" src="../../images/step.png"/>
-                        </div>
-                        <div class="col-md-8 col-lg-8 col-sm-8 no-padding">
-                            <div class="text-bold"><small>{{wearable.steps==null?"N/A":(wearable.steps==0?"N/A":wearable.steps)}}</small></div>
-                            <div class="text-bold"><small>(count)</small></div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-3 col-sm-3 no-padding activity margin-left-30">
-                        <div class="col-md-12 col-lg-12 col-sm-12 bloodoxygen-textcolor text-bold no-padding text-center margin-top-5"><small>Blood&nbsp;Oxygen</small></div>
-                        <div class="col-md-4 col-lg-4 col-sm-4 no-padding margin-top-5">
-                            <img class="img-width" src="../../images/bloodoxygen.png"/>
-                        </div>
-                        <div class="col-md-8 col-lg-8 col-sm-8 no-padding">
-                            <div class="text-bold"><small>{{wearable.bloodoxygen==null?"N/A":wearable.bloodoxygen}}</small></div>
-                            <div class="text-bold"><small>(%)</small></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-12 col-lg-12 col-sm-12 no-padding margin-top-10 pull-right">                                    
-                    <div class="col-lg-3 col-md-3 col-sm-3 no-padding activity margin-left-30">
-                        <div class="col-md-12 col-lg-12 col-sm-12 bloodpessure-textcolor text-bold no-padding text-center text-center margin-top-5"><small>Blood&nbsp;Pressure</small></div>
-                        <div class="col-md-4 col-lg-4 col-sm-4 no-padding margin-top-5">
-                            <img class="img-width" src="../../images/heart1.gif"/>
-                        </div>
-                        <div class="col-md-8 col-lg-8 col-sm-8 no-padding">
-                            <div class="text-bold" title="Systolic Blood Pressure/Diastolic Blood Pressure"><small>{{wearable.systolic==null?"N/A":wearable.systolic}} / {{wearable.diastolic==null?"N/A":wearable.diastolic}}</small></div>
-                            <div class="text-bold" title="Systolic Blood Pressure/Diastolic Blood Pressure"><small>(mmHg)</small></div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-3 col-sm-3 no-padding activity margin-left-30">
-                        <div class="col-md-12 col-lg-12 col-sm-12 bloodglucose-textcolor text-center no-padding text-bold margin-top-5"><small>Blood&nbsp;Glucose</small></div>
-                        <div class="col-md-4 col-lg-4 col-sm-4 no-padding margin-top-5">
-                            <img class="img-width" src="../../images/bloodglucose.png"/>
-                        </div>
-                        <div class="col-md-8 col-lg-8 col-sm-8 no-padding">
-                            <div class="text-bold" title="Random Glucose/Fasting Glucose"><small>{{wearable.randombloodglucose==null?"N/A":wearable.randombloodglucose}} / {{wearable.fastingbloodglucose==null?"N/A":wearable.fastingbloodglucose}}</small></div>
-                            <div class="text-bold" title="Random Glucose/Fasting Glucose"><small>(mg/dl)</small></div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-3 col-sm-3 no-padding activity margin-left-30">
-                        <div class="col-md-12 col-lg-12 col-sm-12 bodytemperature-textcolor text-center no-padding text-bold margin-top-5"><small>Body&nbsp;Temperature</small></div>
-                        <div class="col-md-4 col-lg-4 col-sm-4 no-padding margin-top-5">
-                            <img class="img-width" src="../../images/smalltemp.png"/>
-                        </div>
-                        <div class="col-md-8 col-lg-8 col-sm-8 no-padding">
-                            <div class="text-bold"><small>{{wearable.bodytemperature==null?"N/A":wearable.bodytemperature}}</small></div>
-                            <div class="text-bold"><small>(<sup>o</sup>F)</small></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 col-lg-4 col-sm-4 margin-top-10">
-                <h2 class="classic-title text-color"><span class="sub-title"><strong><i class="fa fa-male"></i>&nbsp;&nbsp;DAILY BUDGETS</strong></span></h2>
-                <div class="row">
-                    <h5 class="col-lg-12 col-md-12 col-sm-12 margin-bottom-5">
-                        Budget Vs Net&nbsp;-&nbsp;
-                        <span style="font-size: small">
-                                <span ng-show="budgetDetails.OverorUnderStatus==1"><span class="fa fa fa-thumbs-down text-red">&nbsp;&nbsp;</span>Over Budget</span>
-                                <span ng-show="budgetDetails.OverorUnderStatus==2"><span class="fa fa fa-thumbs-up text-green">&nbsp;&nbsp;</span>Under Budget</span>
-                        </span>
-                    </h5>
-                        <div class="col-lg-5 col-md-12 col-sm-12 margin-top-10">
-                            <div class="circle-wrapper">
-                                <div class="circle-progress ng-cloak font-14" ng-style="getStyle()">{{Net}}</div>
-                                <div    round-progress
-                                     max="Budget"
-                                     current="Net"
-                                     color="{{currentGainColour}}"
-                                     bgcolor="{{ bgColor }}"
-                                     radius="37"
-                                     semi="isSemi"
-                                     rounded="rounded"
-                                     stroke="6"
-                                     clockwise="clockwise"
-                                     responsive="responsive"
-                                     duration="{{ duration }}"
-                                     animation="{{ currentAnimation }}"
-                                     offset="{{ offset }}">
-                                </div>
-                            </div>
-                            <p class="text-gray text-center">of {{Budget}} cals.</p>
-                        </div>
-
-                    <div class="col-lg-7 col-md-12 col-sm-12">
-                        <div class="label-update">
-                            <span class="label-text">Budget</span>
-                            <span class="label-count blue">{{budgetDetails.Budget}}</span>
-                        </div>
-                        <div class="label-update">
-                            <span class="label-text">Gained</span>
-                            <span class="label-count green">{{budgetDetails.Intake}}</span>
-                        </div>
-                        <div class="label-update">
-                            <span class="label-text">Burnt</span>
-                            <span class="label-count red">{{budgetDetails.Burnt}}</span>
-                        </div>
-                        <div class="label-update">
-                            <span class="label-text">Net</span>
-                            <span class="label-count orange">{{budgetDetails.Net}}</span>
-                        </div>
-                    </div>
-                    <div class="col-lg-12 col-md-12 col-sm-12">
-                        <!--<h6 ng-show="budgetCheck==0"><div class="label-danger">You are going under our recommended budget value. Please change your weight plan.</div></h6>-->
-                        <h6 ng-show="budgetDetails.OverorUnderStatus==1"><div class="label-danger">You have consumed {{budgetDetails.OverorUnderValue}} more calories. Please do exercise.</div></h6>
-                        <h6 ng-show="budgetDetails.OverorUnderStatus==2"><div class="label-success">You should take {{budgetDetails.OverorUnderValue}} more calories to reach today’s budget.</div></h6>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-12 col-md-12 col-sm-12 margin-top-10 no-padding">
-            <h2 class="classic-title text-color"><span class="sub-title"><strong><i class="fa fa fa-bar-chart"></i>&nbsp;&nbsp;GRAPHS</strong></span></h2>
-            <h2 class="text-center"><strong>&nbsp;&nbsp;Activity</strong></h2>
-            <div class="col-lg-6 col-md-6 col-sm-12 no-padding">
-                <div id="excersize" style="height:350px;"></div>
-            </div>
-            <div class="col-lg-6 col-md-6 col-sm-12 no-padding">
-                <div id="floors" style="height:350px;"></div>
-            </div>
-            <div class="col-lg-6 col-md-6 col-sm-12 no-padding">
-                <div id="steps"></div>
-            </div>
-            <div class="col-lg-6 col-md-6 col-sm-12 no-padding">
-                <div id="sleep"></div>
-            </div>
-            <div class="col-lg-6 col-md-6 col-sm-12 no-padding">
-                <div id="graph4"></div>
-            </div>
-            <div class="col-lg-6 col-md-6 col-sm-12 no-padding">
-                <div id="graph5"></div>
-            </div>
+            <a href="" id="ShowMore" class="text-color margin-top-10" data-toggle="collapse" data-target="#collapseTwo">Show More...</a>
         </div>
     </div>
 </div>
+<!-- For Clients Individual Activities -->
+        <div class="stats-div">
+            <div class="margin-top-5 pull-right mouse-pointer" >&nbsp;&nbsp;<i class="fa fa-calendar" ng-click="datePicker()"></i></div>
+            <input hidden id="main-start-date" ng-model="selectedDate">
+
+            <div id="ui-datepicker" class="pull-right main-datepicker">
+                <input type="text" id="main-date" class="profile_input override" block>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 no-padding">
+                
+                <div class="col-md-8 col-lg-8 col-sm-8 no-padding margin-top-10">
+                    <h2 class="classic-title text-color"><span class="sub-title"><strong><i class="fa fa-male"></i>&nbsp;&nbsp;DAILY ACTIVITY</strong></span></h2> 
+                    <div class="col-lg-12 col-md-12 col-sm-12 no-padding text-center">
+                        <div class="col-lg-3 col-md-3 col-sm-3 no-padding activity margin-left-30">
+                            <div class="col-md-12 col-lg-12 col-sm-12 sleep-textcolor text-bold margin-top-5">Sleep</div>
+                            <div class="col-md-4 col-lg-4 col-sm-4 no-padding margin-top-5">
+                                <img class="img-width" src="../../images/sleep.png"/>
+                            </div>
+                            <div class="col-md-8 col-lg-8 col-sm-8 no-padding">
+                                <div class="text-bold" ><small>{{wearable.sleep==null?"N/A":wearable.sleep}}</small></div>
+                                <div class="text-bold"><small>(minutes)</small></div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-3 no-padding activity margin-left-30">
+                            <div class="col-md-12 col-lg-12 col-sm-12 heart-textcolor text-bold margin-top-5">Heart&nbsp;Beat</div>
+                            <div class="col-md-4 col-lg-4 col-sm-4 no-padding margin-top-5">
+                                <img class="img-width" src="../../images/bloodpressure.png"/>
+                            </div>
+                            <div class="col-md-8 col-lg-8 col-sm-8 no-padding">
+                                <div class="text-bold"><small>{{wearable.restingheartrate==null?"N/A":wearable.restingheartrate}}</small></div>
+                                <div class="text-bold"><small>(bpm)</small></div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-3 no-padding activity margin-left-30">
+                            <div class=" col-md-12 col-lg-12 col-sm-12 water-textcolor margin-top-5 no-padding text-center text-bold">Water&nbsp;Level</div>
+                            <div class="col-md-4 col-lg-4 col-sm-4 no-padding margin-top-5">
+                                <img class="img-width" src="../../images/fat.png"/>
+                            </div>
+                            <div class="col-md-8 col-lg-8 col-sm-8 no-padding">
+                                <div class="text-bold" style="font-size: 78%">{{water.milliliters}}/{{water.ounces}}</div>
+                                <div class="text-bold"><small>ml/oz</small></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 text-center no-padding margin-top-10">
+                        <div class="col-lg-3 col-md-3 col-sm-3 no-padding activity margin-left-30">
+                            <div class="col-md-12 col-lg-12 col-sm-12 floor-textcolor text-bold margin-top-5">Floors</div>
+                            <div class="col-md-4 col-lg-4 col-sm-4 no-padding margin-top-5">
+                                <img class="img-width" src="../../images/floor.png"/>
+                            </div>
+                            <div class="col-md-8 col-lg-8 col-sm-8 no-padding">
+                                <div class="text-bold"><small>{{wearable.floors==null?"N/A":(wearable.floors==0?"N/A":wearable.floors)}}</small></div>
+                                <div class="text-bold"><small>(floor)</small></div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-3 no-padding activity margin-left-30">
+                            <div class="col-md-12 col-lg-12 col-sm-12 steps-textcolor text-bold margin-top-5">Steps</div>
+                            <div class="col-md-4 col-lg-4 col-sm-4 no-padding margin-top-5">
+                                <img class="img-width" src="../../images/step.png"/>
+                            </div>
+                            <div class="col-md-8 col-lg-8 col-sm-8 no-padding">
+                                <div class="text-bold"><small>{{wearable.steps==null?"N/A":(wearable.steps==0?"N/A":wearable.steps)}}</small></div>
+                                <div class="text-bold"><small>(count)</small></div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-3 no-padding activity margin-left-30">
+                            <div class="col-md-12 col-lg-12 col-sm-12 bloodoxygen-textcolor text-bold no-padding text-center margin-top-5"><small>Blood&nbsp;Oxygen</small></div>
+                            <div class="col-md-4 col-lg-4 col-sm-4 no-padding margin-top-5">
+                                <img class="img-width" src="../../images/bloodoxygen.png"/>
+                            </div>
+                            <div class="col-md-8 col-lg-8 col-sm-8 no-padding">
+                                <div class="text-bold"><small>{{wearable.bloodoxygen==null?"N/A":wearable.bloodoxygen}}</small></div>
+                                <div class="text-bold"><small>(%)</small></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-lg-12 col-sm-12 text-center no-padding margin-top-10 pull-right">                                    
+                        <div class="col-lg-3 col-md-3 col-sm-3 no-padding activity margin-left-30">
+                            <div class="col-md-12 col-lg-12 col-sm-12 bloodpessure-textcolor text-bold no-padding text-center text-center margin-top-5"><small>Blood&nbsp;Pressure</small></div>
+                            <div class="col-md-4 col-lg-4 col-sm-4 no-padding margin-top-5">
+                                <img class="img-width" src="../../images/heart1.gif"/>
+                            </div>
+                            <div class="col-md-8 col-lg-8 col-sm-8 no-padding">
+                                <div class="text-bold" title="Systolic Blood Pressure/Diastolic Blood Pressure"><small>{{wearable.systolic==null?"N/A":wearable.systolic}} / {{wearable.diastolic==null?"N/A":wearable.diastolic}}</small></div>
+                                <div class="text-bold" title="Systolic Blood Pressure/Diastolic Blood Pressure"><small>(mmHg)</small></div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-3 no-padding activity margin-left-30">
+                            <div class="col-md-12 col-lg-12 col-sm-12 bloodglucose-textcolor text-center no-padding text-bold margin-top-5"><small>Blood&nbsp;Glucose</small></div>
+                            <div class="col-md-4 col-lg-4 col-sm-4 no-padding margin-top-5">
+                                <img class="img-width" src="../../images/bloodglucose.png"/>
+                            </div>
+                            <div class="col-md-8 col-lg-8 col-sm-8 no-padding">
+                                <div class="text-bold" title="Random Glucose/Fasting Glucose"><small>{{wearable.randombloodglucose==null?"N/A":wearable.randombloodglucose}} / {{wearable.fastingbloodglucose==null?"N/A":wearable.fastingbloodglucose}}</small></div>
+                                <div class="text-bold" title="Random Glucose/Fasting Glucose"><small>(mg/dl)</small></div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-3 no-padding activity margin-left-30">
+                            <div class="col-md-12 col-lg-12 col-sm-12 bodytemperature-textcolor text-center no-padding text-bold margin-top-5"><small>Body&nbsp;Temperature</small></div>
+                            <div class="col-md-4 col-lg-4 col-sm-4 no-padding margin-top-5">
+                                <img class="img-width" src="../../images/smalltemp.png"/>
+                            </div>
+                            <div class="col-md-8 col-lg-8 col-sm-8 no-padding">
+                                <div class="text-bold"><small>{{wearable.bodytemperature==null?"N/A":wearable.bodytemperature}}</small></div>
+                                <div class="text-bold"><small>(<sup>o</sup>F)</small></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-lg-4 col-sm-4 margin-top-10">
+                    <h2 class="classic-title text-color"><span class="sub-title"><strong><i class="fa fa-male"></i>&nbsp;&nbsp;DAILY BUDGETS</strong></span></h2>
+                    <div class="row">
+                        <h5 class="col-lg-12 col-md-12 col-sm-12 margin-bottom-5">
+                            Budget Vs Net&nbsp;-&nbsp;
+                            <span style="font-size: small">
+                                    <span ng-show="budgetDetails.OverorUnderStatus==1"><span class="fa fa fa-thumbs-down text-red">&nbsp;&nbsp;</span>Over Budget</span>
+                                    <span ng-show="budgetDetails.OverorUnderStatus==2"><span class="fa fa fa-thumbs-up text-green">&nbsp;&nbsp;</span>Under Budget</span>
+                            </span>
+                        </h5>
+                            <div class="col-lg-5 col-md-12 col-sm-12 margin-top-10">
+                                <div class="circle-wrapper">
+                                    <div class="circle-progress ng-cloak font-14" ng-style="getStyle()">{{budgetDetails.Net}}</div>
+                                    <div    round-progress
+                                         max="Budget"
+                                         current="Net"
+                                         color="{{currentGainColour}}"
+                                         bgcolor="{{ bgColor }}"
+                                         radius="37"
+                                         semi="isSemi"
+                                         rounded="rounded"
+                                         stroke="6"
+                                         clockwise="clockwise"
+                                         responsive="responsive"
+                                         duration="{{ duration }}"
+                                         animation="{{ currentAnimation }}"
+                                         offset="{{ offset }}">
+                                    </div>
+                                </div>
+                                <p class="text-gray text-center">of {{budgetDetails.Budget}} cals.</p>
+                            </div>
+
+                        <div class="col-lg-7 col-md-12 col-sm-12">
+                            <div class="label-update">
+                                <span class="label-text">Budget</span>
+                                <span class="label-count blue">{{budgetDetails.Budget}}</span>
+                            </div>
+                            <div class="label-update">
+                                <span class="label-text">Gained</span>
+                                <span class="label-count green">{{budgetDetails.Intake}}</span>
+                            </div>
+                            <div class="label-update">
+                                <span class="label-text">Burnt</span>
+                                <span class="label-count red">{{budgetDetails.Burnt}}</span>
+                            </div>
+                            <div class="label-update">
+                                <span class="label-text">Net</span>
+                                <span class="label-count orange">{{budgetDetails.Net}}</span>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <!--<h6 ng-show="budgetCheck==0"><div class="label-danger">You are going under our recommended budget value. Please change your weight plan.</div></h6>-->
+                            <h6 ng-show="budgetDetails.OverorUnderStatus==1"><div class="label-danger">Client have consumed {{budgetDetails.OverorUnderValue}} more calories. Please do exercise.</div></h6>
+                            <h6 ng-show="budgetDetails.OverorUnderStatus==2"><div class="label-success">Client should take {{budgetDetails.OverorUnderValue}} more calories to reach today’s budget.</div></h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 margin-top-10 no-padding">
+                    <h2 class="classic-title text-color"><span class="sub-title"><strong><i class="fa fa fa-bar-chart"></i>&nbsp;&nbsp;GRAPHS</strong></span></h2>
+                    <h2 class="text-center"><strong>&nbsp;&nbsp;Activity</strong></h2>
+                    <div class="col-lg-6 col-md-6 col-sm-12 no-padding">
+                        <div id="excersize" style="height:350px;"></div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 no-padding">
+                        <div id="floors" style="height:350px;"></div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 no-padding">
+                        <div id="steps"></div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 no-padding">
+                        <div id="sleep"></div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 no-padding">
+                        <div id="graph4"></div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 no-padding">
+                        <div id="graph5"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
          <!-- For Clients Individual Training Plans -->
         <div class="tracking-plan-div">
         <!--List Tracking Plan-->
@@ -1310,21 +1314,26 @@ $(document).ready(function(){
        $(".tracking-plan-view-div").hide();
        $(".tracking-plan-add-div").hide();
        $(".medication-div").hide();
+       $(".stats-div").hide();
 
        $(".profile-details").click(function(){
            $(".profile-details").addClass("active-tab");
            $(".tracking-plan").removeClass("active-tab");
            $(".medication").removeClass("active-tab");
+           $(".stats").removeClass("active-tab");
            $(".tracking-plan-div").hide();
            $(".medication-div").hide();
+           $(".stats-div").hide();
            $(".profile-details-div").show();
        });
        $(".tracking-plan").click(function(){
            $(".profile-details").removeClass("active-tab");
            $(".medication").removeClass("active-tab");
+           $(".stats").removeClass("active-tab");
            $(".tracking-plan").addClass("active-tab");
            $(".profile-details-div").hide();
            $(".medication-div").hide();
+           $(".stats-div").hide();
            $(".tracking-plan-div").show();
        });
 
@@ -1351,11 +1360,42 @@ $(document).ready(function(){
            $(".profile-details").removeClass("active-tab");
            $(".medication").addClass("active-tab");
            $(".tracking-plan").removeClass("active-tab");
+           $(".stats").removeClass("active-tab");
            $(".profile-details-div").hide();
            $(".medication-div").show();
            $(".tracking-plan-div").hide();
+           $(".stats-div").hide();
+        });
+
+        $(".stats").click(function(){
+           $(".profile-details").removeClass("active-tab");
+           $(".medication").removeClass("active-tab");
+           $(".tracking-plan").removeClass("active-tab");
+           $(".stats").addClass("active-tab");
+           $(".profile-details-div").hide();
+           $(".medication-div").hide();
+           $(".stats-div").show();
+           $(".tracking-plan-div").hide();
+           datePicker();
         });
 
    });
 
+</script>
+
+<script>
+//for dashboard main date
+            function datePicker() {
+                $("#main-date").click();
+                var options = {
+                    maxDate : new Date(),
+                    endDate : new Date(),
+                    opens:'left',
+                    singleDatePicker: true
+                };
+
+                $('#main-date').daterangepicker(options, function(start, end, label) {
+                    document.getElementById("main-start-date").value = start.format('DD/MM/YYYY');
+                });
+            };
 </script>

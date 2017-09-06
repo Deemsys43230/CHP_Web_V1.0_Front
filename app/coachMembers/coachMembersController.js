@@ -11,7 +11,10 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
         "current":null
     };
 
-    
+    $scope.datePicker = function(){
+            $("#main-date").click();
+        };
+        
     //Get Coaches List
     $scope.doGetMyMembers=function(){
       
@@ -215,12 +218,16 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
         } 
         var today = dd+'/'+mm+'/'+yyyy;
 
+        var today = $scope.selectedDate;
+        console.log($scope.selectedDate);
         requestHandler.postRequest("coach/userhealthprofile/",{"userid":userid,"startdate":today,"enddate":today}).then(function(response){
           
             //get the array
             $.each(response.data.healthprofile,function(index,value){
                 $scope.wearable = value.wearables;
                 $scope.water = value.waterlog;
+                $scope.budgetDetails=value.budget;
+                console.log($scope.budgetDetails);
             });
         });
     };
