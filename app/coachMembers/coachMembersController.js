@@ -7,6 +7,8 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
 
     $scope.isActive=false;
 
+    $scope.showGraph={reportTittle:0}
+
     $scope.accordion={
         "current":null
     };
@@ -81,7 +83,7 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
         //Health profile Details
         $scope.doGetClientHealthProfileDetailsByCoach();
         //Graph  for oneweek
-        $scope.doGetClientGraphDetailsByCoach(id);
+        $scope.doGetClientGraphDetailsByCoach();
         //Get Tracking Plan Details
         $scope.doGetTrainingPlanDetails(id);
         //Get Medication List
@@ -134,7 +136,6 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
             if(value.isChecked)
                 $scope.selectedClientId.push(value.userid);
         });
-        console.log($scope.selectedClientId);
         if($scope.selectedClientId.length==0){
             $("#selectModel").modal('show');
         }else{
@@ -240,34 +241,1112 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
         });
     };
 
-    $scope.doGetClientGraphDetailsByCoach = function(userid){
-        var today = new Date(); 
-        var dd = today.getDate(); 
-        var mm = today.getMonth()+1; 
-        //January is 0! 
-        var yyyy = today.getFullYear(); 
+        //To Display User History Graph
+        $scope.historyGraph = [
+                 {"graphCategory":"ACTIVITY","graphCategoryId":1,"graphs":[
+            {
+                'id': 3,
+                'name': 'Exercise Minutes',
+                "imageSrc": "../../images/exercise.png"
+            },
+            {
+                    'id': 10,
+                    'name': 'Floor Graph',
+                    "imageSrc": "../../images/floor.png"
+
+            },
+            {
+                    'id': 7,
+                    'name': 'Steps Value',
+                    "imageSrc": "../../images/step.png"
+
+            },
+            {
+                    'id': 12,
+                    'name': 'Sleep Rate',
+                    "imageSrc": "../../images/sleep.jpg"
+            }
+
+            ]
+            },
+
+
+            {"graphCategory":"CALORIES","graphCategoryId":1,"graphs":[{
+                'id': 6,
+                'name': 'Nutrients Intake',
+                "imageSrc": "../../images/FoodNutrition_Icon.png"
+
+            },
+            {
+                'id': 5,
+                'name': 'Budget vs Net',
+                "imageSrc": "../../images/budget.png"
+            }]
+            },
+            {"graphCategory":"HEART RATE","graphCategoryId":3,"graphs":[
+                
+                {
+                    'id': 11,
+                    'name': 'Heart Rate',
+                    "imageSrc": "../../images/heartpeak.ico"
+
+                }
+                ]
+            },{"graphCategory":"BLOOD GLUCOSE","graphCategoryId":4,"graphs":[{
+                'id': 8,
+                'name': 'Blood Glucose',
+                "imageSrc": "../../images/blood.png"
+
+            }
+               /* {
+                    'id': 9,
+                    'name': 'Blood Oxygen',
+                    "imageSrc": "../../images/oxygen.png"
+                }*/]
+
+            },{"graphCategory":"BLOOD PRESSURE","graphCategoryId":5,"graphs":[{
+
+                'id': 13,
+                'name': 'Blood Pressure',
+                "imageSrc": "../../images/bp.png"
+            }]
+            }, {"graphCategory":"WATER INTAKE","graphCategoryId":6,"graphs":[
+                {
+                    'id': 14,
+                    'name': 'Water Level',
+                    "imageSrc": "../../images/fat.jpg"
+
+                }]
+
+            },
+            {"graphCategory":"BODY TEMPERATURE","graphCategoryId":7,"graphs":[{
+
+                'id': 16,
+                'name': 'Body Temperature',
+                "imageSrc": "../../images/smalltemp.png"
+            }]
+            }
+            ];
+
+    $scope.setHistoryType=function(id,divId){
+            alert(id);
+
+            $scope.historyType=id;
+            if($('#history-start').val()==''){
+                $scope.doGetClientGraphDetailsByCoach(divId);
+            }
+            else $scope.doGetClientGraphDetailsByCoach(divId);
+        };
+
+    $scope.doGetClientGraphDetailsByCoach=function(divId){
+
+        //To Display current date
+        var selectedDate = new Date();
+        var dd = selectedDate.getDate();
+        var mm = selectedDate.getMonth()+1; //January is 0!
+
+        var yyyy = selectedDate.getFullYear();
         if(dd<10){
             dd='0'+dd
-        } 
+        }
         if(mm<10){
             mm='0'+mm
-        } 
-
-        var ed = today.getDate()-6;
-        if(ed<10){
-            ed='0'+ed
         }
-        var today = dd+'/'+mm+'/'+yyyy;
-        var enddate = dd+'/'+mm+'/'+yyyy; 
-        requestHandler.postRequest("coach/userhealthprofile/",{"userid":userid,"startdate":enddate,"enddate":today}).then(function(response){
-          
-            //get the array
-            $.each(response.data.healthprofile,function(index,value){
-                $scope.wearable = value.wearables;
-                $scope.water = value.waterlog;
+        selectedDate = dd+'/'+mm+'/'+yyyy;
+            $scope.isHistoryEmpty=0;
+            $scope.loaded=true;
+            $scope.waterGraphs=false;
+            var endDate;
+
+            //To display lastWeek
+        function getLastWeek(){
+            var today = new Date();
+            var lastWeek = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 6);
+            return lastWeek ;
+        }
+
+        var lastWeek = getLastWeek();
+        var lastWeekMonth = lastWeek.getMonth() + 1;
+        var lastWeekDay = lastWeek.getDate();
+        var lastWeekYear = lastWeek.getFullYear();
+        var lastWeekDisplay = lastWeekMonth + "/" + lastWeekDay + "/" + lastWeekYear;
+        var lastWeekDisplayPadded = ("00" + lastWeekDay.toString()).slice(-2)+ "/" + ("00" + lastWeekMonth .toString()).slice(-2)+ "/" + ("0000" + lastWeekYear .toString()).slice(-4);
+        var startDate=lastWeekDisplayPadded;
+
+
+            if($('#history-start').val()==''){
+                startDate = startDate;
+                endDate = selectedDate;
+            }
+            else{
+
+                startDate = $('#history-start').val();
+                endDate = $('#history-end').val();
+            }
+            var monthNames= ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+            var historyReport = [];
+            var netVal =[];
+            var fibreVal=[];
+            var fatVal=[];
+            var carbsVal=[];
+            var diastolicbpVal=[];
+            var randomglucoseVal=[];
+            var budgetdate=[];
+            var nutrientsdate=[];
+            var historyDates=[];
+            var titles={};
+
+            if($scope.historyType==1){
+                requestHandler.postRequest("coach/userhealthprofile/",{"userid":$scope.currentClientId,"startdate":startDate,"enddate":selectedDate}).then(function(response){
+                     //get the array
+                    $.each(response.data.healthprofile,function(index,value){
+                        $scope.budget = value.budget;
+                        console.log($scope.budget);
+                    });
+                    $scope.historyRecord=response.data.calorieGraphbyDates;
+                    $.each($scope.historyRecord, function(index,value) {
+                        var history = [];
+                        var date = value.date.split("/");
+                        history.push(monthNames[(date[1]-1)]+' '+date[0]);
+                        history.push(parseFloat(value.calorie));
+                        historyDates.push(monthNames[(date[1]-1)]+' '+date[0]);
+                        historyReport.push(history);
+                    });
+                    titles.title="Calories Gained Graph ( "+startDate+" - "+endDate+" )";
+                    titles.graphType='column';
+                    titles.name="Calories Gained";
+                    titles.suffix=" cals";
+                    titles.yaxis="Calories (cal)";
+                    titles.xaxis="Date Range";
+                    titles.color='limegreen';
+                    $scope.drawHistoryGraph(historyReport,historyDates,titles,divId);
+                });
+            }
+            else if($scope.historyType==2){
+                requestHandler.postRequest("user/getCalorieBurntGraphByDates/", {"fromdate":startDate,"todate":endDate}).then(function(response){
+                    $scope.historyRecord=response.data.CalorieBurntGraphbyDates;
+                    $.each($scope.historyRecord, function(index,value) {
+                        var history = [];
+                        var date = value.date.split("/");
+                        history.push(monthNames[(date[1]-1)]+' '+date[0]);
+                        history.push(parseFloat(value.calorie));
+                        historyDates.push(monthNames[(date[1]-1)]+' '+date[0]);
+                        historyReport.push(history);
+                    });
+                    titles.title="Calories Brunt Graph ( "+startDate+" - "+endDate+" )";
+                    titles.graphType='column';
+                    titles.name="Calories Burned";
+                    titles.suffix=" cals";
+                    titles.yaxis="Calories (cal)";
+                    titles.xaxis="Date Range";
+                    titles.color='red';
+                    $scope.drawHistoryGraph(historyReport,historyDates,titles,divId);
+                });
+
+            }
+            else if($scope.historyType==3){
+                requestHandler.postRequest("coach/userhealthprofile/",{"userid":$scope.currentClientId,"startdate":startDate,"enddate":endDate}).then(function(response){
+                    
+                    $.each(response.data.healthprofile, function(index,value) {
+                        $scope.exerciseWorkout=response.data.healthprofile[5].exercises;
+                        console.log( $scope.exerciseWorkout);
+                        $.each($scope.exerciseWorkout, function(index,value) {
+                            console.log(value.workout);
+                        var history = [];
+                        var date = value.date.split("/");
+                        history.push(monthNames[(date[1]-1)]+' '+date[0]);
+                        history.push(parseFloat(value.workout));
+                        historyDates.push(monthNames[(date[1]-1)]+' '+date[0]);
+                        historyReport.push(history);
+                    });
+                    });
+
+
+                    titles.title="Exercise Minutes Graph ( "+startDate+" - "+endDate+" )";
+                    titles.graphType='column';
+                    titles.name="Exercise Minutes";
+                    titles.suffix=" mins";
+                    titles.yaxis="Minutes";
+                    titles.xaxis="Date Range";
+                    titles.color='blue';
+                    $scope.drawHistoryGraph(historyReport,historyDates,titles,divId);
+                });
+            }
+
+            else if($scope.historyType==4){
+                if($scope.userProfile.unitPreference==1){
+                    $scope.unit="Kgs";
+                }
+                else if($scope.userProfile.unitPreference==2){
+                    $scope.unit="Lbs";
+                }
+                requestHandler.postRequest("/user/getWeightLogGraph/", {"startdate":startDate,"enddate":endDate}).then(function(response){
+                    $scope.historyRecord=response.data.Weight_logs;
+                    $.each($scope.historyRecord, function(index,value) {
+                        if(value.userentry ==1){
+                            var history = [];
+                            var date = value.date.split("/");
+                            history.push(monthNames[(date[1]-1)]+' '+date[0]);
+                            history.push(parseFloat(value.weight));
+                            historyDates.push(monthNames[(date[1]-1)]+' '+date[0]);
+                            historyReport.push(history);
+                        }
+                    });
+
+                    titles.title="Weight Log Graph ( "+startDate+" - "+endDate+" )";
+                    titles.graphType='column';
+                    titles.name="Weight Log";
+                    titles.suffix=$scope.unit;
+                    titles.yaxis="Weight (" + $scope.unit + ")";
+                    titles.xaxis="Date Range";
+                    titles.color='#f8ba01';
+                    $scope.drawHistoryGraph(historyReport,historyDates,titles,divId);
+                });
+            }
+
+
+            else if($scope.historyType==5){
+                requestHandler.postRequest("coach/userhealthprofile/",{"userid":$scope.currentClientId,"startdate":startDate,"enddate":endDate}).then(function(response){
+                    
+                    //get the array
+                    $.each(response.data.healthprofile,function(index,value){
+                        $scope.Budget = value.budget;
+                        var history = [];
+                        var date = value.date.split("/");
+                        history.push(monthNames[(date[1]-1)]+' '+date[0]);
+                        history.push(parseFloat(value.budget.Budget));
+                        netVal.push(value.budget.Net);
+                        budgetdate.push(monthNames[(date[1]-1)]+' '+date[0]);
+                        historyReport.push(history);
+                    });
+                    titles.title="Budget Vs Net Graph ( "+startDate+" - "+endDate+" )";
+                    titles.graphType='column';
+                    titles.name="Budget";
+                    titles.suffix=" cals";
+                    titles.yaxis="Calories (Cal)";
+                    titles.xaxis="Date Range";
+                    titles.color='#ff8000';
+                    $scope.drawHistoryGraphForBudget(historyReport,titles,netVal,budgetdate,divId);
+                });
+            }
+
+            else if($scope.historyType==6){
+                requestHandler.postRequest("coach/userhealthprofile/",{"userid":$scope.currentClientId,"startdate":startDate,"enddate":endDate}).then(function(response){
+                    var totalFibre = 0;
+                    var totalProtein = 0;
+                    var totalFat = 0;
+                    var totalCarbo = 0;
+                    //get the array
+                    $.each(response.data.healthprofile,function(index,value){
+                        totalFibre = parseFloat(totalFibre)+parseFloat(value.nutritions.fibre);
+                        totalProtein = parseFloat(totalProtein)+value.nutritions.protein;
+                        totalFat   = parseFloat(totalFat)+ value.nutritions.fat;
+                        totalCarbo = parseFloat(totalCarbo)+value.nutritions.carbo;
+                        var history = [];
+                        var date = value.date.split("/");
+                        history.push(monthNames[(date[1]-1)]+' '+date[0]);
+                        history.push(parseFloat(value.nutritions.protein));
+                        fibreVal.push(parseFloat(value.nutritions.fibre));
+                        fatVal.push(parseFloat(value.nutritions.fat));
+                        carbsVal.push(parseFloat(value.nutritions.carbo));
+                        nutrientsdate.push(monthNames[(date[1]-1)]+' '+date[0]);
+                        historyReport.push(history);
+                    });
+
+                    var fiberPercentage=totalFibre/100;
+                    var proteinPercentage=totalProtein/100;
+                    var fatPercentage=totalFat/100;
+                    var carboPercentage=totalCarbo/100;
+                    titles.title="Nutrients Graph( "+startDate+" - "+endDate+" )";
+                    titles.name="Nutrients";
+                    titles.yaxis="Units (grams)";
+                    titles.xaxis="Date Range";
+                    titles.color='#ff8000';
+                    $scope.drawNutrientsGraph(historyReport,titles,fibreVal,fatVal,carbsVal,fiberPercentage,proteinPercentage,fatPercentage,carboPercentage,nutrientsdate,divId);
+                });
+            }
+
+
+            else if($scope.historyType==7){
+                requestHandler.postRequest("coach/userhealthprofile/",{"userid":$scope.currentClientId,"startdate":startDate,"enddate":endDate}).then(function(response){
+                    
+                    //get the array
+                    $.each(response.data.healthprofile,function(index,value){
+                        $scope.steps = value.wearables.steps;
+                        var history = [];
+                        var date = value.date.split("/");
+                        history.push(monthNames[(date[1]-1)]+' '+date[0]);
+                        history.push(parseFloat(value.wearables.steps));
+                        historyDates.push(monthNames[(date[1]-1)]+' '+date[0]);
+                        historyReport.push(history);
+                    });
+
+                    titles.title="Steps Graph( "+startDate+" - "+endDate+" )";
+                    titles.graphType='column';
+                    titles.name="Steps Walked";
+                    titles.suffix=" steps";
+                    titles.yaxis="Steps (count)";
+                    titles.xaxis="Date Range";
+                    titles.color='#f8ba01';
+                    $scope.drawHistoryGraph(historyReport,historyDates,titles,divId);
+                });
+            }
+
+            else if($scope.historyType==8){
+                requestHandler.postRequest("coach/userhealthprofile/",{"userid":$scope.currentClientId,"startdate":startDate,"enddate":endDate}).then(function(response){
+                    
+                    //get the array
+                    $.each(response.data.healthprofile,function(index,value){
+                        $scope.steps = value.wearables.steps;
+                        var history = [];
+                        var date = value.date.split("/");
+                        history.push(monthNames[(date[1]-1)]+' '+date[0]);
+                        history.push(parseFloat(value.wearables.fastingbloodglucose));
+                        randomglucoseVal.push(parseFloat(value.wearables.randombloodglucose));
+                        historyDates.push(monthNames[(date[1]-1)]+' '+date[0]);
+                        historyReport.push(history);
+                    });
+                    titles.title="Blood Glucose Graph( "+startDate+" - "+endDate+" )";
+                    titles.name="Glucose level";
+                    titles.yaxis="Glucose level (mg/dl)";
+                    titles.xaxis="Date Range";
+                    titles.color='red';
+                    $scope.drawBloodGlucoseGraph(historyReport,titles,randomglucoseVal,historyDates,divId);
+                });
+            }
+            else if($scope.historyType==9){
+                 requestHandler.postRequest("coach/userhealthprofile/",{"userid":$scope.currentClientId,"startdate":startDate,"enddate":endDate}).then(function(response){
+                    
+                    //get the array
+                    $.each(response.data.healthprofile,function(index,value){
+                        $scope.bloodoxygen = value.wearables.bloodoxygen;
+                        var history = [];
+                        var date = value.date.split("/");
+                        history.push(monthNames[(date[1]-1)]+' '+date[0]);
+                        history.push(parseFloat(value.wearables.bloodoxygen));
+                        historyDates.push(monthNames[(date[1]-1)]+' '+date[0]);
+                        historyReport.push(history);
+                    });
+                    titles.title="Blood Oxygen Graph( "+startDate+" - "+endDate+" )";
+                    titles.graphType='spline';
+                    titles.name="Bloodoxygen Level";
+                    titles.suffix="  mg/dl";
+                    titles.yaxis="Bloodoxygen Level (mg/dl)";
+                    titles.xaxis="Date Range";
+                    titles.color='#33bbff';
+                    $scope.drawHistoryGraph(historyReport,historyDates,titles,divId);
+                });
+            }
+
+            else if($scope.historyType==10){
+                requestHandler.postRequest("coach/userhealthprofile/",{"userid":$scope.currentClientId,"startdate":startDate,"enddate":endDate}).then(function(response){
+                    
+                    //get the array
+                    $.each(response.data.healthprofile,function(index,value){
+                        $scope.floors = value.wearables.floors;
+                        var history = [];
+                        var date = value.date.split("/");
+                        history.push(monthNames[(date[1]-1)]+' '+date[0]);
+                        history.push(parseFloat(value.wearables.floors));
+                        historyDates.push(monthNames[(date[1]-1)]+' '+date[0]);
+                        historyReport.push(history);
+                    });
+
+                    titles.title="Floor Graph( "+startDate+" - "+endDate+" )";
+                    titles.graphType='column';
+                    titles.name="Floors Walked";
+                    titles.suffix="  floor (s)";
+                    titles.yaxis="Floors";
+                    titles.xaxis="Date Range";
+                    titles.color='brown';
+                    $scope.drawHistoryGraph(historyReport,historyDates,titles,divId);
+                });
+            }
+            else if($scope.historyType==11){
+                requestHandler.postRequest("coach/userhealthprofile/",{"userid":$scope.currentClientId,"startdate":startDate,"enddate":endDate}).then(function(response){
+                    
+                    //get the array
+                    $.each(response.data.healthprofile,function(index,value){
+                        $scope.restingheartrate = value.wearables.restingheartrate;
+                        var history = [];
+                        var date = value.date.split("/");
+                        history.push(monthNames[(date[1]-1)]+' '+date[0]);
+                        history.push(parseFloat(value.wearables.restingheartrate));
+                        historyDates.push(monthNames[(date[1]-1)]+' '+date[0]);
+                        historyReport.push(history);
+                    });
+
+                    titles.title="Heart Rate Graph( "+startDate+" - "+endDate+" )";
+                    titles.graphType='line';
+                    titles.name="Heart Rate";
+                    titles.suffix="  bpm";
+                    titles.yaxis="Heart Rate (bpm)";
+                    titles.xaxis="Date Range";
+                    titles.color='#ff3300';
+                    $scope.drawHistoryGraph(historyReport,historyDates,titles,divId);
+                });
+            }
+
+            else if($scope.historyType==12){
+                requestHandler.postRequest("coach/userhealthprofile/",{"userid":$scope.currentClientId,"startdate":startDate,"enddate":endDate}).then(function(response){
+                    
+                    //get the array
+                    $.each(response.data.healthprofile,function(index,value){
+                        $scope.sleep = value.wearables.sleep;
+                        var history = [];
+                        var date = value.date.split("/");
+                        history.push(monthNames[(date[1]-1)]+' '+date[0]);
+                        history.push(parseFloat(value.wearables.sleep));
+                        historyDates.push(monthNames[(date[1]-1)]+' '+date[0]);
+                        historyReport.push(history);
+                    });
+                    titles.title="Sleep Rate Graph( "+startDate+" - "+endDate+" )";
+                    titles.graphType='spline';
+                    titles.name="Sleep";
+                    titles.suffix="  mins";
+                    titles.yaxis="Sleep (minutes)";
+                    titles.xaxis="Date Range";
+                    titles.color='#339966';
+                    $scope.drawSleepHistoryGraph(historyReport,historyDates,titles,divId);
+                });
+            }
+            else if($scope.historyType==13){
+                requestHandler.postRequest("coach/userhealthprofile/",{"userid":$scope.currentClientId,"startdate":startDate,"enddate":endDate}).then(function(response){
+                    
+                    //get the array
+                    $.each(response.data.healthprofile,function(index,value){
+                        $scope.steps = value.wearables.diastolic;
+                        var history = [];
+                        var date = value.date.split("/");
+                        history.push(monthNames[(date[1]-1)]+' '+date[0]);
+                        history.push(parseFloat(value.wearables.systolic));
+                        history.push(parseFloat(value.wearables.diastolic));
+                        historyDates.push(monthNames[(date[1]-1)]+' '+date[0]);
+                        historyReport.push(history);
+                    });
+                    titles.title="Blood Pressure Graph( "+startDate+" - "+endDate+" )";
+                    titles.name="BloodPressure";
+                    titles.suffix="  mmHg";
+                    titles.yaxis="BloodPressure (mmHg)";
+                    titles.xaxis="Date Range";
+                    titles.color='#339966';
+                    $scope.drawBpHistoryGraph(historyReport,historyDates,diastolicbpVal,titles,divId);
+                });
+            }
+            else if($scope.historyType==14){
+
+                requestHandler.postRequest("user/getWaterLogGraph/", {"startdate":startDate,"enddate":endDate}).then(function(response){
+                    $scope.historyRecord=response.data.Water_logs;
+                    $.each($scope.historyRecord, function(index,value) {
+                        var history = [];
+                        var date = value.date.split("/");
+                        history.push(monthNames[(date[1]-1)]+' '+date[0]);
+                        history.push(value.milliliters);
+                        historyDates.push(monthNames[(date[1]-1)]+' '+date[0]);
+                        historyReport.push(history);
+                    });
+                    titles.title="Water Level Graph( "+startDate+" - "+endDate+" )";
+                    titles.graphType='spline';
+                    titles.name="Water Level";
+                    titles.suffix="  ml";
+                    titles.yaxis="Water Level (ml)";
+                    titles.xaxis="Date Range";
+                    titles.color='#00ccff';
+                    $scope.drawWaterlogMlHistoryGraph(historyReport,historyDates,titles,divId);
+                });
+            }
+            else if($scope.historyType==15){
+
+                requestHandler.postRequest("user/getWaterLogGraph/", {"startdate":startDate,"enddate":endDate}).then(function(response){
+                    $scope.historyRecord=response.data.Water_logs;
+                    $.each($scope.historyRecord, function(index,value) {
+                        var history = [];
+                        var date = value.date.split("/");
+                        history.push(monthNames[(date[1]-1)]+' '+date[0]);
+                        history.push(value.ounces);
+                        historyDates.push(monthNames[(date[1]-1)]+' '+date[0]);
+                        historyReport.push(history);
+                    });
+                    titles.title="Water Level Graph( "+startDate+" - "+endDate+" )";
+                    titles.graphType='spline';
+                    titles.name="Water Level";
+                    titles.suffix="  oz";
+                    titles.yaxis="Water Level (oz)";
+                    titles.xaxis="Date Range";
+                    titles.color='#ff4da6';
+                    $scope.drawWaterlogOzHistoryGraph(historyReport,historyDates,titles,divId);
+                });
+            }
+            else if($scope.historyType==16){
+                requestHandler.postRequest("coach/userhealthprofile/",{"userid":$scope.currentClientId,"startdate":startDate,"enddate":endDate}).then(function(response){
+                    
+                    //get the array
+                    $.each(response.data.healthprofile,function(index,value){
+                        $scope.sleep = value.wearables.bodytemperature;
+                        var history = [];
+                        var date = value.date.split("/");
+                        history.push(monthNames[(date[1]-1)]+' '+date[0]);
+                        history.push(parseFloat(value.wearables.bodytemperature));
+                        historyDates.push(monthNames[(date[1]-1)]+' '+date[0]);
+                        historyReport.push(history);
+                    });
+                    titles.title="Body Temperature Graph( "+startDate+" - "+endDate+" )";
+                    titles.graphType='areaspline';
+                    titles.name="Body Temperature";
+                    titles.suffix="  °F";
+                    titles.yaxis="Fahrenheit";
+                    titles.xaxis="Date Range";
+                    titles.color='#ff4d4d';
+                    $scope.drawHistoryGraph(historyReport,historyDates,titles,divId);
+                });
+            }
+        };
+
+        $scope.drawHistoryGraph=function(data,dataX,titles,divId){
+            $scope.loaded=false;
+            $('#'+divId).highcharts({
+
+                title: {
+                    text: titles.title
+                },
+                xAxis: {
+                    title: {
+                        text: titles.xaxis
+                    },
+                    categories: dataX
+                },
+                tooltip:{
+                    enabled:true,
+                    backgroundColor:'rgba(255, 255, 255, 1)',
+                    borderWidth:1,
+                    shadow:true,
+                    style:{fontSize:'10px',padding:5,zIndex:500},
+                    formatter:false,
+                    valueSuffix: titles.suffix
+                },
+                yAxis: {
+                    minPadding: 0,
+                    maxPadding: 0,
+                    min: 1,
+
+                    title: {
+                        text: titles.yaxis
+                    },
+                    plotLines: [{
+                        value: 0,
+                        width: 1,
+                        color:titles.color
+                    }]
+                },
+                colors: [
+                    titles.color
+                ],
+                exporting: {
+                    enabled: false
+                },
+                credits: {
+                    enabled: false
+                },
+
+                legend:{enabled:false},
+                series: [{
+                    type: titles.graphType,
+                    name: titles.name,
+                    data: data
+                }]
             });
-        });
-    };
+            $('#excerciseGraph').highcharts({
+
+                title: {
+                    text: titles.title
+                },
+                xAxis: {
+                    title: {
+                        text: titles.xaxis
+                    },
+                    categories: dataX
+                },
+                tooltip:{
+                    enabled:true,
+                    backgroundColor:'rgba(255, 255, 255, 1)',
+                    borderWidth:1,
+                    shadow:true,
+                    style:{fontSize:'10px',padding:5,zIndex:500},
+                    formatter:false,
+                    valueSuffix: titles.suffix
+                },
+                yAxis: {
+                    minRange:0,
+
+                    title: {
+                        text: titles.yaxis
+                    },
+                    plotLines: [{
+                        value: 0,
+                        width: 1,
+                        color:titles.color
+                    }]
+                },
+                colors: [
+                    titles.color
+                ],
+                exporting: {
+                    enabled: false
+                },
+                credits: {
+                    enabled: false
+                },
+
+
+
+                legend:{enabled:false},
+                series: [{
+                    type: 'column',
+                    name: titles.name,
+                    data: data
+                      }]
+            });
+        };
+
+        //for bloodglucose Graph
+        $scope.drawBloodGlucoseGraph=function(datafbg,titles,datarbg,dataD,divId){
+            $scope.loaded=false;
+
+            $('#'+divId).highcharts({
+                title: {
+                    text: titles.title
+                },
+
+                xAxis: {
+                    title: {
+                        text: titles.xaxis
+                    },
+                    categories: dataD //to display date
+
+                },
+                yAxis: {
+                    title: {
+                        text: titles.yaxis
+                    },
+                    plotLines: [{
+                        value: 0,
+                        width: 1,
+                        color:titles.color
+                    }]
+                },
+                colors: [
+                    titles.color
+                ],
+                exporting: {
+                    enabled: false
+                },
+                credits: {
+                    enabled: false
+                },
+                tooltip: {
+                    headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                    pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                        '<td style="padding:0"><b>{point.y:.2f} mg/dl</b></td></tr>',
+                    footerFormat: '</table>',
+                    shared: true,
+                    useHTML: true,
+                    enabled:true,
+                    backgroundColor:'rgba(255, 255, 255, 1)',
+                    borderWidth:1,
+                    shadow:true,
+                    style:{fontSize:'10px',padding:5,zIndex:500},
+                    formatter:false
+                },
+                plotOptions: {
+                    column: {
+                        zones: [{
+                            value: 195,
+                            color: '#00cc44'
+                        },{
+                            value: 225,
+                            color: '#ffd11a'
+                        },{
+                            value: 400,
+                            color: '#e60000'
+                        }]
+                    }
+                },
+                series: [{
+                    type: 'column',
+                    name: 'Fastingbloodglucose',
+                    color: '#339966',
+                    data:datafbg     //to  display fasting bloodglucose value
+                }, {
+                    type: 'column',
+                    name: 'Randombloodglucose',
+                    color: '#3366cc',
+                    data:datarbg   // to display  random bloodGlucose value
+                }]
+
+            });
+        };
+
+        //for blood pressure graph
+        $scope.drawBpHistoryGraph=function(datasbp,dataD,datadbp,titles,divId){
+            $scope.loaded=false;
+            $('#'+divId).highcharts({
+                chart: {
+                    type: 'column'
+                },
+                title: {
+                    text: titles.title
+                },
+
+                xAxis: {
+                    title: {
+                        text: titles.xaxis
+                    },
+                    categories: dataD //for displaying date
+
+                },
+                yAxis: {
+                    title: {
+                        text: titles.yaxis
+                    },
+                    plotLines: [{
+                        value: 0,
+                        width: 1,
+                        color:titles.color
+                    }]
+                },
+                colors: [
+                    titles.color
+                ],
+                exporting: {
+                    enabled: false
+                },
+                credits: {
+                    enabled: false
+                },
+                legend:{enabled:false},
+                tooltip: {
+
+                    headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                    pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                        '<td style="padding:0"><b>{point.y:.2f} mmHg</b></td></tr>',
+                    footerFormat: '</table>',
+                    shared: true,
+                    useHTML: true,
+                    enabled:true,
+                    backgroundColor:'rgba(255, 255, 255, 1)',
+                    borderWidth:1,
+                    shadow:true,
+                    style:{fontSize:'10px',padding:5,zIndex:500},
+                    formatter:false
+                },
+                series: [{
+                    name: 'Systolic Bp',
+                    color: '#cc0000',
+                    data:datasbp     //for  displaying systolic blood pressure value
+                }, {
+                    name: 'Diastolic Bp',
+                    color: '#339966',
+                    data:datadbp     // for displaying diastolic blood pressure value
+                }
+                ]
+            });
+        };
+
+        //for sleep history graph
+        $scope.drawSleepHistoryGraph=function(data,dataD,titles,divId){
+            $scope.loaded=false;
+            $('#'+divId).highcharts({
+
+                title: {
+                    text: titles.title
+                },
+                xAxis: {
+                    title: {
+                        text: titles.xaxis
+                    },
+                    categories: dataD
+                },
+                tooltip:{
+                    enabled:true,
+                    backgroundColor:'rgba(255, 255, 255, 1)',
+                    borderWidth:1,
+                    shadow:true,
+                    style:{fontSize:'10px',padding:5,zIndex:500},
+                    formatter:function() {
+                        return ' <b>' + this.x + '</b>,<br/>Sleep: <b>' + this.y + '</b> mins ('+$scope.convertMinutesToHours(this.y)+')';
+                    },
+                    valueSuffix: titles.suffix
+                },
+                yAxis: {
+
+                    title: {
+                        text: titles.yaxis
+                    },
+                    plotLines: [{
+                        value: 0,
+                        width: 1,
+                        color:titles.color
+                    }]
+                },
+                colors: [
+                    titles.color
+                ],
+                exporting: {
+                    enabled: false
+                },
+                credits: {
+                    enabled: false
+                },
+
+                legend:{enabled:false},
+                series: [{
+                    type: titles.graphType,
+                    name: titles.name,
+                    data: data,
+                    additional:'true'
+                }]
+            });
+        };
+
+        $scope.drawHistoryGraphForBudget=function(data,titles,data1,data2,divId){
+            $scope.loaded=false;
+            $('#'+divId).highcharts({
+                chart: {
+                    type: 'column'
+                },
+                title: {
+                    text: titles.title
+                },
+                xAxis: {
+                    title: {text: titles.xaxis},
+                    categories: data2
+                },tooltip:{
+                    enabled:true,
+                    backgroundColor:'rgba(255, 255, 255, 1)',
+                    borderWidth:1,
+                    shadow:true,
+                    style:{fontSize:'10px',padding:5,zIndex:500},
+                    formatter:false,
+                    valueSuffix: titles.suffix
+                },
+                yAxis: {
+                    title: {
+                        text: titles.yaxis
+                    },
+                    plotLines: [{
+                        value: 0,
+                        width: 1,
+                        color:titles.color
+                    }]
+                },
+                colors: [
+                    titles.color
+                ],
+                exporting: {
+                    enabled: false
+                },
+                credits: {
+                    enabled: false
+                },
+                legend:{enabled:false},
+                series: [{
+                    type: 'column',
+                    name: 'Net',
+                    data: data1
+                },{
+
+                    type: 'spline',
+                    name: 'Budget',
+                    data: data,
+                    marker: {
+                        lineWidth: 2,
+                        lineColor: Highcharts.getOptions().colors[3],
+                        fillColor: 'white'
+                    }
+                }]
+            });
+
+        };
+        //for Nutrients intake graph
+
+        $scope.drawNutrientsGraph=function(dataP,titles,dataFr,dataFa,dataC,dataAf,dataAp,dataAfa,dataAC,dataD,divId){
+            $scope.loaded=false;
+            $('#'+divId).highcharts({
+                chart: {
+                    type: 'column'
+                },
+                title: {
+                    text: titles.title
+                },
+
+                xAxis: {
+                    title: {
+                        text: titles.xaxis
+                    },
+                    categories: dataD     //to display  date
+
+                },
+                yAxis: {
+
+                    title: {
+                        text: titles.yaxis
+                    },
+                    plotLines: [{
+                        value: 0,
+                        width: 1,
+                        color:titles.color
+                    }]
+                },
+                colors: [
+                    titles.color
+                ],
+                exporting: {
+                    enabled: false
+                },
+                credits: {
+                    enabled: false
+                },
+                legend:{enabled:false},
+
+                tooltip:{
+                    enabled:true,
+                    backgroundColor:'rgba(255, 255, 255, 1)',
+                    borderWidth:1,
+                    shadow:true,
+                    pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>'+
+                        '<td style="padding:0"><b>{point.y:.2f} %</b></td></tr>',
+                    style:{fontSize:'10px',padding:5,zIndex:500},
+                    formatter:false,
+                    valueSuffix: titles.suffix
+                },
+
+                series: [{
+                    name: 'Protein',
+                    color: 'limegreen',
+                    data:dataP ,          // to display protein value
+                    tooltip: {
+
+                        headerFormat: '<span style="font-size:10px">{point.key} </span> <table>',
+                        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                            '<td style="padding:0"><b>{point.y:.2f} g</b></td></tr>',
+                        footerFormat: '</table>',
+                        shared: true,
+                        useHTML: true,
+                        enabled:true,
+                        backgroundColor:'rgba(255, 255, 255, 1)',
+                        borderWidth:1,
+                        shadow:true,
+                        style:{fontSize:'10px',padding:5,zIndex:500},
+                        formatter:false
+                    }
+                }, {
+                    name: 'Fat',
+                    color: 'red',
+                    data:dataFa ,        // to display fiber value
+                    tooltip: {
+
+                        headerFormat: '<span style="font-size:10px">{point.key} </span> <table>',
+                        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                            '<td style="padding:0"><b>{point.y:.2f} g</b></td></tr>',
+                        footerFormat: '</table>',
+                        shared: true,
+                        useHTML: true,
+                        enabled:true,
+                        backgroundColor:'rgba(255, 255, 255, 1)',
+                        borderWidth:1,
+                        shadow:true,
+                        style:{fontSize:'10px',padding:5,zIndex:500},
+                        formatter:false
+                    }
+                }, {
+                    name: 'Carbs',
+                    color: '#ff8000',
+                    data:dataC,          // to display fat value
+                    tooltip: {
+
+                        headerFormat: '<span style="font-size:10px">{point.key} </span> <table>',
+                        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                            '<td style="padding:0"><b>{point.y:.2f} g</b></td></tr>',
+                        footerFormat: '</table>',
+                        shared: true,
+                        useHTML: true,
+                        enabled:true,
+                        backgroundColor:'rgba(255, 255, 255, 1)',
+                        borderWidth:1,
+                        shadow:true,
+                        style:{fontSize:'10px',padding:5,zIndex:500},
+                        formatter:false
+                    }
+
+                }, {
+                    name: 'Fibre',
+                    color: '#ffcc00',
+                    data:dataFr,        // to display fibre value
+                    tooltip: {
+
+                        headerFormat: '<span style="font-size:10px">{point.key} </span> <table>',
+                        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                            '<td style="padding:0"><b>{point.y:.2f} g</b></td></tr>',
+                        footerFormat: '</table>',
+                        shared: true,
+                        useHTML: true,
+                        enabled:true,
+                        backgroundColor:'rgba(255, 255, 255, 1)',
+                        borderWidth:1,
+                        shadow:true,
+                        style:{fontSize:'10px',padding:5,zIndex:500},
+                        formatter:false
+                    }
+                },
+
+
+                    {
+                        type: 'pie',
+                        name: 'Total Consumption',
+                        data: [{
+                            name: 'Protein',
+                            y: dataAp,
+                            color:'limegreen'
+                        }, {
+                            name: 'Fat',
+                            y:  dataAfa,
+                            color:'red'
+                        }, {
+                            name: 'Fibre',
+                            y: dataAf,
+                            color:'#ffcc00'
+                        },{
+                            name: 'Carbo',
+                            y: dataAC,
+                            color:'#ff8000'
+                        }],
+                        center: [100, 80],
+                        size: 100,
+                        showInLegend: false,
+                        dataLabels: {
+                            enabled: false
+                        }
+                    }
+                ]
+            });
+        };
+
+
+
+        //To Convert Minutes to Hours Format
+        $scope.convertMinutesToHours=function(minutes){
+            var sign ='';
+            if(minutes < 0){
+                sign = '-';
+            }
+            var hours=Math.floor(Math.abs(minutes) / 60);
+            hours = ((hours < 10 && hours >= 0) ? '0' : '') + hours;
+
+            var minutes = Math.abs(minutes) % 60;
+            minutes=((minutes < 10 && minutes >= 0) ? '0' : '') + minutes;
+
+            return sign + hours +'hrs '+minutes + 'mins';
+        };
 
     //Do Set Chat Message as Read 
     $scope.doReadChatMessage=function(){
@@ -467,7 +1546,6 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
     $scope.doInsertTrainingPlan = function(){
         $scope.planDetails.userid = $scope.currentClientId;
         requestHandler.postRequest("coach/insertTrainingPlan/",$scope.planDetails).then(function(response){
-            console.log(response.data);
         },function(){
             successMessage(Flash, "Successfully Plan Added!");
             $scope.doGetTrainingPlanDetails(userid);
@@ -613,3 +1691,78 @@ coachApp.filter('trusted', ['$sce', function ($sce) {
         return $sce.trustAsResourceUrl(url);
     };
 }]);
+
+
+// Graph chart
+coachApp.directive('historyGraph', function () {
+    return {
+        restrict: 'C',
+        replace: true,
+        scope: {
+            historygraph: '='
+        },
+        controller: function ($scope, $element, $attrs) {
+        },
+        template: '<div id="graph-container" style="height: 400px;width: 67%">not working</div>',
+        link: function (scope, element, attrs) {
+            var chart = new Highcharts.Chart({
+                chart: {
+                    renderTo: 'graph-container',
+                    plotBackgroundColor: null,
+                    plotBorderWidth: null,
+                    plotShadow: false
+                },
+                title: {
+                    text: scope.test,
+                    x: -20 //center
+                },
+                subtitle: {
+                    text: '',
+                    x: -20
+                },
+                xAxis: {
+                    title: {text: 'Date Range'},
+                    categories: []
+                },
+                yAxis: {
+                    title: {
+                        text: 'Weight (Kgs)'
+                    },
+                    plotLines: [{
+                        value: 0,
+                        width: 1,
+                        color: '#ff0066'
+                    }]
+                },
+                tooltip: {
+                    valueSuffix: 'Kgs'
+                },
+
+                colors: [
+                    '#ff0066'
+                ],
+                legend: {
+                    layout: 'vertical',
+                    align: 'right',
+                    verticalAlign: 'middle',
+                    borderWidth: 0,
+                    x: 80,
+                    y: 0
+                },
+                series: [ {
+                    name: 'Weight',
+                    data: []
+                }],
+                exporting: {
+                    enabled: false
+                },
+                credits: {
+                    enabled: false
+                }
+            });
+            scope.$watch("historygraph", function (newValue) {
+                chart.series[0].setData(newValue, true);
+            }, true);
+        }
+    }
+});

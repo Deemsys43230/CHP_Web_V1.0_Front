@@ -366,7 +366,7 @@
         </div>
     </div>
 </div>
-<!-- For Clients Individual Activities -->
+        <!-- For Clients Individual Activities -->
         <div class="stats-div">
             <div class="margin-top-5 pull-right mouse-pointer" >&nbsp;&nbsp;<i class="fa fa-calendar" ng-click="datePicker()"></i></div>
             <input hidden id="main-start-date" >
@@ -534,26 +534,99 @@
                     </div>
                 </div>
                 <div class="col-lg-12 col-md-12 col-sm-12 margin-top-10 no-padding">
-                    <h2 class="classic-title text-color"><span class="sub-title"><strong><i class="fa fa fa-bar-chart"></i>&nbsp;&nbsp;GRAPHS</strong></span></h2>
-                    <h2 class="text-center"><strong>&nbsp;&nbsp;Activity</strong></h2>
-                    <div class="col-lg-6 col-md-6 col-sm-12 no-padding">
-                        <div id="excersize" style="height:350px;"></div>
+                    <h2 class="classic-title text-color"><span class="sub-title"><strong><i class="fa fa fa-bar-chart"></i>&nbsp;&nbsp;Reports</strong></span></h2>
+                    <input id="history-start" hidden />
+                    <input id="history-end" hidden />
+
+                    <div class="col-lg-12 col-md-12 col-sm-12 no-padding" ng-show="showGraph.reportTittle==0">
+                         <div class="tab-content1 contentHistoryOverride min-height-200" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#eee'}">
+                            <div class="col-md-12 col-sm-12 col-xs-12 no-padding">
+                                <div class="col-md-6 col-sm-6 col-xs-6 margin-top-20" style="border: solid red 0px;">
+                                    <h4 style="text-transform: uppercase;padding-left: 20px;">Graphs</h4>
+                                </div>
+                                <!-- Stat Search -->
+                                <div class="col-md-6 col-sm-6 col-xs-6 pull-right margin-top-10" style="border: solid blue 0px;">
+                                    <div class="input-group">
+                                        <input type="text"  class="history_input pull-right" placeholder="Search history here..." ng-model="searchHistory">
+                                           <span class="input-group-btn">
+                                                 <button class="btn history" type="button"><i class="fa fa-search"></i></button>
+                                           </span>
+                                    </div>
+                                </div>
+                             <!-- End Search -->
+                            </div>
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <hr/>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-6 margin-top-10" ng-repeat="graphCategory in historyGraph"  ng-hide="historyfilter.length==0">
+                                <h4 style="text-transform: uppercase;padding-left: 20px;">{{graphCategory.graphCategory}}</h4>
+                                <hr style="padding-left: 20px;padding-right: 20px;"/>
+                                <div class="col-md-6 col-sm-6 col-xs-6 no-padding" ng-repeat="graph in historyfilter = (graphCategory.graphs | startsWithLetterSearch:searchHistory)"  ng-show="graphCategory.graphs.length!=0">
+                                    <div id="{{graph.id}}" class="horizon-swiper" ng-click="setHistoryType(graph.id,'historyGraph-multiple')">
+                                         <div class="horizon-item" ng-click="showGraph.reportTittle=1" style="display: block;padding: 15px 1px;">
+                                            <div class="historyOverride">
+                                             <img style="width: 50px;" ng-src="{{graph.imageSrc}}">
+                                             <a href="" style="color: #666;font-size: 14px;"  data-toggle="tab" onclick="return false;">{{graph.name}}</a>
+                                            </div>
+                                         </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div ng-show="graphCategory.graphs.length==0" class="text-center margin-top-50">
+                                <h3 class="text-gray">NO RECORDS FOUND!!!</h3><br/><br/><br/>
+                            </div>
+                        </div> <!--end of tab content1-->
                     </div>
-                    <div class="col-lg-6 col-md-6 col-sm-12 no-padding">
-                        <div id="floors" style="height:350px;"></div>
+
+
+                    <!-- Tab panels -->
+                    <div ng-show="showGraph.reportTittle==1" class="tab-pane in active padding-top-5">
+                        <div class="col-lg-12 col-md-12 col-sm-12 padding-left-0 padding-right-10">
+                            <div class="col-md-3 col-lg-3 col-sm-3" style="padding-top: 5px;">
+                               <a href="" ng-click="showGraph.reportTittle=0" class="back-button pull-left margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back</a>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 pull-right" style="padding-top: 5px;">
+                                <div class="input-group">
+                                    <input type="text" id="history-graph-date" class="history_input pull-right" block>
+                                    <span class="pull-right margin-top-5 text-right"><i class="fa fa-calendar"></i>&nbsp;Date <span class="hidden-md hidden-sm">Range</span>:&nbsp;
+                                    </span>
+                                    <span class="input-group-btn">
+                                    <button class="btn history" ng-click="doGetClientGraphDetailsByCoach('historyGraph-multiple')" type="button">Go!</button>
+                                    </span>
+                                </div><!-- /input-group -->
+                            </div>
+                            <!-- Tab Content 1 -->
+                            <div class="tab-content2 contentHistoryOverride" style="margin-left: 10px; border-right-width: 10px;">
+                                <div ng-if="loaded" class="col-lg-12 col-md-12 col-sm-12">
+                                    <div class="loader-style-dashboard"><br/><br/>
+                                        <div class="loader"></div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                    <div ng-show="isHistoryEmpty==0">
+                                        <div id="historyGraph-multiple"></div>
+                                    </div>
+                                    <div ng-show="isHistoryEmpty==1" class="text-center">
+                                        <br/><br/><br/>
+
+                                        <img src="../../images/no-dates.png" width="200" height="200">
+                                        <h1 class="text-gray">NO DATES SELECTED</h1>
+                                    </div>
+                                    <div style="text-align: center;padding-top: 5px;" ng-show="waterGraphs">
+                                        <input type="radio" id="ml" ng-change="setHistoryType(14,'historyGraph-multiple')"  value="14" name="ml" ng-model="historyType"/>
+                                        <label for="ml" style="background-color: #00ccff">Ml</label>
+                                        <input type="radio" id="oz" ng-change="setHistoryType(15,'historyGraph-multiple')"  value="15" name="oz" ng-model="historyType"/>
+                                        <label for="oz" style="background-color: #ff4da6">Oz</label>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
                     </div>
-                    <div class="col-lg-6 col-md-6 col-sm-12 no-padding">
-                        <div id="steps"></div>
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-12 no-padding">
-                        <div id="sleep"></div>
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-12 no-padding">
-                        <div id="graph4"></div>
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-12 no-padding">
-                        <div id="graph5"></div>
-                    </div>
+                    <!-- End Tab Panels -->
+
                 </div>
             </div>
         </div>
@@ -897,302 +970,6 @@ $(".modal").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
 
 
 <script type="text/javascript">
-Highcharts.chart('excersize', {
-    chart: {
-        type: 'column'
-    },
-    title: {
-        text: 'Excersize Minutes'
-    },
-    xAxis: {
-        type: 'category',
-        title: {
-            text: 'Date'
-        },
-        labels: {
-            style: {
-                fontSize: '13px',
-                fontFamily: 'Verdana, sans-serif'
-            }
-        }
-    },
-    yAxis: {
-        title: {
-            text: 'Minutes'
-        },
-        plotLines: [{
-            value: 0,
-            width: 1,
-            color: '#f8ba01'
-        }]
-    },
-    colors: [
-        '#4d6483'
-    ],
-    exporting: {
-        enabled: false
-    },
-    credits: {
-        enabled: false
-    },
-    legend: {
-        enabled: false
-    },
-    tooltip: {
-        pointFormat: '<b>{point.y:.1f} mins</b>'
-    },
-    series: [{
-        name: 'Population',
-        data: [
-            ['Aug 6', 23.7],
-            ['Aug 7', 16.1],
-            ['Aug 8', 14.2],
-            ['Aug 9', 14.0],
-            ['Aug 10', 12.5],
-            ['Aug 11', 12.1],
-            ['Aug 12', 11.8],
-            ['Aug 13', 11.7],
-            ['Aug 14', 11.1],
-            ['Aug 15', 11.1]
-        ],
-        dataLabels: {
-            enabled: true,
-            rotation: -90,
-            color: '#FFFFFF',
-            align: 'right',
-            format: '{point.y:.1f}', // one decimal
-            y: 10, // 10 pixels down from the top
-            style: {
-                fontSize: '13px',
-                fontFamily: 'Verdana, sans-serif'
-            }
-        }
-    }]
-});
-</script>
-<script type="text/javascript">
-Highcharts.chart('floors', {
-    chart: {
-        type: 'column'
-    },
-    title: {
-        text: 'Floors'
-    },
-    xAxis: {
-        type: 'category',
-        title: {
-            text: 'Date'
-        },
-        labels: {
-            style: {
-                fontSize: '13px',
-                fontFamily: 'Verdana, sans-serif'
-            }
-        }
-    },
-    yAxis: {
-        min: 0,
-        title: {
-            text: 'Minutes'
-        }
-    },
-    legend: {
-        enabled: false
-    },
-    colors: [
-        '#ea645e'
-    ],
-    exporting: {
-        enabled: false
-    },
-    credits: {
-        enabled: false
-    },
-    legend: {
-        enabled: false
-    },
-    tooltip: {
-        pointFormat: '<b>{point.y:.1f} millions</b>'
-    },
-    series: [{
-        name: 'Population',
-        data: [
-            ['Aug 6', 23.7],
-            ['Aug 7', 15.1],
-            ['Aug 8', 4.2],
-            ['Aug 9', 14.0],
-            ['Aug 10', 1.5],
-            ['Aug 11', 2.1],
-            ['Aug 12', 19.8],
-            ['Aug 13', 17.7],
-            ['Aug 14', 21.1],
-            ['Aug 15', 11.1]
-        ],
-        dataLabels: {
-            enabled: true,
-            rotation: -90,
-            color: '#FFFFFF',
-            align: 'right',
-            format: '{point.y:.1f}', // one decimal
-            y: 10, // 10 pixels down from the top
-            style: {
-                fontSize: '13px',
-                fontFamily: 'Verdana, sans-serif'
-            }
-        }
-    }]
-});
-</script>
-
-<script type="text/javascript">
-Highcharts.chart('steps', {
-    chart: {
-        type: 'column'
-    },
-    title: {
-        text: 'Floors'
-    },
-    xAxis: {
-        type: 'category',
-        title: {
-            text: 'Date'
-        },
-        labels: {
-            style: {
-                fontSize: '13px',
-                fontFamily: 'Verdana, sans-serif'
-            }
-        }
-    },
-    yAxis: {
-        min: 0,
-        title: {
-            text: 'Minutes'
-        }
-    },
-    legend: {
-        enabled: false
-    },
-    colors: [
-        '#fec40d'
-    ],
-    exporting: {
-        enabled: false
-    },
-    credits: {
-        enabled: false
-    },
-    legend: {
-        enabled: false
-    },
-    tooltip: {
-        pointFormat: '<b>{point.y:.1f} millions</b>'
-    },
-    series: [{
-        name: 'Population',
-        data: [
-            ['Aug 6', 23.7],
-            ['Aug 7', 15.1],
-            ['Aug 8', 4.2],
-            ['Aug 9', 14.0],
-            ['Aug 10', 1.5],
-            ['Aug 11', 2.1],
-            ['Aug 12', 19.8],
-            ['Aug 13', 17.7],
-            ['Aug 14', 21.1],
-            ['Aug 15', 11.1]
-        ],
-        dataLabels: {
-            enabled: true,
-            rotation: -90,
-            color: '#FFFFFF',
-            align: 'right',
-            format: '{point.y:.1f}', // one decimal
-            y: 10, // 10 pixels down from the top
-            style: {
-                fontSize: '13px',
-                fontFamily: 'Verdana, sans-serif'
-            }
-        }
-    }]
-});
-</script>
-
-<script type="text/javascript">
-Highcharts.chart('sleep', {
-    chart: {
-        type: 'column'
-    },
-    title: {
-        text: 'Floors'
-    },
-    xAxis: {
-        type: 'category',
-        title: {
-            text: 'Date'
-        },
-        labels: {
-            style: {
-                fontSize: '13px',
-                fontFamily: 'Verdana, sans-serif'
-            }
-        }
-    },
-    yAxis: {
-        min: 0,
-        title: {
-            text: 'Minutes'
-        }
-    },
-    legend: {
-        enabled: false
-    },
-    colors: [
-        '#00887a'
-    ],
-    exporting: {
-        enabled: false
-    },
-    credits: {
-        enabled: false
-    },
-    legend: {
-        enabled: false
-    },
-    tooltip: {
-        pointFormat: '<b>{point.y:.1f} millions</b>'
-    },
-    series: [{
-        name: 'Population',
-        data: [
-            ['Aug 6', 23.7],
-            ['Aug 7', 15.1],
-            ['Aug 8', 4.2],
-            ['Aug 9', 14.0],
-            ['Aug 10', 1.5],
-            ['Aug 11', 2.1],
-            ['Aug 12', 19.8],
-            ['Aug 13', 17.7],
-            ['Aug 14', 21.1],
-            ['Aug 15', 11.1]
-        ],
-        dataLabels: {
-            enabled: true,
-            rotation: -90,
-            color: '#FFFFFF',
-            align: 'right',
-            format: '{point.y:.1f}', // one decimal
-            y: 10, // 10 pixels down from the top
-            style: {
-                fontSize: '13px',
-                fontFamily: 'Verdana, sans-serif'
-            }
-        }
-    }]
-});
-</script>
-
-<script type="text/javascript">
     $(document).ready(function(){
         $("#feedback_button").click(function(){
             if($('#form').css('left')=='0px'){
@@ -1379,13 +1156,12 @@ $(document).ready(function(){
            $(".tracking-plan-div").hide();
            datePicker();
         });
-
    });
 
 </script>
 
 <script>
-//for dashboard main date
+            //for Activity and budget main date
             function datePicker() {
                 $("#main-date").click();
                 var options = {
@@ -1401,4 +1177,33 @@ $(document).ready(function(){
                    
                 });
             };
+
+            //for stats graph
+            var startDate=new Date();
+                startDate.setDate(startDate.getDate()-6);
+
+            $("#history-graph-date").click();
+                var options = {
+                    maxDate : new Date(),
+                    startDate :startDate,
+                    endDate : new Date(),
+                    singleDatePicker: false,
+                    opens:'left',
+                    showDropdowns: true,
+                    dateLimit: {
+                        days: 31
+                    },
+                    ranges:{
+                        'Last Week': [moment().subtract(6,'days'), moment()],
+                        'Last 2 Weeks': [moment().subtract(13,'days'), moment()],
+                        'Last 3 Weeks': [moment().subtract(20,'days'), moment()],
+                        'This Month': [moment().subtract(0,'month').startOf('month'), moment()],
+                        'Last Month': [moment().subtract(1,'month').startOf('month'), moment().subtract(1,'month').endOf('month')]
+                    }
+                };
+
+                $('#history-graph-date').daterangepicker(options, function(start, end, label) {
+                    document.getElementById("history-start").value = start.format('DD/MM/YYYY');
+                    document.getElementById("history-end").value = end.format('DD/MM/YYYY');
+                });
 </script>
