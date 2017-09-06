@@ -11,6 +11,19 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
         "current":null
     };
 
+        var today = new Date(); 
+        var dd = today.getDate(); 
+        var mm = today.getMonth()+1; 
+        //January is 0! 
+        var yyyy = today.getFullYear(); 
+        if(dd<10){
+            dd='0'+dd
+        } 
+        if(mm<10){
+            mm='0'+mm
+        } 
+        var today = dd+'/'+mm+'/'+yyyy;
+
     $scope.datePicker = function(){
             $("#main-date").click();
         };
@@ -64,7 +77,7 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
         //Demography Details
         $scope.doGetClientsDemographyDetailsByCoach(id);
         //Health profile Details
-        $scope.doGetClientHealthProfileDetailsByCoach(id);
+        $scope.doGetClientHealthProfileDetailsByCoach();
         //Graph  for oneweek
         $scope.doGetClientGraphDetailsByCoach(id);
         //Get Tracking Plan Details
@@ -204,30 +217,19 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
 
     /*For clients Individual daily activities details By Coach */
 
-    $scope.doGetClientHealthProfileDetailsByCoach = function(userid){
-        var today = new Date(); 
-        var dd = today.getDate(); 
-        var mm = today.getMonth()+1; 
-        //January is 0! 
-        var yyyy = today.getFullYear(); 
-        if(dd<10){
-            dd='0'+dd
-        } 
-        if(mm<10){
-            mm='0'+mm
-        } 
-        var today = dd+'/'+mm+'/'+yyyy;
+    $scope.doGetClientHealthProfileDetailsByCoach = function(){
 
-        var today = $scope.selectedDate;
-        console.log($scope.selectedDate);
-        requestHandler.postRequest("coach/userhealthprofile/",{"userid":userid,"startdate":today,"enddate":today}).then(function(response){
+        if(document.getElementById("main-start-date").value!=''){
+            today=document.getElementById("main-start-date").value;
+        }
+         
+        requestHandler.postRequest("coach/userhealthprofile/",{"userid":$scope.currentClientId,"startdate":today,"enddate":today}).then(function(response){
           
             //get the array
             $.each(response.data.healthprofile,function(index,value){
                 $scope.wearable = value.wearables;
                 $scope.water = value.waterlog;
                 $scope.budgetDetails=value.budget;
-                console.log($scope.budgetDetails);
             });
         });
     };
@@ -477,38 +479,39 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
         }
 
     }
-    //circle round
-    $scope.offset =         0;
-    $scope.timerCurrent =   0;
-    $scope.uploadCurrent =  0;
-    $scope.stroke =         12;
-    $scope.radius =         70;
-    $scope.isSemi =         false;
-    $scope.rounded =        false;
-    $scope.responsive =     false;
-    $scope.clockwise =      true;
-    $scope.bgColor =        '#ddd';
-    $scope.duration =       1000;
-    $scope.currentAnimation = 'easeOutCubic';
+    
+        //circle round
+        $scope.offset =         0;
+        $scope.timerCurrent =   0;
+        $scope.uploadCurrent =  0;
+        $scope.stroke =         12;
+        $scope.radius =         70;
+        $scope.isSemi =         false;
+        $scope.rounded =        false;
+        $scope.responsive =     false;
+        $scope.clockwise =      true;
+        $scope.bgColor =        '#ddd';
+        $scope.duration =       1000;
+        $scope.currentAnimation = 'easeOutCubic';
 
-    $scope.animations = [];
+        $scope.animations = [];
 
-/*    angular.forEach(roundProgressService.animations, function(value, key){
-        $scope.animations.push(key);
-    });*/
+        /*angular.forEach(roundProgressService.animations, function(value, key){
+            $scope.animations.push(key);
+        });*/
 
-    $scope.getStyle = function(){
-        var transform = ($scope.isSemi ? '' : 'translateY(-50%) ') + 'translateX(-50%)';
+        $scope.getStyle = function(){
+            var transform = ($scope.isSemi ? '' : 'translateY(-50%) ') + 'translateX(-50%)';
 
-        return {
-            'top': $scope.isSemi ? 'auto' : '52%',
-            'bottom': $scope.isSemi ? '5%' : 'auto',
-            'left': '50%',
-            'transform': transform,
-            '-moz-transform': transform,
-            '-webkit-transform': transform
+            return {
+                'top': $scope.isSemi ? 'auto' : '52%',
+                'bottom': $scope.isSemi ? '5%' : 'auto',
+                'left': '50%',
+                'transform': transform,
+                '-moz-transform': transform,
+                '-webkit-transform': transform
+            };
         };
-    };
 
     //Initial Load
     $scope.init = function(){
