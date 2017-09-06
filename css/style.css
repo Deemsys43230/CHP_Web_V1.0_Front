@@ -17181,7 +17181,8 @@ select.date:focus {
 
 .client-content {
     height: 120px;
-    width: 135px;
+    width: 130px;
+    margin: 5px;
     border-radius: 10px;
     -webkit-box-shadow: inset 0px 0px 3px rgba(0,0,0,0.3);
     -moz-box-shadow: inset 0px 0px 3px rgba(0,0,0,0.3);
@@ -17222,12 +17223,13 @@ select.date:focus {
 .sticky-notes{
 
     float: left;
-    height: 180px !important;
+    height: 215px !important;
     font-size: 14px;
     background: #fff9de;
     color: #333;
     padding: 7px 10px;
     width: 100%;
+    margin-top:20px;
     border:0 !important;
     -moz-appearance: none;
     -webkit-appearance: none;
@@ -17634,16 +17636,16 @@ div.foodcalorie{
 }
 /*  Client Profile */
 .client-card{
-    height: 150px;
     border:solid 1px #ddd;
     border-radius: 5px;
     box-shadow: 1px 1px #f3f3f3;
     padding:10px;
 }
 .client-card .client-card-img{
-    width:25%;
-    height: 75px;
+    width:30%;
+    height: 100px;
     border-radius: 50%;
+    padding:5px;
 }
 .client-card-details{
     float: right;
@@ -17655,4 +17657,17 @@ div.foodcalorie{
     padding: 2px 5px 2px 5px;
     margin:20px 0px 10px 0px;
     background-color: #ffec6d;
+}
+.client-info{    
+    box-shadow: 4px 3px #f3f3f3;
+    border-radius: 5px;
+    border:1px solid #c9c2c2;
+}
+.client-image{
+    width: 60%;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+.profile .list-group-item{
+    padding: 5px 10px 5px 10px !important;
 }

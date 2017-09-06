@@ -11,18 +11,20 @@
 
                     <h3>Group by</h3><hr/>
                         
-                    <div class="col-sm-6 col-md-4 col-lg-3 margin-bottom-20" ng-repeat="client in myClients">
-                        <div class="client-card">
-                        <img class="client-card-img" src="{{client.imageurl}}"/>
-                        <div class="client-card-details">
-                            <h5><strong>{{client.name}}</strong></h5><hr/>
-                            <p>{{client.emailid}}</p>
-                            <p>{{client.phone}}</p>
-                        </div>
-                        <div class="client-status">
-                            <p>Messages: {{client.unreadmessagecount}}</p>
-                        </div>
-                    </div>                             
+                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4 margin-bottom-10" ng-repeat="client in myClients">
+                      <a href="#member-view/{{client.userid}}">
+                            <div class="client-card">
+                            <img class="client-card-img" src="{{client.imageurl}}"/>
+                            <div class="client-card-details">
+                                <h5><strong>{{client.name}}</strong></h5><hr/>
+                                <p>{{client.emailid}}</p>
+                                <p>{{client.phone}}</p>
+                            </div>
+                            <div class="client-status">
+                                <p>Messages: {{client.unreadmessagecount}}</p>
+                            </div>
+                            </div>    
+                        </a>                         
                     </div>
 
             </div>

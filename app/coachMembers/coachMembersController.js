@@ -3,7 +3,7 @@
  */
 var coachApp = angular.module('coachApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','angularUtils.directives.dirPagination','angular-nicescroll','angular-svg-round-progress']);
 
-coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter","Flash","$location","$rootScope",function($scope,requestHandler,$filter,Flash,$location,$rootScope,roundProgressService) {
+coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter","Flash","$location","$rootScope","$routeParams",function($scope,requestHandler,$filter,Flash,$location,$rootScope,$routeParams) {
 
     $scope.isActive=false;
 
@@ -81,9 +81,9 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
         //Demography Details
         $scope.doGetClientsDemographyDetailsByCoach(id);
         //Health profile Details
-        $scope.doGetClientHealthProfileDetailsByCoach();
+        //$scope.doGetClientHealthProfileDetailsByCoach();
         //Graph  for oneweek
-        $scope.doGetClientGraphDetailsByCoach();
+        //$scope.doGetClientGraphDetailsByCoach();
         //Get Tracking Plan Details
         $scope.doGetTrainingPlanDetails(id);
         //Get Medication List
@@ -1600,10 +1600,9 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
 
     //Initial Load
     $scope.init = function(){
-                        $scope.paginationLoad=false;
-                        $scope.pagination={"itemsPerPage":9,"pageNumber":1};
-                        $scope.doGetGroupList();
-                        $scope.doGetMyMembers(0);
+        $scope.paginationLoad=false;
+        $scope.pagination={"itemsPerPage":9,"pageNumber":1};
+        $scope.doGetIndividualClientDetail($routeParams.id);
     };
 
     // Search Food Type

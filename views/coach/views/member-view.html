@@ -1,6 +1,6 @@
 <div class="col-lg-12 col-md-12 col-sm-12 no-padding" ng-cloak class="ng-cloak" ng-init="init()">
     <!-- <div flash-message="2000" class="col-lg-4 col-md-4 col-sm-4 pull-right"></div> -->
-    <h5 class="classic-title"><a href="" class="active-tab profile-details"><i class="fa fa-user"></i>&nbsp;&nbsp;Profile</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="" class="stats"><i class="fa fa-history"></i>&nbsp;&nbsp;Stats </a>|&nbsp;&nbsp;<a href="" class="tracking-plan"><i class="fa fa-gg"></i>&nbsp;&nbsp;Training Plans </a>|&nbsp;&nbsp;<a href="" class="medication"><i class="fa fa-medkit"></i>&nbsp;&nbsp;Medications&nbsp;<small class="badge">{{medicationList.length}}</small></a> <a href=""  class="remove-text-color pull-right" ng-show="clients.length>0" ng-click="doRemoveUser()">Remove User</a></h5>
+    <h5 class="classic-title"><a href="" class="active-tab profile-details"><i class="fa fa-user"></i>&nbsp;&nbsp;Demography</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="" class="stats"><i class="fa fa-history"></i>&nbsp;&nbsp;Stats </a>|&nbsp;&nbsp;<a href="" class="tracking-plan"><i class="fa fa-gg"></i>&nbsp;&nbsp;Training Plans </a>|&nbsp;&nbsp;<a href="" class="medication"><i class="fa fa-medkit"></i>&nbsp;&nbsp;Medications&nbsp;<small class="badge">{{medicationList.length}}</small></a> <a href=""  class="remove-text-color pull-right" ng-show="clients.length>0" ng-click="doRemoveUser()">Remove User</a></h5>
       
         <div ng-if="loaded">
             <div class="loader-style">
@@ -8,79 +8,59 @@
             </div>
         </div>
     <div class="profile-details-div">
-    <div ng-show="clients.length>0">
-        <div class="col-lg-12 col-md-12 col-sm-12">
-              <!-- <h2 class="classic-title text-color"><span class="sub-title"><strong><i class="fa fa-user"></i>&nbsp;&nbsp;Profile</strong></span></h2> --> 
-             <div class=" col-lg-6 col-md-6 col-sm-6" style="padding: 8px;">
-                <div class="col-md-4">
-                <img class="img-circle" style="width:140px;" ng-src="{{coachclientdetails.imageurl}}">
+    <div>
+        <div class="row">
+            <div class="col-md-6"> 
+            <div class="col-lg-12 col-md-12 col-sm-12 no-padding margin-top-15">
+                <div class="col-lg-4 col-sm-12 col-md-4 demo-font client-content">
+                    <span ng-show="coachclientdetails.unitPreference==1">
+                            <span>{{demographyDeatil.height}}</span>
+                        </span>
+                        <span ng-show="coachclientdetails.unitPreference==2" >
+                            <span> {{demographyDeatil.heightFeet}}<sup style="color: deepskyblue">'</sup>&nbsp;{{demographyDeatil.heightInches}}<sup style="color: deepskyblue">"</sup></span>
+                        </span></br/></br/>
+                        <span class="text-bold">
+                            <h4>Height <span ng-show="coachclientdetails.unitPreference==1"><small>(cms)</small></span> <span ng-show="coachclientdetails.unitPreference==2"><small>(feet,inches)</small></span></h4>
+                        </span>
+                </div>  
+                <div class="col-lg-4 col-sm-12 col-md-4 demo-font client-content">
+                        <span ng-show="coachclientdetails.unitPreference==1">
+                            <span>{{demographyDeatil.weight}}</span>
+                        </span>
+                        <span ng-show="coachclientdetails.unitPreference==2" >
+                            <span>{{demographyDeatil.weight}}</span>                                           
+                        </span><br/><br/>   
+                        <span class="text-bold">
+                            <h4>Weight <span ng-show="coachclientdetails.unitPreference==1"><small>(kgs)</small></span> <span ng-show="coachclientdetails.unitPreference==2"><small>(lbs)</small></span></h4>
+                        </span>
+                </div>
+                <div class="col-lg-4 col-sm-12 col-md-4 demo-font client-content">
+                         <span>{{demographyDeatil.hip}}</span><br/><br/>
+                        <span class="text-bold">
+                            <h5>Hip<small>(Inches)</small></small></h5>
+                        </span>  
+                </div>
+                <div class="col-lg-4 col-sm-12 col-md-4 demo-font client-content">
+                        <span>{{demographyDeatil.waist}}</span><br/><br/>
+                        <span class="text-bold">
+                            <h5>Waist <small>(Inches)</h5>
+                        </span>               
+                </div>
+                <div class="col-lg-4 col-sm-12 col-md-4 demo-font client-content">
+                        <span>{{demographyDeatil.bmi}}</span><br/><br/>
+                        <span class="text-bold">
+                            <h5>BMI <small>(Kg/m<sup>2</sup>)</small></h5>
+                        </span>                                    
+                </div>
+                <div class="ccol-lg-4 col-sm-12 col-md-4 demo-font client-content">
+                        <span> {{demographyDeatil.targetweight==null?'NA':demographyDeatil.targetweight}} </span><br/><br/>
+                        <span class="text-bold">
+                            <h5>Target Weight &nbsp;<span ng-show="coachclientdetails.unitPreference==1"><small>(kgs)</small></span> <span ng-show="coachclientdetails.unitPreference==2"><small>(lbs)</small></span></h5>
+                        </span>
+                </div>
             </div>
-            <div class="col-md-8">
-                    <h2 class="text-color" style="border-bottom:1px solid #777;margin-bottom:10px;"><strong>{{coachclientdetails.name}}</strong></h2>
-                  <div class="col-lg-6 col-md-6 col-sm-6 no-padding text-bold">
-                        Gender <span class="pull-right">:</span>
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6  wrap-all">
-                        {{coachclientdetails.gender==1?"Male":"Female"}}
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6 no-padding text-bold">
-                        Age <span class="pull-right">:</span>
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6  wrap-all">
-                        {{coachclientdetails.age}}
-                    </div>
-                    <div class="col-md-6 col-lg-6 col-sm-6 no-padding text-bold">
-                        City <span class="pull-right">:</span>
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6  wrap-all">
-                        {{coachclientdetails.city}}
-                    </div>
-                    <div class="col-md-6 col-lg-6 col-sm-6 no-padding text-bold">
-                        State <span class="pull-right">:</span>
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6  wrap-all">
-                        {{coachclientdetails.state}}
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6 no-padding text-bold">
-                        Country <span class="pull-right">:</span>
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6  wrap-all">
-                        {{coachclientdetails.country}}
-                    </div>
-                    <div class="col-md-6 col-lg-6 col-sm-6 no-padding text-bold">
-                        Zip <span class="pull-right">:</span>
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6  wrap-all">
-                        {{coachclientdetails.zipcode}}
-                    </div>
-                    <div class="col-md-6 col-lg-6 col-sm-6 no-padding text-bold">
-                        Phone <span class="pull-right">:</span>
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6  wrap-all">
-                        {{coachclientdetails.phone}}
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6 no-padding text-bold">
-                        Prefer Food <span class="pull-right">:</span>
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6  wrap-all">
-                        {{coachclientdetails.preferfood ==1?"Indian":"Western"}}
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6 no-padding text-bold">
-                        Unit Preference<span class="pull-right">:</span>
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6  wrap-all">
-                        {{coachclientdetails.unitPreference ==1?"Metric":"US"}}
-                    </div>
-                    <div class="col-md-6 col-lg-6 col-sm-6 no-padding text-bold">
-                        About <span class="pull-right">:</span>
-                    </div>
-                    <div class="col-md-6 col-lg-6 col-sm-6 wrap-all">
-                        {{coachclientdetails.about}}
-                    </div>
-            </div>
-                  
-            </div>
-            <div class="col-lg-6 col-md-6 col-sm-6 no-padding">
+        </div>
+            <div class="col-lg-6 col-md-6 col-sm-6 margin-top-20">
                 <span class="col-lg-12 col-sm-12 col-md-12 notesSpan">Notes 
                     <a href="" type="button" style="padding:0px 5px;" class="btn btn-danger pull-right margin-left-5" ng-click="doClearAllNotes(coachclientdetails.userid)">Clear All</a>
                     <a href="" id="notesButton" type="button" style="padding:0px 12px;" class="btn btn-success pull-right" ng-click="doInsertOrUpdateNotes(coachclientdetails.userid)">Save</a>
@@ -91,66 +71,7 @@
             </div>
         </div>
         <div class="col-lg-12 col-md-12 col-sm-12 margin-top-10 no-padding">
-            <h2 class="classic-title text-color"><span class="sub-title"><strong><i class="fa fa-male"></i>&nbsp;&nbsp;DEMOGRAPHY</strong></span></h2>   
-            <div class="col-lg-12 col-md-12 col-sm-12 no-padding margin-top-15">
-                <div class="col-lg-2 col-sm-2 col-md-2">
-                    <div class="demo-font client-content">
-                        <span ng-show="coachclientdetails.unitPreference==1">
-                            <span>{{demographyDeatil.height}}</span>
-                        </span>
-                        <span ng-show="coachclientdetails.unitPreference==2" >
-                            <span> {{demographyDeatil.heightFeet}}<sup style="color: deepskyblue">'</sup>&nbsp;{{demographyDeatil.heightInches}}<sup style="color: deepskyblue">"</sup></span>
-                        </span></br/></br/>
-                        <span class="text-bold">
-                            <h4>Height <span ng-show="coachclientdetails.unitPreference==1"><small>(cms)</small></span> <span ng-show="coachclientdetails.unitPreference==2"><small>(feet,inches)</small></span></h4>
-                        </span>
-                    </div> 
-                </div>  
-                <div class="col-lg-2 col-sm-2 col-md-2">
-                    <div class="demo-font client-content">
-                        <span ng-show="coachclientdetails.unitPreference==1">
-                            <span>{{demographyDeatil.weight}}</span>
-                        </span>
-                        <span ng-show="coachclientdetails.unitPreference==2" >
-                            <span>{{demographyDeatil.weight}}</span>                                           
-                        </span><br/><br/>   
-                        <span class="text-bold">
-                            <h4>Weight <span ng-show="coachclientdetails.unitPreference==1"><small>(kgs)</small></span> <span ng-show="coachclientdetails.unitPreference==2"><small>(lbs)</small></span></h4>
-                        </span>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-sm-2 col-md-2">
-                    <div class="demo-font client-content">
-                        <span>{{demographyDeatil.hip}}</span><br/><br/>
-                        <span class="text-bold">
-                            <h5>Hip<small>(Inches)</small></small></h5>
-                        </span>                                    
-                    </div>
-                </div>
-                <div class="col-lg-2 col-sm-2 col-md-2">
-                    <div class="demo-font client-content">
-                        <span>{{demographyDeatil.waist}}</span><br/><br/>
-                        <span class="text-bold">
-                            <h5>Waist <small>(Inches)</h5>
-                        </span>                                    
-                    </div>
-                </div>
-                <div class="col-lg-2 col-sm-2 col-md-2">
-                    <div class="demo-font client-content">
-                        <span>{{demographyDeatil.bmi}}</span><br/><br/>
-                        <span class="text-bold">
-                            <h5>BMI <small>(Kg/m<sup>2</sup>)</small></h5>
-                        </span>                                    
-                    </div>
-                </div>
-                <div class="col-lg-2 col-sm-2 col-md-2">
-                    <div class="demo-font client-content">
-                        <span> {{demographyDeatil.targetweight==null?'NA':demographyDeatil.targetweight}} </span><br/><br/>
-                        <span class="text-bold">
-                            <h5>Target Weight &nbsp;<span ng-show="coachclientdetails.unitPreference==1"><small>(kgs)</small></span> <span ng-show="coachclientdetails.unitPreference==2"><small>(lbs)</small></span></h5>
-                        </span>
-                    </div>
-                </div>
+            
                 <div class="col-md-12 col-lg-12 col-sm-12 margin-top-10 margin-bottom-10">
                     <div class="col-md-1 col-lg-1"></div>
                     <div class="col-lg-3 col-sm-3 col-md-3 text-center">

@@ -240,6 +240,37 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 controller:'AuthorizeThanksSubscribePageController'
             }).            
             when('/my-members', {
+                templateUrl: 'views/my-members.html',
+                resolve: {                   
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'coachApp',
+                            files:[
+                                '../../plugin/popup/style.css',
+                                '../../app/coachMembers/coachMembersController.js',
+                                '../../angular/angular-utils-pagination/dirPagination.js',
+                                 '../../css/custom-inputs.css',
+                                '../../plugin/dateRange/daterangepicker.css',
+                                '../../plugin/dateRange/daterangepicker.js'
+                            ]
+                        })
+                    }],
+                    check:["$location","$rootScope","requestHandler",function($location,$rootScope,requestHandler){
+                         requestHandler.getRequest("/coach/isSubscriptionActive/","").then(function(response){
+                            if(response.data.isActive==1){
+                                $rootScope.isSubscriptionActive=true;
+                            }else{   
+                                $rootScope.isSubscriptionActive=false;
+                                $location.path("subscription");
+                            }
+
+                         });
+                        
+                    }]
+                },
+                controller:'MyMembersController'
+            }).
+            when('/member-view/:id', {
                 templateUrl: 'views/member.html',
                 resolve: {                   
                     loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
@@ -270,6 +301,8 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'CoachMembersController'
             }).
+
+
             when('/coach-invitations', {
                 templateUrl: 'views/coach-invitations.html',
                 resolve: {
