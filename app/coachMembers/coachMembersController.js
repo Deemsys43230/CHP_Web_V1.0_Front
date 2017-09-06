@@ -67,6 +67,8 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
 
     //Get Individual Memeber Details
     $scope.doGetIndividualClientDetail=function(id){
+
+        $scope.resetUserDetails();
         $scope.currentClientId=id;
         //Get Profile Detail
         $scope.doGetClientsProfileDetailsByCoach(id);  
@@ -88,7 +90,11 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
         $scope.reloadTrainingplanList();
 
 
+    };
 
+    $scope.resetUserDetails=function(){
+        $scope.deletingChatCount=0;
+        $scope.deleteChatLogId=[];
     };
 
     //Refresh Accordian
@@ -386,7 +392,8 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
         requestHandler.postRequest("coach/removeuser/",{"userid":userid}).then(function(response){
             $scope.Result = response.data.Response;
             if(response.data.Response == "Success"){
-                $scope.doGetMyMembers();
+                        $scope.doGetMyMembers();
+             
             }
         });
     };

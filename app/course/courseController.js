@@ -340,6 +340,24 @@ adminApp.controller('CourseAdminController',['$scope','requestHandler','Flash','
 
     };
 
+
+    //Ratings and Reviews
+    $scope.getCourseRatingAndReview=function(){
+        $scope.coursereview = {ratinglevel:1};
+        $scope.averageRate=0.1;
+        $scope.ratingReviewParam={
+            "limit":2,
+            "offset":0
+        };
+        requestHandler.postRequest("getCourseRatingsandReviews/"+parseInt($routeParams.id)+"/",$scope.ratingReviewParam).then(function(response) {
+            $scope.courseReviews=response.data;
+            $scope.averageRate=$scope.courseReviews.averageratings;
+            $scope.totalRatings = response.data.totalrecords;
+        },function(){
+            errorMessage(Flash,"Please try again later!")
+        });
+    }
+
     $scope.courseSectionDetails =function(){
 
         requestHandler.postRequest("admin/getSectionDetail/",{"sectionid":$routeParams.id}).then(function(response) {
@@ -441,12 +459,15 @@ adminApp.controller('CourseAdminController',['$scope','requestHandler','Flash','
     $scope.viewinit = function(){
         $scope.courseDetails();
         $scope.courseSectionList();
+        $scope.getCourseRatingAndReview();
+
     };
 
     $scope.publishedCourses=function(){
     $scope.courselist();
     $scope.getCourseCanReviewSetting();
     $scope.pendingcourselist();
+
     };
 
     $scope.resetrejectdata= function(){
@@ -1259,5 +1280,83 @@ userApp.filter('startsWithLetterCourse', function () {
             }
         }
         return filtered;
+    };
+});
+
+
+//For rating and reviews in adminside
+adminApp.directive("starRating", function() {
+    return {
+        restrict : "EA",
+        template : "<ul class='rating' ng-class='{readonly: readonly}'>" +
+            "  <li ng-repeat='star in stars' ng-class='star' ng-click='toggle($index)'>" +
+            "    <i class='fa fa-star'></i>" + //&#9733
+            "  </li>" +
+            "</ul>",
+        scope : {
+            ratingValue : "=ngModel",
+            max : "=?", //optional: default is 5
+            readonly: "=?"
+        },
+        link : function(scope, elem, attrs) {
+            if (scope.max == undefined) { scope.max = 5; }
+            function updateStars() {
+                scope.stars = [];
+                for (var i = 0; i < scope.max; i++) {
+                    scope.stars.push({
+                        filled : (i < scope.ratingValue.ratinglevel)
+                    });
+                }
+            };
+            scope.toggle = function(index) {
+                if (scope.readonly == undefined || scope.readonly == false){
+                    scope.ratingValue.ratinglevel = index + 1;
+                    scope.onRatingSelected({
+                        ratinglevel: index + 1
+                    });
+                }
+            };
+            scope.$watch("ratingValue.ratinglevel", function(oldVal, newVal) {
+                if (newVal) { updateStars(); }
+            });
+        }
+    };
+});
+
+
+
+adminApp.directive("averageStarRating", function() {
+    return {
+        restrict : "EA",
+        template : "<div class='average-rating-container'>" +
+            "  <ul class='rating background' class='readonly'>" +
+            "    <li ng-repeat='star in stars' class='star'>" +
+            "      <i class='fa fa-star'></i>" + //&#9733
+            "    </li>" +
+            "  </ul>" +
+            "  <ul class='rating foreground' class='readonly' ng-attr-style='width:{{filledInStarsContainerWidth}}%'>" +
+            "    <li ng-repeat='star in stars' class='star filled'>" +
+            "      <i class='fa fa-star'></i>" + //&#9733
+            "    </li>" +
+            "  </ul>" +
+            "</div>",
+        scope : {
+            averageRatingValue : "=ngModel",
+            max : "=?" //optional: default is 5
+        },
+        link : function(scope, elem, attrs) {
+            if (scope.max == undefined) { scope.max = 5; }
+            function updateStars() {
+                scope.stars = [];
+                for (var i = 0; i < scope.max; i++) {
+                    scope.stars.push({});
+                }
+                var starContainerMaxWidth = 76; //%
+                scope.filledInStarsContainerWidth = scope.averageRatingValue / scope.max * starContainerMaxWidth;
+            }
+            scope.$watch("averageRatingValue", function(oldVal, newVal) {
+                if (newVal) { updateStars(); }
+            });
+        }
     };
 });

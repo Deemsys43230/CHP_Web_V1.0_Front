@@ -646,7 +646,7 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller: 'CoachSettingsController'
             }).
-            when('/subscription-panel', {
+           /* when('/subscription-panel', {
                 templateUrl: 'views/payment-subscription-panel.html',
                 resolve: {
                     loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
@@ -661,7 +661,7 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                     }]
                 },
                 controller: 'CoachSubscriptionController'
-            }).
+            }).*/
             when('/contact', {
                 templateUrl: '../common/contact.html',
                 resolve: {
