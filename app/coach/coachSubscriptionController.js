@@ -29,17 +29,19 @@ adminApp.controller('IndividualCoachSubscriptionController',['$scope','requestHa
 
     //Initialize
     $scope.init=function(){        
-        $scope.pagination={"itemsPerPage":10,"pageNumber":1};  
+        $scope.pagination={"itemsPerPage":10,"pageNumber":1};
+        //this is for getting the value of gettting value
     }
 
     $scope.$watch("pagination.pageNumber",function(){
             $scope.doGetCoachSubscriptions();
     });
 
+
 }]);
 
 //All Coach Subscriptions
-adminApp.controller('CoachSubscriptionController',['$scope','requestHandler','Flash','coachMenuService','$location','$routeParams',function($scope,requestHandler,Flash,coachMenuService,$location,$routeParams) {
+adminApp.controller('CoachSubscriptionController',['$scope','requestHandler','Flash','coachMenuService','$location','$routeParams','$rootScope',function($scope,requestHandler,Flash,coachMenuService,$location,$routeParams,$rootScope) {
 
     // For coach management side menu
     $scope.coachMenuList = coachMenuService;
@@ -49,7 +51,6 @@ adminApp.controller('CoachSubscriptionController',['$scope','requestHandler','Fl
         }
         else value.active = ""
     });
-
 
      //Get Admin Side Coach Subscriptions
     $scope.doGetAllCoachSubscriptions=function(){
@@ -62,15 +63,17 @@ adminApp.controller('CoachSubscriptionController',['$scope','requestHandler','Fl
             "searchname":""
         };
         if($scope.showOnlyExpiring){
+            $rootScope.showOnlyExpiring=true;
             requestHandler.postRequest("admin/expiringsubscriptions/",$scope.params).then(function(response){
             $scope.subscriptionHistoryList=response.data;
             $scope.loaded=false;
             $scope.paginationLoad=true;
          });
         }else{
+            $rootScope.showOnlyExpiring=false;
             requestHandler.postRequest("admin/getallsubscriptions/",$scope.params).then(function(response){
             $scope.subscriptionHistoryList=response.data;
-            $scope.loaded=false;
+           $scope.loaded=false;
             $scope.paginationLoad=true;
         });
         }
@@ -79,13 +82,20 @@ adminApp.controller('CoachSubscriptionController',['$scope','requestHandler','Fl
 
     //Initialize
     $scope.init=function(){        
-        $scope.pagination={"itemsPerPage":10,"pageNumber":1};  
-        $scope.showOnlyExpiring=false;
+        $scope.pagination={"itemsPerPage":10,"pageNumber":1};
+        //For checkbox checked value
+        if($rootScope.showOnlyExpiring==undefined){
+            $scope.showOnlyExpiring=false;
+        }
+        else
+            $scope.showOnlyExpiring=$rootScope.showOnlyExpiring;
+
     }
 
     $scope.$watch("pagination.pageNumber",function(){
             $scope.doGetAllCoachSubscriptions();
     });
+
 
 }]);
 
@@ -128,10 +138,12 @@ adminApp.controller('CoachSubscriptionViewController',['$scope','requestHandler'
         requestHandler.postRequest("admin/adminsubscriptiondetail/",{"paymentid":$routeParams.id}).then(function(response){
             $scope.subscriptionHistory=response.data.subscriptionhistory;
             $scope.paymentHistory=response.data.paymenthistory;
+            //$scope.showOnlyExpiring=true;
             $scope.loaded=false;
         });
     };
     //Initialize
         $scope.doViewAdminSubscriptionsDetails();
+
 
 }]);

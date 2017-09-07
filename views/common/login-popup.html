@@ -315,9 +315,17 @@
     }
 
     function checkPopUpAction(referralId){
-     
+     //referral is coming from coach redirect to register
         if(referralId){
-            setTimeout(function(){ $(".modal_trigger").click(); }, 1000);
+            setTimeout(function(){ $(".modal_trigger").click();
+                $(".user_login").hide();
+                $(".secret_question").hide();
+                $(".user_register").show();
+                $(".user_register1").hide();
+                $(".new_password_form").hide();
+                $(".header_title").text('Register');
+            }, 1000);
+
         }else{
             var showLogin=getParamFromURL("showLogin");
             if(showLogin){

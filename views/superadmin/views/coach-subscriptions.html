@@ -29,8 +29,8 @@
                          <div class="col-md-12">
                             <checkbox-group min-required="1" class="pull-right">
                             <span class="fh-checkbox" required>
-                                <input type="checkbox" id="session-1" name="session" ng-model="showOnlyExpiring" ng-change="doGetAllCoachSubscriptions();pagination.pageNumber=1;">
-                                <label for="session-1">Show Only Coach Subscriptions Expiring in 2 days</label>
+                                <input type="checkbox" id="session-1" ng-true-value="true" ng-false-value="false" name="session" ng-model="showOnlyExpiring" ng-change="doGetAllCoachSubscriptions();pagination.pageNumber=1;">
+                                <label for="session-1">Show Only Coach Subscriptions Expired or Expiring in 2 days</label>
                             </span>
                         </checkbox-group>
                         </div>
@@ -48,12 +48,12 @@
                             </thead>
                             <tbody >
                             <tr dir-paginate="subscriptionHistory in subscriptionHistoryList.history | itemsPerPage: pagination.itemsPerPage" current-page="pagination.pageNumber" total-items="subscriptionHistoryList.totalrecords" ng-show="subscriptionHistoryList.totalrecords>0">
-                                <td><span class="line-clamp-md">{{subscriptionHistory.username}}</span></td>
-                                <td><span class="line-clamp-md">{{subscriptionHistory.planname}}</span></td>
-                                <td><span class="line-clamp-md">{{subscriptionHistory.startdate}}</span></td>
-                                 <td><span class="line-clamp-md">{{subscriptionHistory.enddate}}</span></td>
+                                <td><span class="wrap-all">{{subscriptionHistory.username}}</span></td>
+                                <td><span class="wrap-all">{{subscriptionHistory.planname}}</span></td>
+                                <td><span>{{subscriptionHistory.startdate}}</span></td>
+                                 <td><span>{{subscriptionHistory.enddate}}</span></td>
                                   <td><span>{{subscriptionHistory.bufferdate}}</span></td>
-                                  <td><span >{{subscriptionHistory.clientscount}}</span></td>
+                                  <td><span>{{subscriptionHistory.clientscount}}</span></td>
                                 <td>
                                     <a href="#coach-subscription-view/{{subscriptionHistory.paymentid}}/subscription-list" class="btn-xs btn-primary">View Details</a>
                                 </td>
