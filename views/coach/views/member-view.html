@@ -9,6 +9,7 @@
             </div>
         </div>
     <div class="profile-details-div">
+        
     <div>
         <div class="row">
             <div class="col-md-6"> 
@@ -290,15 +291,15 @@
 </div>
         <!-- For Clients Individual Activities -->
         <div class="stats-div">
-            <div class="margin-top-5 pull-right mouse-pointer" >&nbsp;&nbsp;<i class="fa fa-calendar" ng-click="datePicker()"></i></div>
-            <!-- <input hidden id="main-start-date"> -->
+                <div class="margin-top-10 pull-right mouse-pointer" >&nbsp;&nbsp;<i class="fa fa-calendar" ng-click="datePicker()"></i></div>
+                <!-- <input hidden id="main-start-date"> -->
 
-            <div id="ui-datepicker" class="pull-right main-datepicker">
-                <input type="text" id="main-date" class="profile_input override" ng-model="selectedDate" block>
-            </div>
-            <div class="margin-top-5 pull-right">Date</div>
+                <div id="ui-datepicker" class="pull-right main-datepicker margin-top-5">
+                    <input type="text" id="main-date" class="profile_input override" ng-model="activityDate" block>
+                </div>
+                <div class="margin-top-10 pull-right">Date</div>
             <div>
-                <div class="col-md-8 col-lg-8 col-sm-8 no-padding margin-top-10">
+                <div class="col-md-8 col-lg-8 col-sm-8 no-padding">
                     <h2 class="classic-title text-color"><span class="sub-title"><strong><i class="fa fa-male"></i>&nbsp;&nbsp;DAILY ACTIVITY</strong></span></h2> 
                     <div class="col-lg-12 col-md-12 col-sm-12 no-padding text-center">
                         <div class="col-lg-3 col-md-3 col-sm-3 no-padding activity margin-left-30">
@@ -1159,21 +1160,21 @@ $(document).ready(function(){
 </script>
 
 <script>
-            //for Activity and budget main date
-            function datePicker() {
-                $("#main-date").click();
-                var options = {
-                    maxDate : new Date(),
-                    endDate : new Date(),
-                    opens:'left',
-                    singleDatePicker: true
-                };
+    //for Activity and budget main date
+    function datePicker() {
+        $("#main-date").click();
+        var options = {
+            maxDate : new Date(),
+            opens:'left',
+            singleDatePicker: true
+        };
 
-                $('#main-date').daterangepicker(options, function(start, end, label) {                    
-                    angular.element(document.getElementById('main-date')).scope().doGetClientHealthProfileDetailsByCoach();
-                    document.getElementById("main-start-date").value = start.format('DD/MM/YYYY');
-                });
-            };
+        $('#main-date').daterangepicker(options, function(start, end, label) {
+            document.getElementById("main-start-date").value = start.format('DD/MM/YYYY');
+            angular.element(document.getElementById('main-date')).scope().doGetClientHealthProfileDetailsByCoach();
+           
+        });
+    };
 
             //for stats graph
             var startDate=new Date();

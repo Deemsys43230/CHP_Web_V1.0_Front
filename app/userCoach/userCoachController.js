@@ -455,7 +455,11 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
 
     $scope.userSetAttendence = function(eventid){
         requestHandler.postRequest("user/setattendence/",{"id":eventid}).then(function(response){
-
+            if(response.data.Response){
+                $scope.doGetUpcomingEvents($routeParams.id);
+            }
+        }, function(){
+            errorMessage(Flash,"Successfully Joined Event!");
         });
     };
     //Food Meal Plan

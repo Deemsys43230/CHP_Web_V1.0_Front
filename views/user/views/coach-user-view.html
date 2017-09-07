@@ -12,15 +12,15 @@
                 <div class="col-lg-12 col-md-12 col-sm-12">
               
                 <div class="col-lg-2 col-md-2 col-sm-12 no-padding">
-                            <img class="coach_image" ng-src="{{usercoachdetails.imageurl | trusted}}"/>
-                            <h3 class="text-orange margin-bottom-5 wrap">{{usercoachdetails.name}}&nbsp;&nbsp;</h3>
-                            <div class="wrap"><i class="fa fa-inbox"></i>&nbsp;&nbsp;{{usercoachdetails.emailid}}&nbsp;&nbsp;&nbsp;</div>
-                            <div class="margin-bottom-10 wrap"><i class="fa fa-phone"></i>&nbsp;&nbsp;{{usercoachdetails.phone}}&nbsp;&nbsp;&nbsp;&nbsp;</div>
-                            <h5 class="margin-tb-10">Average Ratings : {{avgRatings}}</h5>
-                            <div><average-star-rating ng-model="averageRate" max="5"></average-star-rating></div>
-                            <div>( {{totalRatings}} Reviews )</div><hr/>
-                            <div><strong>About Me :</strong></div>
-                            <div class="wrap-all">{{usercoachdetails.about}}</div>
+                    <img class="coach_image" ng-src="{{usercoachdetails.imageurl | trusted}}"/>
+                    <h3 class="text-orange margin-bottom-5 wrap">{{usercoachdetails.name}}&nbsp;&nbsp;</h3>
+                    <div class="wrap"><i class="fa fa-inbox"></i>&nbsp;&nbsp;{{usercoachdetails.emailid}}&nbsp;&nbsp;&nbsp;</div>
+                    <div class="margin-bottom-10 wrap"><i class="fa fa-phone"></i>&nbsp;&nbsp;{{usercoachdetails.phone}}&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                    <h5 class="margin-tb-10">Average Ratings : {{avgRatings}}</h5>
+                    <div><average-star-rating ng-model="averageRate" max="5"></average-star-rating></div>
+                    <div>( {{totalRatings}} Reviews )</div><hr/>
+                    <div><strong>About Me :</strong></div>
+                    <div class="wrap-all">{{usercoachdetails.about}}</div>
                 </div>    
 
                 <div class="col-lg-10 col-md-10 col-sm-12">  
@@ -148,13 +148,13 @@
 
                             <tbody >
                                 <tr dir-paginate="event in eventfilter = (coachEvent | itemsPerPage: 9)" ng-show="coachEvent.length!=0">
-                                    <td><span class="line-clamp-md">{{event.eventname}}</span></td>
-                                    <td><span class="line-clamp-md">{{event.description}}</span></td>
-                                    <td><span class="line-clamp-md">{{event.datetime}}</span></td>
+                                    <td><span>{{event.eventname}}</span></td>
+                                    <td><span>{{event.description}}</span></td>
+                                    <td><span>{{event.datetime}}</span></td>
                                     <td>{{event.duration}}</td>
                                     <td>
-                                        <a href="" class="btn-xs btn-primary" ng-click="userSetAttendence(event.id)">Join Event</a>
-                                        <!-- <a href="" class="btn-xs btn-primary" ng-click="userSetAttendence(event.id)">Joined</a> -->
+                                        <a href="" ng-show="event.isuserattend==0" class="btn-xs btn-primary" ng-click="userSetAttendence(event.id)">Join Event</a>
+                                        <a href="" ng-show="event.isuserattend==1" class="btn-xs btn-success" ng-disabled="event.isuserattend==1">Joined</a>
                                     </td>
                                 </tr>
                                 <tr ng-show="coachEvent.length==0 || !eventfilter.length "><td colspan="5" class="text-center">No Records Found !!!</td></tr>

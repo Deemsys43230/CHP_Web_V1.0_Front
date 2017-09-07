@@ -73,9 +73,8 @@ coachApp.controller('EventController',['$scope','requestHandler','Flash','$route
             $scope.result= response.data.Response;
             if(response.data.Response == "Success"){
                 $scope.doGetEventsByCoach();
+                successMessage(Flash, "Successfully Event Deleted!");
             }
-        },function(){
-            successMessage(Flash, "Successfully Event Deleted!");
         });
     };
 
@@ -113,16 +112,16 @@ coachApp.controller('EventController',['$scope','requestHandler','Flash','$route
 
     $scope.doInsertOrUpdateEvents = function(){
         $scope.eventDetails.id=null;
-        $scope.eventDetails.datetime=document.getElementById("main-start-date").value;
+        $scope.eventDetails.datetime=document.getElementById("main-start-date").value
+        $scope.eventDetails.duration=parseInt($scope.eventDetails.durationHours*60)+ parseInt($scope.eventDetails.durationMinutes);
         requestHandler.postRequest("coach/insertorupdateevent/",$scope.eventDetails).then(function(response){
-			$scope.result= response.data.Response;
+			// $scope.result= response.data.Response;
 			if(response.data.Response == "Success"){
 				$location.path("events");
 				$scope.doGetEventsByCoach();
+                successMessage(Flash, "Successfully Event Added!");
 			}
-        },function(){
-			successMessage(Flash, "Successfully Event Added!");
-		});
+        });
     };
 
 
@@ -156,6 +155,9 @@ coachApp.controller('EventEditController',['$scope','requestHandler','Flash','$r
     $scope.doGetIndividualEvent = function(eventId){
         requestHandler.postRequest("eventdetail/",{"id":eventId}).then(function(response){
             $scope.eventDetails = response.data.event;
+            $scope.eventDuration = $scope.eventDetails.duration;
+            $scope.eventDetails.durationMinutes=Math.floor(($scope.eventDuration%60)).toString();
+            $scope.eventDetails.durationHours=Math.floor($scope.eventDuration/60).toString();
         });
     };
 
@@ -163,13 +165,13 @@ coachApp.controller('EventEditController',['$scope','requestHandler','Flash','$r
 
     $scope.doUpdateEvent =function(eventId){
         $scope.eventDetails.datetime=document.getElementById("main-start-date").value;
+        $scope.eventDetails.duration=parseInt($scope.eventDetails.durationHours*60)+ parseInt($scope.eventDetails.durationMinutes);
         requestHandler.postRequest("coach/insertorupdateevent/",$scope.eventDetails).then(function(response){
-            $scope.result= response.data.Response;
-                if(response.data.Response == "Success"){
-                    $location.path("events");
-                }
-            },function(){
+        $scope.result= response.data.Response;
+            if(response.data.Response == "Success"){
+                $location.path("events");
                 successMessage(Flash, "Successfully Event Updated!");
+            }
         });
     };  
 

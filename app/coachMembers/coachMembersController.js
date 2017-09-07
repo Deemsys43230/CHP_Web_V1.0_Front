@@ -215,26 +215,25 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
 
 
     $scope.doGetClientHealthProfileDetailsByCoach = function(){
+
         if(document.getElementById("main-start-date").value!=''){
-           var selectedDate=document.getElementById("main-start-date").value;
-           // alert(selectedDate);
-        }
-        else{
-            var selectedDate = new Date(); 
-            var dd = selectedDate.getDate(); 
-            var mm = selectedDate.getMonth()+1; 
+            activityDate=document.getElementById("main-start-date").value;
+        }else{
+            var activityDate = new Date(); 
+            var dd = activityDate.getDate(); 
+            var mm = activityDate.getMonth()+1; 
             //January is 0! 
-            var yyyy = selectedDate.getFullYear(); 
+            var yyyy = activityDate.getFullYear(); 
             if(dd<10){
                 dd='0'+dd
             } 
             if(mm<10){
                 mm='0'+mm
             } 
-            var selectedDate = dd+'/'+mm+'/'+yyyy;
+            var activityDate = dd+'/'+mm+'/'+yyyy;
         }
          
-        requestHandler.postRequest("coach/userhealthprofile/",{"userid":$scope.currentClientId,"startdate":selectedDate,"enddate":selectedDate}).then(function(response){
+        requestHandler.postRequest("coach/userhealthprofile/",{"userid":$scope.currentClientId,"startdate":activityDate,"enddate":activityDate}).then(function(response){
           
             //get the array
             $.each(response.data.healthprofile,function(index,value){
@@ -333,8 +332,6 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
             ];
 
     $scope.setHistoryType=function(id,divId){
-            alert(id);
-
             $scope.historyType=id;
             if($('#history-start').val()==''){
                 $scope.doGetClientGraphDetailsByCoach(divId);
@@ -1261,7 +1258,6 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
 
         //for water log millilitre unit graph
         $scope.drawWaterlogMlHistoryGraph=function(dataml,dataX,titles,divId){
-            console.log(dataml);
             $scope.historyType=14;
             $scope.waterGraphs=true;
             $scope.loaded=false;
@@ -1317,7 +1313,6 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
 
         //for water log ounces unit graph
         $scope.drawWaterlogOzHistoryGraph=function(dataoz,dataX,titles,divId){
-            console.log(dataoz);
             $scope.historyType=15;
             $scope.waterGraphs=true;
             $scope.loaded=false;
