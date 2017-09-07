@@ -53,16 +53,18 @@
                 <tr ng-repeat="mealPlanDetail in mealPlanDetailList" ng-init="$last ? doIntializeLeanModal() : null">
                     <td class="col-md-1 food-plans text-center align-bottom">
                         {{mealPlanDetail.day}}
-                        <div class="foodcalorie badge">
-                        {{mealPlanDetail.totalCalories}}&nbsp;KCals&nbsp;<i class="fa fa-arrow-up"></i>
-                        </div>
+                        <div class="caloriediv">
+                            <div class="calorieunit">KCals</div>
+                            <div class="foodcalorie"><strong>{{mealPlanDetail.totalCalories}}</strong>
+                        <div>
                     </td>
                     <td class="food-plans">                           
                         <!--Breakfast-->
                         <div class="food" ng-repeat="foodItem in mealPlanDetail.foods[0].foodItems">
                             {{foodItem.foodname}}
-                            <i class="fa fa-times-circle pull-right" ng-click="doDeleteFoodItemFromPlan(foodItem.id);"></i>&nbsp;
-                            <i class="fa fa-edit pull-right" ng-click="doEditFoodItemFromPlan(foodItem.id);"></i>&nbsp;
+                            <i class="fa fa-times-circle pull-right text-red" ng-click="doDeleteFoodItemFromPlan(foodItem.id);"></i>&nbsp;
+                            <i class="fa fa-edit pull-right food-edit" ng-click="doEditFoodItemFromPlan(foodItem.id);"></i>&nbsp;
+                            <i class="fa fa-tag pull-right" ng-click="doViewCoachFoodItemFromPlan(foodItem.id)"></i>&nbsp;
                             <div class="foodvalues">
                                 {{foodItem.measurecount}}&nbsp;{{foodItem.foodmeasurename}}&nbsp;&nbsp;|&nbsp;&nbsp;{{foodItem.calorieintake}}&nbsp;KCals
                             </div>
@@ -74,8 +76,9 @@
                          <!--Brunch-->
                          <div class="food" ng-repeat="foodItem in mealPlanDetail.foods[1].foodItems">
                             {{foodItem.foodname}}
-                            <i class="fa fa-times-circle pull-right" ng-click="doDeleteFoodItemFromPlan(foodItem.id);"></i>&nbsp;
-                            <i class="fa fa-edit pull-right" ng-click="doEditFoodItemFromPlan(foodItem.id);"></i>&nbsp;
+                            <i class="fa fa-times-circle pull-right text-red" ng-click="doDeleteFoodItemFromPlan(foodItem.id);"></i>&nbsp;
+                            <i class="fa fa-edit pull-right food-edit" ng-click="doEditFoodItemFromPlan(foodItem.id);"></i>&nbsp;
+                            <i class="fa fa-tag pull-right" ng-click="doViewCoachFoodItemFromPlan(foodItem.id)"></i>&nbsp;
                             <div class="foodvalues">
                                 {{foodItem.measurecount}}&nbsp;{{foodItem.foodmeasurename}}&nbsp;&nbsp;|&nbsp;&nbsp;{{foodItem.calorieintake}}&nbsp;KCals
                             </div>
@@ -86,8 +89,9 @@
                         <!--Lunch-->
                         <div class="food" ng-repeat="foodItem in mealPlanDetail.foods[2].foodItems">
                             {{foodItem.foodname}}
-                            <i class="fa fa-times-circle pull-right" ng-click="doDeleteFoodItemFromPlan(foodItem.id);"></i>&nbsp;
-                            <i class="fa fa-edit pull-right" ng-click="doEditFoodItemFromPlan(foodItem.id);"></i>&nbsp;
+                            <i class="fa fa-times-circle pull-right text-red" ng-click="doDeleteFoodItemFromPlan(foodItem.id);"></i>&nbsp;
+                            <i class="fa fa-edit pull-right food-edit" ng-click="doEditFoodItemFromPlan(foodItem.id);"></i>&nbsp;
+                            <i class="fa fa-tag pull-right" ng-click="doViewCoachFoodItemFromPlan(foodItem.id)"></i>&nbsp;
                             <div class="foodvalues">
                                 {{foodItem.measurecount}}&nbsp;{{foodItem.foodmeasurename}}&nbsp;&nbsp;|&nbsp;&nbsp;{{foodItem.calorieintake}}&nbsp;KCals
                             </div>
@@ -98,8 +102,9 @@
                         <!--Snacks-->
                         <div class="food" ng-repeat="foodItem in mealPlanDetail.foods[3].foodItems">
                             {{foodItem.foodname}}
-                            <i class="fa fa-times-circle pull-right" ng-click="doDeleteFoodItemFromPlan(foodItem.id);"></i>&nbsp;
-                            <i class="fa fa-edit pull-right" ng-click="doEditFoodItemFromPlan(foodItem.id);"></i>&nbsp;
+                            <i class="fa fa-times-circle pull-right text-red" ng-click="doDeleteFoodItemFromPlan(foodItem.id);"></i>&nbsp;
+                            <i class="fa fa-edit pull-right food-edit" ng-click="doEditFoodItemFromPlan(foodItem.id);"></i>&nbsp;
+                            <i class="fa fa-tag pull-right" ng-click="doViewCoachFoodItemFromPlan(foodItem.id)"></i>&nbsp;
                             <div class="foodvalues">
                                 {{foodItem.measurecount}}&nbsp;{{foodItem.foodmeasurename}}&nbsp;&nbsp;|&nbsp;&nbsp;{{foodItem.calorieintake}}&nbsp;KCals
                             </div>
@@ -110,8 +115,9 @@
                          <!--Dinner-->
                          <div class="food" ng-repeat="foodItem in mealPlanDetail.foods[4].foodItems">
                             {{foodItem.foodname}}
-                            <i class="fa fa-times-circle pull-right" ng-click="doDeleteFoodItemFromPlan(foodItem.id);"></i>&nbsp;
-                            <i class="fa fa-edit pull-right" ng-click="doEditFoodItemFromPlan(foodItem.id);"></i>&nbsp;
+                            <i class="fa fa-times-circle pull-right text-red" ng-click="doDeleteFoodItemFromPlan(foodItem.id);"></i>&nbsp;
+                            <i class="fa fa-edit pull-right food-edit" ng-click="doEditFoodItemFromPlan(foodItem.id);"></i>&nbsp;
+                            <i class="fa fa-tag pull-right" ng-click="doViewCoachFoodItemFromPlan(foodItem.id)"></i>&nbsp;
                             <div class="foodvalues">
                                 {{foodItem.measurecount}}&nbsp;{{foodItem.foodmeasurename}}&nbsp;&nbsp;|&nbsp;&nbsp;{{foodItem.calorieintake}}&nbsp;KCals
                             </div>
@@ -232,5 +238,42 @@
     </div>
 </div>
 
+<!-- Food Item view-meal-itemin Meal Plan Popup -->
+<div id="view-meal-item" class="popupContainer-width-big" style="display:none;">
+    <div class="center-block">
+    <header class="popupHeader width-100">
+        <span class="header_title">Meal Item</span>
+        <span class="modal_close"><i class="fa fa-times"></i></span>
+    </header>
+
+    <section class="popupBody">
+        <!-- Register Form -->
+        <div class="common_model">
+            <table class="table table-bordered table-striped">
+                <tr>
+                  <td class="col-md-6">Day</td>
+                  <td class="col-md-6 wrap">Day&nbsp;{{foodPlanItemDetails.day}}</td>
+                </tr>
+                <tr>
+                  <td class="col-md-6">Food Name</td>
+                  <td class="col-md-6 wrap">{{foodPlanItemDetails.foodname}}</td>
+                </tr>
+                <tr>
+                    <td class="col-md-6">Food Session</td>
+                    <td class="col-md-6 wrap">{{foodPlanItemDetails.foodsessioname}}</td>
+                </tr>
+                <tr class="wrap">
+                    <td class="col-md-6">Food Measure</td>
+                    <td class="col-md-6 wrap">{{foodPlanItemDetails.measurecount}}&nbsp;{{foodPlanItemDetails.foodmeasurename}}</td>
+                </tr>
+                <tr>
+                    <td class="col-md-6">Calories Intake</td>
+                    <td class="col-md-6">{{foodPlanItemDetails.calorieintake}}&nbsp;KCals</td>
+                </tr>
+            </table>
+        </div>
+    </section>
+    </div>
+</div>
 
 <script type="text/javascript" src="../../js/script.js"></script>

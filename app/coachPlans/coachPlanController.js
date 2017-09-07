@@ -6,13 +6,12 @@ $scope.activeClass.advices='active';
 $scope.doGetCoachPlanList=function(){
   $scope.loaded=true;
 	$scope.coachPlanPagination={
-						"limit":$scope.pagination.itemsPerPage,
-						"offset":($scope.pagination.pageNumber-1)*$scope.pagination.itemsPerPage
+						"limit": $scope.mealPagination.itemsPerPage,
+						"offset":($scope.mealPagination.pageNumber-1)*$scope.mealPagination.itemsPerPage
 					};
 
    requestHandler.postRequest("coach/myplans/",$scope.coachPlanPagination).then(function(response){
      $scope.coachPlanList= response.data;
-     console.log($scope.coachPlanList);
      $scope.loaded=false;
    	 $scope.paginationLoad=true;
    },function(){
@@ -74,17 +73,6 @@ $scope.doEditCoachMealPlan=function(id){
         $(".common_model").show();
         $scope.shouldBeOpen = true;
     });
-
-    $scope.loaded=true;
-    $scope.coachPlanPagination={
-        "limit":$scope.pagination.itemsPerPage,
-        "offset":($scope.pagination.pageNumber-1)*$scope.pagination.itemsPerPage
-      };
-
-    requestHandler.postRequest("coach/myplans/",$scope.coachPlanPagination).then(function(response){
-        $scope.coachPlanList= response.data.plans;
-        $scope.loaded=false;
-    });
     
     $.each($scope.coachPlanList.plans,function(index,value){
        if(value.id==id){
@@ -128,11 +116,11 @@ $scope.doDeleteCoachMealPlan=function(id){
 $scope.init=function(){
   $scope.original={};
 	$scope.paginationLoad=false;
-	$scope.pagination={"itemsPerPage":8,"pageNumber":1};
+	$scope.mealPagination={"itemsPerPage":8,"pageNumber":1};
 	
 };
 
-$scope.$watch("pagination.pageNumber",function(){
+$scope.$watch("mealPagination.pageNumber",function(){
 	$scope.doGetCoachPlanList();
 });
 
@@ -172,8 +160,7 @@ $scope.doViewCoachPlans=function(){
           // Group Json object of plan 
          $.each($scope.plan, function (key, obj) {
               if(key!='plandetail'){
-                alert(key.substring(3));
-                $scope.mealPlanDetailList[key.substring(3)-1].totalCalories=obj.actualcalories;
+                $scope.mealPlanDetailList[key.substring(3)-1].totalCalories=(obj.actualcalories).toFixed(2);
                 $.each(obj.foods, function (index, value) {
                  $scope.mealPlanDetailList[value.day-1].foods[value.foodsessionid-1].foodItems.push(value);
                 });
@@ -229,7 +216,6 @@ $scope.doCoachAddFood=function(planDay,foodSessionId){
 };
 
 $scope.doEditFoodItemFromPlan=function(id){
-   
    $scope.userFood={};
     requestHandler.postRequest("coach/foodplandetail/",{"id":id}).then(function(response){
       $scope.userSelectedFoodDetails=response.data.fooddetail;
@@ -258,7 +244,7 @@ $scope.doEditFoodItemFromPlan=function(id){
             $("#lean_overlay").fadeTo(1000);
             $("#modal-add-food").fadeIn(600);
             $(".user_register").show();
-          
+            
         });
 
         $(".modal_close").click(function(){
@@ -287,6 +273,40 @@ $scope.resetdata=function(){
     $scope.max = 100;
     $scope.userSelectedFoodDetails={};
 };
+
+// View Food Meal Item Plan Details
+    $scope.doViewCoachFoodItemFromPlan=function(foodid){
+        $(function(){
+            $("#lean_overlay").fadeTo(1000);
+            $("#view-meal-item").fadeIn(600);
+            $(".common_model").show();
+            $("html, body").animate({
+                scrollTop: 0
+            }, 600);
+            $scope.shouldBeOpen = true;
+        });
+
+        $scope.getFoodPlanItemParam={'id':foodid};
+        requestHandler.postRequest("coach/foodplandetail/", $scope.getFoodPlanItemParam).then(function(response){
+            $scope.foodPlanItemDetails= response.data.savedfoodplan;
+        }, function(){
+            errorMessage(Flash,"Please try again later!");
+        });
+
+        $(".modal_close").click(function(){
+            $(".common_model").hide();
+            $("#view-meal-item").hide();
+            $("#lean_overlay").hide();
+            $scope.shouldBeOpen = false;
+        });
+
+        $("#lean_overlay").click(function(){
+            $(".common_model").hide();
+            $("#view-meal-item").hide();
+            $("#lean_overlay").hide();
+            $scope.shouldBeOpen = false;
+        });
+    };
 
 //Search Function for food
 $scope.inputChanged = function(searchStr) {

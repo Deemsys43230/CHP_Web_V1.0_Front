@@ -17608,14 +17608,31 @@ div.foodvalues{
 }
 
 div.foodcalorie{
-    color:#008000;
-    font-weight: 900;
-    margin-top: 10px;
+    color:#1bbb1b;
     padding: 5px;
-    border: solid 1px #ffcc33;
-    background-color: rgba(245, 230, 188, 0.47);
+    border: solid 1px #fc3;
+    font-size: 12px;
+}
+.calorieunit{
+    padding: 2px;
+    background: #fc3;
+}
+.caloriediv{
+    padding: 1px;
+    margin-top: 10px;
 }
 
+.food-consumed-btn{
+    margin-bottom: 10px;
+}
+
+.food-consumed-btn .ng-hide.ng-hide-animate {
+    display: none !important;
+}
+
+.food-edit{
+    color: #2aad2a!important;
+}
 /*Chat Selected*/
 .chat-selected{
     opacity: 0.4;

@@ -474,10 +474,10 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
 
     //Laod Food Meal Plan Details
     $scope.doLoadMealPlanDetails=function(mapId){
+        $scope.currentPlanDetail=mapId;
         $scope.planDetailView=true;
 
         requestHandler.postRequest("getplandetail/",{"mapid":mapId}).then(function(response){
-        $scope.plan= response.data.plan;
             //First We need to group up days
             $scope.plandetail=response.data.plandetail;
            
@@ -491,7 +491,9 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
                   {
                     "day":"Day "+i,
                     "dayId":i,
+                    "date": "dd/mm/yyyy",
                     "totalCalories":0,
+                    "consumedCalories":0,
                     "foods":[
                               {"sessionId":1,"sessionName":"BreakFast","foodItems":[]},
                               {"sessionId":2,"sessionName":"Brunch","foodItems":[]},
@@ -506,8 +508,11 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
           // Group Json object of plan 
          $.each($scope.plandetail, function (key, obj) {            
               if(key.startsWith("day")){
-                $scope.mealPlanDetailList[key.substring(3)-1].totalCalories=obj.actualcalories;
+                $scope.mealPlanDetailList[key.substring(3)-1].totalCalories=(obj.actualcalories).toFixed(2);
+                $scope.mealPlanDetailList[key.substring(3)-1].consumedCalories=(obj.consumedcalories).toFixed(2);
+                $scope.mealPlanDetailList[key.substring(3)-1].date= obj.date;
                 $.each(obj.foods, function (index, value) {
+                 value.calorieintake=value.calorieintake.toFixed(2);   
                  $scope.mealPlanDetailList[value.day-1].foods[value.foodsessionid-1].foodItems.push(value);
                 });
               }              
@@ -519,6 +524,57 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
             errorMessage(Flash,"Please try again later!")
         });
     };
+
+    // View Food Meal Item Plan Details
+    $scope.doViewFoodItemFromMealPlan=function(foodplanid,date){
+        $(function(){
+            $("#lean_overlay").fadeTo(1000);
+            $("#view-meal-item").fadeIn(600);
+            $(".common_model").show();
+            $("html, body").animate({
+                scrollTop: 0
+            }, 600);
+            $scope.shouldBeOpen = true;
+        });
+
+        $scope.getFoodPlanItemParam={'id':foodplanid, 'date':date};
+        requestHandler.postRequest("user/getfooditemdetail/", $scope.getFoodPlanItemParam).then(function(response){
+            $scope.foodPlanItemDetails= response.data.plandetail;
+        }, function(){
+            errorMessage(Flash,"Please try again later!");
+        });
+
+        $(".modal_close").click(function(){
+            $(".common_model").hide();
+            $("#view-meal-item").hide();
+            $("#lean_overlay").hide();
+            $scope.shouldBeOpen = false;
+        });
+
+        $("#lean_overlay").click(function(){
+            $(".common_model").hide();
+            $("#view-meal-item").hide();
+            $("#lean_overlay").hide();
+            $scope.shouldBeOpen = false;
+        });
+    };
+
+    $scope.doSetUnsetFoodItemConsumed= function(foodplanid,date){
+        $scope.getFoodItemConsumedParam={'id':foodplanid, 'date':date};
+        requestHandler.postRequest("user/setorunsetfoodplan/", $scope.getFoodItemConsumedParam).then(function(response){
+           if(response.data.Response_status==1){
+                $scope.doLoadMealPlanDetails($scope.currentPlanDetail);
+                $(function(){
+                    $(".common_model").hide();
+                    $("#view-meal-item").hide();
+                    $("#lean_overlay").hide();
+                });
+                successMessage(Flash,"Successfully Updated!");
+           }
+        }, function(){
+            errorMessage(Flash,"Please try again later!");
+        });
+    }
 
     //Workout Plan
     $scope.doGetCoachWorkoutPlans=function(targetid){

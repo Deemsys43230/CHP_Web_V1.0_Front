@@ -25,7 +25,7 @@
                     </tr>    
                 </thead>
                 <tbody>
-                    <tr dir-paginate="plan in coachPlanList.plans | itemsPerPage:pagination.itemsPerPage" ng-show="coachPlanList.plans.length!=0 && plan.plantype==1" total-items="coachPlanList.totalrecords" current-page="pagination.pageNumber">
+                    <tr dir-paginate="plan in coachPlanList.plans | itemsPerPage:mealPagination.itemsPerPage" ng-show="coachPlanList.plans.length!=0 && plan.plantype==1" current-page="mealPagination.pageNumber" total-items="coachPlanList.totalrecords">
                         <td>{{plan.planname}}</td>
                         <td>{{plan.description}}</td>
                         <td>{{plan.plandays}}</td>

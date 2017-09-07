@@ -77,17 +77,6 @@ $scope.doEditCoachWorkoutPlan=function(id){
         $(".common_model").show();
         $scope.shouldBeOpen = true;
     });
-
-    $scope.loaded=true;
-    $scope.coachWorkoutPlanPagination={
-                    "limit": $scope.pagination.itemsPerPage,
-                    "offset": ($scope.pagination.pageNumber-1)*$scope.pagination.itemsPerPage
-                    };
-
-    requestHandler.postRequest("coach/myplans/",$scope.coachWorkoutPlanPagination).then(function(response){
-        $scope.coachWorkoutPlanList= response.data.plans;
-        $scope.loaded=false;
-    });
     
     $.each($scope.coachWorkoutPlanList.plans,function(index,value){
        if(value.id==id){
