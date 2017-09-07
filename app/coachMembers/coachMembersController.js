@@ -13,22 +13,9 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
         "current":null
     };
 
-        var today = new Date(); 
-        var dd = today.getDate(); 
-        var mm = today.getMonth()+1; 
-        //January is 0! 
-        var yyyy = today.getFullYear(); 
-        if(dd<10){
-            dd='0'+dd
-        } 
-        if(mm<10){
-            mm='0'+mm
-        } 
-        var today = dd+'/'+mm+'/'+yyyy;
-
-    $scope.datePicker = function(){
-            $("#main-date").click();
-        };
+    /*$scope.datePicker = function(){
+        $("#main-date").click();
+    };*/
         
     //Get Coaches List
     $scope.doGetMyMembers=function(){
@@ -81,7 +68,7 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
         //Demography Details
         $scope.doGetClientsDemographyDetailsByCoach(id);
         //Health profile Details
-        //$scope.doGetClientHealthProfileDetailsByCoach();
+        // $scope.doGetClientHealthProfileDetailsByCoach();
         //Graph  for oneweek
         //$scope.doGetClientGraphDetailsByCoach();
         //Get Tracking Plan Details
@@ -224,13 +211,28 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
 
     /*For clients Individual daily activities details By Coach */
 
-    $scope.doGetClientHealthProfileDetailsByCoach = function(){
 
+    $scope.doGetClientHealthProfileDetailsByCoach = function(){
         if(document.getElementById("main-start-date").value!=''){
-            today=document.getElementById("main-start-date").value;
+           var selectedDate=document.getElementById("main-start-date").value;
+           // alert(selectedDate);
+        }
+        else{
+            var selectedDate = new Date(); 
+            var dd = selectedDate.getDate(); 
+            var mm = selectedDate.getMonth()+1; 
+            //January is 0! 
+            var yyyy = selectedDate.getFullYear(); 
+            if(dd<10){
+                dd='0'+dd
+            } 
+            if(mm<10){
+                mm='0'+mm
+            } 
+            var selectedDate = dd+'/'+mm+'/'+yyyy;
         }
          
-        requestHandler.postRequest("coach/userhealthprofile/",{"userid":$scope.currentClientId,"startdate":today,"enddate":today}).then(function(response){
+        requestHandler.postRequest("coach/userhealthprofile/",{"userid":$scope.currentClientId,"startdate":selectedDate,"enddate":selectedDate}).then(function(response){
           
             //get the array
             $.each(response.data.healthprofile,function(index,value){
@@ -244,11 +246,11 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
         //To Display User History Graph
         $scope.historyGraph = [
                  {"graphCategory":"ACTIVITY","graphCategoryId":1,"graphs":[
-            {
+            /*{
                 'id': 3,
                 'name': 'Exercise Minutes',
                 "imageSrc": "../../images/exercise.png"
-            },
+            },*/
             {
                     'id': 10,
                     'name': 'Floor Graph',
@@ -354,7 +356,7 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
         }
         selectedDate = dd+'/'+mm+'/'+yyyy;
             $scope.isHistoryEmpty=0;
-            $scope.loaded=true;
+            $scope.loaded=false;
             $scope.waterGraphs=false;
             var endDate;
 
@@ -396,84 +398,7 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
             var historyDates=[];
             var titles={};
 
-            if($scope.historyType==1){
-                requestHandler.postRequest("coach/userhealthprofile/",{"userid":$scope.currentClientId,"startdate":startDate,"enddate":selectedDate}).then(function(response){
-                     //get the array
-                    $.each(response.data.healthprofile,function(index,value){
-                        $scope.budget = value.budget;
-                        console.log($scope.budget);
-                    });
-                    $scope.historyRecord=response.data.calorieGraphbyDates;
-                    $.each($scope.historyRecord, function(index,value) {
-                        var history = [];
-                        var date = value.date.split("/");
-                        history.push(monthNames[(date[1]-1)]+' '+date[0]);
-                        history.push(parseFloat(value.calorie));
-                        historyDates.push(monthNames[(date[1]-1)]+' '+date[0]);
-                        historyReport.push(history);
-                    });
-                    titles.title="Calories Gained Graph ( "+startDate+" - "+endDate+" )";
-                    titles.graphType='column';
-                    titles.name="Calories Gained";
-                    titles.suffix=" cals";
-                    titles.yaxis="Calories (cal)";
-                    titles.xaxis="Date Range";
-                    titles.color='limegreen';
-                    $scope.drawHistoryGraph(historyReport,historyDates,titles,divId);
-                });
-            }
-            else if($scope.historyType==2){
-                requestHandler.postRequest("user/getCalorieBurntGraphByDates/", {"fromdate":startDate,"todate":endDate}).then(function(response){
-                    $scope.historyRecord=response.data.CalorieBurntGraphbyDates;
-                    $.each($scope.historyRecord, function(index,value) {
-                        var history = [];
-                        var date = value.date.split("/");
-                        history.push(monthNames[(date[1]-1)]+' '+date[0]);
-                        history.push(parseFloat(value.calorie));
-                        historyDates.push(monthNames[(date[1]-1)]+' '+date[0]);
-                        historyReport.push(history);
-                    });
-                    titles.title="Calories Brunt Graph ( "+startDate+" - "+endDate+" )";
-                    titles.graphType='column';
-                    titles.name="Calories Burned";
-                    titles.suffix=" cals";
-                    titles.yaxis="Calories (cal)";
-                    titles.xaxis="Date Range";
-                    titles.color='red';
-                    $scope.drawHistoryGraph(historyReport,historyDates,titles,divId);
-                });
-
-            }
-            else if($scope.historyType==3){
-                requestHandler.postRequest("coach/userhealthprofile/",{"userid":$scope.currentClientId,"startdate":startDate,"enddate":endDate}).then(function(response){
-                    
-                    $.each(response.data.healthprofile, function(index,value) {
-                        $scope.exerciseWorkout=response.data.healthprofile[5].exercises;
-                        console.log( $scope.exerciseWorkout);
-                        $.each($scope.exerciseWorkout, function(index,value) {
-                            console.log(value.workout);
-                        var history = [];
-                        var date = value.date.split("/");
-                        history.push(monthNames[(date[1]-1)]+' '+date[0]);
-                        history.push(parseFloat(value.workout));
-                        historyDates.push(monthNames[(date[1]-1)]+' '+date[0]);
-                        historyReport.push(history);
-                    });
-                    });
-
-
-                    titles.title="Exercise Minutes Graph ( "+startDate+" - "+endDate+" )";
-                    titles.graphType='column';
-                    titles.name="Exercise Minutes";
-                    titles.suffix=" mins";
-                    titles.yaxis="Minutes";
-                    titles.xaxis="Date Range";
-                    titles.color='blue';
-                    $scope.drawHistoryGraph(historyReport,historyDates,titles,divId);
-                });
-            }
-
-            else if($scope.historyType==4){
+            if($scope.historyType==4){
                 if($scope.userProfile.unitPreference==1){
                     $scope.unit="Kgs";
                 }
@@ -510,9 +435,8 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
                     
                     //get the array
                     $.each(response.data.healthprofile,function(index,value){
-                        $scope.Budget = value.budget;
                         var history = [];
-                        var date = value.date.split("/");
+                        var date = value.budget.date.split("/");
                         history.push(monthNames[(date[1]-1)]+' '+date[0]);
                         history.push(parseFloat(value.budget.Budget));
                         netVal.push(value.budget.Net);
@@ -734,17 +658,18 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
                 });
             }
             else if($scope.historyType==14){
-
-                requestHandler.postRequest("user/getWaterLogGraph/", {"startdate":startDate,"enddate":endDate}).then(function(response){
-                    $scope.historyRecord=response.data.Water_logs;
-                    $.each($scope.historyRecord, function(index,value) {
+                 requestHandler.postRequest("coach/userhealthprofile/",{"userid":$scope.currentClientId,"startdate":startDate,"enddate":endDate}).then(function(response){
+                    
+                    //get the array
+                    $.each(response.data.healthprofile,function(index,value){
                         var history = [];
                         var date = value.date.split("/");
                         history.push(monthNames[(date[1]-1)]+' '+date[0]);
-                        history.push(value.milliliters);
+                        history.push(value.waterlog.milliliters);
                         historyDates.push(monthNames[(date[1]-1)]+' '+date[0]);
                         historyReport.push(history);
                     });
+
                     titles.title="Water Level Graph( "+startDate+" - "+endDate+" )";
                     titles.graphType='spline';
                     titles.name="Water Level";
@@ -756,17 +681,18 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
                 });
             }
             else if($scope.historyType==15){
-
-                requestHandler.postRequest("user/getWaterLogGraph/", {"startdate":startDate,"enddate":endDate}).then(function(response){
-                    $scope.historyRecord=response.data.Water_logs;
-                    $.each($scope.historyRecord, function(index,value) {
+                requestHandler.postRequest("coach/userhealthprofile/",{"userid":$scope.currentClientId,"startdate":startDate,"enddate":endDate}).then(function(response){
+                    
+                    //get the array
+                    $.each(response.data.healthprofile,function(index,value){
                         var history = [];
                         var date = value.date.split("/");
                         history.push(monthNames[(date[1]-1)]+' '+date[0]);
-                        history.push(value.ounces);
+                        history.push(value.waterlog.ounces);
                         historyDates.push(monthNames[(date[1]-1)]+' '+date[0]);
                         historyReport.push(history);
                     });
+
                     titles.title="Water Level Graph( "+startDate+" - "+endDate+" )";
                     titles.graphType='spline';
                     titles.name="Water Level";
@@ -1331,7 +1257,118 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
             });
         };
 
+        //for water log millilitre unit graph
+        $scope.drawWaterlogMlHistoryGraph=function(dataml,dataX,titles,divId){
+            console.log(dataml);
+            $scope.historyType=14;
+            $scope.waterGraphs=true;
+            $scope.loaded=false;
+            $('#'+divId).highcharts({
 
+                title: {
+                    text: titles.title
+                },
+                xAxis: {
+                    title: {
+                        text: titles.xaxis
+                    },
+                    categories: dataX
+                },
+                tooltip:{
+                    enabled:true,
+                    backgroundColor:'rgba(255, 255, 255, 1)',
+                    borderWidth:1,
+                    shadow:true,
+                    style:{fontSize:'10px',padding:5,zIndex:500},
+                    formatter:false,
+                    valueSuffix: titles.suffix
+                },
+                yAxis: {
+                    title: {
+                        text: titles.yaxis
+                    },
+                    plotLines: [{
+                        value: 0,
+                        width: 1,
+                        color:titles.color
+                    }]
+                },
+                colors: [
+                    titles.color
+                ],
+                exporting: {
+                    enabled: false
+                },
+                credits: {
+                    enabled: false
+                },
+
+                legend:{enabled:false},
+                series: [{
+                    type: titles.graphType,
+                    name: titles.name,
+                    data: dataml
+
+                }]
+            });
+        };
+
+        //for water log ounces unit graph
+        $scope.drawWaterlogOzHistoryGraph=function(dataoz,dataX,titles,divId){
+            console.log(dataoz);
+            $scope.historyType=15;
+            $scope.waterGraphs=true;
+            $scope.loaded=false;
+            $('#'+divId).highcharts({
+
+                title: {
+                    text: titles.title
+                },
+                xAxis: {
+                    title: {
+                        text: titles.xaxis
+                    },
+                    categories: dataX
+                },
+                tooltip:{
+                    enabled:true,
+                    backgroundColor:'rgba(255, 255, 255, 1)',
+                    borderWidth:1,
+                    shadow:true,
+                    style:{fontSize:'10px',padding:5,zIndex:500},
+                    formatter:false,
+                    valueSuffix: titles.suffix
+                },
+                yAxis: {
+
+                    title: {
+                        text: titles.yaxis
+                    },
+                    plotLines: [{
+                        value: 0,
+                        width: 1,
+                        color:titles.color
+                    }]
+                },
+                colors: [
+                    titles.color
+                ],
+                exporting: {
+                    enabled: false
+                },
+                credits: {
+                    enabled: false
+                },
+
+                legend:{enabled:false},
+                series: [{
+                    type: titles.graphType,
+                    name: titles.name,
+                    data: dataoz
+
+                }]
+            });
+        };
 
         //To Convert Minutes to Hours Format
         $scope.convertMinutesToHours=function(minutes){
@@ -1603,6 +1640,16 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
         $scope.paginationLoad=false;
         $scope.pagination={"itemsPerPage":9,"pageNumber":1};
         $scope.doGetIndividualClientDetail($routeParams.id);
+    };
+
+    //Initial Load
+    $scope.statsInit = function(){
+        $scope.loaded = false;
+        $scope.paginationLoad=false;
+         //Health profile Details
+        $scope.doGetClientHealthProfileDetailsByCoach();
+        //Graph  for oneweek
+        $scope.doGetClientGraphDetailsByCoach();
     };
 
     // Search Food Type

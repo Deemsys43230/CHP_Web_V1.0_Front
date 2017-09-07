@@ -17671,3 +17671,25 @@ div.foodcalorie{
 .profile .list-group-item{
     padding: 5px 10px 5px 10px !important;
 }
+/*for stats graph content*/
+.stats-content1 {
+    margin: 10px 10px;
+    height: 470px;
+    -webkit-box-shadow: inset 0px 0px 3px rgba(0,0,0,0.3);
+    -moz-box-shadow: inset 0px 0px 3px rgba(0,0,0,0.3);
+    box-shadow: inset 0px 0px 3px rgba(0,0,0,0.3);
+
+}
+
+.stats-content1.contentHistoryOverride{
+
+    height: 625px !important;
+}
+
+.stats-content1 p {
+    margin-bottom: 15px;
+}
+
+.stats-content1 p:last-child {
+    margin-bottom: 0;
+}

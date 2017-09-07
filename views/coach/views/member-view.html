@@ -1,7 +1,8 @@
 <div class="col-lg-12 col-md-12 col-sm-12 no-padding" ng-cloak class="ng-cloak" ng-init="init()">
     <!-- <div flash-message="2000" class="col-lg-4 col-md-4 col-sm-4 pull-right"></div> -->
-    <h5 class="classic-title"><a href="" class="active-tab profile-details"><i class="fa fa-user"></i>&nbsp;&nbsp;Demography</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="" class="stats"><i class="fa fa-history"></i>&nbsp;&nbsp;Stats </a>|&nbsp;&nbsp;<a href="" class="tracking-plan"><i class="fa fa-gg"></i>&nbsp;&nbsp;Training Plans </a>|&nbsp;&nbsp;<a href="" class="medication"><i class="fa fa-medkit"></i>&nbsp;&nbsp;Medications&nbsp;<small class="badge">{{medicationList.length}}</small></a> <a href=""  class="remove-text-color pull-right" ng-show="clients.length>0" ng-click="doRemoveUser()">Remove User</a></h5>
-      
+    <h5 class="classic-title"><a href="" class="active-tab profile-details"><i class="fa fa-user"></i>&nbsp;&nbsp;Demography</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="" class="stats" ng-click="doGetClientHealthProfileDetailsByCoach()"><i class="fa fa-history"></i>&nbsp;&nbsp;Stats </a>|&nbsp;&nbsp;<a href="" class="tracking-plan"><i class="fa fa-gg"></i>&nbsp;&nbsp;Training Plans </a>|&nbsp;&nbsp;<a href="" class="medication"><i class="fa fa-medkit"></i>&nbsp;&nbsp;Medications&nbsp;<small class="badge">{{medicationList.length}}</small></a> <a href=""  class="remove-text-color pull-right" ng-show="clients.length>0" ng-click="doRemoveUser()">Remove User</a></h5>
+
+      <input hidden id="main-start-date">
         <div ng-if="loaded">
             <div class="loader-style">
                 <div class="loader"></div>
@@ -290,14 +291,13 @@
         <!-- For Clients Individual Activities -->
         <div class="stats-div">
             <div class="margin-top-5 pull-right mouse-pointer" >&nbsp;&nbsp;<i class="fa fa-calendar" ng-click="datePicker()"></i></div>
-            <input hidden id="main-start-date" >
+            <!-- <input hidden id="main-start-date"> -->
 
             <div id="ui-datepicker" class="pull-right main-datepicker">
                 <input type="text" id="main-date" class="profile_input override" ng-model="selectedDate" block>
             </div>
             <div class="margin-top-5 pull-right">Date</div>
-            <div class="col-lg-12 col-md-12 col-sm-12 no-padding">
-                
+            <div>
                 <div class="col-md-8 col-lg-8 col-sm-8 no-padding margin-top-10">
                     <h2 class="classic-title text-color"><span class="sub-title"><strong><i class="fa fa-male"></i>&nbsp;&nbsp;DAILY ACTIVITY</strong></span></h2> 
                     <div class="col-lg-12 col-md-12 col-sm-12 no-padding text-center">
@@ -397,8 +397,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 col-lg-4 col-sm-4 margin-top-10">
-                    <h2 class="classic-title text-color"><span class="sub-title"><strong><i class="fa fa-male"></i>&nbsp;&nbsp;DAILY BUDGETS</strong></span></h2>
+                <div class="col-md-4 col-lg-4 col-sm-4 margin-top-20">
+                    <!-- <h2 class="classic-title text-color"><span class="sub-title"><strong><i class="fa fa-male"></i>&nbsp;&nbsp;DAILY BUDGETS</strong></span></h2> -->
                     <div class="row">
                         <h5 class="col-lg-12 col-md-12 col-sm-12 margin-bottom-5">
                             Budget Vs Net&nbsp;-&nbsp;
@@ -460,7 +460,7 @@
                     <input id="history-end" hidden />
 
                     <div class="col-lg-12 col-md-12 col-sm-12 no-padding" ng-show="showGraph.reportTittle==0">
-                         <div class="tab-content1 contentHistoryOverride min-height-200" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#eee'}">
+                         <div class="stats-content1 contentHistoryOverride">
                             <div class="col-md-12 col-sm-12 col-xs-12 no-padding">
                                 <div class="col-md-6 col-sm-6 col-xs-6 margin-top-20" style="border: solid red 0px;">
                                     <h4 style="text-transform: uppercase;padding-left: 20px;">Graphs</h4>
@@ -487,7 +487,7 @@
                                          <div class="horizon-item" ng-click="showGraph.reportTittle=1" style="display: block;padding: 15px 1px;">
                                             <div class="historyOverride">
                                              <img style="width: 50px;" ng-src="{{graph.imageSrc}}">
-                                             <a href="" style="color: #666;font-size: 14px;"  data-toggle="tab" onclick="return false;">{{graph.name}}</a>
+                                             <a href="" style="color: #666;font-size: 13px;"  data-toggle="tab" onclick="return false;">{{graph.name}}</a>
                                             </div>
                                          </div>
                                     </div>
@@ -1092,10 +1092,9 @@ $(document).ready(function(){
                     singleDatePicker: true
                 };
 
-                $('#main-date').daterangepicker(options, function(start, end, label) {
-                    document.getElementById("main-start-date").value = start.format('DD/MM/YYYY');
+                $('#main-date').daterangepicker(options, function(start, end, label) {                    
                     angular.element(document.getElementById('main-date')).scope().doGetClientHealthProfileDetailsByCoach();
-                   
+                    document.getElementById("main-start-date").value = start.format('DD/MM/YYYY');
                 });
             };
 
