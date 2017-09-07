@@ -17395,8 +17395,7 @@ select.date:focus {
 .remove-text-color{
     color: red !important;
     font-weight: bold ! important;
-    font-size: 14px;
-    text-decoration: underline !important;
+    font-size: 12px;
 }
 /*Message Read*/
 .message-read{
@@ -17639,17 +17638,17 @@ div.foodcalorie{
     border:solid 1px #ddd;
     border-radius: 5px;
     box-shadow: 1px 1px #f3f3f3;
-    padding:10px;
+    padding:10px 2px;
+    height:150px;
 }
 .client-card .client-card-img{
-    width:30%;
-    height: 100px;
+    width:20%;
     border-radius: 50%;
     padding:5px;
 }
 .client-card-details{
     float: right;
-    width: 70%;
+    width: 80%;
     padding: 5px;
 }
 .client-status{
@@ -17671,25 +17670,24 @@ div.foodcalorie{
 .profile .list-group-item{
     padding: 5px 10px 5px 10px !important;
 }
-/*for stats graph content*/
-.stats-content1 {
-    margin: 10px 10px;
-    height: 470px;
-    -webkit-box-shadow: inset 0px 0px 3px rgba(0,0,0,0.3);
-    -moz-box-shadow: inset 0px 0px 3px rgba(0,0,0,0.3);
-    box-shadow: inset 0px 0px 3px rgba(0,0,0,0.3);
-
+.badge1 {
+   position:relative;
 }
-
-.stats-content1.contentHistoryOverride{
-
-    height: 625px !important;
+.badge1[data-badge]:before { 
+    font-family: 'FontAwesome';
+   content: "\f0e0";
+   position:absolute;
+   top:-5px;
+   right:-5px;
+   font-size:.9em;
+   background:green;
+   color:white;
+   width:25px;height:25px;
+   text-align:center;
+   line-height:25px;
+   border-radius:50%;
+   box-shadow:0px 0px 1px #333;
 }
-
-.stats-content1 p {
-    margin-bottom: 15px;
-}
-
-.stats-content1 p:last-child {
-    margin-bottom: 0;
+.client-view-min-height{
+    height:460px;
 }

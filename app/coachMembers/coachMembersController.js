@@ -7,6 +7,8 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
 
     $scope.isActive=false;
 
+    $scope.viewload=false;
+
     $scope.showGraph={reportTittle:0}
 
     $scope.accordion={
@@ -56,7 +58,7 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
 
     //Get Individual Memeber Details
     $scope.doGetIndividualClientDetail=function(id){
-
+        $scope.viewload=false;
         $scope.resetUserDetails();
         $scope.currentClientId=id;
         //Get Profile Detail
@@ -1667,25 +1669,103 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
 }]);
 
 coachApp.controller('MyMembersController',['$scope','requestHandler','Flash','$routeParams',function($scope,requestHandler,Flash,$routeParams){
-
+    
+    $scope.loaded=true;
+    $scope.myClients=[];    
+    //Get Clients
     $scope.getMyClientsList=function(){
          requestHandler.getRequest("coach/myclients/","").then(function(response){
             $scope.myClients=response.data.clients;
         },function(){
-            successMessage(Flash, "Successfully Plan Added!");
-            $scope.doGetTrainingPlanDetails(userid);
+            errorMessage(Flash,"Please Try Again Later");
+        });
+    }
+    //Get Groups List
+    $scope.doGetGroupList=function(){
+       requestHandler.getRequest("coach/getGroups/").then(function(response){
+            $scope.groupsList=[];
+            $scope.groupsList=response.data.Groups;     
+            $scope.groupsList.push({"id": -1, "coachid": null, "groupname": "All Clients", "status": 1});       
+            $scope.groupsList.push({"id": 0, "coachid": null, "groupname": "Un Assigned", "status": 1});
+            $.each($scope.groupsList,function(index,value){
+                if(value.id!=-1)
+                    value.isSelected=false;
+                else
+                    value.isSelected=true;
+            });
+            var sortArray = $scope.groupsList;
+            $scope.groupsList=sortArray.sort(function(a,b) {
+                if ( a.id < b.id )
+                    return -1;
+                if ( a.id > b.id )
+                    return 1;
+                return 0;
+            });
+        })
+    };
+
+    //Send Group Message
+    $scope.doSendGroupMessage=function(groupid){
+       /* $scope.groupList=[];
+        $scope.groupList.push(groupid);
+        $scope.param={"message":$scope.composeMessage,"targerid"{"userid":[],"groupid":$scope.groupList}};*/
+        requestHandler.postRequest("coach/sendGroupMessage/",function(response){
+            successMessage(Flash,"Successfully Send!");
+        });
+    };
+
+    $scope.setRemovingUserId=function(userid){
+        $scope.removingUserId=userid;
+    };
+
+    $scope.removeClientFromList=function(){
+        requestHandler.postRequest("coach/removeuser/",{"userid":$scope.removingUserId}).then(function(response){
+            $scope.getMyClientsList();
         });
     }
 
+    $scope.doIntializeLeanModal=function(){
+        $(".confirm-delete-modal").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
+    }
+
+    $scope.doFilterGroup=function(id){
+        $scope.selectedGroupId=id;
+    }
 
     $scope.init=function(){
-        $scope.getMyClientsList();
+        $scope.doGetGroupList();
+        $scope.selectedGroupId=-1;
+        $scope.getMyClientsList();    
     }
 
     //My Members Init
     $scope.init();
 
 
+}]);
+
+coachApp.filter('complexFilter',['$filter',function($filter){
+  return function (array, expression, comparator) {
+    var newArr = [];
+    if(expression.groupid==-1)
+        newArr=array;
+    if(expression.groupid==0){
+        for (var i = 0; i < array.length; i++) {
+        if(array[i].groupid==null){
+            newArr.push(array[i]);
+            }
+        }
+    }
+    else{
+        for (var i = 0; i < array.length; i++) {
+        if(array[i].groupid==expression.groupid){
+            newArr.push(array[i]);
+            }
+        }
+    }
+    
+    return newArr;
+  }
 }]);
 
 coachApp.controller('MembersViewController',['$scope','requestHandler','Flash','$routeParams','$sce',function($scope,requestHandler,Flash,$routeParams,$sce) {
