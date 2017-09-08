@@ -230,7 +230,7 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
             if(mm<10){
                 mm='0'+mm
             } 
-            var activityDate = dd+'/'+mm+'/'+yyyy;
+            activityDate = dd+'/'+mm+'/'+yyyy;
         }
          
         requestHandler.postRequest("coach/userhealthprofile/",{"userid":$scope.currentClientId,"startdate":activityDate,"enddate":activityDate}).then(function(response){

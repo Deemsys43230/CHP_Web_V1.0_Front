@@ -54,8 +54,9 @@
                                 <span class="error-message textarea-errormessage55" ng-show="courseForm.durationMinutes.$error.required"><span>Required.</span></span>
                             </span>
                             <!-- <input class="section-input margin-top-15" maxlength="200" name="duration" placeholder="Enter Event Duration" ng-model="eventDetails.duration" required> -->
-                            <div class="col-lg-6 col-md-6 col-sm-6 margin-top-15 no-padding"><span>Hours</span>
-                                <select class="section-input" name="customhours"  ng-model="eventDetails.durationHours" ng-init="selectedHours='0'" style="padding: 8px 15px; width:76%" required>
+                            <div class="col-lg-6 col-md-6 col-sm-6 margin-top-15 no-padding">
+                                <select class="section-input" name="customhours"  ng-model="eventDetails.durationHours" ng-init="selectedHours='0'" style="padding: 8px 15px; width:99%" required>
+                                    <option value="">-- Select Hours --</option>
                                     <option value="0">0</option>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
@@ -82,8 +83,9 @@
                                     <option value="23">23</option>
                                 </select>
                             </div>
-                            <div class="col-lg-6 col-md-6 col-sm-6 margin-top-15 no-padding"><span>Minutes</span>
-                                <select class="section-input" name="minutes" ng-model="eventDetails.durationMinutes" ng-init="selectedMinutes='0'" style="padding: 8px 15px; width:76%" required>
+                            <div class="col-lg-6 col-md-6 col-sm-6 margin-top-15 no-padding">
+                                <select class="section-input" name="minutes" ng-model="eventDetails.durationMinutes" ng-init="selectedMinutes='0'" style="padding: 8px 15px; width:99%" required>
+                                    <option value=""> -- Select Minutes -- </option>
                                     <option value="0">0</option>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
