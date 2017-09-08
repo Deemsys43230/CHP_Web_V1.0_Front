@@ -293,7 +293,10 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
         requestHandler.postRequest("user/acceptinvitation/",{"coachid":coachid}).then(function(response){
            if(response.data.Response_status==1){
                 successMessage(Flash,"Invitation Accepted");
-                $scope.userCoachInit();
+                 $scope.userCoachInit();
+               //Redirect to coach list
+                $location.path("coach");
+
            }
         }, function(){
                 errorMessage(Flash,"Please try again later!");
@@ -657,7 +660,7 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
 
     $scope.$watch("workoutPlanPagination.pageNumber",function(){
         $scope.doGetCoachWorkoutPlans($routeParams.id);
-    }); 
+    });
 
     $scope.coachListInit=function(){
         $scope.doGetMyCoachListByUser();
@@ -666,7 +669,7 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
     $scope.userCoachInit=function(){
 
         $scope.scrollnation={"itemsPerScroll":4,"scrollEndCount":-1};    
-        $scope.usercoachlist=[];   
+        $scope.usercoachlist=[];
         $scope.doGetCoachListByUser(true);
         $scope.coach = {
             status: 'coach-view'

@@ -19,7 +19,7 @@
                             <span>{{demographyDeatil.height}}</span>
                         </span>
                         <span ng-show="coachclientdetails.unitPreference==2" >
-                            <span> {{demographyDeatil.heightFeet}}<sup style="color: deepskyblue">'</sup>&nbsp;{{demographyDeatil.heightInches}}<sup style="color: deepskyblue">"</sup></span>
+                            <span> {{demographyDeatil.heightFeet}}<sup style="color: deepskyblue;font-size: xx-large">'</sup>&nbsp;{{demographyDeatil.heightInches}}<sup style="color: deepskyblue;font-size: xx-large">"</sup></span>
                         </span></br/></br/>
                         <span class="text-bold">
                             <h4>Height <span ng-show="coachclientdetails.unitPreference==1"><small>(cms)</small></span> <span ng-show="coachclientdetails.unitPreference==2"><small>(feet,inches)</small></span></h4>
@@ -39,13 +39,13 @@
                 <div class="col-lg-4 col-sm-12 col-md-4 demo-font client-content">
                          <span>{{demographyDeatil.hip}}</span><br/><br/>
                         <span class="text-bold">
-                            <h5>Hip<small>(Inches)</small></small></h5>
+                            <h5>Hip <small>(Inches)</small></h5>
                         </span>  
                 </div>
                 <div class="col-lg-4 col-sm-12 col-md-4 demo-font client-content">
                         <span>{{demographyDeatil.waist}}</span><br/><br/>
                         <span class="text-bold">
-                            <h5>Waist <small>(Inches)</h5>
+                            <h5>Waist <small>(Inches)</small></h5>
                         </span>               
                 </div>
                 <div class="col-lg-4 col-sm-12 col-md-4 demo-font client-content">
@@ -308,7 +308,7 @@
                                 <img class="img-width" src="../../images/sleep.png"/>
                             </div>
                             <div class="col-md-8 col-lg-8 col-sm-8 no-padding">
-                                <div class="text-bold" ><small>{{wearable.sleep==null?"N/A":wearable.sleep}}</small></div>
+                                <div class="text-bold" ><small>{{wearable.sleep==null?"NA":wearable.sleep}}</small></div>
                                 <div class="text-bold"><small>(minutes)</small></div>
                             </div>
                         </div>
@@ -318,7 +318,7 @@
                                 <img class="img-width" src="../../images/bloodpressure.png"/>
                             </div>
                             <div class="col-md-8 col-lg-8 col-sm-8 no-padding">
-                                <div class="text-bold"><small>{{wearable.restingheartrate==null?"N/A":wearable.restingheartrate}}</small></div>
+                                <div class="text-bold"><small>{{wearable.restingheartrate==null?"NA":wearable.restingheartrate}}</small></div>
                                 <div class="text-bold"><small>(bpm)</small></div>
                             </div>
                         </div>
@@ -340,7 +340,7 @@
                                 <img class="img-width" src="../../images/floor.png"/>
                             </div>
                             <div class="col-md-8 col-lg-8 col-sm-8 no-padding">
-                                <div class="text-bold"><small>{{wearable.floors==null?"N/A":(wearable.floors==0?"N/A":wearable.floors)}}</small></div>
+                                <div class="text-bold"><small>{{wearable.floors==null?"NA":(wearable.floors==0?"NA":wearable.floors)}}</small></div>
                                 <div class="text-bold"><small>(floor)</small></div>
                             </div>
                         </div>
@@ -350,7 +350,7 @@
                                 <img class="img-width" src="../../images/step.png"/>
                             </div>
                             <div class="col-md-8 col-lg-8 col-sm-8 no-padding">
-                                <div class="text-bold"><small>{{wearable.steps==null?"N/A":(wearable.steps==0?"N/A":wearable.steps)}}</small></div>
+                                <div class="text-bold"><small>{{wearable.steps==null?"NA":(wearable.steps==0?"NA":wearable.steps)}}</small></div>
                                 <div class="text-bold"><small>(count)</small></div>
                             </div>
                         </div>
@@ -360,7 +360,7 @@
                                 <img class="img-width" src="../../images/bloodoxygen.png"/>
                             </div>
                             <div class="col-md-8 col-lg-8 col-sm-8 no-padding">
-                                <div class="text-bold"><small>{{wearable.bloodoxygen==null?"N/A":wearable.bloodoxygen}}</small></div>
+                                <div class="text-bold"><small>{{wearable.bloodoxygen==null?"NA":wearable.bloodoxygen}}</small></div>
                                 <div class="text-bold"><small>(%)</small></div>
                             </div>
                         </div>
@@ -372,7 +372,7 @@
                                 <img class="img-width" src="../../images/heart1.gif"/>
                             </div>
                             <div class="col-md-8 col-lg-8 col-sm-8 no-padding">
-                                <div class="text-bold" title="Systolic Blood Pressure/Diastolic Blood Pressure"><small>{{wearable.systolic==null?"N/A":wearable.systolic}} / {{wearable.diastolic==null?"N/A":wearable.diastolic}}</small></div>
+                                <div class="text-bold" title="Systolic Blood Pressure/Diastolic Blood Pressure"><small>{{wearable.systolic==null?"NA":wearable.systolic}} / {{wearable.diastolic==null?"NA":wearable.diastolic}}</small></div>
                                 <div class="text-bold" title="Systolic Blood Pressure/Diastolic Blood Pressure"><small>(mmHg)</small></div>
                             </div>
                         </div>
@@ -382,7 +382,7 @@
                                 <img class="img-width" src="../../images/bloodglucose.png"/>
                             </div>
                             <div class="col-md-8 col-lg-8 col-sm-8 no-padding">
-                                <div class="text-bold" title="Random Glucose/Fasting Glucose"><small>{{wearable.randombloodglucose==null?"N/A":wearable.randombloodglucose}} / {{wearable.fastingbloodglucose==null?"N/A":wearable.fastingbloodglucose}}</small></div>
+                                <div class="text-bold" title="Random Glucose/Fasting Glucose"><small>{{wearable.randombloodglucose==null?"NA":wearable.randombloodglucose}} / {{wearable.fastingbloodglucose==null?"NA":wearable.fastingbloodglucose}}</small></div>
                                 <div class="text-bold" title="Random Glucose/Fasting Glucose"><small>(mg/dl)</small></div>
                             </div>
                         </div>
@@ -392,7 +392,7 @@
                                 <img class="img-width" src="../../images/smalltemp.png"/>
                             </div>
                             <div class="col-md-8 col-lg-8 col-sm-8 no-padding">
-                                <div class="text-bold"><small>{{wearable.bodytemperature==null?"N/A":wearable.bodytemperature}}</small></div>
+                                <div class="text-bold"><small>{{wearable.bodytemperature==null?"NA":wearable.bodytemperature}}</small></div>
                                 <div class="text-bold"><small>(<sup>o</sup>F)</small></div>
                             </div>
                         </div>
@@ -944,7 +944,7 @@ $('.msg-overlay-list-bubble--is-minimized').click(function(){
 </script>
 
 <script type="text/javascript">
-  $(document).ready(function() {    
+  $(document).ready(function() {
     $("textarea").niceScroll({cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#eee'});
     $("#stickyNotes").niceScroll();
     // $('#stickyNotes').getNiceScroll(0).doScrollTop($('textarea').height());
@@ -970,11 +970,14 @@ $(document).on('click', '.panel-heading span.icon_minim', function (e) {
         $this.parents('.panel').find('.panel-body').slideUp();
         $this.addClass('panel-collapsed');
         $this.removeClass('glyphicon-minus').addClass('glyphicon-plus');
-    } else {
+    }
+    else {
         $this.parents('.panel').find('.panel-body').slideDown();
         $this.removeClass('panel-collapsed');
         $this.removeClass('glyphicon-plus').addClass('glyphicon-minus');
+
     }
+
 });
 $(document).on('focus', '.panel-footer input.chat_input', function (e) {
     var $this = $(this);
