@@ -119,15 +119,13 @@ $scope.doDeleteCoachWorkoutPlan=function(id){
 
 $scope.init=function(){
   var original="";
-	$scope.pagination= {"itemsPerPage": 8, "pageNumber": 1}
+	$scope.pagination= {"itemsPerPage": 10, "pageNumber": 1}
 	$scope.paginationLoad=false;
 };
 
 $scope.$watch("pagination.pageNumber", function(){
 	$scope.doGetCoachWorkoutPlanList();
 });
-
-$scope.init();
 
 }]);
 
@@ -147,17 +145,22 @@ $scope.doviewCoachWorkoutPlans=function(){
           {
               "day":"Day "+i,
               "dayId": i,
+              "actualCalories": 0,
               "workouts":[]
           }
          );
       }
 
       //Group json object
-      Object.keys($scope.plan).forEach(function(key){
-        $.each($scope.plan[key].workouts,function(index,value){
-            $scope.workoutPlanDetailList[value.day-1].workouts.push(value);
-        });
-      });
+      $.each($scope.plan, function (key, obj) {
+              if(key!='plandetail'){
+                // $scope.mealPlanDetailList[key.substring(3)-1].totalCalories=(obj.actualcalories).toFixed(2);
+                $.each(obj.workouts, function (index, value) {
+                $scope.workoutPlanDetailList[value.day-1].workouts.push(value);
+                console.log($scope.workoutPlanDetailList);
+                });
+              }              
+          });
 
   },function(){
       errorMessage(Flash,"Please try again later!")
@@ -186,7 +189,9 @@ $scope.doCoachAddExercise=function(planDay){
           $("#lean_overlay").fadeTo(1000);
           $("#modal-add-exercise").fadeIn(600);
           $(".user_register").show();
-
+          $("html, body").animate({
+              scrollTop: 0
+          }, 600);
       });
 
       $(".modal_close").click(function(){

@@ -476,6 +476,8 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
         };   
         requestHandler.postRequest("user/getplans/",$scope.getMealPlanParams).then(function(response){
             $scope.myMealPlanList=response.data;
+        }, function(){
+            errorMessage(Flash,"Please try again later!")
         });
     };
 
@@ -566,6 +568,7 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
         });
     };
 
+    // Set or Unset Food Consumed By User
     $scope.doSetUnsetFoodItemConsumed= function(foodplanid,date){
         $scope.getFoodItemConsumedParam={'id':foodplanid, 'date':date};
         requestHandler.postRequest("user/setorunsetfoodplan/", $scope.getFoodItemConsumedParam).then(function(response){
@@ -594,6 +597,8 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
         };   
         requestHandler.postRequest("user/getplans/",$scope.getWorkoutPlanParams).then(function(response){
             $scope.myworkoutPlanList=response.data;
+        }, function(){
+            errorMessage(Flash,"Please try again later!")
         });
     };
 

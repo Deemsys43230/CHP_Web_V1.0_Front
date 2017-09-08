@@ -1632,12 +1632,83 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
             };
         };
 
+    // Do get Assigned Meal Plans to User    
+    $scope.doGetAssignedUserPlanByCoach=function(targetid){
+        $scope.getUserMealPlanParams={
+            "targetid":targetid,
+            "limit":$scope.pagination.itemsPerPage,
+            "offset":($scope.pagination.pageNumber-1)*$scope.pagination.itemsPerPage
+        };   
+        requestHandler.postRequest("coach/getplans/",$scope.getUserMealPlanParams).then(function(response){
+            $scope.userMealPlanList=response.data;
+        }, function(){
+            errorMessage(Flash,"Please try again later!")
+        });
+    };  
+
+    //Laod Food Meal Plan Details
+    $scope.doLoadMealPlanDetails=function(mapId){
+        $scope.currentPlanDetail=mapId;
+        $scope.planDetailView=true;
+
+        requestHandler.postRequest("getplandetail/",{"mapid":mapId}).then(function(response){
+            //First We need to group up days
+            $scope.plandetail=response.data.plandetail;
+           
+            //Initialize
+            $scope.mealPlanDetailList=[];
+
+            //create array of days
+            for(var i=1;i<=$scope.plandetail.plandays;i++)
+            {
+              $scope.mealPlanDetailList.push(
+                  {
+                    "day":"Day "+i,
+                    "dayId":i,
+                    "date": "dd/mm/yyyy",
+                    "totalCalories":0,
+                    "consumedCalories":0,
+                    "foods":[
+                              {"sessionId":1,"sessionName":"BreakFast","foodItems":[]},
+                              {"sessionId":2,"sessionName":"Brunch","foodItems":[]},
+                              {"sessionId":3,"sessionName":"Lunch","foodItems":[]},
+                              {"sessionId":4,"sessionName":"Snacks","foodItems":[]},
+                              {"sessionId":5,"sessionName":"Dinner","foodItems":[]},  
+                            ]
+                  }
+                );
+            }
+
+          // Group Json object of plan 
+         $.each($scope.plandetail, function (key, obj) {            
+              if(key.startsWith("day")){
+                $scope.mealPlanDetailList[key.substring(3)-1].totalCalories=(obj.actualcalories).toFixed(2);
+                $scope.mealPlanDetailList[key.substring(3)-1].consumedCalories=(obj.consumedcalories).toFixed(2);
+                $scope.mealPlanDetailList[key.substring(3)-1].date= obj.date;
+                $.each(obj.foods, function (index, value) {
+                 value.calorieintake=value.calorieintake.toFixed(2);   
+                 $scope.mealPlanDetailList[value.day-1].foods[value.foodsessionid-1].foodItems.push(value);
+                });
+              }              
+          });
+
+         console.log($scope.mealPlanDetailList);
+         
+        },function(){
+            errorMessage(Flash,"Please try again later!")
+        });
+    };  
+
     //Initial Load
     $scope.init = function(){
         $scope.paginationLoad=false;
         $scope.pagination={"itemsPerPage":9,"pageNumber":1};
         $scope.doGetIndividualClientDetail($routeParams.id);
     };
+
+    $scope.$watch("mealPlanPagination.pageNumber",function(){
+        $scope.doGetAssignedUserPlanByCoach($routeParams.id);
+    });
 
     //Initial Load
     $scope.statsInit = function(){
@@ -1717,20 +1788,23 @@ coachApp.controller('MyMembersController',['$scope','requestHandler','Flash','$r
         requestHandler.postRequest("coach/removeuser/",{"userid":$scope.removingUserId}).then(function(response){
             $scope.getMyClientsList();
         });
-    }
+    };
 
     $scope.doIntializeLeanModal=function(){
         $(".confirm-delete-modal").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
-    }
+    };
 
     $scope.doFilterGroup=function(id){
         $scope.selectedGroupId=id;
-    }
+    };
+
+    
 
     $scope.init=function(){
         $scope.doGetGroupList();
         $scope.selectedGroupId=-1;
-        $scope.getMyClientsList();    
+        $scope.getMyClientsList();   
+        
     }
 
     //My Members Init

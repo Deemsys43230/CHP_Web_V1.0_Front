@@ -167,6 +167,14 @@
 
                     <div class="mealplan-details-div col-lg-12 col-md-12 col-sm-12 margin-bottom-10">
                          <a href="" ng-show="planDetailView" class="btn-sm btn-warning pull-right margin-left-5 margin-bottom-10"  ng-click="planDetailView=false"><i class="fa fa-arrow-circle-o-left"></i>&nbsp;Back to Plans</a>
+                         <div class="col-md-8 pull-right margin-top-3" ng-show="planDetailView">
+                            <div class="col-md-3 no-padding pull-right">
+                            <span class="green food-point"></span><div class="margin-left-20">-&nbsp;Food&nbsp; Mandatory</div>
+                            </div>
+                            <div class="col-md-3 no-padding pull-right">
+                            <span class="orange food-point"></span><div class="margin-left-20">-&nbsp;Food&nbsp;Optional</div>
+                            </div>
+                         </div>
                         <table class="table table-bordered table-striped" ng-hide="planDetailView">
                             <thead>
                                 <tr class="warning">
@@ -182,7 +190,7 @@
                                     <td>{{plan.planname}}</td>
                                     <td>{{plan.description}}</td>
                                     <td>{{plan.plandays}}&nbsp;Day(s)</td>
-                                    <td>{{plan.userplanstatus==1?"Completed":"In Progress"}}</td>
+                                    <td>{{plan.userplanstatus==1?"Completed":"Active"}}</td>
                                     <td>
                                         <a href="" ng-click="doLoadMealPlanDetails(plan.mapid)" class="btn-xs btn-primary">View Plan</a>
                                     </td>
@@ -207,7 +215,7 @@
                     <th class="col-md-2 text-center"><strong>Snacks</strong></th>
                     <th class="col-md-2 text-center"><strong>Dinner</strong></th>
                 </tr>
-                <tr ng-repeat="mealPlanDetail in mealPlanDetailList" ng-init="$last ? doIntializeLeanModal() : null">
+                <tr ng-repeat="mealPlanDetail in mealPlanDetailList">
                     <td class="col-md-2 food-plans text-center align-bottom">
                         {{mealPlanDetail.day}}
                         <div class="text-red"><small>({{mealPlanDetail.date}})</small></div>
@@ -223,6 +231,8 @@
                         <div ng-repeat="foodItem in mealPlanDetail.foods[0].foodItems">
                             <a href="" ng-click="doViewFoodItemFromMealPlan(foodItem.id,mealPlanDetail.date)">
                                 <div class="food">
+                                    <span ng-show="foodItem.isoptional==1" class="orange">&nbsp;</span>
+                                    <span ng-show="foodItem.isoptional==0" class="green">&nbsp;</span>
                                     {{foodItem.foodname}}&nbsp;<span ng-show="foodItem.isDone==1"><i class="fa fa-check-circle text-green pull-right"></i></span>&nbsp;&nbsp;&nbsp;
                                     <div class="foodvalues">
                                         {{foodItem.measurecount}}&nbsp;{{foodItem.foodmeasurename}}&nbsp;&nbsp;|&nbsp;&nbsp;{{foodItem.calorieintake}}&nbsp;KCals
@@ -236,6 +246,8 @@
                          <div ng-repeat="foodItem in mealPlanDetail.foods[1].foodItems">
                              <a href="" ng-click="doViewFoodItemFromMealPlan(foodItem.id,mealPlanDetail.date)">
                                  <div class="food">
+                                    <span ng-show="foodItem.isoptional==1" class="orange">&nbsp;</span>
+                                    <span ng-show="foodItem.isoptional==0" class="green">&nbsp;</span>
                                     {{foodItem.foodname}}&nbsp;<span ng-show="foodItem.isDone==1"><i class="fa fa-check-circle text-green"></i></span>&nbsp;&nbsp;&nbsp;
                                     <div class="foodvalues">
                                         {{foodItem.measurecount}}&nbsp;{{foodItem.foodmeasurename}}&nbsp;&nbsp;|&nbsp;&nbsp;{{foodItem.calorieintake}}&nbsp;KCals
@@ -248,6 +260,8 @@
                         <div ng-repeat="foodItem in mealPlanDetail.foods[2].foodItems">
                             <a href="" ng-click="doViewFoodItemFromMealPlan(foodItem.id,mealPlanDetail.date)">
                                 <div class="food"> 
+                                    <span ng-show="foodItem.isoptional==1" class="orange">&nbsp;</span>
+                                    <span ng-show="foodItem.isoptional==0" class="green">&nbsp;</span>
                                     {{foodItem.foodname}}&nbsp;<span ng-show="foodItem.isDone==1"><i class="fa fa-check-circle text-green"></i></span>&nbsp;&nbsp;&nbsp;
                                     <div class="foodvalues">
                                         {{foodItem.measurecount}}&nbsp;{{foodItem.foodmeasurename}}&nbsp;&nbsp;|&nbsp;&nbsp;{{foodItem.calorieintake}}&nbsp;KCals
@@ -261,6 +275,8 @@
                         <div ng-repeat="foodItem in mealPlanDetail.foods[3].foodItems"> 
                             <a href="" ng-click="doViewFoodItemFromMealPlan(foodItem.id,mealPlanDetail.date)">
                                 <div class="food"> 
+                                    <span ng-show="foodItem.isoptional==1" class="orange">&nbsp;</span>
+                                    <span ng-show="foodItem.isoptional==0" class="green">&nbsp;</span>
                                     {{foodItem.foodname}}&nbsp;<span ng-show="foodItem.isDone==1"><i class="fa fa-check-circle text-green"></i></span>&nbsp;&nbsp;&nbsp;
                                     <div class="foodvalues">
                                         {{foodItem.measurecount}}&nbsp;{{foodItem.foodmeasurename}}&nbsp;&nbsp;|&nbsp;&nbsp;{{foodItem.calorieintake}}&nbsp;KCals
@@ -274,6 +290,8 @@
                          <div ng-repeat="foodItem in mealPlanDetail.foods[4].foodItems">
                              <a href="" ng-click="doViewFoodItemFromMealPlan(foodItem.id,mealPlanDetail.date)">
                                  <div class="food">
+                                    <span ng-show="foodItem.isoptional==1" class="orange">&nbsp;</span>
+                                    <span ng-show="foodItem.isoptional==0" class="green">&nbsp;</span>
                                     {{foodItem.foodname}}&nbsp;<span ng-show="foodItem.isDone==1"><i class="fa fa-check-circle text-green"></i></span>&nbsp;&nbsp;&nbsp;
                                     <div class="foodvalues">
                                         {{foodItem.measurecount}}&nbsp;{{foodItem.foodmeasurename}}&nbsp;&nbsp;|&nbsp;&nbsp;{{foodItem.calorieintake}}&nbsp;KCals
@@ -308,7 +326,7 @@
                             <td>
                                 <a href="" ng-click="doLoadWorkoutPlanDetails(plan.mapid)" class="btn-xs btn-primary">View Plan</a>
                             </td>
-                        </tr>    
+                        </tr>{{myworkoutPlanList.plans.plantype}}   
                         <tr ng-show="myworkoutPlanList.plans.length==0"><td colspan="4" class="text-center">No Records Found !!!</td></tr>
                     </tbody>    
                 </table>
@@ -325,7 +343,7 @@
                     <th class="col-md-3 text-center" style="margin-top:15px"><strong>Plans</strong></th>
                     <th class="col-md-9 text-center"><strong>Excercise Name</strong></th>
                 </tr>
-                <tr ng-repeat="workoutPlanDetail in workoutPlanDetailList" ng-init="$last ? doIntializeLeanModal() : null">
+                <tr ng-repeat="workoutPlanDetail in workoutPlanDetailList">
                     <td class="col-md-1 food-plans text-center align-bottom">{{workoutPlanDetail.day}}
                        <div valign="bottom"><a href="modal-add-exercise" class="food-plan-add-food text-bottom modal_trigger_exercise" ng-click="doCoachAddExercise(workoutPlanDetail.day)">Add Exercise</a></div>     
                     </td>
@@ -469,6 +487,10 @@
                 <tr>
                     <td class="col-md-6">Calories Intake</td>
                     <td class="col-md-6">{{foodPlanItemDetails.calorieintake}}&nbsp;KCals</td>
+                </tr>
+                <tr>
+                    <td class="col-md-6">Is Optional&nbsp;?</td>
+                    <td class="col-md-6">{{foodPlanItemDetails.isoptional==1?"Yes":"No"}}</td>
                 </tr>
             </table>
             <div class="col-lg-12 col-md-12 col-sm-12 text-center food-consumed-btn">

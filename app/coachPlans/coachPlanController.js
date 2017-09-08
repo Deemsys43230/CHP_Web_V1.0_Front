@@ -116,7 +116,7 @@ $scope.doDeleteCoachMealPlan=function(id){
 $scope.init=function(){
   $scope.original={};
 	$scope.paginationLoad=false;
-	$scope.mealPagination={"itemsPerPage":8,"pageNumber":1};
+	$scope.mealPagination={"itemsPerPage":10,"pageNumber":1};
 	
 };
 
@@ -187,6 +187,7 @@ $scope.doCoachAddFood=function(planDay,foodSessionId){
     $scope.userFood={};
     $scope.userFood.day= planDay;
     $scope.userFood.foodsessionid=foodSessionId;
+    $scope.userFood.isoptional=1;
     $scope.addFood=false;
     $scope.showSearch=true;
     $scope.isNew=true;
@@ -196,7 +197,9 @@ $scope.doCoachAddFood=function(planDay,foodSessionId){
             $("#lean_overlay").fadeTo(1000);
             $("#modal-add-food").fadeIn(600);
             $(".user_register").show();
-          
+            $("html, body").animate({
+                scrollTop: 0
+            }, 600);
         });
 
         $(".modal_close").click(function(){
@@ -231,6 +234,7 @@ $scope.doEditFoodItemFromPlan=function(id){
       $scope.userFood.id=$scope.userSavedFoodDetails.id;
       $scope.userFood.foodsessionid=$scope.userSavedFoodDetails.foodsessionid;
       $scope.userFood.day=$scope.userSavedFoodDetails.day;
+      $scope.userFood.isoptional= $scope.userSavedFoodDetails.isoptional;
       $scope.doCalculateCalories();  
       $scope.userFood.calorieintake=$scope.caloriesIntake;
       console.log($scope.userFood);
@@ -275,38 +279,38 @@ $scope.resetdata=function(){
 };
 
 // View Food Meal Item Plan Details
-    $scope.doViewCoachFoodItemFromPlan=function(foodid){
-        $(function(){
-            $("#lean_overlay").fadeTo(1000);
-            $("#view-meal-item").fadeIn(600);
-            $(".common_model").show();
-            $("html, body").animate({
-                scrollTop: 0
-            }, 600);
-            $scope.shouldBeOpen = true;
-        });
+$scope.doViewCoachFoodItemFromPlan=function(foodid){
+    $(function(){
+        $("#lean_overlay").fadeTo(1000);
+        $("#view-meal-item").fadeIn(600);
+        $(".common_model").show();
+        $("html, body").animate({
+            scrollTop: 0
+        }, 600);
+        $scope.shouldBeOpen = true;
+    });
 
-        $scope.getFoodPlanItemParam={'id':foodid};
-        requestHandler.postRequest("coach/foodplandetail/", $scope.getFoodPlanItemParam).then(function(response){
-            $scope.foodPlanItemDetails= response.data.savedfoodplan;
-        }, function(){
-            errorMessage(Flash,"Please try again later!");
-        });
+    $scope.getFoodPlanItemParam={'id':foodid};
+    requestHandler.postRequest("coach/foodplandetail/", $scope.getFoodPlanItemParam).then(function(response){
+        $scope.foodPlanItemDetails= response.data.savedfoodplan;
+    }, function(){
+        errorMessage(Flash,"Please try again later!");
+    });
 
-        $(".modal_close").click(function(){
-            $(".common_model").hide();
-            $("#view-meal-item").hide();
-            $("#lean_overlay").hide();
-            $scope.shouldBeOpen = false;
-        });
+    $(".modal_close").click(function(){
+        $(".common_model").hide();
+        $("#view-meal-item").hide();
+        $("#lean_overlay").hide();
+        $scope.shouldBeOpen = false;
+    });
 
-        $("#lean_overlay").click(function(){
-            $(".common_model").hide();
-            $("#view-meal-item").hide();
-            $("#lean_overlay").hide();
-            $scope.shouldBeOpen = false;
-        });
-    };
+    $("#lean_overlay").click(function(){
+        $(".common_model").hide();
+        $("#view-meal-item").hide();
+        $("#lean_overlay").hide();
+        $scope.shouldBeOpen = false;
+    });
+};
 
 //Search Function for food
 $scope.inputChanged = function(searchStr) {
@@ -379,8 +383,8 @@ $scope.doInsertFoodPlanByCoach=function(){
     $scope.userFood.foodid=$scope.userSelectedFoodDetails.foodid;
     $scope.userFood.foodmeasureid=$scope.userFood.measure.measureid;
     $scope.userFood.calorieintake=$scope.caloriesIntake;
-    $scope.userFood.isoptional=1;
     
+    console.log($scope.userFood);
     requestHandler.postRequest("coach/insertorupdatefoodplan/",$scope.userFood).then(function(response){
         if(response.data.Response_status==1){
           successMessage(Flash,"Successfully Added");

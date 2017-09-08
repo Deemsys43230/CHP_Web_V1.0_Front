@@ -3,7 +3,7 @@
 
 <div class="page-banner" ng-cloak class="ng-cloak">
     <div class="container">
-        <div class="row min-height-450">
+        <div class="row min-height-450" ng-init="init()">
             <div class="col-lg-12 col-md-12 col-sm-12">
                 <a href="#dashboard" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back to Dashboard</a>
                 <a id="modal_workout_plan" href="#workout-plan" class="back-button pull-right margin-left-5" ng-click="reset()"><i class="fa fa-plus-circle"></i> Add Workout Plan</a>
@@ -128,7 +128,7 @@
             </div>
             
                  <div class="action_btns margin-top-20">
-                    <div class="col-lg-8 col-md-8 col-sm-8">
+                    <div class="col-lg-8 col-md-8 col-sm-8 workout-btn">
                     <div class="one_half" ng-show="isNew"><a ng-class="{modal_close:workoutPlanForm.$invalid}" class="btn btn_red" ng-disabled="workoutPlanForm.$invalid" ng-click="doAddWorkoutPlanByCoach()">Add Workout</a></div>
                     <div class="one_half" ng-hide="isNew"><a ng-class="{modal_close:workoutPlanForm.$invalid}" class="btn btn_red" ng-disabled="workoutPlanForm.$invalid || isClean()" ng-click="doAddWorkoutPlanByCoach()">Save Changes </a></div>
                     <div class="one_half last modal_close"><a onclick="return false;" class="btn back_btn">Cancel</a></div>

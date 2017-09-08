@@ -16389,7 +16389,9 @@ a.main-button:hover, input[type="submit"]:hover {
 .yellow{
     background-color: #f8ba01;
 }
-
+.orange{
+    background-color: #ffa500;
+}
 .custom-popup-wrapper {
     position: absolute;
     top: 100%;
@@ -17554,6 +17556,16 @@ div.foodvalues{
     border: none;
 }
 
+div.food-coach-values{
+    background-color: #ffeebb;
+    border: none;
+    font-size: 12px;
+}
+
+.foodview{
+    color: #000000;
+}
+
 .exercise-plans{
     position: relative;
     width: 30px;
@@ -17577,7 +17589,6 @@ div.foodvalues{
 }
 
 .exercise .time{
-    padding-left: 5px;
     background-color: #ffeebb;
     border: none;
 }
@@ -17633,6 +17644,15 @@ div.foodcalorie{
 .food-edit{
     color: #2aad2a!important;
 }
+
+.food-point{
+    display: block;
+    width: 15px;
+    height: 15px;
+    position:absolute;
+    margin-top: 3px;
+}
+
 /*Chat Selected*/
 .chat-selected{
     opacity: 0.4;
@@ -17707,4 +17727,8 @@ div.foodcalorie{
 }
 .client-view-min-height{
     height:460px;
+}
+
+.workout-btn{
+    margin-left: 17%;
 }
