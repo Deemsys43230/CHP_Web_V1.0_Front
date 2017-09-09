@@ -4,40 +4,105 @@
 <div class="page-banner" ng-cloak class="ng-cloak">
     <div class="container">
         <div class="row">
-             <div class="col-lg-12 col-md-12 col-sm-12" ng-init="coachUserInit()">
+            <div class="col-lg-12 col-md-12 col-sm-12" ng-init="init()">
     
                 <a href="#dashboard" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back <span class="hidden-md hidden-sm">to Dashboard</span></a>
                 <div flash-message="2000" class="col-lg-3 col-md-3 col-sm-3 pull-right"></div>
                 
                 <h5 class="classic-title"><a href="#my-members"><i class="fa fa-money"></i>&nbsp;&nbsp;CLIENTS</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#coach-invitations"><i class="fa fa-dollar"></i>&nbsp;&nbsp;INVITATIONS</a>&nbsp;&nbsp;|&nbsp;&nbsp;<span><a href="#coach-invitations"><i class="fa fa-envelope"></i>&nbsp;&nbsp;SEND MESSAGE</a></span></h5></h5>
             </div>           
-            <div class="col-lg-8 col-md-8 col-sm-8 margin-bottom-10">
-                <form name="adviceForm" novalidate>
-                    <p class="pull-right" ng-show="showCount && myadvice.description.length"><span class="text-bold text-red">{{ (350-myadvice.description.length) }}</span> Characters left&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
-                    <p class="pull-right" ng-hide="showCount && myadvice.description.length">&nbsp;</p>
+            <div class="col-lg-12 col-md-12 col-sm-12 margin-bottom-10">
+                <form name="messageForm" novalidate>
+                    <p class="pull-right" ng-show="showCount && sendMessage.message.length"><span class="text-bold text-red">{{ (350-sendMessage.message.length) }}</span> Characters left&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+                    <p class="pull-right" ng-hide="showCount && sendMessage.message.length">&nbsp;</p>
                     <h5 class="text-muted">Compose Your Message :</h5>
-                    <textarea class="height-150 forum-textarea" name="description" ng-model="myadvice.description" maxlength="350" ng-blur="showCount=0" ng-focus="showCount=1" required></textarea>
-                     <span ng-show="adviceForm.description.$dirty&&adviceForm.description.$invalid">
-                                      <span class="error-message textarea-errormessage40" ng-show="adviceForm.description.$error.required"><span>Required.</span></span>
-                                 </span>
-
-
-
-                    <div class="text-center">
-                        <a href="" class="btn btn-success" ng-disabled="adviceForm.$invalid || isClean()" ng-click="doInsertOrUpdateMyAdvice()">Save Advice</a>
-                        <a href="#dashboard" class="btn btn-warning">Cancel</a>
-                        <span ng-show="myadvice.status==0"><a href=""  class="btn btn-success" ng-click="doEnableDisableMyAdvice()">Enable&nbsp;</a></span>
-                        <span ng-hide="myadvice.status==0"><a href="" class="btn btn-danger" ng-click="doEnableDisableMyAdvice()">Disable</a></span>
-                    </div>
+                    <span ng-show="messageForm.description.$dirty&&messageForm.description.$invalid">
+                        <span class="error-message textarea-errormessage40" ng-show="messageForm.description.$error.required"><span>Required.</span></span>
+                    </span>
+                    <textarea class="forum-textarea" name="description" ng-model="sendMessage.message" maxlength="350" ng-blur="showCount=0" ng-focus="showCount=1" required></textarea>
                 </form>
-              
             </div>
-             <div class="col-lg-4 col-md-4 col-sm-4 margin-bottom-10">
-                    <h5 class="text-muted margin-bottom-10">Send To :&nbsp;&nbsp;</h5>
-                    <input type="radio" id="clients" value="1" ng-model="sendToType" checked="checked"><label for="clients">Individual Clients</label>
-                    <input type="radio" id="groups" value="2" ng-model="sendToType"><label for="groups">Groups</label>
-                    <h5 class="text-muted">Select Members</h5>
-              
+            <div class="col-lg-12 col-md-12 col-sm-12 margin-bottom-10">
+                <h5 class="text-muted margin-bottom-10">Send To :&nbsp;&nbsp;</h5>
+                <div>
+                    <input type="radio" id="individual" value="1" ng-model="sendToType" checked="checked"><label for="individual">Individual Clients</label>
+                    <input type="radio" id="group" value="2" ng-model="sendToType"><label for="group">Groups</label>
+                </div>       
+                <div class="col-md-12 col-lg-12 col-sm-12 no-padding row" ng-show="sendToType==1"> 
+                    <div class="coach-list">
+                        <div class="food_scrollbar" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#eee'}">
+                            <div ng-show="coachClients.length>0" class="user-view-width">  
+                                <div class="col-lg-4 col-md-4 col-sm-4 margin-top-5">
+                                    <h5 class="text-muted">{{selectText}}</h5>
+                                </div>
+                                <div class="col-lg-2 col-md-2 col-sm-2 no-padding margin-bottom-5">
+                                    <a href="" class="select-text" ng-click="doSelectAll()">Select All Members</a>
+                                </div> 
+                                <div class="col-lg-2 col-md-2 col-sm-2 no-padding margin-bottom-5">
+                                    <a href=""  class="deselect-text" ng-click="doDeselectAll()">Deselect All Members</a>
+                                </div>      
+                                <div class="col-lg-12 col-md-12 col-sm-12 margin-top-10">
+                                    <div class="col-lg-4 col-md-4 col-sm-12 no-padding" ng-repeat= "coachclient in coachClients">
+                                        <div class="col-md-2 no-padding margin-top-30">
+                                            <checkbox-group>
+                                                <span class="fh-checkbox">
+                                                    <input type="checkbox" id="{{coachclient.userid}}" ng-model="coachclient.isSelected" ng-true-value="true" ng-false-value="false"/>&nbsp;&nbsp;
+                                                    <label class="no-padding" for="{{coachclient.userid}}" style="cursor:default;"></label>&nbsp;
+                                                </span>
+                                            </checkbox-group>
+                                        </div>
+                                        <div class="user-view col-md-10 col-lg-10 col-sm-10">
+                                            <div class="col-lg-2 col-md-2 col-sm-2 no-padding">
+                                                <img class="img-circle" ng-src="{{coachclient.imageurl | trusted}}">
+                                            </div>
+                                            <div class="col-lg-10 col-md-10 col-sm-10 no-padding margin-top-5">
+                                                <h4 class="col-lg-12 col-md-12 col-sm-12">{{coachclient.name}}</h4>
+                                                <p class="col-lg-12 col-md-12 col-sm-12">{{coachclient.emailid}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>                                    
+                            </div>
+                            <div ng-show="coachclientfilter.length==0" class="text-center margin-top-50">
+                                <img src="../../images/no-coach-small.png" width="120" height="120"/>
+                                <h3 class="text-gray">NO USER FOUND!!!</h3><br/>
+                            </div>
+                        </div>
+                    </div>              
+                </div>
+                <div class="margin-top-10 col-md-12 col-lg-12 col-sm-12 no-padding row" ng-show="sendToType==2">
+                    <div class="food_scrollbar" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#eee'}">
+                        <div class="col-md-12 col-lg-12 col-sm-12 no-padding">
+                            <div class="col-lg-4 col-md-4 col-sm-4">
+                                <h5 class="text-muted">{{selectText}}</h5>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-2 no-padding margin-bottom-5">
+                                <a href="" class="select-text" ng-click="doSelectAll()">Select All Members</a>
+                            </div> 
+                            <div class="col-lg-2 col-md-2 col-sm-2 no-padding margin-bottom-5">
+                                <a href=""  class="deselect-text" ng-click="doDeselectAll()">Deselect All Members</a>
+                            </div>
+                        </div>
+                        <ul class="group-menu remove-style">
+                            <li class="col-lg-4 col-md-4 col-sm-12 no-padding margin-top-10" ng-repeat="group in groupsList">
+                                <div class="col-md-2 no-padding margin-top-25">
+                                    <checkbox-group>
+                                        <span class="fh-checkbox">
+                                            <input type="checkbox" id="{{group.id}}" ng-model="group.isSelected" ng-true-value="true" ng-false-value="false"/>&nbsp;&nbsp;
+                                            <label class="no-padding" for="{{group.id}}" style="cursor:default;"></label>&nbsp;
+                                        </span>
+                                    </checkbox-group>
+                                </div>
+                                <div class="col-md-10 no-padding">
+                                    <a href=""><i class="fa fa-group"></i> &nbsp;{{group.groupname}}</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center">
+                <a href="" class="btn btn-success" ng-disabled="messageForm.$invalid || isClean()" ng-click="doSendGroupMessage()">Send Message</a>
             </div>
         </div><!-- @end #content -->
     </div><!-- @end #w -->

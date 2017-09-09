@@ -121,7 +121,8 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                             files:[
                                 '../../plugin/vertical-carousel/vertical-carousel.js',
                                 '../../angular/angular-utils-pagination/dirPagination.js',
-                                '../../app/coachComposeMessage/coachComposeMessageController.js'
+                                '../../app/coachComposeMessage/coachComposeMessageController.js',
+                                '../../css/custom-inputs.css',
                             ]
                         })
                     }]

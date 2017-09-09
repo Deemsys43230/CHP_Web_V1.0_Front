@@ -17732,7 +17732,57 @@ div.foodcalorie{
 .client-view-min-height{
     height:460px;
 }
+/* for coach send message */
+.user-view-width{
+    padding-right: 15px;
+}
 
+.user-view{
+    margin: 1px 0 5px 0px;
+    padding:5px;
+    -webkit-box-shadow: 0 0 3px rgba(0,0,0,0.3);
+    -moz-box-shadow: 0 0 3px rgba(0,0,0,0.3);
+    box-shadow: 0 0 3px rgba(0,0,0,0.3);
+}
+.user-view .img-circle{
+    border:2px solid #efefef;
+}
+.margin-top-25{
+    margin-top: 25px;
+}
+
+ul.group-menu{
+    margin-left: 15px !important;
+    width: 91%;
+    display: block;
+}
+
+ul.group-menu li{
+    list-style:none;
+}
+
+ul.group-menu li a{
+    display: block;
+    color: #666;
+    width: 100% !important;
+    border-bottom: 1px solid #ccc;
+    padding:8px 12px !important ;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    margin-bottom: 5px;
+}
+.deselect-text{
+    color: red !important;
+    font-weight: bold ! important;
+    font-size: 14px;
+    text-decoration: underline !important;
+}
+.select-text{
+    color: #5cb85c !important;
+    font-weight: bold ! important;
+    font-size: 14px;
+    text-decoration: underline !important;
+}
 .workout-btn{
     margin-left: 17%;
 }
