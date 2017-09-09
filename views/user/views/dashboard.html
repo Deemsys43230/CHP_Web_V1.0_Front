@@ -1482,8 +1482,8 @@
                 </div>
 
                 <div class="action_btns margin-top-20">
-                    <div class="one_half" ng-show="isNew"><a href="#" onclick="return false;" ng-disabled="ExerciseAddForm.$invalid ||current==0" class="btn btn_blue modal_close" ng-click="doInsertUserExercise()">Add Exercise</a></div>
-                    <div class="one_half" ng-hide="isNew"><a href="#" onclick="return false;" ng-disabled="ExerciseAddForm.$invalid ||  isCleanExercise() || current==0" class="btn btn_blue modal_close" ng-click="doUpdateUserExercise()">Update Exercise</a></div>
+                    <div class="one_half" ng-show="isNew"><a href="#" onclick="return false;" ng-disabled="ExerciseAddForm.$invalid ||userExercise.workoutvalue==0" class="btn btn_blue modal_close" ng-click="doInsertUserExercise()">Add Exercise</a></div>
+                    <div class="one_half" ng-hide="isNew"><a href="#" onclick="return false;" ng-disabled="ExerciseAddForm.$invalid ||  isCleanExercise() || userExercise.workoutvalue==0" class="btn btn_blue modal_close" ng-click="doUpdateUserExercise()">Update Exercise</a></div>
                     <div class="one_half last modal_close"><a class="btn btn_red">Cancel</a></div>
                 </div>
             </div>
