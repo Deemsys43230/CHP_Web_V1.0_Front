@@ -52,8 +52,14 @@
                     <th class="col-md-9 text-center"><strong>Excercise Name</strong></th>
                 </tr>
                 <tr ng-repeat="workoutPlanDetail in workoutPlanDetailList" ng-init="$last ? doIntializeLeanModal() : null">
-                    <td class="col-md-1 food-plans text-center align-bottom">{{workoutPlanDetail.day}}
-                       <div valign="bottom"><a href="modal-add-exercise" class="food-plan-add-food text-bottom modal_trigger_exercise" ng-click="doCoachAddExercise(workoutPlanDetail.day)">Add Exercise</a></div>     
+                    <td class="col-md-1 food-plans text-center align-bottom">
+                        {{workoutPlanDetail.day}}
+                        <div valign="bottom"><a href="modal-add-exercise" class="food-plan-add-food text-bottom modal_trigger_exercise" ng-click="doCoachAddExercise(workoutPlanDetail.day)">Add Exercise</a></div>
+                        <div class="caloriediv">
+                            <div class="calorieunit">KCals</div>
+                            <div class="foodcalorie"><strong>{{workoutPlanDetail.totalCalories}}</strong>
+                        <div>
+                            
                     </td>
                     <td class="exercise-plans">
                         <div class="col-md-4" ng-repeat="workoutItem in workoutPlanDetail.workouts">

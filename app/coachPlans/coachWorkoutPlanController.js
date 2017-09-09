@@ -144,8 +144,8 @@ $scope.doviewCoachWorkoutPlans=function(){
          $scope.workoutPlanDetailList.push(
           {
               "day":"Day "+i,
-              "dayId": i,
-              "actualCalories": 0,
+              "dayId":i,
+              "totalCalories":0,
               "workouts":[]
           }
          );
@@ -154,7 +154,7 @@ $scope.doviewCoachWorkoutPlans=function(){
       //Group json object
       $.each($scope.plan, function (key, obj) {
               if(key!='plandetail'){
-                // $scope.mealPlanDetailList[key.substring(3)-1].totalCalories=(obj.actualcalories).toFixed(2);
+                $scope.workoutPlanDetailList[key.substring(3)-1].totalCalories=(obj.actualcalories).toFixed(2);
                 $.each(obj.workouts, function (index, value) {
                 $scope.workoutPlanDetailList[value.day-1].workouts.push(value);
                 console.log($scope.workoutPlanDetailList);

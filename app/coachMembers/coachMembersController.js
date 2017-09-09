@@ -1633,11 +1633,11 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
         };
 
     // Do get Assigned Meal Plans to User    
-    $scope.doGetAssignedUserPlanByCoach=function(targetid){
+    $scope.doGetAssignedMealPlanByCoach=function(targetid){
         $scope.getUserMealPlanParams={
             "targetid":targetid,
-            "limit":$scope.pagination.itemsPerPage,
-            "offset":($scope.pagination.pageNumber-1)*$scope.pagination.itemsPerPage
+            "limit":$scope.mealPlanPagination.itemsPerPage,
+            "offset":($scope.mealPlanPagination.pageNumber-1)*$scope.mealPlanPagination.itemsPerPage
         };   
         requestHandler.postRequest("coach/getplans/",$scope.getUserMealPlanParams).then(function(response){
             $scope.userMealPlanList=response.data;
@@ -1699,15 +1699,78 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
         });
     };  
 
+    //Workout Plan
+    $scope.doGetAssignedWorkoutPlanByCoach=function(targetid){
+        $scope.workPlanDetailView=false;
+
+       $scope.getWorkoutPlanParams={
+            "targetid":targetid,
+            "limit":$scope.workoutPlanPagination.itemsPerPage,
+            "offset":($scope.workoutPlanPagination.pageNumber-1)*$scope.workoutPlanPagination.itemsPerPage
+        };   
+        requestHandler.postRequest("coach/getplans/",$scope.getWorkoutPlanParams).then(function(response){
+            $scope.userworkoutPlanList=response.data;
+        }, function(){
+            errorMessage(Flash,"Please try again later!")
+        });
+    };
+
+    //Laod Food Meal Plan Details
+    $scope.doLoadWorkoutPlanDetails=function(mapId){
+        $scope.workPlanDetailView=true;
+
+        requestHandler.postRequest("getplandetail/",{"mapid":mapId}).then(function(response){
+        $scope.plan= response.data.plan;
+            //First We need to group up days
+            $scope.plandetail=response.data.plandetail;
+           
+            //Initialize
+            $scope.workoutPlanDetailList=[];
+
+            for(var i=1; i<=$scope.plandetail.plandays; i++){
+                $scope.workoutPlanDetailList.push(
+                {
+                  "day":"Day "+i,
+                  "dayId": i,
+                  "date": "dd/mm/yyyy",
+                  "totalCalories":0,
+                  "consumedCalories":0,
+                  "workouts":[]
+                }
+                );
+            }
+
+          // Group Json object of plan 
+          $.each($scope.plandetail, function (key, obj) {            
+              if(key.startsWith("day")){
+                $scope.workoutPlanDetailList[key.substring(3)-1].totalCalories= (obj.actualcalories).toFixed(2);
+                $scope.workoutPlanDetailList[key.substring(3)-1].consumedcalories= (obl.consumedcalories).toFixed(2);
+                $scope.workoutPlanDetailList[key.substring(3)-1].date= obj.date;
+                $.each(obj.workouts, function (index, value) {
+                 $scope.workoutPlanDetailList[value.day-1].workouts.push(value);
+                });
+              }              
+          });
+
+        },function(){
+            errorMessage(Flash,"Please try again later!")
+        });
+    };
     //Initial Load
     $scope.init = function(){
         $scope.paginationLoad=false;
         $scope.pagination={"itemsPerPage":9,"pageNumber":1};
         $scope.doGetIndividualClientDetail($routeParams.id);
+        $scope.mealPlanPagination={"itemsPerPage":10,"pageNumber":1};
+        $scope.workoutPlanPagination={"itemsPerPage":10,"pageNumber":1};
     };
 
     $scope.$watch("mealPlanPagination.pageNumber",function(){
-        $scope.doGetAssignedUserPlanByCoach($routeParams.id);
+        $scope.doGetAssignedMealPlanByCoach($routeParams.id);
+    });
+
+    $scope.$watch("workoutPlanPagination.pageNumber", function(){
+        $scope.doGetAssignedWorkoutPlanByCoach($routeParams.id);
     });
 
     //Initial Load

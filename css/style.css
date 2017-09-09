@@ -6795,6 +6795,9 @@ h4.count-text{
 .padding-left-10{
     padding-left:10!important;
 }
+.padding-left-15{
+    padding-left:15px!important;
+}
 .padding-right-0{
     padding-right:0!important;
 }
@@ -17647,10 +17650,11 @@ div.foodcalorie{
 
 .food-point{
     display: block;
-    width: 15px;
-    height: 15px;
+    height: 16px;
+    width: 5px;
     position:absolute;
     margin-top: 3px;
+    margin-left: 9px;
 }
 
 /*Chat Selected*/
