@@ -604,6 +604,7 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
 
     //Laod Food Meal Plan Details
     $scope.doLoadWorkoutPlanDetails=function(mapId){
+        $scope.currentWorkoutPlanDetail=mapId;
         $scope.workPlanDetailView=true;
 
         requestHandler.postRequest("getplandetail/",{"mapid":mapId}).then(function(response){
@@ -619,6 +620,9 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
                 {
                   "day":"Day "+i,
                   "dayId": i,
+                  "date": "dd/mm/yyyy",
+                  "totalCalories":0,
+                  "burntcalories":0,
                   "workouts":[]
                 }
                 );
@@ -627,6 +631,9 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
           // Group Json object of plan 
           $.each($scope.plandetail, function (key, obj) {            
               if(key.startsWith("day")){
+                $scope.workoutPlanDetailList[key.substring(3)-1].totalCalories=(obj.actualcalories).toFixed(2);
+                $scope.workoutPlanDetailList[key.substring(3)-1].burntcalories=(obj.burntcalories).toFixed(2);
+                $scope.workoutPlanDetailList[key.substring(3)-1].date=obj.date;
                 $.each(obj.workouts, function (index, value) {
                  $scope.workoutPlanDetailList[value.day-1].workouts.push(value);
                 });
@@ -637,6 +644,58 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
             errorMessage(Flash,"Please try again later!")
         });
     };
+
+    // View Workout Plan Details
+    $scope.doViewExerciseItemFromWorkoutPlan=function(workoutplanid,date){
+        $(function(){
+            $("#lean_overlay").fadeTo(1000);
+            $("#view-workout-item").fadeIn(600);
+            $(".common_model").show();
+            $("html, body").animate({
+                scrollTop: 0
+            }, 600);
+            $scope.shouldBeOpen = true;
+        });
+
+        $scope.getExerciseItemParam={'id':workoutplanid, 'date':date};
+        requestHandler.postRequest("user/getexerciseitemdetail/", $scope.getExerciseItemParam).then(function(response){
+            $scope.workoutPlanItemDetails= response.data.plandetail;
+        }, function(){
+            errorMessage(Flash,"Please try again later!");
+        });
+
+        $(".modal_close").click(function(){
+            $(".common_model").hide();
+            $("#view-workout-item").hide();
+            $("#lean_overlay").hide();
+            $scope.shouldBeOpen = false;
+        });
+
+        $("#lean_overlay").click(function(){
+            $(".common_model").hide();
+            $("#view-workout-item").hide();
+            $("#lean_overlay").hide();
+            $scope.shouldBeOpen = false;
+        });
+    };
+
+    // Set or Unset Workout Item By User
+    $scope.doSetUnsetExerciseItem= function(workoutplanid,date){
+        $scope.getExerciseItemParam={'id':workoutplanid, 'date':date};
+        requestHandler.postRequest("user/setorunsetworkoutplan/", $scope.getExerciseItemParam).then(function(response){
+           if(response.data.Response_status==1){
+                $scope.doLoadWorkoutPlanDetails($scope.currentWorkoutPlanDetail);
+                $(function(){
+                    $(".common_model").hide();
+                    $("#view-workout-item").hide();
+                    $("#lean_overlay").hide();
+                });
+                successMessage(Flash,"Successfully Updated!");
+           }
+        }, function(){
+            errorMessage(Flash,"Please try again later!");
+        });
+    }
 
     $scope.userCoachViewInit=function(){
         $scope.scrollnation={"itemsPerScroll": 4,"scrollEndCount":-1};

@@ -17621,6 +17621,13 @@ div.food-coach-values{
     vertical-align: bottom;
 }
 
+div.workoutcalorie{
+    color:#FF3232;
+    padding: 5px;
+    border: solid 1px #fc3;
+    font-size: 12px;
+}
+
 div.foodcalorie{
     color:#1bbb1b;
     padding: 5px;
@@ -17641,6 +17648,14 @@ div.foodcalorie{
 }
 
 .food-consumed-btn .ng-hide.ng-hide-animate {
+    display: none !important;
+}
+
+.exercise-btn{
+    margin-bottom: 10px;
+}
+
+.exercise-btn .ng-hide.ng-hide-animate {
     display: none !important;
 }
 
