@@ -17801,3 +17801,8 @@ ul.group-menu li a{
 .workout-btn{
     margin-left: 17%;
 }
+.assign-text-color{
+    color: blue !important;
+    font-weight: bold ! important;
+    font-size: 12px;
+}

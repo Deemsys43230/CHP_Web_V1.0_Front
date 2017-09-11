@@ -117,7 +117,7 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
     };
 
     // For Assign to Group  
-    $scope.SelectModel =function(param){
+ /*   $scope.SelectModel =function(param){
         //Intialize the array
         $scope.selectedClientId=[];
 
@@ -134,20 +134,7 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
                 $("#groupMessage").modal('show');
             }
         }
-    };
-
-    $scope.doAssignGroup = function(){
-        alert($scope.assignGroup);
-        $.each($scope.selectedClientId,function(index,value){
-            alert(value);
-             requestHandler.postRequest("coach/assignusertogroup/",{"groupid":$scope.assignGroup,"userid":value}).then(function(response){
-             },function(){
-                successMessage(Flash, "Successfully Added!");
-                $scope.doGetAllClients();
-            });
-        });
-       
-    };
+    };*/
 
     // For clients individual User profile view
     $scope.doGetClientsProfileDetailsByCoach= function (id){
@@ -1832,12 +1819,17 @@ coachApp.controller('MyMembersController',['$scope','requestHandler','Flash','$r
             });
         })
     };
+    //Get Groups List for popup
+
+    $scope.doGetGroup=function(){
+       requestHandler.getRequest("coach/getGroups/").then(function(response){
+            $scope.groupList=[];
+            $scope.groupList=response.data.Groups;
+        });
+    };
 
     //Send Group Message
     $scope.doSendGroupMessage=function(groupid){
-       /* $scope.groupList=[];
-        $scope.groupList.push(groupid);
-        $scope.param={"message":$scope.composeMessage,"targerid"{"userid":[],"groupid":$scope.groupList}};*/
         requestHandler.postRequest("coach/sendGroupMessage/",function(response){
             successMessage(Flash,"Successfully Send!");
         });
@@ -1847,14 +1839,46 @@ coachApp.controller('MyMembersController',['$scope','requestHandler','Flash','$r
         $scope.removingUserId=userid;
     };
 
+    $scope.setAssignUserId=function(userid){
+        $scope.assignUserId=userid;
+         $scope.assignGroup="";
+         $scope.assignGroupName = "Un Assigned";
+    };
+
+    $scope.setReassignUserId = function(userid,groupid){
+        $scope.assignUserId=userid;
+        $scope.assignGroupId=groupid;
+        $scope.assignGroup ="";
+        requestHandler.getRequest("coach/getGroups/").then(function(response){
+            $scope.groupsList=[];
+            $scope.groupsList=response.data.Groups;     
+            $.each($scope.groupsList,function(index,value){
+
+                if($scope.assignGroupId == value.id){
+                    $scope.reAssigngroupName = value.groupname;
+                }
+            });
+        })
+    }
+
     $scope.removeClientFromList=function(){
         requestHandler.postRequest("coach/removeuser/",{"userid":$scope.removingUserId}).then(function(response){
             $scope.getMyClientsList();
         });
     };
 
+    $scope.doAssignGroup = function(){
+        requestHandler.postRequest("coach/assignusertogroup/",{"groupid":$scope.assignGroup,"userid":$scope.assignUserId}).then(function(response){
+            successMessage(Flash, "Successfully Added!");
+            $scope.getMyClientsList();
+            $scope.doGetGroupList();
+        });             
+    };
+
     $scope.doIntializeLeanModal=function(){
         $(".confirm-delete-modal").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
+        $(".assign-modal").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
+        $(".re-assign-modal").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
     };
 
     $scope.doFilterGroup=function(id){
@@ -1865,6 +1889,7 @@ coachApp.controller('MyMembersController',['$scope','requestHandler','Flash','$r
 
     $scope.init=function(){
         $scope.doGetGroupList();
+        $scope.doGetGroup();
         $scope.selectedGroupId=-1;
         $scope.getMyClientsList();   
         
