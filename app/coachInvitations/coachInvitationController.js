@@ -6,7 +6,7 @@ var coachApp = angular.module('coachApp', ['ngRoute','oc.lazyLoad','requestModul
 coachApp.controller('CoachInvitationController',['$scope','requestHandler','Flash',function($scope,requestHandler,Flash) {
 
 
-
+  $scope.activeClass.my='active';
     $scope.doGetUserListByCoach=function(loadUserDetail){   
 
         if(loadUserDetail){

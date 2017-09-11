@@ -17806,3 +17806,13 @@ ul.group-menu li a{
     font-weight: bold ! important;
     font-size: 12px;
 }
+.message_scrollbar
+{
+    position: relative;
+    width: 99%!important;
+    max-height: 270px;
+    background: none;
+    overflow-y: scroll;
+    overflow-x:hidden;
+    word-wrap: break-word;
+}

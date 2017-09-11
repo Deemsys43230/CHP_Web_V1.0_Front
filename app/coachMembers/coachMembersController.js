@@ -6,6 +6,7 @@ var coachApp = angular.module('coachApp', ['ngRoute','oc.lazyLoad','requestModul
 coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter","Flash","$location","$rootScope","$routeParams",function($scope,requestHandler,$filter,Flash,$location,$rootScope,$routeParams) {
 
     $scope.isActive=false;
+    $scope.activeClass.my='active';
 
     $scope.viewload=false;
 
@@ -1869,7 +1870,7 @@ coachApp.controller('MyMembersController',['$scope','requestHandler','Flash','$r
 
     $scope.doAssignGroup = function(){
         requestHandler.postRequest("coach/assignusertogroup/",{"groupid":$scope.assignGroup,"userid":$scope.assignUserId}).then(function(response){
-            successMessage(Flash, "Successfully Added!");
+            successMessage(Flash, "Successfully Updated!");
             $scope.getMyClientsList();
             $scope.doGetGroupList();
         });             
