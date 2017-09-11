@@ -179,10 +179,12 @@ $scope.doIntializeLeanModal=function()
 $scope.doCoachAddExercise=function(planDay){
 
     $scope.userExercise={};
+    $scope.userSelectedExerciseDetails={};
     $scope.userExercise.day= planDay;
     $scope.showSearch=true;
-    $scope.addExcercise=false;
+    $scope.addExercise=false;
     $scope.isNew=true;
+    $scope.selectedExercise="";
     $scope.title= "Add Exercise";
 
     $(function(){
@@ -285,12 +287,14 @@ $scope.doCalculateCaloriesExercise=function(){
 
 $scope.doEditExerciseFromPlan=function(id){
   $scope.userExercise={};
-    requestHandler.postRequest("coach/exerciseplandetail/",id).then(function(response){
+    requestHandler.postRequest("coach/exerciseplandetail/",{"id":id}).then(function(response){
         $scope.userSelectedExerciseDetails= response.data.exercisedetail;
         $scope.userSavedExerciseDetails= response.data.savedexerciseplan;
 
-        $.each($scope.userSavedExerciseDetails.levels,function(index,value){
-           if(value.levels.levelid==$scope.userSavedExerciseDetails.unitlevelid){
+        $.each($scope.userSelectedExerciseDetails.levels.levels,function(index,value){
+          console.log($scope.userSelectedExerciseDetails.levels);
+          console.log(value);
+           if(value.levelid==$scope.userSavedExerciseDetails.unitlevelid){
               $scope.userExercise.selectedLevel=value;
            }
         });  
@@ -298,7 +302,7 @@ $scope.doEditExerciseFromPlan=function(id){
         $scope.userExercise.id= $scope.userSavedExerciseDetails.id;
         $scope.userExercise.day= $scope.userSavedExerciseDetails.day;
         $scope.doCalculateCaloriesExercise();
-        $scope.userFood.calorieburn=$scope.caloriesSpent;      
+        $scope.userExercise.calorieburn=$scope.userSavedExerciseDetails.calorieburn;      
     });
 
         $scope.addExercise=true;
@@ -317,7 +321,6 @@ $scope.doEditExerciseFromPlan=function(id){
                 $(".user_register").hide();
                 $("#modal-add-exercise").hide();
                 $("#lean_overlay").hide();
-                $scope.resetdata();
             });
 
             $("#lean_overlay").click(function(){
@@ -335,6 +338,10 @@ $scope.doInsertExerciseByCoach=function(){
     $scope.userExercise.exerciseid=$scope.userSelectedExerciseDetails.exerciseid;
     $scope.userExercise.unitlevelid= $scope.userExercise.selectedLevel.levelid;
     $scope.userExercise.isoptional=1;
+
+    if($scope.userExercise.planid==1){
+      $scope.userExercise.calorieburn=0;
+    }
 
     requestHandler.postRequest("coach/insertorupdateexerciseplan/",$scope.userExercise).then(function(response){
         if(response.data.Response_status==1){
