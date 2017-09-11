@@ -7,7 +7,6 @@
             <div class="col-lg-12 col-md-12 col-sm-12" ng-init="init()">
     
                 <a href="#dashboard" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back <span class="hidden-md hidden-sm">to Dashboard</span></a>
-                <div flash-message="2000" class="col-lg-3 col-md-3 col-sm-3 pull-right"></div>
                 
                 <h5 class="classic-title"><a href="#my-members"><i class="fa fa-money"></i>&nbsp;&nbsp;CLIENTS</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#coach-invitations"><i class="fa fa-dollar"></i>&nbsp;&nbsp;INVITATIONS</a>&nbsp;&nbsp;|&nbsp;&nbsp;<span><a href="#coach-invitations"><i class="fa fa-envelope"></i>&nbsp;&nbsp;SEND MESSAGE</a></span></h5></h5>
             </div>           
@@ -24,23 +23,25 @@
             </div>
             <div class="col-lg-12 col-md-12 col-sm-12 margin-bottom-10">
                 <h5 class="text-muted margin-bottom-10">Send To :&nbsp;&nbsp;</h5>
-                <div>
+                <div class="col-md-9 col-lg-9 col-sm-9 no-padding">
                     <input type="radio" id="individual" value="1" ng-model="sendToType" checked="checked"><label for="individual">Individual Clients</label>
                     <input type="radio" id="group" value="2" ng-model="sendToType"><label for="group">Groups</label>
-                </div>       
+                    
+                </div>
+                <div flash-message="2000" class="col-lg-3 col-md-3 col-sm-3 pull-right"></div>       
                 <div class="col-md-12 col-lg-12 col-sm-12 no-padding" ng-show="sendToType==1"> 
                     <div class="coach-list">
                         <div class="food_scrollbar" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#eee'}">
                             <div ng-show="coachClients.length>0" class="user-view-width"> 
                                 <div class="col-md-12 col-lg-12 col-sm-12 no-padding classic-title"> 
-                                    <div class="col-lg-10 col-md-10 col-sm-8 no-padding">
+                                    <div class="col-lg-10 col-md-10 col-sm-10 no-padding">
                                         <h5 class="text-muted">{{selectText}}</h5>
                                     </div>
-                                    <div class="col-lg-1 col-md-1 col-sm-2 no-padding">
-                                        <a href="" class="select-text pull-right" ng-click="doSelectAll()">Select All</a>
-                                    </div> 
-                                    <div class="col-lg-1 col-md-1 col-sm-2 no-padding">
-                                        <a href=""  class="deselect-text pull-right" ng-click="doDeselectAll()">Deselect All</a>
+                                    
+                                    <div class="col-lg-2 col-md-2 col-sm-2 no-padding">
+                                        <a href="" class="select-text" ng-click="doSelectAll()">Select All</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+                                        <a href="" class="deselect-text" ng-click="doDeselectAll()">Deselect All</a>
+                                        
                                     </div>
                                 </div>      
                                 <div class="col-lg-12 col-md-12 col-sm-12 margin-top-10">
@@ -73,16 +74,14 @@
                     </div>              
                 </div>
                 <div class="margin-top-10 col-md-12 col-lg-12 col-sm-12 no-padding" ng-show="sendToType==2">
-                    <div class="food_scrollbar" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#eee'}">
+                    <div class="food_scrollbar" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#eee'}"> 
                         <div class="col-md-12 col-lg-12 col-sm-12 no-padding classic-title">
-                            <div class="col-lg-10 col-md-10 col-sm-8 no-padding">
+                            <div class="col-lg-10 col-md-10 col-sm-10 no-padding">
                                 <h5 class="text-muted">{{selectText}}</h5>
-                            </div>                            
-                            <div class="col-lg-1 col-md-1 col-sm-2 no-padding">
-                                <a href="" class="select-text pull-right" ng-click="doSelectAll()">Select All</a>
-                            </div> 
-                            <div class="col-lg-1 col-md-1 col-sm-2 no-padding">
-                                <a href=""  class="deselect-text pull-right" ng-click="doDeselectAll()">Deselect All</a>
+                            </div>                          
+                            <div class="col-lg-2 col-md-2 col-sm-2 no-padding">
+                                <a href="" class="select-text" ng-click="doSelectAll()">Select All</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+                                <a href="" class="deselect-text" ng-click="doDeselectAll()">Deselect All</a>
                             </div>
                         </div>
                         <ul class="group-menu remove-style">
