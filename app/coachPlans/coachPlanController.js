@@ -7,7 +7,8 @@ $scope.doGetCoachPlanList=function(){
   $scope.loaded=true;
 	$scope.coachPlanPagination={
 						"limit": $scope.mealPagination.itemsPerPage,
-						"offset":($scope.mealPagination.pageNumber-1)*$scope.mealPagination.itemsPerPage
+						"offset":($scope.mealPagination.pageNumber-1)*$scope.mealPagination.itemsPerPage,
+            "plantype": 1
 					};
 
    requestHandler.postRequest("coach/myplans/",$scope.coachPlanPagination).then(function(response){
@@ -116,7 +117,7 @@ $scope.doDeleteCoachMealPlan=function(id){
 $scope.init=function(){
   $scope.original={};
 	$scope.paginationLoad=false;
-	$scope.mealPagination={"itemsPerPage":10,"pageNumber":1};
+	$scope.mealPagination={"itemsPerPage":8,"pageNumber":1};
 	
 };
 

@@ -472,7 +472,8 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
        $scope.getMealPlanParams={
             "targetid":targetid,
             "limit":$scope.mealPlanPagination.itemsPerPage,
-            "offset":($scope.mealPlanPagination.pageNumber-1)*$scope.mealPlanPagination.itemsPerPage
+            "offset":($scope.mealPlanPagination.pageNumber-1)*$scope.mealPlanPagination.itemsPerPage,
+            "plantype": 1
         };   
         requestHandler.postRequest("user/getplans/",$scope.getMealPlanParams).then(function(response){
             $scope.myMealPlanList=response.data;
@@ -580,6 +581,14 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
                     $("#lean_overlay").hide();
                 });
                 successMessage(Flash,"Successfully Updated!");
+           }else if(response.data.Response_status==2){
+                $scope.doLoadMealPlanDetails($scope.currentPlanDetail);
+                $(function(){
+                    $(".common_model").hide();
+                    $("#view-meal-item").hide();
+                    $("#lean_overlay").hide();
+                });
+                errorMessage(Flash,"Future date Food logs are not allowed");
            }
         }, function(){
             errorMessage(Flash,"Please try again later!");
@@ -593,7 +602,8 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
        $scope.getWorkoutPlanParams={
             "targetid":targetid,
             "limit":$scope.workoutPlanPagination.itemsPerPage,
-            "offset":($scope.workoutPlanPagination.pageNumber-1)*$scope.workoutPlanPagination.itemsPerPage
+            "offset":($scope.workoutPlanPagination.pageNumber-1)*$scope.workoutPlanPagination.itemsPerPage,
+            "plantype": 2
         };   
         requestHandler.postRequest("user/getplans/",$scope.getWorkoutPlanParams).then(function(response){
             $scope.myworkoutPlanList=response.data;
@@ -622,7 +632,7 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
                   "dayId": i,
                   "date": "dd/mm/yyyy",
                   "totalCalories":0,
-                  "burntcalories":0,
+                  "burntCalories":0,
                   "workouts":[]
                 }
                 );
@@ -632,7 +642,7 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
           $.each($scope.plandetail, function (key, obj) {            
               if(key.startsWith("day")){
                 $scope.workoutPlanDetailList[key.substring(3)-1].totalCalories=(obj.actualcalories).toFixed(2);
-                $scope.workoutPlanDetailList[key.substring(3)-1].burntcalories=(obj.burntcalories).toFixed(2);
+                $scope.workoutPlanDetailList[key.substring(3)-1].burntCalories=(obj.burntcalories).toFixed(2);
                 $scope.workoutPlanDetailList[key.substring(3)-1].date=obj.date;
                 $.each(obj.workouts, function (index, value) {
                  $scope.workoutPlanDetailList[value.day-1].workouts.push(value);
@@ -691,6 +701,14 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
                     $("#lean_overlay").hide();
                 });
                 successMessage(Flash,"Successfully Updated!");
+           }else if(response.data.Response_status==2){
+                $scope.doLoadWorkoutPlanDetails($scope.currentWorkoutPlanDetail);
+                $(function(){
+                    $(".common_model").hide();
+                    $("#view-meal-item").hide();
+                    $("#lean_overlay").hide();
+                });
+                errorMessage(Flash,"Future date Exercise logs are not allowed");
            }
         }, function(){
             errorMessage(Flash,"Please try again later!");

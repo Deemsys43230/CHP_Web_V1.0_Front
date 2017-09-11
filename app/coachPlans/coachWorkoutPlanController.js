@@ -7,7 +7,8 @@ $scope.doGetCoachWorkoutPlanList=function(){
   $scope.loaded=true;
   $scope.coachWorkoutPlanPagination={
   									"limit": $scope.pagination.itemsPerPage,
-  									"offset": ($scope.pagination.pageNumber-1)*$scope.pagination.itemsPerPage
+  									"offset": ($scope.pagination.pageNumber-1)*$scope.pagination.itemsPerPage,
+                    "plantype": 2
   									};
 
    requestHandler.postRequest("coach/myplans/",$scope.coachWorkoutPlanPagination).then(function(response){
@@ -119,7 +120,7 @@ $scope.doDeleteCoachWorkoutPlan=function(id){
 
 $scope.init=function(){
   var original="";
-	$scope.pagination= {"itemsPerPage": 10, "pageNumber": 1}
+	$scope.pagination= {"itemsPerPage": 8, "pageNumber": 1}
 	$scope.paginationLoad=false;
 };
 
@@ -157,7 +158,6 @@ $scope.doviewCoachWorkoutPlans=function(){
                 $scope.workoutPlanDetailList[key.substring(3)-1].totalCalories=(obj.actualcalories).toFixed(2);
                 $.each(obj.workouts, function (index, value) {
                 $scope.workoutPlanDetailList[value.day-1].workouts.push(value);
-                console.log($scope.workoutPlanDetailList);
                 });
               }              
           });
