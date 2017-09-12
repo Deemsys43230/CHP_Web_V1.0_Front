@@ -1440,6 +1440,11 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
 
     //Do Send Chat Message
     $scope.doSendChatMessage=function(){
+          var chatlen=$scope.chat.message.length;
+        if(chatlen ==0)
+        {
+            return false;
+        }
          $scope.getSendMessageParam={"targetid":$scope.currentChatTargetId,"message":$scope.chat.message};
         requestHandler.postRequest("/sendMessage/",$scope.getSendMessageParam).then(function(response){
             $scope.doGetChatMessage($scope.currentChatTargetId);

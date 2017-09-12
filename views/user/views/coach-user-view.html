@@ -643,6 +643,18 @@
             $('#chat_container').getNiceScroll(0).doScrollPos(0,800);
        }
     }         
+    $(document).on('click', '#btn-input', function (e) {
+ var myDiv=$("#chat_container");
+   myDiv.animate({ scrollTop: myDiv.prop("scrollHeight")- myDiv.height() }, 1000);
+});
+     $(document).on('keypress', '#btn-input', function (e) {
+
+    if (e.which == 13) {
+        var scope = $('#btn-input').scope();
+        scope.doSendChatMessage();
+    return false; 
+    }   
+   });
 
     $(document).on('focus', '.panel-footer input.chat_input', function (e) {
         var $this = $(this);
