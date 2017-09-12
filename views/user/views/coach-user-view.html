@@ -396,7 +396,7 @@
 
                 <div class="chat-window col-xs-5 col-md-3" id="chat_window_1">
                     <div class="col-xs-12 col-md-12">
-                        <div class="panel panel-default">
+                        <div class="panel panel-default" style="margin-bottom:0px;">
                             <div class="panel-heading chat-top-bar">
                                 <div class="col-md-8 col-xs-8">
                                     <h3 class="panel-title"><span class="glyphicon glyphicon-comment"></span> Chat - {{usercoachdetails.firstname}}</h3>
@@ -664,21 +664,19 @@
         $( "#chat_window_1" ).remove();
     });
     
-    $(window).scroll(function(){
-      if($(window).scrollTop() + $(window).height() > ($(document).height()-185)) {
-      $("#chat_window_1").animate({
-                 
-                'margin-bottom':'275px'
-            },10);
-       }else{
-
-        $("#chat_window_1").animate({
-                    
-                    'margin-bottom':'0px'
-                },10);
-       }
-      
+   $(window).scroll(function() {
+        setChatMargin();
     });
+    function setChatMargin(){
+        var scrollBottom=$(document).height() - $(window).scrollTop() - $(window).height();
+        var chat_margin_bottom=0+"px";
+        if(scrollBottom<291){
+            chat_margin_bottom=(291-scrollBottom)+"px";
+        }
+        $("#chat_window_1").animate({
+                        'margin-bottom':chat_margin_bottom
+                },0);
+    }
 
     document.querySelectorAll('body')[0].style.backgroundColor = 'whiteSmoke';
 </script>
