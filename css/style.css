@@ -17255,7 +17255,7 @@ select.date:focus {
 .activity{
     font-weight: 500;
     color: #666;
-    background-color: #f9f9f9;
+   /* background-color: #f9f9f9;*/
     border-radius: 10px !important;
     border: 2px solid #ddd !important;
 }
@@ -17284,7 +17284,7 @@ select.date:focus {
 .msg_container_base{
   background: #fff6dc;
   margin: 0;
-  padding: 0 10px 10px;
+  /*padding: 0 10px 10px;*/
   max-height:300px;
   overflow-x:hidden;
 }

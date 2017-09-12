@@ -59,8 +59,8 @@
                             <span>{{pricingPlan.features}}</span>
                         </div> 
                         <br>
-                        <a ng-show="units==1" href="" ng-disabled="pricingPlan.currentActivePlan==1" class="price-button btn button" ng-click="doGetSubscirbeCreateRazor(pricingPlan.id)">Subscribe</a>
-                        <a ng-hide="units==1" href="" ng-disabled="pricingPlan.currentActivePlan==1" class="price-button btn button" ng-click="authorizePaymentModel(pricingPlan.id,pricingPlan.discountUSD)">Subscribe</a><br/>
+                        <a ng-show="units==1" href="" ng-disabled="pricingPlan.currentActivePlan&&pricingPlan.isActive" class="price-button btn button" ng-click="doGetSubscirbeCreateRazor(pricingPlan.id)">{{pricingPlan.currentActivePlan?pricingPlan.isActive?"Active Subscription":"Renew Subscription":"Subscribe"}}</a>
+                        <a ng-hide="units==1" href="" ng-disabled="pricingPlan.currentActivePlan&&pricingPlan.isActive" class="price-button btn button" ng-click="authorizePaymentModel(pricingPlan.id,pricingPlan.discountUSD)">{{pricingPlan.currentActivePlan?pricingPlan.isActive?"Active Subscription":"Renew Subscription":"Subscribe"}}</a><br/>
                     </div>
                 </div>
             </div>

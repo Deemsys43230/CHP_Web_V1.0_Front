@@ -1024,17 +1024,18 @@
                         <h3 class="panel-title"><span class="glyphicon glyphicon-comment wrap"></span> Chat - {{coachclientdetails.firstname}}</h3>
                          <span class="nav-item__badge" style="position: absolute; margin-left: 20px; margin-top: -9px;" ng-show="showMessageCount">
                             <span aria-hidden="true" class="nav-item__badge-count ng-binding">{{unreadChatMessageCount}}</span>
+                            <input id="unreadChatMessageCount" type="hidden" value="{{unreadChatMessageCount}}"/>
                         </span>
                     </div>
                     <div class="col-md-4 col-xs-4" style="text-align: right;">
                         <a href="" ng-click="doDeleteChatMessage()" ng-show="deleteChatLogId.length>0"><i class="fa fa-trash"></i></a>
-                        <a href=""><span id="minim_chat_window" class="glyphicon glyphicon-plus icon_minim panel-collapsed" ng-click="doReadChatMessage();"></span></a>
+                        <a href=""><span id="minim_chat_window" class="glyphicon glyphicon-plus icon_minim panel-collapsed" onclick="chatMinMax()" ng-click="doReadChatMessage();"></span></a>
                     </div>
                 </div>
 
-                <div class="panel-body msg_container_base" style="display:none;">
+                <div id="chat_container" class="panel-body msg_container_base" style="display:none;">
                     <div  ng-repeat="chatMessage in chatMessages" ng-click="doSelectChat(chatMessage);">
-                     <div class="row" ng-if="chatMessage.firstNewMessage==1"><center><span class="label label-default">New Messages</span></center></div>
+                     <div class="row" ng-if="chatMessage.firstNewMessage==1"><center><span id="new_message_span" class="label label-default">New Messages</span></center></div>
                         <div class="row msg_container">
                             <div class="col-md-10 col-xs-10" ng-if="chatMessage.sentby==2">
                                 <div class="messages msg_sent">
@@ -1228,6 +1229,7 @@ $('.msg-overlay-list-bubble--is-minimized').click(function(){
   $(document).ready(function() {
     $("textarea").niceScroll({cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#eee'});
     $("#stickyNotes").niceScroll();
+    $("#chat_container").niceScroll({cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#eee'});
     // $('#stickyNotes').getNiceScroll(0).doScrollTop($('textarea').height());
     $(".sticky-notes").animate({ scrollTop: $(document).height() }, "slow");
   return false;
@@ -1245,8 +1247,9 @@ $(document).on('click','.msg_container',function(e){
     }
 });
 
-$(document).on('click', '.panel-heading span.icon_minim', function (e) {
-    var $this = $(this);
+
+function chatMinMax(){
+    var $this = $(".panel-heading span.icon_minim");
     if (!$this.hasClass('panel-collapsed')) {
         $this.parents('.panel').find('.panel-body').slideUp();
         $this.addClass('panel-collapsed');
@@ -1256,10 +1259,24 @@ $(document).on('click', '.panel-heading span.icon_minim', function (e) {
         $this.parents('.panel').find('.panel-body').slideDown();
         $this.removeClass('panel-collapsed');
         $this.removeClass('glyphicon-plus').addClass('glyphicon-minus');
-
+        setTimeout(function(){ scrollToNewMessageSpan(); }, 200);
     }
+}
+var newScrollDone=false;
+function scrollToNewMessageSpan(){
+    if(document.getElementById('new_message_span')==null){
+        newScrollDone=true;
+    }
+   if(!newScrollDone){  
+        newScrollDone=true;  
+        var topPos = document.getElementById('new_message_span').offsetTop;
+        var divTop = document.getElementById('chat_container').offsetTop;
+        $('#chat_container').getNiceScroll(0).doScrollPos(0,topPos-divTop-20);
+   }else{
+        $('#chat_container').getNiceScroll(0).doScrollPos(0,800);
+   }
+}
 
-});
 $(document).on('focus', '.panel-footer input.chat_input', function (e) {
     var $this = $(this);
     if ($('#minim_chat_window').hasClass('panel-collapsed')) {
@@ -1271,7 +1288,6 @@ $(document).on('focus', '.panel-footer input.chat_input', function (e) {
 $(document).on('click', '#new_chat', function (e) {
     var size = $( ".chat-window:last-child" ).css("margin-left");
      size_total = parseInt(size) + 400;
-    alert(size_total);
     var clone = $( "#chat_window_1" ).clone().appendTo( ".container" );
     clone.css("margin-left", size_total);
 });

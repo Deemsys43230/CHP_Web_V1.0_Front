@@ -26,7 +26,7 @@
                 <div class="col-lg-10 col-md-10 col-sm-12">  
                   <h5 class="classic-title" style="margin-left:20px;margin-bottom:20px;"><a class="active-tab profile-details" href=""><i class="fa fa-user"></i>&nbsp;&nbsp;Profile</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a class="event-details" href=""><i class="fa fa-calendar"></i>&nbsp;&nbsp;Events</a>|&nbsp;&nbsp;<a class="mealplan-details" href=""><i class="fa fa-th-large"></i>&nbsp;&nbsp;Meal Plan</a>|&nbsp;&nbsp;<a class="workoutplan-details" href=""><i class="fa fa-list"></i>&nbsp;&nbsp;Workout Plan</a></h5> 
                   <div class="profile-details-div">
-                    <div class="col-lg-6 col-md-6 col-sm-12">
+                    <div class="col-lg-6 col-md-6 col-sm-112">
                   <div class="talk-bubble tri-right left-in">
                      <div class="talktext wrap-all">
                       <p style="font-weight: normal"><span style="font-size:35px;color:  #e60000">❝</span>&nbsp;{{coachAdvice.description}}&nbsp;&nbsp;<span style="font-size:35px;color:  #e60000">❞</span></p>
@@ -406,7 +406,7 @@
                                 </div>
                                 <div class="col-md-4 col-xs-4" style="text-align: right;">
                                      <a href="" ng-click="doDeleteChatMessage()" ng-show="deletingChatCount>0"><i class="fa fa-trash"></i></a>
-                                    <a href=""><span id="minim_chat_window" class="glyphicon glyphicon-plus icon_minim panel-collapsed" ng-click="doReadChatMessage();"></span></a>
+                                    <a href=""><span id="minim_chat_window" class="glyphicon glyphicon-plus icon_minim panel-collapsed" onclick="chatMinMax()" ng-click="doReadChatMessage();"></span></a>
                                 </div>
                             </div>
                             <div class="panel-body msg_container_base" style="display:none;">
@@ -612,18 +612,33 @@
     });
 
 
-    $(document).on('click', '.panel-heading span.icon_minim', function (e) {
-        var $this = $(this);
-        if (!$this.hasClass('panel-collapsed')) {
-            $this.parents('.panel').find('.panel-body').slideUp();
-            $this.addClass('panel-collapsed');
-            $this.removeClass('glyphicon-minus').addClass('glyphicon-plus');
-        } else {
-             $this.parents('.panel').find('.panel-body').slideDown();
-            $this.removeClass('panel-collapsed');
-            $this.removeClass('glyphicon-plus').addClass('glyphicon-minus');
+    function chatMinMax(){
+        var $this = $(".panel-heading span.icon_minim");
+            if (!$this.hasClass('panel-collapsed')) {
+                $this.parents('.panel').find('.panel-body').slideUp();
+                $this.addClass('panel-collapsed');
+                $this.removeClass('glyphicon-minus').addClass('glyphicon-plus');
+            } else {
+                 $this.parents('.panel').find('.panel-body').slideDown();
+                $this.removeClass('panel-collapsed');
+                $this.removeClass('glyphicon-plus').addClass('glyphicon-minus');
+            }
+    }
+    var newScrollDone=false;
+    function scrollToNewMessageSpan(){
+        if(document.getElementById('new_message_span')==null){
+            newScrollDone=true;
         }
-    });
+       if(!newScrollDone){  
+            newScrollDone=true;  
+            var topPos = document.getElementById('new_message_span').offsetTop;
+            var divTop = document.getElementById('chat_container').offsetTop;
+            $('#chat_container').getNiceScroll(0).doScrollPos(0,topPos-divTop-20);
+       }else{
+            $('#chat_container').getNiceScroll(0).doScrollPos(0,800);
+       }
+    }         
+
     $(document).on('focus', '.panel-footer input.chat_input', function (e) {
         var $this = $(this);
         if ($('#minim_chat_window').hasClass('panel-collapsed')) {
