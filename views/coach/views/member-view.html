@@ -16,10 +16,10 @@
             <div class="col-lg-12 col-md-12 col-sm-12 no-padding margin-top-15">
                 <div class="col-lg-4 col-sm-12 col-md-4 demo-font client-content">
                     <span ng-show="coachclientdetails.unitPreference==1">
-                            <span>{{demographyDeatil.height}}</span>
+                            <span>{{demographyDeatil.height==null?"N/A":demographyDeatil.height}}</span>
                         </span>
                         <span ng-show="coachclientdetails.unitPreference==2" >
-                            <span> {{demographyDeatil.heightFeet}}<sup style="color: deepskyblue;font-size: xx-large">'</sup>&nbsp;{{demographyDeatil.heightInches}}<sup style="color: deepskyblue;font-size: xx-large">"</sup></span>
+                            <span> {{demographyDeatil.heightFeet==null?"N":demographyDeatil.heightFeet}}<sup style="color: deepskyblue;font-size: xx-large">'</sup>&nbsp;{{demographyDeatil.heightInches==null?"A":demographyDeatil.heightInches}}<sup style="color: deepskyblue;font-size: xx-large">"</sup></span>
                         </span></br/></br/>
                         <span class="text-bold">
                             <h4>Height <span ng-show="coachclientdetails.unitPreference==1"><small>(cms)</small></span> <span ng-show="coachclientdetails.unitPreference==2"><small>(feet,inches)</small></span></h4>
@@ -27,35 +27,35 @@
                 </div>  
                 <div class="col-lg-4 col-sm-12 col-md-4 demo-font client-content">
                         <span ng-show="coachclientdetails.unitPreference==1">
-                            <span>{{demographyDeatil.weight}}</span>
+                            <span>{{demographyDeatil.weight==null?"N/A":demographyDeatil.weight}}</span>
                         </span>
                         <span ng-show="coachclientdetails.unitPreference==2" >
-                            <span>{{demographyDeatil.weight}}</span>                                           
+                            <span>{{demographyDeatil.weight==null?"N/A":demographyDeatil.weight}}</span>                                           
                         </span><br/><br/>   
                         <span class="text-bold">
                             <h4>Weight <span ng-show="coachclientdetails.unitPreference==1"><small>(kgs)</small></span> <span ng-show="coachclientdetails.unitPreference==2"><small>(lbs)</small></span></h4>
                         </span>
                 </div>
                 <div class="col-lg-4 col-sm-12 col-md-4 demo-font client-content">
-                         <span>{{demographyDeatil.hip}}</span><br/><br/>
+                         <span>{{demographyDeatil.hip==null?"N/A":demographyDeatil.hip}}</span><br/><br/>
                         <span class="text-bold">
                             <h5>Hip <small>(Inches)</small></h5>
                         </span>  
                 </div>
                 <div class="col-lg-4 col-sm-12 col-md-4 demo-font client-content">
-                        <span>{{demographyDeatil.waist}}</span><br/><br/>
+                        <span>{{demographyDeatil.waist==null?"N/A":demographyDeatil.waist}}</span><br/><br/>
                         <span class="text-bold">
                             <h5>Waist <small>(Inches)</small></h5>
                         </span>               
                 </div>
                 <div class="col-lg-4 col-sm-12 col-md-4 demo-font client-content">
-                        <span>{{demographyDeatil.bmi}}</span><br/><br/>
+                        <span>{{demographyDeatil.bmi==null?"N/A":demographyDeatil.bmi}}</span><br/><br/>
                         <span class="text-bold">
                             <h5>BMI <small>(Kg/m<sup>2</sup>)</small></h5>
                         </span>                                    
                 </div>
                 <div class="ccol-lg-4 col-sm-12 col-md-4 demo-font client-content">
-                        <span> {{demographyDeatil.targetweight==null?'NA':demographyDeatil.targetweight}} </span><br/><br/>
+                        <span> {{demographyDeatil.targetweight==null?'N/A':demographyDeatil.targetweight}} </span><br/><br/>
                         <span class="text-bold">
                             <h5>Target Weight &nbsp;<span ng-show="coachclientdetails.unitPreference==1"><small>(kgs)</small></span> <span ng-show="coachclientdetails.unitPreference==2"><small>(lbs)</small></span></h5>
                         </span>
@@ -77,16 +77,14 @@
                 <div class="col-md-12 col-lg-12 col-sm-12 margin-top-10 margin-bottom-10">
                     <div class="col-md-1 col-lg-1"></div>
                     <div class="col-lg-3 col-sm-3 col-md-3 text-center">
-                        <h4 class="text-bold margin-top-10">User Type</h4>
-                            <img class="margin-top-10" ng-show="demographyDeatil.diabetes == 1 && demographyDeatil.obesity == null" style="width:60px;" src="../../images/diabetes.jpg"/>
-                            <img class="margin-top-10" ng-show="demographyDeatil.obesity == 1 && demographyDeatil.diabetes == null" style="width:60px;" src="../../images/obese.png"/>
-                            <img class="margin-top-10" ng-show="demographyDeatil.diabetes == 1 && demographyDeatil.obesity == 1" style="width:60px;" src="../../images/obese_diabetes.png"/>
-                            <img class="margin-top-10" ng-show="demographyDeatil.diabetes == null && demographyDeatil.obesity == null" style="width:60px;" src="../../images/healthy.png"/>
+                        <h4 class="text-bold margin-top-10">BMI Status</h4>
+                            <img class="margin-top-10" ng-show="demographyDeatil.bmi <18.5" style="width:60px;" src="../../images/underweight.png"/>
+                            <img class="margin-top-10" ng-show="demographyDeatil.bmi > 18.5 && demographyDeatil.bmi <= 25" style="width:60px;" src="../../images/healthy1.png"/>
+                            <img class="margin-top-10" ng-show="demographyDeatil.bmi >25 && demographyDeatil.bmi <= 30" style="width:60px;" src="../../images/healthy.png"/>
+                            <img class="margin-top-10" ng-show="demographyDeatil.bmi >30" style="width:60px;" src="../../images/healthy.png"/>
 
-                        <div class="margin-top-10" ng-show="demographyDeatil.diabetes == 1 && demographyDeatil.obesity == null">Diabetes</div>
-                        <div class="margin-top-10" ng-show="demographyDeatil.obesity == 1 && demographyDeatil.diabetes == null">Obese</div>
-                        <div class="margin-top-10" ng-show="demographyDeatil.diabetes == 1 && demographyDeatil.obesity == 1">Obese & Diabetes</div>
-                        <div class="margin-top-10" ng-show="demographyDeatil.diabetes == null && demographyDeatil.obesity == null">Normal</div>
+                        <div class="margin-top-10" ng-hide="demographyDeatil.bmi==null">{{bmiStatus}}</div>
+                        <div class="margin-top-10" ng-show="demographyDeatil.bmi==null">Not Available</div>
                     </div>
                     <div class="col-lg-3 col-sm-3 col-md-3 text-center">
                         <h4 class="text-bold margin-top-10">Plan Type</h4>
@@ -99,7 +97,7 @@
                     </div>
                     <div class="col-lg-4 col-sm-4 col-md-4 text-center">
                         <h4 class="text-bold margin-top-10">Activity Level</h4>
-                        <img class="margin-top-10" ng-show="demographyDeatil.userActivityType == 1" style="width:60px;" src="../../images/no-exercise.png"/>
+                        <img class="margin-top-10" ng-show="demographyDeatil.userActivityType == 1" style="width:60px;" src="../../images/no_exercise.png"/>
                         <img class="margin-top-10" ng-show="demographyDeatil.userActivityType == 2" style="width:60px;" src="../../images/little-no.png"/>
                         <img class="margin-top-10" ng-show="demographyDeatil.userActivityType == 3" style="width:60px;" src="../../images/moderate.png"/>
                         <img class="margin-top-10" ng-show="demographyDeatil.userActivityType == 4" style="width:60px;" src="../../images/heavy.png"/>
@@ -127,7 +125,7 @@
                                         <h5>Protein <small>(g)</small> <span class="pull-right">:</span></h5>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-6 padding-right-0">
-                                        <span>{{demographyDeatil.protein}}</span>
+                                        <span>{{demographyDeatil.protein==null?'N/A':demographyDeatil.protein}}</span>
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-6 no-padding margin-top-10">
@@ -135,7 +133,7 @@
                                         <h5>Fat  <small>(g)</small> <span class="pull-right">:</span></h5>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-6 padding-right-0">
-                                        <span> {{demographyDeatil.fat}} </span>
+                                        <span> {{demographyDeatil.fat==null?'N/A':demographyDeatil.fat}} </span>
                                     </div>
                                 </div>                        
                             </div>
@@ -145,7 +143,7 @@
                                         <h5>Carbo Hydrate <small>(g)</small> <span class="pull-right">:</span></h5>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-6 padding-right-0">
-                                        <span> {{demographyDeatil.carbo}} </span>
+                                        <span> {{demographyDeatil.carbo==null?'N/A':demographyDeatil.carbo}} </span>
                                     </div>
                                 </div>                        
                                 <div class="col-lg-6 col-md-6 col-sm-6 no-padding margin-top-10">
@@ -153,7 +151,7 @@
                                         <h5>Fiber <small>(g)</small> <span class="pull-right">:</span></h5>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-6 padding-right-0">
-                                        <span> {{demographyDeatil.fibre}} </span>
+                                        <span> {{demographyDeatil.fibre==null?'N/A':demographyDeatil.fibre}} </span>
                                     </div>
                                 </div>
                             </div>
@@ -291,6 +289,10 @@
 </div>
         <!-- For Clients Individual Activities -->
         <div class="stats-div">
+            <div class="col-md-6 col-lg-6 col-sm-6 margin-top-10">
+                <h5 class="text-color"><strong><i class="fa fa-male"></i>&nbsp;&nbsp;DAILY ACTIVITY</strong></h5>
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-6 pull-right">
                 <div class="margin-top-10 pull-right mouse-pointer" >&nbsp;&nbsp;<i class="fa fa-calendar" ng-click="datePicker()"></i></div>
                 <!-- <input hidden id="main-start-date"> -->
 
@@ -298,9 +300,13 @@
                     <input type="text" id="main-date" class="profile_input override" ng-model="activityDate" block>
                 </div>
                 <div class="margin-top-10 pull-right">Date</div>
+            </div>
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <h2 class="classic-title text-color"><span class="sub-title"></span></h2>
+            </div>
+                
             <div>
                 <div class="col-md-8 col-lg-8 col-sm-8 no-padding">
-                    <h2 class="classic-title text-color"><span class="sub-title"><strong><i class="fa fa-male"></i>&nbsp;&nbsp;DAILY ACTIVITY</strong></span></h2> 
                     <div class="col-lg-12 col-md-12 col-sm-12 no-padding text-center">
                         <div class="col-lg-3 col-md-3 col-sm-3 no-padding activity margin-left-30">
                             <div class="col-md-12 col-lg-12 col-sm-12 sleep-textcolor text-bold margin-top-5">Sleep</div>
@@ -398,8 +404,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 col-lg-4 col-sm-4 margin-top-20">
-                    <!-- <h2 class="classic-title text-color"><span class="sub-title"><strong><i class="fa fa-male"></i>&nbsp;&nbsp;DAILY BUDGETS</strong></span></h2> -->
+                <div class="col-md-4 col-lg-4 col-sm-4">
                     <div class="row">
                         <h5 class="col-lg-12 col-md-12 col-sm-12 margin-bottom-5">
                             Budget Vs Net&nbsp;-&nbsp;
@@ -456,37 +461,34 @@
                     </div>
                 </div>
                 <div class="col-lg-12 col-md-12 col-sm-12 margin-top-10 no-padding">
-                    <h2 class="classic-title text-color"><span class="sub-title"><strong><i class="fa fa fa-bar-chart"></i>&nbsp;&nbsp;Reports</strong></span></h2>
+                    <div class="col-md-6 col-lg-6 col-sm-6 margin-top-10">
+                        <h5 class="text-color"><strong><i class="fa fa-bar-chart"></i>&nbsp;&nbsp;REPORTS</strong></h5>
+                    </div>
+                    <!-- Stat Search -->
+                    <div class="col-md-6 col-sm-6 col-xs-6 pull-right" style="border: solid blue 0px;">
+                        <div class="input-group">
+                            <input type="text"  class="history_input pull-right" placeholder="Search history here..." ng-model="searchHistory">
+                           <span class="input-group-btn">
+                                 <button class="btn history" type="button"><i class="fa fa-search"></i></button>
+                           </span>
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <h2 class="classic-title text-color"><span class="sub-title"></span></h2>
+                    </div>
+                    <!-- End Search -->
                     <input id="history-start" hidden />
                     <input id="history-end" hidden />
 
                     <div class="col-lg-12 col-md-12 col-sm-12 no-padding" ng-show="showGraph.reportTittle==0">
                          <div class="stats-content1 contentHistoryOverride">
-                            <div class="col-md-12 col-sm-12 col-xs-12 no-padding">
-                                <div class="col-md-6 col-sm-6 col-xs-6 margin-top-20" style="border: solid red 0px;">
-                                    <h4 style="text-transform: uppercase;padding-left: 20px;">Graphs</h4>
-                                </div>
-                                <!-- Stat Search -->
-                                <div class="col-md-6 col-sm-6 col-xs-6 pull-right margin-top-10" style="border: solid blue 0px;">
-                                    <div class="input-group">
-                                        <input type="text"  class="history_input pull-right" placeholder="Search history here..." ng-model="searchHistory">
-                                           <span class="input-group-btn">
-                                                 <button class="btn history" type="button"><i class="fa fa-search"></i></button>
-                                           </span>
-                                    </div>
-                                </div>
-                             <!-- End Search -->
-                            </div>
-                            <div class="col-md-12 col-sm-12 col-xs-12">
-                                <hr/>
-                            </div>
                             <div class="col-md-6 col-sm-6 col-xs-6 margin-top-10" ng-repeat="graphCategory in historyGraph"  ng-hide="historyfilter.length==0">
-                                <h4 style="text-transform: uppercase;padding-left: 20px;">{{graphCategory.graphCategory}}</h4>
+                                <h4 style="text-transform: uppercase;padding-left: 20px;color:#fb0c99;">{{graphCategory.graphCategory}}</h4>
                                 <hr style="padding-left: 20px;padding-right: 20px;"/>
                                 <div class="col-md-6 col-sm-6 col-xs-6 no-padding" ng-repeat="graph in historyfilter = (graphCategory.graphs | startsWithLetterSearch:searchHistory)"  ng-show="graphCategory.graphs.length!=0">
                                     <div id="{{graph.id}}" class="horizon-swiper" ng-click="setHistoryType(graph.id,'historyGraph-multiple')">
                                          <div class="horizon-item" ng-click="showGraph.reportTittle=1" style="display: block;padding: 15px 1px;">
-                                            <div class="historyOverride">
+                                            <div class="historyOverride" style="backgrouncolor: #ddd !important">
                                              <img style="width: 50px;" ng-src="{{graph.imageSrc}}">
                                              <a href="" style="color: #666;font-size: 13px;"  data-toggle="tab" onclick="return false;">{{graph.name}}</a>
                                             </div>
@@ -573,7 +575,7 @@
                         </thead>
 
                         <tbody >
-                            <tr dir-paginate="plans in planfilter = (planList | itemsPerPage: 9)" ng-show="planList.length!=0">
+                            <tr dir-paginate="plans in planList.history | itemsPerPage:trainingPagination.itemsPerPage" id="totalrecords" ng-show="planList.length!=0" current-page="trainingPagination.pageNumber" total-items="planList.totalrecords">
                                 <td><span class="line-clamp-md">{{plans.userid}}</span></td>
                                 <td><span class="line-clamp-md">{{plans.subscriptionname}}</span></td>
                                 <td><span class="line-clamp-md">{{plans.startdate}}</span></td>
@@ -582,11 +584,11 @@
                                     <a id="{{plans.id}}" href="" ng-click="doGetPlansView(plans.id);" class="btn-xs btn-primary tracking-plan-view">View Details</a>
                                 </td>
                             </tr>
-                            <tr ng-show="planList.length==0 || !planfilter.length "><td colspan="5" class="text-center">No Records Found !!!</td></tr>
+                            <tr ng-show="planList.length==0"><td colspan="5" class="text-center">No Records Found !!!</td></tr>
                         </tbody>
                     </table>  
                     <!-- Start Pagination -->
-                    <dir-pagination-controls ng-show="paginationLoad" boundary-links="true"> </dir-pagination-controls>
+                    <dir-pagination-controls ng-show="paginationLoad" boundary-links="true" id="totalrecords"> </dir-pagination-controls>
                     <!-- End Pagination -->
             </div>
         </div>
@@ -651,17 +653,17 @@
         <div>
             <div ng-cloak class="ng-cloak tracking-plan-add-div">
                 <div flash-message="2000" class="col-lg-4 col-md-4 col-sm-4 pull-right"></div>                
-                <form name="coachDetailsForm" novalidate>
-                    <div class="col-lg-8 col-md-7 col-sm-7">
+                <form name="coachTrainingForm" novalidate>
+                    <div class="col-lg-9 col-md-9 col-sm-9">
                         <div class="form-group">
                             <div class="col-lg-4 col-md-5 col-sm-12 margin-top-10">
                                 <div> Subscription Name <span class="pull-right">:</span></div>
                             </div>
                             <div class="col-lg-8 col-md-7 col-sm-12 margin-top-10">
                                 <input class="coach-input" placeholder="Sunbscription Name" name="firstname" ng-model="planDetails.subscriptionname" maxlength="25" required/>
-                                <span ng-show="coachDetailsForm.firstname.$dirty && coachDetailsForm.firstname.$invalid">
-                                    <span class="error-message textarea-errormessage10" ng-show="coachDetailsForm.firstname.$error.required"><span>Required.</span></span>
-                                    <span class="error-message textarea-errormessage10" ng-show="coachDetailsForm.firstname.$error.validateAlphaWithSpace"><span>Enter&nbsp;valid&nbsp;Name.</span></span>
+                                <span ng-show="coachTrainingForm.firstname.$dirty && coachTrainingForm.firstname.$invalid">
+                                    <span class="error-message textarea-errormessage10" ng-show="coachTrainingForm.firstname.$error.required"><span>Required.</span></span>
+                                    <span class="error-message textarea-errormessage10" ng-show="coachTrainingForm.firstname.$error.validateAlphaWithSpace"><span>Enter&nbsp;valid&nbsp;Name.</span></span>
                                 </span>
                             </div>
                         </div>
@@ -671,9 +673,9 @@
                             </div>
                             <div class="col-lg-8 col-md-7 col-sm-12 margin-top-10">
                                 <input class="coach-input" placeholder="Subscription Description" name="lastname" ng-model="planDetails.subscriptiondescription" maxlength="25" required validate-alpha-with-space/>
-                                <span ng-show="coachDetailsForm.lastname.$dirty && coachDetailsForm.lastname.$invalid">
-                                    <span class="error-message textarea-errormessage10" ng-show="coachDetailsForm.lastname.$error.required"><span>Required.</span></span>
-                                    <span class="error-message textarea-errormessage10" ng-show="coachDetailsForm.lastname.$error.validateAlphaWithSpace"><span>Enter&nbsp;valid&nbsp;Name.</span></span>
+                                <span ng-show="coachTrainingForm.lastname.$dirty && coachTrainingForm.lastname.$invalid">
+                                    <span class="error-message textarea-errormessage10" ng-show="coachTrainingForm.lastname.$error.required"><span>Required.</span></span>
+                                    <span class="error-message textarea-errormessage10" ng-show="coachTrainingForm.lastname.$error.validateAlphaWithSpace"><span>Enter&nbsp;valid&nbsp;Name.</span></span>
                                 </span>
                             </div>
                         </div>
@@ -683,9 +685,9 @@
                             </div>
                             <div class="col-lg-8 col-md-7 col-sm-12 margin-top-10">
                                 <input class="coach-input input-group" id="start-date"  placeholder="Start Date" name="startdate" ng-model="planDetails.startdate" required  readonly style="background-color: white;cursor: pointer;"/>
-                                <span ng-show="coachDetailsForm.startdate.$dirty && coachDetailsForm.startdate.$invalid">
-                                    <span class="error-message textarea-errormessage10" ng-show="coachDetailsForm.startdate.$error.required"><span>Required.</span></span>
-                                    <span class="error-message textarea-errormessage10" ng-show="coachDetailsForm.startdate.$error.validatePhoneNumber"><span>Enter&nbsp;valid&nbsp;Date.</span></span>
+                                <span ng-show="coachTrainingForm.startdate.$dirty && coachTrainingForm.startdate.$invalid">
+                                    <span class="error-message textarea-errormessage10" ng-show="coachTrainingForm.startdate.$error.required"><span>Required.</span></span>
+                                    <span class="error-message textarea-errormessage10" ng-show="coachTrainingForm.startdate.$error.validatePhoneNumber"><span>Enter&nbsp;valid&nbsp;Date.</span></span>
                                 </span>
                             </div>
                         </div>
@@ -696,9 +698,9 @@
                             </div>
                             <div class="col-lg-8 col-md-7 col-sm-12 margin-top-10">
                                 <input class="coach-input" id="end-date" placeholder="End Date" name="enddate" ng-model="planDetails.enddate" required  readonly style="background-color: white;cursor: pointer;"/>
-                                <span ng-show="coachDetailsForm.enddate.$dirty && coachDetailsForm.enddate.$invalid">
-                                    <span class="error-message textarea-errormessage10" ng-show="coachDetailsForm.enddate.$error.required"><span>Required.</span></span>
-                                    <span class="error-message textarea-errormessage10" ng-show="coachDetailsForm.enddate.$error.validatePhoneNumber"><span>Enter&nbsp;valid&nbsp;Date.</span></span>
+                                <span ng-show="coachTrainingForm.enddate.$dirty && coachTrainingForm.enddate.$invalid">
+                                    <span class="error-message textarea-errormessage10" ng-show="coachTrainingForm.enddate.$error.required"><span>Required.</span></span>
+                                    <span class="error-message textarea-errormessage10" ng-show="coachTrainingForm.enddate.$error.validatePhoneNumber"><span>Enter&nbsp;valid&nbsp;Date.</span></span>
                                 </span>
                             </div>
                         </div>
@@ -709,9 +711,9 @@
                             </div>
                             <div class="col-lg-8 col-md-7 col-sm-12 margin-top-10">
                                 <input class="coach-input" placeholder="Currency Type" name="qualify" ng-model="planDetails.currencytype" maxlength="25" required validate-alpha-with-characters/>
-                                <span ng-show="coachDetailsForm.qualify.$dirty && coachDetailsForm.qualify.$invalid">
-                                    <span class="error-message textarea-errormessage10" ng-show="coachDetailsForm.qualify.$error.required"><span>Required.</span></span>
-                                    <span class="error-message textarea-errormessage10" ng-show="coachDetailsForm.qualify.$error.validateAlphaWithCharacters"><span>Enter&nbsp;valid&nbsp;Data.</span></span>
+                                <span ng-show="coachTrainingForm.qualify.$dirty && coachTrainingForm.qualify.$invalid">
+                                    <span class="error-message textarea-errormessage10" ng-show="coachTrainingForm.qualify.$error.required"><span>Required.</span></span>
+                                    <span class="error-message textarea-errormessage10" ng-show="coachTrainingForm.qualify.$error.validateAlphaWithCharacters"><span>Enter&nbsp;valid&nbsp;Data.</span></span>
                                 </span>
                             </div>
                         </div>
@@ -721,10 +723,10 @@
                             </div>
                             <div class="col-lg-8 col-md-7 col-sm-12 margin-top-10">
                                 <input class="coach-input" placeholder="Amount" name="amount" ng-model="planDetails.amount" required  validate-float1 ng-change="maxAmountCheck(planDetails.amount)" onkeypress="return validateFloatKeyPress1(this,event);"/>
-                                <span class="error-message textarea-errormessage10" ng-show="!coachDetailsForm.amount.$error.required&&maxAmount"><span>Please&nbsp;Enter&nbsp;Valid&nbsp;Amount.</span></span>
-                                <span ng-show="coachDetailsForm.amount.$dirty && coachDetailsForm.amount.$invalid">
-                                    <span class="error-message textarea-errormessage10" ng-show="coachDetailsForm.amount.$error.required"><span>Required.</span></span>
-                                    <span class="error-message textarea-errormessage10" ng-show="coachDetailsForm.amount.$error.validateFloat1"><span>Invalid&nbsp;Data.</span></span>
+                                <span class="error-message textarea-errormessage10" ng-show="!coachTrainingForm.amount.$error.required&&maxAmount"><span>Please&nbsp;Enter&nbsp;Valid&nbsp;Amount.</span></span>
+                                <span ng-show="coachTrainingForm.amount.$dirty && coachTrainingForm.amount.$invalid">
+                                    <span class="error-message textarea-errormessage10" ng-show="coachTrainingForm.amount.$error.required"><span>Required.</span></span>
+                                    <span class="error-message textarea-errormessage10" ng-show="coachTrainingForm.amount.$error.validateFloat1"><span>Invalid&nbsp;Data.</span></span>
                                  </span>
                             </div>
                         </div>
@@ -734,9 +736,9 @@
                             </div>
                             <div class="col-lg-8 col-md-7 col-sm-12 margin-top-10">
                                 <input class="coach-input" placeholder="Reference" name="reference" maxlength="25" ng-model="planDetails.reference" required/>
-                                <span ng-show="coachDetailsForm.reference.$dirty && coachDetailsForm.reference.$invalid">
-                                    <span class="error-message textarea-errormessage10" ng-show="coachDetailsForm.reference.$error.required"><span>Required.</span></span>
-                                    <span class="error-message textarea-errormessage10" ng-show="coachDetailsForm.reference.$error.validateAlphaWithSpace"><span>Enter&nbsp;valid&nbsp;Data.</span></span>
+                                <span ng-show="coachTrainingForm.reference.$dirty && coachTrainingForm.reference.$invalid">
+                                    <span class="error-message textarea-errormessage10" ng-show="coachTrainingForm.reference.$error.required"><span>Required.</span></span>
+                                    <span class="error-message textarea-errormessage10" ng-show="coachTrainingForm.reference.$error.validateAlphaWithSpace"><span>Enter&nbsp;valid&nbsp;Data.</span></span>
                                 </span>
                             </div>
                         </div>
@@ -746,20 +748,20 @@
                             </div>
                             <div class="col-lg-8 col-md-7 col-sm-12 margin-top-10">
                                 <input class="coach-input" placeholder="Payment Mode" name="paymentmode" maxlength="25" ng-model="planDetails.paymentmode" required validate-alpha-with-space/>
-                                <span ng-show="coachDetailsForm.paymentmode.$dirty && coachDetailsForm.paymentmode.$invalid">
-                                    <span class="error-message textarea-errormessage10" ng-show="coachDetailsForm.paymentmode.$error.required"><span>Required.</span></span>
-                                    <span class="error-message textarea-errormessage10" ng-show="coachDetailsForm.paymentmode.$error.validateAlphaWithSpace"><span>Enter&nbsp;valid&nbsp;Data.</span></span>
+                                <span ng-show="coachTrainingForm.paymentmode.$dirty && coachTrainingForm.paymentmode.$invalid">
+                                    <span class="error-message textarea-errormessage10" ng-show="coachTrainingForm.paymentmode.$error.required"><span>Required.</span></span>
+                                    <span class="error-message textarea-errormessage10" ng-show="coachTrainingForm.paymentmode.$error.validateAlphaWithSpace"><span>Enter&nbsp;valid&nbsp;Data.</span></span>
                                 </span>
                             </div>
                         </div>
                         <div class="col-lg-12 col-md-12 col-sm-12 text-center margin-top-50">
-                            <a href="" class="price-button btn" ng-click="doInsertTrainingPlan()" ng-disabled="maxAmount">Submit</a>
+                            <a href="" class="price-button btn" ng-click="doInsertTrainingPlan()" ng-disabled="coachTrainingForm.$invalid || isClean()">Submit</a>
                         </div>
                         <div class="col-lg-12 col-md-12 col-sm-12 text-center margin-top-50"></div>
                     </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 margin-bottom-10">
-                    <a href="" class="back-button pull-right margin-left-5 tracking-plan-viewall" ng-click="contentSelect.showTrackingPlan=1"><i class="fa fa-arrow-circle-o-left"></i> Back</a>
-                </div>
+                    <div class="col-lg-3 col-md-3 col-sm-3 margin-bottom-10">
+                        <a href="" class="back-button pull-right margin-left-5 tracking-plan-viewall" ng-click="contentSelect.showTrackingPlan=1"><i class="fa fa-arrow-circle-o-left"></i> Back</a>
+                    </div>
                 </form>
             </div>
         </div>

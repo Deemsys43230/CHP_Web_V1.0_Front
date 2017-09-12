@@ -70,10 +70,6 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
         $scope.doGetNotesByCoach(id);  
         //Demography Details
         $scope.doGetClientsDemographyDetailsByCoach(id);
-        //Health profile Details
-        // $scope.doGetClientHealthProfileDetailsByCoach();
-        //Graph  for oneweek
-        //$scope.doGetClientGraphDetailsByCoach();
         //Get Tracking Plan Details
         $scope.doGetTrainingPlanDetails(id);
         //Get Medication List
@@ -116,26 +112,6 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
             });
         })
     };
-
-    // For Assign to Group  
- /*   $scope.SelectModel =function(param){
-        //Intialize the array
-        $scope.selectedClientId=[];
-
-        $.each($scope.clients,function(index,value){
-            if(value.isChecked)
-                $scope.selectedClientId.push(value.userid);
-        });
-        if($scope.selectedClientId.length==0){
-            $("#selectModel").modal('show');
-        }else{
-            if(param==1){
-                $("#groupButton").modal('show');
-            }else{
-                $("#groupMessage").modal('show');
-            }
-        }
-    };*/
 
     // For clients individual User profile view
     $scope.doGetClientsProfileDetailsByCoach= function (id){
@@ -183,21 +159,34 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
             $scope.demographyDeatil = response.data.demography;
 
             // For height inches and feet calculation based on user unit preference
-                $scope.demographyDeatil.height = $scope.demographyDeatil.height.toString();
+            $scope.demographyDeatil.height = $scope.demographyDeatil.height.toString();
 
-                var heightarray=$scope.demographyDeatil.height.split('.');
-                var heightSplit=new Array();
-                heightSplit= heightarray;
-                $scope.demographyDeatil.heightFeet = heightSplit[0];
-                if(heightSplit[1]==undefined){
-                    $scope.demographyDeatil.heightInches= 0;
-                }else{
-                    $scope.demographyDeatil.heightInches=heightSplit[1];
-                }
-                $scope.demographyDeatil.height=$scope.demographyDeatil.height.toString();
+            var heightarray=$scope.demographyDeatil.height.split('.');
+            var heightSplit=new Array();
+            heightSplit= heightarray;
+            $scope.demographyDeatil.heightFeet = heightSplit[0];
+            if(heightSplit[1]==undefined){
+                $scope.demographyDeatil.heightInches= 0;
+            }else{
+                $scope.demographyDeatil.heightInches=heightSplit[1];
+            }
+            $scope.demographyDeatil.height=$scope.demographyDeatil.height.toString();
+
+            // for bmi status 
+            if($scope.demographyDeatil.bmi <18.5){
+                $scope.bmiStatus ="UnderWeight";
+            }
+            else if($scope.demographyDeatil.bmi > 18.5 && $scope.demographyDeatil.bmi <= 25){
+                $scope.bmiStatus ="Healthy";
+            }
+            else if($scope.demographyDeatil.bmi >25 && $scope.demographyDeatil.bmi <= 30){
+                $scope.bmiStatus ="OverWeight";
+            }
+            else if($scope.demographyDeatil.bmi >30){
+                $scope.bmiStatus ="Obesity";
+            }
         });
     };
-
 
     /*For clients Individual daily activities details By Coach */
 
@@ -234,7 +223,7 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
 
         //To Display User History Graph
         $scope.historyGraph = [
-                 {"graphCategory":"ACTIVITY","graphCategoryId":1,"graphs":[
+            {"graphCategory":"ACTIVITY","graphCategoryId":1,"graphs":[
             /*{
                 'id': 3,
                 'name': 'Exercise Minutes',
@@ -255,7 +244,7 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
             {
                     'id': 12,
                     'name': 'Sleep Rate',
-                    "imageSrc": "../../images/sleep.jpg"
+                    "imageSrc": "../../images/sleep.png"
             }
 
             ]
@@ -305,7 +294,7 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
                 {
                     'id': 14,
                     'name': 'Water Level',
-                    "imageSrc": "../../images/fat.jpg"
+                    "imageSrc": "../../images/fat.png"
 
                 }]
 
@@ -588,7 +577,7 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
                     });
 
                     titles.title="Heart Rate Graph( "+startDate+" - "+endDate+" )";
-                    titles.graphType='line';
+                    titles.graphType='column';
                     titles.name="Heart Rate";
                     titles.suffix="  bpm";
                     titles.yaxis="Heart Rate (bpm)";
@@ -612,7 +601,7 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
                         historyReport.push(history);
                     });
                     titles.title="Sleep Rate Graph( "+startDate+" - "+endDate+" )";
-                    titles.graphType='spline';
+                    titles.graphType='column';
                     titles.name="Sleep";
                     titles.suffix="  mins";
                     titles.yaxis="Sleep (minutes)";
@@ -626,12 +615,11 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
                     
                     //get the array
                     $.each(response.data.healthprofile,function(index,value){
-                        $scope.steps = value.wearables.diastolic;
                         var history = [];
                         var date = value.date.split("/");
                         history.push(monthNames[(date[1]-1)]+' '+date[0]);
                         history.push(parseFloat(value.wearables.systolic));
-                        history.push(parseFloat(value.wearables.diastolic));
+                        diastolicbpVal.push(parseFloat(value.wearables.diastolic));
                         historyDates.push(monthNames[(date[1]-1)]+' '+date[0]);
                         historyReport.push(history);
                     });
@@ -888,12 +876,44 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
                     type: 'column',
                     name: 'Fastingbloodglucose',
                     color: '#339966',
-                    data:datafbg     //to  display fasting bloodglucose value
+                    data:datafbg,
+                    tooltip: {
+
+                        headerFormat: '<span style="font-size:10px">{point.key} </span> <table>',
+                        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                            '<td style="padding:0"><b>{point.y:.2f} g</b></td></tr>',
+                        footerFormat: '</table>',
+                        shared: true,
+                        useHTML: true,
+                        enabled:true,
+                        backgroundColor:'rgba(255, 255, 255, 1)',
+                        borderWidth:1,
+                        shadow:true,
+                        style:{fontSize:'10px',padding:5,zIndex:500},
+                        formatter:false
+                    }
+     //to  display fasting bloodglucose value
                 }, {
                     type: 'column',
                     name: 'Randombloodglucose',
                     color: '#3366cc',
-                    data:datarbg   // to display  random bloodGlucose value
+                    data:datarbg,
+                    tooltip: {
+
+                        headerFormat: '<span style="font-size:10px">{point.key} </span> <table>',
+                        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                            '<td style="padding:0"><b>{point.y:.2f} g</b></td></tr>',
+                        footerFormat: '</table>',
+                        shared: true,
+                        useHTML: true,
+                        enabled:true,
+                        backgroundColor:'rgba(255, 255, 255, 1)',
+                        borderWidth:1,
+                        shadow:true,
+                        style:{fontSize:'10px',padding:5,zIndex:500},
+                        formatter:false
+                    }
+  // to display  random bloodGlucose value
                 }]
 
             });
@@ -1212,7 +1232,7 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
                     }
                 },
 
-
+/*
                     {
                         type: 'pie',
                         name: 'Total Consumption',
@@ -1239,7 +1259,7 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
                         dataLabels: {
                             enabled: false
                         }
-                    }
+                    }*/
                 ]
             });
         };
@@ -1532,12 +1552,14 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
 
     $scope.doGetTrainingPlanDetails = function(userid){
         $scope.param={
-            "limit":$scope.pagination.itemsPerPage,
-            "offset":($scope.pagination.pageNumber-1)*$scope.pagination.itemsPerPage
+            "limit":$scope.trainingPagination.itemsPerPage,
+            "offset":($scope.trainingPagination.pageNumber-1)*$scope.trainingPagination.itemsPerPage
         };
         $scope.param.userid = userid;
         requestHandler.postRequest("coach/getTrainingPlans/",$scope.param).then(function(response){
-            $scope.planList = response.data.history;
+            $scope.planList = response.data;
+            console.log($scope.planList);
+            $scope.paginationLoad=true;
         });
     };
 
@@ -1867,6 +1889,7 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
     $scope.init = function(){
         $scope.paginationLoad=false;
         $scope.pagination={"itemsPerPage":9,"pageNumber":1};
+        $scope.trainingPagination={"itemsPerPage":9,"pageNumber":1};
         $scope.doGetIndividualClientDetail($routeParams.id);
         $scope.mealPlanPagination={"itemsPerPage":10,"pageNumber":1};
         $scope.workoutPlanPagination={"itemsPerPage":10,"pageNumber":1};
@@ -1875,6 +1898,10 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
         $scope.addMealPlan={};
         $scope.addWorkoutPlan={};
     };
+
+    $scope.$watch("trainingPagination.pageNumber",function(){
+        $scope.doGetTrainingPlanDetails($routeParams.id);
+    });
 
     $scope.$watch("mealPlanPagination.pageNumber",function(){
         $scope.doGetAssignedMealPlanByCoach($routeParams.id);
