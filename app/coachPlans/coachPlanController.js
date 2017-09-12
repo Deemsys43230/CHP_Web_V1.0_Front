@@ -107,7 +107,9 @@ $scope.doDeleteCoachMealPlan=function(id){
           if(response.data.Response_status==1){
             successMessage(Flash,"Successfully Deleted");
             $scope.doGetCoachPlanList();
-       }
+          }else if(response.data.Response_status==0){
+            errorMessage(Flash,"Meal Plan already Assigned");
+          }
     }, function(){
           errorMessage(Flash,"Please try again later!");
     });
@@ -188,7 +190,7 @@ $scope.doCoachAddFood=function(planDay,foodSessionId){
     $scope.userFood={};
     $scope.userFood.day= planDay;
     $scope.userFood.foodsessionid=foodSessionId;
-    $scope.userFood.isoptional=1;
+    $scope.userFood.isoptional= 0;
     $scope.addFood=false;
     $scope.showSearch=true;
     $scope.isNew=true;
@@ -228,10 +230,13 @@ $scope.doEditFoodItemFromPlan=function(id){
       $.each($scope.userSelectedFoodDetails.measure,function(index,value){
         if(value.measureid==$scope.userSavedFoodDetails.foodmeasureid){
           $scope.userFood.measure=value;
+          originalmeasure = angular.copy(value);
+          console.log(value);
         }
       });
 
-      $scope.userFood.measurecount=$scope.userSavedFoodDetails.measurecount;
+      $scope.userFood.measurecount=parseFloat($scope.userSavedFoodDetails.measurecount);
+      originalmeasurecount = angular.copy($scope.userSavedFoodDetails.measurecount);
       $scope.userFood.id=$scope.userSavedFoodDetails.id;
       $scope.userFood.foodsessionid=$scope.userSavedFoodDetails.foodsessionid;
       $scope.userFood.day=$scope.userSavedFoodDetails.day;
@@ -277,6 +282,10 @@ $scope.resetdata=function(){
     $scope.current=$scope.caloriesIntake=0;
     $scope.max = 100;
     $scope.userSelectedFoodDetails={};
+};
+
+$scope.isCleanFood=function(){
+    return angular.equals(originalmeasure, $scope.userFood.measure)&& angular.equals(originalmeasurecount, $scope.userFood.measurecount);
 };
 
 // View Food Meal Item Plan Details
@@ -415,6 +424,8 @@ $scope.plansViewInit=function(){
   $scope.userFood={};
   $scope.current=$scope.caloriesIntake=0;
   $scope.max=100;
+  var originalmeasure= "";
+  var originalmeasurecount= "";
   $scope.foodSearchResult = [];
   $scope.doViewCoachPlans();
   

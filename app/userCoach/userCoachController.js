@@ -588,7 +588,7 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
                     $("#view-meal-item").hide();
                     $("#lean_overlay").hide();
                 });
-                errorMessage(Flash,"Future date Food logs are not allowed");
+                errorMessage(Flash,"Food log for future date is not allowed.");
            }
         }, function(){
             errorMessage(Flash,"Please try again later!");
@@ -705,10 +705,10 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
                 $scope.doLoadWorkoutPlanDetails($scope.currentWorkoutPlanDetail);
                 $(function(){
                     $(".common_model").hide();
-                    $("#view-meal-item").hide();
+                    $("#view-workout-item").hide();
                     $("#lean_overlay").hide();
                 });
-                errorMessage(Flash,"Future date Exercise logs are not allowed");
+                errorMessage(Flash,"Exercise log for future date is not allowed.");
            }
         }, function(){
             errorMessage(Flash,"Please try again later!");

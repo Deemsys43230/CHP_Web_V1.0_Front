@@ -111,7 +111,9 @@ $scope.doDeleteCoachWorkoutPlan=function(id){
           if(response.data.Response_status==1){
             successMessage(Flash,"Successfully Deleted");
             $scope.doGetCoachWorkoutPlanList();
-       }
+          }else if(response.data.Response_status==0){
+            errorMessage(Flash,"Exercise Plan already Assigned");
+          }
     }, function(){
           errorMessage(Flash,"Please try again later!");
     });
@@ -181,6 +183,7 @@ $scope.doCoachAddExercise=function(planDay){
     $scope.userExercise={};
     $scope.userSelectedExerciseDetails={};
     $scope.userExercise.day= planDay;
+    $scope.userExercise.isoptional= 0;
     $scope.showSearch=true;
     $scope.addExercise=false;
     $scope.isNew=true;
@@ -285,24 +288,31 @@ $scope.doCalculateCaloriesExercise=function(){
     }
 };
 
+var originallevel= "";
+var originalcalorie= "";
+
 $scope.doEditExerciseFromPlan=function(id){
   $scope.userExercise={};
     requestHandler.postRequest("coach/exerciseplandetail/",{"id":id}).then(function(response){
         $scope.userSelectedExerciseDetails= response.data.exercisedetail;
         $scope.userSavedExerciseDetails= response.data.savedexerciseplan;
-
+        // console.log("saved Detail",$scope.userSavedExerciseDetails);
         $.each($scope.userSelectedExerciseDetails.levels.levels,function(index,value){
-          console.log($scope.userSelectedExerciseDetails.levels);
-          console.log(value);
-           if(value.levelid==$scope.userSavedExerciseDetails.unitlevelid){
+          // console.log($scope.userSelectedExerciseDetails.levels);
+          // console.log("value",value);
+           if(value.levelunitid==$scope.userSavedExerciseDetails.unitlevelid){
               $scope.userExercise.selectedLevel=value;
+              originallevel= angular.copy(value);
+              console.log(originallevel);
            }
         });  
 
         $scope.userExercise.id= $scope.userSavedExerciseDetails.id;
         $scope.userExercise.day= $scope.userSavedExerciseDetails.day;
+        $scope.userExercise.isoptional= $scope.userSavedExerciseDetails.isoptional;
         $scope.doCalculateCaloriesExercise();
-        $scope.userExercise.calorieburn=$scope.userSavedExerciseDetails.calorieburn;      
+        $scope.userExercise.calorieburn=parseFloat($scope.userSavedExerciseDetails.calorieburn); 
+        originalcalorie= angular.copy($scope.userSavedExerciseDetails.calorieburn);     
     });
 
         $scope.addExercise=true;
@@ -314,7 +324,6 @@ $scope.doEditExerciseFromPlan=function(id){
                 $("#lean_overlay").fadeTo(1000);
                 $("#modal-add-exercise").fadeIn(600);
                 $(".user_register").show();
-              
             });
 
             $(".modal_close").click(function(){
@@ -331,13 +340,16 @@ $scope.doEditExerciseFromPlan=function(id){
             });
 };
 
+$scope.isCleanExercise=function(){
+    return angular.equals(originallevel, $scope.userExercise.selectedLevel.levelunitid)&& angular.equals(originalcalorie, $scope.userExercise.calorieburn);
+};
+
 //Insert  Exercise
 $scope.doInsertExerciseByCoach=function(){
     //Set values according to the api calls
     $scope.userExercise.planid= $routeParams.id;
     $scope.userExercise.exerciseid=$scope.userSelectedExerciseDetails.exerciseid;
     $scope.userExercise.unitlevelid= $scope.userExercise.selectedLevel.levelunitid;
-    $scope.userExercise.isoptional=1;
 
     if($scope.userExercise.planid==1){
       $scope.userExercise.calorieburn=0;

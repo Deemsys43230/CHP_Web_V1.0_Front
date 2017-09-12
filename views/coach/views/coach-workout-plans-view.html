@@ -41,6 +41,14 @@
                     <div class="loader"></div>
                 </div>
             </div>
+            <div class="col-md-10 pull-right margin-top-3 no-padding margin-bottom-10">
+                    <div class="col-md-2 no-padding pull-right">
+                    <span class="green plan-point"></span><div class="margin-left-20">-&nbsp;Mandatory&nbsp;Exercise</div>
+                    </div>
+                    <div class="col-md-2 no-padding pull-right">
+                    <span class="orange plan-point"></span><div class="margin-left-20">-&nbsp;Optional&nbsp;Exercise</div>
+                    </div>
+            </div>
                 <table class="table table-bordered table-striped">
                     <thead>
                         <tr class="warning">
@@ -64,6 +72,8 @@
                     <td class="exercise-plans">
                         <div class="col-md-4" ng-repeat="workoutItem in workoutPlanDetail.workouts">
                                 <div class="exercise">
+                                    <span ng-show="workoutItem.isoptional==1" class="orange">&nbsp;</span>
+                                    <span ng-show="workoutItem.isoptional==0" class="green">&nbsp;</span>
                                     <span class="name_values">{{workoutItem.exercisename}}</span>
                                     <i class="fa fa-times-circle pull-right" ng-click="doDeleteExerciseFromPlan(workoutItem.id);"></i>&nbsp;
                                     <i class="fa fa-edit pull-right" ng-click="doEditExerciseFromPlan(workoutItem.id);"></i>&nbsp;&nbsp;
@@ -303,11 +313,22 @@
                         <h5 class="margin-top-10">Calories to be Burnt:</h5>
                         <input type="text"  name="calories"  maxlength="6" ng-model="userExercise.calorieburn" onkeypress="return validateFloatKeyPress1(this,event);" required validate-zero>
                             <span class="error-message" ng-show="!ExerciseAddForm.calories.$error.required&&maxfoodvalue"><span>Please&nbsp;Enter&nbsp;Valid&nbsp;Value.</span></span>
-                            <span ng-show="ExerciseAddForm.calories.$dirty&&FoodAddForm.measurecount.$invalid">
+                            <span ng-show="ExerciseAddForm.calories.$dirty&&FoodAddForm.calories.$invalid">
                                <span class="error-message" ng-show="ExerciseAddForm.calories.$error.required"><span>Required.</span></span>
                                <span class="error-message" ng-show="!ExerciseAddForm.calories.$error.required&&ExerciseAddForm.calories.$error.validateZero"><span>Invalid&nbsp;data.</span></span>
                             </span>
                         </span>
+                        <div class="col-lg-12 col-md-12 col-sm-12 margin-top-10 no-padding">  
+                            <div class="col-lg-4 col-md-4 col-sm-4 no-padding margin-top-7">
+                            <h5>Is&nbsp;Optional?</h5>
+                            </div> 
+                            <div class="col-lg-8 col-md-8 col-sm-8 margin-top-2">
+                                <span class="fh-checkbox" required>
+                                    <input type="checkbox" id="isOptional" name="isoptional" ng-model="userExercise.isoptional" ng-true-value="1" ng-false-value="0">
+                                    <label for="isOptional">&nbsp;&nbsp;</label>
+                                </span>
+                            </div>
+                        </div>
                     </form>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 text-center">

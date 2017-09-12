@@ -31,7 +31,7 @@
                         <tr dir-paginate="plan in coachWorkoutPlanList.plans | itemsPerPage:pagination.itemsPerPage" ng-show="coachWorkoutPlanList.plans.length!=0" current-page="pagination.pageNumber" total-items="coachWorkoutPlanList.totalrecords">
                             <td>{{plan.planname}}</td>
                             <td>{{plan.description}}</td>
-                            <td>{{plan.plandays}}&nbsp;Day(s)</td>
+                            <td>{{plan.plandays>1?plan.plandays+"&nbsp;Days":plan.plandays+"&nbsp;Day"}}</td>
                             <td>
                                 <a href="#coach-workout-plans-view/{{plan.id}}" class="btn-xs btn-primary">My Plan</a>
                                 <a href="" class="btn-xs btn-warning" ng-click="doEditCoachWorkoutPlan(plan.id)">Edit</a>

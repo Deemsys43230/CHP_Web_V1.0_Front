@@ -1702,8 +1702,6 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
                 });
               }              
           });
-
-         console.log($scope.mealPlanDetailList);
          
         },function(){
             errorMessage(Flash,"Please try again later!")
@@ -1772,53 +1770,57 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
     //Reset Scope
     $scope.resetMeal=function(){
         $scope.addMealPlan={};
-        $scope.planid="";
+        $scope.addMealPlan.planid="";
         $scope.mealAssignForm.$setPristine();
 
         $(function(){
             $("#lean_overlay").fadeTo(1000);
             $("#modal-assign-meal").fadeIn(600);
             $(".common_model").show();
+            $scope.shouldBeOpen = true;
         });
 
         $(".modal_close").click(function(){
             $(".common_model").hide();
             $("#modal-assign-meal").hide();
             $("#lean_overlay").hide();
+            $scope.shouldBeOpen = false;
         });
 
         $("#lean_overlay").click(function(){
             $(".common_model").hide();
             $("#modal-assign-meal").hide();
             $("#lean_overlay").hide();
+            $scope.shouldBeOpen = false;
         });
-
     };
 
      //Reset Scope
     $scope.resetWorkout=function(){
         $scope.addWorkoutPlan={};
-        $scope.planid="";
+        $scope.addWorkoutPlan.planid="";
         $scope.workoutAssignForm.$setPristine();
 
         $(function(){
             $("#lean_overlay").fadeTo(1000);
             $("#modal-assign-workout").fadeIn(600);
             $(".common_model").show();
+            $scope.shouldBeOpen = true;
         });
 
         $(".modal_close").click(function(){
             $(".common_model").hide();
             $("#modal-assign-workout").hide();
             $("#lean_overlay").hide();
+            $scope.shouldBeOpen = false;
         });
 
         $("#lean_overlay").click(function(){
             $(".common_model").hide();
             $("#modal-assign-workout").hide();
             $("#lean_overlay").hide();
+            $scope.shouldBeOpen = false;
         });
-
     };
 
     //Get Coach Meal Plan List
@@ -1882,9 +1884,71 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
         }, function(){
             errorMessage(Flash,"Please try again later!")
         });
+    };
+
+    $scope.setRemovingMealPlanId=function(mapid){
+        $scope.removingMealPlanId= mapid;
+
+        $(function(){
+            $("#lean_overlay").fadeTo(1000);
+            $("#confirm-delete").fadeIn(600);
+            $(".common_model").show();
+        });
+
+        $(".modal_close").click(function(){
+            $(".common_model").hide();
+            $("#confirm-delete").hide();
+            $("#lean_overlay").hide();
+        });
+
+        $("#lean_overlay").click(function(){
+            $(".common_model").hide();
+            $("#confirm-delete").hide();
+            $("#lean_overlay").hide();
+        });
 
     };
 
+    $scope.removeMealPlanfromAssignList=function(){
+        requestHandler.postRequest("coach/removeuserfromplan/", {"mapid": $scope.removingMealPlanId}).then(function(response){
+            successMessage(Flash,"Successfully Removed");
+            $scope.doGetAssignedMealPlanByCoach($routeParams.id);
+        }, function(){
+            errorMessage(Flash,"Please try again later!");
+        });
+    };
+
+    $scope.setRemovingWorkoutPlanId=function(mapid){
+        $scope.removingWorkoutPlanId= mapid;
+
+        $(function(){
+            $("#lean_overlay").fadeTo(1000);
+            $("#confirm-modal-delete").fadeIn(600);
+            $(".common_model").show();
+        });
+
+        $(".modal_close").click(function(){
+            $(".common_model").hide();
+            $("#confirm-modal-delete").hide();
+            $("#lean_overlay").hide();
+        });
+
+        $("#lean_overlay").click(function(){
+            $(".common_model").hide();
+            $("#confirm-modal-delete").hide();
+            $("#lean_overlay").hide();
+        });
+
+    };
+
+    $scope.removeWorkoutPlanfromAssignList=function(){
+        requestHandler.postRequest("coach/removeuserfromplan/", {'mapid': $scope.removingWorkoutPlanId}).then(function(response){
+            successMessage(Flash,"Successfully Removed");
+            $scope.doGetAssignedWorkoutPlanByCoach($routeParams.id);
+        }, function(){
+            errorMessage(Flash,"Please try again later!");
+        });
+    };
     //Initial Load
     $scope.init = function(){
         $scope.paginationLoad=false;

@@ -17658,10 +17658,6 @@ div.foodcalorie{
     display: none !important;
 }
 
-.food-edit{
-    color: #2aad2a!important;
-}
-
 .plan-point{
     display: block;
     height: 16px;
@@ -17713,7 +17709,7 @@ div.foodcalorie{
     background-color: #ffec6d;
 }
 .client-info{    
-    box-shadow: 4px 3px #f3f3f3;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
     border-radius: 5px;
     border:1px solid #c9c2c2;
 }
