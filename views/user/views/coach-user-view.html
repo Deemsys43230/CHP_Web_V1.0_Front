@@ -409,7 +409,7 @@
                                     <a href=""><span id="minim_chat_window" class="glyphicon glyphicon-plus icon_minim panel-collapsed" onclick="chatMinMax()" ng-click="doReadChatMessage();"></span></a>
                                 </div>
                             </div>
-                            <div class="panel-body msg_container_base" style="display:none;">
+                            <div id="chat_container" class="panel-body msg_container_base" style="display:none;">
                                 <div  ng-repeat="chatMessage in chatMessages" ng-click="doSelectChat(chatMessage);">
                                 <div class="row" ng-show="chatMessage.firstNewMessage==1"><span class="label label-default">New Messages</span></div>
                                 <div class="row msg_container">
@@ -602,6 +602,11 @@
     })
 </script>
 <script type="text/javascript">
+      $(document).ready(function() {
+            $("#chat_container").niceScroll({cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#eee'});
+             return false;
+      });
+
     $(document).on('click','.msg_container',function(e){
      var $this = $(this);
         if (!$this.hasClass('chat-selected')) {
