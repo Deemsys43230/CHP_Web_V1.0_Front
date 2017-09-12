@@ -189,8 +189,8 @@ adminApp.factory("UserDashboardService",['requestHandler',function(requestHandle
     };
 
  //On Select Exercise From list
-    userDashboardServiceObj.doGetSelectedExerciseDetails= function (exerciseid) {
-        return requestHandler.postRequest("user/getExerciseDetailByuser/",{"exerciseid":exerciseid}).then(function (response) {
+    userDashboardServiceObj.doGetSelectedExerciseDetails= function (exerciseid,date) {
+        return requestHandler.postRequest("user/getExerciseDetailByuser/",{"exerciseid":exerciseid,'date':date}).then(function (response) {
             var userSelectedExerciseDetails=response.data.ExerciseDetail;
             userSelectedExerciseDetails.imagepath=userSelectedExerciseDetails.imagepath+"200x200.jpg";
             return userSelectedExerciseDetails;

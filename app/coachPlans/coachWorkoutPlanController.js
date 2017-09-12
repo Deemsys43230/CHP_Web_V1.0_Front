@@ -336,7 +336,7 @@ $scope.doInsertExerciseByCoach=function(){
     //Set values according to the api calls
     $scope.userExercise.planid= $routeParams.id;
     $scope.userExercise.exerciseid=$scope.userSelectedExerciseDetails.exerciseid;
-    $scope.userExercise.unitlevelid= $scope.userExercise.selectedLevel.levelid;
+    $scope.userExercise.unitlevelid= $scope.userExercise.selectedLevel.levelunitid;
     $scope.userExercise.isoptional=1;
 
     if($scope.userExercise.planid==1){

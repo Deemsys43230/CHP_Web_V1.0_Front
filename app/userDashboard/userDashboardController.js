@@ -588,7 +588,8 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
             $scope.title= "Add Exercise";
             $scope.loaded=true;
             if(isCustom==0){
-                var getExerciseDetailPromise=UserDashboardService.doGetSelectedExerciseDetails(exerciseid);
+                var date = document.getElementById("main-start-date").value;
+                var getExerciseDetailPromise=UserDashboardService.doGetSelectedExerciseDetails(exerciseid,date);
                 getExerciseDetailPromise.then(function(result){
                     $scope.userSelectedExerciseDetails=result;
                     $scope.loaded=false;
@@ -609,7 +610,8 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
             $scope.isNew=true;
             $scope.title= "Add Exercise";
             $scope.loaded=true;
-            var getExerciseDetailPromise=UserDashboardService.doGetSelectedExerciseDetails(exerciseid);
+            var date = document.getElementById("main-start-date").value;
+            var getExerciseDetailPromise=UserDashboardService.doGetSelectedExerciseDetails(exerciseid,date);
             getExerciseDetailPromise.then(function(result){
                 $scope.userSelectedExerciseDetails=result;
                 $scope.loaded=false;
@@ -621,7 +623,8 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
         $scope.exerciseSelected=function(){
             $scope.isNew=true;
             $scope.title= "Add Exercise";
-            var getExerciseDetailPromise=UserDashboardService.doGetSelectedExerciseDetails($scope.selectedExercise.exerciseid);
+            var date = document.getElementById("main-start-date").value;
+            var getExerciseDetailPromise=UserDashboardService.doGetSelectedExerciseDetails($scope.selectedExercise.exerciseid,date);
             getExerciseDetailPromise.then(function(result){
                 $scope.userSelectedExerciseDetails=result;
                 $scope.doUserAddExercise ();
@@ -802,8 +805,8 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
             $scope.title= "Edit Exercise";
             $scope.loaded=true;
 
-
-            var getExerciseDetailForEditPromise=UserDashboardService.doGetSelectedExerciseDetails(exerciseid);
+            var date = document.getElementById("main-start-date").value;
+            var getExerciseDetailForEditPromise=UserDashboardService.doGetSelectedExerciseDetails(exerciseid,date);
             getExerciseDetailForEditPromise.then(function(result){
 
                 $scope.userSelectedExerciseDetails=result;
