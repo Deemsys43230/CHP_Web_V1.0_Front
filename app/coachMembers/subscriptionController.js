@@ -1,10 +1,11 @@
 var coachApp= angular.module('coachApp', ['ngRoute','oc.lazyLoad','ngCookies','requestModule','flash','ngAnimate']);
 
-coachApp.controller('SubscriptionController',['$scope','requestHandler','Flash','$routeParams','$location',function($scope,requestHandler,Flash,$routeParams,$location) {
+coachApp.controller('SubscriptionController',['$scope','requestHandler','Flash','$routeParams','$timeout','$location',function($scope,requestHandler,Flash,$routeParams,$timeout,$location){
     
     $scope.activeClass.sub='active';
 
     $scope.doGetPricingPlans = function() {
+
       requestHandler.getRequest("getactivePricingPlans/","").then(function(response){
           $scope.pricingPlanDetails = response.data.PricingPlans;
           requestHandler.getRequest("/coach/isSubscriptionActive/","").then(function(response){
@@ -126,11 +127,15 @@ coachApp.controller('SubscriptionController',['$scope','requestHandler','Flash',
     };
 
     $scope.init = function() {
+    
       $scope.doGetPricingPlans();
         
     };
 
-    $scope.init();
 
+  $scope.init();
+     //$scope.doGetPricingPlans();
 
 }]);
+
+

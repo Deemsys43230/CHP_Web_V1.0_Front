@@ -59,7 +59,7 @@
                         </div>
                         <div class="coach">
                             <h4>Features</h4>
-                            <span>{{pricingPlan.features}}</span>
+                            <span style="min-height:63px;">{{pricingPlan.features}}</span>
                         </div> 
                         <br>
                         <a ng-show="units==1" href="" ng-disabled="pricingPlan.currentActivePlan&&pricingPlan.isActive" class="price-button btn button" ng-click="doGetSubscirbeCreateRazor(pricingPlan.id)">{{pricingPlan.currentActivePlan?pricingPlan.isActive?"Active Subscription":"Renew Subscription":"Subscribe"}}</a>

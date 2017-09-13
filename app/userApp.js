@@ -312,7 +312,9 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'userApp',
                             files:[
+                                '../../plugin/popup/style.css',
                                 '../../angular/angular-utils-pagination/dirPagination.js',
+                                '../../css/custom-inputs.css',
                                 '../../app/userCoach/userCoachController.js'
                             ]
                         })
