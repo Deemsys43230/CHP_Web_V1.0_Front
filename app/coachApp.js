@@ -179,7 +179,7 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                     }],
                     check:["$location","$rootScope","requestHandler",function($location,$rootScope,requestHandler){
                         requestHandler.getRequest("/coach/isSubscriptionActive/","").then(function(response){
-                            if(response.data.isActive==0){
+                            if(response.data.isActive==0 && response.data.subscription==[]){
                                 $rootScope.isSubscriptionActive=true;
                             }else{   
                                 $rootScope.isSubscriptionActive=false;

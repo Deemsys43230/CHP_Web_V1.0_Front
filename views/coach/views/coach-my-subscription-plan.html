@@ -14,8 +14,11 @@
             </div>
             
             <div class="col-md-12 margin-top-10">
+                <div class="margin-bottom-10 pull-left">
+                 <h4><strong>Subscription Status </strong>- <span ng-show="subscriptionStatus" class="text-green">Active</span> <span ng-show="!subscriptionStatus" class="text-red">Expired</span></h4>
+                </div>
                 <div class="margin-bottom-10 pull-right">
-                    <a type="button" href="#change-subscription" class="btn btn-md btn-success">Change Plan</a>
+                    <a type="button" href="#change-subscription" class="btn btn-md btn-success">Change / Renew Plan</a>
                 </div>
                 <table class="margin-top-10 table table-striped table-bordered ">
                     <tbody>
@@ -47,7 +50,9 @@
                 </table>
             </div>
             <div class="col-lg-12 col-md-12 col-sm-12">
-                <h5 class="classic-title"><span class="sub-title"><strong>Subscription History</strong></span></h5>
+                <h2 class="classic-title"><span class="sub-title"><strong>Subscription History</strong></span>
+                <h2 class="pull-right text-orange"><b>TOTAL EARN : <small class="text-bold">USD :</small>&nbsp;<span class="text-red"><b>{{totalcountUSD}}</b></span>&nbsp;|&nbsp;<small class="text-bold">INR :</small><span class="text-red"><b>{{totalcountINR}}</b></span></b>&nbsp;&nbsp;</h2>
+                    </h2>
                 <div ng-if="loaded">
                     <div class="loader-style">
                         <div class="loader"></div>
@@ -69,7 +74,7 @@
                     </thead>
 
                     <tbody >
-                        <tr dir-paginate="subscriptionHistory in subscriptionPlanHistoryFilter = (subscriptionPlanHistory | itemsPerPage: 9)" ng-show="subscriptionPlanHistory.length!=0">
+                        <tr dir-paginate="subscriptionHistory in subscriptionPlanHistoryFilter = (subscriptionPlanHistory.history | itemsPerPage: 9)" ng-show="subscriptionPlanHistory.length!=0">
                             <td>{{subscriptionHistory.planname}}</td>
                             <td>{{subscriptionHistory.currencytype}}</td>
                             <td>{{subscriptionHistory.planprice}}</td>
@@ -82,7 +87,7 @@
                             
                         </tr>
                         <tr ng-show="subscriptionPlanHistory.length==0 || !subscriptionPlanHistoryFilter.length">
-                            <td colspan="8" class="text-center">No Records Found !!!</td>
+                            <td colspan="9" class="text-center">No Records Found !!!</td>
                         </tr>
                     </tbody>
                 </table>

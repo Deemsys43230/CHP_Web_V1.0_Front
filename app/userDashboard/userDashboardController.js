@@ -882,6 +882,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
             $scope.userExercise.workoutvalue+=parseInt($scope.workoutvalueMinutes)*60;
             $scope.userExercise.workoutvalue+=parseInt($scope.workoutvalueSeconds);
             console.log( $scope.userExercise.workoutvalue);
+
             if($scope.userExercise.workoutvalue==0){
                 $scope.current=$scope.caloriesSpent=0;
             }
@@ -1454,8 +1455,20 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
 
         };
 
-
         $scope.doGetWeightLogGraph=function(){
+            var goalEndDate=$scope.goalDetails.enddate; //actual goal end date
+            var firstValue = selectedDate.split('/'); //current date
+            var secondValue =goalEndDate.split('/'); // goal end date
+            var firstDate=new Date();
+            firstDate.setFullYear(firstValue[2],(firstValue[1] - 1 ),firstValue[0]);
+            var secondDate=new Date();
+            secondDate.setFullYear(secondValue[2],(secondValue[1] - 1 ),secondValue[0]);
+           //Comparing goal end date with today date
+            if (firstDate < secondDate)
+            {
+                goalEndDate=selectedDate;
+            }
+
             $scope.graph = {
                 status: 'goal-graph'
             };
@@ -1470,7 +1483,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
             var titles={};
             var budgetdate=[];
             var weightLogs = [];
-            requestHandler.postRequest("user/getWeightLogGraph/",{"startdate":$scope.goalDetails.startdate.toString(),"enddate":$scope.goalDetails.enddate.toString()}).then(function(response){
+            requestHandler.postRequest("user/getWeightLogGraph/",{"startdate":$scope.goalDetails.startdate.toString(),"enddate":goalEndDate.toString()}).then(function(response){
                 $scope.weightlogGraph=response.data.Weight_logs;
                    $.each($scope.weightlogGraph, function(index,value) {
                         var weightLog = [];

@@ -17412,6 +17412,7 @@ select.date:focus {
     display: inline-block;
     position: relative;
     width: 100%;
+    /*height: 161px;*/
     background: linear-gradient(rgba(255, 255, 128, 1), rgb(204, 255, 204));
     background-image: linear-gradient(rgb(255, 255, 128), rgb(204, 255, 204));
     margin-left:-2px;
