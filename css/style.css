@@ -17812,3 +17812,10 @@ ul.group-menu li a{
     overflow-x:hidden;
     word-wrap: break-word;
 }
+.no-messages{
+    padding: 20px;
+    width: 100%;
+    text-align: center;
+    border: solid 1px #f8ba01;
+    background: #f3eee1;
+}

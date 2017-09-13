@@ -125,14 +125,8 @@
                             <hr/>
                             <h5>Unit : <span>{{userSelectedExerciseDetails.levels.unitname}}</span></h5>
                             <hr/>
-                            <h5  class="margin-top-10"  ng-show="userSelectedExerciseDetails.repsavailable==1">Reps Value</h5>
-                            <input type="text" ng-pattern="/(^[1-9]\d{0,8}$)/"  name="reps" ng-model="userExercise.reps"  maxlength="3" ng-show="userSelectedExerciseDetails.repsavailable==1">
-                             <span ng-show="ExerciseAddForm.reps.$dirty&&ExerciseAddForm.reps.$invalid">
-                                 <span class="error-message" ng-show="ExerciseAddForm.reps.$error.required"><span>Required.</span></span>
-                                  <span class="error-message" ng-show="ExerciseAddForm.reps.$error.pattern"><span>Invalid&nbsp;Data.</span></span>
-                             </span>
                             <h5 class="margin-top-10">Select Level:</h5>
-                            <select name="levelid" ng-model="userExercise.selectedLevel" ng-options="levels.levelname for levels in userSelectedExerciseDetails.levels.levels track by levels.levelid" ng-change="doCalculateCaloriesExercise()" required>
+                            <select name="levelid" ng-model="userExercise.selectedLevel" ng-options="levels.levelname for levels in userSelectedExerciseDetails.levels.levels track by levels.unitlevelid" ng-change="doCalculateCaloriesExercise()" required>
                                 <option value="">-- Select Level --</option>
                             </select>
                              <span ng-show="ExerciseAddForm.levelid.$dirty&&ExerciseAddForm.levelid.$invalid">

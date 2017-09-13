@@ -233,18 +233,23 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
             });
             $scope.chat={"message":""};
             $scope.unreadChatMessageCount=0;
+
+            var newMessageFound=0;
+            $scope.showMessageCount=false;
+
             $.each($scope.chatMessages,function(index,value){
                 value.selectedChat=0;
+                value.firstNewMessage=0;
                 if(value.status==0 && value.sentby==2){
                     $scope.unreadChatMessageCount+=1;
                     $scope.showMessageCount=true;
-                }
-                else{
-                     $scope.showMessageCount=false;
+                    if(newMessageFound==0){
+                        value.firstNewMessage=1;
+                        newMessageFound=1;
+                    }
                 }
 
             });
-            setTimeout(function(){ $('.msg_container_base').scrollTop($('.msg_container_base')[0].scrollHeight); }, 500);
         });
     };
 

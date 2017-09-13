@@ -66,6 +66,7 @@ $scope.doAddMealPlanByCoach=function(){
 
 $scope.doEditCoachMealPlan=function(id){
     $scope.isNew = false;
+    $scope.changeDays=true;
     $scope.title = "Edit Meal Plan";
 
     $(function(){
@@ -75,6 +76,12 @@ $scope.doEditCoachMealPlan=function(id){
         $scope.shouldBeOpen = true;
     });
     
+     requestHandler.getRequest("coach/plandetail/"+id+"/", "").then(function(response){
+      if(response.data.plan.plandetail.canedit==1){
+        $scope.changeDays=false;
+      }
+     });
+
     $.each($scope.coachPlanList.plans,function(index,value){
        if(value.id==id){
           $scope.mealPlan=value;
