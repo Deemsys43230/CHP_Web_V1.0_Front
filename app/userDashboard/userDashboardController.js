@@ -3501,7 +3501,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
                     style:{fontSize:'10px',padding:5,zIndex:500},
                     formatter:false
                 },
-                plotOptions: {
+                /*plotOptions: {
                     column: {
                         zones: [{
                             value: 195,
@@ -3514,7 +3514,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
                             color: '#e60000'
                         }]
                     }
-                },
+                },*/
                 series: [{
                     type: 'column',
                     name: 'Fastingbloodglucose',

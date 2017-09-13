@@ -1,7 +1,7 @@
 /**
  * Created by Deemsys on 9/21/2015.
  */
-var coachApp = angular.module('coachApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','angularUtils.directives.dirPagination','angular-nicescroll','angular-svg-round-progress']);
+var coachApp = angular.module('coachApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','angularUtils.directives.dirPagination','angular-nicescroll','angular-svg-round-progress','daterangepicker']);
 
 coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter","Flash","$location","$rootScope","$routeParams",function($scope,requestHandler,$filter,Flash,$location,$rootScope,$routeParams) {
 
@@ -15,7 +15,7 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
     $scope.accordion={
         "current":null
     };
-
+    $scope.planDetails={};
     /*$scope.datePicker = function(){
         $("#main-date").click();
     };*/
@@ -858,62 +858,16 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
                     style:{fontSize:'10px',padding:5,zIndex:500},
                     formatter:false
                 },
-                plotOptions: {
-                    column: {
-                        zones: [{
-                            value: 195,
-                            color: '#00cc44'
-                        },{
-                            value: 225,
-                            color: '#ffd11a'
-                        },{
-                            value: 400,
-                            color: '#e60000'
-                        }]
-                    }
-                },
                 series: [{
                     type: 'column',
                     name: 'Fastingbloodglucose',
                     color: '#339966',
-                    data:datafbg,
-                    tooltip: {
-
-                        headerFormat: '<span style="font-size:10px">{point.key} </span> <table>',
-                        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-                            '<td style="padding:0"><b>{point.y:.2f} g</b></td></tr>',
-                        footerFormat: '</table>',
-                        shared: true,
-                        useHTML: true,
-                        enabled:true,
-                        backgroundColor:'rgba(255, 255, 255, 1)',
-                        borderWidth:1,
-                        shadow:true,
-                        style:{fontSize:'10px',padding:5,zIndex:500},
-                        formatter:false
-                    }
-     //to  display fasting bloodglucose value
+                    data:datafbg     //to  display fasting bloodglucose value
                 }, {
                     type: 'column',
                     name: 'Randombloodglucose',
                     color: '#3366cc',
-                    data:datarbg,
-                    tooltip: {
-
-                        headerFormat: '<span style="font-size:10px">{point.key} </span> <table>',
-                        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-                            '<td style="padding:0"><b>{point.y:.2f} g</b></td></tr>',
-                        footerFormat: '</table>',
-                        shared: true,
-                        useHTML: true,
-                        enabled:true,
-                        backgroundColor:'rgba(255, 255, 255, 1)',
-                        borderWidth:1,
-                        shadow:true,
-                        style:{fontSize:'10px',padding:5,zIndex:500},
-                        formatter:false
-                    }
-  // to display  random bloodGlucose value
+                    data:datarbg  // to display  random bloodGlucose value
                 }]
 
             });
@@ -1556,6 +1510,7 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
     /*Get traning plan details*/
 
     $scope.doGetTrainingPlanDetails = function(userid){
+        $scope.paginationLoad=true;
         $scope.param={
             "limit":$scope.trainingPagination.itemsPerPage,
             "offset":($scope.trainingPagination.pageNumber-1)*$scope.trainingPagination.itemsPerPage
@@ -1563,8 +1518,6 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
         $scope.param.userid = userid;
         requestHandler.postRequest("coach/getTrainingPlans/",$scope.param).then(function(response){
             $scope.planList = response.data;
-            console.log($scope.planList);
-            $scope.paginationLoad=true;
         });
     };
 
@@ -1583,7 +1536,6 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
         
         requestHandler.getRequest("coach/getTrainingPlandetail/"+id,"").then(function(response){
             $scope.planView = response.data.history;
-
              $(".tracking-plan-viewall-div").hide();
              $(".tracking-plan-view-div").show();
              $(".tracking-plan-add-div").hide();
@@ -1593,11 +1545,30 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
     //do Insert New Plans
 
     $scope.doInsertTrainingPlan = function(){
+        if($('#duration-start').val()!=''){
+            startDate = $('#duration-start').val();
+            endDate = $('#duration-end').val();
+        }
+        $scope.planDetails.startdate = startDate;
+        $scope.planDetails.enddate = endDate;
         $scope.planDetails.userid = $scope.currentClientId;
+        console.log($scope.planDetails);
         requestHandler.postRequest("coach/insertTrainingPlan/",$scope.planDetails).then(function(response){
+            if(response.data.Response == "Success"){
+                successMessage(Flash, "Successfully Plan Added!");
+                $scope.doGetTrainingPlanDetails($scope.currentClientId);
+                $(".tracking-plan-viewall-div").show();
+                $(".tracking-plan-view-div").hide();
+                $(".tracking-plan-add-div").hide();   
+                $scope.planDetails={};
+                $scope.planDetails.startdate = "";
+                $scope.planDetails.enddate = "";
+                $scope.planDetails.userid = "";
+                $scope.coachTrainingForm.$setPristine();             
+            }
+
         },function(){
-            successMessage(Flash, "Successfully Plan Added!");
-            $scope.doGetTrainingPlanDetails(userid);
+            errorMessage(Flash,"Please Try Again Later");
         });
     };
 
@@ -1863,10 +1834,10 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
      //Get Coach Workout Plan List
     $scope.doGetMyWorkoutPlansList=function(){
         $scope.coachPlanPagination={
-                        "limit": $scope.workoutPlanPagination.itemsPerPage,
-                        "offset":($scope.workoutPlanPagination.pageNumber-1)*$scope.workoutPlanPagination.itemsPerPage,
-                        "plantype": 2
-                    };
+            "limit": $scope.workoutPlanPagination.itemsPerPage,
+            "offset":($scope.workoutPlanPagination.pageNumber-1)*$scope.workoutPlanPagination.itemsPerPage,
+            "plantype": 2
+        };
 
         requestHandler.postRequest("coach/myplans/",$scope.coachPlanPagination).then(function(response){
             $scope.coachWorkoutPlanList= response.data.plans;
@@ -1980,15 +1951,6 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
         $scope.doGetAssignedWorkoutPlanByCoach($routeParams.id);
     });
 
-    //Initial Load
-    $scope.statsInit = function(){
-        $scope.loaded = false;
-        $scope.paginationLoad=false;
-         //Health profile Details
-        $scope.doGetClientHealthProfileDetailsByCoach();
-        //Graph  for oneweek
-        $scope.doGetClientGraphDetailsByCoach();
-    };
 
     // Search Food Type
     $('.show-list-search').click(function() {
