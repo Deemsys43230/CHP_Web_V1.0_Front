@@ -308,6 +308,9 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
                 $location.path("coach");
 
            }
+            if(response.data.Response_status==0 && response.data.Error){
+                errorMessage(Flash,"Coach Exceeded Eligible Clients Count");
+            }
         }, function(){
                 errorMessage(Flash,"Please try again later!");
         });
