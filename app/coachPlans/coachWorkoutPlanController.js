@@ -295,10 +295,7 @@ $scope.doEditExerciseFromPlan=function(id){
     requestHandler.postRequest("coach/exerciseplandetail/",{"id":id}).then(function(response){
         $scope.userSelectedExerciseDetails= response.data.exercisedetail;
         $scope.userSavedExerciseDetails= response.data.savedexerciseplan;
-        // console.log("saved Detail",$scope.userSavedExerciseDetails);
         $.each($scope.userSelectedExerciseDetails.levels.levels,function(index,value){
-          // console.log($scope.userSelectedExerciseDetails.levels);
-          // console.log("value",value);
            if(value.levelunitid==$scope.userSavedExerciseDetails.unitlevelid){
               $scope.userExercise.selectedLevel=value;
               originallevel= angular.copy(value);
