@@ -188,7 +188,7 @@
                             <tbody>
                                 <tr dir-paginate="plan in myMealPlanList.plans | itemsPerPage:pagination.itemsPerPage" ng-show="myMealPlanList.plans.length!=0" total-items="myMealPlanList.totalrecords" current-page="pagination.pageNumber">
                                     <td class="wrap-all">{{plan.planname}}</td>
-                                    <td class="wrap">{{plan.description}}</td>
+                                    <td class="wrap-all">{{plan.description}}</td>
                                     <td>{{plan.plandays>1?plan.plandays+"&nbsp;Days":plan.plandays+"&nbsp;Day"}}</td>
                                     <td>{{plan.startdate}}</td>
                                     <td>{{plan.enddate}}</td>
@@ -332,7 +332,7 @@
                     <tbody>
                         <tr dir-paginate="plan in myworkoutPlanList.plans | itemsPerPage:pagination.itemsPerPage" ng-show="myworkoutPlanList.plans.length!=0" total-items="myworkoutPlanList.totalrecords" current-page="pagination.pageNumber">
                             <td class="wrap-all">{{plan.planname}}</td>
-                            <td class="wrap">{{plan.description}}</td>
+                            <td class="wrap-all">{{plan.description}}</td>
                             <td>{{plan.plandays>1?plan.plandays+"&nbsp;Days":plan.plandays+"&nbsp;Day"}}</td>
                             <td>{{plan.startdate}}</td>
                             <td>{{plan.enddate}}</td>

@@ -1604,6 +1604,8 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
 
     // Do get Assigned Meal Plans to User    
     $scope.doGetAssignedMealPlanByCoach=function(targetid){
+        $scope.planDetailView=false;
+
         $scope.getUserMealPlanParams={
             "targetid":targetid,
             "limit":$scope.mealPlanPagination.itemsPerPage,
@@ -1619,9 +1621,8 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
 
     //Laod Food Meal Plan Details
     $scope.doLoadMealPlanDetails=function(mapId){
-        $scope.currentPlanDetail=mapId;
         $scope.planDetailView=true;
-
+        
         requestHandler.postRequest("getplandetail/",{"mapid":mapId}).then(function(response){
             //First We need to group up days
             $scope.plandetail=response.data.plandetail;
@@ -1670,7 +1671,7 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
 
     //Workout Plan
     $scope.doGetAssignedWorkoutPlanByCoach=function(targetid){
-        $scope.workPlanDetailView=false;
+       $scope.workPlanDetailView=false;
 
        $scope.getWorkoutPlanParams={
             "targetid":targetid,

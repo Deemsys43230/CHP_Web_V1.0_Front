@@ -287,8 +287,6 @@ $scope.doCalculateCaloriesExercise=function(){
     }
 };
 
-var originallevel= "";
-var originalcalorie= "";
 
 $scope.doEditExerciseFromPlan=function(id){
   $scope.userExercise={};
@@ -299,17 +297,16 @@ $scope.doEditExerciseFromPlan=function(id){
            if(value.levelunitid==$scope.userSavedExerciseDetails.unitlevelid){
               $scope.userExercise.selectedLevel=value;
               originallevel= angular.copy(value);
-              console.log(originallevel);
            }
         });  
 
         $scope.userExercise.id= $scope.userSavedExerciseDetails.id;
         $scope.userExercise.day= $scope.userSavedExerciseDetails.day;
         $scope.userExercise.isoptional= $scope.userSavedExerciseDetails.isoptional;
+        originalisoptional= angular.copy($scope.userSavedExerciseDetails.isoptional);
         $scope.doCalculateCaloriesExercise();
         $scope.userExercise.calorieburn=parseFloat($scope.userSavedExerciseDetails.calorieburn); 
-        originalcalorie= angular.copy($scope.userSavedExerciseDetails.calorieburn);     
-        console.log(originalcalorie);
+        originalcalorie= angular.copy($scope.userSavedExerciseDetails.calorieburn);
     });
 
         $scope.addExercise=true;
@@ -338,7 +335,7 @@ $scope.doEditExerciseFromPlan=function(id){
 };
 
 $scope.isCleanExercise=function(){
-    return angular.equals(originallevel, $scope.userExercise.selectedLevel) && angular.equals(originalcalorie, $scope.userExercise.calorieburn);
+    return angular.equals(originallevel, $scope.userExercise.selectedLevel) && angular.equals(originalcalorie, $scope.userExercise.calorieburn) && angular.equals(originalisoptional, $scope.userExercise.isoptional);
 };
 
  //Maximum calorie value check
@@ -393,6 +390,9 @@ $scope.workoutPlansInit=function(){
   $scope.exerciseFilter= false;
   $scope.current=$scope.caloriesSpent=0;
   $scope.max = 100;
+  var originallevel= "";
+  var originalcalorie= "";
+  var originalisoptional= "";
   $scope.doviewCoachWorkoutPlans();
   $scope.exerciseSearchResult=[];
 };

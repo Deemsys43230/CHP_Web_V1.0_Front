@@ -32,21 +32,21 @@ $scope.reset=function(){
 
     $(function(){
         $("#lean_overlay").fadeTo(1000);
-        $("#meal-plan").fadeIn(600);
+        $("#mealPlan").fadeIn(600);
         $(".common_model").show();
         $scope.shouldBeOpen = true;
     });
 
     $(".modal_close").click(function(){
         $(".common_model").hide();
-        $("#meal-plan").hide();
+        $("#mealPlan").hide();
         $("#lean_overlay").hide();
         $scope.shouldBeOpen = false;
     });
 
     $("#lean_overlay").click(function(){
         $(".common_model").hide();
-        $("#meal-plan").hide();
+        $("#mealPlan").hide();
         $("#lean_overlay").hide();
         $scope.shouldBeOpen = false;
     });
@@ -71,7 +71,7 @@ $scope.doEditCoachMealPlan=function(id){
 
     $(function(){
         $("#lean_overlay").fadeTo(1000);
-        $("#meal-plan").fadeIn(600);
+        $("#mealPlan").fadeIn(600);
         $(".common_model").show();
         $scope.shouldBeOpen = true;
     });
@@ -91,14 +91,14 @@ $scope.doEditCoachMealPlan=function(id){
     
     $(".modal_close").click(function(){
         $(".common_model").hide();
-        $("#meal-plan").hide();
+        $("#mealPlan").hide();
         $("#lean_overlay").hide();
         $scope.shouldBeOpen = false;
     });
 
     $("#lean_overlay").click(function(){
         $(".common_model").hide();
-        $("#meal-plan").hide();
+        $("#mealPlan").hide();
         $("#lean_overlay").hide();
         $scope.shouldBeOpen = false;
     });
@@ -238,7 +238,6 @@ $scope.doEditFoodItemFromPlan=function(id){
         if(value.measureid==$scope.userSavedFoodDetails.foodmeasureid){
           $scope.userFood.measure=value;
           originalmeasure = angular.copy(value);
-          console.log(value);
         }
       });
 
@@ -248,9 +247,9 @@ $scope.doEditFoodItemFromPlan=function(id){
       $scope.userFood.foodsessionid=$scope.userSavedFoodDetails.foodsessionid;
       $scope.userFood.day=$scope.userSavedFoodDetails.day;
       $scope.userFood.isoptional= $scope.userSavedFoodDetails.isoptional;
+      originalisoptional= angular.copy($scope.userSavedFoodDetails.isoptional);
       $scope.doCalculateCalories();  
       $scope.userFood.calorieintake=$scope.caloriesIntake;
-      console.log($scope.userFood);
     });
     $scope.addFood=true;
     $scope.showSearch=false;
@@ -292,7 +291,7 @@ $scope.resetdata=function(){
 };
 
 $scope.isCleanFood=function(){
-    return angular.equals(originalmeasure, $scope.userFood.measure)&& angular.equals(originalmeasurecount, $scope.userFood.measurecount);
+    return angular.equals(originalmeasure, $scope.userFood.measure)&& angular.equals(originalmeasurecount, $scope.userFood.measurecount) && angular.equals(originalisoptional, $scope.userFood.isoptional);
 };
 
 // View Food Meal Item Plan Details
@@ -433,6 +432,7 @@ $scope.plansViewInit=function(){
   $scope.max=100;
   var originalmeasure= "";
   var originalmeasurecount= "";
+  var originalisoptional= "";
   $scope.foodSearchResult = [];
   $scope.doViewCoachPlans();
   
