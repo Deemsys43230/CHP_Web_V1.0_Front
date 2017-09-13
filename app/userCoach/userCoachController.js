@@ -456,6 +456,12 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
         requestHandler.getRequest("user/getcoachquote/"+coachid+"/","").then(function(response){
             $scope.coachAdvice= response.data.quotes;
             $scope.coachAdvice.description=response.data.quotes.description;
+            if(response.data.quotes.description==""){
+                $scope.noAdvices=true;
+            }
+            else{
+                $scope.noAdvices=false;
+            }
         }, function(){
             errorMessage(Flash,"Please try again later!");
         });
