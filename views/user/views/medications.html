@@ -39,9 +39,9 @@
                         </thead>
                         <tbody>
                             <tr dir-paginate="mymedication in mymedicationfilter = (userMedicationList | filter : medicationsearch | itemsPerPage: 8)" ng-show="userMedicationList.length!=0">
-                                <td title="{{mymedication.medicinename}}">{{mymedication.medicinename}}</td>
+                                <td title="{{mymedication.medicinename}}" class="wrap-all">{{mymedication.medicinename}}</td>
                                 <td title="{{mymedication.dosage}}">{{mymedication.dosage}}</td>
-                                <td title="{{mymedication.notes}}">{{mymedication.notes}}</td>
+                                <td title="{{mymedication.notes}}" class="wrap-all">{{mymedication.notes}}</td>
                                 <td>{{mymedication.issharable==1?'Yes':'No'}}</td>
                                 <td>
                                  <a href="" class="btn-xs btn-primary" ng-click="viewUserMedication(mymedication.id)">View Details</a>
@@ -98,7 +98,7 @@
                     <span ng-show="medicationForm.notes.$dirty&&medicationForm.notes.$invalid">
                          <span class="error-message textarea-errormessage40" ng-show="medicationForm.notes.$error.required"><span>Required.</span></span>
                     </span>
-                    <textarea class="forum-textarea" name="notes" ng-model="medication.notes" required></textarea>
+                    <textarea class="forum-textarea" name="notes" ng-model="medication.notes" maxlength="250" required></textarea>
                 </div>      
                 <div class="col-lg-8 col-md-8 col-sm-8">  
                     <div class="col-md-2 no-padding"><p class="padding-top-4" style="margin-top:0;">Is&nbsp;Sharable?</p></div> 

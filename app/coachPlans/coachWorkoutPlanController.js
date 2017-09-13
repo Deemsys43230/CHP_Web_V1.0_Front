@@ -82,7 +82,7 @@ $scope.doEditCoachWorkoutPlan=function(id){
     $.each($scope.coachWorkoutPlanList.plans,function(index,value){
        if(value.id==id){
           $scope.workoutPlan=value;
-          $cope.original= angular.copy($scope.workoutPlan);
+          $scope.original= angular.copy($scope.workoutPlan);
        }
     });
     
@@ -265,7 +265,6 @@ $scope.doCalculateCaloriesExercise=function(){
     $scope.userExercise.workoutvalue+=parseInt($scope.workoutvalueHours)*3600;
     $scope.userExercise.workoutvalue+=parseInt($scope.workoutvalueMinutes)*60;
     $scope.userExercise.workoutvalue+=parseInt($scope.workoutvalueSeconds);
-    console.log( $scope.userExercise.workoutvalue);
     if($scope.userExercise.workoutvalue==0){
         $scope.current=$scope.caloriesSpent=0;
     }
@@ -313,6 +312,7 @@ $scope.doEditExerciseFromPlan=function(id){
         $scope.doCalculateCaloriesExercise();
         $scope.userExercise.calorieburn=parseFloat($scope.userSavedExerciseDetails.calorieburn); 
         originalcalorie= angular.copy($scope.userSavedExerciseDetails.calorieburn);     
+        console.log(originalcalorie);
     });
 
         $scope.addExercise=true;
@@ -341,7 +341,19 @@ $scope.doEditExerciseFromPlan=function(id){
 };
 
 $scope.isCleanExercise=function(){
-    return angular.equals(originallevel, $scope.userExercise.selectedLevel.levelunitid)&& angular.equals(originalcalorie, $scope.userExercise.calorieburn);
+    return angular.equals(originallevel, $scope.userExercise.selectedLevel) && angular.equals(originalcalorie, $scope.userExercise.calorieburn);
+};
+
+ //Maximum calorie value check
+$scope.maxcalories=false;
+$scope.maxCalorieValueCheck = function(){
+    if(parseInt($scope.userExercise.calorieburn)<=5000){
+        $scope.maxcalories=false;
+    }
+    else if(parseInt($scope.userExercise.calorieburn) >5000){
+        $scope.maxcalories=true;
+    }
+
 };
 
 //Insert  Exercise

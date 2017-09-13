@@ -52,7 +52,7 @@
                 <table class="table table-bordered table-striped">
                     <thead>
                         <tr class="warning">
-                            <th colspan="6"><h2 class="text-center"><strong>{{plandetail.description}}</strong></h2></th>
+                            <th colspan="6"><h2 class="text-center"><strong>{{plandetail.planname}}</strong></h2></th>
                         </tr>
                     </thead>
                 <tr>
@@ -311,11 +311,11 @@
                         </span>
                         <span ng-if="selectedExercise.exerciseid!=1">
                         <h5 class="margin-top-10">Calories to be Burnt:</h5>
-                        <input type="text"  name="calories"  maxlength="6" ng-model="userExercise.calorieburn" onkeypress="return validateFloatKeyPress1(this,event);" required validate-zero>
-                            <span class="error-message" ng-show="!ExerciseAddForm.calories.$error.required&&maxfoodvalue"><span>Please&nbsp;Enter&nbsp;Valid&nbsp;Value.</span></span>
-                            <span ng-show="ExerciseAddForm.calories.$dirty&&FoodAddForm.calories.$invalid">
-                               <span class="error-message" ng-show="ExerciseAddForm.calories.$error.required"><span>Required.</span></span>
-                               <span class="error-message" ng-show="!ExerciseAddForm.calories.$error.required&&ExerciseAddForm.calories.$error.validateZero"><span>Invalid&nbsp;data.</span></span>
+                        <input type="text"  name="calorieburn"  maxlength="6" ng-model="userExercise.calorieburn" onkeypress="return validateFloatKeyPress1(this,event);" ng-change="maxCalorieValueCheck();" required validate-zero>
+                            <span class="error-message" ng-show="!ExerciseAddForm.calorieburn.$error.required&&maxcalories"><span>Please&nbsp;Enter&nbsp;Valid&nbsp;Value.</span></span>
+                            <span ng-show="ExerciseAddForm.calorieburn.$dirty&&FoodAddForm.calorieburn.$invalid">
+                               <span class="error-message" ng-show="ExerciseAddForm.calorieburn.$error.required"><span>Required.</span></span>
+                               <span class="error-message" ng-show="!ExerciseAddForm.calorieburn.$error.required&&ExerciseAddForm.calorieburn.$error.validateZero"><span>Invalid&nbsp;data.</span></span>
                             </span>
                         </span>
                         <div class="col-lg-12 col-md-12 col-sm-12 margin-top-10 no-padding">  

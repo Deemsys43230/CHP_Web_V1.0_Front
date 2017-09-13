@@ -18,16 +18,16 @@
             <table class="table table-bordered table-striped">
                 <thead>
                     <tr class="warning">
-                        <th>Plan Name</th>
-                        <th>Plan Description</th>
-                        <th>Plan Duration</th>
-                        <th>Options</th>
+                        <th class="col-md-2">Plan Name</th>
+                        <th class="col-md-6">Plan Description</th>
+                        <th class="col-md-2">Plan Duration</th>
+                        <th class="col-md-2">Options</th>
                     </tr>    
                 </thead>
                 <tbody>
                     <tr dir-paginate="plan in coachPlanList.plans | itemsPerPage:mealPagination.itemsPerPage" ng-show="coachPlanList.plans.length!=0" current-page="mealPagination.pageNumber" total-items="coachPlanList.totalrecords">
-                        <td>{{plan.planname}}</td>
-                        <td>{{plan.description}}</td>
+                        <td class="wrap-all">{{plan.planname}}</td>
+                        <td class="wrap-all">{{plan.description}}</td>
                         <td>{{plan.plandays>1?plan.plandays+"&nbsp;Days":plan.plandays+"&nbsp;Day"}}</td>
                         <td>
                             <a href="#coach-plans-view/{{plan.id}}" class="btn-xs btn-primary">My Plan</a>
@@ -116,7 +116,7 @@
                     <span ng-show="mealPlanForm.description.$dirty&&mealPlanForm.description.$invalid">
                          <span class="error-message textarea-errormessage40" ng-show="mealPlanForm.description.$error.required"><span>Required.</span></span>
                     </span>
-                    <textarea class="forum-textarea" name="description" ng-model="mealPlan.description" required></textarea>
+                    <textarea class="forum-textarea" name="description" ng-model="mealPlan.description" maxlength="250"  required></textarea>
                 </div>
             </div>
                  <div class="action_btns margin-top-20">

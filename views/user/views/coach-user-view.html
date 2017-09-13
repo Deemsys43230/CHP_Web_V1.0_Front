@@ -6,7 +6,7 @@
                 <div class="col-lg-12 col-md-12 col-sm-12">
                     <!--<a href="#dashboard" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back to Dashboard</a>-->
                       <a href="#coach" class="btn-sm btn-warning pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i>&nbsp;Back to My Coaches</a>
-                    <div flash-message="2000" class="col-md-3 no-padding pull-right"></div>
+                    <div flash-message="2000" class="col-md-4 no-padding pull-right"></div>
                     <h5 class="classic-title"><span><a href="#coach"><i class="fa fa-male"></i>&nbsp;&nbsp;MY COACH</a></span>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#coach-search"><i class="fa fa-search"></i>&nbsp;&nbsp;COACH SEARCH</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#coach-invitations"><i class="fa fa-envelope"></i>&nbsp;&nbsp;COACH INVITATION</a></h5>
                 </div>                
                 <div class="col-lg-12 col-md-12 col-sm-12">
@@ -176,19 +176,19 @@
                         <table class="table table-bordered table-striped" ng-hide="planDetailView">
                             <thead>
                                 <tr class="warning">
-                                    <th>Plan Name</th>
-                                    <th>Description</th>
-                                    <th>Duration</th>
-                                    <th>Start Date</th>
-                                    <th>End Date</th>
-                                    <th>Status</th>
-                                    <th>Options</th>
-                                </tr>    
+                                    <th class="col-md-2">Plan Name</th>
+                                    <th class="col-md-3">Description</th>
+                                    <th class="col-md-1">Duration</th>
+                                    <th class="col-md-1">Start Date</th>
+                                    <th class="col-md-1">End Date</th>
+                                    <th class="col-md-1">Status</th>
+                                    <th class="col-md-1">Options</th>   
+                                </tr> 
                             </thead>
                             <tbody>
                                 <tr dir-paginate="plan in myMealPlanList.plans | itemsPerPage:pagination.itemsPerPage" ng-show="myMealPlanList.plans.length!=0" total-items="myMealPlanList.totalrecords" current-page="pagination.pageNumber">
-                                    <td>{{plan.planname}}</td>
-                                    <td>{{plan.description}}</td>
+                                    <td class="wrap-all">{{plan.planname}}</td>
+                                    <td class="wrap">{{plan.description}}</td>
                                     <td>{{plan.plandays>1?plan.plandays+"&nbsp;Days":plan.plandays+"&nbsp;Day"}}</td>
                                     <td>{{plan.startdate}}</td>
                                     <td>{{plan.enddate}}</td>
@@ -206,7 +206,7 @@
              <table class="table table-bordered table-striped" ng-show="planDetailView">
                     <thead>
                         <tr class="warning">
-                            <th colspan="6"><h2 class="text-center"><strong>{{plandetail.description}}</strong></h2></th>
+                            <th colspan="6"><h2 class="text-center"><strong>{{plandetail.planname}}</strong></h2></th>
                         </tr>
                     </thead>
                 <tr>
@@ -320,19 +320,19 @@
                  <table class="table table-bordered table-striped" ng-hide="workPlanDetailView">
                     <thead>
                         <tr class="warning">
-                            <th>Plan Name</th>
-                            <th>Description</th>
-                            <th>Duration</th>
-                            <th>Start Date</th>
-                            <th>End Date</th>
-                            <th>Status</th>
-                            <th>Options</th>
-                        </tr>    
+                            <th class="col-md-2">Plan Name</th>
+                            <th class="col-md-3">Description</th>
+                            <th class="col-md-1">Duration</th>
+                            <th class="col-md-1">Start Date</th>
+                            <th class="col-md-1">End Date</th>
+                            <th class="col-md-1">Status</th>
+                            <th class="col-md-1">Options</th>   
+                        </tr>   
                     </thead>
                     <tbody>
                         <tr dir-paginate="plan in myworkoutPlanList.plans | itemsPerPage:pagination.itemsPerPage" ng-show="myworkoutPlanList.plans.length!=0" total-items="myworkoutPlanList.totalrecords" current-page="pagination.pageNumber">
-                            <td>{{plan.planname}}</td>
-                            <td>{{plan.description}}</td>
+                            <td class="wrap-all">{{plan.planname}}</td>
+                            <td class="wrap">{{plan.description}}</td>
                             <td>{{plan.plandays>1?plan.plandays+"&nbsp;Days":plan.plandays+"&nbsp;Day"}}</td>
                             <td>{{plan.startdate}}</td>
                             <td>{{plan.enddate}}</td>
@@ -350,7 +350,7 @@
                 <table class="table table-bordered table-striped" ng-show="workPlanDetailView">
                     <thead>
                         <tr class="warning">
-                            <th colspan="6"><h2 class="text-center"><strong>{{plandetail.description}}</strong></h2></th>
+                            <th colspan="6"><h2 class="text-center"><strong>{{plandetail.planname}}</strong></h2></th>
                         </tr>
                     </thead>
                 <tr>
