@@ -798,12 +798,12 @@
         </div>
 
           <!--Meal Plan -->
-        <div ng-cloak class="ng-cloak mealplan-div">  
-                <a href="" ng-show="planDetailView" class="btn-sm btn-warning pull-right margin-left-5 margin-bottom-10"  ng-click="planDetailView=false"><i class="fa fa-arrow-circle-o-left"></i>&nbsp;Back to Plans</a>
-                <a href="#modal-assign-meal" id="trigger-assign-meal" ng-hide="planDetailView" class="btn-sm btn-success pull-right margin-left-5 margin-bottom-10" ng-click="resetMeal()"><i class="fa fa-plus-circle"></i> Assign Meal Plan</a>
+        <div class="mealplan-div">  
+                <a href="" ng-show="mealplan.planDetailView" class="btn-sm btn-warning pull-right margin-left-5 margin-bottom-10"  ng-click="mealplan.planDetailView=false"><i class="fa fa-arrow-circle-o-left"></i>&nbsp;Back to Plans</a>
+                <a href="#modal-assign-meal" id="trigger-assign-meal" ng-hide="mealplan.planDetailView" class="btn-sm btn-success pull-right margin-left-5 margin-bottom-10" ng-click="resetMeal()"><i class="fa fa-plus-circle"></i> Assign Meal Plan</a>
                 <div flash-message="2000" class="col-md-4 pull-right no-padding"></div>
              
-                 <div class="col-md-8 pull-right margin-top-3" ng-show="planDetailView">
+                 <div class="col-md-8 pull-right margin-top-3" ng-show="mealplan.planDetailView">
                     <div class="col-md-3 no-padding pull-right">
                     <span class="padding-left-15"><i class="fa fa-check-circle text-green"></i></span>
                     <span>-&nbsp;Client&nbsp;Ate&nbsp;Food</span>
@@ -815,7 +815,7 @@
                     <span class="orange plan-point"></span><div class="margin-left-20">-&nbsp;Optional&nbsp;Food</div>
                     </div>
                  </div>        
-                    <table class="table table-bordered table-striped" ng-hide="planDetailView">
+                    <table class="table table-bordered table-striped" ng-hide="mealplan.planDetailView">
                     <thead>
                         <tr class="warning">
                             <th class="col-md-2">Plan Name</th>
@@ -846,7 +846,7 @@
             <!-- Start Pagination -->
         <dir-pagination-controls ng-show="paginationLoad" boundary-links="true"> </dir-pagination-controls>
         <!-- End Pagination -->
-        <table class="table table-bordered table-striped" ng-show="planDetailView">
+        <table class="table table-bordered table-striped" ng-show="mealplan.planDetailView">
                     <thead>
                         <tr class="warning">
                             <th colspan="6"><h2 class="text-center"><strong>{{plandetail.planname}}</strong></h2></th>
@@ -940,11 +940,11 @@
         </div>
 
            <!--Workout Plan -->
-        <div ng-cloak class="ng-cloak workoutplan-div">     
-            <a href="" ng-show="workPlanDetailView" class="btn-sm btn-warning pull-right margin-left-5 margin-bottom-10"  ng-click="workPlanDetailView=false"><i class="fa fa-arrow-circle-o-left"></i>&nbsp;Back to Plans</a>
-            <a href="#modal-assign-workout" id="trigger-assign-workout" ng-hide="workPlanDetailView" class="btn-sm btn-success pull-right margin-left-5 margin-bottom-10" ng-click="resetWorkout()"><i class="fa fa-plus-circle"></i> Assign Workout Plan</a>
+        <div class="workoutplan-div">     
+            <a href="" ng-show="workoutplan.workPlanDetailView" class="btn-sm btn-warning pull-right margin-left-5 margin-bottom-10"  ng-click="workoutplan.workPlanDetailView=false"><i class="fa fa-arrow-circle-o-left"></i>&nbsp;Back to Plans</a>
+            <a href="#modal-assign-workout" id="trigger-assign-workout" ng-hide="workoutplan.workPlanDetailView" class="btn-sm btn-success pull-right margin-left-5 margin-bottom-10" ng-click="resetWorkout()"><i class="fa fa-plus-circle"></i> Assign Workout Plan</a>
             <div flash-message="2000" class="col-md-4 pull-right no-padding"></div>
-            <div class="col-md-10 pull-right margin-top-3" ng-show="workPlanDetailView">
+            <div class="col-md-10 pull-right margin-top-3" ng-show="workoutplan.workPlanDetailView">
                     <div class="col-md-3 no-padding pull-right">
                     <span class="padding-left-15"><i class="fa fa-check-circle text-green"></i></span>
                     <span>-&nbsp;Client&nbsp;Did&nbsp;Exercise</span>
@@ -956,7 +956,7 @@
                     <span class="orange plan-point"></span><div class="margin-left-20">-&nbsp;Optional&nbsp;Exercise</div>
                     </div>
             </div>  
-                 <table class="table table-bordered table-striped" ng-hide="workPlanDetailView">
+                 <table class="table table-bordered table-striped" ng-hide="workoutplan.workPlanDetailView">
                     <thead>
                         <tr class="warning">
                             <th class="col-md-2">Plan Name</th>
@@ -987,7 +987,7 @@
             <!-- Start Pagination -->
         <dir-pagination-controls ng-show="paginationLoad" boundary-links="true"> </dir-pagination-controls>
         <!-- End Pagination -->   
-        <table class="table table-bordered table-striped" ng-show="workPlanDetailView">
+        <table class="table table-bordered table-striped" ng-show="workoutplan.workPlanDetailView">
                     <thead>
                         <tr class="warning">
                             <th colspan="6"><h2 class="text-center"><strong>{{plandetail.planname}}</strong></h2></th>
@@ -995,7 +995,7 @@
                     </thead>
                 <tr>
                     <th class="col-md-3 text-center" style="margin-top:15px"><strong>Plans</strong></th>
-                    <th class="col-md-9 text-center"><strong>Excercise Name</strong></th>
+                    <th class="col-md-9 text-center"><strong>Exercise Name</strong></th>
                 </tr>
                 <tr ng-repeat="workoutPlanDetail in workoutPlanDetailList">
                     <td class="col-md-1 food-plans text-center align-bottom">

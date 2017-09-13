@@ -157,16 +157,18 @@ userApp.controller('UserMedicationController',['$scope','requestHandler','Flash'
 	};
 
     $scope.deleteUserMedication=function(id){
+        if(confirm("Are you sure want to remove Medication?")){
     	requestHandler.postRequest("user/deletemedication/",{'id':id}).then(function(response){
     		successMessage(Flash,"Successfully Removed");
     		$scope.doGetMedicationListByUser();
     	}, function(){
 	 		errorMessage(Flash,"Please try again later!");
 	 	});	
+        }
     };
     
     $scope.isClean= function(){
-    return angular.equals(original, $scope.medication);
+        return angular.equals(original, $scope.medication);
    };
 
 

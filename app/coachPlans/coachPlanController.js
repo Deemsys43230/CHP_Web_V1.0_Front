@@ -84,7 +84,7 @@ $scope.doEditCoachMealPlan=function(id){
 
     $.each($scope.coachPlanList.plans,function(index,value){
        if(value.id==id){
-          $scope.mealPlan=value;
+          $scope.mealPlan=angular.copy(value);
           $scope.original= angular.copy($scope.mealPlan);
        }
     });

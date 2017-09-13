@@ -1604,7 +1604,7 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
 
     // Do get Assigned Meal Plans to User    
     $scope.doGetAssignedMealPlanByCoach=function(targetid){
-        $scope.planDetailView=false;
+        $scope.mealplan={planDetailView:false};
 
         $scope.getUserMealPlanParams={
             "targetid":targetid,
@@ -1615,14 +1615,14 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
         requestHandler.postRequest("coach/getplans/",$scope.getUserMealPlanParams).then(function(response){
             $scope.userMealPlanList=response.data;
         }, function(){
-            errorMessage(Flash,"Please try again later!")
+            errorMessage(Flash,"Please try again later!");
         });
     };  
 
     //Laod Food Meal Plan Details
     $scope.doLoadMealPlanDetails=function(mapId){
-        $scope.planDetailView=true;
-        
+        $scope.mealplan={planDetailView:true};
+
         requestHandler.postRequest("getplandetail/",{"mapid":mapId}).then(function(response){
             //First We need to group up days
             $scope.plandetail=response.data.plandetail;
@@ -1665,13 +1665,13 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
           });
          
         },function(){
-            errorMessage(Flash,"Please try again later!")
+            errorMessage(Flash,"Please try again later!");
         });
     };  
 
     //Workout Plan
     $scope.doGetAssignedWorkoutPlanByCoach=function(targetid){
-       $scope.workPlanDetailView=false;
+       $scope.workoutplan={workPlanDetailView:false};
 
        $scope.getWorkoutPlanParams={
             "targetid":targetid,
@@ -1682,13 +1682,13 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
         requestHandler.postRequest("coach/getplans/",$scope.getWorkoutPlanParams).then(function(response){
             $scope.userworkoutPlanList=response.data;
         }, function(){
-            errorMessage(Flash,"Please try again later!")
+            errorMessage(Flash,"Please try again later!");
         });
     };
 
     //Laod Food Meal Plan Details
     $scope.doLoadWorkoutPlanDetails=function(mapId){
-        $scope.workPlanDetailView=true;
+        $scope.workoutplan={workPlanDetailView:true};
 
         requestHandler.postRequest("getplandetail/",{"mapid":mapId}).then(function(response){
         $scope.plan= response.data.plan;
@@ -1724,7 +1724,7 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
           });
 
         },function(){
-            errorMessage(Flash,"Please try again later!")
+            errorMessage(Flash,"Please try again later!");
         });
     };
 
@@ -1795,7 +1795,7 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
         requestHandler.postRequest("coach/myplans/",$scope.coachPlanPagination).then(function(response){
             $scope.coachMealPlanList= response.data.plans;
         }, function(){
-            errorMessage(Flash,"Please try again later!")
+            errorMessage(Flash,"Please try again later!");
         });
     };
 

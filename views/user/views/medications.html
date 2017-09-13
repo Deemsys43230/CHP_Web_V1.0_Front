@@ -33,7 +33,7 @@
                                 <th class="col-lg-2 col-md-2 col-sm-2">Medicine Name</th>
                                 <th class="col-lg-2 col-md-2 col-sm-2">Dosage</th>
                                 <th class="col-lg-2 col-md-2 col-sm-2">Notes</th>
-                                <th class="col-lg-2 col-md-2 col-sm-2">Is Sharable?</th>
+                                <th class="col-lg-2 col-md-2 col-sm-2">Share&nbsp;with&nbsp;Coach&nbsp;?</th>
                                 <th class="col-lg-2 col-md-2 col-sm-2">Options</th>
                             </tr>    
                         </thead>
@@ -100,17 +100,15 @@
                     </span>
                     <textarea class="forum-textarea" name="notes" ng-model="medication.notes" maxlength="250" required></textarea>
                 </div>      
-                <div class="col-lg-8 col-md-8 col-sm-8">  
-                    <div class="col-md-2 no-padding"><p class="padding-top-4" style="margin-top:0;">Is&nbsp;Sharable?</p></div> 
-                    <div class="col-lg-3 col-md-3 col-sm-3 col-md-offset-1 text-center no-padding">
-                        <input id="yes" type="radio" ng-model="medication.issharable" value="1">
-                          <label for="yes">Yes</label>
+                <div class="col-lg-8 col-md-8 col-sm-8"> 
+                    <div class="col-md-4 no-padding"><p class="padding-top-4" style="margin-top:0;">Share&nbsp;with&nbsp;Coach?</p></div> 
+                    <div class="col-lg-8 col-md-8 col-sm-8 margin-top-2">
+                        <span class="fh-checkbox" required>
+                            <input type="checkbox" id="isSharable" name="issharable" ng-model="medication.issharable" ng-true-value="1" ng-false-value="0">
+                            <label for="isSharable">&nbsp;&nbsp;</label>
+                        </span>
                     </div>
-                    <div class="col-lg-3 col-md-3 col-sm-3 no-padding margin-left-5 text-center">
-                        <input id="no" type="radio" ng-model="medication.issharable" value="0">
-                          <label for="no">No</label>
-                    </div> 
-                    </div>
+                </div>    
                </div> 
                  <div class="action_btns margin-top-20">
                     <div class="one_half" ng-show="isNew"><a ng-class="{modal_close:medicationForm.$invalid}" class="btn btn_red" ng-disabled="medicationForm.$invalid" ng-click="doAddUserMedication()">Add Medication</a></div>
@@ -124,7 +122,7 @@
 </div>
 
 <!-- View Medication Popup -->
-<div id="viewMedication" class="popupContainer-width-big" style="display:none;">
+<div id="viewMedication" class="popupContainer-width-big" style="display:none;top:100px!important">
     <div class="center-block">
     <header class="popupHeader width-100">
         <span class="header_title">Medication</span>
@@ -148,7 +146,7 @@
                     <td class="col-md-6 wrap">{{userMedicationDetails.notes}}</td>
                 </tr>
                 <tr>
-                    <td class="col-md-6">Is Sharable?</td>
+                    <td class="col-md-6">Share&nbsp;with&nbsp;Coach&nbsp;?</td>
                     <td class="col-md-6">{{userMedicationDetails.issharable==1?'Yes':'No'}}</td>
                 </tr>
             </table>

@@ -638,6 +638,7 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'userApp',
                             files:[
+                                '../../css/custom-inputs.css',
                                 '../../plugin/popup/style.css',
                                 '../../angular/angular-utils-pagination/dirPagination.js',
                                 '../../app/medication/userMedicationController.js'
