@@ -33,7 +33,7 @@
                                 <th class="col-lg-2 col-md-2 col-sm-2">Medicine Name</th>
                                 <th class="col-lg-2 col-md-2 col-sm-2">Dosage</th>
                                 <th class="col-lg-2 col-md-2 col-sm-2">Notes</th>
-                                <th class="col-lg-2 col-md-2 col-sm-2">Share&nbsp;with&nbsp;Coach&nbsp;?</th>
+                                <th class="col-lg-2 col-md-2 col-sm-2">Share&nbsp;with&nbsp;Coach</th>
                                 <th class="col-lg-2 col-md-2 col-sm-2">Options</th>
                             </tr>    
                         </thead>
@@ -100,15 +100,12 @@
                     </span>
                     <textarea class="forum-textarea" name="notes" ng-model="medication.notes" maxlength="250" required></textarea>
                 </div>      
-                <div class="col-lg-8 col-md-8 col-sm-8"> 
-                    <div class="col-md-4 no-padding"><p class="padding-top-4" style="margin-top:0;">Share&nbsp;with&nbsp;Coach?</p></div> 
-                    <div class="col-lg-8 col-md-8 col-sm-8 margin-top-2">
-                        <span class="fh-checkbox" required>
+                <div class="col-lg-8 col-md-8 col-sm-8  margin-top-2"> 
+                  <span class="fh-checkbox" required>
                             <input type="checkbox" id="isSharable" name="issharable" ng-model="medication.issharable" ng-true-value="1" ng-false-value="0">
-                            <label for="isSharable">&nbsp;&nbsp;</label>
+                            <label for="isSharable">Share&nbsp;with&nbsp;Coach</label>
                         </span>
                     </div>
-                </div>    
                </div> 
                  <div class="action_btns margin-top-20">
                     <div class="one_half" ng-show="isNew"><a ng-class="{modal_close:medicationForm.$invalid}" class="btn btn_red" ng-disabled="medicationForm.$invalid" ng-click="doAddUserMedication()">Add Medication</a></div>
@@ -146,7 +143,7 @@
                     <td class="col-md-6 wrap">{{userMedicationDetails.notes}}</td>
                 </tr>
                 <tr>
-                    <td class="col-md-6">Share&nbsp;with&nbsp;Coach&nbsp;?</td>
+                    <td class="col-md-6">Share&nbsp;with&nbsp;Coach</td>
                     <td class="col-md-6">{{userMedicationDetails.issharable==1?'Yes':'No'}}</td>
                 </tr>
             </table>
