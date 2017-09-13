@@ -82,7 +82,7 @@ $scope.doEditCoachWorkoutPlan=function(id){
     $.each($scope.coachWorkoutPlanList.plans,function(index,value){
        if(value.id==id){
           $scope.workoutPlan=value;
-          original= angular.copy($scope.workoutPlan);
+          $cope.original= angular.copy($scope.workoutPlan);
        }
     });
     
@@ -102,7 +102,7 @@ $scope.doEditCoachWorkoutPlan=function(id){
 };
 
 $scope.isClean=function(){
-  return angular.equals(original, $scope.workoutPlan);
+  return angular.equals($scope.original, $scope.workoutPlan);
 };    
 
 $scope.doDeleteCoachWorkoutPlan=function(id){
@@ -121,7 +121,7 @@ $scope.doDeleteCoachWorkoutPlan=function(id){
 };
 
 $scope.init=function(){
-  var original="";
+  $scope.original={};
 	$scope.pagination= {"itemsPerPage": 8, "pageNumber": 1}
 	$scope.paginationLoad=false;
 };

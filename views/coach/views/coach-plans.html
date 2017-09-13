@@ -72,10 +72,8 @@
                 <div class="col-md-6 no-padding">
                     <div class="col-md-12">
                         <p>Plan Days</p>
-
-                        <select name="plandays" class="form-control" ng-model="mealPlan.plandays" ng-init="mealPlan.plandays='0'" required focus-me="shouldBeOpen">
+                        <select name="plandays" class="full-width main" ng-model="mealPlan.plandays" ng-init="mealPlan.plandays='0'" required focus-me="shouldBeOpen" style="height: 42px !important">
                             <option value="">-- Select Plan Days --</option>
-                           <option value="0">00</option>
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
@@ -108,9 +106,9 @@
                             <option value="30">30</option>
                         </select>
                                 
-                            <span ng-show="mealPlanForm.plandays.$dirty&&mealPlanForm.plandays.$invalid">
-                                 <span class="error-message" ng-show="mealPlanForm.plandays.$error.required"><span>Required.</span></span>
-                            </span>
+                        <span ng-show="mealPlanForm.plandays.$dirty&&mealPlanForm.plandays.$invalid">
+                             <span class="error-message" ng-show="mealPlanForm.plandays.$error.required"><span>Required.</span></span>
+                        </span>
                     </div>            
                 </div>
                 <div class="col-md-12">
