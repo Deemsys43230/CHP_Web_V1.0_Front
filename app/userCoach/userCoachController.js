@@ -224,10 +224,16 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
     // Do Get Chat Message
     $scope.doGetChatMessage=function(id){
         $scope.currentChatTargetId= id;
-        $scope.getMessageParam={"targetid":id,"offset":0};
+        
         requestHandler.postRequest("readMessage/",$scope.getMessageParam).then(function(response){
+            $scope.totalChatMessages=response.data.totalrecords;
             $scope.chatMessages= response.data.chats;
             $scope.chatMessages.userid= response.data.chats[0].userid;
+            $scope.showLoadMore=false;
+            if($scope.chatMessages.length<$scope.totalChatMessages){
+                $scope.showLoadMore=true;
+            }
+            
             requestHandler.getRequest("getUserProfile/"+$scope.chatMessages.userid, "").then(function(response){
                  $scope.userImageUrl=response.data.userprofile.imageurl;
             });
@@ -250,9 +256,35 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
                 }
 
             });
+            setTimeout(function(){ $('.msg_container_base').scrollTop($('.msg_container_base')[0].scrollHeight); }, 500);
         });
     };
+   //Do Get Load Chat Message
+    $scope.doLoadChatMessages=function(){
+        $scope.getMessageParam.offset=$scope.chatMessages.length;
+        console.log($scope.chatMessages);   
+        $scope.loadMoreScrollStopId=$scope.chatMessages[0].logid;
 
+        requestHandler.postRequest("/readMessage/",$scope.getMessageParam).then(function(response){
+            $.each(response.data.chats,function(index,value){
+                value.selectedChat=0;
+                value.scrollLocation=0;
+            });
+            $scope.totalChatMessages=response.data.totalrecords;
+            $scope.chatMessages.unshift.apply($scope.chatMessages,response.data.chats);
+            $scope.showLoadMore=false;
+            if($scope.chatMessages.length<$scope.totalChatMessages){
+                $scope.showLoadMore=true;
+            }            
+        });
+        setTimeout(function(){
+                $scope.topPos = document.getElementById($scope.loadMoreScrollStopId).offsetTop;
+                $scope.divTop = document.getElementById('chat_container').offsetTop;
+                console.log($scope.loadMoreScrollStopId+","+$scope.topPos+","+$scope.divTop)
+                $('#chat_container').getNiceScroll(0).doScrollPos(0,$scope.topPos-$scope.divTop-20);
+        }, 200);
+        
+    }
     //Do Send Chat Message
     $scope.doSendChatMessage=function(){
          var chatlen=$scope.chat.message.length;
@@ -264,6 +296,9 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
         requestHandler.postRequest("/sendMessage/",$scope.getSendMessageParam).then(function(response){
             $scope.doGetChatMessage($scope.currentChatTargetId);
         });
+        //Reset Array
+       $scope.deletingChatCount=0;
+       $scope.deleteChatLogId=[];
     };
 
     //Do Send Chat Message
@@ -736,6 +771,7 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
 
     $scope.userCoachViewInit=function(){
         $scope.scrollnation={"itemsPerScroll": 4,"scrollEndCount":-1};
+        $scope.getMessageParam={"targetid":$routeParams.id,"offset":0};
         $scope.checkReviews=[];
         $scope.disablereview=true;
         $scope.checkReview();

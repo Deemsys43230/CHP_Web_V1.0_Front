@@ -407,10 +407,11 @@
                                     <a href=""><span id="minim_chat_window" class="glyphicon glyphicon-plus icon_minim panel-collapsed" onclick="chatMinMax()" ng-click="doReadChatMessage();"></span></a>
                                 </div>
                             </div>
-                            <div id="chat_container" class="panel-body msg_container_base" style="display:none;">
+                            <div id="chat_container" class="panel-body msg_container_base" style="display:none;" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#eee',scrollspeed: -5}">
+                                 <div class="row" ng-show="showLoadMore"><center><span ng-click="doLoadChatMessages()" class="label label-default" style="padding:5px;cursor:pointer;"><i class="fa fa-arrow-up" aria-hidden="true"></i>&nbsp;Load More</span></center></div>
                                 <div  ng-repeat="chatMessage in chatMessages" ng-click="doSelectChat(chatMessage);">
-                                <div class="row" ng-show="chatMessage.firstNewMessage==1"><span class="label label-default">New Messages</span></div>
-                                <div class="row msg_container">
+                                <div class="row" ng-if="chatMessage.firstNewMessage==1"><center><span id="new_message_span" class="label label-default">New Messages</span></center></div>
+                                <div class="row msg_container"  id="{{chatMessage.logid}}" ng-class="{'chat-selected':chatMessage.selectedChat==1}">
                                     <div class="col-md-10 col-xs-10" ng-if="chatMessage.sentby==3">
                                         <div class="messages msg_sent">
                                             <p>{{chatMessage.message}}</p><i ng-show="chatMessage.status==1" class="fa fa-check message-read" aria-hidden="true"></i>
@@ -432,6 +433,7 @@
                                     </div>
                                 </div>
                                 </div>
+                                <div class="no-messages" ng-show="chatMessages.length==0">No Messages to Display</div>
                             </div>
                             <div class="panel-footer">
                                 <div class="input-group">
@@ -600,11 +602,6 @@
     })
 </script>
 <script type="text/javascript">
-      $(document).ready(function() {
-            $("#chat_container").niceScroll({cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#eee'});
-             return false;
-      });
-
     $(document).on('click','.msg_container',function(e){
      var $this = $(this);
         if (!$this.hasClass('chat-selected')) {
@@ -625,6 +622,7 @@
                  $this.parents('.panel').find('.panel-body').slideDown();
                 $this.removeClass('panel-collapsed');
                 $this.removeClass('glyphicon-plus').addClass('glyphicon-minus');
+                setTimeout(function(){ scrollToNewMessageSpan(); }, 200);
             }
     }
     var newScrollDone=false;
@@ -638,7 +636,8 @@
             var divTop = document.getElementById('chat_container').offsetTop;
             $('#chat_container').getNiceScroll(0).doScrollPos(0,topPos-divTop-20);
        }else{
-            $('#chat_container').getNiceScroll(0).doScrollPos(0,800);
+            var chat_container=$("#chat_container");
+           chat_container.animate({ scrollTop: chat_container.prop("scrollHeight")- chat_container.height() }, 200);
        }
     }         
     $(document).on('click', '#btn-input', function (e) {
