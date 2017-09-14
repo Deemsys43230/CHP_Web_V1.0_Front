@@ -17826,3 +17826,26 @@ ul.group-menu li a{
     font-weight: bold ! important;
     font-size: 12px;
 }
+/*for event in coach side*/
+select.event {
+
+    display: block;
+    width:100%;
+    padding: 8px 80px 8px 15px;
+    border:1px solid #DDD;
+    color:#666;
+    border-radius: 0 !important;
+    background-color: #fff;
+    background-image: url('../images/down-arrow.png');
+    background-repeat: no-repeat;
+    background-position: right center;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+select.event:focus {
+    -webkit-box-shadow: inset 0px 0px 3px rgba(0,0,0,0.3);
+    -moz-box-shadow: inset 0px 0px 3px rgba(0,0,0,0.3);
+    box-shadow: inset 0px 0px 3px rgba(0,0,0,0.3);
+}
