@@ -129,6 +129,24 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller: 'CoachComposeMessageController'
             }).
+            when('/my-reviews', {
+                templateUrl: 'views/coach-reviews.html',
+                coachInvitations:true,
+                resolve: {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'coachApp',
+                            files:[
+                                '../../plugin/vertical-carousel/vertical-carousel.js',
+                                '../../angular/angular-utils-pagination/dirPagination.js',
+                                '../../app/coach/coachController.js',
+                                '../../css/custom-inputs.css'
+                            ]
+                        })
+                    }]
+                },
+                controller: 'CoachReviewController'
+            }).
              when('/coach-subscription', {
                 templateUrl: 'views/coach-subscription.html',
                 resolve: {

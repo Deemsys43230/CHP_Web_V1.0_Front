@@ -1,6 +1,6 @@
 var userApp = angular.module('userApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','angularUtils.directives.dirPagination','angular-nicescroll']);
 
-userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$location','$q','$routeParams','$route',function($scope,requestHandler,Flash,$location,$q,$routeParams,$route) {
+userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$location','$q','$routeParams','$route','$window',function($scope,requestHandler,Flash,$location,$q,$routeParams,$route,$window) {
 
     $scope.activeClass.coach='active';
     $scope.coachreview = {ratinglevel:1};
@@ -333,6 +333,28 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
 
     $scope.subscribeButtonStatus=false;
     $scope.subscribing=[];
+
+
+//Coach Client count Exceeds alert
+    $scope.countExceedsAlert=function(){
+        $(function(){
+            $("#lean_overlay").fadeTo(1000);
+            $("#coach-count").fadeIn(600);
+            $(".common_model").show();
+
+        });
+        $(".modal_close").click(function(){
+            $(".common_model").hide();
+            $("#coach-count").hide();
+            $("#lean_overlay").hide();
+        });
+
+        $("#lean_overlay").click(function(){
+            $(".common_model").hide();
+            $("#coach-count").hide();
+            $("#lean_overlay").hide();
+        });
+    };
   
     $scope.acceptCoachInvitationsByUser=function(coachid){
         requestHandler.postRequest("user/acceptinvitation/",{"coachid":coachid}).then(function(response){
@@ -344,7 +366,8 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
 
            }
             if(response.data.Response_status==0 && response.data.Error){
-                errorMessage(Flash,"Coach Exceeded Eligible Clients Count");
+                $scope.countExceedsAlert();
+
             }
         }, function(){
                 errorMessage(Flash,"Please try again later!");
@@ -374,11 +397,32 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
                 errorMessage(Flash,"Please try again later!");
         });
     };
+    //Alert Popup for Remove coach from user
+    $scope.doRemoveCoach=function(coachid){
+        $scope.removeCoachParam= {"coachid":coachid};
+        $(function(){
+            $("#lean_overlay").fadeTo(1000);
+            $("#modal").fadeIn(600);
+            $(".common_model").show();
+        });
+
+        $(".modal_close").click(function(){
+            $(".common_model").hide();
+            $("#modal").hide();
+            $("#lean_overlay").hide();
+        });
+
+        $("#lean_overlay").click(function(){
+            $(".common_model").hide();
+            $("#modal").hide();
+            $("#lean_overlay").hide();
+        });
+    };
+
 
     // Remove Coach from My Coach list
-    $scope.doRemoveMyCoachByUser=function(coachid){
-        $scope.removeCoachParam= {"coachid":coachid};
-        requestHandler.postRequest("user/removecoach/",$scope.removeCoachParam).then(function(response){
+    $scope.doRemoveMyCoachByUser=function(){
+      requestHandler.postRequest("user/removecoach/",$scope.removeCoachParam).then(function(response){
              if(response.data.Response_status==1){
                 successMessage(Flash,"Coach Removed Successfully");
                 $scope.doGetMyCoachListByUser();
@@ -387,6 +431,7 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
              }
         });
     };
+
 
 
     $scope.coachReview=function(id){
@@ -563,7 +608,7 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
                               {"sessionId":2,"sessionName":"Brunch","foodItems":[]},
                               {"sessionId":3,"sessionName":"Lunch","foodItems":[]},
                               {"sessionId":4,"sessionName":"Snacks","foodItems":[]},
-                              {"sessionId":5,"sessionName":"Dinner","foodItems":[]},  
+                              {"sessionId":5,"sessionName":"Dinner","foodItems":[]}
                             ]
                   }
                 );

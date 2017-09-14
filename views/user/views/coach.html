@@ -80,7 +80,7 @@
                                     <p>{{mycoach.emailid}}</p>
                                     <p>{{mycoach.phone}}</p>
                                     <hr/>
-                                    <span class="assign-modal assign-text-color"><i class="fa fa-envelope"></i>&nbsp;&nbsp;{{mycoach.unreadmessagecount}}</span>&nbsp;&nbsp;|&nbsp;&nbsp;<span class="assign-modal assign-text-color">Events&nbsp;:&nbsp;{{mycoach.upcomingeventscount}}</span>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="" class="confirm-delete-modal remove-text-color" ng-click="doRemoveMyCoachByUser(mycoach.userid)"><i class="fa fa-trash"></i>&nbsp;&nbsp;Remove Coach</a> 
+                                    <span class="assign-modal assign-text-color"><i class="fa fa-envelope"></i>&nbsp;&nbsp;{{mycoach.unreadmessagecount}}</span>&nbsp;&nbsp;|&nbsp;&nbsp;<span class="assign-modal assign-text-color">Events&nbsp;:&nbsp;{{mycoach.upcomingeventscount}}</span>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="" class="confirm-delete-modal remove-text-color" ng-click="doRemoveCoach(mycoach.userid)"><i class="fa fa-trash"></i>&nbsp;&nbsp;Remove Coach</a>
                                 </div> 
                             </div>    
                         </a>                         
@@ -101,4 +101,30 @@
 </div>
 
 
+
+<!-- Remove coach section popup-->
+<div id="modal" class="popupContainer" style="display:none;left: 37%!important;">
+    <header class="popupHeader">
+        <span class="header_title">Confirmation</span>
+        <span class="modal_close"><i class="fa fa-times"></i></span>
+    </header>
+
+    <section class="popupBody">
+        <div class="common_model">
+            <div class="text-center"><img src="../../images/alert-ring.png"/></div><br/>
+            <h5 class="text-center">Are you sure want to remove this coach?</h5>
+            <div class="action_btns margin-top-20">
+                <div class="one_half"><a href="" class="btn btn_red modal_close" ng-click="doRemoveMyCoachByUser()">Yes</a></div>
+                <div class="one_half last modal_close"><a onclick="return false;" class="btn back_btn">No</a></div>
+            </div>
+        </div>
+    </section>
+</div>
+
 <script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript">
+    $(".modal").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
+    $(function(){
+        $(".common_model").show();
+    })
+</script>

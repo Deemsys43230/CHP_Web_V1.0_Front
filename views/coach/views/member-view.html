@@ -591,7 +591,7 @@
                                 <a id="{{plans.id}}" href="" ng-click="doGetPlansView(plans.id);" class="btn-xs btn-primary tracking-plan-view">View Details</a>
                             </td>
                         </tr>
-                        <tr ng-show="planList.length==0"><td colspan="5" class="text-center">No Records Found !!!</td></tr>
+                        <tr ng-show="planList.length==0 || planList.totalrecords==0"><td colspan="5" class="text-center">No Records Found !!!</td></tr>
                     </tbody>
                 </table>  
                 <!-- Start Pagination -->
@@ -870,7 +870,7 @@
                         <small style="color:#666;">consumed out of</small>
                         {{mealPlanDetail.totalCalories}}</div>
                         <div>
-                    </td>
+                    </div>
                     <td class="food-plans col-md-2">                           
                         <!--Breakfast-->
                         <div ng-repeat="foodItem in mealPlanDetail.foods[0].foodItems">
@@ -935,7 +935,7 @@
                                 </div>
                         </div>
                     </td>
-                </tr>
+                </div>
              </table>
         </div>
 
@@ -1007,7 +1007,7 @@
                         <small style="color:#666;">burnt out of</small>
                         {{workoutPlanDetail.totalCalories}}</div>
                         <div>
-                    </td>  
+                    </div>
                     <td class="exercise-plans">
                         <div class="col-md-4" ng-repeat="workoutItem in workoutPlanDetail.workouts">
                                 <div class="exercise">
@@ -1168,14 +1168,13 @@
     </div>
 </div>
 <!-- Remove user  confirmation popup-->
-<div id="modal" class="popupContainer" style="display:none;left: 15%!important;margin-top: -100px;">
+<!--<div id="modal" class="popupContainer" style="display:none;left: 15%!important;margin-top: -100px;">
     <header class="popupHeader">
         <span class="header_title">Confirmation</span>
         <span class="modal_close"><i class="fa fa-times"></i></span>
     </header>
 
     <section class="popupBody">
-        <!-- Register Form -->
         <div class="common_model">
             <div class="text-center"><img src="../../images/alert-ring.png"/></div><br/>
             <h5 class="text-center">Are you sure want to delete this User?</h5>
@@ -1185,7 +1184,7 @@
             </div>
         </div>
     </section>
-</div>
+</div>-->
 
 <!-- Remove coach plan form user popup-->
 <div id="confirm-delete" class="popupContainer" style="display:none;left: 15%!important;;margin-top: -185px;">
