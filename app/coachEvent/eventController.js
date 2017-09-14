@@ -125,6 +125,25 @@ coachApp.controller('EventController',['$scope','requestHandler','Flash','$route
         $scope.eventTitle="Edit Event";
     }
 
+    //TO check Maximum digits validation for training plan amount
+    $scope.durationHours=false;
+    $scope.durationHoursSet = function(durationHours){
+        $scope.durationHrs = durationHours; 
+    };
+    $scope.durationMinutesSet = function(durationMinutes){
+        $scope.durationMins = durationMinutes;
+    };
+
+    $scope.durationCheck = function(){
+        if($scope.durationHrs ==0 && $scope.durationMins == 0){
+            $scope.duration=false;
+            alert($scope.duration);
+        }
+        else if($scope.durationHrs ==0 || $scope.durationMins == 0){
+            $scope.duration=true;
+        }
+    }
+
     $scope.doInsertOrUpdateEvents = function(){
         var datetime = "";
         if($('#history-start').val!=''){

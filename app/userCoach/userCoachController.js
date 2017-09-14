@@ -552,6 +552,7 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
     $scope.doGetUpcomingEvents = function(coachid){
         requestHandler.postRequest("user/upcomingevents/",{"coachid":coachid}).then(function(response){
             $scope.coachEvent = response.data.attendees;
+            $scope.paginationLoad = true;
         });
     };
 

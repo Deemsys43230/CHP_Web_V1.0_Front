@@ -24,7 +24,7 @@
                             <h4 class="margin-top-10">Event Duration <span class="pull-right">:</span></h4>
                         </div>
                         <div class="col-lg-5 col-md-5 col-sm-5 margin-top-7">
-                            <input class="section-input disabled-class" ng-show="isAdd==0" maxlength="150" name="id" placeholder="null" ng-model="eventDetails.id" ng-disabled>
+                            <input class="section-input disabled-class" ng-show="isAdd==0" name="id" placeholder="null" ng-model="eventDetails.id" ng-disabled>
 
                             <span ng-show="eventForm.name.$dirty&&eventForm.name.$invalid">
                                 <span class="error-message textarea-errormessage40" ng-show="eventForm.name.$error.required"><span>Required.</span></span>
@@ -34,9 +34,10 @@
                             <span ng-show="eventForm.discription.$dirty&&eventForm.discription.$invalid">
                                 <span class="error-message textarea-errormessage55" ng-show="eventForm.discription.$error.required"><span>Required.</span></span>
                             </span>
-                            <input class="section-input margin-top-15" maxlength="200" name="discription" placeholder="Enter Event Description" ng-model="eventDetails.description" required>
-                            <span ng-show="eventForm.discription.$dirty&&eventForm.discription.$invalid">
-                                <span class="error-message textarea-errormessage55" ng-show="eventForm.discription.$error.required"><span>Required.</span></span>
+                            <input class="section-input margin-top-15" maxlength="300" name="discription" placeholder="Enter Event Description" ng-model="eventDetails.description" required>
+                            
+                            <span ng-show="eventForm.startdate.$dirty&&eventForm.startdate.$invalid">
+                                <span class="error-message textarea-errormessage55" ng-show="eventForm.startdate.$error.required"><span>Required.</span></span>
                             </span>
                             
                                 <input hidden id="main-start-date" ng-model="eventDetails.datetime"></input>
@@ -47,12 +48,14 @@
 
                             <span ng-show="eventForm.durationHours.$dirty&&eventForm.durationHours.$invalid">
                                 <span class="error-message textarea-errormessage55" ng-show="eventForm.durationHours.$error.required"><span>Required.</span></span>
+                                <span class="error-message textarea-errormessage10" ng-show="!eventForm.durationHours.$error.required&&duration"><span>Please&nbsp;Enter&nbsp;Valid&nbsp;Duration.</span></span>
                             </span>
                             <span ng-show="eventForm.durationMinutes.$dirty&&eventForm.durationMinutes.$invalid">
                                 <span class="error-message textarea-errormessage55" ng-show="eventForm.durationMinutes.$error.required"><span>Required.</span></span>
+                                <span class="error-message textarea-errormessage10" ng-show="!eventForm.durationMinutes.$error.required&&duration"><span>Please&nbsp;Enter&nbsp;Valid&nbsp;Duration.</span></span>
                             </span>
                             <div class="col-lg-6 col-md-6 col-sm-6 margin-top-15 no-padding">
-                                <select class="full-width event" name="customhours"  ng-model="eventDetails.durationHours" ng-init="selectedHours='0'" required>
+                                <select class="full-width event" name="customhours"  ng-model="eventDetails.durationHours" ng-init="selectedHours='0'"  ng-change="durationHoursSet(eventDetails.durationHours)" required>
                                         <option value="">-- Select Hours --</option>
                                         <option value="0">0</option>
                                         <option value="1">1</option>
@@ -79,9 +82,10 @@
                                         <option value="22">22</option>
                                         <option value="23">23</option>
                                     </select>
+
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6 margin-top-15 no-padding">
-                                <select class="full-width event" name="minutes" ng-model="eventDetails.durationMinutes" ng-init="selectedMinutes='0'" style="padding: 8px 15px; width:99%" required>
+                                <select class="full-width event" name="minutes" ng-model="eventDetails.durationMinutes" ng-init="selectedMinutes='0'" ng-change="durationMinutesSet(eventDetails.durationMinutes)" style="padding: 8px 15px; width:99%" required>
                                     <option value=""> -- Select Minutes -- </option>
                                     <option value="0">0</option>
                                     <option value="1">1</option>
@@ -148,7 +152,7 @@
                         </div>
                          <div class="col-lg-12 col-md-12 col-sm-12 text-center margin-top-15">
                             <span ng-show="isAdd==1"><a href="" ng-disabled="eventForm.$invalid" class="btn btn-success" ng-click="doInsertOrUpdateEvents()">Save Event</a></span>
-                            <span ng-show="isAdd==0"><a href="" ng-disabled="isCleanCourse() || eventForm.$invalid" class="btn btn-success" ng-click="doUpdateEvent(eventDetails.id)">Save Changes</a></span>
+                            <span ng-show="isAdd==0"><a href="" ng-disabled="isCleanCourse() || eventForm.$invalid && duration" class="btn btn-success" ng-click="doUpdateEvent(eventDetails.id)">Save Changes</a></span>
                             <span><a href="#events" class="btn btn-danger">Cancel</a></span>
                         </div>
                     </form>

@@ -574,7 +574,8 @@
                     <thead>
                         <tr class="warning">
                             <!-- <th class="col-md-2">User Id</th> -->
-                            <th class="col-md-4">Subscription Name</th>
+                            <th class="col-md-3">Training Name</th>
+                            <th class="col-md-3">Training Description</th>
                             <th class="col-md-2">Start Date</th>
                             <th class="col-md-2">End Date</th>
                             <th class="col-md-2">Options</th>
@@ -584,14 +585,15 @@
                     <tbody >
                         <tr dir-paginate="plans in planList.history | itemsPerPage:trainingPagination.itemsPerPage" pagination-id="totalRecords" ng-show="planList.length!=0" current-page="trainingPagination.pageNumber" total-items="planList.totalrecords">
                            <!--  <td><span class="line-clamp-md">{{plans.userid}}</span></td> -->
-                            <td><span class="line-clamp-md text-justify">{{plans.subscriptionname}}</span></td>
-                            <td><span class="line-clamp-md">{{plans.startdate}}</span></td>
-                            <td>{{plans.enddate}}</td>
+                            <td class="wrap-all"><span class="line-clamp-sm">{{plans.subscriptionname}}</span></td>
+                            <td class="wrap-all"><span class="line-clamp-sm">{{plans.subscriptiondescription}}</span></td>
+                            <td class="wrap-all"><span class="line-clamp-md">{{plans.startdate}}</span></td>
+                            <td class="wrap-all">{{plans.enddate}}</td>
                             <td>
                                 <a id="{{plans.id}}" href="" ng-click="doGetPlansView(plans.id);" class="btn-xs btn-primary tracking-plan-view">View Details</a>
                             </td>
                         </tr>
-                        <tr ng-show="planList.length==0 || planList.totalrecords==0"><td colspan="5" class="text-center">No Records Found !!!</td></tr>
+                        <tr ng-show="planList.history.length==0"><td colspan="5" class="text-center">No Records Found !!!</td></tr>
                     </tbody>
                 </table>  
                 <!-- Start Pagination -->
@@ -615,11 +617,11 @@
                             <td class="col-md-8">{{planView.coachname}}</td>
                         </tr>
                         <tr>
-                            <td class="col-md-4 text-bold">Subscription Name</td>
+                            <td class="col-md-4 text-bold">Training Name</td>
                             <td class="col-md-8">{{planView.subscriptionname}}</td>
                         </tr>
                         <tr>
-                            <td class="col-md-4 text-bold">Description</td>
+                            <td class="col-md-4 text-bold">Training Description</td>
                             <td class="col-md-8">{{planView.subscriptiondescription}}</td>
                         </tr>
                         <tr>
