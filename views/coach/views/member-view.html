@@ -1276,6 +1276,7 @@ $('.msg-overlay-list-bubble--is-minimized').click(function(){
             $this.text('Show More...');
         }
     });
+
 </script>
 
 <script type="text/javascript">
@@ -1338,16 +1339,7 @@ $(document).on('click', '#btn-input', function (e) {
  var myDiv=$("#chat_container");
    myDiv.animate({ scrollTop: myDiv.prop("scrollHeight")- myDiv.height() }, 1000);
 });
-     $(document).on('keypress', '#btn-input', function (e) {
-
-    if (e.which == 13) {
-        var scope = $('#btn-input').scope();
-        scope.doSendChatMessage();
-    return false; 
-    }   
-   });
-
-
+    
 $(document).on('focus', '.panel-footer input.chat_input', function (e) {
     var $this = $(this);
     if ($('#minim_chat_window').hasClass('panel-collapsed')) {
@@ -1598,3 +1590,15 @@ $(document).ready(function(){
             });
         };
 </script>
+
+<script>
+   $(document).ready(function(){
+    $("#btn-input").keydown(function(event){
+        if (event.keyCode == 13) {
+      var scope = $('#btn-input').scope();
+        scope.doSendChatMessage();
+         return false;
+        }
+       })
+});
+   </script>
