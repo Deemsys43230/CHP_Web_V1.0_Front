@@ -237,17 +237,17 @@ $scope.doEditFoodItemFromPlan=function(id){
       $.each($scope.userSelectedFoodDetails.measure,function(index,value){
         if(value.measureid==$scope.userSavedFoodDetails.foodmeasureid){
           $scope.userFood.measure=value;
-          originalmeasure = angular.copy(value);
+          $scope.originalmeasure = angular.copy(value);
         }
       });
 
       $scope.userFood.measurecount=parseFloat($scope.userSavedFoodDetails.measurecount);
-      originalmeasurecount = angular.copy($scope.userSavedFoodDetails.measurecount);
+      $scope.originalmeasurecount = angular.copy($scope.userSavedFoodDetails.measurecount);
       $scope.userFood.id=$scope.userSavedFoodDetails.id;
       $scope.userFood.foodsessionid=$scope.userSavedFoodDetails.foodsessionid;
       $scope.userFood.day=$scope.userSavedFoodDetails.day;
       $scope.userFood.isoptional= $scope.userSavedFoodDetails.isoptional;
-      originalisoptional= angular.copy($scope.userSavedFoodDetails.isoptional);
+      $scope.originalisoptional= angular.copy($scope.userSavedFoodDetails.isoptional);
       $scope.doCalculateCalories();  
       $scope.userFood.calorieintake=$scope.caloriesIntake;
     });
@@ -291,7 +291,7 @@ $scope.resetdata=function(){
 };
 
 $scope.isCleanFood=function(){
-    return angular.equals(originalmeasure, $scope.userFood.measure)&& angular.equals(originalmeasurecount, $scope.userFood.measurecount) && angular.equals(originalisoptional, $scope.userFood.isoptional);
+    return angular.equals($scope.originalmeasure, $scope.userFood.measure)&& angular.equals($scope.originalmeasurecount, $scope.userFood.measurecount) && angular.equals($scope.originalisoptional, $scope.userFood.isoptional);
 };
 
 // View Food Meal Item Plan Details
@@ -430,9 +430,9 @@ $scope.plansViewInit=function(){
   $scope.userFood={};
   $scope.current=$scope.caloriesIntake=0;
   $scope.max=100;
-  var originalmeasure= "";
-  var originalmeasurecount= "";
-  var originalisoptional= "";
+  $scope.originalmeasure={};
+  $scope.originalmeasurecount={};
+  $scope.originalisoptional={};
   $scope.foodSearchResult = [];
   $scope.doViewCoachPlans();
   

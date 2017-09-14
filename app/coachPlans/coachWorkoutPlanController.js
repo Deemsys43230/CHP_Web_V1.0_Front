@@ -296,17 +296,17 @@ $scope.doEditExerciseFromPlan=function(id){
         $.each($scope.userSelectedExerciseDetails.levels.levels,function(index,value){
            if(value.levelunitid==$scope.userSavedExerciseDetails.unitlevelid){
               $scope.userExercise.selectedLevel=value;
-              originallevel= angular.copy(value);
+              $scope.originallevel= angular.copy(value);
            }
         });  
 
         $scope.userExercise.id= $scope.userSavedExerciseDetails.id;
         $scope.userExercise.day= $scope.userSavedExerciseDetails.day;
         $scope.userExercise.isoptional= $scope.userSavedExerciseDetails.isoptional;
-        originalisoptional= angular.copy($scope.userSavedExerciseDetails.isoptional);
+        $scope.originalisoptional= angular.copy($scope.userSavedExerciseDetails.isoptional);
         $scope.doCalculateCaloriesExercise();
         $scope.userExercise.calorieburn=parseFloat($scope.userSavedExerciseDetails.calorieburn); 
-        originalcalorie= angular.copy($scope.userSavedExerciseDetails.calorieburn);
+        $scope.originalcalorie= angular.copy($scope.userSavedExerciseDetails.calorieburn);
     });
 
         $scope.addExercise=true;
@@ -335,7 +335,7 @@ $scope.doEditExerciseFromPlan=function(id){
 };
 
 $scope.isCleanExercise=function(){
-    return angular.equals(originallevel, $scope.userExercise.selectedLevel) && angular.equals(originalcalorie, $scope.userExercise.calorieburn) && angular.equals(originalisoptional, $scope.userExercise.isoptional);
+    return angular.equals($scope.originallevel, $scope.userExercise.selectedLevel) && angular.equals($scope.originalcalorie, $scope.userExercise.calorieburn) && angular.equals($scope.originalisoptional, $scope.userExercise.isoptional);
 };
 
  //Maximum calorie value check
@@ -390,9 +390,9 @@ $scope.workoutPlansInit=function(){
   $scope.exerciseFilter= false;
   $scope.current=$scope.caloriesSpent=0;
   $scope.max = 100;
-  var originallevel= "";
-  var originalcalorie= "";
-  var originalisoptional= "";
+  $scope.originallevel={};
+  $scope.originalcalorie={};
+  $scope.originalisoptional={};
   $scope.doviewCoachWorkoutPlans();
   $scope.exerciseSearchResult=[];
 };

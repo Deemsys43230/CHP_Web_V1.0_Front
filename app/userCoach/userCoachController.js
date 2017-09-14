@@ -588,13 +588,13 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
 
         requestHandler.postRequest("getplandetail/",{"mapid":mapId}).then(function(response){
             //First We need to group up days
-            $scope.plandetail=response.data.plandetail;
+            $scope.mealplandetail=response.data.plandetail;
            
             //Initialize
             $scope.mealPlanDetailList=[];
 
             //create array of days
-            for(var i=1;i<=$scope.plandetail.plandays;i++)
+            for(var i=1;i<=$scope.mealplandetail.plandays;i++)
             {
               $scope.mealPlanDetailList.push(
                   {
@@ -615,7 +615,7 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
             }
 
           // Group Json object of plan 
-         $.each($scope.plandetail, function (key, obj) {            
+         $.each($scope.mealplandetail, function (key, obj) {            
               if(key.startsWith("day")){
                 $scope.mealPlanDetailList[key.substring(3)-1].totalCalories=(obj.actualcalories).toFixed(2);
                 $scope.mealPlanDetailList[key.substring(3)-1].consumedCalories=(obj.consumedcalories).toFixed(2);
@@ -717,14 +717,13 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
         $scope.workoutplan={workPlanDetailView:true};
 
         requestHandler.postRequest("getplandetail/",{"mapid":mapId}).then(function(response){
-        $scope.plan= response.data.plan;
             //First We need to group up days
-            $scope.plandetail=response.data.plandetail;
+            $scope.workoutplandetail=response.data.plandetail;
            
             //Initialize
             $scope.workoutPlanDetailList=[];
 
-            for(var i=1; i<=$scope.plandetail.plandays; i++){
+            for(var i=1; i<=$scope.workoutplandetail.plandays; i++){
                 $scope.workoutPlanDetailList.push(
                 {
                   "day":"Day "+i,
@@ -738,7 +737,7 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
             }
 
           // Group Json object of plan 
-          $.each($scope.plandetail, function (key, obj) {            
+          $.each($scope.workoutplandetail, function (key, obj) {            
               if(key.startsWith("day")){
                 $scope.workoutPlanDetailList[key.substring(3)-1].totalCalories=(obj.actualcalories).toFixed(2);
                 $scope.workoutPlanDetailList[key.substring(3)-1].burntCalories=(obj.burntcalories).toFixed(2);

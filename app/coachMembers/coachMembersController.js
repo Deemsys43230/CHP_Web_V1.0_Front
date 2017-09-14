@@ -1678,13 +1678,13 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
 
         requestHandler.postRequest("getplandetail/",{"mapid":mapId}).then(function(response){
             //First We need to group up days
-            $scope.plandetail=response.data.plandetail;
+            $scope.mealplandetail=response.data.plandetail;
            
             //Initialize
             $scope.mealPlanDetailList=[];
 
             //create array of days
-            for(var i=1;i<=$scope.plandetail.plandays;i++)
+            for(var i=1;i<=$scope.mealplandetail.plandays;i++)
             {
               $scope.mealPlanDetailList.push(
                   {
@@ -1705,7 +1705,7 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
             }
 
           // Group Json object of plan 
-         $.each($scope.plandetail, function (key, obj) {            
+         $.each($scope.mealplandetail, function (key, obj) {            
               if(key.startsWith("day")){
                 $scope.mealPlanDetailList[key.substring(3)-1].totalCalories=(obj.actualcalories).toFixed(2);
                 $scope.mealPlanDetailList[key.substring(3)-1].consumedCalories=(obj.consumedcalories).toFixed(2);
@@ -1744,14 +1744,13 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
         $scope.workoutplan={workPlanDetailView:true};
 
         requestHandler.postRequest("getplandetail/",{"mapid":mapId}).then(function(response){
-        $scope.plan= response.data.plan;
+            
             //First We need to group up days
-            $scope.plandetail=response.data.plandetail;
-           
+            $scope.workoutplandetail=response.data.plandetail;
             //Initialize
             $scope.workoutPlanDetailList=[];
-
-            for(var i=1; i<=$scope.plandetail.plandays; i++){
+            //create array of days 
+            for(var i=1; i<=$scope.workoutplandetail.plandays; i++){
                 $scope.workoutPlanDetailList.push(
                 {
                   "day":"Day "+i,
@@ -1765,7 +1764,7 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
             }
 
           // Group Json object of plan 
-          $.each($scope.plandetail, function (key, obj) {            
+          $.each($scope.workoutplandetail, function (key, obj) {            
               if(key.startsWith("day")){
                 $scope.workoutPlanDetailList[key.substring(3)-1].totalCalories= (obj.actualcalories).toFixed(2);
                 $scope.workoutPlanDetailList[key.substring(3)-1].burntCalories=(obj.burntcalories).toFixed(2);
@@ -1785,7 +1784,6 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
     $scope.resetMeal=function(){
         $scope.addMealPlan={};
         $scope.addMealPlan.planid="";
-        $scope.mealAssignForm.$setPristine();
 
         $(function(){
             $("#lean_overlay").fadeTo(1000);
@@ -1813,7 +1811,6 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
     $scope.resetWorkout=function(){
         $scope.addWorkoutPlan={};
         $scope.addWorkoutPlan.planid="";
-        $scope.workoutAssignForm.$setPristine();
 
         $(function(){
             $("#lean_overlay").fadeTo(1000);
