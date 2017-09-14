@@ -51,6 +51,28 @@ $.each($scope.settingsMenuList,function(index,value){
 
     };
 
+    $scope.delgroup=function(id)
+    {
+        $scope.listid=id;
+         $(function(){
+            $("#lean_overlay").fadeTo(1000);
+            $("#confirmDelete").fadeIn(600);
+            $(".common_model").show();
+        });
+
+        $(".modal_close").click(function(){
+            $(".common_model").hide();
+            $("#confirmDelete").hide();
+            $("#lean_overlay").hide();
+        });
+
+        $("#lean_overlay").click(function(){
+            $(".common_model").hide();
+            $("#confirmDelete").hide();
+            $("#lean_overlay").hide();
+        });
+    }
+
 $scope.doViewAllCoachGroup= function(){
 	$scope.loaded= true;
 	requestHandler.getRequest("coach/getGroups/","").then(function(response){
@@ -103,6 +125,7 @@ $scope.doEditCoachGroup=function(id){
         $(".modal_close").click(function(){
             $(".common_model").hide();
             $("#group").hide();
+         
             $("#lean_overlay").hide();
             $scope.shouldBeOpen = false;
         });
@@ -126,12 +149,16 @@ $scope.doUpdateCoachGroup=function(){
    });
 };
 
-$scope.doCoachGroupDelete=function(id){
+$scope.doCoachGroupDelete=function(){
+   var id=$scope.listid;
    requestHandler.postRequest("coach/deleteGroups/",{'groupid':id}).then(function(response){
+    if(response.data.Response_status==1){
+                successMessage(Flash,"Group Removed Successfully");
+             }else{
+                errorMessage(Flash,"Please try again later!");
+             }
         $scope.doViewAllCoachGroup();
-        successMessage(Flash,"Successfully Deleted");
-   }, function(){
-        errorMessage(Flash, "Please try again later!");
+      
    }); 
 };
 

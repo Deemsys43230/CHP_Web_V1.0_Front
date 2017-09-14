@@ -42,7 +42,7 @@
                     <td>{{list.groupname}}</td>
                     <td>
                         <a href="" class="btn-xs btn-warning" ng-click="doEditCoachGroup(list.id)">Edit</a>&nbsp;
-                        <a href="" class="btn-xs btn-danger" ng-click="doCoachGroupDelete(list.id)">Delete</a>
+                        <a href="" ng-click="delgroup(list.id)" class="btn-xs btn-danger" >Delete</a>
 
                     </td>
                 </tr>
@@ -56,6 +56,26 @@
         </div>
     </div>
 </div>
+</div>
+
+
+<!-- Remove group section popup-->
+<div id="confirmDelete" class="popupContainer" style="display:none;left: 37%!important;">
+    <header class="popupHeader">
+        <span class="header_title">Confirmation</span>
+        <span class="modal_close"><i class="fa fa-times"></i></span>
+    </header>
+
+    <section class="popupBody">
+        <div class="common_model">
+            <div class="text-center"><img src="../../images/alert-ring.png"/></div><br/>
+            <h5 class="text-center">Are you sure want to remove this Group?</h5>
+            <div class="action_btns margin-top-20">
+                <div class="one_half"><a href="" class="btn btn_red modal_close" ng-click="doCoachGroupDelete()">Yes</a></div>
+                <div class="one_half last modal_close"><a onclick="return false;" class="btn back_btn">No</a></div>
+            </div>
+        </div>
+    </section>
 </div>
 
 <!-- coach group Popup-->
