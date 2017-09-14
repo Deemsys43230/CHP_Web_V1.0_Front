@@ -486,7 +486,7 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
     };
     //Food Meal Plan
     $scope.doGetCoachMealPlans=function(targetid){
-        $scope.planDetailView=false;
+        $scope.mealplan={planDetailView:false};
 
        $scope.getMealPlanParams={
             "targetid":targetid,
@@ -504,7 +504,7 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
     //Laod Food Meal Plan Details
     $scope.doLoadMealPlanDetails=function(mapId){
         $scope.currentPlanDetail=mapId;
-        $scope.planDetailView=true;
+       $scope.mealplan={planDetailView:true};
 
         requestHandler.postRequest("getplandetail/",{"mapid":mapId}).then(function(response){
             //First We need to group up days
@@ -616,9 +616,9 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
 
     //Workout Plan
     $scope.doGetCoachWorkoutPlans=function(targetid){
-        $scope.workPlanDetailView=false;
+        $scope.workoutplan={workPlanDetailView:false};
 
-       $scope.getWorkoutPlanParams={
+        $scope.getWorkoutPlanParams={
             "targetid":targetid,
             "limit":$scope.workoutPlanPagination.itemsPerPage,
             "offset":($scope.workoutPlanPagination.pageNumber-1)*$scope.workoutPlanPagination.itemsPerPage,
@@ -634,7 +634,7 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
     //Laod Food Meal Plan Details
     $scope.doLoadWorkoutPlanDetails=function(mapId){
         $scope.currentWorkoutPlanDetail=mapId;
-        $scope.workPlanDetailView=true;
+        $scope.workoutplan={workPlanDetailView:true};
 
         requestHandler.postRequest("getplandetail/",{"mapid":mapId}).then(function(response){
         $scope.plan= response.data.plan;

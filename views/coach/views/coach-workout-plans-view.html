@@ -126,7 +126,7 @@
                             <h5>Unit : <span>{{userSelectedExerciseDetails.levels.unitname}}</span></h5>
                             <hr/>
                             <h5 class="margin-top-10">Select Level:</h5>
-                            <select name="levelid" ng-model="userExercise.selectedLevel" ng-options="levels.levelname for levels in userSelectedExerciseDetails.levels.levels track by levels.unitlevelid" ng-change="doCalculateCaloriesExercise()" required>
+                            <select name="levelid" ng-model="userExercise.selectedLevel" ng-options="levels.levelname for levels in userSelectedExerciseDetails.levels.levels track by levels.levelid" ng-change="doCalculateCaloriesExercise()" required>
                                 <option value="">-- Select Level --</option>
                             </select>
                              <span ng-show="ExerciseAddForm.levelid.$dirty&&ExerciseAddForm.levelid.$invalid">
