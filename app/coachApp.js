@@ -11,7 +11,7 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
         //Do For Cross Orgin Management
         $httpProvider.defaults.withCredentials = true;
 
-        $httpProvider.interceptors.push(['$q','$location','$injector','$cookies','$window',"$rootScope",function ($q, $location,$injector,$cookies,$window,$rootScope) {
+        $httpProvider.interceptors.push(['$q','$location','$injector','$cookies','$window','$timeout',"$rootScope",function ($q, $location,$injector,$cookies,$window,$timeout,$rootScope) {
 
             return {
 
@@ -166,8 +166,9 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
             }).
              when('/change-subscription', {
                 templateUrl: 'views/coach-subscription-plan.html',
+                 
                 resolve: {
-                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
+                   loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'coachApp',
                             files:[
@@ -180,8 +181,9 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                     }]
                 },
                 controller:'SubscriptionController'
+               
             }).
-            when('/subscription', {
+           when('/subscription', {
                 templateUrl: 'views/coach-subscription-plan.html',
                 resolve: {
                     loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
@@ -195,11 +197,13 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                             ]
                         })
                     }],
-                    check:["$location","$rootScope","requestHandler",function($location,$rootScope,requestHandler){
+                   check:["$location","$rootScope",'$timeout',"requestHandler",function($location,$rootScope,$timeout,requestHandler){
                         requestHandler.getRequest("/coach/isSubscriptionActive/","").then(function(response){
                             if(response.data.isActive==0 && response.data.subscription==[]){
+                                $timeout(function () {
                                 $rootScope.isSubscriptionActive=true;
-                            }else{   
+                                 }, 100);
+                            }else{ 
                                 $rootScope.isSubscriptionActive=false;
                                 $location.path("coach-subscription-history");
                             }
@@ -208,7 +212,7 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                     }]
                 },
                 controller:'SubscriptionController'
-            }).            
+            }).          
             when('/coach-subscription-history', {
                 templateUrl: 'views/coach-my-subscription-plan.html',
                 resolve: {
@@ -266,11 +270,11 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                             name:'coachApp',
                             files:[
                                 '../../plugin/popup/style.css',
-                                '../../app/coachMembers/coachMembersController.js',
                                 '../../angular/angular-utils-pagination/dirPagination.js',
-                                 '../../css/custom-inputs.css',
+                                '../../css/custom-inputs.css',
                                 '../../plugin/dateRange/daterangepicker.css',
-                                '../../plugin/dateRange/daterangepicker.js'
+                                '../../plugin/dateRange/daterangepicker.js',                                
+                                '../../app/coachMembers/coachMembersController.js'
                             ]
                         })
                     }],
@@ -807,11 +811,11 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         return $ocLazyLoad.load({
                             name:'coachApp',
                             files:[
-                                '../../plugin/popup/style.css',
-                                '../../angular/angular-utils-pagination/dirPagination.js',
-                                '../../app/coachEvent/eventController.js',
+                                '../../plugin/popup/style.css',                                
                                 '../../plugin/dateRange/daterangepicker.css',
-                                '../../plugin/dateRange/daterangepicker.js'
+                                '../../plugin/dateRange/daterangepicker.js',
+                                '../../angular/angular-utils-pagination/dirPagination.js',
+                                '../../app/coachEvent/eventController.js'
                             ]
                         })
                     }]
