@@ -18,8 +18,13 @@
                 </div>
             </div>
             <div class="col-lg-12 col-md-12 col-sm-12 margin-top-5">
-                <div class="col-md-2 margin-bottom-15 unit  pull-right">
+                <div class="col-md-10 margin-bottom-15 curreny-label">
+                    <h5 class=" text-orange"style="font-size: 16px;"><strong>Payment Currency</strong>&nbsp;&nbsp;<span>:</span></h5>
+                </div>
+                <div class="col-md-2 margin-bottom-15 unit">
+
                     <div class="btn-group" data-toggle="buttons">
+
                         <label class="btn btn-default active unit-toggle-label"  ng-click="test('mUnit')">
                             <input type="radio" name="unit" ng-model="units"  id="option1" autocomplete="off">&nbsp;&nbsp;&nbsp;INR&nbsp;&nbsp;&nbsp;
                         </label>
@@ -45,7 +50,7 @@
                         </div>
                         <div ng-hide="units==1">
                             <span class="price"  ng-style="{'background-color': pricingPlan.plancolor}">
-                                <span>Rs {{pricingPlan.discountUSD}}</span><br/>
+                                <span>$ {{pricingPlan.discountUSD}}</span><br/>
                                 <span class="text-strike"><small>Rs {{pricingPlan.priceUSD}}</small></span>
                             </span>
                         </div>

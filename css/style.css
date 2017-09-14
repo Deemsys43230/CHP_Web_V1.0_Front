@@ -17826,6 +17826,11 @@ ul.group-menu li a{
     font-weight: bold ! important;
     font-size: 12px;
 }
+.curreny-label{
+    padding-left: 840px;
+    font-weight: bold;
+    margin-top:5px;
+}
 /*for event in coach side*/
 select.event {
 
