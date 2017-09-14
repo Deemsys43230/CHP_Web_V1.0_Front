@@ -289,7 +289,11 @@ $scope.doCalculateCaloriesExercise=function(){
 
 
 $scope.doEditExerciseFromPlan=function(id){
-  $scope.userExercise={};
+    $scope.userExercise={};
+    $scope.addExercise=true;
+    $scope.showSearch=false;
+    $scope.isNew=false;
+    $scope.title="Edit Exercise";
     requestHandler.postRequest("coach/exerciseplandetail/",{"id":id}).then(function(response){
         $scope.userSelectedExerciseDetails= response.data.exercisedetail;
         $scope.userSavedExerciseDetails= response.data.savedexerciseplan;
@@ -307,12 +311,6 @@ $scope.doEditExerciseFromPlan=function(id){
         $scope.doCalculateCaloriesExercise();
         $scope.userExercise.calorieburn=parseFloat($scope.userSavedExerciseDetails.calorieburn); 
         $scope.originalcalorie= angular.copy($scope.userSavedExerciseDetails.calorieburn);
-    });
-
-        $scope.addExercise=true;
-        $scope.showSearch=false;
-        $scope.isNew=false;
-        $scope.title="Edit Exercise";
 
         $(function(){
                 $("#lean_overlay").fadeTo(1000);
@@ -332,6 +330,7 @@ $scope.doEditExerciseFromPlan=function(id){
                 $("#lean_overlay").hide();
                 $scope.resetdata();
             });
+    });
 };
 
 $scope.isCleanExercise=function(){

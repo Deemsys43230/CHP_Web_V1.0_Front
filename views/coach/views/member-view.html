@@ -872,7 +872,7 @@
                         <small style="color:#666;">consumed out of</small>
                         {{mealPlanDetail.totalCalories}}</div>
                         <div>
-                    </div>
+                    </td>
                     <td class="food-plans col-md-2">                           
                         <!--Breakfast-->
                         <div ng-repeat="foodItem in mealPlanDetail.foods[0].foodItems">
@@ -898,6 +898,7 @@
                                     </div>
                                 </div>
                         </div>
+                    </td>    
                     <td class="food-plans col-md-2">                           
                         <!--Lunch-->
                         <div ng-repeat="foodItem in mealPlanDetail.foods[2].foodItems">
@@ -937,7 +938,7 @@
                                 </div>
                         </div>
                     </td>
-                </div>
+                </tr>
              </table>
         </div>
 
@@ -1006,10 +1007,10 @@
                         <div class="caloriediv">
                             <div class="calorieunit">KCals</div>
                             <div class="workoutcalorie">{{workoutPlanDetail.burntCalories}}
-                        <small style="color:#666;">burnt out of</small>
-                        {{workoutPlanDetail.totalCalories}}</div>
-                        <div>
-                    </div>
+                                <small style="color:#666;">burnt out of</small>
+                                {{workoutPlanDetail.totalCalories}}</div>
+                        </div>
+                    </td>  
                     <td class="exercise-plans">
                         <div class="col-md-4" ng-repeat="workoutItem in workoutPlanDetail.workouts">
                                 <div class="exercise">
@@ -1024,7 +1025,6 @@
                                     </div>
                                 </div>
                         </div>
-                    </div>
                     </td>
                 </tr>
                 </table>
@@ -1049,11 +1049,10 @@
                     </div>
                 </div>
 
-                <div id="chat_container" class="panel-body msg_container_base" style="display:none;" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#eee',scrollspeed: -5}">
-                    <div class="row" ng-show="showLoadMore"><center><span ng-click="doLoadChatMessages()" class="label label-default" style="padding:5px;cursor:pointer;"><i class="fa fa-arrow-up" aria-hidden="true"></i>&nbsp;Load More</span></center></div>
+                <div id="chat_container" class="panel-body msg_container_base" style="display:none;">
                     <div  ng-repeat="chatMessage in chatMessages" ng-click="doSelectChat(chatMessage);">
                      <div class="row" ng-if="chatMessage.firstNewMessage==1"><center><span id="new_message_span" class="label label-default">New Messages</span></center></div>
-                        <div class="row msg_container" id="{{chatMessage.logid}}" ng-class="{'chat-selected':chatMessage.selectedChat==1}">
+                        <div class="row msg_container">
                             <div class="col-md-10 col-xs-10" ng-if="chatMessage.sentby==2">
                                 <div class="messages msg_sent">
                                     <p>{{chatMessage.message}}</p><i ng-show="chatMessage.status==1" class="fa fa-check message-read" aria-hidden="true"></i>
@@ -1072,10 +1071,10 @@
                                     <p>{{chatMessage.message}}</p>
                                     <time datetime="2009-11-13T20:00">{{chatMessage.datetime}}</time>
                                 </div>
-                            </div>                          
+                            </div>
+                            <div ng-show="chatMessages.length==0"><h3 class="text-gray">NO MESSAGES FOUND!!!</h3></div>
                         </div>
                     </div>
-                      <div class="no-messages" ng-show="chatMessages.length==0">No Messages to Display</div>
                 </div>
                 <div class="panel-footer">
                     <div class="input-group">
@@ -1170,13 +1169,14 @@
     </div>
 </div>
 <!-- Remove user  confirmation popup-->
-<!--<div id="modal" class="popupContainer" style="display:none;left: 15%!important;margin-top: -100px;">
+<div id="modal" class="popupContainer" style="display:none;left: 15%!important;margin-top: -100px;">
     <header class="popupHeader">
         <span class="header_title">Confirmation</span>
         <span class="modal_close"><i class="fa fa-times"></i></span>
     </header>
 
     <section class="popupBody">
+        <!-- Register Form -->
         <div class="common_model">
             <div class="text-center"><img src="../../images/alert-ring.png"/></div><br/>
             <h5 class="text-center">Are you sure want to delete this User?</h5>
@@ -1186,7 +1186,7 @@
             </div>
         </div>
     </section>
-</div>-->
+</div>
 
 <!-- Remove coach plan form user popup-->
 <div id="confirm-delete" class="popupContainer" style="display:none;left: 15%!important;;margin-top: -185px;">
@@ -1283,6 +1283,7 @@ $('.msg-overlay-list-bubble--is-minimized').click(function(){
   $(document).ready(function() {
     $("textarea").niceScroll({cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#eee'});
     $("#stickyNotes").niceScroll();
+    $("#chat_container").niceScroll({cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#eee'});
     // $('#stickyNotes').getNiceScroll(0).doScrollTop($('textarea').height());
     $(".sticky-notes").animate({ scrollTop: $(document).height() }, "slow");
 
@@ -1304,6 +1305,16 @@ $('.msg-overlay-list-bubble--is-minimized').click(function(){
   $(".sticky-notes").animate({ scrollTop: $(document).height() }, "slow");
 
 
+$(document).on('click','.msg_container',function(e){
+     var $this = $(this);
+    if (!$this.hasClass('chat-selected')) {
+        $this.addClass('chat-selected');
+    }else {
+        $this.removeClass('chat-selected');
+    }
+});
+
+
 function chatMinMax(){
     var $this = $(".panel-heading span.icon_minim");
     if (!$this.hasClass('panel-collapsed')) {
@@ -1315,7 +1326,7 @@ function chatMinMax(){
         $this.parents('.panel').find('.panel-body').slideDown();
         $this.removeClass('panel-collapsed');
         $this.removeClass('glyphicon-plus').addClass('glyphicon-minus');
-        setTimeout(function(){ scrollToNewMessageSpan(); }, 1000);
+        setTimeout(function(){ scrollToNewMessageSpan(); }, 200);
     }
 }
 var newScrollDone=false;
@@ -1329,12 +1340,9 @@ function scrollToNewMessageSpan(){
         var divTop = document.getElementById('chat_container').offsetTop;
         $('#chat_container').getNiceScroll(0).doScrollPos(0,topPos-divTop-20);
    }else{
-        var chat_container=$("#chat_container");
-           chat_container.animate({ scrollTop: chat_container.prop("scrollHeight")- chat_container.height() }, 200);
-       }
+        $('#chat_container').getNiceScroll(0).doScrollPos(0,800);
+   }
 }
-
-
 $(document).on('click', '#btn-input', function (e) {
  var myDiv=$("#chat_container");
    myDiv.animate({ scrollTop: myDiv.prop("scrollHeight")- myDiv.height() }, 1000);

@@ -229,7 +229,12 @@ $scope.doCoachAddFood=function(planDay,foodSessionId){
 };
 
 $scope.doEditFoodItemFromPlan=function(id){
-   $scope.userFood={};
+    $scope.userFood={};
+    $scope.addFood=true;
+    $scope.showSearch=false;
+    $scope.isNew=false;
+    $scope.title="Edit Food";
+
     requestHandler.postRequest("coach/foodplandetail/",{"id":id}).then(function(response){
       $scope.userSelectedFoodDetails=response.data.fooddetail;
       $scope.userSavedFoodDetails=response.data.savedfoodplan;
@@ -250,13 +255,8 @@ $scope.doEditFoodItemFromPlan=function(id){
       $scope.originalisoptional= angular.copy($scope.userSavedFoodDetails.isoptional);
       $scope.doCalculateCalories();  
       $scope.userFood.calorieintake=$scope.caloriesIntake;
-    });
-    $scope.addFood=true;
-    $scope.showSearch=false;
-    $scope.isNew=false;
-    $scope.title="Edit Food";
 
-    $(function(){
+      $(function(){
             $("#lean_overlay").fadeTo(1000);
             $("#modal-add-food").fadeIn(600);
             $(".user_register").show();
@@ -276,7 +276,7 @@ $scope.doEditFoodItemFromPlan=function(id){
             $("#lean_overlay").hide();
             $scope.resetdata();
         });
-      
+    });  
 };
 
 $scope.resetdata=function(){

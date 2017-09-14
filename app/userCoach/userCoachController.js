@@ -617,7 +617,7 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
 
           // Group Json object of plan 
          $.each($scope.mealplandetail, function (key, obj) {            
-              if(key.startsWith("day")){
+              if(key.substring(0,3)=="day"){
                 $scope.mealPlanDetailList[key.substring(3)-1].totalCalories=(obj.actualcalories).toFixed(2);
                 $scope.mealPlanDetailList[key.substring(3)-1].consumedCalories=(obj.consumedcalories).toFixed(2);
                 $scope.mealPlanDetailList[key.substring(3)-1].date= obj.date;
@@ -739,7 +739,7 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
 
           // Group Json object of plan 
           $.each($scope.workoutplandetail, function (key, obj) {            
-              if(key.startsWith("day")){
+              if(key.substring(0,3)=="day"){
                 $scope.workoutPlanDetailList[key.substring(3)-1].totalCalories=(obj.actualcalories).toFixed(2);
                 $scope.workoutPlanDetailList[key.substring(3)-1].burntCalories=(obj.burntcalories).toFixed(2);
                 $scope.workoutPlanDetailList[key.substring(3)-1].date=obj.date;
