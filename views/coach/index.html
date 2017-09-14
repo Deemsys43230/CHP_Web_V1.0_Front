@@ -30,7 +30,11 @@
   <!-- Favicons-->
     <link rel="shortcut icon" href="../../images/favicon.ico" type="image/x-icon"/>
 
-
+   <!--  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-daterangepicker/2.1.13/daterangepicker.min.css" /> -->
+    
+    
+   <!--   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-daterangepicker/2.1.13/daterangepicker.min.js"></script> -->
+     
     <link  rel="stylesheet" type="text/css"  href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css"/>
 
 </head>
@@ -47,21 +51,8 @@
         <div class="top-bar">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-8 col-md-8 col-sm-7 col-xs-5 hidden-xss" ng-init="init()">
-                        <!-- Start Contact Info -->
-                        <div ng-hide="hideValue" ng-cloak class="ng-cloak" >
-                            <ul class="contact-details remove-style" >
-                                <li class="hidden-xs"><a><i class="fa fa-map-marker"></i> {{address}}</a>
-                                </li>
-                                <li class="hidden-sm hidden-xss"><a><i class="fa fa-envelope-o"></i> {{commonDetails.supportemail}}</a>
-                                </li>
-                                <li class="hidden-sm hidden-xs"><a><i class="fa fa-phone"></i> {{commonDetails.mobile}}</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <!-- End Contact Info -->
-                    </div><!-- .col-md-6 -->
-                    <div class="col-lg-4 col-md-4 col-sm-5 padding-left-0">
+                   
+                    <div class="col-lg-12 col-md-12 col-sm-12 pull-right padding-left-0" ng-init="init()">
                         <!-- Start Social Links -->
                         <ul class="social-list remove-style">
                             <li class="navbar-user">
@@ -364,6 +355,8 @@
         });
     });
 </script>
+
+
 
 </body>
 </html>

@@ -695,7 +695,7 @@
                                 <div class='input-group'>
                                      <input id="duration-start"  hidden />
                                     <input id="duration-end" hidden />
-                                    <input type="text" id="duration-date" class="coach-input date-picker" name="training-date" placeholder="Training Duration"nd-model="planDetails.date" class="history_input pull-right" required>
+                                    <input type="text" id="duration-date" class="coach-input date-picker" name="training-date" placeholder="Training Duration" nd-model="planDetails.date" class="history_input pull-right" required>
                                     <span class="input-group-addon"><i class="fa fa-calendar" style="cursor: pointer" ng-click="initializeDateRangePicker()"></i> </span>                                    
                                 </div>
                                 <span ng-show="coachTrainingForm.training-date.$dirty && coachTrainingForm.training-date.$invalid">
@@ -1531,7 +1531,6 @@ $(document).ready(function(){
     function initializeDateRangePicker(){
         $("#duration-date").click();
         var options = {
-            minDate : new Date(),
             singleDatePicker: false,
             opens:'left',
             showDropdowns: true
