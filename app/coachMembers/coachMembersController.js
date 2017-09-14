@@ -15,6 +15,7 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
     $scope.accordion={
         "current":null
     };
+    $scope.planDetails={};
 
     /*$scope.datePicker = function(){
         $("#main-date").click();
@@ -113,6 +114,7 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
         })
     };
 
+    
     // For clients individual User profile view
     $scope.doGetClientsProfileDetailsByCoach= function (id){
             $scope.coachclientdetails={};
@@ -811,7 +813,6 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
 
     //for bloodglucose Graph
     $scope.drawBloodGlucoseGraph=function(datafbg,titles,datarbg,dataD,divId){
-        console.log(datafbg);
         $scope.loaded=false;
 
         $('#'+divId).highcharts({
@@ -1518,7 +1519,6 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
         $scope.param.userid = userid;
         requestHandler.postRequest("coach/getTrainingPlans/",$scope.param).then(function(response){
             $scope.planList = response.data;
-            console.log($scope.planList);
             $scope.paginationLoad=true;
         });
     };
@@ -1545,14 +1545,33 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
         });
     };
 
-    //do Insert New Plans
+//do Insert New Plans
 
     $scope.doInsertTrainingPlan = function(){
+        if($('#duration-start').val()!=''){
+            var startDate = $('#duration-start').val();
+            var endDate = $('#duration-end').val();
+        }
+        $scope.planDetails.startdate = startDate;
+        $scope.planDetails.enddate = endDate;
         $scope.planDetails.userid = $scope.currentClientId;
         requestHandler.postRequest("coach/insertTrainingPlan/",$scope.planDetails).then(function(response){
+            
+            if(response.data.Response == "Success"){
+                successMessage(Flash, "Successfully Plan Added!");
+                $scope.doGetTrainingPlanDetails($scope.currentClientId);
+                $(".tracking-plan-viewall-div").show();
+                $(".tracking-plan-view-div").hide();
+                $(".tracking-plan-add-div").hide();   
+                $scope.planDetails={};
+                $scope.planDetails.startdate = "";
+                $scope.planDetails.enddate = "";
+                $scope.planDetails.userid = "";
+                $scope.coachTrainingForm.$setPristine();
+            }
+
         },function(){
-            successMessage(Flash, "Successfully Plan Added!");
-            $scope.doGetTrainingPlanDetails(userid);
+            errorMessage(Flash,"Please Try Again Later");
         });
     };
 
@@ -2042,6 +2061,15 @@ coachApp.controller('MyMembersController',['$scope','requestHandler','Flash','$r
             $scope.getMyClientsList();
         });
     };
+    //for adding group
+    $scope.doAddCoachGroup=function(){
+        requestHandler.postRequest("coach/insertorupdateGroup/",$scope.group).then(function(response){
+             successMessage(Flash,"Successfully Added");
+             $scope.doGetGroupList(); 
+       }, function(){
+           errorMessage(Flash, "Please try again later!");
+       });
+    };
 
     $scope.doAssignGroup = function(){
         requestHandler.postRequest("coach/assignusertogroup/",{"groupid":$scope.assignGroup,"userid":$scope.assignUserId}).then(function(response){
@@ -2055,6 +2083,7 @@ coachApp.controller('MyMembersController',['$scope','requestHandler','Flash','$r
         $(".confirm-delete-modal").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
         $(".assign-modal").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
         $(".re-assign-modal").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
+         $(".add-group").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
     };
 
     $scope.doFilterGroup=function(id){

@@ -17505,14 +17505,6 @@ input.date-input{
     margin: 0;
     appearance: none;
 }
-.cal-icon{
-   display: table-cell;
-   padding-left:170px;
-}
-
-.cal-width{
-    width:185% !important;
-}
 .margin-left-200{
     margin-left: 200px;
 }
@@ -17820,4 +17812,17 @@ ul.group-menu li a{
     text-align: center;
     border: solid 1px #f8ba01;
     background: #f3eee1;
+}
+/*for add group*/
+.add-text-color{
+    color: #b30b0b !important;
+    text-decoration: underline !important;
+    font-weight: bold ! important;
+    font-size: 14px;
+}
+.edit-text-color{
+    color: green !important;
+    text-decoration: underline !important;
+    font-weight: bold ! important;
+    font-size: 12px;
 }

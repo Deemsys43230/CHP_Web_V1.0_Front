@@ -9,7 +9,7 @@ coachApp.controller('EventController',['$scope','requestHandler','Flash','$route
 
     //For single date selection
     $scope.datePicker = function(){
-            $("#main-date").click();
+            $("#event-date").click();
         };
 
     /*Do get All Event Deatils By Coach*/
@@ -61,6 +61,21 @@ coachApp.controller('EventController',['$scope','requestHandler','Flash','$route
         }
 		requestHandler.postRequest("coach/getevents/",{"fromdate":selectedDate,"todate":endDate}).then(function(response){
 			$scope.eventList= response.data.events;
+            //For Event duration calculation in hrs and min
+            $.each($scope.eventList,function(index,value){
+                value.durationHours=Math.floor(value.duration/60).toString();
+                value.durationMinutes=Math.floor(value.duration%60).toString();
+
+                if(value.durationHours == 0){
+                    value.duration=value.durationMinutes +" Mins";
+                }
+                else if(value.durationMinutes == 0){
+                    value.duration = value.durationHours +" Hrs";
+                }
+                else if( value.durationMinutes != 0 && value.durationHours != 0){
+                    value.duration=value.durationHours +" Hrs "+value.durationMinutes +" Mins ";
+                }
+            });
             $scope.loaded=false;
             $scope.paginationLoad=true;
 		});
@@ -111,8 +126,12 @@ coachApp.controller('EventController',['$scope','requestHandler','Flash','$route
     }
 
     $scope.doInsertOrUpdateEvents = function(){
+        var datetime = "";
+        if($('#history-start').val!=''){
+            datetime=startDate;
+        }
         $scope.eventDetails.id=null;
-        $scope.eventDetails.datetime=document.getElementById("main-start-date").value
+        $scope.eventDetails.datetime=datetime;
         $scope.eventDetails.duration=parseInt($scope.eventDetails.durationHours*60)+ parseInt($scope.eventDetails.durationMinutes);
         requestHandler.postRequest("coach/insertorupdateevent/",$scope.eventDetails).then(function(response){
 			// $scope.result= response.data.Response;
@@ -148,16 +167,36 @@ coachApp.controller('EventEditController',['$scope','requestHandler','Flash','$r
 
     //For single date selection
     $scope.datePicker = function(){
-            $("#main-date").click();
+            $("#event-date").click();
         };
 
-    /*Do view and Edit event Details By coach*/
+    /*Do Edit event Details By coach*/
     $scope.doGetIndividualEvent = function(eventId){
         requestHandler.postRequest("eventdetail/",{"id":eventId}).then(function(response){
             $scope.eventDetails = response.data.event;
-            $scope.eventDuration = $scope.eventDetails.duration;
-            $scope.eventDetails.durationMinutes=Math.floor(($scope.eventDuration%60)).toString();
-            $scope.eventDetails.durationHours=Math.floor($scope.eventDuration/60).toString();
+            $scope.eventDetails.durationHours=Math.floor(($scope.eventDetails.duration/60)).toString();
+            $scope.eventDetails.durationMinutes=Math.floor($scope.eventDetails.duration%60).toString();
+
+            
+        });
+    };
+
+    /*Do view event Details By coach*/
+    $scope.doViewIndividualEvent = function(eventId){
+        requestHandler.postRequest("eventdetail/",{"id":eventId}).then(function(response){
+            $scope.eventDetail = response.data.event;
+            $scope.eventDetail.durationHours=Math.floor(($scope.eventDetail.duration/60)).toString();
+            $scope.eventDetail.durationMinutes=Math.floor($scope.eventDetail.duration%60).toString();
+
+            if($scope.eventDetail.durationHours == 0){
+                $scope.eventDetail.duration=$scope.eventDetail.durationMinutes +" Mins";
+            }
+            else if($scope.eventDetail.durationMinutes == 0){
+                $scope.eventDetail.duration = $scope.eventDetail.durationHours +" Hrs";
+            }
+            else if( $scope.eventDetail.durationHours != 0 &&  $scope.eventDetail.durationMinutes != 0){
+                $scope.eventDetail.duration=$scope.eventDetail.durationHours +" Hrs "+ $scope.eventDetail.durationMinutes +" Mins ";
+            }
         });
     };
 
@@ -198,6 +237,7 @@ coachApp.controller('EventEditController',['$scope','requestHandler','Flash','$r
      $scope.init = function(){
         
         $scope.doGetIndividualEvent($routeParams.id);
+        $scope.doViewIndividualEvent($routeParams.id);
         $scope.doGetAttendees($routeParams.id);
     };
 

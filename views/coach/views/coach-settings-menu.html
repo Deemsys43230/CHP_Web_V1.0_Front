@@ -1,6 +1,8 @@
 <div class="row sidebar-active">
-    <ul class="sidebar-menu remove-style">
-    	<li class="{{activeClass.coachGroup}}"><a href="#settings"><i class="fa fa-users"></i> &nbsp;Groups</a></li>
-        
-    </ul>
+    <div class="col-md-12 margin-bottom-10"><input class="form-control" placeholder="Search menu here..." ng-model="searchMenu"></div>
+    <div class="col-md-12 no-padding">
+        <ul class="sidebar-menu remove-style">
+            <li ng-repeat="settings in settingsMenuList | startsWithLetter:searchMenu" class="{{settings.active}}"><a href="#{{settings.href}}"><i class="fa fa-{{settings.icon}}"></i> &nbsp;{{settings.name}}</a></li>
+        </ul>
+    </div>
 </div>

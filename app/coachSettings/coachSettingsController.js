@@ -1,12 +1,20 @@
 var coachApp= angular.module("coachApp",['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','angularUtils.directives.dirPagination']);
 
-coachApp.controller('CoachSettingsController',['$scope','requestHandler','Flash',function($scope,requestHandler,Flash){
+coachApp.controller('CoachSettingsController',['$scope','requestHandler','Flash','settingsMenuService',function($scope,requestHandler,Flash,settingsMenuService){
  /*coachApp.controller('FoodMeasureController',['$scope','requestHandler','Flash',function($scope,requestHandler,Flash) {*/
-$scope.activeClass = {coachGroup:'active'};
+// $scope.activeClass = {coachGroup:'active'};
 $scope.isNew= true;
 $scope.title="Add Group";
 $scope.paginationLoad=false;
 var original="";
+
+$scope.settingsMenuList = settingsMenuService;
+$.each($scope.settingsMenuList,function(index,value){
+    if(value.id==1){
+        value.active = "active";
+    }
+    else value.active = ""
+});
 
  //Reset Scope
     $scope.reset=function(){

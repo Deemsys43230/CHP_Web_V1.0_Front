@@ -15,7 +15,7 @@
                             <div class="loader"></div>
                         </div>
                     </div>
-                    <form name="courseForm" novalidate>
+                    <form name="eventForm" novalidate>
                         <div class="col-lg-3 col-md-3 col-sm-3 margin-left-200 margin-top-7">
                             <h4 class="margin-top-10" ng-show="isAdd==0">Event No <span class="pull-right">:</span></h4><br/>
                             <h4 class="margin-top-10">Event Name <span class="pull-right">:</span></h4><br/>
@@ -26,65 +26,62 @@
                         <div class="col-lg-5 col-md-5 col-sm-5 margin-top-7">
                             <input class="section-input disabled-class" ng-show="isAdd==0" maxlength="150" name="id" placeholder="null" ng-model="eventDetails.id" ng-disabled>
 
-                            <span ng-show="courseForm.name.$dirty&&courseForm.name.$invalid">
-                                <span class="error-message textarea-errormessage40" ng-show="courseForm.name.$error.required"><span>Required.</span></span>
+                            <span ng-show="eventForm.name.$dirty&&eventForm.name.$invalid">
+                                <span class="error-message textarea-errormessage40" ng-show="eventForm.name.$error.required"><span>Required.</span></span>
                             </span>
                             <input class="section-input margin-top-15" maxlength="150" name="name" placeholder="Enter Event Name" ng-model="eventDetails.eventname" required>
 
-                            <span ng-show="courseForm.discription.$dirty&&courseForm.discription.$invalid">
-                                <span class="error-message textarea-errormessage55" ng-show="courseForm.discription.$error.required"><span>Required.</span></span>
+                            <span ng-show="eventForm.discription.$dirty&&eventForm.discription.$invalid">
+                                <span class="error-message textarea-errormessage55" ng-show="eventForm.discription.$error.required"><span>Required.</span></span>
                             </span>
                             <input class="section-input margin-top-15" maxlength="200" name="discription" placeholder="Enter Event Description" ng-model="eventDetails.description" required>
-
-                            <div class="input-group">
-                                <input hidden id="main-start-date" ng-model="eventDetails.datetime">
-                                    
-                                </input>
-                                <!-- <input type="text" name='startdate' class="date-input" id="main-start-date" date-options="dateOptions" date-validation-in ng-model="eventDetails.datetime" placeholder="Enter Event Date" required /> -->
-                                
-                                <input id="main-date" name='startdate' class="section-input margin-top-15 cal-width" placeholder="Enter Event Date" ng-model="eventDetails.datetime" date-validation-in required>
-                                <div id="ui-datepicker"></div>
-                                <div class="margin-top-15 mouse-pointer cal-icon">&nbsp;&nbsp;<i class="fa fa-calendar" ng-click="datePicker()"></i></div>
+                            <span ng-show="eventForm.discription.$dirty&&eventForm.discription.$invalid">
+                                <span class="error-message textarea-errormessage55" ng-show="eventForm.discription.$error.required"><span>Required.</span></span>
+                            </span>
+                            
+                                <input hidden id="main-start-date" ng-model="eventDetails.datetime"></input>
+                            <div class="input-group margin-top-15">
+                                <input id="main-date" class="section-input" name="startdate" placeholder="Enter Event Date"nd-model="eventDetails.datetime" class="history_input pull-right" date-validation-in required>
+                                <span class="input-group-addon"><i class="fa fa-calendar" style="cursor: pointer" ng-click="datePicker()"></i> </span> 
                             </div>
 
-                            <span ng-show="courseForm.durationHours.$dirty&&courseForm.durationHours.$invalid">
-                                <span class="error-message textarea-errormessage55" ng-show="courseForm.durationHours.$error.required"><span>Required.</span></span>
+                            <span ng-show="eventForm.durationHours.$dirty&&eventForm.durationHours.$invalid">
+                                <span class="error-message textarea-errormessage55" ng-show="eventForm.durationHours.$error.required"><span>Required.</span></span>
                             </span>
-                            <span ng-show="courseForm.durationMinutes.$dirty&&courseForm.durationMinutes.$invalid">
-                                <span class="error-message textarea-errormessage55" ng-show="courseForm.durationMinutes.$error.required"><span>Required.</span></span>
+                            <span ng-show="eventForm.durationMinutes.$dirty&&eventForm.durationMinutes.$invalid">
+                                <span class="error-message textarea-errormessage55" ng-show="eventForm.durationMinutes.$error.required"><span>Required.</span></span>
                             </span>
-                            <!-- <input class="section-input margin-top-15" maxlength="200" name="duration" placeholder="Enter Event Duration" ng-model="eventDetails.duration" required> -->
                             <div class="col-lg-6 col-md-6 col-sm-6 margin-top-15 no-padding">
-                                <select class="section-input" name="customhours"  ng-model="eventDetails.durationHours" ng-init="selectedHours='0'" style="padding: 8px 15px; width:99%" required>
-                                    <option value="">-- Select Hours --</option>
-                                    <option value="0">0</option>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                    <option value="6">6</option>
-                                    <option value="7">7</option>
-                                    <option value="8">8</option>
-                                    <option value="9">9</option>
-                                    <option value="10">10</option>
-                                    <option value="11">11</option>
-                                    <option value="12">12</option>
-                                    <option value="13">13</option>
-                                    <option value="14">14</option>
-                                    <option value="15">15</option>
-                                    <option value="16">16</option>
-                                    <option value="17">17</option>
-                                    <option value="18">18</option>
-                                    <option value="19">19</option>
-                                    <option value="20">20</option>
-                                    <option value="21">21</option>
-                                    <option value="22">22</option>
-                                    <option value="23">23</option>
-                                </select>
+                                <select class="full-width event" name="customhours"  ng-model="eventDetails.durationHours" ng-init="selectedHours='0'" required>
+                                        <option value="">-- Select Hours --</option>
+                                        <option value="0">0</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                        <option value="8">8</option>
+                                        <option value="9">9</option>
+                                        <option value="10">10</option>
+                                        <option value="11">11</option>
+                                        <option value="12">12</option>
+                                        <option value="13">13</option>
+                                        <option value="14">14</option>
+                                        <option value="15">15</option>
+                                        <option value="16">16</option>
+                                        <option value="17">17</option>
+                                        <option value="18">18</option>
+                                        <option value="19">19</option>
+                                        <option value="20">20</option>
+                                        <option value="21">21</option>
+                                        <option value="22">22</option>
+                                        <option value="23">23</option>
+                                    </select>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6 margin-top-15 no-padding">
-                                <select class="section-input" name="minutes" ng-model="eventDetails.durationMinutes" ng-init="selectedMinutes='0'" style="padding: 8px 15px; width:99%" required>
+                                <select class="full-width event" name="minutes" ng-model="eventDetails.durationMinutes" ng-init="selectedMinutes='0'" style="padding: 8px 15px; width:99%" required>
                                     <option value=""> -- Select Minutes -- </option>
                                     <option value="0">0</option>
                                     <option value="1">1</option>
@@ -150,8 +147,8 @@
                             </div>
                         </div>
                          <div class="col-lg-12 col-md-12 col-sm-12 text-center margin-top-15">
-                            <span ng-show="isAdd==1"><a href="" ng-disabled="courseForm.$invalid" class="btn btn-success" ng-click="doInsertOrUpdateEvents()">Save Event</a></span>
-                            <span ng-show="isAdd==0"><a href="" ng-disabled="isCleanCourse() || courseForm.$invalid" class="btn btn-success" ng-click="doUpdateEvent(eventDetails.id)">Save Changes</a></span>
+                            <span ng-show="isAdd==1"><a href="" ng-disabled="eventForm.$invalid" class="btn btn-success" ng-click="doInsertOrUpdateEvents()">Save Event</a></span>
+                            <span ng-show="isAdd==0"><a href="" ng-disabled="isCleanCourse() || eventForm.$invalid" class="btn btn-success" ng-click="doUpdateEvent(eventDetails.id)">Save Changes</a></span>
                             <span><a href="#events" class="btn btn-danger">Cancel</a></span>
                         </div>
                     </form>
@@ -178,7 +175,7 @@ function daterangepicker() {
     };
 
    $('#main-date').daterangepicker(options, function(start, end, label) {
-     //document.getElementById("main-start-date").value = start.format('DD/MM/YYYY');
+        document.getElementById("main-start-date").value = start.format('DD/MM/YYYY');
     });
 };
 </script>

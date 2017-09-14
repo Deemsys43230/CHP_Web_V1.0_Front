@@ -1245,7 +1245,43 @@ coachApp.directive('validFloatnumberzero', function() {
     };
 });
 
+// for coach settings menu
+coachApp.factory('settingsMenuService', function () {
+  var settings = [
+     
+      {
+        'id': 1,
+        'name': 'Groups',
+        'icon': 'users',
+        'href': 'settings',
+        'active': ''
+      },
+      {
+        'id': 2,
+        'name': 'Paypal Settings',
+        'icon': 'paypal',
+        'href': 'payment-settings',
+        'active': ''
+      }];
+  return settings;
+});
 
+coachApp.filter('startsWithLetter', function () {
+  return function (items, searchMenu) {
+    var filtered = [];
+    var letterMatch = new RegExp(searchMenu, 'i');
+    if (!items) {
+    } else {
+      for (var i = 0; i < items.length; i++) {
+        var item = items[i];
+        if (letterMatch.test(item.name)) {
+          filtered.push(item);
+        }
+      }
+    }
+    return filtered;
+  };
+});
 
 //Check For Only Alphabets with space
 coachApp.directive('validateAlphaWithSpace', function() {

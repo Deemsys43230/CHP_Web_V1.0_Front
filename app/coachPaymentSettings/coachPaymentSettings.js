@@ -4,9 +4,16 @@
 
 var coachApp = angular.module('coachApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate']);
 
-coachApp.controller('CoachPaymentSettingsController',['$scope','requestHandler','Flash','$location',function($scope,requestHandler,Flash,$location) {
+coachApp.controller('CoachPaymentSettingsController',['$scope','requestHandler','Flash','$location','settingsMenuService',function($scope,requestHandler,Flash,$location,settingsMenuService) {
 //sidebar menu active class
-    $scope.activeClass = {paymentSettings:'active'};
+    // $scope.activeClass = {paymentSettings:'active'};
+    $scope.settingsMenuList = settingsMenuService;
+    $.each($scope.settingsMenuList,function(index,value){
+        if(value.id==2){
+            value.active = "active";
+        }
+        else value.active = ""
+    });
     var original="";
       $scope.doGetCurrencyCode = function(){
         requestHandler.getRequest("getCurrencyCode/","").then(function(response){

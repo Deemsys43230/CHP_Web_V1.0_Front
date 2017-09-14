@@ -573,7 +573,7 @@
                 <table class="table table-striped table-bordered">
                     <thead>
                         <tr class="warning">
-                            <th class="col-md-2">User Id</th>
+                            <!-- <th class="col-md-2">User Id</th> -->
                             <th class="col-md-4">Subscription Name</th>
                             <th class="col-md-2">Start Date</th>
                             <th class="col-md-2">End Date</th>
@@ -583,8 +583,8 @@
 
                     <tbody >
                         <tr dir-paginate="plans in planList.history | itemsPerPage:trainingPagination.itemsPerPage" pagination-id="totalRecords" ng-show="planList.length!=0" current-page="trainingPagination.pageNumber" total-items="planList.totalrecords">
-                            <td><span class="line-clamp-md">{{plans.userid}}</span></td>
-                            <td><span class="line-clamp-md">{{plans.subscriptionname}}</span></td>
+                           <!--  <td><span class="line-clamp-md">{{plans.userid}}</span></td> -->
+                            <td><span class="line-clamp-md text-justify">{{plans.subscriptionname}}</span></td>
                             <td><span class="line-clamp-md">{{plans.startdate}}</span></td>
                             <td>{{plans.enddate}}</td>
                             <td>
@@ -607,43 +607,43 @@
                 <div class="col-lg-10 col-sm-10 col-md-10" >
                     <table class="table table-bordered table-striped">
                         <tr>
-                            <td class="col-md-4">Name</td>
+                            <td class="col-md-4 text-bold">Name</td>
                             <td class="col-md-8">{{planView.username}}</td>
                         </tr>
                         <tr>
-                            <td class="col-md-4">Email ID</td>
+                            <td class="col-md-4 text-bold">Email ID</td>
                             <td class="col-md-8">{{planView.coachname}}</td>
                         </tr>
                         <tr>
-                            <td class="col-md-4">Subscription Name</td>
+                            <td class="col-md-4 text-bold">Subscription Name</td>
                             <td class="col-md-8">{{planView.subscriptionname}}</td>
                         </tr>
                         <tr>
-                            <td class="col-md-4">Description</td>
+                            <td class="col-md-4 text-bold">Description</td>
                             <td class="col-md-8">{{planView.subscriptiondescription}}</td>
                         </tr>
                         <tr>
-                            <td class="col-md-4">Start Date</td>
+                            <td class="col-md-4 text-bold">Start Date</td>
                             <td class="col-md-8">{{planView.startdate}}</td>
                         </tr>
                         <tr>
-                            <td class="col-md-4">End Date</td>
+                            <td class="col-md-4 text-bold">End Date</td>
                             <td class="col-md-8">{{planView.enddate}}</td>
                         </tr>
                         <tr>
-                            <td class="col-md-3">Amount</td>
-                            <td class="col-md-9">{{planView.amount}}</td>
+                            <td class="col-md-4 text-bold">Amount</td>
+                            <td class="col-md-8">{{planView.amount}}</td>
                         </tr>
                         <tr>
-                            <td class="col-md-4">Currency Type</td>
+                            <td class="col-md-4 text-bold">Currency Type</td>
                             <td class="col-md-8">{{planView.currencytype}}</td>
                         </tr>
                         <tr>
-                            <td class="col-md-3">Reference</td>
-                            <td class="col-md-9">{{planView.reference}}</td>
+                            <td class="col-md-4 text-bold">Reference</td>
+                            <td class="col-md-8">{{planView.reference}}</td>
                         </tr>
                         <tr>
-                            <td class="col-md-4">Payment Mode</td>
+                            <td class="col-md-4 text-bold">Payment Mode</td>
                             <td class="col-md-8">{{planView.paymentmode}}</td>
                         </tr>
                     </table>
@@ -666,7 +666,7 @@
                                 <div> Subscription Name <span class="pull-right">:</span></div>
                             </div>
                             <div class="col-lg-8 col-md-7 col-sm-12 margin-top-10">
-                                <input class="coach-input" placeholder="Sunbscription Name" name="name" ng-model="planDetails.subscriptionname" maxlength="25" required/>
+                                <input class="coach-input" placeholder="Subscription Name" name="name" ng-model="planDetails.subscriptionname" maxlength="25" required/>
                                 <span ng-show="coachTrainingForm.name.$dirty && coachTrainingForm.name.$invalid">
                                     <span class="error-message textarea-errormessage10" ng-show="coachTrainingForm.name.$error.required"><span>Required.</span></span>
                                     <span class="error-message textarea-errormessage10" ng-show="coachTrainingForm.name.$error.validateAlphaWithSpace"><span>Enter&nbsp;valid&nbsp;Name.</span></span>
@@ -1579,7 +1579,6 @@ $(document).ready(function(){
             startDate.setDate(startDate.getDate()-6);
 
         $("#history-graph-date").click();
-        alert("duration");
             var options = {
                 maxDate : new Date(),
                 startDate :startDate,
