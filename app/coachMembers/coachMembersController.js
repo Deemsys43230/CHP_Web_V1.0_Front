@@ -310,6 +310,42 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
             }
             ];
 
+             //Reset Scope
+    $scope.resetAddGroup=function(){
+        $scope.group={};
+        $scope.groupForm.$setPristine();
+        $scope.group.groupname="";
+        $scope.isNew = true;
+        $scope.title = "Add Group";
+
+        if($('.search-list-form').css('display') != 'none'){
+            $(".search-list-form").hide();
+        }
+
+        $(function(){
+            $("#lean_overlay").fadeTo(1000);
+            $("#group").fadeIn(600);
+            $(".common_model").show();
+            $scope.shouldBeOpen = true;
+        });
+
+        $(".modal_close").click(function(){
+            $(".common_model").hide();
+            $("#group").hide();
+            $("#lean_overlay").hide();
+            $scope.shouldBeOpen = false;
+        });
+
+        $("#lean_overlay").click(function(){
+            $(".common_model").hide();
+            $("#group").hide();
+            $("#lean_overlay").hide();
+            $scope.shouldBeOpen = false;
+        });
+
+    };
+
+
     $scope.setHistoryType=function(id,divId){
             $scope.historyType=id;
             if($('#history-start').val()==''){
@@ -2045,6 +2081,42 @@ coachApp.controller('MyMembersController',['$scope','requestHandler','Flash','$r
                 return 0;
             });
         })
+    };
+
+
+             //Reset Scope
+    $scope.resetAddGroup=function(){
+        $scope.group={};
+        $scope.groupForm.$setPristine();
+        $scope.group.groupname="";
+        $scope.isNew = true;
+        $scope.title = "Add Group";
+
+        if($('.search-list-form').css('display') != 'none'){
+            $(".search-list-form").hide();
+        }
+
+        $(function(){
+            $("#lean_overlay").fadeTo(1000);
+            $("#group").fadeIn(600);
+            $(".common_model").show();
+            $scope.shouldBeOpen = true;
+        });
+
+        $(".modal_close").click(function(){
+            $(".common_model").hide();
+            $("#group").hide();
+            $("#lean_overlay").hide();
+            $scope.shouldBeOpen = false;
+        });
+
+        $("#lean_overlay").click(function(){
+            $(".common_model").hide();
+            $("#group").hide();
+            $("#lean_overlay").hide();
+            $scope.shouldBeOpen = false;
+        });
+
     };
     //Get Groups List for popup
 

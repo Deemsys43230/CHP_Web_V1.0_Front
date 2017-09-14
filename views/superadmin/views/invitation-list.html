@@ -48,7 +48,7 @@
                                     <a href="#invitation-view/{{invitation.id}}" class="btn-xs btn-primary">View Details</a>
                                     <a href="" class="btn-xs btn-danger" ng-hide="invitation.status==2" ng-click="deleteModel(invitation.id)">Delete</a>
                                     <a href="#add-edit-coach/{{invitation.id}}" class="btn-xs btn-success" ng-if="invitation.status==1">Add as a Coach</a>
-                                    <a href="" class="fa fa-check-circle" aria-hidden="true" class="btn-xs btn-success" ng-if="invitation.status==2"></a>
+                                    <a href="" class="fa fa-check-circle text-success" aria-hidden="true" class="btn-xs btn-success" ng-if="invitation.status==2"></a><span class="text-success" ng-if="invitation.status==2">&nbsp;Added Coach</span>
                                 </td>
                             </tr>
                             <tr ng-show="InvitationList.length==0 || !invitationfilter.length "><td colspan="3" class="text-center">No Records Found !!!</td></tr>
