@@ -150,7 +150,7 @@ coachApp.controller('CoachInvitationController',['$scope','requestHandler','Flas
 
 	$scope.coachUserInit=function(){
 
-		$scope.scrollnation={"itemsPerScroll":4, "scrollEndCount": -1}
+		$scope.scrollnation={"itemsPerScroll":6, "scrollEndCount": -1}
 		$scope.coachuserlist=[];
 		$scope.invitationType=1;
         $scope.coachsearch="";
