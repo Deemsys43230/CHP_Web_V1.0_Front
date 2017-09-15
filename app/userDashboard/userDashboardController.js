@@ -1456,6 +1456,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
         };
 
         $scope.doGetWeightLogGraph=function(){
+            alert("inside graph");
             var goalEndDate=$scope.goalDetails.enddate; //actual goal end date
             var firstValue = selectedDate.split('/'); //current date
             var secondValue =goalEndDate.split('/'); // goal end date
@@ -3455,8 +3456,10 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
         $scope.drawBloodGlucoseGraph=function(datafbg,titles,datarbg,dataD,divId){
             console.log(datafbg);
             $scope.loaded=false;
-
             $('#'+divId).highcharts({
+                chart: {
+                    type: 'column'
+                },
                 title: {
                     text: titles.title
                 },
@@ -3465,7 +3468,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
                     title: {
                         text: titles.xaxis
                     },
-                    categories: dataD //to display date
+                    categories: dataD //for displaying date
 
                 },
                 yAxis: {
@@ -3487,10 +3490,12 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
                 credits: {
                     enabled: false
                 },
+                legend:{enabled:false},
                 tooltip: {
+
                     headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
                     pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-                        '<td style="padding:0"><b>{point.y:.2f} mg/dl</b></td></tr>',
+                        '<td style="padding:0"><b>{point.y:.2f} mm/dl</b></td></tr>',
                     footerFormat: '</table>',
                     shared: true,
                     useHTML: true,
@@ -3500,19 +3505,18 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
                     shadow:true,
                     style:{fontSize:'10px',padding:5,zIndex:500},
                     formatter:false
+
                 },
                 series: [{
-                    type: 'column',
-                    name: 'Fastingbloodglucose',
+                    name: 'Fasting',
                     color: '#339966',
-                    data:datafbg     //to  display fasting bloodglucose value
+                    data:datafbg     //for  displaying systolic blood pressure value
                 }, {
-                    type: 'column',
-                    name: 'Randombloodglucose',
+                    name: 'Random',
                     color: '#3366cc',
-                    data:datarbg   // to display  random bloodGlucose value
-                }]
-
+                    data:datarbg     // for displaying diastolic blood pressure value
+                }
+                ]
             });
         };
 
@@ -3739,7 +3743,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
 
         //Weight Goal Graph
         $scope.drawGoalGraph=function(data,titles,data1){
-            console.log(data);
+            console.log(data1);
            $('#goalGraph').highcharts({
                 title: {
                     text: titles.title
@@ -3767,7 +3771,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
 
                     },
                     plotLines: [{
-                        value: 0,
+
                         width: 1,
                         color: '#f8ba01'
                     }]
