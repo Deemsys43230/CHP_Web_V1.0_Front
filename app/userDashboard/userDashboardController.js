@@ -1456,7 +1456,6 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
         };
 
         $scope.doGetWeightLogGraph=function(){
-            alert("inside graph");
             var goalEndDate=$scope.goalDetails.enddate; //actual goal end date
             var firstValue = selectedDate.split('/'); //current date
             var secondValue =goalEndDate.split('/'); // goal end date
@@ -1499,8 +1498,24 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
                 titles.suffix=" "+$scope.unit;
                 titles.yaxis="Weight (" + $scope.unit + ")";
                 titles.xaxis="Date Range";
-                $scope.drawGoalGraph(weightLogs,titles,budgetdate);
-                $scope.weightGraphValue = weightLogs
+                
+                var range=Math.round(weightLogs.length/24);
+                var filterWeightLogs=[];
+                var filterBudgetDate=[];
+
+                console.log("Range"+range);
+                for (i = 0; i < weightLogs.length; i=i+range) {
+                    filterWeightLogs.push(weightLogs[i]);
+                    filterBudgetDate.push(budgetdate[i]);
+                }
+                if(i==weightLogs.length){
+                    filterWeightLogs.push(weightLogs[weightLogs.length-1]);
+                    filterBudgetDate.push(budgetdate[weightLogs.length-1]);
+                }
+
+
+                $scope.drawGoalGraph(filterWeightLogs,titles,filterBudgetDate);
+                $scope.weightGraphValue = filterWeightLogs
                 //$scope.weightGraph = limitToFilter($scope.weightGraphValue, 30);
             }, function () {
                 errorMessage(Flash, "Please try again later!")
