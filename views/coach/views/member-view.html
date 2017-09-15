@@ -593,7 +593,7 @@
                                 <a id="{{plans.id}}" href="" ng-click="doGetPlansView(plans.id);" class="btn-xs btn-primary tracking-plan-view">View Details</a>
                             </td>
                         </tr>
-                        <tr ng-show="planList.history.length==0"><td colspan="5" class="text-center">No Records Found !!!</td></tr>
+                        <tr ng-show="planList.history.length==0 || planList.totalrecords==0"><td colspan="5" class="text-center">No Records Found !!!</td></tr>
                     </tbody>
                 </table>  
                 <!-- Start Pagination -->
