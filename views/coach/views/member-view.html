@@ -668,7 +668,7 @@
                                 <div> Training Name <span class="pull-right">:</span></div>
                             </div>
                             <div class="col-lg-8 col-md-7 col-sm-12 margin-top-10">
-                                <input class="coach-input" placeholder="Subscription Name" name="name" ng-model="planDetails.subscriptionname" maxlength="50" required/>
+                                <input class="coach-input" placeholder="Training Name" name="name" ng-model="planDetails.subscriptionname" maxlength="50" required/>
                                 <span ng-show="coachTrainingForm.name.$dirty && coachTrainingForm.name.$invalid">
                                     <span class="error-message textarea-errormessage10" ng-show="coachTrainingForm.name.$error.required"><span>Required.</span></span>
                                     <span class="error-message textarea-errormessage10" ng-show="coachTrainingForm.name.$error.validateAlphaWithSpace"><span>Enter&nbsp;valid&nbsp;Name.</span></span>
@@ -680,7 +680,7 @@
                                 <div> Training Description <span class="pull-right">:</span></div>
                             </div>
                             <div class="col-lg-8 col-md-7 col-sm-12 margin-top-10">
-                                <input class="coach-input" placeholder="Subscription Description" name="description" ng-model="planDetails.subscriptiondescription" maxlength="250" required validate-alpha-with-space/>
+                                <input class="coach-input" placeholder="Training Description" name="description" ng-model="planDetails.subscriptiondescription" maxlength="250" required validate-alpha-with-space/>
                                 <span ng-show="coachTrainingForm.description.$dirty && coachTrainingForm.description.$invalid">
                                     <span class="error-message textarea-errormessage10" ng-show="coachTrainingForm.description.$error.required"><span>Required.</span></span>
                                     <span class="error-message textarea-errormessage10" ng-show="coachTrainingForm.description.$error.validateAlphaWithSpace"><span>Enter&nbsp;valid&nbsp;Name.</span></span>
@@ -1545,7 +1545,7 @@ $(document).ready(function(){
             opens:'left',
             showDropdowns: true
         };
-
+        
         $('#duration-date').daterangepicker(options, function(start, end, label) {
             document.getElementById("duration-start").value = start.format('DD/MM/YYYY');
             document.getElementById("duration-end").value = end.format('DD/MM/YYYY');

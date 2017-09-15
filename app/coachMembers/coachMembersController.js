@@ -1618,9 +1618,26 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
 //do Insert New Plans
 
     $scope.doInsertTrainingPlan = function(){
+        var selectedDate = new Date();
+        var dd = selectedDate.getDate();
+        var mm = selectedDate.getMonth()+1; //January is 0!
+
+        var yyyy = selectedDate.getFullYear();
+        if(dd<10){
+            dd='0'+dd
+        }
+        if(mm<10){
+            mm='0'+mm
+        }
+        selectedDate = dd+'/'+mm+'/'+yyyy;
+
         if($('#duration-start').val()!=''){
             var startDate = $('#duration-start').val();
             var endDate = $('#duration-end').val();
+        }
+        else{
+            startDate = selectedDate;
+            endDate= selectedDate;
         }
         $scope.planDetails.startdate = startDate;
         $scope.planDetails.enddate = endDate;
