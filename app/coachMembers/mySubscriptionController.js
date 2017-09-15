@@ -6,9 +6,26 @@ coachApp.controller('MySubscriptionController',['$scope','requestHandler','Flash
 
     //Do Get Coach Active plans
     $scope.doGetCoachIsActivePlan= function(){
+
+        //To Display current date
+        var selectedDate = new Date();
+        var dd = selectedDate.getDate();
+        var mm = selectedDate.getMonth()+1; //January is 0!
+
+        var yyyy = selectedDate.getFullYear();
+        if(dd<10){
+            dd='0'+dd
+        }
+        if(mm<10){
+            mm='0'+mm
+        }
+        selectedDate = dd+'/'+mm+'/'+yyyy;
+
     	requestHandler.getRequest("coach/isSubscriptionActive/","").then(function(response){
     		$scope.coachActivePlan=response.data.subscription;
-            if(response.data.isActive==1){
+            var todayDate=selectedDate;
+            var enddate=$scope.currentActivePlan.subscription.enddate;
+            if(response.data.isActive==1&&todayDate<enddate){
                 $scope.subscriptionStatus=true;
             }
             else{
