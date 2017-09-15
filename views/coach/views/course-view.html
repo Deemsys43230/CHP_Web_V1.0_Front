@@ -110,6 +110,51 @@
                                 </tfoot>
                             </table>
                         </div>
+                        <div ng-hide="courseDetails.coursestatus==1 || courseDetails.coursestatus==2 || courseDetails.coursestatus==4" class="col-lg-12 col-md-12 col-sm-12 margin-top-10">
+                            <!--<span><a ng-show="courseReviews.canreview==1" id="modal_review" ng-click="reset(reviewForm)" href="#review"  class="btn-sm btn-success pull-right margin-left-5 pull-right"><i class="fa fa-plus-circle"></i> Add Review</a></span>-->
+                            <h4 class="classic-title"><span>Reviews</span></h4>
+                            <div ng-show="totalRatings!=0">
+                                <div class="col-lg-12 col-md-12 col-sm-12 no-padding">
+                                    <div ng-if="reviewload">
+                                        <div class="loader-style">
+                                            <div class="loader"></div>
+                                        </div>
+                                    </div>
+                                    <div class="friends-scroll-responsive" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#eee'}">
+                                        <div ng-repeat="reviews in courseReviews.reviews" class="margin-right-10">
+                                            <div class="col-lg-1 col-md-1 col-sm-1 no-padding">
+                                                <img class="img-circle" ng-src="{{reviews.review_imageurl | trusted}}">
+                                            </div>
+                                            <div class="col-lg-4 col-md-4 col-sm-4">
+                                                <strong class="wrap">{{reviews.review_username}}</strong><br/>
+                                                <span class="small-font text-gray">{{reviews.reviewddatetime}}</span>
+                                            </div>
+                                            <div class="col-lg-5 col-md-4 col-sm-4">
+                                                <strong class="wrap">{{reviews.reviewtitle}}</strong><br/>
+                                                <span class="small-font text-gray wrap">{{reviews.reviewdescription}}</span>
+                                            </div>
+
+                                            <div class="col-lg-2 col-md-3 col-sm-3 no-padding">
+                                                Ratings : {{reviews.ratinglevel}}<br/>
+                                                <average-star-rating ng-model="reviews.ratinglevel" max="5"></average-star-rating>
+                                            </div>
+                                            <div class="col-lg-12 col-md-12 col-sm-12 no-padding margin-tb-5"><hr/></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div ng-show="totalRatings==0">
+                                <div class="row">
+                                    <div class="panel no-margin no-box-shadow">
+                                        <div class="panel-body"><div class="text-center margin-top-40">
+                                            <img src="../../images/no-reviews.png" width="176" height="120"/>
+                                            <h1 class="text-gray">NO REVIEWS</h1><br/><br/><br/>
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
