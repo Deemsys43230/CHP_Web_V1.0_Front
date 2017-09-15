@@ -11,15 +11,13 @@ coachApp.controller('SubscriptionController',['$scope','requestHandler','Flash',
           requestHandler.getRequest("/coach/isSubscriptionActive/","").then(function(response){
               $scope.currentActivePlan=response.data;
               $.each($scope.pricingPlanDetails,function(index,value){
+                value.isCurrentPlan=false;
+                value.isActive=false;
                 if(value.id==$scope.currentActivePlan.subscription.planchoice){
-                  if($scope.currentActivePlan.isActive==1){
-                    value.currentActivePlan=true;                    
+                  value.isCurrentPlan=true;  
+                  if($scope.currentActivePlan.isActive==1){                  
                     value.isActive=true;
-                  }else{
-                    value.isActive=false;
                   }
-                }else{
-                  value.currentActivePlan=false;
                 }
               });
           });
