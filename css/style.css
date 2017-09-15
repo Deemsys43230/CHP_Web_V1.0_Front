@@ -17862,3 +17862,12 @@ select.event:focus {
   display: flex;
   flex-wrap: wrap;
 }
+.padding-lr-15{
+    padding-left: 15px;
+    padding-right: 0px;
+}
+.edit-disabled-class{
+    opacity: 0.8;
+    pointer-events: none;
+    cursor: default;
+}

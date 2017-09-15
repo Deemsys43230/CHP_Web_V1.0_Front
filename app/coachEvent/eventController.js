@@ -6,60 +6,65 @@ coachApp.controller('EventController',['$scope','requestHandler','Flash','$route
 
 	daterangepicker();
 
-
-    //For single date selection
-    $scope.datePicker = function(){
-            $("#event-date").click();
-        };
-
     /*Do get All Event Deatils By Coach*/
 
     //To Display current date
+    
+     var options = {
+            minDate: new Date(),
+            singleDatePicker: true,
+            opens:'left',
+            showDropdowns: true
+        };
 
-        //Always Start date for a week
-        var selectedDate = new Date();
-        var dd = selectedDate.getDate();
-        var mm = selectedDate.getMonth()+1; //January is 0!
-
-        var yyyy = selectedDate.getFullYear();
-        if(dd<10){
-            dd='0'+dd
-        }
-        if(mm<10){
-            mm='0'+mm
-        }
-        selectedDate = dd+'/'+mm+'/'+yyyy;
-
-        var startDate = selectedDate;
-
-        //Always end date for a week
-        var toDate=new Date();
-            toDate.setDate(toDate.getDate()+6);
-
-        var dd = toDate.getDate();
-        var mm = toDate.getMonth()+1; //January is 0!
-
-        var yyyy = toDate.getFullYear();
-        if(dd<10){
-            dd='0'+dd
-        }
-        if(mm<10){
-            mm='0'+mm
-        }
-        toDate = dd+'/'+mm+'/'+yyyy;
-        var endDate = toDate;
+        $('#event-date').daterangepicker(options, function(start, end, label) {
+            document.getElementById("event-start-date").value = start.format('DD/MM/YYYY');
+        });
+        
 
 	$scope.doGetEventsByCoach = function(){
        if($('#history-end').val()==''){
-            startDate = startDate;
-            endDate = endDate;
+            //Always Start date for a week
+            var selectedDate = new Date();
+            var dd = selectedDate.getDate();
+            var mm = selectedDate.getMonth()+1; //January is 0!
+
+            var yyyy = selectedDate.getFullYear();
+            if(dd<10){
+                dd='0'+dd
+            }
+            if(mm<10){
+                mm='0'+mm
+            }
+            selectedDate = dd+'/'+mm+'/'+yyyy;
+
+            var startDate = selectedDate;
+
+            //Always end date for a week
+            var toDate=new Date();
+                toDate.setDate(toDate.getDate()+6);
+
+            var dd = toDate.getDate();
+            var mm = toDate.getMonth()+1; //January is 0!
+
+            var yyyy = toDate.getFullYear();
+            if(dd<10){
+                dd='0'+dd
+            }
+            if(mm<10){
+                mm='0'+mm
+            }
+            toDate = dd+'/'+mm+'/'+yyyy;
+            var endDate = toDate;
+            
+                startDate = startDate;
+                endDate = endDate;
         }
         else{
             startDate = $('#history-start').val();
             endDate = $('#history-end').val();
-           
         }
-		requestHandler.postRequest("coach/getevents/",{"fromdate":selectedDate,"todate":endDate}).then(function(response){
+		requestHandler.postRequest("coach/getevents/",{"fromdate":startDate,"todate":endDate}).then(function(response){
 			$scope.eventList= response.data.events;
             //For Event duration calculation in hrs and min
             $.each($scope.eventList,function(index,value){
@@ -126,28 +131,22 @@ coachApp.controller('EventController',['$scope','requestHandler','Flash','$route
     }
 
     //TO check Maximum digits validation for training plan amount
-    $scope.durationHours=false;
-    $scope.durationHoursSet = function(durationHours){
-        $scope.durationHrs = durationHours; 
-    };
-    $scope.durationMinutesSet = function(durationMinutes){
-        $scope.durationMins = durationMinutes;
-    };
+    $scope.duration=true;
 
     $scope.durationCheck = function(){
-        if($scope.durationHrs ==0 && $scope.durationMins == 0){
-            $scope.duration=false;
-            alert($scope.duration);
-        }
-        else if($scope.durationHrs ==0 || $scope.durationMins == 0){
+        if($scope.eventDetails.durationHours ==0 && $scope.eventDetails.durationMinutes == 0){
             $scope.duration=true;
         }
+        else{
+            $scope.duration=false;
+        }
+        
     }
 
     $scope.doInsertOrUpdateEvents = function(){
         var datetime = "";
-        if($('#history-start').val!=''){
-            datetime=startDate;
+        if($('#event-start-date').val!=''){
+            var datetime = $('#event-start-date').val();
         }
         $scope.eventDetails.id=null;
         $scope.eventDetails.datetime=datetime;
@@ -156,7 +155,7 @@ coachApp.controller('EventController',['$scope','requestHandler','Flash','$route
 			// $scope.result= response.data.Response;
 			if(response.data.Response == "Success"){
 				$location.path("events");
-				$scope.doGetEventsByCoach();
+				// $scope.doGetEventsByCoach();
                 successMessage(Flash, "Successfully Event Added!");
 			}
         });
@@ -181,22 +180,14 @@ coachApp.controller('EventEditController',['$scope','requestHandler','Flash','$r
 
 
     $scope.activeClass.events='active';
-
-    daterangepicker();
-
-    //For single date selection
-    $scope.datePicker = function(){
-            $("#event-date").click();
-        };
+        
 
     /*Do Edit event Details By coach*/
     $scope.doGetIndividualEvent = function(eventId){
         requestHandler.postRequest("eventdetail/",{"id":eventId}).then(function(response){
             $scope.eventDetails = response.data.event;
             $scope.eventDetails.durationHours=Math.floor(($scope.eventDetails.duration/60)).toString();
-            $scope.eventDetails.durationMinutes=Math.floor($scope.eventDetails.duration%60).toString();
-
-            
+            $scope.eventDetails.durationMinutes=Math.floor($scope.eventDetails.duration%60).toString();   
         });
     };
 
@@ -222,7 +213,6 @@ coachApp.controller('EventEditController',['$scope','requestHandler','Flash','$r
     /*For edit Updation */
 
     $scope.doUpdateEvent =function(eventId){
-        $scope.eventDetails.datetime=document.getElementById("main-start-date").value;
         $scope.eventDetails.duration=parseInt($scope.eventDetails.durationHours*60)+ parseInt($scope.eventDetails.durationMinutes);
         requestHandler.postRequest("coach/insertorupdateevent/",$scope.eventDetails).then(function(response){
         $scope.result= response.data.Response;
@@ -243,6 +233,18 @@ coachApp.controller('EventEditController',['$scope','requestHandler','Flash','$r
         $scope.eventTitle="Edit Event";
     }
 
+     //TO check Maximum digits validation for training plan amount
+    $scope.duration=false;
+
+    $scope.durationCheck = function(){
+        if($scope.eventDetails.durationHours ==0 && $scope.eventDetails.durationMinutes == 0){
+            $scope.duration=true;
+        }
+        else{
+            $scope.duration=false;
+        }
+        
+    }
         //For Event Attendees View Event
 
     $scope.doGetAttendees = function(eventId){

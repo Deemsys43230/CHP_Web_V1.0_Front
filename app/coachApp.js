@@ -147,6 +147,24 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller: 'CoachReviewController'
             }).
+            when('/Expired-training-plan', {
+                templateUrl: 'views/expired-training-plan.html',
+                coachInvitations:true,
+                resolve: {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'coachApp',
+                            files:[
+                                '../../plugin/vertical-carousel/vertical-carousel.js',
+                                '../../angular/angular-utils-pagination/dirPagination.js',
+                                '../../app/coachTrainingExpired/coachTrainingExpiredController.js',
+                                '../../css/custom-inputs.css'
+                            ]
+                        })
+                    }]
+                },
+                controller: 'coachTrainingExpiredController'
+            }).
              when('/coach-subscription', {
                 templateUrl: 'views/coach-subscription.html',
                 resolve: {
@@ -180,7 +198,7 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         })
                     }]
                 },
-               controller:'SubscriptionController'
+                controller:'SubscriptionController'
                
             }).
            when('/subscription', {
@@ -192,27 +210,26 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                             files:[
                                 '../../plugin/popup/style.css',
                                 '../../angular/angular-utils-pagination/dirPagination.js',
+                                '../../app/coachMembers/subscriptionController.js',
                                 'https://checkout.razorpay.com/v1/checkout.js'
                             ]
                         })
                     }],
-                   check:["$location","$rootScope","requestHandler",function($location,$rootScope,requestHandler){
+                   check:["$location","$rootScope",'$timeout',"requestHandler",function($location,$rootScope,$timeout,requestHandler){
                         requestHandler.getRequest("/coach/isSubscriptionActive/","").then(function(response){
                             if(response.data.isActive==0 && response.data.subscription==[]){
-                            
-                               $rootScope.isSubscriptionActive=true;
-                                $location.path("change-subscription");
-                             
+                                $timeout(function () {
+                                $rootScope.isSubscriptionActive=true;
+                                 }, 100);
                             }else{ 
-                                
                                 $rootScope.isSubscriptionActive=false;
                                 $location.path("coach-subscription-history");
-                          
                             }
 
                          });
                     }]
-                }
+                },
+                controller:'SubscriptionController'
             }).          
             when('/coach-subscription-history', {
                 templateUrl: 'views/coach-my-subscription-plan.html',
