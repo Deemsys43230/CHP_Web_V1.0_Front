@@ -17870,4 +17870,7 @@ select.event:focus {
     opacity: 0.8;
     pointer-events: none;
     cursor: default;
+}/*for cursor design */
+.cursor{
+    cursor: pointer
 }
