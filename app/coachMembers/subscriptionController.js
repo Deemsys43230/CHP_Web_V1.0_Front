@@ -35,6 +35,14 @@ coachApp.controller('SubscriptionController',['$scope','requestHandler','Flash',
        }
     };
 
+    $scope.doPayment=function(type,id,amount){
+      if(type==1){
+        $scope.doGetSubscirbeCreateRazor(id);
+      }else{
+        $scope.authorizePaymentModel(id,amount);
+      }
+    }
+
 
     //For Subscription create Order Razor Payment
 

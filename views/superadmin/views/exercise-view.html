@@ -62,15 +62,13 @@
                     <div class="row margin-top-10">
                          <div class="col-md-4 text-bold">Video Link<span class="pull-right">:</span></div>
                          <div class="col-md-8">
-                             <a href="{{exerciseDetail.videosource}}" target="_blank" class="btn-xs btn-warning" ng-if="exerciseDetail.videosource!=null"><i class="fa fa-play-circle" aria-hidden="true"></i>&nbsp;Play</a>
-                             <span ng-if="exerciseDetail.videosource==null">-</span>
+                            <span ng-show="exerciseDetail.videosource!==null">
+                             <a href="{{exerciseDetail.videosource}}" target="_blank" class="btn-xs btn-warning" ng-if="exerciseDetail.videosource!==''"><i class="fa fa-play-circle" aria-hidden="true"></i>&nbsp;Play</a>
+                             <span ng-if="exerciseDetail.videosource===''">-</span>
+                            </span>
+                            <span ng-if="exerciseDetail.videosource===null">-</span>
                          </div>
-                    </div>    
-                  <!--  <div class="row margin-top-10">
-                        <div class="col-md-4  text-bold">MET<span class="pull-right">:</span></div>
-                        <div class="col-md-8">{{exerciseDetail.MET}}</div>
-                    </div>-->
-
+                    </div>   
                 </div>
 
                 <div class="col-md-12 no-padding margin-top-10">

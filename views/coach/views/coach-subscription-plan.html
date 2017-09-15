@@ -23,10 +23,10 @@
                       <div class="btn-group" data-toggle="buttons">
 
                         <label class="btn btn-default active unit-toggle-label"  ng-click="test('mUnit')">
-                            <input type="radio" name="unit" ng-model="units"  id="option1" autocomplete="off">&nbsp;&nbsp;&nbsp;INR&nbsp;&nbsp;&nbsp;
+                            <input type="radio" name="unit" ng-model="units" value="1"  id="option1" autocomplete="off">&nbsp;&nbsp;&nbsp;INR&nbsp;&nbsp;&nbsp;
                         </label>
                         <label class="btn btn-default unit-toggle-label"  ng-click="test('uUnit')">
-                            <input type="radio" name="unit" ng-model="units"  id="option2" autocomplete="off"> &nbsp;&nbsp;&nbsp;USD&nbsp;&nbsp;&nbsp;
+                            <input type="radio" name="unit" ng-model="units" value="2" id="option2" autocomplete="off"> &nbsp;&nbsp;&nbsp;USD&nbsp;&nbsp;&nbsp;
                         </label>
                     </div>
 
@@ -68,8 +68,7 @@
                             <span style="min-height:63px;">{{pricingPlan.features}}</span>
                         </div> 
                         <br>
-                        <a ng-show="units==1" href="" ng-disabled="pricingPlan.isCurrentPlan&&pricingPlan.isActive" class="price-button btn button" ng-click="doGetSubscirbeCreateRazor(pricingPlan.id)">{{pricingPlan.isCurrentPlan?pricingPlan.isActive?"Active Subscription":"Renew Subscription":"Subscribe"}}</a>
-                        <a ng-hide="units==1" href="" ng-disabled="pricingPlan.isCurrentPlan&&pricingPlan.isActive" class="price-button btn button" ng-click="authorizePaymentModel(pricingPlan.id,pricingPlan.discountUSD)">{{pricingPlan.isCurrentPlan?pricingPlan.isActive?"Active Subscription":"Renew Subscription":"Subscribe"}}</a><br/>
+                        <a ref="" ng-disabled="pricingPlan.isCurrentPlan&&pricingPlan.isActive" class="price-button btn button" ng-click="doPayment(units,pricingPlan.id,pricingPlan.discountUSD)">{{pricingPlan.isCurrentPlan?pricingPlan.isActive?"Active Subscription":"Renew Subscription":"Subscribe"}}</a><br/>
                     </div>
                 </div>
             </div>
