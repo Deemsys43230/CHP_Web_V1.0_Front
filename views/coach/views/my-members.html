@@ -6,12 +6,12 @@
                     <a href="#dashboard" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back <span class="hidden-md hidden-sm">to Dashboard</span></a>                    
                 </div>
                 <div flash-message="2000" class="col-md-3 col-lg-3 col-sm-3 pull-right"></div>
-                <h5 class="classic-title"><span><a href="#my-members"><i class="fa fa-money"></i>&nbsp;CLIENTS</a></span>&nbsp;|&nbsp;<a href="#coach-invitations"><i class="fa fa-dollar"></i>&nbsp;INVITATIONS</a>&nbsp;|&nbsp;<a href="#coach-compose-message"><i class="fa fa-dollar"></i>&nbsp;SEND MESSAGE</a>&nbsp;|&nbsp;<a href="#my-reviews"><i class="fa fa-star"></i>&nbsp;MY REVIEWS</a>&nbsp;|&nbsp;<a href="#Expired-training-plan"><i class="fa fa-gg"></i>&nbsp;EXPIRED TRAINING PLAN</a></h5>
+                <h5 class="classic-title"><span><a href="#my-members"><i class="fa fa-money"></i>&nbsp;CLIENTS</a></span>&nbsp;|&nbsp;<a href="#coach-invitations"><i class="fa fa-dollar"></i>&nbsp;INVITATIONS</a>&nbsp;|&nbsp;<a href="#coach-compose-message"><i class="fa fa-envelope"></i>&nbsp;SEND MESSAGE</a>&nbsp;|&nbsp;<a href="#my-reviews"><i class="fa fa-star"></i>&nbsp;MY REVIEWS</a>&nbsp;|&nbsp;<a href="#Expired-training-plan"><i class="fa fa-gg"></i>&nbsp;EXPIRED TRAINING PLAN</a></h5>
             </div>
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding">
                 <div class="col-xs-12 col-sm-3 col-md-2 col-lg-2 no-padding">
                     <h4 class="classic-title margin-left-20" style="line-height: 17px; margin-top: 3px;"><span>Groups</span><a href="#settings" class="edit-text-color margin-left-10">Edit</a></h4>
-                    <div class="col-md-12 col-lg-12 col-sm-12 content_scrollbar" style="padding-right: 5px; !important" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#eee'}" >
+                    <div class="col-md-12 col-lg-12 col-sm-12 group_scrollbar" style="padding-right: 5px; !important" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#eee'}" >
                     <ul class="sidebar-menu remove-style " >
                         <li ng-repeat="group in groupsList" ng-class="{'active':group.id==selectedGroupId}" ng-click="doFilterGroup(group.id)">
                             <a href=""><i class="fa fa-group"></i> &nbsp;{{group.groupname}}</a>

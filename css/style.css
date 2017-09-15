@@ -17870,7 +17870,17 @@ select.event:focus {
     opacity: 0.8;
     pointer-events: none;
     cursor: default;
-}/*for cursor design */
+}
+/*for cursor design */
 .cursor{
     cursor: pointer
+}
+/*for group scroll design*/
+.group_scrollbar{
+    max-height: 350px;
+    width: 100%;
+    background: none;
+    overflow-y: scroll;
+    overflow-x:hidden;
+    word-wrap: break-word;
 }
