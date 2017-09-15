@@ -845,6 +845,8 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
     });
 
     $scope.coachListInit=function(){
+        $scope.mealPlanPagination={"itemsPerPage":10,"pageNumber":1};
+        $scope.workoutPlanPagination={"itemsPerPage":10,"pageNumber":1};
         $scope.doGetMyCoachListByUser();
     };
 

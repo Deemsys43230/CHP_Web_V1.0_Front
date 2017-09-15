@@ -56,11 +56,11 @@
                         </tr>
                     </thead>
                 <tr>
-                    <th class="col-md-3 text-center" style="margin-top:15px"><strong>Plans</strong></th>
-                    <th class="col-md-9 text-center"><strong>Excercise Name</strong></th>
+                    <th class="col-md-2 text-center" style="margin-top:15px"><strong>Plans</strong></th>
+                    <th class="col-md-10 text-center"><strong>Excercise Name</strong></th>
                 </tr>
                 <tr ng-repeat="workoutPlanDetail in workoutPlanDetailList" ng-init="$last ? doIntializeLeanModal() : null">
-                    <td class="col-md-1 food-plans text-center align-bottom">
+                    <td class="food-plans text-center align-bottom">
                         {{workoutPlanDetail.day}}
                         <div valign="bottom"><a href="modal-add-exercise" class="food-plan-add-food text-bottom modal_trigger_exercise" ng-click="doCoachAddExercise(workoutPlanDetail.dayId)">Add Exercise</a></div>
                         <div class="caloriediv">
@@ -70,22 +70,23 @@
                             
                     </td>
                     <td class="exercise-plans">
-                        <div class="col-md-4" ng-repeat="workoutItem in workoutPlanDetail.workouts">
-                                <div class="exercise">
-                                    <span ng-show="workoutItem.isoptional==1" class="orange">&nbsp;</span>
-                                    <span ng-show="workoutItem.isoptional==0" class="green">&nbsp;</span>
-                                    <span class="name_values">{{workoutItem.exercisename}}</span>
-                                    <i class="fa fa-times-circle pull-right" ng-click="doDeleteExerciseFromPlan(workoutItem.id);"></i>&nbsp;
-                                    <i class="fa fa-edit pull-right" ng-click="doEditExerciseFromPlan(workoutItem.id);"></i>&nbsp;&nbsp;
-                                    <div class="time">
-                                        {{workoutItem.calorieburn}}&nbsp;KCals&nbsp;&nbsp;|&nbsp;&nbsp;Level: {{workoutItem.levelname}}
-                                    </div>
-                                    <div class="name_values">
-                                        {{workoutItem.categoryname}}&nbsp;&nbsp;|&nbsp;&nbsp;{{workoutItem.typename}}
+                            <div class="display-flex">
+                                <div class="col-md-4" ng-repeat="workoutItem in workoutPlanDetail.workouts">
+                                    <div class="exercise">
+                                        <span ng-show="workoutItem.isoptional==1" class="orange">&nbsp;</span>
+                                        <span ng-show="workoutItem.isoptional==0" class="green">&nbsp;</span>
+                                        <span class="name_values">{{workoutItem.exercisename}}</span>
+                                        <i class="fa fa-times-circle pull-right" ng-click="doDeleteExerciseFromPlan(workoutItem.id);"></i>&nbsp;
+                                        <i class="fa fa-edit pull-right" ng-click="doEditExerciseFromPlan(workoutItem.id);"></i>&nbsp;&nbsp;
+                                        <div class="time">
+                                            {{workoutItem.calorieburn}}&nbsp;KCals&nbsp;&nbsp;|&nbsp;&nbsp;Level: {{workoutItem.levelname}}
+                                        </div>
+                                        <div class="name_values">
+                                            {{workoutItem.categoryname}}&nbsp;&nbsp;|&nbsp;&nbsp;{{workoutItem.typename}}
+                                        </div>
                                     </div>
                                 </div>
-                        </div>
-                   
+                            </div>
                     </td>
                 </tr>
                 </table>

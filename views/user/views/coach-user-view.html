@@ -24,7 +24,7 @@
                 </div>    
 
                 <div class="col-lg-10 col-md-10 col-sm-12">  
-                  <h5 class="classic-title" style="margin-left:20px;margin-bottom:20px;"><a class="active-tab profile-details" href=""><i class="fa fa-user"></i>&nbsp;&nbsp;Profile</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a class="event-details" href=""><i class="fa fa-calendar"></i>&nbsp;&nbsp;Events&nbsp;<small class="badge">{{coachEvent.length}}</small></a>|&nbsp;&nbsp;<a class="mealplan-details" href=""><i class="fa fa-th-large"></i>&nbsp;&nbsp;Meal Plan</a>|&nbsp;&nbsp;<a class="workoutplan-details" href=""><i class="fa fa-list"></i>&nbsp;&nbsp;Workout Plan</a></h5> 
+                  <h5 class="classic-title" style="margin-left:20px;margin-bottom:20px;"><a class="active-tab profile-details" href=""><i class="fa fa-user"></i>&nbsp;&nbsp;Profile</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a class="event-details" href=""><i class="fa fa-calendar"></i>&nbsp;&nbsp;Events&nbsp;<small class="badge">{{coachEvent.length}}</small></a>&nbsp;&nbsp;|&nbsp;&nbsp;<a class="mealplan-details" href=""><i class="fa fa-th-large"></i>&nbsp;&nbsp;Meal Plan</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a class="workoutplan-details" href=""><i class="fa fa-list"></i>&nbsp;&nbsp;Workout Plan</a></h5> 
                   <div class="profile-details-div">
                     <div class="col-lg-6 col-md-6 col-sm-112">
                   <div class="talk-bubble tri-right left-in talktext wrap" ng-show="!noAdvices">
@@ -370,6 +370,7 @@
                         <div>
                     </td>
                     <td class="exercise-plans">
+                        <div class="display-flex">
                         <div class="col-md-4" ng-repeat="workoutItem in workoutPlanDetail.workouts">
                             <a href="" ng-click="doViewExerciseItemFromWorkoutPlan(workoutItem.id, workoutPlanDetail.date)">
                                 <div class="exercise">
@@ -385,7 +386,7 @@
                                 </div>
                             </a>   
                         </div>
-                    
+                        </div>
                     </td>
                 </tr>
                 </table>
@@ -566,19 +567,19 @@
                 </tr>
                 <tr>
                     <td class="col-md-6">Intensity</td>
-                    <td class="col-md-6">{{workoutPlanItemDetails.intensity}}</td>
+                    <td class="col-md-6">{{workoutPlanItemDetails.intensity!=""?workoutPlanItemDetails.intensity:"&nbsp;-"}}</td>
                 </tr>
                 <tr>
                     <td class="col-md-6">Level</td>
-                    <td class="col-md-6">{{workoutPlanItemDetails.level}}</td>
+                    <td class="col-md-6">{{workoutPlanItemDetails.level!=""?workoutPlanItemDetails.level:"&nbsp;-"}}</td>
                 </tr>
                 <tr>
                     <td class="col-md-6">Good For</td>
-                    <td class="col-md-6">{{workoutPlanItemDetails.goodfor}}</td>
+                    <td class="col-md-6">{{workoutPlanItemDetails.goodfor!=""?workoutPlanItemDetails.goodfor:"&nbsp;-"}}</td>
                 </tr>
                 <tr>
                     <td class="col-md-6">Equipments</td>
-                    <td class="col-md-6">{{workoutPlanItemDetails.equipments}}</td>
+                    <td class="col-md-6">{{workoutPlanItemDetails.equipments!=""?workoutPlanItemDetails.equipments:"&nbsp;-"}}</td>
                 </tr>
                 <tr>
                     <td class="col-md-6">Is Optional&nbsp;?</td>
