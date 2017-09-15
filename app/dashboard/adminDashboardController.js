@@ -11,8 +11,8 @@ adminApp.controller('AdminDashboardController',['$scope','requestHandler',functi
             $scope.exerciseCount = $scope.adminCountList.exercisecount;
             $scope.foodCount = $scope.adminCountList.foodcount;
             $scope.courseCount = $scope.adminCountList.publishedcourses;
-            $scope.payCount = $scope.adminCountList.totalincome;
-
+            $scope.payUSD = parseFloat($scope.adminCountList.earnfromsubscriptioninusd)+parseFloat($scope.adminCountList.earnbycourse); 
+            $scope.payINR = parseFloat($scope.adminCountList.earnfromsubscriptionininr);
         });
     };
 

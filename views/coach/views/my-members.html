@@ -11,14 +11,14 @@
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding">
                 <div class="col-xs-12 col-sm-3 col-md-2 col-lg-2 no-padding">
                     <h4 class="classic-title margin-left-20" style="line-height: 17px; margin-top: 3px;"><span>Groups</span><a href="#settings" class="edit-text-color margin-left-10">Edit</a></h4>
-                    <div class="content_scrollbar" style="padding-right: 5px; !important" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#eee'}" >
+                    <div class="col-md-12 col-lg-12 col-sm-12 content_scrollbar" style="padding-right: 5px; !important" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#eee'}" >
                     <ul class="sidebar-menu remove-style " >
                         <li ng-repeat="group in groupsList" ng-class="{'active':group.id==selectedGroupId}" ng-click="doFilterGroup(group.id)">
                             <a href=""><i class="fa fa-group"></i> &nbsp;{{group.groupname}}</a>
                         </li>
                     </ul>
-                        </div>
-                    <a id="modal_group" href="#group" class="add-group add-text-color margin-left-30 margin-bottom-15"> Create New Group</a>
+					</div>
+                    <center><a id="modal_group" href="#group" ng-click="resetAddGroup()" class="add-text-color margin-top-10">Create New Group</a></center>
                    <!--  <a href="" class="assign-modal" ng-click="setAssignUserId(client.userid)">Assign Group</a> -->
                 </div>
                 <div class="col-xs-12 col-sm-9 col-md-10 col-lg-10">   
@@ -86,7 +86,7 @@
     </header>
 
     <section class="popupBody">
-        <div class="common_model">
+        <div class="remove_common_model">
             <div class="text-center"><img src="../../images/alert-ring.png"/></div><br/>
             <h5 class="text-center">Are you sure want to remove this client?</h5>{{removingUser}}
             <div class="action_btns margin-top-20">

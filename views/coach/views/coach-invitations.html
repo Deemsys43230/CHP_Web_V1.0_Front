@@ -27,9 +27,8 @@
                         <div class="loader"></div>
                     </div>
                 </div>
-                <div class="coach-list">
-                    <div class="content_scrollbar" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#eee'}" nice-scroll-end="doGetUserListByCoach(false)">
-                        <div ng-show="coachuserlist.length>0" class="coach-view-width">
+                <div class="coach-list content_scrollbar" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#eee'}" nice-scroll-end="doGetUserListByCoach(false)">
+                    <div ng-show="coachuserlist.length>0" class="coach-view-width">
                             <div class="coach-view col-lg-12 col-md-12 col-sm-12" ng-class="{'active': coachuser.userid==coachuserdetails.userid}" ng-repeat= "coachuser in coachuserfilter= (coachuserlist | startsWithLetterSearch : coachsearch)" ng-click="doGetUserDetailsByCoach(coachuser.userid)">
                                 <div class="col-lg-2 col-md-2 col-sm-2 no-padding">
                                     <img class="img-circle" ng-src="{{coachuser.imageurl | trusted}}">
@@ -49,9 +48,6 @@
                                <h5><button type="submit" class="invite-button modal-inviteUsers text-center" ng-click="doInviteUserPopup()"><i class="fa fa-user-plus"></i>&nbsp;&nbsp;Invite User</button></h5>
                             </div> -->
                         </div>
-
-                    </div>
-                   
                 </div>
 
 

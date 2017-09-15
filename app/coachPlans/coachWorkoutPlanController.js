@@ -71,7 +71,7 @@ $scope.doAddWorkoutPlanByCoach=function(){
 $scope.doEditCoachWorkoutPlan=function(id){
     $scope.isNew = false;
     $scope.title = "Edit Workout Plan";
-
+    $scope.changeDays=true;
     $(function(){
         $("#lean_overlay").fadeTo(1000);
         $("#workout-plan").fadeIn(600);
@@ -79,6 +79,13 @@ $scope.doEditCoachWorkoutPlan=function(id){
         $scope.shouldBeOpen = true;
     });
     
+     requestHandler.getRequest("coach/plandetail/"+id+"/", "").then(function(response){    
+      if(response.data.plan.plandetail.canedit==1){
+        $scope.changeDays=false;
+      }
+     });
+
+
     $.each($scope.coachWorkoutPlanList.plans,function(index,value){
        if(value.id==id){
           $scope.workoutPlan=angular.copy(value);

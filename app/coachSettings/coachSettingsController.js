@@ -153,11 +153,11 @@ $scope.doCoachGroupDelete=function(){
    var id=$scope.listid;
    requestHandler.postRequest("coach/deleteGroups/",{'groupid':id}).then(function(response){
     if(response.data.Response_status==1){
-                successMessage(Flash,"Group Removed Successfully");
+                successMessage(Flash,"Successfully Deleted");
+                $scope.doViewAllCoachGroup();
              }else{
-                errorMessage(Flash,"Please try again later!");
-             }
-        $scope.doViewAllCoachGroup();
+                errorMessage(Flash,"Clients are mapped under this Group");
+             }       
       
    }); 
 };

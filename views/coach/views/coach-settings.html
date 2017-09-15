@@ -30,7 +30,6 @@
             <table class="table table-bordered table-striped">
                 <thead>
                 <tr class="warning">
-                    <th class="col-md-2">Group ID</th>
                     <th class="col-md-6">Group Name</th>
                     <th class="col-md-4">Options</th>
                 </tr>
@@ -38,7 +37,6 @@
                 <tbody>
                    
                 <tr dir-paginate="list in groupfilter = (groupList | filter: groupsearch | itemsPerPage:8)" ng-show="groupList.length!=0">
-                    <td>{{list.id}}</td>
                     <td>{{list.groupname}}</td>
                     <td>
                         <a href="" class="btn-xs btn-warning" ng-click="doEditCoachGroup(list.id)">Edit</a>&nbsp;

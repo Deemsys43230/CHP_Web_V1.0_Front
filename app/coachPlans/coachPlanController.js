@@ -68,15 +68,15 @@ $scope.doEditCoachMealPlan=function(id){
     $scope.isNew = false;
     $scope.changeDays=true;
     $scope.title = "Edit Meal Plan";
-
+     $scope.changeDays=true;
     $(function(){
         $("#lean_overlay").fadeTo(1000);
         $("#mealPlan").fadeIn(600);
         $(".common_model").show();
         $scope.shouldBeOpen = true;
     });
-    
-     requestHandler.getRequest("coach/plandetail/"+id+"/", "").then(function(response){
+
+     requestHandler.getRequest("coach/plandetail/"+id+"/", "").then(function(response){    
       if(response.data.plan.plandetail.canedit==1){
         $scope.changeDays=false;
       }

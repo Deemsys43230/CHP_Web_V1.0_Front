@@ -1054,7 +1054,7 @@
                 <div id="chat_container" class="panel-body msg_container_base" style="display:none;">
                     <div  ng-repeat="chatMessage in chatMessages" ng-click="doSelectChat(chatMessage);">
                      <div class="row" ng-if="chatMessage.firstNewMessage==1"><center><span id="new_message_span" class="label label-default">New Messages</span></center></div>
-                        <div class="row msg_container">
+                        <div class="row msg_container" id="{{chatMessage.logid}}" ng-class="{'chat-selected':chatMessage.selectedChat==1}">
                             <div class="col-md-10 col-xs-10" ng-if="chatMessage.sentby==2">
                                 <div class="messages msg_sent">
                                     <p>{{chatMessage.message}}</p><i ng-show="chatMessage.status==1" class="fa fa-check message-read" aria-hidden="true"></i>
@@ -1441,7 +1441,6 @@ $(document).ready(function(){
            $(".tracking-plan-viewall-div").hide();
            $(".tracking-plan-view-div").hide();
            $(".tracking-plan-add-div").show();
-
        });
 
         $(".tracking-plan-viewall").click(function(){
