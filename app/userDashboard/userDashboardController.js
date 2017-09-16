@@ -3483,7 +3483,8 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
                     title: {
                         text: titles.xaxis
                     },
-                    categories: dataD //for displaying date
+                    categories: dataD, //for displaying date
+                     crosshair:true
 
                 },
                 yAxis: {
@@ -3551,7 +3552,8 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
                     title: {
                         text: titles.xaxis
                     },
-                    categories: dataD //for displaying date
+                    categories: dataD,//for displaying date
+                    crosshair:true
 
                 },
                 yAxis: {

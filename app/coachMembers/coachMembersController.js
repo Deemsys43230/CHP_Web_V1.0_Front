@@ -860,7 +860,8 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
                 title: {
                     text: titles.xaxis
                 },
-                categories: dataD //to display date
+                categories: dataD, //to display date
+                crosshair:true
 
             },
             yAxis: {
@@ -926,7 +927,8 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
                     title: {
                         text: titles.xaxis
                     },
-                    categories: dataD //for displaying date
+                    categories: dataD, //for displaying date
+                    crosshair:true
 
                 },
                 yAxis: {
