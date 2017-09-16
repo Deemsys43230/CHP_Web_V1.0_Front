@@ -43,7 +43,7 @@
                 <tr ng-show="coachLists.length < 0"><td colspan="12" class="text-center">Loading new data!!</td></tr>
                 <tr ng-show="coachLists.length == 0 ||subscriptionDetails.totalrecords==0 "><td colspan="12" class="text-center">No Results!!!</td></tr>
                 <tr dir-paginate="subscription in subscriptionDetails.history | itemsPerPage: getAllSubscriptionPagination.itemsPerPage" current-page="getAllSubscriptionPagination.pageNumber" total-items="subscriptionDetails.totalrecords" pagination-id="subscriptionDetailsPaginate">
-                    <td style="word-wrap: break-word">{{subscription.username}}</td>
+                    <td>{{subscription.username}}</td>
                     <td>{{subscription.useremail}}</td>
                     <td>{{subscription.planname}}</td>
                     <td>{{subscription.planprice}}</td>
