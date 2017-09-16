@@ -17858,10 +17858,13 @@ select.event:focus {
 .table>tbody>tr>td{
      word-break: break-all!important;
 }
-.display-flex {
-  display: flex;
-  flex-wrap: wrap;
+
+.display-block > [class*='col-'] {
+   display: inline-block;
+   float: none;
+   vertical-align: top;
 }
+
 .padding-lr-15{
     padding-left: 15px;
     padding-right: 0px;
