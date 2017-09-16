@@ -210,26 +210,24 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                             files:[
                                 '../../plugin/popup/style.css',
                                 '../../angular/angular-utils-pagination/dirPagination.js',
-                                '../../app/coachMembers/subscriptionController.js',
                                 'https://checkout.razorpay.com/v1/checkout.js'
                             ]
                         })
                     }],
-                   check:["$location","$rootScope",'$timeout',"requestHandler",function($location,$rootScope,$timeout,requestHandler){
+                   check:["$location","$rootScope","requestHandler",function($location,$rootScope,requestHandler){
                         requestHandler.getRequest("/coach/isSubscriptionActive/","").then(function(response){
                             if(response.data.isActive==0 && response.data.subscription==[]){
-                                $timeout(function () {
-                                $rootScope.isSubscriptionActive=true;
-                                 }, 100);
+                             $rootScope.isSubscriptionActive=true;
+                              $location.path("change-subscription");
+                              
                             }else{ 
                                 $rootScope.isSubscriptionActive=false;
                                 $location.path("coach-subscription-history");
                             }
 
                          });
-                    }]
-                },
-                controller:'SubscriptionController'
+                    }] 
+                }
             }).          
             when('/coach-subscription-history', {
                 templateUrl: 'views/coach-my-subscription-plan.html',
