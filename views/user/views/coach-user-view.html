@@ -683,6 +683,27 @@
     }
 
     document.querySelectorAll('body')[0].style.backgroundColor = 'whiteSmoke';
+
+    // set cursor position while send message in chat box
+    $('#btn-chat').click(function () {
+        var text = $('.form-control');
+        text.focus().val('stuff').selectRange(0,0);
+    });
+    $.fn.selectRange = function(start, end) {
+        if(!end) end = start;
+        return this.each(function() {
+            if (this.setSelectionRange) {
+                this.focus();
+                this.setSelectionRange(start, end);
+            } else if (this.createTextRange) {
+                var range = this.createTextRange();
+                range.collapse(true);
+                range.moveEnd('character', end);
+                range.moveStart('character', start);
+                range.select();
+            }
+        });
+    };
 </script>
 
 <script type="text/javascript">

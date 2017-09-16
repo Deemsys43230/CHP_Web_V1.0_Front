@@ -1077,7 +1077,7 @@
                 </div>
                 <div class="panel-footer">
                     <div class="input-group">
-                        <input id="btn-input" type="text" ng-model="chat.message" class="form-control input-sm chat_input cursor" placeholder="Write your message here..."/>
+                        <input id="btn-input" type="text" ng-model="chat.message" class="form-control input-sm chat_input" placeholder="Write your message here..."/>
                         <span class="input-group-btn">
                         <button class="btn btn-sm btn-warning" id="btn-chat" ng-click="doSendChatMessage();">Send</button>
                         </span>
@@ -1365,6 +1365,27 @@ $(document).on('click', '.icon_close', function (e) {
     //$(this).parent().parent().parent().parent().remove();
     $( "#chat_window_1" ).remove();
 });
+
+  // set cursor position while send message in chat box
+  $('#btn-chat').click(function () {
+      var text = $('.form-control');
+      text.focus().val('stuff').selectRange(0,0);
+  });
+  $.fn.selectRange = function(start, end) {
+      if(!end) end = start;
+      return this.each(function() {
+          if (this.setSelectionRange) {
+              this.focus();
+              this.setSelectionRange(start, end);
+          } else if (this.createTextRange) {
+              var range = this.createTextRange();
+              range.collapse(true);
+              range.moveEnd('character', end);
+              range.moveStart('character', start);
+              range.select();
+          }
+      });
+  };
 
 $(window).scroll(function() {
    setChatMargin();
