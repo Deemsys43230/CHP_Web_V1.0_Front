@@ -552,6 +552,21 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
     $scope.doGetUpcomingEvents = function(coachid){
         requestHandler.postRequest("user/upcomingevents/",{"coachid":coachid}).then(function(response){
             $scope.coachEvent = response.data.attendees;
+            //For Event duration calculation in hrs and min
+            $.each($scope.coachEvent,function(index,value){
+                value.durationHours=Math.floor(value.duration/60).toString();
+                value.durationMinutes=Math.floor(value.duration%60).toString();
+
+                if(value.durationHours == 0){
+                    value.duration=value.durationMinutes +" Mins";
+                }
+                else if(value.durationMinutes == 0){
+                    value.duration = value.durationHours +" Hrs";
+                }
+                else if( value.durationMinutes != 0 && value.durationHours != 0){
+                    value.duration=value.durationHours +" Hrs "+value.durationMinutes +" Mins ";
+                }
+            });
             $scope.paginationLoad = true;
         });
     };
