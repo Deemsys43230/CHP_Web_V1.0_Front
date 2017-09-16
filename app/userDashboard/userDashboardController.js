@@ -1498,17 +1498,18 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
                 titles.suffix=" "+$scope.unit;
                 titles.yaxis="Weight (" + $scope.unit + ")";
                 titles.xaxis="Date Range";
-                
-                var range=Math.round(weightLogs.length/24);
+                var range=1;
                 var filterWeightLogs=[];
                 var filterBudgetDate=[];
-
-                console.log("Range"+range);
+                if(weightLogs.length>24){
+                    range=Math.round(weightLogs.length/24);
+                }
+                
                 for (i = 0; i < weightLogs.length; i=i+range) {
                     filterWeightLogs.push(weightLogs[i]);
                     filterBudgetDate.push(budgetdate[i]);
                 }
-                if(i==weightLogs.length){
+                if(i!=weightLogs.length){
                     filterWeightLogs.push(weightLogs[weightLogs.length-1]);
                     filterBudgetDate.push(budgetdate[weightLogs.length-1]);
                 }

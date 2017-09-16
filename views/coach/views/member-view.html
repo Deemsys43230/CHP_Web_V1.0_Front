@@ -1049,9 +1049,10 @@
                 </div>
 
                 <div id="chat_container" class="panel-body msg_container_base" style="display:none;">
+                    <div class="row" ng-show="showLoadMore"><center><span ng-click="doLoadChatMessages()" class="label label-default" style="padding:5px;cursor:pointer;"><i class="fa fa-arrow-up" aria-hidden="true"></i>&nbsp;Load More</span></center></div>
                     <div  ng-repeat="chatMessage in chatMessages" ng-click="doSelectChat(chatMessage);">
                      <div class="row" ng-if="chatMessage.firstNewMessage==1"><center><span id="new_message_span" class="label label-default">New Messages</span></center></div>
-                        <div class="row msg_container">
+                        <div class="row msg_container" id="{{chatMessage.logid}}" ng-class="{'chat-selected':chatMessage.selectedChat==1}">
                             <div class="col-md-10 col-xs-10" ng-if="chatMessage.sentby==2">
                                 <div class="messages msg_sent">
                                     <p>{{chatMessage.message}}</p><i ng-show="chatMessage.status==1" class="fa fa-check message-read" aria-hidden="true"></i>
@@ -1071,9 +1072,9 @@
                                     <time datetime="2009-11-13T20:00">{{chatMessage.datetime}}</time>
                                 </div>
                             </div>
-                            <div ng-show="chatMessages.length==0"><h3 class="text-gray">NO MESSAGES FOUND!!!</h3></div>
                         </div>
                     </div>
+                     <div class="no-messages" ng-show="chatMessages.length==0">No Messages to Display</div>
                 </div>
                 <div class="panel-footer">
                     <div class="input-group">

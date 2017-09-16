@@ -1434,6 +1434,7 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
                     }
                 }
             });
+            setTimeout(function(){ $('.msg_container_base').scrollTop($('.msg_container_base')[0].scrollHeight); }, 500);
         });
     };
 
