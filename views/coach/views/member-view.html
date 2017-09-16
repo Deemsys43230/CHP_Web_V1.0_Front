@@ -584,10 +584,10 @@
                     <tbody >
                         <tr dir-paginate="plans in planList.history | itemsPerPage:trainingPagination.itemsPerPage" pagination-id="totalRecords" ng-show="planList.length!=0" current-page="trainingPagination.pageNumber" total-items="planList.totalrecords">
                            <!--  <td><span class="line-clamp-md">{{plans.userid}}</span></td> -->
-                            <td class="wrap-all">{{plans.subscriptionname}}</span></td>
-                            <td class="wrap-all">{{plans.subscriptiondescription}}</span></td>
-                            <td class="wrap-all">{{plans.startdate}}</span></td>
-                            <td class="wrap-all">{{plans.enddate}}</td>
+                            <td>{{plans.subscriptionname}}</span></td>
+                            <td>{{plans.subscriptiondescription}}</span></td>
+                            <td>{{plans.startdate}}</span></td>
+                            <td>{{plans.enddate}}</td>
                             <td>
                                 <a id="{{plans.id}}" href="" ng-click="doGetPlansView(plans.id);" class="btn-xs btn-primary tracking-plan-view">View Details</a>
                             </td>
