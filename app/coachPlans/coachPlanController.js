@@ -172,6 +172,7 @@ $scope.doViewCoachPlans=function(){
               if(key!='plandetail'){
                 $scope.mealPlanDetailList[key.substring(3)-1].totalCalories=(obj.actualcalories).toFixed(2);
                 $.each(obj.foods, function (index, value) {
+                 value.calorieintake= value.calorieintake.toFixed(2);
                  $scope.mealPlanDetailList[value.day-1].foods[value.foodsessionid-1].foodItems.push(value);
                 });
               }              
