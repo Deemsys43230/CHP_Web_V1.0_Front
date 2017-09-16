@@ -3,7 +3,7 @@
  */
 var coachApp = angular.module('coachApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','angularUtils.directives.dirPagination','angular-nicescroll','angular-svg-round-progress']);
 
-coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter","Flash","$location","$rootScope","$routeParams",function($scope,requestHandler,$filter,Flash,$location,$rootScope,$routeParams) {
+coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter","Flash","$location","$rootScope","$routeParams",function($scope,requestHandler,$filter,Flash,$location,$rootScope,$routeParams,$setPristine) {
 
     $scope.isActive=false;
     $scope.activeClass.my='active';
@@ -1617,6 +1617,12 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
         });
     };
 
+    $scope.resetTrainingPlan = function(trainingForm) {
+        $scope.planDetails={};
+        trainingForm.$setPristine(true);
+        trainingForm.$setUntouched();
+    };
+
 //do Insert New Plans
 
     $scope.doInsertTrainingPlan = function(){
@@ -1644,19 +1650,13 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
         $scope.planDetails.startdate = startDate;
         $scope.planDetails.enddate = endDate;
         $scope.planDetails.userid = $scope.currentClientId;
-        requestHandler.postRequest("coach/insertTrainingPlan/",$scope.planDetails).then(function(response){
-            
+        requestHandler.postRequest("coach/insertTrainingPlan/",$scope.planDetails).then(function(response){            
             if(response.data.Response == "Success"){
                 successMessage(Flash, "Successfully Plan Added!");
                 $scope.doGetTrainingPlanDetails($scope.currentClientId);
                 $(".tracking-plan-viewall-div").show();
                 $(".tracking-plan-view-div").hide();
                 $(".tracking-plan-add-div").hide();   
-                $scope.planDetails={};
-                $scope.planDetails.startdate = "";
-                $scope.planDetails.enddate = "";
-                $scope.planDetails.userid = "";
-                $scope.coachTrainingForm.$setPristine();
             }
 
         },function(){

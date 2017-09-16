@@ -2,6 +2,7 @@ var coachApp = angular.module('coachApp', ['ngRoute','oc.lazyLoad','requestModul
 
 coachApp.controller('coachTrainingExpiredController',['$scope','requestHandler','Flash','$routeParams','$location',function($scope,requestHandler,Flash,$routeParams,$location) {
 
+$scope.activeClass.my='active';
 	$scope.doGetExpiringTraining = function(){
 		$scope.param={
             "limit":$scope.trainingPagination.itemsPerPage,

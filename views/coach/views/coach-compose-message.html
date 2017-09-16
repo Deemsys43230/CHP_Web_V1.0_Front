@@ -34,14 +34,12 @@
                     <div class="coach-list">
                         <div ng-show="coachClients.length>0" class="user-view-width"> 
                             <div class="col-md-12 col-lg-12 col-sm-12 no-padding classic-title"> 
-                                <div class="col-lg-10 col-md-10 col-sm-10 no-padding">
+                                <div class="col-lg-10 col-md-9 col-sm-10 no-padding">
                                     <h5 class="text-muted">{{selectText}}</h5>
                                 </div>
                                 
-                                <div class="col-lg-2 col-md-2 col-sm-2 no-padding">
-                                    <a href="" class="select-text" ng-click="doSelectAll()">Select All</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-                                    <a href="" class="deselect-text" ng-click="doDeselectAll()">Deselect All</a>
-                                    
+                                <div class="col-lg-2 col-md-3 col-sm-2 no-padding">
+                                    <a href="" class="select-text" ng-click="doSelectAll()">Select All</a>&nbsp;|&nbsp;<a href="" class="deselect-text" ng-click="doDeselectAll()">Deselect All</a>
                                 </div>
                             </div>    
 
@@ -77,12 +75,11 @@
                 </div>
                 <div class="margin-top-10 col-md-12 col-lg-12 col-sm-12 no-padding" ng-show="sendToType==2">
                     <div class="col-md-12 col-lg-12 col-sm-12 no-padding classic-title">
-                        <div class="col-lg-10 col-md-10 col-sm-10 no-padding">
+                        <div class="col-lg-10 col-md-9 col-sm-8 no-padding">
                             <h5 class="text-muted">{{selectText}}</h5>
                         </div>                          
-                        <div class="col-lg-2 col-md-2 col-sm-2 no-padding">
-                            <a href="" class="select-text" ng-click="doSelectAll()">Select All</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-                            <a href="" class="deselect-text" ng-click="doDeselectAll()">Deselect All</a>
+                        <div class="col-lg-2 col-md-3 col-sm-4 no-padding">
+                            <a href="" class="select-text" ng-click="doSelectAll()">Select All</a>&nbsp;|&nbsp;<a href="" class="deselect-text" ng-click="doDeselectAll()">Deselect All</a>
                         </div>
                     </div>
                     <div class="message_scrollbar col-lg-12 col-md-12 col-sm-12" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#eee'}">
