@@ -217,16 +217,16 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                    check:["$location","$rootScope","requestHandler",function($location,$rootScope,requestHandler){
                         requestHandler.getRequest("/coach/isSubscriptionActive/","").then(function(response){
                             if(response.data.isActive==0 && response.data.subscription==[]){
-                             $rootScope.isSubscriptionActive=true;
-                              $location.path("change-subscription");
-                              
+                                $rootScope.isSubscriptionActive=true;
+                                 $location.path("change-subscription");
+                                
                             }else{ 
                                 $rootScope.isSubscriptionActive=false;
                                 $location.path("coach-subscription-history");
                             }
 
                          });
-                    }] 
+                    }]
                 }
             }).          
             when('/coach-subscription-history', {
