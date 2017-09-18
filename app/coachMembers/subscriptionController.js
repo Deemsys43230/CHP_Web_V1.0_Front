@@ -27,11 +27,16 @@ coachApp.controller('SubscriptionController',['$scope','requestHandler','Flash',
               $.each($scope.pricingPlanDetails,function(index,value){
                 value.isCurrentPlan=false;
                 value.isActive=false;
-                var todayDate=selectedDate;
-                var enddate=$scope.currentActivePlan.subscription.enddate;
-                if(value.id==$scope.currentActivePlan.subscription.planchoice){
+                var enddate=$scope.currentActivePlan.subscription.enddate; //actual plan end date
+                  var firstValue = selectedDate.split('/');               // Current date
+                  var secondValue =enddate.split('/');
+                  var firstDate=new Date();
+                  firstDate.setFullYear(firstValue[2],(firstValue[1] - 1 ),firstValue[0]);
+                  var secondDate=new Date();
+                  secondDate.setFullYear(secondValue[2],(secondValue[1] - 1 ),secondValue[0]);
+                  if(value.id==$scope.currentActivePlan.subscription.planchoice){
                   value.isCurrentPlan=true;  
-                  if($scope.currentActivePlan.isActive==1&&todayDate<enddate){
+                  if($scope.currentActivePlan.isActive==1 && firstDate < secondDate){
                     value.isActive=true;
                   }
                 }
@@ -40,7 +45,7 @@ coachApp.controller('SubscriptionController',['$scope','requestHandler','Flash',
        });
     };
 
-    //For USA and metric button 
+   //For USA and metric button
     $scope.units=1;
     $scope.test=function(unitVar){
        if(unitVar=='mUnit'){

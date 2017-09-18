@@ -22,13 +22,18 @@ coachApp.controller('MySubscriptionController',['$scope','requestHandler','Flash
         selectedDate = dd+'/'+mm+'/'+yyyy;
 
     	requestHandler.getRequest("coach/isSubscriptionActive/","").then(function(response){
-    		$scope.coachActivePlan=response.data.subscription;
-            var todayDate=selectedDate;
-            var enddate=$scope.currentActivePlan.subscription.enddate;
-            if(response.data.isActive==1&&todayDate<enddate){
+    		$scope.currentActivePlan=response.data.subscription;
+            var enddate=$scope.currentActivePlan.enddate; //actual plan end date
+            var firstValue = selectedDate.split('/');               // Current date
+            var secondValue =enddate.split('/');
+            var firstDate=new Date();
+            firstDate.setFullYear(firstValue[2],(firstValue[1] - 1 ),firstValue[0]);
+            var secondDate=new Date();
+            secondDate.setFullYear(secondValue[2],(secondValue[1] - 1 ),secondValue[0]);
+            if(response.data.isActive==1 && firstDate < secondDate){
                 $scope.subscriptionStatus=true;
             }
-            else{
+            else {
                 $scope.subscriptionStatus=false;
             }
     	});
