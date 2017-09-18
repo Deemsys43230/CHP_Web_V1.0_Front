@@ -27,6 +27,7 @@ $scope.reset=function(){
     $scope.mealPlan.plandays="";
     $scope.mealPlan.description="";
     $scope.mealPlanForm.$setPristine();
+    $scope.changeDays=false;
     $scope.isNew = true;
     $scope.title = "Add Meal Plan";
 
@@ -66,9 +67,8 @@ $scope.doAddMealPlanByCoach=function(){
 
 $scope.doEditCoachMealPlan=function(id){
     $scope.isNew = false;
-    $scope.changeDays=true;
     $scope.title = "Edit Meal Plan";
-     $scope.changeDays=true;
+    $scope.changeDays=true;
     $(function(){
         $("#lean_overlay").fadeTo(1000);
         $("#mealPlan").fadeIn(600);

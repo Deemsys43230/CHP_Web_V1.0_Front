@@ -31,6 +31,7 @@ $scope.reset=function(){
     $scope.workoutPlan.equipments="";
     $scope.workoutPlan.description="";
     $scope.workoutPlanForm.$setPristine();
+    $scope.changeDays=false;
     $scope.isNew = true;
     $scope.title = "Add Workout Plan";
 
