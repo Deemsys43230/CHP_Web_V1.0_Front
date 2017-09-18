@@ -573,8 +573,8 @@
                     <thead>
                         <tr class="warning">
                             <!-- <th class="col-md-2">User Id</th> -->
-                            <th class="col-md-3">Training Name</th>
-                            <th class="col-md-3">Training Description</th>
+                            <th class="col-md-3">Plan Name</th>
+                            <th class="col-md-3">Plan Description</th>
                             <th class="col-md-2">Start Date</th>
                             <th class="col-md-2">End Date</th>
                             <th class="col-md-2">Options</th>
@@ -616,11 +616,11 @@
                             <td class="col-md-8">{{planView.coachname}}</td>
                         </tr>
                         <tr>
-                            <td class="col-md-4 text-bold">Training Name</td>
+                            <td class="col-md-4 text-bold">Plan Name</td>
                             <td class="col-md-8">{{planView.subscriptionname}}</td>
                         </tr>
                         <tr>
-                            <td class="col-md-4 text-bold">Training Description</td>
+                            <td class="col-md-4 text-bold">Plan Description</td>
                             <td class="col-md-8">{{planView.subscriptiondescription}}</td>
                         </tr>
                         <tr>
@@ -664,10 +664,10 @@
                     <div class="col-lg-9 col-md-9 col-sm-9">
                         <div class="form-group">
                             <div class="col-lg-4 col-md-5 col-sm-12 margin-top-10">
-                                <div> Training Name <span class="pull-right">:</span></div>
+                                <div>Plan Name <span class="pull-right">:</span></div>
                             </div>
                             <div class="col-lg-8 col-md-7 col-sm-12 margin-top-10">
-                                <input class="coach-input" placeholder="Training Name" name="name" ng-model="planDetails.subscriptionname" maxlength="50" required/>
+                                <input class="coach-input" placeholder="Plan Name" name="name" ng-model="planDetails.subscriptionname" maxlength="50" required/>
                                 <span ng-show="coachTrainingForm.name.$dirty && coachTrainingForm.name.$invalid">
                                     <span class="error-message textarea-errormessage10" ng-show="coachTrainingForm.name.$error.required"><span>Required.</span></span>
                                     <span class="error-message textarea-errormessage10" ng-show="coachTrainingForm.name.$error.validateAlphaWithSpace"><span>Enter&nbsp;valid&nbsp;Name.</span></span>
@@ -676,10 +676,10 @@
                         </div>
                         <div class="form-group">
                             <div class="col-lg-4 col-md-5 col-sm-12 margin-top-10">
-                                <div> Training Description <span class="pull-right">:</span></div>
+                                <div> Plan Description <span class="pull-right">:</span></div>
                             </div>
                             <div class="col-lg-8 col-md-7 col-sm-12 margin-top-10">
-                                <input class="coach-input" placeholder="Training Description" name="description" ng-model="planDetails.subscriptiondescription" maxlength="250" required/>
+                                <input class="coach-input" placeholder="Plan Description" name="description" ng-model="planDetails.subscriptiondescription" maxlength="250" required/>
                                 <span ng-show="coachTrainingForm.description.$dirty && coachTrainingForm.description.$invalid">
                                     <span class="error-message textarea-errormessage10" ng-show="coachTrainingForm.description.$error.required"><span>Required.</span></span>
                                     <span class="error-message textarea-errormessage10" ng-show="coachTrainingForm.description.$error.validateAlphaWithSpace"><span>Enter&nbsp;valid&nbsp;Name.</span></span>
@@ -688,13 +688,13 @@
                         </div>
                         <div class="form-group">
                             <div class="col-lg-4 col-md-5 col-sm-12 margin-top-10">
-                                <div>Training Duration <span class="pull-right">:</span></div>
+                                <div>Plan Duration <span class="pull-right">:</span></div>
                             </div>
                             <div class="col-lg-8 col-md-7 col-sm-12 margin-top-10">
                                 <div class='input-group'>
                                      <input id="duration-start"  hidden />
                                     <input id="duration-end" hidden />
-                                    <input type="text" id="duration-date" class="coach-input date-picker" name="training-date" placeholder="Training Duration" nd-model="planDetails.date" class="history_input pull-right" required>
+                                    <input type="text" id="duration-date" class="coach-input date-picker" name="training-date" placeholder="Plan Duration" nd-model="planDetails.date" class="history_input pull-right" required>
                                     <span class="input-group-addon" id="focus-date"><i class="fa fa-calendar" style="cursor: pointer"></i> </span>                                    
                                 </div>
                                 <span ng-show="coachTrainingForm.training-date.$dirty && coachTrainingForm.training-date.$invalid">
@@ -1560,8 +1560,8 @@ $(document).ready(function(){
     function initializeDateRangePicker(){
         $("#duration-date").click();
         var options = {
-            minDate : new Date(),
-            // autoUpdateInput:false,
+          /* minDate : new Date(),*/ // allow past date also
+           // autoUpdateInput:false,
             singleDatePicker: false,
             opens:'left',
             showDropdowns: true
