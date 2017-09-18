@@ -237,7 +237,7 @@
                                                 <div id="scrollheightexercise">
                                                   <ul class="exercise remove-style">
                                                         <li class="col-lg-12 col-md-12 col-sm-12" ng-repeat="exerciseDiaryData in userExerciseDiaryDataAll.ExerciseData | orderBy:'$index':true">
-                                                            <div class="col-lg-2 col-md-2 col-sm-2 no-padding"><img ng-if="exerciseDiaryData.imagepath" ng-src="{{exerciseDiaryData.imagepath+'50x50.jpg'}}"></div>
+                                                            <div class="col-lg-2 col-md-2 col-sm-2 no-padding"><img ng-src="{{exerciseDiaryData.exerciseImagePath+'50x50.jpg'}}"></div>
                                                             <div class="col-lg-10 col-md-10 col-sm-10 no-padding">
                                                                 <a href="" class="pull-right exercise_close" title="Delete Exercise" ng-click="doDeleteUserExercise(exerciseDiaryData.userexercisemapid)">x</a>
                                                                 <div class="exercise_name">{{exerciseDiaryData.Exercise.exercisename}}</div>
@@ -260,6 +260,20 @@
                                                                     <span class="pull-right text-red text-bold"><strong><i class="fa fa-angle-down"></i>&nbsp;{{customDiaryData.calories}}  calories</strong></span>
                                                                     <div class="select_food">
                                                                         <span class="text-bold">Workout : </span>{{customDiaryData.customExerciseWorkoutDisplayValue}}&nbsp;&nbsp;<a href="" ng-click="doEditUserCustomExercise(customDiaryData.id,customDiaryData.isCustom)" title="Edit Exercise"><i class="fa fa-pencil"></i></a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                    <ul class="exercise remove-style">
+                                                        <li class="col-lg-12 col-md-12 col-sm-12" ng-repeat="wearableDiaryData in userExerciseDiaryDataAll.wearableactivity | orderBy:'$index':true">
+                                                            <div class="col-lg-2 col-md-2 col-sm-2 no-padding"><img ng-if="wearableDiaryData.imagepath" ng-src="{{wearableDiaryData.imagepath+'50x50.jpg'}}"></div>
+                                                            <div class="col-lg-10 col-md-10 col-sm-10 no-padding">
+                                                                <div class="exercise_name">{{wearableDiaryData.name}}</div>
+                                                                <div class="margin-top-10">
+                                                                    <span class="pull-right text-red text-bold"><strong><i class="fa fa-angle-down"></i>&nbsp;{{wearableDiaryData.calories}}  calories</strong></span>
+                                                                    <div class="select_food">
+                                                                        <span class="text-bold">Workout : </span>{{wearableDiaryData.workoutvalue}}&nbsp;&nbsp;
                                                                     </div>
                                                                 </div>
                                                             </div>

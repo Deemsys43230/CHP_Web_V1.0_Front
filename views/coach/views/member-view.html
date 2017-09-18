@@ -1052,9 +1052,9 @@
                     </div>
                 </div>
 
-                <div id="chat_container" class="panel-body msg_container_base" style="display:none;">
-                    <div class="row" ng-show="showLoadMore"><center><span ng-click="doLoadChatMessages()" class="label label-default" style="padding:5px;cursor:pointer;"><i class="fa fa-arrow-up" aria-hidden="true"></i>&nbsp;Load More</span></center></div>
-                    <div  ng-repeat="chatMessage in chatMessages" ng-click="doSelectChat(chatMessage);">
+                <div id="chat_container" class="panel-body msg_container_base" style="display:none;" >
+                    <div class="row" ng-show="showLoadMore"><center><span ng-click="doLoadChatMessages()" class="label label-default" style="padding:5px;cursor:pointer;"><i class="fa fa-arrow-up" aria-hidden="true"></i>&nbsp;Load More</span></center></div> 
+                    <div  ng-repeat="chatMessage in chatMessages" ng-click="doSelectChat(chatMessage);" >
                      <div class="row" ng-if="chatMessage.firstNewMessage==1"><center><span id="new_message_span" class="label label-default">New Messages</span></center></div>
                         <div class="row msg_container" id="{{chatMessage.logid}}" ng-class="{'chat-selected':chatMessage.selectedChat==1}">
                             <div class="col-md-10 col-xs-10" ng-if="chatMessage.sentby==2">
@@ -1287,24 +1287,26 @@ $('.msg-overlay-list-bubble--is-minimized').click(function(){
   $(document).ready(function() {
     $("textarea").niceScroll({cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#eee'});
     $("#stickyNotes").niceScroll();
-    $("#chat_container").niceScroll({cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#eee'});
+    $("#chat_container").niceScroll({cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#eee',scrollspeed:-10});
     // $('#stickyNotes').getNiceScroll(0).doScrollTop($('textarea').height());
     $(".sticky-notes").animate({ scrollTop: $(document).height() }, "slow");
 
-    if($(window).scrollTop() + $(window).height() > ($(document).height()-117)) {
-         console.log("margin");
-      $("#chat_window_1").animate({
-                'margin-bottom':'120px'
-            },300);
-   }else{
-    console.log("no margin");
-    $("#chat_window_1").animate({
-                'margin-bottom':'0px'
-            },300);
-   }
-
   return false;
   });
+
+  $(window).scroll(function() {
+        setChatMargin();
+    });
+    function setChatMargin(){
+        var scrollBottom=$(document).height() - $(window).scrollTop() - $(window).height();
+        var chat_margin_bottom=0+"px";
+        if(scrollBottom<291){
+            chat_margin_bottom=(291-scrollBottom)+"px";
+        }
+        $("#chat_window_1").animate({
+                        'margin-bottom':chat_margin_bottom
+                },0);
+    }
 
   $(".sticky-notes").animate({ scrollTop: $(document).height() }, "slow");
 
