@@ -104,14 +104,14 @@
                         <img class="hidden-md hidden-lg hidden-sm" width="180" height="49" alt="" src="../../images/cyber-logo-small.png">
                     </a>
                 </div>
-                <div class="navbar-collapse collapse">
+                <div class="navbar-collapse collapse no-padding">
                      <div class="dropdown pull-right notify-menu">
                           <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-bell fa-lg notification-color" style=" font-size: 1.80em;" aria-hidden="true"></i><span ng-hide="allNotifications == 0" class="nav-item__badge"><span aria-hidden="true" class="nav-item__badge-count">{{allNotifications}}</span></span></a>&nbsp;<span class="fa fa-caret-down"></span>
                           <div class="dropdown-content"  ng-hide="allNotifications == 0">
                             <a ng-show="notification.nofiticationid == 1"  ng-repeat="notification in coachNotification" href="#coach-subscription-history">{{notification.description}}</a>
                             <a ng-show="notification.nofiticationid == 2"  ng-repeat="notification in coachNotification"  href="#subscription">{{notification.description}}</a>
                             <a ng-show="notification.nofiticationid == 3"  ng-repeat="notification in coachNotification" href="#my-members">{{notification.description}}</a>
-                          </div>`
+                          </div>
                             <div class="dropdown-content" ng-show="allNotifications == 0">
                                 <a  href="">No Notification</a>
                             </div>

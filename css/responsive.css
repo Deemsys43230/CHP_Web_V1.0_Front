@@ -482,6 +482,9 @@
         font-size: 24px;
         margin-top: 12px;
     }
+    .navbar-default .navbar-nav > li > a {
+        padding: 28px 7px 28px 7px!important;
+    }
 
     .slider.btn{
         padding: 5px 25px;
@@ -701,6 +704,16 @@
 
     .session input[type=radio] + label{
         padding: 0 8px ;
+    }
+
+    .nav.navbar-nav.navbar-right{
+        right:-1px !important;
+    }
+    .notify-menu {
+        padding: 28px 0px 0px 5px;
+    }
+    .navbar-default .navbar-nav > li > a{
+         padding: 28px 7px 28px 7px!important;
     }
 
     ul.food img{

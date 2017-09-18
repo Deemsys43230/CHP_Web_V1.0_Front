@@ -23,7 +23,7 @@ commonApp.controller('CoachController',['$scope','requestHandler','Flash','$rout
     $scope.doGetPricingPlans = function() {
       requestHandler.getRequest("getactivePricingPlans/","").then(function(response){
           $scope.pricingPlanDetails = response.data.PricingPlans;
-          console.log($scope.pricingPlanDetails);
+          // console.log($scope.pricingPlanDetails);
       });
     };
 

@@ -17800,7 +17800,7 @@ ul.group-menu li a{
 {
     position: relative;
     width: 99%!important;
-    height: 270px;
+    max-height: 270px;
     background: none;
     overflow-y: scroll;
     overflow-x:hidden;

@@ -34,19 +34,19 @@
                     <div class="coach-list">
                         <div ng-show="coachClients.length>0" class="user-view-width"> 
                             <div class="col-md-12 col-lg-12 col-sm-12 no-padding classic-title"> 
-                                <div class="col-lg-10 col-md-9 col-sm-10 no-padding">
+                                <div class="col-lg-10 col-md-9 col-sm-9 no-padding">
                                     <h5 class="text-muted">{{selectText}}</h5>
                                 </div>
                                 
-                                <div class="col-lg-2 col-md-3 col-sm-2 no-padding">
+                                <div class="col-lg-2 col-md-3 col-sm-3 no-padding">
                                     <a href="" class="select-text" ng-click="doSelectAll()">Select All</a>&nbsp;|&nbsp;<a href="" class="deselect-text" ng-click="doDeselectAll()">Deselect All</a>
                                 </div>
                             </div>    
 
 
                                     <div class="message_scrollbar col-lg-12 col-md-12 col-sm-12" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#eee'}">
-                                      <div class="col-lg-4 col-md-4 col-sm-12 no-padding margin-top-10" ng-repeat= "coachclient in coachClients">
-                                        <div class="col-md-2 no-padding margin-top-30">
+                                      <div class="col-lg-4 col-md-4 col-sm-6 no-padding margin-top-10" ng-repeat= "coachclient in coachClients">
+                                        <div class="col-md-2 col-lg-2 col-sm-2 no-padding margin-top-30">
                                             <checkbox-group>
                                                 <span class="fh-checkbox">
                                                     <input type="checkbox" id="{{coachclient.userid}}" ng-model="coachclient.isSelected" ng-true-value="true" ng-false-value="false"/>&nbsp;&nbsp;
@@ -84,8 +84,8 @@
                     </div>
                     <div class="message_scrollbar col-lg-12 col-md-12 col-sm-12" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#eee'}">
                         <ul class="group-menu remove-style">
-                            <li class="col-lg-4 col-md-4 col-sm-12 no-padding margin-top-10" ng-repeat="group in groupsList">
-                                <div class="col-md-2 no-padding margin-top-25">
+                            <li class="col-lg-4 col-md-4 col-sm-6 no-padding margin-top-10" ng-repeat="group in groupsList">
+                                <div class="col-md-2 col-lg-2 col-sm-2 no-padding margin-top-25">
                                     <checkbox-group>
                                         <span class="fh-checkbox">
                                             <input type="checkbox" id="{{group.id}}" ng-model="group.isSelected" ng-true-value="true" ng-false-value="false"/>&nbsp;&nbsp;
@@ -93,7 +93,7 @@
                                         </span>
                                     </checkbox-group>
                                 </div>
-                                <div class="col-md-10 no-padding">
+                                <div class="col-md-10 col-lg-10 col-sm-10 no-padding">
                                     <a href=""><i class="fa fa-group"></i> &nbsp;{{group.groupname}}</a>
                                 </div>
                             </li>
