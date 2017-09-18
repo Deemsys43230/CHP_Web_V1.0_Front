@@ -1470,8 +1470,7 @@
 
                     <div class="col-lg-6 col-md-6 col-sm-6 text-center">
                         <div class="no-padding" style="height:220px;">
-                                <img class="add-exercise-img" ng-src="{{userSelectedExerciseDetails.imagepath}}" ng-if="userSelectedExerciseDetails.imagepath&&userSelectedExerciseDetails.videosource==null">
-                                <iframe width="208" height="208" ng-src="{{userSelectedExerciseDetails.videosource | trusted}}" ng-if="userSelectedExerciseDetails.videosource!=null&&userSelectedExerciseDetails.imagepath" frameborder="0" allowfullscreen></iframe>
+                            <img class="add-exercise-img" ng-src="{{userSelectedExerciseDetails.imagepath}}" ng-if="userSelectedExerciseDetails.imagepath">
                          </div>
                         <h5>Calories Spent</h5>
                         <div class="circle-wrapper">
