@@ -17887,3 +17887,9 @@ select.event:focus {
     overflow-x:hidden;
     word-wrap: break-word;
 }
+
+.hr-style{
+    border-top: 1px solid #ffffff; 
+    padding: 0; 
+    margin: 0!important;
+}

@@ -380,6 +380,10 @@
                                     <div class="time">
                                         {{workoutItem.minutes}}&nbsp;Minutes&nbsp;&nbsp;({{workoutItem.calorieburn}}&nbsp;KCals)
                                     </div>
+                                    <hr class="hr-style">
+                                    <div class="time">
+                                        Level:&nbsp;{{workoutItem.levelname}}
+                                    </div>
                                     <div class="name_values no-padding">
                                         {{workoutItem.categoryname}}&nbsp;&nbsp;|&nbsp;&nbsp;{{workoutItem.typename}}
                                     </div>
@@ -562,6 +566,10 @@
                     <td class="col-md-6 wrap">{{workoutPlanItemDetails.minutes}}&nbsp;Minutes</td>
                 </tr>
                 <tr>
+                    <td class="col-md-6">Level</td>
+                    <td class="col-md-6 wrap">{{workoutPlanItemDetails.levelname}}</td>
+                </tr>
+                <tr>
                     <td class="col-md-6">Calories Intake</td>
                     <td class="col-md-6">{{workoutPlanItemDetails.calorieburn}}&nbsp;KCals</td>
                 </tr>
@@ -570,7 +578,7 @@
                     <td class="col-md-6">{{workoutPlanItemDetails.intensity!=""?workoutPlanItemDetails.intensity:"&nbsp;-"}}</td>
                 </tr>
                 <tr>
-                    <td class="col-md-6">Level</td>
+                    <td class="col-md-6">Plan Level</td>
                     <td class="col-md-6">{{workoutPlanItemDetails.level!=""?workoutPlanItemDetails.level:"&nbsp;-"}}</td>
                 </tr>
                 <tr>
