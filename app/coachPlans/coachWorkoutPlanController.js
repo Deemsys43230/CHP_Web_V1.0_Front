@@ -439,3 +439,10 @@ $scope.workoutPlansInit=function(){
     };
 
 }]);	
+
+// render image to view in list
+coachApp.filter('trusted', ['$sce', function ($sce) {
+    return function(url) {
+        return $sce.trustAsResourceUrl(url);
+    };
+}]);

@@ -463,7 +463,8 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../css/custom-inputs.css',
                                 '../../plugin/popup/style.css',
                                 '../../css/ngPercentageCircle.css',
-                                '../../app/userDashboard/ngPercentageCircle.js'
+                                '../../app/userDashboard/ngPercentageCircle.js',
+                                '../../angular/angular-utils-pagination/dirPagination.js'
                             ]
                         })
                     }]
@@ -501,7 +502,8 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../css/ngPercentageCircle.css',
                                 '../../app/userDashboard/ngPercentageCircle.js',
                                 '../../app/userDashboard/userDashboardService.js',
-                                '../../app/coachPlans/coachWorkoutPlanController.js'
+                                '../../app/coachPlans/coachWorkoutPlanController.js',
+                                '../../angular/angular-utils-pagination/dirPagination.js'
                             ]
                         })
                     }]
