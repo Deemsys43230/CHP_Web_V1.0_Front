@@ -798,7 +798,7 @@
         </div>
 
           <!--Meal Plan -->
-        <div class="mealplan-div">  
+        <div ng-cloak class="ng-cloak mealplan-div">  
                 <a href="" ng-show="mealplan.planDetailView" class="btn-sm btn-warning pull-right margin-left-5 margin-bottom-10"  ng-click="mealplan.planDetailView=false"><i class="fa fa-arrow-circle-o-left"></i>&nbsp;Back to Plans</a>
                 <a href="#modal-assign-meal" id="trigger-assign-meal" ng-hide="mealplan.planDetailView" class="btn-sm btn-success pull-right margin-left-5 margin-bottom-10" ng-click="resetMeal()"><i class="fa fa-plus-circle"></i> Assign Meal Plan</a>
                 <div flash-message="2000" class="col-md-4 pull-right no-padding"></div>
@@ -941,7 +941,7 @@
         </div>
 
            <!--Workout Plan -->
-        <div class="workoutplan-div">     
+        <div ng-cloak class="ng-cloak workoutplan-div">     
             <a href="" ng-show="workoutplan.workPlanDetailView" class="btn-sm btn-warning pull-right margin-left-5 margin-bottom-10"  ng-click="workoutplan.workPlanDetailView=false"><i class="fa fa-arrow-circle-o-left"></i>&nbsp;Back to Plans</a>
             <a href="#modal-assign-workout" id="trigger-assign-workout" ng-hide="workoutplan.workPlanDetailView" class="btn-sm btn-success pull-right margin-left-5 margin-bottom-10" ng-click="resetWorkout()"><i class="fa fa-plus-circle"></i> Assign Workout Plan</a>
             <div flash-message="2000" class="col-md-4 pull-right no-padding"></div>

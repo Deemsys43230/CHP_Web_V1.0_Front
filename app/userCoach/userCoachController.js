@@ -534,13 +534,17 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
     //Do Get Coach Advices
     $scope.doGetCoachAdviceByUser=function(coachid){
         requestHandler.getRequest("user/getcoachquote/"+coachid+"/","").then(function(response){
+            if(response.data.Response_status==1){
             $scope.coachAdvice= response.data.quotes;
             $scope.coachAdvice.description=response.data.quotes.description;
-            if(response.data.quotes.description==""){
-                $scope.noAdvices=true;
-            }
-            else{
-                $scope.noAdvices=false;
+                if(response.data.quotes.description==""){
+                    $scope.noAdvices=true;
+                }
+                else{
+                    $scope.noAdvices=false;
+                }
+            }else{
+                $scope.coachAdvice="";
             }
         }, function(){
             errorMessage(Flash,"Please try again later!");
@@ -846,10 +850,10 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
         $scope.doGetCoachAdviceByUser($routeParams.id);
         $scope.doGetUpcomingEvents($routeParams.id);
 
-        //Initializ Page
-        $scope.mealPlanPagination={"itemsPerPage":10,"pageNumber":1};
-        $scope.workoutPlanPagination={"itemsPerPage":10,"pageNumber":1};
     };
+
+    $scope.mealPlanPagination={"itemsPerPage":10,"pageNumber":1};
+    $scope.workoutPlanPagination={"itemsPerPage":10,"pageNumber":1};
 
     $scope.$watch("mealPlanPagination.pageNumber",function(){
         $scope.doGetCoachMealPlans($routeParams.id);
@@ -860,13 +864,10 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
     });
 
     $scope.coachListInit=function(){
-        $scope.mealPlanPagination={"itemsPerPage":10,"pageNumber":1};
-        $scope.workoutPlanPagination={"itemsPerPage":10,"pageNumber":1};
         $scope.doGetMyCoachListByUser();
     };
 
     $scope.userCoachInit=function(){
-
         $scope.scrollnation={"itemsPerScroll":4,"scrollEndCount":-1};    
         $scope.usercoachlist=[];
         $scope.doGetCoachListByUser(true);

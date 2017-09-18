@@ -1831,7 +1831,7 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
                 });
               }              
           });
-          $scope.$apply();
+         
         },function(){
             errorMessage(Flash,"Please try again later!");
         });
