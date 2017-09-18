@@ -769,9 +769,8 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
             //Set values according to the api calls
             $scope.userExercise.exerciseid=$scope.userSelectedExerciseDetails.exerciseid;
             $scope.userExercise.date=document.getElementById("main-start-date").value;
-            $scope.userExercise.levelunitid= $scope.userExercise.selectedLevel.levelunitid;
-
-
+            $scope.userExercise.levelid= $scope.userExercise.selectedLevel.levelid;
+            $scope.userExercise.unitid=$scope.userSelectedExerciseDetails.levels.unitid;
 
             var exerciseInsertPromise=UserDashboardService.doInsertUserExercise($scope.userExercise);
             exerciseInsertPromise.then(function(){
@@ -816,9 +815,9 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
 
                     $scope.userExercise.userexercisemapid=userexercisemapid;
                     $scope.userExercise.exerciseid=exerciseid;
-
+                    $scope.userExercise.unitid=$scope.userSelectedExerciseDetails.levels.unitid;
                     $.each($scope.userSelectedExerciseDetails.levels.levels, function(index,value) {
-                        if(value.levelunitid == result.levelunitid){
+                        if(value.levelid == result.levelid){
                             $scope.userExercise.selectedLevel= value;
                             originallevel = angular.copy(value);
                         }
@@ -842,7 +841,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
         };
 
         $scope.isCleanExercise=function(){
-            return angular.equals(originallevel, $scope.userExercise.selectedLevel.levelunitid)&& angular.equals(originaltiming, $scope.userExercise.workoutvalue);
+            return angular.equals(originallevel, $scope.userExercise.selectedLevel)&& angular.equals(originaltiming, $scope.userExercise.workoutvalue);
         };
 
 
@@ -852,10 +851,9 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
             if($scope.userExercise.date!=null){
                 delete $scope.userExercise.date;
             }
-
             $scope.userExercise.userexercisemapid= $scope.userExercise.userexercisemapid;
             $scope.userExercise.exerciseid= $scope.userExercise.exerciseid;
-            $scope.userExercise.levelunitid=$scope.userExercise.selectedLevel.levelunitid;
+            $scope.userExercise.levelid=$scope.userExercise.selectedLevel.levelid;
             $scope.userExercise.workoutvalue=parseInt($scope.userExercise.workoutvalue);
             var exerciseInsertPromise=UserDashboardService.doUpdateUserExercise($scope.userExercise);
             exerciseInsertPromise.then(function(){

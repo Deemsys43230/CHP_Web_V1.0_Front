@@ -306,7 +306,7 @@ $scope.doEditExerciseFromPlan=function(id){
         $scope.userSelectedExerciseDetails= response.data.exercisedetail;
         $scope.userSavedExerciseDetails= response.data.savedexerciseplan;
         $.each($scope.userSelectedExerciseDetails.levels.levels,function(index,value){
-           if(value.levelunitid==$scope.userSavedExerciseDetails.unitlevelid){
+           if(value.levelid==$scope.userSavedExerciseDetails.levelid){
               $scope.userExercise.selectedLevel=value;
               $scope.originallevel= angular.copy(value);
            }
@@ -362,7 +362,8 @@ $scope.doInsertExerciseByCoach=function(){
     //Set values according to the api calls
     $scope.userExercise.planid= $routeParams.id;
     $scope.userExercise.exerciseid=$scope.userSelectedExerciseDetails.exerciseid;
-    $scope.userExercise.unitlevelid= $scope.userExercise.selectedLevel.levelunitid;
+    $scope.userExercise.levelid= $scope.userExercise.selectedLevel.levelid;
+    $scope.userExercise.unitid= $scope.userSelectedExerciseDetails.levels.unitid;
 
     if($scope.userExercise.planid==1){
       $scope.userExercise.calorieburn=0;
