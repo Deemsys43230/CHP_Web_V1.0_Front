@@ -2950,7 +2950,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
                         historyReport.push(history);
                     });
                     titles.title="Heart Rate Graph( "+startDate+" - "+endDate+" )";
-                    titles.graphType='line';
+                    titles.graphType='column';
                     titles.name="Heart Rate";
                     titles.suffix="  bpm";
                     titles.yaxis="Heart Rate (bpm)";
@@ -2973,7 +2973,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
                         historyReport.push(history);
                     });
                     titles.title="Sleep Rate Graph( "+startDate+" - "+endDate+" )";
-                    titles.graphType='spline';
+                    titles.graphType='column';
                     titles.name="Sleep";
                     titles.suffix="  mins";
                     titles.yaxis="Sleep (minutes)";
@@ -3523,11 +3523,11 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
 
                 },
                 series: [{
-                    name: 'Fasting',
+                    name: 'Fasting Blood Glucose',
                     color: '#339966',
                     data:datafbg     //for  displaying systolic blood pressure value
                 }, {
-                    name: 'Random',
+                    name: 'Random Blood Glucose',
                     color: '#3366cc',
                     data:datarbg     // for displaying diastolic blood pressure value
                 }

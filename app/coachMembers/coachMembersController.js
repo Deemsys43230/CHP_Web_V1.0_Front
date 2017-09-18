@@ -899,12 +899,12 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
             },
             series: [{
                 type: 'column',
-                name: 'Fastingbloodglucose',
+                name: 'Fasting Blood Glucose',
                 color: '#339966',
                 data:datafbg     //to  display fasting bloodglucose value
             }, {
                 type: 'column',
-                name: 'Randombloodglucose',
+                name: 'Random Blood Glucose',
                 color: '#3366cc',
                 data:datarbg   // to display  random bloodGlucose value
             }]
