@@ -45,14 +45,14 @@
 
                             <tbody >
                                 <tr dir-paginate="event in eventfilter = (eventList | itemsPerPage: 9)" ng-show="eventList.length!=0">
-                                    <td>{{event.eventname}}</td>
-                                    <td>{{event.description}}</td>
+                                    <td class="wrap-all">{{event.eventname}}</td>
+                                    <td class="wrap-all">{{event.description}}</td>
                                     <td>{{event.datetime}}</td>
                                     <td>{{event.duration}}</td>
                                     <td>
-                                        <a href="#event-view/{{event.id}}" class="btn-xs btn-primary">View Details</a>
-                                        <a href="#event-edit/{{event.id}}" class="btn-xs btn-warning">Edit Details</a>
-                                        <a href="" class="btn-xs btn-danger" ng-click="deleteModel(event.id)">Delete</a>
+                                        <a href="#event-view/{{event.id}}"  class="btn-xs btn-primary">View Details</a>
+                                        <a href="#event-edit/{{event.id}}" ng-hide="!canEdit" class="btn-xs btn-warning">Edit Details</a>
+                                        <a href="" class="btn-xs btn-danger" ng-hide="!canEdit" ng-click="deleteModel(event.id)">Delete</a>
                                     </td>
                                 </tr>
                                 <tr ng-show="eventList.length==0 || !eventfilter.length "><td colspan="5" class="text-center">No Records Found !!!</td></tr>

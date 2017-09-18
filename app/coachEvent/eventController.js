@@ -23,6 +23,20 @@ coachApp.controller('EventController',['$scope','requestHandler','Flash','$route
         
 
 	$scope.doGetEventsByCoach = function(){
+        //To Display current date
+        var currentDate = new Date();
+        var currentdd = currentDate.getDate();
+        var currentmm = currentDate.getMonth()+1; //January is 0!
+
+        var currentyyyy = currentDate.getFullYear();
+        if(currentdd<10){
+            currentdd='0'+currentdd
+        }
+        if(currentmm<10){
+            currentmm='0'+currentmm
+        }
+        currentDate = currentdd+'/'+currentmm+'/'+currentyyyy;
+
        if($('#history-end').val()==''){
             //Always Start date for a week
             var selectedDate = new Date();
@@ -37,6 +51,7 @@ coachApp.controller('EventController',['$scope','requestHandler','Flash','$route
                 mm='0'+mm
             }
             selectedDate = dd+'/'+mm+'/'+yyyy;
+
 
             var startDate = selectedDate;
 
@@ -66,8 +81,27 @@ coachApp.controller('EventController',['$scope','requestHandler','Flash','$route
         }
 		requestHandler.postRequest("coach/getevents/",{"fromdate":startDate,"todate":endDate}).then(function(response){
 			$scope.eventList= response.data.events;
-            //For Event duration calculation in hrs and min
+
+
+
+
             $.each($scope.eventList,function(index,value){
+                //comparing today date vs event date
+                var eventDate=value.datetime;
+                var firstValue = currentDate.split('/'); //current date
+                var secondValue = eventDate.split('/'); // event date
+                var firstDate=new Date();
+                firstDate.setFullYear(firstValue[2],(firstValue[1] - 1 ),firstValue[0]);
+                var secondDate=new Date();
+                secondDate.setFullYear(secondValue[2],(secondValue[1] - 1 ),secondValue[0]);
+                if(firstDate < secondDate){
+                    $scope.canEdit=true;
+                }
+                else{
+                    $scope.canEdit=false;
+                }
+
+                //For Event duration calculation in hrs and min
                 value.durationHours=Math.floor(value.duration/60).toString();
                 value.durationMinutes=Math.floor(value.duration%60).toString();
 
@@ -83,8 +117,30 @@ coachApp.controller('EventController',['$scope','requestHandler','Flash','$route
             });
             $scope.loaded=false;
             $scope.paginationLoad=true;
+           /* $scope.doGetUpcomingEvent($scope.eventList[0].coachid);*/
 		});
+
 	};
+
+
+
+/*
+    */
+/*Do get upcoming Event By Coach*//*
+
+    $scope.doGetUpcomingEvent = function(coachid){
+        requestHandler.postRequest("coach/upcomingevents/",{"coachid":coachid}).then(function(response){
+            $scope.result= response.data.Response;
+            if(response.data.Response == "Success"){
+              $scope.canEdit=1;
+            }
+            else{
+                $scope.canEdit=0;
+            }
+        });
+    };
+
+*/
 
 
     /*Do Delete Event By Coach*/
@@ -166,12 +222,12 @@ coachApp.controller('EventController',['$scope','requestHandler','Flash','$route
     //Intialization
 
     $scope.init = function(){
-        
-    	$scope.doGetEventsByCoach();
+        $scope.doGetEventsByCoach();
     };
 
 
     $scope.init();
+
 
 
 }]);
@@ -264,5 +320,7 @@ coachApp.controller('EventEditController',['$scope','requestHandler','Flash','$r
 
 
     $scope.init();
+
+
 
 }]);
