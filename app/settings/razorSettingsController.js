@@ -40,9 +40,15 @@ adminApp.controller('RazorSettingsController',['$scope','requestHandler','Flash'
         $scope.submitContent=true;
         $scope.contentBtnTxt="Submitting...";
         $scope.razorSettings.razortype=parseInt($scope.razorSettings.razortype);
+        console.log($scope.razorSettings);
         requestHandler.postRequest("admin/updaterazorpay/",$scope.razorSettings).then(function(response){
-                $scope.doGetRazorSettings();
+            if(response.data.Response_status!="0"){
+                 $scope.doGetRazorSettings();
                 successMessage(Flash,"Successfully Updated!");
+            }else{
+                errorMessage(Flash,"Please&nbsp;provide&nbsp;valid&nbsp;data")
+            }
+               
             $scope.submitContent=false;
             $scope.contentBtnTxt="Save Changes";
     },function(){

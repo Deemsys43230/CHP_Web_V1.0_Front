@@ -18,7 +18,7 @@
                         <h4>Razor Key ID <span class="pull-right">:</span></h4>
                     </div>
                     <div class="col-md-9 margin-top-10">
-                        <input class="form-control margin-bottom-20" name="razorkeyid" ng-model="razorSettings.razorkeyid" maxlength="100" required validate-email>
+                        <input type="text" class="form-control margin-bottom-20" name="razorkeyid" ng-model="razorSettings.razorkeyid" maxlength="100" required>
                          <span ng-show="razorSettingsForm.razorkeyid.$dirty&&razorSettingsForm.razorkeyid.$invalid">
                                 <span class="error-message" ng-show="razorSettingsForm.razorkeyid.$error.required"><span>Required.</span></span>
                          </span>
@@ -27,7 +27,7 @@
                         <h4>Razor Key Secret <span class="pull-right">:</span></h4>
                     </div>
                     <div class="col-md-9">
-                        <input class="form-control margin-bottom-20" name="razorkeysecret" ng-model="razorSettings.razorkeysecret" maxlength="100" required>
+                        <input type="text" class="form-control margin-bottom-20" name="razorkeysecret" ng-model="razorSettings.razorkeysecret" maxlength="100" required>
                          <span ng-show="razorSettingsForm.razorkeysecret.$dirty&&razorSettingsForm.razorkeysecret.$invalid">
                                 <span class="error-message" ng-show="razorSettingsForm.razorkeysecret.$error.required"><span>Required.</span></span>
                          </span>

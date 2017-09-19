@@ -27,7 +27,7 @@
                         <h4>Paypal Name <span class="pull-right">:</span></h4>
                     </div>
                     <div class="col-md-9">
-                        <input class="form-control margin-bottom-20" name="paypalname" ng-model="paypalSettings.paypalname" maxlength="100" required validate-alpha-with-space>
+                        <input type="text" class="form-control margin-bottom-20" name="paypalname" ng-model="paypalSettings.paypalname" maxlength="100" required validate-alpha-with-space>
                          <span ng-show="paypalSettingsForm.paypalname.$dirty&&paypalSettingsForm.paypalname.$invalid">
                                 <span class="error-message" ng-show="paypalSettingsForm.paypalname.$error.required"><span>Required.</span></span>
                              <span class="error-message" ng-show="paypalSettingsForm.paypalname.$error.validateAlphaWithSpace"><span>Invalid&nbsp;Format.</span></span>

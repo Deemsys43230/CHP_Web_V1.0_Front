@@ -18,7 +18,7 @@
                         <h4>Authorize Key ID <span class="pull-right">:</span></h4>
                     </div>
                     <div class="col-md-9 margin-top-10">
-                        <input class="form-control margin-bottom-20" name="authorizekeyid" ng-model="authorizeSettings.authorizekeyid" maxlength="100" required validate-email>
+                        <input type="text" class="form-control margin-bottom-20" name="authorizekeyid" ng-model="authorizeSettings.authorizekeyid" maxlength="100" required validate-email>
                          <span ng-show="authorizeSettingsForm.authorizekeyid.$dirty&&authorizeSettingsForm.authorizekeyid.$invalid">
                                 <span class="error-message" ng-show="authorizeSettingsForm.authorizekeyid.$error.required"><span>Required.</span></span>
                          </span>
@@ -27,7 +27,7 @@
                         <h4>Authorize Key Secret <span class="pull-right">:</span></h4>
                     </div>
                     <div class="col-md-9">
-                        <input class="form-control margin-bottom-20" name="authorizekeysecret" ng-model="authorizeSettings.authorizekeysecret" maxlength="100" required>
+                        <input type="text" class="form-control margin-bottom-20" name="authorizekeysecret" ng-model="authorizeSettings.authorizekeysecret" maxlength="100" required>
                          <span ng-show="authorizeSettingsForm.authorizekeysecret.$dirty&&authorizeSettingsForm.authorizekeysecret.$invalid">
                                 <span class="error-message" ng-show="authorizeSettingsForm.authorizekeysecret.$error.required"><span>Required.</span></span>
                          </span>
