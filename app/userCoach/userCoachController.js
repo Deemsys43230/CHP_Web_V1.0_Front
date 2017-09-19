@@ -224,7 +224,7 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
     // Do Get Chat Message
     $scope.doGetChatMessage=function(id){
         $scope.currentChatTargetId= id;
-        
+        $scope.getMessageParam.offset=0;
         requestHandler.postRequest("readMessage/",$scope.getMessageParam).then(function(response){
             $scope.totalChatMessages=response.data.totalrecords;
             $scope.chatMessages= response.data.chats;
@@ -282,7 +282,7 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
                 $scope.divTop = document.getElementById('chat_container').offsetTop;
                 console.log($scope.loadMoreScrollStopId+","+$scope.topPos+","+$scope.divTop)
                 $('#chat_container').getNiceScroll(0).doScrollPos(0,$scope.topPos-$scope.divTop-20);
-        }, 200);
+        }, 400);
         
     }
     //Do Send Chat Message
