@@ -89,7 +89,7 @@ commonApp.controller('HealthyTipController',['$scope','requestHandler','Flash','
     $scope.getArticleById=function(){
         requestHandler.getRequest("articleview/"+ $scope.articleid+"/","").then(function(response){
             $scope.articleDetail=response.data.article;
-            $('#article').html($scope.articleDetail.content);
+            $('#article').html($scope.articleDetail.content+" <div><div class='loader-style'><div class='loader'></div></div></div>");
             $scope.title=$scope.articleDetail.title;
             console.log($scope.title);
         });

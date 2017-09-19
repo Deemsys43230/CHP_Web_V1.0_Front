@@ -72,14 +72,15 @@
    </div>
  <div id="container2" class="boxed-page" ng-controller="HealthyTipController">
     <div ng-include src="'../common/login-popup.html'"></div>
-
-    <div ng-cloak class="white-background cloak" id="content-page" style="min-height: 550px;">
-        <div class="container">
-           <a href="../home/#healthy-tips" class="back-button pull-right">Back to Healthy Tips list</a>
-            <h4 class="classic-title"><span>{{title}}</span></h4>
-            <div id="article"></div>
+    <div class="min-height-450">
+        <div ng-cloak class="white-background ng-cloak" id="content-page">
+            <div class="container">
+               <a href="../home/#healthy-tips" class="back-button pull-right">Back to Healthy Tips list</a>
+                <h4 class="classic-title"><span>{{title}}</span></h4>
+                <div id="article"></div>
+            </div>
         </div>
-    </div>
+    </div>    
 
     <!-- Start Footer Section -->
     <footer>
@@ -245,10 +246,10 @@
 
 
 <script>
-    var divHeight = $("#content").css("height");
+    var divHeight = $("#article").css("height");
     setInterval(function(){
-        if(divHeight !== $("#content").css("height")){
-            divHeight = $("#content").css("height");
+        if(divHeight !== $("#article").css("height")){
+            divHeight = $("#article").css("height");
             if(divHeight.substring(0,divHeight.indexOf('p'))>=200){
                $(".loader").fadeOut(); 
                $('body').getNiceScroll().remove();

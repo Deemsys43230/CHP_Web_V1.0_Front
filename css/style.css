@@ -17893,3 +17893,9 @@ select.event:focus {
     padding: 0; 
     margin: 0!important;
 }
+
+.no-healthy-living{
+    border: 1px solid #c3c3c3;
+    padding-top: 95px;
+    height: 410px;
+}

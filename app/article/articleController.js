@@ -94,14 +94,14 @@ adminApp.controller('ArticleController',['$scope','requestHandler','Flash','$loc
     // Display Articles For admin view On Page Load
     $scope.init = function(){
         $scope.paginationLoad=false;
-
         $scope.adminArticlePagination={"pageNumber":1,"itemsPerPage":10};
-
     };
 
     $scope.$watch("adminArticlePagination.pageNumber",function(){
         $scope.doGetArticlesByAdmin();
     });
+
+    $scope.init();
 
     //For image upload
     $('.image-editor').cropit();
@@ -260,52 +260,8 @@ adminApp.directive('validFile',function(){
     }
 });
 
-/*var commonApp = angular.module('commonApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate']);
-
-commonApp.controller('ArticleUserController',['$scope','requestHandler','Flash','$sce','$routeParams',function($scope,requestHandler,Flash,$sce,$routeParams){
-
-$scope.getArticlesParam= {
-                        "limit":10,
-                        "offset":0
-                        };
-    
-    $scope.doGetArticlesByUser=function(){
-        requestHandler.postRequest("user/usergetarticles/", $scope.getArticlesParam).then(function(response){
-      $scope.usertestimoniallist=response.data.Testimonials;
-
-            $scope.myImgSrc = $sce.trustAsResourceUrl(response.data.Testimonials[0].imageurl+"?decache="+Math.random());
-            $scope.usertestimonialdetails = response.data.Testimonials[0];
-
-        },function(){
-            errorMessage(Flash,"Please try again later!")
-        });
-    };
-
-    $scope.doGetArticleDetailsByUser= function (id) {
-        requestHandler.getRequest("getTestimonialDetail/"+id, "").then(function(response){*/
-
-            //View the image in ng-src for view testimonials
-         /*   $scope.myImgSrc = $sce.trustAsResourceUrl(response.data.Testimonials.imageurl+"?decache="+Math.random());
-
-            $scope.usertestimonialdetails=response.data.Testimonials
-
-        },function(){
-            errorMessage(Flash,"Please try again later!")
-        });
-
-        return false;
-
-    };*/
-
-    // To display the user Testimonial list on load
-   /* $scope.doGetTestimonialsByUser();
-    $scope.doGetTestimonialDetailsByUser($routeParams.id);
-
-
-}]);
-*/
 // render image to view in list
-commonApp.filter('trusted', ['$sce', function ($sce) {
+adminApp.filter('trusted', ['$sce', function ($sce) {
     return function(url) {
         return $sce.trustAsResourceUrl(url);
     };
@@ -313,7 +269,7 @@ commonApp.filter('trusted', ['$sce', function ($sce) {
 
 // html filter (render text as html)
 
-commonApp.filter('html', ['$sce', function ($sce) {
+adminApp.filter('html', ['$sce', function ($sce) {
     return function (text) {
         return $sce.trustAsHtml(text);
     };

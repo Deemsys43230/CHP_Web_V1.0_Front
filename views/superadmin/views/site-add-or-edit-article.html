@@ -51,19 +51,19 @@
                                 <h4>Description</h4>
                             </div>
                             <div class="col-md-9 margin-bottom-20">
-                             <span ng-show="summernote_touched==1&&articleForm.description.$invalid">
-                                  <span class="error-message textarea-errormessage40" ng-show="articleForm.description.$error.required"><span>Required.</span></span>
+                                <textarea type="text" class="height-150 form-control" name="description" ng-model="articles.description" required></textarea>
+                                    <span ng-show="articleForm.description.$dirty&&articleForm.description.$invalid">
+                                  <span class="error-message" ng-show="articleForm.description.$error.required" style="bottom: 100px;"><span>Required.</span></span>
                              </span>
-                                <div summernote config="options" name="description"  ng-model="articles.description" required ng-init="summernote_touched=0" ng-change ="summernote_touched=1"></div>
                             </div>
                             <div class="col-md-3">
                                 <h4>Content</h4>
                             </div>
                             <div class="col-md-9 margin-bottom-20">
-                             <span ng-show="summernote_touched==1&&articleForm.content.$invalid">
-                                  <span class="error-message textarea-errormessage40" ng-show="articleForm.content.$error.required"><span>Required.</span></span>
+                                <textarea type="text" class="height-150 form-control" name="content" ng-model="articles.content" required></textarea>
+                                    <span ng-show="articleForm.content.$dirty&&articleForm.content.$invalid">
+                                  <span class="error-message" ng-show="articleForm.content.$error.required" style="bottom: 100px;"><span>Required.</span></span>
                              </span>
-                                <div summernote config="options" name="content"  ng-model="articles.content" required ng-init="summernote_touched=0" ng-change ="summernote_touched=1"></div>
                             </div>
                         </div>
                     </div>
