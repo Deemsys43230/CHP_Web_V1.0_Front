@@ -23,6 +23,12 @@ img:hover{color:red;}
             <!-- Start Blog Posts -->
             <div>
                 <div class="col-md-8 col-lg-8 col-sm-8 blog-box">
+                    <div ng-show="articleList.articles.length==0">
+                        <div class="post-head text-center" style="border: 1px solid #c3c3c3; padding-top: 55px;">
+                            <img src="../../images/healthyTips/no-article.png" width="180" height="180"/>
+                            <h3 class="text-gray margin-top-7">NO ARTICLE FOUND!!!</h3><br/><br/><br/>
+                        </div>
+                    </div>
                     
                     <div ng-repeat="article in articleList.articles | limitTo: pagination.itemsPerPage">
                         <div id="{{article.id}}" class="blog-post image-post">
@@ -71,11 +77,20 @@ img:hover{color:red;}
                             </div>
                             <div class="clearfix"></div>
                         </li>
-                    </ul>            
+                    </ul> 
+                    <div ng-show="articleList.articles.length==0">
+                        <div class="col-lg-2 col-md-2 col-sm-2 no-padding">
+                        <img src="../../images/healthyTips/no-article.png" width="65" height="65"/>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 no-padding margin-top-15 margin-left-10">
+                        <h5 class="text-gray">NO ARTICLE FOUND!!!</h5><br/><br/><br/>
+                        </div>
+                    </div>
                 </div>
             </div>
             <!--End sidebar-->
-        </div>
+           </div>
+           
     </div>
 </div>
     </div>

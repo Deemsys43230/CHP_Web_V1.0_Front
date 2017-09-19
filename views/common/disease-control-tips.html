@@ -41,8 +41,15 @@
                             </div>
                             <div class="clearfix"></div>
                         </li>
-
                     </ul>
+                    <div ng-show="cdcContentList.length==0">
+                        <div class="col-lg-2 col-md-2 col-sm-2 no-padding">
+                        <img src="../../images/diseaseControlTips/no-disease-control.png" width="65" height="65"/>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 no-padding margin-top-15 margin-left-10">
+                        <h6 class="text-gray">NO DISEASE CONTROL FOUND!!!</h6><br/><br/><br/>
+                        </div>
+                    </div>
                 </div>
 
             </div>
@@ -50,7 +57,12 @@
 
             <!---start Blog post -->
             <div class="col-lg-8 col-md-7 col-sm-7 sidebar right-sidebar">
-                  <!--  <h4 class="classic-title" style="margin-top: 3%"></h4>-->
+                 <div ng-show="cdcContentList.length==0">
+                    <div class="post-head text-center" style="border: 1px solid #c3c3c3; padding-top: 55px;">
+                        <img src="../../images/diseaseControlTips/no-disease-control.png" width="180" height="180"/>
+                        <h3 class="text-gray margin-top-7">NO DISEASE CONTROL FOUND!!!</h3><br/><br/><br/>
+                    </div>
+                </div>
                 <!-- Start Post -5 -->
 
                 <div dir-paginate="content in cdcContentList | itemsPerPage:5">
