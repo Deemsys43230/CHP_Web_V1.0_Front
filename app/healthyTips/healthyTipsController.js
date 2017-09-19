@@ -68,11 +68,13 @@ commonApp.controller('HealthyTipsListController',['$scope','requestHandler','Fla
 
        requestHandler.postRequest("articles/",$scope.getArticleParam).then(function(response){
           $scope.articleList=response.data;
+          $scope.pager= true;
        });
     };
 
     $scope.init=function(){
          $scope.pagination={"itemsPerPage": 4, "pageNumber": 1};
+         $scope.pager= false;
     };
 
     $scope.$watch("pagination.pageNumber",function(){

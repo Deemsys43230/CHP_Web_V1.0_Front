@@ -158,7 +158,7 @@ adminApp.controller('ArticleEditController',['$scope','requestHandler','Flash','
             //Set values to display data in edit article
             $scope.articles=response.data.article;
             
-            $scope. originalArticle=angular.copy(response.data.article);
+            $scope.originalArticle=angular.copy(response.data.article);
            /* // Change the url hostname to localhost
             $scope.testimonials.imageurl = requestHandler.convertUrl( $scope.testimonials.imageurl);
             $scope.testimonials.imageurl = "http://localhost"+$scope.testimonials.imageurl;*/
@@ -201,29 +201,20 @@ adminApp.controller('ArticleEditController',['$scope','requestHandler','Flash','
 
     //To update Latest Articles
     $scope.doUpdateArticles = function(){
-
         if(!$scope.imageUpload){
             delete $scope.articles.imageurl;
         }
         else{
-            $scope.articles.imageurl = $('.image-editor').cropit('export');
+            $scope.articles.imageurl = document.getElementById("base64").value;
+        }
+        
+        requestHandler.postRequest("admin/insertorupdatearticle/",$scope.articles).then(function(response){
 
-        $scope.convertImgToBase64($scope.articles.imageurl, function(base64Img){
-
-            //Convert the image url to base64 when image is not edited
-            $scope.articles.imageurl=base64Img;
-          
-        });
-        }//Convert the image url to base64 when image is edited
-          
-            requestHandler.postRequest("admin/insertorupdatearticle/",$scope.articles).then(function(response){
                 successMessage(Flash,"Successfully Updated");
                 $location.path("articles");
-
             }, function () {
                 errorMessage(Flash, "Please try again later!")
-            });
-
+        });
 
     };
 

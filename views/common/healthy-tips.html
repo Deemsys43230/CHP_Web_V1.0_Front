@@ -50,7 +50,7 @@ img:hover{color:red;}
                         </div>
                     </div>
 
-                    <div class="text-center">
+                    <div class="text-center" ng-show="pager">
                         <ul class="pager">
                             <li ng-hide="pagination.pageNumber == 1" ng-click="pagination.pageNumber=pagination.pageNumber-1" onClick="window.scrollTo(0,0);"><a class="main-button" href=""> <i class="fa fa-angle-left"></i>  Previous Page  </a></li>&nbsp;&nbsp;&nbsp;&nbsp;
                             <li ng-hide="pagination.pageNumber >= articleList.totalrecords/pagination.itemsPerPage" ng-click="pagination.pageNumber=pagination.pageNumber+1" onClick="window.scrollTo(0,0);"><a class="main-button" href="">   Next Page   <i class="fa fa-angle-right"></i> </a></li>
