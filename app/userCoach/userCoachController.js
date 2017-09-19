@@ -227,6 +227,7 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
         $scope.getMessageParam.offset=0;
         requestHandler.postRequest("readMessage/",$scope.getMessageParam).then(function(response){
             $scope.totalChatMessages=response.data.totalrecords;
+            if($scope.totalChatMessages>0){
             $scope.chatMessages= response.data.chats;
             $scope.chatMessages.userid= response.data.chats[0].userid;
             $scope.showLoadMore=false;
@@ -256,6 +257,9 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
                 }
 
             });
+            }else{
+                $scope.chatMessages= response.data.chats;
+            }
             setTimeout(function(){ $('.msg_container_base').scrollTop($('.msg_container_base')[0].scrollHeight); }, 500);
         });
     };

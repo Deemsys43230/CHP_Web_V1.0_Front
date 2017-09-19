@@ -545,7 +545,7 @@
         <!-- Register Form -->
         <div class="common_model">
             
-            <div class="col-md-8">
+            <div class="col-md-8 margin-bottom-10">
             <table class="table table-bordered table-striped">
                 <tr>
                     <td class="col-md-6 text-bold">Day</td>
@@ -592,19 +592,19 @@
                     <td class="col-md-6">{{workoutPlanItemDetails.equipments!=""?workoutPlanItemDetails.equipments:"&nbsp;-"}}</td>
                 </tr>
                 <tr>
-                    <td class="col-md-6">Is Optional&nbsp;?</td>
+                    <td class="col-md-6 text-bold">Is Optional&nbsp;?</td>
                     <td class="col-md-6">{{workoutPlanItemDetails.isoptional==1?"Yes":"No"}}</td>
                 </tr>
             </table>
             </div>
-            <div class="col-md-4 margin-bottom-10">
+            <div class="col-md-4">
                 <img class="add-exercise-img" width="220" height="208" ng-src="{{workoutPlanItemDetails.exerciseimage}}" ng-if="workoutPlanItemDetails.exerciseimage&&workoutPlanItemDetails.videosource==null">
                 <iframe width="220" height="220" ng-src="{{workoutPlanItemDetails.videosource | trusted}}" ng-if="workoutPlanItemDetails.videosource!=null&&workoutPlanItemDetails.exerciseimage" frameborder="0" allowfullscreen></iframe>
                 
-                <div class="margin-top-10 text-center exercise-btn">
+                <div class="margin-top-15 text-center exercise-btn padding-top-15">
                 <a href="" class="btn register_button text-center" ng-click="doSetUnsetExerciseItem(workoutPlanItemDetails.id,workoutPlanItemDetails.date)" ng-show="workoutPlanItemDetails.isDone==0">Done</a>
                 <a href="" class="btn register_button request_sent text-center" ng-click="doSetUnsetExerciseItem(workoutPlanItemDetails.id,workoutPlanItemDetails.date)" ng-hide="workoutPlanItemDetails.isDone==0">Not&nbsp;Done</a>
-            </div>
+                </div>
             </div>
         </div>
     </section>
