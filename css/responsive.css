@@ -547,7 +547,8 @@
     }
 
     h5.classic-title {
-        font-size: 14px!important;
+        font-size: 13px!important;
+        line-height: 18px !important;
     }
 
     .form-wrapper {
@@ -688,7 +689,7 @@
 
     input[type=radio]+ label
     {
-        padding:5px 15px
+        padding:5px 12px
     }
 
     .container{
@@ -742,7 +743,8 @@
     }
 
     h5.classic-title {
-        font-size: 14px!important;
+        font-size: 13px!important;
+        line-height: 18px !important;
     }
     /*.cal-icon{
        display: table-cell;
@@ -758,6 +760,7 @@
 
     h5.classic-title {
         font-size: 15px!important;
+        line-height: 21px !important;
     }
 
     .form-wrapper {
@@ -1005,6 +1008,7 @@
 
     h5.classic-title {
         font-size: 16px!important;
+        line-height: 22px !important;
     }
 
     .form-wrapper {
@@ -1221,6 +1225,10 @@
 }
 
 @media (min-width: 1200px) and (max-width: 1300px){
+    h5.classic-title {
+    font-size: 16px!important;
+    line-height: 22px !important;
+}
     .session input[type=radio] + label{
         padding: 0 10px ;
     }

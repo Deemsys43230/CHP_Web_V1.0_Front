@@ -12,10 +12,10 @@
         
     <div>
         <div class="row">
-            <div class="col-md-6"> 
-            <div class="col-lg-12 col-md-12 col-sm-12 no-padding margin-top-15">
-                <div class="col-lg-4 col-sm-12 col-md-4 demo-font client-content">
-                    <span ng-show="coachclientdetails.unitPreference==1">
+            <div class="col-md-6 col-lg-6 col-sm-6"> 
+                <div class="col-lg-12 col-md-12 col-sm-12 no-padding margin-top-15">
+                    <div class="col-lg-4 col-sm-12 col-md-4 demo-font client-content">
+                        <span ng-show="coachclientdetails.unitPreference==1">
                             <span>{{demographyDeatil.height==null?"N/A":demographyDeatil.height}}</span>
                         </span>
                         <span ng-show="coachclientdetails.unitPreference==2" >
@@ -24,8 +24,8 @@
                         <span class="text-bold">
                             <h4>Height <span ng-show="coachclientdetails.unitPreference==1"><small>(cms)</small></span> <span ng-show="coachclientdetails.unitPreference==2"><small>(feet,inches)</small></span></h4>
                         </span>
-                </div>  
-                <div class="col-lg-4 col-sm-12 col-md-4 demo-font client-content">
+                    </div>  
+                    <div class="col-lg-4 col-sm-4 col-md-4 demo-font client-content">
                         <span ng-show="coachclientdetails.unitPreference==1">
                             <span>{{demographyDeatil.weight==null?"N/A":demographyDeatil.weight}}</span>
                         </span>
@@ -35,33 +35,33 @@
                         <span class="text-bold">
                             <h4>Weight <span ng-show="coachclientdetails.unitPreference==1"><small>(kgs)</small></span> <span ng-show="coachclientdetails.unitPreference==2"><small>(lbs)</small></span></h4>
                         </span>
-                </div>
-                <div class="col-lg-4 col-sm-12 col-md-4 demo-font client-content">
+                    </div>
+                    <div class="col-lg-4 col-sm-4 col-md-4 demo-font client-content">
                          <span>{{demographyDeatil.hip==null?"N/A":demographyDeatil.hip}}</span><br/><br/>
                         <span class="text-bold">
                             <h5>Hip <small>(Inches)</small></h5>
                         </span>  
-                </div>
-                <div class="col-lg-4 col-sm-12 col-md-4 demo-font client-content">
+                    </div>
+                    <div class="col-lg-4 col-sm-4 col-md-4 demo-font client-content">
                         <span>{{demographyDeatil.waist==null?"N/A":demographyDeatil.waist}}</span><br/><br/>
                         <span class="text-bold">
                             <h5>Waist <small>(Inches)</small></h5>
                         </span>               
-                </div>
-                <div class="col-lg-4 col-sm-12 col-md-4 demo-font client-content">
+                    </div>
+                    <div class="col-lg-4 col-sm-4 col-md-4 demo-font client-content">
                         <span>{{demographyDeatil.bmi==null?"N/A":demographyDeatil.bmi}}</span><br/><br/>
                         <span class="text-bold">
                             <h5>BMI <small>(Kg/m<sup>2</sup>)</small></h5>
                         </span>                                    
-                </div>
-                <div class="ccol-lg-4 col-sm-12 col-md-4 demo-font client-content">
+                    </div>
+                    <div class="ccol-lg-4 col-sm-4 col-md-4 demo-font client-content">
                         <span> {{demographyDeatil.targetweight==null?'N/A':demographyDeatil.targetweight}} </span><br/><br/>
                         <span class="text-bold">
                             <h5>Target Weight &nbsp;<span ng-show="coachclientdetails.unitPreference==1"><small>(kgs)</small></span> <span ng-show="coachclientdetails.unitPreference==2"><small>(lbs)</small></span></h5>
                         </span>
+                    </div>
                 </div>
             </div>
-        </div>
             <div class="col-lg-6 col-md-6 col-sm-6 margin-top-20">
                 <span class="col-lg-12 col-sm-12 col-md-12 notesSpan">Notes 
                     <a href="" type="button" style="padding:0px 5px;" class="btn btn-danger pull-right margin-left-5" ng-click="doClearAllNotes(coachclientdetails.userid)">Clear All</a>
@@ -413,7 +413,7 @@
                                     <span ng-show="budgetDetails.OverorUnderStatus==2"><span class="fa fa fa-thumbs-up text-green">&nbsp;&nbsp;</span>Under Budget</span>
                             </span>
                         </h5>
-                            <div class="col-lg-5 col-md-12 col-sm-12 margin-top-10">
+                            <div class="col-lg-5 col-md-5 col-sm-12 no-padding margin-top-10">
                                 <div class="circle-wrapper">
                                     <div class="circle-progress ng-cloak font-14" ng-style="getStyle()">{{budgetDetails.Net}}</div>
                                     <div    round-progress
@@ -435,7 +435,7 @@
                                 <p class="text-gray text-center">of {{budgetDetails.Budget}} cals.</p>
                             </div>
 
-                        <div class="col-lg-7 col-md-12 col-sm-12">
+                        <div class="col-lg-7 col-md-7 col-sm-12 no-padding">
                             <div class="label-update">
                                 <span class="label-text">Budget</span>
                                 <span class="label-count blue">{{budgetDetails.Budget}}</span>
@@ -573,11 +573,11 @@
                     <thead>
                         <tr class="warning">
                             <!-- <th class="col-md-2">User Id</th> -->
-                            <th class="col-md-3">Plan Name</th>
-                            <th class="col-md-3">Plan Description</th>
-                            <th class="col-md-2">Start Date</th>
-                            <th class="col-md-2">End Date</th>
-                            <th class="col-md-2">Options</th>
+                            <th class="col-md-3 col-lg-3 col-sm-3">Plan Name</th>
+                            <th class="col-md-3 col-lg-3 col-sm-3">Plan Description</th>
+                            <th class="col-md-2 col-lg-2 col-sm-2">Start Date</th>
+                            <th class="col-md-2 col-lg-2 col-sm-2">End Date</th>
+                            <th class="col-md-2 col-lg-2 col-sm-2">Options</th>
                         </tr>
                     </thead>
 
@@ -608,44 +608,44 @@
                 <div class="col-lg-10 col-sm-10 col-md-10" >
                     <table class="table table-bordered table-striped">
                         <tr>
-                            <td class="col-md-4 text-bold">Name</td>
-                            <td class="col-md-8">{{planView.username}}</td>
+                            <td class="col-md-4 col-lg-4 col-sm-4 text-bold">Name</td>
+                            <td class="col-md-8 col-lg-8 col-sm-8">{{planView.username}}</td>
                         </tr>
                         <tr>
-                            <td class="col-md-4 text-bold">Email ID</td>
-                            <td class="col-md-8">{{planView.coachname}}</td>
+                            <td class="col-md-4 col-lg-4 col-sm-4 text-bold">Email ID</td>
+                            <td class="col-md-8 col-lg-8 col-sm-8">{{planView.coachname}}</td>
                         </tr>
                         <tr>
-                            <td class="col-md-4 text-bold">Plan Name</td>
-                            <td class="col-md-8">{{planView.subscriptionname}}</td>
+                            <td class="col-md-4 col-lg-4 col-sm-4 text-bold">Plan Name</td>
+                            <td class="col-md-8 col-lg-8 col-sm-8">{{planView.subscriptionname}}</td>
                         </tr>
                         <tr>
-                            <td class="col-md-4 text-bold">Plan Description</td>
-                            <td class="col-md-8">{{planView.subscriptiondescription}}</td>
+                            <td class="col-md-4 col-lg-4 col-sm-4 text-bold">Plan Description</td>
+                            <td class="col-md-8 col-lg-8 col-sm-8">{{planView.subscriptiondescription}}</td>
                         </tr>
                         <tr>
-                            <td class="col-md-4 text-bold">Start Date</td>
-                            <td class="col-md-8">{{planView.startdate}}</td>
+                            <td class="col-md-4 col-lg-4 col-sm-4 text-bold">Start Date</td>
+                            <td class="col-md-8 col-lg-8 col-sm-8">{{planView.startdate}}</td>
                         </tr>
                         <tr>
-                            <td class="col-md-4 text-bold">End Date</td>
-                            <td class="col-md-8">{{planView.enddate}}</td>
+                            <td class="col-md-4 col-lg-4 col-sm-4 text-bold">End Date</td>
+                            <td class="col-md-8 col-lg-8 col-sm-8">{{planView.enddate}}</td>
                         </tr>
                         <tr>
-                            <td class="col-md-4 text-bold">Amount</td>
-                            <td class="col-md-8">{{planView.amount}}</td>
+                            <td class="col-md-4 col-lg-4 col-sm-4 text-bold">Amount</td>
+                            <td class="col-md-8 col-lg-8 col-sm-8">{{planView.amount}}</td>
                         </tr>
                         <tr>
-                            <td class="col-md-4 text-bold">Currency Type</td>
-                            <td class="col-md-8">{{planView.currencytype}}</td>
+                            <td class="col-md-4 col-lg-4 col-sm-4 text-bold">Currency Type</td>
+                            <td class="col-md-8 col-lg-8 col-sm-8">{{planView.currencytype}}</td>
                         </tr>
                         <tr>
-                            <td class="col-md-4 text-bold">Reference</td>
-                            <td class="col-md-8">{{planView.reference}}</td>
+                            <td class="col-md-4 col-lg-4 col-sm-4 text-bold">Reference</td>
+                            <td class="col-md-8 col-lg-8 col-sm-8">{{planView.reference}}</td>
                         </tr>
                         <tr>
-                            <td class="col-md-4 text-bold">Payment Mode</td>
-                            <td class="col-md-8">{{planView.paymentmode}}</td>
+                            <td class="col-md-4 col-lg-4 col-sm-4 text-bold">Payment Mode</td>
+                            <td class="col-md-8 col-lg-8 col-sm-8">{{planView.paymentmode}}</td>
                         </tr>
                     </table>
                 </div>
