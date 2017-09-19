@@ -117,30 +117,11 @@ coachApp.controller('EventController',['$scope','requestHandler','Flash','$route
             });
             $scope.loaded=false;
             $scope.paginationLoad=true;
-           /* $scope.doGetUpcomingEvent($scope.eventList[0].coachid);*/
 		});
 
 	};
 
 
-
-/*
-    */
-/*Do get upcoming Event By Coach*//*
-
-    $scope.doGetUpcomingEvent = function(coachid){
-        requestHandler.postRequest("coach/upcomingevents/",{"coachid":coachid}).then(function(response){
-            $scope.result= response.data.Response;
-            if(response.data.Response == "Success"){
-              $scope.canEdit=1;
-            }
-            else{
-                $scope.canEdit=0;
-            }
-        });
-    };
-
-*/
 
 
     /*Do Delete Event By Coach*/
