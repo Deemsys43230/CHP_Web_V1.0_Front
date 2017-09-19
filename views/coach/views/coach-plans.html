@@ -6,7 +6,7 @@
             <a href="#dashboard" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back to Dashboard</a>
             <a id="modal_meal_plan" href="#mealPlan" class="back-button pull-right margin-left-5" ng-click="reset()"><i class="fa fa-plus-circle"></i> Add Meal Plan</a>
             <div flash-message="2000" class="col-lg-3 col-md-3 col-sm-3 pull-right no-padding"></div>
-            <h5 class="classic-title"><a href="#advices">Quote</a>&nbsp;&nbsp;|&nbsp;&nbsp;<span><a href="#coach-meal-plans">My Meal Plans</a></span>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#coach-workout-plans">My Workout Plans</a></h5>
+            <h5 class="classic-title"><a href="#advices">Quote</a>&nbsp;&nbsp;|&nbsp;&nbsp;<span><a href="#coach-meal-plans">Meal Plans</a></span>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#coach-workout-plans">Workout Plans</a></h5>
         </div>
             
         <div class="col-md-12 col-md-12 col-sm-12">    
@@ -30,7 +30,7 @@
                         <td class="wrap-all">{{plan.description}}</td>
                         <td>{{plan.plandays>1?plan.plandays+"&nbsp;Days":plan.plandays+"&nbsp;Day"}}</td>
                         <td>
-                            <a href="#coach-plans-view/{{plan.id}}" class="btn-xs btn-primary">My Plan</a>
+                            <a href="#coach-plans-view/{{plan.id}}" class="btn-xs btn-primary">Plan</a>
                             <a href="" class="btn-xs btn-warning" ng-click="doEditCoachMealPlan(plan.id)">Edit</a>
                             <a href="" class="btn-xs btn-danger" ng-click="doDeleteCoachMealPlan(plan.id)">Delete</a>
                         </td>
