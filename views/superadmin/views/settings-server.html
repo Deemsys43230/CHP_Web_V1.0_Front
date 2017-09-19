@@ -35,7 +35,7 @@
                         <h4>Outgoing Mail Server :</h4>
                     </div>
                     <div class="col-md-9">
-                        <input class="form-control margin-bottom-20" name="outgoingmailserver" ng-model="serverSettings.outgoingmailserver" required>
+                        <input type="text" class="form-control margin-bottom-20" name="outgoingmailserver" ng-model="serverSettings.outgoingmailserver" required>
                         <span ng-show="serverSettingsForm.outgoingmailserver.$dirty&&serverSettingsForm.outgoingmailserver.$invalid">
                                 <span class="error-message" ng-show="serverSettingsForm.outgoingmailserver.$error.required"><span>Required.</span></span>
                          </span>
@@ -44,7 +44,7 @@
                         <h4>Port :</h4>
                     </div>
                     <div class="col-md-9">
-                        <input class="form-control margin-bottom-20" name="port" ng-model="serverSettings.port" maxlength="5" required>
+                        <input type="text" class="form-control margin-bottom-20" name="port" ng-model="serverSettings.port" maxlength="5" required>
                         <span ng-show="serverSettingsForm.port.$dirty&&serverSettingsForm.port.$invalid">
                                 <span class="error-message" ng-show="serverSettingsForm.port.$error.required"><span>Required.</span></span>
                          </span>
@@ -53,7 +53,7 @@
                         <h4>SSL :</h4>
                     </div>
                     <div class="col-md-9">
-                        <input class="form-control margin-bottom-20" name="ssl" ng-model="serverSettings.ssl" maxlength="15" required>
+                        <input type="text" class="form-control margin-bottom-20" name="ssl" ng-model="serverSettings.ssl" maxlength="15" required>
                         <span ng-show="serverSettingsForm.ssl.$dirty&&serverSettingsForm.ssl.$invalid">
                                 <span class="error-message" ng-show="serverSettingsForm.ssl.$error.required"><span>Required.</span></span>
                          </span>
