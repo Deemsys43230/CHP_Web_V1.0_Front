@@ -16,6 +16,8 @@
                 <div class="search-content">
                     <input class="coach-input" ng-model="coachsearch" placeholder="Search coach here..">
                 </div>
+                <div ng-show="usercoachlist.length>0" class="padding-top-15"><strong>VIEW COACH INVITATIONS</strong></div>
+
                 <div ng-if="loaded">
                     <div class="loader-style">
                         <div class="loader"></div>
@@ -24,7 +26,6 @@
                 <div class="coach-list">
                     <div class="content_scrollbar" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#eee'}" nice-scroll-end="doGetCoachListByUser(false)">
                         <div ng-show="usercoachlist.length>0" class="coach-view-width">
-                            <div class="padding-top-15"><strong>VIEW COACH INVITATIONS</strong></div>
                             <div class="coach-view col-lg-12 col-md-12 col-sm-12" ng-class="{'active': usercoach.userid == usercoachdetails.userid }" ng-repeat="usercoach in usercoachfilter = (usercoachlist | startsWithLetterSearch : coachsearch )" ng-click="doGetCoachDetailsByUser(usercoach.userid)">
                                 <div class="col-lg-2 col-md-2 col-sm-2 no-padding">
                                     <img class="img-circle" ng-src="{{usercoach.imageurl | trusted}}">
@@ -48,7 +49,7 @@
 
                         <div ng-show="usercoachlist.length==0" class="text-center margin-top-50">
                             <img src="../../images/no-coach-small.png" width="120" height="120"/>
-                            <h3 class="text-gray">NO COACH FOUND!!!</h3><br/><br/><br/>
+                            <h3 class="text-gray">NO INVITATIONS FOUND!!!</h3><br/><br/><br/>
                         </div>
 
                     </div>

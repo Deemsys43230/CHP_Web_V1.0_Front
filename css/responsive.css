@@ -149,30 +149,60 @@
     .easyPieChart {
         margin: 0 40px 20px 0;
     }
+    .chat-window {
+        bottom: -19px;
+        right: 0;
+        position: absolute;
+        float: right;
+        margin-right: 20px;
+        z-index: 2;
+    }
     
 }
 
+@media (max-width: 1024px) {
+.chat-window {
+        bottom: -28px;
+        position: absolute;
+        margin-bottom: 0px !important;
+    }
+    
+}
 @media (max-width: 767px) {
 
-    h1.slider-font .h4{
-        font-size:15px!important;
-    }
+   
 
     .navbar-default{
         padding:7px 10px 7px 10px;
     }
 
-    h1.slider-font .h4 ul li{
-        line-height:20px!important;
+    /*h1.slider-font .h4{
+        font-size:15px!important;
     }
-
     .slider-font{
-        font-size:30px!important;
+        font-size:16px!important;
+        line-height: 30px;
     }
 
-    .slider-hight{
-        height:400px;
+    .slider-font span.small{
+        color:#fff;
+        font-size:16px;
     }
+    .slideshow-element h1 {
+        line-height: 27px !important;
+    }
+    h1.slider-font{
+        line-height:30px!important;
+    }
+
+    .slider-font ul li{
+        line-height:25px!important;
+    }
+
+    .divH1 {
+        font-size: medium;
+        line-height: 30px;
+    }*/
 
     #form p{
         margin-right:-35px!important;
@@ -534,6 +564,7 @@
     .plan {
         width: 47%;
     }
+
 }
 
 @media (min-width: 768px){
@@ -1252,10 +1283,44 @@
 }
 
 @media (max-width: 510px){
+    .slider-font span.small {
+        color: #fff;
+        font-size: 12px !important;
+        line-height: 0;
+    }
+    .divH1 {
+        font-size: 8px;
+        line-height: 12px;
+    }
+    .slide3-font {
+        font-size: 12px !important;
+        line-height: 0px;
+    }
+    .slider-font h1 {
+        font-size: 30px;
+        line-height: 18px;
+    }
     .hidden-xss{
         display: none;
     }
+    h2 {
+        font-size: 22px;
+        line-height: 20px;
+    }
+    .slider-font h1 .h4 {
+        font-weight: 500;
+        font-size: 10px;
+        text-transform: none!important;
+    }
+    .button-xs{
+        font-size: 12px;
+        padding: 2px 10px;
+    }
 
+    h5.classic-title {
+        font-size: 13px!important;
+        line-height: 18px !important;
+    }
     .navbar-default .navbar-toggle i {
         color: #bbb;
         font-size: 1em;
@@ -1293,24 +1358,22 @@
         margin: 20px 0 20px 0!important;
     }
 
-    .slider-font{
-        font-size:25px!important;
-        line-height: 30px;
-    }
-
-    .slider-font{
-        font-size:25px!important;
+   /* .slider-font{
+        font-size:20px!important;
         line-height: 30px;
     }
 
     .slider-font span.small{
         color:#fff;
-        font-size:25px;
+        font-size:20px;
     }
 
     h1.slider-font{
-        line-height:35px!important;
+        line-height:30px!important;
     }
+    .slider-hight{
+        height:300px !important;
+    }*/
     .plan {
         width: 88%;
     }

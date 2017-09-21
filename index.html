@@ -14,8 +14,6 @@
         .btn-small {
             padding: 14px 50px !important;
         }
-
-
     </style>
     <script>
         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -127,34 +125,93 @@
 
     <div ng-include src="'views/common/login-popup.html'"></div>
 
-    <!-- Start Purchase Section -->
-    <div class="section purchase">
-        <div class="container slider-hight">
-            <div class="col-md-7 col-sm-9 col-xs-10">
-                <div id="text-slideshow">
-                    <div class="slideshow-element">
-                        <div class="slider-font margin-bottom-20" style="padding-top: 60px">
+
+    <div class="container" style="width: 100% !important;">
+    <div class="row">
+        <!-- Carousel -->
+        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner">
+                <div class="item active">
+                    <img src="images/slider-back-1.jpg" alt="First slide">
+                    <!-- Static Header -->
+                    <div class="slider-font margin-left-10">
+                        <div class="col-md-7 col-sm-9 col-xs-12 margin-bottom-20">
                             <span class="hidden-xs"><br/></span>
-                            <h1><span class="small">YOU'VE COME TO THE RIGHT PLACE.<br/>Determine a healthy life-style for prolonging your life.</span></h1><br/><br/><br/>
-                            <div class="divH1 h4 margin-top-20" style="padding-top: 20px">
+                            <h1><span class="small uppercase">YOU'VE COME TO THE RIGHT PLACE.<br/>Determine a healthy life-style for prolonging your life.</span></h1>
+                            <span class="hidden-xs margin-top-20"><br/></span>
+                            <div class="divH1 h4">
                                 <br/>
-                                Just record your weight. We,<br/><br/>
-                                <div class="col-md-12">
-                                    <div class="col-md-12">
+                                Just record your weight. We,
+                                <span class="hidden-xs"><br/><br/></span>
+                                    <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
                                         <ul>
                                             <li>Reveal your daily needed calorie budget. Grab it and Get Started!!</li>
                                             <li>Provide you a better food and exercise catalogue.</li>
                                             <li>Asist you with in-time pertinent advice from our knowledgable experts.</li>
                                         </ul>
                                     </div>
-                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="item">
+                    <img src="images/slider-back-4.jpg" alt="Second slide">
+                    <!-- Static Header -->
+                    <div class="slider-font margin-left-10">
+                        <img width="100%" height="auto" src="images/responsive.png"/>
+                        <div class="col-md-7 col-sm-9 col-xs-12">
+                            <h2><span class="small" style="font-size: 24px;">RECORD YOUR DAILY INTAKE AND WORKOUT ROUTINES ANYWHERE AT ANYTIME!</span></h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="item">
+                    <img src="images/slider-back-5.jpg" alt="Third slide">
+                    <!-- Static Header -->
+                    <div class="slider-font margin-top-30 margin-left-10">
+                    <h1 class="col-md-7 col-sm-9 col-xs-12 slider-font margin-bottom-20">
+                            <span class="hidden-xs"><br/></span>
+                            <span class="slide3-font">ACHIEVE YOUR HEALTH AND <br/>FITNESS GOAL WITH A HEALTHY <br/>AND NUTRITIONAL FOOD HABIT.<br/>
+                            <span class="text-bold h4"><span class="hidden-xs"><br/></span>
+                                Register with us! we wil take care of you.
+                            </span>
+                            <a href="" class="btn-system btn-large button-xs" onclick="$('.loginNow').click()"><i class="fa fa-user"></i> Register Now</a>
+                        </h1>
+                    </div>
+                </div>
+            </div>
+        </div><!-- /carousel -->
+    </div>
+</div>
+
+    <!-- Start Purchase Section -->
+    <!-- <div class="section purchase">
+        <div class="container slider-hight">
+            <div class="col-md-7 col-sm-9 col-xs-10">
+                <div id="text-slideshow">
+                    <div class="slideshow-element">
+                        <div class="slider-font margin-bottom-20" style="padding-top: 60px">
+                            <span class="hidden-xs"><br/></span>
+                            <h1><span class="small">YOU'VE COME TO THE RIGHT PLACE.<br/>Determine a healthy life-style for prolonging your life.</span></h1>
+                            <span><br/><br/><br/></span>
+                            <div class="divH1 h4 margin-top-20" style="padding-top: 20px">
+                                <br/>
+                                Just record your weight. We,
+                                <span class="hidden-xs"><br/><br/></span>
+                                    <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                                        <ul>
+                                            <li>Reveal your daily needed calorie budget. Grab it and Get Started!!</li>
+                                            <li>Provide you a better food and exercise catalogue.</li>
+                                            <li>Asist you with in-time pertinent advice from our knowledgable experts.</li>
+                                        </ul>
+                                    </div>
                             </div>
                         </div>
                     </div>
                     <div class="slideshow-element">
                         <img width="100%" height="auto" src="images/responsive.png"/>
                         <div class="slider-font">
-                            <h1>RECORD YOUR DAILY INTAKE AND WORKOUT ROUTINES ANYWHERE AT ANYTIME!</h1>
+                            <h1><span class="small">RECORD YOUR DAILY INTAKE AND WORKOUT ROUTINES ANYWHERE AT ANYTIME!</span></h1>
                         </div>
                     </div>
                     <div class="slideshow-element">
@@ -173,18 +230,17 @@
             <div class="section-video-content text-center hidden">
                 <h1 class="fittext wite-text uppercase">
                     Modern way of Digital Weight <br/>Loss Solution for this modern world
-                </h1>
+                </h1> -->
 
                 <!-- End Animations Text -->
 
 
                 <!-- Start Buttons -->
-                <a class="btn-system btn-large"><i class="fa fa-download"></i> Get Our Mobile App Soon</a>
+                <!-- <a class="btn-system btn-large"><i class="fa fa-download"></i> Get Our Mobile App Soon</a>
 
-            </div>
+            </div> -->
             <!-- End Section Content -->
-        </div><!-- .container -->
-    </div>
+        <!-- </div> --><!-- .container -->
     <!-- End Purchase Section -->
 
     <!-- Start Services Section -->
@@ -336,6 +392,7 @@
     </div> 
 </div>
 <!-- End Content -->
+</div>
 
 <!-- End Services Section -->
 <div class="container">
@@ -508,32 +565,10 @@
             // Components
             slide_links             :   'blank',    // Individual links for each slide (Options: false, 'num', 'name', 'blank')
             slides                  :   [           // Slideshow Images
-                {image : 'images/slider-back-1.jpg', title : '', thumb : '', url : ''},
-                {image : 'images/slider-back-4.jpg', title : '', thumb : '', url : ''},
-                {image : 'images/slider-back-5.jpg', title : '', thumb : '', url : ''}
+                {image : 'images/gym.jpg', title : '', thumb : '', url : ''}
             ]
 
         });
-
-        (function($){
-            $("#text-slideshow > div:gt(0)").hide();
-            $('.slideshow-element').css('opacity',1);
-            var count=1;
-            theme = {
-                beforeAnimation:function(){
-                    if(count!=1){
-
-                        $('#text-slideshow > div:first')
-                                .fadeOut(0)
-                                .next()
-                                .fadeIn(1000)
-                                .end()
-                                .appendTo('#text-slideshow');
-                    }
-                    count+=1;
-                }
-            };
-        })(jQuery);
     });
 
 $('#featuresDiv').load('images/info/features.svg');

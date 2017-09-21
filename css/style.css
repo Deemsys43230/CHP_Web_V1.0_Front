@@ -15938,7 +15938,7 @@ button.reduce_button:hover{
 
 .nav-dot:last-of-type { margin: 0; }
 
-.slideshow-element{
+/*.slideshow-element{
     opacity:0;
 }
 
@@ -15951,7 +15951,7 @@ button.reduce_button:hover{
 
 .slider-hight{
     height:450px;
-}
+}*/
 
 .calendar-button{
     border-radius:0!important;
@@ -15959,7 +15959,7 @@ button.reduce_button:hover{
     padding:8px 13px!important;
 }
 
-.slider-font{
+/*.slider-font{
     font-size:35px;
     font-family:  Century Gothic, sans-serif;
     color:#fff;
@@ -15994,7 +15994,7 @@ h1.slider-font .h4 ul li{
     font-family:inherit;
     text-shadow:none;
     line-height:25px!important;
-}
+}*/
 
 a.button-wrap:hover li{
     color:#fff!important;
@@ -17898,4 +17898,67 @@ select.event:focus {
     border: 1px solid #c3c3c3;
     padding-top: 95px;
     height: 410px;
+}
+
+/*for home page carousal image*/
+
+  /* Carousel Styles */
+.carousel-indicators .active {
+      background-color: #2980b9;
+    }
+
+    .carousel-inner img {
+      width: 100%;
+      height: auto !important;
+    }
+    .slider-font img {
+        width: 50%;
+        height: auto !important;
+    }
+
+
+/* Carousel Header Styles */
+
+.slider-font {
+  position: absolute;
+  top: 15%;
+  left: 1.8%;
+  right: auto;
+  width: 95%;
+  color: #fff;
+   font-size:35px;
+    font-family:  Century Gothic, sans-serif;
+    font-weight:200;
+    text-shadow:2px 2px 0 #444;
+}
+
+.slider-font h1 {
+  font-size: 30px;
+  line-height: 26px;
+}
+
+.slider-font span.small{
+    color:#fff;
+    font-size:30px;
+    font-family: Century Gothic,sans-serif;
+}
+
+.slider-font h2 span {
+  font-size: 30px;
+  line-height: 26px;
+}
+.slider-font h1 .h4{
+    font-weight:bold;
+    text-transform: none!important;
+}
+
+.slider-font a{
+    font-family:inherit;
+    text-shadow:none;
+    line-height:25px!important;
+}
+.slide3-font {
+    font-weight: 500;
+    font-size: 35px !important; 
+    line-height: 55px;
 }

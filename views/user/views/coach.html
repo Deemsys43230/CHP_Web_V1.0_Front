@@ -85,7 +85,7 @@
                             </div>    
                         </a>                         
                     </div>
-                    <div ng-show="!mycoachfilter.length" class="text-center margin-top-50">
+                    <div ng-show="!mycoachfilter.length" ng-hide="mycoachlist.length==0" class="text-center margin-top-50">
                         <img src="../../images/no-coach-small.png" width="120" height="120"/>
                         <h3 class="text-gray">NO COACH FOUND!!!</h3><br/><br/><br/>
                     </div>
