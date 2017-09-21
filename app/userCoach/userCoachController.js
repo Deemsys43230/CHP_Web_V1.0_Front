@@ -515,7 +515,7 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
                                     "offset":($scope.scrollnation.scrollEndCount)*$scope.scrollnation.itemsPerScroll
                                  };
 
-        requestHandler.postRequest("getCoachRatingsandReviews/"+$routeParams.id+"/", $scope.coachRatingPagination).then(function (response) {
+        requestHandler.postRequest("getCoachRatingsandReviews/"+$routeParams.id+"/", $scope.coachRatingScrollnation).then(function (response) {
             $scope.checkReviews = $scope.checkReviews.concat(response.data.reviews);
 
             userTypeArray=[];

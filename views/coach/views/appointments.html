@@ -1,0 +1,101 @@
+
+<!-- Start Page Banner -->
+
+<div class="page-banner" ng-cloak class="ng-cloak">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 min-height-450">
+                <a href="#dashboard" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back to Dashboard</a>
+                <div flash-message="2000" class="col-lg-4 col-md-4 col-sm-4 pull-right no-padding"></div>
+                <h5 class="classic-title"><a href="#events">Events</a>&nbsp;|&nbsp;<span><a href="#appointments">Appointments</a></span></h5>
+                <div class="row margin-top-10 margin-bottom-10">
+                    <div ng-if="loaded">
+                        <div class="loader-style">
+                            <div class="loader"></div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <div class="col-lg-8 col-md-8 col-sm-8">
+                           <simple-calendar options="calendarOptions"></simple-calendar>
+                            
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 no-padding">
+                            <div class="appointment-div text-bold">APPOINTMENTS&nbsp;-&nbsp;{{currentDate}}</div>
+                          
+                            <div class="book-appointment">
+                                  <div class="enable-btn" ng-show="enableAppointment">
+                                    <img src="../../images/clock.png" height="120" width="120" /><br/>
+                                    <div><a href="" class="btn btn-success" ng-click="enableAppointment=false" ng-disabled="previousDate">Enable Appointment</a></div>
+                                    <h4 class="margin-top-10 text-bold margin-left-10"><a href="" ng-click="coachGetAppointmentList()">Appointment List</a></h4>
+                                  </div>
+                                <div class="schedule-btn" ng-show="!enableAppointment">
+                                    <form name="bookingForm" novalidate>
+                                       <div class="col-md-12 margin-top-20">
+                                            <div class="col-md-6 margin-top-5"><h5 class="text-bold">Client Counts :</h5></div>
+                                            <div class="col-md-6">
+                                                <input type="text" ng-model="booking.count" name="count" class="form-control" required/>
+                                                <span ng-show="bookingForm.count.$dirty&&bookingForm.count.$invalid">
+                                                    <span class="error-message" ng-show="bookingForm.count.$error.required"><span>Required.</span></span>
+                                                </span> 
+                                            </div>
+                                            <div class="margin-top-50 text-center"><a href="#" onclick="return false;" ng-disabled="bookingForm.$invalid" class="btn btn-success" ng-click="coachScheduleAppointment() || reset()">Schedule Appointment</a></div>
+                                            <h3  class="text-success" ng-show="createdAppointment"><i class="fa fa-check-circle">&nbsp;&nbsp;Appointment is Scheduled </i></h3> 
+                                            <h4 class="margin-top-10 text-bold text-center"><a href="" ng-click="coachGetAppointmentList()">Appointment List</a></h4>
+                                       </div> 
+                                     
+                                    </form>
+                                </div> 
+
+
+                                <div class="coach-list content_scrollbar margin-left-5" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#eee'}" ng-show="bookingList">
+                                    <div ng-show="appointments.length>0" class="coach-view-width">
+                                            <div class="coach-view col-lg-12 col-md-12 col-sm-12" ng-repeat= "userAppointment in userAppointmentList">
+                                                <div class="col-lg-2 col-md-2 col-sm-2 no-padding">
+                                                    <img class="img-circle" ng-src="{{userAppointment.imageurl | trusted}}">
+                                                </div>
+                                                <div class="col-lg-10 col-md-10 col-sm-10 no-padding margin-top-5">
+                                                    <h4 class="col-lg-12 col-md-12 col-sm-12">{{userAppointment.username}}</h4>
+                                                    <p class="col-lg-12 col-md-12 col-sm-12">{{userAppointment.emailid}}</p>
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                        <div ng-show="appointments.length==0" class="text-center margin-top-50">
+                                            <img src="../../images/no-coach-small.png" width="120" height="120"/>
+                                            <h3 class="text-gray">NO APPOINTMENTS FOUND!!!</h3><br/>
+                                        </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- delete confirmation popup-->
+<!-- <div id="modal" class="popupContainer" style="display:none;left: 37%!important;">
+    <header class="popupHeader">
+        <span class="header_title">Confirmation</span>
+        <span class="modal_close"><i class="fa fa-times"></i></span>
+    </header> -->
+
+    <!-- <section class="popupBody"> -->
+        <!-- Register Form -->
+       <!--  <div class="common_model">
+            <div class="text-center"><img src="../../images/alert-ring.png"/></div><br/>
+            <h5 class="text-center">Are you sure want to delete this Event?</h5>
+            <div class="action_btns margin-top-20">
+                <div class="one_half"><a href="" class="btn btn_red modal_close" ng-click="doDeleteEvent()">Yes</a></div>
+                <div class="one_half last modal_close"><a onclick="return false;" class="btn back_btn">No</a></div>
+            </div>
+        </div>
+    </section>
+</div> -->
+
+
+<script type="text/javascript" src="../../js/script.js"></script>

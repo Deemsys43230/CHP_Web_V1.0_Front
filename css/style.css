@@ -17900,6 +17900,120 @@ select.event:focus {
     height: 410px;
 }
 
+/* Calendar */
+  .calendar{
+    padding: 0;
+    border: 1px solid #dddddd;
+    background-color: #fff;
+  }
+  
+  .move-month { 
+    cursor: pointer;    
+   }
+
+  .prev-month { 
+    float: left;
+    color: #ffffff;
+    font-size: 36px;
+    background: #000000;
+    padding: 5px;
+    margin-top: -5px;
+    }
+
+  .next-month { 
+    float: right;
+    color: #ffffff;
+    font-size: 36px;
+    background: #000000;
+    padding: 5px;
+    margin-top: -5px;
+    }
+  
+  .current-month {
+    width: 100%;
+    text-align: center;
+    padding: 20px 8px;
+    border: 1px solid #fdae21;
+    background-color: #fdae21;
+    color: #000000;
+    font-size: 24px;
+    text-transform: uppercase;
+    font-weight: 800;
+  }
+  
+  .week {
+    height: 80px!important;
+    .day:last-child {
+      border-right: none;
+    }
+  }
+  
+  .weekday { 
+    text-align: center;
+    border-right: 1px solid #ddd;
+    color: #fdae21;
+    font-weight: 800;
+    padding: 15px !important;
+    height: 50px;
+    }
+
+   .weekday:last-child {
+    border-right: none;
+   } 
+  
+  .weekday, .day {
+    display: inline-block;
+    width: calc(100% / 7);
+  }
+  
+  .day {
+    height: 80px !important;
+    padding: 30px 49px !important;
+    border: 1px solid #dddddd;
+    border-bottom: none;
+    border-left: none;
+    overflow: hidden;
+    color: #000000;
+  }
+
+  .day:hover{
+    cursor: pointer; 
+    background-color: #fdae21!important;
+  }
+
+  .appointment-div{
+    height: 64px;
+    border: 2px solid #fdae21;
+    text-align: center;
+    padding-top: 20px;
+    font-size: 18px;
+  }
+
+  .book-appointment{
+    border: 2px solid #efe8d8;
+    height: 446px;
+    margin-top: 5px;
+   /* background: #fff9de;*/
+  }
+
+  .schedule-btn{
+    margin-top: 140px;
+    margin-left: 10px;
+    margin-right: 10px;
+    border-radius: 5px;
+    background: rgba(253, 174, 33, 0.31);
+    height: 165px;
+  }
+
+  .enable-btn{
+    margin-top: 100px;
+    margin-left: 125px;
+  }
+
+  .enable-btn img{
+    margin-left: 20px;
+  }}
+
 /*for home page carousal image*/
 
   /* Carousel Styles */

@@ -894,6 +894,21 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'EventEditController'
             }).
+            when('/appointments', {
+                templateUrl: 'views/appointments.html',
+                resolve: {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'coachApp',
+                            files:[
+                                '../../plugin/popup/style.css', 
+                                '../../app/coachAppointment/coachAppointmentController.js'
+                            ]
+                        })
+                    }]
+                },
+                controller:'AppointmentController'
+            }).
             otherwise({
                 redirectTo: '/dashboard'
             });
