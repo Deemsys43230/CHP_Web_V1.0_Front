@@ -7,7 +7,7 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
     $scope.averageRate=0.1;
     $scope.paginationLoad=false;
     $scope.coachInvitations= $route.current.$$route.coachInvitations;
-
+     $scope.isChatMinimized=true;
     var myCoachIdListArray = [];
     // $scope.disablereview=false;
 
@@ -212,7 +212,7 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
 
     //Do Set Chat Message as Read 
     $scope.doReadChatMessage=function(){
-      $scope.setReadMessageParam={"targetid":$scope.currentChatTargetId};
+      $scope.setReadMessageParam={"targetid":$routeParams.id};
       requestHandler.postRequest("setMessageRead/", $scope.setReadMessageParam).then(function(response){
           if(response.data.Response_status==1){
             $scope.unreadChatMessageCount=0;
@@ -221,23 +221,37 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
       })
     };
 
+    
+    setInterval(function(){                        //set 15 seconds interval for repeatedly call a function
+  $scope.doGetChatMessage();
+}, 15000);
+
+     $scope.setChatMinimizedStatus=function(){     //set chat window open close status
+        if($scope.isChatMinimized)
+            $scope.isChatMinimized=false;
+        else
+            $scope.isChatMinimized=true;
+    }
+
     // Do Get Chat Message
-    $scope.doGetChatMessage=function(id){
-        $scope.currentChatTargetId= id;
+    $scope.doGetChatMessage=function(){
         $scope.getMessageParam.offset=0;
+        $scope.getMessageParam={"targetid":$routeParams.id,"offset":0}; 
         requestHandler.postRequest("readMessage/",$scope.getMessageParam).then(function(response){
             $scope.totalChatMessages=response.data.totalrecords;
-            if($scope.totalChatMessages>0){
+             $scope.chatMessages={};
             $scope.chatMessages= response.data.chats;
-            $scope.chatMessages.userid= response.data.chats[0].userid;
+           
             $scope.showLoadMore=false;
             if($scope.chatMessages.length<$scope.totalChatMessages){
                 $scope.showLoadMore=true;
             }
-            
+            if(response.data.chats.length!=0){
+             $scope.chatMessages.userid= response.data.chats[0].userid;
             requestHandler.getRequest("getUserProfile/"+$scope.chatMessages.userid, "").then(function(response){
                  $scope.userImageUrl=response.data.userprofile.imageurl;
             });
+        }
             $scope.chat={"message":""};
             $scope.unreadChatMessageCount=0;
 
@@ -250,16 +264,18 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
                 if(value.status==0 && value.sentby==2){
                     $scope.unreadChatMessageCount+=1;
                     $scope.showMessageCount=true;
-                    if(newMessageFound==0){
+                    if(newMessageFound==0&&$scope.isChatMinimized){
                         value.firstNewMessage=1;
                         newMessageFound=1;
                     }
                 }
 
             });
-            }else{
-                $scope.chatMessages= response.data.chats;
-            }
+           
+        if(!$scope.isChatMinimized){
+            $scope.doReadChatMessage();
+           }
+
             setTimeout(function(){ $('.msg_container_base').scrollTop($('.msg_container_base')[0].scrollHeight); }, 500);
         });
     };
@@ -296,9 +312,9 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
         {
             return false;
         }
-        $scope.getSendMessageParam={"targetid":$scope.currentChatTargetId,"message":$scope.chat.message};
+        $scope.getSendMessageParam={"targetid":$routeParams.id,"message":$scope.chat.message};
         requestHandler.postRequest("/sendMessage/",$scope.getSendMessageParam).then(function(response){
-            $scope.doGetChatMessage($scope.currentChatTargetId);
+            $scope.doGetChatMessage();
         });
         //Reset Array
        $scope.deletingChatCount=0;
@@ -309,7 +325,7 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
     $scope.doDeleteChatMessage=function(){
         $scope.deleteChatParam={"messageids":$scope.deleteChatLogId};
         requestHandler.postRequest("/deleteMessage/",$scope.deleteChatParam).then(function(response){
-            $scope.doGetChatMessage($scope.currentChatTargetId);
+            $scope.doGetChatMessage();
         });
        //Reset Array
        $scope.deletingChatCount=0;
@@ -850,7 +866,7 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
         $scope.coachReviews=[];
         $scope.doGetCoachRatings($routeParams.id);
         $scope.subscribed=1;
-        $scope.doGetChatMessage($routeParams.id);
+        $scope.doGetChatMessage();
         $scope.doGetCoachAdviceByUser($routeParams.id);
         $scope.doGetUpcomingEvents($routeParams.id);
 

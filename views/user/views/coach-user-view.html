@@ -400,15 +400,16 @@
                     <div class="col-xs-12 col-md-12 col-sm-12">
                         <div class="panel panel-default" style="margin-bottom:0px;">
                             <div class="panel-heading chat-top-bar">
-                                <div class="col-md-8 col-xs-8 col-lg-8 col-sm-8">
-                                    <h3 class="panel-title"><span class="glyphicon glyphicon-comment"></span> Chat - {{usercoachdetails.firstname}}</h3>
-                                    <span class="nav-item__badge" style="position: absolute; margin-left: 20px; margin-top: -9px;" ng-show="showMessageCount">
+                                <div class="col-md-7 col-xs-7 col-lg-7 col-sm-7">
+                                    <h3 class="panel-title"><span class="glyphicon glyphicon-comment" style="padding-right: 7px;"></span> Chat - {{usercoachdetails.firstname}}</h3>
+                                    <span class="nav-item__badge" style="position: absolute; margin-left: 20px; margin-top: -9px;" ng-show="showMessageCount&&isChatMinimized">
                                     <span aria-hidden="true" class="nav-item__badge-count ng-binding">{{unreadChatMessageCount}}</span>
                                     </span>
                                 </div>
-                                <div class="col-md-4 col-xs-4 col-lg-4 col-sm-4" style="text-align: right;">
-                                     <a href="" ng-click="doDeleteChatMessage()" ng-show="deletingChatCount>0"><i class="fa fa-trash"></i></a>
-                                    <a href=""><span id="minim_chat_window" class="glyphicon glyphicon-plus icon_minim panel-collapsed" onclick="chatMinMax()" ng-click="doReadChatMessage();"></span></a>
+                                <div class="col-md-5 col-xs-5 col-lg-5 col-sm-5" style="text-align: right;">
+                                     <a href="" ng-click="doDeleteChatMessage()" ng-show="deletingChatCount>0"><span class="glyphicon glyphicon-trash"></span></a>&nbsp;
+                        <a href="" data-toggle="tooltip" data-placement="left" title="Refresh Chat"><span  class="glyphicon glyphicon-refresh wrap" ng-click="doGetChatMessage()"></span></a>
+                                    <a href=""><span id="minim_chat_window" class="glyphicon glyphicon-plus icon_minim panel-collapsed" onclick="chatMinMax()" ng-click="setChatMinimizedStatus();doReadChatMessage();"></span></a>
                                 </div>
                             </div>
                             <div id="chat_container" class="panel-body msg_container_base" style="display:none;" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#eee',scrollspeed: -5}">
@@ -627,7 +628,6 @@
         }
     });
 
-
     function chatMinMax(){
         var $this = $(".panel-heading span.icon_minim");
             if (!$this.hasClass('panel-collapsed')) {
@@ -659,7 +659,7 @@
     $(document).on('click', '#btn-input', function (e) {
  var myDiv=$("#chat_container");
    myDiv.animate({ scrollTop: myDiv.prop("scrollHeight")- myDiv.height() }, 1000);
-});
+    });
      
 
     $(document).on('focus', '.panel-footer input.chat_input', function (e) {
@@ -781,3 +781,8 @@ $(document).ready(function(){
        })
 });
    </script>
+   <script>
+$(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip();   
+});
+</script>
