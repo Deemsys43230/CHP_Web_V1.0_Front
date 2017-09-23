@@ -1,7 +1,7 @@
 
 <!-- Start Page Banner -->
 
-<div class="page-banner" ng-cloak class="ng-cloak">
+<div ng-cloak class="page-banner ng-cloak">
     <div class="container">
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 min-height-450">
@@ -16,38 +16,19 @@
                     </div>
                     <div class="col-lg-12 col-md-12 col-sm-12">
                         <div class="col-lg-8 col-md-8 col-sm-8">
-                           <simple-calendar options="calendarOptions"></simple-calendar>
+                           <simple-calendar events="events" options="calendarOptions"></simple-calendar>
                             
                         </div>
                         <div class="col-lg-4 col-md-4 col-sm-4 no-padding">
                             <div class="appointment-div text-bold">APPOINTMENTS&nbsp;-&nbsp;{{currentDate}}</div>
                           
                             <div class="book-appointment">
-                                  <div class="enable-btn" ng-show="enableAppointment">
+                                <div class="enable-btn" ng-show="enableAppointment">
                                     <img src="../../images/clock.png" height="120" width="120" /><br/>
-                                    <div><a href="" class="btn btn-success" ng-click="enableAppointment=false" ng-disabled="previousDate">Enable Appointment</a></div>
-                                    <h4 class="margin-top-10 text-bold margin-left-10"><a href="" ng-click="coachGetAppointmentList()">Appointment List</a></h4>
-                                  </div>
-                                <div class="schedule-btn" ng-show="!enableAppointment">
-                                    <form name="bookingForm" novalidate>
-                                       <div class="col-md-12 margin-top-20">
-                                            <div class="col-md-6 margin-top-5"><h5 class="text-bold">Client Counts :</h5></div>
-                                            <div class="col-md-6">
-                                                <input type="text" ng-model="booking.count" name="count" class="form-control" required/>
-                                                <span ng-show="bookingForm.count.$dirty&&bookingForm.count.$invalid">
-                                                    <span class="error-message" ng-show="bookingForm.count.$error.required"><span>Required.</span></span>
-                                                </span> 
-                                            </div>
-                                            <div class="margin-top-50 text-center"><a href="#" onclick="return false;" ng-disabled="bookingForm.$invalid" class="btn btn-success" ng-click="coachScheduleAppointment() || reset()">Schedule Appointment</a></div>
-                                            <h3  class="text-success" ng-show="createdAppointment"><i class="fa fa-check-circle">&nbsp;&nbsp;Appointment is Scheduled </i></h3> 
-                                            <h4 class="margin-top-10 text-bold text-center"><a href="" ng-click="coachGetAppointmentList()">Appointment List</a></h4>
-                                       </div> 
-                                     
-                                    </form>
-                                </div> 
+                                    <div><a href="#appointmentCount" id="modal_appointment" class="btn btn-success" ng-disabled="previousDate" ng-click="appointmentPopup()">Enable Appointment</a></div>
+                                </div>    
 
-
-                                <div class="coach-list content_scrollbar margin-left-5" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#eee'}" ng-show="bookingList">
+                                <div class="coach-list appointment_scrollbar margin-left-5" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#eee'}" ng-show="bookingList">
                                     <div ng-show="appointments.length>0" class="coach-view-width">
                                             <div class="coach-view col-lg-12 col-md-12 col-sm-12" ng-repeat= "userAppointment in userAppointmentList">
                                                 <div class="col-lg-2 col-md-2 col-sm-2 no-padding">
@@ -58,9 +39,8 @@
                                                     <p class="col-lg-12 col-md-12 col-sm-12">{{userAppointment.emailid}}</p>
                                                 </div>
                                             </div>
-                                            
                                         </div>
-                                        <div ng-show="appointments.length==0" class="text-center margin-top-50">
+                                        <div ng-show="appointments.length==0 || userAppointmentList.length==0" class="text-center margin-top-100">
                                             <img src="../../images/no-coach-small.png" width="120" height="120"/>
                                             <h3 class="text-gray">NO APPOINTMENTS FOUND!!!</h3><br/>
                                         </div>
@@ -96,6 +76,39 @@
         </div>
     </section>
 </div> -->
+<!-- coach meal plan Popup-->
+<div id="appointmentCount" class="popupContainer" style="display:none;left:30%;">
+    <div class="center-block">
+        <header class="popupHeader width-100">
+            <span class="header_title">Enable Appointment</span>
+            <span class="modal_close"><i class="fa fa-times"></i></span>
+        </header>
 
+        <section class="popupBody">
+            <!-- Register Form -->
+            <div class="common_model">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <form name="bookingForm" novalidate>
+                        <h5 class="margin-top-10">Client Counts :</h5>
+                        <div class="form-group">
+                            <input type="text" ng-model="booking.count" name="count" class="form-control" required/>
+                                <span ng-show="bookingForm.count.$dirty&&bookingForm.count.$invalid">
+                                    <span class="error-message" ng-show="bookingForm.count.$error.required"><span>Required.</span></span>
+                                </span>   
+                        </div>  
+                       </form>
+                    </div><br/>
+                </div>
+                <div class="action_btns margin-tb-20 col-lg-12 col-md-12 col-sm-12 no-padding">
+                    <div class="one_half"><a href="#" onclick="return false;" ng-disabled="bookingForm.$invalid" class="btn btn_blue modal_close" ng-click="coachScheduleAppointment()">Schedule</a></div>
+                    <div class="one_half last modal_close"><a class="btn btn_red">Cancel</a></div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
 
-<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript">
+    $("#modal_appointment").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
+</script>

@@ -1,11 +1,11 @@
 simple-calendar * {
-  user-select: none;
+  /*user-select: none;*/
 }
 
 simple-calendar .calendar{
   padding: 0;
   border: 1px solid #dddddd;
-  user-select: none;
+  /*user-select: none;*/
   background-color: #fff;
 }
 

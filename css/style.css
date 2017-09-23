@@ -2369,6 +2369,10 @@ input[type="submit"] {
     margin-top: 50px;
 }
 
+.margin-top-100 {
+    margin-top: 100px;
+}
+
 .margin-top-3 {
     margin-top: 3px;
 }
@@ -17905,6 +17909,7 @@ select.event:focus {
     padding: 0;
     border: 1px solid #dddddd;
     background-color: #fff;
+    user-select: auto;
   }
   
   .move-month { 
@@ -17914,7 +17919,7 @@ select.event:focus {
   .prev-month { 
     float: left;
     color: #ffffff;
-    font-size: 36px;
+    font-size: 30px;
     background: #000000;
     padding: 5px;
     margin-top: -5px;
@@ -17923,7 +17928,7 @@ select.event:focus {
   .next-month { 
     float: right;
     color: #ffffff;
-    font-size: 36px;
+    font-size: 30px;
     background: #000000;
     padding: 5px;
     margin-top: -5px;
@@ -17968,14 +17973,21 @@ select.event:focus {
   
   .day {
     height: 80px !important;
-    padding: 30px 49px !important;
+    padding: 30px !important;
     border: 1px solid #dddddd;
     border-bottom: none;
     border-left: none;
     overflow: hidden;
     color: #000000;
+    text-align: center;
   }
 
+  .day.default{
+    background-color: lightblue;
+  }
+  .day.selectedDay{
+    background-color: #fdae21 !important;
+    }   
   .day:hover{
     cursor: pointer; 
     background-color: #fdae21!important;
@@ -17990,9 +18002,9 @@ select.event:focus {
   }
 
   .book-appointment{
-    border: 2px solid #efe8d8;
-    height: 446px;
-    margin-top: 5px;
+    border: 1px solid #dddddd;
+    height: 449px;
+    margin-top: 2px;
    /* background: #fff9de;*/
   }
 
@@ -18012,7 +18024,17 @@ select.event:focus {
 
   .enable-btn img{
     margin-left: 20px;
-  }}
+  }
+
+  .appointment_scrollbar
+{
+    height: 448px;
+    width: 100%;
+    background: none;
+    overflow-y: scroll;
+    overflow-x:hidden;
+    word-wrap: break-word;
+}
 
 /*for home page carousal image*/
 
@@ -18076,3 +18098,4 @@ select.event:focus {
     font-size: 35px !important; 
     line-height: 55px;
 }
+
