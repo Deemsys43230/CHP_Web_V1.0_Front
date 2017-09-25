@@ -1,1 +1,108 @@
-var requestHandlerApp=angular.module("requestModule",[]);requestHandlerApp.factory("requestHandler",["$http",function(a,b){var c={},d=window.location.origin,e=window.location.origin+"/v1/",f=window.location.origin+"/ch-v3/views/user",g=window.location.origin+"/ch-v3/",h=33,i=13;return c.getRequest=function(b,c){return b=e+b,a.get(b,c).then(function(a){return console.log(a),a})},c.putRequest=function(b,c){return b=e+b,a.put(b,c).then(function(a){return console.log(a),a})},c.postRequest=function(b,c){return b=e+b,a.post(b,c).then(function(a){return a})},c.deleteRequest=function(b,c){return b=e+b,a["delete"](b,{data:c}).then(function(a){return a},function(a){return a})},c.loginRequest=function(b,c){return requestURL=e+"/login/",a.post(requestURL,{username:b,password:c}).then(function(a){return a},function(a){return a})},c.paymentURL=function(){return f},c.domainURL=function(){return g},c.convertUrl=function(a){var b=d+a.substring(a.indexOf("/")+h,a.length);return b},c.convertUrlExercise=function(a){var b=a.substring(a.indexOf("/")+h,a.length-i);return b},c.alerting=function(){alert("ok deal")},c}]);
+var requestHandlerApp=angular.module("requestModule",[]);
+
+requestHandlerApp.factory("requestHandler",['$http',function($http,$location){
+
+    var requestObj={};
+
+    //*IMPORTANT*////
+    /*For deployment*/
+    /*  var hostedDomain="http://www.deemsysinc.net/api/v1/";
+     var urlLength = 15;
+     var exerciselength=13;*///
+
+    var domain=window.location.origin;
+    var hostedDomain=domain+"/v1/";
+    var paymentURL=domain+"/CH852/CyberHealth/views/user";
+    var domainURL=domain+"/CH852/CyberHealth/";
+
+
+    var urlLength = 33;
+    var exerciselength=13;
+
+    requestObj.getRequest=function(requestURL,params){
+        requestURL=hostedDomain+requestURL;
+        return $http.get(requestURL,params).then(function (response) {
+            console.log(response);
+            return response;
+        });
+    };
+
+    requestObj.putRequest=function(requestURL,params){
+        requestURL=hostedDomain+requestURL;
+        return $http.put(requestURL,params).then(function (response) {
+            console.log(response);
+            return response;
+        });
+    };
+
+    requestObj.postRequest=function(requestURL,params){
+
+        requestURL=hostedDomain+requestURL;
+
+        return $http.post(requestURL,params).then(function (response) {
+            return response;
+        });
+    };
+
+    requestObj.deleteRequest=function(requestURL,params){
+        requestURL=hostedDomain+requestURL;
+        return $http.delete(requestURL,{data:params}).then(function(response){
+            return response;
+        },function(response){
+            return response;
+        });
+    };
+
+    requestObj.loginRequest=function(username,password){
+        requestURL=hostedDomain+'/login/';
+        return $http.post(requestURL,{"username":username,"password":password}).then(function(response){
+            return response;
+        },function(response){
+            return response;
+        });
+
+    };
+
+//For direct File Upload
+    requestObj.directFileUpload=function(requestURL,data,params){
+        requestURL=hostedDomain+requestURL;
+
+        var fd = new FormData();
+        fd.append(params, data);
+        return $http.post(requestURL, fd, {
+            transformRequest: angular.identity,
+            headers: {'Content-Type': undefined}
+        },function(response){
+            return response;
+        });
+
+    };
+
+    requestObj.paymentURL=function(){
+        return paymentURL;
+    };
+
+
+    requestObj.domainURL=function(){
+        return domainURL;
+    };
+
+    requestObj.convertUrl=function(imageurl){
+        var url = domain+imageurl.substring(imageurl.indexOf("/")+ urlLength, imageurl.length);
+        return url;
+    };
+
+    requestObj.convertUrlExercise=function(imageurl){
+        //  alert(imageurl);
+        var exerciseurl = imageurl.substring(imageurl.indexOf("/")+ urlLength, imageurl.length-exerciselength);
+        return exerciseurl;
+
+
+    };
+    requestObj.alerting=function(){
+        alert("ok deal");
+    };
+
+    return requestObj;
+
+}]);

@@ -77,6 +77,8 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
         $scope.doGetMedicationList(id);
         // Reload TrainingPlan List
         $scope.reloadTrainingplanList();
+        //Get User Uploaded Document Details
+        $scope.doGetUserUploadedDocument(id);
 
 
     };
@@ -1598,6 +1600,14 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
      $scope.doGetMedicationList = function(userid){
         requestHandler.postRequest("coach/coachgetmedications/",{"userid":userid}).then(function(response){
             $scope.medicationList = response.data.medications;
+        });
+    };
+
+
+    /*Get UserUploaded Document List*/
+    $scope.doGetUserUploadedDocument = function(userid){
+        requestHandler.getRequest("readfiles/"+ userid+"/","").then(function(response){
+            $scope.userUploadedDocumentList = response.data.files;
         });
     };
 

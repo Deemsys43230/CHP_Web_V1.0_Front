@@ -1,5 +1,5 @@
 
-var userApp = angular.module('userApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','angularUtils.directives.dirPagination']);
+var userApp = angular.module('userApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','ngPercentDisplay','angular-svg-round-progress','angularUtils.directives.dirPagination']);
 
 userApp.controller('UserMedicationController',['$scope','requestHandler','Flash','$location','$routeParams',function($scope,requestHandler,Flash,$location,$routeParams) {
    
@@ -177,4 +177,185 @@ userApp.controller('UserMedicationController',['$scope','requestHandler','Flash'
     	$scope.doGetMedicationListByUser();
     };
 }]);
+userApp.controller('UserMedicationDocumentUploadController',['$scope','requestHandler','Flash','$location','$routeParams','roundProgressService',function($scope,requestHandler,Flash,$location,$routeParams,roundProgressService) {
+
+    $scope.uploadBtnTxt="Upload File";
+    $scope.fileUpload=false;
+    $scope.paginationLoad=false;
+    $scope.usedSpace=0;
+
+
+
+    // Search  Medication
+    $('.show-list-search').click(function() {
+        $('.search-list-form').toggle(300);
+        $('.search-list-form input').focus();
+    });
+
+//to get user id
+        $scope.doGetUserDetails=function(){
+            $scope.loader=true;
+            requestHandler.getRequest("getUserId/").then(function(response){
+                $scope.userDetails=response.data.User_Profile;
+                $scope.loader=false;
+                $scope.doGetUserUploadedDocument($scope.userDetails.userid);
+            });
+
+        };
+
+
+    //To get user uploaded file list
+    $scope.doGetUserUploadedDocument=function(userid){
+    $scope.loader=true;
+        requestHandler.getRequest("readfiles/"+ userid+"/","").then(function(response){
+            $scope.userUploadedDocumentList=response.data.files;
+            $scope.usedSpace=response.data.usedspace;
+            $scope.availableSpace=response.data.availablespace;
+            $scope.availableSpaceColor="red";
+            $scope.usedSpaceColor="limegreen";
+            $scope.loader=false;
+            $scope.paginationLoad=true;
+        }, function(){
+            errorMessage(Flash,"Please try again later!");
+        });
+    };
+
+//to check user is having coach or not
+    $scope.doCheckUserMedicationDocument=function(){
+        $scope.loader=true;
+        requestHandler.getRequest("user/checkfolderexist/","").then(function(response){
+            $scope.userUploadedDocumentIsExists=response.data.isexist;
+
+            if($scope.userUploadedDocumentIsExists==1){
+                  $scope.showDocumentList=true;
+            }
+            else{
+                $scope.showDocumentList=false;
+            }
+            $scope.loader=false;
+        }, function(){
+            errorMessage(Flash,"Please try again later!");
+        });
+    };
+
+
+
+//to delete user uploaded document
+    $scope.deleteUserUploadedDocument=function(filename){
+        if(confirm("Are you sure want to remove Uploaded Document?")){
+            requestHandler.postRequest("user/deletefile/",{'filename':filename}).then(function(response){
+                successMessage(Flash,"Successfully Removed");
+                $scope.doGetUserUploadedDocument($scope.userDetails.userid);
+            }, function(){
+                errorMessage(Flash,"Please try again later!");
+            });
+        }
+    };
+
+    $scope.doUploadFile = function(){
+        $scope.fileUpload=true;
+        $scope.uploadBtnTxt="Uploading...";
+
+       requestHandler.directFileUpload("user/uploadfile/",$scope.uploadFile,"document").then(function(){
+           successMessage(Flash,"Successfully Uploaded");
+           $scope.uploadBtnTxt="Upload File";
+           $scope.fileUpload=false;
+           $scope.doGetUserUploadedDocument($scope.userDetails.userid);
+       });
+
+    };
+
+    //To clear uploaded file
+    $scope.resetDocument = function () {
+        angular.element("input[type='file']").val(null);
+       /* $scope.uploadFile="";
+        $scope.documentUploadForm.$setPristine();*/
+    };
+
+    //init()
+    $scope.doGetUserDetails();
+   $scope.doCheckUserMedicationDocument();
+
+
+    //circle round
+    $scope.offset =         0;
+    $scope.timerCurrent =   0;
+    $scope.uploadCurrent =  0;
+    $scope.stroke =         12;
+    $scope.radius =         70;
+    $scope.isSemi =         false;
+    $scope.rounded =        false;
+    $scope.responsive =     false;
+    $scope.clockwise =      true;
+    $scope.bgColor =        '#ddd';
+    $scope.duration =       1000;
+    $scope.currentAnimation = 'easeOutCubic';
+
+    $scope.animations = [];
+
+    angular.forEach(roundProgressService.animations, function(value, key){
+        $scope.animations.push(key);
+    });
+
+    $scope.getStyle = function(){
+        var transform = ($scope.isSemi ? '' : 'translateY(-50%) ') + 'translateX(-50%)';
+
+        return {
+            'top': $scope.isSemi ? 'auto' : '52%',
+            'bottom': $scope.isSemi ? '5%' : 'auto',
+            'left': '50%',
+            'transform': transform,
+            '-moz-transform': transform,
+            '-webkit-transform': transform
+        };
+    };
+
+    var getPadded = function(val){
+        return val < 10 ? ('0' + val) : val;
+    };
+}]);
+
+// render image to view in list
+userApp.filter('trusted', ['$sce', function ($sce) {
+    return function(url) {
+        return $sce.trustAsResourceUrl(url);
+    };
+
+
+}]);
+
+userApp.directive('fileModel', ['$parse', function ($parse) {
+    return {
+        restrict: 'A',
+        link: function(scope, element, attrs) {
+            var model = $parse(attrs.fileModel);
+            var modelSetter = model.assign;
+
+            element.bind('change', function(){
+                console.log(element[0].files[0]);
+                scope.$apply(function(){
+                    modelSetter(scope, element[0].files[0]);
+                });
+            });
+        }
+    };
+}]);
+
+// Validation for file upload
+userApp.directive('validFile',function(){
+    return {
+        require:'ngModel',
+        link:function(scope,el,attrs,ngModel){
+            //change event is fired when file is selected
+            el.bind('change',function(){
+                //alert("invalid file");
+                scope.$apply(function(){
+                    ngModel.$setViewValue(el.val());
+                    ngModel.$render();
+                })
+            })
+        }
+    }
+});
+
 

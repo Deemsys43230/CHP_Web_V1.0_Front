@@ -648,6 +648,27 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'UserMedicationController'
             }).
+            when('/document-upload', {
+                templateUrl: 'views/medication-document-upload.html',
+                resolve: {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'userApp',
+                            files:[
+                                '../../css/custom-inputs.css',
+                                '../../plugin/popup/style.css',
+                                '../../css/ngPercentageCircle.css',
+                                '../../app/userDashboard/ngPercentageCircle.js',
+                                '../../angular/angular-utils-pagination/dirPagination.js',
+                                '../../app/medication/userMedicationController.js',
+                                '../../css/profile-image-upload.css',
+                                '../../js/image-upload.js'
+                            ]
+                        })
+                    }]
+                },
+                controller:'UserMedicationDocumentUploadController'
+            }).
             when('/faq', {
                 templateUrl: '../common/faq.html',
                 resolve: {

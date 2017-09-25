@@ -6006,7 +6006,7 @@ ul.footer-nav li a:hover {
 }
 
 
-/* 
+/*
  *  Core Owl Carousel CSS
  *  v1.24
  */
@@ -6240,7 +6240,7 @@ ul.footer-nav li a:hover {
 }
 
 /*
-*   Owl Carousel Owl Theme 
+*   Owl Carousel Owl Theme
 */
 
 .owl-theme .owl-controls{
@@ -16666,7 +16666,7 @@ margin-top: 10px;
 #coach-table {
     margin:10px 0 0 10px;
     text-align: center;
-    width: 100%; 
+    width: 100%;
 }
 
 .plans {
@@ -16742,7 +16742,7 @@ margin-top: 10px;
     padding-left: 150px;
     padding-top: 50px;
 }
-.exp-text .inside-text { 
+.exp-text .inside-text {
     position: absolute;
     top: 1px;
     right: 16px;
@@ -16867,7 +16867,7 @@ margin-top: 10px;
     padding-left: 100px;
     padding-top: 50px;
 }
-.exp-text .inside-text { 
+.exp-text .inside-text {
     position: absolute;
     top: 1px;
     right: 16px;
@@ -17009,7 +17009,7 @@ select.date:focus {
     color: #FFF !important;
 }
 .btn_green:hover {
-    background: #187535 !important; 
+    background: #187535 !important;
     color: #fff!important;
 }
 .coach-profile_input_textarea{
@@ -17401,7 +17401,7 @@ select.date:focus {
 
     padding: 0px 10px 0px 0px;
     background: none;
-    margin-bottom: 0px;    
+    margin-bottom: 0px;
 }
 
 /* For Remove User color*/
@@ -17414,7 +17414,7 @@ select.date:focus {
 .message-read{
     color:#00fc09;
 }
- 
+
 .talk-bubble {
     margin: 40px;
     display: inline-block;
@@ -17710,7 +17710,7 @@ div.foodcalorie{
     margin:20px 0px 10px 0px;
     background-color: #ffec6d;
 }
-.client-info{    
+.client-info{
     box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
     border-radius: 5px;
     border:1px solid #c9c2c2;
@@ -17726,7 +17726,7 @@ div.foodcalorie{
 .badge1 {
    position:relative;
 }
-.badge1[data-badge]:before { 
+.badge1[data-badge]:before {
     font-family: 'FontAwesome';
    content: "\f0e0";
    position:absolute;
@@ -17896,8 +17896,8 @@ select.event:focus {
 }
 
 .hr-style{
-    border-top: 1px solid #ffffff; 
-    padding: 0; 
+    border-top: 1px solid #ffffff;
+    padding: 0;
     margin: 0!important;
 }
 
@@ -17914,12 +17914,12 @@ select.event:focus {
     background-color: #fff;
     user-select: auto;
   }
-  
-  .move-month { 
-    cursor: pointer;    
+
+  .move-month {
+    cursor: pointer;
    }
 
-  .prev-month { 
+  .prev-month {
     float: left;
     color: #ffffff;
     font-size: 30px;
@@ -17928,7 +17928,7 @@ select.event:focus {
     margin-top: -5px;
     }
 
-  .next-month { 
+  .next-month {
     float: right;
     color: #ffffff;
     font-size: 30px;
@@ -17936,7 +17936,7 @@ select.event:focus {
     padding: 5px;
     margin-top: -5px;
     }
-  
+
   .current-month {
     width: 100%;
     text-align: center;
@@ -17948,15 +17948,15 @@ select.event:focus {
     text-transform: uppercase;
     font-weight: 800;
   }
-  
+
   .week {
     height: 80px!important;
     .day:last-child {
       border-right: none;
     }
   }
-  
-  .weekday { 
+
+  .weekday {
     text-align: center;
     border-right: 1px solid #ddd;
     color: #fdae21;
@@ -17967,13 +17967,13 @@ select.event:focus {
 
    .weekday:last-child {
     border-right: none;
-   } 
-  
+   }
+
   .weekday, .day {
     display: inline-block;
     width: calc(100% / 7);
   }
-  
+
   .day {
     height: 80px !important;
     padding: 30px !important;
@@ -17990,9 +17990,9 @@ select.event:focus {
   }
   .day.selectedDay{
     background-color: #fdae21 !important;
-    }   
+    }
   .day:hover{
-    cursor: pointer; 
+    cursor: pointer;
     background-color: #fdae21!important;
   }
   .day:disabled{
@@ -18109,7 +18109,12 @@ select.event:focus {
 }
 .slide3-font {
     font-weight: 500;
-    font-size: 35px !important; 
+    font-size: 35px !important;
     line-height: 55px;
+}
+.document-image-upload-box{
+   border: solid #808080 3px;
+    height: 110px;
+    margin-top: 10px;
 }
 
