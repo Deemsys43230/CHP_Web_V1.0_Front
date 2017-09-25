@@ -1,4 +1,4 @@
-var userApp = angular.module('userApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','angularUtils.directives.dirPagination','angular-nicescroll']);
+var userApp = angular.module('userApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','angularUtils.directives.dirPagination','angular-nicescroll','500tech.simple-calendar']);
 
 userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$location','$q','$routeParams','$route','$window',function($scope,requestHandler,Flash,$location,$q,$routeParams,$route,$window) {
 
@@ -853,6 +853,99 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
         });
     }
 
+    //Appointment Calendar
+    var date = new Date();
+
+    $scope.calendarOptions = {
+        minDate: date.setDate((new Date()).getDate() - 1),
+        dayNamesLength: 3, // How to display weekdays (1 for "M", 2 for "Mo", 3 for "Mon"; 9 will show full day names; default is 1)
+        dateClick: function(date){
+            $scope.dateClick(date)
+        }
+    };
+
+    $scope.dateClick=function(date){
+        $scope.currentDate= moment(date).format('DD/MM/YYYY');
+        $(function(){
+          $("#lean_overlay").fadeTo(1000);
+          $("#book-appointment").fadeIn(600);
+          $(".common_model").show();
+          $("html, body").animate({
+                scrollTop: 0
+            }, 600);
+      });
+
+      $(".modal_close").click(function(){
+          $(".common_model").hide();
+          $("#book-appointment").hide();
+          $("#lean_overlay").hide();
+      });
+
+      $("#lean_overlay").click(function(){
+          $(".common_model").hide();
+          $("#book-appointment").hide();
+          $("#lean_overlay").hide();
+      });
+
+        return $scope.currentDate;
+    };
+
+    $scope.userBookAppointment = function(){
+        requestHandler.postRequest("user/bookappointment/",{'date':$scope.currentDate,'coachid':$routeParams.id}).then(function(response){
+            if(response.data.Response_status==1){
+               successMessage(Flash,"Successfully Booked"); 
+           }else if(response.data.Response_status==0){
+                errorMessage(Flash,"Appointments are not created by Coach");
+           }
+            
+        });
+       
+    };
+
+
+    $scope.getCoachAvailableAppointment= function(){
+
+      var selectedDate = new Date();
+      var dd = selectedDate.getDate();
+      var mm = selectedDate.getMonth()+1; //January is 0!
+
+      var yyyy = selectedDate.getFullYear();
+      if(dd<10){
+          dd='0'+dd
+      }
+      if(mm<10){
+          mm='0'+mm
+      }
+      selectedDate = dd+'/'+mm+'/'+yyyy;
+      var startDate = selectedDate;
+      $scope.today= startDate;
+      var lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+      $scope.lastDate= moment(lastDay).format('DD/MM/YYYY');
+
+        $scope.getAppointmentParam={
+            'coachid': $routeParams.id,
+            'fromdate': $scope.today,
+            'todate' : $scope.lastDate
+        }
+        requestHandler.postRequest("user/coachavailableappointments/", $scope.getAppointmentParam).then(function(response){
+            $scope.availableAppointment= response.data.appointments;
+            // $scope.bookedDate=[];
+            $.each($scope.availableAppointment,function(index,value){
+                if(value.canbook==1){
+                    $scope.calendarOptions.availableDate= value.date;
+                    $scope.calendarOptions.canbook = value.canbook;
+                    // $scope.bookedDate.push(value);
+                   // console.log($scope.bookedDate);
+                }else{
+                    errorMessage(Flash,"Please try again later!");
+                }
+            });
+            
+            
+        });
+    }
+
+
     $scope.userCoachViewInit=function(){
         $scope.scrollnation={"itemsPerScroll": 4,"scrollEndCount":-1};
         $scope.getMessageParam={"targetid":$routeParams.id,"offset":0};
@@ -869,7 +962,7 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
         $scope.doGetChatMessage();
         $scope.doGetCoachAdviceByUser($routeParams.id);
         $scope.doGetUpcomingEvents($routeParams.id);
-
+        $scope.getCoachAvailableAppointment();
     };
 
     $scope.mealPlanPagination={"itemsPerPage":10,"pageNumber":1};

@@ -2431,6 +2431,9 @@ input[type="submit"] {
 .margin-bottom-1 {
     margin-bottom: 1px !important;
 }
+.margin-bottom-60 {
+    margin-bottom: 60px !important;
+}
 .margin-left-69{
     margin-left: 69px !important;
 }
@@ -17992,6 +17995,17 @@ select.event:focus {
     cursor: pointer; 
     background-color: #fdae21!important;
   }
+  .day:disabled{
+    cursor: default;
+    color: silver;
+    background-color: white;
+  }
+
+  .day:disabled .prev-month{
+    float: left;
+    color: #ffffff;
+    font-size: 30px;
+    }
 
   .appointment-div{
     height: 64px;

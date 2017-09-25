@@ -23,12 +23,14 @@ angular.module('500tech.simple-calendar', []).directive('simpleCalendar', functi
       '<div>' +
       '<div ng-repeat="week in weeks track by $index" class="week">' +
       '<div class="day"' +
-      'ng-class="{default: isDefaultDate(date),selectedDay:isSelectedDate(date), event: date.event, disabled: date.disabled || !date}"' +
+      'ng-class="{default: isDefaultDate(date),selectedDay:isSelectedDate(date), event: date.event, disabled: date.disabled || isBookedDate(options.availableDate) || !date}"' +
       'ng-repeat="date in week  track by $index"' +
       'ng-click="onClick(date)">' +
-      '<div class="day-number">{{ date.day || "&nbsp;" }}</div>' +
+      '<div class="day-number">{{ date.day || "&nbsp;" }}' +
+      '<span ng-show="options.canbook"><i class="fa fa-check-circle text-green"></i></span>'+
+      '</div>' +
       '<div class="event-title">{{ date.event.title || "&nbsp;" }}</div>' +
-      ' </div>' +
+      '</div>' +
       '</div>' +
       '</div>' +
       '</div>',
@@ -177,6 +179,18 @@ angular.module('500tech.simple-calendar', []).directive('simpleCalendar', functi
         return date.year === $scope.options.selectedDate.year &&
           date.month === $scope.options.selectedDate.month &&
           date.day === $scope.options.selectedDate.day
+      };
+
+      $scope.availDate= $scope.options.availableDate;
+      
+      $scope.isBookedDate = function (availDate) {
+        console.log("Date",availDate);
+  
+        if(!$scope.options.availableDate){return;}
+        if (!availDate) { return; }
+        return availDate.year === $scope.options.availableDate.year &&
+          availDate.month === $scope.options.availableDate.month &&
+          availDate.day === $scope.options.availableDate.day
       };
 
       $scope.prevMonth = function () {
