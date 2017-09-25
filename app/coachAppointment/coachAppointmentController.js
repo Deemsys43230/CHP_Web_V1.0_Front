@@ -74,6 +74,7 @@ coachApp.controller('AppointmentController',['$scope','requestHandler','Flash','
 
   $scope.coachGetAppointmentList=function(){
         $scope.enableAppointment=false;
+        $scope.showAppointmentCount=false;
         $scope.getAppointmentsParam={"fromdate":$scope.currentDate,"todate":$scope.currentDate};
         requestHandler.postRequest("coach/coachappointments/",$scope.getAppointmentsParam).then(function(response){
           $scope.appointments= response.data.appointments;
@@ -86,7 +87,11 @@ coachApp.controller('AppointmentController',['$scope','requestHandler','Flash','
               $scope.userAppointmentList= angular.copy(value.users);
               $scope.enableAppointment=false;
               $scope.bookingList=true;
-              // $scope.calendarOptions.appointments=$scope.userAppointmentList.length;
+              
+              if($scope.userAppointmentList.length>0){
+                $scope.showAppointmentCount=true;
+                $scope.appointmentsCount=$scope.userAppointmentList.length;
+              }
             }
           });
 

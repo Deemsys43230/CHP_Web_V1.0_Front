@@ -20,7 +20,11 @@
                             
                         </div>
                         <div class="col-lg-4 col-md-4 col-sm-4 no-padding">
-                            <div class="appointment-div text-bold">APPOINTMENTS&nbsp;-&nbsp;{{currentDate}}</div>
+                            <div class="appointment-div text-bold">APPOINTMENTS&nbsp;-&nbsp;{{currentDate}}
+                                <span class="nav-item__badge" style="position: absolute; margin-left: 90px; top: 24px; font-size: 13px; padding-top: 1px;" ng-show="showAppointmentCount">
+                                <span aria-hidden="true" class="nav-item__badge-count ng-binding">{{appointmentsCount}}</span>
+                                </span>
+                            </div>
                           
                             <div class="book-appointment">
                                 <div class="enable-btn" ng-show="enableAppointment">
