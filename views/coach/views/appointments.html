@@ -15,12 +15,12 @@
                         </div>
                     </div>
                     <div class="col-lg-12 col-md-12 col-sm-12">
-                        <div class="col-md-7 no-padding pull-right margin-top-3 margin-bottom-15">
-                            <div class="col-md-4 no-padding pull-right">
-                            <span class="orange appointment_legend"></span><div class="margin-left-20">&nbsp;-&nbsp;&nbsp;Scheduled&nbsp;Appointment&nbsp;Date</div>
+                        <div class="col-md-7 pull-left margin-top-3 margin-bottom-15">
+                            <div class="col-md-4 no-padding pull-left">
+                            <span class="orange appointment_legend"></span><div class="margin-left-20">&nbsp;-&nbsp;&nbsp;Selected&nbsp;Appointment&nbsp;Date</div>
                             </div>
-                            <div class="col-md-4 no-padding pull-right">
-                            <span class="lightgreen appointment_legend"></span><div class="margin-left-20">&nbsp;-&nbsp;&nbsp;Selected&nbsp;Appointment&nbsp;Date</div>
+                            <div class="col-md-4 no-padding pull-left">
+                            <span class="lightgreen appointment_legend"></span><div class="margin-left-20">&nbsp;-&nbsp;&nbsp;Scheduled&nbsp;Appointment&nbsp;Date</div>
                             </div>
                             
                          </div>
@@ -37,7 +37,7 @@
                             <div class="book-appointment">
                                 <div class="enable-btn" ng-show="enableAppointment">
                                     <img src="../../images/clock.png" height="120" width="120" /><br/>
-                                    <div><a href="#appointmentCount" id="modal_appointment" class="btn btn-success" ng-disabled="previousDate" ng-click="appointmentPopup()">Enable Appointment</a></div>
+                                    <div><a href="#appointmentCount" id="modal_appointment" class="btn btn-success" ng-disabled="canEnableAppointment" ng-click="appointmentPopup()">Enable Appointment</a></div>
                                 </div>    
 
                                 <div class="coach-list appointment_scrollbar margin-left-5" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#eee'}" ng-hide="enableAppointment">

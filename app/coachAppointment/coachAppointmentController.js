@@ -48,9 +48,20 @@ coachApp.controller('AppointmentController',['$scope','requestHandler','Flash','
         $scope.selectedDate= moment($scope.calendarOptions.selectedDate).format('DD/MM/YYYY');
         $scope.previousDate=0;
         $scope.cancelAppointment=true;
-        if(startDate>$scope.selectedDate){
-          $scope.previousDate=$scope.selectedDate;
+
+        //Convert into date format for comparison
+        var startDateParts=startDate.split("/");
+        var selectedDateParts=$scope.selectedDate.split("/");
+        var startDate_date=new Date(startDateParts[2],startDateParts[1]-1,startDateParts[0]);
+        var selectedDate_date=new Date(selectedDateParts[2],selectedDateParts[1]-1,selectedDateParts[0]);
+        
+        //Now compare the two converted date formats
+        if(startDate_date>selectedDate_date){
+          $scope.canEnableAppointment=true;
           $scope.cancelAppointment=false;
+        }else{
+          $scope.canEnableAppointment=false;
+          $scope.cancelAppointment=true;
         }
         $scope.getAppointmentsParam={"fromdate":coachSelectedDate,"todate":coachSelectedDate};
         //Get Single date

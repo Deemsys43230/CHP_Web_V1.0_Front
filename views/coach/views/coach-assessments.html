@@ -25,12 +25,12 @@
                         </tr>    
                     </thead>
                     <tbody>
-                        <tr dir-paginate="assessment in coachAssessmentsList|itemsPerPage:2">
+                        <tr dir-paginate="assessment in coachAssessmentsList|itemsPerPage:5">
                             <td class="wrap-all">{{assessment.assessmentname}}</td>
                             <td class="wrap-all">{{assessment.status==0?"In Draft":"Completed"}}</td>
                             <td>
                                 <a href="#coach-assessment-view/{{assessment.id}}" class="btn-xs btn-primary">View</a>
-                                <a href="" class="btn-xs btn-warning" ng-click="doEditAssessment(assessment.id)">Edit</a>
+                                <a href="#coach-assessment-edit/{{assessment.id}}" class="btn-xs btn-warning">Edit</a>
                                 <a href="" class="btn-xs btn-danger" ng-click="doDeleteAssessment(assessment.id)">Delete</a>
                             </td>
                         </tr>    
@@ -38,7 +38,7 @@
                     </tbody>    
                 </table>    
                <!-- Start Pagination -->
-                <dir-pagination-controls ng-show="paginationLoad" boundary-links="true"> </dir-pagination-controls>
+                <dir-pagination-controls boundary-links="true"> </dir-pagination-controls>
                 <!-- End Pagination -->
            
     </div>

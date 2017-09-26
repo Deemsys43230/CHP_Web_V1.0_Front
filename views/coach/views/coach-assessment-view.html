@@ -4,7 +4,7 @@
         <div class="col-md-12 col-md-12 col-sm-12">
             <span><a href="#coach-assessments" class="back-button pull-right margin-left-5"><i class="fa fa-arrow-circle-o-left"></i> Back</a></span>
             <div flash-message="2000" class="col-md-4 pull-right no-padding"></div>
-            <h4 class="classic-title"><span>Assessment</span></h4>
+            <h4 class="classic-title"><span>View Assessment</span></h4>
         </div>
         	 <form name="assessmentsForm" novalidate>
         	 		<div class="col-md-8">
@@ -12,39 +12,28 @@
                             <h4>Assessment Name <span class="pull-right">:</span></h4><br/>
                         </div>
                         <div class="col-lg-8 col-md-8 col-sm-12">
-                            <span ng-show="assessmentsForm.title.$dirty&&assessmentsForm.title.$invalid">
-                                <span class="error-message textarea-errormessage40" ng-show="assessmentsForm.title.$error.required"><span>Required.</span></span>
-                            </span>
-                            <input class="section-input" maxlength="150" name="title" placeholder="Enter Assessment Name" ng-model="assessments.assessmentname" required>
-                            <div class="text-count-position"><span class="text-count">{{(150 - assessments.assessmentname.length)}}</span></div>
+                           <p>{{assessments.assessmentname}}</p>
                         </div>                        
                         <div class="col-lg-12 col-md-12 col-sm-12">
                         	<h4>Questions</h4>
                         	<hr/>
-                        	<span ng-show="assessments.questions.length==0">
-                        		<div class="col-lg-5 col-md-5 col-sm-5">
-                                    <img class="pull-right" src="../../images/no-section.png"/>
-                                </div>
-                                <div class="col-lg-7 col-md-7 col-sm-7 margin-top-10">
-                                    <h2 class="text-gray margin-top-20">no questions added</h2>
-                            	</div>
-                            </span>
                         	<div class="question" ng-repeat="question in assessments.questions">
                         	<h5>Q{{$index+1}}.&nbsp;&nbsp;{{question.question}}&nbsp;&nbsp;<span class="badge pull-right">{{question.answertype==1?"Single Choice":question.answertype==2?"Multi Choice":"Text"}}</span></a></h5>
-                        	<div  class="answers" ng-repeat="question in question.answers"> 
-                        	<p>{{$index+1}}.&nbsp;{{question}}</p>
+                        	<div  class="answers" ng-repeat="option in question.answers"> 
+                        	<p>{{$index+1}}.&nbsp;{{option}}</p>
                         	</div>
-                        	<div class="actions"><a class="appointment_booknow margin-top-10" href="" ng-click="doEditQuestion($index)">Edit</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a class="appointment_booknow margin-top-10" href="" ng-click="assessments.questions.splice($index, 1)">Delete</a></div>
                         	</div>
-                        	<div class="col-md-12">
-                        	<center class="margin-top-20 margin-bottom-20"><span><a id="modal_add_question" href="#add-question" class="main-button margin-left-5" ng-click="reset()"><i class="fa fa-plus-circle"></i> Add Question</a><span></center>
-                        	</div>
-                        	<hr/>
+                            <div class="col-md-12"><hr/></div>
+                            <div class="col-md-offset-4 col-md-8">
+                            <span ng-show="true"><a href="#coach-assessments" class="btn btn-danger">Back</a></span>
+                            </div>
+                            
                         </div> 
                     </div>   
                         <div class="col-lg-4 col-md-4 col-sm-12">
                         	<center><img src="../../images/assessment.png" class="margin-top-50"/></center>
-                        </div>                        
+                        </div> 
+
              </form>
         </div>
     </div>
@@ -79,14 +68,11 @@
                         <strong><p>Question Type:</p></strong>                                       
                     </div> 
                     <div class="col-md-10">
-                     <select name="questiontype" ng-model="addQuestion.answertype" class="full-width main" style="height: 42px !important">
-                            <option value="1">Single Choice</option>
-                            <option value="2">Multiple Choice</option>
-                            <option value="3">Text</option>
+                     <select name="questiontype" ng-model="addQuestion.answertype" ng-options="answertype.typeId as answertype.type for answertype in answertypelist" class="full-width main" style="height: 42px !important">
                         </select> 
                     </div>             
                 </div>
-                <div class="col-md-12 margin-top-10">
+                <div class="col-md-12 margin-top-10" ng-show="addQuestion.answertype!=3">
                 	<div class="col-md-2">
                         <p><strong>Options:</strong></p>
                     </div> 
@@ -98,12 +84,12 @@
                 	</div>
                 </div>
                 <div class="col-md-12 options-content no-padding" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '10px',background:'#eee'}"> 
-                <div class="col-md-12 margin-top-10" ng-repeat="answer in addQuestion.answers track by $index">
+                <div class="col-md-12 margin-top-10" ng-repeat="answer in addQuestion.answers track by $index" ng-show="addQuestion.answertype!=3">
                 	<div class="col-md-2">
                         <p class="pull-right">Option {{$index+1}}:</p>
                     </div>  
                     <div class="col-md-9 col-sm-10 no-padding">
-		                       		 <input type="text" name="answer_{{$index}}" ng-model="addQuestion.answers[$index]" maxlength="200" required>
+		                       		 <input type="text" name="answer_{{$index}}" ng-model="addQuestion.answers[$index]" maxlength="200" ng-required="addQuestion.answertype!=3">
 		                             <span ng-show="addQuestionForm.answer_{{$index}}.$dirty&&addQuestionForm.answer_{{$index}}.$invalid">
 		                                 <span class="error-message" ng-show="addQuestionForm.answer_{{$index}}.$error.required"><span>Required.</span>
 		                             </span> 

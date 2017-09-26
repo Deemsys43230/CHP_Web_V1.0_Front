@@ -526,7 +526,7 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 controller:'CoachAssessmentsController'
             }).
             when('/coach-assessment-add', {
-                templateUrl: 'views/coach-assessments-view.html',
+                templateUrl: 'views/coach-assessments-add-edit.html',
                 resolve: {
                     loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
@@ -540,6 +540,38 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                     }]
                 },
                 controller:'CoachAddAssessmentsController'
+            }).
+            when('/coach-assessment-edit/:id', {
+                templateUrl: 'views/coach-assessments-add-edit.html',
+                resolve: {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'coachApp',
+                            files:[
+                            '../../plugin/popup/style.css',
+                                '../../app/coachAssessments/CoachAssessmentsController.js',
+                                '../../angular/angular-utils-pagination/dirPagination.js'
+                            ]
+                        })
+                    }]
+                },
+                controller:'CoachEditAssessmentsController'
+            }).
+            when('/coach-assessment-view/:id', {
+                templateUrl: 'views/coach-assessment-view.html',
+                resolve: {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'coachApp',
+                            files:[
+                            '../../plugin/popup/style.css',
+                                '../../app/coachAssessments/CoachAssessmentsController.js',
+                                '../../angular/angular-utils-pagination/dirPagination.js'
+                            ]
+                        })
+                    }]
+                },
+                controller:'CoachViewAssessmentsController'
             }).
             when('/course', {
                 templateUrl: 'views/course.html',

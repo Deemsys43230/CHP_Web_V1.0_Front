@@ -300,7 +300,6 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
         setTimeout(function(){
                 $scope.topPos = document.getElementById($scope.loadMoreScrollStopId).offsetTop;
                 $scope.divTop = document.getElementById('chat_container').offsetTop;
-                console.log($scope.loadMoreScrollStopId+","+$scope.topPos+","+$scope.divTop)
                 $('#chat_container').getNiceScroll(0).doScrollPos(0,$scope.topPos-$scope.divTop-20);
         }, 400);
         
@@ -666,8 +665,6 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
                 });
               }              
           });
-
-         console.log($scope.mealPlanDetailList);
          
         },function(){
             errorMessage(Flash,"Please try again later!")
@@ -918,7 +915,7 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
         requestHandler.postRequest("user/bookappointment/",{'date':$scope.selectedDate,'coachid':$routeParams.id}).then(function(response){
             if(response.data.Response_status==1){
                successMessage(Flash,"Successfully Booked"); 
-               $scope.getCoachAvailableAppointment();
+               $scope.userGetAppointmentList($scope.coachid,$scope.fromDate,$scope.endDate);
             }  
         }, function(){
                 errorMessage(Flash,"Please try again later!");
@@ -927,44 +924,20 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
     };
 
 
-    $scope.getCoachAvailableAppointment= function(){
+    $scope.userGetAppointmentList=function(coachid,fromDate,endDate){       
+        $scope.getAppointmentsParam={"coachid":coachid,"fromdate":fromDate,"todate":endDate};
 
-      var selectedDate = new Date();
-      var dd = selectedDate.getDate();
-      var mm = selectedDate.getMonth()+1; //January is 0!
-
-      var yyyy = selectedDate.getFullYear();
-      if(dd<10){
-          dd='0'+dd
-      }
-      if(mm<10){
-          mm='0'+mm
-      }
-      selectedDate = dd+'/'+mm+'/'+yyyy;
-      var startDate = selectedDate;
-      $scope.today= startDate;
-      var lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
-      $scope.lastDate= moment(lastDay).format('DD/MM/YYYY');
-
-        $scope.getAppointmentParam={
-            'coachid': $routeParams.id,
-            'fromdate': $scope.today,
-            'todate' : $scope.lastDate
-        }
-        requestHandler.postRequest("user/coachavailableappointments/", $scope.getAppointmentParam).then(function(response){
-            $scope.availableAppointment= response.data.appointments;
+        requestHandler.postRequest("user/coachavailableappointments/",$scope.getAppointmentsParam).then(function(response){
+           $scope.availableAppointment= response.data.appointments;
             $scope.coachappointments=[];
             $scope.userappointments=[];
             $scope.userbookedappointments=[];
-            console.log($scope.availableAppointment);
             $.each($scope.availableAppointment,function(index,value){
                 var processingDate=value.date.split('/');
                 var formattedDate=parseInt(processingDate[0])+"/"+(parseInt(processingDate[1])-1)+"/"+parseInt(processingDate[2]);
                 $scope.coachappointments.push(formattedDate);
-                console.log("Can book",value.canbook);
                 if(value.canbook==1)
-                    $scope.userappointments.push(formattedDate);
-                
+                    $scope.userappointments.push(formattedDate);                
                 if(value.canbook==2){
                     $scope.userbookedappointments.push(formattedDate);
                 }
@@ -972,23 +945,6 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
             $scope.calendarOptions.coachappointments=$scope.coachappointments;
             $scope.calendarOptions.userappointments=$scope.userappointments;
             $scope.calendarOptions.userbookedappointments=$scope.userbookedappointments;
-            console.log($scope.calendarOptions);
-        });
-    };
-
-    $scope.userGetAppointmentList=function(coachid,fromDate,endDate){
-
-       
-        $scope.getAppointmentsParam={"coachid":coachid,"fromdate":fromDate,"todate":endDate};
-
-        requestHandler.postRequest("user/coachavailableappointments/",$scope.getAppointmentsParam).then(function(response){
-          $scope.appointments= response.data.appointments;
-          $scope.userappointments=[];
-          $.each($scope.appointments,function(index,value){
-            var processingDate=value.date.split('/');
-            $scope.userappointments.push(parseInt(processingDate[0])+"/"+(parseInt(processingDate[1])-1)+"/"+parseInt(processingDate[2]));
-          });
-          $scope.calendarOptions.userappointments=$scope.userappointments;
         }, function(){
             errorMessage(Flash,"Please try again later!");
         });
@@ -1011,7 +967,6 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
         $scope.doGetChatMessage();
         $scope.doGetCoachAdviceByUser($routeParams.id);
         $scope.doGetUpcomingEvents($routeParams.id);
-        $scope.getCoachAvailableAppointment();
 
         var todayDate = new Date();
         $scope.fromDate=moment(new Date(todayDate.getFullYear(), todayDate.getMonth(), 1)).format('DD/MM/YYYY');
