@@ -859,47 +859,69 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
     $scope.calendarOptions = {
         coachappointments:[],
         userappointments:[],
-        minDate: date.setDate((new Date()).getDate() - 1),
+        userbookedappointments:[],
         dayNamesLength: 3, // How to display weekdays (1 for "M", 2 for "Mo", 3 for "Mon"; 9 will show full day names; default is 1)
         dateClick: function(date){
             $scope.dateClick(date)
+        },
+        bookDate: function(date){
+            $scope.userBookAppointmentDate(date)
+        },
+        nextMonth :function(monthIndex){
+            var todayDate = new Date();
+            $scope.coachid= $routeParams.id;
+            $scope.fromDate=moment(new Date(todayDate.getFullYear(), monthIndex+1, 1)).format('DD/MM/YYYY');
+            $scope.endDate=moment(new Date(todayDate.getFullYear(), monthIndex+2, 0)).format('DD/MM/YYYY');
+            $scope.userGetAppointmentList($scope.coachid,$scope.fromDate,$scope.endDate);
+        },
+        prevMonth :function(monthIndex){
+            var todayDate = new Date();
+            $scope.coachid= $routeParams.id;
+            $scope.fromDate=moment(new Date(todayDate.getFullYear(), monthIndex-1, 1)).format('DD/MM/YYYY');
+            $scope.endDate=moment(new Date(todayDate.getFullYear(), monthIndex, 0)).format('DD/MM/YYYY');
+            $scope.userGetAppointmentList($scope.coachid,$scope.fromDate,$scope.endDate);
         }
     };
 
     $scope.dateClick=function(date){
-        $scope.currentDate= moment(date).format('DD/MM/YYYY');
-        $(function(){
-          $("#lean_overlay").fadeTo(1000);
-          $("#book-appointment").fadeIn(600);
-          $(".common_model").show();
-          $("html, body").animate({
-                scrollTop: 0
-            }, 600);
-      });
-
-      $(".modal_close").click(function(){
-          $(".common_model").hide();
-          $("#book-appointment").hide();
-          $("#lean_overlay").hide();
-      });
-
-      $("#lean_overlay").click(function(){
-          $(".common_model").hide();
-          $("#book-appointment").hide();
-          $("#lean_overlay").hide();
-      });
-
-        return $scope.currentDate;
+        $scope.calendarOptions.selectedDate=date;
     };
 
+    $scope.userBookAppointmentDate=function(date){
+        
+        $(function(){
+              $("#lean_overlay").fadeTo(1000);
+              $("#book-appointment").fadeIn(600);
+              $(".common_model").show();
+              $("html, body").animate({
+                    scrollTop: 0
+                }, 600);
+              });
+
+            $(".modal_close").click(function(){
+              $(".common_model").hide();
+              $("#book-appointment").hide();
+              $("#lean_overlay").hide();
+            });
+
+            $("#lean_overlay").click(function(){
+              $(".common_model").hide();
+              $("#book-appointment").hide();
+              $("#lean_overlay").hide();
+            });
+  };
+
+
     $scope.userBookAppointment = function(){
-        requestHandler.postRequest("user/bookappointment/",{'date':$scope.currentDate,'coachid':$routeParams.id}).then(function(response){
+        var bookingDate= $scope.calendarOptions.selectedDate;
+        $scope.selectedDate= moment(bookingDate).format('DD/MM/YYYY');
+        requestHandler.postRequest("user/bookappointment/",{'date':$scope.selectedDate,'coachid':$routeParams.id}).then(function(response){
             if(response.data.Response_status==1){
                successMessage(Flash,"Successfully Booked"); 
-           }else if(response.data.Response_status==0){
-                errorMessage(Flash,"Appointments are not created by Coach");
-           }
-            
+               $scope.getCoachAvailableAppointment();
+            }  
+        }, function(){
+                errorMessage(Flash,"Please try again later!");
         });
        
     };
@@ -933,18 +955,44 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
             $scope.availableAppointment= response.data.appointments;
             $scope.coachappointments=[];
             $scope.userappointments=[];
+            $scope.userbookedappointments=[];
+            console.log($scope.availableAppointment);
             $.each($scope.availableAppointment,function(index,value){
                 var processingDate=value.date.split('/');
                 var formattedDate=parseInt(processingDate[0])+"/"+(parseInt(processingDate[1])-1)+"/"+parseInt(processingDate[2]);
                 $scope.coachappointments.push(formattedDate);
+                console.log("Can book",value.canbook);
                 if(value.canbook==1)
                     $scope.userappointments.push(formattedDate);
+                
+                if(value.canbook==2){
+                    $scope.userbookedappointments.push(formattedDate);
+                }
             });
-            
             $scope.calendarOptions.coachappointments=$scope.coachappointments;
             $scope.calendarOptions.userappointments=$scope.userappointments;
+            $scope.calendarOptions.userbookedappointments=$scope.userbookedappointments;
+            console.log($scope.calendarOptions);
         });
-    }
+    };
+
+    $scope.userGetAppointmentList=function(coachid,fromDate,endDate){
+
+       
+        $scope.getAppointmentsParam={"coachid":coachid,"fromdate":fromDate,"todate":endDate};
+
+        requestHandler.postRequest("user/coachavailableappointments/",$scope.getAppointmentsParam).then(function(response){
+          $scope.appointments= response.data.appointments;
+          $scope.userappointments=[];
+          $.each($scope.appointments,function(index,value){
+            var processingDate=value.date.split('/');
+            $scope.userappointments.push(parseInt(processingDate[0])+"/"+(parseInt(processingDate[1])-1)+"/"+parseInt(processingDate[2]));
+          });
+          $scope.calendarOptions.userappointments=$scope.userappointments;
+        }, function(){
+            errorMessage(Flash,"Please try again later!");
+        });
+  };
 
 
     $scope.userCoachViewInit=function(){
@@ -964,6 +1012,13 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
         $scope.doGetCoachAdviceByUser($routeParams.id);
         $scope.doGetUpcomingEvents($routeParams.id);
         $scope.getCoachAvailableAppointment();
+
+        var todayDate = new Date();
+        $scope.fromDate=moment(new Date(todayDate.getFullYear(), todayDate.getMonth(), 1)).format('DD/MM/YYYY');
+        $scope.endDate=moment(new Date(todayDate.getFullYear(), todayDate.getMonth()+1, 0)).format('DD/MM/YYYY');
+        $scope.coachid= $routeParams.id;
+        //Load Whole Month Appointments  
+        $scope.userGetAppointmentList($scope.coachid,$scope.fromDate,$scope.endDate);
     };
 
     $scope.mealPlanPagination={"itemsPerPage":10,"pageNumber":1};

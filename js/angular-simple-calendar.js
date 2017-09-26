@@ -27,7 +27,8 @@ angular.module('500tech.simple-calendar', []).directive('simpleCalendar', functi
       'ng-repeat="date in week  track by $index"' +
       'ng-click="onClick(date)">' +
       '<div class="day-number">{{ date.day || "&nbsp;" }}' +
-      '<div ng-show="isUserBookableDate(date)"><a href="" class="appointment_booknow">Book&nbsp;Now</a></div>'+
+      '<div ng-show="isUserBookableDate(date)"><a href="" class="appointment_booknow" ng-click="bookDate(date)">Book&nbsp;Now</a></div>'+
+      '<div><h5 ng-show="isUserBookedDate(date)">Booked</h5></div>' +
       '</div>' +
       '<div class="event-title">{{ date.event.title || "&nbsp;" }}</div>' +
       '</div>' +
@@ -189,7 +190,7 @@ angular.module('500tech.simple-calendar', []).directive('simpleCalendar', functi
         }else{
           return false;
         }
-      }
+      };
 
       $scope.isUserBookableDate=function(date){
         if (!date) { return; }
@@ -199,7 +200,23 @@ angular.module('500tech.simple-calendar', []).directive('simpleCalendar', functi
         }else{
           return false;
         }
-      }
+      };
+
+      $scope.isUserBookedDate=function(date){
+        if (!date) { return; }
+        var processingDate=date.day+"/"+date.month+"/"+date.year;
+        if($scope.options.userbookedappointments.indexOf(processingDate)!=-1){
+          return true;
+        }else{
+          return false;
+        }
+      };
+
+      $scope.bookDate = function (date) {
+        if (!date || date.disabled) { return; }
+        var processingDate=date.day+"/"+date.month+"/"+date.year;
+        $scope.options.bookDate(processingDate);
+      };
 
       $scope.prevMonth = function () {
         if (!$scope.allowedPrevMonth()) { return; }
