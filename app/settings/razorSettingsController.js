@@ -8,7 +8,7 @@ adminApp.controller('RazorSettingsController',['$scope','requestHandler','Flash'
 
     $scope.siteMenuList = siteMenuService;
     $.each($scope.siteMenuList,function(index,value){
-        if(value.href==$location.path().substr(1)){
+        if(value.id==6){
             value.active = "active";
         }
         else value.active = ""

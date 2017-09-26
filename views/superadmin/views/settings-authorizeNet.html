@@ -18,7 +18,7 @@
                         <h4>Authorize Key ID <span class="pull-right">:</span></h4>
                     </div>
                     <div class="col-md-9 margin-top-10">
-                        <input type="text" class="form-control margin-bottom-20" name="authorizekeyid" ng-model="authorizeSettings.authorizekeyid" maxlength="100" required validate-email>
+                        <input type="text" class="form-control margin-bottom-20" name="authorizekeyid" ng-model="authorizeSettings.authorizekeyid" maxlength="100" required>
                          <span ng-show="authorizeSettingsForm.authorizekeyid.$dirty&&authorizeSettingsForm.authorizekeyid.$invalid">
                                 <span class="error-message" ng-show="authorizeSettingsForm.authorizekeyid.$error.required"><span>Required.</span></span>
                          </span>
@@ -45,7 +45,7 @@
                 </div>
             </form>
             <div class="text-center">
-                <a href="" class="btn btn-success" ng-click="doUpdateAuthorizeSettings()" ng-disabled="submitContent">{{contentBtnTxt}}</a>
+                <a href="" class="btn btn-success" ng-click="doUpdateAuthorizeSettings()" ng-disabled="submitContent || doGetAuthorizeSettings_isClean() || authorizeSettingsForm.$invalid">{{contentBtnTxt}}</a>
             </div>
         </div>
     </div>

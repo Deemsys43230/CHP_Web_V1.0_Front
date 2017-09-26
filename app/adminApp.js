@@ -2697,12 +2697,13 @@ adminApp.factory('siteMenuService', function () {
         'active': ''
       },
       {
+        'id': 6,
         'name': 'Payment Settings',
         'icon': 'dollar',
         'href': 'paypal-settings',
         'active': ''
       },
-      /*{
+   /*   {
           'name': 'Razor Payment Settings',
           'icon': 'dollar',
           'href': 'razor-payment-settings',

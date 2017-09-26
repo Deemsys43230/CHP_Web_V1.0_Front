@@ -137,6 +137,7 @@ adminApp.controller('PricingPlanEditController',['$scope','requestHandler','Flas
        $scope.doGetPricingPlanByID=function(id){
         requestHandler.getRequest("getPricingPlandetail/"+$routeParams.id,"").then(function(response){
             $scope.pricingplan=response.data.pricingplan;
+            $scope.originalPricingPlan=angular.copy(response.data.pricingplan);
           },function(){
             errorMessage(Flash,"Please try again later!")
         });
@@ -157,6 +158,11 @@ adminApp.controller('PricingPlanEditController',['$scope','requestHandler','Flas
 
         $scope.submitContent=true;
         $scope.contentBtnTxt="Submitting...";
+    };
+
+//To clean pricing plan
+    $scope.isCleanPricingPlan = function() {
+        return angular.equals ( $scope.originalPricingPlan, $scope.pricingplan);
     };
 
     $scope.doGetPricingPlanByID();

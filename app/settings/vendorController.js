@@ -75,6 +75,7 @@ adminApp.controller('VendorEditSettingsController',['$scope','requestHandler','F
     $scope.doGetWearableVendor=function(){
      requestHandler.postRequest("admin/getWearableVendordDetail/",{"vendorid":$routeParams.id }).then(function(response){
           $scope.vendor=response.data.vendorlist;
+         $scope.originalVendorSettings=angular.copy(response.data.vendorlist);
         },function(){
             errorMessage(Flash,"Please try again later!")
         });
@@ -90,7 +91,10 @@ adminApp.controller('VendorEditSettingsController',['$scope','requestHandler','F
             errorMessage(Flash, "Please try again later!")
         });
 
-
+    };
+//To clean vendor settings
+    $scope.isCleanVendorSettings = function() {
+        return angular.equals ($scope.originalVendorSettings,  $scope.vendor);
     };
 
     $scope.doGetWearableVendor();

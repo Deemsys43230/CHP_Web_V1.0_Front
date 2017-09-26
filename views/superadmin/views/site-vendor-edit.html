@@ -33,7 +33,7 @@
                                 <h4>Vendor Name<span class="pull-right">:</span></h4>
                             </div>
                             <div class="col-md-8 margin-bottom-20">
-                                <input class="form-control" name="vendorname" ng-model="vendor.vendorname" required>
+                                <input type="text" class="form-control" name="vendorname" ng-model="vendor.vendorname" required>
                                     <span ng-show="vendorlistForm.vendorname.$dirty&&vendorlistForm.vendorname.$invalid">
                                   <span class="error-message" ng-show="vendorlistForm.vendorname.$error.required"><span>Required.</span></span>
                              </span>
@@ -42,7 +42,7 @@
                                 <h4>Client ID<span class="pull-right">:</span></h4>
                             </div>
                             <div class="col-md-8 margin-bottom-20">
-                                <input class="form-control" name="clientid" ng-model="vendor.clientid" required>
+                                <input type="text" class="form-control" name="clientid" ng-model="vendor.clientid" required>
                                     <span ng-show="vendorlistForm.clientid.$dirty&&vendorlistForm.clientid.$invalid">
                                   <span class="error-message" ng-show="vendorlistForm.clientid.$error.required"><span>Required.</span></span>
                              </span>
@@ -51,7 +51,7 @@
                                 <h4>Client Secret<span class="pull-right">:</span></h4>
                             </div>
                             <div class="col-md-8 margin-bottom-20">
-                                <input class="form-control" name="clientsecret" ng-model="vendor.clientsecret" required>
+                                <input type="text" class="form-control" name="clientsecret" ng-model="vendor.clientsecret" required>
                                     <span ng-show="vendorlistForm.clientsecret.$dirty&&vendorlistForm.clientsecret.$invalid">
                                   <span class="error-message" ng-show="vendorlistForm.clientsecret.$error.required"><span>Required.</span></span>
                              </span>
@@ -60,7 +60,7 @@
                                 <h4>Authorize URL<span class="pull-right">:</span></h4>
                             </div>
                             <div class="col-md-8 margin-bottom-20">
-                                <input class="form-control" name="authorizrurl" ng-model="vendor.authorizeurl" required>
+                                <input type="text" class="form-control" name="authorizrurl" ng-model="vendor.authorizeurl" required>
                                     <span ng-show="vendorlistForm.authorizrurl.$dirty&&vendorlistForm.authorizrurl.$invalid">
                                   <span class="error-message" ng-show="vendorlistForm.authorizrurl.$error.required"><span>Required.</span></span>
                              </span>
@@ -69,7 +69,7 @@
                                 <h4>Token URL<span class="pull-right">:</span></h4>
                             </div>
                             <div class="col-md-8 margin-bottom-20">
-                                <input class="form-control" name="tokenurl" ng-model="vendor.tokenurl" required>
+                                <input type="text" class="form-control" name="tokenurl" ng-model="vendor.tokenurl" required>
                                     <span ng-show="vendorlistForm.tokenurl.$dirty&&vendorlistForm.tokenurl.$invalid">
                                   <span class="error-message" ng-show="vendorlistForm.tokenurl.$error.required"><span>Required.</span></span>
                              </span>
@@ -78,7 +78,7 @@
                                 <h4>Client Secret Encode<span class="pull-right">:</span></h4>
                             </div>
                             <div class="col-md-8 margin-bottom-20">
-                                <input class="form-control" name="csencode" ng-model="vendor.clientsecretencode" required>
+                                <input type="text" class="form-control" name="csencode" ng-model="vendor.clientsecretencode" required>
                                     <span ng-show="vendorlistForm.csencode.$dirty&&vendorlistForm.csencode.$invalid">
                                   <span class="error-message" ng-show="vendorlistForm.csencode.$error.required"><span>Required.</span></span>
                              </span>
@@ -98,7 +98,7 @@
                                 <h4>Scope<span class="pull-right">:</span></h4>
                             </div>
                             <div class="col-md-8 margin-bottom-20">
-                                <input class="form-control" name="scope" ng-model="vendor.scope" required>
+                                <input type="text" class="form-control" name="scope" ng-model="vendor.scope" required>
                                     <span ng-show="vendorlistForm.scope.$dirty&&vendorlistForm.scope.$invalid">
                                   <span class="error-message" ng-show="vendorlistForm.scope.$error.required"><span>Required.</span></span>
                              </span>
@@ -109,7 +109,7 @@
                 </form>
             </div>
             <div class="text-center margin-top-10" style="padding-left: 330px !important;">
-             <a href="" class="btn btn-success" ng-click="doUpdateWearableVendor()">Save Changes</a>&nbsp;&nbsp;
+             <a href="" class="btn btn-success" ng-click="doUpdateWearableVendor()" ng-disabled="isCleanVendorSettings() || vendorlistForm.$invalid">Save Changes</a>&nbsp;&nbsp;
                 <a href="#vendor-settings" class="btn btn-warning">Cancel</a>
             </div>
         </div>

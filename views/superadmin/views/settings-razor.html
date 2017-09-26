@@ -45,7 +45,7 @@
                 </div>
             </form>
             <div class="text-center">
-                <a href="" class="btn btn-success" ng-click="doUpdateRazorSettings()" ng-disabled="submitContent">{{contentBtnTxt}}</a>
+                <a href="" class="btn btn-success" ng-click="doUpdateRazorSettings()" ng-disabled="submitContent || doGetRazorSettings_isClean() || razorSettingsForm.$invalid">{{contentBtnTxt}}</a>
             </div>
         </div>
     </div>

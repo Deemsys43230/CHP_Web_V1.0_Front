@@ -8,7 +8,7 @@ adminApp.controller('PaypalSettingsController',['$scope','requestHandler','Flash
 
     $scope.siteMenuList = siteMenuService;
     $.each($scope.siteMenuList,function(index,value){
-        if(value.href==$location.path().substr(1)){
+        if(value.id==6){
             value.active = "active";
         }
         else value.active = ""
@@ -26,8 +26,9 @@ adminApp.controller('PaypalSettingsController',['$scope','requestHandler','Flash
             }
             $scope.paypalSettings.adminPassword="";
             $scope.paypalSettings.coursepurchaseshare = $scope.paypalSettings.coursepurchaseshare.toString();
-            $scope.paypalSettings.coachsubscribeshare = $scope.paypalSettings.coachsubscribeshare.toString();
+     /*       $scope.paypalSettings.coachsubscribeshare = $scope.paypalSettings.coachsubscribeshare.toString();*/
             original=angular.copy($scope.paypalSettings);
+
         },function(response){
             errorMessage(Flash,"Please Try again later");
         });

@@ -20,7 +20,7 @@
                         <input type="email" class="form-control margin-bottom-20" name="paypalid" ng-model="paypalSettings.paypalid" maxlength="100" required validate-email>
                          <span ng-show="paypalSettingsForm.paypalid.$dirty&&paypalSettingsForm.paypalid.$invalid">
                                 <span class="error-message" ng-show="paypalSettingsForm.paypalid.$error.required"><span>Required.</span></span>
-                              <span class="error-message" ng-show="paypalSettingsForm.paypalid.$error.email"><span>Enter&nbsp;valid&nbsp;Email&nbsp;ID</span></span>
+                              <span class="error-message" ng-show="paypalSettingsForm.paypalid.$error.validateEmail"><span>Enter&nbsp;valid&nbsp;Email&nbsp;ID</span></span>
                          </span>
                     </div>
                     <div class="col-md-3">
@@ -127,7 +127,7 @@
                 </div>
             </form>
             <div class="text-center">
-                <a id="modal_trigger" href="#updatemodal" onclick="return false;" class="btn btn-success" ng-disabled="doGetPaypalSettings_isClean() || paypalSettingsForm.$invalid || maxValue" ng-click="updateCheck()">Save Changes</a>
+                <a id="modal_trigger" href="#updatemodal" onclick="return false;" class="btn btn-success" ng-disabled="doGetPaypalSettings_isClean() || paypalSettingsForm.$invalid" ng-click="updateCheck()">Save Changes</a>
             </div>
         </div>
     </div>
@@ -151,7 +151,7 @@
                     <span class="error-message" ng-show="confirmPasswordForm.adminPassword.$error.required"><span>Required.</span></span>
                 </span>
                 <div class="action_btns margin-top-20">
-                    <div class="one_half"><a class="btn btn_red modal_close" onclick="return false" ng-disabled="confirmPasswordForm.$invalid" ng-click="doUpdatePaypalSettings()">Change Details</a></div>
+                    <div class="one_half"><a class="btn btn_red modal_close" onclick="return false" ng-disabled="confirmPasswordForm.$invalid || doGetPaypalSettings_isClean()" ng-click="doUpdatePaypalSettings()">Change Details</a></div>
                     <div class="one_half last modal_close"><a onclick="return false;" class="btn back_btn">Cancel</a></div>
                 </div>
             </form>

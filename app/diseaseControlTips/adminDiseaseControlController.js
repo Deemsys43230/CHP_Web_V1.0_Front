@@ -180,7 +180,7 @@ adminApp.controller('DiseaseControlEditController',['$scope','requestHandler','F
             $scope.healthyliving=response.data.healthyliving;
 
 
-
+           $scope. originalHealthyTipsArticle=angular.copy(response.data.healthyliving);
                 // View the bannerimage in image cropit preview in edit page
             $('.image-editor-banner').cropit({
                     imageState: {
@@ -273,6 +273,10 @@ adminApp.controller('DiseaseControlEditController',['$scope','requestHandler','F
         $scope.contentBtnTxt="Submitting...";
     };
 
+//To clean cdc content
+    $scope.isCleanHealthyTipsArticle = function() {
+        return angular.equals( $scope. originalHealthyTipsArticle, $scope.healthyliving);
+    };
     $scope.doGetHealthyTipsAdminByID();
 
 }]);

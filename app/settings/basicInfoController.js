@@ -16,16 +16,16 @@ adminApp.controller('ContactUsController',['$scope','requestHandler','Flash','si
 
 /*VIEW ALL*/
     var original="";
-  $scope.copyOrginal_contactUs=function(contactUs){
+/*  $scope.copyOrginal_contactUs=function(contactUs){
         $scope.contactUs=contactUs;
         $scope.contactUs.zipcode = $scope.contactUs.zipcode.toString();
         original=angular.copy( $scope.contactUs);
-    };
+    };*/
 
     $scope.doGetContactUs= function () {
         requestHandler.getRequest("admin/getappdetails/","").then(function(response){
             $scope.contactUs = response.data.App_settings[0];
-             $scope.copyOrginal_contactUs($scope.contactUs);
+            original=angular.copy( $scope.contactUs);
 
         },function(response){
             errorMessage(Flash,"Please Try again later");

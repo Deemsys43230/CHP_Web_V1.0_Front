@@ -6,10 +6,9 @@ var adminApp = angular.module('adminApp', ['ngRoute','oc.lazyLoad','requestModul
 
 adminApp.controller('AuthorizeNetSettingsController',['$scope','requestHandler','Flash','siteMenuService','$location',function($scope,requestHandler,Flash,siteMenuService,$location){
     var original="";
-
     $scope.siteMenuList = siteMenuService;
     $.each($scope.siteMenuList,function(index,value){
-        if(value.href==$location.path().substr(1)){
+        if(value.id==6){
             value.active = "active";
         }
         else value.active = ""
@@ -44,8 +43,12 @@ adminApp.controller('AuthorizeNetSettingsController',['$scope','requestHandler',
         $scope.contentBtnTxt="Submitting...";
         $scope.authorizeSettings.authorizetype=parseInt($scope.authorizeSettings.authorizetype);
         requestHandler.postRequest("admin/updateauthorizenet/",$scope.authorizeSettings).then(function(response){
-            $scope.doGetAuthorizeSettings();
-            successMessage(Flash,"Successfully Updated!");
+            if(response.data.Response_status!="0"){
+                $scope.doGetAuthorizeSettings();
+                successMessage(Flash,"Successfully Updated!");
+            }else{
+                errorMessage(Flash,"Please&nbsp;provide&nbsp;valid&nbsp;data")
+            }
             $scope.submitContent=false;
             $scope.contentBtnTxt="Save Changes";
         },function(){
@@ -55,7 +58,7 @@ adminApp.controller('AuthorizeNetSettingsController',['$scope','requestHandler',
 
    //To clean Authorize settings Value
     $scope.doGetAuthorizeSettings_isClean=function(){
-        return angular.equals(original, $scope.razorSettings);
+        return angular.equals(original, $scope.authorizeSettings);
     };
 
   //T0 init()  the Getsettings page while loading the page

@@ -54,7 +54,7 @@
                                     <a href="#coach-subscription-view/{{subscriptionHistory.paymentid}}/coach-list" class="btn-xs btn-primary">View&nbsp;Details</a>
                                 </td>
                             </tr>
-                            <tr ng-show="subscriptionHistoryList.history.length==0"><td colspan="9" class="text-center">No Subscriptions Found !!!</td></tr>
+                            <tr ng-show="subscriptionHistoryList.history.length==0 || subscriptionHistoryList.totalrecords==0"><td colspan="9" class="text-center">No Subscriptions Found !!!</td></tr>
                             </tbody>
                         </table>
                         <!-- Start Pagination -->

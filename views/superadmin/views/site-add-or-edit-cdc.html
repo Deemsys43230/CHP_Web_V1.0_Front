@@ -94,8 +94,8 @@
                 </form>
             </div>
             <div class="text-center margin-top-10">
-                <a href="" class="btn btn-success" ng-click="doAddHealthyTips()" ng-disabled="diseasecontrolForm.$invalid||submitContent" ng-show="isNew">{{contentBtnTxt}}</a>
-                <a href="" class="btn btn-success" ng-click="doUpdateHealthyTips()" ng-disabled="diseasecontrolForm.$invalid||submitContent" ng-hide="isNew">{{contentBtnTxt}}</a>
+                <a href="" class="btn btn-success" ng-click="doAddHealthyTips()" ng-disabled="diseasecontrolForm.$invalid||submitContent || isCleanHealthyTipsArticle()" ng-show="isNew">{{contentBtnTxt}}</a>
+                <a href="" class="btn btn-success" ng-click="doUpdateHealthyTips()" ng-disabled="diseasecontrolForm.$invalid||submitContent || isCleanHealthyTipsArticle()" ng-hide="isNew">{{contentBtnTxt}}</a>
                 <a href="#cdc-list" class="btn btn-warning">Cancel</a>
             </div>
         </div>

@@ -87,8 +87,8 @@
                 </form>
             </div>
             <div class="text-center margin-top-10">
-                <a href="" class="btn btn-success"  ng-disabled="pricingplanForm.$invalid||submitContent || maxValue" ng-click="doAddCoachPricingPlan()" ng-show="isNew">{{contentBtnTxt}}</a>
-                <a href="" class="btn btn-success"  ng-disabled="pricingplanForm.$invalid ||submitContent || maxValue" ng-hide="isNew" ng-click="doUpdatePricingPlan()">{{contentBtnTxt}}</a>
+                <a href="" class="btn btn-success"  ng-disabled="pricingplanForm.$invalid||submitContent || maxValue || isCleanPricingPlan()" ng-click="doAddCoachPricingPlan()" ng-show="isNew">{{contentBtnTxt}}</a>
+                <a href="" class="btn btn-success"  ng-disabled="pricingplanForm.$invalid ||submitContent || maxValue || isCleanPricingPlan()" ng-hide="isNew" ng-click="doUpdatePricingPlan()">{{contentBtnTxt}}</a>
                 <a href="#pricing-plan-list" class="btn btn-warning">Cancel</a>
             </div>
         </div>
