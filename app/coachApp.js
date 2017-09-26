@@ -510,6 +510,37 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'ViewCoachWorkoutPlanController'
             }).
+            when('/coach-assessments', {
+                templateUrl: 'views/coach-assessments.html',
+                resolve: {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'coachApp',
+                            files:[
+                                '../../app/coachAssessments/CoachAssessmentsController.js',
+                                '../../angular/angular-utils-pagination/dirPagination.js'
+                            ]
+                        })
+                    }]
+                },
+                controller:'CoachAssessmentsController'
+            }).
+            when('/coach-assessment-add', {
+                templateUrl: 'views/coach-assessments-view.html',
+                resolve: {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'coachApp',
+                            files:[
+                            '../../plugin/popup/style.css',
+                                '../../app/coachAssessments/CoachAssessmentsController.js',
+                                '../../angular/angular-utils-pagination/dirPagination.js'
+                            ]
+                        })
+                    }]
+                },
+                controller:'CoachAddAssessmentsController'
+            }).
             when('/course', {
                 templateUrl: 'views/course.html',
                 resolve: {
