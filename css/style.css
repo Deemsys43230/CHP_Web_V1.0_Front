@@ -18112,9 +18112,16 @@ select.event:focus {
     font-size: 35px !important;
     line-height: 55px;
 }
+/*for medication document file upload in user side*/
 .document-image-upload-box{
    border: solid #808080 3px;
     height: 110px;
     margin-top: 10px;
 }
-
+/*for medication document in coach side*/
+.view-text-color{
+    color: #0000ff !important;
+    text-decoration: underline !important;
+    font-weight: bold ! important;
+    font-size: 14px;
+}
