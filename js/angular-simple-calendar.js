@@ -23,11 +23,11 @@ angular.module('500tech.simple-calendar', []).directive('simpleCalendar', functi
       '<div>' +
       '<div ng-repeat="week in weeks track by $index" class="week">' +
       '<div class="day"' +
-      'ng-class="{default: isDefaultDate(date),selectedDay:isSelectedDate(date), event: date.event, disabled: date.disabled || isBookedDate(options.availableDate) || !date}"' +
+      'ng-class="{default: isDefaultDate(date),scheduledDay:isScheduledDate(date),selectedDay:isSelectedDate(date), event: date.event, disabled: date.disabled || !date}"' +
       'ng-repeat="date in week  track by $index"' +
       'ng-click="onClick(date)">' +
       '<div class="day-number">{{ date.day || "&nbsp;" }}' +
-      '<span ng-show="options.canbook"><i class="fa fa-check-circle text-green"></i></span>'+
+      '<div ng-show="isUserBookableDate(date)"><a href="" class="appointment_booknow">Book&nbsp;Now</a></div>'+
       '</div>' +
       '<div class="event-title">{{ date.event.title || "&nbsp;" }}</div>' +
       '</div>' +
@@ -178,20 +178,28 @@ angular.module('500tech.simple-calendar', []).directive('simpleCalendar', functi
         if (!date) { return; }
         return date.year === $scope.options.selectedDate.year &&
           date.month === $scope.options.selectedDate.month &&
-          date.day === $scope.options.selectedDate.day
+          date.day === $scope.options.selectedDate.day;
       };
 
-      $scope.availDate= $scope.options.availableDate;
-      
-      $scope.isBookedDate = function (availDate) {
-        console.log("Date",availDate);
-  
-        if(!$scope.options.availableDate){return;}
-        if (!availDate) { return; }
-        return availDate.year === $scope.options.availableDate.year &&
-          availDate.month === $scope.options.availableDate.month &&
-          availDate.day === $scope.options.availableDate.day
-      };
+      $scope.isScheduledDate=function(date){
+        if (!date) { return; }
+        var processingDate=date.day+"/"+date.month+"/"+date.year;
+        if($scope.options.coachappointments.indexOf(processingDate)!=-1){
+          return true;
+        }else{
+          return false;
+        }
+      }
+
+      $scope.isUserBookableDate=function(date){
+        if (!date) { return; }
+        var processingDate=date.day+"/"+date.month+"/"+date.year;
+        if($scope.options.userappointments.indexOf(processingDate)!=-1){
+          return true;
+        }else{
+          return false;
+        }
+      }
 
       $scope.prevMonth = function () {
         if (!$scope.allowedPrevMonth()) { return; }
@@ -203,6 +211,7 @@ angular.module('500tech.simple-calendar', []).directive('simpleCalendar', functi
           $scope.selectedMonth = MONTHS[currIndex - 1];
         }
         calculateWeeks();
+        $scope.options.prevMonth(currIndex);
       };
 
       $scope.nextMonth = function () {
@@ -215,6 +224,7 @@ angular.module('500tech.simple-calendar', []).directive('simpleCalendar', functi
           $scope.selectedMonth = MONTHS[currIndex + 1];
         }
         calculateWeeks();
+        $scope.options.nextMonth(currIndex);
       };
 
       $scope.$watch('options.defaultDate', function() {

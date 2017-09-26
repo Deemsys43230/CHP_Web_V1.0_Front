@@ -20,24 +20,45 @@ coachApp.controller('AppointmentController',['$scope','requestHandler','Flash','
   var startDate = selectedDate;
  
   $scope.calendarOptions = {
+    coachappointments:[],
+    userappointments:[],
     dayNamesLength: 3, // How to display weekdays (1 for "M", 2 for "Mo", 3 for "Mon"; 9 will show full day names; default is 1)
     dateClick: function(date){
-      $scope.scheduleAppointmentDate(date)
+      $scope.coachGetDateDetails(date);
+     },
+    nextMonth :function(monthIndex){
+        var todayDate = new Date();
+        $scope.fromDate=moment(new Date(todayDate.getFullYear(), monthIndex+1, 1)).format('DD/MM/YYYY');
+        $scope.endDate=moment(new Date(todayDate.getFullYear(), monthIndex+2, 0)).format('DD/MM/YYYY');
+        $scope.coachGetAppointmentList($scope.fromDate,$scope.endDate);
+     },
+    prevMonth :function(monthIndex){
+        var todayDate = new Date();
+        $scope.fromDate=moment(new Date(todayDate.getFullYear(), monthIndex-1, 1)).format('DD/MM/YYYY');
+        $scope.endDate=moment(new Date(todayDate.getFullYear(), monthIndex, 0)).format('DD/MM/YYYY');
+        $scope.coachGetAppointmentList($scope.fromDate,$scope.endDate);
      }
+
   };
-
-	$scope.scheduleAppointmentDate = function(date){
-        $scope.currentDate= moment(date).format('DD/MM/YYYY');
+  //Get Single Date Appointment Details
+  $scope.coachGetDateDetails=function(date){
+        var coachSelectedDate=moment(date).format('DD/MM/YYYY');
         $scope.calendarOptions.selectedDate=date;
-        $scope.previousDate= 0;
-        if($scope.currentDate<startDate){
-          $scope.previousDate=$scope.currentDate;
-        }
-        $scope.coachGetAppointmentList();
-        $scope.bookingList=false;
-        return $scope.currentDate;
-   };
-
+        $scope.getAppointmentsParam={"fromdate":coachSelectedDate,"todate":coachSelectedDate};
+        //Get Single date
+        requestHandler.postRequest("coach/coachappointments/",$scope.getAppointmentsParam).then(function(response){
+          $scope.enableAppointment=false;
+          $scope.selectedDateAppointments= response.data.appointments;
+          if($scope.selectedDateAppointments.length==0)
+            $scope.enableAppointment=true;           
+          else{
+            $scope.userAppointmentList=$scope.selectedDateAppointments[0].users;
+            $scope.appointmentsCount=$scope.selectedDateAppointments[0].count;
+          }
+            
+        });
+  };
+  //Get Client Count Popup.
   $scope.appointmentPopup=function(){
       $(function(){
           $("#lean_overlay").fadeTo(1000);
@@ -62,39 +83,41 @@ coachApp.controller('AppointmentController',['$scope','requestHandler','Flash','
   };
 
   $scope.coachScheduleAppointment= function(){
-        $scope.booking.date= $scope.currentDate;
+        var bookingDate=$scope.calendarOptions.selectedDate;
+        var formattedBookingDate=moment(bookingDate).format('DD/MM/YYYY');
+        $scope.booking.date=formattedBookingDate;
         requestHandler.postRequest("coach/createappointment/", $scope.booking).then(function(response){
             successMessage(Flash,"Successfully Scheduled");
-            $scope.coachGetAppointmentList();
-            $scope.bookingList=true;
+            $scope.coachGetAppointmentList($scope.fromDate,$scope.endDate);
+            $scope.coachGetDateDetails($scope.calendarOptions.selectedDate);
         }, function(){
             errorMessage(Flash,"Please try again later!");
         });
    };
 
-  $scope.coachGetAppointmentList=function(){
-        $scope.enableAppointment=false;
-        $scope.showAppointmentCount=false;
-        $scope.getAppointmentsParam={"fromdate":$scope.currentDate,"todate":$scope.currentDate};
+   $scope.doDeleteAppointment=function(){
+     
+       requestHandler.postRequest("coach/deleteappointment/",{"appointmentid": $scope.selectedDateAppointments[0].id}).then(function(response){
+            successMessage(Flash,"Successfully Cancelled");
+            $scope.coachGetAppointmentList($scope.fromDate,$scope.endDate);
+            $scope.coachGetDateDetails($scope.calendarOptions.selectedDate);
+        }, function(){
+            errorMessage(Flash,"Please try again later!");
+        });
+   }
+
+  $scope.coachGetAppointmentList=function(fromDate,endDate){
+       
+        $scope.getAppointmentsParam={"fromdate":fromDate,"todate":endDate};
+
         requestHandler.postRequest("coach/coachappointments/",$scope.getAppointmentsParam).then(function(response){
           $scope.appointments= response.data.appointments;
-
-          if($scope.appointments==""){
-              $scope.enableAppointment=true;
-            }
+          $scope.coachappointments=[];
           $.each($scope.appointments,function(index,value){
-            if(value.users.appointmentid==$scope.appointments.id){
-              $scope.userAppointmentList= angular.copy(value.users);
-              $scope.enableAppointment=false;
-              $scope.bookingList=true;
-              
-              if($scope.userAppointmentList.length>0){
-                $scope.showAppointmentCount=true;
-                $scope.appointmentsCount=$scope.userAppointmentList.length;
-              }
-            }
+            var processingDate=value.date.split('/');
+            $scope.coachappointments.push(parseInt(processingDate[0])+"/"+(parseInt(processingDate[1])-1)+"/"+parseInt(processingDate[2]));
           });
-
+          $scope.calendarOptions.coachappointments=$scope.coachappointments;
         }, function(){
             errorMessage(Flash,"Please try again later!");
         });
@@ -110,7 +133,14 @@ coachApp.controller('AppointmentController',['$scope','requestHandler','Flash','
     $scope.init=function(){
       $scope.currentDate= moment(new Date()).format('DD/MM/YYYY');
       $scope.booking={};
-      $scope.coachGetAppointmentList();
+
+      var todayDate = new Date();
+      $scope.fromDate=moment(new Date(todayDate.getFullYear(), todayDate.getMonth(), 1)).format('DD/MM/YYYY');
+      $scope.endDate=moment(new Date(todayDate.getFullYear(), todayDate.getMonth()+1, 0)).format('DD/MM/YYYY');
+      //Load Whole Month Appointments  
+      $scope.coachGetAppointmentList($scope.fromDate,$scope.endDate);
+      //Load Single Date Appointments User list
+      $scope.coachGetDateDetails($scope.fromdate);
     };
 
     $scope.init();

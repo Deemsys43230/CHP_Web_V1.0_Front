@@ -17991,6 +17991,9 @@ select.event:focus {
   .day.selectedDay{
     background-color: #fdae21 !important;
     }
+    .day.scheduledDay{
+    background-color: #dcffda;
+    }
   .day:hover{
     cursor: pointer;
     background-color: #fdae21!important;
@@ -18048,6 +18051,10 @@ select.event:focus {
     overflow-y: scroll;
     overflow-x:hidden;
     word-wrap: break-word;
+}
+.appointment_booknow{
+    text-decoration: underline !important;
+    color:brown;
 }
 
 /*for home page carousal image*/
