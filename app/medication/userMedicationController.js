@@ -166,7 +166,20 @@ userApp.controller('UserMedicationController',['$scope','requestHandler','Flash'
 	 	});	
         }
     };
-    
+
+    //to check user is having coach or not
+    $scope.doCheckUserMedicationDocument=function(){
+        $scope.showDocumentList=false;
+        $scope.loader=true;
+        requestHandler.getRequest("user/checkfolderexist/","").then(function(response){
+            $scope.userUploadedDocumentIsExists=response.data.isexist;
+            $scope.showDocumentList=true;
+            $scope.loader=false;
+        }, function(){
+            errorMessage(Flash,"Please try again later!");
+        });
+    };
+
     $scope.isClean= function(){
         return angular.equals(original, $scope.medication);
    };
@@ -175,6 +188,7 @@ userApp.controller('UserMedicationController',['$scope','requestHandler','Flash'
     $scope.userMedicationInit=function(){
     	$scope.paginationLoad=false;
     	$scope.doGetMedicationListByUser();
+        $scope.doCheckUserMedicationDocument();
     };
 }]);
 userApp.controller('UserMedicationDocumentUploadController',['$scope','requestHandler','Flash','$location','$routeParams','roundProgressService',function($scope,requestHandler,Flash,$location,$routeParams,roundProgressService) {
@@ -222,17 +236,12 @@ userApp.controller('UserMedicationDocumentUploadController',['$scope','requestHa
 
 //to check user is having coach or not
     $scope.doCheckUserMedicationDocument=function(){
+        $scope.showDocumentList=false;
         $scope.loader=true;
         requestHandler.getRequest("user/checkfolderexist/","").then(function(response){
-            $scope.userUploadedDocumentIsExists=response.data.isexist;
-
-            if($scope.userUploadedDocumentIsExists==1){
-                  $scope.showDocumentList=true;
-            }
-            else{
-                $scope.showDocumentList=false;
-            }
-            $scope.loader=false;
+          $scope.userUploadedDocumentIsExists=response.data.isexist;
+            $scope.showDocumentList=true;
+          $scope.loader=false;
         }, function(){
             errorMessage(Flash,"Please try again later!");
         });
