@@ -57,7 +57,7 @@
             <div class="col-lg-3 col-md-3 col-sm-3 text-center">
                 <h4>Upload Document</h4><hr/><br/>
                 <div class="circle-wrapper">
-                    <div class="circle-progress ng-cloak" ng-style="getStyle()">{{usedSpace}} <br/><small> space used</small></div>
+                    <div class="circle-progress ng-cloak" ng-style="getStyle()">{{usedSpace}}&nbsp;KB <br/><small> space used</small></div>
                     <div round-progress
                             max="availableSpace"
                             current="usedSpace"
@@ -74,21 +74,21 @@
                             offset="{{ offset }}">
                     </div>
                 </div>
-                <p class="text-gray text-center">of {{availableSpace}} space.</p>
+                <h4 class="text-gray text-center">of {{availableSpace}}&nbsp;MB space</h4>
 
        <div class="document-image-upload-box text-center"><br/>
            <form name="documentUploadForm" novalidate>
-           <input type="file" ng-model="uploadFile" file-model="uploadFile" name="file" style="padding-left: 50px;" required /><br/>
+           <input type="file" ng-model="uploadFile" file-model="uploadFile" name="file" valid-file required style="padding-left: 30px;" class="wrap-all"/><br/>
           <span ng-show="documentUploadForm.file.$dirty&&documentUploadForm.file.$invalid">
-              <span class="error-message" ng-show="documentUploadForm.file.$error.required"><span>Required.</span></span>
-              <span class="error-message" ng-show="documentUploadForm.file.$error.validFile"><span>Select file to Upload.</span></span>
+              <span class="error-message" ng-show="documentUploadForm.file.$error.required"><span>Select&nbsp;file&nbsp;to&nbsp;Upload.</span></span>
+              <!--<span class="error-message" ng-show="documentUploadForm.file.$error.validFile"><span>Select file to Upload.</span></span>-->
           </span>
-       <div class="action_btns margin-bottom-20" style="padding:0 10px 0 10px;">
-           <div class="one_half">
-               <button type="button" onclick="return false;" ng-disabled="documentUploadForm.$invalid || fileUpload" ng-click="doUploadFile()" class="btn-sm btn_blue">{{uploadBtnTxt}}</button>
+       <div class="text-center margin-bottom-20">
+           <div class="col-lg-6 col-md-6 col-sm-6">
+               <button type="button" ng-disabled="documentUploadForm.$invalid" ng-click="doUploadFile()" class="btn-xs btn-primary" style="width: 100%">{{uploadBtnTxt}}</button>
            </div>
-           <div class="one_half last">
-               <button type="button" onclick="return false;" class="btn-sm btn_red"  ng-disabled="documentUploadForm.$invalid" ng-click="resetDocument()">Cancel</button>
+           <div class="col-lg-6 col-md-6 col-sm-6">
+               <button type="button" ng-disabled="fileUpload" ng-click="resetDocument()" class="btn-xs btn-danger" style="width: 100%">Cancel</button>
            </div>
        </div>
                </form>

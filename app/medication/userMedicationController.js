@@ -270,15 +270,18 @@ userApp.controller('UserMedicationDocumentUploadController',['$scope','requestHa
            $scope.uploadBtnTxt="Upload File";
            $scope.fileUpload=false;
            $scope.doGetUserUploadedDocument($scope.userDetails.userid);
+           $scope.resetDocument();
        });
 
     };
 
     //To clear uploaded file
     $scope.resetDocument = function () {
+        $scope.uploadFile="";
         angular.element("input[type='file']").val(null);
-       /* $scope.uploadFile="";
-        $scope.documentUploadForm.$setPristine();*/
+        $scope.documentUploadForm.$setPristine();
+
+
     };
 
     //init()
@@ -350,6 +353,7 @@ userApp.directive('fileModel', ['$parse', function ($parse) {
     };
 }]);
 
+
 // Validation for file upload
 userApp.directive('validFile',function(){
     return {
@@ -357,8 +361,7 @@ userApp.directive('validFile',function(){
         link:function(scope,el,attrs,ngModel){
             //change event is fired when file is selected
             el.bind('change',function(){
-                //alert("invalid file");
-                scope.$apply(function(){
+            scope.$apply(function(){
                     ngModel.$setViewValue(el.val());
                     ngModel.$render();
                 })
