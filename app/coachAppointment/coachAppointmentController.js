@@ -44,6 +44,13 @@ coachApp.controller('AppointmentController',['$scope','requestHandler','Flash','
   $scope.coachGetDateDetails=function(date){
         var coachSelectedDate=moment(date).format('DD/MM/YYYY');
         $scope.calendarOptions.selectedDate=date;
+        $scope.selectedDate= moment($scope.calendarOptions.selectedDate).format('DD/MM/YYYY');
+        $scope.previousDate=0;
+        $scope.cancelAppointment=true;
+        if(startDate>$scope.selectedDate){
+          $scope.previousDate=$scope.selectedDate;
+          $scope.cancelAppointment=false;
+        }
         $scope.getAppointmentsParam={"fromdate":coachSelectedDate,"todate":coachSelectedDate};
         //Get Single date
         requestHandler.postRequest("coach/coachappointments/",$scope.getAppointmentsParam).then(function(response){

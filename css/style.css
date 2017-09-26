@@ -18057,6 +18057,19 @@ select.event:focus {
     color:brown;
 }
 
+.lightgreen{
+    background-color: #dcffda;
+    border: 1px solid #ddd;
+}
+
+.appointment_legend{
+    display: block;
+    height: 16px;
+    width: 15px;
+    position: absolute;
+    margin-top: 3px;
+}
+
 /*for home page carousal image*/
 
   /* Carousel Styles */

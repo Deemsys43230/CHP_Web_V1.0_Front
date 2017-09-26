@@ -15,12 +15,20 @@
                         </div>
                     </div>
                     <div class="col-lg-12 col-md-12 col-sm-12">
+                        <div class="col-md-7 no-padding pull-right margin-top-3 margin-bottom-15">
+                            <div class="col-md-4 no-padding pull-right">
+                            <span class="orange appointment_legend"></span><div class="margin-left-20">&nbsp;-&nbsp;&nbsp;Scheduled&nbsp;Appointment&nbsp;Date</div>
+                            </div>
+                            <div class="col-md-4 no-padding pull-right">
+                            <span class="lightgreen appointment_legend"></span><div class="margin-left-20">&nbsp;-&nbsp;&nbsp;Selected&nbsp;Appointment&nbsp;Date</div>
+                            </div>
+                            
+                         </div>
                         <div class="col-lg-8 col-md-8 col-sm-8">
                            <simple-calendar events="events" options="calendarOptions"></simple-calendar>
-                            
                         </div>
-                        <div class="col-lg-4 col-md-4 col-sm-4 no-padding">
-                            <div class="appointment-div text-bold">APPOINTMENTS&nbsp;-&nbsp;{{currentDate}}
+                        <div class="col-lg-4 col-md-4 col-sm-4">
+                            <div class="appointment-div text-bold">APPOINTMENTS&nbsp;-&nbsp;{{selectedDate}}
                                 <!-- <span class="nav-item__badge" style="position: absolute; margin-left: 90px; top: 24px; font-size: 13px; padding-top: 1px;" >
                                 <span aria-hidden="true" class="nav-item__badge-count ng-binding">{{appointmentsCount}}</span>
                                 </span> -->
@@ -34,7 +42,7 @@
 
                                 <div class="coach-list appointment_scrollbar margin-left-5" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#eee'}" ng-hide="enableAppointment">
                                     <span class="pull-left margin-left-20">Clients Count:&nbsp;{{appointmentsCount}}</span>
-                                    <a href="" class="pull-right appointment_booknow" ng-click="doDeleteAppointment()" style="margin-right:20px;">Cancel Appointment</a>
+                                    <a href="" class="pull-right appointment_booknow" ng-click="doDeleteAppointment()" style="margin-right:20px;" ng-show="cancelAppointment">Cancel Appointment</a>
                                     <div ng-show="userAppointmentList.length>0" class="coach-view-width">
                                             <div class="coach-view col-lg-12 col-md-12 col-sm-12" ng-repeat= "userAppointment in userAppointmentList">
                                                 <div class="col-lg-2 col-md-2 col-sm-2 no-padding">
