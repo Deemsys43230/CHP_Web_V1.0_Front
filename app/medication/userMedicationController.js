@@ -1,5 +1,5 @@
 
-var userApp = angular.module('userApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','ngPercentDisplay','angular-svg-round-progress','angularUtils.directives.dirPagination']);
+var userApp = angular.module('userApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','angular-svg-round-progress','angularUtils.directives.dirPagination']);
 
 userApp.controller('UserMedicationController',['$scope','requestHandler','Flash','$location','$routeParams',function($scope,requestHandler,Flash,$location,$routeParams) {
    
@@ -206,7 +206,7 @@ userApp.controller('UserMedicationDocumentUploadController',['$scope','requestHa
         $('.search-list-form input').focus();
     });
 
-//to get user id
+  //to get user id
         $scope.doGetUserDetails=function(){
             $scope.loader=true;
             requestHandler.getRequest("getUserId/").then(function(response){
@@ -264,8 +264,7 @@ userApp.controller('UserMedicationDocumentUploadController',['$scope','requestHa
     $scope.doUploadFile = function(){
         $scope.fileUpload=true;
         $scope.uploadBtnTxt="Uploading...";
-
-       requestHandler.directFileUpload("user/uploadfile/",$scope.uploadFile,"document").then(function(){
+    requestHandler.directFileUpload("user/uploadfile/",$scope.uploadFile,"document").then(function(){
            successMessage(Flash,"Successfully Uploaded");
            $scope.uploadBtnTxt="Upload File";
            $scope.fileUpload=false;
@@ -280,8 +279,6 @@ userApp.controller('UserMedicationDocumentUploadController',['$scope','requestHa
         $scope.uploadFile="";
         angular.element("input[type='file']").val(null);
         $scope.documentUploadForm.$setPristine();
-
-
     };
 
     //init()
@@ -325,15 +322,6 @@ userApp.controller('UserMedicationDocumentUploadController',['$scope','requestHa
     var getPadded = function(val){
         return val < 10 ? ('0' + val) : val;
     };
-}]);
-
-// render image to view in list
-userApp.filter('trusted', ['$sce', function ($sce) {
-    return function(url) {
-        return $sce.trustAsResourceUrl(url);
-    };
-
-
 }]);
 
 userApp.directive('fileModel', ['$parse', function ($parse) {

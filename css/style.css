@@ -10030,6 +10030,13 @@ a#measure-modal{
     margin-top: 5px;
 }
 
+/*for document upload circle wrapper*/
+.circle-wrapper-document{
+    position: relative;
+    text-align: center;
+    margin-top: 20px;
+
+}
 .circle-progress{
     position: absolute;
     color: #bbb;
@@ -18134,9 +18141,12 @@ select.event:focus {
 }
 /*for medication document file upload in user side*/
 .document-image-upload-box{
-   border: solid #808080 3px;
-    height: 110px;
+   border: solid #808080 2px;
+    height: 300px;
     margin-top: 10px;
+    background-color: #fff;
+    box-shadow: inset -3px 3px 0px #A6ACAF;
+    border-radius: 10px !important;
 }
 /*for medication document in coach side*/
 .view-text-color{
