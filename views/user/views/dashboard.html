@@ -871,7 +871,8 @@
                     <div class="col-lg-12 col-md-12 col-sm-12">
                         <!--<h6 ng-show="budgetCheck==0"><div class="label-danger">You are going under our recommended budget value. Please change your weight plan.</div></h6>-->
                         <h6 ng-show="budgetDetails.OverorUnderStatus==1"><div class="label-danger">You have consumed {{budgetDetails.OverorUnderValue}} more calories. Please do exercise.</div></h6>
-                        <h6 ng-show="budgetDetails.OverorUnderStatus==2"><div class="label-success">You should take {{budgetDetails.OverorUnderValue}} more calories to reach today’s budget.</div></h6>
+                        <h6 ng-show="budgetDetails.OverorUnderStatus==2" ng-hide="budgetDetails.OverorUnderValue==0"><div class="label-success">You should take {{budgetDetails.OverorUnderValue}} more calories to reach today’s budget.</div></h6>
+                        <h6 ng-show="budgetDetails.OverorUnderValue==0"><div class="label-success">You reached your today’s budget.</div></h6>
                     </div>
                 </div>
                 <div class="col-md-12 col-lg-12 col-sm-12 no-padding margin-top-10">
