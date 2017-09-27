@@ -41,8 +41,8 @@
                             <td class="wrap-all">{{file.filename}}</td>
                             <td>{{file.LastModified}}</td>
                             <td>
-                                <a class="view-text-color" href="{{file.filepath}}" download="{{file.filename}}" target="_blank">Download File</a>&nbsp;&nbsp;
-                                <a class="btn-xs btn-primary" href="{{file.filepath}}" target="_blank">View Document</a>&nbsp;&nbsp;
+                                <a class="view-text-color" href="{{file.filepath}}" download="{{file.filename}}" target="_blank">Download</a>&nbsp;&nbsp;
+                                <a class="btn-xs btn-primary" href="{{file.filepath}}" target="_blank">View</a>&nbsp;&nbsp;
                                <a href="" class="btn-xs btn-danger" ng-click="deleteUserUploadedDocument(file.filename)">Remove</a>
                             </td>
                         </tr>
@@ -58,6 +58,7 @@
             <div class="col-lg-3 col-md-3 col-sm-3 text-center">
                 <h4>Upload Document</h4>
                 <div class="document-image-upload-box">
+
                 <div class="circle-wrapper-document">
                     <div class="circle-progress ng-cloak" ng-style="getStyle()">{{usedSpace}}&nbsp;MB <br/><small> space used</small></div>
                     <div round-progress
@@ -76,12 +77,13 @@
                             offset="{{ offset }}">
                     </div>
                 </div>
-                <h4 class="text-gray text-center">out of 20&nbsp;MB space</h4><br/>
+                <h4 class="text-gray text-center">out of 20&nbsp;MB space</h4>&nbsp;
+                    <span class="text-red" ng-show="documentUploadForm.file.$error.validateFileType"><span>Valid&nbsp;Formats&nbsp;:&nbsp;['jpeg','pdf']</span></span>
   <form name="documentUploadForm" novalidate>
            <input type="file" ng-model="uploadFile" id="c" file-model="uploadFile" name="file" valid-file required style="padding-left: 30px;" class="wrap-all" validate-file-type/><br/>
           <span ng-show="documentUploadForm.file.$dirty&&documentUploadForm.file.$invalid">
               <span class="error-message" ng-show="documentUploadForm.file.$error.required"><span>Select&nbsp;file&nbsp;to&nbsp;Upload.</span></span>
-              <span class="error-message" ng-show="documentUploadForm.file.$error.validateFileType"><span>Upload&nbsp;only&nbsp;a&nbsp;Valid&nbsp;Formats&nbsp;:&nbsp;['jpg','jpeg','png','pdf']</span></span>
+
           </span>
        <div class="text-center margin-bottom-20">
            <div class="col-lg-6 col-md-6 col-sm-6">
@@ -91,7 +93,7 @@
                <button type="button" ng-disabled="fileUpload" ng-click="resetDocument()" class="btn-xs btn-danger" style="width: 100%">Cancel</button>
            </div>
        </div>
-               </form>
+  </form>
       </div>
 
 </div>
