@@ -1968,6 +1968,31 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
         });
     };
 
+     //Reset Scope
+    $scope.resetAssessment=function(){
+        $scope.assignAssessment={};
+        $scope.assignAssessment.id="";
+        $scope.assessmentAssignForm.$setPristine();
+        $(function(){
+            $("#lean_overlay").fadeTo(1000);
+            $("#modal-assign-assessment").fadeIn(600);
+            $(".common_model").show();
+        });
+
+        $(".modal_close").click(function(){
+            $(".common_model").hide();
+            $("#modal-assign-assessment").hide();
+            $("#lean_overlay").hide();
+        });
+
+        $("#lean_overlay").click(function(){
+            $(".common_model").hide();
+            $("#modal-assign-assessment").hide();
+            $("#lean_overlay").hide();
+        });
+    };
+
+
     //Get Coach Meal Plan List
     $scope.doGetMyMealPlansList=function(){
         $scope.coachPlanPagination={
@@ -2030,6 +2055,33 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
             errorMessage(Flash,"Please try again later!")
         });
     };
+
+     //Get Coach Workout Plan List
+    $scope.doGetMyAssessmentsList=function(){
+       requestHandler.getRequest("coach/getmyassessments/","").then(function(response){
+            $scope.coachAssessmentsList= response.data.assessments;
+        }, function(){
+            errorMessage(Flash,"Please try again later!")
+        });
+    };
+
+     $scope.doAssignAssessment=function(){
+         $scope.assignParams={"userids":[],
+                             "groupids":[],
+                             "assessmentid":$scope.assignAssessment.id
+                            };
+        $scope.assignParams.userids.push($routeParams.id);
+
+        //API Request
+        requestHandler.postRequest("coach/assigntouser/",$scope.assignParams).then(function(response){
+            if(response.data.Response_status==1){
+                successMessage(Flash,"Successfully Assigned!");
+                $scope.doGetUserAssessments($routeParams.id);
+            }else{
+                errorMessage(Flash,"Please try again later!!")
+            }
+        });
+    }
 
     $scope.setRemovingMealPlanId=function(mapid){
         $scope.removingMealPlanId= mapid;
@@ -2105,6 +2157,7 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
         $scope.workoutPlanPagination={"itemsPerPage":10,"pageNumber":1};
         $scope.doGetMyMealPlansList();
         $scope.doGetMyWorkoutPlansList();
+        $scope.doGetMyAssessmentsList();
         $scope.addMealPlan={};
         $scope.addWorkoutPlan={};
         $scope.assessmentOptions={"showAssessment":true};

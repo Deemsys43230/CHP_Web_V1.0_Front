@@ -29,9 +29,9 @@
                             <td class="wrap-all">{{assessment.assessmentname}}</td>
                             <td class="wrap-all">{{assessment.status==0?"In Draft":"Completed"}}</td>
                             <td>
-                                <a href="#coach-assessment-view/{{assessment.id}}" class="btn-xs btn-primary">View</a>
-                                <a href="#coach-assessment-edit/{{assessment.id}}" class="btn-xs btn-warning">Edit</a>
+                                <a href="#coach-assessment-edit/{{assessment.id}}"  ng-hide="assessment.status==1" class="btn-xs btn-warning">Edit</a>
                                 <a href="" class="btn-xs btn-danger" ng-click="doDeleteAssessment(assessment.id)">Delete</a>
+                                <a href="#coach-assessment-view/{{assessment.id}}" class="btn-xs btn-primary">{{assessment.status==0?"View":"View/Assign"}}</a>
                             </td>
                         </tr>    
                         <tr ng-show="coachAssessmentsList.length==0"><td colspan="4" class="text-center">No Assessment Found!!!</td></tr>

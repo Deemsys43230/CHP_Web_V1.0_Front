@@ -224,15 +224,112 @@ coachApp.controller('CoachViewAssessmentsController',['$scope','requestHandler',
     $scope.getAssessmentDetails=function(){
         requestHandler.getRequest("coach/getassessmentdetail/"+$routeParams.id+"/","").then(function(response){
             $scope.assessments=response.data.assessment;
+            if($scope.assessments.status==1){
+                        $scope.assignTo=1;
+                        $scope.doGetAllClientsOrGroups();
+            }
             original=angular.copy($scope.assessments); 
         });
     };
 
+    //Get All Client List and group list with send message type
+    $scope.doGetAllClientsOrGroups = function(){
+        $scope.groupsList=[];
+        $scope.coachClients={};
+        if($scope.assignTo==1){
+            $scope.selectText="Select Members";
+            $scope.selectGroup="Select All Members";
+            requestHandler.getRequest("/coach/myclients/","").then(function(response){
+                $scope.coachClients = response.data.clients;
+                $scope.resetSelectedCheckBox();
+              });        
+        }else{
+            $scope.selectText="Select Groups";
+            $scope.selectGroup="Select All Groups";
+                requestHandler.getRequest("coach/getGroups/").then(function(response){
+                $scope.groupsList=[];
+                $scope.groupsList=response.data.Groups;
+                $scope.resetSelectedCheckBox();
+            });
+            $scope.loaded=false;
+        }       
+    };
+
+    //for select all button push id to dosendgroupmessage
+    $scope.doSelectDeselect = function(isSelected){
+       if($scope.assignTo==1){
+            $.each($scope.coachClients,function(index,value){
+                value.isSelected=isSelected;
+            });
+        }else{
+            $.each($scope.groupsList,function(index,value){
+                value.isSelected=isSelected;
+            });
+        }
+    };
+
+    //Reset the selection
+    $scope.resetSelectedCheckBox = function(){
+        $.each($scope.groupsList,function(index,value){
+            value.isSelected=false;
+        });
+        $.each($scope.coachClients,function(index,value){
+            value.isSelected=false;
+        });
+    };
+
+    // always watch Switching Assign type
+    $scope.$watch("assignTo",function(){
+         $scope.doGetAllClientsOrGroups(true);
+    });
+
+    $scope.isDisabled=function(){
+        $scope.assignParams={"userids":[],
+                             "groupids":[],
+                             "assessmentid":$routeParams.id
+                            };
+         if($scope.assignTo==1){
+            $.each($scope.coachClients,function(index,value){
+                if(value.isSelected)
+                    $scope.assignParams.userids.push(value.userid);
+            });
+        }else{
+            $.each($scope.groupsList,function(index,value){
+                 if(value.isSelected)
+                    $scope.assignParams.groupids.push(value.id);
+            });
+        }
+        if($scope.assignParams.groupids.length==0&&$scope.assignParams.userids.length==0)
+            return true;
+        else
+            return false;
+    }
+
+
+    $scope.doAssignAssessment=function(){
+        //API Request
+        requestHandler.postRequest("coach/assigntouser/",$scope.assignParams).then(function(response){
+            if(response.data.Response_status==1){
+                successMessage(Flash,"Successfully Assigned!");
+                $location.path("coach-assessments");
+            }else{
+                errorMessage(Flash,"Please try again later!!")
+            }
+        });
+    }
+
     //Init Function
     $scope.init=function(){
-        $scope.getAssessmentDetails();
+        $scope.getAssessmentDetails();        
     };
 
     $scope.init();
 
+}]);
+
+// render image to view in list
+coachApp.filter('trusted', ['$sce', function ($sce) {
+    return function(url) {
+        return $sce.trustAsResourceUrl(url);
+    };
 }]);

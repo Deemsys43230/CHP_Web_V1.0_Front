@@ -30,9 +30,80 @@
                             
                         </div> 
                     </div>   
-                        <div class="col-lg-4 col-md-4 col-sm-12">
-                        	<center><img src="../../images/assessment.png" class="margin-top-50"/></center>
-                        </div> 
+                        <div class="col-lg-4 col-md-4 col-sm-12" ng-class="{main_assign_assessment:assessments.status==1}">
+                        	   <center ng-show="assessments.status==0"><img src="../../images/assessment.png" class="margin-top-50"/></center>
+                                <div  ng-show="assessments.status==1">                                
+                                        <div class="col-md-12 col-lg-12 col-sm-12">
+                                            <h5 class="text-muted margin-bottom-10">Assign To :&nbsp;&nbsp;</h5>
+                                            <input type="radio" id="individual" value="1" ng-model="assignTo" checked="checked"><label for="individual">Individual Clients</label>
+                                            <input type="radio" id="group" value="2" ng-model="assignTo"><label for="group">Groups</label>
+                                            
+                                        </div>     
+                                        <div class="col-md-12 col-lg-12 col-sm-12 margin-top-20"> 
+                                            <div class="col-lg-12 col-md-12 col-sm-12 no-padding">
+                                                <h5 class="text-muted">{{selectText}}<span class="pull-right">
+                                                <a href="" class="appointment_booknow" ng-click="doSelectDeselect(true)">Select All</a>&nbsp;|&nbsp;<a href="" class="appointment_booknow" ng-click="doSelectDeselect(false)">Deselect All</a>
+                                            </span></h5>
+                                                <hr/>
+                                            </div>
+                                        </div>    
+                                        <div class="col-md-12 col-lg-12 col-sm-12 no-padding" ng-show="assignTo==1"> 
+                                            <div class="coach-list">
+                                                <div ng-show="coachClients.length>0" class="user-view-width"> 
+                                                    <div class="assessment_assign_scrollbar col-lg-12 col-md-12 col-sm-12" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#eee'}">
+                                                              <div class="col-lg-12 col-md-12 col-sm-12 no-padding margin-top-10" ng-repeat= "coachclient in coachClients">
+                                                                <div class="col-md-2 col-lg-2 col-sm-2 no-padding margin-top-30">
+                                                                    <checkbox-group>
+                                                                        <span class="fh-checkbox">
+                                                                            <input type="checkbox" id="{{coachclient.userid}}" ng-model="coachclient.isSelected" ng-true-value="true" ng-false-value="false"/>&nbsp;&nbsp;
+                                                                            <label class="no-padding" for="{{coachclient.userid}}" style="cursor:default;"></label>&nbsp;
+                                                                        </span>
+                                                                    </checkbox-group>
+                                                                </div>
+                                                                <div class="user-view col-md-10 col-lg-10 col-sm-10 assign_assessment">
+                                                                    <div class="col-lg-2 col-md-2 col-sm-2 no-padding">
+                                                                        <img class="img-circle" ng-src="{{coachclient.imageurl | trusted}}">
+                                                                    </div>
+                                                                    <div class="col-lg-10 col-md-10 col-sm-10 no-padding margin-top-5">
+                                                                        <h4 class="col-lg-12 col-md-12 col-sm-12 client_name">{{coachclient.name}}</h4>
+                                                                        <p class="col-lg-12 col-md-12 col-sm-12 client_email">{{coachclient.emailid}}</p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                    <div ng-show="coachclientfilter.length==0" class="text-center margin-top-50">
+                                                        <img src="../../images/no-coach-small.png" width="120" height="120"/>
+                                                        <h3 class="text-gray">NO USER FOUND!!!</h3><br/>
+                                                    </div>
+                                                </div>
+                                            </div>              
+                                        </div>
+                                        <div class="margin-top-10 col-md-12 col-lg-12 col-sm-12 no-padding" ng-show="assignTo==2">
+                                             <div class="assessment_assign_scrollbar col-lg-12 col-md-12 col-sm-12" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#eee'}">
+                                                <div class="col-md-12 assign_assessment margin-top-5 no-padding"  ng-repeat="group in groupsList">
+                                                        <div class="col-md-2 col-lg-2 col-sm-2 margin-top-25 no-padding">
+                                                            <checkbox-group>
+                                                                <span class="fh-checkbox">
+                                                                    <input type="checkbox" id="{{group.id}}" ng-model="group.isSelected" ng-true-value="true" ng-false-value="false"/>&nbsp;&nbsp;
+                                                                    <label class="no-padding" for="{{group.id}}" style="cursor:default;"></label>&nbsp;
+                                                                </span>
+                                                            </checkbox-group>
+                                                        </div>
+                                                        <div class="col-md-10 col-lg-10 col-sm-10 group-list">
+                                                            <i class="fa fa-group"></i> &nbsp;{{group.groupname}}
+                                                        </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <hr/>
+                                        </div>
+                                        <div class="text-center margin-top-10">
+                                            <a href="" class="btn btn-success" ng-disabled="isDisabled()" ng-click="doAssignAssessment()">Assign Assessment</a>
+                                        </div>
+                            </div>
+                        </div>
              </form>
         </div>
     </div>
