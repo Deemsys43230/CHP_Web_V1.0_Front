@@ -877,6 +877,9 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
             $scope.fromDate=moment(new Date(todayDate.getFullYear(), monthIndex-1, 1)).format('DD/MM/YYYY');
             $scope.endDate=moment(new Date(todayDate.getFullYear(), monthIndex, 0)).format('DD/MM/YYYY');
             $scope.userGetAppointmentList($scope.coachid,$scope.fromDate,$scope.endDate);
+        },
+        cancelBookDate: function(date){
+            $scope.cancelAppointment(date)
         }
     };
 
@@ -956,6 +959,25 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
             $scope.paginationLoad = true;
         });
     };
+
+  $scope.cancelAppointment=function(date){
+    $.each($scope.availableAppointment,function(index,value){
+        var processingDate=value.date.split('/');
+        var formattedDate=parseInt(processingDate[0])+"/"+(parseInt(processingDate[1])-1)+"/"+parseInt(processingDate[2]);
+        if(formattedDate==date){
+            $scope.appointmentId=value.id;
+            requestHandler.postRequest("user/cancelappointment/",{"appointmentid":$scope.appointmentId}).then(function(response){
+                if(response.data.Response_status==1){
+                    successMessage(Flash,"Successfully Cancelled");
+                    $scope.userGetAppointmentList($scope.coachid,$scope.fromDate,$scope.endDate);
+                }
+            }, function(){
+                errorMessage(Flash,"Please try again later!");
+            });
+        }
+    });
+};
+
 
     $scope.userCoachViewInit=function(){
         $scope.scrollnation={"itemsPerScroll": 4,"scrollEndCount":-1};

@@ -28,7 +28,7 @@ angular.module('500tech.simple-calendar', []).directive('simpleCalendar', functi
       'ng-click="onClick(date)">' +
       '<div class="day-number">{{ date.day || "&nbsp;" }}' +
       '<div ng-show="isUserBookableDate(date)"><a href="" class="appointment_booknow" ng-click="bookDate(date)">Book&nbsp;Now</a></div>'+
-      '<div><h5 ng-show="isUserBookedDate(date)">Booked</h5></div>' +
+      '<span ng-show="isUserBookedDate(date)"><h5 class="appointment_delete">Booked&nbsp;|&nbsp;<a href="" ng-click="cancelBookDate(date)" class="appointment_booknow">Cancel</a></h5></span>' +
       '</div>' +
       '<div class="event-title">{{ date.event.title || "&nbsp;" }}</div>' +
       '</div>' +
@@ -216,6 +216,12 @@ angular.module('500tech.simple-calendar', []).directive('simpleCalendar', functi
         if (!date || date.disabled) { return; }
         var processingDate=date.day+"/"+date.month+"/"+date.year;
         $scope.options.bookDate(processingDate);
+      };
+
+      $scope.cancelBookDate = function(date){
+        if (!date || date.disabled) { return; }
+        var processingDate=date.day+"/"+date.month+"/"+date.year;
+        $scope.options.cancelBookDate(processingDate);
       };
 
       $scope.prevMonth = function () {

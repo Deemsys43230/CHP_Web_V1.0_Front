@@ -18079,6 +18079,16 @@ select.event:focus {
     margin-top: 3px;
 }
 
+.appointment_delete{
+    margin-left: -12px!important;
+    text-decoration: none!important;
+}
+
+.appointment_delete .appointment_booknow{
+    text-decoration: none !important;
+    color:brown;
+}
+
 /*for home page carousal image*/
 
   /* Carousel Styles */
