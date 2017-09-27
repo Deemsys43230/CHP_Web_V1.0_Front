@@ -1,6 +1,6 @@
 <div class="col-lg-12 col-md-12 col-sm-12 no-padding" ng-cloak class="ng-cloak" ng-init="init()">
     <!-- <div flash-message="2000" class="col-lg-4 col-md-4 col-sm-4 pull-right"></div> -->
-    <h5 class="classic-title"><a href="" class="active-tab profile-details"><i class="fa fa-user"></i>&nbsp;&nbsp;Demography</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="" class="stats" ng-click="doGetClientHealthProfileDetailsByCoach()"><i class="fa fa-history"></i>&nbsp;&nbsp;Stats </a>|&nbsp;&nbsp;<a href="" class="tracking-plan"><i class="fa fa-gg"></i>&nbsp;&nbsp;Training Plans </a>|&nbsp;&nbsp;<a href="" class="medication"><i class="fa fa-medkit"></i>&nbsp;&nbsp;Medications&nbsp;<small class="badge">{{medicationList.length}}</small></a> |&nbsp;&nbsp;<a href="" class="mealplan"><i class="fa fa-th-large"></i>&nbsp;&nbsp;Meal Plan</a>&nbsp;|&nbsp;<a href="" class="workoutplan"><i class="fa fa-list"></i>&nbsp;&nbsp;Workout Plan</a>&nbsp;|&nbsp;<a href="" class="assessments"><i class="fa fa-pencil-square-o"></i>&nbsp;&nbsp;Assessments</a></h5>
+    <h5 class="classic-title coach"><a href="" class="active-tab profile-details"><i class="fa fa-user"></i>&nbsp;&nbsp;Demography</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="" class="stats" ng-click="doGetClientHealthProfileDetailsByCoach()"><i class="fa fa-history"></i>&nbsp;&nbsp;Stats </a>|&nbsp;&nbsp;<a href="" class="tracking-plan"><i class="fa fa-gg"></i>&nbsp;&nbsp;Training Plans </a>|&nbsp;&nbsp;<a href="" class="medication"><i class="fa fa-medkit"></i>&nbsp;&nbsp;Medications&nbsp;<small class="badge">{{medicationList.length}}</small></a> |&nbsp;&nbsp;<a href="" class="mealplan"><i class="fa fa-th-large"></i>&nbsp;&nbsp;Meal Plan</a>&nbsp;|&nbsp;<a href="" class="workoutplan"><i class="fa fa-list"></i>&nbsp;&nbsp;Workout Plan</a>&nbsp;|&nbsp;<a href="" class="assessments"><i class="fa fa-pencil-square-o"></i>&nbsp;&nbsp;Assessments</a></h5>
       
       <input hidden id="main-start-date">
         <div ng-if="loaded">
@@ -1158,11 +1158,14 @@
                                 <a href="" ng-click="doGetAssessmentDetails(assessment.id);assesmentOptions.showAssessment=true;" class="btn-xs btn-primary">View Assessment</a>
                             </td>
                         </tr>
-                        <tr ng-show="assessmentsList.length==0"><td colspan="7" class="text-center">No Records Found !!!</td></tr>
+                        <tr ng-show="assessmentsList.length==0"><td colspan="4" class="text-center">No Records Found !!!</td></tr>
                     </tbody>    
                 </table>
+    <!-- Start Pagination -->
+    <dir-pagination-controls ng-show="paginationLoad" boundary-links="true"> </dir-pagination-controls>
+    <!-- End Pagination -->
 
-                <div class="assessments-fill-div" ng-show="assesmentOptions.showAssessment">
+    <div class="assessments-fill-div" ng-show="assesmentOptions.showAssessment">
                              <div class="row min-height-450">
                             <div class="col-md-12 col-md-12 col-sm-12">
                                 <span><a href="" class="back-button pull-right margin-left-5" ng-click="assesmentOptions.showAssessment=false;"><i class="fa fa-arrow-circle-o-left"></i> Back</a></span>
