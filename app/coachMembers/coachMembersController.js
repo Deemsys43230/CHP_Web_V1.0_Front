@@ -79,6 +79,8 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
         $scope.reloadTrainingplanList();
         //Get User Uploaded Document Details
         $scope.doGetUserUploadedDocument(id);
+        //Get User Assessment List
+        $scope.doGetUserAssessments(id);
 
 
     };
@@ -1611,6 +1613,22 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
         });
     };
 
+     /*Get User Assessments*/
+    $scope.doGetUserAssessments = function(userid){
+        requestHandler.postRequest("coach/getassignedassessments/",{'userid':userid}).then(function(response){
+            $scope.assessmentsList = response.data.assignedusers;
+        });
+    };
+
+    //Assessment Option
+    $scope.assesmentOptions={"showAssessment":false};
+    //User Get Assessment Details
+    $scope.doGetAssessmentDetails=function(id){
+         requestHandler.getRequest("coach/assignedassessmentdetail/"+id+"/","").then(function(response){
+            $scope.assessments = response.data.userassessment;
+        });
+    }
+
     /*Get traning plan details*/
 
     $scope.doGetTrainingPlanDetails = function(userid){
@@ -2059,6 +2077,7 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
         $scope.doGetMyWorkoutPlansList();
         $scope.addMealPlan={};
         $scope.addWorkoutPlan={};
+        $scope.assessmentOptions={"showAssessment":true};
     };
 
     $scope.$watch("trainingPagination.pageNumber",function(){

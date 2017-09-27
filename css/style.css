@@ -8635,7 +8635,9 @@ ul.sidebar-menu li a{
 .margin-bottom-40{
     margin-bottom: 40px !important;
 }
-
+.margin-bottom-60{
+    margin-bottom: 60px !important;
+}
 a:hover, a:visited, a:link, a:active
 {
     text-decoration: none;
