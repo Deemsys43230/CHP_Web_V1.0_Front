@@ -23,7 +23,7 @@ angular.module('500tech.simple-calendar', []).directive('simpleCalendar', functi
       '<div>' +
       '<div ng-repeat="week in weeks track by $index" class="week">' +
       '<div class="day"' +
-      'ng-class="{default: isDefaultDate(date),scheduledDay:isScheduledDate(date),selectedDay:isSelectedDate(date), event: date.event, disabled: date.disabled || !date}"' +
+      'ng-class="{default: isDefaultDate(date),scheduledDay:isScheduledDate(date),selectedDay:isSelectedDate(date),notavailableDay:isAvailableDate(date),event: date.event, disabled: date.disabled || !date}"' +
       'ng-repeat="date in week  track by $index"' +
       'ng-click="onClick(date)">' +
       '<div class="day-number">{{ date.day || "&nbsp;" }}' +
@@ -186,6 +186,16 @@ angular.module('500tech.simple-calendar', []).directive('simpleCalendar', functi
         if (!date) { return; }
         var processingDate=date.day+"/"+date.month+"/"+date.year;
         if($scope.options.coachappointments.indexOf(processingDate)!=-1){
+          return true;
+        }else{
+          return false;
+        }
+      };
+
+      $scope.isAvailableDate=function(date){
+        if (!date) { return; }
+        var processingDate=date.day+"/"+date.month+"/"+date.year;
+        if($scope.options.notAvailableAppointments.indexOf(processingDate)!=-1){
           return true;
         }else{
           return false;

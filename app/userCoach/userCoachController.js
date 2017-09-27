@@ -857,6 +857,7 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
         coachappointments:[],
         userappointments:[],
         userbookedappointments:[],
+        notAvailableAppointments:[],
         dayNamesLength: 3, // How to display weekdays (1 for "M", 2 for "Mo", 3 for "Mon"; 9 will show full day names; default is 1)
         dateClick: function(date){
             $scope.dateClick(date)
@@ -935,6 +936,7 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
             $scope.coachappointments=[];
             $scope.userappointments=[];
             $scope.userbookedappointments=[];
+            $scope.notAvailableAppointments=[];
             $.each($scope.availableAppointment,function(index,value){
                 var processingDate=value.date.split('/');
                 var formattedDate=parseInt(processingDate[0])+"/"+(parseInt(processingDate[1])-1)+"/"+parseInt(processingDate[2]);
@@ -944,10 +946,14 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
                 if(value.canbook==2){
                     $scope.userbookedappointments.push(formattedDate);
                 }
+                if(value.canbook==0){
+                    $scope.notAvailableAppointments.push(formattedDate);
+                }
             });
             $scope.calendarOptions.coachappointments=$scope.coachappointments;
             $scope.calendarOptions.userappointments=$scope.userappointments;
             $scope.calendarOptions.userbookedappointments=$scope.userbookedappointments;
+            $scope.calendarOptions.notAvailableAppointments=$scope.notAvailableAppointments;
         }, function(){
             errorMessage(Flash,"Please try again later!");
         });

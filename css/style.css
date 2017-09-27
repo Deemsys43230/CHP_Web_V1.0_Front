@@ -17999,10 +17999,13 @@ select.event:focus {
   }
   .day.selectedDay{
     background-color: #fdae21 !important;
-    }
-    .day.scheduledDay{
+  }
+  .day.scheduledDay{
     background-color: #dcffda;
-    }
+  }
+  .day.notavailableDay{
+    background-color: #f7dcdc;
+  }
   .day:hover{
     cursor: pointer;
     background-color: #fdae21!important;
@@ -18052,42 +18055,46 @@ select.event:focus {
     margin-left: 20px;
   }
 
-  .appointment_scrollbar
-{
+  .appointment_scrollbar{
     height: 448px;
     width: 100%;
     background: none;
     overflow-y: scroll;
     overflow-x:hidden;
     word-wrap: break-word;
-}
-.appointment_booknow{
+ }
+ .appointment_booknow{
     text-decoration: underline !important;
     color:brown;
-}
+ }
 
-.lightgreen{
+ .appointment_notavailable{
+    background-color: #f7dcdc;
+    border: 1px solid #f7dcdc;
+ }
+
+ .lightgreen{
     background-color: #dcffda;
-    border: 1px solid #ddd;
-}
+    border: 1px solid #dcffda;
+ }
 
-.appointment_legend{
+ .appointment_legend{
     display: block;
     height: 16px;
     width: 15px;
     position: absolute;
     margin-top: 3px;
-}
+ }
 
-.appointment_delete{
+ .appointment_delete{
     margin-left: -12px!important;
     text-decoration: none!important;
-}
+ }
 
-.appointment_delete .appointment_booknow{
+ .appointment_delete .appointment_booknow{
     text-decoration: none !important;
     color:brown;
-}
+ }
 
 /*for home page carousal image*/
 

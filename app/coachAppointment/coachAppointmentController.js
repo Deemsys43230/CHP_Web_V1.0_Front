@@ -23,6 +23,7 @@ coachApp.controller('AppointmentController',['$scope','requestHandler','Flash','
     coachappointments:[],
     userappointments:[],
     userbookedappointments:[],
+    notAvailableAppointments:[],
     dayNamesLength: 3, // How to display weekdays (1 for "M", 2 for "Mo", 3 for "Mon"; 9 will show full day names; default is 1)
     dateClick: function(date){
       $scope.coachGetDateDetails(date);
