@@ -965,7 +965,41 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
             $scope.paginationLoad = true;
         });
     };
+    //Do Get Assessment Details
+    $scope.doGetCoachAssessmentDetail=function(id){
+       requestHandler.getRequest("user/readassessmentdetail/"+id+"/","").then(function(response){
+            $scope.assessments=response.data.userassessment;
+       });        
+    }
+    //Do Save Assessment
+    $scope.doCompleteAssessment=function(){
+        
+        $scope.userAnswers={"id":$scope.assessments.id,"questions":[]}
+        //Manupulate for body parameter
+        $.each($scope.assessments.questions,function(index,value){
+            $scope.submitAnswer={"questionid":value.questionid,"answerid":""};
+            if(value.answertype!=2){
+                $scope.submitAnswer.answerid=value.useranswer;
+            }else{
+                var useranswer=[];
+                $.each(value.answers,function(index,answer){
+                    if(answer.checked){
+                         useranswer.push(answer.id);
+                    }
+                });
+                $scope.submitAnswer.answerid=useranswer.join();
+            }
+            $scope.userAnswers.questions.push($scope.submitAnswer);
+        });
 
+        requestHandler.postRequest("user/submitassessment/",$scope.userAnswers).then(function(response){
+            successMessage(Flash,"Successfully Submitted!");            
+            $scope.doGetCoachAssessmentList($routeParams.id) ;
+            $scope.assessmentOptions.showAssessment=false; 
+        });
+
+    };
+   
   $scope.cancelAppointment=function(date){
     $.each($scope.availableAppointment,function(index,value){
         var processingDate=value.date.split('/');
@@ -1002,6 +1036,7 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
         $scope.doGetCoachAdviceByUser($routeParams.id);
         $scope.doGetUpcomingEvents($routeParams.id);
         $scope.doGetCoachAssessmentList($routeParams.id);
+        $scope.assessmentOptions={"showAssessment":false};
 
         var todayDate = new Date();
         $scope.fromDate=moment(new Date(todayDate.getFullYear(), todayDate.getMonth(), 1)).format('DD/MM/YYYY');

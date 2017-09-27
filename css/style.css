@@ -18192,7 +18192,7 @@ select.event:focus {
 }
 .question{
     padding: 10px;
-    background: #f9f9f9;
+    background: #fdfcfc;
     margin-top: 5px;
     border: solid 1px #dadada;
 }
@@ -18201,4 +18201,23 @@ select.event:focus {
 }
 .question .actions{
     padding:10px;
+}
+.answers input[type=radio]{
+    display: inline; !important;
+}
+.option_number{
+    padding: 3px 7px;
+}
+.yellow_badge{
+    display: inline-block;
+    min-width: 10px;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    background-color: #f8ba01;
+    border-radius: 10px;
 }

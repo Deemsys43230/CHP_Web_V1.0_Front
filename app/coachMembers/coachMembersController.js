@@ -1629,6 +1629,23 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
         });
     }
 
+     //Check for right answer
+    $scope.isUserAnswer=function(useranswer,optionid){
+        if(useranswer!=null){
+                $scope.userAnswer_array_string=useranswer.split(",");
+                $scope.userAnswer_array_integer=[];
+                $.each($scope.userAnswer_array_string,function(index,value){
+                    $scope.userAnswer_array_integer.push(parseInt(value));
+                })
+                return $scope.userAnswer_array_integer.indexOf(optionid)!=-1;
+        }else{
+            return false;
+        }
+      
+    };
+
+
+
     /*Get traning plan details*/
 
     $scope.doGetTrainingPlanDetails = function(userid){
