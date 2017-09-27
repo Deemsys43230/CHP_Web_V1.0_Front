@@ -17921,7 +17921,6 @@ select.event:focus {
     padding: 0;
     border: 1px solid #dddddd;
     background-color: #fff;
-    user-select: auto;
   }
 
   .move-month {
@@ -17980,7 +17979,8 @@ select.event:focus {
 
   .weekday, .day {
     display: inline-block;
-    width: calc(100% / 7);
+    /*width: calc(100% / 7);*/
+    width: 14.28% !important;
   }
 
   .day {

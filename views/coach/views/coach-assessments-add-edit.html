@@ -102,14 +102,16 @@
                 	</div>
                 </div>
                 <div class="col-md-12 options-content no-padding" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '10px',background:'#eee'}"> 
-                <div class="col-md-12 margin-top-10" ng-repeat="answer in addQuestion.answers track by $index" ng-show="addQuestion.answertype!=3">
+                <div class="col-md-12 margin-top-30" ng-repeat="answer in addQuestion.answers track by $index" ng-show="addQuestion.answertype!=3">
                 	<div class="col-md-2">
                         <p class="pull-right">Option {{$index+1}}:</p>
                     </div>  
                     <div class="col-md-9 col-sm-10 no-padding">
+                                    {{addQuestion.answers[$index]}}
 		                       		 <input type="text" name="answer_{{$index}}" ng-model="addQuestion.answers[$index]" maxlength="200" ng-required="addQuestion.answertype!=3">
 		                             <span ng-show="addQuestionForm.answer_{{$index}}.$dirty&&addQuestionForm.answer_{{$index}}.$invalid">
-		                                 <span class="error-message" ng-show="addQuestionForm.answer_{{$index}}.$error.required"><span>Required.</span>
+		                                 <span class="error-message" ng-show="addQuestionForm.answer_{{$index}}.$error.required"><span>Required.</span></span>
+                                         <span class="error-message" ng-show="!addQuestionForm.answer_{{$index}}.$error.required&&addQuestionForm.answer_{{$index}}.$error.compareTo"><span>Options&nbsp;should&nbsp;not&nbsp;match.</span></span>
 		                             </span> 
 
                     </div>

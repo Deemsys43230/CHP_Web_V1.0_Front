@@ -1598,4 +1598,18 @@ function getSelectionStart(o) {
     } else return o.selectionStart
 }
 
+//Check For Integer Validation
+coachApp.directive('validateInteger', function () {
+  var INTEGER_REGEXP = /^\-?\d*$/;
+  return {
+    require: 'ngModel',
+    restrict: '',
+    link: function (scope, elm, attrs, ctrl) {
+      // only apply the validator if ngModel is present and Angular has added the Integer validator
+      ctrl.$validators.validateInteger = function (modelValue) {
+        return ctrl.$isEmpty(modelValue) || INTEGER_REGEXP.test(modelValue);
+      };
+    }
+  };
+});
 

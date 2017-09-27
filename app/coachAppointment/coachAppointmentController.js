@@ -143,6 +143,17 @@ coachApp.controller('AppointmentController',['$scope','requestHandler','Flash','
         });
   };
 
+// Check max clients count
+  $scope.maxClientCount=false;
+  $scope.maxClientCountCheck=function(value){
+    if(value<=999){
+        $scope.maxClientCount=false;
+    }
+    else if(value>999){
+        $scope.maxClientCount=true;
+    }
+  };
+
    $scope.reset=function(){
       $scope.booking={};
       $scope.booking.count="";
