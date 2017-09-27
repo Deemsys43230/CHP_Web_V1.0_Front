@@ -197,6 +197,7 @@ userApp.controller('UserMedicationDocumentUploadController',['$scope','requestHa
     $scope.fileUpload=false;
     $scope.paginationLoad=false;
     $scope.usedSpace=0;
+    $scope.fileTypeError=false;
 
 
 
@@ -221,6 +222,7 @@ userApp.controller('UserMedicationDocumentUploadController',['$scope','requestHa
     //To get user uploaded file list
     $scope.doGetUserUploadedDocument=function(userid){
     $scope.loader=true;
+        $scope.totalAvailableSpace=20;
         requestHandler.getRequest("readfiles/"+ userid+"/","").then(function(response){
             $scope.userUploadedDocumentList=response.data.files;
             $scope.usedSpace=response.data.usedspace;
@@ -264,11 +266,13 @@ userApp.controller('UserMedicationDocumentUploadController',['$scope','requestHa
     $scope.doUploadFile = function(){
         $scope.fileUpload=true;
         $scope.uploadBtnTxt="Uploading...";
-    requestHandler.directFileUpload("user/uploadfile/",$scope.uploadFile,"document").then(function(response){
-        if(response.data.Response_status==0){
-            errorMessage(Flash,"Insufficient&nbsp;Space");
+
+
+        requestHandler.directFileUpload("user/uploadfile/",$scope.uploadFile,"document").then(function(response){
+       if(response.data.Response_status==0 ){
+            errorMessage(Flash,response.data.Error);
         }
-        else{
+        else if(response.data.Response_status==1){
             successMessage(Flash,"Successfully Uploaded");
         }
            $scope.uploadBtnTxt="Upload File";
@@ -337,7 +341,6 @@ userApp.directive('fileModel', ['$parse', function ($parse) {
             var modelSetter = model.assign;
 
             element.bind('change', function(){
-                console.log(element[0].files[0]);
                 scope.$apply(function(){
                     modelSetter(scope, element[0].files[0]);
                 });
@@ -346,6 +349,28 @@ userApp.directive('fileModel', ['$parse', function ($parse) {
     };
 }]);
 
+
+//File Type Validation Directive
+userApp.directive('validateFileType',function(){
+    var validFormats=['pdf','jpg','png','png'];
+    return {
+        require:'ngModel',
+        link:function(scope,el,attrs,ngModel){
+            el.bind('change',function(){
+                var fileSize=el[0].files[0].size;
+                var value = el.val(),
+                    ext = value.substring(value.lastIndexOf('.') + 1).toLowerCase();
+                ngModel.$validators.validateFileType = function() {
+                    return validFormats.indexOf(ext) !== -1;
+                };
+
+                ngModel.$validators.validateFileSize=function(){
+                    return fileSize;
+                };
+            });
+        }
+    };
+});
 
 // Validation for file upload
 userApp.directive('validFile',function(){

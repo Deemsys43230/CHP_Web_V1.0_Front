@@ -4292,7 +4292,9 @@ h5.classic-title {
     border-bottom: 3px solid #eee;
     font-weight: 600;
 }
-
+h5.classic-title.coach{
+    font-size: 14px!important;
+}
 h5.classic-title.friend{
     font-size: 14px!important;
     line-height: 18px!important;

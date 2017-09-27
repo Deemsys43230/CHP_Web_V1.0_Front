@@ -45,8 +45,8 @@
 
                             <tbody >
                                 <tr dir-paginate="event in eventfilter = (eventList | itemsPerPage: 9)" ng-show="eventList.length!=0">
-                                    <td>{{event.eventname}}</td>
-                                    <td>{{event.description}}</td>
+                                    <td class="wrap-all">{{event.eventname}}</td>
+                                    <td class="wrap-all">{{event.description}}</td>
                                     <td>{{event.datetime}}</td>
                                     <td>{{event.duration}}</td>
                                     <td>

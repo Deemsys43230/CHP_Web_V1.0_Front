@@ -25,7 +25,7 @@
                         </tr>    
                     </thead>
                     <tbody>
-                        <tr dir-paginate="assessment in coachAssessmentsList|itemsPerPage:5">
+                        <tr dir-paginate="assessment in coachAssessmentsList | itemsPerPage:5" ng-show="coachAssessmentsList.length!=0">
                             <td class="wrap-all">{{assessment.assessmentname}}</td>
                             <td class="wrap-all">{{assessment.status==0?"In Draft":"Completed"}}</td>
                             <td>
@@ -34,7 +34,7 @@
                                 <a href="" class="btn-xs btn-danger" ng-click="doDeleteAssessment(assessment.id)">Delete</a>
                             </td>
                         </tr>    
-                        <tr ng-show="coachAssessmentsList.plans.length==0"><td colspan="4" class="text-center">No Records Found !!!</td></tr>
+                        <tr ng-show="coachAssessmentsList.length==0"><td colspan="4" class="text-center">No Assessment Found!!!</td></tr>
                     </tbody>    
                 </table>    
                <!-- Start Pagination -->

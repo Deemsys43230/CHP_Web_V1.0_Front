@@ -17,7 +17,7 @@
                 </div>
                 <!-- End Search -->
 
-                <div flash-message="2000" class="col-lg-3 col-md-3 col-sm-3 no-padding pull-right"></div>
+                <div flash-message="2000" class="col-lg-4 col-md-4 col-sm-4 no-padding pull-right"></div>
                 <h5 class="classic-title"><a href="#medications"><i class="fa fa-medkit"></i>&nbsp;&nbsp;MEDICATIONS</a>&nbsp;&nbsp;|&nbsp;&nbsp;<span><a href="#document-upload"><i class="fa fa-upload"></i>&nbsp;&nbsp;Document Upload</a></span></h5>
             </div>
             <div class="col-lg-9 col-md-9 col-sm-9 margin-bottom-10">
@@ -32,7 +32,7 @@
                         <tr class="warning">
                             <th class="col-lg-3 col-md-3 col-sm-3">File Name</th>
                             <th class="col-lg-1 col-md-1 col-sm-1">Date & Time</th>
-                            <th class="col-lg-1 col-md-1 col-sm-1">Options</th>
+                            <th class="col-lg-2 col-md-2 col-sm-2">Options</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -41,8 +41,9 @@
                             <td class="wrap-all">{{file.filename}}</td>
                             <td>{{file.LastModified}}</td>
                             <td>
-                                <a class="btn-xs btn-primary" href="{{file.filepath}}" download="{{file.filename}}" target="_blank">Download File</a>&nbsp;&nbsp;
-                                <span><a href="" class="btn-xs btn-danger" ng-click="deleteUserUploadedDocument(file.filename)">Remove</a></span>
+                                <a class="view-text-color" href="{{file.filepath}}" download="{{file.filename}}" target="_blank">Download File</a>&nbsp;&nbsp;
+                                <a class="btn-xs btn-primary" href="{{file.filepath}}" target="_blank">View Document</a>&nbsp;&nbsp;
+                               <a href="" class="btn-xs btn-danger" ng-click="deleteUserUploadedDocument(file.filename)">Remove</a>
                             </td>
                         </tr>
                         <tr ng-show="!userUploadedDocumentListFilter.length || userUploadedDocumentList.length==0"><td colspan="3" class="text-center">No Records Found !!!</td></tr>
@@ -60,7 +61,7 @@
                 <div class="circle-wrapper-document">
                     <div class="circle-progress ng-cloak" ng-style="getStyle()">{{usedSpace}}&nbsp;MB <br/><small> space used</small></div>
                     <div round-progress
-                            max="availableSpace"
+                            max="totalAvailableSpace"
                             current="usedSpace"
                             color="#66E066"
                             bgcolor="{{ bgColor }}"
@@ -75,12 +76,12 @@
                             offset="{{ offset }}">
                     </div>
                 </div>
-                <h4 class="text-gray text-center">of 20&nbsp;MB space</h4><br/>
+                <h4 class="text-gray text-center">out of 20&nbsp;MB space</h4><br/>
   <form name="documentUploadForm" novalidate>
-           <input type="file" ng-model="uploadFile" file-model="uploadFile" name="file" valid-file required style="padding-left: 30px;" class="wrap-all"/><br/>
+           <input type="file" ng-model="uploadFile" id="c" file-model="uploadFile" name="file" valid-file required style="padding-left: 30px;" class="wrap-all" validate-file-type/><br/>
           <span ng-show="documentUploadForm.file.$dirty&&documentUploadForm.file.$invalid">
               <span class="error-message" ng-show="documentUploadForm.file.$error.required"><span>Select&nbsp;file&nbsp;to&nbsp;Upload.</span></span>
-              <!--<span class="error-message" ng-show="documentUploadForm.file.$error.validFile"><span>Select file to Upload.</span></span>-->
+              <span class="error-message" ng-show="documentUploadForm.file.$error.validateFileType"><span>Upload&nbsp;only&nbsp;a&nbsp;Valid&nbsp;Formats&nbsp;:&nbsp;['jpg','jpeg','png','pdf']</span></span>
           </span>
        <div class="text-center margin-bottom-20">
            <div class="col-lg-6 col-md-6 col-sm-6">
