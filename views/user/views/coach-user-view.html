@@ -521,13 +521,20 @@
                             </div>
                             <div id="chat_container" class="panel-body msg_container_base" style="display:none;" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#eee',scrollspeed: -5}">
                                  <div class="row" ng-show="showLoadMore"><center><span ng-click="doLoadChatMessages()" class="label label-default" style="padding:5px;cursor:pointer;"><i class="fa fa-arrow-up" aria-hidden="true"></i>&nbsp;Load More</span></center></div>
-                                <div  ng-repeat="chatMessage in chatMessages" ng-click="doSelectChat(chatMessage);">
+
+                                 </br>
+                   
+                   <div ng-repeat="(key, value) in chatMessages | groupBy:'msgdate'">
+
+                       <center><div class="label" style="padding:5px;background-color: #ffbf80;">{{key}}</div></center>
+
+                <div  ng-repeat="chatMessage in value" ng-click="doSelectChat(chatMessage);">
                                 <div class="row" ng-if="chatMessage.firstNewMessage==1"><center><span id="new_message_span" class="label label-default">New Messages</span></center></div>
                                 <div class="row msg_container"  id="{{chatMessage.logid}}" ng-class="{'chat-selected':chatMessage.selectedChat==1}">
                                     <div class="col-md-10 col-xs-10 col-sm-10" ng-if="chatMessage.sentby==3">
                                         <div class="messages msg_sent">
                                             <p>{{chatMessage.message}}</p><i ng-show="chatMessage.status==1" class="fa fa-check message-read" aria-hidden="true"></i>
-                                            <time datetime="2009-11-13T20:00">{{chatMessage.datetime}}</time>
+                                            <time datetime="2009-11-13T20:00">{{chatMessage.msgtime}}</time>
                                         </div>
                                     </div>
                                     <div class="col-md-2 col-xs-2 col-lg-2 col-sm-2 avatar no-padding" ng-if="chatMessage.sentby==3">
@@ -540,11 +547,12 @@
                                     <div class="col-md-10 col-xs-10 col-sm-10 col-lg-10"  ng-if="chatMessage.sentby==2">
                                         <div class="messages msg_receive">
                                             <p>{{chatMessage.message}}</p>
-                                            <time datetime="2009-11-13T20:00">{{chatMessage.datetime}}</time>
+                                            <time datetime="2009-11-13T20:00">{{chatMessage.msgtime}}</time>
                                         </div>
                                     </div>
                                 </div>
                                 </div>
+                            </div>
                                 <div class="no-messages" ng-show="chatMessages.length==0">No Messages to Display</div>
                             </div>
                             <div class="panel-footer">

@@ -35,33 +35,47 @@
                 <div class="col-lg-9 col-md-9 col-sm-9" style="width:76% !important;" ng-init="init()">
                     <div ng-include src="'views/member-view.html'"></div>
                 </div>
+
                 <div class="chat-window col-xs-6 col-md-4 col-lg-3 col-sm-6" id="chat_window_1">
         <div class="col-xs-12 col-md-12 col-lg-12 col-sm-12">
             <div class="panel panel-default" style="margin-bottom:0px;">
                 <div class="panel-heading chat-top-bar">
-                    <div class="col-md-8 col-xs-8 col-lg-8 col-sm-8">
+                    <div class="col-md-7 col-xs-7 col-lg-7 col-sm-7">
 
-                        <h3 class="panel-title"><span class="glyphicon glyphicon-comment wrap"></span> Chat - {{coachclientdetails.firstname}}</h3>
-                         <span class="nav-item__badge" style="position: absolute; margin-left: 20px; margin-top: -9px;" ng-show="showMessageCount">
+                        <h3 class="panel-title"><span class="glyphicon glyphicon-comment wrap" style="padding-right: 7px;"></span>Chat - {{coachclientdetails.firstname}}</h3>
+                         <span class="nav-item__badge" style="position: absolute; margin-left: 20px; margin-top: -9px;" ng-show="showMessageCount&&isChatMinimized">
                             <span aria-hidden="true" class="nav-item__badge-count ng-binding">{{unreadChatMessageCount}}</span>
                             <input id="unreadChatMessageCount" type="hidden" value="{{unreadChatMessageCount}}"/>
                         </span>
                     </div>
-                    <div class="col-md-4 col-xs-4 col-sm-4 col-lg-4" style="text-align: right;">
-                        <a href="" ng-click="doDeleteChatMessage()" ng-show="deleteChatLogId.length>0"><i class="fa fa-trash"></i></a>
-                        <a href=""><span id="minim_chat_window" class="glyphicon glyphicon-plus icon_minim panel-collapsed" onclick="chatMinMax()" ng-click="doReadChatMessage();"></span></a>
+                                <div class="col-md-5 col-xs-5 col-sm-5 col-lg-5" style="text-align: right;">
+                        <a href="" ng-click="doDeleteChatMessage()" ng-show="deleteChatLogId.length>0"><span class="glyphicon glyphicon-trash"></span></a>&nbsp;
+                        <a href="" data-toggle="tooltip" data-placement="left" title="Refresh Chat"><span  class="glyphicon glyphicon-refresh wrap" ng-click="doGetChatMessage()"></span></a>
+                        <a href=""><span id="minim_chat_window" class="glyphicon glyphicon-plus icon_minim panel-collapsed" onclick="chatMinMax()" ng-click="setChatMinimizedStatus();doReadChatMessage();"></span></a>
                     </div>
                 </div>
 
-                <div id="chat_container" class="panel-body msg_container_base" style="display:none;" >
+                <div id="chat_container" class="panel-body msg_container_base" style="display:none;" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#eee',scrollspeed: -5}" >
                     <div class="row" ng-show="showLoadMore"><center><span ng-click="doLoadChatMessages()" class="label label-default" style="padding:5px;cursor:pointer;"><i class="fa fa-arrow-up" aria-hidden="true"></i>&nbsp;Load More</span></center></div> 
-                    <div  ng-repeat="chatMessage in chatMessages" ng-click="doSelectChat(chatMessage);" >
+                   </br>
+                   
+                   <div ng-repeat="(key, value) in chatMessages | groupBy:'msgdate'">
+
+                       <center><div class="label" style="padding:5px;background-color: #ffbf80;">{{key}}</div></center>
+                    <!-- <div ng-repeat="item in value">
+                   {{item}}
+                  </div> --> 
+                        
+
+                    <div  ng-repeat="chatMessage in value"  ng-click="doSelectChat(chatMessage);" >
+
+                   
                      <div class="row" ng-if="chatMessage.firstNewMessage==1"><center><span id="new_message_span" class="label label-default">New Messages</span></center></div>
                         <div class="row msg_container" id="{{chatMessage.logid}}" ng-class="{'chat-selected':chatMessage.selectedChat==1}">
                             <div class="col-md-10 col-xs-10 col-lg-10 col-sm-10" ng-if="chatMessage.sentby==2">
                                 <div class="messages msg_sent">
                                     <p>{{chatMessage.message}}</p><i ng-show="chatMessage.status==1" class="fa fa-check message-read" aria-hidden="true"></i>
-                                    <time datetime="2009-11-13T20:00">{{chatMessage.datetime}}</time>
+                                    <time datetime="2009-11-13T20:00">{{chatMessage.msgtime }}</time>
                                 </div>
                             </div>
                             <div class="col-md-2 col-xs-2 col-lg-2 col-sm-2 avatar no-padding" ng-if="chatMessage.sentby==2">
@@ -74,11 +88,13 @@
                             <div class="col-md-10 col-xs-10 col-sm-10 col-lg-10"  ng-if="chatMessage.sentby==3">
                                 <div class="messages msg_receive">
                                     <p>{{chatMessage.message}}</p>
-                                    <time datetime="2009-11-13T20:00">{{chatMessage.datetime}}</time>
+                                    <time datetime="2009-11-13T20:00">{{chatMessage.msgtime}}</time>
                                 </div>
                             </div>
                         </div>
                     </div>
+                     </div>
+                      
                      <div class="no-messages" ng-show="chatMessages.length==0">No Messages to Display</div>
                 </div>
                 <div class="panel-footer">

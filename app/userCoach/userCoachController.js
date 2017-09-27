@@ -1,4 +1,4 @@
-var userApp = angular.module('userApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','angularUtils.directives.dirPagination','angular-nicescroll','500tech.simple-calendar']);
+var userApp = angular.module('userApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','angularUtils.directives.dirPagination','angular-nicescroll','500tech.simple-calendar','angular.filter']);
 
 userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$location','$q','$routeParams','$route','$window',function($scope,requestHandler,Flash,$location,$q,$routeParams,$route,$window) {
 
@@ -222,9 +222,9 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
     };
 
     
-    setInterval(function(){                        //set 15 seconds interval for repeatedly call a function
+    /*setInterval(function(){                        //set 15 seconds interval for repeatedly call a function
   $scope.doGetChatMessage();
-}, 15000);
+}, 15000);*/
 
      $scope.setChatMinimizedStatus=function(){     //set chat window open close status
         if($scope.isChatMinimized)
@@ -261,6 +261,10 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
             $.each($scope.chatMessages,function(index,value){
                 value.selectedChat=0;
                 value.firstNewMessage=0;
+          //Set Date and Time Seperately
+                value.msgdate=value.datetime.substring(0,10);
+                value.msgtime=value.datetime.substring(11,19);
+
                 if(value.status==0 && value.sentby==2){
                     $scope.unreadChatMessageCount+=1;
                     $scope.showMessageCount=true;
@@ -289,6 +293,8 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
             $.each(response.data.chats,function(index,value){
                 value.selectedChat=0;
                 value.scrollLocation=0;
+                value.msgdate=value.datetime.substring(0,10);
+                value.msgtime=value.datetime.substring(11,19);
             });
             $scope.totalChatMessages=response.data.totalrecords;
             $scope.chatMessages.unshift.apply($scope.chatMessages,response.data.chats);

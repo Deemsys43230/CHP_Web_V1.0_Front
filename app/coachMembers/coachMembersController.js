@@ -1,7 +1,7 @@
 /**
  * Created by Deemsys on 9/21/2015.
  */
-var coachApp = angular.module('coachApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','angularUtils.directives.dirPagination','angular-nicescroll','angular-svg-round-progress']);
+var coachApp = angular.module('coachApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','angularUtils.directives.dirPagination','angular-nicescroll','angular-svg-round-progress','angular.filter']);
 
 coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter","Flash","$location","$rootScope","$routeParams",function($scope,requestHandler,$filter,Flash,$location,$rootScope,$routeParams,$setPristine) {
 
@@ -1388,6 +1388,8 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
             return sign + hours +'hrs '+minutes + 'mins';
         };
 
+
+
     //Do Set Chat Message as Read 
     $scope.doReadChatMessage=function(){
       $scope.setReadMessageParam={"targetid":$routeParams.id};
@@ -1407,19 +1409,20 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
             $scope.isChatMinimized=true;
     }
 
-       setInterval(function(){                            //set 15 seconds interval for repeatedly call a function
+    /*  setInterval(function(){                            //set 15 seconds interval for repeatedly call a function
   $scope.doGetChatMessage();
   //$scope.doReadChatMessage();
-}, 15000);
+}, 15000);*/
 
     //Do Get Chat Message
-    $scope.doGetChatMessage=function(){
+    $scope.doGetChatMessage=function(){ 
            $scope.getMessageParam.offset=0;
           $scope.getMessageParam={"targetid":$routeParams.id,"offset":0};   
         requestHandler.postRequest("/readMessage/",$scope.getMessageParam).then(function(response){
             $scope.totalChatMessages=response.data.totalrecords;
             $scope.chatMessages={};
             $scope.chatMessages=response.data.chats;
+          
             $scope.showLoadMore=false;
             if($scope.chatMessages.length<$scope.totalChatMessages){
                 $scope.showLoadMore=true;
@@ -1444,6 +1447,10 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
             $.each($scope.chatMessages,function(index,value){
                 value.selectedChat=0;
                 value.firstNewMessage=0;
+                //Set Date and Time Seperately
+                value.msgdate=value.datetime.substring(0,10);
+                value.msgtime=value.datetime.substring(11,19);
+
                 if(value.status==0 && value.sentby==3){
                     $scope.unreadChatMessageCount+=1;
                     $scope.showMessageCount=true;
@@ -1454,15 +1461,18 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
                 }
             });
 
+
         if(!$scope.isChatMinimized){
             $scope.doReadChatMessage();
            }
 
             setTimeout(function(){ $('.msg_container_base').scrollTop($('.msg_container_base')[0].scrollHeight); }, 500);
         });
+
+    
     };
 
-    //Do Get Load Chat Message
+   //Do Get Load Chat Message
     $scope.doLoadChatMessages=function(){
         $scope.getMessageParam.offset=$scope.chatMessages.length;
         console.log($scope.chatMessages);   
@@ -1472,6 +1482,9 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
             $.each(response.data.chats,function(index,value){
                 value.selectedChat=0;
                 value.scrollLocation=0;
+                value.msgdate=value.datetime.substring(0,10);
+                value.msgtime=value.datetime.substring(11,19);
+
             });
             $scope.totalChatMessages=response.data.totalrecords;
             $scope.chatMessages.unshift.apply($scope.chatMessages,response.data.chats);
