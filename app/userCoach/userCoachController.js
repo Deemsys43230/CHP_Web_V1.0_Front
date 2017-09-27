@@ -949,7 +949,13 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
             errorMessage(Flash,"Please try again later!");
         });
   };
-
+    //Do get coach AssessmentList
+    $scope.doGetCoachAssessmentList = function(coachid){
+        requestHandler.postRequest("user/readassessments/",{"coachid":coachid}).then(function(response){
+            $scope.coachAssessmentList = response.data.assessments;
+            $scope.paginationLoad = true;
+        });
+    };
 
     $scope.userCoachViewInit=function(){
         $scope.scrollnation={"itemsPerScroll": 4,"scrollEndCount":-1};
@@ -967,6 +973,7 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
         $scope.doGetChatMessage();
         $scope.doGetCoachAdviceByUser($routeParams.id);
         $scope.doGetUpcomingEvents($routeParams.id);
+        $scope.doGetCoachAssessmentList($routeParams.id);
 
         var todayDate = new Date();
         $scope.fromDate=moment(new Date(todayDate.getFullYear(), todayDate.getMonth(), 1)).format('DD/MM/YYYY');

@@ -24,7 +24,7 @@
                 </div>    
 
                 <div class="col-lg-10 col-md-10 col-sm-9">  
-                    <h5 class="classic-title" style="margin-left:20px;margin-bottom:20px;"><a class="active-tab profile-details" href=""><i class="fa fa-user"></i>&nbsp;&nbsp;Profile</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a class="event-details" href=""><i class="fa fa-calendar"></i>&nbsp;&nbsp;Events&nbsp;<small class="badge">{{coachEvent.length}}</small></a>&nbsp;&nbsp;|&nbsp;&nbsp;<a class="mealplan-details" href=""><i class="fa fa-th-large"></i>&nbsp;&nbsp;Meal Plan</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a class="workoutplan-details" href=""><i class="fa fa-list"></i>&nbsp;&nbsp;Workout Plan</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a class="appointment-details" href=""><i class="fa fa-book"></i>&nbsp;&nbsp;Appointment</a></h5> 
+                    <h5 class="classic-title" style="margin-left:20px;margin-bottom:20px;"><a class="active-tab profile-details" href=""><i class="fa fa-user"></i>&nbsp;&nbsp;Profile</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a class="event-details" href=""><i class="fa fa-calendar"></i>&nbsp;&nbsp;Events&nbsp;<small class="badge">{{coachEvent.length}}</small></a>&nbsp;&nbsp;|&nbsp;&nbsp;<a class="mealplan-details" href=""><i class="fa fa-th-large"></i>&nbsp;&nbsp;Meal Plan</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a class="workoutplan-details" href=""><i class="fa fa-list"></i>&nbsp;&nbsp;Workout Plan</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a class="appointment-details" href=""><i class="fa fa-book"></i>&nbsp;&nbsp;Appointment</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a class="assessment-details" href=""><i class="fa fa-file-text-o"></i>&nbsp;&nbsp;Assessments</a></h5>
                     <div class="profile-details-div">
                         <div class="col-lg-6 col-md-6 col-sm-6">
                             <div class="talk-bubble tri-right left-in talktext wrap" ng-show="!noAdvices">
@@ -225,7 +225,7 @@
                             <small style="color:#666;">consumed out of</small>
                             {{mealPlanDetail.totalCalories}}</div>
                             <div>
-                        </td>
+                        </div>
                         <td class="food-plans">                           
                             <!--Breakfast-->
                             <div ng-repeat="foodItem in mealPlanDetail.foods[0].foodItems">
@@ -366,7 +366,7 @@
                         <small style="color:#666;">burnt out of</small>
                         {{workoutPlanDetail.totalCalories}}</div>
                         <div>
-                    </td>
+                    </div>
                     <td class="col-md-9 col-lg-9 col-am-9 exercise-plans">
                         <div class="display-block">
                         <div class="col-md-4 col-lg-4 col-sm-4" ng-repeat="workoutItem in workoutPlanDetail.workouts">
@@ -390,13 +390,41 @@
                         </div>
                         </div>
                     </td>
-                </tr>
+                </div>
                 </table>
                 </div>
             <div class="appointment-details-div col-lg-12 col-md-12 col-sm-12 margin-bottom-60">
                 <simple-calendar events="events" options="calendarOptions"></simple-calendar>
                 <br/><br/><br/>
-            </div> 
+            </div>
+                    <div class="assessment-details-div col-lg-12 col-md-12 col-sm-12 margin-bottom-10">
+
+                        <table class="table table-striped table-bordered" style="table-layout:fixed">
+                            <thead>
+                            <tr class="warning">
+                                <th class="col-md-2 col-lg-2 col-sm-2">Assessment Name</th>
+                                <th class="col-md-2 col-lg-2 col-sm-2">Date</th>
+                                <th class="col-md-2 col-lg-2 col-sm-2">Options</th>
+                            </tr>
+                            </thead>
+
+                            <tbody >
+                            <tr dir-paginate="assessment in coachAssessmentList | itemsPerPage: 9" ng-show="coachAssessmentList.length!=0" pagination-id="assessment">
+                                <td class="wrap-all">{{assessment.assessmentname}}</td>
+                                <td>{{assessment.date}}</td>
+                            <td>
+                                    <a href=""  class="btn-xs btn-primary">Fill Assessment</a>
+
+                             </td>
+                            </tr>
+                            <tr ng-show="coachAssessmentList.length==0"><td colspan="3" class="text-center">No Records Found !!!</td></tr>
+                            </tbody>
+                        </table>
+                        <!-- Start Pagination -->
+                        <dir-pagination-controls ng-show="paginationLoad" boundary-links="true" pagination-id="assessment"> </dir-pagination-controls>
+                        <!-- End Pagination -->
+                    </div>
+                </div>
                 </div>
                 </form>
 
@@ -752,6 +780,8 @@ $(document).ready(function(){
     $(".mealplan-details-div").hide();
     $(".workoutplan-details-div").hide();
     $(".appointment-details-div").hide();
+    $(".assessment-details-div").hide();
+
 
        $(".profile-details").click(function(){
            $(".profile-details").addClass("active-tab");
@@ -759,11 +789,13 @@ $(document).ready(function(){
            $(".workoutplan-details").removeClass("active-tab");
            $(".mealplan-details").removeClass("active-tab");
            $(".appointment-details").removeClass("active-tab");
+           $(".assessment-details").removeClass("active-tab");
            $(".event-details-div").hide();
            $(".mealplan-details-div").hide();
            $(".workoutplan-details-div").hide();
            $(".profile-details-div").show();
            $(".appointment-details-div").hide();
+           $(".assessment-details-div").hide();
        });
        $(".event-details").click(function(){
            $(".profile-details").removeClass("active-tab");
@@ -771,11 +803,13 @@ $(document).ready(function(){
            $(".workoutplan-details").removeClass("active-tab");
            $(".mealplan-details").removeClass("active-tab");
            $(".appointment-details").removeClass("active-tab");
+           $(".assessment-details").removeClass("active-tab");
            $(".profile-details-div").hide();
            $(".mealplan-details-div").hide();
            $(".workoutplan-details-div").hide();
            $(".event-details-div").show();
            $(".appointment-details-div").hide();
+           $(".assessment-details-div").hide();
       });
        $(".mealplan-details").click(function(){
            $(".profile-details").removeClass("active-tab");
@@ -783,11 +817,13 @@ $(document).ready(function(){
            $(".workoutplan-details").removeClass("active-tab");
            $(".mealplan-details").addClass("active-tab");
            $(".appointment-details").removeClass("active-tab");
+           $(".assessment-details").removeClass("active-tab");
            $(".event-details-div").hide();
            $(".mealplan-details-div").show();
            $(".workoutplan-details-div").hide();
            $(".profile-details-div").hide();
            $(".appointment-details-div").hide();
+           $(".assessment-details-div").hide();
        });
        $(".workoutplan-details").click(function(){
            $(".profile-details").removeClass("active-tab");
@@ -795,11 +831,13 @@ $(document).ready(function(){
            $(".workoutplan-details").addClass("active-tab");
            $(".mealplan-details").removeClass("active-tab");
            $(".appointment-details").removeClass("active-tab");
+           $(".assessment-details").removeClass("active-tab");
            $(".event-details-div").hide();
            $(".mealplan-details-div").hide();
            $(".workoutplan-details-div").show();
            $(".profile-details-div").hide();
            $(".appointment-details-div").hide();
+           $(".assessment-details-div").hide();
        });
        $(".appointment-details").click(function(){
            $(".profile-details").removeClass("active-tab");
@@ -807,12 +845,28 @@ $(document).ready(function(){
            $(".workoutplan-details").removeClass("active-tab");
            $(".mealplan-details").removeClass("active-tab");
            $(".appointment-details").addClass("active-tab");
+           $(".assessment-details").removeClass("active-tab");
            $(".event-details-div").hide();
            $(".mealplan-details-div").hide();
            $(".workoutplan-details-div").hide();
            $(".profile-details-div").hide();
            $(".appointment-details-div").show();
+           $(".assessment-details-div").hide();
        });
+    $(".assessment-details").click(function(){
+        $(".profile-details").removeClass("active-tab");
+        $(".event-details").removeClass("active-tab");
+        $(".workoutplan-details").removeClass("active-tab");
+        $(".mealplan-details").removeClass("active-tab");
+        $(".appointment-details").removeClass("active-tab");
+        $(".assessment-details").addClass("active-tab");
+        $(".event-details-div").hide();
+        $(".mealplan-details-div").hide();
+        $(".workoutplan-details-div").hide();
+        $(".profile-details-div").hide();
+        $(".appointment-details-div").hide();
+        $(".assessment-details-div").show();
+    });
    });
 </script>
 

@@ -264,8 +264,13 @@ userApp.controller('UserMedicationDocumentUploadController',['$scope','requestHa
     $scope.doUploadFile = function(){
         $scope.fileUpload=true;
         $scope.uploadBtnTxt="Uploading...";
-    requestHandler.directFileUpload("user/uploadfile/",$scope.uploadFile,"document").then(function(){
-           successMessage(Flash,"Successfully Uploaded");
+    requestHandler.directFileUpload("user/uploadfile/",$scope.uploadFile,"document").then(function(response){
+        if(response.data.Response_status==0){
+            errorMessage(Flash,"Insufficient&nbsp;Space");
+        }
+        else{
+            successMessage(Flash,"Successfully Uploaded");
+        }
            $scope.uploadBtnTxt="Upload File";
            $scope.fileUpload=false;
            $scope.doGetUserUploadedDocument($scope.userDetails.userid);
