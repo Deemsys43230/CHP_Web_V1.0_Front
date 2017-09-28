@@ -890,6 +890,20 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
         }
     };
 
+    var selectedDate = new Date();
+    var dd = selectedDate.getDate();
+    var mm = selectedDate.getMonth()+1; //January is 0!
+
+    var yyyy = selectedDate.getFullYear();
+      if(dd<10){
+          dd='0'+dd
+      }
+      if(mm<10){
+          mm='0'+mm
+      }
+    selectedDate = dd+'/'+mm+'/'+yyyy;
+    var startDate = selectedDate;
+
     $scope.dateClick=function(date){
         $scope.calendarOptions.selectedDate=date;
     };
@@ -935,6 +949,7 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
 
 
     $scope.userGetAppointmentList=function(coachid,fromDate,endDate){       
+        $scope.canCancel=true;
         $scope.getAppointmentsParam={"coachid":coachid,"fromdate":fromDate,"todate":endDate};
 
         requestHandler.postRequest("user/coachavailableappointments/",$scope.getAppointmentsParam).then(function(response){
@@ -955,6 +970,21 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
                 if(value.canbook==0){
                     $scope.notAvailableAppointments.push(formattedDate);
                 }
+
+            var startDateParts=startDate.split("/");
+            var startDate_date=new Date(startDateParts[2],startDateParts[1]-1,startDateParts[0]);
+
+            var appointmentDateParts=value.date.split("/");
+            var appointmentDate_date=new Date(appointmentDateParts[2],appointmentDateParts[1]-1,appointmentDateParts[0]);
+            
+            if(appointmentDate_date<startDate_date){
+                $scope.canCancel=false; 
+                $scope.calendarOptions.canCancel=$scope.canCancel;
+            }else{
+                $scope.canCancel=true;
+                $scope.calendarOptions.canCancel=$scope.canCancel;
+            }
+
             });
             $scope.calendarOptions.coachappointments=$scope.coachappointments;
             $scope.calendarOptions.userappointments=$scope.userappointments;
@@ -1021,9 +1051,9 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
                 errorMessage(Flash,"Please try again later!");
             });
         }
+        
     });
 };
-
 
     $scope.userCoachViewInit=function(){
         $scope.scrollnation={"itemsPerScroll": 4,"scrollEndCount":-1};
