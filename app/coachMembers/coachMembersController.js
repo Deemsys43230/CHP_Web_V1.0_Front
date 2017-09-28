@@ -2059,7 +2059,12 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
      //Get Coach Workout Plan List
     $scope.doGetMyAssessmentsList=function(){
        requestHandler.getRequest("coach/getmyassessments/","").then(function(response){
-            $scope.coachAssessmentsList= response.data.assessments;
+            $scope.coachAssessmentsList= [];
+            $.each(response.data.assessments,function(index,value){
+                if(value.status==1){
+                    $scope.coachAssessmentsList.push(value);
+                }
+            });
         }, function(){
             errorMessage(Flash,"Please try again later!")
         });

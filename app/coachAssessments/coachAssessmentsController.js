@@ -333,3 +333,19 @@ coachApp.filter('trusted', ['$sce', function ($sce) {
         return $sce.trustAsResourceUrl(url);
     };
 }]);
+
+//Check for option unique
+coachApp.directive('optionExistCheck', function() {
+  return {
+    restrict: 'A',
+    require: '?ngModel',
+    link: function(scope, elem, attrs, ngModel) {
+      ngModel.$validators.optionExistCheck = function(modelValue, viewValue) {
+       if(scope.addQuestion.answers.indexOf(modelValue)!=-1)
+            return false;
+        else
+            return true;
+      };
+    }
+  };
+});

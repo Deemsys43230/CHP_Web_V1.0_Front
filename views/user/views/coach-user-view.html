@@ -476,20 +476,20 @@
                                                 <div class="question" ng-repeat="question in assessments.questions" ng-init="questionIndex = $index">
                                                 <h5 class="wrap-all">Q{{$index+1}}.&nbsp;&nbsp;{{question.question}}&nbsp;&nbsp;<span class="badge pull-right">{{question.answertype==1?"Single Choice":question.answertype==2?"Multi Choice":"Text"}}</span></a></h5>
                                                 <div  class="answers" ng-repeat="option in question.answers" ng-if="question.answertype==1">    
-                                                    <p><span style="margin-top:10px;"><input type="radio" name="radio_{{questionIndex}}" ng-model="assessments.questions[questionIndex].useranswer" ng-value="option.id"/></span>&nbsp;&nbsp;{{option.answer}}</p> 
+                                                    <p><span style="margin-top:10px;"><input type="radio" name="radio_{{questionIndex}}" ng-model="assessments.questions[questionIndex].useranswer" ng-value="option.id" required/></span>&nbsp;&nbsp;{{option.answer}}</p> 
                                                 </div>
                                                 <div class="answers" ng-repeat="option in question.answers" ng-if="question.answertype==2">
                                                     <p><span style="margin-top:10px;"><input type="checkbox" name="checkbox_{{questionIndex}}" ng-model="option.checked" ng-init="option.checked=false"/></span>&nbsp;&nbsp;{{option.answer}}</p>
                                                 </div>
                                                 <div  class="answers" ng-if="question.answertype==3">
-                                                    <textarea class="profile_input_textarea" name="question_answer" ng-model="question.useranswer"></textarea>
+                                                    <textarea class="profile_input_textarea" name="question_answer" ng-model="question.useranswer" ></textarea>
                                                 </div>
 
                                                 </div>
                                                 <div class="col-md-12 margin-bottom-60"><hr/></div>
                                                 <div class="col-md-offset-4 col-md-8">
-                                                    <span ng-show="true"><a href="" ng-disabled="assessmentsForm.$invalid || assessments.questions.length==0 ||isClean()" class="btn btn-success" ng-click="doCompleteAssessment()">Complete Assessment</a></span>
-                                                <span ng-show="true"><a href="#coach-assessments" class="btn btn-danger">Cancel</a></span>
+                                                    <span ng-show="true"><a href="" ng-disabled="assessmentsForm.$invalid" class="btn btn-success" ng-click="doCompleteAssessment()">Complete Assessment</a></span>
+                                                <span ng-show="true"><a href="" ng-click="assessmentOptions.showAssessment=false;" class="btn btn-danger">Cancel</a></span>
                                                 </div>
                                             </div> 
 

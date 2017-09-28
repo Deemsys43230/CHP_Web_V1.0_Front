@@ -106,7 +106,7 @@
                         <form name="bookingForm" novalidate>
                         <h5 class="margin-top-10">Client Counts :</h5>
                         <div class="form-group">
-                            <input type="text" ng-model="booking.count" name="count" class="form-control" required validate-integer ng-change="maxClientCountCheck(booking.count)" style="padding: 7px 12px;"/>
+                            <input type="text" ng-model="booking.count" name="count" class="form-control" required validate-integer ng-change="maxClientCountCheck(booking.count)" style="padding: 7px 12px;" maxlength="3"/>
                             <span class="error-message" ng-show="maxClientCount"><span>Please&nbsp;Enter&nbsp;Valid&nbsp;Value.</span></span>
                                 <span ng-show="bookingForm.count.$dirty&&bookingForm.count.$invalid">
                                     <span class="error-message" ng-show="bookingForm.count.$error.required"><span>Required.</span></span>
