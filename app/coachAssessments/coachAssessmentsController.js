@@ -2,6 +2,7 @@ var coachApp = angular.module('coachApp', ['ngRoute','oc.lazyLoad','requestModul
 
 coachApp.controller('CoachAssessmentsController',['$scope','requestHandler','Flash','$routeParams',function($scope,requestHandler,Flash,$routeParams) {
 
+    $scope.activeClass.assessments='active';
     //Get All Coach Assessments
     $scope.doGetCoachMyAssessments=function(){
         requestHandler.getRequest("coach/getmyassessments/", "").then(function(response){

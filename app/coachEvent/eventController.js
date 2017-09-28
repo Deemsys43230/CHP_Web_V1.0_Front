@@ -2,7 +2,7 @@ var coachApp = angular.module('coachApp', ['ngRoute','oc.lazyLoad','requestModul
 
 coachApp.controller('EventController',['$scope','requestHandler','Flash','$routeParams','$location',function($scope,requestHandler,Flash,$routeParams,$location) {
 
-	$scope.activeClass.events='active';
+    $scope.activeClass.appointments='active';
 
 	daterangepicker();
 

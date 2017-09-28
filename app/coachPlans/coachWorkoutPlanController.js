@@ -1,7 +1,7 @@
 var coachApp = angular.module('coachApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','ngPercentDisplay','angular-svg-round-progress','angularUtils.directives.dirPagination','userDashboardServiceModule','ui.bootstrap']);
 
 coachApp.controller('CoachWorkoutPlanController',['$scope','requestHandler','Flash',function($scope,requestHandler,Flash) {
-$scope.activeClass.advices='active';
+    $scope.activeClass.assessments='active';
 
 $scope.doGetCoachWorkoutPlanList=function(){
   $scope.loaded=true;

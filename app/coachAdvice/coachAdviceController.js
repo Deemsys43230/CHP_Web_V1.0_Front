@@ -2,7 +2,7 @@ var coachApp = angular.module('coachApp', ['ngRoute','oc.lazyLoad','requestModul
 
 coachApp.controller('CoachAdviceController',['$scope','requestHandler','Flash',function($scope,requestHandler,Flash) {
 
-
+    $scope.activeClass.assessments='active';
     var original="";
     $scope.doGetCoachMyAdvice=function(){
         requestHandler.getRequest("coach/getquote/", "").then(function(response){
