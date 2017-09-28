@@ -1,6 +1,6 @@
 var coachApp = angular.module('coachApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','angularUtils.directives.dirPagination','angular-nicescroll']);
 
-coachApp.controller('CoachAssessmentsController',['$scope','requestHandler','Flash',function($scope,requestHandler,Flash) {
+coachApp.controller('CoachAssessmentsController',['$scope','requestHandler','Flash','$routeParams',function($scope,requestHandler,Flash,$routeParams) {
 
     //Get All Coach Assessments
     $scope.doGetCoachMyAssessments=function(){
@@ -9,11 +9,36 @@ coachApp.controller('CoachAssessmentsController',['$scope','requestHandler','Fla
         },function(){
             errorMessage(Flash,"Please try again later!")
         });
+        /*$scope.doDeleteAssessment($scope.assessmentID);*/
     };
-   
+
+
+
+
+    //To delete Coach Assessments
+    $scope.doDeleteAssessment=function(id){
+        if(confirm("Are you sure want to delete Assessment?")){
+            requestHandler.getRequest("coach/deleteassessment/"+id+"/","").then(function(response){
+                if(response.data.Response_status==0 ){
+                    errorMessage(Flash,"Assessment&nbsp;assigned&nbsp;to&nbsp;User");
+                }
+                else if(response.data.Response_status==1){
+                    successMessage(Flash,"Successfully Deleted");
+
+                }
+                $scope.doGetCoachMyAssessments();
+            },function(){
+                errorMessage(Flash,"Please try again later!")
+            });
+        }
+    };
+
     $scope.init=function(){
         $scope.doGetCoachMyAssessments();
-    };
+ };
+
+
+
 
     $scope.init();
 
