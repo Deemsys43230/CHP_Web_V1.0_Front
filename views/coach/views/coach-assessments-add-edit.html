@@ -95,7 +95,7 @@
                         <p><strong>Options:</strong></p>
                     </div> 
                     <div class="col-md-10">
-                    	<a class="appointment_booknow pull-left margin-top-10" href="" ng-click="addQuestion.answers.push('')">Add One More Option</a>
+                    	<a class="appointment_booknow pull-left margin-top-10" href="" ng-click="addQuestion.answers.push('')" ng-hide="addQuestion.answers.length>5">Add One More Option</a>
                    	</div>
                     <div class="col-md-12">
                     <hr/>
@@ -107,7 +107,7 @@
                         <p class="pull-right">Option {{$index+1}}:</p>
                     </div>  
                     <div class="col-md-9 col-sm-10 no-padding">
-		                       		 <input type="text" name="answer_{{$index}}" ng-model="addQuestion.answers[$index]" maxlength="200" ng-required="addQuestion.answertype!=3" option-exist-check="123">
+		                       		 <input type="text" name="answer_{{$index}}" ng-model="addQuestion.answers[$index]" maxlength="200" ng-required="addQuestion.answertype!=3" option-exist-check>
 		                             <span ng-show="addQuestionForm.answer_{{$index}}.$dirty&&addQuestionForm.answer_{{$index}}.$invalid">
 		                                 <span class="error-message" ng-show="addQuestionForm.answer_{{$index}}.$error.required"><span>Required.</span></span>
                                          <span class="error-message" ng-show="!addQuestionForm.answer_{{$index}}.$error.required&&addQuestionForm.answer_{{$index}}.$error.optionExistCheck"><span>Options&nbsp;should&nbsp;not&nbsp;match.</span></span>
