@@ -18,7 +18,7 @@
                         	<h4>Questions</h4>
                         	<hr/>
                         	<div class="question" ng-repeat="question in assessments.questions">
-                        	<h5>Q{{$index+1}}.&nbsp;&nbsp;{{question.question}}&nbsp;&nbsp;<span class="badge pull-right">{{question.answertype==1?"Single Choice":question.answertype==2?"Multi Choice":"Text"}}</span></a></h5>
+                        	<h5 class="wrap-all">Q{{$index+1}}.&nbsp;&nbsp;{{question.question}}&nbsp;&nbsp;<span class="badge pull-right">{{question.answertype==1?"Single Choice":question.answertype==2?"Multi Choice":"Text"}}</span></a></h5>
                         	<div  class="answers" ng-repeat="option in question.answers"> 
                         	<p>{{$index+1}}.&nbsp;{{option}}</p>
                         	</div>

@@ -18087,7 +18087,16 @@ select.event:focus {
     position: absolute;
     margin-top: 3px;
  }
-
+.answer_legend{
+    display: inline-block;
+    height: 15px;
+    width: 17px;
+    position: absolute;
+    margin-top: 3px;
+    background-color:#f8ba01;
+    line-height: 1;
+    border-radius: 10px;
+}
  .appointment_delete{
     margin-left: -12px!important;
     text-decoration: none!important;
