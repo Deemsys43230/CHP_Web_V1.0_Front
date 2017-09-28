@@ -1183,7 +1183,7 @@
                                                     <h4>Assessment Name <span class="pull-right">:</span></h4><br/>
                                                 </div>
                                                 <div class="col-lg-8 col-md-8 col-sm-12">
-                                                   <p>{{assessments.assessmentname}}</p>
+                                                   <p class="wrap-all">{{assessments.assessmentname}}</p>
                                                 </div>  
                                             </div>
                                             <div class="col-md-12 no-padding">
@@ -1206,18 +1206,18 @@
                                             </div>                      
                                             <div class="col-lg-12 col-md-12 col-sm-12">
                                                 <div class="pull-right">
-                                                    <span class="answer_legend"></span><div class="margin-left-20"><strong>-</strong>&nbsp;Client&nbsp;Selected&nbsp;Answers</div>
+                                                    <span ng-show="assessments.status==1" class="answer_legend"></span><div ng-show="assessments.status==1" class="margin-left-20"><strong>-</strong>&nbsp;Client&nbsp;Selected&nbsp;Answers</div>
                                                 </div>
                                                 <h4><strong>Questions</strong></h4>
 
                                                 <hr/>
                                                 <div class="question" ng-repeat="question in assessments.questions">
-                                                <h5 class="wrap-all">Q{{$index+1}}.&nbsp;&nbsp;{{question.question}}&nbsp;&nbsp;<span class="badge pull-right">{{question.answertype==1?"Single Choice":question.answertype==2?"Multi Choice":"Text"}}</span></a></h5>
+                                                <h5>Q{{$index+1}}.&nbsp;&nbsp;<span class="wrap-all">{{question.question}}</span>&nbsp;&nbsp;<span class="badge pull-right">{{question.answertype==1?"Single Choice":question.answertype==2?"Multi Choice":"Text"}}</span></a></h5>
                                                 <div class="answers" ng-repeat="option in question.answers" ng-if="question.answertype!=3"> 
-                                                <p><span class="option_number" ng-class="{yellow_badge:isUserAnswer(question.useranswer,option.id)}">{{$index+1}}.</span>&nbsp;&nbsp;{{option.answer}}</p>
+                                                <p><span class="option_number" ng-class="{yellow_badge:isUserAnswer(question.useranswer,option.id)}">{{$index+1}}.</span>&nbsp;&nbsp;<span class="wrap-all">{{option.answer}}</span></p>
                                                 </div>
                                                 <div class="answers" ng-if="question.answertype==3"> 
-                                                <p class="wrap-all">{{question.useranswer}}</p>
+                                                <p><span class="wrap-all">{{question.useranswer}}</span></p>
                                                 </div>
                                                 </div>
                                                 <div class="col-md-12 margin-bottom-60"><hr/></div>

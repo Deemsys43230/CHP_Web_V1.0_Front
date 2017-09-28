@@ -12,15 +12,15 @@
                             <h4>Assessment Name <span class="pull-right">:</span></h4><br/>
                         </div>
                         <div class="col-lg-8 col-md-8 col-sm-12">
-                           <p>{{assessments.assessmentname}}</p>
+                           <p class="wrap-all">{{assessments.assessmentname}}</p>
                         </div>                        
                         <div class="col-lg-12 col-md-12 col-sm-12">
                         	<h4>Questions</h4>
                         	<hr/>
                         	<div class="question" ng-repeat="question in assessments.questions">
-                        	<h5 class="wrap-all">Q{{$index+1}}.&nbsp;&nbsp;{{question.question}}&nbsp;&nbsp;<span class="badge pull-right">{{question.answertype==1?"Single Choice":question.answertype==2?"Multi Choice":"Text"}}</span></a></h5>
+                        	<h5>Q{{$index+1}}.&nbsp;&nbsp;<span class="wrap-all">{{question.question}}</span>&nbsp;&nbsp;<span class="badge pull-right">{{question.answertype==1?"Single Choice":question.answertype==2?"Multi Choice":"Text"}}</span></h5>
                         	<div  class="answers" ng-repeat="option in question.answers"> 
-                        	<p>{{$index+1}}.&nbsp;{{option}}</p>
+                        	<p>{{$index+1}}.&nbsp;<span class="wrap-all">{{option}}</span></p>
                         	</div>
                         	</div>
                             <div class="col-md-12"><hr/></div>

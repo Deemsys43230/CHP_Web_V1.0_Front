@@ -26,7 +26,7 @@
                         <div flash-message="2000" class="col-md-4 col-lg-3 col-sm-6 pull-right"></div>
                         <h4 class="classic-title" style="margin-left:20px;"><span>Clients</span></h4>
                     </div>
-                    <div class="content_scrollbar col-lg-12 col-md-12 col-sm-12 padding-lr-5" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#eee'}" ><br/>
+                    <div class="content_scrollbar col-lg-12 col-md-12 col-sm-12 padding-lr-5" style="height: 365px;" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#eee'}" ><br/>
                         <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4 margin-bottom-10" ng-repeat="client in filteredClients=(myClients|complexFilter:{'groupid':selectedGroupId})" ng-init="$last ? doIntializeLeanModal() : null">
 
                             <a href="#member-view/{{client.userid}}">

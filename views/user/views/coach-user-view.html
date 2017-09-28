@@ -301,6 +301,7 @@
                                 </a>
                             </div>
                         </td>
+                    </div>
                     </tr>
                  </table>
                  </div>
@@ -316,7 +317,7 @@
                             <span class="orange plan-point"></span><div class="margin-left-20">-&nbsp;Optional&nbsp;Exercise</div>
                             </div>
                          </div>
-                 <table class="table table-bordered table-striped" ng-hide="workoutplan.workPlanDetailView">
+                <table class="table table-bordered table-striped" ng-hide="workoutplan.workPlanDetailView">
                     <thead>
                         <tr class="warning">
                             <th class="col-md-2 col-lg-2 col-sm-2">Plan Name</th>
@@ -451,7 +452,7 @@
                                                     <h4>Assessment Name <span class="pull-right">:</span></h4><br/>
                                                 </div>
                                                 <div class="col-lg-8 col-md-8 col-sm-12">
-                                                   <p>{{assessments.assessmentname}}</p>
+                                                   <p class="wrap-all">{{assessments.assessmentname}}</p>
                                                 </div>  
                                             </div>
                                             <div class="col-md-12 no-padding">
@@ -466,20 +467,21 @@
                                             <div class="col-lg-4 col-md-4 col-sm-4 margin-top-7">
                                                 <h4>Status<span class="pull-right">:</span></h4><br/>
                                             </div>
-                                            <div class="col-lg-8 col-md-8 col-sm-12">
-                                               <p>{{assessments.status==0?"Pending":"Completed"}}</p>
+                                            <div class="col-lg-8 col-md-8 col-sm-12 margin-top-10 font-weight">
+                                                <a class="btn-xs btn-warning" ng-if="assessments.status==0">Pending</a>
+                                                <a class="btn-xs btn-success" ng-if="assessments.status==1">Completed</a>
                                             </div> 
                                             </div>                      
                                             <div class="col-lg-12 col-md-12 col-sm-12">
                                                 <h4><strong>Fill Out the Answers Below</strong></h4>
                                                 <hr/>
                                                 <div class="question" ng-repeat="question in assessments.questions" ng-init="questionIndex = $index">
-                                                <h5 class="wrap-all">Q{{$index+1}}.&nbsp;&nbsp;{{question.question}}&nbsp;&nbsp;<span class="badge pull-right">{{question.answertype==1?"Single Choice":question.answertype==2?"Multi Choice":"Text"}}</span></a></h5>
+                                                <h5>Q{{$index+1}}.&nbsp;&nbsp;<span class="wrap-all">{{question.question}}</span>&nbsp;&nbsp;<span class="badge pull-right">{{question.answertype==1?"Single Choice":question.answertype==2?"Multi Choice":"Text"}}</span></a></h5>
                                                 <div  class="answers" ng-repeat="option in question.answers" ng-if="question.answertype==1">    
-                                                    <p><span style="margin-top:10px;"><input type="radio" name="radio_{{questionIndex}}" ng-model="assessments.questions[questionIndex].useranswer" ng-value="option.id" required/></span>&nbsp;&nbsp;{{option.answer}}</p> 
+                                                    <p><span style="margin-top:10px;"><input type="radio" name="radio_{{questionIndex}}" ng-model="assessments.questions[questionIndex].useranswer" ng-value="option.id" required/></span>&nbsp;&nbsp;<span class="wrap-all">{{option.answer}}</span></p>
                                                 </div>
                                                 <div class="answers" ng-repeat="option in question.answers" ng-if="question.answertype==2">
-                                                    <p><span style="margin-top:10px;"><input type="checkbox" name="checkbox_{{questionIndex}}" ng-model="option.checked" ng-init="option.checked=false"/></span>&nbsp;&nbsp;{{option.answer}}</p>
+                                                    <p><span style="margin-top:10px;"><input type="checkbox" name="checkbox_{{questionIndex}}" ng-model="option.checked" ng-init="option.checked=false"/></span>&nbsp;&nbsp;<span class="wrap-all">{{option.answer}}</span></p>
                                                 </div>
                                                 <div  class="answers" ng-if="question.answertype==3">
                                                     <textarea class="profile_input_textarea" name="question_answer" ng-model="question.useranswer" ></textarea>
