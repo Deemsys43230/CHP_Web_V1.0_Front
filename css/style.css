@@ -15965,11 +15965,11 @@ button.reduce_button:hover{
     text-transform: uppercase;
     line-height:33px;
     font-weight:400;
-}
+}*/
 
 .slider-hight{
     height:450px;
-}*/
+}
 
 .calendar-button{
     border-radius:0!important;
@@ -16699,7 +16699,7 @@ margin-top: 10px;
 .plan .price {
     display: block;
     width: 100%;
-    background-color: #ff9933;
+    height: 60px;
     margin: 15px 0 10px 0;
     text-align: center;
     font-size: 23px;
@@ -18168,6 +18168,16 @@ select.event:focus {
     font-weight: 500;
     font-size: 35px !important;
     line-height: 55px;
+}
+.slide2-font{
+     font-size: 24px !important;
+}
+.slide2-left{
+    left: 55%;
+}
+.slide3-left{
+    left: 50%;
+
 }
 /*for medication document file upload in user side*/
 .document-image-upload-box{
