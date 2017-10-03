@@ -18270,14 +18270,13 @@ select.event:focus {
 }
 
 /*document  file upload*/
-#fileupload-example-1 {
+#fileupload-wrap-filename {
     background: #999999;
     color: #ffffff;
     display: inline-block;
     font-size: 14px;
     padding: 0;
-    width:200px;
+    width:250px;
     text-overflow: ellipsis;
-
 }
 
