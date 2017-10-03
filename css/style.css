@@ -18268,3 +18268,16 @@ select.event:focus {
 .question-font-weight{
     font-weight:600; !important
 }
+
+/*document  file upload*/
+#fileupload-example-1 {
+    background: #999999;
+    color: #ffffff;
+    display: inline-block;
+    font-size: 14px;
+    padding: 0;
+    width:200px;
+    text-overflow: ellipsis;
+
+}
+
