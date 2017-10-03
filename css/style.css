@@ -17987,10 +17987,10 @@ select.event:focus {
 
   .day {
     height: 80px !important;
-    padding: 30px !important;
     border: 1px solid #dddddd;
     border-bottom: none;
     border-left: none;
+    padding-top: 30px !important;
     overflow: hidden;
     color: #000000;
     text-align: center;
@@ -18098,15 +18098,9 @@ select.event:focus {
     border-radius: 10px;
 }
  .appointment_delete{
-    margin-left: -12px!important;
     text-decoration: none!important;
- }
-
- .appointment_delete .appointment_booknow{
-    text-decoration: none !important;
     color:brown;
  }
-
 /*for home page carousal image*/
 
   /* Carousel Styles */

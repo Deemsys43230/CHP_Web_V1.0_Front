@@ -28,8 +28,8 @@ angular.module('500tech.simple-calendar', []).directive('simpleCalendar', functi
       'ng-click="onClick(date)">' +
       '<div class="day-number">{{ date.day || "&nbsp;" }}' +
       '<div ng-show="isUserBookableDate(date)"><a href="" class="appointment_booknow" ng-click="bookDate(date)">Book&nbsp;Now</a></div>'+
-      '<span ng-show="isUserBookedDate(date)"><h5 class="appointment_delete">Booked<a href="" ng-click="cancelBookDate(date)" class="appointment_booknow" ng-show="canCancel()">&nbsp;|&nbsp;Cancel</a></h5></span>' +
       '</div>' +
+      '<div ng-show="isUserBookedDate(date)">Booked<span  ng-show="canCancel()">&nbsp;|&nbsp;<a href="" ng-click="cancelBookDate(date)" class="appointment_delete">Cancel</a></span></div>'+
       '<div class="event-title">{{ date.event.title || "&nbsp;" }}</div>' +
       '</div>' +
       '</div>' +
