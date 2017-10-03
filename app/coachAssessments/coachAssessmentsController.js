@@ -82,7 +82,7 @@ coachApp.controller('CoachAddAssessmentsController',['$scope','requestHandler','
 
     $scope.doEditQuestion=function(index){
     $scope.isNew=false;
-    $scope.addQuestion=angular.copy($scope.assessments.questions[index]);
+    $scope.addQuestion=$scope.assessments.questions[index];
      $scope.title = "Edit Question";     
     $(function(){
         $("#lean_overlay").fadeTo(1000);
@@ -181,7 +181,7 @@ coachApp.controller('CoachEditAssessmentsController',['$scope','requestHandler',
 
     $scope.doEditQuestion=function(index){
     $scope.isNew=false;
-    $scope.addQuestion=angular.copy($scope.assessments.questions[index]);
+    $scope.addQuestion=$scope.assessments.questions[index];
     $scope.title = "Edit Question";     
     $(function(){
         $("#lean_overlay").fadeTo(1000);
