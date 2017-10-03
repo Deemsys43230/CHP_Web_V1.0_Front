@@ -215,17 +215,11 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         })
                     }],
                    check:["$location","$rootScope","requestHandler",function($location,$rootScope,requestHandler){
-                        requestHandler.getRequest("/coach/isSubscriptionActive/","").then(function(response){
-                            if(response.data.isActive==0 && response.data.subscription==[]){
-                                $rootScope.isSubscriptionActive=true;
-                                 $location.path("change-subscription");
-                                
+                            if( $rootScope.isSubscriptionActive==false && $rootScope.subscription==[]){
+                                $location.path("change-subscription");                                
                             }else{ 
-                                $rootScope.isSubscriptionActive=false;
                                 $location.path("coach-subscription-history");
                             }
-
-                         });
                     }]
                 }
             }).          
@@ -521,6 +515,11 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../angular/angular-utils-pagination/dirPagination.js'
                             ]
                         })
+                    }],
+                    check:["$location","$rootScope","requestHandler",function($location,$rootScope,requestHandler){
+                            if(!$rootScope.isSubscriptionActive){
+                                $location.path("subscription");
+                            }                        
                     }]
                 },
                 controller:'CoachAssessmentsController'
@@ -900,6 +899,14 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../app/coachEvent/eventController.js'
                             ]
                         })
+                    }],check:["$location","$rootScope","requestHandler",function($location,$rootScope,requestHandler){
+                         requestHandler.getRequest("/coach/isSubscriptionActive/","").then(function(response){
+                             if(!$rootScope.isSubscriptionActive){
+                                $location.path("subscription");
+                            }   
+
+                         });
+                        
                     }]
                 },
                 controller:'EventController'
@@ -969,6 +976,10 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../app/coachAppointment/coachAppointmentController.js'
                             ]
                         })
+                    }],
+                    check:["$location","$rootScope","requestHandler",function($location,$rootScope,requestHandler){
+                            if(!$rootScope.isSubscriptionActive)
+                                $location.path("subscription");                        
                     }]
                 },
                 controller:'AppointmentController'
@@ -977,6 +988,19 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 redirectTo: '/dashboard'
             });
     }]);
+
+coachApp.run(["$rootScope","requestHandler",function ($rootScope,requestHandler) {
+        requestHandler.getRequest("/coach/isSubscriptionActive/","").then(function(response){
+            $rootScope.subscription=response.data.subscription;
+            if(response.data.isActive==1){
+                $rootScope.isSubscriptionActive=true;
+            }else{   
+                $rootScope.isSubscriptionActive=false;
+            }
+         });
+    }]);
+
+
 
 //Initial Controller for Username
 coachApp.controller("CoachInitialController",['$scope','requestHandler','$location','FeedbackService','Flash','$timeout','$rootScope',function($scope,requestHandler,$location,FeedbackService,Flash,$timeout,$rootScope){
