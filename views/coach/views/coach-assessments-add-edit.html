@@ -30,9 +30,10 @@
                             	</div>
                             </span>
                         	<div class="question" ng-repeat="question in assessments.questions">
-                        	<h5 class="wrap-all">Q{{$index+1}}.&nbsp;&nbsp;{{question.question}}&nbsp;&nbsp;<span class="badge pull-right">{{question.answertype==1?"Single Choice":question.answertype==2?"Multi Choice":"Text"}}</span></a></h5>
+                            <div class="col-md-12 no-padding margin-bottom-10"><span class="badge pull-right" style="font-weight: normal">{{question.answertype==1?"Single Choice":question.answertype==2?"Multi Choice":"Text"}}</span></div>
+                        	<h5>Q{{$index+1}}.&nbsp;&nbsp;<span class="wrap-all question-font-weight">{{question.question}}</span></h5>
                         	<div  class="answers" ng-repeat="option in question.answers"> 
-                        	<p>{{$index+1}}.&nbsp;{{option}}</p>
+                        	<p>{{$index+1}}.&nbsp;<span class="wrap-all">{{option}}</span></p>
                         	</div>
                         	<div class="actions"><a class="appointment_booknow margin-top-10" href="" ng-click="doEditQuestion($index)">Edit</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a class="appointment_booknow margin-top-10" href="" ng-click="assessments.questions.splice($index, 1)">Delete</a></div>
                         	</div>
