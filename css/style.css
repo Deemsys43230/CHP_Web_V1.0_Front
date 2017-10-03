@@ -18101,6 +18101,10 @@ select.event:focus {
     text-decoration: none!important;
     color:brown;
  }
+
+ #appointment_booknow .ng-hide.ng-hide-animate {
+    display: none !important;
+ }
 /*for home page carousal image*/
 
   /* Carousel Styles */

@@ -44,11 +44,11 @@ coachApp.controller('AppointmentController',['$scope','requestHandler','Flash','
   };
   //Get Single Date Appointment Details
   $scope.coachGetDateDetails=function(date){
+        
         var coachSelectedDate=moment(date).format('DD/MM/YYYY');
         $scope.calendarOptions.selectedDate=date;
         $scope.selectedDate= moment($scope.calendarOptions.selectedDate).format('DD/MM/YYYY');
         $scope.previousDate=0;
-        $scope.cancelAppointment=true;
 
         //Convert into date format for comparison
         var startDateParts=startDate.split("/");
@@ -59,10 +59,10 @@ coachApp.controller('AppointmentController',['$scope','requestHandler','Flash','
         //Now compare the two converted date formats
         if(startDate_date>selectedDate_date){
           $scope.canEnableAppointment=true;
-          $scope.cancelAppointment=false;
+          $scope.cancelAppointment=true;
         }else{
           $scope.canEnableAppointment=false;
-          $scope.cancelAppointment=true;
+          $scope.cancelAppointment=false;
         }
         $scope.getAppointmentsParam={"fromdate":coachSelectedDate,"todate":coachSelectedDate};
         //Get Single date
@@ -127,7 +127,6 @@ coachApp.controller('AppointmentController',['$scope','requestHandler','Flash','
    }
 
   $scope.coachGetAppointmentList=function(fromDate,endDate){
-       
         $scope.getAppointmentsParam={"fromdate":fromDate,"todate":endDate};
 
         requestHandler.postRequest("coach/coachappointments/",$scope.getAppointmentsParam).then(function(response){
@@ -164,7 +163,6 @@ coachApp.controller('AppointmentController',['$scope','requestHandler','Flash','
     $scope.init=function(){
       $scope.currentDate= moment(new Date()).format('DD/MM/YYYY');
       $scope.booking={};
-
       var todayDate = new Date();
       $scope.fromDate=moment(new Date(todayDate.getFullYear(), todayDate.getMonth(), 1)).format('DD/MM/YYYY');
       $scope.endDate=moment(new Date(todayDate.getFullYear(), todayDate.getMonth()+1, 0)).format('DD/MM/YYYY');
