@@ -476,7 +476,8 @@
                                                 <h4><strong>Fill Out the Answers Below</strong></h4>
                                                 <hr/>
                                                 <div class="question" ng-repeat="question in assessments.questions" ng-init="questionIndex = $index">
-                                                <h5>Q{{$index+1}}.&nbsp;&nbsp;<span class="wrap-all">{{question.question}}</span>&nbsp;&nbsp;<span class="badge pull-right">{{question.answertype==1?"Single Choice":question.answertype==2?"Multi Choice":"Text"}}</span></a></h5>
+                                                    <div class="col-md-12 no-padding margin-bottom-10"><span class="badge pull-right" style="font-weight: normal">{{question.answertype==1?"Single Choice":question.answertype==2?"Multi Choice":"Text"}}</span></div>
+                                                <h5>Q{{$index+1}}.&nbsp;&nbsp;<span class="wrap-all question-font-weight">{{question.question}}</span>&nbsp;&nbsp;</h5>
                                                 <div  class="answers" ng-repeat="option in question.answers" ng-if="question.answertype==1">    
                                                     <p><span style="margin-top:10px;"><input type="radio" name="radio_{{questionIndex}}" ng-model="assessments.questions[questionIndex].useranswer" ng-value="option.id" required/></span>&nbsp;&nbsp;<span class="wrap-all">{{option.answer}}</span></p>
                                                 </div>

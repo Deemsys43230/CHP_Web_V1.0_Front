@@ -18250,7 +18250,6 @@ select.event:focus {
     font-size: 14px;
 }
 .assign_assessment .client_email{
-    font-size: 12px;
 }
 .assign_assessment .group-list{
     padding: 5px;
@@ -18259,4 +18258,9 @@ select.event:focus {
 .main_assign_assessment{
     border: solid 1px #ece7e7;
     padding:20px 0px 20px 0px;
+}
+/*assessment question design*/
+
+.question-font-weight{
+    font-weight:600; !important
 }

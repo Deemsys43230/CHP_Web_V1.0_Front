@@ -53,13 +53,14 @@
                                 <h5>Clients Count</h5>
                                 <span>{{pricingPlan.clientscount}}</span>
                             </div>
-                            <div class="coach">
+                            <div class="coach"  ng-show="pricingPlan.discount!=0">
                                 <h4>Total Discount</h4>
                                 <span>{{pricingPlan.discount}} %</span>
                             </div>
                             <div class="coach">
                                 <h4>Features</h4>
-                                <span style="min-height:63px;">{{pricingPlan.features}}</span>
+                                <span  ng-if= "pricingPlan.discount!=0" style="min-height: 30px;" >{{pricingPlan.features}}</span>
+                                <span  ng-if= "pricingPlan.discount==0" style="min-height: 90px;" >{{pricingPlan.features}}</span>
                             </div> 
                             <br>
                             <!-- <h4>Discount</h4>

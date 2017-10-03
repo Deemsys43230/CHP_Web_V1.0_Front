@@ -45,7 +45,7 @@
                         <div ng-show="units==1">
                             <span class="price"  ng-style="{'background-color': pricingPlan.plancolor}">
                                 <span>Rs {{pricingPlan.discountINR}}</span><br/>
-                                <span class="text-strike"><small>Rs {{pricingPlan.priceINR}}</small></span>
+                                <span class="text-strike" ng-show="pricingPlan.discount!=0"><small>Rs {{pricingPlan.priceINR}}</small></span>
                                 
                             </span>
                         </div>
@@ -59,13 +59,14 @@
                             <h4>Clients Count</h4>
                             <span>{{pricingPlan.clientscount}}</span>
                         </div>
-                        <div class="coach">
+                        <div class="coach" ng-show="pricingPlan.discount!=0">
                             <h4>Discount</h4>
                             <span>{{pricingPlan.discount}} %</span>
                         </div>
                         <div class="coach">
                             <h4>Features</h4>
-                            <span style="min-height:63px;">{{pricingPlan.features}}</span>
+                            <span  ng-if= "pricingPlan.discount!=0" style="min-height: 30px;" >{{pricingPlan.features}}</span>
+                            <span  ng-if= "pricingPlan.discount==0" style="min-height: 90px;" >{{pricingPlan.features}}</span>
                         </div> 
                         <br>
                         <a ref="" ng-disabled="pricingPlan.isCurrentPlan&&pricingPlan.isActive" class="price-button btn button" ng-click="doPayment(units,pricingPlan.id,pricingPlan.discountUSD)">{{pricingPlan.isCurrentPlan?pricingPlan.isActive?"Active Subscription":"Renew Subscription":"Subscribe"}}</a><br/>
