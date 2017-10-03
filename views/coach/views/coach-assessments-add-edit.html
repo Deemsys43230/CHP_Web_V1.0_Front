@@ -108,7 +108,7 @@
                         <p class="pull-right">Option {{$index+1}}:</p>
                     </div>  
                     <div class="col-md-9 col-sm-10 no-padding">
-		                       		 <input type="text" name="answer_{{$index}}" ng-model="addQuestion.answers[$index]" maxlength="200" ng-required="addQuestion.answertype!=3" option-exist-check>
+		                       		 <input type="text" name="answer_{{$index}}" ng-model="addQuestion.answers[$index]" maxlength="200" ng-required="addQuestion.answertype!=3" ng-if="addQuestion.answertype!=3" option-exist-check>
 		                             <span ng-show="addQuestionForm.answer_{{$index}}.$dirty&&addQuestionForm.answer_{{$index}}.$invalid">
 		                                 <span class="error-message" ng-show="addQuestionForm.answer_{{$index}}.$error.required"><span>Required.</span></span>
                                          <span class="error-message" ng-show="!addQuestionForm.answer_{{$index}}.$error.required&&addQuestionForm.answer_{{$index}}.$error.optionExistCheck"><span>Options&nbsp;should&nbsp;not&nbsp;match.</span></span>

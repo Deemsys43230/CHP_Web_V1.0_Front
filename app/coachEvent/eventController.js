@@ -95,10 +95,10 @@ coachApp.controller('EventController',['$scope','requestHandler','Flash','$route
                 var secondDate=new Date();
                 secondDate.setFullYear(secondValue[2],(secondValue[1] - 1 ),secondValue[0]);
                 if(firstDate < secondDate){
-                    $scope.canEdit=true;
+                    value.canEdit=true;
                 }
                 else{
-                    $scope.canEdit=false;
+                    value.canEdit=false;
                 }
 
                 //For Event duration calculation in hrs and min
