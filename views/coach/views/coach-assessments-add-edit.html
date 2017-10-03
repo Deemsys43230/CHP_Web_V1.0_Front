@@ -95,14 +95,14 @@
                         <p><strong>Options:</strong></p>
                     </div> 
                     <div class="col-md-10">
-                    	<a class="appointment_booknow pull-left margin-top-10" href="" ng-click="addQuestion.answers.push('')" ng-hide="addQuestion.answers.length>5">Add One More Option</a>
+                    	<a class="appointment_booknow pull-left margin-top-10" href="" ng-click="addOptions()" ng-hide="addQuestion.answers.length==6">Add One More Option</a>
                    	</div>
                     <div class="col-md-12">
                     <hr/>
                 	</div>
                 </div>
                 <div class="col-md-12 options-content no-padding" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '10px',background:'#eee'}"> <br/>
-                <div class="col-md-12 margin-top-10" ng-repeat="answer in addQuestion.answers track by $index" ng-show="addQuestion.answertype!=3">
+                <div class="col-md-12 margin-top-10" ng-repeat="answer in addQuestion.answers track by $index | limitTo: 6" ng-show="addQuestion.answertype!=3">
                 	<div class="col-md-2">
                         <p class="pull-right">Option {{$index+1}}:</p>
                     </div>  

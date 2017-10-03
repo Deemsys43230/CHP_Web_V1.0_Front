@@ -53,6 +53,7 @@ coachApp.controller('CoachAddAssessmentsController',['$scope','requestHandler','
 
     $scope.reset=function(){
     $scope.isNew=true;
+    $scope.canShowOptions=true;
     $scope.addQuestion={};
     $scope.addQuestion.question="";
     $scope.addQuestion.answertype=1;
@@ -123,6 +124,12 @@ coachApp.controller('CoachAddAssessmentsController',['$scope','requestHandler','
             successMessage(Flash,"Successfully Added!");
             $location.path("coach-assessments");
         });
+    };
+
+    $scope.addOptions=function(){
+        if($scope.addQuestion.answers.length<6){
+            $scope.addQuestion.answers.push('');
+        }
     };
 
     $scope.init=function(){
@@ -231,7 +238,13 @@ coachApp.controller('CoachEditAssessmentsController',['$scope','requestHandler',
 
     $scope.isClean=function(){
         return angular.equals(original,$scope.assessments);
-    }
+    };
+
+    $scope.addOptions=function(){
+        if($scope.addQuestion.answers.length<6){
+            $scope.addQuestion.answers.push('');
+        }
+    };
 
     //Init Function
     $scope.init=function(){
