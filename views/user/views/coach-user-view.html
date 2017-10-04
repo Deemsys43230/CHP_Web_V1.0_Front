@@ -477,15 +477,15 @@
                                                 <hr/>
                                                 <div class="question" ng-repeat="question in assessments.questions" ng-init="questionIndex = $index">
                                                     <div class="col-md-12 no-padding margin-bottom-10"><span class="badge pull-right" style="font-weight: normal">{{question.answertype==1?"Single Choice":question.answertype==2?"Multi Choice":"Text"}}</span></div>
-                                                <h5>Q{{$index+1}}.&nbsp;&nbsp;<span class="wrap-all question-font-weight">{{question.question}}</span>&nbsp;&nbsp;</h5>
+                                                <h5 class="wrap-all question-font-weight">Q{{$index+1}}.&nbsp;&nbsp;{{question.question}}&nbsp;&nbsp;</h5>
                                                 <div  class="answers" ng-repeat="option in question.answers" ng-if="question.answertype==1">    
-                                                    <p><span style="margin-top:10px;"><input type="radio" name="radio_{{questionIndex}}" ng-model="assessments.questions[questionIndex].useranswer" ng-value="option.id" required/></span>&nbsp;&nbsp;<span class="wrap-all">{{option.answer}}</span></p>
+                                                    <p class="wrap-all"><span style="margin-top:10px;"><input type="radio" name="radio_{{questionIndex}}" ng-model="assessments.questions[questionIndex].useranswer" ng-value="option.id" required/></span>&nbsp;&nbsp;{{option.answer}}</p>
                                                 </div>
                                                 <div class="answers" ng-repeat="option in question.answers" ng-if="question.answertype==2">
-                                                    <p><span style="margin-top:10px;"><input type="checkbox" name="checkbox_{{questionIndex}}" ng-model="option.checked" ng-init="option.checked=false"/></span>&nbsp;&nbsp;<span class="wrap-all">{{option.answer}}</span></p>
+                                                    <p class="wrap-all"><span style="margin-top:10px;"><input type="checkbox" name="checkbox_{{questionIndex}}" ng-model="option.checked" ng-init="option.checked=false"/></span>&nbsp;&nbsp;{{option.answer}}</p>
                                                 </div>
                                                 <div  class="answers" ng-if="question.answertype==3">
-                                                    <textarea class="profile_input_textarea" name="question_answer" ng-model="question.useranswer" ></textarea>
+                                                    <textarea class="profile_input_textarea wrap-all" name="question_answer" ng-model="question.useranswer" ></textarea>
                                                 </div>
 
                                                 </div>

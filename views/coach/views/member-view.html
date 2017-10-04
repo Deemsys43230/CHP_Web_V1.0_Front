@@ -1213,12 +1213,12 @@
                                                 <hr/>
                                                 <div class="question" ng-repeat="question in assessments.questions">
                                                     <div class="col-md-12 no-padding margin-bottom-10"><span class="badge pull-right" style="font-weight: normal">{{question.answertype==1?"Single Choice":question.answertype==2?"Multi Choice":"Text"}}</span></div>
-                                                <h5>Q{{$index+1}}.&nbsp;&nbsp;<span class="wrap-all question-font-weight">{{question.question}}</span>&nbsp;&nbsp;</h5>
+                                                <h5 class="wrap-all question-font-weight">Q{{$index+1}}.&nbsp;&nbsp;{{question.question}}&nbsp;&nbsp;</h5>
                                                 <div class="answers" ng-repeat="option in question.answers" ng-if="question.answertype!=3"> 
-                                                <p><span class="option_number" ng-class="{yellow_badge:isUserAnswer(question.useranswer,option.id)}">{{$index+1}}.</span>&nbsp;&nbsp;<span class="wrap-all">{{option.answer}}</span></p>
+                                                <p class="wrap-all"><span class="option_number" ng-class="{yellow_badge:isUserAnswer(question.useranswer,option.id)}">{{$index+1}}.</span>&nbsp;&nbsp;{{option.answer}}</p>
                                                 </div>
                                                 <div class="answers" ng-if="question.answertype==3"> 
-                                                <p><span class="wrap-all">{{question.useranswer}}</span></p>
+                                                <p class="wrap-all">{{question.useranswer}}</p>
                                                 </div>
                                                 </div>
                                                 <div class="col-md-12 margin-bottom-60"><hr/></div>

@@ -6856,7 +6856,7 @@ h4.count-text{
 }
 
 .wrap-all{
-    word-break: break-all !important;
+    word-break: break-all;
 }
 
 .counter-item i{
