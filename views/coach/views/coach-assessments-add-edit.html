@@ -30,8 +30,8 @@
                             	</div>
                             </span>
                         	<div class="question" ng-repeat="question in assessments.questions track by $index">
-                            <div class="col-md-12 no-padding margin-bottom-10"><span class="badge pull-right" style="font-weight: normal">{{question.answertype==1?"Single Choice":question.answertype==2?"Multi Choice":"Text"}}</span></div>
-                        	<h5 class="wrap-all question-font-weight">Q{{$index+1}}.&nbsp;&nbsp;{{question.question}}</h5>
+                            <div class="col-md-12 no-padding margin-bottom-10"><span class="badge pull-right" style="font-weight: normal">{{question.answertype==1?"Single Choice":question.answertype==2?"Multi Choice":"Text"}}</span></div><br/>
+                        	<h5 class="wrap-all question-font-weight">{{'Q'+($index+1)}}.&nbsp;&nbsp;{{question.question}}</h5>
                         	<div  class="answers" ng-repeat="option in question.answers track by $index">
                         	<p class="wrap-all">{{$index+1}}.&nbsp;{{option}}</p>
                         	</div>
@@ -108,7 +108,7 @@
                         <p class="pull-right">Option {{$index+1}}:</p>
                     </div>  
                     <div class="col-md-9 col-sm-10 no-padding">
-		                       		 <input type="text" name="answer_{{$index}}" ng-model="addQuestion.answers[$index]" maxlength="200" ng-required="addQuestion.answertype!=3" ng-if="addQuestion.answertype!=3" option-exist-check>
+		                       		 <input type="text" name="answer_{{$index}}" ng-model="addQuestion.answers[$index]" maxlength="200" ng-required="addQuestion.answertype!=3" ng-if="addQuestion.answertype!=3" option-exist-check index="$index" answers="addQuestion.answers">
 		                             <span ng-show="addQuestionForm.answer_{{$index}}.$dirty&&addQuestionForm.answer_{{$index}}.$invalid">
 		                                 <span class="error-message" ng-show="addQuestionForm.answer_{{$index}}.$error.required"><span>Required.</span></span>
                                          <span class="error-message" ng-show="!addQuestionForm.answer_{{$index}}.$error.required&&addQuestionForm.answer_{{$index}}.$error.optionExistCheck"><span>Options&nbsp;should&nbsp;not&nbsp;match.</span></span>
@@ -124,7 +124,7 @@
                  <div class="action_btns margin-top-20">
                     <div class="col-lg-8 col-md-8 col-sm-8 workout-btn" style="margin-left:15% !important;">
                     <div class="one_half" ng-show="isNew"><a ng-class="{modal_close:addQuestionForm.$invalid}" class="btn btn_red" ng-disabled="addQuestionForm.$invalid" ng-click="assessments.questions.push(addQuestion)">Add Question</a></div>
-                    <div class="one_half" ng-hide="isNew"><a ng-class="{modal_close:addQuestionForm.$invalid}" class="btn btn_red" ng-click="doAddWorkoutPlanByCoach()">Save Changes </a></div>
+                    <div class="one_half" ng-hide="isNew"><a ng-class="{modal_close:addQuestionForm.$invalid}" class="btn btn_red" ng-disabled="addQuestionForm.$invalid||isQuestionClean()" ng-click="doUpdateQuestion()">Save Changes</a></div>
                     <div class="one_half last modal_close"><a onclick="return false;" class="btn back_btn">Cancel</a></div>
                     </div>
                 </div>

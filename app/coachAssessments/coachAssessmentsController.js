@@ -52,64 +52,76 @@ coachApp.controller('CoachAddAssessmentsController',['$scope','requestHandler','
     $scope.answertypelist = [{"type":"Single Choice","typeId":1},{"type":"Multiple Choice","typeId":2},{"type":"Text","typeId":3}];
 
     $scope.reset=function(){
-    $scope.isNew=true;
-    $scope.canShowOptions=true;
-    $scope.addQuestion={};
-    $scope.addQuestion.question="";
-    $scope.lastanswertype=3;
-    $scope.addQuestion.answers=["",""];
-    $scope.addQuestion.answertype=1;
-    $scope.addQuestionForm.$setPristine();
-     $scope.title = "Add Question";   
+        $scope.isNew=true;
+        $scope.canShowOptions=true;
+        $scope.addQuestion={};
+        $scope.addQuestion.question="";
+        $scope.lastanswertype=3;
+        $scope.addQuestion.answertype=1;
+        $scope.addQuestionForm.$setPristine();
+         $scope.title = "Add Question";   
 
-    $(function(){
-        $("#lean_overlay").fadeTo(1000);
-        $("#add-question").fadeIn(600);
-        $(".common_model").show();
-    });
+        $(function(){
+            $("#lean_overlay").fadeTo(1000);
+            $("#add-question").fadeIn(600);
+            $(".common_model").show();
+        });
 
-    $(".modal_close").click(function(){
-        $(".common_model").hide();
-        $("#add-question").hide();
-        $("#lean_overlay").hide();
-    });
+        $(".modal_close").click(function(){
+            $(".common_model").hide();
+            $("#add-question").hide();
+            $("#lean_overlay").hide();
+        });
 
-    $("#lean_overlay").click(function(){
-        $(".common_model").hide();
-        $("#add-question").hide();
-        $("#lean_overlay").hide();
-    });
+        $("#lean_overlay").click(function(){
+            $(".common_model").hide();
+            $("#add-question").hide();
+            $("#lean_overlay").hide();
+        });
+        $scope.onChangeAnswerType();
     }
-
+    var orginalAddQuestion="";
     $scope.doEditQuestion=function(index){
+    $scope.currentIndex=index;
     $scope.isNew=false;
-    $scope.addQuestion=$scope.assessments.questions[index];
-     $scope.title = "Edit Question";     
+    $scope.addQuestion={};
+    angular.copy($scope.assessments.questions[index],$scope.addQuestion);   
+    orginalAddQuestion=angular.copy($scope.addQuestion);
+    $scope.title = "Edit Question";     
     $(function(){
         $("#lean_overlay").fadeTo(1000);
         $("#add-question").fadeIn(600);
         $(".common_model").show();
-        $scope.shouldBeOpen = true;
     });
 
     $(".modal_close").click(function(){
         $(".common_model").hide();
         $("#add-question").hide();
         $("#lean_overlay").hide();
-        $scope.shouldBeOpen = false;
     });
 
     $("#lean_overlay").click(function(){
         $(".common_model").hide();
         $("#add-question").hide();
         $("#lean_overlay").hide();
-        $scope.shouldBeOpen = false;
     });
 
     $("html, body").animate({
               scrollTop: 0
           }, 600);
 
+    }
+
+    $scope.doUpdateQuestion=function(){
+         $scope.assessments.questions[$scope.currentIndex]=angular.copy($scope.addQuestion); 
+         return true;
+    };
+
+
+    $scope.isQuestionClean=function(){
+        console.log(orginalAddQuestion);
+        console.log($scope.addQuestion);
+        return angular.equals(orginalAddQuestion,$scope.addQuestion);
     }
 
     $scope.doSaveUpdateAssessment=function(status){
@@ -142,13 +154,16 @@ coachApp.controller('CoachAddAssessmentsController',['$scope','requestHandler','
     };
 
     $scope.$watch("addQuestion.answertype",function(){
+        $scope.onChangeAnswerType();
+    });
+
+    $scope.onChangeAnswerType=function(){
         if($scope.addQuestion.answertype==3)
             $scope.addQuestion.answers=null;
         else if($scope.lastanswertype==3)
             $scope.addQuestion.answers=["",""];
         $scope.lastanswertype=$scope.addQuestion.answertype;
-           
-    });
+    }
 
     $scope.init();
 
@@ -188,11 +203,19 @@ coachApp.controller('CoachEditAssessmentsController',['$scope','requestHandler',
         $("#add-question").hide();
         $("#lean_overlay").hide();
     });
+    $scope.onChangeAnswerType();
     }
 
+    var orginalAddQuestion="";
     $scope.doEditQuestion=function(index){
+    $scope.currentIndex=index;
     $scope.isNew=false;
-    $scope.addQuestion=$scope.assessments.questions[index];
+    $scope.addQuestion={};
+
+    angular.copy($scope.assessments.questions[index],$scope.addQuestion);
+    orginalAddQuestion=angular.copy($scope.addQuestion);
+    
+    $scope.addQuestionForm.$setPristine();
     $scope.title = "Edit Question";     
     $(function(){
         $("#lean_overlay").fadeTo(1000);
@@ -220,6 +243,11 @@ coachApp.controller('CoachEditAssessmentsController',['$scope','requestHandler',
           }, 600);
 
     }
+    //Update only question
+     $scope.doUpdateQuestion=function(){
+         $scope.assessments.questions[$scope.currentIndex]=angular.copy($scope.addQuestion); 
+         return true;
+    };
 
     //Update Function
     $scope.doSaveUpdateAssessment=function(status){
@@ -250,6 +278,12 @@ coachApp.controller('CoachEditAssessmentsController',['$scope','requestHandler',
         return angular.equals(original,$scope.assessments);
     };
 
+    $scope.isQuestionClean=function(){
+        console.log(orginalAddQuestion);
+        console.log($scope.addQuestion);
+        return angular.equals(orginalAddQuestion,$scope.addQuestion);
+    }
+
     $scope.addOptions=function(){
         if($scope.addQuestion.answers.length<6){
             $scope.addQuestion.answers.push('');
@@ -262,14 +296,17 @@ coachApp.controller('CoachEditAssessmentsController',['$scope','requestHandler',
         $scope.getAssessmentDetails();
     };
 
-    $scope.$watch("addQuestion.answertype",function(){
+     $scope.$watch("addQuestion.answertype",function(){
+        $scope.onChangeAnswerType();
+    });
+
+    $scope.onChangeAnswerType=function(){
         if($scope.addQuestion.answertype==3)
             $scope.addQuestion.answers=null;
         else if($scope.lastanswertype==3)
             $scope.addQuestion.answers=["",""];
         $scope.lastanswertype=$scope.addQuestion.answertype;
-           
-    });
+    }
 
     $scope.init();
 
@@ -397,13 +434,22 @@ coachApp.directive('optionExistCheck', function() {
   return {
     restrict: 'A',
     require: '?ngModel',
+    scope: {
+      index: '=index',
+      answers:'=answers'
+    },
     link: function(scope, elem, attrs, ngModel) {
       ngModel.$validators.optionExistCheck = function(modelValue, viewValue) {
-        if(scope.addQuestion.answers.indexOf(modelValue)!=-1)
-            return false;
-        else
-            return true;
-      };
+       var answerIndex=scope.answers.indexOf(modelValue);
+       if(answerIndex!=-1){
+            if(answerIndex!=scope.index)
+                return false;
+            else
+                return true;
+       }else{
+                return true;
+        }
+    }
     }
   };
 });
