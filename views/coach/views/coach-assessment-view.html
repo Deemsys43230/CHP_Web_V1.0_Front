@@ -17,10 +17,10 @@
                         <div class="col-lg-12 col-md-12 col-sm-12">
                         	<h4>Questions</h4>
                         	<hr/>
-                        	<div class="question" ng-repeat="question in assessments.questions">
+                        	<div class="question" ng-repeat="question in assessments.questions track by $index">
                             <div class="col-md-12 no-padding margin-bottom-10"><span class="badge pull-right" style="font-weight: normal">{{question.answertype==1?"Single Choice":question.answertype==2?"Multi Choice":"Text"}}</span></div>
                         	<h5 class="wrap-all question-font-weight">Q{{$index+1}}.&nbsp;&nbsp;{{question.question}}</h5>
-                        	<div  class="answers" ng-repeat="option in question.answers"> 
+                        	<div  class="answers" ng-repeat="option in question.answers track by $index"> 
                         	<p class="wrap-all">{{$index+1}}.&nbsp;{{option}}</p>
                         	</div>
                         	</div>
