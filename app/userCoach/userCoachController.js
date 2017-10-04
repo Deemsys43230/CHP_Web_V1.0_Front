@@ -221,12 +221,36 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
       })
     };
 
-    
-    /*setInterval(function(){                        //set 15 seconds interval for repeatedly call a function
-  $scope.doGetChatMessage();
-}, 15000);*/
+    $scope.refreshChat=function(){  
+        $scope.getMessageParam={"targetid":$routeParams.id,"offset":0,'onlyunread':1};
+         requestHandler.postRequest("readMessage/",$scope.getMessageParam).then(function(response){
+            if($scope.unreadChatMessageCount==0){
+                $.each($scope.chatMessages,function(index,value){
+                    value.firstNewMessage=0;
+                });
+            }
+            $scope.unreadChatMessageCount=response.data.unreadrecords;
+            if(response.data.unreadrecords>0){  
+            $scope.unreadChatMessageCount=response.data.unreadrecords;  
+             $scope.showMessageCount=true; 
+               $.each(response.data.chats,function(index,value){
+                if($scope.chatLogArray.indexOf(value.logid)==-1) {
+                        value.selectedChat=0;
+                        value.firstNewMessage=0;
+                         //Set Date and Time Seperately
+                        value.msgdate=value.datetime.substring(0,10);
+                        value.msgtime=value.datetime.substring(11,19);
+                        //Chat Log Array
+                        $scope.chatLogArray.push(value.logid);
+                        $scope.chatMessages.push(value);
+                }
+            });
+         }
+        });
+    };
 
-     $scope.setChatMinimizedStatus=function(){     //set chat window open close status
+    //set chat window open close status
+     $scope.setChatMinimizedStatus=function(){     
         if($scope.isChatMinimized)
             $scope.isChatMinimized=false;
         else
@@ -237,6 +261,7 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
     $scope.doGetChatMessage=function(){
         $scope.getMessageParam.offset=0;
         $scope.getMessageParam={"targetid":$routeParams.id,"offset":0}; 
+        $scope.chatLogArray=[];
         requestHandler.postRequest("readMessage/",$scope.getMessageParam).then(function(response){
             $scope.totalChatMessages=response.data.totalrecords;
              $scope.chatMessages={};
@@ -264,6 +289,9 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
           //Set Date and Time Seperately
                 value.msgdate=value.datetime.substring(0,10);
                 value.msgtime=value.datetime.substring(11,19);
+                //Chat Log Array
+                $scope.chatLogArray.push(value.logid);
+
 
                 if(value.status==0 && value.sentby==2){
                     $scope.unreadChatMessageCount+=1;
@@ -281,12 +309,18 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
            }
 
             setTimeout(function(){ $('.msg_container_base').scrollTop($('.msg_container_base')[0].scrollHeight); }, 500);
+
+              //set 15 seconds interval for repeatedly call a function
+            setInterval(function(){                       
+                        $scope.refreshChat();
+            }, 2000);
+
         });
     };
    //Do Get Load Chat Message
     $scope.doLoadChatMessages=function(){
         $scope.getMessageParam.offset=$scope.chatMessages.length;
-        console.log($scope.chatMessages);   
+        $scope.getMessageParam.onlyunread=0;
         $scope.loadMoreScrollStopId=$scope.chatMessages[0].logid;
 
         requestHandler.postRequest("/readMessage/",$scope.getMessageParam).then(function(response){
@@ -295,6 +329,7 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
                 value.scrollLocation=0;
                 value.msgdate=value.datetime.substring(0,10);
                 value.msgtime=value.datetime.substring(11,19);
+                $scope.chatLogArray.push(value.logid);
             });
             $scope.totalChatMessages=response.data.totalrecords;
             $scope.chatMessages.unshift.apply($scope.chatMessages,response.data.chats);
@@ -864,6 +899,7 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
         userappointments:[],
         userbookedappointments:[],
         notAvailableAppointments:[],
+        userAppointmentCancelableDate:[],
         dayNamesLength: 3, // How to display weekdays (1 for "M", 2 for "Mo", 3 for "Mon"; 9 will show full day names; default is 1)
         dateClick: function(date){
             $scope.dateClick(date)
@@ -958,38 +994,37 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
             $scope.userappointments=[];
             $scope.userbookedappointments=[];
             $scope.notAvailableAppointments=[];
+            $scope.userAppointmentCancelableDate=[];
             $.each($scope.availableAppointment,function(index,value){
                 var processingDate=value.date.split('/');
                 var formattedDate=parseInt(processingDate[0])+"/"+(parseInt(processingDate[1])-1)+"/"+parseInt(processingDate[2]);
                 $scope.coachappointments.push(formattedDate);
+
+
+                var startDateParts=startDate.split("/");
+                var startDate_date=new Date(startDateParts[2],startDateParts[1]-1,startDateParts[0]);
+                var appointmentDateParts=value.date.split("/");
+                var appointmentDate_date=new Date(appointmentDateParts[2],appointmentDateParts[1]-1,appointmentDateParts[0]);
+
                 if(value.canbook==1)
                     $scope.userappointments.push(formattedDate);                
                 if(value.canbook==2){
                     $scope.userbookedappointments.push(formattedDate);
+                    if(appointmentDate_date>=startDate_date){
+                        $scope.userAppointmentCancelableDate.push(formattedDate);
+                    }
                 }
                 if(value.canbook==0){
                     $scope.notAvailableAppointments.push(formattedDate);
                 }
 
-            var startDateParts=startDate.split("/");
-            var startDate_date=new Date(startDateParts[2],startDateParts[1]-1,startDateParts[0]);
-
-            var appointmentDateParts=value.date.split("/");
-            var appointmentDate_date=new Date(appointmentDateParts[2],appointmentDateParts[1]-1,appointmentDateParts[0]);
-            
-            if(appointmentDate_date<startDate_date){
-                $scope.canCancel=false; 
-                $scope.calendarOptions.canCancel=$scope.canCancel;
-            }else{
-                $scope.canCancel=true;
-                $scope.calendarOptions.canCancel=$scope.canCancel;
-            }
-
+                
             });
             $scope.calendarOptions.coachappointments=$scope.coachappointments;
             $scope.calendarOptions.userappointments=$scope.userappointments;
             $scope.calendarOptions.userbookedappointments=$scope.userbookedappointments;
             $scope.calendarOptions.notAvailableAppointments=$scope.notAvailableAppointments;
+            $scope.calendarOptions.userAppointmentCancelableDate=$scope.userAppointmentCancelableDate;
         }, function(){
             errorMessage(Flash,"Please try again later!");
         });

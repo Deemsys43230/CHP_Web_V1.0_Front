@@ -1401,23 +1401,23 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
           }
       })
     };
+
     
-    $scope.setChatMinimizedStatus=function(){             // set chat window open close status
+    // set chat window open close status
+    $scope.setChatMinimizedStatus=function(){             
         if($scope.isChatMinimized)
             $scope.isChatMinimized=false;
         else
             $scope.isChatMinimized=true;
     }
 
-    /*  setInterval(function(){                            //set 15 seconds interval for repeatedly call a function
-  $scope.doGetChatMessage();
-  //$scope.doReadChatMessage();
-}, 15000);*/
+ 
 
     //Do Get Chat Message
     $scope.doGetChatMessage=function(){ 
            $scope.getMessageParam.offset=0;
-          $scope.getMessageParam={"targetid":$routeParams.id,"offset":0};   
+          $scope.getMessageParam={"targetid":$routeParams.id,"offset":0};
+          $scope.chatLogArray=[];   
         requestHandler.postRequest("/readMessage/",$scope.getMessageParam).then(function(response){
             $scope.totalChatMessages=response.data.totalrecords;
             $scope.chatMessages={};
@@ -1445,6 +1445,8 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
             
 
             $.each($scope.chatMessages,function(index,value){
+                //Chat Log Array
+                $scope.chatLogArray.push(value.logid);
                 value.selectedChat=0;
                 value.firstNewMessage=0;
                 //Set Date and Time Seperately
@@ -1467,6 +1469,11 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
            }
 
             setTimeout(function(){ $('.msg_container_base').scrollTop($('.msg_container_base')[0].scrollHeight); }, 500);
+
+             //set 15 seconds interval for repeatedly call a function
+            setInterval(function(){                           
+              $scope.refreshChat();
+            }, 2000);
         });
 
     
@@ -1475,7 +1482,7 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
    //Do Get Load Chat Message
     $scope.doLoadChatMessages=function(){
         $scope.getMessageParam.offset=$scope.chatMessages.length;
-        console.log($scope.chatMessages);   
+        $scope.getMessageParam.onlyunread=0;
         $scope.loadMoreScrollStopId=$scope.chatMessages[0].logid;
 
         requestHandler.postRequest("/readMessage/",$scope.getMessageParam).then(function(response){
@@ -1484,7 +1491,7 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
                 value.scrollLocation=0;
                 value.msgdate=value.datetime.substring(0,10);
                 value.msgtime=value.datetime.substring(11,19);
-
+                $scope.chatLogArray.push(value.logid);
             });
             $scope.totalChatMessages=response.data.totalrecords;
             $scope.chatMessages.unshift.apply($scope.chatMessages,response.data.chats);
@@ -1501,6 +1508,36 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
         }, 200);
         
     }
+
+    //Refresh Chat
+    $scope.refreshChat=function(){  
+        $scope.getMessageParam={"targetid":$routeParams.id,"offset":0,'onlyunread':1};
+         requestHandler.postRequest("readMessage/",$scope.getMessageParam).then(function(response){
+            if($scope.unreadChatMessageCount==0){
+                $.each($scope.chatMessages,function(index,value){
+                    value.firstNewMessage=0;
+                });
+            }
+            $scope.unreadChatMessageCount=response.data.unreadrecords;
+            if(response.data.unreadrecords>0){  
+            $scope.unreadChatMessageCount=response.data.unreadrecords;  
+             $scope.showMessageCount=true; 
+               $.each(response.data.chats,function(index,value){
+                if($scope.chatLogArray.indexOf(value.logid)==-1) {
+                        value.selectedChat=0;
+                        value.firstNewMessage=0;
+                         //Set Date and Time Seperately
+                        value.msgdate=value.datetime.substring(0,10);
+                        value.msgtime=value.datetime.substring(11,19);
+                        //Chat Log Array
+                        $scope.chatLogArray.push(value.logid);
+                        $scope.chatMessages.push(value);
+                }
+            });
+         }
+        });
+    };
+
 
     //Do Send Chat Message
     $scope.doSendChatMessage=function(){

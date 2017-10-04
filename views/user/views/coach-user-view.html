@@ -511,10 +511,9 @@
                         <div class="panel panel-default" style="margin-bottom:0px;">
                             <div class="panel-heading chat-top-bar">
                                 <div class="col-md-7 col-xs-7 col-lg-7 col-sm-7">
-                                    <h3 class="panel-title"><span class="glyphicon glyphicon-comment" style="padding-right: 7px;"></span> Chat - {{usercoachdetails.firstname}}</h3>
-                                    <span class="nav-item__badge" style="position: absolute; margin-left: 20px; margin-top: -9px;" ng-show="showMessageCount&&isChatMinimized">
-                                    <span aria-hidden="true" class="nav-item__badge-count ng-binding">{{unreadChatMessageCount}}</span>
-                                    </span>
+                                    <h3 class="panel-title"><span class="glyphicon glyphicon-comment" style="padding-right: 7px;"></span>&nbsp;Chat&nbsp;&nbsp;
+                                    <span aria-hidden="true" class="badge" style="background-color: red;margin-top:2px;" ng-show="unreadChatMessageCount>0">{{unreadChatMessageCount}}</span>
+                                    </h3>
                                 </div>
                                 <div class="col-md-5 col-xs-5 col-lg-5 col-sm-5" style="text-align: right;">
                                      <a href="" ng-click="doDeleteChatMessage()" ng-show="deletingChatCount>0"><span class="glyphicon glyphicon-trash"></span></a>&nbsp;
@@ -522,7 +521,7 @@
                                     <a href=""><span id="minim_chat_window" class="glyphicon glyphicon-plus icon_minim panel-collapsed" onclick="chatMinMax()" ng-click="setChatMinimizedStatus();doReadChatMessage();"></span></a>
                                 </div>
                             </div>
-                            <div id="chat_container" class="panel-body msg_container_base" style="display:none;" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#eee',scrollspeed: -5}">
+                            <div id="chat_container" class="panel-body msg_container_base" style="display:none;" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#eee',scrollspeed: -5}" nice-scroll-end="doReadChatMessage()">
                                  <div class="row" ng-show="showLoadMore"><center><span ng-click="doLoadChatMessages()" class="label label-default" style="padding:5px;cursor:pointer;"><i class="fa fa-arrow-up" aria-hidden="true"></i>&nbsp;Load More</span></center></div>
 
                                  </br>
