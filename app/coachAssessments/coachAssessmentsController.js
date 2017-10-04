@@ -57,6 +57,7 @@ coachApp.controller('CoachAddAssessmentsController',['$scope','requestHandler','
     $scope.addQuestion={};
     $scope.addQuestion.question="";
     $scope.lastanswertype=3;
+    $scope.addQuestion.answers=["",""];
     $scope.addQuestion.answertype=1;
     $scope.addQuestionForm.$setPristine();
      $scope.title = "Add Question";   
@@ -165,6 +166,7 @@ coachApp.controller('CoachEditAssessmentsController',['$scope','requestHandler',
     $scope.addQuestion={};
     $scope.addQuestion.question="";
     $scope.lastanswertype=3;
+    $scope.addQuestion.answers=["",""];
     $scope.addQuestion.answertype=1;
     $scope.addQuestionForm.$setPristine();
      $scope.title = "Add Question";   
@@ -397,13 +399,10 @@ coachApp.directive('optionExistCheck', function() {
     require: '?ngModel',
     link: function(scope, elem, attrs, ngModel) {
       ngModel.$validators.optionExistCheck = function(modelValue, viewValue) {
-        if(scope.addQuestion.answertype!=3){
-            if(scope.addQuestion.answers.indexOf(modelValue)!=-1)
-                return false;
-            else
-                return true;
-        }else
+        if(scope.addQuestion.answers.indexOf(modelValue)!=-1)
             return false;
+        else
+            return true;
       };
     }
   };
