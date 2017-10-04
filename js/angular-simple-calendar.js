@@ -29,7 +29,7 @@ angular.module('500tech.simple-calendar', []).directive('simpleCalendar', functi
       '<div class="day-number">{{ date.day || "&nbsp;" }}' +
       '<div ng-show="isUserBookableDate(date)"><a href="" class="appointment_booknow" ng-click="bookDate(date)">Book&nbsp;Now</a></div>'+
       '</div>' +
-      '<div ng-show="isUserBookedDate(date)">Booked<span  ng-show="canCancel()">&nbsp;|&nbsp;<a href="" ng-click="cancelBookDate(date)" class="appointment_delete">Cancel</a></span></div>'+
+      '<div ng-show="isUserBookedDate(date)">Booked<span  ng-show="isCancelableDate(date)">&nbsp;|&nbsp;<a href="" ng-click="cancelBookDate(date)" class="appointment_delete">Cancel</a></span></div>'+
       '<div class="event-title">{{ date.event.title || "&nbsp;" }}</div>' +
       '</div>' +
       '</div>' +
@@ -216,6 +216,16 @@ angular.module('500tech.simple-calendar', []).directive('simpleCalendar', functi
         if (!date) { return; }
         var processingDate=date.day+"/"+date.month+"/"+date.year;
         if($scope.options.userbookedappointments.indexOf(processingDate)!=-1){
+          return true;
+        }else{
+          return false;
+        }
+      };
+
+      $scope.isCancelableDate=function(date){
+        if (!date) { return; }
+        var processingDate=date.day+"/"+date.month+"/"+date.year;
+        if($scope.options.userAppointmentCancelableDate.indexOf(processingDate)!=-1){
           return true;
         }else{
           return false;

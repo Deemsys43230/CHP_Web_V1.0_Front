@@ -17996,9 +17996,9 @@ select.event:focus {
     text-align: center;
   }
 
-  .day.default{
-    background-color: lightblue;
-  }
+ simple-calendar .day.default {
+  border: solid 1px #4883ed;
+}
   .day.selectedDay{
     background-color: #fdae21 !important;
   }

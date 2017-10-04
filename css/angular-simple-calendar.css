@@ -57,10 +57,6 @@ simple-calendar .day:hover {
   cursor: pointer;
 }
 
-simple-calendar .day.default {
-  background-color: lightblue;
-}
-
 simple-calendar .day.event {
   background-color: #fdf3ea;
 }
