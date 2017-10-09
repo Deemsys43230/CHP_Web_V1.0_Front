@@ -10,7 +10,7 @@ userApp.controller('GoalController',['$scope','requestHandler','Flash','$route',
     $scope.doGetMyGoalList=function(){
         $scope.paginationLoad=false;
         $scope.loaded=true;
-        requestHandler.getRequest("user/getMyGoallist","").then(function(response){
+        requestHandler.getRequest("user/getMyGoallist/","").then(function(response){
             $scope.myGoalList = [];
             $scope.myRequestGoalList=[];
            $.each(response.data.MyGoallist,function(index,value){
