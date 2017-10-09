@@ -169,11 +169,16 @@ userApp.controller('UserMedicationController',['$scope','requestHandler','Flash'
 
     //to check user is having coach or not
     $scope.doCheckUserMedicationDocument=function(){
-        $scope.showDocumentList=false;
         $scope.loader=true;
         requestHandler.getRequest("user/checkfolderexist/","").then(function(response){
             $scope.userUploadedDocumentIsExists=response.data.isexist;
-            $scope.showDocumentList=true;
+            if($scope.userUploadedDocumentIsExists==1){
+                $scope.showDocumentList=true;
+            }
+            else{
+                $scope.showDocumentList=false;
+            }
+
             $scope.loader=false;
         }, function(){
             errorMessage(Flash,"Please try again later!");

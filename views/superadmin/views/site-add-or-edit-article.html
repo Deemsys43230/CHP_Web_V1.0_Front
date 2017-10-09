@@ -59,19 +59,26 @@
                             <div class="col-md-3">
                                 <h4>Content</h4>
                             </div>
+
                             <div class="col-md-9 margin-bottom-20">
+                             <span ng-show="summernote_touched==1&&articleForm.content.$invalid">
+                                  <span class="error-message textarea-errormessage40" ng-show="articleForm.content.$error.required"><span>Required.</span></span>
+                             </span>
+                                <div summernote config="options" name="content" ng-model="articles.content" required ng-init="summernote_touched=0" ng-change ="summernote_touched=1"></div>
+                            </div>
+                         <!--   <div class="col-md-9 margin-bottom-20">
                                 <textarea type="text" class="height-150 form-control" name="content" ng-model="articles.content" required></textarea>
                                     <span ng-show="articleForm.content.$dirty&&articleForm.content.$invalid">
                                   <span class="error-message" ng-show="articleForm.content.$error.required" style="bottom: 100px;"><span>Required.</span></span>
                              </span>
-                            </div>
+                            </div>-->
                         </div>
                     </div>
                 </form>
             </div>
             <div class="text-center margin-top-10">
-                <a href="" class="btn btn-success" ng-click="doAddArticles()" ng-disabled="articleForm.$invalid || isCleanArticle()" ng-show="isNew">Add Article</a>
-                <a href="" class="btn btn-success"  ng-click="doUpdateArticles()" ng-disabled="articleForm.$invalid || isCleanArticle()" ng-hide="isNew">Save Changes</a>
+                <a href="" class="btn btn-success" ng-click="doAddArticles()" ng-disabled="articleForm.$invalid || submitContent || isCleanArticle()" ng-show="isNew">{{articleBtnTxt}}</a>
+                <a href="" class="btn btn-success"  ng-click="doUpdateArticles()" ng-disabled="articleForm.$invalid || submitContent || isCleanArticle()" ng-hide="isNew">{{articleBtnTxt}}</a>
                 <a href="#articles" class="btn btn-warning">Cancel</a>
             </div>
         </div>

@@ -2,6 +2,8 @@ var adminApp = angular.module('adminApp', ['ngRoute','oc.lazyLoad','requestModul
 adminApp.controller('ArticleController',['$scope','requestHandler','Flash','$location','siteMenuService',function($scope,requestHandler,Flash,$location,siteMenuService) {
 
     $scope.isNew = true;
+    $scope.submitContent=false;
+    $scope.articleBtnTxt="Add Article";
     $scope.title = "Add Article";
 
     $scope.siteMenuList = siteMenuService;
@@ -75,6 +77,10 @@ adminApp.controller('ArticleController',['$scope','requestHandler','Flash','$loc
             }, function () {
                 errorMessage(Flash, "Please try again later!")
             });
+
+        $scope.submitContent=true;
+
+        $scope.articleBtnTxt="Submitting...";
     };
 
 
@@ -146,6 +152,9 @@ adminApp.controller('ArticleEditController',['$scope','requestHandler','Flash','
     $scope.doGetarticlesAdminByID=function(){
         $scope.isNew = false;
         $scope.title = "Edit Article";
+
+        $scope.submitContent=false;
+       $scope.articleBtnTxt="Save Changes";
         console.log($routeParams.id);
 
         requestHandler.postRequest("articledetail/",{'id':$routeParams.id}).then(function(response){
@@ -215,6 +224,9 @@ adminApp.controller('ArticleEditController',['$scope','requestHandler','Flash','
             }, function () {
                 errorMessage(Flash, "Please try again later!")
         });
+        $scope.submitContent=true;
+
+        $scope.articleBtnTxt="Submitting...";
 
     };
 

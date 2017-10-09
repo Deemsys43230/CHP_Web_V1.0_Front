@@ -17,7 +17,7 @@
                         </li>
                     </ul>
 					</div>
-                    <center><a id="modal_group" href="#group" ng-click="resetAddGroup()" class="add-text-color margin-top-10">Create New Group</a></center>
+                    <center><a id="modal_add_group" href="#group" ng-click="resetAddGroup()" class="add-text-color margin-top-10">Create New Group</a></center>
                    <!--  <a href="" class="assign-modal" ng-click="setAssignUserId(client.userid)">Assign Group</a> -->
                 </div>
                 <div class="col-xs-12 col-sm-9 col-md-9 col-lg-10">
@@ -93,7 +93,7 @@
     <section class="popupBody">
         <div class="remove_common_model">
             <div class="text-center"><img src="../../images/alert-ring.png"/></div><br/>
-            <h5 class="text-center">Are you sure want to remove this client?</h5>{{removingUser}}
+            <h5 class="text-center">Are you sure want to remove this client?</h5>
             <div class="action_btns margin-top-20">
                 <div class="one_half"><a href="" class="btn btn_red modal_close" ng-click="removeClientFromList()">Yes</a></div>
                 <div class="one_half last modal_close"><a onclick="return false;" class="btn back_btn">No</a></div>
@@ -167,8 +167,9 @@
 </script>
 
 <script type="text/javascript">
-    $("#modal_group").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
+    $("#modal_add_group").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
     $(function(){
         $(".common_model").show();
     })
 </script>
+
