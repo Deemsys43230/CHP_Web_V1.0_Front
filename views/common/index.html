@@ -30,7 +30,7 @@
                     </div>
                     <div class="col-md-12 col-sm-12 col-xs-12 calculator-section margin-top-10">
                         <form name="calculateForm" ng-show="showForm" novalidate>
-                            <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="col-md-12 col-sm-12">
                                 <h3 class="text-muted margin-bottom-15 col-md-4">Calculate Your BMI</h3>
                                 <div class="col-md-4 margin-top5 margin-bottom-15 unit">
                                     <div class="btn-group" data-toggle="buttons">
@@ -43,11 +43,11 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-12 col-sm-12 col-xs-12 no-padding">
-                                <div class="col-md-6 col-sm-12 col-xs-12 no-padding">
-                                    <h5 class="col-md-4 col-sm-4 col-xs-12 margin-top-10">Height <sup class="text-red">*</sup></h5>
+                            <div class="col-md-12 col-sm-12  no-padding">
+                                <div class="col-md-6 col-sm-12  no-padding">
+                                    <h5 class="col-md-4 col-sm-4 margin-top-10">Height <sup class="text-red">*</sup></h5>
                                     <div ng-show="units==2">
-                                    <div class="col-md-4 col-sm-4 col-xs-6">
+                                    <div class="col-md-4 col-sm-4">
                                         <input class="calculator-input" name="feet" ng-model="feet" maxlength="2" ng-required="units==2">
                                         <div class="text-count-position"><span class="text-unit">ft</span></div>
                                         <div class="text-error-message">
@@ -56,7 +56,7 @@
                                         </span>
                                         </div>
                                     </div>
-                                    <div class="col-md-4 col-sm-4 col-xs-6">
+                                    <div class="col-md-4 col-sm-4">
                                         <input class="calculator-input" name="inches" ng-model="inches" maxlength="2" ng-required="units==2" ng-change="maxHeightCheck(inches)">
                                         <div class="text-count-position"><span class="text-unit">in</span></div>
                                         <span class="text-error-message" ng-show="!calculateForm.inches.$error.required&&maxHeightInches"><span>Please&nbsp;Enter&nbsp;Valid&nbsp;Height</span></span>
