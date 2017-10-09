@@ -2379,7 +2379,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
         };
 
 
-        $scope.doGetCoachAdvices = function(){
+      /*  $scope.doGetCoachAdvices = function(){
             requestHandler.getRequest("user/getCoachAdvicesByUser/", "").then(function(response){
 
                 //To get frequently asked exercise
@@ -2423,7 +2423,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
             },function(){
                 console.log("Please try again later!");
             });
-        };
+        };*/
 
         $scope.setCoachDeatails=function(mycoachadvice){
             $scope.usercoachadvicedetails=mycoachadvice;
@@ -3954,7 +3954,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
         };
 
         $scope.doGetVendorlist = function(){
-            requestHandler.getRequest("getWearableVendorsListByUser","").then(function(response) {
+            requestHandler.getRequest("getWearableVendorsListByUser/","").then(function(response) {
                 $scope.vendorList = response.data.vendorlist;
                 $.each($scope.vendorList,function(index,value){
                     if(value.isactive==0)
@@ -4097,7 +4097,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
         };
 
         $scope.initialLoadFoodAndExercise(selectedDate);
-        $scope.doGetCoachAdvices();
+    /*    $scope.doGetCoachAdvices();*/
         //circle round
         $scope.offset =         0;
         $scope.timerCurrent =   0;
