@@ -198,6 +198,8 @@ userApp.controller('UserMedicationController',['$scope','requestHandler','Flash'
 }]);
 userApp.controller('UserMedicationDocumentUploadController',['$scope','requestHandler','Flash','$location','$routeParams','roundProgressService',function($scope,requestHandler,Flash,$location,$routeParams,roundProgressService) {
 
+    $scope.activeClass.medications='active';
+
     $scope.uploadBtnTxt="Upload File";
     $scope.fileUpload=false;
     $scope.paginationLoad=false;
