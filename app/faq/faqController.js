@@ -16,7 +16,7 @@ adminApp.controller('FAQController',['$scope','requestHandler','Flash','siteMenu
     $scope.doGetAllFAQ=function(){
         $scope.loaded=true;
 
-        requestHandler.getRequest("admin/getFAQList","").then(function(response){
+        requestHandler.getRequest("admin/getFAQList/","").then(function(response){
             $scope.faqList=response.data.Faq_Data;
             $scope.loaded=false;
             $scope.paginationLoad=true;
