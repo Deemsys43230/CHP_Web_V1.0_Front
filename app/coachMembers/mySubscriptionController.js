@@ -21,7 +21,7 @@ coachApp.controller('MySubscriptionController',['$scope','requestHandler','Flash
         }
         selectedDate = dd+'/'+mm+'/'+yyyy;
 
-    	requestHandler.getRequest("coach/isSubscriptionActive/","").then(function(response){
+    	requestHandler.getRequest("/coach/isSubscriptionActive/","").then(function(response){
     		$scope.currentActivePlan=response.data.subscription;
             var enddate=$scope.currentActivePlan.enddate; //actual plan end date
             var firstValue = selectedDate.split('/');               // Current date
