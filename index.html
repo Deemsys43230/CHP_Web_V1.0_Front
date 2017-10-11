@@ -171,11 +171,23 @@
                     <div class="slider-font margin-top-30 margin-left-10">
                     <h1 class="col-md-7 col-sm-9 col-xs-12 slider-font margin-bottom-20">
                             <span class="hidden-xs"><br/></span>
-                            <span class="slide3-font">ACHIEVE YOUR HEALTH AND <br/>FITNESS GOAL WITH A HEALTHY <br/>AND NUTRITIONAL FOOD HABIT.<br/>
+                            <span class="slide3-font">ACHIEVE YOUR HEALTH AND <br/>FITNESS GOAL WITH A HEALTHY <br/>AND NUTRITIONAL FOOD HABIT.<br/></span>
                             <span class="text-bold h4"><span class="hidden-xs"><br/></span>
                                 Register with us! we wil take care of you.
                             </span>
-                            <a href="" class="btn-system btn-large button-xs" onclick="$('.loginNow').click()"><i class="fa fa-user"></i> Register Now</a>
+                          <span class="noMobileApp">
+                              <a href="" class="btn-system btn-large button-xs" onclick="$('.loginNow').click()"><i class="fa fa-user"></i> Register Now</a>
+                          </span>
+                        <span class="mobileApp">
+                            <span class="android centerize">
+                                <!-- This is andriod -->
+                                <a href="https://play.google.com/store/apps/details?id=com.deemsysinc.cyberhealthapp" class="btn-system btn-large button-xs" target="_self"><i class="fa fa-user"></i> Register</a>
+                            </span>
+                            <span class="iphone centerize">
+                                <!-- This is iphone -->
+                                <a href="" class="btn-system btn-large button-xs"><i class="fa fa-user"></i> Register</a>
+                            </span>
+                        </span>
                         </h1>
                     </div>
                 </div>
@@ -338,9 +350,23 @@
                             </div>
                         </div>
                     </div>
+                    <div class="noMobileApp">
                     <div class="centerize">
                         <a href="" class="btn-system btn-small" onclick="$('.loginNow').click()"><i class="fa fa-user"></i> Register</a>
                     </div>
+                        </div>
+
+                    <div class="mobileApp">
+                        <div class="android centerize">
+                            <!-- This is andriod -->
+                            <a href="https://play.google.com/store/apps/details?id=com.deemsysinc.cyberhealthapp" class="btn-system btn-small" target="_self"><i class="fa fa-user"></i> Register</a>
+                        </div>
+                        <div class="iphone centerize">
+                            <!-- This is iphone -->
+                            <a href="" class="btn-system btn-small"><i class="fa fa-user"></i> Register</a>
+                        </div>
+                    </div>
+
                 </div>
 
             </div>
@@ -572,6 +598,34 @@
     });
 
 $('#featuresDiv').load('images/info/features.svg');
+</script>
+
+<script type="text/javascript">
+
+   /* finding user device*/
+
+    var isAndroid = (/android/i.test(navigator.userAgent.toLowerCase()));
+    var isIphone = (/iphone/i.test(navigator.userAgent.toLowerCase()));
+
+    $(".android").hide();
+    $(".iphone").hide();
+    $(".mobileApp").hide();
+    $(".noMobileApp").show();
+
+    if(isAndroid){
+        $(".mobileApp").show();
+        $(".noMobileApp").hide();
+        $(".android").show();
+        $(".iphone").hide();
+    }
+    else if(isIphone){
+        $(".mobileApp").show();
+        $(".noMobileApp").hide();
+        $(".android").hide();
+        $(".iphone").show();
+    }
+  $(".modal_trigger").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
+
 </script>
 </body>
 </html>

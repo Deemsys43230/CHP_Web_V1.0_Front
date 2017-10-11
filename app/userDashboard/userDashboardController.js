@@ -2516,7 +2516,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
                 {
                     'id': 11,
                     'name': 'Heart Rate',
-                    "imageSrc": "../../images/heartpeak.ico"
+                    "imageSrc": "../../images/heart1.gif"
 
                 }
                 ]
