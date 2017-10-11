@@ -18,10 +18,10 @@
                     <div class="col-lg-4 col-md-4 col-sm-4" ng-repeat="courseList in myCourseList"  ng-show="myCourseList.length!=0">
                         <a href="#course-view/{{courseList.courseid}}">
                             <div class="dashboard">
-                                <span ng-show="courseList.coursestatus==1"><img class="course-status" src="../../images/draft.png"></span>
-                                <span ng-show="courseList.coursestatus==2"><img class="course-status" src="../../images/pending.png"></span>
-                                <span ng-show="courseList.coursestatus==3"><img class="course-status" src="../../images/published.png"></span>
-                                <span ng-show="courseList.coursestatus==4"><img class="course-status" src="../../images/rejected.png"></span>
+                                <span ng-show="courseList.coursestatus==1"><img style="width: 90px;height: 90px" class="course-status" src="../../images/draft.png"></span>
+                                <span ng-show="courseList.coursestatus==2"><img style="width: 90px;height: 90px" class="course-status" src="../../images/pending.png"></span>
+                                <span ng-show="courseList.coursestatus==3"><img style="width: 90px;height: 90px" class="course-status" src="../../images/published.png"></span>
+                                <span ng-show="courseList.coursestatus==4"><img style="width: 90px;height: 90px" class="course-status" src="../../images/rejected.png"></span>
                                 <div class="course-grid">
                                     <div class="col-lg-6 col-md-6 col-sm-6 margin-top-5">
                                         <h4 class="wrap course-title" title="{{courseList.coursename}}" >{{courseList.coursename}}</h4>
@@ -67,7 +67,7 @@
     <section class="popupBody">
         <!-- Register Form -->
         <div class="common_model">
-            <div class="text-center"><img src="../../images/alert-ring.png"/></div><br/>
+            <div class="text-center"><img style="width: 118px;height: 100px" src="../../images/alert-ring.png"/></div><br/>
             <h5 class="text-center">We recommended you to use Google Chrome / Mozilla Firefox browser to Create/Edit course.</h5>
             <div class="action_btns margin-top-20">
                 <div><a href="#course-add" class="btn btn_red modal_close" >Proceed Anyway</a></div>

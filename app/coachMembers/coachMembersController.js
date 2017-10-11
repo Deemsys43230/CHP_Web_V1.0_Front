@@ -126,7 +126,7 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
                 status: 'member-view'
             };
             if(id!=0){
-                 requestHandler.getRequest("/getUserProfile/"+id, "").then(function(response){
+                 requestHandler.getRequest("/getUserProfile/"+id+"/", "").then(function(response){
                     coachclientdetails=response.data.userprofile;
                     // $scope.coachclientdetails.age = "-";
                     
@@ -161,7 +161,7 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
     /* For clients Individual Demograpgy Details BY Coach */
 
     $scope.doGetClientsDemographyDetailsByCoach = function(id){
-        requestHandler.getRequest("getUserDemography/"+id, "").then(function(response){
+        requestHandler.getRequest("getUserDemography/"+id+"/" , "").then(function(response){
             $scope.demographyDeatil = response.data.demography;
 
             // For height inches and feet calculation based on user unit preference
@@ -1431,7 +1431,7 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
             if(response.data.chats.length!=0){
                 $scope.chatMessages.coachid= response.data.chats[0].coachid;
 
-                requestHandler.getRequest("/getUserProfile/"+$scope.chatMessages.coachid, "").then(function(response){
+                requestHandler.getRequest("/getUserProfile/"+$scope.chatMessages.coachid+"/", "").then(function(response){
                      $scope.coachImageUrl=response.data.userprofile.imageurl;
                 });
             }
