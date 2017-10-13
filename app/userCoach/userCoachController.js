@@ -1,6 +1,6 @@
 var userApp = angular.module('userApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','angularUtils.directives.dirPagination','angular-nicescroll','500tech.simple-calendar','angular.filter']);
 
-userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$location','$q','$routeParams','$route','$window',function($scope,requestHandler,Flash,$location,$q,$routeParams,$route,$window) {
+userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$location','$q','$routeParams','$route',function($scope,requestHandler,Flash,$location,$q,$routeParams,$route) {
 
     $scope.activeClass.coach='active';
     $scope.coachreview = {ratinglevel:1};
@@ -8,6 +8,8 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
     $scope.paginationLoad=false;
     $scope.coachInvitations= $route.current.$$route.coachInvitations;
      $scope.isChatMinimized=true;
+    $scope.submitButton=false;
+    $scope.assessmentBtnTxt="Complete Assessment";
     var myCoachIdListArray = [];
     // $scope.disablereview=false;
 
@@ -27,16 +29,16 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
                                 "searchname":"",
                                 "offset":($scope.scrollnation.scrollEndCount)*$scope.scrollnation.itemsPerScroll
                                };
-       
+
         if($scope.coachInvitations){
             $scope.request=requestHandler.getRequest("user/userreadinvitations/",{});
         }else{
             $scope.request=requestHandler.postRequest("user/usergetcoachlist/",$scope.userCoachPagination);
           }
 
-        
+
         $scope.request.then(function(response){
-           
+
             var ratingPromise;
             $.each(response.data.coaches, function(index,value){
                 value.averageRating=0.1;
@@ -47,19 +49,19 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
                     if(result.averageratings!=0){
                         value.averageRating=result.averageratings;
                     }
-                  
+
                     value.totalReviews= result.totalrecords;
                 });
             });
-          
+
             $q.all([ratingPromise]).then(function(){
-             
+
                 $scope.usercoachlist= $scope.usercoachlist.concat(response.data.coaches);
-                if(loadCoachDetail){ 
+                if(loadCoachDetail){
                     //Load First Coach Default
                         if($scope.usercoachlist.length>0)
                         {
-                             $scope.doGetCoachDetailsByUser($scope.usercoachlist[0].userid); 
+                             $scope.doGetCoachDetailsByUser($scope.usercoachlist[0].userid);
                         }
                 }
 
@@ -210,18 +212,18 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
 
     };
 
-    //Do Set Chat Message as Read 
+    //Do Set Chat Message as Read
     $scope.doReadChatMessage=function(){
       $scope.setReadMessageParam={"targetid":$routeParams.id};
       requestHandler.postRequest("setMessageRead/", $scope.setReadMessageParam).then(function(response){
           if(response.data.Response_status==1){
             $scope.unreadChatMessageCount=0;
-            $scope.showMessageCount=false; 
+            $scope.showMessageCount=false;
           }
       })
     };
 
-    $scope.refreshChat=function(){  
+    $scope.refreshChat=function(){
         $scope.getMessageParam={"targetid":$routeParams.id,"offset":0,'onlyunread':1};
          requestHandler.postRequest("readMessage/",$scope.getMessageParam).then(function(response){
             if($scope.unreadChatMessageCount==0){
@@ -230,9 +232,9 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
                 });
             }
             $scope.unreadChatMessageCount=response.data.unreadrecords;
-            if(response.data.unreadrecords>0){  
-            $scope.unreadChatMessageCount=response.data.unreadrecords;  
-             $scope.showMessageCount=true; 
+            if(response.data.unreadrecords>0){
+            $scope.unreadChatMessageCount=response.data.unreadrecords;
+             $scope.showMessageCount=true;
                $.each(response.data.chats,function(index,value){
                 if($scope.chatLogArray.indexOf(value.logid)==-1) {
                         value.selectedChat=0;
@@ -250,7 +252,7 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
     };
 
     //set chat window open close status
-     $scope.setChatMinimizedStatus=function(){     
+     $scope.setChatMinimizedStatus=function(){
         if($scope.isChatMinimized)
             $scope.isChatMinimized=false;
         else
@@ -260,13 +262,13 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
     // Do Get Chat Message
     $scope.doGetChatMessage=function(){
         $scope.getMessageParam.offset=0;
-        $scope.getMessageParam={"targetid":$routeParams.id,"offset":0}; 
+        $scope.getMessageParam={"targetid":$routeParams.id,"offset":0};
         $scope.chatLogArray=[];
         requestHandler.postRequest("readMessage/",$scope.getMessageParam).then(function(response){
             $scope.totalChatMessages=response.data.totalrecords;
              $scope.chatMessages={};
             $scope.chatMessages= response.data.chats;
-           
+
             $scope.showLoadMore=false;
             if($scope.chatMessages.length<$scope.totalChatMessages){
                 $scope.showLoadMore=true;
@@ -303,7 +305,7 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
                 }
 
             });
-           
+
         if(!$scope.isChatMinimized){
             $scope.doReadChatMessage();
            }
@@ -311,7 +313,7 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
             setTimeout(function(){ $('.msg_container_base').scrollTop($('.msg_container_base')[0].scrollHeight); }, 500);
 
               //set 15 seconds interval for repeatedly call a function
-            setInterval(function(){                       
+            setInterval(function(){
                         $scope.refreshChat();
             }, 2000);
 
@@ -336,14 +338,14 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
             $scope.showLoadMore=false;
             if($scope.chatMessages.length<$scope.totalChatMessages){
                 $scope.showLoadMore=true;
-            }            
+            }
         });
         setTimeout(function(){
                 $scope.topPos = document.getElementById($scope.loadMoreScrollStopId).offsetTop;
                 $scope.divTop = document.getElementById('chat_container').offsetTop;
                 $('#chat_container').getNiceScroll(0).doScrollPos(0,$scope.topPos-$scope.divTop-20);
         }, 400);
-        
+
     }
     //Do Send Chat Message
     $scope.doSendChatMessage=function(){
@@ -385,9 +387,9 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
             if(value.selectedChat==1){
                 $scope.deleteChatLogId.push(value.logid);
                 $scope.deletingChatCount+=1;
-            }             
+            }
         });
-        
+
 
     };
 
@@ -415,7 +417,7 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
             $("#lean_overlay").hide();
         });
     };
-  
+
     $scope.acceptCoachInvitationsByUser=function(coachid){
         requestHandler.postRequest("user/acceptinvitation/",{"coachid":coachid}).then(function(response){
            if(response.data.Response_status==1){
@@ -653,7 +655,7 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
             "limit":$scope.mealPlanPagination.itemsPerPage,
             "offset":($scope.mealPlanPagination.pageNumber-1)*$scope.mealPlanPagination.itemsPerPage,
             "plantype": 1
-        };   
+        };
         requestHandler.postRequest("user/getplans/",$scope.getMealPlanParams).then(function(response){
             $scope.myMealPlanList=response.data;
         }, function(){
@@ -669,7 +671,7 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
         requestHandler.postRequest("getplandetail/",{"mapid":mapId}).then(function(response){
             //First We need to group up days
             $scope.mealplandetail=response.data.plandetail;
-           
+
             //Initialize
             $scope.mealPlanDetailList=[];
 
@@ -694,19 +696,19 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
                 );
             }
 
-          // Group Json object of plan 
-         $.each($scope.mealplandetail, function (key, obj) {            
+          // Group Json object of plan
+         $.each($scope.mealplandetail, function (key, obj) {
               if(key.substring(0,3)=="day"){
                 $scope.mealPlanDetailList[key.substring(3)-1].totalCalories=(obj.actualcalories).toFixed(2);
                 $scope.mealPlanDetailList[key.substring(3)-1].consumedCalories=(obj.consumedcalories).toFixed(2);
                 $scope.mealPlanDetailList[key.substring(3)-1].date= obj.date;
                 $.each(obj.foods, function (index, value) {
-                 value.calorieintake=value.calorieintake.toFixed(2);   
+                 value.calorieintake=value.calorieintake.toFixed(2);
                  $scope.mealPlanDetailList[value.day-1].foods[value.foodsessionid-1].foodItems.push(value);
                 });
-              }              
+              }
           });
-         
+
         },function(){
             errorMessage(Flash,"Please try again later!")
         });
@@ -781,7 +783,7 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
             "limit":$scope.workoutPlanPagination.itemsPerPage,
             "offset":($scope.workoutPlanPagination.pageNumber-1)*$scope.workoutPlanPagination.itemsPerPage,
             "plantype": 2
-        };   
+        };
         requestHandler.postRequest("user/getplans/",$scope.getWorkoutPlanParams).then(function(response){
             $scope.myworkoutPlanList=response.data;
         }, function(){
@@ -797,7 +799,7 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
         requestHandler.postRequest("getplandetail/",{"mapid":mapId}).then(function(response){
             //First We need to group up days
             $scope.workoutplandetail=response.data.plandetail;
-           
+
             //Initialize
             $scope.workoutPlanDetailList=[];
 
@@ -814,8 +816,8 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
                 );
             }
 
-          // Group Json object of plan 
-          $.each($scope.workoutplandetail, function (key, obj) {            
+          // Group Json object of plan
+          $.each($scope.workoutplandetail, function (key, obj) {
               if(key.substring(0,3)=="day"){
                 $scope.workoutPlanDetailList[key.substring(3)-1].totalCalories=(obj.actualcalories).toFixed(2);
                 $scope.workoutPlanDetailList[key.substring(3)-1].burntCalories=(obj.burntcalories).toFixed(2);
@@ -823,7 +825,7 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
                 $.each(obj.workouts, function (index, value) {
                  $scope.workoutPlanDetailList[value.day-1].workouts.push(value);
                 });
-              }              
+              }
           });
 
         },function(){
@@ -945,7 +947,7 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
     };
 
     $scope.userBookAppointmentDate=function(date){
-        
+
         $(function(){
               $("#lean_overlay").fadeTo(1000);
               $("#book-appointment").fadeIn(600);
@@ -974,17 +976,17 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
         $scope.selectedDate= moment(bookingDate).format('DD/MM/YYYY');
         requestHandler.postRequest("user/bookappointment/",{'date':$scope.selectedDate,'coachid':$routeParams.id}).then(function(response){
             if(response.data.Response_status==1){
-               successMessage(Flash,"Successfully Booked"); 
+               successMessage(Flash,"Successfully Booked");
                $scope.userGetAppointmentList($scope.coachid,$scope.fromDate,$scope.endDate);
-            }  
+            }
         }, function(){
                 errorMessage(Flash,"Please try again later!");
         });
-       
+
     };
 
 
-    $scope.userGetAppointmentList=function(coachid,fromDate,endDate){       
+    $scope.userGetAppointmentList=function(coachid,fromDate,endDate){
         $scope.canCancel=true;
         $scope.getAppointmentsParam={"coachid":coachid,"fromdate":fromDate,"todate":endDate};
 
@@ -1007,7 +1009,7 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
                 var appointmentDate_date=new Date(appointmentDateParts[2],appointmentDateParts[1]-1,appointmentDateParts[0]);
 
                 if(value.canbook==1)
-                    $scope.userappointments.push(formattedDate);                
+                    $scope.userappointments.push(formattedDate);
                 if(value.canbook==2){
                     $scope.userbookedappointments.push(formattedDate);
                     if(appointmentDate_date>=startDate_date){
@@ -1018,7 +1020,7 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
                     $scope.notAvailableAppointments.push(formattedDate);
                 }
 
-                
+
             });
             $scope.calendarOptions.coachappointments=$scope.coachappointments;
             $scope.calendarOptions.userappointments=$scope.userappointments;
@@ -1038,40 +1040,81 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
     };
     //Do Get Assessment Details
     $scope.doGetCoachAssessmentDetail=function(id){
+        $scope.submittedAssessment=false;
        requestHandler.getRequest("user/readassessmentdetail/"+id+"/","").then(function(response){
             $scope.assessments=response.data.userassessment;
-       });        
+           $scope.originalAssesments=angular.copy(response.data.userassessment);
+       });
     }
-    //Do Save Assessment
-    $scope.doCompleteAssessment=function(){
-        
-        $scope.userAnswers={"id":$scope.assessments.id,"questions":[]}
-        //Manupulate for body parameter
-        $.each($scope.assessments.questions,function(index,value){
-            $scope.submitAnswer={"questionid":value.questionid,"answerid":""};
-            if(value.answertype!=2){
-                $scope.submitAnswer.answerid=value.useranswer;
-            }else{
-                var useranswer=[];
-                $.each(value.answers,function(index,answer){
-                    if(answer.checked){
-                         useranswer.push(answer.id);
-                    }
-                });
-                $scope.submitAnswer.answerid=useranswer.join();
-            }
-            $scope.userAnswers.questions.push($scope.submitAnswer);
-        });
 
+
+///Do Save Assessment
+    $scope.doCompleteAssessment=function(){
+        $scope.userAnswers={"id":$scope.assessments.id,"questions":[]};
+        $scope.submittedAssessment=true;
+        if($scope.validateAnswers()){
+            $.each($scope.assessments.questions,function(index,value){
+             $scope.submitAnswer={"questionid":value.questionid,"answerid":""};
+                if(value.answertype!=2){
+                    $scope.submitAnswer.answerid=value.useranswer;
+                }else{
+                    var useranswer=[];
+                    $.each(value.answers,function(index,answer){
+                        if(answer.checked){
+                            useranswer.push(answer.id);
+                        }
+                    });
+                    $scope.submitAnswer.answerid=useranswer.join();
+                }
+                $scope.userAnswers.questions.push($scope.submitAnswer);
+            });
         requestHandler.postRequest("user/submitassessment/",$scope.userAnswers).then(function(response){
-            successMessage(Flash,"Successfully Submitted!");            
-            $scope.doGetCoachAssessmentList($routeParams.id) ;
-            $scope.assessmentOptions.showAssessment=false; 
-        });
+                $scope.submitButton=true;
+                $scope.assessmentBtnTxt="Submitting...";
+                successMessage(Flash,"Successfully Submitted!");
+                $scope.submitButton=false;
+                $scope.assessmentBtnTxt="Complete Assessment";
+                $scope.doGetCoachAssessmentList($routeParams.id) ;
+                $scope.assessmentOptions.showAssessment=false;
+
+            });
+        }
 
     };
-   
-  $scope.cancelAppointment=function(date){
+
+    //Check for validation
+    $scope.validateAnswers=function(){
+        var isNoError=true;
+        //Manipulate for body parameter
+        if($scope.submittedAssessment){
+        $.each($scope.assessments.questions,function(index,value){
+                if(value.answertype!=2){
+                    if(value.useranswer==null){
+                        isNoError=false;
+                        $("#error_"+index).show();
+                    }else {
+                        $("#error_"+index).hide();
+                    }
+                }else{
+                    var isAnswerSelected=false;
+                    $.each(value.answers,function(ansindex,answer){
+                        if(answer.checked){
+                            isAnswerSelected=true;
+                        }
+                    });
+                    isNoError=isAnswerSelected;
+                    if(isAnswerSelected)
+                        $("#error_"+index).hide();
+                    else
+                        $("#error_"+index).show();
+                }
+        });
+        }
+        return isNoError;
+    };
+
+
+    $scope.cancelAppointment=function(date){
     $.each($scope.availableAppointment,function(index,value){
         var processingDate=value.date.split('/');
         var formattedDate=parseInt(processingDate[0])+"/"+(parseInt(processingDate[1])-1)+"/"+parseInt(processingDate[2]);
@@ -1086,16 +1129,18 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
                 errorMessage(Flash,"Please try again later!");
             });
         }
-        
+
     });
 };
 
     $scope.userCoachViewInit=function(){
+        //alert("usercoachviewinit");
         $scope.scrollnation={"itemsPerScroll": 4,"scrollEndCount":-1};
         $scope.getMessageParam={"targetid":$routeParams.id,"offset":0};
         $scope.checkReviews=[];
         $scope.disablereview=true;
         $scope.checkReview();
+
         $scope.doGetCoachDetailsByUser($routeParams.id);
         $scope.coachView = {
             status: 'coach-reviews'
@@ -1107,13 +1152,14 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
         $scope.doGetCoachAdviceByUser($routeParams.id);
         $scope.doGetUpcomingEvents($routeParams.id);
         $scope.doGetCoachAssessmentList($routeParams.id);
+        $scope.assessments={"questions":[]};
         $scope.assessmentOptions={"showAssessment":false};
 
         var todayDate = new Date();
         $scope.fromDate=moment(new Date(todayDate.getFullYear(), todayDate.getMonth(), 1)).format('DD/MM/YYYY');
         $scope.endDate=moment(new Date(todayDate.getFullYear(), todayDate.getMonth()+1, 0)).format('DD/MM/YYYY');
         $scope.coachid= $routeParams.id;
-        //Load Whole Month Appointments  
+        //Load Whole Month Appointments
         $scope.userGetAppointmentList($scope.coachid,$scope.fromDate,$scope.endDate);
     };
 
@@ -1122,19 +1168,21 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
 
     $scope.$watch("mealPlanPagination.pageNumber",function(){
         $scope.doGetCoachMealPlans($routeParams.id);
-    }); 
+    });
 
     $scope.$watch("workoutPlanPagination.pageNumber",function(){
         $scope.doGetCoachWorkoutPlans($routeParams.id);
     });
+
 
     $scope.coachListInit=function(){
         $scope.doGetMyCoachListByUser();
     };
 
     $scope.userCoachInit=function(){
-        $scope.scrollnation={"itemsPerScroll":4,"scrollEndCount":-1};    
+        $scope.scrollnation={"itemsPerScroll":4,"scrollEndCount":-1};
         $scope.usercoachlist=[];
+
         $scope.doGetCoachListByUser(true);
         $scope.coach = {
             status: 'coach-view'
