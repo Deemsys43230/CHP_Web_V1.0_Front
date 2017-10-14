@@ -18164,7 +18164,7 @@ select.event:focus {
 }
 .slide3-font {
     font-weight: 500;
-    font-size: 35px !important;
+    font-size: 35px;
     line-height: 55px;
 }
 .slide2-font{

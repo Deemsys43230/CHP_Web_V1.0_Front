@@ -1440,4 +1440,31 @@
     .xsm-hide{
         display: inline!important;
     }
+    .slide3-font{
+        font-size: 28px;
+    }
+    .button-xs{
+        font-size: 12px;
+        padding: 2px 10px;
+    }
+}
+
+/*home page slider text responsiveness*/
+@media (min-width: 568px) and (max-width: 964px){
+    .slide3-font{
+        font-size: 28px;
+        line-height: 40px;
+    }
+    .button-xs{
+        font-size: 12px;
+        padding: 2px 10px;
+    }
+    .slider-font span.small{
+        font-size: 28px;
+        line-height: 1.4;
+    }
+    .divH1{
+        font-size: 16px;
+        line-height: 24px;
+    }
 }
