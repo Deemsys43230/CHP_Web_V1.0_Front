@@ -492,7 +492,7 @@
                                             </div>
                                             <div class="col-md-12 margin-bottom-60"><hr/></div>
                                                 <div class="col-md-offset-4 col-md-8">
-                                                <a href="" ng-disabled="submitButton || assessmentsForm.$invalid" class="btn btn-success" ng-click="doCompleteAssessment()">{{assessmentBtnTxt}}</a>
+                                                <a href="" ng-disabled="assessmentsForm.$invalid || submitButton" class="btn btn-success" ng-click="doCompleteAssessment()">{{assessmentBtnTxt}}</a>
                                                 <a href="" ng-click="assessmentOptions.showAssessment=false" class="btn btn-danger">Cancel </a>
                                                 </div>
                                             </div>

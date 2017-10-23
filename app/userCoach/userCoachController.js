@@ -1069,15 +1069,15 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
                 $scope.userAnswers.questions.push($scope.submitAnswer);
             });
         requestHandler.postRequest("user/submitassessment/",$scope.userAnswers).then(function(response){
-                $scope.submitButton=true;
-                $scope.assessmentBtnTxt="Submitting...";
-                successMessage(Flash,"Successfully Submitted!");
-                $scope.submitButton=false;
-                $scope.assessmentBtnTxt="Complete Assessment";
+          successMessage(Flash,"Successfully Submitted!");
+            $scope.submitButton=false;
+            $scope.assessmentBtnTxt="Complete Assessment";
                 $scope.doGetCoachAssessmentList($routeParams.id) ;
                 $scope.assessmentOptions.showAssessment=false;
 
             });
+            $scope.submitButton=true;
+            $scope.assessmentBtnTxt="Submitting...";
         }
 
     };
