@@ -780,6 +780,7 @@ userApp.controller("UserInitialController",['$scope','requestHandler','$location
     });
 
     $scope.$on('$routeChangeStart', function(next, current) {
+       /* alert("rootchanges");*/
 
         $scope.activeClass={};
         var currentPage = $location.url().substr(1);
@@ -822,6 +823,29 @@ userApp.controller("UserInitialController",['$scope','requestHandler','$location
                 $(".common_model").show();
             });
 
+           $(".modal_close").click(function(){
+                $(".common_model").hide();
+                $("#review-modal").hide();
+                $("#lean_overlay").hide();
+           });
+
+            $("#lean_overlay").click(function(){
+                $(".common_model").hide();
+                $("#review-modal").hide();
+                $("#lean_overlay").hide();
+            });
+        });
+        }
+        else if(pathVar==2){
+            $(function(){
+                $("#lean_overlay").hide();
+                $("#review-modal").fadeIn(600);
+                $(".common_model").hide();
+                $(".popupContainer").hide();
+                $(".popupHeader").hide();
+                $(".popupBody").hide();
+            });
+
             $(".modal_close").click(function(){
                 $(".common_model").hide();
                 $("#review-modal").hide();
@@ -833,9 +857,6 @@ userApp.controller("UserInitialController",['$scope','requestHandler','$location
                 $("#review-modal").hide();
                 $("#lean_overlay").hide();
             });
-        });
-        }
-        else if(pathVar==2){
                // $location.path("dashboard");
         }
     };
