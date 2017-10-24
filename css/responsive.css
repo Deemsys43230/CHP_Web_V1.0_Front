@@ -1302,7 +1302,7 @@
         line-height: 0;
     }
     .divH1 {
-        font-size: 8px;
+        font-size: 10px;
         line-height: 12px;
     }
     .slide3-font {
@@ -1321,8 +1321,8 @@
         line-height: 19px;
     }
     .slider-font h1 .h4 {
-        font-weight: 500;
-        font-size: 10px;
+        font-weight: bold;
+        font-size: 12px;
         text-transform: none!important;
     }
     .button-xs{
