@@ -311,6 +311,8 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                             name:'coachApp',
                             files:[
                                 '../../plugin/popup/style.css',
+                                '../../css/ngPercentageCircle.css',
+                                '../../app/userDashboard/ngPercentageCircle.js',
                                 '../../app/coachMembers/coachMembersController.js',
                                 '../../angular/angular-utils-pagination/dirPagination.js',
                                  '../../css/custom-inputs.css',

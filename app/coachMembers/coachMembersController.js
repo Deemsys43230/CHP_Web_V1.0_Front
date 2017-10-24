@@ -3,7 +3,7 @@
  */
 var coachApp = angular.module('coachApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','angularUtils.directives.dirPagination','angular-nicescroll','angular-svg-round-progress','angular.filter']);
 
-coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter","Flash","$location","$rootScope","$routeParams",function($scope,requestHandler,$filter,Flash,$location,$rootScope,$routeParams,$setPristine) {
+coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter","Flash","$location","$rootScope","$routeParams","roundProgressService",function($scope,requestHandler,$filter,Flash,$location,$rootScope,$routeParams,$setPristine,roundProgressService) {
 
     $scope.isActive=false;
     $scope.activeClass.my='active';
@@ -223,6 +223,32 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
                 $scope.wearable = value.wearables;
                 $scope.water = value.waterlog;
                 $scope.budgetDetails=value.budget;
+                $scope.Budget= $scope.budgetDetails.Budget;
+                $scope.Net = $scope.budgetDetails.Net;
+
+                if($scope.budgetDetails.Intake=="") $scope.budgetDetails.Intake=0;
+                if($scope.budgetDetails.Burnt=="") $scope.budgetDetails.Burnt=0;
+                else  if($scope.budgetDetails.Burnt!=""){
+                    $scope.budgetDetails.Burnt=Math.abs($scope.budgetDetails.Burnt);
+                }
+                $scope.averageIntake=Math.round($scope.budgetDetails.averagecalorieintake);
+                $scope.averageSpent=Math.round($scope.budgetDetails.averagecalorieburnt);
+
+                $scope.currentGain=$scope.budgetDetails.Intake;
+                $scope.currentGain=$scope.currentGain.toFixed(2);
+
+                if($scope.averageIntake<$scope.budgetDetails.intakecalorie){
+                    $scope.currentGainColour="red";
+                }else $scope.currentGainColour="limegreen";
+
+
+                $scope.currentSpent=$scope.budgetDetails.Burnt;
+                $scope.currentSpent=$scope.currentSpent.toFixed(2);
+
+                if($scope.averageSpent<$scope.budgetDetails.burntcalorie){
+                    $scope.currentSpentColour="red";
+                }else $scope.currentSpentColour="orange";
+
             });
         });
     };
@@ -1808,10 +1834,10 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
 
         $scope.animations = [];
 
-        /*angular.forEach(roundProgressService.animations, function(value, key){
+     /*   angular.forEach(roundProgressService.animations, function(value, key){
             $scope.animations.push(key);
-        });*/
-
+        });
+*/
         $scope.getStyle = function(){
             var transform = ($scope.isSemi ? '' : 'translateY(-50%) ') + 'translateX(-50%)';
 
