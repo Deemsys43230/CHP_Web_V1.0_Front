@@ -2432,10 +2432,9 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
         $scope.getHistory=function(){
             $scope.historyReport=1;
             if($('#history-start').val()==''){
-                $scope.waterGraphs=false; //if no datae is selected hide watergraphs
-                $scope.isHistoryEmpty=1;
+                $scope.isHistoryEmpty=0;
             }
-            else $scope.isHistoryEmpty=0;
+           /* else $scope.isHistoryEmpty=1;*/
         };
         $scope.getViewGraph=function(){
             $scope.historyReport=0;
@@ -2448,7 +2447,9 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
             else $scope.isViewEmpty=0;
         };
         $scope.otherThanHistory=function(){
+            $scope.isHistoryEmpty=0;
             $scope.historyReport=0;
+
         };
 
         $scope.setHistoryType=function(id,divId){
