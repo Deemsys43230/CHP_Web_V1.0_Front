@@ -8629,6 +8629,9 @@ ul.sidebar-menu li a{
 .margin-left-5{
     margin-left: 5px !important;
 }
+.margin-left-70{
+    margin-left: 70px !important;
+}
 
 .margin-bottom-20{
     margin-bottom: 20px !important;
@@ -18280,4 +18283,5 @@ select.event:focus {
     width:250px;
     text-overflow: ellipsis;
 }
+
 
