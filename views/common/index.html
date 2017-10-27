@@ -2,14 +2,7 @@
 <script type="text/javascript">
         $(function () {
             $("#dobForBMI").datepicker({ dateFormat: "mm/dd/yy",maxDate:new Date()}).val()
-            $(function ()
-            {
-                $('#dobForBMI1').datetimepicker({format: 'DD/MM/YYYY', ignoreReadonly: true});
-                $('#dobIcon1').click(function()
-                {
-                    $('#dobForBMI1').focus();
-                });
-            });
+            $("#dobForBMI1").datepicker({ dateFormat: "dd/mm/yy",maxDate:new Date() }).val()
         });
 
     </script>
@@ -17,7 +10,8 @@
 
 
 <!-- Start Testimonials Section -->
-<div class="section service">
+        <div id="ascrail2000">
+  <div class="section service">
     <div class="container">
         <div class="row">
                 <div class="col-md-12">
@@ -92,7 +86,7 @@
                                     <h5 class="col-md-4 col-sm-4 margin-top-10">D O B<sup class="text-red">*</sup></h5>
                                     <div class="col-md-8 col-sm-8">
                                         <div class="input-group">
-                                        <input type="text" name='dob' class="search-input" id="dobForBMI" date-options="dateOptions" date-validation-us ng-model="dob" placeholder="mm/dd/yyyy" required />
+                                        <input type="text" name='dob' class="search-input" id="dobForBMI" date-options="dateOptions" date-validation-us ng-model="dob" placeholder="mm/dd/yyyy" ng-required="units==2" />
                                         <span class="input-group-addon" id="dobIcon">
                                             <span class="glyphicon glyphicon-calendar"></span>
                                         </span>
@@ -112,16 +106,15 @@
                                 <h5 class="col-md-4 col-sm-4 margin-top-10">D O B<sup class="text-red">*</sup></h5>
                                 <div class="col-md-8 col-sm-8">
                                     <div class="input-group">
-                                    <input name='dob1' class="search-input" id="dobForBMI1"
-                                           ng-model="dob"  placeholder="dd/mm/yyyy" readonly style='background-color:white;cursor: pointer' ng-required="units==1"/>
+                                    <input type="text" name='dob1' class="search-input" id="dobForBMI1" date-validation-in ng-model="dob"  placeholder="dd/mm/yyyy"  ng-required="units==1"/>
                                     <span class="input-group-addon" id="dobIcon1">
                                         <span class="glyphicon glyphicon-calendar"></span>
                                     </span>
                                     </div>
                                     <div class="text-error-message">
                                     <span ng-show="bmiSubmitted">
-                                           <span ng-show="calculateForm.dob.$error.invalidDate">Invalid date.</span>
-                                           <span ng-show="calculateForm.dob.$error.required"><span>Please enter a valid date.</span></span>
+                                           <span ng-show="calculateForm.dob1.$error.invalidDate">Invalid date.</span>
+                                           <span ng-show="calculateForm.dob1.$error.required"><span>Please enter a valid date.</span></span>
                                     </span>
                                     </div>
                                 </div>
@@ -246,6 +239,7 @@
         </div>
     </div>
 </div>
+  </div>
 <!-- End Testimonials Section -->
 <!-- <div id="parallax-one" class="parallax">
     <div class="parallax-text-container">
@@ -525,4 +519,5 @@ function getSelectionStart(o) {
         return o.value.lastIndexOf(r.text)
     } else return o.selectionStart
 }
+
 </script>
