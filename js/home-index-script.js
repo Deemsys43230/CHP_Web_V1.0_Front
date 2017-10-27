@@ -26,6 +26,7 @@ $(document).ready(function() {
         cursorcolor: "#424242",
         cursorwidth: "8px",
         cursorborder: "1px solid #424242",
-        cursorborderradius: 0
+        cursorborderradius: 0,
+        autohidemode: false
     });  // The document page (body)
 });
