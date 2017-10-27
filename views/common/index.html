@@ -2,7 +2,14 @@
 <script type="text/javascript">
         $(function () {
             $("#dobForBMI").datepicker({ dateFormat: "mm/dd/yy",maxDate:new Date()}).val()
-            $("#dobForBMI1").datepicker({ dateFormat: "dd/mm/yy",maxDate:new Date() }).val()
+            $(function ()
+            {
+                $('#dobForBMI1').datetimepicker({format: 'DD/MM/YYYY', ignoreReadonly: true});
+                $('#dobIcon1').click(function()
+                {
+                    $('#dobForBMI1').focus();
+                });
+            });
         });
 
     </script>
@@ -105,8 +112,8 @@
                                 <h5 class="col-md-4 col-sm-4 margin-top-10">D O B<sup class="text-red">*</sup></h5>
                                 <div class="col-md-8 col-sm-8">
                                     <div class="input-group">
-                                    <input name='dob1' class="search-input" id="dobForBMI1" date-validation-in
-                                           ng-model="dob"  placeholder="dd/mm/yyyy" ng-required="units==1" required />
+                                    <input name='dob1' class="search-input" id="dobForBMI1"
+                                           ng-model="dob"  placeholder="dd/mm/yyyy" readonly style='background-color:white;cursor: pointer' ng-required="units==1"/>
                                     <span class="input-group-addon" id="dobIcon1">
                                         <span class="glyphicon glyphicon-calendar"></span>
                                     </span>

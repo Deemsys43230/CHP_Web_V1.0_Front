@@ -127,11 +127,21 @@
                 <div class="footer-widget social-widget">
                     <h4>Mobile Apps<span class="head-line"></span></h4>
                     <p>Get our mobile apps for handy use shortly</p>
-                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 no-padding">
-                        <img title="App Store" class="margin-top-20" src="../../images/Appstore.png">
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 no-padding text-center">
+                        <img title="App Store - Coming Soon" class="margin-top-20" src="../../images/appstore.png">
                     </div>
-                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 no-padding">
-                        <a href="https://play.google.com/store/apps/details?id=com.deemsysinc.cyberhealthapp" target="_blank"><img title="Google Play" style="height: 33px;" class="margin-top-20" src="../../images/googleplay.png"></a>
+                    <div ng-cloak class="noMobileApp">
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 no-padding">
+                            <a href="https://play.google.com/store/apps/details?id=com.deemsysinc.cyberhealthapp" target="_blank"><img title="Google Play" class="margin-top-20" src="../../images/googleplay.png"></a>
+                        </div>
+                    </div>
+                    <div ng-cloak class="mobileApp">
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 no-padding android">
+                            <a href="https://play.google.com/store/apps/details?id=com.deemsysinc.cyberhealthapp" target="_blank"><img title="Google Play" class="margin-top-20" src="../../images/googleplay.png"></a>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 no-padding iphone">
+                            <img title="We are Working for this App"  class="margin-top-20" src="../../images/googleplay.png">
+                        </div>
                     </div>
                 </div>
             </div><!-- .col-md-3 -->
@@ -295,6 +305,35 @@
 <script src="../../app/commonApp.js"></script>
 <script src="../../js/home-index-script.js"></script>
 <script src="../../js/feedback.js"></script>
+
+
+<script type="text/javascript">
+
+    /* finding user device*/
+
+    var isAndroid = (/android/i.test(navigator.userAgent.toLowerCase()));
+    var isIphone = (/iphone/i.test(navigator.userAgent.toLowerCase()));
+
+    $(".android").hide();
+    $(".iphone").hide();
+    $(".mobileApp").hide();
+    $(".noMobileApp").show();
+
+    if(isAndroid){
+        $(".mobileApp").show();
+        $(".noMobileApp").hide();
+        $(".android").show();
+        $(".iphone").hide();
+    }
+    else if(isIphone){
+        $(".mobileApp").show();
+        $(".noMobileApp").hide();
+        $(".android").hide();
+        $(".iphone").show();
+    }
+    $(".modal_trigger").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
+
+</script>
 
 </body>
 </html>
