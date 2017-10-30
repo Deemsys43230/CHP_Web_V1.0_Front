@@ -243,6 +243,7 @@ commonApp.directive('dateValidation', function() {
 
 //Date Directive for US BMI calculation
 commonApp.directive('dateValidationUs', function() {
+
     return {
         restrict: 'A',
         require : 'ngModel',
@@ -261,7 +262,7 @@ commonApp.directive('dateValidationUs', function() {
         });
                 
                 checkDateUS = function(inputDate) {
-                    var mm = parseInt(inputDate.substr(0,2));
+                    var mm = parseInt(inputDate.substr(0,2)-1);
                     var dd = parseInt(inputDate.substr(3,4));
                     var yy = parseInt(inputDate.substr(6,9));
 

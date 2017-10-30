@@ -491,10 +491,12 @@
                                                 </div>
                                             </div>
                                             <div class="col-md-12 margin-bottom-60"><hr/></div>
+                                                <!--<div class="col-md-offset-5" ng-show="submittedAssessment"><span class="text-red text-center">Please &nbsp;fill&nbsp;out&nbsp;All&nbsp;Answers</span></div><br/>-->
                                                 <div class="col-md-offset-4 col-md-8">
-                                                <a href="" ng-disabled="assessmentsForm.$invalid || submitButton" class="btn btn-success" ng-click="doCompleteAssessment()">{{assessmentBtnTxt}}</a>
+                                                <a href="" ng-disabled="submitButton" class="btn btn-success" ng-click="doCompleteAssessment()">{{assessmentBtnTxt}}</a>
                                                 <a href="" ng-click="assessmentOptions.showAssessment=false" class="btn btn-danger">Cancel </a>
-                                                </div>
+                                            </div>
+
                                             </div>
                                         </div>
                                  </form>
@@ -534,7 +536,7 @@
                                 <div class="row msg_container"  id="{{chatMessage.logid}}" ng-class="{'chat-selected':chatMessage.selectedChat==1}">
                                     <div class="col-md-10 col-xs-10 col-sm-10" ng-if="chatMessage.sentby==3">
                                         <div class="messages msg_sent">
-                                            <p>{{chatMessage.message}}</p><i ng-show="chatMessage.status==1" class="fa fa-check message-read" aria-hidden="true"></i>
+                                            <p class="wrap">{{chatMessage.message}}</p><i ng-show="chatMessage.status==1" class="fa fa-check message-read" aria-hidden="true"></i>
                                             <time datetime="2009-11-13T20:00">{{chatMessage.msgtime}}</time>
                                         </div>
                                     </div>
@@ -547,7 +549,7 @@
                                     </div>
                                     <div class="col-md-10 col-xs-10 col-sm-10 col-lg-10"  ng-if="chatMessage.sentby==2">
                                         <div class="messages msg_receive">
-                                            <p>{{chatMessage.message}}</p>
+                                            <p class="wrap">{{chatMessage.message}}</p>
                                             <time datetime="2009-11-13T20:00">{{chatMessage.msgtime}}</time>
                                         </div>
                                     </div>

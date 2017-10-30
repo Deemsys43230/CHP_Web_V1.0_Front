@@ -67,7 +67,7 @@
                                     </span>
                                 </div>
                                 <div class="col-lg-4 col-md-4 col-sm-4 padding-top-4 padding-right-0 margin-top-10">
-                                    <h5>DOB <span class="pull-right">:</span></h5>
+                                    <h5>DOB <span class="pull-right">:</span><span class="pull-right">&nbsp;<a href="" data-toggle="popover" data-trigger="hover" title="DOB Restriction" data-content="You are under the age of 13,We are requested to go with under parental guidance."><i class="fa fa-info-circle"></i></a>&nbsp;</span></h5>
                                 </div>
                                 <div class="col-lg-8 col-md-8 col-sm-8 margin-top-10" ng-model="userProfile.dob">
                                     <div class="col-lg-3 col-md-3 col-sm-3 no-padding">
@@ -462,4 +462,11 @@
         });
 
     });
+</script>
+
+<script>
+    $(document).ready(function(){
+        $('[data-toggle="popover"]').popover();
+    });
+
 </script>

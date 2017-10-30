@@ -33,7 +33,7 @@ userApp.controller('UserProfileController',['$scope','requestHandler','Flash','$
                     dayDefault: day, /* Optional */
                     monthDefault: month, /* Optional */
                     yearDefault: year, /* Optional */
-                    minimumAge: 3, /* Optional */
+                    minimumAge: 13, /* Optional */
                     maximumAge: 100 /* Optional */
                 });
             });

@@ -1069,6 +1069,7 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
                 $scope.userAnswers.questions.push($scope.submitAnswer);
             });
         requestHandler.postRequest("user/submitassessment/",$scope.userAnswers).then(function(response){
+
           successMessage(Flash,"Successfully Submitted!");
             $scope.submitButton=false;
             $scope.assessmentBtnTxt="Complete Assessment";
@@ -1079,9 +1080,37 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
             $scope.submitButton=true;
             $scope.assessmentBtnTxt="Submitting...";
         }
+        else{
+            var errorIndex=[];
+            $.each($scope.assessments.questions,function(index,value){
+                if(value.answertype!=2){
+                    if(value.useranswer==null){
+                        errorIndex.push(index);
+                     }
+                }else{
+                    var isAnswerSelected=false;
+                    $.each(value.answers,function(ansindex,answer){
+                        if(answer.checked){
+                            isAnswerSelected=true;
+                        }
+                    });
+                    if(!isAnswerSelected)
+                        errorIndex.push(index);
+
+                }
+            });
+
+            if(errorIndex.length>0){
+                var offset = $("#error_"+errorIndex[0]).offset().top -150;
+                $('html, body').animate({scrollTop : offset},"slow");
+            }
+        }
 
     };
 
+    $scope.isClean = function() {
+        return angular.equals ($scope.originalAssesments, $scope.assessments);
+    };
     //Check for validation
     $scope.validateAnswers=function(){
         var isNoError=true;
@@ -1092,8 +1121,9 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
                     if(value.useranswer==null){
                         isNoError=false;
                         $("#error_"+index).show();
-                    }else {
+                     }else {
                         $("#error_"+index).hide();
+
                     }
                 }else{
                     var isAnswerSelected=false;
@@ -1107,6 +1137,7 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
                         $("#error_"+index).hide();
                     else
                         $("#error_"+index).show();
+
                 }
         });
         }

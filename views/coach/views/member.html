@@ -71,7 +71,7 @@
                         <div class="row msg_container" id="{{chatMessage.logid}}" ng-class="{'chat-selected':chatMessage.selectedChat==1}">
                             <div class="col-md-10 col-xs-10 col-lg-10 col-sm-10" ng-if="chatMessage.sentby==2">
                                 <div class="messages msg_sent">
-                                    <p>{{chatMessage.message}}</p><i ng-show="chatMessage.status==1" class="fa fa-check message-read" aria-hidden="true"></i>
+                                    <p class="wrap">{{chatMessage.message}}</p><i ng-show="chatMessage.status==1" class="fa fa-check message-read" aria-hidden="true"></i>
                                     <time datetime="2009-11-13T20:00">{{chatMessage.msgtime }}</time>
                                 </div>
                             </div>
@@ -84,7 +84,7 @@
                             </div>
                             <div class="col-md-10 col-xs-10 col-sm-10 col-lg-10"  ng-if="chatMessage.sentby==3">
                                 <div class="messages msg_receive">
-                                    <p>{{chatMessage.message}}</p>
+                                    <p class="wrap">{{chatMessage.message}}</p>
                                     <time datetime="2009-11-13T20:00">{{chatMessage.msgtime}}</time>
                                 </div>
                             </div>
