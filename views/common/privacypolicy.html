@@ -2,8 +2,9 @@
 <div class="page-banner" ng-cloak class="ng-cloak">
     <div id="w" class="clearfix">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 min-height-450">
-            <span class="pull-right">Last Updated On : {{userprivacypolicydetails.dateupdated}}</span>
-            <h4 class="classic-title col-xs-12"><span>Privacy Policy</span></h4>
+            <div class="pull-right hidden-xs margin-top-30">Last Updated On : {{userprivacypolicydetails.dateupdated}}</div>
+            <div class="pull-right hidden-lg hidden-md hidden-sm" style="margin-top: 60px;">Last Updated On : {{userprivacypolicydetails.dateupdated}}</div>
+            <h4 class="classic-title"><br/><span>Privacy Policy</span></h4>
             <div class="margin-top-20 wrap" ng-bind-html="userprivacypolicydetails.content | html"></div>
         </div>
     </div>
