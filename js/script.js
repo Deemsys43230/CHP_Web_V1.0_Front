@@ -99,7 +99,9 @@ $(document).ready(function ($) {
 		percentTime;
 
     var touchslider=$('.touch-slider');
-    touchslider.each(function(){
+    touchslider.find('.owl-prev').html('<i class="fa fa-angle-left"></i>');
+    touchslider.find('.owl-next').html('<i class="fa fa-angle-right"></i>');
+    /*touchslider.each(function(){
         var returnSliderNav;
         var returnSliderPag;
         var returnSliderProgressBar;
@@ -143,7 +145,7 @@ $(document).ready(function ($) {
 			afterInit : returnSliderProgressBar,
 			afterMove : moved,
 			startDragging : pauseOnDragging
-		});
+		});*/
 		
 	});
 
@@ -471,8 +473,8 @@ $(document).ready(function ($) {
 	/*	Change Slider Nav Icons
 	/*----------------------------------------------------*/
 
-    touchslider.find('.owl-prev').html('<i class="fa fa-angle-left"></i>');
-    touchslider.find('.owl-next').html('<i class="fa fa-angle-right"></i>');
+    /*touchslider.find('.owl-prev').html('<i class="fa fa-angle-left"></i>');
+    touchslider.find('.owl-next').html('<i class="fa fa-angle-right"></i>');*/
 
     var carouselcontroll = $('.touch-carousel, .testimonials-carousel');
 
@@ -581,9 +583,7 @@ $(document).ready(function ($) {
 
 
 		
-	})();
-});
-
+	});
 
 
 
