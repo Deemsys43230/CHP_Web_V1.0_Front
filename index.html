@@ -2,7 +2,7 @@
 <!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
 <!--[if (gte IE 9)|!(IE)]><html lang="en" class="no-js"> <![endif]-->
 
-<html lang="en">
+<html lang="en" class="body-bg">
 <head>
 
     <style>
@@ -40,8 +40,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css"/>
 
     <!-- slide show -->
-    <link type="text/css" rel="stylesheet" href="css/supersized.css"/>
-    <link type="text/css" rel="stylesheet" href="css/supersized.shutter.css"/>
+   <!--  <link type="text/css" rel="stylesheet" href="css/supersized.css"/>
+    <link type="text/css" rel="stylesheet" href="css/supersized.shutter.css"/> -->
 
     <!-- Custom links  -->
     <!-- combine of style, passowrd, font-site, yellow, spinner, loader css files  -->
@@ -63,7 +63,7 @@
         <style>svg {width: 100%; height: 100%}</style>
 </head>
 
-<body ng-app="commonApp">
+<body ng-app="commonApp" >
 
 <!-- Full Body Container -->
 <div id="container" class="boxed-page" ng-controller="LoginController">
@@ -574,8 +574,8 @@
 <script src="app/commonApp.js"></script>
 <script src="js/home-index-script.js"></script>
 <script type="text/javascript" src="js/jquery.easing.min.js"></script>
-<script type="text/javascript" src="js/supersized.3.2.7.min.js"></script>
-<script type="text/javascript" src="js/supersized.shutter.min.js"></script>
+<!-- <script type="text/javascript" src="js/supersized.3.2.7.min.js"></script>
+<script type="text/javascript" src="js/supersized.shutter.min.js"></script> -->
 
 
 <!-- datepicker require jQuery-ui script -->
@@ -596,6 +596,7 @@
 
 </script>
 
+
 <!--Hide nicescroll for mobile devices-->
 <script type="text/javascript">
     var isMobile = (/android| iphone/i.test(navigator.userAgent.toLowerCase()));
@@ -604,29 +605,6 @@ if(!isMobile) {
          document.write('<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"><script>');
     }
 
-</script>
-
-
-<script type="text/javascript">
-
-    jQuery(function($){
-        $.supersized({
-
-            // Functionality
-            slide_interval          :   6000,       // Length between transitions
-            transition              :   1,          // 0-None, 1-Fade, 2-Slide Top, 3-Slide Right, 4-Slide Bottom, 5-Slide Left, 6-Carousel Right, 7-Carousel Left
-            transition_speed        :   700,        // Speed of transition
-
-            // Components
-            slide_links             :   'blank',    // Individual links for each slide (Options: false, 'num', 'name', 'blank')
-            slides                  :   [           // Slideshow Images
-                {image : 'images/gym.jpg', title : '', thumb : '', url : ''}
-            ]
-
-        });
-    });
-
-$('#featuresDiv').load('images/info/features.svg');
 </script>
 
 <script type="text/javascript">
@@ -656,5 +634,27 @@ $('#featuresDiv').load('images/info/features.svg');
   $(".modal_trigger").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
 
 </script>
+
+<!-- <script type="text/javascript">
+
+    jQuery(function($){
+        $.supersized({
+
+            // Functionality
+            slide_interval          :   6000,       // Length between transitions
+            transition              :   1,          // 0-None, 1-Fade, 2-Slide Top, 3-Slide Right, 4-Slide Bottom, 5-Slide Left, 6-Carousel Right, 7-Carousel Left
+            transition_speed        :   700,        // Speed of transition
+
+            // Components
+            slide_links             :   'blank',    // Individual links for each slide (Options: false, 'num', 'name', 'blank')
+            slides                  :   [           // Slideshow Images
+                {image : 'images/gym.jpg', title : '', thumb : '', url : ''}
+            ]
+
+        });
+    });
+
+$('#featuresDiv').load('images/info/features.svg');
+</script> -->
 </body>
 </html>
