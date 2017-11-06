@@ -10,8 +10,7 @@
 
 
 <!-- Start Testimonials Section -->
-        <div id="ascrail2000">
-  <div class="section service">
+<div class="section service">
     <div class="container">
         <div class="row">
                 <div class="col-md-12">
@@ -36,7 +35,7 @@
                                 <div class="col-md-4 margin-top5 margin-bottom-15 unit">
                                     <div class="btn-group" data-toggle="buttons">
                                         <label class="btn btn-default active unit-toggle-label"  ng-click="test('mUnit')">
-                                            <input type="radio" name="unit" ng-model="units"  id="option1" autocomplete="off"> Metric
+                                            <input type="radio" name="unit" ng-model="units"  id="option1" autocomplete="off" autofocus> Metric
                                         </label>
                                         <label class="btn btn-default unit-toggle-label"  ng-click="test('uUnit')">
                                             <input type="radio" name="unit" ng-model="units"  id="option2" autocomplete="off"> &nbsp;&nbsp;&nbsp;US&nbsp;&nbsp;&nbsp;
@@ -86,7 +85,7 @@
                                     <h5 class="col-md-4 col-sm-4 margin-top-10">D O B<sup class="text-red">*</sup></h5>
                                     <div class="col-md-8 col-sm-8">
                                         <div class="input-group">
-                                        <input type="text" name='dob' class="search-input" id="dobForBMI" date-options="dateOptions" date-validation-us ng-model="dob" placeholder="mm/dd/yyyy" ng-required="units==2" />
+                                        <input type="text" name='dob' class="search-input" id="dobForBMI" date-options="dateOptions" date-validation-us ng-model="dob" placeholder="mm/dd/yyyy" ng-required="units==2"/>
                                         <span class="input-group-addon" id="dobIcon">
                                             <span class="glyphicon glyphicon-calendar"></span>
                                         </span>
@@ -106,7 +105,8 @@
                                 <h5 class="col-md-4 col-sm-4 margin-top-10">D O B<sup class="text-red">*</sup></h5>
                                 <div class="col-md-8 col-sm-8">
                                     <div class="input-group">
-                                    <input type="text" name='dob1' class="search-input" id="dobForBMI1" date-validation-in ng-model="dob"  placeholder="dd/mm/yyyy"  ng-required="units==1"/>
+                                    <input name='dob1' class="search-input" id="dobForBMI1" date-validation-in
+                                           ng-model="dob"  placeholder="dd/mm/yyyy" ng-required="units==1" />
                                     <span class="input-group-addon" id="dobIcon1">
                                         <span class="glyphicon glyphicon-calendar"></span>
                                     </span>
@@ -147,6 +147,7 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
 
                         <div class="col-md-12 col-sm-12 no-padding margin-top-10">
                             <div class="col-md-6 col-sm-12 no-padding">
@@ -238,7 +239,6 @@
         </div>
     </div>
 </div>
-  </div>
 <!-- End Testimonials Section -->
 <!-- <div id="parallax-one" class="parallax">
     <div class="parallax-text-container">
@@ -518,5 +518,4 @@ function getSelectionStart(o) {
         return o.value.lastIndexOf(r.text)
     } else return o.selectionStart
 }
-
 </script>
