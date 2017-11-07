@@ -206,36 +206,39 @@ userApp.controller('UserProfileController',['$scope','requestHandler','Flash','$
                  $scope.sizeError=false;
                  $scope.fileTypeError=false; 
       if(!$scope.imageAdded){
-       var imgFile=document.getElementById('imgfile').files;
-       if(imgFile.length > 0){
-        var _URL = window.URL || window.webkitURL;
-         
-        var imgusFile=document.getElementById('imgfile').files[0];
-        var imgusName=imgusFile.name;
-        var validFormats = ['jpg','jpeg','png'];
-        var extn = imgusName.split(".").pop();     //getting extension of selected file
-          if(validFormats.indexOf(extn) == -1){    //checking file extension wih valid file format extesion
-         
-            $timeout( function(){ 
-            $scope.fileTypeError=true;    
-            $scope.imageUploaded=true;
-            $scope.imageAdded=false;
-          },100);
-         }    
+        var imgFile=document.getElementById('imgfile').files;
+        if(imgFile.length > 0){
+            var _URL = window.URL || window.webkitURL;
+             
+            var imgusFile=document.getElementById('imgfile').files[0];
+            var imgusName=imgusFile.name;
+            var validFormats = ['jpg','jpeg','png'];
+            var extn = imgusName.split(".").pop();     //getting extension of selected file
+                if(validFormats.indexOf(extn) == -1){    //checking file extension wih valid file format extesion
+                 
+                    $timeout( function(){ 
+                    $scope.fileTypeError=true;    
+                    $scope.imageUploaded=true;
+                    $scope.imageAdded=false;
+                    },100);
+                }    
      
          img = new Image();
         img.onload = function () {
-         if(this.width < 200 || this.height < 200)   //checking the height and width of imagefile while uploading  
-            {
-               
-                $timeout( function(){         //timeout for image preview
-                $scope.sizeError=true;
-                $scope.imageUploaded=true;
-                 $scope.imageAdded=false;  
-                },100);
 
-                 }
-                  }
+
+            if(this.width < 200 || this.height < 200)   //checking the height and width of imagefile while uploading  
+                {
+               
+                    $timeout( function(){         //timeout for image preview
+                    $scope.sizeError=true;
+                    $scope.imageUploaded=true;
+                     $scope.imageAdded=false;  
+                    },100);
+
+                }
+            }
+
                   img.src = _URL.createObjectURL(imgusFile);
                 $scope.inputContainsFile=false;
                 $scope.imageAdded=true;
@@ -258,7 +261,15 @@ userApp.controller('UserProfileController',['$scope','requestHandler','Flash','$
     $scope.doUpdateProfileImage=function(){
         //Convert the image to base 64
         $scope.spinner=true;
-        var image = $('.image-editor').cropit('export');
+
+        /*var image = $('.image-editor').cropit('export');*/
+          var image = $('.image-editor').cropit('export', {
+              type: 'image/jpeg',
+              quality: .9,
+              originalSize: true
+            });
+        
+        
 
         requestHandler.postRequest("uploadProfileImage/",{'imageurl':image}).then(function(response){
             $scope.refreshImage();
