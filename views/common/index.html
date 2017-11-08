@@ -8,7 +8,6 @@
     </script>
 
 
-
 <!-- Start Testimonials Section -->
 <div class="section service">
     <div class="container">
@@ -29,7 +28,7 @@
                         </div>
                     </div>
                     <div class="col-md-12 col-sm-12 col-xs-12 calculator-section margin-top-10">
-                        <form name="calculateForm" ng-show="showForm" novalidate>
+                        <form name="calculateForm" ng-show="showForm" novalidate id="bmi_form">
                             <div class="col-md-12 col-sm-12">
                                 <h3 class="text-muted margin-bottom-15 col-md-4">Calculate Your BMI</h3>
                                 <div class="col-md-4 margin-top5 margin-bottom-15 unit">
@@ -42,27 +41,31 @@
                                         </label>
                                     </div>
                                 </div>
+
                             </div>
                             <div class="col-md-12 col-sm-12  no-padding">
                                 <div class="col-md-6 col-sm-12  no-padding">
                                     <h5 class="col-md-4 col-sm-4 margin-top-10">Height <sup class="text-red">*</sup></h5>
                                     <div ng-show="units==2">
                                     <div class="col-md-4 col-sm-4">
-                                        <input class="calculator-input" name="feet" ng-model="feet" maxlength="2" ng-required="units==2">
+                                        <input class="calculator-input" name="feet" ng-model="feet" maxlength="2" ng-required="units==2" ng-change="maxHeightCheckFeet(feet)" ng-pattern="/^0*[1-9]\d*$/">
                                         <div class="text-count-position"><span class="text-unit">ft</span></div>
+                                        <span class="text-error-message" ng-show="!calculateForm.feet.$error.required&&maxHeightFeet"><span>Please&nbsp;Enter&nbsp;Valid&nbsp;Height</span></span>
                                         <div class="text-error-message">
                                         <span ng-show="bmiSubmitted">
                                             <span ng-show="calculateForm.feet.$error.required"><span>Required.</span></span>
+                                             <span ng-show="calculateForm.feet.$error.pattern"><span>Invalid&nbsp;Format.</span></span>
                                         </span>
                                         </div>
                                     </div>
                                     <div class="col-md-4 col-sm-4">
-                                        <input class="calculator-input" name="inches" ng-model="inches" maxlength="2" ng-required="units==2" ng-change="maxHeightCheck(inches)">
+                                        <input class="calculator-input" name="inches" ng-model="inches" maxlength="2" ng-required="units==2" ng-change="maxHeightCheck(inches)" ng-pattern="/^0*[1-9]\d*$/">
                                         <div class="text-count-position"><span class="text-unit">in</span></div>
                                         <span class="text-error-message" ng-show="!calculateForm.inches.$error.required&&maxHeightInches"><span>Please&nbsp;Enter&nbsp;Valid&nbsp;Height</span></span>
                                         <div class="text-error-message">
                                         <span ng-show="bmiSubmitted">
                                             <span ng-show="calculateForm.inches.$error.required"><span>Required.</span></span>
+                                              <span ng-show="calculateForm.inches.$error.pattern"><span>Invalid&nbsp;Format.</span></span>
                                         </span>
                                         </div>
                                     </div>
@@ -166,7 +169,11 @@
                             </div>
                             <div class="col-md-6 col-sm-12 margin-top-10 text-right">
                                 <div class="hidden-lg hidden-md"><div class="margin-top-10"></div></div>
+
+                                <a href=""  id="reset_form" class="view-text-color padding-right-10" ng-click="reset()">Reset</a>
                                 <a href="" class="btn-dis main_button red_button" ng-click="bmiSubmitted=true; calculateEMI(calculateForm.$valid)" ng-disabled="maxHeightInches">GET MY RESULT</a>
+
+
                             </div>
                         </div>
 
@@ -518,4 +525,9 @@ function getSelectionStart(o) {
         return o.value.lastIndexOf(r.text)
     } else return o.selectionStart
 }
+
+// To reset bmi calculationform
+$('#reset_form').click(function(){
+    $('#bmi_form')[0].reset();
+});
 </script>

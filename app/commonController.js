@@ -87,16 +87,9 @@ commonApp.controller('CommonController',['$scope','requestHandler','Flash','$rou
     $scope.test=function(unitVar){
        if(unitVar=='mUnit'){
            $scope.units=1;
-           $scope.height="";
-           $scope.weight="";
-           $scope.dob="";
        }
        else if(unitVar){
            $scope.units=2;
-           $scope.feet="";
-           $scope.inches="";
-           $scope.weight="";
-           $scope.dob="";
        }
     };
 
@@ -147,7 +140,7 @@ commonApp.controller('CommonController',['$scope','requestHandler','Flash','$rou
 
 
 
-    //To check maximum Height
+    //To check maximum Height in inches
     $scope.maxHeightInches=false;
     $scope.maxHeightCheck = function(height){
         if(height <=11){
@@ -158,10 +151,24 @@ commonApp.controller('CommonController',['$scope','requestHandler','Flash','$rou
         }
 
     };
+    //To check maximum Height in feet
+    $scope.maxHeightFeet=false;
+    $scope.maxHeightCheckFeet = function(height){
+        if(height <=12){
+            $scope.maxHeightFeet=false;
+        }
+        else if(height >12){
+            $scope.maxHeightFeet=true;
+        }
+
+    };
     $scope.returnToCalculate=function(){
         $scope.showForm=true;
     };
-
+// To reset form
+    $scope.reset=function(){
+        $scope.showForm=true;
+    };
     $timeout(function(){
         $scope.doGetNewsByUser();
         $scope.doGetTestimonialsByUser();
