@@ -66,3 +66,116 @@ simple-calendar .day.disabled {
   color: silver;
   background-color: white;
 }
+
+
+/* Calendar */
+simple-calendar .calendar{
+   padding: 0;
+   border: 1px solid #dddddd;
+   background-color: #fff;
+ }
+simple-calendar .move-month {
+  cursor: pointer;
+ }
+
+simple-calendar .prev-month {
+  float: left;
+  color: #ffffff;
+  font-size: 30px;
+  background: #000000;
+  padding: 5px;
+  margin-top: -5px;
+  }
+simple-calendar .next-month {
+    float: right;
+    color: #ffffff;
+    font-size: 30px;
+    background: #000000;
+    padding: 5px;
+    margin-top: -5px;
+    }
+
+simple-calendar .current-month {
+    width: 100%;
+    text-align: center;
+    padding: 20px 8px;
+    border: 1px solid #fdae21;
+    background-color: #fdae21;
+    color: #000000;
+    font-size: 24px;
+    text-transform: uppercase;
+    font-weight: 800;
+  }
+
+simple-calendar .week {
+    height: 80px!important;
+  }
+simple-calendar .day:last-child {
+   border-right: none;
+ }
+
+simple-calendar .weekday {
+         text-align: center;
+         border-right: 1px solid #ddd;
+         color: #fdae21;
+         font-weight: 800;
+         padding: 15px !important;
+         height: 50px;
+     }
+
+simple-calendar .weekday:last-child {
+    border-right: none;
+}
+
+simple-calendar .weekday, .day {
+    display: inline-block;
+    width: calc(100% / 7);
+    width: 14.28% !important;
+}
+
+simple-calendar  .day {
+    height: 80px !important;
+    border: 1px solid #dddddd;
+    border-bottom: none;
+    border-left: none;
+    padding-top: 30px !important;
+    overflow: hidden;
+    color: #000000;
+    text-align: center;
+  }
+
+ simple-calendar .day.default {
+  border: solid 1px #4883ed;
+}
+simple-calendar .day.selectedDay{
+  background-color: #fdae21 !important;
+}
+simple-calendar .day.scheduledDay{
+  background-color: #dcffda;
+}
+simple-calendar .day.notavailableDay{
+  background-color: #f7dcdc;
+}
+simple-calendar .day:hover{
+  cursor: pointer;
+  background-color: #fdae21!important;
+}
+simple-calendar .day:disabled{
+  cursor: default;
+  color: silver;
+  background-color: white;
+}
+
+simple-calendar .day:disabled .prev-month{
+  float: left;
+  color: #ffffff;
+  font-size: 30px;
+  }
+
+simple-calendar .appointment-div{
+  height: 64px;
+  border: 2px solid #fdae21;
+  text-align: center;
+  padding-top: 20px;
+  font-size: 18px;
+}

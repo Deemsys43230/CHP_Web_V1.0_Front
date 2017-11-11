@@ -2254,24 +2254,21 @@ function errorMessage(Flash, message) {
   $('html, body').animate({ scrollTop: 0 }, 600);
   return false;
 }
-//Check For Email Validation
-adminApp.directive('validateEmail', function () {
-  var EMAIL_REGEXP = /^[_A-Za-z0-9-]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9-]+)*(\.[A-Za-z]{2,5})$/;
-  return {
-    require: 'ngModel',
-    restrict: '',
-    link: function (scope, elm, attrs, ctrl) {
-      // only apply the validator if ngModel is present and Angular has added the email validator
-      if (ctrl && ctrl.$validators.email) {
-        // this will overwrite the default Angular email validator
-        ctrl.$validators.email = function (modelValue) {
-          return ctrl.$isEmpty(modelValue) || EMAIL_REGEXP.test(modelValue);
-        };
-      }
-    }
-  };
-});
+//Check for Email Validation
+adminApp.directive('validateEmail', function() {
+    var EMAIL_ID =/^\S+@(([a-zA-Z0-9]{2}([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,6})$/;
 
+    return {
+        require: 'ngModel',
+        restrict: '',
+        link: function(scope, elm, attrs, ctrl) {
+            // only apply the validator if ngModel is present and Angular has added the Integer validator
+            ctrl.$validators.validateEmail = function(modelValue) {
+                return  ctrl.$isEmpty(modelValue) || EMAIL_ID.test(modelValue);
+            };
+        }
+    };
+});
 
 
 

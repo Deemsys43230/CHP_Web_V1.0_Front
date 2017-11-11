@@ -3444,7 +3444,7 @@ ul.icons-list li i {
 
 .service {
     background-color: rgba(255,255,255,1);
-    padding: 10px 0 !important;
+    padding: 10px 0 ;
 }
 
 .service1 {
@@ -17921,125 +17921,13 @@ select.event:focus {
     height: 410px;
 }
 
-/* Calendar */
-  .calendar{
-    padding: 0;
-    border: 1px solid #dddddd;
-    background-color: #fff;
-  }
-
-  .move-month {
-    cursor: pointer;
-   }
-
-  .prev-month {
-    float: left;
-    color: #ffffff;
-    font-size: 30px;
-    background: #000000;
-    padding: 5px;
-    margin-top: -5px;
-    }
-
-  .next-month {
-    float: right;
-    color: #ffffff;
-    font-size: 30px;
-    background: #000000;
-    padding: 5px;
-    margin-top: -5px;
-    }
-
-  .current-month {
-    width: 100%;
-    text-align: center;
-    padding: 20px 8px;
-    border: 1px solid #fdae21;
-    background-color: #fdae21;
-    color: #000000;
-    font-size: 24px;
-    text-transform: uppercase;
-    font-weight: 800;
-  }
-
-  .week {
-    height: 80px!important;
-    .day:last-child {
-      border-right: none;
-    }
-  }
-
-  .weekday {
-    text-align: center;
-    border-right: 1px solid #ddd;
-    color: #fdae21;
-    font-weight: 800;
-    padding: 15px !important;
-    height: 50px;
-    }
-
-   .weekday:last-child {
-    border-right: none;
-   }
-
-  .weekday, .day {
-    display: inline-block;
-    /*width: calc(100% / 7);*/
-    width: 14.28% !important;
-  }
-
-  .day {
-    height: 80px !important;
-    border: 1px solid #dddddd;
-    border-bottom: none;
-    border-left: none;
-    padding-top: 30px !important;
-    overflow: hidden;
-    color: #000000;
-    text-align: center;
-  }
-
- simple-calendar .day.default {
-  border: solid 1px #4883ed;
-}
-  .day.selectedDay{
-    background-color: #fdae21 !important;
-  }
-  .day.scheduledDay{
-    background-color: #dcffda;
-  }
-  .day.notavailableDay{
-    background-color: #f7dcdc;
-  }
-  .day:hover{
-    cursor: pointer;
-    background-color: #fdae21!important;
-  }
-  .day:disabled{
-    cursor: default;
-    color: silver;
-    background-color: white;
-  }
-
-  .day:disabled .prev-month{
-    float: left;
-    color: #ffffff;
-    font-size: 30px;
-    }
-
-  .appointment-div{
-    height: 64px;
-    border: 2px solid #fdae21;
-    text-align: center;
-    padding-top: 20px;
-    font-size: 18px;
-  }
 
   .book-appointment{
     border: 1px solid #dddddd;
     height: 449px;
     margin-top: 2px;
-   /* background: #fff9de;*/
+    background: #fff9de;
+
   }
 
   .schedule-btn{
@@ -18282,6 +18170,22 @@ select.event:focus {
     padding: 0;
     width:250px;
     text-overflow: ellipsis;
+}
+
+/*datepicker table*/
+.datetimepicker .table td, .datetimepicker .table th {
+    border: 0;
+    border-radius: 4px;
+    height: 20px;
+    text-align: center;
+}
+/*.table-condensed>thead>tr>th, .table-condensed>tbody>tr>th, .table-condensed>tfoot>tr>th, .table-condensed>thead>tr>td, .table-condensed>tbody>tr>td, .table-condensed>tfoot>tr>td{
+    padding:18px;
+}*/
+/*datepicker cursor*/
+.datepicker_cursor{
+    background-color:white;
+    cursor: pointer;
 }
 
 

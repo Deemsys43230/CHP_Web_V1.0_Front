@@ -46,7 +46,7 @@
                                 <div> Email ID <span class="pull-right">:</span></div>
                             </div>
                             <div class="col-lg-8 col-md-7 col-sm-12 margin-top-10">
-                                <input class="coach-input" placeholder="example@gmail.com" name="emailid" ng-model="coach.emailid" maxlength="50" required/>
+                                <input class="coach-input" placeholder="example@gmail.com" name="emailid" ng-model="coach.emailid" maxlength="50" required validate-email/>
                                 <span ng-show="coachDetailsForm.emailid.$dirty && coachDetailsForm.emailid.$invalid">
                                     <span class="error-message textarea-errormessage10" ng-show="coachDetailsForm.emailid.$error.required"><span>Required.</span></span>
                                     <span class="error-message textarea-errormessage10" ng-show="coachDetailsForm.emailid.$error.validateEmail"><span>Enter&nbsp;valid&nbsp;Email.</span></span>

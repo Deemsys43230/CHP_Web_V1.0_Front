@@ -87,6 +87,7 @@ commonApp.controller('CommonController',['$scope','requestHandler','Flash','$rou
     $scope.test=function(unitVar){
        if(unitVar=='mUnit'){
            $scope.units=1;
+
        }
        else if(unitVar){
            $scope.units=2;
@@ -113,6 +114,7 @@ commonApp.controller('CommonController',['$scope','requestHandler','Flash','$rou
             var mHt = $scope.height/100; //Height in meter
             $scope.minWeight = 18.6 * mHt * mHt; $scope.maxWeight = 24.9 * mHt * mHt; //Min and max weight
             $scope.weightRange = ""+Math.round($scope.minWeight)+" and "+Math.round($scope.maxWeight)+" kgs";
+            console.log($scope.dob);
         }
         else if($scope.units==2){
             var inches = (12*$scope.feet)+(1*$scope.inches);
@@ -165,15 +167,49 @@ commonApp.controller('CommonController',['$scope','requestHandler','Flash','$rou
     $scope.returnToCalculate=function(){
         $scope.showForm=true;
     };
+
 // To reset form
     $scope.reset=function(){
         $scope.showForm=true;
+        $scope.bmiSubmitted=false;
+        $scope.feet="";
+        $scope.inches="";
+        $scope.height="";
+        $scope.dob="";
+        $scope.weight="";
+        $scope.email="";
+        $scope.gender="";
+        $scope.calculateForm.$setPristine();
     };
+
+
+  //datepicker
+    $('#dobForBMI1').datetimepicker({format: 'DD-MMM-YYYY', ignoreReadonly: true}).on('dp.change', function(selected){
+        $('#dobIcon1').click(function()
+        {
+            $('#dobForBMI1').focus();
+
+        });
+
+        $scope.dob=$('#dobForBMI1').val();
+    });
+
+    $('#dobForBMI').datetimepicker({format: 'DD-MMM-YYYY', ignoreReadonly: true}).on('dp.change', function(selected){
+        $('#dobIcon').click(function()
+        {
+            $('#dobForBMI').focus();
+
+        });
+
+        $scope.dob=$('#dobForBMI').val();
+    });
+
     $timeout(function(){
         $scope.doGetNewsByUser();
         $scope.doGetTestimonialsByUser();
         $scope.doGetDashboardCount();
     });
+
 
 }]);
 
@@ -222,7 +258,6 @@ commonApp.directive('dateValidation', function() {
                   var valid = value.charAt(2) == '/' && value.charAt(5) == '/' && value.length == 10 && checkDate(value);
                   ctrl.$setValidity('invalidDate', valid);
                 }
-
                 // if it's valid, return the value to the model,
                 // otherwise return undefined.
                 return valid ? value : "undefined";

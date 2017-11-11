@@ -1035,7 +1035,7 @@ commonApp.directive('validateAlphaWithSpace', function() {
 });
 //Check for Email Validation
 commonApp.directive('validateEmail', function() {
-    var EMAIL_ID =/^\S+@(([a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,6})$/;
+    var EMAIL_ID =/^\S+@(([a-zA-Z0-9]{2}([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,6})$/;
 
     return {
         require: 'ngModel',
@@ -1131,3 +1131,19 @@ commonApp.directive('validateAlphaWithCharacters', function() {
         }
     };
 });
+
+/*
+commonApp.directive('bDatepicker', function () {
+    return {
+        restrict: 'A',
+        link: function (scope, el, attr) {
+            el.datepicker({});
+            var component = el.siblings('[data-toggle="datepicker"]');
+            if (component.length) {
+                component.on('click', function () {
+                    el.trigger('focus');
+                });
+            }
+        }
+    };
+});*/

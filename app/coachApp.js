@@ -1448,7 +1448,7 @@ coachApp.directive('validateAlphaWithSpace', function() {
 
 //Check for Email Validation
 coachApp.directive('validateEmail', function() {
-    var EMAIL_ID = /^[_A-Za-z0-9-]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9-]+)*(\.[A-Za-z]{2,5})$/;
+    var EMAIL_ID =/^\S+@(([a-zA-Z0-9]{2}([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,6})$/;
 
     return {
         require: 'ngModel',

@@ -1,14 +1,27 @@
 
-<script type="text/javascript">
+<!--<script type="text/javascript">
         $(function () {
             $("#dobForBMI").datepicker({ dateFormat: "mm/dd/yy",maxDate:new Date()}).val()
             $("#dobForBMI1").datepicker({ dateFormat: "dd/mm/yy",maxDate:new Date() }).val()
         });
 
-    </script>
+    </script>-->
+<!--<script type="text/javascript">
+    $(function ()
+    {
+        alert("zadsa");
+        $('#dobForBMI1').datetimepicker({format: 'DD/MMMM/YYYY', ignoreReadonly: true});
+        $('#dobIcon1').click(function()
+        {
+            $('#dobForBMI1').focus();
+        });
+    });
+
+</script>-->
 
 
 <!-- Start Testimonials Section -->
+       <!-- <div class="col-md-12"> Test Div</div>-->
 <div class="section service">
     <div class="container">
         <div class="row">
@@ -18,12 +31,12 @@
                     <h5 class="classic-title"><span>Your BMI</span></h5></a>
                     <div class="col-md-12 col-sm-12 col-xs-12 no-padding">
                         <div>
-                            Body Mass Index, or BMI, is used to identify whether you are lying in a 
-                            healthy weight range for your height. Knowing your BMI helps you to know 
-                            whether you are underweight, healthy weight, overweight, or obese for your 
+                            Body Mass Index, or BMI, is used to identify whether you are lying in a
+                            healthy weight range for your height. Knowing your BMI helps you to know
+                            whether you are underweight, healthy weight, overweight, or obese for your
                             height range.<br/><br/>
                         </div>
-                        <div>
+                        <div ng-show="showForm">
                             Choose US or Metric measures and fill the form to know your BMI result.
                         </div>
                     </div>
@@ -59,7 +72,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-4 col-sm-4">
-                                        <input class="calculator-input" name="inches" ng-model="inches" maxlength="2" ng-required="units==2" ng-change="maxHeightCheck(inches)" ng-pattern="/^0*[1-9]\d*$/">
+                                        <input class="calculator-input" name="inches" ng-model="inches" maxlength="2" ng-required="units==2" ng-change="maxHeightCheck(inches)" ng-pattern="/^[0-9]+$/">
                                         <div class="text-count-position"><span class="text-unit">in</span></div>
                                         <span class="text-error-message" ng-show="!calculateForm.inches.$error.required&&maxHeightInches"><span>Please&nbsp;Enter&nbsp;Valid&nbsp;Height</span></span>
                                         <div class="text-error-message">
@@ -82,47 +95,63 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div ng-show="units==2">
+                                <div class="col-md-6 col-sm-12 no-padding">
+
+                                </div>
                                 <div class="col-md-6 col-sm-12 no-padding">
                                     <div class="hidden-lg hidden-md"><div class="margin-top-10"></div></div>
-                                    <h5 class="col-md-4 col-sm-4 margin-top-10">D O B<sup class="text-red">*</sup></h5>
+                                    <h5 class="col-md-4 col-sm-4 margin-top-10">Email ID <sup class="text-red">*</sup></h5>
                                     <div class="col-md-8 col-sm-8">
-                                        <div class="input-group">
-                                        <input type="text" name='dob' class="search-input" id="dobForBMI" date-options="dateOptions" date-validation-us ng-model="dob" placeholder="mm/dd/yyyy" ng-required="units==2"/>
-                                        <span class="input-group-addon" id="dobIcon">
-                                            <span class="glyphicon glyphicon-calendar"></span>
-                                        </span>
-                                        </div>
+                                        <input type="email" class="search-input" name="email" ng-model="email" required validate-email/>
                                         <div class="text-error-message">
-                                        <span ng-show="bmiSubmitted">
-                                               <span ng-show="calculateForm.dob.$error.invalidDate">Invalid date.</span>
-                                               <span ng-show="calculateForm.dob.$error.required"><span>Please enter a valid date.</span></span>
-                                        </span>
+                                    <span ng-show="bmiSubmitted">
+                                       <span ng-show="calculateForm.email.$error.required"><span>Required.</span></span>
+                                        <span ng-show="calculateForm.email.$error.validateEmail"><span>Invalid&nbsp;Format.</span></span>
+                                    </span>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                       <!--         <div ng-show="units==2">
+                                    <div class="col-md-6 col-sm-12 no-padding">
+                                        <div class="hidden-lg hidden-md"><div class="margin-top-10"></div></div>
+                                        <h5 class="col-md-4 col-sm-4 margin-top-10">D O B <sup class="text-red">*</sup></h5>
+                                        <div class="col-md-8 col-sm-8">
+                                            <div class="input-group">
+                                                <input type="text" name='dobus' class="search-input datepicker_cursor" id="dobForBMI"  ng-model="dob" ng-required="units==2" readonly/>
+                                        <span class="input-group-addon cursor" id="dobIcon">
+                                            <span class="glyphicon glyphicon-calendar"></span>
+                                        </span>
+                                            </div>
+                                            <div class="text-error-message">
+                                        <span ng-show="bmiSubmitted">
+                                               <span ng-show="calculateForm.dobus.$error.invalidDate">Invalid date.</span>
+                                               <span ng-show="calculateForm.dobus.$error.required"><span>Please enter a valid date.</span></span>
+                                        </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             <div ng-show="units==1">
                             <div class="col-md-6 col-sm-12 no-padding">
                                 <div class="hidden-lg hidden-md"><div class="margin-top-10"></div></div>
                                 <h5 class="col-md-4 col-sm-4 margin-top-10">D O B<sup class="text-red">*</sup></h5>
                                 <div class="col-md-8 col-sm-8">
                                     <div class="input-group">
-                                    <input name='dob1' class="search-input" id="dobForBMI1" date-validation-in
-                                           ng-model="dob"  placeholder="dd/mm/yyyy" ng-required="units==1" />
-                                    <span class="input-group-addon" id="dobIcon1">
-                                        <span class="glyphicon glyphicon-calendar"></span>
-                                    </span>
+                                        <input type="text" name='dobmetric' class="search-input datepicker_cursor" id="dobForBMI1"  ng-model="dob"  ng-required="units==1" readonly/>
+                                        <span class="input-group-addon cursor" id="dobIcon1">
+                                            <span class="glyphicon glyphicon-calendar"></span>
+                                        </span>
                                     </div>
+
                                     <div class="text-error-message">
                                     <span ng-show="bmiSubmitted">
-                                           <span ng-show="calculateForm.dob1.$error.invalidDate">Invalid date.</span>
-                                           <span ng-show="calculateForm.dob1.$error.required"><span>Please enter a valid date.</span></span>
+                                           <span ng-show="calculateForm.dobmetric.$error.invalidDate">Invalid date.</span>
+                                           <span ng-show="calculateForm.dobmetric.$error.required"><span>Please enter a valid date.</span></span>
                                     </span>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div>-->
                         </div>
                         <div class="col-md-12 col-sm-12 no-padding margin-top-10">
                             <div class="col-md-6 col-sm-12 no-padding">
@@ -137,7 +166,48 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-6 col-sm-12 no-padding">
+                            <div ng-show="units==2">
+                                <div class="col-md-6 col-sm-12 no-padding">
+                                    <div class="hidden-lg hidden-md"><div class="margin-top-10"></div></div>
+                                    <h5 class="col-md-4 col-sm-4 margin-top-10">D O B <sup class="text-red">*</sup></h5>
+                                    <div class="col-md-8 col-sm-8">
+                                        <div class="input-group">
+                                            <input type="text" name='dobus' class="search-input datepicker_cursor" id="dobForBMI"  ng-model="dob" ng-required="units==2" readonly/>
+                                        <span class="input-group-addon cursor" id="dobIcon">
+                                            <span class="glyphicon glyphicon-calendar"></span>
+                                        </span>
+                                        </div>
+                                        <div class="text-error-message">
+                                        <span ng-show="bmiSubmitted">
+                                               <span ng-show="calculateForm.dobus.$error.invalidDate">Invalid date.</span>
+                                               <span ng-show="calculateForm.dobus.$error.required"><span>Please enter a valid date.</span></span>
+                                        </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div ng-show="units==1">
+                                <div class="col-md-6 col-sm-12 no-padding">
+                                    <div class="hidden-lg hidden-md"><div class="margin-top-10"></div></div>
+                                    <h5 class="col-md-4 col-sm-4 margin-top-10">D O B<sup class="text-red">*</sup></h5>
+                                    <div class="col-md-8 col-sm-8">
+                                        <div class="input-group">
+                                            <input type="text" name='dobmetric' class="search-input datepicker_cursor" id="dobForBMI1"  ng-model="dob"  ng-required="units==1" readonly/>
+                                        <span class="input-group-addon cursor" id="dobIcon1">
+                                            <span class="glyphicon glyphicon-calendar"></span>
+                                        </span>
+                                        </div>
+
+                                        <div class="text-error-message">
+                                    <span ng-show="bmiSubmitted">
+                                           <span ng-show="calculateForm.dobmetric.$error.invalidDate">Invalid date.</span>
+                                           <span ng-show="calculateForm.dobmetric.$error.required"><span>Please enter a valid date.</span></span>
+                                    </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                     <!--       <div class="col-md-6 col-sm-12 no-padding">
                                 <div class="hidden-lg hidden-md"><div class="margin-top-10"></div></div>
                                 <h5 class="col-md-4 col-sm-4 margin-top-10">Email ID <sup class="text-red">*</sup></h5>
                                 <div class="col-md-8 col-sm-8">
@@ -149,7 +219,8 @@
                                     </span>
                                     </div>
                                 </div>
-                            </div>
+                            </div>-->
+
                         </div>
 
                         <div class="col-md-12 col-sm-12 no-padding margin-top-10">
@@ -191,51 +262,51 @@
                                 <div class="margin-top-15">
                                     <i>
                                         <small ng-show="bmiUnder">
-                                                You are underweight for your height. You need to maintain your weight range between 
+                                                You are underweight for your height. You need to maintain your weight range between
                                                 <b>{{ weightRange }}</b> for a strong and healthy life.<br/><br/>
-                                                Being underweight may weaken your immune system and put you at threat. 
-                                                For better health intake foods with essential nutrients on time and burn the extra 
+                                                Being underweight may weaken your immune system and put you at threat.
+                                                For better health intake foods with essential nutrients on time and burn the extra
                                                 calories. <br/><br/>
-                                                Set a fitness goal and start tracking your daily intake, calories burnt with 
-                                                cyberhealths and reach your target weight in a healthy manner. 
-                                                <button class="loginNow btn btn-default">Sign up</button> with 
+                                                Set a fitness goal and start tracking your daily intake, calories burnt with
+                                                cyberhealths and reach your target weight in a healthy manner.
+                                                <button class="loginNow btn btn-default">Sign up</button> with
                                                 cyberhealths and commit to be fit.
                                         </small>
                                         <small ng-show="bmiHealthy">
-                                            You are sustaining a healthy weight for your height. You need to maintain your 
+                                            You are sustaining a healthy weight for your height. You need to maintain your
                                             weight range between <b>{{ weightRange }}</b> for a strong and healthy life.<br/><br/>
-                                            Maintain a healthy weight range by eating healthy, with appropriate workout 
+                                            Maintain a healthy weight range by eating healthy, with appropriate workout
                                             routines. Having healthy snacks in-between helps you to be nutritionally fit. <br/><br/>
-                                            Set a fitness goal and start tracking your daily intake, calories burnt with 
-                                            cyberhealths and maintain your weight in a healthy manner. 
-                                            <button class="loginNow btn btn-default">Sign up</button> with 
+                                            Set a fitness goal and start tracking your daily intake, calories burnt with
+                                            cyberhealths and maintain your weight in a healthy manner.
+                                            <button class="loginNow btn btn-default">Sign up</button> with
                                             cyberhealths and commit to be fit.
                                         </small>
                                         <small ng-show="bmiOver">
-                                            You are overweight for your height. You need to maintain your weight range 
+                                            You are overweight for your height. You need to maintain your weight range
                                             between <b>{{ weightRange }}</b> for a strong and healthy life. <br/><br/>
-                                            Excess weight also increases your likelihood of developing other problems 
-                                            linked to coronary heart disease, high blood sugar & cholesterol, etc. 
-                                            To achieve and maintain a healthy weight, eat healthy foods with proper 
+                                            Excess weight also increases your likelihood of developing other problems
+                                            linked to coronary heart disease, high blood sugar & cholesterol, etc.
+                                            To achieve and maintain a healthy weight, eat healthy foods with proper
                                             workout routines. Having healthy food helps you to be nutritionally fit.<br/><br/>
-                                            Set a fitness goal and start tracking your daily intake, calories burnt with 
-                                            cyberhealths and reduce your weight in a healthy manner. 
-                                            <button class="loginNow btn btn-default">Sign up</button> with 
+                                            Set a fitness goal and start tracking your daily intake, calories burnt with
+                                            cyberhealths and reduce your weight in a healthy manner.
+                                            <button class="loginNow btn btn-default">Sign up</button> with
                                             cyberhealths and commit to be fit.
                                         </small>
                                         <small ng-show="bmiObese">
-                                            You are obese for your height. You need to maintain your weight range 
+                                            You are obese for your height. You need to maintain your weight range
                                             between <b>{{ weightRange }}</b> for a strong and healthy life. <br/><br/>
-                                            Excess weight also increases your likelihood of developing other problems 
-                                            linked to coronary heart disease, high blood sugar & cholesterol, etc. 
-                                            Follow a healthy eating plan. Know your daily calorie needs and achieve 
+                                            Excess weight also increases your likelihood of developing other problems
+                                            linked to coronary heart disease, high blood sugar & cholesterol, etc.
+                                            Follow a healthy eating plan. Know your daily calorie needs and achieve
                                             it with healthy nutritional diet.<br/><br/>
-                                            Set a fitness goal and start tracking your daily intake, calories burnt 
-                                            with cyberhealths and reduce your weight in a healthy manner. 
-                                            <button class="loginNow btn btn-default">Sign up</button> with 
-                                            cyberhealths and commit to be fit.                                            
+                                            Set a fitness goal and start tracking your daily intake, calories burnt
+                                            with cyberhealths and reduce your weight in a healthy manner.
+                                            <button class="loginNow btn btn-default">Sign up</button> with
+                                            cyberhealths and commit to be fit.
                                         </small>
-                                    </i>                                    
+                                    </i>
                                 </div>
                             </div>
                         </div>
@@ -383,13 +454,24 @@
     function refreshGraph(){
         $('#myGoal').stepProgressBar('setCurrentValue', emi);
     };
-
     $('.loginNow').click(function(){
         $('.modal_trigger').click();
         $("#register_form").click();
     });
-    
+/*
+    $('.loginNow').click(function(){
+        $('.modal_trigger').click();
+        $("#login_form").click();
+
+    });*/
+
 </script>
+
+<script type="text/javascript">
+
+
+
+    </script>
 
 <script type="text/javascript">
 /*
@@ -398,29 +480,29 @@
         document.getElementById("mypicker").value=selectedDate;
 
     }); */
-    
-    $(function() {
-    $('#dobForBMI').datepicker({
-                // Consistent format with the HTML5 picker
-                    dateFormat : 'dd/mm/yy',
-                    maxDate: new Date()
-                },
-                // Localization
-                $.datepicker.regional['us']);
-  });
-  $(function() {
-      $('#dobIcon').click(function(){
-          $('#dobForBMI').focus();
-      }
-              );
-  });
-   $(function() {
-  
-      $('#dobIcon1').click(function(){
-          $('#dobForBMI1').focus();
-      }
-              );
-  });
+
+//    $(function() {
+//    $('#dobForBMI').datepicker({
+//                // Consistent format with the HTML5 picker
+//                    dateFormat : 'dd/mm/yy',
+//                    maxDate: new Date()
+//                },
+//                // Localization
+//                $.datepicker.regional['us']);
+//  });
+//  $(function() {
+//      $('#dobIcon').click(function(){
+//          $('#dobForBMI').focus();
+//      }
+//              );
+//  });
+//   $(function() {
+//
+//      $('#dobIcon1').click(function(){
+//          $('#dobForBMI1').focus();
+//      }
+//              );
+//  });
 
     $(function () {
         $(".vertical-items").bootstrapNews({

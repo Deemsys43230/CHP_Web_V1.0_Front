@@ -50,7 +50,7 @@ coachApp.controller('CoachProfileController',['$scope','requestHandler','Flash',
                         dayDefault: day, /* Optional */
                         monthDefault: month, /* Optional */
                         yearDefault: year, /* Optional */
-                        minimumAge: 3, /* Optional */
+                        minimumAge: 18, /* Optional */
                         maximumAge: 100 /* Optional */
                     });
                 });
@@ -205,7 +205,11 @@ coachApp.controller('CoachProfileController',['$scope','requestHandler','Flash',
         $scope.doUpdateProfileImage=function(){
             //Convert the image to base 64
             $scope.spinner=true;
-            var image = $('.image-editor').cropit('export');
+            var image = $('.image-editor').cropit('export', {
+                type: 'image/jpeg',
+                quality: .9,
+                originalSize: true
+            });
 
             requestHandler.postRequest("uploadProfileImage/",{'imageurl':image}).then(function(response){
                 $scope.refreshImage();

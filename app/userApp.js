@@ -1073,26 +1073,21 @@ userApp.directive('block', function () {
     }
 });
 
-//Check For Email Validation
+//Check for Email Validation
 userApp.directive('validateEmail', function() {
-    var EMAIL_REGEXP = /^[_A-Za-z0-9-]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9-]+)*(\.[A-Za-z]{2,5})$/;
+    var EMAIL_ID =/^\S+@(([a-zA-Z0-9]{2}([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,6})$/;
 
     return {
         require: 'ngModel',
         restrict: '',
         link: function(scope, elm, attrs, ctrl) {
-            // only apply the validator if ngModel is present and Angular has added the email validator
-            if (ctrl && ctrl.$validators.email) {
-
-                // this will overwrite the default Angular email validator
-                ctrl.$validators.email = function(modelValue) {
-                    return ctrl.$isEmpty(modelValue) || EMAIL_REGEXP.test(modelValue);
-                };
-            }
+            // only apply the validator if ngModel is present and Angular has added the Integer validator
+            ctrl.$validators.validateEmail = function(modelValue) {
+                return  ctrl.$isEmpty(modelValue) || EMAIL_ID.test(modelValue);
+            };
         }
     };
 });
-
 
 //Check For Only Alphabets with space
 userApp.directive('validateAlphaWithSpace', function() {
