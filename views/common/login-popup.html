@@ -23,7 +23,7 @@
                 </div>
                 <div class="iphone">
                     <!-- This is iphone -->
-                    <a href="" class="main-button">Get Mobile App Here</a>
+                    <a href="" class="main-button">Coming Soon</a>
                 </div>
             </div>
             <!-- Social Login -->
@@ -58,7 +58,8 @@
                     <a href="#" id="forgot_password" data-ng-click="reset();linkType='forgot'" class="forgot_password text-center">Forgot password?</a>
                     <div class="action_btns">
                         <div class="one_half"><a class="btn btn_red" ng-class="{'button-disable':loginForm.$invalid}" ng-click="doLogin()">Login</a></div>
-                        <div class="one_half last"><a id="register_form" class="btn">Register</a></div>
+                        <div class="one_half last noMobileApp"><a id="register_form" class="btn">Register</a></div>
+                        <div class="one_half last mobileApp"><a id="register_form_mobile" class="btn">Register</a></div>
                     </div>
                 </form>
             </div>
@@ -185,7 +186,7 @@
                 <input type="email" name="emailid" ng-model="userForm.emailid"  required validate-email emailexists/>
                     <span ng-show="registerForm.emailid.$dirty&&registerForm.emailid.$invalid && !registerForm.emailid.$pristine">
                         <span class="error-message" ng-show="registerForm.emailid.$error.required"><span>Required.</span></span>
-                       <span class="error-message" ng-show="registerForm.emailid.$error.email"><span>Enter&nbsp;valid&nbsp;Email&nbsp;ID.</span></span>
+                       <span class="error-message" ng-show="registerForm.emailid.$error.validateEmail"><span>Enter&nbsp;valid&nbsp;Email&nbsp;ID.</span></span>
 
                     </span>
                 <span class="error-message" ng-show="registerForm.emailid.$error.emailexists"><span>Email&nbsp;ID&nbsp;Already&nbsp;Exist.</span></span>
@@ -387,6 +388,20 @@
             $("#pswd_info").hide();
             return false;
         });
+
+        // Calling Register Form
+        $("#register_form_mobile").click(function(){
+            $(".user_login").show();
+            $(".secret_question").hide();
+            $(".user_register").hide();
+            $(".user_register1").hide();
+            $(".new_password_form").hide();
+            $(".header_title").text('Register');
+
+            $("#pswd_info").hide();
+            return false;
+        });
+
 
 
 // Calling Register Form

@@ -87,10 +87,15 @@ commonApp.controller('CommonController',['$scope','requestHandler','Flash','$rou
     $scope.test=function(unitVar){
        if(unitVar=='mUnit'){
            $scope.units=1;
+           $scope.height="";
+           $scope.weight="";
 
        }
        else if(unitVar){
            $scope.units=2;
+           $scope.feet="";
+           $scope.inches="";
+           $scope.weight="";
        }
     };
 

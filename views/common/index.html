@@ -458,20 +458,8 @@
         $('.modal_trigger').click();
         $("#register_form").click();
     });
-/*
-    $('.loginNow').click(function(){
-        $('.modal_trigger').click();
-        $("#login_form").click();
-
-    });*/
 
 </script>
-
-<script type="text/javascript">
-
-
-
-    </script>
 
 <script type="text/javascript">
 /*
@@ -608,8 +596,40 @@ function getSelectionStart(o) {
     } else return o.selectionStart
 }
 
+
+/* finding user device*/
+
+var isAndroid = (/android/i.test(navigator.userAgent.toLowerCase()));
+var isIphone = (/iphone/i.test(navigator.userAgent.toLowerCase()));
+
+$(".android").hide();
+$(".iphone").hide();
+$(".mobileApp").hide();
+$(".noMobileApp").show();
+
+if(isAndroid){
+    $(".mobileApp").show();
+    $(".noMobileApp").hide();
+    $(".android").show();
+    $(".iphone").hide();
+    $('.loginNow').click(function(){
+        $('.modal_trigger').click();
+        $("#register_form_mobile").click();
+    });
+
+}
+else if(isIphone){
+    $(".mobileApp").show();
+    $(".noMobileApp").hide();
+    $(".android").hide();
+    $(".iphone").show();
+    $('.loginNow').click(function(){
+        $('.modal_trigger').click();
+        $("#register_form_mobile").click();
+    });
+}
 // To reset bmi calculationform
-$('#reset_form').click(function(){
+/*$('#reset_form').click(function(){
     $('#bmi_form')[0].reset();
-});
+});*/
 </script>
