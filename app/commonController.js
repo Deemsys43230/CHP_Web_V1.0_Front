@@ -86,12 +86,14 @@ commonApp.controller('CommonController',['$scope','requestHandler','Flash','$rou
     $scope.units=1;
     $scope.test=function(unitVar){
        if(unitVar=='mUnit'){
+           $scope.bmiSubmitted=false;
            $scope.units=1;
            $scope.height="";
            $scope.weight="";
 
        }
-       else if(unitVar){
+       else if(unitVar=='uUnit'){
+           $scope.bmiSubmitted=false;
            $scope.units=2;
            $scope.feet="";
            $scope.inches="";
@@ -188,7 +190,7 @@ commonApp.controller('CommonController',['$scope','requestHandler','Flash','$rou
     };
 
 
-  //datepicker
+  //Set date value to ng-modal
     $('#dobForBMI1').datetimepicker({format: 'DD-MMM-YYYY', ignoreReadonly: true}).on('dp.change', function(selected){
         $('#dobIcon1').click(function()
         {

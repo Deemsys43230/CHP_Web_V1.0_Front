@@ -121,6 +121,7 @@ coachApp.controller('CoachProfileController',['$scope','requestHandler','Flash',
             $('html, body').animate({scrollTop: 0}, 0);
         };
 
+/*
         $scope.refreshImage=function(){
             requestHandler.getRequest("getUserId/","").then(function(response){
                 $scope.userProfile.imageurl=response.data.User_Profile.imageurl;
@@ -133,6 +134,7 @@ coachApp.controller('CoachProfileController',['$scope','requestHandler','Flash',
                 $scope.spinner=false;
             });
         };
+*/
 
         $scope.doUpdateProfile= function () {
 
@@ -212,8 +214,9 @@ coachApp.controller('CoachProfileController',['$scope','requestHandler','Flash',
             });
 
             requestHandler.postRequest("uploadProfileImage/",{'imageurl':image}).then(function(response){
-                $scope.refreshImage();
-                $scope.doGetProfile();
+                $scope.userProfile.imageurl=image;
+                //$scope.refreshImage();
+                $scope.spinner=false;
             },function(response){
                 errorMessage(Flash,"Please Try again later!");
             });

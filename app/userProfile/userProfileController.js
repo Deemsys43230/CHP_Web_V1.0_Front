@@ -132,19 +132,22 @@ userApp.controller('UserProfileController',['$scope','requestHandler','Flash','$
         });
     };
 
-    $scope.refreshImage=function(){
-        requestHandler.getRequest("getUserId/","").then(function(response){
+/*
+        $scope.refreshImage=function(){
+            requestHandler.getRequest("getUserId/","").then(function(response){
             $scope.userProfile.imageurl=response.data.User_Profile.imageurl;
             $scope.userProfile.imageurl=$scope.userProfile.imageurl+"?decache="+Math.random();
+                //$scope.spinner=true;
             $('.image-editor').cropit({
                 imageState: {
                     src: $scope.userProfile.imageurl
+
                 }
             });
-            
+
             $scope.spinner=false;
         });
-    };
+    };*/
 
     $scope.changeBirthday=function(){
 
@@ -260,6 +263,9 @@ userApp.controller('UserProfileController',['$scope','requestHandler','Flash','$
 
     $scope.doUpdateProfileImage=function(){
         //Convert the image to base 64
+
+        $scope.uploadImage=false;
+        $scope.uploadBtnTxt="Upload Image";
         $scope.spinner=true;
 
         /*var image = $('.image-editor').cropit('export');*/
@@ -268,11 +274,13 @@ userApp.controller('UserProfileController',['$scope','requestHandler','Flash','$
               quality: .9,
               originalSize: true
             });
-        
-        
+
+
 
         requestHandler.postRequest("uploadProfileImage/",{'imageurl':image}).then(function(response){
-            $scope.refreshImage();
+            $scope.userProfile.imageurl=image;
+            //$scope.refreshImage();
+            $scope.spinner=false;
         },function(response){
             errorMessage(Flash,"Please Try again later!");
         });
