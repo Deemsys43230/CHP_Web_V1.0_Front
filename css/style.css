@@ -18179,13 +18179,18 @@ select.event:focus {
     height: 20px;
     text-align: center;
 }
-/*.table-condensed>thead>tr>th, .table-condensed>tbody>tr>th, .table-condensed>tfoot>tr>th, .table-condensed>thead>tr>td, .table-condensed>tbody>tr>td, .table-condensed>tfoot>tr>td{
-    padding:18px;
-}*/
 /*datepicker cursor*/
 .datepicker_cursor{
     background-color:white;
     cursor: pointer;
 }
+/*reset link in home page*/
+.reset-text-color{
+    color:#f8ba01 !important;
+    text-decoration: underline !important;
+    font-weight: bold ! important;
+    font-size: 16px;
+}
+
 
 
