@@ -190,26 +190,36 @@ commonApp.controller('CommonController',['$scope','requestHandler','Flash','$rou
     };
 
 
-  //Set date value to ng-modal
-    $('#dobForBMI1').datetimepicker({format: 'DD-MMM-YYYY', ignoreReadonly: true}).on('dp.change', function(selected){
-        $('#dobIcon1').click(function()
-        {
-            $('#dobForBMI1').focus();
+  //Set date value to ng-modal for unit preference metric
+    $('#dobForBMIMetric').datetimepicker({format: 'DD-MMM-YYYY', ignoreReadonly: true,  widgetPositioning: {vertical: 'top'}}).on('dp.change', function(selected){
+        var offset = $("#dobForBMIMetric").offset().top -350;
+        $('html, body').animate({scrollTop : offset},"slow");
 
-        });
+        $scope.dob=$('#dobForBMIMetric').val();
+    });
+//while clicking dob icon to set scrollTop for metric calender
+    $('#dobIconMetric').click(function()
+    {
+         var offset = $("#dobIconMetric").offset().top -350;
+         $('html, body').animate({scrollTop : offset},"slow");
+        $('#dobForBMIMetric').focus();
 
-        $scope.dob=$('#dobForBMI1').val();
     });
 
-    $('#dobForBMI').datetimepicker({format: 'DD-MMM-YYYY', ignoreReadonly: true}).on('dp.change', function(selected){
-        $('#dobIcon').click(function()
+    //Set date value to ng-modal for unit preference us
+    $('#dobForBMIUs').datetimepicker({format: 'DD-MMM-YYYY', ignoreReadonly: true,  widgetPositioning: {vertical: 'top'}}).on('dp.change', function(selected){
+                var offset = $("#dobForBMIUs").offset().top -350;
+                $('html, body').animate({scrollTop : offset},"slow");
+                $scope.dob=$('#dobForBMIUs').val();
+    });
+//while clicking dob icon to set scrollTop for US calender
+         $('#dobIconUs').click(function()
         {
-            $('#dobForBMI').focus();
+            var offset = $("#dobIconUs").offset().top -350;
+            $('html, body').animate({scrollTop : offset},"slow");
+            $('#dobForBMIUs').focus();
 
         });
-
-        $scope.dob=$('#dobForBMI').val();
-    });
 
     $timeout(function(){
         $scope.doGetNewsByUser();

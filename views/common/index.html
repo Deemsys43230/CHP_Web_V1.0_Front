@@ -6,24 +6,11 @@
         });
 
     </script>-->
-<!--<script type="text/javascript">
-    $(function ()
-    {
-        alert("zadsa");
-        $('#dobForBMI1').datetimepicker({format: 'DD/MMMM/YYYY', ignoreReadonly: true});
-        $('#dobIcon1').click(function()
-        {
-            $('#dobForBMI1').focus();
-        });
-    });
-
-</script>-->
-
-
 <!-- Start Testimonials Section -->
        <!-- <div class="col-md-12"> Test Div</div>-->
-<div class="section service">
+<div class="section service" >
     <div class="container">
+    <div class="wrapper">
         <div class="row">
                 <div class="col-md-12">
                 <div class="row">
@@ -167,13 +154,13 @@
                                 </div>
                             </div>
                             <div ng-show="units==2">
-                                <div class="col-md-6 col-sm-12 no-padding">
+                                <div class="col-md-6 col-sm-12 no-padding wrapper" >
                                     <div class="hidden-lg hidden-md"><div class="margin-top-10"></div></div>
                                     <h5 class="col-md-4 col-sm-4 margin-top-10">D O B <sup class="text-red">*</sup></h5>
-                                    <div class="col-md-8 col-sm-8">
+                                    <div class="col-md-8 col-sm-8 ">
                                         <div class="input-group">
-                                            <input type="text" name='dobus' class="search-input datepicker_cursor" id="dobForBMI"  ng-model="dob" ng-required="units==2" readonly/>
-                                        <span class="input-group-addon cursor" id="dobIcon">
+                                            <input type="text" name='dobus' class="search-input datepicker_cursor" id="dobForBMIUs"  ng-model="dob" ng-required="units==2" readonly/>
+                                        <span class="input-group-addon cursor" id="dobIconUs">
                                             <span class="glyphicon glyphicon-calendar"></span>
                                         </span>
                                         </div>
@@ -192,8 +179,8 @@
                                     <h5 class="col-md-4 col-sm-4 margin-top-10">D O B<sup class="text-red">*</sup></h5>
                                     <div class="col-md-8 col-sm-8">
                                         <div class="input-group">
-                                            <input type="text" name='dobmetric' class="search-input datepicker_cursor" id="dobForBMI1"  ng-model="dob"  ng-required="units==1" readonly/>
-                                        <span class="input-group-addon cursor" id="dobIcon1">
+                                            <input type="text" name='dobmetric' class="search-input datepicker_cursor" id="dobForBMIMetric"  ng-model="dob"  ng-required="units==1" readonly/>
+                                        <span class="input-group-addon cursor" id="dobIconMetric">
                                             <span class="glyphicon glyphicon-calendar"></span>
                                         </span>
                                         </div>
@@ -315,6 +302,7 @@
                 </div>
             </div>
         </div>
+    </div>
     </div>
 </div>
 <!-- End Testimonials Section -->
