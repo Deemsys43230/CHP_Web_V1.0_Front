@@ -48,7 +48,7 @@
                     <input type="email" name="username" ng-model="username" ng-keypress="checkIfEnterKeyWasPressedForLogin($event)" required validate-email/>
                         <span ng-show="loginForm.username.$dirty&&loginForm.username.$invalid && !loginForm.username.$pristine">
                         <span class="error-message" ng-show="loginForm.username.$error.required"><span>Required.</span></span>
-                        <span class="error-message" ng-show="loginForm.username.$error. validateEmail"><span>Enter&nbsp;valid&nbsp;Email&nbsp;ID.</span></span>
+                        <span class="error-message" ng-show="loginForm.username.$error.email"><span>Enter&nbsp;valid&nbsp;Email&nbsp;ID.</span></span>
                         </span>
                     <p>Password</p>
                     <input type="password" name="password" ng-keypress="checkIfEnterKeyWasPressedForLogin($event)" required ng-model="password"/>
