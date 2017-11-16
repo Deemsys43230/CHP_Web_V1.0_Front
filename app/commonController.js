@@ -189,37 +189,54 @@ commonApp.controller('CommonController',['$scope','requestHandler','Flash','$rou
         $scope.calculateForm.$setPristine();
     };
 
+    $scope.initializeMetricCalender=function() {
+   $('#dobForBMIMetric').datetimepicker({format: 'DD-MMM-YYYY', ignoreReadonly: true,  widgetPositioning: {vertical: 'top'}}).on('dp.change', function(selected){
 
-  //Set date value to ng-modal for unit preference metric
-    $('#dobForBMIMetric').datetimepicker({format: 'DD-MMM-YYYY', ignoreReadonly: true,  widgetPositioning: {vertical: 'top'}}).on('dp.change', function(selected){
+     $scope.dob=$('#dobForBMIMetric').val();
+
+     });
+   $('#dobForBMIMetric').click(function(){
         var offset = $("#dobForBMIMetric").offset().top -350;
         $('html, body').animate({scrollTop : offset},"slow");
-
-        $scope.dob=$('#dobForBMIMetric').val();
+        $('#dobForBMIMetric').focus();
     });
-//while clicking dob icon to set scrollTop for metric calender
+   //while clicking dob icon to set scrollTop for metric calender
     $('#dobIconMetric').click(function()
-    {
-         var offset = $("#dobIconMetric").offset().top -350;
-         $('html, body').animate({scrollTop : offset},"slow");
+   {
+        var offset = $("#dobIconMetric").offset().top -350;
+        $('html, body').animate({scrollTop : offset},"slow");
         $('#dobForBMIMetric').focus();
 
-    });
+   });
+    }
 
+
+
+
+    $scope.initializeUsCalender=function() {
     //Set date value to ng-modal for unit preference us
     $('#dobForBMIUs').datetimepicker({format: 'DD-MMM-YYYY', ignoreReadonly: true,  widgetPositioning: {vertical: 'top'}}).on('dp.change', function(selected){
-                var offset = $("#dobForBMIUs").offset().top -350;
-                $('html, body').animate({scrollTop : offset},"slow");
-                $scope.dob=$('#dobForBMIUs').val();
+        $scope.dob=$('#dobForBMIUs').val();
     });
-//while clicking dob icon to set scrollTop for US calender
-         $('#dobIconUs').click(function()
-        {
-            var offset = $("#dobIconUs").offset().top -350;
-            $('html, body').animate({scrollTop : offset},"slow");
-            $('#dobForBMIUs').focus();
 
-        });
+    $('#dobForBMIUs').click(function(){
+        var offset = $("#dobForBMIUs").offset().top -350;
+        $('html, body').animate({scrollTop : offset},"slow");
+        $('#dobForBMIUs').focus();
+    });
+   //while clicking dob icon to set scrollTop for US calender
+    $('#dobIconUs').click(function()
+    {
+        var offset = $("#dobIconUs").offset().top -350;
+        $('html, body').animate({scrollTop : offset},"slow");
+        $('#dobForBMIUs').focus();
+
+    });
+    };
+
+    //Initialize Calender
+    $scope.initializeMetricCalender();
+    $scope.initializeUsCalender();
 
     $timeout(function(){
         $scope.doGetNewsByUser();

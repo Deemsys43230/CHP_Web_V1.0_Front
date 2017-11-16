@@ -33,7 +33,7 @@
                 </tr>
                 <tr dir-paginate="data in pricingplanlist | itemsPerPage: 9" pagination-id="pricingplanPaginationId" ng-show="pricingplanlist.length != 0">
                     <td>{{data.planname}}</td>
-                    <td><span class="line-clamp-sm" style="width: 15%"><i class="fa fa-inr"></i>&nbsp;{{data.priceINR}}&nbsp;|&nbsp;<i class="fa fa-dollar"></i>&nbsp;{{data.priceUSD}}</span></td>
+                    <td><span class="line-clamp-sm" style="width: 15%"><i class="fa fa-inr"></i>&nbsp;{{data.priceINR}}&nbsp;|&nbsp;<i class="fa fa-dollar	"></i>&nbsp;{{data.priceUSD}}</span></td>
                     <td><span class="line-clamp-sm">{{data.clientscount}}</span></td>
                     <td>{{data.discount}}</td>
                     <td><a href="#view-pricing-plan/{{data.id}}" class="btn-xs btn-primary">View Details</a>
