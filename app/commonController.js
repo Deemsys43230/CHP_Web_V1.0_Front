@@ -190,11 +190,11 @@ commonApp.controller('CommonController',['$scope','requestHandler','Flash','$rou
     };
 
     $scope.initializeMetricCalender=function() {
-   $('#dobForBMIMetric').datetimepicker({format: 'DD-MMM-YYYY', ignoreReadonly: true,  widgetPositioning: {vertical: 'top'}}).on('dp.change', function(selected){
+//Set date value to ng-modal for unit preference metric
+   $('#dobForBMIMetric').datetimepicker({format: 'DD-MMM-YYYY', ignoreReadonly: true, maxDate: new Date(),widgetPositioning: {vertical: 'top'}}).on('dp.change', function(selected){
+           $scope.dob=$('#dobForBMIMetric').val();
+      });
 
-     $scope.dob=$('#dobForBMIMetric').val();
-
-     });
    $('#dobForBMIMetric').click(function(){
         var offset = $("#dobForBMIMetric").offset().top -350;
         $('html, body').animate({scrollTop : offset},"slow");
@@ -208,14 +208,12 @@ commonApp.controller('CommonController',['$scope','requestHandler','Flash','$rou
         $('#dobForBMIMetric').focus();
 
    });
-    }
-
-
+    };
 
 
     $scope.initializeUsCalender=function() {
     //Set date value to ng-modal for unit preference us
-    $('#dobForBMIUs').datetimepicker({format: 'DD-MMM-YYYY', ignoreReadonly: true,  widgetPositioning: {vertical: 'top'}}).on('dp.change', function(selected){
+    $('#dobForBMIUs').datetimepicker({format: 'DD-MMM-YYYY', ignoreReadonly: true,  maxDate: new Date(), widgetPositioning: {vertical: 'top'}}).on('dp.change', function(selected){
         $scope.dob=$('#dobForBMIUs').val();
     });
 
