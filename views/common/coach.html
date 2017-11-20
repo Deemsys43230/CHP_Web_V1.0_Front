@@ -5,88 +5,106 @@
     <div class="container">
         <div class="row blog-page">
             <div class="col-md-12 col-lg-12 col-sm-12 margin-bottom-10">
-
-                <h4 class="classic-title"><span>Coach Subscription Plans</span>
-                </h4>
+                <h5 class="classic-title"><span>Features</span>
+                </h5>
             </div>
-            <div ng-if="viewload">
-                <div class="loader-style">
-                    <div class="loader"></div>
-                </div>
-            </div>
-            <div ng-show="pricingPlanDetails.length!=0">
-                <div class="col-lg-12 col-md-12 col-sm-12 margin-top-5">
-                    <div class="col-md-2 margin-bottom-15 unit  pull-right">
-                        <div class="btn-group" data-toggle="buttons">
-                            <label class="btn btn-default active unit-toggle-label"  ng-click="test('mUnit')">
-                                <input type="radio" name="unit" ng-model="units"  id="option1" autocomplete="off">&nbsp;&nbsp;&nbsp;INR&nbsp;&nbsp;&nbsp;
-                            </label>
-                            <label class="btn btn-default unit-toggle-label"  ng-click="test('uUnit')">
-                                <input type="radio" name="unit" ng-model="units"  id="option2" autocomplete="off"> &nbsp;&nbsp;&nbsp;USD&nbsp;&nbsp;&nbsp;
-                            </label>
-                        </div>
-                    </div>
-                    <div class="col-md-2 col-lg-2 col-sm-2 margin-bottom-15 pull-right">
-                        <h5 class="currency-label">PAYMENT&nbsp;CURRENCY&nbsp;<strong>:</strong></h5>
-                    </div>
-                </div>
-                <div id="coach-table">
-                    <div class="plans">
-                        <div class="plan" ng-repeat="pricingPlan in pricingPlanDetails">
-                            <div class="coach">
-                                <span ng-style="{'color': pricingPlan.plancolor}">{{pricingPlan.planname}}</span>
-                            </div>
-                            <div ng-show="units==1">
+            <div class="page-content">
+                <div class="col-md-4 col-lg-4 col-sm-12 col-xs-12 margin-top-20 pull-right">
+                    <video controls="" class="border-box" poster="../../images/coach-snap.png">
+                        <source src="../../images/videos/coachapp.mp4" type="video/mp4">
+                    </video>
 
-                                <span class="price" ng-style="{'background-color': pricingPlan.plancolor}">
-                                    <span>Rs {{pricingPlan.discountINR}}</span><br/>
-                                    <span ng-show="pricingPlan.discount!=0" class="text-strike"><small>Rs {{pricingPlan.priceINR}}</small></span>
-                                </span>
-                            </div>
-                            <div ng-hide="units==1">
-                                <span class="price" ng-style="{'background-color': pricingPlan.plancolor}">
-                                    <span>$ {{pricingPlan.discountUSD}}</span><br/>
-                                    <span ng-show="pricingPlan.discount!=0" class="text-strike"><small>$ {{pricingPlan.priceUSD}}</small></span>
-                                </span>
-                            </div>
-                            <div class="coach">
-                                <h5>Clients Count</h5>
-                                <span>{{pricingPlan.clientscount}}</span>
-                            </div>
-                            <div class="coach"  ng-show="pricingPlan.discount!=0">
-                                <h4>Total Discount</h4>
-                                <span>{{pricingPlan.discount}} %</span>
-                            </div>
-                            <div class="coach">
-                                <h4>Features</h4>
-                                <span  ng-if= "pricingPlan.discount!=0" style="min-height: 30px;" >{{pricingPlan.features}}</span>
-                                <span  ng-if= "pricingPlan.discount==0" style="min-height: 90px;" >{{pricingPlan.features}}</span>
-                            </div> 
-                            <br>
-                            <!-- <h4>Discount</h4>
-                            <ul class="features remove-style">
-                                <li ng-show="units==1">Rs {{pricingPlan.discountINR}}</li>
-                                <li ng-hide="units==1">$ {{pricingPlan.discountUSD}}</li>
-                            </ul> -->
-                            <div>
-                                <a href="#coach-form/{{pricingPlan.id}}" class="price-button btn button" ng-disabled="subscribeButtonStatus">
-                                    Subscribe
-                                </a>
-                            </div>
-                            <br/>
+                    <div class="text-center margin-top-30">
+                        <div class="centerize">
+                            <a href="#coach-plan" class="price-button btn button">View Plans</a>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-12 col-md-12 col-sm-12 text-center margin-top-50">
+                <div class="col-md-4 col-lg-4 col-sm-12 col-xs-12">
+                    <!-- Start Service Icon 1 -->
+                    <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 service-box service-icon-left-more text-justify">
+                        <div class="service-icon">
+                            <i class="fa fa-users icon-medium"></i>
+                        </div>
+                        <div class="service-content">
+                            <h4 class="text-orange text-bold">1. Manage Your Clients</h4>
+                            <p>
+                               Manage and Review your individual Clients Profile,Demography,Stats and Reports throw Application.
+                            </p>
+                        </div>
+                    </div>
+                    <!-- End Service Icon 1 -->
+
+                    <!-- Start Service Icon 2 -->
+                    <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 service-box service-icon-left-more text-justify">
+                        <div class="service-icon">
+                            <i class="fa fa-gg icon-medium"></i>
+                        </div>
+                        <div class="service-content">
+                            <h4 class="text-orange text-bold">2. Diet Plans</h4>
+                            <p>
+                                Create Meal and Workout plans,view and Assign the Diet plans to clients for Fitness throw Application.
+                            </p>
+                        </div>
+                    </div>
+                    <!-- End Service Icon 2 -->
+
+                    <!-- Start Service Icon 3 -->
+                    <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 service-box service-icon-left-more text-justify">
+                        <div class="service-icon">
+                            <i class="fa fa-comments-o icon-medium"></i>
+                        </div>
+                        <div class="service-content">
+                            <h4 class="text-orange text-bold">3. Chats</h4>
+                            <p>Convey Your Message to clients Individually and Group,Anywhere any time throw Application.</p>
+                        </div>
+                    </div>
+                    <!-- End Service Icon 3 -->
                 </div>
-            </div>
-            <div ng-show="pricingPlanDetails.length==0" class="text-center margin-top-50">
-                <img src="../../images/no-list.png" width="120" height="120"/>
-                <h3 class="text-gray margin-top-10">NO SUBSCRIPTION PLANS FOUND!!!</h3><br/>
+                    <!-- Start Service Icon 4 -->
+                <div class="col-md-4 col-lg-4 col-sm-12 col-xs-12">
+                    <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 service-box service-icon-left-more text-justify">
+                        <div class="service-icon">
+                            <i class="fa fa-calendar icon-medium"></i>
+                        </div>
+                        <div class="service-content">
+                            <h4 class="text-orange text-bold">4. Set Your Events</h4>
+                            <p>Upload Your Events throw our Application.Clients can view and set Attendance.</p>
+                        </div>
+                    </div>
+                    <!-- End Service Icon 4 -->
+
+
+                    <!-- Start Service Icon 5 -->
+                    <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 service-box service-icon-left-more text-justify">
+                        <div class="service-icon">
+                            <i class="fa fa-calendar-check-o icon-medium"></i>
+                        </div>
+                        <div class="service-content">
+                            <h4 class="text-orange text-bold">5. Appointments</h4>
+                            <p>You can give appointments to your clients for discuss clients doubt throw our application.</p>
+                        </div>
+                    </div>
+                    <!-- End Service Icon 5 -->
+
+                    <!-- Start Service Icon 6 -->
+                    <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 service-box service-icon-left-more text-justify">
+                        <div class="service-icon">
+                            <i class="fa fa-pencil-square-o icon-medium"></i>
+                        </div>
+                        <div class="service-content">
+                            <h4 class="text-orange text-bold">6. Assessment</h4>
+                            <p>Assign assessment to know medical details about clients throw our application.</p>
+                        </div>
+                    </div><br/><br/>
+                    <!-- End Service Icon 6 -->
+                    <div class="col-xs-12 hidden-lg hidden-md hidden-sm">
+                        <br/><br/>
+                    </div>
+                </div>
+
             </div>
 
         </div>
     </div>
 </div>
-
-<script type="text/javascript" src="../../js/script.js"></script>

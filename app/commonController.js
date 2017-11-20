@@ -189,7 +189,7 @@ commonApp.controller('CommonController',['$scope','requestHandler','Flash','$rou
         $scope.calculateForm.$setPristine();
     };
 
-    $scope.initializeMetricCalender=function() {
+    function initializeMetricCalender() {
 //Set date value to ng-modal for unit preference metric
    $('#dobForBMIMetric').datetimepicker({format: 'DD-MMM-YYYY', ignoreReadonly: true, maxDate: new Date(),widgetPositioning: {vertical: 'top'}}).on('dp.change', function(selected){
            $scope.dob=$('#dobForBMIMetric').val();
@@ -211,7 +211,7 @@ commonApp.controller('CommonController',['$scope','requestHandler','Flash','$rou
     };
 
 
-    $scope.initializeUsCalender=function() {
+    function initializeUsCalender() {
     //Set date value to ng-modal for unit preference us
     $('#dobForBMIUs').datetimepicker({format: 'DD-MMM-YYYY', ignoreReadonly: true,  maxDate: new Date(), widgetPositioning: {vertical: 'top'}}).on('dp.change', function(selected){
         $scope.dob=$('#dobForBMIUs').val();
@@ -233,8 +233,8 @@ commonApp.controller('CommonController',['$scope','requestHandler','Flash','$rou
     };
 
     //Initialize Calender
-    $scope.initializeMetricCalender();
-    $scope.initializeUsCalender();
+    initializeMetricCalender();
+    initializeUsCalender();
 
     $timeout(function(){
         $scope.doGetNewsByUser();

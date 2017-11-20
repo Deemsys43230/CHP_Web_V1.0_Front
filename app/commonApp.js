@@ -607,6 +607,20 @@ commonApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'CoachController'
             }).
+            when('/coach-plan', {
+                templateUrl: '../common/coach-plan.html',
+                resolve: {
+                    loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'commonApp',
+                            files:[
+                                '../../app/indexCoach/indexCoachController.js'
+                            ]
+                        })
+                    }]
+                },
+                controller:'CoachController'
+            }).
                when('/coach-form/:id', {
                 templateUrl: '../common/coach-form.html',
                 resolve: {
