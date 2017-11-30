@@ -18204,3 +18204,21 @@ select.event:focus {
     -moz-box-shadow:  5px 5px  #d6d6c2 inset;
     -webkit-box-shadow:  5px 5px  #d6d6c2 inset;
 }
+
+/*profile-error message*/
+/*for chrome*/
+@supports (-webkit-appearance:none) {
+    .error-bottom {
+        bottom: 45px !important;
+    }
+}
+/*for firefox*/
+_:-moz-tree-row(hover), .error-bottom {
+    bottom: 45px !important;
+}
+/*for IE*/
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+    .error-bottom {
+        bottom: 4px !important;
+    }
+}
