@@ -18209,16 +18209,17 @@ select.event:focus {
 /*for chrome*/
 @supports (-webkit-appearance:none) {
     .error-bottom {
-        bottom: 45px !important;
+        bottom: 30px !important;
     }
 }
+
 /*for firefox*/
 _:-moz-tree-row(hover), .error-bottom {
-    bottom: 45px !important;
+    bottom: 30px !important;
 }
 /*for IE*/
 @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
     .error-bottom {
-        bottom: 4px !important;
+        bottom: 5px !important;
     }
 }

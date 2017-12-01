@@ -20,8 +20,9 @@
     <div class="col-lg-8 col-md-7 col-sm-7 padding-top-4 padding-right-0">
         <h5>Height<sup class="text-red">*</sup> <span ng-show="userProfile.unitPreference==1"><small>(cms)</small></span> <span ng-show="userProfile.unitPreference==2"><small>(feet,inches)</small></span> <span class="pull-right">:</span></h5>
     </div>
-    <div class="col-lg-4 col-md-5 col-sm-5 padding-right-0">
+    <div class="col-lg-4 col-md-5 col-sm-5 padding-right-0 padding-left-0">
                                 <span ng-show="userProfile.unitPreference==2">
+                                <div class="col-lg-6 col-md-6 col-sm-6">
                                     <select  class="form-control main" style="width:49px;" id="heightfeet" name="heightFeet" ng-model="demography.heightFeet" ng-required="userProfile.unitPreference==2" ng-change="bmiCalculation();">
                                         <option value="">--Feet--</option>
                                         <option value="1">1</option>
@@ -37,8 +38,11 @@
                                         <option value="11">11</option>
                                         <option value="12">12</option>
                                     </select>
-                                    <select  class="form-control main" style="width:49px;margin-top: -28px;margin-left: 51px;"  id="heightinches" name="heightInches"  ng-model="demography.heightInches" ng-required="userProfile.unitPreference==2" ng-change="bmiCalculation();">
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6 padding-left-5">
+                                    <select  class="form-control main" style="width:49px;"  id="heightinches" name="heightInches"  ng-model="demography.heightInches" ng-required="userProfile.unitPreference==2" ng-change="bmiCalculation();">
                                         <option value="">--Inches--</option>
+                                        <option value="0">0</option>
                                         <option value="1">1</option>
                                         <option value="2">2</option>
                                         <option value="3">3</option>
@@ -51,6 +55,7 @@
                                         <option value="10">10</option>
                                         <option value="11">11</option>
                                     </select>
+                                </div>
                                <span ng-show="demographyForm.heightFeet.$dirty&&demographyForm.heightFeet.$invalid">
                                    <span class="error-message textarea-errormessage8-left50" ng-show="demographyForm.heightFeet.$error.required"><span>Required.</span></span>
                                </span>
@@ -117,16 +122,16 @@
 </div>
 <div class="col-lg-6 col-md-6 col-sm-12 margin-top-15">
     <div class="col-lg-8 col-md-7 col-sm-7 padding-top-4 padding-right-0">
-        <h5>BMI <small>(Kg/m<sup>2</sup>)</small> <span class="pull-right">:</span><span class="pull-right">&nbsp;<a href="" data-toggle="popover" data-trigger="hover" title="BMI" data-content="The weight in kilograms divided by the square of the height in meters, a measure of body fat that gives an indication of nutritional status."><i class="fa fa-info-circle"></i></a>&nbsp;</span></h5>
+        <h5>BMI <small>(Kg/m<sup>2</sup>)</small> <span class="pull-right">:</span><span class="pull-right">&nbsp;<a href="" data-toggle="popover" data-trigger="focus" title="BMI" data-content="The weight in kilograms divided by the square of the height in meters, a measure of body fat that gives an indication of nutritional status."><i class="fa fa-info-circle"></i></a>&nbsp;</span></h5>
     </div>
     <div class="col-lg-4 col-md-5 col-sm-5 padding-right-0">
         <input class="demography_input" name="bmi"  id="bmivalue" ng-model="demography.bmi" ng-disabled="true">
     </div>
 </div>
 <div class="col-lg-12 col-md-12 col-sm-12">
-    <div class="col-lg-12 col-md-12 col-sm-12 margin-top-15">
-        <span class="demo_status">{{bmiStatus}}</span>
-    </div>
+<div class="col-lg-12 col-md-12 col-sm-12 margin-top-15">
+    <span class="demo_status">{{bmiStatus}}</span>
+</div>
 </div>
 
 <div class="col-lg-12 col-md-12 col-sm-12">
@@ -212,7 +217,7 @@
 </div>
 <div class="col-lg-6 col-md-6 col-sm-12 margin-top-15">
     <div class="col-lg-8 col-md-7 col-sm-7 padding-top-4 padding-right-0 padding-right-0">
-        <h5>Diastollic Blood Pressure <small>(mmHg)</small> <span class="pull-right">:</span><span class="pull-right">&nbsp;<a href="" data-toggle="popover" data-trigger="hover" title="Diastollic Blood Pressure" data-content="The diastolic blood pressure number or the bottom number indicates the pressure in the arteries when heart rest between beats."><i class="fa fa-info-circle"></i></a>&nbsp; </span> </h5>
+        <h5>Diastolic Blood Pressure <small>(mmHg)</small> <span class="pull-right">:</span><span class="pull-right">&nbsp;<a href="" data-toggle="popover" data-trigger="hover" title="Diastollic Blood Pressure" data-content="The diastolic blood pressure number or the bottom number indicates the pressure in the arteries when heart rest between beats."><i class="fa fa-info-circle"></i></a>&nbsp; </span> </h5>
     </div>
     <div class="col-lg-4 col-md-5 col-sm-5 padding-right-0">
         <input class="demography_input" name="diastolicbloodpressure" maxlength="3"  ng-model="demography.diastolicbloodpressure" ng-pattern="/^0*[1-9]\d*$/"/>
