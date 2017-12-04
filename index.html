@@ -62,6 +62,7 @@
 
     <link type="text/css" rel="stylesheet" href="css/BeatPicker.css"/>
 
+    <!--video player CSS styles-->
     <link rel="stylesheet" type="text/css" href="css/video-js.css" media="screen"/>
 
         <!-- Date picker requires jQuery-UI -->
@@ -269,11 +270,8 @@
                         <!-- Classic Heading -->
                     <h5 class="classic-title"><span>How it works</span></h5>
                     <div class="col-md-4 col-lg-4 col-sm-12 col-xs-12 pull-right margin-top-20 no-padding">
-                        <video id="my-video" class="video-js" controls="true" preload="auto" style="width: 100%;height: auto" poster="images/user-snap.png" data-setup="{}">
-                       <!-- <video id="videoPlayer" controls="" class="border-box" poster="images/user-snap-overlay-image.png" style="width: 100%;height: auto;" >-->
-                            <source src="https://cyberhealth.s3.amazonaws.com/DemoVideos/userapp.mp4" type="video/mp4">
-                       <!--     <source src="https://s3.amazonaws.com/cyberhealth/DemoVideos/userapp-webm.webm" type="video/webm">
-                            <source src="https://s3.amazonaws.com/cyberhealth/DemoVideos/userapp-ogv.ogv" type="video/ogg">-->
+                        <video id="my-video" class="video-js" controls="true" preload="auto" style="width: 100%;height: auto" poster="images/user-poster.png" data-setup="{}">
+                          <source src="https://cyberhealth.s3.amazonaws.com/DemoVideos/userapp.mp4" type="video/mp4">
                         </video>
                        <div ng-cloak class="noMobileApp">
                             <div class="centerize">
@@ -570,7 +568,6 @@
 <!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 <!-- If you'd like to support IE8 -->
 <script src="http://vjs.zencdn.net/ie8/1.1.2/videojs-ie8.min.js"></script>
-<script src="http://vjs.zencdn.net/6.4.0/video.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/1.2.1/jquery-migrate.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
 <!--<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fitvids/1.0.3/jquery.fitvids.min.js"></script>-->

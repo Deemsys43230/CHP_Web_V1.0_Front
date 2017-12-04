@@ -10,10 +10,15 @@
             </div>
             <div class="page-content">
                 <div class="col-md-4 col-lg-4 col-sm-12 col-xs-12 margin-top-20 pull-right">
-                    <video controls="" class="border-box" poster="../../images/coach-snap.png">
+                   <!-- <video controls="" class="border-box" poster="../../images/coach-poster.png">
                         <source src="https://cyberhealth.s3.amazonaws.com/DemoVideos/coachapp.mp4" type="video/mp4">
+                    </video>-->
+                    <video id="my-video" class="video-js" controls="true" preload="auto" style="width: 100%;height: auto" poster="../../images/coach-poster.png" data-setup="{}">
+                        <!-- <video id="videoPlayer" controls="" class="border-box" poster="images/user-snap-overlay-image.png" style="width: 100%;height: auto;" >-->
+                        <source src="https://cyberhealth.s3.amazonaws.com/DemoVideos/coachapp.mp4" type="video/mp4">
+                        <!--     <source src="https://s3.amazonaws.com/cyberhealth/DemoVideos/userapp-webm.webm" type="video/webm">
+                             <source src="https://s3.amazonaws.com/cyberhealth/DemoVideos/userapp-ogv.ogv" type="video/ogg">-->
                     </video>
-
                     <div class="text-center margin-top-30">
                         <div class="centerize">
                             <a href="#coach-plan" class="price-button btn button">View Plans</a>
