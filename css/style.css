@@ -18223,3 +18223,7 @@ _:-moz-tree-row(hover), .error-bottom {
         bottom: 5px !important;
     }
 }
+/*user and coach datepicker design*/
+.ui-datepicker {
+   top:320px !important;
+}

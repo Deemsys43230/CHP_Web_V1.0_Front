@@ -58,8 +58,13 @@
                                 <div class="col-lg-4 col-md-4 col-sm-4 padding-top-4 padding-right-0 margin-top-10">
                                     <h5>DOB <span class="pull-right">:</span><span class="pull-right">&nbsp;<a href="" data-toggle="popover" data-trigger="hover" title="Age Restriction" data-content="Coach age to be above of 18."><i class="fa fa-info-circle"></i></a>&nbsp;</span></h5>
                                 </div>
-                                <div class="col-lg-8 col-md-8 col-sm-8 margin-top-10" ng-model="userProfile.dob">
-                                    <div class="col-lg-3 col-md-3 col-sm-3 no-padding">
+                                <div class="col-lg-8 col-md-8 col-sm-8 margin-top-10" >
+                                <div class="input-group">
+                                    <input type="text" id="datepicker" class="profile_input" name="date" placeholder="dd/mm/yyyy"  ng-model="userProfile.dob" readonly style="background-color: white;cursor: pointer;">
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i> </span>
+                                </div>
+                             <!--   <div class="col-lg-8 col-md-8 col-sm-8 margin-top-10">-->
+                                <!--    <div class="col-lg-3 col-md-3 col-sm-3 no-padding">
                                         <select id="dobday" onchange="angular.element(this).scope().changeBirthday()" class="full-width main"></select>
                                     </div>
                                     <div class="col-lg-5 col-md-5 col-sm-5">
@@ -67,7 +72,7 @@
                                     </div>
                                     <div class="col-lg-4 col-md-4 col-sm-4 no-padding">
                                         <select id="dobyear" onchange="angular.element(this).scope().changeBirthday()" class="full-width main"></select>
-                                    </div>
+                                    </div>-->
                                     <span ng-show="userProfileForm.dob.$dirty&&userProfileForm.dob.$invalid">
                                         <span class="error-message textarea-errormessage10" ng-show="userProfileForm.dob.$error.required"><span>Required.</span></span>
                                     </span>
@@ -226,16 +231,16 @@
                                 </div> 
                             </div>
                              
-                            <div class="col-lg-6 col-md-12 col-sm-12" width-about-me>
-                                <div class="col-lg-4 col-md-4 col-sm-4 padding-right-0 margin-top-10">
+                            <div class="col-lg-12 col-md-12 col-sm-12" style="width: 105% !important">
+                                <div class="col-lg-2 col-md-2 col-sm-2 padding-top-4 margin-top-10">
                                     <h5>About Me <span class="pull-right">:</span></h5>
                                     <p><span ng-hide="showCount && userProfile.about.length">&nbsp;</span><span ng-show="showCount && userProfile.about.length"><span class="text-bold text-red" style="font-size: 14px">{{ (300-userProfile.about.length) }}</span> Characters Remaining</span></p>
                                 </div>
-                                <div class="col-lg-8 col-md-8 col-sm-8 margin-top-5 margin-bottom-5">
+                                <div class="col-lg-9 col-md-9 col-sm-9 padding-top-4 margin-top-10 padding-left-0">
                                     <span ng-show="userProfileForm.about.$dirty&&userProfileForm.about.$invalid">
                                         <span class="error-message textarea-errormessage40" ng-show="userProfileForm.about.$error.required"><span>Required.</span></span>
                                     </span>
-                                    <textarea id="inputFocusForDatePicker" class="profile_input_textarea" name="about" ng-model="userProfile.about" maxlength="300" ng-blur="showCount=0" ng-focus="showCount=1" required></textarea>
+                                    <textarea class="profile_input_textarea" name="about" ng-model="userProfile.about" maxlength="300" ng-blur="showCount=0" ng-focus="showCount=1" required></textarea>
                                 </div>
                             </div>
                             
@@ -440,4 +445,16 @@
         $('[data-toggle="popover"]').popover();
     });
 
+</script>
+<script>
+    $( function() {
+        $( "#datepicker" ).datepicker({
+            changeMonth: true,
+            changeYear: true,
+            yearRange: "-100:-18",
+            dateFormat: 'dd/mm/yy',
+            maxDate: new Date() , //Hiding Future Date
+            orientation: "bottom"
+        });
+    });
 </script>

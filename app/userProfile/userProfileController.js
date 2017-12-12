@@ -19,25 +19,24 @@ userApp.controller('UserProfileController',['$scope','requestHandler','Flash','$
             if($scope.userProfile.preferfood == null){
                 $scope.userProfile.preferfood = "1";
             }
-
-            var year = $scope.userProfile.dob.slice(6,10);
+/*
+        var year = $scope.userProfile.dob.slice(6,10);
             var month = $scope.userProfile.dob.slice(3,5);
             month = $scope.birthdayformat[parseInt(month)-1];
             var day = $scope.userProfile.dob.slice(0,2);
 
             $(document).ready(function(){
                 $.dobPicker({
-                    daySelector: '#dobday', /* Required */
-                    monthSelector: '#dobmonth', /* Required */
-                    yearSelector: '#dobyear', /* Required */
-                    dayDefault: day, /* Optional */
-                    monthDefault: month, /* Optional */
-                    yearDefault: year, /* Optional */
-                    minimumAge: 13, /* Optional */
-                    maximumAge: 100 /* Optional */
+                    daySelector: '#dobday', *//* Required *//*
+                    monthSelector: '#dobmonth', *//* Required *//*
+                    yearSelector: '#dobyear',*//* Required *//*
+                    dayDefault: day, *//* Optional *//*
+                    monthDefault: month,*//* Optional *//*
+                    yearDefault: year, *//* Optional *//*
+                    minimumAge: 13, *//* Optional *//*
+                    maximumAge: 100 *//* Optional *//*
                 });
-            });
-
+            });*/
             if($scope.userProfile.isProfileUpdated == 1){
 
                 $.each($scope.countries, function(index,value) {
@@ -149,15 +148,14 @@ userApp.controller('UserProfileController',['$scope','requestHandler','Flash','$
         });
     };*/
 
-    $scope.changeBirthday=function(){
+/*    $scope.changeBirthday=function(){
 
         $scope.userProfile.dob = $('#dobday').val()+'/'+ $('#dobmonth').val() +'/'+$('#dobyear').val();
         var focusSelect = $('#inputFocusForDatePicker');
         focusSelect.focus();
         focusSelect.blur();
         $('html, body').animate({scrollTop: 0}, 0);
-    };
-
+    };*/
     $scope.doUpdateProfile= function () {
         $rootScope.update1 = true; //Pass value 'true' when directed from 'Change your plan' option
         delete $scope.userProfile.imageurl;
@@ -4779,6 +4777,23 @@ userApp.directive('widthAboutMe', function() {
             });
         }
     }
+});
+
+userApp.directive('calendar', function () {
+    return {
+        require: 'ngModel',
+        link: function (scope, el, attr, ngModel) {
+            $(el).datepicker({
+                dateFormat: 'dd/mm/yy',
+                maxDate: new Date() , //Hiding Future Date
+                onSelect: function (dateText) {
+                    scope.$apply(function () {
+                        ngModel.$setViewValue(dateText);
+                    });
+                }
+            });
+        }
+    };
 });
 
 /*

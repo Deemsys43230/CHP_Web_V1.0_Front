@@ -4702,6 +4702,23 @@ coachApp.directive('widthAboutMe', function() {
         }
     }
 });
+
+coachApp.directive('calendar', function () {
+    return {
+        require: 'ngModel',
+        link: function (scope, el, attr, ngModel) {
+            $(el).datepicker({
+                dateFormat: 'dd/mm/yy',
+                maxDate: new Date() , //Hiding Future Date
+                onSelect: function (dateText) {
+                    scope.$apply(function () {
+                        ngModel.$setViewValue(dateText);
+                    });
+                }
+            });
+        }
+    };
+});
 /*coachApp.directive('widthAboutMe', function() {
     return {
         link: function($scope, $element) {

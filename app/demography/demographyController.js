@@ -280,18 +280,29 @@ userApp.controller('DemographyController',['$rootScope','$scope','requestHandler
        $scope.weight=parseFloat($scope.demography.weight);
        $scope.targetweight =parseFloat($scope.demography.targetweight);
 
+
+
+
         if(plantype==1){
             $scope.weightlossError=false;
             $scope.weightgainError=false;
         }
         if(plantype==2){
             $scope.weightgainError=false;
-           if( $scope.targetweight < $scope.weight){
-               $scope.weightlossError=false;
-           }
+            $scope.weightlossError=false;
+            $scope.invalidError=false;
+            if($scope.targetweight==0){
+                $scope.invalidError=true;
+            }
             else{
-               $scope.weightlossError=true;
-           }
+                if( $scope.targetweight < $scope.weight){
+                    $scope.weightlossError=false;
+                }
+                else{
+                    $scope.weightlossError=true;
+                }
+            }
+
         }
         else if(plantype==3){
             $scope.weightlossError=false;
@@ -362,11 +373,23 @@ userApp.controller('DemographyController',['$rootScope','$scope','requestHandler
         if(targetWeight<=999.9){
             $scope.maxTargetWeightKgs=false;
         }
-        else if(targetWeight>999.9){
+        else if(targetWeight>999.9 || targetWeight==0){
             $scope.maxTargetWeightKgs=true;
         }
 
     };
+
+    //TO check Maximum target Weight in kgs
+/*    $scope.targetZero=false;
+    $scope.targetZeroKgs = function(targetWeight){
+        if(targetWeight==0){
+            $scope.targetZero=true;
+        }
+        else if(targetWeight!=0){
+            $scope.targetZero=false;
+        }
+
+    };*/
     $scope.isCleanNutrition =function(){
         return angular.equals(originalNutrition, $scope.nutrients);
     };
