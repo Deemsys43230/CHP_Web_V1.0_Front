@@ -158,6 +158,22 @@
                                 <textarea id="inputFocusForDatePicker" class="profile_input_textarea" name="about" ng-model="invitationDetails.about" maxlength="300" ng-blur="showCount=0" ng-focus="showCount=1" required></textarea>
                             </div>
                         </div>
+                        <div class="form-group">
+                            <div class="col-lg-3 col-md-5 col-sm-12 margin-top-10">
+                                <div> Account Type <span class="pull-right">:</span></div>
+                            </div>
+                            <div class="col-lg-8 col-md-7 col-sm-12 margin-top-10">
+                                <select class="full-width main margin-bottom-1" ng-model="invitationDetails.accounttype" name="accountytpe" required>
+                                    <option value="">-- Select --</option>
+                                    <option value="1">Demo Account</option>
+                                    <option value="2">Trial Account</option>
+                                    <option value="3">Normal Account</option>
+                                </select>
+                                <span ng-show="coachDetailsForm.accountytpe.$dirty && coachDetailsForm.accountytpe.$invalid">
+                                     <span class="error-message textarea-errormessage10" ng-show="coachDetailsForm.accountytpe.$error.required"><span>Required.</span></span>
+                                </span>
+                            </div>
+                        </div>
                         <div class="col-lg-12 col-md-12 col-sm-12 text-center margin-top-50">
                             <a id="confirm_modal_trigger" href="#confirm_modal" class="price-button btn" ng-click="confirmModel()" ng-disabled="isClean() || coachDetailsForm.$invalid">Submit</a>
                         </div>

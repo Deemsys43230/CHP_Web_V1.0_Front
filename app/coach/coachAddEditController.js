@@ -25,10 +25,11 @@ adminApp.controller('CoachAddEditController',['$scope','requestHandler','Flash',
         });
     //Add New Coach from coach list and Clik add as a coach button
     $scope.doAddCoach= function () {
+        $scope.invitationDetails.accounttype = parseInt($scope.invitationDetails.accounttype);
       requestHandler.postRequest("admin/registerCoach/",$scope.invitationDetails).then(function(){
             successMessage(Flash,"Coach Added Successfully");
             /*To Close Modal*/
-             $(".common_model").hide();
+             $(".common_model").show();
              $("#modal").hide();
              $("#lean_overlay").hide();
           /*End Close Modal*/
@@ -54,7 +55,6 @@ adminApp.controller('CoachAddEditController',['$scope','requestHandler','Flash',
                     $scope.invitationDetails=value;
                  }
             });
-
             switch ($scope.invitationDetails.referral.toString()) {
                     case "1":
                         $scope.invitationDetails.referral="Friend";
