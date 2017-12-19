@@ -435,7 +435,7 @@
         <span class="error-message textarea-errormessage40-right60" ng-show="!demographyForm.targetWeightkgs.$error.required&&maxTargetWeightKgs" style="top:0;left: 30px;"><span>Please&nbsp;Enter&nbsp;Valid&nbsp;Weight.</span></span>
         <span class="error-message textarea-errormessage40" ng-show="!demographyForm.targetWeightkgs.$error.required&&weightlossError"><span>Should&nbsp;be&nbsp;less&nbsp;than&nbsp;your&nbsp;weight</span></span>
         <span class="error-message textarea-errormessage40" ng-show="!demographyForm.targetWeightkgs.$error.required&&weightgainError"><span>Should&nbsp;be&nbsp;greater&nbsp;than&nbsp;your&nbsp;weight</span></span>
-       <span class="error-message textarea-errormessage40" ng-show="!demographyForm.targetWeightkgs.$error.required&&!weightlossError&&invalidError"><span>Invalid&nbsp;Format.</span></span>
+       <span class="error-message textarea-errormessage40" ng-show="!demographyForm.targetWeightkgs.$error.required&&!weightlossError&&invalidError"><span>Invalid</span></span>
         <span ng-show="demographyForm.targetWeightkgs.$dirty&&demographyForm.targetWeightkgs.$invalid">
              <span class="error-message textarea-errormessage40" ng-show="demographyForm.targetWeightkgs.$error.required"><span>Required.</span></span>
 
@@ -446,7 +446,7 @@
         <span class="error-message textarea-errormessage40-right60" ng-show="!demographyForm.targetWeight.$error.required&&maxTargetWeight" style="top:0;left: 30px;"><span>Please&nbsp;Enter&nbsp;Valid&nbsp;Weight.</span></span>
         <span class="error-message textarea-errormessage40" ng-show="!demographyForm.targetWeight.$error.required&&weightlossError"><span>Should&nbsp;be&nbsp;less&nbsp;than&nbsp;your&nbsp;weight</span></span>
         <span class="error-message textarea-errormessage40" ng-show="!demographyForm.targetWeight.$error.required&&weightgainError"><span>Should&nbsp;be&nbsp;greater&nbsp;than&nbsp;your&nbsp;weight</span></span>
-        <span class="error-message textarea-errormessage40" ng-show="!demographyForm.targetWeight.$error.required&&!weightlossError&&invalidError"><span>Invalid&nbsp;Format.</span></span>
+        <span class="error-message textarea-errormessage40" ng-show="!demographyForm.targetWeight.$error.required&&!weightlossError&&invalidError"><span>Invalid</span></span>
         <span ng-show="demographyForm.targetWeight.$dirty&&demographyForm.targetWeight.$invalid">
              <span class="error-message textarea-errormessage40" ng-show="demographyForm.targetWeight.$error.required"><span>Required.</span></span>
             <!--<span class="error-message textarea-errormessage40" ng-show="demographyForm.targetWeight.$error.validateZero"><span>Invalid&nbsp;Format.</span></span>-->
@@ -495,7 +495,7 @@
 </div>
 <div class="col-lg-12 col-md-12 col-sm-12"><hr/></div>
 <div class="col-lg-12 col-md-12 col-sm-12 text-center margin-tb-10">
-    <a href="" class="btn register_button" ng-disabled="isCleanDemography() || demographyForm.$invalid || weightlossError || weightgainError || maxheight || maxweightkgs ||  maxweight || maxTargetWeightKgs || maxTargetWeight || maxValue || maxHbaValue"  ng-click="doUpdateDemography()" >Save Changes</a>
+    <a href="" class="btn register_button" ng-disabled="isCleanDemography() || demographyForm.$invalid || weightlossError || weightgainError || maxheight || maxweightkgs ||  maxweight || maxTargetWeightKgs || maxTargetWeight || maxValue || maxHbaValue || invalidError"  ng-click="doUpdateDemography()" >Save Changes</a>
     <a href="#dashboard" class="btn cancel_button">Cancel</a>
 </div>
 </form>
