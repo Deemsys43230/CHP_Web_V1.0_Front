@@ -18215,13 +18215,17 @@ select.event:focus {
 
 /*for firefox*/
 _:-moz-tree-row(hover), .error-bottom {
-    bottom: 30px !important;
+    bottom: 0 !important;
 }
 /*for IE*/
 @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
     .error-bottom {
         bottom: 5px !important;
     }
+}
+/*dropdown error message*/
+.error-bottom-dropdown {
+    bottom: 0 !important;
 }
 /*user and coach datepicker design*/
 .ui-datepicker {
