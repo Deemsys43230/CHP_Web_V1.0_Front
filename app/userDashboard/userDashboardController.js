@@ -1317,9 +1317,11 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
         };
 
         $scope.doGetWeightLog=function(date,id){
+            $scope.showEmpty=false;
             var weightLogPromise=UserDashboardService.doGetWeightLogDetails(selectedDate);
             weightLogPromise.then(function(result){
                 var weightlogdetails=result.Weight_logs;
+
                 if(!weightlogdetails.weight){
                     $scope.originalWeight="";
                     if(id==1)
@@ -1330,6 +1332,11 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
                 else{
                     $scope.weightlog=$scope.originalWeight=weightlogdetails.weight;
                     $scope.fat=$scope.originalFat=weightlogdetails.fat;
+                    if(weightlogdetails.fat == null){
+                        $scope.fatEmpty= '-';
+                        $scope.showEmpty=true;
+                    }
+
                     if(id==1){
                         $("#weightLog").val(weightlogdetails.weight);
                         $("#fatLog").val(weightlogdetails.fat);
@@ -1354,6 +1361,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
 
         $scope.weightLogEntry=function(id){
             $scope.weightUpdateText="Updating...";
+            $scope.showEmpty=false;
             $scope.spinner=true;
             if(id==1){
                 $scope.doInsertOrUpdateWeightLog($scope.UserDate,parseFloat($("#weightLog").val()));

@@ -92,7 +92,8 @@
                         </form>
                     </div>
                     <div  style="padding-right: 40px;float: right">
-                       <span class="weight-text-font">{{fat}}&nbsp;(%)</span>
+                       <span class="weight-text-font" >{{fat}}&nbsp;<span ng-hide="showEmpty">(%)</span></span>
+                        <span class="weight-text-font" ng-show="showEmpty">{{fatEmpty}}</span>
                     </div>
                </li>
             </ul>
