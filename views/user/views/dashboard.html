@@ -74,25 +74,27 @@
                     </a>
                 </li>
                 <li class="log" ng-click="otherThanHistory()">
-                    <a class="menu-items" href="#log"><i class="fa fa-mobile fa-4x hidden-md"></i><span>Log</span>
+                    <a class="menu-items" href="#log" ng-click="doGetPreviousDate()"><i class="fa fa-mobile fa-4x hidden-md"></i><span>Log</span>
                         <p class="hidden-md hidden-sm">Update Weight</p>
                     </a>
                 </li>
-                <li class="calories" style="height: 150px;">
+               <li class="calories" style="height: 150px;">
                     <div class="col-lg-12 col-md-12 col-sm-12 no-padding">
                         <form name="weightLogForm" novalidate>
-                            <h5 class="margin-left-10 font-size-md"><b>CURRENT WEIGHT</b></h5>
+                            <h5 class="margin-left-10 font-size-md"><b>CURRENT&nbsp;WEIGHT&nbsp;&&nbsp;FAT</b></h5>
                             <div class="col-lg-6 col-md-6 col-sm-6 no-padding">
                                 <img style="width: 80px;height: 74px" class="width margin-left-5" src="../../images/log.png">
                             </div>
 
                             <div class="col-lg-6 col-md-6 col-sm-6 no-padding margin-top-20">
                                 <span class="weight-text-font">{{weightlog}}&nbsp;<small><span ng-show="userProfile.unitPreference==1">Kgs</span><span ng-show="userProfile.unitPreference==2">lbs</span></small></span>
-                              <!--  <span class="weight-text-font">{{fat}}&nbsp;(%)</span>-->
                             </div>
                         </form>
                     </div>
-                </li>
+                    <div  style="padding-right: 40px;float: right">
+                       <span class="weight-text-font">{{fat}}&nbsp;(%)</span>
+                    </div>
+               </li>
             </ul>
         </div>
         <div class="col-lg-12 col-md-12 col-sm-12 margin-top-5">
@@ -677,7 +679,7 @@
                                                 </div>
                                                 <div class="col-lg-6 col-md-6 col-sm-6 margin-top-10 no-padding-right padding-left-8">
                                                     <span ng-show="userProfile.unitPreference==1">
-                                                     <input class="profile_input weightoverride" id="weightLog" name="weightkgs" ng-model="weightlog" required validate-zero  ng-change="maxWeightCheck()" onkeypress="return validateFloatKeyPress(this,event);"/>
+                                                     <input class="profile_input weightoverride" ng-disabled="shouldNotHide" id="weightLog" name="weightkgs" ng-model="weightlog" required validate-zero  ng-change="maxWeightCheck()" onkeypress="return validateFloatKeyPress(this,event);"/>
                                                         <span class="error-message textarea-errormessage40-right60" ng-show="!weightLogForm.weightkgs.$error.required&&maxweight"><span style="bottom: 70px;">Please&nbsp;Enter&nbsp;Valid&nbsp;Weight.</span></span>
                                                          <span ng-show="weightLogForm.weightkgs.$dirty&&weightLogForm.weightkgs.$invalid">
                                                          <span class="error-message textarea-errormessage10" ng-show="weightLogForm.weightkgs.$error.required"><span>Required.</span></span>
@@ -685,7 +687,7 @@
                                                     </span>
                                                     </span>
                                                    <span ng-show="userProfile.unitPreference==2">
-                                                      <input class="profile_input weightoverride" name="weightlbs" ng-model="weightlog"  ng-change="maxCheck()" required validate-zero onkeypress="return validateFloatKeyPress(this,event);"/>
+                                                      <input class="profile_input weightoverride" ng-disabled="shouldNotHide" name="weightlbs" ng-model="weightlog"  ng-change="maxCheck()" required validate-zero onkeypress="return validateFloatKeyPress(this,event);"/>
                                                            <span class="error-message textarea-errormessage40-right60" ng-show="!weightLogForm.weightlbs.$error.required&&maxweightlbs"><span style="bottom: 70px;">Please&nbsp;Enter&nbsp;Valid&nbsp;Weight.</span></span>
                                                            <span ng-show="weightLogForm.weightlbs.$dirty&&weightLogForm.weightlbs.$invalid">
                                                            <span class="error-message textarea-errormessage10" ng-show="weightLogForm.weightlbs.$error.required"><span>Required.</span></span>
@@ -703,14 +705,14 @@
                                                     <span>Fat<small>(<span>%</span>)</small><span class="pull-right">:</span></span>
                                                 </div>
                                                 <div class="col-lg-6 col-md-6 col-sm-6 margin-top-10 no-padding-right padding-left-8">
-                                                    <input class="profile_input weightoverride decimal" name="curfat" ng-model="fat" required ng-change="maxFatValueCheck()" validate-zero onkeypress="return validateFloatKeyPress(this,event);"/>
+                                                    <input class="profile_input weightoverride decimal" ng-disabled="shouldNotHide" name="curfat" ng-model="fat" required ng-change="maxFatValueCheck()" validate-zero onkeypress="return validateFloatKeyPress(this,event);"/>
                                                     <span class="error-message" ng-show="!fatLogForm.curfat.$error.required&&maxfat"><span>Please&nbsp;Enter&nbsp;Valid&nbsp;Value.</span></span>
                                                     <span ng-show="fatLogForm.curfat.$dirty&&fatLogForm.curfat.$invalid">
                                                     <span class="error-message" ng-show="fatLogForm.curfat.$error.validateZero"><span>Invalid&nbsp;Data.</span></span>
                                                     </span>
                                                 </div>
                                                 <div class="col-lg-12 col-md-12 col-sm-12 text-center margin-top-20">
-                                                    <button onclick="return false;" class="btn-dis suggest_button override-width no-margin-bottom" ng-disabled="weightLogForm.$invalid || spinner || maxweight || maxfat || maxweightlbs " ng-click="weightLogEntry(1)">
+                                                    <button onclick="return false;" class="btn-dis suggest_button override-width no-margin-bottom" ng-disabled="weightLogForm.$invalid || spinner || maxweight || maxfat || maxweightlbs || shouldNotHide" ng-click="weightLogEntry(1)">
                                                       <span ng-if="spinner"><span class="three-quarters-loader">Loading…</span></span>{{weightUpdateText}}</button><br/>
                                                 </div>
                                             </div>
@@ -1021,11 +1023,11 @@
 
                     <div class="tab-content1 contentHistoryOverride min-height-200" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#eee'}">
                         <div class="col-md-12 col-sm-12 col-xs-12">
-                        <div class="col-md-6 col-sm-6 col-xs-6 margin-top-20" style="border: solid red 0px;">
+                        <div class="col-md-6 col-sm-6 col-xs-6 margin-top-20">
                             <h4 style="text-transform: uppercase;padding-left: 20px;">Graphs</h4>
                         </div>
                     <!-- Stat Search -->
-                        <div class="col-md-6 col-sm-6 col-xs-6 pull-right margin-top-10" style="border: solid blue 0px;">
+                        <div class="col-md-6 col-sm-6 col-xs-6 pull-right margin-top-10">
                             <div class="input-group">
                                 <input type="text"  class="history_input pull-right" placeholder="Search history here..." ng-model="searchHistory">
                                    <span class="input-group-btn">
@@ -1038,7 +1040,7 @@
                     <div class="col-md-12 col-sm-12 col-xs-12">
                         <hr/>
                     </div>
-                    <div class="col-md-6 col-sm-6 col-xs-6 margin-top-10" ng-repeat="graphCategory in historyGraph"  ng-hide="historyfilter.length==0">
+                    <div class="col-md-6 col-sm-6 col-xs-6 margin-top-10" ng-repeat="graphCategory in historyGraph"  ng-show="historyfilter.length!=0">
                                 <h4 style="text-transform: uppercase;padding-left: 20px;">{{graphCategory.graphCategory}}</h4>
                                 <hr style="padding-left: 20px;padding-right: 20px;"/>
                             <div class="col-md-6 col-sm-6 col-xs-6" ng-repeat="graph in historyfilter = (graphCategory.graphs | startsWithLetter:searchHistory)"  ng-show="graphCategory.graphs.length!=0">
@@ -1051,11 +1053,10 @@
                                      </div>
                                 </div>
                             </div>
-                    </div>
-
-                        <div ng-show="graphCategory.graphs.length==0" class="text-center margin-top-50">
+                        <div ng-show="historyfilter.length==0" class="text-center margin-top-50">
                             <h3 class="text-gray">NO RECORDS FOUND!!!</h3><br/><br/><br/>
                         </div>
+                    </div>
 
                     </div> <!--end of tab content1-->
                 </div> <!--end of col-md-12-->
@@ -1087,11 +1088,11 @@
                                 <div ng-show="isHistoryEmpty==0">
                                     <div id="historyGraph-multiple"></div>
                                 </div>
-                              <!--  <div ng-show="isHistoryEmpty==1" class="text-center">
+                                <div ng-show="isHistoryEmpty==1" class="text-center">
                                     <br/><br/><br/>
                                     <img src="../../images/no-dates.png" width="200" height="200">
                                     <h1 class="text-gray">NO DATES SELECTED</h1>
-                                </div>-->
+                                </div>
                                 <div style="text-align: center;padding-top: 5px;" ng-show="waterGraphs">
                                     <input type="radio" id="ml" ng-change="setHistoryType(14,'historyGraph-multiple')"  value="14" name="ml" ng-model="historyType"/>
                                     <label for="ml" style="background-color: #00ccff">Ml</label>
@@ -2218,6 +2219,7 @@
                 $('#main-date').daterangepicker(options, function(start, end, label) {
                     angular.element(document.getElementById('main-date')).scope().initialLoadFoodAndExercise(start.format('DD/MM/YYYY'));
                     document.getElementById("main-start-date").value = start.format('DD/MM/YYYY');
+                    console.log(start);
                 });
 
 //for food intake and excersize view graph date picker

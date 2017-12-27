@@ -1299,9 +1299,24 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
          showInLegend: false
          }]
          });*/
+    // date compare for update weight
+        $scope.doGetPreviousDate=function(){
+            $scope.shouldNotHide=false;
+            var yesterdayDate=document.getElementById("main-start-date").value; //main date
+            var firstValue = selectedDate.split('/'); //current date
+            var secondValue =yesterdayDate.split('/'); // main date on change value
+            var firstDate=new Date();
+            firstDate.setFullYear(firstValue[2],(firstValue[1] - 1 ),firstValue[0]);
+            var secondDate=new Date();
+            secondDate.setFullYear(secondValue[2],(secondValue[1] - 1 ),secondValue[0]);
+            //Comparing previous date with today date
+            if (+firstDate != +secondDate)
+            {
+                $scope.shouldNotHide=true;
+            }
+        };
 
         $scope.doGetWeightLog=function(date,id){
-
             var weightLogPromise=UserDashboardService.doGetWeightLogDetails(selectedDate);
             weightLogPromise.then(function(result){
                 var weightlogdetails=result.Weight_logs;
@@ -1398,7 +1413,6 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
 
              });*/
         };
-
         //TO Insert weight Goal Log
         $scope.doInsertOrUpdateWeightLog=function(date,weight,fat){
             requestHandler.postRequest("user/weightlogInsertorUpdate/",{"date":selectedDate,"weight":weight,"fat":$scope.fat}).then(function(response){
@@ -3738,7 +3752,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
                 else{
                     for (var i = 0; i < items.length; i++) {
                         var item = items[i];
-                        if (letterMatch.test(item.historyType)) {
+                        if (letterMatch.test(item.name)) {
                             filtered.push(item);
                         }
                     }

@@ -348,10 +348,10 @@ $scope.isCleanExercise=function(){
  //Maximum calorie value check
 $scope.maxcalories=false;
 $scope.maxCalorieValueCheck = function(){
-    if(parseInt($scope.userExercise.calorieburn)<=5000){
+    if(parseInt($scope.userExercise.calorieburn)<=9999.99){
         $scope.maxcalories=false;
     }
-    else if(parseInt($scope.userExercise.calorieburn) >5000){
+    else if(parseInt($scope.userExercise.calorieburn) >9999.99){
         $scope.maxcalories=true;
     }
 

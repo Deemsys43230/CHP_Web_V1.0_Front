@@ -76,6 +76,8 @@ userApp.controller('UserMedicationController',['$scope','requestHandler','Flash'
     };
 
     $scope.viewUserMedication=function(id){
+        //scrolling to top of the page
+        $('html, body').animate({scrollTop :0},"slow");
         $(function(){
             $("#lean_overlay").fadeTo(1000);
             $("#viewMedication").fadeIn(600);
@@ -106,6 +108,8 @@ userApp.controller('UserMedicationController',['$scope','requestHandler','Flash'
 
 
     $scope.doEditUserMedication=function(id){
+        //scrolling to top of the page
+        $('html, body').animate({scrollTop :0},"slow");
         $scope.isNew = false;
         $scope.title = "Edit Medication";
 

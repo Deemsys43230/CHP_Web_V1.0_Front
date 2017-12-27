@@ -837,6 +837,7 @@ userApp.controller("UserInitialController",['$scope','requestHandler','$location
         });
         }
         else if(pathVar==2){
+            //to hide empty alert while redirecting to dashboard page
             $(function(){
                 $("#lean_overlay").hide();
                 $("#review-modal").fadeIn(600);

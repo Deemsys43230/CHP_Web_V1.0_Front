@@ -305,7 +305,7 @@
                         </span>
                         <span ng-if="selectedExercise.exerciseid!=1">
                         <h5 class="margin-top-10">Calories to be Burnt:</h5>
-                        <input type="text"  name="calories"  maxlength="6" ng-model="userExercise.calorieburn" onkeypress="return validateFloatKeyPress1(this,event);" ng-change="maxCalorieValueCheck();" required validate-zero>
+                        <input type="text"  name="calories"  ng-model="userExercise.calorieburn" onkeypress="return validateFloatKeyPress1(this,event);" ng-change="maxCalorieValueCheck();" required validate-zero>
                             <span class="error-message" ng-show="!ExerciseAddForm.calories.$error.required&&maxcalories"><span>Please&nbsp;Enter&nbsp;Valid&nbsp;Value.</span></span>
                             <span ng-show="ExerciseAddForm.calories.$dirty&&ExerciseAddForm.calories.$invalid">
                                <span class="error-message" ng-show="ExerciseAddForm.calories.$error.required"><span>Required.</span></span>
