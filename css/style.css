@@ -18211,15 +18211,26 @@ select.event:focus {
     .error-bottom {
         bottom: 30px !important;
     }
+    .error-bottom-invalid{
+        bottom: 30px !important;
+    }
 }
 
 /*for firefox*/
-_:-moz-tree-row(hover), .error-bottom {
-    bottom: 0 !important;
+@-moz-document url-prefix() {
+    .error-bottom {
+        bottom: 0 !important;
+    }
+    .error-bottom-invalid{
+        bottom: 30px !important;
+    }
 }
 /*for IE*/
 @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
     .error-bottom {
+        bottom: 5px !important;
+    }
+    .error-bottom-invalid{
         bottom: 5px !important;
     }
 }

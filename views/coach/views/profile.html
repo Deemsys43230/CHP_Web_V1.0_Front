@@ -42,7 +42,7 @@
                                     <input class="profile_input" name="firstname" ng-model="userProfile.firstname" ng-pattern="/^ *([a-zA-Z]+ ?)+ *$/" maxlength="25" required/>
                                     <span ng-show="userProfileForm.firstname.$dirty&&userProfileForm.firstname.$invalid">
                                         <span class="error-message textarea-errormessage10" ng-show="userProfileForm.firstname.$error.required"><span class="error-bottom">Required.</span></span>
-                                        <span class="error-message textarea-errormessage10" ng-show="userProfileForm.firstname.$error.pattern"><span class="error-bottom">Enter&nbsp;valid&nbsp;Name.</span></span>
+                                        <span class="error-message textarea-errormessage10" ng-show="userProfileForm.firstname.$error.pattern"><span class="error-bottom-invalid">Enter&nbsp;valid&nbsp;Name.</span></span>
                                     </span>
                                 </div>
                                 <div class="col-lg-4 col-md-4 col-sm-4 padding-top-4 padding-right-0 margin-top-10">
@@ -52,7 +52,7 @@
                                     <input class="profile_input" name="lastname" ng-model="userProfile.lastname" ng-pattern="/^ *([a-zA-Z]+ ?)+ *$/" maxlength="25" required/>
                                     <span ng-show="userProfileForm.lastname.$dirty&&userProfileForm.lastname.$invalid">
                                         <span class="error-message textarea-errormessage10" ng-show="userProfileForm.lastname.$error.required"><span class="error-bottom">Required.</span></span>
-                                        <span class="error-message textarea-errormessage10" ng-show="userProfileForm.lastname.$error.pattern"><span class="error-bottom">Enter&nbsp;valid&nbsp;Name.</span></span>
+                                        <span class="error-message textarea-errormessage10" ng-show="userProfileForm.lastname.$error.pattern"><span class="error-bottom-invalid">Enter&nbsp;valid&nbsp;Name.</span></span>
                                     </span>
                                 </div>
                                 <div class="col-lg-4 col-md-4 col-sm-4 padding-top-4 padding-right-0 margin-top-10">
@@ -90,8 +90,8 @@
                                     <input class="profile_input" name="phone" ng-pattern="/^\d+$/"  ng-model="userProfile.phone" ng-minlength="10" maxlength="10" required />
                                         <span ng-show="userProfileForm.phone.$dirty&&userProfileForm.phone.$invalid">
                                              <span class="error-message textarea-errormessage10" ng-show="userProfileForm.phone.$error.required"><span class="error-bottom">Required.</span></span>
-                                              <span class="error-message textarea-errormessage10" ng-show="userProfileForm.phone.$error.pattern"><span class="error-bottom">Invalid&nbsp;Format.</span></span>
-                                             <span class="error-message textarea-errormessage10" ng-show="!userProfileForm.phone.$error.pattern&&userProfileForm.phone.$error.minlength"><span class="error-bottom">Should&nbsp;be&nbsp;of&nbsp;length&nbsp;10.</span></span>
+                                              <span class="error-message textarea-errormessage10" ng-show="userProfileForm.phone.$error.pattern"><span class="error-bottom-invalid">Invalid&nbsp;Format.</span></span>
+                                             <span class="error-message textarea-errormessage10" ng-show="!userProfileForm.phone.$error.pattern&&userProfileForm.phone.$error.minlength"><span class="error-bottom-invalid">Should&nbsp;be&nbsp;of&nbsp;length&nbsp;10.</span></span>
                                          </span>
                                 </div>
                                 <div class="col-lg-4 col-md-4 col-sm-4 padding-top-4 padding-right-0 margin-top-10">
@@ -128,8 +128,8 @@
                                     <input class="profile_input" name="experience" ng-pattern="/^\d+$/" ng-model="userProfile.experience" maxlength="30" required ng-maxlength="3"/>
                                     <span ng-show="userProfileForm.experience.$dirty&&userProfileForm.experience.$invalid">
                                         <span class="error-message textarea-errormessage10" ng-show="userProfileForm.experience.$error.required"><span class="error-bottom">Required.</span></span>
-                                        <span class="error-message textarea-errormessage10" ng-show="userProfileForm.experience.$error.pattern"><span class="error-bottom">Invalid&nbsp;Data.</span></span>
-                                         <span class="error-message textarea-errormessage10" ng-show="userProfileForm.experience.$error.maxlength"><span class="error-bottom">Enter&nbsp;Valid&nbsp;Data.</span></span>
+                                        <span class="error-message textarea-errormessage10" ng-show="userProfileForm.experience.$error.pattern"><span class="error-bottom-invalid">Invalid&nbsp;Data.</span></span>
+                                         <span class="error-message textarea-errormessage10" ng-show="userProfileForm.experience.$error.maxlength"><span class="error-bottom-invalid">Enter&nbsp;Valid&nbsp;Data.</span></span>
                                     </span>
                                 </div>
                             </div>
@@ -167,7 +167,7 @@
                                     <input class="profile_input" name="city" ng-pattern="/^ *([a-zA-Z]+ ?)+ *$/" ng-model="userProfile.city" maxlength="20" required/>
                                          <span ng-show="userProfileForm.city.$dirty&&userProfileForm.city.$invalid">
                                              <span class="error-message textarea-errormessage10" ng-show="userProfileForm.city.$error.required"><span class="error-bottom">Required.</span></span>
-                                             <span class="error-message textarea-errormessage10" ng-show="userProfileForm.city.$error.pattern"><span class="error-bottom">Invalid&nbsp;city.</span></span>
+                                             <span class="error-message textarea-errormessage10" ng-show="userProfileForm.city.$error.pattern"><span class="error-bottom-invalid">Invalid&nbsp;city.</span></span>
                                          </span>
                                 </div>
                                 <div class="col-lg-4 col-md-4 col-sm-4 padding-top-4 padding-right-0 margin-top-10">
@@ -177,8 +177,8 @@
                                     <input class="profile_input" name="zipcode" ng-pattern="/^\d{5,6}$/" ng-model="userProfile.zipcode" maxlength="6" minlength="5" required/>
                                         <span ng-show="userProfileForm.zipcode.$dirty&&userProfileForm.zipcode.$invalid">
                                             <span class="error-message textarea-errormessage10" ng-show="userProfileForm.zipcode.$error.required"><span class="error-bottom">Required.</span></span>
-                                            <span class="error-message textarea-errormessage10" ng-show="userProfileForm.zipcode.$error.pattern"><span class="error-bottom">Invalid&nbsp;Format.</span></span>
-                                            <span class="error-message textarea-errormessage10" ng-show="!userProfileForm.zipcode.$error.pattern&&userProfileForm.zipcode.$error.minlength"><span class="error-bottom">Should&nbsp;be&nbsp;of&nbsp;length&nbsp;5.</span></span>
+                                            <span class="error-message textarea-errormessage10" ng-show="userProfileForm.zipcode.$error.pattern"><span class="error-bottom-invalid">Invalid&nbsp;Format.</span></span>
+                                            <span class="error-message textarea-errormessage10" ng-show="!userProfileForm.zipcode.$error.pattern&&userProfileForm.zipcode.$error.minlength"><span class="error-bottom-invalid">Should&nbsp;be&nbsp;of&nbsp;length&nbsp;5.</span></span>
                                          </span>
                                 </div>
                                 <div class="col-lg-4 col-md-4 col-sm-4 padding-top-4 padding-right-0 margin-top-10">

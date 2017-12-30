@@ -1468,22 +1468,3 @@
         line-height: 24px;
     }
 }
-@media only screen and (min-width: 1200px){
-
-    @supports (-webkit-appearance:none) {
-        .error-bottom {
-            bottom: 15px;
-        }
-    }
-
-    _:-moz-tree-row(hover), .error-bottom {
-        bottom: 15px ;
-    }
-
-    @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
-        .error-bottom {
-            bottom: 3px;
-        }
-    }
-
-}
