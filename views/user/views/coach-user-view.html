@@ -716,7 +716,7 @@
             </table>
             </div>
             <div class="col-md-4">
-                <img class="add-exercise-img" width="220" height="208" ng-src="{{workoutPlanItemDetails.exerciseimage}}" ng-if="workoutPlanItemDetails.exerciseimage&&workoutPlanItemDetails.videosource==null">
+                <img class="add-exercise-img" width="220" height="208" ng-src="{{workoutPlanItemDetails.exerciseimage}}" ng-if="workoutPlanItemDetails.exerciseimage&&(workoutPlanItemDetails.videosource==null||workoutPlanItemDetails.videosource== '')">
                 <iframe width="220" height="220" ng-src="{{workoutPlanItemDetails.videosource | trusted}}" ng-if="workoutPlanItemDetails.videosource!=null&&workoutPlanItemDetails.exerciseimage" frameborder="0" allowfullscreen></iframe>
                 
                 <div class="margin-top-15 text-center exercise-btn padding-top-15">

@@ -1246,12 +1246,12 @@
                         <form name="mealAssignForm" novalidate>
                         <h5 class="margin-top-10">Meal Plan Name :</h5>
                         <div class="form-group">
-                            <select class="form-control"  ng-model="addMealPlan.planid" 
+                            <select class="select2 narrow wrap"  ng-model="addMealPlan.planid" name="mealplan"
                                     ng-options="plan.id as plan.planname for plan in coachMealPlanList" required focus-me="shouldBeOpen">
-                                  <option value="" selected="selected">--Select--</option>
+                                  <option  value="" selected="selected">--Select--</option>
                             </select>
-                            <span ng-show="mealAssignForm.planid.$dirty&&mealAssignForm.planid.$invalid">
-                                <span ng-show="mealAssignForm.planid.$error.required"><span>Required.</span></span>
+                            <span ng-show="mealAssignForm.mealplan.$dirty&&mealAssignForm.mealplan.$invalid">
+                                <span class="error-message" ng-show="mealAssignForm.mealplan.$error.required"><span>Required.</span></span>
                             </span>  
                         </div>  
                        </form>
@@ -1283,12 +1283,12 @@
                         <form name="workoutAssignForm" novalidate>
                         <h5 class="margin-top-10">Workout Plan Name :</h5>
                         <div class="form-group">
-                            <select class="form-control"  ng-model="addWorkoutPlan.planid" 
+                            <select class="form-control" ng-model="addWorkoutPlan.planid" name="workoutplan"
                                     ng-options="plan.id as plan.planname for plan in coachWorkoutPlanList" required focus-me="shouldBeOpen">
-                                  <option value="" selected="selected">--Select--</option>
+                                  <option value="" selected="selected" class="wrap-all">--Select--</option>
                             </select>
-                            <span ng-show="workoutAssignForm.planid.$dirty&&workoutAssignForm.planid.$invalid">
-                                <span ng-show="workoutAssignForm.planid.$error.required"><span>Required.</span></span>
+                            <span ng-show="workoutAssignForm.workoutplan.$dirty&&workoutAssignForm.workoutplan.$invalid">
+                                <span ng-show="workoutAssignForm.workoutplan.$error.required"><span>Required.</span></span>
                             </span>  
                         </div>  
                        </form>
@@ -1873,4 +1873,17 @@ $(document).ready(function(){
 $(document).ready(function(){
     $('[data-toggle="tooltip"]').tooltip();   
 });
+
 </script>
+<script>
+  $(function(){
+      var $select2 = $('.select2').select2({
+          containerCssClass: "wrap",
+          dropdownParent: $('#modal-assign-meal'),
+           autoWidth: false
+      });
+});
+</script>
+
+
+
