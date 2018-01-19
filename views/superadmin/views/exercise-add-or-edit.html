@@ -70,7 +70,7 @@
                         </ui-select>
                         </div>
 
-                        <h5>Video URL:</h5>
+                        <h5>Video URL:<span>&nbsp;<a href="" data-toggle="popover" data-trigger="hover" title="Video Url Instruction" data-content="Step : 1) Right click on youtube video. <br/> Step : 2) Copy embed code.<br/> Step : 3) Paste src <b>URL</b> only."><i class="fa fa-info-circle"></i></a>&nbsp;</span></h5>
                       <input class="form-control" name="videosource" maxlength="100" ng-model="exerciseDetail.videosource"/>
                         <span ng-show="excersiseForm.videosource.$dirty$$excerciseForm.videosource.$invalid"> 
                             <span class="error-message" ng-show="excerciseForm.videosource.$error.validateUrl"><span>Enter&nbsp;valid&nbsp;URL.</span></span>
@@ -190,5 +190,11 @@
     $(function(){
         $(".common_model").show();
     })
+
+    $(document).ready(function(){
+        $('[data-toggle="popover"]').popover(
+                {html:true}
+        );
+    });
 </script>
 
