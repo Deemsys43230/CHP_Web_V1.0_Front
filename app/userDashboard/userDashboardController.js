@@ -1318,7 +1318,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
 
         $scope.doGetWeightLog=function(date,id){
             $scope.showEmpty=false;
-            var weightLogPromise=UserDashboardService.doGetWeightLogDetails(selectedDate);
+            var weightLogPromise=UserDashboardService.doGetWeightLogDetails(date);
             weightLogPromise.then(function(result){
                 var weightlogdetails=result.Weight_logs;
 
