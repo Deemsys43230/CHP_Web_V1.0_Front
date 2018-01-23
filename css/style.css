@@ -18255,4 +18255,8 @@ select.event:focus {
     text-overflow: inherit;
     white-space: normal;
 }
-
+/*profile image wrapping*/
+.profile-image img{
+    height:200px !important;
+    width:200px !important;
+}
