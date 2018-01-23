@@ -259,8 +259,8 @@
 </div>
 
 <!-- create coach popup-->
-<div id="modal" class="popupContainer" style="display:none;">
-    <header class="popupHeader">
+<div id="modal" class="popupContainer-width" style="display:none;height: 475px !important;"">
+    <header class="popupHeader-width">
         <span class="header_title">Change Profile Image</span>
         <span class="modal_close"><i class="fa fa-times"></i></span>
     </header>
@@ -269,7 +269,7 @@
         <!-- Register Form -->
         <div class="common_model">
             <div class="image-editor">
-                <div class="cropit-image-preview center-block"></div>
+                <div class="cropit-preview" style="margin-left: 105px;margin-top: 25px"></div>
                 <div class="image-size-label">
                     Resize image
                 </div>
@@ -438,6 +438,20 @@
             $('#pswd_info').hide();
         });
 
+    });
+</script>
+<script>
+    $(function() {
+        $('.image-editor').cropit({
+            exportZoom: 1.25,
+            imageBackground: true,
+            imageBackgroundBorderWidth: 50
+        });
+    });
+</script>
+<script>
+    $('#modal_trigger').click(function(){
+        $('#coimgfile').click();
     });
 </script>
 <script>

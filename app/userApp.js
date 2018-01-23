@@ -465,7 +465,6 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                             files:[
                                 '../../plugin/popup/style.css',
                                 '../../css/profile-image-upload.css',
-                                '../../js/image-upload.js',
                                 '../../app/userProfile/userProfileController.js'
                             ]
                         })
