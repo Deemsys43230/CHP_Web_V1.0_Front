@@ -852,6 +852,7 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
             errorMessage(Flash,"Please try again later!");
         });
 
+
         $(".modal_close").click(function(){
             $(".common_model").hide();
             $("#view-workout-item").hide();
@@ -867,6 +868,10 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
         });
     };
 
+/*    To reset previous exercise image and video urls*/
+    $scope.resetUrl=function(){
+        $scope.workoutPlanItemDetails={};
+    };
     // Set or Unset Workout Item By User
     $scope.doSetUnsetExerciseItem= function(workoutplanid,date){
         $scope.getExerciseItemParam={'id':workoutplanid, 'date':date};

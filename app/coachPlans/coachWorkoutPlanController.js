@@ -336,10 +336,13 @@ $scope.doEditExerciseFromPlan=function(id){
                 $(".user_register").hide();
                 $("#modal-add-exercise").hide();
                 $("#lean_overlay").hide();
-                $scope.resetdata();
             });
     });
 };
+    /*    To reset previous exercise image and video urls*/
+    $scope.resetUrl=function(){
+        $scope.userSelectedExerciseDetails={};
+    };
 
 $scope.isCleanExercise=function(){
     return angular.equals($scope.originallevel, $scope.userExercise.selectedLevel) && angular.equals($scope.originalcalorie, $scope.userExercise.calorieburn) && angular.equals($scope.originalisoptional, $scope.userExercise.isoptional);

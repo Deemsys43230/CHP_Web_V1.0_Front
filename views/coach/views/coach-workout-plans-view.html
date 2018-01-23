@@ -76,7 +76,7 @@
                                         <span ng-show="workoutItem.isoptional==0" class="green">&nbsp;</span>
                                         <span class="name_values">{{workoutItem.exercisename}}</span>
                                         <i class="fa fa-times-circle pull-right" ng-click="doDeleteExerciseFromPlan(workoutItem.id);"></i>&nbsp;
-                                        <i class="fa fa-edit pull-right" ng-click="doEditExerciseFromPlan(workoutItem.id);"></i>&nbsp;&nbsp;
+                                        <i class="fa fa-edit pull-right" ng-click="doEditExerciseFromPlan(workoutItem.id);resetUrl();"></i>&nbsp;&nbsp;
                                         <div class="time">
                                             {{workoutItem.calorieburn}}&nbsp;KCals&nbsp;&nbsp;|&nbsp;&nbsp;Level: {{workoutItem.levelname}}
                                         </div>
