@@ -57,6 +57,15 @@
                                     <td class="col-md-8 wrap-all">{{usercoachdetails.dob}}</td>
                                 </tr>
                                 <tr>
+                                    <td class="col-md-4">Gender</td>
+                                    <td class="col-md-8 wrap-all">
+                                        <div ng-if="usercoachdetails.gender == null">NA</div>
+                                        <div ng-if="usercoachdetails.gender == 1">Male</div>
+                                        <div ng-if="usercoachdetails.gender == 2">Female</div>
+                                    </td>
+
+                                </tr>
+                                <tr>
                                     <td class="col-md-4">City</td>
                                     <td class="col-md-8 wrap-all">{{usercoachdetails.city}}</td>
                                 </tr>
