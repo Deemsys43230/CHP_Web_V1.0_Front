@@ -580,40 +580,37 @@ function getSelectionStart(o) {
     } else return o.selectionStart
 }
 
+</script>
+<script type="text/javascript">
+ /* finding user device*/
 
-/* finding user device*/
+    var isAndroid = (/android/i.test(navigator.userAgent.toLowerCase()));
+    var isIphone = (/iphone/i.test(navigator.userAgent.toLowerCase()));
+         $(".android").hide();
+         $(".iphone").hide();
+         $(".mobileApp").hide();
+         $(".noMobileApp").show();
 
-var isAndroid = (/android/i.test(navigator.userAgent.toLowerCase()));
-var isIphone = (/iphone/i.test(navigator.userAgent.toLowerCase()));
+    if(isAndroid){
+        $(".mobileApp").show();
+        $(".noMobileApp").hide();
+        $(".android").show();
+        $(".iphone").hide();
+        $('.loginNow').click(function(){
+            $('.modal_trigger').click();
+            $("#register_form_mobile").click();
+        });
 
-$(".android").hide();
-$(".iphone").hide();
-$(".mobileApp").hide();
-$(".noMobileApp").show();
-
-if(isAndroid){
-    $(".mobileApp").show();
-    $(".noMobileApp").hide();
-    $(".android").show();
-    $(".iphone").hide();
-    $('.loginNow').click(function(){
-        $('.modal_trigger').click();
-        $("#register_form_mobile").click();
-    });
-
-}
-else if(isIphone){
-    $(".mobileApp").show();
-    $(".noMobileApp").hide();
-    $(".android").hide();
-    $(".iphone").show();
-    $('.loginNow').click(function(){
-        $('.modal_trigger').click();
-        $("#register_form_mobile").click();
-    });
-}
-// To reset bmi calculationform
-/*$('#reset_form').click(function(){
-    $('#bmi_form')[0].reset();
-});*/
+    }
+    else if(isIphone){
+        $(".mobileApp").show();
+        $(".noMobileApp").hide();
+        $(".android").hide();
+        $(".iphone").show();
+        $('.loginNow').click(function(){
+            $('.modal_trigger').click();
+            $("#register_form_mobile").click();
+        });
+    }
+    $(".modal_trigger").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
 </script>
