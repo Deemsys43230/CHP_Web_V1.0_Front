@@ -22,23 +22,23 @@
                 <h3 class="text-orange">{{usercoachdetails.name}}&nbsp;</h3>
                 <div class="margin-bottom-10">{{usercoachdetails.emailid}}&nbsp;</div>
                 <div class="col-md-4 no-padding"><strong>Specialist</strong></div>
-                <div class="col-md-8">: {{usercoachdetails.specialist}}</div>
+                <div class="col-md-6"> <span class="col-md-2" >:</span>{{usercoachdetails.specialist}}</div>
                 <div class="col-md-4 no-padding"><strong>Qualification</strong></div>
-                <div class="col-md-8">: {{usercoachdetails.qualification}}</div>
+                <div class="col-md-6"> <span class="col-md-2" >:</span> {{usercoachdetails.qualification}}</div>
                 <div class="col-md-4 no-padding"><strong>Experience</strong></div>
-                <div class="col-md-8">:<span ng-show="years==undefined"> &nbsp;NA </span> <span ng-show="years>0"> {{years}} <span ng-show="years==1">Year&nbsp;</span><span ng-show="years>1">Years&nbsp;</span> </span><span ng-show="months>0"> {{months}} <span ng-show="months==1">Month</span><span ng-show="months>1"> Months</span></span></div>
+                <div class="col-md-7"> <span class="col-md-1">:</span><span ng-show="years==undefined"> &nbsp;NA </span> <span ng-show="years>0"> {{years}} <span ng-show="years==1">Year&nbsp;</span><span ng-show="years>1">Years&nbsp;</span> </span><span ng-show="months>0"> {{months}} <span ng-show="months==1">Month</span><span ng-show="months>1"> Months</span></span></div>
                 <div class="col-md-4 no-padding"><strong>Contact</strong></div>
-                <div class="col-md-8">: {{usercoachdetails.phone}}</div>
+                <div class="col-md-6"> <span class="col-md-2" >:</span>{{usercoachdetails.phone}}</div>
                 <div class="col-md-4 no-padding"><strong>DOB</strong></div>
-                <div class="col-md-8">: {{usercoachdetails.dob}}</div>
+                <div class="col-md-6"> <span class="col-md-2" >:</span>{{usercoachdetails.dob}}</div>
                 <div class="col-md-4 no-padding"><strong>Country</strong></div>
-                <div class="col-md-8">: {{usercoachdetails.country}}</div>
+                <div class="col-md-6"> <span class="col-md-1" >:</span>{{usercoachdetails.countryName}}</div>
                 <div class="col-md-4 no-padding"><strong>State</strong></div>
-                <div class="col-md-8">: {{usercoachdetails.state}}</div>
+                <div class="col-md-6"> <span class="col-md-1" >:</span>{{usercoachdetails.stateName}}</div>
                 <div class="col-md-4 no-padding"><strong>City</strong></div>
-                <div class="col-md-8">: {{usercoachdetails.city}}</div>
+                <div class="col-md-6"><span class="col-md-2" >:</span>{{usercoachdetails.city}}</div>
                 <div class="col-md-4 no-padding"><strong>Zipcode</strong></div>
-                <div class="col-md-8">: {{usercoachdetails.zipcode}}</div>
+                <div class="col-md-6"><span class="col-md-2" >:</span> {{usercoachdetails.zipcode}}</div>
                 <div class="col-md-12 no-padding margin-top-10"><strong>About Me :</strong></div>
                 <div class="col-md-12 no-padding">{{usercoachdetails.about}}</div>
             </div>
