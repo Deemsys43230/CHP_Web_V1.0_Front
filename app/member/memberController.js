@@ -32,10 +32,7 @@ adminApp.controller('MemberController',['$scope','requestHandler','Flash','$rout
                  $scope.viewMemberDetails.stateName = value.name
             }
             });
-
-service.getCountry().then(func(rsres){
-                $scope.viewMemberDetails.countryName=
-            })
+            
             //View the image in ng-src for view testimonials
 
             if($scope.viewMemberDetails.about==null){
