@@ -635,7 +635,8 @@ adminApp.config([
               name: 'adminApp',
               files: [
                 '../../angular/angular-utils-pagination/dirPagination.js',
-                '../../app/member/memberController.js'
+                '../../app/member/memberController.js',
+                  '../../app/countryState/countryStateService.js'
               ]
             });
           }
@@ -650,7 +651,8 @@ adminApp.config([
           function ($ocLazyLoad) {
             return $ocLazyLoad.load({
               name: 'adminApp',
-              files: ['../../angular/angular-utils-pagination/dirPagination.js','../../app/member/memberController.js']
+              files: ['../../angular/angular-utils-pagination/dirPagination.js','../../app/member/memberController.js',
+                  '../../app/countryState/countryStateService.js']
             });
           }
         ]
@@ -667,7 +669,8 @@ adminApp.config([
               files: [
                 '../../css/custom-inputs.css',
                 '../../angular/angular-utils-pagination/dirPagination.js',
-                '../../app/coach/coachController.js'
+                '../../app/coach/coachController.js',
+                  '../../app/countryState/countryStateService.js'
               ]
             });
           }
@@ -685,7 +688,8 @@ adminApp.config([
               files: [
                 '../../plugin/popup/style.css',
                 '../../angular/angular-utils-pagination/dirPagination.js',
-                '../../app/coach/coachController.js'
+                '../../app/coach/coachController.js',
+                  '../../app/countryState/countryStateService.js'
               ]
             });
           }
@@ -704,7 +708,8 @@ adminApp.config([
                 '../../css/profile-image-upload.css',
                   '../../angular/angular-utils-pagination/dirPagination.js',
                 '../../js/image-upload.js',
-                '../../app/coach/coachController.js'
+                '../../app/coach/coachController.js',
+                  '../../app/countryState/countryStateService.js'
               ]
             });
           }
