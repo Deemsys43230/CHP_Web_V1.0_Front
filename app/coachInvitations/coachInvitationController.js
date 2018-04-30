@@ -1,9 +1,9 @@
 /**
  * Created by Deemsys on 9/21/2015.
  */
-var coachApp = angular.module('coachApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','angularUtils.directives.dirPagination','angular-nicescroll']);
+var coachApp = angular.module('coachApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','stateCountryModule','angularUtils.directives.dirPagination','angular-nicescroll']);
 
-coachApp.controller('CoachInvitationController',['$scope','requestHandler','Flash',function($scope,requestHandler,Flash) {
+coachApp.controller('CoachInvitationController',['$scope','requestHandler','Flash','CountryStateService',function($scope,requestHandler,Flash,CountryStateService) {
 
 
   $scope.activeClass.my='active';
@@ -52,8 +52,12 @@ coachApp.controller('CoachInvitationController',['$scope','requestHandler','Flas
          $scope.viewload=true;
          requestHandler.getRequest("getUserProfile/"+id,"").then(function(response){
          	$scope.coachuserdetails= response.data.userprofile;
+             //to get country and state details for user
+             $scope.coachuserdetails.countryName=CountryStateService.doGetCountries($scope.coachuserdetails.country);
+             $scope.coachuserdetails.stateName=CountryStateService.doGetStates($scope.coachuserdetails.state,$scope.coachuserdetails.country);
 
-            if($scope.coachuserdetails.relationship==null){
+
+             if($scope.coachuserdetails.relationship==null){
               $scope.coachuserdetails.relationship="NA";
             }
             

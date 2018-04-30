@@ -1,9 +1,9 @@
 /**
  * Created by Deemsys on 9/21/2015.
  */
-var coachApp = angular.module('coachApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','angularUtils.directives.dirPagination','angular-nicescroll','angular-svg-round-progress','angular.filter']);
+var coachApp = angular.module('coachApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','stateCountryModule','angularUtils.directives.dirPagination','angular-nicescroll','angular-svg-round-progress','angular.filter']);
 
-coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter","Flash","$location","$rootScope","$routeParams","roundProgressService",function($scope,requestHandler,$filter,Flash,$location,$rootScope,$routeParams,$setPristine,roundProgressService) {
+coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter","Flash","$location","CountryStateService","$rootScope","$routeParams","roundProgressService",function($scope,requestHandler,$filter,Flash,$location,CountryStateService,$rootScope,$routeParams,$setPristine,roundProgressService) {
 
     $scope.isActive=false;
     $scope.activeClass.my='active';
@@ -127,8 +127,13 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
             };
             if(id!=0){
                  requestHandler.getRequest("/getUserProfile/"+id+"/", "").then(function(response){
-                    coachclientdetails=response.data.userprofile;
-                    // $scope.coachclientdetails.age = "-";
+                     coachclientdetails=response.data.userprofile;
+                     //to get country and state details for user from coach side
+                     coachclientdetails.countryName=CountryStateService.doGetCountries(coachclientdetails.country);
+                     coachclientdetails.stateName=CountryStateService.doGetStates(coachclientdetails.state,coachclientdetails.country);
+
+
+                     // $scope.coachclientdetails.age = "-";
                     
 
                     //For Age calculation

@@ -282,8 +282,10 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../angular/angular-utils-pagination/dirPagination.js',
                                 '../../css/custom-inputs.css',
                                 '../../plugin/dateRange/daterangepicker.css',
-                                '../../plugin/dateRange/daterangepicker.js',                                
+                                '../../plugin/dateRange/daterangepicker.js',
+                                '../../app/countryState/countryStateService.js',
                                 '../../app/coachMembers/coachMembersController.js'
+
                             ]
                         })
                     }],
@@ -316,7 +318,8 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../angular/angular-utils-pagination/dirPagination.js',
                                  '../../css/custom-inputs.css',
                                 '../../plugin/dateRange/daterangepicker.css',
-                                '../../plugin/dateRange/daterangepicker.js'
+                                '../../plugin/dateRange/daterangepicker.js',
+                                '../../app/countryState/countryStateService.js'
                             ]
                         })
                     }],
@@ -346,7 +349,8 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                             files:[
                                 '../../plugin/popup/style.css',
                                 '../../angular/angular-utils-pagination/dirPagination.js',
-                                '../../app/coachInvitations/coachInvitationController.js'
+                                '../../app/coachInvitations/coachInvitationController.js',
+                                '../../app/countryState/countryStateService.js'
                             ]
                         })
                     }]
