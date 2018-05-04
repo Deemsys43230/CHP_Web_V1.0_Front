@@ -104,7 +104,7 @@
                 <div >
                     <div>
                         <input class="pull-right friend-search" placeholder="Search member here..." ng-model="searchfriend"/>
-                        <h4>Members List</h4>
+                        <h4><b>Members List</b></h4>
                     </div>
                     <div class="margin-top-15">
                         <hr/>
@@ -118,22 +118,23 @@
                                 <div class="col-lg-6 col-md-5 col-sm-5">
                                     <h4 class="wrap">{{member.user_name}}</h4>
                                 </div>
+                                <div class="col-lg-3 col-md-3 col-sm-3 margin-top-3">
+                                    <div ng-show="goalDetail.candelete==0">
+                                        <span ng-show="member.isownerstatus==1"><a href="" class="btn-xs btn-success disabled">Admin</a></span>
+                                        <span ng-show="member.isownerstatus==0 && member.status==0"><a href="" class="btn-xs btn-danger request_sent" ng-show="isOwner" ng-click="doRemoveMember(member.userid)">Remove</a></span>
+                                        <span ng-show="member.isownerstatus==0 && member.status==1"><a href="" class="btn-xs btn-warning">Member</a></span>
+                                    </div>
+                                    <div ng-show="goalDetail.candelete==1">
+                                        <span ng-show="member.isownerstatus==1"><a href="" class="btn-xs btn-success disabled">Admin</a></span>
+                                        <span ng-show="member.isownerstatus==0 && member.status==0"><a href="" class="btn-xs btn-danger request_sent" ng-click="doRemoveMember(member.userid)">Remove</a></span>
+                                        <span ng-show="member.isownerstatus==0 && member.status==1"><a href="" class="btn-xs btn-warning request_sent disabled">Member</a></span>
+                                    </div>
+                                </div>
                                 <div class="col-lg-2 col-md-3 col-sm-3">
                                     <span ng-show="member.status==1"><strong class="text-green text-bold">Joined</strong></span>
                                     <span ng-show="member.status==0"><strong class="text-orange">Pending</strong></span>
                                 </div>
-                                <div class="col-lg-3 col-md-3 col-sm-3 margin-top-3">
-                                    <div ng-show="goalDetail.candelete==0">
-                                        <span ng-show="member.isownerstatus==1"><a href="" class="invite_button disabled">Admin</a></span>
-                                        <span ng-show="member.isownerstatus==0 && member.status==0"><a href="" class="invite_button request_sent" ng-click="doRemoveMember(member.userid)">Remove</a></span>
-                                        <span ng-show="member.isownerstatus==0 && member.status==1"><a href="" class="invite_button request_sent disabled">Member</a></span>
-                                    </div>
-                                    <div ng-show="goalDetail.candelete==1">
-                                        <span ng-show="member.isownerstatus==1"><a href="" class="invite_button disabled">Admin</a></span>
-                                        <span ng-show="member.isownerstatus==0 && member.status==0"><a href="" class="invite_button request_sent" ng-click="doRemoveMember(member.userid)">Remove</a></span>
-                                        <span ng-show="member.isownerstatus==0 && member.status==1"><a href="" class="invite_button request_sent disabled">Member</a></span>
-                                    </div>
-                                </div>
+
                                 <div class="col-lg-12 col-md-12 col-sm-12 no-padding">
                                     <div class="margin-right-10">
                                         <hr/>

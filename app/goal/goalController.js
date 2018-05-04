@@ -30,6 +30,13 @@ userApp.controller('GoalController',['$scope','requestHandler','Flash','$route',
         console.log("asd",$route.current.request);
         requestHandler.postRequest("user/getIndividualGoalDetail/",{"goalid" :$routeParams.id}).then(function(response){
             $scope.goalDetail=response.data.Goal_Data;
+            //To find the admin of the goal
+            if($scope.goalDetail.ownerid){
+                $scope.isOwner==true;
+            }
+            else{
+                $scope.isOwner==false;
+            }
            /* if($scope.goalDetail.status==2){
                 $scope.viewRank();
             }*/
@@ -41,7 +48,6 @@ userApp.controller('GoalController',['$scope','requestHandler','Flash','$route',
         $scope.memberUserIdList=[];
         requestHandler.postRequest("user/getGoalMemberList/",{"goalid" : $routeParams.id}).then(function(response){
             $scope.goalMembers=response.data.Goal_Data;
-
             $.each($scope.goalMembers,function(index,value){
                 $scope.memberUserIdList.push(value.userid);
             });

@@ -1,0 +1,41 @@
+<html>
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.5/angular.min.js"></script>
+    <script src="../app/requestHandler.js"></script>
+</head>
+
+<body ng-app="commonApp" ng-controller="RedirectController"></body>
+
+
+<script>
+    angular.module("commonApp", []);
+    var commonApp= angular.module('commonApp', ['requestModule']);
+
+    //Internal Login Details
+    commonApp.controller('RedirectController',['$scope','requestHandler','$window','$location',function($scope,requestHandler,$window,$location){
+        //Get Logged In User
+    requestHandler.getRequest("getUserId/","").then(function(response){
+
+        if(response.data.Login.roleid==3){
+            if(response.data.User_Profile.isProfileUpdated==0){
+                $window.location.href=requestHandler.domainURL()+"views/user/#/profile";
+            }else{
+                $window.location.href=requestHandler.domainURL()+"views/user/#/dashboard";
+            }
+        }
+        else if(response.data.Login.roleid==2){
+            if(response.data.User_Profile.isProfileUpdated==0){
+                $window.location.href=requestHandler.domainURL()+"views/coach/#/profile";
+            }else{
+                $window.location.href=requestHandler.domainURL()+"views/coach/#/dashboard";
+            }
+        }
+        else if(response.data.Login.roleid==1){
+            $scope.reset();
+            $window.location.href=requestHandler.domainURL()+"views/superadmin/#/dashboard";
+        }
+        });
+    }]);
+
+</script>
+</html>

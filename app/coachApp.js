@@ -517,15 +517,22 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                             name:'coachApp',
                             files:[
                                 '../../plugin/popup/style.css',
-                                '../../app/coachAssessments/CoachAssessmentsController.js',
+                                '../../app/coachAssessments/coachAssessmentsController.js',
                                 '../../angular/angular-utils-pagination/dirPagination.js'
                             ]
                         })
                     }],
                     check:["$location","$rootScope","requestHandler",function($location,$rootScope,requestHandler){
-                            if(!$rootScope.isSubscriptionActive){
+                        requestHandler.getRequest("/coach/isSubscriptionActive/","").then(function(response){
+                            if(response.data.isActive==1){
+                                $rootScope.isSubscriptionActive=true;
+                            }else{
+                                $rootScope.isSubscriptionActive=false;
                                 $location.path("subscription");
-                            }                        
+                            }
+
+                        });
+
                     }]
                 },
                 controller:'CoachAssessmentsController'
@@ -538,7 +545,7 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                             name:'coachApp',
                             files:[
                             '../../plugin/popup/style.css',
-                                '../../app/coachAssessments/CoachAssessmentsController.js',
+                                '../../app/coachAssessments/coachAssessmentsController.js',
                                 '../../angular/angular-utils-pagination/dirPagination.js'
                             ]
                         })
@@ -554,7 +561,7 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                             name:'coachApp',
                             files:[
                             '../../plugin/popup/style.css',
-                                '../../app/coachAssessments/CoachAssessmentsController.js',
+                                '../../app/coachAssessments/coachAssessmentsController.js',
                                 '../../angular/angular-utils-pagination/dirPagination.js'
                             ]
                         })
@@ -570,7 +577,7 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                             name:'coachApp',
                             files:[
                             '../../plugin/popup/style.css',
-                                '../../app/coachAssessments/CoachAssessmentsController.js',
+                                '../../app/coachAssessments/coachAssessmentsController.js',
                                 '../../angular/angular-utils-pagination/dirPagination.js',
                                 '../../css/custom-inputs.css'
                             ]
@@ -983,9 +990,18 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                             ]
                         })
                     }],
+
                     check:["$location","$rootScope","requestHandler",function($location,$rootScope,requestHandler){
-                            if(!$rootScope.isSubscriptionActive)
-                                $location.path("subscription");                        
+                        requestHandler.getRequest("/coach/isSubscriptionActive/","").then(function(response){
+                            if(response.data.isActive==1){
+                                $rootScope.isSubscriptionActive=true;
+                            }else{
+                                $rootScope.isSubscriptionActive=false;
+                                $location.path("subscription");
+                            }
+
+                        });
+
                     }]
                 },
                 controller:'AppointmentController'
