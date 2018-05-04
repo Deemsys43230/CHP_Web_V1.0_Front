@@ -7,10 +7,9 @@ coachApp.controller('CoachInvitationController',['$scope','requestHandler','Flas
 
 
   $scope.activeClass.my='active';
-    $scope.doGetUserListByCoach=function(loadUserDetail){   
+    $scope.doGetUserListByCoach=function(loadUserDetail){
 
         if(loadUserDetail){
-            $scope.coachuserlist=[];
             $scope.scrollnation.scrollEndCount=-1;
         }
 
@@ -28,7 +27,10 @@ coachApp.controller('CoachInvitationController',['$scope','requestHandler','Flas
        }
 
         $scope.request.then(function(response){
-
+            //for removing previous search result
+            if(loadUserDetail) {
+                $scope.coachuserlist = [];
+            }
              $scope.coachuserlist=$scope.coachuserlist.concat(response.data.users);
              if(loadUserDetail){
                  if($scope.coachuserlist.length>0){
