@@ -47,7 +47,8 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
 
         //Modal Popup to add user food
         $scope.doUserAddFood=function(){
-
+            $scope.isHistoryEmpty=0;
+            $scope.historyReport=0;
             $(function(){
                 $("#lean_overlay").fadeTo(1000);
                 $("#modal-add-food").fadeIn(600);
@@ -2456,24 +2457,25 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
             if($('#history-start').val()==''){
                 $scope.isHistoryEmpty=0;
             }
-           /* else $scope.isHistoryEmpty=1;*/
+          /*  else{
+                $scope.isHistoryEmpty=1;
+            }*/
         };
-        $scope.getViewGraph=function(){
+    /*    $scope.getViewGraph=function(){
             $scope.historyReport=0;
             if($('#history-start').val()=='') $scope.isViewGraphEmpty=1;
             else $scope.isViewGraphEmpty=0;
-        };
-        $scope.getViewGraph1=function(){
+        };*/
+     /*   $scope.getViewGraph1=function(){
             $scope.historyReport=0;
             if($('#history-start').val()=='') $scope.isViewEmpty=1;
             else $scope.isViewEmpty=0;
-        };
+        };*/
         $scope.otherThanHistory=function(){
             $scope.isHistoryEmpty=0;
             $scope.historyReport=0;
 
         };
-
         $scope.setHistoryType=function(id,divId){
 
             $scope.historyType=id;
@@ -3095,8 +3097,10 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
                     $scope.drawHistoryGraph(historyReport,historyDates,titles,divId);
                 });
             }
-            //All Ready Show the Graph
-            $scope.showGraph=1;
+             //All Ready Show the Graph
+              // $scope.showGraph=1;
+
+
         };
 
         $scope.drawHistoryGraph=function(data,dataX,titles,divId){
@@ -3884,24 +3888,26 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
 
         //TO Insert water Log
         $scope.doAddOrReduceWatertLog=function(id){
+            //getting main date
+            var date = document.getElementById("main-start-date").value;
             //$scope.disableReduceWater=false;
             if(id==0){
                 $scope.addspin=true;
                 $scope.waterAddText="Updating...";
                 if($scope.addlogUnit==1){
-                    requestHandler.postRequest("user/waterlogInsertorUpdate/",{"date":$scope.UserDate,"milliliters":parseInt($scope.addlog),"oz":""}).then(function(response){
+                    requestHandler.postRequest("user/waterlogInsertorUpdate/",{"date":date,"milliliters":parseInt($scope.addlog),"oz":""}).then(function(response){
                         $scope.addspin=false;
                         $scope.waterAddText="+ Log";
-                        $scope.doGetWaterLog($scope.UserDate);
+                        $scope.doGetWaterLog(date);
                     }, function () {
                         errorMessage(Flash, "Please try again later!")
                     });
                 }
                 else{
-                    requestHandler.postRequest("user/waterlogInsertorUpdate/",{"date":$scope.UserDate,"milliliters":"","oz":parseInt($scope.addlog)}).then(function(response){
+                    requestHandler.postRequest("user/waterlogInsertorUpdate/",{"date":date,"milliliters":"","oz":parseInt($scope.addlog)}).then(function(response){
                         $scope.addspin=false;
                         $scope.waterAddText="+ Log";
-                        $scope.doGetWaterLog($scope.UserDate);
+                        $scope.doGetWaterLog(date);
                     }, function () {
                         errorMessage(Flash, "Please try again later!")
                     });
@@ -3913,20 +3919,20 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
                     $scope.reducespin=true;
                     $scope.waterReduceText="Updating...";
                     if($scope.addlogUnit==1){
-                        requestHandler.postRequest("user/waterlogInsertorUpdate/",{"date":$scope.UserDate,"milliliters":parseInt($scope.waterlog) - parseInt($scope.addlog),"oz":""}).then(function(response){
+                        requestHandler.postRequest("user/waterlogInsertorUpdate/",{"date":date,"milliliters":parseInt($scope.waterlog) - parseInt($scope.addlog),"oz":""}).then(function(response){
                             $scope.reducespin=false;
                             $scope.waterReduceText="- Reduce";
-                            $scope.doGetWaterLog($scope.UserDate);
+                            $scope.doGetWaterLog(date);
                         }, function () {
                             errorMessage(Flash, "Please try again later!")
                         });
                     }
                     else{
                         $scope.disableForReduce=($scope.waterlogoz<=$scope.addlog);
-                        requestHandler.postRequest("user/waterlogInsertorUpdate/",{"date":$scope.UserDate,"milliliters":"","oz":parseInt($scope.waterlogoz) - parseInt($scope.addlog)}).then(function(response){
+                        requestHandler.postRequest("user/waterlogInsertorUpdate/",{"date":date,"milliliters":"","oz":parseInt($scope.waterlogoz) - parseInt($scope.addlog)}).then(function(response){
                             $scope.reducespin=false;
                             $scope.waterReduceText="- Reduce";
-                            $scope.doGetWaterLog($scope.UserDate);
+                            $scope.doGetWaterLog(date);
                         }, function () {
                             errorMessage(Flash, "Please try again later!")
                         });
@@ -3937,8 +3943,10 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
 
         // for water log update
         $scope.updateWaterLog=function(){
+            //getting main date
+            var date = document.getElementById("main-start-date").value;
             $scope.waterlog=parseFloat($scope.waterlog);
-            requestHandler.postRequest("user/waterlogInsertorUpdate/",{"date":$scope.UserDate,"milliliters":$scope.waterlog,"oz":$scope.waterlogoz}).then(function(response){
+            requestHandler.postRequest("user/waterlogInsertorUpdate/",{"date":date,"milliliters":$scope.waterlog,"oz":$scope.waterlogoz}).then(function(response){
 
             }, function () {
                 errorMessage(Flash, "Please try again later!")
