@@ -648,13 +648,11 @@ commonApp.controller('LoginController',['$scope','requestHandler','Flash','$wind
     var csrf_token= /CSRF\w*TOKEN=([^;]+)/i.test(document.cookie) ? RegExp.$1 : false;
 
 $scope.doGetUserId=function(){
-    if(csrf_token==RegExp.$1){
         requestHandler.getRequest("getUserId/", "").then(function(response){
             $scope.userdetails=response.data.User_Profile;
         },function(){
             errorMessage(Flash,"Please try again later!")
         });
-    }
 };
 
 
@@ -673,7 +671,7 @@ $scope.doGetUserId=function(){
             $("#login-button").show();
             $("#welcome-text").hide();
         }
-        else if(csrf_token==RegExp.$1) {
+        else {
             $scope.doGetUserId();
             $("#login-button").hide();
             $("#welcome-text").show();
