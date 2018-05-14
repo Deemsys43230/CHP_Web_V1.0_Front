@@ -21,7 +21,7 @@
     <div class="container">
         <div class="row blog-page" style="margin-top: -1%">
             <div class="col-md-12">
-                <h5 class="classic-title"><i class="fa fa-newspaper-o"></i><a href="#healthy-tips">&nbsp;Articles</a>&nbsp;|&nbsp;<i class="fa fa-video-camera"></i><a href="#useful-videos">&nbsp;Videos</a>&nbsp;|&nbsp;<span><img src="../../images/diseaseControlTips/disease.jpg" style="width: 17px;"><a href="#disease-control-tips">&nbsp;Disease Control</a></span>
+                <h5 class="classic-title"><i class="fa fa-newspaper-o"></i><a href="#healthy-tips">&nbsp;Articles</a>&nbsp;|&nbsp;<i class="fa fa-video-camera"></i><a href="#useful-videos">&nbsp;Videos</a>&nbsp;|&nbsp;<span><img src="../diseaseControlTips/disease.jpg" style="width: 17px;"><a href="#disease-control-tips">&nbsp;Disease Control</a></span>
                 </h5>
 
            
@@ -36,7 +36,7 @@
                                 <a href="" ng-click="focusToIndividualTips(content.syndicateid)"><img ng-src="{{content.thumbnailurl}}" alt=""  width="65" height="65"/></a>
                             </div>
                             <div class="widget-content">
-                                <h5 style="word-wrap: break-word;"><a href="../diseasecontrol/index.html?id={{content.syndicateid}}">{{content.title}}</a></h5>
+                                <h5 style="word-wrap: break-word;"><a href="../home/diseasecontrol/index.html?id={{content.syndicateid}}">{{content.title}}</a></h5>
                                 <span>{{content.date}}</span>
                             </div>
                             <div class="clearfix"></div>
@@ -44,7 +44,7 @@
                     </ul>
                     <div ng-show="cdcContentList.length==0">
                         <div class="col-lg-2 col-md-2 col-sm-2 no-padding">
-                        <img src="../../images/diseaseControlTips/no-disease-control.png" width="65" height="65"/>
+                        <img src="../diseaseControlTips/no-disease-control.png" width="65" height="65"/>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6 no-padding margin-top-15 margin-left-10">
                         <h6 class="text-gray">NO DISEASE CONTROL FOUND!!!</h6><br/><br/><br/>
@@ -59,7 +59,7 @@
             <div class="col-lg-8 col-md-7 col-sm-7 sidebar right-sidebar">
                  <div ng-show="cdcContentList.length==0">
                     <div class="post-head text-center no-healthy-living">
-                        <img src="../../images/diseaseControlTips/no-disease-control.png" width="180" height="180"/>
+                        <img src="../diseaseControlTips/no-disease-control.png" width="180" height="180"/>
                         <h3 class="text-gray margin-top-7">NO DISEASE CONTROL FOUND!!!</h3><br/><br/><br/>
                     </div>
                 </div>
@@ -81,7 +81,7 @@
                             <!--<div class="margin-top-20 wrap" ng-bind-html="content.content | html"></div>-->
                         </ul>
                         <p style="word-wrap: break-word;">{{content.shortdescription}}</p>
-                        <a class="main-button page_reload" href="../diseasecontrol/index.html?id={{content.syndicateid}}">Read More <i class="fa fa-angle-right"></i></a>
+                        <a class="main-button page_reload" href="../home/diseasecontrol/index.html?id={{content.syndicateid}}">Read More <i class="fa fa-angle-right"></i></a>
                     </div>
                  </div>
                 </div>
@@ -96,7 +96,7 @@
 </div>
 <script type="text/javascript" src="../../js/script.js"></script>
 <script>
-    $(document).on("click", ".page_reload", function() {
+   $(document).on("click", ".page_reload", function() {
         window.location = document.getElementsByClassName("page_reload").href;
         window.location.reload();
     });

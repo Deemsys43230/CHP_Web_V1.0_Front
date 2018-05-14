@@ -1,0 +1,107 @@
+<style>
+    .main-button {
+        background-color: #f8ba01 !important;
+        color: white;
+        display: inline-block;
+    }
+    a.main-button:hover, input[type="submit"]:hover {
+        background: #444 !important;
+    }
+    img:hover{color:red;}
+</style>
+
+<!-- Start Content -->
+<div id="content-page" ng-cloak class="ng-cloak">
+    <div class="container">
+        <div class="row blog-page" style="margin-top: -1%">
+            <div class="col-md-12 col-lg-12 col-sm-12">
+
+
+                <h5 class="classic-title"><span><i class="fa fa-newspaper-o"></i><a href="#healthy-tips">&nbsp;Articles</a></span>&nbsp;|&nbsp;<i class="fa fa-video-camera"></i><a href="#useful-videos">&nbsp;Videos</a>&nbsp;|&nbsp;<img src="../diseaseControlTips/disease.jpg" style="width: 17px;"><a href="#disease-control-tips">&nbsp;Disease Control</a>
+                </h5>
+            </div>
+            <!-- Start Blog Posts -->
+            <div ng-hide="isSingleView">
+                <div class="col-md-8 col-lg-8 col-sm-8 blog-box">
+                    <div ng-show="articleList.articles.length==0">
+                        <div class="post-head text-center no-healthy-living">
+                            <img src="../../images/healthyTips/no-article.png" width="180" height="180"/>
+                            <h3 class="text-gray margin-top-7">NO ARTICLES FOUND!!!</h3><br/><br/><br/>
+                        </div>
+                    </div>
+
+                    <div ng-repeat="article in articleList.articles | limitTo: pagination.itemsPerPage">
+                        <div id="{{article.id}}" class="blog-post image-post">
+                            <!-- Post Thumb -->
+                            <div class="post-head">
+                                <img ng-src="{{article.imageurl}}" style="width:100%;height:auto;">
+                            </div>
+                            <!-- Post Content -->
+                            <div class="post-content1">
+                                <div class="post-type"><i class="fa fa-picture-o"></i></div>
+                                <h2><a href=""  ng-click="getArticleById(article.id)">{{article.title}}</a></h2>
+                                <ul class="post-meta remove-style">
+                                    <li>By <a href="">{{article.by}}</a></li>
+                                    <li>{{article.subdate}}</li>
+                                </ul>
+                                <p style="word-wrap: break-word;">{{article.description}}</p>
+                                <a class="main-button" href="" ng-click="getArticleById(article.id)">Read More <i class="fa fa-angle-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-center" ng-show="pager">
+                        <ul class="pager">
+                            <li ng-hide="pagination.pageNumber == 1" ng-click="pagination.pageNumber=pagination.pageNumber-1" onClick="window.scrollTo(0,0);"><a class="main-button" href=""> <i class="fa fa-angle-left"></i>  Previous Page  </a></li>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <li ng-hide="pagination.pageNumber >= articleList.totalrecords/pagination.itemsPerPage" ng-click="pagination.pageNumber=pagination.pageNumber+1" onClick="window.scrollTo(0,0);"><a class="main-button" href="">   Next Page   <i class="fa fa-angle-right"></i> </a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- End Blog Posts -->
+
+
+                <!--Sidebar-->
+                <div class="col-md-4 col-lg-4 col-sm-4 sidebar right-sidebar">
+                    <!-- Popular Posts widget -->
+                    <div class="widget widget-popular-posts">
+                        <h4>Popular Tips <span class="head-line"></span></h4>
+                        <ul class="remove-style">
+                            <li ng-repeat="article in articleList.articles | limitTo: pagination.itemsPerPage" ng-click="focusToIndividualTips(article.id);">
+                                <div class="widget-thumb">
+                                    <a href="" ng-click="focusToIndividualTips(article.id)"><img ng-src="{{article.imageurl}}" alt=""  width="65" height="65"/></a>
+                                </div>
+                                <div class="widget-content">
+                                    <h5 style="word-wrap: break-word;"><a href="" ng-click="getArticleById(article.id)">{{article.title}}</a></h5>
+                                    <span>{{article.subdate}}</span>
+                                </div>
+                                <div class="clearfix"></div>
+                            </li>
+                        </ul>
+                        <div ng-show="articleList.articles.length==0">
+                            <div class="col-lg-2 col-md-2 col-sm-2 no-padding">
+                                <img src="../../images/healthyTips/no-article.png" width="65" height="65"/>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 no-padding margin-top-15 margin-left-10">
+                                <h5 class="text-gray">NO ARTICLE FOUND!!!</h5><br/><br/><br/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--End sidebar-->
+            </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 min-height-450" ng-show="isSingleView">
+                    <h1 class="wrap-all"><b>{{title}}</b></h1>
+                    <div class="col-xs-12 pull-right"><a href="" ng-click="getArticleList()" class="back-button pull-right">Back to Article List</a></div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 no-padding">
+                        <hr>
+                    </div>
+                    <div id="article" class="wrap-all"></div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+<!-- End Content -->
+
+<script type="text/javascript" src="../../js/script.js"></script>

@@ -1,4 +1,4 @@
-var userApp= angular.module('userApp', ['ngRoute','oc.lazyLoad','ngCookies','requestModule','ngAnimate','flash','feedbackServiceModule']);
+var userApp= angular.module('userApp', ['ngRoute','oc.lazyLoad','ngCookies','requestModule','ngAnimate','flash','feedbackServiceModule','angularUtils.directives.dirPagination']);
 
 userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
 
@@ -519,6 +519,50 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'ForumsUserController'
             }).
+        when('/healthy-tips', {
+            templateUrl: 'views/user-healthy-tips.html',
+            resolve: {
+                loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name:'userApp',
+                        files:[
+                            '../../app/userHealthyTips/userHealthyTipsController.js'
+                        ]
+                    })
+                }]
+            },
+            controller:'UserHealthyTipsListController'
+        }).
+        when('/useful-videos', {
+            templateUrl: '../common/useful-videos.html',
+            resolve: {
+                loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name:'userApp',
+                        files:[
+                            '../../app/usefulVideos/usefulVideosController.js'
+                        ]
+                    })
+                }]
+            },
+            controller:'UserVideosController'
+        }).
+
+        when('/disease-control-tips', {
+            templateUrl: 'views/user-disease-control-tips.html',
+            resolve: {
+                loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name:'userApp',
+                        files:[
+                            '../../angular/angular-utils-pagination/dirPagination.js',
+                            '../../app/userDiseaseControlTips/userDiseaseControlTipsController.js'
+                        ]
+                    })
+                }]
+            },
+            controller:'UserDiseaseControlTipsListController'
+        }).
             when('/add-forum', {
                 templateUrl: 'views/forum-add.html',
                 resolve: {

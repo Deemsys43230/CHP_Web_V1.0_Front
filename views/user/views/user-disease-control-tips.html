@@ -1,0 +1,114 @@
+<style>
+    .main-button {
+
+        color: white !important;
+        display: inline-block;
+
+    }
+    @media (min-device-width : 768px) and (max-width: 1024px) {
+
+        #content-page {
+
+            padding: 60px 0px !important;
+        }
+
+    }
+
+</style>
+
+<!-- Start Content -->
+<div id="content-page" ng-cloak class="ng-cloak">
+    <div class="container">
+        <div class="row blog-page" style="margin-top: -1%">
+            <div class="col-md-12">
+                <h5 class="classic-title"><i class="fa fa-newspaper-o"></i><a href="#healthy-tips">&nbsp;Articles</a>&nbsp;|&nbsp;<i class="fa fa-video-camera"></i><a href="#useful-videos">&nbsp;Videos</a>&nbsp;|&nbsp;<span><img src="../diseaseControlTips/disease.jpg" style="width: 17px;"><a href="#disease-control-tips">&nbsp;Disease Control</a></span>
+                </h5>
+
+
+                <!--Sidebar-->
+                <div >
+                <div class="col-md-4 col-lg-4 col-sm-4 sidebar left-sidebar">
+                    <!-- Popular Posts widget -->
+                    <div class="widget widget-popular-posts">
+                        <h4>Quick Links<span class="head-line"></span></h4>
+                        <ul class="remove-style">
+                            <li ng-repeat="content in cdcContentList | limitTo:5" ng-click="focusToIndividualTips(content.id);">
+                                <div class="widget-thumb">
+                                    <a href="" ng-click="focusToIndividualTips(content.syndicateid)"><img ng-src="{{content.thumbnailurl}}" alt=""  width="65" height="65"/></a>
+                                </div>
+                                <div class="widget-content">
+                                    <h5 style="word-wrap: break-word;"><a href="userdiseasercontrol/index.html?id={{content.syndicateid}}">{{content.title}}</a></h5>
+                                    <span>{{content.date}}</span>
+                                </div>
+                                <div class="clearfix"></div>
+                            </li>
+                        </ul>
+                        <div ng-show="cdcContentList.length==0">
+                            <div class="col-lg-2 col-md-2 col-sm-2 no-padding">
+                                <img src="../diseaseControlTips/no-disease-control.png" width="65" height="65"/>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 no-padding margin-top-15 margin-left-10">
+                                <h6 class="text-gray">NO DISEASE CONTROL FOUND!!!</h6><br/><br/><br/>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!--End sidebar-->
+
+                <!---start Blog post -->
+                <div class="col-lg-8 col-md-7 col-sm-7 sidebar right-sidebar">
+                    <div ng-show="cdcContentList.length==0">
+                        <div class="post-head text-center no-healthy-living">
+                            <img src="../diseaseControlTips/no-disease-control.png" width="180" height="180"/>
+                            <h3 class="text-gray margin-top-7">NO DISEASE CONTROL FOUND!!!</h3><br/><br/><br/>
+                        </div>
+                    </div>
+                    <!-- Start Post -5 -->
+
+                    <div dir-paginate="content in cdcContentList | itemsPerPage:5">
+                        <div id="{{content.syndicateid}}" class="blog-post image-post">
+                            <!-- Post Thumb -->
+                            <div class="post-head">
+                                <img ng-src="{{content.imageurl}}" style="width:100%;height:auto;">
+                            </div>
+                            <!-- Post Content -->
+                            <div class="post-content1">
+                                <div class="post-type"><i class="fa fa-picture-o"></i></div>
+                                <h2 style="word-wrap: break-word;"><a href="" ng-click="getCDCListByID(content.syndicateid)">{{content.title}}</a></h2>
+                                <ul class="post-meta remove-style">
+                                    <li>By <a href="">Cyber Health{{content.syndicateid}}</a></li>
+                                    <li>{{content.date}}</li>
+                                    <!--<div class="margin-top-20 wrap" ng-bind-html="content.content | html"></div>-->
+                                </ul>
+                                <p style="word-wrap: break-word;">{{content.shortdescription}}</p>
+                                <a class="main-button page_reload" href="userdiseasercontrol/index.html?id={{content.syndicateid}}">Read More <i class="fa fa-angle-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <dir-pagination-controls max-size="4" direction-links="true" boundary-links="true"> </dir-pagination-controls>
+                </div>
+                </div>
+              <!--  <div class="col-lg-12 col-md-12 col-sm-12 min-height-450 no-padding">
+                    <h1 class="wrap-all"><b>{{title}}</b></h1>
+                    <div class="col-xs-12 pull-right"> <a href="#disease-control-tips" class="back-button pull-right">Back to Disease Control list</a></div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 no-padding">
+                        <hr>
+                    </div>
+                    <div id="content" class="wrap-all"></div>
+                        </div>-->
+                    </div>
+                </div>
+                <!--Ends blog post -->
+            </div>
+        </div>
+    <!-- End Content -->
+
+<script type="text/javascript" src="../../js/script.js"></script>
+<script>
+      $(document).on("click", ".page_reload", function() {
+           window.location = document.getElementsByClassName("page_reload").href;
+            window.location.reload();
+        });
+</script>
