@@ -85,13 +85,15 @@ commonApp.controller('HealthyTipsListController',['$scope','requestHandler','Fla
 }]);
 
 commonApp.controller('HealthyTipController',['$scope','requestHandler','Flash','$location',function($scope,requestHandler,Flash,$location) {
-
+    $scope.loaded=false;
     $scope.articleid=window.location.href.slice(window.location.href.indexOf('=') + 1);
     // Get List of CDC Content By ID
     $scope.getArticleById=function(){
+        $scope.loaded=true;
         requestHandler.getRequest("articleview/"+ $scope.articleid+"/","").then(function(response){
             $scope.articleDetail=response.data.article;
-            $('#article').html($scope.articleDetail.content+" <div><div class='loader-style'><div class='loader'></div></div></div>");
+            $('#article').html($scope.articleDetail.content);
+            $scope.loaded=false;
             $scope.title=$scope.articleDetail.title;
             console.log($scope.title);
         });

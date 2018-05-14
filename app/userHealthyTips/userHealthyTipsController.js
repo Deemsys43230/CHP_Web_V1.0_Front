@@ -1,9 +1,9 @@
 
-var userApp= angular.module('userApp', ['ngRoute','oc.lazyLoad','ngCookies','requestModule','flash','ngAnimate']);
+//var userApp= angular.module('userApp', ['ngRoute','oc.lazyLoad','ngCookies','requestModule','flash','ngAnimate']);
 userApp.controller('UserHealthyTipsListController',['$scope','requestHandler','Flash','$location',function($scope,requestHandler,Flash,$location) {
     $scope.activeClass.healthy='active';
     //to show hide articles list and single article
-    $scope.isSingleView=false;
+
     setTimeout(function(){
         if(!$location.search().id){}
         else{
@@ -22,7 +22,6 @@ userApp.controller('UserHealthyTipsListController',['$scope','requestHandler','F
 
     // Get list of Artlcle
     $scope.getArticleList=function(){
-        $scope.isSingleView=false;
         $scope.getArticleParam={
             "limit": $scope.pagination.itemsPerPage,
             "offset": ($scope.pagination.pageNumber-1)* $scope.pagination.itemsPerPage
@@ -43,16 +42,34 @@ userApp.controller('UserHealthyTipsListController',['$scope','requestHandler','F
         $scope.getArticleList();
     });
 
-
+    $scope.init();
+}]);
+userApp.controller('UserHealthyTipController',['$scope','requestHandler','Flash','$location',function($scope,requestHandler,Flash,$location) {
+    $scope.loaded=false;
+    $scope.articleid=window.location.href.slice(window.location.href.indexOf('=') + 1);
     // Get List of CDC Content By ID
-    $scope.getArticleById=function(id){
-        $scope.isSingleView=true;
-        requestHandler.getRequest("articleview/"+ id+"/","").then(function(response){
+    $scope.getArticleById=function(){
+        $scope.loaded=true;
+        requestHandler.getRequest("articleview/"+ $scope.articleid+"/","").then(function(response){
             $scope.articleDetail=response.data.article;
-             $('#article').html($scope.articleDetail.content+" <div><div class='loader-style'><div class='loader'></div></div></div>");
+            $('#article').html($scope.articleDetail.content);
+            $scope.loaded=false;
             $scope.title=$scope.articleDetail.title;
+            console.log($scope.title);
         });
     };
 
+    $scope.init=function(){
+        $scope.getArticleById();
+    };
+
     $scope.init();
+
+}]);
+
+// html filter (render text as html)
+userApp.filter('html', ['$sce', function ($sce) {
+    return function (text) {
+        return $sce.trustAsHtml(text);
+    };
 }]);

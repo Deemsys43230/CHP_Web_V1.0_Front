@@ -73,8 +73,10 @@
                     <li><a class="{{activeClass.healthy}}" href="#healthy-tips"><span class="highlight-menu-item">Healthy Living</span></a></li>
                     <li><a class="{{activeClass.coach}}"  href="#coach">I'm&nbsp;a&nbsp;Coach</a></li>
                     <li>
-                        <a class="login itl-tooltip modal_trigger"  data-ng-click="reset()" data-placement="bottom" title="Login / Register" href="#modal">Login / Register</a>
-                        </li>
+                        <a id="login-button" class="login itl-tooltip modal_trigger"  data-ng-click="reset()" data-placement="bottom" href="#modal">Login / Register</a>
+                        <a id="welcome-text"  style="display: none;color:#f8ba01;word-break: break-all" class="text-center" href="../../views/user/#/dashboard">Hi , {{userdetails.name}}</a>
+
+                    </li>
                 </ul>
                 <!-- End Navigation List -->
             </div>

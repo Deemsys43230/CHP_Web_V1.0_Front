@@ -644,6 +644,18 @@ commonApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
 commonApp.controller('LoginController',['$scope','requestHandler','Flash','$window','$location','$element','FeedbackService','$timeout',function($scope,requestHandler,Flash,$window,$location,$element,FeedbackService,$timeout){
  $scope.hideValue=1;
 
+ //to check user session is expired ot not
+    var csrf_token= /CSRF\w*TOKEN=([^;]+)/i.test(document.cookie) ? RegExp.$1 : false;
+
+$scope.doGetUserId=function(){
+    if(csrf_token==RegExp.$1){
+        requestHandler.getRequest("getUserId/", "").then(function(response){
+            $scope.userdetails=response.data.User_Profile;
+        },function(){
+            errorMessage(Flash,"Please try again later!")
+        });
+    }
+};
 
 
     $scope.getSocialMediaDetails=function(){
@@ -656,6 +668,19 @@ commonApp.controller('LoginController',['$scope','requestHandler','Flash','$wind
 
     $scope.init=function(){
         $scope.getSocialMediaDetails();
+        // to show hide login button and welcome text
+        if (csrf_token==false) {
+            $("#login-button").show();
+            $("#welcome-text").hide();
+        }
+        else if(csrf_token==RegExp.$1) {
+            $scope.doGetUserId();
+            $("#login-button").hide();
+            $("#welcome-text").show();
+
+
+        }
+
     };
 
      $scope.init();
@@ -709,6 +734,7 @@ commonApp.controller('LoginController',['$scope','requestHandler','Flash','$wind
 
     //Login
     $scope.doLogin=function(){
+
         $scope.emailNotVerified=false;
         requestHandler.loginRequest($scope.username,$scope.password).then(function(response){
 
@@ -727,28 +753,30 @@ commonApp.controller('LoginController',['$scope','requestHandler','Flash','$wind
 
                 successMessage(Flash,"Login Successful!");
 
-                //Get Logged In User
-                requestHandler.getRequest("getUserId/","").then(function(response){
+                    //Get Logged In User
+                    requestHandler.getRequest("getUserId/", "").then(function (response) {
 
-                   if(response.data.Login.roleid==3){
-                       if(response.data.User_Profile.isProfileUpdated==0){
-                          $window.location.href=requestHandler.domainURL()+"views/user/#/profile";
-                       }else{
-                           $window.location.href=requestHandler.domainURL()+"views/user/#/dashboard";
-                       }
-                   }
-                    else if(response.data.Login.roleid==2){
-                       if(response.data.User_Profile.isProfileUpdated==0){
-                           $window.location.href=requestHandler.domainURL()+"views/coach/#/profile";
-                       }else{
-                           $window.location.href=requestHandler.domainURL()+"views/coach/#/dashboard";
-                       }
-                   }
-                    else if(response.data.Login.roleid==1){
-                       $scope.reset();
-                       $window.location.href=requestHandler.domainURL()+"views/superadmin/#/dashboard";
-                   }
-                });
+                        if (response.data.Login.roleid == 3) {
+                            if (response.data.User_Profile.isProfileUpdated == 0) {
+                                $window.location.href = requestHandler.domainURL() + "views/user/#/profile";
+                            } else {
+                                $window.location.href = requestHandler.domainURL() + "views/user/#/dashboard";
+                                response.data.User_Profile.name=$scope.username;
+                            }
+                        }
+                        else if (response.data.Login.roleid == 2) {
+                            if (response.data.User_Profile.isProfileUpdated == 0) {
+                                $window.location.href = requestHandler.domainURL() + "views/coach/#/profile";
+                            } else {
+                                $window.location.href = requestHandler.domainURL() + "views/coach/#/dashboard";
+                            }
+                        }
+                        else if (response.data.Login.roleid == 1) {
+                            $scope.reset();
+                            $window.location.href = requestHandler.domainURL() + "views/superadmin/#/dashboard";
+                        }
+                    });
+
 
 
                // $window.location.href="views/user/#/register";
@@ -756,7 +784,9 @@ commonApp.controller('LoginController',['$scope','requestHandler','Flash','$wind
 
         });
 
+
     };
+
 
     //Register New User
     $scope.register=function(){

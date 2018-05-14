@@ -58,13 +58,15 @@ commonApp.controller('DiseaseControlTipsListController',['$scope','requestHandle
     }]);
 
 commonApp.controller('DiseaseControlTipController',['$scope','requestHandler','Flash','$location',function($scope,requestHandler,Flash,$location) {
-
+    $scope.loaded=false;
     $scope.cdcid=window.location.href.slice(window.location.href.indexOf('=') + 1);
     // Get List of CDC Content By ID
     $scope.getCDCListByID=function(){
+        $scope.loaded=true;
         requestHandler.getRequest("getHealthyLivingDetail/"+ $scope.cdcid+"/","").then(function(response){
             $scope.cdcContent=response.data.healthyliving;
             $('#content').html($scope.cdcContent.content+" <div><div class='loader-style'><div class='loader'></div></div></div>");
+            $scope.loaded=false;
             $scope.title=$scope.cdcContent.title;
             console.log($scope.title);
         });
