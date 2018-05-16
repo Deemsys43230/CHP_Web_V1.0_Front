@@ -55,14 +55,26 @@
                 </div>
                 <div class="navbar-collapse collapse">
                     <!-- Start Navigation List -->
-                    <ul class="nav navbar-nav navbar-right">
+                    <ul class="nav navbar-nav navbar-right" style="right: -65px !important;">
                         <li><a class="{{activeClass.index}}" href="../../">Home</a></li>
                         <li><a class="{{activeClass.healthy}}" href="../#healthy-tips"><span class="highlight-menu-item">Healthy Living</span></a></li>
                         <li><a class="{{activeClass.coach}}" href="../#/coach">I'm&nbsp;a&nbsp;Coach</a></li>
-                        <li>
+                        <li class="social-list remove-style">
                             <a id="login-button" class="login itl-tooltip modal_trigger"  data-ng-click="reset()" data-placement="bottom" href="#modal">Login / Register</a>
-                            <a id="welcome-text"  style="display: none;color:#f8ba01;word-break: break-all" class="text-center" href="../../../views/user/#/dashboard">Hi , {{userdetails.name}}</a>
                         </li>
+                        <ul class="social-list remove-style">
+                            <li class="navbar-user" >
+                                <ul class="nav navbar-nav dropdownmenu">
+                                    <li>
+                                        <a href="#" id="welcome-text" onclick="return false;" style="display:none;padding: 31px 9px !important;border-left: none !important;background:none !important;color:#f8ba01;border-bottom:none !important;margin-top: -9px;margin-right:50px;">Hi , {{userdetails.firstname}}&nbsp;<span class="fa fa-caret-down"></span></a>
+                                        <ul class="dropdown remove-style" style="top:149% !important;width:150px !important;">
+                                            <li><a  href="../../../views/user/#/dashboard" style="font-size:14px !important;">Dashboard</a></li>
+                                            <li><a href="../../../"  ng-controller="UserLogoutController" ng-click="doLogout()" style="font-size:14px !important;">Logout</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
                     </ul>
                     <!-- End Navigation List -->
                 </div>
@@ -237,8 +249,9 @@
 </div>
 
 <!-- JS  -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
 <!-- ANGULAR JS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.5/angular.min.js"></script>
@@ -247,17 +260,19 @@
 <script src="../../../angular/ocLazyLoad.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.5/angular-animate.min.js"></script>
 <script src="../../../angular/angular-flash.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.5/angular-touch.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js"></script>
+<script type="text/javascript" src="http://vjs.zencdn.net/6.4.0/video.js"></script>
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.5/angular-touch.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/1.2.1/ui-bootstrap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/1.2.1/ui-bootstrap-tpls.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-svg-round-progressbar/0.3.10/roundProgress.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/1.2.1/ui-bootstrap-tpls.min.js"></script>-->
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>-->
 
 <!--[if IE 8]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 <!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-<!--<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/1.2.1/jquery-migrate.min.js"></script>--><!---->
-<!--<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>-->
+<!-- If you'd like to support IE8 -->
+<script src="http://vjs.zencdn.net/ie8/1.1.2/videojs-ie8.min.js"></script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/1.2.1/jquery-migrate.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
 <!--<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fitvids/1.0.3/jquery.fitvids.min.js"></script>-->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.2/owl.carousel.min.js"></script>
 <!--<script type="text/javascript" src="../../js/nivo-lightbox.min.js"></script>-->
@@ -284,6 +299,21 @@
     },200);
 
 </script>
+<script type="text/javascript">
+    //to clicking username dropdown appears
+    $(document).ready(function () {
+        $('#welcome-text').click(function(e) {
+            $('.nav li').addClass('drop');
+            $(this).siblings().addClass('active');
+        });
+        $('#content-page').click(function(e) {
+            $('.nav li').removeClass('drop');
+            $(this).siblings().addClass('active');
+        });
+
+    });
+</script>
+
 <script type="text/javascript">
 
     /* finding user device*/
@@ -318,7 +348,6 @@
 <script src="../../../js/home-index-script.js"></script>
 <script src="../../../js/feedback.js"></script>
 <script src="../../../app/diseaseControlTips/diseaseControlTipsController.js"></script>
-<!--<script src="../../app/login/loginController.js"></script>-->
 </body>
 </html>
 

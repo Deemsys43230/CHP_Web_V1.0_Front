@@ -55,6 +55,8 @@
     <!-- Animate Master CSS -->
     <link href="../../../plugin/social-share/animate.css" rel="stylesheet" type="text/css" />
 
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
 
     <link rel="stylesheet" type="text/css" href="../../../css/angular-simple-calendar.css" />
 
@@ -80,7 +82,7 @@
         <div class="top-bar">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-8 col-md-8 col-sm-7 col-xs-5 hidden-xss" ng-init="init()">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-5 hidden-xss" ng-init="init()">
                         <!-- Start Contact Info -->
                         <div ng-hide="hideValue" ng-cloak class="ng-cloak" >
                             <ul class="contact-details remove-style" >
@@ -94,23 +96,23 @@
                         </div>
                         <!-- End Contact Info -->
                     </div><!-- .col-md-6 -->
-                    <div class="col-lg-4 col-md-4 col-sm-5 padding-left-0">
+                    <div class="col-lg-6 col-md-6 col-sm-6 padding-left-0">
                         <!-- Start Social Links -->
                         <ul class="social-list remove-style">
                             <li class="navbar-user">
                                 <ul class="nav navbar-nav dropdownmenu">
                                     <li>
-                                        <a href="#" onclick="return false;">{{username}}&nbsp;<span class="fa fa-caret-down"></span> </a>
+                                        <a href="#" id="dropdown" class="dropdown-toggle" data-toggle="dropdown" onclick="return false;">{{username}}&nbsp;<span class="fa fa-caret-down"></span> </a>
                                         <ul class="dropdown remove-style">
-                                            <li><a href="#profile">Profile</a></li>
-                                            <li><a href="#demography">Demography</a></li>
-                                            <li><a href="#friends">Friends</a></li>
-                                            <li><a href="#coach">Coaches</a></li>
-                                            <li><a href="#medications">Medications</a></li>
-                                            <li><a href="#my-courses">Courses</a></li>
-                                            <li><a href="#group-goal">Goals</a></li>
-                                            <li><a href="#payments">Payments</a></li>
-                                            <li><a href="" ng-controller="UserLogoutController" ng-click="doLogout()">Log Out</a></li>
+                                            <li><a href="../../user/#profile">Profile</a></li>
+                                            <li><a href="../../user/#demography">Demography</a></li>
+                                            <li><a href="../../user/#friends">Friends</a></li>
+                                            <li><a href="../../user/#coach">Coaches</a></li>
+                                            <li><a href="../../user/#medications">Medications</a></li>
+                                            <li><a href="../../user/#my-courses">Courses</a></li>
+                                            <li><a href="../../user/#group-goal">Goals</a></li>
+                                            <li><a href="../../user/#payments">Payments</a></li>
+                                            <li><a href="../../../#/home" ng-controller="UserLogoutController" ng-click="doLogout()">Log Out</a></li>
                                         </ul>
                                     </li>
                                 </ul>
@@ -440,8 +442,10 @@
 </div>-->
 <!-- JS  -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/cropit/0.5.1/jquery.cropit.js"></script>
 <script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="https://tools.cdc.gov/TemplatePackage/contrib/widgets/tp-widget-external-loader.js"></script>
+
 
 
 
@@ -455,17 +459,16 @@
 <script src="../../../angular/angular-flash.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.5/angular-touch.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/1.2.1/ui-bootstrap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/1.2.1/ui-bootstrap-tpls.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-svg-round-progressbar/0.3.10/roundProgress.min.js"></script>
 <!--<script src="../../angular/angular-datepicker.js"></script>-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.14.0/ui-bootstrap-tpls.min.js"></script>
 
 <!--[if IE 8]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 <!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/1.2.1/jquery-migrate.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
-
 <!--<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fitvids/1.0.3/jquery.fitvids.min.js"></script>-->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.2/owl.carousel.min.js"></script>
 <!--<script type="text/javascript" src="../../js/nivo-lightbox.min.js"></script>
@@ -477,13 +480,14 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/easy-pie-chart/2.1.6/jquery.easypiechart.min.js"></script>-->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.6.6/jquery.nicescroll.min.js"></script>
 <!--<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-parallax/1.1.3/jquery-parallax-min.js"></script>-->
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/highcharts-more.js"></script>
 <script type="text/javascript" src="../../../angular/angular-nicescroll.js"></script>
 <script type="text/javascript" src="../../../plugin/popup/jquery.leanModal.min.js"></script>
 <script type="text/javascript" src="../../../js/rotate.js"></script>
 <script type="text/javascript" src="../../../js/angular-simple-calendar.js"></script>
 <script src="../../../app/requestHandler.js"></script>
 <script src="../../../app/userApp.js"></script>
-<script src="../../../js/home-index-script.js"></script>
 <script src="../../../js/feedback.js"></script>
 <script src="../../../app/userFeedback/userFeedbackService.js"></script>
 <script src="../../../angular/angular-utils-pagination/dirPagination.js"></script>
@@ -491,6 +495,7 @@
 <!-- social -->
 <!--<script type="text/javascript" src="../../js/jquery-social.min.js"></script>-->
 <script type="text/javascript" src="../../../js/jquery-socialmedia.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-filter/0.5.16/angular-filter.min.js"></script>
 
 
 <script>
@@ -554,6 +559,26 @@
     });
 
 </script>
+
+<script type="text/javascript">
+//to clicking username dropdown appears
+$(document).ready(function () {
+    $('#dropdown').click(function(e) {
+        $('.nav li').addClass('drop');
+        $(this).siblings().addClass('active');
+    });
+    $('#content-page').click(function(e) {
+        $('.nav li').removeClass('drop');
+        $(this).siblings().addClass('active');
+    });
+    $('.navbar').click(function(e) {
+        $('.nav li').removeClass('drop');
+        $(this).siblings().addClass('active');
+    });
+
+});
+</script>
+
 
 <script type="text/javascript">
 

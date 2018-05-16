@@ -24,6 +24,11 @@ commonApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                     return response;
                 },
                 'responseError': function (rejection) {
+
+                    if (rejection.status === 403) {
+                        $("#login-button").show();
+                        $("#welcome-text").hide();
+                    }
                     switch (rejection.status) {
                         case 400: {
                             break;
@@ -46,6 +51,7 @@ commonApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                     return $q.reject(rejection);
                 }
             };
+
         }]);
 
         $routeProvider.
@@ -667,7 +673,7 @@ $scope.doGetUserId=function(){
     $scope.init=function(){
         $scope.getSocialMediaDetails();
         // to show hide login button and welcome text
-        if (csrf_token==false) {
+        if (csrf_token==false ) {
             $("#login-button").show();
             $("#welcome-text").hide();
         }
@@ -953,8 +959,20 @@ $scope.isFeedback=false;
 
 
 }]);
+//Controller For Logout
+commonApp.controller("UserLogoutController",['$cookies','$scope','$window',function($cookies,$scope,$window){
+
+    $scope.doLogout=function(){
+
+        $cookies.remove("X-CSRFToken",{path: '/'});
+        $cookies.put('sessionid',undefined);
+        $window.location.href="";
+    };
+
+}]);
 //To Display success message
 //For User Messages
+
 function successMessage(Flash,message){
     Flash.create('success', message, 'alert');
     $("html, body").animate({

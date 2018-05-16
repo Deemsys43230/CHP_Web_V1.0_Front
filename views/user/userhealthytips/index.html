@@ -80,7 +80,7 @@
         <div class="top-bar">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-8 col-md-8 col-sm-7 col-xs-5 hidden-xss" ng-init="init()">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-5 hidden-xss" ng-init="init()">
                         <!-- Start Contact Info -->
                         <div ng-hide="hideValue" ng-cloak class="ng-cloak" >
                             <ul class="contact-details remove-style" >
@@ -94,23 +94,23 @@
                         </div>
                         <!-- End Contact Info -->
                     </div><!-- .col-md-6 -->
-                    <div class="col-lg-4 col-md-4 col-sm-5 padding-left-0">
+                    <div class="col-lg-6 col-md-6 col-sm-6 padding-left-0">
                         <!-- Start Social Links -->
                         <ul class="social-list remove-style">
                             <li class="navbar-user">
                                 <ul class="nav navbar-nav dropdownmenu">
                                     <li>
-                                        <a href="#" onclick="return false;">{{username}}&nbsp;<span class="fa fa-caret-down"></span> </a>
+                                        <a href="#" id="dropdown" onclick="return false;">{{username}}&nbsp;<span class="fa fa-caret-down"></span> </a>
                                         <ul class="dropdown remove-style">
-                                            <li><a href="#profile">Profile</a></li>
-                                            <li><a href="#demography">Demography</a></li>
-                                            <li><a href="#friends">Friends</a></li>
-                                            <li><a href="#coach">Coaches</a></li>
-                                            <li><a href="#medications">Medications</a></li>
-                                            <li><a href="#my-courses">Courses</a></li>
-                                            <li><a href="#group-goal">Goals</a></li>
-                                            <li><a href="#payments">Payments</a></li>
-                                            <li><a href="" ng-controller="UserLogoutController" ng-click="doLogout()">Log Out</a></li>
+                                            <li><a href="../../user/#profile">Profile</a></li>
+                                            <li><a href="../../user/#demography">Demography</a></li>
+                                            <li><a href="../../user/#friends">Friends</a></li>
+                                            <li><a href="../../user/#coach">Coaches</a></li>
+                                            <li><a href="../../user/#medications">Medications</a></li>
+                                            <li><a href="../../user/#my-courses">Courses</a></li>
+                                            <li><a href="../../user/#group-goal">Goals</a></li>
+                                            <li><a href="../../user/#payments">Payments</a></li>
+                                            <li><a href="../../../#/home" ng-controller="UserLogoutController" ng-click="doLogout()">Log Out</a></li>
                                         </ul>
                                     </li>
                                 </ul>
@@ -553,6 +553,24 @@
         });
     });
 
+</script>
+<script type="text/javascript">
+    //to clicking username dropdown appears
+    $(document).ready(function () {
+        $('#dropdown').click(function(e) {
+            $('.nav li').addClass('drop');
+            $(this).siblings().addClass('active');
+        });
+        $('#content-page').click(function(e) {
+            $('.nav li').removeClass('drop');
+            $(this).siblings().addClass('active');
+        });
+        $('.navbar').click(function(e) {
+            $('.nav li').removeClass('drop');
+            $(this).siblings().addClass('active');
+        });
+
+    });
 </script>
 
 <script type="text/javascript">
