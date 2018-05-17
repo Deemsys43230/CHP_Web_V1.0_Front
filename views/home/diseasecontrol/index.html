@@ -63,13 +63,13 @@
                             <a id="login-button" class="login itl-tooltip modal_trigger"  data-ng-click="reset()" data-placement="bottom" href="#modal">Login / Register</a>
                         </li>
                         <ul class="social-list remove-style">
-                            <li class="navbar-user" >
+                            <li class="navbar-common" >
                                 <ul class="nav navbar-nav dropdownmenu">
                                     <li>
-                                        <a href="#" id="welcome-text" onclick="return false;" style="display:none;padding: 31px 9px !important;border-left: none !important;background:none !important;color:#f8ba01;border-bottom:none !important;margin-top: -9px;margin-right:50px;">Hi , {{userdetails.firstname}}&nbsp;<span class="fa fa-caret-down"></span></a>
-                                        <ul class="dropdown remove-style" style="top:149% !important;width:150px !important;">
-                                            <li><a  href="../../../views/user/#/dashboard" style="font-size:14px !important;">Dashboard</a></li>
-                                            <li><a href="../../../"  ng-controller="UserLogoutController" ng-click="doLogout()" style="font-size:14px !important;">Logout</a></li>
+                                        <a href="#" id="welcome-text" onclick="return false;" style="display:none;">Hi , {{userdetails.firstname}}&nbsp;<span class="fa fa-caret-down"></span></a>
+                                        <ul class="dropdown remove-style">
+                                            <li><a  href="../../../views/user/#/dashboard">Dashboard</a></li>
+                                            <li><a href="../../../"  ng-controller="UserLogoutController" ng-click="doLogout()">Logout</a></li>
                                         </ul>
                                     </li>
                                 </ul>

@@ -18260,3 +18260,88 @@ select.event:focus {
     height:200px !important;
     width:200px !important;
 }
+
+/* common Nav bar for common interface*/
+
+.navbar-common .navbar-nav {
+    position: relative;
+    transition: all 0.4s ease-in-out;
+    -moz-transition: all 0.4s ease-in-out;
+    -webkit-transition: all 0.4s ease-in-out;
+    -o-transition: all 0.4s ease-in-out;
+}
+
+.navbar-common .navbar-nav > li {
+    margin-left: 6px;
+}
+
+.navbar-common .navbar-nav > li:first-child {
+    margin-left: 0;
+}
+
+.navbar-common .navbar-nav > li > a {
+    font-size: 1em;
+    height: 33px;
+    text-align: center;
+    color: #f8ba01 !important;
+    display: block;
+    font-weight: 300;
+    overflow: hidden;
+    transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -webkit-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    border-bottom:none !important;
+}
+
+.navbar-common .navbar-nav > li > a:hover {
+    color: #f8ba01;
+}
+
+.navbar-common .navbar-nav .dropdown {
+    position: absolute;
+    left: 10px;
+    top:141%;
+    width:150px;
+    background-color: #fff;
+    visibility: hidden;
+    z-index: 2;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    -moz-transition: opacity 0.3s ease-in-out;
+    -webkit-transition: opacity 0.3s ease-in-out;
+    -o-transition: opacity 0.3s ease-in-out;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    -o-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-common .navbar-nav > li.drop .dropdown{
+    visibility: visible;
+    opacity: 1;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.4);
+    -o-box-shadow: 0 0 4px rgba(0, 0, 0, 0.4);
+    -moz-box-shadow: 0 0 4px rgba(0, 0, 0, 0.4);
+    -webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.4);
+}
+
+.navbar-common .navbar-nav .dropdown li{
+    width: 100%;
+}
+
+.navbar-common .navbar-nav .dropdown li a {
+    font-size:14px !important;
+    width: 100%;
+}
+
+.navbar-common .navbar-nav .dropdown  li a.active {
+    color: #f8ba01;
+}
+
+.navbar-common .navbar-nav .dropdown > li:hover {
+    background: #f8ba01;
+}
+.navbar-common .navbar-nav .dropdown > li:hover >a{
+    color: #fff;
+}

@@ -26,6 +26,7 @@ commonApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 'responseError': function (rejection) {
 
                     if (rejection.status === 403) {
+                        $cookies.remove("X-CSRFToken",{path: '/'});
                         $("#login-button").show();
                         $("#welcome-text").hide();
                     }
