@@ -18281,7 +18281,6 @@ select.event:focus {
 
 .navbar-common .navbar-nav > li > a {
     font-size: 1em;
-    height: 33px;
     text-align: center;
     color: #f8ba01 !important;
     display: block;
@@ -18292,6 +18291,7 @@ select.event:focus {
     -webkit-transition: all 0.3s ease-in-out;
     -o-transition: all 0.3s ease-in-out;
     border-bottom:none !important;
+    margin-right:50px;
 }
 
 .navbar-common .navbar-nav > li > a:hover {
@@ -18300,8 +18300,8 @@ select.event:focus {
 
 .navbar-common .navbar-nav .dropdown {
     position: absolute;
-    left: 10px;
-    top:141%;
+    left: 13px;
+    top:103%;
     width:150px;
     background-color: #fff;
     visibility: hidden;
