@@ -441,7 +441,6 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/cropit/0.5.1/jquery.cropit.js"></script>
 <script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="https://tools.cdc.gov/TemplatePackage/contrib/widgets/tp-widget-external-loader.js"></script>
 
 
 
@@ -576,6 +575,18 @@ $(document).ready(function () {
 });
 </script>
 
+<script type="text/javascript">
+    (function(){
+        var randomh=(Math.floor(Math.random()*899999+100000)+1);
+        var e = document.getElementsByTagName("script")[0];
+        var d = document.createElement("script");
+        d.src = "//tools.cdc.gov/TemplatePackage/contrib/widgets/tp-widget-external-loader.js?_="+randomh+"";
+        d.type = "text/javascript";
+        d.async = true;
+        d.defer = true;
+        e.parentNode.insertBefore(d,e);
+    })();
+</script>
 
 <script type="text/javascript">
 
