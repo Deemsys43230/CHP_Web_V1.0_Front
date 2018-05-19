@@ -55,21 +55,23 @@
                 </div>
                 <div class="navbar-collapse collapse">
                     <!-- Start Navigation List -->
-                    <ul class="nav navbar-nav navbar-right">
+                    <ul class="nav navbar-nav navbar-right" style="min-width: 450px !important;left:100px !important">
                         <li><a class="{{activeClass.index}}" href="../../../">Home</a></li>
                         <li><a class="{{activeClass.healthy}}" href="../#healthy-tips"><span class="highlight-menu-item">Healthy Living</span></a></li>
                         <li><a class="{{activeClass.coach}}" href="../#/coach">I'm&nbsp;a&nbsp;Coach</a></li>
-                        <li class="social-list remove-style">
-                            <a id="login-button" class="login itl-tooltip modal_trigger"  data-ng-click="reset()" data-placement="bottom" href="#modal">Login / Register</a>
-
-                        </li>
+                        <div ng-if="loaded">
+                            <div class="loader-style-home">
+                                <div class="loader"></div>
+                            </div>
+                        </div>
                         <ul class="social-list remove-style">
                             <li class="navbar-common" >
                                 <ul class="nav navbar-nav dropdownmenu">
                                     <li>
-                                        <a href="" id="welcome-text"  style="display:none;">Hi , {{userdetails.firstname}}&nbsp;<span class="fa fa-caret-down"></span></a>
+                                        <a id="login-button" class="itl-tooltip modal_trigger"  style="display:none;" data-ng-click="reset()" href="#modal">Login / Register</a>
+                                        <a href=""  id="welcome-text"  style="display:none;color:#f8ba01!important">{{userdetails.loginName}}&nbsp;<span class="fa fa-caret-down"></span></a>
                                         <ul class="dropdown remove-style">
-                                            <li><a  href="../../../views/user/#/dashboard">Dashboard</a></li>
+                                            <li><a  href="../../../{{redirecturl}}">Dashboard</a></li>
                                             <li><a href="../../../"  ng-controller="UserLogoutController" ng-click="doLogout()">Logout</a></li>
                                         </ul>
                                     </li>
