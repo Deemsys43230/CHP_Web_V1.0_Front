@@ -660,15 +660,24 @@ $scope.doGetUserId=function(){
         requestHandler.getRequest("getUserId/", "").then(function(response){
             $scope.userdetails=response.data.User_Profile;
             $scope.roledetails=response.data.Login;
-            //to check user role for hiding welcome text
-            if( $scope.roledetails.roleid == 1 || $scope.roledetails.roleid == 2){
-                $("#login-button").show();
-                $("#welcome-text").hide();
+            //to check user role
+            if( $scope.roledetails.roleid == 1 ){
+                $scope.userdetails.loginName= 'Hi!'+'  '+$scope.userdetails.firstname;
+                $("#login-button").hide();
+                $("#welcome-text").show();
+                $scope.redirecturl="views/superadmin/#/dashboard";
+            }
+            else if( $scope.roledetails.roleid == 2){
+                $scope.userdetails.loginName= 'Hi!'+'  '+$scope.userdetails.firstname;
+                $("#login-button").hide();
+                $("#welcome-text").show();
+                $scope.redirecturl="views/coach/#/dashboard";
             }
             else{
                 $scope.userdetails.loginName= 'Hi!'+'  '+$scope.userdetails.firstname;
                 $("#login-button").hide();
                 $("#welcome-text").show();
+                $scope.redirecturl="views/user/#/dashboard";
             }
             $scope.loaded=false;
 

@@ -112,7 +112,7 @@
                                        <a id="login-button" class="itl-tooltip modal_trigger"  style="display:none;" data-ng-click="reset()" href="#modal">Login / Register</a>
                                        <a href="" id="welcome-text" style="display:none;color:#f8ba01!important">{{userdetails.loginName}}&nbsp;<span class="fa fa-caret-down"></span></a>
                                        <ul class="dropdown remove-style">
-                                           <li><a  href="views/user/#/dashboard">Dashboard</a></li>
+                                           <li><a  href={{redirecturl}}>Dashboard</a></li>
                                            <li><a href=""  ng-controller="UserLogoutController" ng-click="doLogout()">Logout</a></li>
                                        </ul>
                                   </li>
