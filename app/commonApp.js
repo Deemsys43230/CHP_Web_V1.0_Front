@@ -650,13 +650,28 @@ commonApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
 //Internal Login Details
 commonApp.controller('LoginController',['$scope','requestHandler','Flash','$window','$location','$element','FeedbackService','$timeout',function($scope,requestHandler,Flash,$window,$location,$element,FeedbackService,$timeout){
  $scope.hideValue=1;
+ $scope.loader=false;
 
  //to check user session is expired ot not
     var csrf_token= /CSRF\w*TOKEN=([^;]+)/i.test(document.cookie) ? RegExp.$1 : false;
 
 $scope.doGetUserId=function(){
+    $scope.loader=true;
         requestHandler.getRequest("getUserId/", "").then(function(response){
             $scope.userdetails=response.data.User_Profile;
+            $scope.roledetails=response.data.Login;
+            //to check user role for hiding welcome text
+            if( $scope.roledetails.roleid == 1 || $scope.roledetails.roleid == 2){
+                $("#login-button").show();
+                $("#welcome-text").hide();
+            }
+            else{
+                $scope.userdetails.loginName= 'Hi!'+'  '+$scope.userdetails.firstname;
+                $("#login-button").hide();
+                $("#welcome-text").show();
+            }
+            $scope.loaded=false;
+
         },function(){
             errorMessage(Flash,"Please try again later!")
         });
@@ -680,10 +695,6 @@ $scope.doGetUserId=function(){
         }
         else {
             $scope.doGetUserId();
-            $("#login-button").hide();
-            $("#welcome-text").show();
-
-
         }
 
     };

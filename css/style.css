@@ -9459,11 +9459,11 @@ tr.sort-icon th i{
     animation: load7 1.8s infinite ease-in-out;
 }
 .loader-style{
-    position: absolute;
-    z-index: 20;
-    top:170px;
-    left: 45%;
-}
+     position: absolute;
+     z-index: 20;
+     top:170px;
+     left: 45%;
+ }
 
 .loader-style-dashboard{
     position: absolute;
@@ -18282,7 +18282,6 @@ select.event:focus {
 .navbar-common .navbar-nav > li > a {
     font-size: 1em;
     text-align: center;
-    color: #f8ba01 !important;
     display: block;
     font-weight: 300;
     overflow: hidden;
@@ -18344,4 +18343,10 @@ select.event:focus {
 }
 .navbar-common .navbar-nav .dropdown > li:hover >a{
     color: #fff;
+}
+/* loader styles for home page */
+.loader-style-home{
+    position: absolute;
+    left:80%;
+    bottom:40px;
 }
