@@ -1117,6 +1117,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
                         $scope.updateGoal=1;
 
 
+
                         var dateCompare = $scope.goalDetails.startdate.slice(6,10)+'-'+$scope.goalDetails.startdate.slice(3,5)+'-'+$scope.goalDetails.startdate.slice(0,2);
                         var date1 = selectedDate.slice(6,10)+'-'+selectedDate.slice(3,5)+'-'+selectedDate.slice(0,2);
                         var date2 = $scope.goalDetails.enddate.slice(6,10)+'-'+$scope.goalDetails.enddate.slice(3,5)+'-'+$scope.goalDetails.enddate.slice(0,2);
@@ -1194,7 +1195,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
                             $scope.goalExpired=0;
                         }
 
-                        $window.currentweight = $scope.demography.weight;
+                        $window.currentweight = $scope.demographydata.weight;
                         $window.targetweight = $scope.goalDetails.targetweight;
                         $window.unit=$scope.userProfile.unitPreference==1?"Kgs":"Lbs";
                         $scope.goal = {
@@ -1203,6 +1204,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
 
                     }
                 }
+
             });
 
 
@@ -1220,7 +1222,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
                 }
             }
             $scope.setGoalDetails.enddate=$scope.enddate;
-            $scope.setGoalDetails.currentweight=$scope.demography.weight;
+            $scope.setGoalDetails.currentweight=$scope.demographydata.weight;
             $scope.setGoalDetails.goalchoice=$scope.goalchoice.toString();
 
 
@@ -1631,7 +1633,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
             });
         };
 
-        $scope.updateWeightLogAndEndDate=function(choice){
+            $scope.updateWeightLogAndEndDate=function(choice){
 
             $scope.updateWeightLog();
             $scope.docheckGoalEndDate(choice);
@@ -1848,7 +1850,6 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
 
         //To Do Update Goal
         $scope.doUpdateGoal=function(){
-
             $scope.setGoalDetails={};
 
 

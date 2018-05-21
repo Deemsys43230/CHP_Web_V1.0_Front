@@ -24,12 +24,6 @@ commonApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                     return response;
                 },
                 'responseError': function (rejection) {
-
-                    if (rejection.status === 403) {
-                        $cookies.remove("X-CSRFToken",{path: '/'});
-                        $("#login-button").show();
-                        $("#welcome-text").hide();
-                    }
                     switch (rejection.status) {
                         case 400: {
                             break;
@@ -39,6 +33,10 @@ commonApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                             break;
                         }
                         case 403: {
+                            //while user session expires and 403 exception need to show login button
+                            $cookies.remove("X-CSRFToken",{path: '/'});
+                            $("#login-button").show();
+                            $("#welcome-text").hide();
                             $location.path("/login");
                             break;
                         }
