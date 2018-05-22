@@ -1,12 +1,13 @@
 
 var userApp = angular.module('userApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','friendsServiceModule','angular-nicescroll']);
 
-userApp.controller('FriendsController',['$scope','requestHandler','Flash','FriendsService','$sce',function($scope,requestHandler,Flash,FriendsService,$sce){
+userApp.controller('FriendsController',['$scope','requestHandler','Flash','FriendsService','$sce','$timeout',function($scope,requestHandler,Flash,FriendsService,$sce,$timeout){
 
     $scope.viewDetails=0;
     //Initialize search
     $scope.friendsearch="";
     $scope.activeClass.friends='active';
+    $scope.loadingFriendsImage=false;
 
     //My Friends Pagination starts
     $scope.currentPage = 0;
@@ -142,14 +143,14 @@ userApp.controller('FriendsController',['$scope','requestHandler','Flash','Frien
 
     //user view details
     $scope.doViewMembers= function (id) {
+        $scope.loadingFriendsImage=true;
         $scope.viewMemberDetails={};
         // To empty the image url after getting json values
         $scope.myImgSrc="";
         $scope.viewDetails=1;
-        $scope.loaded = true;
         requestHandler.getRequest("getUserProfile/"+id,"").then(function(response){
-            $scope.myImgSrc =$sce.trustAsResourceUrl(response.data.userprofile.imageurl+"?decache="+Math.random());
             $scope.viewMemberDetails = response.data.userprofile;
+            $scope.myImgSrc =$sce.trustAsResourceUrl(response.data.userprofile.imageurl+"?decache="+Math.random());
 
             //View the image in ng-src for view testimonials
 
@@ -174,8 +175,11 @@ userApp.controller('FriendsController',['$scope','requestHandler','Flash','Frien
             if($scope.viewMemberDetails.zipcode==null){
                 $scope.viewMemberDetails.zipcode="N/A";
             }
+            $timeout(function(){
+                $scope.loadingFriendsImage=false;
+            },2000);
 
-            $scope.loaded = false;
+
             $scope.paginationLoad = true;
 
         },  function () {

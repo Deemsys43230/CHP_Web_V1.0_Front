@@ -34,10 +34,9 @@ commonApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         }
                         case 403: {
                             //while user session expires and 403 exception need to show login button
-                            $cookies.remove("X-CSRFToken",{path: '/'});
+                           $cookies.remove("X-CSRFToken",{path: '/'});
                             $("#login-button").show();
                             $("#welcome-text").hide();
-                            $location.path("/login");
                             break;
                         }
                         case 500: {
