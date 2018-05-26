@@ -318,8 +318,7 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../angular/angular-utils-pagination/dirPagination.js',
                                  '../../css/custom-inputs.css',
                                 '../../plugin/dateRange/daterangepicker.css',
-                                '../../plugin/dateRange/daterangepicker.js',
-                                '../../app/countryState/countryStateService.js'
+                                '../../plugin/dateRange/daterangepicker.js'
                             ]
                         })
                     }],

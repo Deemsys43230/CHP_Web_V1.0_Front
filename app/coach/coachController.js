@@ -1,9 +1,9 @@
 /**
  * Created by Deemsys on 9/21/2017.
  */
-var adminApp = angular.module('adminApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','stateCountryModule','angularUtils.directives.dirPagination']);
+var adminApp = angular.module('adminApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','angularUtils.directives.dirPagination']);
 
-adminApp.controller('CoachController',['$scope','requestHandler','Flash','coachMenuService','$location','CountryStateService','$routeParams',function($scope,requestHandler,Flash,coachMenuService,$location,CountryStateService,$routeParams) {
+adminApp.controller('CoachController',['$scope','requestHandler','Flash','coachMenuService','$location','$routeParams',function($scope,requestHandler,Flash,coachMenuService,$location,$routeParams) {
     $scope.inviteId = $routeParams.id;
     // For coach management side menu
     $scope.coachMenuList = coachMenuService;
@@ -135,7 +135,7 @@ adminApp.controller('CoachController',['$scope','requestHandler','Flash','coachM
 }]);
 
 
-adminApp.controller('CoachViewController',['$scope','requestHandler','Flash','CountryStateService','$routeParams',function($scope,requestHandler,Flash,CountryStateService,$routeParams) {
+adminApp.controller('CoachViewController',['$scope','requestHandler','Flash','$routeParams',function($scope,requestHandler,Flash,$routeParams) {
 
     $scope.averageRate=0.1;
     $scope.paginationLoad=false;
@@ -153,9 +153,6 @@ adminApp.controller('CoachViewController',['$scope','requestHandler','Flash','Co
 
         requestHandler.getRequest("getCoachIndividualDetailbyAdmin/"+id, "").then(function(response){
             $scope.usercoachdetails=response.data.getCoachIndividualDetail;
-            //to get country and state details for coach
-            $scope.usercoachdetails.countryName=CountryStateService.doGetCountries($scope.usercoachdetails.country);
-            $scope.usercoachdetails.stateName=CountryStateService.doGetStates($scope.usercoachdetails.state,$scope.usercoachdetails.country);
 
             if($scope.usercoachdetails.experience!=null){
                 $scope.years = Math.trunc($scope.usercoachdetails.experience / 12);

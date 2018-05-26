@@ -1,6 +1,6 @@
-var adminApp = angular.module('adminApp', ['ngRoute','oc.lazyLoad','requestModule','flash','stateCountryModule','ngAnimate','angularUtils.directives.dirPagination']);
+var adminApp = angular.module('adminApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','angularUtils.directives.dirPagination']);
 
-adminApp.controller('MemberController',['$scope','requestHandler','Flash','CountryStateService','$routeParams','$sce',function($scope,requestHandler,Flash,CountryStateService,$routeParams,$sce) {
+adminApp.controller('MemberController',['$scope','requestHandler','Flash','$routeParams','$sce',function($scope,requestHandler,Flash,$routeParams,$sce) {
 
 
 
@@ -20,11 +20,6 @@ adminApp.controller('MemberController',['$scope','requestHandler','Flash','Count
         requestHandler.getRequest("getUserProfile/"+$routeParams.id,"").then(function(response){
             $scope.myImgSrc = $sce.trustAsResourceUrl(response.data.userprofile.imageurl+"?decache="+Math.random());
             $scope.viewMemberDetails = response.data.userprofile;
-            //to get country and state details for user
-            $scope.viewMemberDetails.countryName=CountryStateService.doGetCountries($scope.viewMemberDetails.country);
-            $scope.viewMemberDetails.stateName=CountryStateService.doGetStates($scope.viewMemberDetails.state,$scope.viewMemberDetails.country);
-
-
             //View the image in ng-src for view testimonials
 
             if($scope.viewMemberDetails.about==null){
