@@ -1086,6 +1086,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
                 $scope.demographydata = response.data.Demography_Data;
                 $scope.weight= $scope.demographydata.targetweight;
                 $scope.currentwt = $scope.demographydata.weight;
+                $window.currentweight = $scope.demographydata.weight;
             });
 
             requestHandler.postRequest("checkGoalStatus/",{"date":selectedDate}).then(function(response){
@@ -1195,7 +1196,6 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
                             $scope.goalExpired=0;
                         }
 
-                        $window.currentweight = $scope.demographydata.weight;
                         $window.targetweight = $scope.goalDetails.targetweight;
                         $window.unit=$scope.userProfile.unitPreference==1?"Kgs":"Lbs";
                         $scope.goal = {
