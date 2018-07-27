@@ -18350,3 +18350,142 @@ select.event:focus {
     left:80%;
     bottom:40px;
 }
+/* user registration in home page */
+.plan-div{
+    padding: 15px 10px 15px 10px !important;
+    min-height: 75px;
+}
+.plan-image{
+    width: 60px;
+    height: 60px;
+}
+.plan-text{
+    color: #FFF;
+    padding-left: 10px;
+    font-size: 22px;
+    line-height: 45px;
+}
+.input-hidden {
+    position: absolute;
+    left: -9999px;
+}
+
+
+input[type=radio]:checked + label>img {
+    border: 1px solid #fff;
+    box-shadow: 0 0 3px 3px #f8ba01;
+}
+.male-label{
+   background-color: deepskyblue !important;
+    border: solid 1px deepskyblue;
+    border-radius: 10px;
+}
+.female-label{
+    background-color: pink !important;
+    border: solid 1px pink;
+    border-radius: 10px;
+}
+
+/* Stuff after this is only to make things more pretty */
+input[type=radio] + label>img {
+    border: 1px dashed #444;
+    width: 150px;
+    height: 150px;
+    transition: 500ms all;
+}
+
+input[type=radio]:checked + label>img {
+    transform:
+            rotateZ(-10deg)
+            rotateX(10deg);
+}
+
+/*
+ | //lea.verou.me/css3patterns
+ | Because white bgs are boring.
+*/
+html {
+    background-color: #fff;
+    background-size: 100% 1.2em;
+    background-image:
+            linear-gradient(
+                    90deg,
+                    transparent 79px,
+                    #abced4 79px,
+                    #abced4 81px,
+                    transparent 81px
+            ),
+            linear-gradient(
+                    #eee .1em,
+                    transparent .1em
+            );
+}
+.margin-top-180{
+    margin-top:180px;
+}
+.margin-top-70{
+    margin-top:70px;
+}
+#sad{
+    margin:0 auto;
+}
+a.step_button {
+    font-size: 14px;
+    padding:5px 25px !important;
+    border-radius: 0px !important;
+    font-weight: bold;
+    background-color:transparent;
+    border: 2px solid #f8ba01;
+    color: #f8ba01;
+}
+
+a.step_button:hover{
+    color: #fff !important;
+    background-color:#f8ba01;
+    cursor: pointer;
+}
+
+a.step_button:visited{
+    color: #f8ba01;
+}
+.workout-label{
+    color: #fff;
+    background-color: #f8ba01;
+    font-size: 20px;
+    padding:15px 25px !important;
+}
+.h2-label{
+    color:#f94c6a !important;
+    text-transform: none !important;
+}
+.workout-plan-button {
+    position: relative!important;
+    border: none;
+    border-radius: 40px;
+    background: #f8ba01;
+    color: #fff!important;
+    outline: 0;
+    padding: 15px 30px !important;
+    width: 250px;
+    font-size: 18px;
+}
+.register-button{
+    border-radius: 5px!important;
+    width: 180px !important;
+    padding: 10px 14px !important;
+    background: #ED6347 !important;
+}
+.change-plan{
+    border-radius: 5px!important;
+    width: 180px !important;
+    padding: 10px 14px !important;
+    background: #f8ba01 !important;
+}
+.preview-label{
+    padding-bottom: 10px;
+    font-size: 18px;
+}
+.small-font-size{
+    font-size: 63% !important;
+
+}

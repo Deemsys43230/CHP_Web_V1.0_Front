@@ -639,6 +639,20 @@ commonApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'CoachController'
             }).
+        when('/user-registration', {
+            templateUrl: '../common/user-registration.html',
+            resolve: {
+                loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name:'commonApp',
+                        files:[
+                            '../../app/userRegistration/userRegistration.js'
+                        ]
+                    })
+                }]
+            },
+            controller:'UserRegistrationController'
+        }).
             otherwise({
                 redirectTo: '/home'
             });
