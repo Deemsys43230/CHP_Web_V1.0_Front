@@ -4,12 +4,20 @@ commonApp.controller('UserRegistrationController',['$scope','requestHandler','Fl
     $scope.steps = 0;
     $scope.registerUser={};
     $scope.userPlan={};
+    $scope.changePlanSkipStep=true;
 
     // to choose user plan
     $scope.planChoosen = function (plantype) {
         $scope.planType = plantype;
+        if(plantype!=4){
+            $scope.steps = 1;
+            if($scope.changePlanSkipStep==false){
+                $scope.steps=$scope.steps+1;
+            }
+        }else{
+            $scope.steps = 6;
+        }
 
-        $scope.steps = 1;
     };
     //default data
     $scope.defaultRegistrationData = {
@@ -30,7 +38,9 @@ commonApp.controller('UserRegistrationController',['$scope','requestHandler','Fl
 
     //to change the plan
     $scope.changePlan = function () {
+        $scope.changePlanSkipStep=false;
         $scope.steps = 0;
+
 
     };
     //to show plan preview
@@ -83,20 +93,28 @@ commonApp.controller('UserRegistrationController',['$scope','requestHandler','Fl
             $scope.customPlanAlert();
         }
 
-        if($scope.userPlan.plantype==2){
-            $scope.userPlan.targetweight= ((parseInt($scope.defaultRegistrationData.weight))+(parseInt($scope.defaultRegistrationData.targetweight)));
-        }
 
-        if($scope.userPlan.plantype==3){
-            $scope.userPlan.targetweight= ((parseInt(($scope.defaultRegistrationData.weight))-parseInt($scope.defaultRegistrationData.targetweight)));
-        }
         if($scope.userPlan.unit==2){
             $scope.userPlan.height=parseInt($scope.defaultRegistrationData.heightFeet)+'.'+($scope.defaultRegistrationData.heightInches) ;
             $scope.userPlan.weight=parseInt($scope.defaultRegistrationData.weightlbs);
+            if($scope.userPlan.plantype==2){
+                $scope.userPlan.targetweight= ((parseInt($scope.defaultRegistrationData.weightlbs))-(parseInt($scope.defaultRegistrationData.targetweight)));
+            }
+
+            if($scope.userPlan.plantype==3){
+                $scope.userPlan.targetweight= ((parseInt(($scope.defaultRegistrationData.weightlbs))+parseInt($scope.defaultRegistrationData.targetweight)));
+            }
         }
         else if($scope.userPlan.unit==1){
             $scope.userPlan.height=parseInt($scope.defaultRegistrationData.height);
             $scope.userPlan.weight=parseInt($scope.defaultRegistrationData.weight);
+            if($scope.userPlan.plantype==2){
+                $scope.userPlan.targetweight= ((parseInt($scope.defaultRegistrationData.weight))-(parseInt($scope.defaultRegistrationData.targetweight)));
+            }
+
+            if($scope.userPlan.plantype==3){
+                $scope.userPlan.targetweight= ((parseInt(($scope.defaultRegistrationData.weight))+parseInt($scope.defaultRegistrationData.targetweight)));
+            }
         }
         requestHandler.postRequest("getplanoverview/",$scope.userPlan).then(function(response) {
 
@@ -105,9 +123,12 @@ commonApp.controller('UserRegistrationController',['$scope','requestHandler','Fl
                 $scope.userPlanDetails=response.data.plandetails;
             }
             else{
-                $scope.possibledate=response.data.possibledate;
+                console.log($scope.userPlan);
                 $scope.userPlanDetails=$scope.userPlan;
+                console.log($scope.userPlanDetails);
+                $scope.possibledate=response.data.possibledate;
                 $scope.userPlanDetails.enddate=$scope.possibledate;
+                console.log($scope.userPlanDetails);
 
             }
 
@@ -118,17 +139,23 @@ commonApp.controller('UserRegistrationController',['$scope','requestHandler','Fl
         $scope.submitted=true;
         if($scope.registerForm.$valid){
         $scope.registerUser.referralid=$scope.defaultRegistrationData.referralid;
-        $scope.registerUser.height=$scope.userPlan.height;
-        $scope.registerUser.weight= $scope.userPlan.weight;
-        $scope.registerUser.plantype=  $scope.userPlan.plantype;
-        $scope.registerUser.dob=  $scope.userPlan.dob;
-        $scope.registerUser.activitytype= $scope.userPlan.activitytype;
-        $scope.registerUser.planchoice=   $scope.userPlan.planchoice;
-        $scope.registerUser.role= $scope.userPlan.role;
-        $scope.registerUser.gender=  $scope.userPlan.gender;
-        $scope.registerUser.unit=  $scope.userPlan.unit;
-        $scope.registerUser.enddate=$scope.userPlan.enddate;
-        $scope.registerUser.targetweight=  $scope.userPlan.targetweight;
+        if($scope.planType==4){
+            $scope.registerUser.role= $scope.defaultRegistrationData.role;
+            $scope.registerUser.plantype=  $scope.planType;
+        }else {
+            $scope.registerUser.height=$scope.userPlan.height;
+            $scope.registerUser.weight= $scope.userPlan.weight;
+            $scope.registerUser.plantype=  $scope.userPlan.plantype;
+            $scope.registerUser.dob=  $scope.userPlan.dob;
+            $scope.registerUser.activitytype= $scope.userPlan.activitytype;
+            $scope.registerUser.planchoice=   $scope.userPlan.planchoice;
+            $scope.registerUser.role= $scope.userPlan.role;
+            $scope.registerUser.gender=  $scope.userPlan.gender;
+            $scope.registerUser.unit=  $scope.userPlan.unit;
+            $scope.registerUser.enddate=$scope.userPlan.enddate;
+            $scope.registerUser.targetweight=  $scope.userPlan.targetweight;
+        }
+
         requestHandler.postRequest("userregistration/",$scope.registerUser).then(function(response) {
             $scope.steps = 0;
             successMessage(Flash,"User Registration Successful");
@@ -149,10 +176,10 @@ commonApp.controller('UserRegistrationController',['$scope','requestHandler','Fl
         else{
             $scope.steps=$scope.steps+1;
         }
-        if($scope.defaultRegistrationData.activitytype){}
         if($scope.steps==5){
             $scope.doGetUserPlanOverView();
         }
+
     };
 
     $scope.doValidation=function(){
@@ -176,65 +203,49 @@ commonApp.controller('UserRegistrationController',['$scope','requestHandler','Fl
     };
 
     function initializeDobCalender() {
-//Set date value to ng-modal for unit preference metric
         $('#dob').datetimepicker({format: 'DD/MM/YYYY', ignoreReadonly: true, maxDate: new Date(),widgetPositioning: {vertical: 'bottom'}}).on('dp.change', function(selected){
             $scope.defaultRegistrationData.dob=$('#dob').val();
         });
 
         $('#dob').click(function(){
-            var offset = $("#dob").offset().top -50;
-            $('html, body').animate({scrollTop : offset},"slow");
             $('#dob').focus();
         });
         //while clicking dob icon to set scrollTop for metric calender
         $('#dobIcon').click(function()
         {
-            var offset = $("#dobIcon").offset().top -50;
-            $('html, body').animate({scrollTop : offset},"slow");
             $('#dob').focus();
 
         });
     };
 
     function initializeEndDateCalender() {
-//Set date value to ng-modal for unit preference metric
         $('#enddate').datetimepicker({format: 'DD/MM/YYYY', ignoreReadonly: true, minDate: new Date(),widgetPositioning: {vertical: 'top'}}).on('dp.change', function(selected){
             $scope.enddate=$('#enddate').val();
         });
 
         $('#enddate').click(function(){
-            var offset = $("#enddate").offset().top -350;
-            $('html, body').animate({scrollTop : offset},"slow");
             $('#enddate').focus();
         });
         //while clicking dob icon to set scrollTop for metric calender
         $('#enddateIcon').click(function()
         {
-            var offset = $("#enddateIcon").offset().top -350;
-            $('html, body').animate({scrollTop : offset},"slow");
             $('#enddate').focus();
 
         });
     };
     function customEndDateCalender() {
-//Set date value to ng-modal for unit preference metric
         $('#customEndDate').datetimepicker({format: 'DD/MM/YYYY', ignoreReadonly: true, minDate: new Date(),widgetPositioning: {vertical: 'top'}}).on('dp.change', function(selected){
             $scope.defaultRegistrationData.customenddate=$('#customEndDate').val();
         });
 
-        // $('#customEndDate').click(function(){
-        //     var offset = $("#customEndDate").offset().top -50;
-        //     $('html, body').animate({scrollTop : offset},"slow");
-        //     $('#customEndDate').focus();
-        // });
-        //while clicking dob icon to set scrollTop for metric calender
-        // $('#customEndDateIcon').click(function()
-        // {
-        //     var offset = $("#customEndDateIcon").offset().top -50;
-        //     $('html, body').animate({scrollTop : offset},"slow");
-        //     $('#customEndDate').focus();
-        //
-        // });
+        $('#customEndDate').click(function(){
+            $('#customEndDate').focus();
+        });
+        $('#customEndDateIcon').click(function()
+        {
+            $('#customEndDate').focus();
+
+        });
     };
     //convert height cm to feet and inches
     $scope.toFeetConversion=function(height) {

@@ -63,7 +63,7 @@
                                 <img src="../../images/sample-image.png" class="plan-image">
                                 </div>
                                 <div class="col-md-9 col-sm-9 col-xs-9">
-                                <a href="" ng-click="userRegistration(4)" ng-model="defaultRegistrationData.plantype" class="plan-text">Skip Plan</a>
+                                <a href="" ng-click="planChoosen(4)" ng-model="defaultRegistrationData.plantype" class="plan-text">Skip Plan</a>
                                 </div>
 
                             </div>
@@ -159,7 +159,7 @@
                     <div class="col-md-4 col-sm-4 margin-top-10"  ng-pattern="/^0*[1-9]\d*$/">Weight<span class="pull-right">:</span></div>
                     <div class="col-md-8 col-sm-8">
                         <span ng-show="units==1">
-                           <input class="calculator-input"  ng-model="defaultRegistrationData.weight" name="weight" ng-required="units==1"  maxlength="5" required>
+                           <input class="calculator-input"  ng-model="defaultRegistrationData.weight" name="weight" ng-required="units==1"  maxlength="5">
                         <div class="text-count-position"><span class="text-unit lbs">kgs</span></div>
                         <span ng-show="userPlanSubmitted">
                             <span class="error-message" ng-show="basicDetailsForm.weight.$error.required"><span>Required.</span></span>
@@ -167,7 +167,7 @@
                         </span>
                         </span>
                         <span ng-show="units==2">
-                             <input class="calculator-input"  ng-model="defaultRegistrationData.weightlbs" name="weightlbs" ng-required="units==2" required>
+                             <input class="calculator-input"  ng-model="defaultRegistrationData.weightlbs" name="weightlbs" ng-required="units==2">
                         <div class="text-count-position"><span class="text-unit lbs">lbs</span></div>
                         <span ng-show="userPlanSubmitted">
                             <span class="error-message" ng-show="basicDetailsForm.weightlbs.$error.required"><span>Required.</span></span>
@@ -181,7 +181,7 @@
                     <div class="col-md-4 col-sm-4 margin-top-10" ng-show="planType==2">How Many&nbsp;<span ng-show="units==1">kgs</span><span ng-show="units==2">lbs</span>&nbsp;You Want to Reduce?<span class="pull-right">:</span></div>
                     <div class="col-md-4 col-sm-4 margin-top-10" ng-show="planType==3">How Many&nbsp;<span ng-show="units==1">kgs</span><span ng-show="units==2">lbs</span>&nbsp;You Want to Increase?<span class="pull-right">:</span></div>
                 <div class="col-md-8 col-sm-8">
-                <input class="calculator-input" ng-model="defaultRegistrationData.targetweight"  name="targetweight"  maxlength="5" required>
+                <input class="calculator-input" ng-model="defaultRegistrationData.targetweight"  name="targetweight"  maxlength="5" ng-required="planType!=1">
                     <span ng-show="userPlanSubmitted">
                             <span class="error-message" ng-show="basicDetailsForm.targetweight.$error.required"><span>Required.</span></span>
                         </span>
@@ -479,7 +479,7 @@
                 </div>
                 <div class="col-md-7">
                <a href="" class="workout-plan-button btn button change-plan" ng-click="doUserRegistration();" >Submit</a>
-                    <a href="" class="btn step_button margin-left-20"  ng-click="previousStep()"><i class="fa fa-arrow-left"></i>&nbsp;&nbsp; Previous</a>
+                    <a href="" class="btn step_button margin-left-20"  ng-click="changePlan()"><i class="fa fa-arrow-left"></i>&nbsp;&nbsp; Previous</a>
                 </div>
             </div>
 
