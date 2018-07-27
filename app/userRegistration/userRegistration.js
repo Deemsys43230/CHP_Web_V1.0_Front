@@ -115,6 +115,8 @@ commonApp.controller('UserRegistrationController',['$scope','requestHandler','Fl
         });
     };
     $scope.doUserRegistration= function () {
+        $scope.submitted=true;
+        if($scope.registerForm.$valid){
         $scope.registerUser.referralid=$scope.defaultRegistrationData.referralid;
         $scope.registerUser.height=$scope.userPlan.height;
         $scope.registerUser.weight= $scope.userPlan.weight;
@@ -134,6 +136,7 @@ commonApp.controller('UserRegistrationController',['$scope','requestHandler','Fl
         }, function () {
             errorMessage(Flash, "Please try again later!")
         });
+    }
 
     };
     //to calculate next step
