@@ -5,6 +5,7 @@ commonApp.controller('UserRegistrationController',['$scope','requestHandler','Fl
     $scope.registerUser={};
     $scope.userPlan={};
     $scope.changePlanSkipStep=true;
+    $scope.showPassword=false;
 
     // to choose user plan
     $scope.planChoosen = function (plantype) {
@@ -38,10 +39,9 @@ commonApp.controller('UserRegistrationController',['$scope','requestHandler','Fl
 
     //to change the plan
     $scope.changePlan = function () {
+        $("html, body").animate({ scrollTop: 0 }, "slow");
         $scope.changePlanSkipStep=false;
         $scope.steps = 0;
-
-
     };
     //to show plan preview
     $scope.planPreview = function () {
@@ -77,6 +77,7 @@ commonApp.controller('UserRegistrationController',['$scope','requestHandler','Fl
 
     //to calculate previous step
     $scope.previousStep=function(){
+        $("html, body").animate({ scrollTop: 0 }, "slow");
         $scope.steps=$scope.steps-1;
     };
     $scope.doGetUserPlanOverView= function () {
@@ -179,7 +180,7 @@ commonApp.controller('UserRegistrationController',['$scope','requestHandler','Fl
         if($scope.steps==5){
             $scope.doGetUserPlanOverView();
         }
-
+        $("html, body").animate({ scrollTop: 0 }, "slow");
     };
 
     $scope.doValidation=function(){
@@ -286,6 +287,11 @@ commonApp.controller('UserRegistrationController',['$scope','requestHandler','Fl
         }
 
     };
+    // Toggle Show Password
+    $scope.toggleShowPassword=function(){
+        $scope.showPassword=!$scope.showPassword;
+    };
+
     $scope.init = function() {
         $scope.test('mUnit');
         initializeDobCalender();

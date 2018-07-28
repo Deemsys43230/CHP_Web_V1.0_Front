@@ -17,7 +17,7 @@
                             <div class="horizon-item">
                                 <div class="historyOverride plan-div" style="background-color: #98d6aa!important;">
                                     <div class="col-md-3 col-sm-3 col-xs-3" style="margin-top: -6px;">
-                                        <img src="../../images/sample-image.png" class="plan-image">
+                                        <img src="../../images/weight_loss.png" class="plan-image">
                                     </div>
                                     <div class="col-md-9 col-sm-9 col-xs-9">
                                         <a href="" ng-click="planChoosen(2)" ng-model="defaultRegistrationData.plantype" class="plan-text">Weight Loss</a>
@@ -46,7 +46,7 @@
                         <div class="horizon-item" >
                             <div class="historyOverride plan-div" style="background-color: #f8ba01 !important;">
                                 <div class="col-md-3 col-sm-3 col-xs-3" style="margin-top: -6px;">
-                                <img src="../../images/sample-image.png" class="plan-image">
+                                <img src="../../images/weight_maintain.png" class="plan-image">
                                 </div>
                                 <div class="col-md-9 col-sm-9 col-xs-9">
                                     <a href="" ng-click="planChoosen(1)" ng-model="defaultRegistrationData.plantype" class="plan-text">Maintain Weight</a>
@@ -413,7 +413,7 @@
             <div class="col-lg-12 col-sm-12 col-md-12">
             <form  name="registerForm" ng-submit="registerForm.$valid" ng-model="registerForm" novalidate>
                 <div class="col-md-12">
-                    <div class="col-md-5" style="padding-left: 150px;!important"> First name<span class="pull-right">:</span></div>
+                    <div class="col-md-5" style="padding-left: 150px !important"> First name<span class="pull-right">:</span></div>
                     <div class="col-md-7">
                         <input class="calculator-input" name="firstname"  ng-model="registerUser.firstname" required validate-alpha-with-space><br/>
                         <span ng-show="submitted">
@@ -423,7 +423,7 @@
                     </div>
                 </div>
                 <div class="col-md-12">
-                    <div class="col-md-5" style="padding-left: 150px;!important"> Last name<span class="pull-right">:</span></div>
+                    <div class="col-md-5" style="padding-left: 150px !important"> Last name<span class="pull-right">:</span></div>
                     <div class="col-md-7">
                         <input class="calculator-input" name="lastname" ng-model="registerUser.lastname" required validate-alpha-with-space><br/>
                         <span ng-show="submitted">
@@ -433,7 +433,7 @@
                     </div>
                 </div>
                 <div class="col-md-12">
-                    <div class="col-md-5" style="padding-left: 150px;!important">Email ID<span class="pull-right">:</span></div>
+                    <div class="col-md-5" style="padding-left: 150px !important">Email ID<span class="pull-right">:</span></div>
                     <div class="col-md-7">
                         <input class="calculator-input" ng-model="registerUser.emailid" name="email"validate-email required><br/>
                         <span ng-show="submitted">
@@ -443,9 +443,10 @@
                     </div>
                 </div>
                 <div class="col-md-12">
-                    <div class="col-md-5" style="padding-left: 150px;!important">Password<span class="pull-right">:</span></div>
+                    <div class="col-md-5" style="padding-left: 150px !important">Password<span class="pull-right">:</span></div>
                     <div class="col-md-7">
-                        <input type="password" id="password" ng-model="registerUser.password" class="calculator-input" name="password" maxlength="20" required>
+                        <input type="{{showPassword?'text':'password'}}" id="password" ng-model="registerUser.password" class="calculator-input" name="password" maxlength="20" required>
+                        <span class="fa fa-fw {{showPassword?'fa-eye-slash':'fa-eye'}} field-icon" ng-click="toggleShowPassword()"></span>
                         <span ng-show="submitted">
                         <span class="error-message" ng-show="registerForm.password.$error.required"><span>Required.</span></span>
                           <span class="error-message" ng-show="registerForm.password.$error.pattern"><span>Condition&nbsp;not&nbsp;satisfied</span></span>

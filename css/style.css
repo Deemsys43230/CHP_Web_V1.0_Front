@@ -18487,5 +18487,14 @@ a.step_button:visited{
 }
 .small-font-size{
     font-size: 63% !important;
-
 }
+/* Password Field Eye Icon */
+.field-icon {
+    float: right;
+    margin-left: -25px;
+    margin-top: -25px;
+    margin-right: 10px;
+    position: relative;
+    z-index: 2;
+    cursor:pointer;
+  }
