@@ -1,119 +1,113 @@
 
 <div class="page-banner" ng-cloak class="ng-cloak">
     <div class="container">
-
-        <div class="row">
-
             <div class="col-lg-12 col-sm-12 col-md-12" ng-show="steps==0">
                 <div flash-message="2000" class="col-md-4 pull-right no-padding"></div>
-                <h4 class="classic-title"><span>Choose Plan</span></h4>
-
-                <div class="col-lg-5 col-sm-5 col-md-5 margin-top-10">
-                    <img src="../../images/weight-plans.jpg">
-                </div>
-                <div class="col-lg-7 col-sm-7 col-md-7">
-                    <div class="col-md-8 col-sm-8 col-xs-8">
-                        <div  class="horizon-swiper">
-                            <div class="horizon-item">
-                                <div class="historyOverride plan-div" style="background-color: #98d6aa!important;">
-                                    <div class="col-md-3 col-sm-3 col-xs-3" style="margin-top: -6px;">
-                                        <img src="../../images/weight_loss.png" class="plan-image">
-                                    </div>
-                                    <div class="col-md-9 col-sm-9 col-xs-9">
-                                        <a href="" ng-click="planChoosen(2)" ng-model="defaultRegistrationData.plantype" class="plan-text">Weight Loss</a>
-                                    </div>
-                                </div>
+                <div id="coach-table">
+                    <h1 class="h1-label">Choose Plan</h1>
+                    <div class="margin-top-10"><small><i>How Can I help You?</i></small></div>
+                    <div class="plans" ng-click="planChoosen(2)">
+                        <div class="plan">
+                            <div class="coach">
+                                <span style="color:#12dc4d">Losing Weight is a mind game</span>
                             </div>
+                            <div>
+                                <span class="price" style="background-color: #12dc4d!important;">
+                                    <span class="h2-label">Weight Loss</span><br/>
+                                </span>
+                            </div>
+                            <div class="coach">
+                                <img class="plan-image" src="../../images/sample-image.png">
+                            </div>
+                            <br/>
                         </div>
                     </div>
-                <div class="col-md-8 col-sm-8 col-xs-8">
-                    <div  class="horizon-swiper">
-                        <div class="horizon-item" >
-                            <div class="historyOverride plan-div" style="background-color: #ff7373 !important;">
-                                <div class="col-md-3 col-sm-3 col-xs-3" style="margin-top: -6px;">
-                                <img src="../../images/weight-gain-plan.png" class="plan-image" >
-                                </div>
-                                <div class="col-md-9 col-sm-9 col-xs-9">
-                                <a href=""  ng-click="planChoosen(3)" ng-model="defaultRegistrationData.plantype"  class="plan-text">Weight Gain</a>
-                                </div>
+                    <div class="plans" ng-click="planChoosen(3)">
+                        <div class="plan">
+                            <div class="coach">
+                                <span style="color:#ff6666">Weight gain dosenot Happen Overnight</span>
                             </div>
-                    </div>
-                </div>
-                </div>
-
-                    <div class="col-md-8 col-sm-8 col-xs-8">
-                    <div  class="horizon-swiper">
-                        <div class="horizon-item" >
-                            <div class="historyOverride plan-div" style="background-color: #f8ba01 !important;">
-                                <div class="col-md-3 col-sm-3 col-xs-3" style="margin-top: -6px;">
-                                <img src="../../images/weight_maintain.png" class="plan-image">
-                                </div>
-                                <div class="col-md-9 col-sm-9 col-xs-9">
-                                    <a href="" ng-click="planChoosen(1)" ng-model="defaultRegistrationData.plantype" class="plan-text">Maintain Weight</a>
-                                </div>
-
+                            <div>
+                                <span class="price" style="background-color:#ff6666!important;">
+                                    <span class="h2-label">Weight Gain</span><br/>
+                                </span>
                             </div>
+                            <div class="coach">
+                               <img class="plan-image" src="../../images/weight-gain-plan.png">
+                            </div>
+                            <br/>
                         </div>
                     </div>
-                </div>
-                    <div class="col-md-8 col-sm-8 col-xs-8">
-                    <div  class="horizon-swiper">
-                        <div class="horizon-item">
-                            <div class="historyOverride plan-div" style="background-color: #c5c4c4 !important;">
-                                <div class="col-md-3 col-sm-3 col-xs-3" style="margin-top: -6px;">
-                                <img src="../../images/sample-image.png" class="plan-image">
-                                </div>
-                                <div class="col-md-9 col-sm-9 col-xs-9">
-                                <a href="" ng-click="planChoosen(4)" ng-model="defaultRegistrationData.plantype" class="plan-text">Skip Plan</a>
-                                </div>
-
+                    <div class="plans" ng-click="planChoosen(1)">
+                        <div class="plan">
+                            <div class="coach">
+                                <span style="color:#f8ba01">Losing Weight is a mind game</span>
                             </div>
+                            <div>
+                                <span class="price" style="background-color: #f8ba01!important;">
+                                    <span class="h2-label" >Maintain Weight</span><br/>
+                                </span>
+                            </div>
+                            <div class="coach">
+                                <img class="plan-image" src="../../images/weight_maintain.png">
+                            </div>
+                            <br/>
+                        </div>
+                    </div>
+                    <div class="plans" ng-click="planChoosen(4)">
+                        <div class="plan">
+                            <div class="coach">
+                                <span style="color:#948f8f">No More It's Too Hard</span>
+                            </div>
+                            <div>
+                                <span class="price" style="background-color: #948f8f!important;">
+                                      <span class="h2-label">Skip & Register</span><br/>
+                                </span>
+                            </div>
+                            <div class="coach">
+                                <img class="plan-image" src="../../images/no-plan.png">
+                            </div>
+                            <br/>
                         </div>
                     </div>
                 </div>
             </div>
-            </div>
-            <div class="col-lg-12 col-sm-12 col-md-12 no-padding" ng-show="steps==1">
-                <h4 class="classic-title"><span>Basic Details</span></h4>
-                <div class="col-md-12 col-sm-12 col-xs-12 no-padding margin-top-10">
-                    <h2 class="h2-label"> Choose Your Gender</h2>
-                    <div class="col-md-3 col-sm-3 col-xs-3 margin-top-10">
-                        <input type="radio" id="male" name="gender"  value="1" ng-model="defaultRegistrationData.gender" class="input-hidden" />
-                        <label for="male" class="male-label">
-                            <img src="../../images/Male.jpg" alt="Male" />
-                        </label>
+            <div class="container text-center" ng-show="steps==1">
+                <h1 class="h1-label">Let's know Your Personal Details</h1>
+                <h3 style="padding-top: 30px;font-size: 24px;">Choose Your Gender</h3>
+                <div class="col-md-12 margin-top-30" >
+                            <input type="radio" id="male" name="gender" value="1" ng-model="defaultRegistrationData.gender" class="input-hidden" />
+                            <label for="male" class="gender-label male-label">
+                                <img src="../../images/Male.jpg" alt="Male" />
+                            </label>
+                            <input type="radio" id="female" name="gender"  value="2" ng-model="defaultRegistrationData.gender" class="input-hidden" />
+                            <label for="female" class="gender-label female-label margin-left-25">
+                                <img src="../../images/Female.png" alt="Female" />
+                            </label>
+                        </div>
 
-                    </div>
-                    <div  class="col-md-3 col-sm-3 col-xs-3  margin-top-10">
-                        <input type="radio" id="female" name="gender" value="2" ng-model="defaultRegistrationData.gender" class="input-hidden" />
-                        <label for="female" class="female-label">
-                            <img src="../../images/Female.png" alt="Female" />
-                        </label>
-                    </div>
-
-                    <div class="col-md-6 col-sm-6 margin-top-10 no-padding">
-                        <h2 class="h2-label" >Select Your Date Of Birth</h2>
-                        <div class="col-md-12 col-sm-12 col-xs-12 margin-top-10">
-                            <div class="input-group">
-                                <input type="text" name='dob' ng-model="defaultRegistrationData.dob" class="search-input datepicker_cursor" id="dob"  readonly/>
-                                <span class="input-group-addon cursor" id="dobIcon">
+                    <div class="center-div">
+                            <h3 class="padding-bottom-20" style="font-size: 24px;"> Date Of Birth</h3>
+                            <div class="col-md-12 col-sm-12 col-xs-12" >
+                                <div class="input-group">
+                                    <input type="text" name='dob' ng-model="defaultRegistrationData.dob" class="search-input datepicker_cursor" id="dob"  readonly/>
+                                    <span class="input-group-addon cursor" id="dobIcon">
                                 <span class="glyphicon glyphicon-calendar"></span>
                             </span>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-
-
-                <div class="pull-right margin-top-100">
+                <div class="margin-top-100">
                     <a href="" class="btn step_button"  ng-click="previousStep()"><i class="fa fa-arrow-left"></i>&nbsp;&nbsp; Previous</a>
                     <a href="" class="btn step_button margin-left-20"  ng-click="nextStep()">Next&nbsp;&nbsp;<i class="fa fa-arrow-right"></i></a>
                 </div>
             </div>
-            <div class="col-lg-12 col-sm-12 col-md-12 no-padding"  ng-show="steps==2">
+
+
+            <div class="container text-center"  ng-show="steps==2">
+                <h1 class="h1-label">Let's know Your Physical Details</h1>
                 <form  name="basicDetailsForm" ng-submit="basicDetailsForm.$valid" ng-model="basicDetailsForm" novalidate>
-                <h4 class="classic-title"><span>BMI Details</span></h4>
-                <div class="col-md-12 col-sm-12 text-center">
+                <div class="col-md-12 col-sm-12">
                     <div class="col-md-12 margin-top5 margin-top-20 unit">
                         <div class="btn-group" data-toggle="buttons">
                             <label class="btn btn-default active unit-toggle-label"  ng-click="test('mUnit')">
@@ -126,10 +120,10 @@
                     </div>
 
                 </div>
-                <div class="col-md-12 col-sm-12  margin-top-20 no-padding">
+                <div class="col-md-12 col-sm-12 text-center margin-top-20">
                     <div class="col-md-4 col-sm-4 margin-top-10">Height<span class="pull-right">:</span></div>
                     <div ng-show="units==2">
-                        <div class="col-md-4 col-sm-4">
+                        <div class="col-md-3 col-sm-3">
                             <input class="calculator-input" name="feet" maxlength="2" ng-model="defaultRegistrationData.heightFeet" ng-pattern="/^0*[1-9]\d*$/"  ng-required="units==2" required>
                             <div class="text-count-position"><span class="text-unit">ft</span></div>
                                 <span ng-show="userPlanSubmitted">
@@ -137,7 +131,7 @@
                                     <span class="error-message" ng-show="basicDetailsForm.feet.$error.pattern"><span>Invalid&nbsp;Format.</span></span>
                                 </span>
                         </div>
-                        <div class="col-md-4 col-sm-4">
+                        <div class="col-md-3 col-sm-3">
                             <input class="calculator-input" name="inches" maxlength="2"  ng-model="defaultRegistrationData.heightInches" ng-required="units==2"  ng-model="inches" ng-pattern="/^[0-9]+$/" required>
                             <div class="text-count-position"><span class="text-unit">in</span></div>
 
@@ -148,7 +142,7 @@
                         </div>
                     </div>
                     <div ng-show="units==1">
-                        <div class="col-md-8 col-sm-8">
+                        <div class="col-md-6 col-sm-6">
                             <input class="calculator-input" ng-model="defaultRegistrationData.height"  name="height" ng-required="units==1" required maxlength="5">
                             <div class="text-count-position"><span class="text-unit lbs">cm</span></div>
                             <span ng-show="userPlanSubmitted">
@@ -156,9 +150,10 @@
                             </span>
                         </div>
                     </div>
-                <div class="col-md-12 col-sm-12 margin-top-10 no-padding">
+                </div>
+                <div class="col-md-12 col-sm-12 margin-top-10 text-center">
                     <div class="col-md-4 col-sm-4 margin-top-10"  ng-pattern="/^0*[1-9]\d*$/">Weight<span class="pull-right">:</span></div>
-                    <div class="col-md-8 col-sm-8">
+                    <div class="col-md-6 col-sm-6">
                         <span ng-show="units==1">
                            <input class="calculator-input"  ng-model="defaultRegistrationData.weight" name="weight" ng-required="units==1"  maxlength="5">
                         <div class="text-count-position"><span class="text-unit lbs">kgs</span></div>
@@ -178,15 +173,14 @@
                     </div>
                 </div>
 
-                <div class="col-md-12 col-sm-12  margin-top-10 no-padding" ng-hide="planType==1">
+                <div class="col-md-12 col-sm-12  margin-top-10" ng-hide="planType==1">
                     <div class="col-md-4 col-sm-4 margin-top-10" ng-show="planType==2">How Many&nbsp;<span ng-show="units==1">kgs</span><span ng-show="units==2">lbs</span>&nbsp;You Want to Reduce?<span class="pull-right">:</span></div>
                     <div class="col-md-4 col-sm-4 margin-top-10" ng-show="planType==3">How Many&nbsp;<span ng-show="units==1">kgs</span><span ng-show="units==2">lbs</span>&nbsp;You Want to Increase?<span class="pull-right">:</span></div>
-                <div class="col-md-8 col-sm-8">
+                <div class="col-md-6 col-sm-6">
                 <input class="calculator-input" ng-model="defaultRegistrationData.targetweight"  name="targetweight"  ng-required="planType!=1">
                     <span ng-show="userPlanSubmitted">
                         <span class="error-message" ng-show="basicDetailsForm.targetweight.$error.required"><span>Required.</span></span>
                     </span>
-                </div>
                 </div>
                 </div>
 
@@ -194,7 +188,7 @@
                     <div class="col-md-4 col-sm-4">
                       Choose End Date <span class="pull-right">:</span>
                     </div>
-                    <div class="col-md-8 col-sm-8">
+                    <div class="col-md-6 col-sm-6">
                     <div class="input-group">
                         <input type="text" name="enddate" id="enddate" class="search-input datepicker_cursor" ng-model="enddate" readonly/>
                         <span class="input-group-addon cursor" id="enddateIcon" >
@@ -203,46 +197,62 @@
                     </div>
                     </div>
                 </div>
-                <div class="pull-right margin-top-70">
-                    <a href="" class="btn step_button"  ng-click="previousStep();"><i class="fa fa-arrow-left"></i>&nbsp;&nbsp; Previous</a>
-                    <a href="" class="btn step_button margin-left-20"  ng-click="doValidation();userPlanSubmitted=true;">Next&nbsp;&nbsp;<i class="fa fa-arrow-right"></i></a>
-                </div>
+                    <div class="margin-top-70">
+                        <a href="" class="btn step_button"  ng-click="previousStep();"><i class="fa fa-arrow-left"></i>&nbsp;&nbsp; Previous</a>
+                        <a href="" class="btn step_button margin-left-20"  ng-click="doValidation();userPlanSubmitted=true;">Next&nbsp;&nbsp;<i class="fa fa-arrow-right"></i></a>
+                    </div>
                 </form>
-                </div>
-            <div class="col-lg-12 col-sm-12 col-md-12 no-padding"  ng-show="steps==3">
 
-                <h4 class="classic-title"><span>Activity Type{{defaultRegistrationData.activityType}}</span></h4>
+                </div>
+            <div class="container text-center"  ng-show="steps==3">
+                <h1 class="h1-label">Let's know Your Activity Details</h1>
                 <div class="col-lg-12 col-sm-12 col-md-12 no-padding text-center">
-                <h2 class="h2-label margin-top-20"> Choose Exercise Type</h2>
-                <div  class="margin-top-20">
-                <input type="radio" id="noexercise" class="height" name="noexercise" value="1" ng-model="defaultRegistrationData.activitytype"/>
-                <label class="workout-label" for="noexercise">Little to No Exercise</label>
-                </div>
-                    <div  class="margin-top-20">
-                <input type="radio" id="littleexercise" class="height" name="littleexercise" value="2" ng-model="defaultRegistrationData.activitytype"/>
-                <label class="workout-label"  for="littleexercise">Little Exercise <br/><small class="small-font-size"> 1-3 days per week</small></label>
+                    <div class="col-md-12">
+                        <div  class="col-md-4 margin-top-20 exercise-type">
 
-                </div>
-                    <div  class="margin-top-20">
-                <input type="radio" id="moderate" class="height" name="moderate" value="3" ng-model="defaultRegistrationData.activitytype"/>
-                <label class="workout-label"   for="moderate">Moderate Exercise<br/><small  class="small-font-size"> 3-5 days per week</small></label>
+                            <input type="radio" id="noexercise" class="height" name="noexercise" value="1" ng-model="defaultRegistrationData.activitytype"/>
+                            <label class="workout-label exercise-type " for="noexercise">Little to No Exercise
+                                <img src="../../images/sample-image.png" style="height: 100px;width: 100px; margin-top: 10px">
+                            </label>
 
-                </div>
-                    <div  class="margin-top-20">
+                        </div>
+                        <div  class=" col-md-4margin-top-20 exercise-type">
+                            <input type="radio" id="littleexercise" class="height" name="littleexercise" value="2" ng-model="defaultRegistrationData.activitytype"/>
+                            <label class="workout-label exercise-type"  for="littleexercise">Little Exercise <br/><small class="small-font-size"> 1-3 days per week</small>
+                                <img src="../../images/sample-image.png" style="height: 100px;width: 100px; margin-top: 10px"></label>
+
+                        </div>
+                        <div  class=" col-md-4 margin-top-20 exercise-type">
+                            <input type="radio" id="moderate" class="height" name="moderate" value="3" ng-model="defaultRegistrationData.activitytype"/>
+                            <label class="workout-label exercise-type"   for="moderate">Moderate Exercise<br/><small  class="small-font-size"> 3-5 days per week</small>
+                                <img src="../../images/sample-image.png" style="height: 100px;width: 100px; margin-top: 10px">
+                            </label>
+
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+
+                    <div  class="col-md-6 margin-top-20 exercise-type">
                 <input type="radio" id="heavy" class="height" name="heavy" value="4" ng-model="defaultRegistrationData.activitytype"/>
-                <label class="workout-label"  for="heavy">Heavy Workout<br/><small  class="small-font-size"> 6-7 days per week</small></label>
+                <label class="workout-label exercise-type"  for="heavy">Heavy Workout<br/><small  class="small-font-size"> 6-7 days per week</small>
+                    <img src="../../images/sample-image.png" style="height: 100px;width: 100px; margin-top: 10px">
+                </label>
 
                 </div>
-                <div  class="margin-top-20">
+                <div  class="col-md-6 margin-top-20 exercise-type">
                 <input type="radio" id="veryheavy" class="height" name="veryheavy" value="5" ng-model="defaultRegistrationData.activitytype"/>
-                <label class="workout-label"  for="veryheavy">Very Heavy Workout<br/><small  class="small-font-size"> Twice Per day ,extra Heavy Workout</small></label>
+                <label class="workout-label exercise-type"  for="veryheavy">Very Heavy Workout<br/><small  class="small-font-size"> Twice Per day ,extra Heavy Workout</small>
+
+                    <img src="../../images/sample-image.png" style="height: 100px;width: 100px; margin-top: 10px"></label>
 
                 </div>
+                    </div>
                 </div>
-                <div class="pull-right margin-top-50">
+                <div class="margin-top-50">
                     <a href="" class="btn step_button"  ng-click="previousStep()"><i class="fa fa-arrow-left"></i>&nbsp;&nbsp; Previous</a>
                     <a href="" class="btn step_button margin-left-20"  ng-click="nextStep()">Next&nbsp;&nbsp;<i class="fa fa-arrow-right"></i></a>
                 </div>
+
             </div>
             <div class="col-lg-12 col-sm-12 col-md-12 no-padding" ng-show="planType==2 && steps==4">
 
@@ -314,7 +324,7 @@
                     </div>
                     </div>
                 </div>
-                </div>
+
             <div class="col-lg-12 col-sm-12 col-md-12 no-padding"  ng-show="steps==5">
                 <h4 class="classic-title"><span>Plan Preview</span></h4>
                 <div class="col-lg-12 col-sm-12 col-md-12 news-block margin-top-20">
@@ -394,7 +404,7 @@
                         <div class="common_model">
                             Your Weigh Loss Plan Can be achieved Only on {{possibledate}} Would You Like to Continue This Plan?
                             <div class="action_btns margin-top-20">
-                                <div class="one_third modal_close"><a href="" class="btn btn_blue">Yes,Use This Date</a></div><br/>
+                                <div class="one_third modal_close"><a href="" class="btn btn_blue" ng-click="doGetUserPlanOverView(true)">Yes,Use This Date</a></div><br/>
                                 <div class="one_third last modal_close"><a class="btn btn_blue" ng-click="changePlan()">No,ChangePlan</a></div><br/>
                                 <div class="one_third last modal_close"><a class="btn btn_blue" ng-click="userRegistration()">Skip & Register</a></div>
                             </div>
@@ -413,7 +423,7 @@
             <div class="col-lg-12 col-sm-12 col-md-12">
             <form  name="registerForm" ng-submit="registerForm.$valid" ng-model="registerForm" novalidate>
                 <div class="col-md-12">
-                    <div class="col-md-5" style="padding-left: 150px !important"> First name<span class="pull-right">:</span></div>
+                    <div class="col-md-5" style="padding-left: 150px;!important"> First name<span class="pull-right">:</span></div>
                     <div class="col-md-7">
                         <input class="calculator-input" name="firstname"  ng-model="registerUser.firstname" required validate-alpha-with-space><br/>
                         <span ng-show="submitted">
@@ -423,7 +433,7 @@
                     </div>
                 </div>
                 <div class="col-md-12">
-                    <div class="col-md-5" style="padding-left: 150px !important"> Last name<span class="pull-right">:</span></div>
+                    <div class="col-md-5" style="padding-left: 150px;!important"> Last name<span class="pull-right">:</span></div>
                     <div class="col-md-7">
                         <input class="calculator-input" name="lastname" ng-model="registerUser.lastname" required validate-alpha-with-space><br/>
                         <span ng-show="submitted">
@@ -433,7 +443,7 @@
                     </div>
                 </div>
                 <div class="col-md-12">
-                    <div class="col-md-5" style="padding-left: 150px !important">Email ID<span class="pull-right">:</span></div>
+                    <div class="col-md-5" style="padding-left: 150px;!important">Email ID<span class="pull-right">:</span></div>
                     <div class="col-md-7">
                         <input class="calculator-input" ng-model="registerUser.emailid" name="email"validate-email required><br/>
                         <span ng-show="submitted">
@@ -443,38 +453,37 @@
                     </div>
                 </div>
                 <div class="col-md-12">
-                    <div class="col-md-5" style="padding-left: 150px !important">Password<span class="pull-right">:</span></div>
+                    <div class="col-md-5" style="padding-left: 150px;!important">Password<span class="pull-right">:</span></div>
                     <div class="col-md-7">
-                        <input type="{{showPassword?'text':'password'}}" id="password" ng-model="registerUser.password" class="calculator-input" name="password" maxlength="20" required>
-                        <span class="fa fa-fw {{showPassword?'fa-eye-slash':'fa-eye'}} field-icon" ng-click="toggleShowPassword()"></span>
+                        <input type="password" id="password" ng-model="registerUser.password" class="calculator-input" name="password" maxlength="20" required>
                         <span ng-show="submitted">
                         <span class="error-message" ng-show="registerForm.password.$error.required"><span>Required.</span></span>
                           <span class="error-message" ng-show="registerForm.password.$error.pattern"><span>Condition&nbsp;not&nbsp;satisfied</span></span>
                         </span>
-                        <!--<div id="password_info">-->
-                            <!--<h4>Password must meet the following requirements:</h4>-->
+                        <div id="password_info">
+                            <h4>Password must meet the following requirements:</h4>
 
-                            <!--<ul class="remove-style">-->
-                                <!--<li id="letter" class="invalid">At least <strong>one small letter</strong>-->
+                            <ul class="remove-style">
+                                <li id="letter" class="invalid">At least <strong>one small letter</strong>
 
-                                <!--</li>-->
-                                <!--<li id="capital" class="invalid">At least <strong>one capital letter</strong>-->
+                                </li>
+                                <li id="capital" class="invalid">At least <strong>one capital letter</strong>
 
-                                <!--</li>-->
-                                <!--<li id="number" class="invalid">At least <strong>one number</strong>-->
+                                </li>
+                                <li id="number" class="invalid">At least <strong>one number</strong>
 
-                                <!--</li>-->
-                                <!--<li id="special" class="invalid">At least <strong>one special character</strong>-->
+                                </li>
+                                <li id="special" class="invalid">At least <strong>one special character</strong>
 
-                                <!--</li>-->
-                                <!--<li id="length" class="invalid">Be at least <strong>6 characters</strong>-->
+                                </li>
+                                <li id="length" class="invalid">Be at least <strong>6 characters</strong>
 
-                                <!--</li>-->
-                                <!--<li id="space" class="valid">Should not allow space-->
+                                </li>
+                                <li id="space" class="valid">Should not allow space
 
-                                <!--</li>-->
-                            <!--</ul>-->
-                        <!--</div>-->
+                                </li>
+                            </ul>
+                        </div>
                     </div>
 
                 </div>
@@ -494,7 +503,7 @@
         </div>
 
 </div>
-<!--
+
 <script type="text/javascript">
     $(document).ready(function () {
         $('#password').keyup(function () {
@@ -597,4 +606,4 @@
         });
     });
 
-</script>-->
+</script>f

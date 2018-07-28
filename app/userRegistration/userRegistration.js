@@ -5,7 +5,7 @@ commonApp.controller('UserRegistrationController',['$scope','requestHandler','Fl
     $scope.registerUser={};
     $scope.userPlan={};
     $scope.changePlanSkipStep=true;
-    $scope.showPassword=false;
+    $scope.isPlanSubmitted=true;
 
     // to choose user plan
     $scope.planChoosen = function (plantype) {
@@ -18,7 +18,6 @@ commonApp.controller('UserRegistrationController',['$scope','requestHandler','Fl
         }else{
             $scope.steps = 6;
         }
-
     };
     //default data
     $scope.defaultRegistrationData = {
@@ -39,9 +38,10 @@ commonApp.controller('UserRegistrationController',['$scope','requestHandler','Fl
 
     //to change the plan
     $scope.changePlan = function () {
-        $("html, body").animate({ scrollTop: 0 }, "slow");
         $scope.changePlanSkipStep=false;
         $scope.steps = 0;
+
+
     };
     //to show plan preview
     $scope.planPreview = function () {
@@ -77,11 +77,9 @@ commonApp.controller('UserRegistrationController',['$scope','requestHandler','Fl
 
     //to calculate previous step
     $scope.previousStep=function(){
-        $("html, body").animate({ scrollTop: 0 }, "slow");
         $scope.steps=$scope.steps-1;
     };
-    $scope.doGetUserPlanOverView= function () {
-
+    $scope.doGetUserPlanOverView= function (possibiledate) {
         $scope.userPlan.plantype=parseInt($scope.planType);
         $scope.userPlan.dob=$scope.defaultRegistrationData.dob;
         $scope.userPlan.activitytype=parseInt($scope.defaultRegistrationData.activitytype);
@@ -91,7 +89,7 @@ commonApp.controller('UserRegistrationController',['$scope','requestHandler','Fl
         $scope.userPlan.unit=$scope.units;
         if( $scope.userPlan.planchoice==5) {
             $scope.userPlan.enddate =$scope.defaultRegistrationData.customenddate;
-            $scope.customPlanAlert();
+
         }
 
 
@@ -117,6 +115,10 @@ commonApp.controller('UserRegistrationController',['$scope','requestHandler','Fl
                 $scope.userPlan.targetweight= ((parseInt(($scope.defaultRegistrationData.weight))+parseInt($scope.defaultRegistrationData.targetweight)));
             }
         }
+        if(possibiledate){
+            $scope.userPlan.enddate= $scope.possibledate;
+        }
+
         requestHandler.postRequest("getplanoverview/",$scope.userPlan).then(function(response) {
 
             if(response.data.Response_status==1){
@@ -124,6 +126,7 @@ commonApp.controller('UserRegistrationController',['$scope','requestHandler','Fl
                 $scope.userPlanDetails=response.data.plandetails;
             }
             else{
+                $scope.customPlanAlert();
                 console.log($scope.userPlan);
                 $scope.userPlanDetails=$scope.userPlan;
                 console.log($scope.userPlanDetails);
@@ -137,6 +140,7 @@ commonApp.controller('UserRegistrationController',['$scope','requestHandler','Fl
         });
     };
     $scope.doUserRegistration= function () {
+
         $scope.submitted=true;
         if($scope.registerForm.$valid){
         $scope.registerUser.referralid=$scope.defaultRegistrationData.referralid;
@@ -145,16 +149,16 @@ commonApp.controller('UserRegistrationController',['$scope','requestHandler','Fl
             $scope.registerUser.plantype=  $scope.planType;
         }else {
             $scope.registerUser.height=$scope.userPlan.height;
-            $scope.registerUser.weight= $scope.userPlan.weight;
-            $scope.registerUser.plantype=  $scope.userPlan.plantype;
+            $scope.registerUser.weight=$scope.userPlan.weight;
+            $scope.registerUser.plantype=$scope.userPlan.plantype;
             $scope.registerUser.dob=  $scope.userPlan.dob;
-            $scope.registerUser.activitytype= $scope.userPlan.activitytype;
-            $scope.registerUser.planchoice=   $scope.userPlan.planchoice;
+            $scope.registerUser.activitytype=$scope.userPlan.activitytype;
+            $scope.registerUser.planchoice=$scope.userPlan.planchoice;
             $scope.registerUser.role= $scope.userPlan.role;
-            $scope.registerUser.gender=  $scope.userPlan.gender;
-            $scope.registerUser.unit=  $scope.userPlan.unit;
+            $scope.registerUser.gender=$scope.userPlan.gender;
+            $scope.registerUser.unit=$scope.userPlan.unit;
             $scope.registerUser.enddate=$scope.userPlan.enddate;
-            $scope.registerUser.targetweight=  $scope.userPlan.targetweight;
+            $scope.registerUser.targetweight=$scope.userPlan.targetweight;
         }
 
         requestHandler.postRequest("userregistration/",$scope.registerUser).then(function(response) {
@@ -178,9 +182,9 @@ commonApp.controller('UserRegistrationController',['$scope','requestHandler','Fl
             $scope.steps=$scope.steps+1;
         }
         if($scope.steps==5){
-            $scope.doGetUserPlanOverView();
+            $scope.doGetUserPlanOverView(false);
         }
-        $("html, body").animate({ scrollTop: 0 }, "slow");
+
     };
 
     $scope.doValidation=function(){
@@ -287,11 +291,6 @@ commonApp.controller('UserRegistrationController',['$scope','requestHandler','Fl
         }
 
     };
-    // Toggle Show Password
-    $scope.toggleShowPassword=function(){
-        $scope.showPassword=!$scope.showPassword;
-    };
-
     $scope.init = function() {
         $scope.test('mUnit');
         initializeDobCalender();

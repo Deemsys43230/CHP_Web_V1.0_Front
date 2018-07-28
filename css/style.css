@@ -6847,6 +6847,9 @@ h4.count-text{
 .margin-left-20{
     margin-left: 20px !important;
 }
+.margin-left-25{
+    margin-left: 25px !important;
+}
 
 .margin-top-50{
     margin-top:50px !important;
@@ -18356,8 +18359,8 @@ select.event:focus {
     min-height: 75px;
 }
 .plan-image{
-    width: 60px;
-    height: 60px;
+   max-width:75% !important;
+    margin-top:10%;
 }
 .plan-text{
     color: #FFF;
@@ -18371,7 +18374,7 @@ select.event:focus {
 }
 
 
-input[type=radio]:checked + label>img {
+input[type=radio]:checked + .gender-label>img {
     border: 1px solid #fff;
     box-shadow: 0 0 3px 3px #f8ba01;
 }
@@ -18385,16 +18388,24 @@ input[type=radio]:checked + label>img {
     border: solid 1px pink;
     border-radius: 10px;
 }
-
+.radio-label {
+    display: inline-block !important;
+    vertical-align: top;
+    margin-right: 3%;
+}
+.radio-input {
+    display: inline-block;
+    vertical-align: top;
+}
 /* Stuff after this is only to make things more pretty */
-input[type=radio] + label>img {
+input[type=radio] + .gender-label>img {
     border: 1px dashed #444;
     width: 150px;
     height: 150px;
     transition: 500ms all;
 }
 
-input[type=radio]:checked + label>img {
+input[type=radio]:checked + .gender-label>img {
     transform:
             rotateZ(-10deg)
             rotateX(10deg);
@@ -18453,10 +18464,16 @@ a.step_button:visited{
     background-color: #f8ba01;
     font-size: 20px;
     padding:15px 25px !important;
+    width: 250px;
 }
 .h2-label{
-    color:#f94c6a !important;
+    color:#fff !important;
     text-transform: none !important;
+}
+.h1-label{
+    font-size:36px !important;
+    color:#f94c6a !important;
+    text-align: center !important;
 }
 .workout-plan-button {
     position: relative!important;
@@ -18498,3 +18515,19 @@ a.step_button:visited{
     z-index: 2;
     cursor:pointer;
   }
+.padding-bottom-20{
+    padding-bottom: 20px;
+}
+.center-div{
+    margin:0 auto;
+    display: block;
+    width: 40%;
+    padding-top: 230px;
+}
+.exercise-type {
+    position: relative;
+    display: inline-block;
+    height: 185px;
+    margin: 5px 2px 5px 5px;
+    min-width: 150px;
+}
