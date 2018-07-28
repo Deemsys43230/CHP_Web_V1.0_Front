@@ -193,12 +193,12 @@ commonApp.controller('UserRegistrationController',['$scope','requestHandler','Fl
     $scope.test=function(unitVar){
         if(unitVar=='mUnit'){
             $scope.units=1;
-
+            $scope.weightLbsToKgConversion();
         }
         else if(unitVar=='uUnit'){
             $scope.units=2;
-            $scope.toFeetConversion();
-            $scope.toWeightConversion();
+            $scope.convertCmToFeetConversion();
+
         }
     };
 
@@ -248,21 +248,19 @@ commonApp.controller('UserRegistrationController',['$scope','requestHandler','Fl
         });
     };
     //convert height cm to feet and inches
-    $scope.toFeetConversion=function(height) {
-        height=$scope.defaultRegistrationData.height;
-        var realFeet = ((height*0.393700) / 12);
+    $scope.convertCmToFeetConversion=function() {
+        var realFeet = (($scope.defaultRegistrationData.height*0.393700) / 12);
         var feet = Math.floor(realFeet);
         $scope.defaultRegistrationData.heightFeet=feet;
         var inches = Math.round((realFeet - feet) * 12);
         $scope.defaultRegistrationData.heightInches=inches;
-        return feet + "" + inches + "";
+        //convert weight kgs to lbs
+        $scope.defaultRegistrationData.weightlbs=  $scope.defaultRegistrationData.weight*2.2046;
+        $scope.defaultRegistrationData.targetweight=$scope.defaultRegistrationData.targetweight*2.2046;
     };
    //convert weight kg to lbs
-    $scope.toWeightConversion=function(weight){
-        weight=$scope.defaultRegistrationData.weight;
-        var realWeight=weight* 2.2046;
-        $scope.defaultRegistrationData.weightlbs=realWeight;
-        return realWeight;
+    $scope.weightLbsToKgConversion=function(){
+        $scope.defaultRegistrationData.targetweight= $scope.defaultRegistrationData.targetweight/2.2046;
     };
 
 

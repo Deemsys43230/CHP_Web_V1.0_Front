@@ -3,8 +3,9 @@
     <div class="container">
 
         <div class="row">
+
             <div class="col-lg-12 col-sm-12 col-md-12" ng-show="steps==0">
-                <div flash-message="2000" class="col-lg-3 col-md-4 col-sm-4 no-padding pull-right"></div>
+                <div flash-message="2000" class="col-md-4 pull-right no-padding"></div>
                 <h4 class="classic-title"><span>Choose Plan</span></h4>
 
                 <div class="col-lg-5 col-sm-5 col-md-5 margin-top-10">
@@ -181,10 +182,11 @@
                     <div class="col-md-4 col-sm-4 margin-top-10" ng-show="planType==2">How Many&nbsp;<span ng-show="units==1">kgs</span><span ng-show="units==2">lbs</span>&nbsp;You Want to Reduce?<span class="pull-right">:</span></div>
                     <div class="col-md-4 col-sm-4 margin-top-10" ng-show="planType==3">How Many&nbsp;<span ng-show="units==1">kgs</span><span ng-show="units==2">lbs</span>&nbsp;You Want to Increase?<span class="pull-right">:</span></div>
                 <div class="col-md-8 col-sm-8">
-                <input class="calculator-input" ng-model="defaultRegistrationData.targetweight"  name="targetweight"  maxlength="5" ng-required="planType!=1">
+                <input class="calculator-input" ng-model="defaultRegistrationData.targetweight"  name="targetweight"  ng-required="planType!=1">
                     <span ng-show="userPlanSubmitted">
-                            <span class="error-message" ng-show="basicDetailsForm.targetweight.$error.required"><span>Required.</span></span>
-                        </span>
+                        <span class="error-message" ng-show="basicDetailsForm.targetweight.$error.required"><span>Required.</span></span>
+                    </span>
+                </div>
                 </div>
                 </div>
 
@@ -204,7 +206,6 @@
                 <div class="pull-right margin-top-70">
                     <a href="" class="btn step_button"  ng-click="previousStep();"><i class="fa fa-arrow-left"></i>&nbsp;&nbsp; Previous</a>
                     <a href="" class="btn step_button margin-left-20"  ng-click="doValidation();userPlanSubmitted=true;">Next&nbsp;&nbsp;<i class="fa fa-arrow-right"></i></a>
-                </div>
                 </div>
                 </form>
                 </div>
@@ -338,12 +339,12 @@
                             <div class="preview-label">  <i>{{userPlanDetails.budget}} KCal</i></div>
                         </div>
                     </div>
-                    <div class="margin-top-10">
+                    <div class="margin-top-10" ng-hide="userPlanDetails.plantype==1">
                         <div class="col-md-4"><span class="pull-right">:</span>
-                            <div class="preview-label">   You Will Reach Your Goal In</div>
+                            <div class="preview-label">You Will Reach Your Goal In</div>
                         </div>
                         <div class="col-md-7">
-                            <div class="preview-label">   <i>{{userPlanDetails.duration}}</i></div>
+                            <div class="preview-label"><i>{{userPlanDetails.duration}}</i></div>
                         </div>
                     </div>
                     <div class="margin-bottom-10">
@@ -359,7 +360,8 @@
                             <div class="preview-label">  Target Weight</div>
                         </div>
                         <div class="col-md-7">
-                            <div class="preview-label">   <i>{{userPlanDetails.targetweight}}</i></div>
+                            <div class="preview-label" ng-if="userPlanDetails.targetweight!=null"><i>{{userPlanDetails.targetweight}}</i></div>
+                            <div class="preview-label" ng-if="userPlanDetails.targetweight==null"><span>-</span></div>
                         </div>
                     </div>
                     <div class="margin-bottom-10">
@@ -375,7 +377,8 @@
                             <div class="preview-label">  End Date</div>
                         </div>
                         <div class="col-md-7">
-                            <div class="preview-label">  <i>{{userPlanDetails.enddate}}</i></div>
+                            <div class="preview-label" ng-if="userPlanDetails.enddate!=null"><i>{{userPlanDetails.enddate}}</i></div>
+                            <div class="preview-label" ng-if="userPlanDetails.enddate==null"><span>-</span></div>
                         </div>
                     </div>
                 </div>
