@@ -129,6 +129,8 @@ commonApp.controller('UserRegistrationController',['$scope','requestHandler','Fl
 
         });
     };
+
+    //to user registration
     $scope.doUserRegistration= function () {
 
         $scope.submitted=true;
@@ -272,6 +274,7 @@ commonApp.controller('UserRegistrationController',['$scope','requestHandler','Fl
 
     };
 
+    //check unit preference
     $scope.test=function(unitVar){
         if(unitVar=='mUnit'){
             $scope.units=1;
@@ -294,7 +297,7 @@ commonApp.controller('UserRegistrationController',['$scope','requestHandler','Fl
 
     function initializeDobCalender() {
         var previousdate = new Date();
-        previousdate.setFullYear(new Date().getFullYear()-18);
+        previousdate.setFullYear(new Date().getFullYear()-13);
         $('#dob').datetimepicker({format: 'DD/MM/YYYY', ignoreReadonly: true, maxDate: previousdate,widgetPositioning: {vertical: 'bottom'}}).on('dp.change', function(selected){
             $scope.defaultRegistrationData.dob=$('#dob').val();
         });
