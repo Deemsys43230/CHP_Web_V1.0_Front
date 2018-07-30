@@ -58,8 +58,8 @@
                     <a href="#" id="forgot_password" data-ng-click="reset();linkType='forgot'" class="forgot_password text-center">Forgot password?</a>
                     <div class="action_btns">
                         <div class="one_half"><a class="btn btn_red" ng-class="{'button-disable':loginForm.$invalid}" ng-click="doLogin()">Login</a></div>
-                        <div class="one_half last noMobileApp"><a href="views/home/#/user-registration" class="btn">Register</a></div>
-                        <div class="one_half last mobileApp"><a id="register_form_mobile" class="btn">Register</a></div>
+                        <div class="one_half last noMobileApp"><a href="{{registerUrl}}" class="btn modal_close">Register</a></div>
+                        <div class="one_half last mobileApp"><a id="register_form_mobile" class="btn modal_close">Register</a></div>
                     </div>
                 </form>
             </div>

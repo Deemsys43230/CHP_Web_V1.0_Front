@@ -16692,6 +16692,7 @@ margin-top: 10px;
     margin-top: 40px;
 }
 .plan {
+    cursor: pointer;
     width: 24%;
     background: #fdfdfd;
     color: #fff;
@@ -18464,7 +18465,7 @@ a.step_button:visited{
     background-color: #f8ba01;
     font-size: 20px;
     padding:15px 25px !important;
-    width: 250px;
+    width: 260px;
 }
 .h2-label{
     color:#fff !important;
@@ -18485,6 +18486,7 @@ a.step_button:visited{
     padding: 15px 30px !important;
     width: 250px;
     font-size: 18px;
+    text-align: center;
 }
 .register-button{
     border-radius: 5px!important;

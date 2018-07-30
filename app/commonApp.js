@@ -662,7 +662,10 @@ commonApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
 commonApp.controller('LoginController',['$scope','requestHandler','Flash','$window','$location','$element','FeedbackService','$timeout',function($scope,requestHandler,Flash,$window,$location,$element,FeedbackService,$timeout){
  $scope.hideValue=1;
  $scope.loader=false;
-
+ $scope.registerUrl="views/home/#/user-registration";
+ if($location.absUrl().indexOf("views")!=-1){
+    $scope.registerUrl="#user-registration";
+ }
  //to check user session is expired ot not
     var csrf_token= /CSRF\w*TOKEN=([^;]+)/i.test(document.cookie) ? RegExp.$1 : false;
 
