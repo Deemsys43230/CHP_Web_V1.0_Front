@@ -90,11 +90,22 @@ commonApp.controller('UserRegistrationController',['$scope','requestHandler','Fl
             $scope.userPlan.height=parseInt($scope.defaultRegistrationData.height);
             $scope.userPlan.weight=parseInt($scope.defaultRegistrationData.weight);
             if($scope.userPlan.plantype==2){
-                $scope.userPlan.targetweight= ((parseInt($scope.defaultRegistrationData.weight))-(parseInt($scope.defaultRegistrationData.targetweight)));
+                if($scope.units==1){
+                    $scope.userPlan.targetweight= ((parseInt($scope.defaultRegistrationData.weight))-(parseInt($scope.defaultRegistrationData.targetweight)));
+                }
+                else{
+                    $scope.userPlan.targetweight= ((parseInt($scope.defaultRegistrationData.weightlbs))-(parseInt($scope.defaultRegistrationData.targetweight)));
+                }
+
             }
 
             if($scope.userPlan.plantype==3){
-                $scope.userPlan.targetweight= ((parseInt(($scope.defaultRegistrationData.weight))+parseInt($scope.defaultRegistrationData.targetweight)));
+                if($scope.units==1){
+                    $scope.userPlan.targetweight= ((parseInt(($scope.defaultRegistrationData.weight))+parseInt($scope.defaultRegistrationData.targetweight)));
+                }
+               else{
+                    $scope.userPlan.targetweight= ((parseInt($scope.defaultRegistrationData.weightlbs))+(parseInt($scope.defaultRegistrationData.targetweight)));
+                }
             }
         }
         if(possibiledate){
@@ -150,6 +161,20 @@ commonApp.controller('UserRegistrationController',['$scope','requestHandler','Fl
     }
 
     };
+    //to calculate target weight is lesser than current weight
+    $scope.weightlossError=false;
+    $scope.targetWeightValidation=function(){
+        if($scope.planType==2){
+            if( $scope.defaultRegistrationData.targetweight < $scope.defaultRegistrationData.weight){
+                $scope.weightlossError=false;
+            }
+            else{
+                $scope.weightlossError=true;
+            }
+        }
+    };
+
+
     //to calculate next step
     $scope.nextStep=function(){
 
@@ -166,10 +191,83 @@ commonApp.controller('UserRegistrationController',['$scope','requestHandler','Fl
 
     };
 
-    $scope.doValidation=function(){
+    //To Check maximum height cm
+    $scope.maxheight=false;
+    $scope.maxHeightCheck = function(){
 
-        if($scope.basicDetailsForm.$valid){
-            $scope.nextStep();
+        if($scope.defaultRegistrationData.height<=393.7){
+            $scope.maxheight=false;
+        }
+        else if($scope.defaultRegistrationData.height>393.7){
+            $scope.maxheight=true;
+        }
+    };
+
+
+//To Check maximum Weight in kgs
+    $scope.maxweightkgs=false;
+    $scope.maxWeightCheckKgs = function(){
+
+        if($scope.defaultRegistrationData.weight <=999.9){
+            $scope.maxweightkgs=false;
+        }
+        else if($scope.defaultRegistrationData.weight >999.9){
+            $scope.maxweightkgs=true;
+        }
+
+    };
+
+
+    //To check maximum Weight
+    $scope.maxweightlbs=false;
+    $scope.maxWeightCheckLbs= function(){
+        if($scope.defaultRegistrationData.weightlbs <=2204.4){
+            $scope.maxweightlbs=false;
+        }
+        else if($scope.defaultRegistrationData.weightlbs >2204.4){
+            $scope.maxweightlbs=true;
+        }
+
+    };
+
+    //To check maximum Height in inches
+    $scope.maxHeightInches=false;
+    $scope.maxHeightCheckInches = function(){
+        if($scope.defaultRegistrationData.heightInches <=11){
+            $scope.maxHeightInches=false;
+        }
+        else if($scope.defaultRegistrationData.heightInches >11){
+            $scope.maxHeightInches=true;
+        }
+
+    };
+    //To check maximum Height in feet
+    $scope.maxHeightFeet=false;
+    $scope.maxHeightCheckFeet = function(){
+        if($scope.defaultRegistrationData.heightFeet <=12){
+            $scope.maxHeightFeet=false;
+        }
+        else if($scope.defaultRegistrationData.heightFeet >12){
+            $scope.maxHeightFeet=true;
+        }
+    };
+    $scope.doValidation=function(){
+        if($scope.planType==2 && $scope.steps==4){
+            if($scope.activityForm.$valid){
+                $scope.nextStep();
+            }
+
+        }else {
+            if($scope.units==1){
+                if($scope.basicDetailsForm.$valid && $scope.maxheight==false && $scope.maxweightkgs==false && $scope.weightlossError==false){
+                    $scope.nextStep();
+                }
+            }
+          else{
+                if($scope.basicDetailsForm.$valid && $scope.maxweightlbs==false && $scope.maxHeightInches==false && $scope.maxHeightFeet==false){
+                    $scope.nextStep();
+                }
+            }
         }
 
     };
@@ -178,16 +276,26 @@ commonApp.controller('UserRegistrationController',['$scope','requestHandler','Fl
         if(unitVar=='mUnit'){
             $scope.units=1;
             $scope.weightLbsToKgConversion();
+            $scope.maxHeightCheck();
+            $scope.maxWeightCheckKgs();
+
         }
         else if(unitVar=='uUnit'){
             $scope.units=2;
             $scope.convertCmToFeetConversion();
+            $scope.maxWeightCheckLbs();
+            $scope.maxHeightCheckInches();
+            $scope.maxHeightCheckFeet();
 
         }
     };
 
+
+
     function initializeDobCalender() {
-        $('#dob').datetimepicker({format: 'DD/MM/YYYY', ignoreReadonly: true, maxDate: new Date(),widgetPositioning: {vertical: 'bottom'}}).on('dp.change', function(selected){
+        var previousdate = new Date();
+        previousdate.setFullYear(new Date().getFullYear()-18);
+        $('#dob').datetimepicker({format: 'DD/MM/YYYY', ignoreReadonly: true, maxDate: previousdate,widgetPositioning: {vertical: 'bottom'}}).on('dp.change', function(selected){
             $scope.defaultRegistrationData.dob=$('#dob').val();
         });
 
@@ -257,27 +365,6 @@ commonApp.controller('UserRegistrationController',['$scope','requestHandler','Fl
     };
 
 
-    //To check maximum Height in inches
-    $scope.maxHeightInches=false;
-    $scope.maxHeightCheck = function(height){
-        if(height <=11){
-            $scope.maxHeightInches=false;
-        }
-        else if(height >11){
-            $scope.maxHeightInches=true;
-        }
-
-    };
-    //To check maximum Height in feet
-    $scope.maxHeightFeet=false;
-    $scope.maxHeightCheckFeet = function(height){
-        if(height <=12){
-            $scope.maxHeightFeet=false;
-        }
-        else if(height >12){
-            $scope.maxHeightFeet=true;
-        }
-    };
      // Toggle Show Password
      $scope.toggleShowPassword=function(){
         $scope.showPassword=!$scope.showPassword;
