@@ -1228,6 +1228,22 @@ commonApp.directive('validateAlphaWithCharacters', function() {
     };
 });
 
+
+//Check for Number is greater than zero Validation
+commonApp.directive('validateZero', function() {
+    var NUMBER = /^(0*[1-9][0-9]*([\.\,][0-9]+)?|0+[\.\,][0-9]*[1-9][0-9]*)$/;
+
+    return {
+        require: 'ngModel',
+        restrict: '',
+        link: function(scope, elm, attrs, ctrl) {
+            // only apply the validator if ngModel is present and Angular has added the Integer validator
+            ctrl.$validators.validateZero = function(modelValue) {
+                return  ctrl.$isEmpty(modelValue) || NUMBER.test(modelValue);
+            };
+        }
+    };
+});
 /*
 commonApp.directive('bDatepicker', function () {
     return {

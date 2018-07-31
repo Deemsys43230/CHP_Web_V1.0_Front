@@ -24,7 +24,7 @@
                     <div class="plans" ng-click="planChoosen(3)">
                         <div class="choose-plan plan">
                             <div class="coach">
-                                <span style="color:#ff6666">Weight gain dosenot Happen Overnight</span>
+                                <span style="color:#ff6666">Weight gain dosen't happen overnight</span>
                             </div>
                             <div class="coach">
                                <img class="plan-image" src="../../images/Reg-Weight-Gain.png">
@@ -35,7 +35,7 @@
                     <div class="plans" ng-click="planChoosen(1)">
                         <div class="choose-plan plan">
                             <div class="coach">
-                                <span style="color:#f8ba01">Focus On Health Not Weight</span>
+                                <span style="color:#f8ba01">Focus on health not Weight</span>
                             </div>
                             <div class="coach">
                                 <img class="plan-image" src="../../images/Reg-Maintain-Weight.png">
@@ -46,7 +46,7 @@
                     <div class="plans" ng-click="planChoosen(4)">
                         <div class="choose-plan plan">
                             <div class="coach">
-                                <span style="color:#948f8f">No More It's Too Hard</span>
+                                <span style="color:#948f8f">No more it's too hard</span>
                             </div>
                             <div class="coach">
                                 <img class="plan-image" src="../../images/Reg-Skip-Plan.png">
@@ -57,7 +57,7 @@
                 </div>
             </div>
             <div class="container" style="width:75% !important; box-shadow: 0 0 3px rgba(0, 0, 0, .3); padding:20px;" ng-show="steps==1">
-                <h1 class="h1-label">Let's Us know Your Personal Details</h1>
+                <h1 class="h1-label">Let Us know Your Personal Details</h1>
                 <hr/>
                 <h3 style="padding-top: 30px;font-size: 24px;" class="text-center">Choose Your Gender</h3>
                 <div class="col-md-12 text-center margin-top-30" >
@@ -86,15 +86,15 @@
                             </div>
                             </div>
                         </div>
-                <div class="col-md-12 margin-top-100">
-                    <a href="" class="btn step_button pull-left"  ng-click="previousStep()"><i class="fa fa-arrow-left"></i>&nbsp;&nbsp; Previous</a>
-                    <a href="" class="btn step_button pull-right"  ng-click="nextStep()">Next&nbsp;&nbsp;<i class="fa fa-arrow-right"></i></a>
+                <div class="col-md-12 text-center margin-top-70">
+                    <a href="" class="btn step_button"  ng-click="previousStep()"><i class="fa fa-arrow-left"></i>&nbsp;&nbsp; Previous</a>
+                    <a href="" class="btn step_button margin-left-20"  ng-click="nextStep()">Next&nbsp;&nbsp;<i class="fa fa-arrow-right"></i></a>
                 </div>
             </div>
 
 
             <div class="container" style="width:75% !important; box-shadow: 0 0 3px rgba(0, 0, 0, .3); padding:20px;" ng-show="steps==2">
-                <h1 class="h1-label">Let's Us know Your Physical Details</h1>
+                <h1 class="h1-label">Let Us know Your Physical Details</h1>
                 <hr/>
                 <form  name="basicDetailsForm" ng-submit="basicDetailsForm.$valid" ng-model="basicDetailsForm" novalidate>
                 <div class="col-md-4 col-sm-4 no-padding pull-right">
@@ -112,7 +112,7 @@
                 <div class="col-md-12 col-sm-12 margin-top-20">
                     <div class="col-md-4 col-sm-4 text-align-right margin-top-10">Height :</div>
                     <div ng-show="units==2">
-                        <div class="col-md-4 col-sm-4">
+                        <div class="col-md-3 col-sm-3">
                             <input class="calculator-input" name="feet" maxlength="2" ng-model="defaultRegistrationData.heightFeet" ng-pattern="/^0*[1-9]\d*$/" ng-change="maxHeightCheckFeet()" ng-required="units==2">
                             <div class="text-count-position"><span class="text-unit">ft</span></div>
                                 <span ng-show="userPlanSubmitted">
@@ -121,7 +121,7 @@
                                     <span class="error-message" ng-show="basicDetailsForm.feet.$error.pattern"><span>Invalid&nbsp;Format.</span></span>
                                 </span>
                         </div>
-                        <div class="col-md-4 col-sm-4">
+                        <div class="col-md-3 col-sm-3">
                             <input class="calculator-input" name="inches" maxlength="2"  ng-model="defaultRegistrationData.heightInches" ng-required="units==2"  ng-change="maxHeightCheckInches()"  onkeypress="return validateFloatKeyPress1(this,event);">
                             <div class="text-count-position"><span class="text-unit">in</span></div>
                             <span ng-show="userPlanSubmitted">
@@ -132,7 +132,7 @@
                         </div>
                     </div>
                     <div ng-show="units==1">
-                        <div class="col-md-8 col-sm-8">
+                        <div class="col-md-6 col-sm-6">
                             <input class="calculator-input" ng-model="defaultRegistrationData.height"  name="height"  ng-required="units==1"  ng-change="maxHeightCheck()"  onkeypress="return validateFloatKeyPress1(this,event);" maxlength="5" >
                             <div class="text-count-position"><span class="text-unit lbs">cm</span></div>
                             <span ng-show="userPlanSubmitted">
@@ -144,7 +144,7 @@
                 </div>
                 <div class="col-md-12 col-sm-12 margin-top-10">
                     <div class="col-md-4 col-sm-4 margin-top-10 text-align-right">Weight:</div>
-                    <div class="col-md-8 col-sm-8">
+                    <div class="col-md-6 col-sm-6">
                         <span ng-show="units==1">
                            <input class="calculator-input"  ng-model="defaultRegistrationData.weight" name="weight" ng-required="units==1"   validate-zero  ng-change="maxWeightCheckKgs()" onkeypress="return validateFloatKeyPress1(this,event);" maxlength="5">
                         <div class="text-count-position"><span class="text-unit lbs">kgs</span></div>
@@ -155,12 +155,13 @@
                         </span>
                         </span>
                         <span ng-show="units==2">
-                             <input class="calculator-input"  ng-model="defaultRegistrationData.weightlbs" name="weightlbs"  validate-zero ng-required="units==2"  ng-change="maxWeightCheckLbs()" onkeypress="return validateFloatKeyPress1(this,event);">
+                             <input class="calculator-input"  ng-model="defaultRegistrationData.weightlbs" name="weightlbs" validate-zero ng-required="units==2"  ng-change="maxWeightCheckLbs()" onkeypress="return validateFloatKeyPress1(this,event);">
                         <div class="text-count-position"><span class="text-unit lbs">lbs</span></div>
                             <span ng-show="userPlanSubmitted">
                             <span class="error-message" ng-show="!basicDetailsForm.weightlbs.$error.required&&maxweightlbs"><span>Please&nbsp;Enter&nbsp;Valid&nbsp;Weight.</span></span>
                             <span class="error-message" ng-show="basicDetailsForm.weightlbs.$error.required"><span>Required.</span></span>
                              <span class="error-message" ng-show="basicDetailsForm.weightlbs.$error.validateZero"><span>Invalid&nbsp;Format.</span></span>
+
                         </span>
                         </span>
                     </div>
@@ -169,14 +170,12 @@
                 <div class="col-md-12 col-sm-12  margin-top-10" ng-hide="planType==1">
                     <div class="col-md-4 col-sm-4 margin-top-10 text-align-right" ng-show="planType==2">How Many&nbsp;<span ng-show="units==1">kgs</span><span ng-show="units==2">lbs</span>&nbsp;You Want to Reduce?:</div>
                     <div class="col-md-4 col-sm-4 margin-top-10 text-align-right" ng-show="planType==3">How Many&nbsp;<span ng-show="units==1">kgs</span><span ng-show="units==2">lbs</span>&nbsp;You Want to Increase?:</div>
-                <div class="col-md-8 col-sm-8">
-                <input class="calculator-input" ng-model="defaultRegistrationData.targetweight"  name="targetweight"  ng-change="targetWeightValidation() "validate-zero ng-required="planType!=1">
+                <div class="col-md-6 col-sm-6">
+                <input class="calculator-input" ng-model="defaultRegistrationData.targetweight" name="targetweight" validate-zero ng-change="targetWeightValidation()" ng-required="planType!=1" onkeypress="return validateFloatKeyPress1(this,event);">
                     <span ng-show="userPlanSubmitted">
                         <span class="error-message" ng-show="!basicDetailsForm.targetweight.$error.required&&weightlossError"><span>Should&nbsp;be&nbsp;less&nbsp;than&nbsp;your&nbsp;weight</span></span>
-                         <span class="error-message" ng-show="basicDetailsForm.targetweight.$error.required"><span>Required.</span></span>
                         <span class="error-message" ng-show="basicDetailsForm.targetweight.$error.required"><span>Required.</span></span>
-                        <span class="error-message" ng-show="basicDetailsForm.targetweight.$error.validateZero"><span>Invalid&nbsp;Format.</span></span>
-
+                         <span class="error-message" ng-show="basicDetailsForm.targetweight.$error.validateZero"><span>Invalid&nbsp;Format.</span></span>
                     </span>
                 </div>
                 </div>
@@ -185,7 +184,7 @@
                     <div class="col-md-4 col-sm-4 text-align-right">
                       Choose End Date :
                     </div>
-                    <div class="col-md-8 col-sm-8">
+                    <div class="col-md-6 col-sm-6">
                     <div class="input-group">
                         <input type="text" name="enddate" id="enddate" class="search-input datepicker_cursor" ng-model="enddate" readonly/>
                         <span class="input-group-addon cursor" id="enddateIcon" >
@@ -195,14 +194,14 @@
                     </div>
                 </div>
                     <div class="col-md-12 text-center margin-top-70">
-                        <a href="" class="btn step_button pull-left"  ng-click="previousStep();"><i class="fa fa-arrow-left"></i>&nbsp;&nbsp; Previous</a>
-                        <a href="" class="btn step_button pull-right"  ng-click="doValidation();userPlanSubmitted=true;">Next&nbsp;&nbsp;<i class="fa fa-arrow-right"></i></a>
+                        <a href="" class="btn step_button"  ng-click="previousStep();"><i class="fa fa-arrow-left"></i>&nbsp;&nbsp; Previous</a>
+                        <a href="" class="btn step_button margin-left-20"  ng-click="doValidation();userPlanSubmitted=true;">Next&nbsp;&nbsp;<i class="fa fa-arrow-right"></i></a>
                     </div>
                 </form>
 
                 </div>
             <div class="container" style="width:75% !important; box-shadow: 0 0 3px rgba(0, 0, 0, .3); padding:20px;"  ng-show="steps==3">
-                <h1 class="h1-label">Let's Us know Your Activity</h1>
+                <h1 class="h1-label">Let  Us know Your Activity</h1>
                 <hr/>
                 <div class="col-lg-12 col-sm-12 col-md-12 no-padding">
                     <div class="col-md-12">
@@ -247,13 +246,13 @@
                     </div>
                 
                 <div class="col-md-12 text-center margin-top-70">
-                    <a href="" class="btn step_button pull-left"  ng-click="previousStep()"><i class="fa fa-arrow-left"></i>&nbsp;&nbsp; Previous</a>
-                    <a href="" class="btn step_button pull-right"  ng-click="nextStep()">Next&nbsp;&nbsp;<i class="fa fa-arrow-right"></i></a>
+                    <a href="" class="btn step_button"  ng-click="previousStep()"><i class="fa fa-arrow-left"></i>&nbsp;&nbsp; Previous</a>
+                    <a href="" class="btn step_button margin-left-20"  ng-click="nextStep()">Next&nbsp;&nbsp;<i class="fa fa-arrow-right"></i></a>
                 </div>
 
             </div>
             <div class="container" style="width:75% !important; box-shadow: 0 0 3px rgba(0, 0, 0, .3); padding:20px;" ng-show="planType==2 && steps==4">
-                <h1 class="h1-label">Let's Us know Your Plan Choice</h1>
+                <h1 class="h1-label">Let Us know Your Plan Choice</h1>
                 <hr/>
                 <form  name="activityForm" ng-submit="activityForm.$valid" ng-model="activityForm" novalidate>
                 <div class="col-lg-12 col-sm-12 col-md-12">
@@ -312,9 +311,9 @@
                         </div>
                     </div>
                     </div>
-                    <div class="col-md-12 margin-top-70">
-                        <a href="" class="btn step_button pull-left" ng-click="previousStep()"><i class="fa fa-arrow-left"></i>&nbsp;&nbsp; Previous</a>
-                        <a href="" class="btn step_button pull-right"  ng-click="doValidation(); userActivitySubmitted=true">Next&nbsp;&nbsp;<i class="fa fa-arrow-right"></i></a>
+                    <div class="col-md-12 text-center margin-top-70">
+                        <a href="" class="btn step_button" ng-click="previousStep()"><i class="fa fa-arrow-left"></i>&nbsp;&nbsp; Previous</a>
+                        <a href="" class="btn step_button margin-left-20"  ng-click="doValidation(); userActivitySubmitted=true">Next&nbsp;&nbsp;<i class="fa fa-arrow-right"></i></a>
                     </div>
                     </div>
                 </form>
@@ -323,73 +322,112 @@
             <div class="container" style="width:75% !important; box-shadow: 0 0 3px rgba(0, 0, 0, .3); padding:20px;" ng-show="steps==5">
                 <h1 class="h1-label">Your Current Plan Preview</h1>
                 <hr/>
-                <div class="col-lg-12 col-sm-12 col-md-12 margin-top-20">
-                    <div class="col-md-12 margin-top-10">
-                        <div class="col-md-6 text-align-right">
-                            <div class="preview-label"> Your Plan Type : </div>
-                        </div>
-                        <div class="col-md-6 text-align-left">
-                            <div ng-show="userPlanDetails.plantype==1"> <i>Maintain Weight</i></div>
-                            <div ng-show="userPlanDetails.plantype==2"> <i>Weight Loss</i></div>
-                            <div ng-show="userPlanDetails.plantype==3"> <i>Weight Gain</i></div>
-                        </div>
-                    </div>
-                    <div class="col-md-12 margin-top-10">
-                        <div class="col-md-6 text-align-right">
-                            <div class="preview-label">  Your Daily Calorie Goal :</div>
-                        </div>
-                        <div class="col-md-6 text-align-left">
-                             <i>{{userPlanDetails.budget}} KCal</i>
-                        </div>
-                    </div>
-                    <div class="col-md-12 margin-top-10" ng-hide="userPlanDetails.plantype==1">
-                        <div class="col-md-6 text-align-right">
-                            <div class="preview-label">You Will Reach Your Goal In :</div>
-                        </div>
-                        <div class="col-md-6 text-align-left">
-                            <i>{{userPlanDetails.duration}}</i>
-                        </div>
-                    </div>
-                    <div class="col-md-12 margin-top-10">
-                        <div class="col-md-6 text-align-right">
-                            <div class="preview-label"> Current Weight :</div>
-                        </div>
-                        <div class="col-md-6 text-align-left">
-                            <i>{{userPlanDetails.currentweight}}</i>
-                        </div>
-                    </div>
-                    <div class="col-md-12 margin-top-10">
-                        <div class="col-md-6 text-align-right">
-                            <div class="preview-label">  Target Weight :</div>
-                        </div>
-                        <div class="col-md-6 text-align-left">
-                            <div ng-if="userPlanDetails.targetweight!=null"><i>{{userPlanDetails.targetweight}}</i></div>
-                            <div ng-if="userPlanDetails.targetweight==null"><span>-</span></div>
-                        </div>
-                    </div>
-                    <div class="col-md-12 margin-top-10">
-                        <div class="col-md-6 text-align-right">
-                            <div class="preview-label">  Start Date :</div>
-                        </div>
-                        <div class="col-md-6 text-align-left">
-                            <i>{{userPlanDetails.startdate}}</i>
-                        </div>
-                    </div>
-                    <div class="col-md-12 margin-top-10">
-                        <div class="col-md-6 text-align-right">
-                            <div class="preview-label">  End Date :</div>
-                        </div>
-                        <div class="col-md-6 text-align-left">
+                <table class="table table-bordered table-striped margin-top-20">
+                    <tr>
+                        <td class="col-md-5"><b>Your Plan Type</b> </td>
+                    <td class="col-md-7">
+                        <div ng-show="userPlanDetails.plantype==1"> <i>Maintain Weight</i></div>
+                        <div ng-show="userPlanDetails.plantype==2"> <i>Weight Loss</i></div>
+                        <div ng-show="userPlanDetails.plantype==3"> <i>Weight Gain</i></div>
+                    </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-5"><b>Your Daily Calorie Goal</b></td>
+                        <td class="col-md-7">{{userPlanDetails.budget}}&nbsp;Kcal</td>
+                    </tr>
+                  <tr ng-hide="planType==1">
+                      <td class="col-md-5"><b>You Will Reach Your Goal In</b></td>
+                      <td class="col-md-7">{{userPlanDetails.duration}}</td>
+                  </tr>
+                 <tr>
+                     <td class="col-md-5"><b>Current Weight</b></td>
+                     <td class="col-md-7">{{userPlanDetails.currentweight}}</td>
+                 </tr>
+                    <tr><td class="col-md-5"><b>Target Weight</b></td>
+                      <td class="col-md-7">
+                          <div ng-if="userPlanDetails.targetweight!=null"><i>{{userPlanDetails.targetweight}}</i></div>
+                          <div ng-if="userPlanDetails.targetweight==null"><span>-</span></div>
+                      </td>
+                  </tr>
+                  <tr>
+                      <td class="col-md-5"><b>Start Date</b></td>
+                      <td class="col-md-7">{{userPlanDetails.startdate}}</td>
+                  </tr>
+                    <tr>
+                        <td class="col-md-5"><b>End Date</b></td>
+                        <td class="col-md-7">
                             <div ng-if="userPlanDetails.enddate!=null"><i>{{userPlanDetails.enddate}}</i></div>
                             <div ng-if="userPlanDetails.enddate==null"><span>-</span></div>
-                        </div>
-                    </div>
-                </div>
+                        </td>
+                    </tr>
+
+
+                    <!--<div class="col-md-12 margin-top-10">-->
+                        <!--<div class="col-md-6 text-align-right">-->
+                            <!--<div class="preview-label"> Your Plan Type : </div>-->
+                        <!--</div>-->
+                        <!--<div class="col-md-6 text-align-left">-->
+                            <!--<div ng-show="userPlanDetails.plantype==1"> <i>Maintain Weight</i></div>-->
+                            <!--<div ng-show="userPlanDetails.plantype==2"> <i>Weight Loss</i></div>-->
+                            <!--<div ng-show="userPlanDetails.plantype==3"> <i>Weight Gain</i></div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+
+                    <!--<div class="col-md-12 margin-top-10">-->
+                        <!--<div class="col-md-6 text-align-right">-->
+                            <!--<div class="preview-label">  Your Daily Calorie Goal :</div>-->
+                        <!--</div>-->
+                        <!--<div class="col-md-6 text-align-left">-->
+                             <!--<i>{{userPlanDetails.budget}} KCal</i>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="col-md-12 margin-top-10" ng-hide="userPlanDetails.plantype==1">-->
+                        <!--<div class="col-md-6 text-align-right">-->
+                            <!--<div class="preview-label">You Will Reach Your Goal In :</div>-->
+                        <!--</div>-->
+                        <!--<div class="col-md-6 text-align-left">-->
+                            <!--<i>{{userPlanDetails.duration}}</i>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="col-md-12 margin-top-10">-->
+                        <!--<div class="col-md-6 text-align-right">-->
+                            <!--<div class="preview-label"> Current Weight :</div>-->
+                        <!--</div>-->
+                        <!--<div class="col-md-6 text-align-left">-->
+                            <!--<i>{{userPlanDetails.currentweight}}</i>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="col-md-12 margin-top-10">-->
+                        <!--<div class="col-md-6 text-align-right">-->
+                            <!--<div class="preview-label">  Target Weight :</div>-->
+                        <!--</div>-->
+                        <!--<div class="col-md-6 text-align-left">-->
+                            <!--<div ng-if="userPlanDetails.targetweight!=null"><i>{{userPlanDetails.targetweight}}</i></div>-->
+                            <!--<div ng-if="userPlanDetails.targetweight==null"><span>-</span></div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="col-md-12 margin-top-10">-->
+                        <!--<div class="col-md-6 text-align-right">-->
+                            <!--<div class="preview-label">  Start Date :</div>-->
+                        <!--</div>-->
+                        <!--<div class="col-md-6 text-align-left">-->
+                            <!--<i>{{userPlanDetails.startdate}}</i>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="col-md-12 margin-top-10">-->
+                        <!--<div class="col-md-6 text-align-right">-->
+                            <!--<div class="preview-label">  End Date :</div>-->
+                        <!--</div>-->
+                        <!--<div class="col-md-6 text-align-left">-->
+                            <!--<div ng-if="userPlanDetails.enddate!=null"><i>{{userPlanDetails.enddate}}</i></div>-->
+                            <!--<div ng-if="userPlanDetails.enddate==null"><span>-</span></div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                </table>
                 <!--Custom plan Alert-->
-                <div id="custom-plan-confirmation" class="popupContainer" style="display:none;left:37%!important;">
+                <div id="custom-plan-confirmation" class="popupContainer" data-backdrop="static" data-keyboard="false"  style="display:none;left:37%!important;">
                     <header class="popupHeader">
                         <span class="header_title">Alert</span>
-                        <span class="modal_close"><i class="fa fa-times"></i></span>
                     </header>
 
                     <section class="popupBody">
@@ -404,7 +442,7 @@
                         </div>
                     </section>
                 </div>
-                <div class="pull-right margin-top-50">
+                <div class="text-center margin-top-25">
                     <a href=""  ng-click="userRegistration()" class="workout-plan-button btn button register-button" >&nbsp; Register</a>
                     <a href="" class="workout-plan-button btn button margin-left-20 change-plan" ng-click="changePlan()">Change Plan</a>
                 </div>
@@ -598,5 +636,8 @@
         }).blur(function () {
             $('#pswd_info').hide();
         });
+
     });
+
+
 </script>

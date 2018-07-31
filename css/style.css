@@ -18380,12 +18380,14 @@ input[type=radio]:checked + .gender-label>img {
     box-shadow: 0 0 3px 3px #f8ba01;
 }
 .male-label{
-    border: solid 1px #ccc;
+    border: solid 1px #eeee;
     border-radius: 10px;
+    background-color:#eeee;
 }
 .female-label{
-    border: solid 1px #ccc;
+    border: solid 1px #eeee;
     border-radius: 10px;
+    background-color:#eeee;
 }
 .radio-label {
     display: inline-block !important;
@@ -18405,12 +18407,12 @@ input[type=radio] + .gender-label>img {
 }
 input[type=radio]:checked + .male-label {
     background-color: deepskyblue;
-    border-radius: solid 1px deepskyblue;
+    border-radius: solid deepskyblue 1px !important;
     color: #fff;
 }
 input[type=radio]:checked + .female-label {
     background-color: pink;
-    border-radius: solid 1px pink;
+    border-radius: solid pink 1px !important;
     color: #fff;
 }
 
@@ -18549,4 +18551,7 @@ a.step_button:visited{
 }
 .text-align-right{
     text-align:right;
+}
+.padding-left-label{
+    padding-left:40%
 }

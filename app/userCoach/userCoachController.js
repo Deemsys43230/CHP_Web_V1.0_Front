@@ -417,6 +417,26 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
             $("#lean_overlay").hide();
         });
     };
+    //User email id verification
+    $scope.userEmailidVerifivationAlert=function(){
+        $(function(){
+            $("#lean_overlay").fadeTo(1000);
+            $("#email-verification").fadeIn(600);
+            $(".common_model").show();
+
+        });
+        $(".modal_close").click(function(){
+            $(".common_model").hide();
+            $("#email-verification").hide();
+            $("#lean_overlay").hide();
+        });
+
+        $("#lean_overlay").click(function(){
+            $(".common_model").hide();
+            $("#email-verification").hide();
+            $("#lean_overlay").hide();
+        });
+    };
 
     $scope.acceptCoachInvitationsByUser=function(coachid){
         requestHandler.postRequest("user/acceptinvitation/",{"coachid":coachid}).then(function(response){
@@ -429,6 +449,10 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
            }
             if(response.data.Response_status==0 && response.data.Error){
                 $scope.countExceedsAlert();
+
+            }
+            if(response.data.Response_status==2){
+                $scope.userEmailidVerifivationAlert();
 
             }
         }, function(){
@@ -444,8 +468,37 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
                 successMessage(Flash,"Interest Sent Successfully");
                 $scope.userCoachInit();
             }
+            else{
+                $scope.userEmailidVerifivationAlert();
+            }
         }, function(){
                 errorMessage(Flash,"Please try again later!");
+        });
+    };
+
+
+    //to get current user email id
+    $scope.doGetProfile=function(){
+        requestHandler.getRequest("getUserId/","").then(function(response) {
+            $scope.userProfile = response.data.Login;
+            $scope.currentUserEmailId= $scope.userProfile.email;
+        });
+    };
+    //to resend verification email link
+    $scope.forgetpasswordRequest=function() {
+        requestHandler.postRequest("verifyEmailId/", {"emailid": $scope.currentUserEmailId}).then(function (response) {
+            if (response.data.Response_status == 2) {
+                $(".common_model").hide();
+                $("#email-verification").hide();
+                $("#lean_overlay").hide();
+                errorMessage(Flash, "Email ID doesn't Exist!");
+            }
+            else if (response.data.Response_status == 1) {
+                $(".common_model").hide();
+                $("#email-verification").hide();
+                $("#lean_overlay").hide();
+                successMessage(Flash, "Please check your Email!");
+            }
         });
     };
 
@@ -1177,6 +1230,7 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
         $scope.disablereview=true;
         $scope.checkReview();
 
+
         $scope.doGetCoachDetailsByUser($routeParams.id);
         $scope.coachView = {
             status: 'coach-reviews'
@@ -1223,6 +1277,7 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
         $scope.coach = {
             status: 'coach-view'
         };
+        $scope.doGetProfile();
 
     };
 }]);

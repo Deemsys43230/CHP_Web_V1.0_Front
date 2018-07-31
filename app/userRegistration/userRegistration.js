@@ -3,6 +3,7 @@ var commonApp = angular.module('commonApp', ['ngRoute','oc.lazyLoad','requestMod
 commonApp.controller('UserRegistrationController',['$scope','requestHandler','Flash','$location',function($scope,requestHandler,Flash,$location) {
    
     // to choose user plan
+    $scope.customAlertChangePlan=false;
     $scope.planChoosen = function (plantype) {
         $scope.planType = plantype;
         if(plantype!=4){
@@ -17,6 +18,8 @@ commonApp.controller('UserRegistrationController',['$scope','requestHandler','Fl
     
     //to change the plan
     $scope.changePlan = function () {
+        $("#lean_overlay").hide();
+        $(".modal-backdrop").hide();
         $scope.changePlanSkipStep=false;
         $scope.steps = 0;
 
@@ -28,9 +31,13 @@ commonApp.controller('UserRegistrationController',['$scope','requestHandler','Fl
 
     };
     $scope.userRegistration = function () {
+        $("#lean_overlay").hide();
+        $(".modal-backdrop").hide();
+        $scope.customAlertChangePlan=true;
         $scope.steps = 6;
 
     };
+  ;
     $scope.customPlanAlert = function () {
         $(function () {
             $("#lean_overlay").fadeTo(1000);
@@ -47,9 +54,9 @@ commonApp.controller('UserRegistrationController',['$scope','requestHandler','Fl
         });
 
         $("#lean_overlay").click(function () {
-            $(".common_model").hide();
-            $("#custom-plan-confirmation").hide();
-            $("#lean_overlay").hide();
+            $(".common_model").show();
+            $("#custom-plan-confirmation").modal({backdrop: 'static', keyboard: false});
+            $("#lean_overlay").show();
             $scope.shouldBeOpen = false;
         });
     };
@@ -59,6 +66,8 @@ commonApp.controller('UserRegistrationController',['$scope','requestHandler','Fl
         $scope.steps=$scope.steps-1;
     };
     $scope.doGetUserPlanOverView= function (possibiledate) {
+        $("#lean_overlay").hide();
+        $(".modal-backdrop").hide();
         $scope.userPlan.plantype=parseInt($scope.planType);
         $scope.userPlan.dob=$scope.defaultRegistrationData.dob;
         $scope.userPlan.activitytype=parseInt($scope.defaultRegistrationData.activitytype);
@@ -111,7 +120,6 @@ commonApp.controller('UserRegistrationController',['$scope','requestHandler','Fl
         if(possibiledate){
             $scope.userPlan.enddate= $scope.possibledate;
         }
-
         requestHandler.postRequest("getplanoverview/",$scope.userPlan).then(function(response) {
 
             if(response.data.Response_status==1){
@@ -120,6 +128,7 @@ commonApp.controller('UserRegistrationController',['$scope','requestHandler','Fl
             }
             else{
                 $scope.customPlanAlert();
+
                 $scope.userPlanDetails=$scope.userPlan;
                 $scope.possibledate=response.data.possibledate;
                 $scope.userPlanDetails.enddate=$scope.possibledate;
@@ -136,10 +145,11 @@ commonApp.controller('UserRegistrationController',['$scope','requestHandler','Fl
         $scope.submitted=true;
         if($scope.registerForm.$valid){
         $scope.registerUser.referralid=$scope.defaultRegistrationData.referralid;
-        if($scope.planType==4){
+        if($scope.planType==4 || $scope.customAlertChangePlan==true){
             $scope.registerUser.role= $scope.defaultRegistrationData.role;
             $scope.registerUser.plantype=  $scope.planType;
-        }else {
+        }
+        else{
             $scope.registerUser.height=$scope.userPlan.height;
             $scope.registerUser.weight=$scope.userPlan.weight;
             $scope.registerUser.plantype=$scope.userPlan.plantype;
