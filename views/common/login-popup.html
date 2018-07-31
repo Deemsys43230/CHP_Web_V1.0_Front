@@ -129,30 +129,30 @@
                     <div class="one_half last"><a  class="btn modal_close">Cancel</a></div>
                 </div>
             </form>
-            <div id="new_pswd_info">
-                <h4>Password must meet the following requirements:</h4>
+            <!--<div id="new_pswd_info">-->
+                <!--<h4>Password must meet the following requirements:</h4>-->
 
-                <ul class="remove-style">
-                    <li id="letter1" class="invalid">At least <strong>one small letter</strong>
+                <!--<ul class="remove-style">-->
+                    <!--<li id="letter1" class="invalid">At least <strong>one small letter</strong>-->
 
-                    </li>
-                    <li id="capital1" class="invalid">At least <strong>one capital letter</strong>
+                    <!--</li>-->
+                    <!--<li id="capital1" class="invalid">At least <strong>one capital letter</strong>-->
 
-                    </li>
-                    <li id="number1" class="invalid">At least <strong>one number</strong>
+                    <!--</li>-->
+                    <!--<li id="number1" class="invalid">At least <strong>one number</strong>-->
 
-                    </li>
-                    <li id="special1" class="invalid">At least <strong>one special character</strong>
+                    <!--</li>-->
+                    <!--<li id="special1" class="invalid">At least <strong>one special character</strong>-->
 
-                    </li>
-                    <li id="length1" class="invalid">Be at least <strong>6 characters</strong>
+                    <!--</li>-->
+                    <!--<li id="length1" class="invalid">Be at least <strong>6 characters</strong>-->
 
-                    </li>
-                    <li id="space1" class="valid">Should not allow space
+                    <!--</li>-->
+                    <!--<li id="space1" class="valid">Should not allow space-->
 
-                    </li>
-                </ul>
-            </div>
+                    <!--</li>-->
+                <!--</ul>-->
+            <!--</div>-->
         </div>
         <!-- Register Form -->
         <div class="user_register">
@@ -191,7 +191,7 @@
                     </span>
                 <span class="error-message" ng-show="registerForm.emailid.$error.emailexists"><span>Email&nbsp;ID&nbsp;Already&nbsp;Exist.</span></span>
                 <p>Password</p>
-                <input type="password"  name="password" id="pswd" ng-model="userForm.password" ng-pattern="/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-])(?!.*\s).{6,}$/"  maxlength="20" required/>
+                <input type="password"  name="password"  ng-model="userForm.password"   maxlength="20" required/>
                     <span ng-show="registerForm.password.$dirty&&registerForm.password.$invalid && !registerForm.password.$pristine">
                         <span class="error-message" ng-show="registerForm.password.$error.required"><span>Required.</span></span>
                           <span class="error-message" ng-show="registerForm.password.$error.pattern"><span>Condition&nbsp;not&nbsp;satisfied</span></span>
@@ -206,30 +206,30 @@
                     <div class="one_half last"><a id="register_form2" ng-disabled="registerForm.$invalid" class="btn btn_red">Proceed <i class="fa fa-angle-double-right"></i></a></div>
                 </div>
             </form>
-            <div id="pswd_info">
-                <h4>Password must meet the following requirements:</h4>
+            <!--<div id="pswd_info">-->
+                <!--<h4>Password must meet the following requirements:</h4>-->
 
-                <ul class="remove-style">
-                    <li id="letter" class="invalid">At least <strong>one small letter</strong>
+                <!--<ul class="remove-style">-->
+                    <!--<li id="letter" class="invalid">At least <strong>one small letter</strong>-->
 
-                    </li>
-                    <li id="capital" class="invalid">At least <strong>one capital letter</strong>
+                    <!--</li>-->
+                    <!--<li id="capital" class="invalid">At least <strong>one capital letter</strong>-->
 
-                    </li>
-                    <li id="number" class="invalid">At least <strong>one number</strong>
+                    <!--</li>-->
+                    <!--<li id="number" class="invalid">At least <strong>one number</strong>-->
 
-                    </li>
-                    <li id="special" class="invalid">At least <strong>one special character</strong>
+                    <!--</li>-->
+                    <!--<li id="special" class="invalid">At least <strong>one special character</strong>-->
 
-                    </li>
-                    <li id="length" class="invalid">Be at least <strong>6 characters</strong>
+                    <!--</li>-->
+                    <!--<li id="length" class="invalid">Be at least <strong>6 characters</strong>-->
 
-                    </li>
-                    <li id="space" class="valid">Should not allow space
+                    <!--</li>-->
+                    <!--<li id="space" class="valid">Should not allow space-->
 
-                    </li>
-                </ul>
-            </div>
+                    <!--</li>-->
+                <!--</ul>-->
+            <!--</div>-->
         </div>
 
         <!-- Register Form Continuation-->
@@ -463,208 +463,5 @@
     });
 
 
-    $(document).ready(function () {
-        $('#pswd').keyup(function () {
-            // set password variable
-            var pswd = $('#pswd').val();
-            if (pswd.length < 6) {
-                $('#length').removeClass('valid').addClass('invalid');
-            } else {
-                $('#length').removeClass('invalid').addClass('valid');
-            }
-//validate letter
-            if (pswd.match(/[a-z]/)) {
-                $('#letter').removeClass('invalid').addClass('valid');
-            } else {
-                $('#letter').removeClass('valid').addClass('invalid');
-            }
-//validate capital letter
-            if (pswd.match(/[A-Z]/)) {
-                $('#capital').removeClass('invalid').addClass('valid');
-            } else {
-                $('#capital').removeClass('valid').addClass('invalid');
-            }
 
-//validate number
-            if (pswd.match(/\d/)) {
-                $('#number').removeClass('invalid').addClass('valid');
-            } else {
-                $('#number').removeClass('valid').addClass('invalid');
-            }
-
-            if (pswd.match(/\s/)) {
-                $('#space').removeClass('valid').addClass('invalid');
-            } else {
-                $('#space').removeClass('invalid').addClass('valid');
-            }
-
-            if (pswd.match(/[#?!@$%^&*-]/)) {
-                $('#special').removeClass('invalid').addClass('valid');
-            } else {
-                $('#special').removeClass('valid').addClass('invalid');
-            }
-
-            if ($('#pswd_info li.invalid').length == 0) {
-                $('#pswd_info').fadeOut();
-            } else {
-                $('#pswd_info').fadeIn();
-            }
-        });
-        $('#pswd').focus(function () {
-            // set password variable
-            var pswd = $('#pswd').val();
-            if (pswd.length < 6) {
-                $('#length').removeClass('valid').addClass('invalid');
-            } else {
-                $('#length').removeClass('invalid').addClass('valid');
-            }
-//validate letter
-            if (pswd.match(/[a-z]/)) {
-                $('#letter').removeClass('invalid').addClass('valid');
-            } else {
-                $('#letter').removeClass('valid').addClass('invalid');
-            }
-//validate capital letter
-            if (pswd.match(/[A-Z]/)) {
-                $('#capital').removeClass('invalid').addClass('valid');
-            } else {
-                $('#capital').removeClass('valid').addClass('invalid');
-            }
-
-//validate number
-            if (pswd.match(/\d/)) {
-                $('#number').removeClass('invalid').addClass('valid');
-            } else {
-                $('#number').removeClass('valid').addClass('invalid');
-            }
-
-            if (pswd.match(/\s/)) {
-                $('#space').removeClass('valid').addClass('invalid');
-            } else {
-                $('#space').removeClass('invalid').addClass('valid');
-            }
-
-            if (pswd.match(/[#?!@$%^&*-]/)) {
-                $('#special').removeClass('invalid').addClass('valid');
-            } else {
-                $('#special').removeClass('valid').addClass('invalid');
-            }
-
-            if ($('#pswd_info li.invalid').length == 0) {
-                $('#pswd_info').fadeOut();
-            } else {
-                $('#pswd_info').fadeIn();
-            }
-        });
-        $('#pswd').keyup(function () {
-        }).focus(function () {
-            $('#pswd_info').show();
-        }).blur(function () {
-            $('#pswd_info').hide();
-        });
-
-
-
-
-        //Password condition for new password
-
-        $('#newpswd').keyup(function () {
-            // set password variable
-            var newpswd = $('#newpswd').val();
-            if (newpswd.length < 6) {
-                $('#length1').removeClass('valid').addClass('invalid');
-            } else {
-                $('#length1').removeClass('invalid').addClass('valid');
-            }
-//validate letter
-            if (newpswd.match(/[a-z]/)) {
-                $('#letter1').removeClass('invalid').addClass('valid');
-            } else {
-                $('#letter1').removeClass('valid').addClass('invalid');
-            }
-//validate capital letter
-            if (newpswd.match(/[A-Z]/)) {
-                $('#capital1').removeClass('invalid').addClass('valid');
-            } else {
-                $('#capital1').removeClass('valid').addClass('invalid');
-            }
-
-//validate number
-            if (newpswd.match(/\d/)) {
-                $('#number1').removeClass('invalid').addClass('valid');
-            } else {
-                $('#number1').removeClass('valid').addClass('invalid');
-            }
-
-            if (newpswd.match(/\s/)) {
-                $('#space1').removeClass('valid').addClass('invalid');
-            } else {
-                $('#space1').removeClass('invalid').addClass('valid');
-            }
-
-            if (newpswd.match(/[#?!@$%^&*-]/)) {
-                $('#special1').removeClass('invalid').addClass('valid');
-            } else {
-                $('#special1').removeClass('valid').addClass('invalid');
-            }
-
-            if ($('#new_pswd_info li.invalid').length == 0) {
-                $('#new_pswd_info').fadeOut();
-            } else {
-                $('#new_pswd_info').fadeIn();
-            }
-        });
-        $('#newpswd').focus(function () {
-            // set password variable
-            var newpswd = $('#newpswd').val();
-            if (newpswd.length < 6) {
-                $('#length1').removeClass('valid').addClass('invalid');
-            } else {
-                $('#length1').removeClass('invalid').addClass('valid');
-            }
-//validate letter
-            if (newpswd.match(/[a-z]/)) {
-                $('#letter1').removeClass('invalid').addClass('valid');
-            } else {
-                $('#letter1').removeClass('valid').addClass('invalid');
-            }
-//validate capital letter
-            if (newpswd.match(/[A-Z]/)) {
-                $('#capital1').removeClass('invalid').addClass('valid');
-            } else {
-                $('#capital1').removeClass('valid').addClass('invalid');
-            }
-
-//validate number
-            if (newpswd.match(/\d/)) {
-                $('#number1').removeClass('invalid').addClass('valid');
-            } else {
-                $('#number1').removeClass('valid').addClass('invalid');
-            }
-
-            if (newpswd.match(/\s/)) {
-                $('#space1').removeClass('valid').addClass('invalid');
-            } else {
-                $('#space1').removeClass('invalid').addClass('valid');
-            }
-
-            if (newpswd.match(/[#?!@$%^&*-]/)) {
-                $('#special1').removeClass('invalid').addClass('valid');
-            } else {
-                $('#special1').removeClass('valid').addClass('invalid');
-            }
-
-            if ($('#new_pswd_info li.invalid').length == 0) {
-                $('#new_pswd_info').fadeOut();
-            } else {
-                $('#new_pswd_info').fadeIn();
-            }
-        });
-        $('#newpswd').keyup(function () {
-        }).focus(function () {
-            $('#new_pswd_info').show();
-        }).blur(function () {
-            $('#new_pswd_info').hide();
-        });
-    });
 </script>
