@@ -18482,7 +18482,7 @@ a.step_button:visited{
     text-transform: none !important;
 }
 .h1-label{
-    font-size:36px !important;
+    font-size:32px !important;
     color:#f94c6a !important;
     text-align: center !important;
 }
@@ -18494,7 +18494,7 @@ a.step_button:visited{
     color: #fff!important;
     outline: 0;
     padding: 15px 30px !important;
-    width: 250px;
+    width: 270px;
     font-size: 18px;
     text-align: center;
 }
@@ -18554,4 +18554,11 @@ a.step_button:visited{
 }
 .padding-left-label{
     padding-left:40%
+}
+.activity-image{
+    height: 100px;
+    width: 100px;
+    margin-top: 10px;
+    background: #fff;
+    border-radius: 10px;
 }

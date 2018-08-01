@@ -88,22 +88,22 @@ commonApp.controller('UserRegistrationController',['$scope','requestHandler','Fl
             $scope.userPlan.height=parseInt($scope.defaultRegistrationData.heightFeet)+'.'+($scope.defaultRegistrationData.heightInches) ;
             $scope.userPlan.weight=parseInt($scope.defaultRegistrationData.weightlbs);
             if($scope.userPlan.plantype==2){
-                $scope.userPlan.targetweight= ((parseInt($scope.defaultRegistrationData.weightlbs))-(parseInt($scope.defaultRegistrationData.targetweight)));
+                $scope.userPlan.targetweight= ((parseInt($scope.defaultRegistrationData.weightlbs))-(parseInt($scope.defaultRegistrationData.targetweightlbs)));
             }
 
             if($scope.userPlan.plantype==3){
-                $scope.userPlan.targetweight= ((parseInt(($scope.defaultRegistrationData.weightlbs))+parseInt($scope.defaultRegistrationData.targetweight)));
+                $scope.userPlan.targetweight= ((parseInt(($scope.defaultRegistrationData.weightlbs))+parseInt($scope.defaultRegistrationData.targetweightlbs)));
             }
         }
         else if($scope.userPlan.unit==1){
             $scope.userPlan.height=parseInt($scope.defaultRegistrationData.height);
             $scope.userPlan.weight=parseInt($scope.defaultRegistrationData.weight);
             if($scope.userPlan.plantype==2){
-                $scope.userPlan.targetweight= ((parseInt($scope.defaultRegistrationData.weight))-(parseInt($scope.defaultRegistrationData.targetweight)));
+                $scope.userPlan.targetweight= ((parseInt($scope.defaultRegistrationData.weight))-(parseInt($scope.defaultRegistrationData.targetweightkgs)));
             }
 
             if($scope.userPlan.plantype==3){
-                $scope.userPlan.targetweight= ((parseInt(($scope.defaultRegistrationData.weight))+parseInt($scope.defaultRegistrationData.targetweight)));         
+                $scope.userPlan.targetweight= ((parseInt(($scope.defaultRegistrationData.weight))+parseInt($scope.defaultRegistrationData.targetweightkgs)));
             }
         }
         if(possibiledate){
@@ -164,15 +164,22 @@ commonApp.controller('UserRegistrationController',['$scope','requestHandler','Fl
     };
     //to calculate target weight is lesser than current weight
     $scope.weightlossError=false;
-    $scope.targetWeightValidation=function(){
-        if($scope.planType==2){
-            if( $scope.defaultRegistrationData.targetweight < $scope.defaultRegistrationData.weight){
-                $scope.weightlossError=false;
+    $scope.targetWeightValidation=function() {
+        $scope.weightlossError = false;
+        if ($scope.planType == 2){
+            if ($scope.units ==2) {
+                if (parseFloat($scope.defaultRegistrationData.targetweightlbs) > parseFloat($scope.defaultRegistrationData.weightlbs)) {
+                    $scope.weightlossError = true;
+                }
             }
-            else{
-                $scope.weightlossError=true;
+            else {
+                if (parseFloat($scope.defaultRegistrationData.targetweightkgs) > parseFloat($scope.defaultRegistrationData.weight)) {
+                    $scope.weightlossError = true;
+                }
+
             }
         }
+
     };
 
 
@@ -265,7 +272,7 @@ commonApp.controller('UserRegistrationController',['$scope','requestHandler','Fl
                 }
             }
           else{
-                if($scope.basicDetailsForm.$valid && $scope.maxweightlbs==false && $scope.maxHeightInches==false && $scope.maxHeightFeet==false){
+                if($scope.basicDetailsForm.$valid && $scope.maxweightlbs==false && $scope.maxHeightInches==false && $scope.maxHeightFeet==false && $scope.weightlossError==false){
                     $scope.nextStep();
                 }
             }
@@ -350,8 +357,8 @@ commonApp.controller('UserRegistrationController',['$scope','requestHandler','Fl
         $scope.defaultRegistrationData.heightInches=inches;
         //convert weight kgs to lbs
         $scope.defaultRegistrationData.weightlbs=  ($scope.defaultRegistrationData.weight*2.2046).toFixed(2);
-        if($scope.defaultRegistrationData.targetweight!=''){
-            $scope.defaultRegistrationData.targetweight=Math.ceil($scope.defaultRegistrationData.targetweight*2.2046).toFixed(2);
+        if($scope.defaultRegistrationData.targetweightkgs!='' && $scope.defaultRegistrationData.targetweightkgs!=undefined ){
+            $scope.defaultRegistrationData.targetweightlbs=Math.ceil($scope.defaultRegistrationData.targetweightkgs*2.2046).toFixed(2);
         }
     };
    //convert weight kg to lbs
@@ -361,9 +368,10 @@ commonApp.controller('UserRegistrationController',['$scope','requestHandler','Fl
             $scope.defaultRegistrationData.height=Math.ceil(($scope.defaultRegistrationData.heightFeet*30.48)+($scope.defaultRegistrationData.heightInches*2.54));
         }
         $scope.defaultRegistrationData.weight=  Math.ceil($scope.defaultRegistrationData.weightlbs/2.2046);
-        if($scope.defaultRegistrationData.targetweight!=''){
-            $scope.defaultRegistrationData.targetweight= ($scope.defaultRegistrationData.targetweight/2.2046).toFixed(2);
+        if($scope.defaultRegistrationData.targetweightlbs!='' && $scope.defaultRegistrationData.targetweightlbs!=undefined ){
+            $scope.defaultRegistrationData.targetweightkgs= ($scope.defaultRegistrationData.targetweightlbs/2.2046).toFixed(2);
         }
+        console.log($scope.defaultRegistrationData.targetweightlbs);
     };
 
 
@@ -384,7 +392,8 @@ commonApp.controller('UserRegistrationController',['$scope','requestHandler','Fl
             'planchoice': '1',
             'role': '3',
             'unit': '',
-            'targetweight': '',
+            'targetweightkgs': '',
+             'targetweightlbs':'',
             'customEndDate': '',
             'referralid':''
         };

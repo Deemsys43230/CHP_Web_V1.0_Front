@@ -485,7 +485,7 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
         });
     };
     //to resend verification email link
-    $scope.forgetpasswordRequest=function() {
+    $scope.emailVerificationRequest=function() {
         requestHandler.postRequest("verifyEmailId/", {"emailid": $scope.currentUserEmailId}).then(function (response) {
             if (response.data.Response_status == 2) {
                 $(".common_model").hide();

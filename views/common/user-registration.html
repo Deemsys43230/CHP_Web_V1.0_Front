@@ -6,14 +6,14 @@
                     <div class="col-md-12">
                         <div class="col-md-4" style="margin-left: 330px">
                             <h1 class="h1-label">Choose Plan</h1>
-                            <div class="margin-top-10"><small><i>How Can I help You?</i></small></div>
+                            <div class="margin-top-10"><small><i>How Can I Help You?</i></small></div>
                         </div>
                         <div flash-message="2000" class="pull-right no-padding col-md-4"></div>
                     </div>
                     <div class="plans margin-top-10" ng-click="planChoosen(2)">
                         <div class="choose-plan  plan">
                             <div class="coach">
-                                <span style="color:#12dc4d">Losing Weight is a mind game</span>
+                                <span style="color:#12dc4d">Losing weight is a mind game</span>
                             </div>
                             <div class="coach">
                                 <img class="plan-image" src="../../images/Reg-Weight-Loss.png">
@@ -24,7 +24,7 @@
                     <div class="plans" ng-click="planChoosen(3)">
                         <div class="choose-plan plan">
                             <div class="coach">
-                                <span style="color:#ff6666">Weight gain dosen't happen overnight</span>
+                                <span style="color:#ff6666">Weight gain doesn't happen overnight</span>
                             </div>
                             <div class="coach">
                                <img class="plan-image" src="../../images/Reg-Weight-Gain.png">
@@ -35,7 +35,7 @@
                     <div class="plans" ng-click="planChoosen(1)">
                         <div class="choose-plan plan">
                             <div class="coach">
-                                <span style="color:#f8ba01">Focus on health not Weight</span>
+                                <span style="color:#f8ba01">Focus on health not weight</span>
                             </div>
                             <div class="coach">
                                 <img class="plan-image" src="../../images/Reg-Maintain-Weight.png">
@@ -171,11 +171,21 @@
                     <div class="col-md-4 col-sm-4 margin-top-10 text-align-right" ng-show="planType==2">How Many&nbsp;<span ng-show="units==1">kgs</span><span ng-show="units==2">lbs</span>&nbsp;You Want to Reduce?:</div>
                     <div class="col-md-4 col-sm-4 margin-top-10 text-align-right" ng-show="planType==3">How Many&nbsp;<span ng-show="units==1">kgs</span><span ng-show="units==2">lbs</span>&nbsp;You Want to Increase?:</div>
                 <div class="col-md-6 col-sm-6">
-                <input class="calculator-input" ng-model="defaultRegistrationData.targetweight" name="targetweight" validate-zero ng-change="targetWeightValidation()" ng-required="planType!=1" onkeypress="return validateFloatKeyPress1(this,event);">
+                    <span ng-show="units==1">
+                        <input class="calculator-input" ng-model="defaultRegistrationData.targetweightkgs" name="targetweightkgs" validate-zero ng-change="targetWeightValidation()" ng-required="planType!=1&&units==1" onkeypress="return validateFloatKeyPress1(this,event);">
                     <span ng-show="userPlanSubmitted">
-                        <span class="error-message" ng-show="!basicDetailsForm.targetweight.$error.required&&weightlossError"><span>Should&nbsp;be&nbsp;less&nbsp;than&nbsp;your&nbsp;weight</span></span>
-                        <span class="error-message" ng-show="basicDetailsForm.targetweight.$error.required"><span>Required.</span></span>
-                         <span class="error-message" ng-show="basicDetailsForm.targetweight.$error.validateZero"><span>Invalid&nbsp;Format.</span></span>
+                         <span class="error-message" ng-show="!basicDetailsForm.targetweightkgs.$error.required&&weightlossError"><span>Should&nbsp;be&nbsp;less&nbsp;than&nbsp;your&nbsp;weight</span></span>
+                         <span class="error-message" ng-show="basicDetailsForm.targetweightkgs.$error.required"><span>Required.</span></span>
+                         <span class="error-message" ng-show="basicDetailsForm.targetweightkgs.$error.validateZero"><span>Invalid&nbsp;Format.</span></span>
+                    </span>
+                    </span>
+                    <span  ng-show="units==2">
+                        <input class="calculator-input" ng-model="defaultRegistrationData.targetweightlbs" name="targetweightlbs" validate-zero ng-change="targetWeightValidation()" ng-required="planType!=1&&units==2" onkeypress="return validateFloatKeyPress1(this,event);">
+                    <span ng-show="userPlanSubmitted">
+                         <span class="error-message" ng-show="!basicDetailsForm.targetweightlbs.$error.required&&weightlossError"><span>Should&nbsp;be&nbsp;less&nbsp;than&nbsp;your&nbsp;weight</span></span>
+                         <span class="error-message" ng-show="basicDetailsForm.targetweightlbs.$error.required"><span>Required.</span></span>
+                         <span class="error-message" ng-show="basicDetailsForm.targetweightlbs.$error.validateZero"><span>Invalid&nbsp;Format.</span></span>
+                    </span>
                     </span>
                 </div>
                 </div>
@@ -208,20 +218,20 @@
                         <div  class="col-md-4 col-sm-4 margin-top-20">
                             <input type="radio" id="noexercise" class="height" name="noexercise" value="1" ng-model="defaultRegistrationData.activitytype"/>
                             <label class="workout-label exercise-type text-center" for="noexercise">Little to No Exercise <br/><small class="small-font-size"> - </small><br/>
-                                <img src="../../images/no-exercise-sleep.png" style="height: 100px;width: 100px; margin-top: 10px">
+                                <img src="../../images/no-exercise-sleep.png" class="activity-image">
                             </label>
 
                         </div>
                         <div  class=" col-md-4 col-sm-4 margin-top-20">
                             <input type="radio" id="littleexercise" class="height" name="littleexercise" value="2" ng-model="defaultRegistrationData.activitytype"/>
                             <label class="workout-label exercise-type text-center"  for="littleexercise">Little Exercise <br/><small class="small-font-size"> 1-3 days per week</small>
-                                <img src="../../images/reg-little.png" style="height: 100px;width: 100px; margin-top: 10px"></label>
+                                <img src="../../images/reg-little.png" class="activity-image"></label>
 
                         </div>
                         <div  class=" col-md-4 col-sm-4 margin-top-20">
                             <input type="radio" id="moderate" class="height" name="moderate" value="3" ng-model="defaultRegistrationData.activitytype"/>
                             <label class="workout-label exercise-type text-center"   for="moderate">Moderate Exercise<br/><small  class="small-font-size"> 3-5 days per week</small>
-                                <img src="../../images/reg-moderate.png" style="height: 100px;width: 100px; margin-top: 10px">
+                                <img src="../../images/reg-moderate.png" class="activity-image">
                             </label>
 
                         </div>
@@ -232,15 +242,15 @@
                     <div  class="col-md-4 margin-top-20">
                 <input type="radio" id="heavy" class="height" name="heavy" value="4" ng-model="defaultRegistrationData.activitytype"/>
                 <label class="workout-label exercise-type text-center"  for="heavy">Heavy Workout<br/><small  class="small-font-size"> 6-7 days per week</small>
-                    <img src="../../images/reg-heavy.png" style="height: 100px;width: 100px; margin-top: 10px">
+                    <img src="../../images/reg-heavy.png" class="activity-image">
                 </label>
 
                 </div>
                 <div  class="col-md-6 col-sm-4 margin-top-20">
                 <input type="radio" id="veryheavy" class="height" name="veryheavy" value="5" ng-model="defaultRegistrationData.activitytype"/>
-                <label class="workout-label exercise-type text-center"  for="veryheavy">Very Heavy Workout<br/><small  class="small-font-size"> Twice Per day ,extra Heavy Workout</small>
+                <label class="workout-label exercise-type text-center"  for="veryheavy">Very Heavy Workout<br/><small  class="small-font-size"> Twice Per day, extra Heavy Workout</small>
 
-                    <img src="../../images/reg-very-heavy.png" style="height: 100px;width: 100px; margin-top: 10px"></label>
+                    <img src="../../images/reg-very-heavy.png" class="activity-image"></label>
 
                 </div>
                     </div>
@@ -298,7 +308,7 @@
                         <input type="radio" id="kg5" class="height" name="planChoice" value="5" ng-model="defaultRegistrationData.planchoice"/>
                         <label class="workout-plan-button workout-label" for="kg5">Custom Exercise</label>
                         </div>
-                        <div class="col-md-4 no-padding" style="margin-top:-15px;" ng-show="defaultRegistrationData.planchoice==5">
+                        <div class="col-md-4 padding-left-5" style="margin-top:-15px;" ng-show="defaultRegistrationData.planchoice==5">
                                 End Date
                             <div class="input-group">
                                 <input type="text" name="customEndDate" id="customEndDate" ng-model="defaultRegistrationData.customEndDate" class="search-input datepicker_cursor" readonly ng-required="defaultRegistrationData.planchoice==5"/>
@@ -431,10 +441,10 @@
                     <section class="popupBody">
                         <!-- Register Form -->
                         <div class="common_model">
-                            Your Weigh Loss Plan Can be achieved Only on {{possibledate}} Would You Like to Continue This Plan?
+                            Your Weigh Loss Plan Can be achieved Only on {{possibledate}}. Would You Like to Continue This Plan?
                             <div class="action_btns margin-top-20">
-                                <div class="one_third modal_close"><a href="" class="btn btn_blue" ng-click="doGetUserPlanOverView(true)">Yes,Use This Date</a></div><br/>
-                                <div class="one_third last modal_close"><a class="btn btn_blue" ng-click="changePlan()">No,ChangePlan</a></div><br/>
+                                <div class="one_third modal_close"><a href="" class="btn btn_blue" ng-click="doGetUserPlanOverView(true)">Yes, Use This Date</a></div><br/>
+                                <div class="one_third last modal_close"><a class="btn btn_blue" ng-click="changePlan()">No, ChangePlan</a></div><br/>
                                 <div class="one_third last modal_close"><a class="btn btn_blue" ng-click="userRegistration()">Skip & Register</a></div>
                             </div>
                         </div>
