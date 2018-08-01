@@ -99,22 +99,11 @@ commonApp.controller('UserRegistrationController',['$scope','requestHandler','Fl
             $scope.userPlan.height=parseInt($scope.defaultRegistrationData.height);
             $scope.userPlan.weight=parseInt($scope.defaultRegistrationData.weight);
             if($scope.userPlan.plantype==2){
-                if($scope.units==1){
-                    $scope.userPlan.targetweight= ((parseInt($scope.defaultRegistrationData.weight))-(parseInt($scope.defaultRegistrationData.targetweight)));
-                }
-                else{
-                    $scope.userPlan.targetweight= ((parseInt($scope.defaultRegistrationData.weightlbs))-(parseInt($scope.defaultRegistrationData.targetweight)));
-                }
-
+                $scope.userPlan.targetweight= ((parseInt($scope.defaultRegistrationData.weight))-(parseInt($scope.defaultRegistrationData.targetweight)));
             }
 
             if($scope.userPlan.plantype==3){
-                if($scope.units==1){
-                    $scope.userPlan.targetweight= ((parseInt(($scope.defaultRegistrationData.weight))+parseInt($scope.defaultRegistrationData.targetweight)));
-                }
-               else{
-                    $scope.userPlan.targetweight= ((parseInt($scope.defaultRegistrationData.weightlbs))+(parseInt($scope.defaultRegistrationData.targetweight)));
-                }
+                $scope.userPlan.targetweight= ((parseInt(($scope.defaultRegistrationData.weight))+parseInt($scope.defaultRegistrationData.targetweight)));         
             }
         }
         if(possibiledate){
