@@ -505,8 +505,8 @@
                         <span ng-show="submitted">
                             <span class="error-message" ng-show="registerForm.email.$error.required"><span>Required.</span></span>
                              <span class="error-message" ng-show="registerForm.email.$error.validateEmail"><span>Invalid&nbsp;Format.</span></span>
+                            <span class="error-message" ng-show="registerForm.email.$error.emailexists"><span>Email&nbsp;ID&nbsp;Already&nbsp;Exist.</span></span>
                         </span>
-                        <span class="error-message" ng-show="registerForm.email.$error.emailexists"><span>Email&nbsp;ID&nbsp;Already&nbsp;Exist.</span></span>
                     </div>
                 </div>
                 <div class="col-md-12">

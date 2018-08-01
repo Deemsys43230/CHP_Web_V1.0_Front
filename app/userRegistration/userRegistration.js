@@ -159,6 +159,7 @@ commonApp.controller('UserRegistrationController',['$scope','requestHandler','Fl
     $scope.doUserRegistration= function () {
 
         $scope.submitted=true;
+        $scope.isEmailExits=false;
         if($scope.registerForm.$valid){
         $scope.registerUser.referralid=$scope.defaultRegistrationData.referralid;
         if($scope.planType==4 || $scope.customAlertChangePlan==true){
@@ -178,8 +179,7 @@ commonApp.controller('UserRegistrationController',['$scope','requestHandler','Fl
             $scope.registerUser.enddate=$scope.userPlan.enddate;
             $scope.registerUser.targetweight=$scope.userPlan.targetweight;
         }
-
-        requestHandler.postRequest("userregistration/",$scope.registerUser).then(function(response) {
+            requestHandler.postRequest("userregistration/",$scope.registerUser).then(function(response) {
             $scope.steps = 0;
             successMessage(Flash,"User Registration Successful");
 

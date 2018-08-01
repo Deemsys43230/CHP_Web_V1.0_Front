@@ -18563,14 +18563,14 @@ a.step_button:visited{
     border-radius: 10px;
 }
 /* registration page responsive */
-@media screen and (min-width: 1024px) and (max-width: 1366px) {
+@media only screen and  (max-width: 1024px) {
     .plan{
         width: 23% !important;
     }
     .coach span {
         min-height: 41px;
     }
-    .exercise-type{
-        height: 230px;
+    .workout-label{
+        font-size: 12px;
     }
 }

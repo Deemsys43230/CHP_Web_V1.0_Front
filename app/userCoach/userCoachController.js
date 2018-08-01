@@ -480,8 +480,8 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
     //to get current user email id
     $scope.doGetProfile=function(){
         requestHandler.getRequest("getUserId/","").then(function(response) {
-            $scope.userProfile = response.data.Login;
-            $scope.currentUserEmailId= $scope.userProfile.email;
+            $scope.userProfile = response.data.User_Profile;
+            $scope.currentUserEmailId= $scope.userProfile.emailid;
         });
     };
     //to resend verification email link
