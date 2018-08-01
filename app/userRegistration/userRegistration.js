@@ -60,6 +60,28 @@ commonApp.controller('UserRegistrationController',['$scope','requestHandler','Fl
             $scope.shouldBeOpen = false;
         });
     };
+    $scope.weightLossAlert = function () {
+        $(function () {
+            $("#lean_overlay").fadeTo(1000);
+            $("#weight-loss-message").fadeIn(600);
+            $(".common_model").show();
+            $scope.shouldBeOpen = true;
+        });
+
+        $(".modal_close").click(function () {
+            $(".common_model").hide();
+            $("#weight-loss-message").hide();
+            $("#lean_overlay").hide();
+            $scope.shouldBeOpen = false;
+        });
+
+        $("#lean_overlay").click(function () {
+            $(".common_model").show();
+            $("#weight-loss-message").modal({backdrop: 'static', keyboard: false});
+            $("#lean_overlay").show();
+            $scope.shouldBeOpen = false;
+        });
+    };
 
     //to calculate previous step
     $scope.previousStep=function(){
@@ -116,11 +138,16 @@ commonApp.controller('UserRegistrationController',['$scope','requestHandler','Fl
                 $scope.userPlanDetails=response.data.plandetails;
             }
             else{
-                $scope.customPlanAlert();
+                if(response.data.possibledate==undefined){
+                    $scope.weightLossAlert();
+                }
+                else{
+                    $scope.customPlanAlert();
+                    $scope.userPlanDetails=$scope.userPlan;
+                    $scope.possibledate=response.data.possibledate;
+                    $scope.userPlanDetails.enddate=$scope.possibledate;
+                }
 
-                $scope.userPlanDetails=$scope.userPlan;
-                $scope.possibledate=response.data.possibledate;
-                $scope.userPlanDetails.enddate=$scope.possibledate;
 
             }
 
@@ -371,7 +398,6 @@ commonApp.controller('UserRegistrationController',['$scope','requestHandler','Fl
         if($scope.defaultRegistrationData.targetweightlbs!='' && $scope.defaultRegistrationData.targetweightlbs!=undefined ){
             $scope.defaultRegistrationData.targetweightkgs= ($scope.defaultRegistrationData.targetweightlbs/2.2046).toFixed(2);
         }
-        console.log($scope.defaultRegistrationData.targetweightlbs);
     };
 
 
