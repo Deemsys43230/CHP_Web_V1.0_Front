@@ -1430,8 +1430,8 @@
     .navbar-default .navbar-nav .dropdown.sm-device{
         display: inline;
     }
+   
 }
-
 
 @media (min-width: 768px) and (max-width: 850px) {
     .xsm-show{
@@ -1467,5 +1467,13 @@
     .divH1{
         font-size: 16px;
         line-height: 24px;
+    }
+}
+@media (min-width: 768px) and (max-width: 1024px) {
+    .medication_scrollbar {
+        height: 400px !important;
+    }
+    .popupContainer-width-big{
+        left:10% !important;
     }
 }

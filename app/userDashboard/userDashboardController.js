@@ -121,7 +121,473 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
             });
         };
 
+        /*Starts For Medications*/
 
+        // medication popup
+        $scope.reset=function(){
+            $scope.medication={};
+            $scope.medication.medicinename="";
+            $scope.medication.dosage="";
+            $scope.medication.notes="";
+            $scope.medication.issharable= 0;
+            $scope.medicationForm.$setPristine();
+            $scope.isNew = true;
+            $scope.title = "Add Medication";
+            $(function(){
+                $("#lean_overlay").fadeTo(1000);
+                $("#medication").fadeIn(600);
+                $(".common_model").show();
+                $scope.shouldBeOpen = true;
+            });
+
+            $(".modal_close").click(function(){
+                $(".common_model").hide();
+                $("#medication").hide();
+                $("#lean_overlay").hide();
+                $scope.shouldBeOpen = false;
+            });
+
+            $("#lean_overlay").click(function(){
+                $(".common_model").hide();
+                $("#medication").hide();
+                $("#lean_overlay").hide();
+                $scope.shouldBeOpen = false;
+            });
+
+        };
+
+        // opload document popup
+        $scope.uploadreset=function(){
+            $scope.title = "Upload Document";
+            $(function(){
+                $("#lean_overlay").fadeTo(1000);
+                $("#uploadDocumentMedication").fadeIn(600);
+                $(".common_model").show();
+                $scope.shouldBeOpen = true;
+            });
+
+            $(".modal_close").click(function(){
+                $(".common_model").hide();
+                $("#uploadDocumentMedication").hide();
+                $("#lean_overlay").hide();
+                $scope.shouldBeOpen = false;
+            });
+
+            $("#lean_overlay").click(function(){
+                $(".common_model").hide();
+                $("#uploadDocumentMedication").hide();
+                $("#lean_overlay").hide();
+                $scope.shouldBeOpen = false;
+            });
+
+        };
+
+
+        // delete medication popup
+        $scope.deletemedication=function(logid){
+            $scope.deleteLogid = logid;
+            $scope.title = "Upload Document";
+            $(function(){
+                $("#lean_overlay").fadeTo(1000);
+                $("#medication-delete-confirmation").fadeIn(600);
+                $(".common_model").show();
+                $scope.shouldBeOpen = true;
+            });
+
+            $(".modal_close").click(function(){
+                $(".common_model").hide();
+                $("#medication-delete-confirmation").hide();
+                $("#lean_overlay").hide();
+                $scope.shouldBeOpen = false;
+            });
+
+            $("#lean_overlay").click(function(){
+                $(".common_model").hide();
+                $("#medication-delete-confirmation").hide();
+                $("#lean_overlay").hide();
+                $scope.shouldBeOpen = false;
+            });
+
+        };
+
+        // delete medication popup
+        $scope.deleteuploaded=function(name){
+            $scope.filename = name;
+            console.log(name);
+            $scope.title = "Upload Document";
+            $(function(){
+                $("#lean_overlay").fadeTo(1000);
+                $("#medication-document-delete-confirmation").fadeIn(600);
+                $(".common_model").show();
+                $scope.shouldBeOpen = true;
+            });
+
+            $(".modal_close").click(function(){
+                $(".common_model").hide();
+                $("#medication-document-delete-confirmation").hide();
+                $("#lean_overlay").hide();
+                $scope.shouldBeOpen = false;
+            });
+
+            $("#lean_overlay").click(function(){
+                $(".common_model").hide();
+                $("#medication-document-delete-confirmation").hide();
+                $("#lean_overlay").hide();
+                $scope.shouldBeOpen = false;
+            });
+
+        };
+
+
+        $scope.sessionid=1;
+        //Do Get User Medication List
+        $scope.doGetMedicationListByUser=function(){
+            $scope.loader=true;
+            var toDate;
+            var fromDate
+            if($('#medications-start').val()==''){
+                fromDate =startDate;
+                toDate = selectedDate;
+            }
+            else{
+                fromDate = $('#medications-start').val();
+                toDate = $('#medications-end').val();
+            }
+            requestHandler.postRequest("user/getmedications/",{"fromdate":fromDate,"todate":toDate}).then(function(response){
+              $scope.userMedicationList= response.data.list;
+              $scope.loadMedicationBySession($scope.sessionid);
+              $scope.loader=false;
+              $scope.paginationLoad=true;
+           }, function(){
+              errorMessage(Flash,"Please try again later!");
+           });
+        };
+
+        $scope.loadMedicationBySession=function(sessionid){
+            $scope.userMedicationData=[];
+            $.each($scope.userMedicationList, function(index,value) {
+                $scope.resultData = value.medications;
+                $.each($scope.resultData, function(index,value){
+                    if(value.session.indexOf(sessionid)!=-1) {
+                        $scope.userMedicationData.push(value);
+                    }
+                 });
+            });
+        }
+
+
+        $scope.getMedicationsSession=function(sessionSet){
+
+            //Set Session
+            var session =[];
+
+            if(sessionSet.morning){
+                session.push("1");
+            }
+            if(sessionSet.anun){
+                session.push("2");
+            }
+            if(sessionSet.evening){
+                session.push("3");
+            }
+            return session.toString();
+        };
+
+
+        // Add Medications
+        $scope.doInsertUserMedication=function(){
+            $scope.medication.session=$scope.getMedicationsSession($scope.medication.session);
+            if($scope.medication.medicinefor=='other'){
+                $scope.medication.medicinefor=$scope.medication.medicinefortext;
+            }
+            requestHandler.postRequest("user/insertorupdatemedication/",$scope.medication).then(function(response){
+                 $scope.doGetMedicationListByUser();
+                 successMessage(Flash,"Successfully Added");
+                 $scope.loaded=false;
+             }, function(){
+                errorMessage(Flash,"Please try again later!");
+             });
+        };
+
+        // Add Medications
+        $scope.doUpdateUserMedication=function(){
+                $scope.medication.fromdate = $scope.medication.date;
+                $scope.medication.todate = "";
+
+            $scope.medication.session=$scope.getMedicationsSession($scope.medication.session);
+            if($scope.medication.medicinefor=='other'){
+                $scope.medication.medicinefor=$scope.medication.medicinefortext;
+            }
+            requestHandler.postRequest("user/insertorupdatemedication/",$scope.medication).then(function(response){
+                 $scope.doGetMedicationListByUser();
+                 successMessage(Flash,"Successfully Added");
+                 $scope.loaded=false;
+             }, function(){
+                errorMessage(Flash,"Please try again later!");
+             });
+        };
+
+        //Delete Mediactions
+        $scope.doDeleteUserMedication=function(){
+            requestHandler.postRequest("user/deletemedication/",{'logid':$scope.deleteLogid}).then(function(response){
+                successMessage(Flash,"Successfully Removed");
+                $scope.doGetMedicationListByUser();
+            }, function(){
+                errorMessage(Flash,"Please try again later!");
+            }); 
+        };
+
+        // view User Medictaions
+        $scope.viewUserMedication=function(id){
+            //scrolling to top of the page
+            $('html, body').animate({scrollTop :0},"slow");
+            $(function(){
+                $("#lean_overlay").fadeTo(1000);
+                $("#viewMedication").fadeIn(600);
+                $(".common_model").show();
+                $scope.shouldBeOpen = true;
+            });
+
+            requestHandler.postRequest("medicationdetail/",{'logid':id}).then(function(response){
+                $scope.userMedicationDetails=response.data.medication;
+                $scope.userMedicationDetails.sessionSet=$scope.getMedicationsSession($scope.userMedicationDetails.session);
+            }, function(){
+                errorMessage(Flash,"Please try again later!");
+            });
+
+            $(".modal_close").click(function(){
+                $(".common_model").hide();
+                $("#viewMedication").hide();
+                $("#lean_overlay").hide();
+                $scope.shouldBeOpen = false;
+            });
+
+            $("#lean_overlay").click(function(){
+                $(".common_model").hide();
+                $("#viewMedication").hide();
+                $("#lean_overlay").hide();
+                $scope.shouldBeOpen = false;
+            });
+        };
+
+        $scope.medicationOtherText;
+        // Edit User Medications
+        $scope.doEditUserMedication=function(id){
+            //scrolling to top of the page
+            $('html, body').animate({scrollTop :0},"slow");
+            $scope.isNew = false;
+            $scope.title = "Edit Medication";
+
+            $(function(){
+                $("#lean_overlay").fadeTo(1000);
+                $("#medication").fadeIn(600);
+                $(".common_model").show();
+                $scope.shouldBeOpen = true;
+            });
+
+            $scope.loaded=true;
+            requestHandler.postRequest("medicationdetail/",{'logid':id}).then(function(response){
+                $scope.medication= response.data.medication;
+
+                var d =new Date($scope.medication.date);
+                var datestring = ("0" + d.getDate()).slice(-2) + "/" + ("0"+(d.getMonth()+1)).slice(-2) +"/" +  + d.getFullYear();
+                   $scope.startdate = datestring;
+
+                   $scope.medication.date = $scope.startdate;
+
+                 if($scope.medication.medicinefor== 'other'){
+                    $scope.medication.medicinefortext = $scope.medication.medicinefor;
+                }
+
+                var sessionString = $scope.medication.session;
+                var sessionArr = sessionString.split(',');
+                var session=[];
+                for(i=0; i < sessionArr.length; i++)
+                session.push(parseInt(sessionArr[i]));
+
+                $.each(session, function(index,value) {
+                    switch(value) {
+                        case 1:
+                            session.morning=true;
+                            break;
+                        case 2:
+                            session.anun=true;
+                            break;
+                        case 3:
+                            session.evening=true;
+                            break;
+                        default:
+                            break;
+                    }
+                });
+
+                return $scope.medication.session = session;
+                
+            });
+            $scope.loaded=false;
+            $(".modal_close").click(function(){
+                $(".common_model").hide();
+                $("#medication").hide();
+                $("#lean_overlay").hide();
+                $scope.shouldBeOpen = false;
+            });
+
+            $("#lean_overlay").click(function(){
+                $(".common_model").hide();
+                $("#medication").hide();
+                $("#lean_overlay").hide();
+                $scope.shouldBeOpen = false;
+            });
+        };
+        /*End medications*/
+
+        /*For Medications Document Upload*/
+
+        $scope.uploadBtnTxt="Upload File";
+        $scope.fileUpload=false;
+        $scope.paginationLoad=false;
+        $scope.usedSpace=0;
+        $scope.fileTypeError=false;
+
+
+
+        // Search  Medication
+        $('.show-list-search').click(function() {
+            $('.search-list-form').toggle(300);
+            $('.search-list-form input').focus();
+        });
+
+      //to get user id
+            $scope.doGetUserDetails=function(){
+                $scope.loader=true;
+                requestHandler.getRequest("getUserId/").then(function(response){
+                    $scope.userDetails=response.data.User_Profile;
+                    $scope.loader=false;
+                    $scope.doGetUserUploadedDocument($scope.userDetails.userid);
+                });
+
+            };
+
+
+        //To get user uploaded file list
+        $scope.doGetUserUploadedDocument=function(userid){
+        $scope.loader=true;
+            $scope.totalAvailableSpace=20;
+            requestHandler.getRequest("readfiles/"+ userid+"/","").then(function(response){
+                $scope.userUploadedDocumentList=response.data.files;
+                $scope.usedSpace=response.data.usedspace;
+                $scope.availableSpace=response.data.availablespace;
+                $scope.availableSpaceColor="red";
+                $scope.usedSpaceColor="limegreen";
+                $scope.loader=false;
+                $scope.paginationLoad=true;
+            }, function(){
+                errorMessage(Flash,"Please try again later!");
+            });
+        };
+
+    //to check user is having coach or not
+        $scope.doCheckUserMedicationDocument=function(){
+            $scope.showDocumentList=false;
+            $scope.loader=true;
+            requestHandler.getRequest("user/checkfolderexist/","").then(function(response){
+              $scope.userUploadedDocumentIsExists=response.data.isexist;
+                $scope.showDocumentList=true;
+              $scope.loader=false;
+            }, function(){
+                errorMessage(Flash,"Please try again later!");
+            });
+        };
+
+
+
+    //to delete user uploaded document
+        $scope.deleteUserUploadedDocument=function(){
+                requestHandler.postRequest("user/deletefile/",{'filename':$scope.filename}).then(function(response){
+                    successMessage(Flash,"Successfully Removed");
+                    $scope.doGetUserUploadedDocument($scope.userDetails.userid);
+                }, function(){
+                    errorMessage(Flash,"Please try again later!");
+                });
+        };
+
+        $scope.doUploadFile = function(){
+            $scope.fileUpload=true;
+            $scope.uploadBtnTxt="Uploading...";
+
+
+            requestHandler.directFileUpload("user/uploadfile/",$scope.uploadFile,"document").then(function(response){
+
+
+           if(response.data.Response_status==0 ){
+                $(".common_model").hide();
+                $("#uploadDocumentMedication").hide();
+                $("#lean_overlay").hide();
+                errorMessage(Flash,response.data.Error);
+            }
+            else if(response.data.Response_status==1){
+                $(".common_model").hide();
+                $("#uploadDocumentMedication").hide();
+                $("#lean_overlay").hide();
+                successMessage(Flash,"Successfully Uploaded");
+            }
+               $scope.uploadBtnTxt="Upload File";
+               $scope.fileUpload=false;
+               $scope.doGetUserUploadedDocument($scope.userDetails.userid);
+               $scope.resetDocument();
+           });
+
+        };
+
+        //To clear uploaded file
+        $scope.resetDocument = function () {
+            $scope.uploadFile="";
+            angular.element("input[type='file']").val(null);
+            $scope.documentUploadForm.$setPristine();
+        };
+
+        //init()
+        $scope.doGetUserDetails();
+       $scope.doCheckUserMedicationDocument();
+
+
+        //circle round
+        $scope.offset =         0;
+        $scope.timerCurrent =   0;
+        $scope.uploadCurrent =  0;
+        $scope.stroke =         12;
+        $scope.radius =         70;
+        $scope.isSemi =         false;
+        $scope.rounded =        false;
+        $scope.responsive =     false;
+        $scope.clockwise =      true;
+        $scope.bgColor =        '#ddd';
+        $scope.duration =       1000;
+        $scope.currentAnimation = 'easeOutCubic';
+
+        $scope.animations = [];
+
+        angular.forEach(roundProgressService.animations, function(value, key){
+            $scope.animations.push(key);
+        });
+
+        $scope.getStyle = function(){
+            var transform = ($scope.isSemi ? '' : 'translateY(-50%) ') + 'translateX(-50%)';
+
+            return {
+                'top': $scope.isSemi ? 'auto' : '52%',
+                'bottom': $scope.isSemi ? '5%' : 'auto',
+                'left': '50%',
+                'transform': transform,
+                '-moz-transform': transform,
+                '-webkit-transform': transform
+            };
+        };
+
+        var getPadded = function(val){
+            return val < 10 ? ('0' + val) : val;
+        };
+    /*End Medications Documents Upload*/
 
         $scope.doSyncDevices=function(id){
             $scope.connectDevice=true;
@@ -1214,7 +1680,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
         $scope.setGoal=function(){
             $scope.setGoalDetails={};
             if($scope.setGoalDetails.goalchoice==5){
-                if($scope.setGoalDetails.enddate==''){
+                if($scopeuploadDocumentMedication.setGoalDetails.enddate==''){
                     $scope.setGoalDetails.enddate = selectedDate;
                 }
                 else{
@@ -4107,7 +4573,6 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
         var lastWeekDisplay = lastWeekMonth + "/" + lastWeekDay + "/" + lastWeekYear;
         var lastWeekDisplayPadded = ("00" + lastWeekDay.toString()).slice(-2)+ "/" + ("00" + lastWeekMonth .toString()).slice(-2)+ "/" + ("0000" + lastWeekYear .toString()).slice(-4);
         var startDate=lastWeekDisplayPadded;
-
         $scope.weightLogDate = selectedDate;
         $scope.todayDate = selectedDate;
         $scope.selectedDate = selectedDate;
@@ -4128,6 +4593,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
             $scope.graphTwo();
             $scope.checkGoalOnLoad(date);
             $scope.doGetWearableDateByDate(date);
+            $scope.doGetMedicationListByUser();
            // $scope.doSyncDevices(date);
         };
 
@@ -4536,6 +5002,61 @@ userApp.directive('shouldFocus', function(){
             });
         }
     };
+});
+
+userApp.directive('fileModel', ['$parse', function ($parse) {
+    return {
+        restrict: 'A',
+        link: function(scope, element, attrs) {
+            var model = $parse(attrs.fileModel);
+            var modelSetter = model.assign;
+
+            element.bind('change', function(){
+                scope.$apply(function(){
+                    modelSetter(scope, element[0].files[0]);
+                });
+            });
+        }
+    };
+}]);
+
+
+//File Type Validation Directive
+userApp.directive('validateFileType',function(){
+    var validFormats=['pdf','jpg','png','png'];
+    return {
+        require:'ngModel',
+        link:function(scope,el,attrs,ngModel){
+            el.bind('change',function(){
+                var fileSize=el[0].files[0].size;
+                var value = el.val(),
+                    ext = value.substring(value.lastIndexOf('.') + 1).toLowerCase();
+                ngModel.$validators.validateFileType = function() {
+                    return validFormats.indexOf(ext) !== -1;
+                };
+
+                ngModel.$validators.validateFileSize=function(){
+                    return fileSize;
+                };
+            });
+        }
+    };
+});
+
+// Validation for file upload
+userApp.directive('validFile',function(){
+    return {
+        require:'ngModel',
+        link:function(scope,el,attrs,ngModel){
+            //change event is fired when file is selected
+            el.bind('change',function(){
+            scope.$apply(function(){
+                    ngModel.$setViewValue(el.val());
+                    ngModel.$render();
+                })
+            })
+        }
+    }
 });
 
 

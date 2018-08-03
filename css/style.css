@@ -18574,3 +18574,62 @@ a.step_button:visited{
         font-size: 12px;
     }
 }
+
+/* For Medication */
+.margin-10 {
+    margin: 10px;
+}
+.popContainerTop {
+    top: 25px !important;
+}
+.medication_scrollbar
+{
+    position: relative;
+    width: 99%!important;
+    height: 350px;
+    background: none;
+    overflow-y: scroll;
+    overflow-x:hidden;
+    word-wrap: break-word;
+}
+select.medications {
+    display: block;
+    line-height: 16px;
+    -webkit-border-radius: 0;
+    width: 100%;
+    padding: 12px 13px;
+    border: 1px solid #DDD;
+    color: #666;
+}
+a.add-medication{
+    padding: 0px 10px;
+    color: #fff !important;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    background-color: limegreen;
+    margin-bottom: 6px;
+}
+
+a.add-medication:hover{
+    color: #fff !important;
+    background-color: #0db600;
+}
+.border-right {
+    border-right: 1px solid #c6c6c6;
+    margin-right: 5px;
+}
+a.upload-medication{
+    padding: 10px;
+    color: #fff !important;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    background-color: limegreen;
+    margin-bottom: 6px;
+}
+
+a.upload-medication:hover{
+    color: #fff !important;
+    background-color: #0db600;
+}
