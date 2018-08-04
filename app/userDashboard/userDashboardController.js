@@ -239,6 +239,10 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
         };
 
 
+        $scope.medicationforArray = ['Fever','Typhoid','Diabetic','Sugar','Blood Pressure','Hypertension','Heart Disease','Asthma','Obesity','Headache',
+          'Depression','Gastro Intestinal','Alzhema','Other'];
+
+
         $scope.sessionid=1;
         //Do Get User Medication List
         $scope.doGetMedicationListByUser=function(){
@@ -295,27 +299,14 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
 
 
         // Add Medications
-        $scope.doInsertUserMedication=function(){
+        $scope.doInsertOrUpdateUserMedication=function(){
             $scope.medication.session=$scope.getMedicationsSession($scope.medication.session);
-            if($scope.medication.medicinefor=='other'){
-                $scope.medication.medicinefor=$scope.medication.medicinefortext;
-            }
-            requestHandler.postRequest("user/insertorupdatemedication/",$scope.medication).then(function(response){
-                 $scope.doGetMedicationListByUser();
-                 successMessage(Flash,"Successfully Added");
-                 $scope.loaded=false;
-             }, function(){
-                errorMessage(Flash,"Please try again later!");
-             });
-        };
-
-        // Add Medications
-        $scope.doUpdateUserMedication=function(){
+            console.log($scope.isNew);
+            if($scope.isNew == false) {
                 $scope.medication.fromdate = $scope.medication.date;
                 $scope.medication.todate = "";
-
-            $scope.medication.session=$scope.getMedicationsSession($scope.medication.session);
-            if($scope.medication.medicinefor=='other'){
+            }
+            if($scope.medication.medicinefor=='Other'){
                 $scope.medication.medicinefor=$scope.medication.medicinefortext;
             }
             requestHandler.postRequest("user/insertorupdatemedication/",$scope.medication).then(function(response){
@@ -395,10 +386,11 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
 
                    $scope.medication.date = $scope.startdate;
 
-                 if($scope.medication.medicinefor== 'other'){
-                    $scope.medication.medicinefortext = $scope.medication.medicinefor;
+                if($scope.medicationforArray.indexOf($scope.medication.medicinefor)==-1){
+                    $scope.medication.medicinefortext = angular.copy($scope.medication.medicinefor);
+                    $scope.medication.medicinefor ="Other";
                 }
-
+                    
                 var sessionString = $scope.medication.session;
                 var sessionArr = sessionString.split(',');
                 var session=[];

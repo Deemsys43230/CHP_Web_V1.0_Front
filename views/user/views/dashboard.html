@@ -830,7 +830,7 @@
                                     <div class="">
                                     <a id="modal_medication" href="#medication" class="add-medication pull-right margin-10" ng-click="reset()"><i class="fa fa-plus-circle"></i> Add</a>
                                     </div>
-                                    <div flash-message="2000" class="col-lg-4 col-md-4 col-sm-4 no-padding pull-right"></div>
+                                    <div flash-message="2000" class="col-lg-4 col-md-4 col-sm-4 no-padding pull-right margin-top-10"></div>
                                 </div>
                                 
                                 <div class="medication_scrollbar" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',horizrailenabled: false,background:'#eee'}" >
@@ -874,8 +874,8 @@
                                 </div>
                             </div><!-- #tab1 -->
                             <!-- Tab Content 2 -->
-                            <div class="tab-pane padding-top-5" id="medications-upload">
-                                <div class="col-lg-12 col-md-12 col-sm-12">
+                            <div class="tab-pane" id="medications-upload">
+                                <div class="col-lg-12 col-md-12 col-sm-12 margin-tb-10">
                                     
                                     <!-- Start Search -->
                                     <div ng-show="userUploadedDocumentList.length!=0">
@@ -891,7 +891,7 @@
                                     <!-- End Search -->
 
                                     <div flash-message="2000" class="col-lg-5 col-md-5 col-sm-5 no-padding pull-right"></div>
-                                    <div class="margin-10">
+                                    <div class="">
                                         <a href=""  ng-click="uploadreset()" class="upload-medication" ><i class="fa fa-upload"></i> Upload Document</a>
                                     </div>
                                 </div>
@@ -905,9 +905,9 @@
                                         <table class="table table-striped table-bordered">
                                             <thead>
                                             <tr class="warning">
-                                                <th class="col-lg-4 col-md-4 col-sm-4">File Name</th>
-                                                <th class="col-lg-4 col-md-4 col-sm-4">Date & Time</th>
-                                                <th class="col-lg-4 col-md-4 col-sm-4">Options</th>
+                                                <th class="col-lg-7 col-md-7 col-sm-7">File Name</th>
+                                                <th class="col-lg-3 col-md-3 col-sm-3">Date & Time</th>
+                                                <th class="col-lg-2 col-md-2 col-sm-2">Options</th>
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -2149,24 +2149,10 @@
                     </div> 
                     <div class="col-md-12">
                         <p>Medicine For</p>
-                            <select class="col-md-6 medications" name="medicinefor" ng-model="medication.medicinefor">
+                            <select class="col-md-6 medications" name="medicinefor" ng-model="medication.medicinefor" ng-options="medicinefor for medicinefor in medicationforArray">
                                 <option value="">-- Select Medicine For --</option>
-                               <option value="Fever">Fever</option>
-                                <option value="typhoid">Typhoid</option>
-                                <option value="diabetic">Diabetic</option>
-                                <option value="sugar">Sugar</option>
-                                <option value="blood pressure">Blood Pressure</option>
-                                <option value="hypertension">Hypertension</option>
-                                <option value="heart disease">Heart Disease</option>
-                                <option value="asthma">Asthma</option>
-                                <option value="obesity">Obesity</option>
-                                <option value="headache">Headache</option>
-                                <option value="depression">Depression</option>
-                                <option value="gastro intestinal">Gastro Intestinal</option>
-                                <option value="alzhema">Alzhema</option>
-                                <option value="other">Other</option>
                             </select>
-                        <input type="text" name="medicinefortext" ng-show="medication.medicinefor=='other'" ng-model="medication.medicinefortext" max-length="200" ng-required="medication.medicinefor=='other'" >
+                        <input type="text" class="margin-top-5" name="medicinefortext" ng-show="medication.medicinefor=='Other'" ng-model="medication.medicinefortext" max-length="200" ng-required="medication.medicinefor=='Other'" >
                             <span ng-show="medicationForm.medicinefor.$dirty&&medicationForm.medicinefor.$invalid">
                                  <span class="error-message" ng-show="medicationForm.medicinefor.$error.required"><span>Required.</span></span>
                             </span>
@@ -2240,8 +2226,8 @@
 
                </div> 
                  <div class="action_btns margin-top-20">
-                    <div class="one_half" ng-show="isNew"><a ng-class="{modal_close:medicationForm.$invalid}" class="btn btn_red" ng-disabled="medicationForm.$invalid" ng-click="doInsertUserMedication()">Add Medication</a></div>
-                    <div class="one_half" ng-hide="isNew"><a ng-class="{modal_close:medicationForm.$invalid}" class="btn btn_red" ng-disabled="medicationForm.$invalid || isClean()" ng-click="doUpdateUserMedication()">Save Changes </a></div>
+                    <div class="one_half" ng-show="isNew"><a ng-class="{modal_close:medicationForm.$invalid}" class="btn btn_red" ng-disabled="medicationForm.$invalid" ng-click="doInsertOrUpdateUserMedication()">Add Medication</a></div>
+                    <div class="one_half" ng-hide="isNew"><a ng-class="{modal_close:medicationForm.$invalid}" class="btn btn_red" ng-disabled="medicationForm.$invalid || isClean()" ng-click="doInsertOrUpdateUserMedication()">Save Changes </a></div>
                     <div class="one_half last modal_close"><a onclick="return false;" class="btn back_btn">Cancel</a></div>
                 </div>
 
