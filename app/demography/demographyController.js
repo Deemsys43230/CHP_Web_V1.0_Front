@@ -10,10 +10,11 @@ userApp.controller('DemographyController',['$rootScope','$scope','requestHandler
 
             //Copy Original
           // $scope.demography.height=$scope.demography.height.toString();
-            $scope.demography.weight=$scope.demography.weight.toString();
+            $scope.demography.weight=$scope.demography.weight;
             $scope.demography.hip=$scope.demography.hip.toString();
             $scope.demography.waist=$scope.demography.waist.toString();
             $scope.demography.userPlanType = $scope.demography.userPlanType.toString();
+            $scope.userPlanTypeOld=$scope.demography.userPlanType;
             $scope.demography.userActivityType = $scope.demography.userActivityType.toString();
 
 
@@ -165,9 +166,44 @@ userApp.controller('DemographyController',['$rootScope','$scope','requestHandler
         });
     };
 
+    //user plan changes alert
+    $scope.userPlanChanged=function(){
+        $(function(){
+            $("#lean_overlay").fadeTo(1000);
+            $("#plan-change").fadeIn(600);
+            $(".common_model").show();
+            $scope.shouldBeOpen = true;
+        });
+
+        $(".modal_close").click(function(){
+            $(".common_model").hide();
+            $("#plan-change").hide();
+            $("#lean_overlay").hide();
+            $scope.shouldBeOpen = false;
+        });
+
+        $("#lean_overlay").click(function(){
+            $(".common_model").hide();
+            $("#plan-change").hide();
+            $("#lean_overlay").hide();
+            $scope.shouldBeOpen = false;
+        });
+    };
+
+    $scope.userWeightPlanChanged=function(){
+        if( $scope.userPlanTypeOld!=$scope.demography.userPlanType){
+            $scope.planChanged=true;
+            $scope.userPlanChanged();
+            $scope.demography.dob=$scope.demography.dob;
+            $scope.demography.gender=$scope.demography.gender;
+        }else{
+            $scope.doUpdateDemography();
+        }
+    };
+
+
     $scope.doUpdateDemography= function () {
         $rootScope.planHighlight = false;
-
         if($scope.demography.heightFeet && $scope.demography.heightInches){
             $scope.demography.height =$scope.demography.heightFeet+'.'+$scope.demography.heightInches;
 
@@ -176,6 +212,7 @@ userApp.controller('DemographyController',['$rootScope','$scope','requestHandler
             $scope.demography.weight = parseFloat($scope.demography.weight);
             $scope.demography.hip = parseFloat($scope.demography.hip);
              $scope.demography.targetweight=parseFloat($scope.demography.targetweight);
+
 
 
         delete $scope.demography.obesity;

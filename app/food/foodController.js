@@ -257,17 +257,6 @@ adminApp.controller("FoodDetailsViewController",['$scope','requestHandler','$rou
             $scope.foodDetails=response.data.Food_Data;
             $scope.foodDetails.foodImagePath=$scope.foodDetails.foodImagePath+"200x200.jpg"+"?decache="+Math.random();
 
-            //Set Suitable For
-            if($scope.foodDetails.notobesity==1){
-                $scope.foodDetails.notSuitableFor="Obesity";
-                if($scope.foodDetails.notdiabetes==1){
-                     $scope.foodDetails.notSuitableFor+=", Diabetes";
-                }
-            }else if($scope.foodDetails.notdiabetes==1){
-                $scope.foodDetails.notSuitableFor="Diabetes";
-            }else{
-                $scope.foodDetails.notSuitableFor="-"
-            }
         },function(response){
             console.log("Not able to pull Food Measure List");
         })
@@ -389,6 +378,7 @@ adminApp.controller("FoodDetailsEditController",['$q','$scope','requestHandler',
 
     //Do Update Food
     $scope.doUpdateFoodDetails= function () {
+        alert("update");
         //For disabling the update button after one click
         $scope.doingUpdate=true;
         $scope.spinner=true;
@@ -489,7 +479,7 @@ adminApp.controller("FoodDetailsEditController",['$q','$scope','requestHandler',
         var addMeasureSet=FoodService.getMeasureSet();
         addMeasureSet.measureid=item.measureid;
         addMeasureSet.measurename=item.measurename;
-        addMeasureSet.status=item.status;  
+        addMeasureSet.status=item.status;
         //Remove Existing one
         $scope.foodMeasureListAll.splice($scope.foodMeasureListAll.indexOf(item),1);
         //Add Refreshed One

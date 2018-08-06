@@ -6800,10 +6800,10 @@ h4.count-text{
 }
 
 .padding-left-0{
-    padding-left:0px !important;
+    padding-left:0!important;
 }
 .padding-left-10{
-    padding-left:10px !important;
+    padding-left:10!important;
 }
 .padding-left-15{
     padding-left:15px!important;
@@ -6848,7 +6848,7 @@ h4.count-text{
     margin-left: 20px !important;
 }
 .margin-left-25{
-    margin-left: 25px !important;
+    margin-left: 25px;
 }
 
 .margin-top-50{
@@ -18242,11 +18242,6 @@ select.event:focus {
 .error-bottom-dropdown {
     bottom: 0 !important;
 }
-/*user and coach datepicker design*/
-.ui-datepicker {
-   top:320px !important;
-}
-
 /*select option value with wrapping css*/
 .select2.narrow {
     width: 460px;
@@ -18407,12 +18402,12 @@ input[type=radio] + .gender-label>img {
 }
 input[type=radio]:checked + .male-label {
     background-color: deepskyblue;
-    border-radius: solid deepskyblue 1px !important;
+    border: solid deepskyblue 1px !important;
     color: #fff;
 }
 input[type=radio]:checked + .female-label {
     background-color: pink;
-    border-radius: solid pink 1px !important;
+    border: solid pink 1px !important;
     color: #fff;
 }
 
@@ -18482,7 +18477,7 @@ a.step_button:visited{
     text-transform: none !important;
 }
 .h1-label{
-    font-size:32px !important;
+    font-size:32px;
     color:#f94c6a !important;
     text-align: center !important;
 }
@@ -18498,35 +18493,6 @@ a.step_button:visited{
     font-size: 18px;
     text-align: center;
 }
-.register-button{
-    border-radius: 5px!important;
-    width: 180px !important;
-    padding: 10px 14px !important;
-    background: #ED6347 !important;
-}
-.change-plan{
-    border-radius: 5px!important;
-    width: 180px !important;
-    padding: 10px 14px !important;
-    background: #f8ba01 !important;
-}
-.preview-label{
-    padding-bottom: 10px;
-    font-size: 18px;
-}
-.small-font-size{
-    font-size: 61% !important;
-}
-/* Password Field Eye Icon */
-.field-icon {
-    float: right;
-    margin-left: -25px;
-    margin-top: -25px;
-    margin-right: 10px;
-    position: relative;
-    z-index: 2;
-    cursor:pointer;
-  }
 .padding-bottom-20{
     padding-bottom: 20px;
 }
@@ -18537,7 +18503,6 @@ a.step_button:visited{
     padding-top: 230px;
 }
 .exercise-type {
-    position: relative;
     display: inline-block;
     height: 185px;
     margin: 5px 2px 5px 5px;
@@ -18562,18 +18527,63 @@ a.step_button:visited{
     background: #fff;
     border-radius: 10px;
 }
-/* registration page responsive */
-@media only screen and  (max-width: 1024px) {
-    .plan{
-        width: 23% !important;
-    }
-    .coach span {
-        min-height: 41px;
-    }
-    .workout-label{
-        font-size: 12px;
-    }
+.padding-top-10{
+    padding-top:10px;
 }
+.chooseplan-text{
+    margin-left: 30%;
+}
+.h3-label{
+    font-size: 24px;
+}
+.plan-view-button {
+    position: relative!important;
+    border: none;
+    border-radius: 5px !important;
+    color: #fff!important;
+    outline: 0;
+    font-size: 18px;
+    text-align: center;
+    width: 180px !important;
+    padding: 10px 14px !important;
+}
+.popup-left{
+    left:37%!important;
+}
+.margin-top15{
+    margin-top:-15px;
+}
+.activity-label{
+    color: #fff;
+    background-color: #f8ba01;
+    font-size: 20px;
+    padding:15px 25px !important;
+    width: 260px;
+}
+.form-control[readonly] {
+    cursor: pointer;
+    background-color: #fff;
+    opacity: 1;
+}
+
+.preview-label{
+    padding-bottom: 10px;
+    font-size: 18px;
+}
+.small-font-size{
+    font-size: 61% !important;
+}
+/* Password Field Eye Icon */
+.field-icon {
+    float: right;
+    margin-left: -25px;
+    margin-top: -25px;
+    margin-right: 10px;
+    position: relative;
+    z-index: 2;
+    cursor:pointer;
+  }
+/* user registration in home page end here */
 
 /* For Medication */
 .margin-10 {
@@ -18633,3 +18643,6 @@ a.upload-medication:hover{
     color: #fff !important;
     background-color: #0db600;
 }
+
+
+

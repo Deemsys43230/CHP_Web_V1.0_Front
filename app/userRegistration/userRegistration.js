@@ -336,12 +336,13 @@ commonApp.controller('UserRegistrationController',['$scope','requestHandler','Fl
     function initializeDobCalender() {
         var previousdate = new Date();
         previousdate.setFullYear(new Date().getFullYear()-13);
-        $('#dob').datetimepicker({format: 'DD/MM/YYYY', ignoreReadonly: true, maxDate: previousdate,widgetPositioning: {vertical: 'bottom'}}).on('dp.change', function(selected){
+        $('#dob').datetimepicker({format: 'DD/MM/YYYY', ignoreReadonly: true,maxDate: previousdate,widgetPositioning: {horizontal: 'right',vertical: 'bottom'}}).on('dp.change', function(selected){
             $scope.defaultRegistrationData.dob=$('#dob').val();
         });
 
         $('#dob').click(function(){
             $('#dob').focus();
+
         });
         //while clicking dob icon to set scrollTop for metric calender
         $('#dobIcon').click(function()
@@ -352,7 +353,7 @@ commonApp.controller('UserRegistrationController',['$scope','requestHandler','Fl
     };
 
     function initializeEndDateCalender() {
-        $('#enddate').datetimepicker({format: 'DD/MM/YYYY', ignoreReadonly: true, minDate: new Date(),widgetPositioning: {vertical: 'top'}}).on('dp.change', function(selected){
+        $('#enddate').datetimepicker({format: 'DD/MM/YYYY', ignoreReadonly: true, minDate: new Date(),widgetPositioning: {vertical: 'bottom'}}).on('dp.change', function(selected){
             $scope.enddate=$('#enddate').val();
         });
 
@@ -367,7 +368,7 @@ commonApp.controller('UserRegistrationController',['$scope','requestHandler','Fl
         });
     };
     function customEndDateCalender() {
-        $('#customEndDate').datetimepicker({format: 'DD/MM/YYYY', ignoreReadonly: true, minDate: new Date(),widgetPositioning: {vertical: 'top'}}).on('dp.change', function(selected){
+        $('#customEndDate').datetimepicker({format: 'DD/MM/YYYY', ignoreReadonly: true, minDate: new Date(),widgetPositioning: {vertical: 'top',horizontal:'right'}}).on('dp.change', function(selected){
             $scope.defaultRegistrationData.customEndDate=$('#customEndDate').val();
         });
 

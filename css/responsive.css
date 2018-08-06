@@ -169,18 +169,40 @@
     
 }
 
-@media (max-width: 1024px) {
+@media only screen and (max-width: 1024px) {
 .chat-window {
         bottom: -28px;
         position: absolute;
         margin-bottom: 0px !important;
     }
-    
+    .plan{
+        width: 23%;
+    }
+    .coach span {
+        min-height: 41px;
+    }
+    .workout-label{
+        font-size: 14px;
+    }
+    .activity-label{
+        font-size: 14px;
+        padding: 5px !important;
+        margin-left: 20%;
+    }
+    .exercise-type {
+        height: 170px;
+        min-width: 152px;
+    }
+    .active-class{
+        position: static !important;
+    }
+    .popup-left{
+        left: 30% !important;
+    }
+
+
 }
 @media (max-width: 767px) {
-
-   
-
     .navbar-default{
         padding:7px 10px 7px 10px;
     }
@@ -229,7 +251,6 @@
     .popupContainer.width-28{
         width: 50% !important;
     }
-
     .container{
         width: 95%!important;
     }
@@ -386,6 +407,10 @@
     .plan {
         width: 47%;
     }
+    .container-shadow-box{
+        box-shadow: 0 0 3px rgba(0, 0, 0, .3);
+        padding:20px;
+    }
 
 }
 @media only screen and (max-width: 479px) { 
@@ -539,6 +564,18 @@
     }
     .cal-width{
         width:134% !important;
+    }
+    .chooseplan-text{
+        margin-left: 0%;
+    }
+    .workout-label {
+        margin-left: 22%;
+        padding: 15px !important;
+        font-size: 16px !important;
+    }
+    .plan-view-button{
+        padding: 5px !important;
+        width: auto !important;
     }
 }
 
@@ -731,9 +768,20 @@
     {
         padding:5px 12px
     }
+    .container-shadow-box{
+        width:75% !important;
+        box-shadow: 0 0 3px rgba(0, 0, 0, .3);
+        padding:20px;
+    }
 
     .container{
-        width: 95% !important;
+        width: 95%;
+    }
+    .workout-label {
+        font-size: 14px !important;
+    }
+    .coach{
+        padding: 0 !important;
     }
 
 }
@@ -1405,7 +1453,44 @@
         height:300px !important;
     }*/
     .plan {
-        width: 88%;
+        width: 88% !important;
+    }
+    .h1-label{
+        font-size: 25px;
+    }
+    .chooseplan-text{
+        margin-left:0;
+    }
+    .margin-left-25{
+        margin-left: 0;
+    }
+    .exercise-type{
+        margin-left: -5px;
+        height: auto;
+    }
+    .previous-next-text{
+        display: none;
+    }
+    a.step_button{
+        padding: 5px !important;
+    }
+
+    .text-align-right{
+        text-align: left;
+    }
+    .plan-view-button{
+        font-size: 14px;
+        padding:5px 6px !important;
+        width: auto !important;
+    }
+    .popup-left{
+        left:0% !important;
+    }
+    .margin-top15{
+        margin-top:-3px;
+    }
+    .bootstrap-datetimepicker-widget.dropdown-menu{
+        left:5% !important;
     }
 }
 
@@ -1430,8 +1515,8 @@
     .navbar-default .navbar-nav .dropdown.sm-device{
         display: inline;
     }
-   
 }
+
 
 @media (min-width: 768px) and (max-width: 850px) {
     .xsm-show{
@@ -1469,6 +1554,20 @@
         line-height: 24px;
     }
 }
+@media  only screen and (min-width: 1024px) {
+.plan{
+    width: 23% !important;
+}
+    .bootstrap-datetimepicker-widget.dropdown-menu{
+        left:0 !important;
+    }
+
+}
+@media  only screen and (max-width: 320px) {
+    .bootstrap-datetimepicker-widget.dropdown-menu{
+        left:-15% !important;
+    }
+}
 @media (min-width: 768px) and (max-width: 1024px) {
     .medication_scrollbar {
         height: 400px !important;
@@ -1477,3 +1576,5 @@
         left:10% !important;
     }
 }
+
+
