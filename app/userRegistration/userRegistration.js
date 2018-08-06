@@ -21,6 +21,7 @@ commonApp.controller('UserRegistrationController',['$scope','requestHandler','Fl
         $("#lean_overlay").hide();
         $(".modal-backdrop").hide();
         $scope.changePlanSkipStep=false;
+        $scope.customAlertChangePlan=false;
         $scope.steps = 0;
 
 
@@ -30,10 +31,13 @@ commonApp.controller('UserRegistrationController',['$scope','requestHandler','Fl
         $scope.steps = 5;
 
     };
-    $scope.userRegistration = function () {
+    $scope.userRegistration = function (isAlert) {
         $("#lean_overlay").hide();
         $(".modal-backdrop").hide();
-        $scope.customAlertChangePlan=true;
+        // Checking for alert
+        if(isAlert){
+            $scope.customAlertChangePlan=true;
+        }
         $scope.steps = 6;
 
     };
@@ -88,6 +92,7 @@ commonApp.controller('UserRegistrationController',['$scope','requestHandler','Fl
         $scope.steps=$scope.steps-1;
     };
     $scope.doGetUserPlanOverView= function (possibiledate) {
+        $scope.customAlertChangePlan=false;
         $("#lean_overlay").hide();
         $(".modal-backdrop").hide();
         $scope.userPlan.plantype=parseInt($scope.planType);
@@ -164,7 +169,7 @@ commonApp.controller('UserRegistrationController',['$scope','requestHandler','Fl
         $scope.registerUser.referralid=$scope.defaultRegistrationData.referralid;
         if($scope.planType==4 || $scope.customAlertChangePlan==true){
             $scope.registerUser.role= $scope.defaultRegistrationData.role;
-            $scope.registerUser.plantype=  $scope.planType;
+            $scope.registerUser.plantype= 4;
         }
         else{
             $scope.registerUser.height=$scope.userPlan.height;
