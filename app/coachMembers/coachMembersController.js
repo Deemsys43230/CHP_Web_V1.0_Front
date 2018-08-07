@@ -16,6 +16,7 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
         "current":null
     };
     $scope.planDetails={};
+    // daterangepicker();
 
     /*$scope.datePicker = function(){
         $("#main-date").click();
@@ -1675,13 +1676,63 @@ coachApp.controller('CoachMembersController',['$scope','requestHandler',"$filter
     };
 
 
+    $scope.sessionid=1;
     /*Get Medication List*/
      $scope.doGetMedicationList = function(userid){
-        requestHandler.postRequest("coach/coachgetmedications/",{"userid":userid}).then(function(response){
-            $scope.medicationList = response.data.medications;
+        var selectedDate = new Date();
+        var dd = selectedDate.getDate();
+        var mm = selectedDate.getMonth()+1; //January is 0!
+
+        var yyyy = selectedDate.getFullYear();
+        if(dd<10){
+            dd='0'+dd
+        }
+        if(mm<10){
+            mm='0'+mm
+        }
+        selectedDate = dd+'/'+mm+'/'+yyyy;
+        // To display lastWeek
+        function getLastWeek(){
+            var today = new Date();
+            var lastWeek = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 6);
+            return lastWeek ;
+        }
+
+        var lastWeek = getLastWeek();
+        var lastWeekMonth = lastWeek.getMonth() + 1;
+        var lastWeekDay = lastWeek.getDate();
+        var lastWeekYear = lastWeek.getFullYear();
+        var lastWeekDisplay = lastWeekMonth + "/" + lastWeekDay + "/" + lastWeekYear;
+        var lastWeekDisplayPadded = ("00" + lastWeekDay.toString()).slice(-2)+ "/" + ("00" + lastWeekMonth .toString()).slice(-2)+ "/" + ("0000" + lastWeekYear .toString()).slice(-4);
+        var startDate=lastWeekDisplayPadded;
+
+        var toDate;
+        var fromDate;
+        if($('#medications-start').val()==''){
+            fromDate =startDate;
+            toDate = selectedDate;
+        }
+        else{
+            fromDate = $('#medications-start').val();
+            toDate = $('#medications-end').val();
+        }
+        requestHandler.postRequest("coach/coachgetmedications/",{"userid":userid,"fromdate":fromDate,"todate":toDate}).then(function(response){
+            $scope.medicationList = response.data.list;
+            $scope.loadMedicationBySession($scope.sessionid);
         });
     };
 
+    $scope.loadMedicationBySession=function(sessionid){
+        $scope.userMedicationData=[];
+        $.each($scope.medicationList, function(index,value) {
+            $scope.resultData = value.medications;
+            $.each($scope.resultData, function(index,value){
+                if(value.session.indexOf(sessionid)!=-1) {
+                    $scope.userMedicationData.push(value);
+                }
+             });
+        });
+    }
 
     /*Get UserUploaded Document List*/
     $scope.doGetUserUploadedDocument = function(userid){

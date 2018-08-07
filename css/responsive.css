@@ -1569,11 +1569,21 @@
     }
 }
 @media (min-width: 768px) and (max-width: 1024px) {
-    .medication_scrollbar {
-        height: 400px !important;
-    }
     .popupContainer-width-big{
         left:10% !important;
+    }
+    .nav.navbar-nav.navbar-right {
+        right: 5px !important;
+    }
+    .notify-menu {
+        padding-top: 30px;
+        padding-left: 0px;
+    }
+    .navbar-default .navbar-nav > li > a {
+        padding: 28px 5px 28px 5px!important;
+    }
+    .navbar-default .navbar-nav {
+        margin-right: 0px !important;
     }
 }
 

@@ -794,7 +794,7 @@
                     <!-- Date Picker Medication -->
                     <div class="col-lg-12 col-md-12 col-sm-12 margin-bottom-5 no-padding">
                         <ul class="col-lg-5 col-md-5 col-sm-5 nav nav-tabs pull-left padding-lr-5">
-                            <li class="active" ng-click="showMedication=0"><a href="#medication-1" data-toggle="tab" onclick="return false;">Medicatrions</a></li>
+                            <li class="active" ng-click="showMedication=0"><a href="#medication-1" data-toggle="tab" onclick="return false;">Medications</a></li>
                             <li ng-click="showMedication=1;" ><a href="#medications-upload" data-toggle="tab" onclick="return false;">Document Upload</a></li>
                             <li>
                         </ul>
@@ -916,9 +916,9 @@
                                                 <td class="wrap-all">{{file.filename}}</td>
                                                 <td>{{file.LastModified}}</td>
                                                 <td>
-                                                    <a class="view-text-color" href="{{file.filepath}}" download="{{file.filename}}" target="_blank"><i class="fa fa-download"></i></a>&nbsp;&nbsp;
-                                                    <a class="btn-xs btn-primary" href="{{file.filepath}}" target="_blank"><i class="fa fa-eye"></i></a>&nbsp;&nbsp;
-                                                   <a href="" class="btn-xs btn-danger" ng-click="deleteuploaded(file.filename)"><i class="fa fa-trash"></i></a>
+                                                    <a class="view-text-color" href="{{file.filepath}}" download="{{file.filename}}" title="Download Document" target="_blank"><i class="fa fa-download"></i></a>&nbsp;&nbsp;
+                                                    <a class="btn-xs btn-primary" href="{{file.filepath}}" title="View Document" target="_blank"><i class="fa fa-eye"></i></a>&nbsp;&nbsp;
+                                                   <a href="" class="btn-xs btn-danger" title="Delete Document" ng-click="deleteuploaded(file.filename)"><i class="fa fa-trash"></i></a>
                                                 </td>
                                             </tr>
                                             <tr ng-show="!userUploadedDocumentListFilter.length || userUploadedDocumentList.length==0"><td colspan="3" class="text-center">No Records Found !!!</td></tr>
@@ -2152,7 +2152,9 @@
                             <select class="col-md-6 medications" name="medicinefor" ng-model="medication.medicinefor" ng-options="medicinefor for medicinefor in medicationforArray">
                                 <option value="">-- Select Medicine For --</option>
                             </select>
-                        <input type="text" class="margin-top-5" name="medicinefortext" ng-show="medication.medicinefor=='Other'" ng-model="medication.medicinefortext" max-length="200" ng-required="medication.medicinefor=='Other'" >
+                    </div>
+                    <div class="col-md-12">
+                        <input type="text" class="margin-top-5" name="medicinefortext" ng-show="medication.medicinefor=='Other'" ng-model="medication.medicinefortext" maxlength="200" ng-required="medication.medicinefor=='Other'" >
                             <span ng-show="medicationForm.medicinefor.$dirty&&medicationForm.medicinefor.$invalid">
                                  <span class="error-message" ng-show="medicationForm.medicinefor.$error.required"><span>Required.</span></span>
                             </span>
@@ -2186,10 +2188,10 @@
                 <div class="col-md-6 col-sm-6 no-padding">
                     <div class="col-md-12">
                         <p>Dosage (mg)</p>
-                        <input type="text" name="dosage" ng-model="medication.dosage" maxlength="4" required validate-only-numbers>
+                        <input type="text" name="dosage" ng-model="medication.dosage" maxlength="6" required validate-Float1>
                             <span ng-show="medicationForm.dosage.$dirty&&medicationForm.dosage.$invalid">
                                 <span class="error-message textarea-errormessage40-right60" ng-show="medicationForm.dosage.$error.validateOnlyNumbers">
-                                    <span style="bottom: 70px;">Please&nbsp;Enter&nbsp;Only&nbsp;Numbers.</span>
+                                    <span style="bottom: 70px;">Please&nbsp;Enter&nbsp;Valid&nbsp;Dosage.</span>
                                 </span>
                                  <span class="error-message" ng-show="medicationForm.dosage.$error.required"><span>Required.</span></span>
                             </span>
@@ -2217,10 +2219,10 @@
                     </div>
                     <div class="col-md-12">
                         <p style="margin-bottom: -13px">Notes</p>
-                        <span ng-show="medicationForm.notes.$dirty&&medicationForm.notes.$invalid">
+                        <!-- <span ng-show="medicationForm.notes.$dirty&&medicationForm.notes.$invalid">
                             <span class="error-message textarea-errormessage40" ng-show="medicationForm.notes.$error.required"><span>Required.</span></span>
-                        </span>
-                        <textarea class="forum-textarea" name="notes" ng-model="medication.notes" maxlength="250" required></textarea>
+                        </span> -->
+                        <textarea class="forum-textarea" name="notes" ng-model="medication.notes" maxlength="500"></textarea>
                     </div>  
                 </div>
 
@@ -2249,36 +2251,40 @@
         <div class="common_model">
             <table class="table table-bordered table-striped">
               <tr>
-                  <th>Medicine Name</th>
-                  <td class="wrap-all">{{userMedicationDetails.medicinename}}</td>
+                  <th class="col-sm-3 col-md-3">Medicine Name</th>
+                  <td class="col-sm-9 col-md-9 wrap-all">{{userMedicationDetails.medicinename}}</td>
               </tr>
                 <tr>
-                    <th>Dosage</th>
-                    <td>{{userMedicationDetails.dosage}} (mg)</td>
+                    <th class="col-sm-3 col-md-3">Dosage</th>
+                    <td class="col-sm-9 col-md-9">{{userMedicationDetails.dosage}} (mg)</td>
                 </tr>
                 <tr>
-                    <th>Medicine For</th>
-                    <td>{{userMedicationDetails.medicinefor}}</td>
+                    <th class="col-sm-3 col-md-3">Medicine For</th>
+                    <td class="col-sm-9 col-md-9 wrap-all">{{userMedicationDetails.medicinefor}}</td>
                 </tr>
                 <tr>
-                    <th>Date</th>
-                    <td>{{userMedicationDetails.date}}</td>
+                    <th class="col-sm-3 col-md-3">Date</th>
+                    <td class="col-sm-9 col-md-9">{{userMedicationDetails.date}}</td>
                 </tr>
                 <tr>
-                    <th>Session</th>
-                    <td>
-                        <div ng-if="userMedicationDetails.session==1">Morning</div>
-                        <div ng-if="userMedicationDetails.session==2">After Noon</div>
-                        <div ng-if="userMedicationDetails.session==3">Evening</div>
+                    <th class="col-sm-3 col-md-3">Session</th>
+                    <td class="col-sm-9 col-md-9">
+                        <span ng-if="userMedicationDetails.session==1">Morning</span>
+                        <span ng-if="userMedicationDetails.session==2">After Noon</span>
+                        <span ng-if="userMedicationDetails.session==3">Evening</span>
+                        <span ng-if="userMedicationDetails.session=='1,2'">Morning, After Noon</span>
+                        <span ng-if="userMedicationDetails.session=='2,3'">After Noon, Evening</span>
+                        <span ng-if="userMedicationDetails.session=='1,3'">Morning, Evening</span>
+                        <span ng-if="userMedicationDetails.session=='1,2,3'">Morning, After Noon, Evening</span>
                     </td>
                 </tr>
                 <tr>
-                    <th>Shared&nbsp;with&nbsp;Coach</th>
-                    <td>{{userMedicationDetails.issharable==1?'Yes':'No'}}</td>
+                    <th class="col-sm-3 col-md-3">Shared&nbsp;with&nbsp;Coach</th>
+                    <td class="col-sm-9 col-md-9">{{userMedicationDetails.issharable==1?'Yes':'No'}}</td>
                 </tr>
                 <tr>
-                    <th>Notes</th>
-                    <td class="wrap-all">{{userMedicationDetails.notes}}</td>
+                    <th class="col-sm-3 col-md-3">Notes</th>
+                    <td class="col-sm-9 col-md-9 wrap-all">{{userMedicationDetails.notes}}</td>
                 </tr>
             </table>
         </div>
@@ -2711,6 +2717,7 @@
 
                 // For add mediactions date
                 var selectedMedicationDate;
+                dateChanged();
                 $("#set-from-date").click();
                 var options = {
                     opens:'left',
@@ -2723,8 +2730,9 @@
 
                 function dateChanged() {
                     selectedMedicationDate = $("#set-from-date").val();
+                };
 
-                    $("#set-to-date").click();
+                $("#set-to-date").click();
                     var options = {
                         minDate : selectedMedicationDate,
                         opens:'left',   
@@ -2734,19 +2742,6 @@
                     $('#set-to-date').daterangepicker(options, function(start, end, label) {
                         angular.element(document.getElementById('set-to-date')).value = start.format('DD/MM/YYYY');
                     });
-                };
-
-                // var maxDate =  $("#set-from-date").val();
-                // $("#set-to-date").click();
-                // var options = {
-                //     // maxDate : endDate,
-                //     opens:'left',   
-                //     singleDatePicker: true
-                // };
-
-                // $('#set-to-date').daterangepicker(options, maxDate, function(start, end, label) {
-                //     angular.element(document.getElementById('set-to-date')).value = start.format('DD/MM/YYYY');
-                // });
 
                 $("#weight-log-date1").click();
                 var options = {

@@ -128,6 +128,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
             $scope.medication={};
             $scope.medication.medicinename="";
             $scope.medication.dosage="";
+            $scope.medication.todate="";
             $scope.medication.notes="";
             $scope.medication.issharable= 0;
             $scope.medicationForm.$setPristine();
@@ -300,8 +301,11 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
 
         // Add Medications
         $scope.doInsertOrUpdateUserMedication=function(){
+            console.log($scope.medication);
             $scope.medication.session=$scope.getMedicationsSession($scope.medication.session);
-            console.log($scope.isNew);
+            if($scope.medication.notes==""){
+                $scope.medication.notes=null;
+            }
             if($scope.isNew == false) {
                 $scope.medication.fromdate = $scope.medication.date;
                 $scope.medication.todate = "";
