@@ -189,20 +189,76 @@ userApp.controller('CourseController',['$scope','requestHandler','Flash','$route
         });
     };
 
+    //to get current user email id
+    $scope.doGetProfile=function(){
+        requestHandler.getRequest("getUserId/","").then(function(response) {
+            $scope.userProfile = response.data.User_Profile;
+            $scope.currentUserEmailId= $scope.userProfile.emailid;
+        });
+    };
+
+    //User email id verification
+    $scope.userEmailidVerifivationAlert=function(){
+        $(function(){
+            $("#lean_overlay").fadeTo(1000);
+            $("#email-verification").fadeIn(600);
+            $(".common_model").show();
+
+        });
+        $(".modal_close").click(function(){
+            $(".common_model").hide();
+            $("#email-verification").hide();
+            $("#lean_overlay").hide();
+        });
+
+        $("#lean_overlay").click(function(){
+            $(".common_model").hide();
+            $("#email-verification").hide();
+            $("#lean_overlay").hide();
+        });
+    };
+
     $scope.doEnrollCourse = function(course){
         $scope.entrolling="We are processing your request";
         $scope.enrollButtonStatus=true;
         requestHandler.postRequest("user/enrollCourse/",{"courseid":course,"returnUrl":requestHandler.paymentURL()+"/#/thanksEnrollPage/"+course,"cancelUrl":requestHandler.paymentURL()+"/#/course-detail/"+course}).then(function(response){
-
-            if(response.data.transactionStatus==1){
-              window.location=response.data.approveURL ;
+            if(response.data.Response_status==1){
+                if(response.data.transactionStatus==1){
+                  window.location=response.data.approveURL ;
+                }
+                else if(response.data.transactionStatus==2){
+                  window.location=requestHandler.paymentURL()+"/#/thanksEnrollPage/"+course;
+                }
             }
-            else if(response.data.transactionStatus==2){
-              window.location=requestHandler.paymentURL()+"/#/thanksEnrollPage/"+course;
+            else if(response.data.Response_status==2){
+                $scope.userEmailidVerifivationAlert();
             }
+            
             // successMessage(Flash,"Successfully Enrolled");
         },function(){
             errorMessage(Flash,"Please try again later!")
+        });
+    };
+
+    //to resend verification email link
+    $scope.emailVerificationRequest=function() {
+        requestHandler.postRequest("verifyEmailId/", {"emailid": $scope.currentUserEmailId}).then(function (response) {
+            if (response.data.Response_status == 2) {
+                $(".common_model").hide();
+                $("#email-verification").hide();
+                $("#lean_overlay").hide();
+                errorMessage(Flash, "Email ID doesn't Exist!");
+                $scope.entrolling="Enroll course";
+                $scope.enrollButtonStatus=false;
+            }
+            else if (response.data.Response_status == 1) {
+                $(".common_model").hide();
+                $("#email-verification").hide();
+                $("#lean_overlay").hide();
+                successMessage(Flash, "Please check your Email!");
+                $scope.entrolling="Enroll course";
+                $scope.enrollButtonStatus=false;
+            }
         });
     };
 
@@ -264,6 +320,7 @@ userApp.controller('CourseController',['$scope','requestHandler','Flash','$route
     $scope.viewinit=function(){
         $scope.courseDetails();
         $scope.courseSectionList();
+        $scope.doGetProfile();
     };
 
     // Search Food Type
@@ -351,6 +408,7 @@ adminApp.controller('CourseAdminController',['$scope','requestHandler','Flash','
         };
         requestHandler.postRequest("getCourseRatingsandReviews/"+parseInt($routeParams.id)+"/",$scope.ratingReviewParam).then(function(response) {
             $scope.courseReviews=response.data;
+            console.log($scope.courseReviews);
             $scope.averageRate=$scope.courseReviews.averageratings;
             $scope.totalRatings = response.data.totalrecords;
         },function(){
@@ -803,7 +861,7 @@ coachApp.controller('CourseController',['$scope','requestHandler','Flash','$rout
     $scope.reviewModel=function(){
         requestHandler.getRequest("getUserId/","").then(function(response){
             $scope.response=response.data.Login.status;
-
+            console.log($scope.response);
             $(function(){
                 $("#lean_overlay").fadeTo(1000);
                 $("#review-modal").fadeIn(600);

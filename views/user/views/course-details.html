@@ -223,7 +223,24 @@
     </section>
 </div>
 
-
+<!-- Email Id Verification Alert-->
+<div id="email-verification" class="popupContainer" style="display:none;">
+    <header class="popupHeader">
+        <span class="header_title">Email Verification</span>
+        <span class="modal_close"><i class="fa fa-times"></i></span>
+    </header>
+    <section class="popupBody">
+        <!-- Register Form -->
+        <div class="common_model">
+            <div class="text-center"><img src="../../images/alert-ring.png"/></div><br/>
+            <h5 class="text-center">Your Email ID has not been validated.You should be receiving a validation link in your email.Don't have the link?</h5>
+          <a href="" ng-click="emailVerificationRequest()" class="forgot_password text-center reset_link">Click Here Resend Link</a>
+            <div class="action_btns margin-top-20">
+                <div class="modal_close"><a href="" class="btn btn_red" >OK</a></div>
+            </div>
+        </div>
+    </section>
+</div>
 <!-- End Page Banner -->
 
 <script type="text/javascript" src="../../js/script.js"></script>

@@ -59,9 +59,10 @@ adminApp.factory("UserDashboardService",['requestHandler',function(requestHandle
     userDashboardServiceObj.doGetSelectedFoodDetails= function (foodid) {
         return requestHandler.postRequest("user/getFoodDetailByUser/",{"foodid":foodid}).then(function (response) {
             var userSelectedFoodDetails=response.data.Food_Data;
-            $.each(userSelectedFoodDetails, function(index,value){
-                value.foodImagePath=value.foodImagePath+"50x50.jpg";
-            });
+            console.log(userSelectedFoodDetails.foodImagePath);
+            // $.each(userSelectedFoodDetails, function(index,value){
+            //     value.foodImagePath=value.foodImagePath+"50x50.jpg";
+            // });
             return userSelectedFoodDetails;
         }, function () {
             console.log("Please try again later!")

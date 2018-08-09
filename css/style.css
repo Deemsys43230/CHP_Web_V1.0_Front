@@ -4288,7 +4288,7 @@ ul.icons-list li i {
 h5.classic-title {
     font-size: 16px;
     margin-bottom: 10px;
-    padding-bottom: 10px;
+    padding-bottom: 10px !important;
     border-bottom: 3px solid #eee;
     font-weight: 600;
 }
