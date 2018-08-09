@@ -712,6 +712,65 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'UserMedicationDocumentUploadController'
             }).
+        when('/meal-plans', {
+            templateUrl: 'views/user-meal-plans.html',
+            resolve: {
+                loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name:'userApp',
+                        files:[
+                            '../../app/userDashboard/userDashboardService.js',
+                            '../../app/userMealPlans/userMealPlanController.js',
+                            '../../plugin/popup/style.css',
+                            '../../css/ngPercentageCircle.css',
+                            '../../app/userDashboard/ngPercentageCircle.js',
+                            '../../angular/angular-utils-pagination/dirPagination.js'
+
+                        ]
+                    })
+                }]
+            },
+            controller:'UserMealPlanController'
+        }).
+        when('/meal-plans-view/:id', {
+            templateUrl: 'views/user-meal-plan-view.html',
+            resolve: {
+                loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name:'userApp',
+                        files:[
+                            '../../app/userDashboard/userDashboardService.js',
+                            '../../app/userMealPlans/userMealPlanController.js',
+                            '../../plugin/popup/style.css',
+                            '../../css/ngPercentageCircle.css',
+                            '../../app/userDashboard/ngPercentageCircle.js',
+                            '../../angular/angular-utils-pagination/dirPagination.js'
+
+                        ]
+                    })
+                }]
+            },
+            controller:'ViewUserMealPlanController'
+        }).
+        when('/assigned-plans-view/', {
+            templateUrl: 'views/user-assigned-meal-plan-view.html',
+            resolve: {
+                loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name:'userApp',
+                        files:[
+                            '../../app/userAssignedMealPlans/userAssignedMealPlans.js',
+                            '../../plugin/popup/style.css',
+                            '../../css/ngPercentageCircle.css',
+                            '../../app/userDashboard/ngPercentageCircle.js',
+                            '../../angular/angular-utils-pagination/dirPagination.js'
+
+                        ]
+                    })
+                }]
+            },
+            controller:'UserAssignedMealPlansController'
+        }).
             when('/faq', {
                 templateUrl: '../common/faq.html',
                 resolve: {

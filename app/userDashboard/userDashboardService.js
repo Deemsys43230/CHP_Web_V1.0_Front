@@ -45,6 +45,14 @@ adminApp.factory("UserDashboardService",['requestHandler',function(requestHandle
         });
     }
 
+    userDashboardServiceObj.searchFoodByUser=function(searchStr){
+        return requestHandler.postRequest("user/searchFoodListByUser/",{"foodname":searchStr}).then(function (response) {
+            var searchResponse=response.data.foods;
+            return searchResponse.slice(0,50);
+        }, function () {
+            console.log("Please try again later!")
+        });
+    }
     userDashboardServiceObj.searchFood=function(searchStr,session){
 
         return requestHandler.postRequest("searchFoodListByUser/",{"foodname":searchStr,"foodsession":session}).then(function (response) {
