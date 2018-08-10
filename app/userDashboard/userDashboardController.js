@@ -241,8 +241,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
 
 
         $scope.medicationforArray = ['Fever','Typhoid','Diabetic','Sugar','Blood Pressure','Hypertension','Heart Disease','Asthma','Obesity','Headache',
-          'Depression','Gastro Intestinal','Alzhema','Other'];
-
+          'Depression','Gastro Intestinal','Alzhema','Other'];            
 
         $scope.sessionid=1;
         //Do Get User Medication List

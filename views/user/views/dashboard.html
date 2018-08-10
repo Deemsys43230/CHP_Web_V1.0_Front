@@ -2151,12 +2151,15 @@
                         <p>Medicine For</p>
                             <select class="col-md-6 medications" name="medicinefor" ng-model="medication.medicinefor" ng-options="medicinefor for medicinefor in medicationforArray">
                                 <option value="">-- Select Medicine For --</option>
+                                <span ng-show="medicationForm.medicinefor.$dirty&&medicationForm.medicinefor.$invalid">
+                                     <span class="error-message" ng-show="medicationForm.medicinefor.$error.required"><span>Required.</span></span>
+                                </span>
                             </select>
                     </div>
                     <div class="col-md-12">
                         <input type="text" class="margin-top-5" name="medicinefortext" ng-show="medication.medicinefor=='Other'" ng-model="medication.medicinefortext" maxlength="200" ng-required="medication.medicinefor=='Other'" >
-                            <span ng-show="medicationForm.medicinefor.$dirty&&medicationForm.medicinefor.$invalid">
-                                 <span class="error-message" ng-show="medicationForm.medicinefor.$error.required"><span>Required.</span></span>
+                            <span ng-show="medicationForm.medicinefortext.$dirty&&medicationForm.medicinefortext.$invalid">
+                                 <span class="error-message" ng-show="medicationForm.medicinefortext.$error.required"><span>Required.</span></span>
                             </span>
                     </div>
                     <div class="col-md-12" ng-show="isNew">
@@ -2169,14 +2172,10 @@
                     <div class="col-md-12" ng-show="isNew">
                         <p>To Date</p>
                         <input type="text" name="todate" id="set-to-date" ng-model="medication.todate" maxlength="200" >
-                            <span ng-show="medicationForm.todate.$dirty&&medicationForm.todate.$invalid">
-                            </span>
-                    </div>
+                    </div> 
                     <div class="col-md-12" ng-hide="isNew">
                         <p>Date</p>
                         <input type="text" name="date" id="date" ng-model="medication.date" ng-disabled="true" maxlength="200" ng-required="!isNew" ng-readonly="true">
-                            <span ng-show="medicationForm.date.$dirty&&medicationForm.date.$invalid">
-                            </span>
                     </div>
                     <div class="col-lg-12 col-md-12 col-sm-12  margin-top-15"> 
                         <span class="fh-checkbox" required>
@@ -2198,24 +2197,24 @@
                     </div>  
                     <div class="col-md-12">
                         <p>Session</p>
-                        <div class="col-lg-12 col-md-12 col-sm-12 no-padding">
-                            <span class="fh-checkbox"  style="white-space: nowrap" required>
-                                <input type="checkbox" name="session" value="1" id="morning" ng-model="medication.session.morning">
+                        <div class="col-md-12">
+                            <span class="fh-checkbox"  style="white-space: nowrap">{{medication.session.morning}}
+                                <input type="checkbox" name="session" value="1" id="morning" ng-model="medication.session.morning" ng-required="!(medication.session.anun || medication.session.evening)">
                                 <label for="morning">Morning</label>
                             </span>
                         </div>
-                        <div class="col-lg-12 col-md-12 col-sm-12 no-padding">
-                            <span class="fh-checkbox"  style="white-space: nowrap" required>
-                                <input type="checkbox" name="session" value="2" id="anun" ng-model="medication.session.anun">
+                        <div class="col-md-12">
+                            <span class="fh-checkbox"  style="white-space: nowrap">
+                                <input type="checkbox" name="session" value="2" id="anun" ng-model="medication.session.anun" ng-required="!(medication.session.morning || medication.session.evening)">
                                 <label for="anun">After Noon</label>
                             </span>
                         </div>
-                        <div class="col-lg-12 col-md-12 col-sm-12 no-padding">
-                            <span class="fh-checkbox"  style="white-space: nowrap" required>
-                                <input type="checkbox" name="session" value="3" id="evening" ng-model="medication.session.evening">
+                        <div class="col-md-12">
+                            <span class="fh-checkbox"  style="white-space: nowrap">
+                                <input type="checkbox" name="session" value="3" id="evening" ng-model="medication.session.evening" ng-required="!(medication.session.anun || medication.session.morning)">
                                 <label for="evening">Evening</label>
                             </span>
-                        </div>        
+                        </div> 
                     </div>
                     <div class="col-md-12">
                         <p style="margin-bottom: -13px">Notes</p>
@@ -2284,7 +2283,7 @@
                 </tr>
                 <tr>
                     <th class="col-sm-3 col-md-3">Notes</th>
-                    <td class="col-sm-9 col-md-9 wrap-all">{{userMedicationDetails.notes}}</td>
+                    <td class="col-sm-9 col-md-9 wrap-all">{{userMedicationDetails.notes==null?"-":userMedicationDetails.notes}}</td>
                 </tr>
             </table>
         </div>
@@ -2716,32 +2715,46 @@
                 });
 
                 // For add mediactions date
-                var selectedMedicationDate;
-                dateChanged();
-                $("#set-from-date").click();
-                var options = {
-                    opens:'left',
-                    singleDatePicker: true
-                };
+                // var selectedMedicationDate;
+                // dateChanged();
+                // $("#set-from-date").click();
+                // var options = {
+                //     opens:'left',
+                //     singleDatePicker: true
+                // };
                 
-                $('#set-from-date').daterangepicker(options)
-                .change(dateChanged)
-                .on('changeDate', dateChanged);
+                // $('#set-from-date').daterangepicker(options)
+                // .change(dateChanged)
+                // .on('changeDate', dateChanged);
 
-                function dateChanged() {
-                    selectedMedicationDate = $("#set-from-date").val();
+                // function dateChanged() {
+                //     selectedMedicationDate = $("#set-from-date").val();
+                //     $("#set-to-date").click();
+                //         var options = {
+                //             minDate : selectedMedicationDate,
+                //             opens:'left',   
+                //             singleDatePicker: true,
+                //             forceParse: false
+                //         };
+
+                //         $('#set-to-date').daterangepicker(options, function(start, end, label) {
+                //             angular.element(document.getElementById('set-to-date')).value = start.format('DD/MM/YYYY');
+                //         });
+                // };
+
+                var minDate2 = moment().format('DD/MM/YYYY');
+                var optionMinDate = {
+                    singleDatePicker: true, 
+                    format: 'DD/MM/YYYY',
+                    autoUpdateInput: false
                 };
-
-                $("#set-to-date").click();
-                    var options = {
-                        minDate : selectedMedicationDate,
-                        opens:'left',   
-                        singleDatePicker: true
-                    };
-
-                    $('#set-to-date').daterangepicker(options, function(start, end, label) {
-                        angular.element(document.getElementById('set-to-date')).value = start.format('DD/MM/YYYY');
+              $("#set-from-date").daterangepicker({singleDatePicker: true,}).on('apply.daterangepicker', function(ev, picker) {
+                  optionMinDate.minDate = picker.startDate.format('DD/MM/YYYY');
+                  $('#set-to-date').daterangepicker(optionMinDate, function(start) {
+                      document.getElementById("set-to-date").value = start.format('DD/MM/YYYY');
                     });
+                });
+
 
                 $("#weight-log-date1").click();
                 var options = {
