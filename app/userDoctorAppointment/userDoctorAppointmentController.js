@@ -1,0 +1,214 @@
+var userApp = angular.module('userApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','angular-nicescroll','angularUtils.directives.dirPagination','ui.bootstrap','500tech.simple-calendar']);
+
+userApp.controller('UserDoctorAppointment',['$scope','requestHandler','Flash',function($scope,requestHandler,Flash) {
+
+    $scope.activeClass.doctorAppointment='active';
+    var date = new Date();
+    var dd = date.getDate();
+    var mm = date.getMonth()+1; //January is 0!
+    var yyyy = date.getFullYear();
+    if(dd<10){
+        dd='0'+dd
+    }
+    if(mm<10){
+        mm='0'+mm
+    }
+    date = dd+'/'+mm+'/'+yyyy;
+    var todayDate = date;
+    $scope.calendarOptions = {
+        coachappointments:[],
+        userappointments:[],
+        userbookedappointments:[],
+        notAvailableAppointments:[],
+        userAppointmentCancelableDate:[],
+        dayNamesLength: 3, // How to display weekdays (1 for "M", 2 for "Mo", 3 for "Mon"; 9 will show full day names; default is 1)
+        dateClick: function(date){
+            $scope.userGetDateDetails(date);
+        },
+        nextMonth :function(monthIndex){
+            var todayDate = new Date();
+            $scope.fromDate=moment(new Date(todayDate.getFullYear(), monthIndex+1, 1)).format('DD/MM/YYYY HH:mm:ss');
+            $scope.endDate=moment(new Date(todayDate.getFullYear(), monthIndex+2, 0)).format('DD/MM/YYYY HH:mm:ss');
+            $scope.doGetDoctorAppointmentList($scope.fromDate,$scope.endDate);
+        },
+        prevMonth :function(monthIndex){
+            var todayDate = new Date();
+            $scope.fromDate=moment(new Date(todayDate.getFullYear(), monthIndex-1, 1)).format('DD/MM/YYYY HH:mm:ss');
+            $scope.endDate=moment(new Date(todayDate.getFullYear(), monthIndex, 0)).format('DD/MM/YYYY HH:mm:ss');
+            $scope.doGetDoctorAppointmentList($scope.fromDate,$scope.endDate);
+        }
+
+    };
+    $scope.dateClick=function(date){
+        $scope.calendarOptions.selectedDate=date;
+    };
+
+
+    //Get Single Date Appointment Details
+    $scope.userGetDateDetails=function(date){
+        var userSelectedDate=moment(date).format('DD/MM/YYYY 00:00:00');
+        var userSelectedEndDate=moment(date).format('DD/MM/YYYY 23:59:59');
+        $scope.calendarOptions.selectedDate=date;
+        $scope.selectedDate= moment($scope.calendarOptions.selectedDate).format('DD/MM/YYYY');
+        console.log($scope.selectedDate);
+        $scope.previousDate=0;
+        // date comparision to hide book appointment for previous date
+        var startDateParts=todayDate.split("/");
+        var selectedDateParts=$scope.selectedDate.split("/");
+        var startDate_date=new Date(startDateParts[2],startDateParts[1]-1,startDateParts[0]);
+        var selectedDate_date=new Date(selectedDateParts[2],selectedDateParts[1]-1,selectedDateParts[0]);
+        //Now compare the two converted date formats
+        if(startDate_date>selectedDate_date){
+            $scope.canEnableAppointment=true;
+        }else{
+            $scope.canEnableAppointment=false;
+        }
+
+        $scope.getAppointmentsParam={"fromdate":userSelectedDate,"todate":userSelectedEndDate};
+        //Get Single date
+        requestHandler.postRequest("user/getdoctorappointmentlist/",$scope.getAppointmentsParam).then(function(response){
+            $scope.appointmentList= response.data.list;
+            $scope.selectedDateAppointment= $scope.appointmentList[0].appointments;
+            $scope.loaded=false;
+            $scope.paginationLoad=true;
+        });
+    };
+
+    //to get current time
+    var currentdatetime=new Date();
+    var hours=currentdatetime.getHours();
+    var minutes=currentdatetime.getMinutes();
+    var seconds=currentdatetime.getSeconds();
+    currentdatetime = hours+':'+minutes+':'+seconds;
+    var options = {
+        autoApply: true,
+        minDate : new Date,
+        singleDatePicker:true,
+        autoclose: true,
+        todayHighlight: false,
+        timePicker:true,
+        startDate: moment().startOf('hour'),
+        timePicker24Hour:true,
+        timePickerSeconds:true,
+        locale: {
+            format: 'DD/MM/YYYY HH:mm:ss'
+        }
+
+    };
+
+    //do get doctor Appointment list
+
+    $scope.doGetDoctorAppointmentList=function(){
+        var selectedDate = new Date();
+        $scope.calendarOptions.selectedDate=date;
+        $scope.selectedDate= moment($scope.calendarOptions.selectedDate).format('DD/MM/YYYY');
+        $scope.previousDate=0;
+        $scope.userGetDateDetails(selectedDate);
+    };
+    // book Appointment modal
+    $scope.userBookDoctorAppointment=function(){
+        $scope.userAppointments={};
+        //to set selected date as date in datepicker
+        $scope.userAppointments.datetime=$scope.selectedDate + ' '+ currentdatetime;
+        options.startDate=$scope.userAppointments.datetime;
+        $('#set-appointment-date').daterangepicker(options);
+        $scope.userDoctorAppointmentForm.$setPristine();
+        $scope.isNew = true;
+        $scope.title = "Book Appointment";
+        $(function(){
+            $("#lean_overlay").fadeTo(1000);
+            $("#user-doctor-appointment").fadeIn(600);
+            $(".common_model").show();
+            $scope.shouldBeOpen = true;
+        });
+
+        $(".modal_close").click(function(){
+            $(".common_model").hide();
+            $("#user-doctor-appointment").hide();
+            $("#lean_overlay").hide();
+            $scope.shouldBeOpen = false;
+        });
+
+        $("#lean_overlay").click(function(){
+            $(".common_model").hide();
+            $("#user-doctor-appointment").hide();
+            $("#lean_overlay").hide();
+            $scope.shouldBeOpen = false;
+        });
+
+    };
+    //user book doctor appointment
+    $scope.doBookDoctorAppointment=function(){
+        if($scope.isNew==false){
+            $scope.userAppointments.logid=$scope.userAppointments.logid;
+        }
+        else{
+            $scope.userAppointments.logid="";
+        }
+
+        requestHandler.postRequest("user/insertorupdatedoctorappointment/",$scope.userAppointments).then(function(response){
+            $scope.userBookDoctorAppointment();
+            $(".common_model").hide();
+            $("#user-doctor-appointment").hide();
+            $("#lean_overlay").hide();
+            $scope.doGetDoctorAppointmentList();
+            successMessage(Flash,"Successfully Booked");
+            $scope.loaded=false;
+            $scope.paginationLoad=true;
+        }, function(){
+            errorMessage(Flash,"Please try again later!");
+        });
+
+    };
+    $scope.doEditBookedAppointment=function(id){
+        $scope.userAppointments={};
+        $scope.isNew = false;
+        $scope.title = "Edit Appointment";
+        //to set selected date as date in datepicker
+        $scope.userAppointments.datetime=$scope.selectedDate + ' '+ currentdatetime;
+        options.startDate=$scope.userAppointments.datetime;
+        $('#set-appointment-date').daterangepicker(options);
+        requestHandler.postRequest("user/getdoctorappointmentdetail/",{"logid":id}).then(function(response){
+            $scope.userAppointments=response.data.medication;
+            $(function(){
+            $("#lean_overlay").fadeTo(1000);
+            $("#user-doctor-appointment").fadeIn(600);
+            $(".common_model").show();
+            $scope.shouldBeOpen = true;
+        });
+
+        $(".modal_close").click(function(){
+            $(".common_model").hide();
+            $("#user-doctor-appointment").hide();
+            $("#lean_overlay").hide();
+            $scope.shouldBeOpen = false;
+        });
+
+        $("#lean_overlay").click(function(){
+            $(".common_model").hide();
+            $("#user-doctor-appointment").hide();
+            $("#lean_overlay").hide();
+            $scope.shouldBeOpen = false;
+        });
+        });
+    };
+    $scope.doDeleteDoctorAppointment=function(id){
+        if(confirm("Are you sure you want to delete?")){
+            requestHandler.postRequest("user/deletedoctorappointment/",{"logid":id}).then(function(response){
+                successMessage(Flash,"Successfully Deleted");
+                    $scope.doGetDoctorAppointmentList();
+            }, function(){
+                errorMessage(Flash,"Please try again later!");
+            });
+        }
+    };
+
+    $scope.init=function () {
+        $scope.doGetDoctorAppointmentList();
+
+    };
+
+    $scope.init();
+
+}]);
+

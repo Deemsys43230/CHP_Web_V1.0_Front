@@ -771,6 +771,26 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
             },
             controller:'UserAssignedMealPlansController'
         }).
+        when('/doctor-appointment/', {
+            templateUrl: 'views/user-doctor-appointment.html',
+            resolve: {
+                loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name:'userApp',
+                        files:[
+                            '../../plugin/popup/style.css',
+                            '../../plugin/vertical-carousel/vertical-carousel.js',
+                            '../../app/userDoctorAppointment/userDoctorAppointmentController.js',
+                            '../../angular/angular-utils-pagination/dirPagination.js',
+                            '../../plugin/dateRange/daterangepicker.css',
+                            '../../plugin/dateRange/daterangepicker.js'
+
+                        ]
+                    })
+                }]
+            },
+            controller:'UserDoctorAppointment'
+        }).
             when('/faq', {
                 templateUrl: '../common/faq.html',
                 resolve: {

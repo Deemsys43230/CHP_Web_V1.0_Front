@@ -42,7 +42,12 @@
                         <td>{{plan.plandays>1?plan.plandays+"&nbsp;Days":plan.plandays+"&nbsp;Day"}}</td>
                         <td>{{plan.startdate}}</td>
                         <td>{{plan.enddate}}</td>
-                        <td>{{plan.userplanstatus==1?'Expired':plan.userplanstatus==2?'Discontinued':'Active'}}</td>
+                        <td>
+                            <a class="btn-xs btn-danger" ng-if="plan.userplanstatus==1" >Expired</a>
+                            <a class="btn-xs btn-warning" ng-if="plan.userplanstatus==2">Discontinued</a>
+                            <a class="btn-xs btn-success" ng-if="plan.userplanstatus==3">Active</a>
+                        </td>
+                        <!--<td>{{plan.userplanstatus==1?'Expired':plan.userplanstatus==2?'Discontinued':'Active'}}</td>-->
                         <td>
                             <a href="" ng-click="doLoadMealPlanDetails(plan.mapid)" class="btn-xs btn-primary">View Plan</a>
                         </td>

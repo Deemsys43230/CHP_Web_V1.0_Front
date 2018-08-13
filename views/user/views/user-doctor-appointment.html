@@ -1,0 +1,148 @@
+<!-- Start Page Banner -->
+<div class="page-banner" ng-cloak class="ng-cloak">
+    <div class="container">
+        <div class="row min-height-450" ng-init="init()">
+            <div class="col-md-12 col-md-12 col-sm-12">
+                <!--<a id="modal_user_doctor_appoinment" href="#user-doctor-appointment" class="back-button pull-right margin-left-5" ng-click="userBookDoctorAppointment()"><i class="fa fa-plus-circle"></i>&nbsp;Book Appointment</a>-->
+                <div flash-message="2000" class="col-lg-3 col-md-3 col-sm-3 pull-right no-padding"></div>
+                <h5 class="classic-title"><span><a href="#meal-plans"><i class="fa fa-calendar-check-o"></i>&nbsp;&nbsp;Doctor Appointment</a></span>&nbsp;</h5>
+            </div>
+
+            <div class="col-md-12 col-md-12 col-sm-12">
+                <div ng-if="loaded">
+                    <div class="loader-style">
+                        <div class="loader"></div>
+                    </div>
+                </div>
+
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="col-lg-8 col-md-8 col-sm-8">
+                        <simple-calendar events="events" options="calendarOptions"></simple-calendar>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4">
+                    <div class="book-appointment">
+                        <div class="coach-list appointment_scrollbar margin-left-5" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#eee'}">
+                                <span class="pull-left margin-left-20">Appointment's Details</span><br/>
+                            <div class="col-lg-12 col-md-12 col-sm-12"><hr/></div>
+                                <div class="col-lg-12 col-md-12 col-sm-12 pull-right">
+                                    <a id="modal_user_doctor_appoinment" href="#user-doctor-appointment"  ng-hide="canEnableAppointment" class="back-button pull-right margin-left-5" ng-click="userBookDoctorAppointment()"><i class="fa fa-plus-circle"></i>&nbsp;Book Appointment</a>
+                                </div>
+                                <div  class="coach-view-width">
+                                    <div class="coach-view col-lg-12 col-md-12 col-sm-12" ng-repeat= "appointmentsSingle in selectedDateAppointment">
+                                        <div class="col-lg-2 col-md-2 col-sm-2 no-padding margin-top-15">
+                                            <img  class="img-circle" src="../../images/appointment.png">
+                                        </div>
+                                        <div class="col-lg-10 col-md-10 col-sm-10 no-padding margin-top-5">
+                                            <h4 class="col-lg-12 col-md-12 col-sm-12">{{appointmentsSingle.doctorname}}</h4>
+                                            <p class="col-lg-12 col-md-12 col-sm-12"><span> {{appointmentsSingle.clinicname==null?'-': appointmentsSingle.clinicname}}</span> <b>|</b> {{appointmentsSingle.datetime}}</p>
+                                            <span class="pull-right text-bold padding-left-10"><a href="" ng-click="doDeleteDoctorAppointment(appointmentsSingle.logid)" title="Delete Appointments"><i class="fa fa-trash"></i></a></span>
+                                            <span class="pull-right text-bold padding-left-10"> <a href="" title="Edit Appointments" ng-click="doEditBookedAppointment(appointmentsSingle.logid)"><i class="fa fa-pencil"></i></a></span>
+                                        </div>
+                                    </div>
+                            </div>
+                                <div ng-show="selectedDateAppointment.length==0" class="text-center margin-top-100">
+                                    <img src="../../images/clock.png" width="120" height="120"/>
+                                    <h3 class="text-gray">NO APPOINTMENTS FOUND!!!</h3><br/>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!--<table class="table table-bordered table-striped">-->
+                    <!--<thead>-->
+                    <!--<tr class="warning">-->
+                        <!--<th class="col-md-3">Doctor Name</th>-->
+                        <!--<th class="col-md-3">Clinic Name</th>-->
+                        <!--<th class="col-md-2">Date & Time</th>-->
+                        <!--<th class="col-md-3">Options</th>-->
+                    <!--</tr>-->
+                    <!--</thead>-->
+                    <!--<tr>-->
+                    <!--<tr ng-repeat-start="appointmentsSingle in appointmentList" ng-show="appointmentList.length!=0">-->
+                    <!--<td>{{appointmentsSingle.date}}</td>-->
+                    <!--</tr>-->
+                    <!--<tr dir-paginate="appointment in appointmentsSingle.appointments | itemsPerPage:5">-->
+                        <!--<td class="wrap-all">{{appointment.doctorname}}</td>-->
+                        <!--<td class="wrap-all">{{appointment.clinicname}}</td>-->
+                        <!--<td>{{appointment.datetime}}</td>-->
+
+                        <!--<td>-->
+                            <!--<a href="#meal-plans-view/{{appointments.logid}}" class="btn-xs btn-primary">View</a>-->
+                            <!--<a href="" class="btn-xs btn-warning" ng-click="doEditBookedAppointment(appointment.logid)">Edit</a>-->
+                            <!--<a href="" class="btn-xs btn-danger" ng-click="doDeleteDoctorAppointment(appointment.logid)">Delete</a>-->
+                        <!--</td>-->
+                    <!--</tr>-->
+                    <!--<tr ng-repeat-end=""></tr>-->
+                    <!--<tr ng-show="appointmentList.length==0"><td colspan="4" class="text-center">No Records Found !!!</td></tr>-->
+                    <!--</tbody>-->
+                <!--</table>-->
+                <!-- Start Pagination -->
+                <!--<dir-pagination-controls ng-show="paginationLoad" boundary-links="true"> </dir-pagination-controls>-->
+                <!-- End Pagination -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- End Page Banner -->
+<!-- User Add  meal plan Popup-->
+<div id="user-doctor-appointment" class="popupContainer width-40" style="display:none;left:30%;">
+    <header class="popupHeader width-100">
+        <span class="header_title">{{title}}</span>
+        <span class="modal_close"><i class="fa fa-times"></i></span>
+    </header>
+
+    <section class="popupBody">
+        <!-- measure Form -->
+        <div class="common_model">
+            <form name="userDoctorAppointmentForm" novalidate>
+                <div class="row">
+                    <div class="col-md-6 no-padding">
+                        <div class="col-md-12">
+                            <p>Doctor Name</p>
+                            <input type="text" name="doctorname"  validate-all-characters ng-model="userAppointments.doctorname" maxlength="200" required focus-me="shouldBeOpen">
+                            <span ng-show="userDoctorAppointmentForm.doctorname.$dirty&&userDoctorAppointmentForm.doctorname.$invalid">
+                                 <span class="error-message" ng-show="userDoctorAppointmentForm.doctorname.$error.required"><span>Required.</span></span>
+                                 <span class="error-message" ng-show="userDoctorAppointmentForm.doctorname.$error.validateAllCharacters"><span>Please&nbsp;Enter&nbsp;Valid&nbsp;Name.</span></span>
+                             </span>
+                        </div>
+                    </div>
+                    <div class="col-md-6 no-padding">
+                        <div class="col-md-12">
+                            <p>Clinic Name</p>
+                            <input type="text" name="clinicname"  ng-model="userAppointments.clinicname" maxlength="200" validate-all-characters>
+                            <span ng-show="userDoctorAppointmentForm.clinicname.$dirty&&userDoctorAppointmentForm.clinicname.$invalid">
+                                 <span class="error-message" ng-show="userDoctorAppointmentForm.clinicname.$error.validateAllCharacters"><span>Please&nbsp;Enter&nbsp;Valid&nbsp;Name.</span></span>
+                             </span>
+
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <p >Date & Time</p>
+                        <input type="text"  id="set-appointment-date"  name="datetime" ng-model="userAppointments.datetime" required readonly/>
+                        <span ng-show="userDoctorAppointmentForm.datetime.$dirty&&userDoctorAppointmentForm.datetime.$invalid">
+                            <span class="error-message" ng-show="userDoctorAppointmentForm.datetime.$error.required"><span>Required.</span></span>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="action_btns margin-top-20">
+                    <div class="one_half" ng-show="isNew"><a ng-class="{modal_close:userDoctorAppointmentForm.$invalid}" class="btn btn_red" ng-disabled="userDoctorAppointmentForm.$invalid" ng-click="doBookDoctorAppointment()">Book Appointment</a></div>
+                    <div class="one_half" ng-hide="isNew"><a ng-class="{modal_close:userDoctorAppointmentForm.$invalid}" class="btn btn_red" ng-disabled="userDoctorAppointmentForm.$invalid" ng-click="doBookDoctorAppointment()">Save Changes </a></div>
+                    <div class="one_half last modal_close"><a onclick="return false;" class="btn back_btn">Cancel</a></div>
+                </div>
+
+
+            </form>
+        </div>
+    </section>
+</div>
+
+
+<script type="text/javascript" src="../../js/script.js"></script>
+
+<script>
+    $("#modal_user_doctor_appoinment").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
+</script>
+

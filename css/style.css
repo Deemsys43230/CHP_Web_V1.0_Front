@@ -18643,6 +18643,9 @@ a.upload-medication:hover{
     color: #fff !important;
     background-color: #0db600;
 }
-
+/* bootstrap daterange picker */
+.applyBtn,.cancelBtn {
+    display: none;
+}
 
 
