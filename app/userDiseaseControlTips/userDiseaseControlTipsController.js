@@ -20,16 +20,28 @@ userApp.controller('UserDiseaseControlTipsListController',['$scope','requestHand
 
     // Get list of CDC content
     $scope.getCDCList=function(){
+        $scope.loaded=true;
+        $scope.cdcPagination={"itemsPerPage":5,"pageNumber":1};
+        $scope.userCdcListPagination={
+            "limit": $scope.cdcPagination.itemsPerPage,
+            "offset":($scope.cdcPagination.pageNumber-1)*$scope.cdcPagination.itemsPerPage
+        };
         //$scope.isSingleView=false;
-        requestHandler.getRequest("getHealthyLivingListByUser/","").then(function(response){
+        requestHandler.postRequest("getHealthyLivingListByUser/",$scope.userCdcListPagination).then(function(response){
             $scope.cdcContentList=response.data.healthyliving;
+            $scope.loaded=false;
+            $scope.paginationLoad=true;
         });
     };
     $scope.init=function(){
-        $scope.getCDCList();
+        $scope.paginationLoad=false;
+        //$scope.getCDCList();
     };
 
-    $scope.init();
+    // $scope.init();
+   $scope.$watch("cdcPagination.pageNumber",function(){
+       $scope.getCDCList();
+    });
 }]);
 userApp.controller('UserDiseaseControlTipController',['$scope','requestHandler','Flash','$location',function($scope,requestHandler,Flash,$location) {
     $scope.loaded=false;

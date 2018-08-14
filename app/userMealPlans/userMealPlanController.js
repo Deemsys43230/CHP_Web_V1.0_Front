@@ -57,7 +57,7 @@ userApp.controller('UserMealPlanController',['$scope','requestHandler','Flash',f
     };
     //user add meal plan
     $scope.doAddMealPlanByUser=function(){
-        requestHandler.postRequest("coach/insertorupdatemealplan/",$scope.userMealPlan).then(function(response){
+        requestHandler.postRequest("user/insertorupdatemealplan/",$scope.userMealPlan).then(function(response){
             $scope.doGetUserMealPlanList();
             successMessage(Flash,"Successfully Added");
             $scope.loaded=false;

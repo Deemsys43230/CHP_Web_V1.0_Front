@@ -22,7 +22,7 @@
                     <div class="col-lg-4 col-md-4 col-sm-4">
                     <div class="book-appointment">
                         <div class="coach-list appointment_scrollbar margin-left-5" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#eee'}">
-                                <span class="pull-left margin-left-20">Appointment's Details</span><br/>
+                                <span class="pull-left margin-left-20">Appointment Details</span><br/>
                             <div class="col-lg-12 col-md-12 col-sm-12"><hr/></div>
                                 <div class="col-lg-12 col-md-12 col-sm-12 pull-right">
                                     <a id="modal_user_doctor_appoinment" href="#user-doctor-appointment"  ng-hide="canEnableAppointment" class="back-button pull-right margin-left-5" ng-click="userBookDoctorAppointment()"><i class="fa fa-plus-circle"></i>&nbsp;Book Appointment</a>
@@ -34,7 +34,8 @@
                                         </div>
                                         <div class="col-lg-10 col-md-10 col-sm-10 no-padding margin-top-5">
                                             <h4 class="col-lg-12 col-md-12 col-sm-12">{{appointmentsSingle.doctorname}}</h4>
-                                            <p class="col-lg-12 col-md-12 col-sm-12"><span> {{appointmentsSingle.clinicname==null?'-': appointmentsSingle.clinicname}}</span> <b>|</b> {{appointmentsSingle.datetime}}</p>
+                                            <h4 class="col-lg-12 col-md-12 col-sm-12">{{appointmentsSingle.clinicname==null?'-': appointmentsSingle.clinicname}}</h4>
+                                            <p class="col-lg-12 col-md-12 col-sm-12"> {{appointmentsSingle.datetime}}</p>
                                             <span class="pull-right text-bold padding-left-10"><a href="" ng-click="doDeleteDoctorAppointment(appointmentsSingle.logid)" title="Delete Appointments"><i class="fa fa-trash"></i></a></span>
                                             <span class="pull-right text-bold padding-left-10"> <a href="" title="Edit Appointments" ng-click="doEditBookedAppointment(appointmentsSingle.logid)"><i class="fa fa-pencil"></i></a></span>
                                         </div>
@@ -49,37 +50,6 @@
                         </div>
                     </div>
                 </div>
-                <!--<table class="table table-bordered table-striped">-->
-                    <!--<thead>-->
-                    <!--<tr class="warning">-->
-                        <!--<th class="col-md-3">Doctor Name</th>-->
-                        <!--<th class="col-md-3">Clinic Name</th>-->
-                        <!--<th class="col-md-2">Date & Time</th>-->
-                        <!--<th class="col-md-3">Options</th>-->
-                    <!--</tr>-->
-                    <!--</thead>-->
-                    <!--<tr>-->
-                    <!--<tr ng-repeat-start="appointmentsSingle in appointmentList" ng-show="appointmentList.length!=0">-->
-                    <!--<td>{{appointmentsSingle.date}}</td>-->
-                    <!--</tr>-->
-                    <!--<tr dir-paginate="appointment in appointmentsSingle.appointments | itemsPerPage:5">-->
-                        <!--<td class="wrap-all">{{appointment.doctorname}}</td>-->
-                        <!--<td class="wrap-all">{{appointment.clinicname}}</td>-->
-                        <!--<td>{{appointment.datetime}}</td>-->
-
-                        <!--<td>-->
-                            <!--<a href="#meal-plans-view/{{appointments.logid}}" class="btn-xs btn-primary">View</a>-->
-                            <!--<a href="" class="btn-xs btn-warning" ng-click="doEditBookedAppointment(appointment.logid)">Edit</a>-->
-                            <!--<a href="" class="btn-xs btn-danger" ng-click="doDeleteDoctorAppointment(appointment.logid)">Delete</a>-->
-                        <!--</td>-->
-                    <!--</tr>-->
-                    <!--<tr ng-repeat-end=""></tr>-->
-                    <!--<tr ng-show="appointmentList.length==0"><td colspan="4" class="text-center">No Records Found !!!</td></tr>-->
-                    <!--</tbody>-->
-                <!--</table>-->
-                <!-- Start Pagination -->
-                <!--<dir-pagination-controls ng-show="paginationLoad" boundary-links="true"> </dir-pagination-controls>-->
-                <!-- End Pagination -->
             </div>
         </div>
     </div>
@@ -89,7 +59,7 @@
 <!-- User Add  meal plan Popup-->
 <div id="user-doctor-appointment" class="popupContainer width-40" style="display:none;left:30%;">
     <header class="popupHeader width-100">
-        <span class="header_title">{{title}}</span>
+        <span class="header_title">{{title}} - {{selectedDate}}</span>
         <span class="modal_close"><i class="fa fa-times"></i></span>
     </header>
 
@@ -101,7 +71,7 @@
                     <div class="col-md-6 no-padding">
                         <div class="col-md-12">
                             <p>Doctor Name</p>
-                            <input type="text" name="doctorname"  validate-all-characters ng-model="userAppointments.doctorname" maxlength="200" required focus-me="shouldBeOpen">
+                            <input type="text" name="doctorname"  validate-all-characters ng-model="userAppointments.doctorname" maxlength="100" required focus-me="shouldBeOpen">
                             <span ng-show="userDoctorAppointmentForm.doctorname.$dirty&&userDoctorAppointmentForm.doctorname.$invalid">
                                  <span class="error-message" ng-show="userDoctorAppointmentForm.doctorname.$error.required"><span>Required.</span></span>
                                  <span class="error-message" ng-show="userDoctorAppointmentForm.doctorname.$error.validateAllCharacters"><span>Please&nbsp;Enter&nbsp;Valid&nbsp;Name.</span></span>
@@ -111,7 +81,7 @@
                     <div class="col-md-6 no-padding">
                         <div class="col-md-12">
                             <p>Clinic Name</p>
-                            <input type="text" name="clinicname"  ng-model="userAppointments.clinicname" maxlength="200" validate-all-characters>
+                            <input type="text" name="clinicname"  ng-model="userAppointments.clinicname" maxlength="100" validate-all-characters>
                             <span ng-show="userDoctorAppointmentForm.clinicname.$dirty&&userDoctorAppointmentForm.clinicname.$invalid">
                                  <span class="error-message" ng-show="userDoctorAppointmentForm.clinicname.$error.validateAllCharacters"><span>Please&nbsp;Enter&nbsp;Valid&nbsp;Name.</span></span>
                              </span>
@@ -119,11 +89,56 @@
                         </div>
                     </div>
                     <div class="col-md-12">
-                        <p >Date & Time</p>
-                        <input type="text"  id="set-appointment-date"  name="datetime" ng-model="userAppointments.datetime" required readonly/>
+                        <p>Select Time</p>
+                    </div>
+                    <div class="col-md-6">
+                        <p >Hours</p>
+                        <select class="col-md-6 medications" name="datetime"  ng-init="selectedHours='0'" ng-model="selectedHours">
+                            <option value="01">1</option>
+                            <option value="02">2</option>
+                            <option value="03">3</option>
+                            <option value="04">4</option>
+                            <option value="05">5</option>
+                            <option value="06">6</option>
+                            <option value="07">7</option>
+                            <option value="08">8</option>
+                            <option value="09">9</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                            <option value="13">13</option>
+                            <option value="14">14</option>
+                            <option value="15">15</option>
+                            <option value="16">16</option>
+                            <option value="17">17</option>
+                            <option value="18">18</option>
+                            <option value="19">19</option>
+                            <option value="20">20</option>
+                            <option value="21">21</option>
+                            <option value="22">22</option>
+                            <option value="23">23</option>
+                            <option value="24">24</option>
+                        </select>
                         <span ng-show="userDoctorAppointmentForm.datetime.$dirty&&userDoctorAppointmentForm.datetime.$invalid">
                             <span class="error-message" ng-show="userDoctorAppointmentForm.datetime.$error.required"><span>Required.</span></span>
                         </span>
+                    </div>
+                    <div class="col-md-6">
+                        <p >Minutes</p>
+                        <select class="col-md-6 medications" name="datetime" ng-init="selectedMinutes='0'" ng-model="selectedMinutes">
+                            <option value="05">05</option>
+                            <option value="10">10</option>
+                            <option value="15">15</option>
+                            <option value="20">20</option>
+                            <option value="25">25</option>
+                            <option value="30">30</option>
+                            <option value="35">35</option>
+                            <option value="40">40</option>
+                            <option value="45">45</option>
+                            <option value="50">50</option>
+                            <option value="55">55</option>
+                            <option value="59">60</option>
+                        </select>
                     </div>
                 </div>
 

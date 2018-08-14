@@ -3,6 +3,8 @@ var userApp = angular.module('userApp', ['ngRoute','oc.lazyLoad','requestModule'
 userApp.controller('UserDoctorAppointment',['$scope','requestHandler','Flash',function($scope,requestHandler,Flash) {
 
     $scope.activeClass.doctorAppointment='active';
+    $scope.selectedMinutes=0;
+    $scope.selectedHours=0;
     var date = new Date();
     var dd = date.getDate();
     var mm = date.getMonth()+1; //January is 0!
@@ -17,6 +19,7 @@ userApp.controller('UserDoctorAppointment',['$scope','requestHandler','Flash',fu
     var todayDate = date;
     $scope.calendarOptions = {
         coachappointments:[],
+        getdoctorappointmentlist:[],
         userappointments:[],
         userbookedappointments:[],
         notAvailableAppointments:[],
@@ -50,7 +53,6 @@ userApp.controller('UserDoctorAppointment',['$scope','requestHandler','Flash',fu
         var userSelectedEndDate=moment(date).format('DD/MM/YYYY 23:59:59');
         $scope.calendarOptions.selectedDate=date;
         $scope.selectedDate= moment($scope.calendarOptions.selectedDate).format('DD/MM/YYYY');
-        console.log($scope.selectedDate);
         $scope.previousDate=0;
         // date comparision to hide book appointment for previous date
         var startDateParts=todayDate.split("/");
@@ -109,6 +111,8 @@ userApp.controller('UserDoctorAppointment',['$scope','requestHandler','Flash',fu
     $scope.userBookDoctorAppointment=function(){
         $scope.userAppointments={};
         //to set selected date as date in datepicker
+        $scope.selectedMinutes='';
+        $scope.selectedHours='';
         $scope.userAppointments.datetime=$scope.selectedDate + ' '+ currentdatetime;
         options.startDate=$scope.userAppointments.datetime;
         $('#set-appointment-date').daterangepicker(options);
@@ -145,6 +149,7 @@ userApp.controller('UserDoctorAppointment',['$scope','requestHandler','Flash',fu
         else{
             $scope.userAppointments.logid="";
         }
+        $scope.userAppointments.datetime=  $scope.selectedDate+' '+$scope.selectedHours+':'+$scope.selectedMinutes+':'+'00';
 
         requestHandler.postRequest("user/insertorupdatedoctorappointment/",$scope.userAppointments).then(function(response){
             $scope.userBookDoctorAppointment();
@@ -164,12 +169,22 @@ userApp.controller('UserDoctorAppointment',['$scope','requestHandler','Flash',fu
         $scope.userAppointments={};
         $scope.isNew = false;
         $scope.title = "Edit Appointment";
+
         //to set selected date as date in datepicker
         $scope.userAppointments.datetime=$scope.selectedDate + ' '+ currentdatetime;
         options.startDate=$scope.userAppointments.datetime;
         $('#set-appointment-date').daterangepicker(options);
         requestHandler.postRequest("user/getdoctorappointmentdetail/",{"logid":id}).then(function(response){
             $scope.userAppointments=response.data.medication;
+            var datetime=$scope.userAppointments.datetime;
+            var a =  datetime.split(" ");
+            var date = a[0];
+            var time = a[1];
+            var splitime=time.split(":");
+            var hours=splitime[0];
+            var minutes=splitime[1];
+            $scope.selectedHours=hours;
+            $scope.selectedMinutes=minutes;
             $(function(){
             $("#lean_overlay").fadeTo(1000);
             $("#user-doctor-appointment").fadeIn(600);
