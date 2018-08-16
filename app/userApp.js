@@ -860,6 +860,15 @@ userApp.controller("UserInitialController",['$scope','requestHandler','$location
         $scope.username=response.data.User_Profile.name;
         $scope.userProfile=response.data.User_Profile;
         $scope.demo = response.data.demography;
+        $scope.emailNotifications= response.data.Login;
+        $scope.currentUserEmailId= $scope.emailNotifications.emailid;
+        if($scope.emailNotifications.isemailvalidated==0){
+            $scope.allNotifications=1;
+            $scope.description="Please Verify Your Email id";
+        }
+        else {
+            $scope.allNotifications=0;
+        }
         if($scope.userProfile.isProfileUpdated==0 && $scope.demo.demoUpdatedstatus==0) {
             $rootScope.checkPath =0;
         }
@@ -870,6 +879,13 @@ userApp.controller("UserInitialController",['$scope','requestHandler','$location
             $rootScope.checkPath=2;
         }
     });
+
+    //to resend verification email link
+    $scope.emailVerificationRequest=function() {
+        requestHandler.postRequest("verifyEmailId/", {"emailid": $scope.currentUserEmailId}).then(function (response) {
+            
+        });
+    };
 
     $scope.socialMedia=function(){
         $("html, body").animate({
