@@ -17,6 +17,13 @@
 
                 <div class="col-lg-12 col-md-12 col-sm-12">
                     <div class="col-lg-8 col-md-8 col-sm-8">
+                        <div class="col-md-6 pull-right">
+                            <span class="orange appointment_legend"></span><div class="margin-left-20">-&nbsp;Selected&nbsp;Appointment&nbsp;Date</div>
+                        </div>
+                        <div class="col-md-6 pull-right">
+                            <span class="lightgreen appointment_legend"></span><div class="margin-left-20">-&nbsp;Scheduled&nbsp;Appointment&nbsp;Date&nbsp;</div>
+                        </div>  
+                        <br/><br/>
                         <simple-calendar events="events" options="calendarOptions"></simple-calendar>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-4">
@@ -25,7 +32,7 @@
                                 <span class="pull-left margin-left-20">Appointment Details</span><br/>
                             <div class="col-lg-12 col-md-12 col-sm-12"><hr/></div>
                                 <div class="col-lg-12 col-md-12 col-sm-12 pull-right">
-                                    <a id="modal_user_doctor_appoinment" href="#user-doctor-appointment"  ng-hide="canEnableAppointment" class="back-button pull-right margin-left-5" ng-click="userBookDoctorAppointment()"><i class="fa fa-plus-circle"></i>&nbsp;Book Appointment</a>
+                                    <a id="modal_user_doctor_appoinment" href="#user-doctor-appointment" ng-hide="canEnableAppointment" class="back-button pull-right margin-left-5" ng-click="userBookDoctorAppointment()"><i class="fa fa-plus-circle"></i>&nbsp;Book Appointment</a>
                                 </div>
                                 <div  class="coach-view-width">
                                     <div class="coach-view col-lg-12 col-md-12 col-sm-12" ng-repeat= "appointmentsSingle in selectedDateAppointment">
@@ -37,7 +44,7 @@
                                             <h4 class="col-lg-12 col-md-12 col-sm-12">{{appointmentsSingle.clinicname==null?'-': appointmentsSingle.clinicname}}</h4>
                                             <p class="col-lg-12 col-md-12 col-sm-12"> {{appointmentsSingle.datetime}}</p>
                                             <span class="pull-right text-bold padding-left-10"><a href="" ng-click="doDeleteDoctorAppointment(appointmentsSingle.logid)" title="Delete Appointments"><i class="fa fa-trash"></i></a></span>
-                                            <span class="pull-right text-bold padding-left-10"> <a href="" title="Edit Appointments" ng-click="doEditBookedAppointment(appointmentsSingle.logid)"><i class="fa fa-pencil"></i></a></span>
+                                            <span class="pull-right text-bold padding-left-10"> <a href="" ng-hide="canEnableAppointment" title="Edit Appointments" ng-click="doEditBookedAppointment(appointmentsSingle.logid)"><i class="fa fa-pencil"></i></a></span>
                                         </div>
                                     </div>
                             </div>
@@ -82,10 +89,6 @@
                         <div class="col-md-12">
                             <p>Clinic Name</p>
                             <input type="text" name="clinicname"  ng-model="userAppointments.clinicname" maxlength="100" validate-all-characters>
-                            <span ng-show="userDoctorAppointmentForm.clinicname.$dirty&&userDoctorAppointmentForm.clinicname.$invalid">
-                                 <span class="error-message" ng-show="userDoctorAppointmentForm.clinicname.$error.validateAllCharacters"><span>Please&nbsp;Enter&nbsp;Valid&nbsp;Name.</span></span>
-                             </span>
-
                         </div>
                     </div>
                     <div class="col-md-12">
@@ -93,7 +96,7 @@
                     </div>
                     <div class="col-md-6">
                         <p >Hours</p>
-                        <select class="col-md-6 medications" name="datetime"  ng-init="selectedHours='0'" ng-model="selectedHours">
+                        <select class="col-md-6 medications" name="selectedHours"  ng-init="selectedHours='0'" ng-model="selectedHours" required>
                             <option value="01">1</option>
                             <option value="02">2</option>
                             <option value="03">3</option>
@@ -119,13 +122,13 @@
                             <option value="23">23</option>
                             <option value="24">24</option>
                         </select>
-                        <span ng-show="userDoctorAppointmentForm.datetime.$dirty&&userDoctorAppointmentForm.datetime.$invalid">
-                            <span class="error-message" ng-show="userDoctorAppointmentForm.datetime.$error.required"><span>Required.</span></span>
+                        <span ng-show="userDoctorAppointmentForm.selectedHours.$dirty&&userDoctorAppointmentForm.selectedHours.$invalid">
+                            <span class="error-message" ng-show="userDoctorAppointmentForm.selectedHours.$error.required"><span>Required.</span></span>
                         </span>
                     </div>
                     <div class="col-md-6">
                         <p >Minutes</p>
-                        <select class="col-md-6 medications" name="datetime" ng-init="selectedMinutes='0'" ng-model="selectedMinutes">
+                        <select class="col-md-6 medications" name="selectedMinutes" ng-init="selectedMinutes='0'" ng-model="selectedMinutes" required>
                             <option value="05">05</option>
                             <option value="10">10</option>
                             <option value="15">15</option>
@@ -139,6 +142,9 @@
                             <option value="55">55</option>
                             <option value="59">60</option>
                         </select>
+                        <span ng-show="userDoctorAppointmentForm.selectedMinutes.$dirty&&userDoctorAppointmentForm.selectedMinutes.$invalid">
+                            <span class="error-message" ng-show="userDoctorAppointmentForm.selectedMinutes.$error.required"><span>Required.</span></span>
+                        </span>
                     </div>
                 </div>
 

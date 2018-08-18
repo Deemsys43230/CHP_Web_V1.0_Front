@@ -1361,7 +1361,7 @@
                         <form name="FoodAddForm" novalidate>
                         <div class="col-lg-12 col-md-12 col-sm-12 no-padding">
                         <h5 class="margin-top-10">Select Measure:</h5>
-                            <select name="measure" ng-model="userFood.measure" ng-options="measure.measurename for measure in userSelectedFoodDetails.measureid track by measure.measureid" ng-change="doCalculateCalories()" required>
+                            <select name="measure" ng-model="userFood.measure" ng-options="measure.measurename for measure in userSelectedFoodDetails.measure track by measure.measureid" ng-change="doCalculateCalories()" required>
                                 <option value="">-- Select Measure --</option>
                             </select>
                              <span ng-show="FoodAddForm.measure.$dirty&&FoodAddForm.measure.$invalid">
@@ -2198,7 +2198,7 @@
                     <div class="col-md-12">
                         <p>Session</p>
                         <div class="col-md-12">
-                            <span class="fh-checkbox"  style="white-space: nowrap">{{medication.session.morning}}
+                            <span class="fh-checkbox"  style="white-space: nowrap">
                                 <input type="checkbox" name="session" value="1" id="morning" ng-model="medication.session.morning" ng-required="!(medication.session.anun || medication.session.evening)">
                                 <label for="morning">Morning</label>
                             </span>
@@ -2344,7 +2344,7 @@
                 <h4 class="text-gray text-center">out of 20&nbsp;MB space</h4>&nbsp;
                     <span class="text-red" ng-show="documentUploadForm.file.$error.validateFileType"><span>Valid&nbsp;Formats&nbsp;:&nbsp;['jpeg','pdf']</span></span>
                 <form name="documentUploadForm" novalidate>
-                    <input type="file" ng-model="uploadFile"  file-model="uploadFile" id="fileupload-wrap-filename" name="file"  valid-file required class="upload" validate-file-type /><br/>
+                    <input type="file" ng-model="uploadFile"  file-model="uploadFile" id="fileupload-wrap-filename" name="file"  valid-file required class="upload margin-left-20" validate-file-type /><br/>
                     <span ng-show="documentUploadForm.file.$dirty&&documentUploadForm.file.$invalid">
                           <span class="error-message" ng-show="documentUploadForm.file.$error.required"><span>Select&nbsp;file&nbsp;to&nbsp;Upload.</span></span>
                     </span><br/>

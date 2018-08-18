@@ -513,7 +513,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
 
             requestHandler.directFileUpload("user/uploadfile/",$scope.uploadFile,"document").then(function(response){
 
-
+                console.log(response.data);
            if(response.data.Response_status==0 ){
                 $(".common_model").hide();
                 $("#uploadDocumentMedication").hide();
@@ -582,6 +582,11 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
         var getPadded = function(val){
             return val < 10 ? ('0' + val) : val;
         };
+
+        // for download
+        // var content = 'Medication Document Download';
+        // var blob = new Blob([ content ], { type : 'image/pdf' });
+        // $scope.url = (window.URL || window.webkitURL).createObjectURL( blob );
     /*End Medications Documents Upload*/
 
         $scope.doSyncDevices=function(id){
@@ -677,8 +682,9 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
 
                     $scope.userFood.userfoodid=result.userfoodid;
                     $scope.userFood.foodid=result.foodid;
+                    console.log($scope.userSelectedFoodDetails.measure);
                     //  $scope.userFood.measure=result.measureid;
-                    $.each($scope.userSelectedFoodDetails.measureid, function(index,value) {
+                    $.each($scope.userSelectedFoodDetails.measure, function(index,value) {
                         if(value.measureid == result.measureid.measureid){
                             $scope.userFood.measure = value;
                             originalmeasure = angular.copy(value);
@@ -5191,4 +5197,7 @@ function coachAdviceCarousel(){
     },500);
 }
 
-
+// userApp.config(['$compileProvider',
+//     function ($compileProvider) {
+//         $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|file|blob):/);
+// }]);

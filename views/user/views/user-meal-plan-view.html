@@ -187,31 +187,30 @@
                                 <input type="hidden" ng-model="userFood.foodsessionid" />
                                 <div class="col-lg-12 col-md-12 col-sm-12 no-padding">
                                     <h5 class="margin-top-10">Select Measure:</h5>
-                                    <select name="measure" ng-model="userFood.measure" ng-options="measure.measurename for measure in userSelectedFoodDetails.measureid track by measure.measureid" ng-change="doCalculateCalories()" required>
+                                    <select name="measure" ng-model="userFood.measure" ng-options="measure.measurename for measure in userSelectedFoodDetails.measure track by measure.measureid" ng-change="doCalculateCalories()" required>
                                         <option value="">-- Select Measure --</option>
                                     </select>
                                     <span ng-show="FoodAddForm.measure.$dirty&&FoodAddForm.measure.$invalid">
-                                     <span class="error-message" ng-show="FoodAddForm.measure.$error.required"><span>Required.</span></span>
-                             </span>
+                                        <span class="error-message" ng-show="FoodAddForm.measure.$error.required"><span>Required.</span></span>
+                                    </span>
                                     <h5 class="margin-top-10">Value:</h5>
                                     <input type="text"  ng-disabled="!userFood.measure" name="measurecount"  maxlength="6" ng-model="userFood.measurecount" ng-change="doCalculateCalories();maxFoodValueCheck(userFood.measurecount)" onkeypress="return validateFloatKeyPress1(this,event);"  required validate-zero>
                                     <span class="error-message" ng-show="!FoodAddForm.measurecount.$error.required&&maxfoodvalue"><span>Please&nbsp;Enter&nbsp;Valid&nbsp;Value.</span></span>
                                     <span ng-show="FoodAddForm.measurecount.$dirty&&FoodAddForm.measurecount.$invalid">
-                               <span class="error-message" ng-show="FoodAddForm.measurecount.$error.required"><span>Required.</span></span>
-                               <span class="error-message" ng-show="!FoodAddForm.measurecount.$error.required&&FoodAddForm.measurecount.$error.validateZero"><span>Invalid&nbsp;data.</span></span>
-                            </span>
-                                    <div class="col-lg-12 col-md-12 col-sm-12 margin-top-10 no-padding">
-                                        <div class="col-lg-4 col-md-4 col-sm-4 no-padding margin-top-7">
-                                            <h5>Is&nbsp;Optional?</h5>
-                                        </div>
-                                        <div class="col-lg-8 col-md-8 col-sm-8 margin-top-2">
-                                <span class="fh-checkbox" required>
-                                    <input type="checkbox" id="isOptional" name="isoptional" ng-model="userFood.isoptional" ng-true-value="1" ng-false-value="0">
-                                    <label for="isOptional">&nbsp;&nbsp;</label>
-                                </span>
-                                        </div>
+                                        <span class="error-message" ng-show="FoodAddForm.measurecount.$error.required"><span>Required.</span></span>
+                                        <span class="error-message" ng-show="!FoodAddForm.measurecount.$error.required&&FoodAddForm.measurecount.$error.validateZero"><span>Invalid&nbsp;data.</span></span>
+                                    </span>
+                                </div>
+                                <div class="col-lg-12 col-md-12 col-sm-12 margin-top-10 no-padding">
+                                    <div class="col-lg-4 col-md-4 col-sm-4 no-padding margin-top-7">
+                                        <h5>Is&nbsp;Optional?</h5>
                                     </div>
-
+                                    <div class="col-lg-8 col-md-8 col-sm-8 margin-top-2">
+                                        <span class="fh-checkbox" required>
+                                            <input type="checkbox" id="isOptional" name="isoptional" ng-model="userFood.isoptional" ng-true-value="1" ng-false-value="0">
+                                            <label for="isOptional">&nbsp;&nbsp;</label>
+                                        </span>
+                                    </div>
                                 </div>
                             </form>
                         </div>

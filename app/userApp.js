@@ -883,7 +883,7 @@ userApp.controller("UserInitialController",['$scope','requestHandler','$location
     //to resend verification email link
     $scope.emailVerificationRequest=function() {
         requestHandler.postRequest("verifyEmailId/", {"emailid": $scope.currentUserEmailId}).then(function (response) {
-            
+            console.log("sample data");
         });
     };
 

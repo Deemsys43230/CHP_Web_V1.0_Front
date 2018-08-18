@@ -71,8 +71,7 @@ userApp.controller('UserDoctorAppointment',['$scope','requestHandler','Flash',fu
         requestHandler.postRequest("user/getdoctorappointmentlist/",$scope.getAppointmentsParam).then(function(response){
             $scope.appointmentList= response.data.list;
             $scope.selectedDateAppointment= $scope.appointmentList[0].appointments;
-            $scope.loaded=false;
-            $scope.paginationLoad=true;
+            $scope.userGetAllDateDetails($scope.fromDate,$scope.endDate);
         });
     };
 
@@ -99,6 +98,26 @@ userApp.controller('UserDoctorAppointment',['$scope','requestHandler','Flash',fu
     };
 
     //do get doctor Appointment list
+    $scope.userGetAllDateDetails=function(fromDate,endDate){
+        var userStartDate=fromDate;
+        var userEndDate=endDate;
+        $scope.getAppointmentsParam={"fromdate":userStartDate,"todate":userEndDate};
+        //Get Single date
+        requestHandler.postRequest("user/getdoctorappointmentlist/",$scope.getAppointmentsParam).then(function(response){
+            $scope.appointmentList= response.data.list;
+            $scope.coachappointments=[];
+
+            $.each($scope.appointmentList,function(index,value){
+                if(value.appointments.length!=0) {
+                    var processingDate=value.date.split('/');
+                    var formattedDate=parseInt(processingDate[0])+"/"+(parseInt(processingDate[1])-1)+"/"+parseInt(processingDate[2]);
+                    $scope.coachappointments.push(formattedDate);
+                }
+            });
+            $scope.calendarOptions.coachappointments=$scope.coachappointments;
+        });
+    };
+
 
     $scope.doGetDoctorAppointmentList=function(){
         var selectedDate = new Date();
@@ -220,6 +239,11 @@ userApp.controller('UserDoctorAppointment',['$scope','requestHandler','Flash',fu
 
     $scope.init=function () {
         $scope.doGetDoctorAppointmentList();
+        /*For get all date appointments Details*/
+        var todayDate = new Date();
+        $scope.fromDate=moment(new Date(todayDate.getFullYear(), todayDate.getMonth(), 1)).format('DD/MM/YYYY 00:00:00');
+        $scope.endDate=moment(new Date(todayDate.getFullYear(), todayDate.getMonth()+1, 0)).format('DD/MM/YYYY 23:59:59');
+        // $scope.userGetAllDateDetails($scope.fromDate,$scope.endDate);
 
     };
 
