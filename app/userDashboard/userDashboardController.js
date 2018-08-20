@@ -2989,7 +2989,11 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
                     'id': 12,
                     'name': 'Sleep Rate',
                     "imageSrc": "../../images/sleep.jpg"
-            }
+            },  {
+                         'id': 18,
+                         'name': 'Weight Vs Exercise',
+                         "imageSrc": "../../images/weight-exercise.png"
+                     }
 
             ]
             },
@@ -3005,7 +3009,12 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
                 'id': 5,
                 'name': 'Budget vs Net',
                 "imageSrc": "../../images/budget.png"
-            }]
+            },
+                {
+                    'id': 17,
+                    'name': 'Weight Vs Intake',
+                    "imageSrc": "../../images/weight_maintain.png"
+                }]
             },
             {"graphCategory":"HEART RATE","graphCategoryId":3,"graphs":[
                 
@@ -3191,6 +3200,15 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
             var nutrientsdate=[];
             var historyDates=[];
             var titles={};
+            var userWeightVal=[];
+            var foodIntakeVal=[];
+            var exerciseMinutes=[];
+            if($scope.userProfile.unitPreference==1){
+                $scope.unit="Kgs";
+            }
+            else if($scope.userProfile.unitPreference==2){
+                $scope.unit="Lbs";
+            }
 
             if($scope.historyType==1){
                 requestHandler.postRequest("user/calorieGraphbyDates/", {"fromdate":startDate,"todate":endDate}).then(function(response){
@@ -3258,12 +3276,6 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
             }
 
             else if($scope.historyType==4){
-                if($scope.userProfile.unitPreference==1){
-                    $scope.unit="Kgs";
-                }
-                else if($scope.userProfile.unitPreference==2){
-                    $scope.unit="Lbs";
-                }
                 requestHandler.postRequest("/user/getWeightLogGraph/", {"startdate":startDate,"enddate":endDate}).then(function(response){
                     $scope.historyRecord=response.data.Weight_logs;
                     $.each($scope.historyRecord, function(index,value) {
@@ -3347,7 +3359,6 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
                     $scope.drawNutrientsGraph(historyReport,titles,fibreVal,fatVal,carbsVal,fiberPercentage,proteinPercentage,fatPercentage,carboPercentage,nutrientsdate,divId);
                 });
             }
-
 
             else if($scope.historyType==7){
                 requestHandler.postRequest("user/getWearableDataGraph/", {"startdate":startDate,"enddate":endDate}).then(function(response){
@@ -3565,6 +3576,42 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
                     $scope.drawHistoryGraph(historyReport,historyDates,titles,divId);
                 });
             }
+            else if($scope.historyType==17){
+                requestHandler.postRequest("user/getintakevsweightgraphbydates/", {"fromdate":startDate,"todate":endDate}).then(function(response){
+                    $scope.historyRecord=response.data.records;
+                    $.each($scope.historyRecord, function(index,value) {
+                        var date = value.date.split("/");
+                        foodIntakeVal.push(value.calorieintake);
+                        userWeightVal.push(parseInt(value.weight));
+                        historyDates.push(monthNames[(date[1]-1)]+' '+date[0]);
+                    });
+                    titles.title="Food Intake Vs Weight Graph( "+startDate+" - "+endDate+" )";
+                    titles.name="Food Intake Vs Weight Graph";
+                    titles.xaxis="Date Range";
+                    titles.suffix=$scope.unit;
+                    titles.yaxis=$scope.unit;
+                    titles.color='#ff4d4d';
+                    $scope.drawFoodIntakeandWeightGraph(foodIntakeVal,userWeightVal,historyDates,titles,divId);
+                });
+            }
+            else if($scope.historyType==18){
+                requestHandler.postRequest("user/getweightvsexercisegraphbydates/", {"fromdate":startDate,"todate":endDate}).then(function(response){
+                    $scope.historyRecord=response.data.records;
+                    $.each($scope.historyRecord, function(index,value) {
+                        var date = value.date.split("/");
+                        exerciseMinutes.push(parseInt(value.exerciseminutes));
+                        userWeightVal.push(parseInt(value.weight));
+                        historyDates.push(monthNames[(date[1]-1)]+' '+date[0]);
+                    });
+                    titles.title="Exercise Vs Weight Graph( "+startDate+" - "+endDate+" )";
+                    titles.name="Exercise Vs Weight Graph";
+                    titles.xaxis="Date Range";
+                    titles.suffix=$scope.unit;
+                    titles.yaxis= $scope.unit;
+                    $scope.drawExerciseMinutesandWeightGraph(exerciseMinutes,userWeightVal,historyDates,titles,divId);
+                });
+            }
+
              //All Ready Show the Graph
               // $scope.showGraph=1;
 
@@ -3744,7 +3791,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
         //for Nutrients intake graph
 
         $scope.drawNutrientsGraph=function(dataP,titles,dataFr,dataFa,dataC,dataAf,dataAp,dataAfa,dataAC,dataD,divId){
-            console.log(dataP);
+            console.log(dataC);
             $scope.loaded=false;
             $('#'+divId).highcharts({
                 chart: {
@@ -3905,7 +3952,6 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
                 ]
             });
         };
-
 
         //for sleep history graph
         $scope.drawSleepHistoryGraph=function(data,dataD,titles,divId){
@@ -4213,6 +4259,173 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
                 }]
             });
         };
+    //to draw user weight vs food intake graph
+    $scope.drawFoodIntakeandWeightGraph=function(dataC,dataW,dataD,titles,divId){
+
+        $scope.loaded=false;
+        $('#'+divId).highcharts({
+            title: {
+                text: titles.title
+            },
+            xAxis: [{title: {
+                text: titles.xaxis
+            },categories: dataD
+                // crosshair: true
+            }],tooltip:{
+                enabled:true,
+                backgroundColor:'rgba(255, 255, 255, 1)',
+                borderWidth:1,
+                shadow:true,
+                style:{fontSize:'10px',padding:5,zIndex:500},
+                formatter:false,
+                valueSuffix: titles.suffix
+            },
+            yAxis: [{ // Primary yAxis
+                labels: {
+                    format: '{value} '+  ' '+ titles.yaxis,
+                    style: {
+                        color: '#f8ba01'
+                    }
+                },
+                title: {
+                    text: 'Weight',
+                    style: {
+                        color: '#f8ba01'
+                    }
+                }
+            }, { // Secondary yAxis
+                title: {
+                    text: 'Food Intake',
+                    style: {
+                        color: 'limegreen'
+                    }
+                },
+                labels: {
+                    format: '{value} cal',
+                    style: {
+                        color: 'limegreen'
+                    }
+                },
+                opposite: true
+            }],
+            exporting: {
+                enabled: false
+            },
+            credits: {
+                enabled: false
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'center',
+                verticalAlign: 'bottom',
+                floating: false
+            },
+            series: [{
+                name: 'Weight',
+                type: 'line',
+                yAxis: 1,
+                data: dataW,
+                tooltip: {
+                    valueSuffix: ' ' +titles.suffix
+                },
+                color:'#f8ba01'
+
+            }, {
+                name: 'Food Intake',
+                type: 'spline',
+                data:dataC ,
+                tooltip: {
+                    valueSuffix: ' cal'
+                },
+                color:'limegreen'
+            }]
+        });
+
+    };
+    //to draw user weight vs exercise graph
+    $scope.drawExerciseMinutesandWeightGraph=function(dataM,dataW,dataD,titles,divId){
+        $scope.loaded=false;
+        $('#'+divId).highcharts({
+            title: {
+                text: titles.title
+            },
+            xAxis: [{ title: {
+                text: titles.xaxis
+            },
+                categories: dataD
+                //crosshair: true
+            }],tooltip:{
+                enabled:true,
+                backgroundColor:'rgba(255, 255, 255, 1)',
+                borderWidth:1,
+                shadow:true,
+                style:{fontSize:'10px',padding:5,zIndex:500},
+                formatter:false,
+                valueSuffix: titles.suffix
+            },
+            yAxis: [{ // Primary yAxis
+                labels: {
+                    format: '{value}' +  ' '+titles.yaxis,
+                    style: {
+                        color: '#f8ba01'
+                    }
+                },
+                title: {
+                    text: 'Weight',
+                    style: {
+                        color: '#f8ba01'
+                    }
+                }
+            }, { // Secondary yAxis
+                title: {
+                    text: 'Exercise',
+                    style: {
+                        color: 'blue'
+                    }
+                },
+                labels: {
+                    format: '{value} min',
+                    style: {
+                        color: 'blue'
+                    }
+                },
+                opposite: true
+            }],
+            exporting: {
+                enabled: false
+            },
+            credits: {
+                enabled: false
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'center',
+                verticalAlign: 'bottom',
+                floating: false
+            },
+            series: [{
+                name: 'Weight',
+                type: 'line',
+                yAxis: 1,
+                data: dataW,
+                tooltip: {
+                    valueSuffix:' '+ titles.suffix
+                },
+                color:'#f8ba01'
+
+            }, {
+                name: 'Exercise Minutes',
+                type: 'spline',
+                data:dataM ,
+                tooltip: {
+                    valueSuffix: ' min'
+                },
+                color:'blue'
+            }]
+        });
+
+    };
+
 
 //HistoryGraph Search Filter
 
