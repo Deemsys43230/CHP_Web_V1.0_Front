@@ -169,7 +169,13 @@ userApp.controller('UserDoctorAppointment',['$scope','requestHandler','Flash',fu
             $scope.userAppointments.logid="";
         }
         $scope.userAppointments.datetime=  $scope.selectedDate+' '+$scope.selectedHours+':'+$scope.selectedMinutes+':'+'00';
-
+        if ($scope.userAppointments.clinicname=="") {
+            $scope.userAppointments.clinicname=null;
+        }
+        else{
+            $scope.userAppointments.clinicname=$scope.userAppointments.clinicname;
+        }
+        console.log($scope.userAppointments);
         requestHandler.postRequest("user/insertorupdatedoctorappointment/",$scope.userAppointments).then(function(response){
             $scope.userBookDoctorAppointment();
             $(".common_model").hide();
