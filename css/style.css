@@ -18214,33 +18214,40 @@ select.event:focus {
 @supports (-webkit-appearance:none) {
     .error-bottom {
         bottom: 30px !important;
+        z-index:30;
     }
     .error-bottom-invalid{
         bottom: 30px !important;
+        z-index:30;
     }
 }
 
 /*for firefox*/
 @-moz-document url-prefix() {
     .error-bottom {
-        bottom: 0 !important;
+        bottom: 45px !important;
+        z-index:30;
     }
     .error-bottom-invalid{
         bottom: 30px !important;
+        z-index:30;
     }
 }
 /*for IE*/
 @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
     .error-bottom {
-        bottom: 5px !important;
+        bottom: 45px !important;
+        z-index:30;
     }
     .error-bottom-invalid{
-        bottom: 5px !important;
+        bottom: 45px !important;
+        z-index:30;
     }
 }
 /*dropdown error message*/
 .error-bottom-dropdown {
     bottom: 0 !important;
+    z-index:30;
 }
 /*select option value with wrapping css*/
 .select2.narrow {

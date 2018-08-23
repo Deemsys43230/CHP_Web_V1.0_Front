@@ -11,11 +11,11 @@ userApp.controller('DemographyController',['$rootScope','$scope','requestHandler
             //Copy Original
           // $scope.demography.height=$scope.demography.height.toString();
             $scope.demography.weight=$scope.demography.weight;
-            $scope.demography.hip=$scope.demography.hip.toString();
-            $scope.demography.waist=$scope.demography.waist.toString();
-            $scope.demography.userPlanType = $scope.demography.userPlanType.toString();
+            $scope.demography.hip=$scope.demography.hip;
+            $scope.demography.waist=$scope.demography.waist;
+            $scope.demography.userPlanType =($scope.demography.userPlanType).toString();
             $scope.userPlanTypeOld=$scope.demography.userPlanType;
-            $scope.demography.userActivityType = $scope.demography.userActivityType.toString();
+            $scope.demography.userActivityType =($scope.demography.userActivityType).toString();
 
 
             if($scope.userProfile.unitPreference==2){
