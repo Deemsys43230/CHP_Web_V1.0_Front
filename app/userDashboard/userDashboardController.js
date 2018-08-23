@@ -4314,12 +4314,13 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
             credits: {
                 enabled: false
             },
-            legend: {
-                layout: 'vertical',
-                align: 'center',
-                verticalAlign: 'bottom',
-                floating: false
-            },
+            legend:{enabled:false},
+            // legend: {
+            //     layout: 'vertical',
+            //     align: 'center',
+            //     verticalAlign: 'bottom',
+            //     floating: false
+            // },
             series: [{
                 name: 'Weight',
                 type: 'line',
@@ -4397,12 +4398,13 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
             credits: {
                 enabled: false
             },
-            legend: {
-                layout: 'vertical',
-                align: 'center',
-                verticalAlign: 'bottom',
-                floating: false
-            },
+            legend:{enabled:false},
+            // legend: {
+            //     layout: 'vertical',
+            //     align: 'center',
+            //     verticalAlign: 'bottom',
+            //     floating: false
+            // },
             series: [{
                 name: 'Weight',
                 type: 'line',
