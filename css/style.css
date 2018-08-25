@@ -18722,3 +18722,58 @@ a.resend_back:hover {
     color: #fff;
     border-radius: 5px;
 }
+/* menu Css */
+.circle-container {
+    position: relative;
+    width: 350px;
+    height: 550px;
+    padding: 2.8em;
+    margin: 18% 30% 0;
+}
+.circle-container a {
+    display: block;
+    position: absolute;
+    top: 10%; left: 50%;
+    width: 4em; height: 4em;
+    margin: -2em;
+}
+.circle-container .circle-menu {
+    width:180px;
+    height:180px;
+    border-radius:250px;
+
+    font-size:20px;
+    color:#fff;
+    line-height:75px;
+    text-align:center;
+    background:#f8ba01;
+    padding-top: 15px;
+}
+.deg0 { transform: translate(20em); } /* 12em = half the width of the wrapper */
+.deg45 { transform: rotate(60deg) translate(20em) rotate(-60deg); }
+.deg135 { transform: rotate(120deg) translate(20em) rotate(-120deg); }
+.deg180 { transform: translate(-20em); }
+.deg225 { transform: rotate(240deg) translate(20em) rotate(-240deg); }
+.deg315 { transform: rotate(300deg) translate(20em) rotate(-300deg); }
+.dashboard-menu-img{
+    width: 75px;
+    height: 75px;
+    margin-top: -30px;
+}
+.navbar-menu-right {
+    right: -50px !important;
+}
+a.back-menu {
+    padding: 5px 10px;
+    color: #666 !important;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    background-color: #ddd;
+    margin-bottom: 6px;
+}
+.menu-button{
+    padding: 19px 0 !important;
+    margin-right: -15px;
+    margin-top: 5px;
+}

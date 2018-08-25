@@ -1,7 +1,7 @@
 var userApp = angular.module('userApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','angularUtils.directives.dirPagination','angular-nicescroll','500tech.simple-calendar','angular.filter']);
 
-userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$location','$q','$routeParams','$route',function($scope,requestHandler,Flash,$location,$q,$routeParams,$route) {
-
+userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$location','$q','$routeParams','$route','$rootScope',function($scope,requestHandler,Flash,$location,$q,$routeParams,$route,$rootScope) {
+    $rootScope.isMenuShow=1;
     $scope.activeClass.coach='active';
     $scope.coachreview = {ratinglevel:1};
     $scope.averageRate=0.1;

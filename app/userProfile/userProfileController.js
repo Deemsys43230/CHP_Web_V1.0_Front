@@ -4,7 +4,7 @@
 var userApp= angular.module('userApp', ['ngRoute','oc.lazyLoad','ngCookies','requestModule','flash','ngAnimate','ui.bootstrap']);
 
 userApp.controller('UserProfileController',['$scope','requestHandler','Flash','$location','$timeout','$rootScope',function($scope,requestHandler,Flash,$location,$timeout,$rootScope) {
-
+    $rootScope.isMenuShow=1;
     $scope.doGetProfile=function(){
 
         requestHandler.getRequest("getUserId/","").then(function(response){

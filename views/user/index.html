@@ -69,14 +69,14 @@
         <div class="dot2"></div>
     </div>
 </div>
-
+<div ng-controller="UserInitialController">
 <!-- Container -->
-<div id="container" class="boxed-page" ng-controller="UserInitialController">
+<div id="container" class="boxed-page">
+
 
 <!-- Start Header -->
-<div class="hidden-header"></div>
+<div class="hidden-header" ></div>
 <header class="clearfix">
-
     <!-- Start Top Bar -->
     <div class="top-bar">
         <div class="container">
@@ -112,7 +112,7 @@
                         <li class="navbar-user">
                             <ul class="nav navbar-nav dropdownmenu">
                                 <li>
-                                    <a href="#" onclick="return false;">{{username}}&nbsp;<span class="fa fa-caret-down"></span> </a>
+                                    <a href="#"  id="dropdown" onclick="return false;">{{username}}&nbsp;<span class="fa fa-caret-down"></span> </a>
                                     <ul class="dropdown remove-style">
                                         <li><a href="#profile">Profile</a></li>
                                         <li><a href="#demography">Demography</a></li>
@@ -147,9 +147,26 @@
     </div><!-- .top-bar -->
     <!-- End Top Bar -->
 
+    <!-- Start  Logo for dashboard menu -->
+    <div class="navbar navbar-default navbar-top" ng-show="isMenuShow==2" style="min-height: 75px !important;">
+        <div class="container">
+            <div class="navbar-header col-md-12 text-center">
+                <!-- Stat Toggle Nav Link For Mobiles -->
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <i class="fa fa-bars"></i>
+                </button>
+                <!-- End Toggle Nav Link For Mobiles -->
+                <a class="navbar-brand text-center" href="#dashboard" style="float: none !important;">
+                    <img class="hidden-xs margin-top-5" width="209" height="57" alt="" src="../../images/cyber-logo.png">
+                    <img class="hidden-md hidden-lg hidden-sm margin-top-5" width="180" height="49" alt="" src="../../images/cyber-logo-small.png">
+                </a>
+            </div>
+        </div>
+    </div>
+
 
     <!-- Start  Logo & Naviagtion  -->
-    <div class="navbar navbar-default navbar-top">
+    <div class="navbar navbar-default navbar-top" ng-hide="isMenuShow==2">
         <div class="container">
             <div class="navbar-header">
                 <!-- Stat Toggle Nav Link For Mobiles -->
@@ -164,7 +181,7 @@
             </div>
             <div class="navbar-collapse collapse">
                 <!-- Start Navigation List -->
-                <ul class="nav navbar-nav navbar-right active-class">
+                <ul class="nav navbar-nav navbar-menu-right active-class">
                     <li>
                         <a class="{{activeClass.dashboard}}" href="#dashboard">Dashboard</a>
                     </li>
@@ -195,16 +212,20 @@
                     <li>
                         <a class="{{activeClass.contact}}" href="#contact">Contact Us</a>
                     </li>
+
                 </ul>
                 <!-- End Navigation List -->
+                <div class="pull-right menu-button" title="Back to Menu">
+                    <a class="back-menu" href="#menu"><i class="fa fa-arrow-circle-o-left"></i>&nbsp;Back</a>
+                </div>
             </div>
+
         </div>
     </div>
     <!-- End Header Logo & Naviagtion -->
 
 </header>
 <!-- End Header -->
-
 <div class="default-banner">
     <div ng-view autoscroll="true"></div>
 </div>
@@ -397,6 +418,8 @@
 
 </div>
 
+
+
 <div id="review-modal" class="popupContainer" style="display:none;left: 37%!important;">
     <header class="popupHeader">
         <span class="header_title">Alert</span>
@@ -563,6 +586,16 @@
     $(".modal_trigger").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
 
 </script>
+    <script type="text/javascript">
+        //to clicking username dropdown appears
+        $(document).ready(function () {
+            $('#dropdown').click(function(e) {
+                $('.nav li').addClass('drop');
+                $(this).siblings().addClass('active');
+            });
+
+        });
+    </script>
 
 </body>
 </html>

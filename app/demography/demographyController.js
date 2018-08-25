@@ -1,5 +1,6 @@
 var userApp= angular.module('userApp', ['ngRoute','oc.lazyLoad','ngCookies','requestModule','flash']);
 userApp.controller('DemographyController',['$rootScope','$scope','requestHandler','Flash','$location','$timeout',function($rootScope,$scope,requestHandler,Flash,$location,$timeout) {
+    $rootScope.isMenuShow=1;
     var originalDemography="";
     var originalNutrition="";
     $scope.doGetDemographyandNutrition = function () {

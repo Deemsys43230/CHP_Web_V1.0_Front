@@ -799,7 +799,7 @@ $scope.doGetUserId=function(){
                             if (response.data.User_Profile.isProfileUpdated == 0) {
                                 $window.location.href = requestHandler.domainURL() + "views/user/#/profile";
                             } else {
-                                $window.location.href = requestHandler.domainURL() + "views/user/#/dashboard";
+                                $window.location.href = requestHandler.domainURL() + "views/user/#/menu";
                                 response.data.User_Profile.name=$scope.username;
                             }
                         }

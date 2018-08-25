@@ -1,6 +1,7 @@
 var userApp= angular.module('userApp', ['ngRoute','oc.lazyLoad','ngCookies','requestModule','flash','ngAnimate','ngTouch','ngPercentDisplay','userDashboardServiceModule','angular-svg-round-progress','ui.bootstrap','angular-nicescroll']);
 
 userApp.controller('UserDashboardController',['$scope','$window','requestHandler','Flash','UserDashboardService','$interval','roundProgressService','limitToFilter','$timeout','$compile','$location','$rootScope','$route',function($scope,$window,requestHandler,Flash,UserDashboardService,$interval,roundProgressService,limitToFilter,$timeout,$compile,$location,$rootScope,$route) {
+        $rootScope.isMenuShow=1;
         $scope.foodSearchResult = [];
         $scope.userFood={};
         $scope.userFood.sessionid=1;
@@ -44,6 +45,17 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
         if($route.current.$$route.fromDevice){
             $("#appAndDevice").click();
         }
+
+
+    if($rootScope.isMenuClicked==3){
+        $("#appAndDevice").click();
+    };
+    if($rootScope.isMenuClicked==2){
+        $("#dailyupdate").click();
+        $("#energyspent").click();
+    };
+
+
 
         //Modal Popup to add user food
         $scope.doUserAddFood=function(){

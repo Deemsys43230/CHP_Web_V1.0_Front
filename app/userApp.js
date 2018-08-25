@@ -53,6 +53,7 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
             when('/dashboard', {
                 templateUrl: 'views/dashboard.html',
                 fromGoal:false,
+
                 resolve: {
                     loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({
@@ -74,6 +75,22 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         })}]},
                 controller:'UserDashboardController'
             }).
+
+        when('/menu', {
+            templateUrl: 'dashboardmenu/index.html',
+            resolve: {
+                loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name:'userApp',
+                        files:[
+                            '../../css/custom-inputs.css',
+                            '../../css/vertical_tab.css',
+                            '../../app/userKeyDetails/userKeyDetailsController.js'
+
+                        ]
+                    })}]},
+            controller:'UserKeyDetailsController'
+        }).
             when('/individualGoal', {
                 templateUrl: 'views/dashboard.html',
                 fromGoal:true,
@@ -847,14 +864,16 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                 },
                 controller:'PrivacyPolicyCommonController'
             }).
+
             otherwise({
-                redirectTo: '/dashboard'
+                redirectTo: '/menu'
             });
 }]);
 
 //Initial Controller for Username
 userApp.controller("UserInitialController",['$scope','requestHandler','$location','Flash','FeedbackService','$timeout','$rootScope',function($scope,requestHandler,$location,Flash,FeedbackService,$timeout,$rootScope){
     $scope.hideValue=1;
+
 
     requestHandler.getRequest("getUserId/","").then(function(response){
         $scope.username=response.data.User_Profile.name;

@@ -45,7 +45,7 @@
             <ul id="sidemenu">
 
                 <li class="daily_update" ng-click="otherThanHistory()">
-                    <a href="#daily_update" class="open menu-items"><i class="fa fa-child fa-4x hidden-md"></i><span>Daily Updates</span>
+                    <a href="#daily_update" id="dailyupdate" class="open menu-items"><i class="fa fa-child fa-4x hidden-md"></i><span>Daily Updates</span>
                         <p class="hidden-md hidden-sm">Enter your Daily Updates</p>
                     </a>
                 </li>
@@ -113,7 +113,7 @@
                         <!-- Nav Tabs -->
                         <ul class="nav nav-tabs pull-left">
                             <li class="active" ng-click="showExercise=0"><a href="#tab-1" data-toggle="tab" onclick="return false;">Food Intake</a></li>
-                            <li ng-click="showExercise=1;doGetCategoryandTypeExercise();" ><a href="#tab-2" data-toggle="tab" onclick="return false;">Energy Spent</a></li>
+                            <li ng-click="showExercise=1;doGetCategoryandTypeExercise();" ><a href="#tab-2" data-toggle="tab" id="energyspent" onclick="return false;">Energy Spent</a></li>
                             <li><a href="#tab-3" data-toggle="tab" onclick="return false;">Log</a></li>
                             <li>
                         </ul>
