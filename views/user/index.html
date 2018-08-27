@@ -182,8 +182,11 @@
             <div class="navbar-collapse collapse">
                 <!-- Start Navigation List -->
                 <ul class="nav navbar-nav navbar-menu-right active-class">
-                    <li>
+                    <li ng-hide="isDiabetic==1">
                         <a class="{{activeClass.dashboard}}" href="#dashboard">Dashboard</a>
+                    </li>
+                    <li ng-show="isDiabetic==1">
+                        <a class="{{activeClass.dashboard}}" href="#dashboard">Diabetic Dashboard</a>
                     </li>
                     <li>
                         <a class="{{activeClass.myCourses}}" href="#my-courses">Courses</a>
@@ -200,8 +203,8 @@
                     <li>
                         <a class="{{activeClass.coach}}" href="#coach">Coach</a>
                     </li>
-                    <li>
-                        <a class="{{activeClass.doctorAppointment}}" href="#doctor-appointment">Doctor Appointment</a>
+                    <li ng-show="isDiabetic==1">
+                        <a class="{{activeClass.doctorAppointment}}" href="#doctor-appointment">Appointment</a>
                     </li>
                     <li>
                         <a class="{{activeClass.forums}}" href="#forums">Forums</a>

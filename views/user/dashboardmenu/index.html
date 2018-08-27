@@ -19,3 +19,83 @@
         </div>
     </div>
 </div>
+
+<!-- For Diabetic details for user -->
+<div id="diabetic-status" class="popupContainer width-28" style="display:none;left:37%!important;">
+    <header class="popupHeader" style="width: 100% !important;">
+        <span class="header_title">Diabetic Details</span>
+    </header>
+
+    <section class="popupBody">
+        <!-- Register Form -->
+        <div class="common_model">
+            Are you Diabetic Person?
+            <div class="col-lg-12 col-md-12 col-sm-12 margin-top-20 margin-bottom-20">
+                <div class="one_half">
+                    <input type="radio" id="diabetic" class="height" name="diabetic" value="1" ng-model="diabeticCheck.diabetic"/>
+                    <label class="width-28" for="diabetic">Yes</label>
+                </div>
+                <div class="one_half last modal_close">
+                    <input type="radio" id="notdiabetic" class="height one_half last modal_close" name="diabetic" value="0" ng-model="diabeticCheck.diabetic" ng-click="doDiabetesCheck()"/>
+                    <label class="width-28" for="notdiabetic">No</label>
+                </div>
+            </div>
+
+            <div ng-show="diabeticCheck.diabetic==1">
+                <form name="diabeticForm" novalidate>
+                    <div  class="col-lg-12 col-md-12 col-sm-12 margin-top-15 no-padding">
+                        <div class="col-lg-8 col-md-7 col-sm-7 no-padding margin-top-5">
+                            <h5>HbA<sub>1c</sub> <small>(%)</small> <span class="pull-right">:</span></h5>
+                        </div>
+                        <div class="col-lg-4 col-md-5 col-sm-5 padding-right-0">
+                            <input class="demography_input" name="HbA1c"  ng-model="diabeticCheck.HbA1c" ng-change="maxHbaValueCheck()" onkeypress="return validateFloatKeyPress(this,event);" validate-zero/>
+                            <span class="error-message textarea-errormessage40" ng-show="!diabeticForm.HbA1c.$error.required&&maxHbaValue"><span class="error-bottom-invalid">Please&nbsp;Enter&nbsp;Valid&nbsp;Value.</span></span>
+                                <span ng-show="diabeticForm.HbA1c.$dirty&&diabeticForm.HbA1c.$invalid">
+                                    <span class="error-message textarea-errormessage40" ng-show="diabeticForm.HbA1c.$error.pattern"><span class="error-bottom-invalid">Invalid&nbsp;Format.</span></span>
+                                    <span class="error-message textarea-errormessage40" ng-show="diabeticForm.HbA1c.$error.validateZero"><span class="error-bottom-invalid">Invalid</span></span>
+                                </span>
+                        </div>
+                    </div>
+                    <div  class="col-lg-12 col-md-12 col-sm-12 margin-top-15 no-padding">
+                        <div class="col-lg-8 col-md-7 col-sm-7 no-padding margin-top-5">
+                            <h5>Fasting Blood Glucose <small>(mg/dL)</small> <span class="pull-right">:</span></h5>
+                        </div>
+                        <div class="col-lg-4 col-md-5 col-sm-5 padding-right-0">
+                            <input class="demography_input" name="fastingbloodglucose" maxlength="3" ng-model="diabeticCheck.fastingbloodglucose" validate-zero/>
+                            <span ng-show="diabeticForm.fastingbloodglucose.$dirty&&diabeticForm.fastingbloodglucose.$invalid">
+                                <span class="error-message textarea-errormessage40" ng-show="diabeticForm.fastingbloodglucose.$error.validateOnlyNumbers"><span class="error-bottom-invalid">Invalid&nbsp;Format.</span></span>
+                                <span class="error-message textarea-errormessage40" ng-show="diabeticForm.fastingbloodglucose.$error.validateZero"><span class="error-bottom-invalid">Invalid</span></span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 margin-top-15 no-padding">
+                        <div class="col-lg-8 col-md-7 col-sm-7 no-padding margin-top-5">
+                            <h5>Postprandial Blood Glucose <small>(mg/dL)</small> <span class="pull-right">:</span><span class="pull-right"></h5>
+                        </div>
+                        <div class="col-lg-4 col-md-5 col-sm-5 padding-right-0">
+                            <input class="demography_input" name="postprandialbloodglucose" maxlength="3" ng-model="diabeticCheck.postprandialbloodglucose" validate-zero/>
+                                <span ng-show="diabeticForm.postprandialbloodglucose.$dirty&&diabeticForm.postprandialbloodglucose.$invalid">
+                                    <span class="error-message textarea-errormessage40" ng-show="diabeticForm.postprandialbloodglucose.$error.validateOnlyNumbers"><span class="error-bottom-invalid">Invalid&nbsp;Format.</span></span>
+                                    <span class="error-message textarea-errormessage40" ng-show="diabeticForm.postprandialbloodglucose.$error.validateZero"><span class="error-bottom-invalid">Invalid</span></span>
+                                </span>
+                        </div>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 margin-top-15 no-padding margin-bottom-20">
+                        <div class="col-lg-8 col-md-7 col-sm-7 no-padding margin-top-5">
+                            <h5>Random Blood Glucose <small>(mg/dL)</small> <span class="pull-right">:</span><span class="pull-right"></h5>
+                        </div>
+                        <div class="col-lg-4 col-md-5 col-sm-5 padding-right-0">
+                            <input class="demography_input" name="randombloodglucose" maxlength="3" ng-model="diabeticCheck.randombloodglucose" validate-zero/>
+                                <span ng-show="diabeticForm.randombloodglucose.$dirty&&diabeticForm.randombloodglucose.$invalid">
+                                    <span class="error-message textarea-errormessage40" ng-show="diabeticForm.randombloodglucose.$error.validateOnlyNumbers"><span class="error-bottom-invalid">Invalid&nbsp;Format.</span></span>
+                                    <span class="error-message textarea-errormessage40" ng-show="diabeticForm.randombloodglucose.$error.validateZero"><span class="error-bottom-invalid">Invalid</span></span>
+                                </span>
+                        </div>
+                    </div>
+                    <div class="text-center margin-top-20">
+                        <a ng-class="{modal_close:diabeticForm.$invalid}" class="btn register_button" ng-disabled="diabeticForm.$invalid || maxHbaValue" ng-click="doDiabetesCheck()">Save</a>
+                    </div>
+                </form>
+            </div>
+    </section>
+</div>

@@ -85,6 +85,7 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         files:[
                             '../../css/custom-inputs.css',
                             '../../css/vertical_tab.css',
+                            '../../plugin/popup/style.css',
                             '../../app/userKeyDetails/userKeyDetailsController.js'
 
                         ]
@@ -929,6 +930,15 @@ userApp.controller("UserInitialController",['$scope','requestHandler','$location
         });
     };
 
+    requestHandler.getRequest("user/keydetails/", "").then(function (response) {
+        $scope.userKeyDetails=response.data;
+        if($scope.userKeyDetails.diabeticstatus==1) {
+            $rootScope.isDiabetic=1;
+        }
+        else {
+            $('.navbar-collapse ul').addClass('navbar-menu-right1');
+        }
+    });
 
 
   $scope.$watch('checkPath', function() {
