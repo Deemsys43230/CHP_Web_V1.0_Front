@@ -1,6 +1,5 @@
 angular.module("commonApp", []);
 var commonApp= angular.module('commonApp', ['ngRoute','oc.lazyLoad','ngCookies','requestModule','flash','ngAnimate','feedbackServiceModule','angularUtils.directives.dirPagination']);
-
 commonApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
 
     function($routeProvider,$ocLazyLoadProvider,$httpProvider) {
@@ -1244,6 +1243,71 @@ commonApp.directive('validateZero', function() {
         }
     };
 });
+
+//for restricting keypress event two digit after (dot)
+function validateFloatKeyPress1(el, evt) {
+    var charCode = (evt.which) ? evt.which : event.keyCode;
+    var number = el.value.split('.');
+    if (charCode != 46 && charCode > 31 && (charCode < 48 || charCode > 57)) {
+        return false;
+    }
+    //just one dot
+    if(number.length>1 && charCode == 46){
+        return false;
+    }
+    // for backspace issue in firefox
+    if(charCode== 8){
+        return true;
+    }
+    //get the carat position
+    var caratPos = getSelectionStart(el);
+    var dotPos = el.value.indexOf(".");
+    if( caratPos > dotPos && dotPos>-1 && (number[1].length > 1)){
+        return false;
+    }
+    return true;
+}
+function getSelectionStart(o) {
+    if (o.createTextRange) {
+        var r = document.selection.createRange().duplicate()
+        r.moveEnd('character', o.value.length)
+        if (r.text == '') return o.value.length
+        return o.value.lastIndexOf(r.text)
+    } else return o.selectionStart
+}
+
+
+//for restricting keypress event one digit after (dot)
+function validateFloatKeyPress(el, evt) {
+    var charCode = (evt.which) ? evt.which : event.keyCode;
+    var number = el.value.split('.');
+    if (charCode != 46 && charCode > 31 && (charCode < 48 || charCode > 57)) {
+        return false;
+    }
+    //just one dot
+    if(number.length>1 && charCode == 46){
+        return false;
+    }
+    // for backspace issue in firefox
+    if(charCode== 8){
+        return true;
+    }
+    //get the carat position
+    var caratPos = getSelectionStart(el);
+    var dotPos = el.value.indexOf(".");
+    if( caratPos > dotPos && dotPos>-1 && (number[1].length > 0)){
+        return false;
+    }
+    return true;
+}
+function getSelectionStart(o) {
+    if (o.createTextRange) {
+        var r = document.selection.createRange().duplicate()
+        r.moveEnd('character', o.value.length)
+        if (r.text == '') return o.value.length
+        return o.value.lastIndexOf(r.text)
+    } else return o.selectionStart
+}
 /*
 commonApp.directive('bDatepicker', function () {
     return {

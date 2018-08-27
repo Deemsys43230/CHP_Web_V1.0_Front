@@ -3,8 +3,8 @@
  */
 var userApp= angular.module('userApp', ['ngRoute','oc.lazyLoad','ngCookies','requestModule','flash','ngAnimate','angularUtils.directives.dirPagination','angular-nicescroll']);
 
-userApp.controller('GoalController',['$scope','requestHandler','Flash','$route','$routeParams','$location',function($scope,requestHandler,Flash,$route,$routeParams,$location) {
-
+userApp.controller('GoalController',['$scope','requestHandler','Flash','$route','$routeParams','$location','$rootScope',function($scope,requestHandler,Flash,$route,$routeParams,$location,$rootScope) {
+    $rootScope.isMenuShow=1;
     $scope.activeClass.groupGoal='active';
 
     $scope.doGetMyGoalList=function(){
@@ -27,7 +27,7 @@ userApp.controller('GoalController',['$scope','requestHandler','Flash','$route',
 
     $scope.doGetViewGoal=function(){
         $scope.isRequest=$route.current.request;
-        console.log("asd",$route.current.request);
+        console.log("$route.current.request");
         requestHandler.postRequest("user/getIndividualGoalDetail/",{"goalid" :$routeParams.id}).then(function(response){
             $scope.goalDetail=response.data.Goal_Data;
             //To find the admin of the goal

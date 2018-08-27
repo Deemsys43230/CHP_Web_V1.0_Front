@@ -131,7 +131,7 @@
                     </div>
                     <div ng-show="units==1">
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input class="calculator-input" ng-model="defaultRegistrationData.height"  name="height"  ng-required="units==1"  ng-change="maxHeightCheck()"  onkeypress="return validateFloatKeyPress1(this,event);" maxlength="5" >
+                            <input class="calculator-input" ng-model="defaultRegistrationData.height"  name="height"  ng-required="units==1"  ng-change="maxHeightCheck()"  onkeypress="return validateFloatKeyPress(this,event);" maxlength="5" >
                             <div class="text-count-position"><span class="text-unit lbs">cm</span></div>
                             <span ng-show="userPlanSubmitted">
                                 <span class="error-message" ng-show="!basicDetailsForm.height.$error.required&&maxheight"><span>Height&nbsp;should&nbsp;not&nbsp;exceed&nbsp;393.7</span></span>
@@ -144,7 +144,7 @@
                     <div class="col-md-4 col-sm-4 col-xs-12 margin-top-10 text-align-right">Weight:</div>
                     <div class="col-md-6 col-sm-6 col-xs-12">
                         <span ng-show="units==1">
-                           <input class="calculator-input"  ng-model="defaultRegistrationData.weight" name="weight" ng-required="units==1"   validate-zero  ng-change="maxWeightCheckKgs()" onkeypress="return validateFloatKeyPress1(this,event);" maxlength="5">
+                           <input class="calculator-input"  ng-model="defaultRegistrationData.weight" name="weight" ng-required="units==1"   validate-zero  ng-change="maxWeightCheckKgs()" onkeypress="return validateFloatKeyPress(this,event);" maxlength="5">
                         <div class="text-count-position"><span class="text-unit lbs">kgs</span></div>
                             <span ng-show="userPlanSubmitted">
                              <span class="error-message" ng-show="!basicDetailsForm.weight.$error.required&&maxweightkgs"><span>Please&nbsp;Enter&nbsp;Valid&nbsp;Weight.</span></span>
@@ -153,7 +153,7 @@
                         </span>
                         </span>
                         <span ng-show="units==2">
-                             <input class="calculator-input"  ng-model="defaultRegistrationData.weightlbs" name="weightlbs" validate-zero ng-required="units==2"  ng-change="maxWeightCheckLbs()" onkeypress="return validateFloatKeyPress1(this,event);">
+                             <input class="calculator-input"  ng-model="defaultRegistrationData.weightlbs" name="weightlbs" validate-zero ng-required="units==2"  ng-change="maxWeightCheckLbs()" onkeypress="return validateFloatKeyPress(this,event);">
                         <div class="text-count-position"><span class="text-unit lbs">lbs</span></div>
                             <span ng-show="userPlanSubmitted">
                             <span class="error-message" ng-show="!basicDetailsForm.weightlbs.$error.required&&maxweightlbs"><span>Please&nbsp;Enter&nbsp;Valid&nbsp;Weight.</span></span>
@@ -170,7 +170,7 @@
                     <div class="col-md-4 col-sm-4 col-xs-12 margin-top-10 text-align-right" ng-show="planType==3">How Many&nbsp;<span ng-show="units==1">kgs</span><span ng-show="units==2">lbs</span>&nbsp;You Want to Increase?:</div>
                 <div class="col-md-6 col-sm-6 col-xs-12">
                     <span ng-show="units==1">
-                        <input class="calculator-input" ng-model="defaultRegistrationData.targetweightkgs" name="targetweightkgs" validate-zero ng-change="targetWeightValidation()" ng-required="planType!=1&&units==1" onkeypress="return validateFloatKeyPress1(this,event);">
+                        <input class="calculator-input" ng-model="defaultRegistrationData.targetweightkgs" name="targetweightkgs" validate-zero ng-change="targetWeightValidation()" ng-required="planType!=1&&units==1" onkeypress="return validateFloatKeyPress(this,event);">
                     <span ng-show="userPlanSubmitted">
                          <span class="error-message" ng-show="!basicDetailsForm.targetweightkgs.$error.required&&weightlossError"><span>Should&nbsp;be&nbsp;less&nbsp;than&nbsp;your&nbsp;weight</span></span>
                          <span class="error-message" ng-show="basicDetailsForm.targetweightkgs.$error.required"><span>Required.</span></span>
@@ -178,7 +178,7 @@
                     </span>
                     </span>
                     <span  ng-show="units==2">
-                        <input class="calculator-input" ng-model="defaultRegistrationData.targetweightlbs" name="targetweightlbs" validate-zero ng-change="targetWeightValidation()" ng-required="planType!=1&&units==2" onkeypress="return validateFloatKeyPress1(this,event);">
+                        <input class="calculator-input" ng-model="defaultRegistrationData.targetweightlbs" name="targetweightlbs" validate-zero ng-change="targetWeightValidation()" ng-required="planType!=1&&units==2" onkeypress="return validateFloatKeyPress(this,event);">
                     <span ng-show="userPlanSubmitted">
                          <span class="error-message" ng-show="!basicDetailsForm.targetweightlbs.$error.required&&weightlossError"><span>Should&nbsp;be&nbsp;less&nbsp;than&nbsp;your&nbsp;weight</span></span>
                          <span class="error-message" ng-show="basicDetailsForm.targetweightlbs.$error.required"><span>Required.</span></span>

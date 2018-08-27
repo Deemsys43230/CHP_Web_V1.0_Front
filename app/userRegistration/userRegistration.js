@@ -389,20 +389,21 @@ commonApp.controller('UserRegistrationController',['$scope','requestHandler','Fl
         var inches = Math.round((realFeet - feet) * 12);
         $scope.defaultRegistrationData.heightInches=inches;
         //convert weight kgs to lbs
-        $scope.defaultRegistrationData.weightlbs=  ($scope.defaultRegistrationData.weight*2.2046).toFixed(2);
+        $scope.defaultRegistrationData.weightlbs=($scope.defaultRegistrationData.weight*2.2046).toFixed(1);
         if($scope.defaultRegistrationData.targetweightkgs!='' && $scope.defaultRegistrationData.targetweightkgs!=undefined ){
-            $scope.defaultRegistrationData.targetweightlbs=Math.ceil($scope.defaultRegistrationData.targetweightkgs*2.2046).toFixed(2);
+            $scope.defaultRegistrationData.targetweightlbs=($scope.defaultRegistrationData.targetweightkgs*2.2046).toFixed(1);
         }
     };
    //convert weight kg to lbs
     $scope.weightLbsToKgConversion=function(){
    
         if($scope.defaultRegistrationData.heightFeet!=undefined&&$scope.defaultRegistrationData.heightInches!=undefined){
-            $scope.defaultRegistrationData.height=Math.ceil(($scope.defaultRegistrationData.heightFeet*30.48)+($scope.defaultRegistrationData.heightInches*2.54));
+            var originalValue=(parseInt($scope.defaultRegistrationData.heightFeet*12)+parseInt($scope.defaultRegistrationData.heightInches));
+            $scope.defaultRegistrationData.height=(originalValue*2.54).toFixed(1);
         }
-        $scope.defaultRegistrationData.weight=  Math.ceil($scope.defaultRegistrationData.weightlbs/2.2046);
+        $scope.defaultRegistrationData.weight=($scope.defaultRegistrationData.weightlbs/2.2046).toFixed(1);
         if($scope.defaultRegistrationData.targetweightlbs!='' && $scope.defaultRegistrationData.targetweightlbs!=undefined ){
-            $scope.defaultRegistrationData.targetweightkgs= ($scope.defaultRegistrationData.targetweightlbs/2.2046).toFixed(2);
+            $scope.defaultRegistrationData.targetweightkgs= ($scope.defaultRegistrationData.targetweightlbs/2.2046).toFixed(1);
         }
     };
 

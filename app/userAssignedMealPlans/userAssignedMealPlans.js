@@ -1,7 +1,6 @@
 var userApp = angular.module('userApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','ngPercentDisplay','angular-svg-round-progress','angularUtils.directives.dirPagination','ui.bootstrap']);
 
 userApp.controller('UserAssignedMealPlansController',['$scope','requestHandler','Flash',function($scope,requestHandler,Flash) {
-
     $scope.activeClass.mealPlans = 'active';
     $scope.mealPagination={"itemsPerPage":5,"pageNumber":1};
     //Food Meal Plan
@@ -72,6 +71,65 @@ userApp.controller('UserAssignedMealPlansController',['$scope','requestHandler',
             errorMessage(Flash,"Please try again later!")
         });
     };
+    // Set or Unset Food Consumed By User
+    $scope.doSetUnsetFoodItemConsumed= function(foodplanid,date){
+        $scope.getFoodItemConsumedParam={'id':foodplanid, 'date':date};
+        requestHandler.postRequest("user/setorunsetfoodplan/", $scope.getFoodItemConsumedParam).then(function(response){
+            if(response.data.Response_status==1){
+                $scope.doLoadMealPlanDetails($scope.currentPlanDetail);
+                $(function(){
+                    $(".common_model").hide();
+                    $("#view-meal-item").hide();
+                    $("#lean_overlay").hide();
+                });
+                successMessage(Flash,"Successfully Updated!");
+            }else if(response.data.Response_status==2){
+                $scope.doLoadMealPlanDetails($scope.currentPlanDetail);
+                $(function(){
+                    $(".common_model").hide();
+                    $("#view-meal-item").hide();
+                    $("#lean_overlay").hide();
+                });
+                errorMessage(Flash,"Food log for future date is not allowed.");
+            }
+        }, function(){
+            errorMessage(Flash,"Please try again later!");
+        });
+    }
+
+    $scope.doViewFoodItemFromMealPlan=function(foodplanid,date){
+        $(function(){
+            $("#lean_overlay").fadeTo(1000);
+            $("#view-meal-item").fadeIn(600);
+            $(".common_model").show();
+            $("html, body").animate({
+                scrollTop: 0
+            }, 600);
+            $scope.shouldBeOpen = true;
+        });
+
+        $scope.getFoodPlanItemParam={'id':foodplanid, 'date':date};
+        requestHandler.postRequest("user/getfooditemdetail/", $scope.getFoodPlanItemParam).then(function(response){
+            $scope.foodPlanItemDetails= response.data.plandetail;
+        }, function(){
+            errorMessage(Flash,"Please try again later!");
+        });
+
+        $(".modal_close").click(function(){
+            $(".common_model").hide();
+            $("#view-meal-item").hide();
+            $("#lean_overlay").hide();
+            $scope.shouldBeOpen = false;
+        });
+
+        $("#lean_overlay").click(function(){
+            $(".common_model").hide();
+            $("#view-meal-item").hide();
+            $("#lean_overlay").hide();
+            $scope.shouldBeOpen = false;
+        });
+
+    }
 
     $scope.init=function() {
         $scope.doGetAssignedMealPlans();
