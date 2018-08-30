@@ -113,17 +113,17 @@
                         <div class="col-md-3 col-sm-3 col-xs-6">
                             <input class="calculator-input" name="feet" maxlength="2" ng-model="defaultRegistrationData.heightFeet" ng-pattern="/^0*[1-9]\d*$/" ng-change="maxHeightCheckFeet()" ng-required="units==2">
                             <div class="text-count-position"><span class="text-unit">ft</span></div>
+                            <span class="error-message" ng-show="!basicDetailsForm.feet.$error.required&&maxHeightFeet"><span>Invalid&nbsp;Height</span></span>
                                 <span ng-show="userPlanSubmitted">
-                                    <span class="error-message" ng-show="!basicDetailsForm.feet.$error.required&&maxHeightFeet"><span>Invalid&nbsp;Height</span></span>
                                     <span  class="error-message" ng-show="basicDetailsForm.feet.$error.required"><span>Required.</span></span>
                                     <span class="error-message" ng-show="basicDetailsForm.feet.$error.pattern"><span>Invalid&nbsp;Format.</span></span>
                                 </span>
                         </div>
                         <div class="col-md-3 col-sm-3 col-xs-6">
-                            <input class="calculator-input" name="inches" maxlength="2"  ng-model="defaultRegistrationData.heightInches" ng-required="units==2"  ng-change="maxHeightCheckInches()"  onkeypress="return validateFloatKeyPress1(this,event);">
+                            <input class="calculator-input" name="inches" maxlength="2"  ng-model="defaultRegistrationData.heightInches" ng-required="units==2"  ng-change="maxHeightCheckInches();userManullayChanges();"  onkeypress="return validateFloatKeyPress1(this,event);">
                             <div class="text-count-position"><span class="text-unit">in</span></div>
+                            <span class="error-message" ng-show="!basicDetailsForm.inches.$error.required&&maxHeightInches"><span>Invalid&nbsp;Height</span></span>
                             <span ng-show="userPlanSubmitted">
-                                    <span class="error-message" ng-show="!basicDetailsForm.inches.$error.required&&maxHeightInches"><span>Invalid&nbsp;Height</span></span>
                                     <span class="error-message" ng-show="basicDetailsForm.inches.$error.required"><span>Required.</span></span>
                                     <span class="error-message" ng-show="basicDetailsForm.inches.$error.pattern"><span>Invalid&nbsp;Format.</span></span>
                             </span>
@@ -133,8 +133,8 @@
                         <div class="col-md-6 col-sm-6 col-xs-12">
                             <input class="calculator-input" ng-model="defaultRegistrationData.height"  name="height"  ng-required="units==1"  ng-change="maxHeightCheck()"  onkeypress="return validateFloatKeyPress(this,event);" maxlength="5" >
                             <div class="text-count-position"><span class="text-unit lbs">cm</span></div>
+                            <span class="error-message" ng-show="!basicDetailsForm.height.$error.required&&maxheight"><span>Height&nbsp;should&nbsp;not&nbsp;exceed&nbsp;393.7</span></span>
                             <span ng-show="userPlanSubmitted">
-                                <span class="error-message" ng-show="!basicDetailsForm.height.$error.required&&maxheight"><span>Height&nbsp;should&nbsp;not&nbsp;exceed&nbsp;393.7</span></span>
                                 <span class="error-message"  ng-show="basicDetailsForm.height.$error.required"><span>Required.</span></span>
                             </span>
                         </div>
@@ -146,8 +146,8 @@
                         <span ng-show="units==1">
                            <input class="calculator-input"  ng-model="defaultRegistrationData.weight" name="weight" ng-required="units==1"   validate-zero  ng-change="maxWeightCheckKgs()" onkeypress="return validateFloatKeyPress(this,event);" maxlength="5">
                         <div class="text-count-position"><span class="text-unit lbs">kgs</span></div>
-                            <span ng-show="userPlanSubmitted">
                              <span class="error-message" ng-show="!basicDetailsForm.weight.$error.required&&maxweightkgs"><span>Please&nbsp;Enter&nbsp;Valid&nbsp;Weight.</span></span>
+                            <span ng-show="userPlanSubmitted">
                             <span class="error-message" ng-show="basicDetailsForm.weight.$error.required"><span>Required.</span></span>
                                 <span class="error-message" ng-show="basicDetailsForm.weight.$error.validateZero"><span>Invalid&nbsp;Format.</span></span>
                         </span>
@@ -155,8 +155,8 @@
                         <span ng-show="units==2">
                              <input class="calculator-input"  ng-model="defaultRegistrationData.weightlbs" name="weightlbs" validate-zero ng-required="units==2"  ng-change="maxWeightCheckLbs()" onkeypress="return validateFloatKeyPress(this,event);">
                         <div class="text-count-position"><span class="text-unit lbs">lbs</span></div>
+                             <span class="error-message" ng-show="!basicDetailsForm.weightlbs.$error.required&&maxweightlbs"><span>Please&nbsp;Enter&nbsp;Valid&nbsp;Weight.</span></span>
                             <span ng-show="userPlanSubmitted">
-                            <span class="error-message" ng-show="!basicDetailsForm.weightlbs.$error.required&&maxweightlbs"><span>Please&nbsp;Enter&nbsp;Valid&nbsp;Weight.</span></span>
                             <span class="error-message" ng-show="basicDetailsForm.weightlbs.$error.required"><span>Required.</span></span>
                              <span class="error-message" ng-show="basicDetailsForm.weightlbs.$error.validateZero"><span>Invalid&nbsp;Format.</span></span>
 
@@ -190,7 +190,8 @@
 
                 <div class="col-md-12 col-sm-12 col-xs-12 margin-top-10"  ng-hide="planType==1 || planType==2">
                     <div class="col-md-4 col-sm-4 col-xs-12 text-align-right">
-                      Choose End Date :
+                      Choose End Date :<br/>
+                        (Optional)
                     </div>
                     <div class="col-md-6 col-sm-6 col-xs-12">
                     <div class="input-group">
@@ -370,7 +371,7 @@
 
                     <section class="popupBody">
                         <div class="common_model">
-                            Your Weigh Loss Plan Can be achieved Only on {{possibledate}}. Would You Like to Continue This Plan?
+                            Your Weigh {{alertText}} Plan Can be achieved Only on {{possibledate}}. Would You Like to Continue This Plan?
                             <div class="action_btns margin-top-20">
                                 <div class="one_third modal_close"><a href="" class="btn btn_blue" ng-click="doGetUserPlanOverView(true)">Yes, Use This Date</a></div><br/>
                                 <div class="one_third last modal_close"><a class="btn btn_blue" ng-click="changePlan()">No, Change Plan</a></div><br/>

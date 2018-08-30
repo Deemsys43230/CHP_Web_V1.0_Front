@@ -1,7 +1,8 @@
 var commonApp = angular.module('commonApp', ['ngRoute','oc.lazyLoad','requestModule','flash']);
 
 commonApp.controller('UserRegistrationController',['$scope','requestHandler','Flash','$location',function($scope,requestHandler,Flash,$location) {
-   
+
+    var actualnches=0.00;
     // to choose user plan
     $scope.customAlertChangePlan=false;
     $scope.planChoosen = function (plantype) {
@@ -15,12 +16,16 @@ commonApp.controller('UserRegistrationController',['$scope','requestHandler','Fl
             $scope.steps = 6;
         }
     };
-    
+
     //to change the plan
     $scope.changePlan = function () {
+        $scope.submitted=false;
         $("#lean_overlay").hide();
         $(".modal-backdrop").hide();
         $scope.changePlanSkipStep=false;
+        if($scope.steps==6 && $scope.planType==4){
+            $scope.changePlanSkipStep=true;
+        }
         $scope.customAlertChangePlan=false;
         $scope.steps = 0;
 
@@ -41,7 +46,7 @@ commonApp.controller('UserRegistrationController',['$scope','requestHandler','Fl
         $scope.steps = 6;
 
     };
-  ;
+    ;
     $scope.customPlanAlert = function () {
         $(function () {
             $("#lean_overlay").fadeTo(1000);
@@ -89,6 +94,9 @@ commonApp.controller('UserRegistrationController',['$scope','requestHandler','Fl
 
     //to calculate previous step
     $scope.previousStep=function(){
+        $scope.userPlanSubmitted=false;
+        $scope.submitted=false;
+        $scope.userActivitySubmitted=false;
         $scope.steps=$scope.steps-1;
     };
     $scope.doGetUserPlanOverView= function (possibiledate) {
@@ -108,9 +116,9 @@ commonApp.controller('UserRegistrationController',['$scope','requestHandler','Fl
         }else{
             if( $scope.userPlan.planchoice==5) {
                 $scope.userPlan.enddate =$scope.defaultRegistrationData.customEndDate;
-             }
+            }
         }
-        
+
         if($scope.userPlan.unit==2){
             $scope.userPlan.height=parseInt($scope.defaultRegistrationData.heightFeet)+'.'+($scope.defaultRegistrationData.heightInches) ;
             $scope.userPlan.weight=parseInt($scope.defaultRegistrationData.weightlbs);
@@ -149,6 +157,13 @@ commonApp.controller('UserRegistrationController',['$scope','requestHandler','Fl
                 else{
                     $scope.customPlanAlert();
                     $scope.userPlanDetails=$scope.userPlan;
+                    if($scope.userPlanDetails.plantype==3){
+                        $scope.alertText="Gain"
+                    }
+                    else if($scope.userPlanDetails.plantype==2){
+                        $scope.alertText="Lose"
+                    }
+
                     $scope.possibledate=response.data.possibledate;
                     $scope.userPlanDetails.enddate=$scope.possibledate;
                 }
@@ -166,32 +181,32 @@ commonApp.controller('UserRegistrationController',['$scope','requestHandler','Fl
         $scope.submitted=true;
         $scope.isEmailExits=false;
         if($scope.registerForm.$valid){
-        $scope.registerUser.referralid=$scope.defaultRegistrationData.referralid;
-        if($scope.planType==4 || $scope.customAlertChangePlan==true){
-            $scope.registerUser.role= $scope.defaultRegistrationData.role;
-            $scope.registerUser.plantype= 4;
-        }
-        else{
-            $scope.registerUser.height=$scope.userPlan.height;
-            $scope.registerUser.weight=$scope.userPlan.weight;
-            $scope.registerUser.plantype=$scope.userPlan.plantype;
-            $scope.registerUser.dob=  $scope.userPlan.dob;
-            $scope.registerUser.activitytype=$scope.userPlan.activitytype;
-            $scope.registerUser.planchoice=$scope.userPlan.planchoice;
-            $scope.registerUser.role= $scope.userPlan.role;
-            $scope.registerUser.gender=$scope.userPlan.gender;
-            $scope.registerUser.unit=$scope.userPlan.unit;
-            $scope.registerUser.enddate=$scope.userPlan.enddate;
-            $scope.registerUser.targetweight=$scope.userPlan.targetweight;
-        }
+            $scope.registerUser.referralid=$scope.defaultRegistrationData.referralid;
+            if($scope.planType==4 || $scope.customAlertChangePlan==true){
+                $scope.registerUser.role= $scope.defaultRegistrationData.role;
+                $scope.registerUser.plantype= 4;
+            }
+            else{
+                $scope.registerUser.height=$scope.userPlan.height;
+                $scope.registerUser.weight=$scope.userPlan.weight;
+                $scope.registerUser.plantype=$scope.userPlan.plantype;
+                $scope.registerUser.dob=  $scope.userPlan.dob;
+                $scope.registerUser.activitytype=$scope.userPlan.activitytype;
+                $scope.registerUser.planchoice=$scope.userPlan.planchoice;
+                $scope.registerUser.role= $scope.userPlan.role;
+                $scope.registerUser.gender=$scope.userPlan.gender;
+                $scope.registerUser.unit=$scope.userPlan.unit;
+                $scope.registerUser.enddate=$scope.userPlan.enddate;
+                $scope.registerUser.targetweight=$scope.userPlan.targetweight;
+            }
             requestHandler.postRequest("userregistration/",$scope.registerUser).then(function(response) {
-            $scope.steps = 0;
-            successMessage(Flash,"User Registration Successful");
+                $scope.steps = 0;
+                successMessage(Flash,"User Registration Successful");
 
-        }, function () {
-            errorMessage(Flash, "Please try again later!")
-        });
-    }
+            }, function () {
+                errorMessage(Flash, "Please try again later!")
+            });
+        }
 
     };
     //to calculate target weight is lesser than current weight
@@ -217,7 +232,9 @@ commonApp.controller('UserRegistrationController',['$scope','requestHandler','Fl
 
     //to calculate next step
     $scope.nextStep=function(){
-
+        $scope.submitted=false;
+        $scope.userPlanSubmitted=false;
+        $scope.userActivitySubmitted=false;
         if($scope.planType!=2&&$scope.steps==3){
             $scope.steps=$scope.steps+2;
 
@@ -281,6 +298,11 @@ commonApp.controller('UserRegistrationController',['$scope','requestHandler','Fl
         }
 
     };
+    $scope.userManullayChanges=function(){
+        if ($scope.defaultRegistrationData.heightInches!="" &&$scope.defaultRegistrationData.heightInches!=undefined ){
+            actualnches=$scope.defaultRegistrationData.heightInches;
+        }
+    };
     //To check maximum Height in feet
     $scope.maxHeightFeet=false;
     $scope.maxHeightCheckFeet = function(){
@@ -303,7 +325,7 @@ commonApp.controller('UserRegistrationController',['$scope','requestHandler','Fl
                     $scope.nextStep();
                 }
             }
-          else{
+            else{
                 if($scope.basicDetailsForm.$valid && $scope.maxweightlbs==false && $scope.maxHeightInches==false && $scope.maxHeightFeet==false && $scope.weightlossError==false){
                     $scope.nextStep();
                 }
@@ -386,35 +408,34 @@ commonApp.controller('UserRegistrationController',['$scope','requestHandler','Fl
         var realFeet = (($scope.defaultRegistrationData.height*0.393700) / 12);
         var feet = Math.floor(realFeet);
         $scope.defaultRegistrationData.heightFeet=feet;
-        var inches = Math.round((realFeet - feet) * 12);
-        $scope.defaultRegistrationData.heightInches=inches;
+        actualnches = ((realFeet - feet) * 12);
+        $scope.defaultRegistrationData.heightInches=Math.round(actualnches);
         //convert weight kgs to lbs
         $scope.defaultRegistrationData.weightlbs=($scope.defaultRegistrationData.weight*2.2046).toFixed(1);
         if($scope.defaultRegistrationData.targetweightkgs!='' && $scope.defaultRegistrationData.targetweightkgs!=undefined ){
             $scope.defaultRegistrationData.targetweightlbs=($scope.defaultRegistrationData.targetweightkgs*2.2046).toFixed(1);
         }
     };
-   //convert weight kg to lbs
+    //convert weight kg to lbs
     $scope.weightLbsToKgConversion=function(){
-   
         if($scope.defaultRegistrationData.heightFeet!=undefined&&$scope.defaultRegistrationData.heightInches!=undefined){
-            var originalValue=(parseInt($scope.defaultRegistrationData.heightFeet*12)+parseInt($scope.defaultRegistrationData.heightInches));
+            var originalValue=($scope.defaultRegistrationData.heightFeet*12)+Math.abs(actualnches);
             $scope.defaultRegistrationData.height=(originalValue*2.54).toFixed(1);
         }
-        $scope.defaultRegistrationData.weight=($scope.defaultRegistrationData.weightlbs/2.2046).toFixed(1);
+        $scope.defaultRegistrationData.weight= ($scope.defaultRegistrationData.weightlbs/2.2046).toFixed(1);
         if($scope.defaultRegistrationData.targetweightlbs!='' && $scope.defaultRegistrationData.targetweightlbs!=undefined ){
-            $scope.defaultRegistrationData.targetweightkgs= ($scope.defaultRegistrationData.targetweightlbs/2.2046).toFixed(1);
+            $scope.defaultRegistrationData.targetweightkgs= ($scope.defaultRegistrationData.targetweightlbs/2.2046).toFixed(2);
         }
     };
 
 
-     // Toggle Show Password
-     $scope.toggleShowPassword=function(){
+    // Toggle Show Password
+    $scope.toggleShowPassword=function(){
         $scope.showPassword=!$scope.showPassword;
     };
     $scope.init = function() {
-         //default data
-         $scope.defaultRegistrationData = {
+        //default data
+        $scope.defaultRegistrationData = {
             'plantype': '',
             'gender': '1',
             'dob': '01/01/1990',
@@ -426,7 +447,7 @@ commonApp.controller('UserRegistrationController',['$scope','requestHandler','Fl
             'role': '3',
             'unit': '',
             'targetweightkgs': '',
-             'targetweightlbs':'',
+            'targetweightlbs':'',
             'customEndDate': '',
             'referralid':''
         };
@@ -441,7 +462,7 @@ commonApp.controller('UserRegistrationController',['$scope','requestHandler','Fl
         initializeDobCalender();
         initializeEndDateCalender();
         customEndDateCalender();
-     };
+    };
     $scope.init();
 
 }]);
