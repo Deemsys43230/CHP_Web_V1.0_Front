@@ -18726,9 +18726,9 @@ a.resend_back:hover {
 .circle-container {
     position: relative;
     width: 350px;
-    height: 550px;
+    height: 500px;
     padding: 2.8em;
-    margin: 18% 30% 0;
+    margin: 12% 32.5% 0;
 }
 .circle-container a {
     display: block;
@@ -18736,25 +18736,38 @@ a.resend_back:hover {
     top: 10%; left: 50%;
     width: 4em; height: 4em;
     margin: -2em;
+    z-index: 100;
 }
 .circle-container .circle-menu {
-    width:180px;
-    height:180px;
+    width:150px;
+    height:150px;
     border-radius:250px;
-
     font-size:20px;
     color:#fff;
     line-height:75px;
     text-align:center;
     background:#f8ba01;
-    padding-top: 15px;
+    padding-top: 5px;
 }
-.deg0 { transform: translate(20em); } /* 12em = half the width of the wrapper */
-.deg45 { transform: rotate(60deg) translate(20em) rotate(-60deg); }
-.deg135 { transform: rotate(120deg) translate(20em) rotate(-120deg); }
-.deg180 { transform: translate(-20em); }
-.deg225 { transform: rotate(240deg) translate(20em) rotate(-240deg); }
-.deg315 { transform: rotate(300deg) translate(20em) rotate(-300deg); }
+.deg0 { transform: translate(15em); } /* 12em = half the width of the wrapper */
+.deg45 { transform: rotate(60deg) translate(15em) rotate(-60deg); }
+.deg135 { transform: rotate(120deg) translate(15em) rotate(-120deg); }
+.deg180 { transform: translate(-15em); }
+.deg225 { transform: rotate(240deg) translate(15em) rotate(-240deg); }
+.deg315 { transform: rotate(300deg) translate(15em) rotate(-300deg); }
+/* this is for showing the circle on which the images are placed */
+.circle-container:after {
+    position: absolute;
+    top: -140px;
+    left: -5px;
+    width: 450px;
+    height: 450px;
+    border: 1px dashed #ff1493;
+    border-radius: 50%;
+    pointer-events: none;
+    content: '';
+}
+
 .dashboard-menu-img{
     width: 75px;
     height: 75px;
@@ -18779,4 +18792,64 @@ a.back-menu {
 }
 .navbar-menu-right1 {
      right: -205px !important;
+}
+#dashboard-menu{
+    width: 100%;
+    height: 550px;
+}
+/* for menu coach bubble*/
+.coach-bubble {
+    margin: 40px;
+    display: inline-block;
+    position: relative;
+    min-height: 160px;
+    width: 330px;
+    /*height: 161px;*/
+    background: linear-gradient(rgba(255, 255, 128, 1), rgb(204, 255, 204));
+    background-image: linear-gradient(rgb(255, 255, 128), rgb(204, 255, 204));
+    margin-left:-2px;
+    margin-top:-3px;
+    margin-bottom: 20px;
+    border-radius: 1em;
+}
+
+.coach-tri-right.left-in:after{
+    content: ' ';
+    position: absolute;
+    width: 10px;
+    height: 0;
+    left: auto;
+    right: -46px;
+    top: 31px;
+    bottom: auto;
+    border: 24px solid;
+    border-color: transparent transparent #eeff9a #eeff9a;
+}
+.width-370 {
+    width: 370px;
+}
+.app-list-img {
+    width: 25px;
+    height: 25px;
+}
+.pointer{
+    cursor: pointer;
+}
+.goal-menu-image{
+    width: 60%;margin-top: -30px;
+}
+.margin-left-15p{
+    margin-left:15%
+}
+.app-menu-button{
+    margin-left: 25%;
+}
+.margin-bottom-120 {
+    margin-bottom: 120px;
+}
+.device-description-width{
+    width:200px;
+}
+.device-margin{
+    margin:7% 5%;
 }

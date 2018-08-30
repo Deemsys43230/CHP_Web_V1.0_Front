@@ -81,7 +81,7 @@
     <div class="top-bar">
         <div class="container">
             <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-5 hidden-xss" ng-init="init()">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-5 hidden-xss"  id="top-bar-menu" ng-init="init()">
                     <!-- Start Contact Info -->
                     <div ng-hide="hideValue" ng-cloak class="ng-cloak" >
                         <ul class="contact-details remove-style" >
@@ -594,6 +594,14 @@
         $(document).ready(function () {
             $('#dropdown').click(function(e) {
                 $('.nav li').addClass('drop');
+                $(this).siblings().addClass('active');
+            });
+            $('#top-bar-menu').click(function(e) {
+                $('.nav li').removeClass('drop');
+                $(this).siblings().addClass('active');
+            });
+            $('.navbar').click(function(e) {
+                $('.nav li').removeClass('drop');
                 $(this).siblings().addClass('active');
             });
 

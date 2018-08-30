@@ -1,5 +1,56 @@
 <div ng-show="isMenuShow==2" ng-controller="UserKeyDetailsController">
-    <div class="page-banner1">
+    <div class="page-banner1" id="dashboard-menu">
+        <div class=" pull-left width-370 device-margin">
+            <h2>List of devices access to <br/>your physical details</h2><br/>
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="col-md-2 col-sm-2 col-xs-2 padding-lr-5"><img src="../../images/aria.png" class="app-list-img"></div>
+                <div class="col-md-9 col-sm-9 col-xs-9 no-padding">
+                    <h3>fitbit aria</h3>
+                    <!--<p class="hidden-sm device-description-width">Weight, Fat</p>-->
+                </div>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 margin-top-5">
+                <div class="col-md-2 col-sm-2 col-xs-2 padding-lr-5"><img src="../../images/ihealth.png" class="app-list-img"></div>
+                <div class="col-md-9 col-sm-9 col-xs-9 no-padding">
+                    <h3>iHealth</h3>
+                    <!--<p  class="hidden-sm device-description-width">Blood Pressure, Blood Glucose, Blood Oxygen</p>-->
+                </div>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 margin-top-5">
+                <div class="col-md-2 col-sm-2 col-xs-2 padding-lr-5"><img src="../../images/fitbit.png" class="app-list-img"></div>
+                <div class="col-md-9 col-sm-9 col-xs-9 no-padding">
+                    <h3>fitbit tracker</h3>
+                    <!--<p  class="hidden-sm" style="width: 167px;">Steps, Floors, Sleep, Heart Rate & Minutes, Activity</p>-->
+                </div>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 margin-top-5">
+                <div class="col-md-2 col-sm-2 col-xs-2 padding-lr-5"><img src="../../images/samsunghealth.png" class="app-list-img"></div>
+                <div class="col-md-9 col-sm-9 col-xs-9 no-padding">
+                    <h3>samsung health</h3>
+                    <!--<p  class="hidden-sm device-description-width">Steps, Sleep, Heart Rate, Activity, Blood Pressure, Blood Glucose, Blood Oxygen</p>-->
+                </div>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 margin-top-5 margin-bottom-10">
+                <div class="col-md-2 col-sm-2 col-xs-2 padding-lr-5"><img src="../../images/healthkit.png" class="app-list-img"></div>
+                <div class="col-md-9 col-sm-9 col-xs-9 no-padding">
+                    <h3>apple healthkit</h3>
+                    <!--<p  class="hidden-sm device-description-width">Steps, Floors, Sleep, Heart Rate, Activity, Blood Pressure, Blood Glucose, Blood Oxygen</p>-->
+                </div>
+            </div>
+            <div class="app-button app-menu-button">
+                <a href="" ng-click="menuUrlChange(3)" class="main-button orange_back">Connect</a>
+            </div>
+            </div>
+        <div class="pull-right">
+            <div class="col-md-6 col-sm-6 col-xs-6 coach-bubble coach-tri-right left-in talktext wrap margin-bottom-120">
+                <a href="#coach"><h2 style="font-style: italic;">A good coach can change a routine. Great coaches can change a life.</h2></a>
+            </div>
+            <br/><br/><br/>
+            <br/><br/>
+            <div class="width-370 pull-right pointer" ng-click="menuUrlChange(4)">
+                <img class="margin-left-15p" src="../../images/waterlog.png">
+            </div>
+        </div>
         <div class='circle-container'>
             <a href='#profile' class='center'><div class="circle-menu">Profile<br/>
                 <img src="../../images/profile-icon.png" class="dashboard-menu-img"></div></a>
@@ -9,7 +60,7 @@
                 <img src="../../images/demography-icon.png" class="dashboard-menu-img">
             </div></a>
             <a href='#group-goal' class='deg135'><div class="circle-menu">Goal<br/>
-                <img src="../../images/goal-icon.png" style="width: 60%;margin-top: -30px"> </div></a>
+                <img src="../../images/goal-icon.png" class="goal-menu-image"> </div></a>
             <a href='' ng-click="menuUrlChange(3)" class='deg180'><div class="circle-menu">App & Devices<br/>
                 <img src="../../images/smartwatch-icon.png" class="dashboard-menu-img"></div></a>
             <a href=''  ng-click="menuUrlChange(1)" class='deg225'><div class="circle-menu">Food Diary<br/>
@@ -33,9 +84,9 @@
             <div class="col-lg-12 col-md-12 col-sm-12 margin-top-20 margin-bottom-20">
                 <div class="one_half">
                     <input type="radio" id="diabetic" class="height" name="diabetic" value="1" ng-model="diabeticCheck.diabetic"/>
-                    <label class="width-28" for="diabetic">Yes</label>
+                    <label class="width-28 pull-right" for="diabetic">Yes</label>
                 </div>
-                <div class="one_half last modal_close">
+                <div class="one_half">
                     <input type="radio" id="notdiabetic" class="height one_half last modal_close" name="diabetic" value="0" ng-model="diabeticCheck.diabetic" ng-click="doDiabetesCheck()"/>
                     <label class="width-28" for="notdiabetic">No</label>
                 </div>
@@ -97,5 +148,17 @@
                     </div>
                 </form>
             </div>
+        </div>
     </section>
 </div>
+
+<script type="text/javascript">
+    //to clicking username dropdown appears
+    $(document).ready(function () {
+        $('.page-banner1').click(function(e) {
+            $('.nav li').removeClass('drop');
+            $(this).siblings().addClass('active');
+        });
+
+    });
+</script>

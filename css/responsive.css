@@ -1569,21 +1569,94 @@
     }
 }
 @media (min-width: 768px) and (max-width: 1024px) {
-    .popupContainer-width-big{
-        left:10% !important;
+    .popupContainer-width-big {
+        left: 10% !important;
     }
+
     .nav.navbar-nav.navbar-right {
         right: 5px !important;
     }
+
     .notify-menu {
         padding-top: 30px;
         padding-left: 0px;
     }
+
     .navbar-default .navbar-nav > li > a {
-        padding: 28px 5px 28px 5px!important;
+        padding: 28px 5px 28px 5px !important;
     }
+
     .navbar-default .navbar-nav {
         margin-right: 0px !important;
+    }
+
+    /*for dashboard menu responsiveness*/
+    .dashboard-menu-img {
+        width: 50px;
+        height: 50px;
+        margin-top: -75px;
+    }
+
+    .goal-menu-image {
+        width: 60%;
+        margin-top: -65px;
+    }
+
+    .circle-container .circle-menu {
+        height: 120px;
+        width: 120px;
+        font-size: 16px;
+    }
+
+    .deg0 {
+        transform: translate(13em);
+    }
+
+    /* 12em = half the width of the wrapper */
+    .deg45 {
+        transform: rotate(60deg) translate(13em) rotate(-60deg);
+    }
+
+    .deg135 {
+        transform: rotate(120deg) translate(13em) rotate(-120deg);
+    }
+
+    .deg180 {
+        transform: translate(-13em);
+    }
+
+    .deg225 {
+        transform: rotate(240deg) translate(13em) rotate(-240deg);
+    }
+
+    .deg315 {
+        transform: rotate(300deg) translate(13em) rotate(-300deg);
+    }
+
+    .circle-container {
+        margin: 17% 28.5% 0;
+    }
+
+    .circle-container:after {
+        top: -120px;
+        width: 400px;
+        height: 400px;
+    }
+    .coach-bubble {
+        margin: 40px;
+        min-height: 135px;
+        width: 250px;
+        margin-left: 75px;
+        margin-top: -3px;
+    }
+    .margin-left-15p{
+        margin-left:32%
+    }
+    .margin-bottom-120 {
+        margin-bottom: 120px;
+    }
+    .device-margin{
+        margin:7% 2%;
     }
 }
 

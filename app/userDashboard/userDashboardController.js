@@ -54,6 +54,10 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
         $("#dailyupdate").click();
         $("#energyspent").click();
     };
+    if($rootScope.isMenuClicked==4){
+        $("#dailyupdate").click();
+        $("#weight-water").click();
+    };
 
 
 
@@ -3625,7 +3629,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
             }
 
              //All Ready Show the Graph
-              // $scope.showGraph=1;
+              $scope.showGraph=1;
 
 
         };
