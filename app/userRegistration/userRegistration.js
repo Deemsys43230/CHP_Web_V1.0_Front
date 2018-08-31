@@ -375,9 +375,10 @@ commonApp.controller('UserRegistrationController',['$scope','requestHandler','Fl
     };
 
     function initializeEndDateCalender() {
-        $('#enddate').datetimepicker({format: 'DD/MM/YYYY', ignoreReadonly: true, minDate: new Date(),widgetPositioning: {vertical: 'bottom'}}).on('dp.change', function(selected){
+        $('#enddate').datetimepicker({format: 'DD/MM/YYYY', ignoreReadonly: true, minDate:new Date().setHours(0,0,0,0),widgetPositioning: {vertical: 'bottom'}}).on('dp.change', function(selected){
             $scope.enddate=$('#enddate').val();
         });
+
 
         $('#enddate').click(function(){
             $('#enddate').focus();
@@ -390,7 +391,8 @@ commonApp.controller('UserRegistrationController',['$scope','requestHandler','Fl
         });
     };
     function customEndDateCalender() {
-        $('#customEndDate').datetimepicker({format: 'DD/MM/YYYY', ignoreReadonly: true, minDate: new Date(),widgetPositioning: {vertical: 'top',horizontal:'right'}}).on('dp.change', function(selected){
+
+        $('#customEndDate').datetimepicker({format: 'DD/MM/YYYY', ignoreReadonly: true,minDate:new Date().setHours(0,0,0,0),widgetPositioning: {vertical: 'top',horizontal:'right'}}).on('dp.change', function(selected){
             $scope.defaultRegistrationData.customEndDate=$('#customEndDate').val();
         });
 
@@ -403,6 +405,10 @@ commonApp.controller('UserRegistrationController',['$scope','requestHandler','Fl
 
         });
     };
+
+    initializeDobCalender();
+    initializeEndDateCalender();
+    customEndDateCalender();
     //convert height cm to feet and inches
     $scope.convertCmToFeetConversion=function() {
         var realFeet = (($scope.defaultRegistrationData.height*0.393700) / 12);
@@ -459,9 +465,6 @@ commonApp.controller('UserRegistrationController',['$scope','requestHandler','Fl
         $scope.isPlanSubmitted=true;
         $scope.convertCmToFeetConversion();
         $scope.test('mUnit');
-        initializeDobCalender();
-        initializeEndDateCalender();
-        customEndDateCalender();
     };
     $scope.init();
 

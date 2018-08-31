@@ -881,7 +881,7 @@ userApp.controller("UserInitialController",['$scope','requestHandler','$location
         $scope.userProfile=response.data.User_Profile;
         $scope.demo = response.data.demography;
         $scope.emailNotifications= response.data.Login;
-        $scope.currentUserEmailId= $scope.emailNotifications.emailid;
+        $scope.currentUserEmailId= $scope.emailNotifications.email;
         if($scope.emailNotifications.isemailvalidated==0){
             $scope.allNotifications=1;
             $scope.description="Please Verify Your Email id";

@@ -18435,12 +18435,12 @@ html {
             linear-gradient(
                     90deg,
                     transparent 79px,
-                    #abced4 79px,
-                    #abced4 81px,
+                    #ffffff 79px,
+                    #ffffff 81px,
                     transparent 81px
             ),
             linear-gradient(
-                    #eee .1em,
+                    #ffffff .1em,
                     transparent .1em
             );
 }
