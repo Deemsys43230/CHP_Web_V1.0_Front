@@ -1,7 +1,7 @@
 var userApp = angular.module('userApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','angular-nicescroll','angularUtils.directives.dirPagination','ui.bootstrap','500tech.simple-calendar']);
 
-userApp.controller('UserDoctorAppointment',['$scope','requestHandler','Flash',function($scope,requestHandler,Flash) {
-
+userApp.controller('UserDoctorAppointment',['$scope','requestHandler','Flash','$rootScope',function($scope,requestHandler,Flash,$rootScope) {
+    $rootScope.isMenuShow=1;
     $scope.activeClass.doctorAppointment='active';
     $scope.selectedMinutes=0;
     $scope.selectedHours=0;

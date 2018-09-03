@@ -6,6 +6,23 @@ userApp.controller('UserKeyDetailsController',['$scope','requestHandler','$rootS
     $scope.menuUrlChange=function(tabid){
         $rootScope.isMenuClicked=tabid;
         $location.path('/dashboard');
+        if (tabid==4) {
+            $location.path('/coach');
+        }
+        if (tabid==5) {
+            $location.path('/demography');
+        }
+        if(tabid==6){
+             if( $scope.isDiabeticPerson==1){
+             $location.path('/doctor-appointment');  
+             
+            }
+            else{
+                   $location.path('/group-goal'); 
+            }
+            
+        }
+       
     };
 
     $scope.doGetUserKeyDetails=function() {
@@ -13,12 +30,13 @@ userApp.controller('UserKeyDetailsController',['$scope','requestHandler','$rootS
             $scope.userKeyDetails=response.data;    
             if($scope.userKeyDetails.diabeticstatus==1) {
                 $rootScope.isDiabetic=1;
+                $scope.isDiabeticPerson=1;
             }
             else {
                 $('.navbar-collapse ul').addClass('navbar-menu-right1');
             }
               // for diabetic details popup
-            if ($scope.userKeyDetails.diabeticstatus==null || $scope.userKeyDetails.diabeticstatus==0) {
+            if ($scope.userKeyDetails.diabeticstatus==null) {
                  $(window).load(function(){        
                     $(function(){
                         $("#lean_overlay").fadeTo(1000);

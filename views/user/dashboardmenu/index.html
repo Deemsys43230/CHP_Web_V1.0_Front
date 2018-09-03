@@ -1,73 +1,104 @@
 <div ng-show="isMenuShow==2" ng-controller="UserKeyDetailsController">
-    <div class="page-banner1" id="dashboard-menu">
-        <div class=" pull-left width-370 device-margin">
-            <h2>List of devices access to <br/>your physical details</h2><br/>
-            <div class="col-lg-12 col-md-12 col-sm-12">
-                <div class="col-md-2 col-sm-2 col-xs-2 padding-lr-5"><img src="../../images/aria.png" class="app-list-img"></div>
-                <div class="col-md-9 col-sm-9 col-xs-9 no-padding">
-                    <h3>fitbit aria</h3>
-                    <!--<p class="hidden-sm device-description-width">Weight, Fat</p>-->
+    <div class="menu-banner" id="dashboard-menu">
+        <div class="menu-leftsidebar">
+            <div id="grad1" class="col-lg-12 col-md-12 col-sm-12 box-gradiant" ng-click="menuUrlChange(1)">
+                <div class="col-lg-9 col-md-9 col-sm-9 no-padding">
+                    <h5 class="text-white">Track your caloric intake.</h5>
+                    <h3 class="text-white">Record of Food Intake</h3>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3 no-padding"> 
+                    <i class="fa fa-3x fa-caret-right"></i>  
                 </div>
             </div>
-            <div class="col-lg-12 col-md-12 col-sm-12 margin-top-5">
-                <div class="col-md-2 col-sm-2 col-xs-2 padding-lr-5"><img src="../../images/ihealth.png" class="app-list-img"></div>
-                <div class="col-md-9 col-sm-9 col-xs-9 no-padding">
-                    <h3>iHealth</h3>
-                    <!--<p  class="hidden-sm device-description-width">Blood Pressure, Blood Glucose, Blood Oxygen</p>-->
+            <div id="grad2" class="col-lg-12 col-md-12 col-sm-12 box-gradiant" ng-click="menuUrlChange(2)">
+                <div class="col-lg-9 col-md-9 col-sm-9 no-padding">
+                    <h5 class="text-white">Check calories burned by workout.</h5>
+                    <h3 class="text-white">Record of Energy Spent</h3>
                 </div>
-            </div>
-            <div class="col-lg-12 col-md-12 col-sm-12 margin-top-5">
-                <div class="col-md-2 col-sm-2 col-xs-2 padding-lr-5"><img src="../../images/fitbit.png" class="app-list-img"></div>
-                <div class="col-md-9 col-sm-9 col-xs-9 no-padding">
-                    <h3>fitbit tracker</h3>
-                    <!--<p  class="hidden-sm" style="width: 167px;">Steps, Floors, Sleep, Heart Rate & Minutes, Activity</p>-->
+                <div class="col-lg-3 col-md-3 col-sm-3 no-padding"> 
+                    <i class="fa fa-3x fa-caret-right"></i>  
                 </div>
-            </div>
-            <div class="col-lg-12 col-md-12 col-sm-12 margin-top-5">
-                <div class="col-md-2 col-sm-2 col-xs-2 padding-lr-5"><img src="../../images/samsunghealth.png" class="app-list-img"></div>
-                <div class="col-md-9 col-sm-9 col-xs-9 no-padding">
-                    <h3>samsung health</h3>
-                    <!--<p  class="hidden-sm device-description-width">Steps, Sleep, Heart Rate, Activity, Blood Pressure, Blood Glucose, Blood Oxygen</p>-->
+            </div> 
+            <div id="grad3" class="col-lg-12 col-md-12 col-sm-12 box-gradiant" ng-click="menuUrlChange(3)">
+                <div class="col-lg-9 col-md-9 col-sm-9 no-padding">
+                    <h5 class="text-white">Access your physical Details.</h5>
+                    <h3 class="text-white">Wearble Devices</h3>
                 </div>
-            </div>
-            <div class="col-lg-12 col-md-12 col-sm-12 margin-top-5 margin-bottom-10">
-                <div class="col-md-2 col-sm-2 col-xs-2 padding-lr-5"><img src="../../images/healthkit.png" class="app-list-img"></div>
-                <div class="col-md-9 col-sm-9 col-xs-9 no-padding">
-                    <h3>apple healthkit</h3>
-                    <!--<p  class="hidden-sm device-description-width">Steps, Floors, Sleep, Heart Rate, Activity, Blood Pressure, Blood Glucose, Blood Oxygen</p>-->
+                <div class="col-lg-3 col-md-3 col-sm-3 no-padding"> 
+                    <i class="fa fa-3x fa-caret-right"></i>  
                 </div>
-            </div>
-            <div class="app-button app-menu-button">
-                <a href="" ng-click="menuUrlChange(3)" class="main-button orange_back">Connect</a>
-            </div>
-            </div>
-        <div class="pull-right">
-            <div class="col-md-6 col-sm-6 col-xs-6 coach-bubble coach-tri-right left-in talktext wrap margin-bottom-120">
-                <a href="#coach"><h2 style="font-style: italic;">A good coach can change a routine. Great coaches can change a life.</h2></a>
-            </div>
-            <br/><br/><br/>
-            <br/><br/>
-            <div class="width-370 pull-right pointer" ng-click="menuUrlChange(4)">
-                <img class="margin-left-15p" src="../../images/waterlog.png">
+            </div> 
+            <div id="grad4" class="col-lg-12 col-md-12 col-sm-12 box-gradiant" ng-click="menuUrlChange(5)">
+                <div class="col-lg-9 col-md-9 col-sm-9 no-padding">
+                    <h5 class="text-white">Maintain your Basic & Nutrients Details.</h5>
+                    <h3 class="text-white">Know Yourself</h3>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3 no-padding"> 
+                    <i class="fa fa-3x fa-caret-right"></i>  
+                </div>
+            </div> 
+        </div>
+        <!-- For Menu spinning -->
+        <div class="menu-sidebar">
+            <div class='selector'>
+                <ul>
+                    <li>
+                        <div class="menu-load" ng-click="menuUrlChange(1)">Food Dairy<br/>
+                                <img src="../../images/food-icon.png" class="dashboard-menu-img" />
+                        </div>
+                    </li>
+                    <li>
+                        <div class="menu-load" ng-click="menuUrlChange(2)">Exercise<br/>
+                                <img src="../../images/exercise-icon.png" class="dashboard-menu-img" />
+                        </div>
+                    </li>
+                    <li>
+                        <div class="menu-load" ng-click="menuUrlChange(4)">Coach<br/>
+                                <img src="../../images/coach-icon.png" class="dashboard-menu-img" />
+                        </div>
+                    </li>
+                    <li>
+                        <div class="menu-load" ng-click="menuUrlChange(5)">Demography<br/>
+                                <img src="../../images/demography-icon.png" class="dashboard-menu-img" />
+                        </div>
+                    </li>
+                    <li>
+                        <div ng-show="isDiabeticPerson==1" class="menu-load" ng-click="menuUrlChange(6)">Appointments<br/>
+                            <img src="../../images/appointment-icon.png" class="dashboard-menu-img" />
+                        </div>
+                        <div ng-hide="isDiabeticPerson==1" class="menu-load" ng-click="menuUrlChange(6)">Goal<br/>
+                                <img src="../../images/goal-icon.png" class="dashboard-menu-img" />
+                        </div>
+                    </li>
+                    <li>
+                        <div class="menu-load" ng-click="menuUrlChange(3)">App & Devices<br/>
+                                <img src="../../images/smartwatch-icon.png" class="dashboard-menu-img" />
+                        </div>
+                    </li>
+                </ul>
+                <button>
+                    <a href="#profile">Profile<br/>
+                        <img src="../../images/profile-icon.png" class="profile-menu-image" />
+                    </a>
+                </button>
             </div>
         </div>
-        <div class='circle-container'>
-            <a href='#profile' class='center'><div class="circle-menu">Profile<br/>
-                <img src="../../images/profile-icon.png" class="dashboard-menu-img"></div></a>
-            <a href='#coach' class='deg0'><div class="circle-menu">Coach<br/>
-                <img src="../../images/coach-icon.png" class="dashboard-menu-img"></div></a>
-            <a href='#demography' class='deg45'><div class="circle-menu">Demography<br/>
-                <img src="../../images/demography-icon.png" class="dashboard-menu-img">
-            </div></a>
-            <a href='#group-goal' class='deg135'><div class="circle-menu">Goal<br/>
-                <img src="../../images/goal-icon.png" class="goal-menu-image"> </div></a>
-            <a href='' ng-click="menuUrlChange(3)" class='deg180'><div class="circle-menu">App & Devices<br/>
-                <img src="../../images/smartwatch-icon.png" class="dashboard-menu-img"></div></a>
-            <a href=''  ng-click="menuUrlChange(1)" class='deg225'><div class="circle-menu">Food Diary<br/>
-                <img src="../../images/food-icon.png" class="dashboard-menu-img"></div></a>
-            <a href='' ng-click="menuUrlChange(2)" class='deg315'><div class="circle-menu">Exercise<br/>
-                <img src="../../images/exercise-running-icon.png" class="dashboard-menu-img"></div></a>
+        <div class=" col-lg-3 col-md-3 col-sm-3 menu-rightsidebar" ng-click="menuUrlChange(4)">
+            <h3 class="text-center">Coach Intraction</h3>
+            <br/>
+            <img src="../../images/assessments.png" class="coach-activity" />
+            <br/>
+            <br/>
+            <img src="../../images/chat-icon.png" class="coach-activity" />
+            <br/>
+            <br/>
+            <img src="../../images/events-icon.png" class="coach-activity" />
         </div>
+        <div class=" col-lg-3 col-md-3 col-sm-3 menu-rightsidebar1" ng-click="menuUrlChange(7)">
+            <h3 class="text-center">Water Log</h3>
+            <img src="../../images/water-log.png" class="margin-top15 pointer" />
+        </div>
+      
     </div>
 </div>
 
@@ -153,12 +184,37 @@
 </div>
 
 <script type="text/javascript">
-    //to clicking username dropdown appears
-    $(document).ready(function () {
-        $('.page-banner1').click(function(e) {
-            $('.nav li').removeClass('drop');
-            $(this).siblings().addClass('active');
-        });
 
-    });
+    var nbOptions = 6;
+    var angleStart = -360;
+
+    // jquery rotate animation
+    function rotate(li,d) {
+        $({d:angleStart}).animate({d:d}, {
+            step: function(now) {
+                // alert("step");
+                $(li)
+                   .css({ transform: 'rotate('+now+'deg)' })
+                   .find('div.menu-load')
+                      .css({ transform: 'rotate('+(-now)+'deg)' });
+            }, duration: 200
+        });
+    }
+
+    // show / hide the options
+    function toggleOptions(s) {
+        $(s).toggleClass('open');
+        var li = $(s).find('li');
+        var deg = $(s).hasClass('half') ? 180/(li.length-1) : 360/li.length;
+        for(var i=0; i<li.length; i++) {
+            var d = $(s).hasClass('half') ? (i*deg)-90 : i*deg;
+            $(s).hasClass('open') ? rotate(li[i],d) : rotate(li[i],angleStart);
+        }
+    }
+
+  /*  $('.selector button').click(function(e) {
+        toggleOptions($(this).parent());
+    });*/
+
+setTimeout(function() { toggleOptions('.selector'); }, 100);//@ sourceURL=pen.js
 </script>
