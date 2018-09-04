@@ -8,7 +8,7 @@
     </div>
     <div ng-show="usercoachlist.length>0">
         <div class="col-lg-8 col-md-8 col-sm-8 margin-bottom-10">
-            <h2><strong>COACH DETAILS</strong></h2>  
+            <h2><strong>COACH DETAILS</strong></h2>
 
           <table class="table table-bordered table-striped margin-top-10" style="table-layout:fixed;">
                 <tr>
@@ -30,6 +30,26 @@
                       <div ng-if="usercoachdetails.gender == 1">Male</div>
                       <div ng-if="usercoachdetails.gender == 2">Female</div>
                   </td>
+
+              </tr>
+              <tr>
+                  <td class="col-md-4">City</td>
+                  <td class="col-md-8 wrap-all">{{usercoachdetails.city}}</td>
+
+              </tr>
+              <tr>
+                  <td class="col-md-4">State</td>
+                  <td class="col-md-8 wrap-all">{{usercoachdetails.state}}</td>
+
+              </tr>
+              <tr>
+                  <td class="col-md-4">Country</td>
+                  <td class="col-md-8 wrap-all">{{usercoachdetails.country}}</td>
+
+              </tr>
+              <tr>
+                  <td class="col-md-4">Zip</td>
+                  <td class="col-md-8 wrap-all">{{usercoachdetails.zipcode}}</td>
 
               </tr>
               <tr>

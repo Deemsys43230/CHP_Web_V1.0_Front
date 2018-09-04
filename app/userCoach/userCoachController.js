@@ -31,14 +31,14 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
                                };
 
         if($scope.coachInvitations){
+            $scope.usercoachlist=[];
             $scope.request=requestHandler.getRequest("user/userreadinvitations/",{});
         }else{
             $scope.request=requestHandler.postRequest("user/usergetcoachlist/",$scope.userCoachPagination);
           }
 
 
-        $scope.request.then(function(response){
-
+        $scope.request.then(function(response){;
             var ratingPromise;
             $.each(response.data.coaches, function(index,value){
                 value.averageRating=0.1;
@@ -506,7 +506,8 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
         requestHandler.postRequest("user/denyinvitation/",{'coachid':coachid}).then(function(response){
            if(response.data.Response_status==1){
                 successMessage(Flash,"Invitation Declined");
-                $scope.doGetCoachDetailsByUser(coachid);
+                $scope.doGetCoachListByUser(true);
+
            }
         }, function(){
                 errorMessage(Flash,"Please try again later!");
@@ -782,6 +783,7 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
         $scope.getFoodPlanItemParam={'id':foodplanid, 'date':date};
         requestHandler.postRequest("user/getfooditemdetail/", $scope.getFoodPlanItemParam).then(function(response){
             $scope.foodPlanItemDetails= response.data.plandetail;
+            $scope.calorieRoundedValue= $scope.foodPlanItemDetails.calorieintake.toFixed(2);
         }, function(){
             errorMessage(Flash,"Please try again later!");
         });
