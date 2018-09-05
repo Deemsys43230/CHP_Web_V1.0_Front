@@ -232,6 +232,8 @@ userApp.controller('CourseController',['$scope','requestHandler','Flash','$route
             }
             else if(response.data.Response_status==2){
                 $scope.userEmailidVerifivationAlert();
+                $scope.entrolling="Enroll course";
+                $scope.enrollButtonStatus=false;
             }
             else {
                 errorMessage(Flash,response.data.Error);

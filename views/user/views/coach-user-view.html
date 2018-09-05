@@ -486,7 +486,7 @@
                                                 <hr/>
                                                 <div class="question" ng-repeat="question in assessments.questions" ng-init="questionIndex = $index">
                                                     <div class="col-md-12 no-padding margin-bottom-10"><span class="badge pull-right" style="font-weight: normal">{{question.answertype==1?"Single Choice":question.answertype==2?"Multi Choice":"Text"}}</span></div>
-                                                <h5 class="wrap-all question-font-weight">Q{{$index+1}}.&nbsp;&nbsp;{{question.question}}&nbsp;&nbsp;</h5>
+                                                <h5 class="wrap question-font-weight">Q{{$index+1}}.&nbsp;&nbsp;{{question.question}}&nbsp;&nbsp;</h5>
                                                       <div id="error_{{questionIndex}}" style="display: none"><span class="text-red">Please &nbsp;fill&nbsp;out&nbsp;the&nbsp;Answer</span></div>
                                                 <div class="answers" ng-repeat="option in question.answers" ng-if="question.answertype==1">
                                                     <p class="wrap-all"><span style="margin-top:10px;">
