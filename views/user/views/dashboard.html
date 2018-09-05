@@ -795,7 +795,7 @@
                     <div class="col-lg-12 col-md-12 col-sm-12 margin-bottom-5 no-padding">
                         <ul class="col-lg-5 col-md-5 col-sm-5 nav nav-tabs pull-left padding-lr-5">
                             <li class="active" ng-click="showMedication=0"><a href="#medication-1" data-toggle="tab" onclick="return false;">Medications</a></li>
-                            <li ng-click="showMedication=1;" ><a href="#medications-upload" data-toggle="tab" onclick="return false;">Document Upload</a></li>
+                            <li ng-show="showDocumentList" ng-click="showMedication=1;" ><a href="#medications-upload" data-toggle="tab" onclick="return false;">Document Upload</a></li>
                             <li>
                         </ul>
                         <div class="col-lg-7 col-md-7 col-sm-7 pull-right padding-lr-5">
@@ -828,9 +828,9 @@
                                         <label for="evening-medications">Evening</label>
                                     </div>
                                     <div class="">
-                                    <a id="modal_medication" href="#medication" class="add-medication pull-right margin-10" ng-click="reset()"><i class="fa fa-plus-circle"></i> Add</a>
+                                    <a id="modal_medication" href="#medication" class="add-medication pull-right margin-10" ng-click="resetMedication()"><i class="fa fa-plus-circle"></i> Add</a>
                                     </div>
-                                    <div flash-message="2000" class="col-lg-4 col-md-4 col-sm-4 no-padding pull-right margin-top-10"></div>
+                                    <div flash-message="2000" class="col-lg-4 col-md-4 col-sm-4 no-padding pull-right margin-top-5"></div>
                                 </div>
                                 
                                 <div class="medication_scrollbar" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',horizrailenabled: false,background:'#eee'}" >
@@ -1375,6 +1375,22 @@
                                <span class="error-message" ng-show="!FoodAddForm.servings.$error.required&&FoodAddForm.servings.$error.validateZero"><span>Invalid&nbsp;data.</span></span>
                             </span>
                          </div>
+                         <div class="col-md-12 col-sm-12 no-padding margin-top-10">
+                            <div id="myGlycaemic"></div>
+                            <div class="margin-top-15">
+                                <i>
+                                    <small ng-show="glycaemic==1">
+                                        You are Low for your glycaemic load. Your Value is<b>{{ glycaemicLoad }}</b>.
+                                    </small>
+                                    <small ng-show="glycaemic==2">
+                                        You are Medium for your glycaemic load. Your Value is<b>{{ glycaemicLoad }}</b>.
+                                    </small>
+                                    <small ng-show="glycaemic==3">
+                                       You are High for your glycaemic load. Your Value is<b>{{ glycaemicLoad }}</b>.
+                                    </small>
+                                </i>
+                            </div>
+                        </div>
                         </form>
                     </div>
 
@@ -2149,7 +2165,7 @@
                     </div> 
                     <div class="col-md-12">
                         <p>Medicine For</p>
-                            <select class="col-md-6 medications" name="medicinefor" ng-model="medication.medicinefor" ng-options="medicinefor for medicinefor in medicationforArray">
+                            <select class="col-md-6 medications" name="medicinefor" ng-model="medication.medicinefor" ng-options="medicinefor for medicinefor in medicationforArray" required>
                                 <option value="">-- Select Medicine For --</option>
                                 <span ng-show="medicationForm.medicinefor.$dirty&&medicationForm.medicinefor.$invalid">
                                      <span class="error-message" ng-show="medicationForm.medicinefor.$error.required"><span>Required.</span></span>
@@ -2164,14 +2180,14 @@
                     </div>
                     <div class="col-md-12" ng-show="isNew">
                         <p>From Date</p>
-                        <input type="text" name="fromdate" id="set-from-date" ng-model="medication.fromdate" maxlength="200" ng-required="isNew" >
+                        <input type="text" name="fromdate" id="set-from-date" ng-model="medication.fromdate" ng-required="isNew" >
                             <span ng-show="medicationForm.fromdate.$dirty&&medicationForm.fromdate.$invalid">
                                  <span class="error-message" ng-show="medicationForm.fromdate.$error.required"><span>Required.</span></span>
                             </span>
                     </div>
                     <div class="col-md-12" ng-show="isNew">
                         <p>To Date</p>
-                        <input type="text" name="todate" id="set-to-date" ng-model="medication.todate" maxlength="200" >
+                        <input type="text" name="todate" id="set-to-date" ng-model="medication.todate">
                     </div> 
                     <div class="col-md-12" ng-hide="isNew">
                         <p>Date</p>
@@ -2614,7 +2630,9 @@
 </div>
 
 <script type="text/javascript" src="../../js/script.js"></script>
-        <script>
+<script type="text/javascript" src="../../js/jquery.stepProgressBar.js"></script>
+        <script type="text/javascript">
+
 //for dashboard main date
             function daterangepicker() {
                 $("#main-date").click();
@@ -2714,34 +2732,6 @@
                     document.getElementById("medications-end").value = end.format('DD/MM/YYYY');
                 });
 
-                // For add mediactions date
-                // var selectedMedicationDate;
-                // dateChanged();
-                // $("#set-from-date").click();
-                // var options = {
-                //     opens:'left',
-                //     singleDatePicker: true
-                // };
-                
-                // $('#set-from-date').daterangepicker(options)
-                // .change(dateChanged)
-                // .on('changeDate', dateChanged);
-
-                // function dateChanged() {
-                //     selectedMedicationDate = $("#set-from-date").val();
-                //     $("#set-to-date").click();
-                //         var options = {
-                //             minDate : selectedMedicationDate,
-                //             opens:'left',   
-                //             singleDatePicker: true,
-                //             forceParse: false
-                //         };
-
-                //         $('#set-to-date').daterangepicker(options, function(start, end, label) {
-                //             angular.element(document.getElementById('set-to-date')).value = start.format('DD/MM/YYYY');
-                //         });
-                // };
-
                 var minDate2 = moment().format('DD/MM/YYYY');
                 var optionMinDate = {
                     singleDatePicker: true, 
@@ -2750,11 +2740,10 @@
                 };
               $("#set-from-date").daterangepicker({singleDatePicker: true,}).on('apply.daterangepicker', function(ev, picker) {
                   optionMinDate.minDate = picker.startDate.format('DD/MM/YYYY');
-                  $('#set-to-date').daterangepicker(optionMinDate, function(start) {
-                      document.getElementById("set-to-date").value = start.format('DD/MM/YYYY');
+                  $('#set-to-date').daterangepicker(optionMinDate).on('apply.daterangepicker', function(ev, picker) {
+                        document.getElementById("set-to-date").value = picker.startDate.format('DD/MM/YYYY');
                     });
                 });
-
 
                 $("#weight-log-date1").click();
                 var options = {
@@ -2774,3 +2763,66 @@
         <script type="text/javascript">
             $("#modal_medication").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
         </script>
+
+        <script type="text/javascript">
+
+          function callGlycaemic(){
+            $('#myGlycaemic').stepProgressBar({
+
+                currentValue: 0,
+                steps: [
+                    {
+                        value: 0,
+                        bottomLabel: ' '
+                    },
+                    {
+                        topLabel: ' ',
+                        value: 2,
+                        bottomLabel: '<span style="color: #00b8e6">LOW</span>'
+                    },
+                    {
+                        value: 10,
+                        bottomLabel: ' '
+                    },
+                    {
+                        topLabel: ' ',
+                        value: 17,
+                        bottomLabel: '<span style="color: #66cc00">MEDIUM</span>'
+                    },
+                    {
+                        value: 19,
+                        bottomLabel: ' '
+                    },
+                    {
+                        topLabel: ' ',
+                        value: 40,
+                        bottomLabel: '<span style="color: #e4ac01">HIGH</span>'
+                    },
+                    {
+                        value: 90,
+                        bottomLabel: ' '
+                    }
+                ],
+                unit: ' '
+            });
+
+            if(emi<=10){ 
+                $('.step-progressbar-bar').find('.step-progressbar-progress').css("background-color","#00b8e6");
+                $('.bmi-color').css("color","#00b8e6");
+            }else if(emi>=11 && emi<=19){
+                $('.step-progressbar-bar').find('.step-progressbar-progress').css("background-color","#66cc00");
+                $('.bmi-color').css("color","#66cc00");
+            }else if(emi>=20){
+                $('.step-progressbar-bar').find('.step-progressbar-progress').css("background-color","#e4ac01");
+                $('.bmi-color').css("color","#e4ac01");
+            }
+            setTimeout(function(){
+                refreshGlycaemic()
+            },200)
+        }; 
+
+        function refreshGlycaemic(){
+            $('#myGlycaemic').stepProgressBar('setCurrentValue', emi);
+        };
+
+</script>

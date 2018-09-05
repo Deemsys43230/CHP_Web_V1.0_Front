@@ -18763,7 +18763,7 @@ a.back-menu {
     margin-top: 5px;
 }
 .navbar-menu-right1 {
-     right: -205px !important;
+     right: -205px;
 }
 #dashboard-menu{
     width: 100%;
@@ -19088,6 +19088,14 @@ a.back-menu {
 .coach-activity {
     width: 35%;
     height: auto;
-    margin-left: 50px;
+    margin: 13px 55px;
     cursor: pointer;
+}
+.slogan-text {
+    font-size: 18px;
+    line-height: 24px;
+}
+.slogan-text-h5 {
+    font-size: 14px;
+    line-height: 22px;
 }

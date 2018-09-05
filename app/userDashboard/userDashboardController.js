@@ -36,6 +36,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
         $scope.historyReport=0;
         $scope.historyType=1;
         $scope.showExercise=0;
+           $window.emi=0;
         slidemenu();
         daterangepicker();
         modeltrigger();
@@ -46,20 +47,18 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
             $("#appAndDevice").click();
         }
 
-
-    if($rootScope.isMenuClicked==3){
-        $("#appAndDevice").click();
-    };
-    if($rootScope.isMenuClicked==2){
-        $("#dailyupdate").click();
-        $("#energyspent").click();
-    };
-    if($rootScope.isMenuClicked==4){
-        $("#dailyupdate").click();
-        $("#weight-water").click();
-    };
-
-
+        if($rootScope.isMenuClicked==3){
+            $("#appAndDevice").click();
+        };
+        if($rootScope.isMenuClicked==2){
+            $("#dailyupdate").click();
+            $("#energyspent").click();
+        };
+        if($rootScope.isMenuClicked==7){
+            $("#dailyupdate").click();
+            $("#weight-water").click();
+        };
+     
 
         //Modal Popup to add user food
         $scope.doUserAddFood=function(){
@@ -140,8 +139,9 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
         /*Starts For Medications*/
 
         // medication popup
-        $scope.reset=function(){
+        $scope.resetMedication=function(){
             $scope.medication={};
+            document.getElementById("set-to-date").value ="";
             $scope.medication.medicinename="";
             $scope.medication.dosage="";
             $scope.medication.todate="";
@@ -316,7 +316,10 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
 
         // Add Medications
         $scope.doInsertOrUpdateUserMedication=function(){
-            console.log($scope.medication);
+            var setToDate = document.getElementById("set-to-date").value
+            if (setToDate!="") {
+                $scope.medication.todate= setToDate;
+            }
             $scope.medication.session=$scope.getMedicationsSession($scope.medication.session);
             if($scope.medication.notes==""){
                 $scope.medication.notes=null;
@@ -497,18 +500,24 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
             });
         };
 
-    //to check user is having coach or not
+        //to check user is having coach or not
         $scope.doCheckUserMedicationDocument=function(){
-            $scope.showDocumentList=false;
             $scope.loader=true;
             requestHandler.getRequest("user/checkfolderexist/","").then(function(response){
-              $scope.userUploadedDocumentIsExists=response.data.isexist;
-                $scope.showDocumentList=true;
-              $scope.loader=false;
+                $scope.userUploadedDocumentIsExists=response.data.isexist;
+                if($scope.userUploadedDocumentIsExists==1){
+                    $scope.showDocumentList=true;
+                }
+                else{
+                    $scope.showDocumentList=false;
+                }
+
+                $scope.loader=false;
             }, function(){
                 errorMessage(Flash,"Please try again later!");
             });
         };
+
 
 
 
@@ -557,9 +566,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
             $scope.documentUploadForm.$setPristine();
         };
 
-        //init()
-        $scope.doGetUserDetails();
-       $scope.doCheckUserMedicationDocument();
+        
 
 
         //circle round
@@ -599,10 +606,6 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
             return val < 10 ? ('0' + val) : val;
         };
 
-        // for download
-        // var content = 'Medication Document Download';
-        // var blob = new Blob([ content ], { type : 'image/pdf' });
-        // $scope.url = (window.URL || window.webkitURL).createObjectURL( blob );
     /*End Medications Documents Upload*/
 
         $scope.doSyncDevices=function(id){
@@ -647,6 +650,8 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
 
         //On Select frequent foods
         $scope.frequentFood=function(foodid){
+            $window.emi=0;
+            callGlycaemic();
             $scope.isNew=true;
             $scope.title= "Add Food";
             $scope.loaded=true;
@@ -661,9 +666,11 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
 
         //On Select suggested foods
         $scope.suggestedFoodByAdmin=function(foodid){
+            $window.emi=0;
             $scope.isNew=true;
             $scope.title= "Add Food";
             $scope.loaded=true;
+            callGlycaemic();
             var getFoodDetailPromise=UserDashboardService.doGetSelectedFoodDetails(foodid);
             getFoodDetailPromise.then(function(result){
                 $scope.userSelectedFoodDetails=result;
@@ -674,11 +681,14 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
 
         //On Select search function
         $scope.foodSelected=function(){
+            $window.emi=0;
+            callGlycaemic();
             $scope.isNew=true;
             $scope.title= "Add Food";
             var getFoodDetailPromise=UserDashboardService.doGetSelectedFoodDetails($scope.selectedFood.foodid);
             getFoodDetailPromise.then(function(result){
                 $scope.userSelectedFoodDetails=result;
+                console.log(  $scope.userSelectedFoodDetails.glycaemicindex);
                 $scope.doUserAddFood();
             });
         };
@@ -686,19 +696,18 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
         var originalservings="";
         //On Select edit foods
         $scope.doEditUserFood=function(foodid,userfoodid){
-
             $scope.isNew=false;
             $scope.title= "Edit Food";
             $scope.loaded=true;
+            callGlycaemic();
             var getFoodDetailForEditPromise=UserDashboardService.doGetSelectedFoodDetails(foodid);
             getFoodDetailForEditPromise.then(function(result){
                 $scope.userSelectedFoodDetails=result;
                 var getUserFoodDetailsPromise=UserDashboardService.doGetUserFoodDetails(userfoodid);
                 getUserFoodDetailsPromise.then(function(result){
-
+                    $scope.userFoodGlycaemic=result.glycaemicload;
                     $scope.userFood.userfoodid=result.userfoodid;
                     $scope.userFood.foodid=result.foodid;
-                    console.log($scope.userSelectedFoodDetails.measure);
                     //  $scope.userFood.measure=result.measureid;
                     $.each($scope.userSelectedFoodDetails.measure, function(index,value) {
                         if(value.measureid == result.measureid.measureid){
@@ -706,9 +715,22 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
                             originalmeasure = angular.copy(value);
                         }
                     });
+
                     $scope.userFood.servings=parseFloat(result.measureid.servings);
                     originalservings = angular.copy(result.measureid.servings);
                     $scope.current=$scope.caloriesIntake=result.measureid.calories;
+                    $scope.glycaemicLoad=result.glycaemicload;
+                    $window.emi=$scope.glycaemicLoad;
+                    callGlycaemic();
+                    if($scope.glycaemicLoad <= 10) {
+                        $scope.glycaemic = 1;
+                    }
+                    else if($scope.glycaemicLoad >= 11 && $scope.glycaemicLoad <= 19) {
+                        $scope.glycaemic = 2;
+                    }
+                    else {
+                        $scope.glycaemic = 3;
+                    }
                     $scope.current=$scope.current.toFixed(2);
                     if(($scope.current.length-3)>2) $scope.max=100+((String($scope.current|0).slice(0, -2))*100);
                     else $scope.max=100;
@@ -735,6 +757,23 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
                 $scope.current=$scope.current.toFixed(2);
                 if(($scope.current.length-3)>2) $scope.max=100+((String($scope.current|0).slice(0, -2))*100);
                 else $scope.max=100;
+                 /* glyphicload calculation*/
+                $scope.userCarbo=($scope.current*$scope.userFood.measure.carbo);
+                
+                $scope.glycaemicLoad = parseFloat(($scope.userSelectedFoodDetails.glycaemicindex*$scope.userCarbo) / 100);
+                $scope.glycaemicLoad=$scope.glycaemicLoad.toFixed(2);
+                /* for graph*/
+                $window.emi=$scope.glycaemicLoad;
+                callGlycaemic();
+                if($scope.glycaemicLoad <= 10) {
+                    $scope.glycaemic = 1;
+                }
+                else if($scope.glycaemicLoad >= 11 && $scope.glycaemicLoad <= 19) {
+                    $scope.glycaemic = 2;
+                }
+                else {
+                    $scope.glycaemic = 3;
+                }
             }
         };
 
@@ -4826,6 +4865,8 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
             $scope.checkGoalOnLoad(date);
             $scope.doGetWearableDateByDate(date);
             $scope.doGetMedicationListByUser();
+            $scope.doCheckUserMedicationDocument();
+            $scope.doGetUserDetails();
            // $scope.doSyncDevices(date);
         };
 
@@ -5291,7 +5332,6 @@ userApp.directive('validFile',function(){
     }
 });
 
-
 //for dashboard side menu open functionaliteis
 function slidemenu() {
     $('#sidemenu a').on('click', function(e){
@@ -5432,3 +5472,8 @@ function coachAdviceCarousel(){
 //     function ($compileProvider) {
 //         $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|file|blob):/);
 // }]);
+// userApp.config(function($sceDelegateProvider) {
+//   $sceDelegateProvider.resourceUrlWhitelist([
+//     'https://cyberhealthweb.s3.amazonaws.com/**'
+//   ]);
+// });

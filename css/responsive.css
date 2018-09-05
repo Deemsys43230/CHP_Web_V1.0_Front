@@ -1314,6 +1314,21 @@
     #targetGraph{
         width:370px;
     }
+    .coach-activity {
+        width: 30%;
+        height: auto;
+        margin-left: 75px;
+    }
+    .waterlog-img{
+        width: 100%;
+        margin: -31px 5px;
+    }
+    .navbar-menu-right1 {
+        right: -415px;
+    }
+    .navbar-menu-right {
+        right: -240px !important;
+    }
 }
 
 @media (min-width: 1200px) and (max-width: 1300px){
@@ -1601,62 +1616,31 @@
         width: 60%;
         margin-top: -65px;
     }
-
-    .circle-container .circle-menu {
-        height: 120px;
-        width: 120px;
-        font-size: 16px;
+    .menu-sidebar {
+        margin: 0 5px;
     }
-
-    .deg0 {
-        transform: translate(13em);
+    .menu-rightsidebar {
+        margin: 0 5px;
     }
-
-    /* 12em = half the width of the wrapper */
-    .deg45 {
-        transform: rotate(60deg) translate(13em) rotate(-60deg);
+    .menu-rightsidebar1 {
+        margin: 20px 5px;
     }
-
-    .deg135 {
-        transform: rotate(120deg) translate(13em) rotate(-120deg);
+    .selector {
+        left: 51%;
     }
-
-    .deg180 {
-        transform: translate(-13em);
+    .slogan-text {
+        font-size: 15px;
     }
-
-    .deg225 {
-        transform: rotate(240deg) translate(13em) rotate(-240deg);
+    .slogan-text-h5 {
+        font-size: 12px;
     }
-
-    .deg315 {
-        transform: rotate(300deg) translate(13em) rotate(-300deg);
+    .coach-activity {
+        width: 43%;
+        height: auto;
+        margin: 13px 40px;
     }
-
-    .circle-container {
-        margin: 17% 28.5% 0;
-    }
-
-    .circle-container:after {
-        top: -120px;
-        width: 400px;
-        height: 400px;
-    }
-    .coach-bubble {
-        margin: 40px;
-        min-height: 135px;
-        width: 250px;
-        margin-left: 75px;
-        margin-top: -3px;
-    }
-    .margin-left-15p{
-        margin-left:32%
-    }
-    .margin-bottom-120 {
-        margin-bottom: 120px;
-    }
-    .device-margin{
-        margin:7% 2%;
+    .waterlog-img {
+        margin-top: 0px;
     }
 }
 

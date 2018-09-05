@@ -67,6 +67,7 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../app/userDashboard/userDashboardService.js',
                                 '../../app/userDashboard/userDashboardController.js',
                                 '../../plugin/dateRange/daterangepicker.css',
+                                '../../css/stepProgressBar.css',
                                 '../../plugin/dateRange/daterangepicker.js',
                                 '../../css/horizon-swiper.min.css',
                                 '../../css/horizon-theme.min.css',
@@ -937,6 +938,7 @@ userApp.controller("UserInitialController",['$scope','requestHandler','$location
         }
         else {
             $('.navbar-collapse ul').addClass('navbar-menu-right1');
+            $('.navbar-collapse ul').removeClass('navbar-menu-right');
         }
     });
 

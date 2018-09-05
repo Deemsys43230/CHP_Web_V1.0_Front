@@ -20,6 +20,7 @@ adminApp.factory("UserDashboardService",['requestHandler',function(requestHandle
     //Get Food by date
     userDashboardServiceObj.getFoodDiary=function(date){
         return requestHandler.postRequest("user/getFoodbyDate/",{"addeddate":date}).then(function (response) {
+            console.log(response.data.MyFoodData);
             return response.data.MyFoodData;
         }, function () {
             console.log("Please try again later!")
