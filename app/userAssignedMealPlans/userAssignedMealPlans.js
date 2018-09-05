@@ -111,6 +111,7 @@ userApp.controller('UserAssignedMealPlansController',['$scope','requestHandler',
         $scope.getFoodPlanItemParam={'id':foodplanid, 'date':date};
         requestHandler.postRequest("user/getfooditemdetail/", $scope.getFoodPlanItemParam).then(function(response){
             $scope.foodPlanItemDetails= response.data.plandetail;
+            $scope.assignedPlanRoundedValue= $scope.foodPlanItemDetails.calorieintake.toFixed(2);
         }, function(){
             errorMessage(Flash,"Please try again later!");
         });

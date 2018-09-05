@@ -117,25 +117,25 @@
                 <div class="col-md-4 no-padding">
                     <div class="col-md-12">
                         <p>Intensity<small class="pull-right text-red"><i>optional</i></small></p>
-                        <input type="text" name="plandays" ng-model="workoutPlan.intensity" focus-me="shouldBeOpen">
+                        <input type="text" name="plandays" ng-model="workoutPlan.intensity" maxlength="100" focus-me="shouldBeOpen">
                     </div>             
                 </div>         
                 <div class="col-md-4 no-padding">
                     <div class="col-md-12">
                         <p>Level<small class="pull-right text-red"><i>optional</i></small></p>
-                        <input type="text" name="plandays" ng-model="workoutPlan.level" focus-me="shouldBeOpen">
+                        <input type="text" name="plandays" ng-model="workoutPlan.level" maxlength="100" focus-me="shouldBeOpen">
                     </div>            
                 </div>
                 <div class="col-md-4 no-padding">
                     <div class="col-md-12">
                         <p>It is Good For<small class="pull-right text-red"><i>optional</i></small></p>
-                        <input type="text" name="plandays" ng-model="workoutPlan.goodfor" focus-me="shouldBeOpen">
+                        <input type="text" name="plandays" ng-model="workoutPlan.goodfor" maxlength="100" focus-me="shouldBeOpen">
                     </div>            
                 </div>         
                 <div class="col-md-4 no-padding">
                     <div class="col-md-12">
                         <p>Equipments Used<small class="pull-right text-red"><i>optional</i></small></p>
-                        <input type="text" name="plandays" ng-model="workoutPlan.equipments" max-length="200" focus-me="shouldBeOpen">
+                        <input type="text" name="plandays" ng-model="workoutPlan.equipments" maxlength="100" focus-me="shouldBeOpen">
                     </div>            
                 </div>
                 <div class="col-md-12">
@@ -143,7 +143,7 @@
                     <span ng-show="workoutPlanForm.description.$dirty&&workoutPlanForm.description.$invalid">
                          <span class="error-message textarea-errormessage40" ng-show="workoutPlanForm.description.$error.required"><span>Required.</span></span>
                     </span>
-                    <textarea class="forum-textarea" name="description" ng-model="workoutPlan.description" maxlength="250" required></textarea>
+                    <textarea class="forum-textarea" name="description" ng-model="workoutPlan.description" maxlength="200" required></textarea>
                 </div>
             </div>
             

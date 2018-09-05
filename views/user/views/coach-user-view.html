@@ -359,7 +359,7 @@
                 <table class="table table-bordered table-striped" ng-show="workoutplan.workPlanDetailView">
                     <thead>
                         <tr class="warning">
-                            <th colspan="6"><h2 class="text-center"><strong>{{workoutplandetail.planname}}</strong></h2></th>
+                            <th colspan="6"><h2 class="text-center wrap-all"><strong>{{workoutplandetail.planname}}</strong></h2></th>
                         </tr>
                     </thead>
                 <tr>
@@ -661,7 +661,7 @@
 </div>
 
 <!-- View Exercise Item from Workout Plan Popup -->
-<div id="view-workout-item" class="popupContainer-width-big" style="display:none;">
+<div id="view-workout-item" class="popupContainer-width-big" style="display:none; top:20px !important;">
     <div class="center-block">
     <header class="popupHeader width-100">
         <span class="header_title">Workout Item</span>
@@ -672,59 +672,59 @@
         <!-- Register Form -->
         <div class="common_model">
             
-            <div class="col-md-8 margin-bottom-10">
+            <div class="col-md-9 margin-bottom-10">
             <table class="table table-bordered table-striped">
                 <tr>
-                    <td class="col-md-6 text-bold">Day</td>
-                    <td class="col-md-6 wrap">Day&nbsp;{{workoutPlanItemDetails.day}}</td>
+                    <td class="col-md-3 text-bold">Day</td>
+                    <td class="col-md-9 wrap">Day&nbsp;{{workoutPlanItemDetails.day}}</td>
                 </tr>
                 <tr>
-                    <td class="col-md-6 text-bold">Exercise Name</td>
-                    <td class="col-md-6 wrap">{{workoutPlanItemDetails.exercisename}}</td>
+                    <td class="col-md-3 text-bold">Exercise Name</td>
+                    <td class="col-md-9 wrap">{{workoutPlanItemDetails.exercisename}}</td>
                 </tr>
                 <tr>
-                    <td class="col-md-6 text-bold">Category Name</td>
-                    <td class="col-md-6 wrap">{{workoutPlanItemDetails.categoryname}}</td>
+                    <td class="col-md-3 text-bold">Category Name</td>
+                    <td class="col-md-9 wrap">{{workoutPlanItemDetails.categoryname}}</td>
                 </tr>
                 <tr>
-                    <td class="col-md-6 text-bold">Type Name</td>
-                    <td class="col-md-6 wrap">{{workoutPlanItemDetails.typename}}</td>
+                    <td class="col-md-3 text-bold">Type Name</td>
+                    <td class="col-md-9 wrap">{{workoutPlanItemDetails.typename}}</td>
                 </tr>
                 <tr>
-                    <td class="col-md-6 text-bold">Time</td>
-                    <td class="col-md-6 wrap">{{workoutPlanItemDetails.minutes}}&nbsp;Minutes</td>
+                    <td class="col-md-3 text-bold">Time</td>
+                    <td class="col-md-9 wrap">{{workoutPlanItemDetails.minutes}}&nbsp;Minutes</td>
                 </tr>
                 <tr>
-                    <td class="col-md-6 text-bold">Level</td>
-                    <td class="col-md-6 wrap">{{workoutPlanItemDetails.levelname}}</td>
+                    <td class="col-md-3 text-bold">Level</td>
+                    <td class="col-md-9 wrap">{{workoutPlanItemDetails.levelname}}</td>
                 </tr>
                 <tr>
-                    <td class="col-md-6 text-bold">Calories Intake</td>
-                    <td class="col-md-6">{{workoutPlanItemDetails.calorieburn}}&nbsp;KCals</td>
+                    <td class="col-md-3 text-bold">Calories Burnt</td>
+                    <td class="col-md-9">{{workoutPlanItemDetails.calorieburn}}&nbsp;KCals</td>
                 </tr>
                 <tr>
-                    <td class="col-md-6 text-bold">Intensity</td>
-                    <td class="col-md-6">{{workoutPlanItemDetails.intensity!=""?workoutPlanItemDetails.intensity:"&nbsp;-"}}</td>
+                    <td class="col-md-3 text-bold">Intensity</td>
+                    <td class="col-md-9 wrap-all">{{workoutPlanItemDetails.intensity!=""?workoutPlanItemDetails.intensity:"&nbsp;-"}}</td>
                 </tr>
                 <tr>
-                    <td class="col-md-6 text-bold">Plan Level</td>
-                    <td class="col-md-6">{{workoutPlanItemDetails.level!=""?workoutPlanItemDetails.level:"&nbsp;-"}}</td>
+                    <td class="col-md-3 text-bold">Plan Level</td>
+                    <td class="col-md-9 wrap-all">{{workoutPlanItemDetails.level!=""?workoutPlanItemDetails.level:"&nbsp;-"}}</td>
                 </tr>
                 <tr>
-                    <td class="col-md-6 text-bold">Good For</td>
-                    <td class="col-md-6">{{workoutPlanItemDetails.goodfor!=""?workoutPlanItemDetails.goodfor:"&nbsp;-"}}</td>
+                    <td class="col-md-3 text-bold">Good For</td>
+                    <td class="col-md-9 wrap-all">{{workoutPlanItemDetails.goodfor!=""?workoutPlanItemDetails.goodfor:"&nbsp;-"}}</td>
                 </tr>
                 <tr>
-                    <td class="col-md-6 text-bold">Equipments</td>
-                    <td class="col-md-6">{{workoutPlanItemDetails.equipments!=""?workoutPlanItemDetails.equipments:"&nbsp;-"}}</td>
+                    <td class="col-md-3 text-bold">Equipments</td>
+                    <td class="col-md-9 wrap-all">{{workoutPlanItemDetails.equipments!=""?workoutPlanItemDetails.equipments:"&nbsp;-"}}</td>
                 </tr>
                 <tr>
-                    <td class="col-md-6 text-bold">Is Optional&nbsp;?</td>
-                    <td class="col-md-6">{{workoutPlanItemDetails.isoptional==1?"Yes":"No"}}</td>
+                    <td class="col-md-3 text-bold">Is Optional&nbsp;?</td>
+                    <td class="col-md-9">{{workoutPlanItemDetails.isoptional==1?"Yes":"No"}}</td>
                 </tr>
             </table>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3 no-padding">
                 <img class="add-exercise-img" width="220" height="208" ng-src="{{workoutPlanItemDetails.exerciseimage}}" ng-if="workoutPlanItemDetails.exerciseimage&&(workoutPlanItemDetails.videosource==null||workoutPlanItemDetails.videosource== '')">
                 <iframe width="220" height="220" ng-src="{{workoutPlanItemDetails.videosource | trusted}}" ng-if="(workoutPlanItemDetails.videosource!=null && workoutPlanItemDetails.videosource!='')&&workoutPlanItemDetails.exerciseimage" frameborder="0" allowfullscreen></iframe>
                 

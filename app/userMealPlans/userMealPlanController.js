@@ -329,6 +329,7 @@ userApp.controller('ViewUserMealPlanController',['$scope','requestHandler','Flas
         $scope.getFoodPlanItemParam={'id':foodid};
         requestHandler.postRequest("user/foodplandetail/", $scope.getFoodPlanItemParam).then(function(response){
             $scope.foodPlanItemDetails= response.data.savedfoodplan;
+           $scope.foodCalorieRoundedValue=$scope.foodPlanItemDetails.calorieintake.toFixed(2);
         }, function(){
             errorMessage(Flash,"Please try again later!");
         });

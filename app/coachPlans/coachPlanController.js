@@ -310,6 +310,7 @@ $scope.doViewCoachFoodItemFromPlan=function(foodid){
     $scope.getFoodPlanItemParam={'id':foodid};
     requestHandler.postRequest("coach/foodplandetail/", $scope.getFoodPlanItemParam).then(function(response){
         $scope.foodPlanItemDetails= response.data.savedfoodplan;
+        $scope.coachCalorieRoundedValue= $scope.foodPlanItemDetails.calorieintake.toFixed(2);
     }, function(){
         errorMessage(Flash,"Please try again later!");
     });
