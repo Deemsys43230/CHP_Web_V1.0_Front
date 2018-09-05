@@ -53,7 +53,6 @@ userApp.controller('DemographyController',['$rootScope','$scope','requestHandler
     };
 
 
-
     //BMI Calculation for demography page onchange event
     $scope.bmiCalculation=function(){
         if(Number($scope.demography.height)&&Number($scope.demography.weight)){
@@ -321,7 +320,7 @@ userApp.controller('DemographyController',['$rootScope','$scope','requestHandler
 
 
 
-        if(plantype==1){
+        if(plantype==1 || plantype==4 ){
             $scope.weightlossError=false;
             $scope.weightgainError=false;
         }

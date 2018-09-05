@@ -160,12 +160,19 @@ userApp.controller('UserProfileController',['$scope','requestHandler','Flash','$
         $rootScope.update1 = true; //Pass value 'true' when directed from 'Change your plan' option
         delete $scope.userProfile.imageurl;
         delete $scope.userProfile.createdon;
-        if($scope.userProfile.country!=null  && $scope.userProfile.country!="" ){
+        console.log($scope.userProfile.country);
+        if($scope.userProfile.countrySelect!=null  && $scope.userProfile.countrySelect!="" ){
             $scope.userProfile.country = $scope.userProfile.countrySelect.code;
         }
-        if( $scope.userProfile.state!=null && $scope.userProfile.country!="" ){
+        else{
+            $scope.userProfile.country=null;
+        }
+        if( $scope.userProfile.stateSelect!=null && $scope.userProfile.stateSelect!="" ){
             $scope.userProfile.state = $scope.userProfile.stateSelect.code;
-        };
+        }
+        else{
+            $scope.userProfile.state=null;
+        }
         $scope.userProfile.unitPreference =parseInt($scope.userProfile.unitPreference);
 
         requestHandler.getRequest("getUserId/","").then(function(response){

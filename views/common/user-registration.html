@@ -8,7 +8,6 @@
                             <h1 class="h1-label">Choose Plan</h1>
                             <div class="margin-top-10"><small><i>How Can I Help You?</i></small></div>
                         </div>
-                        <div flash-message="2000" class="pull-right no-padding col-lg-4 col-md-4"></div>
                     </div>
                     <div class="plans" ng-click="planChoosen(2)">
                         <div class="choose-plan  plan">
@@ -407,6 +406,9 @@
         <div class="container container-shadow-box"  ng-show="steps==6">
             <h1 class="h1-label">Let's Start Sign Up</h1>
             <hr/>
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <div flash-message="2000" class="pull-right no-padding col-lg-4 col-md-4"></div>
+            </div>
             <div class="col-lg-12 col-sm-12 col-md-12 margin-top-20">
             <form  name="registerForm" ng-submit="registerForm.$valid" ng-model="registerForm" novalidate>
                 <div class="col-md-12">

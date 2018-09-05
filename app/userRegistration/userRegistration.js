@@ -1,6 +1,6 @@
 var commonApp = angular.module('commonApp', ['ngRoute','oc.lazyLoad','requestModule','flash']);
 
-commonApp.controller('UserRegistrationController',['$scope','requestHandler','Flash','$location',function($scope,requestHandler,Flash,$location) {
+commonApp.controller('UserRegistrationController',['$scope','requestHandler','Flash','$location','$window','$timeout',function($scope,requestHandler,Flash,$location,$window,$timeout) {
 
     var actualnches=0.00;
     // to choose user plan
@@ -200,8 +200,13 @@ commonApp.controller('UserRegistrationController',['$scope','requestHandler','Fl
                 $scope.registerUser.targetweight=$scope.userPlan.targetweight;
             }
             requestHandler.postRequest("userregistration/",$scope.registerUser).then(function(response) {
-                $scope.steps = 0;
+                $scope.steps = 6;
                 successMessage(Flash,"User Registration Successful");
+                $timeout(function(){
+                    $window.location.href="../../#/home?showLogin=true";
+                },2000);
+
+
 
             }, function () {
                 errorMessage(Flash, "Please try again later!")
