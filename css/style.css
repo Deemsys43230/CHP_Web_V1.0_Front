@@ -19104,3 +19104,13 @@ a.back-menu {
     height: auto;
     margin: 0 auto;
 }
+.user-book-appointment{
+    border: 1px solid #ddd;
+    height: 594px;
+    margin-top: 43px;
+    background: #fff9de;
+}
+.user-view-appointment{
+    margin: 3px 0 10px 3px;
+    box-shadow: 0 0 3px rgba(0,0,0,.3);
+}
