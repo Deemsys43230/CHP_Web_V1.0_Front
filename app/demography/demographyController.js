@@ -15,6 +15,12 @@ userApp.controller('DemographyController',['$rootScope','$scope','requestHandler
             $scope.demography.hip=$scope.demography.hip;
             $scope.demography.waist=$scope.demography.waist;
             $scope.demography.userPlanType =($scope.demography.userPlanType).toString();
+                if($scope.demography.userPlanType==4 || $scope.demography.userPlanType==1  ){
+                    $scope.isShowActivityLevel=1;
+                }
+                else{
+                    $scope.isShowActivityLevel=2;
+                }
             $scope.userPlanTypeOld=$scope.demography.userPlanType;
             $scope.demography.userActivityType =($scope.demography.userActivityType).toString();
 
@@ -52,6 +58,15 @@ userApp.controller('DemographyController',['$rootScope','$scope','requestHandler
         });
     };
 
+
+    $scope.isUserPlanChanges=function(){
+        if($scope.demography.userPlanType==4 || $scope.demography.userPlanType==1  ){
+            $scope.isShowActivityLevel=1;
+        }
+        else{
+            $scope.isShowActivityLevel=2;
+        }
+    };
 
     //BMI Calculation for demography page onchange event
     $scope.bmiCalculation=function(){
@@ -320,7 +335,7 @@ userApp.controller('DemographyController',['$rootScope','$scope','requestHandler
 
 
 
-        if(plantype==1 || plantype==4 ){
+        if(plantype==1){
             $scope.weightlossError=false;
             $scope.weightgainError=false;
         }

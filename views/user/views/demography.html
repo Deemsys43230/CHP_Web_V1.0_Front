@@ -424,7 +424,7 @@
             <!--h5 ng-if=planHighlight><span style="font-weight: bold; font-size: x-large; color: orange">Plan Type</span><span class="pull-right">:</span></h5-->
         </div>
         <div class="col-lg-6 col-md-6 col-sm-5 padding-right-0">
-            <select class="form-control main"  ng-model="demography.userPlanType" ng-init="demography.userPlanType='1'"  name="userPlanType" ng-change="planChangeValidation(demography.userPlanType)">
+            <select class="form-control main"  ng-model="demography.userPlanType" ng-init="demography.userPlanType='1'"  name="userPlanType" ng-change="planChangeValidation(demography.userPlanType);isUserPlanChanges();">
                 <option value="1">Maintain weight</option>
                 <option value="2">Weight loss</option>
                 <option value="3">Weight gain</option>
@@ -442,7 +442,7 @@
         <span class="error-message textarea-errormessage40-right60" ng-show="!demographyForm.targetWeightkgs.$error.required&&maxTargetWeightKgs" style="top:0;left: 30px;"><span>Please&nbsp;Enter&nbsp;Valid&nbsp;Weight.</span></span>
         <span class="error-message textarea-errormessage40" ng-show="!demographyForm.targetWeightkgs.$error.required&&weightlossError"><span>Should&nbsp;be&nbsp;less&nbsp;than&nbsp;your&nbsp;weight</span></span>
         <span class="error-message textarea-errormessage40" ng-show="!demographyForm.targetWeightkgs.$error.required&&weightgainError"><span>Should&nbsp;be&nbsp;greater&nbsp;than&nbsp;your&nbsp;weight</span></span>
-       <span class="error-message textarea-errormessage40" ng-show="!demographyForm.targetWeightkgs.$error.required&&!weightlossError&&invalidError"><span>Invalid</span></span>
+       <span class="error-message textarea-errormessage40" ng-show="!demographyForm.targetWeightkgs.$error.required&&!weightlossError&&invalidError"><span style="bottom: 15px !important;">Invalid</span></span>
         <span ng-show="demographyForm.targetWeightkgs.$dirty&&demographyForm.targetWeightkgs.$invalid">
              <span class="error-message textarea-errormessage40" ng-show="demographyForm.targetWeightkgs.$error.required"><span class="error-bottom">Required.</span></span>
 
@@ -484,7 +484,7 @@
         </div>
     </div>-->
 
-    <div class="col-lg-12 col-md-12 col-sm-12 margin-top-15 clearfix" style="border-left:1px solid #eee">
+    <div class="col-lg-12 col-md-12 col-sm-12 margin-top-15 clearfix" style="border-left:1px solid #eee" ng-hide="isShowActivityLevel==1">
         <div class="col-lg-6 col-md-6 col-sm-7 padding-top-4 padding-right-0">
             <h5>Activity Level <span class="pull-right">:</span></h5>
         </div>
