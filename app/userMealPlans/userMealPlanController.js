@@ -1,7 +1,7 @@
 var userApp = angular.module('userApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','ngPercentDisplay','angular-svg-round-progress','angularUtils.directives.dirPagination','userDashboardServiceModule','ui.bootstrap']);
 
-userApp.controller('UserMealPlanController',['$scope','requestHandler','Flash',function($scope,requestHandler,Flash) {
-
+userApp.controller('UserMealPlanController',['$scope','requestHandler','Flash','$rootScope',function($scope,requestHandler,Flash,$rootScope) {
+    $rootScope.isMenuShow=1;
     $scope.activeClass.mealPlans='active';
 
     $scope.doGetUserMealPlanList=function(){

@@ -1,8 +1,8 @@
 
 var userApp = angular.module('userApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','friendsServiceModule','angular-nicescroll']);
 
-userApp.controller('FriendsController',['$scope','requestHandler','Flash','FriendsService','$sce','$timeout',function($scope,requestHandler,Flash,FriendsService,$sce,$timeout){
-
+userApp.controller('FriendsController',['$scope','requestHandler','Flash','FriendsService','$sce','$timeout','$rootScope',function($scope,requestHandler,Flash,FriendsService,$sce,$timeout,$rootScope){
+    $rootScope.isMenuShow=1;
     $scope.viewDetails=0;
     //Initialize search
     $scope.friendsearch="";

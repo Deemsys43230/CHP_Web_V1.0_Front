@@ -907,21 +907,27 @@ userApp.controller("UserInitialController",['$scope','requestHandler','$location
             console.log(response.data);
             if (response.data.Response_status==1) {
                 $(function(){
-                    $("#lean_overlay").fadeTo(1000);
-                    $("#emailVerificationAlert").fadeIn(600);
-                    $(".common_model").show();
-                });
+                        $("#lean_overlay").fadeTo(1000);
+                        $("#emailVerificationAlert").fadeIn(600);
+                        $(".common_model").show();
+                        $(".popupHeader").show();
+                        $(".popupBody").show();
+                    });
 
-                $(".modal_close").click(function(){
-                    $(".common_model").hide();
-                    $("#emailVerificationAlert").hide();
-                    $("#lean_overlay").hide();
-                });
+                    $(".modal_close").click(function(){
+                        $(".common_model").hide();
+                        $("#emailVerificationAlert").hide();
+                        $("#lean_overlay").hide();
+                        $(".popupHeader").hide();
+                        $(".popupBody").hide();
+                    });
 
-                $("#lean_overlay").click(function(){
-                    $(".common_model").hide();
-                    $("#emailVerificationAlert").hide();
-                    $("#lean_overlay").hide();
+                    $("#lean_overlay").click(function(){
+                        $(".common_model").hide();
+                        $("#emailVerificationAlert").hide();
+                        $("#lean_overlay").hide();
+                        $(".popupHeader").hide();
+                        $(".popupBody").hide();
                 });
             }
         });

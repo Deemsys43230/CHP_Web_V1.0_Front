@@ -1,8 +1,8 @@
 var userApp = angular.module('userApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','angularUtils.directives.dirPagination']);
 
-userApp.controller('UserPaymentController',['$scope','requestHandler','Flash','$routeParams',function($scope,requestHandler,Flash,$routeParams) {
+userApp.controller('UserPaymentController',['$scope','requestHandler','Flash','$routeParams','$rootScope',function($scope,requestHandler,Flash,$routeParams,$rootScope) {
 
-
+    $rootScope.isMenuShow=1;
     $scope.sortcoursenameicon="fa fa-caret-down";
     $scope.sortcategoryicon = "fa fa-caret-down";
     $scope.sortauthoricon = "fa fa-caret-down";
