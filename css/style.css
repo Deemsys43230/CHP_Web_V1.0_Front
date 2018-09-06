@@ -19099,3 +19099,8 @@ a.back-menu {
     font-size: 14px;
     line-height: 22px;
 }
+.mail-alert-button {
+    width: 35%;
+    height: auto;
+    margin: 0 auto;
+}

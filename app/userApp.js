@@ -67,11 +67,11 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../app/userDashboard/userDashboardService.js',
                                 '../../app/userDashboard/userDashboardController.js',
                                 '../../plugin/dateRange/daterangepicker.css',
-                                '../../css/stepProgressBar.css',
                                 '../../plugin/dateRange/daterangepicker.js',
                                 '../../css/horizon-swiper.min.css',
                                 '../../css/horizon-theme.min.css',
-                                '../../js/horizon-swiper.min.js'
+                                '../../js/horizon-swiper.min.js', 
+                                '../../css/stepProgressBar.css',
                             ]
                         })}]},
                 controller:'UserDashboardController'
@@ -904,7 +904,26 @@ userApp.controller("UserInitialController",['$scope','requestHandler','$location
     //to resend verification email link
     $scope.emailVerificationRequest=function() {
         requestHandler.postRequest("verifyEmailId/", {"emailid": $scope.currentUserEmailId}).then(function (response) {
-            console.log("sample data");
+            console.log(response.data);
+            if (response.data.Response_status==1) {
+                $(function(){
+                    $("#lean_overlay").fadeTo(1000);
+                    $("#emailVerificationAlert").fadeIn(600);
+                    $(".common_model").show();
+                });
+
+                $(".modal_close").click(function(){
+                    $(".common_model").hide();
+                    $("#emailVerificationAlert").hide();
+                    $("#lean_overlay").hide();
+                });
+
+                $("#lean_overlay").click(function(){
+                    $(".common_model").hide();
+                    $("#emailVerificationAlert").hide();
+                    $("#lean_overlay").hide();
+                });
+            }
         });
     };
 
@@ -964,7 +983,7 @@ userApp.controller("UserInitialController",['$scope','requestHandler','$location
         if(pathVar==0){
            $location.path("profile");
            $rootScope.$on( "$routeChangeStart", function() {
-                $(function(){
+            $(function(){
                 $("#lean_overlay").fadeTo(1000);
                 $("#review-modal").fadeIn(600);
                 $(".common_model").show();
