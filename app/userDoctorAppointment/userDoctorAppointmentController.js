@@ -32,13 +32,13 @@ userApp.controller('UserDoctorAppointment',['$scope','requestHandler','Flash','$
             var todayDate = new Date();
             $scope.fromDate=moment(new Date(todayDate.getFullYear(), monthIndex+1, 1)).format('DD/MM/YYYY HH:mm:ss');
             $scope.endDate=moment(new Date(todayDate.getFullYear(), monthIndex+2, 0)).format('DD/MM/YYYY HH:mm:ss');
-            $scope.doGetDoctorAppointmentList($scope.fromDate,$scope.endDate);
+            $scope.doGetDoctorAppointmentList();
         },
         prevMonth :function(monthIndex){
             var todayDate = new Date();
             $scope.fromDate=moment(new Date(todayDate.getFullYear(), monthIndex-1, 1)).format('DD/MM/YYYY HH:mm:ss');
             $scope.endDate=moment(new Date(todayDate.getFullYear(), monthIndex, 0)).format('DD/MM/YYYY HH:mm:ss');
-            $scope.doGetDoctorAppointmentList($scope.fromDate,$scope.endDate);
+            $scope.doGetDoctorAppointmentList();
         }
 
     };
@@ -71,7 +71,7 @@ userApp.controller('UserDoctorAppointment',['$scope','requestHandler','Flash','$
         requestHandler.postRequest("user/getdoctorappointmentlist/",$scope.getAppointmentsParam).then(function(response){
             $scope.appointmentList= response.data.list;
             $scope.selectedDateAppointment= $scope.appointmentList[0].appointments;
-            $scope.userGetAllDateDetails($scope.fromDate,$scope.endDate);
+         /*   $scope.userGetAllDateDetails($scope.fromDate,$scope.endDate);*/
         });
     };
 
@@ -120,11 +120,8 @@ userApp.controller('UserDoctorAppointment',['$scope','requestHandler','Flash','$
 
 
     $scope.doGetDoctorAppointmentList=function(){
-        var selectedDate = new Date();
-        $scope.calendarOptions.selectedDate=date;
-        $scope.selectedDate= moment($scope.calendarOptions.selectedDate).format('DD/MM/YYYY');
         $scope.previousDate=0;
-        $scope.userGetDateDetails(selectedDate);
+        $scope.userGetAllDateDetails($scope.fromDate,$scope.endDate);
     };
     // book Appointment modal
     $scope.userBookDoctorAppointment=function(){
@@ -175,14 +172,19 @@ userApp.controller('UserDoctorAppointment',['$scope','requestHandler','Flash','$
         else{
             $scope.userAppointments.clinicname=$scope.userAppointments.clinicname;
         }
-        console.log($scope.userAppointments);
         requestHandler.postRequest("user/insertorupdatedoctorappointment/",$scope.userAppointments).then(function(response){
-            $scope.userBookDoctorAppointment();
+
             $(".common_model").hide();
             $("#user-doctor-appointment").hide();
             $("#lean_overlay").hide();
-            $scope.doGetDoctorAppointmentList();
-            successMessage(Flash,"Successfully Booked");
+            $scope.userGetDateDetails($scope.calendarOptions.selectedDate);
+            $scope.doGetDoctorAppointmentList($scope.calendarOptions.selectedDate);
+            if($scope.isNew==false){
+                successMessage(Flash,"Successfully Updated");
+            }
+            else{
+                successMessage(Flash,"Successfully Booked");
+            }
             $scope.loaded=false;
             $scope.paginationLoad=true;
         }, function(){
@@ -236,7 +238,8 @@ userApp.controller('UserDoctorAppointment',['$scope','requestHandler','Flash','$
         if(confirm("Are you sure you want to delete?")){
             requestHandler.postRequest("user/deletedoctorappointment/",{"logid":id}).then(function(response){
                 successMessage(Flash,"Successfully Deleted");
-                    $scope.doGetDoctorAppointmentList();
+                $scope.userGetDateDetails($scope.calendarOptions.selectedDate);
+                $scope.doGetDoctorAppointmentList();
             }, function(){
                 errorMessage(Flash,"Please try again later!");
             });
@@ -244,7 +247,9 @@ userApp.controller('UserDoctorAppointment',['$scope','requestHandler','Flash','$
     };
 
     $scope.init=function () {
-        $scope.doGetDoctorAppointmentList();
+
+        $scope.doGetDoctorAppointmentList($scope.fromDate,$scope.endDate);
+        $scope.userGetDateDetails($scope.calendarOptions.selectedDate);
         /*For get all date appointments Details*/
         var todayDate = new Date();
         $scope.fromDate=moment(new Date(todayDate.getFullYear(), todayDate.getMonth(), 1)).format('DD/MM/YYYY 00:00:00');

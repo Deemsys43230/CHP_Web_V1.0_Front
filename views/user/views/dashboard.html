@@ -2203,12 +2203,13 @@
                 <div class="col-md-6 col-sm-6 no-padding">
                     <div class="col-md-12">
                         <p>Dosage (mg)</p>
-                        <input type="text" name="dosage" ng-model="medication.dosage" maxlength="6" required validate-Float1>
+                        <input type="text" name="dosage" ng-model="medication.dosage" required ng-pattern="/^\-?\d+((\.|\,)\d+)?$/" ng-change="maxDosageCheck(medication.dosage)" onkeypress="return validateFloatKeyPress1(this,event);" validate-zero>
+                        <span class="error-message textarea-errormessage40-right60" ng-show="!medicationForm.dosage.$error.required&&maxdosage">
+                            <span style="bottom: 70px;right:50px !important;">Please&nbsp;Enter&nbsp;Valid&nbsp;Dosage.</span>
+                        </span>
                             <span ng-show="medicationForm.dosage.$dirty&&medicationForm.dosage.$invalid">
-                                <span class="error-message textarea-errormessage40-right60" ng-show="medicationForm.dosage.$error.validateOnlyNumbers">
-                                    <span style="bottom: 70px;">Please&nbsp;Enter&nbsp;Valid&nbsp;Dosage.</span>
-                                </span>
-                                 <span class="error-message" ng-show="medicationForm.dosage.$error.required"><span>Required.</span></span>
+                                <span class="error-message" ng-show="medicationForm.dosage.$error.required"><span>Required.</span></span>
+                                <span class="error-message" ng-show="medicationForm.dosage.$error.validateZero"><span style="bottom: 57px !important">Invalid.</span></span>
                             </span>
                     </div>  
                     <div class="col-md-12">
@@ -2243,8 +2244,8 @@
 
                </div> 
                  <div class="action_btns margin-top-20">
-                    <div class="one_half" ng-show="isNew"><a ng-class="{modal_close:medicationForm.$invalid}" class="btn btn_red" ng-disabled="medicationForm.$invalid" ng-click="doInsertOrUpdateUserMedication()">Add Medication</a></div>
-                    <div class="one_half" ng-hide="isNew"><a ng-class="{modal_close:medicationForm.$invalid}" class="btn btn_red" ng-disabled="medicationForm.$invalid || isClean()" ng-click="doInsertOrUpdateUserMedication()">Save Changes </a></div>
+                    <div class="one_half" ng-show="isNew"><a ng-class="{modal_close:medicationForm.$invalid}" class="btn btn_red" ng-disabled="medicationForm.$invalid || maxdosage" ng-click="doInsertOrUpdateUserMedication()">Add Medication</a></div>
+                    <div class="one_half" ng-hide="isNew"><a ng-class="{modal_close:medicationForm.$invalid}" class="btn btn_red" ng-disabled="medicationForm.$invalid || isClean() || maxdosage" ng-click="doInsertOrUpdateUserMedication()">Save Changes </a></div>
                     <div class="one_half last modal_close"><a onclick="return false;" class="btn back_btn">Cancel</a></div>
                 </div>
 

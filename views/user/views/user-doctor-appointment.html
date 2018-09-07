@@ -27,15 +27,15 @@
                         <simple-calendar events="events" options="calendarOptions"></simple-calendar>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-4">
-                    <div class="book-appointment">
-                        <div class="coach-list appointment_scrollbar margin-left-5" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#eee'}">
+                    <div class="user-book-appointment">
+                        <div class="coach-list appointment_scrollbar margin-left-5" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#eee'}" style="height: 593px !important;">
                                 <span class="pull-left margin-left-20">Appointment Details</span><br/>
                             <div class="col-lg-12 col-md-12 col-sm-12"><hr/></div>
                                 <div class="col-lg-12 col-md-12 col-sm-12 pull-right">
                                     <a id="modal_user_doctor_appoinment" href="#user-doctor-appointment" ng-hide="canEnableAppointment" class="back-button pull-right margin-left-5" ng-click="userBookDoctorAppointment()"><i class="fa fa-plus-circle"></i>&nbsp;Book Appointment</a>
                                 </div>
                                 <div  class="coach-view-width">
-                                    <div class="coach-view col-lg-12 col-md-12 col-sm-12" ng-repeat= "appointmentsSingle in selectedDateAppointment">
+                                    <div class="user-view-appointment col-lg-12 col-md-12 col-sm-12" ng-repeat= "appointmentsSingle in selectedDateAppointment">
                                         <div class="col-lg-2 col-md-2 col-sm-2 no-padding margin-top-15">
                                             <img  class="img-circle" src="../../images/appointment.png">
                                         </div>
@@ -97,6 +97,7 @@
                     <div class="col-md-6">
                         <p >Hours</p>
                         <select class="col-md-6 medications" name="selectedHours"  ng-init="selectedHours='0'" ng-model="selectedHours" required>
+                            <option value="">--Select--</option>
                             <option value="01">1</option>
                             <option value="02">2</option>
                             <option value="03">3</option>
@@ -129,6 +130,7 @@
                     <div class="col-md-6">
                         <p >Minutes</p>
                         <select class="col-md-6 medications" name="selectedMinutes" ng-init="selectedMinutes='0'" ng-model="selectedMinutes" required>
+                            <option value="">--Select--</option>
                             <option value="05">05</option>
                             <option value="10">10</option>
                             <option value="15">15</option>

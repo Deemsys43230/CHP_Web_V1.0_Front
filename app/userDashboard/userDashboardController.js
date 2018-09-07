@@ -350,6 +350,18 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
             }); 
         };
 
+    //To Check Maximum dosage value
+    $scope.maxdosage=false;
+    $scope.maxDosageCheck = function(dosage){
+        if(dosage <=999.99){
+            $scope.maxdosage=false;
+        }
+        else if(dosage >999.99){
+            $scope.maxdosage=true;
+        }
+
+    };
+
         // view User Medictaions
         $scope.viewUserMedication=function(id){
             //scrolling to top of the page
@@ -637,10 +649,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
                 if(isActive>0){
                    $scope.syncBtnTxt="Sync Completed";
                    $scope.sync_btn_background_color="#35900d";
-                   $timeout(function(){
-                        $scope.syncBtnTxt="Sync Now";
-                        $scope.sync_btn_background_color="#ff5010";
-                   },3000)
+
                 }
                 else{
                    $scope.syncBtnTxt="No Devices Connected";
