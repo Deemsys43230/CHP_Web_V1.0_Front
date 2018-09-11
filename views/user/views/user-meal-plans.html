@@ -132,5 +132,16 @@
 
 <script type="text/javascript">
     $("#modal_user_meal_plan").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
+    $(document).ready(function () {
+        $('#top-bar-menu').click(function(e) {
+            $('.nav li').removeClass('drop');
+            $(this).siblings().addClass('active');
+        });
+        $('.navbar').click(function(e) {
+            $('.nav li').removeClass('drop');
+            $(this).siblings().addClass('active');
+        });
+
+    });
 </script>
 

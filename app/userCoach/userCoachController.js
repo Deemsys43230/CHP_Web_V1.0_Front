@@ -1400,8 +1400,10 @@ userApp.filter('startsWithLetterSearch', function () {
         else{
             for (var i = 0; i < items.length; i++) {
                 var item = items[i];
-                if (letterMatch.test(item.emailid) || letterMatch.test(item.name) || letterMatch.test(item.businessaddress
-                    || letterMatch.test(item.phone) || letterMatch.test(item.specialist)) ) {
+                if (letterMatch.test(item.emailid) || letterMatch.test(item.name) || letterMatch.test(item.phone) 
+                    || letterMatch.test(item.businessaddress) || letterMatch.test(item.specialist) 
+                    || letterMatch.test(item.city) || letterMatch.test(item.state) || letterMatch.test(item.country) 
+                    || letterMatch.test(item.qualification) || letterMatch.test(item.businessname)) {
                     filtered.push(item);
                 }
             }
