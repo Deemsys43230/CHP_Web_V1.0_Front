@@ -38,7 +38,7 @@
     </div>
 </script>
 
-<div class="page-banner1" ng-cloak class="ng-cloak">
+<div class="page-banner1" ng-cloak class="ng-cloak" >
 
     <div id="w" class="clearfix">
         <div class="dashboard-1">
@@ -112,7 +112,7 @@
                     <div class="col-lg-12 col-md-12 col-sm-12 padding-lr" style="padding-right: 3px;">
                         <!-- Nav Tabs -->
                         <ul class="nav nav-tabs pull-left">
-                            <li class="active" ng-click="showExercise=0"><a href="#tab-1" data-toggle="tab" onclick="return false;">Food Intake</a></li>
+                            <li class="active" ng-click="showExercise=0;showFoodMoal=1;"><a href="#tab-1" data-toggle="tab" onclick="return false;" id="foodintake">Food Intake</a></li>
                             <li ng-click="showExercise=1;doGetCategoryandTypeExercise();" ><a href="#tab-2" data-toggle="tab" id="energyspent" onclick="return false;">Energy Spent</a></li>
                             <li><a href="#tab-3" data-toggle="tab"  id="weight-water" onclick="return false;">Log</a></li>
                             <li>
@@ -1375,7 +1375,7 @@
                                <span class="error-message" ng-show="!FoodAddForm.servings.$error.required&&FoodAddForm.servings.$error.validateZero"><span>Invalid&nbsp;data.</span></span>
                             </span>
                          </div>
-                         <div class="col-md-12 col-sm-12 no-padding margin-top-10">
+                         <div class="col-md-12 col-sm-12 no-padding margin-top-10" ng-hide="isDiabetic==2 || isGlycaemicValueEmpty">
                             <div id="myGlycaemic"></div>
                             <div class="margin-top-15">
                                 <i>
@@ -2398,7 +2398,56 @@
         </div>
     </section>
 </div>
+    <div id="meal-plan-calendar" class="popupContainer-width-big" style="display:none;top: 12px!important;">
+        <header class="popupHeader width-100">
+            <span class="header_title">Meal Plan</span>
+            <span class="modal_close"><i class="fa fa-times"></i></span>
+        </header>
 
+        <section class="popupBody">
+            <!-- Register Form -->
+            <div class="common_model">
+                <div class="col-md-12 text-center no-padding">
+                    <h3 class="text-center">{{ calendarTitle }}</h3>
+
+                        <div class="col-md-6 pull-left no-padding" >
+                        <a href=""  class="btn-xs btn-success pull-left" mwl-date-modifier date="viewDate" decrement="calendarView" ng-click="cellIsOpen = false">
+                            <i class="fa fa-2x fa-angle-left" aria-hidden="true"></i>
+                        </a>
+                        </div>
+                        <div class="col-md-6 pull-right no-padding">
+                        <a href="" style="margin-right: 30px" class="btn-xs btn-success pull-right" mwl-date-modifier date="viewDate" increment="calendarView" ng-click="cellIsOpen = false">
+                            <i class="fa fa-2x fa-angle-right" aria-hidden="true"></i>
+                        </a>
+                        </div>
+                        <!--   <label class="btn btn-primary" ng-model="vm.calendarView" uib-btn-radio="'year'" ng-click="vm.cellIsOpen = false">Year</label> -->
+                        <!--<label class="btn btn-primary" ng-model="vm.calendarView" uib-btn-radio="'month'" ng-click="vm.cellIsOpen = false">Month</label>-->
+                        <!--  <label class="btn btn-primary" ng-model="vm.calendarView" uib-btn-radio="'week'" ng-click="vm.cellIsOpen = false">Week</label> -->
+                        <!-- <label class="btn btn-primary" ng-model="vm.calendarView" uib-btn-radio="'day'" ng-click="vm.cellIsOpen = false">Day</label> -->
+                </div>
+
+                <mwl-calendar
+                        events="events"
+                        view="calendarView"
+                        view-title="calendarTitle"
+                        view-date="viewDate"
+                        on-event-click="eventClicked(calendarEvent)"
+                        on-event-times-changed="eventTimesChanged(calendarEvent); calendarEvent.startsAt = calendarNewEventStart; calendarEvent.endsAt = calendarNewEventEnd"
+                        cell-is-open="cellIsOpen"
+                        day-view-start="06:00"
+                        day-view-end="22:59"
+                        day-view-split="30"
+                        cell-modifier="modifyCell(calendarCell)"
+                        cell-auto-open-disabled="true"
+                        on-timespan-click="timespanClicked(calendarDate, calendarCell)">
+                </mwl-calendar>
+                <div class="action_btns margin-top-20">
+                    <!--<div class="one_half modal_close"><a href="" class="btn btn_blue">Yes</a></div>-->
+                    <div class="text-center mail-alert-button  modal_close"><a class="btn btn_red">Ok</a></div>
+                </div>
+            </div>
+        </section>
+    </div>
 
 <div class="hidden-lg hidden-md" id="weight-form">
     <p id="weight_button"><img style="width: 39px;height: 151px" src="../../images/update-weight.png"></p>

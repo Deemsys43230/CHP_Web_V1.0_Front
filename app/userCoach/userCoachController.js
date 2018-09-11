@@ -1,6 +1,6 @@
-var userApp = angular.module('userApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','angularUtils.directives.dirPagination','angular-nicescroll','500tech.simple-calendar','angular.filter']);
+var userApp = angular.module('userApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','angularUtils.directives.dirPagination','angular-nicescroll','500tech.simple-calendar','angular.filter','stateCountryModule']);
 
-userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$location','$q','$routeParams','$route','$rootScope',function($scope,requestHandler,Flash,$location,$q,$routeParams,$route,$rootScope) {
+userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$location','$q','$routeParams','$route','$rootScope','CountryStateService',function($scope,requestHandler,Flash,$location,$q,$routeParams,$route,$rootScope,CountryStateService) {
     $rootScope.isMenuShow=1;
     $scope.activeClass.coach='active';
     $scope.coachreview = {ratinglevel:1};
@@ -129,6 +129,9 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
         requestHandler.getRequest("getUserProfile/"+id, "").then(function(response){
 
             $scope.usercoachdetails=response.data.userprofile;
+            //to get country and state details for coach from user side
+            $scope.usercoachdetails.countryName=CountryStateService.doGetCountries($scope.usercoachdetails.country);
+            $scope.usercoachdetails.stateName=CountryStateService.doGetStates($scope.usercoachdetails.state,$scope.usercoachdetails.country);
 
             if($scope.usercoachdetails.experience!=null){
             $scope.years = Math.floor($scope.usercoachdetails.experience / 12);

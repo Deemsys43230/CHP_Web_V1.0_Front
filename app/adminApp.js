@@ -634,9 +634,10 @@ adminApp.config([
             return $ocLazyLoad.load({
               name: 'adminApp',
               files: [
+                  '../../app/countryState/countryStateService.js',
                 '../../angular/angular-utils-pagination/dirPagination.js',
-                '../../app/member/memberController.js',
-                  '../../app/countryState/countryStateService.js'
+                '../../app/member/memberController.js'
+
               ]
             });
           }
@@ -651,7 +652,7 @@ adminApp.config([
           function ($ocLazyLoad) {
             return $ocLazyLoad.load({
               name: 'adminApp',
-              files: ['../../angular/angular-utils-pagination/dirPagination.js','../../app/member/memberController.js']
+              files: ['../../app/countryState/countryStateService.js','../../angular/angular-utils-pagination/dirPagination.js','../../app/member/memberController.js']
             });
           }
         ]
@@ -707,6 +708,7 @@ adminApp.config([
                 '../../css/profile-image-upload.css',
                   '../../angular/angular-utils-pagination/dirPagination.js',
                 '../../js/image-upload.js',
+                  '../../app/countryState/countryStateService.js',
                 '../../app/coach/coachController.js'
               ]
             });

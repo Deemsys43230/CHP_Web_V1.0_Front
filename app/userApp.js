@@ -1,4 +1,4 @@
-var userApp= angular.module('userApp', ['ngRoute','oc.lazyLoad','ngCookies','requestModule','ngAnimate','flash','feedbackServiceModule','angularUtils.directives.dirPagination']);
+var userApp= angular.module('userApp', ['ngRoute','oc.lazyLoad','ngCookies','requestModule','ngAnimate','flash','feedbackServiceModule','angularUtils.directives.dirPagination','mwl.calendar']);
 
 userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
 
@@ -333,6 +333,7 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                             files:[
                                 '../../plugin/popup/style.css',
                                 '../../angular/angular-utils-pagination/dirPagination.js',
+                                '../../app/countryState/countryStateService.js',
                                 '../../css/custom-inputs.css',
                                 '../../app/userCoach/userCoachController.js'
                             ]
@@ -351,6 +352,7 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                             files:[
                                 '../../plugin/vertical-carousel/vertical-carousel.js',
                                 '../../angular/angular-utils-pagination/dirPagination.js',
+                                '../../app/countryState/countryStateService.js',
                                 '../../app/userCoach/userCoachController.js'
                             ]
                         })
@@ -367,8 +369,10 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                             files:[
                                 '../../plugin/vertical-carousel/vertical-carousel.js',
                                 '../../angular/angular-utils-pagination/dirPagination.js',
+                                '../../app/countryState/countryStateService.js',
                                 '../../app/userCoach/userCoachController.js',
                                 '../../plugin/popup/style.css'
+
                             ]
                         })
                     }]
@@ -385,6 +389,7 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                             files:[
                                 '../../plugin/vertical-carousel/vertical-carousel.js',
                                 '../../angular/angular-utils-pagination/dirPagination.js',
+                                '../../app/countryState/countryStateService.js',
                                 '../../app/userCoach/userCoachController.js'
                             ]
                         })
@@ -877,6 +882,7 @@ userApp.controller("UserInitialController",['$scope','requestHandler','$location
     $scope.hideValue=1;
 
 
+
     requestHandler.getRequest("getUserId/","").then(function(response){
         $scope.username=response.data.User_Profile.name;
         $scope.userProfile=response.data.User_Profile;
@@ -962,6 +968,7 @@ userApp.controller("UserInitialController",['$scope','requestHandler','$location
             $rootScope.isDiabetic=1;
         }
         else {
+            $rootScope.isDiabetic=2;
             $('.navbar-collapse ul').addClass('navbar-menu-right1');
             $('.navbar-collapse ul').removeClass('navbar-menu-right');
         }

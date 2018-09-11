@@ -1,6 +1,6 @@
-var userApp= angular.module('userApp', ['ngRoute','oc.lazyLoad','ngCookies','requestModule','flash','ngAnimate','ngTouch','ngPercentDisplay','userDashboardServiceModule','angular-svg-round-progress','ui.bootstrap','angular-nicescroll']);
+var userApp= angular.module('userApp', ['ngRoute','oc.lazyLoad','ngCookies','requestModule','flash','ngAnimate','ngTouch','ngPercentDisplay','userDashboardServiceModule','angular-svg-round-progress','ui.bootstrap','angular-nicescroll','mwl.calendar']);
 
-userApp.controller('UserDashboardController',['$scope','$window','requestHandler','Flash','UserDashboardService','$interval','roundProgressService','limitToFilter','$timeout','$compile','$location','$rootScope','$route',function($scope,$window,requestHandler,Flash,UserDashboardService,$interval,roundProgressService,limitToFilter,$timeout,$compile,$location,$rootScope,$route) {
+userApp.controller('UserDashboardController',['$scope','$window','requestHandler','Flash','UserDashboardService','$interval','roundProgressService','limitToFilter','$timeout','$compile','$location','$rootScope','$route','calendarConfig','moment',function($scope,$window,requestHandler,Flash,UserDashboardService,$interval,roundProgressService,limitToFilter,$timeout,$compile,$location,$rootScope,$route,calendarConfig,moment) {
         $rootScope.isMenuShow=1;
         $scope.foodSearchResult = [];
         $scope.userFood={};
@@ -36,6 +36,8 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
         $scope.historyReport=0;
         $scope.historyType=1;
         $scope.showExercise=0;
+        // $scope.showFoodMoal=0;
+        $scope.isGlycaemicValueEmpty=false;
            $window.emi=0;
         slidemenu();
         daterangepicker();
@@ -46,8 +48,33 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
         if($route.current.$$route.fromDevice){
             $("#appAndDevice").click();
         }
+    // $scope.mealPlanCalender=function(){
+    //     $(function(){
+    //         $("#lean_overlay").fadeTo(1000);
+    //         $("#meal-plan-calendar").fadeIn(600);
+    //         $(".common_model").show();
+    //
+    //     });
+    //
+    //     $(".modal_close").click(function(){
+    //         $(".common_model").hide();
+    //         $("#meal-plan-calendar").hide();
+    //         $("#lean_overlay").hide();
+    //     });
+    //
+    //     $("#lean_overlay").click(function(){
+    //         $(".common_model").hide();
+    //         $("#meal-plan-calendar").hide();
+    //         $("#lean_overlay").hide();
+    //     });
+    //
+    // };
 
+    // if($rootScope.isMenuClicked==1){
+    //     $scope.mealPlanCalender();
+    // };
         if($rootScope.isMenuClicked==3){
+
             $("#appAndDevice").click();
         };
         if($rootScope.isMenuClicked==2){
@@ -58,7 +85,18 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
             $("#dailyupdate").click();
             $("#weight-water").click();
         };
-     
+
+
+    // $('#energyspent').click(function(e) {
+    //     $scope.showFoodMoal=0;
+    // });
+    // $('#weight-water').click(function(e) {
+    //     $scope.showFoodMoal=0;
+    // });
+    // $('#foodintake').click(function(e) {
+    //     $scope.showFoodMoal=1;
+    //     $scope.mealPlanCalender();
+    // });
 
         //Modal Popup to add user food
         $scope.doUserAddFood=function(){
@@ -667,6 +705,9 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
             var getFoodDetailPromise=UserDashboardService.doGetSelectedFoodDetails(foodid);
             getFoodDetailPromise.then(function(result){
                 $scope.userSelectedFoodDetails=result;
+                if( $scope.userSelectedFoodDetails.glycaemicindex==null){
+                    $scope.isGlycaemicValueEmpty=true;
+                }
                 $scope.loaded=false;
                 $scope.doUserAddFood();
             });
@@ -683,6 +724,9 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
             var getFoodDetailPromise=UserDashboardService.doGetSelectedFoodDetails(foodid);
             getFoodDetailPromise.then(function(result){
                 $scope.userSelectedFoodDetails=result;
+                if( $scope.userSelectedFoodDetails.glycaemicindex==null){
+                    $scope.isGlycaemicValueEmpty=true;
+                }
                 $scope.loaded=false;
                 $scope.doUserAddFood();
             });
@@ -697,7 +741,9 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
             var getFoodDetailPromise=UserDashboardService.doGetSelectedFoodDetails($scope.selectedFood.foodid);
             getFoodDetailPromise.then(function(result){
                 $scope.userSelectedFoodDetails=result;
-                console.log(  $scope.userSelectedFoodDetails.glycaemicindex);
+           if( $scope.userSelectedFoodDetails.glycaemicindex==null){
+               $scope.isGlycaemicValueEmpty=true;
+           }
                 $scope.doUserAddFood();
             });
         };
@@ -2985,6 +3031,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
         };
 
         $scope.getHistory=function(){
+            $scope.showFoodMoal=0;
             $scope.historyReport=1;
             if($('#history-start').val()==''){
                 $scope.isHistoryEmpty=0;
@@ -3003,11 +3050,18 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
             if($('#history-start').val()=='') $scope.isViewEmpty=1;
             else $scope.isViewEmpty=0;
         };*/
+
         $scope.otherThanHistory=function(){
+            // $scope.showFoodMoal=0;
+            // $('#dailyupdate').click(function(e) {
+            //     $scope.showFoodMoal=1;
+            //     $scope.mealPlanCalender();
+            // });
             $scope.isHistoryEmpty=0;
             $scope.historyReport=0;
 
         };
+
         $scope.setHistoryType=function(id,divId){
 
             $scope.historyType=id;
@@ -4388,7 +4442,6 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
             series: [{
                 name: 'Weight',
                 type: 'line',
-                yAxis: 1,
                 data: dataW,
                 tooltip: {
                     valueSuffix: ' ' +titles.suffix
@@ -4398,6 +4451,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
             }, {
                 name: 'Food Intake',
                 type: 'spline',
+                yAxis: 1,
                 data:dataC ,
                 tooltip: {
                     valueSuffix: ' cal'
@@ -4472,7 +4526,6 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
             series: [{
                 name: 'Weight',
                 type: 'line',
-                yAxis: 1,
                 data: dataW,
                 tooltip: {
                     valueSuffix:' '+ titles.suffix
@@ -4482,6 +4535,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
             }, {
                 name: 'Exercise Minutes',
                 type: 'spline',
+                yAxis: 1,
                 data:dataM ,
                 tooltip: {
                     valueSuffix: ' min'
@@ -4857,6 +4911,102 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
         $scope.todayDate = selectedDate;
         $scope.selectedDate = selectedDate;
         $window.goalStartDate = $window.goalEndDate = selectedDate;
+
+    //These variables MUST be set as a minimum for the calendar to work
+    $scope.calendarView = 'month';
+    $scope.viewDate = new Date();
+    var actions = [{
+        onClick: function(args) {
+            alert.show('Edited', args.calendarEvent);
+        }
+    }, {
+        onClick: function(args) {
+            alert.show('Deleted', args.calendarEvent);
+        }
+    }];
+    $scope.events = [
+        {
+            title: 'An event',
+
+            startsAt: moment().startOf('week').subtract(2, 'days').add(8, 'hours').toDate(),
+            endsAt: moment().startOf('week').add(1, 'week').add(9, 'hours').toDate(),
+            draggable: true,
+            resizable: true,
+            actions: actions
+        }, {
+            title: '<i class="glyphicon glyphicon-asterisk"></i> <span class="text-primary">Another event</span>, with a <i>html</i> title',
+
+            startsAt: moment().subtract(1, 'day').toDate(),
+            endsAt: moment().add(5, 'days').toDate(),
+            draggable: true,
+            resizable: true,
+            actions: actions
+        }, {
+            title: 'This is a really long event title that occurs on every year',
+            color: calendarConfig.colorTypes.important,
+            startsAt: moment().startOf('day').add(7, 'hours').toDate(),
+            endsAt: moment().startOf('day').add(19, 'hours').toDate(),
+            recursOn: 'year',
+            draggable: true,
+            resizable: true,
+            actions: actions
+        }
+    ];
+
+    $scope.cellIsOpen = true;
+
+    $scope.addEvent = function() {
+        $scope.events.push({
+            title: 'New event',
+            startsAt: moment().startOf('day').toDate(),
+            endsAt: moment().endOf('day').toDate(),
+            color: calendarConfig.colorTypes.important,
+            draggable: true,
+            resizable: true
+        });
+    };
+
+    $scope.eventClicked = function(event) {
+        alert.show('Clicked', event);
+    };
+
+    $scope.eventEdited = function(event) {
+        alert.show('Edited', event);
+    };
+
+    $scope.eventDeleted = function(event) {
+        alert.show('Deleted', event);
+    };
+
+    $scope.eventTimesChanged = function(event) {
+        alert.show('Dropped or resized', event);
+    };
+
+    $scope.toggle = function($event, field, event) {
+        $event.preventDefault();
+        $event.stopPropagation();
+        event[field] = !event[field];
+    };
+
+    $scope.timespanClicked = function(date, cell) {
+
+        if ($scope.calendarView === 'month') {
+            if (($scope.cellIsOpen && moment(date).startOf('day').isSame(moment($scope.viewDate).startOf('day'))) || cell.events.length === 0 || !cell.inMonth) {
+                $scope.cellIsOpen = false;
+            } else {
+                $scope.cellIsOpen = true;
+                $scope.viewDate = date;
+            }
+        } else if ($scope.calendarView === 'year') {
+            if (($scope.cellIsOpen && moment(date).startOf('month').isSame(moment($scope.viewDate).startOf('month'))) || cell.events.length === 0) {
+                $scope.cellIsOpen = false;
+            } else {
+                $scope.cellIsOpen = true;
+                $scope.viewDate = date;
+            }
+        }
+
+    };
 
         //Initialize
         $scope.initialLoadFoodAndExercise=function(date){
@@ -5476,6 +5626,9 @@ function coachAdviceCarousel(){
         controlls.find('.owl-next').html('<i class="fa fa-angle-right"></i>');
     },500);
 }
+
+
+
 
 // userApp.config(['$compileProvider',
 //     function ($compileProvider) {

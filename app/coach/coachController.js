@@ -1,7 +1,7 @@
 /**
  * Created by Deemsys on 9/21/2017.
  */
-var adminApp = angular.module('adminApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','angularUtils.directives.dirPagination']);
+var adminApp = angular.module('adminApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','stateCountryModule','angularUtils.directives.dirPagination']);
 
 adminApp.controller('CoachController',['$scope','requestHandler','Flash','coachMenuService','$location','$routeParams',function($scope,requestHandler,Flash,coachMenuService,$location,$routeParams) {
     $scope.inviteId = $routeParams.id;
@@ -135,7 +135,7 @@ adminApp.controller('CoachController',['$scope','requestHandler','Flash','coachM
 }]);
 
 
-adminApp.controller('CoachViewController',['$scope','requestHandler','Flash','$routeParams',function($scope,requestHandler,Flash,$routeParams) {
+adminApp.controller('CoachViewController',['$scope','requestHandler','Flash','CountryStateService','$routeParams',function($scope,requestHandler,Flash,CountryStateService,$routeParams) {
 
     $scope.averageRate=0.1;
     $scope.paginationLoad=false;
@@ -153,7 +153,8 @@ adminApp.controller('CoachViewController',['$scope','requestHandler','Flash','$r
 
         requestHandler.getRequest("getCoachIndividualDetailbyAdmin/"+id, "").then(function(response){
             $scope.usercoachdetails=response.data.getCoachIndividualDetail;
-
+            $scope.usercoachdetails.countryName=CountryStateService.doGetCountries($scope.usercoachdetails.country);
+            $scope.usercoachdetails.stateName=CountryStateService.doGetStates($scope.usercoachdetails.state,$scope.usercoachdetails.country);
             if($scope.usercoachdetails.experience!=null){
                 $scope.years = Math.trunc($scope.usercoachdetails.experience / 12);
                 $scope.months = $scope.usercoachdetails.experience %12;
@@ -338,7 +339,7 @@ adminApp.directive("averageStarRating", function() {
     };
 });
 
-coachApp.controller('CoachReviewController',['$scope','requestHandler','Flash','$routeParams',function($scope,requestHandler,Flash,$routeParams) {
+adminApp.controller('CoachReviewController',['$scope','requestHandler','Flash','$routeParams',function($scope,requestHandler,Flash,$routeParams) {
 
     $scope.averageRate=0.1;
     $scope.paginationLoad=false;
@@ -400,13 +401,13 @@ coachApp.controller('CoachReviewController',['$scope','requestHandler','Flash','
 
 
 // render image to view in list
-coachApp.filter('trusted', ['$sce', function ($sce) {
+adminApp.filter('trusted', ['$sce', function ($sce) {
     return function(url) {
         return $sce.trustAsResourceUrl(url);
     };
 }]);
 
-coachApp.filter('startsWithLettertotalcoach', function () {
+adminApp.filter('startsWithLettertotalcoach', function () {
 
     return function (items, coachsearch) {
 
@@ -427,7 +428,7 @@ coachApp.filter('startsWithLettertotalcoach', function () {
     };
 });
 
-coachApp.filter('startsWithLettercoach', function () {
+adminApp.filter('startsWithLettercoach', function () {
 
     return function (items, invitationsearch) {
 
@@ -449,7 +450,7 @@ coachApp.filter('startsWithLettercoach', function () {
 });
 
 
-coachApp.directive("averageStarRating", function() {
+adminApp.directive("averageStarRating", function() {
     return {
         restrict : "EA",
         template : "<div class='average-rating-container'>" +
