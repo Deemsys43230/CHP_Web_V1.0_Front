@@ -19114,3 +19114,19 @@ a.back-menu {
     margin: 3px 0 10px 3px;
     box-shadow: 0 0 3px rgba(0,0,0,.3);
 }
+mwl-calendar .cal-week-box-cell{
+    display: none !important;
+}
+mwl-calendar .cal-month-box [class*="cal-cell"] {
+    min-height:50px !important;
+}
+/* basic positioning */
+.legend { list-style: none; }
+.legend li { float: left; margin-right: 62px; margin-bottom: 10px;}
+.legend span {float: left; width: 12px; height: 12px;margin:2px }
+/* your colors */
+.legend .planachieved { background-color: #65bb34;border-radius: 10px; }
+.legend .notachieved { background-color: #eb6b22;border-radius: 10px; }
+.legend .planned { background-color: #f8ba01;border-radius: 10px; }
+.legend .inplan { background-color: #3591cd; border-radius: 10px;}
+.legend .noplan { background-color: #ffffff; border: solid #eee 2px;border-radius: 10px;}

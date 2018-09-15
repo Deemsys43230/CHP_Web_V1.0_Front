@@ -2420,10 +2420,6 @@
                             <i class="fa fa-2x fa-angle-right" aria-hidden="true"></i>
                         </a>
                         </div>
-                        <!--   <label class="btn btn-primary" ng-model="vm.calendarView" uib-btn-radio="'year'" ng-click="vm.cellIsOpen = false">Year</label> -->
-                        <!--<label class="btn btn-primary" ng-model="vm.calendarView" uib-btn-radio="'month'" ng-click="vm.cellIsOpen = false">Month</label>-->
-                        <!--  <label class="btn btn-primary" ng-model="vm.calendarView" uib-btn-radio="'week'" ng-click="vm.cellIsOpen = false">Week</label> -->
-                        <!-- <label class="btn btn-primary" ng-model="vm.calendarView" uib-btn-radio="'day'" ng-click="vm.cellIsOpen = false">Day</label> -->
                 </div>
 
                 <mwl-calendar
@@ -2434,16 +2430,21 @@
                         on-event-click="eventClicked(calendarEvent)"
                         on-event-times-changed="eventTimesChanged(calendarEvent); calendarEvent.startsAt = calendarNewEventStart; calendarEvent.endsAt = calendarNewEventEnd"
                         cell-is-open="cellIsOpen"
-                        day-view-start="06:00"
-                        day-view-end="22:59"
                         day-view-split="30"
                         cell-modifier="modifyCell(calendarCell)"
                         cell-auto-open-disabled="true"
                         on-timespan-click="timespanClicked(calendarDate, calendarCell)">
                 </mwl-calendar>
-                <div class="action_btns margin-top-20">
+                <div class="margin-top-10">
+                    <ul class="legend">
+                        <li><span class="planachieved"></span>&nbsp;Achieved</li>
+                        <li><span class="notachieved"></span> &nbsp;Not Achieved</li>
+                        <li><span class="inplan"></span> &nbsp;In Progress</li>
+                        <li><span class="planned"></span> &nbsp;Planned</li>
+                        <li><span class="noplan"></span> &nbsp;No Plan</li>
+                    </ul>
                     <!--<div class="one_half modal_close"><a href="" class="btn btn_blue">Yes</a></div>-->
-                    <div class="text-center mail-alert-button  modal_close"><a class="btn btn_red">Ok</a></div>
+                    <!--<div class="text-center mail-alert-button  modal_close"><a class="btn btn_red">Ok</a></div>-->
                 </div>
             </div>
         </section>
@@ -2696,7 +2697,7 @@
                 $('#main-date').daterangepicker(options, function(start, end, label) {
                     angular.element(document.getElementById('main-date')).scope().initialLoadFoodAndExercise(start.format('DD/MM/YYYY'));
                     document.getElementById("main-start-date").value = start.format('DD/MM/YYYY');
-                    console.log(start);
+                    console.log(document.getElementById("main-date").value);
                 });
 
 //for food intake and excersize view graph date picker
@@ -2788,7 +2789,7 @@
                     format: 'DD/MM/YYYY',
                     autoUpdateInput: false
                 };
-              $("#set-from-date").daterangepicker({singleDatePicker: true,}).on('apply.daterangepicker', function(ev, picker) {
+              $("#set-from-date").daterangepicker({singleDatePicker: true}).on('apply.daterangepicker', function(ev, picker) {
                   optionMinDate.minDate = picker.startDate.format('DD/MM/YYYY');
                   $('#set-to-date').daterangepicker(optionMinDate).on('apply.daterangepicker', function(ev, picker) {
                         document.getElementById("set-to-date").value = picker.startDate.format('DD/MM/YYYY');

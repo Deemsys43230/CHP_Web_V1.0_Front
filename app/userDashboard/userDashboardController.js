@@ -36,7 +36,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
         $scope.historyReport=0;
         $scope.historyType=1;
         $scope.showExercise=0;
-        // $scope.showFoodMoal=0;
+       $scope.showFoodMoal=0;
         $scope.isGlycaemicValueEmpty=false;
            $window.emi=0;
         slidemenu();
@@ -48,31 +48,39 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
         if($route.current.$$route.fromDevice){
             $("#appAndDevice").click();
         }
-    // $scope.mealPlanCalender=function(){
-    //     $(function(){
-    //         $("#lean_overlay").fadeTo(1000);
-    //         $("#meal-plan-calendar").fadeIn(600);
-    //         $(".common_model").show();
-    //
-    //     });
-    //
-    //     $(".modal_close").click(function(){
-    //         $(".common_model").hide();
-    //         $("#meal-plan-calendar").hide();
-    //         $("#lean_overlay").hide();
-    //     });
-    //
-    //     $("#lean_overlay").click(function(){
-    //         $(".common_model").hide();
-    //         $("#meal-plan-calendar").hide();
-    //         $("#lean_overlay").hide();
-    //     });
-    //
-    // };
+    $scope.mealPlanCalender=function(){
+        $(function(){
+            $("#lean_overlay").fadeTo(1000);
+            $("#meal-plan-calendar").fadeIn(600);
+            $(".common_model").show();
 
-    // if($rootScope.isMenuClicked==1){
-    //     $scope.mealPlanCalender();
-    // };
+        });
+
+        $(".modal_close").click(function(){
+            $(".common_model").hide();
+            $("#meal-plan-calendar").hide();
+            $("#lean_overlay").hide();
+        });
+
+        $("#lean_overlay").click(function(){
+            $(".common_model").hide();
+            $("#meal-plan-calendar").hide();
+            $("#lean_overlay").hide();
+        });
+
+    };
+    $scope.dashboardurl="views/#/user/dashboard";
+    if($location.absUrl().indexOf("views")!=-1){
+        $scope.dashboardurl="#dashboard";
+        $("#dailyupdate").click();
+        $("#foodintake").click();
+        $scope.showFoodMoal=1;
+        $scope.mealPlanCalender();
+    };
+
+    if($rootScope.isMenuClicked==1){
+        $scope.mealPlanCalender();
+    };
         if($rootScope.isMenuClicked==3){
 
             $("#appAndDevice").click();
@@ -87,16 +95,16 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
         };
 
 
-    // $('#energyspent').click(function(e) {
-    //     $scope.showFoodMoal=0;
-    // });
-    // $('#weight-water').click(function(e) {
-    //     $scope.showFoodMoal=0;
-    // });
-    // $('#foodintake').click(function(e) {
-    //     $scope.showFoodMoal=1;
-    //     $scope.mealPlanCalender();
-    // });
+    $('#energyspent').click(function(e) {
+        $scope.showFoodMoal=0;
+    });
+    $('#weight-water').click(function(e) {
+        $scope.showFoodMoal=0;
+    });
+    $('#foodintake').click(function(e) {
+        $scope.showFoodMoal=1;
+        $scope.mealPlanCalender();
+    });
 
         //Modal Popup to add user food
         $scope.doUserAddFood=function(){
@@ -697,6 +705,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
 
         //On Select frequent foods
         $scope.frequentFood=function(foodid){
+            $scope.isGlycaemicValueEmpty=false;
             $window.emi=0;
             callGlycaemic();
             $scope.isNew=true;
@@ -716,6 +725,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
 
         //On Select suggested foods
         $scope.suggestedFoodByAdmin=function(foodid){
+            $scope.isGlycaemicValueEmpty=false;
             $window.emi=0;
             $scope.isNew=true;
             $scope.title= "Add Food";
@@ -734,6 +744,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
 
         //On Select search function
         $scope.foodSelected=function(){
+            $scope.isGlycaemicValueEmpty=false;
             $window.emi=0;
             callGlycaemic();
             $scope.isNew=true;
@@ -751,6 +762,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
         var originalservings="";
         //On Select edit foods
         $scope.doEditUserFood=function(foodid,userfoodid){
+
             $scope.isNew=false;
             $scope.title= "Edit Food";
             $scope.loaded=true;
@@ -758,9 +770,13 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
             var getFoodDetailForEditPromise=UserDashboardService.doGetSelectedFoodDetails(foodid);
             getFoodDetailForEditPromise.then(function(result){
                 $scope.userSelectedFoodDetails=result;
+                if(result.glycaemicindex==null){
+                    $scope.isGlycaemicValueEmpty=true;
+                }
                 var getUserFoodDetailsPromise=UserDashboardService.doGetUserFoodDetails(userfoodid);
                 getUserFoodDetailsPromise.then(function(result){
                     $scope.userFoodGlycaemic=result.glycaemicload;
+                    console.log($scope.userFoodGlycaemic);
                     $scope.userFood.userfoodid=result.userfoodid;
                     $scope.userFood.foodid=result.foodid;
                     //  $scope.userFood.measure=result.measureid;
@@ -3052,11 +3068,11 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
         };*/
 
         $scope.otherThanHistory=function(){
-            // $scope.showFoodMoal=0;
-            // $('#dailyupdate').click(function(e) {
-            //     $scope.showFoodMoal=1;
-            //     $scope.mealPlanCalender();
-            // });
+            $scope.showFoodMoal=0;
+            $('#dailyupdate').click(function(e) {
+                $scope.showFoodMoal=1;
+                $scope.mealPlanCalender();
+            });
             $scope.isHistoryEmpty=0;
             $scope.historyReport=0;
 
@@ -4896,6 +4912,8 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
         //To display lastWeek
         function getLastWeek(){
             var today = new Date();
+            $scope.firstDay = new Date(today.getFullYear(), today.getMonth(), 1);
+            $scope.lastDay = new Date(today.getFullYear(), today.getMonth() + 1, 0);
             var lastWeek = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 6);
             return lastWeek ;
         }
@@ -4924,89 +4942,91 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
             alert.show('Deleted', args.calendarEvent);
         }
     }];
-    $scope.events = [
-        {
-            title: 'An event',
 
-            startsAt: moment().startOf('week').subtract(2, 'days').add(8, 'hours').toDate(),
-            endsAt: moment().startOf('week').add(1, 'week').add(9, 'hours').toDate(),
-            draggable: true,
-            resizable: true,
-            actions: actions
-        }, {
-            title: '<i class="glyphicon glyphicon-asterisk"></i> <span class="text-primary">Another event</span>, with a <i>html</i> title',
 
-            startsAt: moment().subtract(1, 'day').toDate(),
-            endsAt: moment().add(5, 'days').toDate(),
-            draggable: true,
-            resizable: true,
-            actions: actions
-        }, {
-            title: 'This is a really long event title that occurs on every year',
-            color: calendarConfig.colorTypes.important,
-            startsAt: moment().startOf('day').add(7, 'hours').toDate(),
-            endsAt: moment().startOf('day').add(19, 'hours').toDate(),
-            recursOn: 'year',
-            draggable: true,
-            resizable: true,
-            actions: actions
-        }
-    ];
+    $scope.doGetUserMealPlanCalendar=function(mealfromdate,mealenddate){
+        $scope.events= [];
+        requestHandler.postRequest("user/getmealplancalendar/", {"fromdate": mealfromdate,"todate":mealenddate}).then(function (response) {
+            $scope.userMealPlanCalendar=response.data.lists;
 
-    $scope.cellIsOpen = true;
+            $.each( $scope.userMealPlanCalendar, function(index,value) {
+                var event={};
+                //to convert date string into newdate() format
+                var dateString = (value.date);
 
-    $scope.addEvent = function() {
-        $scope.events.push({
-            title: 'New event',
-            startsAt: moment().startOf('day').toDate(),
-            endsAt: moment().endOf('day').toDate(),
-            color: calendarConfig.colorTypes.important,
-            draggable: true,
-            resizable: true
+                var dateParts = dateString.split("/");
+
+                var dateObject = new Date(dateParts[2], dateParts[1] - 1, dateParts[0]);
+
+               $scope.mealDate = dateObject.toString();
+                var mealStatus=value.status;
+
+                if(mealStatus==1){
+                    $scope.meal_plan_background_color='#65bb34';
+                }
+                else if(mealStatus==2){
+                    $scope.meal_plan_background_color='#eb6b22';
+                }
+                else if(mealStatus==5){
+                    $scope.meal_plan_background_color='#3591cd';
+                }
+                else if(mealStatus==4){
+                    $scope.meal_plan_background_color='#f8ba01';
+                }
+                else if(mealStatus==3){
+                    $scope.meal_plan_background_color='#fff';
+                }
+                event.color={"primary":$scope.meal_plan_background_color,"secondary": $scope.meal_plan_background_color};
+                event.startsAt=$scope.mealDate;
+                event.endsAt= $scope.mealDate;
+                $scope.events.push(event);
+             });
+
         });
     };
-
-    $scope.eventClicked = function(event) {
-        alert.show('Clicked', event);
-    };
-
-    $scope.eventEdited = function(event) {
-        alert.show('Edited', event);
-    };
-
-    $scope.eventDeleted = function(event) {
-        alert.show('Deleted', event);
-    };
-
-    $scope.eventTimesChanged = function(event) {
-        alert.show('Dropped or resized', event);
-    };
-
-    $scope.toggle = function($event, field, event) {
-        $event.preventDefault();
-        $event.stopPropagation();
-        event[field] = !event[field];
-    };
-
-    $scope.timespanClicked = function(date, cell) {
-
+//to get current date while clicking calendar cell
+$scope.timespanClicked = function(date, cell) {
         if ($scope.calendarView === 'month') {
             if (($scope.cellIsOpen && moment(date).startOf('day').isSame(moment($scope.viewDate).startOf('day'))) || cell.events.length === 0 || !cell.inMonth) {
                 $scope.cellIsOpen = false;
             } else {
-                $scope.cellIsOpen = true;
-                $scope.viewDate = date;
-            }
-        } else if ($scope.calendarView === 'year') {
-            if (($scope.cellIsOpen && moment(date).startOf('month').isSame(moment($scope.viewDate).startOf('month'))) || cell.events.length === 0) {
                 $scope.cellIsOpen = false;
-            } else {
-                $scope.cellIsOpen = true;
                 $scope.viewDate = date;
             }
+            $(".common_model").hide();
+            $("#meal-plan-calendar").hide();
+            $("#lean_overlay").hide();
+            var viewDate = {
+                singleDatePicker: true,
+                format: 'DD/MM/YYYY',
+                maxDate:new Date()
+            };
+            document.getElementById("main-date").value =moment($scope.viewDate).format('DD/MM/YYYY');
+            $('#main-date').daterangepicker(viewDate).on('apply.daterangepicker', function(ev, picker) {
+                document.getElementById("main-date").value =picker.startDate.format('DD/MM/YYYY');
+
+            });
+
         }
 
     };
+//to get previous month date
+    $scope.$watch("viewDate",function(newValue, oldValue){
+        console.log('being watched oldValue:', oldValue, 'newValue:', newValue);
+        $scope.firstValue=oldValue.format('dd/mm/yyyy');
+        $scope.secondValue=newValue.format('dd/mm/yyyy');
+        var oldDateParts=$scope.firstValue.split("/");
+        var newDateParts=$scope.secondValue.split("/");
+        var old_date=new Date(oldDateParts[2],oldDateParts[1]-1,oldDateParts[0]);
+        var new_date=new Date(newDateParts[2],newDateParts[1]-1,newDateParts[0]);
+        //Now compare the two converted date formats
+        if(oldDateParts[1]-1 != newDateParts[1]-1){
+            var now = new Date(newDateParts[2],newDateParts[1]-1,1);
+            $scope.mealPlanStartDate=moment(new Date(now)).format('DD/MM/YYYY');
+            $scope.mealPlanEndDate=moment(new Date(now.getFullYear(), now.getMonth()+1, 0)).format('DD/MM/YYYY');
+            $scope.doGetUserMealPlanCalendar( $scope.mealPlanStartDate, $scope.mealPlanEndDate);
+        }
+    });
 
         //Initialize
         $scope.initialLoadFoodAndExercise=function(date){
@@ -5026,7 +5046,11 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
             $scope.doGetMedicationListByUser();
             $scope.doCheckUserMedicationDocument();
             $scope.doGetUserDetails();
-           // $scope.doSyncDevices(date);
+            var currentMealDate=new Date();
+            $scope.mealPlanStartDate=moment(new Date(currentMealDate.getFullYear(), currentMealDate.getMonth(), 1)).format('DD/MM/YYYY');
+            $scope.mealPlanEndDate=moment(new Date(currentMealDate.getFullYear(), currentMealDate.getMonth()+1, 0)).format('DD/MM/YYYY');
+            $scope.doGetUserMealPlanCalendar( $scope.mealPlanStartDate, $scope.mealPlanEndDate);
+
         };
 
         $scope.initialLoadFoodAndExercise(selectedDate);
@@ -5231,6 +5255,8 @@ userApp.filter('trusted', ['$sce', function ($sce) {
         return $sce.trustAsResourceUrl(url);
     };
 }]);
+
+
 
 /*userApp.filter('reverse', function() {
  return function(items) {
