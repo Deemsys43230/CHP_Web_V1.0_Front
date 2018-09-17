@@ -3716,7 +3716,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
                     $.each($scope.historyRecord, function(index,value) {
                         var date = value.date.split("/");
                         foodIntakeVal.push(value.calorieintake);
-                        userWeightVal.push(parseInt(value.weight));
+                        userWeightVal.push(parseFloat(value.weight));
                         historyDates.push(monthNames[(date[1]-1)]+' '+date[0]);
                     });
                     titles.title="Food Intake Vs Weight Graph( "+startDate+" - "+endDate+" )";
@@ -3734,7 +3734,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
                     $.each($scope.historyRecord, function(index,value) {
                         var date = value.date.split("/");
                         exerciseMinutes.push(parseInt(value.exerciseminutes));
-                        userWeightVal.push(parseInt(value.weight));
+                        userWeightVal.push(parseFloat(value.weight));
                         historyDates.push(monthNames[(date[1]-1)]+' '+date[0]);
                     });
                     titles.title="Exercise Vs Weight Graph( "+startDate+" - "+endDate+" )";
@@ -4395,7 +4395,6 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
         };
     //to draw user weight vs food intake graph
     $scope.drawFoodIntakeandWeightGraph=function(dataC,dataW,dataD,titles,divId){
-
         $scope.loaded=false;
         $('#'+divId).highcharts({
             title: {
@@ -4407,6 +4406,11 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
                 // crosshair: true
             }],tooltip:{
                 enabled:true,
+                    // // format the tooltip to return the y-axis value to two decimal places
+                    // formatter: function() {
+                    //     return this.series.name + ': <b>' + Highcharts.numberFormat(this.y, 2) + '%</b>';
+                    // },
+
                 backgroundColor:'rgba(255, 255, 255, 1)',
                 borderWidth:1,
                 shadow:true,
