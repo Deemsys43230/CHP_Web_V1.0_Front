@@ -173,6 +173,12 @@ userApp.controller('UserProfileController',['$scope','requestHandler','Flash','$
         else{
             $scope.userProfile.state=null;
         }
+       if($scope.userProfile.secretquestion=="") {
+           $scope.userProfile.secretquestion=null;
+       }
+        if($scope.userProfile.secretanswer=="") {
+            $scope.userProfile.secretanswer=null;
+        }
         $scope.userProfile.unitPreference =parseInt($scope.userProfile.unitPreference);
 
         requestHandler.getRequest("getUserId/","").then(function(response){
