@@ -226,12 +226,12 @@ userApp.controller('DemographyController',['$rootScope','$scope','requestHandler
             $scope.demography.height =$scope.demography.height.toString();
             $scope.demography.weight = parseFloat($scope.demography.weight);
             $scope.demography.hip = parseFloat($scope.demography.hip);
-             $scope.demography.targetweight=parseFloat($scope.demography.targetweight);
+            $scope.demography.targetweight=parseFloat($scope.demography.targetweight);
+            // $scope.demography.obesity=$scope.demography.obesity
+             $scope.demography.diabetes=$scope.demography.diabetes;
 
-
-
-        delete $scope.demography.obesity;
-        delete $scope.demography.diabetes;
+        // delete $scope.demography.obesity;
+        // delete $scope.demography.diabetes;
 
         requestHandler.getRequest("getUserId/","").then(function(response){
             if(response.data.demography.demoUpdatedstatus==0){
@@ -240,7 +240,12 @@ userApp.controller('DemographyController',['$rootScope','$scope','requestHandler
             else if(response.data.demography.demoUpdatedstatus==1){
                 $scope.dashboardNavigation = false;
             }
+            $scope.demography.HbA1c=parseFloat( $scope.demography.HbA1c);
+            $scope.demography.fastingbloodglucose=parseFloat($scope.demography.fastingbloodglucose);
+            $scope.demography.postprandialbloodglucose=parseFloat( $scope.demography.postprandialbloodglucose);
+            $scope.demography.randombloodglucose=parseFloat( $scope.demography.randombloodglucose);
             requestHandler.putRequest("user/insertorupdateDemography/",$scope.demography).then(function(response){
+
                 if(response.data.Response_status==1){
                 $scope.doGetDemographyandNutrition();
                 $scope.checkGoalStatus(selectedDate);
@@ -300,7 +305,28 @@ userApp.controller('DemographyController',['$rootScope','$scope','requestHandler
                             $("#lean_overlay").hide();
                         });
                     }
+                }else if(response.data.Response_status==3){
+                    $(function(){
+                        $("#lean_overlay").fadeTo(1000);
+                        $("#diabeticAlert").fadeIn(800);
+                        $(".common_model").show();
+                    });
+
+                    $(".modal_close").click(function(){
+                        $(".common_model").hide();
+                        $("#diabeticAlert").hide();
+                        $("#lean_overlay").hide();
+                    });
+
+                    $("#lean_overlay").click(function(){
+                        $(".common_model").hide();
+                        $("#diabeticAlert").hide();
+                        $("#lean_overlay").hide();
+                    });
+
                 }
+                $scope.doGetDemographyandNutrition();
+                successMessage(Flash,"Successfully Updated");
             }, function () {
                 errorMessage(Flash, "Please try again later!")
             });

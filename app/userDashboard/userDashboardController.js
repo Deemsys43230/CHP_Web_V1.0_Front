@@ -69,42 +69,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
         });
 
     };
-    $scope.dashboardurl="views/#/user/dashboard";
-    if($location.absUrl().indexOf("views")!=-1){
-        $scope.dashboardurl="#dashboard";
-        $("#dailyupdate").click();
-        $("#foodintake").click();
-        $scope.showFoodMoal=1;
-        $scope.mealPlanCalender();
-    };
 
-    if($rootScope.isMenuClicked==1){
-        $scope.mealPlanCalender();
-    };
-        if($rootScope.isMenuClicked==3){
-
-            $("#appAndDevice").click();
-        };
-        if($rootScope.isMenuClicked==2){
-            $("#dailyupdate").click();
-            $("#energyspent").click();
-        };
-        if($rootScope.isMenuClicked==7){
-            $("#dailyupdate").click();
-            $("#weight-water").click();
-        };
-
-
-    $('#energyspent').click(function(e) {
-        $scope.showFoodMoal=0;
-    });
-    $('#weight-water').click(function(e) {
-        $scope.showFoodMoal=0;
-    });
-    $('#foodintake').click(function(e) {
-        $scope.showFoodMoal=1;
-        $scope.mealPlanCalender();
-    });
 
         //Modal Popup to add user food
         $scope.doUserAddFood=function(){
@@ -3078,6 +3043,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
 
         };
 
+
         $scope.setHistoryType=function(id,divId){
 
             $scope.historyType=id;
@@ -4988,12 +4954,48 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
 
         });
     };
-//to get current date while clicking calendar cell
-$scope.timespanClicked = function(date, cell) {
+
+    //to enable meal-plan popup
+    if($location.absUrl().indexOf("dashboard")!=-1 && $rootScope.isMenuClicked==1){
+        $scope.dashboardurl="#dashboard";
+        $("#dailyupdate").click();
+        $("#foodintake").click();
+        $scope.showFoodMoal=1;
+        $scope.mealPlanCalender();
+    };
+
+    if($rootScope.isMenuClicked==1){
+        $scope.mealPlanCalender();
+    };
+    if($rootScope.isMenuClicked==3){
+        $("#appAndDevice").click();
+        $scope.otherThanHistory();
+
+    };
+    if($rootScope.isMenuClicked==2){
+        $("#dailyupdate").click();
+        $("#energyspent").click();
+    };
+    if($rootScope.isMenuClicked==7){
+        $("#dailyupdate").click();
+        $("#weight-water").click();
+    };
+
+
+    $('#energyspent').click(function(e) {
+        $scope.showFoodMoal=0;
+    });
+    $('#weight-water').click(function(e) {
+        $scope.showFoodMoal=0;
+    });
+    $('#foodintake').click(function(e) {
+        $scope.showFoodMoal=1;
+        $scope.mealPlanCalender();
+    });
+    //to get current date while clicking calendar cell
+    $scope.timespanClicked = function(date, cell) {
         if ($scope.calendarView === 'month') {
-            if (($scope.cellIsOpen && moment(date).startOf('day').isSame(moment($scope.viewDate).startOf('day'))) || cell.events.length === 0 || !cell.inMonth) {
-                $scope.cellIsOpen = false;
-            } else {
+            {
                 $scope.cellIsOpen = false;
                 $scope.viewDate = date;
             }
@@ -5008,10 +5010,10 @@ $scope.timespanClicked = function(date, cell) {
             document.getElementById("main-date").value =moment($scope.viewDate).format('DD/MM/YYYY');
             $('#main-date').daterangepicker(viewDate).on('apply.daterangepicker', function(ev, picker) {
                 document.getElementById("main-date").value =picker.startDate.format('DD/MM/YYYY');
-
             });
 
         }
+        $scope.initialLoadFoodAndExercise(document.getElementById("main-date").value);
 
     };
 //to get previous month date
@@ -5031,6 +5033,7 @@ $scope.timespanClicked = function(date, cell) {
             $scope.doGetUserMealPlanCalendar( $scope.mealPlanStartDate, $scope.mealPlanEndDate);
         }
     });
+
 
         //Initialize
         $scope.initialLoadFoodAndExercise=function(date){
@@ -5056,8 +5059,8 @@ $scope.timespanClicked = function(date, cell) {
             $scope.doGetUserMealPlanCalendar( $scope.mealPlanStartDate, $scope.mealPlanEndDate);
 
         };
-
         $scope.initialLoadFoodAndExercise(selectedDate);
+
     /*    $scope.doGetCoachAdvices();*/
         //circle round
         $scope.offset =         0;

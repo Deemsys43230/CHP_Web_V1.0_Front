@@ -24,10 +24,15 @@ userApp.controller('UserKeyDetailsController',['$scope','requestHandler','$rootS
         }
        
     };
+    $scope.nonDiabeticAlert=false;
 
     $scope.doGetUserKeyDetails=function() {
         requestHandler.getRequest("user/keydetails/", "").then(function (response) {
-            $scope.userKeyDetails=response.data;    
+            $scope.userKeyDetails=response.data;
+            if(response.data.Response_status==3){
+                $scope.nonDiabeticAlert=true;
+                $scope.nonDiabeticAlertText="You are not a diabetic patient. Please provide valid information."
+            }
             if($scope.userKeyDetails.diabeticstatus==1) {
                 $rootScope.isDiabetic=1;
                 $scope.isDiabeticPerson=1;
@@ -36,7 +41,7 @@ userApp.controller('UserKeyDetailsController',['$scope','requestHandler','$rootS
                 $('.navbar-collapse ul').addClass('navbar-menu-right1');
             }
               // for diabetic details popup
-            if ($scope.userKeyDetails.diabeticstatus==null) {
+            if ($scope.userKeyDetails.diabeticstatus==0) {
                  $(window).load(function(){        
                     $(function(){
                         $("#lean_overlay").fadeTo(1000);
@@ -67,6 +72,10 @@ userApp.controller('UserKeyDetailsController',['$scope','requestHandler','$rootS
         $("#lean_overlay").hide();
         $(".modal-backdrop").hide();
         $("#diabetic-status").hide();
+        $scope.diabeticCheck.HbA1c=parseFloat( $scope.diabeticCheck.HbA1c);
+        $scope.diabeticCheck.fastingbloodglucose=parseFloat($scope.diabeticCheck.fastingbloodglucose);
+        $scope.diabeticCheck.postprandialbloodglucose=parseFloat( $scope.diabeticCheck.postprandialbloodglucose);
+        $scope.diabeticCheck.randombloodglucose=parseFloat( $scope.diabeticCheck.randombloodglucose);
         requestHandler.postRequest("user/diabetescheck/", $scope.diabeticCheck).then(function (response) {
                $scope.doGetUserKeyDetails();
         });

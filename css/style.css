@@ -19129,4 +19129,4 @@ mwl-calendar .cal-month-box [class*="cal-cell"] {
 .legend .notachieved { background-color: #eb6b22;border-radius: 10px; }
 .legend .planned { background-color: #f8ba01;border-radius: 10px; }
 .legend .inplan { background-color: #3591cd; border-radius: 10px;}
-.legend .noplan { background-color: #ffffff; border: solid #eee 2px;border-radius: 10px;}
+.legend .noplan { background-color: #ffffff; border: solid #c7c7c7 2px;border-radius: 10px;}

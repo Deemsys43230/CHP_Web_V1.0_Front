@@ -396,7 +396,7 @@
             </checkbox-group>
             <checkbox-group>
                                 <span class="fh-checkbox">
-                                    <input type="checkbox" id="type2" name="diabetes" onclick="return false;" ng-model="demography.diabetes" ng-true-value="'1'" ng-false-value="'0'" readonly="true">
+                                    <input type="checkbox" id="type2" name="diabetes"  ng-model="demography.diabetes" ng-true-value="'1'" ng-false-value="'null'">
                                     <label for="type2" style="cursor:default;">Diabetic</label>
                                  </span>
             </checkbox-group>
@@ -577,6 +577,25 @@
             <div class="action_btns padding-top-10">
                 <div class="one_half"><a class="btn btn_red modal_close" ng-click="doUpdateDemography()" >OK</a></div>
                 <div class="one_half last modal_close"><a onclick="return false;" class="btn back_btn">Cancel</a></div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- Not a Diabetic  Alert-->
+
+<div id="diabeticAlert" class="popupContainer" style="display:none;left:37%!important;">
+    <header class="popupHeader">
+        <span class="header_title">Alert</span>
+        <span class="modal_close"><i class="fa fa-times"></i></span>
+    </header>
+
+    <section class="popupBody">
+        <!-- Register Form -->
+        <div class="common_model">
+            <span >You are not a diabetic patient. Please provide valid information.</span>
+            <div class="action_btns margin-top-20">
+                <div class="modal_close"><a href=""  class="btn btn_blue" >OK</a></div>
             </div>
         </div>
     </section>
