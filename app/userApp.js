@@ -1,4 +1,4 @@
-var userApp= angular.module('userApp', ['ngRoute','oc.lazyLoad','ngCookies','requestModule','ngAnimate','flash','feedbackServiceModule','angularUtils.directives.dirPagination','mwl.calendar']);
+var userApp= angular.module('userApp', ['ngRoute','oc.lazyLoad','ngCookies','requestModule','ngAnimate','flash','feedbackServiceModule','angularUtils.directives.dirPagination']);
 
 userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
 
