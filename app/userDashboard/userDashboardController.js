@@ -295,16 +295,28 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
         };
 
         $scope.loadMedicationBySession=function(sessionid){
-            $scope.userMedicationData=[];
+            $scope.userMedicationGroupedData=[];
+            $scope.tempDate='';
             $.each($scope.userMedicationList, function(index,value) {
+                $scope.userMedicationData=[];
+                $scope.medicationDate=value.date;
                 $scope.resultData = value.medications;
                 $.each($scope.resultData, function(index,value){
                     if(value.session.indexOf(sessionid)!=-1) {
                         $scope.userMedicationData.push(value);
                     }
-                 });
+                });
+                if($scope.medicationDate!=$scope.tempDate){
+                    $scope.originalMedication={};
+                    $scope.originalMedication.medication=[];
+                    $scope.originalMedication.date=$scope.medicationDate;
+                    $scope.tempDate= $scope.medicationDate;
+                    $scope.originalMedication.medication=($scope.userMedicationData);
+                    $scope.userMedicationGroupedData.push($scope.originalMedication);
+                }
             });
-        }
+
+        };
 
 
         $scope.getMedicationsSession=function(sessionSet){
@@ -813,17 +825,17 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
                 $window.emi=$scope.glycaemicLoad;
                 callGlycaemic();
                 if($scope.glycaemicLoad <= 10) {
-                    $scope.glycamicText=" You are Low for your glycaemic load. Your Value is";
+                    $scope.glycamicText="Glycemic Load :";
                     $scope.glycamicTextColor="#00b8e6";
                     $scope.glycaemic = 1;
                 }
                 else if($scope.glycaemicLoad >= 11 && $scope.glycaemicLoad <= 19) {
-                    $scope.glycamicText=" You are Medium for your glycaemic load. Your Value is";
+                    $scope.glycamicText="Glycemic Load :";
                     $scope.glycamicTextColor="#66cc00";
                     $scope.glycaemic = 2;
                 }
                 else {
-                    $scope.glycamicText=" You are High for your glycaemic load. Your Value is";
+                    $scope.glycamicText="Glycemic Load :";
                     $scope.glycamicTextColor="#e4ac01";
                     $scope.glycaemic = 3;
                 }

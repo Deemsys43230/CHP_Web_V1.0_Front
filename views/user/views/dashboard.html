@@ -840,33 +840,38 @@
                                         </div>
                                     </div>
                                     <div id="scrollheightfood">
-                                        <ul class="food remove-style">
-                                            <li class="col-lg-12 col-md-12 col-sm-12" ng-repeat="mediactionsDiaryData in userMedicationData | orderBy:'$index':true">
+                                        <ul class="food remove-style" ng-repeat-start="mediactionsDiaryData in userMedicationGroupedData">
+                                            <div class="food_name" style="color: deepskyblue">
+                                                {{mediactionsDiaryData.date}}
+                                            </div>
+                                            <li class="col-lg-12 col-md-12 col-sm-12" ng-repeat="data in mediactionsDiaryData.medication | orderBy:'$index':true">
                                                 <a href="" ng-click="deletemedication(mediactionsDiaryData.logid)" class="pull-right food_close" title="Delete Medications">x</a>
                                                 <div class="food_name">
-                                                    {{mediactionsDiaryData.medicinename}}
+                                                    {{data.medicinename}}
                                                 </div>
                                                 <div class="margin-top-10">
                                                     <div class="select_food">
                                                     <span class="border-right">
-                                                        <span class="text-bold">Medicine For : </span>{{mediactionsDiaryData.medicinefor}}
+                                                        <span class="text-bold">Medicine For : </span>{{data.medicinefor}}
                                                     </span>
                                                     <span class="border-right">
-                                                        <span class="text-bold">Dosage : </span>{{mediactionsDiaryData.dosage}} <span>(mg)</span>
-                                                    </span>
-                                                    <span class="border-right">
-                                                        <span class="text-bold">Date : </span>{{mediactionsDiaryData.date}}
+                                                        <span class="text-bold">Dosage : </span>{{data.dosage}} <span>(mg)</span>
                                                     </span>
                                                     <span >
-                                                        <span class="text-bold">Shared with Coach : </span>{{mediactionsDiaryData.issharable==1?'Yes':'No'}}
+                                                        <span class="text-bold">Shared with Coach : </span>{{data.issharable==1?'Yes':'No'}}
                                                     </span>
                                                         <span class="pull-right text-bold padding-left-10"> <a href="" title="Edit Medications" ng-click="doEditUserMedication(mediactionsDiaryData.logid)"><i class="fa fa-pencil"></i></a></span>
                                                         <span class="pull-right text-bold padding-left-10"><a href="" ng-click="viewUserMedication(mediactionsDiaryData.logid)" title="View Medications"><i class="fa fa-eye"></i></a></span>
                                                     </div>
                                                 </div>
                                             </li>
+                                            <li ng-show="mediactionsDiaryData.medication.length==0">
+                                                <h5 class="text-gray"> No Medication Found !!!</h5>
+                                            </li>
+
                                         </ul>
-                                        <div ng-show="userMedicationData.length==0" class="text-center margin-top-50">
+                                        <div ng-repeat-end></div>
+                                        <div ng-show="userMedicationGroupedData.length==0" class="text-center margin-top-50">
                                             <img src="../../images/no-medications.jpg" width="150" height="150">
                                             <h1 class="text-gray margin-top-15"> NO MEDICATION ADDED!!!</h1>
                                         </div>
@@ -1381,13 +1386,13 @@
                                 <i>
 
                                     <small ng-show="glycaemic==1">
-                                       {{glycamicText}}<b>&nbsp;<span ng-style="{'color': glycamicTextColor}">{{glycaemicLoad}}</span></b>.
+                                       {{glycamicText}}<b>&nbsp;<span ng-style="{'color': glycamicTextColor}">{{glycaemicLoad}}&nbsp;( Low )</span></b>
                                     </small>
                                     <small ng-show="glycaemic==2">
-                                        {{glycamicText}}<b>&nbsp;<span ng-style="{'color': glycamicTextColor}">{{glycaemicLoad}}</span></b>.
+                                        {{glycamicText}}<b>&nbsp;<span ng-style="{'color': glycamicTextColor}">{{glycaemicLoad}}&nbsp;( Medium )</span></b>
                                     </small>
                                     <small ng-show="glycaemic==3">
-                                        {{glycamicText}}<b>&nbsp;<span ng-style="{'color': glycamicTextColor}">{{glycaemicLoad}}</span></b>.
+                                        {{glycamicText}}<b>&nbsp;<span ng-style="{'color': glycamicTextColor}">{{glycaemicLoad}}&nbsp;( High )</span></b>
                                     </small>
                                 </i>
                             </div>
@@ -2828,7 +2833,7 @@
                     },
                     {
                         topLabel: ' ',
-                        value: 2,
+                        value: 3,
                         bottomLabel: '<span style="color: #00b8e6">LOW</span>'
                     },
                     {
@@ -2837,7 +2842,7 @@
                     },
                     {
                         topLabel: ' ',
-                        value: 17,
+                        value: 13,
                         bottomLabel: '<span style="color: #66cc00">MEDIUM</span>'
                     },
                     {
@@ -2846,7 +2851,7 @@
                     },
                     {
                         topLabel: ' ',
-                        value: 40,
+                        value: 22,
                         bottomLabel: '<span style="color: #e4ac01">HIGH</span>'
                     }
                 ],
