@@ -32,10 +32,6 @@ userApp.controller('UserKeyDetailsController',['$scope','requestHandler','$rootS
     $scope.doGetUserKeyDetails=function() {
         requestHandler.getRequest("user/keydetails/", "").then(function (response) {
             $scope.userKeyDetails=response.data;
-            if(response.data.Response_status==3){
-                $scope.nonDiabeticAlert=true;
-                $scope.nonDiabeticAlertText="You are not a diabetic patient. Please provide valid information."
-            }
             if($scope.userKeyDetails.diabeticstatus==1) {
                 $rootScope.isDiabetic=1;
                 $scope.isDiabeticPerson=1;
@@ -72,14 +68,16 @@ userApp.controller('UserKeyDetailsController',['$scope','requestHandler','$rootS
     };
     
     $scope.doDiabetesCheck=function() {
-        $("#lean_overlay").hide();
-        $(".modal-backdrop").hide();
-        $("#diabetic-status").hide();
+        $scope.diabeticCheck.diabetic=parseInt( $scope.diabeticCheck.diabetic);
         $scope.diabeticCheck.HbA1c=parseFloat( $scope.diabeticCheck.HbA1c);
         $scope.diabeticCheck.fastingbloodglucose=parseFloat($scope.diabeticCheck.fastingbloodglucose);
         $scope.diabeticCheck.postprandialbloodglucose=parseFloat( $scope.diabeticCheck.postprandialbloodglucose);
         $scope.diabeticCheck.randombloodglucose=parseFloat( $scope.diabeticCheck.randombloodglucose);
         requestHandler.postRequest("user/diabetescheck/", $scope.diabeticCheck).then(function (response) {
+            if(response.data.Response_status==0){
+                $scope.nonDiabeticAlert=true;
+                $scope.nonDiabeticAlertText="You are not a diabetic patient. Please provide valid information."
+            }
                $scope.doGetUserKeyDetails();
         });
     }

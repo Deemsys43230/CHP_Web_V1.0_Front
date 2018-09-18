@@ -794,20 +794,25 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
                 if(($scope.current.length-3)>2) $scope.max=100+((String($scope.current|0).slice(0, -2))*100);
                 else $scope.max=100;
                  /* glyphicload calculation*/
-                $scope.userCarbo=($scope.current*$scope.userFood.measure.carbo);
-                
+                $scope.userCarbo=($scope.userFood.servings*$scope.userFood.measure.carbo);
                 $scope.glycaemicLoad = parseFloat(($scope.userSelectedFoodDetails.glycaemicindex*$scope.userCarbo) / 100);
                 $scope.glycaemicLoad=$scope.glycaemicLoad.toFixed(2);
                 /* for graph*/
                 $window.emi=$scope.glycaemicLoad;
                 callGlycaemic();
                 if($scope.glycaemicLoad <= 10) {
+                    $scope.glycamicText=" You are Low for your glycaemic load. Your Value is";
+                    $scope.glycamicTextColor="#00b8e6";
                     $scope.glycaemic = 1;
                 }
                 else if($scope.glycaemicLoad >= 11 && $scope.glycaemicLoad <= 19) {
+                    $scope.glycamicText=" You are Medium for your glycaemic load. Your Value is";
+                    $scope.glycamicTextColor="#66cc00";
                     $scope.glycaemic = 2;
                 }
                 else {
+                    $scope.glycamicText=" You are High for your glycaemic load. Your Value is";
+                    $scope.glycamicTextColor="#e4ac01";
                     $scope.glycaemic = 3;
                 }
             }
@@ -4993,27 +4998,28 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
         $scope.mealPlanCalender();
     });
     //to get current date while clicking calendar cell
-    $scope.timespanClicked = function(date, cell) {
+    $scope.timespanClicked = function(date) {
         if ($scope.calendarView === 'month') {
             {
-                $scope.cellIsOpen = false;
                 $scope.viewDate = date;
+
+                $(".common_model").hide();
+                $("#meal-plan-calendar").hide();
+                $("#lean_overlay").hide();
+                var viewDate = {
+                    singleDatePicker: true,
+                    format: 'DD/MM/YYYY',
+                    maxDate: new Date()
+                };
+                document.getElementById("main-date").value = moment($scope.viewDate).format('DD/MM/YYYY');
+                $('#main-date').daterangepicker(viewDate).on('apply.daterangepicker', function (ev, picker) {
+                    document.getElementById("main-date").value = picker.startDate.format('DD/MM/YYYY');
+                });
+                $scope.initialLoadFoodAndExercise(document.getElementById("main-date").value);
             }
-            $(".common_model").hide();
-            $("#meal-plan-calendar").hide();
-            $("#lean_overlay").hide();
-            var viewDate = {
-                singleDatePicker: true,
-                format: 'DD/MM/YYYY',
-                maxDate:new Date()
-            };
-            document.getElementById("main-date").value =moment($scope.viewDate).format('DD/MM/YYYY');
-            $('#main-date').daterangepicker(viewDate).on('apply.daterangepicker', function(ev, picker) {
-                document.getElementById("main-date").value =picker.startDate.format('DD/MM/YYYY');
-            });
 
         }
-        $scope.initialLoadFoodAndExercise(document.getElementById("main-date").value);
+
 
     };
 //to get previous month date

@@ -219,7 +219,6 @@
     <header class="popupHeader" style="width: 100% !important;">
         <span class="header_title">Diabetic Details</span>
     </header>
-
     <section class="popupBody">
         <!-- Register Form -->
         <div class="common_model">
@@ -230,12 +229,14 @@
                     <label class="width-28 pull-right" for="diabetic">Yes</label>
                 </div>
                 <div class="one_half">
-                    <input type="radio" id="notdiabetic" class="height one_half last modal_close" name="diabetic" value="0" ng-model="diabeticCheck.diabetic" ng-click="doDiabetesCheck()"/>
+                    <input type="radio" id="notdiabetic" class="height one_half last modal_close" name="diabetic" value="null" ng-model="diabeticCheck.diabetic" ng-click="doDiabetesCheck()"/>
                     <label class="width-28" for="notdiabetic">No</label>
                 </div>
             </div>
-
             <div ng-show="diabeticCheck.diabetic==1">
+                <div ng-show="nonDiabeticAlert">
+                    <span class="text-error-message">{{nonDiabeticAlertText}}</span>
+                </div>
                 <form name="diabeticForm" novalidate>
                     <div  class="col-lg-12 col-md-12 col-sm-12 margin-top-15 no-padding">
                         <div class="col-lg-8 col-md-7 col-sm-7 no-padding margin-top-5">
@@ -294,6 +295,7 @@
         </div>
     </section>
 </div>
+
 
 <script type="text/javascript">
 

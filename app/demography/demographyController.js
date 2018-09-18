@@ -258,6 +258,21 @@ userApp.controller('DemographyController',['$rootScope','$scope','requestHandler
                     $scope.dashboardNavigation = false;
                 },1000);
                 }
+                else if(response.data.Response_status==1 && $scope.demography.diabetes==1){
+                    requestHandler.getRequest("user/keydetails/", "").then(function (response) {
+                        $scope.userKeyDetails=response.data;
+                        if($scope.userKeyDetails.diabeticstatus==1) {
+                            $rootScope.isDiabetic=1;
+                        }
+                        else {
+                            $rootScope.isDiabetic=2;
+                            $('.navbar-collapse ul').addClass('navbar-menu-right1');
+                            $('.navbar-collapse ul').removeClass('navbar-menu-right');
+                        }
+                    });
+                }
+
+
                 else if(response.data.Response_status==2){
                     if(response.data.eligibilityPlan ==1){
                         $("html, body").animate({
