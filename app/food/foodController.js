@@ -415,6 +415,7 @@ adminApp.controller("FoodDetailsEditController",['$q','$scope','requestHandler',
         $scope.foodDetails.measuredata=$scope.foodDetails.measureid;
 
         $q.all([tagPromise]).then(function(){
+            console.log($scope.foodDetails);
             requestHandler.putRequest("admin/updateFood/", $scope.foodDetails).then(function (response) {
                 if (response.data.Response_status == 1) {
                     successMessage(Flash,"Food Updated Successfully!");

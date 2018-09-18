@@ -881,11 +881,10 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
 userApp.controller("UserInitialController",['$scope','requestHandler','$location','Flash','FeedbackService','$timeout','$rootScope',function($scope,requestHandler,$location,Flash,FeedbackService,$timeout,$rootScope){
     $scope.hideValue=1;
 
-
-
     requestHandler.getRequest("getUserId/","").then(function(response){
         $scope.username=response.data.User_Profile.name;
         $scope.userProfile=response.data.User_Profile;
+        console.log($scope.userProfile);
         $scope.demo = response.data.demography;
         $scope.emailNotifications= response.data.Login;
         $scope.currentUserEmailId= $scope.emailNotifications.email;

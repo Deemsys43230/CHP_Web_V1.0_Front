@@ -1,6 +1,6 @@
 <div ng-show="isMenuShow==2" ng-controller="UserKeyDetailsController">
     <div class="menu-banner" id="dashboard-menu">
-        <div class="menu-leftsidebar">
+        <!-- <div class="menu-leftsidebar">
             <div id="grad1" class="col-lg-12 col-md-12 col-sm-12 box-gradiant" ng-click="menuUrlChange(1)">
                 <div class="col-lg-9 col-md-9 col-sm-9 no-padding">
                     <h5 class="text-white slogan-text-h5">Track your caloric intake.</h5>
@@ -37,50 +37,167 @@
                     <i class="fa fa-3x fa-caret-right"></i>  
                 </div>
             </div> 
-        </div>
+        </div> -->
         <!-- For Menu spinning -->
         <div class="menu-sidebar">
-            <div class='selector'>
-                <ul>
-                    <li>
-                        <div class="menu-load" ng-click="menuUrlChange(1)">Food Dairy<br/>
+            <div class="col-md-3 col-lg-3 col-sm-3 margin-top-10">
+                <div class="card box-1 cursor" ng-click="menuUrlChange(1)">
+                    <div class="widget-statstic-card">
+                        <div class="card-header borderless" >
+                            <div class="card-header-left">
+                                <h3>Food Intake</h3>
+                                <p class="p-t-10 m-b-0 text-c-yellow">Compared to last week</p>
+                            </div>
+                        </div>
+                        <div class="card-block">
+                            <i class="feather icon-sliders st-icon bg-c-yellow">
                                 <img src="../../images/food-icon.png" class="dashboard-menu-img" />
+                            </i>
+                            <div class="text-left">
+                                <h3>5,456</h3>
+                                <span class="float-right bg-c-yellow">23%</span>
+                            </div>
                         </div>
-                    </li>
-                    <li>
-                        <div class="menu-load" ng-click="menuUrlChange(2)">Exercise<br/>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-lg-3 col-sm-3 margin-top-10">
+                <div class="card box-2 cursor" ng-click="menuUrlChange(2)">
+                    <div class="widget-statstic-card">
+                        <div class="card-header borderless">
+                            <div class="card-header-left">
+                                <h3>Energy Spent</h3>
+                                <p class="p-t-10 m-b-0 text-c-yellow">Compared to last week</p>
+                            </div>
+                        </div>
+                        <div class="card-block">
+                            <i class="feather icon-sliders st-icon bg-c-yellow">
                                 <img src="../../images/exercise-icon.png" class="dashboard-menu-img" />
+                            </i>
+                            <div class="text-left">
+                                <h3>5,456</h3>
+                                <span class="float-right bg-c-yellow">23%</span>
+                            </div>
                         </div>
-                    </li>
-                    <li>
-                        <div class="menu-load" ng-click="menuUrlChange(4)">Coach<br/>
-                                <img src="../../images/coach-icon.png" class="dashboard-menu-img" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-lg-3 col-sm-3 margin-top-10">
+                <div class="card box-3 cursor" ng-click="menuUrlChange(3)">
+                    <div class="widget-statstic-card">
+                        <div class="card-header borderless">
+                            <div class="card-header-left">
+                                <h3>App & Devices</h3>
+                                <p class="p-t-10 m-b-0 text-c-yellow">Compared to last week</p>
+                            </div>
                         </div>
-                    </li>
-                    <li>
-                        <div class="menu-load" ng-click="menuUrlChange(5)">Demography<br/>
-                                <img src="../../images/demography-icon.png" class="dashboard-menu-img" />
-                        </div>
-                    </li>
-                    <li>
-                        <div ng-show="isDiabeticPerson==1" class="menu-load" ng-click="menuUrlChange(6)">Appointments<br/>
-                            <img src="../../images/appointment-icon.png" class="dashboard-menu-img" />
-                        </div>
-                        <div ng-hide="isDiabeticPerson==1" class="menu-load" ng-click="menuUrlChange(6)">Goal<br/>
-                                <img src="../../images/goal-icon.png" class="dashboard-menu-img" />
-                        </div>
-                    </li>
-                    <li>
-                        <div class="menu-load" ng-click="menuUrlChange(3)">App & Devices<br/>
+                        <div class="card-block">
+                            <i class="feather icon-sliders st-icon bg-c-yellow">
                                 <img src="../../images/smartwatch-icon.png" class="dashboard-menu-img" />
+                            </i>
+                            <div class="text-left">
+                                <h3>5,456</h3>
+                                <span class="float-right bg-c-yellow">23%</span>
+                            </div>
                         </div>
-                    </li>
-                </ul>
-                <button>
-                    <a href="#profile">Profile<br/>
-                        <img src="../../images/profile-icon.png" class="profile-menu-image" />
-                    </a>
-                </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-lg-3 col-sm-3 margin-top-10">
+                <div class="card box-4 cursor" ng-click="menuUrlChange(4)">
+                    <div class="widget-statstic-card">
+                        <div class="card-header borderless">
+                            <div class="card-header-left">
+                                <h3>Medications</h3>
+                                <p class="p-t-10 m-b-0 text-c-yellow">Compared to last week</p>
+                            </div>
+                        </div>
+                        <div class="card-block">
+                            <i class="feather icon-sliders st-icon bg-c-yellow">
+                                <img src="../../images/smartwatch-icon.png" class="dashboard-menu-img" />
+                            </i>
+                            <div class="text-left">
+                                <h3>5,456</h3>
+                                <span class="float-right bg-c-yellow">23%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 col-sm-12">
+                <div class="col-md-8 col-lg-8 col-sm-8 no-padding">
+                    <div class="col-sm-5 col-md-5 no-padding">
+                        <div class="card-profile user-card2 cursor" ng-click="menuUrlChange(8)">
+                            <img src="../../images/dashboard-background-profile.jpg" class="profile-bg-img img-fluid" />
+                            <div class="card-block text-center">
+                                <div class="margin-bottom-10">
+                                    <a href="#profile" class="dashboard-profile-image">
+                                        <img class="user-img img-radius" src={{userProfile.imageurl}} alt="user-profile-img">
+                                    </a>
+                                </div>
+                                <div class="margin-bottom-20">
+                                    <h3>{{userProfile.name}}</h3>
+                                    <h6>{{userProfile.gender==1?'Male':'Female'}}</h6>
+                                    <a href="#profile"><i class="feather fa fa-pencil-square-o m-t-10 f-16"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-7 col-sm-7 no-padding">
+                        <div class="col-md-5 social-card1 bg-coach">
+                            <div class="small-card-block cursor">
+                                <div class="row align-items-center">
+                                    <div class="text-center">
+                                        <i class="icon-coach social-icon fa fa-user"></i>
+                                    </div>
+                                    <div class="text-white text-center">
+                                        <h4 class="margin-top-10 text-white">Coach</h4>
+                                        <p class="text-white">Subscribe Coach</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-5 social-card2 bg-goal">
+                            <div class="small-card-block cursor">
+                                <div class="row align-items-center">
+                                    <div class="text-center">
+                                        <i class="icon-goal social-icon fa fa-bullseye"></i>
+                                    </div>
+                                    <div class="text-white text-center">
+                                        <h4 class="margin-top-10 text-white">Goal</h4>
+                                        <p class="text-white">Set you Goal</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-5 social-card1 bg-demography">
+                            <div class="small-card-block cursor">
+                                <div class="row align-items-center">
+                                    <div class="text-center">
+                                        <i class="icon-demography social-icon fa fa-twitter"></i>
+                                    </div>
+                                    <div class="text-white text-center">
+                                        <h4 class="margin-top-10 text-white">Demography</h4>
+                                        <p class="text-white">Diabetic & Nutrients</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-5 social-card2 bg-mealplan">
+                            <div class="small-card-block cursor">
+                                <div class="row align-items-center">
+                                    <div class="text-center">
+                                        <i class="icon-mealplan social-icon fa fa-twitter"></i>
+                                    </div>
+                                    <div class="text-white text-center">
+                                        <h4 class="margin-top-10 text-white">Meal Plan</h4>
+                                        <p class="text-white">Plan your intake</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class=" col-lg-3 col-md-3 col-sm-3 menu-rightsidebar" ng-click="menuUrlChange(4)">

@@ -12,6 +12,9 @@ userApp.controller('UserKeyDetailsController',['$scope','requestHandler','$rootS
         if (tabid==5) {
             $location.path('/demography');
         }
+        if (tabid==8) {
+            $location.path('/profile');
+        }
         if(tabid==6){
              if( $scope.isDiabeticPerson==1){
              $location.path('/doctor-appointment');  
