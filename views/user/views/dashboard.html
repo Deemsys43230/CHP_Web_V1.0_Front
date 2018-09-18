@@ -2163,7 +2163,7 @@
                 <div class="col-md-6 col-sm-6 no-padding">
                     <div class="col-md-12">
                         <p>Medicine Name</p>
-                        <input type="text" name="medication" data-medicationid="medication.id"  validate-all-characters ng-model="medication.medicinename" maxlength="200" required focus-me="shouldBeOpen">
+                        <input type="text" name="medication" data-medicationid="medication.id"  validate-all-characters ng-model="medication.medicinename" maxlength="50" required focus-me="shouldBeOpen">
                              <span ng-show="medicationForm.medication.$dirty&&medicationForm.medication.$invalid">
                                  <span class="error-message" ng-show="medicationForm.medication.$error.required"><span>Required.</span></span>
                                  <span class="error-message" ng-show="medicationForm.medication.$error.validateAllCharacters"><span>Please&nbsp;Enter&nbsp;Valid&nbsp;Name.</span></span>
@@ -2173,10 +2173,10 @@
                         <p>Medicine For</p>
                             <select class="col-md-6 medications" name="medicinefor" ng-model="medication.medicinefor" ng-options="medicinefor for medicinefor in medicationforArray" required>
                                 <option value="">-- Select Medicine For --</option>
-                                <span ng-show="medicationForm.medicinefor.$dirty&&medicationForm.medicinefor.$invalid">
-                                     <span class="error-message" ng-show="medicationForm.medicinefor.$error.required"><span>Required.</span></span>
-                                </span>
                             </select>
+                                <span ng-show="medicationForm.medicinefor.$dirty&&medicationForm.medicinefor.$invalid">
+                                     <span class="error-message" ng-show="medicationForm.medicinefor.$error.required"><span style="bottom: 1px !important;">Required.</span></span>
+                                </span>
                     </div>
                     <div class="col-md-12">
                         <input type="text" class="margin-top-5" name="medicinefortext" ng-show="medication.medicinefor=='Other'" ng-model="medication.medicinefortext" maxlength="200" ng-required="medication.medicinefor=='Other'" >
@@ -2186,14 +2186,14 @@
                     </div>
                     <div class="col-md-12" ng-show="isNew">
                         <p>From Date</p>
-                        <input type="text" name="fromdate" id="set-from-date" ng-model="medication.fromdate" ng-required="isNew" >
+                        <input type="text" name="fromdate" id="set-from-date" ng-model="medication.fromdate" ng-required="isNew" readonly>
                             <span ng-show="medicationForm.fromdate.$dirty&&medicationForm.fromdate.$invalid">
                                  <span class="error-message" ng-show="medicationForm.fromdate.$error.required"><span>Required.</span></span>
                             </span>
                     </div>
                     <div class="col-md-12" ng-show="isNew">
                         <p>To Date</p>
-                        <input type="text" name="todate" id="set-to-date" ng-model="medication.todate">
+                        <input type="text" name="todate" id="set-to-date" ng-model="medication.todate" readonly>
                     </div> 
                     <div class="col-md-12" ng-hide="isNew">
                         <p>Date</p>
