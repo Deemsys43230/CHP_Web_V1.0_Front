@@ -670,6 +670,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
 
         //On Select frequent foods
         $scope.frequentFood=function(foodid){
+            $scope.glycaemic = 0;
             $scope.isGlycaemicValueEmpty=false;
             $window.emi=0;
             callGlycaemic();
@@ -690,6 +691,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
 
         //On Select suggested foods
         $scope.suggestedFoodByAdmin=function(foodid){
+            $scope.glycaemic = 0;
             $scope.isGlycaemicValueEmpty=false;
             $window.emi=0;
             $scope.isNew=true;
@@ -709,6 +711,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
 
         //On Select search function
         $scope.foodSelected=function(){
+            $scope.glycaemic = 0;
             $scope.isGlycaemicValueEmpty=false;
             $window.emi=0;
             callGlycaemic();
@@ -727,7 +730,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
         var originalservings="";
         //On Select edit foods
         $scope.doEditUserFood=function(foodid,userfoodid){
-
+            $scope.glycaemic = 0;
             $scope.isNew=false;
             $scope.title= "Edit Food";
             $scope.loaded=true;
@@ -759,14 +762,21 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
                     $window.emi=$scope.glycaemicLoad;
                     callGlycaemic();
                     if($scope.glycaemicLoad <= 10) {
+                        $scope.glycamicText=" You are Low for your glycaemic load. Your Value is";
+                        $scope.glycamicTextColor="#00b8e6";
                         $scope.glycaemic = 1;
                     }
                     else if($scope.glycaemicLoad >= 11 && $scope.glycaemicLoad <= 19) {
+                        $scope.glycamicText=" You are Medium for your glycaemic load. Your Value is";
+                        $scope.glycamicTextColor="#66cc00";
                         $scope.glycaemic = 2;
-                    }
+                     }
                     else {
+                        $scope.glycamicText=" You are High for your glycaemic load. Your Value is";
+                        $scope.glycamicTextColor="#e4ac01";
                         $scope.glycaemic = 3;
                     }
+                    
                     $scope.current=$scope.current.toFixed(2);
                     if(($scope.current.length-3)>2) $scope.max=100+((String($scope.current|0).slice(0, -2))*100);
                     else $scope.max=100;
@@ -782,6 +792,8 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
 
         //Calories caluclation for food
         $scope.doCalculateCalories=function(){
+            $window.emi=$scope.glycaemicLoad=0;
+            callGlycaemic();
             if($scope.userFood.servings==0){
                 $scope.current=$scope.caloriesIntake=0;
             }
