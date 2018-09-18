@@ -247,18 +247,17 @@ userApp.controller('DemographyController',['$rootScope','$scope','requestHandler
             requestHandler.putRequest("user/insertorupdateDemography/",$scope.demography).then(function(response){
 
                 if(response.data.Response_status==1){
-                $scope.doGetDemographyandNutrition();
-                $scope.checkGoalStatus(selectedDate);
-                $rootScope.checkPath=2;
-                successMessage(Flash,"Successfully Updated");
-                $timeout(function () {
-                    if($scope.dashboardNavigation == true){
-                    $location.path("/dashboard");
-                    }
-                    $scope.dashboardNavigation = false;
-                },1000);
-                }
-                else if(response.data.Response_status==1 && $scope.demography.diabetes==1){
+                    $scope.doGetDemographyandNutrition();
+                    $scope.checkGoalStatus(selectedDate);
+                    $rootScope.checkPath=2;
+                    successMessage(Flash,"Successfully Updated");
+                    $timeout(function () {
+                        if($scope.dashboardNavigation == true){
+                        $location.path("/dashboard");
+                        }
+                        $scope.dashboardNavigation = false;
+                    },1000);
+                    // Get Key Details
                     requestHandler.getRequest("user/keydetails/", "").then(function (response) {
                         $scope.userKeyDetails=response.data;
                         if($scope.userKeyDetails.diabeticstatus==1) {
@@ -270,10 +269,7 @@ userApp.controller('DemographyController',['$rootScope','$scope','requestHandler
                             $('.navbar-collapse ul').removeClass('navbar-menu-right');
                         }
                     });
-                }
-
-
-                else if(response.data.Response_status==2){
+                }else if(response.data.Response_status==2){
                     if(response.data.eligibilityPlan ==1){
                         $("html, body").animate({
                             scrollTop: 0
@@ -341,8 +337,7 @@ userApp.controller('DemographyController',['$rootScope','$scope','requestHandler
 
                 }
                 $scope.doGetDemographyandNutrition();
-                successMessage(Flash,"Successfully Updated");
-            }, function () {
+             }, function () {
                 errorMessage(Flash, "Please try again later!")
             });
 

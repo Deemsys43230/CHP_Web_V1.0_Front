@@ -49,25 +49,10 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
             $("#appAndDevice").click();
         }
     $scope.mealPlanCalender=function(){
-        $(function(){
-            $("#lean_overlay").fadeTo(1000);
-            $("#meal-plan-calendar").fadeIn(600);
-            $(".common_model").show();
-
-        });
-
-        $(".modal_close").click(function(){
-            $(".common_model").hide();
-            $("#meal-plan-calendar").hide();
-            $("#lean_overlay").hide();
-        });
-
-        $("#lean_overlay").click(function(){
-            $(".common_model").hide();
-            $("#meal-plan-calendar").hide();
-            $("#lean_overlay").hide();
-        });
-
+        var currentMealDate=new Date();
+        $scope.mealPlanStartDate=moment(new Date(currentMealDate.getFullYear(), currentMealDate.getMonth(), 1)).format('DD/MM/YYYY');
+        $scope.mealPlanEndDate=moment(new Date(currentMealDate.getFullYear(), currentMealDate.getMonth()+1, 0)).format('DD/MM/YYYY');
+        $scope.doGetUserMealPlanCalendar( $scope.mealPlanStartDate, $scope.mealPlanEndDate);
     };
 
 
@@ -4980,7 +4965,24 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
                 event.endsAt= $scope.mealDate;
                 $scope.events.push(event);
              });
+        $(function(){
+            $("#lean_overlay").fadeTo(1000);
+            $("#meal-plan-calendar").fadeIn(600);
+            $(".common_model").show();
 
+        });
+
+        $(".modal_close").click(function(){
+            $(".common_model").hide();
+            $("#meal-plan-calendar").hide();
+            $("#lean_overlay").hide();
+        });
+
+        $("#lean_overlay").click(function(){
+            $(".common_model").hide();
+            $("#meal-plan-calendar").hide();
+            $("#lean_overlay").hide();
+        });
         });
     };
 
