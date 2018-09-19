@@ -3048,10 +3048,6 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
 
         $scope.otherThanHistory=function(){
             $scope.showFoodMoal=0;
-            $('#dailyupdate').click(function(e) {
-                $scope.showFoodMoal=1;
-                $scope.mealPlanCalender();
-            });
             $scope.isHistoryEmpty=0;
             $scope.historyReport=0;
 
@@ -5023,6 +5019,10 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
         $scope.showFoodMoal=1;
         $scope.mealPlanCalender();
     });
+    $('#dailyupdate').click(function(e) {
+        $scope.showFoodMoal=1;
+        $scope.mealPlanCalender();
+    });
     //to get current date while clicking calendar cell
     $scope.timespanClicked = function(date) {
         if ($scope.calendarView === 'month') {
@@ -5085,10 +5085,10 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
             $scope.doGetMedicationListByUser();
             $scope.doCheckUserMedicationDocument();
             $scope.doGetUserDetails();
-            var currentMealDate=new Date();
+          /*  var currentMealDate=new Date();
             $scope.mealPlanStartDate=moment(new Date(currentMealDate.getFullYear(), currentMealDate.getMonth(), 1)).format('DD/MM/YYYY');
             $scope.mealPlanEndDate=moment(new Date(currentMealDate.getFullYear(), currentMealDate.getMonth()+1, 0)).format('DD/MM/YYYY');
-            $scope.doGetUserMealPlanCalendar( $scope.mealPlanStartDate, $scope.mealPlanEndDate);
+            $scope.doGetUserMealPlanCalendar( $scope.mealPlanStartDate, $scope.mealPlanEndDate);*/
 
         };
         $scope.initialLoadFoodAndExercise(selectedDate);
