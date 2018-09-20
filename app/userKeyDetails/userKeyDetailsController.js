@@ -6,25 +6,22 @@ userApp.controller('UserKeyDetailsController',['$scope','requestHandler','$rootS
     $scope.menuUrlChange=function(tabid){
         $rootScope.isMenuClicked=tabid;
         $location.path('/dashboard');
-        if (tabid==4) {
-            $location.path('/coach');
-        }
-        if (tabid==5) {
-            $location.path('/demography');
-        }
-        if (tabid==8) {
-            $location.path('/profile');
-        }
-        if(tabid==6){
-             if( $scope.isDiabeticPerson==1){
-             $location.path('/doctor-appointment');  
-             
-            }
-            else{
-                   $location.path('/group-goal'); 
-            }
-            
-        }
+        // if (tabid==4) {
+        //     $location.path('/coach');
+        // }
+        // if (tabid==5) {
+        //     $location.path('/demography');
+        // }
+        // if(tabid==6){
+        //      if( $scope.isDiabeticPerson==1){
+        //      $location.path('/doctor-appointment');
+        //
+        //     }
+        //     else{
+        //            $location.path('/group-goal');
+        //     }
+        //
+        // }
        
     };
     $scope.nonDiabeticAlert=false;

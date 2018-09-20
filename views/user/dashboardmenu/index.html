@@ -41,12 +41,35 @@
         <!-- For Menu spinning -->
         <div class="menu-sidebar">
             <div class="col-md-3 col-lg-3 col-sm-3 margin-top-10">
+                <div class="card box-4 cursor">
+                    <a href="#user-dashboard">
+                    <div class="widget-statstic-card">
+                        <div class="card-header borderless">
+                            <div class="card-header-left">
+                                <h3>Dashboard</h3>
+                                <p class="p-t-10 m-b-0 text-c-yellow">Access Our Wellness Library</p>
+                            </div>
+                        </div>
+                        <div class="card-block">
+                            <i class="feather icon-sliders st-icon bg-c-yellow">
+                                <img src="../../images/smartwatch-icon.png" class="dashboard-menu-img" />
+                            </i>
+                            <div class="text-left">
+                                <h3>10,000</h3>
+                                <span class="float-right bg-c-yellow">23%</span>
+                            </div>
+                        </div>
+                    </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-3 col-lg-3 col-sm-3 margin-top-10">
                 <div class="card box-1 cursor" ng-click="menuUrlChange(1)">
                     <div class="widget-statstic-card">
                         <div class="card-header borderless" >
                             <div class="card-header-left">
                                 <h3>Food Intake</h3>
-                                <p class="p-t-10 m-b-0 text-c-yellow">Compared to last week</p>
+                                <p class="p-t-10 m-b-0 text-c-yellow">Track Your Calorie Intake</p>
                             </div>
                         </div>
                         <div class="card-block">
@@ -54,7 +77,7 @@
                                 <img src="../../images/food-icon.png" class="dashboard-menu-img" />
                             </i>
                             <div class="text-left">
-                                <h3>5,456</h3>
+                                <h3>7,456</h3>
                                 <span class="float-right bg-c-yellow">23%</span>
                             </div>
                         </div>
@@ -67,7 +90,7 @@
                         <div class="card-header borderless">
                             <div class="card-header-left">
                                 <h3>Energy Spent</h3>
-                                <p class="p-t-10 m-b-0 text-c-yellow">Compared to last week</p>
+                                <p class="p-t-10 m-b-0 text-c-yellow">Track Calories Burned</p>
                             </div>
                         </div>
                         <div class="card-block">
@@ -88,7 +111,7 @@
                         <div class="card-header borderless">
                             <div class="card-header-left">
                                 <h3>App & Devices</h3>
-                                <p class="p-t-10 m-b-0 text-c-yellow">Compared to last week</p>
+                                <p class="p-t-10 m-b-0 text-c-yellow">Get App and Devices for you</p>
                             </div>
                         </div>
                         <div class="card-block">
@@ -96,37 +119,102 @@
                                 <img src="../../images/smartwatch-icon.png" class="dashboard-menu-img" />
                             </i>
                             <div class="text-left">
-                                <h3>5,456</h3>
+                                <h3>5</h3>
                                 <span class="float-right bg-c-yellow">23%</span>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-3 col-lg-3 col-sm-3 margin-top-10">
-                <div class="card box-4 cursor" ng-click="menuUrlChange(4)">
-                    <div class="widget-statstic-card">
-                        <div class="card-header borderless">
-                            <div class="card-header-left">
-                                <h3>Medications</h3>
-                                <p class="p-t-10 m-b-0 text-c-yellow">Compared to last week</p>
+            <div class="col-md-12 col-sm-12 no-padding">
+                <div class="col-md-3 col-lg-3 col-sm-3 margin-top-10">
+                    <div class="card box-5 cursor" ng-click="menuUrlChange(5)">
+                        <div class="widget-statstic-card">
+                            <div class="card-header borderless">
+                                <div class="card-header-left">
+                                    <h3>Medication</h3>
+                                    <p class="p-t-10 m-b-0 text-c-yellow">Update Your Medications</p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="card-block">
-                            <i class="feather icon-sliders st-icon bg-c-yellow">
-                                <img src="../../images/smartwatch-icon.png" class="dashboard-menu-img" />
-                            </i>
-                            <div class="text-left">
-                                <h3>5,456</h3>
-                                <span class="float-right bg-c-yellow">23%</span>
+                            <div class="card-block">
+                                <i class="feather icon-sliders st-icon bg-c-yellow">
+                                    <img src="../../images/medication-icon.png" class="dashboard-menu-img" />
+                                </i>
+                                <div class="text-left">
+                                    <h3>5,456</h3>
+                                    <span class="float-right bg-c-yellow">23%</span>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 text-center margin-top-5">
+                        <div class="demo_status">Your Current Plan</div>
+                        <div class="demo_status margin-top-10">{{userPlanText}}</div>
+                    </div>
+
                 </div>
-            </div>
-            <div class="col-md-12 col-sm-12">
-                <div class="col-md-8 col-lg-8 col-sm-8 no-padding">
-                    <div class="col-sm-5 col-md-5 no-padding">
+                <div class="col-md-9 col-lg-9 col-sm-9 no-padding">
+                    <div class="col-md-7 col-sm-7 no-padding">
+                        <div class="col-md-5 social-card1 bg-coach">
+                            <a href="#coach">
+                            <div class="small-card-block cursor">
+                                <div class="row align-items-center">
+                                    <div class="text-center">
+                                        <i class="icon-coach social-icon fa fa-user"></i>
+                                    </div>
+                                    <div class="text-white text-center">
+                                        <h4 class="margin-top-10 text-white">Coach</h4>
+                                        <p class="text-white">Subscribe Coach</p>
+                                    </div>
+                                </div>
+                            </div>
+                            </a>
+                        </div>
+                        <div class="col-md-5 social-card2 bg-goal">
+                            <a href="#group-goal">
+                            <div class="small-card-block cursor">
+                                <div class="row align-items-center">
+                                    <div class="text-center">
+                                        <i class="icon-goal social-icon fa fa-bullseye"></i>
+                                    </div>
+                                    <div class="text-white text-center">
+                                        <h4 class="margin-top-10 text-white">Goal</h4>
+                                        <p class="text-white">Set your Goal</p>
+                                    </div>
+                                </div>
+                            </div>
+                            </a>
+                        </div>
+                        <div class="col-md-5 social-card1 bg-demography">
+                            <div class="small-card-block cursor" ng-click="menuUrlChange(6)">
+                                <div class="row align-items-center">
+                                    <div class="text-center">
+                                        <i class="icon-demography social-icon fa fa-line-chart"></i>
+                                    </div>
+                                    <div class="text-white text-center">
+                                        <h4 class="margin-top-10 text-white">Progress</h4>
+                                        <p class="text-white">Get your Reports</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-5 social-card2 bg-mealplan">
+                            <a href="#meal-plans">
+                            <div class="small-card-block cursor">
+                                <div class="row align-items-center">
+                                    <div class="text-center">
+                                        <i class="icon-mealplan social-icon fa fa-th-large"></i>
+                                    </div>
+                                    <div class="text-white text-center">
+                                        <h4 class="margin-top-10 text-white">Meal Plan</h4>
+                                        <p class="text-white">Plan your intake</p>
+                                    </div>
+                                </div>
+                            </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-sm-5 col-md-5">
                         <div class="card-profile user-card2 cursor" ng-click="menuUrlChange(8)">
                             <img src="../../images/dashboard-background-profile.jpg" class="profile-bg-img img-fluid" />
                             <div class="card-block text-center">
@@ -143,72 +231,38 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-7 col-sm-7 no-padding">
-                        <div class="col-md-5 social-card1 bg-coach">
-                            <div class="small-card-block cursor">
-                                <div class="row align-items-center">
-                                    <div class="text-center">
-                                        <i class="icon-coach social-icon fa fa-user"></i>
-                                    </div>
-                                    <div class="text-white text-center">
-                                        <h4 class="margin-top-10 text-white">Coach</h4>
-                                        <p class="text-white">Subscribe Coach</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-5 social-card2 bg-goal">
-                            <div class="small-card-block cursor">
-                                <div class="row align-items-center">
-                                    <div class="text-center">
-                                        <i class="icon-goal social-icon fa fa-bullseye"></i>
-                                    </div>
-                                    <div class="text-white text-center">
-                                        <h4 class="margin-top-10 text-white">Goal</h4>
-                                        <p class="text-white">Set you Goal</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-5 social-card1 bg-demography">
-                            <div class="small-card-block cursor">
-                                <div class="row align-items-center">
-                                    <div class="text-center">
-                                        <i class="icon-demography social-icon fa fa-twitter"></i>
-                                    </div>
-                                    <div class="text-white text-center">
-                                        <h4 class="margin-top-10 text-white">Demography</h4>
-                                        <p class="text-white">Diabetic & Nutrients</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-5 social-card2 bg-mealplan">
-                            <div class="small-card-block cursor">
-                                <div class="row align-items-center">
-                                    <div class="text-center">
-                                        <i class="icon-mealplan social-icon fa fa-twitter"></i>
-                                    </div>
-                                    <div class="text-white text-center">
-                                        <h4 class="margin-top-10 text-white">Meal Plan</h4>
-                                        <p class="text-white">Plan your intake</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
-        <div class=" col-lg-3 col-md-3 col-sm-3 menu-rightsidebar" ng-click="menuUrlChange(4)">
-            <h3 class="text-center">Coach Intraction</h3>
-            <img src="../../images/assessments.png" class="coach-activity" />
-            <img src="../../images/chat-icon.png" class="coach-activity" />
-            <img src="../../images/events-icon.png" class="coach-activity" />
+        <div class=" col-lg-3 col-md-3 col-sm-3 menu-rightsidebar">
+            <h4 class="text-center margin-top-10">Current Weight & Fat</h4>
+            <div class="weight-log-menu">
+                <div class="col-lg-12 col-md-12 col-sm-12 text-center no-padding">
+                    <img style="width: 80px;height: 74px" class="width margin-left-5" src="../../images/log.png">
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 text-center no-padding margin-top-10">
+                    <span class="weight-text-font">{{demo.weight}}&nbsp;<small><span ng-show="userProfile.unitPreference==1">Kgs</span><span ng-show="userProfile.unitPreference==2">lbs</span></small></span>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 text-center no-padding margin-top-10">
+                    <span class="weight-text-font" >{{demo.fat==null?"-":demo.fat}} {{demo.fat==null?" ":"(%)"}}</span></span>
+                </div>
+            </div>
+            <div class="text-center margin-top-20">
+                <div class="centerize">
+                    <a href=""  ng-click="menuUrlChange(4)" class="price-button btn button" style="background-color: #ffba01 !important;">Weight Log</a>
+                </div>
+            </div>
+
+            <!--<img src="../../images/assessments.png" class="coach-activity" />-->
+            <!--<img src="../../images/chat-icon.png" class="coach-activity" />-->
+            <!--<img src="../../images/events-icon.png" class="coach-activity" />-->
         </div>
         <div class=" col-lg-3 col-md-3 col-sm-3 menu-rightsidebar1" ng-click="menuUrlChange(7)">
             <h3 class="text-center">Water Log</h3>
-            <img src="../../images/water-log.png" class="margin-top15 pointer waterlog-img" />
+            <img src="../../images/water-log.png" class="pointer waterlog-img" style="height: 100px;margin-left:30px;" />
+            <div class="col-md-12 col-sm-12 margin-left-20">
+                <div class="waterlog-text"><b><span>40&nbsp;<small>ml</small></span> / <span>5&nbsp;<small>oz</small></span></b></div>
+            </div>
         </div>
       
     </div>

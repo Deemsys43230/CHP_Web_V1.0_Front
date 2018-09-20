@@ -18746,7 +18746,7 @@ a.resend_back:hover {
   transform: rotate(360deg);
 }*/
 .navbar-menu-right {
-    right: -50px !important;
+    left: 395px !important;
 }
 a.back-menu {
     padding: 5px 10px;
@@ -18762,9 +18762,9 @@ a.back-menu {
     margin-right: -15px;
     margin-top: 5px;
 }
-.navbar-menu-right1 {
-     right: -205px;
-}
+/*.navbar-menu-right1 {*/
+     /*right: -205px;*/
+/*}*/
 #dashboard-menu{
     width: 100%;
     height: 550px;
@@ -19200,7 +19200,15 @@ a.back-menu {
     background-repeat: no-repeat;
 }
 .box-3 {
-    background: url(../images/app-and-devices-bg.jpg);
+    background: url(../images/app-and-devices-bg.png);
+    background-repeat: no-repeat;
+}
+.box-4 {
+    background: url(../images/dashboard-menu-bg.jpg);
+    background-repeat: no-repeat;
+}
+.box-5 {
+    background: url(../images/medication-bg.jpg);
     background-repeat: no-repeat;
 }
 .social-card1 {
@@ -19263,13 +19271,50 @@ mwl-calendar .cal-week-box-cell{
 mwl-calendar .cal-month-box [class*="cal-cell"] {
     min-height:50px !important;
 }
-/* basic positioning */
+/* basic positioning for meal plan legends */
 .legend { list-style: none; }
 .legend li { float: left; margin-right: 62px; margin-bottom: 10px;}
 .legend span {float: left; width: 12px; height: 12px;margin:2px }
-/* your colors */
+/* colors */
 .legend .planachieved { background-color: #65bb34;border-radius: 10px; }
 .legend .notachieved { background-color: #eb6b22;border-radius: 10px; }
 .legend .planned { background-color: #f8ba01;border-radius: 10px; }
 .legend .inplan { background-color: #3591cd; border-radius: 10px;}
 .legend .noplan { background-color: #ffffff; border: solid #c7c7c7 2px;border-radius: 10px;}
+.weight-log-menu{
+    display: block;
+    padding: 10px 0;
+    height: 170px;
+    background-color: #fff;
+    box-shadow: 1px 1px 5px rgba(0,0,0,.3);
+    color: #555;
+    text-decoration: none;
+    width: 100%;
+    border-left: 4px solid #1e90ff;
+    margin-top:25px;
+}
+#user-dashboard-content{
+    top: 0;
+    right: 0;
+    position: relative;
+    margin: 0 10px;
+    padding: 10px 0;
+    height: auto;
+    z-index: 1;
+    background-color: #fff;
+    -webkit-box-shadow: 1px 1px 5px rgba(0,0,0,0.3);
+    -moz-box-shadow: 1px 1px 5px rgba(0,0,0,0.3);
+    box-shadow: 1px 1px 5px rgba(0,0,0,0.3);
+}
+#user-dashboard-budget{
+    top: 22px;
+    right: 0;
+    position: relative;
+    padding: 10px 0;
+    height: 180px;
+    z-index: 1;
+    background-color: #fff;
+    -webkit-box-shadow: 1px 1px 5px rgba(0,0,0,0.3);
+    -moz-box-shadow: 1px 1px 5px rgba(0,0,0,0.3);
+    box-shadow: 1px 1px 5px rgba(0,0,0,0.3);
+}

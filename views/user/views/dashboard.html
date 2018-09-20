@@ -41,7 +41,7 @@
 <div class="page-banner1" ng-cloak class="ng-cloak" >
 
     <div id="w" class="clearfix">
-        <div class="dashboard-1">
+        <div class="dashboard-1" style="display: none">
             <ul id="sidemenu">
 
                 <li class="daily_update" ng-click="otherThanHistory()">
@@ -62,15 +62,14 @@
                     </a>
                 </li>-->
 
-                <li id="history-menu" class="history" ng-click="getHistory()">
-                    <a class="menu-items" href="#history"><i class="fa fa-history fa-4x hidden-md"></i><span>Reports</span>
+                <li class="history" ng-click="getHistory()">
+                    <a class="menu-items"  id="history-menu" href="#history"><i class="fa fa-history fa-4x hidden-md"></i><span>Reports</span>
                         <p class="hidden-md hidden-sm">Get your reports</p>
                     </a>
                 </li>
                 <li class="app" ng-click="otherThanHistory()">
                     <a class="menu-items" id="appAndDevice" href="#app" ng-click="doGetVendorlist()"><i class="fa fa-android fa-4x hidden-md"></i><span>App & Devices</span>
                         <p class="hidden-md hidden-sm">Get App and Devices for you</p>
-
                     </a>
                 </li>
                 <!-- <li class="log" ng-click="otherThanHistory()">
@@ -79,7 +78,7 @@
                     </a>
                 </li> -->
                 <li class="medication" ng-click="otherThanHistory()">
-                    <a class="menu-items" href="#medications" ng-click="doGetPreviousDate()"><i class="fa fa-medkit fa-4x hidden-md"></i><span>Medications</span>
+                    <a class="menu-items" href="#medications" id="medicationsmenu" ng-click="doGetPreviousDate()"><i class="fa fa-medkit fa-4x hidden-md"></i><span>Medications</span>
                         <p class="hidden-md hidden-sm">Update Your Medications</p>
                     </a>
                 </li>

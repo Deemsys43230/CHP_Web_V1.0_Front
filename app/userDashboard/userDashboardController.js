@@ -3055,7 +3055,6 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
 
 
         $scope.setHistoryType=function(id,divId){
-
             $scope.historyType=id;
             if($('#history-start').val()==''){
                 $scope.showGraph=1;
@@ -3064,7 +3063,6 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
             else $scope.doGetHistoryReport(divId);
         };
         $scope.setGraphType=function(id,divId){
-
             $scope.historyType=id;
             if($('#history-start').val()==''){}
             else $scope.doGetGraphReport(divId);
@@ -3172,6 +3170,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
             ];
 
         $scope.doGetGraph=function(divId){
+            alert("dsdsd");
             $scope.isViewEmpty=0;
             $scope.loaded=true;
             var endDate;
@@ -4996,17 +4995,24 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
     };
     if($rootScope.isMenuClicked==3){
         $("#appAndDevice").click();
-        $scope.otherThanHistory();
 
     };
     if($rootScope.isMenuClicked==2){
         $("#dailyupdate").click();
         $("#energyspent").click();
     };
-    if($rootScope.isMenuClicked==7){
+    if($rootScope.isMenuClicked==4){
         $("#dailyupdate").click();
         $("#weight-water").click();
     };
+    if($rootScope.isMenuClicked==5){
+        $("#medicationsmenu").click();
+    };
+    if($rootScope.isMenuClicked==6){
+      $("#history-menu").click();
+        $scope.historyReport=0;
+    };
+
 
 
     $('#energyspent').click(function(e) {

@@ -117,12 +117,12 @@
                                     <a href="#"  id="dropdown" onclick="return false;">{{username}}&nbsp;<span class="fa fa-caret-down"></span> </a>
                                     <ul class="dropdown remove-style">
                                         <li><a href="#profile">Profile</a></li>
-                                        <li><a href="#demography">Demography</a></li>
-                                        <li><a href="#friends">Friends</a></li>
-                                        <li><a href="#coach">Coaches</a></li>
-                                        <li><a href="#my-courses">Courses</a></li>
-                                        <li><a href="#meal-plans">Meal Plans</a></li>
-                                        <li><a href="#group-goal">Goals</a></li>
+                                        <!--<li><a href="#demography">Demography</a></li>-->
+                                        <!--<li><a href="#friends">Friends</a></li>-->
+                                        <!--<li><a href="#coach">Coaches</a></li>-->
+                                        <!--<li><a href="#my-courses">Courses</a></li>-->
+                                        <!--<li><a href="#meal-plans">Meal Plans</a></li>-->
+                                        <!--<li><a href="#group-goal">Goals</a></li>-->
                                         <li><a href="#payments">Payments</a></li>
                                         <li><a href="" ng-controller="UserLogoutController" ng-click="doLogout()">Log Out</a></li>
                                     </ul>
@@ -184,30 +184,33 @@
             <div class="navbar-collapse collapse">
                 <!-- Start Navigation List -->
                 <ul class="nav navbar-nav navbar-menu-right active-class">
-                    <li ng-hide="isDiabetic==1">
-                        <a class="{{activeClass.dashboard}}" href="#dashboard">Dashboard</a>
-                    </li>
-                    <li ng-show="isDiabetic==1">
-                        <a class="{{activeClass.dashboard}}" href="#dashboard">Diabetic Dashboard</a>
-                    </li>
+                    <!--<li ng-hide="isDiabetic==1">-->
+                        <!--<a class="{{activeClass.dashboard}}" href="#dashboard">Dashboard</a>-->
+                    <!--</li>-->
+                    <!--<li ng-show="isDiabetic==1">-->
+                        <!--<a class="{{activeClass.dashboard}}" href="#dashboard">Diabetic Dashboard</a>-->
+                    <!--</li>-->
                     <li>
                         <a class="{{activeClass.myCourses}}" href="#my-courses">Courses</a>
                     </li>
                     <li>
+                        <a class="{{activeClass.demography}}" href="#demography">Demography</a>
+                    </li>
+                    <li>
                         <a class="{{activeClass.friends}}" href="#friends">Friends</a>
                     </li>
-                    <li>
-                        <a class="{{activeClass.groupGoal}}" href="#group-goal">Goal</a>
-                    </li>
-                    <li>
-                        <a class="{{activeClass.mealPlans}}" href="#meal-plans">Meal Plans</a>
-                    </li>
-                    <li>
-                        <a class="{{activeClass.coach}}" href="#coach">Coach</a>
-                    </li>
-                    <li ng-show="isDiabetic==1">
-                        <a class="{{activeClass.doctorAppointment}}" href="#doctor-appointment">Appointment</a>
-                    </li>
+                    <!--<li>-->
+                        <!--<a class="{{activeClass.groupGoal}}" href="#group-goal">Goal</a>-->
+                    <!--</li>-->
+                    <!--<li>-->
+                        <!--<a class="{{activeClass.mealPlans}}" href="#meal-plans">Meal Plans</a>-->
+                    <!--</li>-->
+                    <!--<li>-->
+                        <!--<a class="{{activeClass.coach}}" href="#coach">Coach</a>-->
+                    <!--</li>-->
+                    <!--<li ng-show="isDiabetic==1">-->
+                        <!--<a class="{{activeClass.doctorAppointment}}" href="#doctor-appointment">Appointment</a>-->
+                    <!--</li>-->
                     <li>
                         <a class="{{activeClass.forums}}" href="#forums">Forums</a>
                     </li>

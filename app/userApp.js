@@ -70,7 +70,7 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../plugin/dateRange/daterangepicker.js',
                                 '../../css/horizon-swiper.min.css',
                                 '../../css/horizon-theme.min.css',
-                                '../../js/horizon-swiper.min.js', 
+                                '../../js/horizon-swiper.min.js',
                                 '../../css/stepProgressBar.css',
                             ]
                         })}]},
@@ -92,6 +92,27 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                         ]
                     })}]},
             controller:'UserKeyDetailsController'
+        }).
+        when('/user-dashboard', {
+            templateUrl: 'views/user-dashboard.html',
+            resolve: {
+                loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name:'userApp',
+                        files:[
+                            '../../css/custom-inputs.css',
+                            '../../css/vertical_tab.css',
+                            '../../plugin/popup/style.css',
+                            '../../css/ngPercentageCircle.css',
+                            '../../app/userDashboard/ngPercentageCircle.js',
+                            '../../css/horizon-swiper.min.css',
+                            '../../css/horizon-theme.min.css',
+                            '../../js/horizon-swiper.min.js',
+                            '../../css/stepProgressBar.css',
+                            '../../app/userMainDashboard/userMainDashboardController.js'
+                        ]
+                    })}]},
+            controller:'UserMainDashboardController'
         }).
             when('/individualGoal', {
                 templateUrl: 'views/dashboard.html',
@@ -886,6 +907,18 @@ userApp.controller("UserInitialController",['$scope','requestHandler','$location
         $scope.userProfile=response.data.User_Profile;
         console.log($scope.userProfile);
         $scope.demo = response.data.demography;
+        if($scope.demo.userPlanType==1){
+            $scope.userPlanText="Maintain Weight"
+        }
+        else if($scope.demo.userPlanType==2){
+            $scope.userPlanText="Weight Loss"
+        }
+        else if($scope.demo.userPlanType==3){
+            $scope.userPlanText="Weight Gain"
+        }
+        else if($scope.demo.userPlanType==4){
+            $scope.userPlanText="No Plan"
+        }
         $scope.emailNotifications= response.data.Login;
         $scope.currentUserEmailId= $scope.emailNotifications.email;
         if($scope.emailNotifications.isemailvalidated==0){
