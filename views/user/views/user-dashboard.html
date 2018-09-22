@@ -1,5 +1,11 @@
-<div class="dashboard-2" style="width: 100% !important;">
-    <div id="user-dashboard-content">
+<div class="page-banner1" ng-cloak class="ng-cloak" >
+    <div id="height" style="height: 1670px">
+    <div id="user-dashboard-content" ng-show="isDiabetic==1">
+        <div class="col-lg-12 col-md-12 col-sm-12">
+            <div class="col-md-2 col-sm-2">
+                <h3 class="classic-title margin-left-25"><span>Blood Glucose</span></h3>
+            </div>
+        </div>
         <div id=bloodglucosegraph class="hc-graph"></div>
     <div style="text-align: center;padding-top: 5px;">
         <input type="radio" id="fastingbg" ng-click="doGetHistoryReport(1)"  value="1" name="ml"/>
@@ -10,89 +16,322 @@
         <label for="postbg" style="background-color: #e67300;color:#fff">Postprandial</label>
     </div>
     </div>
-     <!--<div class="col-lg-12 col-md-12 col-sm-12 no-padding">-->
-         <!--<div id="user-dashboard-budget">-->
-         <!--<div class="col-lg-3 col-md-3 col-sm-3">-->
-        <!--<div class="circle-wrapper-document">-->
-            <!--<div class="circle-progress ng-cloak" ng-style="getStyle()">Budget <br/><small> Cal</small></div>-->
-            <!--<div round-progress-->
-                 <!--max="totalAvailableSpace"-->
-                 <!--current="usedSpace"-->
-                 <!--color="#66E066"-->
-                 <!--bgcolor="{{ bgColor }}"-->
-                 <!--radius="{{ radius }}"-->
-                 <!--semi="isSemi"-->
-                 <!--rounded="rounded"-->
-                 <!--stroke="{{ stroke }}"-->
-                 <!--clockwise="clockwise"-->
-                 <!--responsive="responsive"-->
-                 <!--duration="{{ duration }}"-->
-                 <!--animation="{{ currentAnimation }}"-->
-                 <!--offset="{{ offset }}">-->
-            <!--</div>-->
-        <!--</div>-->
-         <!--</div>-->
-         <!--<div class="col-lg-3 col-md-3 col-sm-3">-->
-             <!--<div class="circle-wrapper-document">-->
-                 <!--<div class="circle-progress ng-cloak" ng-style="getStyle()">Gained<br/><small> Cal</small></div>-->
-                 <!--<div round-progress-->
-                      <!--max="totalAvailableSpace"-->
-                      <!--current="usedSpace"-->
-                      <!--color="#66E066"-->
-                      <!--bgcolor="{{ bgColor }}"-->
-                      <!--radius="{{ radius }}"-->
-                      <!--semi="isSemi"-->
-                      <!--rounded="rounded"-->
-                      <!--stroke="{{ stroke }}"-->
-                      <!--clockwise="clockwise"-->
-                      <!--responsive="responsive"-->
-                      <!--duration="{{ duration }}"-->
-                      <!--animation="{{ currentAnimation }}"-->
-                      <!--offset="{{ offset }}">-->
-                 <!--</div>-->
-             <!--</div>-->
-         <!--</div>-->
-         <!--<div class="col-lg-3 col-md-3 col-sm-3">-->
-             <!--<div class="circle-wrapper-document">-->
-                 <!--<div class="circle-progress ng-cloak" ng-style="getStyle()">Burned<br/><small> Cal</small></div>-->
-                 <!--<div round-progress-->
-                      <!--max="totalAvailableSpace"-->
-                      <!--current="usedSpace"-->
-                      <!--color="#66E066"-->
-                      <!--bgcolor="{{ bgColor }}"-->
-                      <!--radius="{{ radius }}"-->
-                      <!--semi="isSemi"-->
-                      <!--rounded="rounded"-->
-                      <!--stroke="{{ stroke }}"-->
-                      <!--clockwise="clockwise"-->
-                      <!--responsive="responsive"-->
-                      <!--duration="{{ duration }}"-->
-                      <!--animation="{{ currentAnimation }}"-->
-                      <!--offset="{{ offset }}">-->
-                 <!--</div>-->
-             <!--</div>-->
-         <!--</div>-->
-         <!--<div class="col-lg-3 col-md-3 col-sm-3">-->
-             <!--<div class="circle-wrapper-document">-->
-                 <!--<div class="circle-progress ng-cloak" ng-style="getStyle()">Net<br/><small> Cal</small></div>-->
-                 <!--<div round-progress-->
-                      <!--max="totalAvailableSpace"-->
-                      <!--current="usedSpace"-->
-                      <!--color="#66E066"-->
-                      <!--bgcolor="{{ bgColor }}"-->
-                      <!--radius="{{ radius }}"-->
-                      <!--semi="isSemi"-->
-                      <!--rounded="rounded"-->
-                      <!--stroke="{{ stroke }}"-->
-                      <!--clockwise="clockwise"-->
-                      <!--responsive="responsive"-->
-                      <!--duration="{{ duration }}"-->
-                      <!--animation="{{ currentAnimation }}"-->
-                      <!--offset="{{ offset }}">-->
-                 <!--</div>-->
-             <!--</div>-->
-         <!--</div>-->
-     <!--</div>-->
-    <!--</div>-->
+    <div class="col-lg-12 col-md-12 col-sm-12">
+         <div id="user-dashboard-budget">
+             <div class="col-lg-12 col-md-12 col-sm-12">
+                 <div class="col-md-2 col-sm-2">
+                     <h3 class="classic-title margin-left-25"><span>Budget Vs Net</span></h3>
+                 </div>
+             </div>
+         <div class="col-lg-12 col-md-12 col-sm-12 margin-top-10">
+         <div class="col-lg-2 col-md-2 col-sm-2"></div>
+         <div class="col-lg-2 col-md-2 col-sm-2">
+             <div class="circle-wrapper-document">
+            <div class="circle-progress ng-cloak" ng-style="getStyle()">{{Budget}} <br/><small>calories</small></div>
+            <div round-progress
+                 max="Budget"
+                 current="Budget"
+                 color="#3591cd"
+                 bgcolor="{{ bgColor }}"
+                 radius="{{ radius }}"
+                 semi="isSemi"
+                 rounded="rounded"
+                 stroke="{{ stroke }}"
+                 clockwise="clockwise"
+                 responsive="responsive"
+                 duration="{{ duration }}"
+                 animation="{{ currentAnimation }}"
+                 offset="{{ offset }}">
+            </div>
+            </div>
+             <div class="col-md-12 col-lg-12 col-sm-12 text-center">
+                 <h2 style="font-style: italic;color:#3591cd;">Budget</h2>
+             </div>
+         </div>
+         <div class="col-lg-2 col-md-2 col-sm-2">
+             <div class="circle-wrapper-document">
+                 <div class="circle-progress ng-cloak" ng-style="getStyle()">{{userIntake}}<br/><small>  calories</small></div>
+                 <div round-progress
+                      max="Budget"
+                      current="userIntake"
+                      color="#65bb34 "
+                      bgcolor="{{ bgColor }}"
+                      radius="{{ radius }}"
+                      semi="isSemi"
+                      rounded="rounded"
+                      stroke="{{ stroke }}"
+                      clockwise="clockwise"
+                      responsive="responsive"
+                      duration="{{ duration }}"
+                      animation="{{ currentAnimation }}"
+                      offset="{{ offset }}">
+                 </div>
+             </div>
+             <div class="col-md-12 col-lg-12 col-sm-12 text-center">
+                 <h2 style="font-style: italic;color:#65bb34">Intake</h2>
+             </div>
+         </div>
+         <div class="col-lg-2 col-md-2 col-sm-2">
+             <div class="circle-wrapper-document">
+                 <div class="circle-progress ng-cloak" ng-style="getStyle()">{{userBurnt}}<br/><small> calories</small></div>
+                 <div round-progress
+                      max="Budget"
+                      current="burnt"
+                      color="#eb6b22"
+                      bgcolor="{{ bgColor }}"
+                      radius="{{ radius }}"
+                      semi="isSemi"
+                      rounded="rounded"
+                      stroke="{{ stroke }}"
+                      clockwise="clockwise"
+                      responsive="responsive"
+                      duration="{{ duration }}"
+                      animation="{{ currentAnimation }}"
+                      offset="{{ offset }}">
+                 </div>
+             </div>
+             <div class="col-md-12 col-lg-12 col-sm-12 text-center">
+                 <h2 style="font-style: italic;color:#eb6b22;">Burnt</h2>
+             </div>
+         </div>
+         <div class="col-lg-2 col-md-2 col-sm-2">
+             <div class="circle-wrapper-document">
+                 <div class="circle-progress ng-cloak" ng-style="getStyle()">{{Net}}<br/><small> calories</small></div>
+                 <div round-progress
+                      max="Budget"
+                      current="actualNet"
+                      color="#f8ba01"
+                      bgcolor="{{ bgColor }}"
+                      radius="{{ radius }}"
+                      semi="isSemi"
+                      rounded="rounded"
+                      stroke="{{ stroke }}"
+                      clockwise="clockwise"
+                      responsive="responsive"
+                      duration="{{ duration }}"
+                      animation="{{ currentAnimation }}"
+                      offset="{{ offset }}">
+                 </div>
+             </div>
+             <div class="col-md-12 col-lg-12 col-sm-12 text-center">
+                 <h2 style="font-style: italic;color:#f8ba01">Net</h2>
+             </div>
+         </div>
+             <div class="col-lg-12 col-md-12 col-sm-12 no-padding margin-top-10">
+                     <div class="col-lg-4 col-md-4 col-sm-4">
+                     </div>
+                     <div class="col-lg-4 col-md-4 col-sm-4">
+                         <h6 ng-show="budgetDetails.OverorUnderStatus==1"><div class="label-danger">You have consumed {{budgetDetails.OverorUnderValue}} more calories. Please do exercise.</div></h6>
+                         <h6 ng-show="budgetDetails.OverorUnderStatus==2"><div  ng-hide="budgetDetails.OverorUnderValue==0" class="label-success">You should take {{budgetDetails.OverorUnderValue}} more calories to reach today’s budget.</div></h6>
+                         <h6 ng-show="budgetDetails.OverorUnderValue==0"><div class="label-success">You reached your today’s budget.</div></h6>
+                     </div>
+                     <div class="col-lg-4 col-md-4 col-sm-4">
+                     </div>
+             </div>
+         </div>
+             <div class="col-lg-2 col-md-2 col-sm-2"></div>
+             <div class="col-lg-12 col-md-12 col-sm-12">
+                 <div class="col-lg-1 col-md-1 col-sm-1"></div>
+                 <div class="col-lg-10 col-md-10 col-sm-10">
+                     <hr/>
+                 </div>
+                 <div class="col-lg-1 col-md-1 col-sm-1"></div>
+             </div>
+             <div class="col-lg-12 col-md-12 col-sm-12">
+                 <div class="col-lg-4 col-md-4 col-sm-4"></div>
+                 <div class="col-lg-4 col-md-4 col-sm-4 budget-graph-border">
+                     <div id="targetGraph"></div>
+                     <ul class="budget-legend">
+                         <li><span class="current-budget "></span>&nbsp;Current Net Value</li>
+                         <li><span class="current-net "></span> &nbsp;Target Budget</li>
+                     </ul>
+                 </div>
+                 <div class="col-lg-4 col-md-4 col-sm-4"></div>
+             </div>
+         </div>
+    </div>
+         <div class="col-lg-12 col-md-12 col-sm-12" ng-show="isDiabetic==1">
+             <div id="user-dashboard-appointment" class="appointment_scrollbar" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#eee'}">
+                 <div class="col-lg-12 col-md-12 col-sm-12 ">
+                     <div class="col-md-3 col-sm-3 pull-right">
+                         <a href="#doctor-appointment" class="back-button pull-right margin-left-5"><i class="fa fa-plus-circle"></i>&nbsp;Add</a>
+                     </div>
+                     <div class="col-md-3 col-sm-3">
+                         <h3 class="classic-title margin-left-25"><span>Doctor Appointment</span></h3>
+                     </div>
+                 </div>
+                 <div class="col-lg-12 col-md-12 col-sm-12 margin-top-10">
+                     <div class="col-lg-2 col-md-2 col-sm-2"></div>
+                 <div class="col-lg-9 col-md-9 col-sm-9">
+                     <div class="user-dashboard-appointment col-lg-5 col-md-5 col-sm-5"  ng-model="orderProp" ng-repeat= "appointmentsSingle in userAppointments | filter:query | orderBy:orderProp | limitTo:quantity">
+                     <div class="col-lg-2 col-md-2 col-sm-2 no-padding margin-top-15">
+                         <img  class="img-circle" src="../../images/appointment.png">
+                     </div>
+                     <div class="col-lg-10 col-md-10 col-sm-10 no-padding margin-top-5">
+                         <h4 class="col-lg-12 col-md-12 col-sm-12 wrap-all">{{appointmentsSingle.doctorname}}</h4>
+                         <h4 class="col-lg-12 col-md-12 col-sm-12  wrap-all">{{appointmentsSingle.clinicname==null?'-': appointmentsSingle.clinicname}}</h4>
+                         <p class="col-lg-12 col-md-12 col-sm-12">{{appointmentsSingle.datetime}}</p>
+                     </div>
+                     </div>
+                 </div>
+                     <div class="col-lg-1 col-md-1 col-sm-1"></div>
+                     <div class="col-lg-9 col-md-9 col-sm-9 text-center user-dashboard-appointment" style="margin-left:15%" ng-show="userAppointments.length==0">
+                         <h1 class="appointment-text text-center">NO APPOINTMENTS FOUND!!!</h1><br/>
+                     </div>
+                 </div>
+                 <div class="col-lg-12 col-md-12 col-sm-12" ng-hide="userAppointments.length==0">
+                     <div class="col-md-3 col-sm-3 pull-right">
+                         <a href="#doctor-appointment" class="dashboard-button btn button pull-right margin-left-5"><i class="fa fa-eye"></i>&nbsp;View All</a>
+                     </div>
+                 </div>
+             </div>
+         </div>
+         <div class="col-lg-12 col-md-12 col-sm-12">
+             <div id="user-dashboard-vitals">
+                 <div class="col-lg-12 col-md-12 col-sm-12">
+                     <div class="col-md-2 col-sm-2">
+                         <h3 class="classic-title margin-left-25"><span>Vitals</span></h3>
+                     </div>
+                 </div>
+                 <div class="col-lg-12 col-md-12 col-sm-12 margin-top-10">
+                     <div class="col-lg-2 col-md-2 col-sm-2"></div>
+                     <div class="user-dashboard-vitals col-lg-2 col-md-2 col-sm-2">
+                         <div class="sleep-textcolor text-center vitals-text">Sleep</div>
+                         <div class="col-md-12 col-lg-12 col-sm-12 text-center">
+                             <img class="dashboard-vital-img" src="../../images/sleep.png"/>
+                         </div>
+                         <div class="sleep-textcolor text-center vitals-unit">{{wearable.sleep==null?"NA":wearable.sleep}}&nbsp;{{wearable.sleep==null?" ":"(minutes)"}}</div>
+                     </div>
+                     <div class="user-dashboard-vitals col-lg-2 col-md-2 col-sm-2">
+                         <div class="heart-textcolor text-center vitals-text">Heart Rate</div>
+                         <div class="col-md-12 col-lg-12 col-sm-12 text-center">
+                             <img class="dashboard-vital-img" src="../../images/bloodpressure.png"/>
+                         </div>
+                         <div class="heart-textcolor text-center vitals-unit">{{wearable.restingheartrate==null?"NA":wearable.restingheartrate}}&nbsp;{{wearable.restingheartrate==null?" ":"(bpm)"}}</div>
+                     </div>
+                     <div class="user-dashboard-vitals col-lg-2 col-md-2 col-sm-2">
+                         <div class="floor-textcolor text-center vitals-text">Floors</div>
+                         <div class="col-md-12 col-lg-12 col-sm-12 text-center">
+                             <img class="dashboard-vital-img" src="../../images/floor.png"/>
+                         </div>
+                         <div class="floor-textcolor text-center vitals-unit">{{wearable.floors==null?"NA":wearable.floors}}&nbsp;{{wearable.floors==null?" ":"(floor)"}}</div>
+                     </div>
+                     <div class="user-dashboard-vitals col-lg-2 col-md-2 col-sm-2">
+                         <div class="steps-textcolor text-center vitals-text">Steps</div>
+                         <div class="col-md-12 col-lg-12 col-sm-12 text-center">
+                             <img class="dashboard-vital-img" src="../../images/step.png"/>
+                         </div>
+                         <div class="steps-textcolor text-center vitals-unit">{{wearable.steps==null?"NA":wearable.steps==null}}&nbsp;{{wearable.steps==null?" ":"(count)"}}</div>
+                     </div>
+                     <div class="col-lg-2 col-md-2 col-sm-2">
+                     </div>
+                 </div>
+                 <div class="col-lg-12 col-md-12 col-sm-12  margin-top-10">
+                     <div class="col-lg-2 col-md-2 col-sm-2">
+                     </div>
+                     <div class="user-dashboard-vitals col-lg-2 col-md-2 col-sm-2">
+                         <div class="bloodoxygen-textcolor  text-center vitals-text">Blood Oxygen</div>
+                         <div class="col-md-12 col-lg-12 col-sm-12 text-center">
+                             <img class="dashboard-vital-img" src="../../images/bloodoxygen.png"/>
+                         </div>
+                         <div class="bloodoxygen-textcolor text-center vitals-unit">{{wearable.bloodoxygen==null?"NA":wearable.bloodoxygen}}&nbsp;{{wearable.bloodoxygen==null?" ":"(%)"}}</div>
+                     </div>
+                     <div class="user-dashboard-vitals col-lg-2 col-md-2 col-sm-2">
+                         <div class="bloodglucose-textcolor text-center vitals-text">Blood Glucose</div>
+                         <div class="col-md-12 col-lg-12 col-sm-12 text-center">
+                             <img class="dashboard-vital-img" src="../../images/bloodglucose.png"/>
+                         </div>
+                         <div class="bloodglucose-textcolor text-center vitals-unit">{{wearable.randombloodglucose==null?"NA":wearable.randombloodglucose}} / {{wearable.fastingbloodglucose==null?"NA":wearable.fastingbloodglucose}}&nbsp;{{wearable.fastingbloodglucose==null?" ":"(mg/dl)"}}</div>
+                     </div>
+                     <div class="user-dashboard-vitals col-lg-2 col-md-2 col-sm-2">
+                         <div class="bloodpessure-textcolor text-center vitals-text">Blood Pressure</div>
+                         <div class="col-md-12 col-lg-12 col-sm-12 text-center">
+                             <img class="dashboard-vital-img" src="../../images/heart1.gif"/>
+                         </div>
+                         <div class="bloodpessure-textcolor text-center vitals-unit">{{wearable.systolic==null?"NA":wearable.systolic}} / {{wearable.diastolic==null?"NA":wearable.diastolic}} &nbsp; {{wearable.diastolic==null?" ":"(mmHg)"}}</div>
+                     </div>
+                     <div class="user-dashboard-vitals col-lg-2 col-md-2 col-sm-2">
+                         <div class="bodytemperature-textcolor text-center vitals-text">Body Temperature</div>
+                         <div class="col-md-12 col-lg-12 col-sm-12 text-center">
+                             <img class="dashboard-vital-img" src="../../images/smalltemp.png"/>
+                         </div>
+                         <div class="bodytemperature-textcolor text-center vitals-unit">{{wearable.bodytemperature==null?"NA":wearable.bodytemperature}}&nbsp;{{wearable.bodytemperature==null?" ": "(fahrenheit)"}}</div>
+                     </div>
+                     <div class="col-lg-2 col-md-2 col-sm-2">
+                     </div>
+                 </div>
+             </div>
+         </div>
 </div>
 </div>
+<script>
+    Highcharts.Renderer.prototype.symbols.line = function(x, y, width, height) {
+        return ['M',x ,y + width / 2,'L',x+height,y + width / 2];
+    };
+    //-------------------------------------------------------
+    Highcharts.setOptions({
+
+        credits:{enabled:false},
+        exporting:{enabled:false},
+        legend:{enabled:false},
+        title:{text:''},
+        xAxis:{
+            lineColor:'#999',
+            lineWidth:1,
+            labels:{style:{fontWeight:'bold'}}
+        },
+        yAxis:{
+            tickColor:'#ccc',
+            endOnTick:true,
+            title:{
+                text: ''
+            },
+            labels:{
+                style:{
+                    fontSize:'8px'
+                }
+            }
+        },
+        tooltip:{
+            enabled:true,
+            backgroundColor:'rgba(255, 255, 255, 1)',
+            borderWidth:0,
+            shadow:true,
+            style:{fontSize:'10px',padding:2},
+            formatter:function() {
+                return this.series.name + ": <strong>" + Highcharts.numberFormat(this.y,2) + " cal" + "</strong>";
+            }
+        },
+        plotOptions:{
+            bar:{
+                color:'#65bb34',
+                shadow:false,
+                borderWidth:0
+            },
+            scatter:{
+                marker:{
+                    symbol:'line',
+                    lineWidth:3,
+                    radius:8,
+                    lineColor:'#eb6b22'
+                }
+            }
+        }
+    });
+
+    // to draw budget graph
+    function refreshGraph() {
+        var targetchart = new Highcharts.Chart({
+            chart:{renderTo:'targetGraph',
+                margin:[5,30,20,70]
+            },
+            xAxis:{categories:['Budget Vs Net']},
+            yAxis:{
+                labels:{y:10,style:{fontSize:'8px'}},
+                plotBands:[{color: 'rgba(103,103,103,.35)'}]
+            },
+            series:[{name:'Current Net Value',type: 'bar',pointWidth:10,data:[currentNet]},
+                {name:'Target Budget Value',type: 'scatter',data:[targetBudget]}]
+        });
+    }
+</script>

@@ -82,28 +82,25 @@
                         <p class="hidden-md hidden-sm">Update Your Medications</p>
                     </a>
                 </li>
-               <li class="calories" style="height: 150px;">
-                    <div class="col-lg-12 col-md-12 col-sm-12 no-padding">
-                        <form name="weightLogForm" novalidate>
-                            <h5 class="margin-left-10 font-size-md"><b>CURRENT&nbsp;WEIGHT&nbsp;&&nbsp;FAT</b></h5>
-                            <div class="col-lg-6 col-md-6 col-sm-6 no-padding">
-                                <img style="width: 80px;height: 74px" class="width margin-left-5" src="../../images/log.png">
-                            </div>
+               <!--<li class="calories" style="height: 150px;">-->
+                    <!--<div class="col-lg-12 col-md-12 col-sm-12 no-padding">-->
+                        <!--<form name="weightLogForm" novalidate>-->
+                            <!--<h5 class="margin-left-10 font-size-md"><b>CURRENT&nbsp;WEIGHT&nbsp;&&nbsp;FAT</b></h5>-->
+                            <!--<div class="col-lg-6 col-md-6 col-sm-6 no-padding">-->
+                                <!--<img style="width: 80px;height: 74px" class="width margin-left-5" src="../../images/log.png">-->
+                            <!--</div>-->
 
-                            <div class="col-lg-6 col-md-6 col-sm-6 no-padding margin-top-20">
-                                <span class="weight-text-font">{{weightlog}}&nbsp;<small><span ng-show="userProfile.unitPreference==1">Kgs</span><span ng-show="userProfile.unitPreference==2">lbs</span></small></span>
-                            </div>
-                        </form>
-                    </div>
-                    <div  style="padding-right: 40px;float: right">
-                       <span class="weight-text-font" >{{fat}}&nbsp;<span ng-hide="showEmpty">(%)</span></span>
-                        <span class="weight-text-font" ng-show="showEmpty">{{fatEmpty}}</span>
-                    </div>
-               </li>
+                            <!--<div class="col-lg-6 col-md-6 col-sm-6 no-padding margin-top-20">-->
+                                <!--<span class="weight-text-font">{{weightlog}}&nbsp;<small><span ng-show="userProfile.unitPreference==1">Kgs</span><span ng-show="userProfile.unitPreference==2">lbs</span></small></span>-->
+                            <!--</div>-->
+                        <!--</form>-->
+                    <!--</div>-->
+                    <!--<div  style="padding-right: 40px;float: right">-->
+                       <!--<span class="weight-text-font" >{{fat}}&nbsp;<span ng-hide="showEmpty">(%)</span></span>-->
+                        <!--<span class="weight-text-font" ng-show="showEmpty">{{fatEmpty}}</span>-->
+                    <!--</div>-->
+               <!--</li>-->
             </ul>
-        </div>
-        <div class="col-lg-12 col-md-12 col-sm-12 margin-top-5">
-            <h6 ng-show="budgetCheck==0"><div class="label-red blink">You are not in recommended budget value. Please <span ng-click="budgetChangePlan()" style="cursor: pointer"><u>click here</u></span> to change your plan.</div></h6>
         </div>
         <div class="dashboard-2" ng-show="historyReport==0">
             <div id="content">
@@ -940,7 +937,11 @@
                 </div>
 
             </div><!-- @end #content -->
+            <div class="col-lg-12 col-md-12 col-sm-12 margin-top-10">
+                <h6 ng-show="budgetCheck==0"><div class="label-red blink">You are not in recommended budget value. Please <span ng-click="budgetChangePlan()" style="cursor: pointer"><u>click here</u></span> to change your plan.</div></h6>
+            </div>
         </div>
+
 
         <div class="dashboard-3 hidden-sm" ng-show="historyReport==0">
             <div id="update">
@@ -2504,7 +2505,7 @@
                         <div class="col-lg-5 col-md-5 col-sm-5 margin-top-10">
                             <div class="circle-wrapper">
                                 <div class="circle-progress ng-cloak font-14" ng-style="getStyle()">{{Net}}</div>
-                                <div    round-progress
+                                <div   round-progress
                                      max="Budget"
                                      current="Net"
                                      color="{{currentGainColour}}"

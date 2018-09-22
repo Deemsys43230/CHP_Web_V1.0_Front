@@ -2,6 +2,7 @@ var userApp= angular.module('userApp', ['ngRoute','oc.lazyLoad','ngCookies','req
 userApp.controller('UserKeyDetailsController',['$scope','requestHandler','$rootScope','$location',function($scope,requestHandler,$rootScope,$location) {
 
     $rootScope.isMenuShow=2;
+    $scope.activeClass.menu='active';
     //to redirect to particular controller
     $scope.menuUrlChange=function(tabid){
         $rootScope.isMenuClicked=tabid;
@@ -32,9 +33,6 @@ userApp.controller('UserKeyDetailsController',['$scope','requestHandler','$rootS
             if($scope.userKeyDetails.diabeticstatus==1) {
                 $rootScope.isDiabetic=1;
                 $scope.isDiabeticPerson=1;
-            }
-            else {
-                $('.navbar-collapse ul').addClass('navbar-menu-right1');
             }
               // for diabetic details popup
             if ($scope.userKeyDetails.diabeticstatus==0) {
@@ -79,6 +77,27 @@ userApp.controller('UserKeyDetailsController',['$scope','requestHandler','$rootS
         });
     }
 
+    //to display water log detail
+    $scope.dGetWaterLog=function() {
+        requestHandler.postRequest("user/getWaterLogByDate/",{"date":selectedDate}).then(function (response) {
+            $scope.waterlogDetails=response.data.Water_log;
+
+        });
+    };
+
+    //To Display current date
+    var selectedDate = new Date();
+    var dd = selectedDate.getDate();
+    var mm = selectedDate.getMonth()+1; //January is 0!
+
+    var yyyy = selectedDate.getFullYear();
+    if(dd<10){
+        dd='0'+dd
+    }
+    if(mm<10){
+        mm='0'+mm
+    }
+    selectedDate = dd+'/'+mm+'/'+yyyy;
     //TO check Maximum 2 digit validation for HbA1c
     $scope.maxHbaValue=false;
     $scope.maxHbaValueCheck = function(){
@@ -93,7 +112,8 @@ userApp.controller('UserKeyDetailsController',['$scope','requestHandler','$rootS
 
     $scope.init=function () {
         $scope.doGetUserKeyDetails();
-    }
+        $scope.dGetWaterLog();
+    };
     $scope.init();
 
 }]);

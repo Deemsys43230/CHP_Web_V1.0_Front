@@ -1,5 +1,5 @@
-var userApp= angular.module('userApp', ['ngRoute','oc.lazyLoad','ngCookies','ngAnimate','requestModule','angular-svg-round-progress']);
-userApp.controller('UserMainDashboardController',['$scope','requestHandler','$rootScope','$location','roundProgressService',function($scope,requestHandler,$rootScope,$location,roundProgressService) {
+var userApp= angular.module('userApp', ['ngRoute','oc.lazyLoad','ngCookies','ngAnimate','requestModule','angular-nicescroll','angular-svg-round-progress']);
+userApp.controller('UserMainDashboardController',['$scope','requestHandler','$rootScope','$location','roundProgressService','$window',function($scope,requestHandler,$rootScope,$location,roundProgressService,$window) {
     $rootScope.isMenuShow=1;
     $scope.doGetHistoryReport=function(id)  {
         var endDate=selectedDate;
@@ -8,7 +8,7 @@ userApp.controller('UserMainDashboardController',['$scope','requestHandler','$ro
         var graphDates = [];
         var graphTitles = {};
         if(id==1){
-            requestHandler.postRequest("user/getWearableDataGraph/", {"startdate": startDate, "enddate": endDate}).then(function (response) {
+            requestHandler.postRequest("user/getWearableDataGraph/", {"startdate": firstDay, "enddate": lastDay}).then(function (response) {
                 $scope.diabeticRecord = response.data.wearable;
                 $.each($scope.diabeticRecord, function (index, value) {
                     var diabeticHistory = [];
@@ -18,7 +18,7 @@ userApp.controller('UserMainDashboardController',['$scope','requestHandler','$ro
                     graphDates.push(monthNames[(date[1] - 1)] + ' ' + date[0]);
                     diabeticReport.push(diabeticHistory);
                 });
-                graphTitles.title = "Fasting Blood Glucose Graph( " + startDate + " - " + endDate + " )";
+                graphTitles.title = "Fasting Blood Glucose Graph( " + firstDay + " - " + lastDay + " )";
                 graphTitles.name = "Glucose level";
                 graphTitles.yaxis = "Glucose level (mg/dl)";
                 graphTitles.xaxis = "Date Range";
@@ -28,7 +28,7 @@ userApp.controller('UserMainDashboardController',['$scope','requestHandler','$ro
             });
         }
         else if(id==2){
-            requestHandler.postRequest("user/getWearableDataGraph/", {"startdate": startDate, "enddate": endDate}).then(function (response) {
+            requestHandler.postRequest("user/getWearableDataGraph/", {"startdate": firstDay, "enddate": lastDay}).then(function (response) {
                 $scope.diabeticRecord = response.data.wearable;
                 $.each($scope.diabeticRecord, function (index, value) {
                     var diabeticHistory = [];
@@ -38,7 +38,7 @@ userApp.controller('UserMainDashboardController',['$scope','requestHandler','$ro
                     graphDates.push(monthNames[(date[1] - 1)] + ' ' + date[0]);
                     diabeticReport.push(diabeticHistory);
                 });
-                graphTitles.title = "Random Blood Glucose Graph( " + startDate + " - " + endDate + " )";
+                graphTitles.title = "Random Blood Glucose Graph( " + firstDay + " - " + lastDay + " )";
                 graphTitles.name = "Glucose level";
                 graphTitles.yaxis = "Glucose level (mg/dl)";
                 graphTitles.xaxis = "Date Range";
@@ -48,7 +48,7 @@ userApp.controller('UserMainDashboardController',['$scope','requestHandler','$ro
             });
         }
        else if(id==3){
-            requestHandler.postRequest("user/getWearableDataGraph/", {"startdate": startDate, "enddate": endDate}).then(function (response) {
+            requestHandler.postRequest("user/getWearableDataGraph/", {"startdate": firstDay, "enddate": lastDay}).then(function (response) {
                 $scope.diabeticRecord = response.data.wearable;
                 $.each($scope.diabeticRecord, function (index, value) {
                     var diabeticHistory = [];
@@ -58,7 +58,7 @@ userApp.controller('UserMainDashboardController',['$scope','requestHandler','$ro
                     graphDates.push(monthNames[(date[1] - 1)] + ' ' + date[0]);
                     diabeticReport.push(diabeticHistory);
                 });
-                graphTitles.title = "Postprandial Blood Glucose Graph( " + startDate + " - " + endDate + " )";
+                graphTitles.title = "Postprandial Blood Glucose Graph( " + firstDay + " - " + lastDay + " )";
                 graphTitles.name = "Glucose level";
                 graphTitles.yaxis = "Glucose level (mg/dl)";
                 graphTitles.xaxis = "Date Range";
@@ -68,6 +68,18 @@ userApp.controller('UserMainDashboardController',['$scope','requestHandler','$ro
             });
         }
         };
+    $scope.doGetUserKeyDetails=function() {
+        requestHandler.getRequest("user/keydetails/", "").then(function (response) {
+            $scope.userKeyDetails = response.data;
+            if ($scope.userKeyDetails.diabeticstatus == 1) {
+                $rootScope.isDiabetic = 1;
+                $scope.isDiabeticPerson = 1;
+            }
+            else {
+                $('#height').css({'height':'880px'});
+            }
+        });
+    };
 
         //To Display current date
         var selectedDate = new Date();
@@ -82,27 +94,82 @@ userApp.controller('UserMainDashboardController',['$scope','requestHandler','$ro
             mm='0'+mm
         }
         selectedDate = dd+'/'+mm+'/'+yyyy;
+        var startdatetime= selectedDate +' '+'00' + ':'+ '00'+':'+'00';
+    // to get current month strt date and end date
+    var date=new Date();
+    var firstDay=moment(new Date(date.getFullYear(), date.getMonth(), 1)).format('DD/MM/YYYY');
+    var lastDay=moment(new Date(date.getFullYear(), date.getMonth()+1, 0)).format('DD/MM/YYYY');
 
-        //To display lastWeek
-        function getLastWeek(){
-            var today = new Date();
-            $scope.firstDay = new Date(today.getFullYear(), today.getMonth(), 1);
-            $scope.lastDay = new Date(today.getFullYear(), today.getMonth() + 1, 0);
-            var lastWeek = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 6);
-            return lastWeek ;
-        }
+    //To display next one week
+    function geNextWeek(){
+        var currrentDay = new Date();
+        $scope.firstDate = new Date(currrentDay.getFullYear(), currrentDay.getMonth(), 1);
+        $scope.lastDate = new Date(currrentDay.getFullYear(), currrentDay.getMonth() + 1, 0);
+        var nextWeek = new Date(currrentDay.getFullYear(), currrentDay.getMonth(), currrentDay.getDate() + 30);
+        return nextWeek ;
+    }
 
-        var lastWeek = getLastWeek();
-        var lastWeekMonth = lastWeek.getMonth() + 1;
-        var lastWeekDay = lastWeek.getDate();
-        var lastWeekYear = lastWeek.getFullYear();
-        var lastWeekDisplay = lastWeekMonth + "/" + lastWeekDay + "/" + lastWeekYear;
-        var lastWeekDisplayPadded = ("00" + lastWeekDay.toString()).slice(-2)+ "/" + ("00" + lastWeekMonth .toString()).slice(-2)+ "/" + ("0000" + lastWeekYear .toString()).slice(-4);
-        var startDate=lastWeekDisplayPadded;
+    var  nextWeek= geNextWeek();
+    var nextWeekMonth = nextWeek.getMonth() + 1;
+    var nextWeekDay = nextWeek.getDate();
+    var nextWeekYear = nextWeek.getFullYear();
+    var nextWeekDisplay = nextWeekMonth + "/" + nextWeekDay + "/" + nextWeekYear;
+    var nextWeekDisplayPadded = ("00" + nextWeekDay.toString()).slice(-2)+ "/" + ("00" + nextWeekMonth .toString()).slice(-2)+ "/" + ("0000" + nextWeekYear .toString()).slice(-4);
+    var nextWeekDate=nextWeekDisplayPadded;
+    var enddatetime=nextWeekDate +' ' +'23' + ':'+ '59'+':'+'59';
+
+   //To get vitals activity
+    $scope.doGetWearableData = function(){
+        return requestHandler.postRequest("user/getWearableDataForDate/",{"date": selectedDate}).then(function(response) {
+            $scope.wearable=response.data.wearable;
+        });
+    };
+
+    //do get doctor Appointment list
+    $scope.userGetAllAppointments=function(){
+        var userStartDate=startdatetime;
+        var userEndDate=enddatetime;
+        $scope.getAppointmentsParam={"fromdate":userStartDate,"todate":userEndDate};
+        //Get Single date
+        requestHandler.postRequest("user/getdoctorappointmentlist/",$scope.getAppointmentsParam).then(function(response){
+            $scope.appointmentList= response.data.list;
+            $scope.userAppointments=[];
+            $.each($scope.appointmentList,function(index,value){
+                $.each(value.appointments,function(appointmentindex,appointmentvalue){
+                    $scope.userAppointments.push(appointmentvalue)
+                });
+            });
+        });
+    };
+    //Budget value
+    $scope.getUserBudget=function(){
+        requestHandler.postRequest("user/getTotalCalorieDetailForDate/",{"date":selectedDate}).then(function(response){
+            $scope.budgetDetails = response.data.BudgetDetail;
+            $scope.Budget = $scope.budgetDetails.Budget;
+            $scope.Net = $scope.budgetDetails.Net;
+            var netvalue=   $scope.Net.toString();
+            $window.targetBudget = $scope.Budget;
+            $window.currentNet = $scope.Net;
+            refreshGraph();
+            $scope.actualNet=netvalue.replace(/[\-\^\$\|]/g, '');
+            $scope.actualNet=parseFloat($scope.actualNet);
+            $scope.userIntake=$scope.budgetDetails.Intake;
+            $scope.userBurnt=$scope.budgetDetails.Burnt;
+            var burntvalue=  $scope.userBurnt.toString();
+            $scope.burnt= burntvalue.replace(/[\-\^\$\|]/g, '');
+            $scope.burnt=parseFloat($scope.burnt);
+            if($scope.budgetDetails.OverorUnderStatus==1){
+                $scope.currentGainColour="red";
+            }
+            else if($scope.budgetDetails.OverorUnderStatus==2){
+                $scope.currentGainColour="limegreen";
+            }
+        });
+
+    };
 
     //for water log millilitre unit graph
     $scope.drawBloodGlucoseGraph=function(databg,graphTitles,dataD){
-        console.log(databg);
         $('#bloodglucosegraph').highcharts({
             title: {
                 text: graphTitles.title
@@ -156,6 +223,10 @@ userApp.controller('UserMainDashboardController',['$scope','requestHandler','$ro
     };
     $scope.init=function(){
         $scope.doGetHistoryReport(1);
+        $scope.doGetUserKeyDetails();
+        $scope.doGetWearableData();
+        $scope.userGetAllAppointments();
+        $scope.getUserBudget();
     };
     //circle round
     $scope.offset =         0;

@@ -18746,7 +18746,7 @@ a.resend_back:hover {
   transform: rotate(360deg);
 }*/
 .navbar-menu-right {
-    left: 395px !important;
+    left: 370px !important;
 }
 a.back-menu {
     padding: 5px 10px;
@@ -18938,7 +18938,7 @@ a.back-menu {
 .menu-rightsidebar {
     display: block;
     margin: 0 10px;
-    height: 300px;
+    height: 275px;
     width: 15%;
     float: right;
     z-index: 1;
@@ -18952,7 +18952,7 @@ a.back-menu {
 .menu-rightsidebar1 {
     display: block;
     margin: 20px 10px;
-    height: 168px;
+    height: 195px;
     width: 15%;
     float: right;
     z-index: 1;
@@ -19275,6 +19275,11 @@ mwl-calendar .cal-month-box [class*="cal-cell"] {
 .legend { list-style: none; }
 .legend li { float: left; margin-right: 62px; margin-bottom: 10px;}
 .legend span {float: left; width: 12px; height: 12px;margin:2px }
+.budget-legend { list-style: none; }
+.budget-legend li { float: left; margin-right: 20px; margin-bottom: 10px;}
+.budget-legend span {float: left; width: 10px; height: 10px;margin:5px }
+.budget-legend  .current-budget { background-color: #65bb34;}
+.budget-legend  .current-net { background-color: #eb6b22; }
 /* colors */
 .legend .planachieved { background-color: #65bb34;border-radius: 10px; }
 .legend .notachieved { background-color: #eb6b22;border-radius: 10px; }
@@ -19291,7 +19296,7 @@ mwl-calendar .cal-month-box [class*="cal-cell"] {
     text-decoration: none;
     width: 100%;
     border-left: 4px solid #1e90ff;
-    margin-top:25px;
+    margin-top:10px;
 }
 #user-dashboard-content{
     top: 0;
@@ -19307,14 +19312,92 @@ mwl-calendar .cal-month-box [class*="cal-cell"] {
     box-shadow: 1px 1px 5px rgba(0,0,0,0.3);
 }
 #user-dashboard-budget{
-    top: 22px;
+    top: 20px;
     right: 0;
     position: relative;
     padding: 10px 0;
-    height: 180px;
+    height: 420px;
     z-index: 1;
     background-color: #fff;
     -webkit-box-shadow: 1px 1px 5px rgba(0,0,0,0.3);
     -moz-box-shadow: 1px 1px 5px rgba(0,0,0,0.3);
     box-shadow: 1px 1px 5px rgba(0,0,0,0.3);
+}
+#user-dashboard-appointment{
+    top: 22px;
+    right: 0;
+    position: relative;
+    padding: 10px 0;
+    height: 280px;
+    z-index: 1;
+    margin-top:10px;
+    background-color: #fff;
+    -webkit-box-shadow: 1px 1px 5px rgba(0,0,0,0.3);
+    -moz-box-shadow: 1px 1px 5px rgba(0,0,0,0.3);
+    box-shadow: 1px 1px 5px rgba(0,0,0,0.3);
+}
+.user-dashboard-appointment{
+    margin: 3px 20px 10px 3px;
+    box-shadow: 0 0 3px rgba(0,0,0,.3);
+}
+.dashboard-button{
+    position: relative !important;
+    border: none;
+    border-radius: 40px;
+    background: #f8ba01;
+    color: #fff !important;
+    outline: none;
+    padding: 7px 30px;
+}
+#user-dashboard-vitals {
+    top: 22px;
+    right: 0;
+    position: relative;
+    padding: 10px 0;
+    height: 410px;
+    z-index: 1;
+    margin-top:10px;
+    background-color: #fff;
+    -webkit-box-shadow: 1px 1px 5px rgba(0,0,0,0.3);
+    -moz-box-shadow: 1px 1px 5px rgba(0,0,0,0.3);
+    box-shadow: 1px 1px 5px rgba(0,0,0,0.3);
+}
+.user-dashboard-vitals{
+    width: 160px;
+    position: relative;
+    display: inline-block;
+    height: 150px;
+    margin: 5px 50px 5px 5px;
+    /*-webkit-box-shadow: inset 0 0 1px rgba(0,0,0,.3);*/
+    /*-moz-box-shadow: inset 0 0 1px rgba(0,0,0,.3);*/
+    border-radius:2px;
+    /*background:#fdfcfc;*/
+    background:#eaeaea;
+    /* box-shadow: inset 0 0 3px rgba(0,0,0,.3); */
+}
+.dashboard-vital-img{
+    width: 50px;
+    height: 50px;
+    padding-left: 2px;
+    border-radius: 20px;
+    margin-top:10px;
+}
+.vitals-text{
+    margin-top:20px;
+    font-size: 15px;
+}
+.vitals-unit{
+    font-size:16px;
+    margin-top:70px;
+}
+.appointment-text{
+    color: #ee6f5a!important;
+    margin-top: 20px;
+    font-size: x-large;
+    font-style: italic;
+}
+.budget-graph-border{
+    border: 1px solid #4cae4c;
+    border-radius: 3px;
+    padding:7px 0 0 0;
 }

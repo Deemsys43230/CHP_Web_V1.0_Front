@@ -46,7 +46,8 @@
                     <div class="widget-statstic-card">
                         <div class="card-header borderless">
                             <div class="card-header-left">
-                                <h3>Dashboard</h3>
+                                <h3 ng-hide="isDiabetic==1">Dashboard</h3>
+                                <h3 ng-show="isDiabetic==1">Diabetic Dashboard</h3>
                                 <p class="p-t-10 m-b-0 text-c-yellow">Access Our Wellness Library</p>
                             </div>
                         </div>
@@ -247,9 +248,9 @@
                     <span class="weight-text-font" >{{demo.fat==null?"-":demo.fat}} {{demo.fat==null?" ":"(%)"}}</span></span>
                 </div>
             </div>
-            <div class="text-center margin-top-20">
+            <div class="text-center margin-top-10">
                 <div class="centerize">
-                    <a href=""  ng-click="menuUrlChange(4)" class="price-button btn button" style="background-color: #ffba01 !important;">Weight Log</a>
+                    <a href=""  ng-click="menuUrlChange(4)" class="dashboard-button btn button">Log Weight</a>
                 </div>
             </div>
 
@@ -257,11 +258,16 @@
             <!--<img src="../../images/chat-icon.png" class="coach-activity" />-->
             <!--<img src="../../images/events-icon.png" class="coach-activity" />-->
         </div>
-        <div class=" col-lg-3 col-md-3 col-sm-3 menu-rightsidebar1" ng-click="menuUrlChange(7)">
+        <div class=" col-lg-3 col-md-3 col-sm-3 menu-rightsidebar1">
             <h3 class="text-center">Water Log</h3>
             <img src="../../images/water-log.png" class="pointer waterlog-img" style="height: 100px;margin-left:30px;" />
-            <div class="col-md-12 col-sm-12 margin-left-20">
-                <div class="waterlog-text"><b><span>40&nbsp;<small>ml</small></span> / <span>5&nbsp;<small>oz</small></span></b></div>
+            <div class="col-md-12 col-sm-12 text-center" style="margin-top:-10px;">
+                <div class="waterlog-text"><b><span>{{waterlogDetails.milliliters}}&nbsp;<small>ml</small></span> / <span>{{waterlogDetails.ounces}}&nbsp;<small>oz</small></span></b></div>
+            </div>
+            <div class="text-center margin-top-20">
+                <div class="centerize">
+                    <a href=""  ng-click="menuUrlChange(7)" class="dashboard-button btn button">Log Water</a>
+                </div>
             </div>
         </div>
       
@@ -297,7 +303,7 @@
                             <h5>HbA<sub>1c</sub> <small>(%)</small> <span class="pull-right">:</span></h5>
                         </div>
                         <div class="col-lg-4 col-md-5 col-sm-5 padding-right-0">
-                            <input class="demography_input" name="HbA1c"  ng-model="diabeticCheck.HbA1c" ng-change="maxHbaValueCheck()" onkeypress="return validateFloatKeyPress(this,event);" validate-zero/>
+                            <input class="demography_input" name="HbA1c"  ng-model="diabeticCheck.hba1c" ng-change="maxHbaValueCheck()" onkeypress="return validateFloatKeyPress(this,event);" validate-zero/>
                             <span class="error-message textarea-errormessage40" ng-show="!diabeticForm.HbA1c.$error.required&&maxHbaValue"><span class="error-bottom-invalid">Please&nbsp;Enter&nbsp;Valid&nbsp;Value.</span></span>
                                 <span ng-show="diabeticForm.HbA1c.$dirty&&diabeticForm.HbA1c.$invalid">
                                     <span class="error-message textarea-errormessage40" ng-show="diabeticForm.HbA1c.$error.pattern"><span class="error-bottom-invalid">Invalid&nbsp;Format.</span></span>

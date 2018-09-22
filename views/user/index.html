@@ -187,9 +187,11 @@
                     <!--<li ng-hide="isDiabetic==1">-->
                         <!--<a class="{{activeClass.dashboard}}" href="#dashboard">Dashboard</a>-->
                     <!--</li>-->
-                    <!--<li ng-show="isDiabetic==1">-->
-                        <!--<a class="{{activeClass.dashboard}}" href="#dashboard">Diabetic Dashboard</a>-->
-                    <!--</li>-->
+                    <li>
+                        <a class="{{activeClass.menu}}" href="#menu">
+                            <span class="highlight-menu-item"><i class="fa fa-home" aria-hidden="true"></i>&nbsp;&nbsp;Home Menu</span>
+                        </a>
+                    </li>
                     <li>
                         <a class="{{activeClass.myCourses}}" href="#my-courses">Courses</a>
                     </li>
@@ -223,9 +225,9 @@
 
                 </ul>
                 <!-- End Navigation List -->
-                <div class="pull-right menu-button" title="Back to Menu">
-                    <a class="back-menu" href="#menu"><i class="fa fa-arrow-circle-o-left"></i>&nbsp;Back</a>
-                </div>
+                <!--<div class="pull-right menu-button" title="Back to Menu">-->
+                    <!--<a class="back-menu" href="#menu"><i class="fa fa-arrow-circle-o-left"></i>&nbsp;Back</a>-->
+                <!--</div>-->
             </div>
 
         </div>
@@ -470,6 +472,7 @@
         </div>
     </section>
 </div>
+</div>
 
 <!-- End Container -->
 <!-- Go To Top Link -->
@@ -587,11 +590,6 @@
             }
         });
     });
-
-</script>
-
-<script type="text/javascript">
-
     /* finding user device*/
 
     var isAndroid = (/android/i.test(navigator.userAgent.toLowerCase()));
@@ -615,26 +613,23 @@
         $(".iphone").show();
     }
     $(".modal_trigger").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
+    //to clicking username dropdown appears
+    $(document).ready(function () {
+        $('#dropdown').click(function(e) {
+            $('.nav li').addClass('drop');
+            $(this).siblings().addClass('active');
+        });
+        $('#top-bar-menu').click(function(e) {
+            $('.nav li').removeClass('drop');
+            $(this).siblings().addClass('active');
+        });
+        $('.navbar').click(function(e) {
+            $('.nav li').removeClass('drop');
+            $(this).siblings().addClass('active');
+        });
+
+    });
 
 </script>
-    <script type="text/javascript">
-        //to clicking username dropdown appears
-        $(document).ready(function () {
-            $('#dropdown').click(function(e) {
-                $('.nav li').addClass('drop');
-                $(this).siblings().addClass('active');
-            });
-            $('#top-bar-menu').click(function(e) {
-                $('.nav li').removeClass('drop');
-                $(this).siblings().addClass('active');
-            });
-            $('.navbar').click(function(e) {
-                $('.nav li').removeClass('drop');
-                $(this).siblings().addClass('active');
-            });
-
-        });
-    </script>
-
 </body>
 </html>

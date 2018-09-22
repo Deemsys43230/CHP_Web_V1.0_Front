@@ -1001,8 +1001,6 @@ userApp.controller("UserInitialController",['$scope','requestHandler','$location
         }
         else {
             $rootScope.isDiabetic=2;
-            $('.navbar-collapse ul').addClass('navbar-menu-right1');
-            $('.navbar-collapse ul').removeClass('navbar-menu-right');
         }
     });
 
