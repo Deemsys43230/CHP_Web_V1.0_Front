@@ -4990,9 +4990,6 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
         $scope.mealPlanCalender();
     };
 
-    if($rootScope.isMenuClicked==1){
-        $scope.mealPlanCalender();
-    };
     if($rootScope.isMenuClicked==3){
         $("#appAndDevice").click();
 
@@ -5010,7 +5007,8 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
     };
     if($rootScope.isMenuClicked==6){
       $("#history-menu").click();
-        $scope.historyReport=0;
+        $scope.historyReport=1;
+        $scope.showGraph=2;
     };
 
 
@@ -5025,12 +5023,10 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
         $scope.showFoodMoal=1;
         $scope.mealPlanCalender();
     });
-    $('#dailyupdate').click(function(e) {
-        $scope.showFoodMoal=1;
-        $scope.mealPlanCalender();
-    });
+
     //to get current date while clicking calendar cell
     $scope.timespanClicked = function(date) {
+
         if ($scope.calendarView === 'month') {
             {
                 $scope.viewDate = date;
@@ -5046,6 +5042,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
                 document.getElementById("main-date").value = moment($scope.viewDate).format('DD/MM/YYYY');
                 $('#main-date').daterangepicker(viewDate).on('apply.daterangepicker', function (ev, picker) {
                     document.getElementById("main-date").value = picker.startDate.format('DD/MM/YYYY');
+                    $scope.initialLoadFoodAndExercise(document.getElementById("main-date").value);
                 });
                 $scope.initialLoadFoodAndExercise(document.getElementById("main-date").value);
             }
@@ -5056,7 +5053,6 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
     };
 //to get previous month date
     $scope.$watch("viewDate",function(newValue, oldValue){
-        console.log('being watched oldValue:', oldValue, 'newValue:', newValue);
         $scope.firstValue=oldValue.format('dd/mm/yyyy');
         $scope.secondValue=newValue.format('dd/mm/yyyy');
         var oldDateParts=$scope.firstValue.split("/");
@@ -5091,10 +5087,11 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
             $scope.doGetMedicationListByUser();
             $scope.doCheckUserMedicationDocument();
             $scope.doGetUserDetails();
-          /*  var currentMealDate=new Date();
+            // Set Start and End for Meal Plan Calendar
+            /*var currentMealDate=new Date();
             $scope.mealPlanStartDate=moment(new Date(currentMealDate.getFullYear(), currentMealDate.getMonth(), 1)).format('DD/MM/YYYY');
             $scope.mealPlanEndDate=moment(new Date(currentMealDate.getFullYear(), currentMealDate.getMonth()+1, 0)).format('DD/MM/YYYY');
-            $scope.doGetUserMealPlanCalendar( $scope.mealPlanStartDate, $scope.mealPlanEndDate);*/
+           */
 
         };
         $scope.initialLoadFoodAndExercise(selectedDate);
