@@ -1169,7 +1169,7 @@
             </div>
         </div>
 
-        <div class="dashboard-4" ng-show="historyReport==1" ng-show="showGraph==2" ng-hide="watergraphs=1">
+        <div class="dashboard-4" ng-show="historyReport==1" ng-show="showGraph==2">
         <div id="contentHistory">
             <div id="history"  class="contentblock hidden">
 
@@ -2702,7 +2702,6 @@
                 $('#main-date').daterangepicker(options, function(start, end, label) {
                     angular.element(document.getElementById('main-date')).scope().initialLoadFoodAndExercise(start.format('DD/MM/YYYY'));
                     document.getElementById("main-start-date").value = start.format('DD/MM/YYYY');
-                    console.log(document.getElementById("main-date").value);
                 });
 
 //for food intake and excersize view graph date picker
