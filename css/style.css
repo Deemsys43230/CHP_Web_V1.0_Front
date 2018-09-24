@@ -4299,6 +4299,9 @@ h5.classic-title.friend{
     font-size: 14px!important;
     line-height: 18px!important;
 }
+h3.classic-title.menu-dashboard{
+    font-size: 18px!important;
+}
 .invite-button{
     background-color: #f8ba01;
     color:#fff;
@@ -18725,6 +18728,7 @@ a.resend_back:hover {
 
 .dashboard-menu-img{
     width: 50px;
+    padding: 2px;
     height: 50px;
     /*margin-top: -80px;*/
    /* transition: 0.8s;
@@ -19062,6 +19066,7 @@ a.back-menu {
 
 .card .card-block {
     padding: 1.25rem;
+    margin-top:45px;
 }
 .widget-statstic-card .st-icon {
     color: #fff;
@@ -19324,7 +19329,7 @@ mwl-calendar .cal-month-box [class*="cal-cell"] {
     box-shadow: 1px 1px 5px rgba(0,0,0,0.3);
 }
 #user-dashboard-appointment{
-    top: 22px;
+    top: 30px;
     right: 0;
     position: relative;
     padding: 10px 0;
@@ -19350,11 +19355,11 @@ mwl-calendar .cal-month-box [class*="cal-cell"] {
     padding: 7px 30px;
 }
 #user-dashboard-vitals {
-    top: 22px;
+    top: 40px;
     right: 0;
     position: relative;
     padding: 10px 0;
-    height: 410px;
+    height: 460px;
     z-index: 1;
     margin-top:10px;
     background-color: #fff;
@@ -19366,7 +19371,7 @@ mwl-calendar .cal-month-box [class*="cal-cell"] {
     width: 160px;
     position: relative;
     display: inline-block;
-    height: 150px;
+    height: 175px;
     margin: 5px 50px 5px 5px;
     /*-webkit-box-shadow: inset 0 0 1px rgba(0,0,0,.3);*/
     /*-moz-box-shadow: inset 0 0 1px rgba(0,0,0,.3);*/
@@ -19376,19 +19381,19 @@ mwl-calendar .cal-month-box [class*="cal-cell"] {
     /* box-shadow: inset 0 0 3px rgba(0,0,0,.3); */
 }
 .dashboard-vital-img{
-    width: 50px;
-    height: 50px;
+    width: 65px;
+    height: 65px;
     padding-left: 2px;
     border-radius: 20px;
     margin-top:10px;
 }
 .vitals-text{
-    margin-top:20px;
-    font-size: 15px;
+    margin-top: 20px;
+    font-size: 18px;
 }
-.vitals-unit{
-    font-size:16px;
-    margin-top:70px;
+.vitals-unit {
+    font-size: 18px;
+    margin-top: 90px;
 }
 .appointment-text{
     color: #ee6f5a!important;

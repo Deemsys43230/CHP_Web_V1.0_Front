@@ -7,9 +7,9 @@ userApp.controller('UserKeyDetailsController',['$scope','requestHandler','$rootS
     $scope.menuUrlChange=function(tabid){
         $rootScope.isMenuClicked=tabid;
         $location.path('/dashboard');
-        // if (tabid==4) {
-        //     $location.path('/coach');
-        // }
+        if (tabid==7) {
+            $location.path('/profile');
+        }
         // if (tabid==5) {
         //     $location.path('/demography');
         // }
@@ -85,6 +85,14 @@ userApp.controller('UserKeyDetailsController',['$scope','requestHandler','$rootS
         });
     };
 
+    //to display fat details
+    $scope.doGetWeightLogDetails=function(){
+         requestHandler.postRequest("user/getWeightLogByDate/",{"date":selectedDate}).then(function(response) {
+            $scope.weightlogDetails= response.data.Weight_logs;
+        });
+    };
+
+
     //To Display current date
     var selectedDate = new Date();
     var dd = selectedDate.getDate();
@@ -113,6 +121,7 @@ userApp.controller('UserKeyDetailsController',['$scope','requestHandler','$rootS
     $scope.init=function () {
         $scope.doGetUserKeyDetails();
         $scope.dGetWaterLog();
+        $scope.doGetWeightLogDetails();
     };
     $scope.init();
 

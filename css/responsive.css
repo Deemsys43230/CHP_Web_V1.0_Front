@@ -613,59 +613,63 @@
 
 }
 
-@media (min-width: 768px){
+@media (min-width: 768px) {
 
-    .course-grid{
-        height: 150px!important;
+    .course-grid {
+        height: 150px !important;
     }
 
-    .hight-125{
-        height:105px!important;
+    .hight-125 {
+        height: 105px !important;
     }
 
     h5.classic-title {
-        font-size: 13px!important;
+        font-size: 13px !important;
         line-height: 18px !important;
     }
 
     .form-wrapper {
-        width: 180px!important;
+        width: 180px !important;
     }
 
     .form-wrapper input {
-        width: 150px!important;
+        width: 150px !important;
     }
 
-    .fa-5x{font-size:4em!important;}
+    .fa-5x {
+        font-size: 4em !important;
+    }
 
-    .nav-tabs > li > a.historyOverride{
+    .nav-tabs > li > a.historyOverride {
         padding: 6px 10px;
     }
 
-    .dashboard-1{
+    .dashboard-1 {
         width: 20%;
-        display:inline-block;
+        display: inline-block;
     }
-    .dashboard-3{
+
+    .dashboard-3 {
         width: 25%;
-        display:inline-block;
+        display: inline-block;
     }
 
-    .dashboard-2{
+    .dashboard-2 {
         width: 79%;
-        display:inline-block;
+        display: inline-block;
     }
 
-    .dashboard-4{
+    .dashboard-4 {
         width: 79%;
-        display:inline-block;
+        display: inline-block;
     }
 
     .width {
         width: 80%;
     }
+
     #sidemenu li a {
-        padding: 7px 5px 7px 12px!important;
+        padding: 7px 5px 7px 12px !important;
         height: 38px !important;
     }
 
@@ -674,64 +678,64 @@
         height: 168px !important;
     }
 
-    #sidemenu li.calories .text{
+    #sidemenu li.calories .text {
         margin: 0 10px !important;
     }
 
-    .search-list-form.override form input{
+    .search-list-form.override form input {
         width: 250px !important;
     }
 
-    #weight_level{
-        margin-left:120px!important;
+    #weight_level {
+        margin-left: 120px !important;
     }
 
-    .weight_mask{
-        left:130px !important;
+    .weight_mask {
+        left: 130px !important;
     }
 
-    .weight_measure{
-        left:90px !important;
+    .weight_measure {
+        left: 90px !important;
     }
 
-    .sessionGraph{
-        width:280px;
+    .sessionGraph {
+        width: 280px;
     }
 
-    a.price-button{
+    a.price-button {
         padding: 5px 24px;
     }
 
-    ul.features{
+    ul.features {
         font-size: 11px;
     }
 
-    .friends-scroll-responsive{
-        height: 400px!important;
+    .friends-scroll-responsive {
+        height: 400px !important;
     }
 
-    h5.classic-title.friend{
-        font-size: 16px!important;
-        line-height: 14px!important;
+    h5.classic-title.friend {
+        font-size: 16px !important;
+        line-height: 14px !important;
     }
 
-    #profile{
+    #profile {
         height: 760px;
     }
 
-    #profile-content{
+    #profile-content {
         height: 760px;
     }
 
-    #profile.profile-coach{
+    #profile.profile-coach {
         height: 1050px;
     }
 
-    #profile-content.profile-coach{
+    #profile-content.profile-coach {
         height: 1050px;
     }
 
-    .service-box-image-responsive{
+    .service-box-image-responsive {
         margin-top: 90px;
     }
 
@@ -739,7 +743,7 @@
         font-size: 14px;
     }
 
-    .service-icon i{
+    .service-icon i {
         font-size: 25px;
         height: 70px;
         width: 70px;
@@ -754,36 +758,42 @@
         -webkit-box-shadow: inset 0 0 0 3px #f8ba01;
     }
 
-    .service-content-right{
+    .service-content-right {
         text-align: right;
         margin-top: 0;
     }
 
-    .service-content-left{
+    .service-content-left {
         text-align: left;
         margin-top: 0;
     }
 
-    input[type=radio]+ label
-    {
-        padding:5px 12px
-    }
-    .container-shadow-box{
-        width:75% !important;
-        box-shadow: 0 0 3px rgba(0, 0, 0, .3);
-        padding:20px;
+    input[type=radio] + label {
+        padding: 5px 12px
     }
 
-    .container{
+    .container-shadow-box {
+        width: 75% !important;
+        box-shadow: 0 0 3px rgba(0, 0, 0, .3);
+        padding: 20px;
+    }
+
+    .container {
         width: 95%;
     }
+
     .workout-label {
         font-size: 14px !important;
     }
-    .coach{
+
+    .coach {
         padding: 0 !important;
     }
 
+    .social-card1 {
+        margin: 0px 5px 5px 29px;
+
+    }
 }
 
 @media (min-width: 992px)and (max-width: 1120px){
@@ -841,7 +851,7 @@
     .cal-width{
         width:133% !important;
     }*/
-    
+
 }
 
 @media (min-width: 1120px)and (max-width: 1200px){
@@ -1171,7 +1181,7 @@
     }
 
     .dashboard-4{
-        width: 81%;
+        width: 100%;
         display:inline-block;
     }
     .width {
@@ -1607,9 +1617,8 @@
 
     /*for dashboard menu responsiveness*/
     .dashboard-menu-img {
-        width: 50px;
-        height: 50px;
-        margin-top: -75px;
+        width: 40px;
+        height: 40px;
     }
 
     .goal-menu-image {
@@ -1642,6 +1651,40 @@
     .waterlog-img {
         margin-top: 0px;
     }
+    .card .card-header h3{
+        font-size:12px;
+    }
+    .text-c-yellow{
+        font-size: 12px;
+    }
+    .weight-log-menu{
+        height:155px;
+    }
+    h3.classic-title.menu-dashboard{
+        font-size: 13px!important;
+        line-height: 16px !important;
+    }
+    .budget-legend li {
+        margin-right: 8px;
+        margin-bottom: 10px;
+    }
+    .budget-graph-border {
+        width: 355px;
+        padding: 5px 0 0;
+    }
+    .card .card-block{
+        margin-top: 23px;
+    }
+    .user-dashboard-vitals {
+        width: 135px;
+        margin: 5px 35px 5px 5px;
+        height: 180px;
+    }
+    .navbar-menu-right {
+        left: 130px!important;
+        position:relative !important;
+    }
+
 }
 
 

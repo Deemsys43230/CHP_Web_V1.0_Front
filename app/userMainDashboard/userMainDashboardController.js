@@ -76,7 +76,7 @@ userApp.controller('UserMainDashboardController',['$scope','requestHandler','$ro
                 $scope.isDiabeticPerson = 1;
             }
             else {
-                $('#height').css({'height':'880px'});
+                $('#height').css({'height':'945px'});
             }
         });
     };

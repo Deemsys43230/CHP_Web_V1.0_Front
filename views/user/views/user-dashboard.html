@@ -1,9 +1,9 @@
 <div class="page-banner1" ng-cloak class="ng-cloak" >
-    <div id="height" style="height: 1670px">
+    <div id="height" style="height: 1745px">
     <div id="user-dashboard-content" ng-show="isDiabetic==1">
         <div class="col-lg-12 col-md-12 col-sm-12">
             <div class="col-md-2 col-sm-2">
-                <h3 class="classic-title margin-left-25"><span>Blood Glucose</span></h3>
+                <h3 class="classic-title menu-dashboard margin-left-25"><span>Blood Glucose</span></h3>
             </div>
         </div>
         <div id=bloodglucosegraph class="hc-graph"></div>
@@ -20,12 +20,12 @@
          <div id="user-dashboard-budget">
              <div class="col-lg-12 col-md-12 col-sm-12">
                  <div class="col-md-2 col-sm-2">
-                     <h3 class="classic-title margin-left-25"><span>Budget Vs Net</span></h3>
+                     <h3 class="classic-title menu-dashboard margin-left-25"><span>Budget Vs Net</span></h3>
                  </div>
              </div>
-         <div class="col-lg-12 col-md-12 col-sm-12 margin-top-10">
-         <div class="col-lg-2 col-md-2 col-sm-2"></div>
-         <div class="col-lg-2 col-md-2 col-sm-2">
+         <div class="col-lg-12 col-md-12 col-sm-12 margin-top-5">
+         <div class="col-lg-2 col-md-2 col-sm-2 hidden-sm"></div>
+         <div class="col-lg-2 col-md-2 col-sm-3">
              <div class="circle-wrapper-document">
             <div class="circle-progress ng-cloak" ng-style="getStyle()">{{Budget}} <br/><small>calories</small></div>
             <div round-progress
@@ -48,7 +48,7 @@
                  <h2 style="font-style: italic;color:#3591cd;">Budget</h2>
              </div>
          </div>
-         <div class="col-lg-2 col-md-2 col-sm-2">
+         <div class="col-lg-2 col-md-2 col-sm-3">
              <div class="circle-wrapper-document">
                  <div class="circle-progress ng-cloak" ng-style="getStyle()">{{userIntake}}<br/><small>  calories</small></div>
                  <div round-progress
@@ -71,7 +71,7 @@
                  <h2 style="font-style: italic;color:#65bb34">Intake</h2>
              </div>
          </div>
-         <div class="col-lg-2 col-md-2 col-sm-2">
+         <div class="col-lg-2 col-md-2 col-sm-3">
              <div class="circle-wrapper-document">
                  <div class="circle-progress ng-cloak" ng-style="getStyle()">{{userBurnt}}<br/><small> calories</small></div>
                  <div round-progress
@@ -94,7 +94,7 @@
                  <h2 style="font-style: italic;color:#eb6b22;">Burnt</h2>
              </div>
          </div>
-         <div class="col-lg-2 col-md-2 col-sm-2">
+         <div class="col-lg-2 col-md-2 col-sm-3">
              <div class="circle-wrapper-document">
                  <div class="circle-progress ng-cloak" ng-style="getStyle()">{{Net}}<br/><small> calories</small></div>
                  <div round-progress
@@ -117,7 +117,7 @@
                  <h2 style="font-style: italic;color:#f8ba01">Net</h2>
              </div>
          </div>
-             <div class="col-lg-12 col-md-12 col-sm-12 no-padding margin-top-10">
+             <div class="col-lg-12 col-md-12 col-sm-12 no-padding margin-top-15">
                      <div class="col-lg-4 col-md-4 col-sm-4">
                      </div>
                      <div class="col-lg-4 col-md-4 col-sm-4">
@@ -135,7 +135,7 @@
                  <div class="col-lg-10 col-md-10 col-sm-10">
                      <hr/>
                  </div>
-                 <div class="col-lg-1 col-md-1 col-sm-1"></div>
+                 <div class="col-lg-1 col-md-1 col-sm-1 hidden-sm"></div>
              </div>
              <div class="col-lg-12 col-md-12 col-sm-12">
                  <div class="col-lg-4 col-md-4 col-sm-4"></div>
@@ -157,12 +157,12 @@
                          <a href="#doctor-appointment" class="back-button pull-right margin-left-5"><i class="fa fa-plus-circle"></i>&nbsp;Add</a>
                      </div>
                      <div class="col-md-3 col-sm-3">
-                         <h3 class="classic-title margin-left-25"><span>Doctor Appointment</span></h3>
+                         <h3 class="classic-title menu-dashboard margin-left-25"><span>Doctor Appointment</span></h3>
                      </div>
                  </div>
                  <div class="col-lg-12 col-md-12 col-sm-12 margin-top-10">
-                     <div class="col-lg-2 col-md-2 col-sm-2"></div>
-                 <div class="col-lg-9 col-md-9 col-sm-9">
+                     <div class="col-lg-1 col-md-1 col-sm-1"></div>
+                 <div class="col-lg-10 col-md-10 col-sm-10">
                      <div class="user-dashboard-appointment col-lg-5 col-md-5 col-sm-5"  ng-model="orderProp" ng-repeat= "appointmentsSingle in userAppointments | filter:query | orderBy:orderProp | limitTo:quantity">
                      <div class="col-lg-2 col-md-2 col-sm-2 no-padding margin-top-15">
                          <img  class="img-circle" src="../../images/appointment.png">
@@ -190,45 +190,44 @@
              <div id="user-dashboard-vitals">
                  <div class="col-lg-12 col-md-12 col-sm-12">
                      <div class="col-md-2 col-sm-2">
-                         <h3 class="classic-title margin-left-25"><span>Vitals</span></h3>
+                         <h3 class="classic-title menu-dashboard margin-left-25"><span>Vitals</span></h3>
                      </div>
                  </div>
                  <div class="col-lg-12 col-md-12 col-sm-12 margin-top-10">
                      <div class="col-lg-2 col-md-2 col-sm-2"></div>
-                     <div class="user-dashboard-vitals col-lg-2 col-md-2 col-sm-2">
+                     <div class="user-dashboard-vitals col-lg-2 col-md-2 col-sm-4">
                          <div class="sleep-textcolor text-center vitals-text">Sleep</div>
                          <div class="col-md-12 col-lg-12 col-sm-12 text-center">
                              <img class="dashboard-vital-img" src="../../images/sleep.png"/>
                          </div>
                          <div class="sleep-textcolor text-center vitals-unit">{{wearable.sleep==null?"NA":wearable.sleep}}&nbsp;{{wearable.sleep==null?" ":"(minutes)"}}</div>
                      </div>
-                     <div class="user-dashboard-vitals col-lg-2 col-md-2 col-sm-2">
+                     <div class="user-dashboard-vitals col-lg-2 col-md-2 col-sm-4">
                          <div class="heart-textcolor text-center vitals-text">Heart Rate</div>
                          <div class="col-md-12 col-lg-12 col-sm-12 text-center">
                              <img class="dashboard-vital-img" src="../../images/bloodpressure.png"/>
                          </div>
                          <div class="heart-textcolor text-center vitals-unit">{{wearable.restingheartrate==null?"NA":wearable.restingheartrate}}&nbsp;{{wearable.restingheartrate==null?" ":"(bpm)"}}</div>
                      </div>
-                     <div class="user-dashboard-vitals col-lg-2 col-md-2 col-sm-2">
+                     <div class="user-dashboard-vitals col-lg-2 col-md-2 col-sm-4">
                          <div class="floor-textcolor text-center vitals-text">Floors</div>
                          <div class="col-md-12 col-lg-12 col-sm-12 text-center">
                              <img class="dashboard-vital-img" src="../../images/floor.png"/>
                          </div>
                          <div class="floor-textcolor text-center vitals-unit">{{wearable.floors==null?"NA":wearable.floors}}&nbsp;{{wearable.floors==null?" ":"(floor)"}}</div>
                      </div>
-                     <div class="user-dashboard-vitals col-lg-2 col-md-2 col-sm-2">
+                     <div class="user-dashboard-vitals col-lg-2 col-md-2 col-sm-4">
                          <div class="steps-textcolor text-center vitals-text">Steps</div>
                          <div class="col-md-12 col-lg-12 col-sm-12 text-center">
                              <img class="dashboard-vital-img" src="../../images/step.png"/>
                          </div>
                          <div class="steps-textcolor text-center vitals-unit">{{wearable.steps==null?"NA":wearable.steps==null}}&nbsp;{{wearable.steps==null?" ":"(count)"}}</div>
                      </div>
-                     <div class="col-lg-2 col-md-2 col-sm-2">
+                     <div class="col-lg-2 col-md-2 col-sm-2 hidden-sm">
                      </div>
                  </div>
                  <div class="col-lg-12 col-md-12 col-sm-12  margin-top-10">
-                     <div class="col-lg-2 col-md-2 col-sm-2">
-                     </div>
+                     <div class="col-lg-2 col-md-2 col-sm-2"></div>
                      <div class="user-dashboard-vitals col-lg-2 col-md-2 col-sm-2">
                          <div class="bloodoxygen-textcolor  text-center vitals-text">Blood Oxygen</div>
                          <div class="col-md-12 col-lg-12 col-sm-12 text-center">
@@ -257,8 +256,7 @@
                          </div>
                          <div class="bodytemperature-textcolor text-center vitals-unit">{{wearable.bodytemperature==null?"NA":wearable.bodytemperature}}&nbsp;{{wearable.bodytemperature==null?" ": "(fahrenheit)"}}</div>
                      </div>
-                     <div class="col-lg-2 col-md-2 col-sm-2">
-                     </div>
+                     <div class="col-lg-2 col-md-2 col-sm-2 hidden-sm"></div>
                  </div>
              </div>
          </div>
