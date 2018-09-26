@@ -48,12 +48,6 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
         if($route.current.$$route.fromDevice){
             $("#appAndDevice").click();
         }
-    $scope.mealPlanCalender=function(){
-        var currentMealDate=new Date();
-        $scope.mealPlanStartDate=moment(new Date(currentMealDate.getFullYear(), currentMealDate.getMonth(), 1)).format('DD/MM/YYYY');
-        $scope.mealPlanEndDate=moment(new Date(currentMealDate.getFullYear(), currentMealDate.getMonth()+1, 0)).format('DD/MM/YYYY');
-        $scope.doGetUserMealPlanCalendar( $scope.mealPlanStartDate, $scope.mealPlanEndDate);
-    };
 
 
         //Modal Popup to add user food
@@ -1874,24 +1868,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
          showInLegend: false
          }]
          });*/
-    // date compare for update weight
-        $scope.doGetPreviousDate=function(){
-            $scope.shouldNotHide=false;
-            var yesterdayDate=document.getElementById("main-start-date").value; //main date
-            var firstValue = selectedDate.split('/'); //current date
-            var secondValue =yesterdayDate.split('/'); // main date on change value
-            var firstDate=new Date();
-            firstDate.setFullYear(firstValue[2],(firstValue[1] - 1 ),firstValue[0]);
-            var secondDate=new Date();
-            secondDate.setFullYear(secondValue[2],(secondValue[1] - 1 ),secondValue[0]);
-            //Comparing previous date with today date
-            if (+firstDate != +secondDate)
-            {
-                $scope.shouldNotHide=true;
-            }
-        };
-
-        $scope.doGetWeightLog=function(date,id){
+    $scope.doGetWeightLog=function(date,id){
             $scope.showEmpty=false;
             var weightLogPromise=UserDashboardService.doGetWeightLogDetails(date);
             weightLogPromise.then(function(result){
@@ -3728,7 +3705,6 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
         };
 
         $scope.drawHistoryGraph=function(data,dataX,titles,divId){
-            console.log(data);
             $scope.loaded=false;
             $('#'+divId).highcharts({
 
@@ -3835,10 +3811,6 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
         };
 
         $scope.drawHistoryGraphForBudget=function(data,titles,data1,data2,divId){
-            console.log(data);
-            console.log(titles);
-            console.log(data1);
-            console.log(data2);
             $scope.loaded=false;
             $('#'+divId).highcharts({
                 chart: {
@@ -3900,7 +3872,6 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
         //for Nutrients intake graph
 
         $scope.drawNutrientsGraph=function(dataP,titles,dataFr,dataFa,dataC,dataAf,dataAp,dataAfa,dataAC,dataD,divId){
-            console.log(dataC);
             $scope.loaded=false;
             $('#'+divId).highcharts({
                 chart: {
@@ -4064,7 +4035,6 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
 
         //for sleep history graph
         $scope.drawSleepHistoryGraph=function(data,dataD,titles,divId){
-            console.log(data);
             $scope.loaded=false;
             $('#'+divId).highcharts({
 
@@ -4121,7 +4091,6 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
 
         //for bloodglucose Graph
         $scope.drawBloodGlucoseGraph=function(datafbg,titles,datarbg,dataD,divId){
-            console.log(datafbg);
             $scope.loaded=false;
             $('#'+divId).highcharts({
                 chart: {
@@ -4258,7 +4227,6 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
 
 //for water log millilitre unit graph
         $scope.drawWaterlogMlHistoryGraph=function(dataml,dataX,titles,divId){
-            console.log(dataml);
             $scope.historyType=14;
             $scope.waterGraphs=true;
             $scope.loaded=false;
@@ -4314,7 +4282,6 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
 
 //for water log ounces unit graph
         $scope.drawWaterlogOzHistoryGraph=function(dataoz,dataX,titles,divId){
-            console.log(dataoz);
             $scope.historyType=15;
             $scope.waterGraphs=true;
             $scope.loaded=false;
@@ -4585,7 +4552,6 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
 
         //Weight Goal Graph
         $scope.drawGoalGraph=function(data,titles,data1){
-            console.log(data1);
            $('#goalGraph').highcharts({
                 title: {
                     text: titles.title
@@ -4981,6 +4947,21 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
         });
     };
 
+    $scope.mealPlanCalender=function(){
+        // var currentMealDate=new Date();
+        // $scope.mealPlanStartDate=moment(new Date(currentMealDate.getFullYear(), currentMealDate.getMonth(), 1)).format('DD/MM/YYYY');
+        // $scope.mealPlanEndDate=moment(new Date(currentMealDate.getFullYear(), currentMealDate.getMonth()+1, 0)).format('DD/MM/YYYY');
+        // $scope.doGetUserMealPlanCalendar( $scope.mealPlanStartDate, $scope.mealPlanEndDate);
+        $scope.newSelectedDate=moment($scope.viewDate).format('DD/MM/YYYY');
+
+        var oldDateParts= $scope.newSelectedDate.split("/");
+        //Now compare the two converted date formats
+        var now = new Date(oldDateParts[2],oldDateParts[1]-1,1);
+        $scope.mealPlanStartDate=moment(new Date(now)).format('DD/MM/YYYY');
+        $scope.mealPlanEndDate=moment(new Date(now.getFullYear(), now.getMonth()+1, 0)).format('DD/MM/YYYY');
+        $scope.doGetUserMealPlanCalendar( $scope.mealPlanStartDate, $scope.mealPlanEndDate);
+    };
+
     //to enable meal-plan popup
     if($location.absUrl().indexOf("dashboard")!=-1 && $rootScope.isMenuClicked==1){
         $scope.dashboardurl="#dashboard";
@@ -5026,7 +5007,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
 
     //to get current date while clicking calendar cell
     $scope.timespanClicked = function(date) {
-
+        $scope.shouldNotHide=false;
         if ($scope.calendarView === 'month') {
             {
                 $scope.viewDate = date;
@@ -5034,23 +5015,37 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
                 $(".common_model").hide();
                 $("#meal-plan-calendar").hide();
                 $("#lean_overlay").hide();
-                var viewDate = {
-                    singleDatePicker: true,
-                    format: 'DD/MM/YYYY',
-                    maxDate: new Date()
-                };
-                document.getElementById("main-date").value = moment($scope.viewDate).format('DD/MM/YYYY');
-                $('#main-date').daterangepicker(viewDate).on('apply.daterangepicker', function (ev, picker) {
-                    document.getElementById("main-date").value = picker.startDate.format('DD/MM/YYYY');
-                    $scope.initialLoadFoodAndExercise(document.getElementById("main-date").value);
-                });
-                $scope.initialLoadFoodAndExercise(document.getElementById("main-date").value);
+
+                $scope.newSelectedDate=moment($scope.viewDate).format('DD/MM/YYYY');
+                var currentlyselecteddate=moment(new Date()).format('DD/MM/YYYY');
+                var oldmealdate=currentlyselecteddate.split("/");
+                var newmealdate=$scope.newSelectedDate.split("/");
+                 var old_meal_date=new Date(oldmealdate[2],oldmealdate[1]-1,oldmealdate[0]);
+                 var new_meal_date=new Date(newmealdate[2],newmealdate[1]-1,newmealdate[0]);
+                //Now compare the two converted date formats
+                if(old_meal_date < new_meal_date){
+                    $scope.newSelectedDate=currentlyselecteddate;
+                    $scope.viewDate=currentlyselecteddate;
+                    $scope.viewDate=moment($scope.viewDate).format('DD/MM/YYYY');
+                }
+                // to disable update weight for past dates
+                else if(old_meal_date > new_meal_date){
+                    $scope.shouldNotHide=true;
+                }
+                $scope.initialLoadFoodAndExercise($scope.newSelectedDate);
+
             }
 
         }
-
-
     };
+    // to highlight selected date
+     $scope.cellModifier =function(cell) {
+         $scope.celldate=moment(cell.date._d).format('DD/MM/YYYY');
+         if ($scope.celldate=== $scope.newSelectedDate) {
+             cell.cssClass = 'calendar-selected-day-highlight';
+         }
+
+     };
 //to get previous month date
     $scope.$watch("viewDate",function(newValue, oldValue){
         $scope.firstValue=oldValue.format('dd/mm/yyyy');
@@ -5087,14 +5082,10 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
             $scope.doGetMedicationListByUser();
             $scope.doCheckUserMedicationDocument();
             $scope.doGetUserDetails();
-            // Set Start and End for Meal Plan Calendar
-            /*var currentMealDate=new Date();
-            $scope.mealPlanStartDate=moment(new Date(currentMealDate.getFullYear(), currentMealDate.getMonth(), 1)).format('DD/MM/YYYY');
-            $scope.mealPlanEndDate=moment(new Date(currentMealDate.getFullYear(), currentMealDate.getMonth()+1, 0)).format('DD/MM/YYYY');
-           */
-
         };
-        $scope.initialLoadFoodAndExercise(selectedDate);
+        // initially new date is selected date
+        $scope.newSelectedDate=selectedDate;
+        $scope.initialLoadFoodAndExercise($scope.newSelectedDate);
 
     /*    $scope.doGetCoachAdvices();*/
         //circle round

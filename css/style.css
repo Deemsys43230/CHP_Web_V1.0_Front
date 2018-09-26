@@ -19406,3 +19406,6 @@ mwl-calendar .cal-month-box [class*="cal-cell"] {
     border-radius: 3px;
     padding:7px 0 0 0;
 }
+.calendar-selected-day-highlight{
+    background-color: #e8fde7;
+}
