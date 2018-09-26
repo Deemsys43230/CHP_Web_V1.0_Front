@@ -19409,3 +19409,56 @@ mwl-calendar .cal-month-box [class*="cal-cell"] {
 .calendar-selected-day-highlight{
     background-color: #e8fde7;
 }
+.user-dashboard-overlay {
+    position:absolute;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    background: #bfbbbb;
+    opacity: .1!important;
+    color:white;
+}
+.dashboard_overlay {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #fff;
+    opacity: .1 !important;
+    color: white;
+}
+
+.txt {
+    display: inline-block;
+    vertical-align: middle;
+    padding: 10px 15px;
+    position: relative;
+    font-weight: 700;
+    z-index: 1;
+    margin-top: -260px;
+    text-align: center;
+}
+.overlay_text h3{
+    font-size: x-large !important;
+    line-height: 45px !important;
+    color:#e44f37 !important;
+    background-color: #eee;
+    padding:5px;
+}
+.dashboard_overlay_text
+{
+    display: inline-block;
+    vertical-align: middle;
+    padding: 10px 15px;
+    position: relative;
+    font-weight: 700;
+    z-index: 1;
+    margin-top: -155px;
+    text-align: center;
+}
+.dashboard_overlay_text h5{
+    color:#e44f37 !important;
+    background-color: #eee;
+    padding:5px;
+}

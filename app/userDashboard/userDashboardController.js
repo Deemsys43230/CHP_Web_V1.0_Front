@@ -36,6 +36,8 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
         $scope.historyReport=0;
         $scope.historyType=1;
         $scope.showExercise=0;
+        $scope.isShowOverlayDashboardContent=true;
+        $scope.isDashboardConnectWearable=true;
        $scope.showFoodMoal=0;
         $scope.isGlycaemicValueEmpty=false;
            $window.emi=0;
@@ -490,6 +492,11 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
                 $scope.loader=true;
                 requestHandler.getRequest("getUserId/").then(function(response){
                     $scope.userDetails=response.data.User_Profile;
+                    $scope.userDemoDetails=response.data.demography;
+                    if($scope.userDemoDetails.userPlanType==4){
+                        $scope.isShowOverlayDashboardContent=true;
+                        $('#budget_nopaln').addClass('dashboard_overlay');
+                    }
                     $scope.loader=false;
                     $scope.doGetUserUploadedDocument($scope.userDetails.userid);
                 });
@@ -625,8 +632,12 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
         $scope.doSyncDevices=function(id){
             $scope.connectDevice=true;
             $scope.syncBtnTxt="Synchronizing...";
-        var date = document.getElementById("main-start-date").value;
+            var date = selectedDate;
             requestHandler.postRequest("user/syncWearableData/",{"date":date}).then(function(response){
+                if(response.data.Response_status==0){
+                    $scope.isDashboardConnectWearable=true;
+                    $('#device_not_connect').addClass('dashboard_overlay');
+                }
               $scope.doGetConnectedDevices();
                     if(id=0){
                         $location.path("dashboard");
@@ -4969,15 +4980,18 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
         $("#foodintake").click();
         $scope.showFoodMoal=1;
         $scope.mealPlanCalender();
+        $scope.doSyncDevices(1);
     };
 
     if($rootScope.isMenuClicked==3){
         $("#appAndDevice").click();
-
+        $scope.isDashboardConnectWearable=false;
+        $('#device_not_connect').removeClass('dashboard_overlay');
     };
     if($rootScope.isMenuClicked==2){
         $("#dailyupdate").click();
         $("#energyspent").click();
+        $scope.doSyncDevices(1);
     };
     if($rootScope.isMenuClicked==4){
         $("#dailyupdate").click();

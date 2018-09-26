@@ -1,6 +1,7 @@
 var userApp= angular.module('userApp', ['ngRoute','oc.lazyLoad','ngCookies','ngAnimate','requestModule','angular-nicescroll','angular-svg-round-progress']);
 userApp.controller('UserMainDashboardController',['$scope','requestHandler','$rootScope','$location','roundProgressService','$window',function($scope,requestHandler,$rootScope,$location,roundProgressService,$window) {
     $rootScope.isMenuShow=1;
+    $scope.isConnectWearable=false;
     $scope.doGetHistoryReport=function(id)  {
         var endDate=selectedDate;
         var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -80,7 +81,18 @@ userApp.controller('UserMainDashboardController',['$scope','requestHandler','$ro
             }
         });
     };
-
+    // to get user details
+    $scope.doGetUserPersonalDetails=function(){
+        $scope.isShowOverlayContent=false;
+        requestHandler.getRequest("getUserId/","").then(function(response){
+            $scope.userPersonalDetails=response.data.User_Profile;
+            $scope.userDemographyDetails=response.data.demography;
+                if($scope.userDemographyDetails.userPlanType==4){
+                    $scope.isShowOverlayContent=true;
+                    $('#overlay_content').addClass('user-dashboard-overlay');
+                }
+        });
+    };
         //To Display current date
         var selectedDate = new Date();
         var dd = selectedDate.getDate();
@@ -118,6 +130,22 @@ userApp.controller('UserMainDashboardController',['$scope','requestHandler','$ro
     var nextWeekDate=nextWeekDisplayPadded;
     var enddatetime=nextWeekDate +' ' +'23' + ':'+ '59'+':'+'59';
 
+    // to check wearable devices connected or disconnected
+    $scope.doSyncDevices=function(){
+        requestHandler.postRequest("user/syncWearableData/",{"date":selectedDate}).then(function(response){
+            if(response.data.Response_status==0){
+                $scope.isConnectWearable=true;
+                $('#overlay_sync_content').addClass('user-dashboard-overlay');
+            }
+        },function () {
+            errorMessage(Flash, "Please try again later!")
+        });
+    };
+    // to redirect dashboard menu
+    $scope.menuUrlChange=function(id){
+        $rootScope.isMenuClicked=id;
+        $location.path('/dashboard');
+    };
    //To get vitals activity
     $scope.doGetWearableData = function(){
         return requestHandler.postRequest("user/getWearableDataForDate/",{"date": selectedDate}).then(function(response) {
@@ -227,6 +255,8 @@ userApp.controller('UserMainDashboardController',['$scope','requestHandler','$ro
         $scope.doGetWearableData();
         $scope.userGetAllAppointments();
         $scope.getUserBudget();
+        $scope.doGetUserPersonalDetails();
+        $scope.doSyncDevices();
     };
     //circle round
     $scope.offset =         0;

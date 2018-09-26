@@ -18,7 +18,8 @@
     </div>
     <div class="col-lg-12 col-md-12 col-sm-12">
          <div id="user-dashboard-budget">
-             <div class="col-lg-12 col-md-12 col-sm-12">
+             <div class="col-md-12 col-md-12 col-sm-12" id="overlay_content">
+                 <div class="col-lg-12 col-md-12 col-sm-12">
                  <div class="col-md-2 col-sm-2">
                      <h3 class="classic-title menu-dashboard margin-left-25"><span>Budget Vs Net</span></h3>
                  </div>
@@ -149,6 +150,17 @@
                  <div class="col-lg-4 col-md-4 col-sm-4"></div>
              </div>
          </div>
+         </div>
+        <div class="col-lg-12 col-md-12 col-sm-12">
+            <div class="col-lg-2 col-md-2 col-sm-2"></div>
+        <div class="col-lg-8 col-md-8 col-sm-8 txt text-center overlay_text" id="#overlay_text" ng-show="isShowOverlayContent">
+            <h3>You are not yet set any plans. You want to see the budget details please change your plan</h3>
+            <div class="col-md-12 col-sm-12 margin-top-10 text-center no-padding">
+                <span><a class="target_button orange_button" href="#demography">Change Plan</a></span>
+            </div>
+        </div>
+            <div class="col-lg-2 col-md-2 col-sm-2"></div>
+        </div>
     </div>
          <div class="col-lg-12 col-md-12 col-sm-12" ng-show="isDiabetic==1">
              <div id="user-dashboard-appointment" class="appointment_scrollbar" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#eee'}">
@@ -188,6 +200,7 @@
          </div>
          <div class="col-lg-12 col-md-12 col-sm-12">
              <div id="user-dashboard-vitals">
+                 <div class="col-md-12 col-md-12 col-sm-12" id="overlay_sync_content">
                  <div class="col-lg-12 col-md-12 col-sm-12">
                      <div class="col-md-2 col-sm-2">
                          <h3 class="classic-title menu-dashboard margin-left-25"><span>Vitals</span></h3>
@@ -258,6 +271,17 @@
                      </div>
                      <div class="col-lg-2 col-md-2 col-sm-2 hidden-sm"></div>
                  </div>
+             </div>
+             </div>
+             <div class="col-lg-12 col-md-12 col-sm-12">
+                 <div class="col-lg-3 col-md-3 col-sm-3"></div>
+                 <div class="col-lg-7 col-md-7 col-sm-7 txt text-center overlay_text" id="#overlay_sync_text" ng-show="isConnectWearable">
+                     <h3>You are not yet connect any devices. You want to see your fitness details, please connect your devices</h3>
+                     <div class="col-md-12 col-sm-12 margin-top-10 text-center no-padding">
+                         <span><a class="target_button orange_button" href="" ng-click="menuUrlChange(3)">Connect</a></span>
+                     </div>
+                 </div>
+                 <div class="col-lg-2 col-md-2 col-sm-2"></div>
              </div>
          </div>
 </div>

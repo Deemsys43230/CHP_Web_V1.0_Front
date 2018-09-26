@@ -943,6 +943,7 @@
 
         <div class="dashboard-3 hidden-sm" ng-show="historyReport==0">
             <div id="update">
+                <div id="budget_nopaln">
                 <div class="row">
                     <h5 class="col-lg-12 col-md-12 col-sm-12 margin-bottom-5">
                         Budget Vs Net&nbsp;-&nbsp;
@@ -1032,7 +1033,15 @@
                         <h6 ng-show="budgetDetails.OverorUnderValue==0"><div class="label-success">You reached your today’s budget.</div></h6>
                     </div>
                 </div>
-                <div class="col-md-12 col-lg-12 col-sm-12 no-padding margin-top-10">
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 text-center dashboard_overlay_text" ng-show="isShowOverlayDashboardContent">
+                        <h5>You are not yet set any plans. You want to see the budget details, please change your plan</h5>
+                        <div class="col-md-12 col-sm-12 margin-top-10 text-center no-padding">
+                            <span><a class="target_button orange_button" href="#demography">Change Plan</a></span>
+                        </div>
+                </div>
+                <div id="device_not_connect">
+                <div class="col-md-12 col-lg-12 col-sm-12 no-padding margin-top-20">
                     <div class="col-lg-4 col-md-4 col-sm-4 no-padding">
                         <div class="new-update ">
                             <div class="col-md-12 col-lg-12 col-sm-12 sleep-textcolor margin-top-5">Sleep</div>
@@ -1162,6 +1171,13 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 text-center dashboard_overlay_text" ng-show="isDashboardConnectWearable">
+                    <h5>You are not yet connect any devices. You want to see your fitness details, please connect your devices</h5>
+                    <div class="col-md-12 col-sm-12 margin-top-10 text-center no-padding">
+                        <span><a class="target_button orange_button" ng-click="menuUrlChange(3)">Connect</a></span>
                     </div>
                 </div>
             </div>
