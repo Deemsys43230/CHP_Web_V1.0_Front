@@ -1331,13 +1331,15 @@
     }
     .waterlog-img{
         width: 100%;
-        margin: -31px 5px;
     }
     .navbar-menu-right1 {
         right: -415px;
     }
     .navbar-menu-right {
-        right: -240px !important;
+     left:570px !important;
+    }
+    .vitals-alignment{
+       margin-left:40px !important;
     }
 }
 

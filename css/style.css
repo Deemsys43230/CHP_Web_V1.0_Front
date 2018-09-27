@@ -19462,3 +19462,6 @@ mwl-calendar .cal-month-box [class*="cal-cell"] {
     background-color: #eee;
     padding:5px;
 }
+.vitals-alignment{
+    margin-left:0;
+}
