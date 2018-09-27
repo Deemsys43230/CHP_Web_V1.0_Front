@@ -352,7 +352,7 @@ userApp.controller('ViewUserMealPlanController',['$scope','requestHandler','Flas
 //Search Function for food
     $scope.inputChanged = function(searchStr) {
 
-        if(searchStr.length >=1){
+        if(searchStr.length >=3){
             $scope.loadingFoods=true;
             if($scope.foodSearchResult.length==0){
 

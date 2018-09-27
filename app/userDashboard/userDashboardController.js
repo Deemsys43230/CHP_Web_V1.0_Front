@@ -36,8 +36,8 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
         $scope.historyReport=0;
         $scope.historyType=1;
         $scope.showExercise=0;
-        $scope.isShowOverlayDashboardContent=true;
-        $scope.isDashboardConnectWearable=true;
+        $scope.isShowOverlayDashboardContent=false;
+        $scope.isDashboardConnectWearable=false;
        $scope.showFoodMoal=0;
         $scope.isGlycaemicValueEmpty=false;
            $window.emi=0;
@@ -944,7 +944,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
         //Search Function for food
         $scope.inputChanged = function(searchStr) {
 
-            if(searchStr.length >=1){
+            if(searchStr.length >=3){
                 $scope.loadingFoods=true;
                 if($scope.foodSearchResult.length==0){
 
@@ -1146,7 +1146,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
 
         //Search Function for exercise
         $scope.inputChangedExercise = function(searchStr) {
-            if(searchStr.length){
+            if(searchStr.length >=3){
                 $scope.loadingExercise=true;
                 if($scope.exerciseSearchResult.length==0){
                     $scope.loadingExercise=true;
@@ -4999,6 +4999,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
     };
     if($rootScope.isMenuClicked==5){
         $("#medicationsmenu").click();
+        $scope.doSyncDevices(1);
     };
     if($rootScope.isMenuClicked==6){
       $("#history-menu").click();
@@ -5006,7 +5007,11 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
         $scope.showGraph=2;
     };
 
-
+    // to redirect apps & devices tab
+    $scope.menuUrlChange=function(id){
+        $rootScope.isMenuClicked=id;
+        $("#appAndDevice").click();
+    };
 
     $('#energyspent').click(function(e) {
         $scope.showFoodMoal=0;

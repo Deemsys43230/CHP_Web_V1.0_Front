@@ -241,7 +241,7 @@ $scope.selectedCategory=[];
 $scope.selectedType=[];
 //Search Function for exercise
 $scope.inputChangedExercise = function(searchStr) {
-    if(searchStr.length){
+    if(searchStr.length >=3){
         $scope.loadingExercise=true;
         if($scope.exerciseSearchResult.length==0){
             $scope.loadingExercise=true;
