@@ -1,5 +1,5 @@
 <div class="page-banner1" ng-cloak class="ng-cloak" >
-    <div id="height" style="height: 1745px">
+    <div id="height" style="height: 1780px">
     <div id="user-dashboard-content" ng-show="isDiabetic==1">
         <div class="col-lg-12 col-md-12 col-sm-12">
             <div class="col-md-2 col-sm-2">
@@ -8,22 +8,27 @@
         </div>
         <div id=bloodglucosegraph class="hc-graph"></div>
     <div style="text-align: center;padding-top: 5px;">
-        <input type="radio" id="fastingbg" ng-click="doGetHistoryReport(1)"  value="1" name="ml"/>
+        <input type="radio" id="hba1cbg" ng-click="doGetHistoryReport(4)"  value="4" name="hba1cbg"/>
+        <label for="hba1cbg" style="background-color: #ff884d;color:#fff">HbA1C</label>
+        <input type="radio" id="fastingbg" ng-click="doGetHistoryReport(1)"  value="1" name="fastingbg"/>
         <label for="fastingbg" style="background-color: #3366cc;color:#fff">Fasting</label>
-        <input type="radio" id="randombg" ng-click="doGetHistoryReport(2)"  value="2" name="oz"/>
-        <label for="randombg" style="background-color: #339966;color:#fff">Random</label>
-        <input type="radio" id="postbg" ng-click="doGetHistoryReport(3)"  value="3" name="oz"/>
+        <input type="radio" id="postbg" ng-click="doGetHistoryReport(3)"  value="3" name="postbg"/>
         <label for="postbg" style="background-color: #e67300;color:#fff">Postprandial</label>
+        <input type="radio" id="randombg" ng-click="doGetHistoryReport(2)"  value="2" name="randombg"/>
+        <label for="randombg" style="background-color: #339966;color:#fff">Random</label>
     </div>
     </div>
     <div class="col-lg-12 col-md-12 col-sm-12">
          <div id="user-dashboard-budget">
              <div class="col-md-12 col-md-12 col-sm-12" id="overlay_content">
-                 <div class="col-lg-12 col-md-12 col-sm-12">
-                 <div class="col-md-2 col-sm-2">
-                     <h3 class="classic-title menu-dashboard margin-left-25"><span>Budget Vs Net</span></h3>
+                 <div class="col-lg-12 col-md-12 col-sm-12 ">
+                     <div class="col-md-3 col-sm-3 pull-right">
+                         <a href="" class="back-button pull-right margin-left-5" ng-click="menuUrlChange(1)"><i class="fa fa-plus-circle"></i>&nbsp;Update Your Activities</a>
+                     </div>
+                     <div class="col-md-3 col-sm-3">
+                         <h3 class="classic-title menu-dashboard margin-left-25"><span>Today's Budget</span></h3>
+                     </div>
                  </div>
-             </div>
          <div class="col-lg-12 col-md-12 col-sm-12 margin-top-5">
          <div class="col-lg-2 col-md-2 col-sm-2 hidden-sm"></div>
          <div class="col-lg-2 col-md-2 col-sm-3">
@@ -163,18 +168,19 @@
         </div>
     </div>
          <div class="col-lg-12 col-md-12 col-sm-12" ng-show="isDiabetic==1">
-             <div id="user-dashboard-appointment" class="appointment_scrollbar" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#eee'}">
+             <div id="user-dashboard-appointment">
                  <div class="col-lg-12 col-md-12 col-sm-12 ">
-                     <div class="col-md-3 col-sm-3 pull-right">
+                     <div class="col-md-1 col-sm-1 col-lg-1 pull-right">
                          <a href="#doctor-appointment" class="back-button pull-right margin-left-5"><i class="fa fa-plus-circle"></i>&nbsp;Add</a>
                      </div>
+                     <div flash-message="2000" class="col-lg-3 col-md-3 col-sm-3 pull-right no-padding"></div>
                      <div class="col-md-3 col-sm-3">
                          <h3 class="classic-title menu-dashboard margin-left-25"><span>Doctor Appointment</span></h3>
                      </div>
                  </div>
                  <div class="col-lg-12 col-md-12 col-sm-12 margin-top-10">
                      <div class="col-lg-1 col-md-1 col-sm-1"></div>
-                 <div class="col-lg-10 col-md-10 col-sm-10">
+                 <div class="col-lg-10 col-md-10 col-sm-10 user_dashboard_appointment_scrollbar" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#eee'}">
                      <div class="user-dashboard-appointment col-lg-5 col-md-5 col-sm-5"  ng-model="orderProp" ng-repeat= "appointmentsSingle in userAppointments | filter:query | orderBy:orderProp | limitTo:quantity">
                      <div class="col-lg-2 col-md-2 col-sm-2 no-padding margin-top-15">
                          <img  class="img-circle" src="../../images/appointment.png">
@@ -183,15 +189,16 @@
                          <h4 class="col-lg-12 col-md-12 col-sm-12 wrap-all">{{appointmentsSingle.doctorname}}</h4>
                          <h4 class="col-lg-12 col-md-12 col-sm-12  wrap-all">{{appointmentsSingle.clinicname==null?'-': appointmentsSingle.clinicname}}</h4>
                          <p class="col-lg-12 col-md-12 col-sm-12">{{appointmentsSingle.datetime}}</p>
+                         <span class="pull-right text-bold padding-left-10"><a href="" ng-click="doDeleteDoctorAppointment(appointmentsSingle.logid)" title="Delete Appointments"><i class="fa fa-trash"></i></a></span>
                      </div>
                      </div>
                  </div>
                      <div class="col-lg-1 col-md-1 col-sm-1"></div>
-                     <div class="col-lg-9 col-md-9 col-sm-9 text-center user-dashboard-appointment" style="margin-left:15%" ng-show="userAppointments.length==0">
+                     <div class="col-lg-9 col-md-9 col-sm-9 text-center" style="margin-left:15%" ng-show="userAppointments.length==0">
                          <h1 class="appointment-text text-center">NO APPOINTMENTS FOUND!!!</h1><br/>
                      </div>
                  </div>
-                 <div class="col-lg-12 col-md-12 col-sm-12" ng-hide="userAppointments.length==0">
+                 <div class="col-lg-12 col-md-12 col-sm-12 margin-top-10" ng-hide="userAppointments.length==0">
                      <div class="col-md-3 col-sm-3 pull-right">
                          <a href="#doctor-appointment" class="dashboard-button btn button pull-right margin-left-5"><i class="fa fa-eye"></i>&nbsp;View All</a>
                      </div>

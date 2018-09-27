@@ -39,7 +39,6 @@
 </script>
 
 <div class="page-banner1" ng-cloak class="ng-cloak" >
-
     <div id="w" class="clearfix">
         <div class="dashboard-1" style="display: none">
             <ul id="sidemenu">
@@ -115,8 +114,9 @@
                         </ul>
                         <button href="" ng-click="doSyncDevices(0)" onclick="return false;" class="sync_button override-width pull-left" ng-style="{'background-color':sync_btn_background_color}"  ng-disabled="connectDevice"><i class="fa fa-exchange" aria-hidden="true"></i>&nbsp;{{syncBtnTxt}}&nbsp;</button>
                         <input hidden id="main-start-date" ng-model="newSelectedDate">
+                        <div class="margin-top-5 pull-right" style="padding:7px" ng-click="mealPlanCalender()"><i class="fa fa-calendar mouse-pointer"></i></div>
                         <div id="ui-datepicker" class="pull-right main-datepicker">
-                            <div class="margin-top-5">{{newSelectedDate}}&nbsp;&nbsp;<i class="fa fa-calendar mouse-pointer" ng-click="mealPlanCalender()"></i></div>
+                            <div class="margin-top-5 profile_input override" >{{newSelectedDate}}</div>
                         </div>
                         <div class="margin-top-5 pull-right">Date<span>:</span></div>
                     </div>

@@ -1,5 +1,5 @@
 var userApp= angular.module('userApp', ['ngRoute','oc.lazyLoad','ngCookies','ngAnimate','requestModule','angular-nicescroll','angular-svg-round-progress']);
-userApp.controller('UserMainDashboardController',['$scope','requestHandler','$rootScope','$location','roundProgressService','$window',function($scope,requestHandler,$rootScope,$location,roundProgressService,$window) {
+userApp.controller('UserMainDashboardController',['$scope','requestHandler','$rootScope','$location','roundProgressService','$window','Flash',function($scope,requestHandler,$rootScope,$location,roundProgressService,$window,Flash) {
     $rootScope.isMenuShow=1;
     $scope.isConnectWearable=false;
     $scope.doGetHistoryReport=function(id)  {
@@ -65,6 +65,26 @@ userApp.controller('UserMainDashboardController',['$scope','requestHandler','$ro
                 graphTitles.xaxis = "Date Range";
                 graphTitles.color = '#e67300';
                 graphTitles.suffix =' mm/dl';
+                $scope.drawBloodGlucoseGraph(diabeticReport, graphTitles, graphDates);
+            });
+        }
+       else if(id==4){
+            requestHandler.postRequest("user/getWearableDataGraph/", {"startdate": firstDay, "enddate": lastDay}).then(function (response) {
+                $scope.diabeticRecord = response.data.wearable;
+                $.each($scope.diabeticRecord, function (index, value) {
+                    var diabeticHistory = [];
+                    var date = value.date.split("/");
+                    diabeticHistory.push(monthNames[(date[1] - 1)] + ' ' + date[0]);
+                    diabeticHistory.push(parseFloat(value.HbA1c));
+                    graphDates.push(monthNames[(date[1] - 1)] + ' ' + date[0]);
+                    diabeticReport.push(diabeticHistory);
+                });
+                graphTitles.title = "HBA1c Graph( " + firstDay + " - " + lastDay + " )";
+                graphTitles.name = "HBA1c value";
+                graphTitles.yaxis = "HBA1c value (%)";
+                graphTitles.xaxis = "Date Range";
+                graphTitles.color = '#ff884d';
+                graphTitles.suffix =' %';
                 $scope.drawBloodGlucoseGraph(diabeticReport, graphTitles, graphDates);
             });
         }
@@ -168,6 +188,18 @@ userApp.controller('UserMainDashboardController',['$scope','requestHandler','$ro
                 });
             });
         });
+    };
+
+    // to delete user appointment
+    $scope.doDeleteDoctorAppointment=function(id){
+        if(confirm("Are you sure you want to delete?")){
+            requestHandler.postRequest("user/deletedoctorappointment/",{"logid":id}).then(function(response){
+                Flash.create('success', "Successfully Deleted", 'alert');
+                $scope.userGetAllAppointments();
+            }, function(){
+                errorMessage(Flash,"Please try again later!");
+            });
+        }
     };
     //Budget value
     $scope.getUserBudget=function(){

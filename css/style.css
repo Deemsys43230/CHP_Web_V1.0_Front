@@ -19333,7 +19333,7 @@ mwl-calendar .cal-month-box [class*="cal-cell"] {
     right: 0;
     position: relative;
     padding: 10px 0;
-    height: 280px;
+    height: 305px;
     z-index: 1;
     margin-top:10px;
     background-color: #fff;
@@ -19397,7 +19397,7 @@ mwl-calendar .cal-month-box [class*="cal-cell"] {
 }
 .appointment-text{
     color: #ee6f5a!important;
-    margin-top: 20px;
+    margin-top: -115px;
     font-size: x-large;
     font-style: italic;
 }
@@ -19461,6 +19461,9 @@ mwl-calendar .cal-month-box [class*="cal-cell"] {
     color:#e44f37 !important;
     background-color: #eee;
     padding:5px;
+}
+.user_dashboard_appointment_scrollbar{
+    height: 185px;
 }
 .vitals-alignment{
     margin-left:0;
