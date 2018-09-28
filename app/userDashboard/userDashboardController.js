@@ -637,17 +637,22 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
 
         $scope.doSyncDevices=function(id){
             $scope.connectDevice=true;
-            $scope.syncBtnTxt="Synchronizing...";
+            if(id!=2){
+                $scope.syncBtnTxt="Synchronizing...";
+            }
             var date = selectedDate;
             requestHandler.postRequest("user/syncWearableData/",{"date":date}).then(function(response){
                 if(response.data.Response_status==0){
                     $scope.isDashboardConnectWearable=true;
                     $('#device_not_connect').addClass('dashboard_overlay');
                 }
-              $scope.doGetConnectedDevices();
-                    if(id=0){
-                        $location.path("dashboard");
-                    }
+
+                if(id!=2) {
+                    $scope.doGetConnectedDevices();
+                }
+                    // if(id=0){
+                    //     $location.path("dashboard");
+                    // }
 
               $scope.connectDevice=false;
             $scope.initialLoadFoodAndExercise(date);
@@ -4987,7 +4992,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
         $scope.calendarText='Food Intake';
         $scope.showFoodMoal=1;
         $scope.mealPlanCalender();
-        $scope.doSyncDevices(1);
+        $scope.doSyncDevices(2);
     };
 
     if($rootScope.isMenuClicked==3){
@@ -4999,7 +5004,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
         $("#dailyupdate").click();
         $("#energyspent").click();
         $scope.calendarText='Energy Spent';
-        $scope.doSyncDevices(1);
+        $scope.doSyncDevices(2);
     };
     if($rootScope.isMenuClicked==4){
         $("#dailyupdate").click();
@@ -5008,7 +5013,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
     };
     if($rootScope.isMenuClicked==5){
         $("#medicationsmenu").click();
-        $scope.doSyncDevices(1);
+        $scope.doSyncDevices(2);
     };
     if($rootScope.isMenuClicked==6){
       $("#history-menu").click();
