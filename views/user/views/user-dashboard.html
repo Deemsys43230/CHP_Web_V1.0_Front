@@ -1,5 +1,5 @@
 <div class="page-banner1" ng-cloak class="ng-cloak" >
-    <div id="height" style="height: 1780px">
+    <div id="user-dashboard-height">
     <div id="user-dashboard-content" ng-show="isDiabetic==1">
         <div class="col-lg-12 col-md-12 col-sm-12">
             <div class="col-md-2 col-sm-2">
@@ -170,7 +170,7 @@
          <div class="col-lg-12 col-md-12 col-sm-12" ng-show="isDiabetic==1">
              <div id="user-dashboard-appointment">
                  <div class="col-lg-12 col-md-12 col-sm-12 ">
-                     <div class="col-md-1 col-sm-1 col-lg-1 pull-right">
+                     <div class="col-md-1 col-sm-2 col-lg-1 pull-right">
                          <a href="#doctor-appointment" class="back-button pull-right margin-left-5"><i class="fa fa-plus-circle"></i>&nbsp;Add</a>
                      </div>
                      <div flash-message="2000" class="col-lg-3 col-md-3 col-sm-3 pull-right no-padding"></div>
@@ -249,18 +249,18 @@
                  <div class="col-lg-12 col-md-12 col-sm-12  margin-top-10">
                      <div class="col-lg-2 col-md-2 col-sm-2 vitals-alignment"></div>
                      <div class="user-dashboard-vitals col-lg-2 col-md-2 col-sm-2">
-                         <div class="bloodoxygen-textcolor  text-center vitals-text">Blood Oxygen</div>
-                         <div class="col-md-12 col-lg-12 col-sm-12 text-center">
-                             <img class="dashboard-vital-img" src="../../images/bloodoxygen.png"/>
-                         </div>
-                         <div class="bloodoxygen-textcolor text-center vitals-unit">{{wearable.bloodoxygen==null?"NA":wearable.bloodoxygen}}&nbsp;{{wearable.bloodoxygen==null?" ":"(%)"}}</div>
-                     </div>
-                     <div class="user-dashboard-vitals col-lg-2 col-md-2 col-sm-2">
                          <div class="bloodglucose-textcolor text-center vitals-text">Blood Glucose</div>
                          <div class="col-md-12 col-lg-12 col-sm-12 text-center">
                              <img class="dashboard-vital-img" src="../../images/bloodglucose.png"/>
                          </div>
                          <div class="bloodglucose-textcolor text-center vitals-unit">{{wearable.randombloodglucose==null?"NA":wearable.randombloodglucose}} / {{wearable.fastingbloodglucose==null?"NA":wearable.fastingbloodglucose}}&nbsp;{{wearable.fastingbloodglucose==null?" ":"(mg/dl)"}}</div>
+                     </div>
+                     <div class="user-dashboard-vitals col-lg-2 col-md-2 col-sm-2">
+                         <div class="bloodoxygen-textcolor  text-center vitals-text">Blood Oxygen</div>
+                         <div class="col-md-12 col-lg-12 col-sm-12 text-center">
+                             <img class="dashboard-vital-img" src="../../images/bloodoxygen.png"/>
+                         </div>
+                         <div class="bloodoxygen-textcolor text-center vitals-unit">{{wearable.bloodoxygen==null?"NA":wearable.bloodoxygen}}&nbsp;{{wearable.bloodoxygen==null?" ":"(%)"}}</div>
                      </div>
                      <div class="user-dashboard-vitals col-lg-2 col-md-2 col-sm-2">
                          <div class="bloodpessure-textcolor text-center vitals-text">Blood Pressure</div>

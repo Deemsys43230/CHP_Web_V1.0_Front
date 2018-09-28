@@ -1686,6 +1686,9 @@
         left: 130px!important;
         position:relative !important;
     }
+    #user-dashboard-height{
+        height:1795px;
+    }
 
 }
 

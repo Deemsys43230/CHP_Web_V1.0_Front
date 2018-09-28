@@ -46,7 +46,6 @@ commonApp.controller('UserRegistrationController',['$scope','requestHandler','Fl
         $scope.steps = 6;
 
     };
-    ;
     $scope.customPlanAlert = function () {
         $(function () {
             $("#lean_overlay").fadeTo(1000);
@@ -98,6 +97,9 @@ commonApp.controller('UserRegistrationController',['$scope','requestHandler','Fl
         $scope.submitted=false;
         $scope.userActivitySubmitted=false;
         $scope.steps=$scope.steps-1;
+        if($scope.changePlanSkipStep==false){
+            $scope.steps=$scope.steps-1;
+        }
     };
     $scope.doGetUserPlanOverView= function (possibiledate) {
         $scope.customAlertChangePlan=false;

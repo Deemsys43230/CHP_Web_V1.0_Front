@@ -16291,21 +16291,20 @@ a.main-button.red_back {
     border: 2px solid #e4635d;
 }
 .heart-textcolor{
-    color: #c1272d;
+    color: #d80008;
 }
 .heart-border{
-    border: 2px solid #c1272d;
+    border: 2px solid #d80008;
 
 }
 .fat-textcolor{
     color: #8bca41;
 }
 .bloodpessure-textcolor{
-    color: #0098d8;
+    color: #c1272d;
 }
 .bloodpessure-border{
-    border: 2px solid #0098d8;
-
+    border: 2px solid #c1272d;
 }
 .bloodoxygen-textcolor{
     color: #fb0069;
@@ -16319,7 +16318,6 @@ a.main-button.red_back {
 }
 .bloodglucose-border{
     border: 2px solid #df4444;
-
 }
 .bodytemperature-border{
     border: 2px solid #069da2;
@@ -19467,4 +19465,7 @@ mwl-calendar .cal-month-box [class*="cal-cell"] {
 }
 .vitals-alignment{
     margin-left:0;
+}
+#user-dashboard-height{
+   height: 1780px;
 }

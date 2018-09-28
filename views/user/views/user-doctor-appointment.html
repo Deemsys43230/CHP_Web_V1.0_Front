@@ -3,6 +3,9 @@
     <div class="container">
         <div class="row min-height-450" ng-init="init()">
             <div class="col-md-12 col-md-12 col-sm-12">
+                <div class="margin-top-5 no-padding pull-right">
+                    <a href="#user-dashboard" class="back-button pull-right margin-left-5 margin-top5"><i class="fa fa-arrow-circle-o-left"></i>&nbsp;Go To Dashboard</a>
+                </div>
                 <!--<a id="modal_user_doctor_appoinment" href="#user-doctor-appointment" class="back-button pull-right margin-left-5" ng-click="userBookDoctorAppointment()"><i class="fa fa-plus-circle"></i>&nbsp;Book Appointment</a>-->
                 <div flash-message="2000" class="col-lg-3 col-md-3 col-sm-3 pull-right no-padding"></div>
                 <h5 class="classic-title"><span><a href="#meal-plans"><i class="fa fa-calendar-check-o"></i>&nbsp;&nbsp;Doctor Appointment</a></span>&nbsp;</h5>
@@ -32,7 +35,7 @@
                                 <span class="pull-left margin-left-20">Appointment Details</span><br/>
                             <div class="col-lg-12 col-md-12 col-sm-12"><hr/></div>
                                 <div class="col-lg-12 col-md-12 col-sm-12 pull-right">
-                                    <a id="modal_user_doctor_appoinment" href="#user-doctor-appointment" ng-hide="canEnableAppointment" class="back-button pull-right margin-left-5" ng-click="userBookDoctorAppointment()"><i class="fa fa-plus-circle"></i>&nbsp;Book Appointment</a>
+                                    <a id="modal_user_doctor_appoinment" href="#user-doctor-appointment" ng-hide="canEnableAppointment" class="back-button pull-right margin-left-5" ng-click="userBookDoctorAppointment()"><i class="fa fa-plus-circle"></i>&nbsp;Add Appointment</a>
                                 </div>
                                 <div  class="coach-view-width">
                                     <div class="user-view-appointment col-lg-12 col-md-12 col-sm-12" ng-repeat= "appointmentsSingle in selectedDateAppointment">

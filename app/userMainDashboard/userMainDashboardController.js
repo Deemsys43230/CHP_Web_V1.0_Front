@@ -97,7 +97,7 @@ userApp.controller('UserMainDashboardController',['$scope','requestHandler','$ro
                 $scope.isDiabeticPerson = 1;
             }
             else {
-                $('#height').css({'height':'945px'});
+                $('#user-dashboard-height').css({'height':'945px'});
             }
         });
     };
@@ -282,7 +282,7 @@ userApp.controller('UserMainDashboardController',['$scope','requestHandler','$ro
         });
     };
     $scope.init=function(){
-        $scope.doGetHistoryReport(1);
+        $scope.doGetHistoryReport(4);
         $scope.doGetUserKeyDetails();
         $scope.doGetWearableData();
         $scope.userGetAllAppointments();

@@ -249,7 +249,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
 
 
         $scope.medicationforArray = ['Fever','Typhoid','Diabetic','Sugar','Blood Pressure','Hypertension','Heart Disease','Asthma','Obesity','Headache',
-          'Depression','Gastro Intestinal','Alzhema','Other'];            
+          'Depression','Gastro Intestinal','Alzhema','Other'];
 
         $scope.sessionid=1;
         //Do Get User Medication List
@@ -295,10 +295,10 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
                     $scope.originalMedication.medication=($scope.userMedicationData);
                     $scope.userMedicationGroupedData.push($scope.originalMedication);
                 }
+                console.log( $scope.userMedicationGroupedData);
             });
 
         };
-
 
         $scope.getMedicationsSession=function(sessionSet){
 
@@ -337,7 +337,13 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
             }
             requestHandler.postRequest("user/insertorupdatemedication/",$scope.medication).then(function(response){
                  $scope.doGetMedicationListByUser();
-                 successMessage(Flash,"Successfully Added");
+                if($scope.isNew==false){
+                    successMessage(Flash,"Successfully Updated");
+                }
+                else{
+                    successMessage(Flash,"Successfully Added");
+                }
+
                  $scope.loaded=false;
              }, function(){
                 errorMessage(Flash,"Please try again later!");
@@ -4978,6 +4984,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
         $scope.dashboardurl="#dashboard";
         $("#dailyupdate").click();
         $("#foodintake").click();
+        $scope.calendarText='Food Intake';
         $scope.showFoodMoal=1;
         $scope.mealPlanCalender();
         $scope.doSyncDevices(1);
@@ -4991,11 +4998,13 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
     if($rootScope.isMenuClicked==2){
         $("#dailyupdate").click();
         $("#energyspent").click();
+        $scope.calendarText='Energy Spent';
         $scope.doSyncDevices(1);
     };
     if($rootScope.isMenuClicked==4){
         $("#dailyupdate").click();
         $("#weight-water").click();
+        $scope.calendarText='Weight & Water Log';
     };
     if($rootScope.isMenuClicked==5){
         $("#medicationsmenu").click();
@@ -5015,12 +5024,15 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
 
     $('#energyspent').click(function(e) {
         $scope.showFoodMoal=0;
+        $scope.calendarText='Energy Spent';
     });
     $('#weight-water').click(function(e) {
         $scope.showFoodMoal=0;
+        $scope.calendarText='Weight & Water Log';
     });
     $('#foodintake').click(function(e) {
         $scope.showFoodMoal=1;
+        $scope.calendarText='Food Intake';
         $scope.mealPlanCalender();
     });
 

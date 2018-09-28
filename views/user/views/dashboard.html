@@ -838,7 +838,7 @@
                                                 {{mediactionsDiaryData.date}}
                                             </div>
                                             <li class="col-lg-12 col-md-12 col-sm-12" ng-repeat="data in mediactionsDiaryData.medication | orderBy:'$index':true">
-                                                <a href="" ng-click="deletemedication(mediactionsDiaryData.logid)" class="pull-right food_close" title="Delete Medications">x</a>
+                                                <a href="" ng-click="deletemedication(data.logid)" class="pull-right food_close" title="Delete Medications">x</a>
                                                 <div class="food_name">
                                                     {{data.medicinename}}
                                                 </div>
@@ -853,8 +853,8 @@
                                                     <span >
                                                         <span class="text-bold">Shared with Coach : </span>{{data.issharable==1?'Yes':'No'}}
                                                     </span>
-                                                        <span class="pull-right text-bold padding-left-10"> <a href="" title="Edit Medications" ng-click="doEditUserMedication(mediactionsDiaryData.logid)"><i class="fa fa-pencil"></i></a></span>
-                                                        <span class="pull-right text-bold padding-left-10"><a href="" ng-click="viewUserMedication(mediactionsDiaryData.logid)" title="View Medications"><i class="fa fa-eye"></i></a></span>
+                                                        <span class="pull-right text-bold padding-left-10"> <a href="" title="Edit Medications" ng-click="doEditUserMedication(data.logid)"><i class="fa fa-pencil"></i></a></span>
+                                                        <span class="pull-right text-bold padding-left-10"><a href="" ng-click="viewUserMedication(data.logid)" title="View Medications"><i class="fa fa-eye"></i></a></span>
                                                     </div>
                                                 </div>
                                             </li>
@@ -1116,15 +1116,15 @@
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-4 no-padding">
                         <div class="new-update">
-                            <div class="col-md-12 col-lg-12 col-sm-12 bloodoxygen-textcolor margin-top-5"><small>Blood&nbsp;Oxygen</small></div>
-                            <div class="col-md-12 col-lg-12 col-sm-12 no-padding well-image common-border bloodoxygen-border">
-                            <div class="col-md-4 col-lg-4 col-sm-4 no-padding margin-top-5">
-                                <img class="img-width" src="../../images/bloodoxygen.png"/>
-                            </div>
-                            <div class="col-md-8 col-lg-8 col-sm-8 no-padding">
-                                <div class="bloodoxygen-textcolor"><small>{{wearable.bloodoxygen==null?"NA":wearable.bloodoxygen}}</small></div>
-                                <div class="bloodoxygen-textcolor"><small>(%)</small></div>
-                            </div>
+                            <div class="col-md-12 col-lg-12 col-sm-12 bloodpessure-textcolor margin-top-5"><small>Blood&nbsp;Pressure</small></div>
+                            <div class="col-md-12 col-lg-12 col-sm-12 no-padding well-image common-border bloodpessure-border">
+                                <div class="col-md-4 col-lg-4 col-sm-4 no-padding margin-top-10">
+                                    <img class="img-width" src="../../images/heart1.gif"/>
+                                </div>
+                                <div class="col-md-8 col-lg-8 col-sm-8 no-padding">
+                                    <div class="bloodpessure-textcolor" title="Systolic Blood Pressure/Diastolic Blood Pressure"><small>{{wearable.systolic==null?"NA":wearable.systolic}} / {{wearable.diastolic==null?"NA":wearable.diastolic}}</small></div>
+                                    <div class="bloodpessure-textcolor" title="Systolic Blood Pressure/Diastolic Blood Pressure"><small>(mmHg)</small></div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -1132,15 +1132,15 @@
                 <div class="col-md-12 col-lg-12 col-sm-12 no-padding margin-top-10">
                     <div class="col-lg-4 col-md-4 col-sm-4 no-padding">
                         <div class="new-update">
-                            <div class="col-md-12 col-lg-12 col-sm-12 bloodpessure-textcolor margin-top-5"><small>Blood&nbsp;Pressure</small></div>
-                            <div class="col-md-12 col-lg-12 col-sm-12 no-padding well-image common-border bloodpessure-border">
-                            <div class="col-md-4 col-lg-4 col-sm-4 no-padding margin-top-10">
-                                <img class="img-width" src="../../images/heart1.gif"/>
-                            </div>
-                            <div class="col-md-8 col-lg-8 col-sm-8 no-padding">
-                                <div class="bloodpessure-textcolor" title="Systolic Blood Pressure/Diastolic Blood Pressure"><small>{{wearable.systolic==null?"NA":wearable.systolic}} / {{wearable.diastolic==null?"NA":wearable.diastolic}}</small></div>
-                                <div class="bloodpessure-textcolor" title="Systolic Blood Pressure/Diastolic Blood Pressure"><small>(mmHg)</small></div>
-                            </div>
+                            <div class="col-md-12 col-lg-12 col-sm-12 bloodoxygen-textcolor margin-top-5"><small>Blood&nbsp;Oxygen</small></div>
+                            <div class="col-md-12 col-lg-12 col-sm-12 no-padding well-image common-border bloodoxygen-border">
+                                <div class="col-md-4 col-lg-4 col-sm-4 no-padding margin-top-5">
+                                    <img class="img-width" src="../../images/bloodoxygen.png"/>
+                                </div>
+                                <div class="col-md-8 col-lg-8 col-sm-8 no-padding">
+                                    <div class="bloodoxygen-textcolor"><small>{{wearable.bloodoxygen==null?"NA":wearable.bloodoxygen}}</small></div>
+                                    <div class="bloodoxygen-textcolor"><small>(%)</small></div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -2420,7 +2420,7 @@
 </div>
     <div id="meal-plan-calendar" class="popupContainer-width-big" style="display:none;top: 12px!important;">
         <header class="popupHeader width-100">
-            <span class="header_title">Meal Plan</span>
+            <span class="header_title">{{calendarText}}</span>
             <span class="modal_close"><i class="fa fa-times"></i></span>
         </header>
 
@@ -2637,14 +2637,14 @@
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-4 no-padding">
                     <div class="new-update">
-                        <div class="col-md-12 col-lg-12 col-sm-12 bloodoxygen-textcolor margin-top-5"><small>Blood&nbsp;Oxygen</small></div>
-                        <div class="col-md-12 col-lg-12 col-sm-12 no-padding well-image common-border bloodoxygen-border">
-                            <div class="col-md-4 col-lg-4 col-sm-4 no-padding margin-top-5">
-                                <img class="img-width" src="../../images/bloodoxygen.png"/>
+                        <div class="col-md-12 col-lg-12 col-sm-12 bloodglucose-textcolor margin-top-5"><small>Blood&nbsp;Glucose</small></div>
+                        <div class="col-md-12 col-lg-12 col-sm-12 no-padding well-image common-border bloodglucose-border">
+                            <div class="col-md-4 col-lg-4 col-sm-4 no-padding margin-top-10">
+                                <img class="img-width" style="height: 32px;" src="../../images/bloodglucose.png"/>
                             </div>
                             <div class="col-md-8 col-lg-8 col-sm-8 no-padding">
-                                <div class="bloodoxygen-textcolor"><small>{{wearable.bloodoxygen==null?"NA":wearable.bloodoxygen}}</small></div>
-                                <div class="bloodoxygen-textcolor"><small>(%)</small></div>
+                                <div class="bloodglucose-textcolor" title="Random Glucose/Fasting Glucose"><small>{{wearable.randombloodglucose==null?"NA":wearable.randombloodglucose}} / {{wearable.fastingbloodglucose==null?"NA":wearable.fastingbloodglucose}}</small></div>
+                                <div class="bloodglucose-textcolor" title="Random Glucose/Fasting Glucose"><small>(mg/dl)</small></div>
                             </div>
                         </div>
                     </div>
@@ -2667,14 +2667,14 @@
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-4 no-padding">
                     <div class="new-update">
-                        <div class="col-md-12 col-lg-12 col-sm-12 bloodglucose-textcolor margin-top-5"><small>Blood&nbsp;Glucose</small></div>
-                        <div class="col-md-12 col-lg-12 col-sm-12 no-padding well-image common-border bloodglucose-border">
-                            <div class="col-md-4 col-lg-4 col-sm-4 no-padding margin-top-10">
-                                <img class="img-width" style="height: 32px;" src="../../images/bloodglucose.png"/>
+                        <div class="col-md-12 col-lg-12 col-sm-12 bloodoxygen-textcolor margin-top-5"><small>Blood&nbsp;Oxygen</small></div>
+                        <div class="col-md-12 col-lg-12 col-sm-12 no-padding well-image common-border bloodoxygen-border">
+                            <div class="col-md-4 col-lg-4 col-sm-4 no-padding margin-top-5">
+                                <img class="img-width" src="../../images/bloodoxygen.png"/>
                             </div>
                             <div class="col-md-8 col-lg-8 col-sm-8 no-padding">
-                                <div class="bloodglucose-textcolor" title="Random Glucose/Fasting Glucose"><small>{{wearable.randombloodglucose==null?"NA":wearable.randombloodglucose}} / {{wearable.fastingbloodglucose==null?"NA":wearable.fastingbloodglucose}}</small></div>
-                                <div class="bloodglucose-textcolor" title="Random Glucose/Fasting Glucose"><small>(mg/dl)</small></div>
+                                <div class="bloodoxygen-textcolor"><small>{{wearable.bloodoxygen==null?"NA":wearable.bloodoxygen}}</small></div>
+                                <div class="bloodoxygen-textcolor"><small>(%)</small></div>
                             </div>
                         </div>
                     </div>
