@@ -19350,7 +19350,7 @@ mwl-calendar .cal-month-box [class*="cal-cell"] {
     background: #f8ba01;
     color: #fff !important;
     outline: none;
-    padding: 7px 30px;
+    padding: 7px 15px;
 }
 #user-dashboard-vitals {
     top: 40px;
