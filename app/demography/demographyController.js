@@ -265,8 +265,6 @@ userApp.controller('DemographyController',['$rootScope','$scope','requestHandler
                         }
                         else {
                             $rootScope.isDiabetic=2;
-                            $('.navbar-collapse ul').addClass('navbar-menu-right1');
-                            $('.navbar-collapse ul').removeClass('navbar-menu-right');
                         }
                     });
                 }else if(response.data.Response_status==2){
