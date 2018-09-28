@@ -195,7 +195,7 @@
                                 </div>
                                 <div class="col-lg-8 col-md-8 col-sm-8 margin-top-10">
                                     <!-- <input class="profile_input" name="secretquestion" ng-model="userProfile.secretquestion" maxlength="150" required/>-->
-                                    <select class="full-width main"  ng-model="userProfile.secretquestion" name="secretquestion">
+                                    <select class="full-width main"  ng-model="userProfile.secretquestion" name="secretquestion" ng-change="clearSecretAnswer()">
                                         <option value="">--Select secret question--</option>
                                         <option value="1">What was the name of your first pet?</option>
                                         <option value="2">What is the name of your best friend?</option>
@@ -212,10 +212,10 @@
                                     <h5>Secret&nbsp;Answer<span class="pull-right">:</span></h5>
                                 </div>
                                 <div class="col-lg-8 col-md-8 col-sm-8 margin-top-10">
-                                    <input class="profile_input" name="secretanswer" ng-model="userProfile.secretanswer" maxlength="150"/>
-                                        <!--<span ng-show="userProfileForm.secretanswer.$dirty&&userProfileForm.secretanswer.$invalid">-->
-                                <!--<span class="error-message textarea-errormessage10" ng-show="userProfileForm.secretanswer.$error.required"><span class="error-bottom">Required.</span></span>-->
-                                         <!--</span>-->
+                                    <input class="profile_input" name="secretanswer" ng-model="userProfile.secretanswer" maxlength="150" ng-required="userProfile.secretquestion!=''&&userProfile.secretquestion!=null" ng-model-options="{ allowInvalid: true }"/>
+                                      <span ng-show="userProfileForm.secretanswer.$dirty&&userProfileForm.secretanswer.$invalid">
+                                <span class="error-message textarea-errormessage10" ng-show="userProfileForm.secretanswer.$error.required"><span class="error-bottom">Required.</span></span>
+                                   </span>
                                 </div>
                                 <div class="col-lg-4 col-md-4 col-sm-4 padding-top-4 padding-right-0 margin-top-10">
                                     <h5>Prefer Unit<span class="pull-right">:</span></h5>

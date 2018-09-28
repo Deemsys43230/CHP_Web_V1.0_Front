@@ -176,9 +176,13 @@ userApp.controller('UserProfileController',['$scope','requestHandler','Flash','$
        if($scope.userProfile.secretquestion=="") {
            $scope.userProfile.secretquestion=null;
        }
+       alert($scope.userProfile.secretanswer);
         if($scope.userProfile.secretanswer=="") {
+            alert($scope.userProfile.secretanswer);
             $scope.userProfile.secretanswer=null;
+            console.log($scope.userProfile.secretanswer);
         }
+        console.log($scope.userProfile);
         $scope.userProfile.unitPreference =parseInt($scope.userProfile.unitPreference);
 
         requestHandler.getRequest("getUserId/","").then(function(response){
@@ -310,6 +314,12 @@ userApp.controller('UserProfileController',['$scope','requestHandler','Flash','$
 
         return angular.equals ($scope.orginalUserProfile, $scope.userProfile);
     };
+
+    // Clear Secret Answer
+    $scope.clearSecretAnswer = function(){
+        if($scope.userProfile.secretquestion=="")
+            $scope.userProfile.secretanswer="";
+    }
 
     //Change Password
     $scope.doChangePassword=function(){
