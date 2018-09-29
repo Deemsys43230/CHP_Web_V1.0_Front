@@ -96,8 +96,11 @@ commonApp.controller('UserRegistrationController',['$scope','requestHandler','Fl
         $scope.userPlanSubmitted=false;
         $scope.submitted=false;
         $scope.userActivitySubmitted=false;
-        $scope.steps=$scope.steps-1;
-        if($scope.changePlanSkipStep==false){
+        if($scope.changePlanSkipStep){
+            $scope.steps=$scope.steps-1;
+        }else if($scope.changePlanSkipStep==false && $scope.steps==2){
+            $scope.steps=0;
+        }else{
             $scope.steps=$scope.steps-1;
         }
     };

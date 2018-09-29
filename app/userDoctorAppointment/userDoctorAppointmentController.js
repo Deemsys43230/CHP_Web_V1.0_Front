@@ -30,14 +30,15 @@ userApp.controller('UserDoctorAppointment',['$scope','requestHandler','Flash','$
         },
         nextMonth :function(monthIndex){
             var todayDate = new Date();
-            $scope.fromDate=moment(new Date(todayDate.getFullYear(), monthIndex+1, 1)).format('DD/MM/YYYY HH:mm:ss');
-            $scope.endDate=moment(new Date(todayDate.getFullYear(), monthIndex+2, 0)).format('DD/MM/YYYY HH:mm:ss');
+            $scope.fromDate=moment(new Date(todayDate.getFullYear(), monthIndex+1, 1)).format('DD/MM/YYYY 00:00:00');
+            $scope.endDate=moment(new Date(todayDate.getFullYear(), monthIndex+2, 0)).format('DD/MM/YYYY 23:59:59');
+            console.log(  $scope.endDate);
             $scope.doGetDoctorAppointmentList();
         },
         prevMonth :function(monthIndex){
             var todayDate = new Date();
-            $scope.fromDate=moment(new Date(todayDate.getFullYear(), monthIndex-1, 1)).format('DD/MM/YYYY HH:mm:ss');
-            $scope.endDate=moment(new Date(todayDate.getFullYear(), monthIndex, 0)).format('DD/MM/YYYY HH:mm:ss');
+            $scope.fromDate=moment(new Date(todayDate.getFullYear(), monthIndex-1, 1)).format('DD/MM/YYYY 00:00:00');
+            $scope.endDate=moment(new Date(todayDate.getFullYear(), monthIndex, 0)).format('DD/MM/YYYY 23:59:59');
             $scope.doGetDoctorAppointmentList();
         }
 
@@ -134,7 +135,7 @@ userApp.controller('UserDoctorAppointment',['$scope','requestHandler','Flash','$
         $('#set-appointment-date').daterangepicker(options);
         $scope.userDoctorAppointmentForm.$setPristine();
         $scope.isNew = true;
-        $scope.title = "Book Appointment";
+        $scope.title = "Add Appointment";
         $(function(){
             $("#lean_overlay").fadeTo(1000);
             $("#user-doctor-appointment").fadeIn(600);

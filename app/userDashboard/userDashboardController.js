@@ -4981,11 +4981,36 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
         var now = new Date(oldDateParts[2],oldDateParts[1]-1,1);
         $scope.mealPlanStartDate=moment(new Date(now)).format('DD/MM/YYYY');
         $scope.mealPlanEndDate=moment(new Date(now.getFullYear(), now.getMonth()+1, 0)).format('DD/MM/YYYY');
-        $scope.doGetUserMealPlanCalendar( $scope.mealPlanStartDate, $scope.mealPlanEndDate);
+        if($scope.isCallApiDetails){
+            $scope.doGetUserMealPlanCalendar( $scope.mealPlanStartDate, $scope.mealPlanEndDate);
+        }
+        else{
+            $scope.events=[];
+            $(function(){
+                $("#lean_overlay").fadeTo(1000);
+                $("#meal-plan-calendar").fadeIn(600);
+                $(".common_model").show();
+
+            });
+
+            $(".modal_close").click(function(){
+                $(".common_model").hide();
+                $("#meal-plan-calendar").hide();
+                $("#lean_overlay").hide();
+            });
+
+            $("#lean_overlay").click(function(){
+                $(".common_model").hide();
+                $("#meal-plan-calendar").hide();
+                $("#lean_overlay").hide();
+            });
+        }
+
     };
 
     //to enable meal-plan popup
     if($location.absUrl().indexOf("dashboard")!=-1 && $rootScope.isMenuClicked==1){
+        $scope.isCallApiDetails=true;
         $scope.dashboardurl="#dashboard";
         $("#dailyupdate").click();
         $("#foodintake").click();
@@ -5001,12 +5026,14 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
         $('#device_not_connect').removeClass('dashboard_overlay');
     };
     if($rootScope.isMenuClicked==2){
+        $scope.isCallApiDetails=false;
         $("#dailyupdate").click();
         $("#energyspent").click();
         $scope.calendarText='Energy Spent';
         $scope.doSyncDevices(2);
     };
     if($rootScope.isMenuClicked==4){
+        $scope.isCallApiDetails=false;
         $("#dailyupdate").click();
         $("#weight-water").click();
         $scope.calendarText='Weight & Water Log';
@@ -5028,17 +5055,21 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
     };
 
     $('#energyspent').click(function(e) {
+        $scope.isCallApiDetails=false;
         $scope.showFoodMoal=0;
         $scope.calendarText='Energy Spent';
     });
     $('#weight-water').click(function(e) {
+        $scope.isCallApiDetails=false;
         $scope.showFoodMoal=0;
         $scope.calendarText='Weight & Water Log';
     });
     $('#foodintake').click(function(e) {
+        $scope.isCallApiDetails=true;
         $scope.showFoodMoal=1;
         $scope.calendarText='Food Intake';
         $scope.mealPlanCalender();
+
     });
 
     //to get current date while clicking calendar cell
@@ -5076,6 +5107,8 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
     };
     // to highlight selected date
      $scope.cellModifier =function(cell) {
+         console.log("inside this function");
+         console.log($scope.celldate, $scope.newSelectedDate);
          $scope.celldate=moment(cell.date._d).format('DD/MM/YYYY');
          if ($scope.celldate=== $scope.newSelectedDate) {
              cell.cssClass = 'calendar-selected-day-highlight';
@@ -5095,7 +5128,9 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
             var now = new Date(newDateParts[2],newDateParts[1]-1,1);
             $scope.mealPlanStartDate=moment(new Date(now)).format('DD/MM/YYYY');
             $scope.mealPlanEndDate=moment(new Date(now.getFullYear(), now.getMonth()+1, 0)).format('DD/MM/YYYY');
-            $scope.doGetUserMealPlanCalendar( $scope.mealPlanStartDate, $scope.mealPlanEndDate);
+            if($scope.isCallApiDetails){
+                $scope.doGetUserMealPlanCalendar( $scope.mealPlanStartDate, $scope.mealPlanEndDate);
+            }
         }
     });
 

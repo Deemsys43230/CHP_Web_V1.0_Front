@@ -101,6 +101,7 @@
                         <p >Hours</p>
                         <select class="col-md-6 medications" name="selectedHours"  ng-init="selectedHours='0'" ng-model="selectedHours" required>
                             <option value="">--Select--</option>
+                            <option value="00">0</option>
                             <option value="01">1</option>
                             <option value="02">2</option>
                             <option value="03">3</option>
@@ -124,7 +125,6 @@
                             <option value="21">21</option>
                             <option value="22">22</option>
                             <option value="23">23</option>
-                            <option value="24">24</option>
                         </select>
                         <span ng-show="userDoctorAppointmentForm.selectedHours.$dirty&&userDoctorAppointmentForm.selectedHours.$invalid">
                             <span class="error-message" ng-show="userDoctorAppointmentForm.selectedHours.$error.required"><span>Required.</span></span>
@@ -134,6 +134,7 @@
                         <p >Minutes</p>
                         <select class="col-md-6 medications" name="selectedMinutes" ng-init="selectedMinutes='0'" ng-model="selectedMinutes" required>
                             <option value="">--Select--</option>
+                            <option value="00">00</option>
                             <option value="05">05</option>
                             <option value="10">10</option>
                             <option value="15">15</option>
@@ -145,7 +146,6 @@
                             <option value="45">45</option>
                             <option value="50">50</option>
                             <option value="55">55</option>
-                            <option value="59">60</option>
                         </select>
                         <span ng-show="userDoctorAppointmentForm.selectedMinutes.$dirty&&userDoctorAppointmentForm.selectedMinutes.$invalid">
                             <span class="error-message" ng-show="userDoctorAppointmentForm.selectedMinutes.$error.required"><span>Required.</span></span>
