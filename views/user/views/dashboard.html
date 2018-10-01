@@ -2454,7 +2454,7 @@
                         on-view-change-click="false"
                         cell-modifier="cellModifier(calendarCell)">
                 </mwl-calendar>
-                <div class="margin-top-10">
+                <div ng-show="isCallApiDetails" class="margin-top-10">
                     <ul class="legend">
                         <li><span class="planachieved"></span>&nbsp;Achieved</li>
                         <li><span class="notachieved"></span> &nbsp;Not Achieved</li>
