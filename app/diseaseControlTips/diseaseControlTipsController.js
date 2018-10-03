@@ -44,17 +44,27 @@ commonApp.controller('DiseaseControlTipsListController',['$scope','requestHandle
 
     // Get list of CDC content
     $scope.getCDCList=function(){
-       requestHandler.getRequest("getHealthyLivingListByUser/","").then(function(response){
-          $scope.cdcContentList=response.data.healthyliving;
+        $scope.commonCdcListPagination={
+            "limit": $scope.commonCdcPagination.itemsPerPage,
+            "offset":($scope.commonCdcPagination.pageNumber-1)*$scope.commonCdcPagination.itemsPerPage
+        };
+       requestHandler.postRequest("getHealthyLivingListByUser/",$scope.commonCdcListPagination).then(function(response){
+          $scope.cdcContentList=response.data;
+           $scope.paginationLoad=true;
 //console.log($scope.cdcContentList.syndicateid);
        });
     };
 
     $scope.init=function(){
-    $scope.getCDCList();
+        $scope.paginationLoad=false;
+        $scope.commonCdcPagination={"itemsPerPage":6,"pageNumber":1};
+
     };
 
     $scope.init();
+    $scope.$watch("commonCdcPagination.pageNumber",function(){
+        $scope.getCDCList();
+    });
     }]);
 
 commonApp.controller('DiseaseControlTipController',['$scope','requestHandler','Flash','$location',function($scope,requestHandler,Flash,$location) {
