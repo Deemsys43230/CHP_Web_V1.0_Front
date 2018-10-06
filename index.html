@@ -6,7 +6,6 @@
 <head>
 
     <style>
-
         .centerize {
             text-align: center;
             margin-top: 20px;
@@ -152,73 +151,186 @@
     <div class="container" style="width: 100% !important;">
     <div class="row">
         <!-- Carousel -->
-        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+        <div class="carousel fade-carousel slide" data-ride="carousel" data-interval="10000" id="bs-carousel">
+            <!-- Overlay -->
+            <div class="overlay"></div>
+
+            <!-- Indicators -->
+            <ol class="carousel-indicators">
+                <li data-target="#bs-carousel" data-slide-to="0" class="active"></li>
+                <li data-target="#bs-carousel" data-slide-to="1"></li>
+                <li data-target="#bs-carousel" data-slide-to="2"></li>
+                <li data-target="#bs-carousel" data-slide-to="3"></li>
+                <li data-target="#bs-carousel" data-slide-to="4"></li>
+                <li data-target="#bs-carousel" data-slide-to="5"></li>
+            </ol>
+
             <!-- Wrapper for slides -->
             <div class="carousel-inner">
-                <div class="item active">
-                    <img  src="images/slider-back-1.jpg" alt="First slide">
-                  <!--  <img class="hidden-lg hidden-md hidden-sm" src="images/slider-back-1.jpg" style="height: 350px;">-->
-                    <!-- Static Header -->
-                    <div class="slider-font margin-left-10">
-                        <div class="col-md-7 col-sm-9 col-xs-12 margin-bottom-20">
-                            <span class="hidden-xs"><br/></span>
-                            <h1><span class="small uppercase">YOU'VE COME TO THE RIGHT PLACE.<br/>Determine a healthy life-style for prolonging your life.</span></h1>
-                            <span class="hidden-xs margin-top-20"><br/></span>
-                            <div class="divH1 h4">
+               <div class="item slides active">
+                    <div class="slide-1"  id="slide-1" style="display: block;">
+                        <div class="hero">
+                            <hgroup>
+                                <h1 id="slider1_firsttext">It’s not a short term diet</h1>
+                                <h2 id="slider1_secondtext">It’s a long term lifestyle change</h2>
                                 <br/>
-                                Just record your weight. We,
-                                <span class="hidden-xs"><br/><br/></span>
-                                    <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
-                                        <ul>
-                                            <li>Reveal your daily needed calorie budget. Grab it and Get Started!!</li>
-                                            <li>Provide you a better food and exercise catalogue.</li>
-                                            <li>Assist you with in-time pertinent advice from our knowledgeable experts.</li>
-                                        </ul>
-                                    </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <img  src="images/slider-back-new.png" alt="Second slide">
-                  <!--  <img class="hidden-lg hidden-md hidden-sm" src="images/slider-back-4.jpg" style="height: 350px;">-->
-                    <!-- Static Header -->
-                    <div class="slider-font margin-left-10">
-                        <img width="100%" height="auto" src="images/responsive-new.png"/>
-                        <div class="col-md-7 col-sm-9 col-xs-12">
-                            <h2><span class="small">RECORD YOUR DAILY INTAKE AND WORKOUT ROUTINES ANYWHERE AT ANYTIME!</span></h2>
-                        </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <img  src="images/slider-back-5.jpg" alt="Third slide">
-                   <!-- <img class="hidden-lg hidden-md hidden-sm" src="images/slider-back-5.jpg" style="height: 350px;">-->
-                    <!-- Static Header -->
-                    <div class="slider-font margin-top-30 margin-left-10">
-                    <h1 class="col-md-7 col-sm-9 col-xs-12 slider-font margin-bottom-20">
-                            <span class="hidden-xs"><br/></span>
-                            <span class="slide3-font">ACHIEVE YOUR HEALTH AND <br/>FITNESS GOAL WITH A HEALTHY <br/>AND NUTRITIONAL FOOD HABIT.<br/></span>
-                            <span class="text-bold h4"><span class="hidden-xs"><br/></span>
-                                Register with us! we will take care of you.
+                                <h3 id="slider1_thirdtext" class="hidden-xs">Cyberhealths is a <b>FAMILY</b> of fitness trainers, techies, athletes, dreamers, and entrepreneurs who are relentless in their passion for health education.</h3>
+                            </hgroup>
+                            <span class="noMobileApp">
+                                <button id="slider1_button"  class="btn btn-hero btn-lg" role="button" onclick="$('.loginNow').click()">Register Now</button>
                             </span>
-                          <span class="noMobileApp">
-                              <a href="" class="btn-system btn-large button-xs" onclick="$('.loginNow').click()"><i class="fa fa-user"></i> Register Now</a>
-                          </span>
-                        <span class="mobileApp">
-                            <span class="android centerize">
+                            <span class="mobileApp">
+                            <span class="android">
                                 <!-- This is android -->
-                                 <a href="" class="btn-system btn-large button-xs" onclick="$('.loginNow').click()" target="_self"><i class="fa fa-user"></i> Register Now</a>
+                                <button class="btn btn-hero btn-lg" role="button" onclick="$('.loginNow').click()">Register Now</button>
                             </span>
-                            <span class="iphone centerize">
+                            <span class="iphone">
                                 <!-- This is iphone -->
-                                 <a href="" class="btn-system btn-large button-xs" onclick="$('.loginNow').click()" target="_self"><i class="fa fa-user"></i> Register Now</a>
+                                 <button class="btn btn-hero btn-lg" role="button" onclick="$('.loginNow').click()">Register Now</button>
                             </span>
                         </span>
-                        </h1>
+                        </div>
+                        <video width="100%" height="100%" loop="" autoplay="" muted="">
+                            <source src="https://cdn.cyberhealths.com/Application/banner-video.mp4" type="video/mp4">
+                        </video>
+                    </div>
+               </div>
+               <div class="item slides">
+                    <div class="slide-2">
+                        <img src="images/slider-back-1.jpg">
+                    </div>
+                    <div class="hero" id="hero_slider2">
+                        <hgroup>
+                            <h1 id="slider2_firsttext">Coaches:</h1>
+                            <br class="hidden-xs"/>
+                            <h2 id="slider2_secondtext">Train Anyone,</h2>
+                            <br class="hidden-xs"/>
+                            <h2 id="slider2_thirdtext">Anywhere in the World.</h2>
+                        </hgroup>
+                        <br class="hidden-xs"/>
+
+                        <button id="slider2_button" class="btn btn-hero btn-lg" role="button" onclick="$('.loginNow').click()">Register Now</button>
+                    </div>
+               </div>
+               <div class="item slides">
+                    <div class="slide-3">
+                        <img src="images/slider-back-2.jpg">
+                    </div>
+                    <div class="hero">
+                        <hgroup>
+                            <h2 id="slider3_firsttext" class="pull-left">Sweat Now!</h2> <br/>
+                            <h2 id="slider3_secondtext" class="pull-right ">Shine Later!</h2>
+                        </hgroup> <br/><br/><br/>
+                    </div>
+               </div>
+              <div class="item slides">
+                    <div class="slide-4">
+                        <img src="images/slider-back-3.jpg">
+                    </div>
+                    <div class="hero" id="slide_4_div">
+                        <hgroup>
+                            <h2 id="slider4_firsttext" class="pull-right">You don’t have to eat less</h2> <br/>
+                            <h2 id="slider4_secondtext">You just have to eat right</h2>
+                        </hgroup>
+                        <button class="btn btn-hero btn-lg pull-right" id="slider4_button" role="button" onclick="$('.loginNow').click()">Register Now</button>
+                    </div>
+              </div>
+              <div class="item slides">
+                    <div class="slide-5">
+                        <img src="images/slider-back-4.jpg">
+                    </div>
+                    <div class="hero slider5_hero">
+                        <hgroup>
+                            <h2 id="slider5_firsttext">"Every human being is the author of his own health or disease”</h2>
+                            <h3 id="slider5_secondtext">– Buddha</h3>
+                        </hgroup>
+                        <button id="slider5_button" class="btn btn-hero btn-lg" role="button" onclick="$('.loginNow').click()">Register Now</button>
+                    </div>
+              </div>
+                <div class="item slides">
+                    <div class="slide-6">
+                        <img src="images/slider-back-5.jpg">
+                    </div>
+                    <div class="hero text_last_slide">
+                        <hgroup>
+                            <h2 id="slider6_firsttext">It's Will Power<br/></h2>
+                            <h2 id="slider6_secondtext">It's Mind Over Matter<br/></h2>
+                            <h2 id="slider6_thirdtext">It's Determination<br/></h2>
+                        </hgroup>
+                        <button id="slider6_button" class="btn btn-hero btn-lg" role="button" onclick="$('.loginNow').click()">Register Now</button>
                     </div>
                 </div>
             </div>
-        </div><!-- /carousel -->
+        </div>
+        <!-- /carousel -->
+        <!-- Carousel -->
+        <!--<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">-->
+            <!--&lt;!&ndash; Wrapper for slides &ndash;&gt;-->
+            <!--<div class="carousel-inner">-->
+                <!--<div class="item active">-->
+                    <!--<img  src="images/slider-back-1.jpg" alt="First slide">-->
+                  <!--&lt;!&ndash;  <img class="hidden-lg hidden-md hidden-sm" src="images/slider-back-1.jpg" style="height: 350px;">&ndash;&gt;-->
+                    <!--&lt;!&ndash; Static Header &ndash;&gt;-->
+                    <!--<div class="slider-font margin-left-10">-->
+                        <!--<div class="col-md-7 col-sm-9 col-xs-12 margin-bottom-20">-->
+                            <!--<span class="hidden-xs"><br/></span>-->
+                            <!--<h1><span class="small uppercase">YOU'VE COME TO THE RIGHT PLACE.<br/>Determine a healthy life-style for prolonging your life.</span></h1>-->
+                            <!--<span class="hidden-xs margin-top-20"><br/></span>-->
+                            <!--<div class="divH1 h4">-->
+                                <!--<br/>-->
+                                <!--Just record your weight. We,-->
+                                <!--<span class="hidden-xs"><br/><br/></span>-->
+                                    <!--<div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">-->
+                                        <!--<ul>-->
+                                            <!--<li>Reveal your daily needed calorie budget. Grab it and Get Started!!</li>-->
+                                            <!--<li>Provide you a better food and exercise catalogue.</li>-->
+                                            <!--<li>Assist you with in-time pertinent advice from our knowledgeable experts.</li>-->
+                                        <!--</ul>-->
+                                    <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<div class="item">-->
+                    <!--<img  src="images/slider-back-new.png" alt="Second slide">-->
+                  <!--&lt;!&ndash;  <img class="hidden-lg hidden-md hidden-sm" src="images/slider-back-4.jpg" style="height: 350px;">&ndash;&gt;-->
+                    <!--&lt;!&ndash; Static Header &ndash;&gt;-->
+                    <!--<div class="slider-font margin-left-10">-->
+                        <!--<img width="100%" height="auto" src="images/responsive-new.png"/>-->
+                        <!--<div class="col-md-7 col-sm-9 col-xs-12">-->
+                            <!--<h2><span class="small">RECORD YOUR DAILY INTAKE AND WORKOUT ROUTINES ANYWHERE AT ANYTIME!</span></h2>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<div class="item">-->
+                    <!--<img  src="images/slider-back-5.jpg" alt="Third slide">-->
+                   <!--&lt;!&ndash; <img class="hidden-lg hidden-md hidden-sm" src="images/slider-back-5.jpg" style="height: 350px;">&ndash;&gt;-->
+                    <!--&lt;!&ndash; Static Header &ndash;&gt;-->
+                    <!--<div class="slider-font margin-top-30 margin-left-10">-->
+                    <!--<h1 class="col-md-7 col-sm-9 col-xs-12 slider-font margin-bottom-20">-->
+                            <!--<span class="hidden-xs"><br/></span>-->
+                            <!--<span class="slide3-font">ACHIEVE YOUR HEALTH AND <br/>FITNESS GOAL WITH A HEALTHY <br/>AND NUTRITIONAL FOOD HABIT.<br/></span>-->
+                            <!--<span class="text-bold h4"><span class="hidden-xs"><br/></span>-->
+                                <!--Register with us! we will take care of you.-->
+                            <!--</span>-->
+                          <!--<span class="noMobileApp">-->
+                              <!--<a href="" class="btn-system btn-large button-xs" onclick="$('.loginNow').click()"><i class="fa fa-user"></i> Register Now</a>-->
+                          <!--</span>-->
+                        <!--<span class="mobileApp">-->
+                            <!--<span class="android centerize">-->
+                                <!--&lt;!&ndash; This is android &ndash;&gt;-->
+                                 <!--<a href="" class="btn-system btn-large button-xs" onclick="$('.loginNow').click()" target="_self"><i class="fa fa-user"></i> Register Now</a>-->
+                            <!--</span>-->
+                            <!--<span class="iphone centerize">-->
+                                <!--&lt;!&ndash; This is iphone &ndash;&gt;-->
+                                 <!--<a href="" class="btn-system btn-large button-xs" onclick="$('.loginNow').click()" target="_self"><i class="fa fa-user"></i> Register Now</a>-->
+                            <!--</span>-->
+                        <!--</span>-->
+                        <!--</h1>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>&lt;!&ndash; /carousel &ndash;&gt;-->
     </div>
 </div>
 
@@ -331,8 +443,7 @@
                                 <div class="service-content">
                                     <h4 class="text-orange text-bold">2. Update Your Profile</h4>
                                     <p>
-                                        Updating your profile and demography details to become more
-                                        comfortable with the system.
+                                        Complete your profile to optimize your user experience with individualized programs.
                                     </p>
                                 </div>
                             </div>
@@ -345,7 +456,7 @@
                                 </div>
                                 <div class="service-content">
                                     <h4 class="text-orange text-bold">3. Daily Updates</h4>
-                                    <p>Keep updated your daily Food Intakes and Workouts.</p>
+                                    <p>Keep a food and fitness diary to gain powerful insight about your daily habits.</p>
                                 </div>
                             </div>
                     </div>
@@ -358,7 +469,7 @@
                                 </div>
                                 <div class="service-content">
                                     <h4 class="text-orange text-bold">4. Set up your Goal</h4>
-                                    <p>Create your own individual goals and monitor your daily progress.</p>
+                                    <p>Create your own individual goals, go at your own pace and monitor your daily progress.</p>
                                 </div>
                             </div>
                             <!-- End Service Icon 4 -->
@@ -371,7 +482,7 @@
                                 </div>
                                 <div class="service-content">
                                     <h4 class="text-orange text-bold">5. Subscribe Coach</h4>
-                                    <p>Subscribe our health experts and get advices to achieve your goals.</p>
+                                    <p>Our skilled coaches access your specific health conditions and fitness goals to provide guidance and motivation.</p>
                                 </div>
                             </div>
                             <!-- End Service Icon 5 -->
@@ -382,8 +493,8 @@
                                     <i class="fa fa-book icon-medium"></i>
                                 </div>
                                 <div class="service-content">
-                                    <h4 class="text-orange text-bold">6. Courses</h4>
-                                    <p>Search and enroll courses to know more about healthy life.</p>
+                                    <h4 class="text-orange text-bold">6. Fitness & Health Courses</h4>
+                                    <p>Enroll in courses that are interesting to you, while continuously challenging and educating yourself.</p>
                                 </div>
                             </div><br/><br/>
                             <!-- End Service Icon 6 -->
@@ -461,7 +572,7 @@
             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                 <div class="footer-widget social-widget">
                     <h4>Follow Us<span class="head-line"></span></h4>
-                    <p>Join our social network to stay up to date and get notices about our new releases!</p>
+                    <p>Join us on social Media and stay up-to-date and receive fun updates about our new releases. Cyberhealths is always growing and evolving to bring you the best of everything.</p>
                     <ul class="remove-style social-icons margin-top-10">
                         <li>
                             <a class="facebook" target="_blank" href="{{commonDetails.facebookurl}}"><i class="fa fa-facebook"></i></a>
@@ -484,7 +595,7 @@
             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                 <div class="footer-widget social-widget">
                     <h4>Mobile Apps<span class="head-line"></span></h4>
-                    <p>Get our mobile apps for handy use shortly</p>
+                    <p>Tab the icons below, to get our latest mobile apps</p>
                     <div ng-cloak class="noMobileApp">
                         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 no-padding text-center">
                             <a href="https://itunes.apple.com/us/app/cyberhealths/id1274913078?mt=8" target="_blank">  <img title="App Store" class="margin-top-20" src="images/appstore.png"></a>
@@ -514,7 +625,7 @@
             <!-- Start Contact Widget -->
             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                 <div class="footer-widget contact-widget">
-                    <h4><img width="209" height="57" src="images/cyber-logo-footer.png" alt="Footer Logo" /></h4>
+                    <h4><img width="300" height="75" src="images/cyber-logo-footer.png" alt="Footer Logo" /></h4>
                     <!--<div class="secure-seal text-center"><span id="siteseal"><script async type="text/javascript" src="https://seal.godaddy.com/getSeal?sealID=eTz78gba5GzeWIkXUn0HT7zxrpOxkKbcL6FW4FYKjQTcLbSRmBRww6SRDZUV"></script></span>
                     </div>-->
                 </div>
@@ -586,11 +697,11 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/1.2.1/ui-bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/1.2.1/ui-bootstrap-tpls.min.js"></script>-->
 <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>-->
-<script type="text/javascript" src="http://vjs.zencdn.net/6.4.0/video.js"></script>
-<!--[if IE 8]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-<!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+<script type="text/javascript" src="https://vjs.zencdn.net/6.4.0/video.js"></script>
+<!--[if IE 8]><script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+<!--[if lt IE 9]><script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 <!-- If you'd like to support IE8 -->
-<script src="http://vjs.zencdn.net/ie8/1.1.2/videojs-ie8.min.js"></script>
+<script src="https://vjs.zencdn.net/ie8/1.1.2/videojs-ie8.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/1.2.1/jquery-migrate.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
 <!--<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fitvids/1.0.3/jquery.fitvids.min.js"></script>-->

@@ -577,6 +577,59 @@
         padding: 5px !important;
         width: auto !important;
     }
+    /* for  home page carosoul css */
+    .fade-carousel{
+        height: 42vh !important
+    }
+    .hero{
+        top: 18% !important;
+    }
+    .hero hgroup h1{
+        font-size: 26px !important;
+        font-weight:normal;
+    }
+    .hero hgroup h2{
+        font-size: 20px !important;
+    }
+    .fade-carousel .slides .slide-2,
+    .fade-carousel .slides .slide-3,
+    .fade-carousel .slides .slide-4,
+    .fade-carousel .slides .slide-5,
+    .fade-carousel .slides .slide-6 {
+        height: 42vh !important;
+    }
+    .text_last_slide{
+        left:76% !important;
+    }
+    #slider6_firsttext,#slider6_secondtext,#slider6_thirdtext
+    {
+        font-size: 16px !important;
+    }
+    #slider3_secondtext{
+        margin: 28px -342px 0 0 !important
+    }
+    #slider3_firsttext {
+        margin: 50px 0 0 -325px !important;
+    }
+    #slider4_firsttext{
+        margin: 94px -191px 0 0;
+    }
+    #slider4_secondtext {
+        margin: 109px -188px 0px 80px !important;
+    }
+    #slider4_button{
+        margin-right: -84px;
+    }
+    .btn.btn-hero{
+        margin:10px auto;
+    }
+    #slider5_firsttext {
+        font-size: 25px;
+        margin-top: -20px;
+    }
+    /*#slider3_firsttext,#slider3_secondtext{*/
+        /*margin: 10px 0 0 0 !important;*/
+    /*}*/
 }
 
 
@@ -599,6 +652,82 @@
     #main-slide .carousel-indicators{
         display: none;
     }
+    /* home page slider responsiveness */
+    /*#slider2_secondtext {*/
+        /*margin-left: 30px;*/
+    /*}*/
+
+    /*#slider2_thirdtext {*/
+        /*margin-left: 125px;*/
+    /*}*/
+    /*.fade-carousel .slides .slide-2,*/
+    /*.fade-carousel .slides .slide-3,*/
+    /*.fade-carousel .slides .slide-4,*/
+    /*.fade-carousel .slides .slide-5,*/
+    /*.fade-carousel .slides .slide-6 {*/
+        /*height: 31vh;*/
+    /*}*/
+    /*#slider2_button {*/
+        /*margin: -6px 0 0 120px;*/
+    /*}*/
+    /*.btn.btn-hero {*/
+        /*margin: 0;*/
+    /*}*/
+    /*.btn.btn-lg {*/
+        /*padding: 3px 10px;*/
+    /*}*/
+    /*!*.fade-carousel #slide-1{*!*/
+        /*!*height:200px !important;*!*/
+    /*!*}*!*/
+    /*.fade-carousel{*/
+        /*height:31vh;*/
+    /*}*/
+    /*.hero hgroup h2{*/
+        /*font-size: 14px;*/
+    /*}*/
+    /*.hero hgroup h1{*/
+        /*font-size: 20px;*/
+        /*margin-right: -12px;*/
+    /*}*/
+    /*#hero_slider2{*/
+        /*left: 15%;*/
+        /*top: 17%;*/
+    /*}*/
+    /*#slider3_secondtext{*/
+        /*margin: -114px -171px 0 0px;*/
+    /*}*/
+    /*#slider3_firsttext {*/
+        /*margin: -93px 0 0 -163px;*/
+    /*}*/
+    /*#slider4_firsttext {*/
+        /*margin: -186px -78px 0 0;*/
+    /*}*/
+    /*#slider4_secondtext {*/
+        /*margin: -179px -79px 0 16px;*/
+    /*}*/
+    /*#slider4_button {*/
+        /*margin: -136px 0 0 25px;*/
+    /*}*/
+    /*.text_last_slide {*/
+        /*left: 74% !important;*/
+        /*top: 17% !important;*/
+    /*}*/
+    /*#slider6_secondtext{*/
+        /*font-size: 12px;*/
+    /*}*/
+    /*#slider5_firsttext {*/
+        /*font-size: 13px;*/
+        /*margin-top: -186px;*/
+    /*}*/
+   /*#slider5_secondtext{*/
+        /*font-size: 14px;*/
+    /*}*/
+   /*#slider6_button{*/
+        /*margin-top: 10px;*/
+   /*}*/
+    /*#slider1_firsttext{*/
+        /*margin-top: -187px;*/
+    /*}*/
 }
 
 
@@ -1370,7 +1499,48 @@
     }
 
 }
-
+@media  only screen and (max-width: 320px) {
+    .bootstrap-datetimepicker-widget.dropdown-menu{
+        left:-15% !important;
+    }
+}
+/* for Iphone 5E */
+@media  (min-width: 320px) and (max-width: 350px) {
+    #hero_slider2 {
+        left: 21% !important;
+    }
+    #slider2_thirdtext {
+        margin: 8px 0 3px 74px !important;
+    }
+    #slider3_firsttext {
+        margin: -100px 0 0 -152px !important;
+    }
+    #slider3_secondtext {
+        margin: -122px -157px 0 0 !important;
+    }
+    #slider5_firsttext {
+        font-size: 12px ;
+        margin-top: -172px !important;
+    }
+}
+/* for galaxy mobile  */
+@media (min-width:360px) and  (max-width: 450px) {
+    #hero_slider2 {
+        left: 21%;
+    }
+    #slider2_thirdtext {
+        margin: 15px 0 3px 118px !important;
+    }
+    #slider3_firsttext {
+        margin: -95px 0 0 -173px !important;
+    }
+    #slider3_secondtext{
+        margin: -120px -176px 0 0 !important;
+    }
+    #slider4_firsttext {
+        margin: -186px -78px 0 0 !important;
+    }
+}
 @media (max-width: 510px){
     .slider-font span.small {
         color: #fff;
@@ -1455,7 +1625,7 @@
     }
 
     .navbar-default{
-        padding:7px 10px 18px 10px!important;
+        padding:7px 10px 14px 10px!important;
     }
 
     .navbar-default .navbar-nav{
@@ -1518,6 +1688,85 @@
     }
     .bootstrap-datetimepicker-widget.dropdown-menu{
         left:5% !important;
+    }
+    /* home page slider responsiveness */
+    #slider2_secondtext {
+        margin: 5px 0 0 37px;
+    }
+
+    #slider2_thirdtext {
+        margin: 15px 0 3px 120px;
+    }
+    .fade-carousel .slides .slide-2,
+    .fade-carousel .slides .slide-3,
+    .fade-carousel .slides .slide-4,
+    .fade-carousel .slides .slide-5,
+    .fade-carousel .slides .slide-6 {
+        height: 31vh;
+    }
+    #slider2_button {
+        margin: 7px 0 0 59px !important;
+    }
+    .btn.btn-hero {
+        margin: 0;
+    }
+    .btn.btn-lg {
+        padding: 3px 10px;
+    }
+    /*.fade-carousel #slide-1{*/
+    /*height:200px !important;*/
+    /*}*/
+    .fade-carousel{
+        height:31vh;
+    }
+    .hero hgroup h2{
+        font-size: 14px !important;
+    }
+    .hero hgroup h1{
+        font-size: 16px !important;
+        margin-right: -12px;
+    }
+    #hero_slider2{
+        left: 17%;
+        top: 17%;
+    }
+    #slider3_secondtext{
+        margin: -149px -176px 0 0;
+    }
+    #slider3_firsttext {
+        margin: -129px 0 0 -172px ;
+    }
+    #slider4_firsttext {
+        margin: -186px -78px 0 0 !important;
+    }
+    #slider4_secondtext {
+        margin: -179px -79px 0 16px !important;
+    }
+    #slider4_button {
+        margin: -136px 0 0 25px;
+    }
+    .text_last_slide {
+        left: 74% !important;
+        top: 17% !important;
+    }
+    #slider6_secondtext{
+        font-size: 12px !important;
+    }
+    #slider5_firsttext {
+        font-size: 13px;
+        margin-top: -186px;
+    }
+    #slider5_secondtext{
+        font-size: 14px !important;
+    }
+    #slider6_button{
+        margin-top: 10px;
+    }
+    #slider1_firsttext{
+        margin-top: -172px;
+    }
+    #slide_4_div{
+        top:45%
     }
 }
 
@@ -1589,11 +1838,6 @@
         left:0 !important;
     }
 
-}
-@media  only screen and (max-width: 320px) {
-    .bootstrap-datetimepicker-widget.dropdown-menu{
-        left:-15% !important;
-    }
 }
 @media (min-width: 768px) and (max-width: 1024px) {
     .popupContainer-width-big {
@@ -1688,6 +1932,75 @@
     }
     #user-dashboard-height{
         height:1795px;
+    }
+
+    @media (min-width : 992px) and (max-width: 1024px) {
+
+        /* for carosoul css */
+        .fade-carousel{
+            height: 40vh !important
+        }
+        .hero{
+            top: 18% !important;
+        }
+        .hero hgroup h1{
+            font-size: 26px !important;
+            font-weight:normal;
+        }
+        .hero hgroup h2{
+            font-size: 20px !important;
+        }
+        #slider1_thirdtext{
+            font-size: 15px !important
+        }
+        .fade-carousel .slides .slide-2,
+        .fade-carousel .slides .slide-3,
+        .fade-carousel .slides .slide-4,
+        .fade-carousel .slides .slide-5,
+        .fade-carousel .slides .slide-6{
+            height: 42vh !important
+        }
+        .text_last_slide{
+            left:110% !important;
+        }
+        #slider6_firsttext,#slider6_secondtext,#slider6_thirdtext
+        {
+            font-size: 24px !important;
+        }
+        #slider4_secondtext{
+            margin-top:30px;
+        }
+        #slider4_button{
+            margin-right: 195px;
+        }
+        #slider3_firsttext{
+            margin-left:40px !important;
+        }
+        #slider3_secondtext{
+            margin-right:40px !important;
+        }
+        #slider4_firsttext{
+            margin-right: 95px;
+        }
+
+    }
+    /* Mac Pro 13 inch*/
+    @media (min-width : 1400px) and (max-width : 1450px) {
+
+        /* for carosoul css */
+        .fade-carousel{
+            height: 90vh !important
+        }
+        .fade-carousel .slides .slide-2,
+        .fade-carousel .slides .slide-3,
+        .fade-carousel .slides .slide-4,
+        .fade-carousel .slides .slide-5,
+        .fade-carousel .slides .slide-6{
+            height: 90vh !important
+        }
+        .fade-carousel .carousel-inner .item {
+            height: 90vh !important;
+        }
     }
 
 }
