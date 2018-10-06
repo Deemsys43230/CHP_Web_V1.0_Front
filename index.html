@@ -104,11 +104,11 @@
                                 <div class="loader"></div>
                             </div>
                         </div>
-                        <ul class="social-list remove-style">
+                        <ul class="social-list remove-style noMobileApp">
                             <li class="navbar-common" >
                                <ul class="nav navbar-nav dropdownmenu">
                                    <li>
-                                       <a id="login-button" class="itl-tooltip modal_trigger"  style="display:none;" data-ng-click="reset()" href="#modal">Login / Register</a>
+                                       <a id="login-button" class="login itl-tooltip modal_trigger username-login" style="display:none;" data-ng-click="reset()" href="#modal">Login / Register</a>
                                        <a href="" id="welcome-text" style="display:none;color:#f8ba01!important">{{userdetails.loginName}}&nbsp;<span class="fa fa-caret-down"></span></a>
                                        <ul class="dropdown remove-style">
                                            <li><a  href={{redirecturl}}>Dashboard</a></li>
@@ -118,6 +118,10 @@
                                </ul>
                             </li>
                         </ul>
+                         <li class="social-list remove-style mobileApp">
+                            <a id="mobile-login-button" class="login itl-tooltip modal_trigger"  style="display:none;"
+                             data-ng-click="reset()" data-placement="bottom" href="#modal">Login / Register</a>
+                        </li>
                     </ul>
                     <!-- End Navigation List -->
                 </div>
@@ -760,12 +764,14 @@
         $(".noMobileApp").hide();
         $(".android").show();
         $(".iphone").hide();
+        $("#mobile-login-button").show();
     }
     else if(isIphone){
         $(".mobileApp").show();
         $(".noMobileApp").hide();
         $(".android").hide();
         $(".iphone").show();
+        $("#mobile-login-button").show();
     }
   $(".modal_trigger").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
 

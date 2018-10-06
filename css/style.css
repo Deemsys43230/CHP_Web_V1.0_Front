@@ -1541,7 +1541,7 @@ ul.social-list li a.login {
     height: 33px;
     line-height: 33px;
     background-color: #fec51b;
-    color: #fff!important;
+    color: #fff;
     text-align: center;
     border-left: 1px solid #f2f2f2;
 }
@@ -19695,3 +19695,11 @@ mwl-calendar .cal-month-box [class*="cal-cell"] {
 #user-dashboard-height{
    height: 1780px;
 }
+/* home page login button */
+.username-login{
+ background-color: #fff !important;
+color:#999!important;
+margin-top:-6px;
+border-left: none !important;   
+}
+
