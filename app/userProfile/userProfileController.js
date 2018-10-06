@@ -63,7 +63,6 @@ userApp.controller('UserProfileController',['$scope','requestHandler','Flash','$
                 $scope.userProfile.country=$scope.countries[''];
             }
 
-            //alert($scope.userProfile.imageurl);
             $scope.userProfile.imageurl=$scope.userProfile.imageurl+"?decache="+Math.random();
             //$scope.userProfile.imageurl=$scope.userProfile.imageurl.substring($scope.userProfile.imageurl.indexOf("/") + 14, $scope.userProfile.imageurl.length);
 
@@ -176,13 +175,9 @@ userApp.controller('UserProfileController',['$scope','requestHandler','Flash','$
        if($scope.userProfile.secretquestion=="") {
            $scope.userProfile.secretquestion=null;
        }
-       alert($scope.userProfile.secretanswer);
         if($scope.userProfile.secretanswer=="") {
-            alert($scope.userProfile.secretanswer);
             $scope.userProfile.secretanswer=null;
-            console.log($scope.userProfile.secretanswer);
         }
-        console.log($scope.userProfile);
         $scope.userProfile.unitPreference =parseInt($scope.userProfile.unitPreference);
 
         requestHandler.getRequest("getUserId/","").then(function(response){
@@ -4575,7 +4570,6 @@ userApp.controller('UserProfileController',['$scope','requestHandler','Flash','$
             {name:'Nord', code:'ND', "countryid":1094}
         ];
         $scope.updateCountry = function(){
-            //alert("hi");
             $scope.availableStates = [];
             $.each($scope.states, function(index,value){
                 if(value.countryid == $scope.userProfile.countrySelect.id){
@@ -4771,7 +4765,6 @@ userApp.directive('validFile',function(){
         link:function(scope,el,attrs,ngModel){
             //change event is fired when file is selected
             el.bind('change',function(){
-                //alert("invalid file");
                 scope.$apply(function(){
                     ngModel.$setViewValue(el.val());
                     ngModel.$render();

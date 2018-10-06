@@ -32,7 +32,6 @@ userApp.controller('UserDoctorAppointment',['$scope','requestHandler','Flash','$
             var todayDate = new Date();
             $scope.fromDate=moment(new Date(todayDate.getFullYear(), monthIndex+1, 1)).format('DD/MM/YYYY 00:00:00');
             $scope.endDate=moment(new Date(todayDate.getFullYear(), monthIndex+2, 0)).format('DD/MM/YYYY 23:59:59');
-            console.log(  $scope.endDate);
             $scope.doGetDoctorAppointmentList();
         },
         prevMonth :function(monthIndex){
@@ -179,7 +178,7 @@ userApp.controller('UserDoctorAppointment',['$scope','requestHandler','Flash','$
             $("#user-doctor-appointment").hide();
             $("#lean_overlay").hide();
             $scope.userGetDateDetails($scope.calendarOptions.selectedDate);
-            $scope.doGetDoctorAppointmentList($scope.calendarOptions.selectedDate);
+            $scope.doGetDoctorAppointmentList();
             if($scope.isNew==false){
                 successMessage(Flash,"Successfully Updated");
             }
@@ -248,14 +247,12 @@ userApp.controller('UserDoctorAppointment',['$scope','requestHandler','Flash','$
     };
 
     $scope.init=function () {
-
-        $scope.doGetDoctorAppointmentList($scope.fromDate,$scope.endDate);
         $scope.userGetDateDetails($scope.calendarOptions.selectedDate);
         /*For get all date appointments Details*/
         var todayDate = new Date();
         $scope.fromDate=moment(new Date(todayDate.getFullYear(), todayDate.getMonth(), 1)).format('DD/MM/YYYY 00:00:00');
         $scope.endDate=moment(new Date(todayDate.getFullYear(), todayDate.getMonth()+1, 0)).format('DD/MM/YYYY 23:59:59');
-        // $scope.userGetAllDateDetails($scope.fromDate,$scope.endDate);
+        $scope.doGetDoctorAppointmentList();
 
     };
 

@@ -673,7 +673,10 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
                 if(isActive>0){
                    $scope.syncBtnTxt="Sync Completed";
                    $scope.sync_btn_background_color="#35900d";
-
+                   $timeout(function(){
+                        $scope.syncBtnTxt="Sync Now";
+                        $scope.sync_btn_background_color="#ff5010";
+                   },3000)
                 }
                 else{
                    $scope.syncBtnTxt="No Devices Connected";
