@@ -251,7 +251,9 @@
                                                 calories. <br/><br/>
                                                 Set a fitness goal and start tracking your daily intake, calories burnt with
                                                 cyberhealths and reach your target weight in a healthy manner.
-                                                <button class="loginNow btn btn-default">Sign up</button> with
+                                                <button class="noMobileApp slider_button btn btn-default">Sign up</button>
+                                                <button class="mobileApp android loginNow btn btn-default">Sign up</button>
+                                                <button class="mobileApp iphone loginNow btn btn-default">Sign up</button>with
                                                 cyberhealths and commit to be fit.
                                         </small>
                                         <small ng-show="bmiHealthy">
@@ -261,7 +263,9 @@
                                             routines. Having healthy snacks in-between helps you to be nutritionally fit. <br/><br/>
                                             Set a fitness goal and start tracking your daily intake, calories burnt with
                                             cyberhealths and maintain your weight in a healthy manner.
-                                            <button class="loginNow btn btn-default">Sign up</button> with
+                                            <button class="noMobileApp slider_button btn btn-default">Sign up</button>
+                                            <button class="mobileApp android loginNow btn btn-default">Sign up</button>
+                                            <button class="mobileApp iphone loginNow btn btn-default">Sign up</button> with
                                             cyberhealths and commit to be fit.
                                         </small>
                                         <small ng-show="bmiOver">
@@ -273,7 +277,9 @@
                                             workout routines. Having healthy food helps you to be nutritionally fit.<br/><br/>
                                             Set a fitness goal and start tracking your daily intake, calories burnt with
                                             cyberhealths and reduce your weight in a healthy manner.
-                                            <button class="loginNow btn btn-default">Sign up</button> with
+                                            <button class="noMobileApp slider_button btn btn-default">Sign up</button>
+                                            <button class="mobileApp android loginNow btn btn-default">Sign up</button>
+                                            <button class="mobileApp iphone loginNow btn btn-default">Sign up</button>with
                                             cyberhealths and commit to be fit.
                                         </small>
                                         <small ng-show="bmiObese">
@@ -285,7 +291,9 @@
                                             it with healthy nutritional diet.<br/><br/>
                                             Set a fitness goal and start tracking your daily intake, calories burnt
                                             with cyberhealths and reduce your weight in a healthy manner.
-                                            <button class="loginNow btn btn-default">Sign up</button> with
+                                            <button class="noMobileApp slider_button btn btn-default">Sign up</button>
+                                            <button class="mobileApp android loginNow btn btn-default">Sign up</button>
+                                            <button class="mobileApp iphone loginNow btn btn-default">Sign up</button> with
                                             cyberhealths and commit to be fit.
                                         </small>
                                     </i>
@@ -435,9 +443,8 @@
     function refreshGraph(){
         $('#myGoal').stepProgressBar('setCurrentValue', emi);
     };
-    $('.loginNow').click(function(){
-        $('.modal_trigger').click();
-        $("#register_form").click();
+    $('.slider_button').click(function(){
+        window.location.href="views/home/#/user-registration"
     });
 
 </script>
@@ -594,8 +601,8 @@ function getSelectionStart(o) {
         $(".android").show();
         $(".iphone").hide();
         $('.loginNow').click(function(){
-            $('.modal_trigger').click();
             $("#register_form_mobile").click();
+            $('.modal_trigger').click();
         });
 
     }
@@ -605,8 +612,8 @@ function getSelectionStart(o) {
         $(".android").hide();
         $(".iphone").show();
         $('.loginNow').click(function(){
-            $('.modal_trigger').click();
             $("#register_form_mobile").click();
+            $('.modal_trigger').click();
         });
     }
     $(".modal_trigger").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });

@@ -24,21 +24,6 @@
     font-family: sourcecode-pro-medium;
     src: url(../fonts/source-code-pro/SourceCodePro-Medium.otf);
 }
-/*.fade-carousel .slides .slide-2 {*/
-    /*background-image: url(../images/slider-back-1.jpg);*/
-/*}*/
-/*.fade-carousel .slides .slide-3 {*/
-    /*background-image: url(../images/slider-back-2.jpg);*/
-/*}*/
-/*.fade-carousel .slides .slide-4 {*/
-    /*background-image: url(../images/slider-back-3.jpg);*/
-/*}*/
-/*.fade-carousel .slides .slide-5 {*/
-    /*background-image: url(../images/slider-back-4.jpg);*/
-/*}*/
-/*.fade-carousel .slides .slide-6 {*/
-    /*background-image: url(../images/slider-back-5.jpg);*/
-/*}*/
 /********************************/
 /*       Fade Bs-carousel       */
 /********************************/
@@ -120,7 +105,7 @@
     font-family: quick-sand !important;
 }
 #slider5_firsttext{
-    font-size: 27px;
+    font-size: 27px !important;
 }
 #slider6_firsttext,#slider6_secondtext,#slider6_thirdtext,#slider6_button{
     font-family: sourcecode-pro-medium!important;

@@ -627,6 +627,9 @@
         font-size: 25px;
         margin-top: -20px;
     }
+    #slider1_firsttext{
+        margin-top:50px;
+    }
     /*#slider3_firsttext,#slider3_secondtext{*/
         /*margin: 10px 0 0 0 !important;*/
     /*}*/
@@ -1510,7 +1513,7 @@
         left: 21% !important;
     }
     #slider2_thirdtext {
-        margin: 8px 0 3px 74px !important;
+        margin: 8px 10px 3px 72px !important;
     }
     #slider3_firsttext {
         margin: -100px 0 0 -152px !important;
@@ -1520,8 +1523,29 @@
     }
     #slider5_firsttext {
         font-size: 12px ;
-        margin-top: -172px !important;
+        margin-top: -165px !important;
     }
+    #slider2_mobile_button{
+        margin-left: 67px;
+    }
+    #slider4_iphone_button{
+        margin: -225px 0 0 25px;
+    }
+    #slider1_firsttext {
+        margin-top: -160px !important;
+    }
+    #slider1_iphone_button,#slider1_android_button{
+        margin-top: -15px;
+    }
+    #slider4_firsttext {
+        margin: -166px -78px 0 0 !important;
+    }
+    #slider4_secondtext {
+        margin: -159px -79px 0 16px !important;
+    }
+
+
+
 }
 /* for galaxy mobile  */
 @media (min-width:360px) and  (max-width: 450px) {
@@ -1532,13 +1556,16 @@
         margin: 15px 0 3px 118px !important;
     }
     #slider3_firsttext {
-        margin: -95px 0 0 -173px !important;
+        margin: -108px 0 0 -173px !important;
     }
     #slider3_secondtext{
-        margin: -120px -176px 0 0 !important;
+        margin: -131px -176px 0 0 !important;
     }
     #slider4_firsttext {
         margin: -186px -78px 0 0 !important;
+    }
+    #slider4_android_button{
+        margin: -246px 0 0 20px;
     }
 }
 @media (max-width: 510px){
@@ -1737,10 +1764,10 @@
         margin: -129px 0 0 -172px ;
     }
     #slider4_firsttext {
-        margin: -186px -78px 0 0 !important;
+        margin: -186px -78px 0 0;
     }
     #slider4_secondtext {
-        margin: -179px -79px 0 16px !important;
+        margin: -179px -79px 0 16px;
     }
     #slider4_button {
         margin: -136px 0 0 25px;
@@ -1753,7 +1780,7 @@
         font-size: 12px !important;
     }
     #slider5_firsttext {
-        font-size: 13px;
+        font-size: 13px !important;
         margin-top: -186px;
     }
     #slider5_secondtext{
@@ -1951,7 +1978,8 @@
             font-size: 20px !important;
         }
         #slider1_thirdtext{
-            font-size: 15px !important
+            font-size: 20px !important;
+            padding:10px;
         }
         .fade-carousel .slides .slide-2,
         .fade-carousel .slides .slide-3,
@@ -1982,6 +2010,10 @@
         #slider4_firsttext{
             margin-right: 95px;
         }
+        #slider1_firsttext{
+            margin-top:150px;
+        }
+
 
     }
     /* Mac Pro 13 inch*/
@@ -2002,7 +2034,6 @@
             height: 90vh !important;
         }
     }
-
 }
 
 

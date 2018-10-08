@@ -180,19 +180,11 @@
                                 <br/>
                                 <h3 id="slider1_thirdtext" class="hidden-xs">Cyberhealths is a <b>FAMILY</b> of fitness trainers, techies, athletes, dreamers, and entrepreneurs who are relentless in their passion for health education.</h3>
                             </hgroup>
-                            <span class="noMobileApp">
-                                <button id="slider1_button"  class="btn btn-hero btn-lg" role="button" onclick="$('.loginNow').click()">Register Now</button>
-                            </span>
-                            <span class="mobileApp">
-                            <span class="android">
+                                <button id="slider1_button"  class="noMobileApp slider_button btn btn-hero btn-lg" role="button" onclick="$('.slider_button').click()">Register Now</button>
                                 <!-- This is android -->
-                                <button class="btn btn-hero btn-lg" role="button" onclick="$('.loginNow').click()">Register Now</button>
-                            </span>
-                            <span class="iphone">
+                                <button id="slider1_android_button" class="mobileApp android btn btn-hero btn-lg" role="button" onclick="$('.loginNow').click()">Register Now</button>
                                 <!-- This is iphone -->
-                                 <button class="btn btn-hero btn-lg" role="button" onclick="$('.loginNow').click()">Register Now</button>
-                            </span>
-                        </span>
+                                 <button id="slider1_iphone_button" class="mobileApp iphone btn btn-hero btn-lg" role="button" onclick="$('.loginNow').click()">Register Now</button>
                         </div>
                         <video width="100%" height="100%" loop="" autoplay="" muted="">
                             <source src="https://cdn.cyberhealths.com/Application/banner-video.mp4" type="video/mp4">
@@ -213,7 +205,11 @@
                         </hgroup>
                         <br class="hidden-xs"/>
 
-                        <button id="slider2_button" class="btn btn-hero btn-lg" role="button" onclick="$('.loginNow').click()">Register Now</button>
+                        <button id="slider2_button" class="noMobileApp slider_button btn btn-hero btn-lg" role="button" onclick="$('.slider_button').click()">Register Now</button>
+                        <!-- This is android -->
+                        <button class="mobileApp android btn btn-hero btn-lg" role="button" onclick="$('.loginNow').click()">Register Now</button>
+                        <!-- This is iphone -->
+                        <button id="slider2_mobile_button" class="mobileApp iphone btn btn-hero btn-lg" role="button" onclick="$('.loginNow').click()">Register Now</button>
                     </div>
                </div>
                <div class="item slides">
@@ -236,7 +232,11 @@
                             <h2 id="slider4_firsttext" class="pull-right">You don’t have to eat less</h2> <br/>
                             <h2 id="slider4_secondtext">You just have to eat right</h2>
                         </hgroup>
-                        <button class="btn btn-hero btn-lg pull-right" id="slider4_button" role="button" onclick="$('.loginNow').click()">Register Now</button>
+                        <button id="slider4_button" class="noMobileApp slider_button btn btn-hero btn-lg pull-right" role="button" onclick="$('.slider_button').click()">Register Now</button>
+                        <!-- This is android -->
+                        <button id="slider4_android_button" class="mobileApp android btn btn-hero btn-lg" role="button" onclick="$('.loginNow').click()">Register Now</button>
+                        <!-- This is iphone -->
+                        <button id="slider4_iphone_button" class="mobileApp iphone btn btn-hero btn-lg" role="button" onclick="$('.loginNow').click()">Register Now</button>
                     </div>
               </div>
               <div class="item slides">
@@ -248,7 +248,11 @@
                             <h2 id="slider5_firsttext">"Every human being is the author of his own health or disease”</h2>
                             <h3 id="slider5_secondtext">– Buddha</h3>
                         </hgroup>
-                        <button id="slider5_button" class="btn btn-hero btn-lg" role="button" onclick="$('.loginNow').click()">Register Now</button>
+                        <button id="slider5_button" class="noMobileApp slider_button btn btn-hero btn-lg" role="button" onclick="$('.slider_button').click()">Register Now</button>
+                        <!-- This is android -->
+                        <button class="mobileApp android btn btn-hero btn-lg" role="button" onclick="$('.loginNow').click()">Register Now</button>
+                        <!-- This is iphone -->
+                        <button class="mobileApp iphone btn btn-hero btn-lg" role="button" onclick="$('.loginNow').click()">Register Now</button>
                     </div>
               </div>
                 <div class="item slides">
@@ -261,80 +265,16 @@
                             <h2 id="slider6_secondtext">It's Mind Over Matter<br/></h2>
                             <h2 id="slider6_thirdtext">It's Determination<br/></h2>
                         </hgroup>
-                        <button id="slider6_button" class="btn btn-hero btn-lg" role="button" onclick="$('.loginNow').click()">Register Now</button>
+                        <button id="slider6_button" class="noMobileApp slider_button btn btn-hero btn-lg" role="button" onclick="$('.slider_button').click()">Register Now</button>
+                        <!-- This is android -->
+                        <button class="mobileApp android btn btn-hero btn-lg" role="button" onclick="$('.loginNow').click()">Register Now</button>
+                        <!-- This is iphone -->
+                        <button class="mobileApp iphone btn btn-hero btn-lg" role="button" onclick="$('.loginNow').click()">Register Now</button>
                     </div>
                 </div>
             </div>
         </div>
         <!-- /carousel -->
-        <!-- Carousel -->
-        <!--<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">-->
-            <!--&lt;!&ndash; Wrapper for slides &ndash;&gt;-->
-            <!--<div class="carousel-inner">-->
-                <!--<div class="item active">-->
-                    <!--<img  src="images/slider-back-1.jpg" alt="First slide">-->
-                  <!--&lt;!&ndash;  <img class="hidden-lg hidden-md hidden-sm" src="images/slider-back-1.jpg" style="height: 350px;">&ndash;&gt;-->
-                    <!--&lt;!&ndash; Static Header &ndash;&gt;-->
-                    <!--<div class="slider-font margin-left-10">-->
-                        <!--<div class="col-md-7 col-sm-9 col-xs-12 margin-bottom-20">-->
-                            <!--<span class="hidden-xs"><br/></span>-->
-                            <!--<h1><span class="small uppercase">YOU'VE COME TO THE RIGHT PLACE.<br/>Determine a healthy life-style for prolonging your life.</span></h1>-->
-                            <!--<span class="hidden-xs margin-top-20"><br/></span>-->
-                            <!--<div class="divH1 h4">-->
-                                <!--<br/>-->
-                                <!--Just record your weight. We,-->
-                                <!--<span class="hidden-xs"><br/><br/></span>-->
-                                    <!--<div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">-->
-                                        <!--<ul>-->
-                                            <!--<li>Reveal your daily needed calorie budget. Grab it and Get Started!!</li>-->
-                                            <!--<li>Provide you a better food and exercise catalogue.</li>-->
-                                            <!--<li>Assist you with in-time pertinent advice from our knowledgeable experts.</li>-->
-                                        <!--</ul>-->
-                                    <!--</div>-->
-                            <!--</div>-->
-                        <!--</div>-->
-                    <!--</div>-->
-                <!--</div>-->
-                <!--<div class="item">-->
-                    <!--<img  src="images/slider-back-new.png" alt="Second slide">-->
-                  <!--&lt;!&ndash;  <img class="hidden-lg hidden-md hidden-sm" src="images/slider-back-4.jpg" style="height: 350px;">&ndash;&gt;-->
-                    <!--&lt;!&ndash; Static Header &ndash;&gt;-->
-                    <!--<div class="slider-font margin-left-10">-->
-                        <!--<img width="100%" height="auto" src="images/responsive-new.png"/>-->
-                        <!--<div class="col-md-7 col-sm-9 col-xs-12">-->
-                            <!--<h2><span class="small">RECORD YOUR DAILY INTAKE AND WORKOUT ROUTINES ANYWHERE AT ANYTIME!</span></h2>-->
-                        <!--</div>-->
-                    <!--</div>-->
-                <!--</div>-->
-                <!--<div class="item">-->
-                    <!--<img  src="images/slider-back-5.jpg" alt="Third slide">-->
-                   <!--&lt;!&ndash; <img class="hidden-lg hidden-md hidden-sm" src="images/slider-back-5.jpg" style="height: 350px;">&ndash;&gt;-->
-                    <!--&lt;!&ndash; Static Header &ndash;&gt;-->
-                    <!--<div class="slider-font margin-top-30 margin-left-10">-->
-                    <!--<h1 class="col-md-7 col-sm-9 col-xs-12 slider-font margin-bottom-20">-->
-                            <!--<span class="hidden-xs"><br/></span>-->
-                            <!--<span class="slide3-font">ACHIEVE YOUR HEALTH AND <br/>FITNESS GOAL WITH A HEALTHY <br/>AND NUTRITIONAL FOOD HABIT.<br/></span>-->
-                            <!--<span class="text-bold h4"><span class="hidden-xs"><br/></span>-->
-                                <!--Register with us! we will take care of you.-->
-                            <!--</span>-->
-                          <!--<span class="noMobileApp">-->
-                              <!--<a href="" class="btn-system btn-large button-xs" onclick="$('.loginNow').click()"><i class="fa fa-user"></i> Register Now</a>-->
-                          <!--</span>-->
-                        <!--<span class="mobileApp">-->
-                            <!--<span class="android centerize">-->
-                                <!--&lt;!&ndash; This is android &ndash;&gt;-->
-                                 <!--<a href="" class="btn-system btn-large button-xs" onclick="$('.loginNow').click()" target="_self"><i class="fa fa-user"></i> Register Now</a>-->
-                            <!--</span>-->
-                            <!--<span class="iphone centerize">-->
-                                <!--&lt;!&ndash; This is iphone &ndash;&gt;-->
-                                 <!--<a href="" class="btn-system btn-large button-xs" onclick="$('.loginNow').click()" target="_self"><i class="fa fa-user"></i> Register Now</a>-->
-                            <!--</span>-->
-                        <!--</span>-->
-                        <!--</h1>-->
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
-        <!--</div>&lt;!&ndash; /carousel &ndash;&gt;-->
     </div>
 </div>
 
@@ -747,35 +687,35 @@
 
 </script>
 
-<script type="text/javascript">
+<!--<script type="text/javascript">-->
 
-/* finding user device*/
+<!--/* finding user device*/-->
 
-    var isAndroid = (/android/i.test(navigator.userAgent.toLowerCase()));
-    var isIphone = (/iphone/i.test(navigator.userAgent.toLowerCase()));
+    <!--var isAndroid = (/android/i.test(navigator.userAgent.toLowerCase()));-->
+    <!--var isIphone = (/iphone/i.test(navigator.userAgent.toLowerCase()));-->
 
-    $(".android").hide();
-    $(".iphone").hide();
-    $(".mobileApp").hide();
-    $(".noMobileApp").show();
+    <!--$(".android").hide();-->
+    <!--$(".iphone").hide();-->
+    <!--$(".mobileApp").hide();-->
+    <!--$(".noMobileApp").show();-->
 
-    if(isAndroid){
-        $(".mobileApp").show();
-        $(".noMobileApp").hide();
-        $(".android").show();
-        $(".iphone").hide();
-        $("#mobile-login-button").show();
-    }
-    else if(isIphone){
-        $(".mobileApp").show();
-        $(".noMobileApp").hide();
-        $(".android").hide();
-        $(".iphone").show();
-        $("#mobile-login-button").show();
-    }
-  $(".modal_trigger").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
+    <!--if(isAndroid){-->
+        <!--$(".mobileApp").show();-->
+        <!--$(".noMobileApp").hide();-->
+        <!--$(".android").show();-->
+        <!--$(".iphone").hide();-->
+        <!--$("#mobile-login-button").show();-->
+    <!--}-->
+    <!--else if(isIphone){-->
+        <!--$(".mobileApp").show();-->
+        <!--$(".noMobileApp").hide();-->
+        <!--$(".android").hide();-->
+        <!--$(".iphone").show();-->
+        <!--$("#mobile-login-button").show();-->
+    <!--}-->
+  <!--$(".modal_trigger").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });-->
 
-</script>
+<!--</script>-->
 
 <script type="text/javascript">
 
