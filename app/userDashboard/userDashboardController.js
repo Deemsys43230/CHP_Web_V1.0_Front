@@ -1,6 +1,6 @@
-var userApp= angular.module('userApp', ['ngRoute','oc.lazyLoad','ngCookies','requestModule','flash','ngAnimate','ngTouch','ngPercentDisplay','userDashboardServiceModule','angular-svg-round-progress','ui.bootstrap','angular-nicescroll','mwl.calendar']);
+var userApp= angular.module('userApp', ['ngRoute','oc.lazyLoad','ngCookies','requestModule','flash','ngAnimate','ngTouch','ngPercentDisplay','userDashboardServiceModule','angular-svg-round-progress','ui.bootstrap','angular-nicescroll','mwl.calendar','foodMeasureModule']);
 
-userApp.controller('UserDashboardController',['$scope','$window','requestHandler','Flash','UserDashboardService','$interval','roundProgressService','limitToFilter','$timeout','$compile','$location','$rootScope','$route','calendarConfig','moment',function($scope,$window,requestHandler,Flash,UserDashboardService,$interval,roundProgressService,limitToFilter,$timeout,$compile,$location,$rootScope,$route,calendarConfig,moment) {
+userApp.controller('UserDashboardController',['$scope','$window','requestHandler','Flash','UserDashboardService','$interval','roundProgressService','limitToFilter','$timeout','$compile','$location','FoodMeasureService','$rootScope','$route','calendarConfig','moment',function($scope,$window,requestHandler,Flash,UserDashboardService,$interval,roundProgressService,limitToFilter,$timeout,$compile,$location,FoodMeasureService,$rootScope,$route,calendarConfig,moment) {
         $rootScope.isMenuShow=1;
         $scope.foodSearchResult = [];
         $scope.userFood={};
@@ -52,8 +52,15 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
         }
 
 
+        // to show food measure div
+    $scope.isVisible = false;
+    $scope.showMeasureDetails = function () {
+        $scope.isVisible = $scope.isVisible ? false : true;
+    };
+
         //Modal Popup to add user food
         $scope.doUserAddFood=function(){
+            $scope.foodMeasureList=FoodMeasureService.doGetMeasures();
             $scope.isHistoryEmpty=0;
             $scope.historyReport=0;
             $(function(){
@@ -4987,7 +4994,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
         if($scope.isCallApiDetails){
             $scope.doGetUserMealPlanCalendar( $scope.mealPlanStartDate, $scope.mealPlanEndDate);
         }
-        else{
+       else{
             $scope.events=[];
             $(function(){
                 $("#lean_overlay").fadeTo(1000);
@@ -5085,7 +5092,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
                 $(".common_model").hide();
                 $("#meal-plan-calendar").hide();
                 $("#lean_overlay").hide();
-
+                alert($scope.newSelectedDate);
                 $scope.newSelectedDate=moment($scope.viewDate).format('DD/MM/YYYY');
                 var currentlyselecteddate=moment(new Date()).format('DD/MM/YYYY');
                 var oldmealdate=currentlyselecteddate.split("/");
@@ -5108,15 +5115,15 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
 
         }
     };
+
     // to highlight selected date
      $scope.cellModifier =function(cell) {
-         console.log("inside this function");
+         console.log(cell);
          console.log($scope.celldate, $scope.newSelectedDate);
          $scope.celldate=moment(cell.date._d).format('DD/MM/YYYY');
          if ($scope.celldate=== $scope.newSelectedDate) {
              cell.cssClass = 'calendar-selected-day-highlight';
          }
-
      };
 //to get previous month date
     $scope.$watch("viewDate",function(newValue, oldValue){
