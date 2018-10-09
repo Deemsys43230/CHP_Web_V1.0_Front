@@ -617,9 +617,7 @@
     #slider4_secondtext {
         margin: 109px -188px 0px 80px !important;
     }
-    #slider4_button{
-        margin-right: -84px;
-    }
+
     .btn.btn-hero{
         margin:10px auto;
     }
@@ -1525,16 +1523,16 @@
         font-size: 12px ;
         margin-top: -165px !important;
     }
-    #slider2_mobile_button{
+    #slider2_iphone_button{
         margin-left: 67px;
     }
     #slider4_iphone_button{
-        margin: -225px 0 0 25px;
+        margin: -225px 0 0 25px !important;
     }
     #slider1_firsttext {
         margin-top: -160px !important;
     }
-    #slider1_iphone_button,#slider1_android_button{
+    #slider1_mobile_button{
         margin-top: -15px;
     }
     #slider4_firsttext {
@@ -1542,6 +1540,9 @@
     }
     #slider4_secondtext {
         margin: -159px -79px 0 16px !important;
+    }
+    #slider4_mobile_button {
+        margin: -210px 0 0 17px !important;
     }
 
 
@@ -1553,7 +1554,7 @@
         left: 21%;
     }
     #slider2_thirdtext {
-        margin: 15px 0 3px 118px !important;
+        margin: 15px 0 3px 118px;
     }
     #slider3_firsttext {
         margin: -108px 0 0 -173px !important;
@@ -1563,9 +1564,6 @@
     }
     #slider4_firsttext {
         margin: -186px -78px 0 0 !important;
-    }
-    #slider4_android_button{
-        margin: -246px 0 0 20px;
     }
 }
 @media (max-width: 510px){
@@ -1731,9 +1729,6 @@
     .fade-carousel .slides .slide-6 {
         height: 31vh;
     }
-    #slider2_button {
-        margin: 7px 0 0 59px !important;
-    }
     .btn.btn-hero {
         margin: 0;
     }
@@ -1769,9 +1764,6 @@
     #slider4_secondtext {
         margin: -179px -79px 0 16px;
     }
-    #slider4_button {
-        margin: -136px 0 0 25px;
-    }
     .text_last_slide {
         left: 74% !important;
         top: 17% !important;
@@ -1786,7 +1778,7 @@
     #slider5_secondtext{
         font-size: 14px !important;
     }
-    #slider6_button{
+    #slider6_mobile_button{
         margin-top: 10px;
     }
     #slider1_firsttext{
@@ -1795,6 +1787,13 @@
     #slide_4_div{
         top:45%
     }
+    #slider2_mobile_button{
+        margin: 10px 0 0 57px;
+    }
+    #slider4_mobile_button{
+        margin: -244px 0 0 17px;
+    }
+
 }
 
 .sm-hide, .xsm-hide{
@@ -1898,69 +1897,90 @@
         width: 60%;
         margin-top: -65px;
     }
+
     .menu-sidebar {
         margin: 0 5px;
     }
+
     .menu-rightsidebar {
         margin: 0 5px;
     }
+
     .menu-rightsidebar1 {
         margin: 20px 5px;
     }
+
     .selector {
         left: 51%;
     }
+
     .slogan-text {
         font-size: 15px;
     }
+
     .slogan-text-h5 {
         font-size: 12px;
     }
+
     .coach-activity {
         width: 43%;
         height: auto;
         margin: 13px 40px;
     }
+
     .waterlog-img {
         margin-top: 0px;
     }
-    .card .card-header h3{
-        font-size:12px;
-    }
-    .text-c-yellow{
+
+    .card .card-header h3 {
         font-size: 12px;
     }
-    .weight-log-menu{
-        height:155px;
+
+    .text-c-yellow {
+        font-size: 12px;
     }
-    h3.classic-title.menu-dashboard{
-        font-size: 13px!important;
+
+    .weight-log-menu {
+        height: 155px;
+    }
+
+    h3.classic-title.menu-dashboard {
+        font-size: 13px !important;
         line-height: 16px !important;
     }
+
     .budget-legend li {
         margin-right: 8px;
         margin-bottom: 10px;
     }
+
     .budget-graph-border {
         width: 355px;
         padding: 5px 0 0;
     }
-    .card .card-block{
+
+    .card .card-block {
         margin-top: 23px;
     }
+
     .user-dashboard-vitals {
         width: 135px;
         margin: 5px 35px 5px 5px;
         height: 180px;
     }
+
     .navbar-menu-right {
-        left: 130px!important;
-        position:relative !important;
-    }
-    #user-dashboard-height{
-        height:1795px;
+        left: 130px !important;
+        position: relative !important;
     }
 
+    #user-dashboard-height {
+        height: 1795px;
+    }
+    #slider4_button{
+        margin-right: -87px;
+    }
+}
     @media (min-width : 992px) and (max-width: 1024px) {
 
         /* for carosoul css */
@@ -1998,9 +2018,6 @@
         #slider4_secondtext{
             margin-top:30px;
         }
-        #slider4_button{
-            margin-right: 195px;
-        }
         #slider3_firsttext{
             margin-left:40px !important;
         }
@@ -2012,6 +2029,9 @@
         }
         #slider1_firsttext{
             margin-top:150px;
+        }
+        #slider4_button {
+            margin-right: 188px !important;
         }
 
 

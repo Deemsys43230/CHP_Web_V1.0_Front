@@ -181,10 +181,8 @@
                                 <h3 id="slider1_thirdtext" class="hidden-xs">Cyberhealths is a <b>FAMILY</b> of fitness trainers, techies, athletes, dreamers, and entrepreneurs who are relentless in their passion for health education.</h3>
                             </hgroup>
                                 <button id="slider1_button"  class="noMobileApp slider_button btn btn-hero btn-lg" role="button" onclick="$('.slider_button').click()">Register Now</button>
-                                <!-- This is android -->
-                                <button id="slider1_android_button" class="mobileApp android btn btn-hero btn-lg" role="button" onclick="$('.loginNow').click()">Register Now</button>
-                                <!-- This is iphone -->
-                                 <button id="slider1_iphone_button" class="mobileApp iphone btn btn-hero btn-lg" role="button" onclick="$('.loginNow').click()">Register Now</button>
+                                <!-- This is for mobile -->
+                                <button id="slider1_mobile_button" class="mobileApp btn btn-hero btn-lg" role="button" onclick="$('.loginNow').click()" style="display: none">Register Now</button>
                         </div>
                         <video width="100%" height="100%" loop="" autoplay="" muted="">
                             <source src="https://cdn.cyberhealths.com/Application/banner-video.mp4" type="video/mp4">
@@ -206,10 +204,8 @@
                         <br class="hidden-xs"/>
 
                         <button id="slider2_button" class="noMobileApp slider_button btn btn-hero btn-lg" role="button" onclick="$('.slider_button').click()">Register Now</button>
-                        <!-- This is android -->
-                        <button class="mobileApp android btn btn-hero btn-lg" role="button" onclick="$('.loginNow').click()">Register Now</button>
-                        <!-- This is iphone -->
-                        <button id="slider2_mobile_button" class="mobileApp iphone btn btn-hero btn-lg" role="button" onclick="$('.loginNow').click()">Register Now</button>
+                        <!-- This is for mobile -->
+                        <button id="slider2_mobile_button" class="mobileApp btn btn-hero btn-lg" role="button" onclick="$('.loginNow').click()" style="display: none">Register Now</button>
                     </div>
                </div>
                <div class="item slides">
@@ -233,10 +229,8 @@
                             <h2 id="slider4_secondtext">You just have to eat right</h2>
                         </hgroup>
                         <button id="slider4_button" class="noMobileApp slider_button btn btn-hero btn-lg pull-right" role="button" onclick="$('.slider_button').click()">Register Now</button>
-                        <!-- This is android -->
-                        <button id="slider4_android_button" class="mobileApp android btn btn-hero btn-lg" role="button" onclick="$('.loginNow').click()">Register Now</button>
-                        <!-- This is iphone -->
-                        <button id="slider4_iphone_button" class="mobileApp iphone btn btn-hero btn-lg" role="button" onclick="$('.loginNow').click()">Register Now</button>
+                        <!-- This is for mobile -->
+                        <button id="slider4_mobile_button" class="mobileApp btn btn-hero btn-lg" role="button" onclick="$('.loginNow').click()" style="display: none">Register Now</button>
                     </div>
               </div>
               <div class="item slides">
@@ -249,10 +243,8 @@
                             <h3 id="slider5_secondtext">– Buddha</h3>
                         </hgroup>
                         <button id="slider5_button" class="noMobileApp slider_button btn btn-hero btn-lg" role="button" onclick="$('.slider_button').click()">Register Now</button>
-                        <!-- This is android -->
-                        <button class="mobileApp android btn btn-hero btn-lg" role="button" onclick="$('.loginNow').click()">Register Now</button>
-                        <!-- This is iphone -->
-                        <button class="mobileApp iphone btn btn-hero btn-lg" role="button" onclick="$('.loginNow').click()">Register Now</button>
+                        <!-- This is for mobile -->
+                        <button id="slider5_mobile_button" class="slider5_iphone_button mobileApp btn btn-hero btn-lg" role="button" onclick="$('.loginNow').click()" style="display: none">Register Now</button>
                     </div>
               </div>
                 <div class="item slides">
@@ -266,10 +258,8 @@
                             <h2 id="slider6_thirdtext">It's Determination<br/></h2>
                         </hgroup>
                         <button id="slider6_button" class="noMobileApp slider_button btn btn-hero btn-lg" role="button" onclick="$('.slider_button').click()">Register Now</button>
-                        <!-- This is android -->
-                        <button class="mobileApp android btn btn-hero btn-lg" role="button" onclick="$('.loginNow').click()">Register Now</button>
-                        <!-- This is iphone -->
-                        <button class="mobileApp iphone btn btn-hero btn-lg" role="button" onclick="$('.loginNow').click()">Register Now</button>
+                        <!-- This is for mobile -->
+                        <button id="slider6_mobile_button" class="mobileApp btn btn-hero btn-lg" role="button" onclick="$('.loginNow').click()" style="display: none">Register Now</button>
                     </div>
                 </div>
             </div>
@@ -356,11 +346,11 @@
                         <div ng-cloak class="mobileApp">
                             <div class="android centerize">
                                 <!-- This is android -->
-                                <a href="" class="btn-system btn-small" onclick="$('.loginNow').click()" target="_self"><i class="fa fa-user"></i> Register</a>
+                                <a href="" id="android_register_button" class="btn-system btn-small" onclick="$('.loginNow').click()" target="_self"><i class="fa fa-user"></i> Register</a>
                             </div>
                             <div class="iphone centerize">
                                 <!-- This is iphone -->
-                                <a href="" class="btn-system btn-small" onclick="$('.loginNow').click()" target="_self"><i class="fa fa-user"></i> Register</a>
+                                <a href="" id="iphone_register_button" class="btn-system btn-small" onclick="$('.loginNow').click()" target="_self"><i class="fa fa-user"></i> Register</a>
                             </div>
                         </div>
                     </div>

@@ -66,7 +66,8 @@
     transform: translate3d(-50%,-50%,0);
 }
 #slider1_firsttext,#slider1_secondtext,#slider1_thirdtext,#slider1_button,
-#slider1_firsttext,#slider5_secondtext{
+#slider1_firsttext,#slider5_secondtext,#slider1_mobile_button,
+#slider5_android_button,#slider5_iphone_button{
     font-family: rubik-bold !important;
 }
 .hero hgroup h1 {
@@ -80,7 +81,7 @@
 }
 
 #slider2_firsttext,#slider2_secondtext,#slider2_thirdtext,#slider2_button
-,#slider4_firsttext,#slider4_secondtext,#slider4_button{
+,#slider4_firsttext,#slider4_secondtext,#slider4_button,#slider2_mobile_button,#slider4_mobile_button{
     font-family: kaushan-script !important;
 }
 #slider2_secondtext{
@@ -101,13 +102,14 @@
     font-family: quick-sand-bold !important;
     margin-right:-95px !important;
 }
-#slider5_firsttext,#slider5_secondtext,#slider5_thirdtext,#slider5_button{
+#slider5_firsttext,#slider5_secondtext,#slider5_thirdtext,#slider5_button,
+#slider5_mobile_button{
     font-family: quick-sand !important;
 }
 #slider5_firsttext{
     font-size: 27px !important;
 }
-#slider6_firsttext,#slider6_secondtext,#slider6_thirdtext,#slider6_button{
+#slider6_firsttext,#slider6_secondtext,#slider6_thirdtext,#slider6_button,#slider6_mobile_button{
     font-family: sourcecode-pro-medium!important;
 }
 #slider4_secondtext{
