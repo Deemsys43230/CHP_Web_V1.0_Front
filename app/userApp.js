@@ -72,7 +72,7 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../css/horizon-swiper.min.css',
                                 '../../css/horizon-theme.min.css',
                                 '../../js/horizon-swiper.min.js',
-                                '../../css/stepProgressBar.css',
+                                '../../css/stepProgressBar.css'
                             ]
                         })}]},
                 controller:'UserDashboardController'
@@ -770,6 +770,7 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                             '../../plugin/popup/style.css',
                             '../../css/ngPercentageCircle.css',
                             '../../app/userDashboard/ngPercentageCircle.js',
+                            '../../app/foodMeasure/foodMeasureService.js',
                             '../../angular/angular-utils-pagination/dirPagination.js'
 
                         ]
@@ -790,6 +791,7 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                             '../../plugin/popup/style.css',
                             '../../css/ngPercentageCircle.css',
                             '../../app/userDashboard/ngPercentageCircle.js',
+                            '../../app/foodMeasure/foodMeasureService.js',
                             '../../angular/angular-utils-pagination/dirPagination.js'
 
                         ]

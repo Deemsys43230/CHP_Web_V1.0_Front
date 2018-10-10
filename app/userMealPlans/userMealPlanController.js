@@ -1,4 +1,4 @@
-var userApp = angular.module('userApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','ngPercentDisplay','angular-svg-round-progress','angularUtils.directives.dirPagination','userDashboardServiceModule','ui.bootstrap']);
+var userApp = angular.module('userApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','ngPercentDisplay','angular-svg-round-progress','angularUtils.directives.dirPagination','userDashboardServiceModule','ui.bootstrap','foodMeasureModule','angular-nicescroll']);
 
 userApp.controller('UserMealPlanController',['$scope','requestHandler','Flash','$rootScope',function($scope,requestHandler,Flash,$rootScope) {
     $rootScope.isMenuShow=1;
@@ -156,8 +156,9 @@ userApp.controller('UserMealPlanController',['$scope','requestHandler','Flash','
 
 }]);
 
-userApp.controller('ViewUserMealPlanController',['$scope','requestHandler','Flash','$routeParams','UserDashboardService','roundProgressService',function($scope,requestHandler,Flash,$routeParams,UserDashboardService,roundProgressService) {
+userApp.controller('ViewUserMealPlanController',['$scope','requestHandler','Flash','$routeParams','FoodMeasureService','UserDashboardService','roundProgressService',function($scope,requestHandler,Flash,$routeParams,FoodMeasureService,UserDashboardService,roundProgressService) {
     $scope.activeClass.mealPlans='active';
+
     $scope.doViewUserMealPlans=function(){
         $scope.userMealPlanId= $routeParams.id;
         requestHandler.getRequest("user/plandetail/"+$scope.userMealPlanId+"/", "").then(function(response){
@@ -212,9 +213,15 @@ userApp.controller('ViewUserMealPlanController',['$scope','requestHandler','Flas
             $(".user_register").show();
         });
     }
+    // to show food measure div
+    $scope.isVisible = false;
+    $scope.showMeasureDetails = function () {
+        $scope.isVisible = $scope.isVisible ? false : true;
+    };
 
     $scope.doUserAddFood=function(planDay,foodSessionId){
-
+        $scope.isVisible = false;
+        $scope.foodMeasureList=FoodMeasureService.doGetMeasures();
         $scope.userFood={};
         $scope.userFood.day= planDay;
         $scope.userFood.foodsessionid=foodSessionId;

@@ -60,6 +60,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
 
         //Modal Popup to add user food
         $scope.doUserAddFood=function(){
+            $scope.isVisible = false;
             $scope.foodMeasureList=FoodMeasureService.doGetMeasures();
             $scope.isHistoryEmpty=0;
             $scope.historyReport=0;

@@ -1,4 +1,4 @@
-var coachApp = angular.module('coachApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','ngPercentDisplay','angular-svg-round-progress','angularUtils.directives.dirPagination','userDashboardServiceModule','ui.bootstrap']);
+var coachApp = angular.module('coachApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','ngPercentDisplay','angular-svg-round-progress','angularUtils.directives.dirPagination','userDashboardServiceModule','ui.bootstrap','foodMeasureModule','angular-nicescroll']);
 
 coachApp.controller('CoachMealPlanController',['$scope','requestHandler','Flash',function($scope,requestHandler,Flash) {
     $scope.activeClass.assessments='active';
@@ -136,7 +136,7 @@ $scope.$watch("mealPagination.pageNumber",function(){
 
 }]);
 
-coachApp.controller('ViewCoachPlanController',['$scope','requestHandler','Flash','$routeParams','UserDashboardService','roundProgressService',function($scope,requestHandler,Flash,$routeParams,UserDashboardService,roundProgressService) {
+coachApp.controller('ViewCoachPlanController',['$scope','requestHandler','Flash','$routeParams','FoodMeasureService','UserDashboardService','roundProgressService',function($scope,requestHandler,Flash,$routeParams,FoodMeasureService,UserDashboardService,roundProgressService) {
 
 $scope.doViewCoachPlans=function(){
   $scope.coachPlanId= $routeParams.id;
@@ -193,8 +193,15 @@ $scope.doIntializeLeanModal=function()
     });
 }
 
-$scope.doCoachAddFood=function(planDay,foodSessionId){
+    // to show food measure div
+    $scope.isVisible = false;
+    $scope.showMeasureDetails = function () {
+        $scope.isVisible = $scope.isVisible ? false : true;
+    };
 
+$scope.doCoachAddFood=function(planDay,foodSessionId){
+    $scope.isVisible = false;
+    $scope.foodMeasureList=FoodMeasureService.doGetMeasures();
     $scope.userFood={};
     $scope.userFood.day= planDay;
     $scope.userFood.foodsessionid=foodSessionId;

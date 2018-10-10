@@ -443,6 +443,7 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../plugin/popup/style.css',
                                 '../../css/ngPercentageCircle.css',
                                 '../../app/userDashboard/ngPercentageCircle.js',
+                                '../../app/foodMeasure/foodMeasureService.js',
                                 '../../angular/angular-utils-pagination/dirPagination.js'
                             ]
                         })
@@ -463,6 +464,7 @@ coachApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../plugin/popup/style.css',
                                 '../../css/ngPercentageCircle.css',
                                 '../../app/userDashboard/ngPercentageCircle.js',
+                                '../../app/foodMeasure/foodMeasureService.js',
                                 '../../angular/angular-utils-pagination/dirPagination.js'
                             ]
                         })

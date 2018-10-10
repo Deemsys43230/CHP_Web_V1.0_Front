@@ -1353,8 +1353,8 @@
 <div id="modal-add-food" class="popupContainer-width" style="display:none;">
     <div class="center-block">
         <div class="col-lg-12 col-md-12 col-sm-12 food_measure_details" ng-show="isVisible">
-            <h3 class="classic-title margin-top-10"><span>Measure Details</span><div class="pull-right" ng-click="showMeasureDetails()" ng-hide="!isVisible"><i class="fa fa-times-circle" style="font-size:20px";></i></div></h3>
-            <div class="col-lg-12 col-md-12 col-sm-12 food_measure_appointment_scrollbar" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#eee'}">
+            <h3 class="classic-title margin-top-10"><span>Measure Details</span><div class="pull-right" ng-click="showMeasureDetails()" ng-hide="!isVisible"><i class="fa fa-times-circle mouse-pointer" style="font-size:20px";></i></div></h3>
+            <div class="col-lg-12 col-md-12 col-sm-12 margin-top-10 food_measure_appointment_scrollbar" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#eee'}">
                 <div class="col-lg-4 col-md-4 margin-top-10" ng-repeat="foodmeasure in foodMeasureList">
                         <div class="food-measure-card">
                             <img class="food-measure-card-img-top" src="{{foodmeasure.url}}">
@@ -1364,7 +1364,6 @@
                         </div>
                 </div>
             </div>
-            <hr/>
         </div>
         <header class="popupHeader width-100">
             <span class="header_title">{{title}}</span>
@@ -1393,7 +1392,7 @@
                     <div class="col-lg-7 col-md-7 col-sm-7">
                         <form name="FoodAddForm" novalidate>
                         <div class="col-lg-12 col-md-12 col-sm-12 no-padding">
-                        <h5 class="margin-top-10">Select Measure:&nbsp;<i class="fa fa-info-circle" ng-click="showMeasureDetails()"></i></h5>
+                        <h5 class="margin-top-10">Select Measure:&nbsp;<i class="fa fa-info-circle mouse-pointer" ng-click="showMeasureDetails()" style="color:#3B5998;font-size: 16px;"></i></h5>
                             <select name="measure" ng-model="userFood.measure" ng-options="measure.measurename for measure in userSelectedFoodDetails.measure track by measure.measureid" ng-change="doCalculateCalories()" required>
                                 <option value="">-- Select Measure --</option>
                             </select>
