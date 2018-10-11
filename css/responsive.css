@@ -1471,6 +1471,12 @@
     .vitals-alignment{
        margin-left:40px !important;
     }
+    .dashboard-profile-image {
+        width: 120px;
+        height: 120px;
+    }
+
+
 }
 
 @media (min-width: 1200px) and (max-width: 1300px){
