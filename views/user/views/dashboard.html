@@ -37,9 +37,22 @@
     </a>
     </div>
 </script>
+<div class="col-lg-12 col-md-12 col-sm-12" style="margin-top:150px !important;" ng-show="loaded">
+    <div id="circularG" >
+        <div id="circularG_1" class="circularG"></div>
+        <div id="circularG_2" class="circularG"></div>
+        <div id="circularG_3" class="circularG"></div>
+        <div id="circularG_4" class="circularG"></div>
+        <div id="circularG_5" class="circularG"></div>
+        <div id="circularG_6" class="circularG"></div>
+        <div id="circularG_7" class="circularG"></div>
+        <div id="circularG_8" class="circularG"></div>
+    </div>
+</div>
+<div class="page-banner1" ng-hide="loaded" >
 
-<div class="page-banner1" ng-cloak class="ng-cloak" >
     <div id="w" class="clearfix">
+
         <div class="dashboard-1" style="display: none">
             <ul id="sidemenu">
 
@@ -825,7 +838,7 @@
                                     </div>
                                     <div flash-message="2000" class="col-lg-4 col-md-4 col-sm-4 no-padding pull-right margin-top-5"></div>
                                 </div>
-                                
+
                                 <div class="medication_scrollbar" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',horizrailenabled: false,background:'#eee'}" >
                                     <div ng-if="loaded">
                                         <div class="loader-style-dashboard">
@@ -874,7 +887,7 @@
                             <!-- Tab Content 2 -->
                             <div class="tab-pane" id="medications-upload">
                                 <div class="col-lg-12 col-md-12 col-sm-12 margin-tb-10">
-                                    
+
                                     <!-- Start Search -->
                                     <div ng-show="userUploadedDocumentList.length!=0">
                                         <div class="pull-right" id="hidden-search">
@@ -1363,6 +1376,7 @@
                             </div>
                         </div>
                 </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 margin-top-10"></div>
             </div>
         </div>
         <header class="popupHeader width-100">
@@ -2715,19 +2729,6 @@
 <script type="text/javascript" src="../../js/script.js"></script>
 <script type="text/javascript" src="../../js/jquery.stepProgressBar.js"></script>
 <script type="text/javascript">
-
-//for dashboard main date
-//                var options = {
-//                    maxDate : new Date(),
-//                    endDate : new Date(),
-//                    opens:'left',
-//                    singleDatePicker: true
-//                };
-//
-//                $('#main-date').daterangepicker(options, function(start, end, label) {
-//                    angular.element(document.getElementById('main-date')).scope().initialLoadFoodAndExercise(start.format('DD/MM/YYYY'));
-//                    document.getElementById("main-start-date").value = start.format('DD/MM/YYYY');
-//                });
 
 //for food intake and excersize view graph date picker
        function daterangepicker() {

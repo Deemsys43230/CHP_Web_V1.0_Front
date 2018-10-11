@@ -3,6 +3,7 @@ var userApp= angular.module('userApp', ['ngRoute','oc.lazyLoad','ngCookies','req
 userApp.controller('UserDashboardController',['$scope','$window','requestHandler','Flash','UserDashboardService','$interval','roundProgressService','limitToFilter','$timeout','$compile','$location','FoodMeasureService','$rootScope','$route','calendarConfig','moment',function($scope,$window,requestHandler,Flash,UserDashboardService,$interval,roundProgressService,limitToFilter,$timeout,$compile,$location,FoodMeasureService,$rootScope,$route,calendarConfig,moment) {
         $rootScope.isMenuShow=1;
         $scope.foodSearchResult = [];
+        $scope.loaded=true;
         $scope.userFood={};
         $scope.userFood.sessionid=1;
         $scope.graphSessionId='1';
@@ -5165,6 +5166,8 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
             $scope.doCheckUserMedicationDocument();
             $scope.doGetUserDetails();
         };
+        //page load end
+           $scope.loaded=false;
         // initially new date is selected date
         $scope.newSelectedDate=selectedDate;
         $scope.initialLoadFoodAndExercise($scope.newSelectedDate);
