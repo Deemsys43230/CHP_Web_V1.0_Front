@@ -755,6 +755,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
         var originalservings="";
         //On Select edit foods
         $scope.doEditUserFood=function(foodid,userfoodid){
+            $scope.isVisible = false;
             $scope.glycaemic = 0;
             $scope.isNew=false;
             $scope.title= "Edit Food";

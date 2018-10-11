@@ -257,6 +257,8 @@ userApp.controller('ViewUserMealPlanController',['$scope','requestHandler','Flas
     };
 
     $scope.doEditFoodItemFromPlan=function(id){
+        $scope.isVisible = false;
+        $scope.foodMeasureList=FoodMeasureService.doGetMeasures();
         $scope.userFood={};
         $scope.addFood=true;
         $scope.showSearch=false;
