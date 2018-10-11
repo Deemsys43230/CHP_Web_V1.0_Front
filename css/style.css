@@ -8205,7 +8205,7 @@ ul.exercise li .exercise_name{
     text-decoration:none;
     -webkit-box-shadow: inset 0 0 0px rgba(0,0,0,0.3);
     -moz-box-shadow: inset 0 0 0px rgba(0,0,0,0.3);
-    box-shadow: inset 0 0 0px rgba(0,0,0,0.3));
+    box-shadow: inset 0 0 0px rgba(0,0,0,0.3);
 }
 
 .select_food ul > li:hover{
@@ -9282,8 +9282,8 @@ a:hover, a:visited, a:link, a:active
     position: absolute;
     text-align:center;
     background-color: rgba(0,0,0,0.4);
-    width: 200px:
-height:200px!important;
+    width: 200px;
+    height:200px !important;
     padding:89px 92px;
 }
 
@@ -16439,10 +16439,10 @@ a.main-button.red_back {
     padding-left: 20px;
 }
 .padding-left-220{
-    padding-left:220px;!important;
+    padding-left:220px !important;
 }
 .padding-right-20{
-    padding-right:20px;!important;
+    padding-right:20px !important;
 }
 .no-padding-right{
     padding-right: 0px;
@@ -16589,7 +16589,6 @@ a.main-button.red_back {
     position: relative;
     padding-bottom: 8px;
     border-bottom: 1px solid #ededed;
-
 }
 .content-h {
     background: #FFFFFF;
@@ -17683,7 +17682,7 @@ select.date:focus {
 }
 .talktext p{
   /* remove webkit p margins */
-    color: black
+    color: black;
    -webkit-margin-before: 0em;
    -webkit-margin-after: 0em;
 }
@@ -17847,7 +17846,7 @@ div.food-coach-values{
     color:blue;
     margin-top: 50px;
     font-size: 12px;
-    text-decoration: underline; !important;
+    text-decoration: underline !important;
     font-style: italic;
 }
 .food-plans div{
@@ -18332,7 +18331,7 @@ select.event:focus {
     padding:10px;
 }
 .answers input[type=radio]{
-    display: inline; !important;
+    display: inline !important;
 }
 .option_number{
     padding: 3px 7px;
@@ -18376,7 +18375,7 @@ select.event:focus {
 /*assessment question design*/
 
 .question-font-weight{
-    font-weight:600; !important
+    font-weight:600 !important;
 }
 
 /*document  file upload*/
