@@ -90,8 +90,10 @@ userApp.controller('UserMainDashboardController',['$scope','requestHandler','$ro
         }
         };
     $scope.doGetUserKeyDetails=function() {
+        $scope.loaded=true;
         requestHandler.getRequest("user/keydetails/", "").then(function (response) {
             $scope.userKeyDetails = response.data;
+            $scope.loaded=false;
             if ($scope.userKeyDetails.diabeticstatus == 1) {
                 $rootScope.isDiabetic = 1;
                 $scope.isDiabeticPerson = 1;
