@@ -127,9 +127,8 @@
     color: #fff !important;
 }
 .text_last_slide{
-    left: 104% !important;
+    left:  79% !important;
     top: 50% !important;
-    text-align: unset !important;
 }
 .slider5_hero{
     top:40% !important;
@@ -139,6 +138,15 @@
 }
 #slide_4_div{
     top:50% ;
+}
+#slider6_secondtext{
+    margin-right:-105px;
+}
+#slider6_thirdtext{
+    margin-right:-52px;
+}
+#slider6_button{
+    margin-left:-60px;
 }
 .fade-carousel .carousel-inner .item .hero {
     opacity: 0;
