@@ -3,7 +3,7 @@ var userApp= angular.module('userApp', ['ngRoute','oc.lazyLoad','ngCookies','req
 userApp.controller('UserDashboardController',['$scope','$window','requestHandler','Flash','UserDashboardService','$interval','roundProgressService','limitToFilter','$timeout','$compile','$location','FoodMeasureService','$rootScope','$route','calendarConfig','moment',function($scope,$window,requestHandler,Flash,UserDashboardService,$interval,roundProgressService,limitToFilter,$timeout,$compile,$location,FoodMeasureService,$rootScope,$route,calendarConfig,moment) {
         $rootScope.isMenuShow=1;
         $scope.foodSearchResult = [];
-        $scope.loaded=true;
+        $scope.dashboardLoaded=true;
         $scope.userFood={};
         $scope.userFood.sessionid=1;
         $scope.graphSessionId='1';
@@ -3182,7 +3182,6 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
             ];
 
         $scope.doGetGraph=function(divId){
-            alert("dsdsd");
             $scope.isViewEmpty=0;
             $scope.loaded=true;
             var endDate;
@@ -5095,7 +5094,6 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
                 $(".common_model").hide();
                 $("#meal-plan-calendar").hide();
                 $("#lean_overlay").hide();
-                alert($scope.newSelectedDate);
                 $scope.newSelectedDate=moment($scope.viewDate).format('DD/MM/YYYY');
                 var currentlyselecteddate=moment(new Date()).format('DD/MM/YYYY');
                 var oldmealdate=currentlyselecteddate.split("/");
