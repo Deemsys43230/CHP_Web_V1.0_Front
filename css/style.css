@@ -9,6 +9,10 @@
     src: url(../fonts/quicksand/Quicksand-Bold.otf);
 }
 @font-face {
+    font-family: rubik-bold-medium;
+    src: url(../fonts/rubik/Rubik-Medium.ttf);
+}
+@font-face {
     font-family: kaushan-script;
     src: url(../fonts/kaushan-script/KaushanScript-Regular.otf);
 }
@@ -66,8 +70,7 @@
     transform: translate3d(-50%,-50%,0);
 }
 #slider1_firsttext,#slider1_secondtext,#slider1_thirdtext,#slider1_button,
-#slider1_firsttext,#slider5_secondtext,#slider1_mobile_button,
-#slider5_android_button,#slider5_iphone_button{
+#slider1_mobile_button{
     font-family: rubik-bold !important;
 }
 .hero hgroup h1 {

@@ -1523,7 +1523,8 @@
 /* for Iphone 5E */
 @media  (min-width: 320px) and (max-width: 350px) {
     #hero_slider2 {
-        left: 21% !important;
+        left: 20% !important;
+        top: 15% !important;
     }
     #slider2_thirdtext {
         margin: 8px 10px 3px 72px !important;
@@ -1735,7 +1736,7 @@
     }
 
     #slider2_thirdtext {
-        margin: 15px 0 3px 120px;
+        margin: 15px 0 3px 117px;
     }
     .fade-carousel .slides .slide-2,
     .fade-carousel .slides .slide-3,
@@ -1788,7 +1789,7 @@
     }
     #slider5_firsttext {
         font-size: 13px !important;
-        margin-top: -186px;
+        margin-top: -170px;
     }
     #slider5_secondtext{
         font-size: 14px !important;
@@ -1803,7 +1804,7 @@
         top:45%
     }
     #slider2_mobile_button{
-        margin: 10px 0 0 57px;
+        margin: 3px 0 0 57px;
     }
     #slider4_mobile_button{
         margin: -244px 0 0 17px;
@@ -2081,6 +2082,109 @@
             height: 90vh !important;
         }
     }
+
+/* for samsung tab */
+@media (min-width : 521px) and (max-width : 758px) {
+    .fade-carousel {
+        height: 37vh;
+    }
+    .hero{
+        top: 24%
+    }
+    #slider1_firsttext{
+        font-size: 26px;
+    }
+    #slider1_secondtext{
+        font-size:22px !important;
+    }
+    #slider1_thirdtext{
+        display: block !important;
+        font-size: 13px;
+        line-height: 20px;
+        margin-top:-10px;
+    }
+    #slider1_mobile_button{
+        font-family: rubik-bold-medium !important;
+        margin-top:5px;
+    }
+    .fade-carousel .slides .slide-2 img{
+        height:55%
+    }
+    #hero_slider2 {
+        left: 17%;
+    }
+    #slider2_firsttext, #slider2_secondtext, #slider2_thirdtext, #slider2_button{
+        font-size:26px;
+    }
+    #slider2_thirdtext {
+        margin-left: 141px;
+        margin-top:10px;
+    }
+    #slider2_mobile_button {
+        margin: 10px 0 0 50px !important;
+    }
+    #slider2_secondtext {
+        margin-left: 90px !important;
+        margin-top:10px;
+    }
+    .fade-carousel .slides .slide-3 img{
+        height:44%
+    }
+    #slider3_firsttext,#slider3_secondtext{
+        font-size:22px !important;
+    }
+    #slider3_firsttext{
+        margin: -15px 0 0 -258px !important;
+    }
+    #slider3_secondtext{
+        margin: -30px -275px 0 0 !important;
+    }
+    #slider4_secondtext {
+        margin: -196px -175px 0px -176px !important;
+    }
+    #slider4_firsttext {
+        margin: -240px -158px 0 -157px;
+    }
+    #slider4_mobile_button{
+        margin:-190px 0 0 -240px ;
+    }
+    .fade-carousel .slides .slide-4 img{
+        height:50%
+    }
+    .video-js .vjs-big-play-button {
+        top: 124px !important;
+        left: 260px !important;
+    }
+    .fade-carousel .slides .slide-5 img{
+        height:41%;
+    }
+    #slider5_firsttext {
+        font-size: 24px !important;
+    }
+    .slider5_hero {
+        top: 21% !important;
+    }
+    .fade-carousel .slides .slide-6 img{
+        height: 41%;
+    }
+    #slider6_firsttext, #slider6_secondtext, #slider6_thirdtext,#slider6_button{
+        font-size:22px !important;
+    }
+    .text_last_slide {
+        left: 56% !important;
+        top: 27% !important;
+    }
+    #slider6_firsttext{
+        margin-left: 27px;
+    }
+    #slider6_thirdtext{
+        margin-left: 13px;
+    }
+    #slider6_mobile_button{
+        margin-left:60px;
+    }
 }
+
+
 
 
