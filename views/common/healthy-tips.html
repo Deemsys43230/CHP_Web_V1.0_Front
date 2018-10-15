@@ -65,7 +65,8 @@ img:hover{color:red;}
             <div class="col-md-4 col-lg-4 col-sm-4 sidebar right-sidebar">
                 <!-- Popular Posts widget -->
                 <div class="widget widget-popular-posts">
-                    <h4>Popular Tips <span class="head-line"></span></h4>
+                    <h4 style="font-weight:500 !important;">Popular Tips <span class="head-line"></span></h4>
+                    <span class="healthy-tips-quotes">"Each day is another chance to change your life."<br/><br/></span>
                     <ul class="remove-style">
                         <li ng-repeat="article in articleList.articles | limitTo: pagination.itemsPerPage" ng-click="focusToIndividualTips(article.id);">
                             <div class="widget-thumb">

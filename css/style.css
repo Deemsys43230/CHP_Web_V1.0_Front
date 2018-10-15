@@ -39,18 +39,20 @@
     height: 80vh;
 }
 .fade-carousel .carousel-indicators > li {
-    margin: 0 2px;
-    background-color: #f39c12 !important;
-    border-color: #f39c12 !important;
-    width: 10px !important;
-    height: 10px !important;
+    margin: 0 2px !important;
+    background-color: #ffffff;
+    border-color: #ffffff !important;
+    width: 11px !important;
+    height: 11px !important;
     opacity: .5;
 }
 .fade-carousel .carousel-indicators > li.active {
-    width: 10px !important;
-    height: 10px !important;
+    width: 11px !important;
+    height: 11px !important;
     opacity: 1;
+    background-color: #ffffff;
 }
+
 
 /********************************/
 /*          Hero Headers        */
@@ -84,7 +86,8 @@
 }
 
 #slider2_firsttext,#slider2_secondtext,#slider2_thirdtext,#slider2_button
-,#slider4_firsttext,#slider4_secondtext,#slider4_button,#slider2_mobile_button,#slider4_mobile_button{
+,#slider4_firsttext,#slider4_secondtext,#slider4_button,#slider2_mobile_button,
+#slider4_mobile_button,#slider7_firsttext,#slider7_secondtext,#slider7_button,#slider7_mobile_button{
     font-family: kaushan-script !important;
 }
 #slider2_secondtext{
@@ -118,6 +121,13 @@
 #slider4_secondtext{
     margin: 30px 0px 0px 530px;
 }
+#slider7_secondtext{
+    margin: 15px 0 0 120px;
+}
+#slider7_button{
+   margin-left:80px;
+}
+
 .hero hgroup h2{
     line-height: 1.1 !important;
     font-size: 30px !important;
@@ -132,6 +142,10 @@
 .text_last_slide{
     left:  79% !important;
     top: 50% !important;
+}
+.text_mobilebanner_slide {
+    left: 15%!important;
+    top: 50%!important;
 }
 .slider5_hero{
     top:40% !important;
@@ -202,7 +216,8 @@
 .fade-carousel .slides .slide-3,
 .fade-carousel .slides .slide-4,
 .fade-carousel .slides .slide-5,
-.fade-carousel .slides .slide-6 {
+.fade-carousel .slides .slide-6,
+.fade-carousel .slides .slide-7 {
     height: 90vh;
     /*background-size: 100% 100%;*/
     /*background-position: center center;100% 700px*/
@@ -212,7 +227,8 @@
 .fade-carousel .slides .slide-3 img,
 .fade-carousel .slides .slide-4 img,
 .fade-carousel .slides .slide-5 img,
-.fade-carousel .slides .slide-6 img{
+.fade-carousel .slides .slide-6 img,
+.fade-carousel .slides .slide-7 img{
     width:100%;
     height:100%
 }
@@ -19938,6 +19954,12 @@ border-left: none !important;
     100%{
         -moz-transform:scale(.3);
     }
+}
+/* healthy tips Quotes */
+.healthy-tips-quotes{
+    font-weight:500 !important;
+    font-family:rubik-bold !important;
+    font-size:16px;
 }
 
 

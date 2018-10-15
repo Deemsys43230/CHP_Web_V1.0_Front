@@ -165,101 +165,116 @@
                 <li data-target="#bs-carousel" data-slide-to="3"></li>
                 <li data-target="#bs-carousel" data-slide-to="4"></li>
                 <li data-target="#bs-carousel" data-slide-to="5"></li>
+                <li data-target="#bs-carousel" data-slide-to="6"></li>
             </ol>
 
             <!-- Wrapper for slides -->
             <div class="carousel-inner">
-               <div class="item slides active">
-                    <div class="slide-1"  id="slide-1" style="display: block;">
-                        <div class="hero">
-                            <hgroup>
-                                <h1 id="slider1_firsttext">It’s not a short term diet</h1>
-                                <h2 id="slider1_secondtext">It’s a long term lifestyle change</h2>
-                                <br/>
-                                <h3 id="slider1_thirdtext" class="hidden-xs">Cyberhealths is a <b>FAMILY</b> of fitness trainers, techies, athletes, dreamers, and entrepreneurs who are relentless in their passion for health education.</h3>
-                            </hgroup>
-                                <a id="slider1_button"  class="noMobileApp slider_button btn btn-hero btn-lg" role="button" href="views/home/#/user-registration">Register Now</a>
+                    <div class="item slides active">
+                            <div class="slide-1"  id="slide-1" style="display: block;">
+                                <div class="hero">
+                                    <hgroup>
+                                        <h1 id="slider1_firsttext">It’s not a short term diet</h1>
+                                        <h2 id="slider1_secondtext">It’s a long term lifestyle change</h2>
+                                        <br/>
+                                        <h3 id="slider1_thirdtext" class="hidden-xs">Cyberhealths is a <b>FAMILY</b> of fitness trainers, techies, athletes, dreamers, and entrepreneurs who are relentless in their passion for health education.</h3>
+                                    </hgroup>
+                                        <a id="slider1_button"  class="noMobileApp slider_button btn btn-hero btn-lg" role="button" href="views/home/#/user-registration">Register Now</a>
+                                        <!-- This is for mobile -->
+                                        <button id="slider1_mobile_button" class="mobileApp btn btn-hero btn-lg" role="button" onclick="$('.loginNow').click()" style="display: none">Register Now</button>
+                                </div>
+                                <video width="100%" height="100%" loop="" muted="" id="slider-video">
+                                    <source src="https://cdn.cyberhealths.com/Application/banner-video.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                       </div>
+                       <div class="item slides">
+                            <div class="slide-2">
+                                <img src="images/slider-back-1.jpg">
+                            </div>
+                            <div class="hero" id="hero_slider2">
+                                <hgroup>
+                                    <h1 id="slider2_firsttext">Coaches:</h1>
+                                    <br class="hidden-xs"/>
+                                    <h2 id="slider2_secondtext">Train Anyone,</h2>
+                                    <br class="hidden-xs"/>
+                                    <h2 id="slider2_thirdtext">Anywhere in the World.</h2>
+                                </hgroup>
+                                <br class="hidden-xs"/>
+        
+                                <a id="slider2_button" class="noMobileApp slider_button btn btn-hero btn-lg" role="button" href="views/home/#/user-registration">Register Now</a>
                                 <!-- This is for mobile -->
-                                <button id="slider1_mobile_button" class="mobileApp btn btn-hero btn-lg" role="button" onclick="$('.loginNow').click()" style="display: none">Register Now</button>
+                                <button id="slider2_mobile_button" class="mobileApp btn btn-hero btn-lg" role="button" onclick="$('.loginNow').click()" style="display: none">Register Now</button>
+                            </div>
+                       </div>
+                       <div class="item slides">
+                            <div class="slide-3">
+                                <img src="images/slider-back-2.jpg">
+                            </div>
+                            <div class="hero">
+                                <hgroup>
+                                    <h2 id="slider3_firsttext" class="pull-left">Sweat Now!</h2> <br/>
+                                    <h2 id="slider3_secondtext" class="pull-right ">Shine Later!</h2>
+                                </hgroup> <br/><br/><br/>
+                            </div>
+                       </div>
+                      <div class="item slides">
+                            <div class="slide-4">
+                                <img src="images/slider-back-3.jpg">
+                            </div>
+                            <div class="hero" id="slide_4_div">
+                                <hgroup>
+                                    <h2 id="slider4_firsttext" class="pull-right">You don’t have to eat less</h2> <br/>
+                                    <h2 id="slider4_secondtext">You just have to eat right</h2>
+                                </hgroup>
+                                <a id="slider4_button" class="noMobileApp slider_button btn btn-hero btn-lg pull-right" role="button" href="views/home/#/user-registration">Register Now</a>
+                                <!-- This is for mobile -->
+                                <button id="slider4_mobile_button" class="mobileApp btn btn-hero btn-lg" role="button" onclick="$('.loginNow').click()" style="display: none">Register Now</button>
+                            </div>
+                      </div>
+                      <div class="item slides">
+                            <div class="slide-5">
+                                <img src="images/slider-back-4.jpg">
+                            </div>
+                            <div class="hero slider5_hero">
+                                <hgroup>
+                                    <h2 id="slider5_firsttext">"Every human being is the author of his own health or disease”</h2>
+                                    <h3 id="slider5_secondtext">– Buddha</h3>
+                                </hgroup>
+                                <a id="slider5_button" class="noMobileApp slider_button btn btn-hero btn-lg" role="button" href="views/home/#/user-registration">Register Now</a>
+                                <!-- This is for mobile -->
+                                <button id="slider5_mobile_button" class="slider5_iphone_button mobileApp btn btn-hero btn-lg" role="button" onclick="$('.loginNow').click()" style="display: none">Register Now</button>
+                            </div>
+                      </div>
+                        <div class="item slides">
+                            <div class="slide-6">
+                                <img src="images/slider-back-5.jpg">
+                            </div>
+                            <div class="hero text_last_slide">
+                                <hgroup>
+                                    <h2 id="slider6_firsttext">It's Will Power<br/></h2>
+                                    <h2 id="slider6_secondtext">It's Mind Over Matter<br/></h2>
+                                    <h2 id="slider6_thirdtext">It's Determination<br/></h2>
+                                </hgroup>
+                                <a id="slider6_button" class="noMobileApp slider_button btn btn-hero btn-lg" role="button" href="views/home/#/user-registration">Register Now</a>
+                                <!-- This is for mobile -->
+                                <button id="slider6_mobile_button" class="mobileApp btn btn-hero btn-lg" role="button" onclick="$('.loginNow').click()" style="display: none">Register Now</button>
+                            </div>
                         </div>
-                        <video width="100%" height="100%" loop="" muted="" id="slider-video">
-                            <source src="https://cdn.cyberhealths.com/Application/banner-video.mp4" type="video/mp4">
-                        </video>
-                    </div>
-               </div>
-               <div class="item slides">
-                    <div class="slide-2">
-                        <img src="images/slider-back-1.jpg">
-                    </div>
-                    <div class="hero" id="hero_slider2">
-                        <hgroup>
-                            <h1 id="slider2_firsttext">Coaches:</h1>
-                            <br class="hidden-xs"/>
-                            <h2 id="slider2_secondtext">Train Anyone,</h2>
-                            <br class="hidden-xs"/>
-                            <h2 id="slider2_thirdtext">Anywhere in the World.</h2>
-                        </hgroup>
-                        <br class="hidden-xs"/>
-
-                        <a id="slider2_button" class="noMobileApp slider_button btn btn-hero btn-lg" role="button" href="views/home/#/user-registration">Register Now</a>
-                        <!-- This is for mobile -->
-                        <button id="slider2_mobile_button" class="mobileApp btn btn-hero btn-lg" role="button" onclick="$('.loginNow').click()" style="display: none">Register Now</button>
-                    </div>
-               </div>
-               <div class="item slides">
-                    <div class="slide-3">
-                        <img src="images/slider-back-2.jpg">
-                    </div>
-                    <div class="hero">
-                        <hgroup>
-                            <h2 id="slider3_firsttext" class="pull-left">Sweat Now!</h2> <br/>
-                            <h2 id="slider3_secondtext" class="pull-right ">Shine Later!</h2>
-                        </hgroup> <br/><br/><br/>
-                    </div>
-               </div>
-              <div class="item slides">
-                    <div class="slide-4">
-                        <img src="images/slider-back-3.jpg">
-                    </div>
-                    <div class="hero" id="slide_4_div">
-                        <hgroup>
-                            <h2 id="slider4_firsttext" class="pull-right">You don’t have to eat less</h2> <br/>
-                            <h2 id="slider4_secondtext">You just have to eat right</h2>
-                        </hgroup>
-                        <a id="slider4_button" class="noMobileApp slider_button btn btn-hero btn-lg pull-right" role="button" href="views/home/#/user-registration">Register Now</a>
-                        <!-- This is for mobile -->
-                        <button id="slider4_mobile_button" class="mobileApp btn btn-hero btn-lg" role="button" onclick="$('.loginNow').click()" style="display: none">Register Now</button>
-                    </div>
-              </div>
-              <div class="item slides">
-                    <div class="slide-5">
-                        <img src="images/slider-back-4.jpg">
-                    </div>
-                    <div class="hero slider5_hero">
-                        <hgroup>
-                            <h2 id="slider5_firsttext">"Every human being is the author of his own health or disease”</h2>
-                            <h3 id="slider5_secondtext">– Buddha</h3>
-                        </hgroup>
-                        <a id="slider5_button" class="noMobileApp slider_button btn btn-hero btn-lg" role="button" href="views/home/#/user-registration">Register Now</a>
-                        <!-- This is for mobile -->
-                        <button id="slider5_mobile_button" class="slider5_iphone_button mobileApp btn btn-hero btn-lg" role="button" onclick="$('.loginNow').click()" style="display: none">Register Now</button>
-                    </div>
-              </div>
                 <div class="item slides">
-                    <div class="slide-6">
-                        <img src="images/slider-back-5.jpg">
+                        <div class="slide-7">
+                            <img src="images/slider-back-6.jpg">
+                        </div>
+                        <div class="hero text_mobilebanner_slide">
+                            <hgroup>
+                                <h2 id="slider7_firsttext">Stayconnected<br/></h2>
+                                <h2 id="slider7_secondtext">Anywhere, Anytime<br/></h2>
+                            </hgroup>
+                            <a id="slider7_button" class="noMobileApp slider_button btn btn-hero btn-lg" role="button" href="views/home/#/user-registration">Register Now</a>
+                            <!-- This is for mobile -->
+                            <button id="slider7_mobile_button" class="mobileApp btn btn-hero btn-lg" role="button" onclick="$('.loginNow').click()" style="display: none">Register Now</button>
+                        </div>
                     </div>
-                    <div class="hero text_last_slide">
-                        <hgroup>
-                            <h2 id="slider6_firsttext">It's Will Power<br/></h2>
-                            <h2 id="slider6_secondtext">It's Mind Over Matter<br/></h2>
-                            <h2 id="slider6_thirdtext">It's Determination<br/></h2>
-                        </hgroup>
-                        <a id="slider6_button" class="noMobileApp slider_button btn btn-hero btn-lg" role="button" href="views/home/#/user-registration">Register Now</a>
-                        <!-- This is for mobile -->
-                        <button id="slider6_mobile_button" class="mobileApp btn btn-hero btn-lg" role="button" onclick="$('.loginNow').click()" style="display: none">Register Now</button>
-                    </div>
-                </div>
             </div>
         </div>
         <!-- /carousel -->

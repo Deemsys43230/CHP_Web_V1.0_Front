@@ -595,7 +595,9 @@
     .fade-carousel .slides .slide-3,
     .fade-carousel .slides .slide-4,
     .fade-carousel .slides .slide-5,
-    .fade-carousel .slides .slide-6 {
+    .fade-carousel .slides .slide-6,
+    .fade-carousel .slides .slide-7,
+     {
         height: 42vh !important;
     }
     .text_last_slide{
@@ -1560,10 +1562,13 @@
     #slider4_mobile_button {
         margin: -210px 0 0 17px !important;
     }
-
-
-
-}
+    #slider7_firsttext, #slider7_secondtext {
+        font-size:13px !important;
+    }
+    #slider7_mobile_button {
+        margin: 13px 0 0 10px !important;
+    }
+    }
 /* for galaxy mobile  */
 @media (min-width:360px) and  (max-width: 450px) {
     #hero_slider2 {
@@ -1815,6 +1820,19 @@
     #slider6_thirdtext {
         margin-right: -23px;
     }
+    .text_mobilebanner_slide {
+        left: 26%!important;
+        top: 16%!important;
+    }
+    #slider7_secondtext {
+        margin: 13px 0 0 25px;
+    }
+    #slider7_mobile_button{
+        margin:13px 0 0 0;
+    }
+    .fade-carousel .slides .slide-7 img {
+        height: 38%;
+    }
 
 }
 
@@ -2002,6 +2020,12 @@
     #slider4_button{
         margin-right: -87px;
     }
+    .fade-carousel .slides .slide-7 img {
+        height: 53%;
+    }
+    #slider7_button {
+        margin-left: 167px;
+    }
 }
     @media (min-width : 992px) and (max-width: 1024px) {
 
@@ -2183,6 +2207,23 @@
     #slider6_mobile_button{
         margin-left:60px;
     }
+    .text_mobilebanner_slide{
+        left:25% !important;
+        top: 25% !important;
+    }
+   #slider7_firsttext,#slider7_secondtext{
+       font-size:23px !important;
+    }
+    .fade-carousel .slides .slide-7 img {
+        height: 41%;
+    }
+    #slider7_secondtext {
+        margin: 15px 0 0 40px;
+    }
+    #slider7_button {
+        margin-left: -19px;
+    }
+    
 }
 
 
