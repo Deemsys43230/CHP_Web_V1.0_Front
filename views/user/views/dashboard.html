@@ -111,12 +111,12 @@
         </div>
         <div class="dashboard-2" ng-show="historyReport==0">
             <div id="content">
-                <div id="daily_update">
+                <div id="daily_update" ng-show="$root.isMenuClicked==undefined||$root.isMenuClicked==1||$root.isMenuClicked==2||$root.isMenuClicked==4">
                     <div class="col-lg-12 col-md-12 col-sm-12 padding-lr" style="padding-right: 3px;">
                         <!-- Nav Tabs -->
                         <ul class="nav nav-tabs pull-left">
-                            <li class="active" ng-click="showExercise=0;showFoodMoal=1;"><a href="#tab-1" data-toggle="tab" onclick="return false;" id="foodintake">Food Intake</a></li>
-                            <li ng-click="showExercise=1;doGetCategoryandTypeExercise();" ><a href="#tab-2" data-toggle="tab" id="energyspent" onclick="return false;">Energy Spent</a></li>
+                            <li class="active" ng-click="showExercise=0;showFoodMoal=1;doGetFrquestFoodList();"><a href="#tab-1" data-toggle="tab" onclick="return false;" id="foodintake">Food Intake</a></li>
+                            <li ng-click="showExercise=1;doGetCategoryandTypeExercise();doGetFrequentExercise();" ><a href="#tab-2" data-toggle="tab" id="energyspent" onclick="return false;">Energy Spent</a></li>
                             <li><a href="#tab-3" data-toggle="tab"  id="weight-water" onclick="return false;">Log</a></li>
                             <li>
                         </ul>
@@ -579,7 +579,7 @@
                             </div>-->
 
                            <!-- Tab view graph for calories intake and burnt-->
-                            <div class="tab-pane padding-top-5" id="graph">
+                            <div class="tab-pane padding-top-5" id="graph" ng-show="$root.isMenuClicked==6">
                                 <div class="tab_container">
                                     <div class="col-lg-12 col-md-12 col-sm-12 no-padding">
                                         <div class="col-lg-1 col-md-1 col-sm-1 no-padding">
@@ -763,7 +763,7 @@
                 </div>--><!-- @end #ideas-content -->
 
                 <!-- Starts App and Device post -->
-                <div id="app" class="contentblock hidden">
+                <div id="app" class="contentblock hidden" ng-show="$root.isMenuClicked==3">
                     <div class="outerline">
                         <form name="wearableForm">
                             <div class="col-lg-12 col-md-12 col-sm-12 margin-top-10" ng-init="wearableinit()" >

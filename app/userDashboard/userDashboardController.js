@@ -3,7 +3,6 @@ var userApp= angular.module('userApp', ['ngRoute','oc.lazyLoad','ngCookies','req
 userApp.controller('UserDashboardController',['$scope','$window','requestHandler','Flash','UserDashboardService','$interval','roundProgressService','limitToFilter','$timeout','$compile','$location','FoodMeasureService','$rootScope','$route','calendarConfig','moment',function($scope,$window,requestHandler,Flash,UserDashboardService,$interval,roundProgressService,limitToFilter,$timeout,$compile,$location,FoodMeasureService,$rootScope,$route,calendarConfig,moment) {
         $rootScope.isMenuShow=1;
         $scope.foodSearchResult = [];
-        $scope.dashboardLoaded=true;
         $scope.userFood={};
         $scope.userFood.sessionid=1;
         $scope.graphSessionId='1';
@@ -46,8 +45,10 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
         daterangepicker();
         modeltrigger();
         tabcontent();
-        if($route.current.$$route.fromGoal)
+        if($route.current.$$route.fromGoal){
+            $rootScope.isMenuClicked=-1;
             $("#updateWeightGoal").click();
+        }
         if($route.current.$$route.fromDevice){
             $("#appAndDevice").click();
         }
@@ -658,14 +659,14 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
 
                 if(id!=2) {
                     $scope.doGetConnectedDevices();
+                    $scope.initialLoadFoodAndExercise(date);
                 }
                     // if(id=0){
                     //     $location.path("dashboard");
                     // }
 
               $scope.connectDevice=false;
-            $scope.initialLoadFoodAndExercise(date);
-                    },
+            },
                 function () {
                     errorMessage(Flash, "Please try again later!")
                 });
@@ -691,6 +692,27 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
                    $scope.syncBtnTxt="No Devices Connected";
                 }
                 });
+        };
+
+        $scope.doGetFrquestFoodList=function(){
+            var frequentFoodPromise=UserDashboardService.doGetFrequentlyAdded();
+                frequentFoodPromise.then(function(result){
+                $scope.frequentFoodList =result;
+                $scope.loaded=false;
+            });
+        };
+       $scope.doGetFrequentExercise=function(){
+            var frequentExercisePromise=UserDashboardService.doGetFrequentlyUsedExercise();
+                frequentExercisePromise.then(function(result){
+                $scope.frequentExerciseList =result;
+            });
+        };
+       $scope.doGetExerciseList=function(){
+            var listExercisePromise=UserDashboardService.doGetUserExerciseList();
+                listExercisePromise.then(function(result){
+                $scope.exerciselist =result;
+                $scope.loaded=false;
+            });
         };
 
         //On Select frequent foods
@@ -1118,12 +1140,6 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
 
         $scope.doGetDemograph();
 
-        //To get frequently asked foods
-        var frequentFoodPromise=UserDashboardService.doGetFrequentlyAdded();
-        frequentFoodPromise.then(function(result){
-            $scope.frequentFoodList =result;
-        });
-
         // Insert suggest food
         $scope.isAddFood =false;
         $scope.doAddSuggestFood=function(){
@@ -1361,11 +1377,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
             });
         };
 
-        var listExercisePromise=UserDashboardService.doGetUserExerciseList();
-        listExercisePromise.then(function(result){
-            $scope.exerciselist =result;
-        });
-
+       
         //Insert User Exercise
         $scope.doInsertUserExercise=function(){
             //Set values according to the api calls
@@ -1467,13 +1479,6 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
             });
 
         };
-
-        //To get frequently asked exercise
-        var frequentExercisePromise=UserDashboardService.doGetFrequentlyUsedExercise();
-        frequentExercisePromise.then(function(result){
-            $scope.frequentExerciseList =result;
-        });
-
 
         //Calories caluclation for exercose
         $scope.doCalculateCaloriesExercise=function(){
@@ -1697,7 +1702,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
 
 
             requestHandler.getRequest("user/getWeightGoal/","").then(function(response){
-
+                $scope.loaded=false;
                 if(response.data.Response_status==0){
                     $scope.updateGoal=0;
                     $window.singlePicker = true;
@@ -5019,7 +5024,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
         }
 
     };
-
+    
     //to enable meal-plan popup
     if($location.absUrl().indexOf("dashboard")!=-1 && $rootScope.isMenuClicked==1){
         $scope.isCallApiDetails=true;
@@ -5030,40 +5035,47 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
         $scope.showFoodMoal=1;
         $scope.mealPlanCalender();
         $scope.doSyncDevices(2);
+        $scope.isLoaded=true;
     };
 
     if($rootScope.isMenuClicked==3){
         $("#appAndDevice").click();
         $scope.isDashboardConnectWearable=false;
         $('#device_not_connect').removeClass('dashboard_overlay');
+        $scope.isLoaded=true;
     };
-    if($rootScope.isMenuClicked==2){
+    if($rootScope.isMenuClicked==2){ 
         $scope.isCallApiDetails=false;
         $("#dailyupdate").click();
         $("#energyspent").click();
         $scope.calendarText='Energy Spent';
         $scope.doSyncDevices(2);
+        $scope.isLoaded=true;
     };
     if($rootScope.isMenuClicked==4){
         $scope.isCallApiDetails=false;
         $("#dailyupdate").click();
         $("#weight-water").click();
         $scope.calendarText='Weight & Water Log';
+        $scope.isLoaded=true;
     };
     if($rootScope.isMenuClicked==5){
         $("#medicationsmenu").click();
         $scope.doSyncDevices(2);
+        $scope.isLoaded=true;
     };
     if($rootScope.isMenuClicked==6){
       $("#history-menu").click();
         $scope.historyReport=1;
         $scope.showGraph=2;
+        $scope.isLoaded=true;
     };
 
     // to redirect apps & devices tab
     $scope.menuUrlChange=function(id){
         $rootScope.isMenuClicked=id;
         $("#appAndDevice").click();
+        $scope.isLoaded=true;
     };
 
     $('#energyspent').click(function(e) {
@@ -5146,27 +5158,40 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
     });
 
 
+
         //Initialize
         $scope.initialLoadFoodAndExercise=function(date){
-            $scope.loadFoodDiary(date);
-            $scope.loadExerciseDiary(date);
-           // $scope.doGetIntakeBruntByDate(date);  deprecated
-            $scope.goGetDailyIntakeGraph(date);
-            $scope.doGetWeightGoal();
+            // $scope.doGetIntakeBruntByDate(date);  deprecated
             $scope.doGetWeightLog(date);
             $scope.doGetWaterLog(date);
+            $scope.doGetWeightGoal();
             $scope.goGetSessionGraph($scope.storedSessionId);
             $scope.getUserTimeZone(date);
-            $scope.getBudget(date);
             $scope.graphTwo();
             $scope.checkGoalOnLoad(date);
+           
+            $scope.goGetDailyIntakeGraph(date);
+            $scope.getBudget(date);
             $scope.doGetWearableDateByDate(date);
-            $scope.doGetMedicationListByUser();
-            $scope.doCheckUserMedicationDocument();
             $scope.doGetUserDetails();
+            if($rootScope.isMenuClicked==1||$rootScope.isMenuClicked==undefined){
+                $scope.loadFoodDiary(date);
+                //To get frequently asked foods
+                $scope.doGetFrquestFoodList();
+            }
+            if($rootScope.isMenuClicked==2){
+                $scope.loadExerciseDiary(date);
+                //To get frequently asked exercise
+                $scope.doGetFrequentExercise();
+                $scope.doGetExerciseList();
+                $scope.doGetCategoryandTypeExercise();
+            }
+            if($rootScope.isMenuClicked==5){
+                 $scope.doGetMedicationListByUser();
+                $scope.doCheckUserMedicationDocument();
+            }
         };
-        //page load end
-           $scope.loaded=false;
+        
         // initially new date is selected date
         $scope.newSelectedDate=selectedDate;
         $scope.initialLoadFoodAndExercise($scope.newSelectedDate);

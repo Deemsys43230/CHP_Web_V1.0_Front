@@ -6,10 +6,10 @@ userApp.controller('UserKeyDetailsController',['$scope','requestHandler','$rootS
     //to redirect to particular controller
     $scope.menuUrlChange=function(tabid){
         $rootScope.isMenuClicked=tabid;
-        $location.path('/dashboard');
         if (tabid==7) {
             $location.path('/profile');
         }
+        $location.path('/dashboard');
         // if (tabid==5) {
         //     $location.path('/demography');
         // }
