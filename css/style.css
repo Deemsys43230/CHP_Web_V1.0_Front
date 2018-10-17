@@ -16574,7 +16574,7 @@ a.main-button.red_back {
 }
 .common-border{
     background-color: #fff;
-    box-shadow: inset -3px 3px 0px #A6ACAF;
+    /*box-shadow: inset -3px 3px 0px #A6ACAF;*/
 }
 .border{
     border-bottom: 1px solid #d3d3d3;

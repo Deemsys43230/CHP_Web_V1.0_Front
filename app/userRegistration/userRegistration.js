@@ -26,10 +26,12 @@ commonApp.controller('UserRegistrationController',['$scope','requestHandler','Fl
         if($scope.steps==6 && $scope.planType==4){
             $scope.changePlanSkipStep=true;
         }
+        if($scope.steps==6&&$scope.planType!=4){
+            $scope.steps=$scope.steps-1;
+        }else{
+            $scope.steps = 0;
+        }
         $scope.customAlertChangePlan=false;
-        $scope.steps = 0;
-
-
     };
     //to show plan preview
     $scope.planPreview = function () {
@@ -369,6 +371,7 @@ $scope.maxTargetWeightCheckLbs = function(){
             $scope.units=1;
             $scope.weightLbsToKgConversion();
             $scope.maxHeightCheck();
+            $scope.maxTargetWeightCheckKgs();
             $scope.maxWeightCheckKgs();
 
         }
