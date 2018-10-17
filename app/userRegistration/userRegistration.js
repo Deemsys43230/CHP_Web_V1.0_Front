@@ -274,8 +274,7 @@ commonApp.controller('UserRegistrationController',['$scope','requestHandler','Fl
 //To Check maximum Weight in kgs
     $scope.maxweightkgs=false;
     $scope.maxWeightCheckKgs = function(){
-
-        if($scope.defaultRegistrationData.weight <=999.9){
+      if($scope.defaultRegistrationData.weight <=999.9){
             $scope.maxweightkgs=false;
         }
         else if($scope.defaultRegistrationData.weight >999.9){
@@ -283,7 +282,16 @@ commonApp.controller('UserRegistrationController',['$scope','requestHandler','Fl
         }
 
     };
-
+//To Check maximum target Weight in kgs
+$scope.maxtargetweightkgs=false;
+$scope.maxTargetWeightCheckKgs = function(){
+  if($scope.defaultRegistrationData.targetweightkgs<=999.9){
+        $scope.maxtargetweightkgs=false;
+    }
+    else if($scope.defaultRegistrationData.targetweightkgs >999.9){
+        $scope.maxtargetweightkgs=true;
+    }
+};
 
     //To check maximum Weight
     $scope.maxweightlbs=false;
@@ -296,6 +304,17 @@ commonApp.controller('UserRegistrationController',['$scope','requestHandler','Fl
         }
 
     };
+    //To Check maximum target Weight in lbs
+$scope.maxtargetweightlbs=false;
+$scope.maxTargetWeightCheckLbs = function(){
+  if($scope.defaultRegistrationData.targetweightlbs<=2204.4){
+        $scope.maxtargetweightlbs=false;
+    }
+    else if($scope.defaultRegistrationData.targetweightlbs >2204.4){
+        $scope.maxtargetweightlbs=true;
+    }
+};
+
 
     //To check maximum Height in inches
     $scope.maxHeightInches=false;
@@ -331,12 +350,12 @@ commonApp.controller('UserRegistrationController',['$scope','requestHandler','Fl
 
         }else {
             if($scope.units==1){
-                if($scope.basicDetailsForm.$valid && $scope.maxheight==false && $scope.maxweightkgs==false && $scope.weightlossError==false){
+                if($scope.basicDetailsForm.$valid && $scope.maxheight==false && $scope.maxweightkgs==false && $scope.weightlossError==false && $scope.maxtargetweightkgs==false){
                     $scope.nextStep();
                 }
             }
             else{
-                if($scope.basicDetailsForm.$valid && $scope.maxweightlbs==false && $scope.maxHeightInches==false && $scope.maxHeightFeet==false && $scope.weightlossError==false){
+                if($scope.basicDetailsForm.$valid && $scope.maxweightlbs==false && $scope.maxHeightInches==false && $scope.maxHeightFeet==false && $scope.weightlossError==false && $scope.maxtargetweightlbs==false){
                     $scope.nextStep();
                 }
             }
@@ -357,6 +376,7 @@ commonApp.controller('UserRegistrationController',['$scope','requestHandler','Fl
             $scope.units=2;
             $scope.convertCmToFeetConversion();
             $scope.maxWeightCheckLbs();
+            $scope.maxTargetWeightCheckLbs();
             $scope.maxHeightCheckInches();
             $scope.maxHeightCheckFeet();
 
@@ -421,13 +441,17 @@ commonApp.controller('UserRegistrationController',['$scope','requestHandler','Fl
     customEndDateCalender();
     //convert height cm to feet and inches
     $scope.convertCmToFeetConversion=function() {
-        var realFeet = (($scope.defaultRegistrationData.height*0.393700) / 12);
-        var feet = Math.floor(realFeet);
-        $scope.defaultRegistrationData.heightFeet=feet;
-        actualnches = ((realFeet - feet) * 12);
-        $scope.defaultRegistrationData.heightInches=Math.round(actualnches);
+        if($scope.defaultRegistrationData.height!='' && $scope.defaultRegistrationData.height!=undefined){
+            var realFeet = (($scope.defaultRegistrationData.height*0.393700) / 12);
+            var feet = Math.floor(realFeet);
+            $scope.defaultRegistrationData.heightFeet=feet;
+            actualnches = ((realFeet - feet) * 12);
+            $scope.defaultRegistrationData.heightInches=Math.round(actualnches);
+        }
         //convert weight kgs to lbs
-        $scope.defaultRegistrationData.weightlbs=($scope.defaultRegistrationData.weight*2.2046).toFixed(1);
+        if($scope.defaultRegistrationData.weight!='' && $scope.defaultRegistrationData.weight!=undefined){
+            $scope.defaultRegistrationData.weightlbs=($scope.defaultRegistrationData.weight*2.2046).toFixed(1);
+        }
         if($scope.defaultRegistrationData.targetweightkgs!='' && $scope.defaultRegistrationData.targetweightkgs!=undefined ){
             $scope.defaultRegistrationData.targetweightlbs=($scope.defaultRegistrationData.targetweightkgs*2.2046).toFixed(1);
         }
@@ -438,7 +462,9 @@ commonApp.controller('UserRegistrationController',['$scope','requestHandler','Fl
             var originalValue=($scope.defaultRegistrationData.heightFeet*12)+Math.abs(actualnches);
             $scope.defaultRegistrationData.height=(originalValue*2.54).toFixed(1);
         }
-        $scope.defaultRegistrationData.weight= ($scope.defaultRegistrationData.weightlbs/2.2046).toFixed(1);
+        if($scope.defaultRegistrationData.weightlbs!='' && $scope.defaultRegistrationData.weightlbs!=undefined){
+            $scope.defaultRegistrationData.weight= ($scope.defaultRegistrationData.weightlbs/2.2046).toFixed(1);
+        }
         if($scope.defaultRegistrationData.targetweightlbs!='' && $scope.defaultRegistrationData.targetweightlbs!=undefined ){
             $scope.defaultRegistrationData.targetweightkgs= ($scope.defaultRegistrationData.targetweightlbs/2.2046).toFixed(2);
         }
