@@ -37,14 +37,19 @@
     </a>
     </div>
 </script>
-<div class="col-lg-12 col-md-12 col-sm-12">
-    <div ng-if="loaded">
-        <div class="loader-style">
-           <div class="loader"></div>
-        </div>
+<div class="col-lg-12 col-md-12 col-sm-12" style="margin-top:150px !important;" ng-show="loaded">
+    <div id="circularG" >
+        <div id="circularG_1" class="circularG"></div>
+        <div id="circularG_2" class="circularG"></div>
+        <div id="circularG_3" class="circularG"></div>
+        <div id="circularG_4" class="circularG"></div>
+        <div id="circularG_5" class="circularG"></div>
+        <div id="circularG_6" class="circularG"></div>
+        <div id="circularG_7" class="circularG"></div>
+        <div id="circularG_8" class="circularG"></div>
     </div>
 </div>
-<div class="page-banner1" >
+<div class="page-banner1" ng-hide="loaded">
 
     <div id="w" class="clearfix">
 
@@ -157,7 +162,7 @@
                                                 </div>
                                                 <div class="search-loading" ng-show="loadingFoods"><i class="fa fa-spinner fa-pulse"></i>&nbsp;&nbsp;Searching Foods...</div>
                                             </div>
-                                            <div class="food_scrollbar" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',horizrailenabled: false,background:'#eee'}" >
+                                            <div class="food_scrollbar" id="foodlist-scrollbar" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',horizrailenabled: false}" >
                                                 <div ng-if="loaded">
                                                     <div class="loader-style-dashboard">
                                                         <div class="loader"></div>
@@ -210,7 +215,7 @@
                                         <div class="col-lg-3 col-md-3 col-sm-3 no-padding dashboard-6">
                                             <div class="content-3">
                                                 <a id="modal_trigger_food" href="#modal-food" ng-click="resetdata(); msg()" onclick="return false;" class="suggest_button override-width">Suggest Food</a>
-                                                <div class="suggest_content" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#eee'}" style="height: 365px;">
+                                                <div class="suggest_content" id="suggest-food" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px'}" style="height: 365px;">
                                                     <h6 class="margin-bottom-13">Frequently Used</h6>
                                                     <div class="suggest_option">
                                                         <span ng-repeat="frequentfood in frequentFoodList" ng-click="frequentFood(frequentfood.foodid)" class="wrap-all">{{frequentfood.foodname}}</span>
@@ -237,7 +242,7 @@
                                             </div>
                                             </div>
                                             <div class="search-loading" ng-show="loadingExercise"><i class="fa fa-spinner fa-pulse"></i>&nbsp;&nbsp;Searching Exercise...</div>
-                                            <div class="food_scrollbar exercise-height" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#eee'}" >
+                                            <div class="food_scrollbar exercise-height" id="exercise-scroll" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px'}" >
                                                 <div ng-if="loaded">
                                                     <div class="loader-style-dashboard">
                                                         <div class="loader"></div>
@@ -317,7 +322,7 @@
                                         <div class="col-lg-3 col-md-3 col-sm-3 no-padding dashboard-6">
                                             <div class="content-3">
                                                 <a id="modal_trigger_exercise" href="#modal-exercise" ng-click="resetexercisedata(); msg()" onclick="return false;" class="suggest_button override-width">Suggest Exercise</a>
-                                                <div class="suggest_content" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#eee'}">
+                                                <div class="suggest_content" id="suggest-exercise" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px'}">
                                                     <h6>Frequently Used</h6>
                                                     <div class="suggest_option">
                                                         <span ng-repeat="frequentexercise in frequentExerciseList" ng-click="frequentExercise(frequentexercise.exerciseid,frequentexercise.isCustom,frequentexercise.exercisename)">{{frequentexercise.exercisename}}</span>
@@ -774,7 +779,7 @@
                                 <div class="col-lg-12 col-md-12 col-sm-12 no-padding">
                                     <hr/>
                                 </div>
-                                <div class="col-lg-12 col-md-12 col-sm-12 friends-scroll-responsive" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#eee'}">
+                                <div class="col-lg-12 col-md-12 col-sm-12 friends-scroll-responsive" id="appdevices-scroll" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px'}">
                                     <!-- Posts Wearable list -->
                                     <div class="col-lg-6 col-md-6 col-sm-6" ng-repeat="wearable in vendorList" style="padding:10px;">
                                         <div class="col-md-4 col-sm-4 col-xs-4"><img ng-src="{{wearable.imageurl}}"></div>
@@ -834,7 +839,7 @@
                                     <div flash-message="2000" class="col-lg-4 col-md-4 col-sm-4 no-padding pull-right margin-top-5"></div>
                                 </div>
 
-                                <div class="medication_scrollbar" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',horizrailenabled: false,background:'#eee'}" >
+                                <div class="medication_scrollbar" id="medication-scrollbar" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',horizrailenabled: false}" >
                                     <div ng-if="loaded">
                                         <div class="loader-style-dashboard">
                                             <div class="loader"></div>
@@ -1200,7 +1205,7 @@
 
                 <div class="col-lg-12 col-md-12 col-sm-12" ng-hide="showGraph==1">
 
-                    <div class="tab-content1 contentHistoryOverride min-height-200" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#eee'}">
+                    <div class="tab-content1 contentHistoryOverride min-height-200" id="reports-scroll" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px'}">
                         <div class="col-md-12 col-sm-12 col-xs-12">
                         <div class="col-md-6 col-sm-6 col-xs-6 margin-top-20">
                             <h4 style="text-transform: uppercase;padding-left: 20px;">Graphs</h4>
@@ -1358,22 +1363,23 @@
 </div>
 
 <!-- User Add Food-->
-<div id="modal-add-food" class="popupContainer-width" style="display:none;">
+<div id="modal-add-food" class="popupContainer-width" style="display:none">
     <div class="center-block">
-        <div class="col-lg-12 col-md-12 col-sm-12 food_measure_details" ng-show="isVisible">
+        <div class="col-lg-12 col-md-12 col-sm-12 food_measure_details" id="food-measure" ng-show="isVisible">
             <h3 class="classic-title margin-top-10"><span>Measure Details</span><div class="pull-right" ng-click="showMeasureDetails()" ng-hide="!isVisible"><i class="fa fa-times-circle mouse-pointer" style="font-size:20px";></i></div></h3>
-            <div class="col-lg-12 col-md-12 col-sm-12 margin-top-10 food_measure_appointment_scrollbar" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#eee'}">
-                <div class="col-lg-4 col-md-4 margin-top-10" ng-repeat="foodmeasure in foodMeasureList">
-                        <div class="food-measure-card">
-                            <img class="food-measure-card-img-top" src="{{foodmeasure.url}}">
-                            <div class="food-measure-card-block">
-                                <h5 class="text-bold pull-left">{{foodmeasure.name}}</h5>
-                            </div>
-                        </div>
+            <div class="scrollmenu">
+                    <ul id="navlist">
+                       <li ng-repeat="foodmeasure in foodMeasureList">
+                                <div class="food-measure-card">
+                                    <img class="food-measure-card-img-top" ng-src="{{foodmeasure.url}}">
+                                    <div class="food-measure-card-block">
+                                        <h5 class="text-bold pull-left">{{foodmeasure.name}}</h5>
+                                    </div>
+                                </div>
+                        </li>     
+                    </ul>
                 </div>
-                <div class="col-lg-12 col-md-12 col-sm-12 margin-top-10"></div>
             </div>
-        </div>
         <header class="popupHeader width-100">
             <span class="header_title">{{title}}</span>
             <span class="modal_close"><i class="fa fa-times"></i></span>
@@ -1401,7 +1407,7 @@
                     <div class="col-lg-7 col-md-7 col-sm-7">
                         <form name="FoodAddForm" novalidate>
                         <div class="col-lg-12 col-md-12 col-sm-12 no-padding">
-                        <h5 class="margin-top-10">Select Measure:&nbsp;<i class="fa fa-info-circle mouse-pointer" ng-click="showMeasureDetails()" style="color:#3B5998;font-size: 16px;"></i></h5>
+                        <h5 class="margin-top-10">Select Measure:&nbsp;<i class="fa fa-info-circle mouse-pointer" ng-click="showMeasureDetails()" id="measure-description" style="color:#3B5998;font-size: 16px;"></i></h5>
                             <select name="measure" ng-model="userFood.measure" ng-options="measure.measurename for measure in userSelectedFoodDetails.measure track by measure.measureid" ng-change="doCalculateCalories()" required>
                                 <option value="">-- Select Measure --</option>
                             </select>
@@ -2723,9 +2729,50 @@
 
 <script type="text/javascript" src="../../js/script.js"></script>
 <script type="text/javascript" src="../../js/jquery.stepProgressBar.js"></script>
-<script type="text/javascript">
+<!-- <script type="text/javascript">
+  $(document).ready( function() { 
+        alert("scroll");
+        $("#foodlist-scrollbar").niceScroll({
+            background:'#eee',
+            autohidemode: false,
+            cursorwidth:'8px'
+        });
+        $("#suggest-food").niceScroll({
+             background:'#eee',
+             autohidemode: false,
+             cursorwidth:'8px'
+        });
+        $("#exercise-scroll").niceScroll({
+            background:'#eee',
+            autohidemode: false,
+             cursorwidth:'8px'
+        });
+        $("#appdevices-scroll").niceScroll({
+            background:'#eee',
+            autohidemode: false,
+             cursorwidth:'8px'
+        });
+        $("#medication-scrollbar").niceScroll({
+            background:'#eee',
+            autohidemode: false,
+             cursorwidth:'8px'
+            
+        });
+        $("#reports-scroll").niceScroll({
+           background:'#eee ',
+           autohidemode: false,
+             cursorwidth:'8px'
+        });
+        $("#foodmeasure-scroll").niceScroll({
+            background:'#eee',
+            autohidemode: false,
+             cursorwidth:'8px'
+        });
 
-//for food intake and excersize view graph date picker
+    });
+    </script> -->
+<script type="text/javascript">
+    //for food intake and excersize view graph date picker
        function daterangepicker() {
                 $("#history-graph").click();
                 $("#history-view").click();

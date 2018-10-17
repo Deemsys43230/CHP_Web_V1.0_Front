@@ -19729,8 +19729,9 @@ border-left: none !important;
     border: none;
     border-radius: .28571429rem;
     box-shadow: 0 1px 3px 0 #d4d4d5, 0 0 0 1px #d4d4d5;
-    height: 135px;
-    width: 109%;
+    width: 71%;
+    display:inline-block !important;
+    width:10%
 }
 
 .food-measure-card-block {
@@ -19741,10 +19742,10 @@ border-left: none !important;
     box-shadow: none;
     margin-top:5px;
     padding:5px;
+    
 }
 
 .food-measure-card-img-top {
-    display: block;
     width: 100%;
     height: 70%;
     padding:5px;
@@ -19779,12 +19780,14 @@ border-left: none !important;
 }
 .food_measure_appointment_scrollbar{
     height: 320px;
+    overflow-x: scroll !important;
+    overflow-y: hidden !important;
 }
 .food_measure_details{
-    width:78%;
-    margin: 1% 105%;
+    width: 167%;
+    margin: 90% -34%;
     background: #fff;
-    height: 390px;
+    height: 220px;
     position: absolute;
 }
 /* loader style */
@@ -19960,6 +19963,30 @@ border-left: none !important;
     font-weight:500 !important;
     font-family:rubik-bold !important;
     font-size:16px;
+}
+/* food measure horizontal scroll */
+#navlist li
+{
+  display: inline !important;
+  list-style-type: none;
+  padding-right: 20px;
+}   
+div.scrollmenu {
+    overflow: auto;
+    white-space: nowrap;
+    width:800px;
+}
+
+div.scrollmenu a {
+    display: inline-block;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    text-decoration: none;
+}
+
+div.scrollmenu a:hover {
+    background-color: #777;
 }
 
 

@@ -1,7 +1,8 @@
 var userApp= angular.module('userApp', ['ngRoute','oc.lazyLoad','ngCookies','requestModule','flash','ngAnimate','ngTouch','ngPercentDisplay','userDashboardServiceModule','angular-svg-round-progress','ui.bootstrap','angular-nicescroll','mwl.calendar','foodMeasureModule']);
 
-userApp.controller('UserDashboardController',['$scope','$window','requestHandler','Flash','UserDashboardService','$interval','roundProgressService','limitToFilter','$timeout','$compile','$location','FoodMeasureService','$rootScope','$route','calendarConfig','moment',function($scope,$window,requestHandler,Flash,UserDashboardService,$interval,roundProgressService,limitToFilter,$timeout,$compile,$location,FoodMeasureService,$rootScope,$route,calendarConfig,moment) {
+userApp.controller('UserDashboardController',['$scope','$window','requestHandler','Flash','UserDashboardService','$interval','roundProgressService','limitToFilter','$timeout','$compile','$location','FoodMeasureService','$rootScope','$route','calendarConfig','moment','$animate',function($scope,$window,requestHandler,Flash,UserDashboardService,$interval,roundProgressService,limitToFilter,$timeout,$compile,$location,FoodMeasureService,$rootScope,$route,calendarConfig,moment,$animate) {
         $rootScope.isMenuShow=1;
+        $scope.loaded=true;
         $scope.foodSearchResult = [];
         $scope.userFood={};
         $scope.userFood.sessionid=1;
@@ -58,6 +59,15 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
     $scope.isVisible = false;
     $scope.showMeasureDetails = function () {
         $scope.isVisible = $scope.isVisible ? false : true;
+        var isUp = false;
+        if(!isUp) {
+                $("#food-measure").animate({top: -68}, 2000);
+                 isUp = true;
+               }
+               else if(isUp){
+                $("#food-measure").animate({bottom: 20}, 2000);
+                   isUp = false;
+               }
     };
 
         //Modal Popup to add user food
@@ -5027,6 +5037,14 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
     
     //to enable meal-plan popup
     if($location.absUrl().indexOf("dashboard")!=-1 && $rootScope.isMenuClicked==1){
+        // $("#foodlist-scrollbar").find('.nicescroll').getNiceScroll().hide();
+        // $("#suggest-food").find('.nicescroll').getNiceScroll().hide();
+        // $("#exercise-scroll").find('.nicescroll').getNiceScroll().hide();
+        // $("#suggest-exercise").find('.nicescroll').getNiceScroll().hide();
+        // $("#appdevices-scroll").find('.nicescroll').getNiceScroll().hide();
+        // $("#medication-scrollbar").find('.nicescroll').getNiceScroll().hide();
+        // $("#reports-scroll").find('.nicescroll').getNiceScroll().hide();
+        // $("#foodmeasure-scroll").find('.nicescroll').getNiceScroll().hide();
         $scope.isCallApiDetails=true;
         $scope.dashboardurl="#dashboard";
         $("#dailyupdate").click();
@@ -5039,13 +5057,14 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
     };
 
     if($rootScope.isMenuClicked==3){
+        $scope.isCallApiDetails=true;
         $("#appAndDevice").click();
         $scope.isDashboardConnectWearable=false;
         $('#device_not_connect').removeClass('dashboard_overlay');
         $scope.isLoaded=true;
     };
     if($rootScope.isMenuClicked==2){ 
-        $scope.isCallApiDetails=false;
+        $scope.isCallApiDetails=true;
         $("#dailyupdate").click();
         $("#energyspent").click();
         $scope.calendarText='Energy Spent';
@@ -5053,6 +5072,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
         $scope.isLoaded=true;
     };
     if($rootScope.isMenuClicked==4){
+        $scope.isCallApiDetails=true;
         $scope.isCallApiDetails=false;
         $("#dailyupdate").click();
         $("#weight-water").click();
@@ -5060,11 +5080,13 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
         $scope.isLoaded=true;
     };
     if($rootScope.isMenuClicked==5){
+        $scope.isCallApiDetails=true;
         $("#medicationsmenu").click();
         $scope.doSyncDevices(2);
         $scope.isLoaded=true;
     };
     if($rootScope.isMenuClicked==6){
+        $scope.isCallApiDetails=true;
       $("#history-menu").click();
         $scope.historyReport=1;
         $scope.showGraph=2;
@@ -5169,7 +5191,6 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
             $scope.getUserTimeZone(date);
             $scope.graphTwo();
             $scope.checkGoalOnLoad(date);
-           
             $scope.goGetDailyIntakeGraph(date);
             $scope.getBudget(date);
             $scope.doGetWearableDateByDate(date);
@@ -5190,6 +5211,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
                  $scope.doGetMedicationListByUser();
                 $scope.doCheckUserMedicationDocument();
             }
+            $scope.loaded=false;
         };
         
         // initially new date is selected date
