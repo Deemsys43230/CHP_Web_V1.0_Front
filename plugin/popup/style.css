@@ -33,6 +33,16 @@
     background: #FFF;
     z-index:999999 !important;
 }
+.popupContainer-usermealplan{
+    position:fixed;
+    width:500px !important;
+    height: auto;
+    left:30%;
+    top:6px!important;
+    background: #FFF;
+    z-index:999999 !important;
+}
+
 
 .popupContainer-width-big{
     position:fixed;
@@ -63,12 +73,15 @@ a.btn_blue {color: #FFF !important;}
 /* Popup Styles*/
 .popupHeader {width:330px !important;font-size:16px; text-transform: uppercase;}
 .popupHeader-width {width:500px !important;font-size:16px; text-transform: uppercase;}
+.popupHeader-usermealplan {width:500px !important;font-size:16px; text-transform: uppercase;}
 .popupHeader-big {width:800px !important;font-size:16px; text-transform: uppercase;}
 .popupHeader {background:#F4F4F2; position:relative; padding:10px 20px; border-bottom:1px solid #DDD; font-weight:bold;}
 .popupHeader-width{background:#F4F4F2; position:relative; padding:10px 20px; border-bottom:1px solid #DDD; font-weight:bold;}
+.popupHeader-usermealplan{background:#F4F4F2; position:relative; padding:10px 20px; border-bottom:1px solid #DDD; font-weight:bold;}
 .popupHeader-big {background:#F4F4F2; position:relative; padding:10px 20px; border-bottom:1px solid #DDD; font-weight:bold;}
 .popupHeader .modal_close {position: absolute; right: 0; top:0; padding:10px 15px; background:#E4E4E2; cursor: pointer; color:#aaa; font-size:16px;}
 .popupHeader-width .modal_close {position: absolute; right: 0; top:0; padding:10px 15px; background:#E4E4E2; cursor: pointer; color:#aaa; font-size:16px;}
+.popupHeader-usermealplan .modal_close {position: absolute; right: 0; top:0; padding:10px 15px; background:#E4E4E2; cursor: pointer; color:#aaa; font-size:16px;}
 .popupHeader-big  .modal_close {position: absolute; right: 0; top:0; padding:10px 15px; background:#E4E4E2; cursor: pointer; color:#aaa; font-size:16px;}
 .popupHeader-big-a-content-green{font-weight: bold;font-size: 14px;color:#65bb34;}
 .popupHeader-big-a-content-red{font-weight: bold;font-size: 14px;color:#eb6b22;}

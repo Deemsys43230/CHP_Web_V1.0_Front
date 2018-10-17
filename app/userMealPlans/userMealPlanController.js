@@ -217,6 +217,12 @@ userApp.controller('ViewUserMealPlanController',['$scope','requestHandler','Flas
     $scope.isVisible = false;
     $scope.showMeasureDetails = function () {
         $scope.isVisible = $scope.isVisible ? false : true;
+        if($scope.isVisible) {
+            $("#usermealplan-food-measure").animate({top: -8}, 1000);
+        }
+        else{
+            $("#usermealplan-food-measure").animate({top: 0}, 1000);
+        }
     };
 
     $scope.doUserAddFood=function(planDay,foodSessionId){

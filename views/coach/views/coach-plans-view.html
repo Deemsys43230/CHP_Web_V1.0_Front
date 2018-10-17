@@ -147,22 +147,23 @@
 </div>
 <!-- End Page Banner -->
 <!-- User Add Food-->
-<div id="modal-add-food" class="popupContainer-width" style="display:none;">
-    <div class="center-block">
-        <div class="col-lg-12 col-md-12 col-sm-12 food_measure_details" ng-show="isVisible">
-            <h3 class="classic-title margin-top-10"><span>Measure Details</span><div class="pull-right" ng-click="showMeasureDetails()" ng-hide="!isVisible"><i class="fa fa-times-circle mouse-pointer" style="font-size:20px";></i></div></h3>
-            <div class="col-lg-12 col-md-12 col-sm-12 food_measure_appointment_scrollbar" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',background:'#eee'}">
-                <div class="col-lg-4 col-md-4 margin-top-10" ng-repeat="foodmeasure in foodMeasureList">
-                    <div class="food-measure-card">
-                        <img class="food-measure-card-img-top" src="{{foodmeasure.url}}">
-                        <div class="food-measure-card-block">
-                            <h5 class="text-bold pull-left">{{foodmeasure.name}}</h5>
-                        </div>
+<div id="modal-add-food" class="popupContainer-usermealplan" style="display:none">
+        <div class="center-block">
+            <div class="col-lg-12 col-md-12 col-sm-12 food_measure_details" id="coachmealplan-food-measure" ng-show="isVisible" style="height:180px !important">
+                <h3 class="classic-title margin-top-10"><span>Measure Details</span><div class="pull-right" ng-click="showMeasureDetails()" ng-hide="!isVisible"><i class="fa fa-times-circle mouse-pointer" style="font-size:20px";></i></div></h3>
+                <div class="scrollmenu">
+                        <ul id="navlist">
+                           <li ng-repeat="foodmeasure in foodMeasureList">
+                                    <div class="food-measure-card" style="width: 11% !important; height: 85px;">
+                                        <img class="food-measure-card-img-top" ng-src="{{foodmeasure.url}}">
+                                        <div class="food-measure-card-block" style="margin-top:-5px !important">
+                                            <h5 class="text-bold pull-left">{{foodmeasure.name}}</h5>
+                                        </div>
+                                    </div>
+                            </li>     
+                        </ul>
                     </div>
-                </div>
-                <div class="col-lg-12 col-md-12 col-sm-12 margin-top-5"></div>
             </div>
-        </div>
         <header class="popupHeader width-100">
             <span class="header_title">{{title}}</span>
             <span class="modal_close"><i class="fa fa-times"></i></span>

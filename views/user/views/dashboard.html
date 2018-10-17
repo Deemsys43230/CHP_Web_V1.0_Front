@@ -1,18 +1,4 @@
-<style type="text/css">
-::-webkit-scrollbar{
-        height: 6px !important;
-        width: 4px !important;
-        background: gray !important;
-    }
-    ::-webkit-scrollbar-thumb:horizontal{
-        background: #000 !important;
-        border-radius: 12px !important;
-    }
-    ::-webkit-scrollbar-thumb:vertical{
-        background: #000 !important;
-        border-radius: 12px !important;
-    }
-</style>
+
 
 <!--Food Template-->
 <script type="text/ng-template" id="foodTemplate.html" xmlns="http://www.w3.org/1999/html">
@@ -793,7 +779,7 @@
                                 <div class="col-lg-12 col-md-12 col-sm-12 no-padding">
                                     <hr/>
                                 </div>
-                                <div class="col-lg-12 col-md-12 col-sm-12 friends-scroll-responsive" id="appdevices-scroll" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px'}">
+                                <div class="col-lg-12 col-md-12 col-sm-12 friends-scroll-responsive" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',horizrailenabled: false}">
                                     <!-- Posts Wearable list -->
                                     <div class="col-lg-6 col-md-6 col-sm-6" ng-repeat="wearable in vendorList" style="padding:10px;">
                                         <div class="col-md-4 col-sm-4 col-xs-4"><img ng-src="{{wearable.imageurl}}"></div>
