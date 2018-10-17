@@ -59,15 +59,12 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
     $scope.isVisible = false;
     $scope.showMeasureDetails = function () {
         $scope.isVisible = $scope.isVisible ? false : true;
-        var isUp = false;
-        if(!isUp) {
-                $("#food-measure").animate({top: -68}, 2000);
-                 isUp = true;
-               }
-               else if(isUp){
-                $("#food-measure").animate({bottom: 20}, 2000);
-                   isUp = false;
-               }
+        if($scope.isVisible) {
+            $("#food-measure").animate({top: -68}, 1000);
+        }
+        else{
+            $("#food-measure").animate({top: 0}, 1000);
+        }
     };
 
         //Modal Popup to add user food
