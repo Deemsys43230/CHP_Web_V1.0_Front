@@ -521,7 +521,6 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
                         $('#budget_nopaln').addClass('dashboard_overlay');
                     }
                     $scope.loader=false;
-                    $scope.doGetUserUploadedDocument($scope.userDetails.userid);
                 });
 
             };
@@ -1023,13 +1022,23 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
         //TO get user demography details
         $scope.doGetDemograph=function(){
             var userDemographyPromise=UserDashboardService.doGetDemographyDetails();
-            userDemographyPromise.then(function(result){
+            var documentUploadPromise=$scope.doCheckUserMedicationDocument();
+            
+
+           userDemographyPromise.then(function(result){
                 $scope.demography = result;
 
                 if(!$scope.userProfile){
                     var userDetailPromise=UserDashboardService.doGetUserDetails();
+
                     userDetailPromise.then(function(result){
-                        $scope.userProfile=result;
+                       $scope.userProfile=result;
+                        documentUploadPromise.then(function(result){
+                            $scope.isFolderExists = result.data.isexist;
+                            if($scope.isFolderExists==1){
+                               $scopr.doGetUserUploadedDocument($scope.userProfile.userid);
+                            }
+                        });
                         $scope.userProfileImage=$scope.userProfile.imageurl+"?decache="+Math.random();
                         var dividevalue=2;
                         if($scope.userProfile.gender==1){
@@ -4880,7 +4889,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
 
         //To display daily activities 
         $scope.doGetWearableDateByDate = function(date){
-            return requestHandler.postRequest("user/getWearableDataForDate/",{"date": date}).then(function(response) {
+            return requestHandler.postRequest("user/getWearableDataForDate/",{"date":$scope.newSelectedDate}).then(function(response) {
                 console.log(response.data.wearable);
                 $scope.wearable=response.data.wearable;
             });
@@ -5034,14 +5043,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
     
     //to enable meal-plan popup
     if($location.absUrl().indexOf("dashboard")!=-1 && $rootScope.isMenuClicked==1){
-        // $("#foodlist-scrollbar").find('.nicescroll').getNiceScroll().hide();
-        // $("#suggest-food").find('.nicescroll').getNiceScroll().hide();
-        // $("#exercise-scroll").find('.nicescroll').getNiceScroll().hide();
-        // $("#suggest-exercise").find('.nicescroll').getNiceScroll().hide();
-        // $("#appdevices-scroll").find('.nicescroll').getNiceScroll().hide();
-        // $("#medication-scrollbar").find('.nicescroll').getNiceScroll().hide();
-        // $("#reports-scroll").find('.nicescroll').getNiceScroll().hide();
-        // $("#foodmeasure-scroll").find('.nicescroll').getNiceScroll().hide();
+        $scope.isLoaded=true;
         $scope.isCallApiDetails=true;
         $scope.dashboardurl="#dashboard";
         $("#dailyupdate").click();
@@ -5050,44 +5052,64 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
         $scope.showFoodMoal=1;
         $scope.mealPlanCalender();
         $scope.doSyncDevices(2);
-        $scope.isLoaded=true;
+        $timeout(function(){
+            $scope.isLoaded=false;
+        },5000);
     };
-
+    if($location.absUrl().indexOf("connectDevice")!=-1){
+        $rootScope.isMenuClicked=3;
+    }
     if($rootScope.isMenuClicked==3){
+        $scope.isLoaded=true;
         $scope.isCallApiDetails=true;
         $("#appAndDevice").click();
         $scope.isDashboardConnectWearable=false;
         $('#device_not_connect').removeClass('dashboard_overlay');
-        $scope.isLoaded=true;
+        $timeout(function(){
+            $scope.isLoaded=false;
+        },5000);
+        
     };
     if($rootScope.isMenuClicked==2){ 
+        $scope.isLoaded=true;
         $scope.isCallApiDetails=true;
         $("#dailyupdate").click();
         $("#energyspent").click();
         $scope.calendarText='Energy Spent';
         $scope.doSyncDevices(2);
-        $scope.isLoaded=true;
+        $timeout(function(){
+            $scope.isLoaded=false;
+        },5000);
     };
     if($rootScope.isMenuClicked==4){
+        $scope.isLoaded=true;
         $scope.isCallApiDetails=true;
         $scope.isCallApiDetails=false;
         $("#dailyupdate").click();
         $("#weight-water").click();
         $scope.calendarText='Weight & Water Log';
-        $scope.isLoaded=true;
+        $timeout(function(){
+            $scope.isLoaded=false;
+        },5000);
     };
     if($rootScope.isMenuClicked==5){
+        $scope.isLoaded=true;
         $scope.isCallApiDetails=true;
         $("#medicationsmenu").click();
         $scope.doSyncDevices(2);
-        $scope.isLoaded=true;
+        $timeout(function(){
+            $scope.isLoaded=false;
+        },5000);
     };
     if($rootScope.isMenuClicked==6){
+        $scope.isLoaded=true;
         $scope.isCallApiDetails=true;
       $("#history-menu").click();
         $scope.historyReport=1;
         $scope.showGraph=2;
-        $scope.isLoaded=true;
+        $timeout(function(){
+            $scope.isLoaded=false;
+        },5000);
     };
 
     // to redirect apps & devices tab
@@ -5191,7 +5213,6 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
             $scope.goGetDailyIntakeGraph(date);
             $scope.getBudget(date);
             $scope.doGetWearableDateByDate(date);
-            $scope.doGetUserDetails();
             if($rootScope.isMenuClicked==1||$rootScope.isMenuClicked==undefined){
                 $scope.loadFoodDiary(date);
                 //To get frequently asked foods

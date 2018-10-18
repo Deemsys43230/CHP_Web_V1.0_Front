@@ -1233,8 +1233,6 @@
         padding: 6px 3px;
     }
 }
-
-
 @media (min-width: 1200px){
 
     .hight-125{
@@ -1514,6 +1512,22 @@
 
     .cal-width{
         width:174% !important;
+    }
+      /* user dashboard design responsiveness */
+    #dashboard-card {
+        margin-top: 23px !important;
+    }
+    .menu-sidebar {
+        width:81.6% !important;
+    }
+    .navbar-menu-right {
+        left: 290px !important;
+    }
+    #user-dashboard-budget{
+        height: 435px;
+    }
+   #user-dashboard-height{
+       height: 955px;
     }
 
 }
@@ -2251,6 +2265,7 @@
     }
     
 }
+   
 
 
 
