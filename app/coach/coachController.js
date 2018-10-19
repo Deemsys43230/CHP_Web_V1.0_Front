@@ -339,7 +339,7 @@ adminApp.directive("averageStarRating", function() {
     };
 });
 
-adminApp.controller('CoachReviewController',['$scope','requestHandler','Flash','$routeParams',function($scope,requestHandler,Flash,$routeParams) {
+coachApp.controller('CoachReviewController',['$scope','requestHandler','Flash','$routeParams',function($scope,requestHandler,Flash,$routeParams) {
 
     $scope.averageRate=0.1;
     $scope.paginationLoad=false;
@@ -401,13 +401,13 @@ adminApp.controller('CoachReviewController',['$scope','requestHandler','Flash','
 
 
 // render image to view in list
-adminApp.filter('trusted', ['$sce', function ($sce) {
+coachApp.filter('trusted', ['$sce', function ($sce) {
     return function(url) {
         return $sce.trustAsResourceUrl(url);
     };
 }]);
 
-adminApp.filter('startsWithLettertotalcoach', function () {
+coachApp.filter('startsWithLettertotalcoach', function () {
 
     return function (items, coachsearch) {
 
@@ -428,7 +428,7 @@ adminApp.filter('startsWithLettertotalcoach', function () {
     };
 });
 
-adminApp.filter('startsWithLettercoach', function () {
+coachApp.filter('startsWithLettercoach', function () {
 
     return function (items, invitationsearch) {
 
@@ -450,7 +450,7 @@ adminApp.filter('startsWithLettercoach', function () {
 });
 
 
-adminApp.directive("averageStarRating", function() {
+coachApp.directive("averageStarRating", function() {
     return {
         restrict : "EA",
         template : "<div class='average-rating-container'>" +

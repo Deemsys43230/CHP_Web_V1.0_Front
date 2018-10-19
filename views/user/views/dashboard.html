@@ -854,7 +854,7 @@
                                                         <span class="text-bold">Medicine For : </span>{{data.medicinefor}}
                                                     </span>
                                                     <span class="border-right">
-                                                        <span class="text-bold">Dosage : </span>{{data.dosage}} <span>(mg)</span>
+                                                        <span class="text-bold">Dosage : </span>{{data.dosage}} <span></span>
                                                     </span>
                                                     <span >
                                                         <span class="text-bold">Shared with Coach : </span>{{data.issharable==1?'Yes':'No'}}
@@ -2243,14 +2243,13 @@
                 </div>         
                 <div class="col-md-6 col-sm-6 no-padding">
                     <div class="col-md-12">
-                        <p>Dosage (mg)</p>
-                        <input type="text" name="dosage" ng-model="medication.dosage" required ng-pattern="/^\-?\d+((\.|\,)\d+)?$/" ng-change="maxDosageCheck(medication.dosage)" onkeypress="return validateFloatKeyPress1(this,event);" validate-zero>
-                        <span class="error-message textarea-errormessage40-right60" ng-show="!medicationForm.dosage.$error.required&&maxdosage">
+                        <p>Dosage</p>
+                        <input type="text" name="dosage" ng-model="medication.dosage" required ng-change="maxDosageCheck(medication.dosage)" maxlength="200">
+                        <!-- <span class="error-message textarea-errormessage40-right60" ng-show="!medicationForm.dosage.$error.required&&maxdosage">
                             <span style="bottom: 70px;right:50px !important;">Please&nbsp;Enter&nbsp;Valid&nbsp;Dosage.</span>
-                        </span>
+                        </span> -->
                             <span ng-show="medicationForm.dosage.$dirty&&medicationForm.dosage.$invalid">
                                 <span class="error-message" ng-show="medicationForm.dosage.$error.required"><span>Required.</span></span>
-                                <span class="error-message" ng-show="medicationForm.dosage.$error.validateZero"><span style="bottom: 57px !important">Invalid.</span></span>
                             </span>
                     </div>  
                     <div class="col-md-12">
@@ -2313,7 +2312,7 @@
               </tr>
                 <tr>
                     <th class="col-sm-3 col-md-3">Dosage</th>
-                    <td class="col-sm-9 col-md-9">{{userMedicationDetails.dosage}} (mg)</td>
+                    <td class="col-sm-9 col-md-9">{{userMedicationDetails.dosage}}</td>
                 </tr>
                 <tr>
                     <th class="col-sm-3 col-md-3">Medicine For</th>

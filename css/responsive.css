@@ -1529,6 +1529,9 @@
    #user-dashboard-height{
        height: 955px;
     }
+    .text_last_slide {
+        left: 72% !important
+    }
 
 }
 @media  only screen and (max-width: 320px) {

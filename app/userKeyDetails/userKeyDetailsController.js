@@ -9,22 +9,10 @@ userApp.controller('UserKeyDetailsController',['$scope','requestHandler','$rootS
         if (tabid==7) {
             $location.path('/profile');
         }
-        $location.path('/dashboard');
-        // if (tabid==5) {
-        //     $location.path('/demography');
-        // }
-        // if(tabid==6){
-        //      if( $scope.isDiabeticPerson==1){
-        //      $location.path('/doctor-appointment');
-        //
-        //     }
-        //     else{
-        //            $location.path('/group-goal');
-        //     }
-        //
-        // }
-       
-    };
+        else{
+            $location.path('/dashboard');
+        }
+     };
     $scope.nonDiabeticAlert=false;
 
     $scope.doGetUserKeyDetails=function() {

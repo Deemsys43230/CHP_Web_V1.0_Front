@@ -378,16 +378,16 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
         };
 
     //To Check Maximum dosage value
-    $scope.maxdosage=false;
-    $scope.maxDosageCheck = function(dosage){
-        if(dosage <=999.99){
-            $scope.maxdosage=false;
-        }
-        else if(dosage >999.99){
-            $scope.maxdosage=true;
-        }
+    // $scope.maxdosage=false;
+    // $scope.maxDosageCheck = function(dosage){
+    //     if(dosage <=999.99){
+    //         $scope.maxdosage=false;
+    //     }
+    //     else if(dosage >999.99){
+    //         $scope.maxdosage=true;
+    //     }
 
-    };
+    // };
 
         // view User Medictaions
         $scope.viewUserMedication=function(id){
