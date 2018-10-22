@@ -114,7 +114,7 @@
                         <!-- Nav Tabs -->
                         <ul class="nav nav-tabs pull-left">
                             <li class="active" ng-click="showExercise=0;showFoodMoal=1;doGetFrquestFoodList();"><a href="#tab-1" data-toggle="tab" onclick="return false;" id="foodintake">Food Intake</a></li>
-                            <li ng-click="showExercise=1;doGetCategoryandTypeExercise();doGetFrequentExercise();" ><a href="#tab-2" data-toggle="tab" id="energyspent" onclick="return false;">Energy Spent</a></li>
+                            <li ng-click="showExercise=1;doGetCategoryandTypeExercise();doGetFrequentExercise();loadExerciseDiary(selectedDate);" ><a href="#tab-2" data-toggle="tab" id="energyspent" onclick="return false;">Energy Spent</a></li>
                             <li><a href="#tab-3" data-toggle="tab"  id="weight-water" onclick="return false;">Log</a></li>
                             <li>
                         </ul>
@@ -2177,6 +2177,26 @@
                 By Connecting to this device,other related trackers will be disconnected.
                 <div class="action_btns margin-top-20">
                     <div class="modal_close"><a href="" class="btn btn_red" ng-click="proceedOpenFitBitWindow(authorizeurl,vendorid)">Got it!</a></div>
+                </div>
+                </form>
+            </div>
+        </section>
+    </div>
+
+     <!-- Device Connection Went Wrong issue-->
+     <div id="device-connection-error" class="popupContainer" style="display:none;left:37%!important;">
+        <header class="popupHeader">
+            <span class="header_title">Information</span>
+            <span class="modal_close"><i class="fa fa-times"></i></span>
+        </header>
+
+        <section class="popupBody">
+            <!-- Register Form -->
+            <div class="common_model">
+                <form name="wearableForm">
+               Something went wrong, Please connect your device properly.
+                <div class="action_btns margin-top-20">
+                    <div class="modal_close"><a href="" class="btn btn_red">Ok</a></div>
                 </div>
                 </form>
             </div>

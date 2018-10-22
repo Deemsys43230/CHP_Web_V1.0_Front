@@ -80,6 +80,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
 
             });
             $(".modal_close").click(function(){
+                $("#food-measure").animate({top: 0}, 1000);
                 $(".user_register").hide();
                 $("#modal-add-food").hide();
                 $("#lean_overlay").hide();
@@ -651,12 +652,39 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
 
     /*End Medications Documents Upload*/
 
+
+    
+        // wearables connection failure error
+        $scope.deviceconnectionfailure=function(logid){
+            $(function(){
+                $("#lean_overlay").fadeTo(1000);
+                $("#device-connection-error").fadeIn(600);
+                $(".common_model").show();
+                $scope.shouldBeOpen = true;
+            });
+
+            $(".modal_close").click(function(){
+                $(".common_model").hide();
+                $("#device-connection-error").hide();
+                $("#lean_overlay").hide();
+                $scope.shouldBeOpen = false;
+            });
+
+            $("#lean_overlay").click(function(){
+                $(".common_model").hide();
+                $("#device-connection-error").hide();
+                $("#lean_overlay").hide();
+                $scope.shouldBeOpen = false;
+            });
+
+        };
         $scope.doSyncDevices=function(id){
-            $scope.connectDevice=true;
+            
             if(id!=2){
+                $scope.connectDevice=true;
                 $scope.syncBtnTxt="Synchronizing...";
             }
-            var date = selectedDate;
+            var date = $scope.newSelectedDate;
             requestHandler.postRequest("user/syncWearableData/",{"date":date}).then(function(response){
                 if(response.data.Response_status==0){
                     $scope.isDashboardConnectWearable=true;
@@ -670,10 +698,15 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
                     // if(id=0){
                     //     $location.path("dashboard");
                     // }
-
-              $scope.connectDevice=false;
+                $scope.connectDevice=false;
             },
                 function () {
+                    $scope.connectDevice=false;
+                    if(id!=2){
+                        $scope.syncBtnTxt="Sync Now";
+                        $scope.deviceconnectionfailure();
+                    }
+                 
                     errorMessage(Flash, "Please try again later!")
                 });
         };
@@ -723,6 +756,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
 
         //On Select frequent foods
         $scope.frequentFood=function(foodid){
+            $scope.isVisible=true;
             $scope.glycaemic = 0;
             $scope.isGlycaemicValueEmpty=false;
             $window.emi=0;
@@ -889,7 +923,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
             //Set values according to the api calls
             $scope.userFood.foodid=$scope.userSelectedFoodDetails.foodid;
             $scope.userFood.measureid=$scope.userFood.measure.measureid;
-            $scope.userFood.addeddate=document.getElementById("main-start-date").value;
+            $scope.userFood.addeddate=$scope.newSelectedDate;
             $scope.userFood.servings=parseFloat($scope.userFood.servings);
 
             var foodInsertPromise=UserDashboardService.doInsertUserFood($scope.userFood);
@@ -925,7 +959,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
             $scope.userFood.servings=parseFloat($scope.userFood.servings);
             var foodInsertPromise=UserDashboardService.doUpdateUserFood($scope.userFood);
             foodInsertPromise.then(function(){
-                var date = document.getElementById("main-start-date").value;
+                var date = $scope.newSelectedDate;
                 $scope.loadFoodDiary(date);
                 $scope.doGetIntakeBruntByDate(date);
                 $scope.goGetDailyIntakeGraph(date);
@@ -941,7 +975,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
             $scope.loaded=true;
             var foodDeletePromise=UserDashboardService.doDeleteUserFood(userFoodId);
             foodDeletePromise.then(function(){
-                var date = document.getElementById("main-start-date").value;
+                var date = $scope.newSelectedDate;
                 $scope.loadFoodDiary(date);
                 $scope.doGetIntakeBruntByDate(date);
                 $scope.goGetDailyIntakeGraph(date);
@@ -1222,7 +1256,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
             $scope.title= "Add Exercise";
             $scope.loaded=true;
             if(isCustom==0){
-                var date = document.getElementById("main-start-date").value;
+                var date = $scope.newSelectedDate;
                 var getExerciseDetailPromise=UserDashboardService.doGetSelectedExerciseDetails(exerciseid,date);
                 getExerciseDetailPromise.then(function(result){
                     $scope.userSelectedExerciseDetails=result;
@@ -1244,7 +1278,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
             $scope.isNew=true;
             $scope.title= "Add Exercise";
             $scope.loaded=true;
-            var date = document.getElementById("main-start-date").value;
+            var date = $scope.newSelectedDate;
             var getExerciseDetailPromise=UserDashboardService.doGetSelectedExerciseDetails(exerciseid,date);
             getExerciseDetailPromise.then(function(result){
                 $scope.userSelectedExerciseDetails=result;
@@ -1257,7 +1291,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
         $scope.exerciseSelected=function(){
             $scope.isNew=true;
             $scope.title= "Add Exercise";
-            var date = document.getElementById("main-start-date").value;
+            var date = $scope.newSelectedDate;
             var getExerciseDetailPromise=UserDashboardService.doGetSelectedExerciseDetails($scope.selectedExercise.exerciseid,date);
             getExerciseDetailPromise.then(function(result){
                 $scope.userSelectedExerciseDetails=result;
@@ -1398,7 +1432,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
         $scope.doInsertUserExercise=function(){
             //Set values according to the api calls
             $scope.userExercise.exerciseid=$scope.userSelectedExerciseDetails.exerciseid;
-            $scope.userExercise.date=document.getElementById("main-start-date").value;
+            $scope.userExercise.date=$scope.newSelectedDate;
             $scope.userExercise.levelid= $scope.userExercise.selectedLevel.levelid;
             $scope.userExercise.unitid=$scope.userSelectedExerciseDetails.levels.unitid;
 
@@ -1417,7 +1451,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
             $scope.loaded=true;
             var exerciseDeletePromise=UserDashboardService.doDeleteUserExercise(userExerciseId);
             exerciseDeletePromise.then(function(){
-                var date = document.getElementById("main-start-date").value;
+                var date =$scope.newSelectedDate;
                 $scope.loadExerciseDiary(date);
                 $scope.doGetIntakeBruntByDate(date);
                 $scope.doGetHistoryReport("historyGraph");
@@ -1434,7 +1468,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
             $scope.title= "Edit Exercise";
             $scope.loaded=true;
 
-            var date = document.getElementById("main-start-date").value;
+            var date = $scope.newSelectedDate;
             var getExerciseDetailForEditPromise=UserDashboardService.doGetSelectedExerciseDetails(exerciseid,date);
             getExerciseDetailForEditPromise.then(function(result){
 
@@ -1487,7 +1521,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
             $scope.userExercise.workoutvalue=parseInt($scope.userExercise.workoutvalue);
             var exerciseInsertPromise=UserDashboardService.doUpdateUserExercise($scope.userExercise);
             exerciseInsertPromise.then(function(){
-                var date = document.getElementById("main-start-date").value;
+                var date = $scope.newSelectedDate;
                 $scope.loadExerciseDiary(date);
                 $scope.doGetIntakeBruntByDate(date);
                 $scope.doGetHistoryReport("historyGraph");
@@ -1529,7 +1563,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
         //To insert custom exercise
         $scope.doInsertUserCustomExercise=function(){
             $scope.customExercise.reps=parseInt($scope.customExercise.reps);
-            $scope.customExercise.date=document.getElementById("main-start-date").value;
+            $scope.customExercise.date=$scope.newSelectedDate;
             $scope.customExercise.workoutvalue=parseInt($scope.selectedHours*3600)+ parseInt($scope.selectedMinutes*60)+ parseInt($scope.selectedSeconds);
             var customExerciseInsertPromise=UserDashboardService.doInsertUserCustomExercise($scope.customExercise);
             customExerciseInsertPromise.then(function(){
@@ -1573,13 +1607,13 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
                 delete $scope.customExercise.date;
             }
             $scope.customExercise.workoutvalue=parseInt($scope.selectedHours*3600)+ parseInt($scope.selectedMinutes*60)+ parseInt($scope.selectedSeconds);
-            $scope.customExercise.date=document.getElementById("main-start-date").value;
+            $scope.customExercise.date=$scope.newSelectedDate;
             $scope.customExercise.reps=parseInt($scope.customExercise.reps);
             $scope.customExercise.calories = $scope.customExercise.calories.toString();
             $scope.customExercise.workoutvalue= $scope.customExercise.workoutvalue.toString();
             var customExerciseInsertPromise=UserDashboardService.doUpdateUserCustomExercise($scope.customExercise);
             customExerciseInsertPromise.then(function(){
-                var date = document.getElementById("main-start-date").value;
+                var date = $scope.newSelectedDate;
                 $scope.loadExerciseDiary(date);
                 $scope.doGetIntakeBruntByDate(date);
                 $scope.doGetHistoryReport("historyGraph");
@@ -1594,7 +1628,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
             $scope.loaded=true;
             var customExerciseDeletePromise=UserDashboardService.doDeleteUserCustomExercise(userExerciseId,isCustom);
             customExerciseDeletePromise.then(function(){
-                var date = document.getElementById("main-start-date").value;
+                var date = $scope.newSelectedDate;
                 $scope.loadExerciseDiary(date);
                 $scope.doGetIntakeBruntByDate(date);
                 $scope.doGetHistoryReport("historyGraph");
@@ -2912,7 +2946,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
 
         $scope.goGetSessionGraph = function(id){
             $scope.loaded=true;
-            var date=document.getElementById("main-start-date").value;
+            var date=$scope.newSelectedDate;
             $scope.storedSessionId = id;
 
             if(!$scope.storedSessionId){}
@@ -4706,7 +4740,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
         //TO Insert water Log
         $scope.doAddOrReduceWatertLog=function(id){
             //getting main date
-            var date = document.getElementById("main-start-date").value;
+            var date = $scope.newSelectedDate;
             //$scope.disableReduceWater=false;
             if(id==0){
                 $scope.addspin=true;
@@ -4761,7 +4795,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
         // for water log update
         $scope.updateWaterLog=function(){
             //getting main date
-            var date = document.getElementById("main-start-date").value;
+            var date = $scope.newSelectedDate;
             $scope.waterlog=parseFloat($scope.waterlog);
             requestHandler.postRequest("user/waterlogInsertorUpdate/",{"date":date,"milliliters":$scope.waterlog,"oz":$scope.waterlogoz}).then(function(response){
 
