@@ -177,7 +177,7 @@ userApp.controller('FriendsController',['$scope','requestHandler','Flash','Frien
             }
             $timeout(function(){
                 $scope.loadingFriendsImage=false;
-            },2000);
+            },3000);
 
 
             $scope.paginationLoad = true;
