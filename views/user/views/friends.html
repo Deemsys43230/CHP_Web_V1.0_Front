@@ -63,11 +63,11 @@
                                     <table class="table table-bordered table-striped">
                                         <tr>
                                             <td class="col-lg-3 col-md-3 col-sm-3">Name</td>
-                                            <td class="col-lg-9 col-md-9 col-sm-9">{{viewMemberDetails.name}}</td>
+                                            <td class="col-lg-9 col-md-9 col-sm-9 wrap-all">{{viewMemberDetails.name}}</td>
                                         </tr>
                                         <tr>
                                             <td>Email ID</td>
-                                            <td>{{viewMemberDetails.emailid}}</td>
+                                            <td class="wrap-all">{{viewMemberDetails.emailid}}</td>
                                         </tr>
                                         <tr>
                                             <td>Gender</td>
@@ -87,19 +87,19 @@
                                         </tr>
                                         <tr ng-if="viewMemberDetails.isprivacy==0">
                                             <td>DOB</td>
-                                            <td>{{viewMemberDetails.dob}}</td>
+                                            <td class="wrap-all">{{viewMemberDetails.dob}}</td>
                                         </tr>
                                         <tr ng-if="viewMemberDetails.isprivacy==0">
                                             <td>Phone</td>
-                                            <td>{{viewMemberDetails.phone}}</td>
+                                            <td class="wrap-all">{{viewMemberDetails.phone}}</td>
                                         </tr>
                                         <tr ng-if="viewMemberDetails.isprivacy==0">
                                             <td>Address</td>
-                                            <td><span  class="line-clamp-xlg">{{viewMemberDetails.city}},{{viewMemberDetails.state}},{{viewMemberDetails.country}}</span></td>
+                                            <td class="wrap-all"><span  class="line-clamp-xlg">{{viewMemberDetails.city}},{{viewMemberDetails.state}},{{viewMemberDetails.country}}</span></td>
                                         </tr>
                                         <tr ng-if="viewMemberDetails.isprivacy==0">
                                             <td>Zipcode</td>
-                                            <td>{{viewMemberDetails.zipcode}}</td>
+                                            <td class="wrap-all">{{viewMemberDetails.zipcode}}</td>
                                         </tr>
                                         <tr ng-if="viewMemberDetails.isprivacy==0">
                                             <td>Food Style</td>
@@ -109,7 +109,7 @@
                                         </tr>
                                         <tr>
                                             <td>About</td>
-                                            <td>{{viewMemberDetails.about}}</td>
+                                            <td class="wrap-all">{{viewMemberDetails.about}}</td>
                                         </tr>
                                     </table>
                                 </div>
