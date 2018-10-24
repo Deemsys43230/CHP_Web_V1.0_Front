@@ -217,11 +217,15 @@ userApp.controller('ViewUserMealPlanController',['$scope','requestHandler','Flas
     $scope.isVisible = false;
     $scope.showMeasureDetails = function () {
         $scope.isVisible = $scope.isVisible ? false : true;
-        if($scope.isVisible) {
-            $("#usermealplan-food-measure").animate({top: -8}, 1000);
-        }
+       if($scope.isVisible) {
+            $("#usermealplan-food-measure").animate({
+                height:'toggle'
+            })
+            }
         else{
-            $("#usermealplan-food-measure").animate({top: 0}, 1000);
+            $("#usermealplan-food-measure").animate({
+                height:'toggle'
+            })
         }
     };
 
@@ -247,6 +251,7 @@ userApp.controller('ViewUserMealPlanController',['$scope','requestHandler','Flas
         });
 
         $(".modal_close").click(function(){
+            // $("#usermealplan-food-measure").fadeOut();
             $(".user_register").hide();
             $("#modal-add-food").hide();
             $("#lean_overlay").hide();

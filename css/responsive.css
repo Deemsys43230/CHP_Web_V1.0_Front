@@ -1484,6 +1484,13 @@
         width: 120px;
         height: 120px;
     }
+    .food_measure_details{
+        margin: 93% -34% !important;
+    }
+     /*
+    .food-measure-card{
+        height:120px !important;
+    } */
 
 
 }

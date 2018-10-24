@@ -114,7 +114,7 @@ adminApp.controller('ArticleController',['$scope','requestHandler','Flash','$loc
 
 }]);
 
-adminApp.controller('ArticleEditController',['$scope','requestHandler','Flash','$location','$routeParams','$sce','siteMenuService',function($scope,requestHandler,Flash,$location,$routeParams,$sce,siteMenuService) {
+adminApp.controller('ArticleEditController',['$scope','requestHandler','Flash','$location','$routeParams','$sce','siteMenuService','$timeout',function($scope,requestHandler,Flash,$location,$routeParams,$sce,siteMenuService,$timeout) {
 
     $scope.siteMenuList = siteMenuService;
     $.each($scope.siteMenuList,function(index,value){
@@ -151,6 +151,7 @@ adminApp.controller('ArticleEditController',['$scope','requestHandler','Flash','
     //To display Latest Articles based on id
     $scope.doGetarticlesAdminByID=function(){
         $scope.isNew = false;
+        $scope.loaded=true;
         $scope.title = "Edit Article";
 
         $scope.submitContent=false;
@@ -166,6 +167,9 @@ adminApp.controller('ArticleEditController',['$scope','requestHandler','Flash','
           
             //Set values to display data in edit article
             $scope.articles=response.data.article;
+            $timeout(function(){
+               $scope.loaded=false;
+            },5000);
             
             $scope.originalArticle=angular.copy(response.data.article);
            /* // Change the url hostname to localhost

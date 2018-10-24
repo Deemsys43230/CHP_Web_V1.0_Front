@@ -60,10 +60,14 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
     $scope.showMeasureDetails = function () {
         $scope.isVisible = $scope.isVisible ? false : true;
         if($scope.isVisible) {
-            $("#food-measure").animate({top: -68}, 1000);
+            $("#food-measure").animate({
+                height: 'toggle'
+            })
         }
         else{
-            $("#food-measure").animate({top: 0}, 1000);
+            $("#food-measure").animate({
+                height: 'toggle'
+            })
         }
     };
 

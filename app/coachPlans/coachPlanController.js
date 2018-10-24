@@ -198,10 +198,14 @@ $scope.doIntializeLeanModal=function()
     $scope.showMeasureDetails = function () {
         $scope.isVisible = $scope.isVisible ? false : true;
         if($scope.isVisible) {
-            $("#coachmealplan-food-measure").animate({top: -8}, 1000);
+            $("#coachmealplan-food-measure").animate({
+                height:'toggle'
+            })
         }
         else{
-            $("#coachmealplan-food-measure").animate({top: 0}, 1000);
+            $("#coachmealplan-food-measure").animate({
+                height:'toggle'
+            })
         }
     };
 
