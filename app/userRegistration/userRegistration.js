@@ -15,6 +15,8 @@ commonApp.controller('UserRegistrationController',['$scope','requestHandler','Fl
         }else{
             $scope.steps = 6;
         }
+        $scope.targetWeightValidation();
+
     };
 
     //to change the plan
@@ -227,12 +229,12 @@ commonApp.controller('UserRegistrationController',['$scope','requestHandler','Fl
         $scope.weightlossError = false;
         if ($scope.planType == 2){
             if ($scope.units ==2) {
-                if (parseFloat($scope.defaultRegistrationData.targetweightlbs) > parseFloat($scope.defaultRegistrationData.weightlbs)) {
+                if (parseFloat($scope.defaultRegistrationData.targetweightlbs) >= parseFloat($scope.defaultRegistrationData.weightlbs)) {
                     $scope.weightlossError = true;
                 }
             }
             else {
-                if (parseFloat($scope.defaultRegistrationData.targetweightkgs) > parseFloat($scope.defaultRegistrationData.weight)) {
+                if (parseFloat($scope.defaultRegistrationData.targetweightkgs) >= parseFloat($scope.defaultRegistrationData.weight)) {
                     $scope.weightlossError = true;
                 }
 
