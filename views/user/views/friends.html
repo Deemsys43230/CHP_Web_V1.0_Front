@@ -45,7 +45,7 @@
                         </div>
                         <h1 class="col-lg-12 col-md-12 col-sm-12 margin-top-50 text-gray text-center" ng-show="!friendsfilter.length" ng-if="!loaded">
                             <img src="../../images/no-friend.png" width="150" height="150"/><br/>
-                            No Request Received!!!<br/><br/><br/>
+                            No Friends Found!!!<br/><br/><br/>
                         </h1>
                         </div>
                         <div ng-show="viewDetails==1">
@@ -236,7 +236,7 @@
                             <div>
                                 <a href="" class="img-shadow"><img ng-src="{{friendsrequest.imageurl | trusted}}"/></a>
                                 <h5 class="wrap">{{friendsrequest.name}}<br/>
-                                    <a href="" class="btn-xs btn-danger margin-top-5" ng-click="denyFriends(friendsrequest.userid)">Cancel Request</a>
+                                    <a href="" class="btn-xs btn-dangerbtn-xs btn-danger margin-top-5" ng-click="denyFriends(friendsrequest.userid)">Cancel Request</a>
                                 </h5>
                             </div>
                         </div>
@@ -274,7 +274,8 @@
                                 <div class="margin-top-5">
                                     <a href="" class="invite_button" ng-if="searchfriends.friendStatus == 0" ng-click="inviteFriends(searchfriends.userid)">Invite</a>
                                     <a href="" class="invite_button request_sent" ng-if="searchfriends.friendStatus == 1" ng-click="denyFriends(searchfriends.userid)">Cancel Request</a>
-                                    <a href="" class="invite_button disabled" ng-if="searchfriends.friendStatus == 2">Request Received</a>
+                                    <a href="" class="invite_button" ng-if="searchfriends.friendStatus == 2" ng-click="acceptFriends(searchfriends.userid)">Accept</a>
+                                    <a href="" class="invite_button request_sent" ng-if="searchfriends.friendStatus == 2" ng-click="denyFriends(searchfriends.userid)">Cancel</a>
                                     <a href="" class="invite_button disabled" ng-if="searchfriends.friendStatus == 3">Friend</a>
                                 </div>
                             </div>
