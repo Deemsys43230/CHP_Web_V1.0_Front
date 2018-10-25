@@ -5040,13 +5040,42 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
         });
     };
 
+    //to get current date while clicking calendar cell
+    $scope.timespanClicked = function(date) {
+        $scope.shouldNotHide=false;
+        if ($scope.calendarView === 'month') {
+            {
+                $scope.viewDate = date;
+               $(".common_model").hide();
+                $("#meal-plan-calendar").hide();
+                $("#lean_overlay").hide();
+                $scope.newSelectedDate=moment($scope.viewDate).format('DD/MM/YYYY');
+                var currentlyselecteddate=moment(new Date()).format('DD/MM/YYYY');
+                var oldmealdate=currentlyselecteddate.split("/");
+                var newmealdate=$scope.newSelectedDate.split("/");
+                 var old_meal_date=new Date(oldmealdate[2],oldmealdate[1]-1,oldmealdate[0]);
+                 var new_meal_date=new Date(newmealdate[2],newmealdate[1]-1,newmealdate[0]);
+                //Now compare the two converted date formats
+                if(old_meal_date < new_meal_date){
+                    $scope.newSelectedDate=currentlyselecteddate;
+                    $scope.viewDate=new Date();
+                }
+                // to disable update weight for past dates
+                else if(old_meal_date > new_meal_date){
+                    $scope.shouldNotHide=true;
+                }
+                $scope.initialLoadFoodAndExercise($scope.newSelectedDate);
+
+            }
+
+        }
+    };
     $scope.mealPlanCalender=function(){
         // var currentMealDate=new Date();
         // $scope.mealPlanStartDate=moment(new Date(currentMealDate.getFullYear(), currentMealDate.getMonth(), 1)).format('DD/MM/YYYY');
         // $scope.mealPlanEndDate=moment(new Date(currentMealDate.getFullYear(), currentMealDate.getMonth()+1, 0)).format('DD/MM/YYYY');
         // $scope.doGetUserMealPlanCalendar( $scope.mealPlanStartDate, $scope.mealPlanEndDate);
-        $scope.newSelectedDate=moment($scope.viewDate).format('DD/MM/YYYY');
-
+        $scope.newSelectedDate=moment($scope.viewDate).format('DD/MM/YYYY'); 
         var oldDateParts= $scope.newSelectedDate.split("/");
         //Now compare the two converted date formats
         var now = new Date(oldDateParts[2],oldDateParts[1]-1,1);
@@ -5174,39 +5203,6 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
         $scope.mealPlanCalender();
 
     });
-
-    //to get current date while clicking calendar cell
-    $scope.timespanClicked = function(date) {
-        $scope.shouldNotHide=false;
-        if ($scope.calendarView === 'month') {
-            {
-                $scope.viewDate = date;
-
-                $(".common_model").hide();
-                $("#meal-plan-calendar").hide();
-                $("#lean_overlay").hide();
-                $scope.newSelectedDate=moment($scope.viewDate).format('DD/MM/YYYY');
-                var currentlyselecteddate=moment(new Date()).format('DD/MM/YYYY');
-                var oldmealdate=currentlyselecteddate.split("/");
-                var newmealdate=$scope.newSelectedDate.split("/");
-                 var old_meal_date=new Date(oldmealdate[2],oldmealdate[1]-1,oldmealdate[0]);
-                 var new_meal_date=new Date(newmealdate[2],newmealdate[1]-1,newmealdate[0]);
-                //Now compare the two converted date formats
-                if(old_meal_date < new_meal_date){
-                    $scope.newSelectedDate=currentlyselecteddate;
-                    $scope.viewDate=currentlyselecteddate;
-                    $scope.viewDate=moment($scope.viewDate).format('DD/MM/YYYY');
-                }
-                // to disable update weight for past dates
-                else if(old_meal_date > new_meal_date){
-                    $scope.shouldNotHide=true;
-                }
-                $scope.initialLoadFoodAndExercise($scope.newSelectedDate);
-
-            }
-
-        }
-    };
 
     // to highlight selected date
      $scope.cellModifier =function(cell) {
