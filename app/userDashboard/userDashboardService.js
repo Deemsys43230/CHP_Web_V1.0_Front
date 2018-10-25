@@ -142,6 +142,14 @@ adminApp.factory("UserDashboardService",['requestHandler',function(requestHandle
         });
     };
 
+    // Get Documents Status of Medication
+     userDashboardServiceObj.doCheckUserMedicationDocument=function(){
+            return requestHandler.getRequest("user/checkfolderexist/","").then(function(response){
+                console.log("service",response);
+               return response;
+            });
+        };
+
     //Get User Demography Details
     userDashboardServiceObj.doGetDemographyDetails=function(){
         return requestHandler.getRequest("user/getDemography/","").then(function(response) {

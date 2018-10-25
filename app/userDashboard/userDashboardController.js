@@ -1060,7 +1060,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
         //TO get user demography details
         $scope.doGetDemograph=function(){
             var userDemographyPromise=UserDashboardService.doGetDemographyDetails();
-            var documentUploadPromise=$scope.doCheckUserMedicationDocument();
+            var documentUploadPromise=UserDashboardService.doCheckUserMedicationDocument();
             
 
            userDemographyPromise.then(function(result){
