@@ -457,6 +457,7 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                             name:'userApp',
                             files:[
                                 '../../plugin/popup/style.css',
+                                '../../app/countryState/countryStateService.js',
                                 '../../app/friends/friendsController.js',
                                 '../../app/friends/friendsService.js'
                             ]

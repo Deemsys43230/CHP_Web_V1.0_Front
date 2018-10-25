@@ -2531,10 +2531,10 @@ coachApp.controller('MembersViewController',['$scope','requestHandler','Flash','
                 $scope.viewMemberDetails.phone="N/A";
             }
             if($scope.viewMemberDetails.country==null){
-                $scope.viewMemberDetails.country="N/A";
+                $scope.viewMemberDetails.countryName="N/A";
             }
             if($scope.viewMemberDetails.state==null){
-                $scope.viewMemberDetails.state="N/A";
+                $scope.viewMemberDetails.stateName="N/A";
             }
             if($scope.viewMemberDetails.city==null){
                 $scope.viewMemberDetails.city="N/A";

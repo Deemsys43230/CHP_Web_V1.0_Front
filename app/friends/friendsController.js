@@ -1,7 +1,7 @@
 
-var userApp = angular.module('userApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','friendsServiceModule','angular-nicescroll']);
+var userApp = angular.module('userApp', ['ngRoute','oc.lazyLoad','requestModule','flash','ngAnimate','friendsServiceModule','stateCountryModule','angular-nicescroll']);
 
-userApp.controller('FriendsController',['$scope','requestHandler','Flash','FriendsService','$sce','$timeout','$rootScope',function($scope,requestHandler,Flash,FriendsService,$sce,$timeout,$rootScope){
+userApp.controller('FriendsController',['$scope','requestHandler','Flash','FriendsService','$sce','$timeout','$rootScope','CountryStateService',function($scope,requestHandler,Flash,FriendsService,$sce,$timeout,$rootScope,CountryStateService){
     $rootScope.isMenuShow=1;
     $scope.viewDetails=0;
     //Initialize search
@@ -150,30 +150,34 @@ userApp.controller('FriendsController',['$scope','requestHandler','Flash','Frien
         $scope.viewDetails=1;
         requestHandler.getRequest("getUserProfile/"+id,"").then(function(response){
             $scope.viewMemberDetails = response.data.userprofile;
+            console.log( $scope.viewMemberDetails);
+            $scope.viewMemberDetails.countryName=CountryStateService.doGetCountries($scope.viewMemberDetails.country);
+            $scope.viewMemberDetails.stateName=CountryStateService.doGetStates($scope.viewMemberDetails.state,$scope.viewMemberDetails.country);
+            console.log($scope.viewMemberDetails.stateName);
             $scope.myImgSrc =$sce.trustAsResourceUrl(response.data.userprofile.imageurl+"?decache="+Math.random());
 
             //View the image in ng-src for view testimonials
 
             if($scope.viewMemberDetails.about==null){
-                $scope.viewMemberDetails.about="N/A";
+                $scope.viewMemberDetails.about="NA";
             }
             if($scope.viewMemberDetails.dob==null){
-                $scope.viewMemberDetails.dob="N/A";
+                $scope.viewMemberDetails.dob="NA";
             }
             if($scope.viewMemberDetails.phone==null){
-                $scope.viewMemberDetails.phone="N/A";
+                $scope.viewMemberDetails.phone="NA";
             }
             if($scope.viewMemberDetails.country==null){
-                $scope.viewMemberDetails.country="N/A";
+                $scope.viewMemberDetails.countryName="NA";
             }
             if($scope.viewMemberDetails.state==null){
-                $scope.viewMemberDetails.state="N/A";
+                $scope.viewMemberDetails.stateName="NA";
             }
             if($scope.viewMemberDetails.city==null){
-                $scope.viewMemberDetails.city="N/A";
+                $scope.viewMemberDetails.city="NA";
             }
             if($scope.viewMemberDetails.zipcode==null){
-                $scope.viewMemberDetails.zipcode="N/A";
+                $scope.viewMemberDetails.zipcode="NA";
             }
             $timeout(function(){
                 $scope.loadingFriendsImage=false;

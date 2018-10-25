@@ -189,11 +189,11 @@ adminApp.controller('CoachViewController',['$scope','requestHandler','Flash','Co
             }
 
             if($scope.usercoachdetails.country==null){
-                $scope.usercoachdetails.country = "NA";
+                $scope.usercoachdetails.countryName = "NA";
             }
 
             if($scope.usercoachdetails.state==null){
-                $scope.usercoachdetails.state = "NA";
+                $scope.usercoachdetails.stateName= "NA";
             }
 
             if($scope.usercoachdetails.city==null){
