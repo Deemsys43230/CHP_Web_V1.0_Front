@@ -690,7 +690,7 @@ $scope.doGetUserId=function(){
                 $scope.userdetails.loginName= 'Hi!'+'  '+$scope.userdetails.firstname;
                 $("#login-button").hide();
                 $("#welcome-text").show();
-                $scope.redirecturl="views/user/#/menu";
+                $scope.redirecturl="views/user/#/user-dashboard";
             }
             $scope.loaded=false;
 
