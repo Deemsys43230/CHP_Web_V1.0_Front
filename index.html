@@ -183,7 +183,7 @@
                                         <!-- This is for mobile -->
                                         <button id="slider1_mobile_button" class="mobileApp btn btn-hero btn-lg" role="button" onclick="$('.loginNow').click()" style="display: none">Register Now</button>
                                 </div>
-                                <video width="100%" height="100%" loop="" muted="" id="slider-video">
+                                <video width="100%" height="100%" loop="" muted="" id="slider-video" preload="auto" >
                                     <source src="https://cdn.cyberhealths.com/Application/banner-video.mp4" type="video/mp4">
                                 </video>
                             </div>
@@ -509,7 +509,9 @@
         <div ng-view autoscroll="true"></div>
     </div>
 </div>
+<section customconsent>
 
+</section>
 <!-- Start Footer Section -->
 <footer>
     <div class="container" ng-controller="LoginController">

@@ -1595,8 +1595,8 @@ userApp.directive('consent', function ($cookies) {
     scope: {},
     template:
      '<div style="position: relative; z-index: 1000">'+
-      '<div style="background: #000; position: fixed; bottom: 0; left: 0; right: 0;height: 36px;text-align: center;" ng-hide="consent()">'+
-      '<span style="font-size: 14px;color:white;">By using our site, you acknowledge that you have read and understand our Cookie Policy</span>&nbsp;<a href="" ng-click="consent(true)" class="btn btn-sm btn-primary">X</a>'+
+      '<div style="background: #555; position: fixed; bottom: 0; left: 0; right: 0;height: 36px;text-align: center;" ng-hide="consent()">'+
+      '<span style="font-size: 14px;color:white;">This website uses cookies to ensure you get best user experience</span>&nbsp;&nbsp;<a href="" ng-click="consent(true)" class="btn cookie-policy-button">OK</a>'+
       '</div>'+
       '</div>',
     controller: function ($scope) {

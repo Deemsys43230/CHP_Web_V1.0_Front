@@ -690,7 +690,7 @@ $scope.doGetUserId=function(){
                 $scope.userdetails.loginName= 'Hi!'+'  '+$scope.userdetails.firstname;
                 $("#login-button").hide();
                 $("#welcome-text").show();
-                $scope.redirecturl="views/user/#/dashboard";
+                $scope.redirecturl="views/user/#/menu";
             }
             $scope.loaded=false;
 
@@ -1308,6 +1308,30 @@ function getSelectionStart(o) {
         return o.value.lastIndexOf(r.text)
     } else return o.selectionStart
 }
+
+// Cookie Accept Directive
+commonApp.directive('customconsent', function ($cookies) {
+    return {
+      scope: {},
+      template:
+       '<div style="position: relative; z-index: 1000">'+
+        '<div style="background: #555; position: fixed; bottom: 0; left: 0; right: 0;height: 36px;text-align: center;" ng-hide="consent()">'+
+        '<span style="font-size: 14px;color:white;">This website uses cookies to ensure you get best user experience</span>&nbsp;&nbsp;<a href="" ng-click="consent(true)" class="btn cookie-policy-button">OK</a>'+
+        '</div>'+
+        '</div>',
+      controller: function ($scope) {
+        var _consent = $cookies.get('consent');
+        $scope.consent = function (consent) {
+          if (consent === undefined) {
+            return _consent;
+          } else if (consent) {
+            $cookies.put('consent', true);
+            _consent = true;        
+          }
+        };
+      }
+    };
+  });
 /*
 commonApp.directive('bDatepicker', function () {
     return {

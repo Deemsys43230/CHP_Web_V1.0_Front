@@ -19995,3 +19995,14 @@ div.scrollmenu a {
 div.scrollmenu a:hover {
     background-color: #777;
 }
+/* cookie policy button */
+.cookie-policy-button{
+    color: #fff;
+    background-color: #f9bb03;
+    border-color: #f9bb03;
+    outline: none;
+    margin-top: 6px;
+    padding: 1px 6px;
+    border-radius:6px;
+}
+
