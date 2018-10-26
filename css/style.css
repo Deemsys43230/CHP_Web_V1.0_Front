@@ -1592,8 +1592,8 @@ ul.social-list li a.flickr:hover {
     background-color: #E474AF;
 }
 
-ul.social-list li a.instgram:hover {
-    background-color: #4D4F54;
+ul.social-list li a.instagram:hover {
+    background-color: #f2672e;
 }
 
 ul.social-list li a.vimeo:hover {
@@ -4426,7 +4426,7 @@ ul.icons-list li i {
 }
 
 .team-member .member-socail a.instagramm:hover i {
-    background-color: #4D4F54;
+    background-color: #f2672e;
 }
 
 .team-member.modern .member-info {
@@ -6086,8 +6086,8 @@ footer a:hover {
     background-color: #E474AF;
 }
 
-.social-widget ul.social-icons li a.instgram:hover i {
-    background-color: #4D4F54;
+.social-widget ul.social-icons li a.instagram:hover i {
+    background-color: #f2672e;
 }
 
 .social-widget ul.social-icons li a.vimeo:hover i {
