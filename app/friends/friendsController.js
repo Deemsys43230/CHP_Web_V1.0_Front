@@ -157,7 +157,7 @@ userApp.controller('FriendsController',['$scope','requestHandler','Flash','Frien
             $scope.myImgSrc =$sce.trustAsResourceUrl(response.data.userprofile.imageurl+"?decache="+Math.random());
 
             //View the image in ng-src for view testimonials
-
+            $scope.viewMemberDetails.address="";
             if($scope.viewMemberDetails.about==null){
                 $scope.viewMemberDetails.about="NA";
             }
@@ -167,17 +167,17 @@ userApp.controller('FriendsController',['$scope','requestHandler','Flash','Frien
             if($scope.viewMemberDetails.phone==null){
                 $scope.viewMemberDetails.phone="NA";
             }
-            if($scope.viewMemberDetails.country==null){
-                $scope.viewMemberDetails.countryName="NA";
+            if($scope.viewMemberDetails.city!=null){
+                $scope.viewMemberDetails.address=$scope.viewMemberDetails.city;
             }
-            if($scope.viewMemberDetails.state==null){
-                $scope.viewMemberDetails.stateName="NA";
+            if($scope.viewMemberDetails.state!=null){
+                $scope.viewMemberDetails.address=$scope.viewMemberDetails.address+", "+$scope.viewMemberDetails.stateName;
             }
-            if($scope.viewMemberDetails.city==null){
-                $scope.viewMemberDetails.city="NA";
+            if($scope.viewMemberDetails.country!=null){
+                $scope.viewMemberDetails.address=$scope.viewMemberDetails.address+", "+$scope.viewMemberDetails.countryName;
             }
             if($scope.viewMemberDetails.zipcode==null){
-                $scope.viewMemberDetails.zipcode="NA";
+                $scope.viewMemberDetails.zipcode="";
             }
             $timeout(function(){
                 $scope.loadingFriendsImage=false;

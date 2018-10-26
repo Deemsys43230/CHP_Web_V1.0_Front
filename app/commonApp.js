@@ -997,7 +997,7 @@ $scope.isFeedback=false;
 commonApp.controller("UserLogoutController",['$cookies','$scope','$window',function($cookies,$scope,$window){
 
     $scope.doLogout=function(){
-
+        //$cookies.remove("X-CSRFToken",{path: '/',domain:'cyberheaths.com'});
         $cookies.remove("X-CSRFToken",{path: '/'});
         $cookies.put('sessionid',undefined);
         $window.location.href="";
@@ -1310,16 +1310,17 @@ function getSelectionStart(o) {
 }
 
 // Cookie Accept Directive
-commonApp.directive('customconsent', function ($cookies) {
+commonApp.directive('customconsent', ['$cookies','$timeout',function ($cookies,$timeout) {
     return {
       scope: {},
       template:
-       '<div style="position: relative; z-index: 1000">'+
-        '<div style="background: #555; position: fixed; bottom: 0; left: 0; right: 0;height: 36px;text-align: center;" ng-hide="consent()">'+
+       '<div style="position: relative; z-index: 1000" ng-show="showData">'+
+        '<div class="cookie-policy-div" ng-hide="consent()">'+
         '<span style="font-size: 14px;color:white;">This website uses cookies to ensure you get best user experience</span>&nbsp;&nbsp;<a href="" ng-click="consent(true)" class="btn cookie-policy-button">OK</a>'+
         '</div>'+
         '</div>',
-      controller: function ($scope) {
+      controller: ['$cookies','$scope','$timeout',function ($cookies,$scope,$timeout) {
+        $scope.showData=false;
         var _consent = $cookies.get('consent');
         $scope.consent = function (consent) {
           if (consent === undefined) {
@@ -1329,9 +1330,12 @@ commonApp.directive('customconsent', function ($cookies) {
             _consent = true;        
           }
         };
-      }
+        $timeout(function(){
+            $scope.showData=true;
+        },60000);
+      }]
     };
-  });
+  }]);
 /*
 commonApp.directive('bDatepicker', function () {
     return {

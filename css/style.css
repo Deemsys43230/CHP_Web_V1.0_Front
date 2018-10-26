@@ -4852,6 +4852,9 @@ and (max-width : 550px) {
     #portfolio-list li {
         width: 100%;
     }
+    .cookie-policy-div{
+        padding-top: 2px !important;
+    }
 }
 
 @media only screen
@@ -20001,8 +20004,17 @@ div.scrollmenu a:hover {
     background-color: #f9bb03;
     border-color: #f9bb03;
     outline: none;
-    margin-top: 6px;
     padding: 1px 6px;
-    border-radius:6px;
+    width:50px;
+}
+.cookie-policy-div{
+    background: #555; 
+    position: fixed; 
+    bottom: 0; 
+    left: 0; 
+    right: 0;
+    height: 50px;
+    padding-top:12px;
+    text-align: center;
 }
 

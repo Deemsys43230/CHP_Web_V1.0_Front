@@ -4248,6 +4248,9 @@ commonApp.service("CountryStateService",[function(){
             if((statecode==value.code) && (countryid==value.countryid))
                 stateName =value.name;
         });
+        if(stateName==''){
+            stateName=this.doGetCountries(countryCode);
+        }
         return  stateName;
     };
 

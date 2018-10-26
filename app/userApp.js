@@ -1590,16 +1590,17 @@ userApp.filter('startsWithLetter', function () {
 });
 
 // Cookie Accept Directive
-userApp.directive('consent', function ($cookies) {
+userApp.directive('consent', ['$cookies','$timeout', function ($cookies,$timeout) {
   return {
     scope: {},
     template:
-     '<div style="position: relative; z-index: 1000">'+
-      '<div style="background: #555; position: fixed; bottom: 0; left: 0; right: 0;height: 36px;text-align: center;" ng-hide="consent()">'+
+     '<div style="position: relative; z-index: 1000" ng-show="showData">'+
+      '<div style="background: #555; position: fixed; bottom: 0; left: 0; right: 0;height: 50px;padding-top:12px;text-align: center;" ng-hide="consent()">'+
       '<span style="font-size: 14px;color:white;">This website uses cookies to ensure you get best user experience</span>&nbsp;&nbsp;<a href="" ng-click="consent(true)" class="btn cookie-policy-button">OK</a>'+
       '</div>'+
       '</div>',
-    controller: function ($scope) {
+    controller: ['$cookies','$scope','$timeout', function ($cookies,$scope,$timeout) {
+        $scope.showData=false;
       var _consent = $cookies.get('consent');
       $scope.consent = function (consent) {
         if (consent === undefined) {
@@ -1609,9 +1610,12 @@ userApp.directive('consent', function ($cookies) {
           _consent = true;        
         }
       };
-    }
+      $timeout(function(){
+        $scope.showData=true;
+      },60000);
+    }]
   };
-});
+}]);
 
 
 //for restricting keypress event one digit after (dot)
