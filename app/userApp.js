@@ -155,6 +155,7 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../app/userDashboard/ngPercentageCircle.js',
                                 '../../app/userDashboard/userDashboardService.js',
                                 '../../app/userDashboard/userDashboardController.js',
+                                '../../app/foodMeasure/foodMeasureService.js',
                                 '../../plugin/dateRange/daterangepicker.css',
                                 '../../app/foodMeasure/foodMeasureService.js',
                                 '../../plugin/dateRange/daterangepicker.js',
@@ -459,7 +460,7 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                                 '../../plugin/popup/style.css',
                                   '../../app/countryState/countryStateService.js',
                                 '../../app/friends/friendsController.js',
-                                '../../app/friends/friendsService.js'
+                                '../../app/friends/friendsService.js',
                             ]
                         })
                     }]
@@ -1139,7 +1140,8 @@ userApp.controller("UserInitialController",['$scope','requestHandler','$location
 userApp.controller("UserLogoutController",['$cookies','$scope','$window',function($cookies,$scope,$window){
 
     $scope.doLogout=function(){
-
+    
+        //$cookies.remove("X-CSRFToken",{path: '/',domain:'cyberheaths.com'});
         $cookies.remove("X-CSRFToken",{path: '/'});
         $cookies.put('sessionid',undefined);
         $window.location.href="../../#/home";
@@ -1587,7 +1589,29 @@ userApp.filter('startsWithLetter', function () {
     };
 });
 
-
+// Cookie Accept Directive
+userApp.directive('consent', function ($cookies) {
+  return {
+    scope: {},
+    template:
+     '<div style="position: relative; z-index: 1000">'+
+      '<div style="background: #000; position: fixed; bottom: 0; left: 0; right: 0;height: 36px;text-align: center;" ng-hide="consent()">'+
+      '<span style="font-size: 14px;color:white;">By using our site, you acknowledge that you have read and understand our Cookie Policy</span>&nbsp;<a href="" ng-click="consent(true)" class="btn btn-sm btn-primary">X</a>'+
+      '</div>'+
+      '</div>',
+    controller: function ($scope) {
+      var _consent = $cookies.get('consent');
+      $scope.consent = function (consent) {
+        if (consent === undefined) {
+          return _consent;
+        } else if (consent) {
+          $cookies.put('consent', true);
+          _consent = true;        
+        }
+      };
+    }
+  };
+});
 
 
 //for restricting keypress event one digit after (dot)
