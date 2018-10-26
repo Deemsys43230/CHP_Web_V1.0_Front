@@ -26,7 +26,9 @@
                         <li class="list-group-item text-right"><span class="pull-left"><strong>State</strong></span>{{coachclientdetails.stateName}}</li>
                         <li class="list-group-item text-right"><span class="pull-left"><strong>Country</strong></span>{{coachclientdetails.countryName}}</li>
                         <li class="list-group-item text-right"><span class="pull-left"><strong>Zip</strong></span>{{coachclientdetails.zipcode}}</li>
-                        <li class="list-group-item text-right"><span class="pull-left"><strong>Prefer Food</strong></span>{{coachclientdetails.preferfood ==1?"Indian":"Western"}}</li>
+                        <li ng-if="coachclientdetails.preferfood==1"class="list-group-item text-right"><span class="pull-left"><strong>Prefer Food</strong></span>Indian</li>
+                        <li ng-if="coachclientdetails.preferfood==2"class="list-group-item text-right"><span class="pull-left"><strong>Prefer Food</strong></span>Western</li>
+                        <li ng-if="coachclientdetails.preferfood==3"class="list-group-item text-right"><span class="pull-left"><strong>Prefer Food</strong></span>Other</li>
                         <li class="list-group-item text-right"><span class="pull-left"><strong>Unit Preference</strong></span>{{coachclientdetails.unitPreference ==1?"Metric":"US"}}</li>
                         <li class="list-group-item text-justify wrap-all"><strong>About Me</strong><br/><span class="margin-top-10">&nbsp;&nbsp;{{coachclientdetails.about}}</span></li>
                     </ul> 
