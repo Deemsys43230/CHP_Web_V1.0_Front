@@ -143,7 +143,7 @@
                     <div class="col-md-4 col-sm-4 col-xs-12 margin-top-10 text-align-right">Weight:</div>
                     <div class="col-md-6 col-sm-6 col-xs-12">
                         <span ng-show="units==1">
-                           <input class="calculator-input"  ng-model="defaultRegistrationData.weight" name="weight" ng-required="units==1"   validate-zero  ng-change="maxWeightCheckKgs()" onkeypress="return validateFloatKeyPress(this,event);" maxlength="5">
+                           <input class="calculator-input"  ng-model="defaultRegistrationData.weight" name="weight" ng-required="units==1"   validate-zero  ng-change="maxWeightCheckKgs();targetWeightValidation();" onkeypress="return validateFloatKeyPress(this,event);" maxlength="5">
                         <div class="text-count-position"><span class="text-unit lbs">kgs</span></div>
                              <span class="error-message" ng-show="!basicDetailsForm.weight.$error.required&&maxweightkgs"><span>Please&nbsp;Enter&nbsp;Valid&nbsp;Weight.</span></span>
                             <span ng-show="userPlanSubmitted">
@@ -152,7 +152,7 @@
                         </span>
                         </span>
                         <span ng-show="units==2">
-                             <input class="calculator-input"  ng-model="defaultRegistrationData.weightlbs" name="weightlbs" validate-zero ng-required="units==2"  ng-change="maxWeightCheckLbs()" onkeypress="return validateFloatKeyPress(this,event);">
+                             <input class="calculator-input"  ng-model="defaultRegistrationData.weightlbs" name="weightlbs" validate-zero ng-required="units==2"  ng-change="maxWeightCheckLbs();targetWeightValidation();" onkeypress="return validateFloatKeyPress(this,event);">
                         <div class="text-count-position"><span class="text-unit lbs">lbs</span></div>
                              <span class="error-message" ng-show="!basicDetailsForm.weightlbs.$error.required&&maxweightlbs"><span>Please&nbsp;Enter&nbsp;Valid&nbsp;Weight.</span></span>
                             <span ng-show="userPlanSubmitted">
