@@ -1,6 +1,6 @@
 .alert {
   font-size: 14px !important;
-  padding: 10px 15px;
+  padding: 4px 10px 4px 15px;
   margin-bottom: 20px;
   border-radius: 3px !important;
   border:2px !important;
@@ -26,7 +26,7 @@
 .alert-dismissable .close,
 .alert-dismissible .close {
   position: relative;
-  top: -2px;
+  top: -3px;
   right: -21px;
   color: inherit;
 }
