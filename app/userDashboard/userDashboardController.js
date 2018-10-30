@@ -711,7 +711,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
                         $scope.deviceconnectionfailure();
                     }
                  
-                    errorMessage(Flash, "Please try again later!")
+                    //errorMessage(Flash, "Please try again later!")
                 });
         };
         $scope.doGetConnectedDevices=function(){

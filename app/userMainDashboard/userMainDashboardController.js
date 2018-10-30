@@ -160,7 +160,7 @@ userApp.controller('UserMainDashboardController',['$scope','requestHandler','$ro
                 $('#overlay_sync_content').addClass('user-dashboard-overlay');
             }
         },function () {
-            errorMessage(Flash, "Please try again later!")
+            //errorMessage(Flash, "Please try again later!")
         });
     };
     // to redirect dashboard menu
