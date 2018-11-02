@@ -2050,8 +2050,11 @@
     #slider7_button {
         margin-left: 167px;
     }
-    .fade-carousel .slides .slide-2 img, .fade-carousel .slides .slide-3 img, .fade-carousel .slides .slide-4 img, .fade-carousel .slides .slide-5 img, .fade-carousel .slides .slide-6 img{
-        height: 58%;  
+    .fade-carousel .slides .slide-2 img, .fade-carousel .slides .slide-3 img, .fade-carousel .slides .slide-5 img, .fade-carousel .slides .slide-6 img{
+        height: 54%;  
+    }
+    .fade-carousel .slides .slide-4 img{
+        height:52% !important;
     }
     .fade-carousel .carousel-inner .item {
         height: 42vh;
@@ -2061,6 +2064,10 @@
     }
     #slide_4_div {
         top: 35% !important;
+    }
+    #chat-container{
+         margin-bottom: 395px !important;
+         margin-left:50px;
     }
 }
     @media (min-width : 992px) and (max-width: 1024px) {
@@ -2136,6 +2143,10 @@
         .text_mobilebanner_slide{
             top:45% !important;
         }
+        #chat-container{
+         margin-bottom: 500px !important;
+         margin-left:50px;
+    }
 
     }
     /* Mac Pro 13 inch*/

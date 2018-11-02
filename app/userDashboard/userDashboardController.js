@@ -1074,7 +1074,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
                         documentUploadPromise.then(function(result){
                             $scope.isFolderExists = result.data.isexist;
                             if($scope.isFolderExists==1){
-                               $scopr.doGetUserUploadedDocument($scope.userProfile.userid);
+                               $scope.doGetUserUploadedDocument($scope.userProfile.userid);
                             }
                         });
                         $scope.userProfileImage=$scope.userProfile.imageurl+"?decache="+Math.random();
@@ -1411,6 +1411,8 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
 
         //On load Exercise Diary
         $scope.loadExerciseDiary=function(selectedDate){
+            //assigning calendar date to exercose diary
+            var selectedDate = $scope.newSelectedDate;
             $scope.loaded=true;
             var userExerciseDiaryDetailPromise=UserDashboardService.getExerciseDiary(selectedDate);
             userExerciseDiaryDetailPromise.then(function(result){
@@ -5240,11 +5242,11 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
             $scope.doGetWeightLog(date);
             $scope.doGetWaterLog(date);
             $scope.doGetWeightGoal();
-            $scope.goGetSessionGraph($scope.storedSessionId);
-            $scope.getUserTimeZone(date);
-            $scope.graphTwo();
-            $scope.checkGoalOnLoad(date);
-            $scope.goGetDailyIntakeGraph(date);
+            //   $scope.goGetSessionGraph($scope.storedSessionId);
+           // $scope.getUserTimeZone(date);
+           // $scope.graphTwo();
+          //  $scope.checkGoalOnLoad(date);
+          //  $scope.goGetDailyIntakeGraph(date);
             $scope.getBudget(date);
             $scope.doGetWearableDateByDate(date);
             if($rootScope.isMenuClicked==1||$rootScope.isMenuClicked==undefined){

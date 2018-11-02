@@ -20017,4 +20017,8 @@ div.scrollmenu a:hover {
     padding-top:12px;
     text-align: center;
 }
+/*coach user chat window */
+#chat-container{
+    margin-bottom: 0 !important;
+}
 
