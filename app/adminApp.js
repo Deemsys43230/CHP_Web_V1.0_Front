@@ -748,7 +748,7 @@ adminApp.config([
                 '../../css/profile-image-upload.css',
                   '../../angular/angular-utils-pagination/dirPagination.js',
                 '../../js/image-upload.js',
-                '../../app/coach/CoachAddEditController.js'
+                '../../app/coach/coachAddEditController.js'
               ]
             });
           }
