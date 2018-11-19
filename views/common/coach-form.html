@@ -22,10 +22,11 @@
                                 <div> First Name <span class="pull-right">:</span></div>
                             </div>
                             <div class="col-lg-8 col-md-7 col-sm-12 margin-top-10">
-                                <input class="coach-input" placeholder="First name" name="firstname" ng-model="coach.firstname" maxlength="25" required validate-alpha-with-space/>
+                                <input class="coach-input" placeholder="First name" name="firstname" ng-model="coach.firstname" maxlength="25" required validate-alpha-with-space ng-minlength="3"/>
                                 <span ng-show="coachDetailsForm.firstname.$dirty && coachDetailsForm.firstname.$invalid">
                                     <span class="error-message textarea-errormessage10" ng-show="coachDetailsForm.firstname.$error.required"><span>Required.</span></span>
                                     <span class="error-message textarea-errormessage10" ng-show="coachDetailsForm.firstname.$error.validateAlphaWithSpace"><span>Enter&nbsp;valid&nbsp;Name.</span></span>
+                                     <span class="error-message textarea-errormessage10" ng-show="coachDetailsForm.firstname.$error.minlength"><span>First&nbsp;Name&nbsp;should&nbsp;contain&nbsp;atleast&nbsp;3&nbsp;characters.</span></span>
                                 </span>
                             </div>
                         </div>
