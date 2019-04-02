@@ -69,7 +69,25 @@ userApp.controller('UserKeyDetailsController',['$scope','requestHandler','$rootS
     $scope.dGetWaterLog=function() {
         requestHandler.postRequest("user/getWaterLogByDate/",{"date":selectedDate}).then(function (response) {
             $scope.waterlogDetails=response.data.Water_log;
+        });
+    };
 
+    //to display mealPlan
+    $scope.doGetMealPlan=function() {
+        requestHandler.getRequest("user/getfreeplanpdf/",{}).then(function (response) {
+            $scope.mealPlanDetails=response.data.pdf;
+            console.log("Mealplan Details : " + $scope.mealPlanDetails);
+             // to show and hide the My Meal Plan Card
+                $scope.havePlan = false;
+                $scope.showLink = false;
+                if($scope.mealPlanDetails != null){
+                    $scope.showLink = true;
+                    console.log("showLink True");
+                }
+                else if($scope.mealPlanDetails == null){
+                    $scope.havePlan = true;
+                    console.log("havePlan True");
+                }
         });
     };
 
@@ -110,6 +128,8 @@ userApp.controller('UserKeyDetailsController',['$scope','requestHandler','$rootS
         $scope.doGetUserKeyDetails();
         $scope.dGetWaterLog();
         $scope.doGetWeightLogDetails();
+        $scope.doGetMealPlan();
+
     };
     $scope.init();
 

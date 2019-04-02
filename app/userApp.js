@@ -94,6 +94,21 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
                     })}]},
             controller:'UserKeyDetailsController'
         }).
+        when('/viewMyMealPlan', {
+            templateUrl: 'views/view-my-meal-plan.html',
+            resolve: {
+                loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name:'userApp',
+                        files:[
+                            '../../css/custom-inputs.css',
+                            '../../css/vertical_tab.css',
+                            '../../plugin/popup/style.css',
+                            '../../app/viewMyMealPlan/viewMyMealPlanController.js'
+                        ]
+                    })}]},
+            controller:'ViewMyMealPlanController'
+        }).
         when('/user-dashboard', {
             templateUrl: 'views/user-dashboard.html',
             resolve: {

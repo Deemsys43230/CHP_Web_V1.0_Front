@@ -41,7 +41,7 @@
         <!-- For Menu spinning -->
         <div class="menu-sidebar">
             <div class="col-md-3 col-lg-3 col-sm-3 margin-top-10">
-                <div class="card box-4 cursor" style="height:154px;">
+                <div class="card box-4 cursor" style="height:154px; margin-bottom: 20px;">
                     <a href="#user-dashboard">
                     <div class="widget-statstic-card">
                         <div class="card-header borderless">
@@ -127,11 +127,11 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-12 col-sm-12 no-padding">
-                <div class="col-md-3 col-lg-3 col-sm-3 margin-top-10">
-                    <div class="card box-5 cursor" ng-click="menuUrlChange(5)" style="height:154px;">
-                        <div class="widget-statstic-card">
-                            <div class="card-header borderless">
+            <div class="col-md-12 col-sm-12 no-padding" style="margin-top: none;">
+                <div class="col-md-3 col-lg-3 col-sm-3">
+                    <div class="card box-5 cursor no-padding" ng-click="menuUrlChange(5)" style="margin-bottom:25px; margin-top: none;">
+                        <div class="widget-statstic-card" style="height:129px; margin-top: none;">
+                            <div class="card-header borderless" style="padding : 10px;">
                                 <div class="card-header-left">
                                     <h3>Medication</h3>
                                     <p class="p-t-10 m-b-0 text-c-yellow">Update Your Medications</p>
@@ -148,12 +148,39 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-12 col-md-12 col-sm-12 text-center margin-top-5">
-                        <div class="demo_status">Your Current Plan</div>
-                        <div class="demo_status margin-top-10">{{userPlanText}}</div>
+                    <div ng-show = "showLink==true" >
+                        <div class="card box-6 cursor no-padding" style="margin-bottom:25px;">
+                            <a href="#viewMyMealPlan">
+                                <div class="widget-statstic-card" style="height:131px;">
+                                    <div class="card-header borderless" style="padding : 10px;">
+                                        <div class="card-header-left">
+                                            <h3>My Meal Plan</h3>
+                                            <p class="p-t-10 m-b-0 text-c-yellow">Personalized Meal Plan</p>
+                                        </div>
+                                    </div>
+                                    <div class="card-block">
+                                        <i class="feather icon-sliders st-icon bg-c-yellow">
+                                            <img src="../../images/plan2-icon.png" class="dashboard-menu-img" />
+                                        </i>
+                                        <div class="text-left">
+                                            <!--<h3>5,456</h3>-->
+                                            <!--<span class="float-right bg-c-yellow">23%</span>-->
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
                     </div>
-
+                    
+                     <!-- Plan of the user -->
+                     <div ng-show = "havePlan == true">
+                        <div class="col-lg-12 col-md-12 col-sm-12 text-center margin-top-5">
+                            <div class="demo_status">Your Current Plan</div>
+                            <div class="demo_status margin-top-10">{{userPlanText}}</div>
+                        </div>
+                    </div>
                 </div>
+                <!-- </div> -->
                 <div class="col-md-9 col-lg-9 col-sm-9 no-padding">
                     <div class="col-md-7 col-sm-7 no-padding">
                         <div class="col-md-5 col-sm-5 social-card1 bg-coach">
@@ -356,7 +383,6 @@
         </div>
     </section>
 </div>
-
 
 <script type="text/javascript">
 
