@@ -82,6 +82,7 @@ userApp.controller('UserKeyDetailsController',['$scope','requestHandler','$rootS
                 $scope.showLink = false;
                 if($scope.mealPlanDetails != null){
                     $scope.showLink = true;
+                    $scope.userPlanText="No Plan";
                     console.log("showLink True");
                 }
                 else if($scope.mealPlanDetails == null){

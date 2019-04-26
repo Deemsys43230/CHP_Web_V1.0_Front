@@ -2261,7 +2261,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
         };
 
         $scope.doCheckPossibleDate=function(value){
-
+           // alert($scope.UserDate);
             requestHandler.postRequest("/user/getWeightLogGraph/", {"startdate": $scope.UserDate,"enddate": $scope.UserDate}).then(function(response){
                 $scope.UserWeightEntry=response.data.Weight_logs[0].userentry;
 
@@ -5243,7 +5243,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
             $scope.doGetWaterLog(date);
             $scope.doGetWeightGoal();
             //   $scope.goGetSessionGraph($scope.storedSessionId);
-           // $scope.getUserTimeZone(date);
+            $scope.getUserTimeZone(date);
            // $scope.graphTwo();
           //  $scope.checkGoalOnLoad(date);
           //  $scope.goGetDailyIntakeGraph(date);
