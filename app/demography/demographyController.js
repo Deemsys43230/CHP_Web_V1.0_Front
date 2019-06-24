@@ -1,7 +1,7 @@
 var userApp= angular.module('userApp', ['ngRoute','oc.lazyLoad','ngCookies','requestModule','flash']);
-userApp.controller('DemographyController',['$rootScope','$scope','requestHandler','Flash','$location','$timeout',function($rootScope,$scope,requestHandler,Flash,$location,$timeout) {
+userApp.controller('DemographyController',['$rootScope','$scope','requestHandler','Flash','$location', '$window' ,'$timeout',function($rootScope,$scope,requestHandler,Flash,$location, $window,$timeout) {
     $rootScope.isMenuShow=1;
-    var originalDemography="";
+    // var originalDemography="";
     var originalNutrition="";
     $scope.doGetDemographyandNutrition = function () {
 
@@ -41,7 +41,7 @@ userApp.controller('DemographyController',['$rootScope','$scope','requestHandler
                 $scope.demography.height=$scope.demography.height.toString();
             }
             }
-            originalDemography=angular.copy(response.data.Demography_Data);
+            $scope.originalDemography=angular.copy(response.data.Demography_Data);
             // For onchange event
             $scope.bmiCalculation();
             $scope.bmiCheck();
@@ -75,12 +75,11 @@ userApp.controller('DemographyController',['$rootScope','$scope','requestHandler
             $scope.demography.bmi="";
             $scope.weightBmi= $scope.demography.weight/0.4536;
             $scope.heightBmi= $scope.demography.height/2.54;
-            $scope.demography.bmi=(($scope.weightBmi*703)/($scope.heightBmi*$scope.heightBmi)).toFixed(2);
-
+            $scope.demography.bmi=Number((($scope.weightBmi*703)/($scope.heightBmi*$scope.heightBmi)).toFixed(2));
         }
         else if($scope.userProfile.unitPreference==2){
             var inches = (12* $scope.demography.heightFeet)+(1*  $scope.demography.heightInches);
-            $scope.demography.bmi=(($scope.demography.weight*703)/(inches*inches)).toFixed(2);
+            $scope.demography.bmi=Number((($scope.demography.weight*703)/(inches*inches)).toFixed(2));
         }
 
         //To check the Obesity Status
@@ -206,6 +205,11 @@ userApp.controller('DemographyController',['$rootScope','$scope','requestHandler
     };
 
     $scope.userWeightPlanChanged=function(){
+        if($scope.demographyForm.$invalid || $scope.weightlossError || $scope.weightgainError || $scope.maxheight || $scope.maxweightkgs ||  $scope.maxweight || $scope.maxTargetWeightKgs || $scope.maxTargetWeight || $scope.maxValue || $scope.maxHbaValue || $scope.invalidError){
+            // $window.scrollTo(0, 0);
+            $window.scrollTo(0, angular.element('input.ng-invalid').offsetTop);
+        }
+        else{
         if( $scope.userPlanTypeOld!=$scope.demography.userPlanType){
             $scope.planChanged=true;
             $scope.userPlanChanged();
@@ -214,6 +218,7 @@ userApp.controller('DemographyController',['$rootScope','$scope','requestHandler
         }else{
             $scope.doUpdateDemography();
         }
+       }
     };
 
 
@@ -351,14 +356,18 @@ userApp.controller('DemographyController',['$rootScope','$scope','requestHandler
         });
     };
 
-    $scope.isCleanDemography =function(){
-        if($scope.isUpdated==0){
-            return false;
-        }
-        else if($scope.isUpdated==1){
-            return angular.equals(originalDemography, $scope.demography);
-        }
-    };
+    //Api blocked if value is not changed
+    // $scope.isCleanDemography =function(){
+    //     if($scope.isUpdated==0){
+    //         return false;
+    //     }
+    //     else if($scope.isUpdated==1){
+    //         console.log(angular.equals($scope.originalDemography, $scope.demography));
+    //         console.log($scope.originalDemography);
+    //         console.log($scope.demography);
+    //         return angular.equals($scope.originalDemography, $scope.demography);
+    //     }
+    // };
     $scope.weightlossError=false;
     $scope.weightgainError=false;
 

@@ -119,6 +119,7 @@ commonApp.controller('UserRegistrationController',['$scope','requestHandler','Fl
         $scope.userPlan.role= $scope.defaultRegistrationData.role.toString();
         $scope.userPlan.gender= parseInt($scope.defaultRegistrationData.gender);
         $scope.userPlan.unit=$scope.units;
+        $scope.userPlan.preferfood=$scope.defaultRegistrationData.preferfood;
         // Switch End Date
         if($scope.userPlan.plantype==3){
             $scope.userPlan.enddate =$scope.enddate;
@@ -207,6 +208,7 @@ commonApp.controller('UserRegistrationController',['$scope','requestHandler','Fl
                 $scope.registerUser.unit=$scope.userPlan.unit;
                 $scope.registerUser.enddate=$scope.userPlan.enddate;
                 $scope.registerUser.targetweight=$scope.userPlan.targetweight;
+                $scope.registerUser.preferfood=$scope.userPlan.preferfood;
             }
             requestHandler.postRequest("userregistration/",$scope.registerUser).then(function(response) {
                 $scope.steps = 6;

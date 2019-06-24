@@ -9,15 +9,15 @@
     <div ng-show="usercoachlist.length>0">
         <div class="col-lg-8 col-md-8 col-sm-8 margin-bottom-10">
             <h2><strong>COACH DETAILS</strong></h2>
-
           <table class="table table-bordered table-striped margin-top-10" style="table-layout:fixed;">
                 <tr>
                     <td class="col-md-4">Name</td>
                     <td class="col-md-8 wrap-all">{{usercoachdetails.name}}</td>
                 </tr>
                 <tr>
-                    <td class="col-md-4">Email Id</td>
-                    <td class="col-md-8 wrap-all">{{usercoachdetails.emailid}}</td>
+                    <td ng-if="mycoachlist!=undefined" class="col-md-4">Email Id</td>
+                        <td ng-show="!getMailAndPhoneNo(usercoachdetails, mycoachlist)" class="col-md-8 wrap-all">{{usercoachdetails.emailid}}</td>
+                        <td ng-show="getMailAndPhoneNo(usercoachdetails, mycoachlist)" class="col-md-8 wrap-all">Available when Subscribed</td>
                 </tr>
                 <tr>
                     <td class="col-md-4">Date of Birth</td>
@@ -30,7 +30,6 @@
                       <div ng-if="usercoachdetails.gender == 1">Male</div>
                       <div ng-if="usercoachdetails.gender == 2">Female</div>
                   </td>
-
               </tr>
               <tr>
                   <td class="col-md-4">City</td>
@@ -39,12 +38,12 @@
               </tr>
               <tr>
                   <td class="col-md-4">State</td>
-                  <td class="col-md-8 wrap-all">{{usercoachdetails.stateName}}</td>
+                  <td class="col-md-8 wrap-all">{{usercoachdetails.state}}</td>
 
               </tr>
               <tr>
                   <td class="col-md-4">Country</td>
-                  <td class="col-md-8 wrap-all">{{usercoachdetails.countryName}}</td>
+                  <td class="col-md-8 wrap-all">{{usercoachdetails.country}}</td>
 
               </tr>
               <tr>
@@ -61,8 +60,11 @@
                   <td class="col-md-8 wrap-all">{{usercoachdetails.businessaddress==null?"NA":usercoachdetails.businessaddress}}</td>
               </tr>
                 <tr>
-                    <td class="col-md-4">Phone Number</td>
-                    <td class="col-md-8 wrap-all">{{usercoachdetails.phone}}</td>
+                    <td ng-if="mycoachlist!=undefined" class="col-md-4">Phone Number</td>
+                    <td ng-show="!getMailAndPhoneNo(usercoachdetails, mycoachlist)" class="col-md-8 wrap-all">{{usercoachdetails.phone}}</td>
+                    <td ng-show="getMailAndPhoneNo(usercoachdetails, mycoachlist)" class="col-md-8 wrap-all">Available When Subscribed</td>
+
+
                 </tr>
                 <tr>
                     <td class="col-md-4">Specialist</td>
@@ -80,7 +82,7 @@
                   <td class="col-md-4">About</td>
                   <td class="col-md-8 wrap-all">{{usercoachdetails.about}}</td>
               </tr>
-           </table>                     
+           </table>             
             <div class="col-lg-12 col-md-12 col-sm-12 text-center">
               <span><a href="" class="btn register_button" ng-click="doSendInterestToCoach(usercoachdetails.userid)" ng-show="usercoachdetails.relationship=='NA'||usercoachdetails.relationship==5"> I'm Interested </a></span>
               <h3  class="text-success" ng-show="usercoachdetails.relationship==1"><i class="fa fa-check-circle">&nbsp;&nbsp;Interest Request Sent </i></h3>

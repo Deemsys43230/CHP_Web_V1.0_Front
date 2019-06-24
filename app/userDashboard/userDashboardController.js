@@ -4736,10 +4736,12 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
 
             var waterLogPromise=UserDashboardService.doGetWaterLogDetails(date);
             waterLogPromise.then(function(result){
+                console.log(result);
                 var waterlogdetails=result.Water_log;
-
+                console.log($scope.waterlog)
                 $scope.waterlog = waterlogdetails.milliliters;
                 $scope.waterlogoz = waterlogdetails.ounces;
+                console.log($scope.waterlog)
             });
         };
 
@@ -4748,11 +4750,13 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
             //getting main date
             var date = $scope.newSelectedDate;
             //$scope.disableReduceWater=false;
+            console.log(id);
+            console.log($scope.waterlog)
             if(id==0){
                 $scope.addspin=true;
                 $scope.waterAddText="Updating...";
                 if($scope.addlogUnit==1){
-                    requestHandler.postRequest("user/waterlogInsertorUpdate/",{"date":date,"milliliters":parseInt($scope.addlog),"oz":""}).then(function(response){
+                    requestHandler.postRequest("user/waterlogInsertorUpdate/",{"date":date,"milliliters":parseInt($scope.addlog)*240,"oz":""}).then(function(response){
                         $scope.addspin=false;
                         $scope.waterAddText="+ Log";
                         $scope.doGetWaterLog(date);
@@ -4760,23 +4764,26 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
                         errorMessage(Flash, "Please try again later!")
                     });
                 }
-                else{
-                    requestHandler.postRequest("user/waterlogInsertorUpdate/",{"date":date,"milliliters":"","oz":parseInt($scope.addlog)}).then(function(response){
-                        $scope.addspin=false;
-                        $scope.waterAddText="+ Log";
-                        $scope.doGetWaterLog(date);
-                    }, function () {
-                        errorMessage(Flash, "Please try again later!")
-                    });
+                // else{
+                //     console.log($scope.waterlog)
+                //     requestHandler.postRequest("user/waterlogInsertorUpdate/",{"date":date,"milliliters":"","oz":parseInt($scope.addlog)}).then(function(response){
+                //         $scope.addspin=false;
+                //         $scope.waterAddText="+ Log";
+                //         $scope.doGetWaterLog(date);
+                //     }, function () {
+                //         errorMessage(Flash, "Please try again later!")
+                //     });
 
-                }
+                // }
             }
             else{
                 if($scope.waterlog>$scope.addlog){
                     $scope.reducespin=true;
                     $scope.waterReduceText="Updating...";
+                    console.log($scope.waterlog);
+                    console.log($scope.addlog);
                     if($scope.addlogUnit==1){
-                        requestHandler.postRequest("user/waterlogInsertorUpdate/",{"date":date,"milliliters":parseInt($scope.waterlog) - parseInt($scope.addlog),"oz":""}).then(function(response){
+                        requestHandler.postRequest("user/waterlogInsertorUpdate/",{"date":date,"milliliters":parseInt($scope.addlog/2),"oz":""}).then(function(response){
                             $scope.reducespin=false;
                             $scope.waterReduceText="- Reduce";
                             $scope.doGetWaterLog(date);
@@ -4784,16 +4791,16 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
                             errorMessage(Flash, "Please try again later!")
                         });
                     }
-                    else{
-                        $scope.disableForReduce=($scope.waterlogoz<=$scope.addlog);
-                        requestHandler.postRequest("user/waterlogInsertorUpdate/",{"date":date,"milliliters":"","oz":parseInt($scope.waterlogoz) - parseInt($scope.addlog)}).then(function(response){
-                            $scope.reducespin=false;
-                            $scope.waterReduceText="- Reduce";
-                            $scope.doGetWaterLog(date);
-                        }, function () {
-                            errorMessage(Flash, "Please try again later!")
-                        });
-                    }
+                    // else{
+                    //     $scope.disableForReduce=($scope.waterlogoz<=$scope.addlog);
+                    //     requestHandler.postRequest("user/waterlogInsertorUpdate/",{"date":date,"milliliters":"","oz":parseInt($scope.waterlogoz) - parseInt($scope.addlog)}).then(function(response){
+                    //         $scope.reducespin=false;
+                    //         $scope.waterReduceText="- Reduce";
+                    //         $scope.doGetWaterLog(date);
+                    //     }, function () {
+                    //         errorMessage(Flash, "Please try again later!")
+                    //     });
+                    // }
                 }
             }
         };

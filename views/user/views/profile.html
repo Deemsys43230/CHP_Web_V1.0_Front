@@ -53,27 +53,27 @@
                         <div class="row">
                             <div class="col-lg-6 col-md-12 col-sm-12">
                                 <div class="col-lg-4 col-md-4 col-sm-4 padding-top-4 padding-right-0">
-                                    <h5>First name <span class="pull-right">:</span></h5>
+                                    <h5>First name<sup class="text-red">*</sup><span class="pull-right">:</span></h5>
                                 </div>
                                 <div class="col-lg-8 col-md-8 col-sm-8">
                                     <input class="profile_input" name="firstname" ng-model="userProfile.firstname" ng-pattern="/^ *([a-zA-Z]+ ?)+ *$/" maxlength="25" required/>
-                                    <span ng-show="userProfileForm.firstname.$dirty&&userProfileForm.firstname.$invalid">
+                                    <span ng-show="(userProfileForm.about.$dirty || submitted)&&userProfileForm.firstname.$invalid">
                                          <span class="error-message textarea-errormessage10" ng-show="userProfileForm.firstname.$error.required"><span class="error-bottom">Required.</span></span>
                                          <span class="error-message textarea-errormessage10" ng-show="userProfileForm.firstname.$error.pattern"><span class="error-bottom-invalid">Enter&nbsp;valid&nbsp;Name.</span></span>
                                     </span>
                                 </div>
                                 <div class="col-lg-4 col-md-4 col-sm-4 padding-top-4 padding-right-0 margin-top-10">
-                                    <h5>Last name <span class="pull-right">:</span></h5>
+                                    <h5>Last name<sup class="text-red">*</sup><span class="pull-right">:</span></h5>
                                 </div>
                                 <div class="col-lg-8 col-md-8 col-sm-8 margin-top-10">
                                     <input class="profile_input" name="lastname" ng-model="userProfile.lastname" ng-pattern="/^ *([a-zA-Z]+ ?)+ *$/" maxlength="25" required/>
-                                    <span ng-show="userProfileForm.lastname.$dirty&&userProfileForm.lastname.$invalid">
+                                    <span ng-show="(userProfileForm.about.$dirty || submitted)&&userProfileForm.lastname.$invalid">
                                          <span class="error-message textarea-errormessage10" ng-show="userProfileForm.lastname.$error.required"><span class="error-bottom">Required.</span></span>
                                          <span class="error-message textarea-errormessage10" ng-show="userProfileForm.lastname.$error.pattern"><span class="error-bottom-invalid">Enter&nbsp;valid&nbsp;Name.</span></span>
                                     </span>
                                 </div>
                                 <div class="col-lg-4 col-md-4 col-sm-4 padding-top-4 padding-right-0 margin-top-10">
-                                    <h5>DOB <span class="pull-right">:</span><span class="pull-right">&nbsp;<a href="" data-toggle="popover" data-trigger="hover" title="Age Restriction" data-content=" If you are under the age of 13, You are requested to go with under parental guidance."><i class="fa fa-info-circle"></i></a>&nbsp;</span></h5>
+                                    <h5>DOB<sup class="text-red">*</sup><span class="pull-right">:</span><span class="pull-right">&nbsp;<a href="" data-toggle="popover" data-trigger="hover" title="Age Restriction" data-content=" If you are under the age of 13, You are requested to go with under parental guidance."><i class="fa fa-info-circle"></i></a>&nbsp;</span></h5>
                                 </div>
                                 <div class="col-lg-8 col-md-8 col-sm-8 margin-top-10" >
                                     <div class="input-group">
@@ -107,29 +107,29 @@
                                                ng-required="true"
                                                close-text="Close" required block>
                                     </div>-->
-                                        <span ng-show="userProfileForm.dob.$dirty&&userProfileForm.dob.$invalid">
+                                        <span ng-show="(userProfileForm.about.$dirty || submitted)&&userProfileForm.dob.$invalid">
                                             <span class="error-message textarea-errormessage10" ng-show="userProfileForm.dob.$error.required"><span class="error-bottom">Required.</span></span>
                                         </span>
                                 </div>
                                 <div class="col-lg-4 col-md-4 col-sm-4 padding-top-4 padding-right-0 margin-top-10">
-                                    <h5>Email ID <span class="pull-right">:</span></h5>
+                                    <h5>Email ID<span class="pull-right">:</span></h5>
                                 </div>
                                 <div class="col-lg-8 col-md-8 col-sm-8 margin-top-10">
                                     <input class="profile_input" ng-model="userProfile.emailid" ng-disabled="true" required/>
                                 </div>
                                 <div class="col-lg-4 col-md-4 col-sm-4 padding-top-4 padding-right-0 margin-top-10">
-                                    <h5>Mobile <span class="pull-right">:</span></h5>
+                                    <h5>Mobile<sup class="text-red">*</sup><span class="pull-right">:</span></h5>
                                 </div>
                                 <div class="col-lg-8 col-md-8 col-sm-8 margin-top-10">
-                                    <input class="profile_input" name="phone" ng-pattern="/^\d+$/"  ng-model="userProfile.phone" ng-minlength="10" maxlength="10" />
-                                        <span ng-show="userProfileForm.phone.$dirty&&userProfileForm.phone.$invalid">
-                                             <!--<span class="error-message textarea-errormessage10" ng-show="userProfileForm.phone.$error.required"><span class="error-bottom">Required.</span></span>-->
+                                    <input class="profile_input" name="phone" ng-pattern="/^\d+$/"  ng-model="userProfile.phone" ng-minlength="10" maxlength="10" required/>
+                                        <span ng-show="(userProfileForm.phone.$dirty || submitted)&&userProfileForm.phone.$invalid">
+                                             <span class="error-message textarea-errormessage10" ng-show="userProfileForm.phone.$error.required"><span class="error-bottom">Required.</span></span>
                                               <span class="error-message textarea-errormessage10" ng-show="userProfileForm.phone.$error.pattern"><span class="error-bottom-invalid">Invalid&nbsp;Format.</span></span>
                                              <span class="error-message textarea-errormessage10" ng-show="!userProfileForm.phone.$error.pattern&&userProfileForm.phone.$error.minlength"><span class="error-bottom-invalid">Should&nbsp;be&nbsp;of&nbsp;length&nbsp;10.</span></span>
                                          </span>
                                 </div>
                                 <div class="col-lg-4 col-md-4 col-sm-4 padding-top-4 padding-right-0 margin-top-10">
-                                    <h5>Gender <span class="pull-right">:</span></h5>
+                                    <h5>Gender<sup class="text-red">*</sup><span class="pull-right">:</span></h5>
                                 </div>
                                 <div class="col-lg-8 col-md-8 col-sm-8 margin-top-10" >
                                     <input type="radio" id="1" name="sex" value="1" ng-model="userProfile.gender"   required/>
@@ -138,7 +138,7 @@
                                     <label for="2">Female</label>
                                 </div>
                                 <div class="col-lg-4 col-md-4 col-sm-4 padding-top-4 padding-right-0 margin-top-5">
-                                    <h5>Prefer Food <span class="pull-right">:</span></h5>
+                                    <h5>Prefer Food<sup class="text-red">*</sup><span class="pull-right">:</span></h5>
                                 </div>
                                 <div class="col-lg-8 col-md-8 col-sm-8 margin-top-5">
                                     <input type="radio" id="india" class="height" name="preferfood" value="1" ng-model="userProfile.preferfood"/>
@@ -152,56 +152,56 @@
                             <div class="col-lg-6 col-md-12 col-sm-12">
                                 <div class="hidden-lg"><div class="col-sm-12 margin-top-5"></div></div>
                                 <div class="col-lg-4 col-md-4 col-sm-4 padding-top-4 padding-right-0">
-                                    <h5>Country<span class="pull-right">:</span></h5>
+                                    <h5>Country<sup class="text-red">*</sup><span class="pull-right">:</span></h5>
                                 </div>
-                                <div class="col-lg-8 col-md-8 col-sm-8"><!--{{userProfile.country}}-->
-                                    <select class="full-width main margin-bottom-1" name="country"  ng-model="userProfile.countrySelect" ng-options="country.name for country in countries track by country.code" ng-init="addCountry()" ng-change="updateCountry()">
+                                <div class="col-lg-8 col-md-8 col-sm-8">
+                                    <select class="full-width main margin-bottom-1" name="country"  ng-model="userProfile.countrySelect" ng-options="country.name for country in countries track by country.code" ng-init="addCountry()" ng-change="updateCountry()" required>
                                         <option value="">-- Select a Country --</option>
                                     </select>
                                     <!--<input class="profile_input" name="country" ng-model="userProfile.country" maxlength="20" required/>-->
-                                    <!--<span ng-show="userProfileForm.country.$dirty&&userProfileForm.country.$invalid">-->
-                                        <!--<span class="error-message textarea-errormessage10" ng-show="userProfileForm.country.$error.required"><span class="error-bottom-dropdown">Required.</span></span>-->
-                                    <!--</span>-->
+                                    <span ng-show="(userProfileForm.about.$dirty || submitted)&&userProfileForm.country.$invalid">
+                                        <span class="error-message textarea-errormessage10" ng-show="userProfileForm.country.$error.required"><span class="error-bottom-dropdown">Required.</span></span>
+                                    </span>
                                 </div>
                                 <div class="col-lg-4 col-md-4 col-sm-4 padding-top-4 padding-right-0 margin-top-10">
-                                    <h5>State <span class="pull-right">:</span></h5>
+                                    <h5>State<sup class="text-red">*</sup><span class="pull-right">:</span></h5>
                                 </div>
                                 <div class="col-lg-8 col-md-8 col-sm-8 margin-top-10"><!--{{userProfile.state}}-->
-                                    <select class="full-width main margin-bottom-1" name="state" ng-model="userProfile.stateSelect" ng-options="state.name for state in availableStates track by state.code">
+                                    <select class="full-width main margin-bottom-1" name="state" ng-model="userProfile.stateSelect" ng-options="state.name for state in availableStates track by state.code" required>
                                         <option value="">-- Select a State --</option>
                                     </select>
                                     <!--<input class="profile_input" name="state" ng-model="userProfile.state" maxlength="20" required/>-->
-                                        <!--<span ng-show="userProfileForm.state.$dirty&&userProfileForm.state.$invalid">-->
-                                <!--<span class="error-message textarea-errormessage10" ng-show="userProfileForm.state.$error.required"><span class="error-bottom-dropdown">Required.</span></span>-->
-                                         <!--</span>-->
+                                        <span ng-show="(userProfileForm.state.$dirty || submitted)&&userProfileForm.state.$invalid">
+                                <span class="error-message textarea-errormessage10" ng-show="userProfileForm.state.$error.required"><span class="error-bottom-dropdown">Required.</span></span>
+                                         </span>
                                 </div>
                                 <div class="col-lg-4 col-md-4 col-sm-4 padding-top-4 padding-right-0 margin-top-10">
-                                    <h5>City <span class="pull-right">:</span></h5>
+                                    <h5>City<sup class="text-red">*</sup><span class="pull-right">:</span></h5>
                                 </div>
                                 <div class="col-lg-8 col-md-8 col-sm-8 margin-top-10">
-                                    <input class="profile_input" name="city" ng-pattern="/^ *([a-zA-Z]+ ?)+ *$/" ng-model="userProfile.city" maxlength="20"/>
-                                         <span ng-show="userProfileForm.city.$dirty&&userProfileForm.city.$invalid">
-                                             <!--<span class="error-message textarea-errormessage10" ng-show="userProfileForm.city.$error.required"><span class="error-bottom">Required.</span></span>-->
+                                    <input class="profile_input" name="city" ng-pattern="/^ *([a-zA-Z]+ ?)+ *$/" ng-model="userProfile.city" maxlength="20" required/>
+                                         <span ng-show="(userProfileForm.city.$dirty || submitted) && userProfileForm.city.$invalid">
+                                             <span class="error-message textarea-errormessage10" ng-show="userProfileForm.city.$error.required"><span class="error-bottom">Required.</span></span>
                                              <span class="error-message textarea-errormessage10" ng-show="userProfileForm.city.$error.pattern"><span class="error-bottom-invalid">Invalid&nbsp;city.</span></span>
                                          </span>
                                 </div>
                                 <div class="col-lg-4 col-md-4 col-sm-4 padding-top-4 padding-right-0 margin-top-10">
-                                    <h5>Zipcode <span class="pull-right">:</span></h5>
+                                    <h5>Zipcode<sup class="text-red">*</sup><span class="pull-right">:</span></h5>
                                 </div>
                                 <div class="col-lg-8 col-md-8 col-sm-8 margin-top-10">
-                                    <input class="profile_input" name="zipcode" ng-pattern="/^\d{5,6}$/" ng-model="userProfile.zipcode" maxlength="6" minlength="5"/>
-                                        <span ng-show="userProfileForm.zipcode.$dirty&&userProfileForm.zipcode.$invalid">
-                                            <!--<span class="error-message textarea-errormessage10" ng-show="userProfileForm.zipcode.$error.required"><span class="error-bottom">Required.</span></span>-->
+                                    <input class="profile_input" name="zipcode" ng-pattern="/^\d{5,6}$/" ng-model="userProfile.zipcode" maxlength="6" minlength="5" required/>
+                                        <span ng-show="(userProfileForm.zipcode.$dirty || submitted)&&userProfileForm.zipcode.$invalid">
+                                            <span class="error-message textarea-errormessage10" ng-show="userProfileForm.zipcode.$error.required"><span class="error-bottom">Required.</span></span>
                                             <span class="error-message textarea-errormessage10" ng-show="userProfileForm.zipcode.$error.pattern"><span class="error-bottom-invalid">Invalid&nbsp;Format.</span></span>
                                             <span class="error-message textarea-errormessage10" ng-show="!userProfileForm.zipcode.$error.pattern&&userProfileForm.zipcode.$error.minlength"><span class="error-bottom-invalid">Should&nbsp;be&nbsp;of&nbsp;length&nbsp;5.</span></span>
                                          </span>
                                 </div>
                                 <div class="col-lg-4 col-md-4 col-sm-4 padding-top-4 padding-right-0 margin-top-10">
-                                    <h5>Secret&nbsp;Question<span class="pull-right">:</span></h5>
+                                    <h5>Secret&nbsp;Question<sup class="text-red">*</sup><span class="pull-right">:</span></h5>
                                 </div>
                                 <div class="col-lg-8 col-md-8 col-sm-8 margin-top-10">
                                     <!-- <input class="profile_input" name="secretquestion" ng-model="userProfile.secretquestion" maxlength="150" required/>-->
-                                    <select class="full-width main"  ng-model="userProfile.secretquestion" name="secretquestion" ng-change="clearSecretAnswer()">
+                                    <select class="full-width main"  ng-model="userProfile.secretquestion" name="secretquestion" ng-change="clearSecretAnswer()" required>
                                         <option value="">--Select secret question--</option>
                                         <option value="1">What was the name of your first pet?</option>
                                         <option value="2">What is the name of your best friend?</option>
@@ -210,21 +210,22 @@
                                         <option value="5">What is the name of your favourite sport's team?</option>
                                         <option value="6">What is your Dream job?</option>
                                     </select>
-                                        <!--<span ng-show="userProfileForm.secretquestion.$dirty&&userProfileForm.secretquestion.$invalid">-->
-                                <!--<span class="error-message textarea-errormessage10" ng-show="userProfileForm.secretquestion.$error.required"><span class="error-bottom-dropdown">Required.</span></span>-->
-                                         <!--</span>-->
+                                        <span ng-show="(userProfileForm.secretquestion.$dirty || submitted)&&userProfileForm.secretquestion.$invalid">
+                                <span class="error-message textarea-errormessage10" ng-show="userProfileForm.secretquestion.$error.required"><span class="error-bottom-dropdown">Required.</span></span>
+                                         </span>
                                 </div>
                                 <div class="col-lg-4 col-md-4 col-sm-4 padding-top-4 padding-right-0 margin-top-10">
-                                    <h5>Secret&nbsp;Answer<span class="pull-right">:</span></h5>
+                                    <h5>Secret&nbsp;Answer<sup class="text-red">*</sup><span class="pull-right">:</span></h5>
                                 </div>
                                 <div class="col-lg-8 col-md-8 col-sm-8 margin-top-10">
-                                    <input class="profile_input" name="secretanswer" ng-model="userProfile.secretanswer" maxlength="150" ng-required="userProfile.secretquestion!=''&&userProfile.secretquestion!=null" ng-model-options="{ allowInvalid: true }"/>
-                                      <span ng-show="userProfileForm.secretanswer.$dirty&&userProfileForm.secretanswer.$invalid">
-                                <span class="error-message textarea-errormessage10" ng-show="userProfileForm.secretanswer.$error.required"><span class="error-bottom">Required.</span></span>
+                                    <!-- <input class="profile_input" name="secretanswer" ng-model="userProfile.secretanswer" maxlength="150" ng-required="userProfile.secretquestion!=''&&userProfile.secretquestion!=null" ng-model-options="{ allowInvalid: true }"/> -->
+                                    <input class="profile_input" name="secretanswer" ng-model="userProfile.secretanswer" maxlength="150"  ng-model-options="{ allowInvalid: true }" required/>  
+                                    <span ng-show="(userProfileForm.secretanswer.$dirty || submitted) && userProfileForm.secretanswer.$invalid">
+                                        <span class="error-message textarea-errormessage10" ng-show="userProfileForm.secretanswer.$error.required"><span class="error-bottom">Required.</span></span>
                                    </span>
                                 </div>
                                 <div class="col-lg-4 col-md-4 col-sm-4 padding-top-4 padding-right-0 margin-top-10">
-                                    <h5>Prefer Unit<span class="pull-right">:</span></h5>
+                                    <h5>Prefer Unit<sup class="text-red">*</sup><span class="pull-right">:</span></h5>
                                 </div>
                                 <div class="col-lg-8 col-md-8 col-sm-8 margin-top-10">
 
@@ -238,27 +239,27 @@
                                         <option value="1">Metric</option>
                                         <option value="2">United States</option>
                                     </select>
-                                    <span ng-show="userProfileForm.unitPreference.$dirty&&userProfileForm.unitPreference.$invalid">
+                                    <span ng-show="userProfileForm.unitPreference.$dirty&&userProfileForm.unitPreference.$invalid">-->
                                 <span class="error-message textarea-errormessage10" ng-show="userProfileForm.unitPreference.$error.required"><span>Required.</span></span>
-                                         </span>-->
+                                       <!--  </span>-->
                                 </div>
                                <!-- <div class="col-lg-12 hidden-md hidden-sm padding-right-0 margin-top-5 text-right">
                                 </div>-->
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12" style="width: 105% !important">
                                 <div class="col-lg-2 col-md-2 col-sm-2 padding-top-4">
-                                    <h5>About Me <span class="pull-right">:</span></h5>
+                                    <h5>About Me<sup class="text-red">*</sup><span class="pull-right">:</span></h5>
                                     <p><span ng-hide="showCount && userProfile.about.length">&nbsp;</span><span ng-show="showCount && userProfile.about.length"><span class="text-bold text-red" style="font-size: 14px">{{ (300-userProfile.about.length) }}</span> Characters Remaining</span></p>
                                 </div>
                                 <div class="col-lg-9 col-md-9 col-sm-9 padding-top-4 padding-left-0">
-                                  <!--<span ng-show="userProfileForm.about.$dirty&&userProfileForm.about.$invalid">-->
-                                     <!--<span class="error-message textarea-errormessage40" ng-show="userProfileForm.about.$error.required"><span>Required.</span></span>-->
-                                  <!--</span>-->
-                                    <textarea id="inputFocusForDatePicker" class="profile_input_textarea" name="about" ng-model="userProfile.about" maxlength="300" ng-blur="showCount=0" ng-focus="showCount=1"  style="resize: none"></textarea>
+                                  <span ng-show="(userProfileForm.about.$dirty || submitted)&&userProfileForm.about.$invalid">
+                                     <span class="error-message textarea-errormessage40" ng-show="userProfileForm.about.$error.required"><span>Required.</span></span>
+                                  </span>
+                                    <textarea id="inputFocusForDatePicker" class="profile_input_textarea" name="about" ng-model="userProfile.about" maxlength="300" ng-blur="showCount=0" ng-focus="showCount=1"  style="resize: none" required></textarea>
                                 </div>
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12 text-center margin-top-10">
-                                <a href="" class="btn register_button" ng-click="doUpdateProfile()" ng-disabled="isClean() || userProfileForm.$invalid">Save Changes</a>
+                                <a href="" class="btn register_button" ng-click="doUpdateProfile()">Save Changes</a>
                                 <a href="#menu" class="btn cancel_button">Cancel</a>
                             </div>
                         </div>

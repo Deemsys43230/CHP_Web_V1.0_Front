@@ -11,6 +11,10 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
     $scope.submitButton=false;
     $scope.assessmentBtnTxt="Complete Assessment";
     var myCoachIdListArray = [];
+    $scope.usercoachinfo=[];
+    $scope.mycoach;
+    $scope.usercoachlistinfo;
+    $scope.show=false;
     // $scope.disablereview=false;
 
     // Search Food Type
@@ -57,6 +61,7 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
             $q.all([ratingPromise]).then(function(){
 
                 $scope.usercoachlist= $scope.usercoachlist.concat(response.data.coaches);
+                $scope.usercoachlistinfo=$scope.userCoachList;
                 if(loadCoachDetail){
                     //Load First Coach Default
                         if($scope.usercoachlist.length>0)
@@ -129,6 +134,7 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
         requestHandler.getRequest("getUserProfile/"+id, "").then(function(response){
 
             $scope.usercoachdetails=response.data.userprofile;
+            $scope.usercoachinfo=$scope.usercoachdetails;
             //to get country and state details for coach from user side
             $scope.usercoachdetails.countryName=CountryStateService.doGetCountries($scope.usercoachdetails.country);
             $scope.usercoachdetails.stateName=CountryStateService.doGetStates($scope.usercoachdetails.state,$scope.usercoachdetails.country);
@@ -204,6 +210,7 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
         $scope.loaded=true;
         requestHandler.getRequest("user/mycoachlist/", "").then(function(response){
             $scope.mycoachlist=response.data.coaches;
+            $scope.mycoach=$scope.mycoachlist;
             $scope.loaded=false;
             $.each($scope.mycoachlist, function(index,coachlist){
                 myCoachIdListArray.push(coachlist.userid);
@@ -212,8 +219,22 @@ userApp.controller('UserCoachController',['$scope','requestHandler','Flash','$lo
         },function(){
             errorMessage(Flash,"Please try again later!")
         });
-
     };
+
+    //Display Email and Phone number only for subscribed Coach
+    $scope.getMailAndPhoneNo=function(usercoachdetails, mycoachlist){
+        if(mycoachlist!=undefined && mycoachlist.length>0){
+        for(var i=0;i<mycoachlist.length;i++){
+            if(mycoachlist[i].userid==usercoachdetails.userid)
+               return false;
+            else
+                return true;
+        }  
+    }   
+        else if(mycoachlist!=undefined && mycoachlist.length<=0){
+            return true;
+    }
+    }
 
     //Do Set Chat Message as Read
     $scope.doReadChatMessage=function(){

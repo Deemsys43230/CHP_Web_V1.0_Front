@@ -416,12 +416,13 @@
                                                 <div class="col-lg-8 col-md-8 col-sm-8 margin-top-10 no-padding">
                                                     <form name="waterLogForm" novalidate >
                                                         <div class="row margin-top-10" style="margin-right: 0;margin-left: -4px;">
-                                                            <lable class="waterlog-text" id="addLog" name="curentrwater" ng-model="waterlog"><b><span>{{waterlog}}&nbsp;<small>ml</small></span> / <span>{{waterlogoz}}&nbsp;<small>oz</small></span></b></lable>
+                                                            <lable class="waterlog-text" id="addLog" name="curentrwater" ng-model="waterlog"><b><span>Consumed {{waterlog/240}} glass</span></b></lable>
+                                                            <!-- <lable class="waterlog-text" id="addLog" name="curentrwater" ng-model="waterlog"><b><span>{{waterlog}}&nbsp;<small>ml</small></span> / <span>{{waterlogoz}}&nbsp;<small>oz ={{waterlog/240}} glass</small></span></b></lable> -->
                                                         </div>
 
                                                         <div class="col-md-12 col-md-12 col-sm-12 no-padding inner_box ">
                                                             <div class="col-md-12 col-md-12 col-sm-12 margin-top-10">
-                                                                <span>Log Water</span>
+                                                                <span>Log Water&nbsp;<small class="waterlog-text size">(1glass= 240ml)</small></span>
                                                             </div>
                                                             <div class="col-lg-5 col-md-5 col-sm-5 margin-top-5">
                                                                 <input class="profile_input weightoverride " type="text" id="waterLog" name="curwater" ng-model="addlog" ng-pattern="/^0*[1-9]\d*$/" maxlength="5" required  style="width: 70px;"/>
@@ -433,8 +434,7 @@
                                                             <div class="col-lg-7 col-md-7 col-sm-7 margin-top-5">
                                                                 <select class="profile_input weightoverride full-width main" name="addlogUnit" ng-model="addlogUnit" style="width: 70px;" required>
                                                                     <option value="" defalut selected>Select</option>
-                                                                    <option value="1">ml</option>
-                                                                    <option value="2">oz</option>
+                                                                    <option value="1">glass</option>
                                                                 </select>
                                                                   <span ng-show="waterLogForm.addlogUnit.$dirty&&waterLogForm.addlogUnit.$invalid">
                                                                 <span class="error-message textarea-errormessage10" ng-show="waterLogForm.addlogUnit.$error.required"><span>Required.</span></span>

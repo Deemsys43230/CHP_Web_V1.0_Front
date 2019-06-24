@@ -5,6 +5,7 @@ var userApp= angular.module('userApp', ['ngRoute','oc.lazyLoad','ngCookies','req
 
 userApp.controller('UserProfileController',['$scope','requestHandler','Flash','$location','$timeout','$rootScope',function($scope,requestHandler,Flash,$location,$timeout,$rootScope) {
     $rootScope.isMenuShow=1;
+    $scope.submitted = false;
     $scope.doGetProfile=function(){
 
         requestHandler.getRequest("getUserId/","").then(function(response){
@@ -14,7 +15,6 @@ userApp.controller('UserProfileController',['$scope','requestHandler','Flash','$
             if($scope.userProfile.gender == null){
                 $scope.userProfile.gender = "1";
             }
-
 
             if($scope.userProfile.preferfood == null){
                 $scope.userProfile.preferfood = "1";
@@ -156,10 +156,14 @@ userApp.controller('UserProfileController',['$scope','requestHandler','Flash','$
         $('html, body').animate({scrollTop: 0}, 0);
     };*/
     $scope.doUpdateProfile= function () {
+        if($scope.userProfileForm.$invalid){
+            $scope.submitted = true;
+        }
+        else {
         $rootScope.update1 = true; //Pass value 'true' when directed from 'Change your plan' option
         delete $scope.userProfile.imageurl;
         delete $scope.userProfile.createdon;
-        console.log($scope.userProfile.country);
+       
         if($scope.userProfile.countrySelect!=null  && $scope.userProfile.countrySelect!="" ){
             $scope.userProfile.country = $scope.userProfile.countrySelect.code;
         }
@@ -209,7 +213,7 @@ userApp.controller('UserProfileController',['$scope','requestHandler','Flash','$
             });
             });
 
-
+        }
     };
 
      $scope.imageAdded=false;
@@ -302,17 +306,14 @@ userApp.controller('UserProfileController',['$scope','requestHandler','Flash','$
 
         $scope.doGetProfile();
 
-
-
     //To Enable the update button if changes occur.
-    $scope.isClean = function() {
-
-        return angular.equals ($scope.orginalUserProfile, $scope.userProfile);
-    };
+    // $scope.isClean = function() {
+    //     return angular.equals ($scope.orginalUserProfile, $scope.userProfile);
+    // };
 
     // Clear Secret Answer
     $scope.clearSecretAnswer = function(){
-        if($scope.userProfile.secretquestion=="")
+        if($scope.userProfile.secretquestion==undefined || $scope.userProfile.secretquestion=="")
             $scope.userProfile.secretanswer="";
     }
 
@@ -4572,9 +4573,14 @@ userApp.controller('UserProfileController',['$scope','requestHandler','Flash','$
         $scope.updateCountry = function(){
             $scope.availableStates = [];
             $.each($scope.states, function(index,value){
+                console.log(value);
+                // console.log($scope.userProfile.countrySelect.id);
                 if(value.countryid == $scope.userProfile.countrySelect.id){
                     $scope.availableStates.push(value);
                     $scope.userProfile.stateSelect = $scope.availableStates[''];
+                }
+                else if($scope.userProfile.countrySelect.id == ""){
+                    console.log("Do nothing");
                 }
             });
             if($scope.availableStates.length==0){
