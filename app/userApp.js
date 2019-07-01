@@ -859,7 +859,7 @@ userApp.config(['$routeProvider','$ocLazyLoadProvider','$httpProvider',
             controller:'UserDoctorAppointment'
         }).
             when('/faq', {
-                templateUrl: '../common/faq.html',
+                templateUrl: '../common/FAQ.html',
                 resolve: {
                     loadMyFiles:['$ocLazyLoad',function($ocLazyLoad) {
                         return $ocLazyLoad.load({

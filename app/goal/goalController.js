@@ -71,14 +71,37 @@ userApp.controller('GoalController',['$scope','requestHandler','Flash','$route',
         });
     };
 
+    $scope.doRemoveMemberConfirmation=function(id){
+        $scope.removeMemberId=id;
+        $(function(){
+            $("#lean_overlay").fadeTo(1000);
+            $("#removeMemberModal").fadeIn(600);
+            $(".common_model").show();
+
+        });
+
+        $(".modal_close").click(function(){
+            $(".common_model").hide();
+            $("#removeMemberModal").hide();
+            $("#lean_overlay").hide();
+        });
+
+        $("#lean_overlay").click(function(){
+            $(".common_model").hide();
+            $("#removeMemberModal").hide();
+            $("#lean_overlay").hide();
+        });
+        
+    };
+
     $scope.doRemoveMember=function(id){
         requestHandler.deleteRequest("user/deleteGoalMember/",{"goalid" : $routeParams.id,"memberid" : id}).then(function(){
-            successMessage(Flash,"Successfully Removed!");
-            $scope.doGetViewGoalMember();
-        },function(){
-            errorMessage(Flash,"Please try again later!");
-        });
-    };
+        successMessage(Flash,"Successfully Removed!");
+        $scope.doGetViewGoalMember();
+    },function(){
+        errorMessage(Flash,"Please try again later!");
+    });
+    }
 
     $scope.doConfirmation=function(id){
         $(function(){
