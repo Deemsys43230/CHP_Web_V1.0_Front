@@ -1096,8 +1096,6 @@ userApp.controller("UserInitialController",['$scope','requestHandler','$location
                 $("#review-modal").fadeIn(600);
                 $(".common_model").hide();
                 $(".popupContainer").hide();
-                $(".popupHeader").hide();
-                $(".popupBody").hide();
             });
 
             $(".modal_close").click(function(){
