@@ -19,7 +19,6 @@ commonApp.controller('CommonController',['$scope','requestHandler','Flash','$rou
             $(".new_password_form").hide();
             $(".header_title").text('Login');
         });
-        successMessage(Flash,"Reset Password Successfull! Please Login");
     }
 
 

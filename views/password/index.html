@@ -36,11 +36,11 @@
 <!-- Full Body Container -->
 <form name="resetPasswordForm">
 <div id="container" ng-controller="ResetPasswordController">
-    <div class="col-md-6 col-sm-8 col-md-offset-3 col-sm-offset-2">
+    <div class="col-md-6 col-sm-8 col-md-offset-3 col-sm-offset-2" ng-show="!showSuccessDiv">
         <br/><br/><br/>
         <div  class="text-center"><img src="../../images/cyber-logo.png"></div>
         <br/>
-        <div ng-show="response==2" ng-cloak class="text-center">
+        <div ng-show="response==4" ng-cloak class="text-center">
             <div class="reset text-red text-center">Invalid Request . Please Try Again</div>
             <img src="../../images/feedback_error.png"><br/>
             <a href="../../#home" class="highlight-menu-item"><i class="fa fa-arrow-left" aria-hidden="true"></i>&nbsp;Back to home</a>
@@ -94,6 +94,20 @@
             </div>
         </div>
     </div>
+    <div ng-show="showSuccessDiv" class="col-md-6 col-sm-8 col-md-offset-3 col-sm-offset-2">
+        <br/><br/><br/>
+        <div  class="text-center"><img src="../../images/cyber-logo.png"></div>
+        <br/><br>
+        <div class="text-success text-center"><i class="fa fa-check-circle fa-4x" aria-hidden="true"></i><br>
+            <span class="h3">Success</span><br><br>
+        <p><span class="text-success h5">Your Password has been Resetted successfully.</span>
+        <br><b>Now you can use your New Password to Login into Cyberhealths.</b></p><br>
+        <a href="../../#home/password" class="highlight-menu-item">Go to Login</a>
+    </div>
+        <div>
+
+        </div>
+        </div>
 </div>
 </form>
 <!-- End Full Body Container -->

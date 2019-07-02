@@ -57,7 +57,7 @@
                                     <div class="margin-right-20" style="min-height: 200px;" ng-show=loadingFriendsImage >
                                        <img class="border-image" src="../../images/default_profileImage.jpg">
                                     </div>
-                                    <div class="margin-right-20 text-center"><a href="" ng-cloak class="btn btn-xs btn-danger margin-top-10" ng-click="unFriend(viewMemberDetails.userid)">Unfriend</a></div>
+                                    <div class="margin-right-20 text-center"><a href="" ng-cloak class="btn btn-xs btn-danger margin-top-10" ng-click="unFriendModal(viewMemberDetails)">Unfriend</a></div>
                                 </div>
                                 <div class="col-lg-9 col-md-9 col-sm-9 no-padding">
                                     <table class="table table-bordered table-striped">
@@ -326,6 +326,28 @@
        </div>
    </section>
 </div>
+
+<div id="unfriendModal" class="popupContainer" style="display:none;left:37%!important;">
+    <header class="popupHeader">
+        <span class="header_title">Confirmation</span>
+        <span class="modal_close"><i class="fa fa-times"></i></span>
+    </header>
+
+    <section class="popupBody">
+        <!-- Register Form -->
+        <div class="common_model">
+            <div class="margin-top-20 text-center">
+                <img src="../../images/alert-ring.png" width="118" height="100"><br><br>
+                Do You want to unfriend <b>{{unfriendData.name}}?</b></div>
+
+                <div class="action_btns margin-top-20">
+                    <div class="one_half"><a class="btn btn_red modal_close" onclick="return false" ng-click="unFriend(unfriendData.userid)">Unfriend</a></div>
+                    <div class="one_half last modal_close"><a onclick="return false;" class="btn back_btn">Cancel</a></div>
+                </div>
+       </div>
+   </section>
+</div>
+
 
 <script type="text/javascript" src="../../js/script.js"></script>
 <script type="text/javascript">

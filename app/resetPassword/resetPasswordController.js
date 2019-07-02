@@ -11,7 +11,8 @@ passwordApp.controller('ResetPasswordController',['$scope','requestHandler','Fla
 
         requestHandler.postRequest("resetNewPassword/",{"passwordToken":token,"password":$scope.reset.newPassword}).then(function(response){
             if(response.data.Response_status==1){
-                $window.location.href="../../#/home/password";
+                //$window.location.href="../../#/home/password";
+                $scope.showSuccessDiv=true;
                 $scope.newpassword="";
                 $scope.confirmPassword="";
                 $scope.resetPasswordForm.$setPristine();
@@ -40,6 +41,7 @@ passwordApp.controller('ResetPasswordController',['$scope','requestHandler','Fla
 
     $scope.init=function(){
        $scope.verifyToken();
+       $scope.showSuccessDiv=false;
     };
 
     $scope.init();

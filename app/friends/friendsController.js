@@ -116,6 +116,26 @@ userApp.controller('FriendsController',['$scope','requestHandler','Flash','Frien
         })
     };
 
+    $scope.unFriendModal=function(unffriendData){
+        $scope.unfriendData=unffriendData;
+        $(function(){
+            $("#lean_overlay").fadeTo(1000);
+            $("#unfriendModal").fadeIn(600);
+            $(".common_model").show();
+        });
+
+        $(".modal_close").click(function(){
+            $(".common_model").hide();
+            $("#unfriendModal").hide();
+            $("#lean_overlay").hide();
+        });
+
+        $("#lean_overlay").click(function(){
+            $(".common_model").hide();
+            $("#unfriendModal").hide();
+            $("#lean_overlay").hide();
+        });
+    }
     //UnFriend
     $scope.unFriend=function(id){
         var unFriendPromise = FriendsService.doUnFriend(id);
