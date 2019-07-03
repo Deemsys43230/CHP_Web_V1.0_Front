@@ -997,8 +997,8 @@ $scope.isFeedback=false;
 commonApp.controller("UserLogoutController",['$cookies','$scope','$window',function($cookies,$scope,$window){
 
     $scope.doLogout=function(){
-        //$cookies.remove("X-CSRFToken",{path: '/',domain:'cyberheaths.com'});
-        $cookies.remove("X-CSRFToken",{path: '/'});
+        document.cookie = "X-CSRFToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+        //$cookies.remove("X-CSRFToken",{path: '/'});
         $cookies.put('sessionid',undefined);
         $window.location.href="";
     };

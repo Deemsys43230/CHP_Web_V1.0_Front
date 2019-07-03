@@ -16,7 +16,7 @@
          ng-show="isOpen() && !moveInProgress"
          style="display: block;"
          aria-hidden="{{!isOpen()}}">
-        <ul class="dropdown-menu remove-style" role="listbox">
+        <ul class="dropdown-menu remove-style" role="listbox"  id="food-search-option" ng-nicescroll nice-option="{cursorcolor: 'rgb(195, 195, 195)',autohidemode:false,cursorborder:'none',cursorwidth: '6px',horizrailenabled: false}">
             <li ng-repeat="match in matches track by $index" ng-class="{active: isActive($index) }"
                 should-focus="isActive($index)" ng-click="selectMatch($index)" role="option" id="{{::match.id}}">
                 <div uib-typeahead-match index="$index" match="match" query="query" template-url="templateUrl"></div>
@@ -155,7 +155,7 @@
                                                 </div>
                                                 <div class="search-loading" ng-show="loadingFoods"><i class="fa fa-spinner fa-pulse"></i>&nbsp;&nbsp;Searching Foods...</div>
                                             </div>
-                                            <div class="food_scrollbar" id="foodlist-scrollbar" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px',horizrailenabled: false}" >
+                                            <div class="food_scrollbar" id="foodlist-scrollbar" ng-nicescroll nice-option="{cursorcolor: 'rgb(195, 195, 195)',autohidemode:false,cursorborder:'none',cursorwidth: '6px',horizrailenabled: false}">
                                                 <div ng-if="loaded">
                                                     <div class="loader-style-dashboard">
                                                         <div class="loader"></div>
@@ -207,7 +207,7 @@
                                         </div>
                                         <div class="col-lg-3 col-md-3 col-sm-3 no-padding dashboard-6">
                                             <div class="content-3">
-                                                <a id="modal_trigger_food" href="#modal-food" ng-click="resetdata(); msg()" onclick="return false;" class="suggest_button override-width">Suggest Food</a>
+                                                <a id="modal_trigger_food" ng-click="resetdata(); msg(); suggestFood();" class="suggest_button override-width">Suggest Food</a>
                                                 <div class="suggest_content" id="suggest-food" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px'}" style="height: 365px;">
                                                     <h6 class="margin-bottom-13">Frequently Used</h6>
                                                     <div class="suggest_option">
@@ -314,14 +314,14 @@
                                         </div>
                                         <div class="col-lg-3 col-md-3 col-sm-3 no-padding dashboard-6">
                                             <div class="content-3">
-                                                <a id="modal_trigger_exercise" href="#modal-exercise" ng-click="resetexercisedata(); msg()" onclick="return false;" class="suggest_button override-width">Suggest Exercise</a>
-                                                <div class="suggest_content" id="suggest-exercise" ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px'}">
+                                                <a id="modal_trigger_exercise" ng-click="resetexercisedata(); msg(); suggestExercise();" class="suggest_button override-width">Suggest Exercise</a>
+                                                <div class="suggest_content" id="suggest-exercise">
                                                     <h6>Frequently Used</h6>
-                                                    <div class="suggest_option">
+                                                    <div class="suggest_option"  ng-nicescroll nice-option="{cursorcolor: '#666',autohidemode:false,cursorborder:'none',cursorwidth: '6px'}">
                                                         <span ng-repeat="frequentexercise in frequentExerciseList" ng-click="frequentExercise(frequentexercise.exerciseid,frequentexercise.isCustom,frequentexercise.exercisename)">{{frequentexercise.exercisename}}</span>
                                                     </div>
                                                 </div>
-                                                    <a id="modal_trigger_custom_exercise" href="#modal-custom-exercise" ng-click="doUserAddCustomExercise();resetexercisedata();" onclick="return false;" class="custom_button" type="button"><i class="fa fa-plus"></i>&nbsp;Add Custom Exercise</a>
+                                                    <a id="modal_trigger_custom_exercise" ng-click="doUserAddCustomExercise();resetexercisedata();" class="custom_button"><i class="fa fa-plus"></i>&nbsp;Add Custom Exercise</a>
                                              </div>
                                         </div>
                                     </div>
@@ -413,16 +413,16 @@
                                                     </div>
 
                                                 </div>
-                                                <div class="col-lg-8 col-md-8 col-sm-8 margin-top-10 no-padding">
+                                                <div class="col-lg-8 col-md-8 col-sm-8 no-padding">
                                                     <form name="waterLogForm" novalidate >
                                                         <div class="row margin-top-10" style="margin-right: 0;margin-left: -4px;">
                                                             <lable class="waterlog-text" id="addLog" name="curentrwater" ng-model="waterlog"><b><span>Consumed {{waterlog/240}} glass</span></b></lable>
                                                             <!-- <lable class="waterlog-text" id="addLog" name="curentrwater" ng-model="waterlog"><b><span>{{waterlog}}&nbsp;<small>ml</small></span> / <span>{{waterlogoz}}&nbsp;<small>oz ={{waterlog/240}} glass</small></span></b></lable> -->
                                                         </div>
 
-                                                        <div class="col-md-12 col-md-12 col-sm-12 no-padding inner_box ">
+                                                        <div class="col-md-12 col-md-12 col-sm-12 inner_box ">
                                                             <div class="col-md-12 col-md-12 col-sm-12 margin-top-10">
-                                                                <span>Log Water&nbsp;<small class="waterlog-text size">(1glass= 240ml)</small></span>
+                                                                <span>Log Water&nbsp;<br/><small class="waterlog-text size">(1 glass = 240ml/8oz)</small></span>
                                                             </div>
                                                             <div class="col-lg-5 col-md-5 col-sm-5 margin-top-5">
                                                                 <input class="profile_input weightoverride " type="text" id="waterLog" name="curwater" ng-model="addlog" ng-pattern="/^0*[1-9]\d*$/" maxlength="5" required  style="width: 70px;"/>
@@ -433,8 +433,7 @@
                                                             </div>
                                                             <div class="col-lg-7 col-md-7 col-sm-7 margin-top-5">
                                                                 <select class="profile_input weightoverride full-width main" name="addlogUnit" ng-model="addlogUnit" style="width: 70px;" required>
-                                                                    <option value="" defalut selected>Select</option>
-                                                                    <option value="1">glass</option>
+                                                                    <option value="1"  defalut selected>glass</option>
                                                                 </select>
                                                                   <span ng-show="waterLogForm.addlogUnit.$dirty&&waterLogForm.addlogUnit.$invalid">
                                                                 <span class="error-message textarea-errormessage10" ng-show="waterLogForm.addlogUnit.$error.required"><span>Required.</span></span>
@@ -1041,7 +1040,7 @@
                 </div>
                 </div>
                 <div class="col-lg-12 col-md-12 col-sm-12 text-center dashboard_overlay_text" ng-show="isShowOverlayDashboardContent">
-                        <h5>You are not yet set any plans. You want to see the budget details, please start your plan</h5>
+                        <h5>You have not set any plans. Choose a plan and get your budget.</h5>
                         <div class="col-md-12 col-sm-12 margin-top-10 text-center no-padding">
                             <span><a class="target_button orange_button" href="#demography">Start Plan</a></span>
                         </div>
@@ -1181,7 +1180,7 @@
                 </div>
                 </div>
                 <div class="col-lg-12 col-md-12 col-sm-12 text-center dashboard_overlay_text" ng-show="isDashboardConnectWearable">
-                    <h5>You are not yet connect any devices. You want to see your fitness details, please connect your devices</h5>
+                    <h5>You are not connected to any device. Connect your device and monitor your fitness details.</h5>
                     <div class="col-md-12 col-sm-12 margin-top-10 text-center no-padding">
                         <span><a class="target_button orange_button" ng-click="menuUrlChange(3)">Connect</a></span>
                     </div>
@@ -1289,7 +1288,7 @@
         </div>
 
 <!-- Food Suggestion popup-->
-<div id="modal-food" class="popupContainer" style="display:none;">
+<div id="modal-suggest-food" class="popupContainer" style="display:none;">
     <header class="popupHeader">
         <span class="header_title">Food suggestion</span>
         <span class="modal_close"><i class="fa fa-times"></i></span>
@@ -1323,7 +1322,7 @@
 </div>
 
 <!-- Food Suggestion popup-->
-<div id="modal-exercise" class="popupContainer" style="display:none;">
+<div id="modal-suggest-exercise" class="popupContainer" style="display:none;">
     <header class="popupHeader">
         <span class="header_title">Exercise suggestion</span>
         <span class="modal_close"><i class="fa fa-times"></i></span>
@@ -1911,14 +1910,15 @@
                             <!-- <span ng-show="customExerciseAddForm.customseconds.$dirty&&customExerciseAddForm.customseconds.$invalid">
                                   <span class="error-message" ng-show="customExerciseAddForm.customseconds.$error.required"><span>Required.</span></span>
                              </span>-->
-
-                       <h5  class="margin-top-10">Reps Value&nbsp;&nbsp;<span style="font-style:italic;color:#a2a29d">(Optional)</span></h5>
+                        <div class="col--md-12">
+                       <h5  class="margin-top-10" style="margin-top:20px;">Reps Value&nbsp;&nbsp;<span style="font-style:italic;color:#a2a29d">(Optional)</span></h5>
                         <input type="text" ng-pattern="/(^[1-9]\d{0,8}$)/" name="reps" ng-model="customExercise.reps"  maxlength="3" ng-change="maxRepsValueCheck()">
                         <span class="error-message" ng-show="!customExerciseAddForm.reps.$error.required&&maxreps"><span>Please&nbsp;Enter&nbsp;Valid&nbsp;Value.</span></span>
                                  <span ng-show="customExerciseAddForm.reps.$dirty&&customExerciseAddForm.reps.$invalid">
                                     <!-- <span class="error-message" ng-show="customExerciseAddForm.reps.$error.required"><span>Required.</span></span>-->
                                  <span class="error-message" ng-show="customExerciseAddForm.reps.$error.pattern"><span>Invalid&nbsp;Data.</span></span>
                                </span>
+                            </div>
                         <div class="action_btns margin-top-20">
                             <div class="one_half" ng-show="isNew"><a href="#" onclick="return false;" ng-disabled="customExerciseAddForm.$invalid ||selectedSeconds==0&&selectedMinutes==0&&selectedHours==0" class="btn btn_blue modal_close" ng-click="doInsertUserCustomExercise()">Add Custom Exercise</a></div>
                              <div class="one_half" ng-hide="isNew"><a href="#" onclick="return false;" ng-disabled="CustomExerciseAddForm.$invalid ||selectedSeconds==0&&selectedMinutes==0&&selectedHours==0" class="btn btn_blue modal_close" ng-click="doUpdateUserCustomExercise()">Update Custom Exercise</a></div>
@@ -1941,7 +1941,7 @@
 
             <section class="popupBody">
 
-                <div class="common_model">
+                <div class="common_model1">
                     <form name="exerciseFilterForm" novalidate>
                         <div class="col-lg-12 col-md-12 col-sm-12">
                             <div class="col-lg-4 col-md-4 col-sm-4">
@@ -2248,7 +2248,10 @@
                     </div>
                     <div class="col-md-12" ng-show="isNew">
                         <p>To Date</p>
-                        <input type="text" name="todate" id="set-to-date" ng-model="medication.todate" readonly>
+                        <input type="text" name="todate" id="set-to-date" ng-model="medication.todate" ng-required="isNew" readonly>
+                        <span ng-show="medicationForm.todate.$dirty&&medicationForm.todate.$invalid">
+                            <span class="error-message" ng-show="medicationForm.todate.$error.required"><span>Required.</span></span>
+                       </span>
                     </div> 
                     <div class="col-md-12" ng-hide="isNew">
                         <p>Date</p>
@@ -2832,11 +2835,12 @@
                     autoUpdateInput: false
                 };
               $("#set-from-date").daterangepicker({singleDatePicker: true}).on('apply.daterangepicker', function(ev, picker) {
-                  optionMinDate.minDate = picker.startDate.format('DD/MM/YYYY');
-                  $('#set-to-date').daterangepicker(optionMinDate).on('apply.daterangepicker', function(ev, picker) {
-                        document.getElementById("set-to-date").value = picker.startDate.format('DD/MM/YYYY');
-                    });
+                  
+                  $('#set-to-date').daterangepicker({singleDatePicker: true,  minDate: $('#set-from-date').val()}).on('apply.daterangepicker', function(ev, picker) {
+                        optionMinDate.minDate = picker.startDate.format('DD/MM/YYYY');
+                    });              
                 });
+                
 
                 $("#weight-log-date1").click();
                 var options = {

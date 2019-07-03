@@ -190,7 +190,7 @@ commonApp.controller('CommonController',['$scope','requestHandler','Flash','$rou
 
     function initializeMetricCalender() {
 //Set date value to ng-modal for unit preference metric
-   $('#dobForBMIMetric').datetimepicker({format: 'DD-MMM-YYYY', ignoreReadonly: true, maxDate: new Date(),widgetPositioning: {vertical: 'top'}}).on('dp.change', function(selected){
+   $('#dobForBMIMetric').datetimepicker({viewMode: 'years',format: 'DD/MM/YYYY', ignoreReadonly: true, defaultDate:new Date("01/01/1990"),maxDate: new Date(),widgetPositioning: {vertical: 'top'}}).on('dp.change', function(selected){
            $scope.dob=$('#dobForBMIMetric').val();
       });
 

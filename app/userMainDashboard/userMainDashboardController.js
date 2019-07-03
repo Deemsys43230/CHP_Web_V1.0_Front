@@ -8,9 +8,10 @@ userApp.controller('UserMainDashboardController',['$scope','requestHandler','$ro
         var diabeticReport = [];
         var graphDates = [];
         var graphTitles = {};
-        if(id==1){
-            requestHandler.postRequest("user/getWearableDataGraph/", {"startdate": firstDay, "enddate": lastDay}).then(function (response) {
-                $scope.diabeticRecord = response.data.wearable;
+        requestHandler.postRequest("user/getWearableDataGraph/", {"startdate": firstDay, "enddate": lastDay}).then(function (response) {
+            $scope.diabeticRecord = response.data.wearable;
+               if(id==1){
+            
                 $.each($scope.diabeticRecord, function (index, value) {
                     var diabeticHistory = [];
                     var date = value.date.split("/");
@@ -26,12 +27,10 @@ userApp.controller('UserMainDashboardController',['$scope','requestHandler','$ro
                 graphTitles.color = '#3366cc';
                 graphTitles.suffix =' mm/dl';
                 $scope.drawBloodGlucoseGraph(diabeticReport, graphTitles, graphDates);
-            });
+           
         }
         else if(id==2){
-            requestHandler.postRequest("user/getWearableDataGraph/", {"startdate": firstDay, "enddate": lastDay}).then(function (response) {
-                $scope.diabeticRecord = response.data.wearable;
-                $.each($scope.diabeticRecord, function (index, value) {
+           $.each($scope.diabeticRecord, function (index, value) {
                     var diabeticHistory = [];
                     var date = value.date.split("/");
                     diabeticHistory.push(monthNames[(date[1] - 1)] + ' ' + date[0]);
@@ -46,12 +45,10 @@ userApp.controller('UserMainDashboardController',['$scope','requestHandler','$ro
                 graphTitles.color = '#339966';
                 graphTitles.suffix =' mm/dl';
                 $scope.drawBloodGlucoseGraph(diabeticReport, graphTitles, graphDates);
-            });
+          
         }
        else if(id==3){
-            requestHandler.postRequest("user/getWearableDataGraph/", {"startdate": firstDay, "enddate": lastDay}).then(function (response) {
-                $scope.diabeticRecord = response.data.wearable;
-                $.each($scope.diabeticRecord, function (index, value) {
+              $.each($scope.diabeticRecord, function (index, value) {
                     var diabeticHistory = [];
                     var date = value.date.split("/");
                     diabeticHistory.push(monthNames[(date[1] - 1)] + ' ' + date[0]);
@@ -66,13 +63,12 @@ userApp.controller('UserMainDashboardController',['$scope','requestHandler','$ro
                 graphTitles.color = '#e67300';
                 graphTitles.suffix =' mm/dl';
                 $scope.drawBloodGlucoseGraph(diabeticReport, graphTitles, graphDates);
-            });
+           
         }
        else if(id==4){
-            requestHandler.postRequest("user/getWearableDataGraph/", {"startdate": firstDay, "enddate": lastDay}).then(function (response) {
-                $scope.diabeticRecord = response.data.wearable;
-                $.each($scope.diabeticRecord, function (index, value) {
+              $.each($scope.diabeticRecord, function (index, value) {
                     var diabeticHistory = [];
+                    var i=1;
                     var date = value.date.split("/");
                     diabeticHistory.push(monthNames[(date[1] - 1)] + ' ' + date[0]);
                     diabeticHistory.push(parseFloat(value.HbA1c));
@@ -86,8 +82,8 @@ userApp.controller('UserMainDashboardController',['$scope','requestHandler','$ro
                 graphTitles.color = '#ff884d';
                 graphTitles.suffix =' %';
                 $scope.drawBloodGlucoseGraph(diabeticReport, graphTitles, graphDates);
-            });
         }
+    });
         };
     $scope.doGetUserKeyDetails=function() {
         $scope.loaded=true;
@@ -232,7 +228,7 @@ userApp.controller('UserMainDashboardController',['$scope','requestHandler','$ro
 
     //for water log millilitre unit graph
     $scope.drawBloodGlucoseGraph=function(databg,graphTitles,dataD){
-        $('#bloodglucosegraph').highcharts({
+       $('#bloodglucosegraph').highcharts({
             title: {
                 text: graphTitles.title
             },
@@ -282,6 +278,8 @@ userApp.controller('UserMainDashboardController',['$scope','requestHandler','$ro
 
             }]
         });
+        var element = document.getElementById('bloodglucosegraph');
+        element.style.removeProperty("overflow");
     };
     $scope.init=function(){
         $scope.doGetHistoryReport(4);

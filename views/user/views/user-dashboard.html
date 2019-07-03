@@ -18,7 +18,7 @@
                 <h3 class="classic-title menu-dashboard margin-left-25"><span>Blood Glucose</span></h3>
             </div>
         </div>
-        <div id=bloodglucosegraph class="hc-graph"></div>
+        <div id="bloodglucosegraph" class="hc-graph"></div>
     <div style="text-align: center;padding-top: 5px;">
         <input type="radio" id="hba1cbg" ng-click="doGetHistoryReport(4)"  value="4" name="hba1cbg"/>
         <label for="hba1cbg" style="background-color: #ff884d;color:#fff">HbA1C</label>
@@ -171,9 +171,9 @@
         <div class="col-lg-12 col-md-12 col-sm-12">
             <div class="col-lg-2 col-md-2 col-sm-2"></div>
         <div class="col-lg-8 col-md-8 col-sm-8 txt text-center overlay_text" id="#overlay_text" ng-show="isShowOverlayContent">
-            <h3>You are not yet set any plans. You want to see the budget details please start your plan</h3>
+            <h3>You have not set any plans. Choose a plan and get your budget.</h3>
             <div class="col-md-12 col-sm-12 margin-top-10 text-center no-padding">
-                <span><a class="target_button orange_button" href="#demography">Start Plan</a></span>
+                <span><a class="target_button orange_button" href="#demography">Choose Plan</a></span>
             </div>
         </div>
             <div class="col-lg-2 col-md-2 col-sm-2"></div>
@@ -295,7 +295,7 @@
              <div class="col-lg-12 col-md-12 col-sm-12">
                  <div class="col-lg-2 col-md-3 col-sm-3"></div>
                  <div class="col-lg-8 col-md-7 col-sm-7 txt text-center overlay_text" id="#overlay_sync_text" ng-show="isConnectWearable">
-                     <h3>You are not yet connect any devices. You want to see your fitness details, please connect your devices</h3>
+                     <h3>You are not connected to any device. Connect your device and monitor your fitness details.</h3>
                      <div class="col-md-12 col-sm-12 margin-top-10 text-center no-padding">
                          <span><a class="target_button orange_button" href="" ng-click="menuUrlChange(3)">Connect</a></span>
                      </div>

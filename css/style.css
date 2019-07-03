@@ -7621,13 +7621,18 @@ a.custom_button{
     color: white;
     display: inline-block;
     font-weight: normal;
-    margin-left: 5px;
+    width: 100%;
+    text-align: center;
     background-color:#3591cd;
     -webkit-box-shadow: 0px 0px 1px rgba(0,0,0,0.2);
     -moz-box-shadow: 0px 0px 1px rgba(0,0,0,0.2);
     box-shadow: 0px 0px 1px rgba(0,0,0,0.2);
-
+    cursor: pointer;
 }
+a.custom_button:hover{
+    background-color:#236a98;
+}
+
 .green_button:hover{
     color: #fff;
     background-color:#0db600;
@@ -10431,6 +10436,7 @@ input.cmn-toggle-yes-no:checked + label:after {
 
 .img-shadow img {
     float: left;
+    height: 200px;
 }
 
 .img-shadow img:hover{
@@ -16592,7 +16598,7 @@ a.main-button.red_back {
 .box {
     position: relative;
     display: inline-block;
-    height: 230px;
+    height: 260px;
     margin: 5px 2px 5px 5px;
     min-width: 310px;
     -webkit-box-shadow: inset 0 0 3px rgba(0,0,0,0.3);
@@ -16602,7 +16608,8 @@ a.main-button.red_back {
 .inner_box {
     position: relative;
     display: inline-block;
-    height: 115px;
+    /* height: 115px; */
+    padding: 5px;
     width: 190px;
     margin-top: 3px;
     -webkit-box-shadow: inset 0 0 3px rgba(0,0,0,0.3);

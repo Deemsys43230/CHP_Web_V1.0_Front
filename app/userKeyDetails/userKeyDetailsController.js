@@ -69,6 +69,7 @@ userApp.controller('UserKeyDetailsController',['$scope','requestHandler','$rootS
     $scope.dGetWaterLog=function() {
         requestHandler.postRequest("user/getWaterLogByDate/",{"date":selectedDate}).then(function (response) {
             $scope.waterlogDetails=response.data.Water_log;
+            $scope.waterLogDisplay=$scope.waterlogDetails.milliliters/240;
         });
     };
 

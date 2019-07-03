@@ -12,8 +12,12 @@ requestHandlerApp.factory("requestHandler",['$http',function($http,$location){
 
     var domain=window.location.origin;
     var hostedDomain=domain+"/v1/";
-    var paymentURL=domain+"/CH852/CyberHealth/views/user";
-    var domainURL=domain+"/CH852/CyberHealth/";
+    var paymentURL=domain+"/CyberTest/views/user";
+    var domainURL=domain+"/CyberTest/";
+    // var domain=window.location.origin;
+    // var hostedDomain="https://api.cyberhealths.com/v1/";
+    // var paymentURL=domain+"/views/user";
+    // var domainURL=domain+"/";
 
 
     var urlLength = 33;

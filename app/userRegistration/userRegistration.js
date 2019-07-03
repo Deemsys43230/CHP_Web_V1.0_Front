@@ -112,12 +112,12 @@ commonApp.controller('UserRegistrationController',['$scope','requestHandler','Fl
         $scope.customAlertChangePlan=false;
         $("#lean_overlay").hide();
         $(".modal-backdrop").hide();
-        $scope.userPlan.plantype=parseInt($scope.planType);
+        $scope.userPlan.plantype=parseFloat($scope.planType);
         $scope.userPlan.dob=$scope.defaultRegistrationData.dob;
-        $scope.userPlan.activitytype=parseInt($scope.defaultRegistrationData.activitytype);
-        $scope.userPlan.planchoice= parseInt($scope.defaultRegistrationData.planchoice);
+        $scope.userPlan.activitytype=parseFloat($scope.defaultRegistrationData.activitytype);
+        $scope.userPlan.planchoice= parseFloat($scope.defaultRegistrationData.planchoice);
         $scope.userPlan.role= $scope.defaultRegistrationData.role.toString();
-        $scope.userPlan.gender= parseInt($scope.defaultRegistrationData.gender);
+        $scope.userPlan.gender= parseFloat($scope.defaultRegistrationData.gender);
         $scope.userPlan.unit=$scope.units;
         $scope.userPlan.preferfood=$scope.defaultRegistrationData.preferfood;
         // Switch End Date
@@ -130,25 +130,29 @@ commonApp.controller('UserRegistrationController',['$scope','requestHandler','Fl
         }
 
         if($scope.userPlan.unit==2){
-            $scope.userPlan.height=parseInt($scope.defaultRegistrationData.heightFeet)+'.'+($scope.defaultRegistrationData.heightInches) ;
-            $scope.userPlan.weight=parseInt($scope.defaultRegistrationData.weightlbs);
+            $scope.userPlan.height=parseFloat($scope.defaultRegistrationData.heightFeet)+'.'+($scope.defaultRegistrationData.heightInches) ;
+            $scope.userPlan.weight=parseFloat($scope.defaultRegistrationData.weightlbs);
             if($scope.userPlan.plantype==2){
-                $scope.userPlan.targetweight= ((parseInt($scope.defaultRegistrationData.weightlbs))-(parseInt($scope.defaultRegistrationData.targetweightlbs)));
+                $scope.userPlan.targetweight= ((parseFloat($scope.defaultRegistrationData.weightlbs))-(parseFloat($scope.defaultRegistrationData.targetweightlbs)));
+                $scope.userPlan.targetweight=parseFloat(parseFloat($scope.userPlan.targetweight).toFixed(1));
             }
 
             if($scope.userPlan.plantype==3){
-                $scope.userPlan.targetweight= ((parseInt(($scope.defaultRegistrationData.weightlbs))+parseInt($scope.defaultRegistrationData.targetweightlbs)));
+                $scope.userPlan.targetweight= ((parseFloat(($scope.defaultRegistrationData.weightlbs))+parseFloat($scope.defaultRegistrationData.targetweightlbs)));
+                $scope.userPlan.targetweight=parseFloat(parseFloat($scope.userPlan.targetweight).toFixed(1));
             }
         }
         else if($scope.userPlan.unit==1){
-            $scope.userPlan.height=parseInt($scope.defaultRegistrationData.height);
-            $scope.userPlan.weight=parseInt($scope.defaultRegistrationData.weight);
+            $scope.userPlan.height=parseFloat($scope.defaultRegistrationData.height);
+            $scope.userPlan.weight=parseFloat($scope.defaultRegistrationData.weight);
             if($scope.userPlan.plantype==2){
-                $scope.userPlan.targetweight= ((parseInt($scope.defaultRegistrationData.weight))-(parseInt($scope.defaultRegistrationData.targetweightkgs)));
+                $scope.userPlan.targetweight= parseFloat($scope.defaultRegistrationData.weight)-parseFloat($scope.defaultRegistrationData.targetweightkgs);
+                $scope.userPlan.targetweight=  parseFloat(parseFloat($scope.userPlan.targetweight).toFixed(1));
             }
 
             if($scope.userPlan.plantype==3){
-                $scope.userPlan.targetweight= ((parseInt(($scope.defaultRegistrationData.weight))+parseInt($scope.defaultRegistrationData.targetweightkgs)));
+                $scope.userPlan.targetweight= parseFloat($scope.defaultRegistrationData.weight)+parseFloat($scope.defaultRegistrationData.targetweightkgs);
+                $scope.userPlan.targetweight= parseFloat(parseFloat($scope.userPlan.targetweight).toFixed(1));
             }
         }
         if(possibiledate){
@@ -395,12 +399,12 @@ $scope.maxTargetWeightCheckLbs = function(){
     function initializeDobCalender() {
         var previousdate = new Date();
         previousdate.setFullYear(new Date().getFullYear()-13);
-        $('#dob').datetimepicker({format: 'DD/MM/YYYY', ignoreReadonly: true,maxDate: previousdate,widgetPositioning: {horizontal: 'right',vertical: 'bottom'}}).on('dp.change', function(selected){
+        $('#dob').datetimepicker({viewMode: 'years',format: 'DD/MM/YYYY', ignoreReadonly: true,maxDate: previousdate,widgetPositioning: {horizontal: 'right',vertical: 'bottom'}}).on('dp.change', function(selected){
             $scope.defaultRegistrationData.dob=$('#dob').val();
         });
 
         $('#dob').click(function(){
-            $('#dob').focus();
+          // $('#dob').datetimepicker({viewMode: 'years'}).focus();
 
         });
         //while clicking dob icon to set scrollTop for metric calender
@@ -473,7 +477,7 @@ $scope.maxTargetWeightCheckLbs = function(){
             $scope.defaultRegistrationData.weight= ($scope.defaultRegistrationData.weightlbs/2.2046).toFixed(1);
         }
         if($scope.defaultRegistrationData.targetweightlbs!='' && $scope.defaultRegistrationData.targetweightlbs!=undefined ){
-            $scope.defaultRegistrationData.targetweightkgs= ($scope.defaultRegistrationData.targetweightlbs/2.2046).toFixed(2);
+            $scope.defaultRegistrationData.targetweightkgs= ($scope.defaultRegistrationData.targetweightlbs/2.2046).toFixed(1);
         }
     };
 

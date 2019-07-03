@@ -254,7 +254,7 @@
 
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12">
-                        <input type="text" class="friend-input" placeholder="Search new friend name..." ng-model="friendsearch" ng-change="searchFriends(friendsearch)">
+                        <input type="text" class="friend-input" placeholder="Search new friend name..." ng-model="friendsearch" ng-change="searchFriends(friendsearch)" ng-model-options="{debounce: 1000}">
                     </div>
                 </div>
                 <div ng-if="loaded">

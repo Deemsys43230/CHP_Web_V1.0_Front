@@ -76,7 +76,7 @@
                             <div class="col-md-3 col-sm-3 col-xs-3"></div>
                                 <div class="col-md-6 col-sm-12 col-xs-12">
                              <div class="input-group">
-                                    <input type="text" name='dob' ng-model="defaultRegistrationData.dob" class="form-control datepicker_cursor" id="dob" readonly/>
+                                    <input type="text" name='dob' ng-model="defaultRegistrationData.dob" class="form-control datepicker_cursor" id="dob" placeholder="DD/MM/YYYY"/>
                                     <span class="input-group-addon cursor" id="dobIcon">
                                 <span class="glyphicon glyphicon-calendar"></span>
                             </span>
@@ -140,7 +140,7 @@
                     </div>
                 </div>
                 <div class="col-md-12 col-sm-12 col-xs-12 margin-top-10">
-                    <div class="col-md-4 col-sm-4 col-xs-12 margin-top-10 text-align-right">Weight:</div>
+                    <div class="col-md-4 col-sm-4 col-xs-12 margin-top-10 text-align-right">Weight :</div>
                     <div class="col-md-6 col-sm-6 col-xs-12">
                         <span ng-show="units==1">
                            <input class="calculator-input"  ng-model="defaultRegistrationData.weight" name="weight" ng-required="units==1"   validate-zero  ng-change="maxWeightCheckKgs();targetWeightValidation();" onkeypress="return validateFloatKeyPress(this,event);" maxlength="5">
@@ -165,8 +165,8 @@
                 </div>
 
                 <div class="col-md-12 col-sm-12 col-xs-12 margin-top-10" ng-hide="planType==1">
-                    <div class="col-md-4 col-sm-4  col-xs-12 margin-top-10 text-align-right" ng-show="planType==2">How Many&nbsp;<span ng-show="units==1">kgs</span><span ng-show="units==2">lbs</span>&nbsp;You Want to Reduce?:</div>
-                    <div class="col-md-4 col-sm-4 col-xs-12 margin-top-10 text-align-right" ng-show="planType==3">How Many&nbsp;<span ng-show="units==1">kgs</span><span ng-show="units==2">lbs</span>&nbsp;You Want to Increase?:</div>
+                    <div class="col-md-4 col-sm-4  col-xs-12 margin-top-10 text-align-right" ng-show="planType==2">How Many&nbsp;<span ng-show="units==1">kgs</span><span ng-show="units==2">lbs</span>&nbsp;You Want to Reduce?</div>
+                    <div class="col-md-4 col-sm-4 col-xs-12 margin-top-10 text-align-right" ng-show="planType==3">How Many&nbsp;<span ng-show="units==1">kgs</span><span ng-show="units==2">lbs</span>&nbsp;You Want to Increase?</div>
                 <div class="col-md-6 col-sm-6 col-xs-12">
                     <span ng-show="units==1">
                         <input class="calculator-input" ng-model="defaultRegistrationData.targetweightkgs" name="targetweightkgs" validate-zero ng-change="targetWeightValidation();maxTargetWeightCheckKgs();" ng-required="planType!=1&&units==1" onkeypress="return validateFloatKeyPress(this,event);">
@@ -205,8 +205,7 @@
                 </div>
                 <div class="col-md-12 col-sm-12 col-xs-12 margin-top-10" ng-hide="planType==4">
                     <div class="col-md-4 col-sm-4 col-xs-12 text-align-right">
-                        Food Preference
-                        <span style="font-style:italic;color:#a2a29d"><sup class="text-red">*</sup></span>:
+                        Food Preference :
                     </div>
                     <div class="col-md-6 col-sm-6 col-xs-12">
                         <div class="input-group" ng-init="defaultRegistrationData.preferfood=1">

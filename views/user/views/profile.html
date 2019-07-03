@@ -56,7 +56,7 @@
                                     <h5>First name<sup class="text-red">*</sup><span class="pull-right">:</span></h5>
                                 </div>
                                 <div class="col-lg-8 col-md-8 col-sm-8">
-                                    <input class="profile_input" name="firstname" ng-model="userProfile.firstname" ng-pattern="/^ *([a-zA-Z]+ ?)+ *$/" maxlength="25" required/>
+                                    <input class="profile_input" name="firstname" ng-model="userProfile.firstname" maxlength="25" required/>
                                     <span ng-show="(userProfileForm.about.$dirty || submitted)&&userProfileForm.firstname.$invalid">
                                          <span class="error-message textarea-errormessage10" ng-show="userProfileForm.firstname.$error.required"><span class="error-bottom">Required.</span></span>
                                          <span class="error-message textarea-errormessage10" ng-show="userProfileForm.firstname.$error.pattern"><span class="error-bottom-invalid">Enter&nbsp;valid&nbsp;Name.</span></span>
@@ -66,7 +66,7 @@
                                     <h5>Last name<sup class="text-red">*</sup><span class="pull-right">:</span></h5>
                                 </div>
                                 <div class="col-lg-8 col-md-8 col-sm-8 margin-top-10">
-                                    <input class="profile_input" name="lastname" ng-model="userProfile.lastname" ng-pattern="/^ *([a-zA-Z]+ ?)+ *$/" maxlength="25" required/>
+                                    <input class="profile_input" name="lastname" ng-model="userProfile.lastname" maxlength="25" required/>
                                     <span ng-show="(userProfileForm.about.$dirty || submitted)&&userProfileForm.lastname.$invalid">
                                          <span class="error-message textarea-errormessage10" ng-show="userProfileForm.lastname.$error.required"><span class="error-bottom">Required.</span></span>
                                          <span class="error-message textarea-errormessage10" ng-show="userProfileForm.lastname.$error.pattern"><span class="error-bottom-invalid">Enter&nbsp;valid&nbsp;Name.</span></span>

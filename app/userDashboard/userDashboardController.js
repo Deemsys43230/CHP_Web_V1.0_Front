@@ -16,6 +16,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
         $scope.exercisename='';
         $scope.reps='';
         $scope.calories='';
+        $scope.addlogUnit="1";
         $scope.caloriesSpent=0;
         $scope.workoutvalue=0;
         $scope.workoutvalueMinutes=0;
@@ -131,18 +132,18 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
             $(function(){
                 $("#lean_overlay").fadeTo(1000);
                 $("#modal-custom-exercise").fadeIn(600);
-                $(".user_register").show();
+                $(".common_model").show();
             });
 
             $(".modal_close").click(function(){
-                $(".user_register").hide();
+                $(".common_model").hide();
                 $("#modal-custom-exercise").hide();
                 $("#lean_overlay").hide();
                 $scope.resetexercisedata();
             });
 
             $("#lean_overlay").click(function(){
-                $(".user_register").hide();
+                $(".common_model").hide();
                 $("#modal-custom-exercise").hide();
                 $("#lean_overlay").hide();
                 $scope.resetexercisedata();
@@ -1222,6 +1223,55 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
             $scope.isAddFood =false;
             $scope.isAddExercise=false;
         };
+
+        //Pop Up Add Suggest Food
+        $scope.suggestFood=function(){           
+            $(function(){
+                $("#lean_overlay").fadeTo(1000);
+                $("#modal-suggest-food").fadeIn(600);
+                $(".common_model").show();
+                $scope.shouldBeOpen = true;
+            });
+
+            $(".modal_close").click(function(){
+                $(".common_model").hide();
+                $("#modal-suggest-food").hide();
+                $("#lean_overlay").hide();
+                $scope.shouldBeOpen = false;
+            });
+
+            $("#lean_overlay").click(function(){
+                $(".common_model").hide();
+                $("#modal-suggest-food").hide();
+                $("#lean_overlay").hide();
+                $scope.shouldBeOpen = false;
+            });
+        }
+
+        //Pop Up Add Suggest Exercise
+        $scope.suggestExercise=function(){           
+            $(function(){
+                $("#lean_overlay").fadeTo(1000);
+                $("#modal-suggest-exercise").fadeIn(600);
+                $(".common_model").show();
+                $scope.shouldBeOpen = true;
+            });
+
+            $(".modal_close").click(function(){
+                $(".common_model").hide();
+                $("#modal-suggest-exercise").hide();
+                $("#lean_overlay").hide();
+                $scope.shouldBeOpen = false;
+            });
+
+            $("#lean_overlay").click(function(){
+                $(".common_model").hide();
+                $("#modal-suggest-exercise").hide();
+                $("#lean_overlay").hide();
+                $scope.shouldBeOpen = false;
+            });
+        }
+
         // Insert suggest exercise
 
         $scope.isAddExercise=false;
@@ -4848,7 +4898,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
                 $scope.loader=false;
                 //$scope.wearableFitbitText="Connecting...";
                 $scope.device=true;
-                $window.open(authorizeurl+"&state="+requestHandler.domainURL()+"/views/devices/index.html?state="+vendorid,"_self");
+                $window.open(authorizeurl+"&state="+vendorid,"_self");
         };
 
         $scope.doGetVendorlist = function(){
@@ -4939,6 +4989,12 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
             return requestHandler.postRequest("user/getWearableDataForDate/",{"date":$scope.newSelectedDate}).then(function(response) {
                 console.log(response.data.wearable);
                 $scope.wearable=response.data.wearable;
+                requestHandler.postRequest("user/syncWearableData/",{"date":date}).then(function(response){
+                    if(response.data.Response_status==0){
+                        $scope.isDashboardConnectWearable=true;
+                        $('#device_not_connect').addClass('dashboard_overlay');
+                    }
+                });
             });
         };
 
@@ -5126,11 +5182,11 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
         $("#foodintake").click();
         $scope.calendarText='Food Intake';
         $scope.showFoodMoal=1;
-        $scope.mealPlanCalender();
         $scope.doSyncDevices(2);
         $timeout(function(){
-            $scope.isLoaded=false;
-        },5000);
+            $scope.isLoaded=false;            
+            $scope.mealPlanCalender();
+        },3000);
     };
     if($location.absUrl().indexOf("connectDevice")!=-1){
         $rootScope.isMenuClicked=3;
@@ -5215,9 +5271,7 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
 
     // to highlight selected date
      $scope.cellModifier =function(cell) {
-         console.log(cell);
-         console.log($scope.celldate, $scope.newSelectedDate);
-         $scope.celldate=moment(cell.date._d).format('DD/MM/YYYY');
+        $scope.celldate=moment(cell.date._d).format('DD/MM/YYYY');
          if ($scope.celldate=== $scope.newSelectedDate) {
              cell.cssClass = 'calendar-selected-day-highlight';
          }

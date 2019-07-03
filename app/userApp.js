@@ -1153,9 +1153,9 @@ userApp.controller("UserInitialController",['$scope','requestHandler','$location
 userApp.controller("UserLogoutController",['$cookies','$scope','$window',function($cookies,$scope,$window){
 
     $scope.doLogout=function(){
-    
-        //$cookies.remove("X-CSRFToken",{path: '/',domain:'cyberheaths.com'});
-        $cookies.remove("X-CSRFToken",{path: '/'});
+        document.cookie = "X-CSRFToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+        //$cookies.remove("X-CSRFToken",{path: '/'});
+       // $cookies.remove("X-CSRFToken",{path: '/'});
         $cookies.put('sessionid',undefined);
         $window.location.href="../../#/home";
     };
@@ -1564,7 +1564,7 @@ userApp.filter('startsWithLetter', function () {
         } else {
             for (var i = 0; i < items.length; i++) {
                 var item = items[i];
-                if (letterMatch.test(item.name)) {
+                if (letterMatch.test(item.firstname)||letterMatch.test(item.lastname)) {
                     filtered.push(item);
                 }
             }

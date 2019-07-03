@@ -491,11 +491,14 @@ userApp.filter('startsWithLetter', function () {
     return function (items, searchfriend) {
         var filtered = [];
         var letterMatch = new RegExp(searchfriend, 'i');
+        console.log(items);
+        console.log(searchfriend);
+
         if(!items){}
         else{
             for (var i = 0; i < items.length; i++) {
                 var item = items[i];
-                if (letterMatch.test(item.user_name)) {
+                if (letterMatch.test(item.firstname)||letterMatch.test(item.lastname)) {
                     filtered.push(item);
                 }
             }
