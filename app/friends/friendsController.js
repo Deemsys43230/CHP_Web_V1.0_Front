@@ -131,8 +131,8 @@ userApp.controller('FriendsController',['$scope','requestHandler','Flash','Frien
         });
 
         $("#lean_overlay").click(function(){
-            $(".common_model").hide();
             $("#unfriendModal").hide();
+            $(".common_model").hide();
             $("#lean_overlay").hide();
         });
     }
@@ -229,8 +229,8 @@ userApp.controller('FriendsController',['$scope','requestHandler','Flash','Frien
         });
 
         $("#lean_overlay").click(function(){
-            $(".common_model").hide();
             $("#sendEmail").hide();
+            $(".common_model").hide();
             $("#lean_overlay").hide();
             $scope.shouldBeOpen = false;
         });

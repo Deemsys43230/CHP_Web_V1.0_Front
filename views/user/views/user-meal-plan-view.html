@@ -13,7 +13,7 @@
          ng-show="isOpen() && !moveInProgress"
          style="display: block;"
          aria-hidden="{{!isOpen()}}">
-        <ul class="dropdown-menu remove-style" role="listbox" ng-nicescroll nice-option="{cursorcolor: 'rgb(195, 195, 195)',autohidemode:false,cursorborder:'none',cursorwidth: '6px',horizrailenabled: false}">
+        <ul class="dropdown-menu remove-style" id="food-search-options" role="listbox" ng-nicescroll nice-option="{cursorcolor: 'rgb(195, 195, 195)',autohidemode:false,cursorborder:'none',cursorwidth: '6px',horizrailenabled: false}">
             <li ng-repeat="match in matches track by $index" ng-class="{active: isActive($index) }"
                 should-focus="isActive($index)" ng-click="selectMatch($index)" role="option" id="{{::match.id}}">
                 <div uib-typeahead-match index="$index" match="match" query="query" template-url="templateUrl"></div>
@@ -175,7 +175,7 @@
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12 no-padding" ng-show="showSearch">
                         <div class="content-1">
-                            <input class="profile_input" type="text" ng-model="selectedFood" placeholder="Search Food" uib-typeahead="food as food.foodname for food in inputChanged($viewValue)" typeahead-popup-template-url="customPopupTemplate.html" typeahead-template-url="foodTemplate.html" typeahead-on-select="foodSelected()" typeahead-class="form-control">
+                            <input class="profile_input" type="text" id="custom_meal_search" ng-model="selectedFood" placeholder="Search Food" uib-typeahead="food as food.foodname for food in inputChanged($viewValue)" typeahead-popup-template-url="customPopupTemplate.html" typeahead-template-url="foodTemplate.html" typeahead-on-select="foodSelected()" typeahead-class="form-control">
                         </div>
                         <div class="search-loading" ng-show="loadingFoods"><i class="fa fa-spinner fa-pulse"></i>&nbsp;&nbsp;Searching Foods...</div>
 

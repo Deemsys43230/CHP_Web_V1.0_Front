@@ -1093,20 +1093,20 @@ userApp.controller("UserInitialController",['$scope','requestHandler','$location
             //to hide empty alert while redirecting to dashboard page
             $(function(){
                 $("#lean_overlay").hide();
-                $("#review-modal").fadeIn(600);
+                $("#review-modal").hide();
                 $(".common_model").hide();
                 $(".popupContainer").hide();
             });
 
             $(".modal_close").click(function(){
-                $(".common_model").hide();
                 $("#review-modal").hide();
+                $(".common_model").hide();
                 $("#lean_overlay").hide();
             });
 
             $("#lean_overlay").click(function(){
-                $(".common_model").hide();
                 $("#review-modal").hide();
+                $(".common_model").hide();
                 $("#lean_overlay").hide();
             });
                // $location.path("dashboard");

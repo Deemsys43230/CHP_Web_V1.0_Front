@@ -3,7 +3,6 @@ var userApp = angular.module('userApp', ['ngRoute','oc.lazyLoad','requestModule'
 userApp.controller('UserMealPlanController',['$scope','requestHandler','Flash','$rootScope',function($scope,requestHandler,Flash,$rootScope) {
     $rootScope.isMenuShow=1;
     $scope.activeClass.mealPlans='active';
-
     $scope.doGetUserMealPlanList=function(){
         $scope.loaded=true;
         $scope.userMealPlanPagination={
@@ -110,6 +109,7 @@ userApp.controller('UserMealPlanController',['$scope','requestHandler','Flash','
         return angular.equals($scope.original, $scope.userMealPlan);
     };
 
+
     $scope.doDeleteUserMealPlan=function(id){
         if(confirm("Are you sure you want to delete?")){
             requestHandler.postRequest("user/deleteplan/",{'id':id}).then(function(response){
@@ -150,6 +150,7 @@ userApp.controller('UserMealPlanController',['$scope','requestHandler','Flash','
 
     };
 
+    
     $scope.$watch("mealPagination.pageNumber",function(){
         $scope.doGetUserMealPlanList();
     });
@@ -513,3 +514,16 @@ userApp.controller('ViewUserMealPlanController',['$scope','requestHandler','Flas
     };
 }]);
 
+userApp.directive('shouldFocus', function(){
+    return {
+        restrict: 'A',
+        link: function(scope,element,attrs){
+            scope.$watch(attrs.shouldFocus,function(newVal,oldVal){
+                console.log(newVal);
+                if (newVal) {
+                    element[0].scrollIntoView(false);
+                }
+            });
+        }
+    };
+});
