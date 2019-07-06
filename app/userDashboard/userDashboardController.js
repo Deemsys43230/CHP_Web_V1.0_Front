@@ -216,14 +216,9 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
 
 
         // delete medication popup
-        $scope.deletemedication=function(logid){
-            $scope.deleteLogid = logid;
-            requestHandler.postRequest("medicationdetail/",{'logid':$scope.deleteLogid}).then(function(response){
-                $scope.medication= response.data.medication;
-                var d =new Date($scope.medication.date);
-                var datestring = ("0" + d.getDate()).slice(-2) + "/" + ("0"+(d.getMonth()+1)).slice(-2) +"/" +  + d.getFullYear();
-                   $scope.medication.date = datestring;
-            });
+        $scope.deletemedication=function(medication){
+            delete medication.$$hashKey;
+            $scope.medication=medication;
             $scope.title = "Upload Document";
             $(function(){
                 $("#lean_overlay").fadeTo(1000);
@@ -380,11 +375,16 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
 
         //Delete Mediactions
         $scope.doDeleteUserMedication=function(){
+            //Modify Data to backend
+            var d =new Date($scope.medication.date);
+            var datestring = ("0" + d.getDate()).slice(-2) + "/" + ("0"+(d.getMonth()+1)).slice(-2) +"/" +  + d.getFullYear();
+            $scope.medication.date = datestring;
             var sessionArray=$scope.medication.session.split(',');
             sessionArray.splice(sessionArray.indexOf($scope.sessionid.toString()), 1);
             $scope.medication.session=sessionArray.toString();
             $scope.medication.fromdate = $scope.medication.date;
             $scope.medication.todate = "";
+            
             requestHandler.postRequest("user/insertorupdatemedication/",$scope.medication).then(function(response){
                 $scope.doGetMedicationListByUser();
                 successMessage(Flash,"Successfully Updated");

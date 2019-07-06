@@ -113,7 +113,7 @@
                     <div class="col-lg-12 col-md-12 col-sm-12 padding-lr" style="padding-right: 3px;">
                         <!-- Nav Tabs -->
                         <ul class="nav nav-tabs pull-left">
-                            <li class="active" ng-click="showExercise=0;showFoodMoal=1;doGetFrquestFoodList();"><a href="#tab-1" data-toggle="tab" onclick="return false;" id="foodintake">Food Intake</a></li>
+                            <li class="active" ng-click="showExercise=0;showFoodMoal=1;loadFoodDiary(newSelectedDate);doGetFrquestFoodList();"><a href="#tab-1" data-toggle="tab" onclick="return false;" id="foodintake">Food Intake</a></li>
                             <li ng-click="showExercise=1;doGetCategoryandTypeExercise();doGetFrequentExercise();loadExerciseDiary(selectedDate);" ><a href="#tab-2" data-toggle="tab" id="energyspent" onclick="return false;">Energy Spent</a></li>
                             <li><a href="#tab-3" data-toggle="tab"  id="weight-water" onclick="return false;">Log</a></li>
                             <li>
@@ -843,7 +843,7 @@
                                                 {{mediactionsDiaryData.date}}
                                             </div>
                                             <li class="col-lg-12 col-md-12 col-sm-12" ng-repeat="data in mediactionsDiaryData.medication | orderBy:'$index':true">
-                                                <a href="" ng-click="deletemedication(data.logid)" class="pull-right food_close" title="Delete Medications">x</a>
+                                                <a href="" ng-click="deletemedication(data)" class="pull-right food_close" title="Delete Medications">x</a>
                                                 <div class="food_name">
                                                     {{data.medicinename}}
                                                 </div>
