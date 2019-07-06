@@ -16712,6 +16712,7 @@ a.main-button:hover, input[type="submit"]:hover {
     width: 100%;
     padding:7px 10px;
     font-size: 15px;
+    display: inline-block;
 }
 
 .custom-popup-wrapper > .dropdown-menu >li>a span.wrap{

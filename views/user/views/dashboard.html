@@ -16,7 +16,7 @@
          ng-show="isOpen() && !moveInProgress"
          style="display: block;"
          aria-hidden="{{!isOpen()}}">
-        <ul class="dropdown-menu remove-style" role="listbox"  id="food-search-option" ng-nicescroll nice-option="{cursorcolor: 'rgb(195, 195, 195)',autohidemode:false,cursorborder:'none',cursorwidth: '6px',horizrailenabled: false}">
+        <ul class="dropdown-menu remove-style" role="listbox"  id="food-search-option" ng-nicescroll nice-option="{enablekeyboard: true,cursorcolor: 'rgb(195, 195, 195)',autohidemode:false,cursorborder:'none',cursorwidth: '6px',horizrailenabled: false}">
             <li ng-repeat="match in matches track by $index" ng-class="{active: isActive($index) }"
                 should-focus="isActive($index)" ng-click="selectMatch($index)" role="option" id="{{::match.id}}">
                 <div uib-typeahead-match index="$index" match="match" query="query" template-url="templateUrl"></div>
@@ -28,12 +28,12 @@
 
 <!--Exercise Template-->
 <script type="text/ng-template" id="exerciseTemplate.html">
-    <a class="col-md-12">
+    <a>
         <img ng-if="match.model.imagepath" class="img-circle popup_image" ng-src="{{match.model.imagepath}}50x50.jpg" width="37">
-      <span class="modal_span">
+      <div class="modal_span">
       <span class="wrap"  ng-bind-html="match.label | uibTypeaheadHighlight:query"></span><br/>
       <span class="wrap modal-text" title="Category">{{match.model.categoryname}}&nbsp;|<span style="color: #3591cd" title="Type">&nbsp;{{match.model.typename}}</span></span>
-      </span>
+      </div>
     </a>
     </div>
 </script>

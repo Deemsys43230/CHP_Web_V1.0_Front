@@ -157,6 +157,7 @@ commonApp.controller('UserRegistrationController',['$scope','requestHandler','Fl
         }
         if(possibiledate){
             $scope.userPlan.enddate= $scope.possibledate;
+            $scope.userPlan.planchoice=5;
         }
         requestHandler.postRequest("getplanoverview/",$scope.userPlan).then(function(response) {
 

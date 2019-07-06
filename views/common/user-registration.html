@@ -110,12 +110,12 @@
                     <div class="col-md-4 col-sm-4 col-xs-12 text-align-right margin-top-10">Height :</div>
                     <div ng-show="units==2">
                         <div class="col-md-3 col-sm-3 col-xs-6">
-                            <input class="calculator-input" name="feet" maxlength="2" ng-model="defaultRegistrationData.heightFeet" ng-pattern="/^0*[1-9]\d*$/" ng-change="maxHeightCheckFeet()" ng-required="units==2">
+                            <input class="calculator-input" name="feet" maxlength="2" ng-model="defaultRegistrationData.heightFeet" validate-zero ng-pattern="/^0*[1-9]\d*$/" ng-change="maxHeightCheckFeet()" ng-required="units==2">
                             <div class="text-count-position"><span class="text-unit">ft</span></div>
                             <span class="error-message" ng-show="!basicDetailsForm.feet.$error.required&&maxHeightFeet"><span>Invalid&nbsp;Height</span></span>
                                 <span ng-show="userPlanSubmitted">
                                     <span  class="error-message" ng-show="basicDetailsForm.feet.$error.required"><span>Required.</span></span>
-                                    <span class="error-message" ng-show="basicDetailsForm.feet.$error.pattern"><span>Invalid&nbsp;Format.</span></span>
+                                    <span class="error-message" ng-show="basicDetailsForm.feet.$error.pattern||basicDetailsForm.feet.$error.validateZero"><span>Invalid</span></span>
                                 </span>
                         </div>
                         <div class="col-md-3 col-sm-3 col-xs-6">
@@ -124,17 +124,18 @@
                             <span class="error-message" ng-show="!basicDetailsForm.inches.$error.required&&maxHeightInches"><span>Invalid&nbsp;Height</span></span>
                             <span ng-show="userPlanSubmitted">
                                     <span class="error-message" ng-show="basicDetailsForm.inches.$error.required"><span>Required.</span></span>
-                                    <span class="error-message" ng-show="basicDetailsForm.inches.$error.pattern"><span>Invalid&nbsp;Format.</span></span>
+                                    <span class="error-message" ng-show="basicDetailsForm.inches.$error.pattern"><span>Invalid</span></span>
                             </span>
                         </div>
                     </div>
                     <div ng-show="units==1">
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input class="calculator-input" ng-model="defaultRegistrationData.height"  name="height"  ng-required="units==1"  ng-change="maxHeightCheck()"  onkeypress="return validateFloatKeyPress(this,event);" maxlength="5" >
+                            <input class="calculator-input" ng-model="defaultRegistrationData.height"  name="height" validate-zero  ng-required="units==1"  ng-change="maxHeightCheck()"  onkeypress="return validateFloatKeyPress(this,event);" maxlength="5" >
                             <div class="text-count-position"><span class="text-unit lbs">cm</span></div>
-                            <span class="error-message" ng-show="!basicDetailsForm.height.$error.required&&maxheight"><span>Height&nbsp;should&nbsp;not&nbsp;exceed&nbsp;393.7</span></span>
+                            <span class="error-message" ng-show="!basicDetailsForm.height.$error.required&&maxheight"><span>Invalid&nbsp;Height</span></span>
                             <span ng-show="userPlanSubmitted">
                                 <span class="error-message"  ng-show="basicDetailsForm.height.$error.required"><span>Required.</span></span>
+                                <span class="error-message" ng-show="basicDetailsForm.height.$error.validateZero"><span>Invalid</span></span>
                             </span>
                         </div>
                     </div>
@@ -148,7 +149,7 @@
                              <span class="error-message" ng-show="!basicDetailsForm.weight.$error.required&&maxweightkgs"><span>Please&nbsp;Enter&nbsp;Valid&nbsp;Weight.</span></span>
                             <span ng-show="userPlanSubmitted">
                             <span class="error-message" ng-show="basicDetailsForm.weight.$error.required"><span>Required.</span></span>
-                                <span class="error-message" ng-show="basicDetailsForm.weight.$error.validateZero"><span>Invalid&nbsp;Format.</span></span>
+                                <span class="error-message" ng-show="basicDetailsForm.weight.$error.validateZero"><span>Invalid</span></span>
                         </span>
                         </span>
                         <span ng-show="units==2">
@@ -157,7 +158,7 @@
                              <span class="error-message" ng-show="!basicDetailsForm.weightlbs.$error.required&&maxweightlbs"><span>Please&nbsp;Enter&nbsp;Valid&nbsp;Weight.</span></span>
                             <span ng-show="userPlanSubmitted">
                             <span class="error-message" ng-show="basicDetailsForm.weightlbs.$error.required"><span>Required.</span></span>
-                             <span class="error-message" ng-show="basicDetailsForm.weightlbs.$error.validateZero"><span>Invalid&nbsp;Format.</span></span>
+                             <span class="error-message" ng-show="basicDetailsForm.weightlbs.$error.validateZero"><span>Invalid</span></span>
 
                         </span>
                         </span>
@@ -174,7 +175,7 @@
                         <span class="error-message" ng-show="!basicDetailsForm.targetweightkgs.$error.required&&weightlossError"><span>Should&nbsp;be&nbsp;less&nbsp;than&nbsp;your&nbsp;weight</span></span>
                     <span ng-show="userPlanSubmitted">
                          <span class="error-message" ng-show="basicDetailsForm.targetweightkgs.$error.required"><span>Required.</span></span>
-                         <span class="error-message" ng-show="basicDetailsForm.targetweightkgs.$error.validateZero"><span>Invalid&nbsp;Format.</span></span>
+                         <span class="error-message" ng-show="basicDetailsForm.targetweightkgs.$error.validateZero"><span>Invalid</span></span>
                     </span>
                     </span>
                     <span  ng-show="units==2">
@@ -183,7 +184,7 @@
                         <span class="error-message" ng-show="!basicDetailsForm.targetweightlbs.$error.required&&weightlossError"><span>Should&nbsp;be&nbsp;less&nbsp;than&nbsp;your&nbsp;weight</span></span>
                     <span ng-show="userPlanSubmitted">
                          <span class="error-message" ng-show="basicDetailsForm.targetweightlbs.$error.required"><span>Required.</span></span>
-                         <span class="error-message" ng-show="basicDetailsForm.targetweightlbs.$error.validateZero"><span>Invalid&nbsp;Format.</span></span>
+                         <span class="error-message" ng-show="basicDetailsForm.targetweightlbs.$error.validateZero"><span>Invalid</span></span>
                     </span>
                     </span>
                 </div>

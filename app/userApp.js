@@ -1153,7 +1153,7 @@ userApp.controller("UserInitialController",['$scope','requestHandler','$location
 userApp.controller("UserLogoutController",['$cookies','$scope','$window',function($cookies,$scope,$window){
 
     $scope.doLogout=function(){
-        document.cookie = "X-CSRFToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+        document.cookie = "X-CSRFToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; domain=.cyberhealths.com; path=/;";
         //$cookies.remove("X-CSRFToken",{path: '/'});
        // $cookies.remove("X-CSRFToken",{path: '/'});
         $cookies.put('sessionid',undefined);
