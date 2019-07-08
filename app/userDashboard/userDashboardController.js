@@ -5327,18 +5327,14 @@ userApp.controller('UserDashboardController',['$scope','$window','requestHandler
           //  $scope.goGetDailyIntakeGraph(date);
             $scope.getBudget(date);
             $scope.doGetWearableDateByDate(date);
-            if($rootScope.isMenuClicked==1||$rootScope.isMenuClicked==undefined){
                 $scope.loadFoodDiary(date);
                 //To get frequently asked foods
                 $scope.doGetFrquestFoodList();
-            }
-            if($rootScope.isMenuClicked==2){
                 $scope.loadExerciseDiary(date);
                 //To get frequently asked exercise
                 $scope.doGetFrequentExercise();
                 $scope.doGetExerciseList();
                 $scope.doGetCategoryandTypeExercise();
-            }
             if($rootScope.isMenuClicked==5){
                  $scope.doGetMedicationListByUser();
                 $scope.doCheckUserMedicationDocument();
